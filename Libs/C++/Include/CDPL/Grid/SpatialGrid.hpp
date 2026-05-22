@@ -40,22 +40,47 @@ namespace CDPL
     {
 
         /**
-         * \brief SpatialGrid.
+         * \brief Abstract base class for attributed grids whose elements have a defined 3D position in space.
+         *
+         * Concrete subclasses (e.g. Grid::RegularGrid) implement element access and the mapping from a linear
+         * element index to the corresponding 3D world coordinates.
+         *
+         * \tparam T The grid element value type.
+         * \tparam CVT The coordinate value type (defaults to \a T).
          */
         template <typename T, typename CVT = T>
         class SpatialGrid : public AttributedGrid
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SpatialGrid instances. */
             typedef std::shared_ptr<SpatialGrid> SharedPointer;
+            /** \brief The grid element value type. */
             typedef T                            ValueType;
+            /** \brief The coordinate value type. */
             typedef CVT                          CoordinatesValueType;
+            /** \brief The fixed-size 3D coordinate vector type. */
             typedef Math::CVector<CVT, 3>        CoordinatesType;
 
+            /**
+             * \brief Returns a reference to the grid element at linear index \a i.
+             * \param i The linear element index.
+             * \return A reference to the grid element.
+             */
             virtual ValueType& operator()(std::size_t i) = 0;
 
+            /**
+             * \brief Returns a \c const reference to the grid element at linear index \a i.
+             * \param i The linear element index.
+             * \return A \c const reference to the grid element.
+             */
             virtual const ValueType& operator()(std::size_t i) const = 0;
 
+            /**
+             * \brief Returns the 3D coordinates of the grid element at linear index \a i.
+             * \param i The linear element index.
+             * \param coords The output coordinates.
+             */
             virtual void getCoordinates(std::size_t i, CoordinatesType& coords) const = 0;
 
           protected:
@@ -66,7 +91,9 @@ namespace CDPL
             }
         };
 
+        /** \brief Convenience alias for the single-precision spatial-grid abstract base. */
         typedef SpatialGrid<float>  FSpatialGrid;
+        /** \brief Convenience alias for the double-precision spatial-grid abstract base. */
         typedef SpatialGrid<double> DSpatialGrid;
     } // namespace Grid
 } // namespace CDPL

@@ -64,58 +64,189 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Constructs geometric constraints (distance, planarity, volume) for distance-geometry-based
+         *        3D structure generation.
+         *
+         * Given a molecular graph (and optionally an MMFF94 force-field interaction parameter set) the
+         * generator derives ideal bond lengths, bond angles and 1,4-distances, identifies atom and bond
+         * stereo centers and emits the corresponding constraints into a Util::DG3DCoordinatesGenerator.
+         * The constraint set is used by ConfGen::DGStructureGenerator to produce a 3D embedding of the
+         * molecular graph.
+         */
         class CDPL_CONFGEN_API DGConstraintGenerator
         {
 
           public:
+            /** \brief Pair holding an atom or bond index plus the associated stereo descriptor. */
             typedef std::pair<std::size_t, Chem::StereoDescriptor> StereoCenterData;
 
           private:
             typedef std::vector<StereoCenterData> StereoCenterDataArray;
 
           public:
+            /** \brief A constant iterator over StereoCenterData entries. */
             typedef StereoCenterDataArray::const_iterator ConstStereoCenterDataIterator;
 
+            /**
+             * \brief Constructs the \c %DGConstraintGenerator instance.
+             */
             DGConstraintGenerator();
 
+            /**
+             * \brief Returns a reference to the constraint-generation settings.
+             * \return A reference to the settings.
+             */
             DGConstraintGeneratorSettings& getSettings();
 
+            /**
+             * \brief Returns a \c const reference to the constraint-generation settings.
+             * \return A \c const reference to the settings.
+             */
             const DGConstraintGeneratorSettings& getSettings() const;
 
+            /**
+             * \brief Registers an atom stereo center to be constrained.
+             * \param atom The stereogenic atom.
+             * \param descr The stereo descriptor specifying the desired configuration.
+             */
             void addAtomStereoCenter(const Chem::Atom& atom, const Chem::StereoDescriptor& descr);
+
+            /**
+             * \brief Registers a bond stereo center to be constrained.
+             * \param bond The stereogenic bond.
+             * \param descr The stereo descriptor specifying the desired configuration.
+             */
             void addBondStereoCenter(const Chem::Bond& bond, const Chem::StereoDescriptor& descr);
 
+            /**
+             * \brief Initializes the generator for the molecular graph \a molgraph using default geometry data.
+             * \param molgraph The molecular graph to process.
+             */
             void setup(const Chem::MolecularGraph& molgraph);
+
+            /**
+             * \brief Initializes the generator for the molecular graph \a molgraph using bond lengths and angles obtained from \a ia_data.
+             * \param molgraph The molecular graph to process.
+             * \param ia_data MMFF94 interaction data providing the reference bond lengths and angles.
+             */
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
 
+            /**
+             * \brief Returns the bit mask of hydrogen atoms that have been excluded from constraint generation.
+             * \return A \c const reference to the excluded-hydrogen bit mask.
+             */
             const Util::BitSet& getExcludedHydrogenMask() const;
 
+            /**
+             * \brief Returns the number of registered atom stereo centers.
+             * \return The number of atom stereo centers.
+             */
             std::size_t getNumAtomStereoCenters() const;
+
+            /**
+             * \brief Returns the number of registered bond stereo centers.
+             * \return The number of bond stereo centers.
+             */
             std::size_t getNumBondStereoCenters() const;
 
+            /**
+             * \brief Returns the stereo-center data for the atom stereo center at index \a idx.
+             * \param idx The zero-based stereo-center index.
+             * \return A \c const reference to the stereo-center data.
+             * \throw Base::IndexError if the number of atom stereo centers is zero or \a idx is not in the range [0, getNumAtomStereoCenters() - 1].
+             */
             const StereoCenterData& getAtomStereoCenterData(std::size_t idx) const;
+
+            /**
+             * \brief Returns the stereo-center data for the bond stereo center at index \a idx.
+             * \param idx The zero-based stereo-center index.
+             * \return A \c const reference to the stereo-center data.
+             * \throw Base::IndexError if the number of bond stereo centers is zero or \a idx is not in the range [0, getNumBondStereoCenters() - 1].
+             */
             const StereoCenterData& getBondStereoCenterData(std::size_t idx) const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first atom stereo center.
+             * \return A constant iterator pointing to the first atom stereo center.
+             */
             ConstStereoCenterDataIterator getAtomStereoCenterDataBegin() const;
+
+            /**
+             * \brief Returns a constant iterator pointing one past the last atom stereo center.
+             * \return A constant iterator pointing one past the last atom stereo center.
+             */
             ConstStereoCenterDataIterator getAtomStereoCenterDataEnd() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first bond stereo center.
+             * \return A constant iterator pointing to the first bond stereo center.
+             */
             ConstStereoCenterDataIterator getBondStereoCenterDataBegin() const;
+
+            /**
+             * \brief Returns a constant iterator pointing one past the last bond stereo center.
+             * \return A constant iterator pointing one past the last bond stereo center.
+             */
             ConstStereoCenterDataIterator getBondStereoCenterDataEnd() const;
 
-            /*
+            /**
+             * \brief Adds distance and volume constraints that fix the supplied substructure to the given coordinates.
+             * \param atoms The atoms whose positions shall be fixed.
+             * \param coords The 3D coordinates to fix the atoms to.
+             * \param coords_gen The coordinates generator to add the constraints to.
              * \since 1.1
              */
             void addFixedSubstructureConstraints(const Chem::AtomContainer& atoms, const Math::Vector3DArray& coords,
                                                  Util::DG3DCoordinatesGenerator& coords_gen);
+
+            /**
+             * \brief Adds bond-length distance constraints to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+
+            /**
+             * \brief Adds bond-angle (1,3) distance constraints to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+
+            /**
+             * \brief Adds 1,4-distance constraints (cis/trans bounds) to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+
+            /**
+             * \brief Adds default (van der Waals-derived) lower/upper distance constraints between all
+             *        non-bonded atom pairs to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
+            /**
+             * \brief Adds volume constraints enforcing the registered atom stereo-center configurations to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void addAtomConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+
+            /**
+             * \brief Adds distance and volume constraints enforcing the registered bond stereo-center configurations to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void addBondConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
+            /**
+             * \brief Adds planarity (zero-volume) constraints for sp2-hybridized / aromatic atoms to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void addAtomPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+
+            /**
+             * \brief Adds planarity (zero-volume) constraints for double and aromatic bonds to \a coords_gen.
+             * \param coords_gen The coordinates generator to add the constraints to.
+             */
             void addBondPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
           private:

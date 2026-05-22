@@ -39,6 +39,9 @@ namespace CDPL
     namespace Grid
     {
 
+        /**
+         * \brief Writer for bzip2-compressed regular-grid-set data in the native I/O format of the <em>CDPL</em>.
+         */
         typedef Util::CompressedDataWriter<CDFDRegularGridSetWriter, Util::BZip2OStream> CDFBZ2DRegularGridSetWriter;
     }
 } // namespace CDPL

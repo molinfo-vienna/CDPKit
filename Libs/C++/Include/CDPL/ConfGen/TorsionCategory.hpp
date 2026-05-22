@@ -45,6 +45,10 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief A node of a hierarchical torsion library: a named, optionally pattern-matched category that holds
+         *        child categories and torsion rules.
+         */
         class CDPL_CONFGEN_API TorsionCategory
         {
 
@@ -52,13 +56,23 @@ namespace CDPL
             typedef boost::ptr_vector<TorsionRule>     RuleList;
 
           public:
+            /** \brief A mutable iterator over the child categories. */
             typedef CategoryList::iterator       CategoryIterator;
+            /** \brief A constant iterator over the child categories. */
             typedef CategoryList::const_iterator ConstCategoryIterator;
+            /** \brief A mutable iterator over the contained rules. */
             typedef RuleList::iterator           RuleIterator;
+            /** \brief A constant iterator over the contained rules. */
             typedef RuleList::const_iterator     ConstRuleIterator;
 
+            /**
+             * \brief Constructs an empty \c %TorsionCategory instance.
+             */
             TorsionCategory();
 
+            /**
+             * \brief Virtual destructor.
+             */
             virtual ~TorsionCategory() {}
 
             const std::string& getName() const;

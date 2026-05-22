@@ -51,18 +51,42 @@ namespace CDPL
 
         class TorsionRule;
 
+        /**
+         * \brief A single match of a ConfGen::TorsionRule against a rotatable bond: the rule, the bond and the four atoms that span the torsion.
+         */
         class CDPL_CONFGEN_API TorsionRuleMatch
         {
 
           public:
+            /**
+             * \brief Constructs the \c %TorsionRuleMatch instance.
+             * \param rule The matched torsion rule.
+             * \param bond The rotatable bond.
+             * \param atom1 The first torsion atom (A in A-B-C-D).
+             * \param atom2 The second torsion atom (B).
+             * \param atom3 The third torsion atom (C).
+             * \param atom4 The fourth torsion atom (D).
+             */
             TorsionRuleMatch(const TorsionRule& rule, const Chem::Bond& bond,
                              const Chem::Atom* atom1, const Chem::Atom* atom2,
                              const Chem::Atom* atom3, const Chem::Atom* atom4);
 
+            /**
+             * \brief Returns the four torsion atoms (A, B, C, D).
+             * \return A pointer to a 4-element array of \c const Chem::Atom* (A, B, C, D).
+             */
             const Chem::Atom* const* getAtoms() const;
 
+            /**
+             * \brief Returns the matched torsion rule.
+             * \return A \c const reference to the rule.
+             */
             const TorsionRule& getRule() const;
 
+            /**
+             * \brief Returns the rotatable bond at which the rule matched.
+             * \return A \c const reference to the bond.
+             */
             const Chem::Bond& getBond() const;
 
           private:

@@ -43,6 +43,9 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Bundle of configuration parameters for ConfGen::ConformerGenerator.
+         */
         class CDPL_CONFGEN_API ConformerGeneratorSettings
         {
 

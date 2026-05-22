@@ -39,6 +39,9 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Bundle of configuration parameters for ConfGen::FragmentAssembler.
+         */
         class CDPL_CONFGEN_API FragmentAssemblerSettings
         {
 

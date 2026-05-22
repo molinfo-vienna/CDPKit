@@ -45,8 +45,21 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Tells whether \a bond is a link bond between two fragments under the fragment-based conformer-generation heuristics.
+         * \param bond The bond to test.
+         * \param molgraph The parent molecular graph.
+         * \return \c true if \a bond connects two fragments, and \c false otherwise.
+         */
         CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Tells whether \a bond is rotatable under the conformer-generation rotatable-bond heuristics.
+         * \param bond The bond to test.
+         * \param molgraph The parent molecular graph.
+         * \param het_h_rotors If \c true, rotors involving only heteroatom-bound hydrogens are also counted as rotatable.
+         * \return \c true if \a bond is rotatable, and \c false otherwise.
+         */
         CDPL_CONFGEN_API bool isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors);
     } // namespace ConfGen
 } // namespace CDPL

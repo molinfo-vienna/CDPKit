@@ -63,11 +63,15 @@ namespace CDPL
             extern CDPL_GRID_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
             /**
+             * \brief Specifies whether CDF-format grid output uses single-precision floats (\c true) or double-precision (\c false).
+             * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_GRID_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
+             * \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> [\ref CUBE] file is taken as the grid name on input (\c true) or treated as a regular comment (\c false).
+             * \valuetype \c bool
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_COMMENT_IS_NAME;

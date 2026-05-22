@@ -40,14 +40,23 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Bundle of configuration parameters for ConfGen::FragmentConformerGenerator.
+         */
         class CDPL_CONFGEN_API FragmentConformerGeneratorSettings
         {
 
           public:
+            /** \brief A static instance with default-initialized values. */
             static const FragmentConformerGeneratorSettings DEFAULT;
+            /** \brief A static instance preconfigured for fast (less thorough) conformer generation. */
             static const FragmentConformerGeneratorSettings FAST;
+            /** \brief A static instance preconfigured for thorough (slower) conformer generation. */
             static const FragmentConformerGeneratorSettings THOROUGH;
 
+            /**
+             * \brief Per-fragment-class settings (separate parameters for chain, small-ring and macrocycle fragments).
+             */
             class CDPL_CONFGEN_API FragmentSettings
             {
 
