@@ -1,1 +1,31 @@
 ‎Libs/C++/Include/CDPL/Util/CompoundDataReader.hpp (add \throw to member func. docs if exceptions might be thrown)
+
+-----
+
+‎Libs/C++/Include/CDPL/Math/Expression.hpp         (missing class and member docs)
+‎Libs/C++/Include/CDPL/Math/Functional.hpp         (missing class and member docs)
+‎Libs/C++/Include/CDPL/Math/Grid.hpp               (missing class and member docs)
+‎Libs/C++/Include/CDPL/Math/GridExpression.hpp     (missing class, member and function docs)
+‎Libs/C++/Include/CDPL/Math/IO.hpp                 (refine output string description)
+‎Libs/C++/Include/CDPL/Math/Matrix.hpp             (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/MatrixAdapter.hpp      (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/MatrixExpression.hpp‎   (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/MatrixProxy.hpp‎                   (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/MinimizerVariableArrayTraits.hpp  (missing class member docs)
+‎Libs/C++/Include/CDPL/Math/Quaternion.hpp‎                    (missing class, member and function docs)
+‎Libs/C++/Include/CDPL/Math/QuaternionAdapter.hpp             (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/QuaternionAssignment.hpp‎          (brief doc for quaternionAssignQuaternion() needs to be reworked)
+Libs/C++/Include/CDPL/Math/QuaternionExpression.hpp          (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/RegularSpatialGrid.hpp            (missing class, member and function docs)
+‎Libs/C++/Include/CDPL/Math/SparseContainerElement.hpp        (missing class member docs)
+Libs/C++/Include/CDPL/Math/TypeTraits.hpp‎                    (missing class and member docs)
+Libs/C++/Include/CDPL/Math/Vector.hpp‎                        (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/VectorAdapter.hpp‎                 (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/VectorExpression.hpp‎              (missing class, member and function docs)
+Libs/C++/Include/CDPL/Math/VectorIterator.hpp‎                (missing class member docs)
+Libs/C++/Include/CDPL/Math/VectorProxy.hpp                   (missing class, member and function docs)
+‎Libs/C++/Include/CDPL/Util/DGCoordinatesGenerator.hpp        (add \throw to member func. docs if exceptions might be thrown)
+
+
+
+
