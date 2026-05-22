@@ -40,16 +40,37 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Convenience wrapper around Math::KabschAlgorithm that operates directly on Math::VectorArray inputs.
+         *
+         * \tparam VA The Math::VectorArray specialization type.
+         * \tparam V The vector element type of \a VA.
+         * \tparam T The scalar value type of \a V.
+         */
         template <typename VA, typename V = typename VA::ElementType, typename T = typename V::ValueType>
         class VectorArrayAlignmentCalculator
         {
 
           public:
+            /** \brief The vector-array type. */
             typedef VA                                              VectorArrayType;
+            /** \brief The vector element type of \a VectorArrayType. */
             typedef V                                               VectorType;
+            /** \brief The scalar value type. */
             typedef T                                               ValueType;
+            /** \brief The matrix type used for the computed transformation. */
             typedef typename KabschAlgorithm<ValueType>::MatrixType MatrixType;
 
+            /**
+             * \brief Aligns \a points onto \a ref_points (with per-point weights) using the Kabsch algorithm.
+             * \tparam VE The weight-vector expression type.
+             * \param points The vector array containing the points to align.
+             * \param ref_points The vector array containing the reference points.
+             * \param weights The per-point weights.
+             * \param do_center If \c true, the point sets are centered before alignment.
+             * \param max_svd_iter The maximum number of iterations for the internal SVD step (0 means unlimited).
+             * \return \c true if the SVD step converged, and \c false otherwise.
+             */
             template <typename VE>
             bool calculate(const VectorArrayType& points, const VectorArrayType& ref_points, const VectorExpression<VE>& weights,
                            bool do_center = true, std::size_t max_svd_iter = 0)
@@ -59,6 +80,14 @@ namespace CDPL
                                         weights, do_center, max_svd_iter);
             }
 
+            /**
+             * \brief Aligns \a points onto \a ref_points (with uniform weights) using the Kabsch algorithm.
+             * \param points The vector array containing the points to align.
+             * \param ref_points The vector array containing the reference points.
+             * \param do_center If \c true, the point sets are centered before alignment.
+             * \param max_svd_iter The maximum number of iterations for the internal SVD step (0 means unlimited).
+             * \return \c true if the SVD step converged, and \c false otherwise.
+             */
             bool calculate(const VectorArrayType& points, const VectorArrayType& ref_points,
                            bool do_center = true, std::size_t max_svd_iter = 0)
             {
@@ -67,6 +96,10 @@ namespace CDPL
                                         do_center, max_svd_iter);
             }
 
+            /**
+             * \brief Returns the rigid-body transformation produced by the most recent successful calculate() call.
+             * \return A \c const reference to the homogeneous transformation matrix.
+             */
             const MatrixType& getTransform() const
             {
                 return kabschAlgo.getTransform();

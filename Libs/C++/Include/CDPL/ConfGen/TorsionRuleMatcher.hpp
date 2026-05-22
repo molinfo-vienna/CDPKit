@@ -43,32 +43,80 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Finds torsion rules from a TorsionLibrary that apply to a given rotatable bond.
+         *
+         * For a queried bond in a molecular graph the matcher iterates the configured TorsionLibrary
+         * (top-down through torsion categories) and reports every rule whose central-bond SMARTS
+         * pattern matches at the queried bond. Each match is stored as a TorsionRuleMatch object
+         * providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
+         */
         class CDPL_CONFGEN_API TorsionRuleMatcher
         {
 
             typedef std::vector<TorsionRuleMatch> RuleMatchList;
 
           public:
+            /** \brief A constant iterator over the stored torsion rule matches. */
             typedef RuleMatchList::const_iterator ConstMatchIterator;
 
+            /**
+             * \brief Constructs the \c %TorsionRuleMatcher instance without an associated torsion library.
+             */
             TorsionRuleMatcher();
 
+            /**
+             * \brief Constructs the \c %TorsionRuleMatcher instance and associates it with \a lib.
+             * \param lib The torsion library to query.
+             */
             TorsionRuleMatcher(const TorsionLibrary::SharedPointer& lib);
 
+            /**
+             * \brief Specifies whether only unique substructure mappings shall be reported during matching.
+             * \param unique If \c true, only one of multiple equivalent mappings is reported per rule.
+             */
             void findUniqueMappingsOnly(bool unique);
 
+            /**
+             * \brief Tells whether only unique substructure mappings are reported during matching.
+             * \return \c true if only unique mappings are reported, and \c false otherwise.
+             */
             bool findUniqueMappingsOnly() const;
 
+            /**
+             * \brief Specifies whether all matching rules shall be reported (instead of just the most-specific one).
+             * \param all If \c true, every matching rule across all categories is reported.
+             */
             void findAllRuleMappings(bool all);
 
+            /**
+             * \brief Tells whether all matching rules are reported during matching.
+             * \return \c true if all matching rules are reported, and \c false otherwise.
+             */
             bool findAllRuleMappings() const;
 
+            /**
+             * \brief Specifies whether the matching process shall stop at the first rule that produces matches.
+             * \param stop If \c true, matching stops as soon as a rule yields at least one match.
+             */
             void stopAtFirstMatchingRule(bool stop);
 
+            /**
+             * \brief Tells whether matching stops at the first rule that produces matches.
+             * \return \c true if matching stops at the first matching rule, and \c false otherwise.
+             */
             bool stopAtFirstMatchingRule() const;
 
+            /**
+             * \brief Sets the torsion library to query.
+             * \param lib The new torsion library.
+             */
             void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
+            /**
+             * \brief Returns the currently associated torsion library.
+             * \return A \c const reference to the torsion library smart pointer.
+             */
             const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
             /**
@@ -109,6 +157,13 @@ namespace CDPL
              */
             ConstMatchIterator end() const;
 
+            /**
+             * \brief Searches the associated TorsionLibrary for rules that apply to the bond \a bond of \a molgraph.
+             * \param bond The rotatable bond for which matching torsion rules are sought.
+             * \param molgraph The molecular graph the bond belongs to.
+             * \param append If \c true, new matches are appended to the previously stored ones; otherwise stored matches are cleared first.
+             * \return \c true if at least one matching rule was found, and \c false otherwise.
+             */
             bool findMatches(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool append = false);
 
           private:

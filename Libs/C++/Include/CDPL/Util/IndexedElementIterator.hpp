@@ -147,8 +147,16 @@ namespace CDPL
             IndexedElementIterator(const AccessFunc& access_func, IndexType start_idx):
                 accessFunc(access_func), index(start_idx) {}
 
+            /**
+             * \brief Returns the access functor used by the iterator.
+             * \return A \c const reference to the access functor.
+             */
             const AccessFunc& getAccessFunc() const;
 
+            /**
+             * \brief Returns the index that the iterator currently points to.
+             * \return The current element index.
+             */
             IndexType getIndex() const;
 
           private:

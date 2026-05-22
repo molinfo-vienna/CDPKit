@@ -50,10 +50,22 @@ namespace CDPL
             friend class BasicPharmacophore;
 
           public:
+            /**
+             * \brief Returns the parent Pharm::BasicPharmacophore that owns this feature.
+             * \return A \c const reference to the parent pharmacophore.
+             */
             const Pharmacophore& getPharmacophore() const;
 
+            /**
+             * \brief Returns the parent Pharm::BasicPharmacophore that owns this feature.
+             * \return A reference to the parent pharmacophore.
+             */
             Pharmacophore& getPharmacophore();
 
+            /**
+             * \brief Returns the zero-based index of this feature within its parent pharmacophore.
+             * \return The feature index.
+             */
             std::size_t getIndex() const;
 
             /**

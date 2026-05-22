@@ -44,6 +44,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Vector-expression proxy that views a single row of an underlying matrix.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         class MatrixRow : public VectorExpression<MatrixRow<M> >
         {
@@ -191,6 +195,10 @@ namespace CDPL
             SizeType          index;
         };
 
+        /**
+         * \brief Vector-expression proxy that views a single column of an underlying matrix.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         class MatrixColumn : public VectorExpression<MatrixColumn<M> >
         {
@@ -338,6 +346,10 @@ namespace CDPL
             SizeType          index;
         };
 
+        /**
+         * \brief Matrix-expression proxy that views a contiguous rectangular subrange of an underlying matrix.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         class MatrixRange : public MatrixExpression<MatrixRange<M> >
         {
@@ -487,6 +499,10 @@ namespace CDPL
             RangeType         range2;
         };
 
+        /**
+         * \brief Matrix-expression proxy that views a strided rectangular slice of an underlying matrix.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         class MatrixSlice : public MatrixExpression<MatrixSlice<M> >
         {

@@ -54,13 +54,22 @@ namespace CDPL
 
         class FragmentConformerGeneratorImpl;
 
+        /**
+         * \brief Driver for the generation of low-energy 3D conformers for a single molecular fragment (chain, small
+         *        ring or macrocycle) via distance geometry plus MMFF94 minimization plus RMSD clustering.
+         */
         class CDPL_CONFGEN_API FragmentConformerGenerator
         {
 
           public:
+            /** \brief A constant iterator over the generated conformers. */
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+            /** \brief A mutable iterator over the generated conformers. */
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData>       ConformerIterator;
 
+            /**
+             * \brief Constructs the \c %FragmentConformerGenerator instance.
+             */
             FragmentConformerGenerator();
 
             FragmentConformerGenerator(const FragmentConformerGenerator&) = delete;

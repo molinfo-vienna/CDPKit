@@ -39,6 +39,9 @@ namespace CDPL
     namespace Grid
     {
 
+        /**
+         * \brief Reader for bzip2-compressed regular-grid data in the native I/O format of the <em>CDPL</em>.
+         */
         typedef Util::CompressedDataReader<CDFDRegularGridReader, Util::BZip2IStream> CDFBZ2DRegularGridReader;
     }
 } // namespace CDPL

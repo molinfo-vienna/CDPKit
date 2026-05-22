@@ -50,11 +50,13 @@ namespace CDPL
             extern CDPL_GRID_API const bool STRICT_ERROR_CHECKING;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Grid::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
              * \since 1.2
              */
             extern CDPL_GRID_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Grid::ControlParameter::CUBE_COMMENT_IS_NAME.
              * \since 1.4
              */
             extern CDPL_GRID_API const bool CUBE_COMMENT_IS_NAME;

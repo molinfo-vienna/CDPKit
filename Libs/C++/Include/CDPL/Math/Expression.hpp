@@ -34,6 +34,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief CRTP base for all numeric expression types in the Math namespace (Barton-Nackman idiom).
+         * \tparam E The derived expression type.
+         */
         template <typename E>
         class Expression
         {
@@ -49,6 +53,10 @@ namespace CDPL
             const Expression& operator=(const Expression&);
         };
 
+        /**
+         * \brief CRTP base for all vector expression types. Provides downcast access to the concrete derived expression.
+         * \tparam E The derived vector expression type.
+         */
         template <typename E>
         class VectorExpression : public Expression<E>
         {
@@ -71,6 +79,10 @@ namespace CDPL
             ~VectorExpression(){};
         };
 
+        /**
+         * \brief CRTP base for all matrix expression types. Provides downcast access to the concrete derived expression.
+         * \tparam E The derived matrix expression type.
+         */
         template <typename E>
         class MatrixExpression : public Expression<E>
         {
@@ -93,6 +105,10 @@ namespace CDPL
             ~MatrixExpression(){};
         };
 
+        /**
+         * \brief CRTP base for all quaternion expression types. Provides downcast access to the concrete derived expression.
+         * \tparam E The derived quaternion expression type.
+         */
         template <typename E>
         class QuaternionExpression : public Expression<E>
         {
@@ -115,6 +131,10 @@ namespace CDPL
             ~QuaternionExpression(){};
         };
 
+        /**
+         * \brief CRTP base for all grid expression types. Provides downcast access to the concrete derived expression.
+         * \tparam E The derived grid expression type.
+         */
         template <typename E>
         class GridExpression : public Expression<E>
         {
@@ -137,6 +157,10 @@ namespace CDPL
             ~GridExpression(){};
         };
 
+        /**
+         * \brief Refinement of Math::VectorExpression marking the derived type as a concrete (writable) vector container.
+         * \tparam C The derived vector container type.
+         */
         template <typename C>
         class VectorContainer : public VectorExpression<C>
         {
@@ -159,6 +183,10 @@ namespace CDPL
             ~VectorContainer(){};
         };
 
+        /**
+         * \brief Refinement of Math::MatrixExpression marking the derived type as a concrete (writable) matrix container.
+         * \tparam C The derived matrix container type.
+         */
         template <typename C>
         class MatrixContainer : public MatrixExpression<C>
         {
@@ -181,6 +209,10 @@ namespace CDPL
             ~MatrixContainer(){};
         };
 
+        /**
+         * \brief Refinement of Math::QuaternionExpression marking the derived type as a concrete (writable) quaternion container.
+         * \tparam C The derived quaternion container type.
+         */
         template <typename C>
         class QuaternionContainer : public QuaternionExpression<C>
         {
@@ -203,6 +235,10 @@ namespace CDPL
             ~QuaternionContainer(){};
         };
 
+        /**
+         * \brief Refinement of Math::GridExpression marking the derived type as a concrete (writable) grid container.
+         * \tparam C The derived grid container type.
+         */
         template <typename C>
         class GridContainer : public GridExpression<C>
         {

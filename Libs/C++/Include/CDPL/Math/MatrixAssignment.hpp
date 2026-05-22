@@ -43,6 +43,15 @@ namespace CDPL
         template <typename E>
         class MatrixExpression;
 
+        /**
+         * \brief Applies the element-wise functor \a F to every (matrix element, source element) pair, i.e. \c F::apply(m(i,j), e()(i,j)).
+         * \tparam F The element-wise binary functor template.
+         * \tparam M The destination matrix container type.
+         * \tparam E The source matrix expression type.
+         * \param m The destination matrix.
+         * \param e The source matrix expression.
+         * \throw Base::SizeError if the dimensions of \a m and \a e differ.
+         */
         template <template <typename T1, typename T2> class F, typename M, typename E>
         void matrixAssignMatrix(M& m, const MatrixExpression<E>& e)
         {
@@ -58,6 +67,14 @@ namespace CDPL
                     FunctorType::apply(m(i, j), e()(i, j));
         }
 
+        /**
+         * \brief Applies the element-wise functor \a F to every (matrix element, scalar) pair, i.e. \c F::apply(m(i,j), t).
+         * \tparam F The element-wise binary functor template.
+         * \tparam M The destination matrix container type.
+         * \tparam T The scalar type.
+         * \param m The destination matrix.
+         * \param t The scalar value applied to every element.
+         */
         template <template <typename T1, typename T2> class F, typename M, typename T>
         void matrixAssignScalar(M& m, const T& t)
         {
@@ -72,6 +89,14 @@ namespace CDPL
                     FunctorType::apply(m(i, j), t);
         }
 
+        /**
+         * \brief Swaps the elements of two equally sized matrix expressions element by element.
+         * \tparam M The first matrix container type.
+         * \tparam E The second matrix expression type.
+         * \param m The first matrix.
+         * \param e The second matrix expression.
+         * \throw Base::SizeError if the dimensions of \a m and \a e differ.
+         */
         template <typename M, typename E>
         void matrixSwap(M& m, MatrixExpression<E>& e)
         {

@@ -42,6 +42,15 @@ namespace CDPL
 
         template <typename E>
         class GridExpression;
+        /**
+         * \brief Applies the element-wise functor \a F to every (grid cell, source cell) pair, i.e. \c F::apply(g(i,j,k), e()(i,j,k)).
+         * \tparam F The element-wise binary functor template.
+         * \tparam G The destination grid container type.
+         * \tparam E The source grid expression type.
+         * \param g The destination grid.
+         * \param e The source grid expression.
+         * \throw Base::SizeError if the dimensions of \a g and \a e differ.
+         */
         template <template <typename T1, typename T2> class F, typename G, typename E>
         void gridAssignGrid(G& g, const GridExpression<E>& e)
         {
@@ -59,6 +68,14 @@ namespace CDPL
                         FunctorType::apply(g(i, j, k), e()(i, j, k));
         }
 
+        /**
+         * \brief Applies the element-wise functor \a F to every (grid cell, scalar) pair, i.e. \c F::apply(g(i,j,k), t).
+         * \tparam F The element-wise binary functor template.
+         * \tparam G The destination grid container type.
+         * \tparam T The scalar type.
+         * \param g The destination grid.
+         * \param t The scalar value applied to every cell.
+         */
         template <template <typename T1, typename T2> class F, typename G, typename T>
         void gridAssignScalar(G& g, const T& t)
         {
@@ -75,6 +92,14 @@ namespace CDPL
                         FunctorType::apply(g(i, j, k), t);
         }
 
+        /**
+         * \brief Swaps the cells of two equally sized grid expressions cell by cell.
+         * \tparam G The first grid container type.
+         * \tparam E The second grid expression type.
+         * \param g The first grid.
+         * \param e The second grid expression.
+         * \throw Base::SizeError if the dimensions of \a g and \a e differ.
+         */
         template <typename G, typename E>
         void gridSwap(G& g, GridExpression<E>& e)
         {

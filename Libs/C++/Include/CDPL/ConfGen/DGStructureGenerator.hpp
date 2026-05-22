@@ -51,42 +51,111 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Distance-geometry-based generator of an initial 3D structure for a molecular graph.
+         *
+         * Constraints are produced by an embedded ConfGen::DGConstraintGenerator and used to embed the coordinates
+         * via a two-phase Util::DG3DCoordinatesGenerator pipeline. After generation, atom and bond stereo
+         * configurations can be validated against the perceived stereo descriptors.
+         */
         class CDPL_CONFGEN_API DGStructureGenerator
         {
 
           public:
+            /**
+             * \brief Constructs the \c %DGStructureGenerator instance.
+             */
             DGStructureGenerator();
 
+            /**
+             * \brief Returns the current generator settings (mutable).
+             * \return A reference to the settings.
+             */
             DGStructureGeneratorSettings& getSettings();
 
+            /**
+             * \brief Returns the current generator settings.
+             * \return A \c const reference to the settings.
+             */
             const DGStructureGeneratorSettings& getSettings() const;
 
+            /**
+             * \brief Returns the bit mask of hydrogens excluded from the coordinate-generation step.
+             * \return A \c const reference to the bit mask.
+             */
             const Util::BitSet& getExcludedHydrogenMask() const;
 
+            /**
+             * \brief Sets up the generator for \a molgraph using force-field parameters perceived on the fly.
+             * \param molgraph The input molecular graph.
+             */
             void setup(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Sets up the generator for \a molgraph using the supplied MMFF94 interaction data.
+             * \param molgraph The input molecular graph.
+             * \param ia_data The pre-computed MMFF94 interaction data.
+             */
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
 
-            /*
+            /**
+             * \brief Sets up the generator for \a molgraph while keeping the substructure fragments in \a fixed_substr_frags at the supplied 3D coordinates.
+             * \param molgraph The input molecular graph.
+             * \param fixed_substr_frags The substructure fragments that must retain their 3D coordinates.
+             * \param fixed_substr_coords The 3D coordinates assigned to the fixed substructures.
              * \since 1.1
              */
             void setup(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& fixed_substr_frags,
                        const Math::Vector3DArray& fixed_substr_coords);
 
-            /*
+            /**
+             * \brief Sets up the generator for \a molgraph using the supplied MMFF94 interaction data and fixed-substructure data.
+             * \param molgraph The input molecular graph.
+             * \param ia_data The pre-computed MMFF94 interaction data.
+             * \param fixed_substr_frags The substructure fragments that must retain their 3D coordinates.
+             * \param fixed_substr_coords The 3D coordinates assigned to the fixed substructures.
              * \since 1.1
              */
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data,
                        const Chem::FragmentList& fixed_substr_frags, const Math::Vector3DArray& fixed_substr_coords);
 
+            /**
+             * \brief Generates a 3D coordinate set that respects the configured distance constraints.
+             * \param coords The output 3D coordinate array.
+             * \return \c true if the embedding succeeded, and \c false otherwise.
+             */
             bool generate(Math::Vector3DArray& coords);
 
+            /**
+             * \brief Validates the per-atom stereo-configurations of \a coords against the perceived stereo descriptors.
+             * \param coords The 3D coordinates to test.
+             * \return \c true if all per-atom stereo-configurations are valid, and \c false otherwise.
+             */
             bool checkAtomConfigurations(Math::Vector3DArray& coords) const;
+
+            /**
+             * \brief Validates the per-bond stereo-configurations of \a coords against the perceived stereo descriptors.
+             * \param coords The 3D coordinates to test.
+             * \return \c true if all per-bond stereo-configurations are valid, and \c false otherwise.
+             */
             bool checkBondConfigurations(Math::Vector3DArray& coords) const;
 
+            /**
+             * \brief Returns the number of atom stereo centers in the set-up molecular graph.
+             * \return The atom stereo-center count.
+             */
             std::size_t getNumAtomStereoCenters() const;
+
+            /**
+             * \brief Returns the number of bond stereo centers in the set-up molecular graph.
+             * \return The bond stereo-center count.
+             */
             std::size_t getNumBondStereoCenters() const;
 
+            /**
+             * \brief Returns the embedded constraint generator used to produce the distance/volume constraints.
+             * \return A \c const reference to the constraint generator.
+             */
             const DGConstraintGenerator& getConstraintGenerator() const;
 
           private:

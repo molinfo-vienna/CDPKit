@@ -44,6 +44,13 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Prepares \a mol for conformer generation by completing its hydrogens, perceiving SSSR, ring flags,
+         *        implicit hydrogen counts, hybridization states, aromaticity and (optionally) canonicalizing the
+         *        atom ordering.
+         * \param mol The molecule to prepare (modified in place).
+         * \param canonicalize If \c true, the atom ordering of \a mol is canonicalized.
+         */
         CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false);
     }
 } // namespace CDPL

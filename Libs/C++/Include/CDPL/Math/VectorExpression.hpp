@@ -43,6 +43,11 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Expression-template node applying a unary functor \a F element-wise to a vector expression \a E.
+         * \tparam E The wrapped vector expression type.
+         * \tparam F The unary functor type.
+         */
         template <typename E, typename F>
         class VectorUnary : public VectorExpression<VectorUnary<E, F> >
         {
@@ -91,6 +96,12 @@ namespace CDPL
             typedef ExpressionType    ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two vector expressions \a E1 and \a E2 element-wise via the binary functor \a F.
+         * \tparam E1 The first wrapped vector expression type.
+         * \tparam E2 The second wrapped vector expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class VectorBinary1 : public VectorExpression<VectorBinary1<E1, E2, F> >
         {

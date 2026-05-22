@@ -37,6 +37,16 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Proxy that exposes a single (key, value) entry of a sparse container as a writable reference.
+         *
+         * Reading the proxy returns the value associated with \a key (or a default-constructed value if no entry exists).
+         * Writing to the proxy inserts/updates the entry; assigning the default-constructed value removes the entry from
+         * the underlying sparse storage.
+         *
+         * \tparam C The sparse container type (must expose \c KeyType, \c ValueType, \c SizeType, \c ConstReference, \c ArrayType and \c getData()).
+         * \tparam K The key type (defaults to <tt>C::KeyType</tt>).
+         */
         template <typename C, typename K = typename C::KeyType>
         class SparseContainerElement
         {
@@ -163,6 +173,10 @@ namespace CDPL
             mutable ValueType value;
         };
 
+        /**
+         * \brief Math::TypeTraits specialization that delegates to the underlying value type of a Math::SparseContainerElement.
+         * \tparam C The sparse container type.
+         */
         template <typename C>
         struct TypeTraits<SparseContainerElement<C> > : public TypeTraits<typename SparseContainerElement<C>::ValueType>
         {};

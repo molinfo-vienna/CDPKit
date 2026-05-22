@@ -46,7 +46,9 @@ namespace CDPL
         namespace AttributedGridPropertyDefault
         {
 
+            /** \brief Default value for the Grid::AttributedGridProperty::NAME property (empty string). */
             extern CDPL_GRID_API const std::string NAME;
+            /** \brief Default value for the Grid::AttributedGridProperty::COMMENT property (empty string). */
             extern CDPL_GRID_API const std::string COMMENT;
         }
     } // namespace Grid

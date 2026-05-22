@@ -50,6 +50,16 @@ namespace CDPL
         template <typename E>
         class GridExpression;
 
+        /**
+         * \brief Base for binary in-place assignment functors of the form <tt>F::apply(T1, const T2&)</tt>.
+         *
+         * Derived functors (Math::ScalarAssignment, Math::ScalarAdditionAssignment, Math::ScalarSubtractionAssignment,
+         * Math::ScalarMultiplicationAssignment, Math::ScalarDivisionAssignment) implement the element-wise update of a
+         * destination scalar with a source scalar.
+         *
+         * \tparam T1 The (modifiable) destination type.
+         * \tparam T2 The source type.
+         */
         template <typename T1, typename T2>
         struct ScalarBinaryAssignmentFunctor
         {
@@ -123,6 +133,14 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Base for unary scalar functors of the form <tt>F::apply(const T&)</tt> returning a \a T result.
+         *
+         * Derived functors (Math::ScalarNegation, Math::ScalarConjugation, Math::ScalarReal, Math::ScalarImaginary)
+         * implement specific element-wise operations.
+         *
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         struct ScalarUnaryFunctor
         {
@@ -160,6 +178,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Base for unary scalar functors that return the real part of \a T (Math::ScalarReal, Math::ScalarImaginary).
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         struct ScalarRealUnaryFunctor
         {
@@ -197,6 +219,15 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Base for binary scalar functors of the form <tt>F::apply(const T1&, const T2&)</tt> returning a Math::CommonType result.
+         *
+         * Derived functors (Math::ScalarAddition, Math::ScalarSubtraction, Math::ScalarMultiplication, Math::ScalarDivision)
+         * implement specific element-wise operations.
+         *
+         * \tparam T1 The first argument type.
+         * \tparam T2 The second argument type.
+         */
         template <typename T1, typename T2>
         struct ScalarBinaryFunctor
         {
@@ -262,6 +293,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Base for binary functors that take two vectors and return a scalar (Math::VectorInnerProduct, Math::VectorAngleCosine).
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         */
         template <typename V1, typename V2>
         struct VectorScalarBinaryFunctor
         {
@@ -306,6 +342,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Base for binary functors that take two vectors and return a boolean (Math::VectorEquality and similar).
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         */
         template <typename V1, typename V2>
         struct VectorBooleanBinaryFunctor
         {
@@ -336,6 +377,12 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Base for ternary functors that take two vectors and a scalar tolerance and return a boolean (Math::VectorToleranceEquality).
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         * \tparam T The scalar tolerance type.
+         */
         template <typename V1, typename V2, typename T>
         struct Scalar3VectorBooleanTernaryFunctor
         {
@@ -372,6 +419,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Base for binary functors that take two vectors and return a vector (Math::VectorCrossProduct).
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         */
         template <typename V1, typename V2>
         struct VectorBinaryFunctor
         {

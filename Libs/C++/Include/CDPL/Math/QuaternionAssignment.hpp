@@ -39,6 +39,14 @@ namespace CDPL
         template <typename E>
         class QuaternionExpression;
 
+        /**
+         * \brief Applies the element-wise functor \a F to every (quaternion component, source component) pair (C1, C2, C3, C4).
+         * \tparam F The element-wise binary functor template.
+         * \tparam Q The destination quaternion container type.
+         * \tparam E The source quaternion expression type.
+         * \param q The destination quaternion.
+         * \param e The source quaternion expression.
+         */
         template <template <typename T1, typename T2> class F, typename Q, typename E>
         void quaternionAssignQuaternion(Q& q, const QuaternionExpression<E>& e)
         {
@@ -50,6 +58,14 @@ namespace CDPL
             FunctorType::apply(q.getC4(), e().getC4());
         }
 
+        /**
+         * \brief Applies the element-wise functor \a F to every (quaternion component, scalar) pair.
+         * \tparam F The element-wise binary functor template.
+         * \tparam Q The destination quaternion container type.
+         * \tparam T The scalar type.
+         * \param q The destination quaternion.
+         * \param t The scalar value applied to every component.
+         */
         template <template <typename T1, typename T2> class F, typename Q, typename T>
         void quaternionAssignScalar(Q& q, const T& t)
         {
@@ -61,6 +77,13 @@ namespace CDPL
             FunctorType::apply(q.getC4(), t);
         }
 
+        /**
+         * \brief Swaps the components of two quaternion expressions component by component.
+         * \tparam Q The first quaternion container type.
+         * \tparam E The second quaternion expression type.
+         * \param q The first quaternion.
+         * \param e The second quaternion expression.
+         */
         template <typename Q, typename E>
         void quaternionSwap(Q& q, QuaternionExpression<E>& e)
         {

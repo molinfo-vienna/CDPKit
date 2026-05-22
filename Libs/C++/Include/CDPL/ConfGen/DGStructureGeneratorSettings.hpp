@@ -39,6 +39,10 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Bundle of configuration parameters for ConfGen::DGStructureGenerator, extending ConfGen::DGConstraintGeneratorSettings
+         *        with parameters controlling the embedding optimization loop.
+         */
         class CDPL_CONFGEN_API DGStructureGeneratorSettings : public DGConstraintGeneratorSettings
         {
 

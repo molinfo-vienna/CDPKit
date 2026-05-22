@@ -40,6 +40,16 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Traits template that adapts arbitrary variable-array types to the linear-algebra operations
+         *        required by minimizer implementations (\c dot, \c norm2, \c axpy, \c clear, \c assign, \c multiply, \c sub).
+         *
+         * The primary template assumes \a A behaves like a Math::Vector (provides \c getSize, \c clear, \c assign,
+         * \c plusAssign/\c minusAssign, \c innerProd and arithmetic operators). Specializations adapt other
+         * array-of-vector storage types.
+         *
+         * \tparam A The variable-array type.
+         */
         template <typename A>
         struct MinimizerVariableArrayTraits
         {
@@ -115,6 +125,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Math::MinimizerVariableArrayTraits specialization for Math::VectorArray storage (a sequence of fixed-size vectors).
+         * \tparam V The inner vector type stored in the array.
+         */
         template <typename V>
         struct MinimizerVariableArrayTraits<VectorArray<V> >
         {
@@ -207,6 +221,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Math::MinimizerVariableArrayTraits specialization for \c std::vector storage of fixed-size vectors.
+         * \tparam V The inner vector type stored in the \c std::vector.
+         */
         template <typename V>
         struct MinimizerVariableArrayTraits<std::vector<V> >
         {

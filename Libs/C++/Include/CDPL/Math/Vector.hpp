@@ -53,6 +53,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Lightweight vector expression that proxies a reference to an underlying vector container.
+         * \tparam V The wrapped vector type.
+         */
         template <typename V>
         class VectorReference : public VectorExpression<VectorReference<V> >
         {
@@ -198,6 +202,10 @@ namespace CDPL
         template <typename T, typename A>
         class Vector;
 
+        /**
+         * \brief Lightweight vector container that wraps a \c std::initializer_list for construction-style initialization.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class InitListVector : public VectorContainer<InitListVector<T> >
         {
@@ -253,6 +261,11 @@ namespace CDPL
             InitializerListType list;
         };
 
+        /**
+         * \brief Dynamically-sized dense vector with configurable underlying storage.
+         * \tparam T The scalar value type.
+         * \tparam A The underlying storage container type (default: \c std::vector).
+         */
         template <typename T, typename A = std::vector<T> >
         class Vector : public VectorContainer<Vector<T, A> >
         {
@@ -502,6 +515,11 @@ namespace CDPL
             ArrayType data;
         };
 
+        /**
+         * \brief Sparse vector that stores only non-default entries in an associative key-to-value container.
+         * \tparam T The scalar value type.
+         * \tparam A The underlying associative container type (default: \c std::unordered_map).
+         */
         template <typename T, typename A = std::unordered_map<std::size_t, T> >
         class SparseVector : public VectorContainer<SparseVector<T, A> >
         {
@@ -780,6 +798,11 @@ namespace CDPL
         template <typename T, typename A>
         const typename SparseVector<T, A>::ValueType SparseVector<T, A>::zero = SparseVector<T, A>::ValueType();
 
+        /**
+         * \brief Variable-size vector with a fixed upper capacity \a N stored in a stack-allocated array.
+         * \tparam T The scalar value type.
+         * \tparam N The maximum vector size.
+         */
         template <typename T, std::size_t N>
         class BoundedVector : public VectorContainer<BoundedVector<T, N> >
         {
@@ -1048,6 +1071,11 @@ namespace CDPL
         template <typename T, std::size_t N>
         const typename BoundedVector<T, N>::SizeType BoundedVector<T, N>::MaxSize;
 
+        /**
+         * \brief Fixed-size vector of dimension \a N backed by a C-array (no dynamic allocation).
+         * \tparam T The scalar value type.
+         * \tparam N The vector dimension.
+         */
         template <typename T, std::size_t N>
         class CVector : public VectorContainer<CVector<T, N> >
         {
@@ -1287,6 +1315,10 @@ namespace CDPL
         template <typename T, std::size_t N>
         const typename CVector<T, N>::SizeType CVector<T, N>::Size;
 
+        /**
+         * \brief Constant vector expression whose elements are all zero.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class ZeroVector : public VectorContainer<ZeroVector<T> >
         {
@@ -1368,6 +1400,10 @@ namespace CDPL
         template <typename T>
         const typename ZeroVector<T>::ValueType ZeroVector<T>::zero = ZeroVector<T>::ValueType();
 
+        /**
+         * \brief Constant vector expression \f$ e_i \f$ that contains \c 1 at a single specified index and \c 0 elsewhere.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class UnitVector : public VectorContainer<UnitVector<T> >
         {
@@ -1465,6 +1501,10 @@ namespace CDPL
         template <typename T>
         const typename UnitVector<T>::ValueType UnitVector<T>::one = UnitVector<T>::ValueType(1);
 
+        /**
+         * \brief Constant vector expression in which every element equals the same scalar value.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class ScalarVector : public VectorContainer<ScalarVector<T> >
         {

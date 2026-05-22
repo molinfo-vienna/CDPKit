@@ -40,6 +40,9 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Bundle of configuration parameters for ConfGen::TorsionDriver.
+         */
         class CDPL_CONFGEN_API TorsionDriverSettings
         {
 

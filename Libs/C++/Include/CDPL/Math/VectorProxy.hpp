@@ -43,6 +43,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Vector-expression proxy that views a contiguous half-open subrange of an underlying vector.
+         * \tparam V The wrapped vector type.
+         */
         template <typename V>
         class VectorRange : public VectorExpression<VectorRange<V> >
         {
@@ -191,6 +195,10 @@ namespace CDPL
             RangeType         range;
         };
 
+        /**
+         * \brief Vector-expression proxy that views a strided slice of an underlying vector.
+         * \tparam V The wrapped vector type.
+         */
         template <typename V>
         class VectorSlice : public VectorExpression<VectorSlice<V> >
         {

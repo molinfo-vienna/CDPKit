@@ -43,21 +43,47 @@ namespace CDPL
     {
 
         /**
-         * \brief CompressedDataWriter.
+         * \brief Convenience wrapper that combines a Util::CompressionOStream of type \a CompStream with a stream-based
+         *        writer \a WriterImpl so that data written via this Base::DataWriter is automatically compressed on the fly.
+         *
+         * \tparam WriterImpl The underlying stream-based writer implementation type.
+         * \tparam CompStream The Util::CompressionOStream specialization to use (e.g. Util::GZipOStream).
+         * \tparam DataType The data type written by \a WriterImpl.
          */
         template <typename WriterImpl, typename CompStream, typename DataType = typename WriterImpl::DataType>
         class CompressedDataWriter : public Base::DataWriter<DataType>
         {
 
           public:
+            /**
+             * \brief Constructs the \c %CompressedDataWriter instance that compresses output written to \a os via \a CompStream
+             *        and forwards the resulting stream to a freshly constructed \a WriterImpl.
+             * \param os The output stream that will receive the compressed data.
+             */
             CompressedDataWriter(std::ostream& os);
 
+            /**
+             * \brief Writes \a obj via the wrapped writer.
+             * \param obj The object to write.
+             * \return A reference to itself.
+             */
             CompressedDataWriter& write(const DataType& obj);
 
+            /**
+             * \brief Closes the wrapped writer and finalizes the compression stream.
+             */
             void close();
 
+            /**
+             * \brief Tells whether the writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
 
+            /**
+             * \brief Tells whether the writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

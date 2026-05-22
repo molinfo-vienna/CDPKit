@@ -46,6 +46,15 @@ namespace CDPL
         template <typename E>
         class GridExpression;
 
+        /**
+         * \brief Writes a textual representation of the vector expression \a e to \a os in the format <tt>[size](e0,e1,...)</tt>.
+         * \tparam C The stream character type.
+         * \tparam T The stream character traits.
+         * \tparam E The vector expression type.
+         * \param os The output stream.
+         * \param e The vector expression to write.
+         * \return A reference to \a os.
+         */
         template <typename C, typename T, typename E>
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const VectorExpression<E>& e)
         {
@@ -91,6 +100,15 @@ namespace CDPL
             return os;
         }
 
+        /**
+         * \brief Writes a textual representation of the matrix expression \a e to \a os in the format <tt>[rows,cols]((row0),(row1),...)</tt>.
+         * \tparam C The stream character type.
+         * \tparam T The stream character traits.
+         * \tparam E The matrix expression type.
+         * \param os The output stream.
+         * \param e The matrix expression to write.
+         * \return A reference to \a os.
+         */
         template <typename C, typename T, typename E>
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const MatrixExpression<E>& e)
         {
@@ -149,6 +167,15 @@ namespace CDPL
             return os;
         }
 
+        /**
+         * \brief Writes a textual representation of the quaternion expression \a e to \a os in the format <tt>(c1,c2,c3,c4)</tt>.
+         * \tparam C The stream character type.
+         * \tparam T The stream character traits.
+         * \tparam E The quaternion expression type.
+         * \param os The output stream.
+         * \param e The quaternion expression to write.
+         * \return A reference to \a os.
+         */
         template <typename C, typename T, typename E>
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const QuaternionExpression<E>& e)
         {
@@ -182,6 +209,15 @@ namespace CDPL
             return os;
         }
 
+        /**
+         * \brief Writes a textual representation of the grid expression \a e to \a os in the format <tt>[d1,d2,d3]((plane0)(plane1)...)</tt>.
+         * \tparam C The stream character type.
+         * \tparam T The stream character traits.
+         * \tparam E The grid expression type.
+         * \param os The output stream.
+         * \param e The grid expression to write.
+         * \return A reference to \a os.
+         */
         template <typename C, typename T, typename E>
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const GridExpression<E>& e)
         {

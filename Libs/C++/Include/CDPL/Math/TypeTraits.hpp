@@ -40,6 +40,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Helper template selecting \c std::abs() for signed types and the identity for unsigned types.
+         * \tparam Signed Whether the scalar type is signed.
+         */
         template <bool Signed>
         struct ScalarAbsImpl
         {
@@ -62,6 +66,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Common operations and type aliases for scalar arithmetic types.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         struct ScalarTraits
         {
@@ -112,9 +120,17 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Primary type traits template selecting between Math::ScalarTraits and Math::ComplexTraits based on \a T.
+         * \tparam T The value type.
+         */
         template <typename T>
         struct TypeTraits;
 
+        /**
+         * \brief Common operations and type aliases for complex arithmetic types.
+         * \tparam T A \c std::complex specialization.
+         */
         template <typename T>
         struct ComplexTraits
         {
@@ -174,6 +190,10 @@ namespace CDPL
         struct TypeTraits<std::complex<T> > : public ComplexTraits<std::complex<T> >
         {};
 
+        /**
+         * \brief Selects a concrete temporary vector type compatible with the vector expression \a V.
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorTemporaryTraits
         {
@@ -181,6 +201,10 @@ namespace CDPL
             typedef typename V::VectorTemporaryType Type;
         };
 
+        /**
+         * \brief Selects a concrete temporary matrix type compatible with the matrix expression \a M.
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixTemporaryTraits
         {
@@ -188,6 +212,10 @@ namespace CDPL
             typedef typename M::MatrixTemporaryType Type;
         };
 
+        /**
+         * \brief Selects a concrete temporary quaternion type compatible with the quaternion expression \a Q.
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionTemporaryTraits
         {
@@ -195,6 +223,10 @@ namespace CDPL
             typedef typename Q::QuaternionTemporaryType Type;
         };
 
+        /**
+         * \brief Selects a concrete temporary grid type compatible with the grid expression \a G.
+         * \tparam G The grid expression type.
+         */
         template <typename G>
         struct GridTemporaryTraits
         {
@@ -202,10 +234,18 @@ namespace CDPL
             typedef typename G::GridTemporaryType Type;
         };
 
+        /**
+         * \brief Type trait identifying \a T as a scalar arithmetic type (true for built-in arithmetic types).
+         * \tparam T The type to test.
+         */
         template <typename T>
         struct IsScalar : public std::is_arithmetic<T>
         {};
 
+        /**
+         * \brief Math::IsScalar specialization that treats \c std::complex<T> as scalar when \c T is arithmetic.
+         * \tparam T The underlying real value type.
+         */
         template <typename T>
         struct IsScalar<std::complex<T> > : public std::is_arithmetic<T>
         {};

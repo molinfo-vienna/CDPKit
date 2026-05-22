@@ -34,6 +34,11 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Proxy that converts an assignment to a Math container into the corresponding direct-assignment call
+         *        on the container (\c assign / \c plusAssign / \c minusAssign) bypassing alias detection.
+         * \tparam C The container type whose closure is wrapped.
+         */
         template <typename C>
         class DirectAssignmentProxy
         {
@@ -77,12 +82,24 @@ namespace CDPL
             ClosureType lvalue;
         };
 
+        /**
+         * \brief Convenience factory creating a Math::DirectAssignmentProxy for a \c const lvalue.
+         * \tparam C The container type.
+         * \param lvalue The lvalue to wrap.
+         * \return A Math::DirectAssignmentProxy bound to \a lvalue.
+         */
         template <typename C>
         DirectAssignmentProxy<const C> direct(const C& lvalue)
         {
             return DirectAssignmentProxy<const C>(lvalue);
         }
 
+        /**
+         * \brief Convenience factory creating a Math::DirectAssignmentProxy for a mutable lvalue.
+         * \tparam C The container type.
+         * \param lvalue The lvalue to wrap.
+         * \return A Math::DirectAssignmentProxy bound to \a lvalue.
+         */
         template <typename C>
         DirectAssignmentProxy<C> direct(C& lvalue)
         {

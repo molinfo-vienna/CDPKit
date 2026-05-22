@@ -42,6 +42,7 @@ namespace CDPL
         template <typename T>
         class Range;
 
+        /** \brief Tag selecting the lower-triangular view (entries strictly above the diagonal read as zero) for Math::TriangularAdapter. */
         struct Lower
         {
 
@@ -55,6 +56,7 @@ namespace CDPL
             }
         };
 
+        /** \brief Tag selecting the unit-lower-triangular view (zero above the diagonal, one on the diagonal) for Math::TriangularAdapter. */
         struct UnitLower
         {
 
@@ -71,6 +73,7 @@ namespace CDPL
             }
         };
 
+        /** \brief Tag selecting the upper-triangular view (entries strictly below the diagonal read as zero) for Math::TriangularAdapter. */
         struct Upper
         {
 
@@ -84,6 +87,7 @@ namespace CDPL
             }
         };
 
+        /** \brief Tag selecting the unit-upper-triangular view (zero below the diagonal, one on the diagonal) for Math::TriangularAdapter. */
         struct UnitUpper
         {
 
@@ -100,6 +104,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Matrix expression that exposes only the triangular part of an underlying matrix \a M selected by the policy \a Tri (Math::Lower, Math::UnitLower, Math::Upper or Math::UnitUpper).
+         * \tparam M The wrapped matrix type.
+         * \tparam Tri The triangular-view selection policy.
+         */
         template <typename M, typename Tri>
         class TriangularAdapter : public MatrixExpression<TriangularAdapter<M, Tri> >
         {

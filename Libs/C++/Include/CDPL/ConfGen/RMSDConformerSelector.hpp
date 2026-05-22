@@ -51,37 +51,95 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Greedy RMSD-based conformer-diversity filter.
+         *
+         * For each candidate conformer the selector computes the minimum symmetry-equivalent RMSD against the set of
+         * already-selected conformers. A new conformer is accepted (added to the selected set) only if its minimum
+         * RMSD exceeds the configured threshold.
+         */
         class CDPL_CONFGEN_API RMSDConformerSelector
         {
 
           public:
+            /** \brief Default maximum number of considered automorphism (symmetry) mappings per setup() call. */
             static constexpr std::size_t DEF_MAX_NUM_SYMMETRY_MAPPINGS = 32768;
 
+            /**
+             * \brief Constructs the \c %RMSDConformerSelector instance.
+             */
             RMSDConformerSelector();
 
             RMSDConformerSelector(const RMSDConformerSelector&) = delete;
 
             RMSDConformerSelector& operator=(const RMSDConformerSelector&) = delete;
 
+            /**
+             * \brief Sets the minimum RMSD that a candidate conformer must keep from every already-selected conformer to be accepted.
+             * \param min_rmsd The new minimum RMSD.
+             */
             void setMinRMSD(double min_rmsd);
 
+            /**
+             * \brief Returns the currently configured minimum RMSD threshold.
+             * \return The minimum RMSD threshold.
+             */
             double getMinRMSD() const;
 
+            /**
+             * \brief Sets the callback invoked periodically to allow the selection to be aborted by the user.
+             * \param func The abort-check callback.
+             */
             void setAbortCallback(const CallbackFunction& func);
 
+            /**
+             * \brief Returns the currently configured abort-check callback.
+             * \return A \c const reference to the abort-check callback.
+             */
             const CallbackFunction& getAbortCallback() const;
 
+            /**
+             * \brief Returns the number of symmetry (automorphism) mappings enumerated during the last setup() call.
+             * \return The symmetry-mapping count.
+             */
             std::size_t getNumSymmetryMappings() const;
 
+            /**
+             * \brief Sets the maximum number of symmetry mappings to enumerate per setup() call.
+             * \param max_num The new maximum number of mappings.
+             */
             void setMaxNumSymmetryMappings(std::size_t max_num);
 
+            /**
+             * \brief Returns the currently configured maximum number of symmetry mappings.
+             * \return The maximum number of mappings.
+             */
             std::size_t getMaxNumSymmetryMappings() const;
 
+            /**
+             * \brief Sets up the selector for the subgraph of \a molgraph defined by \a atom_mask.
+             * \param molgraph The parent molecular graph.
+             * \param atom_mask The bit mask selecting atoms considered during RMSD computation.
+             */
             void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask);
 
+            /**
+             * \brief Sets up the selector for the subgraph of \a molgraph defined by \a atom_mask while restricting the
+             *        enumerated automorphisms to those that preserve the chirality of atoms in \a stable_config_atom_mask
+             *        with respect to the supplied 3D coordinates \a coords.
+             * \param molgraph The parent molecular graph.
+             * \param atom_mask The bit mask selecting atoms considered during RMSD computation.
+             * \param stable_config_atom_mask The bit mask of atoms whose stereo-configuration must be preserved.
+             * \param coords The 3D coordinates used to determine the stereo-configurations.
+             */
             void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask,
                        const Util::BitSet& stable_config_atom_mask, const Math::Vector3DArray& coords);
 
+            /**
+             * \brief Tests whether \a conf_coords is sufficiently different from already-selected conformers and, if so, adds it to the selected set.
+             * \param conf_coords The candidate conformer's 3D coordinates.
+             * \return \c true if the conformer was selected, and \c false otherwise.
+             */
             bool selected(const Math::Vector3DArray& conf_coords);
 
           private:

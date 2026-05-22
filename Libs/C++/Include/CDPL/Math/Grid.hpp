@@ -49,6 +49,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Lightweight grid expression that proxies a reference to an underlying grid container.
+         * \tparam G The wrapped grid type.
+         */
         template <typename G>
         class GridReference : public GridExpression<GridReference<G> >
         {
@@ -221,6 +225,11 @@ namespace CDPL
             GridType& data;
         };
 
+        /**
+         * \brief Dynamically-sized dense 3D grid (\f$ d_1 \times d_2 \times d_3 \f$) with configurable underlying storage.
+         * \tparam T The scalar value type.
+         * \tparam A The underlying storage container type (default: \c std::vector).
+         */
         template <typename T, typename A = std::vector<T> >
         class Grid : public GridContainer<Grid<T, A> >
         {
@@ -481,6 +490,10 @@ namespace CDPL
             SizeType  size3;
         };
 
+        /**
+         * \brief Constant grid expression whose cells are all zero.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class ZeroGrid : public GridContainer<ZeroGrid<T> >
         {
@@ -600,6 +613,10 @@ namespace CDPL
         template <typename T>
         const typename ZeroGrid<T>::ValueType ZeroGrid<T>::zero = ZeroGrid<T>::ValueType();
 
+        /**
+         * \brief Constant grid expression in which every cell equals the same scalar value.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class ScalarGrid : public GridContainer<ScalarGrid<T> >
         {
