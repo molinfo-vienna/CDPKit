@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for ConfGen.ConformerGenerator.
+# 
 class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##

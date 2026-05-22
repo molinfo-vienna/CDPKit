@@ -20,13 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for ConfGen.FragmentConformerGenerator.
+# 
 class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Per-fragment-class settings (separate parameters for chain, small-ring and macrocycle fragments).
+    # 
     class FragmentSettings(Boost.Python.instance):
 
         ##
@@ -141,18 +141,18 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         minRMSD = property(getMinRMSD, setMinRMSD)
 
     ##
-    # \brief 
-    #
+    # \brief A static instance with default-initialized values.
+    # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief 
-    #
+    # \brief A static instance preconfigured for fast (less thorough) conformer generation.
+    # 
     FAST = _HIDDEN_VALUE_
 
     ##
-    # \brief 
-    #
+    # \brief A static instance preconfigured for thorough (slower) conformer generation.
+    # 
     THOROUGH = _HIDDEN_VALUE_
 
     ##

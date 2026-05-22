@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Tag selecting the unit-upper-triangular view (zero below the diagonal, one on the diagonal) for Math.TriangularAdapter.
+# 
 class UnitUpper(Boost.Python.instance):
 
     ##

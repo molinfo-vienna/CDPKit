@@ -20,21 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single torsion-library rule consisting of a SMARTS-like atom-mapping pattern and a list of preferred torsion angles (each with tolerances and a score).
+# 
 class TorsionRule(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief One preferred torsion angle for a rule, characterized by its value, the two tolerance bands and a score.
+    # 
     class AngleEntry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %AngleEntry instance.
-        # \param ang 
-        # \param tol1 
-        # \param tol2 
-        # \param score 
+        # \brief Constructs the <tt>AngleEntry</tt> with the given angle value, tolerances and score.
+        # 
+        # \param ang The angle value in degrees.
+        # \param tol1 The first (preferred) tolerance band.
+        # \param tol2 The second (relaxed) tolerance band.
+        # \param score The score (higher = more preferred).
         # 
         def __init__(ang: float, tol1: float, tol2: float, score: float) -> None: pass
 
@@ -64,27 +65,31 @@ class TorsionRule(Boost.Python.instance):
         def assign(entry: AngleEntry) -> AngleEntry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the angle value.
+        # 
+        # \return The angle value in degrees.
+        # 
         def getAngle() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the score (higher values mark more strongly preferred angles).
+        # 
+        # \return The score.
+        # 
         def getScore() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the first (preferred) tolerance band.
+        # 
+        # \return The first tolerance band in degrees.
+        # 
         def getTolerance1() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the second (relaxed) tolerance band.
+        # 
+        # \return The second tolerance band in degrees.
+        # 
         def getTolerance2() -> float: pass
 
         objectID = property(getObjectID)
@@ -128,52 +133,65 @@ class TorsionRule(Boost.Python.instance):
     def assign(rule: TorsionRule) -> TorsionRule: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the SMARTS-like match pattern in textual form.
+    # 
+    # \return A reference to the match-pattern string.
+    # 
     def getMatchPatternString() -> str: pass
 
     ##
-    # \brief 
-    # \param ptn_str 
-    #
+    # \brief Sets the SMARTS-like match pattern in textual form.
+    # 
+    # \param ptn_str The new match-pattern string.
+    # 
     def setMatchPatternString(ptn_str: str) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the compiled match-pattern molecular graph.
+    # 
+    # \return A reference to the compiled pattern shared reference.
+    # 
     def getMatchPattern() -> Chem.MolecularGraph: pass
 
     ##
-    # \brief 
-    # \param ptn 
-    #
+    # \brief Sets the compiled match-pattern molecular graph.
+    # 
+    # \param ptn The new match pattern.
+    # 
     def setMatchPattern(ptn: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored angle entries.
+    # 
+    # \return The angle-entry count.
+    # 
     def getNumAngles() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the angle entry at index <em>idx</em>.
+    # 
+    # \param idx The zero-based angle-entry index.
+    # 
+    # \return A reference to the angle entry. 
+    # 
+    # \throw Base.IndexError if the number of angle entries is zero or <em>idx</em> is not in the range [0, getNumAngles() - 1].
+    # 
     def getAngle(idx: int) -> AngleEntry: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the angle entry at index <em>idx</em>.
+    # 
+    # \param idx The zero-based angle-entry index.
+    # 
+    # \throw Base.IndexError if the number of angle entries is zero or <em>idx</em> is not in the range [0, getNumAngles() - 1].
+    # 
     def removeAngle(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param ang_entry 
-    #
+    # \brief Appends the angle entry <em>ang_entry</em> to the rule.
+    # 
+    # \param ang_entry The angle entry to append.
+    # 
     def addAngle(ang_entry: AngleEntry) -> None: pass
 
     ##
@@ -186,14 +204,15 @@ class TorsionRule(Boost.Python.instance):
     def addAngle(ang: float, tol1: float, tol2: float, score: float) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Clears the match pattern and removes all angle entries.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param rule 
-    #
+    # \brief Swaps the contents of this rule with <em>rule</em>.
+    # 
+    # \param rule The other torsion rule.
+    # 
     def swap(rule: TorsionRule) -> None: pass
 
     ##

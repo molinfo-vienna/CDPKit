@@ -1362,10 +1362,12 @@ def length(e: ConstULVectorExpression) -> int: pass
 def lnGamma(z: float) -> float: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> without partial pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# 
+# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: DMatrixExpression) -> int: pass
 
 ##
@@ -1377,10 +1379,12 @@ def luDecompose(e: DMatrixExpression) -> int: pass
 def luDecompose(e: DMatrixExpression, pv: ULVectorExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> without partial pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# 
+# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: FMatrixExpression) -> int: pass
 
 ##
@@ -1392,10 +1396,12 @@ def luDecompose(e: FMatrixExpression) -> int: pass
 def luDecompose(e: FMatrixExpression, pv: ULVectorExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> without partial pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# 
+# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: LMatrixExpression) -> int: pass
 
 ##
@@ -1407,10 +1413,12 @@ def luDecompose(e: LMatrixExpression) -> int: pass
 def luDecompose(e: LMatrixExpression, pv: ULVectorExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> without partial pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# 
+# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: ULMatrixExpression) -> int: pass
 
 ##
@@ -2483,11 +2491,13 @@ def range(e: ULVectorExpression, r: Range) -> ULVectorRange: pass
 def range(e: ULVectorExpression, start: int, stop: int) -> ULVectorRange: pass
 
 ##
-# \brief 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Convenience factory for Math.Range with <tt>std::size_t</tt> indices.
+# 
+# \param start The lower (inclusive) bound.
+# \param stop The upper (exclusive) bound.
+# 
+# \return The constructed Math.Range instance.
+# 
 def range(start: int, stop: int) -> Range: pass
 
 ##
@@ -3015,268 +3025,334 @@ def slice(e: ULVectorExpression, s: Slice) -> ULVectorSlice: pass
 def slice(e: ULVectorExpression, start: int, stride: int, size: int) -> ULVectorSlice: pass
 
 ##
-# \brief 
-# \param start 
-# \param stride 
-# \param size 
-# \return 
-#
+# \brief Convenience factory for Math.Slice with <tt>std::size_t</tt> indices and <tt>std::ptrdiff_t</tt> stride.
+# 
+# \param start The starting global index.
+# \param stride The signed step size between consecutive entries.
+# \param size The number of entries.
+# 
+# \return The constructed Math.Slice instance.
+# 
 def slice(start: int, stride: int, size: int) -> Slice: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# 
+# \param e1 The lower-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveLower(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# 
+# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitLower(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
+# 
+# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
 def solveUnitUpper(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e1 
-# \param e2 
-# \return 
-#
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# 
+# \param e1 The upper-triangular coefficient matrix.
+# \param e2 The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
 def solveUpper(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
 
 ##

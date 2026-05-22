@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Distance-geometry-based generator of an initial 3D structure for a molecular graph.
+# 
+# Constraints are produced by an embedded ConfGen.DGConstraintGenerator and used to embed the coordinates via a two-phase Util.DG3DCoordinatesGenerator pipeline. After generation, atom and bond stereo configurations can be validated against the perceived stereo descriptors.
+# 
 class DGStructureGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %DGStructureGenerator instance.
+    # \brief Constructs the <tt>DGStructureGenerator</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -55,67 +57,80 @@ class DGStructureGenerator(Boost.Python.instance):
     def assign(gen: DGStructureGenerator) -> DGStructureGenerator: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the bit mask of hydrogens excluded from the coordinate-generation step.
+    # 
+    # \return A reference to the bit mask.
+    # 
     def getExcludedHydrogenMask() -> Util.BitSet: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Sets up the generator for <em>molgraph</em> using force-field parameters perceived on the fly.
+    # 
+    # \param molgraph The input molecular graph.
+    # 
     def setup(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param ia_data 
-    #
+    # \brief Sets up the generator for <em>molgraph</em> using the supplied MMFF94 interaction data.
+    # 
+    # \param molgraph The input molecular graph.
+    # \param ia_data The pre-computed MMFF94 interaction data.
+    # 
     def setup(molgraph: Chem.MolecularGraph, ia_data: ForceField.MMFF94InteractionData) -> None: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
+    # \brief Generates a 3D coordinate set that respects the configured distance constraints.
+    # 
+    # \param coords The output 3D coordinate array.
+    # 
+    # \return <tt>True</tt> if the embedding succeeded, and <tt>False</tt> otherwise.
+    # 
     def generate(coords: Math.Vector3DArray) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of atom stereo centers in the set-up molecular graph.
+    # 
+    # \return The atom stereo-center count.
+    # 
     def getNumAtomStereoCenters() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of bond stereo centers in the set-up molecular graph.
+    # 
+    # \return The bond stereo-center count.
+    # 
     def getNumBondStereoCenters() -> int: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
+    # \brief Validates the per-atom stereo-configurations of <em>coords</em> against the perceived stereo descriptors.
+    # 
+    # \param coords The 3D coordinates to test.
+    # 
+    # \return <tt>True</tt> if all per-atom stereo-configurations are valid, and <tt>False</tt> otherwise.
+    # 
     def checkAtomConfigurations(coords: Math.Vector3DArray) -> bool: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
+    # \brief Validates the per-bond stereo-configurations of <em>coords</em> against the perceived stereo descriptors.
+    # 
+    # \param coords The 3D coordinates to test.
+    # 
+    # \return <tt>True</tt> if all per-bond stereo-configurations are valid, and <tt>False</tt> otherwise.
+    # 
     def checkBondConfigurations(coords: Math.Vector3DArray) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current generator settings.
+    # 
+    # \return A reference to the settings.
+    # 
     def getSettings() -> DGStructureGeneratorSettings: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the embedded constraint generator used to produce the distance/volume constraints.
+    # 
+    # \return A reference to the constraint generator.
+    # 
     def getConstraintGenerator() -> DGConstraintGenerator: pass
 
     objectID = property(getObjectID)

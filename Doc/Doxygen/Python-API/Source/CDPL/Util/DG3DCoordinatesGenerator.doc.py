@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Convenience alias for the 3D coordinates generator with double-precision values.
+# 
 class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     ##

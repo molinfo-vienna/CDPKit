@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for ConfGen.StructureGenerator.
+# 
 class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A static instance with default-initialized values.
+    # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \c %StructureGeneratorSettings instance.
+    # \brief Constructs the <tt>StructureGeneratorSettings</tt> instance with default values.
     # 
     def __init__() -> None: pass
 
@@ -60,99 +60,115 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def assign(settings: StructureGeneratorSettings) -> StructureGeneratorSettings: pass
 
     ##
-    # \brief 
-    # \param mode 
-    #
+    # \brief Sets the structure-generation mode (see ConfGen.StructureGenerationMode).
+    # 
+    # \param mode The new generation mode.
+    # 
     def setGenerationMode(mode: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured structure-generation mode.
+    # 
+    # \return The ConfGen.StructureGenerationMode identifier.
+    # 
     def getGenerationMode() -> int: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether 3D coordinates should be generated from scratch (vs. starting from existing input coordinates).
+    # 
+    # \param generate <tt>True</tt> to generate coordinates from scratch, and <tt>False</tt> to keep existing input coordinates.
+    # 
     def generateCoordinatesFromScratch(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether 3D coordinates are generated from scratch.
+    # 
+    # \return <tt>True</tt> if coordinates are generated from scratch, and <tt>False</tt> otherwise.
+    # 
     def generateCoordinatesFromScratch() -> bool: pass
 
     ##
-    # \brief 
-    # \param sample 
-    #
+    # \brief Specifies whether torsion-angle tolerance ranges are sampled during structure generation.
+    # 
+    # \param sample <tt>True</tt> to enable sampling, and <tt>False</tt> to disable it.
+    # 
     def sampleAngleToleranceRanges(sample: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether torsion-angle tolerance ranges are sampled during structure generation.
+    # 
+    # \return <tt>True</tt> if sampling is enabled, and <tt>False</tt> otherwise.
+    # 
     def sampleAngleToleranceRanges() -> bool: pass
 
     ##
-    # \brief 
-    # \param mil_secs 
-    #
+    # \brief Sets the timeout for the structure-generation pipeline.
+    # 
+    # \param mil_secs The new timeout in milliseconds (<em>0</em> disables the timeout).
+    # 
     def setTimeout(mil_secs: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured timeout in milliseconds.
+    # 
+    # \return The timeout in milliseconds.
+    # 
     def getTimeout() -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Sets the MMFF94 force-field variant used for fragment-mode structure generation (see ForceField.MMFF94 variants).
+    # 
+    # \param type The new force-field type.
+    # 
     def setFragmentModeForceFieldType(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured fragment-mode force-field type.
+    # 
+    # \return The force-field type identifier.
+    # 
     def getFragmentModeForceFieldType() -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Sets the MMFF94 force-field variant used for distance-geometry-mode structure generation.
+    # 
+    # \param type The new force-field type.
+    # 
     def setDGModeForceFieldType(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured DG-mode force-field type.
+    # 
+    # \return The force-field type identifier.
+    # 
     def getDGModeForceFieldType() -> int: pass
 
     ##
-    # \brief 
-    # \param strict 
-    #
+    # \brief Specifies whether force-field parameterization should be strict (missing parameters cause failure).
+    # 
+    # \param strict <tt>True</tt> to enable strict parameterization, and <tt>False</tt> to tolerate missing parameters.
+    # 
     def strictForceFieldParameterization(strict: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether force-field parameterization is strict.
+    # 
+    # \return <tt>True</tt> if strict parameterization is enabled, and <tt>False</tt> otherwise.
+    # 
     def strictForceFieldParameterization() -> bool: pass
 
     ##
-    # \brief 
-    # \param de_const 
-    #
+    # \brief Sets the dielectric constant used in the electrostatic-energy term.
+    # 
+    # \param de_const The new dielectric constant.
+    # 
     def setDielectricConstant(de_const: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured dielectric constant.
+    # 
+    # \return The dielectric constant.
+    # 
     def getDielectricConstant() -> float: pass
 
     ##
@@ -162,9 +178,10 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured distance exponent.
+    # 
+    # \return The distance exponent.
+    # 
     def getDistanceExponent() -> float: pass
 
     ##
@@ -174,21 +191,24 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum number of refinement iterations.
+    # 
+    # \return The maximum number of iterations.
+    # 
     def getMaxNumRefinementIterations() -> int: pass
 
     ##
-    # \brief 
-    # \param tol 
-    #
+    # \brief Sets the convergence tolerance of the force-field-based coordinate refinement step.
+    # 
+    # \param tol The new refinement tolerance.
+    # 
     def setRefinementTolerance(tol: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured refinement tolerance.
+    # 
+    # \return The refinement tolerance.
+    # 
     def getRefinementTolerance() -> float: pass
 
     ##
@@ -198,39 +218,45 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured macrocycle rotor-bond-count threshold.
+    # 
+    # \return The threshold.
+    # 
     def getMacrocycleRotorBondCountThreshold() -> int: pass
 
     ##
-    # \brief 
-    # \param max_num 
-    #
+    # \brief Sets the maximum number of conformers sampled during structure generation.
+    # 
+    # \param max_num The new maximum number of sampled conformers.
+    # 
     def setMaxNumSampledConformers(max_num: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum number of sampled conformers.
+    # 
+    # \return The maximum number of sampled conformers.
+    # 
     def getMaxNumSampledConformers() -> int: pass
 
     ##
-    # \brief 
-    # \param size 
-    #
+    # \brief Sets the cycle size for the convergence check of the structure-sampling loop.
+    # 
+    # \param size The new convergence-check cycle size.
+    # 
     def setConvergenceCheckCycleSize(size: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured convergence-check cycle size.
+    # 
+    # \return The convergence-check cycle size.
+    # 
     def getConvergenceCheckCycleSize() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the embedded fragment-build settings.
+    # 
+    # \return A reference to the fragment-build settings.
+    # 
     def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 
     objectID = property(getObjectID)

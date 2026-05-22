@@ -20,18 +20,21 @@
 #
 
 ##
-# \brief FragmentLibraryGenerator.
+# \brief Driver for populating a ConfGen.FragmentLibrary with conformers of canonicalized molecular fragments.
+# 
+# For each input fragment the generator constructs the corresponding ConfGen.CanonicalFragment, computes its hash code and SMILES string, generates a representative conformer ensemble using ConfGen.FragmentConformerGenerator and stores the result as a new FragmentLibraryEntry in the associated FragmentLibrary. Already-present entries (identified by hash code) are skipped.
 # 
 class FragmentLibraryGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %FragmentLibraryGenerator instance.
+    # \brief Constructs the <tt>FragmentLibraryGenerator</tt> instance without an associated fragment library.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %FragmentLibraryGenerator instance.
-    # \param lib 
+    # \brief Constructs the <tt>FragmentLibraryGenerator</tt> instance and associates it with <em>lib</em>.
+    # 
+    # \param lib The fragment library to populate.
     # 
     def __init__(lib: FragmentLibrary) -> None: pass
 
@@ -48,51 +51,59 @@ class FragmentLibraryGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Sets the fragment library to populate.
+    # 
+    # \param lib The new fragment library.
+    # 
     def setFragmentLibrary(lib: FragmentLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently associated fragment library.
+    # 
+    # \return A reference to the fragment library smart reference.
+    # 
     def getFragmentLibrary() -> FragmentLibrary: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked periodically to allow conformer generation to be aborted.
+    # 
+    # \param func The abort-check callback.
+    # 
     def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured abort-check callback.
+    # 
+    # \return A reference to the abort-check callback.
+    # 
     def getAbortCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked periodically to check whether the configured generation timeout has elapsed.
+    # 
+    # \param func The timeout-check callback.
+    # 
     def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured timeout-check callback.
+    # 
+    # \return A reference to the timeout-check callback.
+    # 
     def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback that receives log messages produced during fragment processing.
+    # 
+    # \param func The log-message callback.
+    # 
     def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured log-message callback.
+    # 
+    # \return A reference to the log-message callback.
+    # 
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
@@ -104,21 +115,24 @@ class FragmentLibraryGenerator(Boost.Python.instance):
     def process(self: MolecularGraph, frag: Chem.MolecularGraph) -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of conformers generated during the last process() call.
+    # 
+    # \return The number of generated conformers.
+    # 
     def getNumGeneratedConformers() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the hash code of the library entry created during the last process() call.
+    # 
+    # \return The hash code of the library entry.
+    # 
     def getLibraryEntryHashCode() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the fragment conformer-generation settings.
+    # 
+    # \return A reference to the settings.
+    # 
     def getSettings() -> FragmentConformerGeneratorSettings: pass
 
     objectID = property(getObjectID)

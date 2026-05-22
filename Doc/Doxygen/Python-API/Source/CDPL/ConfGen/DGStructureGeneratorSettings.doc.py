@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for ConfGen.DGStructureGenerator, extending ConfGen.DGConstraintGeneratorSettings with parameters controlling the embedding optimization loop.
+# 
 class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##

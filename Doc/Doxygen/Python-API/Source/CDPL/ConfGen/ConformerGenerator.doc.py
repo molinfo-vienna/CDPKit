@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief High-level driver for the systematic generation of low-energy 3D conformer ensembles from a molecular graph.
+# 
+# The generator coordinates the full pipeline: 2D-to-3D fragment-based structure generation, torsion-driven conformer enumeration, MMFF94-based energy minimization, RMSD-based clustering and final selection. Pipeline behaviour is controlled via the embedded Settings instance, the configured fragment and torsion libraries and optional abort/timeout/log callbacks.
+# 
 class ConformerGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %ConformerGenerator instance.
+    # \brief Constructs the <tt>ConformerGenerator</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -42,103 +44,124 @@ class ConformerGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current generator settings (mutable).
+    # 
+    # \return A reference to the settings.
+    # 
     def getSettings() -> ConformerGeneratorSettings: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all configured fragment libraries.
+    # 
     def clearFragmentLibraries() -> None: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Adds <em>lib</em> to the list of fragment libraries consulted during fragment-based 3D structure generation.
+    # 
+    # \param lib The fragment library to add.
+    # 
     def addFragmentLibrary(lib: FragmentLibrary) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all configured torsion libraries.
+    # 
     def clearTorsionLibraries() -> None: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Adds <em>lib</em> to the list of torsion libraries consulted during torsion driving.
+    # 
+    # \param lib The torsion library to add.
+    # 
     def addTorsionLibrary(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked periodically to allow the generation to be aborted by the user.
+    # 
+    # \param func The abort-check callback.
+    # 
     def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured abort-check callback.
+    # 
+    # \return A reference to the abort-check callback.
+    # 
     def getAbortCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked when the configured timeout is reached.
+    # 
+    # \param func The timeout callback.
+    # 
     def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured timeout callback.
+    # 
+    # \return A reference to the timeout callback.
+    # 
     def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback receiving log messages emitted by the generator.
+    # 
+    # \param func The log-message callback.
+    # 
     def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured log-message callback.
+    # 
+    # \return A reference to the log-message callback.
+    # 
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Generates a conformer ensemble for <em>molgraph</em>.
+    # 
+    # \param molgraph The input molecular graph.
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the generation.
+    # 
     def generate(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param fixed_substr 
-    # \return 
-    #
+    # \brief Generates a conformer ensemble for <em>molgraph</em> while keeping the substructure <em>fixed_substr</em> at its current 3D coordinates.
+    # 
+    # \param molgraph The input molecular graph.
+    # \param fixed_substr The substructure that must retain its current 3D coordinates.
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the generation. 
+    # 
+    # \since 1.1
+    # 
     def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param fixed_substr 
-    # \param fixed_substr_coords 
-    # \return 
-    #
+    # \brief Generates a conformer ensemble for <em>molgraph</em> while keeping the substructure <em>fixed_substr</em> at the supplied 3D coordinates <em>fixed_substr_coords</em>.
+    # 
+    # \param molgraph The input molecular graph.
+    # \param fixed_substr The substructure that must retain the supplied 3D coordinates.
+    # \param fixed_substr_coords The 3D coordinates assigned to <em>fixed_substr</em>.
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the generation. 
+    # 
+    # \since 1.1
+    # 
     def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Transfers the generated conformer ensemble onto <em>molgraph</em> (adds Chem.MolecularGraphProperty.CONFORMER_DATA entries).
+    # 
+    # \param molgraph The molecular graph receiving the conformer data.
+    # 
     def setConformers(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of generated conformers.
+    # 
+    # \return The conformer count.
+    # 
     def getNumConformers() -> int: pass
 
     ##

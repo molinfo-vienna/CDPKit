@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Container for the 3D coordinates of a generated conformer plus its associated energy value.
+# 
+# <tt>ConformerData</tt> extends Math.Vector3DArray with an energy field that is filled by force-field-based conformer-generation steps.
+# 
 class ConformerData(Math.Vector3DArray):
 
     ##
-    # \brief Initializes the \c %ConformerData instance.
+    # \brief Constructs an empty <tt>ConformerData</tt> instance with zero energy.
     # 
     def __init__() -> None: pass
 
@@ -36,16 +38,18 @@ class ConformerData(Math.Vector3DArray):
     def __init__(data: ConformerData) -> None: pass
 
     ##
-    # \brief Initializes the \c %ConformerData instance.
-    # \param coords 
-    # \param energy 
+    # \brief Constructs the <tt>ConformerData</tt> instance with the given coordinates and energy.
+    # 
+    # \param coords The 3D coordinate vectors of the conformer.
+    # \param energy The energy value to assign.
     # 
     def __init__(coords: Math.Vector3DArray, energy: float = 0.0) -> None: pass
 
     ##
-    # \brief 
-    # \param data 
-    #
+    # \brief Swaps the contents (coordinates and energy) of this instance with <em>data</em>.
+    # 
+    # \param data The other <tt>ConformerData</tt> instance.
+    # 
     def swap(data: ConformerData) -> None: pass
 
     ##
@@ -63,15 +67,17 @@ class ConformerData(Math.Vector3DArray):
     def assign(coords: Math.Vector3DArray) -> ConformerData: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the energy value.
+    # 
+    # \return The currently stored energy value.
+    # 
     def getEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \param energy 
-    #
+    # \brief Sets the energy value.
+    # 
+    # \param energy The new energy value.
+    # 
     def setEnergy(energy: float) -> None: pass
 
     energy = property(getEnergy, setEnergy)

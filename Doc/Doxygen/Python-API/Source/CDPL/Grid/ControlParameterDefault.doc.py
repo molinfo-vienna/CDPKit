@@ -30,13 +30,17 @@ class ControlParameterDefault(Boost.Python.instance):
     STRICT_ERROR_CHECKING = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Grid.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
+    # 
+    # \since 1.2
+    # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Grid.ControlParameter.CUBE_COMMENT_IS_NAME.
+    # 
+    # \since 1.4
+    # 
     CUBE_COMMENT_IS_NAME = False
 
     ##

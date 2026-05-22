@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Driver for the fragment-based generation of 3D structures: decomposes a molecular graph into chain and ring fragments, looks up pre-built conformers from a ConfGen.FragmentLibrary for each fragment and assembles them into one or more full 3D conformers.
+# 
 class FragmentAssembler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %FragmentAssembler instance.
+    # \brief Constructs the <tt>FragmentAssembler</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -42,78 +42,93 @@ class FragmentAssembler(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current assembler settings (mutable).
+    # 
+    # \return A reference to the settings.
+    # 
     def getSettings() -> FragmentAssemblerSettings: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all configured fragment libraries.
+    # 
     def clearFragmentLibraries() -> None: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Adds <em>lib</em> to the list of fragment libraries consulted during assembly.
+    # 
+    # \param lib The fragment library to add.
+    # 
     def addFragmentLibrary(lib: FragmentLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked periodically to allow the assembly to be aborted by the user.
+    # 
+    # \param func The abort-check callback.
+    # 
     def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured abort-check callback.
+    # 
+    # \return A reference to the abort-check callback.
+    # 
     def getAbortCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked when the configured timeout is reached.
+    # 
+    # \param func The timeout callback.
+    # 
     def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured timeout callback.
+    # 
+    # \return A reference to the timeout callback.
+    # 
     def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback receiving log messages emitted by the assembler.
+    # 
+    # \param func The log-message callback.
+    # 
     def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured log-message callback.
+    # 
+    # \return A reference to the log-message callback.
+    # 
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Assembles 3D conformer(s) for <em>molgraph</em> from fragment building blocks.
+    # 
+    # \param molgraph The input molecular graph.
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the assembly.
+    # 
     def assemble(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param fixed_substr 
-    # \param fixed_substr_coords 
-    # \return 
-    #
+    # \brief Assembles 3D conformer(s) for <em>molgraph</em> while keeping the substructure <em>fixed_substr</em> at the supplied 3D coordinates.
+    # 
+    # \param molgraph The input molecular graph.
+    # \param fixed_substr The substructure that must retain the supplied 3D coordinates.
+    # \param fixed_substr_coords The 3D coordinates assigned to <em>fixed_substr</em>.
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the assembly. 
+    # 
+    # \since 1.1
+    # 
     def assemble(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of assembled conformers.
+    # 
+    # \return The conformer count.
+    # 
     def getNumConformers() -> int: pass
 
     ##

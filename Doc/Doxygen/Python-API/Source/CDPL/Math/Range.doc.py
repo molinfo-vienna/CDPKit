@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
+# 
 class Range(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %Range instance.
+    # \brief Constructs an empty range \f$ [0, 0) \f$.
     # 
     def __init__() -> None: pass
 
@@ -36,34 +36,41 @@ class Range(Boost.Python.instance):
     def __init__(r: Range) -> None: pass
 
     ##
-    # \brief Initializes the \c %Range instance.
-    # \param start 
-    # \param stop 
+    # \brief Constructs the range \f$ [start, stop) \f$.
+    # 
+    # \param start The lower (inclusive) bound.
+    # \param stop The upper (exclusive) bound.
+    # 
+    # \throw Base.RangeError if <em>start</em> > <em>stop</em>.
     # 
     def __init__(start: int, stop: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the lower (inclusive) bound.
+    # 
+    # \return The lower bound.
+    # 
     def getStart() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the upper (exclusive) bound.
+    # 
+    # \return The upper bound.
+    # 
     def getStop() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the range, \f$ stop - start \f$.
+    # 
+    # \return The range size.
+    # 
     def getSize() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the range is empty.
+    # 
+    # \return <tt>True</tt> if the range is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -81,9 +88,10 @@ class Range(Boost.Python.instance):
     def assign(r: Range) -> Range: pass
 
     ##
-    # \brief 
-    # \param r 
-    #
+    # \brief Swaps the contents of <tt>self</tt> and <em>r</em>.
+    # 
+    # \param r The other range.
+    # 
     def swap(r: Range) -> None: pass
 
     ##
@@ -99,24 +107,32 @@ class Range(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param r The \c %Range instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Equality comparison.
+    # 
+    # \param r The other range.
+    # 
+    # \return <tt>True</tt> if both ranges have the same start and stop, and <tt>False</tt> otherwise.
     # 
     def __eq__(r: Range) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param r The \c %Range instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Inequality comparison.
+    # 
+    # \param r The other range.
+    # 
+    # \return <tt>True</tt> if the ranges differ in start or stop, and <tt>False</tt> otherwise.
     # 
     def __ne__(r: Range) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Maps the local position <em>i</em> to the global index <em>start</em> + <em>i</em>.
+    # 
+    # \param i The zero-based local position.
+    # 
+    # \return The global index. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range \f$ [0, size) \f$.
+    # 
     def __call__(i: int) -> int: pass
 
     ##

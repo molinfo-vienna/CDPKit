@@ -20,67 +20,78 @@
 #
 
 ##
-# \brief 
-#
+# \brief Finds torsion rules from a TorsionLibrary that apply to a given rotatable bond.
+# 
+# For a queried bond in a molecular graph the matcher iterates the configured TorsionLibrary (top-down through torsion categories) and reports every rule whose central-bond SMARTS pattern matches at the queried bond. Each match is stored as a TorsionRuleMatch object providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
+# 
 class TorsionRuleMatcher(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %TorsionRuleMatcher instance.
+    # \brief Constructs the <tt>TorsionRuleMatcher</tt> instance without an associated torsion library.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %TorsionRuleMatcher instance.
-    # \param lib 
+    # \brief Constructs the <tt>TorsionRuleMatcher</tt> instance and associates it with <em>lib</em>.
+    # 
+    # \param lib The torsion library to query.
     # 
     def __init__(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \param unique 
-    #
+    # \brief Specifies whether only unique substructure mappings shall be reported during matching.
+    # 
+    # \param unique If <tt>True</tt>, only one of multiple equivalent mappings is reported per rule.
+    # 
     def findUniqueMappingsOnly(unique: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether only unique substructure mappings are reported during matching.
+    # 
+    # \return <tt>True</tt> if only unique mappings are reported, and <tt>False</tt> otherwise.
+    # 
     def findUniqueMappingsOnly() -> bool: pass
 
     ##
-    # \brief 
-    # \param all 
-    #
+    # \brief Specifies whether all matching rules shall be reported (instead of just the most-specific one).
+    # 
+    # \param all If <tt>True</tt>, every matching rule across all categories is reported.
+    # 
     def findAllRuleMappings(all: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether all matching rules are reported during matching.
+    # 
+    # \return <tt>True</tt> if all matching rules are reported, and <tt>False</tt> otherwise.
+    # 
     def findAllRuleMappings() -> bool: pass
 
     ##
-    # \brief 
-    # \param stop 
-    #
+    # \brief Specifies whether the matching process shall stop at the first rule that produces matches.
+    # 
+    # \param stop If <tt>True</tt>, matching stops as soon as a rule yields at least one match.
+    # 
     def stopAtFirstMatchingRule(stop: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether matching stops at the first rule that produces matches.
+    # 
+    # \return <tt>True</tt> if matching stops at the first matching rule, and <tt>False</tt> otherwise.
+    # 
     def stopAtFirstMatchingRule() -> bool: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Sets the torsion library to query.
+    # 
+    # \param lib The new torsion library.
+    # 
     def setTorsionLibrary(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently associated torsion library.
+    # 
+    # \return A reference to the torsion library smart reference.
+    # 
     def getTorsionLibrary() -> TorsionLibrary: pass
 
     ##
@@ -102,12 +113,14 @@ class TorsionRuleMatcher(Boost.Python.instance):
     def getMatch(idx: int) -> TorsionRuleMatch: pass
 
     ##
-    # \brief 
-    # \param bond 
-    # \param molgraph 
-    # \param append 
-    # \return 
-    #
+    # \brief Searches the associated TorsionLibrary for rules that apply to the bond <em>bond</em> of <em>molgraph</em>.
+    # 
+    # \param bond The rotatable bond for which matching torsion rules are sought.
+    # \param molgraph The molecular graph the bond belongs to.
+    # \param append If <tt>True</tt>, new matches are appended to the previously stored ones; otherwise stored matches are cleared first.
+    # 
+    # \return <tt>True</tt> if at least one matching rule was found, and <tt>False</tt> otherwise.
+    # 
     def findMatches(bond: Chem.Bond, molgraph: Chem.MolecularGraph, append: bool = False) -> bool: pass
 
     ##

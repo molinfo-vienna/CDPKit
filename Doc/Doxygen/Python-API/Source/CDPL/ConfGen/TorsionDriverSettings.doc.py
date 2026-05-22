@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for ConfGen.TorsionDriver.
+# 
 class TorsionDriverSettings(Boost.Python.instance):
 
     ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for ConfGen.DGConstraintGenerator (which builds the distance/volume constraints used for distance-geometry coordinate generation).
+# 
 class DGConstraintGeneratorSettings(Boost.Python.instance):
 
     ##

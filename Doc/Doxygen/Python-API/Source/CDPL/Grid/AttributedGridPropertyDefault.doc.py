@@ -25,11 +25,11 @@
 class AttributedGridPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Grid.AttributedGridProperty.NAME property (empty string).
+    # 
     NAME = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Grid.AttributedGridProperty.COMMENT property (empty string).
+    # 
     COMMENT = ''

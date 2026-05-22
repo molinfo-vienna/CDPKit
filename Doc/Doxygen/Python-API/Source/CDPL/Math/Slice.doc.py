@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief An index slice ( \f$ start, stride, size \f$) used for strided slicing of vector and matrix expressions.
+# 
+# Local position <em>i</em> is mapped to the global index \f$ start + i \cdot stride \f$. Negative strides (reverse iteration) are supported as long as the resulting indices stay non-negative.
+# 
 class Slice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %Slice instance.
+    # \brief Constructs an empty slice ( \f$ 0, 0, 0 \f$).
     # 
     def __init__() -> None: pass
 
@@ -36,35 +38,42 @@ class Slice(Boost.Python.instance):
     def __init__(s: Slice) -> None: pass
 
     ##
-    # \brief Initializes the \c %Slice instance.
-    # \param start 
-    # \param stride 
-    # \param size 
+    # \brief Constructs the slice (<em>start</em>, <em>stride</em>, <em>size</em>).
+    # 
+    # \param start The starting global index.
+    # \param stride The signed step size between consecutive entries.
+    # \param size The number of entries.
+    # 
+    # \throw Base.RangeError if the slice would produce a negative global index.
     # 
     def __init__(start: int, stride: int, size: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the starting global index.
+    # 
+    # \return The starting index.
+    # 
     def getStart() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the signed step size between consecutive entries.
+    # 
+    # \return The stride.
+    # 
     def getStride() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the slice.
+    # 
+    # \return The slice size.
+    # 
     def getSize() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the slice is empty.
+    # 
+    # \return <tt>True</tt> if the slice contains no entries, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -82,9 +91,10 @@ class Slice(Boost.Python.instance):
     def assign(s: Slice) -> Slice: pass
 
     ##
-    # \brief 
-    # \param s 
-    #
+    # \brief Swaps the contents of <tt>self</tt> and <em>s</em>.
+    # 
+    # \param s The other slice.
+    # 
     def swap(s: Slice) -> None: pass
 
     ##
@@ -100,24 +110,32 @@ class Slice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == s</tt>.
-    # \param s The \c %Slice instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Equality comparison.
+    # 
+    # \param s The other slice.
+    # 
+    # \return <tt>True</tt> if both slices have the same start, stride and size, and <tt>False</tt> otherwise.
     # 
     def __eq__(s: Slice) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != s</tt>.
-    # \param s The \c %Slice instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Inequality comparison.
+    # 
+    # \param s The other slice.
+    # 
+    # \return <tt>True</tt> if the slices differ in start, stride or size, and <tt>False</tt> otherwise.
     # 
     def __ne__(s: Slice) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Maps the local position <em>i</em> to the global index \f$ start + i \cdot stride \f$.
+    # 
+    # \param i The zero-based local position.
+    # 
+    # \return The global index. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range \f$ [0, size) \f$.
+    # 
     def __call__(i: int) -> int: pass
 
     ##

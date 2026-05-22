@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Driver for the systematic enumeration of conformers obtained by rotating around rotatable bonds of a molecular graph, using preferred torsion angles taken from configured ConfGen.TorsionLibrary instances.
+# 
 class TorsionDriver(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %TorsionDriver instance.
+    # \brief Constructs the <tt>TorsionDriver</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -42,114 +42,132 @@ class TorsionDriver(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current driver settings (mutable).
+    # 
+    # \return A reference to the settings.
+    # 
     def getSettings() -> TorsionDriverSettings: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all configured torsion libraries.
+    # 
     def clearTorsionLibraries() -> None: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Adds <em>lib</em> to the list of torsion libraries consulted during torsion driving.
+    # 
+    # \param lib The torsion library to add.
+    # 
     def addTorsionLibrary(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Sets up the driver for <em>molgraph</em> with the default rotatable-bond perception.
+    # 
+    # \param molgraph The input molecular graph.
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the setup.
+    # 
     def setup(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param bond_mask 
-    # \return 
-    #
+    # \brief Sets up the driver for <em>molgraph</em> using only the bonds whose corresponding bit is set in <em>bond_mask</em> as rotatable.
+    # 
+    # \param molgraph The input molecular graph.
+    # \param bond_mask The bit mask of rotatable bonds (one bit per bond of <em>molgraph</em>).
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the setup.
+    # 
     def setup(molgraph: Chem.MolecularGraph, bond_mask: Util.BitSet) -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all stored input coordinates.
+    # 
     def clearInputCoordinates() -> None: pass
 
     ##
-    # \brief 
-    # \param frag_idx 
-    #
+    # \brief Removes all input coordinates of the fragment at index <em>frag_idx</em>.
+    # 
+    # \param frag_idx The zero-based fragment index.
+    # 
     def clearInputCoordinates(frag_idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param coords 
-    #
+    # \brief Adds <em>coords</em> as a new starting configuration that the driver will torsion-drive.
+    # 
+    # \param coords The input 3D coordinates.
+    # 
     def addInputCoordinates(coords: Math.Vector3DArray) -> None: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \param frag_idx 
-    #
+    # \brief Adds <em>coords</em> as a new starting configuration restricted to the fragment at index <em>frag_idx</em>.
+    # 
+    # \param coords The input 3D coordinates of the fragment.
+    # \param frag_idx The zero-based fragment index.
+    # 
     def addInputCoordinates(coords: Math.Vector3DArray, frag_idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param conf_data 
-    # \param frag_idx 
-    #
+    # \brief Adds the conformer data shared reference <em>conf_data</em> as a new starting configuration restricted to the fragment at index <em>frag_idx</em>.
+    # 
+    # \param conf_data The input conformer data.
+    # \param frag_idx The zero-based fragment index.
+    # 
     def addInputCoordinates(conf_data: ConformerData, frag_idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked periodically to allow the generation to be aborted by the user.
+    # 
+    # \param func The abort-check callback.
+    # 
     def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured abort-check callback.
+    # 
+    # \return A reference to the abort-check callback.
+    # 
     def getAbortCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked when the configured timeout is reached.
+    # 
+    # \param func The timeout callback.
+    # 
     def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured timeout callback.
+    # 
+    # \return A reference to the timeout callback.
+    # 
     def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback receiving log messages emitted by the driver.
+    # 
+    # \param func The log-message callback.
+    # 
     def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured log-message callback.
+    # 
+    # \return A reference to the log-message callback.
+    # 
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Runs the torsion-driving conformer enumeration.
+    # 
+    # \return A ConfGen.ReturnCode value reporting the outcome of the generation.
+    # 
     def generateConformers() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of generated conformers.
+    # 
+    # \return The conformer count.
+    # 
     def getNumConformers() -> int: pass
 
     ##

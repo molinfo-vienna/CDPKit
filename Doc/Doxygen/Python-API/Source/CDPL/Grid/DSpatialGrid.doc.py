@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief SpatialGrid.
+# \brief Convenience alias for the double-precision spatial-grid abstract base.
 # 
 class DSpatialGrid(AttributedGrid):
 
@@ -56,17 +56,20 @@ class DSpatialGrid(AttributedGrid):
     def setElement(i: int, value: float) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param coords 
-    #
+    # \brief Returns the 3D coordinates of the grid element at linear index <em>i</em>.
+    # 
+    # \param i The linear element index.
+    # \param coords The output coordinates.
+    # 
     def getCoordinates(i: int, coords: Math.Vector3D) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the grid element at linear index <em>i</em>.
+    # 
+    # \param i The linear element index.
+    # 
+    # \return A reference to the grid element.
+    # 
     def __call__(i: int) -> float: pass
 
     ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for ConfGen.FragmentAssembler.
+# 
 class FragmentAssemblerSettings(Boost.Python.instance):
 
     ##

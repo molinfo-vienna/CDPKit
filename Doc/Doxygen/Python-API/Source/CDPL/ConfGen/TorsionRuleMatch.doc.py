@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single match of a ConfGen.TorsionRule against a rotatable bond: the rule, the bond and the four atoms that span the torsion.
+# 
 class TorsionRuleMatch(Boost.Python.instance):
 
     ##
@@ -56,13 +56,14 @@ class TorsionRuleMatch(Boost.Python.instance):
     def __init__(match: TorsionRuleMatch) -> None: pass
 
     ##
-    # \brief Initializes the \c %TorsionRuleMatch instance.
-    # \param rule 
-    # \param bond 
-    # \param atom1 
-    # \param atom2 
-    # \param atom3 
-    # \param atom4 
+    # \brief Constructs the <tt>TorsionRuleMatch</tt> instance.
+    # 
+    # \param rule The matched torsion rule.
+    # \param bond The rotatable bond.
+    # \param atom1 The first torsion atom (A in A-B-C-D).
+    # \param atom2 The second torsion atom (B).
+    # \param atom3 The third torsion atom (C).
+    # \param atom4 The fourth torsion atom (D).
     # 
     def __init__(rule: TorsionRule, bond: Chem.Bond, atom1: Chem.Atom, atom2: Chem.Atom, atom3: Chem.Atom, atom4: Chem.Atom) -> None: pass
 
@@ -79,21 +80,24 @@ class TorsionRuleMatch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the four torsion atoms (A, B, C, D).
+    # 
+    # \return A reference to a 4-element array of Chem.Atom* (A, B, C, D).
+    # 
     def getAtoms() -> AtomArray: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the rotatable bond at which the rule matched.
+    # 
+    # \return A reference to the bond.
+    # 
     def getBond() -> Chem.Bond: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the matched torsion rule.
+    # 
+    # \return A reference to the rule.
+    # 
     def getRule() -> TorsionRule: pass
 
     ##

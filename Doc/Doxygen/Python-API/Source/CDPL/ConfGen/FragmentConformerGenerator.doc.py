@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Driver for the generation of low-energy 3D conformers for a single molecular fragment (chain, small ring or macrocycle) via distance geometry plus MMFF94 minimization plus RMSD clustering.
+# 
 class FragmentConformerGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %FragmentConformerGenerator instance.
+    # \brief Constructs the <tt>FragmentConformerGenerator</tt> instance.
     # 
     def __init__() -> None: pass
 

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Tag selecting the upper-triangular view (entries strictly below the diagonal read as zero) for Math.TriangularAdapter.
+# 
 class Upper(Boost.Python.instance):
 
     ##

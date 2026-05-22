@@ -29,39 +29,40 @@
 class DVectorBFGSMinimizer(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Status bitmask reported by minimize() and getStatus(). Multiple flags may be combined.
+    # 
     class Status(Boost.Python.enum):
 
         ##
-        # \brief SUCCESS.
-        #
+        # \brief Iteration step completed successfully (no termination condition met yet).
+        # 
         SUCCESS = 0
 
         ##
-        # \brief NO_PROGRESS.
-        #
+        # \brief No more progress towards the solution can be made.
+        # 
         NO_PROGRESS = 1
 
         ##
-        # \brief ITER_LIMIT_REACHED.
-        #
+        # \brief The maximum number of minimization iterations has been reached.
+        # 
         ITER_LIMIT_REACHED = 2
 
         ##
-        # \brief GNORM_REACHED.
-        #
+        # \brief The configured gradient-norm threshold has been reached.
+        # 
         GNORM_REACHED = 4
 
         ##
-        # \brief DELTAF_REACHED.
-        #
+        # \brief The configured function-value delta between successive iterations has been reached.
+        # 
         DELTAF_REACHED = 8
 
     ##
-    # \brief Initializes the \c %DVectorBFGSMinimizer instance.
-    # \param func 
-    # \param grad_func 
+    # \brief Constructs the <tt>BFGSMinimizer</tt> instance with the given objective and gradient functions.
+    # 
+    # \param func The objective function.
+    # \param grad_func The gradient function (also computes the objective value).
     # 
     def __init__(func: DoubleDVectorFunctor, grad_func: object) -> None: pass
 
@@ -78,64 +79,75 @@ class DVectorBFGSMinimizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the L2 norm of the gradient at the end of the most recent iterate() call.
+    # 
+    # \return The gradient norm.
+    # 
     def getGradientNorm() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the magnitude of the function-value decrease produced by the most recent iterate() call.
+    # 
+    # \return The function-value delta (positive when the function decreased).
+    # 
     def getFunctionDelta() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function value at the end of the most recent iterate() call.
+    # 
+    # \return The function value.
+    # 
     def getFunctionValue() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of iterations performed by the most recent minimize() or iterate() loop.
+    # 
+    # \return The iteration count.
+    # 
     def getNumIterations() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current status of the minimizer.
+    # 
+    # \return The Status bitmask.
+    # 
     def getStatus() -> Status: pass
 
     ##
-    # \brief 
-    # \param x 
-    # \param g 
-    # \param max_iter 
-    # \param g_norm 
-    # \param delta_f 
-    # \param do_setup 
-    # \return 
-    #
+    # \brief Runs the BFGS minimization loop on <em>x</em>.
+    # 
+    # \param x The variable vector to be minimized (modified in place).
+    # \param g The gradient vector (modified in place).
+    # \param max_iter The maximum number of iterations (<em>0</em> means unlimited).
+    # \param g_norm The gradient-norm threshold below which the minimization is stopped (negative values disable this stop condition).
+    # \param delta_f The function-value-delta threshold below which the minimization is stopped (negative values disable this stop condition).
+    # \param do_setup If <tt>True</tt>, setup() is invoked at the start to initialize the minimizer.
+    # 
+    # \return The terminal Status bitmask of the minimization.
+    # 
     def minimize(x: DVector, g: DVector, max_iter: int, g_norm: float, delta_f: float, do_setup: bool = True) -> Status: pass
 
     ##
-    # \brief 
-    # \param x 
-    # \param g 
-    # \param step_size 
-    # \param tol 
-    # \return 
-    #
+    # \brief Initializes the minimizer state for a subsequent iterate() / minimize() loop.
+    # 
+    # \param x The starting variable vector.
+    # \param g The gradient vector (filled with the gradient at <em>x</em>).
+    # \param step_size The initial step-size guess.
+    # \param tol The line-search tolerance.
+    # 
+    # \return The objective-function value at <em>x</em>.
+    # 
     def setup(x: DVector, g: DVector, step_size: float = 0.001, tol: float = 0.15) -> float: pass
 
     ##
-    # \brief 
-    # \param f 
-    # \param x 
-    # \param g 
-    # \return 
-    #
+    # \brief Performs a single BFGS iteration: line search along the current search direction, BFGS update of the inverse Hessian approximation, and selection of the new search direction.
+    # 
+    # \param f The current function value (updated in place).
+    # \param x The current variable vector (updated in place).
+    # \param g The current gradient vector (updated in place).
+    # 
+    # \return Status.SUCCESS if the iteration produced a step, otherwise the bitmask of stop conditions met.
+    # 
     def iterate(f: float, x: DVector, g: DVector) -> tuple: pass
 
     objectID = property(getObjectID)

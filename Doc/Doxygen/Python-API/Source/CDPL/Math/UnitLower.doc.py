@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Tag selecting the unit-lower-triangular view (zero above the diagonal, one on the diagonal) for Math.TriangularAdapter.
+# 
 class UnitLower(Boost.Python.instance):
 
     ##

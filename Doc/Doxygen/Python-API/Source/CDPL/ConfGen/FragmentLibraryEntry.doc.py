@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief FragmentLibraryEntry.
+# \brief A single entry of a ConfGen.FragmentLibrary holding the precomputed conformer set of a canonicalized molecular fragment.
+# 
+# Each entry is keyed by the hash code of the associated ConfGen.CanonicalFragment and stores the canonical SMILES string plus a list of ConformerData instances (one per stored conformer).
 # 
 class FragmentLibraryEntry(Boost.Python.instance):
 
@@ -55,57 +57,68 @@ class FragmentLibraryEntry(Boost.Python.instance):
     def assign(entry: FragmentLibraryEntry) -> FragmentLibraryEntry: pass
 
     ##
-    # \brief 
-    # \param hash_code 
-    #
+    # \brief Sets the hash code identifying the entry within the FragmentLibrary.
+    # 
+    # \param hash_code The new hash code.
+    # 
     def setHashCode(hash_code: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the hash code identifying the entry within the FragmentLibrary.
+    # 
+    # \return The hash code.
+    # 
     def getHashCode() -> int: pass
 
     ##
-    # \brief 
-    # \param smiles 
-    #
+    # \brief Sets the canonical SMILES string describing the stored fragment.
+    # 
+    # \param smiles The new SMILES string.
+    # 
     def setSMILES(smiles: str) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the canonical SMILES string describing the stored fragment.
+    # 
+    # \return A reference to the SMILES string.
+    # 
     def getSMILES() -> str: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of atoms of the stored fragment.
+    # 
+    # \return The number of atoms (zero if no conformer has been added yet).
+    # 
     def getNumAtoms() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored conformers.
+    # 
+    # \return The number of stored conformers.
+    # 
     def getNumConformers() -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all stored conformers from the entry.
+    # 
     def clearConformers() -> None: pass
 
     ##
-    # \brief 
-    # \param conf_data 
-    #
+    # \brief Appends the given conformer to the entry.
+    # 
+    # \param conf_data A smart reference to the conformer data to add.
+    # 
     def addConformer(conf_data: ConformerData) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the stored conformer at index <em>idx</em>.
+    # 
+    # \param idx The zero-based conformer index.
+    # 
+    # \return A reference to the conformer. 
+    # 
+    # \throw Base.IndexError if the number of stored conformers is zero or <em>idx</em> is not in the range [0, getNumConformers() - 1].
+    # 
     def getConformer(idx: int) -> ConformerData: pass
 
     ##

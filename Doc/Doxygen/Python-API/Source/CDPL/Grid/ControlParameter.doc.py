@@ -34,13 +34,17 @@ class ControlParameter(Boost.Python.instance):
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether CDF-format grid output uses single-precision floats (<tt>True</tt>) or double-precision (<tt>False</tt>). <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> [\ref CUBE] file is taken as the grid name on input (<tt>True</tt>) or treated as a regular comment (<tt>False</tt>). <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.4
+    # 
     CUBE_COMMENT_IS_NAME = CDPL.Base.LookupKey('CUBE_COMMENT_IS_NAME')
 
     ##

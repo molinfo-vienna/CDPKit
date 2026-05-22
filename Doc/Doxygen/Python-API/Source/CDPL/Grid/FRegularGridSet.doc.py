@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief RegularGridSet.
+# \brief Convenience alias for the single-precision regular-grid set.
 # 
 class FRegularGridSet(Boost.Python.instance):
 

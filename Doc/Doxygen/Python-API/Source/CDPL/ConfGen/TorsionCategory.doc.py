@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A node of a hierarchical torsion library: a named, optionally pattern-matched category that holds child categories and torsion rules.
+# 
 class TorsionCategory(Boost.Python.instance):
 
     ##
@@ -113,7 +113,7 @@ class TorsionCategory(Boost.Python.instance):
         objectID = property(getObjectID)
 
     ##
-    # \brief Initializes the \c %TorsionCategory instance.
+    # \brief Constructs an empty <tt>TorsionCategory</tt> instance.
     # 
     def __init__() -> None: pass
 
