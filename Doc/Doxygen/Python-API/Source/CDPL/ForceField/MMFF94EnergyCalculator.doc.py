@@ -20,12 +20,16 @@
 #
 
 ##
-# \brief 
-#
+# \brief Evaluates the total MMFF94 force-field energy of a 3D conformation.
+# 
+# The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and van der Waals energy contributions for a supplied set of 3D coordinates. The per-component energies are retained and made available via the dedicated accessors; the sum is returned by __call__ and getTotalEnergy().
+# 
 class MMFF94EnergyCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94EnergyCalculator instance.
+    # \brief Constructs the calculator without any associated interaction data.
+    # 
+    # Operator() will return zero until setup() has been called.
     # 
     def __init__() -> None: pass
 
@@ -36,8 +40,9 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def __init__(calc: MMFF94EnergyCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94EnergyCalculator instance.
-    # \param ia_data 
+    # \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
+    # 
+    # \param ia_data The MMFF94 interaction data to use during energy evaluation.
     # 
     def __init__(ia_data: MMFF94InteractionData) -> None: pass
 
@@ -61,76 +66,91 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def assign(calc: MMFF94EnergyCalculator) -> MMFF94EnergyCalculator: pass
 
     ##
-    # \brief 
-    # \param types 
-    #
+    # \brief Enables/disables specific MMFF94 interaction-type contributions.
+    # 
+    # \param types Bitwise-OR combination of ForceField.InteractionType flags. Only the listed contributions are evaluated.
+    # 
     def setEnabledInteractionTypes(types: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently enabled interaction-type contributions.
+    # 
+    # \return The bitwise-OR combination of ForceField.InteractionType flags.
+    # 
     def getEnabledInteractionTypes() -> int: pass
 
     ##
-    # \brief 
-    # \param ia_data 
-    #
+    # \brief Associates the calculator with the supplied MMFF94 interaction data.
+    # 
+    # \param ia_data The new MMFF94 interaction data.
+    # 
     def setup(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total MMFF94 energy computed by the most recent __call__ call.
+    # 
+    # \return A reference to the total energy.
+    # 
     def getTotalEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the bond-stretching energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the bond-stretching energy.
+    # 
     def getBondStretchingEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the angle-bending energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the angle-bending energy.
+    # 
     def getAngleBendingEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the stretch-bend coupling energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the stretch-bend energy.
+    # 
     def getStretchBendEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the out-of-plane bending energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the out-of-plane bending energy.
+    # 
     def getOutOfPlaneBendingEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the torsion energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the torsion energy.
+    # 
     def getTorsionEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the electrostatic energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the electrostatic energy.
+    # 
     def getElectrostaticEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the van der Waals energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the van der Waals energy.
+    # 
     def getVanDerWaalsEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
+    # \brief Computes the total MMFF94 energy of the conformation <em>coords</em>.
+    # 
+    # The per-component energies are stored internally and can be retrieved via the dedicated accessors.
+    # 
+    # \param coords The 3D coordinates of the molecule.
+    # 
+    # \return A reference to the computed total energy (also accessible via getTotalEnergy()).
+    # 
     def __call__(coords: Math.Vector3DArray) -> float: pass
 
     objectID = property(getObjectID)

@@ -25,12 +25,12 @@
 class TorsionDriverSettings(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default settings used by a freshly-constructed TorsionDriverSettings.
+    # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \c %TorsionDriverSettings instance.
+    # \brief Constructs the settings instance with default values.
     # 
     def __init__() -> None: pass
 
@@ -60,99 +60,115 @@ class TorsionDriverSettings(Boost.Python.instance):
     def assign(settings: TorsionDriverSettings) -> TorsionDriverSettings: pass
 
     ##
-    # \brief 
-    # \param sample 
-    #
+    # \brief Specifies whether torsion angles around bonds to hetero-atom hydrogens shall be sampled.
+    # 
+    # \param sample If <tt>True</tt>, hetero-atom-H torsions are included in the driving.
+    # 
     def sampleHeteroAtomHydrogens(sample: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether torsion angles around bonds to hetero-atom hydrogens are sampled.
+    # 
+    # \return <tt>True</tt> if sampling is enabled, and <tt>False</tt> otherwise.
+    # 
     def sampleHeteroAtomHydrogens() -> bool: pass
 
     ##
-    # \brief 
-    # \param sample 
-    #
+    # \brief Specifies whether additional torsion samples within the tolerance ranges of each rule shall be generated.
+    # 
+    # \param sample If <tt>True</tt>, tolerance-range sampling is enabled.
+    # 
     def sampleAngleToleranceRanges(sample: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether tolerance-range sampling is enabled.
+    # 
+    # \return <tt>True</tt> if tolerance-range sampling is enabled, and <tt>False</tt> otherwise.
+    # 
     def sampleAngleToleranceRanges() -> bool: pass
 
     ##
-    # \brief 
-    # \param order 
-    #
+    # \brief Specifies whether the generated conformers shall be sorted by ascending energy.
+    # 
+    # \param order If <tt>True</tt>, the output is sorted by energy.
+    # 
     def orderByEnergy(order: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the generated conformers are sorted by ascending energy.
+    # 
+    # \return <tt>True</tt> if energy ordering is enabled, and <tt>False</tt> otherwise.
+    # 
     def orderByEnergy() -> bool: pass
 
     ##
-    # \brief 
-    # \param win_size 
-    #
+    # \brief Sets the energy-window size (in kcal/mol) above the global minimum within which conformers are kept.
+    # 
+    # \param win_size The new energy-window size in kcal/mol.
+    # 
     def setEnergyWindow(win_size: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the configured energy-window size.
+    # 
+    # \return The energy-window size in kcal/mol.
+    # 
     def getEnergyWindow() -> float: pass
 
     ##
-    # \brief 
-    # \param max_size 
-    #
+    # \brief Sets the maximum number of conformers retained in the internal candidate pool.
+    # 
+    # \param max_size The new maximum pool size.
+    # 
     def setMaxPoolSize(max_size: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the maximum number of conformers retained in the internal candidate pool.
+    # 
+    # \return The maximum pool size.
+    # 
     def getMaxPoolSize() -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Sets the force-field type used to score the generated conformers.
+    # 
+    # \param type One of the ConfGen.ForceFieldType values.
+    # 
     def setForceFieldType(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the force-field type used to score the generated conformers.
+    # 
+    # \return One of the ConfGen.ForceFieldType values.
+    # 
     def getForceFieldType() -> int: pass
 
     ##
-    # \brief 
-    # \param strict 
-    #
+    # \brief Specifies whether strict MMFF94 parameterization is required.
+    # 
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a failure; if <tt>False</tt>, fallback parameters are used.
+    # 
     def strictForceFieldParameterization(strict: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether strict MMFF94 parameterization is required.
+    # 
+    # \return <tt>True</tt> if strict parameterization is required, and <tt>False</tt> otherwise.
+    # 
     def strictForceFieldParameterization() -> bool: pass
 
     ##
-    # \brief 
-    # \param de_const 
-    #
+    # \brief Sets the dielectric constant used by the MMFF94 electrostatic interactions.
+    # 
+    # \param de_const The new dielectric constant.
+    # 
     def setDielectricConstant(de_const: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the dielectric constant used by the MMFF94 electrostatic interactions.
+    # 
+    # \return The dielectric constant.
+    # 
     def getDielectricConstant() -> float: pass
 
     ##
@@ -162,9 +178,10 @@ class TorsionDriverSettings(Boost.Python.instance):
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the exponent of the MMFF94 distance-dependent electrostatic term.
+    # 
+    # \return The distance exponent.
+    # 
     def getDistanceExponent() -> float: pass
 
     objectID = property(getObjectID)

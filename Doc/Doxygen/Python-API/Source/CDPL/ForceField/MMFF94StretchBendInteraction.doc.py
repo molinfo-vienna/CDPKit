@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single MMFF94 stretch-bend coupling interaction.
+# 
+# The stretch-bend term couples the angle defined by an atom triplet (<em>i-<em>j-<em>k</em>)</em> with</em> the two bond lengths <em>i-<em>j</em> and</em> <em>j-<em>k</em>.</em> The associated energy contribution is \f$ E_{sb} = (k_{ijk} \Delta r_{ij} + k_{kji} \Delta r_{jk}) (\Theta - \Theta_0) \f$ where the two distinct force constants account for the asymmetric coupling between the two bonds and the central angle.
+# 
 class MMFF94StretchBendInteraction(Boost.Python.instance):
 
     ##
@@ -31,107 +33,123 @@ class MMFF94StretchBendInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94StretchBendInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94StretchBendInteraction instance.
-    # \param term_atom1_idx 
-    # \param ctr_atom_idx 
-    # \param term_atom2_idx 
-    # \param sb_type_idx 
-    # \param ref_angle 
-    # \param ref_length1 
-    # \param ref_length2 
-    # \param ijk_force_const 
-    # \param kji_force_const 
+    # \brief Constructs the stretch-bend interaction record.
+    # 
+    # \param term_atom1_idx The zero-based index of the first terminal atom <em>i</em>.
+    # \param ctr_atom_idx The zero-based index of the central atom <em>j</em>.
+    # \param term_atom2_idx The zero-based index of the second terminal atom <em>k</em>.
+    # \param sb_type_idx The MMFF94 stretch-bend type index (0-11).
+    # \param ref_angle The reference angle \f$ \Theta_0 \f$ (in degrees).
+    # \param ref_length1 The reference length \f$ r_{ij,0} \f$ of bond <em>i-<em>j</em>.</em>
+    # \param ref_length2 The reference length \f$ r_{jk,0} \f$ of bond <em>j-<em>k</em>.</em>
+    # \param ijk_force_const The force constant \f$ k_{ijk} \f$ coupling <em>i-<em>j</em> stretching</em> to the angle.
+    # \param kji_force_const The force constant \f$ k_{kji} \f$ coupling <em>j-<em>k</em> stretching</em> to the angle.
     # 
     def __init__(term_atom1_idx: int, ctr_atom_idx: int, term_atom2_idx: int, sb_type_idx: int, ref_angle: float, ref_length1: float, ref_length2: float, ijk_force_const: float, kji_force_const: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first terminal atom <em>i</em>.
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getTerminalAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second terminal atom <em>k</em>.
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getTerminalAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the central atom <em>j</em>.
+    # 
+    # \return The center-atom index.
+    # 
     def getCenterAtomIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first terminal atom (alias for getTerminalAtom1Index()).
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the central atom (alias for getCenterAtomIndex()).
+    # 
+    # \return The center-atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second terminal atom (alias for getTerminalAtom2Index()).
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getAtom3Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the MMFF94 stretch-bend type index.
+    # 
+    # \return The stretch-bend type index (0-11).
+    # 
     def getStretchBendTypeIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the force constant coupling <em>i-<em>j</em> bond</em> stretching with the central angle.
+    # 
+    # \return The force constant \f$ k_{ijk} \f$.
+    # 
     def getIJKForceConstant() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the force constant coupling <em>j-<em>k</em> bond</em> stretching with the central angle.
+    # 
+    # \return The force constant \f$ k_{kji} \f$.
+    # 
     def getKJIForceConstant() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the reference angle.
+    # 
+    # \return The reference angle \f$ \Theta_0 \f$ (in degrees).
+    # 
     def getReferenceAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the reference angle.
+    # 
+    # \param angle The new reference angle \f$ \Theta_0 \f$ (in degrees).
+    # 
     def setReferenceAngle(angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the reference length of bond <em>i-<em>j</em>.</em>
+    # 
+    # \return The reference length \f$ r_{ij,0} \f$.
+    # 
     def getReferenceLength1() -> float: pass
 
     ##
-    # \brief 
-    # \param length 
-    #
+    # \brief Sets the reference length of bond <em>i-<em>j</em>.</em>
+    # 
+    # \param length The new reference length \f$ r_{ij,0} \f$.
+    # 
     def setReferenceLength1(length: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the reference length of bond <em>j-<em>k</em>.</em>
+    # 
+    # \return The reference length \f$ r_{jk,0} \f$.
+    # 
     def getReferenceLength2() -> float: pass
 
     ##
-    # \brief 
-    # \param length 
-    #
+    # \brief Sets the reference length of bond <em>j-<em>k</em>.</em>
+    # 
+    # \param length The new reference length \f$ r_{jk,0} \f$.
+    # 
     def setReferenceLength2(length: float) -> None: pass
 
     ##

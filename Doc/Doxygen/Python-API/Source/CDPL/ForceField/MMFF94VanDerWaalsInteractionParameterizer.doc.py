@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Generates the MMFF94 van der Waals interactions for the non-bonded atom pairs of a molecular graph.
+# 
+# For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom-type van der Waals parameters and the donor/acceptor classification from the supplied parameter table, applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction record into the output list.
+# 
 class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94VanDerWaalsInteractionParameterizer instance.
+    # \brief Constructs an <tt>MMFF94VanDerWaalsInteractionParameterizer</tt> instance using the default MMFF94 tables.
     # 
     def __init__() -> None: pass
 
@@ -36,10 +38,11 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def __init__(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94VanDerWaalsInteractionParameterizer instance.
-    # \param molgraph 
-    # \param ia_list 
-    # \param strict 
+    # \brief Constructs the parameterizer and immediately processes <em>molgraph</em> into <em>ia_list</em>.
+    # 
+    # \param molgraph The molecular graph for which to parameterize the van der Waals interactions.
+    # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
     # 
     def __init__(molgraph: Chem.MolecularGraph, ia_list: MMFF94VanDerWaalsInteractionList, strict: bool) -> None: pass
 
@@ -56,27 +59,31 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the filter function used to skip atom pairs during parameterization.
+    # 
+    # \param func The new filter function (when it returns <tt>False</tt> for an atom pair, the pair is skipped).
+    # 
     def setFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+    # 
+    # \param func The new numeric-atom-type lookup function.
+    # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to determine the topological distance between two atoms (number of bonds along the shortest path).
+    # 
+    # \param func The new topological-distance function.
+    # 
     def setTopologicalDistanceFunction(func: TopologicalAtomDistanceFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the table providing per-numeric-atom-type van der Waals parameters and donor/acceptor classifications.
+    # 
+    # \param table The new van der Waals parameter table.
+    # 
     def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
@@ -87,11 +94,12 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param ia_list 
-    # \param strict 
-    #
+    # \brief Generates the MMFF94 van der Waals interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
+    # 
+    # \param molgraph The molecular graph for which to parameterize the van der Waals interactions.
+    # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_list: MMFF94VanDerWaalsInteractionList, strict: bool) -> None: pass
 
     objectID = property(getObjectID)

@@ -20,8 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Harmonic distance-restraint potential between a pair of atoms.
+# 
+# The potential evaluates to \f$ \frac{1}{2} k (r - r_0)^2 \f$, where <em>k</em> is the force constant, \f$ r_0 \f$ the reference length and <em>r</em> the current distance between the two atoms. It is used by ForceField.MMFF94EnergyCalculator/ForceFieldMMFF94GradientCalculator as an auxiliary restraint to bias the energy minimization toward a desired geometry.
+# 
+# \since 1.1
+# 
 class ElasticPotential(Boost.Python.instance):
 
     ##
@@ -31,42 +35,48 @@ class ElasticPotential(Boost.Python.instance):
     def __init__(pot: ElasticPotential) -> None: pass
 
     ##
-    # \brief Initializes the \c %ElasticPotential instance.
-    # \param atom1_idx 
-    # \param atom2_idx 
-    # \param force_const 
-    # \param ref_length 
+    # \brief Constructs the elastic potential between atoms <em>atom1_idx</em> and <em>atom2_idx</em> with the specified force constant and reference length.
+    # 
+    # \param atom1_idx The zero-based index of the first restrained atom.
+    # \param atom2_idx The zero-based index of the second restrained atom.
+    # \param force_const The force constant <em>k</em> of the harmonic potential.
+    # \param ref_length The reference length \f$ r_0 \f$ of the harmonic potential.
     # 
     def __init__(atom1_idx: int, atom2_idx: int, force_const: float, ref_length: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first restrained atom.
+    # 
+    # \return The first atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second restrained atom.
+    # 
+    # \return The second atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the force constant of the potential.
+    # 
+    # \return The force constant <em>k</em>.
+    # 
     def getForceConstant() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the reference length of the potential.
+    # 
+    # \return The reference length \f$ r_0 \f$.
+    # 
     def getReferenceLength() -> float: pass
 
     ##
-    # \brief 
-    # \param length 
-    #
+    # \brief Sets the reference length of the potential.
+    # 
+    # \param length The new reference length \f$ r_0 \f$.
+    # 
     def setReferenceLength(length: float) -> None: pass
 
     ##

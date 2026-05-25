@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single MMFF94 torsion interaction over an atom quadruplet <em>i-<em>j-<em>k-<em>l</em>.</em> </em> </em>
+# 
+# The MMFF94 torsion-energy expression for one quadruplet is a three-term Fourier series \f$ E_t = \frac{1}{2}[V_1 (1 + \cos\Phi) + V_2 (1 - \cos 2\Phi) + V_3 (1 + \cos 3\Phi)] \f$ where \f$ V_1, V_2, V_3 \f$ are the MMFF94 torsion parameters and \f$ \Phi \f$ is the dihedral angle defined by the four atoms.
+# 
 class MMFF94TorsionInteraction(Boost.Python.instance):
 
     ##
@@ -31,88 +33,101 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94TorsionInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94TorsionInteraction instance.
-    # \param term_atom1_idx 
-    # \param ctr_atom1_idx 
-    # \param ctr_atom2_idx 
-    # \param term_atom2_idx 
-    # \param tor_type_idx 
-    # \param tor_param1 
-    # \param tor_param2 
-    # \param tor_param3 
+    # \brief Constructs the torsion interaction record.
+    # 
+    # \param term_atom1_idx The zero-based index of the first terminal atom <em>i</em>.
+    # \param ctr_atom1_idx The zero-based index of the first central atom <em>j</em> (bonded to <em>i</em> and <em>k</em>).
+    # \param ctr_atom2_idx The zero-based index of the second central atom <em>k</em> (bonded to <em>j</em> and <em>l</em>).
+    # \param term_atom2_idx The zero-based index of the second terminal atom <em>l</em>.
+    # \param tor_type_idx The MMFF94 torsion-type index (0-5).
+    # \param tor_param1 The torsion parameter \f$ V_1 \f$.
+    # \param tor_param2 The torsion parameter \f$ V_2 \f$.
+    # \param tor_param3 The torsion parameter \f$ V_3 \f$.
     # 
     def __init__(term_atom1_idx: int, ctr_atom1_idx: int, ctr_atom2_idx: int, term_atom2_idx: int, tor_type_idx: int, tor_param1: float, tor_param2: float, tor_param3: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first terminal atom <em>i</em>.
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getTerminalAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second terminal atom <em>l</em>.
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getTerminalAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first central atom <em>j</em>.
+    # 
+    # \return The first center-atom index.
+    # 
     def getCenterAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second central atom <em>k</em>.
+    # 
+    # \return The second center-atom index.
+    # 
     def getCenterAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first terminal atom (alias for getTerminalAtom1Index()).
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first central atom (alias for getCenterAtom1Index()).
+    # 
+    # \return The first center-atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second central atom (alias for getCenterAtom2Index()).
+    # 
+    # \return The second center-atom index.
+    # 
     def getAtom3Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second terminal atom (alias for getTerminalAtom2Index()).
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getAtom4Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the MMFF94 torsion-type index.
+    # 
+    # \return The torsion-type index (0-5).
+    # 
     def getTorsionTypeIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the first torsion parameter.
+    # 
+    # \return The torsion parameter \f$ V_1 \f$.
+    # 
     def getTorsionParameter1() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the second torsion parameter.
+    # 
+    # \return The torsion parameter \f$ V_2 \f$.
+    # 
     def getTorsionParameter2() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the third torsion parameter.
+    # 
+    # \return The torsion parameter \f$ V_3 \f$.
+    # 
     def getTorsionParameter3() -> float: pass
 
     ##

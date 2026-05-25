@@ -25,16 +25,16 @@
 class FragmentType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Open-chain fragment (no rings).
+    # 
     CHAIN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Flexible ring system (macrocycle or otherwise non-rigid set of fused rings).
+    # 
     FLEXIBLE_RING_SYSTEM = 1
 
     ##
-    # \brief 
-    #
+    # \brief Rigid (small) ring system whose conformation is essentially fixed.
+    # 
     RIGID_RING_SYSTEM = 2

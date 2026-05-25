@@ -20,12 +20,16 @@
 #
 
 ##
-# \brief 
-#
+# \brief Evaluates the total MMFF94 force-field energy and its gradient with respect to the atomic coordinates.
+# 
+# The calculator takes a ForceField.MMFF94InteractionData instance and the atom count of the molecule and computes both the total MMFF94 energy and the analytical Cartesian gradient \f$ \partial E / \partial \mathbf{r}_i \f$ for each atom. The per-component energies are retained and made available via the dedicated accessors. A bit mask can be set to mark atoms whose gradient contributions are zeroed, freezing them during an energy minimization.
+# 
 class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94GradientCalculator instance.
+    # \brief Constructs the calculator without any associated interaction data.
+    # 
+    # Operator() will return zero until setup() has been called.
     # 
     def __init__() -> None: pass
 
@@ -36,9 +40,10 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def __init__(calc: MMFF94GradientCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94GradientCalculator instance.
-    # \param ia_data 
-    # \param num_atoms 
+    # \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
+    # 
+    # \param ia_data The MMFF94 interaction data to use during energy/gradient evaluation.
+    # \param num_atoms The number of atoms in the parameterized molecular graph.
     # 
     def __init__(ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
 
@@ -62,102 +67,121 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def assign(calc: MMFF94GradientCalculator) -> MMFF94GradientCalculator: pass
 
     ##
-    # \brief 
-    # \param types 
-    #
+    # \brief Enables/disables specific MMFF94 interaction-type contributions.
+    # 
+    # \param types Bitwise-OR combination of ForceField.InteractionType flags. Only the listed contributions are evaluated.
+    # 
     def setEnabledInteractionTypes(types: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently enabled interaction-type contributions.
+    # 
+    # \return The bitwise-OR combination of ForceField.InteractionType flags.
+    # 
     def getEnabledInteractionTypes() -> int: pass
 
     ##
-    # \brief 
-    # \param ia_data 
-    # \param num_atoms 
-    #
+    # \brief Associates the calculator with the supplied MMFF94 interaction data and atom count.
+    # 
+    # \param ia_data The new MMFF94 interaction data.
+    # \param num_atoms The number of atoms in the parameterized molecular graph.
+    # 
     def setup(ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total MMFF94 energy computed by the most recent __call__ call.
+    # 
+    # \return A reference to the total energy.
+    # 
     def getTotalEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the bond-stretching energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the bond-stretching energy.
+    # 
     def getBondStretchingEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the angle-bending energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the angle-bending energy.
+    # 
     def getAngleBendingEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the stretch-bend coupling energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the stretch-bend energy.
+    # 
     def getStretchBendEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the out-of-plane bending energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the out-of-plane bending energy.
+    # 
     def getOutOfPlaneBendingEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the torsion energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the torsion energy.
+    # 
     def getTorsionEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the electrostatic energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the electrostatic energy.
+    # 
     def getElectrostaticEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the van der Waals energy contribution computed by the most recent __call__ call.
+    # 
+    # \return A reference to the van der Waals energy.
+    # 
     def getVanDerWaalsEnergy() -> float: pass
 
     ##
-    # \brief 
-    # \param mask 
-    #
+    # \brief Sets the bit mask flagging atoms whose gradient components shall be zeroed after evaluation.
+    # 
+    # \param mask The new fixed-atom bit mask (bit <em>i</em> set freezes atom <em>i</em> during minimization).
+    # 
     def setFixedAtomMask(mask: Util.BitSet) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Clears the fixed-atom mask so that all atoms contribute to the gradient.
+    # 
     def resetFixedAtomMask() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the bit mask flagging atoms whose gradient components are zeroed after evaluation.
+    # 
+    # \return A reference to the fixed-atom bit mask.
+    # 
     def getFixedAtomMask() -> Util.BitSet: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
+    # \brief Computes the total MMFF94 energy of the conformation <em>coords</em> without evaluating the gradient.
+    # 
+    # \param coords The 3D coordinates of the molecule.
+    # 
+    # \return A reference to the computed total energy.
+    # 
     def __call__(coords: Math.Vector3DArray) -> float: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \param grad 
-    # \return 
-    #
+    # \brief Computes the total MMFF94 energy and the per-atom gradient of the conformation <em>coords</em>.
+    # 
+    # Gradients of atoms marked in the fixed-atom mask (see setFixedAtomMask()) are zeroed after evaluation.
+    # 
+    # \param coords The 3D coordinates of the molecule.
+    # \param grad The output gradient vector.
+    # 
+    # \return A reference to the computed total energy.
+    # 
     def __call__(coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
     objectID = property(getObjectID)

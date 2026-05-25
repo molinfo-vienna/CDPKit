@@ -143,90 +143,111 @@ class TorsionCategory(Boost.Python.instance):
     def assign(cat: TorsionCategory) -> TorsionCategory: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the SMARTS string used to perceive bonds belonging to this category.
+    # 
+    # \return A reference to the SMARTS string.
+    # 
     def getMatchPatternString() -> str: pass
 
     ##
-    # \brief 
-    # \param ptn_str 
-    #
+    # \brief Sets the SMARTS string used to perceive bonds belonging to this category.
+    # 
+    # \param ptn_str The new SMARTS pattern string.
+    # 
     def setMatchPatternString(ptn_str: str) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the molecular-graph pattern used to perceive bonds belonging to this category.
+    # 
+    # \return A reference to the pattern smart reference.
+    # 
     def getMatchPattern() -> Chem.MolecularGraph: pass
 
     ##
-    # \brief 
-    # \param ptn 
-    #
+    # \brief Sets the molecular-graph pattern used to perceive bonds belonging to this category.
+    # 
+    # \param ptn The new molecular-graph pattern.
+    # 
     def setMatchPattern(ptn: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the atom type of the first central-bond atom required by this category.
+    # 
+    # \return The atom type (Chem.AtomType value).
+    # 
     def getBondAtom1Type() -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Sets the atom type of the first central-bond atom required by this category.
+    # 
+    # \param type The new atom type (Chem.AtomType value).
+    # 
     def setBondAtom1Type(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the atom type of the second central-bond atom required by this category.
+    # 
+    # \return The atom type (Chem.AtomType value).
+    # 
     def getBondAtom2Type() -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Sets the atom type of the second central-bond atom required by this category.
+    # 
+    # \param type The new atom type (Chem.AtomType value).
+    # 
     def setBondAtom2Type(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the category name.
+    # 
+    # \return A reference to the category name.
+    # 
     def getName() -> str: pass
 
     ##
-    # \brief 
-    # \param name 
-    #
+    # \brief Sets the category name.
+    # 
+    # \param name The new name.
+    # 
     def setName(name: str) -> None: pass
 
     ##
-    # \brief 
-    # \param recursive 
-    # \return 
-    #
+    # \brief Returns the number of contained torsion rules.
+    # 
+    # \param recursive If <tt>True</tt>, the count includes rules of all descendant categories.
+    # 
+    # \return The torsion-rule count.
+    # 
     def getNumRules(recursive: bool = False) -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the torsion rule at index <em>idx</em>.
+    # 
+    # \param idx The zero-based rule index.
+    # 
+    # \return A reference to the rule. 
+    # 
+    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumRules() - 1].
+    # 
     def getRule(idx: int) -> TorsionRule: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the torsion rule at index <em>idx</em>.
+    # 
+    # \param idx The zero-based rule index.
+    # 
+    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumRules() - 1].
+    # 
     def removeRule(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param rule 
-    # \return 
-    #
+    # \brief Appends a copy of <em>rule</em> as a contained torsion rule.
+    # 
+    # \param rule The torsion rule to copy.
+    # 
+    # \return A reference to the newly added rule.
+    # 
     def addRule(rule: TorsionRule) -> TorsionRule: pass
 
     ##
@@ -236,30 +257,41 @@ class TorsionCategory(Boost.Python.instance):
     def getRules() -> RuleSequence: pass
 
     ##
-    # \brief 
-    # \param recursive 
-    # \return 
-    #
+    # \brief Returns the number of child categories.
+    # 
+    # \param recursive If <tt>True</tt>, the count includes all descendant categories.
+    # 
+    # \return The child-category count.
+    # 
     def getNumCategories(recursive: bool = False) -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the child category at index <em>idx</em>.
+    # 
+    # \param idx The zero-based child-category index.
+    # 
+    # \return A reference to the child category. 
+    # 
+    # \throw Base.IndexError if the number of child categories is zero or <em>idx</em> is not in the range [0, getNumCategories() - 1].
+    # 
     def getCategory(idx: int) -> TorsionCategory: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the child category at index <em>idx</em>.
+    # 
+    # \param idx The zero-based child-category index.
+    # 
+    # \throw Base.IndexError if the number of child categories is zero or <em>idx</em> is not in the range [0, getNumCategories() - 1].
+    # 
     def removeCategory(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param cat 
-    # \return 
-    #
+    # \brief Appends a copy of <em>cat</em> as a child category.
+    # 
+    # \param cat The child category to copy.
+    # 
+    # \return A reference to the newly added child category.
+    # 
     def addCategory(cat: TorsionCategory) -> TorsionCategory: pass
 
     ##
@@ -269,14 +301,15 @@ class TorsionCategory(Boost.Python.instance):
     def getCategories() -> CategorySequence: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all child categories and contained rules and resets the pattern/atom-type data.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param cat 
-    #
+    # \brief Swaps the contents of this category with <em>cat</em>.
+    # 
+    # \param cat The other category.
+    # 
     def swap(cat: TorsionCategory) -> None: pass
 
     objectID = property(getObjectID)

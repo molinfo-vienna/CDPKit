@@ -25,12 +25,12 @@
 class FragmentAssemblerSettings(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default settings used by a freshly-constructed FragmentAssemblerSettings.
+    # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \c %FragmentAssemblerSettings instance.
+    # \brief Constructs the settings instance with default values.
     # 
     def __init__() -> None: pass
 
@@ -60,27 +60,31 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def assign(settings: FragmentAssemblerSettings) -> FragmentAssemblerSettings: pass
 
     ##
-    # \brief 
-    # \param enumerate 
-    #
+    # \brief Specifies whether ring conformations shall be enumerated during fragment assembly.
+    # 
+    # \param enumerate If <tt>True</tt>, multiple ring conformations are emitted.
+    # 
     def enumerateRings(enumerate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether ring conformations are enumerated during fragment assembly.
+    # 
+    # \return <tt>True</tt> if ring conformations are enumerated, and <tt>False</tt> otherwise.
+    # 
     def enumerateRings() -> bool: pass
 
     ##
-    # \brief 
-    # \param mode 
-    #
+    # \brief Sets the enumeration mode for stereogenic nitrogen centers.
+    # 
+    # \param mode One of the ConfGen.NitrogenEnumerationMode values.
+    # 
     def setNitrogenEnumerationMode(mode: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured stereogenic-nitrogen enumeration mode.
+    # 
+    # \return One of the ConfGen.NitrogenEnumerationMode values.
+    # 
     def getNitrogenEnumerationMode() -> int: pass
 
     ##
@@ -90,15 +94,17 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def generateCoordinatesFromScratch(reuse: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether 3D coordinates are generated from scratch.
+    # 
+    # \return <tt>True</tt> if 3D coordinates are always regenerated, and <tt>False</tt> otherwise.
+    # 
     def generateCoordinatesFromScratch() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the nested fragment-conformer build settings.
+    # 
+    # \return A reference to the build settings.
+    # 
     def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 
     objectID = property(getObjectID)

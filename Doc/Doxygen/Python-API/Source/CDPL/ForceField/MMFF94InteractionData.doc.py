@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Container holding the full set of MMFF94 interaction parameters for a molecular graph.
+# 
+# The class aggregates the seven per-interaction lists that together describe the energy expression of the MMFF94 force field (bond stretching, angle bending, stretch-bend coupling, out-of-plane bending, torsion, electrostatic and van der Waals interactions). Instances are typically produced by ForceField.MMFF94InteractionParameterizer and consumed by ForceField.MMFF94EnergyCalculator and ForceField.MMFF94GradientCalculator.
+# 
 class MMFF94InteractionData(Boost.Python.instance):
 
     ##
@@ -36,50 +38,57 @@ class MMFF94InteractionData(Boost.Python.instance):
     def __init__(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all stored interactions from every interaction list.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of MMFF94 bond-stretching interactions.
+    # 
+    # \return A reference to the bond-stretching interaction list.
+    # 
     def getBondStretchingInteractions() -> MMFF94BondStretchingInteractionList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of MMFF94 angle-bending interactions.
+    # 
+    # \return A reference to the angle-bending interaction list.
+    # 
     def getAngleBendingInteractions() -> MMFF94AngleBendingInteractionList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of MMFF94 stretch-bend coupling interactions.
+    # 
+    # \return A reference to the stretch-bend interaction list.
+    # 
     def getStretchBendInteractions() -> MMFF94StretchBendInteractionList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of MMFF94 out-of-plane bending interactions.
+    # 
+    # \return A reference to the out-of-plane bending interaction list.
+    # 
     def getOutOfPlaneBendingInteractions() -> MMFF94OutOfPlaneBendingInteractionList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of MMFF94 torsion interactions.
+    # 
+    # \return A reference to the torsion interaction list.
+    # 
     def getTorsionInteractions() -> MMFF94TorsionInteractionList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of MMFF94 electrostatic interactions.
+    # 
+    # \return A reference to the electrostatic interaction list.
+    # 
     def getElectrostaticInteractions() -> MMFF94ElectrostaticInteractionList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of MMFF94 van der Waals interactions.
+    # 
+    # \return A reference to the van der Waals interaction list.
+    # 
     def getVanDerWaalsInteractions() -> MMFF94VanDerWaalsInteractionList: pass
 
     ##
@@ -90,9 +99,10 @@ class MMFF94InteractionData(Boost.Python.instance):
     def assign(ia_data: MMFF94InteractionData) -> MMFF94InteractionData: pass
 
     ##
-    # \brief 
-    # \param ia_data 
-    #
+    # \brief Swaps the contents (all interaction lists) of this instance with <em>ia_data</em>.
+    # 
+    # \param ia_data The other interaction-data container.
+    # 
     def swap(ia_data: MMFF94InteractionData) -> None: pass
 
     ##

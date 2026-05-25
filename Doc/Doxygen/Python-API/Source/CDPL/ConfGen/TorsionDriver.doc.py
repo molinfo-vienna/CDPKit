@@ -92,14 +92,14 @@ class TorsionDriver(Boost.Python.instance):
     def clearInputCoordinates(frag_idx: int) -> None: pass
 
     ##
-    # \brief Adds <em>coords</em> as a new starting configuration that the driver will torsion-drive.
+    # \brief Adds <em>coords</em> as a new starting conformation that the driver will torsion-drive.
     # 
     # \param coords The input 3D coordinates.
     # 
     def addInputCoordinates(coords: Math.Vector3DArray) -> None: pass
 
     ##
-    # \brief Adds <em>coords</em> as a new starting configuration restricted to the fragment at index <em>frag_idx</em>.
+    # \brief Adds <em>coords</em> as a new starting conformation restricted to the fragment at index <em>frag_idx</em>.
     # 
     # \param coords The input 3D coordinates of the fragment.
     # \param frag_idx The zero-based fragment index.
@@ -107,7 +107,7 @@ class TorsionDriver(Boost.Python.instance):
     def addInputCoordinates(coords: Math.Vector3DArray, frag_idx: int) -> None: pass
 
     ##
-    # \brief Adds the conformer data shared reference <em>conf_data</em> as a new starting configuration restricted to the fragment at index <em>frag_idx</em>.
+    # \brief Adds the conformer data shared reference <em>conf_data</em> as a new starting conformation restricted to the fragment at index <em>frag_idx</em>.
     # 
     # \param conf_data The input conformer data.
     # \param frag_idx The zero-based fragment index.

@@ -20,28 +20,30 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single MMFF94 van der Waals interaction between two non-bonded atoms.
+# 
+# The MMFF94 van der Waals form is a buffered 14-7 potential \f$ E_{vdW} = \varepsilon_{IJ} \left( \frac{1.07 R_{IJ}}{r + 0.07 R_{IJ}} \right)^7 \left( \frac{1.12 R_{IJ}^7}{r^7 + 0.12 R_{IJ}^7} - 2 \right) \f$ with combined parameters \f$ R_{IJ} \f$ and \f$ \varepsilon_{IJ} \f$. The constructor performs the MMFF94 combining rules using the per-atom polarizabilities, effective electron numbers and the MMFF94-defined "factor A", "factor G", buffered combining "factor B" and donor/acceptor scaling factors; the resulting \f$ R_{IJ} \f$, \f$ \varepsilon_{IJ} \f$ and the precomputed \f$ R_{IJ}^7 \f$ are stored.
+# 
 class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief MMFF94 hydrogen-bond donor/acceptor classification of an atom (for the donor/acceptor scaling of the vdW combining rule).
+    # 
     class HDonorAcceptorType(Boost.Python.enum):
 
         ##
-        # \brief NONE.
-        #
+        # \brief The atom is neither a hydrogen-bond donor nor an acceptor.
+        # 
         NONE = 0
 
         ##
-        # \brief DONOR.
-        #
+        # \brief The atom is a hydrogen-bond donor.
+        # 
         DONOR = 1
 
         ##
-        # \brief ACCEPTOR.
-        #
+        # \brief The atom is a hydrogen-bond acceptor.
+        # 
         ACCEPTOR = 2
 
     ##
@@ -65,33 +67,38 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
     def __init__(atom1_idx: int, atom2_idx: int, atom_params1: MMFF94VanDerWaalsAtomParameters, atom_params2: MMFF94VanDerWaalsAtomParameters, expo: float, fact_b: float, beta: float, fact_darad: float, fact_daeps: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first atom.
+    # 
+    # \return The first atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second atom.
+    # 
+    # \return The second atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the combined well-depth parameter \f$ \varepsilon_{IJ} \f$.
+    # 
+    # \return The well-depth \f$ \varepsilon_{IJ} \f$ (in kcal/mol).
+    # 
     def getEIJ() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the combined minimum-energy distance \f$ R_{IJ} \f$.
+    # 
+    # \return The minimum-energy distance \f$ R_{IJ} \f$ (in &Aring;).
+    # 
     def getRIJ() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the pre-computed seventh power of \f$ R_{IJ} \f$ (used by the calculator to avoid recomputation).
+    # 
+    # \return The value \f$ R_{IJ}^7 \f$.
+    # 
     def getRIJPow7() -> float: pass
 
     ##

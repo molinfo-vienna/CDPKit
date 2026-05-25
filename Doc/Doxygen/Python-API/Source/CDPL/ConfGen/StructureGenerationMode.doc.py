@@ -25,16 +25,16 @@
 class StructureGenerationMode(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Selects the structure-generation strategy heuristically based on the input molecule.
+    # 
     AUTO = 0
 
     ##
-    # \brief 
-    #
+    # \brief Selects the fragment-based structure-generation strategy (assembly from pre-built fragment conformers).
+    # 
     FRAGMENT = 1
 
     ##
-    # \brief 
-    #
+    # \brief Selects the distance-geometry structure-generation strategy.
+    # 
     DISTANCE_GEOMETRY = 2

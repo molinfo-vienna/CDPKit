@@ -20,7 +20,11 @@
 #
 
 ##
-# \brief Driver for the fragment-based generation of 3D structures: decomposes a molecular graph into chain and ring fragments, looks up pre-built conformers from a ConfGen.FragmentLibrary for each fragment and assembles them into one or more full 3D conformers.
+# \brief Driver for the fragment-based generation of 3D starting conformers.
+# 
+# The assembler decomposes a molecular graph into chain and ring fragments, looks up pre-built conformers from a ConfGen.FragmentLibrary for each fragment (generating them on the fly when no library entry is available) and reassembles them into full 3D structures. The conformers produced this way are intended to serve as <em>starting conformers</em> for subsequent torsion driving — they are not (in general) a final conformer ensemble.
+# 
+# \see ConfGen.TorsionDriver, ConfGen.ConformerGenerator
 # 
 class FragmentAssembler(Boost.Python.instance):
 

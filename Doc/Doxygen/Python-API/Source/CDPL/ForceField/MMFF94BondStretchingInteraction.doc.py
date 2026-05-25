@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single MMFF94 bond-stretching interaction between two bonded atoms.
+# 
+# Stores the indices of the two interacting atoms, the MMFF94 bond-type index (0 or 1 — see the MMFF94 specification), the harmonic force constant and the reference bond length. The associated energy term is \f$ E_b = \frac{1}{2} k_b (r - r_0)^2 (1 + c_s (r - r_0) + \frac{7}{12} c_s^2 (r - r_0)^2) \f$ (cubic-stretch MMFF94 form, evaluated by the calculator).
+# 
 class MMFF94BondStretchingInteraction(Boost.Python.instance):
 
     ##
@@ -31,49 +33,56 @@ class MMFF94BondStretchingInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94BondStretchingInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94BondStretchingInteraction instance.
-    # \param atom1_idx 
-    # \param atom2_idx 
-    # \param bond_type_idx 
-    # \param force_const 
-    # \param ref_length 
+    # \brief Constructs the bond-stretching interaction record.
+    # 
+    # \param atom1_idx The zero-based index of the first bonded atom.
+    # \param atom2_idx The zero-based index of the second bonded atom.
+    # \param bond_type_idx The MMFF94 bond-type index (0 or 1).
+    # \param force_const The bond-stretching force constant.
+    # \param ref_length The reference bond length \f$ r_0 \f$.
     # 
     def __init__(atom1_idx: int, atom2_idx: int, bond_type_idx: int, force_const: float, ref_length: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first bonded atom.
+    # 
+    # \return The first atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second bonded atom.
+    # 
+    # \return The second atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the MMFF94 bond-type index of this bond.
+    # 
+    # \return The bond-type index (0 or 1).
+    # 
     def getBondTypeIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the bond-stretching force constant.
+    # 
+    # \return The force constant.
+    # 
     def getForceConstant() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the reference bond length.
+    # 
+    # \return The reference bond length \f$ r_0 \f$.
+    # 
     def getReferenceLength() -> float: pass
 
     ##
-    # \brief 
-    # \param length 
-    #
+    # \brief Sets the reference bond length.
+    # 
+    # \param length The new reference bond length \f$ r_0 \f$.
+    # 
     def setReferenceLength(length: float) -> None: pass
 
     ##

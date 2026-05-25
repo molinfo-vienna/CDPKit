@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single MMFF94 angle-bending interaction defined over an atom triplet.
+# 
+# Stores the indices of the central atom plus the two terminal atoms, the MMFF94 angle-type index, a linear-angle flag, the harmonic force constant and the reference angle. For non-linear angles the MMFF94 angle-bending energy is the cubic-bend form \f$ E_a = \frac{1}{2} k_a (\Theta - \Theta_0)^2 (1 + c_b (\Theta - \Theta_0)) \f$; for linear angles the cosine-form \f$ E_a = k_a (1 + \cos\Theta) \f$ is used (evaluated by the calculator).
+# 
 class MMFF94AngleBendingInteraction(Boost.Python.instance):
 
     ##
@@ -31,81 +33,93 @@ class MMFF94AngleBendingInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94AngleBendingInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94AngleBendingInteraction instance.
-    # \param term_atom1_idx 
-    # \param ctr_atom_idx 
-    # \param term_atom2_idx 
-    # \param angle_type_idx 
-    # \param linear 
-    # \param force_const 
-    # \param ref_angle 
+    # \brief Constructs the angle-bending interaction record.
+    # 
+    # \param term_atom1_idx The zero-based index of the first terminal atom.
+    # \param ctr_atom_idx The zero-based index of the central (vertex) atom.
+    # \param term_atom2_idx The zero-based index of the second terminal atom.
+    # \param angle_type_idx The MMFF94 angle-type index (0-8).
+    # \param linear <tt>True</tt> if the equilibrium angle is treated as linear (180&deg;).
+    # \param force_const The angle-bending force constant.
+    # \param ref_angle The reference angle \f$ \Theta_0 \f$ (in degrees).
     # 
     def __init__(term_atom1_idx: int, ctr_atom_idx: int, term_atom2_idx: int, angle_type_idx: int, linear: bool, force_const: float, ref_angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first terminal atom.
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getTerminalAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second terminal atom.
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getTerminalAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the central (vertex) atom.
+    # 
+    # \return The center-atom index.
+    # 
     def getCenterAtomIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first terminal atom (alias for getTerminalAtom1Index()).
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the central atom (alias for getCenterAtomIndex()).
+    # 
+    # \return The center-atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second terminal atom (alias for getTerminalAtom2Index()).
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getAtom3Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the MMFF94 angle-type index.
+    # 
+    # \return The angle-type index (0-8).
+    # 
     def getAngleTypeIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the equilibrium angle is treated as linear.
+    # 
+    # \return <tt>True</tt> if the angle is linear, and <tt>False</tt> otherwise.
+    # 
     def isLinearAngle() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the angle-bending force constant.
+    # 
+    # \return The force constant.
+    # 
     def getForceConstant() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the reference angle.
+    # 
+    # \return The reference angle \f$ \Theta_0 \f$ (in degrees).
+    # 
     def getReferenceAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the reference angle.
+    # 
+    # \param angle The new reference angle \f$ \Theta_0 \f$ (in degrees).
+    # 
     def setReferenceAngle(angle: float) -> None: pass
 
     ##

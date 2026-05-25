@@ -25,16 +25,16 @@
 class NitrogenEnumerationMode(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Do not enumerate any invertible nitrogen stereo centers.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Enumerate both configurations at every invertible nitrogen stereo center.
+    # 
     ALL = 1
 
     ##
-    # \brief 
-    #
+    # \brief Enumerate both configurations only at invertible nitrogen stereo centers whose stereochemistry has not been explicitly specified.
+    # 
     UNSPECIFIED_STEREO = 2

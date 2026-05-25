@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single MMFF94 out-of-plane bending interaction at a trigonal center.
+# 
+# The interaction restrains the out-of-plane angle \f$ \chi \f$ that the bond from the central atom <em>j</em> to the out-of-plane atom <em>l</em> makes with the plane defined by the central atom and its two in-plane neighbors <em>i</em> and <em>k</em>. The associated energy term is \f$ E_{oop} = \frac{1}{2} k_{oop} \chi^2 \f$.
+# 
 class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
 
     ##
@@ -31,67 +33,77 @@ class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94OutOfPlaneBendingInteraction instance.
-    # \param term_atom1_idx 
-    # \param ctr_atom_idx 
-    # \param term_atom2_idx 
-    # \param oop_atom_idx 
-    # \param force_const 
+    # \brief Constructs the out-of-plane bending interaction record.
+    # 
+    # \param term_atom1_idx The zero-based index of the first in-plane terminal atom <em>i</em>.
+    # \param ctr_atom_idx The zero-based index of the central trigonal atom <em>j</em>.
+    # \param term_atom2_idx The zero-based index of the second in-plane terminal atom <em>k</em>.
+    # \param oop_atom_idx The zero-based index of the out-of-plane atom <em>l</em>.
+    # \param force_const The out-of-plane force constant \f$ k_{oop} \f$.
     # 
     def __init__(term_atom1_idx: int, ctr_atom_idx: int, term_atom2_idx: int, oop_atom_idx: int, force_const: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first in-plane terminal atom <em>i</em>.
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getTerminalAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second in-plane terminal atom <em>k</em>.
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getTerminalAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the central trigonal atom <em>j</em>.
+    # 
+    # \return The center-atom index.
+    # 
     def getCenterAtomIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the out-of-plane atom <em>l</em>.
+    # 
+    # \return The out-of-plane-atom index.
+    # 
     def getOutOfPlaneAtomIndex() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first in-plane terminal atom (alias for getTerminalAtom1Index()).
+    # 
+    # \return The first terminal-atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the central atom (alias for getCenterAtomIndex()).
+    # 
+    # \return The center-atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second in-plane terminal atom (alias for getTerminalAtom2Index()).
+    # 
+    # \return The second terminal-atom index.
+    # 
     def getAtom3Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the out-of-plane atom (alias for getOutOfPlaneAtomIndex()).
+    # 
+    # \return The out-of-plane-atom index.
+    # 
     def getAtom4Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the out-of-plane force constant.
+    # 
+    # \return The force constant \f$ k_{oop} \f$.
+    # 
     def getForceConstant() -> float: pass
 
     ##

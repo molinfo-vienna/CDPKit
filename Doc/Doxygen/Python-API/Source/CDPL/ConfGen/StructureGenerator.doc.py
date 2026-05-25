@@ -151,7 +151,7 @@ class StructureGenerator(Boost.Python.instance):
     def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
-    # \brief Transfers the generated 3D coordinates onto <em>molgraph</em> (sets the <tt>ATOM_COORDINATES_3D</tt> atom properties).
+    # \brief Transfers the generated 3D coordinates onto the atoms of <em>molgraph</em> (via Chem.set3DCoordinates).
     # 
     # \param molgraph The molecular graph receiving the 3D coordinates.
     # 

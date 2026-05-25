@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Assigns MMFF94 bond-type indices (0 or 1) to the bonds of a molecular graph.
+# 
+# A bond receives the nonstandard type index <em>1</em> when it is a single bond between two non-aromatic atoms whose MMFF94 atom-type properties carry an <tt>sbmb</tt> flag, or when it connects two atoms that belong to two different aromatic rings (as in the central C-C bond of biphenyl). All other bonds receive the standard type index <em>0</em>.
+# 
 class MMFF94BondTyper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94BondTyper instance.
+    # \brief Constructs an <tt>MMFF94BondTyper</tt> instance using the default MMFF94 tables.
     # 
     def __init__() -> None: pass
 
@@ -36,10 +38,11 @@ class MMFF94BondTyper(Boost.Python.instance):
     def __init__(typer: MMFF94BondTyper) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94BondTyper instance.
-    # \param molgraph 
-    # \param types 
-    # \param strict 
+    # \brief Constructs an <tt>MMFF94BondTyper</tt> instance and immediately perceives the bond types of <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph to be typed.
+    # \param types Output array receiving the perceived MMFF94 bond-type indices.
+    # \param strict If <tt>True</tt>, strict parameterization will be performed that might fail.
     # 
     def __init__(molgraph: Chem.MolecularGraph, types: Util.UIArray, strict: bool) -> None: pass
 
@@ -56,21 +59,24 @@ class MMFF94BondTyper(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+    # 
+    # \param func The new numeric-atom-type lookup function.
+    # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
+    # 
+    # \param func The new aromatic-ring-set function.
+    # 
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the table providing the per-numeric-atom-type property data (used to look up the <tt>sbmb</tt> flag).
+    # 
+    # \param table The new atom-type property table.
+    # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##

@@ -25,12 +25,12 @@
 class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
-    # \brief 
-    #
+    # \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings.
+    # 
     DEFAULT_ = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \c %DGStructureGeneratorSettings instance.
+    # \brief Constructs the settings instance with default values.
     # 
     def __init__() -> None: pass
 
@@ -55,27 +55,31 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
     def assign(settings: DGConstraintGeneratorSettings) -> DGStructureGeneratorSettings: pass
 
     ##
-    # \brief 
-    # \param size 
-    #
+    # \brief Sets the edge length of the bounding box used by the distance-geometry embedder.
+    # 
+    # \param size The new bounding-box edge length.
+    # 
     def setBoxSize(size: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the edge length of the bounding box used by the distance-geometry embedder.
+    # 
+    # \return The bounding-box edge length.
+    # 
     def getBoxSize() -> float: pass
 
     ##
-    # \brief 
-    # \param enable 
-    #
+    # \brief Specifies whether planarity (zero-volume) constraints shall be added for sp2 atoms and double/aromatic bonds.
+    # 
+    # \param enable If <tt>True</tt>, planarity constraints are added.
+    # 
     def enablePlanarityConstraints(enable: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether planarity constraints are enabled.
+    # 
+    # \return <tt>True</tt> if planarity constraints are enabled, and <tt>False</tt> otherwise.
+    # 
     def enablePlanarityConstraints() -> bool: pass
 
     boxSize = property(getBoxSize, setBoxSize)

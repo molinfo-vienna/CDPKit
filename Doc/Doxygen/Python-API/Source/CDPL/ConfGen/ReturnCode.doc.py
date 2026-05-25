@@ -25,76 +25,76 @@
 class ReturnCode(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Operation completed successfully.
+    # 
     SUCCESS = 0
 
     ##
-    # \brief 
-    #
+    # \brief The operation could not be carried out because the object was not properly initialized.
+    # 
     UNINITIALIZED = 1
 
     ##
-    # \brief 
-    #
+    # \brief The operation was terminated because the configured wall-clock time limit was exceeded.
+    # 
     TIMEOUT = 2
 
     ##
-    # \brief 
-    #
+    # \brief The operation was terminated through the registered abort callback.
+    # 
     ABORTED = 3
 
     ##
-    # \brief 
-    #
+    # \brief The MMFF94 force-field parameterization step failed (typically due to missing/ambiguous parameters under strict mode).
+    # 
     FORCEFIELD_SETUP_FAILED = 4
 
     ##
-    # \brief 
-    #
+    # \brief The MMFF94 energy-minimization step failed to converge or produced an invalid result.
+    # 
     FORCEFIELD_MINIMIZATION_FAILED = 5
 
     ##
-    # \brief 
-    #
+    # \brief No fragment library has been configured (required for fragment-based structure generation).
+    # 
     FRAGMENT_LIBRARY_NOT_SET = 6
 
     ##
-    # \brief 
-    #
+    # \brief Conformer generation for at least one fragment failed.
+    # 
     FRAGMENT_CONF_GEN_FAILED = 7
 
     ##
-    # \brief 
-    #
+    # \brief Conformer generation for at least one fragment timed out.
+    # 
     FRAGMENT_CONF_GEN_TIMEOUT = 8
 
     ##
-    # \brief 
-    #
+    # \brief The submitted fragment has already been processed (FragmentLibraryGenerator).
+    # 
     FRAGMENT_ALREADY_PROCESSED = 9
 
     ##
-    # \brief 
-    #
+    # \brief The torsion-driving step failed.
+    # 
     TORSION_DRIVING_FAILED = 10
 
     ##
-    # \brief 
-    #
+    # \brief The overall conformer-generation pipeline failed.
+    # 
     CONF_GEN_FAILED = 11
 
     ##
-    # \brief 
-    #
+    # \brief The molecule exhibits too high a symmetry to enumerate all symmetry mappings within the configured limit.
+    # 
     TOO_MUCH_SYMMETRY = 12
 
     ##
-    # \brief 
-    #
+    # \brief The input molecule's rotatable-bond count exceeds the configured maximum.
+    # 
     MAX_ROT_BOND_COUNT_EXCEEDED = 13
 
     ##
-    # \brief 
-    #
+    # \brief A fixed substructure was specified but no 3D coordinates were supplied for it.
+    # 
     NO_FIXED_SUBSTRUCT_COORDS = 14

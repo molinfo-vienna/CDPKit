@@ -25,12 +25,12 @@
 class DGConstraintGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings.
+    # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \c %DGConstraintGeneratorSettings instance.
+    # \brief Constructs the settings instance with default values.
     # 
     def __init__() -> None: pass
 
@@ -60,39 +60,45 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
     def assign(settings: DGConstraintGeneratorSettings) -> DGConstraintGeneratorSettings: pass
 
     ##
-    # \brief 
-    # \param exclude 
-    #
+    # \brief Specifies whether hydrogen atoms shall be excluded from the constraint set.
+    # 
+    # \param exclude If <tt>True</tt>, hydrogen atoms are skipped during constraint generation.
+    # 
     def excludeHydrogens(exclude: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether hydrogen atoms are excluded from the constraint set.
+    # 
+    # \return <tt>True</tt> if hydrogens are excluded, and <tt>False</tt> otherwise.
+    # 
     def excludeHydrogens() -> bool: pass
 
     ##
-    # \brief 
-    # \param regard 
-    #
+    # \brief Specifies whether atom-stereo-center configurations shall be enforced by volume constraints.
+    # 
+    # \param regard If <tt>True</tt>, atom-configuration constraints are added.
+    # 
     def regardAtomConfiguration(regard: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether atom-stereo-center configurations are enforced.
+    # 
+    # \return <tt>True</tt> if atom-configuration constraints are added, and <tt>False</tt> otherwise.
+    # 
     def regardAtomConfiguration() -> bool: pass
 
     ##
-    # \brief 
-    # \param regard 
-    #
+    # \brief Specifies whether bond-stereo-center configurations (cis/trans) shall be enforced.
+    # 
+    # \param regard If <tt>True</tt>, bond-configuration constraints are added.
+    # 
     def regardBondConfiguration(regard: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether bond-stereo-center configurations are enforced.
+    # 
+    # \return <tt>True</tt> if bond-configuration constraints are added, and <tt>False</tt> otherwise.
+    # 
     def regardBondConfiguration() -> bool: pass
 
     objectID = property(getObjectID)

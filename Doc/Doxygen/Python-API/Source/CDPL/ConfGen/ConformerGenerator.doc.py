@@ -20,9 +20,15 @@
 #
 
 ##
-# \brief High-level driver for the systematic generation of low-energy 3D conformer ensembles from a molecular graph.
+# \brief High-level driver for the generation of low-energy 3D conformer ensembles from a molecular graph.
 # 
-# The generator coordinates the full pipeline: 2D-to-3D fragment-based structure generation, torsion-driven conformer enumeration, MMFF94-based energy minimization, RMSD-based clustering and final selection. Pipeline behaviour is controlled via the embedded Settings instance, the configured fragment and torsion libraries and optional abort/timeout/log callbacks.
+# The generator implements two complementary sampling strategies (selectable via the embedded ConformerGeneratorSettings) for assembling the conformer ensemble: 
+#  - a systematic strategy that performs fragment-based 2D-to-3D structure generation followed by exhaustive torsion-driving of all flexible bonds, and
+#  - a stochastic strategy that draws conformations randomly from the rotatable-bond torsion-angle distributions (typically applied to large/highly-flexible molecules).
+# 
+# Both strategies share a common downstream pipeline of MMFF94-based energy minimization, RMSD-based clustering and energy-window filtering. Behaviour is controlled by the embedded Settings instance, the configured fragment and torsion libraries and the optional abort/timeout/log callbacks.
+# 
+# \see [\ref CFRG]
 # 
 class ConformerGenerator(Boost.Python.instance):
 
@@ -151,9 +157,11 @@ class ConformerGenerator(Boost.Python.instance):
     def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
-    # \brief Transfers the generated conformer ensemble onto <em>molgraph</em> (adds Chem.MolecularGraphProperty.CONFORMER_DATA entries).
+    # \brief Transfers the generated conformer ensemble onto <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph receiving the conformer data.
+    # The per-conformer 3D coordinates are written to each atom's 3D-coordinates array (via Chem.set3DCoordinatesArray) and the corresponding per-conformer energies are attached to the molecular graph (via Chem.setConformerEnergies).
+    # 
+    # \param molgraph The molecular graph that receives the conformer coordinates and energies.
     # 
     def setConformers(molgraph: Chem.MolecularGraph) -> None: pass
 

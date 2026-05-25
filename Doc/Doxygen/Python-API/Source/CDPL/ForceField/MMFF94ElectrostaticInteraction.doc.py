@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A single MMFF94 electrostatic interaction between two non-bonded atoms.
+# 
+# The MMFF94 electrostatic-energy contribution between two atoms with partial charges \f$ q_i \f$ and \f$ q_j \f$ separated by distance <em>r</em> is \f$ E_q = f \frac{q_i q_j}{\varepsilon (r + \delta)^n} \f$ where <em>f</em> is a scaling factor (e.g. 0.75 for 1-4 pairs), \f$ \varepsilon \f$ the dielectric constant, <em>n</em> the distance exponent and \f$ \delta = 0.05 \f$ &Aring; the MMFF94 buffer.
+# 
 class MMFF94ElectrostaticInteraction(Boost.Python.instance):
 
     ##
@@ -31,57 +33,65 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94ElectrostaticInteraction instance.
-    # \param atom1_idx 
-    # \param atom2_idx 
-    # \param atom1_chg 
-    # \param atom2_chg 
-    # \param scale_fact 
-    # \param de_const 
-    # \param dist_expo 
+    # \brief Constructs the electrostatic interaction record.
+    # 
+    # \param atom1_idx The zero-based index of the first atom.
+    # \param atom2_idx The zero-based index of the second atom.
+    # \param atom1_chg The partial charge \f$ q_i \f$ of the first atom.
+    # \param atom2_chg The partial charge \f$ q_j \f$ of the second atom.
+    # \param scale_fact The scaling factor <em>f</em> applied to the energy contribution (e.g. 0.75 for 1-4 pairs).
+    # \param de_const The dielectric constant \f$ \varepsilon \f$.
+    # \param dist_expo The distance exponent <em>n</em>.
     # 
     def __init__(atom1_idx: int, atom2_idx: int, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the first atom.
+    # 
+    # \return The first atom index.
+    # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the zero-based index of the second atom.
+    # 
+    # \return The second atom index.
+    # 
     def getAtom2Index() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the partial charge of the first atom.
+    # 
+    # \return The charge \f$ q_i \f$.
+    # 
     def getAtom1Charge() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the partial charge of the second atom.
+    # 
+    # \return The charge \f$ q_j \f$.
+    # 
     def getAtom2Charge() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the scaling factor applied to the energy contribution.
+    # 
+    # \return The scaling factor <em>f</em>.
+    # 
     def getScalingFactor() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the dielectric constant used by this interaction.
+    # 
+    # \return The dielectric constant \f$ \varepsilon \f$.
+    # 
     def getDielectricConstant() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the distance exponent of the electrostatic potential.
+    # 
+    # \return The distance exponent <em>n</em>.
+    # 
     def getDistanceExponent() -> float: pass
 
     ##

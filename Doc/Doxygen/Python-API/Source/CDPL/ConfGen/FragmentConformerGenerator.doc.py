@@ -42,85 +42,107 @@ class FragmentConformerGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked periodically to allow conformer generation to be aborted by the user.
+    # 
+    # \param func The abort-check callback.
+    # 
     def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured abort-check callback.
+    # 
+    # \return A reference to the abort-check callback.
+    # 
     def getAbortCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked periodically to check whether the configured generation timeout has elapsed.
+    # 
+    # \param func The timeout-check callback.
+    # 
     def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured timeout-check callback.
+    # 
+    # \return A reference to the timeout-check callback.
+    # 
     def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback that receives log messages produced during conformer generation.
+    # 
+    # \param func The log-message callback.
+    # 
     def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured log-message callback.
+    # 
+    # \return A reference to the log-message callback.
+    # 
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Generates a conformer ensemble for the fragment <em>molgraph</em> (the fragment type is perceived automatically).
+    # 
+    # \param molgraph The fragment to process.
+    # 
+    # \return A status code defined in ConfGen.ReturnCode.
+    # 
     def generate(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param fixed_substr 
-    # \param fixed_substr_coords 
-    # \return 
-    #
+    # \brief Generates a conformer ensemble for the fragment <em>molgraph</em> while keeping the substructure <em>fixed_substr</em> at the supplied 3D coordinates.
+    # 
+    # \param molgraph The fragment to process.
+    # \param fixed_substr The substructure that must retain the supplied 3D coordinates.
+    # \param fixed_substr_coords The 3D coordinates assigned to <em>fixed_substr</em>.
+    # 
+    # \return A status code defined in ConfGen.ReturnCode. 
+    # 
+    # \since 1.1
+    # 
     def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param frag_type 
-    # \return 
-    #
+    # \brief Generates a conformer ensemble for the fragment <em>molgraph</em> using the fragment-type-specific settings selected by <em>frag_type</em>.
+    # 
+    # \param molgraph The fragment to process.
+    # \param frag_type One of the ConfGen.FragmentType values selecting the per-fragment-class settings.
+    # 
+    # \return A status code defined in ConfGen.ReturnCode.
+    # 
     def generate(molgraph: Chem.MolecularGraph, frag_type: int) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param frag_type 
-    # \param fixed_substr 
-    # \param fixed_substr_coords 
-    # \return 
-    #
+    # \brief Generates a conformer ensemble for the fragment <em>molgraph</em> using the fragment-type-specific settings selected by <em>frag_type</em> while keeping the substructure <em>fixed_substr</em> at the supplied 3D coordinates.
+    # 
+    # \param molgraph The fragment to process.
+    # \param frag_type One of the ConfGen.FragmentType values selecting the per-fragment-class settings.
+    # \param fixed_substr The substructure that must retain the supplied 3D coordinates.
+    # \param fixed_substr_coords The 3D coordinates assigned to <em>fixed_substr</em>.
+    # 
+    # \return A status code defined in ConfGen.ReturnCode. 
+    # 
+    # \since 1.1
+    # 
     def generate(molgraph: Chem.MolecularGraph, frag_type: int, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Transfers the generated conformer ensemble onto <em>molgraph</em>.
+    # 
+    # The per-conformer 3D coordinates are written to each atom's 3D-coordinates array (via Chem.set3DCoordinatesArray) and the corresponding per-conformer energies are attached to the molecular graph (via Chem.setConformerEnergies).
+    # 
+    # \param molgraph The molecular graph that receives the conformer coordinates and energies.
+    # 
     def setConformers(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of generated conformers.
+    # 
+    # \return The conformer count.
+    # 
     def getNumConformers() -> int: pass
 
     ##
@@ -131,9 +153,10 @@ class FragmentConformerGenerator(Boost.Python.instance):
     def getConformer(conf_idx: int) -> ConformerData: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current generator settings.
+    # 
+    # \return A reference to the settings.
+    # 
     def getSettings() -> FragmentConformerGeneratorSettings: pass
 
     ##

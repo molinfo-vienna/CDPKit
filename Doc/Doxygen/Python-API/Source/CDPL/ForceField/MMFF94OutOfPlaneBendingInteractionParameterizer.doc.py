@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Generates the MMFF94 out-of-plane bending interactions for the trigonal centers of a molecular graph.
+# 
+# For every atom <em>j</em> with exactly three neighbors that is a trigonal center (per the MMFF94 atom-type properties) the parameterizer generates three out-of-plane records — one for each permutation of the three neighbors as the out-of-plane atom <em>l</em> with the remaining two as in-plane terminal atoms. The required out-of-plane force constants are taken from the parameter table, falling back through the primary-to-parameter atom-type map when no exact entry is available.
+# 
 class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance.
+    # \brief Constructs an <tt>MMFF94OutOfPlaneBendingInteractionParameterizer</tt> instance using the default MMFF94 tables.
     # 
     def __init__() -> None: pass
 
@@ -36,10 +38,11 @@ class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
     def __init__(parameterizer: MMFF94OutOfPlaneBendingInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance.
-    # \param molgraph 
-    # \param ia_list 
-    # \param strict 
+    # \brief Constructs the parameterizer and immediately processes <em>molgraph</em> into <em>ia_list</em>.
+    # 
+    # \param molgraph The molecular graph for which to parameterize the out-of-plane bending interactions.
+    # \param ia_list Output list receiving the generated MMFF94OutOfPlaneBendingInteraction records.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
     # 
     def __init__(molgraph: Chem.MolecularGraph, ia_list: MMFF94OutOfPlaneBendingInteractionList, strict: bool) -> None: pass
 
@@ -56,33 +59,38 @@ class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the filter function used to skip atom quadruplets during parameterization.
+    # 
+    # \param func The new four-atom filter function (when it returns <tt>False</tt>, the quadruplet is skipped).
+    # 
     def setFilterFunction(func: InteractionFilterFunction4) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+    # 
+    # \param func The new numeric-atom-type lookup function.
+    # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the table providing per-atom-type-quadruplet out-of-plane bending force constants.
+    # 
+    # \param table The new out-of-plane bending parameter table.
+    # 
     def setOutOfPlaneBendingParameterTable(table: MMFF94OutOfPlaneBendingParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the table providing per-numeric-atom-type property data (used to identify trigonal centers).
+    # 
+    # \param table The new atom-type property table.
+    # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    #
+    # \brief Sets the map used to translate primary atom types into their corresponding parameter-atom types.
+    # 
+    # \param map The new primary-to-parameter atom-type map.
+    # 
     def setParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
@@ -93,11 +101,12 @@ class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94OutOfPlaneBendingInteractionParameterizer) -> MMFF94OutOfPlaneBendingInteractionParameterizer: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param ia_list 
-    # \param strict 
-    #
+    # \brief Generates the MMFF94 out-of-plane bending interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
+    # 
+    # \param molgraph The molecular graph for which to parameterize the out-of-plane bending interactions.
+    # \param ia_list Output list receiving the generated MMFF94OutOfPlaneBendingInteraction records.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_list: MMFF94OutOfPlaneBendingInteractionList, strict: bool) -> None: pass
 
     objectID = property(getObjectID)
