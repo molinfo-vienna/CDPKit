@@ -75,72 +75,221 @@ namespace CDPL
              */
             virtual ~TorsionCategory() {}
 
+            /**
+             * \brief Returns the category name.
+             * \return A \c const reference to the category name.
+             */
             const std::string& getName() const;
 
+            /**
+             * \brief Sets the category name.
+             * \param name The new name.
+             */
             void setName(const std::string& name);
 
+            /**
+             * \brief Returns the SMARTS string used to perceive bonds belonging to this category.
+             * \return A \c const reference to the SMARTS string.
+             */
             const std::string& getMatchPatternString() const;
 
+            /**
+             * \brief Sets the SMARTS string used to perceive bonds belonging to this category.
+             * \param ptn_str The new SMARTS pattern string.
+             */
             void setMatchPatternString(const std::string& ptn_str);
 
+            /**
+             * \brief Returns the molecular-graph pattern used to perceive bonds belonging to this category.
+             * \return A \c const reference to the pattern smart pointer.
+             */
             const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
+            /**
+             * \brief Sets the molecular-graph pattern used to perceive bonds belonging to this category.
+             * \param ptn The new molecular-graph pattern.
+             */
             void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
 
+            /**
+             * \brief Returns the atom type of the first central-bond atom required by this category.
+             * \return The atom type (Chem::AtomType value).
+             */
             unsigned int getBondAtom1Type() const;
 
+            /**
+             * \brief Sets the atom type of the first central-bond atom required by this category.
+             * \param type The new atom type (Chem::AtomType value).
+             */
             void setBondAtom1Type(unsigned int type);
 
+            /**
+             * \brief Returns the atom type of the second central-bond atom required by this category.
+             * \return The atom type (Chem::AtomType value).
+             */
             unsigned int getBondAtom2Type() const;
 
+            /**
+             * \brief Sets the atom type of the second central-bond atom required by this category.
+             * \param type The new atom type (Chem::AtomType value).
+             */
             void setBondAtom2Type(unsigned int type);
 
+            /**
+             * \brief Creates and appends a new empty child category.
+             * \return A reference to the newly added child category.
+             */
             TorsionCategory& addCategory();
 
+            /**
+             * \brief Appends a copy of \a cat as a child category.
+             * \param cat The child category to copy.
+             * \return A reference to the newly added child category.
+             */
             TorsionCategory& addCategory(const TorsionCategory& cat);
 
+            /**
+             * \brief Creates and appends a new empty torsion rule.
+             * \return A reference to the newly added rule.
+             */
             TorsionRule& addRule();
 
+            /**
+             * \brief Appends a copy of \a rule as a contained torsion rule.
+             * \param rule The torsion rule to copy.
+             * \return A reference to the newly added rule.
+             */
             TorsionRule& addRule(const TorsionRule& rule);
 
+            /**
+             * \brief Returns the number of child categories.
+             * \param recursive If \c true, the count includes all descendant categories.
+             * \return The child-category count.
+             */
             std::size_t getNumCategories(bool recursive = false) const;
 
+            /**
+             * \brief Returns the number of contained torsion rules.
+             * \param recursive If \c true, the count includes rules of all descendant categories.
+             * \return The torsion-rule count.
+             */
             std::size_t getNumRules(bool recursive = false) const;
 
+            /**
+             * \brief Returns the child category at index \a idx.
+             * \param idx The zero-based child-category index.
+             * \return A reference to the child category.
+             * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
+             */
             TorsionCategory& getCategory(std::size_t idx);
 
+            /**
+             * \brief Returns the child category at index \a idx.
+             * \param idx The zero-based child-category index.
+             * \return A \c const reference to the child category.
+             * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
+             */
             const TorsionCategory& getCategory(std::size_t idx) const;
 
+            /**
+             * \brief Returns the torsion rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \return A reference to the rule.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumRules() - 1].
+             */
             TorsionRule& getRule(std::size_t idx);
 
+            /**
+             * \brief Returns the torsion rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \return A \c const reference to the rule.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumRules() - 1].
+             */
             const TorsionRule& getRule(std::size_t idx) const;
 
+            /**
+             * \brief Removes the child category at index \a idx.
+             * \param idx The zero-based child-category index.
+             * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
+             */
             void removeCategory(std::size_t idx);
 
+            /**
+             * \brief Removes the torsion rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumRules() - 1].
+             */
             void removeRule(std::size_t idx);
 
+            /**
+             * \brief Removes the child category referenced by \a it.
+             * \param it Iterator referencing the child category to remove.
+             */
             void removeCategory(const CategoryIterator& it);
 
+            /**
+             * \brief Removes the torsion rule referenced by \a it.
+             * \param it Iterator referencing the rule to remove.
+             */
             void removeRule(const RuleIterator& it);
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first child category.
+             * \return A mutable iterator pointing to the first child category.
+             */
             CategoryIterator getCategoriesBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last child category.
+             * \return A mutable iterator pointing one past the last child category.
+             */
             CategoryIterator getCategoriesEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first child category.
+             * \return A constant iterator pointing to the first child category.
+             */
             ConstCategoryIterator getCategoriesBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last child category.
+             * \return A constant iterator pointing one past the last child category.
+             */
             ConstCategoryIterator getCategoriesEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first contained rule.
+             * \return A mutable iterator pointing to the first rule.
+             */
             RuleIterator getRulesBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last contained rule.
+             * \return A mutable iterator pointing one past the last rule.
+             */
             RuleIterator getRulesEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first contained rule.
+             * \return A constant iterator pointing to the first rule.
+             */
             ConstRuleIterator getRulesBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last contained rule.
+             * \return A constant iterator pointing one past the last rule.
+             */
             ConstRuleIterator getRulesEnd() const;
 
+            /**
+             * \brief Swaps the contents of this category with \a cat.
+             * \param cat The other category.
+             */
             void swap(TorsionCategory& cat);
 
+            /**
+             * \brief Removes all child categories and contained rules and resets the pattern/atom-type data.
+             */
             void clear();
 
           private:

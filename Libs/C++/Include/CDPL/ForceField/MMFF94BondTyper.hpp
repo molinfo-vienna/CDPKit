@@ -47,18 +47,47 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Assigns MMFF94 bond-type indices (0 or 1) to the bonds of a molecular graph.
+         *
+         * A bond receives the nonstandard type index \e 1 when it is a single bond between two non-aromatic
+         * atoms whose MMFF94 atom-type properties carry an \c sbmb flag, or when it connects two atoms that
+         * belong to two different aromatic rings (as in the central C-C bond of biphenyl). All other bonds
+         * receive the standard type index \e 0.
+         */
         class CDPL_FORCEFIELD_API MMFF94BondTyper
         {
 
           public:
+            /**
+             * \brief Constructs an \c %MMFF94BondTyper instance using the default MMFF94 tables.
+             */
             MMFF94BondTyper();
 
+            /**
+             * \brief Constructs an \c %MMFF94BondTyper instance and immediately perceives the bond types of \a molgraph.
+             * \param molgraph The molecular graph to be typed.
+             * \param types Output array receiving the perceived MMFF94 bond-type indices.
+             * \param strict If \c true, strict parameterization will be performed that might fail.
+             */
             MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
 
+            /**
+             * \brief Sets the table providing the per-numeric-atom-type property data (used to look up the \c sbmb flag).
+             * \param table The new atom-type property table.
+             */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
+             * \param func The new aromatic-ring-set function.
+             */
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
+            /**
+             * \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+             * \param func The new numeric-atom-type lookup function.
+             */
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
             /**

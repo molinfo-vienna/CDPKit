@@ -57,28 +57,78 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Assigns MMFF94 symbolic and numeric atom types to the atoms of a molecular graph.
+         *
+         * Typing is performed in four stages: provisional symbolic types are assigned by SMARTS pattern matching,
+         * aromatic atom types are then reassigned according to the MMFF94 aromatic-ring rules, hydrogen atoms
+         * receive types derived from their heavy-atom neighbors, and finally the symbolic types are translated
+         * to the corresponding numeric type indices used by the rest of the MMFF94 parameter tables.
+         */
         class CDPL_FORCEFIELD_API MMFF94AtomTyper
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AtomTyper instances. */
             typedef std::shared_ptr<MMFF94AtomTyper> SharedPointer;
 
+            /**
+             * \brief Constructs an empty \c %MMFF94AtomTyper instance using the default MMFF94 tables.
+             */
             MMFF94AtomTyper();
 
+            /**
+             * \brief Constructs an \c %MMFF94AtomTyper instance and immediately perceives the atom types of \a molgraph.
+             * \param molgraph The molecular graph to be typed.
+             * \param sym_types Output array receiving the perceived MMFF94 symbolic atom-type strings.
+             * \param num_types Output array receiving the perceived MMFF94 numeric atom-type indices.
+             * \param strict If \c true, atoms for which no MMFF94 type could be perceived cause an error to be reported.
+             */
             MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict);
 
+            /**
+             * \brief Sets the SMARTS-pattern table used for provisional symbolic atom-type assignment.
+             * \param table The new symbolic-atom-type pattern table.
+             */
             void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the table used for the reassignment of aromatic atom types.
+             * \param table The new aromatic-atom-type definition table.
+             */
             void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the map used to derive hydrogen atom types from heavy-atom neighbor types.
+             * \param map The new heavy-to-hydrogen atom-type map.
+             */
             void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
 
+            /**
+             * \brief Sets the map used to translate symbolic into numeric atom types.
+             * \param map The new symbolic-to-numeric atom-type map.
+             */
             void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
 
+            /**
+             * \brief Sets the table providing the per-numeric-type atom property data.
+             * \param table The new atom-type property table.
+             */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the function used to obtain the set of MMFF94-aromatic rings for the input molecular graph.
+             * \param func The new aromatic-ring-set function.
+             */
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
+            /**
+             * \brief Perceives the MMFF94 atom types of \a molgraph and writes them to \a sym_types and \a num_types.
+             * \param molgraph The molecular graph to be typed.
+             * \param sym_types Output array receiving the perceived MMFF94 symbolic atom-type strings.
+             * \param num_types Output array receiving the perceived MMFF94 numeric atom-type indices.
+             * \param strict If \c true, atoms for which no MMFF94 type could be perceived cause an error to be reported.
+             */
             void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict);
 
           private:

@@ -45,22 +45,50 @@ namespace CDPL
         {
 
           public:
+            /** \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings. */
             static const DGConstraintGeneratorSettings DEFAULT;
 
+            /**
+             * \brief Constructs the settings instance with default values.
+             */
             DGConstraintGeneratorSettings();
 
             virtual ~DGConstraintGeneratorSettings() {}
 
+            /**
+             * \brief Specifies whether hydrogen atoms shall be excluded from the constraint set.
+             * \param exclude If \c true, hydrogen atoms are skipped during constraint generation.
+             */
             void excludeHydrogens(bool exclude);
 
+            /**
+             * \brief Tells whether hydrogen atoms are excluded from the constraint set.
+             * \return \c true if hydrogens are excluded, and \c false otherwise.
+             */
             bool excludeHydrogens() const;
 
+            /**
+             * \brief Specifies whether atom-stereo-center configurations shall be enforced by volume constraints.
+             * \param regard If \c true, atom-configuration constraints are added.
+             */
             void regardAtomConfiguration(bool regard);
 
+            /**
+             * \brief Tells whether atom-stereo-center configurations are enforced.
+             * \return \c true if atom-configuration constraints are added, and \c false otherwise.
+             */
             bool regardAtomConfiguration() const;
 
+            /**
+             * \brief Specifies whether bond-stereo-center configurations (cis/trans) shall be enforced.
+             * \param regard If \c true, bond-configuration constraints are added.
+             */
             void regardBondConfiguration(bool regard);
 
+            /**
+             * \brief Tells whether bond-stereo-center configurations are enforced.
+             * \return \c true if bond-configuration constraints are added, and \c false otherwise.
+             */
             bool regardBondConfiguration() const;
 
           private:

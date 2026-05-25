@@ -42,10 +42,13 @@ namespace CDPL
         namespace NitrogenEnumerationMode
         {
 
+            /** \brief Do not enumerate any invertible nitrogen stereo centers. */
             const int NONE = 0;
 
+            /** \brief Enumerate both configurations at every invertible nitrogen stereo center. */
             const int ALL = 1;
 
+            /** \brief Enumerate both configurations only at invertible nitrogen stereo centers whose stereochemistry has not been explicitly specified. */
             const int UNSPECIFIED_STEREO = 2;
         } // namespace NitrogenEnumerationMode
     } // namespace ConfGen

@@ -38,10 +38,29 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief A single MMFF94 torsion interaction over an atom quadruplet \e i-\e j-\e k-\e l.
+         *
+         * The MMFF94 torsion-energy expression for one quadruplet is a three-term Fourier series
+         * \f$ E_t = \frac{1}{2}[V_1 (1 + \cos\Phi) + V_2 (1 - \cos 2\Phi) + V_3 (1 + \cos 3\Phi)] \f$
+         * where \f$ V_1, V_2, V_3 \f$ are the MMFF94 torsion parameters and \f$ \Phi \f$ is the dihedral
+         * angle defined by the four atoms.
+         */
         class MMFF94TorsionInteraction
         {
 
           public:
+            /**
+             * \brief Constructs the torsion interaction record.
+             * \param term_atom1_idx The zero-based index of the first terminal atom \e i.
+             * \param ctr_atom1_idx The zero-based index of the first central atom \e j (bonded to \e i and \e k).
+             * \param ctr_atom2_idx The zero-based index of the second central atom \e k (bonded to \e j and \e l).
+             * \param term_atom2_idx The zero-based index of the second terminal atom \e l.
+             * \param tor_type_idx The MMFF94 torsion-type index (0-5).
+             * \param tor_param1 The torsion parameter \f$ V_1 \f$.
+             * \param tor_param2 The torsion parameter \f$ V_2 \f$.
+             * \param tor_param3 The torsion parameter \f$ V_3 \f$.
+             */
             MMFF94TorsionInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom1_idx, std::size_t ctr_atom2_idx,
                                      std::size_t term_atom2_idx, unsigned int tor_type_idx, double tor_param1,
                                      double tor_param2, double tor_param3):
@@ -50,61 +69,109 @@ namespace CDPL
                 termAtom2Idx(term_atom2_idx), torTypeIdx(tor_type_idx), torParam1(tor_param1), torParam2(tor_param2),
                 torParam3(tor_param3) {}
 
+            /**
+             * \brief Returns the zero-based index of the first terminal atom \e i.
+             * \return The first terminal-atom index.
+             */
             std::size_t getTerminalAtom1Index() const
             {
                 return termAtom1Idx;
             }
 
+            /**
+             * \brief Returns the zero-based index of the first central atom \e j.
+             * \return The first center-atom index.
+             */
             std::size_t getCenterAtom1Index() const
             {
                 return ctrAtom1Idx;
             }
 
+            /**
+             * \brief Returns the zero-based index of the second central atom \e k.
+             * \return The second center-atom index.
+             */
             std::size_t getCenterAtom2Index() const
             {
                 return ctrAtom2Idx;
             }
 
+            /**
+             * \brief Returns the zero-based index of the second terminal atom \e l.
+             * \return The second terminal-atom index.
+             */
             std::size_t getTerminalAtom2Index() const
             {
                 return termAtom2Idx;
             }
 
+            /**
+             * \brief Returns the zero-based index of the first terminal atom (alias for getTerminalAtom1Index()).
+             * \return The first terminal-atom index.
+             */
             std::size_t getAtom1Index() const
             {
                 return termAtom1Idx;
             }
 
+            /**
+             * \brief Returns the zero-based index of the first central atom (alias for getCenterAtom1Index()).
+             * \return The first center-atom index.
+             */
             std::size_t getAtom2Index() const
             {
                 return ctrAtom1Idx;
             }
 
+            /**
+             * \brief Returns the zero-based index of the second central atom (alias for getCenterAtom2Index()).
+             * \return The second center-atom index.
+             */
             std::size_t getAtom3Index() const
             {
                 return ctrAtom2Idx;
             }
 
+            /**
+             * \brief Returns the zero-based index of the second terminal atom (alias for getTerminalAtom2Index()).
+             * \return The second terminal-atom index.
+             */
             std::size_t getAtom4Index() const
             {
                 return termAtom2Idx;
             }
 
+            /**
+             * \brief Returns the MMFF94 torsion-type index.
+             * \return The torsion-type index (0-5).
+             */
             unsigned int getTorsionTypeIndex() const
             {
                 return torTypeIdx;
             }
 
+            /**
+             * \brief Returns the first torsion parameter.
+             * \return The torsion parameter \f$ V_1 \f$.
+             */
             double getTorsionParameter1() const
             {
                 return torParam1;
             }
 
+            /**
+             * \brief Returns the second torsion parameter.
+             * \return The torsion parameter \f$ V_2 \f$.
+             */
             double getTorsionParameter2() const
             {
                 return torParam2;
             }
 
+            /**
+             * \brief Returns the third torsion parameter.
+             * \return The torsion parameter \f$ V_3 \f$.
+             */
             double getTorsionParameter3() const
             {
                 return torParam3;

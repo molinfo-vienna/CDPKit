@@ -59,36 +59,96 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Generates the MMFF94 angle-bending interactions for the atom triplets defined by the bonds of a molecular graph.
+         *
+         * For every non-filtered atom triplet (\e i-\e j-\e k) consisting of a central atom \e j and two of its
+         * neighbors the parameterizer determines the MMFF94 angle-type index (0-8, accounting for ring membership
+         * and double-bond character), looks up the matching MMFF94 angle-bending parameters, falls back to the
+         * empirical rule when no exact entry is found and emits an MMFF94AngleBendingInteraction record.
+         */
         class CDPL_FORCEFIELD_API MMFF94AngleBendingInteractionParameterizer
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AngleBendingInteractionParameterizer instances. */
             typedef std::shared_ptr<MMFF94AngleBendingInteractionParameterizer> SharedPointer;
 
+            /**
+             * \brief Constructs an \c %MMFF94AngleBendingInteractionParameterizer instance using the default MMFF94 tables.
+             */
             MMFF94AngleBendingInteractionParameterizer();
 
+            /**
+             * \brief Constructs the parameterizer and immediately processes \a molgraph into \a ia_list.
+             * \param molgraph The molecular graph for which to parameterize the angle-bending interactions.
+             * \param ia_list Output list receiving the generated MMFF94AngleBendingInteraction records.
+             * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             */
             MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph&        molgraph,
                                                        MMFF94AngleBendingInteractionList& ia_list,
                                                        bool                               strict);
 
+            /**
+             * \brief Sets the filter function used to skip atom triplets during parameterization.
+             * \param func The new three-atom filter function (when it returns \c false, the triplet is skipped).
+             */
             void setFilterFunction(const InteractionFilterFunction3& func);
 
+            /**
+             * \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+             * \param func The new numeric-atom-type lookup function.
+             */
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
+            /**
+             * \brief Sets the function used to look up the MMFF94 bond-type index of a bond.
+             * \param func The new bond-type-index lookup function.
+             */
             void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
+            /**
+             * \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
+             * \param func The new aromatic-ring-set function.
+             */
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
+            /**
+             * \brief Sets the primary bond-stretching parameter table (used to retrieve reference bond lengths in the empirical-rule fallback).
+             * \param table The new bond-stretching parameter table.
+             */
             void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the fallback bond-stretching rule-parameter table (used in the empirical-rule fallback).
+             * \param table The new bond-stretching rule-parameter table.
+             */
             void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the primary table providing angle-type-specific angle-bending parameters.
+             * \param table The new angle-bending parameter table.
+             */
             void setAngleBendingParameterTable(const MMFF94AngleBendingParameterTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the table providing per-numeric-atom-type property data (used by the empirical fallback).
+             * \param table The new atom-type property table.
+             */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the map used to translate primary atom types into their corresponding parameter-atom types.
+             * \param map The new primary-to-parameter atom-type map.
+             */
             void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
+            /**
+             * \brief Generates the MMFF94 angle-bending interactions for \a molgraph and writes them to \a ia_list.
+             * \param molgraph The molecular graph for which to parameterize the angle-bending interactions.
+             * \param ia_list Output list receiving the generated MMFF94AngleBendingInteraction records.
+             * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             */
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionList& ia_list, bool strict);
 
           private:

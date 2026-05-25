@@ -53,34 +53,94 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Generates the MMFF94 bond-stretching interactions for the bonds of a molecular graph.
+         *
+         * For every non-filtered bond the parameterizer looks up the matching MMFF94 bond-type-specific
+         * parameters from the supplied tables (falling back to the rule-based table when no exact match is
+         * available) and appends an MMFF94BondStretchingInteraction record to the output list.
+         */
         class CDPL_FORCEFIELD_API MMFF94BondStretchingInteractionParameterizer
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94BondStretchingInteractionParameterizer instances. */
             typedef std::shared_ptr<MMFF94BondStretchingInteractionParameterizer> SharedPointer;
 
+            /**
+             * \brief Constructs an \c %MMFF94BondStretchingInteractionParameterizer instance using the default MMFF94 tables.
+             */
             MMFF94BondStretchingInteractionParameterizer();
 
+            /**
+             * \brief Constructs the parameterizer and immediately processes the bonds of \a molgraph into \a ia_list.
+             * \param molgraph The molecular graph for which to parameterize the bond-stretching interactions.
+             * \param ia_list Output list receiving the generated MMFF94BondStretchingInteraction records.
+             * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             */
             MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph&          molgraph,
                                                          MMFF94BondStretchingInteractionList& ia_list,
                                                          bool                                 strict);
 
+            /**
+             * \brief Sets the filter function used to skip bonds during parameterization.
+             * \param func The new filter function (when it returns \c false for a bond pair, the bond is skipped).
+             */
             void setFilterFunction(const InteractionFilterFunction2& func);
 
+            /**
+             * \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+             * \param func The new numeric-atom-type lookup function.
+             */
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
+            /**
+             * \brief Sets the function used to look up the MMFF94 bond-type index of a bond.
+             * \param func The new bond-type-index lookup function.
+             */
             void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
+            /**
+             * \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
+             * \param func The new aromatic-ring-set function.
+             */
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
+            /**
+             * \brief Sets the primary table providing bond-type-specific bond-stretching parameters.
+             * \param table The new bond-stretching parameter table.
+             */
             void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the fallback table providing rule-based bond-stretching parameters.
+             * \param table The new bond-stretching rule-parameter table.
+             */
             void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the table providing per-numeric-atom-type property data (used by the empirical fallback).
+             * \param table The new atom-type property table.
+             */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
+            /**
+             * \brief Generates the MMFF94 bond-stretching interactions for \a molgraph and writes them to \a ia_list.
+             * \param molgraph The molecular graph for which to parameterize the bond-stretching interactions.
+             * \param ia_list Output list receiving the generated MMFF94BondStretchingInteraction records.
+             * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             */
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionList& ia_list, bool strict);
 
+            /**
+             * \brief Looks up the MMFF94 bond-stretching parameters for a single bond.
+             * \param molgraph The molecular graph the bond belongs to.
+             * \param bond The bond whose parameters are queried.
+             * \param bond_type_idx Output variable receiving the MMFF94 bond-type index.
+             * \param force_const Output variable receiving the bond-stretching force constant.
+             * \param ref_length Output variable receiving the reference bond length \f$ r_0 \f$.
+             * \param strict If \c true, missing parameters cause a parameterization failure.
+             */
             void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond,
                                unsigned int& bond_type_idx, double& force_const, double& ref_length, bool strict) const;
 

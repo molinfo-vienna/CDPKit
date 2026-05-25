@@ -45,8 +45,8 @@ namespace CDPL
         /**
          * \brief A hierarchical library of torsion rules organized into categories.
          *
-         * \c %TorsionLibrary extends ConfGen::TorsionCategory with persistence (XML load/save) and a global
-         * default-library slot accessed via the static set()/get() methods.
+         * \c %TorsionLibrary extends ConfGen::TorsionCategory with persistence (XML load/save) and provides
+         * static set()/get() accessors for the process-wide default torsion library.
          */
         class CDPL_CONFGEN_API TorsionLibrary : public TorsionCategory
         {

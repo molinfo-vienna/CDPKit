@@ -47,44 +47,121 @@ namespace CDPL
         {
 
           public:
+            /** \brief Default settings used by a freshly-constructed TorsionDriverSettings. */
             static const TorsionDriverSettings DEFAULT;
 
+            /**
+             * \brief Constructs the settings instance with default values.
+             */
             TorsionDriverSettings();
 
+            /**
+             * \brief Specifies whether torsion angles around bonds to hetero-atom hydrogens shall be sampled.
+             * \param sample If \c true, hetero-atom-H torsions are included in the driving.
+             */
             void sampleHeteroAtomHydrogens(bool sample);
 
+            /**
+             * \brief Tells whether torsion angles around bonds to hetero-atom hydrogens are sampled.
+             * \return \c true if sampling is enabled, and \c false otherwise.
+             */
             bool sampleHeteroAtomHydrogens() const;
 
+            /**
+             * \brief Specifies whether additional torsion samples within the tolerance ranges of each rule shall be generated.
+             * \param sample If \c true, tolerance-range sampling is enabled.
+             */
             void sampleAngleToleranceRanges(bool sample);
 
+            /**
+             * \brief Tells whether tolerance-range sampling is enabled.
+             * \return \c true if tolerance-range sampling is enabled, and \c false otherwise.
+             */
             bool sampleAngleToleranceRanges() const;
 
+            /**
+             * \brief Specifies whether the generated conformers shall be sorted by ascending energy.
+             * \param order If \c true, the output is sorted by energy.
+             */
             void orderByEnergy(bool order);
 
+            /**
+             * \brief Tells whether the generated conformers are sorted by ascending energy.
+             * \return \c true if energy ordering is enabled, and \c false otherwise.
+             */
             bool orderByEnergy() const;
 
+            /**
+             * \brief Sets the energy-window size (in kcal/mol) above the global minimum within which conformers are kept.
+             * \param win_size The new energy-window size in kcal/mol.
+             */
             void setEnergyWindow(double win_size);
 
+            /**
+             * \brief Returns the configured energy-window size.
+             * \return The energy-window size in kcal/mol.
+             */
             double getEnergyWindow() const;
 
+            /**
+             * \brief Sets the maximum number of conformers retained in the internal candidate pool.
+             * \param max_size The new maximum pool size.
+             */
             void setMaxPoolSize(std::size_t max_size);
 
+            /**
+             * \brief Returns the maximum number of conformers retained in the internal candidate pool.
+             * \return The maximum pool size.
+             */
             std::size_t getMaxPoolSize() const;
 
+            /**
+             * \brief Sets the force-field type used to score the generated conformers.
+             * \param type One of the ConfGen::ForceFieldType values.
+             */
             void setForceFieldType(unsigned int type);
 
+            /**
+             * \brief Returns the force-field type used to score the generated conformers.
+             * \return One of the ConfGen::ForceFieldType values.
+             */
             unsigned int getForceFieldType() const;
 
+            /**
+             * \brief Specifies whether strict MMFF94 parameterization is required.
+             * \param strict If \c true, missing/ambiguous parameters cause a failure;
+             *               if \c false, fallback parameters are used.
+             */
             void strictForceFieldParameterization(bool strict);
 
+            /**
+             * \brief Tells whether strict MMFF94 parameterization is required.
+             * \return \c true if strict parameterization is required, and \c false otherwise.
+             */
             bool strictForceFieldParameterization() const;
 
+            /**
+             * \brief Sets the dielectric constant used by the MMFF94 electrostatic interactions.
+             * \param de_const The new dielectric constant.
+             */
             void setDielectricConstant(double de_const);
 
+            /**
+             * \brief Returns the dielectric constant used by the MMFF94 electrostatic interactions.
+             * \return The dielectric constant.
+             */
             double getDielectricConstant() const;
 
+            /**
+             * \brief Sets the exponent of the MMFF94 distance-dependent electrostatic term.
+             * \param exponent The new distance exponent.
+             */
             void setDistanceExponent(double exponent);
 
+            /**
+             * \brief Returns the exponent of the MMFF94 distance-dependent electrostatic term.
+             * \return The distance exponent.
+             */
             double getDistanceExponent() const;
 
           private:
