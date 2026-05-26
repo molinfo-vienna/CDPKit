@@ -106,7 +106,7 @@ namespace CDPL
             const CallbackFunction& getAbortCallback() const;
 
             /**
-             * \brief Sets the callback invoked periodically to check whether the configured generation timeout has elapsed.
+             * \brief Sets the callback invoked periodically to check whether the configured timeout has elapsed.
              * \param func The timeout-check callback.
              */
             void setTimeoutCallback(const CallbackFunction& func);

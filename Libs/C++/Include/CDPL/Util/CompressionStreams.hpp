@@ -93,7 +93,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base class for stream wrappers that buffer (de)compressed data through a temporary file.
+         * \brief %Base class for stream wrappers that buffer (de)compressed data through a temporary file.
          *
          * Subclasses inherit a hidden \c std::basic_filebuf and use it as the working buffer while transparently
          * compressing/decompressing data on open/close.

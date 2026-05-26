@@ -56,7 +56,7 @@ namespace CDPL
          *
          * The buriedness score is computed by casting a configurable number of test rays evenly distributed
          * over the surface of a probe sphere centered at the query position. For each ray it is checked
-         * whether the ray hits an atom of the input container (the van der Waals surface, expanded by a
+         * whether the ray hits an atom of the input container (the Van der Waals surface, expanded by a
          * minimum distance) within the probe sphere. The returned score is the fraction of rays that
          * hit an atom and thus reflects how surrounded by the atoms the query position is.
          */
@@ -70,7 +70,7 @@ namespace CDPL
             static constexpr double DEF_PROBE_RADIUS             = 8.0;
 
             /**
-             * \brief Default minimum required distance between a ray and the van der Waals surface of an atom.
+             * \brief Default minimum required distance between a ray and the Van der Waals surface of an atom.
              */
             static constexpr double DEF_MIN_VDW_SURFACE_DISTANCE = 1.0;
 
@@ -82,7 +82,7 @@ namespace CDPL
             /**
              * \brief Constructs a \c %BuriednessScore instance with the given configuration.
              * \param probe_radius The probe sphere radius.
-             * \param min_vdw_surf_dist The minimum distance to the van der Waals surface of an atom.
+             * \param min_vdw_surf_dist The minimum distance to the Van der Waals surface of an atom.
              * \param num_test_rays The number of rays used in the calculation.
              */
             BuriednessScore(double probe_radius = DEF_PROBE_RADIUS, double min_vdw_surf_dist = DEF_MIN_VDW_SURFACE_DISTANCE,
@@ -101,14 +101,14 @@ namespace CDPL
             double getProbeRadius() const;
 
             /**
-             * \brief Sets the minimum required distance between a ray and the van der Waals surface of an atom.
-             * \param dist The minimum distance to the van der Waals surface.
+             * \brief Sets the minimum required distance between a ray and the Van der Waals surface of an atom.
+             * \param dist The minimum distance to the Van der Waals surface.
              */
             void setMinVdWSurfaceDistance(double dist);
 
             /**
-             * \brief Returns the currently configured minimum distance to the van der Waals surface of an atom.
-             * \return The configured minimum distance to the van der Waals surface.
+             * \brief Returns the currently configured minimum distance to the Van der Waals surface of an atom.
+             * \return The configured minimum distance to the Van der Waals surface.
              */
             double getMinVdWSurfaceDistance() const;
 

@@ -163,35 +163,35 @@ namespace CDPL
             void setFactorDAEPS(double value);
 
             /**
-             * \brief Returns the exponent used in the calculation of van der Waals
+             * \brief Returns the exponent used in the calculation of Van der Waals
              *        interaction energies.
              * \return The exponent.
              */
             double getExponent() const;
 
             /**
-             * \brief Returns the value of the \e B factor used in the calculation of van der Waals
+             * \brief Returns the value of the \e B factor used in the calculation of Van der Waals
              *        interaction energies.
              * \return The value of the \e B factor.
              */
             double getFactorB() const;
 
             /**
-             * \brief Returns the value of \e beta used in the calculation of van der Waals
+             * \brief Returns the value of \e beta used in the calculation of Van der Waals
              *        interaction energies.
              * \return The value of \e beta.
              */
             double getBeta() const;
 
             /**
-             * \brief Returns the value of the \e DARAD factor used in the calculation of van der Waals
+             * \brief Returns the value of the \e DARAD factor used in the calculation of Van der Waals
              *        interaction energies.
              * \return The value of the \e DARAD factor.
              */
             double getFactorDARAD() const;
 
             /**
-             * \brief Returns the value of the \e DAEPS factor used in the calculation of van der Waals
+             * \brief Returns the value of the \e DAEPS factor used in the calculation of Van der Waals
              *        interaction energies.
              * \return The value of the \e DAEPS factor.
              */

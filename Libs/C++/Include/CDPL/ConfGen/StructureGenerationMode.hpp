@@ -37,16 +37,25 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants used to specify the employed structure generation method.
+         * \brief Provides constants used to specify the 3D structure generation method that shall be employed.
          */
         namespace StructureGenerationMode
         {
 
-            /** \brief Selects the structure-generation strategy heuristically based on the input molecule. */
+            /**
+             * \brief Specifies to select the structure generation strategy heuristically based on characteristics of the input molecule.
+             */
             constexpr unsigned int AUTO              = 0;
-            /** \brief Selects the fragment-based structure-generation strategy (assembly from pre-built fragment conformers). */
+
+            /**
+             * \brief Specifies to perform structure generation by assembly of pre-built fragment conformers.
+             */
             constexpr unsigned int FRAGMENT          = 1;
-            /** \brief Selects the distance-geometry structure-generation strategy. */
+
+            /**
+             * \brief Specifies to perform structure generation by a combination of distance geometry-based raw
+             *        coordinates generation and subsequent force field refinement.
+             */
             constexpr unsigned int DISTANCE_GEOMETRY = 2;
         } // namespace StructureGenerationMode
     } // namespace ConfGen

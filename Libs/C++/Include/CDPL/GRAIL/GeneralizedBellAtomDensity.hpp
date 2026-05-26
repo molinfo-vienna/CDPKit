@@ -50,7 +50,7 @@ namespace CDPL
          *        at a query position.
          *
          * The density falls off with distance from the atom according to a generalized bell function
-         * parameterized by the atom's van der Waals radius (scaled by a configurable factor) and the
+         * parameterized by the atom's Van der Waals radius (scaled by a configurable factor) and the
          * radius of a probe sphere.
          */
         class CDPL_GRAIL_API GeneralizedBellAtomDensity
@@ -63,14 +63,14 @@ namespace CDPL
             static constexpr double DEF_PROBE_RADIUS          = 0.0;
 
             /**
-             * \brief Default scaling factor applied to atom van der Waals radii.
+             * \brief Default scaling factor applied to atom Van der Waals radii.
              */
             static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.0;
 
             /**
              * \brief Constructs a \c %GeneralizedBellAtomDensity instance with the given configuration.
              * \param probe_radius The probe sphere radius.
-             * \param rad_scaling_factor The scaling factor applied to atom van der Waals radii.
+             * \param rad_scaling_factor The scaling factor applied to atom Van der Waals radii.
              */
             GeneralizedBellAtomDensity(double probe_radius = DEF_PROBE_RADIUS, double rad_scaling_factor = DEF_RADIUS_SCALING_FACTOR):
                 probeRadius(probe_radius), radiusScalingFactor(rad_scaling_factor) {}
@@ -82,7 +82,7 @@ namespace CDPL
             double getProbeRadius() const;
 
             /**
-             * \brief Returns the currently configured van der Waals radius scaling factor.
+             * \brief Returns the currently configured Van der Waals radius scaling factor.
              * \return The configured scaling factor.
              */
             double getRadiusScalingFactor() const;

@@ -44,22 +44,20 @@ namespace CDPL
     {
 
         /**
-         * \brief Bundle of configuration parameters for ConfGen::ConformerGenerator.
+         * \brief Bundle of configuration parameters for conformer ensemble generation via class ConfGen::ConformerGenerator.
          */
         class CDPL_CONFGEN_API ConformerGeneratorSettings
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed ConformerGeneratorSettings. */
+            /** \brief Default settings used by a freshly-constructed ConformerGeneratorSettings instance. */
             static const ConformerGeneratorSettings DEFAULT;
-
             /** \brief Preset producing a small, diversity-optimized conformer ensemble. */
             static const ConformerGeneratorSettings SMALL_SET_DIVERSE;
             /** \brief Preset producing a medium-sized, diversity-optimized conformer ensemble. */
             static const ConformerGeneratorSettings MEDIUM_SET_DIVERSE;
             /** \brief Preset producing a large, diversity-optimized conformer ensemble. */
             static const ConformerGeneratorSettings LARGE_SET_DIVERSE;
-
             /** \brief Preset producing a small, dense conformer ensemble (tight RMSD threshold). */
             static const ConformerGeneratorSettings SMALL_SET_DENSE;
             /** \brief Preset producing a medium-sized, dense conformer ensemble (tight RMSD threshold). */
@@ -73,7 +71,7 @@ namespace CDPL
             ConformerGeneratorSettings();
 
             /**
-             * \brief Sets the conformer-sampling strategy.
+             * \brief Specifies the conformer-sampling strategy to use.
              * \param mode One of the ConfGen::ConformerSamplingMode values.
              */
             void setSamplingMode(unsigned int mode);
@@ -85,13 +83,13 @@ namespace CDPL
             unsigned int getSamplingMode() const;
 
             /**
-             * \brief Specifies whether torsion angles around bonds to hetero-atom hydrogens shall be sampled.
-             * \param sample If \c true, hetero-atom-H torsions are included in the sampling.
+             * \brief Specifies whether torsions of hetero-atom hydrogen rotors shall be sampled.
+             * \param sample If \c true, hetero-atom-H torsions are sampled.
              */
             void sampleHeteroAtomHydrogens(bool sample);
 
             /**
-             * \brief Tells whether torsion angles around bonds to hetero-atom hydrogens are sampled.
+             * \brief Tells whether torsions of hetero-atom hydrogen rotors are sampled.
              * \return \c true if sampling is enabled, and \c false otherwise.
              */
             bool sampleHeteroAtomHydrogens() const;
@@ -127,7 +125,7 @@ namespace CDPL
             void setNitrogenEnumerationMode(unsigned int mode);
 
             /**
-             * \brief Returns the currently configured stereogenic-nitrogen enumeration mode.
+             * \brief Returns the currently configured nitrogen enumeration mode.
              * \return One of the ConfGen::NitrogenEnumerationMode values.
              */
             unsigned int getNitrogenEnumerationMode() const;
@@ -145,25 +143,25 @@ namespace CDPL
             bool generateCoordinatesFromScratch() const;
 
             /**
-             * \brief Specifies whether the input 3D coordinates of \a molgraph shall be included in the output conformer set.
+             * \brief Specifies whether the input conformation shall be included in the output conformer ensemble.
              * \param include If \c true, the input coordinates become part of the output ensemble.
              */
             void includeInputCoordinates(bool include);
 
             /**
-             * \brief Tells whether the input coordinates are included in the output conformer set.
+             * \brief Tells whether the input coordinates are included in the output conformer ensemble.
              * \return \c true if the input coordinates are included, and \c false otherwise.
              */
             bool includeInputCoordinates() const;
 
             /**
-             * \brief Sets the energy-window size (in kcal/mol) above the global minimum within which conformers are kept.
+             * \brief Sets the energy-window size (in kcal/mol) above the found global minimum within which conformers are kept.
              * \param win_size The new energy-window size in kcal/mol.
              */
             void setEnergyWindow(double win_size);
 
             /**
-             * \brief Returns the globally configured energy-window size.
+             * \brief Returns the configured energy-window size.
              * \return The energy-window size in kcal/mol.
              */
             double getEnergyWindow() const;
@@ -171,51 +169,51 @@ namespace CDPL
             /**
              * \brief Returns the energy-window size that applies for molecules with \a num_rot_bonds rotatable bonds.
              *
-             * If a rotatable-bond-specific range was registered via addEnergyWindowRange(), the matching value
+             * If a rotatable bond-specific range was registered via addEnergyWindowRange(), the matching value
              * is returned; otherwise the global window from getEnergyWindow() is used.
              *
-             * \param num_rot_bonds The rotatable-bond count.
+             * \param num_rot_bonds The rotatable bond count.
              * \return The energy-window size in kcal/mol.
              * \since 1.1
              */
             double getEnergyWindow(std::size_t num_rot_bonds) const;
 
             /**
-             * \brief Removes all registered rotatable-bond-count-dependent energy-window overrides.
+             * \brief Removes all registered rotatable bond count-dependent energy-window overrides.
              * \since 1.1
              */
             void clearEnergyWindowRanges();
 
             /**
              * \brief Registers an energy-window override that applies up to and including \a num_rot_bonds rotatable bonds.
-             * \param num_rot_bonds The upper-bound rotatable-bond count to which \a win_size applies.
-             * \param win_size The energy-window size (in kcal/mol) used for matching molecules.
+             * \param num_rot_bonds The upper-bound rotatable bond count to which \a win_size applies.
+             * \param win_size The energy-window size (in kcal/mol).
              * \since 1.1
              */
             void addEnergyWindowRange(std::size_t num_rot_bonds, double win_size);
 
             /**
-             * \brief Sets the maximum number of conformers retained in the internal candidate pool.
+             * \brief Sets the maximum number of conformers in the internal candidate pool.
              * \param max_size The new maximum pool size.
              */
             void setMaxPoolSize(std::size_t max_size);
 
             /**
-             * \brief Returns the maximum number of conformers retained in the internal candidate pool.
+             * \brief Returns the maximum number of conformers in the internal candidate pool.
              * \return The maximum pool size.
              */
             std::size_t getMaxPoolSize() const;
 
             /**
              * \brief Sets the upper limit on the number of rotatable bonds an input molecule may have to be processed.
-             * \param max_count The new rotatable-bond-count limit (\e -1 disables the limit).
+             * \param max_count The new rotatable bond count limit (\e -1 disables the limit).
              * \since 1.1
              */
             void setMaxRotatableBondCount(long max_count);
 
             /**
-             * \brief Returns the rotatable-bond-count limit above which input molecules are rejected.
-             * \return The rotatable-bond-count limit (\e -1 disables the limit).
+             * \brief Returns the rotatable bond count limit above which input molecules are rejected.
+             * \return The rotatable bond count limit (\e -1 disables the limit).
              * \since 1.1
              */
             long getMaxRotatableBondCount() const;
@@ -233,25 +231,25 @@ namespace CDPL
             std::size_t getTimeout() const;
 
             /**
-             * \brief Sets the force-field type used by the systematic sampling pipeline.
+             * \brief Sets the force field type used by the systematic sampling pipeline.
              * \param type One of the ConfGen::ForceFieldType values.
              */
             void setForceFieldTypeSystematic(unsigned int type);
 
             /**
-             * \brief Returns the force-field type used by the systematic sampling pipeline.
+             * \brief Returns the force field type used by the systematic sampling pipeline.
              * \return One of the ConfGen::ForceFieldType values.
              */
             unsigned int getForceFieldTypeSystematic() const;
 
             /**
-             * \brief Sets the force-field type used by the stochastic sampling pipeline.
+             * \brief Sets the force field type used by the stochastic sampling pipeline.
              * \param type One of the ConfGen::ForceFieldType values.
              */
             void setForceFieldTypeStochastic(unsigned int type);
 
             /**
-             * \brief Returns the force-field type used by the stochastic sampling pipeline.
+             * \brief Returns the force field type used by the stochastic sampling pipeline.
              * \return One of the ConfGen::ForceFieldType values.
              */
             unsigned int getForceFieldTypeStochastic() const;
@@ -259,7 +257,7 @@ namespace CDPL
             /**
              * \brief Specifies whether strict MMFF94 parameterization is required.
              * \param strict If \c true, missing/ambiguous parameters cause a generation failure;
-             *               if \c false, fallback parameters are used.
+             *               if \c false, suitable fallback parameters are used.
              */
             void strictForceFieldParameterization(bool strict);
 
@@ -295,38 +293,38 @@ namespace CDPL
 
             /**
              * \brief Sets the maximum number of output conformers per molecule.
-             * \param max_num The new output-conformer limit.
+             * \param max_num The new output conformer count limit.
              */
             void setMaxNumOutputConformers(std::size_t max_num);
 
             /**
-             * \brief Returns the globally configured maximum number of output conformers.
-             * \return The output-conformer limit.
+             * \brief Returns the configured maximum number of output conformers.
+             * \return The output conformer count limit.
              */
             std::size_t getMaxNumOutputConformers() const;
 
             /**
              * \brief Returns the maximum number of output conformers that applies for molecules with \a num_rot_bonds rotatable bonds.
              *
-             * If a rotatable-bond-specific range was registered via addMaxNumOutputConformersRange(), the matching value
+             * If a rotatable bond-specific range was registered via addMaxNumOutputConformersRange(), the matching value
              * is returned; otherwise the global limit from getMaxNumOutputConformers() is used.
              *
-             * \param num_rot_bonds The rotatable-bond count.
-             * \return The output-conformer limit.
+             * \param num_rot_bonds The rotatable bond count.
+             * \return The output conformer limit.
              * \since 1.1
              */
             std::size_t getMaxNumOutputConformers(std::size_t num_rot_bonds) const;
 
             /**
-             * \brief Removes all registered rotatable-bond-count-dependent output-conformer overrides.
+             * \brief Removes all registered rotatable bond count-dependent output conformer overrides.
              * \since 1.1
              */
             void clearMaxNumOutputConformersRanges();
 
             /**
-             * \brief Registers an output-conformer limit override that applies up to and including \a num_rot_bonds rotatable bonds.
-             * \param num_rot_bonds The upper-bound rotatable-bond count to which \a max_num applies.
-             * \param max_num The output-conformer limit used for matching molecules.
+             * \brief Registers an output conformer limit override that applies up to and including \a num_rot_bonds rotatable bonds.
+             * \param num_rot_bonds The upper-bound rotatable bond count to which \a max_num applies.
+             * \param max_num The output conformer limit used for matching molecules.
              * \since 1.1
              */
             void addMaxNumOutputConformersRange(std::size_t num_rot_bonds, std::size_t max_num);
@@ -346,62 +344,62 @@ namespace CDPL
             /**
              * \brief Returns the minimum RMSD threshold that applies for molecules with \a num_rot_bonds rotatable bonds.
              *
-             * If a rotatable-bond-specific range was registered via addMinRMSDRange(), the matching value
+             * If a rotatable bond-specific range was registered via addMinRMSDRange(), the matching value
              * is returned; otherwise the global threshold from getMinRMSD() is used.
              *
-             * \param num_rot_bonds The rotatable-bond count.
+             * \param num_rot_bonds The rotatable bond count.
              * \return The minimum RMSD threshold (in &Aring;).
              * \since 1.1
              */
             double getMinRMSD(std::size_t num_rot_bonds) const;
 
             /**
-             * \brief Removes all registered rotatable-bond-count-dependent minimum-RMSD overrides.
+             * \brief Removes all registered rotatable bond count-dependent minimum RMSD overrides.
              * \since 1.1
              */
             void clearMinRMSDRanges();
 
             /**
-             * \brief Registers a minimum-RMSD override that applies up to and including \a num_rot_bonds rotatable bonds.
-             * \param num_rot_bonds The upper-bound rotatable-bond count to which \a min_rmsd applies.
+             * \brief Registers a minimum RMSD override that applies up to and including \a num_rot_bonds rotatable bonds.
+             * \param num_rot_bonds The upper-bound rotatable bond count to which \a min_rmsd applies.
              * \param min_rmsd The minimum RMSD threshold used for matching molecules.
              * \since 1.1
              */
             void addMinRMSDRange(std::size_t num_rot_bonds, double min_rmsd);
 
             /**
-             * \brief Sets the maximum number of MMFF94 energy-minimization iterations per conformer.
+             * \brief Sets the maximum number of MMFF94 energy minimization iterations per conformer.
              * \param max_iter The new iteration limit (zero disables refinement).
              */
             void setMaxNumRefinementIterations(std::size_t max_iter);
 
             /**
-             * \brief Returns the maximum number of MMFF94 energy-minimization iterations per conformer.
+             * \brief Returns the maximum number of MMFF94 energy minimization iterations per conformer.
              * \return The iteration limit (zero if refinement is disabled).
              */
             std::size_t getMaxNumRefinementIterations() const;
 
             /**
-             * \brief Sets the convergence tolerance of the MMFF94 energy-minimization step.
+             * \brief Sets the convergence tolerance of the MMFF94 energy minimization step.
              * \param tol The new convergence tolerance.
              */
             void setRefinementTolerance(double tol);
 
             /**
-             * \brief Returns the convergence tolerance of the MMFF94 energy-minimization step.
+             * \brief Returns the convergence tolerance of the MMFF94 energy minimization step.
              * \return The convergence tolerance.
              */
             double getRefinementTolerance() const;
 
             /**
              * \brief Sets the upper bound on the number of trial conformations produced by the stochastic sampler.
-             * \param max_num The new sampled-conformer limit.
+             * \param max_num The new sampled conformer limit.
              */
             void setMaxNumSampledConformers(std::size_t max_num);
 
             /**
              * \brief Returns the upper bound on the number of trial conformations produced by the stochastic sampler.
-             * \return The sampled-conformer limit.
+             * \return The sampled conformer limit.
              */
             std::size_t getMaxNumSampledConformers() const;
 
@@ -418,25 +416,25 @@ namespace CDPL
             std::size_t getConvergenceCheckCycleSize() const;
 
             /**
-             * \brief Sets the minimum number of rotatable bonds a macrocyclic ring must contain to be processed by the macrocycle treatment.
-             * \param min_count The new macrocycle rotatable-bond count threshold.
+             * \brief Sets the minimum number of rotatable bonds a ring must contain to be considered as a flexible macrocycle.
+             * \param min_count The new macrocycle rotatable bond count threshold.
              */
             void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
             /**
-             * \brief Returns the macrocycle rotatable-bond count threshold.
+             * \brief Returns the macrocycle rotatable bond count threshold.
              * \return The threshold.
              */
             std::size_t getMacrocycleRotorBondCountThreshold() const;
 
             /**
-             * \brief Returns a reference to the nested fragment-conformer build settings.
+             * \brief Returns a reference to the nested fragment conformer build settings.
              * \return A reference to the build settings.
              */
             FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
             /**
-             * \brief Returns a \c const reference to the nested fragment-conformer build settings.
+             * \brief Returns a \c const reference to the nested fragment conformer build settings.
              * \return A \c const reference to the build settings.
              */
             const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;

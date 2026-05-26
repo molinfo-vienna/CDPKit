@@ -46,7 +46,7 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed FragmentAssemblerSettings. */
+            /** \brief Default settings used by a freshly-constructed FragmentAssemblerSettings instance. */
             static const FragmentAssemblerSettings DEFAULT;
 
             /**

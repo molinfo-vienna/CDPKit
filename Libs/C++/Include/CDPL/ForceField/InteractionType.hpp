@@ -73,7 +73,7 @@ namespace CDPL
             constexpr unsigned int TORSION              = 0x10;
 
             /**
-             * \brief Specifies a van der Waals interaction.
+             * \brief Specifies a Van der Waals interaction.
              */
             constexpr unsigned int VAN_DER_WAALS        = 0x20;
 

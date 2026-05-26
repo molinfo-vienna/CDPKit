@@ -73,7 +73,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94AtomTyper> SharedPointer;
 
             /**
-             * \brief Constructs an empty \c %MMFF94AtomTyper instance using the default MMFF94 tables.
+             * \brief Constructs an empty \c %MMFF94AtomTyper instance using the default MMFF94 parameter tables.
              */
             MMFF94AtomTyper();
 

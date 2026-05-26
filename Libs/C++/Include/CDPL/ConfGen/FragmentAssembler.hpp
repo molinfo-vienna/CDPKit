@@ -114,7 +114,7 @@ namespace CDPL
             void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
             /**
-             * \brief Sets the callback invoked periodically to allow the assembly to be aborted by the user.
+             * \brief Sets the callback invoked periodically to allow the processing to be aborted by the user.
              * \param func The abort-check callback.
              */
             void setAbortCallback(const CallbackFunction& func);
@@ -126,17 +126,17 @@ namespace CDPL
             const CallbackFunction& getAbortCallback() const;
 
             /**
-             * \brief Sets the callback invoked when the configured timeout is reached.
-             * \param func The timeout callback.
+             * \brief Sets the callback invoked periodically to check whether the configured timeout has elapsed.
+             * \param func The timeout-check callback.
              */
             void setTimeoutCallback(const CallbackFunction& func);
 
             /**
-             * \brief Returns the currently configured timeout callback.
-             * \return A \c const reference to the timeout callback.
+             * \brief Returns the currently configured timeout-check callback.
+             * \return A \c const reference to the timeout-check callback.
              */
             const CallbackFunction& getTimeoutCallback() const;
-
+       
             /**
              * \brief Sets the callback receiving log messages emitted by the assembler.
              * \param func The log-message callback.

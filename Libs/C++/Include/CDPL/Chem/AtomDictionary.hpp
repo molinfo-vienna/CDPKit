@@ -88,7 +88,7 @@ namespace CDPL
                  * \param metal \c true if the element is a metal.
                  * \param non_metal \c true if the element is a non-metal.
                  * \param val_states The valence states of the element.
-                 * \param vdw_rad The van der Waals radius of the element.
+                 * \param vdw_rad The Van der Waals radius of the element.
                  * \param cov_radii Array of covalent radii indexed by bond order (single, double, triple).
                  * \param ar_eneg The Allred-Rochow electronegativity of the element.
                  * \param iso_masses Map from isotope mass number to its relative isotopic mass.
@@ -165,8 +165,8 @@ namespace CDPL
                 const Util::STArray& getValenceStates() const;
 
                 /**
-                 * \brief Returns the van der Waals radius of the element.
-                 * \return The van der Waals radius.
+                 * \brief Returns the Van der Waals radius of the element.
+                 * \return The Van der Waals radius.
                  */
                 double getVdWRadius() const;
 
@@ -393,9 +393,9 @@ namespace CDPL
             static double getAtomicWeight(unsigned int type, std::size_t isotope = 0);
 
             /**
-             * \brief Returns the <em>van der Waals</em> radius of the chemical element specified by \a type.
+             * \brief Returns the <em>Van der Waals</em> radius of the chemical element specified by \a type.
              * \param type The atom type specifying the chemical element.
-             * \return The <em>van der Waals</em> radius, or \e 0.0 if \a type
+             * \return The <em>Van der Waals</em> radius, or \e 0.0 if \a type
              *         does not specify a supported chemical element.
              */
             static double getVdWRadius(unsigned int type);

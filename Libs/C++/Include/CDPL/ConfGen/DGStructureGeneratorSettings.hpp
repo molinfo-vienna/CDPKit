@@ -47,7 +47,7 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings. */
+            /** \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings instance. */
             static const DGStructureGeneratorSettings DEFAULT;
 
             /**

@@ -265,9 +265,9 @@ namespace CDPL
         CDPL_MOLPROP_API std::size_t getPeriod(const Chem::Atom& atom);
 
         /**
-         * \brief Returns the van der Waals radius of the chemical element associated with \a atom.
+         * \brief Returns the Van der Waals radius of the chemical element associated with \a atom.
          * \param atom The atom.
-         * \return The van der Waals radius.
+         * \return The Van der Waals radius.
          */
         CDPL_MOLPROP_API double getVdWRadius(const Chem::Atom& atom);
 

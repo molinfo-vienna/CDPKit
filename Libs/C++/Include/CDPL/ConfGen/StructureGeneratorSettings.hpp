@@ -48,7 +48,7 @@ namespace CDPL
         {
 
           public:
-            /** \brief A static instance with default-initialized values. */
+            /** \brief A static instance providing settings default values. */
             static const StructureGeneratorSettings DEFAULT;
 
             /**

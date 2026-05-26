@@ -118,7 +118,7 @@ namespace CDPL
             bool includeHydrogens() const;
 
             /**
-             * \brief Sets the sphere radius used for all atoms (negative value: use atom-specific van der Waals radii).
+             * \brief Sets the sphere radius used for all atoms (negative value: use atom-specific Van der Waals radii).
              * \param radius The new atom sphere radius.
              */
             void setAtomRadius(double radius);

@@ -219,7 +219,7 @@ namespace CDPL
             void add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
             /**
-             * \brief Adds default (van der Waals-derived) lower/upper distance constraints between all
+             * \brief Adds default (Van der Waals-derived) lower/upper distance constraints between all
              *        non-bonded atom pairs to \a coords_gen.
              * \param coords_gen The coordinates generator to add the constraints to.
              */

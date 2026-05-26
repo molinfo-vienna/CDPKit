@@ -47,7 +47,7 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed TorsionDriverSettings. */
+            /** \brief Default settings used by a freshly-constructed TorsionDriverSettings instance. */
             static const TorsionDriverSettings DEFAULT;
 
             /**

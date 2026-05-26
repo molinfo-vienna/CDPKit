@@ -114,7 +114,7 @@ namespace CDPL
          * \param pharm The pharmacophore to filter.
          * \param cntnr The atom container providing the clash partners.
          * \param coords_func The function returning the 3D coordinates of an atom.
-         * \param vdw_scaling_fact Scaling factor applied to the per-atom van der Waals radius during the clash test.
+         * \param vdw_scaling_fact Scaling factor applied to the per-atom Van der Waals radius during the clash test.
          * \return \c true if at least one exclusion volume was removed, and \c false otherwise.
          */
         CDPL_PHARM_API bool removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,
@@ -126,7 +126,7 @@ namespace CDPL
          * \param pharm The pharmacophore to modify.
          * \param cntnr The atom container providing the clash partners.
          * \param coords_func The function returning the 3D coordinates of an atom.
-         * \param vdw_scaling_fact Scaling factor applied to the per-atom van der Waals radius during the clash test.
+         * \param vdw_scaling_fact Scaling factor applied to the per-atom Van der Waals radius during the clash test.
          * \return \c true if at least one exclusion volume was resized or removed, and \c false otherwise.
          */
         CDPL_PHARM_API bool resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,

@@ -45,7 +45,7 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings. */
+            /** \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings instance. */
             static const DGConstraintGeneratorSettings DEFAULT;
 
             /**

@@ -415,7 +415,7 @@ namespace CDPL
         ValueType calcMMFF94VanDerWaalsEnergy(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair \e i-j.
+         * \brief Calculates the Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair \e i-j.
          *
          * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
          *
@@ -447,14 +447,14 @@ namespace CDPL
          * \param e_IJ The precalculated value \f$ \varepsilon_{IJ} \f$.
          * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
          * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
-         * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+         * \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& e_IJ,
                                               const ValueType& r_IJ, const ValueType& r_IJ_7);
 
         /**
-         * \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair \e i-j.
+         * \brief Calculates the Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair \e i-j.
          *
          * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
          *
@@ -485,7 +485,7 @@ namespace CDPL
          * \param e_IJ The precalculated value \f$ \varepsilon_{IJ} \f$.
          * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
          * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
-         * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+         * \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
          */
         template <typename ValueType>
         ValueType calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ,

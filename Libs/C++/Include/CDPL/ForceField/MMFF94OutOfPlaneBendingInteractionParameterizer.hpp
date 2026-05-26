@@ -71,7 +71,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94OutOfPlaneBendingInteractionParameterizer> SharedPointer;
 
             /**
-             * \brief Constructs an \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance using the default MMFF94 tables.
+             * \brief Constructs an \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance using the default MMFF94 parameter tables.
              */
             MMFF94OutOfPlaneBendingInteractionParameterizer();
 

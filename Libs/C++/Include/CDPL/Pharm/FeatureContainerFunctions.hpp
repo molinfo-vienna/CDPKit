@@ -164,13 +164,13 @@ namespace CDPL
          *
          * Each enabled feature of type Pharm::FeatureType::EXCLUSION_VOLUME is checked against every atom of \a atom_cntnr:
          * a clash is reported as soon as the distance between feature and atom is smaller than the sum of the feature's position
-         * tolerance and \a vdw_factor times the atom's van der Waals radius.
+         * tolerance and \a vdw_factor times the atom's Van der Waals radius.
          *
          * \param ftr_cntnr The feature container providing the exclusion-volume features.
          * \param atom_cntnr The atom container providing the test atoms.
          * \param coords_func The function returning the 3D coordinates of an atom.
          * \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
-         * \param vdw_factor Scaling factor for the per-atom van der Waals radii; if &le; 0 the atoms are treated as point particles.
+         * \param vdw_factor Scaling factor for the per-atom Van der Waals radii; if &le; 0 the atoms are treated as point particles.
          * \return \c true if no clash is detected, and \c false otherwise.
          */
         CDPL_PHARM_API bool checkForExclusionVolumeClashes(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr,

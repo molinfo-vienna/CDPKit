@@ -40,9 +40,9 @@ namespace CDPL
     {
 
         /**
-         * \brief A single MMFF94 van der Waals interaction between two non-bonded atoms.
+         * \brief A single MMFF94 Van der Waals interaction between two non-bonded atoms.
          *
-         * The MMFF94 van der Waals form is a buffered 14-7 potential
+         * The MMFF94 Van der Waals form is a buffered 14-7 potential
          * \f$ E_{vdW} = \varepsilon_{IJ} \left( \frac{1.07 R_{IJ}}{r + 0.07 R_{IJ}} \right)^7 \left( \frac{1.12 R_{IJ}^7}{r^7 + 0.12 R_{IJ}^7} - 2 \right) \f$
          * with combined parameters \f$ R_{IJ} \f$ and \f$ \varepsilon_{IJ} \f$. The constructor performs the
          * MMFF94 combining rules using the per-atom polarizabilities, effective electron numbers and the
@@ -67,7 +67,7 @@ namespace CDPL
             };
 
             /**
-             * \brief Constructs the van der Waals interaction record and pre-computes the combined MMFF94 parameters.
+             * \brief Constructs the Van der Waals interaction record and pre-computes the combined MMFF94 parameters.
              * \param atom1_idx The zero-based index of the first atom.
              * \param atom2_idx The zero-based index of the second atom.
              * \param atom_pol1 The atomic polarizability \f$ \alpha_i \f$ of the first atom.

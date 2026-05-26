@@ -121,14 +121,14 @@ namespace CDPL
             const CallbackFunction& getAbortCallback() const;
 
             /**
-             * \brief Sets the callback invoked when the configured timeout is reached.
-             * \param func The timeout callback.
+             * \brief Sets the callback invoked periodically to check whether the configured timeout has elapsed.
+             * \param func The timeout-check callback.
              */
             void setTimeoutCallback(const CallbackFunction& func);
 
             /**
-             * \brief Returns the currently configured timeout callback.
-             * \return A \c const reference to the timeout callback.
+             * \brief Returns the currently configured timeout-check callback.
+             * \return A \c const reference to the timeout-check callback.
              */
             const CallbackFunction& getTimeoutCallback() const;
 

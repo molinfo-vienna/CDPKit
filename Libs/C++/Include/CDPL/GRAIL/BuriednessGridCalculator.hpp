@@ -59,7 +59,7 @@ namespace CDPL
          *        GRAIL::BuriednessScore.
          *
          * For each grid cell, the buriedness score with respect to the surrounding atoms is computed
-         * and stored. The configurable parameters (probe radius, minimum van der Waals surface
+         * and stored. The configurable parameters (probe radius, minimum Van der Waals surface
          * distance, number of test rays) are forwarded to the underlying BuriednessScore instance.
          */
         class CDPL_GRAIL_API BuriednessGridCalculator
@@ -95,14 +95,14 @@ namespace CDPL
             double getProbeRadius() const;
 
             /**
-             * \brief Sets the minimum required distance between a ray and the van der Waals surface of an atom.
-             * \param dist The minimum distance to the van der Waals surface.
+             * \brief Sets the minimum required distance between a ray and the Van der Waals surface of an atom.
+             * \param dist The minimum distance to the Van der Waals surface.
              */
             void setMinVdWSurfaceDistance(double dist);
 
             /**
-             * \brief Returns the currently configured minimum distance to the van der Waals surface of an atom.
-             * \return The configured minimum distance to the van der Waals surface.
+             * \brief Returns the currently configured minimum distance to the Van der Waals surface of an atom.
+             * \return The configured minimum distance to the Van der Waals surface.
              */
             double getMinVdWSurfaceDistance() const;
 

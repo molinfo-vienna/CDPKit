@@ -45,7 +45,7 @@ namespace CDPL
             /** \brief Operation completed successfully. */
             const int SUCCESS                        = 0;
 
-            /** \brief The operation could not be carried out because the object was not properly initialized. */
+            /** \brief The operation could not be carried out due to uninitialized input data. */
             const int UNINITIALIZED                  = 1;
 
             /** \brief The operation was terminated because the configured wall-clock time limit was exceeded. */
@@ -69,7 +69,7 @@ namespace CDPL
             /** \brief Conformer generation for at least one fragment timed out. */
             const int FRAGMENT_CONF_GEN_TIMEOUT      = 8;
 
-            /** \brief The submitted fragment has already been processed (FragmentLibraryGenerator). */
+            /** \brief The submitted fragment has already been processed. */
             const int FRAGMENT_ALREADY_PROCESSED     = 9;
 
             /** \brief The torsion-driving step failed. */

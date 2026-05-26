@@ -75,7 +75,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94AngleBendingInteractionParameterizer> SharedPointer;
 
             /**
-             * \brief Constructs an \c %MMFF94AngleBendingInteractionParameterizer instance using the default MMFF94 tables.
+             * \brief Constructs an \c %MMFF94AngleBendingInteractionParameterizer instance using the default MMFF94 parameter tables.
              */
             MMFF94AngleBendingInteractionParameterizer();
 

@@ -60,7 +60,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs an \c %MMFF94BondTyper instance using the default MMFF94 tables.
+             * \brief Constructs an \c %MMFF94BondTyper instance using the default MMFF94 parameter tables.
              */
             MMFF94BondTyper();
 

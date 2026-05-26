@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Base for classes dedicated to the generation of coordinates that fulfill user-provided point distance
+         * \brief %Base for classes dedicated to the generation of coordinates that fulfill user-provided point distance
          *        (and volume) constraints [\ref ASPE].
          */
         template <std::size_t Dim, typename T, typename Derived>

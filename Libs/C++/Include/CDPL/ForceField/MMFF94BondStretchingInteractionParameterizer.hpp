@@ -68,7 +68,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94BondStretchingInteractionParameterizer> SharedPointer;
 
             /**
-             * \brief Constructs an \c %MMFF94BondStretchingInteractionParameterizer instance using the default MMFF94 tables.
+             * \brief Constructs an \c %MMFF94BondStretchingInteractionParameterizer instance using the default MMFF94 parameter tables.
              */
             MMFF94BondStretchingInteractionParameterizer();
 

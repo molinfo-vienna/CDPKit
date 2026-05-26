@@ -37,18 +37,18 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants that are used to specify the mode of invertible nitrogen enumeration.
+         * \brief Provides constants for specifying the mode of invertible nitrogen enumeration.
          */
         namespace NitrogenEnumerationMode
         {
 
-            /** \brief Do not enumerate any invertible nitrogen stereo centers. */
+            /** \brief Do not enumerate invertible nitrogens. */
             const int NONE = 0;
 
-            /** \brief Enumerate both configurations at every invertible nitrogen stereo center. */
+            /** \brief Enumerate all invertible nitrogens. */
             const int ALL = 1;
 
-            /** \brief Enumerate both configurations only at invertible nitrogen stereo centers whose stereochemistry has not been explicitly specified. */
+            /** \brief Enumerate only those invertible nitrogens whose configuration has not been explicitly specified. */
             const int UNSPECIFIED_STEREO = 2;
         } // namespace NitrogenEnumerationMode
     } // namespace ConfGen

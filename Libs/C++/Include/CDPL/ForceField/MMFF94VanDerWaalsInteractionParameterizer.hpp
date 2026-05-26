@@ -52,10 +52,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Generates the MMFF94 van der Waals interactions for the non-bonded atom pairs of a molecular graph.
+         * \brief Generates the MMFF94 Van der Waals interactions for the non-bonded atom pairs of a molecular graph.
          *
          * For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom-type
-         * van der Waals parameters and the donor/acceptor classification from the supplied parameter table,
+         * Van der Waals parameters and the donor/acceptor classification from the supplied parameter table,
          * applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction record into the output list.
          */
         class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
@@ -66,13 +66,13 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94VanDerWaalsInteractionParameterizer> SharedPointer;
 
             /**
-             * \brief Constructs an \c %MMFF94VanDerWaalsInteractionParameterizer instance using the default MMFF94 tables.
+             * \brief Constructs an \c %MMFF94VanDerWaalsInteractionParameterizer instance using the default MMFF94 parameter tables.
              */
             MMFF94VanDerWaalsInteractionParameterizer();
 
             /**
              * \brief Constructs the parameterizer and immediately processes \a molgraph into \a ia_list.
-             * \param molgraph The molecular graph for which to parameterize the van der Waals interactions.
+             * \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
              * \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
              */
@@ -99,14 +99,14 @@ namespace CDPL
             void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func);
 
             /**
-             * \brief Sets the table providing per-numeric-atom-type van der Waals parameters and donor/acceptor classifications.
-             * \param table The new van der Waals parameter table.
+             * \brief Sets the table providing per-numeric-atom-type Van der Waals parameters and donor/acceptor classifications.
+             * \param table The new Van der Waals parameter table.
              */
             void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
             /**
-             * \brief Generates the MMFF94 van der Waals interactions for \a molgraph and writes them to \a ia_list.
-             * \param molgraph The molecular graph for which to parameterize the van der Waals interactions.
+             * \brief Generates the MMFF94 Van der Waals interactions for \a molgraph and writes them to \a ia_list.
+             * \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
              * \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
              */

@@ -384,7 +384,7 @@ namespace CDPL
          */
 
         /**
-         * \brief Calculates the van der Waals interaction energy gradient \f$ \nabla E_{vdW_{ij}} \f$ for the atom pair \e i-j.
+         * \brief Calculates the Van der Waals interaction energy gradient \f$ \nabla E_{vdW_{ij}} \f$ for the atom pair \e i-j.
          *
          * Energy function:<br>
          * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
@@ -429,7 +429,7 @@ namespace CDPL
          * \param e_IJ The precalculated value \f$ \varepsilon_{IJ} \f$.
          * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
          * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
-         * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+         * \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
          */

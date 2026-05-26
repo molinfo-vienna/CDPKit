@@ -46,7 +46,7 @@ namespace CDPL
          *
          * The calculator takes a ForceField::MMFF94InteractionData instance (typically produced by
          * ForceField::MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending,
-         * stretch-bend, out-of-plane bending, torsion, electrostatic and van der Waals energy contributions
+         * stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions
          * for a supplied set of 3D coordinates. The per-component energies are retained and made available
          * via the dedicated accessors; the sum is returned by operator() and getTotalEnergy().
          *
@@ -143,8 +143,8 @@ namespace CDPL
             const ValueType& getElectrostaticEnergy() const;
 
             /**
-             * \brief Returns the van der Waals energy contribution computed by the most recent operator() call.
-             * \return A \c const reference to the van der Waals energy.
+             * \brief Returns the Van der Waals energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the Van der Waals energy.
              */
             const ValueType& getVanDerWaalsEnergy() const;
 

@@ -51,7 +51,7 @@ namespace CDPL
         class GridExpression;
 
         /**
-         * \brief Base for binary in-place assignment functors of the form <tt>F::apply(T1, const T2&)</tt>.
+         * \brief %Base class for binary in-place assignment functors of the form <tt>F::apply(T1, const T2&)</tt>.
          *
          * Derived functors (Math::ScalarAssignment, Math::ScalarAdditionAssignment, Math::ScalarSubtractionAssignment,
          * Math::ScalarMultiplicationAssignment, Math::ScalarDivisionAssignment) implement the element-wise update of a
@@ -134,7 +134,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base for unary scalar functors of the form <tt>F::apply(const T&)</tt> returning a \a T result.
+         * \brief %Base class for unary scalar functors of the form <tt>F::apply(const T&)</tt> returning a \a T result.
          *
          * Derived functors (Math::ScalarNegation, Math::ScalarConjugation, Math::ScalarReal, Math::ScalarImaginary)
          * implement specific element-wise operations.
@@ -179,7 +179,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base for unary scalar functors that return the real part of \a T (Math::ScalarReal, Math::ScalarImaginary).
+         * \brief %Base class for unary scalar functors that return the real part of \a T (Math::ScalarReal, Math::ScalarImaginary).
          * \tparam T The scalar value type.
          */
         template <typename T>
@@ -220,7 +220,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base for binary scalar functors of the form <tt>F::apply(const T1&, const T2&)</tt> returning a Math::CommonType result.
+         * \brief %Base class for binary scalar functors of the form <tt>F::apply(const T1&, const T2&)</tt> returning a Math::CommonType result.
          *
          * Derived functors (Math::ScalarAddition, Math::ScalarSubtraction, Math::ScalarMultiplication, Math::ScalarDivision)
          * implement specific element-wise operations.
@@ -294,7 +294,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base for binary functors that take two vectors and return a scalar (Math::VectorInnerProduct, Math::VectorAngleCosine).
+         * \brief %Base class for binary functors that take two vectors and return a scalar (Math::VectorInnerProduct, Math::VectorAngleCosine).
          * \tparam V1 The first vector expression type.
          * \tparam V2 The second vector expression type.
          */
@@ -343,7 +343,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base for binary functors that take two vectors and return a boolean (Math::VectorEquality and similar).
+         * \brief %Base class for binary functors that take two vectors and return a boolean (Math::VectorEquality and similar).
          * \tparam V1 The first vector expression type.
          * \tparam V2 The second vector expression type.
          */
@@ -378,7 +378,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base for ternary functors that take two vectors and a scalar tolerance and return a boolean (Math::VectorToleranceEquality).
+         * \brief %Base class for ternary functors that take two vectors and a scalar tolerance and return a boolean (Math::VectorToleranceEquality).
          * \tparam V1 The first vector expression type.
          * \tparam V2 The second vector expression type.
          * \tparam T The scalar tolerance type.
@@ -420,7 +420,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Base for binary functors that take two vectors and return a vector (Math::VectorCrossProduct).
+         * \brief %Base class for binary functors that take two vectors and return a vector (Math::VectorCrossProduct).
          * \tparam V1 The first vector expression type.
          * \tparam V2 The second vector expression type.
          */

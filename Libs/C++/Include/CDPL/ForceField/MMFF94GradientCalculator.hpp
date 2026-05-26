@@ -160,8 +160,8 @@ namespace CDPL
             const ValueType& getElectrostaticEnergy() const;
 
             /**
-             * \brief Returns the van der Waals energy contribution computed by the most recent operator() call.
-             * \return A \c const reference to the van der Waals energy.
+             * \brief Returns the Van der Waals energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the Van der Waals energy.
              */
             const ValueType& getVanDerWaalsEnergy() const;
 

@@ -59,9 +59,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Convenience alias for the double-precision regular-grid set. */
+        /** \brief Convenience alias for the double-precision regular spatial grid sets. */
         typedef RegularGridSet<double> DRegularGridSet;
-        /** \brief Convenience alias for the single-precision regular-grid set. */
+        /** \brief Convenience alias for the single-precision regular spatial grid sets. */
         typedef RegularGridSet<float>  FRegularGridSet;
     } // namespace Grid
 } // namespace CDPL

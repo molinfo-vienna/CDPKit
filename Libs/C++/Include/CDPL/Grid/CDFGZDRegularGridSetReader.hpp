@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Reader for gzip-compressed regular-grid-set data in the native I/O format of the <em>CDPL</em>.
+         * \brief Reader for gzip-compressed regular spatial grid set data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::CompressedDataReader<CDFDRegularGridSetReader, Util::GZipIStream> CDFGZDRegularGridSetReader;
     }
