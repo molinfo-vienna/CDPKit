@@ -65,7 +65,7 @@ class FragmentAssembler(Boost.Python.instance):
     def addFragmentLibrary(lib: FragmentLibrary) -> None: pass
 
     ##
-    # \brief Sets the callback invoked periodically to allow the assembly to be aborted by the user.
+    # \brief Sets the callback invoked periodically to allow the processing to be aborted by the user.
     # 
     # \param func The abort-check callback.
     # 
@@ -79,16 +79,16 @@ class FragmentAssembler(Boost.Python.instance):
     def getAbortCallback() -> CallbackFunction: pass
 
     ##
-    # \brief Sets the callback invoked when the configured timeout is reached.
+    # \brief Sets the callback invoked periodically to check whether the configured timeout has elapsed.
     # 
-    # \param func The timeout callback.
+    # \param func The timeout-check callback.
     # 
     def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief Returns the currently configured timeout callback.
+    # \brief Returns the currently configured timeout-check callback.
     # 
-    # \return A reference to the timeout callback.
+    # \return A reference to the timeout-check callback.
     # 
     def getTimeoutCallback() -> CallbackFunction: pass
 

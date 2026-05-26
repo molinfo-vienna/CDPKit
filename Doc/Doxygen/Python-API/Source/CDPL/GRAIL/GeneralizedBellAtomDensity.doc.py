@@ -22,12 +22,12 @@
 ##
 # \brief Functor for the evaluation of the generalized-bell atom density contribution of an atom at a query position.
 # 
-# The density falls off with distance from the atom according to a generalized bell function parameterized by the atom's van der Waals radius (scaled by a configurable factor) and the radius of a probe sphere.
+# The density falls off with distance from the atom according to a generalized bell function parameterized by the atom's Van der Waals radius (scaled by a configurable factor) and the radius of a probe sphere.
 # 
 class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
-    # \brief Default scaling factor applied to atom van der Waals radii.
+    # \brief Default scaling factor applied to atom Van der Waals radii.
     # 
     DEF_RADIUS_SCALING_FACTOR = 1.0
 
@@ -46,7 +46,7 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     # \brief Constructs a <tt>GeneralizedBellAtomDensity</tt> instance with the given configuration.
     # 
     # \param probe_radius The probe sphere radius.
-    # \param rad_scaling_factor The scaling factor applied to atom van der Waals radii.
+    # \param rad_scaling_factor The scaling factor applied to atom Van der Waals radii.
     # 
     def __init__(probe_radius: float = 0.0, rad_scaling_factor: float = 1.0) -> None: pass
 
@@ -70,7 +70,7 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     def getProbeRadius() -> float: pass
 
     ##
-    # \brief Returns the currently configured van der Waals radius scaling factor.
+    # \brief Returns the currently configured Van der Waals radius scaling factor.
     # 
     # \return The configured scaling factor.
     # 

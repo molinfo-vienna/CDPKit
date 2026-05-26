@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for molecular graph data in the Tripos MOL2 format.
+# 
 class MOL2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

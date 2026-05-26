@@ -138,9 +138,9 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def getElectrostaticEnergy() -> float: pass
 
     ##
-    # \brief Returns the van der Waals energy contribution computed by the most recent __call__ call.
+    # \brief Returns the Van der Waals energy contribution computed by the most recent __call__ call.
     # 
-    # \return A reference to the van der Waals energy.
+    # \return A reference to the Van der Waals energy.
     # 
     def getVanDerWaalsEnergy() -> float: pass
 

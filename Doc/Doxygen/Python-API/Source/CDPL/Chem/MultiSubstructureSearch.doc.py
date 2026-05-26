@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MultiSubstructureSearch.
+# \brief Evaluates a boolean expression over multiple substructure queries against a target molecular graph.
+# 
+# Substructure query molecular graphs are added via addSubstructure() and referenced in the boolean expression by their 1-based insertion order (e.g. <tt>"1 AND (2 OR NOT 3)"</tt>). The expression is parsed by setup() and subsequently evaluated for each target molecular graph passed to matches().
 # 
 # \since 1.2
 # 
@@ -44,20 +46,24 @@ class MultiSubstructureSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Appends a substructure query to the internal substructure list.
+    # 
+    # The query receives the 1-based ID equal to the new value of getNumSubstructures(), which is how it is referenced in the boolean expression.
+    # 
+    # \param molgraph A smart reference to the substructure query molecular graph.
+    # 
     def addSubstructure(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored substructure queries.
+    # 
+    # \return The number of stored substructure queries.
+    # 
     def getNumSubstructures() -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all stored substructure queries and clears the compiled expression.
+    # 
     def clear() -> None: pass
 
     ##

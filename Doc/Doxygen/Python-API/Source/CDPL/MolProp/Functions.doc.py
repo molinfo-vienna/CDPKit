@@ -905,11 +905,11 @@ def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph)
 def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph, steric_num: int) -> int: pass
 
 ##
-# \brief Returns the van der Waals radius of the chemical element associated with <em>atom</em>.
+# \brief Returns the Van der Waals radius of the chemical element associated with <em>atom</em>.
 # 
 # \param atom The atom.
 # 
-# \return The van der Waals radius.
+# \return The Van der Waals radius.
 # 
 def getVdWRadius(atom: Chem.Atom) -> float: pass
 

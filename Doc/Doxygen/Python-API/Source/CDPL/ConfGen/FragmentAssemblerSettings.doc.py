@@ -25,7 +25,7 @@
 class FragmentAssemblerSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed FragmentAssemblerSettings.
+    # \brief Default settings used by a freshly-constructed FragmentAssemblerSettings instance.
     # 
     DEFAULT = _HIDDEN_VALUE_
 

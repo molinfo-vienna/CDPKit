@@ -20,13 +20,13 @@
 #
 
 ##
-# \brief High-level driver for the generation of low-energy 3D conformer ensembles from a molecular graph.
+# \brief High-level driver for the generation of low-energy conformer ensembles of molecular graphs.
 # 
-# The generator implements two complementary sampling strategies (selectable via the embedded ConformerGeneratorSettings) for assembling the conformer ensemble: 
-#  - a systematic strategy that performs fragment-based 2D-to-3D structure generation followed by exhaustive torsion-driving of all flexible bonds, and
-#  - a stochastic strategy that draws conformations randomly from the rotatable-bond torsion-angle distributions (typically applied to large/highly-flexible molecules).
+# The generator implements two complementary sampling strategies for producing the conformer ensemble: 
+#  - a systematic strategy that performs a fragment-based 3D structure generation followed by exhaustive torsion-driving of all rotatable bonds, and
+#  - a stochastic strategy that picks conformations randomly from the conformational space of the molecule (by default used only for flexible macrocyclic molecules).
 # 
-# Both strategies share a common downstream pipeline of MMFF94-based energy minimization, RMSD-based clustering and energy-window filtering. Behaviour is controlled by the embedded Settings instance, the configured fragment and torsion libraries and the optional abort/timeout/log callbacks.
+# Both strategies share a common downstream pipeline of MMFF94-based energy minimization, RMSD-based clustering and energy-window filtering. Behaviour is controlled by the embedded conformer generation settings instance, the configured fragment and torsion libraries and the optional abort/timeout/log callbacks.
 # 
 # \see [\ref CFRG]
 # 
@@ -95,16 +95,16 @@ class ConformerGenerator(Boost.Python.instance):
     def getAbortCallback() -> CallbackFunction: pass
 
     ##
-    # \brief Sets the callback invoked when the configured timeout is reached.
+    # \brief Sets the callback invoked periodically to check whether the configured timeout has elapsed.
     # 
-    # \param func The timeout callback.
+    # \param func The timeout-check callback.
     # 
     def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
-    # \brief Returns the currently configured timeout callback.
+    # \brief Returns the currently configured timeout-check callback.
     # 
-    # \return A reference to the timeout callback.
+    # \return A reference to the timeout-check callback.
     # 
     def getTimeoutCallback() -> CallbackFunction: pass
 

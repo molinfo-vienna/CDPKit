@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Writer for gzip-compressed regular-grid data in the native I/O format of the <em>CDPL</em>.
+# \brief Writer for gzip-compressed regular spatial grid data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFGZDRegularGridWriter(DRegularGridWriterBase):
 

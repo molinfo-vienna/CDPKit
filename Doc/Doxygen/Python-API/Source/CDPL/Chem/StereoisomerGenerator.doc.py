@@ -20,15 +20,17 @@
 #
 
 ##
-# \brief StereoisomerGenerator.
+# \brief Enumerates the stereoisomers of a molecular graph by flipping the configurations of selected atom and bond stereocenters.
+# 
+# After calling setup() for an input molecular graph, each call to generate() yields the next stereoisomer (encoded as per-atom and per-bond StereoDescriptor arrays accessible via getAtomDescriptors() / getBondDescriptors()); generate() returns <tt>False</tt> when the enumeration is exhausted. Atom and bond predicates plus a number of inclusion flags control which stereocenters are enumerated.
 # 
 # \since 1.1
 # 
 class StereoisomerGenerator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Array of StereoDescriptor values (one per atom or one per bond of the input molecular graph).
+    # 
     class StereoDescriptorArray(Boost.Python.instance):
 
         ##
@@ -110,147 +112,171 @@ class StereoisomerGenerator(Boost.Python.instance):
     def assign(gen: StereoisomerGenerator) -> StereoisomerGenerator: pass
 
     ##
-    # \brief 
-    # \param pred 
-    #
+    # \brief Sets the predicate used to filter atom stereocenters considered during enumeration.
+    # 
+    # \param pred The new atom predicate.
+    # 
     def setAtomPredicate(pred: AtomPredicate) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured atom predicate.
+    # 
+    # \return A reference to the atom predicate.
+    # 
     def getAtomPredicate() -> AtomPredicate: pass
 
     ##
-    # \brief 
-    # \param pred 
-    #
+    # \brief Sets the predicate used to filter bond stereocenters considered during enumeration.
+    # 
+    # \param pred The new bond predicate.
+    # 
     def setBondPredicate(pred: BondPredicate) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured bond predicate.
+    # 
+    # \return A reference to the bond predicate.
+    # 
     def getBondPredicate() -> BondPredicate: pass
 
     ##
-    # \brief 
-    # \param enumerate 
-    #
+    # \brief Specifies whether atom-stereocenter configurations shall be enumerated.
+    # 
+    # \param enumerate If <tt>True</tt>, atom configurations are flipped during enumeration.
+    # 
     def enumerateAtomConfig(enumerate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether atom-stereocenter configurations are enumerated.
+    # 
+    # \return <tt>True</tt> if atom configurations are enumerated, and <tt>False</tt> otherwise.
+    # 
     def atomConfigEnumerated() -> bool: pass
 
     ##
-    # \brief 
-    # \param enumerate 
-    #
+    # \brief Specifies whether bond-stereocenter configurations shall be enumerated.
+    # 
+    # \param enumerate If <tt>True</tt>, bond configurations are flipped during enumeration.
+    # 
     def enumerateBondConfig(enumerate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether bond-stereocenter configurations are enumerated.
+    # 
+    # \return <tt>True</tt> if bond configurations are enumerated, and <tt>False</tt> otherwise.
+    # 
     def bondConfigEnumerated() -> bool: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether stereocenters with explicitly specified configurations shall be enumerated.
+    # 
+    # \param include If <tt>True</tt>, specified stereocenters are also flipped.
+    # 
     def includeSpecifiedCenters(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether specified stereocenters are enumerated.
+    # 
+    # \return <tt>True</tt> if specified stereocenters are included, and <tt>False</tt> otherwise.
+    # 
     def specifiedCentersIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether topologically-symmetric stereocenters shall be enumerated.
+    # 
+    # \param include If <tt>True</tt>, symmetric stereocenters are also flipped.
+    # 
     def includeSymmetricCenters(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether topologically-symmetric stereocenters are enumerated.
+    # 
+    # \return <tt>True</tt> if symmetric stereocenters are included, and <tt>False</tt> otherwise.
+    # 
     def symmetricCentersIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether bridgehead atoms in fused ring systems shall be enumerated as stereocenters.
+    # 
+    # \param include If <tt>True</tt>, bridgehead atoms are included.
+    # 
     def includeBridgeheadAtoms(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether bridgehead atoms are enumerated.
+    # 
+    # \return <tt>True</tt> if bridgehead atoms are included, and <tt>False</tt> otherwise.
+    # 
     def bridgeheadAtomsIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether invertible (pyramidal) nitrogen stereocenters shall be enumerated.
+    # 
+    # \param include If <tt>True</tt>, invertible nitrogens are included.
+    # 
     def includeInvertibleNitrogens(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether invertible nitrogen stereocenters are enumerated.
+    # 
+    # \return <tt>True</tt> if invertible nitrogens are included, and <tt>False</tt> otherwise.
+    # 
     def invertibleNitrogensIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether ring bonds (large enough to allow cis/trans isomerism) shall be enumerated.
+    # 
+    # \param include If <tt>True</tt>, ring bonds whose ring is at least getMinRingSize() atoms in size are included.
+    # 
     def includeRingBonds(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether ring bonds are enumerated.
+    # 
+    # \return <tt>True</tt> if ring bonds are included, and <tt>False</tt> otherwise.
+    # 
     def ringBondsIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param min_size 
-    #
+    # \brief Sets the minimum ring size for a ring bond to be eligible as a stereocenter.
+    # 
+    # \param min_size The new minimum ring size (in atoms).
+    # 
     def setMinRingSize(min_size: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the minimum ring size for a ring bond to be eligible as a stereocenter.
+    # 
+    # \return The minimum ring size.
+    # 
     def getMinRingSize() -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Prepares the generator for enumerating the stereoisomers of <em>molgraph</em>.
+    # 
+    # \param molgraph The input molecular graph.
+    # 
     def setup(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Advances the enumeration by one step and updates the per-atom/per-bond stereo-descriptor arrays.
+    # 
+    # \return <tt>True</tt> if a new stereoisomer was generated, and <tt>False</tt> if the enumeration is exhausted.
+    # 
     def generate() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the per-atom stereo descriptors for the current stereoisomer.
+    # 
+    # \return A reference to the atom-stereo-descriptor array.
+    # 
     def getAtomDescriptors() -> StereoDescriptorArray: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the per-bond stereo descriptors for the current stereoisomer.
+    # 
+    # \return A reference to the bond-stereo-descriptor array.
+    # 
     def getBondDescriptors() -> StereoDescriptorArray: pass
 
     objectID = property(getObjectID)

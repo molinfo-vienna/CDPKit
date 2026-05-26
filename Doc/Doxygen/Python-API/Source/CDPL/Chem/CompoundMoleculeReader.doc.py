@@ -48,6 +48,8 @@ class CompoundMoleculeReader(MoleculeReaderBase):
     # 
     # \param idx The zero-based reader index.
     # 
+    # \throw Base.IndexError if the number of readers is zero or <em>idx</em> is not in the range [0, getNumReaders() - 1].
+    # 
     def removeReader(idx: int) -> None: pass
 
     ##
@@ -60,7 +62,9 @@ class CompoundMoleculeReader(MoleculeReaderBase):
     # 
     # \param idx The zero-based reader index.
     # 
-    # \return A reference to the reader shared reference.
+    # \return A reference to the reader shared reference. 
+    # 
+    # \throw Base.IndexError if the number of readers is zero or <em>idx</em> is not in the range [0, getNumReaders() - 1].
     # 
     def getReader(idx: int) -> MoleculeReaderBase: pass
 

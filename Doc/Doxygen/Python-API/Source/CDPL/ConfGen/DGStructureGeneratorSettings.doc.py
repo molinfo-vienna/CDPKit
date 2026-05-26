@@ -25,7 +25,7 @@
 class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
-    # \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings.
+    # \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings instance.
     # 
     DEFAULT_ = _HIDDEN_VALUE_
 

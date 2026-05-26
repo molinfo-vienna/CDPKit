@@ -500,13 +500,13 @@ def clearWeight(feature: Feature) -> None: pass
 ##
 # \brief Tests whether the exclusion-volume features in <em>ftr_cntnr</em> remain clash-free with respect to the transformed atom positions of <em>atom_cntnr</em>.
 # 
-# Each enabled feature of type Pharm.FeatureType.EXCLUSION_VOLUME is checked against every atom of <em>atom_cntnr:</em> a clash is reported as soon as the distance between feature and atom is smaller than the sum of the feature's position tolerance and <em>vdw_factor</em> times the atom's van der Waals radius.
+# Each enabled feature of type Pharm.FeatureType.EXCLUSION_VOLUME is checked against every atom of <em>atom_cntnr:</em> a clash is reported as soon as the distance between feature and atom is smaller than the sum of the feature's position tolerance and <em>vdw_factor</em> times the atom's Van der Waals radius.
 # 
 # \param ftr_cntnr The feature container providing the exclusion-volume features.
 # \param atom_cntnr The atom container providing the test atoms.
 # \param coords_func The function returning the 3D coordinates of an atom.
 # \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
-# \param vdw_factor Scaling factor for the per-atom van der Waals radii; if &le; 0 the atoms are treated as point particles.
+# \param vdw_factor Scaling factor for the per-atom Van der Waals radii; if &le; 0 the atoms are treated as point particles.
 # 
 # \return <tt>True</tt> if no clash is detected, and <tt>False</tt> otherwise.
 # 
@@ -579,7 +579,7 @@ def prepareForPharmacophoreGeneration(mol: Chem.Molecule, calc_hyd: bool = True,
 # \param pharm The pharmacophore to filter.
 # \param cntnr The atom container providing the clash partners.
 # \param coords_func The function returning the 3D coordinates of an atom.
-# \param vdw_scaling_fact Scaling factor applied to the per-atom van der Waals radius during the clash test.
+# \param vdw_scaling_fact Scaling factor applied to the per-atom Van der Waals radius during the clash test.
 # 
 # \return <tt>True</tt> if at least one exclusion volume was removed, and <tt>False</tt> otherwise.
 # 
@@ -671,7 +671,7 @@ def removePositionalDuplicates(pharm: Pharmacophore, pos_tol: float = 0.0) -> bo
 # \param pharm The pharmacophore to modify.
 # \param cntnr The atom container providing the clash partners.
 # \param coords_func The function returning the 3D coordinates of an atom.
-# \param vdw_scaling_fact Scaling factor applied to the per-atom van der Waals radius during the clash test.
+# \param vdw_scaling_fact Scaling factor applied to the per-atom Van der Waals radius during the clash test.
 # 
 # \return <tt>True</tt> if at least one exclusion volume was resized or removed, and <tt>False</tt> otherwise.
 # 

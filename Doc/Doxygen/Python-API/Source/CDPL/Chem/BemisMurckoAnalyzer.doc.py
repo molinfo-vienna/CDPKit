@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BemisMurckoAnalyzer.
+# \brief Decomposes a molecular graph into its Bemis-Murcko framework, ring systems, linkers and side chains.
+# 
+# After calling analyze() the four constituent fragment sets can be queried separately via getRingSystems(), getLinkers(), getFrameworks() and getSideChains(). The framework of a molecule is the union of all ring systems together with the linker chains that connect them; side chains are the remaining acyclic substituents. Hydrogen atoms can optionally be stripped from the input.
 # 
 # \see [\ref BEMU] 
 # 
@@ -29,7 +31,7 @@
 class BemisMurckoAnalyzer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %BemisMurckoAnalyzer instance.
+    # \brief Constructs the <tt>BemisMurckoAnalyzer</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -47,45 +49,54 @@ class BemisMurckoAnalyzer(Boost.Python.instance):
     def assign(gen: BemisMurckoAnalyzer) -> BemisMurckoAnalyzer: pass
 
     ##
-    # \brief 
-    # \param strip 
-    #
+    # \brief Specifies whether hydrogen atoms shall be stripped from the input before the decomposition.
+    # 
+    # \param strip If <tt>True</tt>, hydrogens are removed prior to analysis.
+    # 
     def stripHydrogens(strip: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether hydrogen atoms are stripped from the input before the decomposition.
+    # 
+    # \return <tt>True</tt> if hydrogens are stripped, and <tt>False</tt> otherwise.
+    # 
     def hydrogensStripped() -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Performs the Bemis-Murcko decomposition of the molecular graph <em>molgraph</em>.
+    # 
+    # After this call the four fragment sets produced by the decomposition are available via getRingSystems(), getLinkers(), getFrameworks() and getSideChains().
+    # 
+    # \param molgraph The molecular graph to decompose.
+    # 
     def analyze(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the perceived ring systems of the input molecular graph.
+    # 
+    # \return A reference to the list of ring-system fragments.
+    # 
     def getRingSystems() -> FragmentList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the side chains (acyclic substituents) of the input molecular graph.
+    # 
+    # \return A reference to the list of side-chain fragments.
+    # 
     def getSideChains() -> FragmentList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the linker fragments connecting different ring systems of the input molecular graph.
+    # 
+    # \return A reference to the list of linker fragments.
+    # 
     def getLinkers() -> FragmentList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the Bemis-Murcko frameworks of the input molecular graph (union of ring systems and linkers).
+    # 
+    # \return A reference to the list of framework fragments.
+    # 
     def getFrameworks() -> FragmentList: pass
 
     hydrogenStripping = property(hydrogensStripped, stripHydrogens)

@@ -22,7 +22,7 @@
 ##
 # \brief Calculator that fills a spatial grid with per-cell buriedness scores derived from GRAIL.BuriednessScore.
 # 
-# For each grid cell, the buriedness score with respect to the surrounding atoms is computed and stored. The configurable parameters (probe radius, minimum van der Waals surface distance, number of test rays) are forwarded to the underlying BuriednessScore instance.
+# For each grid cell, the buriedness score with respect to the surrounding atoms is computed and stored. The configurable parameters (probe radius, minimum Van der Waals surface distance, number of test rays) are forwarded to the underlying BuriednessScore instance.
 # 
 class BuriednessGridCalculator(Boost.Python.instance):
 
@@ -60,16 +60,16 @@ class BuriednessGridCalculator(Boost.Python.instance):
     def assign(calc: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
 
     ##
-    # \brief Sets the minimum required distance between a ray and the van der Waals surface of an atom.
+    # \brief Sets the minimum required distance between a ray and the Van der Waals surface of an atom.
     # 
-    # \param dist The minimum distance to the van der Waals surface.
+    # \param dist The minimum distance to the Van der Waals surface.
     # 
     def setMinVdWSurfaceDistance(dist: float) -> None: pass
 
     ##
-    # \brief Returns the currently configured minimum distance to the van der Waals surface of an atom.
+    # \brief Returns the currently configured minimum distance to the Van der Waals surface of an atom.
     # 
-    # \return The configured minimum distance to the van der Waals surface.
+    # \return The configured minimum distance to the Van der Waals surface.
     # 
     def getMinVdWSurfaceDistance() -> float: pass
 

@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Bundle of configuration parameters for ConfGen.ConformerGenerator.
+# \brief Bundle of configuration parameters for conformer ensemble generation via class ConfGen.ConformerGenerator.
 # 
 class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed ConformerGeneratorSettings.
+    # \brief Default settings used by a freshly-constructed ConformerGeneratorSettings instance.
     # 
     DEFAULT = _HIDDEN_VALUE_
 
@@ -90,7 +90,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def assign(settings: ConformerGeneratorSettings) -> ConformerGeneratorSettings: pass
 
     ##
-    # \brief Sets the conformer-sampling strategy.
+    # \brief Specifies the conformer-sampling strategy to use.
     # 
     # \param mode One of the ConfGen.ConformerSamplingMode values.
     # 
@@ -104,14 +104,14 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getSamplingMode() -> int: pass
 
     ##
-    # \brief Specifies whether torsion angles around bonds to hetero-atom hydrogens shall be sampled.
+    # \brief Specifies whether torsions of hetero-atom hydrogen rotors shall be sampled.
     # 
-    # \param sample If <tt>True</tt>, hetero-atom-H torsions are included in the sampling.
+    # \param sample If <tt>True</tt>, hetero-atom-H torsions are sampled.
     # 
     def sampleHeteroAtomHydrogens(sample: bool) -> None: pass
 
     ##
-    # \brief Tells whether torsion angles around bonds to hetero-atom hydrogens are sampled.
+    # \brief Tells whether torsions of hetero-atom hydrogen rotors are sampled.
     # 
     # \return <tt>True</tt> if sampling is enabled, and <tt>False</tt> otherwise.
     # 
@@ -153,7 +153,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def setNitrogenEnumerationMode(mode: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured stereogenic-nitrogen enumeration mode.
+    # \brief Returns the currently configured nitrogen enumeration mode.
     # 
     # \return One of the ConfGen.NitrogenEnumerationMode values.
     # 
@@ -174,28 +174,28 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def generateCoordinatesFromScratch() -> bool: pass
 
     ##
-    # \brief Specifies whether the input 3D coordinates of <em>molgraph</em> shall be included in the output conformer set.
+    # \brief Specifies whether the input conformation shall be included in the output conformer ensemble.
     # 
     # \param include If <tt>True</tt>, the input coordinates become part of the output ensemble.
     # 
     def includeInputCoordinates(include: bool) -> None: pass
 
     ##
-    # \brief Tells whether the input coordinates are included in the output conformer set.
+    # \brief Tells whether the input coordinates are included in the output conformer ensemble.
     # 
     # \return <tt>True</tt> if the input coordinates are included, and <tt>False</tt> otherwise.
     # 
     def includeInputCoordinates() -> bool: pass
 
     ##
-    # \brief Sets the energy-window size (in kcal/mol) above the global minimum within which conformers are kept.
+    # \brief Sets the energy-window size (in kcal/mol) above the found global minimum within which conformers are kept.
     # 
     # \param win_size The new energy-window size in kcal/mol.
     # 
     def setEnergyWindow(win_size: float) -> None: pass
 
     ##
-    # \brief Returns the globally configured energy-window size.
+    # \brief Returns the configured energy-window size.
     # 
     # \return The energy-window size in kcal/mol.
     # 
@@ -204,9 +204,9 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns the energy-window size that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # If a rotatable-bond-specific range was registered via addEnergyWindowRange(), the matching value is returned; otherwise the global window from getEnergyWindow() is used.
+    # If a rotatable bond-specific range was registered via addEnergyWindowRange(), the matching value is returned; otherwise the global window from getEnergyWindow() is used.
     # 
-    # \param num_rot_bonds The rotatable-bond count.
+    # \param num_rot_bonds The rotatable bond count.
     # 
     # \return The energy-window size in kcal/mol. 
     # 
@@ -215,7 +215,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getEnergyWindow(num_rot_bonds: int) -> float: pass
 
     ##
-    # \brief Removes all registered rotatable-bond-count-dependent energy-window overrides.
+    # \brief Removes all registered rotatable bond count-dependent energy-window overrides.
     # 
     # \since 1.1
     # 
@@ -224,22 +224,22 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Registers an energy-window override that applies up to and including <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # \param num_rot_bonds The upper-bound rotatable-bond count to which <em>win_size</em> applies.
-    # \param win_size The energy-window size (in kcal/mol) used for matching molecules.
+    # \param num_rot_bonds The upper-bound rotatable bond count to which <em>win_size</em> applies.
+    # \param win_size The energy-window size (in kcal/mol).
     # 
     # \since 1.1
     # 
     def addEnergyWindowRange(num_rot_bonds: int, win_size: float) -> None: pass
 
     ##
-    # \brief Sets the maximum number of conformers retained in the internal candidate pool.
+    # \brief Sets the maximum number of conformers in the internal candidate pool.
     # 
     # \param max_size The new maximum pool size.
     # 
     def setMaxPoolSize(max_size: int) -> None: pass
 
     ##
-    # \brief Returns the maximum number of conformers retained in the internal candidate pool.
+    # \brief Returns the maximum number of conformers in the internal candidate pool.
     # 
     # \return The maximum pool size.
     # 
@@ -248,16 +248,16 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Sets the upper limit on the number of rotatable bonds an input molecule may have to be processed.
     # 
-    # \param max_count The new rotatable-bond-count limit (<em>-1</em> disables the limit).
+    # \param max_count The new rotatable bond count limit (<em>-1</em> disables the limit).
     # 
     # \since 1.1
     # 
     def setMaxRotatableBondCount(max_count: int) -> None: pass
 
     ##
-    # \brief Returns the rotatable-bond-count limit above which input molecules are rejected.
+    # \brief Returns the rotatable bond count limit above which input molecules are rejected.
     # 
-    # \return The rotatable-bond-count limit (<em>-1</em> disables the limit). 
+    # \return The rotatable bond count limit (<em>-1</em> disables the limit). 
     # 
     # \since 1.1
     # 
@@ -278,28 +278,28 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getTimeout() -> int: pass
 
     ##
-    # \brief Sets the force-field type used by the systematic sampling pipeline.
+    # \brief Sets the force field type used by the systematic sampling pipeline.
     # 
     # \param type One of the ConfGen.ForceFieldType values.
     # 
     def setForceFieldTypeSystematic(type: int) -> None: pass
 
     ##
-    # \brief Returns the force-field type used by the systematic sampling pipeline.
+    # \brief Returns the force field type used by the systematic sampling pipeline.
     # 
     # \return One of the ConfGen.ForceFieldType values.
     # 
     def getForceFieldTypeSystematic() -> int: pass
 
     ##
-    # \brief Sets the force-field type used by the stochastic sampling pipeline.
+    # \brief Sets the force field type used by the stochastic sampling pipeline.
     # 
     # \param type One of the ConfGen.ForceFieldType values.
     # 
     def setForceFieldTypeStochastic(type: int) -> None: pass
 
     ##
-    # \brief Returns the force-field type used by the stochastic sampling pipeline.
+    # \brief Returns the force field type used by the stochastic sampling pipeline.
     # 
     # \return One of the ConfGen.ForceFieldType values.
     # 
@@ -308,7 +308,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Specifies whether strict MMFF94 parameterization is required.
     # 
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a generation failure; if <tt>False</tt>, fallback parameters are used.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a generation failure; if <tt>False</tt>, suitable fallback parameters are used.
     # 
     def strictForceFieldParameterization(strict: bool) -> None: pass
 
@@ -349,42 +349,42 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Sets the maximum number of output conformers per molecule.
     # 
-    # \param max_num The new output-conformer limit.
+    # \param max_num The new output conformer count limit.
     # 
     def setMaxNumOutputConformers(max_num: int) -> None: pass
 
     ##
-    # \brief Returns the globally configured maximum number of output conformers.
+    # \brief Returns the configured maximum number of output conformers.
     # 
-    # \return The output-conformer limit.
+    # \return The output conformer count limit.
     # 
     def getMaxNumOutputConformers() -> int: pass
 
     ##
     # \brief Returns the maximum number of output conformers that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # If a rotatable-bond-specific range was registered via addMaxNumOutputConformersRange(), the matching value is returned; otherwise the global limit from getMaxNumOutputConformers() is used.
+    # If a rotatable bond-specific range was registered via addMaxNumOutputConformersRange(), the matching value is returned; otherwise the global limit from getMaxNumOutputConformers() is used.
     # 
-    # \param num_rot_bonds The rotatable-bond count.
+    # \param num_rot_bonds The rotatable bond count.
     # 
-    # \return The output-conformer limit. 
+    # \return The output conformer limit. 
     # 
     # \since 1.1
     # 
     def getMaxNumOutputConformers(num_rot_bonds: int) -> int: pass
 
     ##
-    # \brief Removes all registered rotatable-bond-count-dependent output-conformer overrides.
+    # \brief Removes all registered rotatable bond count-dependent output conformer overrides.
     # 
     # \since 1.1
     # 
     def clearMaxNumOutputConformersRanges() -> None: pass
 
     ##
-    # \brief Registers an output-conformer limit override that applies up to and including <em>num_rot_bonds</em> rotatable bonds.
+    # \brief Registers an output conformer limit override that applies up to and including <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # \param num_rot_bonds The upper-bound rotatable-bond count to which <em>max_num</em> applies.
-    # \param max_num The output-conformer limit used for matching molecules.
+    # \param num_rot_bonds The upper-bound rotatable bond count to which <em>max_num</em> applies.
+    # \param max_num The output conformer limit used for matching molecules.
     # 
     # \since 1.1
     # 
@@ -407,9 +407,9 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns the minimum RMSD threshold that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # If a rotatable-bond-specific range was registered via addMinRMSDRange(), the matching value is returned; otherwise the global threshold from getMinRMSD() is used.
+    # If a rotatable bond-specific range was registered via addMinRMSDRange(), the matching value is returned; otherwise the global threshold from getMinRMSD() is used.
     # 
-    # \param num_rot_bonds The rotatable-bond count.
+    # \param num_rot_bonds The rotatable bond count.
     # 
     # \return The minimum RMSD threshold (in &Aring;). 
     # 
@@ -418,16 +418,16 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getMinRMSD(num_rot_bonds: int) -> float: pass
 
     ##
-    # \brief Removes all registered rotatable-bond-count-dependent minimum-RMSD overrides.
+    # \brief Removes all registered rotatable bond count-dependent minimum RMSD overrides.
     # 
     # \since 1.1
     # 
     def clearMinRMSDRanges() -> None: pass
 
     ##
-    # \brief Registers a minimum-RMSD override that applies up to and including <em>num_rot_bonds</em> rotatable bonds.
+    # \brief Registers a minimum RMSD override that applies up to and including <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # \param num_rot_bonds The upper-bound rotatable-bond count to which <em>min_rmsd</em> applies.
+    # \param num_rot_bonds The upper-bound rotatable bond count to which <em>min_rmsd</em> applies.
     # \param min_rmsd The minimum RMSD threshold used for matching molecules.
     # 
     # \since 1.1
@@ -441,7 +441,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
-    # \brief Returns the maximum number of MMFF94 energy-minimization iterations per conformer.
+    # \brief Returns the maximum number of MMFF94 energy minimization iterations per conformer.
     # 
     # \return The iteration limit (zero if refinement is disabled).
     # 
@@ -454,7 +454,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def setRefinementStopGradient(tol: float) -> None: pass
 
     ##
-    # \brief Returns the convergence tolerance of the MMFF94 energy-minimization step.
+    # \brief Returns the convergence tolerance of the MMFF94 energy minimization step.
     # 
     # \return The convergence tolerance.
     # 
@@ -463,14 +463,14 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Sets the upper bound on the number of trial conformations produced by the stochastic sampler.
     # 
-    # \param max_num The new sampled-conformer limit.
+    # \param max_num The new sampled conformer limit.
     # 
     def setMaxNumSampledConformers(max_num: int) -> None: pass
 
     ##
     # \brief Returns the upper bound on the number of trial conformations produced by the stochastic sampler.
     # 
-    # \return The sampled-conformer limit.
+    # \return The sampled conformer limit.
     # 
     def getMaxNumSampledConformers() -> int: pass
 
@@ -495,14 +495,14 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
-    # \brief Returns the macrocycle rotatable-bond count threshold.
+    # \brief Returns the macrocycle rotatable bond count threshold.
     # 
     # \return The threshold.
     # 
     def getMacrocycleRotorBondCountThreshold() -> int: pass
 
     ##
-    # \brief Returns a reference to the nested fragment-conformer build settings.
+    # \brief Returns a reference to the nested fragment conformer build settings.
     # 
     # \return A reference to the build settings.
     # 

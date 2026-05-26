@@ -20,28 +20,30 @@
 #
 
 ##
-# \brief TautomerGenerator.
+# \brief Enumerates the tautomers of a molecular graph by iteratively applying a configurable set of Chem.TautomerizationRule instances and reporting each accepted tautomer to a user-supplied callback.
+# 
+# After registering tautomerization rules (via addTautomerizationRule()) and a callback (via setCallbackFunction()), each call to generate() seeds the enumeration with the input molecular graph, applies every registered rule to every intermediate tautomer to derive the next generation, and reports each newly-generated tautomer to the callback. The Mode setting controls how aggressively duplicates are filtered.
 # 
 class TautomerGenerator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Selects the duplicate-filtering strategy applied during tautomer enumeration.
+    # 
     class Mode(Boost.Python.enum):
 
         ##
-        # \brief TOPOLOGICALLY_UNIQUE.
-        #
+        # \brief Two tautomers are considered equal if they share the same constitutional (topological) connection table.
+        # 
         TOPOLOGICALLY_UNIQUE = 0
 
         ##
-        # \brief GEOMETRICALLY_UNIQUE.
-        #
+        # \brief Two tautomers are considered equal if they share the same connection table AND the same stereo-configuration.
+        # 
         GEOMETRICALLY_UNIQUE = 1
 
         ##
-        # \brief EXHAUSTIVE.
-        #
+        # \brief Every accepted tautomer is reported, even if topologically/geometrically equivalent to an already-reported one.
+        # 
         EXHAUSTIVE = 2
 
     ##
@@ -50,8 +52,9 @@ class TautomerGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %TautomerGenerator instance \a gen.
-    # \param gen The \c %TautomerGenerator instance to copy.
+    # \brief Constructs a copy of the <tt>TautomerGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>TautomerGenerator</tt> to copy.
     # 
     def __init__(gen: TautomerGenerator) -> None: pass
 
@@ -68,118 +71,154 @@ class TautomerGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param rule 
-    #
+    # \brief Registers a new tautomerization rule.
+    # 
+    # \param rule The tautomerization rule to register.
+    # 
     def addTautomerizationRule(rule: TautomerizationRule) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the registered tautomerization rule at index <em>idx</em>.
+    # 
+    # \param idx The zero-based rule index.
+    # 
+    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumTautomerizationRules() - 1].
+    # 
     def removeTautomerizationRule(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the registered tautomerization rule at index <em>idx</em>.
+    # 
+    # \param idx The zero-based rule index.
+    # 
+    # \return A reference to the rule smart reference. 
+    # 
+    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumTautomerizationRules() - 1].
+    # 
     def getTautomerizationRule(idx: int) -> TautomerizationRule: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of registered tautomerization rules.
+    # 
+    # \return The rule count.
+    # 
     def getNumTautomerizationRules() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback invoked for every accepted tautomer.
+    # 
+    # The callback receives the tautomer molecular graph as its argument and returns a boolean: returning <tt>False</tt> aborts the enumeration.
+    # 
+    # \param func The new callback function.
+    # 
     def setCallbackFunction(func: BoolMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured callback.
+    # 
+    # \return A reference to the callback function.
+    # 
     def getCallbackFunction() -> BoolMolecularGraphFunctor: pass
 
     ##
-    # \brief 
-    # \param mode 
-    #
+    # \brief Sets the duplicate-filtering mode.
+    # 
+    # \param mode The new Mode value.
+    # 
     def setMode(mode: Mode) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured duplicate-filtering mode.
+    # 
+    # \return The Mode value.
+    # 
     def getMode() -> Mode: pass
 
     ##
-    # \brief 
-    # \param regard 
-    #
+    # \brief Specifies whether tautomer stereochemistry shall be preserved/regarded during duplicate filtering.
+    # 
+    # \param regard If <tt>True</tt>, stereo-configurations are taken into account.
+    # 
     def regardStereochemistry(regard: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether stereochemistry is regarded during duplicate filtering.
+    # 
+    # \return <tt>True</tt> if stereochemistry is regarded, and <tt>False</tt> otherwise.
+    # 
     def stereochemistryRegarded() -> bool: pass
 
     ##
-    # \brief 
-    # \param regard 
-    #
+    # \brief Specifies whether atom isotope information shall be regarded during duplicate filtering.
+    # 
+    # \param regard If <tt>True</tt>, isotopes are taken into account.
+    # 
     def regardIsotopes(regard: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether isotope information is regarded during duplicate filtering.
+    # 
+    # \return <tt>True</tt> if isotopes are regarded, and <tt>False</tt> otherwise.
+    # 
     def isotopesRegarded() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether 2D atom coordinates are cleared from the generated tautomers.
+    # 
+    # \return <tt>True</tt> if 2D coordinates are cleared, and <tt>False</tt> otherwise. 
+    # 
+    # \since 1.3
+    # 
     def coordinates2DCleared() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether 3D atom coordinates are cleared from the generated tautomers.
+    # 
+    # \return <tt>True</tt> if 3D coordinates are cleared, and <tt>False</tt> otherwise. 
+    # 
+    # \since 1.3
+    # 
     def coordinates3DCleared() -> bool: pass
 
     ##
-    # \brief 
-    # \param remove 
-    #
+    # \brief Specifies whether tautomers that differ only by resonance (no atom-connectivity change) shall be filtered out.
+    # 
+    # \param remove If <tt>True</tt>, resonance-only duplicates are not reported.
+    # 
+    # \since 1.1
+    # 
     def removeResonanceDuplicates(remove: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether resonance-only duplicates are filtered out.
+    # 
+    # \return <tt>True</tt> if resonance duplicates are removed, and <tt>False</tt> otherwise. 
+    # 
+    # \since 1.1
+    # 
     def resonanceDuplicatesRemoved() -> bool: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the optional setup function invoked on the input molecular graph before enumeration starts.
+    # 
+    # The setup function may modify the input (e.g. add explicit hydrogens, perceive aromaticity) prior to enumeration.
+    # 
+    # \param func The new custom-setup function.
+    # 
     def setCustomSetupFunction(func: VoidMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Generates all unique tautomers of the molecular graph <em>molgraph</em>.
+    # \brief Enumerates the tautomers of <em>molgraph</em> and reports each accepted one to the registered callback.
     # 
-    # \param molgraph The molecular graph for which to generate the tautomers.
+    # \param molgraph The molecular graph whose tautomers shall be generated.
     # 
     def generate(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %TautomerGenerator instance \a gen.
-    # \param gen The \c %TautomerGenerator instance to copy.
+    # \brief Replaces the state of this generator by a copy of the state of <em>gen</em>.
+    # 
+    # \param gen The source <tt>TautomerGenerator</tt>.
+    # 
     # \return \a self
     # 
     def assign(gen: TautomerGenerator) -> TautomerGenerator: pass

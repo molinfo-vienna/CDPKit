@@ -20,38 +20,39 @@
 #
 
 ##
-# \brief Sets the protation state of molecules according to desired objectives.
+# \brief Adjusts the protonation state of a molecule (atom formal charges and bonded hydrogen counts) according to one of several pre-defined objectives.
 # 
 class ProtonationStateStandardizer(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Selects the objective driving the protonation-state adjustment.
+    # 
     class Flavor(Boost.Python.enum):
 
         ##
-        # \brief MIN_CHARGED_ATOM_COUNT.
-        #
+        # \brief Minimize the total number of formally charged atoms (neutralize where possible).
+        # 
         MIN_CHARGED_ATOM_COUNT = 0
 
         ##
-        # \brief PHYSIOLOGICAL_CONDITION_STATE.
-        #
+        # \brief Set the protonation state expected under physiological conditions (pH ~7.4).
+        # 
         PHYSIOLOGICAL_CONDITION_STATE = 1
 
         ##
-        # \brief MAX_CHARGE_COMPENSATION.
-        #
+        # \brief Maximize the cancellation of opposite formal charges (neutralize zwitterion-like pairs).
+        # 
         MAX_CHARGE_COMPENSATION = 2
 
     ##
-    # \brief Initializes the \c %ProtonationStateStandardizer instance.
+    # \brief Constructs the <tt>ProtonationStateStandardizer</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %ProtonationStateStandardizer instance \a standardizer.
-    # \param standardizer The \c %ProtonationStateStandardizer instance to copy.
+    # \brief Constructs a copy of the <tt>ProtonationStateStandardizer</tt> instance <em>standardizer</em>.
+    # 
+    # \param standardizer The <tt>ProtonationStateStandardizer</tt> to copy.
     # 
     def __init__(standardizer: ProtonationStateStandardizer) -> None: pass
 
@@ -68,27 +69,33 @@ class ProtonationStateStandardizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ProtonationStateStandardizer instance \a standardizer.
-    # \param standardizer The \c %ProtonationStateStandardizer instance to copy.
+    # \brief Replaces the state of this standardizer by a copy of the state of <em>standardizer</em>.
+    # 
+    # \param standardizer The source <tt>ProtonationStateStandardizer</tt>.
+    # 
     # \return \a self
     # 
     def assign(standardizer: ProtonationStateStandardizer) -> ProtonationStateStandardizer: pass
 
     ##
-    # \brief 
-    # \param mol 
-    # \param flavor 
-    # \return 
-    #
+    # \brief Adjusts the protonation state of <em>mol</em> in place according to the selected <em>flavor</em>.
+    # 
+    # \param mol The molecule to standardize (modified in place).
+    # \param flavor The protonation-state objective.
+    # 
+    # \return <tt>True</tt> if the molecule was modified, and <tt>False</tt> otherwise.
+    # 
     def standardize(mol: Molecule, flavor: Flavor) -> bool: pass
 
     ##
-    # \brief 
-    # \param mol 
-    # \param std_mol 
-    # \param flavor 
-    # \return 
-    #
+    # \brief Writes a standardized copy of <em>mol</em> to <em>std_mol</em> without modifying <em>mol</em>.
+    # 
+    # \param mol The input molecule.
+    # \param std_mol The output molecule receiving the standardized copy.
+    # \param flavor The protonation-state objective.
+    # 
+    # \return <tt>True</tt> if the output differs from the input, and <tt>False</tt> otherwise.
+    # 
     def standardize(mol: Molecule, std_mol: Molecule, flavor: Flavor) -> bool: pass
 
     objectID = property(getObjectID)

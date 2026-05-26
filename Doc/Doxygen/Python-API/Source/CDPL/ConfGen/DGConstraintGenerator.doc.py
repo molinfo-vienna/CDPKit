@@ -184,7 +184,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     def add14DistanceConstraints(coords_gen: Util.DG3DCoordinatesGenerator) -> None: pass
 
     ##
-    # \brief Adds default (van der Waals-derived) lower/upper distance constraints between all non-bonded atom pairs to <em>coords_gen</em>.
+    # \brief Adds default (Van der Waals-derived) lower/upper distance constraints between all non-bonded atom pairs to <em>coords_gen</em>.
     # 
     # \param coords_gen The coordinates generator to add the constraints to.
     # 

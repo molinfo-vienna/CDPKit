@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Reader for bzip2-compressed regular-grid-set data in the native I/O format of the <em>CDPL</em>.
+# \brief Reader for bzip2-compressed regular spatial grid set data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFBZ2DRegularGridSetReader(DRegularGridSetReaderBase):
 

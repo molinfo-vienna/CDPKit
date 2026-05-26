@@ -250,35 +250,35 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def setFactorDAEPS(value: float) -> None: pass
 
     ##
-    # \brief Returns the exponent used in the calculation of van der Waals interaction energies.
+    # \brief Returns the exponent used in the calculation of Van der Waals interaction energies.
     # 
     # \return The exponent.
     # 
     def getExponent() -> float: pass
 
     ##
-    # \brief Returns the value of the <em>B</em> factor used in the calculation of van der Waals interaction energies.
+    # \brief Returns the value of the <em>B</em> factor used in the calculation of Van der Waals interaction energies.
     # 
     # \return The value of the <em>B</em> factor.
     # 
     def getFactorB() -> float: pass
 
     ##
-    # \brief Returns the value of <em>beta</em> used in the calculation of van der Waals interaction energies.
+    # \brief Returns the value of <em>beta</em> used in the calculation of Van der Waals interaction energies.
     # 
     # \return The value of <em>beta</em>.
     # 
     def getBeta() -> float: pass
 
     ##
-    # \brief Returns the value of the <em>DARAD</em> factor used in the calculation of van der Waals interaction energies.
+    # \brief Returns the value of the <em>DARAD</em> factor used in the calculation of Van der Waals interaction energies.
     # 
     # \return The value of the <em>DARAD</em> factor.
     # 
     def getFactorDARAD() -> float: pass
 
     ##
-    # \brief Returns the value of the <em>DAEPS</em> factor used in the calculation of van der Waals interaction energies.
+    # \brief Returns the value of the <em>DAEPS</em> factor used in the calculation of Van der Waals interaction energies.
     # 
     # \return The value of the <em>DAEPS</em> factor.
     # 

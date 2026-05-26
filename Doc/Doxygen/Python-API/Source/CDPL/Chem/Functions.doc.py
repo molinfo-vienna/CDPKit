@@ -47,18 +47,20 @@ def get2DCoordinates(atom: Atom) -> Math.Vector2D: pass
 def clear2DCoordinates(atom: Atom) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords 
-#
+# \brief Writes the 2D coordinates in <em>coords</em> back to the corresponding atoms of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# \param coords The 2D coordinates to assign (must contain at least one entry per atom).
+# 
 def set2DCoordinates(cntnr: AtomContainer, coords: Math.Vector2DArray) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords 
-# \param append 
-#
+# \brief Extracts the 2D coordinates of all atoms in <em>cntnr</em> into <em>coords</em>.
+# 
+# \param cntnr The atom container.
+# \param coords The output 2D-coordinate array.
+# \param append If <tt>True</tt>, the coordinates are appended to <em>coords</em>; otherwise <em>coords</em> is cleared first.
+# 
 def get2DCoordinates(cntnr: AtomContainer, coords: Math.Vector2DArray, append: bool = False) -> None: pass
 
 ##
@@ -116,12 +118,13 @@ def get3DCoordinatesArray(atom: Atom) -> Math.Vector3DArray: pass
 def clear3DCoordinatesArray(atom: Atom) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords 
-# \param coords_func 
-# \param append 
-#
+# \brief Extracts the 3D coordinates of all atoms in <em>cntnr</em> into <em>coords</em> using the per-atom coordinate lookup function <em>coords_func</em>.
+# 
+# \param cntnr The atom container.
+# \param coords The output 3D-coordinate array.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param append If <tt>True</tt>, the coordinates are appended to <em>coords</em>; otherwise <em>coords</em> is cleared first.
+# 
 def get3DCoordinates(cntnr: AtomContainer, coords: Math.Vector3DArray, coords_func: Atom3DCoordinatesFunction, append: bool = False) -> None: pass
 
 ##
@@ -654,12 +657,13 @@ def getComponents(molgraph: MolecularGraph) -> FragmentList: pass
 def clearComponents(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param conf_idx 
-# \param coords 
-# \param append 
-#
+# \brief Extracts the conformation at index <em>conf_idx</em> into <em>coords</em>.
+# 
+# \param cntnr The atom container.
+# \param conf_idx The zero-based conformation index.
+# \param coords The output 3D-coordinate array.
+# \param append If <tt>True</tt>, the coordinates are appended to <em>coords</em>; otherwise <em>coords</em> is cleared first.
+# 
 def getConformation(cntnr: AtomContainer, conf_idx: int, coords: Math.Vector3DArray, append: bool = False) -> None: pass
 
 ##
@@ -707,9 +711,10 @@ def clearConformationIndex(molgraph: MolecularGraph) -> None: pass
 def setConformation(molgraph: MolecularGraph, conf_idx: int, coords: Math.Vector3DArray, energy: float) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes all stored conformations from the atoms of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# 
 def clearConformations(cntnr: AtomContainer) -> None: pass
 
 ##
@@ -807,11 +812,13 @@ def getContainingFragments(bond: Bond, frag_list: FragmentList, cont_frag_list: 
 def getContainingFragments(molgraph: MolecularGraph, frag_list: FragmentList, cont_frag_list: FragmentList, append: bool = False, atoms: bool = True, bonds: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param dim 
-# \return 
-#
+# \brief Tells whether all atoms of <em>cntnr</em> carry coordinates of the given dimensionality.
+# 
+# \param cntnr The atom container.
+# \param dim The coordinate dimensionality (<em>2</em> or <em>3</em>).
+# 
+# \return <tt>True</tt> if all atoms have the requested coordinates, and <tt>False</tt> otherwise.
+# 
 def hasCoordinates(cntnr: AtomContainer, dim: int) -> bool: pass
 
 ##
@@ -2031,10 +2038,12 @@ def getMatchExpressionString(bond: Bond) -> str: pass
 def clearMatchExpressionString(bond: Bond) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the largest atom-mapping ID assigned to any atom of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# 
+# \return The largest atom-mapping ID (zero if no atom carries an atom-mapping ID).
+# 
 def getMaxAtomMappingID(cntnr: AtomContainer) -> int: pass
 
 ##
@@ -2045,10 +2054,12 @@ def getMaxAtomMappingID(cntnr: AtomContainer) -> int: pass
 def getMaxAtomMappingID(rxn: Reaction) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the largest component-group ID assigned to any atom of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# 
+# \return The largest component-group ID (zero if no atom carries a component-group ID).
+# 
 def getMaxComponentGroupID(cntnr: AtomContainer) -> int: pass
 
 ##
@@ -2167,10 +2178,12 @@ def getName(rxn: Reaction) -> str: pass
 def clearName(rxn: Reaction) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the number of conformations stored on the atoms of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# 
+# \return The conformation count.
+# 
 def getNumConformations(cntnr: AtomContainer) -> int: pass
 
 ##
@@ -2661,17 +2674,21 @@ def getStructureData(molgraph: MolecularGraph) -> StringDataBlock: pass
 def clearStructureData(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param sybyl_type 
-# \return 
-#
+# \brief Returns the canonical textual representation of the Sybyl atom type <em>sybyl_type</em>.
+# 
+# \param sybyl_type The Sybyl atom-type identifier (Chem.SybylAtomType value).
+# 
+# \return A reference to the type-name string (empty for unknown types).
+# 
 def getSybylAtomTypeString(sybyl_type: int) -> str: pass
 
 ##
-# \brief 
-# \param sybyl_type 
-# \return 
-#
+# \brief Returns the canonical textual representation of the Sybyl bond type <em>sybyl_type</em>.
+# 
+# \param sybyl_type The Sybyl bond-type identifier (Chem.SybylBondType value).
+# 
+# \return A reference to the type-name string (empty for unknown types).
+# 
 def getSybylBondTypeString(sybyl_type: int) -> str: pass
 
 ##
@@ -2941,10 +2958,11 @@ def getUnpairedElectronCount(atom: Atom) -> int: pass
 def clearUnpairedElectronCount(atom: Atom) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords 
-#
+# \brief Appends a new conformation built from the supplied 3D coordinates to the atoms of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# \param coords The 3D coordinates of the new conformation.
+# 
 def addConformation(cntnr: AtomContainer, coords: Math.Vector3DArray) -> None: pass
 
 ##
@@ -3004,52 +3022,71 @@ def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, s
 def align3DCoordinates(cntnr: Entity3DContainer, ref_entities: Entity3DContainer, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ref_atoms 
-# \param ref_coords 
-# \return 
-#
+# \brief Aligns each stored conformation of <em>cntnr</em> onto the supplied reference coordinates using the atoms of <em>ref_atoms</em> as alignment anchors.
+# 
+# \param cntnr The atom container holding the conformations to be aligned.
+# \param ref_atoms The atoms used as alignment anchors (must all be members of <em>cntnr</em>).
+# \param ref_coords Reference 3D coordinates of the alignment-anchor atoms.
+# 
+# \return <tt>True</tt> if the alignment succeeded for every conformation, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ref_atoms 
-# \param ref_coords 
-# \return 
-#
+# \brief Aligns each stored conformation of <em>cntnr</em> onto the supplied reference coordinates using the atoms of <em>ref_atoms</em> as alignment anchors.
+# 
+# \param cntnr The atom container holding the conformations to be aligned.
+# \param ref_atoms The atoms used as alignment anchors (must all be members of <em>cntnr</em>).
+# \param ref_coords Reference 3D coordinates of the alignment-anchor atoms.
+# 
+# \return <tt>True</tt> if the alignment succeeded for every conformation, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def alignConformations(cntnr: AtomContainer, ref_atoms: AtomContainer, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ref_atoms 
-# \return 
-#
+# \brief Aligns each stored conformation of <em>cntnr</em> to the first conformation using the atoms of <em>ref_atoms</em> as alignment anchors.
+# 
+# \param cntnr The atom container holding the conformations to be aligned.
+# \param ref_atoms The atoms used as alignment anchors (must all be members of <em>cntnr</em>).
+# 
+# \return <tt>True</tt> if the alignment succeeded for every conformation, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ref_atoms 
-# \return 
-#
+# \brief Aligns each stored conformation of <em>cntnr</em> to the first conformation using the atoms of <em>ref_atoms</em> as alignment anchors.
+# 
+# \param cntnr The atom container holding the conformations to be aligned.
+# \param ref_atoms The atoms used as alignment anchors (must all be members of <em>cntnr</em>).
+# 
+# \return <tt>True</tt> if the alignment succeeded for every conformation, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def alignConformations(cntnr: AtomContainer, ref_atoms: AtomContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param conf_idx 
-#
+# \brief Promotes the stored conformation at index <em>conf_idx</em> to the active per-atom 3D coordinates.
+# 
+# \param cntnr The atom container.
+# \param conf_idx The zero-based conformation index.
+# 
 def applyConformation(cntnr: AtomContainer, conf_idx: int) -> None: pass
 
 ##
-# \brief 
-# \param qry_type 
-# \param tgt_type 
-# \return 
-#
+# \brief Tells whether the target atom type <em>tgt_type</em> matches the query atom type <em>qry_type</em> (taking generic atom-type classes like Chem.AtomType.HET into account).
+# 
+# \param qry_type The query atom type (Chem.AtomType value).
+# \param tgt_type The target atom type (Chem.AtomType value).
+# 
+# \return <tt>True</tt> if the target matches the query, and <tt>False</tt> otherwise.
+# 
 def atomTypesMatch(qry_type: int, tgt_type: int) -> bool: pass
 
 ##
@@ -3120,13 +3157,14 @@ def calcBondCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None
 def calcBondStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1, check_stc_flag: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param min 
-# \param max 
-# \param coords_func 
-# \param reset 
-#
+# \brief Computes the axis-aligned bounding box enclosing the atoms of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# \param min The output lower-left corner of the bounding box.
+# \param max The output upper-right corner of the bounding box.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param reset If <tt>True</tt>, the bounding box is reset to the first atom; otherwise <em>min</em> and <em>max</em> are extended in place.
+# 
 def calcBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction, reset: bool = True) -> None: pass
 
 ##
@@ -3155,21 +3193,25 @@ def calcCIPPriorities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 def calcCanonicalNumbering(molgraph: MolecularGraph, overwrite: bool, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords_func 
-# \param ctr 
-# \return 
-#
+# \brief Computes the mass-weighted center of mass of the atoms in <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param ctr The output center-of-mass coordinates.
+# 
+# \return <tt>True</tt> if the center of mass could be computed (at least one atom with non-zero mass), and <tt>False</tt> otherwise.
+# 
 def calcCenterOfMass(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: Math.Vector3D) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords_func 
-# \param ctr 
-# \return 
-#
+# \brief Computes the unweighted centroid (arithmetic mean of atom coordinates) of <em>cntnr</em>.
+# 
+# \param cntnr The atom container.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param ctr The output centroid coordinates.
+# 
+# \return <tt>True</tt> if the centroid could be computed (<em>cntnr</em> is non-empty), and <tt>False</tt> otherwise.
+# 
 def calcCentroid(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: Math.Vector3D) -> bool: pass
 
 ##
@@ -3375,19 +3417,23 @@ def connectAtoms(mol: Molecule, coords_func: Atom3DCoordinatesFunction, dist_tol
 def connectAtoms(mol: Molecule, dist_tol: float = 0.3, atom_idx_offs: int = 0) -> None: pass
 
 ##
-# \brief 
-# \param frag_list 
-# \param bond 
-# \return 
-#
+# \brief Tells whether any fragment in <em>frag_list</em> contains the bond <em>bond</em>.
+# 
+# \param frag_list The list of fragments to search.
+# \param bond The queried bond.
+# 
+# \return <tt>True</tt> if at least one fragment contains <em>bond</em>, and <tt>False</tt> otherwise.
+# 
 def containsFragmentWithBond(frag_list: FragmentList, bond: Bond) -> bool: pass
 
 ##
-# \brief 
-# \param frag_list 
-# \param min_size 
-# \return 
-#
+# \brief Tells whether <em>frag_list</em> contains at least one fragment with at least <em>min_size</em> atoms.
+# 
+# \param frag_list The list of fragments to search.
+# \param min_size The minimum required atom count.
+# 
+# \return <tt>True</tt> if such a fragment exists, and <tt>False</tt> otherwise.
+# 
 def containsFragmentWithMinSize(frag_list: FragmentList, min_size: int) -> bool: pass
 
 ##
@@ -3401,50 +3447,56 @@ def containsFragmentWithMinSize(frag_list: FragmentList, min_size: int) -> bool:
 def containsMolecularGraph(molgraph: MolecularGraph, sub_molgraph: MolecularGraph, atoms: bool = True, bonds: bool = True) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mol 
-# \param pred 
-# \param append 
-#
+# \brief Copies every atom of <em>cntnr</em> that satisfies <em>pred</em> into the molecule <em>mol</em>.
+# 
+# \param cntnr The source atom container.
+# \param mol The target molecule.
+# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>True</tt> are copied.
+# \param append If <tt>True</tt>, atoms are appended to <em>mol</em>; otherwise <em>mol</em> is cleared first.
+# 
 def copyAtomsIf(cntnr: AtomContainer, mol: Molecule, pred: AtomPredicate, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param frag 
-# \param pred 
-# \param append 
-#
+# \brief Copies every atom of <em>cntnr</em> that satisfies <em>pred</em> into the fragment <em>frag</em>.
+# 
+# \param cntnr The source atom container.
+# \param frag The target fragment.
+# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>True</tt> are copied.
+# \param append If <tt>True</tt>, atoms are appended to <em>frag</em>; otherwise <em>frag</em> is cleared first.
+# 
 def copyAtomsIf(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mol 
-# \param pred 
-# \param append 
-#
+# \brief Copies every atom of <em>cntnr</em> that does <em>not</em> satisfy <em>pred</em> into the molecule <em>mol</em>.
+# 
+# \param cntnr The source atom container.
+# \param mol The target molecule.
+# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>False</tt> are copied.
+# \param append If <tt>True</tt>, atoms are appended to <em>mol</em>; otherwise <em>mol</em> is cleared first.
+# 
 def copyAtomsIfNot(cntnr: AtomContainer, mol: Molecule, pred: AtomPredicate, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param frag 
-# \param pred 
-# \param append 
-#
+# \brief Copies every atom of <em>cntnr</em> that does <em>not</em> satisfy <em>pred</em> into the fragment <em>frag</em>.
+# 
+# \param cntnr The source atom container.
+# \param frag The target fragment.
+# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>False</tt> are copied.
+# \param append If <tt>True</tt>, atoms are appended to <em>frag</em>; otherwise <em>frag</em> is cleared first.
+# 
 def copyAtomsIfNot(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mask 
-# \param type 
-# \param reset 
-# \param strict 
-# \return 
-#
+# \brief Sets bits in <em>mask</em> corresponding to atoms of <em>cntnr</em> whose atom type matches <em>type</em>.
+# 
+# \param cntnr The atom container.
+# \param mask The output bit mask (bit <em>i</em> is set if atom <em>i</em> of <em>cntnr</em> has the requested type).
+# \param type The query atom type (Chem.AtomType value, possibly a generic class such as Chem.AtomType.HET).
+# \param reset If <tt>True</tt>, <em>mask</em> is reset before processing; otherwise existing bits are preserved.
+# \param strict If <tt>True</tt>, only exact type matches are accepted; if <tt>False</tt>, generic-class matches also set the bit.
+# 
+# \return The number of atoms whose bit was set.
+# 
 def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset: bool = True, strict: bool = True) -> int: pass
 
 ##
@@ -3469,12 +3521,13 @@ def editSubstructures(molgraph: MolecularGraph, result_mol: Molecule, search_ptn
 def editSubstructures(mol: Molecule, search_ptns: str, result_ptn: str, exclude_ptns: str = '') -> int: pass
 
 ##
-# \brief 
-# \param min 
-# \param max 
-# \param coords 
-# \param reset 
-#
+# \brief Extends the axis-aligned bounding box defined by <em>min</em> and <em>max</em> so that it contains the point <em>coords</em>.
+# 
+# \param min The lower-left corner of the bounding box (updated in place).
+# \param max The upper-right corner of the bounding box (updated in place).
+# \param coords The 3D point to include.
+# \param reset If <tt>True</tt>, the bounding box is first reset to <em>coords</em> (degenerate point box) before extension.
+# 
 def extendBoundingBox(min: Math.Vector3D, max: Math.Vector3D, coords: Math.Vector3D, reset: bool = False) -> None: pass
 
 ##
@@ -3703,13 +3756,15 @@ def initSubstructureSearchTarget(molgraph: MolecularGraph, overwrite: bool) -> N
 def initSubstructureSearchTarget(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param min 
-# \param max 
-# \param coords_func 
-# \return 
-#
+# \brief Tells whether every atom of <em>cntnr</em> lies inside the axis-aligned bounding box defined by <em>min</em> and <em>max</em>.
+# 
+# \param cntnr The atom container.
+# \param min The lower-left corner of the bounding box.
+# \param max The upper-right corner of the bounding box.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# 
+# \return <tt>True</tt> if all atoms are inside the box, and <tt>False</tt> otherwise.
+# 
 def insideBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
 
 ##
@@ -3722,22 +3777,26 @@ def insideBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector
 def insideBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
 ##
-# \brief 
-# \param min 
-# \param max 
-# \param coords 
-# \return 
-#
+# \brief Tells whether the point <em>coords</em> lies inside the axis-aligned bounding box defined by <em>min</em> and <em>max</em>.
+# 
+# \param min The lower-left corner of the bounding box.
+# \param max The upper-right corner of the bounding box.
+# \param coords The 3D point to test.
+# 
+# \return <tt>True</tt> if the point is inside (componentwise <= <em>max</em> and >= <em>min</em>), and <tt>False</tt> otherwise.
+# 
 def insideBoundingBox(min: Math.Vector3D, max: Math.Vector3D, coords: Math.Vector3D) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param min 
-# \param max 
-# \param coords_func 
-# \return 
-#
+# \brief Tells whether at least one atom of <em>cntnr</em> lies inside the axis-aligned bounding box defined by <em>min</em> and <em>max</em>.
+# 
+# \param cntnr The atom container.
+# \param min The lower-left corner of the bounding box.
+# \param max The upper-right corner of the bounding box.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# 
+# \return <tt>True</tt> if at least one atom is inside the box, and <tt>False</tt> otherwise.
+# 
 def intersectsBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
 
 ##
@@ -3750,12 +3809,14 @@ def intersectsBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Ve
 def intersectsBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
 ##
-# \brief 
-# \param ring 
-# \param molgraph 
-# \param arom_bond_mask 
-# \return 
-#
+# \brief Tells whether <em>ring</em> fulfills the Hckel <em></em>(4n+2)<em>&pi;-electron</em> criterion within <em>molgraph</em>.
+# 
+# \param ring The candidate aromatic ring.
+# \param molgraph The parent molecular graph.
+# \param arom_bond_mask A bond bit mask flagging bonds already known to be aromatic.
+# 
+# \return <tt>True</tt> if <em>ring</em> satisfies the Hckel rule, and <tt>False</tt> otherwise.
+# 
 def isAromatic(ring: Fragment, molgraph: MolecularGraph, arom_bond_mask: Util.BitSet) -> bool: pass
 
 ##
@@ -3777,11 +3838,13 @@ def isInFragmentOfSize(atom: Atom, frag_list: FragmentList, size: int) -> bool: 
 def isInFragmentOfSize(bond: Bond, frag_list: FragmentList, size: int) -> bool: pass
 
 ##
-# \brief 
-# \param ring 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether <em>ring</em> is guaranteed not to be aromatic (based on quick geometric/topological criteria).
+# 
+# \param ring The ring to test.
+# \param molgraph The parent molecular graph.
+# 
+# \return <tt>True</tt> if <em>ring</em> cannot be aromatic, and <tt>False</tt> if a more thorough test is required.
+# 
 def isNotAromatic(ring: Fragment, molgraph: MolecularGraph) -> bool: pass
 
 ##
@@ -3880,35 +3943,43 @@ def makeOrdinaryHydrogenDeplete(mol: Molecule, flags: int, corr_impl_h_count: bo
 def markReachableAtoms(atom: Atom, molgraph: MolecularGraph, atom_mask: Util.BitSet, reset: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param smarts 
-# \param init_qry 
-# \return 
-#
+# \brief Parses the SMARTS string <em>smarts</em> into a freshly allocated query Chem.Molecule.
+# 
+# \param smarts The SMARTS string to parse.
+# \param init_qry If <tt>True</tt>, query-specific perception (e.g. ring-membership, aromaticity) is run on the parsed molecule.
+# 
+# \return A smart reference to the parsed molecule, or an empty smart reference if parsing failed.
+# 
 def parseSMARTS(smarts: str, init_qry: bool = True) -> Molecule: pass
 
 ##
-# \brief 
-# \param smarts 
-# \param mol 
-# \param init_qry 
-# \return 
-#
+# \brief Parses the SMARTS string <em>smarts</em> into the supplied molecule <em>mol</em>.
+# 
+# \param smarts The SMARTS string to parse.
+# \param mol The molecule to populate (cleared before parsing).
+# \param init_qry If <tt>True</tt>, query-specific perception is run on the parsed molecule.
+# 
+# \return <tt>True</tt> if parsing succeeded, and <tt>False</tt> otherwise.
+# 
 def parseSMARTS(smarts: str, mol: Molecule, init_qry: bool = True) -> bool: pass
 
 ##
-# \brief 
-# \param smiles 
-# \return 
-#
+# \brief Parses the SMILES string <em>smiles</em> into a freshly allocated Chem.Molecule.
+# 
+# \param smiles The SMILES string to parse.
+# 
+# \return A smart reference to the parsed molecule, or an empty smart reference if parsing failed.
+# 
 def parseSMILES(smiles: str) -> Molecule: pass
 
 ##
-# \brief 
-# \param smiles 
-# \param mol 
-# \return 
-#
+# \brief Parses the SMILES string <em>smiles</em> into the supplied molecule <em>mol</em>.
+# 
+# \param smiles The SMILES string to parse.
+# \param mol The molecule to populate (cleared before parsing).
+# 
+# \return <tt>True</tt> if parsing succeeded, and <tt>False</tt> otherwise.
+# 
 def parseSMILES(smiles: str, mol: Molecule) -> bool: pass
 
 ##
@@ -4163,17 +4234,20 @@ def removeAtomsIfNot(mol: Molecule, pred: AtomPredicate) -> None: pass
 def splitIntoFragments(molgraph: MolecularGraph, frag_list: FragmentList, split_bond_mask: Util.BitSet, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param sybyl_type 
-# \return 
-#
+# \brief Translates a Sybyl atom-type identifier to the corresponding generic Chem.AtomType value.
+# 
+# \param sybyl_type The Sybyl atom-type identifier (Chem.SybylAtomType value).
+# 
+# \return The corresponding Chem.AtomType value.
+# 
 def sybylToAtomType(sybyl_type: int) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mtx 
-#
+# \brief Transforms the 2D coordinates of all atoms in <em>cntnr</em> by the affine 3&times;3 matrix <em>mtx</em>.
+# 
+# \param cntnr The atom container.
+# \param mtx The 2D affine transformation matrix.
+# 
 def transform2DCoordinates(cntnr: AtomContainer, mtx: Math.Matrix3D) -> None: pass
 
 ##
@@ -4184,18 +4258,20 @@ def transform2DCoordinates(cntnr: AtomContainer, mtx: Math.Matrix3D) -> None: pa
 def transform3DCoordinates(cntnr: Entity3DContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param conf_idx 
-# \param mtx 
-#
+# \brief Transforms the conformation at index <em>conf_idx</em> by the homogeneous 4&times;4 matrix <em>mtx</em>.
+# 
+# \param cntnr The atom container.
+# \param conf_idx The zero-based conformation index.
+# \param mtx The homogeneous 4&times;4 transformation matrix.
+# 
 def transformConformation(cntnr: AtomContainer, conf_idx: int, mtx: Math.Matrix4D) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mtx 
-#
+# \brief Transforms every stored conformation of the atoms in <em>cntnr</em> by the homogeneous 4&times;4 matrix <em>mtx</em>.
+# 
+# \param cntnr The atom container.
+# \param mtx The homogeneous 4&times;4 transformation matrix.
+# 
 def transformConformations(cntnr: AtomContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##

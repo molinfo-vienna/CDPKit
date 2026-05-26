@@ -29,7 +29,7 @@
 class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
-    # \brief Default scaling factor applied to van der Waals radii for the proximity-check pruning.
+    # \brief Default scaling factor applied to Van der Waals radii for the proximity-check pruning.
     # 
     DEF_RADIUS_SCALING_FACTOR = 1.4
 
@@ -77,7 +77,7 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     def proximityOptimization() -> bool: pass
 
     ##
-    # \brief Sets the scaling factor applied to van der Waals radii during the proximity check.
+    # \brief Sets the scaling factor applied to Van der Waals radii during the proximity check.
     # 
     # \param factor The new radius scaling factor.
     # 

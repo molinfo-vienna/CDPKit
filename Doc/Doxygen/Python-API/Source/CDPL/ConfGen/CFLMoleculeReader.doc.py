@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the native I/O format of the <em>CDPL</em>.
+# \brief A reader for molecule data stored in the CDPL conformer fragment library format (CFL).
 # 
 class CFLMoleculeReader(Chem.MoleculeReaderBase):
 

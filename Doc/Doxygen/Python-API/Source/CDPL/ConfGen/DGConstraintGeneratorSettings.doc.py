@@ -25,7 +25,7 @@
 class DGConstraintGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings.
+    # \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings instance.
     # 
     DEFAULT = _HIDDEN_VALUE_
 

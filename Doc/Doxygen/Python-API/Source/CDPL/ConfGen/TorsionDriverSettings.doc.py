@@ -25,7 +25,7 @@
 class TorsionDriverSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed TorsionDriverSettings.
+    # \brief Default settings used by a freshly-constructed TorsionDriverSettings instance.
     # 
     DEFAULT = _HIDDEN_VALUE_
 

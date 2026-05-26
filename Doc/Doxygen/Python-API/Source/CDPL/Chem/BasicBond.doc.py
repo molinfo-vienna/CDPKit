@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BasicBond.
+# \brief BasicMolecule-specific implementation of the Chem.Bond interface.
+# 
+# Instances of <tt>BasicBond</tt> are owned and constructed exclusively by the parent Chem.BasicMolecule and reference its Chem.BasicAtom objects as the two bonded atoms.
 # 
 class BasicBond(Bond):
 

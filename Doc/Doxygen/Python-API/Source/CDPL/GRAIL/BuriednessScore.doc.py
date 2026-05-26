@@ -22,7 +22,7 @@
 ##
 # \brief Functor for the calculation of the <em>buriedness</em> of a 3D query position with respect to the surrounding atoms.
 # 
-# The buriedness score is computed by casting a configurable number of test rays evenly distributed over the surface of a probe sphere centered at the query position. For each ray it is checked whether the ray hits an atom of the input container (the van der Waals surface, expanded by a minimum distance) within the probe sphere. The returned score is the fraction of rays that hit an atom and thus reflects how surrounded by the atoms the query position is.
+# The buriedness score is computed by casting a configurable number of test rays evenly distributed over the surface of a probe sphere centered at the query position. For each ray it is checked whether the ray hits an atom of the input container (the Van der Waals surface, expanded by a minimum distance) within the probe sphere. The returned score is the fraction of rays that hit an atom and thus reflects how surrounded by the atoms the query position is.
 # 
 class BuriednessScore(Boost.Python.instance):
 
@@ -46,7 +46,7 @@ class BuriednessScore(Boost.Python.instance):
     # \brief Constructs a <tt>BuriednessScore</tt> instance with the given configuration.
     # 
     # \param probe_radius The probe sphere radius.
-    # \param min_vdw_surf_dist The minimum distance to the van der Waals surface of an atom.
+    # \param min_vdw_surf_dist The minimum distance to the Van der Waals surface of an atom.
     # \param num_test_rays The number of rays used in the calculation.
     # 
     def __init__(probe_radius: float = 8.0, min_vdw_surf_dist: float = 1.0, num_test_rays: float = 200) -> None: pass
@@ -64,16 +64,16 @@ class BuriednessScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Sets the minimum required distance between a ray and the van der Waals surface of an atom.
+    # \brief Sets the minimum required distance between a ray and the Van der Waals surface of an atom.
     # 
-    # \param dist The minimum distance to the van der Waals surface.
+    # \param dist The minimum distance to the Van der Waals surface.
     # 
     def setMinVdWSurfaceDistance(dist: float) -> None: pass
 
     ##
-    # \brief Returns the currently configured minimum distance to the van der Waals surface of an atom.
+    # \brief Returns the currently configured minimum distance to the Van der Waals surface of an atom.
     # 
-    # \return The configured minimum distance to the van der Waals surface.
+    # \return The configured minimum distance to the Van der Waals surface.
     # 
     def getMinVdWSurfaceDistance() -> float: pass
 

@@ -22,7 +22,7 @@
 ##
 # \brief Evaluates the total MMFF94 force-field energy of a 3D conformation.
 # 
-# The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and van der Waals energy contributions for a supplied set of 3D coordinates. The per-component energies are retained and made available via the dedicated accessors; the sum is returned by __call__ and getTotalEnergy().
+# The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions for a supplied set of 3D coordinates. The per-component energies are retained and made available via the dedicated accessors; the sum is returned by __call__ and getTotalEnergy().
 # 
 class MMFF94EnergyCalculator(Boost.Python.instance):
 
@@ -136,9 +136,9 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def getElectrostaticEnergy() -> float: pass
 
     ##
-    # \brief Returns the van der Waals energy contribution computed by the most recent __call__ call.
+    # \brief Returns the Van der Waals energy contribution computed by the most recent __call__ call.
     # 
-    # \return A reference to the van der Waals energy.
+    # \return A reference to the Van der Waals energy.
     # 
     def getVanDerWaalsEnergy() -> float: pass
 

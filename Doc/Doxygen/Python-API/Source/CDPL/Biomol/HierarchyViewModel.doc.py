@@ -20,35 +20,46 @@
 #
 
 ##
-# \brief HierarchyViewModel.
+# \brief A single NMR/ensemble model of a Biomol.HierarchyView, holding the constituent chains.
 # 
 class HierarchyViewModel(HierarchyViewNode):
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of chains in this model.
+    # 
+    # \return The number of chains.
+    # 
     def getNumChains() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the chain at index <em>idx</em>.
+    # 
+    # \param idx The zero-based chain index.
+    # 
+    # \return A reference to the chain. 
+    # 
+    # \throw Base.IndexError if the number of chains is zero or <em>idx</em> is not in the range [0, getNumChains() - 1].
+    # 
     def getChain(idx: int) -> HierarchyViewChain: pass
 
     ##
-    # \brief 
-    # \param id 
-    # \return 
-    #
+    # \brief Tells whether this model contains a chain with the given PDB chain ID.
+    # 
+    # \param id The PDB chain ID.
+    # 
+    # \return <tt>True</tt> if such a chain exists, and <tt>False</tt> otherwise.
+    # 
     def hasChainWithID(id: str) -> bool: pass
 
     ##
-    # \brief 
-    # \param id 
-    # \return 
-    #
+    # \brief Returns the chain identified by the given PDB chain ID.
+    # 
+    # \param id The PDB chain ID.
+    # 
+    # \return A reference to the chain. 
+    # 
+    # \throw Base.ItemNotFound if no chain with the requested ID exists.
+    # 
     def getChainByID(id: str) -> HierarchyViewChain: pass
 
     ##

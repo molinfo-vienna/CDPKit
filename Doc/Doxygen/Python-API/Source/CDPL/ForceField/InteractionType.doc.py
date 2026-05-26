@@ -55,7 +55,7 @@ class InteractionType(Boost.Python.instance):
     TORSION = 16
 
     ##
-    # \brief Specifies a van der Waals interaction.
+    # \brief Specifies a Van der Waals interaction.
     # 
     VAN_DER_WAALS = 32
 

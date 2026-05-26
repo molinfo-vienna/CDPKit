@@ -20,21 +20,26 @@
 #
 
 ##
-# \brief HierarchyViewChain.
+# \brief A single chain of a Biomol.HierarchyView model, holding the constituent contiguous fragments (separated by chain breaks).
 # 
 class HierarchyViewChain(HierarchyViewNode):
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of contiguous fragments in this chain.
+    # 
+    # \return The number of fragments.
+    # 
     def getNumFragments() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the fragment at index <em>idx</em>.
+    # 
+    # \param idx The zero-based fragment index.
+    # 
+    # \return A reference to the fragment. 
+    # 
+    # \throw Base.IndexError if the number of fragments is zero or <em>idx</em> is not in the range [0, getNumFragments() - 1].
+    # 
     def getFragment(idx: int) -> HierarchyViewFragment: pass
 
     ##

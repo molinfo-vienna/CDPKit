@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Convenience alias for the single-precision regular-grid set.
+# \brief Convenience alias for the single-precision regular spatial grid sets.
 # 
 class FRegularGridSet(Boost.Python.instance):
 

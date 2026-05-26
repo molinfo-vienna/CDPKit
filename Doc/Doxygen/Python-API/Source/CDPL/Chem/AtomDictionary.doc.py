@@ -157,9 +157,9 @@ class AtomDictionary(Boost.Python.instance):
         def getValenceStates() -> Util.STArray: pass
 
         ##
-        # \brief Returns the van der Waals radius of the element.
+        # \brief Returns the Van der Waals radius of the element.
         # 
-        # \return The van der Waals radius.
+        # \return The Van der Waals radius.
         # 
         def getVdWRadius() -> float: pass
 
@@ -411,11 +411,11 @@ class AtomDictionary(Boost.Python.instance):
     def getAtomicWeight(type: int, isotope: int = 0) -> float: pass
 
     ##
-    # \brief Returns the <em>van der Waals</em> radius of the chemical element specified by <em>type</em>.
+    # \brief Returns the <em>Van der Waals</em> radius of the chemical element specified by <em>type</em>.
     # 
     # \param type The atom type specifying the chemical element.
     # 
-    # \return The <em>van der Waals</em> radius, or <em>0.0</em> if <em>type</em> does not specify a supported chemical element.
+    # \return The <em>Van der Waals</em> radius, or <em>0.0</em> if <em>type</em> does not specify a supported chemical element.
     # 
     @staticmethod
     def getVdWRadius(type: int) -> float: pass

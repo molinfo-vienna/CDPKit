@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief PatternAtomTyper.
+# \brief Assigns numeric labels to the atoms of a molecular graph by SMARTS-pattern matching.
+# 
+# Patterns are added via addPattern() (each pattern carries an atom-label value, a priority and match-handling flags). On execute() the typer iterates the registered patterns in priority order, runs each as a substructure query and assigns the corresponding atom label to every matched atom unless the atom has already received a label from a higher-priority pattern.
 # 
 class PatternAtomTyper(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Holds a single SMARTS query pattern, its atom-label value, its priority and match-handling flags.
+    # 
     class Pattern(Boost.Python.instance):
 
         ##
@@ -36,12 +38,13 @@ class PatternAtomTyper(Boost.Python.instance):
         def __init__(pattern: Pattern) -> None: pass
 
         ##
-        # \brief Initializes the \c %Pattern instance.
-        # \param molgraph 
-        # \param atom_label 
-        # \param priority 
-        # \param all_matches 
-        # \param unique_matches 
+        # \brief Constructs a pattern from the query molecular graph <em>molgraph</em>.
+        # 
+        # \param molgraph The SMARTS query molecular graph.
+        # \param atom_label The atom label to assign to atoms matching this pattern.
+        # \param priority The priority of this pattern; higher-priority patterns are evaluated first.
+        # \param all_matches If <tt>True</tt>, every match of <em>molgraph</em> in the target is processed; if <tt>False</tt>, only the first match is processed.
+        # \param unique_matches If <tt>True</tt>, only one of multiple equivalent substructure mappings is reported per match.
         # 
         def __init__(molgraph: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
 
@@ -65,33 +68,38 @@ class PatternAtomTyper(Boost.Python.instance):
         def assign(pattern: Pattern) -> Pattern: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the SMARTS query molecular graph of this pattern.
+        # 
+        # \return A reference to the query smart reference.
+        # 
         def getStructure() -> MolecularGraph: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the pattern priority.
+        # 
+        # \return The priority value.
+        # 
         def getPriority() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the atom label assigned by this pattern.
+        # 
+        # \return The atom-label value.
+        # 
         def getAtomLabel() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether all substructure matches are processed.
+        # 
+        # \return <tt>True</tt> if all matches are processed, and <tt>False</tt> if only the first match is.
+        # 
         def processAllMatches() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether only one of multiple equivalent mappings is processed per match.
+        # 
+        # \return <tt>True</tt> if unique-only mode is enabled, and <tt>False</tt> otherwise.
+        # 
         def processUniqueMatchesOnly() -> bool: pass
 
         objectID = property(getObjectID)
@@ -107,13 +115,14 @@ class PatternAtomTyper(Boost.Python.instance):
         uniqueMatches = property(processUniqueMatchesOnly)
 
     ##
-    # \brief Initializes the \c %PatternAtomTyper instance.
+    # \brief Constructs an empty <tt>PatternAtomTyper</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %PatternAtomTyper instance \a typer.
-    # \param typer The \c %PatternAtomTyper instance to copy.
+    # \brief Constructs a copy of the <tt>PatternAtomTyper</tt> instance <em>typer</em>.
+    # 
+    # \param typer The <tt>PatternAtomTyper</tt> to copy.
     # 
     def __init__(typer: PatternAtomTyper) -> None: pass
 
@@ -130,75 +139,94 @@ class PatternAtomTyper(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param atom_label 
-    # \param priority 
-    # \param all_matches 
-    # \param unique_matches 
-    #
+    # \brief Registers a new pattern by its query molecular graph and per-pattern settings.
+    # 
+    # \param molgraph The SMARTS query molecular graph.
+    # \param atom_label The atom label to assign to matched atoms.
+    # \param priority The pattern's priority; higher-priority patterns are evaluated first.
+    # \param all_matches If <tt>True</tt>, every match of the query is processed; otherwise only the first.
+    # \param unique_matches If <tt>True</tt>, only one of multiple equivalent substructure mappings is processed per match.
+    # 
     def addPattern(molgraph: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
 
     ##
-    # \brief 
-    # \param pattern 
-    #
+    # \brief Appends a copy of the pre-built pattern <em>pattern</em>.
+    # 
+    # \param pattern The pattern to copy and register.
+    # 
     def addPattern(pattern: Pattern) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the registered pattern at index <em>idx</em>.
+    # 
+    # \param idx The zero-based pattern index.
+    # 
+    # \return A reference to the pattern. 
+    # 
+    # \throw Base.IndexError if the number of patterns is zero or <em>idx</em> is not in the range [0, getNumPatterns() - 1].
+    # 
     def getPattern(idx: int) -> Pattern: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the registered pattern at index <em>idx</em>.
+    # 
+    # \param idx The zero-based pattern index.
+    # 
+    # \throw Base.IndexError if the number of patterns is zero or <em>idx</em> is not in the range [0, getNumPatterns() - 1].
+    # 
     def removePattern(idx: int) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all registered patterns.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of registered patterns.
+    # 
+    # \return The pattern count.
+    # 
     def getNumPatterns() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the atom label assigned to the atom at index <em>idx</em> during the last execute() call.
+    # 
+    # \param idx The zero-based atom index.
+    # 
+    # \return The atom label (zero if no pattern matched the atom).
+    # 
     def getAtomLabel(idx: int) -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the index of the pattern that produced the label of the atom at index <em>idx</em>.
+    # 
+    # \param idx The zero-based atom index.
+    # 
+    # \return The matching-pattern index (returns an undefined value if hasAtomLabel(idx) is <tt>False</tt>).
+    # 
     def getPatternIndex(idx: int) -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Tells whether the atom at index <em>idx</em> has received a label from any matching pattern.
+    # 
+    # \param idx The zero-based atom index in the molecular graph last processed by execute().
+    # 
+    # \return <tt>True</tt> if the atom carries a label, and <tt>False</tt> otherwise.
+    # 
     def hasAtomLabel(idx: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Runs the registered patterns against <em>molgraph</em> and assigns atom labels accordingly.
+    # 
+    # \param molgraph The molecular graph to be typed.
+    # 
     def execute(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %PatternAtomTyper instance \a typer.
-    # \param typer The \c %PatternAtomTyper instance to copy.
+    # \brief Replaces the state of this typer by a copy of the state of <em>typer</em>.
+    # 
+    # \param typer The source <tt>PatternAtomTyper</tt>.
+    # 
     # \return \a self
     # 
     def assign(typer: PatternAtomTyper) -> PatternAtomTyper: pass

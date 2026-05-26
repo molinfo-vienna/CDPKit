@@ -30,7 +30,7 @@ class ReturnCode(Boost.Python.instance):
     SUCCESS = 0
 
     ##
-    # \brief The operation could not be carried out because the object was not properly initialized.
+    # \brief The operation could not be carried out due to uninitialized input data.
     # 
     UNINITIALIZED = 1
 
@@ -70,7 +70,7 @@ class ReturnCode(Boost.Python.instance):
     FRAGMENT_CONF_GEN_TIMEOUT = 8
 
     ##
-    # \brief The submitted fragment has already been processed (FragmentLibraryGenerator).
+    # \brief The submitted fragment has already been processed.
     # 
     FRAGMENT_ALREADY_PROCESSED = 9
 

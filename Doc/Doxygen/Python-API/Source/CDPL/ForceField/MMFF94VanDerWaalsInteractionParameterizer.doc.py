@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Generates the MMFF94 van der Waals interactions for the non-bonded atom pairs of a molecular graph.
+# \brief Generates the MMFF94 Van der Waals interactions for the non-bonded atom pairs of a molecular graph.
 # 
-# For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom-type van der Waals parameters and the donor/acceptor classification from the supplied parameter table, applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction record into the output list.
+# For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom-type Van der Waals parameters and the donor/acceptor classification from the supplied parameter table, applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction record into the output list.
 # 
 class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Constructs an <tt>MMFF94VanDerWaalsInteractionParameterizer</tt> instance using the default MMFF94 tables.
+    # \brief Constructs an <tt>MMFF94VanDerWaalsInteractionParameterizer</tt> instance using the default MMFF94 parameter tables.
     # 
     def __init__() -> None: pass
 
@@ -40,7 +40,7 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Constructs the parameterizer and immediately processes <em>molgraph</em> into <em>ia_list</em>.
     # 
-    # \param molgraph The molecular graph for which to parameterize the van der Waals interactions.
+    # \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
     # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
     # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
     # 
@@ -80,9 +80,9 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def setTopologicalDistanceFunction(func: TopologicalAtomDistanceFunction) -> None: pass
 
     ##
-    # \brief Sets the table providing per-numeric-atom-type van der Waals parameters and donor/acceptor classifications.
+    # \brief Sets the table providing per-numeric-atom-type Van der Waals parameters and donor/acceptor classifications.
     # 
-    # \param table The new van der Waals parameter table.
+    # \param table The new Van der Waals parameter table.
     # 
     def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
@@ -94,9 +94,9 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
 
     ##
-    # \brief Generates the MMFF94 van der Waals interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
+    # \brief Generates the MMFF94 Van der Waals interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
     # 
-    # \param molgraph The molecular graph for which to parameterize the van der Waals interactions.
+    # \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
     # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
     # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
     # 

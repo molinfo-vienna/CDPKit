@@ -56,36 +56,48 @@ class HierarchyView(Boost.Python.instance):
     def build(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the flat list of all residues across all models of the hierarchy view.
+    # 
+    # \return A reference to the residue list.
+    # 
     def getResidues() -> ResidueList: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of NMR/ensemble models stored in the hierarchy view.
+    # 
+    # \return The number of models.
+    # 
     def getNumModels() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the model at index <em>idx</em>.
+    # 
+    # \param idx The zero-based model index.
+    # 
+    # \return A reference to the model. 
+    # 
+    # \throw Base.IndexError if the number of models is zero or <em>idx</em> is not in the range [0, getNumModels() - 1].
+    # 
     def getModel(idx: int) -> HierarchyViewModel: pass
 
     ##
-    # \brief 
-    # \param num 
-    # \return 
-    #
+    # \brief Tells whether the hierarchy view contains a model with PDB model number <em>num</em>.
+    # 
+    # \param num The PDB model number.
+    # 
+    # \return <tt>True</tt> if such a model exists, and <tt>False</tt> otherwise.
+    # 
     def hasModelWithNumber(num: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param num 
-    # \return 
-    #
+    # \brief Returns the model identified by PDB model number <em>num</em>.
+    # 
+    # \param num The PDB model number.
+    # 
+    # \return A reference to the model. 
+    # 
+    # \throw Base.ItemNotFound if no model with the requested number exists.
+    # 
     def getModelByNumber(num: int) -> HierarchyViewModel: pass
 
     ##

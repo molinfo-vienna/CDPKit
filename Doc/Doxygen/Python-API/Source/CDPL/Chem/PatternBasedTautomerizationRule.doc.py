@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief PatternBasedTautomerizationRule.
+# \brief SMARTS-pattern-based implementation of a Chem.TautomerizationRule.
+# 
+# The rule is configured with a set of <em>transformation patterns</em> (SMARTS queries describing the source substructure together with per-atom-pair bond-order changes that apply when the pattern matches) plus optional <em>exclude patterns</em> (substructures that, when present, suppress the application of the rule). The setup() / generate() pair from the base class then enumerates the tautomers reachable from the parent molecular graph by applying the configured transformations.
 # 
 class PatternBasedTautomerizationRule(TautomerizationRule):
 
     ##
-    # \brief 
-    #
+    # \brief Encodes a single bond-order change between two pattern atoms applied when the parent transformation pattern matches.
+    # 
     class BondOrderChange(Boost.Python.instance):
 
         ##
@@ -110,8 +112,9 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     def __init__(id: int) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %PatternBasedTautomerizationRule instance \a rule.
-    # \param rule The \c %PatternBasedTautomerizationRule instance to copy.
+    # \brief Constructs a copy of the <tt>PatternBasedTautomerizationRule</tt> instance <em>rule</em>.
+    # 
+    # \param rule The <tt>PatternBasedTautomerizationRule</tt> to copy.
     # 
     def __init__(rule: PatternBasedTautomerizationRule) -> None: pass
 
@@ -123,25 +126,29 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     def addTransformationPattern(molgraph: MolecularGraph, bond_chgs: object) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Registers an exclude pattern: when this substructure is present in the parent molecular graph, the matching transformation will not be applied.
+    # 
+    # \param molgraph The exclude SMARTS pattern.
+    # 
     def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param rule 
-    #
+    # \brief Copies all exclude patterns of <em>rule</em> into this rule.
+    # 
+    # \param rule The source rule whose exclude patterns are copied.
+    # 
     def addExcludePatterns(rule: PatternBasedTautomerizationRule) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all registered exclude patterns.
+    # 
     def clearExcludePatterns() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %PatternBasedTautomerizationRule instance \a rule.
-    # \param rule The \c %PatternBasedTautomerizationRule instance to copy.
+    # \brief Replaces the state of this rule by a copy of the state of <em>rule</em>.
+    # 
+    # \param rule The source <tt>PatternBasedTautomerizationRule</tt>.
+    # 
     # \return \a self
     # 
     def assign(rule: PatternBasedTautomerizationRule) -> PatternBasedTautomerizationRule: pass

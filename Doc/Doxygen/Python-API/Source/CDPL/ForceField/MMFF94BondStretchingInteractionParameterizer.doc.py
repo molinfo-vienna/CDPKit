@@ -27,7 +27,7 @@
 class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Constructs an <tt>MMFF94BondStretchingInteractionParameterizer</tt> instance using the default MMFF94 tables.
+    # \brief Constructs an <tt>MMFF94BondStretchingInteractionParameterizer</tt> instance using the default MMFF94 parameter tables.
     # 
     def __init__() -> None: pass
 

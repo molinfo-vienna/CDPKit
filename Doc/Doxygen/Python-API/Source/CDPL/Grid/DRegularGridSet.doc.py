@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Convenience alias for the double-precision regular-grid set.
+# \brief Convenience alias for the double-precision regular spatial grid sets.
 # 
 class DRegularGridSet(Boost.Python.instance):
 

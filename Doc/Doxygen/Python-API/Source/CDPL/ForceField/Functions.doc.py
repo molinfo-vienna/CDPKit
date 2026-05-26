@@ -1285,7 +1285,7 @@ def calcMMFF94VanDerWaalsEnergy(iaction: MMFF94VanDerWaalsInteraction, coords: M
 def calcMMFF94VanDerWaalsEnergy(ia_list: MMFF94VanDerWaalsInteractionList, coords: Math.Vector3DArray) -> float: pass
 
 ##
-# \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
+# \brief Calculates the Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
 # 
 # \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
 # 
@@ -1306,12 +1306,12 @@ def calcMMFF94VanDerWaalsEnergy(ia_list: MMFF94VanDerWaalsInteractionList, coord
 # \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
 # \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
 # 
-# \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+# \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
 # 
 def calcMMFF94VanDerWaalsEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
 
 ##
-# \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
+# \brief Calculates the Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
 # 
 # \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
 # 
@@ -1331,7 +1331,7 @@ def calcMMFF94VanDerWaalsEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector
 # \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
 # \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
 # 
-# \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+# \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
 # 
 def calcMMFF94VanDerWaalsEnergy(r_ij: float, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
 
@@ -1354,7 +1354,7 @@ def calcMMFF94VanDerWaalsGradient(iaction: MMFF94VanDerWaalsInteraction, coords:
 def calcMMFF94VanDerWaalsGradient(ia_list: MMFF94VanDerWaalsInteractionList, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
-# \brief Calculates the van der Waals interaction energy gradient \f$ \nabla E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
+# \brief Calculates the Van der Waals interaction energy gradient \f$ \nabla E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
 # 
 # Energy function:<br>
 #  \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
@@ -1388,7 +1388,7 @@ def calcMMFF94VanDerWaalsGradient(ia_list: MMFF94VanDerWaalsInteractionList, coo
 # \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
 # \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
 # 
-# \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$. 
+# \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$. 
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 

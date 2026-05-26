@@ -153,7 +153,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         minRMSD = property(getMinRMSD, setMinRMSD)
 
     ##
-    # \brief A static instance with default-initialized values.
+    # \brief A static instance providing settings default values.
     # 
     DEFAULT = _HIDDEN_VALUE_
 

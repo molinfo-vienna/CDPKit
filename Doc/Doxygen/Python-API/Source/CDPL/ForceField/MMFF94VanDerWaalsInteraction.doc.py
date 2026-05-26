@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief A single MMFF94 van der Waals interaction between two non-bonded atoms.
+# \brief A single MMFF94 Van der Waals interaction between two non-bonded atoms.
 # 
-# The MMFF94 van der Waals form is a buffered 14-7 potential \f$ E_{vdW} = \varepsilon_{IJ} \left( \frac{1.07 R_{IJ}}{r + 0.07 R_{IJ}} \right)^7 \left( \frac{1.12 R_{IJ}^7}{r^7 + 0.12 R_{IJ}^7} - 2 \right) \f$ with combined parameters \f$ R_{IJ} \f$ and \f$ \varepsilon_{IJ} \f$. The constructor performs the MMFF94 combining rules using the per-atom polarizabilities, effective electron numbers and the MMFF94-defined "factor A", "factor G", buffered combining "factor B" and donor/acceptor scaling factors; the resulting \f$ R_{IJ} \f$, \f$ \varepsilon_{IJ} \f$ and the precomputed \f$ R_{IJ}^7 \f$ are stored.
+# The MMFF94 Van der Waals form is a buffered 14-7 potential \f$ E_{vdW} = \varepsilon_{IJ} \left( \frac{1.07 R_{IJ}}{r + 0.07 R_{IJ}} \right)^7 \left( \frac{1.12 R_{IJ}^7}{r^7 + 0.12 R_{IJ}^7} - 2 \right) \f$ with combined parameters \f$ R_{IJ} \f$ and \f$ \varepsilon_{IJ} \f$. The constructor performs the MMFF94 combining rules using the per-atom polarizabilities, effective electron numbers and the MMFF94-defined "factor A", "factor G", buffered combining "factor B" and donor/acceptor scaling factors; the resulting \f$ R_{IJ} \f$, \f$ \varepsilon_{IJ} \f$ and the precomputed \f$ R_{IJ}^7 \f$ are stored.
 # 
 class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
 

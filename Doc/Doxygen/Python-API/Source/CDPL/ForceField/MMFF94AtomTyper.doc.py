@@ -27,7 +27,7 @@
 class MMFF94AtomTyper(Boost.Python.instance):
 
     ##
-    # \brief Constructs an empty <tt>MMFF94AtomTyper</tt> instance using the default MMFF94 tables.
+    # \brief Constructs an empty <tt>MMFF94AtomTyper</tt> instance using the default MMFF94 parameter tables.
     # 
     def __init__() -> None: pass
 

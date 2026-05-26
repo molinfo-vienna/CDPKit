@@ -27,7 +27,7 @@
 class MMFF94AngleBendingInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Constructs an <tt>MMFF94AngleBendingInteractionParameterizer</tt> instance using the default MMFF94 tables.
+    # \brief Constructs an <tt>MMFF94AngleBendingInteractionParameterizer</tt> instance using the default MMFF94 parameter tables.
     # 
     def __init__() -> None: pass
 

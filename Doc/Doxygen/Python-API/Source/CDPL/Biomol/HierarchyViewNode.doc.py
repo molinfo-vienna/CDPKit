@@ -20,14 +20,17 @@
 #
 
 ##
-# \brief HierarchyViewNode.
+# \brief Abstract base class for nodes of the Biomol.HierarchyView tree (models, chains, residues).
+# 
+# Stores the residue list of the node and the mutex protecting the lazy initialization of the node-specific child lists (chains / residues).
 # 
 class HierarchyViewNode(Chem.Fragment):
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the list of residues belonging to this node (lazily perceived on first access).
+    # 
+    # \return A reference to the residue list.
+    # 
     def getResidues() -> ResidueList: pass
 
     residues = property(getResidues)

@@ -27,83 +27,84 @@
 class ChEMBLStandardizer(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Bitwise-OR-combined flags reporting which standardization steps modified the input molecule.
+    # 
     class ChangeFlags(Boost.Python.enum):
 
         ##
-        # \brief NONE.
-        #
+        # \brief No changes were applied.
+        # 
         NONE = 0
 
         ##
-        # \brief EXCLUDED.
-        #
+        # \brief The molecule matched a ChEMBL exclusion criterion and was not processed further.
+        # 
         EXCLUDED = 1
 
         ##
-        # \brief EXPLICIT_HYDROGENS_REMOVED.
-        #
+        # \brief Removable explicit hydrogen atoms were removed.
+        # 
         EXPLICIT_HYDROGENS_REMOVED = 2
 
         ##
-        # \brief UNKNOWN_STEREO_STANDARDIZED.
-        #
+        # \brief Atoms/bonds with unknown stereo descriptors were standardized.
+        # 
         UNKNOWN_STEREO_STANDARDIZED = 4
 
         ##
-        # \brief BONDS_KEKULIZED.
-        #
+        # \brief Aromatic bonds were kekulized to alternating single/double bonds.
+        # 
         BONDS_KEKULIZED = 8
 
         ##
-        # \brief STRUCTURE_NORMALIZED.
-        #
+        # \brief Functional-group structure normalizations were applied.
+        # 
         STRUCTURE_NORMALIZED = 16
 
         ##
-        # \brief CHARGES_REMOVED.
-        #
+        # \brief Atom formal charges were removed where possible.
+        # 
         CHARGES_REMOVED = 32
 
         ##
-        # \brief TARTRATE_STEREO_CLEARED.
-        #
+        # \brief Defined stereo at tartrate-like substructures was cleared.
+        # 
         TARTRATE_STEREO_CLEARED = 64
 
         ##
-        # \brief STRUCTURE_2D_CORRECTED.
-        #
+        # \brief 2D bond-angle artefacts were corrected.
+        # 
         STRUCTURE_2D_CORRECTED = 128
 
         ##
-        # \brief ISOTOPE_INFO_CLEARED.
-        #
+        # \brief Atom isotope information was cleared.
+        # 
         ISOTOPE_INFO_CLEARED = 256
 
         ##
-        # \brief SALT_COMPONENTS_REMOVED.
-        #
+        # \brief Salt components were removed (parent extraction only).
+        # 
         SALT_COMPONENTS_REMOVED = 512
 
         ##
-        # \brief SOLVENT_COMPONENTS_REMOVED.
-        #
+        # \brief Common solvent components were removed (parent extraction only).
+        # 
         SOLVENT_COMPONENTS_REMOVED = 1024
 
         ##
-        # \brief DUPLICATE_COMPONENTS_REMOVED.
-        #
+        # \brief Duplicate disconnected components were collapsed (parent extraction only).
+        # 
         DUPLICATE_COMPONENTS_REMOVED = 2048
 
     ##
-    # \brief Initializes the \c %ChEMBLStandardizer instance.
+    # \brief Constructs the <tt>ChEMBLStandardizer</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %ChEMBLStandardizer instance \a standardizer.
-    # \param standardizer The \c %ChEMBLStandardizer instance to copy.
+    # \brief Constructs a copy of the <tt>ChEMBLStandardizer</tt> instance <em>standardizer</em>.
+    # 
+    # \param standardizer The <tt>ChEMBLStandardizer</tt> to copy.
     # 
     def __init__(standardizer: ChEMBLStandardizer) -> None: pass
 
@@ -120,18 +121,22 @@ class ChEMBLStandardizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ChEMBLStandardizer instance \a standardizer.
-    # \param standardizer The \c %ChEMBLStandardizer instance to copy.
+    # \brief Replaces the state of this standardizer by a copy of the state of <em>standardizer</em>.
+    # 
+    # \param standardizer The source <tt>ChEMBLStandardizer</tt>.
+    # 
     # \return \a self
     # 
     def assign(standardizer: ChEMBLStandardizer) -> ChEMBLStandardizer: pass
 
     ##
-    # \brief 
-    # \param mol 
-    # \param proc_excld 
-    # \return 
-    #
+    # \brief Standardizes <em>mol</em> in place.
+    # 
+    # \param mol The molecule to standardize (modified in place).
+    # \param proc_excld If <tt>True</tt>, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
+    # 
+    # \return A bitwise-OR combination of ChangeFlags reporting which standardization steps modified the molecule.
+    # 
     def standardize(mol: Molecule, proc_excld: bool = False) -> ChangeFlags: pass
 
     ##
@@ -144,12 +149,14 @@ class ChEMBLStandardizer(Boost.Python.instance):
     def standardize(mol: MolecularGraph, std_mol: Molecule, proc_excluded: bool = False) -> ChangeFlags: pass
 
     ##
-    # \brief 
-    # \param mol 
-    # \param neutralize 
-    # \param check_exclusion 
-    # \return 
-    #
+    # \brief Extracts the parent compound of <em>mol</em> in place (removing salt/solvent components).
+    # 
+    # \param mol The molecule from which to extract the parent (modified in place).
+    # \param neutralize If <tt>True</tt>, charges of the extracted parent are subsequently neutralized.
+    # \param check_exclusion If <tt>True</tt>, ChEMBL exclusion criteria are checked before processing.
+    # 
+    # \return A bitwise-OR combination of ChangeFlags reporting which steps modified the molecule.
+    # 
     def getParent(mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
 
     ##

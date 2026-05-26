@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for molecule data in the Tripos MOL2 format.
+# 
 class MOL2MoleculeReader(MoleculeReaderBase):
 
     ##

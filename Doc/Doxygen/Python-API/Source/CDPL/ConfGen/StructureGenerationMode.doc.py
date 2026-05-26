@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief Provides constants used to specify the employed structure generation method.
+# \brief Provides constants used to specify the 3D structure generation method that shall be employed.
 # 
 class StructureGenerationMode(Boost.Python.instance):
 
     ##
-    # \brief Selects the structure-generation strategy heuristically based on the input molecule.
+    # \brief Specifies to select the structure generation strategy heuristically based on characteristics of the input molecule.
     # 
     AUTO = 0
 
     ##
-    # \brief Selects the fragment-based structure-generation strategy (assembly from pre-built fragment conformers).
+    # \brief Specifies to perform structure generation by assembly of pre-built fragment conformers.
     # 
     FRAGMENT = 1
 
     ##
-    # \brief Selects the distance-geometry structure-generation strategy.
+    # \brief Specifies to perform structure generation by a combination of distance geometry-based raw coordinates generation and subsequent force field refinement.
     # 
     DISTANCE_GEOMETRY = 2

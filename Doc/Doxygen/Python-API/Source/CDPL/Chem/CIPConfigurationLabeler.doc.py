@@ -20,14 +20,18 @@
 #
 
 ##
-# \brief CIPConfigurationLabeler.
+# \brief Assigns Cahn-Ingold-Prelog (CIP) configuration labels to stereogenic atoms and bonds of a molecular graph.
 # 
-# Code is largely based on a Java implementation of the CIP sequence rules by John Mayfield [\ref CIPJM]. \since 1.1
+# After calling setup() for a molecular graph the per-atom or per-bond CIP descriptor (<em>R</em> / <em>S</em> / <em>E</em> / <em>Z</em> / <em>r</em> / <em>s</em> / undefined) can be queried via the getLabel() overloads. The implementation is largely based on John Mayfield's Java implementation of the CIP sequence rules [\ref CIPJM].
+# 
+# \see Chem.CIPDescriptor 
+# 
+# \since 1.1
 # 
 class CIPConfigurationLabeler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %CIPConfigurationLabeler instance.
+    # \brief Constructs the <tt>CIPConfigurationLabeler</tt> instance without an associated molecular graph.
     # 
     def __init__() -> None: pass
 
@@ -44,30 +48,37 @@ class CIPConfigurationLabeler(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %CIPConfigurationLabeler instance \a labeler.
-    # \param labeler The \c %CIPConfigurationLabeler instance to copy.
+    # \brief Replaces the state of this labeler by a copy of the state of <em>labeler</em>.
+    # 
+    # \param labeler The source <tt>CIPConfigurationLabeler</tt>.
+    # 
     # \return \a self
     # 
     def assign(labeler: CIPConfigurationLabeler) -> CIPConfigurationLabeler: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Prepares the labeler to assign CIP descriptors for the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph to label.
+    # 
     def setup(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Returns the CIP descriptor of the stereogenic atom <em>atom</em>.
+    # 
+    # \param atom The atom whose CIP descriptor is queried.
+    # 
+    # \return One of the Chem.CIPDescriptor values.
+    # 
     def getLabel(atom: Atom) -> int: pass
 
     ##
-    # \brief 
-    # \param bond 
-    # \return 
-    #
+    # \brief Returns the CIP descriptor of the stereogenic bond <em>bond</em>.
+    # 
+    # \param bond The bond whose CIP descriptor is queried.
+    # 
+    # \return One of the Chem.CIPDescriptor values.
+    # 
     def getLabel(bond: Bond) -> int: pass
 
     objectID = property(getObjectID)
