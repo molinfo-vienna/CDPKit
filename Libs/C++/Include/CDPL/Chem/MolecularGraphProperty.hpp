@@ -72,7 +72,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey TIMESTAMP;
 
             /**
-             * \brief Specifies the connected components of the molecular graph.
+             * \brief Specifies the components of the molecular graph.
              *
              * \valuetype Chem::FragmentList::SharedPointer
              */
@@ -128,7 +128,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
 
             /**
-             * \brief Specifies grouped sets of connected components used for substructure matching (e.g. enantiomeric pairs).
+             * \brief Specifies molecular graph component groups for substructure searching.
              *
              * \valuetype Chem::FragmentList::SharedPointer
              */

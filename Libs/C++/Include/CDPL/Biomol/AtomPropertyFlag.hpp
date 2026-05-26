@@ -52,20 +52,31 @@ namespace CDPL
              */
             constexpr unsigned int DEFAULT = 0x80000000;
 
-            /** \brief Flag indicating that the residue three-letter code identifies the atom's owning residue. */
+            /**
+             * \brief Specifies the residue three-letter code of an atom.
+             */
             constexpr unsigned int RESIDUE_CODE = 0x400;
 
-            /** \brief Flag indicating that the residue sequence number identifies the atom's owning residue. */
+            /**
+             * \brief Specifies the residue sequence number of an atom.
+             */
             constexpr unsigned int RESIDUE_SEQ_NO = 0x800;
 
-            /** \brief Flag indicating that the residue insertion code identifies the atom's owning residue. */
+            /**
+             * \brief Specifies the residue insertion code of an atom.
+             */
             constexpr unsigned int RESIDUE_INS_CODE = 0x1000;
 
-            /** \brief Flag indicating that the chain identifier identifies the atom's owning residue. */
+            /**
+             * \brief Specifies the chain identifier of an atom.
+             */
             constexpr unsigned int CHAIN_ID = 0x2000;
 
-            /** \brief Flag indicating that the PDB model number identifies the atom's owning residue. */
+            /**
+             * \brief Specifies the PDB model number of an atom.
+             */
             constexpr unsigned int MODEL_NUMBER = 0x4000;
+            
         } // namespace AtomPropertyFlag
     } // namespace Biomol
 } // namespace CDPL

@@ -63,6 +63,7 @@ namespace CDPL
              */
             typedef std::shared_ptr<HierarchyView> SharedPointer;
 
+            /** \brief A constant iterator over the biological macromolecule models. */
             typedef boost::indirect_iterator<ModelList::const_iterator, const HierarchyViewModel> ConstModelIterator;
 
             /**
@@ -77,13 +78,13 @@ namespace CDPL
             HierarchyView(const Chem::MolecularGraph& molgraph);
 
             /**
-             * \brief Returns the flat list of all residues across all models of the hierarchy view.
+             * \brief Returns the flat list of all residues across all models of the biological macromolecule.
              * \return A \c const reference to the residue list.
              */
             const ResidueList& getResidues() const;
 
             /**
-             * \brief Returns the number of NMR/ensemble models stored in the hierarchy view.
+             * \brief Returns the number of stored models.
              * \return The number of models.
              */
             std::size_t getNumModels() const;
@@ -97,14 +98,14 @@ namespace CDPL
             const HierarchyViewModel& getModel(std::size_t idx) const;
 
             /**
-             * \brief Tells whether the hierarchy view contains a model with PDB model number \a num.
+             * \brief Tells whether a model with number \a num exists.
              * \param num The PDB model number.
              * \return \c true if such a model exists, and \c false otherwise.
              */
             bool hasModelWithNumber(std::size_t num) const;
 
             /**
-             * \brief Returns the model identified by PDB model number \a num.
+             * \brief Returns the model identified by model number \a num.
              * \param num The PDB model number.
              * \return A \c const reference to the model.
              * \throw Base::ItemNotFound if no model with the requested number exists.

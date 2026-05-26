@@ -56,14 +56,14 @@ class HierarchyView(Boost.Python.instance):
     def build(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Returns the flat list of all residues across all models of the hierarchy view.
+    # \brief Returns the flat list of all residues across all models of the biological macromolecule.
     # 
     # \return A reference to the residue list.
     # 
     def getResidues() -> ResidueList: pass
 
     ##
-    # \brief Returns the number of NMR/ensemble models stored in the hierarchy view.
+    # \brief Returns the number of stored models.
     # 
     # \return The number of models.
     # 
@@ -81,7 +81,7 @@ class HierarchyView(Boost.Python.instance):
     def getModel(idx: int) -> HierarchyViewModel: pass
 
     ##
-    # \brief Tells whether the hierarchy view contains a model with PDB model number <em>num</em>.
+    # \brief Tells whether a model with number <em>num</em> exists.
     # 
     # \param num The PDB model number.
     # 
@@ -90,7 +90,7 @@ class HierarchyView(Boost.Python.instance):
     def hasModelWithNumber(num: int) -> bool: pass
 
     ##
-    # \brief Returns the model identified by PDB model number <em>num</em>.
+    # \brief Returns the model identified by model number <em>num</em>.
     # 
     # \param num The PDB model number.
     # 

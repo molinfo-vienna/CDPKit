@@ -48,7 +48,7 @@ namespace CDPL
          * \c plusAssign/\c minusAssign, \c innerProd and arithmetic operators). Specializations adapt other
          * array-of-vector storage types.
          *
-         * \tparam A The variable-array type.
+         * \tparam A The variable array type.
          */
         template <typename A>
         struct MinimizerVariableArrayTraits
@@ -66,7 +66,7 @@ namespace CDPL
              * \tparam T The scalar result type.
              * \param a1 The first variable array.
              * \param a2 The second variable array.
-             * \return The inner product \f$ \sum_i a1_i \, a2_i \f$ as a value of type \a T.
+             * \return The inner product as a value of type \a T.
              */
             template <typename T>
             static T dot(const ArrayType& a1, const ArrayType& a2)
@@ -78,7 +78,7 @@ namespace CDPL
              * \brief Computes the Euclidean (L2) norm of \a a using a numerically-stable scaling algorithm.
              * \tparam T The scalar result type.
              * \param a The variable array.
-             * \return The Euclidean norm \f$ \sqrt{\sum_i a_i^2} \f$ as a value of type \a T.
+             * \return The Euclidean norm as a value of type \a T.
              */
             template <typename T>
             static T norm2(const ArrayType& a)
@@ -175,11 +175,22 @@ namespace CDPL
         struct MinimizerVariableArrayTraits<VectorArray<V> >
         {
 
+            /** \brief The vector-array type. */
             typedef VectorArray<V>               ArrayType;
+            /** \brief The vector type of the array elements. */
             typedef V                            VectorType;
+            /** \brief The scalar value type stored in the array elements. */
             typedef typename V::ValueType        ValueType;
+            /** \brief The size type used by the vector array. */
             typedef typename ArrayType::SizeType SizeType;
 
+            /**
+             * \brief Computes the inner product (dot product) of two vector arrays.
+             * \tparam T The scalar result type.
+             * \param a1 The first vector array.
+             * \param a2 The second vector array.
+             * \return The inner product as a value of type \a T.
+             */
             template <typename T>
             static T dot(const ArrayType& a1, const ArrayType& a2)
             {
@@ -191,6 +202,12 @@ namespace CDPL
                 return result;
             }
 
+            /**
+             * \brief Computes the Euclidean (L2) norm of \a a using a numerically-stable scaling algorithm.
+             * \tparam T The scalar result type.
+             * \param a The vector array.
+             * \return The Euclidean norm as a value of type \a T.
+             */
             template <typename T>
             static T norm2(const ArrayType& a)
             {
@@ -221,6 +238,13 @@ namespace CDPL
                 return (scale * TypeTraits<T>::sqrt(ssq));
             }
 
+            /**
+             * \brief Performs the in-place BLAS-style \e axpy operation \f$ y \leftarrow y + \alpha\, x \f$.
+             * \tparam T The scalar type of \a alpha.
+             * \param alpha The scalar multiplier.
+             * \param x The vector array \e x.
+             * \param y The vector array \e y (updated in place).
+             */
             template <typename T>
             static void axpy(const T& alpha, const ArrayType& x, ArrayType& y)
             {
@@ -235,17 +259,32 @@ namespace CDPL
                 }
             }
 
+            /**
+             * \brief Sets all vector elements in \a a to the default-constructed ValueType.
+             * \param a The vector array to clear.
+             */
             static void clear(ArrayType& a)
             {
                 for (typename ArrayType::ElementIterator it = a.getElementsBegin(), end = a.getElementsEnd(); it != end; ++it)
                     it->clear(ValueType());
             }
 
+            /**
+             * \brief Copies the contents of \a a2 into \a a1.
+             * \param a1 The destination vector array.
+             * \param a2 The source vector array.
+             */
             static void assign(ArrayType& a1, const ArrayType& a2)
             {
                 a1 = a2;
             }
 
+            /**
+             * \brief Multiplies every element of \a a by the scalar \a v.
+             * \tparam T The scalar type of \a v.
+             * \param a The vector array to scale (updated in place).
+             * \param v The scalar multiplier.
+             */
             template <typename T>
             static void multiply(ArrayType& a, const T& v)
             {
@@ -253,7 +292,11 @@ namespace CDPL
                     *it *= v;
             }
 
-
+            /**
+             * \brief Subtracts \a a2 from \a a1 element-wise (\f$ a_1 \leftarrow a_1 - a_2 \f$).
+             * \param a1 The destination vector array (updated in place).
+             * \param a2 The vector array to subtract.
+             */
             static void sub(ArrayType& a1, const ArrayType& a2)
             {
                 typename ArrayType::ConstElementIterator it2 = a2.getElementsBegin();
@@ -271,11 +314,22 @@ namespace CDPL
         struct MinimizerVariableArrayTraits<std::vector<V> >
         {
 
+            /** \brief The vector-array type. */
             typedef std::vector<V>                ArrayType;
+            /** \brief The vector type of the array elements. */
             typedef V                             VectorType;
+            /** \brief The scalar value type stored in the array elements. */
             typedef typename V::ValueType         ValueType;
+            /** \brief The size type used by the vector array. */
             typedef typename ArrayType::size_type SizeType;
 
+            /**
+             * \brief Computes the inner product (dot product) of two vector arrays.
+             * \tparam T The scalar result type.
+             * \param a1 The first vector array.
+             * \param a2 The second vector array.
+             * \return The inner product as a value of type \a T.
+             */
             template <typename T>
             static T dot(const ArrayType& a1, const ArrayType& a2)
             {
@@ -287,6 +341,12 @@ namespace CDPL
                 return result;
             }
 
+            /**
+             * \brief Computes the Euclidean (L2) norm of \a a using a numerically-stable scaling algorithm.
+             * \tparam T The scalar result type.
+             * \param a The vector array.
+             * \return The Euclidean norm as a value of type \a T.
+             */
             template <typename T>
             static T norm2(const ArrayType& a)
             {
@@ -317,6 +377,13 @@ namespace CDPL
                 return (scale * TypeTraits<T>::sqrt(ssq));
             }
 
+           /**
+             * \brief Performs the in-place BLAS-style \e axpy operation \f$ y \leftarrow y + \alpha\, x \f$.
+             * \tparam T The scalar type of \a alpha.
+             * \param alpha The scalar multiplier.
+             * \param x The vector array \e x.
+             * \param y The vector array \e y (updated in place).
+             */
             template <typename T>
             static void axpy(const T& alpha, const ArrayType& x, ArrayType& y)
             {
@@ -331,17 +398,32 @@ namespace CDPL
                 }
             }
 
+            /**
+             * \brief Sets all vector elements in \a a to the default-constructed ValueType.
+             * \param a The vector array to clear.
+             */
             static void clear(ArrayType& a)
             {
                 for (typename ArrayType::iterator it = a.begin(), end = a.end(); it != end; ++it)
                     it->clear(ValueType());
             }
 
+            /**
+             * \brief Copies the contents of \a a2 into \a a1.
+             * \param a1 The destination vector array.
+             * \param a2 The source vector array.
+             */
             static void assign(ArrayType& a1, const ArrayType& a2)
             {
                 a1 = a2;
             }
 
+            /**
+             * \brief Multiplies every element of \a a by the scalar \a v.
+             * \tparam T The scalar type of \a v.
+             * \param a The vector array to scale (updated in place).
+             * \param v The scalar multiplier.
+             */
             template <typename T>
             static void multiply(ArrayType& a, const T& v)
             {
@@ -349,7 +431,11 @@ namespace CDPL
                     *it *= v;
             }
 
-
+            /**
+             * \brief Subtracts \a a2 from \a a1 element-wise (\f$ a_1 \leftarrow a_1 - a_2 \f$).
+             * \param a1 The destination vector array (updated in place).
+             * \param a2 The vector array to subtract.
+             */
             static void sub(ArrayType& a1, const ArrayType& a2)
             {
                 typename ArrayType::const_iterator it2 = a2.begin();
@@ -358,6 +444,7 @@ namespace CDPL
                     it1->minusAssign(*it2);
             }
         };
+        
     } // namespace Math
 } // namespace CDPL
 

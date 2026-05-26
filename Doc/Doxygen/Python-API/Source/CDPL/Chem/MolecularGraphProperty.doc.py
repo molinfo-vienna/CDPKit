@@ -46,7 +46,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     TIMESTAMP = CDPL.Base.LookupKey('TIMESTAMP')
 
     ##
-    # \brief Specifies the connected components of the molecular graph.
+    # \brief Specifies the components of the molecular graph.
     # 
     # <b>Value Type:</b> Chem.FragmentList.SharedPointer
     # 
@@ -102,7 +102,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 
     ##
-    # \brief Specifies grouped sets of connected components used for substructure matching (e.g. enantiomeric pairs).
+    # \brief Specifies molecular graph component groups for substructure searching.
     # 
     # <b>Value Type:</b> Chem.FragmentList.SharedPointer
     # 

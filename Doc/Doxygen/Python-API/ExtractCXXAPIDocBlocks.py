@@ -180,6 +180,10 @@ def getTextRecursive(parent_node):
             rc.append('&pi;')
         elif node.nodeName == 'deg':
             rc.append('&deg;')
+        elif node.nodeName == 'infin':
+            rc.append('&infin;')
+        elif node.nodeName == 'uumlaut':
+            rc.append('&uuml;')
         elif node.nodeName == 'table':
             rc.append(outputTable(node))
         elif node.nodeName == 'parameterlist':

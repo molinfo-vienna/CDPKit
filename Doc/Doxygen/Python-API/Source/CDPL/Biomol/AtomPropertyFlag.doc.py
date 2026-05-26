@@ -35,26 +35,26 @@ class AtomPropertyFlag(Boost.Python.instance):
     DEFAULT = 2147483648
 
     ##
-    # \brief Flag indicating that the residue three-letter code identifies the atom's owning residue.
+    # \brief Specifies the residue three-letter code of an atom.
     # 
     RESIDUE_CODE = 1024
 
     ##
-    # \brief Flag indicating that the residue sequence number identifies the atom's owning residue.
+    # \brief Specifies the residue sequence number of an atom.
     # 
     RESIDUE_SEQ_NO = 2048
 
     ##
-    # \brief Flag indicating that the residue insertion code identifies the atom's owning residue.
+    # \brief Specifies the residue insertion code of an atom.
     # 
     RESIDUE_INS_CODE = 4096
 
     ##
-    # \brief Flag indicating that the chain identifier identifies the atom's owning residue.
+    # \brief Specifies the chain identifier of an atom.
     # 
     CHAIN_ID = 8192
 
     ##
-    # \brief Flag indicating that the PDB model number identifies the atom's owning residue.
+    # \brief Specifies the PDB model number of an atom.
     # 
     MODEL_NUMBER = 16384

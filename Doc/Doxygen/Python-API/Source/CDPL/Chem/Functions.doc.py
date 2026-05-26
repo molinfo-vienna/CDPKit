@@ -3809,13 +3809,13 @@ def intersectsBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Ve
 def intersectsBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
 ##
-# \brief Tells whether <em>ring</em> fulfills the Hckel <em></em>(4n+2)<em>&pi;-electron</em> criterion within <em>molgraph</em>.
+# \brief Tells whether <em>ring</em> fulfills the H&uuml;ckel <em></em>(4n+2)<em>&pi;-electron</em> criterion within <em>molgraph</em>.
 # 
 # \param ring The candidate aromatic ring.
 # \param molgraph The parent molecular graph.
 # \param arom_bond_mask A bond bit mask flagging bonds already known to be aromatic.
 # 
-# \return <tt>True</tt> if <em>ring</em> satisfies the Hckel rule, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if <em>ring</em> satisfies the H&uuml;ckel rule, and <tt>False</tt> otherwise.
 # 
 def isAromatic(ring: Fragment, molgraph: MolecularGraph, arom_bond_mask: Util.BitSet) -> bool: pass
 

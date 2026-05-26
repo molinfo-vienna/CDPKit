@@ -41,13 +41,17 @@ namespace CDPL
     {
 
         /**
-         * \brief Helper template selecting \c std::abs() for signed types and the identity for unsigned types.
-         * \tparam Signed Whether the scalar type is signed.
+         * \brief Helper class template for retrieving the absolute value of scalar arithmetic types.
+         * \tparam Signed Whether the scalar type is signed or not.
          */
         template <bool Signed>
         struct ScalarAbsImpl
         {
 
+            /**
+             * \brief Returns the absolute value of \a t.
+             * \return The absolute value of \a t.
+             */
             template <typename T>
             static T abs(const T& t)
             {
@@ -55,10 +59,17 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Specialization of Math::ScalarAbsImpl for unsigned types.
+         */
         template <>
         struct ScalarAbsImpl<false>
         {
 
+            /**
+             * \brief Returns the absolute value of \a t.
+             * \return The absolute value of \a t.
+             */
             template <typename T>
             static const T& abs(const T& t)
             {
@@ -163,10 +174,6 @@ namespace CDPL
             }
         };
 
-        /**
-         * \brief Primary type traits template selecting between Math::ScalarTraits and Math::ComplexTraits based on \a T.
-         * \tparam T The value type.
-         */
         template <typename T>
         struct TypeTraits;
 
@@ -269,10 +276,18 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Primary traits template for scalar arithmetic value types.
+         * \tparam T The value type.
+         */
         template <typename T>
         struct TypeTraits : public ScalarTraits<T>
         {};
 
+        /**
+         * \brief Math::TypeTraits specialization for complex arithmetic value types.
+         * \tparam T The value type.
+         */
         template <typename T>
         struct TypeTraits<std::complex<T> > : public ComplexTraits<std::complex<T> >
         {};
@@ -336,6 +351,7 @@ namespace CDPL
         template <typename T>
         struct IsScalar<std::complex<T> > : public std::is_arithmetic<T>
         {};
+        
     } // namespace Math
 } // namespace CDPL
 
