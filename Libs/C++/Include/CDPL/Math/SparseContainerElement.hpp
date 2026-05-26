@@ -52,18 +52,34 @@ namespace CDPL
         {
 
           public:
+            /** \brief The sparse container type the proxy references. */
             typedef C                                      ContainerType;
+            /** \brief The key type used to address an entry of the container. */
             typedef K                                      KeyType;
+            /** \brief The value type stored in the container. */
             typedef typename ContainerType::ValueType      ValueType;
+            /** \brief The size type used by the container. */
             typedef typename ContainerType::SizeType       SizeType;
+            /** \brief Mutable reference type to a value. */
             typedef ValueType&                             Reference;
+            /** \brief Constant reference type to a value (as defined by the container). */
             typedef typename ContainerType::ConstReference ConstReference;
+            /** \brief Underlying associative-array type of the container (typically a \c std::map / \c std::unordered_map specialization). */
             typedef typename ContainerType::ArrayType      ArrayType;
 
+            /**
+             * \brief Constructs the proxy for the (\a key, value) entry of the sparse container \a c.
+             * \param c The sparse container.
+             * \param key The key of the addressed entry.
+             */
             SparseContainerElement(ContainerType& c, KeyType key):
                 cntnr(c), key(key) {}
 
-            // Assignment
+            /**
+             * \brief Copies the value pointed to by \a p into the entry pointed to by this proxy.
+             * \param p The source proxy.
+             * \return A reference to itself.
+             */
             SparseContainerElement& operator=(const SparseContainerElement& p)
             {
                 p.get();
@@ -72,6 +88,15 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the value \a d to the entry pointed to by this proxy.
+             *
+             * If \a d equals the default-constructed value, the entry is removed from the underlying sparse storage.
+             *
+             * \tparam D The type of the assigned value (convertible to ValueType).
+             * \param d The value to assign.
+             * \return A reference to itself.
+             */
             template <typename D>
             SparseContainerElement& operator=(const D& d)
             {
@@ -80,6 +105,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds \a d to the value of the entry pointed to by this proxy.
+             * \tparam D The type of the addend (must support \c value \c += \c d).
+             * \param d The value to add.
+             * \return A reference to itself.
+             */
             template <typename D>
             SparseContainerElement& operator+=(const D& d)
             {
@@ -90,6 +121,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts \a d from the value of the entry pointed to by this proxy.
+             * \tparam D The type of the subtrahend (must support \c value \c -= \c d).
+             * \param d The value to subtract.
+             * \return A reference to itself.
+             */
             template <typename D>
             SparseContainerElement& operator-=(const D& d)
             {
@@ -100,6 +137,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Multiplies the value of the entry pointed to by this proxy by \a d.
+             * \tparam D The type of the multiplier (must support \c value \c *= \c d).
+             * \param d The multiplier.
+             * \return A reference to itself.
+             */
             template <typename D>
             SparseContainerElement& operator*=(const D& d)
             {
@@ -110,6 +153,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Divides the value of the entry pointed to by this proxy by \a d.
+             * \tparam D The type of the divisor (must support \c value \c /= \c d).
+             * \param d The divisor.
+             * \return A reference to itself.
+             */
             template <typename D>
             SparseContainerElement& operator/=(const D& d)
             {
@@ -120,7 +169,12 @@ namespace CDPL
                 return *this;
             }
 
-            // Comparison
+            /**
+             * \brief Tests the value of the entry pointed to by this proxy for equality with \a d.
+             * \tparam D The type of the right-hand side (must support \c value \c == \c d).
+             * \param d The value to compare against.
+             * \return \c true if the entry's value equals \a d, and \c false otherwise.
+             */
             template <typename D>
             bool operator==(const D& d) const
             {
@@ -129,6 +183,12 @@ namespace CDPL
                 return (value == d);
             }
 
+            /**
+             * \brief Tests the value of the entry pointed to by this proxy for inequality with \a d.
+             * \tparam D The type of the right-hand side (must support \c value \c != \c d).
+             * \param d The value to compare against.
+             * \return \c true if the entry's value differs from \a d, and \c false otherwise.
+             */
             template <typename D>
             bool operator!=(const D& d) const
             {
@@ -137,6 +197,11 @@ namespace CDPL
                 return (value != d);
             }
 
+            /**
+             * \brief Implicit conversion to a \c const reference to the value of the entry pointed to by this proxy
+             *        (returns a default-constructed value when the entry does not exist in the underlying storage).
+             * \return A \c const reference to the value.
+             */
             operator ConstReference() const
             {
                 get();

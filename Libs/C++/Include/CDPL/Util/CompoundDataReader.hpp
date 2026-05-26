@@ -85,6 +85,7 @@ namespace CDPL
             /**
              * \brief Removes the reader at index \a idx from the list of underlying readers.
              * \param idx The zero-based reader index.
+             * \throw Base::IndexError if the number of readers is zero or \a idx is not in the range [0, getNumReaders() - 1].
              */
             void removeReader(std::size_t idx);
 
@@ -110,6 +111,7 @@ namespace CDPL
              * \brief Returns the underlying reader at index \a idx.
              * \param idx The zero-based reader index.
              * \return A \c const reference to the reader shared pointer.
+             * \throw Base::IndexError if the number of readers is zero or \a idx is not in the range [0, getNumReaders() - 1].
              */
             const ReaderPointer& getReader(std::size_t idx) const;
 
@@ -127,6 +129,7 @@ namespace CDPL
              * \param obj The output object.
              * \param overwrite If \c true, the output object is cleared before the record is copied into it.
              * \return A reference to itself.
+             * \throw Base::IndexError if the number of records is zero or \a idx is not in the range [0, getNumRecords() - 1].
              */
             CompoundDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
@@ -150,7 +153,8 @@ namespace CDPL
 
             /**
              * \brief Sets the current global record index.
-             * \param idx The new zero-based global record index.
+             * \param idx The new zero-based global record index (may equal getNumRecords() to position past the last record).
+             * \throw Base::IndexError if \a idx is strictly greater than getNumRecords().
              */
             void setRecordIndex(std::size_t idx);
 

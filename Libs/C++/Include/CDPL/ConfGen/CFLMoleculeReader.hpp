@@ -50,7 +50,7 @@ namespace CDPL
         class CFLDataReader;
 
         /**
-         * \brief A reader for molecule data in the native I/O format of the <em>CDPL</em>.
+         * \brief A reader for molecule data stored in the CDPL conformer fragment library format (CFL).
          */
         class CDPL_CONFGEN_API CFLMoleculeReader : public Util::StreamDataReader<Chem::Molecule, CFLMoleculeReader>
         {

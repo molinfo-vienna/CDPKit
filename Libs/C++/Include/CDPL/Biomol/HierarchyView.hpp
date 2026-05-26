@@ -76,22 +76,63 @@ namespace CDPL
              */
             HierarchyView(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Returns the flat list of all residues across all models of the hierarchy view.
+             * \return A \c const reference to the residue list.
+             */
             const ResidueList& getResidues() const;
 
+            /**
+             * \brief Returns the number of NMR/ensemble models stored in the hierarchy view.
+             * \return The number of models.
+             */
             std::size_t getNumModels() const;
 
+            /**
+             * \brief Returns the model at index \a idx.
+             * \param idx The zero-based model index.
+             * \return A \c const reference to the model.
+             * \throw Base::IndexError if the number of models is zero or \a idx is not in the range [0, getNumModels() - 1].
+             */
             const HierarchyViewModel& getModel(std::size_t idx) const;
 
+            /**
+             * \brief Tells whether the hierarchy view contains a model with PDB model number \a num.
+             * \param num The PDB model number.
+             * \return \c true if such a model exists, and \c false otherwise.
+             */
             bool hasModelWithNumber(std::size_t num) const;
 
+            /**
+             * \brief Returns the model identified by PDB model number \a num.
+             * \param num The PDB model number.
+             * \return A \c const reference to the model.
+             * \throw Base::ItemNotFound if no model with the requested number exists.
+             */
             const HierarchyViewModel& getModelByNumber(std::size_t num) const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first model.
+             * \return A constant iterator pointing to the first model.
+             */
             ConstModelIterator getModelsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last model.
+             * \return A constant iterator pointing one past the last model.
+             */
             ConstModelIterator getModelsEnd() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first model (range-based for support).
+             * \return A constant iterator pointing to the first model.
+             */
             ConstModelIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last model (range-based for support).
+             * \return A constant iterator pointing one past the last model.
+             */
             ConstModelIterator end() const;
 
             /**

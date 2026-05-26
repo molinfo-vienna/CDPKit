@@ -53,23 +53,39 @@ namespace CDPL
     {
 
         /**
-         * \brief TautomerGenerator.
+         * \brief Enumerates the tautomers of a molecular graph by iteratively applying a configurable set of
+         *        Chem::TautomerizationRule instances and reporting each accepted tautomer to a user-supplied callback.
+         *
+         * After registering tautomerization rules (via addTautomerizationRule()) and a callback (via
+         * setCallbackFunction()), each call to generate() seeds the enumeration with the input molecular graph,
+         * applies every registered rule to every intermediate tautomer to derive the next generation, and
+         * reports each newly-generated tautomer to the callback. The Mode setting controls how aggressively
+         * duplicates are filtered.
          */
         class CDPL_CHEM_API TautomerGenerator
         {
 
           public:
+            /**
+             * \brief Selects the duplicate-filtering strategy applied during tautomer enumeration.
+             */
             enum Mode
             {
 
+                /** \brief Two tautomers are considered equal if they share the same constitutional (topological) connection table. */
                 TOPOLOGICALLY_UNIQUE,
+                /** \brief Two tautomers are considered equal if they share the same connection table AND the same stereo-configuration. */
                 GEOMETRICALLY_UNIQUE,
+                /** \brief Every accepted tautomer is reported, even if topologically/geometrically equivalent to an already-reported one. */
                 EXHAUSTIVE
             };
 
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TautomerGenerator instances. */
             typedef std::shared_ptr<TautomerGenerator> SharedPointer;
 
+            /** \brief Type of the callback invoked for every accepted tautomer (returning \c false aborts the enumeration). */
             typedef std::function<bool(MolecularGraph&)> CallbackFunction;
+            /** \brief Type of the optional setup function invoked on the input molecular graph before enumeration starts. */
             typedef std::function<void(MolecularGraph&)> CustomSetupFunction;
 
             /**
@@ -77,71 +93,157 @@ namespace CDPL
              */
             TautomerGenerator();
 
+            /**
+             * \brief Constructs a copy of the \c %TautomerGenerator instance \a gen.
+             * \param gen The \c %TautomerGenerator to copy.
+             */
             TautomerGenerator(const TautomerGenerator& gen);
 
+            /**
+             * \brief Virtual destructor.
+             */
             virtual ~TautomerGenerator() {}
 
+            /**
+             * \brief Replaces the state of this generator by a copy of the state of \a gen.
+             * \param gen The source \c %TautomerGenerator.
+             * \return A reference to itself.
+             */
             TautomerGenerator& operator=(const TautomerGenerator& gen);
 
+            /**
+             * \brief Registers a new tautomerization rule.
+             * \param rule The tautomerization rule to register.
+             */
             void addTautomerizationRule(const TautomerizationRule::SharedPointer& rule);
 
+            /**
+             * \brief Returns the registered tautomerization rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \return A \c const reference to the rule smart pointer.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumTautomerizationRules() - 1].
+             */
             const TautomerizationRule::SharedPointer& getTautomerizationRule(std::size_t idx) const;
 
+            /**
+             * \brief Removes the registered tautomerization rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumTautomerizationRules() - 1].
+             */
             void removeTautomerizationRule(std::size_t idx);
 
+            /**
+             * \brief Returns the number of registered tautomerization rules.
+             * \return The rule count.
+             */
             std::size_t getNumTautomerizationRules() const;
 
+            /**
+             * \brief Sets the callback invoked for every accepted tautomer.
+             *
+             * The callback receives the tautomer molecular graph as its argument and returns a boolean:
+             * returning \c false aborts the enumeration.
+             *
+             * \param func The new callback function.
+             */
             void setCallbackFunction(const CallbackFunction& func);
 
+            /**
+             * \brief Returns the currently configured callback.
+             * \return A \c const reference to the callback function.
+             */
             const CallbackFunction& getCallbackFunction() const;
 
+            /**
+             * \brief Sets the duplicate-filtering mode.
+             * \param mode The new Mode value.
+             */
             void setMode(Mode mode);
 
+            /**
+             * \brief Returns the currently configured duplicate-filtering mode.
+             * \return The Mode value.
+             */
             Mode getMode() const;
 
+            /**
+             * \brief Specifies whether tautomer stereochemistry shall be preserved/regarded during duplicate filtering.
+             * \param regard If \c true, stereo-configurations are taken into account.
+             */
             void regardStereochemistry(bool regard);
 
+            /**
+             * \brief Tells whether stereochemistry is regarded during duplicate filtering.
+             * \return \c true if stereochemistry is regarded, and \c false otherwise.
+             */
             bool stereochemistryRegarded() const;
 
+            /**
+             * \brief Specifies whether atom isotope information shall be regarded during duplicate filtering.
+             * \param regard If \c true, isotopes are taken into account.
+             */
             void regardIsotopes(bool regard);
 
+            /**
+             * \brief Tells whether isotope information is regarded during duplicate filtering.
+             * \return \c true if isotopes are regarded, and \c false otherwise.
+             */
             bool isotopesRegarded() const;
 
             /**
+             * \brief Specifies whether 2D atom coordinates shall be cleared from the generated tautomers (the input remains untouched).
+             * \param clear If \c true, the output tautomers have no 2D coordinates.
              * \since 1.3
              */
             void clearCoordinates2D(bool clear);
 
             /**
+             * \brief Tells whether 2D atom coordinates are cleared from the generated tautomers.
+             * \return \c true if 2D coordinates are cleared, and \c false otherwise.
              * \since 1.3
              */
             bool coordinates2DCleared() const;
 
             /**
+             * \brief Specifies whether 3D atom coordinates shall be cleared from the generated tautomers.
+             * \param clear If \c true, the output tautomers have no 3D coordinates.
              * \since 1.3
              */
             void clearCoordinates3D(bool clear);
 
             /**
+             * \brief Tells whether 3D atom coordinates are cleared from the generated tautomers.
+             * \return \c true if 3D coordinates are cleared, and \c false otherwise.
              * \since 1.3
              */
             bool coordinates3DCleared() const;
-            
+
             /**
+             * \brief Specifies whether tautomers that differ only by resonance (no atom-connectivity change) shall be filtered out.
+             * \param remove If \c true, resonance-only duplicates are not reported.
              * \since 1.1
              */
             void removeResonanceDuplicates(bool remove);
 
             /**
+             * \brief Tells whether resonance-only duplicates are filtered out.
+             * \return \c true if resonance duplicates are removed, and \c false otherwise.
              * \since 1.1
              */
             bool resonanceDuplicatesRemoved() const;
-            
+
+            /**
+             * \brief Sets the optional setup function invoked on the input molecular graph before enumeration starts.
+             *
+             * The setup function may modify the input (e.g. add explicit hydrogens, perceive aromaticity) prior to enumeration.
+             *
+             * \param func The new custom-setup function.
+             */
             void setCustomSetupFunction(const CustomSetupFunction& func);
 
             /**
-             * \brief Generates all unique tautomers of the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to generate the tautomers.
+             * \brief Enumerates the tautomers of \a molgraph and reports each accepted one to the registered callback.
+             * \param molgraph The molecular graph whose tautomers shall be generated.
              */
             void generate(const MolecularGraph& molgraph);
 

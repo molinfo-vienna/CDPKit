@@ -50,7 +50,7 @@ namespace CDPL
         class HierarchyView;
 
         /**
-         * \brief HierarchyViewModel.
+         * \brief A single NMR/ensemble model of a Biomol::HierarchyView, holding the constituent chains.
          */
         class CDPL_BIOMOL_API HierarchyViewModel : public HierarchyViewNode
         {
@@ -61,22 +61,60 @@ namespace CDPL
             typedef std::vector<ChainPtr>               ChainList;
 
           public:
+            /** \brief A constant iterator over the contained chains. */
             typedef boost::indirect_iterator<ChainList::const_iterator, const HierarchyViewChain> ConstChainIterator;
 
+            /**
+             * \brief Returns the number of chains in this model.
+             * \return The number of chains.
+             */
             std::size_t getNumChains() const;
 
+            /**
+             * \brief Returns the chain at index \a idx.
+             * \param idx The zero-based chain index.
+             * \return A \c const reference to the chain.
+             * \throw Base::IndexError if the number of chains is zero or \a idx is not in the range [0, getNumChains() - 1].
+             */
             const HierarchyViewChain& getChain(std::size_t idx) const;
 
+            /**
+             * \brief Tells whether this model contains a chain with the given PDB chain ID.
+             * \param id The PDB chain ID.
+             * \return \c true if such a chain exists, and \c false otherwise.
+             */
             bool hasChainWithID(const std::string& id) const;
 
+            /**
+             * \brief Returns the chain identified by the given PDB chain ID.
+             * \param id The PDB chain ID.
+             * \return A \c const reference to the chain.
+             * \throw Base::ItemNotFound if no chain with the requested ID exists.
+             */
             const HierarchyViewChain& getChainByID(const std::string& id) const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first chain.
+             * \return A constant iterator pointing to the first chain.
+             */
             ConstChainIterator getChainsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last chain.
+             * \return A constant iterator pointing one past the last chain.
+             */
             ConstChainIterator getChainsEnd() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first chain (range-based for support).
+             * \return A constant iterator pointing to the first chain.
+             */
             ConstChainIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last chain (range-based for support).
+             * \return A constant iterator pointing one past the last chain.
+             */
             ConstChainIterator end() const;
 
           private:

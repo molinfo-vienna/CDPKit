@@ -29,6 +29,17 @@
 
 #include <algorithm>
 
+/**
+ * \def CDPL_MATH_CHECK
+ * \brief Throws the exception \a e with message \a msg when the boolean expression \a expr evaluates to \c false.
+ *
+ * Expands to an empty statement when the macro \c CDPL_MATH_CHECKS_DISABLE is defined at compile time,
+ * allowing release builds to elide the check.
+ *
+ * \param expr The boolean condition that must hold.
+ * \param msg The C-string error message passed to the exception constructor.
+ * \param e The exception type to throw when \a expr is \c false.
+ */
 #ifndef CDPL_MATH_CHECK
 # ifdef CDPL_MATH_CHECKS_DISABLE
 #  define CDPL_MATH_CHECK(expr, msg, e)
@@ -59,8 +70,29 @@ namespace
     }
 } // namespace
 
+/**
+ * \def CDPL_MATH_CHECK_SIZE_EQUALITY
+ * \brief Throws the exception \a e if \a size1 differs from \a size2, otherwise returns \c std::min(size1, size2).
+ *
+ * Intended for size compatibility checks (e.g. matching vector dimensions in arithmetic expressions).
+ * Subject to compile-time elision via \c CDPL_MATH_CHECKS_DISABLE (see CDPL_MATH_CHECK).
+ *
+ * \param size1 The first size value.
+ * \param size2 The second size value.
+ * \param e The exception type to throw on size mismatch.
+ */
 #define CDPL_MATH_CHECK_SIZE_EQUALITY(size1, size2, e) checkSizeEquality<e>(size1, size2)
 
+/**
+ * \def CDPL_MATH_CHECK_MAX_SIZE
+ * \brief Throws the exception \a e if \a size exceeds \a max_size, otherwise returns \c std::min(size, max_size).
+ *
+ * Intended for upper-bound size checks. Subject to compile-time elision via \c CDPL_MATH_CHECKS_DISABLE.
+ *
+ * \param size The size value to test.
+ * \param max_size The upper bound the size must respect.
+ * \param e The exception type to throw on overflow.
+ */
 #define CDPL_MATH_CHECK_MAX_SIZE(size, max_size, e) checkMaxSize<e>(size, max_size)
 
 #endif // CDPL_MATH_CHECK_HPP

@@ -42,8 +42,11 @@ namespace CDPL
         class HierarchyViewChain;
 
         /**
-     * \brief HierarchyViewFragment.
-     */
+         * \brief A single contiguous fragment of a Biomol::HierarchyViewChain (delimited by chain breaks).
+         *
+         * Inherits the residue list from Biomol::HierarchyViewNode; no fragment-specific public API is exposed
+         * beyond that. Fragment instances are constructed and owned by the parent Biomol::HierarchyViewChain.
+         */
         class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode
         {
 
