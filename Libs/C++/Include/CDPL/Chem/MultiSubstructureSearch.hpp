@@ -45,13 +45,19 @@ namespace CDPL
     {
    
         /**
-         * \brief MultiSubstructureSearch.
+         * \brief Evaluates a boolean expression over multiple substructure queries against a target molecular graph.
+         *
+         * Substructure query molecular graphs are added via addSubstructure() and referenced in the boolean
+         * expression by their 1-based insertion order (e.g. \c "1 AND (2 OR NOT 3)"). The expression is parsed
+         * by setup() and subsequently evaluated for each target molecular graph passed to matches().
+         *
          * \since 1.2
          */
         class CDPL_CHEM_API MultiSubstructureSearch
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiSubstructureSearch instances. */
             typedef std::shared_ptr<MultiSubstructureSearch> SharedPointer;
 
             /**
@@ -60,7 +66,7 @@ namespace CDPL
             MultiSubstructureSearch();
 
             MultiSubstructureSearch(const MultiSubstructureSearch&) = delete;
-            
+
             /**
              * \brief Destructor.
              *
@@ -69,17 +75,52 @@ namespace CDPL
             ~MultiSubstructureSearch();
 
             MultiSubstructureSearch& operator=(const MultiSubstructureSearch&) = delete;
-          
+
+            /**
+             * \brief Evaluates the configured boolean substructure expression against the target molecular graph \a molgraph.
+             * \param molgraph The target molecular graph.
+             * \return \c true if the boolean expression evaluates to true for \a molgraph, and \c false otherwise
+             *         (also \c false when no expression has been compiled by setup() yet).
+             */
             bool matches(const MolecularGraph& molgraph);
 
+            /**
+             * \brief Appends a substructure query to the internal substructure list.
+             *
+             * The query receives the 1-based ID equal to the new value of getNumSubstructures(),
+             * which is how it is referenced in the boolean expression.
+             *
+             * \param molgraph A smart pointer to the substructure query molecular graph.
+             */
             void addSubstructure(const MolecularGraph::SharedPointer& molgraph);
 
+            /**
+             * \brief Returns the number of stored substructure queries.
+             * \return The number of stored substructure queries.
+             */
             std::size_t getNumSubstructures() const;
 
+            /**
+             * \brief Removes all stored substructure queries and clears the compiled expression.
+             */
             void clear();
 
+            /**
+             * \brief Compiles the boolean substructure expression \a qry_expr.
+             *
+             * Substructure IDs in the expression are 1-based and refer to the order in which queries
+             * were added via addSubstructure(). Supported operators are \c AND, \c OR, \c XOR and \c NOT.
+             *
+             * \param qry_expr The boolean expression to compile (an empty string clears the compiled expression).
+             */
             void setup(const std::string& qry_expr = "");
 
+            /**
+             * \brief Validates the syntax of \a qry_expr without compiling it for evaluation.
+             * \param qry_expr The expression to validate.
+             * \param max_substr_id Largest accepted substructure ID; expressions referencing larger IDs are rejected.
+             * \return An empty string if \a qry_expr is well-formed, otherwise an error message describing the failure.
+             */
             std::string validate(const std::string& qry_expr, std::size_t max_substr_id);
             
           private:

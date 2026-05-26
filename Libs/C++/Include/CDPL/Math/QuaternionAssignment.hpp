@@ -40,8 +40,13 @@ namespace CDPL
         class QuaternionExpression;
 
         /**
-         * \brief Applies the element-wise functor \a F to every (quaternion component, source component) pair (C1, C2, C3, C4).
-         * \tparam F The element-wise binary functor template.
+         * \brief Applies the binary functor \a F componentwise between the destination quaternion \a q and
+         *        the source quaternion expression \a e.
+         *
+         * For each of the four quaternion components <em>i</em> in \e {C1, C2, C3, C4}, the call
+         * <tt>F::apply(q.getCi(), e().getCi())</tt> is performed.
+         *
+         * \tparam F The element-wise binary functor template (instantiated as <tt>F<Q::Reference, E::ValueType></tt>).
          * \tparam Q The destination quaternion container type.
          * \tparam E The source quaternion expression type.
          * \param q The destination quaternion.

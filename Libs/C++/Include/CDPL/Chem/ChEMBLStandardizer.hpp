@@ -65,38 +65,95 @@ namespace CDPL
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ChEMBLStandardizer instances. */
             typedef std::shared_ptr<ChEMBLStandardizer> SharedPointer;
 
+            /**
+             * \brief Bitwise-OR-combined flags reporting which standardization steps modified the input molecule.
+             */
             enum ChangeFlags
             {
 
+                /** \brief No changes were applied. */
                 NONE                         = 0x0,
+                /** \brief The molecule matched a ChEMBL exclusion criterion and was not processed further. */
                 EXCLUDED                     = 0x1,
+                /** \brief Removable explicit hydrogen atoms were removed. */
                 EXPLICIT_HYDROGENS_REMOVED   = 0x2,
+                /** \brief Atoms/bonds with unknown stereo descriptors were standardized. */
                 UNKNOWN_STEREO_STANDARDIZED  = 0x4,
+                /** \brief Aromatic bonds were kekulized to alternating single/double bonds. */
                 BONDS_KEKULIZED              = 0x8,
+                /** \brief Functional-group structure normalizations were applied. */
                 STRUCTURE_NORMALIZED         = 0x10,
+                /** \brief Atom formal charges were removed where possible. */
                 CHARGES_REMOVED              = 0x20,
+                /** \brief Defined stereo at tartrate-like substructures was cleared. */
                 TARTRATE_STEREO_CLEARED      = 0x40,
+                /** \brief 2D bond-angle artefacts were corrected. */
                 STRUCTURE_2D_CORRECTED       = 0x80,
+                /** \brief Atom isotope information was cleared. */
                 ISOTOPE_INFO_CLEARED         = 0x100,
+                /** \brief Salt components were removed (parent extraction only). */
                 SALT_COMPONENTS_REMOVED      = 0x200,
+                /** \brief Common solvent components were removed (parent extraction only). */
                 SOLVENT_COMPONENTS_REMOVED   = 0x400,
+                /** \brief Duplicate disconnected components were collapsed (parent extraction only). */
                 DUPLICATE_COMPONENTS_REMOVED = 0x800
             };
 
+            /**
+             * \brief Constructs the \c %ChEMBLStandardizer instance.
+             */
             ChEMBLStandardizer();
 
+            /**
+             * \brief Constructs a copy of the \c %ChEMBLStandardizer instance \a standardizer.
+             * \param standardizer The \c %ChEMBLStandardizer to copy.
+             */
             ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
 
+            /**
+             * \brief Standardizes \a mol in place.
+             * \param mol The molecule to standardize (modified in place).
+             * \param proc_excld If \c true, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
+             * \return A bitwise-OR combination of ChangeFlags reporting which standardization steps modified the molecule.
+             */
             ChangeFlags standardize(Molecule& mol, bool proc_excld = false);
 
+            /**
+             * \brief Writes a standardized copy of \a molgraph to \a std_mol.
+             * \param molgraph The input molecular graph.
+             * \param std_mol The output molecule receiving the standardized copy.
+             * \param proc_excluded If \c true, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
+             * \return A bitwise-OR combination of ChangeFlags reporting which standardization steps modified the molecule.
+             */
             ChangeFlags standardize(const MolecularGraph& molgraph, Molecule& std_mol, bool proc_excluded = false);
 
+            /**
+             * \brief Extracts the parent compound of \a mol in place (removing salt/solvent components).
+             * \param mol The molecule from which to extract the parent (modified in place).
+             * \param neutralize If \c true, charges of the extracted parent are subsequently neutralized.
+             * \param check_exclusion If \c true, ChEMBL exclusion criteria are checked before processing.
+             * \return A bitwise-OR combination of ChangeFlags reporting which steps modified the molecule.
+             */
             ChangeFlags getParent(Molecule& mol, bool neutralize = true, bool check_exclusion = true);
 
+            /**
+             * \brief Extracts the parent compound of \a molgraph into \a parent_mol.
+             * \param molgraph The input molecular graph.
+             * \param parent_mol The output molecule receiving the parent compound.
+             * \param neutralize If \c true, charges of the extracted parent are subsequently neutralized.
+             * \param check_exclusion If \c true, ChEMBL exclusion criteria are checked before processing.
+             * \return A bitwise-OR combination of ChangeFlags reporting which steps modified the molecule.
+             */
             ChangeFlags getParent(const MolecularGraph& molgraph, Molecule& parent_mol, bool neutralize = true, bool check_exclusion = true);
 
+            /**
+             * \brief Replaces the state of this standardizer by a copy of the state of \a standardizer.
+             * \param standardizer The source \c %ChEMBLStandardizer.
+             * \return A reference to itself.
+             */
             ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
 
           private:

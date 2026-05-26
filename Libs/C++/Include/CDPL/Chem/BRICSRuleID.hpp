@@ -43,48 +43,91 @@ namespace CDPL
         namespace BRICSRuleID
         {
 
+            /** \brief No BRICS rule applies. */
             constexpr unsigned int NONE    = 0;
+            /** \brief BRICS rule cleaving the bond between atom-class L1 and L2 (C-C between sp3 carbons). */
             constexpr unsigned int L1_L2   = 1;
+            /** \brief BRICS rule cleaving the bond between atom-class L1 and L3 (sp3 C - N). */
             constexpr unsigned int L1_L3   = 2;
+            /** \brief BRICS rule cleaving the bond between atom-class L1 and L10. */
             constexpr unsigned int L1_L10  = 3;
+            /** \brief BRICS rule cleaving the bond between atom-class L2 and L12. */
             constexpr unsigned int L2_L12  = 4;
+            /** \brief BRICS rule cleaving the bond between atom-class L2 and L14. */
             constexpr unsigned int L2_L14  = 5;
+            /** \brief BRICS rule cleaving the bond between atom-class L2 and L16. */
             constexpr unsigned int L2_L16  = 6;
+            /** \brief BRICS rule cleaving the bond between atom-class L3 and L4. */
             constexpr unsigned int L3_L4   = 7;
+            /** \brief BRICS rule cleaving the bond between atom-class L3 and L13. */
             constexpr unsigned int L3_L13  = 8;
+            /** \brief BRICS rule cleaving the bond between atom-class L3 and L14. */
             constexpr unsigned int L3_L14  = 9;
+            /** \brief BRICS rule cleaving the bond between atom-class L3 and L15. */
             constexpr unsigned int L3_L15  = 10;
+            /** \brief BRICS rule cleaving the bond between atom-class L3 and L16. */
             constexpr unsigned int L3_L16  = 11;
+            /** \brief BRICS rule cleaving the bond between atom-class L4 and L5. */
             constexpr unsigned int L4_L5   = 12;
+            /** \brief BRICS rule cleaving the bond between atom-class L4 and L11. */
             constexpr unsigned int L4_L11  = 13;
+            /** \brief BRICS rule cleaving the bond between atom-class L5 and L13. */
             constexpr unsigned int L5_L13  = 14;
+            /** \brief BRICS rule cleaving the bond between atom-class L5 and L15. */
             constexpr unsigned int L5_L15  = 15;
+            /** \brief BRICS rule cleaving the bond between atom-class L6 and L13. */
             constexpr unsigned int L6_L13  = 16;
+            /** \brief BRICS rule cleaving the bond between atom-class L6 and L14. */
             constexpr unsigned int L6_L14  = 17;
+            /** \brief BRICS rule cleaving the bond between atom-class L6 and L15. */
             constexpr unsigned int L6_L15  = 18;
+            /** \brief BRICS rule cleaving the bond between atom-class L6 and L16. */
             constexpr unsigned int L6_L16  = 19;
+            /** \brief BRICS rule cleaving the bond between two atoms of atom-class L7. */
             constexpr unsigned int L7_L7   = 20;
+            /** \brief BRICS rule cleaving the bond between atom-class L8 and L9. */
             constexpr unsigned int L8_L9   = 21;
+            /** \brief BRICS rule cleaving the bond between atom-class L8 and L10. */
             constexpr unsigned int L8_L10  = 22;
+            /** \brief BRICS rule cleaving the bond between atom-class L8 and L13. */
             constexpr unsigned int L8_L13  = 23;
+            /** \brief BRICS rule cleaving the bond between atom-class L8 and L14. */
             constexpr unsigned int L8_L14  = 24;
+            /** \brief BRICS rule cleaving the bond between atom-class L8 and L15. */
             constexpr unsigned int L8_L15  = 25;
+            /** \brief BRICS rule cleaving the bond between atom-class L8 and L16. */
             constexpr unsigned int L8_L16  = 26;
+            /** \brief BRICS rule cleaving the bond between atom-class L9 and L15. */
             constexpr unsigned int L9_L15  = 27;
+            /** \brief BRICS rule cleaving the bond between atom-class L9 and L16. */
             constexpr unsigned int L9_L16  = 28;
+            /** \brief BRICS rule cleaving the bond between atom-class L10 and L13. */
             constexpr unsigned int L10_L13 = 29;
+            /** \brief BRICS rule cleaving the bond between atom-class L10 and L14. */
             constexpr unsigned int L10_L14 = 30;
+            /** \brief BRICS rule cleaving the bond between atom-class L10 and L15. */
             constexpr unsigned int L10_L15 = 31;
+            /** \brief BRICS rule cleaving the bond between atom-class L10 and L16. */
             constexpr unsigned int L10_L16 = 32;
+            /** \brief BRICS rule cleaving the bond between atom-class L11 and L13. */
             constexpr unsigned int L11_L13 = 33;
+            /** \brief BRICS rule cleaving the bond between atom-class L11 and L14. */
             constexpr unsigned int L11_L14 = 34;
+            /** \brief BRICS rule cleaving the bond between atom-class L11 and L15. */
             constexpr unsigned int L11_L15 = 35;
+            /** \brief BRICS rule cleaving the bond between atom-class L11 and L16. */
             constexpr unsigned int L11_L16 = 36;
+            /** \brief BRICS rule cleaving the bond between atom-class L13 and L14. */
             constexpr unsigned int L13_L14 = 37;
+            /** \brief BRICS rule cleaving the bond between atom-class L13 and L15. */
             constexpr unsigned int L13_L15 = 38;
+            /** \brief BRICS rule cleaving the bond between atom-class L13 and L16. */
             constexpr unsigned int L13_L16 = 39;
+            /** \brief BRICS rule cleaving the bond between atom-class L14 and L15. */
             constexpr unsigned int L14_L15 = 40;
+            /** \brief BRICS rule cleaving the bond between atom-class L14 and L16. */
             constexpr unsigned int L14_L16 = 41;
+            /** \brief BRICS rule cleaving the bond between atom-class L15 and L16. */
             constexpr unsigned int L15_L16 = 42;
         } // namespace BRICSRuleID
     } // namespace Chem

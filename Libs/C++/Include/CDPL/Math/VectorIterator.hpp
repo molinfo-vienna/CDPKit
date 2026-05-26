@@ -52,14 +52,28 @@ namespace CDPL
             typedef typename E::Reference Reference;
 
           public:
+            /**
+             * \brief Constructs the accessor referencing the (mutable) vector \a e.
+             * \param e The referenced vector.
+             */
             VectorElementAccessor(VectorType& e):
                 vec(e) {}
 
+            /**
+             * \brief Returns a mutable reference to the element at index \a i of the referenced vector.
+             * \param i The zero-based element index.
+             * \return A mutable reference to the element.
+             */
             Reference operator()(SizeType i) const
             {
                 return vec.get()(i);
             }
 
+            /**
+             * \brief Tells whether this accessor references the same vector as \a accessor.
+             * \param accessor The other accessor.
+             * \return \c true if both accessors reference the same vector, and \c false otherwise.
+             */
             bool operator==(const VectorElementAccessor& accessor) const
             {
                 return (&vec.get() == &accessor.vec.get());
@@ -82,22 +96,45 @@ namespace CDPL
             typedef typename E::ConstReference Reference;
 
           public:
+            /**
+             * \brief Constructs the accessor from a mutable-vector accessor (relaxing it to read-only access).
+             * \param accessor The source mutable accessor.
+             */
             VectorElementAccessor(const VectorElementAccessor<E>& accessor):
                 vec(accessor.vec) {}
 
+            /**
+             * \brief Constructs the accessor referencing the constant vector \a e.
+             * \param e The referenced vector.
+             */
             VectorElementAccessor(const VectorType& e):
                 vec(e) {}
 
+            /**
+             * \brief Returns a \c const reference to the element at index \a i of the referenced vector.
+             * \param i The zero-based element index.
+             * \return A \c const reference to the element.
+             */
             Reference operator()(SizeType i) const
             {
                 return vec.get()(i);
             }
 
+            /**
+             * \brief Tells whether this accessor references the same vector as \a accessor.
+             * \param accessor The other accessor.
+             * \return \c true if both accessors reference the same vector, and \c false otherwise.
+             */
             bool operator==(const VectorElementAccessor& accessor) const
             {
                 return (&vec.get() == &accessor.vec.get());
             }
 
+            /**
+             * \brief Rebinds this accessor to the vector referenced by \a accessor.
+             * \param accessor The source accessor.
+             * \return A reference to itself.
+             */
             VectorElementAccessor& operator=(const VectorElementAccessor<E>& accessor)
             {
                 vec = std::reference_wrapper<const VectorType>(accessor.vec);

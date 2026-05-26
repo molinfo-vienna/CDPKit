@@ -51,30 +51,63 @@ namespace CDPL
         class ChEMBLStandardizer;
 
         /**
-         * \brief Sets the protation state of molecules according to desired objectives.
+         * \brief Adjusts the protonation state of a molecule (atom formal charges and bonded hydrogen counts)
+         *        according to one of several pre-defined objectives.
          */
         class CDPL_CHEM_API ProtonationStateStandardizer
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ProtonationStateStandardizer instances. */
             typedef std::shared_ptr<ProtonationStateStandardizer> SharedPointer;
 
+            /**
+             * \brief Selects the objective driving the protonation-state adjustment.
+             */
             enum Flavor
             {
 
+                /** \brief Minimize the total number of formally charged atoms (neutralize where possible). */
                 MIN_CHARGED_ATOM_COUNT,
+                /** \brief Set the protonation state expected under physiological conditions (pH ~7.4). */
                 PHYSIOLOGICAL_CONDITION_STATE,
+                /** \brief Maximize the cancellation of opposite formal charges (neutralize zwitterion-like pairs). */
                 MAX_CHARGE_COMPENSATION
             };
 
+            /**
+             * \brief Constructs the \c %ProtonationStateStandardizer instance.
+             */
             ProtonationStateStandardizer();
 
+            /**
+             * \brief Constructs a copy of the \c %ProtonationStateStandardizer instance \a standardizer.
+             * \param standardizer The \c %ProtonationStateStandardizer to copy.
+             */
             ProtonationStateStandardizer(const ProtonationStateStandardizer& standardizer);
 
+            /**
+             * \brief Adjusts the protonation state of \a mol in place according to the selected \a flavor.
+             * \param mol The molecule to standardize (modified in place).
+             * \param flavor The protonation-state objective.
+             * \return \c true if the molecule was modified, and \c false otherwise.
+             */
             bool standardize(Molecule& mol, Flavor flavor);
 
+            /**
+             * \brief Writes a standardized copy of \a mol to \a std_mol without modifying \a mol.
+             * \param mol The input molecule.
+             * \param std_mol The output molecule receiving the standardized copy.
+             * \param flavor The protonation-state objective.
+             * \return \c true if the output differs from the input, and \c false otherwise.
+             */
             bool standardize(const Molecule& mol, Molecule& std_mol, Flavor flavor);
 
+            /**
+             * \brief Replaces the state of this standardizer by a copy of the state of \a standardizer.
+             * \param standardizer The source \c %ProtonationStateStandardizer.
+             * \return A reference to itself.
+             */
             ProtonationStateStandardizer& operator=(const ProtonationStateStandardizer& standardizer);
 
           private:

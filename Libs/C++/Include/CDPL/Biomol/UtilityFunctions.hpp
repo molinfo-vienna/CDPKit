@@ -45,6 +45,25 @@ namespace CDPL
     namespace Biomol
     {
 
+        /**
+         * \brief Searches the iterator range [\a it, \a end) for the first atom whose PDB-style residue
+         *        identity attributes match the given filter values.
+         *
+         * Each filter argument is ignored when set to its sentinel value (\c nullptr / 0 / IGNORE_SEQUENCE_NO /
+         * IGNORE_SERIAL_NO). All supplied filters must match for an atom to be considered a hit.
+         *
+         * \tparam Iter The (forward) iterator type whose value type is \c Chem::Atom.
+         * \param it Iterator pointing to the first atom of the range.
+         * \param end Iterator pointing one past the last atom of the range.
+         * \param res_code The PDB three-letter residue code to match (or \c nullptr to ignore).
+         * \param chain_id The PDB chain ID to match (or \c nullptr to ignore).
+         * \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The PDB insertion code to match (or 0 to ignore).
+         * \param model_no The PDB model number to match (or 0 to ignore).
+         * \param atom_name The PDB atom name to match (or \c nullptr to ignore).
+         * \param serial_no The PDB atom serial number to match (or IGNORE_SERIAL_NO to ignore).
+         * \return An iterator pointing to the first matching atom, or \a end if no match was found.
+         */
         template <typename Iter>
         Iter findResidueAtom(Iter it, Iter end, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
                              char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, long serial_no = IGNORE_SERIAL_NO)
@@ -54,6 +73,26 @@ namespace CDPL
                                           ins_code, model_no, atom_name, serial_no));
         }
 
+        /**
+         * \brief Searches the iterator range [\a it, \a end) for the first residue (molecular graph) whose
+         *        PDB-style identity attributes match the given filter values, optionally requiring a matching atom.
+         *
+         * Each filter argument is ignored when set to its sentinel value. If both \a atom_name and \a serial_no
+         * are sentinels, the search returns the first residue matching the residue-level filters. Otherwise,
+         * a residue is only returned if it additionally contains an atom matching \a atom_name / \a serial_no.
+         *
+         * \tparam Iter The (forward) iterator type whose value type is convertible to \c Chem::MolecularGraph.
+         * \param it Iterator pointing to the first residue of the range.
+         * \param end Iterator pointing one past the last residue of the range.
+         * \param res_code The PDB three-letter residue code to match (or \c nullptr to ignore).
+         * \param chain_id The PDB chain ID to match (or \c nullptr to ignore).
+         * \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The PDB insertion code to match (or 0 to ignore).
+         * \param model_no The PDB model number to match (or 0 to ignore).
+         * \param atom_name The PDB atom name an atom of the residue must match (or \c nullptr to ignore).
+         * \param serial_no The PDB atom serial number an atom of the residue must match (or IGNORE_SERIAL_NO to ignore).
+         * \return An iterator pointing to the first matching residue, or \a end if no match was found.
+         */
         template <typename Iter>
         Iter findResidue(Iter it, Iter end, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
                          char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, long serial_no = IGNORE_SERIAL_NO)

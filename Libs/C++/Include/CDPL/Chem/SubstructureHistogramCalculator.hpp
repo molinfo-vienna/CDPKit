@@ -49,7 +49,14 @@ namespace CDPL
     {
 
         /**
-         * \brief SubstructureHistogramCalculator.
+         * \brief Counts occurrences of registered SMARTS substructure queries in a molecular graph,
+         *        emitting the per-pattern hit counts into a user-supplied histogram container.
+         *
+         * Patterns are added via addPattern() (each pattern carries a numeric ID, a priority and
+         * match-handling flags). On calculate() the registered patterns are run in priority order
+         * against the input molecular graph; matched atom/bond regions are masked so that subsequent
+         * lower-priority patterns cannot re-count overlapping substructures. The per-pattern hit count
+         * is then forwarded to the histogram via the expression \c histo[id]++ for every accepted match.
          */
         class CDPL_CHEM_API SubstructureHistogramCalculator
         {
@@ -61,26 +68,61 @@ namespace CDPL
             typedef std::vector<Pattern> PatternList;
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SubstructureHistogramCalculator instances. */
             typedef std::shared_ptr<SubstructureHistogramCalculator> SharedPointer;
 
+            /** \brief A constant iterator over the registered patterns. */
             typedef PatternList::const_iterator ConstPatternIterator;
+            /** \brief A mutable iterator over the registered patterns. */
             typedef PatternList::iterator       PatternIterator;
 
+            /**
+             * \brief Holds a single SMARTS query pattern, its histogram ID, its priority and match-handling flags.
+             */
             class CDPL_CHEM_API Pattern
             {
 
               public:
+                /**
+                 * \brief Constructs a pattern from the query molecular graph \a molgraph.
+                 * \param molgraph The SMARTS query molecular graph.
+                 * \param id The histogram-bin ID to which matches of this pattern contribute.
+                 * \param priority The priority of this pattern; higher-priority patterns are evaluated first.
+                 * \param all_matches If \c true, every match of \a molgraph in the target is processed;
+                 *                    if \c false, only the first match is processed.
+                 * \param unique_matches If \c true, only one of multiple equivalent substructure mappings is processed per match.
+                 */
                 Pattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id, std::size_t priority = 0,
                         bool all_matches = true, bool unique_matches = true);
 
+                /**
+                 * \brief Returns the SMARTS query molecular graph of this pattern.
+                 * \return A \c const reference to the query smart pointer.
+                 */
                 const MolecularGraph::SharedPointer& getStructure() const;
 
+                /**
+                 * \brief Returns the histogram-bin ID of this pattern.
+                 * \return The histogram-bin ID.
+                 */
                 std::size_t getID() const;
 
+                /**
+                 * \brief Returns the pattern priority.
+                 * \return The priority value.
+                 */
                 std::size_t getPriority() const;
 
+                /**
+                 * \brief Tells whether all substructure matches are processed.
+                 * \return \c true if all matches are processed, and \c false if only the first match is.
+                 */
                 bool processAllMatches() const;
 
+                /**
+                 * \brief Tells whether only one of multiple equivalent mappings is processed per match.
+                 * \return \c true if unique-only mode is enabled, and \c false otherwise.
+                 */
                 bool processUniqueMatchesOnly() const;
 
               private:
@@ -91,40 +133,132 @@ namespace CDPL
                 bool                          uniqueMatches;
             };
 
+            /**
+             * \brief Constructs an empty \c %SubstructureHistogramCalculator instance.
+             */
             SubstructureHistogramCalculator();
 
+            /**
+             * \brief Constructs a copy of the \c %SubstructureHistogramCalculator instance \a gen.
+             * \param gen The \c %SubstructureHistogramCalculator to copy.
+             */
             SubstructureHistogramCalculator(const SubstructureHistogramCalculator& gen);
 
+            /**
+             * \brief Registers a new pattern by its query molecular graph and per-pattern settings.
+             * \param molgraph The SMARTS query molecular graph.
+             * \param id The histogram-bin ID to which matches of this pattern contribute.
+             * \param priority The pattern's priority; higher-priority patterns are evaluated first.
+             * \param all_matches If \c true, every match of the query is processed; otherwise only the first.
+             * \param unique_matches If \c true, only one of multiple equivalent substructure mappings is processed per match.
+             */
             void addPattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id, std::size_t priority = 0,
                             bool all_matches = true, bool unique_matches = true);
 
+            /**
+             * \brief Appends a copy of the pre-built pattern \a pattern.
+             * \param pattern The pattern to copy and register.
+             */
             void addPattern(const Pattern& pattern);
 
+            /**
+             * \brief Returns the registered pattern at index \a idx.
+             * \param idx The zero-based pattern index.
+             * \return A \c const reference to the pattern.
+             * \throw Base::IndexError if the number of patterns is zero or \a idx is not in the range [0, getNumPatterns() - 1].
+             */
             const Pattern& getPattern(std::size_t idx) const;
 
+            /**
+             * \brief Removes the registered pattern at index \a idx.
+             * \param idx The zero-based pattern index.
+             * \throw Base::IndexError if the number of patterns is zero or \a idx is not in the range [0, getNumPatterns() - 1].
+             */
             void removePattern(std::size_t idx);
 
+            /**
+             * \brief Removes the registered pattern referenced by \a it.
+             * \param it Iterator referencing the pattern to remove.
+             */
             void removePattern(const PatternIterator& it);
 
+            /**
+             * \brief Removes all registered patterns.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of registered patterns.
+             * \return The pattern count.
+             */
             std::size_t getNumPatterns() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first registered pattern.
+             * \return A constant iterator pointing to the first pattern.
+             */
             ConstPatternIterator getPatternsBegin() const;
+
+            /**
+             * \brief Returns a constant iterator pointing one past the last registered pattern.
+             * \return A constant iterator pointing one past the last pattern.
+             */
             ConstPatternIterator getPatternsEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first registered pattern.
+             * \return A mutable iterator pointing to the first pattern.
+             */
             PatternIterator getPatternsBegin();
+
+            /**
+             * \brief Returns a mutable iterator pointing one past the last registered pattern.
+             * \return A mutable iterator pointing one past the last pattern.
+             */
             PatternIterator getPatternsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first registered pattern (range-based for support).
+             * \return A constant iterator pointing to the first pattern.
+             */
             ConstPatternIterator begin() const;
+
+            /**
+             * \brief Returns a constant iterator pointing one past the last registered pattern (range-based for support).
+             * \return A constant iterator pointing one past the last pattern.
+             */
             ConstPatternIterator end() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first registered pattern (range-based for support).
+             * \return A mutable iterator pointing to the first pattern.
+             */
             PatternIterator begin();
+
+            /**
+             * \brief Returns a mutable iterator pointing one past the last registered pattern (range-based for support).
+             * \return A mutable iterator pointing one past the last pattern.
+             */
             PatternIterator end();
 
+            /**
+             * \brief Counts substructure occurrences in \a molgraph and writes the per-pattern hit counts to \a histo.
+             *
+             * For every accepted match, the histogram is updated via \c histo[id] += 1 with the ID being the
+             * histogram-bin ID of the matching pattern.
+             *
+             * \tparam T The histogram type (must support \c operator[] returning an arithmetic value).
+             * \param molgraph The molecular graph to be analyzed.
+             * \param histo The histogram receiving the hit counts.
+             */
             template <typename T>
             void calculate(const MolecularGraph& molgraph, T& histo);
 
+            /**
+             * \brief Replaces the state of this calculator by a copy of the state of \a gen.
+             * \param gen The source \c %SubstructureHistogramCalculator.
+             * \return A reference to itself.
+             */
             SubstructureHistogramCalculator& operator=(const SubstructureHistogramCalculator& gen);
 
           private:

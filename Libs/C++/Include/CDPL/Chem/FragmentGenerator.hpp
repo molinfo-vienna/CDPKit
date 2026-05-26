@@ -48,28 +48,62 @@ namespace CDPL
     {
 
         /**
-         * \brief FragmentGenerator.
+         * \brief Generic rule-based molecule fragmentation engine that splits a molecular graph along
+         *        bonds matching user-defined SMARTS fragmentation rules.
+         *
+         * Fragmentation rules are added via addFragmentationRule() (each rule has a SMARTS pattern matching
+         * a bond plus a numeric rule ID). Bonds matching any registered rule are scheduled for splitting,
+         * unless a registered exclude pattern overrides the split. The optional fragment filter rejects
+         * generated fragments based on a user-supplied predicate. The connectivity between the resulting
+         * fragments is exposed via the FragmentLink list, recording for each cleaved bond the two adjacent
+         * fragment indices, the cleaved bond, the matching rule and per-side atom labels.
          */
         class CDPL_CHEM_API FragmentGenerator
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentGenerator instances. */
             typedef std::shared_ptr<FragmentGenerator> SharedPointer;
 
+            /** \brief Type of a predicate accepting/rejecting a generated fragment. */
             typedef std::function<bool(const MolecularGraph&)> FragmentFilterFunction;
 
+            /**
+             * \brief A single fragmentation rule, consisting of a SMARTS match pattern and a numeric rule ID.
+             */
             class CDPL_CHEM_API FragmentationRule
             {
 
               public:
+                /**
+                 * \brief Constructs the fragmentation rule.
+                 * \param match_ptn The SMARTS match pattern (must match a single bond to be cleaved).
+                 * \param id The rule identifier (forwarded to FragmentLink::getRuleID() for cleaved bonds).
+                 */
                 FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int id);
 
+                /**
+                 * \brief Returns the SMARTS match pattern of this rule.
+                 * \return A \c const reference to the pattern smart pointer.
+                 */
                 const MolecularGraph::SharedPointer& getMatchPattern() const;
 
+                /**
+                 * \brief Sets the SMARTS match pattern of this rule.
+                 * \param ptn The new pattern.
+                 */
                 void setMatchPattern(const MolecularGraph::SharedPointer& ptn);
 
+                /**
+                 * \brief Returns the rule identifier.
+                 * \return The numeric rule ID.
+                 */
                 unsigned int getID() const;
 
+                /**
+                 * \brief Sets the rule identifier.
+                 * \param id The new numeric rule ID.
+                 */
                 void setID(unsigned int id);
 
               private:
@@ -77,24 +111,63 @@ namespace CDPL
                 unsigned int                  id;
             };
 
+            /**
+             * \brief A pattern overriding a fragmentation rule: bonds matching the pattern are not cleaved.
+             *
+             * An exclude pattern is either rule-specific (only the matching rule is suppressed) or generic
+             * (all rules are suppressed for the matching bonds).
+             */
             class CDPL_CHEM_API ExcludePattern
             {
 
               public:
+                /**
+                 * \brief Constructs a rule-specific exclude pattern.
+                 * \param match_ptn The SMARTS match pattern.
+                 * \param rule_id The rule ID this exclusion applies to.
+                 */
                 ExcludePattern(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
 
+                /**
+                 * \brief Constructs a generic exclude pattern (applies to all fragmentation rules).
+                 * \param match_ptn The SMARTS match pattern.
+                 */
                 ExcludePattern(const MolecularGraph::SharedPointer& match_ptn);
 
+                /**
+                 * \brief Returns the SMARTS match pattern.
+                 * \return A \c const reference to the pattern smart pointer.
+                 */
                 const MolecularGraph::SharedPointer& getMatchPattern() const;
 
+                /**
+                 * \brief Sets the SMARTS match pattern.
+                 * \param ptn The new pattern.
+                 */
                 void setMatchPattern(const MolecularGraph::SharedPointer& ptn);
 
+                /**
+                 * \brief Returns the rule ID this exclusion applies to (only meaningful when isGeneric() is \c false).
+                 * \return The rule ID.
+                 */
                 unsigned int getRuleID() const;
 
+                /**
+                 * \brief Sets the rule ID this exclusion applies to.
+                 * \param id The new rule ID.
+                 */
                 void setRuleID(unsigned int id);
 
+                /**
+                 * \brief Tells whether this exclude pattern applies to all rules (generic) or only to a specific one.
+                 * \return \c true if the pattern is generic, and \c false otherwise.
+                 */
                 bool isGeneric() const;
 
+                /**
+                 * \brief Sets whether this exclude pattern is generic.
+                 * \param generic If \c true, the pattern applies to all rules; if \c false, only to the configured rule ID.
+                 */
                 void setGeneric(bool generic);
 
               private:
@@ -103,23 +176,59 @@ namespace CDPL
                 bool                          generic;
             };
 
+            /**
+             * \brief Records the connectivity between two fragments produced by a single bond cleavage.
+             */
             class CDPL_CHEM_API FragmentLink
             {
 
               public:
+                /**
+                 * \brief Constructs the fragment link.
+                 * \param frag1_idx The index of the first fragment in the output FragmentList.
+                 * \param frag2_idx The index of the second fragment in the output FragmentList.
+                 * \param bond The cleaved bond (from the original molecular graph).
+                 * \param rule_id The rule ID that triggered the cleavage.
+                 * \param atom1_label The label assigned to the first atom of the cleaved bond.
+                 * \param atom2_label The label assigned to the second atom of the cleaved bond.
+                 */
                 FragmentLink(std::size_t frag1_idx, std::size_t frag2_idx, const Bond& bond,
                              unsigned int rule_id, unsigned int atom1_label, unsigned int atom2_label);
 
+                /**
+                 * \brief Returns the index of the first fragment in the output FragmentList.
+                 * \return The first fragment index.
+                 */
                 std::size_t getFragment1Index() const;
 
+                /**
+                 * \brief Returns the index of the second fragment in the output FragmentList.
+                 * \return The second fragment index.
+                 */
                 std::size_t getFragment2Index() const;
 
+                /**
+                 * \brief Returns the cleaved bond from the original molecular graph.
+                 * \return A \c const reference to the bond.
+                 */
                 const Bond& getBond() const;
 
+                /**
+                 * \brief Returns the rule ID that triggered the cleavage of this bond.
+                 * \return The rule ID.
+                 */
                 unsigned int getRuleID() const;
 
+                /**
+                 * \brief Returns the label of the first atom of the cleaved bond.
+                 * \return The first atom label.
+                 */
                 unsigned int getAtom1Label() const;
 
+                /**
+                 * \brief Returns the label of the second atom of the cleaved bond.
+                 * \return The second atom label.
+                 */
                 unsigned int getAtom2Label() const;
 
               private:
@@ -137,12 +246,17 @@ namespace CDPL
             typedef std::vector<FragmentLink>      FragmentLinkList;
 
           public:
+            /** \brief A constant iterator over the registered fragmentation rules. */
             typedef FragmentationRuleList::const_iterator ConstFragmentationRuleIterator;
+            /** \brief A mutable iterator over the registered fragmentation rules. */
             typedef FragmentationRuleList::iterator       FragmentationRuleIterator;
 
+            /** \brief A constant iterator over the registered exclude patterns. */
             typedef ExcludePatternList::const_iterator ConstExcludePatternIterator;
+            /** \brief A mutable iterator over the registered exclude patterns. */
             typedef ExcludePatternList::iterator       ExcludePatternIterator;
 
+            /** \brief A constant iterator over the generated fragment links. */
             typedef FragmentLinkList::const_iterator ConstFragmentLinkIterator;
 
             /**
@@ -150,74 +264,229 @@ namespace CDPL
              */
             FragmentGenerator();
 
+            /**
+             * \brief Constructs a copy of the \c %FragmentGenerator instance \a gen.
+             * \param gen The \c %FragmentGenerator to copy.
+             */
             FragmentGenerator(const FragmentGenerator& gen);
 
+            /**
+             * \brief Virtual destructor.
+             */
             virtual ~FragmentGenerator() {}
 
+            /**
+             * \brief Replaces the state of this generator by a copy of the state of \a gen.
+             * \param gen The source \c %FragmentGenerator.
+             * \return A reference to itself.
+             */
             FragmentGenerator& operator=(const FragmentGenerator& gen);
 
+            /**
+             * \brief Registers a new fragmentation rule by its SMARTS match pattern and rule ID.
+             * \param match_ptn The SMARTS match pattern (must match a single bond to be cleaved).
+             * \param rule_id The rule identifier.
+             */
             void addFragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
 
+            /**
+             * \brief Appends a copy of the pre-built fragmentation rule \a rule.
+             * \param rule The rule to copy and register.
+             */
             void addFragmentationRule(const FragmentationRule& rule);
 
+            /**
+             * \brief Returns the fragmentation rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \return A \c const reference to the rule.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumFragmentationRules() - 1].
+             */
             const FragmentationRule& getFragmentationRule(std::size_t idx) const;
 
+            /**
+             * \brief Returns the fragmentation rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \return A reference to the rule.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumFragmentationRules() - 1].
+             */
             FragmentationRule& getFragmentationRule(std::size_t idx);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first registered fragmentation rule.
+             * \return A constant iterator pointing to the first rule.
+             */
             ConstFragmentationRuleIterator getFragmentationRulesBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last registered fragmentation rule.
+             * \return A constant iterator pointing one past the last rule.
+             */
             ConstFragmentationRuleIterator getFragmentationRulesEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first registered fragmentation rule.
+             * \return A mutable iterator pointing to the first rule.
+             */
             FragmentationRuleIterator getFragmentationRulesBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last registered fragmentation rule.
+             * \return A mutable iterator pointing one past the last rule.
+             */
             FragmentationRuleIterator getFragmentationRulesEnd();
 
+            /**
+             * \brief Removes the fragmentation rule at index \a idx.
+             * \param idx The zero-based rule index.
+             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumFragmentationRules() - 1].
+             */
             void removeFragmentationRule(std::size_t idx);
 
+            /**
+             * \brief Returns the number of registered fragmentation rules.
+             * \return The rule count.
+             */
             std::size_t getNumFragmentationRules() const;
 
+            /**
+             * \brief Removes all registered fragmentation rules.
+             */
             void clearFragmentationRules();
 
+            /**
+             * \brief Registers a rule-specific exclude pattern.
+             * \param match_ptn The SMARTS match pattern.
+             * \param rule_id The rule ID this exclusion applies to.
+             */
             void addExcludePattern(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
 
+            /**
+             * \brief Registers a generic exclude pattern (applies to all fragmentation rules).
+             * \param match_ptn The SMARTS match pattern.
+             */
             void addExcludePattern(const MolecularGraph::SharedPointer& match_ptn);
 
+            /**
+             * \brief Appends a copy of the pre-built exclude pattern \a excl_ptn.
+             * \param excl_ptn The exclude pattern to copy and register.
+             */
             void addExcludePattern(const ExcludePattern& excl_ptn);
 
+            /**
+             * \brief Returns the exclude pattern at index \a idx.
+             * \param idx The zero-based pattern index.
+             * \return A \c const reference to the exclude pattern.
+             * \throw Base::IndexError if the number of exclude patterns is zero or \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             */
             const ExcludePattern& getExcludePattern(std::size_t idx) const;
 
+            /**
+             * \brief Returns the exclude pattern at index \a idx.
+             * \param idx The zero-based pattern index.
+             * \return A reference to the exclude pattern.
+             * \throw Base::IndexError if the number of exclude patterns is zero or \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             */
             ExcludePattern& getExcludePattern(std::size_t idx);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first registered exclude pattern.
+             * \return A constant iterator pointing to the first exclude pattern.
+             */
             ConstExcludePatternIterator getExcludePatternsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last registered exclude pattern.
+             * \return A constant iterator pointing one past the last exclude pattern.
+             */
             ConstExcludePatternIterator getExcludePatternsEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first registered exclude pattern.
+             * \return A mutable iterator pointing to the first exclude pattern.
+             */
             ExcludePatternIterator getExcludePatternsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last registered exclude pattern.
+             * \return A mutable iterator pointing one past the last exclude pattern.
+             */
             ExcludePatternIterator getExcludePatternsEnd();
 
+            /**
+             * \brief Removes the exclude pattern at index \a idx.
+             * \param idx The zero-based pattern index.
+             * \throw Base::IndexError if the number of exclude patterns is zero or \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             */
             void removeExcludePattern(std::size_t idx);
 
+            /**
+             * \brief Returns the number of registered exclude patterns.
+             * \return The exclude-pattern count.
+             */
             std::size_t getNumExcludePatterns() const;
 
+            /**
+             * \brief Removes all registered exclude patterns.
+             */
             void clearExcludePatterns();
 
+            /**
+             * \brief Tells whether the split (cleaved) bonds are retained in the output fragments.
+             * \return \c true if split bonds are retained, and \c false otherwise.
+             */
             bool splitBondsIncluded() const;
 
+            /**
+             * \brief Specifies whether the split (cleaved) bonds shall be retained in the output fragments.
+             * \param include If \c true, the cleaved bonds remain part of the adjacent output fragments.
+             */
             void includeSplitBonds(bool include);
 
+            /**
+             * \brief Returns the predicate used to filter the generated fragments.
+             * \return A \c const reference to the fragment-filter function.
+             */
             const FragmentFilterFunction& getFragmentFilterFunction() const;
 
+            /**
+             * \brief Sets the predicate used to filter the generated fragments (fragments for which the
+             *        predicate returns \c false are discarded).
+             * \param func The new fragment-filter function.
+             */
             void setFragmentFilterFunction(const FragmentFilterFunction& func);
 
+            /**
+             * \brief Performs the fragmentation of \a molgraph and writes the resulting fragments to \a frag_list.
+             * \param molgraph The molecular graph to fragment.
+             * \param frag_list The output fragment list.
+             * \param append If \c true, new fragments are appended to \a frag_list; otherwise the list is cleared first.
+             */
             void generate(const MolecularGraph& molgraph, FragmentList& frag_list, bool append = false);
 
+            /**
+             * \brief Returns the number of fragment links produced by the most recent generate() call.
+             * \return The fragment-link count.
+             */
             std::size_t getNumFragmentLinks() const;
 
+            /**
+             * \brief Returns the fragment link at index \a idx.
+             * \param idx The zero-based link index.
+             * \return A \c const reference to the fragment link.
+             * \throw Base::IndexError if the number of fragment links is zero or \a idx is not in the range [0, getNumFragmentLinks() - 1].
+             */
             const FragmentLink& getFragmentLink(std::size_t idx) const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first fragment link.
+             * \return A constant iterator pointing to the first fragment link.
+             */
             ConstFragmentLinkIterator getFragmentLinksBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last fragment link.
+             * \return A constant iterator pointing one past the last fragment link.
+             */
             ConstFragmentLinkIterator getFragmentLinksEnd() const;
 
           private:

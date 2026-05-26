@@ -54,17 +54,32 @@ namespace CDPL
         struct MinimizerVariableArrayTraits
         {
 
+            /** \brief The variable-array type. */
             typedef A                     ArrayType;
+            /** \brief The scalar value type stored in the array. */
             typedef typename A::ValueType ValueType;
+            /** \brief The size type used by the array. */
             typedef typename A::SizeType  SizeType;
 
+            /**
+             * \brief Computes the inner product (dot product) of two variable arrays.
+             * \tparam T The scalar result type.
+             * \param a1 The first variable array.
+             * \param a2 The second variable array.
+             * \return The inner product \f$ \sum_i a1_i \, a2_i \f$ as a value of type \a T.
+             */
             template <typename T>
-
             static T dot(const ArrayType& a1, const ArrayType& a2)
             {
                 return innerProd(a1, a2);
             }
 
+            /**
+             * \brief Computes the Euclidean (L2) norm of \a a using a numerically-stable scaling algorithm.
+             * \tparam T The scalar result type.
+             * \param a The variable array.
+             * \return The Euclidean norm \f$ \sqrt{\sum_i a_i^2} \f$ as a value of type \a T.
+             */
             template <typename T>
             static T norm2(const ArrayType& a)
             {
@@ -97,28 +112,55 @@ namespace CDPL
                 return (scale * TypeTraits<T>::sqrt(ssq));
             }
 
+            /**
+             * \brief Performs the in-place BLAS-style \e axpy operation \f$ y \leftarrow y + \alpha\, x \f$.
+             * \tparam T The scalar type of \a alpha.
+             * \param alpha The scalar multiplier.
+             * \param x The variable array \e x.
+             * \param y The variable array \e y (updated in place).
+             */
             template <typename T>
             static void axpy(const T& alpha, const ArrayType& x, ArrayType& y)
             {
                 y.plusAssign(alpha * x);
             }
 
+            /**
+             * \brief Sets all elements of \a a to the default-constructed ValueType.
+             * \param a The variable array to clear.
+             */
             static void clear(ArrayType& a)
             {
                 a.clear(ValueType());
             }
 
+            /**
+             * \brief Copies the contents of \a a2 into \a a1.
+             * \param a1 The destination variable array.
+             * \param a2 The source variable array.
+             */
             static void assign(ArrayType& a1, const ArrayType& a2)
             {
                 a1.assign(a2);
             }
 
+            /**
+             * \brief Multiplies every element of \a a by the scalar \a v.
+             * \tparam T The scalar type of \a v.
+             * \param a The variable array to scale (updated in place).
+             * \param v The scalar multiplier.
+             */
             template <typename T>
             static void multiply(ArrayType& a, const T& v)
             {
                 a *= v;
             }
 
+            /**
+             * \brief Subtracts \a a2 from \a a1 element-wise (\f$ a_1 \leftarrow a_1 - a_2 \f$).
+             * \param a1 The destination variable array (updated in place).
+             * \param a2 The variable array to subtract.
+             */
             static void sub(ArrayType& a1, const ArrayType& a2)
             {
                 a1.minusAssign(a2);

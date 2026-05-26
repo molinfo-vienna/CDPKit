@@ -74,46 +74,89 @@ namespace CDPL
         struct ScalarTraits
         {
 
+            /** \brief The scalar value type. */
             typedef T               ValueType;
+            /** \brief The real-valued type (identical to ValueType for scalar traits). */
             typedef T               RealType;
+            /** \brief Constant-reference type to a value. */
             typedef const T&        ConstReference;
+            /** \brief Convenience alias for this traits instantiation. */
             typedef ScalarTraits<T> SelfType;
 
+            /**
+             * \brief Returns the real part of \a t (identical to \a t for non-complex scalars).
+             * \param t The value.
+             * \return The real part of \a t.
+             */
             static RealType real(ConstReference t)
             {
                 return t;
             }
 
+            /**
+             * \brief Returns the imaginary part (always zero for non-complex scalars).
+             * \return The default-constructed RealType.
+             */
             static RealType imag(ConstReference)
             {
                 return RealType();
             }
 
+            /**
+             * \brief Returns the complex conjugate of \a t (identical to \a t for non-complex scalars).
+             * \param t The value.
+             * \return The conjugate of \a t.
+             */
             static RealType conj(ConstReference t)
             {
                 return t;
             }
 
+            /**
+             * \brief Returns the absolute value of \a t (\c std::abs for signed types, the identity for unsigned types).
+             * \param t The value.
+             * \return The absolute value of \a t.
+             */
             static RealType abs(ConstReference t)
             {
                 return ScalarAbsImpl<std::numeric_limits<ValueType>::is_signed>::abs(t);
             }
 
+            /**
+             * \brief Returns the square root of \a t.
+             * \param t The value.
+             * \return \f$ \sqrt{t} \f$ as a ValueType.
+             */
             static ValueType sqrt(ConstReference t)
             {
                 return ValueType(std::sqrt(t));
             }
 
+            /**
+             * \brief Returns the L1 norm of \a t (identical to the absolute value for scalar values).
+             * \param t The value.
+             * \return The L1 norm of \a t.
+             */
             static RealType norm1(ConstReference t)
             {
                 return SelfType::abs(t);
             }
 
+            /**
+             * \brief Returns the L2 (Euclidean) norm of \a t (identical to the absolute value for scalar values).
+             * \param t The value.
+             * \return The L2 norm of \a t.
+             */
             static RealType norm2(ConstReference t)
             {
                 return SelfType::abs(t);
             }
 
+            /**
+             * \brief Returns the L&infin; norm of \a t (identical to the absolute value for scalar values).
+             * \param t The value.
+             * \return The L&infin; norm of \a t.
+             */
             static RealType normInf(ConstReference t)
             {
                 return SelfType::abs(t);
@@ -135,46 +178,90 @@ namespace CDPL
         struct ComplexTraits
         {
 
+            /** \brief The complex value type (a \c std::complex specialization). */
             typedef T                      ValueType;
+            /** \brief The underlying real-valued type. */
             typedef typename T::value_type RealType;
+            /** \brief Constant-reference type to a value. */
             typedef const T&               ConstReference;
+            /** \brief Convenience alias for this traits instantiation. */
             typedef ComplexTraits<T>       SelfType;
 
+            /**
+             * \brief Returns the real part of the complex value \a t.
+             * \param t The complex value.
+             * \return The real part \f$ \mathrm{Re}(t) \f$.
+             */
             static RealType real(ConstReference t)
             {
                 return std::real(t);
             }
 
+            /**
+             * \brief Returns the imaginary part of the complex value \a t.
+             * \param t The complex value.
+             * \return The imaginary part \f$ \mathrm{Im}(t) \f$.
+             */
             static RealType imag(ConstReference t)
             {
                 return std::imag(t);
             }
 
+            /**
+             * \brief Returns the complex conjugate of \a t.
+             * \param t The complex value.
+             * \return The conjugate \f$ \overline{t} \f$.
+             */
             static ValueType conj(ConstReference t)
             {
                 return std::conj(t);
             }
 
+            /**
+             * \brief Returns the modulus (absolute value) of the complex value \a t.
+             * \param t The complex value.
+             * \return The modulus \f$ |t| \f$.
+             */
             static RealType abs(ConstReference t)
             {
                 return std::abs(t);
             }
 
+            /**
+             * \brief Returns the principal complex square root of \a t.
+             * \param t The complex value.
+             * \return \f$ \sqrt{t} \f$ as a complex value.
+             */
             static ValueType sqrt(ConstReference t)
             {
                 return std::sqrt(t);
             }
 
+            /**
+             * \brief Returns the L1 norm of the complex value \a t (\f$ |\mathrm{Re}(t)| + |\mathrm{Im}(t)| \f$).
+             * \param t The complex value.
+             * \return The L1 norm of \a t.
+             */
             static RealType norm1(ConstReference t)
             {
                 return TypeTraits<RealType>::abs(SelfType::real(t)) + TypeTraits<RealType>::abs(SelfType::imag(t));
             }
 
+            /**
+             * \brief Returns the L2 norm of the complex value \a t (identical to its modulus).
+             * \param t The complex value.
+             * \return The L2 norm of \a t.
+             */
             static RealType norm2(ConstReference t)
             {
                 return SelfType::abs(t);
             }
 
+            /**
+             * \brief Returns the L&infin; norm of the complex value \a t (\f$ \max(|\mathrm{Re}(t)|, |\mathrm{Im}(t)|) \f$).
+             * \param t The complex value.
+             * \return The L&infin; norm of \a t.
+             */
             static RealType normInf(ConstReference t)
             {
                 return std::max(TypeTraits<RealType>::abs(SelfType::real(t)),

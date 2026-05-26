@@ -101,7 +101,10 @@ namespace CDPL
         }
 
         /**
-         * \brief Writes a textual representation of the matrix expression \a e to \a os in the format <tt>[rows,cols]((row0),(row1),...)</tt>.
+         * \brief Writes a textual representation of the matrix expression \a e to \a os in the format
+         *        <tt>[rows,cols]((e00,e01,...,e0N),(e10,e11,...,e1N),...,(eM0,eM1,...,eMN))</tt>
+         *        where <tt>M=rows-1</tt>, <tt>N=cols-1</tt>, comma-separated within and between rows.
+         *        Empty matrices are written as <tt>[rows,cols]()</tt>.
          * \tparam C The stream character type.
          * \tparam T The stream character traits.
          * \tparam E The matrix expression type.
@@ -210,7 +213,10 @@ namespace CDPL
         }
 
         /**
-         * \brief Writes a textual representation of the grid expression \a e to \a os in the format <tt>[d1,d2,d3]((plane0)(plane1)...)</tt>.
+         * \brief Writes a textual representation of the grid expression \a e to \a os in the format
+         *        <tt>[d1,d2,d3](plane0,plane1,...,planeD1)</tt>, where each <tt>planeI</tt> is itself
+         *        formatted as <tt>(row0,row1,...,rowD2)</tt> and each row as <tt>(e0,e1,...,eD3)</tt>.
+         *        Comma-separators are used at every level. Empty grids are written as <tt>[d1,d2,d3]()</tt>.
          * \tparam C The stream character type.
          * \tparam T The stream character traits.
          * \tparam E The grid expression type.
