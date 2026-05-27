@@ -41,9 +41,9 @@ class MMFF94AtomTyper(Boost.Python.instance):
     # \brief Constructs an <tt>MMFF94AtomTyper</tt> instance and immediately perceives the atom types of <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph to be typed.
-    # \param sym_types Output array receiving the perceived MMFF94 symbolic atom-type strings.
-    # \param num_types Output array receiving the perceived MMFF94 numeric atom-type indices.
-    # \param strict If <tt>True</tt>, atoms for which no MMFF94 type could be perceived cause an error to be reported.
+    # \param sym_types Output array receiving the perceived MMFF94 symbolic atom type strings.
+    # \param num_types Output array receiving the perceived MMFF94 numeric atom type indices.
+    # \param strict If <tt>True</tt>, atoms for which no MMFF94 type could be perceived cause an error to be reported. Otherwise, perception never fails and problematic atoms get assigned a suitable fallback type.
     # 
     def __init__(molgraph: Chem.MolecularGraph, sym_types: Util.SArray, num_types: Util.UIArray, strict: bool) -> None: pass
 
@@ -60,44 +60,44 @@ class MMFF94AtomTyper(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Sets the SMARTS-pattern table used for provisional symbolic atom-type assignment.
+    # \brief Sets the SMARTS-pattern table used for provisional symbolic atom type assignment.
     # 
-    # \param table The new symbolic-atom-type pattern table.
+    # \param table The new symbolic atom type pattern table.
     # 
     def setSymbolicAtomTypePatternTable(table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
 
     ##
     # \brief Sets the table used for the reassignment of aromatic atom types.
     # 
-    # \param table The new aromatic-atom-type definition table.
+    # \param table The new aromatic atom type definition table.
     # 
     def setAromaticAtomTypeDefinitionTable(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 
     ##
     # \brief Sets the map used to derive hydrogen atom types from heavy-atom neighbor types.
     # 
-    # \param map The new heavy-to-hydrogen atom-type map.
+    # \param map The new heavy-to-hydrogen atom type map.
     # 
     def setHeavyToHydrogenAtomTypeMap(map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
 
     ##
     # \brief Sets the map used to translate symbolic into numeric atom types.
     # 
-    # \param map The new symbolic-to-numeric atom-type map.
+    # \param map The new symbolic-to-numeric atom type map.
     # 
     def setSymbolicToNumericAtomTypeMap(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 
     ##
     # \brief Sets the table providing the per-numeric-type atom property data.
     # 
-    # \param table The new atom-type property table.
+    # \param table The new atom type property table.
     # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief Sets the function used to obtain the set of MMFF94-aromatic rings for the input molecular graph.
+    # \brief Sets the function used to obtain the set of MMFF94 aromatic rings for the input molecular graph.
     # 
-    # \param func The new aromatic-ring-set function.
+    # \param func The new aromatic ring set retrieval function.
     # 
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
@@ -112,9 +112,9 @@ class MMFF94AtomTyper(Boost.Python.instance):
     # \brief Perceives the MMFF94 atom types of <em>molgraph</em> and writes them to <em>sym_types</em> and <em>num_types</em>.
     # 
     # \param molgraph The molecular graph to be typed.
-    # \param sym_types Output array receiving the perceived MMFF94 symbolic atom-type strings.
-    # \param num_types Output array receiving the perceived MMFF94 numeric atom-type indices.
-    # \param strict If <tt>True</tt>, atoms for which no MMFF94 type could be perceived cause an error to be reported.
+    # \param sym_types Output array receiving the perceived MMFF94 symbolic atom type strings.
+    # \param num_types Output array receiving the perceived MMFF94 numeric atom type indices.
+    # \param strict If <tt>True</tt>, atoms for which no MMFF94 type could be perceived cause an error to be reported. Otherwise, perception never fails and problematic atoms get assigned a suitable fallback type.
     # 
     def perceiveTypes(molgraph: Chem.MolecularGraph, sym_types: Util.SArray, num_types: Util.UIArray, strict: bool) -> None: pass
 

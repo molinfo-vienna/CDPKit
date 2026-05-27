@@ -308,7 +308,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Specifies whether strict MMFF94 parameterization is required.
     # 
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a generation failure; if <tt>False</tt>, suitable fallback parameters are used.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a generation failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def strictForceFieldParameterization(strict: bool) -> None: pass
 

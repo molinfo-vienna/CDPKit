@@ -39,19 +39,14 @@ namespace CDPL
     {
 
         /**
-         * \brief A single MMFF94 out-of-plane bending interaction at a trigonal center.
-         *
-         * The interaction restrains the out-of-plane angle \f$ \chi \f$ that the bond from the central
-         * atom \e j to the out-of-plane atom \e l makes with the plane defined by the central atom and
-         * its two in-plane neighbors \e i and \e k. The associated energy term is
-         * \f$ E_{oop} = \frac{1}{2} k_{oop} \chi^2 \f$.
+         * \brief Stores parameters for a single MMFF94 out-of-plane bending interaction at a trigonal center.
          */
         class MMFF94OutOfPlaneBendingInteraction
         {
 
           public:
             /**
-             * \brief Constructs the out-of-plane bending interaction record.
+             * \brief Constructs the out-of-plane bending interaction parameter set.
              * \param term_atom1_idx The zero-based index of the first in-plane terminal atom \e i.
              * \param ctr_atom_idx The zero-based index of the central trigonal atom \e j.
              * \param term_atom2_idx The zero-based index of the second in-plane terminal atom \e k.

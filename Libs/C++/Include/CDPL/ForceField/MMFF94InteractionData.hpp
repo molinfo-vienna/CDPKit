@@ -53,7 +53,7 @@ namespace CDPL
          * The class aggregates the seven per-interaction lists that together describe the energy expression
          * of the MMFF94 force field (bond stretching, angle bending, stretch-bend coupling, out-of-plane bending,
          * torsion, electrostatic and Van der Waals interactions). Instances are typically produced by
-         * ForceField::MMFF94InteractionParameterizer and consumed by ForceField::MMFF94EnergyCalculator and
+         * ForceField::MMFF94InteractionParameterizer and consumed by ForceField::MMFF94EnergyCalculator or
          * ForceField::MMFF94GradientCalculator.
          */
         class CDPL_FORCEFIELD_API MMFF94InteractionData
@@ -88,13 +88,13 @@ namespace CDPL
             MMFF94AngleBendingInteractionList& getAngleBendingInteractions();
 
             /**
-             * \brief Returns the list of MMFF94 stretch-bend coupling interactions.
+             * \brief Returns the list of MMFF94 stretch-bend interactions.
              * \return A \c const reference to the stretch-bend interaction list.
              */
             const MMFF94StretchBendInteractionList& getStretchBendInteractions() const;
 
             /**
-             * \brief Returns the list of MMFF94 stretch-bend coupling interactions.
+             * \brief Returns the list of MMFF94 stretch-bend interactions.
              * \return A reference to the stretch-bend interaction list.
              */
             MMFF94StretchBendInteractionList& getStretchBendInteractions();
@@ -154,7 +154,7 @@ namespace CDPL
 
             /**
              * \brief Swaps the contents (all interaction lists) of this instance with \a ia_data.
-             * \param ia_data The other interaction-data container.
+             * \param ia_data The other interaction data instance.
              */
             void swap(MMFF94InteractionData& ia_data);
 

@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Evaluates the total MMFF94 force field energy and its gradient with respect to the atomic coordinates.
+# \brief Calculates the total MMFF94 force field energy and its gradient for a set of atom 3D coordinates.
 # 
-# The calculator takes a ForceField.MMFF94InteractionData instance and the atom count of the molecule and computes both the total MMFF94 energy and the analytical Cartesian gradient \f$ \partial E / \partial \mathbf{r}_i \f$ for each atom. The per-component energies are retained and made available via the dedicated accessors. A bit mask can be set to mark atoms whose gradient contributions are zeroed, freezing them during an energy minimization.
+# The calculator takes a ForceField.MMFF94InteractionData instance and the atom count of the molecule and computes both the total MMFF94 energy and the analytical Cartesian gradient \f$ \partial E / \partial \mathbf{r}_i \f$ for each atom. The per-component energies are retained and made available via the dedicated accessors. A bit mask can be set to mark atoms whose gradient contributions are zeroed, freezing them during an energy minimization run.
 # 
 class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
-    # \brief Constructs the calculator without any associated interaction data.
+    # \brief Constructs the calculator without an associated ForceField.MMFF94InteractionData instance.
     # 
     # Operator() will return zero until setup() has been called.
     # 
@@ -40,9 +40,9 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def __init__(calc: MMFF94GradientCalculator) -> None: pass
 
     ##
-    # \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
+    # \brief Constructs the calculator and associates it with the supplied ForceField.MMFF94InteractionData instance.
     # 
-    # \param ia_data The MMFF94 interaction data to use during energy/gradient evaluation.
+    # \param ia_data The MMFF94 interaction data to use during energy/gradient calculation.
     # \param num_atoms The number of atoms in the parameterized molecular graph.
     # 
     def __init__(ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
@@ -69,7 +69,9 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     ##
     # \brief Enables/disables specific MMFF94 interaction-type contributions.
     # 
-    # \param types Bitwise-OR combination of ForceField.InteractionType flags. Only the listed contributions are evaluated.
+    # \param types Bitwise-OR combination of ForceField.InteractionType flags.
+    # 
+    # \note Only enabled contributions are evaluated.
     # 
     def setEnabledInteractionTypes(types: int) -> None: pass
 
@@ -81,9 +83,9 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def getEnabledInteractionTypes() -> int: pass
 
     ##
-    # \brief Associates the calculator with the supplied MMFF94 interaction data and atom count.
+    # \brief Associates the calculator with the supplied ForceField.MMFF94InteractionData instance and atom count.
     # 
-    # \param ia_data The new MMFF94 interaction data.
+    # \param ia_data The new MMFF94 interaction data to use for energy/gradient calculation.
     # \param num_atoms The number of atoms in the parameterized molecular graph.
     # 
     def setup(ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
@@ -145,7 +147,7 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def getVanDerWaalsEnergy() -> float: pass
 
     ##
-    # \brief Sets the bit mask flagging atoms whose gradient components shall be zeroed after evaluation.
+    # \brief Sets the bit mask flagging atoms whose gradient components shall be zeroed after calculation.
     # 
     # \param mask The new fixed-atom bit mask (bit <em>i</em> set freezes atom <em>i</em> during minimization).
     # 
@@ -164,7 +166,7 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def getFixedAtomMask() -> Util.BitSet: pass
 
     ##
-    # \brief Computes the total MMFF94 energy of the conformation <em>coords</em> without evaluating the gradient.
+    # \brief Computes the total MMFF94 energy of the conformation specified by <em>coords</em> without calculating the gradient.
     # 
     # \param coords The 3D coordinates of the molecule.
     # 
@@ -173,11 +175,11 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def __call__(coords: Math.Vector3DArray) -> float: pass
 
     ##
-    # \brief Computes the total MMFF94 energy and the per-atom gradient of the conformation <em>coords</em>.
+    # \brief Computes the total MMFF94 energy and the per-atom gradient of the conformation specified by <em>coords</em>.
     # 
-    # Gradients of atoms marked in the fixed-atom mask (see setFixedAtomMask()) are zeroed after evaluation.
+    # Gradients of atoms marked in the fixed-atom mask (see setFixedAtomMask()) are zeroed after calculation.
     # 
-    # \param coords The 3D coordinates of the molecule.
+    # \param coords The atom 3D coordinates.
     # \param grad The output gradient vector.
     # 
     # \return A reference to the computed total energy.

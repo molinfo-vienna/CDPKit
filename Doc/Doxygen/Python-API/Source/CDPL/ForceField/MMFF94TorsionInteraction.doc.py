@@ -20,9 +20,7 @@
 #
 
 ##
-# \brief A single MMFF94 torsion interaction over an atom quadruplet <em>i-<em>j-<em>k-<em>l</em>.</em> </em> </em>
-# 
-# The MMFF94 torsion-energy expression for one quadruplet is a three-term Fourier series \f$ E_t = \frac{1}{2}[V_1 (1 + \cos\Phi) + V_2 (1 - \cos 2\Phi) + V_3 (1 + \cos 3\Phi)] \f$ where \f$ V_1, V_2, V_3 \f$ are the MMFF94 torsion parameters and \f$ \Phi \f$ is the dihedral angle defined by the four atoms.
+# \brief Stores parameters for a single MMFF94 torsion interaction over an atom quadruplet <em>i-<em>j-<em>k-<em>l</em>.</em> </em> </em>
 # 
 class MMFF94TorsionInteraction(Boost.Python.instance):
 
@@ -33,13 +31,13 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94TorsionInteraction) -> None: pass
 
     ##
-    # \brief Constructs the torsion interaction record.
+    # \brief Constructs the torsion interaction parameter set.
     # 
     # \param term_atom1_idx The zero-based index of the first terminal atom <em>i</em>.
     # \param ctr_atom1_idx The zero-based index of the first central atom <em>j</em> (bonded to <em>i</em> and <em>k</em>).
     # \param ctr_atom2_idx The zero-based index of the second central atom <em>k</em> (bonded to <em>j</em> and <em>l</em>).
     # \param term_atom2_idx The zero-based index of the second terminal atom <em>l</em>.
-    # \param tor_type_idx The MMFF94 torsion-type index (0-5).
+    # \param tor_type_idx The MMFF94 torsion type index (0-5).
     # \param tor_param1 The torsion parameter \f$ V_1 \f$.
     # \param tor_param2 The torsion parameter \f$ V_2 \f$.
     # \param tor_param3 The torsion parameter \f$ V_3 \f$.
@@ -103,9 +101,9 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
     def getAtom4Index() -> int: pass
 
     ##
-    # \brief Returns the MMFF94 torsion-type index.
+    # \brief Returns the MMFF94 torsion type index.
     # 
-    # \return The torsion-type index (0-5).
+    # \return The torsion type index (0-5).
     # 
     def getTorsionTypeIndex() -> int: pass
 

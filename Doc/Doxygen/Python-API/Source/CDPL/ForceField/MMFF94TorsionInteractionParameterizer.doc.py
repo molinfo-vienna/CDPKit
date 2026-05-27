@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Generates the MMFF94 torsion interactions for the atom quadruplets defined by the bonds of a molecular graph.
+# \brief Detects and parameterizes the MMFF94 torsion interactions of a molecular graph.
 # 
-# For every non-filtered atom quadruplet (<em>i-<em>j-<em>k-<em>l</em>)</em> consisting</em> of</em> a central bond <em>j-<em>k</em> and</em> one neighbor each on <em>j</em> and <em>k</em> the parameterizer looks up the matching MMFF94 torsion-type-specific parameters \f$ V_1, V_2, V_3 \f$ from the supplied parameter table, falling back to the primary-to-parameter atom-type map for atoms with no exact parameter entry, and emits an MMFF94TorsionInteraction record.
+# For every non-filtered atom quadruplet (<em>i-<em>j-<em>k-<em>l</em>)</em> consisting</em> of</em> a central bond <em>j-<em>k</em> and</em> one neighbor each on <em>j</em> and <em>k</em> the parameterizer looks up the matching MMFF94 torsion type-specific parameters \f$ V_1, V_2, V_3 \f$ from the supplied parameter table, falling back to the primary-to-parameter atom type map for atoms with no exact parameter entry, and emits an MMFF94TorsionInteraction instance.
 # 
 class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
 
@@ -38,11 +38,11 @@ class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
     def __init__(parameterizer: MMFF94TorsionInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Constructs the parameterizer and immediately processes <em>molgraph</em> into <em>ia_list</em>.
+    # \brief Constructs the parameterizer and processes the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the torsion interactions.
-    # \param ia_list Output list receiving the generated MMFF94TorsionInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94TorsionInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def __init__(molgraph: Chem.MolecularGraph, ia_list: MMFF94TorsionInteractionList, strict: bool) -> None: pass
 
@@ -68,42 +68,42 @@ class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
     # 
-    # \param func The new numeric-atom-type lookup function.
+    # \param func The new numeric atom type lookup function.
     # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief Sets the function used to look up the MMFF94 bond-type index of a bond.
+    # \brief Sets the function used to look up the MMFF94 bond type index of a bond.
     # 
-    # \param func The new bond-type-index lookup function.
+    # \param func The new bond type index lookup function.
     # 
     def setBondTypeIndexFunction(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
-    # \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
+    # \brief Sets the function used to obtain the set of MMFF94 aromatic rings of the input molecular graph.
     # 
-    # \param func The new aromatic-ring-set function.
+    # \param func The new aromatic ring set retrievaly function.
     # 
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief Sets the primary table providing torsion-type-specific \f$ V_1/V_2/V_3 \f$ parameters.
+    # \brief Sets the primary table providing torsion type-specific \f$ V_1/V_2/V_3 \f$ parameters.
     # 
     # \param table The new torsion parameter table.
     # 
     def setTorsionParameterTable(table: MMFF94TorsionParameterTable) -> None: pass
 
     ##
-    # \brief Sets the table providing per-numeric-atom-type property data (used by the empirical fallback).
+    # \brief Sets the table providing MMFF94 numeric atom type property data (used by the empirical fallback).
     # 
-    # \param table The new atom-type property table.
+    # \param table The new atom type property table.
     # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief Sets the map used to translate primary atom types into their corresponding parameter-atom types.
+    # \brief Sets the map used to translate primary atom types into their corresponding parameter atom types.
     # 
-    # \param map The new primary-to-parameter atom-type map.
+    # \param map The new primary-to-parameter atom type map.
     # 
     def setParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
@@ -115,11 +115,11 @@ class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94TorsionInteractionParameterizer) -> MMFF94TorsionInteractionParameterizer: pass
 
     ##
-    # \brief Generates the MMFF94 torsion interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
+    # \brief Perceives the MMFF94 torsion interactions for <em>molgraph</em> and outputs the corresponding parameter data into <em>ia_list</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the torsion interactions.
-    # \param ia_list Output list receiving the generated MMFF94TorsionInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94TorsionInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_list: MMFF94TorsionInteractionList, strict: bool) -> None: pass
 

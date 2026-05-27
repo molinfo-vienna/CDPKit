@@ -42,7 +42,7 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph for which to calculate partial atomic charges.
     # \param charges The output array storing the calculated partial charges.
-    # \param strict If <tt>True</tt>, strict parameterization is performed (and may fail).
+    # \param strict If <tt>True</tt>, strict parameterization is performed (and may fail). Otherwise, in case of parameterization problems, fallback strategies take effect.
     # 
     def __init__(molgraph: Chem.MolecularGraph, charges: Util.DArray, strict: bool) -> None: pass
 
@@ -87,16 +87,16 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     def setBondTypeIndexFunction(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
-    # \brief Sets the atom-type property table to use.
+    # \brief Sets the MMFF94 atom type property table to use.
     # 
-    # \param table The table providing per-atom-type properties.
+    # \param table The table providing atom type properties.
     # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief Sets the formal-charge definition table to use.
+    # \brief Sets the formal charge definition table to use.
     # 
-    # \param table The table providing formal-charge definitions.
+    # \param table The table providing formal charge definitions.
     # 
     def setFormalChargeDefinitionTable(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
@@ -132,7 +132,7 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph for which to calculate partial atomic charges.
     # \param charges The output array storing the calculated partial charges.
-    # \param strict If <tt>True</tt>, strict parameterization will be peformed that might fail.
+    # \param strict If <tt>True</tt>, strict parameterization will be peformed that might fail. Otherwise, in case of parameterization problems, fallback strategies take effect.
     # 
     def calculate(molgraph: Chem.MolecularGraph, charges: Util.DArray, strict: bool) -> None: pass
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Assigns MMFF94 bond-type indices (0 or 1) to the bonds of a molecular graph.
+# \brief Assigns MMFF94 bond type indices to the bonds of a molecular graph.
 # 
 # A bond receives the nonstandard type index <em>1</em> when it is a single bond between two non-aromatic atoms whose MMFF94 atom-type properties carry an <tt>sbmb</tt> flag, or when it connects two atoms that belong to two different aromatic rings (as in the central C-C bond of biphenyl). All other bonds receive the standard type index <em>0</em>.
 # 
@@ -41,8 +41,8 @@ class MMFF94BondTyper(Boost.Python.instance):
     # \brief Constructs an <tt>MMFF94BondTyper</tt> instance and immediately perceives the bond types of <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph to be typed.
-    # \param types Output array receiving the perceived MMFF94 bond-type indices.
-    # \param strict If <tt>True</tt>, strict parameterization will be performed that might fail.
+    # \param types Output array receiving the perceived MMFF94 bond type indices.
+    # \param strict If <tt>True</tt>, strict parameterization will be performed that might fail. Otherwise, bonds with parameterization problems receive the type index <em>0</em>.
     # 
     def __init__(molgraph: Chem.MolecularGraph, types: Util.UIArray, strict: bool) -> None: pass
 
@@ -61,21 +61,21 @@ class MMFF94BondTyper(Boost.Python.instance):
     ##
     # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
     # 
-    # \param func The new numeric-atom-type lookup function.
+    # \param func The new numeric atom type lookup function.
     # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
+    # \brief Sets the function used to obtain the set of MMFF94 aromatic rings of the input molecular graph.
     # 
-    # \param func The new aromatic-ring-set function.
+    # \param func The new aromatic ring set retrieval function.
     # 
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief Sets the table providing the per-numeric-atom-type property data (used to look up the <tt>sbmb</tt> flag).
+    # \brief Sets the table providing the MMFF94 numeric atom type property data (used to look up the <tt>sbmb</tt> flag).
     # 
-    # \param table The new atom-type property table.
+    # \param table The new atom type property table.
     # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
@@ -93,7 +93,7 @@ class MMFF94BondTyper(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph for which to assign bond type indices
     # \param types The output array storing the determined bond type indices.
-    # \param strict If <tt>True</tt>, strict parameterization will be peformed that might fail.
+    # \param strict If <tt>True</tt>, strict parameterization will be peformed that might fail. Otherwise, bonds with parameterization problems receive the type index <em>0</em>.
     # 
     def perceiveTypes(molgraph: Chem.MolecularGraph, types: Util.UIArray, strict: bool) -> None: pass
 

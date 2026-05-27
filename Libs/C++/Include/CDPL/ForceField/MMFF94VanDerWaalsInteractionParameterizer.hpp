@@ -52,11 +52,11 @@ namespace CDPL
     {
 
         /**
-         * \brief Generates the MMFF94 Van der Waals interactions for the non-bonded atom pairs of a molecular graph.
+         * \brief Detects and parameterizes the MMFF94 Van der Waals interactions of a molecular graph.
          *
-         * For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom-type
+         * For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom type
          * Van der Waals parameters and the donor/acceptor classification from the supplied parameter table,
-         * applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction record into the output list.
+         * applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction instance.
          */
         class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
         {
@@ -71,10 +71,11 @@ namespace CDPL
             MMFF94VanDerWaalsInteractionParameterizer();
 
             /**
-             * \brief Constructs the parameterizer and immediately processes \a molgraph into \a ia_list.
+             * \brief Constructs the parameterizer and processes the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
-             * \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
+             * \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction instances.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
              */
             MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph&       molgraph,
                                                       MMFF94VanDerWaalsInteractionList& ia_list,
@@ -88,27 +89,29 @@ namespace CDPL
 
             /**
              * \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
-             * \param func The new numeric-atom-type lookup function.
+             * \param func The new numeric atom type lookup function.
              */
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
             /**
              * \brief Sets the function used to determine the topological distance between two atoms (number of bonds along the shortest path).
-             * \param func The new topological-distance function.
+             * \param func The new topological distance function.
              */
             void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func);
 
             /**
-             * \brief Sets the table providing per-numeric-atom-type Van der Waals parameters and donor/acceptor classifications.
+             * \brief Sets the table providing MMFF94 numeric atom type Van der Waals parameters and donor/acceptor classifications.
              * \param table The new Van der Waals parameter table.
              */
             void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
             /**
-             * \brief Generates the MMFF94 Van der Waals interactions for \a molgraph and writes them to \a ia_list.
+             * \brief Perceives the MMFF94 Van der Waals interactions for \a molgraph and outputs the
+             *        corresponding parameter data into \a ia_list.
              * \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
-             * \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
+             * \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction instances.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
              */
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionList& ia_list, bool strict);
 

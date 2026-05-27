@@ -39,24 +39,19 @@ namespace CDPL
     {
 
         /**
-         * \brief A single MMFF94 torsion interaction over an atom quadruplet \e i-\e j-\e k-\e l.
-         *
-         * The MMFF94 torsion-energy expression for one quadruplet is a three-term Fourier series
-         * \f$ E_t = \frac{1}{2}[V_1 (1 + \cos\Phi) + V_2 (1 - \cos 2\Phi) + V_3 (1 + \cos 3\Phi)] \f$
-         * where \f$ V_1, V_2, V_3 \f$ are the MMFF94 torsion parameters and \f$ \Phi \f$ is the dihedral
-         * angle defined by the four atoms.
+         * \brief Stores parameters for a single MMFF94 torsion interaction over an atom quadruplet \e i-\e j-\e k-\e l.
          */
         class MMFF94TorsionInteraction
         {
 
           public:
             /**
-             * \brief Constructs the torsion interaction record.
+             * \brief Constructs the torsion interaction parameter set.
              * \param term_atom1_idx The zero-based index of the first terminal atom \e i.
              * \param ctr_atom1_idx The zero-based index of the first central atom \e j (bonded to \e i and \e k).
              * \param ctr_atom2_idx The zero-based index of the second central atom \e k (bonded to \e j and \e l).
              * \param term_atom2_idx The zero-based index of the second terminal atom \e l.
-             * \param tor_type_idx The MMFF94 torsion-type index (0-5).
+             * \param tor_type_idx The MMFF94 torsion type index (0-5).
              * \param tor_param1 The torsion parameter \f$ V_1 \f$.
              * \param tor_param2 The torsion parameter \f$ V_2 \f$.
              * \param tor_param3 The torsion parameter \f$ V_3 \f$.
@@ -142,8 +137,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the MMFF94 torsion-type index.
-             * \return The torsion-type index (0-5).
+             * \brief Returns the MMFF94 torsion type index.
+             * \return The torsion type index (0-5).
              */
             unsigned int getTorsionTypeIndex() const
             {

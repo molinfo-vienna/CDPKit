@@ -39,20 +39,14 @@ namespace CDPL
     {
 
         /**
-         * \brief A single MMFF94 stretch-bend coupling interaction.
-         *
-         * The stretch-bend term couples the angle defined by an atom triplet (\e i-\e j-\e k) with the two
-         * bond lengths \e i-\e j and \e j-\e k. The associated energy contribution is
-         * \f$ E_{sb} = (k_{ijk} \Delta r_{ij} + k_{kji} \Delta r_{jk}) (\Theta - \Theta_0) \f$
-         * where the two distinct force constants account for the asymmetric coupling between the two bonds and
-         * the central angle.
+         * \brief Stores paramters for a single MMFF94 stretch-bend coupling interaction.
          */
         class MMFF94StretchBendInteraction
         {
 
           public:
             /**
-             * \brief Constructs the stretch-bend interaction record.
+             * \brief Constructs the stretch-bend interaction parameter set.
              * \param term_atom1_idx The zero-based index of the first terminal atom \e i.
              * \param ctr_atom_idx The zero-based index of the central atom \e j.
              * \param term_atom2_idx The zero-based index of the second terminal atom \e k.

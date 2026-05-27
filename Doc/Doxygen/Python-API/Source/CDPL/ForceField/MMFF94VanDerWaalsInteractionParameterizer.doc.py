@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Generates the MMFF94 Van der Waals interactions for the non-bonded atom pairs of a molecular graph.
+# \brief Detects and parameterizes the MMFF94 Van der Waals interactions of a molecular graph.
 # 
-# For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom-type Van der Waals parameters and the donor/acceptor classification from the supplied parameter table, applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction record into the output list.
+# For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom type Van der Waals parameters and the donor/acceptor classification from the supplied parameter table, applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction instance.
 # 
 class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
 
@@ -38,11 +38,11 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def __init__(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Constructs the parameterizer and immediately processes <em>molgraph</em> into <em>ia_list</em>.
+    # \brief Constructs the parameterizer and processes the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
-    # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def __init__(molgraph: Chem.MolecularGraph, ia_list: MMFF94VanDerWaalsInteractionList, strict: bool) -> None: pass
 
@@ -68,19 +68,19 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
     # 
-    # \param func The new numeric-atom-type lookup function.
+    # \param func The new numeric atom type lookup function.
     # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
     # \brief Sets the function used to determine the topological distance between two atoms (number of bonds along the shortest path).
     # 
-    # \param func The new topological-distance function.
+    # \param func The new topological distance function.
     # 
     def setTopologicalDistanceFunction(func: TopologicalAtomDistanceFunction) -> None: pass
 
     ##
-    # \brief Sets the table providing per-numeric-atom-type Van der Waals parameters and donor/acceptor classifications.
+    # \brief Sets the table providing MMFF94 numeric atom type Van der Waals parameters and donor/acceptor classifications.
     # 
     # \param table The new Van der Waals parameter table.
     # 
@@ -94,11 +94,11 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
 
     ##
-    # \brief Generates the MMFF94 Van der Waals interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
+    # \brief Perceives the MMFF94 Van der Waals interactions for <em>molgraph</em> and outputs the corresponding parameter data into <em>ia_list</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the Van der Waals interactions.
-    # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94VanDerWaalsInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_list: MMFF94VanDerWaalsInteractionList, strict: bool) -> None: pass
 

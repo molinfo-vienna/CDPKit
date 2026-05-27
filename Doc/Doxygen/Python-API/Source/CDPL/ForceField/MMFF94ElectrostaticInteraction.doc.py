@@ -20,9 +20,7 @@
 #
 
 ##
-# \brief A single MMFF94 electrostatic interaction between two non-bonded atoms.
-# 
-# The MMFF94 electrostatic-energy contribution between two atoms with partial charges \f$ q_i \f$ and \f$ q_j \f$ separated by distance <em>r</em> is \f$ E_q = f \frac{q_i q_j}{\varepsilon (r + \delta)^n} \f$ where <em>f</em> is a scaling factor (e.g. 0.75 for 1-4 pairs), \f$ \varepsilon \f$ the dielectric constant, <em>n</em> the distance exponent and \f$ \delta = 0.05 \f$ &Aring; the MMFF94 buffer.
+# \brief Stores parameters for a single MMFF94 electrostatic interaction between two non-bonded atoms.
 # 
 class MMFF94ElectrostaticInteraction(Boost.Python.instance):
 
@@ -33,13 +31,13 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
-    # \brief Constructs the electrostatic interaction record.
+    # \brief Constructs the electrostatic interaction parameter set.
     # 
     # \param atom1_idx The zero-based index of the first atom.
     # \param atom2_idx The zero-based index of the second atom.
     # \param atom1_chg The partial charge \f$ q_i \f$ of the first atom.
     # \param atom2_chg The partial charge \f$ q_j \f$ of the second atom.
-    # \param scale_fact The scaling factor <em>f</em> applied to the energy contribution (e.g. 0.75 for 1-4 pairs).
+    # \param scale_fact The scaling factor <em>f</em> applied to the energy contribution (0.75 for 1-4 pairs).
     # \param de_const The dielectric constant \f$ \varepsilon \f$.
     # \param dist_expo The distance exponent <em>n</em>.
     # 

@@ -22,7 +22,7 @@
 ##
 # \brief Container holding the full set of MMFF94 interaction parameters for a molecular graph.
 # 
-# The class aggregates the seven per-interaction lists that together describe the energy expression of the MMFF94 force field (bond stretching, angle bending, stretch-bend coupling, out-of-plane bending, torsion, electrostatic and Van der Waals interactions). Instances are typically produced by ForceField.MMFF94InteractionParameterizer and consumed by ForceField.MMFF94EnergyCalculator and ForceField.MMFF94GradientCalculator.
+# The class aggregates the seven per-interaction lists that together describe the energy expression of the MMFF94 force field (bond stretching, angle bending, stretch-bend coupling, out-of-plane bending, torsion, electrostatic and Van der Waals interactions). Instances are typically produced by ForceField.MMFF94InteractionParameterizer and consumed by ForceField.MMFF94EnergyCalculator or ForceField.MMFF94GradientCalculator.
 # 
 class MMFF94InteractionData(Boost.Python.instance):
 
@@ -57,7 +57,7 @@ class MMFF94InteractionData(Boost.Python.instance):
     def getAngleBendingInteractions() -> MMFF94AngleBendingInteractionList: pass
 
     ##
-    # \brief Returns the list of MMFF94 stretch-bend coupling interactions.
+    # \brief Returns the list of MMFF94 stretch-bend interactions.
     # 
     # \return A reference to the stretch-bend interaction list.
     # 
@@ -101,7 +101,7 @@ class MMFF94InteractionData(Boost.Python.instance):
     ##
     # \brief Swaps the contents (all interaction lists) of this instance with <em>ia_data</em>.
     # 
-    # \param ia_data The other interaction-data container.
+    # \param ia_data The other interaction data instance.
     # 
     def swap(ia_data: MMFF94InteractionData) -> None: pass
 

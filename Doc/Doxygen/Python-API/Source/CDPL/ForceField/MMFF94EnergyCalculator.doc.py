@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Evaluates the total MMFF94 force field energy of a 3D conformation.
+# \brief Calculates the total MMFF94 force field energy for a set of atom 3D coordinates.
 # 
-# The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions for a supplied set of 3D coordinates. The per-component energies are retained and made available via the dedicated accessors; the sum is returned by __call__ and getTotalEnergy().
+# The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions for a supplied set of atom 3D coordinates. The per-component energies are retained and made available via the dedicated accessors, the calculated sum is returned by __call__ and getTotalEnergy().
 # 
 class MMFF94EnergyCalculator(Boost.Python.instance):
 
     ##
-    # \brief Constructs the calculator without any associated interaction data.
+    # \brief Constructs the calculator without an associated ForceField.MMFF94InteractionData instance.
     # 
     # Operator() will return zero until setup() has been called.
     # 
@@ -40,9 +40,9 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def __init__(calc: MMFF94EnergyCalculator) -> None: pass
 
     ##
-    # \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
+    # \brief Constructs the calculator and associates it with the supplied ForceField.MMFF94InteractionData instance.
     # 
-    # \param ia_data The MMFF94 interaction data to use during energy evaluation.
+    # \param ia_data The MMFF94 interaction data to use for energy calculation.
     # 
     def __init__(ia_data: MMFF94InteractionData) -> None: pass
 
@@ -68,7 +68,9 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     ##
     # \brief Enables/disables specific MMFF94 interaction-type contributions.
     # 
-    # \param types Bitwise-OR combination of ForceField.InteractionType flags. Only the listed contributions are evaluated.
+    # \param types Bitwise-OR combination of ForceField.InteractionType flags.
+    # 
+    # \note Only enabled contributions are evaluated.
     # 
     def setEnabledInteractionTypes(types: int) -> None: pass
 
@@ -80,9 +82,9 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def getEnabledInteractionTypes() -> int: pass
 
     ##
-    # \brief Associates the calculator with the supplied MMFF94 interaction data.
+    # \brief Associates the calculator with the supplied ForceField.MMFF94InteractionData instance.
     # 
-    # \param ia_data The new MMFF94 interaction data.
+    # \param ia_data The new MMFF94 interaction data to use for energy calculation.
     # 
     def setup(ia_data: MMFF94InteractionData) -> None: pass
 
@@ -143,13 +145,13 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def getVanDerWaalsEnergy() -> float: pass
 
     ##
-    # \brief Computes the total MMFF94 energy of the conformation <em>coords</em>.
+    # \brief Computes the total MMFF94 energy of the conformation specified by <em>coords</em>.
     # 
     # The per-component energies are stored internally and can be retrieved via the dedicated accessors.
     # 
-    # \param coords The 3D coordinates of the molecule.
+    # \param coords The atom 3D coordinates.
     # 
-    # \return A reference to the computed total energy (also accessible via getTotalEnergy()).
+    # \return A reference to the computed total energy.
     # 
     def __call__(coords: Math.Vector3DArray) -> float: pass
 

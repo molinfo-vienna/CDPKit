@@ -20,9 +20,7 @@
 #
 
 ##
-# \brief A single MMFF94 stretch-bend coupling interaction.
-# 
-# The stretch-bend term couples the angle defined by an atom triplet (<em>i-<em>j-<em>k</em>)</em> with</em> the two bond lengths <em>i-<em>j</em> and</em> <em>j-<em>k</em>.</em> The associated energy contribution is \f$ E_{sb} = (k_{ijk} \Delta r_{ij} + k_{kji} \Delta r_{jk}) (\Theta - \Theta_0) \f$ where the two distinct force constants account for the asymmetric coupling between the two bonds and the central angle.
+# \brief Stores paramters for a single MMFF94 stretch-bend coupling interaction.
 # 
 class MMFF94StretchBendInteraction(Boost.Python.instance):
 
@@ -33,7 +31,7 @@ class MMFF94StretchBendInteraction(Boost.Python.instance):
     def __init__(iactn: MMFF94StretchBendInteraction) -> None: pass
 
     ##
-    # \brief Constructs the stretch-bend interaction record.
+    # \brief Constructs the stretch-bend interaction parameter set.
     # 
     # \param term_atom1_idx The zero-based index of the first terminal atom <em>i</em>.
     # \param ctr_atom_idx The zero-based index of the central atom <em>j</em>.

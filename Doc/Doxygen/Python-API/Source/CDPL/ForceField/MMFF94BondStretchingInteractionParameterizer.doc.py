@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Generates the MMFF94 bond-stretching interactions for the bonds of a molecular graph.
+# \brief Detects and parameterizes the MMFF94 bond-stretching interactions of a molecular graph.
 # 
-# For every non-filtered bond the parameterizer looks up the matching MMFF94 bond-type-specific parameters from the supplied tables (falling back to the rule-based table when no exact match is available) and appends an MMFF94BondStretchingInteraction record to the output list.
+# For every non-filtered bond the parameterizer looks up the matching MMFF94 bond type-specific parameters from the supplied tables (falling back to the rule-based table when no exact match is available) and appends an MMFF94BondStretchingInteraction instance to the output list.
 # 
 class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
 
@@ -38,11 +38,11 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     def __init__(parameterizer: MMFF94BondStretchingInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Constructs the parameterizer and immediately processes the bonds of <em>molgraph</em> into <em>ia_list</em>.
+    # \brief Constructs the parameterizer and processes the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the bond-stretching interactions.
-    # \param ia_list Output list receiving the generated MMFF94BondStretchingInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94BondStretchingInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def __init__(molgraph: Chem.MolecularGraph, ia_list: MMFF94BondStretchingInteractionList, strict: bool) -> None: pass
 
@@ -68,26 +68,26 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
     # 
-    # \param func The new numeric-atom-type lookup function.
+    # \param func The new numeric atom type lookup function.
     # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief Sets the function used to look up the MMFF94 bond-type index of a bond.
+    # \brief Sets the function used to look up the MMFF94 bond type index of a bond.
     # 
-    # \param func The new bond-type-index lookup function.
+    # \param func The new bond type index lookup function.
     # 
     def setBondTypeIndexFunction(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
-    # \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
+    # \brief Sets the function used to obtain the set of MMFF94 aromatic rings of the input molecular graph.
     # 
-    # \param func The new aromatic-ring-set function.
+    # \param func The new aromatic ring set retrieval function.
     # 
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief Sets the primary table providing bond-type-specific bond-stretching parameters.
+    # \brief Sets the primary table providing bond type-specific bond-stretching parameters.
     # 
     # \param table The new bond-stretching parameter table.
     # 
@@ -96,14 +96,14 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Sets the fallback table providing rule-based bond-stretching parameters.
     # 
-    # \param table The new bond-stretching rule-parameter table.
+    # \param table The new bond-stretching rule parameter table.
     # 
     def setBondStretchingRuleParameterTable(table: MMFF94BondStretchingRuleParameterTable) -> None: pass
 
     ##
-    # \brief Sets the table providing per-numeric-atom-type property data (used by the empirical fallback).
+    # \brief Sets the table providing MMFF94 numeric atom type property data (used by the empirical fallback).
     # 
-    # \param table The new atom-type property table.
+    # \param table The new atom type property table.
     # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
@@ -115,11 +115,11 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94BondStretchingInteractionParameterizer) -> MMFF94BondStretchingInteractionParameterizer: pass
 
     ##
-    # \brief Generates the MMFF94 bond-stretching interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
+    # \brief Perceives the MMFF94 bond-stretching interactions for <em>molgraph</em> and outputs the corresponding parameter data into <em>ia_list</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the bond-stretching interactions.
-    # \param ia_list Output list receiving the generated MMFF94BondStretchingInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94BondStretchingInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_list: MMFF94BondStretchingInteractionList, strict: bool) -> None: pass
 

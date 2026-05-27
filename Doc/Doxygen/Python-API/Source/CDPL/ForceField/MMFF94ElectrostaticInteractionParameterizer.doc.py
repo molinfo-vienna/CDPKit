@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Generates the MMFF94 electrostatic interactions for the non-bonded atom pairs of a molecular graph.
+# \brief Detects and parameterizes the MMFF94 electrostatic interactions of a molecular graph.
 # 
-# For every pair of atoms that is at least 1,4-separated (1,4-pairs use a scaling factor of 0.75; 1,5 and farther pairs use 1.0) the parameterizer emits an MMFF94ElectrostaticInteraction record carrying the partial charges, the configured dielectric constant and the configured distance exponent.
+# For every pair of atoms that is at least 1,4-separated (1,4-pairs use a scaling factor of <em>0.75</em>; 1,5 and farther pairs use <em>1.0</em>) the parameterizer emits an MMFF94ElectrostaticInteraction instance storing the partial charges, the configured dielectric constant and the configured distance exponent.
 # 
 class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
 
@@ -53,11 +53,11 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     def __init__(parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Constructs the parameterizer and immediately processes <em>molgraph</em> into <em>ia_list</em>.
+    # \brief Constructs the parameterizer and processes the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the electrostatic interactions.
-    # \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def __init__(molgraph: Chem.MolecularGraph, ia_list: MMFF94ElectrostaticInteractionList, strict: bool) -> None: pass
 
@@ -83,14 +83,14 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Sets the function used to look up the MMFF94 partial charge of an atom.
     # 
-    # \param func The new atom-charge lookup function.
+    # \param func The new atom charge lookup function.
     # 
     def setAtomChargeFunction(func: MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief Sets the function used to determine the topological distance between two atoms (number of bonds along the shortest path).
     # 
-    # \param func The new topological-distance function.
+    # \param func The new topological distance function.
     # 
     def setTopologicalDistanceFunction(func: TopologicalAtomDistanceFunction) -> None: pass
 
@@ -116,11 +116,11 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> MMFF94ElectrostaticInteractionParameterizer: pass
 
     ##
-    # \brief Generates the MMFF94 electrostatic interactions for <em>molgraph</em> and writes them to <em>ia_list</em>.
+    # \brief Perceives the MMFF94 electrostatic interactions for <em>molgraph</em> and outputs the corresponding parameter data into <em>ia_list</em>.
     # 
     # \param molgraph The molecular graph for which to parameterize the electrostatic interactions.
-    # \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction records.
-    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure.
+    # \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_list: MMFF94ElectrostaticInteractionList, strict: bool) -> None: pass
 

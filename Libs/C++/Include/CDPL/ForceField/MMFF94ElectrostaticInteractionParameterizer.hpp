@@ -51,10 +51,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Generates the MMFF94 electrostatic interactions for the non-bonded atom pairs of a molecular graph.
+         * \brief Detects and parameterizes the MMFF94 electrostatic interactions of a molecular graph.
          *
-         * For every pair of atoms that is at least 1,4-separated (1,4-pairs use a scaling factor of 0.75; 1,5
-         * and farther pairs use 1.0) the parameterizer emits an MMFF94ElectrostaticInteraction record carrying
+         * For every pair of atoms that is at least 1,4-separated (1,4-pairs use a scaling factor of \e 0.75; 1,5
+         * and farther pairs use \e 1.0) the parameterizer emits an MMFF94ElectrostaticInteraction instance storing
          * the partial charges, the configured dielectric constant and the configured distance exponent.
          */
         class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteractionParameterizer
@@ -77,10 +77,11 @@ namespace CDPL
             MMFF94ElectrostaticInteractionParameterizer();
 
             /**
-             * \brief Constructs the parameterizer and immediately processes \a molgraph into \a ia_list.
+             * \brief Constructs the parameterizer and processes the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to parameterize the electrostatic interactions.
-             * \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction records.
+             * \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction instances.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
              */
             MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph&         molgraph,
                                                         MMFF94ElectrostaticInteractionList& ia_list,
@@ -94,13 +95,13 @@ namespace CDPL
 
             /**
              * \brief Sets the function used to look up the MMFF94 partial charge of an atom.
-             * \param func The new atom-charge lookup function.
+             * \param func The new atom charge lookup function.
              */
             void setAtomChargeFunction(const MMFF94AtomChargeFunction& func);
 
             /**
              * \brief Sets the function used to determine the topological distance between two atoms (number of bonds along the shortest path).
-             * \param func The new topological-distance function.
+             * \param func The new topological distance function.
              */
             void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func);
 
@@ -117,10 +118,12 @@ namespace CDPL
             void setDistanceExponent(double dist_expo);
 
             /**
-             * \brief Generates the MMFF94 electrostatic interactions for \a molgraph and writes them to \a ia_list.
+             * \brief Perceives the MMFF94 electrostatic interactions for \a molgraph and outputs the
+             *        corresponding parameter data into \a ia_list.
              * \param molgraph The molecular graph for which to parameterize the electrostatic interactions.
-             * \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction records.
+             * \param ia_list Output list receiving the generated MMFF94ElectrostaticInteraction instances.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
              */
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionList& ia_list, bool strict);
 

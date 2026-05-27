@@ -46,15 +46,15 @@ namespace CDPL
     {
 
         /**
-         * \brief Evaluates the total MMFF94 force field energy and its gradient with respect to the atomic coordinates.
+         * \brief Calculates the total MMFF94 force field energy and its gradient for a set of atom 3D coordinates.
          *
          * The calculator takes a ForceField::MMFF94InteractionData instance and the atom count of the molecule
          * and computes both the total MMFF94 energy and the analytical Cartesian gradient
          * \f$ \partial E / \partial \mathbf{r}_i \f$ for each atom. The per-component energies are retained
          * and made available via the dedicated accessors. A bit mask can be set to mark atoms whose gradient
-         * contributions are zeroed, freezing them during an energy minimization.
+         * contributions are zeroed, freezing them during an energy minimization run.
          *
-         * \tparam ValueType The floating-point value type used to represent the computed energies and gradients.
+         * \tparam ValueType The floating-point value type used to represent the computed energies and gradient vector elements.
          */
         template <typename ValueType>
         class MMFF94GradientCalculator
@@ -62,22 +62,23 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs the calculator without any associated interaction data.
+             * \brief Constructs the calculator without an associated ForceField::MMFF94InteractionData instance.
              *
              * Operator() will return zero until setup() has been called.
              */
             MMFF94GradientCalculator();
 
             /**
-             * \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
-             * \param ia_data The MMFF94 interaction data to use during energy/gradient evaluation.
+             * \brief Constructs the calculator and associates it with the supplied ForceField::MMFF94InteractionData instance.
+             * \param ia_data The MMFF94 interaction data to use during energy/gradient calculation.
              * \param num_atoms The number of atoms in the parameterized molecular graph.
              */
             MMFF94GradientCalculator(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
 
             /**
              * \brief Enables/disables specific MMFF94 interaction-type contributions.
-             * \param types Bitwise-OR combination of ForceField::InteractionType flags. Only the listed contributions are evaluated.
+             * \param types Bitwise-OR combination of ForceField::InteractionType flags.
+             * \note Only enabled contributions are evaluated.
              */
             void setEnabledInteractionTypes(unsigned int types);
 
@@ -88,15 +89,15 @@ namespace CDPL
             unsigned int getEnabledInteractionTypes() const;
 
             /**
-             * \brief Associates the calculator with the supplied MMFF94 interaction data and atom count.
-             * \param ia_data The new MMFF94 interaction data.
+             * \brief Associates the calculator with the supplied ForceField::MMFF94InteractionData instance and atom count.
+             * \param ia_data The new MMFF94 interaction data to use for energy/gradient calculation.
              * \param num_atoms The number of atoms in the parameterized molecular graph.
              */
             void setup(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
 
             /**
-             * \brief Computes the total MMFF94 energy of the conformation \a coords without evaluating the gradient.
-             * \tparam CoordsArray The coordinate-array type.
+             * \brief Computes the total MMFF94 energy of the conformation specified by \a coords without calculating the gradient.
+             * \tparam CoordsArray The atom coordinate array type.
              * \param coords The 3D coordinates of the molecule.
              * \return A \c const reference to the computed total energy.
              */
@@ -104,13 +105,13 @@ namespace CDPL
             const ValueType& operator()(const CoordsArray& coords);
 
             /**
-             * \brief Computes the total MMFF94 energy and the per-atom gradient of the conformation \a coords.
+             * \brief Computes the total MMFF94 energy and the per-atom gradient of the conformation specified by \a coords.
              *
-             * Gradients of atoms marked in the fixed-atom mask (see setFixedAtomMask()) are zeroed after evaluation.
+             * Gradients of atoms marked in the fixed-atom mask (see setFixedAtomMask()) are zeroed after calculation.
              *
-             * \tparam CoordsArray The coordinate-array type.
-             * \tparam GradVector The gradient-vector type (must satisfy ForceField::GradientVectorTraits requirements).
-             * \param coords The 3D coordinates of the molecule.
+             * \tparam CoordsArray The atom coordinate array type.
+             * \tparam GradVector The gradient vector type (must satisfy ForceField::GradientVectorTraits requirements).
+             * \param coords The atom 3D coordinates.
              * \param grad The output gradient vector.
              * \return A \c const reference to the computed total energy.
              */
@@ -172,7 +173,7 @@ namespace CDPL
             const Util::BitSet& getFixedAtomMask() const;
 
             /**
-             * \brief Sets the bit mask flagging atoms whose gradient components shall be zeroed after evaluation.
+             * \brief Sets the bit mask flagging atoms whose gradient components shall be zeroed after calculation.
              * \param mask The new fixed-atom bit mask (bit \e i set freezes atom \e i during minimization).
              */
             void setFixedAtomMask(const Util::BitSet& mask);

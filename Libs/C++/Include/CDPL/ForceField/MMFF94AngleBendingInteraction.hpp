@@ -39,25 +39,19 @@ namespace CDPL
     {
 
         /**
-         * \brief A single MMFF94 angle-bending interaction defined over an atom triplet.
-         *
-         * Stores the indices of the central atom plus the two terminal atoms, the MMFF94 angle-type index,
-         * a linear-angle flag, the harmonic force constant and the reference angle. For non-linear angles the
-         * MMFF94 angle-bending energy is the cubic-bend form
-         * \f$ E_a = \frac{1}{2} k_a (\Theta - \Theta_0)^2 (1 + c_b (\Theta - \Theta_0)) \f$;
-         * for linear angles the cosine-form \f$ E_a = k_a (1 + \cos\Theta) \f$ is used (evaluated by the calculator).
+         * \brief Stores parameters for a single MMFF94 angle-bending interaction defined over an atom triplet.
          */
         class MMFF94AngleBendingInteraction
         {
 
           public:
             /**
-             * \brief Constructs the angle-bending interaction record.
+             * \brief Constructs the angle-bending interaction parameter set.
              * \param term_atom1_idx The zero-based index of the first terminal atom.
              * \param ctr_atom_idx The zero-based index of the central (vertex) atom.
              * \param term_atom2_idx The zero-based index of the second terminal atom.
-             * \param angle_type_idx The MMFF94 angle-type index (0-8).
-             * \param linear \c true if the equilibrium angle is treated as linear (180&deg;).
+             * \param angle_type_idx The MMFF94 angle type index (0-8).
+             * \param linear \c true if the equilibrium angle is near linear (180&deg;).
              * \param force_const The angle-bending force constant.
              * \param ref_angle The reference angle \f$ \Theta_0 \f$ (in degrees).
              */
@@ -122,8 +116,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the MMFF94 angle-type index.
-             * \return The angle-type index (0-8).
+             * \brief Returns the MMFF94 angle type index.
+             * \return The angle type index (0-8).
              */
             unsigned int getAngleTypeIndex() const
             {
@@ -131,8 +125,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the equilibrium angle is treated as linear.
-             * \return \c true if the angle is linear, and \c false otherwise.
+             * \brief Tells whether the equilibrium angle is near linear (180&deg;).
+             * \return \c true if the angle is near linear, and \c false otherwise.
              */
             bool isLinearAngle() const
             {

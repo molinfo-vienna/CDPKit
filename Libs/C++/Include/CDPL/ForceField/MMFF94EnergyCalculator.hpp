@@ -42,13 +42,13 @@ namespace CDPL
     {
 
         /**
-         * \brief Evaluates the total MMFF94 force field energy of a 3D conformation.
+         * \brief Calculates the total MMFF94 force field energy for a set of atom 3D coordinates.
          *
          * The calculator takes a ForceField::MMFF94InteractionData instance (typically produced by
          * ForceField::MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending,
          * stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions
-         * for a supplied set of 3D coordinates. The per-component energies are retained and made available
-         * via the dedicated accessors; the sum is returned by operator() and getTotalEnergy().
+         * for a supplied set of atom 3D coordinates. The per-component energies are retained and made available
+         * via the dedicated accessors, the calculated sum is returned by operator() and getTotalEnergy().
          *
          * \tparam ValueType The floating-point value type used to represent the computed energies.
          */
@@ -58,21 +58,22 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs the calculator without any associated interaction data.
+             * \brief Constructs the calculator without an associated ForceField::MMFF94InteractionData instance.
              *
              * Operator() will return zero until setup() has been called.
              */
             MMFF94EnergyCalculator();
 
             /**
-             * \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
-             * \param ia_data The MMFF94 interaction data to use during energy evaluation.
+             * \brief Constructs the calculator and associates it with the supplied ForceField::MMFF94InteractionData instance.
+             * \param ia_data The MMFF94 interaction data to use for energy calculation.
              */
             MMFF94EnergyCalculator(const MMFF94InteractionData& ia_data);
 
             /**
              * \brief Enables/disables specific MMFF94 interaction-type contributions.
-             * \param types Bitwise-OR combination of ForceField::InteractionType flags. Only the listed contributions are evaluated.
+             * \param types Bitwise-OR combination of ForceField::InteractionType flags.
+             * \note Only enabled contributions are evaluated.
              */
             void setEnabledInteractionTypes(unsigned int types);
 
@@ -83,19 +84,19 @@ namespace CDPL
             unsigned int getEnabledInteractionTypes() const;
 
             /**
-             * \brief Associates the calculator with the supplied MMFF94 interaction data.
-             * \param ia_data The new MMFF94 interaction data.
+             * \brief Associates the calculator with the supplied ForceField::MMFF94InteractionData instance.
+             * \param ia_data The new MMFF94 interaction data to use for energy calculation.
              */
             void setup(const MMFF94InteractionData& ia_data);
 
             /**
-             * \brief Computes the total MMFF94 energy of the conformation \a coords.
+             * \brief Computes the total MMFF94 energy of the conformation specified by \a coords.
              *
              * The per-component energies are stored internally and can be retrieved via the dedicated accessors.
              *
-             * \tparam CoordsArray The coordinate-array type (must provide operator[] returning a Math::Vector3 - compatible value).
-             * \param coords The 3D coordinates of the molecule.
-             * \return A \c const reference to the computed total energy (also accessible via getTotalEnergy()).
+             * \tparam CoordsArray The atom coordinate array type.
+             * \param coords The atom 3D coordinates.
+             * \return A \c const reference to the computed total energy.
              */
             template <typename CoordsArray>
             const ValueType& operator()(const CoordsArray& coords);

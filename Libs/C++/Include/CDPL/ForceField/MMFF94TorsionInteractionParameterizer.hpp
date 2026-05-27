@@ -56,12 +56,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Generates the MMFF94 torsion interactions for the atom quadruplets defined by the bonds of a molecular graph.
+         * \brief Detects and parameterizes the MMFF94 torsion interactions of a molecular graph. 
          *
          * For every non-filtered atom quadruplet (\e i-\e j-\e k-\e l) consisting of a central bond \e j-\e k
-         * and one neighbor each on \e j and \e k the parameterizer looks up the matching MMFF94 torsion-type-specific
+         * and one neighbor each on \e j and \e k the parameterizer looks up the matching MMFF94 torsion type-specific
          * parameters \f$ V_1, V_2, V_3 \f$ from the supplied parameter table, falling back to the primary-to-parameter
-         * atom-type map for atoms with no exact parameter entry, and emits an MMFF94TorsionInteraction record.
+         * atom type map for atoms with no exact parameter entry, and emits an MMFF94TorsionInteraction instance.
          */
         class CDPL_FORCEFIELD_API MMFF94TorsionInteractionParameterizer
         {
@@ -76,10 +76,11 @@ namespace CDPL
             MMFF94TorsionInteractionParameterizer();
 
             /**
-             * \brief Constructs the parameterizer and immediately processes \a molgraph into \a ia_list.
+             * \brief Constructs the parameterizer and processes the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to parameterize the torsion interactions.
-             * \param ia_list Output list receiving the generated MMFF94TorsionInteraction records.
+             * \param ia_list Output list receiving the generated MMFF94TorsionInteraction instances.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
              */
             MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph&   molgraph,
                                                   MMFF94TorsionInteractionList& ia_list,
@@ -93,45 +94,47 @@ namespace CDPL
 
             /**
              * \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
-             * \param func The new numeric-atom-type lookup function.
+             * \param func The new numeric atom type lookup function.
              */
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
             /**
-             * \brief Sets the function used to look up the MMFF94 bond-type index of a bond.
-             * \param func The new bond-type-index lookup function.
+             * \brief Sets the function used to look up the MMFF94 bond type index of a bond.
+             * \param func The new bond type index lookup function.
              */
             void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
             /**
-             * \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
-             * \param func The new aromatic-ring-set function.
+             * \brief Sets the function used to obtain the set of MMFF94 aromatic rings of the input molecular graph.
+             * \param func The new aromatic ring set retrievaly function.
              */
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
             /**
-             * \brief Sets the primary table providing torsion-type-specific \f$ V_1/V_2/V_3 \f$ parameters.
+             * \brief Sets the primary table providing torsion type-specific \f$ V_1/V_2/V_3 \f$ parameters.
              * \param table The new torsion parameter table.
              */
             void setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table);
 
             /**
-             * \brief Sets the table providing per-numeric-atom-type property data (used by the empirical fallback).
-             * \param table The new atom-type property table.
+             * \brief Sets the table providing MMFF94 numeric atom type property data (used by the empirical fallback).
+             * \param table The new atom type property table.
              */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
             /**
-             * \brief Sets the map used to translate primary atom types into their corresponding parameter-atom types.
-             * \param map The new primary-to-parameter atom-type map.
+             * \brief Sets the map used to translate primary atom types into their corresponding parameter atom types.
+             * \param map The new primary-to-parameter atom type map.
              */
             void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
             /**
-             * \brief Generates the MMFF94 torsion interactions for \a molgraph and writes them to \a ia_list.
+             * \brief Perceives the MMFF94 torsion interactions for \a molgraph and outputs the
+             *        corresponding parameter data into \a ia_list.
              * \param molgraph The molecular graph for which to parameterize the torsion interactions.
-             * \param ia_list Output list receiving the generated MMFF94TorsionInteraction records.
+             * \param ia_list Output list receiving the generated MMFF94TorsionInteraction instances.
              * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
              */
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionList& ia_list, bool strict);
 

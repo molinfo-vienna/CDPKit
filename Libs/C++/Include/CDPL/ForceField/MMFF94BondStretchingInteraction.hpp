@@ -39,22 +39,17 @@ namespace CDPL
     {
 
         /**
-         * \brief A single MMFF94 bond-stretching interaction between two bonded atoms.
-         *
-         * Stores the indices of the two interacting atoms, the MMFF94 bond-type index (0 or 1 — see the MMFF94
-         * specification), the harmonic force constant and the reference bond length. The associated energy term
-         * is \f$ E_b = \frac{1}{2} k_b (r - r_0)^2 (1 + c_s (r - r_0) + \frac{7}{12} c_s^2 (r - r_0)^2) \f$
-         * (cubic-stretch MMFF94 form, evaluated by the calculator).
+         * \brief Store parameters for a single MMFF94 bond-stretching interaction between two bonded atoms.
          */
         class MMFF94BondStretchingInteraction
         {
 
           public:
             /**
-             * \brief Constructs the bond-stretching interaction record.
+             * \brief Constructs the bond-stretching interaction parameter set.
              * \param atom1_idx The zero-based index of the first bonded atom.
              * \param atom2_idx The zero-based index of the second bonded atom.
-             * \param bond_type_idx The MMFF94 bond-type index (0 or 1).
+             * \param bond_type_idx The MMFF94 bond type index (0 or 1).
              * \param force_const The bond-stretching force constant.
              * \param ref_length The reference bond length \f$ r_0 \f$.
              */
@@ -82,8 +77,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the MMFF94 bond-type index of this bond.
-             * \return The bond-type index (0 or 1).
+             * \brief Returns the MMFF94 bond type index of this bond.
+             * \return The bond type index (0 or 1).
              */
             unsigned int getBondTypeIndex() const
             {

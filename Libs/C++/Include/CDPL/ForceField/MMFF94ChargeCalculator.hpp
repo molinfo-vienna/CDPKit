@@ -83,6 +83,7 @@ namespace CDPL
              * \param molgraph The molecular graph for which to calculate partial atomic charges.
              * \param charges The output array storing the calculated partial charges.
              * \param strict If \c true, strict parameterization is performed (and may fail).
+             *               Otherwise, in case of parameterization problems, fallback strategies take effect.
              */
             MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 
@@ -99,14 +100,14 @@ namespace CDPL
             void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
 
             /**
-             * \brief Sets the atom-type property table to use.
-             * \param table The table providing per-atom-type properties.
+             * \brief Sets the MMFF94 atom type property table to use.
+             * \param table The table providing atom type properties.
              */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
             /**
-             * \brief Sets the formal-charge definition table to use.
-             * \param table The table providing formal-charge definitions.
+             * \brief Sets the formal charge definition table to use.
+             * \param table The table providing formal charge definitions.
              */
             void setFormalChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
 
@@ -169,6 +170,7 @@ namespace CDPL
              * \param molgraph The molecular graph for which to calculate partial atomic charges.
              * \param charges The output array storing the calculated partial charges.
              * \param strict If \c true, strict parameterization will be peformed that might fail.
+             *               Otherwise, in case of parameterization problems, fallback strategies take effect.
              */
             void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 

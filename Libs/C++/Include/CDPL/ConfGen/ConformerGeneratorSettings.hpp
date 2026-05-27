@@ -256,8 +256,8 @@ namespace CDPL
 
             /**
              * \brief Specifies whether strict MMFF94 parameterization is required.
-             * \param strict If \c true, missing/ambiguous parameters cause a generation failure;
-             *               if \c false, suitable fallback parameters are used.
+             * \param strict If \c true, missing/ambiguous parameters cause a generation failure.
+             *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
              */
             void strictForceFieldParameterization(bool strict);
 

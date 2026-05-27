@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief A single MMFF94 Van der Waals interaction between two non-bonded atoms.
-# 
-# The MMFF94 Van der Waals form is a buffered 14-7 potential \f$ E_{vdW} = \varepsilon_{IJ} \left( \frac{1.07 R_{IJ}}{r + 0.07 R_{IJ}} \right)^7 \left( \frac{1.12 R_{IJ}^7}{r^7 + 0.12 R_{IJ}^7} - 2 \right) \f$ with combined parameters \f$ R_{IJ} \f$ and \f$ \varepsilon_{IJ} \f$. The constructor performs the MMFF94 combining rules using the per-atom polarizabilities, effective electron numbers and the MMFF94-defined "factor A", "factor G", buffered combining "factor B" and donor/acceptor scaling factors; the resulting \f$ R_{IJ} \f$, \f$ \varepsilon_{IJ} \f$ and the precomputed \f$ R_{IJ}^7 \f$ are stored.
+# \brief Stores parameters for a single MMFF94 Van der Waals interaction between two non-bonded atoms.
 # 
 class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
 
     ##
-    # \brief MMFF94 hydrogen-bond donor/acceptor classification of an atom (for the donor/acceptor scaling of the vdW combining rule).
+    # \brief MMFF94 hydrogen-bond donor/acceptor classification of an atom.
     # 
     class HDonorAcceptorType(Boost.Python.enum):
 
@@ -95,7 +93,7 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
     def getRIJ() -> float: pass
 
     ##
-    # \brief Returns the pre-computed seventh power of \f$ R_{IJ} \f$ (used by the calculator to avoid recomputation).
+    # \brief Returns the pre-computed seventh power of \f$ R_{IJ} \f$.
     # 
     # \return The value \f$ R_{IJ}^7 \f$.
     # 

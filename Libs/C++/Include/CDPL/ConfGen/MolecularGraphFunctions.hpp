@@ -112,6 +112,7 @@ namespace CDPL
          * \param param_data The output interaction-data structure.
          * \param ff_type The MMFF94 force field variant (see ForceField::MMFF94InteractionParameterizer for valid values).
          * \param strict If \c true, missing parameters are treated as fatal errors.
+         *               Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
          * \param estat_de_const The dielectric constant used in the electrostatic energy term.
          * \param estat_dist_expo The distance exponent used in the electrostatic energy term.
          * \return A ConfGen::ReturnCode value reporting the outcome of the parameterization.

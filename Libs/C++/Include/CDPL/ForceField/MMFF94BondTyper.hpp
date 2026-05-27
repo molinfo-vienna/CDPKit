@@ -48,7 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Assigns MMFF94 bond-type indices (0 or 1) to the bonds of a molecular graph.
+         * \brief Assigns MMFF94 bond type indices to the bonds of a molecular graph.
          *
          * A bond receives the nonstandard type index \e 1 when it is a single bond between two non-aromatic
          * atoms whose MMFF94 atom-type properties carry an \c sbmb flag, or when it connects two atoms that
@@ -67,26 +67,27 @@ namespace CDPL
             /**
              * \brief Constructs an \c %MMFF94BondTyper instance and immediately perceives the bond types of \a molgraph.
              * \param molgraph The molecular graph to be typed.
-             * \param types Output array receiving the perceived MMFF94 bond-type indices.
+             * \param types Output array receiving the perceived MMFF94 bond type indices.
              * \param strict If \c true, strict parameterization will be performed that might fail.
+             *               Otherwise, bonds with parameterization problems receive the type index \e 0.
              */
             MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
 
             /**
-             * \brief Sets the table providing the per-numeric-atom-type property data (used to look up the \c sbmb flag).
-             * \param table The new atom-type property table.
+             * \brief Sets the table providing the MMFF94 numeric atom type property data (used to look up the \c sbmb flag).
+             * \param table The new atom type property table.
              */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
             /**
-             * \brief Sets the function used to obtain the set of MMFF94-aromatic rings of the input molecular graph.
-             * \param func The new aromatic-ring-set function.
+             * \brief Sets the function used to obtain the set of MMFF94 aromatic rings of the input molecular graph.
+             * \param func The new aromatic ring set retrieval function.
              */
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
             /**
              * \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
-             * \param func The new numeric-atom-type lookup function.
+             * \param func The new numeric atom type lookup function.
              */
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
@@ -103,6 +104,7 @@ namespace CDPL
              * \param molgraph The molecular graph for which to assign bond type indices
              * \param types The output array storing the determined bond type indices.
              * \param strict If \c true, strict parameterization will be peformed that might fail.
+             *               Otherwise, bonds with parameterization problems receive the type index \e 0.
              */
             void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
 
