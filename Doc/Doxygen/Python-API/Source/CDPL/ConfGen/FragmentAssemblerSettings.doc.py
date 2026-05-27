@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bundle of configuration parameters for ConfGen.FragmentAssembler.
+# \brief Bundle of configuration parameters for fragment conformer assembly via class ConfGen.FragmentAssembler.
 # 
 class FragmentAssemblerSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed FragmentAssemblerSettings instance.
+    # \brief A static instance providing configuration parameter default values.
     # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Constructs the settings instance with default values.
+    # \brief Constructs the <tt>FragmentAssemblerSettings</tt> instance with default configuration parameter values.
     # 
     def __init__() -> None: pass
 
@@ -74,14 +74,14 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def enumerateRings() -> bool: pass
 
     ##
-    # \brief Sets the enumeration mode for stereogenic nitrogen centers.
+    # \brief Sets the enumeration mode for invertible nitrogen centers.
     # 
     # \param mode One of the ConfGen.NitrogenEnumerationMode values.
     # 
     def setNitrogenEnumerationMode(mode: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured stereogenic-nitrogen enumeration mode.
+    # \brief Returns the currently configured invertible nitrogen enumeration mode.
     # 
     # \return One of the ConfGen.NitrogenEnumerationMode values.
     # 
@@ -101,7 +101,7 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def generateCoordinatesFromScratch() -> bool: pass
 
     ##
-    # \brief Returns a reference to the nested fragment-conformer build settings.
+    # \brief Returns a reference to the nested fragment conformer build settings.
     # 
     # \return A reference to the build settings.
     # 

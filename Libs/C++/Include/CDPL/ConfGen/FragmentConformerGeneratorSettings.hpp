@@ -41,13 +41,14 @@ namespace CDPL
     {
 
         /**
-         * \brief Bundle of configuration parameters for ConfGen::FragmentConformerGenerator.
+         * \brief Bundle of configuration parameters for fragment conformer ensemble generation via
+         *        class ConfGen::FragmentConformerGenerator.
          */
         class CDPL_CONFGEN_API FragmentConformerGeneratorSettings
         {
 
           public:
-            /** \brief A static instance providing settings default values. */
+            /** \brief A static instance providing configuration parameter default values. */
             static const FragmentConformerGeneratorSettings DEFAULT;
             /** \brief A static instance preconfigured for fast (less thorough) conformer generation. */
             static const FragmentConformerGeneratorSettings FAST;
@@ -55,62 +56,62 @@ namespace CDPL
             static const FragmentConformerGeneratorSettings THOROUGH;
 
             /**
-             * \brief Per-fragment-class settings (separate parameters for chain, small-ring and macrocycle fragments).
+             * \brief Per-fragment-class settings (separate parameters for chain, small ring system and macrocycle fragments).
              */
             class CDPL_CONFGEN_API FragmentSettings
             {
 
               public:
                 /**
-                 * \brief Constructs the per-fragment-class settings instance with default values.
+                 * \brief Constructs a \c %FragmentSettings instance with default configuration parameter values.
                  */
                 FragmentSettings();
 
                 /**
                  * \brief Sets the maximum number of trial conformers sampled per fragment.
-                 * \param max_num The new sampled-conformer limit.
+                 * \param max_num The new num. conformers upper limit.
                  */
                 void setMaxNumSampledConformers(std::size_t max_num);
 
                 /**
                  * \brief Returns the maximum number of trial conformers sampled per fragment.
-                 * \return The sampled-conformer limit.
+                 * \return The current num. conformers upper limit.
                  */
                 std::size_t getMaxNumSampledConformers() const;
 
                 /**
                  * \brief Sets the minimum number of trial conformers sampled per fragment before convergence is tested.
-                 * \param min_num The new minimum sampled-conformer count.
+                 * \param min_num The new num. conformers lower limit.
                  */
                 void setMinNumSampledConformers(std::size_t min_num);
 
                 /**
                  * \brief Returns the minimum number of trial conformers sampled per fragment.
-                 * \return The minimum sampled-conformer count.
+                 * \return The current num. conformers lower limit.
                  */
                 std::size_t getMinNumSampledConformers() const;
 
                 /**
-                 * \brief Sets the per-fragment wall-clock processing time limit.
+                 * \brief Sets the per-fragment wall clock processing time limit.
                  * \param mil_secs The new time limit in milliseconds (zero disables the limit).
                  */
                 void setTimeout(std::size_t mil_secs);
 
                 /**
-                 * \brief Returns the per-fragment wall-clock processing time limit.
+                 * \brief Returns the per-fragment wall clock processing time limit.
                  * \return The time limit in milliseconds (zero if disabled).
                  */
                 std::size_t getTimeout() const;
 
                 /**
-                 * \brief Sets the energy-window size (in kcal/mol) above the fragment-conformer minimum within which fragment conformers are kept.
-                 * \param win_size The new energy-window size in kcal/mol.
+                 * \brief Sets the energy window size (in kcal/mol) above the fragment conformer minimum within which fragment conformers are kept.
+                 * \param win_size The new energy window size in kcal/mol.
                  */
                 void setEnergyWindow(double win_size);
 
                 /**
-                 * \brief Returns the per-fragment energy-window size.
-                 * \return The energy-window size in kcal/mol.
+                 * \brief Returns the per-fragment energy window size.
+                 * \return The energy window size in kcal/mol.
                  */
                 double getEnergyWindow() const;
 
@@ -127,7 +128,7 @@ namespace CDPL
                 std::size_t getMaxNumOutputConformers() const;
 
                 /**
-                 * \brief Sets the minimum pairwise heavy-atom RMSD that fragment conformers in the output set must keep.
+                 * \brief Sets the minimum pairwise heavy-atom RMSD that fragment conformers in the output set must have.
                  * \param min_rmsd The new minimum RMSD threshold (in &Aring;).
                  */
                 void setMinRMSD(double min_rmsd);
@@ -148,10 +149,13 @@ namespace CDPL
             };
 
             /**
-             * \brief Constructs the settings instance with default values.
+             * \brief Constructs the \c % FragmentConformerGeneratorSettings instance with default configuration parameter values.
              */
             FragmentConformerGeneratorSettings();
 
+            /**
+             * \brief Destructor.
+             */
             virtual ~FragmentConformerGeneratorSettings() {}
 
             /**
@@ -167,13 +171,13 @@ namespace CDPL
             bool preserveInputBondingGeometries() const;
 
             /**
-             * \brief Sets the force-field type used for fragment-conformer minimization.
+             * \brief Sets the force field type used for fragment conformer minimization.
              * \param type One of the ConfGen::ForceFieldType values.
              */
             void setForceFieldType(unsigned int type);
 
             /**
-             * \brief Returns the force-field type used for fragment-conformer minimization.
+             * \brief Returns the force field type used for fragment conformer minimization.
              * \return One of the ConfGen::ForceFieldType values.
              */
             unsigned int getForceFieldType() const;
@@ -228,7 +232,7 @@ namespace CDPL
             std::size_t getMaxNumRefinementIterations() const;
 
             /**
-             * \brief Sets the gradient-norm threshold at which fragment-conformer refinement is considered converged.
+             * \brief Sets the gradient-norm threshold at which fragment conformer refinement is considered converged.
              * \param grad_norm The new stop-gradient threshold.
              */
             void setRefinementStopGradient(double grad_norm);
@@ -240,14 +244,14 @@ namespace CDPL
             double getRefinementStopGradient() const;
 
             /**
-             * \brief Sets the minimum number of rotatable bonds a macrocyclic ring must contain to be treated as a macrocycle.
-             * \param min_count The new macrocycle rotatable-bond count threshold.
+             * \brief Sets the minimum number of rotatable bonds a macrocyclic ring must contain to be considered as a flexible macrocycle.
+             * \param min_count The new flexible macrocycle rotatable bond count threshold.
              */
             void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
             /**
-             * \brief Returns the macrocycle rotatable-bond count threshold.
-             * \return The threshold.
+             * \brief Returns the flexible macrocycle rotatable bond count threshold.
+             * \return The current threshold.
              */
             std::size_t getMacrocycleRotorBondCountThreshold() const;
 
@@ -264,26 +268,26 @@ namespace CDPL
             const FragmentSettings& getChainSettings() const;
 
             /**
-             * \brief Returns a reference to the per-fragment-class settings used for macrocyclic ring systems.
+             * \brief Returns a reference to the per-fragment-class settings used for flexible macrocyclic ring systems.
              * \return A reference to the macrocycle settings.
              */
             FragmentSettings& getMacrocycleSettings();
 
             /**
-             * \brief Returns a \c const reference to the per-fragment-class settings used for macrocyclic ring systems.
+             * \brief Returns a \c const reference to the per-fragment-class settings used for flexible macrocyclic ring systems.
              * \return A \c const reference to the macrocycle settings.
              */
             const FragmentSettings& getMacrocycleSettings() const;
 
             /**
              * \brief Returns a reference to the per-fragment-class settings used for small ring systems.
-             * \return A reference to the small-ring-system settings.
+             * \return A reference to the small ring system settings.
              */
             FragmentSettings& getSmallRingSystemSettings();
 
             /**
              * \brief Returns a \c const reference to the per-fragment-class settings used for small ring systems.
-             * \return A \c const reference to the small-ring-system settings.
+             * \return A \c const reference to the small ring system settings.
              */
             const FragmentSettings& getSmallRingSystemSettings() const;
 

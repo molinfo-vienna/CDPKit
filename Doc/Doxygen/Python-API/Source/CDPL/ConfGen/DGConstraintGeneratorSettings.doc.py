@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bundle of configuration parameters for ConfGen.DGConstraintGenerator (which builds the distance/volume constraints used for distance-geometry coordinate generation).
+# \brief Bundle of configuration parameters for distance-geometry constraint generation via class ConfGen.DGConstraintGenerator.
 # 
 class DGConstraintGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings instance.
+    # \brief A static instance providing configuration parameter default values.
     # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Constructs the settings instance with default values.
+    # \brief Constructs the <tt>DGConstraintGeneratorSettings</tt> instance with default configuration parameter values.
     # 
     def __init__() -> None: pass
 
@@ -74,28 +74,28 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
     def excludeHydrogens() -> bool: pass
 
     ##
-    # \brief Specifies whether atom-stereo-center configurations shall be enforced by volume constraints.
+    # \brief Specifies whether atom stereo center configurations shall be enforced by volume constraints.
     # 
     # \param regard If <tt>True</tt>, atom-configuration constraints are added.
     # 
     def regardAtomConfiguration(regard: bool) -> None: pass
 
     ##
-    # \brief Tells whether atom-stereo-center configurations are enforced.
+    # \brief Tells whether atom stereo center configurations are enforced.
     # 
     # \return <tt>True</tt> if atom-configuration constraints are added, and <tt>False</tt> otherwise.
     # 
     def regardAtomConfiguration() -> bool: pass
 
     ##
-    # \brief Specifies whether bond-stereo-center configurations (cis/trans) shall be enforced.
+    # \brief Specifies whether bond stereo center configurations (cis/trans) shall be enforced.
     # 
     # \param regard If <tt>True</tt>, bond-configuration constraints are added.
     # 
     def regardBondConfiguration(regard: bool) -> None: pass
 
     ##
-    # \brief Tells whether bond-stereo-center configurations are enforced.
+    # \brief Tells whether bond stereo center configurations are enforced.
     # 
     # \return <tt>True</tt> if bond-configuration constraints are added, and <tt>False</tt> otherwise.
     # 

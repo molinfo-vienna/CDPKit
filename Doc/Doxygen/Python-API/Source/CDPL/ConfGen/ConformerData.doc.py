@@ -22,7 +22,7 @@
 ##
 # \brief Container for the 3D coordinates of a generated conformer plus its associated energy value.
 # 
-# <tt>ConformerData</tt> extends Math.Vector3DArray with an energy field that is filled by force-field-based conformer-generation steps.
+# <tt>ConformerData</tt> extends Math.Vector3DArray with an energy field that is filled by force field-based conformer generation steps.
 # 
 class ConformerData(Math.Vector3DArray):
 

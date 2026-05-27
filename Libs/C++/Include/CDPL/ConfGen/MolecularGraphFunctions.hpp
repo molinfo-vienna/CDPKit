@@ -81,7 +81,7 @@ namespace CDPL
         /**
          * \brief Sets bits in \a bond_mask for every rotatable bond of \a molgraph that is not already marked in \a excl_bond_mask.
          * \param molgraph The molecular graph.
-         * \param excl_bond_mask The bit mask of bonds to exclude from rotatable-bond consideration.
+         * \param excl_bond_mask The bit mask of bonds to exclude from rotatable bond consideration.
          * \param bond_mask The output bit mask sized to the number of bonds in \a molgraph.
          * \param het_h_rotors If \c true, rotors involving only heteroatom-bound hydrogens are also counted as rotatable.
          * \param reset If \c true, the output mask is cleared before bits are set.
@@ -94,7 +94,7 @@ namespace CDPL
          * \brief Returns the number of rotatable bonds in \a molgraph (see ConfGen::isRotatableBond()).
          * \param molgraph The molecular graph.
          * \param het_h_rotors If \c true, rotors involving only heteroatom-bound hydrogens are also counted as rotatable.
-         * \return The rotatable-bond count.
+         * \return The rotatable bond count.
          */
         CDPL_CONFGEN_API std::size_t getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool het_h_rotors);
 
@@ -110,10 +110,10 @@ namespace CDPL
          * \param molgraph The molecular graph.
          * \param parameterizer The MMFF94 interaction parameterizer.
          * \param param_data The output interaction-data structure.
-         * \param ff_type The MMFF94 force-field variant (see ForceField::MMFF94InteractionParameterizer for valid values).
+         * \param ff_type The MMFF94 force field variant (see ForceField::MMFF94InteractionParameterizer for valid values).
          * \param strict If \c true, missing parameters are treated as fatal errors.
-         * \param estat_de_const The dielectric constant used in the electrostatic-energy term.
-         * \param estat_dist_expo The distance exponent used in the electrostatic-energy term.
+         * \param estat_de_const The dielectric constant used in the electrostatic energy term.
+         * \param estat_dist_expo The distance exponent used in the electrostatic energy term.
          * \return A ConfGen::ReturnCode value reporting the outcome of the parameterization.
          */
         CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph&                 molgraph,

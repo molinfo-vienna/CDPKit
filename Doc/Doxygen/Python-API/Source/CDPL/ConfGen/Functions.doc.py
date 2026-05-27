@@ -25,7 +25,7 @@
 # \param molgraph The molecular graph.
 # \param het_h_rotors If <tt>True</tt>, rotors involving only heteroatom-bound hydrogens are also counted as rotatable.
 # 
-# \return The rotatable-bond count.
+# \return The rotatable bond count.
 # 
 def getRotatableBondCount(molgraph: Chem.MolecularGraph, het_h_rotors: bool) -> int: pass
 
@@ -56,7 +56,7 @@ def createRotatableBondMask(molgraph: Chem.MolecularGraph, bond_mask: Util.BitSe
 # \brief Sets bits in <em>bond_mask</em> for every rotatable bond of <em>molgraph</em> that is not already marked in <em>excl_bond_mask</em>.
 # 
 # \param molgraph The molecular graph.
-# \param excl_bond_mask The bit mask of bonds to exclude from rotatable-bond consideration.
+# \param excl_bond_mask The bit mask of bonds to exclude from rotatable bond consideration.
 # \param bond_mask The output bit mask sized to the number of bonds in <em>molgraph</em>.
 # \param het_h_rotors If <tt>True</tt>, rotors involving only heteroatom-bound hydrogens are also counted as rotatable.
 # \param reset If <tt>True</tt>, the output mask is cleared before bits are set.
@@ -88,7 +88,7 @@ def initFixedSubstructurePattern(molgraph: Chem.MolecularGraph, tmplt: Chem.Mole
 def initFixedSubstructureTemplate(molgraph: Chem.MolecularGraph, init_match_expr: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>bond</em> is a link bond between two fragments under the fragment-based conformer-generation heuristics.
+# \brief Tells whether <em>bond</em> is a link bond between two fragments under the fragment-based conformer generation heuristics.
 # 
 # \param bond The bond to test.
 # \param molgraph The parent molecular graph.
@@ -98,7 +98,7 @@ def initFixedSubstructureTemplate(molgraph: Chem.MolecularGraph, init_match_expr
 def isFragmentLinkBond(bond: Chem.Bond, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief Tells whether <em>bond</em> is rotatable under the conformer-generation rotatable-bond heuristics.
+# \brief Tells whether <em>bond</em> is rotatable under the conformer generation rotatable bond heuristics.
 # 
 # \param bond The bond to test.
 # \param molgraph The parent molecular graph.
@@ -114,10 +114,10 @@ def isRotatableBond(bond: Chem.Bond, molgraph: Chem.MolecularGraph, het_h_rotors
 # \param molgraph The molecular graph.
 # \param parameterizer The MMFF94 interaction parameterizer.
 # \param param_data The output interaction-data structure.
-# \param ff_type The MMFF94 force-field variant (see ForceField.MMFF94InteractionParameterizer for valid values).
+# \param ff_type The MMFF94 force field variant (see ForceField.MMFF94InteractionParameterizer for valid values).
 # \param strict If <tt>True</tt>, missing parameters are treated as fatal errors.
-# \param estat_de_const The dielectric constant used in the electrostatic-energy term.
-# \param estat_dist_expo The distance exponent used in the electrostatic-energy term.
+# \param estat_de_const The dielectric constant used in the electrostatic energy term.
+# \param estat_dist_expo The distance exponent used in the electrostatic energy term.
 # 
 # \return A ConfGen.ReturnCode value reporting the outcome of the parameterization.
 # 

@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A single torsion-library rule consisting of a SMARTS-like atom-mapping pattern and a list of
+         * \brief A single torsion library rule consisting of a SMARTS-like atom-mapping pattern and a list of
          *        preferred torsion angles (each with tolerances and a score).
          */
         class CDPL_CONFGEN_API TorsionRule

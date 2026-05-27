@@ -33,7 +33,7 @@ class FileScreeningHitCollector(Boost.Python.instance):
     ##
     # \brief Constructs the <tt>FileScreeningHitCollector</tt> instance.
     # 
-    # \param writer The molecular-graph writer used to output hit molecules.
+    # \param writer The molecular graph writer used to output hit molecules.
     # 
     def __init__(writer: Chem.MolecularGraphWriterBase) -> None: pass
 
@@ -57,14 +57,14 @@ class FileScreeningHitCollector(Boost.Python.instance):
     def assign(collector: FileScreeningHitCollector) -> FileScreeningHitCollector: pass
 
     ##
-    # \brief Specifies the molecular-graph writer used to output hit molecules.
+    # \brief Specifies the molecular graph writer used to output hit molecules.
     # 
     # \param writer The data writer.
     # 
     def setDataWriter(writer: Chem.MolecularGraphWriterBase) -> None: pass
 
     ##
-    # \brief Returns the currently configured molecular-graph writer.
+    # \brief Returns the currently configured molecular graph writer.
     # 
     # \return A reference to the data writer.
     # 

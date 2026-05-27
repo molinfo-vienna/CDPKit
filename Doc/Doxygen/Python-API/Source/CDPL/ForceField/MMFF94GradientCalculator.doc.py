@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Evaluates the total MMFF94 force-field energy and its gradient with respect to the atomic coordinates.
+# \brief Evaluates the total MMFF94 force field energy and its gradient with respect to the atomic coordinates.
 # 
 # The calculator takes a ForceField.MMFF94InteractionData instance and the atom count of the molecule and computes both the total MMFF94 energy and the analytical Cartesian gradient \f$ \partial E / \partial \mathbf{r}_i \f$ for each atom. The per-component energies are retained and made available via the dedicated accessors. A bit mask can be set to mark atoms whose gradient contributions are zeroed, freezing them during an energy minimization.
 # 

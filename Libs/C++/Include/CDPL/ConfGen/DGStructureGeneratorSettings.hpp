@@ -40,18 +40,17 @@ namespace CDPL
     {
 
         /**
-         * \brief Bundle of configuration parameters for ConfGen::DGStructureGenerator, extending ConfGen::DGConstraintGeneratorSettings
-         *        with parameters controlling the embedding optimization loop.
+         * \brief Bundle of configuration parameters for raw coordinates generation via class ConfGen::DGStructureGenerator.
          */
         class CDPL_CONFGEN_API DGStructureGeneratorSettings : public DGConstraintGeneratorSettings
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings instance. */
+            /** \brief A static instance providing configuration parameter default values. */
             static const DGStructureGeneratorSettings DEFAULT;
 
             /**
-             * \brief Constructs the settings instance with default values.
+             * \brief Constructs the \c %DGStructureGeneratorSettings instance with default configuration parameter values.
              */
             DGStructureGeneratorSettings();
 

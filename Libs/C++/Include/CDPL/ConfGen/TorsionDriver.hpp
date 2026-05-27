@@ -145,7 +145,7 @@ namespace CDPL
             const LogMessageCallbackFunction& getLogMessageCallback() const;
 
             /**
-             * \brief Sets up the driver for \a molgraph with the default rotatable-bond perception.
+             * \brief Sets up the driver for \a molgraph with the default rotatable bond perception.
              * \param molgraph The input molecular graph.
              * \return A ConfGen::ReturnCode value reporting the outcome of the setup.
              */
@@ -198,7 +198,7 @@ namespace CDPL
             void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
 
             /**
-             * \brief Returns the number of fragments produced by the rotatable-bond decomposition.
+             * \brief Returns the number of fragments produced by the rotatable bond decomposition.
              * \return The fragment count.
              */
             std::size_t getNumFragments() const;

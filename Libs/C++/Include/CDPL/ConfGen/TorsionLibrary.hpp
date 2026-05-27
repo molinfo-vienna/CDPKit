@@ -45,8 +45,8 @@ namespace CDPL
         /**
          * \brief A hierarchical library of torsion rules organized into categories.
          *
-         * \c %TorsionLibrary extends ConfGen::TorsionCategory with persistence (XML load/save) and provides
-         * static set()/get() accessors for the process-wide default torsion library.
+         * \c %TorsionLibrary extends ConfGen::TorsionCategory with XML load/save methods and provides
+         * static set()/get() accessors for a process-wide default torsion library.
          */
         class CDPL_CONFGEN_API TorsionLibrary : public TorsionCategory
         {
@@ -56,13 +56,13 @@ namespace CDPL
             typedef std::shared_ptr<TorsionLibrary> SharedPointer;
 
             /**
-             * \brief Reads the library content from the input stream \a is in the CDPL XML torsion-library format.
+             * \brief Reads the library content from the input stream \a is in the XML-based CDPL torsion library format.
              * \param is The input stream to read from.
              */
             void load(std::istream& is);
 
             /**
-             * \brief Writes the library content to the output stream \a os in the CDPL XML torsion-library format.
+             * \brief Writes the library content to the output stream \a os in the XML-base CDPL torsion library format.
              * \param os The output stream to write to.
              */
             void save(std::ostream& os) const;
@@ -80,7 +80,7 @@ namespace CDPL
 
             /**
              * \brief Returns the globally accessible default torsion library (created on first access).
-             * \return A \c const reference to the default torsion-library shared pointer.
+             * \return A \c const reference to the default torsion library shared pointer.
              */
             static const SharedPointer& get();
 

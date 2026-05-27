@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Evaluates the total MMFF94 force-field energy of a 3D conformation.
+         * \brief Evaluates the total MMFF94 force field energy of a 3D conformation.
          *
          * The calculator takes a ForceField::MMFF94InteractionData instance (typically produced by
          * ForceField::MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending,

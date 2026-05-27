@@ -41,34 +41,34 @@ namespace CDPL
     {
 
         /**
-         * \brief Bundle of configuration parameters for ConfGen::TorsionDriver.
+         * \brief Bundle of configuration parameters for systematic conformer enumeration via class ConfGen::TorsionDriver.
          */
         class CDPL_CONFGEN_API TorsionDriverSettings
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed TorsionDriverSettings instance. */
+            /** \brief A static instance providing configuration parameter default values. */
             static const TorsionDriverSettings DEFAULT;
 
             /**
-             * \brief Constructs the settings instance with default values.
+             * \brief Constructs the \c %TorsionDriverSettings instance with default configuration parameter values.
              */
             TorsionDriverSettings();
 
             /**
-             * \brief Specifies whether torsion angles around bonds to hetero-atom hydrogens shall be sampled.
-             * \param sample If \c true, hetero-atom-H torsions are included in the driving.
+             * \brief Specifies whether torsions of heteroatom hydrogen rotors shall be sampled.
+             * \param sample If \c true, such torsions are sampled.
              */
             void sampleHeteroAtomHydrogens(bool sample);
 
             /**
-             * \brief Tells whether torsion angles around bonds to hetero-atom hydrogens are sampled.
+             * \brief Tells whether torsions of heteroatom hydrogen rotors are sampled.
              * \return \c true if sampling is enabled, and \c false otherwise.
              */
             bool sampleHeteroAtomHydrogens() const;
 
             /**
-             * \brief Specifies whether additional torsion samples within the tolerance ranges of each rule shall be generated.
+             * \brief Specifies whether additional torsion samples within the tolerance ranges defined by the torsion library entries shall be generated.
              * \param sample If \c true, tolerance-range sampling is enabled.
              */
             void sampleAngleToleranceRanges(bool sample);
@@ -81,48 +81,48 @@ namespace CDPL
 
             /**
              * \brief Specifies whether the generated conformers shall be sorted by ascending energy.
-             * \param order If \c true, the output is sorted by energy.
+             * \param order If \c true, the output conformers are sorted by energy.
              */
             void orderByEnergy(bool order);
 
             /**
              * \brief Tells whether the generated conformers are sorted by ascending energy.
-             * \return \c true if energy ordering is enabled, and \c false otherwise.
+             * \return \c true if conformer energy ordering is enabled, and \c false otherwise.
              */
             bool orderByEnergy() const;
 
             /**
-             * \brief Sets the energy-window size (in kcal/mol) above the global minimum within which conformers are kept.
-             * \param win_size The new energy-window size in kcal/mol.
+             * \brief Sets the energy window size (in kcal/mol) above the found global minimum within which conformers are kept.
+             * \param win_size The new energy window size in kcal/mol.
              */
             void setEnergyWindow(double win_size);
 
             /**
-             * \brief Returns the configured energy-window size.
-             * \return The energy-window size in kcal/mol.
+             * \brief Returns the configured energy window size.
+             * \return The energy window size in kcal/mol.
              */
             double getEnergyWindow() const;
 
             /**
-             * \brief Sets the maximum number of conformers retained in the internal candidate pool.
+             * \brief Sets the maximum number of conformers to keep in the internal candidate pool.
              * \param max_size The new maximum pool size.
              */
             void setMaxPoolSize(std::size_t max_size);
 
             /**
-             * \brief Returns the maximum number of conformers retained in the internal candidate pool.
+             * \brief Returns the maximum number of conformers kept in the internal candidate pool.
              * \return The maximum pool size.
              */
             std::size_t getMaxPoolSize() const;
 
             /**
-             * \brief Sets the force-field type used to score the generated conformers.
+             * \brief Sets the force field type used to score the generated conformers.
              * \param type One of the ConfGen::ForceFieldType values.
              */
             void setForceFieldType(unsigned int type);
 
             /**
-             * \brief Returns the force-field type used to score the generated conformers.
+             * \brief Returns the force field type used to score the generated conformers.
              * \return One of the ConfGen::ForceFieldType values.
              */
             unsigned int getForceFieldType() const;

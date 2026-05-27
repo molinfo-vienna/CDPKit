@@ -52,7 +52,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Distance-geometry-based generator of an initial 3D structure for a molecular graph.
+         * \brief Distance-geometry-based generation of raw 3D structures for molecular graphs.
          *
          * Constraints are produced by an embedded ConfGen::DGConstraintGenerator and used to embed the coordinates
          * via a two-phase Util::DG3DCoordinatesGenerator pipeline. After generation, atom and bond stereo

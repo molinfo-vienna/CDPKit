@@ -66,7 +66,7 @@ namespace CDPL
          *     (by default used only for flexible macrocyclic molecules).
          *
          * Both strategies share a common downstream pipeline of MMFF94-based energy minimization,
-         * RMSD-based clustering and energy-window filtering. Behaviour is controlled by the embedded
+         * RMSD-based clustering and energy window filtering. Behaviour is controlled by the embedded
          * conformer generation settings instance, the configured fragment and torsion libraries and the optional
          * abort/timeout/log callbacks.
          *

@@ -25,7 +25,7 @@
 class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed ConformerGeneratorSettings instance.
+    # \brief Instance providing configuration parameter default values.
     # 
     DEFAULT = _HIDDEN_VALUE_
 
@@ -60,7 +60,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     LARGE_SET_DENSE = _HIDDEN_VALUE_
 
     ##
-    # \brief Constructs the settings instance with default values.
+    # \brief Constructs the <tt>ConformerGeneratorSettings</tt> instance with default configuration parameter values.
     # 
     def __init__() -> None: pass
 
@@ -104,21 +104,21 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getSamplingMode() -> int: pass
 
     ##
-    # \brief Specifies whether torsions of hetero-atom hydrogen rotors shall be sampled.
+    # \brief Specifies whether torsions of heteroatom hydrogen rotors shall be sampled.
     # 
-    # \param sample If <tt>True</tt>, hetero-atom-H torsions are sampled.
+    # \param sample If <tt>True</tt>, such torsions are sampled.
     # 
     def sampleHeteroAtomHydrogens(sample: bool) -> None: pass
 
     ##
-    # \brief Tells whether torsions of hetero-atom hydrogen rotors are sampled.
+    # \brief Tells whether torsions of heteroatom hydrogen rotors are sampled.
     # 
     # \return <tt>True</tt> if sampling is enabled, and <tt>False</tt> otherwise.
     # 
     def sampleHeteroAtomHydrogens() -> bool: pass
 
     ##
-    # \brief Specifies whether additional torsion samples within the tolerance ranges defined by the torsion library shall be generated.
+    # \brief Specifies whether additional torsion samples within the tolerance ranges defined by the torsion library entries shall be generated.
     # 
     # \param sample If <tt>True</tt>, tolerance-range sampling is enabled.
     # 
@@ -188,58 +188,58 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def includeInputCoordinates() -> bool: pass
 
     ##
-    # \brief Sets the energy-window size (in kcal/mol) above the found global minimum within which conformers are kept.
+    # \brief Sets the energy window size (in kcal/mol) above the found global minimum within which conformers are kept.
     # 
-    # \param win_size The new energy-window size in kcal/mol.
+    # \param win_size The new energy window size in kcal/mol.
     # 
     def setEnergyWindow(win_size: float) -> None: pass
 
     ##
-    # \brief Returns the configured energy-window size.
+    # \brief Returns the configured energy window size.
     # 
-    # \return The energy-window size in kcal/mol.
+    # \return The energy window size in kcal/mol.
     # 
     def getEnergyWindow() -> float: pass
 
     ##
-    # \brief Returns the energy-window size that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
+    # \brief Returns the energy window size that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
     # 
     # If a rotatable bond-specific range was registered via addEnergyWindowRange(), the matching value is returned; otherwise the global window from getEnergyWindow() is used.
     # 
     # \param num_rot_bonds The rotatable bond count.
     # 
-    # \return The energy-window size in kcal/mol. 
+    # \return The energy window size in kcal/mol. 
     # 
     # \since 1.1
     # 
     def getEnergyWindow(num_rot_bonds: int) -> float: pass
 
     ##
-    # \brief Removes all registered rotatable bond count-dependent energy-window overrides.
+    # \brief Removes all registered rotatable bond count-dependent energy window overrides.
     # 
     # \since 1.1
     # 
     def clearEnergyWindowRanges() -> None: pass
 
     ##
-    # \brief Registers an energy-window override that applies up to and including <em>num_rot_bonds</em> rotatable bonds.
+    # \brief Registers an energy window override that applies up to and including <em>num_rot_bonds</em> rotatable bonds.
     # 
     # \param num_rot_bonds The upper-bound rotatable bond count to which <em>win_size</em> applies.
-    # \param win_size The energy-window size (in kcal/mol).
+    # \param win_size The energy window size (in kcal/mol).
     # 
     # \since 1.1
     # 
     def addEnergyWindowRange(num_rot_bonds: int, win_size: float) -> None: pass
 
     ##
-    # \brief Sets the maximum number of conformers in the internal candidate pool.
+    # \brief Sets the maximum number of conformers to keep in the internal candidate pool.
     # 
     # \param max_size The new maximum pool size.
     # 
     def setMaxPoolSize(max_size: int) -> None: pass
 
     ##
-    # \brief Returns the maximum number of conformers in the internal candidate pool.
+    # \brief Returns the maximum number of conformers kept in the internal candidate pool.
     # 
     # \return The maximum pool size.
     # 
@@ -264,14 +264,14 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getMaxRotatableBondCount() -> int: pass
 
     ##
-    # \brief Sets the maximum allowed wall-clock processing time per molecule.
+    # \brief Sets the maximum allowed wall clock processing time per molecule.
     # 
     # \param mil_secs The new time limit in milliseconds (zero disables the limit).
     # 
     def setTimeout(mil_secs: int) -> None: pass
 
     ##
-    # \brief Returns the configured per-molecule wall-clock time limit.
+    # \brief Returns the configured per-molecule wall clock time limit.
     # 
     # \return The time limit in milliseconds (zero if disabled).
     # 
@@ -477,14 +477,14 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Sets the cycle size (in trial conformations) at which the stochastic sampler tests for convergence.
     # 
-    # \param size The new convergence-check cycle size.
+    # \param size The new convergence check cycle size.
     # 
     def setConvergenceCheckCycleSize(size: int) -> None: pass
 
     ##
     # \brief Returns the cycle size at which the stochastic sampler tests for convergence.
     # 
-    # \return The convergence-check cycle size.
+    # \return The convergence check cycle size.
     # 
     def getConvergenceCheckCycleSize() -> int: pass
 
@@ -495,7 +495,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
-    # \brief Returns the macrocycle rotatable bond count threshold.
+    # \brief Returns the flexible macrocycle rotatable bond count threshold.
     # 
     # \return The threshold.
     # 

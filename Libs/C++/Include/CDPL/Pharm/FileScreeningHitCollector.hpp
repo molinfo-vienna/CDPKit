@@ -56,23 +56,23 @@ namespace CDPL
         {
 
           public:
-            /** \brief Type of the underlying molecular-graph data writer. */
+            /** \brief Type of the underlying molecular graph data writer. */
             typedef Base::DataWriter<Chem::MolecularGraph> MolecularGraphWriter;
 
             /**
              * \brief Constructs the \c %FileScreeningHitCollector instance.
-             * \param writer The molecular-graph writer used to output hit molecules.
+             * \param writer The molecular graph writer used to output hit molecules.
              */
             FileScreeningHitCollector(MolecularGraphWriter& writer);
 
             /**
-             * \brief Specifies the molecular-graph writer used to output hit molecules.
+             * \brief Specifies the molecular graph writer used to output hit molecules.
              * \param writer The data writer.
              */
             void setDataWriter(MolecularGraphWriter& writer);
 
             /**
-             * \brief Returns the currently configured molecular-graph writer.
+             * \brief Returns the currently configured molecular graph writer.
              * \return A reference to the data writer.
              */
             MolecularGraphWriter& getDataWriter() const;

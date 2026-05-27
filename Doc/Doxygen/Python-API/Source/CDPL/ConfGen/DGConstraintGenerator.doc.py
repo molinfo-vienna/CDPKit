@@ -22,7 +22,7 @@
 ##
 # \brief Constructs geometric constraints (distance, planarity, volume) for distance-geometry-based 3D structure generation.
 # 
-# Given a molecular graph (and optionally an MMFF94 force-field interaction parameter set) the generator derives ideal bond lengths, bond angles and 1,4-distances, identifies atom and bond stereo centers and emits the corresponding constraints into a Util.DG3DCoordinatesGenerator. The constraint set is used by ConfGen.DGStructureGenerator to produce a 3D embedding of the molecular graph.
+# Given a molecular graph (and optionally an MMFF94 force field interaction parameter set) the generator derives ideal bond lengths, bond angles and 1,4-distances, identifies atom and bond stereo centers and emits the corresponding constraints into a Util.DG3DCoordinatesGenerator. The constraint set is used by ConfGen.DGStructureGenerator to produce a 3D embedding of the molecular graph.
 # 
 class DGConstraintGenerator(Boost.Python.instance):
 

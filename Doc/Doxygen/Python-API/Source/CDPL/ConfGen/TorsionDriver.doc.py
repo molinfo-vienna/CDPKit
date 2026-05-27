@@ -61,7 +61,7 @@ class TorsionDriver(Boost.Python.instance):
     def addTorsionLibrary(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief Sets up the driver for <em>molgraph</em> with the default rotatable-bond perception.
+    # \brief Sets up the driver for <em>molgraph</em> with the default rotatable bond perception.
     # 
     # \param molgraph The input molecular graph.
     # 

@@ -22,7 +22,7 @@
 ##
 # \brief A hierarchical library of torsion rules organized into categories.
 # 
-# <tt>TorsionLibrary</tt> extends ConfGen.TorsionCategory with persistence (XML load/save) and provides static set()/get() accessors for the process-wide default torsion library.
+# <tt>TorsionLibrary</tt> extends ConfGen.TorsionCategory with XML load/save methods and provides static set()/get() accessors for a process-wide default torsion library.
 # 
 class TorsionLibrary(TorsionCategory):
 
@@ -38,7 +38,7 @@ class TorsionLibrary(TorsionCategory):
     def __init__(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief Reads the library content from the input stream <em>is</em> in the CDPL XML torsion-library format.
+    # \brief Reads the library content from the input stream <em>is</em> in the XML-based CDPL torsion library format.
     # 
     # \param is The input stream to read from.
     # 
@@ -50,7 +50,7 @@ class TorsionLibrary(TorsionCategory):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Writes the library content to the output stream <em>os</em> in the CDPL XML torsion-library format.
+    # \brief Writes the library content to the output stream <em>os</em> in the XML-base CDPL torsion library format.
     # 
     # \param os The output stream to write to.
     # 
@@ -73,7 +73,7 @@ class TorsionLibrary(TorsionCategory):
     ##
     # \brief Returns the globally accessible default torsion library (created on first access).
     # 
-    # \return A reference to the default torsion-library shared reference.
+    # \return A reference to the default torsion library shared reference.
     # 
     @staticmethod
     def get(: ) -> TorsionLibrary: pass

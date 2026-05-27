@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Bundle of configuration parameters for ConfGen.FragmentConformerGenerator.
+# \brief Bundle of configuration parameters for fragment conformer ensemble generation via class ConfGen.FragmentConformerGenerator.
 # 
 class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief Per-fragment-class settings (separate parameters for chain, small-ring and macrocycle fragments).
+    # \brief Per-fragment-class settings (separate parameters for chain, small ring system and macrocycle fragments).
     # 
     class FragmentSettings(Boost.Python.instance):
 
@@ -57,56 +57,56 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         ##
         # \brief Sets the maximum number of trial conformers sampled per fragment.
         # 
-        # \param max_num The new sampled-conformer limit.
+        # \param max_num The new num. conformers upper limit.
         # 
         def setMaxNumSampledConformers(max_num: int) -> None: pass
 
         ##
         # \brief Returns the maximum number of trial conformers sampled per fragment.
         # 
-        # \return The sampled-conformer limit.
+        # \return The current num. conformers upper limit.
         # 
         def getMaxNumSampledConformers() -> int: pass
 
         ##
         # \brief Sets the minimum number of trial conformers sampled per fragment before convergence is tested.
         # 
-        # \param min_num The new minimum sampled-conformer count.
+        # \param min_num The new num. conformers lower limit.
         # 
         def setMinNumSampledConformers(min_num: int) -> None: pass
 
         ##
         # \brief Returns the minimum number of trial conformers sampled per fragment.
         # 
-        # \return The minimum sampled-conformer count.
+        # \return The current num. conformers lower limit.
         # 
         def getMinNumSampledConformers() -> int: pass
 
         ##
-        # \brief Sets the per-fragment wall-clock processing time limit.
+        # \brief Sets the per-fragment wall clock processing time limit.
         # 
         # \param mil_secs The new time limit in milliseconds (zero disables the limit).
         # 
         def setTimeout(mil_secs: int) -> None: pass
 
         ##
-        # \brief Returns the per-fragment wall-clock processing time limit.
+        # \brief Returns the per-fragment wall clock processing time limit.
         # 
         # \return The time limit in milliseconds (zero if disabled).
         # 
         def getTimeout() -> int: pass
 
         ##
-        # \brief Sets the energy-window size (in kcal/mol) above the fragment-conformer minimum within which fragment conformers are kept.
+        # \brief Sets the energy window size (in kcal/mol) above the fragment conformer minimum within which fragment conformers are kept.
         # 
-        # \param win_size The new energy-window size in kcal/mol.
+        # \param win_size The new energy window size in kcal/mol.
         # 
         def setEnergyWindow(win_size: float) -> None: pass
 
         ##
-        # \brief Returns the per-fragment energy-window size.
+        # \brief Returns the per-fragment energy window size.
         # 
-        # \return The energy-window size in kcal/mol.
+        # \return The energy window size in kcal/mol.
         # 
         def getEnergyWindow() -> float: pass
 
@@ -125,7 +125,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         def getMaxNumOutputConformers() -> int: pass
 
         ##
-        # \brief Sets the minimum pairwise heavy-atom RMSD that fragment conformers in the output set must keep.
+        # \brief Sets the minimum pairwise heavy-atom RMSD that fragment conformers in the output set must have.
         # 
         # \param min_rmsd The new minimum RMSD threshold (in &Aring;).
         # 
@@ -153,7 +153,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         minRMSD = property(getMinRMSD, setMinRMSD)
 
     ##
-    # \brief A static instance providing settings default values.
+    # \brief A static instance providing configuration parameter default values.
     # 
     DEFAULT = _HIDDEN_VALUE_
 
@@ -168,7 +168,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     THOROUGH = _HIDDEN_VALUE_
 
     ##
-    # \brief Constructs the settings instance with default values.
+    # \brief Constructs the <tt>%</tt> FragmentConformerGeneratorSettings instance with default configuration parameter values.
     # 
     def __init__() -> None: pass
 
@@ -212,14 +212,14 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def preserveInputBondingGeometries() -> bool: pass
 
     ##
-    # \brief Sets the force-field type used for fragment-conformer minimization.
+    # \brief Sets the force field type used for fragment conformer minimization.
     # 
     # \param type One of the ConfGen.ForceFieldType values.
     # 
     def setForceFieldType(type: int) -> None: pass
 
     ##
-    # \brief Returns the force-field type used for fragment-conformer minimization.
+    # \brief Returns the force field type used for fragment conformer minimization.
     # 
     # \return One of the ConfGen.ForceFieldType values.
     # 
@@ -280,7 +280,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def getMaxNumRefinementIterations() -> int: pass
 
     ##
-    # \brief Sets the gradient-norm threshold at which fragment-conformer refinement is considered converged.
+    # \brief Sets the gradient-norm threshold at which fragment conformer refinement is considered converged.
     # 
     # \param grad_norm The new stop-gradient threshold.
     # 
@@ -300,9 +300,9 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
-    # \brief Returns the macrocycle rotatable-bond count threshold.
+    # \brief Returns the flexible macrocycle rotatable bond count threshold.
     # 
-    # \return The threshold.
+    # \return The current threshold.
     # 
     def getMacrocycleRotorBondCountThreshold() -> int: pass
 
@@ -314,7 +314,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def getChainSettings() -> FragmentSettings: pass
 
     ##
-    # \brief Returns a reference to the per-fragment-class settings used for macrocyclic ring systems.
+    # \brief Returns a reference to the per-fragment-class settings used for flexible macrocyclic ring systems.
     # 
     # \return A reference to the macrocycle settings.
     # 
@@ -323,7 +323,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns a reference to the per-fragment-class settings used for small ring systems.
     # 
-    # \return A reference to the small-ring-system settings.
+    # \return A reference to the small ring system settings.
     # 
     def getSmallRingSystemSettings() -> FragmentSettings: pass
 

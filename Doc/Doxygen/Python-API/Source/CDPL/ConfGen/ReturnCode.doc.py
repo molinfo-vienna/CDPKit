@@ -35,7 +35,7 @@ class ReturnCode(Boost.Python.instance):
     UNINITIALIZED = 1
 
     ##
-    # \brief The operation was terminated because the configured wall-clock time limit was exceeded.
+    # \brief The operation was terminated because the configured wall clock time limit was exceeded.
     # 
     TIMEOUT = 2
 
@@ -45,7 +45,7 @@ class ReturnCode(Boost.Python.instance):
     ABORTED = 3
 
     ##
-    # \brief The MMFF94 force-field parameterization step failed (typically due to missing/ambiguous parameters under strict mode).
+    # \brief The MMFF94 force field parameterization step failed (typically due to missing/ambiguous parameters under strict mode).
     # 
     FORCEFIELD_SETUP_FAILED = 4
 
@@ -80,7 +80,7 @@ class ReturnCode(Boost.Python.instance):
     TORSION_DRIVING_FAILED = 10
 
     ##
-    # \brief The overall conformer-generation pipeline failed.
+    # \brief The overall conformer generation pipeline failed.
     # 
     CONF_GEN_FAILED = 11
 
@@ -90,7 +90,7 @@ class ReturnCode(Boost.Python.instance):
     TOO_MUCH_SYMMETRY = 12
 
     ##
-    # \brief The input molecule's rotatable-bond count exceeds the configured maximum.
+    # \brief The input molecule's rotatable bond count exceeds the configured maximum.
     # 
     MAX_ROT_BOND_COUNT_EXCEEDED = 13
 

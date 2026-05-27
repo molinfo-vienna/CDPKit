@@ -46,8 +46,9 @@ namespace CDPL
     {
 
         /**
-         * \brief A node of a hierarchical torsion library: a named, optionally pattern-matched category that holds
-         *        child categories and torsion rules.
+         * \brief Represents a node of a hierarchical torsion library.
+         *
+         * Nodes are named, central bond specific categories that can hold child categories as well as torsion rules.
          */
         class CDPL_CONFGEN_API TorsionCategory
         {
@@ -100,37 +101,37 @@ namespace CDPL
             void setMatchPatternString(const std::string& ptn_str);
 
             /**
-             * \brief Returns the molecular-graph pattern used to perceive bonds belonging to this category.
+             * \brief Returns the molecular graph pattern used to perceive bonds belonging to this category.
              * \return A \c const reference to the pattern smart pointer.
              */
             const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
             /**
-             * \brief Sets the molecular-graph pattern used to perceive bonds belonging to this category.
-             * \param ptn The new molecular-graph pattern.
+             * \brief Sets the molecular graph pattern used to perceive bonds belonging to this category.
+             * \param ptn The new molecular graph pattern.
              */
             void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
 
             /**
-             * \brief Returns the atom type of the first central-bond atom required by this category.
+             * \brief Returns the atom type of the first central bond atom required by this category.
              * \return The atom type (Chem::AtomType value).
              */
             unsigned int getBondAtom1Type() const;
 
             /**
-             * \brief Sets the atom type of the first central-bond atom required by this category.
+             * \brief Sets the atom type of the first central bond atom required by this category.
              * \param type The new atom type (Chem::AtomType value).
              */
             void setBondAtom1Type(unsigned int type);
 
             /**
-             * \brief Returns the atom type of the second central-bond atom required by this category.
+             * \brief Returns the atom type of the second central bond atom required by this category.
              * \return The atom type (Chem::AtomType value).
              */
             unsigned int getBondAtom2Type() const;
 
             /**
-             * \brief Sets the atom type of the second central-bond atom required by this category.
+             * \brief Sets the atom type of the second central bond atom required by this category.
              * \param type The new atom type (Chem::AtomType value).
              */
             void setBondAtom2Type(unsigned int type);
@@ -164,7 +165,7 @@ namespace CDPL
             /**
              * \brief Returns the number of child categories.
              * \param recursive If \c true, the count includes all descendant categories.
-             * \return The child-category count.
+             * \return The child category count.
              */
             std::size_t getNumCategories(bool recursive = false) const;
 
@@ -177,7 +178,7 @@ namespace CDPL
 
             /**
              * \brief Returns the child category at index \a idx.
-             * \param idx The zero-based child-category index.
+             * \param idx The zero-based child category index.
              * \return A reference to the child category.
              * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
              */
@@ -185,7 +186,7 @@ namespace CDPL
 
             /**
              * \brief Returns the child category at index \a idx.
-             * \param idx The zero-based child-category index.
+             * \param idx The zero-based child category index.
              * \return A \c const reference to the child category.
              * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
              */
@@ -209,7 +210,7 @@ namespace CDPL
 
             /**
              * \brief Removes the child category at index \a idx.
-             * \param idx The zero-based child-category index.
+             * \param idx The zero-based child category index.
              * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
              */
             void removeCategory(std::size_t idx);

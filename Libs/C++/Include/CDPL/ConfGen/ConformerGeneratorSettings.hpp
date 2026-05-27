@@ -50,7 +50,7 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed ConformerGeneratorSettings instance. */
+            /** \brief Instance providing configuration parameter default values. */
             static const ConformerGeneratorSettings DEFAULT;
             /** \brief Preset producing a small, diversity-optimized conformer ensemble. */
             static const ConformerGeneratorSettings SMALL_SET_DIVERSE;
@@ -66,7 +66,7 @@ namespace CDPL
             static const ConformerGeneratorSettings LARGE_SET_DENSE;
 
             /**
-             * \brief Constructs the settings instance with default values.
+             * \brief Constructs the \c %ConformerGeneratorSettings instance with default configuration parameter values.
              */
             ConformerGeneratorSettings();
 
@@ -83,19 +83,19 @@ namespace CDPL
             unsigned int getSamplingMode() const;
 
             /**
-             * \brief Specifies whether torsions of hetero-atom hydrogen rotors shall be sampled.
-             * \param sample If \c true, hetero-atom-H torsions are sampled.
+             * \brief Specifies whether torsions of heteroatom hydrogen rotors shall be sampled.
+             * \param sample If \c true, such torsions are sampled.
              */
             void sampleHeteroAtomHydrogens(bool sample);
 
             /**
-             * \brief Tells whether torsions of hetero-atom hydrogen rotors are sampled.
+             * \brief Tells whether torsions of heteroatom hydrogen rotors are sampled.
              * \return \c true if sampling is enabled, and \c false otherwise.
              */
             bool sampleHeteroAtomHydrogens() const;
 
             /**
-             * \brief Specifies whether additional torsion samples within the tolerance ranges defined by the torsion library shall be generated.
+             * \brief Specifies whether additional torsion samples within the tolerance ranges defined by the torsion library entries shall be generated.
              * \param sample If \c true, tolerance-range sampling is enabled.
              */
             void sampleAngleToleranceRanges(bool sample);
@@ -155,51 +155,51 @@ namespace CDPL
             bool includeInputCoordinates() const;
 
             /**
-             * \brief Sets the energy-window size (in kcal/mol) above the found global minimum within which conformers are kept.
-             * \param win_size The new energy-window size in kcal/mol.
+             * \brief Sets the energy window size (in kcal/mol) above the found global minimum within which conformers are kept.
+             * \param win_size The new energy window size in kcal/mol.
              */
             void setEnergyWindow(double win_size);
 
             /**
-             * \brief Returns the configured energy-window size.
-             * \return The energy-window size in kcal/mol.
+             * \brief Returns the configured energy window size.
+             * \return The energy window size in kcal/mol.
              */
             double getEnergyWindow() const;
 
             /**
-             * \brief Returns the energy-window size that applies for molecules with \a num_rot_bonds rotatable bonds.
+             * \brief Returns the energy window size that applies for molecules with \a num_rot_bonds rotatable bonds.
              *
              * If a rotatable bond-specific range was registered via addEnergyWindowRange(), the matching value
              * is returned; otherwise the global window from getEnergyWindow() is used.
              *
              * \param num_rot_bonds The rotatable bond count.
-             * \return The energy-window size in kcal/mol.
+             * \return The energy window size in kcal/mol.
              * \since 1.1
              */
             double getEnergyWindow(std::size_t num_rot_bonds) const;
 
             /**
-             * \brief Removes all registered rotatable bond count-dependent energy-window overrides.
+             * \brief Removes all registered rotatable bond count-dependent energy window overrides.
              * \since 1.1
              */
             void clearEnergyWindowRanges();
 
             /**
-             * \brief Registers an energy-window override that applies up to and including \a num_rot_bonds rotatable bonds.
+             * \brief Registers an energy window override that applies up to and including \a num_rot_bonds rotatable bonds.
              * \param num_rot_bonds The upper-bound rotatable bond count to which \a win_size applies.
-             * \param win_size The energy-window size (in kcal/mol).
+             * \param win_size The energy window size (in kcal/mol).
              * \since 1.1
              */
             void addEnergyWindowRange(std::size_t num_rot_bonds, double win_size);
 
             /**
-             * \brief Sets the maximum number of conformers in the internal candidate pool.
+             * \brief Sets the maximum number of conformers to keep in the internal candidate pool.
              * \param max_size The new maximum pool size.
              */
             void setMaxPoolSize(std::size_t max_size);
 
             /**
-             * \brief Returns the maximum number of conformers in the internal candidate pool.
+             * \brief Returns the maximum number of conformers kept in the internal candidate pool.
              * \return The maximum pool size.
              */
             std::size_t getMaxPoolSize() const;
@@ -219,13 +219,13 @@ namespace CDPL
             long getMaxRotatableBondCount() const;
 
             /**
-             * \brief Sets the maximum allowed wall-clock processing time per molecule.
+             * \brief Sets the maximum allowed wall clock processing time per molecule.
              * \param mil_secs The new time limit in milliseconds (zero disables the limit).
              */
             void setTimeout(std::size_t mil_secs);
 
             /**
-             * \brief Returns the configured per-molecule wall-clock time limit.
+             * \brief Returns the configured per-molecule wall clock time limit.
              * \return The time limit in milliseconds (zero if disabled).
              */
             std::size_t getTimeout() const;
@@ -405,24 +405,24 @@ namespace CDPL
 
             /**
              * \brief Sets the cycle size (in trial conformations) at which the stochastic sampler tests for convergence.
-             * \param size The new convergence-check cycle size.
+             * \param size The new convergence check cycle size.
              */
             void setConvergenceCheckCycleSize(std::size_t size);
 
             /**
              * \brief Returns the cycle size at which the stochastic sampler tests for convergence.
-             * \return The convergence-check cycle size.
+             * \return The convergence check cycle size.
              */
             std::size_t getConvergenceCheckCycleSize() const;
 
             /**
              * \brief Sets the minimum number of rotatable bonds a ring must contain to be considered as a flexible macrocycle.
-             * \param min_count The new macrocycle rotatable bond count threshold.
+             * \param min_count The new flexible macrocycle rotatable bond count threshold.
              */
             void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
             /**
-             * \brief Returns the macrocycle rotatable bond count threshold.
+             * \brief Returns the flexible macrocycle rotatable bond count threshold.
              * \return The threshold.
              */
             std::size_t getMacrocycleRotorBondCountThreshold() const;

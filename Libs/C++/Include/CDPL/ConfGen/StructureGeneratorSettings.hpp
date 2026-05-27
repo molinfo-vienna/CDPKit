@@ -42,34 +42,34 @@ namespace CDPL
     {
 
         /**
-         * \brief Bundle of configuration parameters for ConfGen::StructureGenerator.
+         * \brief Bundle of configuration parameters for single 3D structure generation via class ConfGen::StructureGenerator.
          */
         class CDPL_CONFGEN_API StructureGeneratorSettings
         {
 
           public:
-            /** \brief A static instance providing settings default values. */
+            /** \brief A static instance providing configuration parameter default values. */
             static const StructureGeneratorSettings DEFAULT;
 
             /**
-             * \brief Constructs the \c %StructureGeneratorSettings instance with default values.
+             * \brief Constructs the \c %StructureGeneratorSettings instance with default configuration parameter values.
              */
             StructureGeneratorSettings();
 
             /**
-             * \brief Sets the structure-generation mode (see ConfGen::StructureGenerationMode).
+             * \brief Sets the structure generation mode (see ConfGen::StructureGenerationMode).
              * \param mode The new generation mode.
              */
             void setGenerationMode(unsigned int mode);
 
             /**
-             * \brief Returns the currently configured structure-generation mode.
-             * \return The ConfGen::StructureGenerationMode identifier.
+             * \brief Returns the currently configured structure generation mode.
+             * \return The current generation mode.
              */
             unsigned int getGenerationMode() const;
 
             /**
-             * \brief Specifies whether 3D coordinates should be generated from scratch (vs. starting from existing input coordinates).
+             * \brief Specifies whether 3D coordinates should be generated from scratch (vs. reusing existing input coordinates).
              * \param generate \c true to generate coordinates from scratch, and \c false to keep existing input coordinates.
              */
             void generateCoordinatesFromScratch(bool generate);
@@ -93,7 +93,7 @@ namespace CDPL
             bool sampleAngleToleranceRanges() const;
 
             /**
-             * \brief Sets the timeout for the structure-generation pipeline.
+             * \brief Sets the timeout for the structure generation pipeline.
              * \param mil_secs The new timeout in milliseconds (\e 0 disables the timeout).
              */
             void setTimeout(std::size_t mil_secs);
@@ -105,43 +105,43 @@ namespace CDPL
             std::size_t getTimeout() const;
 
             /**
-             * \brief Sets the MMFF94 force-field variant used for fragment-mode structure generation (see ForceField::MMFF94 variants).
-             * \param type The new force-field type.
+             * \brief Sets the MMFF94 force field variant used for fragment-mode structure generation (see ForceField::MMFF94 variants).
+             * \param type The new force field type.
              */
             void setFragmentModeForceFieldType(unsigned int type);
 
             /**
-             * \brief Returns the currently configured fragment-mode force-field type.
-             * \return The force-field type identifier.
+             * \brief Returns the currently configured fragment-mode force field type.
+             * \return The current force field type.
              */
             unsigned int getFragmentModeForceFieldType() const;
 
             /**
-             * \brief Sets the MMFF94 force-field variant used for distance-geometry-mode structure generation.
-             * \param type The new force-field type.
+             * \brief Sets the MMFF94 force field variant used for DG-mode structure generation.
+             * \param type The new force field type.
              */
             void setDGModeForceFieldType(unsigned int type);
 
             /**
-             * \brief Returns the currently configured DG-mode force-field type.
-             * \return The force-field type identifier.
+             * \brief Returns the currently configured DG-mode force field type.
+             * \return The force field type identifier.
              */
             unsigned int getDGModeForceFieldType() const;
 
             /**
-             * \brief Specifies whether force-field parameterization should be strict (missing parameters cause failure).
+             * \brief Specifies whether force field parameterization should be strict (missing parameters cause failure).
              * \param strict \c true to enable strict parameterization, and \c false to tolerate missing parameters.
              */
             void strictForceFieldParameterization(bool strict);
 
             /**
-             * \brief Tells whether force-field parameterization is strict.
+             * \brief Tells whether force field parameterization is strict.
              * \return \c true if strict parameterization is enabled, and \c false otherwise.
              */
             bool strictForceFieldParameterization() const;
 
             /**
-             * \brief Sets the dielectric constant used in the electrostatic-energy term.
+             * \brief Sets the dielectric constant used in the electrostatic energy term.
              * \param de_const The new dielectric constant.
              */
             void setDielectricConstant(double de_const);
@@ -153,7 +153,7 @@ namespace CDPL
             double getDielectricConstant() const;
 
             /**
-             * \brief Sets the distance exponent used in the electrostatic-energy term.
+             * \brief Sets the distance exponent used in the electrostatic energy term.
              * \param exponent The new distance exponent.
              */
             void setDistanceExponent(double exponent);
@@ -165,7 +165,7 @@ namespace CDPL
             double getDistanceExponent() const;
 
             /**
-             * \brief Sets the maximum number of iterations of the force-field-based coordinate refinement step.
+             * \brief Sets the maximum number of iterations of the force field-based coordinate refinement step.
              * \param max_iter The new maximum number of iterations.
              */
             void setMaxNumRefinementIterations(std::size_t max_iter);
@@ -177,7 +177,7 @@ namespace CDPL
             std::size_t getMaxNumRefinementIterations() const;
 
             /**
-             * \brief Sets the convergence tolerance of the force-field-based coordinate refinement step.
+             * \brief Sets the convergence tolerance of the force field-based coordinate refinement step.
              * \param tol The new refinement tolerance.
              */
             void setRefinementTolerance(double tol);
@@ -202,24 +202,24 @@ namespace CDPL
 
             /**
              * \brief Sets the cycle size for the convergence check of the structure-sampling loop.
-             * \param size The new convergence-check cycle size.
+             * \param size The new convergence check cycle size.
              */
             void setConvergenceCheckCycleSize(std::size_t size);
 
             /**
-             * \brief Returns the currently configured convergence-check cycle size.
-             * \return The convergence-check cycle size.
+             * \brief Returns the currently configured convergence check cycle size.
+             * \return The convergence check cycle size.
              */
             std::size_t getConvergenceCheckCycleSize() const;
 
             /**
-             * \brief Sets the minimum number of rotatable bonds in a macrocycle for it to be considered macrocyclic.
+             * \brief Sets the minimum number of rotatable bonds in a macrocycle for it to be considered as flexible.
              * \param min_count The new threshold.
              */
             void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
             /**
-             * \brief Returns the currently configured macrocycle rotor-bond-count threshold.
+             * \brief Returns the currently configured flexible macrocycle rotor bond count threshold.
              * \return The threshold.
              */
             std::size_t getMacrocycleRotorBondCountThreshold() const;

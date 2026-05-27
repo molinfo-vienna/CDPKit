@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bundle of configuration parameters for ConfGen.TorsionDriver.
+# \brief Bundle of configuration parameters for systematic conformer enumeration via class ConfGen.TorsionDriver.
 # 
 class TorsionDriverSettings(Boost.Python.instance):
 
     ##
-    # \brief Default settings used by a freshly-constructed TorsionDriverSettings instance.
+    # \brief A static instance providing configuration parameter default values.
     # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Constructs the settings instance with default values.
+    # \brief Constructs the <tt>TorsionDriverSettings</tt> instance with default configuration parameter values.
     # 
     def __init__() -> None: pass
 
@@ -60,21 +60,21 @@ class TorsionDriverSettings(Boost.Python.instance):
     def assign(settings: TorsionDriverSettings) -> TorsionDriverSettings: pass
 
     ##
-    # \brief Specifies whether torsion angles around bonds to hetero-atom hydrogens shall be sampled.
+    # \brief Specifies whether torsions of heteroatom hydrogen rotors shall be sampled.
     # 
-    # \param sample If <tt>True</tt>, hetero-atom-H torsions are included in the driving.
+    # \param sample If <tt>True</tt>, such torsions are sampled.
     # 
     def sampleHeteroAtomHydrogens(sample: bool) -> None: pass
 
     ##
-    # \brief Tells whether torsion angles around bonds to hetero-atom hydrogens are sampled.
+    # \brief Tells whether torsions of heteroatom hydrogen rotors are sampled.
     # 
     # \return <tt>True</tt> if sampling is enabled, and <tt>False</tt> otherwise.
     # 
     def sampleHeteroAtomHydrogens() -> bool: pass
 
     ##
-    # \brief Specifies whether additional torsion samples within the tolerance ranges of each rule shall be generated.
+    # \brief Specifies whether additional torsion samples within the tolerance ranges defined by the torsion library entries shall be generated.
     # 
     # \param sample If <tt>True</tt>, tolerance-range sampling is enabled.
     # 
@@ -90,54 +90,54 @@ class TorsionDriverSettings(Boost.Python.instance):
     ##
     # \brief Specifies whether the generated conformers shall be sorted by ascending energy.
     # 
-    # \param order If <tt>True</tt>, the output is sorted by energy.
+    # \param order If <tt>True</tt>, the output conformers are sorted by energy.
     # 
     def orderByEnergy(order: bool) -> None: pass
 
     ##
     # \brief Tells whether the generated conformers are sorted by ascending energy.
     # 
-    # \return <tt>True</tt> if energy ordering is enabled, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if conformer energy ordering is enabled, and <tt>False</tt> otherwise.
     # 
     def orderByEnergy() -> bool: pass
 
     ##
-    # \brief Sets the energy-window size (in kcal/mol) above the global minimum within which conformers are kept.
+    # \brief Sets the energy window size (in kcal/mol) above the found global minimum within which conformers are kept.
     # 
-    # \param win_size The new energy-window size in kcal/mol.
+    # \param win_size The new energy window size in kcal/mol.
     # 
     def setEnergyWindow(win_size: float) -> None: pass
 
     ##
-    # \brief Returns the configured energy-window size.
+    # \brief Returns the configured energy window size.
     # 
-    # \return The energy-window size in kcal/mol.
+    # \return The energy window size in kcal/mol.
     # 
     def getEnergyWindow() -> float: pass
 
     ##
-    # \brief Sets the maximum number of conformers retained in the internal candidate pool.
+    # \brief Sets the maximum number of conformers to keep in the internal candidate pool.
     # 
     # \param max_size The new maximum pool size.
     # 
     def setMaxPoolSize(max_size: int) -> None: pass
 
     ##
-    # \brief Returns the maximum number of conformers retained in the internal candidate pool.
+    # \brief Returns the maximum number of conformers kept in the internal candidate pool.
     # 
     # \return The maximum pool size.
     # 
     def getMaxPoolSize() -> int: pass
 
     ##
-    # \brief Sets the force-field type used to score the generated conformers.
+    # \brief Sets the force field type used to score the generated conformers.
     # 
     # \param type One of the ConfGen.ForceFieldType values.
     # 
     def setForceFieldType(type: int) -> None: pass
 
     ##
-    # \brief Returns the force-field type used to score the generated conformers.
+    # \brief Returns the force field type used to score the generated conformers.
     # 
     # \return One of the ConfGen.ForceFieldType values.
     # 

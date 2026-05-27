@@ -39,20 +39,23 @@ namespace CDPL
     {
 
         /**
-         * \brief Bundle of configuration parameters for ConfGen::DGConstraintGenerator (which builds the distance/volume constraints used for distance-geometry coordinate generation).
+         * \brief Bundle of configuration parameters for distance-geometry constraint generation via class ConfGen::DGConstraintGenerator.
          */
         class CDPL_CONFGEN_API DGConstraintGeneratorSettings
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed DGConstraintGeneratorSettings instance. */
+            /** \brief A static instance providing configuration parameter default values. */
             static const DGConstraintGeneratorSettings DEFAULT;
 
             /**
-             * \brief Constructs the settings instance with default values.
+             * \brief Constructs the \c %DGConstraintGeneratorSettings instance with default configuration parameter values.
              */
             DGConstraintGeneratorSettings();
 
+            /**
+             * \brief Destructor.
+             */
             virtual ~DGConstraintGeneratorSettings() {}
 
             /**
@@ -68,25 +71,25 @@ namespace CDPL
             bool excludeHydrogens() const;
 
             /**
-             * \brief Specifies whether atom-stereo-center configurations shall be enforced by volume constraints.
+             * \brief Specifies whether atom stereo center configurations shall be enforced by volume constraints.
              * \param regard If \c true, atom-configuration constraints are added.
              */
             void regardAtomConfiguration(bool regard);
 
             /**
-             * \brief Tells whether atom-stereo-center configurations are enforced.
+             * \brief Tells whether atom stereo center configurations are enforced.
              * \return \c true if atom-configuration constraints are added, and \c false otherwise.
              */
             bool regardAtomConfiguration() const;
 
             /**
-             * \brief Specifies whether bond-stereo-center configurations (cis/trans) shall be enforced.
+             * \brief Specifies whether bond stereo center configurations (cis/trans) shall be enforced.
              * \param regard If \c true, bond-configuration constraints are added.
              */
             void regardBondConfiguration(bool regard);
 
             /**
-             * \brief Tells whether bond-stereo-center configurations are enforced.
+             * \brief Tells whether bond stereo center configurations are enforced.
              * \return \c true if bond-configuration constraints are added, and \c false otherwise.
              */
             bool regardBondConfiguration() const;

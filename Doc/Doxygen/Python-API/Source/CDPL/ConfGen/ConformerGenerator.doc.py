@@ -26,7 +26,7 @@
 #  - a systematic strategy that performs a fragment-based 3D structure generation followed by exhaustive torsion-driving of all rotatable bonds, and
 #  - a stochastic strategy that picks conformations randomly from the conformational space of the molecule (by default used only for flexible macrocyclic molecules).
 # 
-# Both strategies share a common downstream pipeline of MMFF94-based energy minimization, RMSD-based clustering and energy-window filtering. Behaviour is controlled by the embedded conformer generation settings instance, the configured fragment and torsion libraries and the optional abort/timeout/log callbacks.
+# Both strategies share a common downstream pipeline of MMFF94-based energy minimization, RMSD-based clustering and energy window filtering. Behaviour is controlled by the embedded conformer generation settings instance, the configured fragment and torsion libraries and the optional abort/timeout/log callbacks.
 # 
 # \see [\ref CFRG]
 # 

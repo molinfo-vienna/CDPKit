@@ -100,7 +100,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
 
             /**
-             * \brief Specifies whether the atom is a hetero atom (HETATM record in PDB).
+             * \brief Specifies whether the atom is a heteroatom (HETATM record in PDB).
              *
              * \valuetype bool
              */

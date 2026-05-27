@@ -85,13 +85,13 @@ namespace CDPL
             const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
 
             /**
-             * \brief Returns a reference to the fragment conformer-generation settings.
+             * \brief Returns a reference to the fragment conformer generation settings.
              * \return A reference to the settings.
              */
             FragmentConformerGeneratorSettings& getSettings();
 
             /**
-             * \brief Returns a \c const reference to the fragment conformer-generation settings.
+             * \brief Returns a \c const reference to the fragment conformer generation settings.
              * \return A \c const reference to the settings.
              */
             const FragmentConformerGeneratorSettings& getSettings() const;

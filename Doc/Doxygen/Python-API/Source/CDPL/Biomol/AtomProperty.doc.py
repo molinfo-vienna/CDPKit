@@ -74,7 +74,7 @@ class AtomProperty(Boost.Python.instance):
     RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey('RESIDUE_INSERTION_CODE')
 
     ##
-    # \brief Specifies whether the atom is a hetero atom (HETATM record in PDB).
+    # \brief Specifies whether the atom is a heteroatom (HETATM record in PDB).
     # 
     # <b>Value Type:</b> bool
     # 

@@ -22,7 +22,7 @@
 ##
 # \brief High-level driver for the generation of a single low-energy 3D structure from a molecular graph.
 # 
-# Internally delegates to the same pipeline as ConfGen.ConformerGenerator but stops after the first acceptable conformer has been produced.
+# Internally delegates to the same pipeline as class ConfGen.ConformerGenerator but stops after the first acceptable conformer has been produced.
 # 
 class StructureGenerator(Boost.Python.instance):
 

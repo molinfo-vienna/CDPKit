@@ -25,7 +25,7 @@
 class ConformerSamplingMode(Boost.Python.instance):
 
     ##
-    # \brief Selects the sampling strategy heuristically based on the input molecule (rotatable-bond count, ring topology, etc.).
+    # \brief Selects the sampling strategy heuristically based on the input molecule (rotatable bond count, ring topology, etc.).
     # 
     AUTO = 0
 
@@ -35,6 +35,6 @@ class ConformerSamplingMode(Boost.Python.instance):
     SYSTEMATIC = 1
 
     ##
-    # \brief Selects the stochastic sampling strategy (random sampling of rotatable-bond torsion-angle distributions).
+    # \brief Selects the stochastic sampling strategy (random sampling of rotatable bond torsion-angle distributions).
     # 
     STOCHASTIC = 2

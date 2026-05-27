@@ -57,7 +57,7 @@ namespace CDPL
         /**
          * \brief High-level driver for the generation of a single low-energy 3D structure from a molecular graph.
          *
-         * Internally delegates to the same pipeline as ConfGen::ConformerGenerator but stops after the first acceptable
+         * Internally delegates to the same pipeline as class ConfGen::ConformerGenerator but stops after the first acceptable
          * conformer has been produced.
          */
         class CDPL_CONFGEN_API StructureGenerator

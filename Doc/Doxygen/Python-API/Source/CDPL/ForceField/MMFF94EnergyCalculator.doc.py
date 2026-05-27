@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Evaluates the total MMFF94 force-field energy of a 3D conformation.
+# \brief Evaluates the total MMFF94 force field energy of a 3D conformation.
 # 
 # The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions for a supplied set of 3D coordinates. The per-component energies are retained and made available via the dedicated accessors; the sum is returned by __call__ and getTotalEnergy().
 # 

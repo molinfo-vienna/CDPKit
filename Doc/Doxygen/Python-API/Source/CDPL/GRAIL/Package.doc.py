@@ -21,6 +21,6 @@
 
 ##
 # \package CDPL.GRAIL
-# \brief Contains classes and functions related to the GRAIL method [\ref GRAIL].
+# \brief Contains classes and functions related to the <em>GRAIL</em> method [\ref GRAIL, \ref GRADE].
 # 
 

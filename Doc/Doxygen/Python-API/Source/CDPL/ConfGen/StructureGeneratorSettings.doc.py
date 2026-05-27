@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bundle of configuration parameters for ConfGen.StructureGenerator.
+# \brief Bundle of configuration parameters for single 3D structure generation via class ConfGen.StructureGenerator.
 # 
 class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief A static instance providing settings default values.
+    # \brief A static instance providing configuration parameter default values.
     # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Constructs the <tt>StructureGeneratorSettings</tt> instance with default values.
+    # \brief Constructs the <tt>StructureGeneratorSettings</tt> instance with default configuration parameter values.
     # 
     def __init__() -> None: pass
 
@@ -60,21 +60,21 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def assign(settings: StructureGeneratorSettings) -> StructureGeneratorSettings: pass
 
     ##
-    # \brief Sets the structure-generation mode (see ConfGen.StructureGenerationMode).
+    # \brief Sets the structure generation mode (see ConfGen.StructureGenerationMode).
     # 
     # \param mode The new generation mode.
     # 
     def setGenerationMode(mode: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured structure-generation mode.
+    # \brief Returns the currently configured structure generation mode.
     # 
-    # \return The ConfGen.StructureGenerationMode identifier.
+    # \return The current generation mode.
     # 
     def getGenerationMode() -> int: pass
 
     ##
-    # \brief Specifies whether 3D coordinates should be generated from scratch (vs. starting from existing input coordinates).
+    # \brief Specifies whether 3D coordinates should be generated from scratch (vs. reusing existing input coordinates).
     # 
     # \param generate <tt>True</tt> to generate coordinates from scratch, and <tt>False</tt> to keep existing input coordinates.
     # 
@@ -102,7 +102,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def sampleAngleToleranceRanges() -> bool: pass
 
     ##
-    # \brief Sets the timeout for the structure-generation pipeline.
+    # \brief Sets the timeout for the structure generation pipeline.
     # 
     # \param mil_secs The new timeout in milliseconds (<em>0</em> disables the timeout).
     # 
@@ -116,49 +116,49 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def getTimeout() -> int: pass
 
     ##
-    # \brief Sets the MMFF94 force-field variant used for fragment-mode structure generation (see ForceField.MMFF94 variants).
+    # \brief Sets the MMFF94 force field variant used for fragment-mode structure generation (see ForceField.MMFF94 variants).
     # 
-    # \param type The new force-field type.
+    # \param type The new force field type.
     # 
     def setFragmentModeForceFieldType(type: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured fragment-mode force-field type.
+    # \brief Returns the currently configured fragment-mode force field type.
     # 
-    # \return The force-field type identifier.
+    # \return The current force field type.
     # 
     def getFragmentModeForceFieldType() -> int: pass
 
     ##
-    # \brief Sets the MMFF94 force-field variant used for distance-geometry-mode structure generation.
+    # \brief Sets the MMFF94 force field variant used for DG-mode structure generation.
     # 
-    # \param type The new force-field type.
+    # \param type The new force field type.
     # 
     def setDGModeForceFieldType(type: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured DG-mode force-field type.
+    # \brief Returns the currently configured DG-mode force field type.
     # 
-    # \return The force-field type identifier.
+    # \return The force field type identifier.
     # 
     def getDGModeForceFieldType() -> int: pass
 
     ##
-    # \brief Specifies whether force-field parameterization should be strict (missing parameters cause failure).
+    # \brief Specifies whether force field parameterization should be strict (missing parameters cause failure).
     # 
     # \param strict <tt>True</tt> to enable strict parameterization, and <tt>False</tt> to tolerate missing parameters.
     # 
     def strictForceFieldParameterization(strict: bool) -> None: pass
 
     ##
-    # \brief Tells whether force-field parameterization is strict.
+    # \brief Tells whether force field parameterization is strict.
     # 
     # \return <tt>True</tt> if strict parameterization is enabled, and <tt>False</tt> otherwise.
     # 
     def strictForceFieldParameterization() -> bool: pass
 
     ##
-    # \brief Sets the dielectric constant used in the electrostatic-energy term.
+    # \brief Sets the dielectric constant used in the electrostatic energy term.
     # 
     # \param de_const The new dielectric constant.
     # 
@@ -198,7 +198,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def getMaxNumRefinementIterations() -> int: pass
 
     ##
-    # \brief Sets the convergence tolerance of the force-field-based coordinate refinement step.
+    # \brief Sets the convergence tolerance of the force field-based coordinate refinement step.
     # 
     # \param tol The new refinement tolerance.
     # 
@@ -218,7 +218,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured macrocycle rotor-bond-count threshold.
+    # \brief Returns the currently configured flexible macrocycle rotor bond count threshold.
     # 
     # \return The threshold.
     # 
@@ -241,14 +241,14 @@ class StructureGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Sets the cycle size for the convergence check of the structure-sampling loop.
     # 
-    # \param size The new convergence-check cycle size.
+    # \param size The new convergence check cycle size.
     # 
     def setConvergenceCheckCycleSize(size: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured convergence-check cycle size.
+    # \brief Returns the currently configured convergence check cycle size.
     # 
-    # \return The convergence-check cycle size.
+    # \return The convergence check cycle size.
     # 
     def getConvergenceCheckCycleSize() -> int: pass
 

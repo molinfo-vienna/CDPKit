@@ -55,8 +55,13 @@ namespace CDPL
         class FragmentConformerGeneratorImpl;
 
         /**
-         * \brief Driver for the generation of low-energy 3D conformers for a single molecular fragment (chain, small
-         *        ring or macrocycle) via distance geometry plus MMFF94 minimization plus RMSD clustering.
+         * \brief Driver for the generation of low-energy conformer ensembles for single molecular fragments (chain, small
+         *        ring system or macrocycle)
+         *
+         * Conformer sampling is done in a stochastic manner using distance-geometry-based raw coordinates generation,
+         * MMFF94 energy minimization and conformer RMSD clustering.
+         *
+         * \see [\ref CFRG]
          */
         class CDPL_CONFGEN_API FragmentConformerGenerator
         {

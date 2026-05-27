@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bundle of configuration parameters for ConfGen.DGStructureGenerator, extending ConfGen.DGConstraintGeneratorSettings with parameters controlling the embedding optimization loop.
+# \brief Bundle of configuration parameters for raw coordinates generation via class ConfGen.DGStructureGenerator.
 # 
 class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
-    # \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings instance.
+    # \brief A static instance providing configuration parameter default values.
     # 
     DEFAULT_ = _HIDDEN_VALUE_
 
     ##
-    # \brief Constructs the settings instance with default values.
+    # \brief Constructs the <tt>DGStructureGeneratorSettings</tt> instance with default configuration parameter values.
     # 
     def __init__() -> None: pass
 

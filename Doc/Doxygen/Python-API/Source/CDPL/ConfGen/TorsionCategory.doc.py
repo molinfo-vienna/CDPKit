@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief A node of a hierarchical torsion library: a named, optionally pattern-matched category that holds child categories and torsion rules.
+# \brief Represents a node of a hierarchical torsion library.
+# 
+# Nodes are named, central bond specific categories that can hold child categories as well as torsion rules.
 # 
 class TorsionCategory(Boost.Python.instance):
 
@@ -157,42 +159,42 @@ class TorsionCategory(Boost.Python.instance):
     def setMatchPatternString(ptn_str: str) -> None: pass
 
     ##
-    # \brief Returns the molecular-graph pattern used to perceive bonds belonging to this category.
+    # \brief Returns the molecular graph pattern used to perceive bonds belonging to this category.
     # 
     # \return A reference to the pattern smart reference.
     # 
     def getMatchPattern() -> Chem.MolecularGraph: pass
 
     ##
-    # \brief Sets the molecular-graph pattern used to perceive bonds belonging to this category.
+    # \brief Sets the molecular graph pattern used to perceive bonds belonging to this category.
     # 
-    # \param ptn The new molecular-graph pattern.
+    # \param ptn The new molecular graph pattern.
     # 
     def setMatchPattern(ptn: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Returns the atom type of the first central-bond atom required by this category.
+    # \brief Returns the atom type of the first central bond atom required by this category.
     # 
     # \return The atom type (Chem.AtomType value).
     # 
     def getBondAtom1Type() -> int: pass
 
     ##
-    # \brief Sets the atom type of the first central-bond atom required by this category.
+    # \brief Sets the atom type of the first central bond atom required by this category.
     # 
     # \param type The new atom type (Chem.AtomType value).
     # 
     def setBondAtom1Type(type: int) -> None: pass
 
     ##
-    # \brief Returns the atom type of the second central-bond atom required by this category.
+    # \brief Returns the atom type of the second central bond atom required by this category.
     # 
     # \return The atom type (Chem.AtomType value).
     # 
     def getBondAtom2Type() -> int: pass
 
     ##
-    # \brief Sets the atom type of the second central-bond atom required by this category.
+    # \brief Sets the atom type of the second central bond atom required by this category.
     # 
     # \param type The new atom type (Chem.AtomType value).
     # 
@@ -261,14 +263,14 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \param recursive If <tt>True</tt>, the count includes all descendant categories.
     # 
-    # \return The child-category count.
+    # \return The child category count.
     # 
     def getNumCategories(recursive: bool = False) -> int: pass
 
     ##
     # \brief Returns the child category at index <em>idx</em>.
     # 
-    # \param idx The zero-based child-category index.
+    # \param idx The zero-based child category index.
     # 
     # \return A reference to the child category. 
     # 
@@ -279,7 +281,7 @@ class TorsionCategory(Boost.Python.instance):
     ##
     # \brief Removes the child category at index <em>idx</em>.
     # 
-    # \param idx The zero-based child-category index.
+    # \param idx The zero-based child category index.
     # 
     # \throw Base.IndexError if the number of child categories is zero or <em>idx</em> is not in the range [0, getNumCategories() - 1].
     # 

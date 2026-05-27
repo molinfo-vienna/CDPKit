@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Evaluates the total MMFF94 force-field energy and its gradient with respect to the atomic coordinates.
+         * \brief Evaluates the total MMFF94 force field energy and its gradient with respect to the atomic coordinates.
          *
          * The calculator takes a ForceField::MMFF94InteractionData instance and the atom count of the molecule
          * and computes both the total MMFF94 energy and the analytical Cartesian gradient

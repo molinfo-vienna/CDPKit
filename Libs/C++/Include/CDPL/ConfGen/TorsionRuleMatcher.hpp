@@ -47,7 +47,7 @@ namespace CDPL
          * \brief Finds torsion rules from a TorsionLibrary that apply to a given rotatable bond.
          *
          * For a queried bond in a molecular graph the matcher iterates the configured TorsionLibrary
-         * (top-down through torsion categories) and reports every rule whose central-bond SMARTS
+         * (top-down through torsion categories) and reports every rule whose central bond SMARTS
          * pattern matches at the queried bond. Each match is stored as a TorsionRuleMatch object
          * providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
          */

@@ -46,8 +46,11 @@ namespace CDPL
     {
 
         /**
-         * \brief %Base for classes dedicated to the generation of coordinates that fulfill user-provided point distance
-         *        (and volume) constraints [\ref ASPE].
+         * \brief Serves as foundation for subclasses that perform coordinates generation based on distance-geometry.
+         * \tparam Dim The dimension of the coordinates to generate.
+         * \tparam T The scalar value type to use for coordinates and constraint bounds.
+         * \tparam Derived The type of the subclass.
+         * \see [\ref ASPE]
          */
         template <std::size_t Dim, typename T, typename Derived>
         class DGCoordinatesGeneratorBase
@@ -340,7 +343,10 @@ namespace CDPL
 
 
         /**
-         * \brief Generic implementation for generation of coordinates that fulfill user-provided point distance constraints [\ref ASPE].
+         * \brief Generic distance-geometry implementation for the generation of coordinates that fulfill user-provided distance constraints.
+         * \tparam Dim The dimension of the coordinates to generate.
+         * \tparam T The scalar value type to use for coordinates and constraint bounds.
+         * \see [\ref ASPE]
          */
         template <std::size_t Dim, typename T>
         class DGCoordinatesGenerator : public DGCoordinatesGeneratorBase<Dim, T, DGCoordinatesGenerator<Dim, T> >
@@ -348,7 +354,9 @@ namespace CDPL
 
 
         /**
-         * \brief Specialized implementation for the generation of 3D coordinates that fulfill user-provided point distance and volume constraints [\ref ASPE].
+         * \brief Specialized distance-geometry implementation for the generation of 3D coordinates that fulfill user-provided distance and volume constraints.
+         * \tparam T The scalar value type to use for coordinates and constraint bounds.
+         * \see [\ref ASPE]
          */
         template <typename T>
         class DGCoordinatesGenerator<3, T> : public DGCoordinatesGeneratorBase<3, T, DGCoordinatesGenerator<3, T> >

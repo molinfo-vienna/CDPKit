@@ -40,17 +40,17 @@ namespace CDPL
     {
 
         /**
-         * \brief Bundle of configuration parameters for ConfGen::FragmentAssembler.
+         * \brief Bundle of configuration parameters for fragment conformer assembly via class ConfGen::FragmentAssembler.
          */
         class CDPL_CONFGEN_API FragmentAssemblerSettings
         {
 
           public:
-            /** \brief Default settings used by a freshly-constructed FragmentAssemblerSettings instance. */
+            /** \brief A static instance providing configuration parameter default values. */
             static const FragmentAssemblerSettings DEFAULT;
 
             /**
-             * \brief Constructs the settings instance with default values.
+             * \brief Constructs the \c %FragmentAssemblerSettings instance with default configuration parameter values.
              */
             FragmentAssemblerSettings();
 
@@ -67,13 +67,13 @@ namespace CDPL
             bool enumerateRings() const;
 
             /**
-             * \brief Sets the enumeration mode for stereogenic nitrogen centers.
+             * \brief Sets the enumeration mode for invertible nitrogen centers.
              * \param mode One of the ConfGen::NitrogenEnumerationMode values.
              */
             void setNitrogenEnumerationMode(unsigned int mode);
 
             /**
-             * \brief Returns the currently configured stereogenic-nitrogen enumeration mode.
+             * \brief Returns the currently configured invertible nitrogen enumeration mode.
              * \return One of the ConfGen::NitrogenEnumerationMode values.
              */
             unsigned int getNitrogenEnumerationMode() const;
@@ -91,13 +91,13 @@ namespace CDPL
             bool generateCoordinatesFromScratch() const;
 
             /**
-             * \brief Returns a reference to the nested fragment-conformer build settings.
+             * \brief Returns a reference to the nested fragment conformer build settings.
              * \return A reference to the build settings.
              */
             FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
             /**
-             * \brief Returns a \c const reference to the nested fragment-conformer build settings.
+             * \brief Returns a \c const reference to the nested fragment conformer build settings.
              * \return A \c const reference to the build settings.
              */
             const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
