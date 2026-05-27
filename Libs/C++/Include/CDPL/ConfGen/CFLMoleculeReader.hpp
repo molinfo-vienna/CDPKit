@@ -50,14 +50,14 @@ namespace CDPL
         class CFLDataReader;
 
         /**
-         * \brief A reader for molecule data stored in the CDPL conformer fragment library format (CFL).
+         * \brief A reader for molecule fragment data stored in the <em>CDPL Conformer Generator Fragment Library (CFL)</em> format.
          */
         class CDPL_CONFGEN_API CFLMoleculeReader : public Util::StreamDataReader<Chem::Molecule, CFLMoleculeReader>
         {
 
           public:
             /**
-             * \brief Constructs a \c %CFLMoleculeReader instance that will read the molecule data from the input
+             * \brief Constructs a \c %CFLMoleculeReader instance that will read the molecule fragments from the input
              *        stream \a is.
              * \param is The input stream to read from.
              */

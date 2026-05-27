@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief A reader for molecule data stored in the CDPL conformer fragment library format (CFL).
+# \brief A reader for molecule fragment data stored in the <em>CDPL Conformer Generator Fragment Library (CFL)</em> format.
 # 
 class CFLMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief Constructs a <tt>CFLMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
+    # \brief Constructs a <tt>CFLMoleculeReader</tt> instance that will read the molecule fragments from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 

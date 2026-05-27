@@ -51,7 +51,7 @@ namespace CDPL
         {
 
             /**
-             * \brief Provides meta-information about the conformer generator fragment library format.
+             * \brief Provides meta-information about the <em>CDPL Conformer Generator Fragment Library (CFL)</em> format.
              */
             extern CDPL_CONFGEN_API const Base::DataFormat CFL;
         } // namespace DataFormat

@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Assigns Cahn-Ingold-Prelog (CIP) configuration labels to stereogenic atoms and bonds of a molecular graph.
+# \brief Assigns <em>Cahn-Ingold-Prelog (CIP)</em> configuration labels to stereogenic atoms and bonds of a molecular graph.
 # 
-# After calling setup() for a molecular graph the per-atom or per-bond CIP descriptor (<em>R</em> / <em>S</em> / <em>E</em> / <em>Z</em> / <em>r</em> / <em>s</em> / undefined) can be queried via the getLabel() overloads. The implementation is largely based on John Mayfield's Java implementation of the CIP sequence rules [\ref CIPJM].
+# After calling setup() for a molecular graph the per-atom or per-bond CIP descriptor can be queried via the getLabel() overloads. The implementation is largely based on John Mayfield's Java implementation of the CIP sequence rules [\ref CIPJM].
 # 
 # \see Chem.CIPDescriptor 
 # 

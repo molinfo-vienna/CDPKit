@@ -37,7 +37,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants that are used to specify the <em>R/S</em> configuration of atoms.
+         * \brief Provides constants that are used to specify the configuration of stereogenic atoms.
          */
         namespace AtomConfiguration
         {
