@@ -22,27 +22,27 @@
 ##
 # \brief Enumerates the tautomers of a molecular graph by iteratively applying a configurable set of Chem.TautomerizationRule instances and reporting each accepted tautomer to a user-supplied callback.
 # 
-# After registering tautomerization rules (via addTautomerizationRule()) and a callback (via setCallbackFunction()), each call to generate() seeds the enumeration with the input molecular graph, applies every registered rule to every intermediate tautomer to derive the next generation, and reports each newly-generated tautomer to the callback. The Mode setting controls how aggressively duplicates are filtered.
+# After registering tautomerization rules (via addTautomerizationRule()) and a callback (via setCallbackFunction()), each call to generate() seeds the enumeration with the input molecular graph, applies every registered rule to every intermediate tautomer to derive the next generation, and reports each newly-generated tautomer to the callback. The Mode setting controls how various types of duplicates shall be handled.
 # 
 class TautomerGenerator(Boost.Python.instance):
 
     ##
-    # \brief Selects the duplicate-filtering strategy applied during tautomer enumeration.
+    # \brief Constants specifying the output tautomer filtering strategy.
     # 
     class Mode(Boost.Python.enum):
 
         ##
-        # \brief Two tautomers are considered equal if they share the same constitutional (topological) connection table.
+        # \brief Report a generated tautomer only if its molecular graph is not topologically equivalent to an already reported one.
         # 
         TOPOLOGICALLY_UNIQUE = 0
 
         ##
-        # \brief Two tautomers are considered equal if they share the same connection table AND the same stereo-configuration.
+        # \brief Report a generated tautomer only if its ordinary H-deplete molecular graph connection table is different from already reported ones.
         # 
         GEOMETRICALLY_UNIQUE = 1
 
         ##
-        # \brief Every accepted tautomer is reported, even if topologically/geometrically equivalent to an already-reported one.
+        # \brief Report a generated tautomer only if its molecular graph connection table is different from already reported ones.
         # 
         EXHAUSTIVE = 2
 
@@ -105,7 +105,7 @@ class TautomerGenerator(Boost.Python.instance):
     def getNumTautomerizationRules() -> int: pass
 
     ##
-    # \brief Sets the callback invoked for every accepted tautomer.
+    # \brief Sets the callback invoked for every accepted output tautomer.
     # 
     # The callback receives the tautomer molecular graph as its argument and returns a boolean: returning <tt>False</tt> aborts the enumeration.
     # 
@@ -121,44 +121,44 @@ class TautomerGenerator(Boost.Python.instance):
     def getCallbackFunction() -> BoolMolecularGraphFunctor: pass
 
     ##
-    # \brief Sets the duplicate-filtering mode.
+    # \brief Sets the tautomer duplicate filtering mode.
     # 
-    # \param mode The new Mode value.
+    # \param mode The new duplicate filtering mode.
     # 
     def setMode(mode: Mode) -> None: pass
 
     ##
-    # \brief Returns the currently configured duplicate-filtering mode.
+    # \brief Returns the currently configured tautomer duplicate filtering mode.
     # 
-    # \return The Mode value.
+    # \return The current duplicate filtering mode.
     # 
     def getMode() -> Mode: pass
 
     ##
-    # \brief Specifies whether tautomer stereochemistry shall be preserved/regarded during duplicate filtering.
+    # \brief Specifies whether atom/bond stereochemistry shall be regarded by the tautomer duplicate detection algorithm.
     # 
-    # \param regard If <tt>True</tt>, stereo-configurations are taken into account.
+    # \param regard If <tt>True</tt>, atom/bond stereo configurations are taken into account.
     # 
     def regardStereochemistry(regard: bool) -> None: pass
 
     ##
-    # \brief Tells whether stereochemistry is regarded during duplicate filtering.
+    # \brief Tells whether atom/bond stereochemistry is regarded by the tautomer duplicate detection algorithm.
     # 
     # \return <tt>True</tt> if stereochemistry is regarded, and <tt>False</tt> otherwise.
     # 
     def stereochemistryRegarded() -> bool: pass
 
     ##
-    # \brief Specifies whether atom isotope information shall be regarded during duplicate filtering.
+    # \brief Specifies whether atom isotope information shall be regarded by the tautomer duplicate detection algorithm.
     # 
-    # \param regard If <tt>True</tt>, isotopes are taken into account.
+    # \param regard If <tt>True</tt>, atom isotope information is taken into account.
     # 
     def regardIsotopes(regard: bool) -> None: pass
 
     ##
-    # \brief Tells whether isotope information is regarded during duplicate filtering.
+    # \brief Tells whether atom isotope information is regarded by the tautomer duplicate detection algorithm.
     # 
-    # \return <tt>True</tt> if isotopes are regarded, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if atom isotope information is regarded, and <tt>False</tt> otherwise.
     # 
     def isotopesRegarded() -> bool: pass
 
@@ -199,11 +199,9 @@ class TautomerGenerator(Boost.Python.instance):
     def resonanceDuplicatesRemoved() -> bool: pass
 
     ##
-    # \brief Sets the optional setup function invoked on the input molecular graph before enumeration starts.
+    # \brief Sets the optional setup function invoked on the generated tautomers.
     # 
-    # The setup function may modify the input (e.g. add explicit hydrogens, perceive aromaticity) prior to enumeration.
-    # 
-    # \param func The new custom-setup function.
+    # \param func The new custom setup function.
     # 
     def setCustomSetupFunction(func: VoidMolecularGraphFunctor) -> None: pass
 

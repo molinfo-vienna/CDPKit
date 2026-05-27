@@ -43,10 +43,10 @@ namespace CDPL
         class BasicAtom;
 
         /**
-         * \brief BasicMolecule-specific implementation of the Chem::Bond interface.
+         * \brief Default implementation of the Chem::Bond interface.
          *
-         * Instances of \c %BasicBond are owned and constructed exclusively by the parent Chem::BasicMolecule
-         * and reference its Chem::BasicAtom objects as the two bonded atoms.
+         * Instances of \c %BasicBond are owned and constructed exclusively by a Chem::BasicMolecule instance
+         * and reference two Chem::BasicAtom instances that represent the bonded atoms.
          */
         class CDPL_CHEM_API BasicBond : public Bond
         {
@@ -74,26 +74,26 @@ namespace CDPL
             Molecule& getMolecule();
 
             /**
-             * \brief Returns the first (begin) atom of the bond.
-             * \return A \c const reference to the begin atom.
+             * \brief Returns the first atom of the bond.
+             * \return A \c const reference to the first atom.
              */
             const Atom& getBegin() const;
 
             /**
-             * \brief Returns the first (begin) atom of the bond.
-             * \return A reference to the begin atom.
+             * \brief Returns the first atom of the bond.
+             * \return A reference to the first atom.
              */
             Atom& getBegin();
 
             /**
-             * \brief Returns the second (end) atom of the bond.
-             * \return A \c const reference to the end atom.
+             * \brief Returns the second atom of the bond.
+             * \return A \c const reference to the second atom.
              */
             const Atom& getEnd() const;
 
             /**
-             * \brief Returns the second (end) atom of the bond.
-             * \return A reference to the end atom.
+             * \brief Returns the second atom of the bond.
+             * \return A reference to the second atom.
              */
             Atom& getEnd();
 
