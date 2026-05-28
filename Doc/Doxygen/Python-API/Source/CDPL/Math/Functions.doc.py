@@ -2215,20 +2215,24 @@ def range(e: ConstDMatrixExpression, r1: Range, r2: Range) -> ConstDMatrixRange:
 def range(e: ConstDMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstDMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstDVectorExpression, r: Range) -> ConstDVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstDVectorExpression, start: int, stop: int) -> ConstDVectorRange: pass
 
 ##
@@ -2252,20 +2256,24 @@ def range(e: ConstFMatrixExpression, r1: Range, r2: Range) -> ConstFMatrixRange:
 def range(e: ConstFMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstFMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstFVectorExpression, r: Range) -> ConstFVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstFVectorExpression, start: int, stop: int) -> ConstFVectorRange: pass
 
 ##
@@ -2289,20 +2297,24 @@ def range(e: ConstLMatrixExpression, r1: Range, r2: Range) -> ConstLMatrixRange:
 def range(e: ConstLMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstLMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstLVectorExpression, r: Range) -> ConstLVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstLVectorExpression, start: int, stop: int) -> ConstLVectorRange: pass
 
 ##
@@ -2326,20 +2338,24 @@ def range(e: ConstULMatrixExpression, r1: Range, r2: Range) -> ConstULMatrixRang
 def range(e: ConstULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstULMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstULVectorExpression, r: Range) -> ConstULVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ConstULVectorExpression, start: int, stop: int) -> ConstULVectorRange: pass
 
 ##
@@ -2363,20 +2379,24 @@ def range(e: DMatrixExpression, r1: Range, r2: Range) -> DMatrixRange: pass
 def range(e: DMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> DMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: DVectorExpression, r: Range) -> DVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: DVectorExpression, start: int, stop: int) -> DVectorRange: pass
 
 ##
@@ -2400,20 +2420,24 @@ def range(e: FMatrixExpression, r1: Range, r2: Range) -> FMatrixRange: pass
 def range(e: FMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> FMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: FVectorExpression, r: Range) -> FVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: FVectorExpression, start: int, stop: int) -> FVectorRange: pass
 
 ##
@@ -2437,20 +2461,24 @@ def range(e: LMatrixExpression, r1: Range, r2: Range) -> LMatrixRange: pass
 def range(e: LMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> LMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: LVectorExpression, r: Range) -> LVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: LVectorExpression, start: int, stop: int) -> LVectorRange: pass
 
 ##
@@ -2474,20 +2502,24 @@ def range(e: ULMatrixExpression, r1: Range, r2: Range) -> ULMatrixRange: pass
 def range(e: ULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ULMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param r The index range to view.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ULVectorExpression, r: Range) -> ULVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start 
-# \param stop 
-# \return 
-#
+# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param start The (inclusive) start index of the range.
+# \param stop The (exclusive) end index of the range.
+# 
+# \return A constant range view of <em>e</em>.
+# 
 def range(e: ULVectorExpression, start: int, stop: int) -> ULVectorRange: pass
 
 ##
@@ -2727,11 +2759,13 @@ def slice(e: ConstDMatrixExpression, s1: Slice, s2: Slice) -> ConstDMatrixSlice:
 def slice(e: ConstDMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstDMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: ConstDVectorExpression, s: Slice) -> ConstDVectorSlice: pass
 
 ##
@@ -2767,11 +2801,13 @@ def slice(e: ConstFMatrixExpression, s1: Slice, s2: Slice) -> ConstFMatrixSlice:
 def slice(e: ConstFMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstFMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: ConstFVectorExpression, s: Slice) -> ConstFVectorSlice: pass
 
 ##
@@ -2807,11 +2843,13 @@ def slice(e: ConstLMatrixExpression, s1: Slice, s2: Slice) -> ConstLMatrixSlice:
 def slice(e: ConstLMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstLMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: ConstLVectorExpression, s: Slice) -> ConstLVectorSlice: pass
 
 ##
@@ -2847,11 +2885,13 @@ def slice(e: ConstULMatrixExpression, s1: Slice, s2: Slice) -> ConstULMatrixSlic
 def slice(e: ConstULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstULMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: ConstULVectorExpression, s: Slice) -> ConstULVectorSlice: pass
 
 ##
@@ -2887,11 +2927,13 @@ def slice(e: DMatrixExpression, s1: Slice, s2: Slice) -> DMatrixSlice: pass
 def slice(e: DMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> DMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: DVectorExpression, s: Slice) -> DVectorSlice: pass
 
 ##
@@ -2927,11 +2969,13 @@ def slice(e: FMatrixExpression, s1: Slice, s2: Slice) -> FMatrixSlice: pass
 def slice(e: FMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> FMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: FVectorExpression, s: Slice) -> FVectorSlice: pass
 
 ##
@@ -2967,11 +3011,13 @@ def slice(e: LMatrixExpression, s1: Slice, s2: Slice) -> LMatrixSlice: pass
 def slice(e: LMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> LMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: LVectorExpression, s: Slice) -> LVectorSlice: pass
 
 ##
@@ -3007,11 +3053,13 @@ def slice(e: ULMatrixExpression, s1: Slice, s2: Slice) -> ULMatrixSlice: pass
 def slice(e: ULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ULMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s 
-# \return 
-#
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# 
+# \param e The vector expression.
+# \param s The (start, stride, size) slice to view.
+# 
+# \return A constant slice view of <em>e</em>.
+# 
 def slice(e: ULVectorExpression, s: Slice) -> ULVectorSlice: pass
 
 ##
@@ -4037,31 +4085,39 @@ def unreal(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 def unreal(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# 
+# \param e The quaternion expression to wrap.
+# 
+# \return A constant 4-element vector view of <em>e</em>.
+# 
 def vec(e: ConstDQuaternionExpression) -> ConstDQuaternionVectorAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# 
+# \param e The quaternion expression to wrap.
+# 
+# \return A constant 4-element vector view of <em>e</em>.
+# 
 def vec(e: ConstFQuaternionExpression) -> ConstFQuaternionVectorAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# 
+# \param e The quaternion expression to wrap.
+# 
+# \return A constant 4-element vector view of <em>e</em>.
+# 
 def vec(e: ConstLQuaternionExpression) -> ConstLQuaternionVectorAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# 
+# \param e The quaternion expression to wrap.
+# 
+# \return A constant 4-element vector view of <em>e</em>.
+# 
 def vec(e: ConstULQuaternionExpression) -> ConstULQuaternionVectorAdapter: pass
 
 ##

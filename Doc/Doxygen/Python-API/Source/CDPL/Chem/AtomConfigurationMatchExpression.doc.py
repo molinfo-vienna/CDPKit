@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief AtomConfigurationMatchExpression.
+# \brief Chem.MatchExpression that constrains target atoms by their stereo configuration relative to a query atom.
+# 
+# Used in substructure searches with stereochemistry support: the expression evaluates the target atom's stereo configuration (as defined by its Chem.StereoDescriptor) against the configuration constraint flags derived from the query atom's descriptor. The matching mode (match/not-match) and partial-mapping tolerance are configurable.
 # 
 class AtomConfigurationMatchExpression(AtomMatchExpression):
 

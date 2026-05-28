@@ -20,13 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping each symbolic MMFF94 atom type to its corresponding numeric MMFF94 atom type.
+# 
 class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief The map entry type (a (symbolic type, numeric type) key/value pair).
+    # 
     class Entry(Boost.Python.instance):
 
         ##
@@ -78,7 +78,7 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
         numericType = property(getNumericType)
 
     ##
-    # \brief Initializes the \c %MMFF94SymbolicToNumericAtomTypeMap instance.
+    # \brief Constructs an empty <tt>MMFF94SymbolicToNumericAtomTypeMap</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -101,35 +101,41 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param sym_type 
-    # \param num_type 
-    #
+    # \brief Adds (or overwrites) the symbolic-to-numeric mapping for <em>sym_type</em>.
+    # 
+    # \param sym_type The symbolic MMFF94 atom type.
+    # \param num_type The corresponding numeric MMFF94 atom type.
+    # 
     def addEntry(sym_type: str, num_type: int) -> None: pass
 
     ##
-    # \brief 
-    # \param sym_type 
-    # \return 
-    #
+    # \brief Removes the mapping for the symbolic MMFF94 atom type <em>sym_type</em>.
+    # 
+    # \param sym_type The symbolic MMFF94 atom type.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(sym_type: str) -> bool: pass
 
     ##
-    # \brief 
-    # \param sym_type 
-    # \return 
-    #
+    # \brief Returns the numeric MMFF94 atom type associated with <em>sym_type</em>.
+    # 
+    # \param sym_type The symbolic MMFF94 atom type.
+    # 
+    # \return The corresponding numeric MMFF94 atom type, or <tt>0</tt> if no mapping exists.
+    # 
     def getEntry(sym_type: str) -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the map.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of mappings stored in the map.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -139,14 +145,15 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads map entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default symbolic-to-numeric atom-type mappings.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -157,17 +164,18 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     def assign(map: MMFF94SymbolicToNumericAtomTypeMap) -> MMFF94SymbolicToNumericAtomTypeMap: pass
 
     ##
-    # \brief 
-    # \param map 
-    #
+    # \brief Replaces the process-wide default map by <em>map</em>.
+    # 
+    # \param map The new default map (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default map (lazily initialized on first call).
+    # 
+    # \return A reference to the default-map shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94SymbolicToNumericAtomTypeMap: pass
 

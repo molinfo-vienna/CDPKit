@@ -25,26 +25,29 @@
 class LVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %LVector instance.
+    # \brief Constructs an empty vector (size zero).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %LVector instance \a v.
-    # \param v The \c %LVector instance to copy.
+    # \brief Move-constructs a vector from <em>v</em> (<em>v</em> is left in a valid empty state).
+    # 
+    # \param v The vector to move from.
     # 
     def __init__(v: LVector) -> None: pass
 
     ##
-    # \brief Initializes the \c %LVector instance.
-    # \param n 
+    # \brief Constructs a vector of size <em>n</em> with default-initialized elements.
+    # 
+    # \param n The desired vector size.
     # 
     def __init__(n: int) -> None: pass
 
     ##
-    # \brief Initializes the \c %LVector instance.
-    # \param n 
-    # \param v 
+    # \brief Constructs a vector of size <em>n</em> with every element initialized to <em>v</em>.
+    # 
+    # \param n The desired vector size.
+    # \param v The element value used to initialize every entry.
     # 
     def __init__(n: int, v: int) -> None: pass
 

@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BondDirectionMatchExpression.
+# \brief Chem.MatchExpression that constrains target bonds by their SMILES/SMARTS bond direction.
+# 
+# The expression evaluates the target bond's auxiliary direction value (one of the Chem.BondDirection flags, supplied as <tt>aux_data</tt>) against the configured direction constraint flags. The matching mode (match/not-match) is configurable.
 # 
 class BondDirectionMatchExpression(BondMatchExpression):
 

@@ -25,28 +25,31 @@
 class ULMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %ULMatrix instance.
+    # \brief Constructs an empty matrix (zero rows and zero columns).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %ULMatrix instance \a m.
-    # \param m The \c %ULMatrix instance to copy.
+    # \brief Move-constructs a matrix from <em>m</em> (<em>m</em> is left in a valid empty state).
+    # 
+    # \param m The matrix to move from.
     # 
     def __init__(m: ULMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c %ULMatrix instance.
-    # \param m 
-    # \param n 
+    # \brief Constructs an <em>m</em> &times; <em>n</em> matrix with default-initialized elements.
+    # 
+    # \param m The number of rows.
+    # \param n The number of columns.
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Initializes the \c %ULMatrix instance.
-    # \param m 
-    # \param n 
-    # \param v 
+    # \brief Constructs an <em>m</em> &times; <em>n</em> matrix with every element initialized to <em>v</em>.
+    # 
+    # \param m The number of rows.
+    # \param n The number of columns.
+    # \param v The element value used to initialize every cell.
     # 
     def __init__(m: int, n: int, v: int) -> None: pass
 

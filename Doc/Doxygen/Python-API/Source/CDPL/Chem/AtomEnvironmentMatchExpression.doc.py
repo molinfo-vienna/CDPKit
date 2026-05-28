@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief AtomEnvironmentMatchExpression.
+# \brief Chem.MatchExpression that constrains target atoms by the structural environment encoded as a SMARTS substructure pattern.
+# 
+# A target atom matches the expression when the supplied SMARTS environment pattern (anchored on the target atom) is found by an inner Chem.SubstructureSearch instance. The matching mode (match/not-match) is configurable.
 # 
 class AtomEnvironmentMatchExpression(AtomMatchExpression):
 

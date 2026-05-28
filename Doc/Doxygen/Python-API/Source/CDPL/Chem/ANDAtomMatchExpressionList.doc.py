@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief ANDAtomMatchExpressionList.
+# \brief Chem.MatchExpressionList specialization that evaluates the stored expressions as a logical conjunction (AND).
+# 
+# The list evaluates to <tt>True</tt> if and only if every contained Chem.MatchExpression evaluates to <tt>True</tt> for the given query/target object pair (short-circuit evaluation). An empty list evaluates to <tt>True</tt>.
 # 
 class ANDAtomMatchExpressionList(AtomMatchExpressionList):
 

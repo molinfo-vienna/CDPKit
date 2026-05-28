@@ -25,6 +25,8 @@
 class MolecularGraphProperty(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the list of aromatic rings used by the MMFF94 force field.
+    # 
+    # <b>Value Type:</b> Chem.FragmentList.SharedPointer
+    # 
     MMFF94_AROMATIC_RINGS = CDPL.Base.LookupKey('MMFF94_AROMATIC_RINGS')

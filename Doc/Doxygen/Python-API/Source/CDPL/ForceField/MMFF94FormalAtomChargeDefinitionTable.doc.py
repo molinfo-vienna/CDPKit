@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping symbolic MMFF94 atom types to their formal-charge definitions used by the MMFF94 charge model.
+# 
+# Each entry specifies a formal charge plus an assignment-mode flag that controls how the charge is distributed across the atom and its neighbours of selected types.
+# 
 class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single formal-charge definition.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -41,11 +43,12 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c %Entry instance.
-        # \param atom_type 
-        # \param ass_mode 
-        # \param charge 
-        # \param type_list 
+        # \brief Constructs an <tt>Entry</tt> for the symbolic MMFF94 atom type <em>atom_type</em>.
+        # 
+        # \param atom_type The symbolic MMFF94 atom type.
+        # \param ass_mode The charge-assignment mode flag.
+        # \param charge The formal charge value.
+        # \param type_list A whitespace-separated list of neighbour atom types used by the assignment.
         # 
         def __init__(atom_type: str, ass_mode: int, charge: float, type_list: str) -> None: pass
 
@@ -69,27 +72,31 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the symbolic MMFF94 atom type of the entry.
+        # 
+        # \return A reference to the symbolic atom type.
+        # 
         def getAtomType() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the charge-assignment mode flag.
+        # 
+        # \return The assignment mode.
+        # 
         def getAssignmentMode() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the formal charge of the entry.
+        # 
+        # \return The formal charge value.
+        # 
         def getFormalCharge() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the whitespace-separated list of neighbour atom types used by the assignment.
+        # 
+        # \return A reference to the neighbour atom-type list.
+        # 
         def getAtomTypeList() -> str: pass
 
         ##
@@ -115,7 +122,7 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         atomTypeList = property(getAtomTypeList)
 
     ##
-    # \brief Initializes the \c %MMFF94FormalAtomChargeDefinitionTable instance.
+    # \brief Constructs an empty <tt>MMFF94FormalAtomChargeDefinitionTable</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -147,28 +154,33 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     def addEntry(atom_type: str, ass_mode: int, charge: float, type_list: str) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Removes the entry for the symbolic atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The symbolic MMFF94 atom type.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(atom_type: str) -> bool: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Returns the entry for the symbolic MMFF94 atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The symbolic MMFF94 atom type.
+    # 
+    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # 
     def getEntry(atom_type: str) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the table.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the table.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -178,14 +190,15 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads table entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default formal-charge definitions.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -196,17 +209,18 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     def assign(table: MMFF94FormalAtomChargeDefinitionTable) -> MMFF94FormalAtomChargeDefinitionTable: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Replaces the process-wide default table by <em>table</em>.
+    # 
+    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default table (lazily initialized on first call).
+    # 
+    # \return A reference to the default-table shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94FormalAtomChargeDefinitionTable: pass
 

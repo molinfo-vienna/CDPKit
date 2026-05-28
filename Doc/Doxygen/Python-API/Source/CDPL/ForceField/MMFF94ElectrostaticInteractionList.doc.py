@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A dynamically-sized array of MMFF94 electrostatic interaction records.
+# 
 class MMFF94ElectrostaticInteractionList(Boost.Python.instance):
 
     ##

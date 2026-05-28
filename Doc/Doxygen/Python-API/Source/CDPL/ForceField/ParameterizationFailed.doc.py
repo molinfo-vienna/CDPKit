@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown when force-field parameter assignment for an interaction or atom fails.
+# 
 class ParameterizationFailed(Error):
     pass

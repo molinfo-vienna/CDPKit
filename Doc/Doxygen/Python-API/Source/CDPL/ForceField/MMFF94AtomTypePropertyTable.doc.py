@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping numeric MMFF94 atom types to per-atom-type structural and chemical property data used during MMFF94 atom and bond typing.
+# 
+# Each entry provides the corresponding atomic number, the standard neighbour count and valence, and flags describing pi-lone-pair character, aromaticity, linear-bond-angle geometry, and the ability to form multi-bond or single-bond patterns.
+# 
 class MMFF94AtomTypePropertyTable(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single atom-type property record.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -41,16 +43,17 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c %Entry instance.
-        # \param atom_type 
-        # \param atomic_no 
-        # \param num_nbrs 
-        # \param valence 
-        # \param has_pi_lp 
-        # \param mltb_desig 
-        # \param is_arom 
-        # \param lin_bnd_ang 
-        # \param has_mb_or_sb 
+        # \brief Constructs an <tt>Entry</tt> for the numeric MMFF94 atom type <em>atom_type</em>.
+        # 
+        # \param atom_type The numeric MMFF94 atom type.
+        # \param atomic_no The atomic number of atoms of this type.
+        # \param num_nbrs The standard number of explicit neighbour atoms.
+        # \param valence The standard valence.
+        # \param has_pi_lp <tt>True</tt> if the atom type carries a pi lone pair.
+        # \param mltb_desig The MMFF94 multi-bond designator.
+        # \param is_arom <tt>True</tt> if the atom type is aromatic.
+        # \param lin_bnd_ang <tt>True</tt> if the atom type forms linear bond angles.
+        # \param has_mb_or_sb <tt>True</tt> if the atom type can form multi-bond or single-bond patterns.
         # 
         def __init__(atom_type: int, atomic_no: int, num_nbrs: int, valence: int, has_pi_lp: bool, mltb_desig: int, is_arom: bool, lin_bnd_ang: bool, has_mb_or_sb: bool) -> None: pass
 
@@ -74,57 +77,66 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the numeric MMFF94 atom type of the entry.
+        # 
+        # \return The numeric atom type.
+        # 
         def getAtomType() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the atomic number of atoms of this type.
+        # 
+        # \return The atomic number.
+        # 
         def getAtomicNumber() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the standard number of explicit neighbour atoms.
+        # 
+        # \return The neighbour count.
+        # 
         def getNumNeighbors() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the standard valence of atoms of this type.
+        # 
+        # \return The valence.
+        # 
         def getValence() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the atom type carries a pi lone pair.
+        # 
+        # \return <tt>True</tt> if the atom type carries a pi lone pair, and <tt>False</tt> otherwise.
+        # 
         def hasPiLonePair() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the MMFF94 multi-bond designator.
+        # 
+        # \return The multi-bond designator.
+        # 
         def getMultiBondDesignator() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the atom type is aromatic.
+        # 
+        # \return <tt>True</tt> if the atom type is aromatic, and <tt>False</tt> otherwise.
+        # 
         def isAromaticAtomType() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the atom type forms linear bond angles.
+        # 
+        # \return <tt>True</tt> if the atom type forms linear bond angles, and <tt>False</tt> otherwise.
+        # 
         def formsLinearBondAngle() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the atom type can form multi-bond or single-bond patterns.
+        # 
+        # \return <tt>True</tt> if such patterns are allowed, and <tt>False</tt> otherwise.
+        # 
         def formsMultiOrSingleBonds() -> bool: pass
 
         ##
@@ -160,7 +172,7 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         multiOrSingleBonds = property(formsMultiOrSingleBonds)
 
     ##
-    # \brief Initializes the \c %MMFF94AtomTypePropertyTable instance.
+    # \brief Constructs an empty <tt>MMFF94AtomTypePropertyTable</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -183,42 +195,48 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \param atomic_no 
-    # \param num_nbrs 
-    # \param valence 
-    # \param has_pi_lp 
-    # \param mltb_desig 
-    # \param is_arom 
-    # \param lin_bnd_ang 
-    # \param has_mb_or_sb 
-    #
+    # \brief Adds (or overwrites) the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric MMFF94 atom type.
+    # \param atomic_no The atomic number of atoms of this type.
+    # \param num_nbrs The standard number of explicit neighbour atoms.
+    # \param valence The standard valence.
+    # \param has_pi_lp <tt>True</tt> if the atom type carries a pi lone pair.
+    # \param mltb_desig The MMFF94 multi-bond designator.
+    # \param is_arom <tt>True</tt> if the atom type is aromatic.
+    # \param lin_bnd_ang <tt>True</tt> if the atom type forms linear bond angles.
+    # \param has_mb_or_sb <tt>True</tt> if the atom type can form multi-bond or single-bond patterns.
+    # 
     def addEntry(atom_type: int, atomic_no: int, num_nbrs: int, valence: int, has_pi_lp: bool, mltb_desig: int, is_arom: bool, lin_bnd_ang: bool, has_mb_or_sb: bool) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Removes the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric MMFF94 atom type.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(atom_type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Returns the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric MMFF94 atom type.
+    # 
+    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # 
     def getEntry(atom_type: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the table.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the table.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -228,14 +246,15 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads table entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default atom-type property entries.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -246,17 +265,18 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     def assign(table: MMFF94AtomTypePropertyTable) -> MMFF94AtomTypePropertyTable: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Replaces the process-wide default table by <em>table</em>.
+    # 
+    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default table (lazily initialized on first call).
+    # 
+    # \return A reference to the default-table shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94AtomTypePropertyTable: pass
 

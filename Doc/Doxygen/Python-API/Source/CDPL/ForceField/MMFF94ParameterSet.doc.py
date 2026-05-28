@@ -25,26 +25,26 @@
 class MMFF94ParameterSet(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Original (dynamic) MMFF94 parameter set.
+    # 
     DYNAMIC = 0
 
     ##
-    # \brief 
-    #
+    # \brief Static MMFF94s parameter set (used for energy minimization).
+    # 
     STATIC = 1
 
     ##
-    # \brief 
-    #
+    # \brief Static MMFF94s parameter set with extended out-of-plane bending parameters.
+    # 
     STATIC_XOOP = 2
 
     ##
-    # \brief 
-    #
+    # \brief Static MMFF94s parameter set with restricted (refined) torsion parameters.
+    # 
     STATIC_RTOR = 3
 
     ##
-    # \brief 
-    #
+    # \brief Static MMFF94s parameter set with both extended out-of-plane bending and restricted torsion parameters.
+    # 
     STATIC_RTOR_XOOP = 4

@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief 
-#
+# \brief Ordered list of SMARTS-style substructure patterns used to assign symbolic MMFF94 atom types during atom typing.
+# 
+# Each entry pairs a pattern with the symbolic MMFF94 type to assign on a match. Patterns marked as fallback are only considered after no non-fallback pattern matches.
+# 
 class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single atom-type pattern record.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
@@ -36,10 +38,11 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c %Entry instance.
-        # \param ptn 
-        # \param sym_type 
-        # \param fallback 
+        # \brief Constructs an <tt>Entry</tt> pairing the pattern <em>ptn</em> with the symbolic type <em>sym_type</em>.
+        # 
+        # \param ptn The substructure pattern.
+        # \param sym_type The symbolic MMFF94 atom type to assign on a match.
+        # \param fallback <tt>True</tt> if the pattern is only to be tried after all non-fallback patterns failed.
         # 
         def __init__(ptn: Chem.MolecularGraph, sym_type: str, fallback: bool) -> None: pass
 
@@ -63,21 +66,24 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the substructure pattern.
+        # 
+        # \return A reference to the pattern shared reference.
+        # 
         def getPattern() -> Chem.MolecularGraph: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the symbolic MMFF94 atom type assigned on a match.
+        # 
+        # \return A reference to the symbolic atom type.
+        # 
         def getSymbolicType() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the pattern is a fallback pattern.
+        # 
+        # \return <tt>True</tt> if the pattern is a fallback pattern, and <tt>False</tt> otherwise.
+        # 
         def isFallbackType() -> bool: pass
 
         objectID = property(getObjectID)
@@ -89,7 +95,7 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
         fallbackType = property(isFallbackType)
 
     ##
-    # \brief Initializes the \c %MMFF94SymbolicAtomTypePatternTable instance.
+    # \brief Constructs an empty <tt>MMFF94SymbolicAtomTypePatternTable</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -112,35 +118,44 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param ptn 
-    # \param sym_type 
-    # \param fallback 
-    #
+    # \brief Appends a new pattern entry to the table.
+    # 
+    # \param ptn The substructure pattern.
+    # \param sym_type The symbolic MMFF94 atom type to assign on a match.
+    # \param fallback <tt>True</tt> if the pattern is only to be tried after all non-fallback patterns failed.
+    # 
     def addEntry(ptn: Chem.MolecularGraph, sym_type: str, fallback: bool) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the entry at the zero-based index <em>idx</em>.
+    # 
+    # \param idx The zero-based entry index.
+    # 
+    # \throw Base.IndexError if the number of entries is zero or <em>idx</em> is not in the range [0, getNumEntries() - 1].
+    # 
     def removeEntry(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the entry at the zero-based index <em>idx</em>.
+    # 
+    # \param idx The zero-based entry index.
+    # 
+    # \return A reference to the entry. 
+    # 
+    # \throw Base.IndexError if the number of entries is zero or <em>idx</em> is not in the range [0, getNumEntries() - 1].
+    # 
     def getEntry(idx: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the table.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the table.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -150,14 +165,15 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads table entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default atom-type patterns.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -168,17 +184,18 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     def assign(table: MMFF94SymbolicAtomTypePatternTable) -> MMFF94SymbolicAtomTypePatternTable: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Replaces the process-wide default table by <em>table</em>.
+    # 
+    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default table (lazily initialized on first call).
+    # 
+    # \return A reference to the default-table shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94SymbolicAtomTypePatternTable: pass
 

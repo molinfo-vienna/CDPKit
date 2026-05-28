@@ -31,32 +31,36 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def __init__(grid: DRegularSpatialGrid) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularSpatialGrid instance.
-    # \param data 
-    # \param xs 
-    # \param ys 
-    # \param zs 
+    # \brief Constructs the grid with anisotropic per-axis step sizes initialized to the supplied grid data.
+    # 
+    # \param data The grid data container.
+    # \param xs The step size along the X axis.
+    # \param ys The step size along the Y axis.
+    # \param zs The step size along the Z axis.
     # 
     def __init__(data: DGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularSpatialGrid instance.
-    # \param data 
-    # \param s 
+    # \brief Constructs the grid with isotropic step size <em>s</em> and the supplied grid data.
+    # 
+    # \param data The grid data container.
+    # \param s The step size used on every axis.
     # 
     def __init__(data: DGrid, s: float) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularSpatialGrid instance.
-    # \param xs 
-    # \param ys 
-    # \param zs 
+    # \brief Constructs an empty grid with anisotropic per-axis step sizes.
+    # 
+    # \param xs The step size along the X axis.
+    # \param ys The step size along the Y axis.
+    # \param zs The step size along the Z axis.
     # 
     def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularSpatialGrid instance.
-    # \param s 
+    # \brief Constructs an empty grid with isotropic step size <em>s</em> on all three axes.
+    # 
+    # \param s The step size used on every axis.
     # 
     def __init__(s: float) -> None: pass
 

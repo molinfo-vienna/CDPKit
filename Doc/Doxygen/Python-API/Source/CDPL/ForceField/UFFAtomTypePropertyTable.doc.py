@@ -20,17 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping numeric UFF atom types to the per-atom-type parameters used by the <em>Universal Force Field (UFF)</em>.
+# 
+# Each entry provides the natural bond radius and bond angle of the atom type, its Van der Waals parameters (well distance, well depth, and scaling factor), and the effective atomic charge used by the UFF electrostatic terms.
+# 
+# \see [\ref UFF]
+# 
 class UFFAtomTypePropertyTable(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single UFF atom-type property record.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -41,16 +45,17 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c %Entry instance.
-        # \param atom_type 
-        # \param atom_type_sym 
-        # \param atomic_no 
-        # \param bond_rad 
-        # \param bond_ang 
-        # \param vdw_dist 
-        # \param vdw_energy 
-        # \param vdw_scale 
-        # \param eff_charge 
+        # \brief Constructs an <tt>Entry</tt> for the numeric UFF atom type <em>atom_type</em>.
+        # 
+        # \param atom_type The numeric UFF atom type.
+        # \param atom_type_sym The symbolic UFF atom-type label.
+        # \param atomic_no The atomic number of atoms of this type.
+        # \param bond_rad The natural bond radius.
+        # \param bond_ang The natural bond angle.
+        # \param vdw_dist The Van der Waals distance parameter (well distance).
+        # \param vdw_energy The Van der Waals energy parameter (well depth).
+        # \param vdw_scale The Van der Waals scaling factor.
+        # \param eff_charge The effective atomic charge used by the UFF electrostatic terms.
         # 
         def __init__(atom_type: int, atom_type_sym: str, atomic_no: int, bond_rad: float, bond_ang: float, vdw_dist: float, vdw_energy: float, vdw_scale: float, eff_charge: float) -> None: pass
 
@@ -74,57 +79,66 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the numeric UFF atom type of the entry.
+        # 
+        # \return The numeric atom type.
+        # 
         def getAtomType() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the atomic number of atoms of this type.
+        # 
+        # \return The atomic number.
+        # 
         def getAtomicNumber() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the symbolic UFF atom-type label of the entry.
+        # 
+        # \return A reference to the symbolic atom-type label.
+        # 
         def getAtomTypeSymbol() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the natural bond radius of the atom type.
+        # 
+        # \return The bond radius.
+        # 
         def getBondRadius() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the natural bond angle of the atom type.
+        # 
+        # \return The bond angle.
+        # 
         def getBondAngle() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the Van der Waals well distance of the atom type.
+        # 
+        # \return The Van der Waals distance parameter.
+        # 
         def getVdWDistance() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the Van der Waals well depth of the atom type.
+        # 
+        # \return The Van der Waals energy parameter.
+        # 
         def getVdWEnergy() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the Van der Waals scaling factor of the atom type.
+        # 
+        # \return The Van der Waals scaling factor.
+        # 
         def getVdWScale() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the effective atomic charge used by the UFF electrostatic terms.
+        # 
+        # \return The effective atomic charge.
+        # 
         def getEffectiveCharge() -> float: pass
 
         ##
@@ -160,7 +174,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         effectiveCharge = property(getEffectiveCharge)
 
     ##
-    # \brief Initializes the \c %UFFAtomTypePropertyTable instance.
+    # \brief Constructs an empty <tt>UFFAtomTypePropertyTable</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -183,42 +197,48 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \param atom_type_sym 
-    # \param atomic_no 
-    # \param bond_rad 
-    # \param bond_ang 
-    # \param vdw_dist 
-    # \param vdw_energy 
-    # \param vdw_scale 
-    # \param eff_charge 
-    #
+    # \brief Adds (or overwrites) the entry for the numeric UFF atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric UFF atom type.
+    # \param atom_type_sym The symbolic UFF atom-type label.
+    # \param atomic_no The atomic number of atoms of this type.
+    # \param bond_rad The natural bond radius.
+    # \param bond_ang The natural bond angle.
+    # \param vdw_dist The Van der Waals distance parameter (well distance).
+    # \param vdw_energy The Van der Waals energy parameter (well depth).
+    # \param vdw_scale The Van der Waals scaling factor.
+    # \param eff_charge The effective atomic charge used by the UFF electrostatic terms.
+    # 
     def addEntry(atom_type: int, atom_type_sym: str, atomic_no: int, bond_rad: float, bond_ang: float, vdw_dist: float, vdw_energy: float, vdw_scale: float, eff_charge: float) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Removes the entry for the numeric UFF atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric UFF atom type.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(atom_type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Returns the entry for the numeric UFF atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric UFF atom type.
+    # 
+    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # 
     def getEntry(atom_type: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the table.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the table.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -228,8 +248,8 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default UFF atom-type property entries.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -240,17 +260,18 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     def assign(table: UFFAtomTypePropertyTable) -> UFFAtomTypePropertyTable: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Replaces the process-wide default table by <em>table</em>.
+    # 
+    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(table: UFFAtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default table (lazily initialized on first call).
+    # 
+    # \return A reference to the default-table shared reference.
+    # 
     @staticmethod
     def get(: ) -> UFFAtomTypePropertyTable: pass
 

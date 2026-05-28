@@ -20,22 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping each primary numeric MMFF94 atom type to the ordered list of fallback numeric atom types used when looking up missing interaction parameters.
+# 
 class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single primary-to-parameter atom-type-map record.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief 
-        #
+        # \brief Number of parameter atom types stored per entry.
+        # 
         NUM_TYPES = 4
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -72,9 +72,10 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the primary numeric MMFF94 atom type of the entry.
+        # 
+        # \return The primary atom type.
+        # 
         def getAtomType() -> int: pass
 
         ##
@@ -102,7 +103,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         paramAtomTypes = property(getParameterAtomTypes)
 
     ##
-    # \brief Initializes the \c %MMFF94PrimaryToParameterAtomTypeMap instance.
+    # \brief Constructs an empty <tt>MMFF94PrimaryToParameterAtomTypeMap</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -125,35 +126,41 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \param param_types 
-    #
+    # \brief Adds (or overwrites) the entry for the primary atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The primary numeric MMFF94 atom type.
+    # \param param_types A length-<tt>Entry.NUM_TYPES</tt> array of fallback parameter atom types.
+    # 
     def addEntry(atom_type: int, param_types: object) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Removes the entry for the primary atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The primary numeric MMFF94 atom type.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(atom_type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Returns the entry for the primary atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The primary numeric MMFF94 atom type.
+    # 
+    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # 
     def getEntry(atom_type: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the map.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries stored in the map.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -163,14 +170,15 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads map entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default primary-to-parameter atom-type mappings.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -188,10 +196,10 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def set(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default map (lazily initialized on first call).
+    # 
+    # \return A reference to the default-map shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94PrimaryToParameterAtomTypeMap: pass
 

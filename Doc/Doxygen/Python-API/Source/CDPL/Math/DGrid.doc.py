@@ -25,30 +25,33 @@
 class DGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %DGrid instance.
+    # \brief Constructs an empty grid (zero size on every axis).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DGrid instance \a g.
-    # \param g The \c %DGrid instance to copy.
+    # \brief Move-constructs a grid from <em>g</em> (<em>g</em> is left in a valid empty state).
+    # 
+    # \param g The grid to move from.
     # 
     def __init__(g: DGrid) -> None: pass
 
     ##
-    # \brief Initializes the \c %DGrid instance.
-    # \param m 
-    # \param n 
-    # \param o 
+    # \brief Constructs an <em>m</em> &times; <em>n</em> &times; <em>o</em> grid with default-initialized elements.
+    # 
+    # \param m The size along the first axis.
+    # \param n The size along the second axis.
+    # \param o The size along the third axis.
     # 
     def __init__(m: int, n: int, o: int) -> None: pass
 
     ##
-    # \brief Initializes the \c %DGrid instance.
-    # \param m 
-    # \param n 
-    # \param o 
-    # \param v 
+    # \brief Constructs an <em>m</em> &times; <em>n</em> &times; <em>o</em> grid with every element initialized to <em>v</em>.
+    # 
+    # \param m The size along the first axis.
+    # \param n The size along the second axis.
+    # \param o The size along the third axis.
+    # \param v The element value used to initialize every cell.
     # 
     def __init__(m: int, n: int, o: int, v: float) -> None: pass
 

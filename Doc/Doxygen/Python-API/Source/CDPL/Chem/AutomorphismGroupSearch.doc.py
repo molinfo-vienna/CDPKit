@@ -20,12 +20,17 @@
 #
 
 ##
-# \brief AutomorphismGroupSearch.
+# \brief Enumerates the atom/bond automorphisms of a molecular graph.
+# 
+# The automorphism group of a molecular graph is the set of self-mappings (atom-permutations and the induced bond-permutations) that preserve the molecular graph structure under the configured atom and bond property flags. Atom and bond matching is configurable via the Chem.AtomPropertyFlag and Chem.BondPropertyFlag bit masks. Found mappings are stored as Chem.AtomBondMapping objects and can be iterated or accessed by index.
 # 
 class AutomorphismGroupSearch(Boost.Python.instance):
 
     ##
     # \brief Constructs and initializes a <tt>AutomorphismGroupSearch</tt> instance.
+    # 
+    # \param atom_flags The bitwise-OR combination of Chem.AtomPropertyFlag values considered for atom matching.
+    # \param bond_flags The bitwise-OR combination of Chem.BondPropertyFlag values considered for bond matching.
     # 
     def __init__(atom_flags: int = 12702, bond_flags: int = 30) -> None: pass
 
@@ -42,39 +47,45 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param flags 
-    #
+    # \brief Specifies the atomic properties considered for atom matching during automorphism search.
+    # 
+    # \param flags The new bitwise-OR combination of Chem.AtomPropertyFlag values.
+    # 
     def setAtomPropertyFlags(flags: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the atomic properties currently considered for atom matching.
+    # 
+    # \return The bitwise-OR combination of Chem.AtomPropertyFlag values.
+    # 
     def getAtomPropertyFlags() -> int: pass
 
     ##
-    # \brief 
-    # \param flags 
-    #
+    # \brief Specifies the bond properties considered for bond matching during automorphism search.
+    # 
+    # \param flags The new bitwise-OR combination of Chem.BondPropertyFlag values.
+    # 
     def setBondPropertyFlags(flags: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the bond properties currently considered for bond matching.
+    # 
+    # \return The bitwise-OR combination of Chem.BondPropertyFlag values.
+    # 
     def getBondPropertyFlags() -> int: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether the identity mapping shall be included in the search results.
+    # 
+    # \param include If <tt>True</tt>, the identity mapping is also reported.
+    # 
     def includeIdentityMapping(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the identity mapping is included in the search results.
+    # 
+    # \return <tt>True</tt> if the identity mapping is included, and <tt>False</tt> otherwise.
+    # 
     def identityMappingIncluded() -> bool: pass
 
     ##

@@ -20,13 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping each heavy-atom symbolic MMFF94 type to the symbolic MMFF94 type used for hydrogen atoms bonded to it.
+# 
 class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief The map entry type (a (parent type, hydrogen type) key/value pair).
+    # 
     class Entry(Boost.Python.instance):
 
         ##
@@ -78,7 +78,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
         hydrogenAtomType = property(getHydrogenAtomType)
 
     ##
-    # \brief Initializes the \c %MMFF94HeavyToHydrogenAtomTypeMap instance.
+    # \brief Constructs an empty <tt>MMFF94HeavyToHydrogenAtomTypeMap</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -108,28 +108,33 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def addEntry(parent_type: str, h_atom_type: str) -> None: pass
 
     ##
-    # \brief 
-    # \param parent_type 
-    # \return 
-    #
+    # \brief Removes the mapping for the heavy-atom type <em>parent_type</em>.
+    # 
+    # \param parent_type The symbolic MMFF94 type of the heavy parent atom.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(parent_type: str) -> bool: pass
 
     ##
-    # \brief 
-    # \param parent_type 
-    # \return 
-    #
+    # \brief Returns the hydrogen MMFF94 type associated with the heavy-atom type <em>parent_type</em>.
+    # 
+    # \param parent_type The symbolic MMFF94 type of the heavy parent atom.
+    # 
+    # \return A reference to the symbolic hydrogen type, or to an empty string if no mapping exists.
+    # 
     def getEntry(parent_type: str) -> object: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the map.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of mappings stored in the map.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -139,14 +144,15 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads map entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default heavy-to-hydrogen atom-type mappings.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -157,17 +163,18 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def assign(map: MMFF94HeavyToHydrogenAtomTypeMap) -> MMFF94HeavyToHydrogenAtomTypeMap: pass
 
     ##
-    # \brief 
-    # \param map 
-    #
+    # \brief Replaces the process-wide default map by <em>map</em>.
+    # 
+    # \param map The new default map (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default map (lazily initialized on first call).
+    # 
+    # \return A reference to the default-map shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94HeavyToHydrogenAtomTypeMap: pass
 

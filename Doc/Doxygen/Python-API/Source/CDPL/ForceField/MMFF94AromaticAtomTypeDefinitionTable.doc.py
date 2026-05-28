@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief 
-#
+# \brief Definitions for the second-stage MMFF94 aromatic atom typing.
+# 
+# After the initial pattern-based typing has produced provisional ("old") atom types, this table is consulted to upgrade aromatic-ring atoms to their proper MMFF94 aromatic types based on atomic number, ring size, distance to the next heteroatom in the ring, and special-case flags for imidazolium-like cations and 5-ring anions.
+# 
 class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single aromatic-atom-type definition.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
@@ -36,14 +38,15 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c %Entry instance.
-        # \param old_type 
-        # \param aro_type 
-        # \param atomic_no 
-        # \param ring_size 
-        # \param het_atom_dist 
-        # \param im_cation 
-        # \param n5_anion 
+        # \brief Constructs an <tt>Entry</tt> for the conversion of a provisional aromatic-ring atom type to its proper MMFF94 type.
+        # 
+        # \param old_type The symbolic provisional atom type assigned by initial typing.
+        # \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
+        # \param atomic_no The atomic number required for the match.
+        # \param ring_size The ring size required for the match.
+        # \param het_atom_dist The required topological distance (along the ring) to the next heteroatom.
+        # \param im_cation <tt>True</tt> to restrict the match to imidazolium-like cations.
+        # \param n5_anion <tt>True</tt> to restrict the match to 5-ring anion centers.
         # 
         def __init__(old_type: str, aro_type: str, atomic_no: int, ring_size: int, het_atom_dist: int, im_cation: bool, n5_anion: bool) -> None: pass
 
@@ -67,45 +70,52 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the provisional (input) atom type of the entry.
+        # 
+        # \return A reference to the provisional atom type.
+        # 
         def getOldAtomType() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the aromatic MMFF94 atom type assigned on a match.
+        # 
+        # \return A reference to the aromatic atom type.
+        # 
         def getAromAtomType() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the atomic number required for a match.
+        # 
+        # \return The atomic number.
+        # 
         def getAtomicNumber() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the ring size required for a match.
+        # 
+        # \return The ring size.
+        # 
         def getRingSize() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the required topological distance (along the ring) to the next heteroatom.
+        # 
+        # \return The heteroatom distance.
+        # 
         def getHeteroAtomDistance() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the match is restricted to imidazolium-like cations.
+        # 
+        # \return <tt>True</tt> if the match is restricted to imidazolium-like cations, and <tt>False</tt> otherwise.
+        # 
         def isImidazoliumCation() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the match is restricted to 5-ring anion centers.
+        # 
+        # \return <tt>True</tt> if the match is restricted to 5-ring anion centers, and <tt>False</tt> otherwise.
+        # 
         def isN5RingAnion() -> bool: pass
 
         objectID = property(getObjectID)
@@ -125,7 +135,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         n5RingAnion = property(isN5RingAnion)
 
     ##
-    # \brief Initializes the \c %MMFF94AromaticAtomTypeDefinitionTable instance.
+    # \brief Constructs an empty <tt>MMFF94AromaticAtomTypeDefinitionTable</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -148,39 +158,48 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param old_type 
-    # \param aro_type 
-    # \param atomic_no 
-    # \param ring_size 
-    # \param het_atom_dist 
-    # \param im_cation 
-    # \param n5_anion 
-    #
+    # \brief Appends a new aromatic-atom-type definition to the table.
+    # 
+    # \param old_type The symbolic provisional atom type assigned by initial typing.
+    # \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
+    # \param atomic_no The atomic number required for the match.
+    # \param ring_size The ring size required for the match.
+    # \param het_atom_dist The required topological distance (along the ring) to the next heteroatom.
+    # \param im_cation <tt>True</tt> to restrict the match to imidazolium-like cations.
+    # \param n5_anion <tt>True</tt> to restrict the match to 5-ring anion centers.
+    # 
     def addEntry(old_type: str, aro_type: str, atomic_no: int, ring_size: int, het_atom_dist: int, im_cation: bool, n5_anion: bool) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the entry at the zero-based index <em>idx</em>.
+    # 
+    # \param idx The zero-based entry index.
+    # 
+    # \throw Base.IndexError if the number of entries is zero or <em>idx</em> is not in the range [0, getNumEntries() - 1].
+    # 
     def removeEntry(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the entry at the zero-based index <em>idx</em>.
+    # 
+    # \param idx The zero-based entry index.
+    # 
+    # \return A reference to the entry. 
+    # 
+    # \throw Base.IndexError if the number of entries is zero or <em>idx</em> is not in the range [0, getNumEntries() - 1].
+    # 
     def getEntry(idx: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the table.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the table.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -190,14 +209,15 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads table entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default aromatic-atom-type definitions.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -208,17 +228,18 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def assign(table: MMFF94AromaticAtomTypeDefinitionTable) -> MMFF94AromaticAtomTypeDefinitionTable: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Replaces the process-wide default table by <em>table</em>.
+    # 
+    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default table (lazily initialized on first call).
+    # 
+    # \return A reference to the default-table shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94AromaticAtomTypeDefinitionTable: pass
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Base class of the ForceField subsystem exception hierarchy.
+# 
 class Error(Base.Exception):
     pass

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A dynamically-sized array of MMFF94 Van der Waals interaction records.
+# 
 class MMFF94VanDerWaalsInteractionList(Boost.Python.instance):
 
     ##
