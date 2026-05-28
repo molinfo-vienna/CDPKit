@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure allowing a hierarchical view on biological macromolecules.
+# \brief A data structure providing a hierarchical view on biological macromolecules.
 # 
 class HierarchyView(Boost.Python.instance):
 
@@ -49,9 +49,9 @@ class HierarchyView(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Build the hierarchy view for the molecular graph <em>molgraph</em>.
+    # \brief Build the hierarchy view for the biological macromolecule represented by <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to build the hierarchy view.
+    # \param molgraph The molecular graph of the biological macromolecule for which to build the hierarchy view.
     # 
     def build(molgraph: Chem.MolecularGraph) -> None: pass
 

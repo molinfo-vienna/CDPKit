@@ -22,8 +22,6 @@
 ##
 # \brief Abstract base class for nodes of the Biomol.HierarchyView tree (models, chains, residues).
 # 
-# Stores the residue list of the node and the mutex protecting the lazy initialization of the node-specific child lists (chains / residues).
-# 
 class HierarchyViewNode(Chem.Fragment):
 
     ##

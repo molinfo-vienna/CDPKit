@@ -64,7 +64,7 @@ namespace CDPL
             /**
              * \brief Constructs the calculator without an associated ForceField::MMFF94InteractionData instance.
              *
-             * Operator() will return zero until setup() has been called.
+             * operator()() will return zero until setup() has been called.
              */
             MMFF94GradientCalculator();
 
@@ -119,49 +119,49 @@ namespace CDPL
             const ValueType& operator()(const CoordsArray& coords, GradVector& grad);
 
             /**
-             * \brief Returns the total MMFF94 energy computed by the most recent operator() call.
+             * \brief Returns the total MMFF94 energy computed by the most recent operator()() call.
              * \return A \c const reference to the total energy.
              */
             const ValueType& getTotalEnergy() const;
 
             /**
-             * \brief Returns the bond-stretching energy contribution computed by the most recent operator() call.
+             * \brief Returns the bond-stretching energy contribution computed by the most recent operator()() call.
              * \return A \c const reference to the bond-stretching energy.
              */
             const ValueType& getBondStretchingEnergy() const;
 
             /**
-             * \brief Returns the angle-bending energy contribution computed by the most recent operator() call.
+             * \brief Returns the angle-bending energy contribution computed by the most recent operator()() call.
              * \return A \c const reference to the angle-bending energy.
              */
             const ValueType& getAngleBendingEnergy() const;
 
             /**
-             * \brief Returns the stretch-bend coupling energy contribution computed by the most recent operator() call.
+             * \brief Returns the stretch-bend coupling energy contribution computed by the most recent operator()() call.
              * \return A \c const reference to the stretch-bend energy.
              */
             const ValueType& getStretchBendEnergy() const;
 
             /**
-             * \brief Returns the out-of-plane bending energy contribution computed by the most recent operator() call.
+             * \brief Returns the out-of-plane bending energy contribution computed by the most recent operator()() call.
              * \return A \c const reference to the out-of-plane bending energy.
              */
             const ValueType& getOutOfPlaneBendingEnergy() const;
 
             /**
-             * \brief Returns the torsion energy contribution computed by the most recent operator() call.
+             * \brief Returns the torsion energy contribution computed by the most recent operator()() call.
              * \return A \c const reference to the torsion energy.
              */
             const ValueType& getTorsionEnergy() const;
 
             /**
-             * \brief Returns the electrostatic energy contribution computed by the most recent operator() call.
+             * \brief Returns the electrostatic energy contribution computed by the most recent operator()() call.
              * \return A \c const reference to the electrostatic energy.
              */
             const ValueType& getElectrostaticEnergy() const;
 
             /**
-             * \brief Returns the Van der Waals energy contribution computed by the most recent operator() call.
+             * \brief Returns the Van der Waals energy contribution computed by the most recent operator()() call.
              * \return A \c const reference to the Van der Waals energy.
              */
             const ValueType& getVanDerWaalsEnergy() const;

@@ -39,7 +39,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Store parameters for a single MMFF94 bond-stretching interaction between two bonded atoms.
+         * \brief Stores parameters for a single MMFF94 bond-stretching interaction between two bonded atoms.
          */
         class MMFF94BondStretchingInteraction
         {

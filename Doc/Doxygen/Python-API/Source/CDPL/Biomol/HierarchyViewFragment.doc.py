@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief A single contiguous fragment of a Biomol.HierarchyViewChain (delimited by chain breaks).
+# \brief A data structure for the representation of a single contiguous fragment of a biological macromolecule chain.
 # 
-# Inherits the residue list from Biomol.HierarchyViewNode; no fragment-specific public API is exposed beyond that. Fragment instances are constructed and owned by the parent Biomol.HierarchyViewChain.
+# \see Biomol.HierarchyView
 # 
 class HierarchyViewFragment(HierarchyViewNode):
     pass

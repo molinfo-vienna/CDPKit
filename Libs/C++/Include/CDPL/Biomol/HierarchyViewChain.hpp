@@ -49,8 +49,8 @@ namespace CDPL
         class HierarchyViewModel;
 
         /**
-         * \brief A single chain of a Biomol::HierarchyView model, holding the constituent contiguous fragments
-         *        (separated by chain breaks).
+         * \brief A data structure for the representation of biological macromolecule chains.
+         * \see Biomol::HierarchyView
          */
         class CDPL_BIOMOL_API HierarchyViewChain : public HierarchyViewNode
         {
@@ -61,44 +61,44 @@ namespace CDPL
             typedef std::vector<FragmentPtr>               FragmentList;
 
           public:
-            /** \brief A constant iterator over the contained fragments. */
+            /** \brief A constant iterator over the chain fragments. */
             typedef boost::indirect_iterator<FragmentList::const_iterator, const HierarchyViewFragment> ConstFragmentIterator;
 
             /**
-             * \brief Returns the number of contiguous fragments in this chain.
-             * \return The number of fragments.
+             * \brief Returns the number of fragments this chain consists of.
+             * \return The number of chain fragments.
              */
             std::size_t getNumFragments() const;
 
             /**
-             * \brief Returns the fragment at index \a idx.
+             * \brief Returns the chain fragment at index \a idx.
              * \param idx The zero-based fragment index.
-             * \return A \c const reference to the fragment.
-             * \throw Base::IndexError if the number of fragments is zero or \a idx is not in the range [0, getNumFragments() - 1].
+             * \return A \c const reference to the chain fragment.
+             * \throw Base::IndexError if the number of chain fragments is zero or \a idx is not in the range [0, getNumFragments() - 1].
              */
             const HierarchyViewFragment& getFragment(std::size_t idx) const;
 
             /**
-             * \brief Returns a constant iterator pointing to the first fragment.
-             * \return A constant iterator pointing to the first fragment.
+             * \brief Returns a constant iterator pointing to the first chain fragment.
+             * \return A constant iterator pointing to the first chain fragment.
              */
             ConstFragmentIterator getFragmentsBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing one past the last fragment.
-             * \return A constant iterator pointing one past the last fragment.
+             * \brief Returns a constant iterator pointing one past the last chain fragment.
+             * \return A constant iterator pointing one past the last chain fragment.
              */
             ConstFragmentIterator getFragmentsEnd() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the first fragment (range-based for support).
-             * \return A constant iterator pointing to the first fragment.
+             * \brief Returns a constant iterator pointing to the first chain fragment (range-based for support).
+             * \return A constant iterator pointing to the first chain fragment.
              */
             ConstFragmentIterator begin() const;
 
             /**
-             * \brief Returns a constant iterator pointing one past the last fragment (range-based for support).
-             * \return A constant iterator pointing one past the last fragment.
+             * \brief Returns a constant iterator pointing one past the last chain fragment (range-based for support).
+             * \return A constant iterator pointing one past the last chain fragment.
              */
             ConstFragmentIterator end() const;
 

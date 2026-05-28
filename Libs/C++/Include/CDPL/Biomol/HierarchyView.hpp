@@ -49,7 +49,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure allowing a hierarchical view on biological macromolecules.
+         * \brief A data structure providing a hierarchical view on biological macromolecules.
          */
         class CDPL_BIOMOL_API HierarchyView
         {
@@ -137,8 +137,8 @@ namespace CDPL
             ConstModelIterator end() const;
 
             /**
-             * \brief Build the hierarchy view for the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to build the hierarchy view.
+             * \brief Build the hierarchy view for the biological macromolecule represented by \a molgraph.
+             * \param molgraph The molecular graph of the biological macromolecule for which to build the hierarchy view.
              */
             void build(const Chem::MolecularGraph& molgraph);
 

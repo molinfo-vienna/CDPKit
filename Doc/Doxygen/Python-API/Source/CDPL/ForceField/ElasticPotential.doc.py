@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Harmonic distance-restraint potential between a pair of atoms.
+# \brief Stores parameters for a harmonic distance-restraint potential between a pair of atoms.
 # 
-# The potential evaluates to \f$ \frac{1}{2} k (r - r_0)^2 \f$, where <em>k</em> is the force constant, \f$ r_0 \f$ the reference length and <em>r</em> the current distance between the two atoms. It is used by ForceField.MMFF94EnergyCalculator/ForceFieldMMFF94GradientCalculator as an auxiliary restraint to bias the energy minimization toward a desired geometry.
+# \see ForceField.calcElasticPotentialEnergy() 
 # 
 # \since 1.1
 # 
@@ -45,14 +45,14 @@ class ElasticPotential(Boost.Python.instance):
     def __init__(atom1_idx: int, atom2_idx: int, force_const: float, ref_length: float) -> None: pass
 
     ##
-    # \brief Returns the zero-based index of the first restrained atom.
+    # \brief Returns the zero-based index of the first atom.
     # 
     # \return The first atom index.
     # 
     def getAtom1Index() -> int: pass
 
     ##
-    # \brief Returns the zero-based index of the second restrained atom.
+    # \brief Returns the zero-based index of the second atom.
     # 
     # \return The second atom index.
     # 

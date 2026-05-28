@@ -20,25 +20,27 @@
 #
 
 ##
-# \brief A single chain of a Biomol.HierarchyView model, holding the constituent contiguous fragments (separated by chain breaks).
+# \brief A data structure for the representation of biological macromolecule chains.
+# 
+# \see Biomol.HierarchyView
 # 
 class HierarchyViewChain(HierarchyViewNode):
 
     ##
-    # \brief Returns the number of contiguous fragments in this chain.
+    # \brief Returns the number of fragments this chain consists of.
     # 
-    # \return The number of fragments.
+    # \return The number of chain fragments.
     # 
     def getNumFragments() -> int: pass
 
     ##
-    # \brief Returns the fragment at index <em>idx</em>.
+    # \brief Returns the chain fragment at index <em>idx</em>.
     # 
     # \param idx The zero-based fragment index.
     # 
-    # \return A reference to the fragment. 
+    # \return A reference to the chain fragment. 
     # 
-    # \throw Base.IndexError if the number of fragments is zero or <em>idx</em> is not in the range [0, getNumFragments() - 1].
+    # \throw Base.IndexError if the number of chain fragments is zero or <em>idx</em> is not in the range [0, getNumFragments() - 1].
     # 
     def getFragment(idx: int) -> HierarchyViewFragment: pass
 

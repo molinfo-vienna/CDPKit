@@ -43,9 +43,6 @@ namespace CDPL
 
         /**
          * \brief Abstract base class for nodes of the Biomol::HierarchyView tree (models, chains, residues).
-         *
-         * Stores the residue list of the node and the mutex protecting the lazy initialization of the
-         * node-specific child lists (chains / residues).
          */
         class CDPL_BIOMOL_API HierarchyViewNode : public Chem::Fragment
         {
@@ -58,11 +55,22 @@ namespace CDPL
             const ResidueList& getResidues() const;
 
           protected:
+            /**
+             * \brief Constructs the \c %HierarchyViewNode instance.
+             */
             HierarchyViewNode():
                 initResidues(true) {}
 
-            ~HierarchyViewNode() {}
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~HierarchyViewNode() {}
 
+            /**
+             * \brief Returns a \c std::mutex instance for the thread-safe
+             *        lazy initialization of data in this and any derived classes.
+             * \return A reference to the stored \c std::mutex instance.
+             */
             std::mutex& getMutex() const;
 
           private:

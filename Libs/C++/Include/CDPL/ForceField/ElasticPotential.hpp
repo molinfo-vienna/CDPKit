@@ -39,13 +39,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Harmonic distance-restraint potential between a pair of atoms.
-         *
-         * The potential evaluates to \f$ \frac{1}{2} k (r - r_0)^2 \f$, where \e k is the force constant,
-         * \f$ r_0 \f$ the reference length and \e r the current distance between the two atoms. It is used
-         * by ForceField::MMFF94EnergyCalculator/ForceField::MMFF94GradientCalculator as an auxiliary restraint
-         * to bias the energy minimization toward a desired geometry.
-         *
+         * \brief Stores parameters for a harmonic distance-restraint potential between a pair of atoms.
+         * \see ForceField::calcElasticPotentialEnergy()
          * \since 1.1
          */
         class ElasticPotential
@@ -53,7 +48,8 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs the elastic potential between atoms \a atom1_idx and \a atom2_idx with the specified force constant and reference length.
+             * \brief Constructs the elastic potential between atoms \a atom1_idx and \a atom2_idx with the
+             *        specified force constant and reference length.
              * \param atom1_idx The zero-based index of the first restrained atom.
              * \param atom2_idx The zero-based index of the second restrained atom.
              * \param force_const The force constant \e k of the harmonic potential.
@@ -63,7 +59,7 @@ namespace CDPL
                 atom1Idx(atom1_idx), atom2Idx(atom2_idx), forceConst(force_const), refLength(ref_length) {}
 
             /**
-             * \brief Returns the zero-based index of the first restrained atom.
+             * \brief Returns the zero-based index of the first atom.
              * \return The first atom index.
              */
             std::size_t getAtom1Index() const
@@ -72,7 +68,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the zero-based index of the second restrained atom.
+             * \brief Returns the zero-based index of the second atom.
              * \return The second atom index.
              */
             std::size_t getAtom2Index() const

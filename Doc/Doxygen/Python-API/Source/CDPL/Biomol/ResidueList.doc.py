@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implements the extraction of residues in biological macromolecules.
+# \brief A data structure for the storage of residues extracted from biological macromolecules.
 # 
 class ResidueList(Chem.FragmentList):
 
