@@ -1791,22 +1791,44 @@ namespace CDPL
         template <typename T>
         const typename IdentityMatrix<T>::ValueType IdentityMatrix<T>::one = IdentityMatrix<T>::ValueType(1);
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying matrix for a Math::MatrixReference view.
+         * \tparam M The underlying matrix type.
+         */
         template <typename M>
         struct VectorTemporaryTraits<MatrixReference<M> > : public VectorTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying matrix for a \c const Math::MatrixReference view.
+         * \tparam M The underlying matrix type.
+         */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixReference<M> > : public VectorTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::MatrixTemporaryTraits specialization inheriting the temporary type of the underlying matrix for a Math::MatrixReference view.
+         * \tparam M The underlying matrix type.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixReference<M> > : public MatrixTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::MatrixTemporaryTraits specialization inheriting the temporary type of the underlying matrix for a \c const Math::MatrixReference view.
+         * \tparam M The underlying matrix type.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixReference<M> > : public MatrixTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Returns the determinant of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return The determinant of \a e.
+         */
         template <typename E>
         typename E::ValueType
         det(const MatrixExpression<E>& e)
@@ -1829,6 +1851,12 @@ namespace CDPL
             return (num_row_swaps % 2 == 0 ? res : -res);
         }
 
+        /**
+         * \brief Returns the determinant of the matrix container \a c (specialization avoiding an extra temporary copy when possible).
+         * \tparam C The matrix container type.
+         * \param c The matrix container.
+         * \return The determinant of \a c.
+         */
         template <typename C>
         typename C::ValueType
         det(const MatrixContainer<C>& c)
@@ -1852,6 +1880,14 @@ namespace CDPL
             return (num_row_swaps % 2 == 0 ? res : -res);
         }
 
+        /**
+         * \brief Computes the inverse of the matrix expression \a e and stores it in \a c.
+         * \tparam E The source matrix expression type.
+         * \tparam C The output matrix container type.
+         * \param e The matrix expression to invert.
+         * \param c The output container receiving the inverse of \a e.
+         * \return \c true if \a e is invertible and the inverse was computed, and \c false if \a e is singular.
+         */
         template <typename E, typename C>
         bool
         invert(const MatrixExpression<E>& e, MatrixContainer<C>& c)
@@ -1872,6 +1908,12 @@ namespace CDPL
             return luSubstitute(lu, pv, c);
         }
 
+        /**
+         * \brief Computes the inverse of the matrix container \a c in place.
+         * \tparam C The matrix container type.
+         * \param c The matrix container to invert in place.
+         * \return \c true if \a c is invertible and the inverse was computed, and \c false if \a c is singular.
+         */
         template <typename C>
         bool
         invert(MatrixContainer<C>& c)
@@ -1879,19 +1921,31 @@ namespace CDPL
             return invert(c, c);
         }
 
+        /** \brief A Math::ZeroMatrix specialization with single-precision \c float elements. */
         typedef ZeroMatrix<float>         FZeroMatrix;
+        /** \brief A Math::ZeroMatrix specialization with double-precision \c double elements. */
         typedef ZeroMatrix<double>        DZeroMatrix;
+        /** \brief A Math::ZeroMatrix specialization with signed-integer \c long elements. */
         typedef ZeroMatrix<long>          LZeroMatrix;
+        /** \brief A Math::ZeroMatrix specialization with unsigned-integer \c unsigned \c long elements. */
         typedef ZeroMatrix<unsigned long> ULZeroMatrix;
 
+        /** \brief A Math::ScalarMatrix specialization with single-precision \c float elements. */
         typedef ScalarMatrix<float>         FScalarMatrix;
+        /** \brief A Math::ScalarMatrix specialization with double-precision \c double elements. */
         typedef ScalarMatrix<double>        DScalarMatrix;
+        /** \brief A Math::ScalarMatrix specialization with signed-integer \c long elements. */
         typedef ScalarMatrix<long>          LScalarMatrix;
+        /** \brief A Math::ScalarMatrix specialization with unsigned-integer \c unsigned \c long elements. */
         typedef ScalarMatrix<unsigned long> ULScalarMatrix;
 
+        /** \brief A Math::IdentityMatrix specialization with single-precision \c float elements. */
         typedef IdentityMatrix<float>         FIdentityMatrix;
+        /** \brief A Math::IdentityMatrix specialization with double-precision \c double elements. */
         typedef IdentityMatrix<double>        DIdentityMatrix;
+        /** \brief A Math::IdentityMatrix specialization with signed-integer \c long elements. */
         typedef IdentityMatrix<long>          LIdentityMatrix;
+        /** \brief A Math::IdentityMatrix specialization with unsigned-integer \c unsigned \c long elements. */
         typedef IdentityMatrix<unsigned long> ULIdentityMatrix;
 
         /**

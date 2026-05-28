@@ -38,7 +38,14 @@ namespace CDPL
     namespace Biomol
     {
 
+        /**
+         * \brief Sentinel value indicating that the residue sequence number should be ignored when matching residues.
+         */
         const long IGNORE_SEQUENCE_NO = std::numeric_limits<long>::min();
+
+        /**
+         * \brief Sentinel value indicating that the atom serial number should be ignored when matching atoms.
+         */
         const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
     } // namespace Biomol
 } // namespace CDPL

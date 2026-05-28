@@ -212,46 +212,91 @@ namespace CDPL
 
           public:
             typedef InitListVector                                SelfType;
+            /** \brief The wrapped \c std::initializer_list type. */
             typedef std::initializer_list<T>                      InitializerListType;
+            /** \brief The scalar value type. */
             typedef typename InitializerListType::value_type      ValueType;
+            /** \brief Constant reference type to an element. */
             typedef typename InitializerListType::const_reference ConstReference;
+            /** \brief Mutable reference type (degrades to ConstReference for the immutable initializer list). */
             typedef typename InitializerListType::reference       Reference;
+            /** \brief The unsigned size type. */
             typedef typename InitializerListType::size_type       SizeType;
+            /** \brief The signed difference type. */
             typedef typename std::ptrdiff_t                       DifferenceType;
+            /** \brief Closure type used when this vector appears inside another expression. */
             typedef SelfType                                      ClosureType;
+            /** \brief Constant closure type used when this vector appears inside another expression. */
             typedef const SelfType                                ConstClosureType;
+            /** \brief Concrete temporary vector type used by expression-template machinery. */
             typedef Vector<T, std::vector<T> >                    VectorTemporaryType;
 
+            /**
+             * \brief Constructs the vector by wrapping the initializer list \a l (no copy).
+             * \param l The initializer list to wrap.
+             */
             InitListVector(InitializerListType l):
                 list(l) {}
 
+            /**
+             * \brief Returns a reference to the element at index \a i (alias for operator()).
+             * \param i The zero-based element index.
+             * \return A reference to the element.
+             * \throw Base::IndexError if \a i is out of range.
+             */
             Reference operator[](SizeType i)
             {
                 return this->operator()(i);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \param i The zero-based element index.
+             * \return A \c const reference to the element.
+             * \throw Base::IndexError if \a i is out of range.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return this->operator()(i);
             }
 
+            /**
+             * \brief Returns a reference to the element at index \a i.
+             * \param i The zero-based element index.
+             * \return A reference to the element.
+             * \throw Base::IndexError if \a i is out of range.
+             */
             Reference operator()(SizeType i)
             {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return *(list.begin() + i);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at index \a i.
+             * \param i The zero-based element index.
+             * \return A \c const reference to the element.
+             * \throw Base::IndexError if \a i is out of range.
+             */
             ConstReference operator()(SizeType i) const
             {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return *(list.begin() + i);
             }
 
+            /**
+             * \brief Returns the size of the wrapped initializer list.
+             * \return The element count.
+             */
             SizeType getSize() const
             {
                 return list.size();
             }
 
+            /**
+             * \brief Tells whether the wrapped initializer list is empty.
+             * \return \c true if the list is empty, and \c false otherwise.
+             */
             bool isEmpty() const
             {
                 return (list.size() == 0);
@@ -1635,14 +1680,30 @@ namespace CDPL
             ValueType value;
         };
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying vector for a \c const Math::VectorReference view.
+         * \tparam V The underlying vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<const VectorReference<V> > : public VectorTemporaryTraits<V>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying vector for a Math::VectorReference view.
+         * \tparam V The underlying vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<VectorReference<V> > : public VectorTemporaryTraits<V>
         {};
 
+        /**
+         * \brief Constructs a Math::CVector of size 2 from the components \a t1 and \a t2.
+         * \tparam T1 The type of the first component.
+         * \tparam T2 The type of the second component.
+         * \param t1 The first component.
+         * \param t2 The second component.
+         * \return A 2-element vector with components (\a t1, \a t2).
+         */
         template <typename T1, typename T2>
         CVector<typename CommonType<T1, T2>::Type, 2>
         vec(const T1& t1, const T2& t2)
@@ -1655,6 +1716,16 @@ namespace CDPL
             return v;
         }
 
+        /**
+         * \brief Constructs a Math::CVector of size 3 from the components \a t1, \a t2 and \a t3.
+         * \tparam T1 The type of the first component.
+         * \tparam T2 The type of the second component.
+         * \tparam T3 The type of the third component.
+         * \param t1 The first component.
+         * \param t2 The second component.
+         * \param t3 The third component.
+         * \return A 3-element vector with components (\a t1, \a t2, \a t3).
+         */
         template <typename T1, typename T2, typename T3>
         CVector<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, 3>
         vec(const T1& t1, const T2& t2, const T3& t3)
@@ -1668,6 +1739,18 @@ namespace CDPL
             return v;
         }
 
+        /**
+         * \brief Constructs a Math::CVector of size 4 from the components \a t1, \a t2, \a t3 and \a t4.
+         * \tparam T1 The type of the first component.
+         * \tparam T2 The type of the second component.
+         * \tparam T3 The type of the third component.
+         * \tparam T4 The type of the fourth component.
+         * \param t1 The first component.
+         * \param t2 The second component.
+         * \param t3 The third component.
+         * \param t4 The fourth component.
+         * \return A 4-element vector with components (\a t1, \a t2, \a t3, \a t4).
+         */
         template <typename T1, typename T2, typename T3, typename T4>
         CVector<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type, 4>
         vec(const T1& t1, const T2& t2, const T3& t3, const T4& t4)
@@ -1682,14 +1765,22 @@ namespace CDPL
             return v;
         }
 
+        /** \brief A Math::ScalarVector specialization with single-precision \c float elements. */
         typedef ScalarVector<float>         FScalarVector;
+        /** \brief A Math::ScalarVector specialization with double-precision \c double elements. */
         typedef ScalarVector<double>        DScalarVector;
+        /** \brief A Math::ScalarVector specialization with signed-integer \c long elements. */
         typedef ScalarVector<long>          LScalarVector;
+        /** \brief A Math::ScalarVector specialization with unsigned-integer \c unsigned \c long elements. */
         typedef ScalarVector<unsigned long> ULScalarVector;
 
+        /** \brief A Math::ZeroVector specialization with single-precision \c float elements. */
         typedef ZeroVector<float>         FZeroVector;
+        /** \brief A Math::ZeroVector specialization with double-precision \c double elements. */
         typedef ZeroVector<double>        DZeroVector;
+        /** \brief A Math::ZeroVector specialization with signed-integer \c long elements. */
         typedef ZeroVector<long>          LZeroVector;
+        /** \brief A Math::ZeroVector specialization with unsigned-integer \c unsigned \c long elements. */
         typedef ZeroVector<unsigned long> ULZeroVector;
 
         typedef UnitVector<float>         FUnitVector;

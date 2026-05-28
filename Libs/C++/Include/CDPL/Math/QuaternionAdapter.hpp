@@ -338,6 +338,11 @@ namespace CDPL
 
         template <typename T, std::size_t N>
         class CVector;
+
+        /**
+         * \brief Math::VectorTemporaryTraits specialization selecting Math::CVector as the temporary type for a Math::QuaternionVectorAdapter view.
+         * \tparam Q The wrapped quaternion type.
+         */
         template <typename Q>
         struct VectorTemporaryTraits<QuaternionVectorAdapter<Q> >
         {
@@ -345,6 +350,10 @@ namespace CDPL
             typedef CVector<typename Q::ValueType, 4> Type;
         };
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization selecting Math::CVector as the temporary type for a \c const Math::QuaternionVectorAdapter view.
+         * \tparam Q The wrapped quaternion type.
+         */
         template <typename Q>
         struct VectorTemporaryTraits<const QuaternionVectorAdapter<Q> >
         {

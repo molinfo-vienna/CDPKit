@@ -788,18 +788,30 @@ namespace CDPL
             ValueType value;
         };
 
+        /**
+         * \brief Math::GridTemporaryTraits specialization inheriting the temporary type of the underlying grid for a Math::GridReference view.
+         * \tparam G The underlying grid type.
+         */
         template <typename G>
         struct GridTemporaryTraits<GridReference<G> > : public GridTemporaryTraits<G>
         {};
 
+        /**
+         * \brief Math::GridTemporaryTraits specialization inheriting the temporary type of the underlying grid for a \c const Math::GridReference view.
+         * \tparam G The underlying grid type.
+         */
         template <typename G>
         struct GridTemporaryTraits<const GridReference<G> > : public GridTemporaryTraits<G>
         {};
 
+        /** \brief A Math::ZeroGrid specialization with single-precision \c float elements. */
         typedef ZeroGrid<float>  FZeroGrid;
+        /** \brief A Math::ZeroGrid specialization with double-precision \c double elements. */
         typedef ZeroGrid<double> DZeroGrid;
 
+        /** \brief A Math::ScalarGrid specialization with single-precision \c float elements. */
         typedef ScalarGrid<float>  FScalarGrid;
+        /** \brief A Math::ScalarGrid specialization with double-precision \c double elements. */
         typedef ScalarGrid<double> DScalarGrid;
 
         /**

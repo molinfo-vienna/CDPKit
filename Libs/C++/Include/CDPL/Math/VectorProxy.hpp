@@ -592,18 +592,34 @@ namespace CDPL
             SliceType         slice;
         };
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying vector for a Math::VectorRange view.
+         * \tparam V The underlying vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<VectorRange<V> > : public VectorTemporaryTraits<V>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying vector for a \c const Math::VectorRange view.
+         * \tparam V The underlying vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<const VectorRange<V> > : public VectorTemporaryTraits<V>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying vector for a Math::VectorSlice view.
+         * \tparam V The underlying vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<VectorSlice<V> > : public VectorTemporaryTraits<V>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the underlying vector for a \c const Math::VectorSlice view.
+         * \tparam V The underlying vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<const VectorSlice<V> > : public VectorTemporaryTraits<V>
         {};
@@ -702,6 +718,15 @@ namespace CDPL
             return VectorSlice<const E>(e(), s);
         }
 
+        /**
+         * \brief Creates a mutable Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \param start The (inclusive) start index of the slice.
+         * \param stride The stride between successive slice elements.
+         * \param size The number of elements of the slice.
+         * \return A mutable slice view of \a e.
+         */
         template <typename E>
         VectorSlice<E>
         slice(VectorExpression<E>&                               e,
@@ -714,6 +739,15 @@ namespace CDPL
             return VectorSlice<E>(e(), SliceType(start, stride, size));
         }
 
+        /**
+         * \brief Creates a constant Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \param start The (inclusive) start index of the slice.
+         * \param stride The stride between successive slice elements.
+         * \param size The number of elements of the slice.
+         * \return A constant slice view of \a e.
+         */
         template <typename E>
         VectorSlice<const E>
         slice(const VectorExpression<E>&                               e,

@@ -47,9 +47,31 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Sums the MMFF94 bond-stretching interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94BondStretchingInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The summed bond-stretching interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94BondStretchingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /**
+         * \brief Calculates the bond-stretching interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param iaction The MMFF94 bond-stretching interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The bond-stretching interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94BondStretchingGradient(const MMFF94BondStretchingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
@@ -96,9 +118,31 @@ namespace CDPL
                                                    const ValueType& force_const, const ValueType& ref_length);
 
 
+        /**
+         * \brief Sums the MMFF94 angle-bending interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94AngleBendingInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The summed angle-bending interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94AngleBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /**
+         * \brief Calculates the angle-bending interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param iaction The MMFF94 angle-bending interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The angle-bending interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94AngleBendingGradient(const MMFF94AngleBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
@@ -157,9 +201,31 @@ namespace CDPL
                                                  const ValueType& force_const, const ValueType& ref_angle);
 
 
+        /**
+         * \brief Sums the MMFF94 stretch-bend coupling interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94StretchBendInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The summed stretch-bend interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94StretchBendGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /**
+         * \brief Calculates the stretch-bend coupling interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param iaction The MMFF94 stretch-bend interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The stretch-bend interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94StretchBendGradient(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
@@ -219,9 +285,31 @@ namespace CDPL
                                       const ValueType& ref_angle, const ValueType& ref_length1, const ValueType& ref_length2);
 
 
+        /**
+         * \brief Sums the MMFF94 out-of-plane bending interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94OutOfPlaneBendingInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The summed out-of-plane bending interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94OutOfPlaneBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /**
+         * \brief Calculates the out-of-plane bending interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param iaction The MMFF94 out-of-plane bending interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The out-of-plane bending interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94OutOfPlaneBendingGradient(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
@@ -268,9 +356,31 @@ namespace CDPL
                                                       GradVec& oop_atom_grad, const ValueType& force_const);
 
 
+        /**
+         * \brief Sums the MMFF94 torsion interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94TorsionInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The summed torsion interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94TorsionGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /**
+         * \brief Calculates the torsion interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param iaction The MMFF94 torsion interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The torsion interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94TorsionGradient(const MMFF94TorsionInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
@@ -319,9 +429,31 @@ namespace CDPL
                                             GradVec& term_atom2_grad, const ValueType& tor_param1, const ValueType& tor_param2, const ValueType& tor_param3);
 
 
+        /**
+         * \brief Sums the MMFF94 electrostatic interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94ElectrostaticInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The summed electrostatic interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94ElectrostaticGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /**
+         * \brief Calculates the electrostatic interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param iaction The MMFF94 electrostatic interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The electrostatic interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94ElectrostaticGradient(const MMFF94ElectrostaticInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
@@ -372,9 +504,31 @@ namespace CDPL
                                                   const ValueType& de_const, const ValueType& dist_expo);
 
 
+        /**
+         * \brief Sums the MMFF94 Van der Waals interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94VanDerWaalsInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The summed Van der Waals interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94VanDerWaalsGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /**
+         * \brief Calculates the Van der Waals interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type.
+         * \tparam GradVector The atom-position gradient vector type.
+         * \param iaction The MMFF94 Van der Waals interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \param grad The gradient vector to accumulate into.
+         * \return The Van der Waals interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94VanDerWaalsGradient(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords, GradVector& grad);
         /*

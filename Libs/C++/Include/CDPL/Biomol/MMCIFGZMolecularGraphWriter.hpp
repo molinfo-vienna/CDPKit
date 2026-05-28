@@ -40,6 +40,7 @@ namespace CDPL
     {
 
         /**
+         * \brief Writer for molecular graph data in the gzip-compressed <em>Macromolecular Crystallographic Information File (mmCIF)</em> [\ref MMCIF] format.
          * \since 1.2
          */
         typedef Util::CompressedDataWriter<MMCIFMolecularGraphWriter, Util::GZipOStream> MMCIFGZMolecularGraphWriter;

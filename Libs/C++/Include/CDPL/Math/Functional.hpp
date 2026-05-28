@@ -200,6 +200,10 @@ namespace CDPL
             typedef ValueType ResultType;
         };
 
+        /**
+         * \brief Scalar negation functor: <tt>apply(v)</tt> returns <tt>-v</tt>.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         struct ScalarNegation : public ScalarUnaryFunctor<T>
         {
@@ -208,12 +212,21 @@ namespace CDPL
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
             typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
+            /**
+             * \brief Returns <tt>-v</tt>.
+             * \param v The scalar argument.
+             * \return The negated value.
+             */
             static ResultType apply(ArgumentType v)
             {
                 return -v;
             }
         };
 
+        /**
+         * \brief Scalar complex-conjugation functor: <tt>apply(v)</tt> returns \f$ \overline{v} \f$ (identity for real types).
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         struct ScalarConjugation : public ScalarUnaryFunctor<T>
         {
@@ -222,6 +235,11 @@ namespace CDPL
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
             typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
+            /**
+             * \brief Returns the complex conjugate of \a v.
+             * \param v The scalar argument.
+             * \return The complex conjugate \f$ \overline{v} \f$.
+             */
             static ResultType apply(ArgumentType v)
             {
                 return TypeTraits<ValueType>::conj(v);
@@ -241,6 +259,10 @@ namespace CDPL
             typedef typename TypeTraits<T>::RealType ResultType;
         };
 
+        /**
+         * \brief Scalar real-part functor: <tt>apply(v)</tt> returns \f$ \mathrm{Re}(v) \f$ (identity for real types).
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         struct ScalarReal : public ScalarRealUnaryFunctor<T>
         {
@@ -249,12 +271,21 @@ namespace CDPL
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
             typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
+            /**
+             * \brief Returns the real part of \a v.
+             * \param v The scalar argument.
+             * \return \f$ \mathrm{Re}(v) \f$.
+             */
             static ResultType apply(ArgumentType v)
             {
                 return TypeTraits<ValueType>::real(v);
             }
         };
 
+        /**
+         * \brief Scalar imaginary-part functor: <tt>apply(v)</tt> returns \f$ \mathrm{Im}(v) \f$ (zero for real types).
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         struct ScalarImaginary : public ScalarRealUnaryFunctor<T>
         {
@@ -263,6 +294,11 @@ namespace CDPL
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
             typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
+            /**
+             * \brief Returns the imaginary part of \a v.
+             * \param v The scalar argument.
+             * \return \f$ \mathrm{Im}(v) \f$.
+             */
             static ResultType apply(ArgumentType v)
             {
                 return TypeTraits<ValueType>::imag(v);
@@ -287,6 +323,11 @@ namespace CDPL
             typedef typename CommonType<T1, T2>::Type ResultType;
         };
 
+        /**
+         * \brief Scalar binary addition functor: <tt>apply(t1, t2)</tt> returns <tt>t1 + t2</tt>.
+         * \tparam T1 The first argument type.
+         * \tparam T2 The second argument type.
+         */
         template <typename T1, typename T2>
         struct ScalarAddition : public ScalarBinaryFunctor<T1, T2>
         {
@@ -295,12 +336,23 @@ namespace CDPL
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
+            /**
+             * \brief Returns <tt>t1 + t2</tt>.
+             * \param t1 The first argument.
+             * \param t2 The second argument.
+             * \return The sum of \a t1 and \a t2.
+             */
             static ResultType apply(Argument1Type t1, Argument2Type t2)
             {
                 return (t1 + t2);
             }
         };
 
+        /**
+         * \brief Scalar binary subtraction functor: <tt>apply(t1, t2)</tt> returns <tt>t1 - t2</tt>.
+         * \tparam T1 The first argument type.
+         * \tparam T2 The second argument type.
+         */
         template <typename T1, typename T2>
         struct ScalarSubtraction : public ScalarBinaryFunctor<T1, T2>
         {
@@ -309,12 +361,23 @@ namespace CDPL
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
+            /**
+             * \brief Returns <tt>t1 - t2</tt>.
+             * \param t1 The minuend.
+             * \param t2 The subtrahend.
+             * \return The difference of \a t1 and \a t2.
+             */
             static ResultType apply(Argument1Type t1, Argument2Type t2)
             {
                 return (t1 - t2);
             }
         };
 
+        /**
+         * \brief Scalar binary multiplication functor: <tt>apply(t1, t2)</tt> returns <tt>t1 * t2</tt>.
+         * \tparam T1 The first argument type.
+         * \tparam T2 The second argument type.
+         */
         template <typename T1, typename T2>
         struct ScalarMultiplication : public ScalarBinaryFunctor<T1, T2>
         {
@@ -323,12 +386,23 @@ namespace CDPL
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
+            /**
+             * \brief Returns <tt>t1 * t2</tt>.
+             * \param t1 The first factor.
+             * \param t2 The second factor.
+             * \return The product of \a t1 and \a t2.
+             */
             static ResultType apply(Argument1Type t1, Argument2Type t2)
             {
                 return (t1 * t2);
             }
         };
 
+        /**
+         * \brief Scalar binary division functor: <tt>apply(t1, t2)</tt> returns <tt>t1 / t2</tt>.
+         * \tparam T1 The first argument type.
+         * \tparam T2 The second argument type.
+         */
         template <typename T1, typename T2>
         struct ScalarDivision : public ScalarBinaryFunctor<T1, T2>
         {
@@ -337,6 +411,12 @@ namespace CDPL
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
+            /**
+             * \brief Returns <tt>t1 / t2</tt>.
+             * \param t1 The dividend.
+             * \param t2 The divisor.
+             * \return The quotient of \a t1 and \a t2.
+             */
             static ResultType apply(Argument1Type t1, Argument2Type t2)
             {
                 return (t1 / t2);
@@ -355,12 +435,24 @@ namespace CDPL
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ResultType;
         };
 
+        /**
+         * \brief Vector inner-product functor: <tt>apply(e1, e2)</tt> returns \f$ \sum_i e_1(i) \cdot e_2(i) \f$.
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         */
         template <typename V1, typename V2>
         struct VectorInnerProduct : public VectorScalarBinaryFunctor<V1, V2>
         {
 
             typedef typename VectorScalarBinaryFunctor<V1, V2>::ResultType ResultType;
 
+            /**
+             * \brief Returns the inner product of \a e1 and \a e2.
+             * \param e1 The first vector expression.
+             * \param e2 The second vector expression.
+             * \return \f$ \sum_i e_1(i) \cdot e_2(i) \f$.
+             * \throw Base::SizeError if the two vector expressions differ in size.
+             */
             static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2)
             {
                 typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type SizeType;
@@ -375,12 +467,26 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning the cosine of the angle between two vectors (optionally clamped to <tt>[-1, 1]</tt>).
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         * \tparam T The norm-product scalar type.
+         */
         template <typename V1, typename V2, typename T>
         struct VectorAngleCosine : public VectorScalarBinaryFunctor<V1, V2>
         {
 
             typedef typename CommonType<typename VectorInnerProduct<V1, V2>::ResultType, T>::Type ResultType;
 
+            /**
+             * \brief Returns the cosine of the angle between \a e1 and \a e2.
+             * \param e1 The first vector expression.
+             * \param e2 The second vector expression.
+             * \param sd The precomputed product \f$ \|e_1\| \cdot \|e_2\| \f$ of the two vector magnitudes.
+             * \param clamp If \c true, the result is clamped to the range <tt>[-1, 1]</tt>.
+             * \return The (optionally clamped) cosine of the angle.
+             */
             static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, const T& sd, bool clamp)
             {
                 ResultType res = VectorInnerProduct<V1, V2>::apply(e1, e2) / sd;
@@ -406,6 +512,11 @@ namespace CDPL
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Vector equality functor: <tt>apply(e1, e2)</tt> tests element-wise equality of two vector expressions.
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         */
         template <typename V1, typename V2>
         struct VectorEquality : public VectorBooleanBinaryFunctor<V1, V2>
         {
@@ -414,6 +525,12 @@ namespace CDPL
             typedef typename VectorBooleanBinaryFunctor<V1, V2>::ValueType  ValueType;
             typedef typename VectorBooleanBinaryFunctor<V1, V2>::ResultType ResultType;
 
+            /**
+             * \brief Tells whether the vector expressions \a e1 and \a e2 are element-wise equal.
+             * \param e1 The first vector expression.
+             * \param e2 The second vector expression.
+             * \return \c true if both vectors have equal sizes and equal elements, and \c false otherwise.
+             */
             static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2)
             {
                 if (SizeType(e1().getSize()) != SizeType(e2().getSize()))
@@ -443,6 +560,12 @@ namespace CDPL
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Vector tolerance-equality functor: <tt>apply(e1, e2, eps)</tt> tests element-wise equality within an absolute tolerance.
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         * \tparam T The scalar tolerance type.
+         */
         template <typename V1, typename V2, typename T>
         struct VectorToleranceEquality : public Scalar3VectorBooleanTernaryFunctor<V1, V2, T>
         {
@@ -452,6 +575,13 @@ namespace CDPL
             typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::ResultType    ResultType;
             typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::Argument3Type Argument3Type;
 
+            /**
+             * \brief Tells whether the vector expressions \a e1 and \a e2 are element-wise equal within an absolute tolerance \a epsilon.
+             * \param e1 The first vector expression.
+             * \param e2 The second vector expression.
+             * \param epsilon The non-negative absolute tolerance.
+             * \return \c true if both vectors have equal sizes and corresponding elements agree within \a epsilon, and \c false otherwise.
+             */
             static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, Argument3Type epsilon)
             {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
@@ -481,12 +611,28 @@ namespace CDPL
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ResultType;
         };
 
+        /**
+         * \brief Vector cross-product functor: <tt>apply(e1, e2, i)</tt> returns the \a i-th component of the 3-vector cross product \f$ e_1 \times e_2 \f$.
+         * \tparam V1 The first vector expression type.
+         * \tparam V2 The second vector expression type.
+         */
         template <typename V1, typename V2>
         struct VectorCrossProduct : public VectorBinaryFunctor<V1, V2>
         {
 
             typedef typename VectorScalarBinaryFunctor<V1, V2>::ResultType ResultType;
 
+            /**
+             * \brief Returns the \a i-th component of the cross product \f$ e_1 \times e_2 \f$.
+             * \tparam E1 The first concrete vector expression type.
+             * \tparam E2 The second concrete vector expression type.
+             * \tparam SizeType The component-index type.
+             * \param e1 The first 3-vector expression.
+             * \param e2 The second 3-vector expression.
+             * \param i The zero-based component index (0, 1, or 2).
+             * \return The \a i-th component of the cross product.
+             * \throw Base::SizeError if either vector is not of size 3.
+             */
             template <typename E1, typename E2, typename SizeType>
             static ResultType apply(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i)
             {
@@ -510,6 +656,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that take a vector and return a scalar (Math::VectorElementSum).
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorScalarUnaryFunctor
         {
@@ -518,12 +668,21 @@ namespace CDPL
             typedef typename V::SizeType  SizeType;
         };
 
+        /**
+         * \brief Functor returning the sum of all elements of a vector expression.
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorElementSum : public VectorScalarUnaryFunctor<V>
         {
 
             typedef typename VectorScalarUnaryFunctor<V>::ResultType ResultType;
 
+            /**
+             * \brief Returns the sum of all elements of \a e.
+             * \param e The vector expression.
+             * \return \f$ \sum_i e(i) \f$.
+             */
             static ResultType apply(const VectorExpression<V>& e)
             {
                 typedef typename V::SizeType SizeType;

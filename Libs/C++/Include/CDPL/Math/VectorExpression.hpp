@@ -396,14 +396,28 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionVectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The quaternion expression type.
+         * \tparam E2 The vector expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct QuaternionVectorBinaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef QuaternionVectorBinary<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                    ResultType;
         };
 
+        /**
+         * \brief Returns the element-wise negation of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return An expression-template node representing \f$ -e \f$.
+         */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarNegation<typename E::ValueType> >::ResultType
         operator-(const VectorExpression<E>& e)
@@ -413,6 +427,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the vector expression \a e unchanged (unary \c +).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return A \c const reference to \a e.
+         */
         template <typename E>
         const E&
         operator+(const VectorExpression<E>& e)
@@ -420,6 +440,14 @@ namespace CDPL
             return e();
         }
 
+        /**
+         * \brief Returns the element-wise sum of the vector expressions \a e1 and \a e2.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \return An expression-template node representing \f$ e_1 + e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType
         operator+(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -430,6 +458,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the element-wise difference of the vector expressions \a e1 and \a e2.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \return An expression-template node representing \f$ e_1 - e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType
         operator-(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -440,6 +476,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the element-wise product of the vector expression \a e and the scalar \a t.
+         * \tparam E The vector expression type.
+         * \tparam T The scalar type.
+         * \param e The vector expression.
+         * \param t The scalar multiplier.
+         * \return An expression-template node representing \f$ e \cdot t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2VectorBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
         operator*(const VectorExpression<E>& e, const T& t)
@@ -450,6 +494,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Returns the element-wise product of the scalar \a t and the vector expression \a e.
+         * \tparam T The scalar type.
+         * \tparam E The vector expression type.
+         * \param t The scalar multiplier.
+         * \param e The vector expression.
+         * \return An expression-template node representing \f$ t \cdot e \f$.
+         */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1VectorBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
         operator*(const T& t, const VectorExpression<E>& e)
@@ -460,6 +512,14 @@ namespace CDPL
             return ExpressionType(t, e());
         }
 
+        /**
+         * \brief Returns the element-wise quotient of the vector expression \a e by the scalar \a t.
+         * \tparam E The vector expression type.
+         * \tparam T The scalar type.
+         * \param e The vector expression.
+         * \param t The scalar divisor.
+         * \return An expression-template node representing \f$ e / t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2VectorBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
         operator/(const VectorExpression<E>& e, const T& t)
@@ -470,6 +530,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Tells whether the vector expressions \a e1 and \a e2 are element-wise equal.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \return \c true if both vectors have equal sizes and equal elements, and \c false otherwise.
+         */
         template <typename E1, typename E2>
         typename VectorEquality<E1, E2>::ResultType
         operator==(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -477,6 +545,14 @@ namespace CDPL
             return VectorEquality<E1, E2>::apply(e1, e2);
         }
 
+        /**
+         * \brief Tells whether the vector expressions \a e1 and \a e2 differ in at least one element.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \return \c true if the vectors differ in size or in any element, and \c false otherwise.
+         */
         template <typename E1, typename E2>
         typename VectorEquality<E1, E2>::ResultType
         operator!=(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -484,6 +560,16 @@ namespace CDPL
             return !VectorEquality<E1, E2>::apply(e1, e2);
         }
 
+        /**
+         * \brief Tells whether the vector expressions \a e1 and \a e2 agree element-wise within the absolute tolerance \a eps.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \tparam T The numeric tolerance type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \param eps The non-negative absolute tolerance.
+         * \return \c true if all elements agree within \a eps, and \c false otherwise.
+         */
         template <typename E1, typename E2, typename T>
         typename std::enable_if<std::is_arithmetic<T>::value, typename VectorToleranceEquality<E1, E2, T>::ResultType>::type
         equals(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, const T& eps)
@@ -491,6 +577,12 @@ namespace CDPL
             return VectorToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
         }
 
+        /**
+         * \brief Returns the element-wise complex conjugate of the vector expression \a e (identity for real-valued vectors).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return An expression-template node representing \f$ \overline{e} \f$.
+         */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
         conj(const VectorExpression<E>& e)
@@ -500,6 +592,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the Hermitian conjugate of the vector expression \a e (alias of conj() for vectors).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return An expression-template node representing \f$ \overline{e} \f$.
+         */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
         herm(const VectorExpression<E>& e)
@@ -509,6 +607,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the element-wise real part of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return An expression-template node representing the real part of \a e.
+         */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
         real(const VectorExpression<E>& e)
@@ -518,6 +622,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the element-wise imaginary part of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return An expression-template node representing the imaginary part of \a e.
+         */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
         imag(const VectorExpression<E>& e)
@@ -527,6 +637,14 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the element-wise quotient of the vector expressions \a e1 and \a e2.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The numerator vector expression.
+         * \param e2 The denominator vector expression.
+         * \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
         elemDiv(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -537,6 +655,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the element-wise product (Hadamard product) of the vector expressions \a e1 and \a e2.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
         elemProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -547,6 +673,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the 3-vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first 3-vector expression.
+         * \param e2 The second 3-vector expression.
+         * \return An expression-template node representing the cross product.
+         */
         template <typename E1, typename E2>
         typename VectorBinary2Traits<E1, E2, VectorCrossProduct<E1, E2> >::ResultType
         crossProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -557,6 +691,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the inner (dot) product of the vector expressions \a e1 and \a e2.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \return \f$ \sum_i e_1(i) \cdot e_2(i) \f$.
+         */
         template <typename E1, typename E2>
         typename VectorInnerProduct<E1, E2>::ResultType
         innerProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -564,6 +706,17 @@ namespace CDPL
             return VectorInnerProduct<E1, E2>::apply(e1, e2);
         }
 
+        /**
+         * \brief Returns the cosine of the angle between the vector expressions \a e1 and \a e2 (optionally clamped to <tt>[-1, 1]</tt>).
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \tparam T The norm-product scalar type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \param sd The precomputed product \f$ \|e_1\| \cdot \|e_2\| \f$ of the two vector magnitudes.
+         * \param clamp If \c true (default), the result is clamped to the range <tt>[-1, 1]</tt>.
+         * \return The (optionally clamped) cosine of the angle.
+         */
         template <typename E1, typename E2, typename T>
         typename VectorAngleCosine<E1, E2, T>::ResultType
         angleCos(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, const T& sd, bool clamp = true)
@@ -571,6 +724,12 @@ namespace CDPL
             return VectorAngleCosine<E1, E2, T>::apply(e1, e2, sd, clamp);
         }
 
+        /**
+         * \brief Returns the sum of all elements of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return \f$ \sum_i e(i) \f$.
+         */
         template <typename E>
         typename VectorElementSum<E>::ResultType
         sum(const VectorExpression<E>& e)
@@ -578,6 +737,12 @@ namespace CDPL
             return VectorElementSum<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the L1 norm of the vector expression \a e (\f$ \sum_i |e(i)| \f$).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return The L1 norm.
+         */
         template <typename E>
         typename VectorNorm1<E>::ResultType
         norm1(const VectorExpression<E>& e)
@@ -585,6 +750,12 @@ namespace CDPL
             return VectorNorm1<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the L2 (Euclidean) norm of the vector expression \a e (\f$ \sqrt{\sum_i |e(i)|^2} \f$).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return The L2 norm.
+         */
         template <typename E>
         typename VectorNorm2<E>::ResultType
         norm2(const VectorExpression<E>& e)
@@ -592,6 +763,12 @@ namespace CDPL
             return VectorNorm2<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the L&infin; norm of the vector expression \a e (\f$ \max_i |e(i)| \f$).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return The L&infin; norm.
+         */
         template <typename E>
         typename VectorNormInfinity<E>::ResultType
         normInf(const VectorExpression<E>& e)
@@ -599,6 +776,12 @@ namespace CDPL
             return VectorNormInfinity<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the (first) index at which the vector expression \a e attains its L&infin; norm.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return The zero-based index of the element with the maximum absolute value.
+         */
         template <typename E>
         typename VectorNormInfinityIndex<E>::ResultType
         normInfIndex(const VectorExpression<E>& e)
@@ -606,6 +789,12 @@ namespace CDPL
             return VectorNormInfinityIndex<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the length (L2 norm) of the vector expression \a e (alias of norm2()).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return The vector length.
+         */
         template <typename E>
         typename VectorNorm2<E>::ResultType
         length(const VectorExpression<E>& e)
@@ -613,6 +802,12 @@ namespace CDPL
             return norm2(e);
         }
 
+        /**
+         * \brief Returns the transpose of the vector expression \a e (the identity for vectors — provided for matrix-API symmetry).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return A \c const reference to \a e.
+         */
         template <typename E>
         const E&
         trans(const VectorExpression<E>& e)
@@ -620,6 +815,12 @@ namespace CDPL
             return e();
         }
 
+        /**
+         * \brief Returns the transpose of the mutable vector expression \a e (the identity for vectors — provided for matrix-API symmetry).
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return A reference to \a e.
+         */
         template <typename E>
         E&
         trans(VectorExpression<E>& e)
@@ -627,6 +828,14 @@ namespace CDPL
             return e();
         }
 
+        /**
+         * \brief Rotates the vector expression \a e2 by the quaternion expression \a e1.
+         * \tparam E1 The quaternion expression type.
+         * \tparam E2 The vector expression type.
+         * \param e1 The unit quaternion expression encoding the rotation.
+         * \param e2 The vector expression to rotate.
+         * \return An expression-template node representing the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+         */
         template <typename E1, typename E2>
         typename QuaternionVectorBinaryTraits<E1, E2, QuaternionVectorRotation<E1, E2> >::ResultType
         rotate(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2)

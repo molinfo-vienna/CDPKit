@@ -40,6 +40,7 @@ namespace CDPL
     {
 
         /**
+         * \brief Reader for molecule data in the bzip2-compressed <em>Macromolecular Crystallographic Information File (mmCIF)</em> [\ref MMCIF] format.
          * \since 1.2
          */
         typedef Util::CompressedDataReader<MMCIFMoleculeReader, Util::BZip2IStream> MMCIFBZ2MoleculeReader;

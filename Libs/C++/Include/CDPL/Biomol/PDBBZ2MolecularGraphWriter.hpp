@@ -39,6 +39,9 @@ namespace CDPL
     namespace Biomol
     {
 
+        /**
+         * \brief Writer for molecular graph data in the bzip2-compressed <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+         */
         typedef Util::CompressedDataWriter<PDBMolecularGraphWriter, Util::BZip2OStream> PDBBZ2MolecularGraphWriter;
     }
 } // namespace CDPL

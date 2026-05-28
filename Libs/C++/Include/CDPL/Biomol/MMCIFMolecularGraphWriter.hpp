@@ -51,6 +51,7 @@ namespace CDPL
         class MMCIFDataWriter;
 
         /**
+         * \brief A writer for molecular graph data in the <em>Macromolecular Crystallographic Information File (mmCIF)</em> [\ref MMCIF] format.
          * \since 1.2
          */
         class CDPL_BIOMOL_API MMCIFMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>

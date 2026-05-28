@@ -151,6 +151,12 @@ namespace CDPL
              */
             bool findMappings(const MolecularGraph& molgraph);
 
+            /**
+             * \brief Aborts a currently running findMappings() call.
+             *
+             * Intended to be invoked from within the callback installed via setFoundMappingCallback() to stop the
+             * automorphism enumeration early.
+             */
             void stopSearch();
 
             /**
@@ -282,8 +288,19 @@ namespace CDPL
              */
             void clearBondMappingConstraints();
             
+            /**
+             * \brief Sets a callback that is invoked for every atom/bond mapping found during findMappings().
+             *
+             * Returning \c false from the callback aborts the search (equivalent to calling stopSearch()).
+             *
+             * \param func The new found-mapping callback.
+             */
             void setFoundMappingCallback(const MappingCallbackFunction& func);
 
+            /**
+             * \brief Returns the currently installed found-mapping callback.
+             * \return A \c const reference to the found-mapping callback.
+             */
             const MappingCallbackFunction& getFoundMappingCallback() const;
 
           private:

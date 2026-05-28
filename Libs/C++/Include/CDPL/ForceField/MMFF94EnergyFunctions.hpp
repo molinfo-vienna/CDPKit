@@ -45,9 +45,27 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Sums the bond-stretching interaction energies of all MMFF94 bond-stretching interactions in the iterator range <em>[beg, end)</em>.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94BondStretchingInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The summed bond-stretching interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94BondStretchingEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /**
+         * \brief Calculates the bond-stretching interaction energy of \a iaction using the geometry from \a coords.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param iaction The MMFF94 bond-stretching interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The bond-stretching interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcMMFF94BondStretchingEnergy(const MMFF94BondStretchingInteraction& iaction, const CoordsArray& coords);
 
@@ -104,9 +122,27 @@ namespace CDPL
         ValueType calcMMFF94BondStretchingEnergy(const ValueType& r_ij, const ValueType& force_const, const ValueType& ref_length);
 
 
+        /**
+         * \brief Sums the angle-bending interaction energies of all MMFF94 angle-bending interactions in the iterator range <em>[beg, end)</em>.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94AngleBendingInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The summed angle-bending interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94AngleBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /**
+         * \brief Calculates the angle-bending interaction energy of \a iaction using the geometry from \a coords.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param iaction The MMFF94 angle-bending interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The angle-bending interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcMMFF94AngleBendingEnergy(const MMFF94AngleBendingInteraction& iaction, const CoordsArray& coords);
 
@@ -178,9 +214,27 @@ namespace CDPL
                                                bool linear, const ValueType& force_const, const ValueType& ref_angle);
 
 
+        /**
+         * \brief Sums the stretch-bend coupling interaction energies of all MMFF94 stretch-bend interactions in the iterator range <em>[beg, end)</em>.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94StretchBendInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The summed stretch-bend interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94StretchBendEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /**
+         * \brief Calculates the stretch-bend coupling interaction energy of \a iaction using the geometry from \a coords.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param iaction The MMFF94 stretch-bend interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The stretch-bend interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcMMFF94StretchBendEnergy(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords);
 
@@ -258,9 +312,27 @@ namespace CDPL
                                               const ValueType& ref_length1, const ValueType& ref_length2);
 
 
+        /**
+         * \brief Sums the out-of-plane bending interaction energies of all MMFF94 out-of-plane bending interactions in the iterator range <em>[beg, end)</em>.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94OutOfPlaneBendingInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The summed out-of-plane bending interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94OutOfPlaneBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /**
+         * \brief Calculates the out-of-plane bending interaction energy of \a iaction using the geometry from \a coords.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param iaction The MMFF94 out-of-plane bending interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The out-of-plane bending interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcMMFF94OutOfPlaneBendingEnergy(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords);
 
@@ -308,9 +380,27 @@ namespace CDPL
                                                     const CoordsVec& oop_atom_pos, const ValueType& r_jl, const ValueType& force_const);
 
 
+        /**
+         * \brief Sums the torsion interaction energies of all MMFF94 torsion interactions in the iterator range <em>[beg, end)</em>.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94TorsionInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The summed torsion interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94TorsionEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /**
+         * \brief Calculates the torsion interaction energy of \a iaction using the geometry from \a coords.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param iaction The MMFF94 torsion interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The torsion interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcMMFF94TorsionEnergy(const MMFF94TorsionInteraction& iaction, const CoordsArray& coords);
 
@@ -341,9 +431,27 @@ namespace CDPL
                                           const ValueType& tor_param3);
 
 
+        /**
+         * \brief Sums the electrostatic interaction energies of all MMFF94 electrostatic interactions in the iterator range <em>[beg, end)</em>.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94ElectrostaticInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The summed electrostatic interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94ElectrostaticEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /**
+         * \brief Calculates the electrostatic interaction energy of \a iaction using the geometry from \a coords.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param iaction The MMFF94 electrostatic interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The electrostatic interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcMMFF94ElectrostaticEnergy(const MMFF94ElectrostaticInteraction& iaction, const CoordsArray& coords);
 
@@ -408,9 +516,27 @@ namespace CDPL
                                                 const ValueType& scale_fact, const ValueType& de_const, const ValueType& dist_expo);
 
 
+        /**
+         * \brief Sums the Van der Waals interaction energies of all MMFF94 Van der Waals interactions in the iterator range <em>[beg, end)</em>.
+         * \tparam ValueType The result value type.
+         * \tparam Iter The iterator type over MMFF94VanDerWaalsInteraction records.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param beg An iterator pointing to the first interaction.
+         * \param end An iterator pointing one past the last interaction.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The summed Van der Waals interaction energy.
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94VanDerWaalsEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /**
+         * \brief Calculates the Van der Waals interaction energy of \a iaction using the geometry from \a coords.
+         * \tparam ValueType The result value type.
+         * \tparam CoordsArray The atom-coordinates array type (indexable via atom index).
+         * \param iaction The MMFF94 Van der Waals interaction record.
+         * \param coords The atom-coordinates array providing the geometry.
+         * \return The Van der Waals interaction energy of \a iaction.
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcMMFF94VanDerWaalsEnergy(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords);
 
