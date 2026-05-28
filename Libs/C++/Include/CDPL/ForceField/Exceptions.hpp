@@ -39,21 +39,41 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief %Base class of the ForceField subsystem exception hierarchy.
+         */
         class CDPL_FORCEFIELD_API Error : public Base::Exception
         {
 
           public:
+            /**
+             * \brief Constructs an \c %Error instance with the given error message.
+             * \param msg The error message.
+             */
             Error(const std::string& msg = "");
 
+            /**
+             * \brief Destructor.
+             */
             virtual ~Error() throw();
         };
 
+        /**
+         * \brief Thrown when force-field parameter assignment for an interaction or atom fails.
+         */
         class CDPL_FORCEFIELD_API ParameterizationFailed : public Error
         {
 
           public:
+            /**
+             * \brief Constructs a \c %ParameterizationFailed instance with the given error message.
+             * \param msg The error message.
+             */
             ParameterizationFailed(const std::string& msg = "");
 
+            /**
+             * \brief Destructor.
+             */
             virtual ~ParameterizationFailed() throw();
         };
     } // namespace ForceField

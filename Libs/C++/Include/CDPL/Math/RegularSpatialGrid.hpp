@@ -94,22 +94,41 @@ namespace CDPL
             typedef RegularSpatialGrid<T, C, GD, XF> SelfType;
 
           public:
+            /** \brief The grid cell value type. */
             typedef T                                                       ValueType;
+            /** \brief The coordinate (real) value type used in the world frame. */
             typedef C                                                       CoordinatesValueType;
+            /** \brief The underlying grid data container type. */
             typedef GD                                                      GridDataType;
+            /** \brief The coordinate transformation type mapping cell indices to world coordinates. */
             typedef XF                                                      CoordinatesTransformType;
+            /** \brief The inverse coordinate transformation type. */
             typedef typename CoordinatesTransformType::MatrixTemporaryType  InvCoordinatesTransformType;
+            /** \brief Mutable reference type to a grid cell (degrades to ConstReference when the data container is \c const). */
             typedef typename std::conditional<std::is_const<GD>::value,
                                               typename GD::ConstReference,
                                               typename GD::Reference>::type Reference;
+            /** \brief Constant reference type to a grid cell. */
             typedef typename GD::ConstReference                             ConstReference;
+            /** \brief The unsigned size type used by the grid data container. */
             typedef typename GD::SizeType                                   SizeType;
+            /** \brief A signed size type used for offset arithmetic. */
             typedef std::ptrdiff_t                                          SSizeType;
+            /** \brief The signed difference type used by the grid data container. */
             typedef typename GD::DifferenceType                             DifferenceType;
+            /** \brief Closure type used when this grid appears inside another expression. */
             typedef SelfType                                                ClosureType;
+            /** \brief Constant closure type used when this grid appears inside another expression. */
             typedef const SelfType                                          ConstClosureType;
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RegularSpatialGrid instances. */
             typedef std::shared_ptr<SelfType>                               SharedPointer;
 
+            /**
+             * \brief Constructs an empty grid with anisotropic per-axis step sizes.
+             * \param xs The step size along the X axis.
+             * \param ys The step size along the Y axis.
+             * \param zs The step size along the Z axis.
+             */
             RegularSpatialGrid(const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs):
                 xStep(xs), yStep(ys), zStep(zs)
             {
@@ -118,6 +137,13 @@ namespace CDPL
                 GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
             }
 
+            /**
+             * \brief Constructs the grid with anisotropic per-axis step sizes initialized to the supplied grid data.
+             * \param data The grid data container.
+             * \param xs The step size along the X axis.
+             * \param ys The step size along the Y axis.
+             * \param zs The step size along the Z axis.
+             */
             RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs):
                 data(data), xStep(xs), yStep(ys), zStep(zs)
             {
@@ -126,6 +152,10 @@ namespace CDPL
                 GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
             }
 
+            /**
+             * \brief Constructs an empty grid with isotropic step size \a s on all three axes.
+             * \param s The step size used on every axis.
+             */
             explicit RegularSpatialGrid(const CoordinatesValueType& s):
                 xStep(s), yStep(s), zStep(s)
             {
@@ -134,6 +164,11 @@ namespace CDPL
                 GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
             }
 
+            /**
+             * \brief Constructs the grid with isotropic step size \a s and the supplied grid data.
+             * \param data The grid data container.
+             * \param s The step size used on every axis.
+             */
             RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& s):
                 data(data), xStep(s), yStep(s), zStep(s)
             {
@@ -142,6 +177,10 @@ namespace CDPL
                 GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
             }
 
+            /**
+             * \brief Constructs a copy of the \c %RegularSpatialGrid instance \a usg.
+             * \param usg The grid to copy.
+             */
             RegularSpatialGrid(const RegularSpatialGrid& usg):
                 data(usg.data), xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep),
                 xform(usg.xform), invXform(usg.invXform) {}

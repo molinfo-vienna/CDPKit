@@ -121,50 +121,92 @@ namespace CDPL
             friend struct UnitUpper;
 
           public:
+            /** \brief The wrapped matrix type. */
             typedef M                                                        MatrixType;
+            /** \brief The triangular-view selection policy. */
             typedef Tri                                                      TriangularType;
+            /** \brief The size type used by the underlying matrix. */
             typedef typename M::SizeType                                     SizeType;
+            /** \brief The signed difference type used by the underlying matrix. */
             typedef typename M::DifferenceType                               DifferenceType;
+            /** \brief The element value type of the underlying matrix. */
             typedef typename M::ValueType                                    ValueType;
+            /** \brief Constant reference type to an element of the underlying matrix. */
             typedef typename M::ConstReference                               ConstReference;
+            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
+            /** \brief Closure type used to store the wrapped matrix internally (mutable or const flavor). */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
+            /** \brief Constant closure type used when this adapter appears inside another expression. */
             typedef const SelfType                                           ConstClosureType;
+            /** \brief Closure type used when this adapter appears inside another expression. */
             typedef SelfType                                                 ClosureType;
+            /** \brief The Math::Range type used to address sub-ranges. */
             typedef Range<SizeType>                                          RangeType;
 
+            /**
+             * \brief Constructs the adapter wrapping \a m.
+             * \param m The matrix to be viewed through the triangular policy.
+             */
             explicit TriangularAdapter(MatrixType& m):
                 data(m) {}
 
+            /**
+             * \brief Returns the value of element (\a i, \a j) as seen through the triangular policy
+             *        (off-policy entries return the appropriate fill value: zero or one).
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return The element value as defined by the triangular-view policy.
+             */
             ConstReference operator()(SizeType i, SizeType j) const
             {
                 return TriangularType::template get<SelfType>(*this, i, j);
             }
 
+            /**
+             * \brief Returns the number of rows of the wrapped matrix.
+             * \return The row count.
+             */
             SizeType getSize1() const
             {
                 return data.getSize1();
             }
 
+            /**
+             * \brief Returns the number of columns of the wrapped matrix.
+             * \return The column count.
+             */
             SizeType getSize2() const
             {
                 return data.getSize2();
             }
 
+            /**
+             * \brief Returns a reference to the wrapped matrix (via its stored closure).
+             * \return A reference to the wrapped matrix closure.
+             */
             MatrixClosureType& getData()
             {
                 return data;
             }
 
+            /**
+             * \brief Returns a \c const reference to the wrapped matrix (via its stored closure).
+             * \return A \c const reference to the wrapped matrix closure.
+             */
             const MatrixClosureType& getData() const
             {
                 return data;
             }
 
+            /**
+             * \brief Tells whether the wrapped matrix is empty (zero rows or zero columns).
+             * \return \c true if the wrapped matrix is empty, and \c false otherwise.
+             */
             bool isEmpty() const
             {
                 return (data.getSize1() == 0 || data.getSize2() == 0);
@@ -198,6 +240,13 @@ namespace CDPL
         struct MatrixTemporaryTraits<const TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Creates a Math::TriangularAdapter view of the matrix expression \a e using the triangular policy \a Tri.
+         * \tparam Tri The triangular-view selection policy (Math::Lower, Math::UnitLower, Math::Upper or Math::UnitUpper).
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression to wrap.
+         * \return A mutable triangular view of \a e.
+         */
         template <typename Tri, typename E>
         TriangularAdapter<E, Tri>
         triang(MatrixExpression<E>& e)
@@ -205,6 +254,13 @@ namespace CDPL
             return TriangularAdapter<E, Tri>(e());
         }
 
+        /**
+         * \brief Creates a constant Math::TriangularAdapter view of the matrix expression \a e using the triangular policy \a Tri.
+         * \tparam Tri The triangular-view selection policy (Math::Lower, Math::UnitLower, Math::Upper or Math::UnitUpper).
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression to wrap.
+         * \return A constant triangular view of \a e.
+         */
         template <typename Tri, typename E>
         TriangularAdapter<const E, Tri>
         triang(const MatrixExpression<E>& e)

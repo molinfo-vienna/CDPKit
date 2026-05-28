@@ -44,12 +44,31 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Returns the value of the ForceField::BondProperty::MMFF94_TYPE_INDEX property of \a bond.
+         * \param bond The bond.
+         * \return The MMFF94 bond type index.
+         */
         CDPL_FORCEFIELD_API unsigned int getMMFF94TypeIndex(const Chem::Bond& bond);
 
+        /**
+         * \brief Sets the value of the ForceField::BondProperty::MMFF94_TYPE_INDEX property of \a bond to \a type_idx.
+         * \param bond The bond.
+         * \param type_idx The new MMFF94 bond type index.
+         */
         CDPL_FORCEFIELD_API void setMMFF94TypeIndex(Chem::Bond& bond, unsigned int type_idx);
 
+        /**
+         * \brief Removes the ForceField::BondProperty::MMFF94_TYPE_INDEX property from \a bond.
+         * \param bond The bond.
+         */
         CDPL_FORCEFIELD_API void clearMMFF94TypeIndex(Chem::Bond& bond);
 
+        /**
+         * \brief Tells whether \a bond carries an explicit ForceField::BondProperty::MMFF94_TYPE_INDEX property.
+         * \param bond The bond.
+         * \return \c true if the MMFF94 bond type index is set, and \c false otherwise.
+         */
         CDPL_FORCEFIELD_API bool hasMMFF94TypeIndex(const Chem::Bond& bond);
     } // namespace ForceField
 } // namespace CDPL

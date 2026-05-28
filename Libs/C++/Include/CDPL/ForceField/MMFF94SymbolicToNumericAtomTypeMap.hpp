@@ -44,54 +44,138 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Lookup table mapping each symbolic MMFF94 atom type to its corresponding numeric MMFF94 atom type.
+         */
         class CDPL_FORCEFIELD_API MMFF94SymbolicToNumericAtomTypeMap
         {
 
             typedef std::unordered_map<std::string, unsigned int> DataStorage;
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94SymbolicToNumericAtomTypeMap instances. */
             typedef std::shared_ptr<MMFF94SymbolicToNumericAtomTypeMap> SharedPointer;
 
+            /** \brief A constant iterator over the entries of the map. */
             typedef DataStorage::const_iterator ConstEntryIterator;
+            /** \brief A mutable iterator over the entries of the map. */
             typedef DataStorage::iterator       EntryIterator;
+            /** \brief The map entry type (a (symbolic type, numeric type) key/value pair). */
             typedef DataStorage::value_type     Entry;
 
+            /**
+             * \brief Constructs an empty \c %MMFF94SymbolicToNumericAtomTypeMap instance.
+             */
             MMFF94SymbolicToNumericAtomTypeMap();
 
+            /**
+             * \brief Adds (or overwrites) the symbolic-to-numeric mapping for \a sym_type.
+             * \param sym_type The symbolic MMFF94 atom type.
+             * \param num_type The corresponding numeric MMFF94 atom type.
+             */
             void addEntry(const std::string& sym_type, unsigned int num_type);
 
+            /**
+             * \brief Returns the numeric MMFF94 atom type associated with \a sym_type.
+             * \param sym_type The symbolic MMFF94 atom type.
+             * \return The corresponding numeric MMFF94 atom type, or \c 0 if no mapping exists.
+             */
             unsigned int getEntry(const std::string& sym_type) const;
 
+            /**
+             * \brief Removes all entries from the map.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of mappings stored in the map.
+             * \return The entry count.
+             */
             std::size_t getNumEntries() const;
 
+            /**
+             * \brief Removes the mapping for the symbolic MMFF94 atom type \a sym_type.
+             * \param sym_type The symbolic MMFF94 atom type.
+             * \return \c true if a matching entry was removed, and \c false if no such entry existed.
+             */
             bool removeEntry(const std::string& sym_type);
 
+            /**
+             * \brief Removes the entry pointed to by the iterator \a it.
+             * \param it An iterator pointing to the entry to remove.
+             * \return An iterator pointing to the entry immediately following the removed one.
+             */
             EntryIterator removeEntry(const EntryIterator& it);
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the entry list.
+             * \return A constant iterator to the first entry.
+             */
             ConstEntryIterator getEntriesBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry.
+             * \return A constant iterator to the end of the entry list.
+             */
             ConstEntryIterator getEntriesEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the entry list.
+             * \return A mutable iterator to the first entry.
+             */
             EntryIterator getEntriesBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last entry.
+             * \return A mutable iterator to the end of the entry list.
+             */
             EntryIterator getEntriesEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the entry list (alias of getEntriesBegin()).
+             * \return A constant iterator to the first entry.
+             */
             ConstEntryIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry (alias of getEntriesEnd()).
+             * \return A constant iterator to the end of the entry list.
+             */
             ConstEntryIterator end() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the entry list (alias of getEntriesBegin()).
+             * \return A mutable iterator to the first entry.
+             */
             EntryIterator begin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last entry (alias of getEntriesEnd()).
+             * \return A mutable iterator to the end of the entry list.
+             */
             EntryIterator end();
 
+            /**
+             * \brief Loads map entries from the input stream \a is.
+             * \param is The input stream to read from.
+             */
             void load(std::istream& is);
 
+            /**
+             * \brief Loads the built-in default symbolic-to-numeric atom-type mappings.
+             */
             void loadDefaults();
 
+            /**
+             * \brief Replaces the process-wide default map by \a map.
+             * \param map The new default map (a \c nullptr resets to the built-in default).
+             */
             static void set(const SharedPointer& map);
 
+            /**
+             * \brief Returns the process-wide default map (lazily initialized on first call).
+             * \return A \c const reference to the default-map shared pointer.
+             */
             static const SharedPointer& get();
 
           private:

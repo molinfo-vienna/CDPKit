@@ -179,6 +179,7 @@ namespace CDPL
             /**
              * \brief Removes the registered pattern referenced by \a it.
              * \param it Iterator referencing the pattern to remove.
+             * \throw Base::IndexError if \a it is not in the range [getPatternsBegin(), getPatternsEnd() - 1].
              */
             void removePattern(const PatternIterator& it);
 

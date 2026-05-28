@@ -39,6 +39,9 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief A dynamically-sized array of MMFF94 Van der Waals interaction records.
+         */
         typedef Util::Array<MMFF94VanDerWaalsInteraction> MMFF94VanDerWaalsInteractionList;
     }
 } // namespace CDPL

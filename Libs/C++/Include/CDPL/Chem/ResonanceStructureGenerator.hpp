@@ -52,7 +52,12 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief ResonanceStructureGenerator.
+         * \brief Enumerates the resonance structures of a molecular graph by redistributing &pi;-electrons across the
+         *        resonance-active bonds.
+         *
+         * For each generated resonance structure the per-atom formal charges and per-bond bond-orders are reported as a
+         * Chem::ResonanceStructureGenerator::StructureData record. Optional post-processing minimizes octet-rule
+         * violations, sp-hybridization-geometry violations, and 1,2-charge separations on adjacent carbon atoms.
          */
         class CDPL_CHEM_API ResonanceStructureGenerator
         {
@@ -66,17 +71,30 @@ namespace CDPL
             typedef std::vector<StructureDataPtr>           StructureDataList;
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResonanceStructureGenerator instances. */
             typedef std::shared_ptr<ResonanceStructureGenerator>                                     SharedPointer;
+            /** \brief A constant iterator over the generated resonance-structure records. */
             typedef boost::indirect_iterator<StructureDataList::const_iterator, const StructureData> ConstStructureDataIterator;
 
+            /**
+             * \brief Holds the per-atom formal charges and per-bond bond-orders that define a single resonance structure.
+             */
             class CDPL_CHEM_API StructureData
             {
 
                 friend class ResonanceStructureGenerator;
 
               public:
+                /**
+                 * \brief Returns the per-atom formal charges of this resonance structure.
+                 * \return A \c const reference to the per-atom formal-charge array.
+                 */
                 const Util::LArray& getAtomCharges() const;
 
+                /**
+                 * \brief Returns the per-bond bond-orders of this resonance structure.
+                 * \return A \c const reference to the per-bond bond-order array.
+                 */
                 const Util::STArray& getBondOrders() const;
 
               private:
@@ -90,52 +108,138 @@ namespace CDPL
              */
             ResonanceStructureGenerator();
 
+            /**
+             * \brief Constructs a copy of the \c %ResonanceStructureGenerator instance \a gen.
+             * \param gen The \c %ResonanceStructureGenerator to copy.
+             */
             ResonanceStructureGenerator(const ResonanceStructureGenerator& gen);
 
+            /**
+             * \brief Virtual destructor.
+             */
             virtual ~ResonanceStructureGenerator() {}
 
+            /**
+             * \brief Replaces the state of this generator by a copy of the state of \a gen.
+             * \param gen The source \c %ResonanceStructureGenerator.
+             * \return A reference to itself.
+             */
             ResonanceStructureGenerator& operator=(const ResonanceStructureGenerator& gen);
 
+            /**
+             * \brief Returns the bit mask of atom types subjected to the octet-rule check during minimization.
+             * \return A reference to the bit mask (indexed by Chem::AtomType value).
+             */
             Util::BitSet& getOctetRuleCheckAtomTypes();
 
+            /**
+             * \brief Returns the bit mask of atom types subjected to the octet-rule check during minimization.
+             * \return A \c const reference to the bit mask (indexed by Chem::AtomType value).
+             */
             const Util::BitSet& getOctetRuleCheckAtomTypes() const;
 
+            /**
+             * \brief Specifies whether resonance structures violating the octet rule shall be filtered out.
+             * \param minimize If \c true, structures with octet-rule violations on the configured atom types are minimized.
+             */
             void minimizeOctetRuleViolations(bool minimize);
 
+            /**
+             * \brief Tells whether octet-rule violations are minimized.
+             * \return \c true if octet-rule violations are minimized, and \c false otherwise.
+             */
             bool octetRuleViolationsMinimized() const;
 
+            /**
+             * \brief Specifies whether resonance structures with sp-hybridization-geometry violations shall be filtered out.
+             * \param minimize If \c true, sp-hybridization-geometry violations are minimized.
+             */
             void minimizeSP1GeometryViolations(bool minimize);
 
+            /**
+             * \brief Tells whether sp-hybridization-geometry violations are minimized.
+             * \return \c true if sp-geometry violations are minimized, and \c false otherwise.
+             */
             bool sp1GeometryViolationsMinimized() const;
 
+            /**
+             * \brief Specifies whether resonance structures with 1,2-charge separations on adjacent carbon atoms shall be filtered out.
+             * \param minimize If \c true, 1,2-charged C&minus;C resonance forms are minimized.
+             */
             void minimizeCarbonBond12Charges(bool minimize);
 
+            /**
+             * \brief Tells whether 1,2-charge separations on adjacent carbon atoms are minimized.
+             * \return \c true if 1,2-charged C&minus;C resonance forms are minimized, and \c false otherwise.
+             */
             bool carbonBond12ChargesMinimized() const;
 
+            /**
+             * \brief Sets the maximum allowed difference between the lowest and highest formal-charge count of accepted resonance structures.
+             * \param win_size The new charge-count window size.
+             */
             void setChargeCountWindow(std::size_t win_size);
 
+            /**
+             * \brief Returns the configured charge-count window size.
+             * \return The charge-count window size.
+             */
             std::size_t getChargeCountWindow() const;
 
+            /**
+             * \brief Sets the upper limit on the number of resonance structures generated per molecule.
+             * \param max_num The new output-structure limit.
+             */
             void setMaxNumGeneratedStructures(std::size_t max_num);
 
+            /**
+             * \brief Returns the upper limit on the number of resonance structures generated per molecule.
+             * \return The output-structure limit.
+             */
             std::size_t getMaxNumGeneratedStructures() const;
 
             /**
-             * \brief Generates all unique resonanceStructures of the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to generate the resonanceStructures.
+             * \brief Generates all unique resonance structures of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to generate the resonance structures.
              */
             void generate(const MolecularGraph& molgraph);
 
+            /**
+             * \brief Returns the number of generated resonance structures.
+             * \return The resonance-structure count.
+             */
             std::size_t getNumStructures() const;
 
+            /**
+             * \brief Returns the resonance-structure record at index \a idx.
+             * \param idx The zero-based structure index.
+             * \return A \c const reference to the resonance-structure record.
+             * \throw Base::IndexError if the number of resonance structures is zero or \a idx is not in the range [0, getNumStructures() - 1].
+             */
             const StructureData& getStructureData(std::size_t idx) const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first generated resonance-structure record.
+             * \return A constant iterator pointing to the first record.
+             */
             ConstStructureDataIterator getStructureDataBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last generated resonance-structure record.
+             * \return A constant iterator pointing one past the last record.
+             */
             ConstStructureDataIterator getStructureDataEnd() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first generated record (range-based for support).
+             * \return A constant iterator pointing to the first record.
+             */
             ConstStructureDataIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last generated record (range-based for support).
+             * \return A constant iterator pointing one past the last record.
+             */
             ConstStructureDataIterator end() const;
 
           private:

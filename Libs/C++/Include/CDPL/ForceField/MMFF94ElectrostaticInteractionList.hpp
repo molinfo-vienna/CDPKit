@@ -39,6 +39,9 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief A dynamically-sized array of MMFF94 electrostatic interaction records.
+         */
         typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionList;
     }
 } // namespace CDPL

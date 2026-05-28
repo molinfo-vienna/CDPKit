@@ -47,6 +47,10 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Lookup table mapping (atomic-number 1, atomic-number 2) pairs to fallback MMFF94 bond-stretching
+         *        parameters used when no atom-type-specific entry is available.
+         */
         class CDPL_FORCEFIELD_API MMFF94BondStretchingRuleParameterTable
         {
 
@@ -57,24 +61,58 @@ namespace CDPL
             typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94BondStretchingRuleParameterTable instances. */
             typedef std::shared_ptr<MMFF94BondStretchingRuleParameterTable> SharedPointer;
 
+            /**
+             * \brief A single rule-based bond-stretching parameter record.
+             */
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
+                /**
+                 * \brief Constructs an empty (uninitialized) \c %Entry instance.
+                 */
                 Entry();
 
+                /**
+                 * \brief Constructs an \c %Entry for the given (atomic number 1, atomic number 2) pair.
+                 * \param atomic_no1 The atomic number of the first bonded atom.
+                 * \param atomic_no2 The atomic number of the second bonded atom.
+                 * \param force_const The bond-stretching force constant.
+                 * \param ref_length The reference bond length.
+                 */
                 Entry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
 
+                /**
+                 * \brief Returns the atomic number of the first bonded atom.
+                 * \return The first atom's atomic number.
+                 */
                 unsigned int getAtomicNumber1() const;
 
+                /**
+                 * \brief Returns the atomic number of the second bonded atom.
+                 * \return The second atom's atomic number.
+                 */
                 unsigned int getAtomicNumber2() const;
 
+                /**
+                 * \brief Returns the bond-stretching force constant.
+                 * \return The force constant.
+                 */
                 double getForceConstant() const;
 
+                /**
+                 * \brief Returns the reference bond length.
+                 * \return The reference bond length.
+                 */
                 double getReferenceLength() const;
 
+                /**
+                 * \brief Tells whether the entry holds initialized data.
+                 * \return \c true if the entry was constructed with explicit values, and \c false if it is the empty default.
+                 */
                 operator bool() const;
 
               private:
@@ -85,50 +123,133 @@ namespace CDPL
                 bool         initialized;
             };
 
+            /** \brief A constant iterator over the entries of the table. */
             typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
                                               DataStorage::const_iterator>
                 ConstEntryIterator;
 
+            /** \brief A mutable iterator over the entries of the table. */
             typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
                                               DataStorage::iterator>
                 EntryIterator;
 
+            /**
+             * \brief Constructs an empty \c %MMFF94BondStretchingRuleParameterTable instance.
+             */
             MMFF94BondStretchingRuleParameterTable();
 
+            /**
+             * \brief Adds (or overwrites) the entry for the given (atomic number 1, atomic number 2) pair.
+             * \param atomic_no1 The atomic number of the first bonded atom.
+             * \param atomic_no2 The atomic number of the second bonded atom.
+             * \param force_const The bond-stretching force constant.
+             * \param ref_length The reference bond length.
+             */
             void addEntry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
 
+            /**
+             * \brief Returns the entry for the given (atomic number 1, atomic number 2) pair.
+             * \param atomic_no1 The atomic number of the first bonded atom.
+             * \param atomic_no2 The atomic number of the second bonded atom.
+             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             */
             const Entry& getEntry(unsigned int atomic_no1, unsigned int atomic_no2) const;
 
+            /**
+             * \brief Returns the number of entries in the table.
+             * \return The entry count.
+             */
             std::size_t getNumEntries() const;
 
+            /**
+             * \brief Removes all entries from the table.
+             */
             void clear();
 
+            /**
+             * \brief Removes the entry for the given (atomic number 1, atomic number 2) pair.
+             * \param atomic_no1 The atomic number of the first bonded atom.
+             * \param atomic_no2 The atomic number of the second bonded atom.
+             * \return \c true if a matching entry was removed, and \c false if no such entry existed.
+             */
             bool removeEntry(unsigned int atomic_no1, unsigned int atomic_no2);
 
+            /**
+             * \brief Removes the entry pointed to by the iterator \a it.
+             * \param it An iterator pointing to the entry to remove.
+             * \return An iterator pointing to the entry immediately following the removed one.
+             */
             EntryIterator removeEntry(const EntryIterator& it);
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the entry list.
+             * \return A constant iterator to the first entry.
+             */
             ConstEntryIterator getEntriesBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry.
+             * \return A constant iterator to the end of the entry list.
+             */
             ConstEntryIterator getEntriesEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the entry list.
+             * \return A mutable iterator to the first entry.
+             */
             EntryIterator getEntriesBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last entry.
+             * \return A mutable iterator to the end of the entry list.
+             */
             EntryIterator getEntriesEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the entry list (alias of getEntriesBegin()).
+             * \return A constant iterator to the first entry.
+             */
             ConstEntryIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry (alias of getEntriesEnd()).
+             * \return A constant iterator to the end of the entry list.
+             */
             ConstEntryIterator end() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the entry list (alias of getEntriesBegin()).
+             * \return A mutable iterator to the first entry.
+             */
             EntryIterator begin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last entry (alias of getEntriesEnd()).
+             * \return A mutable iterator to the end of the entry list.
+             */
             EntryIterator end();
 
+            /**
+             * \brief Loads table entries from the input stream \a is.
+             * \param is The input stream to read from.
+             */
             void load(std::istream& is);
 
+            /**
+             * \brief Loads the built-in default bond-stretching rule parameter entries.
+             */
             void loadDefaults();
 
+            /**
+             * \brief Replaces the process-wide default table by \a table.
+             * \param table The new default table (a \c nullptr resets to the built-in default).
+             */
             static void set(const SharedPointer& table);
 
+            /**
+             * \brief Returns the process-wide default table (lazily initialized on first call).
+             * \return A \c const reference to the default-table shared pointer.
+             */
             static const SharedPointer& get();
 
           private:

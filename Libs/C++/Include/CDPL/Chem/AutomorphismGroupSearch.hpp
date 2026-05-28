@@ -46,7 +46,13 @@ namespace CDPL
     {
 
         /**
-         * \brief AutomorphismGroupSearch.
+         * \brief Enumerates the atom/bond automorphisms of a molecular graph.
+         *
+         * The automorphism group of a molecular graph is the set of self-mappings (atom-permutations and
+         * the induced bond-permutations) that preserve the molecular graph structure under the configured
+         * atom and bond property flags. Atom and bond matching is configurable via the Chem::AtomPropertyFlag
+         * and Chem::BondPropertyFlag bit masks. Found mappings are stored as Chem::AtomBondMapping objects
+         * and can be iterated or accessed by index.
          */
         class CDPL_CHEM_API AutomorphismGroupSearch
         {
@@ -67,6 +73,7 @@ namespace CDPL
                 BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
                 BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AutomorphismGroupSearch instances. */
             typedef std::shared_ptr<AutomorphismGroupSearch> SharedPointer;
 
             /**
@@ -79,10 +86,13 @@ namespace CDPL
              */
             typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
 
+            /** \brief Type of the callback invoked for every found mapping (return \c false to abort the search). */
             typedef std::function<bool(const MolecularGraph&, const AtomBondMapping&)> MappingCallbackFunction;
 
             /**
              * \brief Constructs and initializes a \c %AutomorphismGroupSearch instance.
+             * \param atom_flags The bitwise-OR combination of Chem::AtomPropertyFlag values considered for atom matching.
+             * \param bond_flags The bitwise-OR combination of Chem::BondPropertyFlag values considered for bond matching.
              */
             AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS,
                                     unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
@@ -91,16 +101,40 @@ namespace CDPL
 
             AutomorphismGroupSearch& operator=(const AutomorphismGroupSearch&) = delete;
 
+            /**
+             * \brief Specifies the atomic properties considered for atom matching during automorphism search.
+             * \param flags The new bitwise-OR combination of Chem::AtomPropertyFlag values.
+             */
             void setAtomPropertyFlags(unsigned int flags);
 
+            /**
+             * \brief Returns the atomic properties currently considered for atom matching.
+             * \return The bitwise-OR combination of Chem::AtomPropertyFlag values.
+             */
             unsigned int getAtomPropertyFlags() const;
 
+            /**
+             * \brief Specifies the bond properties considered for bond matching during automorphism search.
+             * \param flags The new bitwise-OR combination of Chem::BondPropertyFlag values.
+             */
             void setBondPropertyFlags(unsigned int flags);
 
+            /**
+             * \brief Returns the bond properties currently considered for bond matching.
+             * \return The bitwise-OR combination of Chem::BondPropertyFlag values.
+             */
             unsigned int getBondPropertyFlags() const;
 
+            /**
+             * \brief Specifies whether the identity mapping shall be included in the search results.
+             * \param include If \c true, the identity mapping is also reported.
+             */
             void includeIdentityMapping(bool include);
 
+            /**
+             * \brief Tells whether the identity mapping is included in the search results.
+             * \return \c true if the identity mapping is included, and \c false otherwise.
+             */
             bool identityMappingIncluded() const;
 
             /**

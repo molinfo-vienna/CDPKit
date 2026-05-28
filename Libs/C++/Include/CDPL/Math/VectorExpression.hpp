@@ -88,11 +88,18 @@ namespace CDPL
             ExpressionClosureType expr;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::VectorUnary instantiation <\a E, \a F>.
+         * \tparam E The vector expression type.
+         * \tparam F The unary functor type.
+         */
         template <typename E, typename F>
         struct VectorUnaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef VectorUnary<E, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType    ResultType;
         };
 
@@ -145,14 +152,33 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::VectorBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct VectorBinary1Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef VectorBinary1<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType           ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two vector expressions \a E1 and \a E2 via a binary functor \a F
+         *        invoked with both expressions plus the element index \e i.
+         *
+         * Unlike Math::VectorBinary1 (which is element-wise), the functor here receives both expressions verbatim
+         * along with the element index — used for inner products and similar non-element-wise combinations.
+         *
+         * \tparam E1 The first wrapped vector expression type.
+         * \tparam E2 The second wrapped vector expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class VectorBinary2 : public VectorExpression<VectorBinary2<E1, E2, F> >
         {
@@ -196,14 +222,28 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::VectorBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct VectorBinary2Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef VectorBinary2<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType           ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a scalar \a E1 (lhs) and a vector expression \a E2 (rhs) element-wise via the binary functor \a F.
+         * \tparam E1 The scalar type appearing on the left-hand side.
+         * \tparam E2 The wrapped vector expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar1VectorBinary : public VectorExpression<Scalar1VectorBinary<E1, E2, F> >
         {
@@ -247,10 +287,17 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1VectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The scalar type on the left-hand side.
+         * \tparam E2 The vector expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar1VectorBinaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar1VectorBinary<E1, E2, F> ExpressionType;
             typedef ExpressionType                 ResultType;
         };

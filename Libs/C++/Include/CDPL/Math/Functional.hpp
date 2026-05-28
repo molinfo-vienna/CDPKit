@@ -68,6 +68,11 @@ namespace CDPL
             typedef const T2& Argument2Type;
         };
 
+        /**
+         * \brief Scalar plain-assignment functor: <tt>apply(t1, t2)</tt> performs <tt>t1 = t2</tt>.
+         * \tparam T1 The (modifiable) destination type.
+         * \tparam T2 The source type.
+         */
         template <typename T1, typename T2>
         struct ScalarAssignment : public ScalarBinaryAssignmentFunctor<T1, T2>
         {
@@ -75,12 +80,22 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
+            /**
+             * \brief Performs <tt>t1 = t2</tt>.
+             * \param t1 The destination scalar.
+             * \param t2 The source scalar.
+             */
             static void apply(Argument1Type t1, Argument2Type t2)
             {
                 t1 = t2;
             }
         };
 
+        /**
+         * \brief Scalar in-place addition functor: <tt>apply(t1, t2)</tt> performs <tt>t1 += t2</tt>.
+         * \tparam T1 The (modifiable) destination type.
+         * \tparam T2 The source type.
+         */
         template <typename T1, typename T2>
         struct ScalarAdditionAssignment : public ScalarBinaryAssignmentFunctor<T1, T2>
         {
@@ -88,12 +103,22 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
+            /**
+             * \brief Performs <tt>t1 += t2</tt>.
+             * \param t1 The destination scalar.
+             * \param t2 The summand.
+             */
             static void apply(Argument1Type t1, Argument2Type t2)
             {
                 t1 += t2;
             }
         };
 
+        /**
+         * \brief Scalar in-place subtraction functor: <tt>apply(t1, t2)</tt> performs <tt>t1 -= t2</tt>.
+         * \tparam T1 The (modifiable) destination type.
+         * \tparam T2 The source type.
+         */
         template <typename T1, typename T2>
         struct ScalarSubtractionAssignment : public ScalarBinaryAssignmentFunctor<T1, T2>
         {
@@ -101,12 +126,22 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
+            /**
+             * \brief Performs <tt>t1 -= t2</tt>.
+             * \param t1 The destination scalar.
+             * \param t2 The subtrahend.
+             */
             static void apply(Argument1Type t1, Argument2Type t2)
             {
                 t1 -= t2;
             }
         };
 
+        /**
+         * \brief Scalar in-place multiplication functor: <tt>apply(t1, t2)</tt> performs <tt>t1 *= t2</tt>.
+         * \tparam T1 The (modifiable) destination type.
+         * \tparam T2 The source type.
+         */
         template <typename T1, typename T2>
         struct ScalarMultiplicationAssignment : public ScalarBinaryAssignmentFunctor<T1, T2>
         {
@@ -114,12 +149,22 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
+            /**
+             * \brief Performs <tt>t1 *= t2</tt>.
+             * \param t1 The destination scalar.
+             * \param t2 The multiplier.
+             */
             static void apply(Argument1Type t1, Argument2Type t2)
             {
                 t1 *= t2;
             }
         };
 
+        /**
+         * \brief Scalar in-place division functor: <tt>apply(t1, t2)</tt> performs <tt>t1 /= t2</tt>.
+         * \tparam T1 The (modifiable) destination type.
+         * \tparam T2 The source type.
+         */
         template <typename T1, typename T2>
         struct ScalarDivisionAssignment : public ScalarBinaryAssignmentFunctor<T1, T2>
         {
@@ -127,6 +172,11 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
+            /**
+             * \brief Performs <tt>t1 /= t2</tt>.
+             * \param t1 The destination scalar.
+             * \param t2 The divisor.
+             */
             static void apply(Argument1Type t1, Argument2Type t2)
             {
                 t1 /= t2;

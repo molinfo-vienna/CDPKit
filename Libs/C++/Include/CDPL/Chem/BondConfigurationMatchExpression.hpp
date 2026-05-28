@@ -46,7 +46,11 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief BondConfigurationMatchExpression.
+         * \brief Chem::MatchExpression that constrains target bonds by their stereo configuration relative to a query bond.
+         *
+         * Used in substructure searches with stereochemistry support: the expression evaluates the target bond's
+         * cis/trans stereo configuration (as defined by its Chem::StereoDescriptor) against the configuration constraint
+         * flags derived from the query bond's descriptor.
          */
         class CDPL_CHEM_API BondConfigurationMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {

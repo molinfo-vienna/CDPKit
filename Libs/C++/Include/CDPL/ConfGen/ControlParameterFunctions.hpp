@@ -44,12 +44,31 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Returns the value of the ConfGen::ControlParameter::STRICT_ERROR_CHECKING parameter stored in \a cntnr.
+         * \param cntnr The control-parameter container to query.
+         * \return The current value of the STRICT_ERROR_CHECKING parameter (the ConfGen::ControlParameterDefault::STRICT_ERROR_CHECKING value if the parameter is unset).
+         */
         CDPL_CONFGEN_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \brief Sets the value of the ConfGen::ControlParameter::STRICT_ERROR_CHECKING parameter stored in \a cntnr.
+         * \param cntnr The control-parameter container to update.
+         * \param strict The new STRICT_ERROR_CHECKING value.
+         */
         CDPL_CONFGEN_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
 
+        /**
+         * \brief Tells whether the ConfGen::ControlParameter::STRICT_ERROR_CHECKING parameter is set on \a cntnr.
+         * \param cntnr The control-parameter container to query.
+         * \return \c true if the parameter is set, and \c false otherwise.
+         */
         CDPL_CONFGEN_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \brief Removes the ConfGen::ControlParameter::STRICT_ERROR_CHECKING parameter from \a cntnr.
+         * \param cntnr The control-parameter container to update.
+         */
         CDPL_CONFGEN_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
     } // namespace ConfGen

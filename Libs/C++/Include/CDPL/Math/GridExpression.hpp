@@ -96,11 +96,18 @@ namespace CDPL
             ExpressionClosureType expr;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::GridUnary instantiation <\a E, \a F>.
+         * \tparam E The grid expression type.
+         * \tparam F The unary functor type.
+         */
         template <typename E, typename F>
         struct GridUnaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef GridUnary<E, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType  ResultType;
         };
 
@@ -158,14 +165,28 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::GridBinary1 instantiation Binary <\a E1, \a E2, \a F>.
+         * \tparam E1 The first grid expression type.
+         * \tparam E2 The second grid expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct GridBinary1Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef GridBinary1<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType         ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a scalar \a E1 (lhs) and a grid expression \a E2 (rhs) element-wise via the binary functor \a F.
+         * \tparam E1 The scalar type appearing on the left-hand side.
+         * \tparam E2 The wrapped grid expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar1GridBinary : public GridExpression<Scalar1GridBinary<E1, E2, F> >
         {
@@ -214,14 +235,28 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1GridBinary instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The scalar type on the left-hand side.
+         * \tparam E2 The grid expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar1GridBinaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar1GridBinary<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType               ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a grid expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
+         * \tparam E1 The wrapped grid expression type.
+         * \tparam E2 The scalar type appearing on the right-hand side.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar2GridBinary : public GridExpression<Scalar2GridBinary<E1, E2, F> >
         {
@@ -270,11 +305,19 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2GridBinary instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The grid expression type.
+         * \tparam E2 The scalar type on the right-hand side.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar2GridBinaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar2GridBinary<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType               ResultType;
         };
 

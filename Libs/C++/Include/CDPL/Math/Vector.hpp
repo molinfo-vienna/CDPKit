@@ -273,41 +273,87 @@ namespace CDPL
             typedef Vector<T, A> SelfType;
 
           public:
+            /** \brief The scalar value type stored in the vector. */
             typedef T                                     ValueType;
+            /** \brief Mutable reference type to an element. */
             typedef T&                                    Reference;
+            /** \brief Constant reference type to an element. */
             typedef const T&                              ConstReference;
+            /** \brief The unsigned size type used by the underlying storage container. */
             typedef typename A::size_type                 SizeType;
+            /** \brief The signed difference type used by the underlying storage container. */
             typedef typename A::difference_type           DifferenceType;
+            /** \brief The underlying storage container type. */
             typedef A                                     ArrayType;
+            /** \brief Pointer type for raw element access. */
             typedef T*                                    Pointer;
+            /** \brief Constant pointer type for raw element access. */
             typedef const T*                              ConstPointer;
+            /** \brief Closure type used when this vector appears inside another expression. */
             typedef VectorReference<SelfType>             ClosureType;
+            /** \brief Constant closure type used when this vector appears inside another expression. */
             typedef const VectorReference<const SelfType> ConstClosureType;
+            /** \brief Concrete temporary vector type used by expression-template machinery. */
             typedef SelfType                              VectorTemporaryType;
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Vector instances. */
             typedef std::shared_ptr<SelfType>             SharedPointer;
+            /** \brief Type of the brace-initializer list accepted by the corresponding constructor. */
             typedef std::initializer_list<T>              InitializerListType;
 
+            /**
+             * \brief Constructs an empty vector (size zero).
+             */
             Vector():
                 data() {}
 
+            /**
+             * \brief Constructs a vector of size \a n with default-initialized elements.
+             * \param n The desired vector size.
+             */
             explicit Vector(SizeType n):
                 data(storageSize(n)) {}
 
+            /**
+             * \brief Constructs a vector of size \a n with every element initialized to \a v.
+             * \param n The desired vector size.
+             * \param v The element value used to initialize every entry.
+             */
             Vector(SizeType n, const ValueType& v):
                 data(storageSize(n), v) {}
 
+            /**
+             * \brief Constructs a vector that copies its data directly from the underlying-array container \a data.
+             * \param data The source storage container.
+             */
             Vector(const ArrayType& data):
                 data(data) {}
 
+            /**
+             * \brief Constructs a copy of the vector \a v.
+             * \param v The vector to copy.
+             */
             Vector(const Vector& v):
                 data(v.data) {}
 
+            /**
+             * \brief Move-constructs a vector from \a v (\a v is left in a valid empty state).
+             * \param v The vector to move from.
+             */
             Vector(Vector&& v):
                 data(std::move(v.data)) {}
 
+            /**
+             * \brief Constructs the vector from a brace-initializer list \a l.
+             * \param l The initializer list (one element per vector entry).
+             */
             Vector(InitializerListType l):
                 data(l) {}
 
+            /**
+             * \brief Constructs the vector from the vector expression \a e (materializing the expression result).
+             * \tparam E The vector expression type.
+             * \param e The vector expression to materialize.
+             */
             template <typename E>
             Vector(const VectorExpression<E>& e):
                 data(storageSize(e().getSize()))
