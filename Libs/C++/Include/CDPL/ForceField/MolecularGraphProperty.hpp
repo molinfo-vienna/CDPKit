@@ -50,6 +50,11 @@ namespace CDPL
         namespace MolecularGraphProperty
         {
 
+            /**
+             * \brief Specifies the list of aromatic rings used by the MMFF94 force field.
+             *
+             * \valuetype Chem::FragmentList::SharedPointer
+             */
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_AROMATIC_RINGS;
         }
     } // namespace ForceField

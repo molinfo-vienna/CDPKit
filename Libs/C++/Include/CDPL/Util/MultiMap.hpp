@@ -191,10 +191,18 @@ namespace CDPL
              */
             virtual ~MultiMap() {}
 
+            /**
+             * \brief Returns a non-\c const reference to the underlying \c std::multimap storage.
+             * \return A non-\c const reference to the underlying storage container.
+             */
             StorageType& getData();
 
+            /**
+             * \brief Returns a \c const reference to the underlying \c std::multimap storage.
+             * \return A \c const reference to the underlying storage container.
+             */
             const StorageType& getData() const;
-            
+
             /**
              * \brief Returns the size (number of entries) of the map.
              * \return The size of the map.
@@ -492,26 +500,30 @@ namespace CDPL
             void setEntries(const InputIter& first, const InputIter& last);
 
             /**
-             * \brief Returns a mutable iterator pointing to the first entry whose key is not less than the specified key.
-             * \return A mutable iterator pointing to the first entry whose key is not less than the specified key.
+             * \brief Returns a mutable iterator pointing to the first entry whose key is not less than \a key.
+             * \param key The key to compare against.
+             * \return A mutable iterator pointing to the first entry whose key is not less than \a key.
              */
             EntryIterator getLowerBound(const Key& key);
 
             /**
-             * \brief Returns a constant iterator pointing to the first entry whose key is not less than the specified key.
-             * \return A constant iterator pointing to the first entry whose key is not less than the specified key.
+             * \brief Returns a constant iterator pointing to the first entry whose key is not less than \a key.
+             * \param key The key to compare against.
+             * \return A constant iterator pointing to the first entry whose key is not less than \a key.
              */
             ConstEntryIterator getLowerBound(const Key& key) const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the first entry whose key is greater than the specified key.
-             * \return A mutable iterator pointing to the first entry whose key is greater than the specified key.
+             * \brief Returns a mutable iterator pointing to the first entry whose key is greater than \a key.
+             * \param key The key to compare against.
+             * \return A mutable iterator pointing to the first entry whose key is greater than \a key.
              */
             EntryIterator getUpperBound(const Key& key);
 
             /**
-             * \brief Returns a constant iterator pointing to the first entry whose key is greater than the specified key.
-             * \return A constant iterator pointing to the first entry whose key is greater than the specified key.
+             * \brief Returns a constant iterator pointing to the first entry whose key is greater than \a key.
+             * \param key The key to compare against.
+             * \return A constant iterator pointing to the first entry whose key is greater than \a key.
              */
             ConstEntryIterator getUpperBound(const Key& key) const;
 

@@ -39,7 +39,10 @@ namespace CDPL
     {
 
         /**
-         * \brief A generic wrapper class used to store a user-defined callback functions (see [\ref FUNWRP]).
+         * \brief A generic wrapper for storing user-defined callback functions returning a \c bool status flag (see [\ref FUNWRP]).
+         *
+         * Used by the conformer generation pipeline (Chem::ConformerGenerator, Chem::TorsionDriver, etc.) for
+         * the periodic abort and timeout-check callbacks: returning \c false signals the pipeline to abort.
          */
         typedef std::function<bool()> CallbackFunction;
     } // namespace ConfGen

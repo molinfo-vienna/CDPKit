@@ -89,14 +89,28 @@ namespace CDPL
             ExpressionClosureType expr;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionUnary1 instantiation <\a E, \a F>.
+         * \tparam E The quaternion expression type.
+         * \tparam F The unary functor type.
+         */
         template <typename E, typename F>
         struct QuaternionUnary1Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef QuaternionUnary1<E, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType         ResultType;
         };
 
+        /**
+         * \brief Expression-template node applying a per-component functor \a F to a quaternion expression \a E,
+         *        where \a F exposes four separate apply methods (\c applyC1 / \c applyC2 / \c applyC3 / \c applyC4)
+         *        operating on the whole source expression.
+         * \tparam E The wrapped quaternion expression type.
+         * \tparam F The per-component functor type.
+         */
         template <typename E, typename F>
         class QuaternionUnary2 : public QuaternionExpression<QuaternionUnary2<E, F> >
         {
@@ -140,11 +154,18 @@ namespace CDPL
             ExpressionClosureType expr;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionUnary2 instantiation <\a E, \a F>.
+         * \tparam E The quaternion expression type.
+         * \tparam F The per-component functor type.
+         */
         template <typename E, typename F>
         struct QuaternionUnary2Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef QuaternionUnary2<E, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType         ResultType;
         };
 

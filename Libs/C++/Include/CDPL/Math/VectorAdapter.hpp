@@ -53,23 +53,45 @@ namespace CDPL
             typedef HomogenousCoordsAdapter<V> SelfType;
 
           public:
+            /** \brief The wrapped vector type. */
             typedef V                                                        VectorType;
+            /** \brief The size type used by the wrapped vector. */
             typedef typename V::SizeType                                     SizeType;
+            /** \brief The signed difference type used by the wrapped vector. */
             typedef typename V::DifferenceType                               DifferenceType;
+            /** \brief The element value type of the wrapped vector. */
             typedef typename V::ValueType                                    ValueType;
+            /** \brief Constant reference type to an element. */
             typedef typename V::ConstReference                               ConstReference;
+            /** \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const). */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type   Reference;
+            /** \brief Closure type used to store the wrapped vector internally (mutable or const flavor). */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstClosureType,
                                               typename V::ClosureType>::type VectorClosureType;
+            /** \brief Constant closure type used when this adapter appears inside another expression. */
             typedef const SelfType                                           ConstClosureType;
+            /** \brief Closure type used when this adapter appears inside another expression. */
             typedef SelfType                                                 ClosureType;
 
+            /**
+             * \brief Constructs the adapter wrapping \a v.
+             * \param v The vector to be viewed as its homogeneous-coordinate extension.
+             */
             HomogenousCoordsAdapter(VectorType& v):
                 data(v), extElem(1) {}
 
+            /**
+             * \brief Returns a mutable reference to the element at index \a i of the view.
+             *
+             * Index <tt>getSize() - 1</tt> returns the extension element (initialized to \e 1); all lower indices
+             * return the corresponding element of the wrapped vector.
+             *
+             * \param i The zero-based index within the view.
+             * \return A mutable reference to the element.
+             */
             Reference operator()(SizeType i)
             {
                 if (i == data.getSize())
@@ -78,6 +100,11 @@ namespace CDPL
                 return data(i);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at index \a i of the view.
+             * \param i The zero-based index within the view.
+             * \return A \c const reference to the element.
+             */
             ConstReference operator()(SizeType i) const
             {
                 if (i == data.getSize())
@@ -86,6 +113,11 @@ namespace CDPL
                 return data(i);
             }
 
+            /**
+             * \brief Returns a mutable reference to the element at index \a i of the view (alias for operator()).
+             * \param i The zero-based index within the view.
+             * \return A mutable reference to the element.
+             */
             Reference operator[](SizeType i)
             {
                 if (i == data.getSize())
@@ -94,6 +126,11 @@ namespace CDPL
                 return data[i];
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at index \a i of the view (alias for operator()).
+             * \param i The zero-based index within the view.
+             * \return A \c const reference to the element.
+             */
             ConstReference operator[](SizeType i) const
             {
                 if (i == data.getSize())
@@ -102,32 +139,59 @@ namespace CDPL
                 return data[i];
             }
 
+            /**
+             * \brief Returns the dimensionality of the view (wrapped vector size + 1).
+             * \return The view size.
+             */
             SizeType getSize() const
             {
                 return (data.getSize() + SizeType(1));
             }
 
+            /**
+             * \brief Tells whether the view is empty (always \c false; the view always has at least the extension element).
+             * \return \c false.
+             */
             bool isEmpty() const
             {
                 return false;
             }
 
+            /**
+             * \brief Returns a reference to the wrapped vector (via its stored closure).
+             * \return A reference to the wrapped vector closure.
+             */
             VectorClosureType& getData()
             {
                 return data;
             }
 
+            /**
+             * \brief Returns a \c const reference to the wrapped vector (via its stored closure).
+             * \return A \c const reference to the wrapped vector closure.
+             */
             const VectorClosureType& getData() const
             {
                 return data;
             }
 
+            /**
+             * \brief Copies the elements of \a va into this view (writing through to the wrapped vector and to the extension element).
+             * \param va The source adapter.
+             * \return A reference to itself.
+             */
             HomogenousCoordsAdapter& operator=(const HomogenousCoordsAdapter& va)
             {
                 vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(va));
                 return *this;
             }
 
+            /**
+             * \brief Assigns the vector expression \a e to this view (writing through to the wrapped vector).
+             * \tparam E The source vector expression type.
+             * \param e The source vector expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             HomogenousCoordsAdapter& operator=(const VectorExpression<E>& e)
             {
@@ -135,6 +199,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the vector expression \a e componentwise to this view.
+             * \tparam E The source vector expression type.
+             * \param e The vector expression to add.
+             * \return A reference to itself.
+             */
             template <typename E>
             HomogenousCoordsAdapter& operator+=(const VectorExpression<E>& e)
             {
@@ -142,6 +212,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the vector expression \a e componentwise from this view.
+             * \tparam E The source vector expression type.
+             * \param e The vector expression to subtract.
+             * \return A reference to itself.
+             */
             template <typename E>
             HomogenousCoordsAdapter& operator-=(const VectorExpression<E>& e)
             {
@@ -149,6 +225,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Multiplies every element of this view by the scalar \a t.
+             * \tparam T The scalar type.
+             * \param t The scalar multiplier.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, HomogenousCoordsAdapter>::type& operator*=(const T& t)
             {
@@ -156,6 +238,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Divides every element of this view by the scalar \a t.
+             * \tparam T The scalar type.
+             * \param t The scalar divisor.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, HomogenousCoordsAdapter>::type& operator/=(const T& t)
             {
@@ -163,6 +251,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the vector expression \a e to this view without intermediate temporary.
+             * \tparam E The source vector expression type.
+             * \param e The source vector expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             HomogenousCoordsAdapter& assign(const VectorExpression<E>& e)
             {
@@ -170,6 +264,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the vector expression \a e to this view without intermediate temporary.
+             * \tparam E The source vector expression type.
+             * \param e The source vector expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             HomogenousCoordsAdapter& plusAssign(const VectorExpression<E>& e)
             {
@@ -177,6 +277,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the vector expression \a e from this view without intermediate temporary.
+             * \tparam E The source vector expression type.
+             * \param e The source vector expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             HomogenousCoordsAdapter& minusAssign(const VectorExpression<E>& e)
             {
@@ -184,12 +290,21 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Swaps the contents of this view with those of \a va.
+             * \param va The view to swap with.
+             */
             void swap(HomogenousCoordsAdapter& va)
             {
                 if (this != &va)
                     vectorSwap(*this, va);
             }
 
+            /**
+             * \brief ADL-enabled free-function form of swap().
+             * \param va1 The first adapter.
+             * \param va2 The second adapter.
+             */
             friend void swap(HomogenousCoordsAdapter& va1, HomogenousCoordsAdapter& va2)
             {
                 va1.swap(va2);
@@ -211,66 +326,117 @@ namespace CDPL
             typedef VectorQuaternionAdapter<V> SelfType;
 
           public:
+            /** \brief The wrapped 4-element vector type. */
             typedef V                                                        VectorType;
+            /** \brief The element value type. */
             typedef typename V::ValueType                                    ValueType;
+            /** \brief Constant reference type to a component. */
             typedef typename V::ConstReference                               ConstReference;
+            /** \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const). */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type   Reference;
+            /** \brief Closure type used to store the wrapped vector internally. */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstClosureType,
                                               typename V::ClosureType>::type VectorClosureType;
+            /** \brief Constant closure type used when this adapter appears inside another expression. */
             typedef const SelfType                                           ConstClosureType;
+            /** \brief Closure type used when this adapter appears inside another expression. */
             typedef SelfType                                                 ClosureType;
 
+            /**
+             * \brief Constructs the adapter wrapping the 4-element vector \a v.
+             * \param v The 4-element vector to be viewed as a quaternion.
+             */
             explicit VectorQuaternionAdapter(VectorType& v):
                 data(v) {}
 
+            /**
+             * \brief Returns a mutable reference to component C1 (mapped to element 0 of the wrapped vector).
+             * \return A mutable reference to C1.
+             */
             Reference getC1()
             {
                 return data(0);
             }
 
+            /**
+             * \brief Returns a mutable reference to component C2 (mapped to element 1 of the wrapped vector).
+             * \return A mutable reference to C2.
+             */
             Reference getC2()
             {
                 return data(1);
             }
 
+            /**
+             * \brief Returns a mutable reference to component C3 (mapped to element 2 of the wrapped vector).
+             * \return A mutable reference to C3.
+             */
             Reference getC3()
             {
                 return data(2);
             }
 
+            /**
+             * \brief Returns a mutable reference to component C4 (mapped to element 3 of the wrapped vector).
+             * \return A mutable reference to C4.
+             */
             Reference getC4()
             {
                 return data(3);
             }
 
+            /**
+             * \brief Returns a \c const reference to component C1.
+             * \return A \c const reference to C1.
+             */
             ConstReference getC1() const
             {
                 return data(0);
             }
 
+            /**
+             * \brief Returns a \c const reference to component C2.
+             * \return A \c const reference to C2.
+             */
             ConstReference getC2() const
             {
                 return data(1);
             }
 
+            /**
+             * \brief Returns a \c const reference to component C3.
+             * \return A \c const reference to C3.
+             */
             ConstReference getC3() const
             {
                 return data(2);
             }
 
+            /**
+             * \brief Returns a \c const reference to component C4.
+             * \return A \c const reference to C4.
+             */
             ConstReference getC4() const
             {
                 return data(3);
             }
 
+            /**
+             * \brief Returns a reference to the wrapped vector (via its stored closure).
+             * \return A reference to the wrapped vector closure.
+             */
             VectorClosureType& getData()
             {
                 return data;
             }
 
+            /**
+             * \brief Returns a \c const reference to the wrapped vector (via its stored closure).
+             * \return A \c const reference to the wrapped vector closure.
+             */
             const VectorClosureType& getData() const
             {
                 return data;

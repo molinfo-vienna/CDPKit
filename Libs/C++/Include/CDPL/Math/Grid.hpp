@@ -60,17 +60,29 @@ namespace CDPL
             typedef GridReference<G> SelfType;
 
           public:
+            /** \brief The wrapped grid type. */
             typedef G                                                      GridType;
+            /** \brief The element value type of the wrapped grid. */
             typedef typename G::ValueType                                  ValueType;
+            /** \brief Mutable reference type (degrades to ConstReference when the wrapped grid is \c const). */
             typedef typename std::conditional<std::is_const<G>::value,
                                               typename G::ConstReference,
                                               typename G::Reference>::type Reference;
+            /** \brief Constant reference type to an element. */
             typedef typename G::ConstReference                             ConstReference;
+            /** \brief The unsigned size type used by the wrapped grid. */
             typedef typename G::SizeType                                   SizeType;
+            /** \brief The signed difference type used by the wrapped grid. */
             typedef typename G::DifferenceType                             DifferenceType;
+            /** \brief Closure type used when this reference appears inside another expression. */
             typedef SelfType                                               ClosureType;
+            /** \brief Constant closure type used when this reference appears inside another expression. */
             typedef const SelfType                                         ConstClosureType;
 
+            /**
+             * \brief Constructs the reference wrapping the grid \a g.
+             * \param g The grid to wrap.
+             */
             explicit GridReference(GridType& g):
                 data(g) {}
 
@@ -237,37 +249,78 @@ namespace CDPL
             typedef Grid<T, A> SelfType;
 
           public:
+            /** \brief The scalar value type stored in the grid. */
             typedef T                                   ValueType;
+            /** \brief Mutable reference type to an element. */
             typedef T&                                  Reference;
+            /** \brief Constant reference type to an element. */
             typedef const T&                            ConstReference;
+            /** \brief The unsigned size type used by the underlying storage container. */
             typedef typename A::size_type               SizeType;
+            /** \brief The signed difference type used by the underlying storage container. */
             typedef typename A::difference_type         DifferenceType;
+            /** \brief The underlying storage container type. */
             typedef A                                   ArrayType;
+            /** \brief Pointer type for raw element access. */
             typedef T*                                  Pointer;
+            /** \brief Constant pointer type for raw element access. */
             typedef const T*                            ConstPointer;
+            /** \brief Closure type used when this grid appears inside another expression. */
             typedef GridReference<SelfType>             ClosureType;
+            /** \brief Constant closure type used when this grid appears inside another expression. */
             typedef const GridReference<const SelfType> ConstClosureType;
+            /** \brief Concrete temporary grid type used by expression-template machinery. */
             typedef SelfType                            GridTemporaryType;
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Grid instances. */
             typedef std::shared_ptr<SelfType>           SharedPointer;
 
+            /**
+             * \brief Constructs an empty grid (zero size on every axis).
+             */
             Grid():
                 data(), size1(0), size2(0), size3(0) {}
 
+            /**
+             * \brief Constructs an \e m &times; \e n &times; \e o grid with default-initialized elements.
+             * \param m The size along the first axis.
+             * \param n The size along the second axis.
+             * \param o The size along the third axis.
+             */
             Grid(SizeType m, SizeType n, SizeType o):
                 data(storageSize(m, n, o)), size1(m), size2(n), size3(o) {}
 
+            /**
+             * \brief Constructs an \e m &times; \e n &times; \e o grid with every element initialized to \a v.
+             * \param m The size along the first axis.
+             * \param n The size along the second axis.
+             * \param o The size along the third axis.
+             * \param v The element value used to initialize every cell.
+             */
             Grid(SizeType m, SizeType n, SizeType o, const ValueType& v):
                 data(storageSize(m, n, o), v), size1(m), size2(n), size3(o) {}
 
+            /**
+             * \brief Constructs a copy of the grid \a g.
+             * \param g The grid to copy.
+             */
             Grid(const Grid& g):
                 data(g.data), size1(g.size1), size2(g.size2), size3(g.size3) {}
 
+            /**
+             * \brief Move-constructs a grid from \a g (\a g is left in a valid empty state).
+             * \param g The grid to move from.
+             */
             Grid(Grid&& g):
                 data(), size1(0), size2(0), size3(0)
             {
                 swap(g);
             }
 
+            /**
+             * \brief Constructs the grid from the grid expression \a e (materializing the expression result).
+             * \tparam E The grid expression type.
+             * \param e The grid expression to materialize.
+             */
             template <typename E>
             Grid(const GridExpression<E>& e):
                 data(storageSize(e().getSize1(), e().getSize2(), e().getSize3())), size1(e().getSize1()), size2(e().getSize2()), size3(e().getSize3())

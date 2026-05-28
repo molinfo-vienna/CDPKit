@@ -46,6 +46,16 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Lookup table mapping numeric UFF atom types to the per-atom-type parameters used by the
+         *        <em>Universal Force Field (UFF)</em>.
+         *
+         * Each entry provides the natural bond radius and bond angle of the atom type, its Van der Waals
+         * parameters (well distance, well depth, and scaling factor), and the effective atomic charge used
+         * by the UFF electrostatic terms.
+         *
+         * \see [\ref UFF]
+         */
         class CDPL_FORCEFIELD_API UFFAtomTypePropertyTable
         {
 
@@ -56,35 +66,94 @@ namespace CDPL
             typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %UFFAtomTypePropertyTable instances. */
             typedef std::shared_ptr<UFFAtomTypePropertyTable> SharedPointer;
 
+            /**
+             * \brief A single UFF atom-type property record.
+             */
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
+                /**
+                 * \brief Constructs an empty (uninitialized) \c %Entry instance.
+                 */
                 Entry();
 
+                /**
+                 * \brief Constructs an \c %Entry for the numeric UFF atom type \a atom_type.
+                 * \param atom_type The numeric UFF atom type.
+                 * \param atom_type_sym The symbolic UFF atom-type label.
+                 * \param atomic_no The atomic number of atoms of this type.
+                 * \param bond_rad The natural bond radius.
+                 * \param bond_ang The natural bond angle.
+                 * \param vdw_dist The Van der Waals distance parameter (well distance).
+                 * \param vdw_energy The Van der Waals energy parameter (well depth).
+                 * \param vdw_scale The Van der Waals scaling factor.
+                 * \param eff_charge The effective atomic charge used by the UFF electrostatic terms.
+                 */
                 Entry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad,
                       double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
 
+                /**
+                 * \brief Returns the numeric UFF atom type of the entry.
+                 * \return The numeric atom type.
+                 */
                 unsigned int getAtomType() const;
 
+                /**
+                 * \brief Returns the symbolic UFF atom-type label of the entry.
+                 * \return A \c const reference to the symbolic atom-type label.
+                 */
                 const std::string& getAtomTypeSymbol() const;
 
+                /**
+                 * \brief Returns the atomic number of atoms of this type.
+                 * \return The atomic number.
+                 */
                 unsigned int getAtomicNumber() const;
 
+                /**
+                 * \brief Returns the natural bond radius of the atom type.
+                 * \return The bond radius.
+                 */
                 double getBondRadius() const;
 
+                /**
+                 * \brief Returns the natural bond angle of the atom type.
+                 * \return The bond angle.
+                 */
                 double getBondAngle() const;
 
+                /**
+                 * \brief Returns the Van der Waals well distance of the atom type.
+                 * \return The Van der Waals distance parameter.
+                 */
                 double getVdWDistance() const;
 
+                /**
+                 * \brief Returns the Van der Waals well depth of the atom type.
+                 * \return The Van der Waals energy parameter.
+                 */
                 double getVdWEnergy() const;
 
+                /**
+                 * \brief Returns the Van der Waals scaling factor of the atom type.
+                 * \return The Van der Waals scaling factor.
+                 */
                 double getVdWScale() const;
 
+                /**
+                 * \brief Returns the effective atomic charge used by the UFF electrostatic terms.
+                 * \return The effective atomic charge.
+                 */
                 double getEffectiveCharge() const;
 
+                /**
+                 * \brief Tells whether the entry holds initialized data.
+                 * \return \c true if the entry was constructed with explicit values, and \c false if it is the empty default.
+                 */
                 operator bool() const;
 
               private:
@@ -100,49 +169,131 @@ namespace CDPL
                 bool         initialized;
             };
 
+            /** \brief A constant iterator over the entries of the table. */
             typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
                                               DataStorage::const_iterator>
                 ConstEntryIterator;
 
+            /** \brief A mutable iterator over the entries of the table. */
             typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
                                               DataStorage::iterator>
                 EntryIterator;
 
+            /**
+             * \brief Constructs an empty \c %UFFAtomTypePropertyTable instance.
+             */
             UFFAtomTypePropertyTable();
 
+            /**
+             * \brief Adds (or overwrites) the entry for the numeric UFF atom type \a atom_type.
+             * \param atom_type The numeric UFF atom type.
+             * \param atom_type_sym The symbolic UFF atom-type label.
+             * \param atomic_no The atomic number of atoms of this type.
+             * \param bond_rad The natural bond radius.
+             * \param bond_ang The natural bond angle.
+             * \param vdw_dist The Van der Waals distance parameter (well distance).
+             * \param vdw_energy The Van der Waals energy parameter (well depth).
+             * \param vdw_scale The Van der Waals scaling factor.
+             * \param eff_charge The effective atomic charge used by the UFF electrostatic terms.
+             */
             void addEntry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad,
                           double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
 
+            /**
+             * \brief Returns the entry for the numeric UFF atom type \a atom_type.
+             * \param atom_type The numeric UFF atom type.
+             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             */
             const Entry& getEntry(unsigned int atom_type) const;
 
+            /**
+             * \brief Returns the number of entries in the table.
+             * \return The entry count.
+             */
             std::size_t getNumEntries() const;
 
+            /**
+             * \brief Removes all entries from the table.
+             */
             void clear();
 
+            /**
+             * \brief Removes the entry for the numeric UFF atom type \a atom_type.
+             * \param atom_type The numeric UFF atom type.
+             * \return \c true if a matching entry was removed, and \c false if no such entry existed.
+             */
             bool removeEntry(unsigned int atom_type);
 
+            /**
+             * \brief Removes the entry pointed to by the iterator \a it.
+             * \param it An iterator pointing to the entry to remove.
+             * \return An iterator pointing to the entry immediately following the removed one.
+             */
             EntryIterator removeEntry(const EntryIterator& it);
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the entry list.
+             * \return A constant iterator to the first entry.
+             */
             ConstEntryIterator getEntriesBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry.
+             * \return A constant iterator to the end of the entry list.
+             */
             ConstEntryIterator getEntriesEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the entry list.
+             * \return A mutable iterator to the first entry.
+             */
             EntryIterator getEntriesBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last entry.
+             * \return A mutable iterator to the end of the entry list.
+             */
             EntryIterator getEntriesEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the entry list (alias of getEntriesBegin()).
+             * \return A constant iterator to the first entry.
+             */
             ConstEntryIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry (alias of getEntriesEnd()).
+             * \return A constant iterator to the end of the entry list.
+             */
             ConstEntryIterator end() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the entry list (alias of getEntriesBegin()).
+             * \return A mutable iterator to the first entry.
+             */
             EntryIterator begin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last entry (alias of getEntriesEnd()).
+             * \return A mutable iterator to the end of the entry list.
+             */
             EntryIterator end();
 
+            /**
+             * \brief Loads the built-in default UFF atom-type property entries.
+             */
             void loadDefaults();
 
+            /**
+             * \brief Replaces the process-wide default table by \a table.
+             * \param table The new default table (a \c nullptr resets to the built-in default).
+             */
             static void set(const SharedPointer& table);
 
+            /**
+             * \brief Returns the process-wide default table (lazily initialized on first call).
+             * \return A \c const reference to the default-table shared pointer.
+             */
             static const SharedPointer& get();
 
           private:

@@ -35,7 +35,7 @@ namespace CDPL
     {
 
         /**
-         * \brief CRTP base for all numeric expression types in the Math namespace (Barton-Nackman idiom).
+         * \brief CRTP %base class for all numeric expression types in the Math namespace (Barton-Nackman idiom).
          * \tparam E The derived expression type.
          */
         template <typename E>
@@ -43,6 +43,7 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived expression type (made available to expression-template machinery). */
             typedef E ExpressionType;
 
           protected:
@@ -54,7 +55,10 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP base for all vector expression types. Provides downcast access to the concrete derived expression.
+         * \brief CRTP %base class for all vector expression types.
+         *
+         * Provides downcast access to the concrete derived expression via \c operator().
+         *
          * \tparam E The derived vector expression type.
          */
         template <typename E>
@@ -62,13 +66,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived vector expression type. */
             typedef E ExpressionType;
 
+            /**
+             * \brief Returns a \c const reference to the derived vector expression.
+             * \return A \c const reference downcast to ExpressionType.
+             */
             const ExpressionType& operator()() const
             {
                 return *static_cast<const ExpressionType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived vector expression.
+             * \return A reference downcast to ExpressionType.
+             */
             ExpressionType& operator()()
             {
                 return *static_cast<ExpressionType*>(this);
@@ -80,7 +93,10 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP base for all matrix expression types. Provides downcast access to the concrete derived expression.
+         * \brief CRTP %base class for all matrix expression types.
+         *
+         * Provides downcast access to the concrete derived expression via \c operator().
+         *
          * \tparam E The derived matrix expression type.
          */
         template <typename E>
@@ -88,13 +104,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived matrix expression type. */
             typedef E ExpressionType;
 
+            /**
+             * \brief Returns a \c const reference to the derived matrix expression.
+             * \return A \c const reference downcast to ExpressionType.
+             */
             const ExpressionType& operator()() const
             {
                 return *static_cast<const ExpressionType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived matrix expression.
+             * \return A reference downcast to ExpressionType.
+             */
             ExpressionType& operator()()
             {
                 return *static_cast<ExpressionType*>(this);
@@ -106,7 +131,10 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP base for all quaternion expression types. Provides downcast access to the concrete derived expression.
+         * \brief CRTP %base class for all quaternion expression types.
+         *
+         * Provides downcast access to the concrete derived expression via \c operator().
+         *
          * \tparam E The derived quaternion expression type.
          */
         template <typename E>
@@ -114,13 +142,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived quaternion expression type. */
             typedef E ExpressionType;
 
+            /**
+             * \brief Returns a \c const reference to the derived quaternion expression.
+             * \return A \c const reference downcast to ExpressionType.
+             */
             const ExpressionType& operator()() const
             {
                 return *static_cast<const ExpressionType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived quaternion expression.
+             * \return A reference downcast to ExpressionType.
+             */
             ExpressionType& operator()()
             {
                 return *static_cast<ExpressionType*>(this);
@@ -132,7 +169,10 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP base for all grid expression types. Provides downcast access to the concrete derived expression.
+         * \brief CRTP %base class for all grid expression types.
+         *
+         * Provides downcast access to the concrete derived expression via \c operator().
+         *
          * \tparam E The derived grid expression type.
          */
         template <typename E>
@@ -140,13 +180,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived grid expression type. */
             typedef E ExpressionType;
 
+            /**
+             * \brief Returns a \c const reference to the derived grid expression.
+             * \return A \c const reference downcast to ExpressionType.
+             */
             const ExpressionType& operator()() const
             {
                 return *static_cast<const ExpressionType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived grid expression.
+             * \return A reference downcast to ExpressionType.
+             */
             ExpressionType& operator()()
             {
                 return *static_cast<ExpressionType*>(this);
@@ -166,13 +215,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived vector container type. */
             typedef C ContainerType;
 
+            /**
+             * \brief Returns a \c const reference to the derived vector container.
+             * \return A \c const reference downcast to ContainerType.
+             */
             const ContainerType& operator()() const
             {
                 return *static_cast<const ContainerType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived vector container.
+             * \return A reference downcast to ContainerType.
+             */
             ContainerType& operator()()
             {
                 return *static_cast<ContainerType*>(this);
@@ -192,13 +250,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived matrix container type. */
             typedef C ContainerType;
 
+            /**
+             * \brief Returns a \c const reference to the derived matrix container.
+             * \return A \c const reference downcast to ContainerType.
+             */
             const ContainerType& operator()() const
             {
                 return *static_cast<const ContainerType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived matrix container.
+             * \return A reference downcast to ContainerType.
+             */
             ContainerType& operator()()
             {
                 return *static_cast<ContainerType*>(this);
@@ -218,13 +285,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived quaternion container type. */
             typedef C ContainerType;
 
+            /**
+             * \brief Returns a \c const reference to the derived quaternion container.
+             * \return A \c const reference downcast to ContainerType.
+             */
             const ContainerType& operator()() const
             {
                 return *static_cast<const ContainerType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived quaternion container.
+             * \return A reference downcast to ContainerType.
+             */
             ContainerType& operator()()
             {
                 return *static_cast<ContainerType*>(this);
@@ -244,13 +320,22 @@ namespace CDPL
         {
 
           public:
+            /** \brief The derived grid container type. */
             typedef C ContainerType;
 
+            /**
+             * \brief Returns a \c const reference to the derived grid container.
+             * \return A \c const reference downcast to ContainerType.
+             */
             const ContainerType& operator()() const
             {
                 return *static_cast<const ContainerType*>(this);
             }
 
+            /**
+             * \brief Returns a reference to the derived grid container.
+             * \return A reference downcast to ContainerType.
+             */
             ContainerType& operator()()
             {
                 return *static_cast<ContainerType*>(this);

@@ -41,7 +41,10 @@ namespace CDPL
     {
 
         /**
-         * \brief ORMatchExpressionList.
+         * \brief Chem::MatchExpressionList specialization that evaluates the stored expressions as a logical disjunction (OR).
+         *
+         * The list evaluates to \c true as soon as one contained Chem::MatchExpression evaluates to \c true
+         * (short-circuit evaluation). An empty list evaluates to \c false.
          * \tparam ObjType1 The type of the primary query/target objects for which the expression list gets evaluated.
          * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
          *                  expression list evaluation.
@@ -94,7 +97,10 @@ namespace CDPL
         };
 
         /**
-         * \brief ORMatchExpressionList.
+         * \brief Chem::MatchExpressionList specialization that evaluates the stored expressions as a logical disjunction (OR).
+         *
+         * The list evaluates to \c true as soon as one contained Chem::MatchExpression evaluates to \c true
+         * (short-circuit evaluation). An empty list evaluates to \c false.
          * \tparam ObjType The type of the query/target objects for which the expression list gets evaluated.
          */
         template <typename ObjType>

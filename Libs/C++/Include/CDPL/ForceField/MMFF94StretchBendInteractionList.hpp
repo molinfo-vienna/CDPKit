@@ -39,6 +39,9 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief A dynamically-sized array of MMFF94 stretch-bend coupling interaction records.
+         */
         typedef Util::Array<MMFF94StretchBendInteraction> MMFF94StretchBendInteractionList;
     }
 } // namespace CDPL

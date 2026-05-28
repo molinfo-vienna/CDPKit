@@ -55,63 +55,117 @@ namespace CDPL
             typedef MatrixRow<M> SelfType;
 
           public:
+            /** \brief The wrapped matrix type. */
             typedef M                                                        MatrixType;
+            /** \brief The size type used by the wrapped matrix. */
             typedef typename M::SizeType                                     SizeType;
+            /** \brief The signed difference type used by the wrapped matrix. */
             typedef typename M::DifferenceType                               DifferenceType;
+            /** \brief The element value type of the wrapped matrix. */
             typedef typename M::ValueType                                    ValueType;
+            /** \brief Constant reference type to an element. */
             typedef typename M::ConstReference                               ConstReference;
+            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
+            /** \brief Closure type used to store the wrapped matrix internally (mutable or const flavor). */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
+            /** \brief Constant closure type used when this proxy appears inside another expression. */
             typedef const SelfType                                           ConstClosureType;
+            /** \brief Closure type used when this proxy appears inside another expression. */
             typedef SelfType                                                 ClosureType;
 
+            /**
+             * \brief Constructs the row proxy viewing row \a i of \a m.
+             * \param m The wrapped matrix.
+             * \param i The zero-based row index to view.
+             */
             MatrixRow(MatrixType& m, SizeType i):
                 data(m), index(i) {}
 
+            /**
+             * \brief Returns a mutable reference to the element at column \a i of the row.
+             * \param i The zero-based column index.
+             * \return A mutable reference to the underlying element <tt>m(index, i)</tt>.
+             */
             Reference operator()(SizeType i)
             {
                 return data(index, i);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at column \a i of the row.
+             * \param i The zero-based column index.
+             * \return A \c const reference to the underlying element <tt>m(index, i)</tt>.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return data(index, i);
             }
 
+            /**
+             * \brief Returns a mutable reference to the element at column \a i of the row (alias for operator()).
+             * \param i The zero-based column index.
+             * \return A mutable reference to the underlying element.
+             */
             Reference operator[](SizeType i)
             {
                 return data(index, i);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at column \a i of the row (alias for operator()).
+             * \param i The zero-based column index.
+             * \return A \c const reference to the underlying element.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return data(index, i);
             }
 
+            /**
+             * \brief Returns the row index this proxy refers to within the wrapped matrix.
+             * \return The zero-based row index.
+             */
             SizeType getIndex() const
             {
                 return index;
             }
 
+            /**
+             * \brief Returns the size of the row (number of columns of the wrapped matrix).
+             * \return The number of columns.
+             */
             SizeType getSize() const
             {
                 return data.getSize2();
             }
 
+            /**
+             * \brief Tells whether the row is empty (the wrapped matrix has zero columns).
+             * \return \c true if the wrapped matrix has zero columns, and \c false otherwise.
+             */
             bool isEmpty() const
             {
                 return (data.getSize2() == 0);
             }
 
+            /**
+             * \brief Returns a reference to the wrapped matrix (via its stored closure).
+             * \return A reference to the wrapped matrix closure.
+             */
             MatrixClosureType& getData()
             {
                 return data;
             }
 
+            /**
+             * \brief Returns a \c const reference to the wrapped matrix (via its stored closure).
+             * \return A \c const reference to the wrapped matrix closure.
+             */
             const MatrixClosureType& getData() const
             {
                 return data;
@@ -206,58 +260,108 @@ namespace CDPL
             typedef MatrixColumn<M> SelfType;
 
           public:
+            /** \brief The wrapped matrix type. */
             typedef M                                                        MatrixType;
+            /** \brief The size type used by the wrapped matrix. */
             typedef typename M::SizeType                                     SizeType;
+            /** \brief The signed difference type used by the wrapped matrix. */
             typedef typename M::DifferenceType                               DifferenceType;
+            /** \brief The element value type of the wrapped matrix. */
             typedef typename M::ValueType                                    ValueType;
+            /** \brief Constant reference type to an element. */
             typedef typename M::ConstReference                               ConstReference;
+            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
+            /** \brief Closure type used to store the wrapped matrix internally. */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
+            /** \brief Constant closure type used when this proxy appears inside another expression. */
             typedef const SelfType                                           ConstClosureType;
+            /** \brief Closure type used when this proxy appears inside another expression. */
             typedef SelfType                                                 ClosureType;
 
+            /**
+             * \brief Constructs the column proxy viewing column \a i of \a m.
+             * \param m The wrapped matrix.
+             * \param i The zero-based column index to view.
+             */
             MatrixColumn(MatrixType& m, SizeType i):
                 data(m), index(i) {}
 
+            /**
+             * \brief Returns a mutable reference to the element at row \a i of the column.
+             * \param i The zero-based row index.
+             * \return A mutable reference to the underlying element <tt>m(i, index)</tt>.
+             */
             Reference operator()(SizeType i)
             {
                 return data(i, index);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at row \a i of the column.
+             * \param i The zero-based row index.
+             * \return A \c const reference to the underlying element <tt>m(i, index)</tt>.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return data(i, index);
             }
 
+            /**
+             * \brief Returns a mutable reference to the element at row \a i of the column (alias for operator()).
+             * \param i The zero-based row index.
+             * \return A mutable reference to the underlying element.
+             */
             Reference operator[](SizeType i)
             {
                 return data(i, index);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at row \a i of the column (alias for operator()).
+             * \param i The zero-based row index.
+             * \return A \c const reference to the underlying element.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return data(i, index);
             }
 
+            /**
+             * \brief Returns the column index this proxy refers to within the wrapped matrix.
+             * \return The zero-based column index.
+             */
             SizeType getIndex() const
             {
                 return index;
             }
 
+            /**
+             * \brief Returns the size of the column (number of rows of the wrapped matrix).
+             * \return The number of rows.
+             */
             SizeType getSize() const
             {
                 return data.getSize1();
             }
 
+            /**
+             * \brief Tells whether the column is empty (the wrapped matrix has zero rows).
+             * \return \c true if the wrapped matrix has zero rows, and \c false otherwise.
+             */
             bool isEmpty() const
             {
                 return (data.getSize1() == 0);
             }
 
+            /**
+             * \brief Returns a reference to the wrapped matrix (via its stored closure).
+             * \return A reference to the wrapped matrix closure.
+             */
             MatrixClosureType& getData()
             {
                 return data;

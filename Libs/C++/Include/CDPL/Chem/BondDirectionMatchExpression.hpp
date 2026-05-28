@@ -45,7 +45,11 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief BondDirectionMatchExpression.
+         * \brief Chem::MatchExpression that constrains target bonds by their SMILES/SMARTS bond direction.
+         *
+         * The expression evaluates the target bond's auxiliary direction value (one of the Chem::BondDirection flags,
+         * supplied as \c aux_data) against the configured direction constraint flags. The matching mode (match/not-match)
+         * is configurable.
          */
         class CDPL_CHEM_API BondDirectionMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {

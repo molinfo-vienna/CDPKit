@@ -47,12 +47,26 @@ namespace CDPL
             typedef typename C::ClosureType ClosureType;
 
           public:
+            /**
+             * \brief Constructs the proxy wrapping the lvalue \a lval.
+             * \param lval The container lvalue to wrap.
+             */
             explicit DirectAssignmentProxy(LValueType& lval):
                 lvalue(lval) {}
 
+            /**
+             * \brief Copy-constructs the proxy from \a proxy.
+             * \param proxy The proxy to copy.
+             */
             DirectAssignmentProxy(const DirectAssignmentProxy& proxy):
                 lvalue(proxy.lvalue) {}
 
+            /**
+             * \brief Forwards the assignment of \a e to the wrapped lvalue's direct-assignment method.
+             * \tparam E The source expression type.
+             * \param e The source expression.
+             * \return A reference to the wrapped lvalue closure.
+             */
             template <typename E>
             ClosureType& operator=(const E& e)
             {
@@ -60,6 +74,12 @@ namespace CDPL
                 return lvalue;
             }
 
+            /**
+             * \brief Forwards the compound addition of \a e to the wrapped lvalue's direct-plus-assignment method.
+             * \tparam E The source expression type.
+             * \param e The expression to add.
+             * \return A reference to the wrapped lvalue closure.
+             */
             template <typename E>
             ClosureType& operator+=(const E& e)
             {
@@ -67,6 +87,12 @@ namespace CDPL
                 return lvalue;
             }
 
+            /**
+             * \brief Forwards the compound subtraction of \a e to the wrapped lvalue's direct-minus-assignment method.
+             * \tparam E The source expression type.
+             * \param e The expression to subtract.
+             * \return A reference to the wrapped lvalue closure.
+             */
             template <typename E>
             ClosureType& operator-=(const E& e)
             {

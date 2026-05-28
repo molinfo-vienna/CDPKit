@@ -295,45 +295,94 @@ namespace CDPL
             typedef Matrix<T, A> SelfType;
 
           public:
+            /** \brief The scalar value type stored in the matrix. */
             typedef T                                                ValueType;
+            /** \brief Mutable reference type to an element. */
             typedef T&                                               Reference;
+            /** \brief Constant reference type to an element. */
             typedef const T&                                         ConstReference;
+            /** \brief The unsigned size type used by the underlying storage container. */
             typedef typename A::size_type                            SizeType;
+            /** \brief The signed difference type used by the underlying storage container. */
             typedef typename A::difference_type                      DifferenceType;
+            /** \brief The underlying storage container type (row-major linear storage). */
             typedef A                                                ArrayType;
+            /** \brief Pointer type for raw element access. */
             typedef T*                                               Pointer;
+            /** \brief Constant pointer type for raw element access. */
             typedef const T*                                         ConstPointer;
+            /** \brief Closure type used when this matrix appears inside another expression. */
             typedef MatrixReference<SelfType>                        ClosureType;
+            /** \brief Constant closure type used when this matrix appears inside another expression. */
             typedef const MatrixReference<const SelfType>            ConstClosureType;
+            /** \brief Concrete temporary matrix type used by expression-template machinery. */
             typedef SelfType                                         MatrixTemporaryType;
+            /** \brief Concrete temporary vector type compatible with this matrix's value type and storage. */
             typedef Vector<T, A>                                     VectorTemporaryType;
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Matrix instances. */
             typedef std::shared_ptr<SelfType>                        SharedPointer;
+            /** \brief Type of the brace-initializer list of lists accepted by the corresponding constructor (one inner list per row). */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
+            /**
+             * \brief Constructs an empty matrix (zero rows and zero columns).
+             */
             Matrix():
                 size1(0), size2(0), data() {}
 
+            /**
+             * \brief Constructs an \e m &times; \e n matrix with default-initialized elements.
+             * \param m The number of rows.
+             * \param n The number of columns.
+             */
             Matrix(SizeType m, SizeType n):
                 size1(m), size2(n), data(storageSize(m, n)) {}
 
+            /**
+             * \brief Constructs an \e m &times; \e n matrix with every element initialized to \a v.
+             * \param m The number of rows.
+             * \param n The number of columns.
+             * \param v The element value used to initialize every cell.
+             */
             Matrix(SizeType m, SizeType n, const ValueType& v):
                 size1(m), size2(n), data(storageSize(m, n), v) {}
 
+            /**
+             * \brief Constructs a copy of the matrix \a m.
+             * \param m The matrix to copy.
+             */
             Matrix(const Matrix& m):
                 size1(m.size1), size2(m.size2), data(m.data) {}
 
+            /**
+             * \brief Move-constructs a matrix from \a m (\a m is left in a valid empty state).
+             * \param m The matrix to move from.
+             */
             Matrix(Matrix&& m):
                 size1(0), size2(0), data()
             {
                 swap(m);
             }
 
+            /**
+             * \brief Constructs the matrix from a brace-initializer list of rows.
+             *
+             * The outer list yields the rows; each inner list yields the row elements. The size is derived
+             * from the dimensions of the supplied initializer (all inner lists must have the same length).
+             *
+             * \param l The initializer list of rows.
+             */
             Matrix(InitializerListType l):
                 size1(0), size2(0), data()
             {
                 assign(l);
             }
 
+            /**
+             * \brief Constructs the matrix from the matrix expression \a e (materializing the expression result).
+             * \tparam E The matrix expression type.
+             * \param e The matrix expression to materialize.
+             */
             template <typename E>
             Matrix(const MatrixExpression<E>& e):
                 size1(e().getSize1()), size2(e().getSize2()), data(storageSize(e().getSize1(), e().getSize2()))

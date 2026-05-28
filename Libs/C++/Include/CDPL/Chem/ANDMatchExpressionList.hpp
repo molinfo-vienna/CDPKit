@@ -41,7 +41,11 @@ namespace CDPL
     {
 
         /**
-         * \brief ANDMatchExpressionList.
+         * \brief Chem::MatchExpressionList specialization that evaluates the stored expressions as a logical conjunction (AND).
+         *
+         * The list evaluates to \c true if and only if every contained Chem::MatchExpression evaluates to \c true for
+         * the given query/target object pair (short-circuit evaluation). An empty list evaluates to \c true.
+         *
          * \tparam ObjType1 The type of the primary query/target objects for which the expression list gets evaluated.
          * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
          *                  expression list evaluation.

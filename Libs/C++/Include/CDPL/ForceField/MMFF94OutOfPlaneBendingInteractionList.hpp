@@ -39,6 +39,9 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief A dynamically-sized array of MMFF94 out-of-plane bending interaction records.
+         */
         typedef Util::Array<MMFF94OutOfPlaneBendingInteraction> MMFF94OutOfPlaneBendingInteractionList;
     }
 } // namespace CDPL

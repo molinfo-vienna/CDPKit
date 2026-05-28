@@ -87,7 +87,7 @@ namespace CDPL
              * \param obj The output data object.
              * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
              * \return A reference to itself.
-             * \throw Base::IndexError if \a idx is out of bounds.
+             * \throw Base::IndexError if the number of records is zero or \a idx is not in the range [0, getNumRecords() - 1].
              */
             Base::DataReader<DataType>& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
@@ -111,8 +111,8 @@ namespace CDPL
 
             /**
              * \brief Sets the current record index.
-             * \param idx The new zero-based record index.
-             * \throw Base::IndexError if \a idx exceeds the number of records.
+             * \param idx The new zero-based record index (may equal getNumRecords() to position past the last record).
+             * \throw Base::IndexError if \a idx is strictly greater than getNumRecords().
              */
             void setRecordIndex(std::size_t idx);
 

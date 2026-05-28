@@ -93,14 +93,26 @@ namespace CDPL
             ExpressionClosureType expr;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::MatrixUnary instantiation <\a E, \a F>.
+         * \tparam E The matrix expression type.
+         * \tparam F The unary functor type.
+         */
         template <typename E, typename F>
         struct MatrixUnaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef MatrixUnary<E, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType    ResultType;
         };
 
+        /**
+         * \brief Expression-template node interpreting a vector expression \a E as a column matrix via the per-element functor \a F.
+         * \tparam E The wrapped vector expression type.
+         * \tparam F The unary functor type producing matrix elements from vector elements.
+         */
         template <typename E, typename F>
         class VectorMatrixUnary : public MatrixExpression<VectorMatrixUnary<E, F> >
         {
@@ -141,11 +153,18 @@ namespace CDPL
             ExpressionClosureType expr;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::VectorMatrixUnary instantiation <\a E, \a F>.
+         * \tparam E The vector expression type.
+         * \tparam F The unary functor type producing matrix elements from vector elements.
+         */
         template <typename E, typename F>
         struct VectorMatrixUnaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef VectorMatrixUnary<E, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType          ResultType;
         };
 
@@ -198,14 +217,33 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::MatrixBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct MatrixBinary1Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef MatrixBinary1<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType           ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two matrix expressions \a E1 and \a E2 via a binary functor \a F that
+         *        is invoked with both expressions plus the (\e i, \e j) cell indices.
+         *
+         * Unlike Math::MatrixBinary1 (which is element-wise), the functor here receives both expressions verbatim
+         * along with the cell coordinates — used for matrix products and similar non-element-wise combinations.
+         *
+         * \tparam E1 The first wrapped matrix expression type.
+         * \tparam E2 The second wrapped matrix expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class MatrixBinary2 : public MatrixExpression<MatrixBinary2<E1, E2, F> >
         {
@@ -249,14 +287,29 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::MatrixBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct MatrixBinary2Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef MatrixBinary2<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType           ResultType;
         };
 
+        /**
+         * \brief Expression-template node interpreting a binary combination of two vector expressions as a matrix
+         *        (e.g. outer product), via the per-cell functor \a F invoked with both expressions and the cell coordinates.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \tparam F The per-cell functor type.
+         */
         template <typename E1, typename E2, typename F>
         class VectorMatrixBinary : public MatrixExpression<VectorMatrixBinary<E1, E2, F> >
         {

@@ -249,18 +249,37 @@ namespace CDPL
             typedef Quaternion<T> SelfType;
 
           public:
+            /** \brief The scalar component value type. */
             typedef T                                         ValueType;
+            /** \brief Mutable reference type to a component. */
             typedef T&                                        Reference;
+            /** \brief Constant reference type to a component. */
             typedef const T&                                  ConstReference;
+            /** \brief The plain C-array type used for in-memory storage of the four components. */
             typedef ValueType                                 ArrayType[4];
+            /** \brief Pointer type for raw access to the component array. */
             typedef T*                                        Pointer;
+            /** \brief Constant pointer type for raw access to the component array. */
             typedef const T*                                  ConstPointer;
+            /** \brief Closure type used when this quaternion appears inside another expression. */
             typedef QuaternionReference<SelfType>             ClosureType;
+            /** \brief Constant closure type used when this quaternion appears inside another expression. */
             typedef const QuaternionReference<const SelfType> ConstClosureType;
+            /** \brief Concrete temporary quaternion type used by expression-template machinery. */
             typedef SelfType                                  QuaternionTemporaryType;
 
+            /**
+             * \brief Constructs an uninitialized quaternion.
+             */
             Quaternion() {}
 
+            /**
+             * \brief Constructs the quaternion with the supplied component values (omitted components default to the value-initialized ValueType).
+             * \param c1 The real component.
+             * \param c2 The first imaginary component.
+             * \param c3 The second imaginary component.
+             * \param c4 The third imaginary component.
+             */
             explicit Quaternion(const ValueType& c1, const ValueType& c2 = ValueType(),
                                 const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType())
             {
@@ -270,67 +289,123 @@ namespace CDPL
                 data[3] = c4;
             }
 
+            /**
+             * \brief Constructs a copy of the quaternion \a q.
+             * \param q The quaternion to copy.
+             */
             Quaternion(const Quaternion& q)
             {
                 std::copy(q.data, q.data + 4, data);
             }
 
+            /**
+             * \brief Constructs the quaternion from the quaternion expression \a e.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression to materialize.
+             */
             template <typename E>
             Quaternion(const QuaternionExpression<E>& e)
             {
                 quaternionAssignQuaternion<ScalarAssignment>(*this, e);
             }
 
+            /**
+             * \brief Returns a pointer to the contiguous 4-element component array.
+             * \return A mutable pointer to the component array.
+             */
             Pointer getData()
             {
                 return data;
             }
 
+            /**
+             * \brief Returns a \c const pointer to the contiguous 4-element component array.
+             * \return A \c const pointer to the component array.
+             */
             ConstPointer getData() const
             {
                 return data;
             }
 
+            /**
+             * \brief Returns a mutable reference to the real component \e C1.
+             * \return A mutable reference to \e C1.
+             */
             Reference getC1()
             {
                 return data[0];
             }
 
+            /**
+             * \brief Returns a mutable reference to the imaginary component \e C2.
+             * \return A mutable reference to \e C2.
+             */
             Reference getC2()
             {
                 return data[1];
             }
 
+            /**
+             * \brief Returns a mutable reference to the imaginary component \e C3.
+             * \return A mutable reference to \e C3.
+             */
             Reference getC3()
             {
                 return data[2];
             }
 
+            /**
+             * \brief Returns a mutable reference to the imaginary component \e C4.
+             * \return A mutable reference to \e C4.
+             */
             Reference getC4()
             {
                 return data[3];
             }
 
+            /**
+             * \brief Returns a \c const reference to the real component \e C1.
+             * \return A \c const reference to \e C1.
+             */
             ConstReference getC1() const
             {
                 return data[0];
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C2.
+             * \return A \c const reference to \e C2.
+             */
             ConstReference getC2() const
             {
                 return data[1];
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C3.
+             * \return A \c const reference to \e C3.
+             */
             ConstReference getC3() const
             {
                 return data[2];
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C4.
+             * \return A \c const reference to \e C4.
+             */
             ConstReference getC4() const
             {
                 return data[3];
             }
 
+            /**
+             * \brief Sets the four quaternion components to the supplied values (omitted arguments default to the value-initialized ValueType).
+             * \param c1 The new real component.
+             * \param c2 The new first imaginary component.
+             * \param c3 The new second imaginary component.
+             * \param c4 The new third imaginary component.
+             */
             void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(),
                      const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType())
             {
@@ -497,44 +572,82 @@ namespace CDPL
             typedef RealQuaternion<T> SelfType;
 
           public:
+            /** \brief The scalar component value type. */
             typedef T                                         ValueType;
+            /** \brief Reference type (always a \c const reference — only the real component is mutable, via assignment). */
             typedef const T&                                  Reference;
+            /** \brief Constant reference type to the real component. */
             typedef const T&                                  ConstReference;
+            /** \brief Closure type used when this quaternion appears inside another expression. */
             typedef QuaternionReference<SelfType>             ClosureType;
+            /** \brief Constant closure type used when this quaternion appears inside another expression. */
             typedef const QuaternionReference<const SelfType> ConstClosureType;
+            /** \brief Concrete temporary quaternion type used by expression-template machinery (a general Math::Quaternion<T>). */
             typedef Quaternion<T>                             QuaternionTemporaryType;
 
+            /**
+             * \brief Constructs a zero-valued real quaternion (\e C1 = 0).
+             */
             RealQuaternion():
                 value() {}
 
+            /**
+             * \brief Constructs the real quaternion with the supplied real component.
+             * \param r The real component value.
+             */
             RealQuaternion(const ValueType& r):
                 value(r) {}
 
+            /**
+             * \brief Constructs a copy of the real quaternion \a q (possibly converting the component type).
+             * \tparam T1 The source component type.
+             * \param q The real quaternion to copy.
+             */
             template <typename T1>
             RealQuaternion(const RealQuaternion<T1>& q):
                 value(q.getC1())
             {}
 
+            /**
+             * \brief Returns a \c const reference to the real component \e C1.
+             * \return A \c const reference to \e C1.
+             */
             ConstReference getC1() const
             {
                 return value;
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C2 (always zero for a real quaternion).
+             * \return A \c const reference to the zero element.
+             */
             ConstReference getC2() const
             {
                 return zero;
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C3 (always zero for a real quaternion).
+             * \return A \c const reference to the zero element.
+             */
             ConstReference getC3() const
             {
                 return zero;
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C4 (always zero for a real quaternion).
+             * \return A \c const reference to the zero element.
+             */
             ConstReference getC4() const
             {
                 return zero;
             }
 
+            /**
+             * \brief Implicit conversion to the underlying scalar value (the real component).
+             * \return The real component \e C1 by value.
+             */
             operator ValueType() const
             {
                 return value;
