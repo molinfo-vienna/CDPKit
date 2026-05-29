@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarVector specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# 
 class ULScalarVector(Boost.Python.instance):
 
     ##

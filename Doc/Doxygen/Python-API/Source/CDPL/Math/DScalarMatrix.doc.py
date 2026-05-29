@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarMatrix specialization with double-precision <tt>double</tt> elements.
+# 
 class DScalarMatrix(Boost.Python.instance):
 
     ##

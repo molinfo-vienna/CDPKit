@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping (terminal-atom-1 PTE row, center-atom PTE row, terminal-atom-2 PTE row) triples to fallback MMFF94 stretch-bend coupling force constants used when no atom-type-specific entry is available.
+# 
+# The PTE row of an atom is the row index in the periodic table of the elements. Two directional force constants are stored per entry (<tt>IJK</tt> and <tt>KJI</tt>) — see Util.MMFF94StretchBendParameterTable for the coupling semantics.
+# 
 class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single PTE-row-based default stretch-bend parameter record.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -41,12 +43,13 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c %Entry instance.
-        # \param term_atom1_pte_row 
-        # \param ctr_atom_pte_row 
-        # \param term_atom2_pte_row 
-        # \param ijk_force_const 
-        # \param kji_force_const 
+        # \brief Constructs an <tt>Entry</tt> for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+        # 
+        # \param term_atom1_pte_row The PTE row of the first terminal atom.
+        # \param ctr_atom_pte_row The PTE row of the center atom.
+        # \param term_atom2_pte_row The PTE row of the second terminal atom.
+        # \param ijk_force_const The IJK stretch-bend force constant.
+        # \param kji_force_const The KJI stretch-bend force constant.
         # 
         def __init__(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int, ijk_force_const: float, kji_force_const: float) -> None: pass
 
@@ -70,33 +73,38 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the PTE row of the first terminal atom.
+        # 
+        # \return The first terminal atom's PTE row.
+        # 
         def getTerminalAtom1PTERow() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the PTE row of the center atom.
+        # 
+        # \return The center atom's PTE row.
+        # 
         def getCenterAtomPTERow() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the PTE row of the second terminal atom.
+        # 
+        # \return The second terminal atom's PTE row.
+        # 
         def getTerminalAtom2PTERow() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the IJK stretch-bend force constant.
+        # 
+        # \return The IJK force constant.
+        # 
         def getIJKForceConstant() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the KJI stretch-bend force constant.
+        # 
+        # \return The KJI force constant.
+        # 
         def getKJIForceConstant() -> float: pass
 
         ##
@@ -124,7 +132,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         kjiForceConstant = property(getKJIForceConstant)
 
     ##
-    # \brief Initializes the \c %MMFF94DefaultStretchBendParameterTable instance.
+    # \brief Constructs an empty <tt>MMFF94DefaultStretchBendParameterTable</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -147,42 +155,48 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param term_atom1_pte_row 
-    # \param ctr_atom_pte_row 
-    # \param term_atom2_pte_row 
-    # \param ijk_force_const 
-    # \param kji_force_const 
-    #
+    # \brief Adds (or overwrites) the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+    # 
+    # \param term_atom1_pte_row The PTE row of the first terminal atom.
+    # \param ctr_atom_pte_row The PTE row of the center atom.
+    # \param term_atom2_pte_row The PTE row of the second terminal atom.
+    # \param ijk_force_const The IJK stretch-bend force constant.
+    # \param kji_force_const The KJI stretch-bend force constant.
+    # 
     def addEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int, ijk_force_const: float, kji_force_const: float) -> None: pass
 
     ##
-    # \brief 
-    # \param term_atom1_pte_row 
-    # \param ctr_atom_pte_row 
-    # \param term_atom2_pte_row 
-    # \return 
-    #
+    # \brief Removes the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+    # 
+    # \param term_atom1_pte_row The PTE row of the first terminal atom.
+    # \param ctr_atom_pte_row The PTE row of the center atom.
+    # \param term_atom2_pte_row The PTE row of the second terminal atom.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param term_atom1_pte_row 
-    # \param ctr_atom_pte_row 
-    # \param term_atom2_pte_row 
-    # \return 
-    #
+    # \brief Returns the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+    # 
+    # \param term_atom1_pte_row The PTE row of the first terminal atom.
+    # \param ctr_atom_pte_row The PTE row of the center atom.
+    # \param term_atom2_pte_row The PTE row of the second terminal atom.
+    # 
+    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # 
     def getEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the table.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the table.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -192,14 +206,15 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads table entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default stretch-bend fallback entries.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -210,17 +225,18 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def assign(table: MMFF94DefaultStretchBendParameterTable) -> MMFF94DefaultStretchBendParameterTable: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Replaces the process-wide default table by <em>table</em>.
+    # 
+    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(table: MMFF94DefaultStretchBendParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default table (lazily initialized on first call).
+    # 
+    # \return A reference to the default-table shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94DefaultStretchBendParameterTable: pass
 

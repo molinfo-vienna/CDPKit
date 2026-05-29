@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroMatrix specialization with signed-integer <tt>long</tt> elements.
+# 
 class LZeroMatrix(Boost.Python.instance):
 
     ##

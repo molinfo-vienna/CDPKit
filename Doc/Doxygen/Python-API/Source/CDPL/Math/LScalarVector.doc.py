@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarVector specialization with signed-integer <tt>long</tt> elements.
+# 
 class LScalarVector(Boost.Python.instance):
 
     ##

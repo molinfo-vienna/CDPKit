@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroVector specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# 
 class ULZeroVector(Boost.Python.instance):
 
     ##

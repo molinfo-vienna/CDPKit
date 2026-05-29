@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroGrid specialization with double-precision <tt>double</tt> elements.
+# 
 class DZeroGrid(Boost.Python.instance):
 
     ##

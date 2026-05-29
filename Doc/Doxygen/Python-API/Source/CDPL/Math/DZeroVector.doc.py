@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroVector specialization with double-precision <tt>double</tt> elements.
+# 
 class DZeroVector(Boost.Python.instance):
 
     ##

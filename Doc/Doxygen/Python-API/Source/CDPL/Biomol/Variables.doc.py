@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief 
-#
+# \brief Sentinel value indicating that the residue sequence number should be ignored when matching residues.
+# 
 IGNORE_SEQUENCE_NO = -9223372036854775808
 
 ##
-# \brief 
-#
+# \brief Sentinel value indicating that the atom serial number should be ignored when matching atoms.
+# 
 IGNORE_SERIAL_NO = -9223372036854775808

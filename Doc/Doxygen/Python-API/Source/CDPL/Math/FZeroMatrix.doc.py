@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroMatrix specialization with single-precision <tt>float</tt> elements.
+# 
 class FZeroMatrix(Boost.Python.instance):
 
     ##

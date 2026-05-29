@@ -168,6 +168,8 @@ def getTextRecursive(parent_node):
             rc.append('&harr;')
         elif node.nodeName == 'times':
             rc.append('&times;')
+        elif node.nodeName == 'minus':
+            rc.append('&minus;')
         elif node.nodeName == 'lt':
             rc.append('&lt;')
         elif node.nodeName == 'le':

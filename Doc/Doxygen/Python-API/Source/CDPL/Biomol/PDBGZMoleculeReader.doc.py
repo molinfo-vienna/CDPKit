@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the gzip-compressed <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# 
 class PDBGZMoleculeReader(Chem.MoleculeReaderBase):
 
     ##

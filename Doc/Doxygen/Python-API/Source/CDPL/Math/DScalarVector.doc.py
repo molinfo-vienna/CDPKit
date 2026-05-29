@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarVector specialization with double-precision <tt>double</tt> elements.
+# 
 class DScalarVector(Boost.Python.instance):
 
     ##

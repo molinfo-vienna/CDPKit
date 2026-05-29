@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarMatrix specialization with signed-integer <tt>long</tt> elements.
+# 
 class LScalarMatrix(Boost.Python.instance):
 
     ##

@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief Lookup table mapping numeric MMFF94 atom types to per-atom-type Van der Waals parameters (atomic polarizability, effective electron number, scaling factors A/G, and H-donor/-acceptor classification).
+# 
+# In addition to the per-atom-type entries, the table also stores the five global scalar parameters (exponent, B, beta, DARAD, DAEPS) used by the buffered 14-7 MMFF94 Van der Waals energy expression.
+# 
 class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single per-atom-type Van der Waals parameter record.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -41,13 +43,14 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c %Entry instance.
-        # \param atom_type 
-        # \param atom_pol 
-        # \param eff_el_num 
-        # \param fact_a 
-        # \param fact_g 
-        # \param don_acc_type 
+        # \brief Constructs an <tt>Entry</tt> for the numeric MMFF94 atom type <em>atom_type</em>.
+        # 
+        # \param atom_type The numeric MMFF94 atom type.
+        # \param atom_pol The atomic polarizability parameter.
+        # \param eff_el_num The Slater-Kirkwood effective number of valence electrons.
+        # \param fact_a The scaling factor <tt>A</tt>.
+        # \param fact_g The scaling factor <tt>G</tt>.
+        # \param don_acc_type The H-donor/-acceptor classification of the atom type.
         # 
         def __init__(atom_type: int, atom_pol: float, eff_el_num: float, fact_a: float, fact_g: float, don_acc_type: HDonorAcceptorType) -> None: pass
 
@@ -71,9 +74,10 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the numeric MMFF94 atom type of the entry.
+        # 
+        # \return The numeric atom type.
+        # 
         def getAtomType() -> int: pass
 
         ##
@@ -105,9 +109,10 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         def getFactorG() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the H-donor/-acceptor classification associated with the numeric MMFF94 atom type.
+        # 
+        # \return The H-donor/-acceptor classification.
+        # 
         def getHDonorAcceptorType() -> HDonorAcceptorType: pass
 
         ##
@@ -137,7 +142,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         hDonorAcceptorType = property(getHDonorAcceptorType)
 
     ##
-    # \brief Initializes the \c %MMFF94VanDerWaalsParameterTable instance.
+    # \brief Constructs an empty <tt>MMFF94VanDerWaalsParameterTable</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -160,39 +165,45 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \param atom_pol 
-    # \param eff_el_num 
-    # \param fact_a 
-    # \param fact_g 
-    # \param don_acc_type 
-    #
+    # \brief Adds (or overwrites) the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric MMFF94 atom type.
+    # \param atom_pol The atomic polarizability parameter.
+    # \param eff_el_num The Slater-Kirkwood effective number of valence electrons.
+    # \param fact_a The scaling factor <tt>A</tt>.
+    # \param fact_g The scaling factor <tt>G</tt>.
+    # \param don_acc_type The H-donor/-acceptor classification of the atom type.
+    # 
     def addEntry(atom_type: int, atom_pol: float, eff_el_num: float, fact_a: float, fact_g: float, don_acc_type: HDonorAcceptorType) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Removes the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric MMFF94 atom type.
+    # 
+    # \return <tt>True</tt> if a matching entry was removed, and <tt>False</tt> if no such entry existed.
+    # 
     def removeEntry(atom_type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param atom_type 
-    # \return 
-    #
+    # \brief Returns the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # 
+    # \param atom_type The numeric MMFF94 atom type.
+    # 
+    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # 
     def getEntry(atom_type: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the table.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the table.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -202,14 +213,15 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads table entries from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default Van der Waals parameter entries and global scalar parameters.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -220,33 +232,38 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def assign(table: MMFF94VanDerWaalsParameterTable) -> MMFF94VanDerWaalsParameterTable: pass
 
     ##
-    # \brief 
-    # \param value 
-    #
+    # \brief Sets the global exponent used in the buffered 14-7 Van der Waals energy expression.
+    # 
+    # \param value The new exponent value.
+    # 
     def setExponent(value: float) -> None: pass
 
     ##
-    # \brief 
-    # \param value 
-    #
+    # \brief Sets the global <em>beta</em> value used in the buffered 14-7 Van der Waals energy expression.
+    # 
+    # \param value The new <em>beta</em> value.
+    # 
     def setBeta(value: float) -> None: pass
 
     ##
-    # \brief 
-    # \param value 
-    #
+    # \brief Sets the global <em>B</em> factor used in the buffered 14-7 Van der Waals energy expression.
+    # 
+    # \param value The new <em>B</em> factor value.
+    # 
     def setFactorB(value: float) -> None: pass
 
     ##
-    # \brief 
-    # \param value 
-    #
+    # \brief Sets the global <em>DARAD</em> factor used in the buffered 14-7 Van der Waals energy expression.
+    # 
+    # \param value The new <em>DARAD</em> factor value.
+    # 
     def setFactorDARAD(value: float) -> None: pass
 
     ##
-    # \brief 
-    # \param value 
-    #
+    # \brief Sets the global <em>DAEPS</em> factor used in the buffered 14-7 Van der Waals energy expression.
+    # 
+    # \param value The new <em>DAEPS</em> factor value.
+    # 
     def setFactorDAEPS(value: float) -> None: pass
 
     ##
@@ -285,17 +302,18 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def getFactorDAEPS() -> float: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Replaces the process-wide default table by <em>table</em>.
+    # 
+    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default table (lazily initialized on first call).
+    # 
+    # \return A reference to the default-table shared reference.
+    # 
     @staticmethod
     def get(: ) -> MMFF94VanDerWaalsParameterTable: pass
 

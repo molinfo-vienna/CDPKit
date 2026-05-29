@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.RealQuaternion specialization with double-precision <tt>double</tt> real component.
+# 
 class DRealQuaternion(Boost.Python.instance):
 
     ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.IdentityMatrix specialization with signed-integer <tt>long</tt> elements.
+# 
 class LIdentityMatrix(Boost.Python.instance):
 
     ##
