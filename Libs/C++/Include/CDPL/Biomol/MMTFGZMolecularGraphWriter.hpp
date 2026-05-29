@@ -39,6 +39,10 @@ namespace CDPL
     namespace Biomol
     {
 
+        /**
+         * \brief Writer for molecular graph data in the gzip-compressed <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
+         * \since 1.2
+         */
         typedef Util::CompressedDataWriter<MMTFMolecularGraphWriter, Util::GZipOStream> MMTFGZMolecularGraphWriter;
     }
 } // namespace CDPL

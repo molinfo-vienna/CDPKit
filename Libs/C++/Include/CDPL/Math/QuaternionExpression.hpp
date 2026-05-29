@@ -613,6 +613,12 @@ namespace CDPL
             typedef ExpressionType                           ResultType;
         };
 
+        /**
+         * \brief Returns the component-wise negation of the quaternion expression \a e.
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return An expression-template node representing \f$ -e \f$.
+         */
         template <typename E>
         typename QuaternionUnary1Traits<E, ScalarNegation<typename E::ValueType> >::ResultType
         operator-(const QuaternionExpression<E>& e)
@@ -622,6 +628,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the quaternion expression \a e unchanged (unary \c +).
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return A \c const reference to \a e.
+         */
         template <typename E>
         const E&
         operator+(const QuaternionExpression<E>& e)
@@ -629,6 +641,14 @@ namespace CDPL
             return e();
         }
 
+        /**
+         * \brief Returns the component-wise sum of the quaternion expressions \a e1 and \a e2.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The first quaternion expression.
+         * \param e2 The second quaternion expression.
+         * \return An expression-template node representing \f$ e_1 + e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType
         operator+(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -639,6 +659,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Adds the scalar \a t to the real component (C1) of the quaternion expression \a e.
+         * \tparam E The quaternion expression type.
+         * \tparam T The scalar type.
+         * \param e The quaternion expression.
+         * \param t The scalar summand.
+         * \return An expression-template node representing \f$ e + t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionAddition<E, T> >::ResultType>::type
         operator+(const QuaternionExpression<E>& e, const T& t)
@@ -648,6 +676,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Adds the scalar \a t to the real component (C1) of the quaternion expression \a e (commutative form).
+         * \tparam T The scalar type.
+         * \tparam E The quaternion expression type.
+         * \param t The scalar summand.
+         * \param e The quaternion expression.
+         * \return An expression-template node representing \f$ t + e \f$.
+         */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionAddition<T, E> >::ResultType>::type
         operator+(const T& t, const QuaternionExpression<E>& e)
@@ -657,6 +693,14 @@ namespace CDPL
             return ExpressionType(t, e());
         }
 
+        /**
+         * \brief Returns the component-wise difference of the quaternion expressions \a e1 and \a e2.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The first quaternion expression.
+         * \param e2 The second quaternion expression.
+         * \return An expression-template node representing \f$ e_1 - e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType
         operator-(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -667,6 +711,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Subtracts the scalar \a t from the real component (C1) of the quaternion expression \a e.
+         * \tparam E The quaternion expression type.
+         * \tparam T The scalar type.
+         * \param e The quaternion expression.
+         * \param t The scalar subtrahend.
+         * \return An expression-template node representing \f$ e - t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionSubtraction<E, T> >::ResultType>::type
         operator-(const QuaternionExpression<E>& e, const T& t)
@@ -676,6 +728,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Subtracts the quaternion expression \a e from the scalar \a t (forming \f$ t - e \f$ as a quaternion expression).
+         * \tparam T The scalar type.
+         * \tparam E The quaternion expression type.
+         * \param t The scalar minuend.
+         * \param e The quaternion expression to subtract.
+         * \return An expression-template node representing \f$ t - e \f$.
+         */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionSubtraction<T, E> >::ResultType>::type
         operator-(const T& t, const QuaternionExpression<E>& e)
@@ -685,6 +745,14 @@ namespace CDPL
             return ExpressionType(t, e());
         }
 
+        /**
+         * \brief Returns the (Hamilton) product of the quaternion expressions \a e1 and \a e2.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The first quaternion expression.
+         * \param e2 The second quaternion expression.
+         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename QuaternionBinary2Traits<E1, E2, QuaternionProduct<E1, E2> >::ResultType
         operator*(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -694,6 +762,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the component-wise product of the quaternion expression \a e and the scalar \a t.
+         * \tparam E The quaternion expression type.
+         * \tparam T The scalar type.
+         * \param e The quaternion expression.
+         * \param t The scalar multiplier.
+         * \return An expression-template node representing \f$ e \cdot t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary1Traits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
         operator*(const QuaternionExpression<E>& e, const T& t)
@@ -704,6 +780,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Returns the component-wise product of the scalar \a t and the quaternion expression \a e.
+         * \tparam T The scalar type.
+         * \tparam E The quaternion expression type.
+         * \param t The scalar multiplier.
+         * \param e The quaternion expression.
+         * \return An expression-template node representing \f$ t \cdot e \f$.
+         */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary1Traits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
         operator*(const T& t, const QuaternionExpression<E>& e)
@@ -714,6 +798,14 @@ namespace CDPL
             return ExpressionType(t, e());
         }
 
+        /**
+         * \brief Returns the quaternion division \f$ e_1 \cdot e_2^{-1} \f$ as an expression-template node.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The dividend quaternion expression.
+         * \param e2 The divisor quaternion expression.
+         * \return An expression-template node representing \f$ e_1 / e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename Scalar3QuaternionTernaryTraits<E1, E2, typename QuaternionNorm2<E2>::ResultType,
                                                 QuaternionDivision<E1, E2, typename QuaternionNorm2<E2>::ResultType> >::ResultType
@@ -725,6 +817,14 @@ namespace CDPL
             return ExpressionType(e1(), e2(), norm2(e2));
         }
 
+        /**
+         * \brief Returns the component-wise quotient of the quaternion expression \a e by the scalar \a t.
+         * \tparam E The quaternion expression type.
+         * \tparam T The scalar type.
+         * \param e The quaternion expression.
+         * \param t The scalar divisor.
+         * \return An expression-template node representing \f$ e / t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary1Traits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
         operator/(const QuaternionExpression<E>& e, const T& t)
@@ -735,6 +835,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Returns the quaternion division of the scalar \a t by the quaternion expression \a e (\f$ t \cdot e^{-1} \f$).
+         * \tparam T The scalar type.
+         * \tparam E The quaternion expression type.
+         * \param t The scalar dividend.
+         * \param e The quaternion expression divisor.
+         * \return An expression-template node representing \f$ t / e \f$.
+         */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value,
                                 typename Scalar13QuaternionTernaryTraits<T, E, typename QuaternionNorm2<E>::ResultType,
@@ -747,6 +855,14 @@ namespace CDPL
             return ExpressionType(t, e(), norm2(e));
         }
 
+        /**
+         * \brief Tells whether the quaternion expressions \a e1 and \a e2 are component-wise equal.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The first quaternion expression.
+         * \param e2 The second quaternion expression.
+         * \return \c true if all four components agree, and \c false otherwise.
+         */
         template <typename E1, typename E2>
         typename QuaternionEquality<E1, E2>::ResultType
         operator==(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -754,6 +870,14 @@ namespace CDPL
             return QuaternionEquality<E1, E2>::apply(e1, e2);
         }
 
+        /**
+         * \brief Tells whether the quaternion expressions \a e1 and \a e2 differ in at least one component.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The first quaternion expression.
+         * \param e2 The second quaternion expression.
+         * \return \c true if at least one of the four components differs, and \c false otherwise.
+         */
         template <typename E1, typename E2>
         typename QuaternionEquality<E1, E2>::ResultType
         operator!=(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -761,6 +885,16 @@ namespace CDPL
             return !QuaternionEquality<E1, E2>::apply(e1, e2);
         }
 
+        /**
+         * \brief Tells whether the quaternion expressions \a e1 and \a e2 agree component-wise within the absolute tolerance \a eps.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \tparam T The numeric tolerance type.
+         * \param e1 The first quaternion expression.
+         * \param e2 The second quaternion expression.
+         * \param eps The non-negative absolute tolerance.
+         * \return \c true if all four components agree within \a eps, and \c false otherwise.
+         */
         template <typename E1, typename E2, typename T>
         typename std::enable_if<std::is_arithmetic<T>::value, typename QuaternionToleranceEquality<E1, E2, T>::ResultType>::type
         equals(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, const T& eps)
@@ -768,6 +902,14 @@ namespace CDPL
             return QuaternionToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
         }
 
+        /**
+         * \brief Returns the component-wise quotient of the quaternion expressions \a e1 and \a e2.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The numerator quaternion expression.
+         * \param e2 The denominator quaternion expression.
+         * \return An expression-template node representing the component-wise quotient.
+         */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
         elemDiv(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -778,6 +920,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the component-wise product (Hadamard product) of the quaternion expressions \a e1 and \a e2.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \param e1 The first quaternion expression.
+         * \param e2 The second quaternion expression.
+         * \return An expression-template node representing the component-wise product.
+         */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
         elemProd(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -788,6 +938,12 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the real component (C1) of the quaternion expression \a e.
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return The real component \f$ \mathrm{Re}(e) \f$ as a scalar.
+         */
         template <typename E>
         typename E::ValueType
         real(const QuaternionExpression<E>& e)
@@ -795,6 +951,12 @@ namespace CDPL
             return e().getC1();
         }
 
+        /**
+         * \brief Returns the unreal (pure-quaternion) part of the quaternion expression \a e (with C1 zeroed out).
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return An expression-template node representing the unreal part of \a e.
+         */
         template <typename E>
         typename QuaternionUnary2Traits<E, QuaternionUnreal<E> >::ResultType
         unreal(const QuaternionExpression<E>& e)
@@ -804,6 +966,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the quaternion conjugate of the quaternion expression \a e (negates C2, C3, C4).
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return An expression-template node representing \f$ \overline{e} \f$.
+         */
         template <typename E>
         typename QuaternionUnary2Traits<E, QuaternionConjugate<E> >::ResultType
         conj(const QuaternionExpression<E>& e)
@@ -813,6 +981,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the multiplicative inverse of the quaternion expression \a e (\f$ \overline{e} / |e|^2 \f$).
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return An expression-template node representing \f$ e^{-1} \f$.
+         */
         template <typename E>
         typename Scalar2QuaternionBinary2Traits<E, typename QuaternionNorm2<E>::ResultType,
                                                 QuaternionInverse<E, typename QuaternionNorm2<E>::ResultType> >::ResultType
@@ -824,6 +998,12 @@ namespace CDPL
             return ExpressionType(e(), norm2(e));
         }
 
+        /**
+         * \brief Returns the norm (Euclidean length) of the quaternion expression \a e.
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return \f$ \|e\| = \sqrt{e \cdot \overline{e}} \f$.
+         */
         template <typename E>
         typename QuaternionNorm<E>::ResultType
         norm(const QuaternionExpression<E>& e)
@@ -831,6 +1011,12 @@ namespace CDPL
             return QuaternionNorm<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the squared norm of the quaternion expression \a e.
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return \f$ \|e\|^2 = e \cdot \overline{e} \f$.
+         */
         template <typename E>
         typename QuaternionNorm2<E>::ResultType
         norm2(const QuaternionExpression<E>& e)
@@ -838,6 +1024,12 @@ namespace CDPL
             return QuaternionNorm2<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the sum of the four components of the quaternion expression \a e.
+         * \tparam E The quaternion expression type.
+         * \param e The quaternion expression.
+         * \return \f$ \sum_{i} C_i(e) \f$.
+         */
         template <typename E>
         typename QuaternionElementSum<E>::ResultType
         sum(const QuaternionExpression<E>& e)

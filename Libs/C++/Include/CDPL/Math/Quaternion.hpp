@@ -774,14 +774,28 @@ namespace CDPL
         template <typename T>
         const typename RealQuaternion<T>::ValueType RealQuaternion<T>::zero = RealQuaternion<T>::ValueType();
 
+        /**
+         * \brief Math::QuaternionTemporaryTraits specialization inheriting the temporary type of the underlying quaternion for a \c const Math::QuaternionReference view.
+         * \tparam Q The underlying quaternion type.
+         */
         template <typename Q>
         struct QuaternionTemporaryTraits<const QuaternionReference<Q> > : public QuaternionTemporaryTraits<Q>
         {};
 
+        /**
+         * \brief Math::QuaternionTemporaryTraits specialization inheriting the temporary type of the underlying quaternion for a Math::QuaternionReference view.
+         * \tparam Q The underlying quaternion type.
+         */
         template <typename Q>
         struct QuaternionTemporaryTraits<QuaternionReference<Q> > : public QuaternionTemporaryTraits<Q>
         {};
 
+        /**
+         * \brief Constructs a Math::RealQuaternion from the scalar \a t (its real component).
+         * \tparam T The scalar value type.
+         * \param t The real component.
+         * \return A real quaternion with \c C1 = \a t and zero imaginary components.
+         */
         template <typename T>
         typename std::enable_if<IsScalar<T>::value, RealQuaternion<T> >::type
         quat(const T& t)
@@ -789,6 +803,14 @@ namespace CDPL
             return RealQuaternion<T>(t);
         }
 
+        /**
+         * \brief Constructs a Math::Quaternion from two scalar components \a t1 and \a t2 (C1, C2) — remaining components are zero.
+         * \tparam T1 The type of the first component.
+         * \tparam T2 The type of the second component.
+         * \param t1 The C1 component.
+         * \param t2 The C2 component.
+         * \return A quaternion (\a t1, \a t2, \c 0, \c 0).
+         */
         template <typename T1, typename T2>
         Quaternion<typename CommonType<T1, T2>::Type>
         quat(const T1& t1, const T2& t2)
@@ -798,6 +820,16 @@ namespace CDPL
             return QuaternionType(t1, t2);
         }
 
+        /**
+         * \brief Constructs a Math::Quaternion from three scalar components (C1, C2, C3) — C4 is zero.
+         * \tparam T1 The type of the C1 component.
+         * \tparam T2 The type of the C2 component.
+         * \tparam T3 The type of the C3 component.
+         * \param t1 The C1 component.
+         * \param t2 The C2 component.
+         * \param t3 The C3 component.
+         * \return A quaternion (\a t1, \a t2, \a t3, \c 0).
+         */
         template <typename T1, typename T2, typename T3>
         Quaternion<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type>
         quat(const T1& t1, const T2& t2, const T3& t3)
@@ -807,6 +839,18 @@ namespace CDPL
             return QuaternionType(t1, t2, t3);
         }
 
+        /**
+         * \brief Constructs a Math::Quaternion from four scalar components (C1, C2, C3, C4).
+         * \tparam T1 The type of the C1 component.
+         * \tparam T2 The type of the C2 component.
+         * \tparam T3 The type of the C3 component.
+         * \tparam T4 The type of the C4 component.
+         * \param t1 The C1 component.
+         * \param t2 The C2 component.
+         * \param t3 The C3 component.
+         * \param t4 The C4 component.
+         * \return A quaternion (\a t1, \a t2, \a t3, \a t4).
+         */
         template <typename T1, typename T2, typename T3, typename T4>
         Quaternion<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type>
         quat(const T1& t1, const T2& t2, const T3& t3, const T4& t4)
@@ -816,14 +860,22 @@ namespace CDPL
             return QuaternionType(t1, t2, t3, t4);
         }
 
+        /** \brief A Math::Quaternion specialization with single-precision \c float components. */
         typedef Quaternion<float>         FQuaternion;
+        /** \brief A Math::Quaternion specialization with double-precision \c double components. */
         typedef Quaternion<double>        DQuaternion;
+        /** \brief A Math::Quaternion specialization with signed-integer \c long components. */
         typedef Quaternion<long>          LQuaternion;
+        /** \brief A Math::Quaternion specialization with unsigned-integer \c unsigned \c long components. */
         typedef Quaternion<unsigned long> ULQuaternion;
 
+        /** \brief A Math::RealQuaternion specialization with single-precision \c float real component. */
         typedef RealQuaternion<float>         FRealQuaternion;
+        /** \brief A Math::RealQuaternion specialization with double-precision \c double real component. */
         typedef RealQuaternion<double>        DRealQuaternion;
+        /** \brief A Math::RealQuaternion specialization with signed-integer \c long real component. */
         typedef RealQuaternion<long>          LRealQuaternion;
+        /** \brief A Math::RealQuaternion specialization with unsigned-integer \c unsigned \c long real component. */
         typedef RealQuaternion<unsigned long> ULRealQuaternion;
     } // namespace Math
 } // namespace CDPL

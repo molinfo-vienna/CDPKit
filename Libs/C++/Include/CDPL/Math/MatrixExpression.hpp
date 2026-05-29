@@ -506,11 +506,19 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1MatrixBinary instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The scalar type on the left-hand side.
+         * \tparam E2 The matrix expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar1MatrixBinaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar1MatrixBinary<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                 ResultType;
         };
 
@@ -557,14 +565,26 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2MatrixBinary instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The matrix expression type.
+         * \tparam E2 The scalar type on the right-hand side.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar2MatrixBinaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar2MatrixBinary<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                 ResultType;
         };
 
+        /**
+         * \brief Mutable view adapter that exposes the transpose of a matrix \a M as a matrix expression (\f$ (i, j) \to M(j, i) \f$).
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         class MatrixTranspose : public MatrixExpression<MatrixTranspose<M> >
         {
@@ -712,22 +732,44 @@ namespace CDPL
             MatrixClosureType data;
         };
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a Math::MatrixTranspose view.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         struct VectorTemporaryTraits<MatrixTranspose<M> > : public VectorTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a \c const Math::MatrixTranspose view.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixTranspose<M> > : public VectorTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::MatrixTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a Math::MatrixTranspose view.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixTranspose<M> > : public MatrixTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::MatrixTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a \c const Math::MatrixTranspose view.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixTranspose<M> > : public MatrixTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Returns the element-wise negation of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return An expression-template node representing \f$ -e \f$.
+         */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarNegation<typename E::ValueType> >::ResultType
         operator-(const MatrixExpression<E>& e)
@@ -737,6 +779,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the matrix expression \a e unchanged (unary \c +).
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return A \c const reference to \a e.
+         */
         template <typename E>
         const E&
         operator+(const MatrixExpression<E>& e)
@@ -744,6 +792,14 @@ namespace CDPL
             return e();
         }
 
+        /**
+         * \brief Returns the element-wise sum of the matrix expressions \a e1 and \a e2.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \return An expression-template node representing \f$ e_1 + e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType
         operator+(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -754,6 +810,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the element-wise difference of the matrix expressions \a e1 and \a e2.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \return An expression-template node representing \f$ e_1 - e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType
         operator-(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -764,6 +828,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the element-wise product of the matrix expression \a e and the scalar \a t.
+         * \tparam E The matrix expression type.
+         * \tparam T The scalar type.
+         * \param e The matrix expression.
+         * \param t The scalar multiplier.
+         * \return An expression-template node representing \f$ e \cdot t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2MatrixBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
         operator*(const MatrixExpression<E>& e, const T& t)
@@ -774,6 +846,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Returns the element-wise product of the scalar \a t and the matrix expression \a e.
+         * \tparam T The scalar type.
+         * \tparam E The matrix expression type.
+         * \param t The scalar multiplier.
+         * \param e The matrix expression.
+         * \return An expression-template node representing \f$ t \cdot e \f$.
+         */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1MatrixBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
         operator*(const T& t, const MatrixExpression<E>& e)
@@ -784,6 +864,14 @@ namespace CDPL
             return ExpressionType(t, e());
         }
 
+        /**
+         * \brief Returns the element-wise quotient of the matrix expression \a e by the scalar \a t.
+         * \tparam E The matrix expression type.
+         * \tparam T The scalar type.
+         * \param e The matrix expression.
+         * \param t The scalar divisor.
+         * \return An expression-template node representing \f$ e / t \f$.
+         */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2MatrixBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
         operator/(const MatrixExpression<E>& e, const T& t)
@@ -794,6 +882,14 @@ namespace CDPL
             return ExpressionType(e(), t);
         }
 
+        /**
+         * \brief Tells whether the matrix expressions \a e1 and \a e2 are element-wise equal.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \return \c true if both matrices have equal dimensions and equal elements, and \c false otherwise.
+         */
         template <typename E1, typename E2>
         typename MatrixEquality<E1, E2>::ResultType
         operator==(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -801,6 +897,14 @@ namespace CDPL
             return MatrixEquality<E1, E2>::apply(e1, e2);
         }
 
+        /**
+         * \brief Tells whether the matrix expressions \a e1 and \a e2 differ in at least one element.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \return \c true if the matrices differ in dimension or in any element, and \c false otherwise.
+         */
         template <typename E1, typename E2>
         typename MatrixEquality<E1, E2>::ResultType
         operator!=(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -808,6 +912,16 @@ namespace CDPL
             return !MatrixEquality<E1, E2>::apply(e1, e2);
         }
 
+        /**
+         * \brief Tells whether the matrix expressions \a e1 and \a e2 agree element-wise within the absolute tolerance \a eps.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \tparam T The numeric tolerance type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \param eps The non-negative absolute tolerance.
+         * \return \c true if all elements agree within \a eps, and \c false otherwise.
+         */
         template <typename E1, typename E2, typename T>
         typename std::enable_if<std::is_arithmetic<T>::value, typename MatrixToleranceEquality<E1, E2, T>::ResultType>::type
         equals(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, const T& eps)
@@ -815,6 +929,12 @@ namespace CDPL
             return MatrixToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
         }
 
+        /**
+         * \brief Returns the element-wise complex conjugate of the matrix expression \a e (identity for real-valued matrices).
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return An expression-template node representing \f$ \overline{e} \f$.
+         */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
         conj(const MatrixExpression<E>& e)
@@ -824,6 +944,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression \a e — currently aliased to conj() pending transpose support.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return An expression-template node representing \f$ \overline{e} \f$.
+         */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
         herm(const MatrixExpression<E>& e)
@@ -833,6 +959,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the element-wise real part of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return An expression-template node representing the real part of \a e.
+         */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
         real(const MatrixExpression<E>& e)
@@ -842,6 +974,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the element-wise imaginary part of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return An expression-template node representing the imaginary part of \a e.
+         */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
         imag(const MatrixExpression<E>& e)
@@ -851,6 +989,14 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the outer product of the vector expressions \a e1 and \a e2 as a matrix expression \f$ e_1 \cdot e_2^T \f$.
+         * \tparam E1 The first vector expression type.
+         * \tparam E2 The second vector expression type.
+         * \param e1 The first vector expression.
+         * \param e2 The second vector expression.
+         * \return An expression-template node representing the outer product.
+         */
         template <typename E1, typename E2>
         typename VectorMatrixBinaryTraits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
         outerProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -861,6 +1007,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the element-wise quotient of the matrix expressions \a e1 and \a e2.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The numerator matrix expression.
+         * \param e2 The denominator matrix expression.
+         * \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
         elemDiv(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -871,6 +1025,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the element-wise product (Hadamard product) of the matrix expressions \a e1 and \a e2.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
         elemProd(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -881,6 +1043,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the matrix-vector product \f$ e_1 \cdot e_2 \f$ as a vector expression.
+         * \tparam E1 The matrix expression type.
+         * \tparam E2 The vector expression type.
+         * \param e1 The matrix expression.
+         * \param e2 The vector expression.
+         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename Matrix1VectorBinaryTraits<E1, E2, MatrixVectorProduct<E1, E2> >::ResultType
         operator*(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -890,6 +1060,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the matrix-vector product \f$ e_1 \cdot e_2 \f$ as a vector expression (named-function form of operator*).
+         * \tparam E1 The matrix expression type.
+         * \tparam E2 The vector expression type.
+         * \param e1 The matrix expression.
+         * \param e2 The vector expression.
+         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename Matrix1VectorBinaryTraits<E1, E2, MatrixVectorProduct<E1, E2> >::ResultType
         prod(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2)
@@ -899,12 +1077,30 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Computes the matrix-vector product \f$ e_1 \cdot e_2 \f$ and stores it in \a c.
+         * \tparam C The output vector container type.
+         * \tparam E1 The matrix expression type.
+         * \tparam E2 The input vector expression type.
+         * \param e1 The matrix expression.
+         * \param e2 The input vector expression.
+         * \param c The output vector container receiving the result.
+         * \return A reference to \a c.
+         */
         template <typename C, typename E1, typename E2>
         C& prod(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2, VectorContainer<C>& c)
         {
             return c().assign(prod(e1, e2));
         }
 
+        /**
+         * \brief Returns the vector-matrix product \f$ e_1 \cdot e_2 \f$ as a vector expression.
+         * \tparam E1 The vector expression type.
+         * \tparam E2 The matrix expression type.
+         * \param e1 The vector expression.
+         * \param e2 The matrix expression.
+         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename Matrix2VectorBinaryTraits<E1, E2, VectorMatrixProduct<E1, E2> >::ResultType
         operator*(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -914,6 +1110,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the vector-matrix product \f$ e_1 \cdot e_2 \f$ as a vector expression (named-function form of operator*).
+         * \tparam E1 The vector expression type.
+         * \tparam E2 The matrix expression type.
+         * \param e1 The vector expression.
+         * \param e2 The matrix expression.
+         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename Matrix2VectorBinaryTraits<E1, E2, VectorMatrixProduct<E1, E2> >::ResultType
         prod(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -923,12 +1127,30 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Computes the vector-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in \a c.
+         * \tparam C The output vector container type.
+         * \tparam E1 The input vector expression type.
+         * \tparam E2 The matrix expression type.
+         * \param e1 The input vector expression.
+         * \param e2 The matrix expression.
+         * \param c The output vector container receiving the result.
+         * \return A reference to \a c.
+         */
         template <typename C, typename E1, typename E2>
         C& prod(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2, VectorContainer<C>& c)
         {
             return c().assign(prod(e1, e2));
         }
 
+        /**
+         * \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename MatrixBinary2Traits<E1, E2, MatrixProduct<E1, E2> >::ResultType
         operator*(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -938,6 +1160,14 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         */
         template <typename E1, typename E2>
         typename MatrixBinary2Traits<E1, E2, MatrixProduct<E1, E2> >::ResultType
         prod(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
@@ -947,12 +1177,28 @@ namespace CDPL
             return ExpressionType(e1(), e2());
         }
 
+        /**
+         * \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in \a c.
+         * \tparam C The output matrix container type.
+         * \tparam E1 The first matrix expression type.
+         * \tparam E2 The second matrix expression type.
+         * \param e1 The first matrix expression.
+         * \param e2 The second matrix expression.
+         * \param c The output matrix container receiving the result.
+         * \return A reference to \a c.
+         */
         template <typename C, typename E1, typename E2>
         C& prod(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, MatrixContainer<C>& c)
         {
             return c().assign(prod(e1, e2));
         }
 
+        /**
+         * \brief Returns the trace (sum of diagonal elements) of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return \f$ \sum_i e(i, i) \f$.
+         */
         template <typename E>
         typename MatrixTrace<E>::ResultType
         trace(const MatrixExpression<E>& e)
@@ -960,6 +1206,12 @@ namespace CDPL
             return MatrixTrace<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the L1 (maximum absolute column sum) norm of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return The L1 norm of \a e.
+         */
         template <typename E>
         typename MatrixNorm1<E>::ResultType
         norm1(const MatrixExpression<E>& e)
@@ -967,6 +1219,12 @@ namespace CDPL
             return MatrixNorm1<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the Frobenius norm of the matrix expression \a e (\f$ \sqrt{\sum_{i, j} |e(i, j)|^2} \f$).
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return The Frobenius norm of \a e.
+         */
         template <typename E>
         typename MatrixNormFrobenius<E>::ResultType
         normFrob(const MatrixExpression<E>& e)
@@ -974,6 +1232,12 @@ namespace CDPL
             return MatrixNormFrobenius<E>::apply(e);
         }
 
+        /**
+         * \brief Returns the L&infin; (maximum absolute row sum) norm of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return The L&infin; norm of \a e.
+         */
         template <typename E>
         typename MatrixNormInfinity<E>::ResultType
         normInf(const MatrixExpression<E>& e)
@@ -981,6 +1245,12 @@ namespace CDPL
             return MatrixNormInfinity<E>::apply(e);
         }
 
+        /**
+         * \brief Returns a diagonal matrix whose diagonal entries are the components of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return An expression-template node representing the diagonal matrix.
+         */
         template <typename E>
         typename VectorMatrixUnaryTraits<E, DiagonalMatrixFromVector<E> >::ResultType
         diag(const VectorExpression<E>& e)
@@ -990,6 +1260,12 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3-vector expression \a e (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
+         * \tparam E The vector expression type.
+         * \param e The 3-vector expression.
+         * \return An expression-template node representing the skew-symmetric matrix.
+         */
         template <typename E>
         typename VectorMatrixUnaryTraits<E, CrossProductMatrixFromVector<E> >::ResultType
         cross(const VectorExpression<E>& e)
@@ -999,18 +1275,36 @@ namespace CDPL
             return ExpressionType(e());
         }
 
+        /**
+         * \brief Returns a mutable Math::MatrixTranspose view of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression to transpose.
+         * \return A mutable transpose view of \a e.
+         */
         template <typename E>
         MatrixTranspose<E> trans(MatrixExpression<E>& e)
         {
             return MatrixTranspose<E>(e());
         }
 
+        /**
+         * \brief Returns a constant Math::MatrixTranspose view of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression to transpose.
+         * \return A constant transpose view of \a e.
+         */
         template <typename E>
         MatrixTranspose<const E> trans(const MatrixExpression<E>& e)
         {
             return MatrixTranspose<const E>(e());
         }
 
+        /**
+         * \brief Returns the sum of all elements of the matrix expression \a e.
+         * \tparam E The matrix expression type.
+         * \param e The matrix expression.
+         * \return \f$ \sum_{i, j} e(i, j) \f$.
+         */
         template <typename E>
         typename MatrixElementSum<E>::ResultType
         sum(const MatrixExpression<E>& e)

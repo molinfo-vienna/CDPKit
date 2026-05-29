@@ -224,18 +224,38 @@ namespace CDPL
         template <typename M, typename Tri>
         const typename TriangularAdapter<M, Tri>::ValueType TriangularAdapter<M, Tri>::one = TriangularAdapter<M, Tri>::ValueType(1);
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a Math::TriangularAdapter view.
+         * \tparam M The wrapped matrix type.
+         * \tparam Tri The triangular-view selection policy.
+         */
         template <typename M, typename Tri>
         struct VectorTemporaryTraits<TriangularAdapter<M, Tri> > : public VectorTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a \c const Math::TriangularAdapter view.
+         * \tparam M The wrapped matrix type.
+         * \tparam Tri The triangular-view selection policy.
+         */
         template <typename M, typename Tri>
         struct VectorTemporaryTraits<const TriangularAdapter<M, Tri> > : public VectorTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::MatrixTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a Math::TriangularAdapter view.
+         * \tparam M The wrapped matrix type.
+         * \tparam Tri The triangular-view selection policy.
+         */
         template <typename M, typename Tri>
         struct MatrixTemporaryTraits<TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M>
         {};
 
+        /**
+         * \brief Math::MatrixTemporaryTraits specialization inheriting the temporary type of the wrapped matrix for a \c const Math::TriangularAdapter view.
+         * \tparam M The wrapped matrix type.
+         * \tparam Tri The triangular-view selection policy.
+         */
         template <typename M, typename Tri>
         struct MatrixTemporaryTraits<const TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M>
         {};

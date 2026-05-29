@@ -39,6 +39,9 @@ namespace CDPL
     namespace Biomol
     {
 
+        /**
+         * \brief Reader for molecule data in the gzip-compressed <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+         */
         typedef Util::CompressedDataReader<PDBMoleculeReader, Util::GZipIStream> PDBGZMoleculeReader;
     }
 } // namespace CDPL

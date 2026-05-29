@@ -44,21 +44,44 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Reusable transformation traits used by Math::RegularSpatialGrid when the coordinate transform is a 4x4 matrix.
+         * \tparam MatrixType The 4x4 transformation matrix type.
+         */
         template <typename MatrixType>
         struct GridCoordinatesMatrixTransformTraits
         {
 
+            /**
+             * \brief Initializes \a mtx to the 4x4 identity matrix.
+             * \param mtx The matrix to initialize.
+             */
             static void init(MatrixType& mtx)
             {
                 mtx.assign(IdentityMatrix<typename MatrixType::ValueType>(4, 4));
             }
 
+            /**
+             * \brief Computes \a inv_mtx as the inverse of \a mtx.
+             * \tparam M The output matrix type.
+             * \param mtx The matrix to invert.
+             * \param inv_mtx The output matrix receiving the inverse.
+             * \return \c true if \a mtx is invertible, and \c false otherwise.
+             */
             template <typename M>
             static bool invert(const MatrixType& mtx, M& inv_mtx)
             {
                 return Math::invert(mtx, inv_mtx);
             }
 
+            /**
+             * \brief Computes \a r as <tt>mtx * v</tt>.
+             * \tparam V The input vector type.
+             * \tparam R The output vector type.
+             * \param mtx The transformation matrix.
+             * \param v The input vector.
+             * \param r The output vector receiving the transformed result.
+             */
             template <typename V, typename R>
             static void transform(const MatrixType& mtx, const V& v, R& r)
             {
@@ -66,13 +89,25 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Primary traits template for grid-coordinate transformations of type \a T (left unspecialized; specialize for new transform types).
+         * \tparam T The coordinate transformation type.
+         */
         template <typename T>
         struct GridCoordinatesTransformTraits;
 
+        /**
+         * \brief Math::GridCoordinatesTransformTraits specialization for the fixed-size Math::CMatrix 4x4 transformation type.
+         * \tparam T The matrix element value type.
+         */
         template <typename T>
         struct GridCoordinatesTransformTraits<CMatrix<T, 4, 4> > : public GridCoordinatesMatrixTransformTraits<CMatrix<T, 4, 4> >
         {};
 
+        /**
+         * \brief Math::GridCoordinatesTransformTraits specialization for the bounded Math::BoundedMatrix 4x4 transformation type.
+         * \tparam T The matrix element value type.
+         */
         template <typename T>
         struct GridCoordinatesTransformTraits<BoundedMatrix<T, 4, 4> > : public GridCoordinatesMatrixTransformTraits<BoundedMatrix<T, 4, 4> >
         {};
@@ -556,6 +591,19 @@ namespace CDPL
             InvCoordinatesTransformType invXform;
         };
 
+        /**
+         * \brief Returns the trilinearly-interpolated value of \a grid at \a pos.
+         * \tparam T The grid cell value type.
+         * \tparam C The coordinate value type.
+         * \tparam GD The underlying grid data container type.
+         * \tparam XF The coordinate transformation type.
+         * \tparam V The position vector type (indexable via <tt>operator[]</tt> for 3 components).
+         * \param grid The regular spatial grid.
+         * \param pos The query position.
+         * \param local_pos If \c true, \a pos is interpreted as local (cell-index space) coordinates;
+         *                  if \c false, \a pos is interpreted as world coordinates and converted via the inverse transform.
+         * \return The trilinearly-interpolated cell value at \a pos (zero if \a grid is empty).
+         */
         template <typename T, typename C, typename GD, typename XF, typename V>
         T interpolateTrilinear(const RegularSpatialGrid<T, C, GD, XF>& grid, const V& pos, bool local_pos)
         {
