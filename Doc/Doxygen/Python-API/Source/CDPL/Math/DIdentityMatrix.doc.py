@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.IdentityMatrix specialization with double-precision <tt>double</tt> elements.
+# \brief A memory-efficient immutable identity matrix with element values of type <tt>double</tt>.
 # 
 class DIdentityMatrix(Boost.Python.instance):
 

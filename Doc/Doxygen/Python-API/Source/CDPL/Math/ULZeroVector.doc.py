@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroVector specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>unsigned long</tt>.
 # 
 class ULZeroVector(Boost.Python.instance):
 

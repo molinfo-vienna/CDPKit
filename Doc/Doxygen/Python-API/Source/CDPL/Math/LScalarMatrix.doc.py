@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarMatrix specialization with signed-integer <tt>long</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>long</tt>.
 # 
 class LScalarMatrix(Boost.Python.instance):
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.IdentityMatrix specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# \brief A memory-efficient immutable identity matrix with element values of type <tt>unsigned long</tt>.
 # 
 class ULIdentityMatrix(Boost.Python.instance):
 

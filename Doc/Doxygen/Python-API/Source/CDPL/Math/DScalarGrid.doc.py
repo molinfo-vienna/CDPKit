@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarGrid specialization with double-precision <tt>double</tt> elements.
+# \brief An immutable grid where all elements have the same value of type <tt>double</tt>.
 # 
 class DScalarGrid(Boost.Python.instance):
 

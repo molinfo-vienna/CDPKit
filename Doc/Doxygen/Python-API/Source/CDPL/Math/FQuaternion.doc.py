@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.Quaternion specialization with single-precision <tt>float</tt> components.
+# \brief A general 4-component quaternion with component values of type <tt>float</tt>.
 # 
 class FQuaternion(Boost.Python.instance):
 

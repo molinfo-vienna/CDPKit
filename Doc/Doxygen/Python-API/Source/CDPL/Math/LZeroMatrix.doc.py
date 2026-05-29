@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroMatrix specialization with signed-integer <tt>long</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>long</tt>.
 # 
 class LZeroMatrix(Boost.Python.instance):
 

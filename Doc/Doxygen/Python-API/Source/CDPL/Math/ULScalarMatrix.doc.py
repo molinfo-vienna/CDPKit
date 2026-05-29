@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarMatrix specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>unsigned long</tt>.
 # 
 class ULScalarMatrix(Boost.Python.instance):
 

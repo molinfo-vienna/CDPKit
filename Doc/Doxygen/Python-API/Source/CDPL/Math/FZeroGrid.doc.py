@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroGrid specialization with single-precision <tt>float</tt> elements.
+# \brief An immutable grid where all elements have the value zero of type <tt>float</tt>.
 # 
 class FZeroGrid(Boost.Python.instance):
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarGrid specialization with single-precision <tt>float</tt> elements.
+# \brief An immutable grid where all elements have the same value of type <tt>float</tt>.
 # 
 class FScalarGrid(Boost.Python.instance):
 

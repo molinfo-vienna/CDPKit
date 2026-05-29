@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarVector specialization with single-precision <tt>float</tt> elements.
+# \brief A memory-efficient immutable vector where all elements have the same value of type <tt>float</tt>.
 # 
 class FScalarVector(Boost.Python.instance):
 

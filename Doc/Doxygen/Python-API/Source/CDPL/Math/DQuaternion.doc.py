@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.Quaternion specialization with double-precision <tt>double</tt> components.
+# \brief A general 4-component quaternion with component values of type <tt>double</tt>.
 # 
 class DQuaternion(Boost.Python.instance):
 

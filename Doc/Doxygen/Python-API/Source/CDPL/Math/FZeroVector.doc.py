@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroVector specialization with single-precision <tt>float</tt> elements.
+# \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>float</tt>.
 # 
 class FZeroVector(Boost.Python.instance):
 

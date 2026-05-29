@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.RealQuaternion specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> real component.
+# \brief A memory-efficient pure-real quaternion with component values of type <tt>unsigned long</tt>.
 # 
 class ULRealQuaternion(Boost.Python.instance):
 

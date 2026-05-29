@@ -1765,27 +1765,64 @@ namespace CDPL
             return v;
         }
 
-        /** \brief A Math::ScalarVector specialization with single-precision \c float elements. */
-        typedef ScalarVector<float>         FScalarVector;
-        /** \brief A Math::ScalarVector specialization with double-precision \c double elements. */
-        typedef ScalarVector<double>        DScalarVector;
-        /** \brief A Math::ScalarVector specialization with signed-integer \c long elements. */
-        typedef ScalarVector<long>          LScalarVector;
-        /** \brief A Math::ScalarVector specialization with unsigned-integer \c unsigned \c long elements. */
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>float</tt>.
+         */
+        typedef ScalarVector<float> FScalarVector;
+
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>double</tt>.
+         */
+        typedef ScalarVector<double> DScalarVector;
+
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>long</tt>.
+         */
+        typedef ScalarVector<long> LScalarVector;
+
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>unsigned long</tt>.
+         */
         typedef ScalarVector<unsigned long> ULScalarVector;
 
-        /** \brief A Math::ZeroVector specialization with single-precision \c float elements. */
-        typedef ZeroVector<float>         FZeroVector;
-        /** \brief A Math::ZeroVector specialization with double-precision \c double elements. */
-        typedef ZeroVector<double>        DZeroVector;
-        /** \brief A Math::ZeroVector specialization with signed-integer \c long elements. */
-        typedef ZeroVector<long>          LZeroVector;
-        /** \brief A Math::ZeroVector specialization with unsigned-integer \c unsigned \c long elements. */
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>float</tt>.
+         */
+        typedef ZeroVector<float> FZeroVector;
+
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>double</tt>.
+         */
+        typedef ZeroVector<double> DZeroVector;
+
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>long</tt>.
+         */
+        typedef ZeroVector<long> LZeroVector;
+
+        /**
+         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>unsigned long</tt>.
+         */
         typedef ZeroVector<unsigned long> ULZeroVector;
 
-        typedef UnitVector<float>         FUnitVector;
-        typedef UnitVector<double>        DUnitVector;
-        typedef UnitVector<long>          LUnitVector;
+        /**
+         * \brief A memory-efficient immutable unit vector with element values of type <tt>float</tt>.
+         */
+        typedef UnitVector<float> FUnitVector;
+
+        /**
+         * \brief A memory-efficient immutable unit vector with element values of type <tt>double</tt>.
+         */
+        typedef UnitVector<double> DUnitVector;
+
+        /**
+         * \brief A memory-efficient immutable unit vector with element values of type <tt>long</tt>.
+         */
+        typedef UnitVector<long> LUnitVector;
+
+        /**
+         * \brief A memory-efficient immutable unit vector with element values of type <tt>unsigned long</tt>.
+         */
         typedef UnitVector<unsigned long> ULUnitVector;
 
         /**
