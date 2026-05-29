@@ -52,6 +52,10 @@ License
 
 The CDPKit source code is released under the terms of the `GNU Lesser General Public License (LGPL) V2.1-or-later <https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html>`_.
 CDPKit documentation is licensed under the terms of the `GNU Free Documentation License (GFDL) V1.2-or-later <https://www.gnu.org/licenses/old-licenses/fdl-1.2.en.html>`_.
+Text of this website is available for modification and reuse under the terms of the
+`Creative Commons Attribution-Sharealike 4.0 International License <https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_4.0_International_License>`_
+and the `GNU Free Documentation License <https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License>`_
+(unversioned, with no invariant sections, front-cover texts, or back-cover texts).
 Code snippets in tutorials and the source code of CDPL programming examples are distributed under the terms of the `Zero-Clause BSD License (0BSD) <https://opensource.org/license/0bsd>`_.
 
 .. index:: Related Software
