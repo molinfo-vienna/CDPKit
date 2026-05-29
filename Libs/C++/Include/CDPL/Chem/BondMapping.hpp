@@ -54,6 +54,7 @@ namespace CDPL
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondMapping instances. */
             typedef std::shared_ptr<BondMapping> SharedPointer;
 
           private:

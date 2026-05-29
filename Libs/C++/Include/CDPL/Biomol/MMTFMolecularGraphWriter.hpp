@@ -52,6 +52,7 @@ namespace CDPL
 
         /**
          * \brief A writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
+         * \since 1.2
          */
         class CDPL_BIOMOL_API MMTFMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
         {
@@ -80,7 +81,16 @@ namespace CDPL
              */
             Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Tells whether the writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
                  operator const void*() const;
+
+            /**
+             * \brief Tells whether the writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

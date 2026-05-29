@@ -59,88 +59,136 @@ namespace CDPL
             extern CDPL_BIOMOL_API const bool CHECK_LINE_LENGTH;
 
             /**
+             * \brief Default value (= empty shared pointer) for the control-parameter
+             *        Biomol::ControlParameter::RESIDUE_DICTIONARY (a \c nullptr selects the built-in default dictionary).
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const ResidueDictionary::SharedPointer RESIDUE_DICTIONARY;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::APPLY_DICT_FORMAL_CHARGES.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool APPLY_DICT_FORMAL_CHARGES;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::APPLY_DICT_ATOM_TYPES.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool APPLY_DICT_ATOM_TYPES;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::CALC_MISSING_FORMAL_CHARGES.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool CALC_MISSING_FORMAL_CHARGES;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::PERCEIVE_MISSING_BOND_ORDERS.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool PERCEIVE_MISSING_BOND_ORDERS;
 
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::COMBINE_INTERFERING_RESIDUE_COORDINATES.
+             */
             extern CDPL_BIOMOL_API const bool COMBINE_INTERFERING_RESIDUE_COORDINATES;
-            
+
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES.
+             */
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
 
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES.
+             */
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
 
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES.
+             */
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES;
 
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES.
+             */
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES;
 
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_IGNORE_CONECT_RECORDS.
+             */
             extern CDPL_BIOMOL_API const bool PDB_IGNORE_CONECT_RECORDS;
 
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS.
+             */
             extern CDPL_BIOMOL_API const bool PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
 
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_IGNORE_FORMAL_CHARGE_FIELD.
+             */
             extern CDPL_BIOMOL_API const bool PDB_IGNORE_FORMAL_CHARGE_FIELD;
-    
+
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_EVALUATE_MASTER_RECORD.
+             */
             extern CDPL_BIOMOL_API const bool PDB_EVALUATE_MASTER_RECORD;
 
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_TRUNCATE_LINES.
+             */
             extern CDPL_BIOMOL_API const bool PDB_TRUNCATE_LINES;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::PDB_OUTPUT_FORMAL_CHARGES.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool PDB_OUTPUT_FORMAL_CHARGES;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool PDB_OUTPUT_CONECT_RECORDS;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER;
 
+            /**
+             * \brief Default value (= Biomol::PDBFormatVersion::V3) for the control-parameter Biomol::ControlParameter::PDB_FORMAT_VERSION.
+             */
             extern CDPL_BIOMOL_API const unsigned int PDB_FORMAT_VERSION;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::MMCIF_APPLY_DICT_ATOM_BONDING.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool MMCIF_APPLY_DICT_ATOM_BONDING;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Biomol::ControlParameter::MMCIF_APPLY_DICT_BOND_ORDERS.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool MMCIF_APPLY_DICT_BOND_ORDERS;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const bool MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP;
 
             /**
+             * \brief Default value (= empty function object) for the control-parameter
+             *        Biomol::ControlParameter::MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION.
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const MMCIFDataProcessingFunction MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION;

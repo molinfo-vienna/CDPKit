@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Writer for molecular graph data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+         */
         typedef Util::CompressedDataWriter<CDFMolecularGraphWriter, Util::GZipOStream> CDFGZMolecularGraphWriter;
     }
 } // namespace CDPL

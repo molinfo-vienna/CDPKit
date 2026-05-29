@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Writer for molecular graph data in the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+         */
         typedef Util::CompressedDataWriter<SMILESMolecularGraphWriter, Util::GZipOStream> SMILESGZMolecularGraphWriter;
     }
 } // namespace CDPL

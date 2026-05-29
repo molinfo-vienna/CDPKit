@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Writer for reaction data in the bzip2-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+         */
         typedef Util::CompressedDataWriter<SMILESReactionWriter, Util::BZip2OStream> SMILESBZ2ReactionWriter;
     }
 } // namespace CDPL

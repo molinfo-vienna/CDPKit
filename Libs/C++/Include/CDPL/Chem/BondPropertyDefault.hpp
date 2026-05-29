@@ -48,12 +48,19 @@ namespace CDPL
         namespace BondPropertyDefault
         {
 
+            /** \brief Default value for the Chem::BondProperty::ORDER property. */
             extern CDPL_CHEM_API const std::size_t                        ORDER;
+            /** \brief Default value for the Chem::BondProperty::DIRECTION property. */
             extern CDPL_CHEM_API const unsigned int                       DIRECTION;
+            /** \brief Default value for the Chem::BondProperty::STEREO_2D_FLAG property. */
             extern CDPL_CHEM_API const unsigned int                       STEREO_2D_FLAG;
+            /** \brief Default value for the Chem::BondProperty::STEREO_DESCRIPTOR property. */
             extern CDPL_CHEM_API const StereoDescriptor                   STEREO_DESCRIPTOR;
+            /** \brief Default value for the Chem::BondProperty::REACTION_CENTER_STATUS property. */
             extern CDPL_CHEM_API const unsigned int                       REACTION_CENTER_STATUS;
+            /** \brief Default value for the Chem::BondProperty::SYBYL_TYPE property. */
             extern CDPL_CHEM_API const unsigned int                       SYBYL_TYPE;
+            /** \brief Default value for the Chem::BondProperty::MATCH_CONSTRAINTS property. */
             extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
         } // namespace BondPropertyDefault
     } // namespace Chem

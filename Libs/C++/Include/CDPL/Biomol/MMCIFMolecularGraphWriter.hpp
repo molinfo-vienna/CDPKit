@@ -1,7 +1,7 @@
 /* 
  * MMCIFMolecularGraphWriter.hpp 
  *
- * This file is part of the Biomolical Data Processing Toolkit
+ * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
@@ -81,7 +81,16 @@ namespace CDPL
              */
             Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Tells whether the writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

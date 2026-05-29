@@ -42,7 +42,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief Atom3DCoordinatesFunctor.
+         * \brief Helper-functor for retrieving the 3D coordinates of an atom (via the Chem::AtomProperty::COORDINATES_3D property).
          */
         struct CDPL_CHEM_API Atom3DCoordinatesFunctor
         {

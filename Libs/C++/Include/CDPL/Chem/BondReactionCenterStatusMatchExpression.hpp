@@ -45,7 +45,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief BondReactionCenterStatusMatchExpression.
+         * \brief Chem::MatchExpression that constrains target bonds by their reaction-center status (see Chem::ReactionCenterStatus).
          */
         class CDPL_CHEM_API BondReactionCenterStatusMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
