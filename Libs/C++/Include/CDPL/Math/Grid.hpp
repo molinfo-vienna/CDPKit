@@ -804,14 +804,24 @@ namespace CDPL
         struct GridTemporaryTraits<const GridReference<G> > : public GridTemporaryTraits<G>
         {};
 
-        /** \brief A Math::ZeroGrid specialization with single-precision \c float elements. */
+        /**
+         * \brief An immutable grid where all elements have the value zero of type <tt>float</tt>.
+         */
         typedef ZeroGrid<float>  FZeroGrid;
-        /** \brief A Math::ZeroGrid specialization with double-precision \c double elements. */
+        
+        /**
+         * \brief An immutable grid where all elements have the value zero of type <tt>double</tt>.
+         */
         typedef ZeroGrid<double> DZeroGrid;
 
-        /** \brief A Math::ScalarGrid specialization with single-precision \c float elements. */
+        /**
+         * \brief An immutable grid where all elements have the same value of type <tt>float</tt>.
+         */
         typedef ScalarGrid<float>  FScalarGrid;
-        /** \brief A Math::ScalarGrid specialization with double-precision \c double elements. */
+        
+        /**
+         * \brief An immutable grid where all elements have the same value of type <tt>double</tt>.
+         */
         typedef ScalarGrid<double> DScalarGrid;
 
         /**

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarVector specialization with signed-integer <tt>long</tt> elements.
+# \brief A memory-efficient immutable vector where all elements have the same value of type <tt>long</tt>.
 # 
 class LScalarVector(Boost.Python.instance):
 

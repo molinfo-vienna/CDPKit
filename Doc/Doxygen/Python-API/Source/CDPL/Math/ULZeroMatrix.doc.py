@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroMatrix specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>unsigned long</tt>.
 # 
 class ULZeroMatrix(Boost.Python.instance):
 

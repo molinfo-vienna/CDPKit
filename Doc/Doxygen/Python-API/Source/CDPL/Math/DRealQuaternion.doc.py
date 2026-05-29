@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.RealQuaternion specialization with double-precision <tt>double</tt> real component.
+# \brief A memory-efficient pure-real quaternion with component values of type <tt>double</tt>.
 # 
 class DRealQuaternion(Boost.Python.instance):
 

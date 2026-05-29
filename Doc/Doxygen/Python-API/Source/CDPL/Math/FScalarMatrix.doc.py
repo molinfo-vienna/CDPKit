@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarMatrix specialization with single-precision <tt>float</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>float</tt>.
 # 
 class FScalarMatrix(Boost.Python.instance):
 

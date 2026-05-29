@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarMatrix specialization with double-precision <tt>double</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>double</tt>.
 # 
 class DScalarMatrix(Boost.Python.instance):
 

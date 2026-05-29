@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroMatrix specialization with double-precision <tt>double</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>double</tt>.
 # 
 class DZeroMatrix(Boost.Python.instance):
 

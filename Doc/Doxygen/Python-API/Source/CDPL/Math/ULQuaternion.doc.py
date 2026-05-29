@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.Quaternion specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> components.
+# \brief A general 4-component quaternion with component values of type <tt>unsigned long</tt>.
 # 
 class ULQuaternion(Boost.Python.instance):
 

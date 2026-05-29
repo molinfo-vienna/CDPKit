@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroGrid specialization with double-precision <tt>double</tt> elements.
+# \brief An immutable grid where all elements have the value zero of type <tt>double</tt>.
 # 
 class DZeroGrid(Boost.Python.instance):
 

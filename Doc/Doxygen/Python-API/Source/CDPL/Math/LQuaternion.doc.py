@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.Quaternion specialization with signed-integer <tt>long</tt> components.
+# \brief A general 4-component quaternion with component values of type <tt>long</tt>.
 # 
 class LQuaternion(Boost.Python.instance):
 

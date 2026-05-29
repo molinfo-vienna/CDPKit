@@ -1921,31 +1921,64 @@ namespace CDPL
             return invert(c, c);
         }
 
-        /** \brief A Math::ZeroMatrix specialization with single-precision \c float elements. */
-        typedef ZeroMatrix<float>         FZeroMatrix;
-        /** \brief A Math::ZeroMatrix specialization with double-precision \c double elements. */
-        typedef ZeroMatrix<double>        DZeroMatrix;
-        /** \brief A Math::ZeroMatrix specialization with signed-integer \c long elements. */
-        typedef ZeroMatrix<long>          LZeroMatrix;
-        /** \brief A Math::ZeroMatrix specialization with unsigned-integer \c unsigned \c long elements. */
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>float</tt>.
+         */
+        typedef ZeroMatrix<float> FZeroMatrix;
+
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>double</tt>.
+         */
+        typedef ZeroMatrix<double> DZeroMatrix;
+
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>long</tt>.
+         */
+        typedef ZeroMatrix<long> LZeroMatrix;
+
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>unsigned long</tt>.
+         */
         typedef ZeroMatrix<unsigned long> ULZeroMatrix;
 
-        /** \brief A Math::ScalarMatrix specialization with single-precision \c float elements. */
-        typedef ScalarMatrix<float>         FScalarMatrix;
-        /** \brief A Math::ScalarMatrix specialization with double-precision \c double elements. */
-        typedef ScalarMatrix<double>        DScalarMatrix;
-        /** \brief A Math::ScalarMatrix specialization with signed-integer \c long elements. */
-        typedef ScalarMatrix<long>          LScalarMatrix;
-        /** \brief A Math::ScalarMatrix specialization with unsigned-integer \c unsigned \c long elements. */
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>float</tt>.
+         */
+        typedef ScalarMatrix<float> FScalarMatrix;
+
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>double</tt>.
+         */
+        typedef ScalarMatrix<double> DScalarMatrix;
+
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>long</tt>.
+         */
+        typedef ScalarMatrix<long> LScalarMatrix;
+
+        /**
+         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>unsigned long</tt>.
+         */
         typedef ScalarMatrix<unsigned long> ULScalarMatrix;
 
-        /** \brief A Math::IdentityMatrix specialization with single-precision \c float elements. */
-        typedef IdentityMatrix<float>         FIdentityMatrix;
-        /** \brief A Math::IdentityMatrix specialization with double-precision \c double elements. */
-        typedef IdentityMatrix<double>        DIdentityMatrix;
-        /** \brief A Math::IdentityMatrix specialization with signed-integer \c long elements. */
-        typedef IdentityMatrix<long>          LIdentityMatrix;
-        /** \brief A Math::IdentityMatrix specialization with unsigned-integer \c unsigned \c long elements. */
+        /**
+         * \brief A memory-efficient immutable identity matrix with element values of type <tt>float</tt>.
+         */
+        typedef IdentityMatrix<float> FIdentityMatrix;
+
+        /**
+         * \brief A memory-efficient immutable identity matrix with element values of type <tt>double</tt>.
+         */
+        typedef IdentityMatrix<double> DIdentityMatrix;
+
+        /**
+         * \brief A memory-efficient immutable identity matrix with element values of type <tt>long</tt>.
+         */
+        typedef IdentityMatrix<long> LIdentityMatrix;
+
+        /**
+         * \brief A memory-efficient immutable identity matrix with element values of type <tt>unsigned long</tt>.
+         */
         typedef IdentityMatrix<unsigned long> ULIdentityMatrix;
 
         /**

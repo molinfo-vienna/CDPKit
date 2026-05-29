@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A memory-efficient immutable unit vector with element values of type <tt>double</tt>.
+# 
 class DUnitVector(Boost.Python.instance):
 
     ##

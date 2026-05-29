@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ZeroMatrix specialization with single-precision <tt>float</tt> elements.
+# \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>float</tt>.
 # 
 class FZeroMatrix(Boost.Python.instance):
 

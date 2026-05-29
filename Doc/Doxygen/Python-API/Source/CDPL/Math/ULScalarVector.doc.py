@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.ScalarVector specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# \brief A memory-efficient immutable vector where all elements have the same value of type <tt>unsigned long</tt>.
 # 
 class ULScalarVector(Boost.Python.instance):
 

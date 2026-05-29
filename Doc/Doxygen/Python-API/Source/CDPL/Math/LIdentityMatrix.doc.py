@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.IdentityMatrix specialization with signed-integer <tt>long</tt> elements.
+# \brief A memory-efficient immutable identity matrix with element values of type <tt>long</tt>.
 # 
 class LIdentityMatrix(Boost.Python.instance):
 

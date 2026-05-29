@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Math.IdentityMatrix specialization with single-precision <tt>float</tt> elements.
+# \brief A memory-efficient immutable identity matrix with element values of type <tt>float</tt>.
 # 
 class FIdentityMatrix(Boost.Python.instance):
 

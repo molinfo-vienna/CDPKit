@@ -860,22 +860,44 @@ namespace CDPL
             return QuaternionType(t1, t2, t3, t4);
         }
 
-        /** \brief A Math::Quaternion specialization with single-precision \c float components. */
+        /**
+         * \brief A general 4-component quaternion with component values of type <tt>float</tt>.
+         */
         typedef Quaternion<float>         FQuaternion;
-        /** \brief A Math::Quaternion specialization with double-precision \c double components. */
+        
+        /**
+         * \brief A general 4-component quaternion with component values of type <tt>double</tt>.
+         */
         typedef Quaternion<double>        DQuaternion;
-        /** \brief A Math::Quaternion specialization with signed-integer \c long components. */
+
+        /**
+         * \brief A general 4-component quaternion with component values of type <tt>long</tt>.
+         */
         typedef Quaternion<long>          LQuaternion;
-        /** \brief A Math::Quaternion specialization with unsigned-integer \c unsigned \c long components. */
+        
+        /**
+         * \brief A general 4-component quaternion with component values of type <tt>unsigned long</tt>.
+         */
         typedef Quaternion<unsigned long> ULQuaternion;
 
-        /** \brief A Math::RealQuaternion specialization with single-precision \c float real component. */
+        /**
+         * \brief A memory-efficient pure-real quaternion with component values of type <tt>float</tt>.
+         */
         typedef RealQuaternion<float>         FRealQuaternion;
-        /** \brief A Math::RealQuaternion specialization with double-precision \c double real component. */
+        
+        /**
+         * \brief A memory-efficient pure-real quaternion with component values of type <tt>double</tt>.
+         */
         typedef RealQuaternion<double>        DRealQuaternion;
-        /** \brief A Math::RealQuaternion specialization with signed-integer \c long real component. */
+        
+        /**
+         * \brief A memory-efficient pure-real quaternion with component values of type <tt>long</tt>.
+         */
         typedef RealQuaternion<long>          LRealQuaternion;
-        /** \brief A Math::RealQuaternion specialization with unsigned-integer \c unsigned \c long real component. */
+        
+        /**
+         * \brief A memory-efficient pure-real quaternion with component values of type <tt>unsigned long</tt>.
+         */
         typedef RealQuaternion<unsigned long> ULRealQuaternion;
     } // namespace Math
 } // namespace CDPL
