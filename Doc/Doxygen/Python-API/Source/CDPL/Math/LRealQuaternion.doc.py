@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.RealQuaternion specialization with signed-integer <tt>long</tt> real component.
+# 
 class LRealQuaternion(Boost.Python.instance):
 
     ##

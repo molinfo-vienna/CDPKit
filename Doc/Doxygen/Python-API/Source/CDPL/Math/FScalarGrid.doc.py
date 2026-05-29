@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarGrid specialization with single-precision <tt>float</tt> elements.
+# 
 class FScalarGrid(Boost.Python.instance):
 
     ##

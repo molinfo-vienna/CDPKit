@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarVector specialization with single-precision <tt>float</tt> elements.
+# 
 class FScalarVector(Boost.Python.instance):
 
     ##

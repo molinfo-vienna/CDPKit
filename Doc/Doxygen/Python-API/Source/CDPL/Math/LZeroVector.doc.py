@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroVector specialization with signed-integer <tt>long</tt> elements.
+# 
 class LZeroVector(Boost.Python.instance):
 
     ##

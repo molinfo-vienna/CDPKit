@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarMatrix specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# 
 class ULScalarMatrix(Boost.Python.instance):
 
     ##

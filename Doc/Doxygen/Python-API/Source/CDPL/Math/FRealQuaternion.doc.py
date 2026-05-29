@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.RealQuaternion specialization with single-precision <tt>float</tt> real component.
+# 
 class FRealQuaternion(Boost.Python.instance):
 
     ##

@@ -140,14 +140,14 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     ##
     # \brief Tells whether 1,2-charge separations on adjacent carbon atoms are minimized.
     # 
-    # \return <tt>True</tt> if 1,2-charged CC resonance forms are minimized, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if 1,2-charged C&minus;C resonance forms are minimized, and <tt>False</tt> otherwise.
     # 
     def carbonBond12ChargesMinimized() -> bool: pass
 
     ##
     # \brief Specifies whether resonance structures with 1,2-charge separations on adjacent carbon atoms shall be filtered out.
     # 
-    # \param minimize If <tt>True</tt>, 1,2-charged CC resonance forms are minimized.
+    # \param minimize If <tt>True</tt>, 1,2-charged C&minus;C resonance forms are minimized.
     # 
     def minimizeCarbonBond12Charges(minimize: bool) -> None: pass
 

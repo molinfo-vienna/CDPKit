@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroMatrix specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> elements.
+# 
 class ULZeroMatrix(Boost.Python.instance):
 
     ##

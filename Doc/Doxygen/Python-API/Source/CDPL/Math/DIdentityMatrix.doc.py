@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.IdentityMatrix specialization with double-precision <tt>double</tt> elements.
+# 
 class DIdentityMatrix(Boost.Python.instance):
 
     ##

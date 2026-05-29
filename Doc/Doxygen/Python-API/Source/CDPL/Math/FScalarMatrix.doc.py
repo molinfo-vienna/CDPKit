@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarMatrix specialization with single-precision <tt>float</tt> elements.
+# 
 class FScalarMatrix(Boost.Python.instance):
 
     ##

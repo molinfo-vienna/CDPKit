@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ScalarGrid specialization with double-precision <tt>double</tt> elements.
+# 
 class DScalarGrid(Boost.Python.instance):
 
     ##

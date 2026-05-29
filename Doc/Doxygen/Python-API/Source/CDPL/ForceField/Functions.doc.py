@@ -574,11 +574,13 @@ def calcElasticPotentialGradient(list: ElasticPotentialList, coords: Math.Vector
 def calcElasticPotentialGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \return 
-#
+# \brief Calculates the angle-bending interaction energy of <em>iaction</em> using the geometry from <em>coords</em>.
+# 
+# \param iaction The MMFF94 angle-bending interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# 
+# \return The angle-bending interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94AngleBendingEnergy(iaction: MMFF94AngleBendingInteraction, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -646,12 +648,14 @@ def calcMMFF94AngleBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Ma
 def calcMMFF94AngleBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the angle-bending interaction energy of <em>iaction</em> and accumulates the corresponding atom-position gradient contribution into <em>grad</em>.
+# 
+# \param iaction The MMFF94 angle-bending interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# \param grad The gradient vector to accumulate into.
+# 
+# \return The angle-bending interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94AngleBendingGradient(iaction: MMFF94AngleBendingInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
@@ -721,11 +725,13 @@ def calcMMFF94AngleBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: 
 def calcMMFF94AtomCharges(molgraph: Chem.MolecularGraph, strict: bool, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \return 
-#
+# \brief Calculates the bond-stretching interaction energy of <em>iaction</em> using the geometry from <em>coords</em>.
+# 
+# \param iaction The MMFF94 bond-stretching interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# 
+# \return The bond-stretching interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94BondStretchingEnergy(iaction: MMFF94BondStretchingInteraction, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -778,12 +784,14 @@ def calcMMFF94BondStretchingEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vec
 def calcMMFF94BondStretchingEnergy(r_ij: float, force_const: float, ref_length: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the bond-stretching interaction energy of <em>iaction</em> and accumulates the corresponding atom-position gradient contribution into <em>grad</em>.
+# 
+# \param iaction The MMFF94 bond-stretching interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# \param grad The gradient vector to accumulate into.
+# 
+# \return The bond-stretching interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94BondStretchingGradient(iaction: MMFF94BondStretchingInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
@@ -832,11 +840,13 @@ def calcMMFF94BondStretchingGradient(ia_list: MMFF94BondStretchingInteractionLis
 def calcMMFF94BondStretchingGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \return 
-#
+# \brief Calculates the electrostatic interaction energy of <em>iaction</em> using the geometry from <em>coords</em>.
+# 
+# \param iaction The MMFF94 electrostatic interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# 
+# \return The electrostatic interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94ElectrostaticEnergy(iaction: MMFF94ElectrostaticInteraction, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -901,12 +911,14 @@ def calcMMFF94ElectrostaticEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vect
 def calcMMFF94ElectrostaticEnergy(r_ij: float, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the electrostatic interaction energy of <em>iaction</em> and accumulates the corresponding atom-position gradient contribution into <em>grad</em>.
+# 
+# \param iaction The MMFF94 electrostatic interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# \param grad The gradient vector to accumulate into.
+# 
+# \return The electrostatic interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94ElectrostaticGradient(iaction: MMFF94ElectrostaticInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
@@ -961,11 +973,13 @@ def calcMMFF94ElectrostaticGradient(ia_list: MMFF94ElectrostaticInteractionList,
 def calcMMFF94ElectrostaticGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \return 
-#
+# \brief Calculates the out-of-plane bending interaction energy of <em>iaction</em> using the geometry from <em>coords</em>.
+# 
+# \param iaction The MMFF94 out-of-plane bending interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# 
+# \return The out-of-plane bending interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94OutOfPlaneBendingEnergy(iaction: MMFF94OutOfPlaneBendingInteraction, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1016,12 +1030,14 @@ def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_po
 def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, r_jl: float, force_const: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the out-of-plane bending interaction energy of <em>iaction</em> and accumulates the corresponding atom-position gradient contribution into <em>grad</em>.
+# 
+# \param iaction The MMFF94 out-of-plane bending interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# \param grad The gradient vector to accumulate into.
+# 
+# \return The out-of-plane bending interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94OutOfPlaneBendingGradient(iaction: MMFF94OutOfPlaneBendingInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1073,11 +1089,13 @@ def calcMMFF94OutOfPlaneBendingGradient(ia_list: MMFF94OutOfPlaneBendingInteract
 def calcMMFF94OutOfPlaneBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, oop_atom_grad: Math.Vector3D, force_const: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \return 
-#
+# \brief Calculates the stretch-bend coupling interaction energy of <em>iaction</em> using the geometry from <em>coords</em>.
+# 
+# \param iaction The MMFF94 stretch-bend interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# 
+# \return The stretch-bend interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94StretchBendEnergy(iaction: MMFF94StretchBendInteraction, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1149,12 +1167,14 @@ def calcMMFF94StretchBendEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Mat
 def calcMMFF94StretchBendEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the stretch-bend coupling interaction energy of <em>iaction</em> and accumulates the corresponding atom-position gradient contribution into <em>grad</em>.
+# 
+# \param iaction The MMFF94 stretch-bend interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# \param grad The gradient vector to accumulate into.
+# 
+# \return The stretch-bend interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94StretchBendGradient(iaction: MMFF94StretchBendInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1214,11 +1234,13 @@ def calcMMFF94StretchBendGradient(ia_list: MMFF94StretchBendInteractionList, coo
 def calcMMFF94StretchBendGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \return 
-#
+# \brief Calculates the torsion interaction energy of <em>iaction</em> using the geometry from <em>coords</em>.
+# 
+# \param iaction The MMFF94 torsion interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# 
+# \return The torsion interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94TorsionEnergy(iaction: MMFF94TorsionInteraction, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1251,12 +1273,14 @@ def calcMMFF94TorsionEnergy(ia_list: MMFF94TorsionInteractionList, coords: Math.
 def calcMMFF94TorsionEnergy(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the torsion interaction energy of <em>iaction</em> and accumulates the corresponding atom-position gradient contribution into <em>grad</em>.
+# 
+# \param iaction The MMFF94 torsion interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# \param grad The gradient vector to accumulate into.
+# 
+# \return The torsion interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94TorsionGradient(iaction: MMFF94TorsionInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1309,11 +1333,13 @@ def calcMMFF94TorsionGradient(ia_list: MMFF94TorsionInteractionList, coords: Mat
 def calcMMFF94TorsionGradient(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom1_grad: Math.Vector3D, ctr_atom2_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \return 
-#
+# \brief Calculates the Van der Waals interaction energy of <em>iaction</em> using the geometry from <em>coords</em>.
+# 
+# \param iaction The MMFF94 Van der Waals interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# 
+# \return The Van der Waals interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94VanDerWaalsEnergy(iaction: MMFF94VanDerWaalsInteraction, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1376,12 +1402,14 @@ def calcMMFF94VanDerWaalsEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector
 def calcMMFF94VanDerWaalsEnergy(r_ij: float, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
 
 ##
-# \brief 
-# \param iaction 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the Van der Waals interaction energy of <em>iaction</em> and accumulates the corresponding atom-position gradient contribution into <em>grad</em>.
+# 
+# \param iaction The MMFF94 Van der Waals interaction record.
+# \param coords The atom-coordinates array providing the geometry.
+# \param grad The gradient vector to accumulate into.
+# 
+# \return The Van der Waals interaction energy of <em>iaction</em>.
+# 
 def calcMMFF94VanDerWaalsGradient(iaction: MMFF94VanDerWaalsInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
@@ -1535,11 +1563,12 @@ def calcOutOfPlaneAngle(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector
 def calcSquaredDistance(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D) -> float: pass
 
 ##
-# \brief 
-# \param ia_data 
-# \param filtered_ia_data 
-# \param inc_atom_mask 
-#
+# \brief Filters an MMFF94 interaction-data set, retaining only those interactions that exclusively reference atoms in <em>inc_atom_mask</em>.
+# 
+# \param ia_data The input interaction-data set.
+# \param filtered_ia_data The output interaction-data set receiving the retained interactions.
+# \param inc_atom_mask A bit set whose set bits identify the atom indices that may appear in a retained interaction.
+# 
 def filterInteractions(ia_data: MMFF94InteractionData, filtered_ia_data: MMFF94InteractionData, inc_atom_mask: Util.BitSet) -> None: pass
 
 ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroGrid specialization with single-precision <tt>float</tt> elements.
+# 
 class FZeroGrid(Boost.Python.instance):
 
     ##

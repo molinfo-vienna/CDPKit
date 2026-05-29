@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for molecular graph data in the <em>Macromolecular Crystallographic Information File (mmCIF)</em> [\ref MMCIF] format.
+# 
+# \since 1.2
+# 
 class MMCIFMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##

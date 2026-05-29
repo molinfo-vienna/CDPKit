@@ -102,8 +102,10 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def findMappings(molgraph: MolecularGraph) -> bool: pass
 
     ##
-    # \brief 
-    #
+    # \brief Aborts a currently running findMappings() call.
+    # 
+    # Intended to be invoked from within the callback installed via setFoundMappingCallback() to stop the automorphism enumeration early.
+    # 
     def stopSearch() -> None: pass
 
     ##
@@ -179,15 +181,19 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def addBondMappingConstraint(bond1_idx: int, bond2_idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets a callback that is invoked for every atom/bond mapping found during findMappings().
+    # 
+    # Returning <tt>False</tt> from the callback aborts the search (equivalent to calling stopSearch()).
+    # 
+    # \param func The new found-mapping callback.
+    # 
     def setFoundMappingCallback(func: BoolMolecularGraphAtomBondMappingFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently installed found-mapping callback.
+    # 
+    # \return A reference to the found-mapping callback.
+    # 
     def getFoundMappingCallback() -> BoolMolecularGraphAtomBondMappingFunctor: pass
 
     ##

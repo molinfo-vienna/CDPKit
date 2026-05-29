@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.Quaternion specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> components.
+# 
 class ULQuaternion(Boost.Python.instance):
 
     ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.IdentityMatrix specialization with single-precision <tt>float</tt> elements.
+# 
 class FIdentityMatrix(Boost.Python.instance):
 
     ##

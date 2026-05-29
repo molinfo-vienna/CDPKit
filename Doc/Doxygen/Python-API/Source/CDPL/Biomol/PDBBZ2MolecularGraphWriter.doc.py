@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the bzip2-compressed <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# 
 class PDBBZ2MolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##

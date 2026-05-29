@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.RealQuaternion specialization with unsigned-integer <tt>unsigned</tt> <tt>long</tt> real component.
+# 
 class ULRealQuaternion(Boost.Python.instance):
 
     ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A Math.ZeroVector specialization with single-precision <tt>float</tt> elements.
+# 
 class FZeroVector(Boost.Python.instance):
 
     ##

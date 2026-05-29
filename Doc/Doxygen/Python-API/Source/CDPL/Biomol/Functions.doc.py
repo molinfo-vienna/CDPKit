@@ -631,11 +631,15 @@ def clearSerialNumber(atom: Chem.Atom) -> None: pass
 def areInSameResidue(atom1: Chem.Atom, atom2: Chem.Atom, flags: int = 2147483648) -> bool: pass
 
 ##
-# \brief 
-# \param mol 
-# \param max_ctr_dist 
-# \return 
-#
+# \brief Merges alternative residue conformers in <em>mol</em> whose residue centers lie within <em>max_ctr_dist</em> of one another.
+# 
+# Many PDB and mmCIF structures encode alternative conformations of a residue as multiple residues with distinct alternate-location identifiers but mostly overlapping atom positions. This function detects such interfering residue copies (residues whose geometric centers are closer than <em>max_ctr_dist</em>) and combines them into a single residue with all observed atom positions, leaving the molecule's topology and residue ordering otherwise unchanged.
+# 
+# \param mol The molecule whose interfering residues are to be combined.
+# \param max_ctr_dist The maximum distance between residue centers that still qualifies them as interfering copies of one another.
+# 
+# \return <tt>True</tt> if at least one residue group was combined, and <tt>False</tt> if no interfering residues were found.
+# 
 def combineInterferingResidueCoordinates(mol: Chem.Molecule, max_ctr_dist: float = 1.0) -> bool: pass
 
 ##
