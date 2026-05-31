@@ -65,6 +65,10 @@ namespace CDPL
              */
             MolecularGraphComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
 
+            /**
+             * \brief Copy-constructs the expression from \a rhs (the per-evaluation working storage is left in an unspecified empty state).
+             * \param rhs The expression to copy.
+             */
             MolecularGraphComponentGroupingMatchExpression(const MolecularGraphComponentGroupingMatchExpression& rhs);
 
             /**
@@ -97,6 +101,11 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
+            /**
+             * \brief Copy-assigns the component-level grouping constraints from \a rhs.
+             * \param rhs The expression to copy from.
+             * \return A reference to itself.
+             */
             MolecularGraphComponentGroupingMatchExpression& operator=(const MolecularGraphComponentGroupingMatchExpression& rhs);
 
           private:

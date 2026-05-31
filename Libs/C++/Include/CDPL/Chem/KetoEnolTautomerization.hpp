@@ -40,12 +40,16 @@ namespace CDPL
     {
 
         /**
-         * \brief KetoEnolTautomerizationRule.
+         * \brief Chem::TautomerizationRule implementation that enumerates the keto/enol tautomers of an
+         *        \f$ R_2C{-}C(=O)R' \rightleftharpoons RC=C(OH)R' \f$ system.
          */
         class CDPL_CHEM_API KetoEnolTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
+            /**
+             * \brief Constructs the rule and registers the underlying keto/enol substructure pattern.
+             */
             KetoEnolTautomerization();
         };
     } // namespace Chem

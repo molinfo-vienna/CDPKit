@@ -48,7 +48,11 @@ namespace CDPL
         class BasicBond;
 
         /**
-         * \brief BasicAtom.
+         * \brief Concrete Chem::Atom implementation used as the atom type of Chem::BasicMolecule.
+         *
+         * Stores its own incident-bond list and provides constant-time access to neighbor atoms and bonds
+         * via the inherited Chem::Atom interface. \c %BasicAtom instances are owned by a Chem::BasicMolecule
+         * and are not constructed directly by client code; use Chem::BasicMolecule::addAtom() instead.
          */
         class CDPL_CHEM_API BasicAtom : public Atom
         {
@@ -83,42 +87,108 @@ namespace CDPL
             };
 
           public:
+            /** \brief Mutable random-access iterator over the connected (neighbor) atoms. */
             typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator>             AtomIterator;
+            /** \brief Constant random-access iterator over the connected (neighbor) atoms. */
             typedef boost::transform_iterator<AtomAccessor<const BasicAtom>, NeighborList::const_iterator> ConstAtomIterator;
+            /** \brief Mutable random-access iterator over the incident bonds. */
             typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator>             BondIterator;
+            /** \brief Constant random-access iterator over the incident bonds. */
             typedef boost::transform_iterator<BondAccessor<const BasicBond>, NeighborList::const_iterator> ConstBondIterator;
 
+            /**
+             * \brief Returns a \c const reference to the molecule owning this atom.
+             * \return A \c const reference to the owning molecule.
+             */
             const Molecule& getMolecule() const;
 
+            /**
+             * \brief Returns a mutable reference to the molecule owning this atom.
+             * \return A mutable reference to the owning molecule.
+             */
             Molecule& getMolecule();
 
+            /**
+             * \brief Returns the number of connected (neighbor) atoms.
+             * \return The neighbor count.
+             */
             std::size_t getNumAtoms() const;
 
+            /**
+             * \brief Returns the number of incident bonds (equal to getNumAtoms()).
+             * \return The incident-bond count.
+             */
             std::size_t getNumBonds() const;
 
+            /**
+             * \brief Returns a \c const reference to the incident bond at index \a idx.
+             * \param idx The zero-based index of the bond.
+             * \return A \c const reference to the bond.
+             * \throw Base::IndexError if \a idx is not less than getNumBonds().
+             */
             const Bond& getBond(std::size_t idx) const;
 
+            /**
+             * \brief Returns a mutable reference to the incident bond at index \a idx.
+             * \param idx The zero-based index of the bond.
+             * \return A mutable reference to the bond.
+             * \throw Base::IndexError if \a idx is not less than getNumBonds().
+             */
             Bond& getBond(std::size_t idx);
 
+            /**
+             * \brief Returns the incident bond that connects this atom with \a atom.
+             * \param atom The other end-atom of the requested bond.
+             * \return A \c const reference to the connecting bond.
+             * \throw Base::ItemNotFound if there is no such bond.
+             */
             const Bond& getBondToAtom(const Atom& atom) const;
 
+            /**
+             * \brief Returns the incident bond that connects this atom with \a atom.
+             * \param atom The other end-atom of the requested bond.
+             * \return A mutable reference to the connecting bond.
+             * \throw Base::ItemNotFound if there is no such bond.
+             */
             Bond& getBondToAtom(const Atom& atom);
 
+            /**
+             * \brief Looks up the incident bond that connects this atom with \a atom without throwing.
+             * \param atom The other end-atom of the requested bond.
+             * \return A pointer to the connecting bond, or \c nullptr if no such bond exists.
+             */
             const Bond* findBondToAtom(const Atom& atom) const;
 
+            /**
+             * \brief Looks up the incident bond that connects this atom with \a atom without throwing.
+             * \param atom The other end-atom of the requested bond.
+             * \return A pointer to the connecting bond, or \c nullptr if no such bond exists.
+             */
             Bond* findBondToAtom(const Atom& atom);
 
+            /**
+             * \brief Returns a \c const reference to the connected (neighbor) atom at index \a idx.
+             * \param idx The zero-based index of the neighbor atom.
+             * \return A \c const reference to the neighbor atom.
+             * \throw Base::IndexError if \a idx is not less than getNumAtoms().
+             */
             const Atom& getAtom(std::size_t idx) const;
 
+            /**
+             * \brief Returns a mutable reference to the connected (neighbor) atom at index \a idx.
+             * \param idx The zero-based index of the neighbor atom.
+             * \return A mutable reference to the neighbor atom.
+             * \throw Base::IndexError if \a idx is not less than getNumAtoms().
+             */
             Atom& getAtom(std::size_t idx);
 
-            /*
+            /**
              * \brief Returns a constant iterator pointing to the beginning of the connected atoms.
              * \return A constant iterator pointing to the beginning of the connected atoms.
              */
             ConstAtomIterator getAtomsBegin() const;
 
-            /*
+            /**
              * \brief Returns a mutable iterator pointing to the beginning of the connected atoms.
              * \return A mutable iterator pointing to the beginning of the connected atoms.
              */
@@ -160,18 +230,52 @@ namespace CDPL
              */
             BondIterator getBondsEnd();
 
+            /**
+             * \brief Tells whether \a atom is a neighbor of this atom.
+             * \param atom The atom to look up.
+             * \return \c true if \a atom is in the neighbor list, and \c false otherwise.
+             */
             bool containsAtom(const Atom& atom) const;
 
+            /**
+             * \brief Tells whether \a bond is an incident bond of this atom.
+             * \param bond The bond to look up.
+             * \return \c true if \a bond is in the incident-bond list, and \c false otherwise.
+             */
             bool containsBond(const Bond& bond) const;
 
+            /**
+             * \brief Returns the index of the neighbor atom \a atom in the connected-atoms list.
+             * \param atom The neighbor atom to look up.
+             * \return The zero-based neighbor index.
+             * \throw Base::ItemNotFound if \a atom is not a neighbor.
+             */
             std::size_t getAtomIndex(const Atom& atom) const;
 
+            /**
+             * \brief Returns the index of the incident bond \a bond.
+             * \param bond The bond to look up.
+             * \return The zero-based incident-bond index.
+             * \throw Base::ItemNotFound if \a bond is not incident.
+             */
             std::size_t getBondIndex(const Bond& bond) const;
 
+            /**
+             * \brief Returns the index of this atom in its owning molecule's atom list.
+             * \return The zero-based atom index.
+             */
             std::size_t getIndex() const;
 
+            /**
+             * \brief Reorders the connected (neighbor) atom list using the binary comparator \a func.
+             * \param func The strict-weak-ordering comparator used to sort the neighbor list.
+             */
             void orderAtoms(const AtomCompareFunction& func);
 
+            /**
+             * \brief Reorders the incident bond list using the binary comparator \a func.
+             * \param func The strict-weak-ordering comparator used to sort the bond list.
+             */
             void orderBonds(const BondCompareFunction& func);
 
             /**

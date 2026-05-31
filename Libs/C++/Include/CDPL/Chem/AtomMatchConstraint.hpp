@@ -64,7 +64,7 @@ namespace CDPL
             constexpr unsigned int ISOTOPE = 3;
 
             /**
-             * \brief Specifies a constraint on the fromal charge of the target atom.
+             * \brief Specifies a constraint on the formal charge of the target atom.
              */
             constexpr unsigned int CHARGE = 4;
 

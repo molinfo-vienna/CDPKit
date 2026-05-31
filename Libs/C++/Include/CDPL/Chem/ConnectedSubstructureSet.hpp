@@ -46,7 +46,11 @@ namespace CDPL
     {
 
         /**
-         * \brief ConnectedSubstructureSet.
+         * \brief Enumerates the connected substructures of a molecular graph of a specified bond count.
+         *
+         * After construction or a call to reset(), invoke findSubstructures() with a target size to populate
+         * the inherited Chem::FragmentList with all connected subgraphs of that size. Successive findSubstructures()
+         * calls accumulate fragments in the list; use getSubstructureSize() to query the most recently requested size.
          */
         class CDPL_CHEM_API ConnectedSubstructureSet : public FragmentList
         {

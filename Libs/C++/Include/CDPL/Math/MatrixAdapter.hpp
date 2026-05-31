@@ -46,6 +46,14 @@ namespace CDPL
         struct Lower
         {
 
+            /**
+             * \brief Returns element (\a i, \a j) of \a m under the lower-triangular policy (zero above the diagonal).
+             * \tparam M The Math::TriangularAdapter instantiation.
+             * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return The matrix element if \f$ i \ge j \f$, and the zero fill value otherwise.
+             */
             template <typename M>
             static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
             {
@@ -60,6 +68,14 @@ namespace CDPL
         struct UnitLower
         {
 
+            /**
+             * \brief Returns element (\a i, \a j) of \a m under the unit-lower-triangular policy (one on the diagonal, zero above).
+             * \tparam M The Math::TriangularAdapter instantiation.
+             * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return The one fill value if \f$ i = j \f$, the matrix element if \f$ i > j \f$, and the zero fill value otherwise.
+             */
             template <typename M>
             static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
             {
@@ -77,6 +93,14 @@ namespace CDPL
         struct Upper
         {
 
+            /**
+             * \brief Returns element (\a i, \a j) of \a m under the upper-triangular policy (zero below the diagonal).
+             * \tparam M The Math::TriangularAdapter instantiation.
+             * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return The matrix element if \f$ i \le j \f$, and the zero fill value otherwise.
+             */
             template <typename M>
             static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
             {
@@ -91,6 +115,14 @@ namespace CDPL
         struct UnitUpper
         {
 
+            /**
+             * \brief Returns element (\a i, \a j) of \a m under the unit-upper-triangular policy (one on the diagonal, zero below).
+             * \tparam M The Math::TriangularAdapter instantiation.
+             * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return The one fill value if \f$ i = j \f$, the matrix element if \f$ i < j \f$, and the zero fill value otherwise.
+             */
             template <typename M>
             static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
             {

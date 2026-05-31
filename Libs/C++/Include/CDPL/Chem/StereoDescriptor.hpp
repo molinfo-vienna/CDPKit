@@ -89,7 +89,7 @@ namespace CDPL
          *  and \e 3 are part of the central double bond. Atom \e 1 is the connected atom of the first double bond ligand,
          *  and atom \e 4 the connected atom of the second ligand. If reference atoms \e 1 and \e 4 lie on the same
          *  side of the double bond (see <em>Fig. 3a</em>), the configuration flag is assigned the value BondConfiguration::CIS,
-         *  and BondConfiguration::TRANS, if they are on opposite sides f the bond (<em>Fig. 3b</em>).
+         *  and BondConfiguration::TRANS, if they are on opposite sides of the bond (<em>Fig. 3b</em>).
          *
          * <table align="center" cellpadding="30">
          * <tr align="center" valign="middle">
@@ -170,7 +170,7 @@ namespace CDPL
             StereoDescriptor& operator=(const StereoDescriptor& descr);
 
             /**
-             * \brief Tells wheter this \c %StereoDescriptor instance is valid for the specified center atom.
+             * \brief Tells whether this \c %StereoDescriptor instance is valid for the specified center atom.
              *
              * The method checks if the number of reference atoms is at least 3, the reference atoms are distinct 
              * and if every reference atom is connected to the argument atom.
@@ -181,7 +181,7 @@ namespace CDPL
             bool isValid(const Atom& atom) const;
 
             /**
-             * \brief Tells wheter this \c %StereoDescriptor instance is valid for the specified center bond.
+             * \brief Tells whether this \c %StereoDescriptor instance is valid for the specified center bond.
              *
              * The method checks if the number of reference atoms is 4, the reference atoms are distinct,
              * the specified bond connects reference atoms 2 and 3 and if reference atoms 1 and 4 are connected

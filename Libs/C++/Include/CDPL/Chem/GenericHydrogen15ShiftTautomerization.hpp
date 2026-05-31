@@ -40,12 +40,17 @@ namespace CDPL
     {
 
         /**
-         * \brief GenericHydrogen15ShiftTautomerizationRule.
+         * \brief Chem::TautomerizationRule implementation that enumerates tautomers obtained by a generic
+         *        1,5-hydrogen shift (a proton migrates between atoms separated by four bonds along a conjugated
+         *        path, with the corresponding single/double bond pattern flipping).
          */
         class CDPL_CHEM_API GenericHydrogen15ShiftTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
+            /**
+             * \brief Constructs the rule and registers the underlying generic 1,5-H-shift substructure pattern.
+             */
             GenericHydrogen15ShiftTautomerization();
         };
     } // namespace Chem

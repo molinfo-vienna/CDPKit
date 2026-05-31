@@ -40,12 +40,16 @@ namespace CDPL
     {
 
         /**
-         * \brief LactamLactimTautomerizationRule.
+         * \brief Chem::TautomerizationRule implementation that enumerates the lactam/lactim tautomers of a
+         *        cyclic amide \f$ {-}NH{-}C(=O){-} \rightleftharpoons {-}N=C(OH){-} \f$ system.
          */
         class CDPL_CHEM_API LactamLactimTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
+            /**
+             * \brief Constructs the rule and registers the underlying lactam/lactim substructure pattern.
+             */
             LactamLactimTautomerization();
         };
     } // namespace Chem
