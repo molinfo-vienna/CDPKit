@@ -37,16 +37,22 @@ namespace CDPL
     {
 
         /**
-     * \brief Provides constants for the specification of the molecule type in <em>Tripos MOL2</em> files.
-     */
+         * \brief Provides constants for the specification of the molecule type in <em>Tripos MOL2</em> files.
+         */
         namespace MOL2MoleculeType
         {
 
+            /** \brief Specifies that the molecule type is unknown (default for unrecognized values). */
             constexpr unsigned int UNKNOWN      = 0;
+            /** \brief Specifies that the molecule is a small (non-polymeric) molecule. */
             constexpr unsigned int SMALL        = 1;
+            /** \brief Specifies that the molecule is a generic biopolymer. */
             constexpr unsigned int BIOPOLYMER   = 2;
+            /** \brief Specifies that the molecule is a protein. */
             constexpr unsigned int PROTEIN      = 3;
+            /** \brief Specifies that the molecule is a nucleic acid. */
             constexpr unsigned int NUCLEIC_ACID = 4;
+            /** \brief Specifies that the molecule is a saccharide. */
             constexpr unsigned int SACCHARIDE   = 5;
         } // namespace MOL2MoleculeType
     } // namespace Chem

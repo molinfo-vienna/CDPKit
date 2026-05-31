@@ -58,27 +58,52 @@ namespace CDPL
             typedef typename E::ConstClosureType ExpressionClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType     ValueType;
+            /** \brief Constant reference type to an element value. */
             typedef const ValueType            ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType            Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType             ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType                   ClosureType;
+            /** \brief The size type inherited from the wrapped expression. */
             typedef typename E::SizeType       SizeType;
+            /** \brief The signed difference type inherited from the wrapped expression. */
             typedef typename E::DifferenceType DifferenceType;
 
+            /**
+             * \brief Constructs the expression-template node wrapping \a e.
+             * \param e The vector expression to wrap.
+             */
             VectorUnary(const ExpressionType& e):
                 expr(e) {}
 
+            /**
+             * \brief Returns the wrapped expression's size.
+             * \return The element count.
+             */
             SizeType getSize() const
             {
                 return expr.getSize();
             }
 
+            /**
+             * \brief Applies the unary functor to element \a i of the wrapped expression and returns the result.
+             * \param i The zero-based element index.
+             * \return The element value as transformed by the functor.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return FunctorType::apply(expr(i));
             }
 
+            /**
+             * \brief Alias for operator() — applies the unary functor to element \a i of the wrapped expression.
+             * \param i The zero-based element index.
+             * \return The element value as transformed by the functor.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return FunctorType::apply(expr[i]);
@@ -121,27 +146,54 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType                                                              ValueType;
+            /** \brief Constant reference type to an element value. */
             typedef const ValueType                                                                     ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType                                                                     Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType                                                                      ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType                                                                            ClosureType;
+            /** \brief The common size type of the two wrapped expressions. */
             typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
+            /** \brief The common signed difference type of the two wrapped expressions. */
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
+            /**
+             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \param e1 The first vector expression.
+             * \param e2 The second vector expression.
+             */
             VectorBinary1(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the element count after verifying that both wrapped expressions agree on it.
+             * \return The element count.
+             * \throw Base::SizeError if the two wrapped expressions report different sizes.
+             */
             SizeType getSize() const
             {
                 return CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(expr1.getSize()), SizeType(expr2.getSize()), Base::SizeError);
             }
 
+            /**
+             * \brief Applies the binary functor element-wise at index \a i of the two wrapped expressions and returns the result.
+             * \param i The zero-based element index.
+             * \return The element value as combined by the functor.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return FunctorType::apply(expr1(i), expr2(i));
             }
 
+            /**
+             * \brief Alias for operator() — applies the binary functor element-wise at index \a i.
+             * \param i The zero-based element index.
+             * \return The element value as combined by the functor.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return FunctorType::apply(expr1[i], expr2[i]);
@@ -191,27 +243,54 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType                                                              ValueType;
+            /** \brief Constant reference type to an element value. */
             typedef const ValueType                                                                     ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType                                                                     Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType                                                                      ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType                                                                            ClosureType;
+            /** \brief The common size type of the two wrapped expressions. */
             typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
+            /** \brief The common signed difference type of the two wrapped expressions. */
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
+            /**
+             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \param e1 The first vector expression.
+             * \param e2 The second vector expression.
+             */
             VectorBinary2(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the element count after verifying that both wrapped expressions agree on it.
+             * \return The element count.
+             * \throw Base::SizeError if the two wrapped expressions report different sizes.
+             */
             SizeType getSize() const
             {
                 return CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(expr1.getSize()), SizeType(expr2.getSize()), Base::SizeError);
             }
 
+            /**
+             * \brief Invokes the functor with both wrapped expressions and the index \a i and returns the result.
+             * \param i The zero-based element index.
+             * \return The computed element value.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return FunctorType::apply(expr1, expr2, i);
             }
 
+            /**
+             * \brief Alias for operator() — invokes the functor with both wrapped expressions and the index \a i.
+             * \param i The zero-based element index.
+             * \return The computed element value.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return FunctorType::apply(expr1, expr2, i);
@@ -256,27 +335,53 @@ namespace CDPL
             typedef typename E2::ConstClosureType  Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType      ValueType;
+            /** \brief Constant reference type to an element value. */
             typedef const ValueType             ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType             Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType              ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType                    ClosureType;
+            /** \brief The size type inherited from the wrapped vector expression. */
             typedef typename E2::SizeType       SizeType;
+            /** \brief The signed difference type inherited from the wrapped vector expression. */
             typedef typename E2::DifferenceType DifferenceType;
 
+            /**
+             * \brief Constructs the expression-template node combining the scalar \a e1 and the vector expression \a e2.
+             * \param e1 The scalar value on the left-hand side.
+             * \param e2 The vector expression on the right-hand side.
+             */
             Scalar1VectorBinary(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the wrapped vector expression's size.
+             * \return The element count.
+             */
             SizeType getSize() const
             {
                 return expr2.getSize();
             }
 
+            /**
+             * \brief Applies the binary functor to the scalar and element \a i of the wrapped vector expression and returns the result.
+             * \param i The zero-based element index.
+             * \return The element value as combined by the functor.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return FunctorType::apply(expr1, expr2(i));
             }
 
+            /**
+             * \brief Alias for operator() — applies the binary functor to the scalar and element \a i of the wrapped expression.
+             * \param i The zero-based element index.
+             * \return The element value as combined by the functor.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return FunctorType::apply(expr1, expr2[i]);
@@ -299,9 +404,16 @@ namespace CDPL
 
             /** \brief The expression-template node type. */
             typedef Scalar1VectorBinary<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                 ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a vector expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
+         * \tparam E1 The wrapped vector expression type.
+         * \tparam E2 The scalar type appearing on the right-hand side.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar2VectorBinary : public VectorExpression<Scalar2VectorBinary<E1, E2, F> >
         {
@@ -314,27 +426,53 @@ namespace CDPL
             typedef const E2                       Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType      ValueType;
+            /** \brief Constant reference type to an element value. */
             typedef const ValueType             ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType             Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType              ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType                    ClosureType;
+            /** \brief The size type inherited from the wrapped vector expression. */
             typedef typename E1::SizeType       SizeType;
+            /** \brief The signed difference type inherited from the wrapped vector expression. */
             typedef typename E1::DifferenceType DifferenceType;
 
+            /**
+             * \brief Constructs the expression-template node combining the vector expression \a e1 and the scalar \a e2.
+             * \param e1 The vector expression on the left-hand side.
+             * \param e2 The scalar value on the right-hand side.
+             */
             Scalar2VectorBinary(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the wrapped vector expression's size.
+             * \return The element count.
+             */
             SizeType getSize() const
             {
                 return expr1.getSize();
             }
 
+            /**
+             * \brief Applies the binary functor to element \a i of the wrapped vector expression and the scalar and returns the result.
+             * \param i The zero-based element index.
+             * \return The element value as combined by the functor.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return FunctorType::apply(expr1(i), expr2);
             }
 
+            /**
+             * \brief Alias for operator() — applies the binary functor to element \a i of the wrapped expression and the scalar.
+             * \param i The zero-based element index.
+             * \return The element value as combined by the functor.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return FunctorType::apply(expr1[i], expr2);
@@ -345,14 +483,29 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2VectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The vector expression type.
+         * \tparam E2 The scalar type on the right-hand side.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar2VectorBinaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar2VectorBinary<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                 ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a quaternion expression \a E1 and a vector expression \a E2
+         *        into a vector expression via the per-element functor \a F (used e.g. for quaternion-vector rotation).
+         * \tparam E1 The wrapped quaternion expression type.
+         * \tparam E2 The wrapped vector expression type.
+         * \tparam F The per-element functor type.
+         */
         template <typename E1, typename E2, typename F>
         class QuaternionVectorBinary : public VectorExpression<QuaternionVectorBinary<E1, E2, F> >
         {
@@ -365,27 +518,53 @@ namespace CDPL
             typedef typename E2::ConstClosureType     Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType      ValueType;
+            /** \brief Constant reference type to an element value. */
             typedef const ValueType             ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType             Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType              ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType                    ClosureType;
+            /** \brief The size type inherited from the wrapped vector expression. */
             typedef typename E2::SizeType       SizeType;
+            /** \brief The signed difference type inherited from the wrapped vector expression. */
             typedef typename E2::DifferenceType DifferenceType;
 
+            /**
+             * \brief Constructs the expression-template node combining the quaternion expression \a e1 and the vector expression \a e2.
+             * \param e1 The quaternion expression.
+             * \param e2 The vector expression.
+             */
             QuaternionVectorBinary(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the wrapped vector expression's size.
+             * \return The element count.
+             */
             SizeType getSize() const
             {
                 return expr2.getSize();
             }
 
+            /**
+             * \brief Invokes the functor with the quaternion expression, the vector expression, and the index \a i.
+             * \param i The zero-based element index.
+             * \return The computed element value.
+             */
             ConstReference operator()(SizeType i) const
             {
                 return FunctorType::apply(expr1, expr2, i);
             }
 
+            /**
+             * \brief Alias for operator() — invokes the functor with both wrapped expressions and the index \a i.
+             * \param i The zero-based element index.
+             * \return The computed element value.
+             */
             ConstReference operator[](SizeType i) const
             {
                 return FunctorType::apply(expr1, expr2, i);

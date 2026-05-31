@@ -75,7 +75,7 @@ namespace CDPL
             constexpr unsigned int ANY_ORDER = SINGLE | DOUBLE | TRIPLE | AROMATIC;
 
             /**
-             * \brief Specifies a constraint which requires the target bond to fulfill additional contraints
+             * \brief Specifies a constraint which requires the target bond to fulfill additional constraints
              *        specified by a Chem::MatchConstraintList object.
              */
             constexpr unsigned int CONSTRAINT_LIST = 0;

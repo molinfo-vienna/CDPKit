@@ -54,74 +54,135 @@ namespace CDPL
             typedef QuaternionReference<Q> SelfType;
 
           public:
+            /** \brief The wrapped quaternion type. */
             typedef Q                                                      QuaternionType;
+            /** \brief The scalar component value type of the wrapped quaternion. */
             typedef typename Q::ValueType                                  ValueType;
+            /** \brief Mutable reference type (degrades to ConstReference when the wrapped quaternion is \c const). */
             typedef typename std::conditional<std::is_const<Q>::value,
                                               typename Q::ConstReference,
                                               typename Q::Reference>::type Reference;
+            /** \brief Constant reference type to a component. */
             typedef typename Q::ConstReference                             ConstReference;
+            /** \brief Closure type used when this proxy appears inside another expression. */
             typedef SelfType                                               ClosureType;
+            /** \brief Constant closure type used when this proxy appears inside another expression. */
             typedef const SelfType                                         ConstClosureType;
 
+            /**
+             * \brief Constructs the reference proxy referring to \a q.
+             * \param q The wrapped quaternion to proxy.
+             */
             explicit QuaternionReference(QuaternionType& q):
                 data(q) {}
 
+            /**
+             * \brief Returns a mutable reference to the real component \e C1.
+             * \return A mutable reference to \e C1.
+             */
             Reference getC1()
             {
                 return data.getC1();
             }
 
+            /**
+             * \brief Returns a mutable reference to the imaginary component \e C2.
+             * \return A mutable reference to \e C2.
+             */
             Reference getC2()
             {
                 return data.getC2();
             }
 
+            /**
+             * \brief Returns a mutable reference to the imaginary component \e C3.
+             * \return A mutable reference to \e C3.
+             */
             Reference getC3()
             {
                 return data.getC3();
             }
 
+            /**
+             * \brief Returns a mutable reference to the imaginary component \e C4.
+             * \return A mutable reference to \e C4.
+             */
             Reference getC4()
             {
                 return data.getC4();
             }
 
+            /**
+             * \brief Returns a \c const reference to the real component \e C1.
+             * \return A \c const reference to \e C1.
+             */
             ConstReference getC1() const
             {
                 return data.getC1();
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C2.
+             * \return A \c const reference to \e C2.
+             */
             ConstReference getC2() const
             {
                 return data.getC2();
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C3.
+             * \return A \c const reference to \e C3.
+             */
             ConstReference getC3() const
             {
                 return data.getC3();
             }
 
+            /**
+             * \brief Returns a \c const reference to the imaginary component \e C4.
+             * \return A \c const reference to \e C4.
+             */
             ConstReference getC4() const
             {
                 return data.getC4();
             }
 
+            /**
+             * \brief Returns a \c const reference to the wrapped quaternion.
+             * \return A \c const reference to the wrapped quaternion.
+             */
             const QuaternionType& getData() const
             {
                 return data;
             }
 
+            /**
+             * \brief Returns a reference to the wrapped quaternion.
+             * \return A reference to the wrapped quaternion.
+             */
             QuaternionType& getData()
             {
                 return data;
             }
 
+            /**
+             * \brief Copy-assigns the wrapped quaternion from the quaternion referenced by \a r.
+             * \param r The source reference proxy.
+             * \return A reference to itself.
+             */
             QuaternionReference& operator=(const QuaternionReference& r)
             {
                 data.operator=(r.data);
                 return *this;
             }
 
+            /**
+             * \brief Assigns the quaternion expression \a e to the wrapped quaternion.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& operator=(const QuaternionExpression<E>& e)
             {
@@ -129,6 +190,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the scalar \a t to the real component of the wrapped quaternion (other components are zeroed).
+             * \tparam T The scalar type.
+             * \param t The scalar value.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type&
             operator=(const T& t)
@@ -137,6 +204,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the quaternion expression \a e component-wise to the wrapped quaternion.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& operator+=(const QuaternionExpression<E>& e)
             {
@@ -144,6 +217,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the scalar \a t to the real component of the wrapped quaternion.
+             * \tparam T The scalar type.
+             * \param t The scalar addend.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type&
             operator+=(const T& t)
@@ -152,6 +231,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the quaternion expression \a e component-wise from the wrapped quaternion.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& operator-=(const QuaternionExpression<E>& e)
             {
@@ -159,6 +244,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the scalar \a t from the real component of the wrapped quaternion.
+             * \tparam T The scalar type.
+             * \param t The scalar subtrahend.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type&
             operator-=(const T& t)
@@ -167,6 +258,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Right-multiplies the wrapped quaternion by the quaternion expression \a e (Hamilton product).
+             * \tparam E The right-hand quaternion expression type.
+             * \param e The right-hand quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& operator*=(const QuaternionExpression<E>& e)
             {
@@ -174,6 +271,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Multiplies every component of the wrapped quaternion by the scalar \a t.
+             * \tparam T The scalar type.
+             * \param t The scalar multiplier.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type&
             operator*=(const T& t)
@@ -182,6 +285,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Right-divides the wrapped quaternion by the quaternion expression \a e (Hamilton-product inverse).
+             * \tparam E The right-hand quaternion expression type.
+             * \param e The right-hand quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& operator/=(const QuaternionExpression<E>& e)
             {
@@ -189,6 +298,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Divides every component of the wrapped quaternion by the scalar \a t.
+             * \tparam T The scalar type.
+             * \param t The scalar divisor.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type&
             operator/=(const T& t)
@@ -197,6 +312,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the quaternion expression \a e to the wrapped quaternion without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& assign(const QuaternionExpression<E>& e)
             {
@@ -204,6 +325,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the quaternion expression \a e to the wrapped quaternion without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& plusAssign(const QuaternionExpression<E>& e)
             {
@@ -211,6 +338,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the quaternion expression \a e from the wrapped quaternion without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             QuaternionReference& minusAssign(const QuaternionExpression<E>& e)
             {
@@ -218,16 +351,32 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Swaps the contents of the two wrapped quaternions.
+             * \param r The reference proxy to swap with.
+             */
             void swap(QuaternionReference& r)
             {
                 data.swap(r.data);
             }
 
+            /**
+             * \brief ADL-enabled free-function form of swap().
+             * \param r1 The first reference proxy.
+             * \param r2 The second reference proxy.
+             */
             friend void swap(QuaternionReference& r1, QuaternionReference& r2)
             {
                 r1.swap(r2);
             }
 
+            /**
+             * \brief Sets the components of the wrapped quaternion to the supplied values (omitted components default to the value-initialized ValueType).
+             * \param c1 The real component.
+             * \param c2 The first imaginary component.
+             * \param c3 The second imaginary component.
+             * \param c4 The third imaginary component.
+             */
             void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(),
                      const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType())
             {
@@ -415,6 +564,11 @@ namespace CDPL
                 data[3] = c4;
             }
 
+            /**
+             * \brief Copy-assigns the components of \a q to this quaternion.
+             * \param q The source quaternion.
+             * \return A reference to itself.
+             */
             Quaternion& operator=(const Quaternion& q)
             {
                 if (this != &q)
@@ -423,12 +577,24 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the components of the quaternion container \a c to this quaternion (no alias check needed).
+             * \tparam C The source quaternion container type.
+             * \param c The source quaternion container.
+             * \return A reference to itself.
+             */
             template <typename C>
             Quaternion& operator=(const QuaternionContainer<C>& c)
             {
                 return assign(c);
             }
 
+            /**
+             * \brief Assigns the quaternion expression \a e to this quaternion (via a temporary to handle aliasing).
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& operator=(const QuaternionExpression<E>& e)
             {
@@ -437,6 +603,12 @@ namespace CDPL
                 return this->operator=(tmp);
             }
 
+            /**
+             * \brief Assigns the scalar \a t to the real component (zeroing the three imaginary components).
+             * \tparam T1 The scalar type.
+             * \param t The scalar value.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
             operator=(const T1& t)
@@ -449,6 +621,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the scalar \a t to the real component.
+             * \tparam T1 The scalar type.
+             * \param t The scalar addend.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
             operator+=(const T1& t)
@@ -457,12 +635,24 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the components of the quaternion container \a c to this quaternion (no alias check needed).
+             * \tparam C The source quaternion container type.
+             * \param c The source quaternion container.
+             * \return A reference to itself.
+             */
             template <typename C>
             Quaternion& operator+=(const QuaternionContainer<C>& c)
             {
                 return plusAssign(c);
             }
 
+            /**
+             * \brief Adds the quaternion expression \a e to this quaternion (via a temporary to handle aliasing).
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& operator+=(const QuaternionExpression<E>& e)
             {
@@ -471,6 +661,12 @@ namespace CDPL
                 return this->operator=(tmp);
             }
 
+            /**
+             * \brief Subtracts the scalar \a t from the real component.
+             * \tparam T1 The scalar type.
+             * \param t The scalar subtrahend.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
             operator-=(const T1& t)
@@ -479,12 +675,24 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the components of the quaternion container \a c from this quaternion (no alias check needed).
+             * \tparam C The source quaternion container type.
+             * \param c The source quaternion container.
+             * \return A reference to itself.
+             */
             template <typename C>
             Quaternion& operator-=(const QuaternionContainer<C>& c)
             {
                 return minusAssign(c);
             }
 
+            /**
+             * \brief Subtracts the quaternion expression \a e from this quaternion (via a temporary to handle aliasing).
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& operator-=(const QuaternionExpression<E>& e)
             {
@@ -493,6 +701,12 @@ namespace CDPL
                 return this->operator=(tmp);
             }
 
+            /**
+             * \brief Multiplies every component by the scalar \a t.
+             * \tparam T1 The scalar type.
+             * \param t The scalar multiplier.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
             operator*=(const T1& t)
@@ -501,6 +715,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Right-multiplies this quaternion by the quaternion expression \a e (Hamilton product, via a temporary).
+             * \tparam E The right-hand quaternion expression type.
+             * \param e The right-hand quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& operator*=(const QuaternionExpression<E>& e)
             {
@@ -509,6 +729,12 @@ namespace CDPL
                 return this->operator=(tmp);
             }
 
+            /**
+             * \brief Divides every component by the scalar \a t.
+             * \tparam T1 The scalar type.
+             * \param t The scalar divisor.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
             operator/=(const T1& t)
@@ -517,6 +743,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Right-divides this quaternion by the quaternion expression \a e (Hamilton-product inverse, via a temporary).
+             * \tparam E The right-hand quaternion expression type.
+             * \param e The right-hand quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& operator/=(const QuaternionExpression<E>& e)
             {
@@ -525,6 +757,12 @@ namespace CDPL
                 return this->operator=(tmp);
             }
 
+            /**
+             * \brief Assigns the quaternion expression \a e to this quaternion without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& assign(const QuaternionExpression<E>& e)
             {
@@ -532,6 +770,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the quaternion expression \a e to this quaternion without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& plusAssign(const QuaternionExpression<E>& e)
             {
@@ -539,6 +783,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the quaternion expression \a e from this quaternion without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             Quaternion& minusAssign(const QuaternionExpression<E>& e)
             {
@@ -546,12 +796,21 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Swaps the four components of this quaternion with those of \a q.
+             * \param q The quaternion to swap with.
+             */
             void swap(Quaternion& q)
             {
                 if (this != &q)
                     std::swap_ranges(data, data + 4, q.data);
             }
 
+            /**
+             * \brief ADL-enabled free-function form of swap().
+             * \param q1 The first quaternion.
+             * \param q2 The second quaternion.
+             */
             friend void swap(Quaternion& q1, Quaternion& q2)
             {
                 q1.swap(q2);
@@ -653,12 +912,23 @@ namespace CDPL
                 return value;
             }
 
+            /**
+             * \brief Copy-assigns the real component from \a q.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             RealQuaternion& operator=(const RealQuaternion& q)
             {
                 value = q.value;
                 return *this;
             }
 
+            /**
+             * \brief Assigns the real component from \a q (possibly converting the component type).
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& operator=(const RealQuaternion<T1>& q)
             {
@@ -666,6 +936,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the scalar \a t to the real component.
+             * \tparam T1 The scalar type.
+             * \param t The scalar value.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
             operator=(const T1& t)
@@ -674,6 +950,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the real component of \a q to this quaternion's real component.
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& operator+=(const RealQuaternion<T1>& q)
             {
@@ -681,6 +963,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the scalar \a t to the real component.
+             * \tparam T1 The scalar type.
+             * \param t The scalar addend.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
             operator+=(const T1& t)
@@ -689,6 +977,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the real component of \a q from this quaternion's real component.
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& operator-=(const RealQuaternion<T1>& q)
             {
@@ -696,6 +990,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the scalar \a t from the real component.
+             * \tparam T1 The scalar type.
+             * \param t The scalar subtrahend.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
             operator-=(const T1& t)
@@ -704,6 +1004,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Multiplies the real component by the real component of \a q.
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& operator*=(const RealQuaternion<T1>& q)
             {
@@ -711,6 +1017,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Multiplies the real component by the scalar \a t.
+             * \tparam T1 The scalar type.
+             * \param t The scalar multiplier.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
             operator*=(const T1& t)
@@ -719,6 +1031,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Divides the real component by the real component of \a q.
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& operator/=(const RealQuaternion<T1>& q)
             {
@@ -726,6 +1044,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Divides the real component by the scalar \a t.
+             * \tparam T1 The scalar type.
+             * \param t The scalar divisor.
+             * \return A reference to itself.
+             */
             template <typename T1>
             typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
             operator/=(const T1& t)
@@ -734,6 +1058,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the real component from \a q without intermediate temporary.
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& assign(const RealQuaternion<T1>& q)
             {
@@ -741,6 +1071,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the real component of \a q to this quaternion's real component without intermediate temporary.
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& plusAssign(const RealQuaternion<T1>& q)
             {
@@ -748,6 +1084,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the real component of \a q from this quaternion's real component without intermediate temporary.
+             * \tparam T1 The source component type.
+             * \param q The source real quaternion.
+             * \return A reference to itself.
+             */
             template <typename T1>
             RealQuaternion& minusAssign(const RealQuaternion<T1>& q)
             {
@@ -755,12 +1097,21 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Swaps the real component value with \a q.
+             * \param q The real quaternion to swap with.
+             */
             void swap(RealQuaternion& q)
             {
                 if (this != &q)
                     std::swap(value, q.value);
             }
 
+            /**
+             * \brief ADL-enabled free-function form of swap().
+             * \param q1 The first real quaternion.
+             * \param q2 The second real quaternion.
+             */
             friend void swap(RealQuaternion& q1, RealQuaternion& q2)
             {
                 q1.swap(q2);

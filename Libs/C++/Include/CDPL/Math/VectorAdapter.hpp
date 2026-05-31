@@ -442,12 +442,23 @@ namespace CDPL
                 return data;
             }
 
+            /**
+             * \brief Copies the components of \a a into this view (writing through to the wrapped vector).
+             * \param a The source adapter.
+             * \return A reference to itself.
+             */
             VectorQuaternionAdapter& operator=(const VectorQuaternionAdapter& a)
             {
                 quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(a));
                 return *this;
             }
 
+            /**
+             * \brief Assigns the quaternion expression \a e to this view (writing through to the wrapped vector).
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& operator=(const QuaternionExpression<E>& e)
             {
@@ -455,6 +466,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the scalar \a t to this view (sets C1 to \a t and the remaining components to the default value).
+             * \tparam T The scalar type.
+             * \param t The scalar to assign.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, VectorQuaternionAdapter>::type&
             operator=(const T& t)
@@ -466,6 +483,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the quaternion expression \a e componentwise to this view.
+             * \tparam E The source quaternion expression type.
+             * \param e The quaternion expression to add.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& operator+=(const QuaternionExpression<E>& e)
             {
@@ -473,6 +496,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the scalar \a t to component C1 of this view.
+             * \tparam T The scalar type.
+             * \param t The scalar summand.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, VectorQuaternionAdapter>::type&
             operator+=(const T& t)
@@ -481,6 +510,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the quaternion expression \a e componentwise from this view.
+             * \tparam E The source quaternion expression type.
+             * \param e The quaternion expression to subtract.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& operator-=(const QuaternionExpression<E>& e)
             {
@@ -488,6 +523,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the scalar \a t from component C1 of this view.
+             * \tparam T The scalar type.
+             * \param t The scalar subtrahend.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, VectorQuaternionAdapter>::type&
             operator-=(const T& t)
@@ -496,6 +537,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Multiplies this view by the quaternion expression \a e (Hamilton-product semantics).
+             * \tparam E The source quaternion expression type.
+             * \param e The quaternion expression to multiply by.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& operator*=(const QuaternionExpression<E>& e)
             {
@@ -503,6 +550,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Multiplies every component of this view by the scalar \a t.
+             * \tparam T The scalar type.
+             * \param t The scalar multiplier.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, VectorQuaternionAdapter>::type&
             operator*=(const T& t)
@@ -511,6 +564,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Divides this view by the quaternion expression \a e (Hamilton-quotient semantics).
+             * \tparam E The source quaternion expression type.
+             * \param e The quaternion expression to divide by.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& operator/=(const QuaternionExpression<E>& e)
             {
@@ -518,6 +577,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Divides every component of this view by the scalar \a t.
+             * \tparam T The scalar type.
+             * \param t The scalar divisor.
+             * \return A reference to itself.
+             */
             template <typename T>
             typename std::enable_if<IsScalar<T>::value, VectorQuaternionAdapter>::type&
             operator/=(const T& t)
@@ -526,6 +591,13 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Assigns the quaternion expression \a e to this view without intermediate temporary
+             *        (use only when \a e does not alias the wrapped vector).
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& assign(const QuaternionExpression<E>& e)
             {
@@ -533,6 +605,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the quaternion expression \a e to this view without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& plusAssign(const QuaternionExpression<E>& e)
             {
@@ -540,6 +618,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the quaternion expression \a e from this view without intermediate temporary.
+             * \tparam E The source quaternion expression type.
+             * \param e The source quaternion expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             VectorQuaternionAdapter& minusAssign(const QuaternionExpression<E>& e)
             {
@@ -547,17 +631,33 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Swaps the components of this view with those of \a a.
+             * \param a The adapter to swap with.
+             */
             void swap(VectorQuaternionAdapter& a)
             {
                 if (this != &a)
                     quaternionSwap(*this, a);
             }
 
+            /**
+             * \brief ADL-enabled free-function form of swap().
+             * \param a1 The first adapter.
+             * \param a2 The second adapter.
+             */
             friend void swap(VectorQuaternionAdapter& a1, VectorQuaternionAdapter& a2)
             {
                 a1.swap(a2);
             }
 
+            /**
+             * \brief Assigns the four supplied component values to this view (writing through to the wrapped vector).
+             * \param c1 The C1 component value.
+             * \param c2 The C2 component value.
+             * \param c3 The C3 component value.
+             * \param c4 The C4 component value.
+             */
             void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(),
                      const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType())
             {
@@ -573,6 +673,11 @@ namespace CDPL
 
         template <typename T>
         class Quaternion;
+
+        /**
+         * \brief Math::QuaternionTemporaryTraits specialization selecting Math::Quaternion as the temporary type for a Math::VectorQuaternionAdapter view.
+         * \tparam V The wrapped 4-element vector type.
+         */
         template <typename V>
         struct QuaternionTemporaryTraits<VectorQuaternionAdapter<V> >
         {
@@ -580,6 +685,10 @@ namespace CDPL
             typedef Quaternion<typename V::ValueType> Type;
         };
 
+        /**
+         * \brief Math::QuaternionTemporaryTraits specialization selecting Math::Quaternion as the temporary type for a \c const Math::VectorQuaternionAdapter view.
+         * \tparam V The wrapped 4-element vector type.
+         */
         template <typename V>
         struct QuaternionTemporaryTraits<const VectorQuaternionAdapter<V> >
         {
@@ -587,14 +696,28 @@ namespace CDPL
             typedef Quaternion<typename V::ValueType> Type;
         };
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the wrapped vector for a Math::HomogenousCoordsAdapter view.
+         * \tparam V The wrapped vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<HomogenousCoordsAdapter<V> > : public VectorTemporaryTraits<V>
         {};
 
+        /**
+         * \brief Math::VectorTemporaryTraits specialization inheriting the temporary type of the wrapped vector for a \c const Math::HomogenousCoordsAdapter view.
+         * \tparam V The wrapped vector type.
+         */
         template <typename V>
         struct VectorTemporaryTraits<const HomogenousCoordsAdapter<V> > : public VectorTemporaryTraits<V>
         {};
 
+        /**
+         * \brief Creates a mutable Math::VectorQuaternionAdapter view of the 4-element vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression to wrap.
+         * \return A mutable quaternion view of \a e.
+         */
         template <typename E>
         VectorQuaternionAdapter<E>
         quat(VectorExpression<E>& e)
@@ -602,6 +725,12 @@ namespace CDPL
             return VectorQuaternionAdapter<E>(e());
         }
 
+        /**
+         * \brief Creates a constant Math::VectorQuaternionAdapter view of the 4-element vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression to wrap.
+         * \return A constant quaternion view of \a e.
+         */
         template <typename E>
         VectorQuaternionAdapter<const E>
         quat(const VectorExpression<E>& e)
@@ -609,6 +738,12 @@ namespace CDPL
             return VectorQuaternionAdapter<const E>(e());
         }
 
+        /**
+         * \brief Creates a mutable Math::HomogenousCoordsAdapter view of the vector expression \a e (extends \a e by an implicit \c 1).
+         * \tparam E The vector expression type.
+         * \param e The vector expression to wrap.
+         * \return A mutable homogeneous-coordinates view of \a e.
+         */
         template <typename E>
         HomogenousCoordsAdapter<E>
         homog(VectorExpression<E>& e)
@@ -616,6 +751,12 @@ namespace CDPL
             return HomogenousCoordsAdapter<E>(e());
         }
 
+        /**
+         * \brief Creates a constant Math::HomogenousCoordsAdapter view of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression to wrap.
+         * \return A constant homogeneous-coordinates view of \a e.
+         */
         template <typename E>
         HomogenousCoordsAdapter<const E>
         homog(const VectorExpression<E>& e)

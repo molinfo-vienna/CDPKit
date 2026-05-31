@@ -47,7 +47,12 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief ReactionComponentGroupingMatchExpression.
+         * \brief Chem::MatchExpression that constrains reaction substructure matches by the query's component-level
+         *        groupings (typically derived from the parenthesization of a <em>Daylight SMARTS</em> [\ref SMARTS] pattern).
+         *
+         * Required component groupings are passed as a Chem::FragmentList: query atoms inside the same fragment must
+         * map to a single target component, and query atoms in different fragments must map to different target
+         * components.
          * \see [\ref SMARTS]
          */
         class CDPL_CHEM_API ReactionComponentGroupingMatchExpression : public MatchExpression<Reaction>
@@ -66,6 +71,10 @@ namespace CDPL
              */
             ReactionComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
 
+            /**
+             * \brief Copy-constructs the expression from \a rhs (the per-evaluation working storage is left in an unspecified empty state).
+             * \param rhs The expression to copy.
+             */
             ReactionComponentGroupingMatchExpression(const ReactionComponentGroupingMatchExpression& rhs);
 
             /**
@@ -98,6 +107,11 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
+            /**
+             * \brief Copy-assigns the component-level grouping constraints from \a rhs.
+             * \param rhs The expression to copy from.
+             * \return A reference to itself.
+             */
             ReactionComponentGroupingMatchExpression& operator=(const ReactionComponentGroupingMatchExpression& rhs);
 
           private:

@@ -697,6 +697,10 @@ namespace CDPL
         };
 
         template <typename V>
+        /**
+         * \brief %Base class for unary functors that take a vector and return a real-valued scalar (Math::VectorNorm1, Math::VectorNorm2, Math::VectorNormInfinity).
+         * \tparam V The vector expression type.
+         */
         struct VectorScalarRealUnaryFunctor
         {
 
@@ -705,6 +709,10 @@ namespace CDPL
             typedef RealType                                 ResultType;
         };
 
+        /**
+         * \brief Functor returning the L1 norm of a vector expression.
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorNorm1 : public VectorScalarRealUnaryFunctor<V>
         {
@@ -713,6 +721,11 @@ namespace CDPL
             typedef typename VectorScalarRealUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
+            /**
+             * \brief Returns the L1 norm of \a e.
+             * \param e The vector expression.
+             * \return \f$ \sum_i \|e(i)\|_1 \f$.
+             */
             static ResultType apply(const VectorExpression<V>& e)
             {
                 typedef typename V::SizeType SizeType;
@@ -726,6 +739,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning the L2 (Euclidean) norm of a vector expression.
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorNorm2 : public VectorScalarRealUnaryFunctor<V>
         {
@@ -734,6 +751,11 @@ namespace CDPL
             typedef typename VectorScalarRealUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
+            /**
+             * \brief Returns the L2 norm of \a e.
+             * \param e The vector expression.
+             * \return \f$ \sqrt{\sum_i \|e(i)\|_2^2} \f$.
+             */
             static ResultType apply(const VectorExpression<V>& e)
             {
                 typedef typename V::SizeType SizeType;
@@ -750,6 +772,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning the L&infin; (maximum-magnitude) norm of a vector expression.
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorNormInfinity : public VectorScalarRealUnaryFunctor<V>
         {
@@ -758,6 +784,11 @@ namespace CDPL
             typedef typename VectorScalarRealUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
+            /**
+             * \brief Returns the L&infin; norm of \a e.
+             * \param e The vector expression.
+             * \return \f$ \max_i \|e(i)\|_\infty \f$.
+             */
             static ResultType apply(const VectorExpression<V>& e)
             {
                 typedef typename V::SizeType SizeType;
@@ -775,6 +806,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that take a vector and return a vector-element index (Math::VectorNormInfinityIndex).
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorScalarIndexUnaryFunctor
         {
@@ -784,6 +819,10 @@ namespace CDPL
             typedef typename V::SizeType                     ResultType;
         };
 
+        /**
+         * \brief Functor returning the index of the vector element with the largest L&infin; norm.
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorNormInfinityIndex : public VectorScalarIndexUnaryFunctor<V>
         {
@@ -792,6 +831,11 @@ namespace CDPL
             typedef typename VectorScalarIndexUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarIndexUnaryFunctor<V>::ResultType ResultType;
 
+            /**
+             * \brief Returns the index of the element of \a e with the largest L&infin; norm.
+             * \param e The vector expression.
+             * \return The zero-based index of the element \f$ \arg\max_i \|e(i)\|_\infty \f$ (0 if \a e is empty).
+             */
             static ResultType apply(const VectorExpression<V>& e)
             {
                 typedef typename V::SizeType SizeType;
@@ -812,6 +856,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for binary functors that take two matrix expressions and return a \c bool result (Math::MatrixEquality).
+         * \tparam M1 The first matrix expression type.
+         * \tparam M2 The second matrix expression type.
+         */
         template <typename M1, typename M2>
         struct MatrixBooleanBinaryFunctor
         {
@@ -821,6 +870,11 @@ namespace CDPL
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Functor checking element-wise equality of two matrix expressions.
+         * \tparam M1 The first matrix expression type.
+         * \tparam M2 The second matrix expression type.
+         */
         template <typename M1, typename M2>
         struct MatrixEquality : public MatrixBooleanBinaryFunctor<M1, M2>
         {
@@ -829,6 +883,12 @@ namespace CDPL
             typedef typename MatrixBooleanBinaryFunctor<M1, M2>::ValueType  ValueType;
             typedef typename MatrixBooleanBinaryFunctor<M1, M2>::ResultType ResultType;
 
+            /**
+             * \brief Tells whether \a e1 and \a e2 have the same dimensions and equal element values.
+             * \param e1 The first matrix expression.
+             * \param e2 The second matrix expression.
+             * \return \c true if the matrices agree in dimensions and element-wise values, and \c false otherwise.
+             */
             static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2)
             {
                 if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
@@ -846,6 +906,12 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for ternary functors that take two matrix expressions plus a tolerance scalar and return a \c bool result (Math::MatrixToleranceEquality).
+         * \tparam M1 The first matrix expression type.
+         * \tparam M2 The second matrix expression type.
+         * \tparam T The tolerance scalar type.
+         */
         template <typename M1, typename M2, typename T>
         struct Scalar3MatrixBooleanTernaryFunctor
         {
@@ -856,6 +922,12 @@ namespace CDPL
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Functor checking element-wise approximate equality of two matrix expressions within an absolute tolerance.
+         * \tparam M1 The first matrix expression type.
+         * \tparam M2 The second matrix expression type.
+         * \tparam T The tolerance scalar type.
+         */
         template <typename M1, typename M2, typename T>
         struct MatrixToleranceEquality : public Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>
         {
@@ -865,6 +937,13 @@ namespace CDPL
             typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::ResultType    ResultType;
             typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::Argument3Type Argument3Type;
 
+            /**
+             * \brief Tells whether \a e1 and \a e2 agree element-wise within the absolute tolerance \a epsilon.
+             * \param e1 The first matrix expression.
+             * \param e2 The second matrix expression.
+             * \param epsilon The non-negative absolute tolerance.
+             * \return \c true if the matrices have equal dimensions and all elements agree within \a epsilon, and \c false otherwise.
+             */
             static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2, Argument3Type epsilon)
             {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
@@ -886,6 +965,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that take a matrix expression and return a scalar result (Math::MatrixElementSum, Math::MatrixTrace).
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixScalarUnaryFunctor
         {
@@ -893,12 +976,21 @@ namespace CDPL
             typedef typename M::ValueType ResultType;
         };
 
+        /**
+         * \brief Functor returning the sum of all elements of a matrix expression.
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixElementSum : public MatrixScalarUnaryFunctor<M>
         {
 
             typedef typename MatrixScalarUnaryFunctor<M>::ResultType ResultType;
 
+            /**
+             * \brief Returns the element sum of \a e.
+             * \param e The matrix expression.
+             * \return \f$ \sum_{i, j} e(i, j) \f$.
+             */
             static ResultType apply(const MatrixExpression<M>& e)
             {
                 typedef typename M::SizeType SizeType;
@@ -915,12 +1007,22 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning the trace (sum of diagonal entries) of a matrix expression.
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixTrace : public MatrixScalarUnaryFunctor<M>
         {
 
             typedef typename MatrixScalarUnaryFunctor<M>::ResultType ResultType;
 
+            /**
+             * \brief Returns the trace of \a e.
+             * \param e The matrix expression.
+             * \return \f$ \sum_i e(i, i) \f$.
+             * \throw Base::SizeError if \a e is not square.
+             */
             static ResultType apply(const MatrixExpression<M>& e)
             {
                 typedef typename M::SizeType SizeType;
@@ -935,6 +1037,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that take a matrix expression and return a real-valued scalar (Math::MatrixNorm1, Math::MatrixNormFrobenius, Math::MatrixNormInfinity).
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixScalarRealUnaryFunctor
         {
@@ -944,6 +1050,10 @@ namespace CDPL
             typedef RealType                                 ResultType;
         };
 
+        /**
+         * \brief Functor returning the L1 (maximum absolute column sum) norm of a matrix expression.
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixNorm1 : public MatrixScalarRealUnaryFunctor<M>
         {
@@ -952,6 +1062,11 @@ namespace CDPL
             typedef typename MatrixScalarRealUnaryFunctor<M>::RealType   RealType;
             typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
+            /**
+             * \brief Returns the L1 norm of \a e.
+             * \param e The matrix expression.
+             * \return \f$ \max_j \sum_i \|e(i, j)\|_1 \f$.
+             */
             static ResultType apply(const MatrixExpression<M>& e)
             {
                 typedef typename M::SizeType SizeType;
@@ -974,6 +1089,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning the Frobenius norm of a matrix expression.
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixNormFrobenius : public MatrixScalarRealUnaryFunctor<M>
         {
@@ -982,6 +1101,11 @@ namespace CDPL
             typedef typename MatrixScalarRealUnaryFunctor<M>::RealType   RealType;
             typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
+            /**
+             * \brief Returns the Frobenius norm of \a e.
+             * \param e The matrix expression.
+             * \return \f$ \sqrt{\sum_{i, j} \|e(i, j)\|_2^2} \f$.
+             */
             static ResultType apply(const MatrixExpression<M>& e)
             {
                 typedef typename M::SizeType SizeType;
@@ -1002,6 +1126,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning the L&infin; (maximum absolute row sum) norm of a matrix expression.
+         * \tparam M The matrix expression type.
+         */
         template <typename M>
         struct MatrixNormInfinity : public MatrixScalarRealUnaryFunctor<M>
         {
@@ -1010,6 +1138,11 @@ namespace CDPL
             typedef typename MatrixScalarRealUnaryFunctor<M>::RealType   RealType;
             typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
+            /**
+             * \brief Returns the L&infin; norm of \a e.
+             * \param e The matrix expression.
+             * \return \f$ \max_i \sum_j \|e(i, j)\|_\infty \f$.
+             */
             static ResultType apply(const MatrixExpression<M>& e)
             {
                 typedef typename M::SizeType SizeType;
@@ -1032,6 +1165,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that produce a matrix element from a vector expression and (\e i, \e j) cell indices (Math::DiagonalMatrixFromVector, Math::CrossProductMatrixFromVector).
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct VectorMatrixUnaryFunctor
         {
@@ -1040,6 +1177,10 @@ namespace CDPL
             typedef typename V::SizeType  SizeType;
         };
 
+        /**
+         * \brief Functor producing the diagonal-matrix entry at (\e i, \e j) from a vector expression (\f$ e(i) \f$ on the diagonal, \c 0 elsewhere).
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct DiagonalMatrixFromVector : public VectorMatrixUnaryFunctor<V>
         {
@@ -1047,6 +1188,14 @@ namespace CDPL
             typedef typename VectorScalarUnaryFunctor<V>::ResultType ResultType;
             typedef typename VectorScalarUnaryFunctor<V>::SizeType   SizeType;
 
+            /**
+             * \brief Returns \f$ e(i) \f$ if \a i equals \a j, otherwise \c 0.
+             * \tparam E The vector expression type.
+             * \param e The vector expression.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return The diagonal-matrix entry.
+             */
             template <typename E>
             static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j)
             {
@@ -1057,6 +1206,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor producing the cross-product (skew-symmetric) matrix entry at (\e i, \e j) for a 3-vector expression.
+         * \tparam V The vector expression type.
+         */
         template <typename V>
         struct CrossProductMatrixFromVector : public VectorMatrixUnaryFunctor<V>
         {
@@ -1064,6 +1217,15 @@ namespace CDPL
             typedef typename VectorScalarUnaryFunctor<V>::ResultType ResultType;
             typedef typename VectorScalarUnaryFunctor<V>::SizeType   SizeType;
 
+            /**
+             * \brief Returns the (\a i, \a j) entry of the skew-symmetric matrix \f$ [e]_\times \f$ corresponding to the 3-vector \a e.
+             * \tparam E The vector expression type.
+             * \param e The 3-vector expression.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return The corresponding entry of \f$ [e]_\times \f$.
+             * \throw Base::SizeError if \a e does not have size 3.
+             */
             template <typename E>
             static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j)
             {
@@ -1119,6 +1281,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for binary functors that take a matrix expression and a vector expression and return a vector-element scalar result (Math::MatrixVectorProduct, Math::VectorMatrixProduct).
+         * \tparam M The matrix expression type.
+         * \tparam V The vector expression type.
+         */
         template <typename M, typename V>
         struct MatrixVectorBinaryFunctor
         {
@@ -1128,6 +1295,11 @@ namespace CDPL
             typedef ValueType                                                               ResultType;
         };
 
+        /**
+         * \brief Functor returning element \e i of the matrix-vector product \f$ e_1 \cdot e_2 \f$.
+         * \tparam M The matrix expression type.
+         * \tparam V The vector expression type.
+         */
         template <typename M, typename V>
         struct MatrixVectorProduct : public MatrixVectorBinaryFunctor<M, V>
         {
@@ -1136,6 +1308,16 @@ namespace CDPL
             typedef typename MatrixVectorBinaryFunctor<M, V>::SizeType   SizeType;
             typedef typename MatrixVectorBinaryFunctor<M, V>::ResultType ResultType;
 
+            /**
+             * \brief Returns element \e i of the matrix-vector product \f$ e_1 \cdot e_2 \f$.
+             * \tparam E1 The matrix expression type.
+             * \tparam E2 The vector expression type.
+             * \param e1 The matrix expression.
+             * \param e2 The vector expression.
+             * \param i The zero-based row index of the result element.
+             * \return \f$ \sum_j e_1(i, j) \cdot e_2(j) \f$.
+             * \throw Base::SizeError if \c e1.getSize2() does not equal \c e2.getSize().
+             */
             template <typename E1, typename E2>
             static ResultType apply(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i)
             {
@@ -1149,6 +1331,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning element \e i of the vector-matrix product \f$ e_1 \cdot e_2 \f$.
+         * \tparam V The vector expression type.
+         * \tparam M The matrix expression type.
+         */
         template <typename V, typename M>
         struct VectorMatrixProduct : public MatrixVectorBinaryFunctor<M, V>
         {
@@ -1157,6 +1344,16 @@ namespace CDPL
             typedef typename MatrixVectorBinaryFunctor<M, V>::SizeType   SizeType;
             typedef typename MatrixVectorBinaryFunctor<M, V>::ResultType ResultType;
 
+            /**
+             * \brief Returns element \e i of the vector-matrix product \f$ e_1 \cdot e_2 \f$.
+             * \tparam E1 The vector expression type.
+             * \tparam E2 The matrix expression type.
+             * \param e1 The vector expression.
+             * \param e2 The matrix expression.
+             * \param i The zero-based column index of the result element.
+             * \return \f$ \sum_j e_1(j) \cdot e_2(j, i) \f$.
+             * \throw Base::SizeError if \c e1.getSize() does not equal \c e2.getSize1().
+             */
             template <typename E1, typename E2>
             static ResultType apply(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i)
             {
@@ -1170,6 +1367,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for binary functors that take two matrix expressions and return a matrix-element scalar result (Math::MatrixProduct).
+         * \tparam M1 The first matrix expression type.
+         * \tparam M2 The second matrix expression type.
+         */
         template <typename M1, typename M2>
         struct MatrixBinaryFunctor
         {
@@ -1179,6 +1381,11 @@ namespace CDPL
             typedef ValueType                                                                 ResultType;
         };
 
+        /**
+         * \brief Functor returning entry (\e i, \e j) of the matrix product \f$ e_1 \cdot e_2 \f$.
+         * \tparam M1 The first matrix expression type.
+         * \tparam M2 The second matrix expression type.
+         */
         template <typename M1, typename M2>
         struct MatrixProduct : public MatrixBinaryFunctor<M1, M2>
         {
@@ -1187,6 +1394,17 @@ namespace CDPL
             typedef typename MatrixVectorBinaryFunctor<M1, M2>::SizeType   SizeType;
             typedef typename MatrixVectorBinaryFunctor<M1, M2>::ResultType ResultType;
 
+            /**
+             * \brief Returns entry (\e i, \e j) of the matrix product \f$ e_1 \cdot e_2 \f$.
+             * \tparam E1 The first matrix expression type.
+             * \tparam E2 The second matrix expression type.
+             * \param e1 The first matrix expression.
+             * \param e2 The second matrix expression.
+             * \param i The zero-based row index of the result entry.
+             * \param j The zero-based column index of the result entry.
+             * \return \f$ \sum_k e_1(i, k) \cdot e_2(k, j) \f$.
+             * \throw Base::SizeError if \c e1.getSize2() does not equal \c e2.getSize1().
+             */
             template <typename E1, typename E2>
             static ResultType apply(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i, SizeType j)
             {
@@ -1200,6 +1418,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for binary functors that take two quaternion expressions and return a \c bool result (Math::QuaternionEquality).
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         */
         template <typename Q1, typename Q2>
         struct QuaternionBooleanBinaryFunctor
         {
@@ -1208,6 +1431,11 @@ namespace CDPL
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Functor checking component-wise equality of two quaternion expressions.
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         */
         template <typename Q1, typename Q2>
         struct QuaternionEquality : public QuaternionBooleanBinaryFunctor<Q1, Q2>
         {
@@ -1215,12 +1443,24 @@ namespace CDPL
             typedef typename QuaternionBooleanBinaryFunctor<Q1, Q2>::ValueType  ValueType;
             typedef typename QuaternionBooleanBinaryFunctor<Q1, Q2>::ResultType ResultType;
 
+            /**
+             * \brief Tells whether \a e1 and \a e2 have equal components.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             * \return \c true if all four components agree, and \c false otherwise.
+             */
             static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2)
             {
                 return (ValueType(e1().getC1()) == ValueType(e2().getC1()) && ValueType(e1().getC2()) == ValueType(e2().getC2()) && ValueType(e1().getC3()) == ValueType(e2().getC3()) && ValueType(e1().getC4()) == ValueType(e2().getC4()));
             }
         };
 
+        /**
+         * \brief %Base class for ternary functors that take two quaternion expressions plus a tolerance scalar and return a \c bool result (Math::QuaternionToleranceEquality).
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         * \tparam T The tolerance scalar type.
+         */
         template <typename Q1, typename Q2, typename T>
         struct Scalar3QuaternionBooleanTernaryFunctor
         {
@@ -1230,6 +1470,12 @@ namespace CDPL
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Functor checking component-wise approximate equality of two quaternion expressions within an absolute tolerance.
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         * \tparam T The tolerance scalar type.
+         */
         template <typename Q1, typename Q2, typename T>
         struct QuaternionToleranceEquality : public Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>
         {
@@ -1238,6 +1484,13 @@ namespace CDPL
             typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::ResultType    ResultType;
             typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::Argument3Type Argument3Type;
 
+            /**
+             * \brief Tells whether \a e1 and \a e2 agree component-wise within the absolute tolerance \a epsilon.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             * \param epsilon The non-negative absolute tolerance.
+             * \return \c true if all four components agree within \a epsilon, and \c false otherwise.
+             */
             static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2, Argument3Type epsilon)
             {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
@@ -1248,6 +1501,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that take a quaternion expression and return a scalar result (Math::QuaternionElementSum).
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionScalarUnaryFunctor
         {
@@ -1255,18 +1512,31 @@ namespace CDPL
             typedef typename Q::ValueType ResultType;
         };
 
+        /**
+         * \brief Functor returning the sum of the four components of a quaternion expression.
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionElementSum : public QuaternionScalarUnaryFunctor<Q>
         {
 
             typedef typename QuaternionScalarUnaryFunctor<Q>::ResultType ResultType;
 
+            /**
+             * \brief Returns the component sum of \a e.
+             * \param e The quaternion expression.
+             * \return \f$ C_1(e) + C_2(e) + C_3(e) + C_4(e) \f$.
+             */
             static ResultType apply(const QuaternionExpression<Q>& e)
             {
                 return (e().getC1() + e().getC2() + e().getC3() + e().getC4());
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that take a quaternion expression and return a real-valued scalar (Math::QuaternionNorm, Math::QuaternionNorm2).
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionScalarRealUnaryFunctor
         {
@@ -1276,6 +1546,10 @@ namespace CDPL
             typedef RealType              ResultType;
         };
 
+        /**
+         * \brief Functor returning the (Euclidean) norm \f$ \|e\| \f$ of a quaternion expression.
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionNorm : public QuaternionScalarRealUnaryFunctor<Q>
         {
@@ -1284,6 +1558,11 @@ namespace CDPL
             typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType   RealType;
             typedef typename QuaternionScalarRealUnaryFunctor<Q>::ResultType ResultType;
 
+            /**
+             * \brief Returns \f$ \|e\| = \sqrt{C_1^2 + C_2^2 + C_3^2 + C_4^2} \f$.
+             * \param e The quaternion expression.
+             * \return The Euclidean norm of \a e.
+             */
             static ResultType apply(const QuaternionExpression<Q>& e)
             {
                 RealType t = e().getC1() * e().getC1() +
@@ -1295,6 +1574,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Functor returning the squared norm \f$ \|e\|^2 \f$ of a quaternion expression.
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionNorm2 : public QuaternionScalarRealUnaryFunctor<Q>
         {
@@ -1303,6 +1586,11 @@ namespace CDPL
             typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType   RealType;
             typedef typename QuaternionScalarRealUnaryFunctor<Q>::ResultType ResultType;
 
+            /**
+             * \brief Returns \f$ \|e\|^2 = C_1^2 + C_2^2 + C_3^2 + C_4^2 \f$.
+             * \param e The quaternion expression.
+             * \return The squared Euclidean norm of \a e.
+             */
             static ResultType apply(const QuaternionExpression<Q>& e)
             {
                 RealType t = e().getC1() * e().getC1() +
@@ -1314,6 +1602,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for per-component unary functors that take a quaternion expression and produce a quaternion result via \c applyC1 / \c applyC2 / \c applyC3 / \c applyC4 (Math::QuaternionUnreal, Math::QuaternionConjugate).
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionUnaryFunctor
         {
@@ -1321,30 +1613,58 @@ namespace CDPL
             typedef typename Q::ValueType ResultType;
         };
 
+        /**
+         * \brief Per-component functor returning the unreal (pure-quaternion) part of a quaternion expression (zeros \c C1, keeps \c C2/\c C3/\c C4).
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionUnreal : public QuaternionUnaryFunctor<Q>
         {
 
             typedef typename QuaternionUnaryFunctor<Q>::ResultType ResultType;
 
+            /**
+             * \brief Returns the \c C1 component of the unreal part (always zero).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return Zero.
+             */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e)
             {
                 return ResultType();
             }
 
+            /**
+             * \brief Returns the \c C2 component of the unreal part (equals \c e.getC2()).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return \c e.getC2().
+             */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e)
             {
                 return e().getC2();
             }
 
+            /**
+             * \brief Returns the \c C3 component of the unreal part (equals \c e.getC3()).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return \c e.getC3().
+             */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e)
             {
                 return e().getC3();
             }
 
+            /**
+             * \brief Returns the \c C4 component of the unreal part (equals \c e.getC4()).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return \c e.getC4().
+             */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e)
             {
@@ -1352,30 +1672,58 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Per-component functor returning the quaternion conjugate (keeps \c C1, negates \c C2/\c C3/\c C4).
+         * \tparam Q The quaternion expression type.
+         */
         template <typename Q>
         struct QuaternionConjugate : public QuaternionUnaryFunctor<Q>
         {
 
             typedef typename QuaternionUnaryFunctor<Q>::ResultType ResultType;
 
+            /**
+             * \brief Returns the \c C1 component of the conjugate (equals \c e.getC1()).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return \c e.getC1().
+             */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e)
             {
                 return e().getC1();
             }
 
+            /**
+             * \brief Returns the \c C2 component of the conjugate (equals \c -e.getC2()).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return \c -e.getC2().
+             */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e)
             {
                 return -e().getC2();
             }
 
+            /**
+             * \brief Returns the \c C3 component of the conjugate (equals \c -e.getC3()).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return \c -e.getC3().
+             */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e)
             {
                 return -e().getC3();
             }
 
+            /**
+             * \brief Returns the \c C4 component of the conjugate (equals \c -e.getC4()).
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \return \c -e.getC4().
+             */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e)
             {
@@ -1383,6 +1731,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for per-component binary functors that take a scalar \a T (lhs) and a quaternion expression (Math::Scalar1QuaternionAddition, Math::Scalar1QuaternionSubtraction).
+         * \tparam T The scalar type.
+         * \tparam Q The quaternion expression type.
+         */
         template <typename T, typename Q>
         struct Scalar1QuaternionBinaryFunctor
         {
@@ -1391,6 +1744,11 @@ namespace CDPL
             typedef const T&                                            Argument1Type;
         };
 
+        /**
+         * \brief Per-component functor returning \f$ t + e \f$ (scalar \a t added to the real component of \a e).
+         * \tparam T The scalar type.
+         * \tparam Q The quaternion expression type.
+         */
         template <typename T, typename Q>
         struct Scalar1QuaternionAddition : public Scalar1QuaternionBinaryFunctor<T, Q>
         {
@@ -1398,24 +1756,28 @@ namespace CDPL
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::Argument1Type Argument1Type;
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
+            /** \brief Returns \c t + e.getC1(). */
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
             {
                 return (t + e().getC1());
             }
 
+            /** \brief Returns \c e.getC2(). */
             template <typename E>
             static ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return e().getC2();
             }
 
+            /** \brief Returns \c e.getC3(). */
             template <typename E>
             static ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return e().getC3();
             }
 
+            /** \brief Returns \c e.getC4(). */
             template <typename E>
             static ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
             {
@@ -1423,6 +1785,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Per-component functor returning \f$ t - e \f$ (scalar \a t with the quaternion \a e subtracted).
+         * \tparam T The scalar type.
+         * \tparam Q The quaternion expression type.
+         */
         template <typename T, typename Q>
         struct Scalar1QuaternionSubtraction : public Scalar1QuaternionBinaryFunctor<T, Q>
         {
@@ -1430,24 +1797,28 @@ namespace CDPL
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::Argument1Type Argument1Type;
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
+            /** \brief Returns \c t - e.getC1(). */
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
             {
                 return (t - e().getC1());
             }
 
+            /** \brief Returns \c -e.getC2(). */
             template <typename E>
             static ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return -e().getC2();
             }
 
+            /** \brief Returns \c -e.getC3(). */
             template <typename E>
             static ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return -e().getC3();
             }
 
+            /** \brief Returns \c -e.getC4(). */
             template <typename E>
             static ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
             {
@@ -1455,6 +1826,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for per-component binary functors that take a quaternion expression (lhs) and a scalar \a T (Math::Scalar2QuaternionAddition, Math::Scalar2QuaternionSubtraction, Math::QuaternionInverse).
+         * \tparam Q The quaternion expression type.
+         * \tparam T The scalar type.
+         */
         template <typename Q, typename T>
         struct Scalar2QuaternionBinaryFunctor
         {
@@ -1463,6 +1839,11 @@ namespace CDPL
             typedef const T&                                            Argument2Type;
         };
 
+        /**
+         * \brief Per-component functor returning \f$ e + t \f$ (scalar \a t added to the real component of \a e).
+         * \tparam Q The quaternion expression type.
+         * \tparam T The scalar type.
+         */
         template <typename Q, typename T>
         struct Scalar2QuaternionAddition : public Scalar2QuaternionBinaryFunctor<Q, T>
         {
@@ -1470,24 +1851,28 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
+            /** \brief Returns \c e.getC1() + t. */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
             {
                 return (e().getC1() + t);
             }
 
+            /** \brief Returns \c e.getC2(). */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC2();
             }
 
+            /** \brief Returns \c e.getC3(). */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC3();
             }
 
+            /** \brief Returns \c e.getC4(). */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
             {
@@ -1495,6 +1880,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Per-component functor returning \f$ e - t \f$ (scalar \a t subtracted from the real component of \a e).
+         * \tparam Q The quaternion expression type.
+         * \tparam T The scalar type.
+         */
         template <typename Q, typename T>
         struct Scalar2QuaternionSubtraction : public Scalar2QuaternionBinaryFunctor<Q, T>
         {
@@ -1502,24 +1892,28 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
+            /** \brief Returns \c e.getC1() - t. */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
             {
                 return (e().getC1() - t);
             }
 
+            /** \brief Returns \c e.getC2(). */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC2();
             }
 
+            /** \brief Returns \c e.getC3(). */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC3();
             }
 
+            /** \brief Returns \c e.getC4(). */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
             {
@@ -1527,6 +1921,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief Per-component functor returning the multiplicative inverse \f$ \overline{e} / \|e\|^2 \f$ of a quaternion expression (\a n2 is the precomputed squared norm).
+         * \tparam Q The quaternion expression type.
+         * \tparam T The precomputed-norm scalar type.
+         */
         template <typename Q, typename T>
         struct QuaternionInverse : public Scalar2QuaternionBinaryFunctor<Q, T>
         {
@@ -1534,24 +1933,28 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
+            /** \brief Returns \c e.getC1() / n2 (the real component of \f$ e^{-1} \f$). */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type n2)
             {
                 return (e().getC1() / n2);
             }
 
+            /** \brief Returns \c -e.getC2() / n2 (the C2 component of \f$ e^{-1} \f$). */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type n2)
             {
                 return (-e().getC2() / n2);
             }
 
+            /** \brief Returns \c -e.getC3() / n2 (the C3 component of \f$ e^{-1} \f$). */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type n2)
             {
                 return (-e().getC3() / n2);
             }
 
+            /** \brief Returns \c -e.getC4() / n2 (the C4 component of \f$ e^{-1} \f$). */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type n2)
             {
@@ -1559,6 +1962,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for per-component binary functors that take two quaternion expressions and produce a quaternion result (Math::QuaternionProduct).
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         */
         template <typename Q1, typename Q2>
         struct QuaternionBinaryFunctor
         {
@@ -1566,12 +1974,18 @@ namespace CDPL
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ResultType;
         };
 
+        /**
+         * \brief Per-component functor returning the Hamilton product \f$ e_1 \cdot e_2 \f$ of two quaternion expressions.
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         */
         template <typename Q1, typename Q2>
         struct QuaternionProduct : public QuaternionBinaryFunctor<Q1, Q2>
         {
 
             typedef typename QuaternionBinaryFunctor<Q1, Q2>::ResultType ResultType;
 
+            /** \brief Returns the \c C1 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
             template <typename E1, typename E2>
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -1579,6 +1993,7 @@ namespace CDPL
                 return (e1().getC1() * e2().getC1() - e1().getC2() * e2().getC2() - e1().getC3() * e2().getC3() - e1().getC4() * e2().getC4());
             }
 
+            /** \brief Returns the \c C2 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -1586,6 +2001,7 @@ namespace CDPL
                 return (e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() + e1().getC3() * e2().getC4() - e1().getC4() * e2().getC3());
             }
 
+            /** \brief Returns the \c C3 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -1593,6 +2009,7 @@ namespace CDPL
                 return (e1().getC1() * e2().getC3() - e1().getC2() * e2().getC4() + e1().getC3() * e2().getC1() + e1().getC4() * e2().getC2());
             }
 
+            /** \brief Returns the \c C4 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -1601,6 +2018,12 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for per-component ternary functors that take two quaternion expressions plus a scalar (Math::QuaternionDivision).
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         * \tparam T The scalar type.
+         */
         template <typename Q1, typename Q2, typename T>
         struct Scalar3QuaternionTernaryFunctor
         {
@@ -1609,6 +2032,12 @@ namespace CDPL
             typedef const T&                                                                                                Argument3Type;
         };
 
+        /**
+         * \brief Per-component functor returning the quaternion division \f$ e_1 \cdot e_2^{-1} \f$ (\a n2 is the precomputed squared norm of \a e_2).
+         * \tparam Q1 The first quaternion expression type.
+         * \tparam Q2 The second quaternion expression type.
+         * \tparam T The precomputed-norm scalar type.
+         */
         template <typename Q1, typename Q2, typename T>
         struct QuaternionDivision : public Scalar3QuaternionTernaryFunctor<Q1, Q2, T>
         {
@@ -1616,6 +2045,7 @@ namespace CDPL
             typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::Argument3Type Argument3Type;
             typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::ResultType    ResultType;
 
+            /** \brief Returns the \c C1 component of \f$ e_1 \cdot e_2^{-1} \f$. */
             template <typename E1, typename E2>
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -1623,6 +2053,7 @@ namespace CDPL
                 return ((e1().getC1() * e2().getC1() + e1().getC2() * e2().getC2() + e1().getC3() * e2().getC3() + e1().getC4() * e2().getC4()) / n2);
             }
 
+            /** \brief Returns the \c C2 component of \f$ e_1 \cdot e_2^{-1} \f$. */
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -1630,6 +2061,7 @@ namespace CDPL
                 return ((-e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() - e1().getC3() * e2().getC4() + e1().getC4() * e2().getC3()) / n2);
             }
 
+            /** \brief Returns the \c C3 component of \f$ e_1 \cdot e_2^{-1} \f$. */
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -1637,6 +2069,7 @@ namespace CDPL
                 return ((-e1().getC1() * e2().getC3() + e1().getC2() * e2().getC4() + e1().getC3() * e2().getC1() - e1().getC4() * e2().getC2()) / n2);
             }
 
+            /** \brief Returns the \c C4 component of \f$ e_1 \cdot e_2^{-1} \f$. */
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -1645,6 +2078,12 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for per-component ternary functors that take a scalar \a T1 (lhs), a quaternion expression, and a scalar \a T2 (Math::ScalarQuaternionDivision).
+         * \tparam T1 The scalar type on the left-hand side.
+         * \tparam Q The quaternion expression type.
+         * \tparam T2 The scalar type on the right-hand side.
+         */
         template <typename T1, typename Q, typename T2>
         struct Scalar13QuaternionTernaryFunctor
         {
@@ -1654,6 +2093,12 @@ namespace CDPL
             typedef const T2&                                                                           Argument3Type;
         };
 
+        /**
+         * \brief Per-component functor returning the scalar/quaternion division \f$ t \cdot e^{-1} \f$ (\a n2 is the precomputed squared norm of \a e).
+         * \tparam T1 The scalar type on the left-hand side.
+         * \tparam Q The quaternion expression type.
+         * \tparam T2 The precomputed-norm scalar type.
+         */
         template <typename T1, typename Q, typename T2>
         struct ScalarQuaternionDivision : public Scalar13QuaternionTernaryFunctor<T1, Q, T2>
         {
@@ -1687,6 +2132,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for binary functors that take a quaternion expression and a vector expression and return a vector-element scalar (Math::QuaternionVectorRotation).
+         * \tparam Q The quaternion expression type.
+         * \tparam V The vector expression type.
+         */
         template <typename Q, typename V>
         struct QuaternionVectorBinaryFunctor
         {
@@ -1696,6 +2146,11 @@ namespace CDPL
             typedef ValueType                                                               ResultType;
         };
 
+        /**
+         * \brief Functor returning element \e i of the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$ (quaternion rotation of \a e_2 by \a e_1).
+         * \tparam Q The quaternion expression type.
+         * \tparam V The vector expression type.
+         */
         template <typename Q, typename V>
         struct QuaternionVectorRotation : public QuaternionVectorBinaryFunctor<Q, V>
         {
@@ -1704,6 +2159,16 @@ namespace CDPL
             typedef typename QuaternionVectorBinaryFunctor<Q, V>::SizeType   SizeType;
             typedef typename QuaternionVectorBinaryFunctor<Q, V>::ResultType ResultType;
 
+            /**
+             * \brief Returns element \a i (\f$ 0 \le i < 3 \f$) of the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+             * \tparam E1 The quaternion expression type.
+             * \tparam E2 The vector expression type.
+             * \param e1 The quaternion expression (rotation).
+             * \param e2 The 3-vector expression to rotate.
+             * \param i The zero-based element index (\c 0, \c 1, or \c 2).
+             * \return The rotated vector's \a i-th element (zero for \a i &gt; 2).
+             * \throw Base::SizeError if \a e2 has fewer than 3 elements.
+             */
             template <typename E1, typename E2>
             static ResultType apply(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i)
             {
@@ -1744,6 +2209,11 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for binary functors that take two grid expressions and return a \c bool result (Math::GridEquality).
+         * \tparam G1 The first grid expression type.
+         * \tparam G2 The second grid expression type.
+         */
         template <typename G1, typename G2>
         struct GridBooleanBinaryFunctor
         {
@@ -1753,6 +2223,11 @@ namespace CDPL
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Functor checking cell-wise equality of two grid expressions.
+         * \tparam G1 The first grid expression type.
+         * \tparam G2 The second grid expression type.
+         */
         template <typename G1, typename G2>
         struct GridEquality : public GridBooleanBinaryFunctor<G1, G2>
         {
@@ -1761,6 +2236,12 @@ namespace CDPL
             typedef typename GridBooleanBinaryFunctor<G1, G2>::ValueType  ValueType;
             typedef typename GridBooleanBinaryFunctor<G1, G2>::ResultType ResultType;
 
+            /**
+             * \brief Tells whether \a e1 and \a e2 have the same dimensions and equal cell values.
+             * \param e1 The first grid expression.
+             * \param e2 The second grid expression.
+             * \return \c true if the grids agree in dimensions and cell-wise values, and \c false otherwise.
+             */
             static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2)
             {
                 if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
@@ -1782,6 +2263,12 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for ternary functors that take two grid expressions plus a tolerance scalar and return a \c bool result (Math::GridToleranceEquality).
+         * \tparam G1 The first grid expression type.
+         * \tparam G2 The second grid expression type.
+         * \tparam T The tolerance scalar type.
+         */
         template <typename G1, typename G2, typename T>
         struct Scalar3GridBooleanTernaryFunctor
         {
@@ -1792,6 +2279,12 @@ namespace CDPL
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
+        /**
+         * \brief Functor checking cell-wise approximate equality of two grid expressions within an absolute tolerance.
+         * \tparam G1 The first grid expression type.
+         * \tparam G2 The second grid expression type.
+         * \tparam T The tolerance scalar type.
+         */
         template <typename G1, typename G2, typename T>
         struct GridToleranceEquality : public Scalar3GridBooleanTernaryFunctor<G1, G2, T>
         {
@@ -1801,6 +2294,13 @@ namespace CDPL
             typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ResultType    ResultType;
             typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::Argument3Type Argument3Type;
 
+            /**
+             * \brief Tells whether \a e1 and \a e2 agree cell-wise within the absolute tolerance \a epsilon.
+             * \param e1 The first grid expression.
+             * \param e2 The second grid expression.
+             * \param epsilon The non-negative absolute tolerance.
+             * \return \c true if the grids have equal dimensions and all cells agree within \a epsilon, and \c false otherwise.
+             */
             static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2, Argument3Type epsilon)
             {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
@@ -1826,6 +2326,10 @@ namespace CDPL
             }
         };
 
+        /**
+         * \brief %Base class for unary functors that take a grid expression and return a scalar result (Math::GridElementSum).
+         * \tparam M The grid expression type.
+         */
         template <typename M>
         struct GridScalarUnaryFunctor
         {
@@ -1833,12 +2337,21 @@ namespace CDPL
             typedef typename M::ValueType ResultType;
         };
 
+        /**
+         * \brief Functor returning the sum of all cells of a grid expression.
+         * \tparam G The grid expression type.
+         */
         template <typename G>
         struct GridElementSum : public GridScalarUnaryFunctor<G>
         {
 
             typedef typename GridScalarUnaryFunctor<G>::ResultType ResultType;
 
+            /**
+             * \brief Returns the cell sum of \a e.
+             * \param e The grid expression.
+             * \return \f$ \sum_{i, j, k} e(i, j, k) \f$.
+             */
             static ResultType apply(const GridExpression<G>& e)
             {
                 typedef typename G::SizeType SizeType;

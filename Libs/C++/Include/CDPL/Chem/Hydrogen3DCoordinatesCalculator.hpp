@@ -51,7 +51,14 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief Hydrogen3DCoordinatesCalculator.
+         * \brief Generates 3D coordinates for the hydrogen atoms of a molecular graph from the existing
+         *        positions of their heavy-atom neighbors.
+         *
+         * For every hydrogen-bearing center the calculator picks a coordination geometry (linear, trigonal-planar,
+         * tetrahedral, square-planar, trigonal-/pentagonal-bipyramidal or octahedral) consistent with the heavy-atom
+         * neighborhood and places the hydrogens at appropriate template positions, oriented to avoid clashes with
+         * already-positioned substituents. Heavy-atom coordinates can be supplied through user-defined accessor
+         * functions; by default only hydrogens without 3D coordinates are placed (see undefinedOnly()).
          */
         class CDPL_CHEM_API Hydrogen3DCoordinatesCalculator
         {
@@ -114,6 +121,14 @@ namespace CDPL
              */
             const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
+            /**
+             * \brief Initializes the calculator for the molecular graph \a molgraph (perceives hydrogen-bearing centers
+             *        and prepares the working state) without yet writing any coordinates.
+             *
+             * Call calculate(Math::Vector3DArray&, bool) afterwards to perform the placement.
+             *
+             * \param molgraph The molecular graph for which to set up the calculation.
+             */
             void setup(const MolecularGraph& molgraph);
 
             /**
@@ -127,6 +142,14 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool init_coords = true);
 
+            /**
+             * \brief Calculates 3D-coordinates for the hydrogen atoms of the molecular graph previously specified via setup().
+             * \param coords An array containing the heavy atom and calculated hydrogen 3D-coordinates. The coordinates
+             *         are stored in the same order as the atoms appear in the atom list of
+             *         the molecular graph (i.e. the coordinates of an atom are accessible via
+             *         its index).
+             * \param init_coords If \c false, defined atom coordinates are already present in \a coords and thus won't get assigned again.
+             */
             void calculate(Math::Vector3DArray& coords, bool init_coords = true);
 
           private:

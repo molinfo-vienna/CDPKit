@@ -46,7 +46,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
+         * \brief A writer for reaction data in the native I/O format of the <em>CDPL</em>.
          */
         class CDPL_CHEM_API CDFReactionWriter : public Base::DataWriter<Reaction>
         {
@@ -75,7 +75,16 @@ namespace CDPL
              */
             Base::DataWriter<Reaction>& write(const Reaction& rxn);
 
+            /**
+             * \brief Returns a pointer that is non-null while the writer is in a good state and \c nullptr after a failed write.
+             * \return A non-null pointer in a good state, \c nullptr otherwise.
+             */
                  operator const void*() const;
+
+            /**
+             * \brief Tells whether a previous write operation has failed.
+             * \return \c true if the writer is in a failed state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

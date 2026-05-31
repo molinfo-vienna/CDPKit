@@ -104,14 +104,34 @@ namespace CDPL
              */
             bool operator!=(const StringDataBlockEntry& entry) const;
 
+            /**
+             * \brief Less-than comparison operator (lexicographic ordering by header, then data).
+             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \return \c true if \c *this is less than \a entry, and \c false otherwise.
+             */
             bool operator<(const StringDataBlockEntry& entry) const;
 
+            /**
+             * \brief Greater-than comparison operator (lexicographic ordering by header, then data).
+             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \return \c true if \c *this is greater than \a entry, and \c false otherwise.
+             */
             bool operator>(const StringDataBlockEntry& entry) const;
 
+            /**
+             * \brief Less-than-or-equal comparison operator (lexicographic ordering by header, then data).
+             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \return \c true if \c *this is less than or equal to \a entry, and \c false otherwise.
+             */
             bool operator<=(const StringDataBlockEntry& entry) const;
 
+            /**
+             * \brief Greater-than-or-equal comparison operator (lexicographic ordering by header, then data).
+             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \return \c true if \c *this is greater than or equal to \a entry, and \c false otherwise.
+             */
             bool operator>=(const StringDataBlockEntry& entry) const;
-            
+
           private:
             std::string header;
             std::string data;
@@ -125,8 +145,14 @@ namespace CDPL
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %StringDataBlock instances. */
             typedef std::shared_ptr<StringDataBlock> SharedPointer;
 
+            /**
+             * \brief Appends a new entry with the supplied data header and content to the block.
+             * \param header The data header of the new entry.
+             * \param data The data content of the new entry.
+             */
             void addEntry(const std::string& header, const std::string& data)
             {
                 addElement(StringDataBlockEntry(header, data));

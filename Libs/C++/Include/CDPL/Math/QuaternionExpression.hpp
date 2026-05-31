@@ -56,30 +56,55 @@ namespace CDPL
             typedef typename E::ConstClosureType ExpressionClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node wrapping \a e.
+             * \param e The quaternion expression to wrap.
+             */
             QuaternionUnary1(const ExpressionType& e):
                 expr(e) {}
 
+            /**
+             * \brief Returns the result of applying the unary functor to component \e C1 of the wrapped expression.
+             * \return The transformed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::apply(expr.getC1());
             }
 
+            /**
+             * \brief Returns the result of applying the unary functor to component \e C2 of the wrapped expression.
+             * \return The transformed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::apply(expr.getC2());
             }
 
+            /**
+             * \brief Returns the result of applying the unary functor to component \e C3 of the wrapped expression.
+             * \return The transformed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::apply(expr.getC3());
             }
 
+            /**
+             * \brief Returns the result of applying the unary functor to component \e C4 of the wrapped expression.
+             * \return The transformed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::apply(expr.getC4());
@@ -121,30 +146,55 @@ namespace CDPL
             typedef typename E::ConstClosureType ExpressionClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node wrapping \a e.
+             * \param e The quaternion expression to wrap.
+             */
             QuaternionUnary2(const ExpressionType& e):
                 expr(e) {}
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC1 method to the wrapped expression.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::applyC1(expr);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC2 method to the wrapped expression.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::applyC2(expr);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC3 method to the wrapped expression.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::applyC3(expr);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC4 method to the wrapped expression.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::applyC4(expr);
@@ -187,30 +237,56 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             */
             QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C1 components of the two wrapped expressions.
+             * \return The combined \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::apply(expr1.getC1(), expr2.getC1());
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C2 components of the two wrapped expressions.
+             * \return The combined \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::apply(expr1.getC2(), expr2.getC2());
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C3 components of the two wrapped expressions.
+             * \return The combined \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::apply(expr1.getC3(), expr2.getC3());
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C4 components of the two wrapped expressions.
+             * \return The combined \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::apply(expr1.getC4(), expr2.getC4());
@@ -221,14 +297,29 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct QuaternionBinary1Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef QuaternionBinary1<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType               ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two quaternion expressions \a E1 and \a E2 via the per-component functor \a F
+         *        (which exposes four separate \c applyC1 / \c applyC2 / \c applyC3 / \c applyC4 methods operating on the whole source expressions).
+         * \tparam E1 The first wrapped quaternion expression type.
+         * \tparam E2 The second wrapped quaternion expression type.
+         * \tparam F The per-component functor type.
+         */
         template <typename E1, typename E2, typename F>
         class QuaternionBinary2 : public QuaternionExpression<QuaternionBinary2<E1, E2, F> >
         {
@@ -241,30 +332,56 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             */
             QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC1 method to the two wrapped expressions.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::applyC1(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC2 method to the two wrapped expressions.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::applyC2(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC3 method to the two wrapped expressions.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::applyC3(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC4 method to the two wrapped expressions.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::applyC4(expr1, expr2);
@@ -275,14 +392,28 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \tparam F The per-component functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct QuaternionBinary2Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef QuaternionBinary2<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType               ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a scalar \a E1 (lhs) and a quaternion expression \a E2 (rhs) component-wise via the binary functor \a F.
+         * \tparam E1 The scalar type appearing on the left-hand side.
+         * \tparam E2 The wrapped quaternion expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar1QuaternionBinary1 : public QuaternionExpression<Scalar1QuaternionBinary1<E1, E2, F> >
         {
@@ -295,30 +426,56 @@ namespace CDPL
             typedef typename E2::ConstClosureType       Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node combining the scalar \a e1 and the quaternion expression \a e2.
+             * \param e1 The scalar value on the left-hand side.
+             * \param e2 The quaternion expression on the right-hand side.
+             */
             Scalar1QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the result of applying the binary functor to the scalar and the \e C1 component of the wrapped expression.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::apply(expr1, expr2.getC1());
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the scalar and the \e C2 component of the wrapped expression.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::apply(expr1, expr2.getC2());
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the scalar and the \e C3 component of the wrapped expression.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::apply(expr1, expr2.getC3());
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the scalar and the \e C4 component of the wrapped expression.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::apply(expr1, expr2.getC4());
@@ -329,14 +486,29 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The scalar type on the left-hand side.
+         * \tparam E2 The quaternion expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar1QuaternionBinary1Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar1QuaternionBinary1<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                      ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a scalar \a E1 (lhs) and a quaternion expression \a E2 (rhs) via the per-component functor \a F
+         *        (which exposes \c applyC1 / \c applyC2 / \c applyC3 / \c applyC4 methods).
+         * \tparam E1 The scalar type appearing on the left-hand side.
+         * \tparam E2 The wrapped quaternion expression type.
+         * \tparam F The per-component functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar1QuaternionBinary2 : public QuaternionExpression<Scalar1QuaternionBinary2<E1, E2, F> >
         {
@@ -349,30 +521,56 @@ namespace CDPL
             typedef typename E2::ConstClosureType       Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node combining the scalar \a e1 and the quaternion expression \a e2.
+             * \param e1 The scalar value on the left-hand side.
+             * \param e2 The quaternion expression on the right-hand side.
+             */
             Scalar1QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC1 method to the scalar and the wrapped expression.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::applyC1(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC2 method to the scalar and the wrapped expression.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::applyC2(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC3 method to the scalar and the wrapped expression.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::applyC3(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC4 method to the scalar and the wrapped expression.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::applyC4(expr1, expr2);
@@ -383,14 +581,28 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The scalar type on the left-hand side.
+         * \tparam E2 The quaternion expression type.
+         * \tparam F The per-component functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar1QuaternionBinary2Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar1QuaternionBinary2<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                      ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a quaternion expression \a E1 (lhs) and a scalar \a E2 (rhs) component-wise via the binary functor \a F.
+         * \tparam E1 The wrapped quaternion expression type.
+         * \tparam E2 The scalar type appearing on the right-hand side.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar2QuaternionBinary1 : public QuaternionExpression<Scalar2QuaternionBinary1<E1, E2, F> >
         {
@@ -403,30 +615,56 @@ namespace CDPL
             typedef const E2                            Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node combining the quaternion expression \a e1 and the scalar \a e2.
+             * \param e1 The quaternion expression on the left-hand side.
+             * \param e2 The scalar value on the right-hand side.
+             */
             Scalar2QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C1 component of the wrapped expression and the scalar.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::apply(expr1.getC1(), expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C2 component of the wrapped expression and the scalar.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::apply(expr1.getC2(), expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C3 component of the wrapped expression and the scalar.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::apply(expr1.getC3(), expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the binary functor to the \e C4 component of the wrapped expression and the scalar.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::apply(expr1.getC4(), expr2);
@@ -437,14 +675,29 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The quaternion expression type.
+         * \tparam E2 The scalar type on the right-hand side.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar2QuaternionBinary1Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar2QuaternionBinary1<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                      ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a quaternion expression \a E1 (lhs) and a scalar \a E2 (rhs) via the per-component functor \a F
+         *        (which exposes \c applyC1 / \c applyC2 / \c applyC3 / \c applyC4 methods).
+         * \tparam E1 The wrapped quaternion expression type.
+         * \tparam E2 The scalar type appearing on the right-hand side.
+         * \tparam F The per-component functor type.
+         */
         template <typename E1, typename E2, typename F>
         class Scalar2QuaternionBinary2 : public QuaternionExpression<Scalar2QuaternionBinary2<E1, E2, F> >
         {
@@ -457,30 +710,56 @@ namespace CDPL
             typedef const E2                            Expression2ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node combining the quaternion expression \a e1 and the scalar \a e2.
+             * \param e1 The quaternion expression on the left-hand side.
+             * \param e2 The scalar value on the right-hand side.
+             */
             Scalar2QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2):
                 expr1(e1), expr2(e2) {}
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC1 method to the wrapped expression and the scalar.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::applyC1(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC2 method to the wrapped expression and the scalar.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::applyC2(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC3 method to the wrapped expression and the scalar.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::applyC3(expr1, expr2);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC4 method to the wrapped expression and the scalar.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::applyC4(expr1, expr2);
@@ -491,14 +770,30 @@ namespace CDPL
             Expression2ClosureType expr2;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \tparam E1 The quaternion expression type.
+         * \tparam E2 The scalar type on the right-hand side.
+         * \tparam F The per-component functor type.
+         */
         template <typename E1, typename E2, typename F>
         struct Scalar2QuaternionBinary2Traits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar2QuaternionBinary2<E1, E2, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                      ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two quaternion expressions \a E1 (lhs) and \a E2 (middle) with a scalar \a E3 (rhs)
+         *        via the per-component ternary functor \a F.
+         * \tparam E1 The first wrapped quaternion expression type.
+         * \tparam E2 The second wrapped quaternion expression type.
+         * \tparam E3 The scalar type appearing on the right-hand side.
+         * \tparam F The per-component ternary functor type.
+         */
         template <typename E1, typename E2, typename E3, typename F>
         class Scalar3QuaternionTernary : public QuaternionExpression<Scalar3QuaternionTernary<E1, E2, E3, F> >
         {
@@ -513,30 +808,57 @@ namespace CDPL
             typedef const E3                                Expression3ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node combining the two quaternion expressions and the scalar.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             * \param e3 The scalar value on the right-hand side.
+             */
             Scalar3QuaternionTernary(const Expression1Type& e1, const Expression2Type& e2, const Expression3Type& e3):
                 expr1(e1), expr2(e2), expr3(e3) {}
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC1 method to the two wrapped expressions and the scalar.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::applyC1(expr1, expr2, expr3);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC2 method to the two wrapped expressions and the scalar.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::applyC2(expr1, expr2, expr3);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC3 method to the two wrapped expressions and the scalar.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::applyC3(expr1, expr2, expr3);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC4 method to the two wrapped expressions and the scalar.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::applyC4(expr1, expr2, expr3);
@@ -548,14 +870,31 @@ namespace CDPL
             Expression3ClosureType expr3;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar3QuaternionTernary instantiation <\a E1, \a E2, \a E3, \a F>.
+         * \tparam E1 The first quaternion expression type.
+         * \tparam E2 The second quaternion expression type.
+         * \tparam E3 The scalar type on the right-hand side.
+         * \tparam F The per-component ternary functor type.
+         */
         template <typename E1, typename E2, typename E3, typename F>
         struct Scalar3QuaternionTernaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar3QuaternionTernary<E1, E2, E3, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                          ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining a scalar \a E1 (lhs), a quaternion expression \a E2 (middle), and a scalar \a E3 (rhs)
+         *        via the per-component ternary functor \a F.
+         * \tparam E1 The scalar type appearing on the left-hand side.
+         * \tparam E2 The wrapped quaternion expression type.
+         * \tparam E3 The scalar type appearing on the right-hand side.
+         * \tparam F The per-component ternary functor type.
+         */
         template <typename E1, typename E2, typename E3, typename F>
         class Scalar13QuaternionTernary : public QuaternionExpression<Scalar13QuaternionTernary<E1, E2, E3, F> >
         {
@@ -570,30 +909,57 @@ namespace CDPL
             typedef const E3                                 Expression3ClosureType;
 
           public:
+            /** \brief The element value type of the expression (the functor's result type). */
             typedef typename F::ResultType ValueType;
+            /** \brief Constant reference type to a component value. */
             typedef const ValueType        ConstReference;
+            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
             typedef const ValueType        Reference;
+            /** \brief Constant closure type used when this expression appears inside another expression. */
             typedef const SelfType         ConstClosureType;
+            /** \brief Closure type used when this expression appears inside another expression. */
             typedef SelfType               ClosureType;
 
+            /**
+             * \brief Constructs the expression-template node combining the two scalars and the wrapped quaternion expression.
+             * \param e1 The scalar value on the left-hand side.
+             * \param e2 The wrapped quaternion expression.
+             * \param e3 The scalar value on the right-hand side.
+             */
             Scalar13QuaternionTernary(const Expression1Type& e1, const Expression2Type& e2, const Expression3Type& e3):
                 expr1(e1), expr2(e2), expr3(e3) {}
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC1 method to the two scalars and the wrapped expression.
+             * \return The computed \e C1 component.
+             */
             ConstReference getC1() const
             {
                 return FunctorType::applyC1(expr1, expr2, expr3);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC2 method to the two scalars and the wrapped expression.
+             * \return The computed \e C2 component.
+             */
             ConstReference getC2() const
             {
                 return FunctorType::applyC2(expr1, expr2, expr3);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC3 method to the two scalars and the wrapped expression.
+             * \return The computed \e C3 component.
+             */
             ConstReference getC3() const
             {
                 return FunctorType::applyC3(expr1, expr2, expr3);
             }
 
+            /**
+             * \brief Returns the result of applying the functor's \c applyC4 method to the two scalars and the wrapped expression.
+             * \return The computed \e C4 component.
+             */
             ConstReference getC4() const
             {
                 return FunctorType::applyC4(expr1, expr2, expr3);
@@ -605,11 +971,20 @@ namespace CDPL
             Expression3ClosureType expr3;
         };
 
+        /**
+         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar13QuaternionTernary instantiation <\a E1, \a E2, \a E3, \a F>.
+         * \tparam E1 The scalar type on the left-hand side.
+         * \tparam E2 The quaternion expression type.
+         * \tparam E3 The scalar type on the right-hand side.
+         * \tparam F The per-component ternary functor type.
+         */
         template <typename E1, typename E2, typename E3, typename F>
         struct Scalar13QuaternionTernaryTraits
         {
 
+            /** \brief The expression-template node type. */
             typedef Scalar13QuaternionTernary<E1, E2, E3, F> ExpressionType;
+            /** \brief The expression-template result type returned by free-function operators. */
             typedef ExpressionType                           ResultType;
         };
 
