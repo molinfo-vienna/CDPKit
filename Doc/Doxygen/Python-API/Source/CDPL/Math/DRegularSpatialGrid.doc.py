@@ -65,347 +65,417 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def __init__(s: float) -> None: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \param n 
-    # \param o 
-    # \param preserve 
-    # \param v 
-    #
+    # \brief Resizes the grid to \f$ m \times n \times o \f$ cells.
+    # 
+    # \param m The new first-dimension size.
+    # \param n The new second-dimension size.
+    # \param o The new third-dimension size.
+    # \param preserve If <tt>True</tt>, existing cell values are kept where the indices remain valid; if <tt>False</tt>, all cells are set to <em>v</em>.
+    # \param v The fill value used for newly added cells (and for all cells if <em>preserve</em> is <tt>False</tt>).
+    # 
     def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Sets every cell of the grid to the value <em>v</em>.
+    # 
+    # \param v The fill value.
+    # 
     def clear(v: float = 0.0) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the spatial extent of the grid along the X axis ( \f$ (\mathrm{size}_1 - 1) \cdot \mathrm{xStep} \f$ for non-empty grids).
+    # 
+    # \return The X-axis extent.
+    # 
     def getXExtent() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the spatial extent of the grid along the Y axis.
+    # 
+    # \return The Y-axis extent.
+    # 
     def getYExtent() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the spatial extent of the grid along the Z axis.
+    # 
+    # \return The Z-axis extent.
+    # 
     def getZExtent() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the per-cell step size along the X axis.
+    # 
+    # \return The X-axis step size.
+    # 
     def getXStepSize() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the per-cell step size along the Y axis.
+    # 
+    # \return The Y-axis step size.
+    # 
     def getYStepSize() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the per-cell step size along the Z axis.
+    # 
+    # \return The Z-axis step size.
+    # 
     def getZStepSize() -> float: pass
 
     ##
-    # \brief 
-    # \param xs 
-    #
+    # \brief Sets the per-cell step size along the X axis to <em>xs</em>.
+    # 
+    # \param xs The new X-axis step size.
+    # 
     def setXStepSize(xs: float) -> None: pass
 
     ##
-    # \brief 
-    # \param ys 
-    #
+    # \brief Sets the per-cell step size along the Y axis to <em>ys</em>.
+    # 
+    # \param ys The new Y-axis step size.
+    # 
     def setYStepSize(ys: float) -> None: pass
 
     ##
-    # \brief 
-    # \param zs 
-    #
+    # \brief Sets the per-cell step size along the Z axis to <em>zs</em>.
+    # 
+    # \param zs The new Z-axis step size.
+    # 
     def setZStepSize(zs: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a mutable reference to the underlying grid data container.
+    # 
+    # \return A mutable reference to the grid data.
+    # 
     def getData() -> DGrid: pass
 
     ##
-    # \brief 
-    # \param xform 
-    #
+    # \brief Sets the cell-index to world-coordinate transformation to <em>xform</em> and caches its inverse.
+    # 
+    # \param xform The new transformation.
+    # 
+    # \throw Base.CalculationFailed if the transformation cannot be inverted (only when math checks are enabled).
+    # 
     def setCoordinatesTransform(xform: Matrix4D) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the coordinate transformation mapping cell-index coordinates to world coordinates.
+    # 
+    # \return A reference to the transformation matrix.
+    # 
     def getCoordinatesTransform() -> Matrix4D: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \param coords 
-    #
+    # \brief Writes the world-space 3D position of the cell at (<em>i</em>, <em>j</em>, <em>k</em>) into <em>coords</em>.
+    # 
+    # \param i The first-dimension cell index.
+    # \param j The second-dimension cell index.
+    # \param k The third-dimension cell index.
+    # \param coords The output vector receiving the X/Y/Z position.
+    # 
     def getCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param coords 
-    #
+    # \brief Writes the world-space 3D position of the cell with linear index <em>i</em> into <em>coords</em>.
+    # 
+    # \param i The zero-based linear cell index.
+    # \param coords The output vector receiving the X/Y/Z position.
+    # 
     def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \param coords 
-    #
+    # \brief Writes the local-space 3D position of the cell at (<em>i</em>, <em>j</em>, <em>k</em>) into <em>coords</em>.
+    # 
+    # Local coordinates are centered at the grid origin (the cell-center cell-index coordinate system before applying the world-space transformation).
+    # 
+    # \param i The first-dimension cell index.
+    # \param j The second-dimension cell index.
+    # \param k The third-dimension cell index.
+    # \param coords The output vector receiving the local X/Y/Z position.
+    # 
     def getLocalCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
 
     ##
-    # \brief 
-    # \param world_coords 
-    # \param local_coords 
-    #
+    # \brief Transforms the world-space point <em>world_coords</em> into the grid's local coordinate frame and stores the result in <em>local_coords</em>.
+    # 
+    # \param world_coords The input world-space 3D position.
+    # \param local_coords The output vector receiving the local-frame 3D position.
+    # 
     def getLocalCoordinates(world_coords: Vector3D, local_coords: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: Vector3F) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: Vector3D) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: Vector3L) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: Vector3UL) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the world-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The world-space 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsPoint(pos: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: Vector3F) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: Vector3D) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: Vector3L) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: Vector3UL) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Tells whether the local-space point <em>pos</em> lies within the grid bounds.
+    # 
+    # \param pos The local-frame 3D position to test.
+    # 
+    # \return <tt>True</tt> if <em>pos</em> is inside the grid, and <tt>False</tt> otherwise.
+    # 
     def containsLocalPoint(pos: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: Vector3F, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: ConstFVectorExpression, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: Vector3D, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: ConstDVectorExpression, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: Vector3L, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: ConstLVectorExpression, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: Vector3UL, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the world-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The world-space 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getContainingCell(pos: ConstULVectorExpression, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: Vector3F, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: ConstFVectorExpression, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: Vector3D, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: ConstDVectorExpression, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: Vector3L, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: ConstLVectorExpression, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: Vector3UL, indices: object) -> None: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param indices 
-    #
+    # \brief Writes the (i, j, k) cell indices of the cell containing the local-space point <em>pos</em> into <em>indices</em>.
+    # 
+    # \param pos The local-frame 3D position.
+    # \param indices The output vector receiving the three cell indices.
+    # 
     def getLocalContainingCell(pos: ConstULVectorExpression, indices: object) -> None: pass
 
     ##
@@ -421,22 +491,28 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFGridExpression instance \a e.
-    # \param e The \c %ConstFGridExpression instance to copy.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFGridExpression) -> DRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDGridExpression instance \a e.
-    # \param e The \c %ConstDGridExpression instance to copy.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDGridExpression) -> DRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a e.
-    # \param e The \c %object instance to copy.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: object) -> DRegularSpatialGrid: pass
@@ -449,27 +525,31 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def assign(g: DRegularSpatialGrid) -> DRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the grid along the first dimension.
+    # 
+    # \return The first-dimension size.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the grid along the second dimension.
+    # 
+    # \return The second-dimension size.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the grid along the third dimension.
+    # 
+    # \return The third-dimension size.
+    # 
     def getSize3() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the grid is empty (zero cells along any dimension).
+    # 
+    # \return <tt>True</tt> if the grid is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -495,9 +575,10 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of cells of the grid.
+    # 
+    # \return The total cell count.
+    # 
     def getSize() -> int: pass
 
     ##
@@ -523,19 +604,23 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
+    # \brief Returns a reference to the cell at the (<em>i</em>, <em>j</em>, <em>k</em>) position.
+    # 
+    # \param i The zero-based first-dimension index.
+    # \param j The zero-based second-dimension index.
+    # \param k The zero-based third-dimension index.
+    # 
+    # \return A reference to the cell value.
+    # 
     def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the cell at the linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear cell index.
+    # 
+    # \return A reference to the cell value.
+    # 
     def __call__(i: int) -> float: pass
 
     ##

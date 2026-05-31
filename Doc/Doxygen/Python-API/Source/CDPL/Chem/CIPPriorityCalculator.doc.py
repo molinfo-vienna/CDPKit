@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief CIPPriorityCalculator.
+# \brief Computes a topological approximation of CIP (Cahn-Ingold-Prelog) priorities for the atoms of a molecular graph.
+# 
+# The calculator performs an iterative refinement of per-atom priority labels that follows the topological subset of the CIP rules (atomic number, then constitutional environment); it does not resolve full stereochemical CIP rank but provides a robust input ordering for downstream stereodescriptor assignment.
 # 
 # \see [\ref TCIP]
 # 

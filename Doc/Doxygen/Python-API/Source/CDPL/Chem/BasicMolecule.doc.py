@@ -51,48 +51,48 @@ class BasicMolecule(Molecule):
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of <em>mol</em>.
     # 
-    # \param mol The molecule to copy.
+    # \param mol The source molecule.
     # 
     def copy(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of <em>mol</em>.
     # 
-    # \param mol The molecule to copy.
+    # \param mol The source molecule.
     # 
     def copy(mol: Molecule) -> None: pass
 
     ##
-    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of <em>molgraph</em>.
     # 
-    # \param molgraph The Chem.MolecularGraph instance providing the atoms, bonds and properties to copy.
+    # \param molgraph The source molecular graph.
     # 
     def copy(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of those in <em>mol</em>.
     # 
-    # \param mol The molecule providing the atoms and bonds to append.
+    # \param mol The source molecule.
     # 
     # \note Does not affect any properties.
     # 
     def append(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of those in <em>mol</em>.
     # 
-    # \param mol The molecule providing the atoms and bonds to append.
+    # \param mol The source molecule.
     # 
     # \note Does not affect any properties.
     # 
     def append(mol: Molecule) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of those in <em>molgraph</em>.
     # 
-    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to append.
+    # \param molgraph The source molecular graph.
     # 
     # \note Does not affect any properties.
     # 

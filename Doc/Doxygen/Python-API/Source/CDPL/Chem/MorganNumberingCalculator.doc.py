@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MorganNumberingCalculator.
+# \brief Computes a canonical atom numbering of a molecular graph using a modified Morgan algorithm.
+# 
+# The result is an array of canonical atom indices in the same order as the molecular graph's atom list, so the canonical number of an atom is accessible via its index. Symmetry classes are broken by additional invariants (atomic symbol, formal charge, isotope, bond multiplicity).
 # 
 # \see [\ref MOCAN]
 # 

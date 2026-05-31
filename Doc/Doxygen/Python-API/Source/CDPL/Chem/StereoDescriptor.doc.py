@@ -41,7 +41,7 @@
 # </table>
 # 
 # - <em>Non-terminal double bonds:</em><br>
-#  As shown in figure <em>3a</em> and <em>3b</em>, the four reference atoms form a path with three consecutive bonds where atoms <em>2</em> and <em>3</em> are part of the central double bond. Atom <em>1</em> is the connected atom of the first double bond ligand, and atom <em>4</em> the connected atom of the second ligand. If reference atoms <em>1</em> and <em>4</em> lie on the same side of the double bond (see <em>Fig. 3a</em>), the configuration flag is assigned the value BondConfiguration.CIS, and BondConfiguration.TRANS, if they are on opposite sides f the bond (<em>Fig. 3b</em>).
+#  As shown in figure <em>3a</em> and <em>3b</em>, the four reference atoms form a path with three consecutive bonds where atoms <em>2</em> and <em>3</em> are part of the central double bond. Atom <em>1</em> is the connected atom of the first double bond ligand, and atom <em>4</em> the connected atom of the second ligand. If reference atoms <em>1</em> and <em>4</em> lie on the same side of the double bond (see <em>Fig. 3a</em>), the configuration flag is assigned the value BondConfiguration.CIS, and BondConfiguration.TRANS, if they are on opposite sides of the bond (<em>Fig. 3b</em>).
 # 
 # <table>
 #  <tr><td>\image html bond_stereo_cis.png "Fig. 3a: Cis-Configuration"</td><td>\image html bond_stereo_trans.png "Fig. 3b: Trans-Configuration"</td></tr>
@@ -171,7 +171,7 @@ class StereoDescriptor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Tells wheter this <tt>StereoDescriptor</tt> instance is valid for the specified center atom.
+    # \brief Tells whether this <tt>StereoDescriptor</tt> instance is valid for the specified center atom.
     # 
     # The method checks if the number of reference atoms is at least 3, the reference atoms are distinct and if every reference atom is connected to the argument atom.
     # 

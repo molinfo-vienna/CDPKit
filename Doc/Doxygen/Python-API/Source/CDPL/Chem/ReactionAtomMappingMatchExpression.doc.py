@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief ReactionAtomMappingMatchExpression.
+# \brief Chem.MatchExpression that constrains reaction substructure matches by a required reactant-to-product atom mapping.
+# 
+# The expression is evaluated by a reaction substructure search (RSSS) and requires that every reactant/product atom pair of the query atom mapping is mirrored by a corresponding pair of mapped atoms in the same atom class of the target reaction. Useful for enforcing role-preserving mappings such as those derived from <em>Daylight SMIRKS</em> reaction patterns.
 # 
 class ReactionAtomMappingMatchExpression(ReactionMatchExpression):
 

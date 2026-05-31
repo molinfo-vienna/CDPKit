@@ -25,31 +25,31 @@
 class MOL2MoleculeType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the molecule type is unknown (default for unrecognized values).
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the molecule is a small (non-polymeric) molecule.
+    # 
     SMALL = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the molecule is a generic biopolymer.
+    # 
     BIOPOLYMER = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the molecule is a protein.
+    # 
     PROTEIN = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the molecule is a nucleic acid.
+    # 
     NUCLEIC_ACID = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the molecule is a saccharide.
+    # 
     SACCHARIDE = 5

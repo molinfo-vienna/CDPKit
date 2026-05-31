@@ -74,19 +74,21 @@ class FGrid(Boost.Python.instance):
     def __init__(e: object) -> None: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \param n 
-    # \param o 
-    # \param preserve 
-    # \param v 
-    #
+    # \brief Resizes the grid to \f$ m \times n \times o \f$ cells.
+    # 
+    # \param m The new first-axis size.
+    # \param n The new second-axis size.
+    # \param o The new third-axis size.
+    # \param preserve If <tt>True</tt>, existing cell values at indices that remain valid are kept; if <tt>False</tt>, all cells are set to <em>v</em>.
+    # \param v The fill value for newly added cells (or for all cells when <em>preserve</em> is <tt>False</tt>).
+    # 
     def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Sets every cell of the grid to the value <em>v</em>.
+    # 
+    # \param v The fill value.
+    # 
     def clear(v: float = 0.0) -> None: pass
 
     ##
@@ -102,55 +104,67 @@ class FGrid(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFGridExpression instance \a e.
-    # \param e The \c %ConstFGridExpression instance to copy.
+    # \brief Resizes this grid to match <em>e</em> and assigns its cells without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFGridExpression) -> FGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDGridExpression instance \a e.
-    # \param e The \c %ConstDGridExpression instance to copy.
+    # \brief Resizes this grid to match <em>e</em> and assigns its cells without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDGridExpression) -> FGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a e.
-    # \param e The \c %object instance to copy.
+    # \brief Resizes this grid to match <em>e</em> and assigns its cells without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: object) -> FGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FGrid instance \a g.
-    # \param g The \c %FGrid instance to copy.
+    # \brief Move-assigns the contents of <em>g</em> to this grid.
+    # 
+    # \param g The source grid (left in a valid but unspecified state).
+    # 
     # \return \a self
     # 
     def assign(g: FGrid) -> FGrid: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the first-axis size.
+    # 
+    # \return The size along the first axis.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the second-axis size.
+    # 
+    # \return The size along the second axis.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the third-axis size.
+    # 
+    # \return The size along the third axis.
+    # 
     def getSize3() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the grid is empty.
+    # 
+    # \return <tt>True</tt> if the underlying storage holds no elements, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -176,15 +190,17 @@ class FGrid(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total cell count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+    # 
+    # \return The total number of cells.
+    # 
     def getSize() -> int: pass
 
     ##
-    # \brief 
-    # \param g 
-    #
+    # \brief Swaps the contents of this grid with those of <em>g</em>.
+    # 
+    # \param g The grid to swap with.
+    # 
     def swap(g: FGrid) -> None: pass
 
     ##
@@ -204,19 +220,27 @@ class FGrid(Boost.Python.instance):
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
+    # \brief Returns a reference to the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return A reference to the cell. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return A reference to the cell. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> float: pass
 
     ##

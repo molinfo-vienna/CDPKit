@@ -25,19 +25,21 @@
 class SparseLVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %SparseLVector instance.
+    # \brief Constructs an empty sparse vector (size zero, no stored entries).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %SparseLVector instance \a v.
-    # \param v The \c %SparseLVector instance to copy.
+    # \brief Move-constructs from <em>v</em> (<em>v</em> is left in a valid empty state).
+    # 
+    # \param v The sparse vector to move from.
     # 
     def __init__(v: SparseLVector) -> None: pass
 
     ##
-    # \brief Initializes the \c %SparseLVector instance.
-    # \param n 
+    # \brief Constructs a sparse vector of size <em>n</em> with no stored entries (every position reads as the default value).
+    # 
+    # \param n The logical element count.
     # 
     def __init__(n: int) -> None: pass
 
@@ -72,20 +74,22 @@ class SparseLVector(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \param n 
-    #
+    # \brief Resizes the logical element count to <em>n</em>, dropping any stored entries at indices beyond <em>n</em>.
+    # 
+    # \param n The new logical element count.
+    # 
     def resize(n: int) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all explicitly stored entries (the logical size remains unchanged).
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of explicitly stored (non-default) entries.
+    # 
+    # \return The number of stored entries.
+    # 
     def getNumElements() -> int: pass
 
     ##
@@ -101,36 +105,46 @@ class SparseLVector(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> SparseLVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> SparseLVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> SparseLVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> SparseLVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %SparseLVector instance \a v.
-    # \param v The \c %SparseLVector instance to copy.
+    # \brief Move-assigns the contents of <em>v</em> to this sparse vector.
+    # 
+    # \param v The source sparse vector (left in a valid but unspecified state).
+    # 
     # \return \a self
     # 
     def assign(v: SparseLVector) -> SparseLVector: pass
@@ -143,15 +157,17 @@ class SparseLVector(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the vector's logical size is zero.
+    # 
+    # \return <tt>True</tt> if the logical size is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the logical element count.
+    # 
+    # \return The number of elements.
+    # 
     def getSize() -> int: pass
 
     ##
@@ -168,9 +184,10 @@ class SparseLVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Swaps the contents of this sparse vector with those of <em>v</em>.
+    # 
+    # \param v The sparse vector to swap with.
+    # 
     def swap(v: SparseLVector) -> None: pass
 
     ##
@@ -209,10 +226,14 @@ class SparseLVector(Boost.Python.instance):
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the stored value, or to the zero element if no entry exists at <em>i</em>. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> int: pass
 
     ##

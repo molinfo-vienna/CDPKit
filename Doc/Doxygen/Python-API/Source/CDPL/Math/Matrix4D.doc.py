@@ -25,19 +25,21 @@
 class Matrix4D(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %Matrix4D instance.
+    # \brief Constructs a zero-initialized \f$ M \times N \f$ matrix.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %Matrix4D instance.
-    # \param v 
+    # \brief Constructs an \f$ M \times N \f$ matrix with every element initialized to <em>v</em>.
+    # 
+    # \param v The initial element value.
     # 
     def __init__(v: float) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %Matrix4D instance \a m.
-    # \param m The \c %Matrix4D instance to copy.
+    # \brief Constructs a copy of the fixed-size matrix <em>m</em>.
+    # 
+    # \param m The fixed-size matrix to copy.
     # 
     def __init__(m: Matrix4D) -> None: pass
 
@@ -72,9 +74,10 @@ class Matrix4D(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Sets every element of the matrix to the value <em>v</em>.
+    # 
+    # \param v The fill value.
+    # 
     def clear(v: float = 0.0) -> None: pass
 
     ##
@@ -90,36 +93,46 @@ class Matrix4D(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
-    # \param e The \c %ConstFMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
-    # \param e The \c %ConstDMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
-    # \param e The \c %ConstLMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
-    # \param e The \c %ConstULMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %Matrix4D instance \a m.
-    # \param m The \c %Matrix4D instance to copy.
+    # \brief Copy-assigns the elements of <em>m</em> to this fixed-size matrix.
+    # 
+    # \param m The source fixed-size matrix.
+    # 
     # \return \a self
     # 
     def assign(m: Matrix4D) -> Matrix4D: pass
@@ -132,21 +145,24 @@ class Matrix4D(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the fixed row count <em>M</em>.
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the fixed column count <em>N</em>.
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the matrix is empty (<em>M</em> or <em>N</em> is zero).
+    # 
+    # \return <tt>True</tt> if either <em>M</em> or <em>N</em> is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -164,9 +180,10 @@ class Matrix4D(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    #
+    # \brief Swaps the contents of this fixed-size matrix with those of <em>m</em>.
+    # 
+    # \param m The fixed-size matrix to swap with.
+    # 
     def swap(m: Matrix4D) -> None: pass
 
     ##
@@ -178,11 +195,15 @@ class Matrix4D(Boost.Python.instance):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
+    # \brief Returns a reference to the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __call__(i: int, j: int) -> float: pass
 
     ##

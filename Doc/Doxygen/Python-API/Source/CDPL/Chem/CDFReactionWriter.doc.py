@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
+# \brief A writer for reaction data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFReactionWriter(ReactionWriterBase):
 

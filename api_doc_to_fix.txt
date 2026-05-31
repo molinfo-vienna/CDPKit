@@ -1,15 +1,2 @@
-Libs/C++/Include/CDPL/Math/MatrixProxy.hpp‎        (still missing class, class member typedef/function and free function docs)
-Libs/C++/Include/CDPL/Math/VectorAdapter.hpp‎        (still missing class, class member typedef/function and free function docs)
-
--------
-
-‎Libs/C++/Include/CDPL/Math/Functional.hpp         (still missing class and class member typedef/function docs)
-‎Libs/C++/Include/CDPL/Math/Grid.hpp               (still missing class member typedef/function docs)
-‎Libs/C++/Include/CDPL/Math/Matrix.hpp             (still missing class member typedef/function docs)
-Libs/C++/Include/CDPL/Math/MatrixAdapter.hpp      (still missing class member function docs)
-Libs/C++/Include/CDPL/Math/MatrixExpression.hpp‎   (still missing class and class member typedef/function docs)
-‎Libs/C++/Include/CDPL/Math/Quaternion.hpp‎         (still missing class member typedef/function docs)
-Libs/C++/Include/CDPL/Math/RegularSpatialGrid.hpp (still missing class member function docs)
-Libs/C++/Include/CDPL/Math/Vector.hpp‎             (still missing class member typedef/function and namespace-level typedef docs)
-Libs/C++/Include/CDPL/Math/QuaternionExpression.hpp (still missing class and class member typedef/function docs)
-Libs/C++/Include/CDPL/Math/VectorExpression.hpp‎     (still missing class and class member typedef/function docs)
+Libs/C++/Include/CDPL/Chem/BasicMolecule.hpp (missing class doc)
+‎Libs/C++/Include/CDPL/Math/Functional.hpp    (starting with line 1759 member function docs miss parameter and return value docs)

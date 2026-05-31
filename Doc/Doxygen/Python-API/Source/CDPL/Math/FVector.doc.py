@@ -82,16 +82,18 @@ class FVector(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \param n 
-    # \param v 
-    #
+    # \brief Resizes the vector to <em>n</em> elements.
+    # 
+    # \param n The new element count.
+    # \param v The fill value for newly added elements.
+    # 
     def resize(n: int, v: float = 0.0) -> None: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Sets every element of the vector to the value <em>v</em>.
+    # 
+    # \param v The fill value.
+    # 
     def clear(v: float = 0.0) -> None: pass
 
     ##
@@ -107,36 +109,46 @@ class FVector(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> FVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> FVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> FVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> FVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FVector instance \a v.
-    # \param v The \c %FVector instance to copy.
+    # \brief Move-assigns the elements of <em>v</em> to this vector.
+    # 
+    # \param v The source vector (left in a valid but unspecified state).
+    # 
     # \return \a self
     # 
     def assign(v: FVector) -> FVector: pass
@@ -149,15 +161,17 @@ class FVector(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the vector is empty.
+    # 
+    # \return <tt>True</tt> if the vector contains no elements, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current element count.
+    # 
+    # \return The number of elements.
+    # 
     def getSize() -> int: pass
 
     ##
@@ -174,9 +188,10 @@ class FVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Swaps the contents of this vector with those of <em>v</em>.
+    # 
+    # \param v The vector to swap with.
+    # 
     def swap(v: FVector) -> None: pass
 
     ##
@@ -215,10 +230,14 @@ class FVector(Boost.Python.instance):
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> float: pass
 
     ##

@@ -25,19 +25,21 @@
 class Vector3UL(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %Vector3UL instance.
+    # \brief Constructs a zero-initialized <em>N-element</em> vector.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %Vector3UL instance \a v.
-    # \param v The \c %Vector3UL instance to copy.
+    # \brief Constructs a copy of the fixed-size vector <em>v</em>.
+    # 
+    # \param v The fixed-size vector to copy.
     # 
     def __init__(v: Vector3UL) -> None: pass
 
     ##
-    # \brief Initializes the \c %Vector3UL instance.
-    # \param v 
+    # \brief Constructs a copy of the fixed-size vector <em>v</em>.
+    # 
+    # \param v The fixed-size vector to copy.
     # 
     def __init__(v: int) -> None: pass
 
@@ -72,9 +74,10 @@ class Vector3UL(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Sets every element of the vector to the value <em>v</em>.
+    # 
+    # \param v The fill value.
+    # 
     def clear(v: int = 0) -> None: pass
 
     ##
@@ -90,36 +93,46 @@ class Vector3UL(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> Vector3UL: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> Vector3UL: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> Vector3UL: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> Vector3UL: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %Vector3UL instance \a v.
-    # \param v The \c %Vector3UL instance to copy.
+    # \brief Copy-assigns the elements of <em>v</em> to this fixed-size vector.
+    # 
+    # \param v The source fixed-size vector.
+    # 
     # \return \a self
     # 
     def assign(v: Vector3UL) -> Vector3UL: pass
@@ -132,15 +145,17 @@ class Vector3UL(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the vector is empty (<em>N</em> is zero).
+    # 
+    # \return <tt>True</tt> if <em>N</em> is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the fixed element count <em>N</em>.
+    # 
+    # \return The element count.
+    # 
     def getSize() -> int: pass
 
     ##
@@ -157,9 +172,10 @@ class Vector3UL(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Swaps the contents of this fixed-size vector with those of <em>v</em>.
+    # 
+    # \param v The fixed-size vector to swap with.
+    # 
     def swap(v: Vector3UL) -> None: pass
 
     ##
@@ -198,10 +214,14 @@ class Vector3UL(Boost.Python.instance):
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> int: pass
 
     ##

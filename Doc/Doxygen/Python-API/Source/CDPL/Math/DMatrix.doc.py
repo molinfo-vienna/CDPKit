@@ -84,18 +84,20 @@ class DMatrix(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \param n 
-    # \param preserve 
-    # \param v 
-    #
+    # \brief Resizes the matrix to \f$ m \times n \f$ elements.
+    # 
+    # \param m The new row count.
+    # \param n The new column count.
+    # \param preserve If <tt>True</tt>, existing element values at indices that remain valid are kept; if <tt>False</tt>, all elements are set to <em>v</em>.
+    # \param v The fill value for newly added elements (or for all elements when <em>preserve</em> is <tt>False</tt>).
+    # 
     def resize(m: int, n: int, preserve: bool = True, v: float = 0.0) -> None: pass
 
     ##
-    # \brief 
-    # \param v 
-    #
+    # \brief Sets every element of the matrix to the value <em>v</em>.
+    # 
+    # \param v The fill value.
+    # 
     def clear(v: float = 0.0) -> None: pass
 
     ##
@@ -111,36 +113,46 @@ class DMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
-    # \param e The \c %ConstFMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
-    # \param e The \c %ConstDMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
-    # \param e The \c %ConstLMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
-    # \param e The \c %ConstULMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DMatrix instance \a m.
-    # \param m The \c %DMatrix instance to copy.
+    # \brief Move-assigns the contents of <em>m</em> to this matrix.
+    # 
+    # \param m The source matrix (left in a valid but unspecified state).
+    # 
     # \return \a self
     # 
     def assign(m: DMatrix) -> DMatrix: pass
@@ -153,21 +165,24 @@ class DMatrix(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of columns.
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the matrix is empty.
+    # 
+    # \return <tt>True</tt> if the underlying storage holds no elements, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -185,9 +200,10 @@ class DMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    #
+    # \brief Swaps the contents of this matrix with those of <em>m</em>.
+    # 
+    # \param m The matrix to swap with.
+    # 
     def swap(m: DMatrix) -> None: pass
 
     ##
@@ -199,11 +215,15 @@ class DMatrix(Boost.Python.instance):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
+    # \brief Returns a reference to the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __call__(i: int, j: int) -> float: pass
 
     ##

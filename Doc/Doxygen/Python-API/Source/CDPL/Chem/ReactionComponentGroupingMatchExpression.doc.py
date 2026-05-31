@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief ReactionComponentGroupingMatchExpression.
+# \brief Chem.MatchExpression that constrains reaction substructure matches by the query's component-level groupings (typically derived from the parenthesization of a <em>Daylight SMARTS</em> [\ref SMARTS] pattern).
 # 
-# \see [\ref SMARTS]
+# Required component groupings are passed as a Chem.FragmentList: query atoms inside the same fragment must map to a single target component, and query atoms in different fragments must map to different target components. \see [\ref SMARTS]
 # 
 class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
 

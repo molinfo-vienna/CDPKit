@@ -40,7 +40,7 @@ class AtomMatchConstraint(Boost.Python.instance):
     BOND_COUNT = 9
 
     ##
-    # \brief Specifies a constraint on the fromal charge of the target atom.
+    # \brief Specifies a constraint on the formal charge of the target atom.
     # 
     CHARGE = 4
 

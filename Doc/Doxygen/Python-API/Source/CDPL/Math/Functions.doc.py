@@ -1161,59 +1161,75 @@ def herm(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 def herm(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: ConstDVectorExpression) -> ConstDHomogenousCoordsAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: ConstFVectorExpression) -> ConstFHomogenousCoordsAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: ConstLVectorExpression) -> ConstLHomogenousCoordsAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: ConstULVectorExpression) -> ConstULHomogenousCoordsAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: DVectorExpression) -> DHomogenousCoordsAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: FVectorExpression) -> FHomogenousCoordsAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: LVectorExpression) -> LHomogenousCoordsAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant homogeneous-coordinates view of <em>e</em>.
+# 
 def homog(e: ULVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
 ##
@@ -2435,59 +2451,75 @@ def prod(e1: ConstULVectorExpression, e2: ConstULMatrixExpression, c: ULVectorEx
 def pythag(a: float, b: float) -> float: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: ConstDVectorExpression) -> ConstDVectorQuaternionAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: ConstFVectorExpression) -> ConstFVectorQuaternionAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: ConstLVectorExpression) -> ConstLVectorQuaternionAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: ConstULVectorExpression) -> ConstULVectorQuaternionAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: DVectorExpression) -> DVectorQuaternionAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: FVectorExpression) -> FVectorQuaternionAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: LVectorExpression) -> LVectorQuaternionAdapter: pass
 
 ##
-# \brief 
-# \param e 
-# \return 
-#
+# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# 
+# \param e The vector expression to wrap.
+# 
+# \return A constant quaternion view of <em>e</em>.
+# 
 def quat(e: ULVectorExpression) -> ULVectorQuaternionAdapter: pass
 
 ##
@@ -2575,23 +2607,27 @@ def quat(t1: int, t2: int, t3: int) -> LQuaternion: pass
 def quat(t1: int, t2: int, t3: int, t4: int) -> LQuaternion: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstDMatrixExpression, r1: Range, r2: Range) -> ConstDMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstDMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstDMatrixRange: pass
 
 ##
@@ -2616,23 +2652,27 @@ def range(e: ConstDVectorExpression, r: Range) -> ConstDVectorRange: pass
 def range(e: ConstDVectorExpression, start: int, stop: int) -> ConstDVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstFMatrixExpression, r1: Range, r2: Range) -> ConstFMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstFMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstFMatrixRange: pass
 
 ##
@@ -2657,23 +2697,27 @@ def range(e: ConstFVectorExpression, r: Range) -> ConstFVectorRange: pass
 def range(e: ConstFVectorExpression, start: int, stop: int) -> ConstFVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstLMatrixExpression, r1: Range, r2: Range) -> ConstLMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstLMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstLMatrixRange: pass
 
 ##
@@ -2698,23 +2742,27 @@ def range(e: ConstLVectorExpression, r: Range) -> ConstLVectorRange: pass
 def range(e: ConstLVectorExpression, start: int, stop: int) -> ConstLVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstULMatrixExpression, r1: Range, r2: Range) -> ConstULMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ConstULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstULMatrixRange: pass
 
 ##
@@ -2739,23 +2787,27 @@ def range(e: ConstULVectorExpression, r: Range) -> ConstULVectorRange: pass
 def range(e: ConstULVectorExpression, start: int, stop: int) -> ConstULVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: DMatrixExpression, r1: Range, r2: Range) -> DMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: DMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> DMatrixRange: pass
 
 ##
@@ -2780,23 +2832,27 @@ def range(e: DVectorExpression, r: Range) -> DVectorRange: pass
 def range(e: DVectorExpression, start: int, stop: int) -> DVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: FMatrixExpression, r1: Range, r2: Range) -> FMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: FMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> FMatrixRange: pass
 
 ##
@@ -2821,23 +2877,27 @@ def range(e: FVectorExpression, r: Range) -> FVectorRange: pass
 def range(e: FVectorExpression, start: int, stop: int) -> FVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: LMatrixExpression, r1: Range, r2: Range) -> LMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: LMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> LMatrixRange: pass
 
 ##
@@ -2862,23 +2922,27 @@ def range(e: LVectorExpression, r: Range) -> LVectorRange: pass
 def range(e: LVectorExpression, start: int, stop: int) -> LVectorRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param r1 
-# \param r2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param r1 The row index range.
+# \param r2 The column index range.
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ULMatrixExpression, r1: Range, r2: Range) -> ULMatrixRange: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stop1 
-# \param start2 
-# \param stop2 
-# \return 
-#
+# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param start1 The first row index (inclusive).
+# \param stop1 The last row index (exclusive).
+# \param start2 The first column index (inclusive).
+# \param stop2 The last column index (exclusive).
+# 
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# 
 def range(e: ULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ULMatrixRange: pass
 
 ##
@@ -3079,67 +3143,83 @@ def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstL
 def rotate(e1: ConstULQuaternionExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: ConstDMatrixExpression, i: int) -> ConstDMatrixRow: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: ConstFMatrixExpression, i: int) -> ConstFMatrixRow: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: ConstLMatrixExpression, i: int) -> ConstLMatrixRow: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: ConstULMatrixExpression, i: int) -> ConstULMatrixRow: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: DMatrixExpression, i: int) -> DMatrixRow: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: FMatrixExpression, i: int) -> FMatrixRow: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: LMatrixExpression, i: int) -> LMatrixRow: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
+# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param i The zero-based row index.
+# 
+# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# 
 def row(e: ULMatrixExpression, i: int) -> ULMatrixRow: pass
 
 ##
@@ -3153,25 +3233,29 @@ def row(e: ULMatrixExpression, i: int) -> ULMatrixRow: pass
 def sign(a: float, b: float) -> float: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstDMatrixExpression, s1: Slice, s2: Slice) -> ConstDMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstDMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstDMatrixSlice: pass
 
 ##
@@ -3197,25 +3281,29 @@ def slice(e: ConstDVectorExpression, s: Slice) -> ConstDVectorSlice: pass
 def slice(e: ConstDVectorExpression, start: int, stride: int, size: int) -> ConstDVectorSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstFMatrixExpression, s1: Slice, s2: Slice) -> ConstFMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstFMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstFMatrixSlice: pass
 
 ##
@@ -3241,25 +3329,29 @@ def slice(e: ConstFVectorExpression, s: Slice) -> ConstFVectorSlice: pass
 def slice(e: ConstFVectorExpression, start: int, stride: int, size: int) -> ConstFVectorSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstLMatrixExpression, s1: Slice, s2: Slice) -> ConstLMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstLMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstLMatrixSlice: pass
 
 ##
@@ -3285,25 +3377,29 @@ def slice(e: ConstLVectorExpression, s: Slice) -> ConstLVectorSlice: pass
 def slice(e: ConstLVectorExpression, start: int, stride: int, size: int) -> ConstLVectorSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstULMatrixExpression, s1: Slice, s2: Slice) -> ConstULMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ConstULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstULMatrixSlice: pass
 
 ##
@@ -3329,25 +3425,29 @@ def slice(e: ConstULVectorExpression, s: Slice) -> ConstULVectorSlice: pass
 def slice(e: ConstULVectorExpression, start: int, stride: int, size: int) -> ConstULVectorSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: DMatrixExpression, s1: Slice, s2: Slice) -> DMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: DMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> DMatrixSlice: pass
 
 ##
@@ -3373,25 +3473,29 @@ def slice(e: DVectorExpression, s: Slice) -> DVectorSlice: pass
 def slice(e: DVectorExpression, start: int, stride: int, size: int) -> DVectorSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: FMatrixExpression, s1: Slice, s2: Slice) -> FMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: FMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> FMatrixSlice: pass
 
 ##
@@ -3417,25 +3521,29 @@ def slice(e: FVectorExpression, s: Slice) -> FVectorSlice: pass
 def slice(e: FVectorExpression, start: int, stride: int, size: int) -> FVectorSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: LMatrixExpression, s1: Slice, s2: Slice) -> LMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: LMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> LMatrixSlice: pass
 
 ##
@@ -3461,25 +3569,29 @@ def slice(e: LVectorExpression, s: Slice) -> LVectorSlice: pass
 def slice(e: LVectorExpression, start: int, stride: int, size: int) -> LVectorSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param s1 
-# \param s2 
-# \return 
-#
+# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param s1 The row slice (start, stride, size).
+# \param s2 The column slice (start, stride, size).
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ULMatrixExpression, s1: Slice, s2: Slice) -> ULMatrixSlice: pass
 
 ##
-# \brief 
-# \param e 
-# \param start1 
-# \param stride1 
-# \param size1 
-# \param start2 
-# \param stride2 
-# \param size2 
-# \return 
-#
+# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# 
+# \param e The matrix expression.
+# \param start1 The start row index.
+# \param stride1 The row stride.
+# \param size1 The number of rows.
+# \param start2 The start column index.
+# \param stride2 The column stride.
+# \param size2 The number of columns.
+# 
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# 
 def slice(e: ULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ULMatrixSlice: pass
 
 ##

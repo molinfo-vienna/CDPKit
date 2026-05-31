@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Atom2DCoordinatesCalculator.
+# \brief Generates 2D coordinates for the atoms of a molecular graph using a layout algorithm that combines ring-system templates, chain extension, and substituent placement.
+# 
+# The resulting coordinates are deterministic, free of intra-molecular overlaps where possible, and respect bond stereochemistry. The calculator is reusable: after calling calculate() the instance can be applied to further molecular graphs.
 # 
 class Atom2DCoordinatesCalculator(Boost.Python.instance):
 

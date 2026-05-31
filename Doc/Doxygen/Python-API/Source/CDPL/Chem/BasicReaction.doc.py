@@ -53,14 +53,12 @@ class BasicReaction(Reaction):
     def addComponent(role: int) -> BasicMolecule: pass
 
     ##
-    # \brief Creates a new reaction component with the specified role that is a copy of the molecule <em>mol</em>.
+    # \brief Creates a new reaction component with the supplied <em>role</em>, optionally copying the contents of <em>mol</em>.
     # 
-    # \param role A flag specifying the reaction role of the new component (see namespace Chem.ReactionRole).
-    # \param mol Specifies a molecule that provides the data for the new reaction component (note that only explicitly assigned molecule, atom and bond properties will be copied).
+    # \param role The Chem.ReactionRole flag indicating where the new component is inserted (REACTANT, AGENT, or PRODUCT).
+    # \param mol The molecule whose contents are copied into the new component, or <tt>nullptr</tt> to create an empty component.
     # 
-    # \return A reference to the newly created component molecule. 
-    # 
-    # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
+    # \return A reference to the newly added component.
     # 
     def addComponent(role: int, mol: Molecule) -> BasicMolecule: pass
 

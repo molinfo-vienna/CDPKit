@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BondOrderCalculator.
+# \brief Perceives bond orders of a molecular graph from its 3D structure and atom connectivity.
+# 
+# The calculator combines per-atom geometry analysis (linear, trigonal-planar, tetrahedral, ...), functional-group substructure matching, conjugated &pi;-system detection, and free-valence accounting to assign single, double, or triple bonds. By default only bonds whose order is currently undefined are assigned; this can be toggled via undefinedOnly().
 # 
 class BondOrderCalculator(Boost.Python.instance):
 

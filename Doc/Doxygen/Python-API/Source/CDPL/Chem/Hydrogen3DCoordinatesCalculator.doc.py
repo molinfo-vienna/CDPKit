@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Hydrogen3DCoordinatesCalculator.
+# \brief Generates 3D coordinates for the hydrogen atoms of a molecular graph from the existing positions of their heavy-atom neighbors.
+# 
+# For every hydrogen-bearing center the calculator picks a coordination geometry (linear, trigonal-planar, tetrahedral, square-planar, trigonal-/pentagonal-bipyramidal or octahedral) consistent with the heavy-atom neighborhood and places the hydrogens at appropriate template positions, oriented to avoid clashes with already-positioned substituents. Heavy-atom coordinates can be supplied through user-defined accessor functions; by default only hydrogens without 3D coordinates are placed (see undefinedOnly()).
 # 
 class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
 
@@ -97,9 +99,12 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     def getAtom3DCoordinatesCheckFunction() -> AtomPredicate: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Initializes the calculator for the molecular graph <em>molgraph</em> (perceives hydrogen-bearing centers and prepares the working state) without yet writing any coordinates.
+    # 
+    # Call calculate(Math.Vector3DArray&, bool) afterwards to perform the placement.
+    # 
+    # \param molgraph The molecular graph for which to set up the calculation.
+    # 
     def setup(molgraph: MolecularGraph) -> None: pass
 
     ##
@@ -112,10 +117,11 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     def calculate(molgraph: MolecularGraph, coords: Math.Vector3DArray, init_coords: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \param init_coords 
-    #
+    # \brief Calculates 3D-coordinates for the hydrogen atoms of the molecular graph previously specified via setup().
+    # 
+    # \param coords An array containing the heavy atom and calculated hydrogen 3D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
+    # \param init_coords If <tt>False</tt>, defined atom coordinates are already present in <em>coords</em> and thus won't get assigned again.
+    # 
     def calculate(coords: Math.Vector3DArray, init_coords: bool = True) -> None: pass
 
     objectID = property(getObjectID)

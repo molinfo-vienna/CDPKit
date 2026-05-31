@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief KetoEnolTautomerizationRule.
+# \brief Chem.TautomerizationRule implementation that enumerates the keto/enol tautomers of an \f$ R_2C{-}C(=O)R' \rightleftharpoons RC=C(OH)R' \f$ system.
 # 
 class KetoEnolTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \c %KetoEnolTautomerization instance.
+    # \brief Constructs the rule and registers the underlying keto/enol substructure pattern.
     # 
     def __init__() -> None: pass
 

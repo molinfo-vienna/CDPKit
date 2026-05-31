@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief ImineEnamineTautomerizationRule.
+# \brief Chem.TautomerizationRule implementation that enumerates the imine/enamine tautomers of an \f$ R_2C=N{-}CHR_2 \rightleftharpoons R_2CH{-}N=CR_2 \f$ system.
 # 
 class ImineEnamineTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \c %ImineEnamineTautomerization instance.
+    # \brief Constructs the rule and registers the underlying imine/enamine substructure pattern.
     # 
     def __init__() -> None: pass
 

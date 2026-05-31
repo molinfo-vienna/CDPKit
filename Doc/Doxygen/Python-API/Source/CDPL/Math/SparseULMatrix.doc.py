@@ -25,20 +25,24 @@
 class SparseULMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %SparseULMatrix instance.
+    # \brief Constructs an empty sparse matrix (zero rows, zero columns, no stored entries).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %SparseULMatrix instance \a m.
-    # \param m The \c %SparseULMatrix instance to copy.
+    # \brief Move-constructs a sparse matrix from <em>m</em> (<em>m</em> is left in a valid empty state).
+    # 
+    # \param m The sparse matrix to move from.
     # 
     def __init__(m: SparseULMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c %SparseULMatrix instance.
-    # \param m 
-    # \param n 
+    # \brief Constructs a sparse matrix of size \f$ m \times n \f$ with no stored entries.
+    # 
+    # \param m The number of rows.
+    # \param n The number of columns.
+    # 
+    # \throw Base.SizeError if \f$ m \cdot n \f$ exceeds the underlying container's capacity.
     # 
     def __init__(m: int, n: int) -> None: pass
 
@@ -73,21 +77,25 @@ class SparseULMatrix(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \param n 
-    #
+    # \brief Resizes the logical dimensions to \f$ m \times n \f$, dropping any stored entries that fall outside the new bounds.
+    # 
+    # \param m The new row count.
+    # \param n The new column count.
+    # 
+    # \throw Base.SizeError if \f$ m \cdot n \f$ exceeds the underlying container's capacity.
+    # 
     def resize(m: int, n: int) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all explicitly stored entries (the logical dimensions remain unchanged).
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of explicitly stored (non-default) entries.
+    # 
+    # \return The number of stored entries.
+    # 
     def getNumElements() -> int: pass
 
     ##
@@ -103,36 +111,46 @@ class SparseULMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
-    # \param e The \c %ConstFMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match <em>e</em> and assigns its elements without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> SparseULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
-    # \param e The \c %ConstDMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match <em>e</em> and assigns its elements without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> SparseULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
-    # \param e The \c %ConstLMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match <em>e</em> and assigns its elements without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> SparseULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
-    # \param e The \c %ConstULMatrixExpression instance to copy.
+    # \brief Resizes this matrix to match <em>e</em> and assigns its elements without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> SparseULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %SparseULMatrix instance \a m.
-    # \param m The \c %SparseULMatrix instance to copy.
+    # \brief Move-assigns the contents of <em>m</em> to this sparse matrix.
+    # 
+    # \param m The source sparse matrix (left in a valid but unspecified state).
+    # 
     # \return \a self
     # 
     def assign(m: SparseULMatrix) -> SparseULMatrix: pass
@@ -145,21 +163,24 @@ class SparseULMatrix(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the logical number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the logical number of columns.
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the matrix is empty (zero rows or zero columns).
+    # 
+    # \return <tt>True</tt> if either dimension is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -177,9 +198,10 @@ class SparseULMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    #
+    # \brief Swaps the contents of this sparse matrix with those of <em>m</em>.
+    # 
+    # \param m The sparse matrix to swap with.
+    # 
     def swap(m: SparseULMatrix) -> None: pass
 
     ##
@@ -191,11 +213,15 @@ class SparseULMatrix(Boost.Python.instance):
     def setElement(i: int, j: int, v: int) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
+    # \brief Returns a reference to the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return A reference to the stored value, or to the zero element if no entry exists at (<em>i</em>, <em>j</em>). 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __call__(i: int, j: int) -> int: pass
 
     ##

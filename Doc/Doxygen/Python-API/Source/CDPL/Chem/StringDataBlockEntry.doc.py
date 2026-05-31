@@ -113,30 +113,38 @@ class StringDataBlockEntry(Boost.Python.instance):
     def __ne__(entry: StringDataBlockEntry) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self <= entry</tt>.
-    # \param entry The \c %StringDataBlockEntry instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Less-than-or-equal comparison operator (lexicographic ordering by header, then data).
+    # 
+    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # 
+    # \return <tt>True</tt> if <tt>self</tt> is less than or equal to <em>entry</em>, and <tt>False</tt> otherwise.
     # 
     def __le__(entry: StringDataBlockEntry) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self >= entry</tt>.
-    # \param entry The \c %StringDataBlockEntry instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Greater-than-or-equal comparison operator (lexicographic ordering by header, then data).
+    # 
+    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # 
+    # \return <tt>True</tt> if <tt>self</tt> is greater than or equal to <em>entry</em>, and <tt>False</tt> otherwise.
     # 
     def __ge__(entry: StringDataBlockEntry) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self < entry</tt>.
-    # \param entry The \c %StringDataBlockEntry instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Less-than comparison operator (lexicographic ordering by header, then data).
+    # 
+    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # 
+    # \return <tt>True</tt> if <tt>self</tt> is less than <em>entry</em>, and <tt>False</tt> otherwise.
     # 
     def __lt__(entry: StringDataBlockEntry) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self > entry</tt>.
-    # \param entry The \c %StringDataBlockEntry instance to be compared with.
-    # \return The result of the comparison operation.
+    # \brief Greater-than comparison operator (lexicographic ordering by header, then data).
+    # 
+    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # 
+    # \return <tt>True</tt> if <tt>self</tt> is greater than <em>entry</em>, and <tt>False</tt> otherwise.
     # 
     def __gt__(entry: StringDataBlockEntry) -> bool: pass
 

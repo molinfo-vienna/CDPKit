@@ -176,10 +176,11 @@ class StringDataBlock(Boost.Python.instance):
     def setElement(idx: int, value: StringDataBlockEntry) -> None: pass
 
     ##
-    # \brief 
-    # \param header 
-    # \param data 
-    #
+    # \brief Appends a new entry with the supplied data header and content to the block.
+    # 
+    # \param header The data header of the new entry.
+    # \param data The data content of the new entry.
+    # 
     def addEntry(header: str, data: str) -> None: pass
 
     ##
