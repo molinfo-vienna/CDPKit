@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Entity3D.
+# \brief Base class for objects that have a position in 3D space (e.g. Chem.Atom and Chem.Feature).
 # 
 class Entity3D(Base.PropertyContainer):
 

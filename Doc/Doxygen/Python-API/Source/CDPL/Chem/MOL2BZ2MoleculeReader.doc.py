@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the bzip2-compressed Tripos MOL2 format.
+# 
 class MOL2BZ2MoleculeReader(MoleculeReaderBase):
 
     ##

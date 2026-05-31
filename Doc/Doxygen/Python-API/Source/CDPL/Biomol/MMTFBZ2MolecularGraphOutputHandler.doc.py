@@ -22,6 +22,8 @@
 ##
 # \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
+# \since 1.2
+# 
 class MMTFBZ2MolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief KekuleStructureCalculator.
+# \brief Assigns an alternating single/double bond pattern (Kekulé structure) to the previously undefined bonds of a molecular graph (typically used to convert aromatic-bond annotations into explicit single/double bonds).
 # 
 class KekuleStructureCalculator(Boost.Python.instance):
 

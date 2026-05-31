@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief TautomerizationRule.
+# \brief Abstract base class for all tautomerization rule implementations used by the Chem.TautomerGenerator.
 # 
 class TautomerizationRule(Boost.Python.instance):
 
@@ -42,16 +42,19 @@ class TautomerizationRule(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the rule's identifier (see Chem.TautomerizationType).
+    # 
+    # \return The rule identifier.
+    # 
     def getID() -> int: pass
 
     ##
-    # \brief 
-    # \param parent_molgraph 
-    # \return 
-    #
+    # \brief Sets the parent molecular graph for which the rule is to enumerate tautomers.
+    # 
+    # \param parent_molgraph The molecular graph to be tautomerized.
+    # 
+    # \return <tt>True</tt> if the rule applies to <em>parent_molgraph</em> and the iteration has been initialized, and <tt>False</tt> otherwise.
+    # 
     def setup(parent_molgraph: MolecularGraph) -> bool: pass
 
     ##
@@ -64,9 +67,10 @@ class TautomerizationRule(Boost.Python.instance):
     def generate(tautomer: Molecule) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a deep copy of this rule instance.
+    # 
+    # \return A shared reference to the cloned rule.
+    # 
     def clone() -> TautomerizationRule: pass
 
     objectID = property(getObjectID)

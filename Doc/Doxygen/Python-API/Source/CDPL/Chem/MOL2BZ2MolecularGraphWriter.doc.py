@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the bzip2-compressed Tripos MOL2 format.
+# 
 class MOL2BZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

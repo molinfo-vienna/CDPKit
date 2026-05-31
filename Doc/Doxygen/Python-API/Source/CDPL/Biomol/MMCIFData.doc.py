@@ -27,13 +27,14 @@
 class MMCIFData(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single data item (column) of an mmCIF category, holding an ordered list of string values.
+    # 
     class Item(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Item instance.
-        # \param name 
+        # \brief Constructs an empty <tt>Item</tt> with the data-item name <em>name</em>.
+        # 
+        # \param name The fully-qualified mmCIF data-item name (including the <tt>_</tt> prefix).
         # 
         def __init__(name: str) -> None: pass
 
@@ -69,8 +70,8 @@ class MMCIFData(Boost.Python.instance):
         def swap(cat: Item) -> None: pass
 
         ##
-        # \brief 
-        #
+        # \brief Removes all values from the item.
+        # 
         def clear() -> None: pass
 
         ##
@@ -81,35 +82,47 @@ class MMCIFData(Boost.Python.instance):
         def getName() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the number of values stored in the item.
+        # 
+        # \return The value count.
+        # 
         def getNumValues() -> int: pass
 
         ##
-        # \brief 
-        # \param index 
-        # \return 
-        #
+        # \brief Returns the value at the zero-based index <em>index</em>.
+        # 
+        # \param index The zero-based value index.
+        # 
+        # \return A reference to the value. 
+        # 
+        # \throw Base.IndexError if the number of values is zero or <em>index</em> is not in the range [0, getNumValues() - 1].
+        # 
         def getValue(index: int) -> str: pass
 
         ##
-        # \brief 
-        # \param index 
-        # \param value 
-        #
+        # \brief Replaces the value at the zero-based index <em>index</em> by moving <em>value</em>.
+        # 
+        # \param index The zero-based value index.
+        # \param value The new value to move-assign.
+        # 
+        # \throw Base.IndexError if the number of values is zero or <em>index</em> is not in the range [0, getNumValues() - 1].
+        # 
         def setValue(index: int, value: str) -> None: pass
 
         ##
-        # \brief 
-        # \param value 
-        #
+        # \brief Appends the value <em>value</em> to the item's value list by moving.
+        # 
+        # \param value The value to move-append.
+        # 
         def addValue(value: str) -> None: pass
 
         ##
-        # \brief 
-        # \param index 
-        #
+        # \brief Removes the value at the zero-based index <em>index</em>.
+        # 
+        # \param index The zero-based value index.
+        # 
+        # \throw Base.IndexError if the number of values is zero or <em>index</em> is not in the range [0, getNumValues() - 1].
+        # 
         def removeValue(index: int) -> None: pass
 
         ##
@@ -145,13 +158,14 @@ class MMCIFData(Boost.Python.instance):
         name = property(getName)
 
     ##
-    # \brief 
-    #
+    # \brief A single mmCIF data category, holding an ordered list of data items (columns).
+    # 
     class Category(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Category instance.
-        # \param name 
+        # \brief Constructs an empty <tt>Category</tt> with the name <em>name</em>.
+        # 
+        # \param name The mmCIF category name (without the leading underscore).
         # 
         def __init__(name: str) -> None: pass
 
@@ -195,67 +209,89 @@ class MMCIFData(Boost.Python.instance):
         def getName() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the number of items in the category.
+        # 
+        # \return The item count.
+        # 
         def getNumItems() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the number of value rows of the category, i.e. the maximum value count over all items.
+        # 
+        # \return The category's value-row count.
+        # 
         def getNumValueRows() -> int: pass
 
         ##
-        # \brief 
-        #
+        # \brief Removes all items from the category.
+        # 
         def clear() -> None: pass
 
         ##
-        # \brief 
-        # \param cat 
-        #
+        # \brief Swaps the contents of this category with those of <em>cat</em>.
+        # 
+        # \param cat The other category to swap with.
+        # 
         def swap(cat: Category) -> None: pass
 
         ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
+        # \brief Returns a mutable reference to the item with name <em>name</em>, or <tt>nullptr</tt> if no matching item exists.
+        # 
+        # \param name The fully-qualified data-item name (including the <tt>_</tt> prefix).
+        # 
+        # \return A mutable reference to the matching item, or <tt>nullptr</tt>.
+        # 
         def findItem(name: str) -> Item: pass
 
         ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
+        # \brief Appends a new (empty) item with name <em>name</em> to the category.
+        # 
+        # If an item with the given name already exists, no new item is added and a reference to the existing item is returned.
+        # 
+        # \param name The fully-qualified data-item name (including the <tt>_</tt> prefix).
+        # 
+        # \return A mutable reference to the added (or pre-existing) item.
+        # 
         def addItem(name: str) -> Item: pass
 
         ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
+        # \brief Returns a reference to the item with name <em>name</em>.
+        # 
+        # \param name The fully-qualified data-item name (including the <tt>_</tt> prefix).
+        # 
+        # \return A reference to the matching item. 
+        # 
+        # \throw Base.ItemNotFound if no matching item exists.
+        # 
         def getItem(name: str) -> Item: pass
 
         ##
-        # \brief 
-        # \param index 
-        # \return 
-        #
+        # \brief Returns a reference to the item at the zero-based index <em>index</em>.
+        # 
+        # \param index The zero-based item index.
+        # 
+        # \return A reference to the item. 
+        # 
+        # \throw Base.IndexError if the number of items is zero or <em>index</em> is not in the range [0, getNumItems() - 1].
+        # 
         def getItem(index: int) -> Item: pass
 
         ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
+        # \brief Removes the item with name <em>name</em>.
+        # 
+        # \param name The fully-qualified data-item name (including the <tt>_</tt> prefix).
+        # 
+        # \return <tt>True</tt> if a matching item was removed, and <tt>False</tt> if no such item existed.
+        # 
         def removeItem(name: str) -> bool: pass
 
         ##
-        # \brief 
-        # \param index 
-        #
+        # \brief Removes the item at the zero-based index <em>index</em>.
+        # 
+        # \param index The zero-based item index.
+        # 
+        # \throw Base.IndexError if the number of items is zero or <em>index</em> is not in the range [0, getNumItems() - 1].
+        # 
         def removeItem(index: int) -> None: pass
 
         ##
@@ -313,7 +349,7 @@ class MMCIFData(Boost.Python.instance):
         name = property(getName)
 
     ##
-    # \brief Initializes the \c %MMCIFData instance.
+    # \brief Constructs an empty <tt>MMCIFData</tt> instance with an empty data-block ID.
     # 
     def __init__() -> None: pass
 
@@ -324,8 +360,9 @@ class MMCIFData(Boost.Python.instance):
     def __init__(data: MMCIFData) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMCIFData instance.
-    # \param id 
+    # \brief Constructs an empty <tt>MMCIFData</tt> instance with the data-block ID <em>id</em>.
+    # 
+    # \param id The mmCIF data-block ID.
     # 
     def __init__(id: str) -> None: pass
 
@@ -342,21 +379,24 @@ class MMCIFData(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the mmCIF data-block ID.
+    # 
+    # \return A reference to the data-block ID.
+    # 
     def getID() -> str: pass
 
     ##
-    # \brief 
-    # \param id 
-    #
+    # \brief Sets the mmCIF data-block ID to <em>id</em>.
+    # 
+    # \param id The new data-block ID.
+    # 
     def setID(id: str) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of categories in the data record.
+    # 
+    # \return The category count.
+    # 
     def getNumCategories() -> int: pass
 
     ##
@@ -367,62 +407,85 @@ class MMCIFData(Boost.Python.instance):
     def assign(data: MMCIFData) -> MMCIFData: pass
 
     ##
-    # \brief 
-    # \param data 
-    #
+    # \brief Swaps the contents of this data record with those of <em>data</em>.
+    # 
+    # \param data The other data record to swap with.
+    # 
     def swap(data: MMCIFData) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all categories from the data record (without changing the data-block ID).
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param name 
-    # \return 
-    #
+    # \brief Returns a mutable reference to the category with name <em>name</em>, or <tt>nullptr</tt> if no matching category exists.
+    # 
+    # \param name The mmCIF category name (without the leading underscore).
+    # 
+    # \return A mutable reference to the matching category, or <tt>nullptr</tt>.
+    # 
     def findCategory(name: str) -> Category: pass
 
     ##
-    # \brief 
-    # \param name 
-    # \param front 
-    # \return 
-    #
+    # \brief Adds a new (empty) category with name <em>name</em> to the data record.
+    # 
+    # If a category with the given name already exists, no new category is added and a reference to the existing category is returned.
+    # 
+    # \param name The mmCIF category name (without the leading underscore).
+    # \param front If <tt>True</tt>, the new category is inserted at the front of the category list; if <tt>False</tt>, it is appended.
+    # 
+    # \return A mutable reference to the added (or pre-existing) category.
+    # 
     def addCategory(name: str, front: bool = False) -> Category: pass
 
     ##
-    # \brief 
-    # \param name 
-    # \return 
-    #
+    # \brief Returns a reference to the category with name <em>name</em>.
+    # 
+    # \param name The mmCIF category name (without the leading underscore).
+    # 
+    # \return A reference to the matching category. 
+    # 
+    # \throw Base.ItemNotFound if no matching category exists.
+    # 
     def getCategory(name: str) -> Category: pass
 
     ##
-    # \brief 
-    # \param index 
-    # \return 
-    #
+    # \brief Returns a reference to the category at the zero-based index <em>index</em>.
+    # 
+    # \param index The zero-based category index.
+    # 
+    # \return A reference to the category. 
+    # 
+    # \throw Base.IndexError if the number of categories is zero or <em>index</em> is not in the range [0, getNumCategories() - 1].
+    # 
     def getCategory(index: int) -> Category: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a mutable reference to the last category of the data record.
+    # 
+    # \return A mutable reference to the last category. 
+    # 
+    # \throw Base.OperationFailed if the data record is empty.
+    # 
     def lastCategory() -> Category: pass
 
     ##
-    # \brief 
-    # \param name 
-    # \return 
-    #
+    # \brief Removes the category with name <em>name</em>.
+    # 
+    # \param name The mmCIF category name (without the leading underscore).
+    # 
+    # \return <tt>True</tt> if a matching category was removed, and <tt>False</tt> if no such category existed.
+    # 
     def removeCategory(name: str) -> bool: pass
 
     ##
-    # \brief 
-    # \param index 
-    #
+    # \brief Removes the category at the zero-based index <em>index</em>.
+    # 
+    # \param index The zero-based category index.
+    # 
+    # \throw Base.IndexError if the number of categories is zero or <em>index</em> is not in the range [0, getNumCategories() - 1].
+    # 
     def removeCategory(index: int) -> None: pass
 
     ##

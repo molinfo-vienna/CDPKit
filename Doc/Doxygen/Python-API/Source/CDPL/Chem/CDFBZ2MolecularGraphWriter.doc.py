@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the bzip2-compressed native I/O format of the <em>CDPL</em>.
+# 
 class CDFBZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

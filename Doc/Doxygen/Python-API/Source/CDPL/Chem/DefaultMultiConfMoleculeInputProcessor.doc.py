@@ -20,24 +20,25 @@
 #
 
 ##
-# \brief MultiConfMoleculeInputProcessor.
+# \brief Default Chem.MultiConfMoleculeInputProcessor implementation that detects multi-conformer input by comparing atom and bond properties (and optionally molecule names) between successive input molecules.
 # 
 class DefaultMultiConfMoleculeInputProcessor(MultiConfMoleculeInputProcessor):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the default set of atom properties considered when checking conformer compatibility.
+    # 
     DEF_ATOM_PROPERTY_FLAGS = 14
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the default set of bond properties considered when checking conformer compatibility.
+    # 
     DEF_BOND_PROPERTY_FLAGS = 2
 
     ##
-    # \brief Initializes the \c %DefaultMultiConfMoleculeInputProcessor instance.
-    # \param comp_names 
-    # \param atom_flags 
-    # \param bond_flags 
+    # \brief Constructs the processor with the given property-comparison configuration.
+    # 
+    # \param comp_names If <tt>True</tt>, the molecule name property must agree between successive conformers.
+    # \param atom_flags The bitwise-OR combination of Chem.AtomPropertyFlag values that must agree atom-wise.
+    # \param bond_flags The bitwise-OR combination of Chem.BondPropertyFlag values that must agree bond-wise.
     # 
     def __init__(comp_names: bool = False, atom_flags: int = 14, bond_flags: int = 2) -> None: pass

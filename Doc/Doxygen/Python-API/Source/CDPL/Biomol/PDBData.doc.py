@@ -30,223 +30,223 @@ class PDBData(Boost.Python.instance):
     class RecordType(Boost.Python.enum):
 
         ##
-        # \brief HEADER.
-        #
+        # \brief PDB <tt>HEADER</tt> record (structure classification, deposition date, PDB ID).
+        # 
         HEADER = 0
 
         ##
-        # \brief OBSLTE.
-        #
+        # \brief PDB <tt>OBSLTE</tt> record (PDB IDs that have replaced this entry).
+        # 
         OBSLTE = 1
 
         ##
-        # \brief TITLE.
-        #
+        # \brief PDB <tt>TITLE</tt> record (title of the entry).
+        # 
         TITLE = 2
 
         ##
-        # \brief SPLIT.
-        #
+        # \brief PDB <tt>SPLIT</tt> record (list of entries that together form the complete structure).
+        # 
         SPLIT = 3
 
         ##
-        # \brief CAVEAT.
-        #
+        # \brief PDB <tt>CAVEAT</tt> record (caveats about the structure).
+        # 
         CAVEAT = 4
 
         ##
-        # \brief COMPND.
-        #
+        # \brief PDB <tt>COMPND</tt> record (description of macromolecular contents).
+        # 
         COMPND = 5
 
         ##
-        # \brief SOURCE.
-        #
+        # \brief PDB <tt>SOURCE</tt> record (source organism information).
+        # 
         SOURCE = 6
 
         ##
-        # \brief KEYWDS.
-        #
+        # \brief PDB <tt>KEYWDS</tt> record (keywords describing the entry).
+        # 
         KEYWDS = 7
 
         ##
-        # \brief EXPDTA.
-        #
+        # \brief PDB <tt>EXPDTA</tt> record (experimental technique).
+        # 
         EXPDTA = 8
 
         ##
-        # \brief AUTHOR.
-        #
+        # \brief PDB <tt>AUTHOR</tt> record (authors of the entry).
+        # 
         AUTHOR = 9
 
         ##
-        # \brief REVDAT.
-        #
+        # \brief PDB <tt>REVDAT</tt> record (revision history of the entry).
+        # 
         REVDAT = 10
 
         ##
-        # \brief SPRSDE.
-        #
+        # \brief PDB <tt>SPRSDE</tt> record (PDB IDs that this entry supersedes).
+        # 
         SPRSDE = 11
 
         ##
-        # \brief JRNL.
-        #
+        # \brief PDB <tt>JRNL</tt> record (literature citation associated with the entry).
+        # 
         JRNL = 12
 
         ##
-        # \brief REMARK.
-        #
+        # \brief PDB <tt>REMARK</tt> record (free-text annotations).
+        # 
         REMARK = 13
 
         ##
-        # \brief DBREF.
-        #
+        # \brief PDB <tt>DBREF</tt> record (cross-references to external sequence databases).
+        # 
         DBREF = 14
 
         ##
-        # \brief DBREF1.
-        #
+        # \brief PDB <tt>DBREF1</tt> record (first part of a two-line database cross-reference).
+        # 
         DBREF1 = 15
 
         ##
-        # \brief DBREF2.
-        #
+        # \brief PDB <tt>DBREF2</tt> record (second part of a two-line database cross-reference).
+        # 
         DBREF2 = 16
 
         ##
-        # \brief SEQADV.
-        #
+        # \brief PDB <tt>SEQADV</tt> record (sequence differences relative to the reference database).
+        # 
         SEQADV = 17
 
         ##
-        # \brief SEQRES.
-        #
+        # \brief PDB <tt>SEQRES</tt> record (residue sequence of biopolymer chains).
+        # 
         SEQRES = 18
 
         ##
-        # \brief MODRES.
-        #
+        # \brief PDB <tt>MODRES</tt> record (modified residues).
+        # 
         MODRES = 19
 
         ##
-        # \brief HET.
-        #
+        # \brief PDB <tt>HET</tt> record (non-standard residue identification).
+        # 
         HET = 20
 
         ##
-        # \brief FORMUL.
-        #
+        # \brief PDB <tt>FORMUL</tt> record (chemical formula of non-standard residues).
+        # 
         FORMUL = 21
 
         ##
-        # \brief HETNAM.
-        #
+        # \brief PDB <tt>HETNAM</tt> record (chemical name of non-standard residues).
+        # 
         HETNAM = 22
 
         ##
-        # \brief HETSYN.
-        #
+        # \brief PDB <tt>HETSYN</tt> record (synonyms for non-standard residues).
+        # 
         HETSYN = 23
 
         ##
-        # \brief HELIX.
-        #
+        # \brief PDB <tt>HELIX</tt> record (helix secondary-structure annotations).
+        # 
         HELIX = 24
 
         ##
-        # \brief SHEET.
-        #
+        # \brief PDB <tt>SHEET</tt> record (sheet secondary-structure annotations).
+        # 
         SHEET = 25
 
         ##
-        # \brief TURN.
-        #
+        # \brief PDB <tt>TURN</tt> record (turn secondary-structure annotations).
+        # 
         TURN = 26
 
         ##
-        # \brief SSBOND.
-        #
+        # \brief PDB <tt>SSBOND</tt> record (disulfide bond annotations).
+        # 
         SSBOND = 27
 
         ##
-        # \brief LINK.
-        #
+        # \brief PDB <tt>LINK</tt> record (covalent links between non-standard residues).
+        # 
         LINK = 28
 
         ##
-        # \brief CISPEP.
-        #
+        # \brief PDB <tt>CISPEP</tt> record (cis peptide bond annotations).
+        # 
         CISPEP = 29
 
         ##
-        # \brief SITE.
-        #
+        # \brief PDB <tt>SITE</tt> record (groups of residues describing an active or binding site).
+        # 
         SITE = 30
 
         ##
-        # \brief CRYST1.
-        #
+        # \brief PDB <tt>CRYST1</tt> record (unit cell parameters and space group).
+        # 
         CRYST1 = 31
 
         ##
-        # \brief MTRIX1.
-        #
+        # \brief PDB <tt>MTRIX1</tt> record (first row of a non-crystallographic-symmetry transformation matrix).
+        # 
         MTRIX1 = 32
 
         ##
-        # \brief MTRIX2.
-        #
+        # \brief PDB <tt>MTRIX2</tt> record (second row of a non-crystallographic-symmetry transformation matrix).
+        # 
         MTRIX2 = 33
 
         ##
-        # \brief MTRIX3.
-        #
+        # \brief PDB <tt>MTRIX3</tt> record (third row of a non-crystallographic-symmetry transformation matrix).
+        # 
         MTRIX3 = 34
 
         ##
-        # \brief ORIGX1.
-        #
+        # \brief PDB <tt>ORIGX1</tt> record (first row of the orthogonal-to-submitted-coordinates transformation).
+        # 
         ORIGX1 = 35
 
         ##
-        # \brief ORIGX2.
-        #
+        # \brief PDB <tt>ORIGX2</tt> record (second row of the orthogonal-to-submitted-coordinates transformation).
+        # 
         ORIGX2 = 36
 
         ##
-        # \brief ORIGX3.
-        #
+        # \brief PDB <tt>ORIGX3</tt> record (third row of the orthogonal-to-submitted-coordinates transformation).
+        # 
         ORIGX3 = 37
 
         ##
-        # \brief SCALE1.
-        #
+        # \brief PDB <tt>SCALE1</tt> record (first row of the orthogonal-to-fractional-coordinates transformation).
+        # 
         SCALE1 = 38
 
         ##
-        # \brief SCALE2.
-        #
+        # \brief PDB <tt>SCALE2</tt> record (second row of the orthogonal-to-fractional-coordinates transformation).
+        # 
         SCALE2 = 39
 
         ##
-        # \brief SCALE3.
-        #
+        # \brief PDB <tt>SCALE3</tt> record (third row of the orthogonal-to-fractional-coordinates transformation).
+        # 
         SCALE3 = 40
 
         ##
-        # \brief STRUCTURE_ID.
-        #
+        # \brief Derived: the 4-character PDB identifier extracted from the <tt>HEADER</tt> record.
+        # 
         STRUCTURE_ID = 41
 
         ##
-        # \brief DEPOSITION_DATE.
-        #
+        # \brief Derived: the deposition date extracted from the <tt>HEADER</tt> record.
+        # 
         DEPOSITION_DATE = 42
 
         ##
-        # \brief RESOLUTION.
-        #
+        # \brief Derived: the experimental resolution extracted from <tt>REMARK</tt> records.
+        # 
         RESOLUTION = 43
 
     ##

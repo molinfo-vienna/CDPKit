@@ -25,12 +25,12 @@
 class ResidueDictionary(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single residue dictionary entry.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty (default-initialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -41,17 +41,17 @@ class ResidueDictionary(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs and initializes a <tt>Entry</tt> instance with the given data.
+        # \brief Constructs and initializes an <tt>Entry</tt> instance with the given data.
         # 
-        # \param code The three letter code (TLC) of the residue.
-        # \param rep_code 
-        # \param rep_by_code 
-        # \param parent_code The TLC of the parent residue (since 1.2).
-        # \param one_letter_code The one letter code (since 1.2).
-        # \param obsolete 
-        # \param name 
-        # \param type 
-        # \param struc_ret_func
+        # \param code The three-letter code (TLC) of the residue.
+        # \param rep_code The TLC of the residue this entry replaces (or an empty string if it does not replace any other residue).
+        # \param rep_by_code The TLC of the residue that replaces this one (or an empty string if it has not been replaced).
+        # \param parent_code The TLC of the parent residue (or an empty string if there is no parent).
+        # \param one_letter_code The one-letter residue code (or an empty string if not defined).
+        # \param obsolete <tt>True</tt> if the residue type is obsolete, and <tt>False</tt> otherwise.
+        # \param name The full residue name.
+        # \param type The residue type (see Biomol.ResidueType).
+        # \param struc_ret_func The function used to retrieve the residue structure on demand.
         # 
         def __init__(code: str, rep_code: str, rep_by_code: str, parent_code: str, one_letter_code: str, obsolete: bool, name: str, type: int, struc_ret_func: MolecularGraphPointerStringFunctor) -> None: pass
 
@@ -75,57 +75,70 @@ class ResidueDictionary(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the three-letter code (TLC) of the residue.
+        # 
+        # \return A reference to the three-letter residue code.
+        # 
         def getCode() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the TLC of the residue this entry replaces.
+        # 
+        # \return A reference to the replaced-residue code (or an empty string if this entry does not replace any other residue).
+        # 
         def getReplacedCode() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the TLC of the residue that replaces this one.
+        # 
+        # \return A reference to the replacing-residue code (or an empty string if this entry has not been replaced).
+        # 
         def getReplacedByCode() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the TLC of the parent residue.
+        # 
+        # \return A reference to the parent-residue code (or an empty string if there is no parent). 
+        # 
+        # \since 1.2
+        # 
         def getParentCode() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the one-letter residue code.
+        # 
+        # \return A reference to the one-letter residue code (or an empty string if not defined). 
+        # 
+        # \since 1.2
+        # 
         def getOneLetterCode() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the residue type (see Biomol.ResidueType).
+        # 
+        # \return The residue type identifier.
+        # 
         def getType() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the full residue name.
+        # 
+        # \return A reference to the residue name.
+        # 
         def getName() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the residue type described by this entry is obsolete.
+        # 
+        # \return <tt>True</tt> if the residue type is obsolete, and <tt>False</tt> otherwise.
+        # 
         def isObsolete() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Retrieves the residue structure via the configured structure-retrieval function.
+        # 
+        # \return A shared reference to the residue structure (or an empty reference if no structure could be retrieved).
+        # 
         def getStructure() -> Chem.MolecularGraph: pass
 
         objectID = property(getObjectID)
@@ -172,40 +185,49 @@ class ResidueDictionary(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param entry 
-    #
+    # \brief Adds (or overwrites) the dictionary entry <em>entry</em> by moving its data.
+    # 
+    # \param entry The entry to add.
+    # 
+    # \since 1.2
+    # 
     def addEntry(entry: Entry) -> None: pass
 
     ##
-    # \brief 
-    # \param code 
-    # \return 
-    #
+    # \brief Tells whether the dictionary contains an entry for the residue with three-letter code <em>code</em>.
+    # 
+    # \param code The residue three-letter code.
+    # 
+    # \return <tt>True</tt> if a matching entry exists, and <tt>False</tt> otherwise.
+    # 
     def containsEntry(code: str) -> bool: pass
 
     ##
-    # \brief 
-    # \param code 
-    #
+    # \brief Removes the dictionary entry for the residue with three-letter code <em>code</em>.
+    # 
+    # \param code The residue three-letter code.
+    # 
     def removeEntry(code: str) -> None: pass
 
     ##
-    # \brief 
-    # \param code 
-    # \return 
-    #
+    # \brief Returns the dictionary entry for the residue with three-letter code <em>code</em>.
+    # 
+    # \param code The residue three-letter code.
+    # 
+    # \return A reference to the matching entry (or to an empty default-constructed entry if no matching entry exists).
+    # 
     def getEntry(code: str) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the dictionary.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries in the dictionary.
+    # 
+    # \return The entry count.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -215,8 +237,8 @@ class ResidueDictionary(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the built-in default residue dictionary entries.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -227,17 +249,18 @@ class ResidueDictionary(Boost.Python.instance):
     def assign(dict: ResidueDictionary) -> ResidueDictionary: pass
 
     ##
-    # \brief 
-    # \param dict 
-    #
+    # \brief Replaces the process-wide default dictionary by <em>dict</em>.
+    # 
+    # \param dict The new default dictionary (a <tt>nullptr</tt> resets to the built-in default).
+    # 
     @staticmethod
     def set(dict: ResidueDictionary) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default dictionary (lazily initialized on first call).
+    # 
+    # \return A reference to the default-dictionary shared reference.
+    # 
     @staticmethod
     def get(: ) -> ResidueDictionary: pass
 
@@ -290,10 +313,12 @@ class ResidueDictionary(Boost.Python.instance):
     def getName(code: str) -> str: pass
 
     ##
-    # \brief 
-    # \param code 
-    # \return 
-    #
+    # \brief Tells whether the residue with three-letter code <em>code</em> is a standard biopolymer residue (amino acid or nucleotide).
+    # 
+    # \param code The residue three-letter code.
+    # 
+    # \return <tt>True</tt> if the residue is a standard biopolymer residue, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isStdResidue(code: str) -> bool: pass
 

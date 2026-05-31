@@ -25,66 +25,66 @@
 class MOL2ChargeType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the charge type is unknown.
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the file contains no charge information.
+    # 
     NO_CHARGES = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies Del Re partial atomic charges.
+    # 
     DEL_RE = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies Gasteiger partial atomic charges.
+    # 
     GASTEIGER = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies Gasteiger-Hückel partial atomic charges.
+    # 
     GAST_HUCK = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies Hückel partial atomic charges.
+    # 
     HUCKEL = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies Pullman partial atomic charges.
+    # 
     PULLMAN = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Gaussian 80</em> derived partial atomic charges.
+    # 
     GAUSS80 = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>AMPAC</em> derived partial atomic charges.
+    # 
     AMPAC = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies Mulliken partial atomic charges.
+    # 
     MULLIKEN = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies dictionary-derived charges.
+    # 
     DICT = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies MMFF94 partial atomic charges.
+    # 
     MMFF94 = 11
 
     ##
-    # \brief 
-    #
+    # \brief Specifies user-supplied charges.
+    # 
     USER = 12

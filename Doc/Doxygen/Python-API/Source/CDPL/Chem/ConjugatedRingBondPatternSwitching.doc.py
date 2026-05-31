@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief ConjugatedRingBondPatternSwitching.
+# \brief Chem.TautomerizationRule implementation that enumerates tautomers obtained by switching the single/double bond pattern of conjugated rings (e.g. the two Kekulé forms of benzene).
 # 
 # \since 1.3
 # 

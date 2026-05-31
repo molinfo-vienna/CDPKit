@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief BondReactionCenterStatusMatchExpression.
+# \brief Chem.MatchExpression that constrains target bonds by their reaction-center status (see Chem.ReactionCenterStatus).
 # 
 class BondReactionCenterStatusMatchExpression(BondMatchExpression):
 

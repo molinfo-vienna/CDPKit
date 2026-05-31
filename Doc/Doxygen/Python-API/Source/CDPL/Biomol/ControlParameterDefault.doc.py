@@ -35,73 +35,83 @@ class ControlParameterDefault(Boost.Python.instance):
     CHECK_LINE_LENGTH = False
 
     ##
-    # \brief 
-    #
+    # \brief Default value (= empty shared reference) for the control-parameter Biomol.ControlParameter.RESIDUE_DICTIONARY (a <tt>nullptr</tt> selects the built-in default dictionary).
+    # 
+    # \since 1.2
+    # 
     RESIDUE_DICTIONARY = None
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.COMBINE_INTERFERING_RESIDUE_COORDINATES.
+    # 
     COMBINE_INTERFERING_RESIDUE_COORDINATES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.APPLY_DICT_FORMAL_CHARGES.
+    # 
+    # \since 1.2
+    # 
     APPLY_DICT_FORMAL_CHARGES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.APPLY_DICT_ATOM_TYPES.
+    # 
+    # \since 1.2
+    # 
     APPLY_DICT_ATOM_TYPES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.CALC_MISSING_FORMAL_CHARGES.
+    # 
+    # \since 1.2
+    # 
     CALC_MISSING_FORMAL_CHARGES = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.PERCEIVE_MISSING_BOND_ORDERS.
+    # 
+    # \since 1.2
+    # 
     PERCEIVE_MISSING_BOND_ORDERS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES.
+    # 
     PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES.
+    # 
     PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES.
+    # 
     PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_IGNORE_CONECT_RECORDS.
+    # 
     PDB_IGNORE_CONECT_RECORDS = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS.
+    # 
     PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_IGNORE_FORMAL_CHARGE_FIELD.
+    # 
     PDB_IGNORE_FORMAL_CHARGE_FIELD = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_EVALUATE_MASTER_RECORD.
+    # 
     PDB_EVALUATE_MASTER_RECORD = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_TRUNCATE_LINES.
+    # 
     PDB_TRUNCATE_LINES = False
 
     ##
@@ -110,41 +120,55 @@ class ControlParameterDefault(Boost.Python.instance):
     PDB_WRITE_FORMAL_CHARGES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.PDB_OUTPUT_CONECT_RECORDS.
+    # 
+    # \since 1.2
+    # 
     PDB_OUTPUT_CONECT_RECORDS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS.
+    # 
+    # \since 1.2
+    # 
     PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER.
+    # 
+    # \since 1.2
+    # 
     PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER = False
 
     ##
-    # \brief 
-    #
+    # \brief Default value (= Biomol.PDBFormatVersion.V3) for the control-parameter Biomol.ControlParameter.PDB_FORMAT_VERSION.
+    # 
     PDB_FORMAT_VERSION = 3
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.MMCIF_APPLY_DICT_ATOM_BONDING.
+    # 
+    # \since 1.2
+    # 
     MMCIF_APPLY_DICT_ATOM_BONDING = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Biomol.ControlParameter.MMCIF_APPLY_DICT_BOND_ORDERS.
+    # 
+    # \since 1.2
+    # 
     MMCIF_APPLY_DICT_BOND_ORDERS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Biomol.ControlParameter.MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP.
+    # 
+    # \since 1.2
+    # 
     MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP = False
 
     ##
-    # \brief 
-    #
+    # \brief Default value (= empty function object) for the control-parameter Biomol.ControlParameter.MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION.
+    # 
+    # \since 1.2
+    # 
     MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION = _HIDDEN_VALUE_

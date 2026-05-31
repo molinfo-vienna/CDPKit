@@ -155,18 +155,20 @@ def get3DCoordinates(entity: Entity3D) -> Math.Vector3D: pass
 def clear3DCoordinates(entity: Entity3D) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords 
-#
+# \brief Sets the 3D coordinates of the entities of <em>cntnr</em> from <em>coords</em>.
+# 
+# \param cntnr The entity 3D container whose coordinates are to be updated.
+# \param coords The input coordinates array (must contain at least one position per entity in <em>cntnr</em>).
+# 
 def set3DCoordinates(cntnr: Entity3DContainer, coords: Math.Vector3DArray) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords 
-# \param append 
-#
+# \brief Stores the 3D coordinates of the entities of <em>cntnr</em> in <em>coords</em>.
+# 
+# \param cntnr The entity 3D container providing the source coordinates.
+# \param coords The output coordinates array.
+# \param append If <tt>True</tt>, the entity coordinates are appended to <em>coords</em>; if <tt>False</tt>, <em>coords</em> is cleared first.
+# 
 def get3DCoordinates(cntnr: Entity3DContainer, coords: Math.Vector3DArray, append: bool = False) -> None: pass
 
 ##
@@ -3013,12 +3015,16 @@ def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, u
 def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, substr_ptn: MolecularGraph, fix_bond_stereo: bool = True) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ref_entities 
-# \param ref_coords 
-# \return 
-#
+# \brief Rigid-body aligns the 3D coordinates of <em>cntnr</em> to the reference geometry defined by the entity-coordinate pair (<em>ref_entities</em>, <em>ref_coords</em>).
+# 
+# \param cntnr The entity 3D container whose coordinates are to be aligned.
+# \param ref_entities The reference entity 3D container.
+# \param ref_coords The reference coordinates corresponding to the entities of <em>ref_entities</em>.
+# 
+# \return <tt>True</tt> if the alignment succeeded, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def align3DCoordinates(cntnr: Entity3DContainer, ref_entities: Entity3DContainer, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
@@ -3168,12 +3174,13 @@ def calcBondStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 def calcBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction, reset: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param min 
-# \param max 
-# \param reset 
-#
+# \brief Calculates the axis-aligned bounding box of the 3D coordinates of <em>cntnr</em>.
+# 
+# \param cntnr The entity 3D container.
+# \param min The output vector receiving the per-axis minimum coordinates.
+# \param max The output vector receiving the per-axis maximum coordinates.
+# \param reset If <tt>True</tt>, <em>min</em> and <em>max</em> are reset before the calculation; if <tt>False</tt>, the box is extended to include the existing range.
+# 
 def calcBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D, reset: bool = True) -> None: pass
 
 ##
@@ -3215,11 +3222,13 @@ def calcCenterOfMass(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunctio
 def calcCentroid(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: Math.Vector3D) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the geometric centroid of the entities of <em>cntnr</em>.
+# 
+# \param cntnr The entity 3D container.
+# \param ctr The output centroid vector.
+# 
+# \return <tt>True</tt> if the centroid could be calculated (i.e. <em>cntnr</em> is non-empty), and <tt>False</tt> otherwise.
+# 
 def calcCentroid(cntnr: Entity3DContainer, ctr: Math.Vector3D) -> bool: pass
 
 ##
@@ -3258,10 +3267,11 @@ def calcFormalCharge(atom: Atom, molgraph: MolecularGraph) -> int: pass
 def calcFormalCharges(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mtx 
-#
+# \brief Calculates the inter-entity geometric distance matrix for the entities of <em>cntnr</em>.
+# 
+# \param cntnr The entity 3D container providing the source coordinates.
+# \param mtx The output matrix receiving the calculated pairwise distances.
+# 
 def calcGeometricalDistanceMatrix(cntnr: Entity3DContainer, mtx: Math.DMatrix) -> None: pass
 
 ##
@@ -3400,20 +3410,22 @@ def canonicalize(molgraph: MolecularGraph, atoms: bool = True, atom_nbrs: bool =
 def canonicalize(molgraph: MolecularGraph, func: BoolAtom2Functor, atoms: bool = True, atom_nbrs: bool = True, bonds: bool = True, bond_atoms: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param mol 
-# \param coords_func 
-# \param dist_tol 
-# \param atom_idx_offs 
-#
+# \brief Adds bonds between atoms of <em>mol</em> whose 3D distance (obtained via <em>coords_func</em>) falls within the covalent-radii sum plus <em>dist_tol</em>.
+# 
+# \param mol The molecule whose atoms are to be connected.
+# \param coords_func The function used to retrieve the 3D coordinates of an atom.
+# \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
+# \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to <em>atom_idx_offs</em>.
+# 
 def connectAtoms(mol: Molecule, coords_func: Atom3DCoordinatesFunction, dist_tol: float = 0.3, atom_idx_offs: int = 0) -> None: pass
 
 ##
-# \brief 
-# \param mol 
-# \param dist_tol 
-# \param atom_idx_offs 
-#
+# \brief Adds bonds between atoms of <em>mol</em> whose 3D distance falls within the covalent-radii sum plus <em>dist_tol</em>.
+# 
+# \param mol The molecule whose atoms are to be connected.
+# \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
+# \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to <em>atom_idx_offs</em> (useful to extend an existing bonding network without re-evaluating already-connected atoms).
+# 
 def connectAtoms(mol: Molecule, dist_tol: float = 0.3, atom_idx_offs: int = 0) -> None: pass
 
 ##
@@ -3511,13 +3523,17 @@ def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset
 def editSubstructures(molgraph: MolecularGraph, result_mol: Molecule, search_ptns: str, result_ptn: str, exclude_ptns: str = '') -> int: pass
 
 ##
-# \brief 
-# \param mol 
-# \param search_ptns 
-# \param result_ptn 
-# \param exclude_ptns 
-# \return 
-#
+# \brief Edits the molecule <em>mol</em> by replacing all substructures matching the SMARTS search patterns in <em>search_ptns</em> with the SMARTS replacement pattern <em>result_ptn</em>, optionally skipping matches that also match <em>exclude_ptns</em>.
+# 
+# \param mol The molecule to edit in place.
+# \param search_ptns A whitespace-separated list of SMARTS patterns matching the substructures to replace.
+# \param result_ptn The SMARTS replacement pattern.
+# \param exclude_ptns A whitespace-separated list of SMARTS patterns matching substructures that shall be retained even if they match <em>search_ptns</em>.
+# 
+# \return The number of replaced substructures. 
+# 
+# \since 1.3
+# 
 def editSubstructures(mol: Molecule, search_ptns: str, result_ptn: str, exclude_ptns: str = '') -> int: pass
 
 ##
@@ -3768,12 +3784,14 @@ def initSubstructureSearchTarget(rxn: Reaction, overwrite: bool) -> None: pass
 def insideBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param min 
-# \param max 
-# \return 
-#
+# \brief Tells whether all entities of <em>cntnr</em> lie within the axis-aligned box defined by <em>min</em> and <em>max</em>.
+# 
+# \param cntnr The entity 3D container.
+# \param min The per-axis minimum coordinates of the box.
+# \param max The per-axis maximum coordinates of the box.
+# 
+# \return <tt>True</tt> if every entity coordinate is inside the box, and <tt>False</tt> otherwise.
+# 
 def insideBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
 ##
@@ -3800,12 +3818,14 @@ def insideBoundingBox(min: Math.Vector3D, max: Math.Vector3D, coords: Math.Vecto
 def intersectsBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param min 
-# \param max 
-# \return 
-#
+# \brief Tells whether at least one entity of <em>cntnr</em> lies within the axis-aligned box defined by <em>min</em> and <em>max</em>.
+# 
+# \param cntnr The entity 3D container.
+# \param min The per-axis minimum coordinates of the box.
+# \param max The per-axis maximum coordinates of the box.
+# 
+# \return <tt>True</tt> if any entity coordinate is inside the box, and <tt>False</tt> otherwise.
+# 
 def intersectsBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
 ##
@@ -4197,31 +4217,35 @@ def perceiveSybylType(bond: Bond, molgraph: MolecularGraph) -> int: pass
 def perceiveSymmetryClasses(molgraph: MolecularGraph, overwrite: bool, atom_flags: int = 2147483648, bond_flags: int = 2147483648, inc_impl_h: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param frag 
-# \param pred 
-#
+# \brief Removes all atoms of the fragment <em>frag</em> for which the predicate <em>pred</em> returns <tt>True</tt>.
+# 
+# \param frag The fragment to filter in place.
+# \param pred The atom predicate to evaluate.
+# 
 def removeAtomsIf(frag: Fragment, pred: AtomPredicate) -> None: pass
 
 ##
-# \brief 
-# \param mol 
-# \param pred 
-#
+# \brief Removes all atoms of the molecule <em>mol</em> for which the predicate <em>pred</em> returns <tt>True</tt>.
+# 
+# \param mol The molecule to filter in place.
+# \param pred The atom predicate to evaluate.
+# 
 def removeAtomsIf(mol: Molecule, pred: AtomPredicate) -> None: pass
 
 ##
-# \brief 
-# \param frag 
-# \param pred 
-#
+# \brief Removes all atoms of the fragment <em>frag</em> for which the predicate <em>pred</em> returns <tt>False</tt>.
+# 
+# \param frag The fragment to filter in place.
+# \param pred The atom predicate to evaluate.
+# 
 def removeAtomsIfNot(frag: Fragment, pred: AtomPredicate) -> None: pass
 
 ##
-# \brief 
-# \param mol 
-# \param pred 
-#
+# \brief Removes all atoms of the molecule <em>mol</em> for which the predicate <em>pred</em> returns <tt>False</tt>.
+# 
+# \param mol The molecule to filter in place.
+# \param pred The atom predicate to evaluate.
+# 
 def removeAtomsIfNot(mol: Molecule, pred: AtomPredicate) -> None: pass
 
 ##
@@ -4251,10 +4275,11 @@ def sybylToAtomType(sybyl_type: int) -> int: pass
 def transform2DCoordinates(cntnr: AtomContainer, mtx: Math.Matrix3D) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mtx 
-#
+# \brief Transforms the 3D coordinates of the entities of <em>cntnr</em> by the affine matrix <em>mtx</em>.
+# 
+# \param cntnr The entity 3D container whose coordinates are to be transformed.
+# \param mtx The \f$ 4 \times 4 \f$ affine transformation matrix.
+# 
 def transform3DCoordinates(cntnr: Entity3DContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##

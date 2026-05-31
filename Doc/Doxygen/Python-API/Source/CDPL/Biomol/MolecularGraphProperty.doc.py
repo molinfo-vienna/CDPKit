@@ -25,36 +25,50 @@
 class MolecularGraphProperty(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the residue code (three-letter code) of the residue described by the molecular graph.
+    # 
+    # <b>Value Type:</b> std::string
+    # 
     RESIDUE_CODE = CDPL.Base.LookupKey('RESIDUE_CODE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the residue sequence number of the residue described by the molecular graph.
+    # 
+    # <b>Value Type:</b> long
+    # 
     RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey('RESIDUE_SEQUENCE_NUMBER')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the residue insertion code of the residue described by the molecular graph.
+    # 
+    # <b>Value Type:</b> char
+    # 
     RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey('RESIDUE_INSERTION_CODE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the identifier of the chain the molecular graph belongs to.
+    # 
+    # <b>Value Type:</b> std::string
+    # 
     CHAIN_ID = CDPL.Base.LookupKey('CHAIN_ID')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the model number assigned to the molecular graph.
+    # 
+    # <b>Value Type:</b> std::size_t
+    # 
     MODEL_NUMBER = CDPL.Base.LookupKey('MODEL_NUMBER')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the associated PDB data record.
+    # 
+    # <b>Value Type:</b> Biomol.PDBData.SharedPointer
+    # 
     PDB_DATA = CDPL.Base.LookupKey('PDB_DATA')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the associated mmCIF data record.
+    # 
+    # <b>Value Type:</b> Biomol.MMCIFData.SharedPointer \since 1.2
+    # 
     MMCIF_DATA = CDPL.Base.LookupKey('MMCIF_DATA')

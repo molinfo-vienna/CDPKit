@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief KeteneYnolTautomerizationRule.
+# \brief Chem.PatternBasedTautomerizationRule implementation that enumerates ketene/ynol tautomers (Chem.TautomerizationType.KETENE_YNOL).
 # 
 class KeteneYnolTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \c %KeteneYnolTautomerization instance.
+    # \brief Constructs the rule and registers the built-in ketene/ynol tautomerization patterns.
     # 
     def __init__() -> None: pass
 

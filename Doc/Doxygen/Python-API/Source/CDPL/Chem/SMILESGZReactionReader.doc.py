@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for reaction data in the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESGZReactionReader(ReactionReaderBase):
 
     ##

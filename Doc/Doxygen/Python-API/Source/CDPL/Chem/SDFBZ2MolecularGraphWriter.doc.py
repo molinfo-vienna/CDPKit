@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the bzip2-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class SDFBZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

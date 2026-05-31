@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESGZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief AtomConformer3DCoordinatesFunctor.
+# \brief Helper-functor for retrieving the 3D coordinates of an atom for a specific conformer (via the Chem.AtomProperty.CONFORMER_COORDINATES_3D conformer-array property).
 # 
 class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
 
@@ -31,8 +31,9 @@ class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
     def __init__(func: AtomConformer3DCoordinatesFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %AtomConformer3DCoordinatesFunctor instance.
-    # \param conf_idx 
+    # \brief Constructs the functor for retrieving the coordinates of conformer <em>conf_idx</em>.
+    # 
+    # \param conf_idx The zero-based conformer index to retrieve.
     # 
     def __init__(conf_idx: int) -> None: pass
 

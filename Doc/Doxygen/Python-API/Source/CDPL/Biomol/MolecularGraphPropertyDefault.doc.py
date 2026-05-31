@@ -25,11 +25,11 @@
 class MolecularGraphPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Biomol.MolecularGraphProperty.MODEL_NUMBER property.
+    # 
     MODEL_NUMBER = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Biomol.MolecularGraphProperty.RESIDUE_INSERTION_CODE property.
+    # 
     RESIDUE_INSERTION_CODE = ' '

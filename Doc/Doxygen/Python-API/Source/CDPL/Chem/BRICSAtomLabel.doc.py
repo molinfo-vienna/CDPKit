@@ -27,86 +27,86 @@
 class BRICSAtomLabel(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom carries no BRICS label.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L1</em>.
+    # 
     L1 = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L2</em>.
+    # 
     L2 = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L3</em>.
+    # 
     L3 = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L4</em>.
+    # 
     L4 = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L5</em>.
+    # 
     L5 = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L6</em>.
+    # 
     L6 = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L7</em>.
+    # 
     L7 = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L8</em>.
+    # 
     L8 = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L9</em>.
+    # 
     L9 = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L10</em>.
+    # 
     L10 = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L11</em>.
+    # 
     L11 = 11
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L12</em>.
+    # 
     L12 = 12
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L13</em>.
+    # 
     L13 = 13
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L14</em>.
+    # 
     L14 = 14
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L15</em>.
+    # 
     L15 = 15
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the BRICS atom label <em>L16</em>.
+    # 
     L16 = 16

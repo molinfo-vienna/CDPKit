@@ -25,71 +25,71 @@
 class MolecularGraphPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.NAME property.
+    # 
     NAME = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.COMMENT property.
+    # 
     COMMENT = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property.
+    # 
     STOICHIOMETRIC_NUMBER = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property.
+    # 
     MATCH_CONSTRAINTS = MatchConstraintList()
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property.
+    # 
     MDL_CTAB_VERSION = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property.
+    # 
     MDL_PROGRAM_NAME = 'CDPL'
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_USER_INITIALS property.
+    # 
     MDL_USER_INITIALS = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property.
+    # 
     MDL_DIMENSIONALITY = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_ENERGY property.
+    # 
     MDL_ENERGY = 0.0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property.
+    # 
     MDL_CHIRAL_FLAG = False
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property.
+    # 
     MDL_SCALING_FACTOR1 = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property.
+    # 
     MDL_SCALING_FACTOR2 = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property.
+    # 
     MOL2_MOLECULE_TYPE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property.
+    # 
     MOL2_CHARGE_TYPE = 0

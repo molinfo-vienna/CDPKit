@@ -27,7 +27,7 @@
 class Entity3DMapping(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %Entity3DMapping instance.
+    # \brief Constructs an empty <tt>Entity3DMapping</tt> instance.
     # 
     def __init__() -> None: pass
 

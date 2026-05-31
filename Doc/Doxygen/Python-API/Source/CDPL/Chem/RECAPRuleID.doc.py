@@ -27,61 +27,61 @@
 class RECAPRuleID(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that no RECAP rule matched the bond.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for amide bond cleavage.
+    # 
     AMIDE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for ester bond cleavage.
+    # 
     ESTER = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for amine bond cleavage.
+    # 
     AMINE = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for urea bond cleavage.
+    # 
     UREA = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for ether bond cleavage.
+    # 
     ETHER = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for olefinic-bond cleavage.
+    # 
     OLEFIN = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for quaternary-nitrogen bond cleavage.
+    # 
     QUARTERNARY_N = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for aromatic-N to aliphatic-C bond cleavage.
+    # 
     AROMATIC_N_ALIPHATIC_C = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for lactam-N to aliphatic-C bond cleavage.
+    # 
     LACTAM_N_ALIPHATIC_C = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for aromatic-C to aromatic-C bond cleavage (biaryl).
+    # 
     AROMATIC_C_AROMATIC_C = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the RECAP rule for sulfonamide bond cleavage.
+    # 
     SULFONAMIDE = 11

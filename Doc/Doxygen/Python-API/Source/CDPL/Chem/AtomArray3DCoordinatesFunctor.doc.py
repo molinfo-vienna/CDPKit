@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief AtomArray3DCoordinatesFunctor.
+# \brief Helper-functor for retrieving the 3D coordinates of an atom from a separately-stored coordinates array, indexed by the atom's position in the underlying molecular graph.
 # 
 class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
 
@@ -31,9 +31,10 @@ class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
     def __init__(func: AtomArray3DCoordinatesFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %AtomArray3DCoordinatesFunctor instance.
-    # \param coords 
-    # \param molgraph 
+    # \brief Constructs the functor that resolves atom coordinates against <em>coords</em> using the atom-index ordering of <em>molgraph</em>.
+    # 
+    # \param coords The atom-coordinate array.
+    # \param molgraph The molecular graph providing the atom indexing.
     # 
     def __init__(coords: Math.Vector3DArray, molgraph: MolecularGraph) -> None: pass
 

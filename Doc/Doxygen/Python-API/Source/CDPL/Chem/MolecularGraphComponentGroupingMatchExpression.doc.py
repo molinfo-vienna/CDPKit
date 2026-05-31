@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief MolecularGraphComponentGroupingMatchExpression.
+# \brief Chem.MatchExpression that constrains the substructure mapping by the query's component-level groupings (typically derived from the parenthesization of a <em>Daylight SMARTS</em> [\ref SMARTS] pattern).
 # 
 # \see [\ref SMARTS]
 # 
@@ -35,7 +35,7 @@ class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpressi
     ##
     # \brief Constructs a <tt>MolecularGraphComponentGroupingMatchExpression</tt> instance for the specified component-level grouping.
     # 
-    # \param comp_grouping Specifies the component-level grouping constraints that have to be fulfilled by matching target molecuar graphs.
+    # \param comp_grouping Specifies the component-level grouping constraints that have to be fulfilled by matching target molecular graphs.
     # 
     def __init__(comp_grouping: FragmentList) -> None: pass
 

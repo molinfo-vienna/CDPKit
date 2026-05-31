@@ -25,61 +25,63 @@
 class TautomerizationType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the keto-enol tautomerization rule.
+    # 
     KETO_ENOL = 0
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the imine-enamine tautomerization rule.
+    # 
     IMINE_ENAMINE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the nitroso-oxime tautomerization rule.
+    # 
     NITROSO_OXIME = 2
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the amide-imidic-acid tautomerization rule.
+    # 
     AMIDE_IMIDIC_ACID = 3
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the lactam-lactim tautomerization rule.
+    # 
     LACTAM_LACTIM = 4
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the ketene-ynol tautomerization rule.
+    # 
     KETENE_YNOL = 5
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the nitro-aci tautomerization rule.
+    # 
     NITRO_ACI = 6
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the phosphinic-acid tautomerization rule.
+    # 
     PHOSPHINIC_ACID = 7
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the sulfenic-acid tautomerization rule.
+    # 
     SULFENIC_ACID = 8
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the generic 1,3-hydrogen-shift tautomerization rule.
+    # 
     GENERIC_H_13_SHIFT = 9
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the generic 1,5-hydrogen-shift tautomerization rule.
+    # 
     GENERIC_H_15_SHIFT = 10
 
     ##
-    # \brief 
-    #
+    # \brief Identifier for the conjugated-ring-bond-pattern switching tautomerization rule.
+    # 
+    # \since 1.3
+    # 
     CONJ_RING_BOND_SWITCH = 11

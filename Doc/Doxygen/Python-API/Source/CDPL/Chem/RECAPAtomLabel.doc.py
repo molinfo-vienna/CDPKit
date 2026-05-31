@@ -27,106 +27,106 @@
 class RECAPAtomLabel(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom carries no RECAP label.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the nitrogen side of an amide bond cleaved by the RECAP <tt>AMIDE</tt> rule.
+    # 
     AMIDE_N = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the carbon side of an amide bond cleaved by the RECAP <tt>AMIDE</tt> rule.
+    # 
     AMIDE_C = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the oxygen side of an ester bond cleaved by the RECAP <tt>ESTER</tt> rule.
+    # 
     ESTER_O = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the carbon side of an ester bond cleaved by the RECAP <tt>ESTER</tt> rule.
+    # 
     ESTER_C = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the nitrogen side of an amine bond cleaved by the RECAP <tt>AMINE</tt> rule.
+    # 
     AMINE_N = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the carbon side of an amine bond cleaved by the RECAP <tt>AMINE</tt> rule.
+    # 
     AMINE_C = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the nitrogen side of a urea bond cleaved by the RECAP <tt>UREA</tt> rule.
+    # 
     UREA_N = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the carbon side of a urea bond cleaved by the RECAP <tt>UREA</tt> rule.
+    # 
     UREA_C = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the oxygen side of an ether bond cleaved by the RECAP <tt>ETHER</tt> rule.
+    # 
     ETHER_O = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the carbon side of an ether bond cleaved by the RECAP <tt>ETHER</tt> rule.
+    # 
     ETHER_C = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a carbon side of an olefinic bond cleaved by the RECAP <tt>OLEFIN</tt> rule.
+    # 
     OLEFIN_C = 11
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the quaternary-nitrogen side of a bond cleaved by the RECAP <tt>QUARTERNARY_N</tt> rule.
+    # 
     QUARTERNARY_N_N = 12
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the carbon side of a bond cleaved by the RECAP <tt>QUARTERNARY_N</tt> rule.
+    # 
     QUARTERNARY_N_C = 13
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the aromatic-N side of a bond cleaved by the RECAP <tt>AROMATIC_N_ALIPHATIC_C</tt> rule.
+    # 
     AROMATIC_N_ALIPHATIC_C_N = 14
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the aliphatic-C side of a bond cleaved by the RECAP <tt>AROMATIC_N_ALIPHATIC_C</tt> rule.
+    # 
     AROMATIC_N_ALIPHATIC_C_C = 15
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the lactam-N side of a bond cleaved by the RECAP <tt>LACTAM_N_ALIPHATIC_C</tt> rule.
+    # 
     LACTAM_N_ALIPHATIC_C_N = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the aliphatic-C side of a bond cleaved by the RECAP <tt>LACTAM_N_ALIPHATIC_C</tt> rule.
+    # 
     LACTAM_N_ALIPHATIC_C_C = 17
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an aromatic-C side of a biaryl bond cleaved by the RECAP <tt>AROMATIC_C_AROMATIC_C</tt> rule.
+    # 
     AROMATIC_C_AROMATIC_C_C = 18
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the nitrogen side of a sulfonamide bond cleaved by the RECAP <tt>SULFONAMIDE</tt> rule.
+    # 
     SULFONAMIDE_N = 19
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the sulfur side of a sulfonamide bond cleaved by the RECAP <tt>SULFONAMIDE</tt> rule.
+    # 
     SULFONAMIDE_S = 20

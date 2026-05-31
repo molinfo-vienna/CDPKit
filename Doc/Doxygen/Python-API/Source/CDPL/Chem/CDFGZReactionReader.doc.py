@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for reaction data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+# 
 class CDFGZReactionReader(ReactionReaderBase):
 
     ##

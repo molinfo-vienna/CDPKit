@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for reaction data in the bzip2-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESBZ2ReactionWriter(ReactionWriterBase):
 
     ##

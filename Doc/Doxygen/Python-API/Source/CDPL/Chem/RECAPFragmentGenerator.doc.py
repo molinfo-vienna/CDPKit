@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief RECAPFragmentGenerator.
-# 
-# \see [\ref RECAP]
+# \brief Chem.FragmentGenerator implementation applying the <em>RECAP</em> [\ref RECAP] cleavage rules (see Chem.RECAPRuleID) to produce a set of fragment building blocks from a molecular graph.
 # 
 class RECAPFragmentGenerator(FragmentGenerator):
 
     ##
-    # \brief Constructs the <tt>RECAPFragmentGenerator</tt> instance.
+    # \brief Constructs the <tt>RECAPFragmentGenerator</tt> instance and registers the built-in RECAP cleavage rules.
     # 
     def __init__() -> None: pass
 

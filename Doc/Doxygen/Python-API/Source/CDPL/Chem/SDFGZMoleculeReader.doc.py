@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the gzip-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class SDFGZMoleculeReader(MoleculeReaderBase):
 
     ##

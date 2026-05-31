@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief NitrosoOximeTautomerizationRule.
+# \brief Chem.PatternBasedTautomerizationRule implementation that enumerates nitroso/oxime tautomers (Chem.TautomerizationType.NITROSO_OXIME).
 # 
 class NitrosoOximeTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \c %NitrosoOximeTautomerization instance.
+    # \brief Constructs the rule and registers the built-in nitroso/oxime tautomerization patterns.
     # 
     def __init__() -> None: pass
 

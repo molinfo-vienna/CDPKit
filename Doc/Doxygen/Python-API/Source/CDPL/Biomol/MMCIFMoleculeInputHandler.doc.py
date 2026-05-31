@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of molecule data in the <em>MMCIF</em> format.
+# \brief A handler for the input of molecule data in the <em>Macromolecular Crystallographic Information File (mmCIF)</em> [\ref MMCIF] format.
 # 
 # \since 1.2
 # 

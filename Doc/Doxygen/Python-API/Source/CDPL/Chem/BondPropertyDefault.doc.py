@@ -25,36 +25,36 @@
 class BondPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.BondProperty.ORDER property.
+    # 
     ORDER = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.BondProperty.SYBYL_TYPE property.
+    # 
     SYBYL_TYPE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.BondProperty.DIRECTION property.
+    # 
     DIRECTION = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.BondProperty.STEREO_2D_FLAG property.
+    # 
     STEREO_2D_FLAG = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.BondProperty.STEREO_DESCRIPTOR property.
+    # 
     STEREO_DESCRIPTOR = StereoDescriptor(config=0)
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.BondProperty.REACTION_CENTER_STATUS property.
+    # 
     REACTION_CENTER_STATUS = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.BondProperty.MATCH_CONSTRAINTS property.
+    # 
     MATCH_CONSTRAINTS = MatchConstraintList()
