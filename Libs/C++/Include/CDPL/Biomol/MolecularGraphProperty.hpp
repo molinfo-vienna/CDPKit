@@ -50,14 +50,54 @@ namespace CDPL
         namespace MolecularGraphProperty
         {
 
+            /**
+             * \brief Specifies the residue code (three-letter code) of the residue described by the molecular graph.
+             *
+             * \valuetype std::string
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_CODE;
+
+            /**
+             * \brief Specifies the residue sequence number of the residue described by the molecular graph.
+             *
+             * \valuetype long
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
+
+            /**
+             * \brief Specifies the residue insertion code of the residue described by the molecular graph.
+             *
+             * \valuetype char
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
 
+            /**
+             * \brief Specifies the identifier of the chain the molecular graph belongs to.
+             *
+             * \valuetype std::string
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
+
+            /**
+             * \brief Specifies the model number assigned to the molecular graph.
+             *
+             * \valuetype std::size_t
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
 
+            /**
+             * \brief Specifies the associated PDB data record.
+             *
+             * \valuetype Biomol::PDBData::SharedPointer
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_DATA;
+
+            /**
+             * \brief Specifies the associated mmCIF data record.
+             *
+             * \valuetype Biomol::MMCIFData::SharedPointer
+             * \since 1.2
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_DATA;
 
         } // namespace MolecularGraphProperty

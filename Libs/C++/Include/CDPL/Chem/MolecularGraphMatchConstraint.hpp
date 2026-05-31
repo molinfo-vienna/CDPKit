@@ -43,7 +43,7 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies a constraint which requires the target olecular graph to fulfill additional constraints
+             * \brief Specifies a constraint which requires the target molecular graph to fulfill additional constraints
              *        specified by a Chem::MatchConstraintList object.
              */
             constexpr unsigned int CONSTRAINT_LIST = 0;

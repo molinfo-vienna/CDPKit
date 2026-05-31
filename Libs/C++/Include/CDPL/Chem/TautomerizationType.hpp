@@ -42,19 +42,31 @@ namespace CDPL
         namespace TautomerizationType
         {
 
+            /** \brief Identifier for the keto-enol tautomerization rule. */
             constexpr unsigned int KETO_ENOL             = 0;
+            /** \brief Identifier for the imine-enamine tautomerization rule. */
             constexpr unsigned int IMINE_ENAMINE         = 1;
+            /** \brief Identifier for the nitroso-oxime tautomerization rule. */
             constexpr unsigned int NITROSO_OXIME         = 2;
+            /** \brief Identifier for the amide-imidic-acid tautomerization rule. */
             constexpr unsigned int AMIDE_IMIDIC_ACID     = 3;
+            /** \brief Identifier for the lactam-lactim tautomerization rule. */
             constexpr unsigned int LACTAM_LACTIM         = 4;
+            /** \brief Identifier for the ketene-ynol tautomerization rule. */
             constexpr unsigned int KETENE_YNOL           = 5;
+            /** \brief Identifier for the nitro-aci tautomerization rule. */
             constexpr unsigned int NITRO_ACI             = 6;
+            /** \brief Identifier for the phosphinic-acid tautomerization rule. */
             constexpr unsigned int PHOSPHINIC_ACID       = 7;
+            /** \brief Identifier for the sulfenic-acid tautomerization rule. */
             constexpr unsigned int SULFENIC_ACID         = 8;
+            /** \brief Identifier for the generic 1,3-hydrogen-shift tautomerization rule. */
             constexpr unsigned int GENERIC_H_13_SHIFT    = 9;
+            /** \brief Identifier for the generic 1,5-hydrogen-shift tautomerization rule. */
             constexpr unsigned int GENERIC_H_15_SHIFT    = 10;
 
             /**
+             * \brief Identifier for the conjugated-ring-bond-pattern switching tautomerization rule.
              * \since 1.3
              */
             constexpr unsigned int CONJ_RING_BOND_SWITCH = 11;

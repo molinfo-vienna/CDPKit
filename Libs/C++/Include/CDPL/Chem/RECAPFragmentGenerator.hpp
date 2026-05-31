@@ -42,17 +42,18 @@ namespace CDPL
     {
 
         /**
-         * \brief RECAPFragmentGenerator.
-         * \see [\ref RECAP]
+         * \brief Chem::FragmentGenerator implementation applying the <em>RECAP</em> [\ref RECAP] cleavage rules
+         *        (see Chem::RECAPRuleID) to produce a set of fragment building blocks from a molecular graph.
          */
         class CDPL_CHEM_API RECAPFragmentGenerator : public FragmentGenerator
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RECAPFragmentGenerator instances. */
             typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
 
             /**
-             * \brief Constructs the \c %RECAPFragmentGenerator instance.
+             * \brief Constructs the \c %RECAPFragmentGenerator instance and registers the built-in RECAP cleavage rules.
              */
             RECAPFragmentGenerator();
         };

@@ -45,21 +45,41 @@ namespace CDPL
     {
 
         /**
-         * \brief ConjugatedRingBondPatternSwitching.
+         * \brief Chem::TautomerizationRule implementation that enumerates tautomers obtained by switching the
+         *        single/double bond pattern of conjugated rings (e.g. the two Kekulé forms of benzene).
          * \since 1.3
          */
         class CDPL_CHEM_API ConjugatedRingBondPatternSwitching : public TautomerizationRule
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ConjugatedRingBondPatternSwitching instances. */
             typedef std::shared_ptr<ConjugatedRingBondPatternSwitching> SharedPointer;
 
+            /**
+             * \brief Sets the parent molecular graph and identifies its conjugated rings for tautomer enumeration.
+             * \param parent_molgraph The molecular graph to be tautomerized.
+             * \return \c true if at least one conjugated ring was found, and \c false otherwise.
+             */
             bool setup(MolecularGraph& parent_molgraph);
 
+            /**
+             * \brief Returns the rule's identifier (Chem::TautomerizationType::CONJ_RING_BOND_SWITCH).
+             * \return The rule identifier.
+             */
             unsigned int getID() const;
 
+            /**
+             * \brief Generates the next bond-pattern-switched tautomer.
+             * \param tautomer The tautomer output molecule object.
+             * \return \c true if a tautomer was generated, and \c false if no more tautomers are available.
+             */
             bool generate(Molecule& tautomer);
 
+            /**
+             * \brief Returns a deep copy of this rule instance.
+             * \return A shared pointer to the cloned rule.
+             */
             TautomerizationRule::SharedPointer clone() const;
 
           private:

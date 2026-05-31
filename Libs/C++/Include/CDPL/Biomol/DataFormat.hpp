@@ -71,18 +71,21 @@ namespace CDPL
             /**
              * \brief Provides meta-information about the <em>Macromolecular Crystallographic Information File Format</em>
              *        [\ref MMCIF] format.
+             * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::DataFormat MMCIF;
 
             /**
              * \brief Provides meta-information about the gzip-compressed <em>Macromolecular Crystallographic Information File Format</em>
              *        [\ref MMCIF] format.
+             * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::DataFormat MMCIF_GZ;
 
             /**
              * \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Crystallographic Information File Format</em>
              *        [\ref MMCIF] format.
+             * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::DataFormat MMCIF_BZ2;
 

@@ -37,28 +37,45 @@ namespace CDPL
     {
 
         /**
-     * \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
-     * \see [\ref BRICS]
-     */
+         * \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
+         * \see [\ref BRICS]
+         */
         namespace BRICSAtomLabel
         {
 
+            /** \brief Specifies that the atom carries no BRICS label. */
             constexpr unsigned int NONE = 0;
+            /** \brief Specifies the BRICS atom label \e L1. */
             constexpr unsigned int L1   = 1;
+            /** \brief Specifies the BRICS atom label \e L2. */
             constexpr unsigned int L2   = 2;
+            /** \brief Specifies the BRICS atom label \e L3. */
             constexpr unsigned int L3   = 3;
+            /** \brief Specifies the BRICS atom label \e L4. */
             constexpr unsigned int L4   = 4;
+            /** \brief Specifies the BRICS atom label \e L5. */
             constexpr unsigned int L5   = 5;
+            /** \brief Specifies the BRICS atom label \e L6. */
             constexpr unsigned int L6   = 6;
+            /** \brief Specifies the BRICS atom label \e L7. */
             constexpr unsigned int L7   = 7;
+            /** \brief Specifies the BRICS atom label \e L8. */
             constexpr unsigned int L8   = 8;
+            /** \brief Specifies the BRICS atom label \e L9. */
             constexpr unsigned int L9   = 9;
+            /** \brief Specifies the BRICS atom label \e L10. */
             constexpr unsigned int L10  = 10;
+            /** \brief Specifies the BRICS atom label \e L11. */
             constexpr unsigned int L11  = 11;
+            /** \brief Specifies the BRICS atom label \e L12. */
             constexpr unsigned int L12  = 12;
+            /** \brief Specifies the BRICS atom label \e L13. */
             constexpr unsigned int L13  = 13;
+            /** \brief Specifies the BRICS atom label \e L14. */
             constexpr unsigned int L14  = 14;
+            /** \brief Specifies the BRICS atom label \e L15. */
             constexpr unsigned int L15  = 15;
+            /** \brief Specifies the BRICS atom label \e L16. */
             constexpr unsigned int L16  = 16;
         } // namespace BRICSAtomLabel
     } // namespace Chem

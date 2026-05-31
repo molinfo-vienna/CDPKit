@@ -57,8 +57,18 @@ namespace CDPL
          */
         CDPL_CHEM_API bool makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags);
 
+        /**
+         * \brief Removes all atoms of the fragment \a frag for which the predicate \a pred returns \c true.
+         * \param frag The fragment to filter in place.
+         * \param pred The atom predicate to evaluate.
+         */
         CDPL_CHEM_API void removeAtomsIf(Fragment& frag, const AtomPredicate& pred);
 
+        /**
+         * \brief Removes all atoms of the fragment \a frag for which the predicate \a pred returns \c false.
+         * \param frag The fragment to filter in place.
+         * \param pred The atom predicate to evaluate.
+         */
         CDPL_CHEM_API void removeAtomsIfNot(Fragment& frag, const AtomPredicate& pred);
     } // namespace Chem
 } // namespace CDPL

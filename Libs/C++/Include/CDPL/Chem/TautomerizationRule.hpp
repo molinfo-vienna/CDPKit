@@ -44,18 +44,31 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief TautomerizationRule.
+         * \brief Abstract base class for all tautomerization rule implementations used by the Chem::TautomerGenerator.
          */
         class CDPL_CHEM_API TautomerizationRule
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TautomerizationRule instances. */
             typedef std::shared_ptr<TautomerizationRule> SharedPointer;
 
+            /**
+             * \brief Virtual destructor.
+             */
             virtual ~TautomerizationRule() {}
 
+            /**
+             * \brief Sets the parent molecular graph for which the rule is to enumerate tautomers.
+             * \param parent_molgraph The molecular graph to be tautomerized.
+             * \return \c true if the rule applies to \a parent_molgraph and the iteration has been initialized, and \c false otherwise.
+             */
             virtual bool setup(MolecularGraph& parent_molgraph) = 0;
 
+            /**
+             * \brief Returns the rule's identifier (see Chem::TautomerizationType).
+             * \return The rule identifier.
+             */
             virtual unsigned int getID() const = 0;
 
             /**
@@ -65,6 +78,10 @@ namespace CDPL
              */
             virtual bool generate(Molecule& tautomer) = 0;
 
+            /**
+             * \brief Returns a deep copy of this rule instance.
+             * \return A shared pointer to the cloned rule.
+             */
             virtual SharedPointer clone() const = 0;
         };
     } // namespace Chem

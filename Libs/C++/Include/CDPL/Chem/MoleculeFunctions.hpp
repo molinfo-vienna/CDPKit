@@ -75,16 +75,47 @@ namespace CDPL
          */
         CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count = true);
 
+        /**
+         * \brief Adds bonds between atoms of \a mol whose 3D distance falls within the covalent-radii sum plus \a dist_tol.
+         * \param mol The molecule whose atoms are to be connected.
+         * \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
+         * \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to \a atom_idx_offs
+         *                     (useful to extend an existing bonding network without re-evaluating already-connected atoms).
+         */
         CDPL_CHEM_API void connectAtoms(Molecule& mol, double dist_tol = 0.3, std::size_t atom_idx_offs = 0);
 
+        /**
+         * \brief Adds bonds between atoms of \a mol whose 3D distance (obtained via \a coords_func) falls within the covalent-radii sum plus \a dist_tol.
+         * \param mol The molecule whose atoms are to be connected.
+         * \param coords_func The function used to retrieve the 3D coordinates of an atom.
+         * \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
+         * \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to \a atom_idx_offs.
+         */
         CDPL_CHEM_API void connectAtoms(Molecule& mol, const Atom3DCoordinatesFunction& coords_func,
                                         double dist_tol = 0.3, std::size_t atom_idx_offs = 0);
 
+        /**
+         * \brief Removes all atoms of the molecule \a mol for which the predicate \a pred returns \c true.
+         * \param mol The molecule to filter in place.
+         * \param pred The atom predicate to evaluate.
+         */
         CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 
+        /**
+         * \brief Removes all atoms of the molecule \a mol for which the predicate \a pred returns \c false.
+         * \param mol The molecule to filter in place.
+         * \param pred The atom predicate to evaluate.
+         */
         CDPL_CHEM_API void removeAtomsIfNot(Molecule& mol, const AtomPredicate& pred);
 
         /**
+         * \brief Edits the molecule \a mol by replacing all substructures matching the SMARTS search patterns in \a search_ptns
+         *        with the SMARTS replacement pattern \a result_ptn, optionally skipping matches that also match \a exclude_ptns.
+         * \param mol The molecule to edit in place.
+         * \param search_ptns A whitespace-separated list of SMARTS patterns matching the substructures to replace.
+         * \param result_ptn The SMARTS replacement pattern.
+         * \param exclude_ptns A whitespace-separated list of SMARTS patterns matching substructures that shall be retained even if they match \a search_ptns.
+         * \return The number of replaced substructures.
          * \since 1.3
          */
         CDPL_CHEM_API std::size_t editSubstructures(Molecule& mol, const std::string& search_ptns,

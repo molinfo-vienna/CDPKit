@@ -46,7 +46,9 @@ namespace CDPL
         namespace MolecularGraphPropertyDefault
         {
 
+            /** \brief Default value for the Biomol::MolecularGraphProperty::MODEL_NUMBER property. */
             extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
+            /** \brief Default value for the Biomol::MolecularGraphProperty::RESIDUE_INSERTION_CODE property. */
             extern CDPL_BIOMOL_API const char        RESIDUE_INSERTION_CODE;
         } // namespace MolecularGraphPropertyDefault
     } // namespace Biomol

@@ -62,49 +62,93 @@ namespace CDPL
             enum RecordType
             {
 
+                /** \brief PDB \c HEADER record (structure classification, deposition date, PDB ID). */
                 HEADER,
+                /** \brief PDB \c OBSLTE record (PDB IDs that have replaced this entry). */
                 OBSLTE,
+                /** \brief PDB \c TITLE record (title of the entry). */
                 TITLE,
+                /** \brief PDB \c SPLIT record (list of entries that together form the complete structure). */
                 SPLIT,
+                /** \brief PDB \c CAVEAT record (caveats about the structure). */
                 CAVEAT,
+                /** \brief PDB \c COMPND record (description of macromolecular contents). */
                 COMPND,
+                /** \brief PDB \c SOURCE record (source organism information). */
                 SOURCE,
+                /** \brief PDB \c KEYWDS record (keywords describing the entry). */
                 KEYWDS,
+                /** \brief PDB \c EXPDTA record (experimental technique). */
                 EXPDTA,
+                /** \brief PDB \c AUTHOR record (authors of the entry). */
                 AUTHOR,
+                /** \brief PDB \c REVDAT record (revision history of the entry). */
                 REVDAT,
+                /** \brief PDB \c SPRSDE record (PDB IDs that this entry supersedes). */
                 SPRSDE,
+                /** \brief PDB \c JRNL record (literature citation associated with the entry). */
                 JRNL,
+                /** \brief PDB \c REMARK record (free-text annotations). */
                 REMARK,
+                /** \brief PDB \c DBREF record (cross-references to external sequence databases). */
                 DBREF,
+                /** \brief PDB \c DBREF1 record (first part of a two-line database cross-reference). */
                 DBREF1,
+                /** \brief PDB \c DBREF2 record (second part of a two-line database cross-reference). */
                 DBREF2,
+                /** \brief PDB \c SEQADV record (sequence differences relative to the reference database). */
                 SEQADV,
+                /** \brief PDB \c SEQRES record (residue sequence of biopolymer chains). */
                 SEQRES,
+                /** \brief PDB \c MODRES record (modified residues). */
                 MODRES,
+                /** \brief PDB \c HET record (non-standard residue identification). */
                 HET,
+                /** \brief PDB \c FORMUL record (chemical formula of non-standard residues). */
                 FORMUL,
+                /** \brief PDB \c HETNAM record (chemical name of non-standard residues). */
                 HETNAM,
+                /** \brief PDB \c HETSYN record (synonyms for non-standard residues). */
                 HETSYN,
+                /** \brief PDB \c HELIX record (helix secondary-structure annotations). */
                 HELIX,
+                /** \brief PDB \c SHEET record (sheet secondary-structure annotations). */
                 SHEET,
+                /** \brief PDB \c TURN record (turn secondary-structure annotations). */
                 TURN,
+                /** \brief PDB \c SSBOND record (disulfide bond annotations). */
                 SSBOND,
+                /** \brief PDB \c LINK record (covalent links between non-standard residues). */
                 LINK,
+                /** \brief PDB \c CISPEP record (cis peptide bond annotations). */
                 CISPEP,
+                /** \brief PDB \c SITE record (groups of residues describing an active or binding site). */
                 SITE,
+                /** \brief PDB \c CRYST1 record (unit cell parameters and space group). */
                 CRYST1,
+                /** \brief PDB \c MTRIX1 record (first row of a non-crystallographic-symmetry transformation matrix). */
                 MTRIX1,
+                /** \brief PDB \c MTRIX2 record (second row of a non-crystallographic-symmetry transformation matrix). */
                 MTRIX2,
+                /** \brief PDB \c MTRIX3 record (third row of a non-crystallographic-symmetry transformation matrix). */
                 MTRIX3,
+                /** \brief PDB \c ORIGX1 record (first row of the orthogonal-to-submitted-coordinates transformation). */
                 ORIGX1,
+                /** \brief PDB \c ORIGX2 record (second row of the orthogonal-to-submitted-coordinates transformation). */
                 ORIGX2,
+                /** \brief PDB \c ORIGX3 record (third row of the orthogonal-to-submitted-coordinates transformation). */
                 ORIGX3,
+                /** \brief PDB \c SCALE1 record (first row of the orthogonal-to-fractional-coordinates transformation). */
                 SCALE1,
+                /** \brief PDB \c SCALE2 record (second row of the orthogonal-to-fractional-coordinates transformation). */
                 SCALE2,
+                /** \brief PDB \c SCALE3 record (third row of the orthogonal-to-fractional-coordinates transformation). */
                 SCALE3,
+                /** \brief Derived: the 4-character PDB identifier extracted from the \c HEADER record. */
                 STRUCTURE_ID,
+                /** \brief Derived: the deposition date extracted from the \c HEADER record. */
                 DEPOSITION_DATE,
+                /** \brief Derived: the experimental resolution extracted from \c REMARK records. */
                 RESOLUTION
             };
 

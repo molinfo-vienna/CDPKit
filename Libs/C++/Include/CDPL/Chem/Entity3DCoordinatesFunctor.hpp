@@ -42,7 +42,7 @@ namespace CDPL
         class Entity3D;
 
         /**
-         * \brief Entity3DCoordinatesFunctor.
+         * \brief Helper-functor for retrieving the 3D coordinates of an Chem::Entity3D object (via the Chem::Entity3DProperty::COORDINATES_3D property).
          */
         struct CDPL_CHEM_API Entity3DCoordinatesFunctor
         {

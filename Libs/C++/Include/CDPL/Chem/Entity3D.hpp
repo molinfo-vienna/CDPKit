@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Entity3D.
+         * \brief %Base class for objects that have a position in 3D space (e.g. Chem::Atom and Chem::Feature).
          */
         class CDPL_CHEM_API Entity3D : public Base::PropertyContainer
         {

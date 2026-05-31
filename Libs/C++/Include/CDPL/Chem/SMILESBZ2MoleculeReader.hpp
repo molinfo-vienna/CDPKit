@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Reader for molecule data in the bzip2-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+         */
         typedef Util::CompressedDataReader<SMILESMoleculeReader, Util::BZip2IStream> SMILESBZ2MoleculeReader;
     }
 } // namespace CDPL

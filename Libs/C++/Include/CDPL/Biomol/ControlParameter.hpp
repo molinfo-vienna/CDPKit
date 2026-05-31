@@ -77,88 +77,199 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey CHECK_LINE_LENGTH;
 
             /**
+             * \brief Specifies the residue dictionary consulted during PDB and mmCIF I/O when looking up canonical residue
+             *        atom names, bonding, atom types, or formal charges.
+             *
+             * \valuetype Biomol::ResidueDictionary::SharedPointer
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_DICTIONARY;
-            
+
             /**
+             * \brief Specifies whether to apply the formal atom charges provided by the residue dictionary during input data
+             *        post-processing.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey APPLY_DICT_FORMAL_CHARGES;
 
             /**
+             * \brief Specifies whether to apply the atom types provided by the residue dictionary during input data
+             *        post-processing.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey APPLY_DICT_ATOM_TYPES;
 
             /**
+             * \brief Specifies whether to calculate formal atomic charges for atoms whose charge could not be obtained from
+             *        the input data or the residue dictionary.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey CALC_MISSING_FORMAL_CHARGES;
 
             /**
+             * \brief Specifies whether to perceive bond orders for bonds whose order could not be obtained from the input
+             *        data or the residue dictionary.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey PERCEIVE_MISSING_BOND_ORDERS;
 
+            /**
+             * \brief Specifies whether to merge alternative residue conformers whose atoms overlap in space (see
+             *        Biomol::combineInterferingResidueCoordinates()).
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey COMBINE_INTERFERING_RESIDUE_COORDINATES;
-            
+
+            /**
+             * \brief Specifies whether to use the residue dictionary to derive atom-bonding for atoms of non-standard
+             *        residues during PDB input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
 
+            /**
+             * \brief Specifies whether to use the residue dictionary to derive atom-bonding for atoms of standard residues
+             *        during PDB input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
 
+            /**
+             * \brief Specifies whether to apply the residue-dictionary bond orders to bonds of non-standard residues during
+             *        PDB input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES;
 
+            /**
+             * \brief Specifies whether to apply the residue-dictionary bond orders to bonds of standard residues during
+             *        PDB input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES;
 
+            /**
+             * \brief Specifies whether to skip \c CONECT records when reading PDB input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_IGNORE_CONECT_RECORDS;
 
+            /**
+             * \brief Specifies whether to deduce bond orders from the duplication pattern of bonded-atom pairs in \c CONECT
+             *        records when reading PDB input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
 
+            /**
+             * \brief Specifies whether to ignore the formal-charge field of \c ATOM/\c HETATM records when reading PDB input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_IGNORE_FORMAL_CHARGE_FIELD;
 
+            /**
+             * \brief Specifies whether to verify the record counts in the PDB \c MASTER record against the actual numbers
+             *        observed during input.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_EVALUATE_MASTER_RECORD;
 
+            /**
+             * \brief Specifies whether to truncate output PDB data lines that exceed the maximum allowed line length instead
+             *        of failing the write operation.
+             *
+             * \valuetype bool
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_TRUNCATE_LINES;
 
             /**
+             * \brief Specifies whether to write the formal-charge field of \c ATOM/\c HETATM records when generating PDB output.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_OUTPUT_FORMAL_CHARGES;
 
             /**
+             * \brief Specifies whether to write \c CONECT records when generating PDB output.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_OUTPUT_CONECT_RECORDS;
 
             /**
+             * \brief Specifies whether \c CONECT records shall be written for all bonds (and not only for non-standard ones)
+             *        when generating PDB output.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS;
 
             /**
+             * \brief Specifies whether \c CONECT records shall encode the bond order via the duplication count of bonded-atom
+             *        pairs when generating PDB output.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER;
 
+            /**
+             * \brief Specifies the PDB format version to use when generating PDB output (see Biomol::PDBFormatVersion).
+             *
+             * \valuetype unsigned int
+             */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_FORMAT_VERSION;
 
             /**
+             * \brief Specifies whether to use the residue dictionary to derive atom-bonding during mmCIF input.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_APPLY_DICT_ATOM_BONDING;
 
             /**
+             * \brief Specifies whether to apply the residue-dictionary bond orders during mmCIF input.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_APPLY_DICT_BOND_ORDERS;
 
             /**
+             * \brief Specifies whether to emit biopolymer residues using the \c chem_comp data category (instead of the
+             *        regular polymer-residue encoding) when generating mmCIF output.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP;
 
             /**
+             * \brief Specifies a post-processing function that is applied to the constructed mmCIF data record before it is
+             *        written to the output stream.
+             *
+             * \valuetype Biomol::MMCIFDataProcessingFunction
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION;

@@ -43,6 +43,7 @@ namespace CDPL
         /**
          * \brief A handler for the input of gzip-compressed molecule data in the <em>Macromolecular Transmission Format (MMTF)</em>
          *        [\ref MMTF] format.
+         * \since 1.2
          */
         typedef Util::DefaultDataInputHandler<MMTFGZMoleculeReader, DataFormat::MMTF_GZ> MMTFGZMoleculeInputHandler;
     } // namespace Biomol

@@ -45,7 +45,8 @@ namespace CDPL
     {
 
         /**
-         * \brief MolecularGraphComponentGroupingMatchExpression.
+         * \brief Chem::MatchExpression that constrains the substructure mapping by the query's component-level groupings
+         *        (typically derived from the parenthesization of a <em>Daylight SMARTS</em> [\ref SMARTS] pattern).
          * \see [\ref SMARTS]
          */
         class CDPL_CHEM_API MolecularGraphComponentGroupingMatchExpression : public MatchExpression<MolecularGraph>
@@ -60,7 +61,7 @@ namespace CDPL
 
             /**
              * \brief Constructs a \c %MolecularGraphComponentGroupingMatchExpression instance for the specified component-level grouping.
-             * \param comp_grouping Specifies the component-level grouping constraints that have to be fulfilled by matching target molecuar graphs.
+             * \param comp_grouping Specifies the component-level grouping constraints that have to be fulfilled by matching target molecular graphs.
              */
             MolecularGraphComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
 

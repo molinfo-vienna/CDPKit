@@ -40,12 +40,16 @@ namespace CDPL
     {
 
         /**
-         * \brief PhosphinicAcidTautomerizationRule.
+         * \brief Chem::PatternBasedTautomerizationRule implementation that enumerates phosphinic-acid tautomers
+         *        (Chem::TautomerizationType::PHOSPHINIC_ACID).
          */
         class CDPL_CHEM_API PhosphinicAcidTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
+            /**
+             * \brief Constructs the rule and registers the built-in phosphinic-acid tautomerization patterns.
+             */
             PhosphinicAcidTautomerization();
         };
     } // namespace Chem

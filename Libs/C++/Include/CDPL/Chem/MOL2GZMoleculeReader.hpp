@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Reader for molecule data in the gzip-compressed Tripos MOL2 format.
+         */
         typedef Util::CompressedDataReader<MOL2MoleculeReader, Util::GZipIStream> MOL2GZMoleculeReader;
     }
 } // namespace CDPL

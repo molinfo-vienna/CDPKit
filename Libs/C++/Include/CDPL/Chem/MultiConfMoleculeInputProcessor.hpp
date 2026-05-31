@@ -43,7 +43,8 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief MultiConfMoleculeInputProcessor.
+         * \brief Abstract base interface for processors that detect and assemble multi-conformer molecules from a
+         *        stream of successive single-conformer input molecules.
          */
         class CDPL_CHEM_API MultiConfMoleculeInputProcessor
         {
@@ -71,7 +72,7 @@ namespace CDPL
 
             /**
              * \brief Checks if \a conf_molgraph represents a conformation of \a tgt_molgraph.
-             * \param tgt_molgraph The molecular graph for which to check if \a conf_molgraph represents a ne conformation.
+             * \param tgt_molgraph The molecular graph for which to check if \a conf_molgraph represents a new conformation.
              * \param conf_molgraph A molecular graph representing a possible conformation of \a tgt_molgraph.
              * \return \c false if \a conf_molgraph does not represent a conformer of \a tgt_molgraph, and \c true otherwise.
              */

@@ -49,6 +49,7 @@ namespace CDPL
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ElectronSystemList instances. */
             typedef std::shared_ptr<ElectronSystemList> SharedPointer;
 
           private:

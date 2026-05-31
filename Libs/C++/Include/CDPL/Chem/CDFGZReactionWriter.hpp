@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Writer for reaction data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+         */
         typedef Util::CompressedDataWriter<CDFReactionWriter, Util::GZipOStream> CDFGZReactionWriter;
     }
 } // namespace CDPL

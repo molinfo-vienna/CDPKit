@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Reader for molecule data in the bzip2-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+         */
         typedef Util::CompressedDataReader<SDFMoleculeReader, Util::BZip2IStream> SDFBZ2MoleculeReader;
     }
 } // namespace CDPL

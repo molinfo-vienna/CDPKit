@@ -48,19 +48,33 @@ namespace CDPL
         namespace MolecularGraphPropertyDefault
         {
 
+            /** \brief Default value for the Chem::MolecularGraphProperty::NAME property. */
             extern CDPL_CHEM_API const std::string                        NAME;
+            /** \brief Default value for the Chem::MolecularGraphProperty::COMMENT property. */
             extern CDPL_CHEM_API const std::string                        COMMENT;
+            /** \brief Default value for the Chem::MolecularGraphProperty::STOICHIOMETRIC_NUMBER property. */
             extern CDPL_CHEM_API const double                             STOICHIOMETRIC_NUMBER;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MATCH_CONSTRAINTS property. */
             extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_CTAB_VERSION property. */
             extern CDPL_CHEM_API const unsigned int                       MDL_CTAB_VERSION;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_PROGRAM_NAME property. */
             extern CDPL_CHEM_API const std::string                        MDL_PROGRAM_NAME;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_USER_INITIALS property. */
             extern CDPL_CHEM_API const std::string                        MDL_USER_INITIALS;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_DIMENSIONALITY property. */
             extern CDPL_CHEM_API const std::size_t                        MDL_DIMENSIONALITY;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_ENERGY property. */
             extern CDPL_CHEM_API const double                             MDL_ENERGY;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_CHIRAL_FLAG property. */
             extern CDPL_CHEM_API const bool                               MDL_CHIRAL_FLAG;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_SCALING_FACTOR1 property. */
             extern CDPL_CHEM_API const long                               MDL_SCALING_FACTOR1;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MDL_SCALING_FACTOR2 property. */
             extern CDPL_CHEM_API const double                             MDL_SCALING_FACTOR2;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE property. */
             extern CDPL_CHEM_API const unsigned int                       MOL2_MOLECULE_TYPE;
+            /** \brief Default value for the Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE property. */
             extern CDPL_CHEM_API const unsigned int                       MOL2_CHARGE_TYPE;
         } // namespace MolecularGraphPropertyDefault
     } // namespace Chem

@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Reader for molecule data in the bzip2-compressed native I/O format of the <em>CDPL</em>.
+         */
         typedef Util::CompressedDataReader<CDFMoleculeReader, Util::BZip2IStream> CDFBZ2MoleculeReader;
     }
 } // namespace CDPL

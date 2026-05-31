@@ -40,12 +40,16 @@ namespace CDPL
     {
 
         /**
-         * \brief KeteneYnolTautomerizationRule.
+         * \brief Chem::PatternBasedTautomerizationRule implementation that enumerates ketene/ynol tautomers
+         *        (Chem::TautomerizationType::KETENE_YNOL).
          */
         class CDPL_CHEM_API KeteneYnolTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
+            /**
+             * \brief Constructs the rule and registers the built-in ketene/ynol tautomerization patterns.
+             */
             KeteneYnolTautomerization();
         };
     } // namespace Chem
