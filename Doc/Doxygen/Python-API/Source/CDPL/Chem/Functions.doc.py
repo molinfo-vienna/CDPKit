@@ -128,30 +128,38 @@ def clear3DCoordinatesArray(atom: Atom) -> None: pass
 def get3DCoordinates(cntnr: AtomContainer, coords: Math.Vector3DArray, coords_func: Atom3DCoordinatesFunction, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param entity 
-# \param coords 
-#
+# \brief Sets the 3D coordinates of <em>entity</em> (Chem.Entity3DProperty.COORDINATES_3D) to <em>coords</em>.
+# 
+# \param entity The entity to modify.
+# \param coords The 3D coordinates to store.
+# 
 def set3DCoordinates(entity: Entity3D, coords: Math.Vector3D) -> None: pass
 
 ##
-# \brief 
-# \param entity 
-# \return 
-#
+# \brief Tells whether <em>entity</em> carries the Chem.Entity3DProperty.COORDINATES_3D property.
+# 
+# \param entity The entity to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def has3DCoordinates(entity: Entity3D) -> bool: pass
 
 ##
-# \brief 
-# \param entity 
-# \return 
-#
+# \brief Returns the 3D coordinates stored as Chem.Entity3DProperty.COORDINATES_3D of <em>entity</em>.
+# 
+# \param entity The entity to query.
+# 
+# \return The 3D coordinates of <em>entity</em>. 
+# 
+# \throw Base.ItemNotFound if the property has not been set.
+# 
 def get3DCoordinates(entity: Entity3D) -> Math.Vector3D: pass
 
 ##
-# \brief 
-# \param entity 
-#
+# \brief Removes the Chem.Entity3DProperty.COORDINATES_3D property from <em>entity</em>.
+# 
+# \param entity The entity to modify.
+# 
 def clear3DCoordinates(entity: Entity3D) -> None: pass
 
 ##
@@ -301,30 +309,36 @@ def getAtomMappingID(atom: Atom) -> int: pass
 def clearAtomMappingID(atom: Atom) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param mapping 
-#
+# \brief Sets the Chem.ReactionProperty.ATOM_MAPPING property of <em>rxn</em> to <em>mapping</em>.
+# 
+# \param rxn The reaction to modify.
+# \param mapping The new reactant-to-product atom mapping.
+# 
 def setAtomMapping(rxn: Reaction, mapping: AtomMapping) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.ATOM_MAPPING property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAtomMapping(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.ATOM_MAPPING property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored reactant-to-product atom mapping.
+# 
 def getAtomMapping(rxn: Reaction) -> AtomMapping: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.ATOM_MAPPING property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearAtomMapping(rxn: Reaction) -> None: pass
 
 ##
@@ -336,11 +350,12 @@ def clearAtomMapping(rxn: Reaction) -> None: pass
 def setAtomMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param constr 
-# \param overwrite 
-#
+# \brief Sets the atom-level match-constraint list <em>constr</em> on every atom of every component of <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# \param constr The match-constraint list to assign.
+# \param overwrite If <tt>True</tt>, replaces any existing per-atom constraints; if <tt>False</tt>, leaves atoms that already carry a list unchanged.
+# 
 def setAtomMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
@@ -366,11 +381,12 @@ def setAtomTypesFromSymbols(molgraph: MolecularGraph, overwrite: bool) -> None: 
 def setBondMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param constr 
-# \param overwrite 
-#
+# \brief Sets the bond-level match-constraint list <em>constr</em> on every bond of every component of <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# \param constr The match-constraint list to assign.
+# \param overwrite If <tt>True</tt>, replaces any existing per-bond constraints; if <tt>False</tt>, leaves bonds that already carry a list unchanged.
+# 
 def setBondMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
@@ -509,30 +525,36 @@ def getComment(molgraph: MolecularGraph) -> str: pass
 def clearComment(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param comment 
-#
+# \brief Sets the Chem.ReactionProperty.COMMENT property of <em>rxn</em> to <em>comment</em>.
+# 
+# \param rxn The reaction to modify.
+# \param comment The new comment string.
+# 
 def setComment(rxn: Reaction, comment: str) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.COMMENT property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasComment(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.COMMENT property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored comment.
+# 
 def getComment(rxn: Reaction) -> str: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.COMMENT property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearComment(rxn: Reaction) -> None: pass
 
 ##
@@ -597,38 +619,45 @@ def getComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
 def clearComponentGroups(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param comp_groups 
-#
+# \brief Sets the Chem.ReactionProperty.COMPONENT_GROUPS property of <em>rxn</em> to <em>comp_groups</em>.
+# 
+# \param rxn The reaction to modify.
+# \param comp_groups The new component-group fragment list.
+# 
 def setComponentGroups(rxn: Reaction, comp_groups: FragmentList) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.COMPONENT_GROUPS property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasComponentGroups(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.COMPONENT_GROUPS property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored component-group fragment list.
+# 
 def getComponentGroups(rxn: Reaction) -> FragmentList: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.COMPONENT_GROUPS property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearComponentGroups(rxn: Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param constr 
-# \param overwrite 
-#
+# \brief Sets the molecular-graph-level match-constraint list <em>constr</em> on every component of <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# \param constr The match-constraint list to assign.
+# \param overwrite If <tt>True</tt>, replaces any existing per-component constraints; if <tt>False</tt>, leaves components that already carry a list unchanged.
+# 
 def setComponentMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
@@ -1176,84 +1205,102 @@ def getMDLEnergy(molgraph: MolecularGraph) -> float: pass
 def clearMDLEnergy(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param reg_no 
-#
+# \brief Sets the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of <em>rxn</em> to <em>reg_no</em>.
+# 
+# \param rxn The reaction to modify.
+# \param reg_no The new MDL external registry number.
+# 
 def setMDLExternalRegistryNumber(rxn: Reaction, reg_no: str) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLExternalRegistryNumber(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored MDL external registry number.
+# 
 def getMDLExternalRegistryNumber(rxn: Reaction) -> str: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMDLExternalRegistryNumber(rxn: Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param reg_no 
-#
+# \brief Sets the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of <em>rxn</em> to <em>reg_no</em>.
+# 
+# \param rxn The reaction to modify.
+# \param reg_no The new MDL internal registry number.
+# 
 def setMDLInternalRegistryNumber(rxn: Reaction, reg_no: str) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLInternalRegistryNumber(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored MDL internal registry number.
+# 
 def getMDLInternalRegistryNumber(rxn: Reaction) -> str: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMDLInternalRegistryNumber(rxn: Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param mol_rec 
-#
+# \brief Sets the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of <em>rxn</em> to <em>mol_rec</em>.
+# 
+# \param rxn The reaction to modify.
+# \param mol_rec The new MDL molecule record.
+# 
 def setMDLMoleculeRecord(rxn: Reaction, mol_rec: Molecule) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_MOLECULE_RECORD property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLMoleculeRecord(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored MDL molecule record (typically the structure component of an RD-file).
+# 
 def getMDLMoleculeRecord(rxn: Reaction) -> Molecule: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MDL_MOLECULE_RECORD property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMDLMoleculeRecord(rxn: Reaction) -> None: pass
 
 ##
@@ -1311,57 +1358,69 @@ def getMDLProgramName(molgraph: MolecularGraph) -> str: pass
 def clearMDLProgramName(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param name 
-#
+# \brief Sets the Chem.ReactionProperty.MDL_PROGRAM_NAME property of <em>rxn</em> to <em>name</em>.
+# 
+# \param rxn The reaction to modify.
+# \param name The new MDL program name.
+# 
 def setMDLProgramName(rxn: Reaction, name: str) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_PROGRAM_NAME property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLProgramName(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MDL_PROGRAM_NAME property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored MDL program name.
+# 
 def getMDLProgramName(rxn: Reaction) -> str: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MDL_PROGRAM_NAME property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMDLProgramName(rxn: Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param version 
-#
+# \brief Sets the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of <em>rxn</em> to <em>version</em>.
+# 
+# \param rxn The reaction to modify.
+# \param version The new RXN-file version (see Chem.MDLDataFormatVersion).
+# 
 def setMDLRXNFileVersion(rxn: Reaction, version: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLRXNFileVersion(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored RXN-file version (see Chem.MDLDataFormatVersion).
+# 
 def getMDLRXNFileVersion(rxn: Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMDLRXNFileVersion(rxn: Reaction) -> None: pass
 
 ##
@@ -1392,30 +1451,36 @@ def getMDLRegistryNumber(molgraph: MolecularGraph) -> int: pass
 def clearMDLRegistryNumber(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param reg_no 
-#
+# \brief Sets the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of <em>rxn</em> to <em>reg_no</em>.
+# 
+# \param rxn The reaction to modify.
+# \param reg_no The new MDL registry number.
+# 
 def setMDLRegistryNumber(rxn: Reaction, reg_no: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLRegistryNumber(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored MDL registry number.
+# 
 def getMDLRegistryNumber(rxn: Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMDLRegistryNumber(rxn: Reaction) -> None: pass
 
 ##
@@ -1527,30 +1592,36 @@ def getMDLUserInitials(molgraph: MolecularGraph) -> str: pass
 def clearMDLUserInitials(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param initials 
-#
+# \brief Sets the Chem.ReactionProperty.MDL_USER_INITIALS property of <em>rxn</em> to <em>initials</em>.
+# 
+# \param rxn The reaction to modify.
+# \param initials The new MDL user initials.
+# 
 def setMDLUserInitials(rxn: Reaction, initials: str) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_USER_INITIALS property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLUserInitials(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MDL_USER_INITIALS property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored MDL user initials.
+# 
 def getMDLUserInitials(rxn: Reaction) -> str: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MDL_USER_INITIALS property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMDLUserInitials(rxn: Reaction) -> None: pass
 
 ##
@@ -1851,30 +1922,36 @@ def getMatchConstraints(molgraph: MolecularGraph) -> MatchConstraintList: pass
 def clearMatchConstraints(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param constr 
-#
+# \brief Sets the Chem.ReactionProperty.MATCH_CONSTRAINTS property of <em>rxn</em> to <em>constr</em>.
+# 
+# \param rxn The reaction to modify.
+# \param constr The new match-constraint list to store.
+# 
 def setMatchConstraints(rxn: Reaction, constr: MatchConstraintList) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MATCH_CONSTRAINTS property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMatchConstraints(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MATCH_CONSTRAINTS property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored top-level match-constraint list.
+# 
 def getMatchConstraints(rxn: Reaction) -> MatchConstraintList: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MATCH_CONSTRAINTS property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMatchConstraints(rxn: Reaction) -> None: pass
 
 ##
@@ -1959,30 +2036,36 @@ def getMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpressio
 def clearMatchExpression(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param expr 
-#
+# \brief Sets the Chem.ReactionProperty.MATCH_EXPRESSION property of <em>rxn</em> to <em>expr</em>.
+# 
+# \param rxn The reaction to modify.
+# \param expr The new match expression to store.
+# 
 def setMatchExpression(rxn: Reaction, expr: ReactionMatchExpression) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MATCH_EXPRESSION property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasMatchExpression(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.MATCH_EXPRESSION property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored top-level reaction match expression.
+# 
 def getMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.MATCH_EXPRESSION property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearMatchExpression(rxn: Reaction) -> None: pass
 
 ##
@@ -2049,10 +2132,12 @@ def clearMatchExpressionString(bond: Bond) -> None: pass
 def getMaxAtomMappingID(cntnr: AtomContainer) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the largest atom-mapping ID found on any of the atoms in <em>rxn</em>.
+# 
+# \param rxn The reaction to scan.
+# 
+# \return The largest atom-mapping ID, or zero if no IDs are assigned.
+# 
 def getMaxAtomMappingID(rxn: Reaction) -> int: pass
 
 ##
@@ -2065,10 +2150,12 @@ def getMaxAtomMappingID(rxn: Reaction) -> int: pass
 def getMaxComponentGroupID(cntnr: AtomContainer) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the largest component-group ID found on any of the components of <em>rxn</em>.
+# 
+# \param rxn The reaction to scan.
+# 
+# \return The largest component-group ID, or zero if no IDs are assigned.
+# 
 def getMaxComponentGroupID(rxn: Reaction) -> int: pass
 
 ##
@@ -2153,30 +2240,36 @@ def getName(molgraph: MolecularGraph) -> str: pass
 def clearName(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param name 
-#
+# \brief Sets the Chem.ReactionProperty.NAME property of <em>rxn</em> to <em>name</em>.
+# 
+# \param rxn The reaction to modify.
+# \param name The new reaction name.
+# 
 def setName(rxn: Reaction, name: str) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.NAME property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasName(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.NAME property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored reaction name.
+# 
 def getName(rxn: Reaction) -> str: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.NAME property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearName(rxn: Reaction) -> None: pass
 
 ##
@@ -2340,30 +2433,36 @@ def getReactionCenterStatus(bond: Bond) -> int: pass
 def clearReactionCenterStatus(bond: Bond) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param data 
-#
+# \brief Sets the Chem.ReactionProperty.REACTION_DATA property of <em>rxn</em> to <em>data</em>.
+# 
+# \param rxn The reaction to modify.
+# \param data The new MDL reaction data block.
+# 
 def setReactionData(rxn: Reaction, data: StringDataBlock) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.REACTION_DATA property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasReactionData(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.REACTION_DATA property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored MDL reaction data block.
+# 
 def getReactionData(rxn: Reaction) -> StringDataBlock: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.REACTION_DATA property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearReactionData(rxn: Reaction) -> None: pass
 
 ##
@@ -2836,30 +2935,36 @@ def getTimestamp(molgraph: MolecularGraph) -> int: pass
 def clearTimestamp(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param time 
-#
+# \brief Sets the Chem.ReactionProperty.TIMESTAMP property of <em>rxn</em> to <em>time</em>.
+# 
+# \param rxn The reaction to modify.
+# \param time The new timestamp value.
+# 
 def setTimestamp(rxn: Reaction, time: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.TIMESTAMP property.
+# 
+# \param rxn The reaction to query.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasTimestamp(rxn: Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Chem.ReactionProperty.TIMESTAMP property of <em>rxn</em>.
+# 
+# \param rxn The reaction to query.
+# 
+# \return The stored timestamp.
+# 
 def getTimestamp(rxn: Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Removes the Chem.ReactionProperty.TIMESTAMP property from <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# 
 def clearTimestamp(rxn: Reaction) -> None: pass
 
 ##
@@ -3133,10 +3238,13 @@ def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 def calcBasicProperties(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param overwrite 
-#
+# \brief Computes the basic per-component properties (aromaticity, ring info, etc.) of every component of <em>rxn</em>.
+# 
+# \param rxn The reaction to modify.
+# \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
+# 
+# \since 1.1
+# 
 def calcBasicProperties(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
@@ -3293,14 +3401,16 @@ def calcGeometricalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> 
 def calcHashCode(molgraph: MolecularGraph, atom_flags: int = 2147483648, bond_flags: int = 2147483648, ord_h_deplete: bool = True) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param role_mask 
-# \param atom_flags 
-# \param bond_flags 
-# \param ord_h_deplete 
-# \return 
-#
+# \brief Computes a 64-bit hash code for <em>rxn</em> taking into account the specified reaction roles and atom/bond properties.
+# 
+# \param rxn The reaction to hash.
+# \param role_mask A bitmask of Chem.ReactionRole flags selecting the considered component sets.
+# \param atom_flags A bitmask of Chem.AtomPropertyFlag flags controlling which atomic properties enter the hash.
+# \param bond_flags A bitmask of Chem.BondPropertyFlag flags controlling which bond properties enter the hash.
+# \param ord_h_deplete <tt>True</tt> to suppress ordinary hydrogens before hashing.
+# 
+# \return The computed hash code.
+# 
 def calcHashCode(rxn: Reaction, role_mask: int = 7, atom_flags: int = 2147483648, bond_flags: int = 2147483648, ord_h_deplete: bool = True) -> int: pass
 
 ##
@@ -3670,18 +3780,22 @@ def generateMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpr
 def generateMatchExpression(molgraph: MolecularGraph, overwrite: bool) -> MolecularGraphMatchExpression: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Builds a reaction-level match expression from the constraints currently attached to <em>rxn</em> and returns it without modifying <em>rxn</em>.
+# 
+# \param rxn The reaction to inspect.
+# 
+# \return The generated match expression.
+# 
 def generateMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param overwrite 
-# \return 
-#
+# \brief Builds and (optionally) stores the reaction-level match expression of <em>rxn</em>.
+# 
+# \param rxn The reaction to inspect/modify.
+# \param overwrite If <tt>True</tt>, the generated expression replaces any existing Chem.ReactionProperty.MATCH_EXPRESSION; if <tt>False</tt>, the existing one (if any) is returned unchanged.
+# 
+# \return The generated (or pre-existing) match expression.
+# 
 def generateMatchExpression(rxn: Reaction, overwrite: bool) -> ReactionMatchExpression: pass
 
 ##
@@ -3715,10 +3829,11 @@ def generateMatchExpressionStrings(molgraph: MolecularGraph, overwrite: bool) ->
 def generateMatchExpressions(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param overwrite 
-#
+# \brief Generates and stores match expressions for the atoms, bonds, components, and <em>rxn</em> itself.
+# 
+# \param rxn The reaction to modify.
+# \param overwrite If <tt>True</tt>, replaces any existing match expressions; if <tt>False</tt>, leaves items that already carry a match expression unchanged.
+# 
 def generateMatchExpressions(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
@@ -3751,10 +3866,11 @@ def generateSMILES(rxn: Reaction, canonical: bool = False, ord_h_deplete: bool =
 def initSubstructureSearchQuery(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param overwrite 
-#
+# \brief Prepares <em>rxn</em> for use as a substructure-search query (e.g. by pre-computing match expressions and required cached properties).
+# 
+# \param rxn The reaction to modify.
+# \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
+# 
 def initSubstructureSearchQuery(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
@@ -3765,10 +3881,11 @@ def initSubstructureSearchQuery(rxn: Reaction, overwrite: bool) -> None: pass
 def initSubstructureSearchTarget(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param overwrite 
-#
+# \brief Prepares <em>rxn</em> for use as a substructure-search target (e.g. by pre-computing required cached properties).
+# 
+# \param rxn The reaction to modify.
+# \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
+# 
 def initSubstructureSearchTarget(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
@@ -4018,18 +4135,22 @@ def perceiveAromaticSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 def perceiveAromaticSubstructure(molgraph: MolecularGraph, overwrite: bool) -> Fragment: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Derives the reactant-to-product atom mapping from the atom mapping IDs of <em>rxn</em> without modifying it.
+# 
+# \param rxn The reaction to inspect.
+# 
+# \return The perceived atom mapping.
+# 
 def perceiveAtomMapping(rxn: Reaction) -> AtomMapping: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param overwrite 
-# \return 
-#
+# \brief Derives and (optionally) stores the reactant-to-product atom mapping of <em>rxn</em>.
+# 
+# \param rxn The reaction to inspect/modify.
+# \param overwrite If <tt>True</tt>, the perceived mapping replaces any existing Chem.ReactionProperty.ATOM_MAPPING; if <tt>False</tt>, the existing one (if any) is returned unchanged.
+# 
+# \return The perceived (or pre-existing) atom mapping.
+# 
 def perceiveAtomMapping(rxn: Reaction, overwrite: bool) -> AtomMapping: pass
 
 ##
@@ -4079,18 +4200,22 @@ def perceiveComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
 def perceiveComponentGroups(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Perceives the component groups of <em>rxn</em> without modifying it.
+# 
+# \param rxn The reaction to inspect.
+# 
+# \return The perceived component-group fragment list.
+# 
 def perceiveComponentGroups(rxn: Reaction) -> FragmentList: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param overwrite 
-# \return 
-#
+# \brief Perceives and (optionally) stores the component groups of <em>rxn</em>.
+# 
+# \param rxn The reaction to inspect/modify.
+# \param overwrite If <tt>True</tt>, the perceived list replaces any existing Chem.ReactionProperty.COMPONENT_GROUPS; if <tt>False</tt>, the existing one (if any) is returned unchanged.
+# 
+# \return The perceived (or pre-existing) component-group fragment list.
+# 
 def perceiveComponentGroups(rxn: Reaction, overwrite: bool) -> FragmentList: pass
 
 ##

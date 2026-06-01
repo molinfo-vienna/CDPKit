@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BasicMolecule.
+# \brief Concrete Chem.Molecule implementation that owns Chem.BasicAtom and Chem.BasicBond instances.
+# 
+# <tt>BasicMolecule</tt> provides the default in-memory representation of a molecular graph: atoms and bonds are allocated from internal object pools and accessed through random-access iterators. The class implements the full editing interface inherited from Chem.Molecule (addAtom, addBond, removeAtom, removeBond, copy, append, remove, reserveMemoryForAtoms, reserveMemoryForBonds) and is the standard concrete type used by readers and downstream algorithms throughout CDPKit.
 # 
 class BasicMolecule(Molecule):
 

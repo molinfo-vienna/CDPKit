@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Reaction.
+# \brief Abstract base class for chemical reactions composed of role-tagged Chem.Molecule components.
+# 
+# Each component carries a Chem.ReactionRole (<tt>REACTANT</tt>, <tt>AGENT</tt> or <tt>PRODUCT</tt>); the role is the primary indexing axis exposed by getComponentRole(), getNumComponents(role), getComponent(idx, role) and the role-restricted iterator pair getComponentsBegin(role)/getComponentsEnd(role). Editing methods (addComponent, removeComponent, swapComponentRoles, clear) are pure virtual and supplied by concrete subclasses such as Chem.BasicReaction. Properties common to all components are inherited from Base.PropertyContainer.
 # 
 class Reaction(Base.PropertyContainer):
 
@@ -232,16 +234,18 @@ class Reaction(Base.PropertyContainer):
     def getProducts() -> ComponentSequence: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Registers a global post-processing function invoked after every reaction copy operation.
+    # 
+    # \param func The function to register.
+    # 
     @staticmethod
     def registerCopyPostprocessingFunction(func: VoidMoleculeMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param src_rxn 
-    #
+    # \brief Invokes all registered copy post-processing functions with <tt>self</tt> as the target reaction and <em>src_rxn</em> as the source.
+    # 
+    # \param src_rxn The source reaction the copy was made from.
+    # 
     def invokeCopyPostprocessingFunctions(src_rxn: Reaction) -> None: pass
 
     ##

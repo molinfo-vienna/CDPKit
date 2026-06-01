@@ -38,7 +38,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is set to <tt>True</tt>, the calculation result will be equivalent to the result that would have been obtained for the ordinary hydrogen deplete input structure. If the control-parameter is set to <tt>False</tt>, the calculation will be performed for the unmodified molecular graph.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \see Chem.AtomProperty.IS_ORDINARY_H for the definition of ordinary hydrogens.
+    # <b>Value Type:</b> <tt>bool</tt> \see Chem.AtomProperty.IS_ORDINARY_H for the definition of ordinary hydrogens. <br>
     # 
     ORDINARY_HYDROGEN_DEPLETE = CDPL.Base.LookupKey('ORDINARY_HYDROGEN_DEPLETE')
 

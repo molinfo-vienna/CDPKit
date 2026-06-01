@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief DefaultTautomerGenerator.
+# \brief Chem.TautomerGenerator preconfigured with the standard CDPKit tautomerization rules.
+# 
+# <tt>DefaultTautomerGenerator</tt> registers the following rules on construction (in order): Chem.GenericHydrogen13ShiftTautomerization, Chem.GenericHydrogen15ShiftTautomerization, Chem.KeteneYnolTautomerization, Chem.PhosphinicAcidTautomerization, Chem.SulfenicAcidTautomerization, and Chem.ConjugatedRingBondPatternSwitching.
 # 
 class DefaultTautomerGenerator(TautomerGenerator):
 
     ##
-    # \brief Constructs the <tt>DefaultTautomerGenerator</tt> instance.
+    # \brief Constructs the <tt>DefaultTautomerGenerator</tt> instance and registers the standard set of tautomerization rules.
     # 
     def __init__() -> None: pass
 

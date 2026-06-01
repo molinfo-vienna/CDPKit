@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Molecule.
+# \brief Abstract base class representing a mutable molecular graph that owns its atoms and bonds.
+# 
+# Extends Chem.MolecularGraph with editing operations (addAtom, addBond, removeAtom, removeBond, copy, append, remove) and supports a global registry of copy-postprocessing callbacks invoked after copy() / operator=() to keep derived state in sync with the source molecular graph.
 # 
 class Molecule(MolecularGraph):
 
@@ -233,16 +235,20 @@ class Molecule(MolecularGraph):
     def getBonds() -> BondSequence: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Registers a new copy-postprocessing function in the global registry.
+    # 
+    # Registered callbacks are invoked in registration order after each copy() / operator=() that populates a Chem.Molecule from a Chem.MolecularGraph.
+    # 
+    # \param func The callback to register.
+    # 
     @staticmethod
     def registerCopyPostprocessingFunction(func: VoidMoleculeMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param src_molgraph 
-    #
+    # \brief Invokes all registered copy-postprocessing functions on this molecule with <em>src_molgraph</em> as the source.
+    # 
+    # \param src_molgraph The molecular graph that was copied into this molecule.
+    # 
     def invokeCopyPostprocessingFunctions(src_molgraph: MolecularGraph) -> None: pass
 
     ##

@@ -25,31 +25,31 @@
 class ReactionPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.ReactionProperty.NAME property (empty string).
+    # 
     NAME = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.ReactionProperty.COMMENT property (empty string).
+    # 
     COMMENT = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.ReactionProperty.MATCH_CONSTRAINTS property (empty Chem.MatchConstraintList).
+    # 
     MATCH_CONSTRAINTS = MatchConstraintList()
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property (Chem.MDLDataFormatVersion.UNDEF).
+    # 
     MDL_RXN_FILE_VERSION = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.ReactionProperty.MDL_PROGRAM_NAME property (<tt>"CDPL"</tt>).
+    # 
     MDL_PROGRAM_NAME = 'CDPL'
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the Chem.ReactionProperty.MDL_USER_INITIALS property (empty string).
+    # 
     MDL_USER_INITIALS = ''

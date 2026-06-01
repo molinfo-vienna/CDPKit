@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief SymmetryClassCalculator.
+# \brief Perceives topological-symmetry classes of the atoms in a molecular graph.
+# 
+# Two atoms are placed in the same class when the topology and configurable atom/bond properties (see DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS) of their respective graph neighbourhoods are indistinguishable. The class identifiers are returned as a Util.STArray indexed by the atom index in the molecular graph. Treatment of implicit hydrogens can be configured via includeImplicitHydrogens().
 # 
 # \see [\ref TOPSY]
 # 

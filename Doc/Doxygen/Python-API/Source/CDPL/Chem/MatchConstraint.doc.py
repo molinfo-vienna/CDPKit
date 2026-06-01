@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MatchConstraint.
+# \brief Describes a single attribute-comparison constraint between a query and a target object used by molecular-graph matching algorithms.
+# 
+# Each constraint is identified by an integer <em>id</em> (typically a Chem.*MatchConstraint constant such as Chem.AtomMatchConstraint.AROMATICITY) and pairs it with a Relation (<tt>LESS</tt>, <tt>EQUAL</tt>, <tt>GREATER</tt>, <tt>LESS_OR_EQUAL</tt>, <tt>GREATER_OR_EQUAL</tt>, <tt>NOT_EQUAL</tt>, or <tt>ANY</tt>) plus an optional query-side value stored in a Base.Any. The matching algorithm reads back <em>id</em>, <em>relation</em> and <em>value</em> to decide whether a query/target attribute pair satisfies the constraint.
 # 
 class MatchConstraint(Boost.Python.instance):
 

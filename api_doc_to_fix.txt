@@ -1,2 +1,1 @@
-Libs/C++/Include/CDPL/Chem/BasicMolecule.hpp (missing class doc)
-‎Libs/C++/Include/CDPL/Math/Functional.hpp    (starting with line 1759 member function docs miss parameter and return value docs)
+‎

@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MaxCommonAtomSubstructureSearch.
+# \brief Computes the maximum common atom substructure between a query and a target molecular graph by reducing the problem to maximum-clique enumeration on an association (modular product) graph.
+# 
+# setQuery() fixes the query molecular graph; mappingExists() returns a yes/no answer (subject to the setMinSubstructureSize() lower bound), findAllMappings() enumerates all atom-count-maximal common substructures, and findMaxBondMappings() restricts the output to atom-and-bond-count-maximal substructures. Per-atom/-bond/-graph Chem.MatchExpression objects attached to the query are honoured. The result set is bounded by setMaxNumMappings() / uniqueMappingsOnly() and accessed through the same iterator pair as Chem.SubstructureSearch.
 # 
 # \see [\ref MCASA]
 # 

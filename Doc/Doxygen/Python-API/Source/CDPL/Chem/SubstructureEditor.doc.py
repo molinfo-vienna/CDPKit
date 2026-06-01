@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief SubstructureEditor.
+# \brief Pattern-driven editor that rewrites matched substructures of a Chem.Molecule using a result template, with optional exclude patterns guarding sites that must not be touched.
+# 
+# Search patterns supply the substructures the editor will look for; the (single) result pattern defines what each match is rewritten to; exclude patterns mark matches that must be skipped (a search match is discarded when its atoms/bonds form a subset of any exclude match). The editor iterates until no further matches can be transformed and returns the number of applied edits.
 # 
 # \since 1.3.0
 # 
@@ -65,22 +67,30 @@ class SubstructureEditor(Boost.Python.instance):
     def addSearchPattern(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored substructure-search patterns.
+    # 
+    # \return The number of stored search patterns.
+    # 
     def getNumSearchPatterns() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the molecular graph of the search pattern at index <em>idx</em>.
+    # 
+    # \param idx The zero-based search-pattern index.
+    # 
+    # \return The molecular graph of the search pattern at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns() - 1].
+    # 
     def getSearchPattern(idx: int) -> MolecularGraph: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the search pattern at index <em>idx</em>.
+    # 
+    # \param idx The zero-based search-pattern index to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns() - 1].
+    # 
     def removeSearchPattern(idx: int) -> None: pass
 
     ##
@@ -96,22 +106,30 @@ class SubstructureEditor(Boost.Python.instance):
     def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored substructure-exclude patterns.
+    # 
+    # \return The number of stored exclude patterns.
+    # 
     def getNumExcludePatterns() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the molecular graph of the exclude pattern at index <em>idx</em>.
+    # 
+    # \param idx The zero-based exclude-pattern index.
+    # 
+    # \return The molecular graph of the exclude pattern at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns() - 1].
+    # 
     def getExcludePattern(idx: int) -> MolecularGraph: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the exclude pattern at index <em>idx</em>.
+    # 
+    # \param idx The zero-based exclude-pattern index to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns() - 1].
+    # 
     def removeExcludePattern(idx: int) -> None: pass
 
     ##
@@ -126,9 +144,10 @@ class SubstructureEditor(Boost.Python.instance):
     def setResultPattern(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently set result pattern.
+    # 
+    # \return The currently set result pattern, or a null reference if none has been set.
+    # 
     def getResultPattern() -> MolecularGraph: pass
 
     ##
@@ -137,18 +156,22 @@ class SubstructureEditor(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param mol 
-    # \return 
-    #
+    # \brief Edits <em>mol</em> in place by applying the result pattern at every search-pattern match that is not covered by an exclude pattern; repeats until no further changes occur.
+    # 
+    # \param mol The molecule to edit.
+    # 
+    # \return The number of applied transformations.
+    # 
     def edit(mol: Molecule) -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param res_mol 
-    # \return 
-    #
+    # \brief Copies <em>molgraph</em> into <em>res_mol</em> and then edits <em>res_mol</em> via edit(Molecule&).
+    # 
+    # \param molgraph The source molecular graph.
+    # \param res_mol The molecule receiving the edited result.
+    # 
+    # \return The number of applied transformations.
+    # 
     def edit(molgraph: MolecularGraph, res_mol: Molecule) -> int: pass
 
     objectID = property(getObjectID)

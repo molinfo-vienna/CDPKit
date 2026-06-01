@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief ReactionSubstructureSearch.
+# \brief Reaction-level analogue of Chem.SubstructureSearch that locates atom/bond mappings of a query reaction pattern in a target reaction.
+# 
+# Use setQuery() to fix the query reaction and mappingExists() / findMappings() to evaluate it against a target Chem.Reaction. Per-component reaction-role visibility is controlled with setEnabledReactionRoles() (Chem.ReactionRole bitmask); the matcher considers atom-, bond-, and reaction-level Chem.MatchExpression objects attached to the query reaction's components. The result set is bounded by setMaxNumMappings() / uniqueMappingsOnly() and accessed through the same mapping-iterator interface as Chem.SubstructureSearch.
 # 
 class ReactionSubstructureSearch(Boost.Python.instance):
 

@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Fragment.
+# \brief Concrete Chem.MolecularGraph implementation that stores references to a selectable subset of atoms and bonds (typically of a parent Chem.Molecule).
+# 
+# Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond(); adding a bond automatically adds its end atoms when needed. <tt>Fragment</tt> does not own the referenced atoms or bonds — they must outlive any <tt>Fragment</tt> instance that references them.
 # 
 class Fragment(MolecularGraph):
 
@@ -208,15 +210,17 @@ class Fragment(MolecularGraph):
     def getBonds() -> BondSequence: pass
 
     ##
-    # \brief 
-    # \param num_atoms 
-    #
+    # \brief Reserves storage for at least <em>num_atoms</em> atom references to avoid reallocations on subsequent additions.
+    # 
+    # \param num_atoms The minimum number of atom references to accommodate.
+    # 
     def reserveMemoryForAtoms(num_atoms: int) -> None: pass
 
     ##
-    # \brief 
-    # \param num_bonds 
-    #
+    # \brief Reserves storage for at least <em>num_bonds</em> bond references to avoid reallocations on subsequent additions.
+    # 
+    # \param num_bonds The minimum number of bond references to accommodate.
+    # 
     def reserveMemoryForBonds(num_bonds: int) -> None: pass
 
     ##

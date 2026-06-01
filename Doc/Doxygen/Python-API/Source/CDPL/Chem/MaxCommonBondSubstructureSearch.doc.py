@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MaxCommonBondSubstructureSearch.
+# \brief Computes the maximum common bond substructure between a query and a target molecular graph by reducing the problem to maximum-clique enumeration on a bond-based association graph.
+# 
+# Unlike Chem.MaxCommonAtomSubstructureSearch — which maximises shared atoms — this class enumerates substructures with the maximum number of shared bonds (and, in findMaxAtomMappings(), the maximum number of shared atoms within those). The usual interface applies: setQuery() to set the query graph, mappingExists() for a yes/no answer with the setMinSubstructureSize() lower bound on bond count, and the result set is bounded by setMaxNumMappings() and uniqueMappingsOnly().
 # 
 # \see [\ref MCESA]
 # 

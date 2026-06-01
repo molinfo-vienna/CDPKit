@@ -77,18 +77,18 @@ class AtomContainer(Entity3DContainer):
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # \brief Returns a reference to the Chem.Entity3D instance at index <em>idx</em> (equivalent to getAtom(idx)).
     # 
     # \param idx The zero-based index of the Chem.Entity3D instance to return.
     # 
-    # \return A reference to the entity at the specified index. 
+    # \return A reference to the Chem.Entity3D instance at the specified index. 
     # 
-    # \throw Base.IndexError if the number of entities is zero or <em>idx</em> is not in the range [0, getNumEntities() - 1].
+    # \throw Base.IndexError if the container is empty or <em>idx</em> is not in the range [0, getNumAtoms() - 1].
     # 
     def getEntity(idx: int) -> Entity3D: pass
 
     ##
-    # \brief Returns the number of stored Chem.Entity3D objects.
+    # \brief Returns the number of stored Chem.Entity3D objects (equivalent to getNumAtoms()).
     # 
     # \return The number of stored Chem.Entity3D objects.
     # 

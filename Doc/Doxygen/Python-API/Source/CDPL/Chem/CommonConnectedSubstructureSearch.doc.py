@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief CommonConnectedSubstructureSearch.
+# \brief Enumerates all maximal common connected substructures shared between a query and a target molecular graph.
+# 
+# Unlike Chem.MaxCommonAtomSubstructureSearch / Chem.MaxCommonBondSubstructureSearch, the matches reported here are required to be <em>connected</em> — i.e. each mapping covers a single connected subgraph of both the query and the target. The usual lifecycle applies: setQuery() fixes the query, mappingExists() returns a yes/no answer (subject to the setMinSubstructureSize() lower bound), findAllMappings() enumerates all matches, and the result set is bounded by setMaxNumMappings() / uniqueMappingsOnly(). Per-atom, -bond and -graph Chem.MatchExpression objects can be substituted via the corresponding <tt>set*MatchExpressionFunction</tt> setters.
 # 
 # \see [\ref MCSA]
 # 
@@ -51,21 +53,24 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a function that resolves the atom-level Chem.MatchExpression for a query atom.
+    # 
+    # \param func The accessor function to use.
+    # 
     def setAtomMatchExpressionFunction(func: AtomMatchExpressionPtrAtomFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a function that resolves the bond-level Chem.MatchExpression for a query bond.
+    # 
+    # \param func The accessor function to use.
+    # 
     def setBondMatchExpressionFunction(func: BondMatchExpressionPtrBondFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a function that resolves the graph-level Chem.MatchExpression for the query molecular graph.
+    # 
+    # \param func The accessor function to use.
+    # 
     def setMolecularGraphMatchExpressionFunction(func: MolGraphMatchExpressionPtrMolGraphFunctor) -> None: pass
 
     ##

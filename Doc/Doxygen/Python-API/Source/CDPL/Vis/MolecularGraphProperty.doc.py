@@ -177,7 +177,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line spacing takes precedence over the distance specified by the parameter Vis.ControlParameter.BOND_LINE_SPACING.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_SPACING.
+    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_SPACING. <br>
     # 
     BOND_LINE_SPACING = CDPL.Base.LookupKey('BOND_LINE_SPACING')
 
@@ -219,7 +219,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the hash distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the hash distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified hash spacing takes precedence over the spacing specified by the parameter Vis.ControlParameter.STEREO_BOND_HASH_SPACING.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_HASH_SPACING.
+    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_HASH_SPACING. <br>
     # 
     STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey('STEREO_BOND_HASH_SPACING')
 
@@ -228,7 +228,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the wedge width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the wedge width grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified wedge width takes precedence over the width specified by the parameter Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH.
+    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH. <br>
     # 
     STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey('STEREO_BOND_WEDGE_WIDTH')
 
@@ -237,7 +237,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified trim length takes precedence over the length specified by the parameter Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH.
+    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH. <br>
     # 
     DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('DOUBLE_BOND_TRIM_LENGTH')
 
@@ -246,7 +246,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified trim length takes precedence over the length specified by the parameter Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH.
+    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH. <br>
     # 
     TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('TRIPLE_BOND_TRIM_LENGTH')
 
