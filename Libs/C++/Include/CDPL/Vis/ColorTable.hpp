@@ -48,11 +48,23 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ColorTable instances.
+             */
             typedef std::shared_ptr<ColorTable> SharedPointer;
 
+            /**
+             * \brief Constructs an empty color table.
+             */
             ColorTable():
                 Map<std::size_t, Color>() {}
 
+            /**
+             * \brief Constructs a color table by inserting every entry in the range <em>[beg, end)</em>.
+             * \tparam Iter Forward iterator over <tt>std::pair<std::size_t, Color></tt>-compatible elements.
+             * \param beg Iterator to the first entry to insert.
+             * \param end Iterator past the last entry to insert.
+             */
             template <typename Iter>
             ColorTable(const Iter& beg, const Iter& end):
                 Map<std::size_t, Color>(beg, end)

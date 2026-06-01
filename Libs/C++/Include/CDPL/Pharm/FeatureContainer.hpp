@@ -169,10 +169,35 @@ namespace CDPL
              */
             virtual void orderFeatures(const FeatureCompareFunction& func) = 0;
 
+            /**
+             * \brief Returns the number of stored Chem::Entity3D objects.
+             *
+             * Forwards to getNumFeatures() and exists to satisfy the Chem::Entity3DContainer interface.
+             *
+             * \return The number of contained features.
+             */
             virtual std::size_t getNumEntities() const;
 
+            /**
+             * \brief Returns a \c const reference to the Chem::Entity3D at index \a idx.
+             *
+             * Forwards to getFeature() and exists to satisfy the Chem::Entity3DContainer interface.
+             *
+             * \param idx The zero-based entity index.
+             * \return A \c const reference to the entity at the specified index.
+             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             */
             virtual const Chem::Entity3D& getEntity(std::size_t idx) const;
 
+            /**
+             * \brief Returns a non-\c const reference to the Chem::Entity3D at index \a idx.
+             *
+             * Forwards to getFeature() and exists to satisfy the Chem::Entity3DContainer interface.
+             *
+             * \param idx The zero-based entity index.
+             * \return A non-\c const reference to the entity at the specified index.
+             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             */
             virtual Chem::Entity3D& getEntity(std::size_t idx);
 
           protected:

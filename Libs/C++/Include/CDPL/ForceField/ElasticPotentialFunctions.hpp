@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Functions for the calculation of force fieldelastic potential energies and gradients.
+ * \brief Functions for the calculation of force-field elastic-potential energies and gradients.
  */
 
 #ifndef CDPL_FORCEFIELD_ELASTICPOTENTIALFUNCTIONS_HPP
@@ -41,13 +41,27 @@ namespace CDPL
     namespace ForceField
     {
 
-        /*
+        /**
+         * \brief Accumulates the elastic-potential energy of every potential in the range <tt>[beg, end)</tt>.
+         * \tparam ValueType The energy/coordinate value type.
+         * \tparam Iter The iterator type yielding ForceField::ElasticPotential instances.
+         * \tparam CoordsArray The array type providing per-atom 3D coordinates indexed by atom index.
+         * \param beg Iterator pointing to the first ElasticPotential in the range.
+         * \param end Iterator past the last ElasticPotential in the range.
+         * \param coords The atomic-coordinate array used to evaluate each potential.
+         * \return The accumulated elastic-potential energy.
          * \since 1.1
          */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcElasticPotentialEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
-        /*
+        /**
+         * \brief Calculates the energy of a single ElasticPotential under the supplied atom coordinates.
+         * \tparam ValueType The energy/coordinate value type.
+         * \tparam CoordsArray The array type providing per-atom 3D coordinates indexed by atom index.
+         * \param pot The elastic potential to evaluate.
+         * \param coords The atomic-coordinate array.
+         * \return The elastic-potential energy of \a pot.
          * \since 1.1
          */
         template <typename ValueType, typename CoordsArray>
@@ -74,13 +88,33 @@ namespace CDPL
         ValueType calcElasticPotentialEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
                                              const ValueType& force_const, const ValueType& ref_length);
 
-        /*
+        /**
+         * \brief Accumulates the elastic-potential energy and gradient contributions of every potential in the range <tt>[beg, end)</tt>.
+         * \tparam ValueType The energy/coordinate value type.
+         * \tparam Iter The iterator type yielding ForceField::ElasticPotential instances.
+         * \tparam CoordsArray The array type providing per-atom 3D coordinates indexed by atom index.
+         * \tparam GradVector The array type providing per-atom gradient accumulators indexed by atom index.
+         * \param beg Iterator pointing to the first ElasticPotential in the range.
+         * \param end Iterator past the last ElasticPotential in the range.
+         * \param coords The atomic-coordinate array used to evaluate each potential.
+         * \param grad The per-atom gradient array receiving the accumulated contributions.
+         * \return The accumulated elastic-potential energy.
+         * \note Gradient contributions for an atom are \e added to the corresponding entry of \a grad.
          * \since 1.1
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcElasticPotentialGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
-        /*
+        /**
+         * \brief Calculates the energy and gradient contribution of a single ElasticPotential under the supplied atom coordinates.
+         * \tparam ValueType The energy/coordinate value type.
+         * \tparam CoordsArray The array type providing per-atom 3D coordinates indexed by atom index.
+         * \tparam GradVector The array type providing per-atom gradient accumulators indexed by atom index.
+         * \param pot The elastic potential to evaluate.
+         * \param coords The atomic-coordinate array.
+         * \param grad The per-atom gradient array receiving the accumulated contributions.
+         * \return The elastic-potential energy of \a pot.
+         * \note Gradient contributions for the two atoms are \e added to the corresponding entries of \a grad.
          * \since 1.1
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>

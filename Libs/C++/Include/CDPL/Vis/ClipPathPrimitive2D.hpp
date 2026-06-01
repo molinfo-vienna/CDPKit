@@ -61,10 +61,23 @@ namespace CDPL
              */
             ClipPathPrimitive2D() {}
 
+            /**
+             * \brief Installs this clip path as the active clipping region of the renderer \a renderer.
+             * \param renderer The renderer that gets the clip path set on.
+             */
             void render(Renderer2D& renderer) const;
 
+            /**
+             * \brief Creates a dynamically allocated copy of this primitive.
+             * \return A smart pointer to the copy.
+             */
             GraphicsPrimitive2D::SharedPointer clone() const;
 
+            /**
+             * \brief Computes the bounds of the clip path.
+             * \param bounds The Rectangle2D instance storing the result.
+             * \param font_metrics Unused for clip paths; included to satisfy the GraphicsPrimitive2D interface.
+             */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
         };
     } // namespace Vis
