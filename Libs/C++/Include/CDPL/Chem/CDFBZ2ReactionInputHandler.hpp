@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of gzip-compressed reaction data in the native I/O format of the <em>CDPL</em>.
+         * \brief A handler for the input of bzip2-compressed reaction data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::DefaultDataInputHandler<CDFBZ2ReactionReader, DataFormat::CDF_BZ2> CDFBZ2ReactionInputHandler;
     } // namespace Chem
