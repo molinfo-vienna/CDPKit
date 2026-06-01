@@ -40,15 +40,21 @@ namespace CDPL
     {
 
         /**
-     * \brief DefaultTautomerGenerator.
-     */
+         * \brief Chem::TautomerGenerator preconfigured with the standard CDPKit tautomerization rules.
+         *
+         * \c %DefaultTautomerGenerator registers the following rules on construction (in order):
+         * Chem::GenericHydrogen13ShiftTautomerization, Chem::GenericHydrogen15ShiftTautomerization,
+         * Chem::KeteneYnolTautomerization, Chem::PhosphinicAcidTautomerization,
+         * Chem::SulfenicAcidTautomerization, and Chem::ConjugatedRingBondPatternSwitching.
+         */
         class CDPL_CHEM_API DefaultTautomerGenerator : public TautomerGenerator
         {
 
           public:
             /**
-         * \brief Constructs the \c %DefaultTautomerGenerator instance.
-         */
+             * \brief Constructs the \c %DefaultTautomerGenerator instance and registers the standard
+             *        set of tautomerization rules.
+             */
             DefaultTautomerGenerator();
         };
     } // namespace Chem

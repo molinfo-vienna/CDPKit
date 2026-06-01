@@ -46,7 +46,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Fragment.
+         * \brief Concrete Chem::MolecularGraph implementation that stores references to a selectable subset
+         *        of atoms and bonds (typically of a parent Chem::Molecule).
+         *
+         * Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond();
+         * adding a bond automatically adds its end atoms when needed. \c %Fragment does not own the referenced
+         * atoms or bonds — they must outlive any \c %Fragment instance that references them.
          */
         class CDPL_CHEM_API Fragment : public MolecularGraph
         {
@@ -361,10 +366,22 @@ namespace CDPL
              */
             Fragment& operator-=(const MolecularGraph& molgraph);
 
+            /**
+             * \brief Creates a deep copy of this fragment (including the copied properties).
+             * \return A smart pointer to the cloned Chem::MolecularGraph.
+             */
             MolecularGraph::SharedPointer clone() const;
 
+            /**
+             * \brief Reserves storage for at least \a num_atoms atom references to avoid reallocations on subsequent additions.
+             * \param num_atoms The minimum number of atom references to accommodate.
+             */
             void reserveMemoryForAtoms(std::size_t num_atoms);
 
+            /**
+             * \brief Reserves storage for at least \a num_bonds bond references to avoid reallocations on subsequent additions.
+             * \param num_bonds The minimum number of bond references to accommodate.
+             */
             void reserveMemoryForBonds(std::size_t num_bonds);
 
           private:

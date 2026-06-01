@@ -53,7 +53,14 @@ namespace CDPL
         class StereoDescriptor;
 
         /**
-         * \brief SubstructureEditor.
+         * \brief Pattern-driven editor that rewrites matched substructures of a Chem::Molecule using a
+         *        result template, with optional exclude patterns guarding sites that must not be touched.
+         *
+         * Search patterns supply the substructures the editor will look for; the (single) result pattern
+         * defines what each match is rewritten to; exclude patterns mark matches that must be skipped (a
+         * search match is discarded when its atoms/bonds form a subset of any exclude match). The editor
+         * iterates until no further matches can be transformed and returns the number of applied edits.
+         *
          * \since 1.3.0
          */
         class CDPL_CHEM_API SubstructureEditor
@@ -65,9 +72,19 @@ namespace CDPL
             typedef const MolecularGraph::SharedPointer& (*GetMolGraphFunc)(const Pattern&);
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SubstructureEditor instances.
+             */
             typedef std::shared_ptr<SubstructureEditor> SharedPointer;
 
+            /**
+             * \brief A constant iterator over the molecular graphs of the stored search/exclude patterns.
+             */
             typedef boost::transform_iterator<GetMolGraphFunc, PatternList::const_iterator> ConstPatternIterator;
+
+            /**
+             * \brief A mutable iterator over the molecular graphs of the stored search/exclude patterns.
+             */
             typedef boost::transform_iterator<GetMolGraphFunc, PatternList::iterator>       PatternIterator;
 
             /**
@@ -92,12 +109,32 @@ namespace CDPL
              */
             void addSearchPattern(const MolecularGraph::SharedPointer& molgraph);
 
+            /**
+             * \brief Returns the number of stored substructure-search patterns.
+             * \return The number of stored search patterns.
+             */
             std::size_t getNumSearchPatterns() const;
 
+            /**
+             * \brief Returns the molecular graph of the search pattern at index \a idx.
+             * \param idx The zero-based search-pattern index.
+             * \return The molecular graph of the search pattern at index \a idx.
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns() - 1].
+             */
             const MolecularGraph::SharedPointer& getSearchPattern(std::size_t idx) const;
 
+            /**
+             * \brief Removes the search pattern at index \a idx.
+             * \param idx The zero-based search-pattern index to remove.
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns() - 1].
+             */
             void removeSearchPattern(std::size_t idx);
 
+            /**
+             * \brief Removes the search pattern pointed to by \a it.
+             * \param it An iterator pointing to the search pattern to remove.
+             * \throw Base::RangeError if \a it does not point into the current search-pattern range.
+             */
             void removeSearchPattern(const PatternIterator& it);
 
             /**
@@ -105,12 +142,28 @@ namespace CDPL
              */
             void clearSearchPatterns();
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the stored search patterns.
+             * \return A mutable iterator pointing to the beginning of the stored search patterns.
+             */
             PatternIterator getSearchPatternsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the stored search patterns.
+             * \return A mutable iterator pointing to the end of the stored search patterns.
+             */
             PatternIterator getSearchPatternsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the stored search patterns.
+             * \return A constant iterator pointing to the beginning of the stored search patterns.
+             */
             ConstPatternIterator getSearchPatternsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the end of the stored search patterns.
+             * \return A constant iterator pointing to the end of the stored search patterns.
+             */
             ConstPatternIterator getSearchPatternsEnd() const;
 
             /**
@@ -119,12 +172,32 @@ namespace CDPL
              */
             void addExcludePattern(const MolecularGraph::SharedPointer& molgraph);
 
+            /**
+             * \brief Returns the number of stored substructure-exclude patterns.
+             * \return The number of stored exclude patterns.
+             */
             std::size_t getNumExcludePatterns() const;
 
+            /**
+             * \brief Returns the molecular graph of the exclude pattern at index \a idx.
+             * \param idx The zero-based exclude-pattern index.
+             * \return The molecular graph of the exclude pattern at index \a idx.
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             */
             const MolecularGraph::SharedPointer& getExcludePattern(std::size_t idx) const;
 
+            /**
+             * \brief Removes the exclude pattern at index \a idx.
+             * \param idx The zero-based exclude-pattern index to remove.
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             */
             void removeExcludePattern(std::size_t idx);
 
+            /**
+             * \brief Removes the exclude pattern pointed to by \a it.
+             * \param it An iterator pointing to the exclude pattern to remove.
+             * \throw Base::RangeError if \a it does not point into the current exclude-pattern range.
+             */
             void removeExcludePattern(const PatternIterator& it);
 
             /**
@@ -132,16 +205,40 @@ namespace CDPL
              */
             void clearExcludePatterns();
 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the stored exclude patterns.
+             * \return A mutable iterator pointing to the beginning of the stored exclude patterns.
+             */
             PatternIterator getExcludePatternsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the stored exclude patterns.
+             * \return A mutable iterator pointing to the end of the stored exclude patterns.
+             */
             PatternIterator getExcludePatternsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the stored exclude patterns.
+             * \return A constant iterator pointing to the beginning of the stored exclude patterns.
+             */
             ConstPatternIterator getExcludePatternsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the end of the stored exclude patterns.
+             * \return A constant iterator pointing to the end of the stored exclude patterns.
+             */
             ConstPatternIterator getExcludePatternsEnd() const;
 
+            /**
+             * \brief Sets the result pattern that defines how each matched search-pattern instance will be rewritten.
+             * \param pattern The molecular graph of the result pattern.
+             */
             void setResultPattern(const MolecularGraph::SharedPointer& pattern);
 
+            /**
+             * \brief Returns the currently set result pattern.
+             * \return The currently set result pattern, or a null pointer if none has been set.
+             */
             const MolecularGraph::SharedPointer& getResultPattern() const;
 
             /**
@@ -149,8 +246,20 @@ namespace CDPL
              */
             void clear();
 
+            /**
+             * \brief Edits \a mol in place by applying the result pattern at every search-pattern match
+             *        that is not covered by an exclude pattern; repeats until no further changes occur.
+             * \param mol The molecule to edit.
+             * \return The number of applied transformations.
+             */
             std::size_t edit(Molecule& mol);
 
+            /**
+             * \brief Copies \a molgraph into \a res_mol and then edits \a res_mol via edit(Molecule&).
+             * \param molgraph The source molecular graph.
+             * \param res_mol The molecule receiving the edited result.
+             * \return The number of applied transformations.
+             */
             std::size_t edit(const MolecularGraph& molgraph, Molecule& res_mol);
 
             /**

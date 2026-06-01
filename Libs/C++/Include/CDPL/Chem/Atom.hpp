@@ -44,7 +44,12 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Atom.
+         * \brief Abstract base class representing a chemical atom and its bonded neighborhood.
+         *
+         * \c %Atom combines the per-atom property storage inherited from Chem::Entity3D (and via it
+         * Base::PropertyContainer) with two adjacency views: a Chem::AtomContainer over the connected
+         * neighbor atoms and a Chem::BondContainer over the incident bonds, in matching order. Concrete
+         * implementations (Chem::BasicAtom) are owned by their parent molecule.
          */
         class CDPL_CHEM_API Atom : public AtomContainer,
                                    public BondContainer,

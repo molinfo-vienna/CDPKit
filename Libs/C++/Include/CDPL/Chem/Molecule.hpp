@@ -43,7 +43,11 @@ namespace CDPL
     {
 
         /**
-         * \brief Molecule.
+         * \brief Abstract base class representing a mutable molecular graph that owns its atoms and bonds.
+         *
+         * Extends Chem::MolecularGraph with editing operations (addAtom, addBond, removeAtom, removeBond,
+         * copy, append, remove) and supports a global registry of copy-postprocessing callbacks invoked
+         * after copy() / operator=() to keep derived state in sync with the source molecular graph.
          */
         class CDPL_CHEM_API Molecule : public MolecularGraph
         {
@@ -74,8 +78,13 @@ namespace CDPL
              */
             typedef BondContainer::BondIterator BondIterator;
 
+            /**
+             * \brief Type of a callback invoked after a molecule has been copied from a source molecular graph
+             *        (first argument: the freshly populated destination molecule; second argument: the source graph).
+             */
             typedef std::function<void(Molecule&, const MolecularGraph&)> CopyPostprocessingFunction;
-            
+
+
             /**
              * \brief Virtual destructor.
              *
@@ -342,9 +351,21 @@ namespace CDPL
              */
             Molecule& operator-=(const MolecularGraph& molgraph);
 
+            /**
+             * \brief Registers a new copy-postprocessing function in the global registry.
+             *
+             * Registered callbacks are invoked in registration order after each copy() / operator=() that
+             * populates a Chem::Molecule from a Chem::MolecularGraph.
+             *
+             * \param func The callback to register.
+             */
             static void registerCopyPostprocessingFunction(const CopyPostprocessingFunction& func);
 
           protected:
+            /**
+             * \brief Invokes all registered copy-postprocessing functions on this molecule with \a src_molgraph as the source.
+             * \param src_molgraph The molecular graph that was copied into this molecule.
+             */
             void invokeCopyPostprocessingFunctions(const MolecularGraph& src_molgraph);
         };
     } // namespace Chem

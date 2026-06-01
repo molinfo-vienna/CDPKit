@@ -52,7 +52,19 @@ namespace CDPL
     {
 
         /**
-         * \brief SpatialEntityAlignment.
+         * \brief Computes a spatial alignment between two sets of entities (with 3D coordinates)
+         *        by composing topological entity matching with Kabsch-style 3D superposition.
+         *
+         * The class drives an internal Chem::TopologicalEntityAlignment over the two entity sets to
+         * enumerate candidate index mappings (subject to setMinTopologicalMappingSize() and the
+         * optional setTopAlignmentConstraintFunction()), then computes the optimal rigid-body
+         * transformation for each accepted mapping using Math::KabschAlgorithm with the entity
+         * 3D coordinates supplied by setEntity3DCoordinatesFunction() and (optionally) the per-entity
+         * weights supplied by setEntityWeightFunction(). Calls to nextAlignment() advance the search;
+         * the resulting transformation and the corresponding topological mapping are retrieved with
+         * getTransform() and getTopologicalMapping().
+         *
+         * \tparam T The entity type to align.
          */
         template <typename T>
         class SpatialEntityAlignment
@@ -181,8 +193,20 @@ namespace CDPL
              */
             const EntityPairMatchFunction& getEntityPairMatchFunction() const;
 
+            /**
+             * \brief Specifies whether topological mappings shall be enumerated exhaustively before
+             *        spatial alignment, or one-by-one as nextAlignment() is called.
+             * \param exhaustive \c true to enumerate all topological mappings up front, and \c false to
+             *                   enumerate them lazily.
+             */
             void performExhaustiveSearch(bool exhaustive);
 
+            /**
+             * \brief Tells whether topological mappings are enumerated exhaustively before spatial
+             *        alignment.
+             * \return \c true if exhaustive enumeration is enabled, and \c false otherwise.
+             * \see performExhaustiveSearch()
+             */
             bool exhaustiveSearchPerformed() const;
 
             /**
@@ -233,6 +257,10 @@ namespace CDPL
              */
             bool nextAlignment();
 
+            /**
+             * \brief Discards the current alignment-search state so that the next call to nextAlignment()
+             *        restarts the topological-mapping enumeration from scratch.
+             */
             void reset();
 
             /**

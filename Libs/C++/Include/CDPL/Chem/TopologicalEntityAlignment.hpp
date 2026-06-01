@@ -47,7 +47,17 @@ namespace CDPL
     {
 
         /**
-         * \brief TopologicalEntityAlignment.
+         * \brief Computes a topological alignment between two sets of entities by reducing the alignment
+         *        problem to a maximum-common-subgraph search on a compatibility graph.
+         *
+         * The compatibility graph is built from the two stored entity sets: a node \c (i, j) is created
+         * for every pair of entities that satisfies the optional EntityMatchFunction, and edges connect
+         * mutually compatible node pairs (compatibility being decided by the optional EntityPairMatchFunction,
+         * which always sees pairs whose first/second entities already match). Each call to nextAlignment()
+         * advances the underlying Util::BronKerboschAlgorithm one maximal clique forward and reports the
+         * corresponding entity mapping; reset() forces a fresh search on the next nextAlignment() call.
+         *
+         * \tparam T The entity type to align.
          */
         template <typename T>
         class TopologicalEntityAlignment
@@ -166,6 +176,10 @@ namespace CDPL
              */
             bool nextAlignment(Util::STPairArray& mapping);
 
+            /**
+             * \brief Discards the current alignment-search state so that the next call to nextAlignment()
+             *        restarts the compatibility-graph search from scratch.
+             */
             void reset();
 
           private:

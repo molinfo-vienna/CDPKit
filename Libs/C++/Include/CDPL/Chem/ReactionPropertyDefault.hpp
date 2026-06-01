@@ -47,11 +47,31 @@ namespace CDPL
         namespace ReactionPropertyDefault
         {
 
+            /**
+             * \brief Default value for the Chem::ReactionProperty::NAME property (empty string).
+             */
             extern CDPL_CHEM_API const std::string                        NAME;
+            /**
+             * \brief Default value for the Chem::ReactionProperty::COMMENT property (empty string).
+             */
             extern CDPL_CHEM_API const std::string                        COMMENT;
+            /**
+             * \brief Default value for the Chem::ReactionProperty::MATCH_CONSTRAINTS property
+             *        (empty Chem::MatchConstraintList).
+             */
             extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
+            /**
+             * \brief Default value for the Chem::ReactionProperty::MDL_RXN_FILE_VERSION property
+             *        (Chem::MDLDataFormatVersion::UNDEF).
+             */
             extern CDPL_CHEM_API const unsigned int                       MDL_RXN_FILE_VERSION;
+            /**
+             * \brief Default value for the Chem::ReactionProperty::MDL_PROGRAM_NAME property (\c "CDPL").
+             */
             extern CDPL_CHEM_API const std::string                        MDL_PROGRAM_NAME;
+            /**
+             * \brief Default value for the Chem::ReactionProperty::MDL_USER_INITIALS property (empty string).
+             */
             extern CDPL_CHEM_API const std::string                        MDL_USER_INITIALS;
         } // namespace ReactionPropertyDefault
     } // namespace Chem

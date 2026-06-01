@@ -50,16 +50,38 @@ namespace CDPL
         class Fragment;
 
         /**
-         * \brief SurfaceAtomExtractor.
+         * \brief Extracts the solvent-accessible surface atoms of a set of atoms.
+         *
+         * For each candidate atom, a configurable number of probe-sphere test points is generated on
+         * the atom's van-der-Waals surface and tested against the surrounding atoms (looked up via an
+         * internal 3D grid for efficiency). An atom is reported as surface-accessible when at least the
+         * minimum required fraction of its test points is reachable by the probe sphere. The probe
+         * radius, accessibility threshold, test-point count, and grid parameters can be tuned via the
+         * setters; atom 3D coordinates are obtained through a user-replaceable accessor function.
          */
         class CDPL_CHEM_API SurfaceAtomExtractor
         {
 
           public:
+            /**
+             * \brief The default probe sphere radius (in Å).
+             */
             static constexpr double DEF_PROBE_RADIUS         = 1.2;
+            /**
+             * \brief The default margin (in Å) added to each side of the bounding box for the atom-lookup grid.
+             */
             static constexpr double DEF_GRID_OVERSIZE        = 5.0;
+            /**
+             * \brief The default distance between grid points (in Å) along each axis of the atom-lookup grid.
+             */
             static constexpr double DEF_GRID_STEP_SIZE       = 0.75;
+            /**
+             * \brief The default minimum fraction of accessible test points required to classify an atom as surface-accessible.
+             */
             static constexpr double DEF_MIN_SURFACE_ACC      = 0.01;
+            /**
+             * \brief The default number of test points generated per atom on its van-der-Waals surface.
+             */
             static constexpr std::size_t DEF_NUM_TEST_POINTS = 250;
 
             /**
@@ -82,7 +104,7 @@ namespace CDPL
              */
             void setProbeRadius(double radius);
 
-            /*
+            /**
              * \brief Returns the radius of the probe sphere that determines the accessibility of the surface atoms.
              * \return The used probe sphere radius.
              */
