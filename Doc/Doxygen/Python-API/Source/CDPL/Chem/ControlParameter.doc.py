@@ -170,18 +170,18 @@ class ControlParameter(Boost.Python.instance):
     MDL_UPDATE_TIMESTAMP = CDPL.Base.LookupKey('MDL_UPDATE_TIMESTAMP')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to write conformer energies into the energy field of the molecule header block when writing data in an <em>MDL CTFile</em> based format [\ref CTFILE]. <b>Value Type:</b> <tt>bool</tt>.
+    # 
     MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD = CDPL.Base.LookupKey('MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to write conformer energies as an SD-file entry when writing data in an <em>MDL CTFile</em> based format [\ref CTFILE]. <b>Value Type:</b> <tt>bool</tt>.
+    # 
     MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY = CDPL.Base.LookupKey('MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the SD-file tag used for the conformer energy entry (see MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY). <b>Value Type:</b> <tt>std::string</tt>.
+    # 
     MDL_CONF_ENERGY_SD_TAG = CDPL.Base.LookupKey('MDL_CONF_ENERGY_SD_TAG')
 
     ##
@@ -357,58 +357,66 @@ class ControlParameter(Boost.Python.instance):
     MULTI_CONF_INPUT_PROCESSOR = CDPL.Base.LookupKey('MULTI_CONF_INPUT_PROCESSOR')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to write the conformer energy into the molecule comment field on output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
     OUTPUT_CONF_ENERGY_AS_COMMENT = CDPL.Base.LookupKey('OUTPUT_CONF_ENERGY_AS_COMMENT')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a format pattern used to derive per-conformer molecule name suffixes from the conformer index.
+    # 
+    # The pattern is interpreted as a <tt>std::printf</tt> format string with a single integer placeholder for the (one-based) conformer index. An empty value disables the suffix.
+    # 
+    # <b>Value Type:</b> <tt>std::string</tt>
+    # 
     CONF_INDEX_NAME_SUFFIX_PATTERN = CDPL.Base.LookupKey('CONF_INDEX_NAME_SUFFIX_PATTERN')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether floating-point values written to the native CDF format are encoded in single-precision (<tt>True</tt>) or double-precision (<tt>False</tt>). <b>Value Type:</b> <tt>bool</tt>.
+    # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to enable the extended Sybyl atom-type set when reading or writing <em>Sybyl MOL2</em> data. <b>Value Type:</b> <tt>bool</tt>.
+    # 
     MOL2_ENABLE_EXTENDED_ATOM_TYPES = CDPL.Base.LookupKey('MOL2_ENABLE_EXTENDED_ATOM_TYPES')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to interpret/write the Sybyl bond type <tt>"ar"</tt> as aromatic on <em>MOL2</em> input/output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
     MOL2_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('MOL2_ENABLE_AROMATIC_BOND_TYPES')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to recompute formal charges from atom types on <em>MOL2</em> input. <b>Value Type:</b> <tt>bool</tt>.
+    # 
     MOL2_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_CALC_FORMAL_CHARGES')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the charge type recorded in the <tt>@<TRIPOS>MOLECULE</tt> block on <em>MOL2</em> output (see namespace Chem.MOL2ChargeType). <b>Value Type:</b> <tt>unsigned</tt> <tt>int</tt>.
+    # 
     MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to write the <tt>@<TRIPOS>SUBSTRUCTURE</tt> block on <em>MOL2</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
     MOL2_OUTPUT_SUBSTRUCTURES = CDPL.Base.LookupKey('MOL2_OUTPUT_SUBSTRUCTURES')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the molecule type recorded in the <tt>@<TRIPOS>MOLECULE</tt> block on <em>MOL2</em> output (see namespace Chem.MOL2MoleculeType). <b>Value Type:</b> <tt>unsigned</tt> <tt>int</tt>.
+    # 
     MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey('MOL2_MOLECULE_TYPE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to round Sybyl partial charges to the nearest integer formal charges on <em>MOL2</em> input. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2.3
+    # 
     MOL2_READ_PARTIAL_AS_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_READ_PARTIAL_AS_FORMAL_CHARGES')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to emit formal atomic charges in the partial-charge column on <em>MOL2</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2.3
+    # 
     MOL2_OUTPUT_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_OUTPUT_FORMAL_CHARGES')
 
     ##
@@ -417,76 +425,106 @@ class ControlParameter(Boost.Python.instance):
     COMMENT_IS_NAME = CDPL.Base.LookupKey('XYZ_COMMENT_IS_NAME')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to perceive bond connectivity from atom 3D coordinates when reading <em>XYZ</em> data (which encodes no explicit bonds). <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.1
+    # 
     XYZ_PERCEIVE_CONNECTIVITY = CDPL.Base.LookupKey('XYZ_PERCEIVE_CONNECTIVITY')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to perceive bond orders from the perceived connectivity when reading <em>XYZ</em> data. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.1
+    # 
     XYZ_PERCEIVE_BOND_ORDERS = CDPL.Base.LookupKey('XYZ_PERCEIVE_BOND_ORDERS')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to recompute formal atomic charges after the bond perception step on <em>XYZ</em> input. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.1
+    # 
     XYZ_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('XYZ_CALC_FORMAL_CHARGES')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to emit an XML declaration (<tt><?xml version="1.0"?></tt>) at the beginning of <em>CML</em> output records. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_XML_DECLARATION = CDPL.Base.LookupKey('CML_OUTPUT_XML_DECLARATION')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the XML namespace URI emitted with the root <tt><cml></tt> element on <em>CML</em> output. <b>Value Type:</b> <tt>std::string</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_ELEMENT_NAMESPACE = CDPL.Base.LookupKey('CML_OUTPUT_ELEMENT_NAMESPACE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to encode tetrahedral atom parities on <em>CML</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_ATOM_PARITY = CDPL.Base.LookupKey('CML_OUTPUT_ATOM_PARITY')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to emit wedge/hash stereo flags for single bonds on <em>CML</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_SINGLE_BOND_STEREO = CDPL.Base.LookupKey('CML_OUTPUT_SINGLE_BOND_STEREO')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to encode cis/trans descriptors for double bonds on <em>CML</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_DOUBLE_BOND_STEREO = CDPL.Base.LookupKey('CML_OUTPUT_DOUBLE_BOND_STEREO')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to interpret/write CML's aromatic bond type <tt>"a"</tt> on input/output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.3
+    # 
     CML_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('CML_ENABLE_AROMATIC_BOND_TYPES')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to emit the <tt>title</tt> attribute (molecule name) on <em>CML</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_MOLECULE_NAME = CDPL.Base.LookupKey('CML_OUTPUT_MOLECULE_NAME')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to emit attached structure-data fields on <em>CML</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_STRUCTURE_DATA = CDPL.Base.LookupKey('CML_OUTPUT_STRUCTURE_DATA')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to emit the isotopic mass number of non-standard isotopes on <em>CML</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_ISOTOPE = CDPL.Base.LookupKey('CML_OUTPUT_ISOTOPE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to emit the atom spin multiplicity on <em>CML</em> output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_SPIN_MULTIPLICITY = CDPL.Base.LookupKey('CML_OUTPUT_SPIN_MULTIPLICITY')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to use CML's compact (array-style) representation for atom data on output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_COMPACT_ATOM_DATA = CDPL.Base.LookupKey('CML_OUTPUT_COMPACT_ATOM_DATA')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to use CML's compact (array-style) representation for bond data on output. <b>Value Type:</b> <tt>bool</tt>.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_COMPACT_BOND_DATA = CDPL.Base.LookupKey('CML_OUTPUT_COMPACT_BOND_DATA')

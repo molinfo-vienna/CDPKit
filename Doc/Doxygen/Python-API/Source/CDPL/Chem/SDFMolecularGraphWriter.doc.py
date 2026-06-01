@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+# \brief A writer for molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
 # 
 # <tt>SDFMolecularGraphWriter</tt> supports the following control-parameters:
 # 

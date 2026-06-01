@@ -244,53 +244,57 @@ class ControlParameterDefault(Boost.Python.instance):
     OUTPUT_CONF_ENERGY_AS_COMMENT = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>""</tt>) for the control-parameter Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN.
+    # 
     CONF_INDEX_NAME_SUFFIX_PATTERN = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
+    # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES.
+    # 
     MOL2_ENABLE_EXTENDED_ATOM_TYPES = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES.
+    # 
     MOL2_ENABLE_AROMATIC_BOND_TYPES = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES.
+    # 
     MOL2_CALC_FORMAL_CHARGES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>MOL2ChargeType.NO_CHARGES</tt>) for the control-parameter Chem.ControlParameter.MOL2_CHARGE_TYPE.
+    # 
     MOL2_CHARGE_TYPE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>MOL2MoleculeType.SMALL</tt>) for the control-parameter Chem.ControlParameter.MOL2_MOLECULE_TYPE.
+    # 
     MOL2_MOLECULE_TYPE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES.
+    # 
     MOL2_OUTPUT_SUBSTRUCTURES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES.
+    # 
+    # \since 1.2.3
+    # 
     MOL2_READ_PARTIAL_AS_FORMAL_CHARGES = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES.
+    # 
+    # \since 1.2.3
+    # 
     MOL2_OUTPUT_FORMAL_CHARGES = False
 
     ##
@@ -299,76 +303,106 @@ class ControlParameterDefault(Boost.Python.instance):
     COMMENT_IS_NAME = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY.
+    # 
+    # \since 1.1
+    # 
     XYZ_PERCEIVE_CONNECTIVITY = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS.
+    # 
+    # \since 1.1
+    # 
     XYZ_PERCEIVE_BOND_ORDERS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES.
+    # 
+    # \since 1.1
+    # 
     XYZ_CALC_FORMAL_CHARGES = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_XML_DECLARATION = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>""</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_ELEMENT_NAMESPACE = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_ATOM_PARITY = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_SINGLE_BOND_STEREO = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_DOUBLE_BOND_STEREO = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES.
+    # 
+    # \since 1.3
+    # 
     CML_ENABLE_AROMATIC_BOND_TYPES = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_MOLECULE_NAME = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_STRUCTURE_DATA = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_ISOTOPE.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_ISOTOPE = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_SPIN_MULTIPLICITY = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_COMPACT_ATOM_DATA = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA.
+    # 
+    # \since 1.2
+    # 
     CML_OUTPUT_COMPACT_BOND_DATA = False

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of gzip-compressed molecular graph data in the native I/O format of the <em>CDPL</em>.
+# \brief A handler for the output of bzip2-compressed molecular graph data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFBZ2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
