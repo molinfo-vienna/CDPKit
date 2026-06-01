@@ -212,10 +212,24 @@ namespace CDPL
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_TRUNCATE_LINES;
 
+            /**
+             * \brief Specifies whether to write conformer energies into the energy field of the molecule header block
+             *        when writing data in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD;
 
+            /**
+             * \brief Specifies whether to write conformer energies as an SD-file entry when writing data in
+             *        an <em>MDL CTFile</em> based format [\ref CTFILE].
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY;
 
+            /**
+             * \brief Specifies the SD-file tag used for the conformer energy entry (see MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY).
+             * \valuetype \c std::string
+             */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CONF_ENERGY_SD_TAG;
 
             /**
@@ -483,8 +497,20 @@ namespace CDPL
              */
             extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_EXPORT;
 
+            /**
+             * \brief Specifies whether to write the conformer energy into the molecule comment field on output.
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey OUTPUT_CONF_ENERGY_AS_COMMENT;
 
+            /**
+             * \brief Specifies a format pattern used to derive per-conformer molecule name suffixes from the conformer index.
+             *
+             * The pattern is interpreted as a \c std::printf format string with a single integer placeholder for the
+             * (one-based) conformer index. An empty value disables the suffix.
+             *
+             * \valuetype \c std::string
+             */
             extern CDPL_CHEM_API const Base::LookupKey CONF_INDEX_NAME_SUFFIX_PATTERN;
 
             /**
@@ -494,121 +520,179 @@ namespace CDPL
              */
             extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_INPUT_PROCESSOR;
 
+            /**
+             * \brief Specifies whether floating-point values written to the native CDF format are encoded
+             *        in single-precision (\c true) or double-precision (\c false).
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
+            /**
+             * \brief Specifies whether to enable the extended Sybyl atom-type set when reading or writing
+             *        <em>Sybyl MOL2</em> data.
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_ENABLE_EXTENDED_ATOM_TYPES;
 
+            /**
+             * \brief Specifies whether to interpret/write the Sybyl bond type \c "ar" as aromatic on
+             *        <em>MOL2</em> input/output.
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
+             * \brief Specifies whether to round Sybyl partial charges to the nearest integer formal charges
+             *        on <em>MOL2</em> input.
+             * \valuetype \c bool
              * \since 1.2.3
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_READ_PARTIAL_AS_FORMAL_CHARGES;
 
+            /**
+             * \brief Specifies whether to recompute formal charges from atom types on <em>MOL2</em> input.
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CALC_FORMAL_CHARGES;
 
+            /**
+             * \brief Specifies the charge type recorded in the \c \@\<TRIPOS\>MOLECULE block on <em>MOL2</em> output
+             *        (see namespace Chem::MOL2ChargeType).
+             * \valuetype \c unsigned \c int
+             */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
 
+            /**
+             * \brief Specifies the molecule type recorded in the \c \@\<TRIPOS\>MOLECULE block on <em>MOL2</em> output
+             *        (see namespace Chem::MOL2MoleculeType).
+             * \valuetype \c unsigned \c int
+             */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
 
+            /**
+             * \brief Specifies whether to write the \c \@\<TRIPOS\>SUBSTRUCTURE block on <em>MOL2</em> output.
+             * \valuetype \c bool
+             */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_OUTPUT_SUBSTRUCTURES;
 
             /**
+             * \brief Specifies whether to emit formal atomic charges in the partial-charge column on <em>MOL2</em> output.
+             * \valuetype \c bool
              * \since 1.2.3
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_OUTPUT_FORMAL_CHARGES;
 
             /**
+             * \brief Specifies whether to treat the comment line of an <em>XYZ</em> record as the molecule name on input.
              * \valuetype \c bool
              * \since 1.1
              */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_COMMENT_IS_NAME;
 
             /**
+             * \brief Specifies whether to perceive bond connectivity from atom 3D coordinates when reading <em>XYZ</em>
+             *        data (which encodes no explicit bonds).
              * \valuetype \c bool
              * \since 1.1
              */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_PERCEIVE_CONNECTIVITY;
 
             /**
+             * \brief Specifies whether to perceive bond orders from the perceived connectivity when reading <em>XYZ</em>
+             *        data.
              * \valuetype \c bool
              * \since 1.1
              */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_PERCEIVE_BOND_ORDERS;
 
             /**
+             * \brief Specifies whether to recompute formal atomic charges after the bond perception step on <em>XYZ</em>
+             *        input.
              * \valuetype \c bool
              * \since 1.1
              */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_CALC_FORMAL_CHARGES;
 
             /**
+             * \brief Specifies whether to emit an XML declaration (<tt>&lt;?xml version="1.0"?&gt;</tt>) at the
+             *        beginning of <em>CML</em> output records.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_XML_DECLARATION;
 
             /**
+             * \brief Specifies the XML namespace URI emitted with the root \c \<cml\> element on <em>CML</em> output.
              * \valuetype \c std::string
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_ELEMENT_NAMESPACE;
 
             /**
+             * \brief Specifies whether to encode tetrahedral atom parities on <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_ATOM_PARITY;
 
             /**
+             * \brief Specifies whether to emit wedge/hash stereo flags for single bonds on <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_SINGLE_BOND_STEREO;
 
             /**
+             * \brief Specifies whether to encode cis/trans descriptors for double bonds on <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_DOUBLE_BOND_STEREO;
 
             /**
+             * \brief Specifies whether to interpret/write CML's aromatic bond type \c "a" on input/output.
              * \valuetype \c bool
              * \since 1.3
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
+             * \brief Specifies whether to emit the \c title attribute (molecule name) on <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_MOLECULE_NAME;
 
             /**
+             * \brief Specifies whether to emit attached structure-data fields on <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_STRUCTURE_DATA;
 
             /**
+             * \brief Specifies whether to emit the isotopic mass number of non-standard isotopes on <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_ISOTOPE;
 
             /**
+             * \brief Specifies whether to emit the atom spin multiplicity on <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_SPIN_MULTIPLICITY;
 
             /**
+             * \brief Specifies whether to use CML's compact (array-style) representation for atom data on output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_COMPACT_ATOM_DATA;
 
             /**
+             * \brief Specifies whether to use CML's compact (array-style) representation for bond data on output.
              * \valuetype \c bool
              * \since 1.2
              */

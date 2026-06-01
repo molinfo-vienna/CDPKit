@@ -258,108 +258,150 @@ namespace CDPL
              */
             extern CDPL_CHEM_API const bool OUTPUT_CONF_ENERGY_AS_COMMENT;
 
+            /**
+             * \brief Default setting (= \c "") for the control-parameter Chem::ControlParameter::CONF_INDEX_NAME_SUFFIX_PATTERN.
+             */
             extern CDPL_CHEM_API const std::string CONF_INDEX_NAME_SUFFIX_PATTERN;
 
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
+             */
             extern CDPL_CHEM_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_ENABLE_EXTENDED_ATOM_TYPES.
+             */
             extern CDPL_CHEM_API const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES;
 
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_ENABLE_AROMATIC_BOND_TYPES.
+             */
             extern CDPL_CHEM_API const bool MOL2_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES.
              * \since 1.2.3
              */
             extern CDPL_CHEM_API const bool MOL2_READ_PARTIAL_AS_FORMAL_CHARGES;
-            
+
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::MOL2_CALC_FORMAL_CHARGES.
+             */
             extern CDPL_CHEM_API const bool MOL2_CALC_FORMAL_CHARGES;
 
+            /**
+             * \brief Default setting (= \c %MOL2ChargeType::NO_CHARGES) for the control-parameter Chem::ControlParameter::MOL2_CHARGE_TYPE.
+             */
             extern CDPL_CHEM_API const unsigned int MOL2_CHARGE_TYPE;
 
+            /**
+             * \brief Default setting (= \c %MOL2MoleculeType::SMALL) for the control-parameter Chem::ControlParameter::MOL2_MOLECULE_TYPE.
+             */
             extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
 
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::MOL2_OUTPUT_SUBSTRUCTURES.
+             */
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_OUTPUT_FORMAL_CHARGES.
              * \since 1.2.3
              */
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_FORMAL_CHARGES;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_COMMENT_IS_NAME.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_COMMENT_IS_NAME;
-            
+
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_PERCEIVE_CONNECTIVITY.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_CONNECTIVITY;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_PERCEIVE_BOND_ORDERS.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_BOND_ORDERS;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_CALC_FORMAL_CHARGES.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_CALC_FORMAL_CHARGES;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_XML_DECLARATION.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_XML_DECLARATION;
 
             /**
+             * \brief Default setting (= \c "") for the control-parameter Chem::ControlParameter::CML_OUTPUT_ELEMENT_NAMESPACE.
              * \since 1.2
              */
             extern CDPL_CHEM_API const std::string CML_OUTPUT_ELEMENT_NAMESPACE;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_ATOM_PARITY.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_ATOM_PARITY;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_SINGLE_BOND_STEREO.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_SINGLE_BOND_STEREO;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_DOUBLE_BOND_STEREO.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_DOUBLE_BOND_STEREO;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::CML_ENABLE_AROMATIC_BOND_TYPES.
              * \since 1.3
              */
             extern CDPL_CHEM_API const bool CML_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_MOLECULE_NAME.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_MOLECULE_NAME;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_STRUCTURE_DATA.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_STRUCTURE_DATA;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_ISOTOPE.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_ISOTOPE;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_SPIN_MULTIPLICITY.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_SPIN_MULTIPLICITY;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::CML_OUTPUT_COMPACT_ATOM_DATA.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_COMPACT_ATOM_DATA;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::CML_OUTPUT_COMPACT_BOND_DATA.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_COMPACT_BOND_DATA;

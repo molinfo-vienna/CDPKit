@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of class CDPL::Chem::RDFReactionOutputHandler.
+ * \brief Declaration of type CDPL::Chem::RDFReactionOutputHandler.
  */
 
 #ifndef CDPL_CHEM_RDFREACTIONOUTPUTHANDLER_HPP

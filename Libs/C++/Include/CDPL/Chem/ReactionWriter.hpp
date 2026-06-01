@@ -26,8 +26,8 @@
  * \brief Declaration of type CDPL::Chem::ReactionWriter.
  */
 
-#ifndef CDPL_CHEM_MOLECULARGRAPHWRITER_HPP
-#define CDPL_CHEM_MOLECULARGRAPHWRITER_HPP
+#ifndef CDPL_CHEM_REACTIONWRITER_HPP
+#define CDPL_CHEM_REACTIONWRITER_HPP
 
 #include "CDPL/Util/MultiFormatDataWriter.hpp"
 
@@ -48,4 +48,4 @@ namespace CDPL
     } // namespace Chem
 } // namespace CDPL
 
-#endif // CDPL_CHEM_MOLECULARGRAPHWRITER_HPP
+#endif // CDPL_CHEM_REACTIONWRITER_HPP
