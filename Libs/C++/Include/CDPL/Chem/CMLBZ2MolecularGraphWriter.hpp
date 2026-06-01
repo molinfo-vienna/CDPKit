@@ -40,6 +40,7 @@ namespace CDPL
     {
 
         /**
+         * \brief Writer for molecular graph data in the bzip2-compressed <em>Chemical Markup Language</em> [\ref CML] format.
          * \since 1.2
          */
         typedef Util::CompressedDataWriter<CMLMolecularGraphWriter, Util::BZip2OStream> CMLBZ2MolecularGraphWriter;
