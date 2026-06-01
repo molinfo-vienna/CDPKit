@@ -46,7 +46,14 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Reaction.
+         * \brief Abstract base class for chemical reactions composed of role-tagged Chem::Molecule components.
+         *
+         * Each component carries a Chem::ReactionRole (\c REACTANT, \c AGENT or \c PRODUCT); the role is the
+         * primary indexing axis exposed by getComponentRole(), getNumComponents(role), getComponent(idx, role)
+         * and the role-restricted iterator pair getComponentsBegin(role)/getComponentsEnd(role). Editing
+         * methods (addComponent, removeComponent, swapComponentRoles, clear) are pure virtual and supplied
+         * by concrete subclasses such as Chem::BasicReaction. Properties common to all components are
+         * inherited from Base::PropertyContainer.
          */
         class CDPL_CHEM_API Reaction : public Base::PropertyContainer
         {
@@ -70,8 +77,16 @@ namespace CDPL
              */
             typedef Util::IndexedElementIterator<Molecule, ComponentAccessor> ComponentIterator;
 
+            /**
+             * \brief Type of a functor invoked after a reaction copy operation to post-process the
+             *        target reaction (first argument) using information from the source reaction
+             *        (second argument).
+             *
+             * Functions registered with registerCopyPostprocessingFunction() are run by
+             * invokeCopyPostprocessingFunctions() inside subclasses' copy() implementations.
+             */
             typedef std::function<void(Reaction&, const Reaction&)> CopyPostprocessingFunction;
-  
+
             /**
              * \brief Virtual destructor.
              */
@@ -336,9 +351,18 @@ namespace CDPL
              */
             Reaction& operator=(const Reaction& rxn);
 
+            /**
+             * \brief Registers a global post-processing function invoked after every reaction copy operation.
+             * \param func The function to register.
+             */
             static void registerCopyPostprocessingFunction(const CopyPostprocessingFunction& func);
 
           protected:
+            /**
+             * \brief Invokes all registered copy post-processing functions with \c *this as the
+             *        target reaction and \a src_rxn as the source.
+             * \param src_rxn The source reaction the copy was made from.
+             */
             void invokeCopyPostprocessingFunctions(const Reaction& src_rxn);
             
           private:

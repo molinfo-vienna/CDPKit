@@ -45,11 +45,15 @@ namespace CDPL
     {
 
         /**
-     * \brief Provides keys for built-in Chem::Entity3D properties.
-     */
+         * \brief Provides keys for built-in Chem::Entity3D properties.
+         */
         namespace Entity3DProperty
         {
 
+            /**
+             * \brief Key for the 3D coordinates of an entity (Chem::Entity3D).
+             * \valuetype Math::Vector3D
+             */
             extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D;
         }
     } // namespace Chem

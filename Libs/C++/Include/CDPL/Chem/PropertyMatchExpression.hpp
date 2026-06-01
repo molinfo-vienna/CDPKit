@@ -41,7 +41,15 @@ namespace CDPL
     {
 
         /**
-         * \brief PropertyMatchExpression.
+         * \brief Generic Chem::MatchExpression specialisation that evaluates a binary
+         *        comparison between a query- and a target-derived property value retrieved
+         *        through a user-supplied accessor function.
+         *
+         * The constructor either binds a fixed query value (taken verbatim from the constructor
+         * argument) or retrieves the query value through the same accessor as the target value;
+         * the actual comparison is delegated to the \a MatchFunc functor. This class implements
+         * the two-object overload (primary plus secondary objects) of MatchExpression.
+         *
          * \tparam ValueType The type of the checked property values.
          * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
          *                   values against the query property values. The overloaded function call operator is
@@ -112,7 +120,12 @@ namespace CDPL
         };
 
         /**
-         * \brief PropertyMatchExpression.
+         * \brief Single-object specialisation of Chem::PropertyMatchExpression for query/target equivalence
+         *        tests on a single attribute retrieved from a single object via the user-supplied accessor.
+         *
+         * Like the two-object form, the constructor either binds a fixed query value or fetches it on the
+         * fly through the accessor, and the actual comparison is delegated to the \a MatchFunc functor.
+         *
          * \tparam ValueType The type of the checked property values.
          * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
          *                   values against the query property values. The overloaded function call operator is

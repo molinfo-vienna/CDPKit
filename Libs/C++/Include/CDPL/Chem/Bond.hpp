@@ -43,7 +43,11 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Bond.
+         * \brief Abstract base class representing a chemical bond between two Chem::Atom instances.
+         *
+         * \c %Bond combines the per-bond property storage inherited from Base::PropertyContainer with a
+         * fixed-size (always two atoms) Chem::AtomContainer interface that yields the bond's begin and end atoms.
+         * Concrete implementations (Chem::BasicBond) are owned by their parent molecule.
          */
         class CDPL_CHEM_API Bond : public AtomContainer,
                                    public Base::PropertyContainer

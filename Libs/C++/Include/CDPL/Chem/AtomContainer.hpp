@@ -153,10 +153,26 @@ namespace CDPL
              */
             virtual std::size_t getAtomIndex(const Atom& atom) const = 0;
 
+            /**
+             * \brief Returns the number of stored Chem::Entity3D objects (equivalent to getNumAtoms()).
+             * \return The number of stored Chem::Entity3D objects.
+             */
             virtual std::size_t getNumEntities() const;
 
+            /**
+             * \brief Returns a \c const reference to the Chem::Entity3D instance at index \a idx (equivalent to getAtom(idx)).
+             * \param idx The zero-based index of the Chem::Entity3D instance to return.
+             * \return A \c const reference to the Chem::Entity3D instance at the specified index.
+             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumAtoms() - 1].
+             */
             virtual const Entity3D& getEntity(std::size_t idx) const;
 
+            /**
+             * \brief Returns a non-\c const reference to the Chem::Entity3D instance at index \a idx (equivalent to getAtom(idx)).
+             * \param idx The zero-based index of the Chem::Entity3D instance to return.
+             * \return A non-\c const reference to the Chem::Entity3D instance at the specified index.
+             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumAtoms() - 1].
+             */
             virtual Entity3D& getEntity(std::size_t idx);
 
             /**

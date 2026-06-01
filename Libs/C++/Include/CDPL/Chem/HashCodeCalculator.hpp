@@ -50,7 +50,17 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief HashCodeCalculator.
+         * \brief Computes a 64-bit hash code that identifies a molecular graph up to a configurable
+         *        set of atom and bond properties.
+         *
+         * The algorithm assigns initial seeds to each atom and bond through the user-replaceable
+         * functors HashCodeCalculator::AtomHashSeedFunction and HashCodeCalculator::BondHashSeedFunction,
+         * iteratively propagates the seeds over the graph topology in the spirit of Morgan-style
+         * extended-connectivity hashing, and finally folds the per-atom hash codes into a single
+         * \c std::uint64_t result via an SHA-style mixing step. The default seed functors
+         * (DefAtomHashSeedFunctor, DefBondHashSeedFunctor) take into account the property flags
+         * combined into DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS, respectively.
+         *
          * \see [\ref MHASH]
          */
         class CDPL_CHEM_API HashCodeCalculator

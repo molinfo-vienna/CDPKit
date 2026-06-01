@@ -57,7 +57,17 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief SubstructureSearch.
+         * \brief Subgraph-isomorphism search of a query molecular graph against a target molecular graph,
+         *        implemented after the \e VF2 algorithm.
+         *
+         * Successive calls to setQuery() and findMappings() (or mappingExists() for a yes/no answer)
+         * produce all atom/bond mapping solutions; mappings are retrieved through the
+         * getMapping*() / begin()-end() iterator pair. Per-atom, per-bond and per-molecular-graph
+         * match-expression accessor functions can be installed to extend equivalence beyond pure
+         * topology (the defaults pull expressions from the Chem::AtomProperty / Chem::BondProperty
+         * / Chem::MolecularGraphProperty objects). Result accumulation is bounded by setMaxNumMappings()
+         * and uniqueMappingsOnly(); the search can also be aborted from a callback via stopSearch().
+         *
          * \see [\ref VFLIB2]
          */
         class CDPL_CHEM_API SubstructureSearch
@@ -70,6 +80,9 @@ namespace CDPL
             typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SubstructureSearch instances.
+             */
             typedef std::shared_ptr<SubstructureSearch> SharedPointer;
 
             /**
@@ -82,8 +95,19 @@ namespace CDPL
              */
             typedef boost::indirect_iterator<ABMappingList::const_iterator, const AtomBondMapping> ConstMappingIterator;
 
+            /**
+             * \brief Type of the functor used to retrieve the atom-level Chem::MatchExpression for a query atom.
+             */
             typedef std::function<const AtomMatchExprPtr&(const Atom&)>               AtomMatchExpressionFunction;
+
+            /**
+             * \brief Type of the functor used to retrieve the bond-level Chem::MatchExpression for a query bond.
+             */
             typedef std::function<const BondMatchExprPtr&(const Bond&)>               BondMatchExpressionFunction;
+
+            /**
+             * \brief Type of the functor used to retrieve the graph-level Chem::MatchExpression for the query molecular graph.
+             */
             typedef std::function<const MolGraphMatchExprPtr&(const MolecularGraph&)> MolecularGraphMatchExpressionFunction;
 
             /**
@@ -108,10 +132,22 @@ namespace CDPL
 
             SubstructureSearch& operator=(const SubstructureSearch&) = delete;
 
+            /**
+             * \brief Installs a function that resolves the atom-level Chem::MatchExpression for a query atom.
+             * \param func The accessor function to use.
+             */
             void setAtomMatchExpressionFunction(const AtomMatchExpressionFunction& func);
 
+            /**
+             * \brief Installs a function that resolves the bond-level Chem::MatchExpression for a query bond.
+             * \param func The accessor function to use.
+             */
             void setBondMatchExpressionFunction(const BondMatchExpressionFunction& func);
 
+            /**
+             * \brief Installs a function that resolves the graph-level Chem::MatchExpression for the query molecular graph.
+             * \param func The accessor function to use.
+             */
             void setMolecularGraphMatchExpressionFunction(const MolecularGraphMatchExpressionFunction& func);
 
             /**
@@ -150,6 +186,12 @@ namespace CDPL
              */
             bool findMappings(const MolecularGraph& target);
 
+            /**
+             * \brief Aborts the currently running subgraph mapping search.
+             *
+             * Intended to be invoked from a callback (typically a match-expression evaluator) running on
+             * the same thread as findMappings(); once flagged, findMappings() returns at the next loop boundary.
+             */
             void stopSearch();
 
             /**

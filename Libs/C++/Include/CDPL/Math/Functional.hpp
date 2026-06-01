@@ -1756,28 +1756,49 @@ namespace CDPL
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::Argument1Type Argument1Type;
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
-            /** \brief Returns \c t + e.getC1(). */
+            /**
+             * \brief Returns the \c C1 component of \f$ t + e \f$.
+             * \tparam E The quaternion expression type.
+             * \param t The scalar value on the left-hand side.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c t + e.getC1().
+             */
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
             {
                 return (t + e().getC1());
             }
 
-            /** \brief Returns \c e.getC2(). */
+            /**
+             * \brief Returns the \c C2 component of \f$ t + e \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c e.getC2() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return e().getC2();
             }
 
-            /** \brief Returns \c e.getC3(). */
+            /**
+             * \brief Returns the \c C3 component of \f$ t + e \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c e.getC3() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return e().getC3();
             }
 
-            /** \brief Returns \c e.getC4(). */
+            /**
+             * \brief Returns the \c C4 component of \f$ t + e \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c e.getC4() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
             {
@@ -1797,28 +1818,49 @@ namespace CDPL
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::Argument1Type Argument1Type;
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
-            /** \brief Returns \c t - e.getC1(). */
+            /**
+             * \brief Returns the \c C1 component of \f$ t - e \f$.
+             * \tparam E The quaternion expression type.
+             * \param t The scalar value on the left-hand side.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c t - e.getC1().
+             */
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
             {
                 return (t - e().getC1());
             }
 
-            /** \brief Returns \c -e.getC2(). */
+            /**
+             * \brief Returns the \c C2 component of \f$ t - e \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c -e.getC2() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return -e().getC2();
             }
 
-            /** \brief Returns \c -e.getC3(). */
+            /**
+             * \brief Returns the \c C3 component of \f$ t - e \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c -e.getC3() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
             {
                 return -e().getC3();
             }
 
-            /** \brief Returns \c -e.getC4(). */
+            /**
+             * \brief Returns the \c C4 component of \f$ t - e \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the right-hand side.
+             * \return \c -e.getC4() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
             {
@@ -1851,28 +1893,49 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
-            /** \brief Returns \c e.getC1() + t. */
+            /**
+             * \brief Returns the \c C1 component of \f$ e + t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \param t The scalar value on the right-hand side.
+             * \return \c e.getC1() + t.
+             */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
             {
                 return (e().getC1() + t);
             }
 
-            /** \brief Returns \c e.getC2(). */
+            /**
+             * \brief Returns the \c C2 component of \f$ e + t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \return \c e.getC2() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC2();
             }
 
-            /** \brief Returns \c e.getC3(). */
+            /**
+             * \brief Returns the \c C3 component of \f$ e + t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \return \c e.getC3() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC3();
             }
 
-            /** \brief Returns \c e.getC4(). */
+            /**
+             * \brief Returns the \c C4 component of \f$ e + t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \return \c e.getC4() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
             {
@@ -1892,28 +1955,49 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
-            /** \brief Returns \c e.getC1() - t. */
+            /**
+             * \brief Returns the \c C1 component of \f$ e - t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \param t The scalar value on the right-hand side.
+             * \return \c e.getC1() - t.
+             */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
             {
                 return (e().getC1() - t);
             }
 
-            /** \brief Returns \c e.getC2(). */
+            /**
+             * \brief Returns the \c C2 component of \f$ e - t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \return \c e.getC2() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC2();
             }
 
-            /** \brief Returns \c e.getC3(). */
+            /**
+             * \brief Returns the \c C3 component of \f$ e - t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \return \c e.getC3() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
             {
                 return e().getC3();
             }
 
-            /** \brief Returns \c e.getC4(). */
+            /**
+             * \brief Returns the \c C4 component of \f$ e - t \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression on the left-hand side.
+             * \return \c e.getC4() (the scalar argument does not contribute to this component).
+             */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
             {
@@ -1933,28 +2017,52 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
-            /** \brief Returns \c e.getC1() / n2 (the real component of \f$ e^{-1} \f$). */
+            /**
+             * \brief Returns the \c C1 (real) component of the multiplicative inverse \f$ e^{-1} = \overline{e} / \|e\|^2 \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
+             * \return \c e.getC1() / n2.
+             */
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type n2)
             {
                 return (e().getC1() / n2);
             }
 
-            /** \brief Returns \c -e.getC2() / n2 (the C2 component of \f$ e^{-1} \f$). */
+            /**
+             * \brief Returns the \c C2 component of the multiplicative inverse \f$ e^{-1} \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
+             * \return \c -e.getC2() / n2.
+             */
             template <typename E>
             static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type n2)
             {
                 return (-e().getC2() / n2);
             }
 
-            /** \brief Returns \c -e.getC3() / n2 (the C3 component of \f$ e^{-1} \f$). */
+            /**
+             * \brief Returns the \c C3 component of the multiplicative inverse \f$ e^{-1} \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
+             * \return \c -e.getC3() / n2.
+             */
             template <typename E>
             static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type n2)
             {
                 return (-e().getC3() / n2);
             }
 
-            /** \brief Returns \c -e.getC4() / n2 (the C4 component of \f$ e^{-1} \f$). */
+            /**
+             * \brief Returns the \c C4 component of the multiplicative inverse \f$ e^{-1} \f$.
+             * \tparam E The quaternion expression type.
+             * \param e The quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
+             * \return \c -e.getC4() / n2.
+             */
             template <typename E>
             static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type n2)
             {
@@ -1985,7 +2093,14 @@ namespace CDPL
 
             typedef typename QuaternionBinaryFunctor<Q1, Q2>::ResultType ResultType;
 
-            /** \brief Returns the \c C1 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
+            /**
+             * \brief Returns the \c C1 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             * \return The \c C1 component of the Hamilton product.
+             */
             template <typename E1, typename E2>
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -1993,7 +2108,14 @@ namespace CDPL
                 return (e1().getC1() * e2().getC1() - e1().getC2() * e2().getC2() - e1().getC3() * e2().getC3() - e1().getC4() * e2().getC4());
             }
 
-            /** \brief Returns the \c C2 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
+            /**
+             * \brief Returns the \c C2 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             * \return The \c C2 component of the Hamilton product.
+             */
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -2001,7 +2123,14 @@ namespace CDPL
                 return (e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() + e1().getC3() * e2().getC4() - e1().getC4() * e2().getC3());
             }
 
-            /** \brief Returns the \c C3 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
+            /**
+             * \brief Returns the \c C3 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             * \return The \c C3 component of the Hamilton product.
+             */
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -2009,7 +2138,14 @@ namespace CDPL
                 return (e1().getC1() * e2().getC3() - e1().getC2() * e2().getC4() + e1().getC3() * e2().getC1() + e1().getC4() * e2().getC2());
             }
 
-            /** \brief Returns the \c C4 component of the Hamilton product \f$ e_1 \cdot e_2 \f$. */
+            /**
+             * \brief Returns the \c C4 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The first quaternion expression.
+             * \param e2 The second quaternion expression.
+             * \return The \c C4 component of the Hamilton product.
+             */
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
@@ -2045,7 +2181,15 @@ namespace CDPL
             typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::Argument3Type Argument3Type;
             typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::ResultType    ResultType;
 
-            /** \brief Returns the \c C1 component of \f$ e_1 \cdot e_2^{-1} \f$. */
+            /**
+             * \brief Returns the \c C1 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The dividend quaternion expression.
+             * \param e2 The divisor quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
+             * \return The \c C1 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             */
             template <typename E1, typename E2>
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -2053,7 +2197,15 @@ namespace CDPL
                 return ((e1().getC1() * e2().getC1() + e1().getC2() * e2().getC2() + e1().getC3() * e2().getC3() + e1().getC4() * e2().getC4()) / n2);
             }
 
-            /** \brief Returns the \c C2 component of \f$ e_1 \cdot e_2^{-1} \f$. */
+            /**
+             * \brief Returns the \c C2 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The dividend quaternion expression.
+             * \param e2 The divisor quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
+             * \return The \c C2 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             */
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -2061,7 +2213,15 @@ namespace CDPL
                 return ((-e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() - e1().getC3() * e2().getC4() + e1().getC4() * e2().getC3()) / n2);
             }
 
-            /** \brief Returns the \c C3 component of \f$ e_1 \cdot e_2^{-1} \f$. */
+            /**
+             * \brief Returns the \c C3 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The dividend quaternion expression.
+             * \param e2 The divisor quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
+             * \return The \c C3 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             */
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -2069,7 +2229,15 @@ namespace CDPL
                 return ((-e1().getC1() * e2().getC3() + e1().getC2() * e2().getC4() + e1().getC3() * e2().getC1() - e1().getC4() * e2().getC2()) / n2);
             }
 
-            /** \brief Returns the \c C4 component of \f$ e_1 \cdot e_2^{-1} \f$. */
+            /**
+             * \brief Returns the \c C4 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \tparam E1 The first quaternion expression type.
+             * \tparam E2 The second quaternion expression type.
+             * \param e1 The dividend quaternion expression.
+             * \param e2 The divisor quaternion expression.
+             * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
+             * \return The \c C4 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             */
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
@@ -2107,24 +2275,56 @@ namespace CDPL
             typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::Argument3Type Argument3Type;
             typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::ResultType    ResultType;
 
+            /**
+             * \brief Returns the \c C1 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \tparam E The quaternion expression type.
+             * \param t The scalar value on the left-hand side.
+             * \param e The quaternion expression on the right-hand side.
+             * \param n2 The squared norm of \a e.
+             * \return \c t * e.getC1() / n2.
+             */
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
             {
                 return (t * e().getC1() / n2);
             }
 
+            /**
+             * \brief Returns the \c C2 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \tparam E The quaternion expression type.
+             * \param t The scalar value on the left-hand side.
+             * \param e The quaternion expression on the right-hand side.
+             * \param n2 The squared norm of \a e.
+             * \return \c t * -e.getC2() / n2.
+             */
             template <typename E>
             static ResultType applyC2(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
             {
                 return (t * -e().getC2() / n2);
             }
 
+            /**
+             * \brief Returns the \c C3 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \tparam E The quaternion expression type.
+             * \param t The scalar value on the left-hand side.
+             * \param e The quaternion expression on the right-hand side.
+             * \param n2 The squared norm of \a e.
+             * \return \c t * -e.getC3() / n2.
+             */
             template <typename E>
             static ResultType applyC3(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
             {
                 return (t * -e().getC3() / n2);
             }
 
+            /**
+             * \brief Returns the \c C4 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \tparam E The quaternion expression type.
+             * \param t The scalar value on the left-hand side.
+             * \param e The quaternion expression on the right-hand side.
+             * \param n2 The squared norm of \a e.
+             * \return \c t * -e.getC4() / n2.
+             */
             template <typename E>
             static ResultType applyC4(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
             {
