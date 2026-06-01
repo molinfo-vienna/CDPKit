@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the bzip2-compressed <em>Chemical Markup Language</em> [\ref CML] format.
+# 
+# \since 1.2
+# 
 class CMLBZ2MoleculeReader(MoleculeReaderBase):
 
     ##

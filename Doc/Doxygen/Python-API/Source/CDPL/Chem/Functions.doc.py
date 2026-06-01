@@ -5092,1756 +5092,2394 @@ def translateFragment(src_molgraph: MolecularGraph, src_frag: Fragment, tgt_molg
 def translateFragments(src_molgraph: MolecularGraph, src_frag_list: FragmentList, tgt_molgraph: MolecularGraph, tgt_frag_list: FragmentList, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param fix 
-#
+# \brief Sets the value of the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter in <em>cntnr</em> to <em>fix</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param fix The new parameter value.
+# 
 def setBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer, fix: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param single_prec 
-#
+# \brief Sets the value of the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter in <em>cntnr</em> to <em>single_prec</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param single_prec The new parameter value.
+# 
+# \since 1.2
+# 
 def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param enable 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param enable The new parameter value.
+# 
+# \since 1.3
+# 
 def setCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.3
+# 
 def hasCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.3
+# 
 def getCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.3
+# 
 def clearCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ns 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter in <em>cntnr</em> to <em>ns</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param ns The new XML-namespace string.
+# 
+# \since 1.2
+# 
 def setCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer, ns: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored XML-namespace string. 
+# 
+# \since 1.2
+# 
 def getCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param check 
-#
+# \brief Sets the value of the Chem.ControlParameter.CHECK_LINE_LENGTH parameter in <em>cntnr</em> to <em>check</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param check The new parameter value.
+# 
 def setCheckLineLengthParameter(cntnr: Base.ControlParameterContainer, check: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CHECK_LINE_LENGTH parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CHECK_LINE_LENGTH parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CHECK_LINE_LENGTH parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param pattern 
-#
+# \brief Sets the value of the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter in <em>cntnr</em> to <em>pattern</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param pattern The new suffix-pattern string.
+# 
 def setConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer, pattern: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored suffix-pattern string.
+# 
 def getConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param dim 
-#
+# \brief Sets the value of the Chem.ControlParameter.COORDINATES_DIMENSION parameter in <em>cntnr</em> to <em>dim</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param dim The new coordinate dimensionality.
+# 
 def setCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer, dim: int) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.COORDINATES_DIMENSION parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.COORDINATES_DIMENSION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored coordinate dimensionality.
+# 
 def getCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.COORDINATES_DIMENSION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param opts 
-#
+# \brief Sets the value of the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter in <em>cntnr</em> to <em>opts</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param opts The new InChI input-options string.
+# 
 def setINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer, opts: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored InChI input-options string.
+# 
 def getINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param opts 
-#
+# \brief Sets the value of the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter in <em>cntnr</em> to <em>opts</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param opts The new InChI output-options string.
+# 
 def setINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer, opts: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored InChI output-options string.
+# 
 def getINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param separate 
-#
+# \brief Sets the value of the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter in <em>cntnr</em> to <em>separate</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param separate The new parameter value.
+# 
 def setJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer, separate: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param version 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_CTAB_VERSION parameter in <em>cntnr</em> to <em>version</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param version The new CTab version (see namespace Chem.MDLDataFormatVersion).
+# 
 def setMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_CTAB_VERSION parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_CTAB_VERSION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored CTab version (see namespace Chem.MDLDataFormatVersion).
+# 
 def getMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_CTAB_VERSION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param tag 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter in <em>cntnr</em> to <em>tag</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param tag The new SD-tag string.
+# 
 def setMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer, tag: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored SD-tag string.
+# 
 def getMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param enable 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param enable The new parameter value.
+# 
+# \since 1.3
+# 
 def setMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.3
+# 
 def hasMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.3
+# 
 def getMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.3
+# 
 def clearMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param ignore 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_IGNORE_PARITY parameter in <em>cntnr</em> to <em>ignore</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param ignore The new parameter value.
+# 
 def setMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_IGNORE_PARITY parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_IGNORE_PARITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_IGNORE_PARITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
 def setMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
 def setMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param version 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter in <em>cntnr</em> to <em>version</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param version The new RXN-file version (see namespace Chem.MDLDataFormatVersion).
+# 
 def setMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored RXN-file version (see namespace Chem.MDLDataFormatVersion).
+# 
 def getMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param trim 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_TRIM_LINES parameter in <em>cntnr</em> to <em>trim</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param trim The new parameter value.
+# 
 def setMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer, trim: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRIM_LINES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRIM_LINES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_TRIM_LINES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param trim 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_TRIM_STRINGS parameter in <em>cntnr</em> to <em>trim</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param trim The new parameter value.
+# 
 def setMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer, trim: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRIM_STRINGS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRIM_STRINGS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_TRIM_STRINGS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param trunc 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter in <em>cntnr</em> to <em>trunc</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param trunc The new parameter value.
+# 
 def setMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer, trunc: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param trunc 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter in <em>cntnr</em> to <em>trunc</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param trunc The new parameter value.
+# 
 def setMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer, trunc: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param update 
-#
+# \brief Sets the value of the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter in <em>cntnr</em> to <em>update</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param update The new parameter value.
+# 
 def setMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer, update: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param calc 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>calc</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param calc The new parameter value.
+# 
 def setMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param type 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter in <em>cntnr</em> to <em>type</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param type The new MOL2 charge type (see namespace Chem.MOL2ChargeType).
+# 
 def setMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer, type: int) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored MOL2 charge type (see namespace Chem.MOL2ChargeType).
+# 
 def getMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param enable 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param enable The new parameter value.
+# 
 def setMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param enable 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param enable The new parameter value.
+# 
 def setMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param type 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter in <em>cntnr</em> to <em>type</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param type The new MOL2 molecule type (see namespace Chem.MOL2MoleculeType).
+# 
 def setMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer, type: int) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored MOL2 molecule type (see namespace Chem.MOL2MoleculeType).
+# 
 def getMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2.3
+# 
 def setMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2.3
+# 
 def hasMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2.3
+# 
 def getMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2.3
+# 
 def clearMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
 def setMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param read 
-#
+# \brief Sets the value of the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>read</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param read The new parameter value.
+# 
+# \since 1.2.3
+# 
 def setMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer, read: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2.3
+# 
 def hasMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2.3
+# 
 def getMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2.3
+# 
 def clearMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param multi_conf 
-#
+# \brief Sets the value of the Chem.ControlParameter.MULTI_CONF_EXPORT parameter in <em>cntnr</em> to <em>multi_conf</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param multi_conf The new parameter value.
+# 
 def setMultiConfExportParameter(cntnr: Base.ControlParameterContainer, multi_conf: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MULTI_CONF_EXPORT parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMultiConfExportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_EXPORT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMultiConfExportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MULTI_CONF_EXPORT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMultiConfExportParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param multi_conf 
-#
+# \brief Sets the value of the Chem.ControlParameter.MULTI_CONF_IMPORT parameter in <em>cntnr</em> to <em>multi_conf</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param multi_conf The new parameter value.
+# 
 def setMultiConfImportParameter(cntnr: Base.ControlParameterContainer, multi_conf: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MULTI_CONF_IMPORT parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMultiConfImportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_IMPORT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getMultiConfImportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MULTI_CONF_IMPORT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMultiConfImportParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param proc 
-#
+# \brief Sets the value of the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter in <em>cntnr</em> to <em>proc</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param proc The new MultiConfMoleculeInputProcessor reference.
+# 
 def setMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer, proc: MultiConfMoleculeInputProcessor) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored MultiConfMoleculeInputProcessor reference.
+# 
 def getMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer) -> MultiConfMoleculeInputProcessor: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param deplete 
-#
+# \brief Sets the value of the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter in <em>cntnr</em> to <em>deplete</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param deplete The new parameter value.
+# 
 def setOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer, deplete: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
 def setOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param sep 
-#
+# \brief Sets the value of the Chem.ControlParameter.RECORD_SEPARATOR parameter in <em>cntnr</em> to <em>sep</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param sep The new record-separator string.
+# 
 def setRecordSeparatorParameter(cntnr: Base.ControlParameterContainer, sep: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.RECORD_SEPARATOR parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasRecordSeparatorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.RECORD_SEPARATOR parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored record-separator string.
+# 
 def getRecordSeparatorParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.RECORD_SEPARATOR parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearRecordSeparatorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param min_size 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter in <em>cntnr</em> to <em>min_size</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param min_size The new minimum ring size.
+# 
 def setSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContainer, min_size: int) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored minimum ring size.
+# 
 def getSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param no_subset 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter in <em>cntnr</em> to <em>no_subset</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param no_subset The new parameter value.
+# 
 def setSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer, no_subset: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.3
+# 
 def setSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.3
+# 
 def hasSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.3
+# 
 def getSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.3
+# 
 def clearSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param format 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter in <em>cntnr</em> to <em>format</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param format The new record-format string.
+# 
 def setSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer, format: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored record-format string.
+# 
 def getSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param output 
-#
+# \brief Sets the value of the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter in <em>cntnr</em> to <em>output</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param output The new parameter value.
+# 
+# \since 1.2
+# 
 def setSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.2
+# 
 def getSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.2
+# 
 def clearSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param strict 
-#
+# \brief Sets the value of the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter in <em>cntnr</em> to <em>strict</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param strict The new parameter value.
+# 
 def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value.
+# 
 def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
 def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param calc 
-#
+# \brief Sets the value of the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>calc</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param calc The new parameter value.
+# 
+# \since 1.1
+# 
 def setXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.1
+# 
 def getXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.1
+# 
 def clearXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param is_name 
-#
+# \brief Sets the value of the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter in <em>cntnr</em> to <em>is_name</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param is_name The new parameter value.
+# 
+# \since 1.1
+# 
 def setXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.1
+# 
 def getXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.1
+# 
 def clearXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param perceive 
-#
+# \brief Sets the value of the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter in <em>cntnr</em> to <em>perceive</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param perceive The new parameter value.
+# 
+# \since 1.1
+# 
 def setXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.1
+# 
 def getXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.1
+# 
 def clearXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param perceive 
-#
+# \brief Sets the value of the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter in <em>cntnr</em> to <em>perceive</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# \param perceive The new parameter value.
+# 
+# \since 1.1
+# 
 def setXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to query.
+# 
+# \return The stored parameter value. 
+# 
+# \since 1.1
+# 
 def getXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container to modify.
+# 
+# \since 1.1
+# 
 def clearXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -> None: pass

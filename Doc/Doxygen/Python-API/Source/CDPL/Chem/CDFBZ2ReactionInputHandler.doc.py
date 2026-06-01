@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of gzip-compressed reaction data in the native I/O format of the <em>CDPL</em>.
+# \brief A handler for the input of bzip2-compressed reaction data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFBZ2ReactionInputHandler(ReactionInputHandler):
 
