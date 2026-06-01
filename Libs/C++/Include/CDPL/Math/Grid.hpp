@@ -997,6 +997,12 @@ namespace CDPL
                 g1.swap(g2);
             }
 
+            /**
+             * \brief Resizes the grid axes to (\a m, \a n, \a o).
+             * \param m The new first-axis size.
+             * \param n The new second-axis size.
+             * \param o The new third-axis size.
+             */
             void resize(SizeType m, SizeType n, SizeType o)
             {
                 size1 = m;
