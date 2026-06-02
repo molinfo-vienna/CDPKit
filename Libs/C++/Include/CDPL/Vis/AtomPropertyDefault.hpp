@@ -51,60 +51,77 @@ namespace CDPL
         namespace AtomPropertyDefault
         {
 
+            /** \brief Default value of the Vis::AtomProperty::COLOR property. */
             extern CDPL_VIS_API const Color             COLOR;
+            /** \brief Default value of the Vis::AtomProperty::LABEL_FONT property. */
             extern CDPL_VIS_API const Font              LABEL_FONT;
+            /** \brief Default value of the Vis::AtomProperty::LABEL_SIZE property. */
             extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
+            /** \brief Default value of the Vis::AtomProperty::SECONDARY_LABEL_FONT property. */
             extern CDPL_VIS_API const Font              SECONDARY_LABEL_FONT;
+            /** \brief Default value of the Vis::AtomProperty::SECONDARY_LABEL_SIZE property. */
             extern CDPL_VIS_API const SizeSpecification SECONDARY_LABEL_SIZE;
+            /** \brief Default value of the Vis::AtomProperty::LABEL_MARGIN property. */
             extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
+            /** \brief Default value of the Vis::AtomProperty::RADICAL_ELECTRON_DOT_SIZE property. */
             extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
 
-            /*
+            /**
+             * \brief Default value of the Vis::AtomProperty::CONFIGURATION_LABEL_FONT property.
              * \since 1.1
              */
             extern CDPL_VIS_API const Font              CONFIGURATION_LABEL_FONT;
 
-            /*
+            /**
+             * \brief Default value of the Vis::AtomProperty::CONFIGURATION_LABEL_SIZE property.
              * \since 1.1
              */
             extern CDPL_VIS_API const SizeSpecification CONFIGURATION_LABEL_SIZE;
 
-            /*
+            /**
+             * \brief Default value of the Vis::AtomProperty::CONFIGURATION_LABEL_COLOR property.
              * \since 1.2
              */
             extern CDPL_VIS_API const Color             CONFIGURATION_LABEL_COLOR;
 
-            /*
+            /**
+             * \brief Default value of the Vis::AtomProperty::CUSTOM_LABEL_FONT property.
              * \since 1.2
              */
             extern CDPL_VIS_API const Font              CUSTOM_LABEL_FONT;
 
-            /*
+            /**
+             * \brief Default value of the Vis::AtomProperty::CUSTOM_LABEL_SIZE property.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification CUSTOM_LABEL_SIZE;
 
-            /*
+            /**
+             * \brief Default value of the Vis::AtomProperty::CUSTOM_LABEL_COLOR property.
              * \since 1.2
              */
             extern CDPL_VIS_API const Color             CUSTOM_LABEL_COLOR;
 
-            /*
+            /**
+             * \brief Default value of the Vis::AtomProperty::CUSTOM_LABEL property.
              * \since 1.2
              */
             extern CDPL_VIS_API const std::string       CUSTOM_LABEL;
 
             /**
+             * \brief Default value of the Vis::AtomProperty::HIGHLIGHTED_FLAG property.
              * \since 1.2
              */
             extern CDPL_VIS_API const bool              HIGHLIGHTED_FLAG;
 
             /**
+             * \brief Default value of the Vis::AtomProperty::HIGHLIGHT_AREA_BRUSH property.
              * \since 1.2
              */
             extern CDPL_VIS_API const Brush             HIGHLIGHT_AREA_BRUSH;
 
             /**
+             * \brief Default value of the Vis::AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN property.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen               HIGHLIGHT_AREA_OUTLINE_PEN;

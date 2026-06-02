@@ -62,7 +62,9 @@ namespace CDPL
              */
             typedef std::shared_ptr<BasicPharmacophore> SharedPointer;
 
+            /** \brief A mutable random access iterator used to iterate over the stored Pharm::BasicFeature objects. */
             typedef boost::indirect_iterator<FeatureList::iterator, BasicFeature>             FeatureIterator;
+            /** \brief A constant random access iterator used to iterate over the stored \c const Pharm::BasicFeature objects. */
             typedef boost::indirect_iterator<FeatureList::const_iterator, const BasicFeature> ConstFeatureIterator;
 
             /**
@@ -96,8 +98,15 @@ namespace CDPL
              */
             ~BasicPharmacophore();
 
+            /**
+             * \brief Removes all stored features and clears all properties.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of features.
+             * \return The number of features.
+             */
             std::size_t getNumFeatures() const;
 
             /**
@@ -124,12 +133,33 @@ namespace CDPL
              */
             FeatureIterator getFeaturesEnd();
 
+            /**
+             * \brief Returns a \c const reference to the feature at index \a idx.
+             * \param idx The zero-based feature index.
+             * \return A \c const reference to the feature at the specified index.
+             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             */
             const BasicFeature& getFeature(std::size_t idx) const;
 
+            /**
+             * \brief Returns a non-\c const reference to the feature at index \a idx.
+             * \param idx The zero-based feature index.
+             * \return A non-\c const reference to the feature at the specified index.
+             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             */
             BasicFeature& getFeature(std::size_t idx);
 
+            /**
+             * \brief Allocates a new Pharm::BasicFeature in this pharmacophore and returns a reference to it.
+             * \return A reference to the newly created feature.
+             */
             BasicFeature& addFeature();
 
+            /**
+             * \brief Removes the feature at index \a idx.
+             * \param idx The zero-based feature index.
+             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             */
             void removeFeature(std::size_t idx);
 
             /**
@@ -141,8 +171,19 @@ namespace CDPL
              */
             FeatureIterator removeFeature(const FeatureIterator& it);
 
+            /**
+             * \brief Tells whether the specified feature is part of this pharmacophore.
+             * \param feature The feature to look for.
+             * \return \c true if \a feature is stored in the pharmacophore, and \c false otherwise.
+             */
             bool containsFeature(const Feature& feature) const;
 
+            /**
+             * \brief Returns the zero-based index of \a feature in this pharmacophore.
+             * \param feature The feature for which to return the index.
+             * \return The zero-based feature index.
+             * \throw Base::ItemNotFound if \a feature is not stored in this pharmacophore.
+             */
             std::size_t getFeatureIndex(const Feature& feature) const;
 
             /**
@@ -171,6 +212,10 @@ namespace CDPL
 
             using Pharmacophore::operator+=;
 
+            /**
+             * \brief Creates a deep copy of this pharmacophore.
+             * \return A smart pointer to the new \c %BasicPharmacophore copy.
+             */
             Pharmacophore::SharedPointer clone() const;
 
             /**
@@ -180,8 +225,16 @@ namespace CDPL
              */
             void copy(const BasicPharmacophore& pharm);
 
+            /**
+             * \brief Replaces the current set of features and properties by a copy of the features and properties of \a pharm.
+             * \param pharm The pharmacophore to copy.
+             */
             void copy(const Pharmacophore& pharm);
 
+            /**
+             * \brief Replaces the current set of features by copies of the features in the feature container \a cntnr.
+             * \param cntnr The feature container providing the features to copy.
+             */
             void copy(const FeatureContainer& cntnr);
 
             /**
@@ -192,12 +245,31 @@ namespace CDPL
              */
             void append(const BasicPharmacophore& pharm);
 
+            /**
+             * \brief Extends the current set of features by copies of the features in \a pharm.
+             * \param pharm The pharmacophore providing the features to append.
+             * \note Does not affect any properties.
+             */
             void append(const Pharmacophore& pharm);
 
+            /**
+             * \brief Extends the current set of features by copies of the features in \a cntnr.
+             * \param cntnr The feature container providing the features to append.
+             * \note Does not affect any properties.
+             */
             void append(const FeatureContainer& cntnr);
 
+            /**
+             * \brief Removes the features stored in \a cntnr from this pharmacophore.
+             * \param cntnr The feature container providing the features to remove.
+             * \note Does not affect any properties.
+             */
             void remove(const FeatureContainer& cntnr);
 
+            /**
+             * \brief Orders the stored features according to \a func.
+             * \param func The comparison function used as the ordering predicate.
+             */
             void orderFeatures(const FeatureCompareFunction& func);
 
           private:
