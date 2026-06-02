@@ -25,86 +25,106 @@
 class AtomPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.COLOR property.
+    # 
     COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.LABEL_FONT property.
+    # 
     LABEL_FONT = Font()
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.LABEL_SIZE property.
+    # 
     LABEL_SIZE = SizeSpecification(value=10, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.SECONDARY_LABEL_FONT property.
+    # 
     SECONDARY_LABEL_FONT = Font()
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.SECONDARY_LABEL_SIZE property.
+    # 
     SECONDARY_LABEL_SIZE = SizeSpecification(value=6, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.LABEL_MARGIN property.
+    # 
     LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE property.
+    # 
     RADICAL_ELECTRON_DOT_SIZE = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.CONFIGURATION_LABEL_FONT property.
+    # 
+    # \since 1.1
+    # 
     CONFIGURATION_LABEL_FONT = Font()
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.CONFIGURATION_LABEL_SIZE property.
+    # 
+    # \since 1.1
+    # 
     CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.CONFIGURATION_LABEL_COLOR property.
+    # 
+    # \since 1.2
+    # 
     CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.CUSTOM_LABEL_FONT property.
+    # 
+    # \since 1.2
+    # 
     CUSTOM_LABEL_FONT = Font()
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.CUSTOM_LABEL_SIZE property.
+    # 
+    # \since 1.2
+    # 
     CUSTOM_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.CUSTOM_LABEL_COLOR property.
+    # 
+    # \since 1.2
+    # 
     CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.CUSTOM_LABEL property.
+    # 
+    # \since 1.2
+    # 
     CUSTOM_LABEL = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.HIGHLIGHTED_FLAG property.
+    # 
+    # \since 1.2
+    # 
     HIGHLIGHTED_FLAG = False
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH property.
+    # 
+    # \since 1.2
+    # 
     HIGHLIGHT_AREA_BRUSH = Brush(color=Color(r=0.8, g=0.8, b=1), style=SOLID_PATTERN)
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN property.
+    # 
+    # \since 1.2
+    # 
     HIGHLIGHT_AREA_OUTLINE_PEN = Pen(color=Color(r=0.6, g=0.6, b=0.75), width=1, line_style=SOLID_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)

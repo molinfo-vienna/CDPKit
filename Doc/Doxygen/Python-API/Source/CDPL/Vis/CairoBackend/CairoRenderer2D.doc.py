@@ -36,180 +36,132 @@ class CairoRenderer2D(Vis.Renderer2D):
     def __init__(cairo_ctxt: cairo.Context) -> None: pass
 
     ##
-    # \brief Saves the current renderer state.
-    # 
-    # The method saves the current pen, brush, font and transformation matrix on an internal stack. The last saved state can be restored later on by a call to restoreState().
-    # 
-    # \see restoreState()
+    # \brief Pushes the current pen, brush, font, transformation and clip path onto an internal state stack.
     # 
     def saveState() -> None: pass
 
     ##
-    # \brief Restores the last renderer state saved by a call to saveState().
-    # 
-    # \see saveState()
+    # \brief Pops the topmost stack entry and restores the renderer to the saved state.
     # 
     def restoreState() -> None: pass
 
     ##
-    # \brief Sets the applied affine transformation matrix to <em>xform</em>.
+    # \brief Replaces the current transformation matrix by <em>xform</em>.
     # 
-    # \param xform The new affine transformation matrix.
+    # \param xform The new transformation matrix.
     # 
     def setTransform(xform: Math.Matrix3D) -> None: pass
 
     ##
-    # \brief Multiplies the current affine transformation matrix by <em>xform</em>.
+    # \brief Right-multiplies the current transformation matrix by <em>xform</em>.
     # 
-    # \param xform The matrix by which the current affine transformation matrix is multiplied.
+    # \param xform The transformation matrix to append.
     # 
     def transform(xform: Math.Matrix3D) -> None: pass
 
     ##
-    # \brief Sets the pen to be used in subsequent drawing operations.
+    # \brief Sets the pen used for drawing outlines and lines.
     # 
-    # \param pen The new pen for subsequent drawing operations.
-    # 
-    # \see Vis.Pen
+    # \param pen The new pen.
     # 
     def setPen(pen: Vis.Pen) -> None: pass
 
     ##
-    # \brief Sets the brush to be used in subsequent drawing operations.
+    # \brief Sets the brush used for filling shapes.
     # 
-    # \param brush The new brush for subsequent drawing operations.
-    # 
-    # \see Vis.Brush
+    # \param brush The new brush.
     # 
     def setBrush(brush: Vis.Brush) -> None: pass
 
     ##
-    # \brief Sets the font to be used in subsequent text drawing operations.
+    # \brief Sets the font used for rendering text.
     # 
-    # \param font The new font used in subsequent text drawing operations.
-    # 
-    # \see Vis.Font
+    # \param font The new font.
     # 
     def setFont(font: Vis.Font) -> None: pass
 
     ##
-    # \brief Draws an axis aligned rectangle of the specified width and height whose upper-left corner is located at <em>(x, y)</em>.
-    # 
-    # The rectangle is filled as specified by the current brush and the outline will be drawn as specified by the current pen.
-    # 
-    # \param x The x-coordinate of the upper-left corner.
-    # \param y The y-coordinate of the upper-left corner.
-    # \param width The width of the rectangle.
-    # \param height The height of the rectangle.
-    # 
-    # \see setPen(), setBrush()
-    # 
+    # \brief 
+    # \param x 
+    # \param y 
+    # \param width 
+    # \param height 
+    #
     def drawRectangle(x: float, y: float, width: float, height: float) -> None: pass
 
     ##
-    # \brief Draws the polygon defined by <em>points</em>.
+    # \brief Draws the (filled) polygon defined by the vertex sequence <em>points</em>.
     # 
-    # For a given set of \f$ N \f$ corner points \f$ p_i \f$ with \f$ i = 1, 2, \ldots, N \f$, the polygon's \f$ N \f$ edges are given by \f$ (p_1, p_2), (p_2, p_3), \ldots, (p_N, p_0) \f$. The polygon is filled as specified by the current brush and the outline will be drawn as specified by the current pen.
-    # 
-    # \param points An array of points specifying the corners of the polygon.
-    # 
-    # \see setPen(), setBrush()
+    # \param points The polygon's vertex sequence.
     # 
     def drawPolygon(points: Math.Vector2DArray) -> None: pass
 
     ##
-    # \brief Draws a line segment from <em>(x1, y1)</em> to <em>(x2, y2)</em>.
+    # \brief Draws a single line segment from <em>(x1, y1)</em> to <em>(x2, y2)</em>.
     # 
-    # The line style, color, cap style and line width is specified by the current pen.
-    # 
-    # \param x1 The x-coordinate of the starting point.
-    # \param y1 The y-coordinate of the starting point.
-    # \param x2 The x-coordinate of the end point.
-    # \param y2 The y-coordinate of the end point.
-    # 
-    # \see setPen()
+    # \param x1 The x-coordinate of the line's start point.
+    # \param y1 The y-coordinate of the line's start point.
+    # \param x2 The x-coordinate of the line's end point.
+    # \param y2 The y-coordinate of the line's end point.
     # 
     def drawLine(x1: float, y1: float, x2: float, y2: float) -> None: pass
 
     ##
-    # \brief Draws the polyline defined by <em>points</em>.
+    # \brief Draws the open polyline defined by the vertex sequence <em>points</em>.
     # 
-    # For a given set of \f$ N \f$ points \f$ p_i \f$ with \f$ i = 1, 2, \ldots, N \f$, \f$ N - 1 \f$ connected line segments \f$ (p_1, p_2), (p_2, p_3), \ldots, (p_{N - 1}, p_N) \f$ will be drawn. The line style, color, cap style, join style and line width is specified by the current pen.
-    # 
-    # \param points An array of points defining the polyline.
-    # 
-    # \see setPen()
+    # \param points The polyline's vertex sequence.
     # 
     def drawPolyline(points: Math.Vector2DArray) -> None: pass
 
     ##
-    # \brief Draws the sequence of disjoint line segments defined by <em>points</em>.
+    # \brief Draws the disjoint line segments defined by consecutive vertex pairs in <em>points</em>.
     # 
-    # For a given set of \f$ 2N \f$ points \f$ p_i \f$ with \f$ i = 1, 2, \ldots, 2N \f$, \f$ N \f$ disjoint line segments \f$ (p_1, p_2), (p_3, p_4), \ldots, (p_{2N - 1}, p_2N) \f$ will be drawn. The line style, color, cap style and line width is specified by the current pen.
-    # 
-    # \param points An array of points defining the line segments.
-    # 
-    # \see setPen()
+    # \param points The vertex sequence (size must be even).
     # 
     def drawLineSegments(points: Math.Vector2DArray) -> None: pass
 
     ##
-    # \brief Draws a point at the position <em>(x, y)</em>.
+    # \brief Draws a single point at <em>(x, y)</em>.
     # 
-    # The diameter and color of the point is specified by the current pen.
-    # 
-    # \param x The x-coordinate of the point.
-    # \param y The y-coordinate of the point.
-    # 
-    # \see setPen()
+    # \param x The point's x-coordinate.
+    # \param y The point's y-coordinate.
     # 
     def drawPoint(x: float, y: float) -> None: pass
 
     ##
-    # \brief Draws an ellipse with the given width and height around the center position <em>(x, y)</em>.
+    # \brief Draws an axis-aligned ellipse centered at <em>(x, y)</em> with the given <em>width</em> and <em>height</em>.
     # 
-    # The ellipse is filled as specified by the current brush and the outline will be drawn as specified by the current pen.
-    # 
-    # \param x The x-coordinate of the center point.
-    # \param y The y-coordinate of the center point.
+    # \param x The x-coordinate of the ellipse's center.
+    # \param y The y-coordinate of the ellipse's center.
     # \param width The width of the ellipse.
     # \param height The height of the ellipse.
-    # 
-    # \see setPen(), setBrush()
     # 
     def drawEllipse(x: float, y: float, width: float, height: float) -> None: pass
 
     ##
-    # \brief Draws the specified text at the position <em>(x, y)</em>.
+    # \brief Draws the text <em>txt</em> with its baseline starting at <em>(x, y)</em>.
     # 
-    # The text color is specified by the current pen. The font has to be specified by setFont().
-    # 
-    # \param x The x-position of the drawn text.
-    # \param y The y-position of the baseline.
+    # \param x The baseline x-coordinate.
+    # \param y The baseline y-coordinate.
     # \param txt The text to draw.
-    # 
-    # \see setPen(), setFont()
     # 
     def drawText(x: float, y: float, txt: str) -> None: pass
 
     ##
-    # \brief Draws the given path.
-    # 
-    # The path is filled as specified by the current brush and the outline will be drawn as specified by the current pen.
+    # \brief Draws (strokes and fills) the 2D path <em>path</em>.
     # 
     # \param path The path to draw.
-    # 
-    # \see setPen(), setBrush()
     # 
     def drawPath(path: Vis.Path2D) -> None: pass
 
     ##
-    # \brief 
-    # \param path 
-    #
+    # \brief Sets the renderer's active clipping region to <em>path</em>.
+    # 
+    # \param path The path defining the new clipping region.
+    # 
     def setClipPath(path: Vis.Path2D) -> None: pass
 
     ##
-    # \brief Disables clipping.
+    # \brief Disables any currently active clipping region.
     # 
     def clearClipPath() -> None: pass

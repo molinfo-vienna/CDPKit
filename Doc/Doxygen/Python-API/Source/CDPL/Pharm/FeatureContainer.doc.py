@@ -69,20 +69,24 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def orderFeatures(func: BoolFeature2Functor) -> None: pass
 
     ##
-    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # \brief Returns a reference to the Chem.Entity3D at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the Chem.Entity3D instance to return.
+    # Forwards to getFeature() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \param idx The zero-based entity index.
     # 
     # \return A reference to the entity at the specified index. 
     # 
-    # \throw Base.IndexError if the number of entities is zero or <em>idx</em> is not in the range [0, getNumEntities() - 1].
+    # \throw Base.IndexError if the number of features is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
     # 
     def getEntity(idx: int) -> Chem.Entity3D: pass
 
     ##
     # \brief Returns the number of stored Chem.Entity3D objects.
     # 
-    # \return The number of stored Chem.Entity3D objects.
+    # Forwards to getNumFeatures() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \return The number of contained features.
     # 
     def getNumEntities() -> int: pass
 

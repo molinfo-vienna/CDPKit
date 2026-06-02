@@ -42,73 +42,73 @@ class UFFAtomType(Boost.Python.instance):
     H_b = 2
 
     ##
-    # \brief 
-    #
+    # \brief Helium.
+    # 
     He_4_4 = 3
 
     ##
-    # \brief 
-    #
+    # \brief Lithium.
+    # 
     Li = 4
 
     ##
-    # \brief 
-    #
+    # \brief Beryllium (tetrahedral).
+    # 
     Be_3_2 = 5
 
     ##
-    # \brief 
-    #
+    # \brief Boron (sp3, tetrahedral).
+    # 
     B_3 = 6
 
     ##
-    # \brief 
-    #
+    # \brief Boron (sp2, trigonal-planar).
+    # 
     B_2 = 7
 
     ##
-    # \brief 
-    #
+    # \brief Carbon (sp3, tetrahedral).
+    # 
     C_3 = 8
 
     ##
-    # \brief 
-    #
+    # \brief Carbon (aromatic/resonant).
+    # 
     C_R = 9
 
     ##
-    # \brief 
-    #
+    # \brief Carbon (sp2, trigonal-planar).
+    # 
     C_2 = 10
 
     ##
-    # \brief 
-    #
+    # \brief Carbon (sp, linear).
+    # 
     C_1 = 11
 
     ##
-    # \brief 
-    #
+    # \brief Nitrogen (sp3, pyramidal).
+    # 
     N_3 = 12
 
     ##
-    # \brief 
-    #
+    # \brief Nitrogen (aromatic/resonant).
+    # 
     N_R = 13
 
     ##
-    # \brief 
-    #
+    # \brief Nitrogen (sp2, trigonal-planar).
+    # 
     N_2 = 14
 
     ##
-    # \brief 
-    #
+    # \brief Nitrogen (sp, linear).
+    # 
     N_1 = 15
 
     ##
-    # \brief 
-    #
+    # \brief Oxygen (sp3).
+    # 
     O_3 = 16
 
     ##
@@ -117,556 +117,556 @@ class UFFAtomType(Boost.Python.instance):
     O_3_z = 17
 
     ##
-    # \brief 
-    #
+    # \brief Oxygen (aromatic/resonant).
+    # 
     O_R = 18
 
     ##
-    # \brief 
-    #
+    # \brief Oxygen (sp2).
+    # 
     O_2 = 19
 
     ##
-    # \brief 
-    #
+    # \brief Oxygen (sp, linear, e.g. carbonyl in CO).
+    # 
     O_1 = 20
 
     ##
-    # \brief 
-    #
+    # \brief Fluorine.
+    # 
     F = 21
 
     ##
-    # \brief 
-    #
+    # \brief Neon.
+    # 
     Ne_4_4 = 22
 
     ##
-    # \brief 
-    #
+    # \brief Sodium.
+    # 
     Na = 23
 
     ##
-    # \brief 
-    #
+    # \brief Magnesium (tetrahedral).
+    # 
     Mg_3_2 = 24
 
     ##
-    # \brief 
-    #
+    # \brief Aluminum (tetrahedral).
+    # 
     Al_3 = 25
 
     ##
-    # \brief 
-    #
+    # \brief Silicon (tetrahedral).
+    # 
     Si_3 = 26
 
     ##
-    # \brief 
-    #
+    # \brief Phosphorus (sp3, three-coordinate).
+    # 
     P_3_3 = 27
 
     ##
-    # \brief 
-    #
+    # \brief Phosphorus (sp3, five-coordinate, e.g. phosphate).
+    # 
     P_3_5 = 28
 
     ##
-    # \brief 
-    #
+    # \brief Phosphorus in organometallic complexes.
+    # 
     P_3_q = 29
 
     ##
-    # \brief 
-    #
+    # \brief Sulfur (sp3, two-coordinate).
+    # 
     S_3_2 = 30
 
     ##
-    # \brief 
-    #
+    # \brief Sulfur (sp3, four-coordinate, e.g. sulfoxide).
+    # 
     S_3_4 = 31
 
     ##
-    # \brief 
-    #
+    # \brief Sulfur (sp3, six-coordinate, e.g. sulfone).
+    # 
     S_3_6 = 32
 
     ##
-    # \brief 
-    #
+    # \brief Sulfur (aromatic/resonant).
+    # 
     S_R = 33
 
     ##
-    # \brief 
-    #
+    # \brief Sulfur (sp2).
+    # 
     S_2 = 34
 
     ##
-    # \brief 
-    #
+    # \brief Chlorine.
+    # 
     Cl = 35
 
     ##
-    # \brief 
-    #
+    # \brief Argon.
+    # 
     Ar_4_4 = 36
 
     ##
-    # \brief 
-    #
+    # \brief Potassium.
+    # 
     K = 37
 
     ##
-    # \brief 
-    #
+    # \brief Calcium (octahedral).
+    # 
     Ca_6_2 = 38
 
     ##
-    # \brief 
-    #
+    # \brief Scandium (tetrahedral).
+    # 
     Sc_3_3 = 39
 
     ##
-    # \brief 
-    #
+    # \brief Titanium (tetrahedral).
+    # 
     Ti_3_4 = 40
 
     ##
-    # \brief 
-    #
+    # \brief Titanium (octahedral).
+    # 
     Ti_6_4 = 41
 
     ##
-    # \brief 
-    #
+    # \brief Vanadium (tetrahedral).
+    # 
     V_3_5 = 42
 
     ##
-    # \brief 
-    #
+    # \brief Chromium (octahedral).
+    # 
     Cr_6_3 = 43
 
     ##
-    # \brief 
-    #
+    # \brief Manganese (octahedral).
+    # 
     Mn_6_2 = 44
 
     ##
-    # \brief 
-    #
+    # \brief Iron (tetrahedral).
+    # 
     Fe_3_2 = 45
 
     ##
-    # \brief 
-    #
+    # \brief Iron (octahedral).
+    # 
     Fe_6_2 = 46
 
     ##
-    # \brief 
-    #
+    # \brief Cobalt (octahedral).
+    # 
     Co_6_3 = 47
 
     ##
-    # \brief 
-    #
+    # \brief Nickel (square-planar).
+    # 
     Ni_4_2 = 48
 
     ##
-    # \brief 
-    #
+    # \brief Copper (tetrahedral).
+    # 
     Cu_3_1 = 49
 
     ##
-    # \brief 
-    #
+    # \brief Zinc (tetrahedral).
+    # 
     Zn_3_2 = 50
 
     ##
-    # \brief 
-    #
+    # \brief Gallium (tetrahedral).
+    # 
     Ga_3_3 = 51
 
     ##
-    # \brief 
-    #
+    # \brief Germanium (tetrahedral).
+    # 
     Ge_3 = 52
 
     ##
-    # \brief 
-    #
+    # \brief Arsenic (tetrahedral).
+    # 
     As_3_3 = 53
 
     ##
-    # \brief 
-    #
+    # \brief Selenium (tetrahedral).
+    # 
     Se_3_2 = 54
 
     ##
-    # \brief 
-    #
+    # \brief Bromine.
+    # 
     Br = 55
 
     ##
-    # \brief 
-    #
+    # \brief Krypton.
+    # 
     Kr_4_4 = 56
 
     ##
-    # \brief 
-    #
+    # \brief Rubidium.
+    # 
     Rb = 57
 
     ##
-    # \brief 
-    #
+    # \brief Strontium (octahedral).
+    # 
     Sr_6_2 = 58
 
     ##
-    # \brief 
-    #
+    # \brief Yttrium (tetrahedral).
+    # 
     Y_3_3 = 59
 
     ##
-    # \brief 
-    #
+    # \brief Zirconium (tetrahedral).
+    # 
     Zr_3_4 = 60
 
     ##
-    # \brief 
-    #
+    # \brief Niobium (tetrahedral).
+    # 
     Nb_3_5 = 61
 
     ##
-    # \brief 
-    #
+    # \brief Molybdenum (octahedral).
+    # 
     Mo_6_6 = 62
 
     ##
-    # \brief 
-    #
+    # \brief Molybdenum (tetrahedral).
+    # 
     Mo_3_6 = 63
 
     ##
-    # \brief 
-    #
+    # \brief Technetium (octahedral).
+    # 
     Tc_6_5 = 64
 
     ##
-    # \brief 
-    #
+    # \brief Ruthenium (octahedral).
+    # 
     Ru_6_2 = 65
 
     ##
-    # \brief 
-    #
+    # \brief Rhodium (octahedral).
+    # 
     Rh_6_3 = 66
 
     ##
-    # \brief 
-    #
+    # \brief Palladium (square-planar).
+    # 
     Pd_4_2 = 67
 
     ##
-    # \brief 
-    #
+    # \brief Silver (linear).
+    # 
     Ag_1_1 = 68
 
     ##
-    # \brief 
-    #
+    # \brief Cadmium (tetrahedral).
+    # 
     Cd_3_2 = 69
 
     ##
-    # \brief 
-    #
+    # \brief Indium (tetrahedral).
+    # 
     In_3_3 = 70
 
     ##
-    # \brief 
-    #
+    # \brief Tin (tetrahedral).
+    # 
     Sn_3 = 71
 
     ##
-    # \brief 
-    #
+    # \brief Antimony (tetrahedral).
+    # 
     Sb_3_3 = 72
 
     ##
-    # \brief 
-    #
+    # \brief Tellurium (tetrahedral).
+    # 
     Te_3_2 = 73
 
     ##
-    # \brief 
-    #
+    # \brief Iodine.
+    # 
     I = 74
 
     ##
-    # \brief 
-    #
+    # \brief Xenon.
+    # 
     Xe_4_4 = 75
 
     ##
-    # \brief 
-    #
+    # \brief Caesium.
+    # 
     Cs = 76
 
     ##
-    # \brief 
-    #
+    # \brief Barium (octahedral).
+    # 
     Ba_6_2 = 77
 
     ##
-    # \brief 
-    #
+    # \brief Lanthanum (tetrahedral).
+    # 
     La_3_3 = 78
 
     ##
-    # \brief 
-    #
+    # \brief Cerium (octahedral).
+    # 
     Ce_6_3 = 79
 
     ##
-    # \brief 
-    #
+    # \brief Praseodymium (octahedral).
+    # 
     Pr_6_3 = 80
 
     ##
-    # \brief 
-    #
+    # \brief Neodymium (octahedral).
+    # 
     Nd_6_3 = 81
 
     ##
-    # \brief 
-    #
+    # \brief Promethium (octahedral).
+    # 
     Pm_6_3 = 82
 
     ##
-    # \brief 
-    #
+    # \brief Samarium (octahedral).
+    # 
     Sm_6_3 = 83
 
     ##
-    # \brief 
-    #
+    # \brief Europium (octahedral).
+    # 
     Eu_6_3 = 84
 
     ##
-    # \brief 
-    #
+    # \brief Gadolinium (octahedral).
+    # 
     Gd_6_3 = 85
 
     ##
-    # \brief 
-    #
+    # \brief Terbium (octahedral).
+    # 
     Tb_6_3 = 86
 
     ##
-    # \brief 
-    #
+    # \brief Dysprosium (octahedral).
+    # 
     Dy_6_3 = 87
 
     ##
-    # \brief 
-    #
+    # \brief Holmium (octahedral).
+    # 
     Ho_6_3 = 88
 
     ##
-    # \brief 
-    #
+    # \brief Erbium (octahedral).
+    # 
     Er_6_3 = 89
 
     ##
-    # \brief 
-    #
+    # \brief Thulium (octahedral).
+    # 
     Tm_6_3 = 90
 
     ##
-    # \brief 
-    #
+    # \brief Ytterbium (octahedral).
+    # 
     Yb_6_3 = 91
 
     ##
-    # \brief 
-    #
+    # \brief Lutetium (octahedral).
+    # 
     Lu_6_3 = 92
 
     ##
-    # \brief 
-    #
+    # \brief Hafnium (tetrahedral).
+    # 
     Hf_3_4 = 93
 
     ##
-    # \brief 
-    #
+    # \brief Tantalum (tetrahedral).
+    # 
     Ta_3_5 = 94
 
     ##
-    # \brief 
-    #
+    # \brief Tungsten (octahedral).
+    # 
     W_6_6 = 95
 
     ##
-    # \brief 
-    #
+    # \brief Tungsten (tetrahedral).
+    # 
     W_3_4 = 96
 
     ##
-    # \brief 
-    #
+    # \brief Tungsten (tetrahedral, higher oxidation state).
+    # 
     W_3_6 = 97
 
     ##
-    # \brief 
-    #
+    # \brief Rhenium (octahedral).
+    # 
     Re_6_5 = 98
 
     ##
-    # \brief 
-    #
+    # \brief Rhenium (tetrahedral).
+    # 
     Re_3_7 = 99
 
     ##
-    # \brief 
-    #
+    # \brief Osmium (octahedral).
+    # 
     Os_6_6 = 100
 
     ##
-    # \brief 
-    #
+    # \brief Iridium (octahedral).
+    # 
     Ir_6_3 = 101
 
     ##
-    # \brief 
-    #
+    # \brief Platinum (square-planar).
+    # 
     Pt_4_2 = 102
 
     ##
-    # \brief 
-    #
+    # \brief Gold (square-planar).
+    # 
     Au_4_3 = 103
 
     ##
-    # \brief 
-    #
+    # \brief Mercury (linear).
+    # 
     Hg_1_2 = 104
 
     ##
-    # \brief 
-    #
+    # \brief Thallium (tetrahedral).
+    # 
     Tl_3_3 = 105
 
     ##
-    # \brief 
-    #
+    # \brief Lead (tetrahedral).
+    # 
     Pb_3 = 106
 
     ##
-    # \brief 
-    #
+    # \brief Bismuth (tetrahedral).
+    # 
     Bi_3_3 = 107
 
     ##
-    # \brief 
-    #
+    # \brief Polonium (tetrahedral).
+    # 
     Po_3_2 = 108
 
     ##
-    # \brief 
-    #
+    # \brief Astatine.
+    # 
     At = 109
 
     ##
-    # \brief 
-    #
+    # \brief Radon.
+    # 
     Rn_4_4 = 110
 
     ##
-    # \brief 
-    #
+    # \brief Francium.
+    # 
     Fr = 111
 
     ##
-    # \brief 
-    #
+    # \brief Radium (octahedral).
+    # 
     Ra_6_2 = 112
 
     ##
-    # \brief 
-    #
+    # \brief Actinium (octahedral).
+    # 
     Ac_6_3 = 113
 
     ##
-    # \brief 
-    #
+    # \brief Thorium (octahedral).
+    # 
     Th_6_4 = 114
 
     ##
-    # \brief 
-    #
+    # \brief Protactinium (octahedral).
+    # 
     Pa_6_4 = 115
 
     ##
-    # \brief 
-    #
+    # \brief Uranium (octahedral).
+    # 
     U_6_4 = 116
 
     ##
-    # \brief 
-    #
+    # \brief Neptunium (octahedral).
+    # 
     Np_6_4 = 117
 
     ##
-    # \brief 
-    #
+    # \brief Plutonium (octahedral).
+    # 
     Pu_6_4 = 118
 
     ##
-    # \brief 
-    #
+    # \brief Americium (octahedral).
+    # 
     Am_6_4 = 119
 
     ##
-    # \brief 
-    #
+    # \brief Curium (octahedral).
+    # 
     Cm_6_3 = 120
 
     ##
-    # \brief 
-    #
+    # \brief Berkelium (octahedral).
+    # 
     Bk_6_3 = 121
 
     ##
-    # \brief 
-    #
+    # \brief Californium (octahedral).
+    # 
     Cf_6_3 = 122
 
     ##
-    # \brief 
-    #
+    # \brief Einsteinium (octahedral).
+    # 
     Es_6_3 = 123
 
     ##
-    # \brief 
-    #
+    # \brief Fermium (octahedral).
+    # 
     Fm_6_3 = 124
 
     ##
-    # \brief 
-    #
+    # \brief Mendelevium (octahedral).
+    # 
     Md_6_3 = 125
 
     ##
-    # \brief 
-    #
+    # \brief Nobelium (octahedral).
+    # 
     No_6_3 = 126
 
     ##
-    # \brief 
-    #
+    # \brief Lawrencium (octahedral).
+    # 
     Lr_6_3 = 127
 
     ##
-    # \brief 
-    #
+    # \brief Marks the end of all supported UFF atom types.
+    # 
     MAX_TYPE = 127

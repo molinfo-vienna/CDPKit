@@ -25,7 +25,7 @@
 class ColorTable(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %ColorTable instance.
+    # \brief Constructs an empty color table.
     # 
     def __init__() -> None: pass
 

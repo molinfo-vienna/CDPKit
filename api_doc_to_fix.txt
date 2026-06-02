@@ -1,1 +1,5 @@
-‎
+Libs/C++/Include/CDPL/Math/Grid.hpp (still missing class member function docs‎)
+Libs/C++/Include/CDPL/Math/Functional.hpp (still missing class member typedef docs‎)
+Libs/C++/Include/CDPL/Math/Matrix.hpp (still missing class member typedef/function docs‎)
+Libs/C++/Include/CDPL/Math/TypeTraits.hpp (still missing class member typedef docs‎)
+Libs/C++/Include/CDPL/Math/VectorAdapter.hpp (still missing class member typedef docs‎)

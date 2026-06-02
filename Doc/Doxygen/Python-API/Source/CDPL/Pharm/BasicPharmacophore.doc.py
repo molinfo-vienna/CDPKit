@@ -51,28 +51,28 @@ class BasicPharmacophore(Pharmacophore):
     def __init__(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # \brief Replaces the current set of features and properties by a copy of the features and properties of <em>pharm</em>.
     # 
     # \param pharm The pharmacophore to copy.
     # 
     def copy(pharm: BasicPharmacophore) -> None: pass
 
     ##
-    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # \brief Replaces the current set of features and properties by a copy of the features and properties of <em>pharm</em>.
     # 
     # \param pharm The pharmacophore to copy.
     # 
     def copy(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the feature container <em>cntnr</em>.
+    # \brief Replaces the current set of features by copies of the features in the feature container <em>cntnr</em>.
     # 
-    # \param cntnr The Pharm.FeatureContainer instance providing the features and properties to copy.
+    # \param cntnr The feature container providing the features to copy.
     # 
     def copy(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief Extends the current set of pharmacophore features by a copy of the features in the pharmacophore <em>pharm</em>.
+    # \brief Extends the current set of features by copies of the features in <em>pharm</em>.
     # 
     # \param pharm The pharmacophore providing the features to append.
     # 
@@ -81,7 +81,7 @@ class BasicPharmacophore(Pharmacophore):
     def append(pharm: BasicPharmacophore) -> None: pass
 
     ##
-    # \brief Extends the current set of pharmacophore features by a copy of the features in the pharmacophore <em>pharm</em>.
+    # \brief Extends the current set of features by copies of the features in <em>pharm</em>.
     # 
     # \param pharm The pharmacophore providing the features to append.
     # 
@@ -90,9 +90,9 @@ class BasicPharmacophore(Pharmacophore):
     def append(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Extends the current set of pharmacophore features by a copy of the features in the feature container <em>cntnr</em>.
+    # \brief Extends the current set of features by copies of the features in <em>cntnr</em>.
     # 
-    # \param cntnr The Pharm.FeatureContainer instance providing the features to append.
+    # \param cntnr The feature container providing the features to append.
     # 
     # \note Does not affect any properties.
     # 

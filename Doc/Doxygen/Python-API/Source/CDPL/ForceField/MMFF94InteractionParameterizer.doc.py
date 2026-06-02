@@ -20,19 +20,23 @@
 #
 
 ##
-# \brief 
-#
+# \brief One-stop MMFF94 parameterizer that combines atom typing, bond typing, partial-charge assignment and per-interaction-type parameter look-up into a single <tt>parameterize()</tt> call.
+# 
+# The constructor installs default parameter tables and atom-/bond-typing helpers for the selected ForceField.MMFF94ParameterSet variant (<tt>STATIC</tt>, <tt>DYNAMIC</tt>, etc.); every table, map and filter function can be overridden via the corresponding setter. Calling parameterize() runs atom typing, bond typing, formal/partial-charge assignment, aromaticity perception and topological-distance calculation, then dispatches to the seven per-interaction MMFF94*InteractionParameterizer members and stores the resulting interaction lists in the supplied ForceField.MMFF94InteractionData object.
+# 
 class MMFF94InteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94InteractionParameterizer instance.
-    # \param param_set 
+    # \brief Constructs the parameterizer with the default tables for the chosen MMFF94 parameter set.
+    # 
+    # \param param_set The parameter-set variant (see namespace ForceField.MMFF94ParameterSet).
     # 
     def __init__(param_set: int = 1) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %MMFF94InteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \c %MMFF94InteractionParameterizer instance to copy.
+    # \brief Constructs a copy of the parameterizer <em>parameterizer</em>.
+    # 
+    # \param parameterizer The parameterizer to copy.
     # 
     def __init__(parameterizer: MMFF94InteractionParameterizer) -> None: pass
 
@@ -49,186 +53,216 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a filter that decides whether a candidate bond-stretching interaction is kept.
+    # 
+    # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
+    # 
     def setBondStretchingFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a filter that decides whether a candidate angle-bending interaction is kept.
+    # 
+    # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
+    # 
     def setAngleBendingFilterFunction(func: InteractionFilterFunction3) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a filter that decides whether a candidate stretch-bend interaction is kept.
+    # 
+    # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
+    # 
     def setStretchBendFilterFunction(func: InteractionFilterFunction3) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a filter that decides whether a candidate out-of-plane bending interaction is kept.
+    # 
+    # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
+    # 
     def setOutOfPlaneBendingFilterFunction(func: InteractionFilterFunction4) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a filter that decides whether a candidate torsion interaction is kept.
+    # 
+    # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
+    # 
     def setTorsionFilterFunction(func: InteractionFilterFunction4) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a filter that decides whether a candidate electrostatic interaction is kept.
+    # 
+    # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
+    # 
     def setElectrostaticFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Installs a filter that decides whether a candidate van-der-Waals interaction is kept.
+    # 
+    # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
+    # 
     def setVanDerWaalsFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes every previously installed interaction-filter function.
+    # 
     def clearFilterFunctions() -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the symbolic-atom-type pattern table to use during atom typing.
+    # 
+    # \param table The new symbolic-atom-type pattern table.
+    # 
     def setSymbolicAtomTypePatternTable(table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    #
+    # \brief Sets the heavy-to-hydrogen atom-type map used to derive hydrogen atom types from their non-hydrogen neighbors.
+    # 
+    # \param map The new heavy-to-hydrogen atom-type map.
+    # 
     def setHeavyToHydrogenAtomTypeMap(map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    #
+    # \brief Sets the symbolic-to-numeric atom-type map used to convert symbolic types to numeric ones.
+    # 
+    # \param map The new symbolic-to-numeric atom-type map.
+    # 
     def setSymbolicToNumericAtomTypeMap(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the aromatic-atom-type definition table used to override types of aromatic atoms.
+    # 
+    # \param table The new aromatic-atom-type definition table.
+    # 
     def setAromaticAtomTypeDefinitionTable(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the atom-type property table used to resolve per-numeric-type properties.
+    # 
+    # \param table The new atom-type property table.
+    # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the formal-atomic-charge definition table used during charge assignment.
+    # 
+    # \param table The new formal-atomic-charge definition table.
+    # 
     def setFormalAtomChargeDefinitionTable(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the bond charge-increment table used during partial-charge calculation.
+    # 
+    # \param table The new bond-charge-increment table.
+    # 
     def setBondChargeIncrementTable(table: MMFF94BondChargeIncrementTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the partial bond charge-increment table used during partial-charge calculation.
+    # 
+    # \param table The new partial-bond-charge-increment table.
+    # 
     def setPartialBondChargeIncrementTable(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    #
+    # \brief Sets the primary-to-parameter atom-type map used by the parameter look-ups.
+    # 
+    # \param map The new primary-to-parameter atom-type map.
+    # 
     def setPrimaryToParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the angle-bending parameter table to use.
+    # 
+    # \param table The new angle-bending parameter table.
+    # 
     def setAngleBendingParameterTable(table: MMFF94AngleBendingParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the bond-stretching parameter table to use.
+    # 
+    # \param table The new bond-stretching parameter table.
+    # 
     def setBondStretchingParameterTable(table: MMFF94BondStretchingParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the bond-stretching rule parameter table used as a fallback when no explicit bond-stretching entry is available.
+    # 
+    # \param table The new bond-stretching rule parameter table.
+    # 
     def setBondStretchingRuleParameterTable(table: MMFF94BondStretchingRuleParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the stretch-bend parameter table to use.
+    # 
+    # \param table The new stretch-bend parameter table.
+    # 
     def setStretchBendParameterTable(table: MMFF94StretchBendParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the default stretch-bend parameter table used as a periodic-row fallback.
+    # 
+    # \param table The new default stretch-bend parameter table.
+    # 
     def setDefaultStretchBendParameterTable(table: MMFF94DefaultStretchBendParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the out-of-plane bending parameter table to use.
+    # 
+    # \param table The new out-of-plane bending parameter table.
+    # 
     def setOutOfPlaneBendingParameterTable(table: MMFF94OutOfPlaneBendingParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the torsion parameter table to use.
+    # 
+    # \param table The new torsion parameter table.
+    # 
     def setTorsionParameterTable(table: MMFF94TorsionParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the van-der-Waals parameter table to use.
+    # 
+    # \param table The new van-der-Waals parameter table.
+    # 
     def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param de_const 
-    #
+    # \brief Sets the dielectric constant used by the electrostatic interaction parameterizer.
+    # 
+    # \param de_const The new dielectric constant.
+    # 
     def setDielectricConstant(de_const: float) -> None: pass
 
     ##
-    # \brief 
-    # \param dist_expo 
-    #
+    # \brief Sets the distance exponent used by the electrostatic interaction parameterizer.
+    # 
+    # \param dist_expo The new distance exponent.
+    # 
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
-    # \brief 
-    # \param param_set 
-    #
+    # \brief Switches the active MMFF94 parameter-set variant and reinstalls the matching default tables.
+    # 
+    # \param param_set The new parameter-set variant (see namespace ForceField.MMFF94ParameterSet).
+    # 
     def setParameterSet(param_set: int) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %MMFF94InteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \c %MMFF94InteractionParameterizer instance to copy.
+    # \brief Copies the state of <em>parameterizer</em>.
+    # 
+    # \param parameterizer The parameterizer to copy.
+    # 
     # \return \a self
     # 
     def assign(parameterizer: MMFF94InteractionParameterizer) -> MMFF94InteractionParameterizer: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param ia_data 
-    # \param ia_types 
-    # \param strict 
-    #
+    # \brief Parameterizes the MMFF94 force-field interactions for <em>molgraph</em> and stores them in <em>ia_data</em>.
+    # 
+    # \param molgraph The molecular graph to parameterize.
+    # \param ia_data The output container receiving the perceived interactions.
+    # \param ia_types A bitmask of ForceField.InteractionType flags selecting which interaction types are parameterized.
+    # \param strict If <tt>True</tt>, the parameterization fails when any required parameter is missing; otherwise fallback strategies (rule-based parameters, default values) are used.
+    # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_data: MMFF94InteractionData, ia_types: int = 127, strict: bool = True) -> None: pass
 
     objectID = property(getObjectID)

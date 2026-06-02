@@ -485,11 +485,15 @@ def calcDistanceDerivatives(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, 
 def calcDistance(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D) -> float: pass
 
 ##
-# \brief 
-# \param pot 
-# \param coords 
-# \return 
-#
+# \brief Calculates the energy of a single ElasticPotential under the supplied atom coordinates.
+# 
+# \param pot The elastic potential to evaluate.
+# \param coords The atomic-coordinate array.
+# 
+# \return The elastic-potential energy of <em>pot</em>. 
+# 
+# \since 1.1
+# 
 def calcElasticPotentialEnergy(pot: ElasticPotential, coords: Math.Vector3DArray) -> float: pass
 
 ##
@@ -521,12 +525,18 @@ def calcElasticPotentialEnergy(list: ElasticPotentialList, coords: Math.Vector3D
 def calcElasticPotentialEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
 ##
-# \brief 
-# \param pot 
-# \param coords 
-# \param grad 
-# \return 
-#
+# \brief Calculates the energy and gradient contribution of a single ElasticPotential under the supplied atom coordinates.
+# 
+# \param pot The elastic potential to evaluate.
+# \param coords The atomic-coordinate array.
+# \param grad The per-atom gradient array receiving the accumulated contributions.
+# 
+# \return The elastic-potential energy of <em>pot</em>. 
+# 
+# \note Gradient contributions for the two atoms are <em>added</em> to the corresponding entries of <em>grad</em>. 
+# 
+# \since 1.1
+# 
 def calcElasticPotentialGradient(pot: ElasticPotential, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
