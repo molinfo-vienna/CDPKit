@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
+         * \brief Handler for the output of molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
          *        [\ref PDB] format.
          */
         typedef Util::DefaultDataOutputHandler<PDBMolecularGraphWriter, DataFormat::PDB> PDBMolecularGraphOutputHandler;

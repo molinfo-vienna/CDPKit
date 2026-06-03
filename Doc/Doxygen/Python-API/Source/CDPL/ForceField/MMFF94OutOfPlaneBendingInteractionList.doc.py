@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A dynamically-sized array of MMFF94 out-of-plane bending interaction records.
+# \brief Dynamically-sized array of MMFF94 out-of-plane bending interaction records.
 # 
 class MMFF94OutOfPlaneBendingInteractionList(Boost.Python.instance):
 

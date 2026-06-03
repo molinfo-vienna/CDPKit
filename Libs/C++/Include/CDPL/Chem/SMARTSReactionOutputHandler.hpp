@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+         * \brief Handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
          */
         typedef Util::DefaultDataOutputHandler<SMARTSReactionWriter, DataFormat::SMARTS> SMARTSReactionOutputHandler;
     } // namespace Chem

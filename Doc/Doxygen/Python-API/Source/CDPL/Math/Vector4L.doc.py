@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 4 element vector holding signed integers of type <tt>long</tt>.
+# \brief Bounded 4 element vector holding signed integers of type <tt>long</tt>.
 # 
 class Vector4L(Boost.Python.instance):
 

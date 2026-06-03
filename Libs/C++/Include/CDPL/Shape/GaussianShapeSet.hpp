@@ -43,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An ordered set of (shared) Gaussian shapes.
+         * \brief Data structure storing a set of (shared) Gaussian shapes.
          *
          * \c %GaussianShapeSet is an indirect array of Shape::GaussianShape smart pointers, typically used
          * as input to alignment / overlap routines that operate on multiple shapes at once.

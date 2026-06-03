@@ -3075,162 +3075,162 @@ namespace CDPL
         }
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>float</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the value zero of type <tt>float</tt>.
          */
         typedef ZeroMatrix<float> FZeroMatrix;
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>double</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the value zero of type <tt>double</tt>.
          */
         typedef ZeroMatrix<double> DZeroMatrix;
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>long</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the value zero of type <tt>long</tt>.
          */
         typedef ZeroMatrix<long> LZeroMatrix;
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the value zero of type <tt>unsigned long</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the value zero of type <tt>unsigned long</tt>.
          */
         typedef ZeroMatrix<unsigned long> ULZeroMatrix;
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>float</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the same value of type <tt>float</tt>.
          */
         typedef ScalarMatrix<float> FScalarMatrix;
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>double</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the same value of type <tt>double</tt>.
          */
         typedef ScalarMatrix<double> DScalarMatrix;
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>long</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the same value of type <tt>long</tt>.
          */
         typedef ScalarMatrix<long> LScalarMatrix;
 
         /**
-         * \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>unsigned long</tt>.
+         * \brief Memory-efficient immutable matrix where all elements have the same value of type <tt>unsigned long</tt>.
          */
         typedef ScalarMatrix<unsigned long> ULScalarMatrix;
 
         /**
-         * \brief A memory-efficient immutable identity matrix with element values of type <tt>float</tt>.
+         * \brief Memory-efficient immutable identity matrix with element values of type <tt>float</tt>.
          */
         typedef IdentityMatrix<float> FIdentityMatrix;
 
         /**
-         * \brief A memory-efficient immutable identity matrix with element values of type <tt>double</tt>.
+         * \brief Memory-efficient immutable identity matrix with element values of type <tt>double</tt>.
          */
         typedef IdentityMatrix<double> DIdentityMatrix;
 
         /**
-         * \brief A memory-efficient immutable identity matrix with element values of type <tt>long</tt>.
+         * \brief Memory-efficient immutable identity matrix with element values of type <tt>long</tt>.
          */
         typedef IdentityMatrix<long> LIdentityMatrix;
 
         /**
-         * \brief A memory-efficient immutable identity matrix with element values of type <tt>unsigned long</tt>.
+         * \brief Memory-efficient immutable identity matrix with element values of type <tt>unsigned long</tt>.
          */
         typedef IdentityMatrix<unsigned long> ULIdentityMatrix;
 
         /**
-         * \brief An unbounded dense matrix holding floating point values of type <tt>float</tt>..
+         * \brief Unbounded dense matrix holding floating point values of type <tt>float</tt>..
          */
         typedef Matrix<float> FMatrix;
 
         /**
-         * \brief An unbounded dense matrix holding floating point values of type <tt>double</tt>..
+         * \brief Unbounded dense matrix holding floating point values of type <tt>double</tt>..
          */
         typedef Matrix<double> DMatrix;
 
         /**
-         * \brief An unbounded dense matrix holding signed integers of type <tt>long</tt>.
+         * \brief Unbounded dense matrix holding signed integers of type <tt>long</tt>.
          */
         typedef Matrix<long> LMatrix;
 
         /**
-         * \brief An unbounded dense matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Unbounded dense matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef Matrix<unsigned long> ULMatrix;
 
         /**
-         * \brief A bounded 2x2 matrix holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 2x2 matrix holding floating point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 2, 2> Matrix2F;
 
         /**
-         * \brief A bounded 3x3 matrix holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 3x3 matrix holding floating point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 3, 3> Matrix3F;
 
         /**
-         * \brief A bounded 4x4 matrix holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 4x4 matrix holding floating point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 4, 4> Matrix4F;
 
         /**
-         * \brief A bounded 2x2 matrix holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 2x2 matrix holding floating point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 2, 2> Matrix2D;
 
         /**
-         * \brief A bounded 3x3 matrix holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 3x3 matrix holding floating point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 3, 3> Matrix3D;
 
         /**
-         * \brief A bounded 4x4 matrix holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 4x4 matrix holding floating point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 4, 4> Matrix4D;
 
         /**
-         * \brief A bounded 2x2 matrix holding signed integers of type <tt>long</tt>.
+         * \brief Bounded 2x2 matrix holding signed integers of type <tt>long</tt>.
          */
         typedef CMatrix<long, 2, 2> Matrix2L;
 
         /**
-         * \brief A bounded 3x3 matrix holding signed integers of type <tt>long</tt>.
+         * \brief Bounded 3x3 matrix holding signed integers of type <tt>long</tt>.
          */
         typedef CMatrix<long, 3, 3> Matrix3L;
 
         /**
-         * \brief A bounded 4x4 matrix holding signed integers of type <tt>long</tt>.
+         * \brief Bounded 4x4 matrix holding signed integers of type <tt>long</tt>.
          */
         typedef CMatrix<long, 4, 4> Matrix4L;
 
         /**
-         * \brief A bounded 2x2 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded 2x2 matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CMatrix<unsigned long, 2, 2> Matrix2UL;
 
         /**
-         * \brief A bounded 3x3 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded 3x3 matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CMatrix<unsigned long, 3, 3> Matrix3UL;
 
         /**
-         * \brief A bounded 4x4 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded 4x4 matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CMatrix<unsigned long, 4, 4> Matrix4UL;
 
         /**
-         * \brief An unbounded sparse matrix holding floating point values of type <tt>float</tt>..
+         * \brief Unbounded sparse matrix holding floating point values of type <tt>float</tt>..
          */
         typedef SparseMatrix<float> SparseFMatrix;
 
         /**
-         * \brief An unbounded sparse matrix holding floating point values of type <tt>double</tt>..
+         * \brief Unbounded sparse matrix holding floating point values of type <tt>double</tt>..
          */
         typedef SparseMatrix<double> SparseDMatrix;
 
         /**
-         * \brief An unbounded sparse matrix holding signed integers of type <tt>long</tt>.
+         * \brief Unbounded sparse matrix holding signed integers of type <tt>long</tt>.
          */
         typedef SparseMatrix<long> SparseLMatrix;
 
         /**
-         * \brief An unbounded sparse matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Unbounded sparse matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef SparseMatrix<unsigned long> SparseULMatrix;
     } // namespace Math

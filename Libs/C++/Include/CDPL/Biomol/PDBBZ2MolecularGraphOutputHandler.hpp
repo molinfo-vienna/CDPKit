@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
+         * \brief Handler for the output of bzip2-compressed molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
          *        [\ref PDB] format.
          */
         typedef Util::DefaultDataOutputHandler<PDBBZ2MolecularGraphWriter, DataFormat::PDB_BZ2> PDBBZ2MolecularGraphOutputHandler;

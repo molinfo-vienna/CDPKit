@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of Pharm.FeatureContainer instances in the <em>VRML</em> [\ref VRML97] format.
+# \brief Handler for the output of Pharm.FeatureContainer instances in the <em>VRML</em> [\ref VRML97] format.
 # 
 # \since 1.3
 # 

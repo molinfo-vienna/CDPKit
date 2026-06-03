@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
+# \brief Handler for the input of molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
 # 
 class INCHIMoleculeInputHandler(MoleculeInputHandler):
 

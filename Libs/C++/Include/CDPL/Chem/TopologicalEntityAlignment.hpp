@@ -80,12 +80,12 @@ namespace CDPL
             typedef boost::indirect_iterator<typename EntitySet::const_iterator, const EntityType> ConstEntityIterator;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined entity match constraint function.
+             * \brief Generic wrapper class used to store a user-defined entity match constraint function.
              */
             typedef std::function<bool(const EntityType&, const EntityType&)> EntityMatchFunction;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined entity-pair match constraint function.
+             * \brief Generic wrapper class used to store a user-defined entity-pair match constraint function.
              */
             typedef std::function<bool(const EntityType&, const EntityType&, const EntityType&, const EntityType&)> EntityPairMatchFunction;
 

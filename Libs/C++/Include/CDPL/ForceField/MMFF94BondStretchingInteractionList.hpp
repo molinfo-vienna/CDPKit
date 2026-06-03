@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamically-sized array of MMFF94 bond-stretching interaction records.
+         * \brief Dynamically-sized array of MMFF94 bond-stretching interaction records.
          */
         typedef Util::Array<MMFF94BondStretchingInteraction> MMFF94BondStretchingInteractionList;
     }

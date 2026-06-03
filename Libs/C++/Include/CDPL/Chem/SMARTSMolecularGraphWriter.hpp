@@ -46,7 +46,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief A writer for molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+         * \brief Writer for molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
          *
          * \c %SMARTSMolecularGraphWriter supports the following control-parameters:
          *

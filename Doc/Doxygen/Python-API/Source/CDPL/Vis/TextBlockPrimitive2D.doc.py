@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a block of styled text.
+# \brief 2D graphics primitive representing a block of styled text.
 # 
 # Class <tt>TextBlockPrimitive2D</tt> is smiliar to Vis.TextLabelPrimitive2D but way more versatile. <tt>TextBlockPrimitive2D</tt> can store/render text that spans multiple lines with configurable line spacing (see setLineSpacing()) and alignment (see setAlignment()), and supports changing text color and various attributes like font weight and slant for individual text portions. Furthermore, text fragments can be rendered sub/super-scripted, under- and overlined as well as striked out. This is achieved by using an XML-based syntax where a portion of text to be rendered in a particular style is enclosed in specific start and end tags. More information on the syntax, the supported styling tags and their meaning can be found in the documentation of the method setText().
 # 

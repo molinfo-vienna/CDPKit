@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# \brief Handler for the output of molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
 # 
 class SDFMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 

@@ -114,7 +114,7 @@ namespace CDPL
 
 
         /**
-         * \brief A regular 3D spatial grid combining a Math::Grid data store with a coordinate-system transformation
+         * \brief 3D grid data structure combining a Math::Grid data store with a coordinate-system transformation
          *        that maps grid-cell indices to 3D world positions.
          *
          * \tparam T The grid cell value type.
@@ -933,12 +933,12 @@ namespace CDPL
         }
 
         /**
-         * \brief An unbounded dense regular grid holding floating point values of type <tt>float</tt>.
+         * \brief Unbounded dense regular grid storing floating point values of type <tt>float</tt>.
          */
         typedef RegularSpatialGrid<float> FRegularSpatialGrid;
 
         /**
-         * \brief An unbounded dense regular grid holding floating point values of type <tt>double</tt>.
+         * \brief Unbounded dense regular grid storing floating point values of type <tt>double</tt>.
          */
         typedef RegularSpatialGrid<double> DRegularSpatialGrid;
     } // namespace Math

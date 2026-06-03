@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A graphics primitive representing a polygon.
+         * \brief 2D graphics primitive representing a polygon.
          */
         class CDPL_VIS_API PolygonPrimitive2D : public PointArray2D,
                                                 public GraphicsPrimitive2D

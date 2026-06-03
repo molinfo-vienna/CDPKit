@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A common interface for data-structures that support a random access to stored Chem.Entity3D instances.
+# \brief Common interface for data structures that support a random access to stored Chem.Entity3D instances.
 # 
 # Implementations have to guarantee that a given Chem.Entity3D object is stored only once and its index is unique amongst all contained Chem.Entity3D instances. Otherwise algorithms that rely on this behaviour may not work correctly!
 # 

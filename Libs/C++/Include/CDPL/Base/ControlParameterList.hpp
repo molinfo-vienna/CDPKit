@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure for the storage and lookup of control-parameter values.
+         * \brief Data structure for the storage and lookup of control-parameter values.
          * \see Base::ControlParameterContainer for a description of the available methods.
          */
         class CDPL_BASE_API ControlParameterList : public ControlParameterContainer

@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A STL compatible random access iterator for container elements accessible by index.
+         * \brief STL compatible random access iterator for container elements accessible by index.
          *
          * The rationale for \c %IndexedElementIterator is to allow STL-style iteration over
          * the elements of container classes which do not provide suitable iterators on their

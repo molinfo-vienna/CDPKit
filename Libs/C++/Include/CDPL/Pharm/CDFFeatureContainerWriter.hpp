@@ -46,7 +46,7 @@ namespace CDPL
         class FeatureContainer;
 
         /**
-         * \brief A writer for feature container data in the native I/O format of the <em>CDPL</em>.
+         * \brief Writer for feature container data in the native I/O format of the <em>CDPL</em>.
          */
         class CDPL_PHARM_API CDFFeatureContainerWriter : public Base::DataWriter<FeatureContainer>
         {

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a polygon.
+# \brief 2D graphics primitive representing a polygon.
 # 
 class PolygonPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 

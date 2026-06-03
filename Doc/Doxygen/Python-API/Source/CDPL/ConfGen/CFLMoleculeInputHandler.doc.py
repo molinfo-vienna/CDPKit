@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of molecule fragments stored in the <em>CDPL Conformer Generator Fragment Library (CFL)</em> format.
+# \brief Handler for the input of molecule fragments stored in the <em>CDPL Conformer Generator Fragment Library (CFL)</em> format.
 # 
 class CFLMoleculeInputHandler(Chem.MoleculeInputHandler):
 

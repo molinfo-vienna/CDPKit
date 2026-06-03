@@ -2852,167 +2852,167 @@ namespace CDPL
         }
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>float</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the same value of type <tt>float</tt>.
          */
         typedef ScalarVector<float> FScalarVector;
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>double</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the same value of type <tt>double</tt>.
          */
         typedef ScalarVector<double> DScalarVector;
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>long</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the same value of type <tt>long</tt>.
          */
         typedef ScalarVector<long> LScalarVector;
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the same value of type <tt>unsigned long</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the same value of type <tt>unsigned long</tt>.
          */
         typedef ScalarVector<unsigned long> ULScalarVector;
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>float</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the value zero of type <tt>float</tt>.
          */
         typedef ZeroVector<float> FZeroVector;
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>double</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the value zero of type <tt>double</tt>.
          */
         typedef ZeroVector<double> DZeroVector;
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>long</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the value zero of type <tt>long</tt>.
          */
         typedef ZeroVector<long> LZeroVector;
 
         /**
-         * \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>unsigned long</tt>.
+         * \brief Memory-efficient immutable vector where all elements have the value zero of type <tt>unsigned long</tt>.
          */
         typedef ZeroVector<unsigned long> ULZeroVector;
 
         /**
-         * \brief A memory-efficient immutable unit vector with element values of type <tt>float</tt>.
+         * \brief Memory-efficient immutable unit vector with element values of type <tt>float</tt>.
          */
         typedef UnitVector<float> FUnitVector;
 
         /**
-         * \brief A memory-efficient immutable unit vector with element values of type <tt>double</tt>.
+         * \brief Memory-efficient immutable unit vector with element values of type <tt>double</tt>.
          */
         typedef UnitVector<double> DUnitVector;
 
         /**
-         * \brief A memory-efficient immutable unit vector with element values of type <tt>long</tt>.
+         * \brief Memory-efficient immutable unit vector with element values of type <tt>long</tt>.
          */
         typedef UnitVector<long> LUnitVector;
 
         /**
-         * \brief A memory-efficient immutable unit vector with element values of type <tt>unsigned long</tt>.
+         * \brief Memory-efficient immutable unit vector with element values of type <tt>unsigned long</tt>.
          */
         typedef UnitVector<unsigned long> ULUnitVector;
 
         /**
-         * \brief A bounded 2 element vector holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 2 element vector holding floating point values of type <tt>float</tt>.
          */
         typedef CVector<float, 2> Vector2F;
 
         /**
-         * \brief A bounded 3 element vector holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 3 element vector holding floating point values of type <tt>float</tt>.
          */
         typedef CVector<float, 3> Vector3F;
 
         /**
-         * \brief A bounded 4 element vector holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 4 element vector holding floating point values of type <tt>float</tt>.
          */
         typedef CVector<float, 4> Vector4F;
 
         /**
-         * \brief A bounded 2 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 2 element vector holding floating point values of type <tt>double</tt>.
          */
         typedef CVector<double, 2> Vector2D;
 
         /**
-         * \brief A bounded 3 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 3 element vector holding floating point values of type <tt>double</tt>.
          */
         typedef CVector<double, 3> Vector3D;
 
         /**
-         * \brief A bounded 4 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 4 element vector holding floating point values of type <tt>double</tt>.
          */
         typedef CVector<double, 4> Vector4D;
 
         /**
-         * \brief A bounded 7 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 7 element vector holding floating point values of type <tt>double</tt>.
          */
         typedef CVector<double, 7> Vector7D;
 
         /**
-         * \brief A bounded 2 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded 2 element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 2> Vector2L;
 
         /**
-         * \brief A bounded 3 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded 3 element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 3> Vector3L;
 
         /**
-         * \brief A bounded 4 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded 4 element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 4> Vector4L;
 
         /**
-         * \brief A bounded 2 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded 2 element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 2> Vector2UL;
 
         /**
-         * \brief A bounded 3 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded 3 element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 3> Vector3UL;
 
         /**
-         * \brief A bounded 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 4> Vector4UL;
 
         /**
-         * \brief An unbounded dense vector holding floating point values of type <tt>float</tt>.
+         * \brief Unbounded dense vector holding floating point values of type <tt>float</tt>.
          */
         typedef Vector<float> FVector;
 
         /**
-         * \brief An unbounded dense vector holding floating point values of type <tt>double</tt>.
+         * \brief Unbounded dense vector holding floating point values of type <tt>double</tt>.
          */
         typedef Vector<double> DVector;
 
         /**
-         * \brief An unbounded dense vector holding signed integers of type <tt>long</tt>.
+         * \brief Unbounded dense vector holding signed integers of type <tt>long</tt>.
          */
         typedef Vector<long> LVector;
 
         /**
-         * \brief An unbounded dense vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Unbounded dense vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef Vector<unsigned long> ULVector;
 
         /**
-         * \brief An unbounded sparse vector holding floating point values of type <tt>float</tt>.
+         * \brief Unbounded sparse vector holding floating point values of type <tt>float</tt>.
          */
         typedef SparseVector<float> SparseFVector;
 
         /**
-         * \brief An unbounded sparse vector holding floating point values of type <tt>double</tt>.
+         * \brief Unbounded sparse vector holding floating point values of type <tt>double</tt>.
          */
         typedef SparseVector<double> SparseDVector;
 
         /**
-         * \brief An unbounded sparse vector holding signed integers of type <tt>long</tt>.
+         * \brief Unbounded sparse vector holding signed integers of type <tt>long</tt>.
          */
         typedef SparseVector<long> SparseLVector;
 
         /**
-         * \brief An unbounded sparse vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Unbounded sparse vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef SparseVector<unsigned long> SparseULVector;
     } // namespace Math

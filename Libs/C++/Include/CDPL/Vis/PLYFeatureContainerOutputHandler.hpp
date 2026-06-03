@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of Pharm::FeatureContainer instances in the <em>Polygon File Format</em> [\ref PLYFMT].
+         * \brief Handler for the output of Pharm::FeatureContainer instances in the <em>Polygon File Format</em> [\ref PLYFMT].
          * \since 1.3
          */
         typedef Util::DefaultDataOutputHandler<PLYFeatureContainerWriter, DataFormat::PLY> PLYFeatureContainerOutputHandler;

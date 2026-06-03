@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of 2D depictions of chemical structures in the <em>Portable Network Graphics (PNG)</em> [\ref WPNG] format.
+# \brief Handler for the output of 2D depictions of chemical structures in the <em>Portable Network Graphics (PNG)</em> [\ref WPNG] format.
 # 
 class PNGMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Reader for molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# \brief Reader for molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
 # 
 # <tt>SDFMoleculeReader</tt> supports the following control-parameters:
 # 

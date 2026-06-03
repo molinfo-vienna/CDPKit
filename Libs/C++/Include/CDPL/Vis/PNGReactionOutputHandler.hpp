@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable
+         * \brief Handler for the output of 2D depictions of chemical reactions in the <em>Portable
          *        Network Graphics (PNG)</em> [\ref WPNG] format.
          */
         typedef Util::DefaultDataOutputHandler<PNGReactionWriter, DataFormat::PNG> PNGReactionOutputHandler;

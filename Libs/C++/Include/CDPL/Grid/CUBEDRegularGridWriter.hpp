@@ -46,7 +46,7 @@ namespace CDPL
         class CUBEDataWriter;
 
         /**
-         * \brief A writer for regular spatial grid data in the <em>Gaussian CUBE</em> [\ref CUBE] format.
+         * \brief Writer for regular spatial grid data in the <em>Gaussian CUBE</em> [\ref CUBE] format.
          * \since 1.4
          */
         class CDPL_GRID_API CUBEDRegularGridWriter : public Base::DataWriter<DRegularGrid>

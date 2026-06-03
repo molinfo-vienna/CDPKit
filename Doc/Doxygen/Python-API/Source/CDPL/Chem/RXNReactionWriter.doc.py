@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+# \brief Writer for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 # 
 # <tt>RXNReactionWriter</tt> supports the following control-parameters:
 # 

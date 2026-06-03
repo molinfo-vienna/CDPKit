@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# \brief Reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 # 
 # <tt>SMILESReactionReader</tt> supports the following control-parameters:
 # 

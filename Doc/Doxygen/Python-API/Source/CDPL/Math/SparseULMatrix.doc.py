@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded sparse matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief Unbounded sparse matrix holding unsigned integers of type <tt>unsigned long</tt>.
 # 
 class SparseULMatrix(Boost.Python.instance):
 

@@ -50,7 +50,7 @@ namespace CDPL
         class HierarchyView;
 
         /**
-         * \brief A data structure for the representation of individual biological macromolecule models.
+         * \brief Data structure for the representation of individual biological macromolecule models.
          * \see Biomol::HierarchyView
          */
         class CDPL_BIOMOL_API HierarchyViewModel : public HierarchyViewNode

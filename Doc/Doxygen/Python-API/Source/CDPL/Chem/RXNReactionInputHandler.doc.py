@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+# \brief Handler for the input of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 # 
 class RXNReactionInputHandler(ReactionInputHandler):
 

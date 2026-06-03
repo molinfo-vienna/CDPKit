@@ -388,7 +388,7 @@ namespace CDPL
         };
 
         /**
-         * \brief A general 4-component quaternion \f$ q = c_1 + c_2 i + c_3 j + c_4 k \f$.
+         * \brief General 4-component quaternion \f$ q = c_1 + c_2 i + c_3 j + c_4 k \f$.
          * \tparam T The scalar component value type.
          */
         template <typename T>
@@ -1212,22 +1212,22 @@ namespace CDPL
         }
 
         /**
-         * \brief A general 4-component quaternion with component values of type <tt>float</tt>.
+         * \brief General 4-component quaternion with component values of type <tt>float</tt>.
          */
         typedef Quaternion<float>         FQuaternion;
         
         /**
-         * \brief A general 4-component quaternion with component values of type <tt>double</tt>.
+         * \brief General 4-component quaternion with component values of type <tt>double</tt>.
          */
         typedef Quaternion<double>        DQuaternion;
 
         /**
-         * \brief A general 4-component quaternion with component values of type <tt>long</tt>.
+         * \brief General 4-component quaternion with component values of type <tt>long</tt>.
          */
         typedef Quaternion<long>          LQuaternion;
         
         /**
-         * \brief A general 4-component quaternion with component values of type <tt>unsigned long</tt>.
+         * \brief General 4-component quaternion with component values of type <tt>unsigned long</tt>.
          */
         typedef Quaternion<unsigned long> ULQuaternion;
 

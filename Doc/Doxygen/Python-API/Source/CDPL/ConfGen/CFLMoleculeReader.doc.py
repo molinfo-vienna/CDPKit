@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule fragment data stored in the <em>CDPL Conformer Generator Fragment Library (CFL)</em> format.
+# \brief Reader for molecule fragment data stored in the <em>CDPL Conformer Generator Fragment Library (CFL)</em> format.
 # 
 class CFLMoleculeReader(Chem.MoleculeReaderBase):
 

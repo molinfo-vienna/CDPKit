@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense matrix holding floating point values of type <tt>double</tt>..
+# \brief Unbounded dense matrix holding floating point values of type <tt>double</tt>..
 # 
 class DMatrix(Boost.Python.instance):
 

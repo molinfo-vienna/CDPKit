@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# \brief Handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 # 
 class SMARTSReactionOutputHandler(ReactionOutputHandler):
 

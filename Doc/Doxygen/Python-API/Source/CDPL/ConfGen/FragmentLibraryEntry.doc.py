@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief A single entry of a ConfGen.FragmentLibrary holding the precomputed conformer set of a canonicalized molecular fragment.
+# \brief Data structure representing a single entry of a conformer generation fragment library.
 # 
-# Each entry is keyed by the hash code of the associated ConfGen.CanonicalFragment and stores the canonical SMILES string plus a list of ConformerData instances (one per stored conformer).
+# Each entry is identified by the hash code of the associated ConfGen.CanonicalFragment and stores the canonical SMILES string plus a list of ConformerData instances (one per stored conformer).
 # 
 class FragmentLibraryEntry(Boost.Python.instance):
 

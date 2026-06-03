@@ -46,7 +46,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief A common interface for data-structures that support a random access to stored Chem::Atom instances.
+         * \brief Common interface for data structures that support a random access to stored Chem::Atom instances.
          *
          * Implementations have to guarantee that a given Chem::Atom object is stored only once and its index is unique amongst
          * all contained Chem::Atom instances. Otherwise algorithms that rely on this behaviour may not work correctly!

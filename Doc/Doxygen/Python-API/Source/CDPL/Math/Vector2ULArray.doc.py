@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of Math.Vector2UL objects.
+# \brief Array storing vectors of type Math.Vector2UL.
 # 
 class Vector2ULArray(Boost.Python.instance):
 

@@ -67,7 +67,7 @@ namespace CDPL
             constexpr unsigned int H_CENTER = LEFT | RIGHT;
 
             /**
-             * \brief A bitmask for all horizontal alignment flags.
+             * \brief Bitmask for all horizontal alignment flags.
              */
             constexpr unsigned int H_ALIGNMENT_MASK = H_CENTER;
 
@@ -87,7 +87,7 @@ namespace CDPL
             constexpr unsigned int V_CENTER = TOP | BOTTOM;
 
             /**
-             * \brief A bitmask for all vertical alignment flags.
+             * \brief Bitmask for all vertical alignment flags.
              */
             constexpr unsigned int V_ALIGNMENT_MASK = V_CENTER;
 

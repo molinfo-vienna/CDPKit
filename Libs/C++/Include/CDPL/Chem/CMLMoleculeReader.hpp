@@ -45,7 +45,7 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief A Reader for molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
+         * \brief Reader for molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
          *
          * \c %CMLMoleculeReader supports the following control-parameters:
          *

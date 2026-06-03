@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unary functor that retrieves the value of a given property from the Base.PropertyContainer instance provided as argument.
+# \brief Unary functor that retrieves the value of a given property from the Base.PropertyContainer instance provided as argument.
 # 
 class PropertyValue(builtins.object):
 

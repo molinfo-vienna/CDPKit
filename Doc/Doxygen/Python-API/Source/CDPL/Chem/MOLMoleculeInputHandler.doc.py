@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+# \brief Handler for the input of molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
 # 
 class MOLMoleculeInputHandler(MoleculeInputHandler):
 

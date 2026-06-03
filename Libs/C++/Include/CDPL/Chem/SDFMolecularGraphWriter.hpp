@@ -46,7 +46,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief A writer for molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+         * \brief Writer for molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
          *
          * \c %SDFMolecularGraphWriter supports the following control-parameters:
          *

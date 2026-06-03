@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of Pharm.FeatureContainer instances in the <em>Raster3D</em> [\ref R3DFMT] format.
+# \brief Handler for the output of Pharm.FeatureContainer instances in the <em>Raster3D</em> [\ref R3DFMT] format.
 # 
 # \since 1.3
 # 

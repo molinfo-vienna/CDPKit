@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable vector where all elements have the same value of type <tt>float</tt>.
+# \brief Memory-efficient immutable vector where all elements have the same value of type <tt>float</tt>.
 # 
 class FScalarVector(Boost.Python.instance):
 

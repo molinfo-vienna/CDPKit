@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+# \brief Reader for molecule data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
 # 
 # <tt>JMEMoleculeReader</tt> implements the reading of Chem.Molecule objects from a <tt>std::istream</tt> instance that provides the molecule data in the native I/O format of the <em>JME Molecular Editor</em> applet.
 # 

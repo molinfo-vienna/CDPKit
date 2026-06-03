@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
+         * \brief Handler for the input of molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
          * \since 1.2
          */
         typedef Util::DefaultDataInputHandler<CMLMoleculeReader, DataFormat::CML> CMLMoleculeInputHandler;

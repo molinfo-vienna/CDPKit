@@ -45,7 +45,7 @@ namespace CDPL
         class Pharmacophore;
 
         /**
-         * \brief A reader for pharmacophore data in the native I/O format of the <em>CDPL</em>.
+         * \brief Reader for pharmacophore data in the native I/O format of the <em>CDPL</em>.
          */
         class CDPL_PHARM_API CDFPharmacophoreReader : public Util::StreamDataReader<Pharmacophore, CDFPharmacophoreReader>
         {

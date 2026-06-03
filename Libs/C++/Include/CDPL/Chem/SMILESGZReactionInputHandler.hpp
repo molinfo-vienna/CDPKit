@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of gzip-compressed reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         * \brief Handler for the input of gzip-compressed reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
          */
         typedef Util::DefaultDataInputHandler<SMILESGZReactionReader, DataFormat::SMILES_GZ> SMILESGZReactionInputHandler;
     } // namespace Chem

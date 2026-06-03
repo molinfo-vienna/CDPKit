@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable identity matrix with element values of type <tt>long</tt>.
+# \brief Memory-efficient immutable identity matrix with element values of type <tt>long</tt>.
 # 
 class LIdentityMatrix(Boost.Python.instance):
 

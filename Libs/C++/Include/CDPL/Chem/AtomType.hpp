@@ -632,52 +632,52 @@ namespace CDPL
             constexpr unsigned int MAX_ATOMIC_NO = Nh;
 
             /**
-             * \brief A generic type that covers any element except hydrogen.
+             * \brief Generic type that covers any element except hydrogen.
              */
             constexpr unsigned int A = MAX_ATOMIC_NO + 1;
 
             /**
-             * \brief A generic type that covers any element.
+             * \brief Generic type that covers any element.
              */
             constexpr unsigned int AH = MAX_ATOMIC_NO + 2;
 
             /**
-             * \brief A generic type that covers any element except hydrogen and carbon.
+             * \brief Generic type that covers any element except hydrogen and carbon.
              */
             constexpr unsigned int Q = MAX_ATOMIC_NO + 3;
 
             /**
-             * \brief A generic type that covers any element except carbon.
+             * \brief Generic type that covers any element except carbon.
              */
             constexpr unsigned int QH = MAX_ATOMIC_NO + 4;
 
             /**
-             * \brief A generic type that covers any element that is a metal.
+             * \brief Generic type that covers any element that is a metal.
              */
             constexpr unsigned int M = MAX_ATOMIC_NO + 5;
 
             /**
-             * \brief A generic type that covers hydrogen and any element that is a metal.
+             * \brief Generic type that covers hydrogen and any element that is a metal.
              */
             constexpr unsigned int MH = MAX_ATOMIC_NO + 6;
 
             /**
-             * \brief A generic type that covers any element that is a halogen.
+             * \brief Generic type that covers any element that is a halogen.
              */
             constexpr unsigned int X = MAX_ATOMIC_NO + 7;
 
             /**
-             * \brief A generic type that covers hydrogen and any element that is a halogen.
+             * \brief Generic type that covers hydrogen and any element that is a halogen.
              */
             constexpr unsigned int XH = MAX_ATOMIC_NO + 8;
 
             /**
-             * \brief A generic type that covers any element (equivalent to AtomType::AH).
+             * \brief Generic type that covers any element (equivalent to AtomType::AH).
              */
             constexpr unsigned int ANY = MAX_ATOMIC_NO + 9;
 
             /**
-             * \brief A generic type for heteroatoms (N, O, S or P).
+             * \brief Generic type for heteroatoms (N, O, S or P).
              */
             constexpr unsigned int HET = MAX_ATOMIC_NO + 10;
 

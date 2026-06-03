@@ -46,7 +46,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A writer for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+         * \brief Writer for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
          *
          * \c %SMARTSReactionWriter supports the following control-parameters:
          *

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of <tt>Util.BitSet</tt> objects.
+# \brief Array storing <tt>Util.BitSet</tt> objects.
 # 
 class BitSetArray(Boost.Python.instance):
 

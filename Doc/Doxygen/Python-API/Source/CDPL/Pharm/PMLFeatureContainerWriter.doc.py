@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for feature container data in the native I/O format of <em>LigandScout</em>.
+# \brief Writer for feature container data in the native I/O format of <em>LigandScout</em>.
 # 
 class PMLFeatureContainerWriter(FeatureContainerWriterBase):
 

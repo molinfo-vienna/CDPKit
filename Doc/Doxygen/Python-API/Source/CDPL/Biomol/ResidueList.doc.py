@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure for the storage of residues extracted from biological macromolecules.
+# \brief Data structure for the storage of residues extracted from biological macromolecules.
 # 
 class ResidueList(Chem.FragmentList):
 

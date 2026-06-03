@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS]
+         * \brief Handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS]
          *        format.
          */
         typedef Util::DefaultDataOutputHandler<PSMolecularGraphWriter, DataFormat::PS> PSMolecularGraphOutputHandler;

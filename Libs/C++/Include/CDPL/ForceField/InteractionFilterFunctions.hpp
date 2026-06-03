@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A generic wrapper for storing user-defined two-atom interaction filtering functions (see [\ref FUNWRP]).
+         * \brief Generic wrapper for storing user-defined two-atom interaction filtering functions (see [\ref FUNWRP]).
          *
          * The function is invoked with the two interacting atoms and is expected to return \c true if the interaction
          * should be considered, and \c false if it should be skipped.
@@ -54,7 +54,7 @@ namespace CDPL
         typedef std::function<bool(const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction2;
 
         /**
-         * \brief A generic wrapper for storing user-defined three-atom interaction filtering functions (see [\ref FUNWRP]).
+         * \brief Generic wrapper for storing user-defined three-atom interaction filtering functions (see [\ref FUNWRP]).
          *
          * The function is invoked with the three interacting atoms (typically used for angle-bending and stretch-bend
          * interactions) and is expected to return \c true if the interaction should be considered, and \c false if it
@@ -63,7 +63,7 @@ namespace CDPL
         typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction3;
 
         /**
-         * \brief A generic wrapper for storing user-defined four-atom interaction filtering functions (see [\ref FUNWRP]).
+         * \brief Generic wrapper for storing user-defined four-atom interaction filtering functions (see [\ref FUNWRP]).
          *
          * The function is invoked with the four interacting atoms (typically used for torsion and out-of-plane bending
          * interactions) and is expected to return \c true if the interaction should be considered, and \c false if it

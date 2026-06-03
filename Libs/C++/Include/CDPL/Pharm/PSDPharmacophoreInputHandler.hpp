@@ -42,7 +42,7 @@ namespace CDPL
         class Pharmacophore;
 
         /**
-         * \brief A handler for the input of pharmacophore data in the PSD-format of the <em>CDPL</em>.
+         * \brief Handler for the input of pharmacophore data in the PSD-format of the <em>CDPL</em>.
          */
         class CDPL_PHARM_API PSDPharmacophoreInputHandler : public Base::DataInputHandler<Pharmacophore>
         {

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the PSD-format of the <em>CDPL</em>.
+# \brief Writer for molecular graph data in the PSD-format of the <em>CDPL</em>.
 # 
 class PSDMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 

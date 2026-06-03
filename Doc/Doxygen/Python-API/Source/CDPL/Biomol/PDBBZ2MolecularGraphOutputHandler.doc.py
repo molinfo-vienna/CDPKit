@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# \brief Handler for the output of bzip2-compressed molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 # 
 class PDBBZ2MolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 

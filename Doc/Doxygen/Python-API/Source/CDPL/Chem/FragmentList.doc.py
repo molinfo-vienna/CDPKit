@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data type for the storage of Chem.Fragment objects.
+# \brief Data type for the storage of Chem.Fragment objects.
 # 
 class FragmentList(Boost.Python.instance):
 

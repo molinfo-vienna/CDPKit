@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable unit vector with element values of type <tt>long</tt>.
+# \brief Memory-efficient immutable unit vector with element values of type <tt>long</tt>.
 # 
 class LUnitVector(Boost.Python.instance):
 

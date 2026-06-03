@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An interface for reading data objects of a given type from an arbitrary data source.
+         * \brief Interface for reading data objects of a given type from an arbitrary data source.
          *
          * \c %DataReader is the common interface of classes which read objects of a given type 
          * (specified by the template parameter \a T) from some data source (e.g. a file) that provides

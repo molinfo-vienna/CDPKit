@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A class providing methods for the storage and lookup of object properties.
+# \brief Base class providing methods for the storage and lookup of object properties.
 # 
 # The purpose of <tt>PropertyContainer</tt> is to provide a common facility for the storage and lookup of dynamic object properties to subclasses and their clients.
 # 

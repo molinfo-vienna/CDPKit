@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamically-sized array of MMFF94 torsion interaction records.
+         * \brief Dynamically-sized array of MMFF94 torsion interaction records.
          */
         typedef Util::Array<MMFF94TorsionInteraction> MMFF94TorsionInteractionList;
     }

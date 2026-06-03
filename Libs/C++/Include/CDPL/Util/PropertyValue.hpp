@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An unary functor that retrieves the value of a given property from the
+         * \brief Unary functor that retrieves the value of a given property from the
          *        Base::PropertyContainer instance provided as argument.
          * \tparam T The type of the property value.
          */

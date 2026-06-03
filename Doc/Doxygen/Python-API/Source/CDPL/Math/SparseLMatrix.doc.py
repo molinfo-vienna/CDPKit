@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded sparse matrix holding signed integers of type <tt>long</tt>.
+# \brief Unbounded sparse matrix holding signed integers of type <tt>long</tt>.
 # 
 class SparseLMatrix(Boost.Python.instance):
 

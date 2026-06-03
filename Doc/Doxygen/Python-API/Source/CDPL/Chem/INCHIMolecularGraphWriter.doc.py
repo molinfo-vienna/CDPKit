@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
+# \brief Writer for molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
 # 
 # <tt>INCHIMolecularGraphWriter</tt> implements the generation of <em>InChI</em> strings from Chem.MolecularGraph objects. The output data are written by means of a <tt>std::ostream</tt> object that was provided to the <tt>INCHIMolecularGraphWriter</tt> constructor.
 # 

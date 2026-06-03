@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamically-sized array of MMFF94 angle-bending interaction records.
+         * \brief Dynamically-sized array of MMFF94 angle-bending interaction records.
          */
         typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionList;
     }

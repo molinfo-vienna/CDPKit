@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a list of disjoint line segments.
+# \brief 2D graphics primitive representing a list of disjoint line segments.
 # 
 class LineSegmentListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 

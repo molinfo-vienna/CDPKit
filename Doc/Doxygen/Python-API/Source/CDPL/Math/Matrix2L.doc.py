@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 2x2 matrix holding signed integers of type <tt>long</tt>.
+# \brief Bounded 2x2 matrix holding signed integers of type <tt>long</tt>.
 # 
 class Matrix2L(Boost.Python.instance):
 

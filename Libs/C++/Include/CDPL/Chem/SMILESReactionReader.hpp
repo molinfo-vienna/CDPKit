@@ -45,7 +45,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         * \brief Reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
          *
          * \c %SMILESReactionReader supports the following control-parameters:
          *

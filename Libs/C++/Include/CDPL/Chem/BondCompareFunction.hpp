@@ -41,7 +41,7 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief A generic wrapper class used to store a user-defined bond compare function.
+         * \brief Generic wrapper class used to store a user-defined bond compare function.
          */
         typedef std::function<bool(const Chem::Bond&, const Chem::Bond&)> BondCompareFunction;
     } // namespace Chem

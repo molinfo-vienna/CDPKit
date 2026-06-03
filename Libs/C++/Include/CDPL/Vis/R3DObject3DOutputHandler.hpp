@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of Vis::Object3D instances in the <em>Raster3D</em> [\ref R3DFMT] format.
+         * \brief Handler for the output of Vis::Object3D instances in the <em>Raster3D</em> [\ref R3DFMT] format.
          * \since 1.3
          */
         typedef Util::DefaultDataOutputHandler<R3DObject3DWriter, DataFormat::R3D> R3DObject3DOutputHandler;

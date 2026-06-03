@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data type for the storage of mass percent compositions of chemical compounds.
+         * \brief Data type for the storage of mass percent compositions of chemical compounds.
          *
          * \c %MassComposition is an unique associative map where the keys specify the atom type
          * (defined in namespace Chem::AtomType) of the chemical elements and the mapped floating-point

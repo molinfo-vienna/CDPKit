@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>double</tt>.
+# \brief Memory-efficient immutable vector where all elements have the value zero of type <tt>double</tt>.
 # 
 class DZeroVector(Boost.Python.instance):
 

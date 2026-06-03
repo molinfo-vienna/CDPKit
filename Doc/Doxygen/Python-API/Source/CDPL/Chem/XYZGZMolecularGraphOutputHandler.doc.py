@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of gzip-compressed molecular graph data in the <em>XYZ</em> format.
+# \brief Handler for the output of gzip-compressed molecular graph data in the <em>XYZ</em> format.
 # 
 # \since 1.1
 # 

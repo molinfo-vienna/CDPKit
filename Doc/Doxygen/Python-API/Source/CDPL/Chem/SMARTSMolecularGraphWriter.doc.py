@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# \brief Writer for molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 # 
 # <tt>SMARTSMolecularGraphWriter</tt> supports the following control-parameters:
 # 

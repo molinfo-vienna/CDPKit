@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A pre-defined triangle mesh providing the vertices and faces of a torus specified
+         * \brief Pre-defined triangle mesh providing the vertices and faces of a torus specified
          *        by the contructor arguments.
          * \since 1.3
          */

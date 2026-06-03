@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
+# \brief Generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
 # 
 class MMFF94NumericAtomTypeFunction(Boost.Python.instance):
 

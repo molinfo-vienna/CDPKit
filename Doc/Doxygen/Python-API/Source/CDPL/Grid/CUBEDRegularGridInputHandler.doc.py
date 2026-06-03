@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of regular spatial grid data in the <em>Gaussian CUBE</em> [\ref CUBE] format.
+# \brief Handler for the input of regular spatial grid data in the <em>Gaussian CUBE</em> [\ref CUBE] format.
 # 
 # \since 1.4
 # 

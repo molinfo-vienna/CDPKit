@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a text label.
+# \brief 2D graphics primitive representing a text label.
 # 
 class TextLabelPrimitive2D(GraphicsPrimitive2D):
 

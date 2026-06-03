@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of unsigned integers of type <tt>long</tt>.
+# \brief Array storing integers of type <tt>long</tt>.
 # 
 class LArray(Boost.Python.instance):
 

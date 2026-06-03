@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Sybyl MOL2</em> format.
+         * \brief Handler for the output of gzip-compressed molecular graph data in the <em>Sybyl MOL2</em> format.
          */
         typedef Util::DefaultDataOutputHandler<MOL2GZMolecularGraphWriter, DataFormat::MOL2_GZ> MOL2GZMolecularGraphOutputHandler;
     } // namespace Chem

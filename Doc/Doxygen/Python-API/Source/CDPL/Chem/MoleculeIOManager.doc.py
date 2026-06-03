@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A singleton class that serves as a global registry for Chem.MoleculeInputHandler and Chem.MoleculeOutputHandler implementation instances.
+# \brief Singleton class that serves as a global registry for Chem.MoleculeInputHandler and Chem.MoleculeOutputHandler implementation instances.
 # 
 # <tt>DataIOManager</tt> provides static methods for the registration and lookup of Chem.MoleculeInputHandler and Chem.MoleculeOutputHandler implementation instances that handle different input and output storage formats.
 # 

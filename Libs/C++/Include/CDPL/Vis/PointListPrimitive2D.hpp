@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A graphics primitive representing a list of points.
+         * \brief 2D graphics primitive representing a list of points.
          */
         class CDPL_VIS_API PointListPrimitive2D : public PointArray2D,
                                                   public GraphicsPrimitive2D

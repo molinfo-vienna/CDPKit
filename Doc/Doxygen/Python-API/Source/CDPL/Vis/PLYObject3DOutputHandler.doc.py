@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of Vis.Object3D instances in the <em>Polygon File Format</em> [\ref PLYFMT].
+# \brief Handler for the output of Vis.Object3D instances in the <em>Polygon File Format</em> [\ref PLYFMT].
 # 
 # \since 1.3
 # 

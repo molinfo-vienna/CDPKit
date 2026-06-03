@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper class used to store a user-defined Chem.Atom 3D-coordinates function.
+# \brief Generic wrapper class used to store a user-defined Chem.Atom 3D-coordinates function.
 # 
 class Atom3DCoordinatesFunction(Boost.Python.instance):
 

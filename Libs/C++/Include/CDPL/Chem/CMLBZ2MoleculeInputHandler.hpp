@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of bzip2-compressed molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
+         * \brief Handler for the input of bzip2-compressed molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
          * \since 1.2
          */
         typedef Util::DefaultDataInputHandler<CMLBZ2MoleculeReader, DataFormat::CML_BZ2> CMLBZ2MoleculeInputHandler;

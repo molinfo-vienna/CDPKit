@@ -46,8 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A library of pre-generated conformations for molecular fragments, indexed by
-         *        canonical-fragment hash code.
+         * \brief Data structure representing a library of pre-generated molecular fragment conformer ensembles.
          *
          * Entries are FragmentLibraryEntry instances keyed by the hash code of the
          * associated ConfGen::CanonicalFragment. The library is iterable, supports

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper class used to store a user-defined function for the processing of Biomol.MMCIFData instances.
+# \brief Generic wrapper class used to store a user-defined function for the processing of Biomol.MMCIFData instances.
 # 
 class MMCIFDataProcessingFunction(Boost.Python.instance):
 

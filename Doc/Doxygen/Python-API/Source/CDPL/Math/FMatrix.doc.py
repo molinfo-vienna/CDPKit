@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense matrix holding floating point values of type <tt>float</tt>..
+# \brief Unbounded dense matrix holding floating point values of type <tt>float</tt>..
 # 
 class FMatrix(Boost.Python.instance):
 

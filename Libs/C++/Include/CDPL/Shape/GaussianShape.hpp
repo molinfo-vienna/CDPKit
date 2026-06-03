@@ -45,14 +45,14 @@ namespace CDPL
     {
 
         /**
-         * \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
+         * \brief Data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
          */
         class CDPL_SHAPE_API GaussianShape : public Base::PropertyContainer
         {
 
           public:
             /**
-             * \brief A single sphere of the Gaussian shape, characterized by a position, radius, hardness and color.
+             * \brief Data structure representing a single sphere of the Gaussian shape, characterized by a position, radius, hardness and color.
              */
             class Element
             {

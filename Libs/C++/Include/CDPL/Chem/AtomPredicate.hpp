@@ -41,7 +41,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief A generic wrapper class used to store a user-defined atom predicate.
+         * \brief Generic wrapper class used to store a user-defined atom predicate.
          */
         typedef std::function<bool(const Chem::Atom&)> AtomPredicate;
     } // namespace Chem

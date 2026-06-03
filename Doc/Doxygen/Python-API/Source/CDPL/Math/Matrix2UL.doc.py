@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 2x2 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief Bounded 2x2 matrix holding unsigned integers of type <tt>unsigned long</tt>.
 # 
 class Matrix2UL(Boost.Python.instance):
 

@@ -39,7 +39,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A bounded 7 element vector specifying a quaternion-based rotation plus translation.
+         * \brief Bounded 7 element vector specifying a quaternion-based rotation plus translation.
          */
         typedef Math::Vector7D QuaternionTransformation;
     }

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a ellipse.
+# \brief 2D graphics primitive representing a ellipse.
 # 
 class EllipsePrimitive2D(GraphicsPrimitive2D):
 

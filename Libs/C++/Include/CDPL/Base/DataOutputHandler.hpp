@@ -45,7 +45,7 @@ namespace CDPL
         class DataFormat;
 
         /**
-         * \brief A factory interface providing methods for the creation of Base::DataWriter instances handling a particular
+         * \brief Factory interface providing methods for the creation of Base::DataWriter instances handling a particular
          *        object type and storage format.
          * \tparam T The type of objects handled by the created Base::DataWriter instances.
          */

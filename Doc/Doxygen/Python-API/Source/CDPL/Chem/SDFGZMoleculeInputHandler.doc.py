@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of gzip-compressed molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# \brief Handler for the input of gzip-compressed molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
 # 
 class SDFGZMoleculeInputHandler(MoleculeInputHandler):
 

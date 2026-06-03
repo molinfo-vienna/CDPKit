@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of molecular graph data in the <em>Sybyl MOL2</em> format.
+# \brief Handler for the output of molecular graph data in the <em>Sybyl MOL2</em> format.
 # 
 class MOL2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 

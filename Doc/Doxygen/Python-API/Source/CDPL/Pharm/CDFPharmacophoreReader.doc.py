@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for pharmacophore data in the native I/O format of the <em>CDPL</em>.
+# \brief Reader for pharmacophore data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFPharmacophoreReader(PharmacophoreReaderBase):
 

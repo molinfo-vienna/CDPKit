@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded sparse vector holding floating point values of type <tt>float</tt>.
+# \brief Unbounded sparse vector holding floating point values of type <tt>float</tt>.
 # 
 class SparseFVector(Boost.Python.instance):
 

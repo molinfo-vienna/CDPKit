@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An unique lookup key for control-parameter and property values.
+         * \brief Unique lookup key for control-parameter and property values.
          *
          * \c %LookupKey has a private default constructor and a public copy constructor. The creation of
          * not copy constructed new instances is only possible by the method create(const std::string& name).
@@ -55,7 +55,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief A functor class implementing the generation of hash codes for \c %LookupKey instances.
+             * \brief Functor class implementing the generation of hash codes for \c %LookupKey instances.
              */
             struct HashFunc
             {

@@ -42,7 +42,7 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief A data type for the storage and lookup of arbitrary bond to bond mappings.
+         * \brief Data type for the storage and lookup of arbitrary bond to bond mappings.
          *
          * Bonds mappings are stored as pairs of pointers to the mapped \c const Chem::Bond objects.
          * Mappings do not have to be unique and multiple mappings of a given bond to other bonds are possible.

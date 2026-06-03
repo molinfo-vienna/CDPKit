@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+# \brief Reader for molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
 # 
 # <tt>MOLMoleculeReader</tt> supports the following control-parameters:
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A Reader for molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
+# \brief Reader for molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
 # 
 # <tt>CMLMoleculeReader</tt> supports the following control-parameters:
 # 

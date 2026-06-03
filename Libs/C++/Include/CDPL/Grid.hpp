@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Grid.
+ * \brief Convenience header including everything that is defined in namespace CDPL::Grid.
  */
 
 #ifndef CDPL_GRID_HPP

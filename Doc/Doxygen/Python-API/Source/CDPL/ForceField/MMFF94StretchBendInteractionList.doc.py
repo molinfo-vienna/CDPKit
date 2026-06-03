@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A dynamically-sized array of MMFF94 stretch-bend coupling interaction records.
+# \brief Dynamically-sized array of MMFF94 stretch-bend coupling interaction records.
 # 
 class MMFF94StretchBendInteractionList(Boost.Python.instance):
 

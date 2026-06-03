@@ -51,7 +51,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief A reader for molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em>
+         * \brief Reader for molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em>
          *        [\ref INCHI] format.
          *
          * \c %INCHIMoleculeReader implements the conversion of \e InChI strings (or strings with auxiliary \e InChI information)

@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure for the storage of residues extracted from biological macromolecules.
+         * \brief Data structure for the storage of residues extracted from biological macromolecules.
          */
         class CDPL_BIOMOL_API ResidueList : public Chem::FragmentList
         {

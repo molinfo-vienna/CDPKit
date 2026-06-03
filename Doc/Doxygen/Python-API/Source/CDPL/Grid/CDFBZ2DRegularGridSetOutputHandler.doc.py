@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of bzip2-compressed regular spatial grid set data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the output of bzip2-compressed regular spatial grid set data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFBZ2DRegularGridSetOutputHandler(DRegularGridSetOutputHandler):
 

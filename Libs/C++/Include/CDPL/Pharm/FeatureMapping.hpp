@@ -42,7 +42,7 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief A data type for the storage and lookup of arbitrary feature to feature mappings.
+         * \brief Data type for the storage and lookup of arbitrary feature to feature mappings.
          *
          * Features mappings are stored as pairs of pointers to the mapped \c const Pharm::Feature objects.
          * Mappings do not have to be unique and multiple mappings of a given feature to other features are possible.

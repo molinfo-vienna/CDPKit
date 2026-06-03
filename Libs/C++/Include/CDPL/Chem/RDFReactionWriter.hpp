@@ -46,7 +46,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A writer for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+         * \brief Writer for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
          *
          * \c %RDFReactionWriter supports the following control-parameters:
          *

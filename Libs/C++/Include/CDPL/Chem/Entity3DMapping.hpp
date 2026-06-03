@@ -42,7 +42,7 @@ namespace CDPL
         class Entity3D;
 
         /**
-         * \brief A data type for the storage and lookup of arbitrary entity to entity mappings.
+         * \brief Data type for the storage and lookup of arbitrary entity to entity mappings.
          *
          * Entity3Ds mappings are stored as pairs of pointers to the mapped \c const Chem::Entity3D objects.
          * Mappings do not have to be unique and multiple mappings of a given entity to other entities are possible.

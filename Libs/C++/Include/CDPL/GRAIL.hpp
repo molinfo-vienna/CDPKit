@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::GRAIL.
+ * \brief Convenience header including everything that is defined in namespace CDPL::GRAIL.
  */
 
 #ifndef CDPL_GRAIL_HPP

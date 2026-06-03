@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
+# \brief Writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
 # \since 1.2
 # 

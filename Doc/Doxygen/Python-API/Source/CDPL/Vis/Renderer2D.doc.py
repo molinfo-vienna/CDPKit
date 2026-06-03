@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An interface that provides methods for low level 2D drawing operations.
+# \brief Interface providing methods for low level 2D drawing operations.
 # 
 # For the drawing of graphical primitives the following methods are provided:
 #  - drawPoint() for drawing points

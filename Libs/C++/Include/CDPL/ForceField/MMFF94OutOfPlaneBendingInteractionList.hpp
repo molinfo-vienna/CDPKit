@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamically-sized array of MMFF94 out-of-plane bending interaction records.
+         * \brief Dynamically-sized array of MMFF94 out-of-plane bending interaction records.
          */
         typedef Util::Array<MMFF94OutOfPlaneBendingInteraction> MMFF94OutOfPlaneBendingInteractionList;
     }

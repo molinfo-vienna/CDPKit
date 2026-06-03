@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 4x4 matrix holding floating point values of type <tt>float</tt>.
+# \brief Bounded 4x4 matrix holding floating point values of type <tt>float</tt>.
 # 
 class Matrix4F(Boost.Python.instance):
 

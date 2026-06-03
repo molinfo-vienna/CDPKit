@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of double precision floating-point numbers.
+# \brief Array storing floating point values of type <tt>double</tt>.
 # 
 class DArray(Boost.Python.instance):
 

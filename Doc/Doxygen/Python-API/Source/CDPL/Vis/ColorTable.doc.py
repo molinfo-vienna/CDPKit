@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A container for the storage and lookup of Vis.Color objects that are associated with a numeric identifier.
+# \brief Container for the storage and lookup of Vis.Color objects that are associated with a numeric identifier.
 # 
 class ColorTable(Boost.Python.instance):
 

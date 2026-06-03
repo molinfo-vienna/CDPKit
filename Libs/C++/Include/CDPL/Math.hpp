@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Math.
+ * \brief Convenience header including everything that is defined in namespace CDPL::Math.
  */
 
 #ifndef CDPL_MATH_HPP

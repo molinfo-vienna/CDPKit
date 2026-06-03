@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+         * \brief Handler for the output of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
          */
         typedef Util::DefaultDataOutputHandler<RDFReactionWriter, DataFormat::RDF> RDFReactionOutputHandler;
     } // namespace Chem

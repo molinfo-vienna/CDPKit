@@ -41,7 +41,7 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief A generic wrapper class used to store a user-defined feature compare function.
+         * \brief Generic wrapper class used to store a user-defined feature compare function.
          */
         typedef std::function<bool(const Feature&, const Feature&)> FeatureCompareFunction;
     } // namespace Pharm

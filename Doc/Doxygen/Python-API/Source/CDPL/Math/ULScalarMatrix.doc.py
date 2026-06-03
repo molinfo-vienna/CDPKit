@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>unsigned long</tt>.
+# \brief Memory-efficient immutable matrix where all elements have the same value of type <tt>unsigned long</tt>.
 # 
 class ULScalarMatrix(Boost.Python.instance):
 

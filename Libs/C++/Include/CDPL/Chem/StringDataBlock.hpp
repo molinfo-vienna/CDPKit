@@ -42,8 +42,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Represents a data item in the structure or reaction data block of an
-         *        <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
+         * \brief Represents a data item consisting of a header and a data payload.
+         *
+         * Used to represent the individual entries in the structure or reaction data block of an
+         * <em>MDL SD-</em> or \e RD-File record (see [\ref CTFILE]).
          */
         class CDPL_CHEM_API StringDataBlockEntry
         {
@@ -138,8 +140,10 @@ namespace CDPL
         };
 
         /**
-         * \brief An array of Chem::StringDataBlockEntry objects used to store the structure or reaction
-         *        data block of an <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
+         * \brief Array of Chem::StringDataBlockEntry objects.
+         *
+         * Used to store the structure or reaction data block of an <em>MDL SD-</em>
+         * or \e RD-File record (see [\ref CTFILE]).
          */
         class CDPL_CHEM_API StringDataBlock : public Util::Array<StringDataBlockEntry>
         {

@@ -45,7 +45,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+         * \brief Reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
          *
          * \c %RXNReactionReader supports the following control-parameters:
          *

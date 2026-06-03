@@ -47,7 +47,7 @@ namespace CDPL
         class MMCIFData;
         
         /**
-         * \brief A generic wrapper class used to store a user-defined function for the processing of Biomol::MMCIFData instances.
+         * \brief Generic wrapper class used to store a user-defined function for the processing of Biomol::MMCIFData instances.
          */
         typedef std::function<void(Biomol::MMCIFData&, const Chem::MolecularGraph&)> MMCIFDataProcessingFunction;
     } // namespace Biomol

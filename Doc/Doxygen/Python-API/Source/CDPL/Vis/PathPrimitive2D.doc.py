@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing an arbitrary path in 2D space.
+# \brief 2D graphics primitive representing an arbitrary path in 2D space.
 # 
 # \since 1.1
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of Math.Vector3L objects.
+# \brief Array storing vectors of type Math.Vector3L.
 # 
 class Vector3LArray(Boost.Python.instance):
 

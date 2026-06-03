@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of gzip-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+         * \brief Handler for the output of gzip-compressed feature container data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::DefaultDataOutputHandler<CDFGZFeatureContainerWriter, DataFormat::CDF_GZ> CDFGZFeatureContainerOutputHandler;
     } // namespace Pharm

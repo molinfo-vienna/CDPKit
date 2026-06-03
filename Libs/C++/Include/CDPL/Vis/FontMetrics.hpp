@@ -44,7 +44,7 @@ namespace CDPL
         class Rectangle2D;
 
         /**
-         * \brief An interface class with methods that provide information about the metrics of a font.
+         * \brief Interface providing methods for querying information about the metrics of a font.
          *
          * Implementations of the \c %FontMetrics interface provide height and width information for a
          * given font and specific character glyphs in that font. Once a font has been specified with setFont(),

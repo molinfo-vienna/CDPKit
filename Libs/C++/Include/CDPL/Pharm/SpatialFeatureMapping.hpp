@@ -58,17 +58,17 @@ namespace CDPL
 
           public:
             /**
-             * \brief A generic wrapper class used to store a user-defined feature type match function.
+             * \brief Generic wrapper class used to store a user-defined feature type match function.
              */
             typedef std::function<bool(const Feature&, const Feature&)> TypeMatchFunction;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined feature position match function.
+             * \brief Generic wrapper class used to store a user-defined feature position match function.
              */
             typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> PositionMatchFunction;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined feature geometry match function.
+             * \brief Generic wrapper class used to store a user-defined feature geometry match function.
              */
             typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> GeometryMatchFunction;
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A binary functor that calculates the product of two property values retrieved from a pair of Base.PropertyContainer instances passed as argument.
+# \brief Binary functor that calculates the product of two property values retrieved from a pair of Base.PropertyContainer instances passed as argument.
 # 
 class PropertyValueProduct(builtins.object):
 

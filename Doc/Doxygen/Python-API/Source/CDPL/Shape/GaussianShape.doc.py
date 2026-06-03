@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
+# \brief Data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
 # 
 class GaussianShape(Base.PropertyContainer):
 
     ##
-    # \brief A single sphere of the Gaussian shape, characterized by a position, radius, hardness and color.
+    # \brief Data structure representing a single sphere of the Gaussian shape, characterized by a position, radius, hardness and color.
     # 
     class Element(Boost.Python.instance):
 

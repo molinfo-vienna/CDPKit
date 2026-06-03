@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief Bounded 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
 # 
 class Vector4UL(Boost.Python.instance):
 

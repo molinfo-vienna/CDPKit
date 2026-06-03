@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An interface for writing data objects of type Chem.MolecularGraph to an arbitrary data sink.
+# \brief Interface for writing data objects of type Chem.MolecularGraph to an arbitrary data sink.
 # 
 # <tt>MolecularGraphWriterBase</tt> is the common interface of classes which write objects of type Chem.MolecularGraph to some data sink (e.g. a file) that expects the data to be encoded in a particular storage format.
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A factory interface providing methods for the creation of Chem.ReactionReaderBase instances for reading data provided in a particular storage format.
+# \brief Factory interface providing methods for the creation of Chem.ReactionReaderBase instances for reading data provided in a particular storage format.
 # 
 class ReactionInputHandler(Boost.Python.instance):
 

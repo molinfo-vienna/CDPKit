@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the <em>Chemical Markup Language</em> [\ref CML] format.
+# \brief Writer for molecular graph data in the <em>Chemical Markup Language</em> [\ref CML] format.
 # 
 # \since 1.2
 # 

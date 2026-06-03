@@ -42,7 +42,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief A generic wrapper class used to store a user-defined atom priority function.
+         * \brief Generic wrapper class used to store a user-defined atom priority function.
          */
         typedef std::function<std::size_t(const Chem::Atom&)> AtomPriorityFunction;
     } // namespace Chem

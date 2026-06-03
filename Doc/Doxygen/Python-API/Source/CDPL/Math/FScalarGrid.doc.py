@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An immutable grid where all elements have the same value of type <tt>float</tt>.
+# \brief Immutable grid where all elements have the same value of type <tt>float</tt>.
 # 
 class FScalarGrid(Boost.Python.instance):
 

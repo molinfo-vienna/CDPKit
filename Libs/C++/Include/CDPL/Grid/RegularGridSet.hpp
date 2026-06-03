@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An indirected array of dynamically allocated Grid::RegularGrid instances.
+         * \brief Indirected array of dynamically allocated Grid::RegularGrid instances.
          * \tparam T The grid cell value type.
          * \tparam CVT The world-coordinate value type used by the wrapped Grid::RegularGrid (defaults to \a T).
          */

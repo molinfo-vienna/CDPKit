@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure for the storage and retrieval of stereochemical information about atoms and bonds.
+# \brief Data structure for the storage and retrieval of stereochemical information about atoms and bonds.
 # 
 # The stereochemistry of atoms and bonds is definded by an ordered list of reference atoms and an integer constant that describes the spatial configuration of the reference atoms. Requirements on the specification of the reference atom list and the way the associated steric configuration has to be interpreted both depend on the primary type of the stereocenter (if atom or bond) and, for atom centers, also on the number and geometric arrangement of the reference atoms. The following basic types of atom and bond stereocenters are currently supported:
 # 

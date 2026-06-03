@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense vector holding floating point values of type <tt>double</tt>.
+# \brief Unbounded dense vector holding floating point values of type <tt>double</tt>.
 # 
 class DVector(Boost.Python.instance):
 

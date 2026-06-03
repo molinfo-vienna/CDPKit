@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A factory interface providing methods for the creation of Chem.MoleculeReaderBase instances for reading data provided in a particular storage format.
+# \brief Factory interface providing methods for the creation of Chem.MoleculeReaderBase instances for reading data provided in a particular storage format.
 # 
 class MoleculeInputHandler(Boost.Python.instance):
 

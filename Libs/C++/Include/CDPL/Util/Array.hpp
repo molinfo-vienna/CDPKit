@@ -62,7 +62,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamic array class providing amortized constant time
+         * \brief Dynamic array class providing amortized constant time
          *        access to arbitrary elements.
          *
          * \c %Array is essentially a wrapper around \c std::vector and provides similar
@@ -565,42 +565,42 @@ namespace CDPL
 
 
         /**
-         * \brief An array of unsigned integers.
+         * \brief Array storing unsigned integers of type <tt>unsigned int</tt>.
          */
         typedef Array<unsigned int> UIArray;
 
         /**
-         * \brief An array of unsigned integers of type <tt>std::size_t</tt>.
+         * \brief Array storing unsigned integers of type <tt>std::size_t</tt>.
          */
         typedef Array<std::size_t> STArray;
 
         /**
-         * \brief An array of unsigned integers of type <tt>long</tt>.
+         * \brief Array storing integers of type <tt>long</tt>.
          */
         typedef Array<long> LArray;
 
         /**
-         * \brief A pair of unsigned integers of type <tt>std::size_t</tt>.
+         * \brief Pair of unsigned integers of type <tt>std::size_t</tt>.
          */
         typedef std::pair<std::size_t, std::size_t> STPair;
 
         /**
-         * \brief An array of pairs of unsigned integers of type <tt>std::size_t</tt>.
+         * \brief Array storing pairs of unsigned integers of type <tt>std::size_t</tt>.
          */
         typedef Array<STPair> STPairArray;
 
         /**
-         * \brief An array of double precision floating-point numbers.
+         * \brief Array storing floating point values of type <tt>double</tt>.
          */
         typedef Array<double> DArray;
 
         /**
-         * \brief An array of <tt>std::string</tt> objects.
+         * \brief Array storing <tt>std::string</tt> objects.
          */
         typedef Array<std::string> SArray;
 
         /**
-         * \brief An array of <tt>Util::BitSet</tt> objects.
+         * \brief Array storing <tt>Util::BitSet</tt> objects.
          */
         typedef Array<BitSet> BitSetArray;
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Sybyl MOL2</em> format.
+# \brief Handler for the output of bzip2-compressed molecular graph data in the <em>Sybyl MOL2</em> format.
 # 
 class MOL2BZ2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 

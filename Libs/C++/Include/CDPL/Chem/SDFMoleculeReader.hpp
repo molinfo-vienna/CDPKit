@@ -45,7 +45,7 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief A Reader for molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+         * \brief Reader for molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
          *
          * \c %SDFMoleculeReader supports the following control-parameters:
          *

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the native I/O format of the <em>CDPL</em>.
+# \brief Reader for molecule data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFMoleculeReader(MoleculeReaderBase):
 

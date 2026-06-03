@@ -45,7 +45,7 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief A reader for molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         * \brief Reader for molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
          *
          * \c %SMILESMoleculeReader supports the following control-parameters:
          *

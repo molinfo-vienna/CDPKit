@@ -39,7 +39,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An unary functor for the dereferenciation of pointers
+         * \brief Unary functor for the dereferenciation of pointers
          *        \e without \e null pointer checking.
          * \tparam ArgType The pointer type.
          * \tparam ResType The type of the pointer dereferenciation result.
@@ -64,7 +64,7 @@ namespace CDPL
         };
 
         /**
-         * \brief An unary functor for the dereferenciation of pointers
+         * \brief Unary functor for the dereferenciation of pointers
          *        \e with \e null pointer checking.
          * \tparam ArgType The pointer type.
          * \tparam ResType The type of the pointer dereferenciation result.

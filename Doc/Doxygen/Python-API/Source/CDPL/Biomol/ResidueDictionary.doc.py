@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A global dictionary for the lookup of meta-data associated with the residues in biological macromolecules.
+# \brief Global dictionary for the lookup of meta-data associated with the residues in biological macromolecules.
 # 
 class ResidueDictionary(Boost.Python.instance):
 

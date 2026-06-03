@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 2 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief Bounded 2 element vector holding unsigned integers of type <tt>unsigned long</tt>.
 # 
 class Vector2UL(Boost.Python.instance):
 

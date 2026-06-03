@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An interface for writing data objects of type Pharm.FeatureContainer to an arbitrary data sink.
+# \brief Interface for writing data objects of type Pharm.FeatureContainer to an arbitrary data sink.
 # 
 # <tt>FeatureContainerWriterBase</tt> is the common interface of classes which write objects of type Pharm.FeatureContainer to some data sink (e.g. a file) that expects the data to be encoded in a particular storage format.
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense vector holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief Unbounded dense vector holding unsigned integers of type <tt>unsigned long</tt>.
 # 
 class ULVector(Boost.Python.instance):
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of bzip2-compressed reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# \brief Handler for the input of bzip2-compressed reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 # 
 class RDFBZ2ReactionInputHandler(ReactionInputHandler):
 

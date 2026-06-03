@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 2x2 matrix holding floating point values of type <tt>double</tt>.
+# \brief Bounded 2x2 matrix holding floating point values of type <tt>double</tt>.
 # 
 class Matrix2D(Boost.Python.instance):
 

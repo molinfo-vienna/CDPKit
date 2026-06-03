@@ -39,7 +39,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamic bitset class.
+         * \brief Dynamic bitset class.
          *
          * For further information see [\ref BDBS].
          */

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 3x3 matrix holding floating point values of type <tt>float</tt>.
+# \brief Bounded 3x3 matrix holding floating point values of type <tt>float</tt>.
 # 
 class Matrix3F(Boost.Python.instance):
 

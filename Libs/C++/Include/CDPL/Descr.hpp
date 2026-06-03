@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Descr.
+ * \brief Convenience header including everything that is defined in namespace CDPL::Descr.
  */
 
 #ifndef CDPL_DESCR_HPP

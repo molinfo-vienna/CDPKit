@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format.
+# \brief Handler for the output of 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format.
 # 
 class SVGReactionOutputHandler(Chem.ReactionOutputHandler):
 

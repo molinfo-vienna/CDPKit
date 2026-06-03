@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a set of connected line segments.
+# \brief 2D graphics primitive representing a set of connected line segments.
 # 
 class PolylinePrimitive2D(PointArray2D, GraphicsPrimitive2D):
 

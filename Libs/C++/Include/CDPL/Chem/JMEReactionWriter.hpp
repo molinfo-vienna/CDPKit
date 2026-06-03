@@ -46,7 +46,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A writer for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+         * \brief Writer for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
          *
          * \c %JMEReactionWriter implements the output of Chem::Reaction objects in the native I/O format used by the
          * <em>JME Molecular Editor</em> applet. The output data are written by means of a \c std::ostream object that

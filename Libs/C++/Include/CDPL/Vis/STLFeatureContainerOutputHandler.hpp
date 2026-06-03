@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of Pharm::FeatureContainer instances in the <em>STL</em> [\ref STLFMT] format.
+         * \brief Handler for the output of Pharm::FeatureContainer instances in the <em>STL</em> [\ref STLFMT] format.
          * \since 1.3
          */
         typedef Util::DefaultDataOutputHandler<STLFeatureContainerWriter, DataFormat::STL> STLFeatureContainerOutputHandler;

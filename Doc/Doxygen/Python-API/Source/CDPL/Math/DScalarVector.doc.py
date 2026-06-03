@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable vector where all elements have the same value of type <tt>double</tt>.
+# \brief Memory-efficient immutable vector where all elements have the same value of type <tt>double</tt>.
 # 
 class DScalarVector(Boost.Python.instance):
 

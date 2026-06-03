@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+         * \brief Handler for the input of molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
          */
         typedef Util::DefaultDataInputHandler<SDFMoleculeReader, DataFormat::SDF> SDFMoleculeInputHandler;
     } // namespace Chem

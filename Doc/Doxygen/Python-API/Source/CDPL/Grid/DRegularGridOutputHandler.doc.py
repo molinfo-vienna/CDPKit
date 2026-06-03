@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A factory interface providing methods for the creation of Grid.DRegularGridWriterBase instances for data output in a particular storage format.
+# \brief Factory interface providing methods for the creation of Grid.DRegularGridWriterBase instances for data output in a particular storage format.
 # 
 class DRegularGridOutputHandler(Boost.Python.instance):
 

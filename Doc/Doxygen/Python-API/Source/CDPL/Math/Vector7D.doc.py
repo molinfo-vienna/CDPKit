@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 7 element vector holding floating point values of type <tt>double</tt>.
+# \brief Bounded 7 element vector holding floating point values of type <tt>double</tt>.
 # 
 class Vector7D(Boost.Python.instance):
 

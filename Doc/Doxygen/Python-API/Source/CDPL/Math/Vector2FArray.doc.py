@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of Math.Vector2F objects.
+# \brief Array storing vectors of type Math.Vector2F.
 # 
 class Vector2FArray(Boost.Python.instance):
 

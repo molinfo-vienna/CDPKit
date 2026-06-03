@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A container for the storage and evaluation of logical match expression lists.
+         * \brief Container for the storage and evaluation of logical match expression lists.
          *
          * \c %MatchExpressionList allows for a concatenation of multiple Chem::MatchExpression instances that
          * get evaluated in turn according to some logic. The actual logic of expression list evaluation

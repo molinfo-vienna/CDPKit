@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of pharmacophore data in the native I/O format of <em>LigandScout</em>.
+# \brief Handler for the output of pharmacophore data in the native I/O format of <em>LigandScout</em>.
 # 
 class PMLFeatureContainerOutputHandler(FeatureContainerOutputHandler):
 

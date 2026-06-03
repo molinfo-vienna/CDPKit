@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A graphics primitive representing a single line.
+         * \brief 2D graphics primitive representing a single line.
          */
         class CDPL_VIS_API LinePrimitive2D : public Line2D,
                                              public GraphicsPrimitive2D

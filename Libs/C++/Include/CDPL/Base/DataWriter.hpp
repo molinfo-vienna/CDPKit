@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An interface for writing data objects of a given type to an arbitrary data sink.
+         * \brief Interface for writing data objects of a given type to an arbitrary data sink.
          *
          * \c %DataWriter is the common interface of classes which write objects of a given type 
          * (specified by the template parameter \a T) to some data sink (e.g. a file) that expects

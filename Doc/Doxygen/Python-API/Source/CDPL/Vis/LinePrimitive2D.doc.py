@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a single line.
+# \brief 2D graphics primitive representing a single line.
 # 
 class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
 

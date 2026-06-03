@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An immutable grid where all elements have the same value of type <tt>double</tt>.
+# \brief Immutable grid where all elements have the same value of type <tt>double</tt>.
 # 
 class DScalarGrid(Boost.Python.instance):
 

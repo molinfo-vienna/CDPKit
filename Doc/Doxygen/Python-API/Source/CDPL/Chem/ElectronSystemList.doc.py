@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data type for the storage of Chem.ElectronSystem objects.
+# \brief Data type for the storage of Chem.ElectronSystem objects.
 # 
 class ElectronSystemList(Boost.Python.instance):
 

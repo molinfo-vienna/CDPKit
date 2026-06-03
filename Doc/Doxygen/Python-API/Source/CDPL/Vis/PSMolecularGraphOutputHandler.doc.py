@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS] format.
+# \brief Handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS] format.
 # 
 class PSMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 

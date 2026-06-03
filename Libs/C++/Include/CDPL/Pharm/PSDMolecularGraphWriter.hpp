@@ -50,7 +50,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A writer for molecular graph data in the PSD-format of the <em>CDPL</em>.
+         * \brief Writer for molecular graph data in the PSD-format of the <em>CDPL</em>.
          */
         class CDPL_PHARM_API PSDMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
         {

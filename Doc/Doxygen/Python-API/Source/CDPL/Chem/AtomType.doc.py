@@ -47,22 +47,22 @@ class AtomType(Boost.Python.instance):
     R = 124
 
     ##
-    # \brief A generic type that covers any element except hydrogen.
+    # \brief Generic type that covers any element except hydrogen.
     # 
     A = 114
 
     ##
-    # \brief A generic type that covers any element.
+    # \brief Generic type that covers any element.
     # 
     AH = 115
 
     ##
-    # \brief A generic type that covers any element (equivalent to AtomType.AH).
+    # \brief Generic type that covers any element (equivalent to AtomType.AH).
     # 
     ANY = 122
 
     ##
-    # \brief A generic type for heteroatoms (N, O, S or P).
+    # \brief Generic type for heteroatoms (N, O, S or P).
     # 
     HET = 123
 
@@ -347,12 +347,12 @@ class AtomType(Boost.Python.instance):
     Lu = 71
 
     ##
-    # \brief A generic type that covers any element that is a metal.
+    # \brief Generic type that covers any element that is a metal.
     # 
     M = 118
 
     ##
-    # \brief A generic type that covers hydrogen and any element that is a metal.
+    # \brief Generic type that covers hydrogen and any element that is a metal.
     # 
     MH = 119
 
@@ -482,12 +482,12 @@ class AtomType(Boost.Python.instance):
     Pu = 94
 
     ##
-    # \brief A generic type that covers any element except hydrogen and carbon.
+    # \brief Generic type that covers any element except hydrogen and carbon.
     # 
     Q = 116
 
     ##
-    # \brief A generic type that covers any element except carbon.
+    # \brief Generic type that covers any element except carbon.
     # 
     QH = 117
 
@@ -637,12 +637,12 @@ class AtomType(Boost.Python.instance):
     W = 74
 
     ##
-    # \brief A generic type that covers any element that is a halogen.
+    # \brief Generic type that covers any element that is a halogen.
     # 
     X = 120
 
     ##
-    # \brief A generic type that covers hydrogen and any element that is a halogen.
+    # \brief Generic type that covers hydrogen and any element that is a halogen.
     # 
     XH = 121
 

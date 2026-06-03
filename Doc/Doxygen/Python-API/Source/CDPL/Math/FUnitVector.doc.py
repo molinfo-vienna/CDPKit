@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable unit vector with element values of type <tt>float</tt>.
+# \brief Memory-efficient immutable unit vector with element values of type <tt>float</tt>.
 # 
 class FUnitVector(Boost.Python.instance):
 

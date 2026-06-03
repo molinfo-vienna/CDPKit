@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of gzip-compressed molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# \brief Handler for the input of gzip-compressed molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 # 
 class PDBGZMoleculeInputHandler(Chem.MoleculeInputHandler):
 

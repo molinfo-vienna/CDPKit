@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure for the storage of imported MMCIF data (see [\ref MMCIF]).
+# \brief Data structure for the storage of imported MMCIF data (see [\ref MMCIF]).
 # 
 # \since 1.2
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# \brief Writer for molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 # 
 # <tt>SMILESMolecularGraphWriter</tt> supports the following control-parameters:
 # 

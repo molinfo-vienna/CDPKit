@@ -46,7 +46,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief A writer for molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         * \brief Writer for molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
          *
          * \c %SMILESMolecularGraphWriter supports the following control-parameters:
          *

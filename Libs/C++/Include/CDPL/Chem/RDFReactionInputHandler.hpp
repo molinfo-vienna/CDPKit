@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+         * \brief Handler for the input of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
          */
         typedef Util::DefaultDataInputHandler<RDFReactionReader, DataFormat::RDF> RDFReactionInputHandler;
     } // namespace Chem

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable vector where all elements have the value zero of type <tt>long</tt>.
+# \brief Memory-efficient immutable vector where all elements have the value zero of type <tt>long</tt>.
 # 
 class LZeroVector(Boost.Python.instance):
 

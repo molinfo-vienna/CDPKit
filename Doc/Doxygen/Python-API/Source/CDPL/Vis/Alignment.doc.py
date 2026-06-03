@@ -37,7 +37,7 @@ class Alignment(Boost.Python.instance):
     CENTER = 15
 
     ##
-    # \brief A bitmask for all horizontal alignment flags.
+    # \brief Bitmask for all horizontal alignment flags.
     # 
     H_ALIGNMENT_MASK = 3
 
@@ -67,7 +67,7 @@ class Alignment(Boost.Python.instance):
     TOP = 4
 
     ##
-    # \brief A bitmask for all vertical alignment flags.
+    # \brief Bitmask for all vertical alignment flags.
     # 
     V_ALIGNMENT_MASK = 12
 

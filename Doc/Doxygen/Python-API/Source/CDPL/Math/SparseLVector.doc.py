@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded sparse vector holding signed integers of type <tt>long</tt>.
+# \brief Unbounded sparse vector holding signed integers of type <tt>long</tt>.
 # 
 class SparseLVector(Boost.Python.instance):
 

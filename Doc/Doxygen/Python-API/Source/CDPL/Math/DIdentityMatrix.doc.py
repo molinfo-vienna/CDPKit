@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable identity matrix with element values of type <tt>double</tt>.
+# \brief Memory-efficient immutable identity matrix with element values of type <tt>double</tt>.
 # 
 class DIdentityMatrix(Boost.Python.instance):
 

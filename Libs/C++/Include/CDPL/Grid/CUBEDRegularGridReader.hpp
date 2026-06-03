@@ -45,7 +45,7 @@ namespace CDPL
         class CUBEDataReader;
 
         /**
-         * \brief A reader for regular spatial grid data in the <em>Gaussian CUBE</em> [\ref CUBE] format.
+         * \brief Reader for regular spatial grid data in the <em>Gaussian CUBE</em> [\ref CUBE] format.
          * \since 1.4
          */
         class CDPL_GRID_API CUBEDRegularGridReader : public Util::StreamDataReader<DRegularGrid, CUBEDRegularGridReader>

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of molecular graph data in the PSD-format of the <em>CDPL</em>.
+# \brief Handler for the output of molecular graph data in the PSD-format of the <em>CDPL</em>.
 # 
 class PSDMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 

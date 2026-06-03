@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief An array for storing generic vector objects.
+         * \brief Array data type for the ordered storage of vector objects.
          */
         template <typename V>
         class VectorArray : public Util::Array<V>
@@ -65,42 +65,42 @@ namespace CDPL
         };
 
         /**
-         * \brief An array of Math::Vector2F objects.
+         * \brief Array storing vectors of type Math::Vector2F.
          */
         typedef VectorArray<Vector2F> Vector2FArray;
 
         /**
-         * \brief An array of Math::Vector3F objects.
+         * \brief Array storing vectors of type Math::Vector3F.
          */
         typedef VectorArray<Vector3F> Vector3FArray;
 
         /**
-         * \brief An array of Math::Vector2D objects.
+         * \brief Array storing vectors of type Math::Vector2D.
          */
         typedef VectorArray<Vector2D> Vector2DArray;
 
         /**
-         * \brief An array of Math::Vector3D objects.
+         * \brief Array storing vectors of type Math::Vector3D.
          */
         typedef VectorArray<Vector3D> Vector3DArray;
 
         /**
-         * \brief An array of Math::Vector2L objects.
+         * \brief Array storing vectors of type Math::Vector2L.
          */
         typedef VectorArray<Vector2L> Vector2LArray;
 
         /**
-         * \brief An array of Math::Vector3L objects.
+         * \brief Array storing vectors of type Math::Vector3L.
          */
         typedef VectorArray<Vector3L> Vector3LArray;
 
         /**
-         * \brief An array of Math::Vector2UL objects.
+         * \brief Array storing vectors of type Math::Vector2UL.
          */
         typedef VectorArray<Vector2UL> Vector2ULArray;
 
         /**
-         * \brief An array of Math::Vector3UL objects.
+         * \brief Array storing vectors of type Math::Vector3UL.
          */
         typedef VectorArray<Vector3UL> Vector3ULArray;
     } // namespace Math

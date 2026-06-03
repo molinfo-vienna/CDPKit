@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A graphics primitive representing a list of points.
+# \brief 2D graphics primitive representing a list of points.
 # 
 class PointListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 

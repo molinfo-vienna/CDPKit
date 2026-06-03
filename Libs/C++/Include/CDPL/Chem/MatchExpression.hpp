@@ -47,7 +47,7 @@ namespace CDPL
         class AtomBondMapping;
 
         /**
-         * \brief A generic boolean expression interface for the implementation of query/target object equivalence tests
+         * \brief Generic boolean expression interface for the implementation of query/target object equivalence tests
          *        in molecular graph matching algorithms.
          *
          * The \c %MatchExpression interface abstracts the task of checking a set of constraints on the attributes of target
@@ -124,7 +124,7 @@ namespace CDPL
         };
 
         /**
-         * \brief A generic boolean expression interface for the implementation of query/target object equivalence tests
+         * \brief Generic boolean expression interface for the implementation of query/target object equivalence tests
          *        in molecular graph matching algorithms.
          *
          * The \c %MatchExpression interface abstracts the task of checking a set of constraints on the attributes of target

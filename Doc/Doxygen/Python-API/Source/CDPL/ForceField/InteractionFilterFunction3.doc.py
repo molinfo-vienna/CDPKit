@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper for storing user-defined three-atom interaction filtering functions (see [\ref FUNWRP]).
+# \brief Generic wrapper for storing user-defined three-atom interaction filtering functions (see [\ref FUNWRP]).
 # 
 # The function is invoked with the three interacting atoms (typically used for angle-bending and stretch-bend interactions) and is expected to return <tt>True</tt> if the interaction should be considered, and <tt>False</tt> if it should be skipped.
 # 

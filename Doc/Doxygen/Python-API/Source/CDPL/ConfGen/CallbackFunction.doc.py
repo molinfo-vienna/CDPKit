@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper for storing user-defined callback functions returning a <tt>bool</tt> status flag (see [\ref FUNWRP]).
+# \brief Generic wrapper for storing user-defined callback functions returning a <tt>bool</tt> status flag (see [\ref FUNWRP]).
 # 
 # Used by the conformer generation pipeline (Chem.ConformerGenerator, Chem.TorsionDriver, etc.) for the periodic abort and timeout-check callbacks: returning <tt>False</tt> signals the pipeline to abort.
 # 

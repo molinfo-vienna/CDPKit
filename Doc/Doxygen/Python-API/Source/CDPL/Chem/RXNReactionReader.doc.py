@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+# \brief Reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 # 
 # <tt>RXNReactionReader</tt> supports the following control-parameters:
 # 

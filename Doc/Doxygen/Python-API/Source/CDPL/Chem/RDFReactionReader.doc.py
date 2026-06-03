@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# \brief Reader for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 # 
 # <tt>RDFReactionReader</tt> supports the following control-parameters:
 # 

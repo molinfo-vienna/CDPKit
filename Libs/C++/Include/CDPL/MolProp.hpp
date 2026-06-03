@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::MolProp.
+ * \brief Convenience header including everything that is defined in namespace CDPL::MolProp.
  */
 
 #ifndef CDPL_MOLPROP_HPP

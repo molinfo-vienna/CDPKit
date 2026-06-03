@@ -41,7 +41,7 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief A generic wrapper class used to store a user-defined bond predicate.
+         * \brief Generic wrapper class used to store a user-defined bond predicate.
          */
         typedef std::function<bool(const Chem::Bond&)> BondPredicate;
     } // namespace Chem

@@ -43,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data type for the storage of Chem::ElectronSystem objects.
+         * \brief Data type for the storage of Chem::ElectronSystem objects.
          */
         class CDPL_CHEM_API ElectronSystemList : public Util::IndirectArray<ElectronSystem>
         {

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data type for the storage and lookup of arbitrary feature to feature mappings.
+# \brief Data type for the storage and lookup of arbitrary feature to feature mappings.
 # 
 # Features mappings are stored as pairs of references to the mapped Pharm.Feature objects. Mappings do not have to be unique and multiple mappings of a given feature to other features are possible. If a mapping entry for a particular feature does not exist, the methods FeatureMapping.getValue() and FeatureMapping.__getitem__() return a <em>None</em> reference to indicate that the lookup of the mapped feature has failed.
 # 

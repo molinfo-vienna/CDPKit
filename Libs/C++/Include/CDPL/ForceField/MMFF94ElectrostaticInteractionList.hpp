@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamically-sized array of MMFF94 electrostatic interaction records.
+         * \brief Dynamically-sized array of MMFF94 electrostatic interaction records.
          */
         typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionList;
     }

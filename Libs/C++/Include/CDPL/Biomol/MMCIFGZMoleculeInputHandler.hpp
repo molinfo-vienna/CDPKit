@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of gzip-compressed molecule data in the <em>Macromolecular Crystallographic Information File (mmCIF)</em> [\ref MMCIF] format.
+         * \brief Handler for the input of gzip-compressed molecule data in the <em>Macromolecular Crystallographic Information File (mmCIF)</em> [\ref MMCIF] format.
          * \since 1.2
          */
         typedef Util::DefaultDataInputHandler<MMCIFGZMoleculeReader, DataFormat::MMCIF_GZ> MMCIFGZMoleculeInputHandler;

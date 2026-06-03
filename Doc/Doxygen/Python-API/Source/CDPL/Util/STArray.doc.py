@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of unsigned integers of type <tt>std::size_t</tt>.
+# \brief Array storing unsigned integers of type <tt>std::size_t</tt>.
 # 
 class STArray(Boost.Python.instance):
 

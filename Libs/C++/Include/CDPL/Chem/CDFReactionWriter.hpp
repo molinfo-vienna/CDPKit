@@ -46,7 +46,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A writer for reaction data in the native I/O format of the <em>CDPL</em>.
+         * \brief Writer for reaction data in the native I/O format of the <em>CDPL</em>.
          */
         class CDPL_CHEM_API CDFReactionWriter : public Base::DataWriter<Reaction>
         {

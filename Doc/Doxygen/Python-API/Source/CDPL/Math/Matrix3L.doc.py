@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 3x3 matrix holding signed integers of type <tt>long</tt>.
+# \brief Bounded 3x3 matrix holding signed integers of type <tt>long</tt>.
 # 
 class Matrix3L(Boost.Python.instance):
 

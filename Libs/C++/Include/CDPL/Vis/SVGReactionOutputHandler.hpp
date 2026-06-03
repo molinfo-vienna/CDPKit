@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em>
+         * \brief Handler for the output of 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em>
          *        [\ref WSVG] format.
          */
         typedef Util::DefaultDataOutputHandler<SVGReactionWriter, DataFormat::SVG> SVGReactionOutputHandler;

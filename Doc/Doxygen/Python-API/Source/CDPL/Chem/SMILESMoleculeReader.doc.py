@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# \brief Reader for molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 # 
 # <tt>SMILESMoleculeReader</tt> supports the following control-parameters:
 # 

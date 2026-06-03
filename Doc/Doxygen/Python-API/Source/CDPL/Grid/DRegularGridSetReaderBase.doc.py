@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An interface for reading data objects of type Grid.DRegularGridSet from an arbitrary data source.
+# \brief Interface for reading data objects of type Grid.DRegularGridSet from an arbitrary data source.
 # 
 # <tt>DRegularGridSetReaderBase</tt> is the common interface of classes which read objects of type Grid.DRegularGridSet from some data source (e.g. a file) that provides the data encoded in a particular storage format.
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data type for the storage of feature type histograms of pharmacophores.
+# \brief Data type for the storage of feature type histograms of pharmacophores.
 # 
 # <tt>FeatureTypeHistogram</tt> is an unique associative map where the keys specify the feature type (defined in namespace Pharm.FeatureType) of the pharmacophore features and the mapped integer values correspond to the feature type frequencies.
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 3 element vector holding floating point values of type <tt>float</tt>.
+# \brief Bounded 3 element vector holding floating point values of type <tt>float</tt>.
 # 
 class Vector3F(Boost.Python.instance):
 

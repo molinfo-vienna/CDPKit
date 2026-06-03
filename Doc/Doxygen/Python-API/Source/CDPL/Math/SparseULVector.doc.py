@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded sparse vector holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief Unbounded sparse vector holding unsigned integers of type <tt>unsigned long</tt>.
 # 
 class SparseULVector(Boost.Python.instance):
 

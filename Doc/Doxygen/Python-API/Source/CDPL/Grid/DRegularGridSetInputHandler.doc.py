@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A factory interface providing methods for the creation of Grid.DRegularGridSetReaderBase instances for reading data provided in a particular storage format.
+# \brief Factory interface providing methods for the creation of Grid.DRegularGridSetReaderBase instances for reading data provided in a particular storage format.
 # 
 class DRegularGridSetInputHandler(Boost.Python.instance):
 

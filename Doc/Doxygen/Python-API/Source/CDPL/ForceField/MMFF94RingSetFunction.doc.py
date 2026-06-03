@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper class used to store a user-defined MMFF94 ring set function.
+# \brief Generic wrapper class used to store a user-defined MMFF94 ring set function.
 # 
 class MMFF94RingSetFunction(Boost.Python.instance):
 

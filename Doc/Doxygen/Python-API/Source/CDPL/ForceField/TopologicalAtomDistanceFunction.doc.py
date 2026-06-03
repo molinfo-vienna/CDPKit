@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
+# \brief Generic wrapper class used to store a user-defined topological atom-pair distance function.
 # 
 class TopologicalAtomDistanceFunction(Boost.Python.instance):
 

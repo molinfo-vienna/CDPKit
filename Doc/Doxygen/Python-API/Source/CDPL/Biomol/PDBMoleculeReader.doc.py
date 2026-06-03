@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# \brief Reader for molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 # 
 class PDBMoleculeReader(Chem.MoleculeReaderBase):
 

@@ -1268,32 +1268,32 @@ namespace CDPL
         {};
 
         /**
-         * \brief An immutable grid where all elements have the value zero of type <tt>float</tt>.
+         * \brief Immutable grid where all elements have the value zero of type <tt>float</tt>.
          */
         typedef ZeroGrid<float>  FZeroGrid;
         
         /**
-         * \brief An immutable grid where all elements have the value zero of type <tt>double</tt>.
+         * \brief Immutable grid where all elements have the value zero of type <tt>double</tt>.
          */
         typedef ZeroGrid<double> DZeroGrid;
 
         /**
-         * \brief An immutable grid where all elements have the same value of type <tt>float</tt>.
+         * \brief Immutable grid where all elements have the same value of type <tt>float</tt>.
          */
         typedef ScalarGrid<float>  FScalarGrid;
         
         /**
-         * \brief An immutable grid where all elements have the same value of type <tt>double</tt>.
+         * \brief Immutable grid where all elements have the same value of type <tt>double</tt>.
          */
         typedef ScalarGrid<double> DScalarGrid;
 
         /**
-         * \brief An unbounded dense grid holding floating point values of type <tt>float</tt>.
+         * \brief Unbounded dense grid storing floating point values of type <tt>float</tt>.
          */
         typedef Grid<float> FGrid;
 
         /**
-         * \brief An unbounded dense grid holding floating point values of type <tt>double</tt>.
+         * \brief Unbounded dense grid storing floating point values of type <tt>double</tt>.
          */
         typedef Grid<double> DGrid;
     } // namespace Math

@@ -49,7 +49,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure providing a hierarchical view on biological macromolecules.
+         * \brief Data structure providing a hierarchical view on biological macromolecules.
          */
         class CDPL_BIOMOL_API HierarchyView
         {

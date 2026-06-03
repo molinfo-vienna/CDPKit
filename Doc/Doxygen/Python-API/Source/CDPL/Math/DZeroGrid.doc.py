@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An immutable grid where all elements have the value zero of type <tt>double</tt>.
+# \brief Immutable grid where all elements have the value zero of type <tt>double</tt>.
 # 
 class DZeroGrid(Boost.Python.instance):
 

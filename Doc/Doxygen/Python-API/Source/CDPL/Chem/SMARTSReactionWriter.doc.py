@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# \brief Writer for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 # 
 # <tt>SMARTSReactionWriter</tt> supports the following control-parameters:
 # 

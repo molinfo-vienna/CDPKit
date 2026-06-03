@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# \brief Writer for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 # 
 # <tt>RDFReactionWriter</tt> supports the following control-parameters:
 # 

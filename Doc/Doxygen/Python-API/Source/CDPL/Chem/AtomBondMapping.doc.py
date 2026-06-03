@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure for the common storage of related atom to atom and bond to bond mappings.
+# \brief Data structure for the common storage of related atom to atom and bond to bond mappings.
 # 
 # <tt>AtomBondMapping</tt> is used to represent arbitrary mappings between the atoms and bonds of two (or more) molecular graphs (e.g. results of a substructure search). The atom and bond mappings are stored in respective data members of type Chem.AtomMapping and Chem.BondMapping. They can be accessed by the provided getAtomMapping() and getBondMapping() family of overloaded methods.
 # 

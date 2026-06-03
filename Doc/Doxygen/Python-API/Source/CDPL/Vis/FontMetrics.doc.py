@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An interface class with methods that provide information about the metrics of a font.
+# \brief Interface providing methods for querying information about the metrics of a font.
 # 
 # Implementations of the <tt>FontMetrics</tt> interface provide height and width information for a given font and specific character glyphs in that font. Once a font has been specified with setFont(), there are several methods that operate on the font.
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense vector holding signed integers of type <tt>long</tt>.
+# \brief Unbounded dense vector holding signed integers of type <tt>long</tt>.
 # 
 class LVector(Boost.Python.instance):
 

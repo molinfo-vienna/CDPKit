@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 2x2 matrix holding floating point values of type <tt>float</tt>.
+# \brief Bounded 2x2 matrix holding floating point values of type <tt>float</tt>.
 # 
 class Matrix2F(Boost.Python.instance):
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A general 4-component quaternion with component values of type <tt>unsigned long</tt>.
+# \brief General 4-component quaternion with component values of type <tt>unsigned long</tt>.
 # 
 class ULQuaternion(Boost.Python.instance):
 

@@ -49,7 +49,7 @@ namespace CDPL
         class HierarchyViewModel;
 
         /**
-         * \brief A data structure for the representation of biological macromolecule chains.
+         * \brief Data structure for the representation of biological macromolecule chains.
          * \see Biomol::HierarchyView
          */
         class CDPL_BIOMOL_API HierarchyViewChain : public HierarchyViewNode

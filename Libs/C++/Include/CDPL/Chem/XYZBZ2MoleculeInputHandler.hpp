@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of bzip2-compressed molecule data in the <em>XYZ</em> format.
+         * \brief Handler for the input of bzip2-compressed molecule data in the <em>XYZ</em> format.
          * \since 1.1
          */
         typedef Util::DefaultDataInputHandler<XYZBZ2MoleculeReader, DataFormat::XYZ_BZ2> XYZBZ2MoleculeInputHandler;

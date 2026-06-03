@@ -43,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure for the common storage of related atom to atom and bond to bond mappings.
+         * \brief Data structure for the common storage of related atom to atom and bond to bond mappings.
          *
          * \c %AtomBondMapping is used to represent arbitrary mappings between the atoms and bonds of
          * two (or more) molecular graphs (e.g. results of a substructure search).

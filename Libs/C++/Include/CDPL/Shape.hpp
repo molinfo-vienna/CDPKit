@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Shape.
+ * \brief Convenience header including everything that is defined in namespace CDPL::Shape.
  */
 
 #ifndef CDPL_SHAPE_HPP

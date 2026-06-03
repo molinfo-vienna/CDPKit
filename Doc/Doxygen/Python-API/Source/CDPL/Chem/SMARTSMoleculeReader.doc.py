@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# \brief Reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 # 
 # <tt>SMARTSMoleculeReader</tt> supports the following control-parameter:
 # 

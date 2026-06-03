@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of 2D depictions of chemical structures in the <em>Portable Document Format (PDF)</em> [\ref WPDF].
+# \brief Handler for the output of 2D depictions of chemical structures in the <em>Portable Document Format (PDF)</em> [\ref WPDF].
 # 
 class PDFMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 

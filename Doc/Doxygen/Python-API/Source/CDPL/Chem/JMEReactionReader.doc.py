@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+# \brief Reader for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
 # 
 # <tt>JMEReactionReader</tt> implements the reading of Chem.Reaction objects from a <tt>std::istream</tt> instance that provides the reaction data in the native I/O format used by the <em>JME Molecular Editor</em> applet.
 # 

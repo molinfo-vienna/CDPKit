@@ -45,7 +45,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief A reader for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+         * \brief Reader for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
          *
          * \c %JMEReactionReader implements the reading of Chem::Reaction objects from a \c std::istream instance that
          * provides the reaction data in the native I/O format used by the <em>JME Molecular Editor</em> applet.

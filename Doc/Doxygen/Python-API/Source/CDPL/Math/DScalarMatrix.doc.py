@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>double</tt>.
+# \brief Memory-efficient immutable matrix where all elements have the same value of type <tt>double</tt>.
 # 
 class DScalarMatrix(Boost.Python.instance):
 

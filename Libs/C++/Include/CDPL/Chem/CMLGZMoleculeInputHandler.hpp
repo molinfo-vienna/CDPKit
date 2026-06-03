@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the input of gzip-compressed molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
+         * \brief Handler for the input of gzip-compressed molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
          * \since 1.2
          */
         typedef Util::DefaultDataInputHandler<CMLGZMoleculeReader, DataFormat::CML_GZ> CMLGZMoleculeInputHandler;

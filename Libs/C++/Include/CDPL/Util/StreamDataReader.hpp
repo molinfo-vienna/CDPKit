@@ -43,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A helper class that implements Base::DataReader for \c std::istream based data readers.
+         * \brief Helper class that implements Base::DataReader for \c std::istream based data readers.
          *
          * \c %StreamDataReader implements common operations for readers which retrieve the input data
          * from a \c std::istream instance. However, since \c %StreamDataReader does not know anything

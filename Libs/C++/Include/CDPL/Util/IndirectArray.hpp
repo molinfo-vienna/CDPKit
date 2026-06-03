@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamic array class for the storage of object pointers with an indirected query interface.
+         * \brief Dynamic array class for the storage of object pointers with an indirected query interface.
          *
          * \c %IndirectArray stores pointers to objects instead of object copies and provides an indirected query
          * interface. That is, methods for accessing an array element do not directly return the stored pointer

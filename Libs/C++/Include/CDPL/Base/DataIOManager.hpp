@@ -79,7 +79,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A singleton class that serves as a global registry for Base::DataInputHandler and Base::DataOutputHandler
+         * \brief Singleton class that serves as a global registry for Base::DataInputHandler and Base::DataOutputHandler
          *        implementation instances.
          *
          * \c %DataIOManager provides static methods for the registration and lookup of Base::DataInputHandler and

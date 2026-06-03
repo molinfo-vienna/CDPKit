@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A dynamically-sized array of harmonic distance-restraint potential records.
+         * \brief Dynamically-sized array of harmonic distance-restraint potential records.
          * \since 1.1
          */
         typedef Util::Array<ElasticPotential> ElasticPotentialList;

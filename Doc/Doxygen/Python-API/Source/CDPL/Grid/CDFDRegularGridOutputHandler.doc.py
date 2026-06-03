@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of regular spatial grid data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the output of regular spatial grid data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFDRegularGridOutputHandler(DRegularGridOutputHandler):
 

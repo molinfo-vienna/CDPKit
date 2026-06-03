@@ -42,7 +42,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief A data type for the storage and lookup of arbitrary atom to atom mappings.
+         * \brief Data type for the storage and lookup of arbitrary atom to atom mappings.
          *
          * Atoms mappings are stored as pairs of pointers to the mapped \c const Chem::Atom objects.
          * Mappings do not have to be unique and multiple mappings of a given atom to other atoms are possible.

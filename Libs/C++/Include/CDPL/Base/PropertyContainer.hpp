@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A class providing methods for the storage and lookup of object properties.
+         * \brief %Base class providing methods for the storage and lookup of object properties.
          *
          * The purpose of \c %PropertyContainer is to provide a common facility for the storage and lookup of
          * dynamic object properties to subclasses and their clients.

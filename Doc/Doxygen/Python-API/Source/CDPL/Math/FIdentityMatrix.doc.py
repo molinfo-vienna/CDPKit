@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable identity matrix with element values of type <tt>float</tt>.
+# \brief Memory-efficient immutable identity matrix with element values of type <tt>float</tt>.
 # 
 class FIdentityMatrix(Boost.Python.instance):
 

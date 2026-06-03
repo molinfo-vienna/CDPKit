@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An interface for reading data objects of type Chem.Molecule from an arbitrary data source.
+# \brief Interface for reading data objects of type Chem.Molecule from an arbitrary data source.
 # 
 # <tt>MoleculeReaderBase</tt> is the common interface of classes which read objects of type Chem.Molecule from some data source (e.g. a file) that provides the data encoded in a particular storage format.
 # 

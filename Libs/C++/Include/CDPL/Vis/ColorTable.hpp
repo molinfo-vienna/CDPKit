@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A container for the storage and lookup of Vis::Color objects that are associated with a
+         * \brief Container for the storage and lookup of Vis::Color objects that are associated with a
          *        numeric identifier.
          */
         class CDPL_VIS_API ColorTable : public Util::Map<std::size_t, Color>

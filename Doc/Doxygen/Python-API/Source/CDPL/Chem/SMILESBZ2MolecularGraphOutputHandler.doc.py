@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# \brief Handler for the output of bzip2-compressed molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 # 
 class SMILESBZ2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 

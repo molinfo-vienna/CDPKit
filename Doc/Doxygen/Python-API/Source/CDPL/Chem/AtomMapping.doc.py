@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data type for the storage and lookup of arbitrary atom to atom mappings.
+# \brief Data type for the storage and lookup of arbitrary atom to atom mappings.
 # 
 # Atoms mappings are stored as pairs of references to the mapped Chem.Atom objects. Mappings do not have to be unique and multiple mappings of a given atom to other atoms are possible. If a mapping entry for a particular atom does not exist, the methods AtomMapping.getValue() and AtomMapping.__getitem__() return a <em>None</em> reference to indicate that the lookup of the mapped atom has failed.
 # 

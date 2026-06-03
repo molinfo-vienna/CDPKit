@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A hierarchical library of torsion rules organized into categories.
+# \brief Data structure representing a hierarchical library of torsion rules organized into categories.
 # 
 # <tt>TorsionLibrary</tt> extends ConfGen.TorsionCategory with XML load/save methods and provides static set()/get() accessors for a process-wide default torsion library.
 # 

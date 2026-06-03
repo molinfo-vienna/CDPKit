@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A general 4-component quaternion with component values of type <tt>float</tt>.
+# \brief General 4-component quaternion with component values of type <tt>float</tt>.
 # 
 class FQuaternion(Boost.Python.instance):
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An index slice ( \f$ start, stride, size \f$) used for strided slicing of vector and matrix expressions.
+# \brief Index slice ( \f$ start, stride, size \f$) used for strided slicing of vector and matrix expressions.
 # 
 # Local position <em>i</em> is mapped to the global index \f$ start + i \cdot stride \f$. Negative strides (reverse iteration) are supported as long as the resulting indices stay non-negative.
 # 

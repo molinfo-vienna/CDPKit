@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper class used to store a user-defined atom predicate.
+# \brief Generic wrapper class used to store a user-defined atom predicate.
 # 
 class AtomPredicate(Boost.Python.instance):
 

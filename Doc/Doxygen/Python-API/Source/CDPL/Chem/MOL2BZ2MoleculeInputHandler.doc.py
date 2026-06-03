@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of bzip2-compressed molecule data in the <em>Sybyl MOL2</em> format.
+# \brief Handler for the input of bzip2-compressed molecule data in the <em>Sybyl MOL2</em> format.
 # 
 class MOL2BZ2MoleculeInputHandler(MoleculeInputHandler):
 

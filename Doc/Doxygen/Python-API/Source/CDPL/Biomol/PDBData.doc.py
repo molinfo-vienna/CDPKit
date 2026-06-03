@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure for the storage of data records found in PDB formatted data [\ref PDB].
+# \brief Data structure for the storage of data records found in PDB formatted data [\ref PDB].
 # 
 class PDBData(Boost.Python.instance):
 

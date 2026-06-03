@@ -52,7 +52,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief A writer for molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em>
+         * \brief Writer for molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em>
          *        [\ref INCHI] format.
          *
          * \c %INCHIMolecularGraphWriter implements the generation of \e InChI strings from Chem::MolecularGraph objects. The output data

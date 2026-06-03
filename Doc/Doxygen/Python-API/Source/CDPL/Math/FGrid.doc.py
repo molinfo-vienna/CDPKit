@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense grid holding floating point values of type <tt>float</tt>.
+# \brief Unbounded dense grid storing floating point values of type <tt>float</tt>.
 # 
 class FGrid(Boost.Python.instance):
 

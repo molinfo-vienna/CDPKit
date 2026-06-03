@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure for the storage of data records found in PDB
+         * \brief Data structure for the storage of data records found in PDB
          *        formatted data [\ref PDB].
          */
         class CDPL_BIOMOL_API PDBData

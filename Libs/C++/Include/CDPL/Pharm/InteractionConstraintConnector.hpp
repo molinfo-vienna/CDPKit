@@ -51,7 +51,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief A generic wrapper class used to store feature interaction constraint test functions.
+             * \brief Generic wrapper class used to store feature interaction constraint test functions.
              */
             typedef std::function<bool(const Feature&, const Feature&)> ConstraintFunction;
 

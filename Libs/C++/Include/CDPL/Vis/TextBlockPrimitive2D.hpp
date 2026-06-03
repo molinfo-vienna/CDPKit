@@ -54,7 +54,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A graphics primitive representing a block of styled text.
+         * \brief 2D graphics primitive representing a block of styled text.
          *
          * Class \c %TextBlockPrimitive2D is smiliar to Vis::TextLabelPrimitive2D but way more versatile.
          * \c %TextBlockPrimitive2D can store/render text that spans multiple lines with configurable line

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for feature container data in the native I/O format of the <em>CDPL</em>.
+# \brief Writer for feature container data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFFeatureContainerWriter(FeatureContainerWriterBase):
 

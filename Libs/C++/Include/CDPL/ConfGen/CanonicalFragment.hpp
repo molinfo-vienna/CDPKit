@@ -48,13 +48,12 @@ namespace CDPL
     {
 
         /**
-         * \brief A canonicalized molecular fragment with an associated hash code, used as the key for
-         *        fragment-library lookup in conformer generation.
+         * \brief Data structure representing a canonicalized molecular fragment.
          *
          * A \c %CanonicalFragment is constructed from a fragment of a parent molecular graph and stores
          * a canonicalized copy of the fragment's atoms and bonds. Canonicalization yields a stable
          * atom ordering and an associated hash code that uniquely identifies the topology (and,
-         * optionally, the stereochemistry) of the fragment.
+         * optionally, the stereochemistry) of the fragment. 
          *
          * \see ConfGen::FragmentLibrary
          */

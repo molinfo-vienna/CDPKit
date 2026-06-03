@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure for the representation of biological macromolecule chains.
+# \brief Data structure for the representation of biological macromolecule chains.
 # 
 # \see Biomol.HierarchyView
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# \brief Reader for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 # 
 # <tt>SMARTSReactionReader</tt> supports the following control-parameter:
 # 

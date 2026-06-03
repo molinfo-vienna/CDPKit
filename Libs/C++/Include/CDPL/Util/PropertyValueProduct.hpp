@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A binary functor that calculates the product of two property values retrieved 
+         * \brief Binary functor that calculates the product of two property values retrieved 
          *        from a pair of Base::PropertyContainer instances passed as argument.
          * \tparam ResType The result type.
          * \tparam PropertyValueType The property value type.

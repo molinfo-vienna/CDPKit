@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Pharm.
+ * \brief Convenience header including everything that is defined in namespace CDPL::Pharm.
  */
 
 #ifndef CDPL_PHARM_HPP

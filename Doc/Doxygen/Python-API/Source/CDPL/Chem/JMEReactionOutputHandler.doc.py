@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+# \brief Handler for the output of reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
 # 
 class JMEReactionOutputHandler(ReactionOutputHandler):
 

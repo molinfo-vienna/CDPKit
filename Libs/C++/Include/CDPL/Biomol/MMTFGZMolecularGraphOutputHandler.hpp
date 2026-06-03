@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em>
+         * \brief Handler for the output of gzip-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em>
          *        [\ref MMTF].
          * \since 1.2
          */

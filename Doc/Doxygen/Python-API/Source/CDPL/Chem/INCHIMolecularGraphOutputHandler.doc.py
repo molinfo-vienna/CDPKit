@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
+# \brief Handler for the output of molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
 # 
 class INCHIMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 

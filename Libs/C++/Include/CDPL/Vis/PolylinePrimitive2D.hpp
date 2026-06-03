@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A graphics primitive representing a set of connected line segments.
+         * \brief 2D graphics primitive representing a set of connected line segments.
          */
         class CDPL_VIS_API PolylinePrimitive2D : public PointArray2D,
                                                  public GraphicsPrimitive2D

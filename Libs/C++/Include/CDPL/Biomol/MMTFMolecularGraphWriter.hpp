@@ -51,7 +51,7 @@ namespace CDPL
         class MMTFDataWriter;
 
         /**
-         * \brief A writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
+         * \brief Writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
          * \since 1.2
          */
         class CDPL_BIOMOL_API MMTFMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>

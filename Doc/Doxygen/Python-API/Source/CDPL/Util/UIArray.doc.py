@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of unsigned integers.
+# \brief Array storing unsigned integers of type <tt>unsigned int</tt>.
 # 
 class UIArray(Boost.Python.instance):
 

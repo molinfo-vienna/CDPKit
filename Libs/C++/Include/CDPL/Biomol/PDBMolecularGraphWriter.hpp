@@ -51,7 +51,7 @@ namespace CDPL
         class PDBDataWriter;
 
         /**
-         * \brief A writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+         * \brief Writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
          */
         class CDPL_BIOMOL_API PDBMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
         {

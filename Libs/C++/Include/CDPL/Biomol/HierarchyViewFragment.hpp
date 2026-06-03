@@ -42,7 +42,7 @@ namespace CDPL
         class HierarchyViewChain;
 
         /**
-         * \brief A data structure for the representation of a single contiguous fragment of a biological macromolecule chain.
+         * \brief Data structure for the representation of a single contiguous fragment of a biological macromolecule chain.
          * \see Biomol::HierarchyView
          */
         class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode

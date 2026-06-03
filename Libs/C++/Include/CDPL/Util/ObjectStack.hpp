@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A reusable object pool with stack-like borrow/return semantics.
+         * \brief Reusable object pool with stack-like borrow/return semantics.
          *
          * \c %ObjectStack allocates objects of type \a T lazily on demand and recycles them across
          * subsequent get() calls instead of destroying them on put(). An optional pool size limit
@@ -62,12 +62,12 @@ namespace CDPL
             typedef T ObjectType;
 
             /**
-             * \brief A generic wrapper for functions creating new instances of \c ObjectType.
+             * \brief Generic wrapper for functions creating new instances of \c ObjectType.
              */
             typedef std::function<ObjectType*()>     ConstructorFunction;
 
             /**
-             * \brief A generic wrapper for functions operating on instances of \c ObjectType.
+             * \brief Generic wrapper for functions operating on instances of \c ObjectType.
              */
             typedef std::function<void(ObjectType&)> ObjectFunction;
 

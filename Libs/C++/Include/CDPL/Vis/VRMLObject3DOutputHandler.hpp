@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of Vis::Object3D instances in the <em>VRML</em> [\ref VRML97] format.
+         * \brief Handler for the output of Vis::Object3D instances in the <em>VRML</em> [\ref VRML97] format.
          * \since 1.3
          */
         typedef Util::DefaultDataOutputHandler<VRMLObject3DWriter, DataFormat::VRML> VRMLObject3DOutputHandler;

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A memory-efficient immutable matrix where all elements have the same value of type <tt>float</tt>.
+# \brief Memory-efficient immutable matrix where all elements have the same value of type <tt>float</tt>.
 # 
 class FScalarMatrix(Boost.Python.instance):
 

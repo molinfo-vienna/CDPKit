@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Chemical Markup Language</em> [\ref CML] format.
+         * \brief Handler for the output of bzip2-compressed molecular graph data in the <em>Chemical Markup Language</em> [\ref CML] format.
          * \since 1.2
          */
         typedef Util::DefaultDataOutputHandler<CMLBZ2MolecularGraphWriter, DataFormat::CML_BZ2> CMLBZ2MolecularGraphOutputHandler;

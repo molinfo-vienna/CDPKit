@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of gzip-compressed reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# \brief Handler for the output of gzip-compressed reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 # 
 class RDFGZReactionOutputHandler(ReactionOutputHandler):
 

@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A graphics primitive representing a text label.
+         * \brief 2D graphics primitive representing a text label.
          */
         class CDPL_VIS_API TextLabelPrimitive2D : public GraphicsPrimitive2D
         {

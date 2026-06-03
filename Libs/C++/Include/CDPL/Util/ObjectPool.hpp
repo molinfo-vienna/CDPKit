@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure that caches instances of type \c T up to a user specified amount. 
+         * \brief Data structure that caches instances of type \c T up to a user specified amount. 
          *
          * Instances of type \c T that are allocated via this pool (see get()) are preferentially taken from an
          * internally maintained list of previously allocated but now unused objects. If there are no
@@ -71,17 +71,17 @@ namespace CDPL
             typedef std::shared_ptr<ObjectType> SharedObjectPointer;
 
             /**
-             * \brief A generic wrapper for functions creating new instances of \c ObjectType.
+             * \brief Generic wrapper for functions creating new instances of \c ObjectType.
              */
             typedef std::function<ObjectType*()>     ConstructorFunction;
 
             /**
-             * \brief A generic wrapper for functions destroying instances of \c ObjectType.
+             * \brief Generic wrapper for functions destroying instances of \c ObjectType.
              */
             typedef std::function<void(ObjectType*)> DestructorFunction;
 
             /**
-             * \brief A generic wrapper for functions operating on instances of \c ObjectType.
+             * \brief Generic wrapper for functions operating on instances of \c ObjectType.
              */
             typedef std::function<void(ObjectType&)> ObjectFunction;
 

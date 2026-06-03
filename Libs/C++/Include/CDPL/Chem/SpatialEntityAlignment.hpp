@@ -84,27 +84,27 @@ namespace CDPL
             typedef typename TopologicalAlignment::ConstEntityIterator ConstEntityIterator;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined predicate to restrict allowed topological entity alignments.
+             * \brief Generic wrapper class used to store a user-defined predicate to restrict allowed topological entity alignments.
              */
             typedef std::function<bool(const Util::STPairArray&)> TopologicalAlignmentConstraintFunction;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined entity 3D-coordinates function.
+             * \brief Generic wrapper class used to store a user-defined entity 3D-coordinates function.
              */
             typedef std::function<const Math::Vector3D&(const EntityType&)> Entity3DCoordinatesFunction;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined entity alignment weight function.
+             * \brief Generic wrapper class used to store a user-defined entity alignment weight function.
              */
             typedef std::function<double(const EntityType&)> EntityWeightFunction;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined topological entity match constraint function.
+             * \brief Generic wrapper class used to store a user-defined topological entity match constraint function.
              */
             typedef typename TopologicalAlignment::EntityMatchFunction EntityMatchFunction;
 
             /**
-             * \brief A generic wrapper class used to store a user-defined entity-pair match constraint function.
+             * \brief Generic wrapper class used to store a user-defined entity-pair match constraint function.
              */
             typedef typename TopologicalAlignment::EntityPairMatchFunction EntityPairMatchFunction;
 

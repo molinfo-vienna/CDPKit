@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# \brief Writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 # 
 class PDBMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 

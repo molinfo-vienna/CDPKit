@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the output of gzip-compressed reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# \brief Handler for the output of gzip-compressed reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 # 
 class SMILESGZReactionOutputHandler(ReactionOutputHandler):
 

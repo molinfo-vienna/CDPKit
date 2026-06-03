@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A regular spatial grid implementation of the SpatialGrid interface.
+         * \brief Implementation of the Grid::SpatialGrid interface for regular spatial grids.
          *
          * \c %RegularGrid combines the property-bag/grid interface inherited from Grid::SpatialGrid with
          * the data storage and coordinate handling of Math::RegularSpatialGrid. The grid spacing can be

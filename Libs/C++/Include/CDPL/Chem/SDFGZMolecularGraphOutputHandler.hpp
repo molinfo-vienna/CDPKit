@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A handler for the output of gzip-compressed molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+         * \brief Handler for the output of gzip-compressed molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
          */
         typedef Util::DefaultDataOutputHandler<SDFGZMolecularGraphWriter, DataFormat::SDF_GZ> SDFGZMolecularGraphOutputHandler;
     } // namespace Chem

@@ -47,7 +47,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A global dictionary for the lookup of meta-data associated with the residues
+         * \brief Global dictionary for the lookup of meta-data associated with the residues
          *        in biological macromolecules.
          */
         class CDPL_BIOMOL_API ResidueDictionary
@@ -61,7 +61,7 @@ namespace CDPL
             {
 
               public:
-                /** \brief A generic wrapper for storing a user-defined function that retrieves the residue structure for a given three-letter code. */
+                /** \brief Generic wrapper for storing a user-defined function that retrieves the residue structure for a given three-letter code. */
                 typedef std::function<Chem::MolecularGraph::SharedPointer(const std::string&)> StructureRetrievalFunction;
 
                 /**

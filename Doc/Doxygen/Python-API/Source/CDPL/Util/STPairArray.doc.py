@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of pairs of unsigned integers of type <tt>std::size_t</tt>.
+# \brief Array storing pairs of unsigned integers of type <tt>std::size_t</tt>.
 # 
 class STPairArray(Boost.Python.instance):
 

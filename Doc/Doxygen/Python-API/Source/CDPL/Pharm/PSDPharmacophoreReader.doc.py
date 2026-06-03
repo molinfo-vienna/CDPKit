@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for pharmacophore data in the PSD-format of the <em>CDPL</em>.
+# \brief Reader for pharmacophore data in the PSD-format of the <em>CDPL</em>.
 # 
 class PSDPharmacophoreReader(PharmacophoreReaderBase):
 

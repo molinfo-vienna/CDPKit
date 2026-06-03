@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A generic wrapper for storing user-defined log message callback functions (see [\ref FUNWRP]).
+         * \brief Generic wrapper for storing user-defined log message callback functions (see [\ref FUNWRP]).
          *
          * Used by the conformer generation pipeline (Chem::ConformerGenerator, Chem::FragmentConformerGenerator,
          * Chem::FragmentLibraryGenerator) to forward textual log messages to the caller.

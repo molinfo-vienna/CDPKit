@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper class used to store a user-defined Pharm.Feature 3D-coordinates function.
+# \brief Generic wrapper class used to store a user-defined Pharm.Feature 3D-coordinates function.
 # 
 class Feature3DCoordinatesFunction(Boost.Python.instance):
 

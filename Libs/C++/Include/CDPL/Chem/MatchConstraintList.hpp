@@ -192,7 +192,7 @@ namespace CDPL
         };
 
         /**
-         * \brief A list of Chem::MatchConstraint instances combined with a logical Type (\c AND_LIST,
+         * \brief List of Chem::MatchConstraint instances combined with a logical Type (\c AND_LIST,
          *        \c NOT_AND_LIST, \c OR_LIST, or \c NOT_OR_LIST) that controls how the contained
          *        constraints are aggregated during query/target evaluation.
          *

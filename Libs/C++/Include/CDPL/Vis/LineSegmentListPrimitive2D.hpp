@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A graphics primitive representing a list of disjoint line segments.
+         * \brief 2D graphics primitive representing a list of disjoint line segments.
          */
         class CDPL_VIS_API LineSegmentListPrimitive2D : public PointArray2D,
                                                         public GraphicsPrimitive2D

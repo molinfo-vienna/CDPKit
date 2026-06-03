@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Biomol.
+ * \brief Convenience header including everything that is defined in namespace CDPL::Biomol.
  */
 
 #ifndef CDPL_BIOMOL_HPP

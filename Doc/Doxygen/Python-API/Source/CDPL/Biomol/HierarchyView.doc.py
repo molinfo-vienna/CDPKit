@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A data structure providing a hierarchical view on biological macromolecules.
+# \brief Data structure providing a hierarchical view on biological macromolecules.
 # 
 class HierarchyView(Boost.Python.instance):
 

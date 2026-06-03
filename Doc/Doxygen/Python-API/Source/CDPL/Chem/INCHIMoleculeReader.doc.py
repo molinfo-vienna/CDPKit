@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
+# \brief Reader for molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
 # 
 # <tt>INCHIMoleculeReader</tt> implements the conversion of <em>InChI</em> strings (or strings with auxiliary <em>InChI</em> information) to corresponding Chem.Molecule objects. The input data are read by means of a <tt>std::istream</tt> object that was provided to the <tt>INCHIMoleculeReader</tt> constructor.
 # 

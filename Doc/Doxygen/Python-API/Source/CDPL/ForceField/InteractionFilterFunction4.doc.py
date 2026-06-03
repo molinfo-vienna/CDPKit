@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A generic wrapper for storing user-defined four-atom interaction filtering functions (see [\ref FUNWRP]).
+# \brief Generic wrapper for storing user-defined four-atom interaction filtering functions (see [\ref FUNWRP]).
 # 
 # The function is invoked with the four interacting atoms (typically used for torsion and out-of-plane bending interactions) and is expected to return <tt>True</tt> if the interaction should be considered, and <tt>False</tt> if it should be skipped.
 # 

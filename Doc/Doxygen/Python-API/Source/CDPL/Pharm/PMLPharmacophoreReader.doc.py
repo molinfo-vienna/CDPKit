@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A reader for pharmacophore data in the native I/O format of <em>LigandScout</em>.
+# \brief Reader for pharmacophore data in the native I/O format of <em>LigandScout</em>.
 # 
 class PMLPharmacophoreReader(PharmacophoreReaderBase):
 

@@ -47,7 +47,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A class providing methods for the storage and lookup of control-parameter values.
+         * \brief %Base class providing methods for the storage and lookup of control-parameter values.
          *
          * The purpose of \c %ControlParameterContainer is to provide a common facility for the storage and lookup of
          * dynamic parameter values to subclasses which can be used to control their runtime-behaviour.
