@@ -27,13 +27,14 @@
 class RightFrustumMesh3D(TriangleMesh3D):
 
     ##
-    # \brief Initializes the \c %RightFrustumMesh3D instance.
-    # \param radius1 
-    # \param radius2 
-    # \param height 
-    # \param num_sides 
-    # \param close_btm 
-    # \param close_top 
+    # \brief Constructs a right-frustum triangle mesh with the specified bottom radius, top radius, height, side count and optional bottom/top caps.
+    # 
+    # \param radius1 The radius of the bottom circle.
+    # \param radius2 The radius of the top circle.
+    # \param height The height of the frustum.
+    # \param num_sides The number of sides used to approximate the lateral surface.
+    # \param close_btm <tt>True</tt> to include the bottom cap, and <tt>False</tt> to leave the bottom open.
+    # \param close_top <tt>True</tt> to include the top cap, and <tt>False</tt> to leave the top open.
     # 
     def __init__(radius1: float, radius2: float, height: float, num_sides: int, close_btm: bool = True, close_top: bool = True) -> None: pass
 

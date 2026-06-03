@@ -30,7 +30,11 @@ class EllipsePrimitive2D(GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs an undefined ellipse primitive.
+    # \brief Constructs an ellipse primitive centered at <em>pos</em> with the given diameters.
+    # 
+    # \param pos The center position of the ellipse.
+    # \param width The diameter of the ellipse in x-direction.
+    # \param height The diameter of the ellipse in y-direction.
     # 
     def __init__(pos: Math.Vector2D, width: float, height: float) -> None: pass
 

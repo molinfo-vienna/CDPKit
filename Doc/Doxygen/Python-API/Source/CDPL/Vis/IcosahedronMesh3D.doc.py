@@ -27,8 +27,9 @@
 class IcosahedronMesh3D(TriangleMesh3D):
 
     ##
-    # \brief Initializes the \c %IcosahedronMesh3D instance.
-    # \param radius 
+    # \brief Constructs an icosahedron mesh whose vertices lie on the sphere of the given <em>radius</em>.
+    # 
+    # \param radius The circumscribed-sphere radius of the icosahedron.
     # 
     def __init__(radius: float = 1.0) -> None: pass
 

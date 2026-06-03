@@ -27,11 +27,11 @@
 class Object3DPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.Object3DProperty.SHAPE property.
+    # 
     SHAPE = None
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Vis.Object3DProperty.TRANSFORMATION_MATRIX property.
+    # 
     TRANSFORMATION_MATRIX = [4,4]((1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1))

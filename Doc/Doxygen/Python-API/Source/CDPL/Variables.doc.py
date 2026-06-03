@@ -22,12 +22,12 @@
 ##
 # \brief <em>CDPL</em> build system information.
 # 
-BUILD_SYSTEM = 'Linux-6.12.0-124.52.1.el10_1.x86_64'
+BUILD_SYSTEM = 'Linux-6.12.0-211.16.1.el10_2.0.1.x86_64'
 
 ##
 # \brief The <em>CDPL</em> build time in the format <em>YYYYMMDDHHMM</em>.
 # 
-BUILD_TIME = 202606020643
+BUILD_TIME = 202606020738
 
 ##
 # \brief An identifier for the compiler that was used to build the <em>CDPL</em>.

@@ -27,50 +27,61 @@
 def setAgentAlignment(rxn: Chem.Reaction, show: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.AGENT_ALIGNMENT property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAgentAlignment(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.AGENT_ALIGNMENT property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.AGENT_ALIGNMENT property.
+# 
 def getAgentAlignment(rxn: Chem.Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.AGENT_ALIGNMENT property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearAgentAlignment(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param dir 
-#
+# \brief Sets the value of the Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em> to <em>dir</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param dir The new agent layout direction (see Vis.LayoutDirection).
+# 
 def setAgentLayoutDirection(rxn: Chem.Reaction, dir: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAgentLayoutDirection(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION property.
+# 
 def getAgentLayoutDirection(rxn: Chem.Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearAgentLayoutDirection(rxn: Chem.Reaction) -> None: pass
 
 ##
@@ -81,995 +92,1360 @@ def clearAgentLayoutDirection(rxn: Chem.Reaction) -> None: pass
 def setAgentLayout(rxn: Chem.Reaction, show: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.AGENT_LAYOUT property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAgentLayout(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.AGENT_LAYOUT property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.AGENT_LAYOUT property.
+# 
 def getAgentLayout(rxn: Chem.Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.AGENT_LAYOUT property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearAgentLayout(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param color 
-#
+# \brief Sets the value of the Vis.ReactionProperty.ARROW_COLOR property of the reaction <em>rxn</em> to <em>color</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param color The new arrow color.
+# 
 def setArrowColor(rxn: Chem.Reaction, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.ARROW_COLOR property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasArrowColor(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.ARROW_COLOR property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.ARROW_COLOR property.
+# 
 def getArrowColor(rxn: Chem.Reaction) -> Color: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.ARROW_COLOR property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearArrowColor(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param length 
-#
+# \brief Sets the value of the Vis.ReactionProperty.ARROW_HEAD_LENGTH property of the reaction <em>rxn</em> to <em>length</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param length The new arrow head length.
+# 
 def setArrowHeadLength(rxn: Chem.Reaction, length: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.ARROW_HEAD_LENGTH property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasArrowHeadLength(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.ARROW_HEAD_LENGTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.ARROW_HEAD_LENGTH property.
+# 
 def getArrowHeadLength(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.ARROW_HEAD_LENGTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearArrowHeadLength(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param width 
-#
+# \brief Sets the value of the Vis.ReactionProperty.ARROW_HEAD_WIDTH property of the reaction <em>rxn</em> to <em>width</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param width The new arrow head width.
+# 
 def setArrowHeadWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.ARROW_HEAD_WIDTH property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasArrowHeadWidth(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.ARROW_HEAD_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.ARROW_HEAD_WIDTH property.
+# 
 def getArrowHeadWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.ARROW_HEAD_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearArrowHeadWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param length 
-#
+# \brief Sets the value of the Vis.ReactionProperty.ARROW_LENGTH property of the reaction <em>rxn</em> to <em>length</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param length The new arrow length.
+# 
 def setArrowLength(rxn: Chem.Reaction, length: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.ARROW_LENGTH property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasArrowLength(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.ARROW_LENGTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.ARROW_LENGTH property.
+# 
 def getArrowLength(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.ARROW_LENGTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearArrowLength(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param width 
-#
+# \brief Sets the value of the Vis.ReactionProperty.ARROW_LINE_WIDTH property of the reaction <em>rxn</em> to <em>width</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param width The new arrow outline width.
+# 
 def setArrowLineWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.ARROW_LINE_WIDTH property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasArrowLineWidth(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.ARROW_LINE_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.ARROW_LINE_WIDTH property.
+# 
 def getArrowLineWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.ARROW_LINE_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearArrowLineWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param width 
-#
+# \brief Sets the value of the Vis.ReactionProperty.ARROW_SHAFT_WIDTH property of the reaction <em>rxn</em> to <em>width</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param width The new arrow shaft width.
+# 
 def setArrowShaftWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.ARROW_SHAFT_WIDTH property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasArrowShaftWidth(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.ARROW_SHAFT_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.ARROW_SHAFT_WIDTH property.
+# 
 def getArrowShaftWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.ARROW_SHAFT_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearArrowShaftWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param style 
-#
+# \brief Sets the value of the Vis.ReactionProperty.ARROW_STYLE property of the reaction <em>rxn</em> to <em>style</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param style The new arrow style (see Vis.ArrowStyle).
+# 
 def setArrowStyle(rxn: Chem.Reaction, style: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.ARROW_STYLE property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasArrowStyle(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.ARROW_STYLE property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.ARROW_STYLE property.
+# 
 def getArrowStyle(rxn: Chem.Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.ARROW_STYLE property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearArrowStyle(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param color 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_COLOR property of the molecular graph <em>molgraph</em> to <em>color</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param color The new value of the Vis.MolecularGraphProperty.ATOM_COLOR property.
+# 
 def setAtomColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_COLOR property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAtomColor(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_COLOR property.
+# 
 def getAtomColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearAtomColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param colors 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_COLOR_TABLE property of the molecular graph <em>molgraph</em> to <em>colors</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param colors The new value of the Vis.MolecularGraphProperty.ATOM_COLOR_TABLE property.
+# 
 def setAtomColorTable(molgraph: Chem.MolecularGraph, colors: ColorTable) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_COLOR_TABLE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAtomColorTable(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_COLOR_TABLE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_COLOR_TABLE property.
+# 
 def getAtomColorTable(molgraph: Chem.MolecularGraph) -> ColorTable: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_COLOR_TABLE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearAtomColorTable(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param color 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em> to <em>color</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param color The new value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR property.
+# 
+# \since 1.2
+# 
 def setAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR property. 
+# 
+# \since 1.2
+# 
 def getAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param font 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em> to <em>font</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param font The new value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT property.
+# 
+# \since 1.1
+# 
 def setAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT property. 
+# 
+# \since 1.1
+# 
 def getAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.1
+# 
 def clearAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE property.
+# 
+# \since 1.1
+# 
 def setAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE property. 
+# 
+# \since 1.1
+# 
 def getAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.1
+# 
 def clearAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param color 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em> to <em>color</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param color The new value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR property.
+# 
+# \since 1.2
+# 
 def setAtomCustomLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasAtomCustomLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR property. 
+# 
+# \since 1.2
+# 
 def getAtomCustomLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearAtomCustomLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param font 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em> to <em>font</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param font The new value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT property.
+# 
+# \since 1.2
+# 
 def setAtomCustomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasAtomCustomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT property. 
+# 
+# \since 1.2
+# 
 def getAtomCustomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearAtomCustomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE property.
+# 
+# \since 1.2
+# 
 def setAtomCustomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasAtomCustomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE property. 
+# 
+# \since 1.2
+# 
 def getAtomCustomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearAtomCustomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param brush 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em> to <em>brush</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param brush The new value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH property.
+# 
+# \since 1.2
+# 
 def setAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph, brush: Brush) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH property. 
+# 
+# \since 1.2
+# 
 def getAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> Brush: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param pen 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em> to <em>pen</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param pen The new value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN property.
+# 
+# \since 1.2
+# 
 def setAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph, pen: Pen) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN property. 
+# 
+# \since 1.2
+# 
 def getAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> Pen: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE property.
+# 
+# \since 1.2
+# 
 def setAtomHighlightAreaSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasAtomHighlightAreaSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE property. 
+# 
+# \since 1.2
+# 
 def getAtomHighlightAreaSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearAtomHighlightAreaSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param font 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em> to <em>font</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param font The new value of the Vis.MolecularGraphProperty.ATOM_LABEL_FONT property.
+# 
 def setAtomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAtomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_LABEL_FONT property.
+# 
 def getAtomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearAtomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param margin 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN property of the molecular graph <em>molgraph</em> to <em>margin</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param margin The new value of the Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN property.
+# 
 def setAtomLabelMargin(molgraph: Chem.MolecularGraph, margin: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAtomLabelMargin(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN property.
+# 
 def getAtomLabelMargin(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearAtomLabelMargin(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.ATOM_LABEL_SIZE property.
+# 
 def setAtomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasAtomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.ATOM_LABEL_SIZE property.
+# 
 def getAtomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearAtomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param color 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_COLOR property of the molecular graph <em>molgraph</em> to <em>color</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param color The new value of the Vis.MolecularGraphProperty.BOND_COLOR property.
+# 
 def setBondColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_COLOR property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasBondColor(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_COLOR property.
+# 
 def getBondColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearBondColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param color 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em> to <em>color</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param color The new value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR property.
+# 
+# \since 1.2
+# 
 def setBondConfigurationLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasBondConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR property. 
+# 
+# \since 1.2
+# 
 def getBondConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearBondConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param font 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em> to <em>font</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param font The new value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT property.
+# 
+# \since 1.1
+# 
 def setBondConfigurationLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasBondConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT property. 
+# 
+# \since 1.1
+# 
 def getBondConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.1
+# 
 def clearBondConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE property.
+# 
+# \since 1.1
+# 
 def setBondConfigurationLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.1
+# 
 def hasBondConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE property. 
+# 
+# \since 1.1
+# 
 def getBondConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.1
+# 
 def clearBondConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param color 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em> to <em>color</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param color The new value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR property.
+# 
+# \since 1.2
+# 
 def setBondCustomLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasBondCustomLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR property. 
+# 
+# \since 1.2
+# 
 def getBondCustomLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearBondCustomLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param font 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em> to <em>font</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param font The new value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT property.
+# 
+# \since 1.2
+# 
 def setBondCustomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasBondCustomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT property. 
+# 
+# \since 1.2
+# 
 def getBondCustomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearBondCustomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE property.
+# 
+# \since 1.2
+# 
 def setBondCustomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasBondCustomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE property. 
+# 
+# \since 1.2
+# 
 def getBondCustomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearBondCustomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param brush 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em> to <em>brush</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param brush The new value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH property.
+# 
+# \since 1.2
+# 
 def setBondHighlightAreaBrush(molgraph: Chem.MolecularGraph, brush: Brush) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasBondHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH property. 
+# 
+# \since 1.2
+# 
 def getBondHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> Brush: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearBondHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param pen 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em> to <em>pen</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param pen The new value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN property.
+# 
+# \since 1.2
+# 
 def setBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph, pen: Pen) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN property. 
+# 
+# \since 1.2
+# 
 def getBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> Pen: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param width 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH property of the molecular graph <em>molgraph</em> to <em>width</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param width The new value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH property.
+# 
+# \since 1.2
+# 
 def setBondHighlightAreaWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasBondHighlightAreaWidth(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH property. 
+# 
+# \since 1.2
+# 
 def getBondHighlightAreaWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearBondHighlightAreaWidth(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param font 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_LABEL_FONT property of the molecular graph <em>molgraph</em> to <em>font</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param font The new value of the Vis.MolecularGraphProperty.BOND_LABEL_FONT property.
+# 
 def setBondLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_LABEL_FONT property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasBondLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_LABEL_FONT property.
+# 
 def getBondLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearBondLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param margin 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_LABEL_MARGIN property of the molecular graph <em>molgraph</em> to <em>margin</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param margin The new value of the Vis.MolecularGraphProperty.BOND_LABEL_MARGIN property.
+# 
 def setBondLabelMargin(molgraph: Chem.MolecularGraph, margin: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_LABEL_MARGIN property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasBondLabelMargin(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_LABEL_MARGIN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_LABEL_MARGIN property.
+# 
 def getBondLabelMargin(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_LABEL_MARGIN property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearBondLabelMargin(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_LABEL_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.BOND_LABEL_SIZE property.
+# 
 def setBondLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_LABEL_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasBondLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_LABEL_SIZE property.
+# 
 def getBondLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearBondLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param spacing 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_LINE_SPACING property of the molecular graph <em>molgraph</em> to <em>spacing</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param spacing The new value of the Vis.MolecularGraphProperty.BOND_LINE_SPACING property.
+# 
 def setBondLineSpacing(molgraph: Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_LINE_SPACING property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasBondLineSpacing(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_LINE_SPACING property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_LINE_SPACING property.
+# 
 def getBondLineSpacing(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_LINE_SPACING property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearBondLineSpacing(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param width 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.BOND_LINE_WIDTH property of the molecular graph <em>molgraph</em> to <em>width</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param width The new value of the Vis.MolecularGraphProperty.BOND_LINE_WIDTH property.
+# 
 def setBondLineWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.BOND_LINE_WIDTH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasBondLineWidth(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.BOND_LINE_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.BOND_LINE_WIDTH property.
+# 
 def getBondLineWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.BOND_LINE_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearBondLineWidth(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -1139,84 +1515,102 @@ def getColor(bond: Chem.Bond) -> Color: pass
 def clearColor(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param dir 
-#
+# \brief Sets the value of the Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em> to <em>dir</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param dir The new layout direction (see Vis.LayoutDirection).
+# 
 def setComponentLayoutDirection(rxn: Chem.Reaction, dir: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasComponentLayoutDirection(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION property.
+# 
 def getComponentLayoutDirection(rxn: Chem.Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearComponentLayoutDirection(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param layout 
-#
+# \brief Sets the value of the Vis.ReactionProperty.COMPONENT_LAYOUT property of the reaction <em>rxn</em> to <em>layout</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param layout The new layout style (see Vis.LayoutStyle).
+# 
 def setComponentLayout(rxn: Chem.Reaction, layout: int) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.COMPONENT_LAYOUT property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasComponentLayout(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.COMPONENT_LAYOUT property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.COMPONENT_LAYOUT property.
+# 
 def getComponentLayout(rxn: Chem.Reaction) -> int: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.COMPONENT_LAYOUT property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearComponentLayout(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param margin 
-#
+# \brief Sets the value of the Vis.ReactionProperty.COMPONENT_MARGIN property of the reaction <em>rxn</em> to <em>margin</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param margin The new component margin.
+# 
 def setComponentMargin(rxn: Chem.Reaction, margin: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.COMPONENT_MARGIN property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasComponentMargin(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.COMPONENT_MARGIN property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.COMPONENT_MARGIN property.
+# 
 def getComponentMargin(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.COMPONENT_MARGIN property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearComponentMargin(rxn: Chem.Reaction) -> None: pass
 
 ##
@@ -1827,30 +2221,36 @@ def getDoubleBondTrimLength(bond: Chem.Bond) -> SizeSpecification: pass
 def clearDoubleBondTrimLength(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param length 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em> to <em>length</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param length The new value of the Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH property.
+# 
 def setDoubleBondTrimLength(molgraph: Chem.MolecularGraph, length: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasDoubleBondTrimLength(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH property.
+# 
 def getDoubleBondTrimLength(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearDoubleBondTrimLength(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -2018,30 +2418,44 @@ def getHighlightAreaOutlinePen(bond: Chem.Bond) -> Pen: pass
 def clearHighlightAreaOutlinePen(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param width 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH property of the molecular graph <em>molgraph</em> to <em>width</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param width The new value of the Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH property.
+# 
+# \since 1.2
+# 
 def setHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH property. 
+# 
+# \since 1.2
+# 
 def getHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
+# \since 1.2
+# 
 def clearHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -2398,104 +2812,133 @@ def clearLineWidth(bond: Chem.Bond) -> None: pass
 def setMaterial(obj: Object3D, material: Material) -> None: pass
 
 ##
-# \brief 
-# \param obj 
-# \return 
-#
+# \brief Tells whether the Vis.Object3DProperty.MATERIAL property of the 3D object <em>obj</em> is set.
+# 
+# \param obj The 3D object for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.3
+# 
 def hasMaterial(obj: Object3D) -> bool: pass
 
 ##
-# \brief 
-# \param obj 
-# \return 
-#
+# \brief Returns the value of the Vis.Object3DProperty.MATERIAL property of the 3D object <em>obj</em>.
+# 
+# \param obj The 3D object for which to return the property value.
+# 
+# \return The value of the Vis.Object3DProperty.MATERIAL property. 
+# 
+# \since 1.3
+# 
 def getMaterial(obj: Object3D) -> Material: pass
 
 ##
-# \brief 
-# \param obj 
-#
+# \brief Clears the value of the Vis.Object3DProperty.MATERIAL property of the 3D object <em>obj</em>.
+# 
+# \param obj The 3D object for which to clear the property value.
+# 
+# \since 1.3
+# 
 def clearMaterial(obj: Object3D) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param color 
-#
+# \brief Sets the value of the Vis.ReactionProperty.PLUS_SIGN_COLOR property of the reaction <em>rxn</em> to <em>color</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param color The new plus-sign color.
+# 
 def setPlusSignColor(rxn: Chem.Reaction, color: Color) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.PLUS_SIGN_COLOR property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasPlusSignColor(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.PLUS_SIGN_COLOR property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.PLUS_SIGN_COLOR property.
+# 
 def getPlusSignColor(rxn: Chem.Reaction) -> Color: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.PLUS_SIGN_COLOR property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearPlusSignColor(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param width 
-#
+# \brief Sets the value of the Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH property of the reaction <em>rxn</em> to <em>width</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param width The new plus-sign line width.
+# 
 def setPlusSignLineWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasPlusSignLineWidth(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH property.
+# 
 def getPlusSignLineWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearPlusSignLineWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param size 
-#
+# \brief Sets the value of the Vis.ReactionProperty.PLUS_SIGN_SIZE property of the reaction <em>rxn</em> to <em>size</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param size The new plus-sign size.
+# 
 def setPlusSignSize(rxn: Chem.Reaction, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.PLUS_SIGN_SIZE property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasPlusSignSize(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.PLUS_SIGN_SIZE property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.PLUS_SIGN_SIZE property.
+# 
 def getPlusSignSize(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.PLUS_SIGN_SIZE property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearPlusSignSize(rxn: Chem.Reaction) -> None: pass
 
 ##
@@ -2532,30 +2975,36 @@ def getRadicalElectronDotSize(atom: Chem.Atom) -> SizeSpecification: pass
 def clearRadicalElectronDotSize(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE property.
+# 
 def setRadicalElectronDotSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasRadicalElectronDotSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE property.
+# 
 def getRadicalElectronDotSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearRadicalElectronDotSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -2592,30 +3041,36 @@ def getReactionCenterLineLength(bond: Chem.Bond) -> SizeSpecification: pass
 def clearReactionCenterLineLength(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param length 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH property of the molecular graph <em>molgraph</em> to <em>length</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param length The new value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH property.
+# 
 def setReactionCenterLineLength(molgraph: Chem.MolecularGraph, length: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasReactionCenterLineLength(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH property.
+# 
 def getReactionCenterLineLength(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearReactionCenterLineLength(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -2652,84 +3107,102 @@ def getReactionCenterLineSpacing(bond: Chem.Bond) -> SizeSpecification: pass
 def clearReactionCenterLineSpacing(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param spacing 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING property of the molecular graph <em>molgraph</em> to <em>spacing</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param spacing The new value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING property.
+# 
 def setReactionCenterLineSpacing(molgraph: Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasReactionCenterLineSpacing(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING property.
+# 
 def getReactionCenterLineSpacing(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearReactionCenterLineSpacing(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param font 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em> to <em>font</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param font The new value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT property.
+# 
 def setSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT property.
+# 
 def getSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param size 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> to <em>size</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param size The new value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE property.
+# 
 def setSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE property.
+# 
 def getSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -2799,138 +3272,176 @@ def getSecondaryLabelSize(atom: Chem.Atom) -> SizeSpecification: pass
 def clearSecondaryLabelSize(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief 
-# \param obj 
-# \param shape 
-#
+# \brief Sets the value of the Vis.Object3DProperty.SHAPE property of the 3D object <em>obj</em> to <em>shape</em>.
+# 
+# \param obj The 3D object for which to set the property value.
+# \param shape The new value of the Vis.Object3DProperty.SHAPE property.
+# 
+# \since 1.3
+# 
 def setShape(obj: Object3D, shape: Shape3D) -> None: pass
 
 ##
-# \brief 
-# \param obj 
-# \return 
-#
+# \brief Tells whether the Vis.Object3DProperty.SHAPE property of the 3D object <em>obj</em> is set.
+# 
+# \param obj The 3D object for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.3
+# 
 def hasShape(obj: Object3D) -> bool: pass
 
 ##
-# \brief 
-# \param obj 
-# \return 
-#
+# \brief Returns the value of the Vis.Object3DProperty.SHAPE property of the 3D object <em>obj</em>.
+# 
+# \param obj The 3D object for which to return the property value.
+# 
+# \return The value of the Vis.Object3DProperty.SHAPE property. 
+# 
+# \since 1.3
+# 
 def getShape(obj: Object3D) -> object: pass
 
 ##
-# \brief 
-# \param obj 
-#
+# \brief Clears the value of the Vis.Object3DProperty.SHAPE property of the 3D object <em>obj</em>.
+# 
+# \param obj The 3D object for which to clear the property value.
+# 
+# \since 1.3
+# 
 def clearShape(obj: Object3D) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param show 
-#
+# \brief Sets the value of the Vis.ReactionProperty.SHOW_AGENTS property of the reaction <em>rxn</em> to <em>show</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param show <tt>True</tt> to show the agents, and <tt>False</tt> to hide them.
+# 
 def setShowAgents(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.SHOW_AGENTS property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasShowAgents(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.SHOW_AGENTS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.SHOW_AGENTS property.
+# 
 def getShowAgents(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.SHOW_AGENTS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearShowAgents(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param show 
-#
+# \brief Sets the value of the Vis.ReactionProperty.SHOW_PLUS_SIGNS property of the reaction <em>rxn</em> to <em>show</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param show <tt>True</tt> to draw the '+' signs, and <tt>False</tt> to hide them.
+# 
 def setShowPlusSigns(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.SHOW_PLUS_SIGNS property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasShowPlusSigns(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.SHOW_PLUS_SIGNS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.SHOW_PLUS_SIGNS property.
+# 
 def getShowPlusSigns(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.SHOW_PLUS_SIGNS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearShowPlusSigns(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param show 
-#
+# \brief Sets the value of the Vis.ReactionProperty.SHOW_PRODUCTS property of the reaction <em>rxn</em> to <em>show</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param show <tt>True</tt> to show the products, and <tt>False</tt> to hide them.
+# 
 def setShowProducts(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.SHOW_PRODUCTS property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasShowProducts(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.SHOW_PRODUCTS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.SHOW_PRODUCTS property.
+# 
 def getShowProducts(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.SHOW_PRODUCTS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearShowProducts(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \param show 
-#
+# \brief Sets the value of the Vis.ReactionProperty.SHOW_REACTANTS property of the reaction <em>rxn</em> to <em>show</em>.
+# 
+# \param rxn The reaction for which to set the property value.
+# \param show <tt>True</tt> to show the reactants, and <tt>False</tt> to hide them.
+# 
 def setShowReactants(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Tells whether the Vis.ReactionProperty.SHOW_REACTANTS property of the reaction <em>rxn</em> is set.
+# 
+# \param rxn The reaction for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasShowReactants(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-# \return 
-#
+# \brief Returns the value of the Vis.ReactionProperty.SHOW_REACTANTS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to return the property value.
+# 
+# \return The value of the Vis.ReactionProperty.SHOW_REACTANTS property.
+# 
 def getShowReactants(rxn: Chem.Reaction) -> bool: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Clears the value of the Vis.ReactionProperty.SHOW_REACTANTS property of the reaction <em>rxn</em>.
+# 
+# \param rxn The reaction for which to clear the property value.
+# 
 def clearShowReactants(rxn: Chem.Reaction) -> None: pass
 
 ##
@@ -2967,30 +3478,36 @@ def getStereoBondHashSpacing(bond: Chem.Bond) -> SizeSpecification: pass
 def clearStereoBondHashSpacing(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param spacing 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING property of the molecular graph <em>molgraph</em> to <em>spacing</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param spacing The new value of the Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING property.
+# 
 def setStereoBondHashSpacing(molgraph: Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasStereoBondHashSpacing(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING property.
+# 
 def getStereoBondHashSpacing(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearStereoBondHashSpacing(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -3027,57 +3544,77 @@ def getStereoBondWedgeWidth(bond: Chem.Bond) -> SizeSpecification: pass
 def clearStereoBondWedgeWidth(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param width 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH property of the molecular graph <em>molgraph</em> to <em>width</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param width The new value of the Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH property.
+# 
 def setStereoBondWedgeWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasStereoBondWedgeWidth(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH property.
+# 
 def getStereoBondWedgeWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearStereoBondWedgeWidth(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param obj 
-# \param mtx 
-#
+# \brief Sets the value of the Vis.Object3DProperty.TRANSFORMATION_MATRIX property of the 3D object <em>obj</em> to <em>mtx</em>.
+# 
+# \param obj The 3D object for which to set the property value.
+# \param mtx The new value of the Vis.Object3DProperty.TRANSFORMATION_MATRIX property.
+# 
+# \since 1.3
+# 
 def setTransformationMatrix(obj: Object3D, mtx: Math.Matrix4D) -> None: pass
 
 ##
-# \brief 
-# \param obj 
-# \return 
-#
+# \brief Tells whether the Vis.Object3DProperty.TRANSFORMATION_MATRIX property of the 3D object <em>obj</em> is set.
+# 
+# \param obj The 3D object for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.3
+# 
 def hasTransformationMatrix(obj: Object3D) -> bool: pass
 
 ##
-# \brief 
-# \param obj 
-# \return 
-#
+# \brief Returns the value of the Vis.Object3DProperty.TRANSFORMATION_MATRIX property of the 3D object <em>obj</em>.
+# 
+# \param obj The 3D object for which to return the property value.
+# 
+# \return The value of the Vis.Object3DProperty.TRANSFORMATION_MATRIX property. 
+# 
+# \since 1.3
+# 
 def getTransformationMatrix(obj: Object3D) -> Math.Matrix4D: pass
 
 ##
-# \brief 
-# \param obj 
-#
+# \brief Clears the value of the Vis.Object3DProperty.TRANSFORMATION_MATRIX property of the 3D object <em>obj</em>.
+# 
+# \param obj The 3D object for which to clear the property value.
+# 
+# \since 1.3
+# 
 def clearTransformationMatrix(obj: Object3D) -> None: pass
 
 ##
@@ -3114,30 +3651,36 @@ def getTripleBondTrimLength(bond: Chem.Bond) -> SizeSpecification: pass
 def clearTripleBondTrimLength(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param length 
-#
+# \brief Sets the value of the Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em> to <em>length</em>.
+# 
+# \param molgraph The molecular graph for which to set the property value.
+# \param length The new value of the Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH property.
+# 
 def setTripleBondTrimLength(molgraph: Chem.MolecularGraph, length: SizeSpecification) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether the Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em> is set.
+# 
+# \param molgraph The molecular graph for which to query the property value.
+# 
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
+# 
 def hasTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to return the property value.
+# 
+# \return The value of the Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH property.
+# 
 def getTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Clears the value of the Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH property of the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph for which to clear the property value.
+# 
 def clearTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -3156,15 +3699,21 @@ def calcVertexFromFaceNormals(mesh: TriangleMesh3D, weight_face_size: bool = Fal
 def calcVertexFromFaceNormals(mesh: TriangleMesh3D, normals: Math.Vector3DArray, weight_face_size: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Prepares <em>molgraph</em> for 2D visualization by perceiving all properties (aromaticity, hybridization, rings, stereo, etc.) that downstream 2D-rendering code expects to be set.
+# 
+# \param molgraph The molecular graph to prepare (modified in place).
+# 
+# \since 1.3
+# 
 def prepareFor2DVisualization(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param rxn 
-#
+# \brief Prepares <em>rxn</em> for 2D visualization by perceiving all properties (aromaticity, hybridization, rings, stereo, etc.) that downstream 2D-rendering code expects to be set on each reaction component.
+# 
+# \param rxn The reaction to prepare (modified in place).
+# 
+# \since 1.3
+# 
 def prepareFor2DVisualization(rxn: Chem.Reaction) -> None: pass
 
 ##

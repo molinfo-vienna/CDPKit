@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Object3D.
+# \brief Hierarchical 3D scene object that owns a list of nested sub-objects and inherits its property bag from Base.PropertyContainer.
+# 
+# Concrete 3D representations (e.g. those produced by Vis.FeatureContainerObject3DFactory) are typically assembled as trees of nested <tt>Object3D</tt> instances annotated with rendering-relevant properties.
 # 
 # \since 1.3
 # 
@@ -46,33 +48,42 @@ class Object3D(Base.PropertyContainer):
     def assign(self: Object3D) -> Object3D: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all sub-objects and clears all properties of this object.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the sub-object at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the sub-object to remove.
+    # 
+    # \throw Base.IndexError if the number of sub-objects is zero or <em>idx</em> is not in the range [0, getNumSubObjects() - 1].
+    # 
     def removeSubObject(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the sub-object at index <em>idx</em>.
+    # 
+    # \param idx The zero-based sub-object index.
+    # 
+    # \return A reference to the sub-object. 
+    # 
+    # \throw Base.IndexError if the number of sub-objects is zero or <em>idx</em> is not in the range [0, getNumSubObjects() - 1].
+    # 
     def getSubObject(idx: int) -> Object3D: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of sub-objects directly owned by this object.
+    # 
+    # \return The sub-object count.
+    # 
     def getNumSubObjects() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Creates a new empty sub-object and appends it to the sub-object list.
+    # 
+    # \return A reference to the newly created sub-object.
+    # 
     def addSubObject() -> Object3D: pass
 
     ##

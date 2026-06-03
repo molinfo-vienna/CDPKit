@@ -234,9 +234,12 @@ class Renderer2D(Boost.Python.instance):
     def drawPath(path: Path2D) -> None: pass
 
     ##
-    # \brief 
-    # \param path 
-    #
+    # \brief Enables clipping and establishes a new clip region.
+    # 
+    # The set clip region will affect all drawing operations by effectively masking out any changes to the drawing surface that are outside of the specified region.
+    # 
+    # \param path The path specifying the shape of the clip region.
+    # 
     def setClipPath(path: Path2D) -> None: pass
 
     ##
