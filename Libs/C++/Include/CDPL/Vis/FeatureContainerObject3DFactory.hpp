@@ -64,6 +64,11 @@ namespace CDPL
              */
             typedef std::shared_ptr<FeatureContainerObject3DFactory> SharedPointer;
 
+            /**
+             * \brief Creates an Object3D that provides a 3D representation of the pharmacophore \a cntnr.
+             * \param cntnr The feature container to visualize.
+             * \return A smart pointer to the constructed 3D object.
+             */
             Object3D::SharedPointer create(const Pharm::FeatureContainer& cntnr);
 
           private:

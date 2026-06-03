@@ -1,7 +1,7 @@
 /* 
  * Object3D.hpp
  *
- * This file is part of the Visical Data Processing Toolkit
+ * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
@@ -45,7 +45,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Object3D.
+         * \brief Hierarchical 3D scene object that owns a list of nested sub-objects and inherits its property bag
+         *        from Base::PropertyContainer.
+         *
+         * Concrete 3D representations (e.g. those produced by Vis::FeatureContainerObject3DFactory) are typically
+         * assembled as trees of nested \c %Object3D instances annotated with rendering-relevant properties.
+         *
          * \since 1.3
          */
         class CDPL_VIS_API Object3D : public Base::PropertyContainer
@@ -88,8 +93,15 @@ namespace CDPL
              */
             Object3D& operator=(const Object3D& obj);
 
+            /**
+             * \brief Removes all sub-objects and clears all properties of this object.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of sub-objects directly owned by this object.
+             * \return The sub-object count.
+             */
             std::size_t getNumSubObjects() const;
 
             /**
@@ -140,14 +152,40 @@ namespace CDPL
              */
             Object3DIterator end();
 
+            /**
+             * \brief Returns a \c const reference to the sub-object at index \a idx.
+             * \param idx The zero-based sub-object index.
+             * \return A \c const reference to the sub-object.
+             * \throw Base::IndexError if the number of sub-objects is zero or \a idx is not in the range [0, getNumSubObjects() - 1].
+             */
             const Object3D& getSubObject(std::size_t idx) const;
 
+            /**
+             * \brief Returns a non-\c const reference to the sub-object at index \a idx.
+             * \param idx The zero-based sub-object index.
+             * \return A non-\c const reference to the sub-object.
+             * \throw Base::IndexError if the number of sub-objects is zero or \a idx is not in the range [0, getNumSubObjects() - 1].
+             */
             Object3D& getSubObject(std::size_t idx);
 
+            /**
+             * \brief Creates a new empty sub-object and appends it to the sub-object list.
+             * \return A reference to the newly created sub-object.
+             */
             Object3D& addSubObject();
 
+            /**
+             * \brief Appends the supplied \a object to the sub-object list.
+             * \param object A smart pointer to the sub-object to append.
+             * \return A reference to the appended sub-object.
+             */
             Object3D& addSubObject(const SharedPointer& object);
 
+            /**
+             * \brief Removes the sub-object at index \a idx.
+             * \param idx The zero-based index of the sub-object to remove.
+             * \throw Base::IndexError if the number of sub-objects is zero or \a idx is not in the range [0, getNumSubObjects() - 1].
+             */
             void removeSubObject(std::size_t idx);
 
             /**

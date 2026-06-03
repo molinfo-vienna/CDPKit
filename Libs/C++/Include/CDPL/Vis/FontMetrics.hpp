@@ -71,7 +71,7 @@ namespace CDPL
         {
 
           public:
-            /**Ren
+            /**
              * \brief Virtual destructor.
              */
             virtual ~FontMetrics() {}

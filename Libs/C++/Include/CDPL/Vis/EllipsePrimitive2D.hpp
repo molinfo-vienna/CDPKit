@@ -63,11 +63,18 @@ namespace CDPL
                 width(0.0), height(0.0) {}
 
             /**
-             * \brief Constructs an undefined ellipse primitive.
+             * \brief Constructs an ellipse primitive centered at \a pos with the given diameters.
+             * \param pos The center position of the ellipse.
+             * \param width The diameter of the ellipse in x-direction.
+             * \param height The diameter of the ellipse in y-direction.
              */
             EllipsePrimitive2D(const Math::Vector2D& pos, double width, double height):
                 position(pos), width(width), height(height) {}
 
+            /**
+             * \brief Renders the ellipse via \a renderer using the configured pen and brush.
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer) const;
 
             /**
@@ -130,8 +137,17 @@ namespace CDPL
              */
             double getHeight() const;
 
+            /**
+             * \brief Creates a dynamically allocated copy of this primitive.
+             * \return A smart pointer to the copy.
+             */
             GraphicsPrimitive2D::SharedPointer clone() const;
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle of the ellipse.
+             * \param bounds The Rectangle2D instance storing the result.
+             * \param font_metrics Unused for ellipses; included to satisfy the GraphicsPrimitive2D interface.
+             */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
           private:

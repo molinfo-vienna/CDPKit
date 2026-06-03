@@ -610,8 +610,16 @@ namespace CDPL
 
             ReactionView2D& operator=(const ReactionView2D&) = delete;
 
+            /**
+             * \brief Renders the visualized reaction via \a renderer.
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer);
 
+            /**
+             * \brief Specifies the font metrics object used for text-size calculations.
+             * \param font_metrics A pointer to the font metrics object (or \e null to clear).
+             */
             void setFontMetrics(FontMetrics* font_metrics);
 
             /**
@@ -636,6 +644,10 @@ namespace CDPL
              */
             const Chem::Reaction* getReaction() const;
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle that contains the rendered reaction model.
+             * \param bounds The Rectangle2D instance storing the result.
+             */
             void getModelBounds(Rectangle2D& bounds);
 
           private:

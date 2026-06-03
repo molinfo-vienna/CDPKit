@@ -55,6 +55,16 @@ namespace CDPL
              */
             typedef std::shared_ptr<RightFrustumMesh3D> SharedPointer;
 
+            /**
+             * \brief Constructs a right-frustum triangle mesh with the specified bottom radius, top radius, height,
+             *        side count and optional bottom/top caps.
+             * \param radius1 The radius of the bottom circle.
+             * \param radius2 The radius of the top circle.
+             * \param height The height of the frustum.
+             * \param num_sides The number of sides used to approximate the lateral surface.
+             * \param close_btm \c true to include the bottom cap, and \c false to leave the bottom open.
+             * \param close_top \c true to include the top cap, and \c false to leave the top open.
+             */
             RightFrustumMesh3D(double radius1, double radius2, double height, std::size_t num_sides,
                                bool close_btm = true, bool close_top = true);
          };

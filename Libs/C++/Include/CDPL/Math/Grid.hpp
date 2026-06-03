@@ -319,6 +319,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Adds the grid expression \a e to the wrapped grid without intermediate temporary.
+             * \tparam E The source grid expression type.
+             * \param e The source grid expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             GridReference& plusAssign(const GridExpression<E>& e)
             {
@@ -326,6 +332,12 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Subtracts the grid expression \a e from the wrapped grid without intermediate temporary.
+             * \tparam E The source grid expression type.
+             * \param e The source grid expression.
+             * \return A reference to itself.
+             */
             template <typename E>
             GridReference& minusAssign(const GridExpression<E>& e)
             {
@@ -333,11 +345,20 @@ namespace CDPL
                 return *this;
             }
 
+            /**
+             * \brief Swaps the contents of the wrapped grid with those of the grid wrapped by \a r.
+             * \param r The reference to swap with.
+             */
             void swap(GridReference& r)
             {
                 data.swap(r.data);
             }
 
+            /**
+             * \brief ADL-enabled free-function form of swap().
+             * \param r1 The first reference.
+             * \param r2 The second reference.
+             */
             friend void swap(GridReference& r1, GridReference& r2)
             {
                 r1.swap(r2);

@@ -43,6 +43,12 @@ namespace CDPL
     namespace Vis
     {
 
+        /**
+         * \brief Generic writer that converts Pharm::FeatureContainer instances into a 3D scene representation
+         *        (via Vis::FeatureContainerObject3DFactory) and forwards them to a \a WriterImpl Object3D writer.
+         * \tparam WriterImpl The underlying Object3D writer implementation (e.g. an STL/VRML/PLY writer).
+         * \since 1.3
+         */
         template <typename WriterImpl>
         class FeatureContainerObject3DWriter : public Base::DataWriter<Pharm::FeatureContainer>
         {
@@ -55,15 +61,35 @@ namespace CDPL
             FeatureContainerObject3DWriter(std::ostream& os);
             FeatureContainerObject3DWriter(const FeatureContainerObject3DWriter&) = delete;
 
+            /**
+             * \brief Destructor; closes the underlying Object3D writer.
+             */
             ~FeatureContainerObject3DWriter();
 
+            /**
+             * \brief Builds a 3D scene representation of \a cntnr and forwards it to the underlying \a WriterImpl.
+             * \param cntnr The feature container to write.
+             * \return A reference to itself.
+             */
             Base::DataWriter<Pharm::FeatureContainer>& write(const Pharm::FeatureContainer& cntnr);
 
+            /**
+             * \brief Tells whether the underlying writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the underlying writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
             FeatureContainerObject3DWriter& operator=(const FeatureContainerObject3DWriter&) = delete;
 
+            /**
+             * \brief Closes the underlying Object3D writer.
+             */
             void close();
 
           private:

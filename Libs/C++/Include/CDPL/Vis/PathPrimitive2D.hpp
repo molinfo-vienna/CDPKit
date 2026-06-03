@@ -63,6 +63,10 @@ namespace CDPL
              */
             PathPrimitive2D() {}
 
+            /**
+             * \brief Renders the path via \a renderer using the configured pen and brush.
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer) const;
 
             /**
@@ -89,8 +93,17 @@ namespace CDPL
              */
             const Brush& getBrush() const;
 
+            /**
+             * \brief Creates a dynamically allocated copy of this primitive.
+             * \return A smart pointer to the copy.
+             */
             GraphicsPrimitive2D::SharedPointer clone() const;
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle of the path.
+             * \param bounds The Rectangle2D instance storing the result.
+             * \param font_metrics Unused for paths; included to satisfy the GraphicsPrimitive2D interface.
+             */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
           private:

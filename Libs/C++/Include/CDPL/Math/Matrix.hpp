@@ -338,18 +338,36 @@ namespace CDPL
         {
 
           public:
+            /** \brief Convenience alias for this instantiation. */
             typedef InitListMatrix                                            SelfType;
+            /** \brief The nested \c std::initializer_list type wrapped by this matrix. */
             typedef std::initializer_list<std::initializer_list<T> >          InitializerListType;
+            /** \brief The scalar value type. */
             typedef typename InitializerListType::value_type::value_type      ValueType;
+            /** \brief Constant reference type to an element. */
             typedef typename InitializerListType::value_type::const_reference ConstReference;
+            /** \brief Mutable reference type to an element. */
             typedef typename InitializerListType::value_type::reference       Reference;
+            /** \brief The unsigned size type. */
             typedef typename InitializerListType::size_type                   SizeType;
+            /** \brief The signed difference type. */
             typedef typename std::ptrdiff_t                                   DifferenceType;
+            /** \brief Closure type used when this matrix appears inside another expression. */
             typedef SelfType                                                  ClosureType;
+            /** \brief Constant closure type used when this matrix appears inside another expression. */
             typedef const SelfType                                            ConstClosureType;
+            /** \brief Concrete temporary matrix type used by expression-template machinery. */
             typedef Matrix<T, std::vector<T> >                                MatrixTemporaryType;
+            /** \brief Concrete temporary vector type used by expression-template machinery. */
             typedef Vector<T, std::vector<T> >                                VectorTemporaryType;
 
+            /**
+             * \brief Constructs an \c %InitListMatrix wrapping the nested initializer list \a l.
+             *
+             * The second-dimension size is the longest inner list's length; shorter rows are zero-padded on access.
+             *
+             * \param l The nested initializer list.
+             */
             InitListMatrix(InitializerListType l):
                 list(l), size2(0)
             {
@@ -357,6 +375,13 @@ namespace CDPL
                     size2 = std::max(size2, r.size());
             }
 
+            /**
+             * \brief Returns a mutable reference to the element at row \a i and column \a j.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return A mutable reference to the element (or to a zero element if \a j is past the row's length).
+             * \throw Base::IndexError if \a i or \a j is out of range.
+             */
             Reference operator()(SizeType i, SizeType j)
             {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
@@ -367,6 +392,13 @@ namespace CDPL
                 return *((list.begin() + i)->begin() + j);
             }
 
+            /**
+             * \brief Returns a \c const reference to the element at row \a i and column \a j.
+             * \param i The zero-based row index.
+             * \param j The zero-based column index.
+             * \return A \c const reference to the element (or to a zero element if \a j is past the row's length).
+             * \throw Base::IndexError if \a i or \a j is out of range.
+             */
             ConstReference operator()(SizeType i, SizeType j) const
             {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
@@ -377,16 +409,28 @@ namespace CDPL
                 return *((list.begin() + i)->begin() + j);
             }
 
+            /**
+             * \brief Returns the number of rows.
+             * \return The first-dimension size.
+             */
             SizeType getSize1() const
             {
                 return list.size();
             }
 
+            /**
+             * \brief Returns the number of columns (the longest row length).
+             * \return The second-dimension size.
+             */
             SizeType getSize2() const
             {
                 return size2;
             }
 
+            /**
+             * \brief Tells whether the matrix is empty (zero rows or zero columns).
+             * \return \c true if the matrix is empty, and \c false otherwise.
+             */
             bool isEmpty() const
             {
                 return (size2 == 0 || list.size() == 0);

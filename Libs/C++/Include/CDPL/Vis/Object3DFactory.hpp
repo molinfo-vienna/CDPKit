@@ -61,6 +61,11 @@ namespace CDPL
              */
             virtual ~Object3DFactory() {}
 
+            /**
+             * \brief Creates a Vis::Object3D instance providing a 3D representation of the data object \a data.
+             * \param data The data object to visualize.
+             * \return A smart pointer to the constructed 3D object.
+             */
             virtual Object3D::SharedPointer create(const T& data) = 0;
         };
     } // namespace Vis

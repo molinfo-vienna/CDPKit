@@ -47,7 +47,9 @@ namespace CDPL
         namespace Object3DPropertyDefault
         {
 
+            /** \brief Default value of the Vis::Object3DProperty::SHAPE property. */
             extern CDPL_VIS_API const Shape3D::SharedPointer SHAPE;
+            /** \brief Default value of the Vis::Object3DProperty::TRANSFORMATION_MATRIX property. */
             extern CDPL_VIS_API const Math::Matrix4D         TRANSFORMATION_MATRIX;
             
         } // namespace Object3DPropertyDefault

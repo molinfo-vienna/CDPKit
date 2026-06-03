@@ -61,6 +61,10 @@ namespace CDPL
              */
             void translate(const Math::Vector2D& vec);
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle that contains all stored points.
+             * \param bounds The Rectangle2D instance storing the result.
+             */
             void getBounds(Rectangle2D& bounds) const;
 
           private:

@@ -61,6 +61,10 @@ namespace CDPL
              */
             PointListPrimitive2D() {}
 
+            /**
+             * \brief Renders the points via \a renderer using the configured pen.
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer) const;
 
             /**
@@ -75,8 +79,17 @@ namespace CDPL
              */
             const Pen& getPen() const;
 
+            /**
+             * \brief Creates a dynamically allocated copy of this primitive.
+             * \return A smart pointer to the copy.
+             */
             GraphicsPrimitive2D::SharedPointer clone() const;
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle that contains all stored points.
+             * \param bounds The Rectangle2D instance storing the result.
+             * \param font_metrics Unused for point lists; included to satisfy the GraphicsPrimitive2D interface.
+             */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
           private:

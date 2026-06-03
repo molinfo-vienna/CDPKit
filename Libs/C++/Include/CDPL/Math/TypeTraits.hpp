@@ -300,6 +300,7 @@ namespace CDPL
         struct VectorTemporaryTraits
         {
 
+            /** \brief The concrete temporary vector type compatible with the vector expression \a V. */
             typedef typename V::VectorTemporaryType Type;
         };
 
@@ -311,6 +312,7 @@ namespace CDPL
         struct MatrixTemporaryTraits
         {
 
+            /** \brief The concrete temporary matrix type compatible with the matrix expression \a M. */
             typedef typename M::MatrixTemporaryType Type;
         };
 
@@ -322,6 +324,7 @@ namespace CDPL
         struct QuaternionTemporaryTraits
         {
 
+            /** \brief The concrete temporary quaternion type compatible with the quaternion expression \a Q. */
             typedef typename Q::QuaternionTemporaryType Type;
         };
 
@@ -333,6 +336,7 @@ namespace CDPL
         struct GridTemporaryTraits
         {
 
+            /** \brief The concrete temporary grid type compatible with the grid expression \a G. */
             typedef typename G::GridTemporaryType Type;
         };
 
