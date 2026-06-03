@@ -590,7 +590,7 @@ def calcWienerIndex(molgraph: Chem.MolecularGraph) -> int: pass
 ##
 # \brief Calculates the first Zagreb index ( \f$ M_1 \f$) of <em>molgraph</em>.
 # 
-# \f$ M_1 \f$ is the sum of squared heavy-atom degrees over all heavy atoms.
+# \f$ M_1 \f$ is the sum of squared heavy atom degrees over all heavy atoms.
 # 
 # \param molgraph The molecular graph.
 # 
@@ -601,7 +601,7 @@ def calcZagrebIndex1(molgraph: Chem.MolecularGraph) -> int: pass
 ##
 # \brief Calculates the second Zagreb index ( \f$ M_2 \f$) of <em>molgraph</em>.
 # 
-# \f$ M_2 \f$ is the sum of the products of the heavy-atom degrees over all heavy-atom bonds.
+# \f$ M_2 \f$ is the sum of the products of the heavy atom degrees over all heavy bonds.
 # 
 # \param molgraph The molecular graph.
 # 

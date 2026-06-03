@@ -22,8 +22,6 @@
 ##
 # \brief Writer for molecular graph data in the bzip2-compressed <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
-# \since 1.2
-# 
 class MMTFBZ2MolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##

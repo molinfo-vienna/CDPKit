@@ -27,90 +27,90 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief Specifies the bond order.
     # 
-    # <b>Value Type:</b> std::size_t
+    # \valuetype  <tt>std::size_t</tt>
     # 
     ORDER = CDPL.Base.LookupKey('ORDER')
 
     ##
     # \brief Specifies the SYBYL bond type (see namespace Chem.SybylBondType).
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     SYBYL_TYPE = CDPL.Base.LookupKey('SYBYL_TYPE')
 
     ##
     # \brief Specifies whether the bond is a member of any ring.
     # 
-    # <b>Value Type:</b> bool
+    # \valuetype  <tt>bool</tt>
     # 
     RING_FLAG = CDPL.Base.LookupKey('RING_FLAG')
 
     ##
     # \brief Specifies whether the bond is a member of an aromatic ring system.
     # 
-    # <b>Value Type:</b> bool
+    # \valuetype  <tt>bool</tt>
     # 
     AROMATICITY_FLAG = CDPL.Base.LookupKey('AROMATICITY_FLAG')
 
     ##
     # \brief Specifies the stereochemical descriptor of the bond.
     # 
-    # <b>Value Type:</b> Chem.StereoDescriptor
+    # \valuetype  Chem.StereoDescriptor
     # 
     STEREO_DESCRIPTOR = CDPL.Base.LookupKey('STEREO_DESCRIPTOR')
 
     ##
     # \brief Specifies whether the bond is a stereogenic center.
     # 
-    # <b>Value Type:</b> bool
+    # \valuetype  <tt>bool</tt>
     # 
     STEREO_CENTER_FLAG = CDPL.Base.LookupKey('STEREO_CENTER_FLAG')
 
     ##
     # \brief Specifies the CIP stereochemical configuration label of the bond (see namespace Chem.CIPDescriptor).
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     CIP_CONFIGURATION = CDPL.Base.LookupKey('CIP_CONFIGURATION')
 
     ##
     # \brief Specifies the bond direction in SMILES and SMARTS strings (see [\ref SMILES, \ref SMARTS], namespace Chem.BondDirection).
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     DIRECTION = CDPL.Base.LookupKey('DIRECTION')
 
     ##
     # \brief Specifies the 2D stereo flag of the bond (see namespace Chem.BondStereoFlag).
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     STEREO_2D_FLAG = CDPL.Base.LookupKey('STEREO_2D_FLAG')
 
     ##
     # \brief Specifies the reaction center status of the bond (see namespace Chem.ReactionCenterStatus).
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     REACTION_CENTER_STATUS = CDPL.Base.LookupKey('REACTION_CENTER_STATUS')
 
     ##
     # \brief Specifies the substructure matching constraints associated with the bond.
     # 
-    # <b>Value Type:</b> Chem.MatchConstraintList.SharedPointer
+    # \valuetype  Chem.MatchConstraintList.SharedPointer
     # 
     MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
     # \brief Specifies the substructure matching expression associated with the bond.
     # 
-    # <b>Value Type:</b> Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph>.SharedPointer
+    # \valuetype  Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph>.SharedPointer
     # 
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 
     ##
     # \brief Specifies a string representation of the substructure matching expression associated with the bond.
     # 
-    # <b>Value Type:</b> std::string
+    # \valuetype  <tt>std::string</tt>
     # 
     MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey('MATCH_EXPRESSION_STRING')

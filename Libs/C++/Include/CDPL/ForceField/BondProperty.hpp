@@ -53,7 +53,7 @@ namespace CDPL
             /**
              * \brief Specifies the MMFF94 bond type index.
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_TYPE_INDEX;
         }

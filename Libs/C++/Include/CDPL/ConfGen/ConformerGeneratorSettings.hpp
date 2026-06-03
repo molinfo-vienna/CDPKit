@@ -330,7 +330,7 @@ namespace CDPL
             void addMaxNumOutputConformersRange(std::size_t num_rot_bonds, std::size_t max_num);
 
             /**
-             * \brief Sets the minimum pairwise heavy-atom RMSD that conformers in the output ensemble must keep.
+             * \brief Sets the minimum pairwise heavy atom RMSD that conformers in the output ensemble must keep.
              * \param min_rmsd The new minimum RMSD threshold (in &Aring;).
              */
             void setMinRMSD(double min_rmsd);

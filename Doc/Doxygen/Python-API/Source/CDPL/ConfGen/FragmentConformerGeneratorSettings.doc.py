@@ -125,7 +125,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         def getMaxNumOutputConformers() -> int: pass
 
         ##
-        # \brief Sets the minimum pairwise heavy-atom RMSD that fragment conformers in the output set must have.
+        # \brief Sets the minimum pairwise heavy atom RMSD that fragment conformers in the output set must have.
         # 
         # \param min_rmsd The new minimum RMSD threshold (in &Aring;).
         # 

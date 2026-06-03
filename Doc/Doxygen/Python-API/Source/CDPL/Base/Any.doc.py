@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A safe, type checked container for arbitrary data of variable type.
+# \brief Safe, type checked container for arbitrary data of variable type.
 # 
 # The code is based on the <tt>std::experimental.any</tt> (N4562, merged into C++17) implementation for C++11 compilers by <a href="https://github.com/thelink2012">Denilson das Mercês Amorim</a>. <tt>Any</tt> provides an optimization for small objects objects with a size of up to 2 words such as <tt>int</tt>, <tt>float</tt> and <tt>std::shared_ptr</tt>. Storing those objects in the container will not trigger a dynamic allocation.
 # 

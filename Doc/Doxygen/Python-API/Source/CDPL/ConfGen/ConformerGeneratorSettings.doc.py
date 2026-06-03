@@ -391,7 +391,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def addMaxNumOutputConformersRange(num_rot_bonds: int, max_num: int) -> None: pass
 
     ##
-    # \brief Sets the minimum pairwise heavy-atom RMSD that conformers in the output ensemble must keep.
+    # \brief Sets the minimum pairwise heavy atom RMSD that conformers in the output ensemble must keep.
     # 
     # \param min_rmsd The new minimum RMSD threshold (in &Aring;).
     # 

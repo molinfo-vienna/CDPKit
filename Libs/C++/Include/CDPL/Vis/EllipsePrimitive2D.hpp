@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief 2D graphics primitive representing a ellipse.
+         * \brief 2D graphics primitive representing an ellipse.
          */
         class CDPL_VIS_API EllipsePrimitive2D : public GraphicsPrimitive2D
         {

@@ -110,7 +110,7 @@ namespace CDPL
             void addSearchPattern(const MolecularGraph::SharedPointer& molgraph);
 
             /**
-             * \brief Returns the number of stored substructure-search patterns.
+             * \brief Returns the number of stored substructure search patterns.
              * \return The number of stored search patterns.
              */
             std::size_t getNumSearchPatterns() const;

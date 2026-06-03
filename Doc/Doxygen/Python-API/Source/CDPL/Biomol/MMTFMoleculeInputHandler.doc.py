@@ -22,8 +22,6 @@
 ##
 # \brief Handler for the input of molecule data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
-# \since 1.2
-# 
 class MMTFMoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##

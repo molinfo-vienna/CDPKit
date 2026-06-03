@@ -507,12 +507,12 @@ def getHBondDonorType(atom: Chem.Atom) -> int: pass
 def clearHBondDonorType(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief Returns the number of heavy-atom neighbors of <em>atom</em> in <em>molgraph</em>.
+# \brief Returns the number of heavy atom neighbors of <em>atom</em> in <em>molgraph</em>.
 # 
 # \param atom The atom.
 # \param molgraph The molecular graph.
 # 
-# \return The heavy-atom neighbor count.
+# \return The heavy atom neighbor count.
 # 
 def getHeavyAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
@@ -526,21 +526,21 @@ def getHeavyAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pa
 def getHeavyAtomCount(cntnr: Chem.AtomContainer) -> int: pass
 
 ##
-# \brief Returns the number of heavy-atom bonds incident to <em>atom</em> in <em>molgraph</em>.
+# \brief Returns the number of heavy bonds incident to <em>atom</em> in <em>molgraph</em>.
 # 
 # \param atom The atom.
 # \param molgraph The molecular graph.
 # 
-# \return The heavy-atom bond count.
+# \return The heavy bond count.
 # 
 def getHeavyBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief Returns the number of heavy-atom bonds in <em>cntnr</em> (bonds where neither atom is hydrogen).
+# \brief Returns the number of heavy atom bonds in <em>cntnr</em>.
 # 
 # \param cntnr The bond container.
 # 
-# \return The number of heavy-atom bonds.
+# \return The number of heavy bonds.
 # 
 def getHeavyBondCount(cntnr: Chem.BondContainer) -> int: pass
 

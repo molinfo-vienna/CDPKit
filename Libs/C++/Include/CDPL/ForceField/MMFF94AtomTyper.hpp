@@ -62,7 +62,7 @@ namespace CDPL
          *
          * Typing is performed in four stages: provisional symbolic types are assigned by SMARTS pattern matching,
          * aromatic atom types are then reassigned according to the MMFF94 aromatic-ring rules, hydrogen atoms
-         * receive types derived from their heavy-atom neighbors, and finally the symbolic types are translated
+         * receive types derived from their heavy atom neighbors, and finally the symbolic types are translated
          * to the corresponding numeric type indices used by the rest of the MMFF94 parameter tables.
          */
         class CDPL_FORCEFIELD_API MMFF94AtomTyper
@@ -100,7 +100,7 @@ namespace CDPL
             void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
 
             /**
-             * \brief Sets the map used to derive hydrogen atom types from heavy-atom neighbor types.
+             * \brief Sets the map used to derive hydrogen atom types from heavy atom neighbor types.
              * \param map The new heavy-to-hydrogen atom type map.
              */
             void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);

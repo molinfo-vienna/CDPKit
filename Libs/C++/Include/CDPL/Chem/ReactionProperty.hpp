@@ -53,14 +53,14 @@ namespace CDPL
             /**
              * \brief Specifies the name of the reaction.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey NAME;
 
             /**
              * \brief Specifies a comment associated with the reaction.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey COMMENT;
 
@@ -113,21 +113,21 @@ namespace CDPL
             /**
              * \brief Specifies the user initials field read from the MDL rxn file.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
 
             /**
              * \brief Specifies the program name field read from the MDL rxn file.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
 
             /**
              * \brief Specifies the MDL registry number of the reaction.
              *
-             * \valuetype std::size_t
+             * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
 
@@ -142,21 +142,21 @@ namespace CDPL
             /**
              * \brief Specifies the MDL internal registry number string of the reaction.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_INTERNAL_REGISTRY_NUMBER;
 
             /**
              * \brief Specifies the MDL external registry number string of the reaction.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_EXTERNAL_REGISTRY_NUMBER;
 
             /**
              * \brief Specifies the version of the MDL rxn file the reaction was read from.
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_RXN_FILE_VERSION;
         } // namespace ReactionProperty

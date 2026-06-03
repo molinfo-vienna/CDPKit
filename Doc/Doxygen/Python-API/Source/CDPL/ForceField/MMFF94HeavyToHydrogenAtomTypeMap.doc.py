@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Lookup table mapping each heavy-atom symbolic MMFF94 type to the symbolic MMFF94 type used for hydrogen atoms bonded to it.
+# \brief Lookup table mapping each heavy atom symbolic MMFF94 type to the symbolic MMFF94 type used for hydrogen atoms bonded to it.
 # 
 class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
 
@@ -108,7 +108,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def addEntry(parent_type: str, h_atom_type: str) -> None: pass
 
     ##
-    # \brief Removes the mapping for the heavy-atom type <em>parent_type</em>.
+    # \brief Removes the mapping for the heavy atom type <em>parent_type</em>.
     # 
     # \param parent_type The symbolic MMFF94 type of the heavy parent atom.
     # 
@@ -117,7 +117,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def removeEntry(parent_type: str) -> bool: pass
 
     ##
-    # \brief Returns the hydrogen MMFF94 type associated with the heavy-atom type <em>parent_type</em>.
+    # \brief Returns the hydrogen MMFF94 type associated with the heavy atom type <em>parent_type</em>.
     # 
     # \param parent_type The symbolic MMFF94 type of the heavy parent atom.
     # 

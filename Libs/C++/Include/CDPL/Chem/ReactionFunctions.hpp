@@ -591,7 +591,7 @@ namespace CDPL
         CDPL_CHEM_API void setBondMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
 
         /**
-         * \brief Sets the molecular-graph-level match-constraint list \a constr on every component of \a rxn.
+         * \brief Sets the molecular graph-level match-constraint list \a constr on every component of \a rxn.
          * \param rxn The reaction to modify.
          * \param constr The match-constraint list to assign.
          * \param overwrite If \c true, replaces any existing per-component constraints; if \c false, leaves
@@ -608,7 +608,7 @@ namespace CDPL
         CDPL_CHEM_API void generateMatchExpressions(Reaction& rxn, bool overwrite);
 
         /**
-         * \brief Prepares \a rxn for use as a substructure-search query (e.g. by pre-computing
+         * \brief Prepares \a rxn for use as a substructure search query (e.g. by pre-computing
          *        match expressions and required cached properties).
          * \param rxn The reaction to modify.
          * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.
@@ -616,7 +616,7 @@ namespace CDPL
         CDPL_CHEM_API void initSubstructureSearchQuery(Reaction& rxn, bool overwrite);
 
         /**
-         * \brief Prepares \a rxn for use as a substructure-search target (e.g. by pre-computing
+         * \brief Prepares \a rxn for use as a substructure search target (e.g. by pre-computing
          *        required cached properties).
          * \param rxn The reaction to modify.
          * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.

@@ -53,21 +53,21 @@ namespace CDPL
             /**
              * \brief Specifies the bond order.
              *
-             * \valuetype std::size_t
+             * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey ORDER;
 
             /**
              * \brief Specifies whether the bond is a member of any ring.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey RING_FLAG;
 
             /**
              * \brief Specifies whether the bond is a member of an aromatic ring system.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey AROMATICITY_FLAG;
 
@@ -81,42 +81,42 @@ namespace CDPL
             /**
              * \brief Specifies whether the bond is a stereogenic center.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
 
             /**
              * \brief Specifies the CIP stereochemical configuration label of the bond (see namespace Chem::CIPDescriptor).
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
 
             /**
              * \brief Specifies the bond direction in SMILES and SMARTS strings (see [\ref SMILES, \ref SMARTS], namespace Chem::BondDirection).
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey DIRECTION;
 
             /**
              * \brief Specifies the 2D stereo flag of the bond (see namespace Chem::BondStereoFlag).
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey STEREO_2D_FLAG;
 
             /**
              * \brief Specifies the SYBYL bond type (see namespace Chem::SybylBondType).
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
 
             /**
              * \brief Specifies the reaction center status of the bond (see namespace Chem::ReactionCenterStatus).
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
 
@@ -137,7 +137,7 @@ namespace CDPL
             /**
              * \brief Specifies a string representation of the substructure matching expression associated with the bond.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
         } // namespace BondProperty

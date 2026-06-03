@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A concrete Pharm::FeatureContainer implementation that stores references to existing Pharm::Feature instances.
+         * \brief Concrete Pharm::FeatureContainer implementation that stores references to existing Pharm::Feature instances.
          *
          * Unlike Pharm::BasicPharmacophore, a \c %FeatureSet does not own its features. It is typically used
          * to represent subsets/selections of features that live elsewhere (e.g. for feature mappings or

@@ -279,14 +279,14 @@ namespace CDPL
 
             /**
              * \brief Specifies the custom label text.
-             * \valuetype std::string
+             * \valuetype \c std::string
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey CUSTOM_LABEL;
 
             /**
              * \brief Specifies whether or not the bond is highlighted.
-             * \valuetype bool
+             * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey HIGHLIGHTED_FLAG;

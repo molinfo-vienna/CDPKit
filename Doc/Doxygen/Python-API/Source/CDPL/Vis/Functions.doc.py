@@ -5192,7 +5192,7 @@ def clearEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer) 
 # \brief Sets the value of the Vis.ControlParameter.FEATURE_COLOR_TABLE parameter of <em>cntnr</em> to <em>colors</em>.
 # 
 # \param cntnr The control-parameter container to update.
-# \param colors The new pharmacophoric-feature color table.
+# \param colors The new pharmacophoric feature color table.
 # 
 # \since 1.3
 # 

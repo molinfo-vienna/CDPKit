@@ -56,7 +56,6 @@ namespace CDPL
         /**
          * \brief Reader for molecule data in the <em>Macromolecular Transmission Format (MMTF)</em>
          *        [\ref MMTF].
-         * \since 1.2
          */
         class CDPL_BIOMOL_API MMTFMoleculeReader : public Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>
         {

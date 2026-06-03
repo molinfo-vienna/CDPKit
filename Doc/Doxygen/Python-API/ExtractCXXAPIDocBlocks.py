@@ -132,9 +132,14 @@ def getTextRecursive(parent_node):
             rc.append(getTextRecursive(node).strip() + '\n')
             rc.append('-' * len(rc[-1]) + '\n')
         elif node.nodeName == 'bold':
-            rc.append('<b>')
-            rc.append(getTextRecursive(node))
-            rc.append('</b>')
+            text = getTextRecursive(node)
+
+            if text == 'Value Type:':
+                rc.append('\n\\valuetype ')
+            else:
+                rc.append('<b>')
+                rc.append(text)
+                rc.append('</b>')
         elif node.nodeName == 'superscript':
             rc.append('<sup>')
             rc.append(getTextRecursive(node))

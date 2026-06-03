@@ -747,7 +747,7 @@ def getComponentGroups(rxn: Reaction) -> FragmentList: pass
 def clearComponentGroups(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the molecular-graph-level match-constraint list <em>constr</em> on every component of <em>rxn</em>.
+# \brief Sets the molecular graph-level match-constraint list <em>constr</em> on every component of <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
 # \param constr The match-constraint list to assign.
@@ -4451,7 +4451,7 @@ def generateSMILES(molgraph: MolecularGraph, canonical: bool = False, ord_h_depl
 def generateSMILES(rxn: Reaction, canonical: bool = False, ord_h_deplete: bool = True, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> object: pass
 
 ##
-# \brief Prepares <em>molgraph</em> for use as a substructure-search query (precomputes match expressions and required cached properties).
+# \brief Prepares <em>molgraph</em> for use as a substructure search query (precomputes match expressions and required cached properties).
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
@@ -4459,7 +4459,7 @@ def generateSMILES(rxn: Reaction, canonical: bool = False, ord_h_deplete: bool =
 def initSubstructureSearchQuery(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Prepares <em>rxn</em> for use as a substructure-search query (e.g. by pre-computing match expressions and required cached properties).
+# \brief Prepares <em>rxn</em> for use as a substructure search query (e.g. by pre-computing match expressions and required cached properties).
 # 
 # \param rxn The reaction to modify.
 # \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
@@ -4467,7 +4467,7 @@ def initSubstructureSearchQuery(molgraph: MolecularGraph, overwrite: bool) -> No
 def initSubstructureSearchQuery(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
-# \brief Prepares <em>molgraph</em> for use as a substructure-search target (precomputes required cached properties).
+# \brief Prepares <em>molgraph</em> for use as a substructure search target (precomputes required cached properties).
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
@@ -4475,7 +4475,7 @@ def initSubstructureSearchQuery(rxn: Reaction, overwrite: bool) -> None: pass
 def initSubstructureSearchTarget(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Prepares <em>rxn</em> for use as a substructure-search target (e.g. by pre-computing required cached properties).
+# \brief Prepares <em>rxn</em> for use as a substructure search target (e.g. by pre-computing required cached properties).
 # 
 # \param rxn The reaction to modify.
 # \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.

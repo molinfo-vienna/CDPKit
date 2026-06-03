@@ -116,7 +116,7 @@ namespace CDPL
         /**
          * \brief Calculates the first Zagreb index (\f$ M_1 \f$) of \a molgraph.
          *
-         * \f$ M_1 \f$ is the sum of squared heavy-atom degrees over all heavy atoms.
+         * \f$ M_1 \f$ is the sum of squared heavy atom degrees over all heavy atoms.
          *
          * \param molgraph The molecular graph.
          * \return The first Zagreb index.
@@ -126,7 +126,7 @@ namespace CDPL
         /**
          * \brief Calculates the second Zagreb index (\f$ M_2 \f$) of \a molgraph.
          *
-         * \f$ M_2 \f$ is the sum of the products of the heavy-atom degrees over all heavy-atom bonds.
+         * \f$ M_2 \f$ is the sum of the products of the heavy atom degrees over all heavy bonds.
          *
          * \param molgraph The molecular graph.
          * \return The second Zagreb index.

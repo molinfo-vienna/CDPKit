@@ -1092,12 +1092,12 @@ namespace CDPL
          *  \param overwrite If \c true, replaces any existing match-expression strings. */
         CDPL_CHEM_API void generateMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite);
 
-        /** \brief Prepares \a molgraph for use as a substructure-search query (precomputes match expressions and required cached properties).
+        /** \brief Prepares \a molgraph for use as a substructure search query (precomputes match expressions and required cached properties).
          *  \param molgraph The molecular graph to modify.
          *  \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged. */
         CDPL_CHEM_API void initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite);
 
-        /** \brief Prepares \a molgraph for use as a substructure-search target (precomputes required cached properties).
+        /** \brief Prepares \a molgraph for use as a substructure search target (precomputes required cached properties).
          *  \param molgraph The molecular graph to modify.
          *  \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged. */
         CDPL_CHEM_API void initSubstructureSearchTarget(MolecularGraph& molgraph, bool overwrite);

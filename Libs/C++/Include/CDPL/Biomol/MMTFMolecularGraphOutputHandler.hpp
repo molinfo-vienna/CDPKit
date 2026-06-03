@@ -43,7 +43,6 @@ namespace CDPL
         /**
          * \brief Handler for the output of molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em>
          *        [\ref MMTF] format.
-         * \since 1.2
          */
         typedef Util::DefaultDataOutputHandler<MMTFMolecularGraphWriter, DataFormat::MMTF> MMTFMolecularGraphOutputHandler;
     } // namespace Biomol

@@ -29,7 +29,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The color specified by this property takes precedence over the colors specified by Vis.ControlParameter.BOND_COLOR and Vis.MolecularGraphProperty.BOND_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color
+    # \valuetype  Vis.Color
     # 
     COLOR = CDPL.Base.LookupKey('COLOR')
 
@@ -38,7 +38,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The trim length specified by this property takes precedence over the lengths specified by Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH and Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('DOUBLE_BOND_TRIM_LENGTH')
 
@@ -47,7 +47,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The font specified by this property takes precedence over the fonts specified by Vis.ControlParameter.BOND_LABEL_FONT and Vis.MolecularGraphProperty.BOND_LABEL_FONT. <br>
     # 
-    # <b>Value Type:</b> Vis.Font
+    # \valuetype  Vis.Font
     # 
     LABEL_FONT = CDPL.Base.LookupKey('LABEL_FONT')
 
@@ -56,7 +56,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the width of the margin will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the margin will follow the size change of the chemical structure during viewport size adjustment. The margin specified by this property takes precedence over the margins specified by Vis.ControlParameter.BOND_LABEL_MARGIN and Vis.MolecularGraphProperty.BOND_LABEL_MARGIN. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     LABEL_MARGIN = CDPL.Base.LookupKey('LABEL_MARGIN')
 
@@ -65,7 +65,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The font size has to be specified as an absolute value. If input-scaling is enabled, the font size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The font size specified by this property takes precedence over the sizes specified by Vis.ControlParameter.BOND_LABEL_SIZE and Vis.MolecularGraphProperty.BOND_LABEL_SIZE. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     LABEL_SIZE = CDPL.Base.LookupKey('LABEL_SIZE')
 
@@ -74,7 +74,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The line spacing specified by this property takes precedence over the distances specified by Vis.ControlParameter.BOND_LINE_SPACING and Vis.MolecularGraphProperty.BOND_LINE_SPACING. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     LINE_SPACING = CDPL.Base.LookupKey('LINE_SPACING')
 
@@ -83,7 +83,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the line width grows/shrinks with the size of the chemical structure during viewport size adjustment. The line width specified by this property takes precedence over the widths specified by Vis.ControlParameter.BOND_LINE_WIDTH and Vis.MolecularGraphProperty.BOND_LINE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     LINE_WIDTH = CDPL.Base.LookupKey('LINE_WIDTH')
 
@@ -92,7 +92,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The line length specified by this property takes precedence over the length specified by Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH or Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
+    # \valuetype  Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
     REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey('REACTION_CENTER_LINE_LENGTH')
 
@@ -101,7 +101,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The line spacing specified by this property takes precedence over the spacing specified by Vis.ControlParameter.REACTION_CENTER_LINE_SPACING or Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
+    # \valuetype  Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
     REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey('REACTION_CENTER_LINE_SPACING')
 
@@ -110,7 +110,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The trim length specified by this property takes precedence over the lengths specified by Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH and Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('TRIPLE_BOND_TRIM_LENGTH')
 
@@ -119,7 +119,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the hash distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the hash distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The hash spacing specified by this property takes precedence over the distances specified by Vis.ControlParameter.STEREO_BOND_HASH_SPACING and Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING. <br>
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey('STEREO_BOND_HASH_SPACING')
 
@@ -128,7 +128,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the wedge width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the wedge width grows/shrinks with the size of the chemical structure during viewport size adjustment. The wedge width specified by this property takes precedence over the width specified by Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH or Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey('STEREO_BOND_WEDGE_WIDTH')
 
@@ -137,7 +137,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The font specified by this property takes precedence over the fonts specified by Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT and Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \since 1.1
+    # \valuetype  Vis.Font \since 1.1
     # 
     CONFIGURATION_LABEL_FONT = CDPL.Base.LookupKey('CONFIGURATION_LABEL_FONT')
 
@@ -146,7 +146,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE and Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \since 1.1
+    # \valuetype  Vis.SizeSpecification \since 1.1
     # 
     CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('CONFIGURATION_LABEL_SIZE')
 
@@ -155,7 +155,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The color specified by this property takes precedence over the colors specified by Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR and Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \since 1.2
+    # \valuetype  Vis.Color \since 1.2
     # 
     CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('CONFIGURATION_LABEL_COLOR')
 
@@ -164,7 +164,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The font specified by this property takes precedence over the fonts specified by Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT and Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \since 1.2
+    # \valuetype  Vis.Font \since 1.2
     # 
     CUSTOM_LABEL_FONT = CDPL.Base.LookupKey('CUSTOM_LABEL_FONT')
 
@@ -173,7 +173,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE and Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # \valuetype  Vis.SizeSpecification \since 1.2
     # 
     CUSTOM_LABEL_SIZE = CDPL.Base.LookupKey('CUSTOM_LABEL_SIZE')
 
@@ -182,33 +182,37 @@ class BondProperty(Boost.Python.instance):
     # 
     # The color specified by this property takes precedence over the colors specified by Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR and Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \since 1.2
+    # \valuetype  Vis.Color \since 1.2
     # 
     CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('CUSTOM_LABEL_COLOR')
 
     ##
-    # \brief Specifies the custom label text. <b>Value Type:</b> std::string.
+    # \brief Specifies the custom label text. 
+    # \valuetype  <tt>std::string</tt>.
     # 
     # \since 1.2
     # 
     CUSTOM_LABEL = CDPL.Base.LookupKey('CUSTOM_LABEL')
 
     ##
-    # \brief Specifies whether or not the bond is highlighted. <b>Value Type:</b> bool.
+    # \brief Specifies whether or not the bond is highlighted. 
+    # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
     # 
     HIGHLIGHTED_FLAG = CDPL.Base.LookupKey('HIGHLIGHTED_FLAG')
 
     ##
-    # \brief Specifies the brush to use for filling atom highlighting areas. <b>Value Type:</b> Vis.Brush.
+    # \brief Specifies the brush to use for filling atom highlighting areas. 
+    # \valuetype  Vis.Brush.
     # 
     # \since 1.2
     # 
     HIGHLIGHT_AREA_BRUSH = CDPL.Base.LookupKey('HIGHLIGHT_AREA_BRUSH')
 
     ##
-    # \brief Specifies the pen to use for drawing atom highlighting area outlines. <b>Value Type:</b> Vis.Pen.
+    # \brief Specifies the pen to use for drawing atom highlighting area outlines. 
+    # \valuetype  Vis.Pen.
     # 
     # \since 1.2
     # 

@@ -45,7 +45,7 @@ namespace CDPL
 
         /**
          * \brief Describes a single attribute-comparison constraint between a query and a target object used by
-         *        molecular-graph matching algorithms.
+         *        molecular graph matching algorithms.
          *
          * Each constraint is identified by an integer \a id (typically a Chem::*MatchConstraint constant such as
          * Chem::AtomMatchConstraint::AROMATICITY) and pairs it with a Relation (\c LESS, \c EQUAL, \c GREATER,
@@ -197,8 +197,8 @@ namespace CDPL
          *        constraints are aggregated during query/target evaluation.
          *
          * Match-constraint lists are typically attached as object properties (e.g. via
-         * Chem::setMatchConstraints) and consulted by substructure-search algorithms such as
-         * Chem::SubstructureSearch to express composite atom-, bond- or molecular-graph-level
+         * Chem::setMatchConstraints) and consulted by substructure search algorithms such as
+         * Chem::SubstructureSearch to express composite atom-, bond- or molecular graph-level
          * constraints.
          */
         class CDPL_CHEM_API MatchConstraintList : public Util::Array<MatchConstraint>

@@ -22,7 +22,7 @@
 ##
 # \brief List of Chem.MatchConstraint instances combined with a logical Type (<tt>AND_LIST</tt>, <tt>NOT_AND_LIST</tt>, <tt>OR_LIST</tt>, or <tt>NOT_OR_LIST</tt>) that controls how the contained constraints are aggregated during query/target evaluation.
 # 
-# Match-constraint lists are typically attached as object properties (e.g. via Chem.setMatchConstraints) and consulted by substructure-search algorithms such as Chem.SubstructureSearch to express composite atom-, bond- or molecular-graph-level constraints.
+# Match-constraint lists are typically attached as object properties (e.g. via Chem.setMatchConstraints) and consulted by substructure search algorithms such as Chem.SubstructureSearch to express composite atom-, bond- or molecular graph-level constraints.
 # 
 class MatchConstraintList(Boost.Python.instance):
 

@@ -57,7 +57,7 @@ namespace CDPL
              * For example, a scaling factor of \e 4.0 causes a logical pixel (a square with side length \e 1.0) being mapped to \e 16 drawing surface pixels.
              * Thus, the higher the scaling factor the higher will be the resolution and size of pixel-based output images.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_VIS_API const Base::LookupKey OUTPUT_SCALING_FACTOR;
             
@@ -632,7 +632,7 @@ namespace CDPL
              * If the control-parameter is left unspecified, the default setting 
              * Vis::ControlParameterDefault::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE will be used.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE;

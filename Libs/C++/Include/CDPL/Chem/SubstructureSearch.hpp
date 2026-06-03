@@ -62,7 +62,7 @@ namespace CDPL
          *
          * Successive calls to setQuery() and findMappings() (or mappingExists() for a yes/no answer)
          * produce all atom/bond mapping solutions; mappings are retrieved through the
-         * getMapping*() / begin()-end() iterator pair. Per-atom, per-bond and per-molecular-graph
+         * getMapping*() / begin()-end() iterator pair. Per-atom, per-bond and per-molecular graph
          * match-expression accessor functions can be installed to extend equivalence beyond pure
          * topology (the defaults pull expressions from the Chem::AtomProperty / Chem::BondProperty
          * / Chem::MolecularGraphProperty objects). Result accumulation is bounded by setMaxNumMappings()

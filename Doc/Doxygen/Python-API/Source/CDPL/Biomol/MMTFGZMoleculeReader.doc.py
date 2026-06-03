@@ -22,8 +22,6 @@
 ##
 # \brief Reader for molecule data in the gzip-compressed <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
-# \since 1.2
-# 
 class MMTFGZMoleculeReader(Chem.MoleculeReaderBase):
 
     ##

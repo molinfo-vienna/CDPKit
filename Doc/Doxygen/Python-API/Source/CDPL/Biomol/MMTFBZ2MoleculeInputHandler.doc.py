@@ -22,8 +22,6 @@
 ##
 # \brief Handler for the input of bzip2-compressed molecule data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF] format.
 # 
-# \since 1.2
-# 
 class MMTFBZ2MoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##

@@ -53,84 +53,84 @@ namespace CDPL
             /**
              * \brief Specifies the residue-local name of the atom (e.g. \e CA, \e CB).
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_ATOM_NAME;
 
             /**
              * \brief Specifies the alternative residue-local name of the atom.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_ALT_ATOM_NAME;
 
             /**
              * \brief Specifies whether the atom is a leaving atom in the parent residue.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_LEAVING_ATOM_FLAG;
 
             /**
              * \brief Specifies whether the atom is a linking atom between residues.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_LINKING_ATOM_FLAG;
 
             /**
              * \brief Specifies the residue code (three-letter code) of the residue the atom belongs to.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_CODE;
 
             /**
              * \brief Specifies the sequence number of the residue the atom belongs to.
              *
-             * \valuetype long
+             * \valuetype \c long
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
 
             /**
              * \brief Specifies the insertion code of the residue the atom belongs to.
              *
-             * \valuetype char
+             * \valuetype \c char
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
 
             /**
              * \brief Specifies whether the atom is a heteroatom (HETATM record in PDB).
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_BIOMOL_API const Base::LookupKey HETERO_ATOM_FLAG;
 
             /**
              * \brief Specifies the serial number of the atom as read from or written to the input file.
              *
-             * \valuetype long
+             * \valuetype \c long
              */
             extern CDPL_BIOMOL_API const Base::LookupKey SERIAL_NUMBER;
 
             /**
              * \brief Specifies the chain identifier of the chain the atom belongs to.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
 
             /**
              * \brief Specifies the alternate-location identifier of the atom.
              *
-             * \valuetype char
+             * \valuetype \c char
              */
             extern CDPL_BIOMOL_API const Base::LookupKey ALT_LOCATION_ID;
 
             /**
              * \brief Specifies the identifier of the entity the atom belongs to (e.g. an mmCIF entity ID).
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey ENTITY_ID;
@@ -138,21 +138,21 @@ namespace CDPL
             /**
              * \brief Specifies the model number of the model the atom belongs to.
              *
-             * \valuetype std::size_t
+             * \valuetype \c std::size_t
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
 
             /**
              * \brief Specifies the occupancy of the atom as read from or written to the input file.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_BIOMOL_API const Base::LookupKey OCCUPANCY;
 
             /**
              * \brief Specifies the isotropic temperature (B-) factor of the atom.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_BIOMOL_API const Base::LookupKey B_FACTOR;
         } // namespace AtomProperty

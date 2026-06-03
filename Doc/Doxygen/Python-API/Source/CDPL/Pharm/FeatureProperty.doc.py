@@ -27,76 +27,76 @@ class FeatureProperty(Boost.Python.instance):
     ##
     # \brief Specifies the type of the pharmacophore feature (see namespace Pharm.FeatureType).
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     TYPE = CDPL.Base.LookupKey('TYPE')
 
     ##
     # \brief Specifies the geometric shape of the feature (see namespace Pharm.FeatureGeometry).
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     GEOMETRY = CDPL.Base.LookupKey('GEOMETRY')
 
     ##
     # \brief Specifies the length of the feature (for directional features).
     # 
-    # <b>Value Type:</b> double
+    # \valuetype  <tt>double</tt>
     # 
     LENGTH = CDPL.Base.LookupKey('LENGTH')
 
     ##
     # \brief Specifies the orientation of the feature in 3D space.
     # 
-    # <b>Value Type:</b> Math.Vector3D
+    # \valuetype  Math.Vector3D
     # 
     ORIENTATION = CDPL.Base.LookupKey('ORIENTATION')
 
     ##
     # \brief Specifies the positional tolerance of the feature.
     # 
-    # <b>Value Type:</b> double
+    # \valuetype  <tt>double</tt>
     # 
     TOLERANCE = CDPL.Base.LookupKey('TOLERANCE')
 
     ##
     # \brief Specifies the weight (relative importance) of the feature.
     # 
-    # <b>Value Type:</b> double
+    # \valuetype  <tt>double</tt>
     # 
     WEIGHT = CDPL.Base.LookupKey('WEIGHT')
 
     ##
     # \brief Specifies the chemical substructure the feature was derived from.
     # 
-    # <b>Value Type:</b> Chem.Fragment.SharedPointer
+    # \valuetype  Chem.Fragment.SharedPointer
     # 
     SUBSTRUCTURE = CDPL.Base.LookupKey('SUBSTRUCTURE')
 
     ##
     # \brief Specifies whether the feature is currently disabled (and thus not considered in pharmacophore matching).
     # 
-    # <b>Value Type:</b> bool
+    # \valuetype  <tt>bool</tt>
     # 
     DISABLED_FLAG = CDPL.Base.LookupKey('DISABLED_FLAG')
 
     ##
     # \brief Specifies whether the feature is optional in pharmacophore matching.
     # 
-    # <b>Value Type:</b> bool
+    # \valuetype  <tt>bool</tt>
     # 
     OPTIONAL_FLAG = CDPL.Base.LookupKey('OPTIONAL_FLAG')
 
     ##
     # \brief Specifies the calculated hydrophobicity contribution of the feature.
     # 
-    # <b>Value Type:</b> double
+    # \valuetype  <tt>double</tt>
     # 
     HYDROPHOBICITY = CDPL.Base.LookupKey('HYDROPHOBICITY')
 
     ##
     # \brief Specifies the environment substructure (e.g. interacting pocket residues) associated with the feature.
     # 
-    # <b>Value Type:</b> Chem.Fragment.SharedPointer \since 1.4
+    # \valuetype  Chem.Fragment.SharedPointer \since 1.4
     # 
     ENVIRONMENT_SUBSTRUCTURE = CDPL.Base.LookupKey('ENVIRONMENT_SUBSTRUCTURE')

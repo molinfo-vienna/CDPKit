@@ -67,7 +67,7 @@ class SubstructureEditor(Boost.Python.instance):
     def addSearchPattern(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Returns the number of stored substructure-search patterns.
+    # \brief Returns the number of stored substructure search patterns.
     # 
     # \return The number of stored search patterns.
     # 

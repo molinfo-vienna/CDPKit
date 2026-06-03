@@ -65,7 +65,7 @@ namespace CDPL
             /**
              * \brief Specifies whether floating-point values stored in CDF output shall use single (instead of double) precision.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_PHARM_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
@@ -80,7 +80,7 @@ namespace CDPL
             /**
              * \brief Specifies whether duplicate molecules shall be permitted when building a pharmacophore screening database.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_PHARM_API const Base::LookupKey PSD_ALLOW_DUPLICATES;
         } // namespace ControlParameter

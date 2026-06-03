@@ -516,7 +516,7 @@ namespace CDPL
             /**
              * \brief Specifies an instance of Chem::MultiConfMoleculeInputProcessor that implements the logic of
              *        multi-conformer molecule detection and conformational data processing.
-             * \valuetype \c Chem::MultiConfMoleculeInputProcessor::SharedPointer
+             * \valuetype Chem::MultiConfMoleculeInputProcessor::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_INPUT_PROCESSOR;
 
@@ -558,14 +558,14 @@ namespace CDPL
             /**
              * \brief Specifies the charge type recorded in the \c \@\<TRIPOS\>MOLECULE block on <em>MOL2</em> output
              *        (see namespace Chem::MOL2ChargeType).
-             * \valuetype \c unsigned \c int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
 
             /**
              * \brief Specifies the molecule type recorded in the \c \@\<TRIPOS\>MOLECULE block on <em>MOL2</em> output
              *        (see namespace Chem::MOL2MoleculeType).
-             * \valuetype \c unsigned \c int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
 

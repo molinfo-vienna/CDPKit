@@ -91,9 +91,9 @@ namespace CDPL
         CDPL_MOLPROP_API std::size_t getAromaticBondCount(const Chem::BondContainer& cntnr);
 
         /**
-         * \brief Returns the number of heavy-atom bonds in \a cntnr (bonds where neither atom is hydrogen).
+         * \brief Returns the number of heavy atom bonds in \a cntnr.
          * \param cntnr The bond container.
-         * \return The number of heavy-atom bonds.
+         * \return The number of heavy bonds.
          */
         CDPL_MOLPROP_API std::size_t getHeavyBondCount(const Chem::BondContainer& cntnr);
     } // namespace MolProp

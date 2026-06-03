@@ -29,33 +29,37 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the control-parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')
 
     ##
-    # \brief Specifies whether CDF-format grid output uses single-precision floats (<tt>True</tt>) or double-precision (<tt>False</tt>). <b>Value Type:</b> <tt>bool</tt>.
+    # \brief Specifies whether CDF-format grid output uses single-precision floats (<tt>True</tt>) or double-precision (<tt>False</tt>). 
+    # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
     # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> [\ref CUBE] file is taken as the grid name on input (<tt>True</tt>) or treated as a regular comment (<tt>False</tt>). <b>Value Type:</b> <tt>bool</tt>.
+    # \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> [\ref CUBE] file is taken as the grid name on input (<tt>True</tt>) or treated as a regular comment (<tt>False</tt>). 
+    # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.4
     # 
     CUBE_COMMENT_IS_NAME = CDPL.Base.LookupKey('CUBE_COMMENT_IS_NAME')
 
     ##
-    # \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> [\ref CUBE] format. <b>Value Type:</b> double.
+    # \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> [\ref CUBE] format. 
+    # \valuetype  <tt>double</tt>.
     # 
     # \since 1.4
     # 
     CUBE_INPUT_DISTANCE_SCALING_FACTOR = CDPL.Base.LookupKey('CUBE_INPUT_DISTANCE_SCALING_FACTOR')
 
     ##
-    # \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> [\ref CUBE] format data output. <b>Value Type:</b> double.
+    # \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> [\ref CUBE] format data output. 
+    # \valuetype  <tt>double</tt>.
     # 
     # \since 1.4
     # 

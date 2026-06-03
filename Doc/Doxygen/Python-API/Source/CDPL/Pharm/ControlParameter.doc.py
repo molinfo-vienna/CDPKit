@@ -29,27 +29,27 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the control-parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')
 
     ##
     # \brief Specifies whether floating-point values stored in CDF output shall use single (instead of double) precision.
     # 
-    # <b>Value Type:</b> bool \since 1.2
+    # \valuetype  <tt>bool</tt> \since 1.2
     # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
     # \brief Specifies the creation mode for new pharmacophore screening databases (see Pharm.ScreeningDBCreator.Mode).
     # 
-    # <b>Value Type:</b> Pharm.ScreeningDBCreator.Mode
+    # \valuetype  Pharm.ScreeningDBCreator.Mode
     # 
     PSD_CREATION_MODE = CDPL.Base.LookupKey('PSD_CREATION_MODE')
 
     ##
     # \brief Specifies whether duplicate molecules shall be permitted when building a pharmacophore screening database.
     # 
-    # <b>Value Type:</b> bool
+    # \valuetype  <tt>bool</tt>
     # 
     PSD_ALLOW_DUPLICATES = CDPL.Base.LookupKey('PSD_ALLOW_DUPLICATES')

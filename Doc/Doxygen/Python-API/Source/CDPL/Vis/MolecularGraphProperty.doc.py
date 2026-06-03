@@ -29,7 +29,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.ATOM_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.COLOR.
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.COLOR.
     # 
     ATOM_COLOR = CDPL.Base.LookupKey('ATOM_COLOR')
 
@@ -38,7 +38,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # If the color for a particular atom type is missing, the color specified by Vis.ControlParameter.ATOM_COLOR or Vis.MolecularGraphProperty.ATOM_COLOR will be used instead. The specified color takes precedence over the table specified by the parameter Vis.ControlParameter.ATOM_COLOR_TABLE.
     # 
-    # <b>Value Type:</b> Vis.ColorTable.SharedPointer \note The color table will only be considered if the Chem.Atom property Vis.AtomProperty.COLOR has not been set.
+    # \valuetype  Vis.ColorTable.SharedPointer \note The color table will only be considered if the Chem.Atom property Vis.AtomProperty.COLOR has not been set.
     # 
     ATOM_COLOR_TABLE = CDPL.Base.LookupKey('ATOM_COLOR_TABLE')
 
@@ -47,7 +47,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The dot size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the dot diameter will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the diameter will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE.
     # 
     RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey('RADICAL_ELECTRON_DOT_SIZE')
 
@@ -56,7 +56,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.ATOM_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_FONT.
+    # \valuetype  Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_FONT.
     # 
     ATOM_LABEL_FONT = CDPL.Base.LookupKey('ATOM_LABEL_FONT')
 
@@ -65,7 +65,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the width of the margin will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the label margin will follow the size change of the chemical structure during viewport size adjustment. The specified margin takes precedence over the margin specified by the parameter Vis.ControlParameter.ATOM_LABEL_MARGIN.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_MARGIN.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_MARGIN.
     # 
     ATOM_LABEL_MARGIN = CDPL.Base.LookupKey('ATOM_LABEL_MARGIN')
 
@@ -74,7 +74,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The font size has to be specified as an absolute value. If input-scaling is enabled, the font size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will grow/shrink with the size of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.ATOM_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_SIZE.
     # 
     ATOM_LABEL_SIZE = CDPL.Base.LookupKey('ATOM_LABEL_SIZE')
 
@@ -83,7 +83,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.SECONDARY_LABEL_FONT.
+    # \valuetype  Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.SECONDARY_LABEL_FONT.
     # 
     SECONDARY_ATOM_LABEL_FONT = CDPL.Base.LookupKey('SECONDARY_ATOM_LABEL_FONT')
 
@@ -92,7 +92,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.SECONDARY_LABEL_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.SECONDARY_LABEL_SIZE.
     # 
     SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey('SECONDARY_ATOM_LABEL_SIZE')
 
@@ -101,7 +101,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size has to be specified as an absolute value. If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # \valuetype  Vis.SizeSpecification \since 1.2
     # 
     ATOM_HIGHLIGHT_AREA_SIZE = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_SIZE')
 
@@ -110,7 +110,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified brush takes precedence over the brush specified by the parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH.
     # 
-    # <b>Value Type:</b> Vis.Brush \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH. 
+    # \valuetype  Vis.Brush \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH. 
     # 
     # \since 1.2
     # 
@@ -121,7 +121,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified pen takes precedence over the pen specified by the parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
-    # <b>Value Type:</b> Vis.Pen \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # \valuetype  Vis.Pen \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
     # 
     # \since 1.2
     # 
@@ -132,7 +132,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The width has to be specified as an absolute value. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line width takes precedence over the width specified by the parameter Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # \valuetype  Vis.SizeSpecification \since 1.2
     # 
     HIGHLIGHT_AREA_OUTLINE_WIDTH = CDPL.Base.LookupKey('HIGHLIGHT_AREA_OUTLINE_WIDTH')
 
@@ -141,7 +141,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.BOND_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.COLOR.
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.COLOR.
     # 
     BOND_COLOR = CDPL.Base.LookupKey('BOND_COLOR')
 
@@ -150,7 +150,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.BOND_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_FONT.
+    # \valuetype  Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_FONT.
     # 
     BOND_LABEL_FONT = CDPL.Base.LookupKey('BOND_LABEL_FONT')
 
@@ -159,7 +159,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the width of the margin will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the label margin will follow the size change of the chemical structure during viewport size adjustment. The specified margin takes precedence over the margin specified by the parameter Vis.ControlParameter.BOND_LABEL_MARGIN.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_MARGIN.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_MARGIN.
     # 
     BOND_LABEL_MARGIN = CDPL.Base.LookupKey('BOND_LABEL_MARGIN')
 
@@ -168,7 +168,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The font size has to be specified as an absolute value. If input-scaling is enabled, the font size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified font size takes precedence over the size specified by the parameter Vis.ControlParameter.BOND_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_SIZE.
     # 
     BOND_LABEL_SIZE = CDPL.Base.LookupKey('BOND_LABEL_SIZE')
 
@@ -177,7 +177,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line spacing takes precedence over the distance specified by the parameter Vis.ControlParameter.BOND_LINE_SPACING.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_SPACING.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_SPACING.
     # 
     BOND_LINE_SPACING = CDPL.Base.LookupKey('BOND_LINE_SPACING')
 
@@ -186,7 +186,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the line width grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line width takes precedence over the width specified by the parameter Vis.ControlParameter.BOND_LINE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_WIDTH.
     # 
     BOND_LINE_WIDTH = CDPL.Base.LookupKey('BOND_LINE_WIDTH')
 
@@ -195,7 +195,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line length takes precedence over the length specified by the parameter Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.REACTION_CENTER_LINE_LENGTH. <br>
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.REACTION_CENTER_LINE_LENGTH. <br>
     #  
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
@@ -207,7 +207,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line spacing takes precedence over the spacing specified by the parameter Vis.ControlParameter.REACTION_CENTER_LINE_SPACING.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.REACTION_CENTER_LINE_SPACING. <br>
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.REACTION_CENTER_LINE_SPACING. <br>
     #  
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
@@ -219,7 +219,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the hash distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the hash distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified hash spacing takes precedence over the spacing specified by the parameter Vis.ControlParameter.STEREO_BOND_HASH_SPACING.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_HASH_SPACING.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_HASH_SPACING.
     # 
     STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey('STEREO_BOND_HASH_SPACING')
 
@@ -228,7 +228,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the wedge width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the wedge width grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified wedge width takes precedence over the width specified by the parameter Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH.
     # 
     STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey('STEREO_BOND_WEDGE_WIDTH')
 
@@ -237,7 +237,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified trim length takes precedence over the length specified by the parameter Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH.
     # 
     DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('DOUBLE_BOND_TRIM_LENGTH')
 
@@ -246,7 +246,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified trim length takes precedence over the length specified by the parameter Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH.
     # 
     TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('TRIPLE_BOND_TRIM_LENGTH')
 
@@ -255,7 +255,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_FONT. 
     # 
     # \since 1.1
     # 
@@ -266,7 +266,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_SIZE. 
     # 
     # \since 1.1
     # 
@@ -277,7 +277,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_COLOR. 
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_COLOR. 
     # 
     # \since 1.2
     # 
@@ -288,7 +288,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The width has to be specified as an absolute value. If input-scaling is enabled, the width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified width takes precedence over the width specified by the parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # \valuetype  Vis.SizeSpecification \since 1.2
     # 
     BOND_HIGHLIGHT_AREA_WIDTH = CDPL.Base.LookupKey('BOND_HIGHLIGHT_AREA_WIDTH')
 
@@ -297,7 +297,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified brush takes precedence over the brush specified by the parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH.
     # 
-    # <b>Value Type:</b> Vis.Brush \note The setting is overridden by the Chem.Bond property Vis.BondProperty.HIGHLIGHT_AREA_BRUSH. 
+    # \valuetype  Vis.Brush \note The setting is overridden by the Chem.Bond property Vis.BondProperty.HIGHLIGHT_AREA_BRUSH. 
     # 
     # \since 1.2
     # 
@@ -308,7 +308,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified pen takes precedence over the pen specified by the parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
-    # <b>Value Type:</b> Vis.Pen \note The setting is overridden by the Chem.Bond property Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # \valuetype  Vis.Pen \note The setting is overridden by the Chem.Bond property Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
     # 
     # \since 1.2
     # 
@@ -319,7 +319,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_FONT. 
     # 
     # \since 1.1
     # 
@@ -330,7 +330,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_SIZE. 
     # 
     # \since 1.1
     # 
@@ -341,7 +341,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_COLOR. 
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_COLOR. 
     # 
     # \since 1.2
     # 
@@ -352,7 +352,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CUSTOM_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CUSTOM_LABEL_FONT. 
     # 
     # \since 1.2
     # 
@@ -363,7 +363,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CUSTOM_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CUSTOM_LABEL_SIZE. 
     # 
     # \since 1.2
     # 
@@ -374,7 +374,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CUSTOM_LABEL_COLOR. 
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CUSTOM_LABEL_COLOR. 
     # 
     # \since 1.2
     # 
@@ -385,7 +385,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CUSTOM_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CUSTOM_LABEL_FONT. 
     # 
     # \since 1.2
     # 
@@ -396,7 +396,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CUSTOM_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CUSTOM_LABEL_SIZE. 
     # 
     # \since 1.2
     # 
@@ -407,7 +407,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CUSTOM_LABEL_COLOR. 
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CUSTOM_LABEL_COLOR. 
     # 
     # \since 1.2
     # 

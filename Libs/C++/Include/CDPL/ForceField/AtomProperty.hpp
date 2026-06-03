@@ -53,28 +53,28 @@ namespace CDPL
             /**
              * \brief Specifies the symbolic MMFF94 atom type.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_SYMBOLIC_TYPE;
 
             /**
              * \brief Specifies the numeric MMFF94 atom type.
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_NUMERIC_TYPE;
 
             /**
              * \brief Specifies the MMFF94 partial atomic charge.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
 
             /**
              * \brief Specifies the numeric UFF atom type.
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_FORCEFIELD_API const Base::LookupKey UFF_TYPE;
         } // namespace AtomProperty

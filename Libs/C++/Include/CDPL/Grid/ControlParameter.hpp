@@ -78,14 +78,14 @@ namespace CDPL
 
             /**
              * \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> [\ref CUBE] format.
-             * \valuetype double
+             * \valuetype \c double
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_INPUT_DISTANCE_SCALING_FACTOR;
 
             /**
              * \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> [\ref CUBE] format data output.
-             * \valuetype double
+             * \valuetype \c double
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_OUTPUT_DISTANCE_SCALING_FACTOR;

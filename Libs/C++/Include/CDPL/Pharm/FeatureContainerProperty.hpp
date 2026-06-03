@@ -53,7 +53,7 @@ namespace CDPL
             /**
              * \brief Specifies the name of the feature container.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_PHARM_API const Base::LookupKey NAME;
         }

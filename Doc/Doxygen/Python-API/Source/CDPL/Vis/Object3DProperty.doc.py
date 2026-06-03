@@ -27,16 +27,19 @@
 class Object3DProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the Vis.Shape3D instance associated with the 3D object. <b>Value Type:</b> Vis.Shape3D.SharedPointer.
+    # \brief Specifies the Vis.Shape3D instance associated with the 3D object. 
+    # \valuetype  Vis.Shape3D.SharedPointer.
     # 
     SHAPE = CDPL.Base.LookupKey('SHAPE')
 
     ##
-    # \brief Specifies a transformation to apply to the geometry of the 3D object and all sub-objects. <b>Value Type:</b> Math.Matrix4D.
+    # \brief Specifies a transformation to apply to the geometry of the 3D object and all sub-objects. 
+    # \valuetype  Math.Matrix4D.
     # 
     TRANSFORMATION_MATRIX = CDPL.Base.LookupKey('TRANSFORMATION_MATRIX')
 
     ##
-    # \brief Specifies the material properties of the 3D object and all sub-objects. <b>Value Type:</b> Vis.Material.
+    # \brief Specifies the material properties of the 3D object and all sub-objects. 
+    # \valuetype  Vis.Material.
     # 
     MATERIAL = CDPL.Base.LookupKey('MATERIAL')

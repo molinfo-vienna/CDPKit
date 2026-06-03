@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
+# \brief Half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
 # 
 class Range(Boost.Python.instance):
 

@@ -131,7 +131,7 @@ namespace CDPL
 
         /**
          * \brief Configures the fixed-substructure handling of \a molgraph using the matches produced by \a sub_search.
-         * \param sub_search The substructure-search engine providing the matches.
+         * \param sub_search The substructure search engine providing the matches.
          * \param max_num_matches The maximum number of matches to process (\e 0 means unlimited).
          * \param molgraph The molecular graph that holds the input atoms (modified in place).
          * \param fixed_substr The output fragment receiving the matched atoms/bonds.
@@ -144,7 +144,7 @@ namespace CDPL
                                                                 Math::Vector3DArray* fixed_substr_coords);
        /**
          * \brief Configures the fixed-substructure handling of \a molgraph using the matches produced by \a sub_search.
-         * \param sub_search The common-connected-substructure-search engine providing the matches.
+         * \param sub_search The common-connected-substructure search engine providing the matches.
          * \param max_num_matches The maximum number of matches to process (\e 0 means unlimited).
          * \param molgraph The molecular graph that holds the input atoms (modified in place).
          * \param fixed_substr The output fragment receiving the matched atoms/bonds.

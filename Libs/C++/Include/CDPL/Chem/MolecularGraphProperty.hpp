@@ -114,16 +114,16 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey PI_ELECTRON_SYSTEMS;
 
             /**
-             * \brief Specifies the substructure-search match constraints attached to the molecular graph.
+             * \brief Specifies the substructure search match constraints attached to the molecular graph.
              *
              * \valuetype Chem::MatchConstraintList::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
 
             /**
-             * \brief Specifies a cached substructure-search match expression compiled from MATCH_CONSTRAINTS.
+             * \brief Specifies a cached substructure search match expression compiled from MATCH_CONSTRAINTS.
              *
-             * \valuetype \c Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer
+             * \valuetype Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
 
@@ -207,7 +207,7 @@ namespace CDPL
             /**
              * \brief Specifies the CTAB version of the MDL connection table.
              *
-             * \valuetype \c unsigned \c int (Chem::MDLDataFormatVersion value)
+             * \valuetype <tt>unsigned int</tt> (Chem::MDLDataFormatVersion value)
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
 
@@ -249,14 +249,14 @@ namespace CDPL
             /**
              * \brief Specifies the partial-charge type of the molecular graph in the Tripos MOL2 format.
              *
-             * \valuetype \c unsigned \c int (Chem::MOL2ChargeType value)
+             * \valuetype <tt>unsigned int</tt> (Chem::MOL2ChargeType value)
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
 
             /**
              * \brief Specifies the molecule type of the molecular graph in the Tripos MOL2 format.
              *
-             * \valuetype \c unsigned \c int (Chem::MOL2MoleculeType value)
+             * \valuetype <tt>unsigned int</tt> (Chem::MOL2MoleculeType value)
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
         } // namespace MolecularGraphProperty

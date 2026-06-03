@@ -29,7 +29,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # A factor higher than <em>1.0</em> (the default) makes only sense for rendering to pixel-based surfaces (e.g. a Cairo [\ref CAIRO] image surface). For example, a scaling factor of <em>4.0</em> causes a logical pixel (a square with side length <em>1.0</em>) being mapped to <em>16</em> drawing surface pixels. Thus, the higher the scaling factor the higher will be the resolution and size of pixel-based output images.
     # 
-    # <b>Value Type:</b> double
+    # \valuetype  <tt>double</tt>
     # 
     OUTPUT_SCALING_FACTOR = CDPL.Base.LookupKey('OUTPUT_SCALING_FACTOR')
 
@@ -38,7 +38,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The alignment is specified by a combination of the flags defined in namespace Vis.Alignment. If <tt>ALIGNMENT</tt> is left unspecified, the default alignment setting Vis.ControlParameterDefault.ALIGNMENT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
+    # \valuetype  <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 
     ALIGNMENT = CDPL.Base.LookupKey('ALIGNMENT')
 
@@ -47,7 +47,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If <tt>ATOM_COLOR</tt> is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_COLOR and Vis.AtomProperty.COLOR are not set, the default color setting Vis.ControlParameterDefault.ATOM_COLOR will be used. If an atom color table has been specified by Vis.ControlParameter.ATOM_COLOR_TABLE or Vis.MolecularGraphProperty.ATOM_COLOR_TABLE and the property Vis.AtomProperty.COLOR is not set, the color provided by <tt>ATOM_COLOR</tt> or Vis.MolecularGraphProperty.ATOM_COLOR will be used as a fallback for missing color table entries.
     # 
-    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_COLOR or Vis.AtomProperty.COLOR.
+    # \valuetype  Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_COLOR or Vis.AtomProperty.COLOR.
     # 
     ATOM_COLOR = CDPL.Base.LookupKey('ATOM_COLOR')
 
@@ -56,7 +56,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the color for a particular atom type is missing, the color specified by Vis.ControlParameter.ATOM_COLOR or Vis.MolecularGraphProperty.ATOM_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.ColorTable.SharedPointer \note The color table will only be considered if the property Vis.AtomProperty.COLOR has not been set for the atom to visualize. A color table specified by Vis.MolecularGraphProperty.ATOM_COLOR_TABLE takes precedence over the table specified by <tt>ATOM_COLOR_TABLE</tt>.
+    # \valuetype  Vis.ColorTable.SharedPointer \note The color table will only be considered if the property Vis.AtomProperty.COLOR has not been set for the atom to visualize. A color table specified by Vis.MolecularGraphProperty.ATOM_COLOR_TABLE takes precedence over the table specified by <tt>ATOM_COLOR_TABLE</tt>.
     # 
     ATOM_COLOR_TABLE = CDPL.Base.LookupKey('ATOM_COLOR_TABLE')
 
@@ -65,7 +65,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The dot size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the dot diameter will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the diameter will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE and Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE are not set, the default setting Vis.ControlParameterDefault.RADICAL_ELECTRON_DOT_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a dot size has been specified by Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE or Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a dot size has been specified by Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE or Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE.
     # 
     RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey('RADICAL_ELECTRON_DOT_SIZE')
 
@@ -74,7 +74,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_LABEL_FONT and Vis.AtomProperty.LABEL_FONT are not set, the default font Vis.ControlParameterDefault.ATOM_LABEL_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_FONT or Vis.AtomProperty.LABEL_FONT.
+    # \valuetype  Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_FONT or Vis.AtomProperty.LABEL_FONT.
     # 
     ATOM_LABEL_FONT = CDPL.Base.LookupKey('ATOM_LABEL_FONT')
 
@@ -83,7 +83,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the width of the margin will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the label margin will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN and Vis.AtomProperty.LABEL_MARGIN are not set, the default setting Vis.ControlParameterDefault.ATOM_LABEL_MARGIN will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a margin has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN or Vis.AtomProperty.LABEL_MARGIN.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a margin has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN or Vis.AtomProperty.LABEL_MARGIN.
     # 
     ATOM_LABEL_MARGIN = CDPL.Base.LookupKey('ATOM_LABEL_MARGIN')
 
@@ -92,7 +92,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The font size has to be specified as an absolute value. If input-scaling is enabled, the font size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will grow/shrink with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_LABEL_SIZE and Vis.AtomProperty.LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.ATOM_LABEL_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE.
     # 
     ATOM_LABEL_SIZE = CDPL.Base.LookupKey('ATOM_LABEL_SIZE')
 
@@ -101,7 +101,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT and Vis.AtomProperty.SECONDARY_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.SECONDARY_ATOM_LABEL_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT or Vis.AtomProperty.SECONDARY_LABEL_FONT.
+    # \valuetype  Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT or Vis.AtomProperty.SECONDARY_LABEL_FONT.
     # 
     SECONDARY_ATOM_LABEL_FONT = CDPL.Base.LookupKey('SECONDARY_ATOM_LABEL_FONT')
 
@@ -110,7 +110,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE and Vis.AtomProperty.SECONDARY_LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.SECONDARY_ATOM_LABEL_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE or Vis.AtomProperty.SECONDARY_LABEL_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE or Vis.AtomProperty.SECONDARY_LABEL_SIZE.
     # 
     SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey('SECONDARY_ATOM_LABEL_SIZE')
 
@@ -119,7 +119,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size has to be specified as an absolute value. If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE is not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE. 
     # 
     # \since 1.2
     # 
@@ -130,7 +130,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH and Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH are not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_BRUSH will be used.
     # 
-    # <b>Value Type:</b> Vis.Brush \note The control-parameter setting is ignored if a brush has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH or Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH. 
+    # \valuetype  Vis.Brush \note The control-parameter setting is ignored if a brush has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH or Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH. 
     # 
     # \since 1.2
     # 
@@ -141,7 +141,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN and Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN are not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN will be used.
     # 
-    # <b>Value Type:</b> Vis.Pen \note The control-parameter setting is ignored if a pen has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN or Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # \valuetype  Vis.Pen \note The control-parameter setting is ignored if a pen has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN or Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
     # 
     # \since 1.2
     # 
@@ -152,7 +152,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE will be used.
     # 
-    # <b>Value Type:</b> bool \since 1.2
+    # \valuetype  <tt>bool</tt> \since 1.2
     # 
     BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE = CDPL.Base.LookupKey('BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE')
 
@@ -161,7 +161,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render.
     # 
-    # <b>Value Type:</b> Vis.Brush
+    # \valuetype  Vis.Brush
     # 
     BACKGROUND_BRUSH = CDPL.Base.LookupKey('BACKGROUND_BRUSH')
 
@@ -170,7 +170,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_COLOR and Vis.BondProperty.COLOR are not set, the default setting Vis.ControlParameterDefault.BOND_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_COLOR or Vis.BondProperty.COLOR.
+    # \valuetype  Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_COLOR or Vis.BondProperty.COLOR.
     # 
     BOND_COLOR = CDPL.Base.LookupKey('BOND_COLOR')
 
@@ -179,7 +179,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_LABEL_FONT and Vis.BondProperty.LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.BOND_LABEL_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_LABEL_FONT or Vis.BondProperty.LABEL_FONT.
+    # \valuetype  Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_LABEL_FONT or Vis.BondProperty.LABEL_FONT.
     # 
     BOND_LABEL_FONT = CDPL.Base.LookupKey('BOND_LABEL_FONT')
 
@@ -188,7 +188,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the width of the margin will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the label margin will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_LABEL_MARGIN and Vis.BondProperty.LABEL_MARGIN are not set, the default setting Vis.ControlParameterDefault.BOND_LABEL_MARGIN will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a margin has been specified by Vis.MolecularGraphProperty.BOND_LABEL_MARGIN or Vis.BondProperty.LABEL_MARGIN.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a margin has been specified by Vis.MolecularGraphProperty.BOND_LABEL_MARGIN or Vis.BondProperty.LABEL_MARGIN.
     # 
     BOND_LABEL_MARGIN = CDPL.Base.LookupKey('BOND_LABEL_MARGIN')
 
@@ -197,7 +197,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The font size has to be specified as an absolute value. If input-scaling is enabled, the font size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_LABEL_SIZE and Vis.BondProperty.LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.BOND_LABEL_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE.
     # 
     BOND_LABEL_SIZE = CDPL.Base.LookupKey('BOND_LABEL_SIZE')
 
@@ -206,7 +206,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The bond length has to be specified as an absolute value. The input- and output-scaling settings are ignored and have no effect. If the specified bond length is smaller or equal zero, then the structure is not resized and the original 2D atom coordinates are used. Otherwise the atom coordinates are scaled to obtain the specified average bond length. If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.BOND_LENGTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     BOND_LENGTH = CDPL.Base.LookupKey('BOND_LENGTH')
 
@@ -215,7 +215,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_LINE_SPACING and Vis.BondProperty.LINE_SPACING are not set, the default setting Vis.ControlParameterDefault.BOND_LINE_SPACING will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line spacing has been specified by Vis.MolecularGraphProperty.BOND_LINE_SAPCING or Vis.BondProperty.LINE_SPACING.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a line spacing has been specified by Vis.MolecularGraphProperty.BOND_LINE_SAPCING or Vis.BondProperty.LINE_SPACING.
     # 
     BOND_LINE_SPACING = CDPL.Base.LookupKey('BOND_LINE_SPACING')
 
@@ -224,7 +224,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the line width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_LINE_WIDTH and Vis.BondProperty.LINE_WIDTH are not set, the default setting Vis.ControlParameterDefault.BOND_LINE_WIDTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line width has been specified by Vis.MolecularGraphProperty.BOND_LINE_WIDTH or Vis.BondProperty.LINE_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a line width has been specified by Vis.MolecularGraphProperty.BOND_LINE_WIDTH or Vis.BondProperty.LINE_WIDTH.
     # 
     BOND_LINE_WIDTH = CDPL.Base.LookupKey('BOND_LINE_WIDTH')
 
@@ -233,7 +233,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH and Vis.BondProperty.REACTION_CENTER_LINE_LENGTH are not set, the default setting Vis.ControlParameterDefault.REACTION_CENTER_LINE_LENGTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line length has been specified by Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH or Vis.BondProperty.REACTION_CENTER_LINE_LENGTH. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a line length has been specified by Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH or Vis.BondProperty.REACTION_CENTER_LINE_LENGTH. 
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
@@ -244,7 +244,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING and Vis.BondProperty.REACTION_CENTER_LINE_SPACING are not set, the default setting Vis.ControlParameterDefault.REACTION_CENTER_LINE_SPACING will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line length has been specified by Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING or Vis.BondProperty.REACTION_CENTER_LINE_SPACING. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a line length has been specified by Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING or Vis.BondProperty.REACTION_CENTER_LINE_SPACING. 
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
@@ -255,7 +255,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the hash distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the hash distance grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING and Vis.BondProperty.STEREO_BOND_HASH_SPACING are not set, the default setting Vis.ControlParameterDefault.STEREO_BOND_HASH_DISTANCE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a hash spacing has been specified by Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING or Vis.BondProperty.STEREO_BOND_HASH_SPACING.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a hash spacing has been specified by Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING or Vis.BondProperty.STEREO_BOND_HASH_SPACING.
     # 
     STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey('STEREO_BOND_HASH_SPACING')
 
@@ -264,7 +264,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the wedge width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the wedge width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH and Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH are not set, the default setting Vis.ControlParameterDefault.STEREO_BOND_WEDGE_WIDTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a wedge width has been specified by Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH or Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a wedge width has been specified by Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH or Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH.
     # 
     STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey('STEREO_BOND_WEDGE_WIDTH')
 
@@ -273,7 +273,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH and Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH are not set, the default setting Vis.ControlParameterDefault.DOUBLE_BOND_TRIM_LENGTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a trim length has been specified by Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH or Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a trim length has been specified by Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH or Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH. 
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
@@ -284,7 +284,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported vertical alignment styles are defined in namespace Vis.Alignment. If <tt>REACTION_AGENT_ALIGNMENT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_ALIGNMENT is not set, the default alignment setting Vis.ControlParameterDefault.REACTION_AGENT_ALIGNMENT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_ALIGNMENT.
+    # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_ALIGNMENT.
     # 
     REACTION_AGENT_ALIGNMENT = CDPL.Base.LookupKey('REACTION_AGENT_ALIGNMENT')
 
@@ -293,7 +293,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. If <tt>REACTION_AGENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT is not set, the default layout Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT.
+    # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT.
     # 
     REACTION_AGENT_LAYOUT = CDPL.Base.LookupKey('REACTION_AGENT_LAYOUT')
 
@@ -302,7 +302,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. If <tt>REACTION_AGENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT_DIRECTION will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION.
+    # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION.
     # 
     REACTION_AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('REACTION_AGENT_LAYOUT_DIRECTION')
 
@@ -311,7 +311,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_COLOR is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_COLOR.
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_COLOR.
     # 
     REACTION_ARROW_COLOR = CDPL.Base.LookupKey('REACTION_ARROW_COLOR')
 
@@ -320,7 +320,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The specified head length can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_HEAD_LENGTH is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_HEAD_LENGTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_HEAD_LENGTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_HEAD_LENGTH.
     # 
     REACTION_ARROW_HEAD_LENGTH = CDPL.Base.LookupKey('REACTION_ARROW_HEAD_LENGTH')
 
@@ -329,7 +329,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The specified width can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_HEAD_WIDTH is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_HEAD_WIDTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_HEAD_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_HEAD_WIDTH.
     # 
     REACTION_ARROW_HEAD_WIDTH = CDPL.Base.LookupKey('REACTION_ARROW_HEAD_WIDTH')
 
@@ -338,7 +338,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Specifying the length as beeing relative has the effect, that the given length is interpreted as a minimum length for an arrow which is as long as the width of the overall area covered by the drawn reaction agents (if any). The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_LENGTH is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_LENGTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_LENGTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_LENGTH.
     # 
     REACTION_ARROW_LENGTH = CDPL.Base.LookupKey('REACTION_ARROW_LENGTH')
 
@@ -347,7 +347,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The specified width can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_LINE_WIDTH is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_HEAD_LENGTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_LINE_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_LINE_WIDTH.
     # 
     REACTION_ARROW_LINE_WIDTH = CDPL.Base.LookupKey('REACTION_ARROW_LINE_WIDTH')
 
@@ -356,7 +356,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The specified width can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_SHAFT_WIDTH is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_SHAFT_WIDTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_SHAFT_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_SHAFT_WIDTH.
     # 
     REACTION_ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey('REACTION_ARROW_SHAFT_WIDTH')
 
@@ -365,7 +365,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported styles are defined as constants in namespace Vis.ArrowStyle. If <tt>REACTION_ARROW_STYLE</tt> is left unspecified and the property Vis.ReactionProperty.ARROW_STYLE is not set, the default arrow style Vis.ControlParameterDefault.REACTION_ARROW_STYLE will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_STYLE.
+    # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_STYLE.
     # 
     REACTION_ARROW_STYLE = CDPL.Base.LookupKey('REACTION_ARROW_STYLE')
 
@@ -374,7 +374,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. If <tt>REACTION_COMPONENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT is not set, the default layout setting Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT.
+    # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT.
     # 
     REACTION_COMPONENT_LAYOUT = CDPL.Base.LookupKey('REACTION_COMPONENT_LAYOUT')
 
@@ -383,7 +383,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. If <tt>REACTION_COMPONENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT_DIRECTION will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION.
+    # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION.
     # 
     REACTION_COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('REACTION_COMPONENT_LAYOUT_DIRECTION')
 
@@ -392,7 +392,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The margin width has to be specified as an absolute value. The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.COMPONENT_MARGIN is not set, the default setting Vis.ControlParameterDefault.REACTION_COMPONENT_MARGIN will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_MARGIN.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_MARGIN.
     # 
     REACTION_COMPONENT_MARGIN = CDPL.Base.LookupKey('REACTION_COMPONENT_MARGIN')
 
@@ -401,7 +401,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the property Vis.ReactionProperty.PLUS_SIGN_COLOR is not set, the default setting Vis.ControlParameterDefault.REACTION_PLUS_SIGN_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_COLOR.
+    # \valuetype  Vis.Color \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_COLOR.
     # 
     REACTION_PLUS_SIGN_COLOR = CDPL.Base.LookupKey('REACTION_PLUS_SIGN_COLOR')
 
@@ -410,7 +410,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size has to be specified as an absolute value. The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH is not set, the default setting Vis.ControlParameterDefault.REACTION_PLUS_SIGN_LINE_WIDTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH.
     # 
     REACTION_PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey('REACTION_PLUS_SIGN_LINE_WIDTH')
 
@@ -419,7 +419,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size has to be specified as an absolute value. The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.PLUS_SIGN_SIZE is not set, the default setting Vis.ControlParameterDefault.REACTION_PLUS_SIGN_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_SIZE.
+    # \valuetype  Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_SIZE.
     # 
     REACTION_PLUS_SIGN_SIZE = CDPL.Base.LookupKey('REACTION_PLUS_SIGN_SIZE')
 
@@ -428,7 +428,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the property Vis.ReactionProperty.SHOW_REACTANTS is not set, the default setting Vis.ControlParameterDefault.SHOW_REACTION_REACTANTS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_REACTANTS.
+    # \valuetype  <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_REACTANTS.
     # 
     SHOW_REACTION_REACTANTS = CDPL.Base.LookupKey('SHOW_REACTION_REACTANTS')
 
@@ -437,7 +437,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the property Vis.ReactionProperty.SHOW_AGENTS is not set, the default setting Vis.ControlParameterDefault.SHOW_REACTION_AGENTS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_AGENTS.
+    # \valuetype  <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_AGENTS.
     # 
     SHOW_REACTION_AGENTS = CDPL.Base.LookupKey('SHOW_REACTION_AGENTS')
 
@@ -446,7 +446,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the property Vis.ReactionProperty.SHOW_PRODUCTS is not set, the default setting Vis.ControlParameterDefault.SHOW_REACTION_PRODUCTS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_PRODUCTS.
+    # \valuetype  <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_PRODUCTS.
     # 
     SHOW_REACTION_PRODUCTS = CDPL.Base.LookupKey('SHOW_REACTION_PRODUCTS')
 
@@ -455,7 +455,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_CHARGES will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has only an effect for atoms with a non-zero formal charge. A formal charge of zero is never shown.
+    # \valuetype  <tt>bool</tt> \note The control-parameter setting has only an effect for atoms with a non-zero formal charge. A formal charge of zero is never shown.
     # 
     SHOW_CHARGES = CDPL.Base.LookupKey('SHOW_CHARGES')
 
@@ -464,7 +464,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_HYDROGEN_COUNTS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has no effect for isolated atoms (i.e. that have no bonds to other visible atoms). The hydrogen count of unbound atoms is always shown.
+    # \valuetype  <tt>bool</tt> \note The control-parameter setting has no effect for isolated atoms (i.e. that have no bonds to other visible atoms). The hydrogen count of unbound atoms is always shown.
     # 
     SHOW_HYDROGEN_COUNTS = CDPL.Base.LookupKey('SHOW_HYDROGEN_COUNTS')
 
@@ -473,7 +473,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ISOTOPES will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has only an effect for atoms with a non-zero isotopic mass. An istopic mass of zero is never shown.
+    # \valuetype  <tt>bool</tt> \note The control-parameter setting has only an effect for atoms with a non-zero isotopic mass. An istopic mass of zero is never shown.
     # 
     SHOW_ISOTOPES = CDPL.Base.LookupKey('SHOW_ISOTOPES')
 
@@ -482,7 +482,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_NON_CARBON_HYDROGEN_COUNTS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has no effect if Vis.ControlParameter.SHOW_HYDROGEN_COUNTS is set to <tt>True</tt> or if an atom has no bonds to other visible atoms.
+    # \valuetype  <tt>bool</tt> \note The control-parameter setting has no effect if Vis.ControlParameter.SHOW_HYDROGEN_COUNTS is set to <tt>True</tt> or if an atom has no bonds to other visible atoms.
     # 
     SHOW_NON_CARBON_HYDROGEN_COUNTS = CDPL.Base.LookupKey('SHOW_NON_CARBON_HYDROGEN_COUNTS')
 
@@ -491,7 +491,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_QUERY_INFOS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_ATOM_QUERY_INFOS = CDPL.Base.LookupKey('SHOW_ATOM_QUERY_INFOS')
 
@@ -500,7 +500,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_RADICAL_ELECTRONS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_RADICAL_ELECTRONS = CDPL.Base.LookupKey('SHOW_RADICAL_ELECTRONS')
 
@@ -509,7 +509,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_REACTION_INFOS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_ATOM_REACTION_INFOS = CDPL.Base.LookupKey('SHOW_ATOM_REACTION_INFOS')
 
@@ -518,7 +518,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_QUERY_INFOS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_BOND_QUERY_INFOS = CDPL.Base.LookupKey('SHOW_BOND_QUERY_INFOS')
 
@@ -534,7 +534,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_REACTION_INFOS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_BOND_REACTION_INFOS = CDPL.Base.LookupKey('SHOW_BOND_REACTION_INFOS')
 
@@ -553,7 +553,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_STERO_BONDS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_STEREO_BONDS = CDPL.Base.LookupKey('SHOW_STEREO_BONDS')
 
@@ -562,7 +562,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_CARBONS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has only an effect for normal carbon atoms with bonds to other visible atoms. Element labels of isolated carbons and carbons with a visible formal charge (Vis.ControlParameter.SHOW_CHARGES), isotopic mass (see Vis.ControlParameter.SHOW_ISOTOPES), query expression label (see Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS), atom-atom mapping number (see Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS) or with visible radical electron dots (see Vis.ControlParameter.SHOW_RADICAL_ELECTRONS) are always shown.
+    # \valuetype  <tt>bool</tt> \note The control-parameter setting has only an effect for normal carbon atoms with bonds to other visible atoms. Element labels of isolated carbons and carbons with a visible formal charge (Vis.ControlParameter.SHOW_CHARGES), isotopic mass (see Vis.ControlParameter.SHOW_ISOTOPES), query expression label (see Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS), atom-atom mapping number (see Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS) or with visible radical electron dots (see Vis.ControlParameter.SHOW_RADICAL_ELECTRONS) are always shown.
     # 
     SHOW_CARBONS = CDPL.Base.LookupKey('SHOW_CARBONS')
 
@@ -571,7 +571,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_EXPLICIT_HYDROGENS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note This setting has only an effect for standard explicit hydrogen atoms which are bound to at least one heavy atom. Explicit hydrogens whose formal charge (Vis.ControlParameter.SHOW_CHARGES), isotopic mass (see Vis.ControlParameter.SHOW_ISOTOPES), query expression label (see Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS), atom-atom mapping number (see Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS) or radical electron cloud (see Vis.ControlParameter.SHOW_RADICAL_ELECTRONS) is visible, are always drawn.
+    # \valuetype  <tt>bool</tt> \note This setting has only an effect for standard explicit hydrogen atoms which are bound to at least one heavy atom. Explicit hydrogens whose formal charge (Vis.ControlParameter.SHOW_CHARGES), isotopic mass (see Vis.ControlParameter.SHOW_ISOTOPES), query expression label (see Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS), atom-atom mapping number (see Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS) or radical electron cloud (see Vis.ControlParameter.SHOW_RADICAL_ELECTRONS) is visible, are always drawn.
     # 
     SHOW_EXPLICIT_HYDROGENS = CDPL.Base.LookupKey('SHOW_EXPLICIT_HYDROGENS')
 
@@ -580,7 +580,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CONFIGURATION_LABELS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.1
+    # \valuetype  <tt>bool</tt> \since 1.1
     # 
     SHOW_BOND_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CONFIGURATION_LABELS')
 
@@ -589,7 +589,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CUSTOM_LABELS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # \valuetype  <tt>bool</tt> \since 1.2
     # 
     SHOW_BOND_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CUSTOM_LABELS')
 
@@ -598,7 +598,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_CONFIGURATION_LABELS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.1
+    # \valuetype  <tt>bool</tt> \since 1.1
     # 
     SHOW_ATOM_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CONFIGURATION_LABELS')
 
@@ -607,7 +607,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_CUSTOM_LABELS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # \valuetype  <tt>bool</tt> \since 1.2
     # 
     SHOW_ATOM_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CUSTOM_LABELS')
 
@@ -616,7 +616,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.ENABLE_ATOM_HIGHLIGHTING will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # \valuetype  <tt>bool</tt> \since 1.2
     # 
     ENABLE_ATOM_HIGHLIGHTING = CDPL.Base.LookupKey('ENABLE_ATOM_HIGHLIGHTING')
 
@@ -625,7 +625,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.ENABLE_BOND_HIGHLIGHTING will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # \valuetype  <tt>bool</tt> \since 1.2
     # 
     ENABLE_BOND_HIGHLIGHTING = CDPL.Base.LookupKey('ENABLE_BOND_HIGHLIGHTING')
 
@@ -634,7 +634,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported adjustment policies are defined in namespace Vis.SizeAdjustment. If <tt>SIZE_ADJUSTMENT</tt> is left unspecified, the default size adjustment setting Vis.ControlParameterDefault.SIZE_ADJUSTMENT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
+    # \valuetype  <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 
     SIZE_ADJUSTMENT = CDPL.Base.LookupKey('SIZE_ADJUSTMENT')
 
@@ -643,7 +643,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH and Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH are not set, the default setting Vis.ControlParameterDefault.TRIPLE_BOND_TRIM_LENGTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a trim length has been specified by Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH or Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH.
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a trim length has been specified by Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH or Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH.
     # 
     TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('TRIPLE_BOND_TRIM_LENGTH')
 
@@ -652,7 +652,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is set to <tt>False</tt> and assigned 2D atom coordinates are available, then the assigned coordinates will be used. If the parameter is <tt>True</tt> or no assigned 2D-coordinates are available, the atom coordinates will be calculated. If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.USE_CALCULATED_ATOM_COORDINATES will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     USE_CALCULATED_ATOM_COORDINATES = CDPL.Base.LookupKey('USE_CALCULATED_ATOM_COORDINATES')
 
@@ -661,7 +661,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The way the size and location of a graphical object is adjusted has to be specified separately by the control-parameters Vis.ControlParameter.SIZE_ADJUSTMENT and Vis.ControlParameter.ALIGNMENT. If <tt>VIEWPORT</tt> is left unspecified, the default setting Vis.ControlParameterDefault.VIEWPORT will be used.
     # 
-    # <b>Value Type:</b> Vis.Rectangle2D
+    # \valuetype  Vis.Rectangle2D
     # 
     VIEWPORT = CDPL.Base.LookupKey('VIEWPORT')
 
@@ -670,7 +670,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The width has to be specified as an absolute value. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH is not set, the default setting Vis.ControlParameterDefault.HIGHLIGHT_AREA_OUTLINE_WIDTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line width has been specified by Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a line width has been specified by Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH. 
     # 
     # \since 1.2
     # 
@@ -681,7 +681,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT and Vis.AtomProperty.CONFIGURATION_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.ATOM_CONFIGURATION_LABEL_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT or Vis.AtomProperty.CONFIGURATION_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT or Vis.AtomProperty.CONFIGURATION_LABEL_FONT. 
     # 
     # \since 1.1
     # 
@@ -692,7 +692,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE and Vis.AtomProperty.CONFIGURATION_LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.ATOM_CONFIGURATION_LABEL_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE or Vis.AtomProperty.ATOM_CONFIGURATION_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE or Vis.AtomProperty.ATOM_CONFIGURATION_LABEL_SIZE. 
     # 
     # \since 1.1
     # 
@@ -703,7 +703,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR and Vis.AtomProperty.CONFIGURATION_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.ATOM_CONFIGURATION_LABEL_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # \valuetype  Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR or Vis.BondProperty.COLOR. 
     # 
     # \since 1.2
     # 
@@ -714,7 +714,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT and Vis.AtomProperty.CUSTOM_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.ATOM_CUSTOM_LABEL_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT or Vis.AtomProperty.CUSTOM_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT or Vis.AtomProperty.CUSTOM_LABEL_FONT. 
     # 
     # \since 1.2
     # 
@@ -725,7 +725,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE and Vis.AtomProperty.CUSTOM_LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.ATOM_CUSTOM_LABEL_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE or Vis.AtomProperty.ATOM_CUSTOM_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE or Vis.AtomProperty.ATOM_CUSTOM_LABEL_SIZE. 
     # 
     # \since 1.2
     # 
@@ -736,7 +736,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR and Vis.AtomProperty.CUSTOM_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.ATOM_CUSTOM_LABEL_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # \valuetype  Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR or Vis.BondProperty.COLOR. 
     # 
     # \since 1.2
     # 
@@ -747,7 +747,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The width has to be specified as an absolute value. If input-scaling is enabled, the width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH is not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_WIDTH will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a width has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a width has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH. 
     # 
     # \since 1.2
     # 
@@ -758,7 +758,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH and Vis.BondProperty.HIGHLIGHT_AREA_BRUSH are not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_BRUSH will be used.
     # 
-    # <b>Value Type:</b> Vis.Brush \note The control-parameter setting is ignored if a brush has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH or Vis.BondProperty.HIGHLIGHT_AREA_BRUSH. 
+    # \valuetype  Vis.Brush \note The control-parameter setting is ignored if a brush has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH or Vis.BondProperty.HIGHLIGHT_AREA_BRUSH. 
     # 
     # \since 1.2
     # 
@@ -769,7 +769,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN and Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN are not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_OUTLINE_PEN will be used.
     # 
-    # <b>Value Type:</b> Vis.Pen \note The control-parameter setting is ignored if a pen has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN or Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # \valuetype  Vis.Pen \note The control-parameter setting is ignored if a pen has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN or Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
     # 
     # \since 1.2
     # 
@@ -780,7 +780,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT and Vis.BondProperty.CONFIGURATION_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.BOND_CONFIGURATION_LABEL_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT or Vis.BondProperty.CONFIGURATION_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT or Vis.BondProperty.CONFIGURATION_LABEL_FONT. 
     # 
     # \since 1.1
     # 
@@ -791,7 +791,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE and Vis.BondProperty.CONFIGURATION_LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.BOND_CONFIGURATION_LABEL_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE or Vis.BondProperty.CONFIGURATION_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE or Vis.BondProperty.CONFIGURATION_LABEL_SIZE. 
     # 
     # \since 1.1
     # 
@@ -802,7 +802,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR and Vis.BondProperty.CONFIGURATION_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.BOND_CONFIGURATION_LABEL_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # \valuetype  Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR or Vis.BondProperty.COLOR. 
     # 
     # \since 1.2
     # 
@@ -813,7 +813,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT and Vis.BondProperty.CUSTOM_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.BOND_CUSTOM_LABEL_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT or Vis.BondProperty.CUSTOM_LABEL_FONT. 
+    # \valuetype  Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT or Vis.BondProperty.CUSTOM_LABEL_FONT. 
     # 
     # \since 1.2
     # 
@@ -824,7 +824,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE and Vis.BondProperty.CUSTOM_LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.BOND_CUSTOM_LABEL_SIZE will be used.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE or Vis.BondProperty.CUSTOM_LABEL_SIZE. 
+    # \valuetype  Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE or Vis.BondProperty.CUSTOM_LABEL_SIZE. 
     # 
     # \since 1.2
     # 
@@ -835,7 +835,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR and Vis.BondProperty.CUSTOM_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.BOND_CUSTOM_LABEL_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # \valuetype  Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR or Vis.BondProperty.COLOR. 
     # 
     # \since 1.2
     # 
@@ -846,7 +846,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_BORDER_PEN will be used.
     # 
-    # <b>Value Type:</b> Vis.Pen \since 1.2
+    # \valuetype  Vis.Pen \since 1.2
     # 
     GRID_VIEW_BORDER_PEN = CDPL.Base.LookupKey('GRID_VIEW_BORDER_PEN')
 
@@ -855,7 +855,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_ROW_SEPARATOR_PEN will be used.
     # 
-    # <b>Value Type:</b> Vis.Pen \since 1.2
+    # \valuetype  Vis.Pen \since 1.2
     # 
     GRID_VIEW_ROW_SEPARATOR_PEN = CDPL.Base.LookupKey('GRID_VIEW_ROW_SEPARATOR_PEN')
 
@@ -864,7 +864,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_COLUMN_SEPARATOR_PEN will be used.
     # 
-    # <b>Value Type:</b> Vis.Pen \since 1.2
+    # \valuetype  Vis.Pen \since 1.2
     # 
     GRID_VIEW_COLUMN_SEPARATOR_PEN = CDPL.Base.LookupKey('GRID_VIEW_COLUMN_SEPARATOR_PEN')
 
@@ -873,7 +873,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_MARGIN will be used.
     # 
-    # <b>Value Type:</b> <tt>double</tt> \since 1.2
+    # \valuetype  <tt>double</tt> \since 1.2
     # 
     GRID_VIEW_MARGIN = CDPL.Base.LookupKey('GRID_VIEW_MARGIN')
 
@@ -882,7 +882,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_CELL_PADDING will be used.
     # 
-    # <b>Value Type:</b> <tt>double</tt> \since 1.2
+    # \valuetype  <tt>double</tt> \since 1.2
     # 
     GRID_VIEW_CELL_PADDING = CDPL.Base.LookupKey('GRID_VIEW_CELL_PADDING')
 
@@ -891,7 +891,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_TEXT_FONT will be used.
     # 
-    # <b>Value Type:</b> Vis.Font \since 1.2
+    # \valuetype  Vis.Font \since 1.2
     # 
     GRID_VIEW_TEXT_FONT = CDPL.Base.LookupKey('GRID_VIEW_TEXT_FONT')
 
@@ -900,7 +900,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_TEXT_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \since 1.2
+    # \valuetype  Vis.Color \since 1.2
     # 
     GRID_VIEW_TEXT_COLOR = CDPL.Base.LookupKey('GRID_VIEW_TEXT_COLOR')
 
@@ -909,7 +909,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the color for a particular feature type is missing then the color specified for that type in Vis.DefaultFeatureColorTable will be used.
     # 
-    # <b>Value Type:</b> Vis.ColorTable.SharedPointer \since 1.3
+    # \valuetype  Vis.ColorTable.SharedPointer \since 1.3
     # 
     FEATURE_COLOR_TABLE = CDPL.Base.LookupKey('FEATURE_COLOR_TABLE')
 
@@ -918,7 +918,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter has not been set then the value of Vis.ControlParameterDefault.DEFAULT_MATERIAL will be used.
     # 
-    # <b>Value Type:</b> Vis.Material \since 1.3
+    # \valuetype  Vis.Material \since 1.3
     # 
     DEFAULT_MATERIAL = CDPL.Base.LookupKey('DEFAULT_MATERIAL')
 
@@ -927,6 +927,6 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_FEATURE_CENTERS will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.3
+    # \valuetype  <tt>bool</tt> \since 1.3
     # 
     SHOW_FEATURE_CENTERS = CDPL.Base.LookupKey('SHOW_FEATURE_CENTERS')

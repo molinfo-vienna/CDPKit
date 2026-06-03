@@ -53,7 +53,7 @@ namespace CDPL
             /**
              * \brief Specifies the MHMO pi-bond order of the bond.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_ORDER;
         }

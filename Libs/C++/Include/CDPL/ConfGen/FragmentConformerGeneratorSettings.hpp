@@ -128,7 +128,7 @@ namespace CDPL
                 std::size_t getMaxNumOutputConformers() const;
 
                 /**
-                 * \brief Sets the minimum pairwise heavy-atom RMSD that fragment conformers in the output set must have.
+                 * \brief Sets the minimum pairwise heavy atom RMSD that fragment conformers in the output set must have.
                  * \param min_rmsd The new minimum RMSD threshold (in &Aring;).
                  */
                 void setMinRMSD(double min_rmsd);

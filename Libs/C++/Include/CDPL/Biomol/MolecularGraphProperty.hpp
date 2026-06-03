@@ -53,35 +53,35 @@ namespace CDPL
             /**
              * \brief Specifies the residue code (three-letter code) of the residue described by the molecular graph.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_CODE;
 
             /**
              * \brief Specifies the residue sequence number of the residue described by the molecular graph.
              *
-             * \valuetype long
+             * \valuetype \c long
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
 
             /**
              * \brief Specifies the residue insertion code of the residue described by the molecular graph.
              *
-             * \valuetype char
+             * \valuetype \c char
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
 
             /**
              * \brief Specifies the identifier of the chain the molecular graph belongs to.
              *
-             * \valuetype std::string
+             * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
 
             /**
              * \brief Specifies the model number assigned to the molecular graph.
              *
-             * \valuetype std::size_t
+             * \valuetype \c std::size_t
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
 

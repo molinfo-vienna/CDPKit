@@ -821,7 +821,7 @@ namespace CDPL
         };
 
         /**
-         * \brief A pure-real quaternion \f$ q = c_1 + 0i + 0j + 0k \f$ that stores only the real component.
+         * \brief Pure-real quaternion \f$ q = c_1 + 0i + 0j + 0k \f$ that stores only the real component.
          * \tparam T The scalar component value type.
          */
         template <typename T>

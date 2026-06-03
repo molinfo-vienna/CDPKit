@@ -22,8 +22,6 @@
 ##
 # \brief Handler for the output of molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF] format.
 # 
-# \since 1.2
-# 
 class MMTFMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##

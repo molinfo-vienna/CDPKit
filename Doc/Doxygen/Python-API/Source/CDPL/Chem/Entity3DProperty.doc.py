@@ -25,6 +25,7 @@
 class Entity3DProperty(Boost.Python.instance):
 
     ##
-    # \brief Key for the 3D coordinates of an entity (Chem.Entity3D). <b>Value Type:</b> Math.Vector3D.
+    # \brief Key for the 3D coordinates of an entity (Chem.Entity3D). 
+    # \valuetype  Math.Vector3D.
     # 
     COORDINATES_3D = CDPL.Base.LookupKey('COORDINATES_3D')

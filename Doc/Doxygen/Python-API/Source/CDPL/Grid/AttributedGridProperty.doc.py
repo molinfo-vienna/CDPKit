@@ -25,12 +25,14 @@
 class AttributedGridProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies a textual name for an attributed grid. <b>Value Type:</b> <tt>std::string</tt>.
+    # \brief Specifies a textual name for an attributed grid. 
+    # \valuetype  <tt>std::string</tt>.
     # 
     NAME = CDPL.Base.LookupKey('NAME')
 
     ##
-    # \brief Specifies a textual comment/description for an attributed grid. <b>Value Type:</b> <tt>std::string</tt>.
+    # \brief Specifies a textual comment/description for an attributed grid. 
+    # \valuetype  <tt>std::string</tt>.
     # 
     # \since 1.4
     # 

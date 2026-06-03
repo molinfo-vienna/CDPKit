@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
+         * \brief Half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
          * \tparam S The integral size/index type.
          */
         template <typename S>

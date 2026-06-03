@@ -29,7 +29,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported vertical alignment styles are defined in namespace Vis.Alignment. The specified alignment takes precedence over the alignment specified by the parameter Vis.ControlParameter.REACTION_AGENT_ALIGNMENT.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt>
     # 
     AGENT_ALIGNMENT = CDPL.Base.LookupKey('AGENT_ALIGNMENT')
 
@@ -38,7 +38,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt>
     # 
     AGENT_LAYOUT = CDPL.Base.LookupKey('AGENT_LAYOUT')
 
@@ -47,7 +47,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt>
     # 
     AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('AGENT_LAYOUT_DIRECTION')
 
@@ -56,7 +56,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.REACTION_ARROW_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color
+    # \valuetype  Vis.Color
     # 
     ARROW_COLOR = CDPL.Base.LookupKey('ARROW_COLOR')
 
@@ -65,7 +65,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The value of the specified length can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. The specified length takes precedence over the length specified by the parameter Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     ARROW_HEAD_LENGTH = CDPL.Base.LookupKey('ARROW_HEAD_LENGTH')
 
@@ -74,7 +74,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The value of the specified width can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. The specified width takes precedence over the width specified by the parameter Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     ARROW_HEAD_WIDTH = CDPL.Base.LookupKey('ARROW_HEAD_WIDTH')
 
@@ -83,7 +83,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Specifying the length as beeing relative has the effect, that the given length is interpreted as a minimum length for an arrow which is as long as the width of the overall area covered by the drawn reaction agents (if any). The output- and input-scaling settings are ignored and have no effect. The specified length takes precedence over the length specified by the parameter Vis.ControlParameter.REACTION_ARROW_LENGTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     ARROW_LENGTH = CDPL.Base.LookupKey('ARROW_LENGTH')
 
@@ -92,7 +92,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The value of the specified width can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. The specified width takes precedence over the width specified by the parameter Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     ARROW_LINE_WIDTH = CDPL.Base.LookupKey('ARROW_LINE_WIDTH')
 
@@ -101,7 +101,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The value of the specified width can be absolute or relative to the overall arrow length defined by Vis.ControlParameter.REACTION_ARROW_LENGTH or Vis.ReactionProperty.ARROW_LENGTH. The output- and input-scaling settings are ignored and have no effect. The specified width takes precedence over the width specified by the parameter Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey('ARROW_SHAFT_WIDTH')
 
@@ -110,7 +110,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported styles are defined as constants in namespace Vis.ArrowStyle. The arrow style specified by this property takes precedence over the style specified by the parameter Vis.ControlParameter.REACTION_ARROW_STYLE.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt>
     # 
     ARROW_STYLE = CDPL.Base.LookupKey('ARROW_STYLE')
 
@@ -119,7 +119,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt>
     # 
     COMPONENT_LAYOUT = CDPL.Base.LookupKey('COMPONENT_LAYOUT')
 
@@ -128,7 +128,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt>
     # 
     COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('COMPONENT_LAYOUT_DIRECTION')
 
@@ -137,7 +137,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The margin width has to be specified as an absolute value. The output- and input-scaling settings are ignored and have no effect. The specified margin takes precedence over the margin specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_MARGIN.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     COMPONENT_MARGIN = CDPL.Base.LookupKey('COMPONENT_MARGIN')
 
@@ -146,7 +146,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The reactant visibility specified by this property overrides the setting of the control-parameter Vis.ControlParameter.SHOW_REACTION_REACTANTS.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_REACTANTS = CDPL.Base.LookupKey('SHOW_REACTANTS')
 
@@ -155,7 +155,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The agent visibility specified by this property overrides the setting of the control-parameter Vis.ControlParameter.SHOW_REACTION_AGENTS.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_AGENTS = CDPL.Base.LookupKey('SHOW_AGENTS')
 
@@ -164,7 +164,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The product visibility specified by this property overrides the setting of the control-parameter Vis.ControlParameter.SHOW_REACTION_PRODUCTS.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_PRODUCTS = CDPL.Base.LookupKey('SHOW_PRODUCTS')
 
@@ -173,7 +173,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.REACTION_PLUS_SIGN_COLOR.
     # 
-    # <b>Value Type:</b> Vis.Color
+    # \valuetype  Vis.Color
     # 
     PLUS_SIGN_COLOR = CDPL.Base.LookupKey('PLUS_SIGN_COLOR')
 
@@ -182,7 +182,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The size has to be specified as an absolute value. The output- and input-scaling settings are ignored and have no effect. The specified line width takes precedence over the width specified by the parameter Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey('PLUS_SIGN_LINE_WIDTH')
 
@@ -191,7 +191,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The size has to be specified as an absolute value. The output- and input-scaling settings are ignored and have no effect. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification
+    # \valuetype  Vis.SizeSpecification
     # 
     PLUS_SIGN_SIZE = CDPL.Base.LookupKey('PLUS_SIGN_SIZE')
 
@@ -200,6 +200,6 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # The visibility specified by this property overrides the setting of the control-parameter Vis.ControlParameter.SHOW_REACTION_PLUS_SIGNS.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     SHOW_PLUS_SIGNS = CDPL.Base.LookupKey('SHOW_PLUS_SIGNS')

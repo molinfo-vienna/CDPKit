@@ -45,7 +45,7 @@ class ScreeningProcessor(Boost.Python.instance):
         ALL_MATCHING_CONFS = 2
 
     ##
-    # \brief A single alignment hit produced by the screening processor, bundling the source pharmacophore/molecule, the alignment transformation and the source-database indices.
+    # \brief Data structure representing a single alignment hit produced by the screening processor, bundling the source pharmacophore/molecule, the alignment transformation and the source-database indices.
     # 
     class SearchHit(Boost.Python.instance):
 

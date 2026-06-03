@@ -33,10 +33,10 @@ class GRAILXDescriptorCalculator(Boost.Python.instance):
     # 
     # The layout consists of six sections (in this order):
     #  - Feature/atom/bond counts of the ligand (positions [0, 8) and [26, 31)).
-    #  - HBD / HBA counts of the ligand resolved by heavy-atom SYBYL type (positions [8, 26)).
-    #  - Target-environment H-bond occupancy SUM/MAX values resolved by ligand-feature heavy-atom element ([31, 43)).
+    #  - HBD / HBA counts of the ligand resolved by heavy atom SYBYL type (positions [8, 26)).
+    #  - Target-environment H-bond occupancy SUM/MAX values resolved by ligand-feature heavy atom element ([31, 43)).
     #  - Generic interaction scores SUM/MAX (PI-AR, AR-PI, H-H, AR-AR) ([43, 51)).
-    #  - Hydrogen-bond interaction SUM/MAX scores between ligand HBD/HBA subtype and target HBA/HBD by heavy-atom element ([51, 171)).
+    #  - Hydrogen-bond interaction SUM/MAX scores between ligand HBD/HBA subtype and target HBA/HBD by heavy atom element ([51, 171)).
     #  - Halogen-bond and energy terms ([171, 177)).
     # 
     class ElementIndex(Boost.Python.enum):

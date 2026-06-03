@@ -143,7 +143,7 @@ def prepareForConformerGeneration(mol: Chem.Molecule, canonicalize: bool = False
 ##
 # \brief Configures the fixed-substructure handling of <em>molgraph</em> using the matches produced by <em>sub_search</em>.
 # 
-# \param sub_search The common-connected-substructure-search engine providing the matches.
+# \param sub_search The common-connected-substructure search engine providing the matches.
 # \param max_num_matches The maximum number of matches to process (<em>0</em> means unlimited).
 # \param molgraph The molecular graph that holds the input atoms (modified in place).
 # \param fixed_substr The output fragment receiving the matched atoms/bonds.
@@ -158,7 +158,7 @@ def setupFixedSubstructureData(sub_search: Chem.CommonConnectedSubstructureSearc
 ##
 # \brief Configures the fixed-substructure handling of <em>molgraph</em> using the matches produced by <em>sub_search</em>.
 # 
-# \param sub_search The common-connected-substructure-search engine providing the matches.
+# \param sub_search The common-connected-substructure search engine providing the matches.
 # \param max_num_matches The maximum number of matches to process (<em>0</em> means unlimited).
 # \param molgraph The molecular graph that holds the input atoms (modified in place).
 # \param fixed_substr The output fragment receiving the matched atoms/bonds.

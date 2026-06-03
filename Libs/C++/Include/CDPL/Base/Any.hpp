@@ -47,7 +47,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A safe, type checked container for arbitrary data of variable type.
+         * \brief Safe, type checked container for arbitrary data of variable type.
          *
          * The code is based on the <tt>std::experimental::any</tt> (N4562, merged into C++17) implementation for C++11 compilers
          * by <a href="https://github.com/thelink2012">Denilson das Mercês Amorim</a>. 

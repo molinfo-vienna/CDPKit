@@ -535,10 +535,10 @@ namespace CDPL
         CDPL_MOLPROP_API std::size_t getAromaticAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Returns the number of heavy-atom neighbors of \a atom in \a molgraph.
+         * \brief Returns the number of heavy atom neighbors of \a atom in \a molgraph.
          * \param atom The atom.
          * \param molgraph The molecular graph.
-         * \return The heavy-atom neighbor count.
+         * \return The heavy atom neighbor count.
          */
         CDPL_MOLPROP_API std::size_t getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
@@ -632,10 +632,10 @@ namespace CDPL
         CDPL_MOLPROP_API std::size_t getAromaticBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Returns the number of heavy-atom bonds incident to \a atom in \a molgraph.
+         * \brief Returns the number of heavy bonds incident to \a atom in \a molgraph.
          * \param atom The atom.
          * \param molgraph The molecular graph.
-         * \return The heavy-atom bond count.
+         * \return The heavy bond count.
          */
         CDPL_MOLPROP_API std::size_t getHeavyBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 

@@ -29,6 +29,6 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the control-parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # \valuetype  <tt>bool</tt>
     # 
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')

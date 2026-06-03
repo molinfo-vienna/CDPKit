@@ -27,6 +27,6 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief Specifies the MMFF94 bond type index.
     # 
-    # <b>Value Type:</b> unsigned int
+    # \valuetype  <tt>unsigned int</tt>
     # 
     MMFF94_TYPE_INDEX = CDPL.Base.LookupKey('MMFF94_TYPE_INDEX')

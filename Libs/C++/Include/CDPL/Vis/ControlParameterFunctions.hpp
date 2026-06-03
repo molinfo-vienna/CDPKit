@@ -2745,7 +2745,7 @@ namespace CDPL
         /**
          * \brief Sets the value of the Vis::ControlParameter::FEATURE_COLOR_TABLE parameter of \a cntnr to \a colors.
          * \param cntnr The control-parameter container to update.
-         * \param colors The new pharmacophoric-feature color table.
+         * \param colors The new pharmacophoric feature color table.
          * \since 1.3
          */
         CDPL_VIS_API void setFeatureColorTableParameter(Base::ControlParameterContainer& cntnr, const ColorTable::SharedPointer& colors);

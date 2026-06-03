@@ -53,21 +53,21 @@ namespace CDPL
             /**
              * \brief Specifies the type of the pharmacophore feature (see namespace Pharm::FeatureType).
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_PHARM_API const Base::LookupKey TYPE;
 
             /**
              * \brief Specifies the geometric shape of the feature (see namespace Pharm::FeatureGeometry).
              *
-             * \valuetype unsigned int
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_PHARM_API const Base::LookupKey GEOMETRY;
 
             /**
              * \brief Specifies the length of the feature (for directional features).
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_PHARM_API const Base::LookupKey LENGTH;
 
@@ -81,14 +81,14 @@ namespace CDPL
             /**
              * \brief Specifies the positional tolerance of the feature.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_PHARM_API const Base::LookupKey TOLERANCE;
 
             /**
              * \brief Specifies the weight (relative importance) of the feature.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_PHARM_API const Base::LookupKey WEIGHT;
 
@@ -102,21 +102,21 @@ namespace CDPL
             /**
              * \brief Specifies whether the feature is currently disabled (and thus not considered in pharmacophore matching).
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_PHARM_API const Base::LookupKey DISABLED_FLAG;
 
             /**
              * \brief Specifies whether the feature is optional in pharmacophore matching.
              *
-             * \valuetype bool
+             * \valuetype \c bool
              */
             extern CDPL_PHARM_API const Base::LookupKey OPTIONAL_FLAG;
 
             /**
              * \brief Specifies the calculated hydrophobicity contribution of the feature.
              *
-             * \valuetype double
+             * \valuetype \c double
              */
             extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
 

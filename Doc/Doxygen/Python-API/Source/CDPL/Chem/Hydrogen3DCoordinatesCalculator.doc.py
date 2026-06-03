@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Generates 3D coordinates for the hydrogen atoms of a molecular graph from the existing positions of their heavy-atom neighbors.
+# \brief Generates 3D coordinates for the hydrogen atoms of a molecular graph from the existing positions of their heavy atom neighbors.
 # 
-# For every hydrogen-bearing center the calculator picks a coordination geometry (linear, trigonal-planar, tetrahedral, square-planar, trigonal-/pentagonal-bipyramidal or octahedral) consistent with the heavy-atom neighborhood and places the hydrogens at appropriate template positions, oriented to avoid clashes with already-positioned substituents. Heavy-atom coordinates can be supplied through user-defined accessor functions; by default only hydrogens without 3D coordinates are placed (see undefinedOnly()).
+# For every hydrogen-bearing center the calculator picks a coordination geometry (linear, trigonal-planar, tetrahedral, square-planar, trigonal-/pentagonal-bipyramidal or octahedral) consistent with the heavy atom neighborhood and places the hydrogens at appropriate template positions, oriented to avoid clashes with already-positioned substituents. Heavy-atom coordinates can be supplied through user-defined accessor functions; by default only hydrogens without 3D coordinates are placed (see undefinedOnly()).
 # 
 class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
 
