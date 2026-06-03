@@ -38,7 +38,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is set to <tt>True</tt>, the calculation result will be equivalent to the result that would have been obtained for the ordinary hydrogen deplete input structure. If the control-parameter is set to <tt>False</tt>, the calculation will be performed for the unmodified molecular graph.
     # 
-    # \valuetype  <tt>bool</tt> \see Chem.AtomProperty.IS_ORDINARY_H for the definition of ordinary hydrogens.
+    # \valuetype  <tt>bool</tt>
     # 
     ORDINARY_HYDROGEN_DEPLETE = CDPL.Base.LookupKey('ORDINARY_HYDROGEN_DEPLETE')
 
@@ -163,7 +163,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies whether to update the timestamp of <em>Mol-</em> and <em>Rxn-File</em> header blocks when writing data in an <em>MDL CTFile</em> based format [\ref CTFILE].
     # 
-    # If the control-parameter is set to <tt>True</tt>, the timestamp of molecule and reaction data records will specify the time of their writing. If <tt>MDL_UPDATE_TIMESTAMP</tt> is <tt>False</tt>, the time specified by one of the properties Chem.MolecularGraphProperty.MDL_TIMESTAMP (for molecular graph output) or Chem.ReactionProperty.MDL_TIMESTAMP (for reaction output) will be used. If the output data object does not provide a value for the timestamp property, the current time will be used as a fallback.
+    # If the control-parameter is set to <tt>True</tt>, the timestamp of molecule and reaction data records will specify the time of their writing. If <tt>MDL_UPDATE_TIMESTAMP</tt> is <tt>False</tt>, the time specified by one of the properties Chem.MolecularGraphProperty.TIMESTAMP (for molecular graph output) or Chem.ReactionProperty.TIMESTAMP (for reaction output) will be used. If the output data object does not provide a value for the timestamp property, the current time will be used as a fallback.
     # 
     # \valuetype  <tt>bool</tt>
     # 
@@ -256,7 +256,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies whether to generate molecule <em>SMILES</em> strings [\ref SMILES] that contain atom-atom mapping numbers.
     # 
-    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty:ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
+    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
     # 
     # \valuetype  <tt>bool</tt> \since 1.2
     # 

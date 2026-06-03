@@ -60,7 +60,6 @@ namespace CDPL
              * graph.
              *
              * \valuetype \c bool
-             * \see Chem::AtomProperty::IS_ORDINARY_H for the definition of ordinary hydrogens.    
              */
             extern CDPL_CHEM_API const Base::LookupKey ORDINARY_HYDROGEN_DEPLETE;
 
@@ -152,8 +151,8 @@ namespace CDPL
              *
              * If the control-parameter is set to \c true, the timestamp of molecule and reaction data records will
              * specify the time of their writing. If \c %MDL_UPDATE_TIMESTAMP is \c false, the time specified by one of the
-             * properties Chem::MolecularGraphProperty::MDL_TIMESTAMP (for molecular graph output) or 
-             * Chem::ReactionProperty::MDL_TIMESTAMP (for reaction output) will be used. If the output data object does not
+             * properties Chem::MolecularGraphProperty::TIMESTAMP (for molecular graph output) or 
+             * Chem::ReactionProperty::TIMESTAMP (for reaction output) will be used. If the output data object does not
              * provide a value for the timestamp property, the current time will be used as a fallback.
              *
              * \valuetype \c bool
@@ -407,7 +406,7 @@ namespace CDPL
              * \brief Specifies whether to generate molecule \e SMILES strings [\ref SMILES] that contain atom-atom mapping numbers.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify reaction atom-atom
-             * mapping numbers (see Chem::AtomProperty:ATOM_MAPPING_ID). 
+             * mapping numbers (see Chem::AtomProperty::ATOM_MAPPING_ID). 
              * If the value of \c %SMILES_OUTPUT_ATOM_MAPPING_ID is \c false, atom-atom mapping numbers will not be specified.
              *
              * \valuetype \c bool
