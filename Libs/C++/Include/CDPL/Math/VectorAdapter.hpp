@@ -682,6 +682,7 @@ namespace CDPL
         struct QuaternionTemporaryTraits<VectorQuaternionAdapter<V> >
         {
 
+            /** \brief The Math::Quaternion specialization used as the temporary quaternion type. */
             typedef Quaternion<typename V::ValueType> Type;
         };
 
@@ -693,6 +694,7 @@ namespace CDPL
         struct QuaternionTemporaryTraits<const VectorQuaternionAdapter<V> >
         {
 
+            /** \brief The Math::Quaternion specialization used as the temporary quaternion type. */
             typedef Quaternion<typename V::ValueType> Type;
         };
 

@@ -54,6 +54,10 @@ namespace CDPL
              */
             typedef std::shared_ptr<IcosahedronMesh3D> SharedPointer;
 
+            /**
+             * \brief Constructs an icosahedron mesh whose vertices lie on the sphere of the given \a radius.
+             * \param radius The circumscribed-sphere radius of the icosahedron.
+             */
             IcosahedronMesh3D(double radius = 1.0);
          };
     } // namespace Vis

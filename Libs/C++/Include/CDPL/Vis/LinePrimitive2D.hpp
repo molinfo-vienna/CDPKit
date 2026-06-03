@@ -76,6 +76,10 @@ namespace CDPL
             explicit LinePrimitive2D(const Line2D& line):
                 Line2D(line) {}
 
+            /**
+             * \brief Renders the line via \a renderer using the configured pen.
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer) const;
 
             /**
@@ -90,8 +94,17 @@ namespace CDPL
              */
             const Pen& getPen() const;
 
+            /**
+             * \brief Creates a dynamically allocated copy of this primitive.
+             * \return A smart pointer to the copy.
+             */
             GraphicsPrimitive2D::SharedPointer clone() const;
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle of the line.
+             * \param bounds The Rectangle2D instance storing the result.
+             * \param font_metrics Unused for lines; included to satisfy the GraphicsPrimitive2D interface.
+             */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
           private:

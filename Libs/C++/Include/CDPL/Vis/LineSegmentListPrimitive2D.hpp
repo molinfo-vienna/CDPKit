@@ -61,6 +61,13 @@ namespace CDPL
              */
             LineSegmentListPrimitive2D() {}
 
+            /**
+             * \brief Renders the line segments via \a renderer using the configured pen.
+             *
+             * The point array is consumed in pairs: each pair of consecutive points defines one line segment.
+             *
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer) const;
 
             /**
@@ -75,8 +82,17 @@ namespace CDPL
              */
             const Pen& getPen() const;
 
+            /**
+             * \brief Creates a dynamically allocated copy of this primitive.
+             * \return A smart pointer to the copy.
+             */
             GraphicsPrimitive2D::SharedPointer clone() const;
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle that contains all line-segment endpoints.
+             * \param bounds The Rectangle2D instance storing the result.
+             * \param font_mtrics Unused for line-segment lists; included to satisfy the GraphicsPrimitive2D interface.
+             */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_mtrics = 0) const;
 
           private:

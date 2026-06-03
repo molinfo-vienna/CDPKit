@@ -253,7 +253,7 @@ namespace CDPL
              */
             virtual void drawText(double x, double y, const std::string& txt) = 0;
 
-            /*
+            /**
              * \brief Enables clipping and establishes a new clip region.
              *
              * The set clip region will affect all drawing operations by effectively masking out any changes to the 

@@ -21,6 +21,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of class CDPL::Vis::ImageWriter.
+ */
 
 #ifndef CDPL_VIS_IMAGEWRITER_HPP
 #define CDPL_VIS_IMAGEWRITER_HPP
@@ -57,6 +61,14 @@ namespace CDPL
         class StructureView2D;
         class Rectangle2D;
 
+        /**
+         * \brief Abstract base class for writers that render Chem::MolecularGraph or Chem::Reaction
+         *        instances into a raster/vector image via an internal Cairo surface.
+         *
+         * Concrete subclasses (e.g. PNG, SVG, PS and PDF writers) implement createCairoSurface() to provide a target surface
+         * of the appropriate format. The base class drives the 2D layout via StructureView2D / ReactionView2D and renders
+         * onto the supplied surface.
+         */
         class CDPL_VIS_API ImageWriter
         {
 

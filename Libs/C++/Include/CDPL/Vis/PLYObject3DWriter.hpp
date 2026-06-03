@@ -64,8 +64,11 @@ namespace CDPL
 
             PLYObject3DWriter(const PLYObject3DWriter&) = delete;
 
+            /**
+             * \brief Destructor; finalizes the PLY output and flushes the underlying stream.
+             */
             ~PLYObject3DWriter();
-            
+
             /**
              * \brief Outputs the Vis::Object3D instance \a obj.
              * \param obj The Vis::Object3D instance to output.
@@ -73,11 +76,23 @@ namespace CDPL
              */
             Base::DataWriter<Object3D>& write(const Object3D& obj);
 
+            /**
+             * \brief Returns a pointer that is non-null while the writer is in a good state and \c nullptr after a failed write.
+             * \return A non-null pointer in a good state, \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether a previous write operation has failed.
+             * \return \c true if the writer is in a failed state, and \c false otherwise.
+             */
             bool operator!() const;
 
             PLYObject3DWriter& operator=(const PLYObject3DWriter&) = delete;
- 
+
+            /**
+             * \brief Finalizes the PLY output and flushes the underlying stream.
+             */
             void close();
             
           private:
