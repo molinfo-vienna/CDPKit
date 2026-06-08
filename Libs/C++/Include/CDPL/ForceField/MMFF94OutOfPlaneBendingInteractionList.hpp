@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of class CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionList.
+ * \brief Declaration of type CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONLIST_HPP
@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamically-sized array of MMFF94 out-of-plane bending interaction records.
+         * \brief Data structure for the storage of MMFF94 out-of-plane bending interaction parameter set records.
          */
         typedef Util::Array<MMFF94OutOfPlaneBendingInteraction> MMFF94OutOfPlaneBendingInteractionList;
     }

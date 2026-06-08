@@ -192,14 +192,14 @@ namespace CDPL
             virtual ~MultiMap() {}
 
             /**
-             * \brief Returns a non-\c const reference to the underlying \c std::multimap storage.
-             * \return A non-\c const reference to the underlying storage container.
+             * \brief Returns a non-\c const reference to the underlying map storage.
+             * \return A non-\c const reference to the underlying map storage.
              */
             StorageType& getData();
 
             /**
-             * \brief Returns a \c const reference to the underlying \c std::multimap storage.
-             * \return A \c const reference to the underlying storage container.
+             * \brief Returns a \c const reference to the underlying map storage.
+             * \return A \c const reference to the underlying map storage.
              */
             const StorageType& getData() const;
 

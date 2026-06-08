@@ -46,7 +46,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
+         * \brief Writer for molecular graph data in the native I/O format of the <em>%CDPL</em>.
          */
         class CDPL_CHEM_API CDFMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
         {

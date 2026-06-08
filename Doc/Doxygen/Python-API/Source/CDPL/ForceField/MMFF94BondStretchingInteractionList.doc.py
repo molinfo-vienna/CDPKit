@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Dynamically-sized array of MMFF94 bond-stretching interaction records.
+# \brief Data structure for the storage of MMFF94 bond-stretching interaction parameter set records.
 # 
 class MMFF94BondStretchingInteractionList(Boost.Python.instance):
 

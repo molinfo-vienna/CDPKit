@@ -51,17 +51,17 @@ namespace CDPL
         {
 
             /**
-             * \brief Provides meta-information about the native binary <em>CDPL</em> format.
+             * \brief Provides meta-information about the native binary <em>%CDPL</em> format.
              */
             extern CDPL_GRID_API const Base::DataFormat CDF;
 
             /**
-             * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+             * \brief Provides meta-information about the gzip-compressed native <em>%CDPL</em> format.
              */
             extern CDPL_GRID_API const Base::DataFormat CDF_GZ;
 
             /**
-             * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+             * \brief Provides meta-information about the bzip2-compressed native <em>%CDPL</em> format.
              */
             extern CDPL_GRID_API const Base::DataFormat CDF_BZ2;
 

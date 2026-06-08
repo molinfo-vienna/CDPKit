@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Dynamically-sized array of MMFF94 angle-bending interaction records.
+# \brief Data structure for the storage of MMFF94 angle-bending interaction parameter set records.
 # 
 class MMFF94AngleBendingInteractionList(Boost.Python.instance):
 

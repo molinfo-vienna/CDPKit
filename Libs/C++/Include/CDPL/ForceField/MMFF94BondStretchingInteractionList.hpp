@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of class CDPL::ForceField::MMFF94BondStretchingInteractionList.
+ * \brief Declaration of type CDPL::ForceField::MMFF94BondStretchingInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONLIST_HPP
@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamically-sized array of MMFF94 bond-stretching interaction records.
+         * \brief Data structure for the storage of MMFF94 bond-stretching interaction parameter set records.
          */
         typedef Util::Array<MMFF94BondStretchingInteraction> MMFF94BondStretchingInteractionList;
     }

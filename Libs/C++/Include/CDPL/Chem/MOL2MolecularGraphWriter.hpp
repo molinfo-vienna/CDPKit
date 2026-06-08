@@ -46,7 +46,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Writer for molecular graph data in the Tripos MOL2 format.
+         * \brief Writer for molecular graph data in the <em>Sybyl MOL2</em> format.
          */
         class CDPL_CHEM_API MOL2MolecularGraphWriter : public Base::DataWriter<MolecularGraph>
         {

@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Writer for gzip-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+         * \brief Writer for gzip-compressed feature container data in the native I/O format of the <em>%CDPL</em>.
          */
         typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::GZipOStream> CDFGZFeatureContainerWriter;
     }

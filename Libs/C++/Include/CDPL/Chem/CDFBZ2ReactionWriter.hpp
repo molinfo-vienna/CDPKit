@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Writer for reaction data in the bzip2-compressed native I/O format of the <em>CDPL</em>.
+         * \brief Writer for reaction data in the bzip2-compressed native I/O format of the <em>%CDPL</em>.
          */
         typedef Util::CompressedDataWriter<CDFReactionWriter, Util::BZip2OStream> CDFBZ2ReactionWriter;
     }

@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Lookup table mapping (angle type, terminal-atom-1 type, center-atom type, terminal-atom-2 type) quadruples to MMFF94 angle-bending force-field parameters (force constant and reference angle).
+# \brief Data structure for the storage and lookup of MMFF94 angle-bending interaction parameters.
 # 
 class MMFF94AngleBendingParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single angle-bending parameter record.
+    # \brief Data structure for the storage of values associated with a single parameter table entry.
     # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
+        # \brief Constructs an empty (uninitialized) parameter entry.
         # 
         def __init__() -> None: pass
 
@@ -41,7 +41,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+        # \brief Constructs an entry for the given query and parameter values.
         # 
         # \param angle_type_idx The MMFF94 angle type index.
         # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -163,7 +163,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+    # \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
     # 
     # \param angle_type_idx The MMFF94 angle type index.
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -175,7 +175,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     def addEntry(angle_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, force_const: float, ref_angle: float) -> None: pass
 
     ##
-    # \brief Removes the entry for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+    # \brief Removes the entry matching the specified query values.
     # 
     # \param angle_type_idx The MMFF94 angle type index.
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -187,14 +187,14 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     def removeEntry(angle_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int) -> bool: pass
 
     ##
-    # \brief Returns the entry for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+    # \brief Returns a reference to the entry matching the specified query values.
     # 
     # \param angle_type_idx The MMFF94 angle type index.
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
     # \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
     # \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(angle_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int) -> Entry: pass
 

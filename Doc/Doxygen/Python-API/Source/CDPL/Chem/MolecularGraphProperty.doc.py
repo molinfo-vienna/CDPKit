@@ -221,14 +221,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     MDL_CHIRAL_FLAG = CDPL.Base.LookupKey('MDL_CHIRAL_FLAG')
 
     ##
-    # \brief Specifies the partial-charge type of the molecular graph in the Tripos MOL2 format.
+    # \brief Specifies the partial-charge type of the molecular graph in the <em>Sybyl MOL2</em> format.
     # 
     # \valuetype  <tt>unsigned int</tt> (Chem.MOL2ChargeType value)
     # 
     MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
 
     ##
-    # \brief Specifies the molecule type of the molecular graph in the Tripos MOL2 format.
+    # \brief Specifies the molecule type of the molecular graph in the <em>Sybyl MOL2</em> format.
     # 
     # \valuetype  <tt>unsigned int</tt> (Chem.MOL2MoleculeType value)
     # 

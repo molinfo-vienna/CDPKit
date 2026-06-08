@@ -45,7 +45,7 @@ namespace CDPL
         class CDFRegularGridSetDataReader;
 
         /**
-         * \brief Reader for regular spatial grid set data in the native I/O format of the <em>CDPL</em>.
+         * \brief Reader for regular spatial grid set data in the native I/O format of the <em>%CDPL</em>.
          */
         class CDPL_GRID_API CDFDRegularGridSetReader : public Util::StreamDataReader<DRegularGridSet, CDFDRegularGridSetReader>
         {

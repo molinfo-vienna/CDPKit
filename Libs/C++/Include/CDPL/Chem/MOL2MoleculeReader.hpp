@@ -45,7 +45,7 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Reader for molecule data in the Tripos MOL2 format.
+         * \brief Reader for molecule data in the <em>Sybyl MOL2</em> format.
          */
         class CDPL_CHEM_API MOL2MoleculeReader : public Util::StreamDataReader<Molecule, MOL2MoleculeReader>
         {

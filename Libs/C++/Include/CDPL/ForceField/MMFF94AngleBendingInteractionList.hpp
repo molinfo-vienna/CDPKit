@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of class CDPL::ForceField::MMFF94AngleBendingInteractionList.
+ * \brief Declaration of type CDPL::ForceField::MMFF94AngleBendingInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONLIST_HPP
@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamically-sized array of MMFF94 angle-bending interaction records.
+         * \brief Data structure for the storage of MMFF94 angle-bending interaction parameter set records.
          */
         typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionList;
     }

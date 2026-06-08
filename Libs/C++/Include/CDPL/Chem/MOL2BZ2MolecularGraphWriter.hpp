@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Writer for molecular graph data in the bzip2-compressed Tripos MOL2 format.
+         * \brief Writer for molecular graph data in the bzip2-compressed <em>Sybyl MOL2</em> format.
          */
         typedef Util::CompressedDataWriter<MOL2MolecularGraphWriter, Util::BZip2OStream> MOL2BZ2MolecularGraphWriter;
     }

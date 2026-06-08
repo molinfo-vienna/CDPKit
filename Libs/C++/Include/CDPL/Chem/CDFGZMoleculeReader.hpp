@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Reader for molecule data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+         * \brief Reader for molecule data in the gzip-compressed native I/O format of the <em>%CDPL</em>.
          */
         typedef Util::CompressedDataReader<CDFMoleculeReader, Util::GZipIStream> CDFGZMoleculeReader;
     }

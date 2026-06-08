@@ -75,7 +75,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Computes the Euclidean (L2) norm of \a a using a numerically-stable scaling algorithm.
+             * \brief Computes the Euclidean (L2) norm of \a a using a numerically stable scaling algorithm.
              * \tparam T The scalar result type.
              * \param a The variable array.
              * \return The Euclidean norm as a value of type \a T.
@@ -203,7 +203,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Computes the Euclidean (L2) norm of \a a using a numerically-stable scaling algorithm.
+             * \brief Computes the Euclidean (L2) norm of \a a using a numerically stable scaling algorithm.
              * \tparam T The scalar result type.
              * \param a The vector array.
              * \return The Euclidean norm as a value of type \a T.
@@ -342,7 +342,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Computes the Euclidean (L2) norm of \a a using a numerically-stable scaling algorithm.
+             * \brief Computes the Euclidean (L2) norm of \a a using a numerically stable scaling algorithm.
              * \tparam T The scalar result type.
              * \param a The vector array.
              * \return The Euclidean norm as a value of type \a T.

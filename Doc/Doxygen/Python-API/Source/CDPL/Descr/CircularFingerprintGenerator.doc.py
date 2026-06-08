@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Generation of atom-centered circular substructure fingerprints in the spirit of SciTegic's <em>Extended Connectivity Fingerprints</em> (ECFP) / <em>Functional Class Fingerprints</em> (FCFP).
+# \brief Generation of atom-centered circular substructure fingerprints in the spirit of SciTegic's <em>Extended Connectivity Fingerprints</em> (ECFP).
 # 
-# Starting from initial atom and bond identifiers (generated either by the built-in <tt>DefAtomIdentifierFunctor</tt> / <tt>DefBondIdentifierFunctor</tt> or by user-supplied functions) the generator runs a configurable number of growing iterations (see setNumIterations()). Each iteration produces a new set of feature identifiers from the identifiers of the previous iteration and the connecting bonds, capturing circular substructures of incrementing radius. The resulting feature identifiers can be folded into a bitset of any size via setFeatureBits().
+# Starting from initial atom and bond identifiers (generated either by the built-in DefAtomIdentifierFunctor / DefBondIdentifierFunctor or by user-supplied functions) the generator runs a configurable number of growing iterations (see setNumIterations()). Each iteration produces a new set of feature identifiers from the identifiers of the previous iteration and the connecting bonds, capturing circular substructures of incrementing radius. The resulting feature identifiers can be folded into a bitset of any size via setFeatureBits().
 # 
 # \see [\ref STECFP]
 # 
@@ -95,12 +95,12 @@ class CircularFingerprintGenerator(Boost.Python.instance):
         def __call__(bond: Chem.Bond) -> int: pass
 
     ##
-    # \brief Specifies the default set of atomic properties considered in the generation of atom identifiers by CircularFingerprintGenerator.DefAtomIdentifierFunction.
+    # \brief Specifies the default set of atomic properties considered in the generation of atom identifiers by DefAtomIdentifierFunctor.
     # 
     DEF_ATOM_PROPERTY_FLAGS = 3166
 
     ##
-    # \brief Specifies the default set of bond properties considered in the generation of bond identifiers by CircularFingerprintGenerator.DefBondIdentifierFunction.
+    # \brief Specifies the default set of bond properties considered in the generation of bond identifiers by DefBondIdentifierFunctor.
     # 
     DEF_BOND_PROPERTY_FLAGS = 10
 

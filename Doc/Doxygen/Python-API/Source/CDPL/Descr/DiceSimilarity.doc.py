@@ -61,7 +61,7 @@ class DiceSimilarity(Boost.Python.instance):
     # 
     # The <em>Dice Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \f[   S_{ab} = \frac{2 * N_{ab}}{N_a + N_b + 2 * N_{ab}} 
+    # \f[   S_{ab} = \frac{2 \: N_{ab}}{N_a + N_b + 2 \: N_{ab}} 
     # \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset.

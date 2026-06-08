@@ -59,7 +59,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Thrown when force-field parameter assignment for an interaction or atom fails.
+         * \brief Thrown when force field parameterization has failed.
          */
         class CDPL_FORCEFIELD_API ParameterizationFailed : public Error
         {

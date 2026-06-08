@@ -38,19 +38,19 @@ class TorsionLibrary(TorsionCategory):
     def __init__(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief Reads the library content from the input stream <em>is</em> in the XML-based CDPL torsion library format.
+    # \brief Reads the library content from the input stream <em>is</em> in the XML-based <em>CDPL</em> torsion library format.
     # 
     # \param is The input stream to read from.
     # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in CDPL default torsion library.
+    # \brief Loads the built-in <em>CDPL</em> default torsion library.
     # 
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Writes the library content to the output stream <em>os</em> in the XML-base CDPL torsion library format.
+    # \brief Writes the library content to the output stream <em>os</em> in the XML-based <em>CDPL</em> torsion library format.
     # 
     # \param os The output stream to write to.
     # 

@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Handler for the input of molecule data in the PSD-format of the <em>CDPL</em>.
+         * \brief Handler for the input of molecule data in the <em>%CDPL</em> <em>PSD</em>-format.
          */
         class CDPL_PHARM_API PSDMoleculeInputHandler : public Base::DataInputHandler<Chem::Molecule>
         {

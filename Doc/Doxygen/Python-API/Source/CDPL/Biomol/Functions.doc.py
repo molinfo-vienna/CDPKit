@@ -1373,7 +1373,7 @@ def clearPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParamet
 # \brief Sets the Biomol.ControlParameter.PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS parameter of <em>cntnr</em> to <em>deduce</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param deduce <tt>True</tt> to deduce bond orders from the duplication pattern of bonded-atom pairs in <tt>CONECT</tt> records, and <tt>False</tt> to skip the deduction.
+# \param deduce <tt>True</tt> to deduce bond orders from the duplication pattern of bonded atom pairs in <tt>CONECT</tt> records, and <tt>False</tt> to skip the deduction.
 # 
 def setPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, deduce: bool) -> None: pass
 
@@ -1471,7 +1471,7 @@ def clearPDBFormatVersionParameter(cntnr: Base.ControlParameterContainer) -> Non
 # \brief Sets the Biomol.ControlParameter.PDB_IGNORE_CONECT_RECORDS parameter of <em>cntnr</em> to <em>ignore</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param ignore <tt>True</tt> to skip <tt>CONECT</tt> records during PDB input, and <tt>False</tt> to process them.
+# \param ignore <tt>True</tt> to skip <tt>CONECT</tt> records during PDB data input, and <tt>False</tt> to process them.
 # 
 def setPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
@@ -1609,7 +1609,7 @@ def clearPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) 
 # \brief Sets the Biomol.ControlParameter.PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER parameter of <em>cntnr</em> to <em>output</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param output <tt>True</tt> to encode the bond order via the duplication count of bonded-atom pairs in <tt>CONECT</tt> records, and <tt>False</tt> to emit each pair only once.
+# \param output <tt>True</tt> to encode the bond order via the duplication count of bonded atom pairs in <tt>CONECT</tt> records, and <tt>False</tt> to emit each pair only once.
 # 
 def setPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 

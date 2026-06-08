@@ -63,7 +63,7 @@ namespace CDPL
             extern CDPL_PHARM_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
             /**
-             * \brief Specifies whether floating-point values stored in CDF output shall use single (instead of double) precision.
+             * \brief Specifies whether floating-point values stored in <em>CDF</em> output shall use single (instead of double) precision.
              *
              * \valuetype \c bool
              * \since 1.2

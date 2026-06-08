@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of class CDPL::ForceField::MMFF94StretchBendInteractionList.
+ * \brief Declaration of type CDPL::ForceField::MMFF94StretchBendInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONLIST_HPP
@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamically-sized array of MMFF94 stretch-bend coupling interaction records.
+         * \brief Data structure for the storage of MMFF94 stretch-bend coupling interaction parameter set records.
          */
         typedef Util::Array<MMFF94StretchBendInteraction> MMFF94StretchBendInteractionList;
     }

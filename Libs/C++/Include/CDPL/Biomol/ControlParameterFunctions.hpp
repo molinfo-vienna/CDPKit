@@ -392,7 +392,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_IGNORE_CONECT_RECORDS parameter of \a cntnr to \a ignore.
          * \param cntnr The control-parameter container.
-         * \param ignore \c true to skip \c CONECT records during PDB input, and \c false to process them.
+         * \param ignore \c true to skip \c CONECT records during PDB data input, and \c false to process them.
          */
         CDPL_BIOMOL_API void setPDBIgnoreCONECTRecordsParameter(Base::ControlParameterContainer& cntnr, bool ignore);
 
@@ -420,7 +420,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS parameter of \a cntnr to \a deduce.
          * \param cntnr The control-parameter container.
-         * \param deduce \c true to deduce bond orders from the duplication pattern of bonded-atom pairs in \c CONECT records, and \c false to skip the deduction.
+         * \param deduce \c true to deduce bond orders from the duplication pattern of bonded atom pairs in \c CONECT records, and \c false to skip the deduction.
          */
         CDPL_BIOMOL_API void setPDBDeduceBondOrdersFromCONECTRecordsParameter(Base::ControlParameterContainer& cntnr, bool deduce);
 
@@ -616,7 +616,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER parameter of \a cntnr to \a output.
          * \param cntnr The control-parameter container.
-         * \param output \c true to encode the bond order via the duplication count of bonded-atom pairs in \c CONECT records, and \c false to emit each pair only once.
+         * \param output \c true to encode the bond order via the duplication count of bonded atom pairs in \c CONECT records, and \c false to emit each pair only once.
          */
         CDPL_BIOMOL_API void setPDBOutputCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr, bool output);
 

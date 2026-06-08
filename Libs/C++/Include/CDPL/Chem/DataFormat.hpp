@@ -123,17 +123,17 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::DataFormat INCHI;
 
             /**
-             * \brief Provides meta-information about the native <em>CDPL</em> format.
+             * \brief Provides meta-information about the native <em>%CDPL</em> format.
              */
             extern CDPL_CHEM_API const Base::DataFormat CDF;
 
             /**
-             * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+             * \brief Provides meta-information about the gzip-compressed native <em>%CDPL</em> format.
              */
             extern CDPL_CHEM_API const Base::DataFormat CDF_GZ;
 
             /**
-             * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+             * \brief Provides meta-information about the bzip2-compressed native <em>%CDPL</em> format.
              */
             extern CDPL_CHEM_API const Base::DataFormat CDF_BZ2;
 

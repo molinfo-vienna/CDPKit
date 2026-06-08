@@ -87,7 +87,7 @@ namespace CDPL
          * The <em>Cosine Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
-         *    S_{ab} = \frac{N_{ab}}{\sqrt{N_a * N_b}} 
+         *    S_{ab} = \frac{N_{ab}}{\sqrt{N_a \: N_b}} 
          * \f] 
          *
          * where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of
@@ -169,7 +169,7 @@ namespace CDPL
          * The <em>Dice Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
-         *    S_{ab} = \frac{2 * N_{ab}}{N_a + N_b + 2 * N_{ab}} 
+         *    S_{ab} = \frac{2 \: N_{ab}}{N_a + N_b + 2 \: N_{ab}} 
          * \f] 
          *
          * where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of
@@ -190,14 +190,14 @@ namespace CDPL
          * The <em>Tversky Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
-         *    S_{ab} = \frac{N_{ab}}{a * N_a + b * N_b + N_{ab}} 
+         *    S_{ab} = \frac{N_{ab}}{\alpha \: N_a + \beta \: N_b + N_{ab}} 
          * \f] 
          *
          * where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of
          * bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset.
-         * \f$ a \f$ and \f$ b \f$ are bitset contribution weighting factors. 
+         * \f$ \alpha \f$ and \f$ \beta \f$ are bitset contribution weighting factors. 
          *
-         * The <em>Tversky</em> measure is asymmetric. Setting the parameters \f$ a = b = 1.0 \f$ makes it identical to the <em>Tanimoto</em> measure.
+         * The <em>Tversky</em> measure is asymmetric. Setting the parameters \f$ \alpha = \beta = 1.0 \f$ makes it identical to the <em>Tanimoto</em> measure.
          *
          * If the specified bitsets \a bs1 and \a bs2 are of different size, missing bits at the end of the smaller bitset are assumed
          * to be zero.

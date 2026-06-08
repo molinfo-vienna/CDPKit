@@ -48,8 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (angle type, terminal-atom-1 type, center-atom type, terminal-atom-2 type)
-         *        quadruples to MMFF94 angle-bending force-field parameters (force constant and reference angle).
+         * \brief Data structure for the storage and lookup of MMFF94 angle-bending interaction parameters.
          */
         class CDPL_FORCEFIELD_API MMFF94AngleBendingParameterTable
         {
@@ -65,19 +64,19 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94AngleBendingParameterTable> SharedPointer;
 
             /**
-             * \brief A single angle-bending parameter record.
+             * \brief Data structure for the storage of values associated with a single parameter table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 /**
-                 * \brief Constructs an empty (uninitialized) \c %Entry instance.
+                 * \brief Constructs an empty (uninitialized) parameter entry.
                  */
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+                 * \brief Constructs an entry for the given query and parameter values.
                  * \param angle_type_idx The MMFF94 angle type index.
                  * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
                  * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -156,7 +155,7 @@ namespace CDPL
             MMFF94AngleBendingParameterTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+             * \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
              * \param angle_type_idx The MMFF94 angle type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -168,12 +167,12 @@ namespace CDPL
                           unsigned int term_atom2_type, double force_const, double ref_angle);
 
             /**
-             * \brief Returns the entry for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param angle_type_idx The MMFF94 angle type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
              * \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type,
                                   unsigned int term_atom2_type) const;
@@ -190,7 +189,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (angle type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+             * \brief Removes the entry matching the specified query values.
              * \param angle_type_idx The MMFF94 angle type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.

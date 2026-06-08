@@ -39,7 +39,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Stores parameters for a harmonic distance-restraint potential between a pair of atoms.
+         * \brief Stores parameters for an elastic potential (harmonic distance restraint) between a pair of atoms.
          * \see ForceField::calcElasticPotentialEnergy()
          * \since 1.1
          */

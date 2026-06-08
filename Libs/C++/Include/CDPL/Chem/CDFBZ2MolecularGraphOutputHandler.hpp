@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Handler for the output of bzip2-compressed molecular graph data in the native I/O format of the <em>CDPL</em>.
+         * \brief Handler for the output of bzip2-compressed molecular graph data in the native I/O format of the <em>%CDPL</em>.
          */
         typedef Util::DefaultDataOutputHandler<CDFBZ2MolecularGraphWriter, DataFormat::CDF_BZ2> CDFBZ2MolecularGraphOutputHandler;
     } // namespace Chem

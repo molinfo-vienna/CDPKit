@@ -172,14 +172,14 @@ namespace CDPL
             virtual ~Array() {}
 
             /**
-             * \brief Returns a non-\c const reference to the underlying \c std::vector storage.
-             * \return A non-\c const reference to the underlying storage container.
+             * \brief Returns a non-\c const reference to the underlying array storage.
+             * \return A non-\c const reference to the underlying array storage.
              */
             StorageType& getData();
 
             /**
-             * \brief Returns a \c const reference to the underlying \c std::vector storage.
-             * \return A \c const reference to the underlying storage container.
+             * \brief Returns a \c const reference to the underlying array storage.
+             * \return A \c const reference to the underlying array storage.
              */
             const StorageType& getData() const;
 

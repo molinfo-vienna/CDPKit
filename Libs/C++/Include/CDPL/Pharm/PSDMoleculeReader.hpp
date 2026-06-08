@@ -50,7 +50,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Reader for molecule data in the PSD-format of the <em>CDPL</em>.
+         * \brief Reader for molecule data in the <em>%CDPL</em> <em>PSD</em>-format.
          */
         class CDPL_PHARM_API PSDMoleculeReader : public Base::DataReader<Chem::Molecule>
         {

@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Handler for the output of molecular graph data in the PSD-format of the <em>CDPL</em>.
+         * \brief Handler for the output of molecular graph data in the <em>%CDPL</em> <em>PSD</em>-format.
          */
         class CDPL_PHARM_API PSDMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
         {

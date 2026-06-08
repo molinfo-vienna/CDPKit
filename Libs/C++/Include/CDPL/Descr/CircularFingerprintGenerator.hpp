@@ -63,11 +63,10 @@ namespace CDPL
 
         /**
          * \brief Generation of atom-centered circular substructure fingerprints in the spirit of
-         *        SciTegic's <em>Extended Connectivity Fingerprints</em> (ECFP) / <em>Functional Class
-         *        Fingerprints</em> (FCFP).
+         *        SciTegic's <em>Extended Connectivity Fingerprints</em> (ECFP).
          *
          * Starting from initial atom and bond identifiers (generated either by the built-in
-         * \c %DefAtomIdentifierFunctor / \c %DefBondIdentifierFunctor or by user-supplied functions)
+         * DefAtomIdentifierFunctor / DefBondIdentifierFunctor or by user-supplied functions)
          * the generator runs a configurable number of growing iterations (see setNumIterations()).
          * Each iteration produces a new set of feature identifiers from the identifiers of the
          * previous iteration and the connecting bonds, capturing circular substructures of
@@ -82,7 +81,7 @@ namespace CDPL
           public:
             /**
              * \brief Specifies the default set of atomic properties considered in the generation
-             *        of atom identifiers by CircularFingerprintGenerator::DefAtomIdentifierFunction.
+             *        of atom identifiers by DefAtomIdentifierFunctor.
              */
             static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 Chem::AtomPropertyFlag::HEAVY_BOND_COUNT | Chem::AtomPropertyFlag::VALENCE | Chem::AtomPropertyFlag::TYPE |
@@ -91,7 +90,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the default set of bond properties considered in the generation
-             *        of bond identifiers by CircularFingerprintGenerator::DefBondIdentifierFunction.
+             *        of bond identifiers by DefBondIdentifierFunctor.
              */
             static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY;

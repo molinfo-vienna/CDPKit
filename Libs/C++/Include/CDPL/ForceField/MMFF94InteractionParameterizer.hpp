@@ -293,7 +293,7 @@ namespace CDPL
             MMFF94InteractionParameterizer& operator=(const MMFF94InteractionParameterizer& parameterizer);
 
             /**
-             * \brief Parameterizes the MMFF94 force-field interactions for \a molgraph and stores them in \a ia_data.
+             * \brief Parameterizes the MMFF94 force field interactions for \a molgraph and stores them in \a ia_data.
              * \param molgraph The molecular graph to parameterize.
              * \param ia_data The output container receiving the perceived interactions.
              * \param ia_types A bitmask of ForceField::InteractionType flags selecting which interaction types are parameterized.

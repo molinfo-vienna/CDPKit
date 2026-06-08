@@ -119,7 +119,7 @@ def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if CDF output uses single-precision floats, and <tt>False</tt> otherwise. 
+# \return <tt>True</tt> if <em>CDF</em> output uses single-precision floats, and <tt>False</tt> otherwise. 
 # 
 # \since 1.2
 # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Reader for molecule data in the gzip-compressed Tripos MOL2 format.
+# \brief Reader for molecule data in the gzip-compressed <em>Sybyl MOL2</em> format.
 # 
 class MOL2GZMoleculeReader(MoleculeReaderBase):
 

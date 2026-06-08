@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Writer for molecular graph data in the Tripos MOL2 format.
+# \brief Writer for molecular graph data in the <em>Sybyl MOL2</em> format.
 # 
 class MOL2MolecularGraphWriter(MolecularGraphWriterBase):
 

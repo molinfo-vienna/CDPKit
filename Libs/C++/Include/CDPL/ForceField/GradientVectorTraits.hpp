@@ -47,20 +47,20 @@ namespace CDPL
          * The primary template assumes \a GV is indexable via <tt>operator[]</tt> with each element exposing 3 components
          * (\c [0], \c [1], \c [2]) and clears them by direct assignment.
          *
-         * \tparam GV The gradient-vector container type.
+         * \tparam GV The gradient vector container type.
          */
         template <typename GV>
         struct GradientVectorTraits
         {
 
-            /** \brief The gradient-vector container type. */
+            /** \brief The gradient vector container type. */
             typedef GV          VectorType;
-            /** \brief The type used to specify element counts. */
+            /** \brief The type used to specify gradient vector container element counts. */
             typedef std::size_t SizeType;
 
             /**
-             * \brief Zeroes the first \a num_elem components of the gradient vector \a g.
-             * \param g The gradient vector to clear.
+             * \brief Zeroes the first \a num_elem elements of the container \a g.
+             * \param g The gradient vector container to clear.
              * \param num_elem The number of leading elements to clear.
              */
             static void clear(VectorType& g, std::size_t num_elem)
@@ -74,25 +74,25 @@ namespace CDPL
         };
 
         /**
-         * \brief GradientVectorTraits specialization for Math::VectorArray gradient containers.
-         * \tparam V The element vector type stored in the Math::VectorArray.
+         * \brief ForceField::GradientVectorTraits specialization for containers of type Math::VectorArray.
+         * \tparam V The gradient vector type stored in the container.
          */
         template <typename V>
         struct GradientVectorTraits<Math::VectorArray<V> >
         {
 
-            /** \brief The gradient-vector container type. */
+            /** \brief The gradient vector container type. */
             typedef Math::VectorArray<V>          VectorType;
-            /** \brief The element vector type stored in the container. */
+            /** \brief The gradient vector type stored in the container. */
             typedef V                             ElementType;
-            /** \brief The scalar value type of the element vector. */
+            /** \brief The value type of the gradient vector components. */
             typedef typename V::ValueType         ValueType;
-            /** \brief The type used to specify element counts. */
+            /** \brief The type used to specify gradient vector container element counts. */
             typedef typename VectorType::SizeType SizeType;
 
             /**
-             * \brief Zeroes the first \a num_elem element vectors of \a g.
-             * \param g The gradient vector to clear.
+             * \brief Zeroes the first \a num_elem elements of the container \a g.
+             * \param g The gradient vector container to clear.
              * \param num_elem The number of leading elements to clear.
              */
             static void clear(VectorType& g, std::size_t num_elem)
@@ -103,25 +103,25 @@ namespace CDPL
         };
 
         /**
-         * \brief GradientVectorTraits specialization for \c std::vector gradient containers.
-         * \tparam V The element vector type stored in the \c std::vector.
+         * \brief ForceField::GradientVectorTraits specialization for containers of type \c std::vector.
+         * \tparam V The gradient vector type stored in the container.
          */
         template <typename V>
         struct GradientVectorTraits<std::vector<V> >
         {
 
-            /** \brief The gradient-vector container type. */
+            /** \brief The gradient vector container type. */
             typedef std::vector<V>                 VectorType;
-            /** \brief The element vector type stored in the container. */
+            /** \brief The gradient vector type stored in the container. */
             typedef V                              ElementType;
-            /** \brief The scalar value type of the element vector. */
+            /** \brief The value type of the gradient vector components. */
             typedef typename V::ValueType          ValueType;
-            /** \brief The type used to specify element counts. */
+            /** \brief The type used to specify gradient vector container element counts. */
             typedef typename VectorType::size_type SizeType;
 
             /**
-             * \brief Zeroes the first \a num_elem element vectors of \a g.
-             * \param g The gradient vector to clear.
+             * \brief Zeroes the first \a num_elem elements of the container \a g.
+             * \param g The gradient vector container to clear.
              * \param num_elem The number of leading elements to clear.
              */
             static void clear(VectorType& g, std::size_t num_elem)

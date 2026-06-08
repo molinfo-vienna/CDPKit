@@ -48,8 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (bond type, atom-type 1, atom-type 2) triples to MMFF94 bond-stretching
-         *        force-field parameters (force constant and reference bond length).
+         * \brief Data structure for the storage and lookup of MMFF94 bond-stretching interaction parameters.
          */
         class CDPL_FORCEFIELD_API MMFF94BondStretchingParameterTable
         {
@@ -65,19 +64,19 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94BondStretchingParameterTable> SharedPointer;
 
             /**
-             * \brief A single bond-stretching parameter record.
+             * \brief Data structure for the storage of values associated with a single parameter table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 /**
-                 * \brief Constructs an empty (uninitialized) \c %Entry instance.
+                 * \brief Constructs an empty (uninitialized) parameter entry.
                  */
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (bond type, atom type 1, atom type 2) triple.
+                 * \brief Constructs an entry for the given query and parameter values.
                  * \param bond_type_idx The MMFF94 bond type index.
                  * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
                  * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
@@ -148,7 +147,7 @@ namespace CDPL
             MMFF94BondStretchingParameterTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (bond type, atom type 1, atom type 2) triple.
+             * \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
              * \param bond_type_idx The MMFF94 bond type index.
              * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
              * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
@@ -159,11 +158,11 @@ namespace CDPL
                           double force_const, double ref_length);
 
             /**
-             * \brief Returns the entry for the given (bond type, atom type 1, atom type 2) triple.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param bond_type_idx The MMFF94 bond type index.
              * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
              * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
 
@@ -179,7 +178,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (bond type, atom type 1, atom type 2) triple.
+             * \brief Removes the entry matching the specified query values.
              * \param bond_type_idx The MMFF94 bond type index.
              * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
              * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.

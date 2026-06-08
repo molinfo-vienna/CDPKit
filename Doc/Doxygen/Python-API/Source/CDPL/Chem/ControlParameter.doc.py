@@ -379,49 +379,49 @@ class ControlParameter(Boost.Python.instance):
     CONF_INDEX_NAME_SUFFIX_PATTERN = CDPL.Base.LookupKey('CONF_INDEX_NAME_SUFFIX_PATTERN')
 
     ##
-    # \brief Specifies whether floating-point values written to the native CDF format are encoded in single-precision (<tt>True</tt>) or double-precision (<tt>False</tt>). 
+    # \brief Specifies whether floating-point values written to the native <em>CDF</em> format are encoded in single-precision (<tt>True</tt>) or double-precision (<tt>False</tt>). 
     # \valuetype  <tt>bool</tt>.
     # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief Specifies whether to enable the extended Sybyl atom-type set when reading or writing <em>Sybyl MOL2</em> data. 
+    # \brief Specifies whether to enable the extended Sybyl atom-type set when reading/writing <em>Sybyl MOL2</em> data. 
     # \valuetype  <tt>bool</tt>.
     # 
     MOL2_ENABLE_EXTENDED_ATOM_TYPES = CDPL.Base.LookupKey('MOL2_ENABLE_EXTENDED_ATOM_TYPES')
 
     ##
-    # \brief Specifies whether to interpret/write the Sybyl bond type <tt>"ar"</tt> as aromatic on <em>MOL2</em> input/output. 
+    # \brief Specifies whether to interpret/write the Sybyl bond type <tt>"ar"</tt> as aromatic when reading/writing <em>Sybyl MOL2</em> data. 
     # \valuetype  <tt>bool</tt>.
     # 
     MOL2_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('MOL2_ENABLE_AROMATIC_BOND_TYPES')
 
     ##
-    # \brief Specifies whether to recompute formal charges from atom types on <em>MOL2</em> input. 
+    # \brief Specifies whether to recompute formal charges from atom types when reading <em>Sybyl MOL2</em> data. 
     # \valuetype  <tt>bool</tt>.
     # 
     MOL2_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_CALC_FORMAL_CHARGES')
 
     ##
-    # \brief Specifies the charge type recorded in the <tt>@<TRIPOS>MOLECULE</tt> block on <em>MOL2</em> output (see namespace Chem.MOL2ChargeType). 
+    # \brief Specifies the charge type to write to the <tt>@<TRIPOS>MOLECULE</tt> block when generating <em>Sybyl MOL2</em> output (see namespace Chem.MOL2ChargeType). 
     # \valuetype  <tt>unsigned int</tt>
     # 
     MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
 
     ##
-    # \brief Specifies whether to write the <tt>@<TRIPOS>SUBSTRUCTURE</tt> block on <em>MOL2</em> output. 
+    # \brief Specifies whether to write the <tt>@<TRIPOS>SUBSTRUCTURE</tt> block when generating <em>Sybyl MOL2</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     MOL2_OUTPUT_SUBSTRUCTURES = CDPL.Base.LookupKey('MOL2_OUTPUT_SUBSTRUCTURES')
 
     ##
-    # \brief Specifies the molecule type recorded in the <tt>@<TRIPOS>MOLECULE</tt> block on <em>MOL2</em> output (see namespace Chem.MOL2MoleculeType). 
+    # \brief Specifies the molecule type to write to the <tt>@<TRIPOS>MOLECULE</tt> block when generating <em>Sybyl MOL2</em> output (see namespace Chem.MOL2MoleculeType). 
     # \valuetype  <tt>unsigned int</tt>
     # 
     MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey('MOL2_MOLECULE_TYPE')
 
     ##
-    # \brief Specifies whether to round Sybyl partial charges to the nearest integer formal charges on <em>MOL2</em> input. 
+    # \brief Specifies whether to round Sybyl partial charges to the nearest integer formal charges on <em>Sybyl MOL2</em> input. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2.3
@@ -429,7 +429,7 @@ class ControlParameter(Boost.Python.instance):
     MOL2_READ_PARTIAL_AS_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_READ_PARTIAL_AS_FORMAL_CHARGES')
 
     ##
-    # \brief Specifies whether to emit formal atomic charges in the partial-charge column on <em>MOL2</em> output. 
+    # \brief Specifies whether to emit formal atomic charges in the partial-charge column when generating <em>Sybyl MOL2</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2.3
@@ -442,7 +442,7 @@ class ControlParameter(Boost.Python.instance):
     COMMENT_IS_NAME = CDPL.Base.LookupKey('XYZ_COMMENT_IS_NAME')
 
     ##
-    # \brief Specifies whether to perceive bond connectivity from atom 3D coordinates when reading <em>XYZ</em> data (which encodes no explicit bonds). 
+    # \brief Specifies whether to perceive bond connectivity from atom 3D coordinates when reading <em>XYZ</em> data. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.1
@@ -466,7 +466,7 @@ class ControlParameter(Boost.Python.instance):
     XYZ_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('XYZ_CALC_FORMAL_CHARGES')
 
     ##
-    # \brief Specifies whether to emit an XML declaration (<tt><?xml version="1.0"?></tt>) at the beginning of <em>CML</em> output records. 
+    # \brief Specifies whether to emit an XML declaration at the beginning of <em>CML</em> output records. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -474,7 +474,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_XML_DECLARATION = CDPL.Base.LookupKey('CML_OUTPUT_XML_DECLARATION')
 
     ##
-    # \brief Specifies the XML namespace URI emitted with the root <tt><cml></tt> element on <em>CML</em> output. 
+    # \brief Specifies the XML namespace URI emitted with the root element when generating <em>CML</em> output. 
     # \valuetype  <tt>std::string</tt>.
     # 
     # \since 1.2
@@ -482,7 +482,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_ELEMENT_NAMESPACE = CDPL.Base.LookupKey('CML_OUTPUT_ELEMENT_NAMESPACE')
 
     ##
-    # \brief Specifies whether to encode tetrahedral atom parities on <em>CML</em> output. 
+    # \brief Specifies whether to encode tetrahedral atom parities when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -490,7 +490,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_ATOM_PARITY = CDPL.Base.LookupKey('CML_OUTPUT_ATOM_PARITY')
 
     ##
-    # \brief Specifies whether to emit wedge/hash stereo flags for single bonds on <em>CML</em> output. 
+    # \brief Specifies whether to emit wedge/hash stereo flags for single bonds when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -498,7 +498,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_SINGLE_BOND_STEREO = CDPL.Base.LookupKey('CML_OUTPUT_SINGLE_BOND_STEREO')
 
     ##
-    # \brief Specifies whether to encode cis/trans descriptors for double bonds on <em>CML</em> output. 
+    # \brief Specifies whether to encode cis/trans descriptors for double bonds when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -506,7 +506,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_DOUBLE_BOND_STEREO = CDPL.Base.LookupKey('CML_OUTPUT_DOUBLE_BOND_STEREO')
 
     ##
-    # \brief Specifies whether to interpret/write CML's aromatic bond type <tt>"a"</tt> on input/output. 
+    # \brief Specifies whether to interpret/write <em>CML</em>'s aromatic bond type <tt>"a"</tt> when reading/wrting <em>CML</em> data. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.3
@@ -514,7 +514,7 @@ class ControlParameter(Boost.Python.instance):
     CML_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('CML_ENABLE_AROMATIC_BOND_TYPES')
 
     ##
-    # \brief Specifies whether to emit the <tt>title</tt> attribute (molecule name) on <em>CML</em> output. 
+    # \brief Specifies whether to emit the title attribute (molecule name) when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -522,7 +522,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_MOLECULE_NAME = CDPL.Base.LookupKey('CML_OUTPUT_MOLECULE_NAME')
 
     ##
-    # \brief Specifies whether to emit attached structure-data fields on <em>CML</em> output. 
+    # \brief Specifies whether to emit attached structure-data fields when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -530,7 +530,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_STRUCTURE_DATA = CDPL.Base.LookupKey('CML_OUTPUT_STRUCTURE_DATA')
 
     ##
-    # \brief Specifies whether to emit the isotopic mass number of non-standard isotopes on <em>CML</em> output. 
+    # \brief Specifies whether to emit the isotopic mass number of non-standard isotopes when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -538,7 +538,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_ISOTOPE = CDPL.Base.LookupKey('CML_OUTPUT_ISOTOPE')
 
     ##
-    # \brief Specifies whether to emit the atom spin multiplicity on <em>CML</em> output. 
+    # \brief Specifies whether to emit the atom spin multiplicity when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -546,7 +546,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_SPIN_MULTIPLICITY = CDPL.Base.LookupKey('CML_OUTPUT_SPIN_MULTIPLICITY')
 
     ##
-    # \brief Specifies whether to use CML's compact (array-style) representation for atom data on output. 
+    # \brief Specifies whether to use <em>CML</em>'s compact (array-style) representation for atom data on output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -554,7 +554,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_COMPACT_ATOM_DATA = CDPL.Base.LookupKey('CML_OUTPUT_COMPACT_ATOM_DATA')
 
     ##
-    # \brief Specifies whether to use CML's compact (array-style) representation for bond data on output. 
+    # \brief Specifies whether to use <em>CML</em>'s compact (array-style) representation for bond data on output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2

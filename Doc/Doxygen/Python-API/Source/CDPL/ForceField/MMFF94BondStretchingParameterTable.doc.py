@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Lookup table mapping (bond type, atom-type 1, atom-type 2) triples to MMFF94 bond-stretching force-field parameters (force constant and reference bond length).
+# \brief Data structure for the storage and lookup of MMFF94 bond-stretching interaction parameters.
 # 
 class MMFF94BondStretchingParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single bond-stretching parameter record.
+    # \brief Data structure for the storage of values associated with a single parameter table entry.
     # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
+        # \brief Constructs an empty (uninitialized) parameter entry.
         # 
         def __init__() -> None: pass
 
@@ -41,7 +41,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the given (bond type, atom type 1, atom type 2) triple.
+        # \brief Constructs an entry for the given query and parameter values.
         # 
         # \param bond_type_idx The MMFF94 bond type index.
         # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
@@ -153,7 +153,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the given (bond type, atom type 1, atom type 2) triple.
+    # \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
     # 
     # \param bond_type_idx The MMFF94 bond type index.
     # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
@@ -164,7 +164,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def addEntry(bond_type_idx: int, atom1_type: int, atom2_type: int, force_const: float, ref_length: float) -> None: pass
 
     ##
-    # \brief Removes the entry for the given (bond type, atom type 1, atom type 2) triple.
+    # \brief Removes the entry matching the specified query values.
     # 
     # \param bond_type_idx The MMFF94 bond type index.
     # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
@@ -175,13 +175,13 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def removeEntry(bond_type_idx: int, atom1_type: int, atom2_type: int) -> bool: pass
 
     ##
-    # \brief Returns the entry for the given (bond type, atom type 1, atom type 2) triple.
+    # \brief Returns a reference to the entry matching the specified query values.
     # 
     # \param bond_type_idx The MMFF94 bond type index.
     # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
     # \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(bond_type_idx: int, atom1_type: int, atom2_type: int) -> Entry: pass
 

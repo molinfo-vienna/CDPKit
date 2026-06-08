@@ -2417,7 +2417,8 @@ namespace CDPL
         };
 
         /**
-         * \brief Functor returning element \e i of the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$ (quaternion rotation of \a e_2 by \a e_1).
+         * \brief Functor returning element \e i of the rotated 3-dimensional vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$
+         *        (quaternion rotation of \f$ e_2 \f$ by \f$ e_1 \f$).
          * \tparam Q The quaternion expression type.
          * \tparam V The vector expression type.
          */

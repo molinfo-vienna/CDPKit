@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Handler for the input of pharmacophore data in the PSD-format of the <em>CDPL</em>.
+# \brief Handler for the input of pharmacophore data in the <em>CDPL</em> <em>PSD</em>-format.
 # 
 class PSDPharmacophoreInputHandler(PharmacophoreInputHandler):
 

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of class CDPL::ForceField::MMFF94ElectrostaticInteractionList.
+ * \brief Declaration of type CDPL::ForceField::MMFF94ElectrostaticInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONLIST_HPP
@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamically-sized array of MMFF94 electrostatic interaction records.
+         * \brief Data structure for the storage of MMFF94 electrostatic interaction parameter set records.
          */
         typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionList;
     }

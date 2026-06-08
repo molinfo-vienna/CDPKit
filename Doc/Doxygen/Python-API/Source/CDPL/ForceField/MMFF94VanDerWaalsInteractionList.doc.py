@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Dynamically-sized array of MMFF94 Van der Waals interaction records.
+# \brief Data structure for the storage of MMFF94 Van der Waals interaction parameter set records.
 # 
 class MMFF94VanDerWaalsInteractionList(Boost.Python.instance):
 

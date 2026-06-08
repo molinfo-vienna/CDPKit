@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of class CDPL::ForceField::MMFF94TorsionInteractionList.
+ * \brief Declaration of type CDPL::ForceField::MMFF94TorsionInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONLIST_HPP
@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamically-sized array of MMFF94 torsion interaction records.
+         * \brief Data structure for the storage of MMFF94 torsion interaction parameter set records.
          */
         typedef Util::Array<MMFF94TorsionInteraction> MMFF94TorsionInteractionList;
     }

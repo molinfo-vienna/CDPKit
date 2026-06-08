@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Dynamically-sized array of MMFF94 torsion interaction records.
+# \brief Data structure for the storage of MMFF94 torsion interaction parameter set records.
 # 
 class MMFF94TorsionInteractionList(Boost.Python.instance):
 

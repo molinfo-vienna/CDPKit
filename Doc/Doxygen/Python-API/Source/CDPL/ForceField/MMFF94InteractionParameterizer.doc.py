@@ -256,7 +256,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94InteractionParameterizer) -> MMFF94InteractionParameterizer: pass
 
     ##
-    # \brief Parameterizes the MMFF94 force-field interactions for <em>molgraph</em> and stores them in <em>ia_data</em>.
+    # \brief Parameterizes the MMFF94 force field interactions for <em>molgraph</em> and stores them in <em>ia_data</em>.
     # 
     # \param molgraph The molecular graph to parameterize.
     # \param ia_data The output container receiving the perceived interactions.

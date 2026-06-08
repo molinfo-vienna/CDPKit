@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Reader for reaction data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+         * \brief Reader for reaction data in the gzip-compressed native I/O format of the <em>%CDPL</em>.
          */
         typedef Util::CompressedDataReader<CDFReactionReader, Util::GZipIStream> CDFGZReactionReader;
     }

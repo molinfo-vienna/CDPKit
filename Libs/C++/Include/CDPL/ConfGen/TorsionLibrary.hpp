@@ -56,19 +56,19 @@ namespace CDPL
             typedef std::shared_ptr<TorsionLibrary> SharedPointer;
 
             /**
-             * \brief Reads the library content from the input stream \a is in the XML-based CDPL torsion library format.
+             * \brief Reads the library content from the input stream \a is in the XML-based \e %CDPL torsion library format.
              * \param is The input stream to read from.
              */
             void load(std::istream& is);
 
             /**
-             * \brief Writes the library content to the output stream \a os in the XML-base CDPL torsion library format.
+             * \brief Writes the library content to the output stream \a os in the XML-based \e %CDPL torsion library format.
              * \param os The output stream to write to.
              */
             void save(std::ostream& os) const;
 
             /**
-             * \brief Loads the built-in CDPL default torsion library.
+             * \brief Loads the built-in \e %CDPL default torsion library.
              */
             void loadDefaults();
 

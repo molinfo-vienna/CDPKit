@@ -23,8 +23,8 @@
 
 /**
  * \file
- * \brief Type declaration of generic wrapper classes for storing user-defined interaction
- *        filtering functions.
+ * \brief Type declaration of generic wrapper class types for storing user-defined interaction
+ *        filtering predicates.
  */
 
 #ifndef CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONS_HPP

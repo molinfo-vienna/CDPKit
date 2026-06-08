@@ -75,7 +75,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return \c true if CDF output uses single-precision floats, and \c false otherwise.
+         * \return \c true if <em>CDF</em> output uses single-precision floats, and \c false otherwise.
          * \since 1.2
          */
         CDPL_PHARM_API bool getCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);

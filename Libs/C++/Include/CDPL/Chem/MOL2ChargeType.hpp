@@ -37,7 +37,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants for the specification of the atom charge type in <em>Tripos MOL2</em> files.
+         * \brief Provides constants for the specification of the atom charge type in <em>Sybyl MOL2</em> files.
          */
         namespace MOL2ChargeType
         {

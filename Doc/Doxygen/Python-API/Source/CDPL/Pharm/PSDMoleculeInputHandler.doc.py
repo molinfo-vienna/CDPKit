@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Handler for the input of molecule data in the PSD-format of the <em>CDPL</em>.
+# \brief Handler for the input of molecule data in the <em>CDPL</em> <em>PSD</em>-format.
 # 
 class PSDMoleculeInputHandler(Chem.MoleculeInputHandler):
 
