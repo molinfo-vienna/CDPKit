@@ -49,7 +49,7 @@ namespace CDPL
 
         /**
          * \brief Lookup table mapping (terminal-atom-1 PTE row, center-atom PTE row, terminal-atom-2 PTE row) triples
-         *        to fallback MMFF94 stretch-bend coupling force constants used when no atom-type-specific entry is available.
+         *        to fallback MMFF94 stretch-bend coupling force constants used when no atom type-specific entry is available.
          *
          * The PTE row of an atom is the row index in the periodic table of the elements. Two directional force constants
          * are stored per entry (\c IJK and \c KJI) — see Util::MMFF94StretchBendParameterTable for the coupling semantics.
@@ -266,7 +266,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A \c const reference to the default table shared pointer.
              */
             static const SharedPointer& get();
 

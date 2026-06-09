@@ -207,7 +207,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A reference to the default table shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94PartialBondChargeIncrementTable: pass

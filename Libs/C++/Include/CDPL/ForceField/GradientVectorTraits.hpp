@@ -45,7 +45,7 @@ namespace CDPL
          * \brief Generic primary traits template providing zero-initialization for a 3D gradient vector container of type \a GV.
          *
          * The primary template assumes \a GV is indexable via <tt>operator[]</tt> with each element exposing 3 components
-         * (\c [0], \c [1], \c [2]) and clears them by direct assignment.
+         * and clears them by direct assignment.
          *
          * \tparam GV The gradient vector container type.
          */

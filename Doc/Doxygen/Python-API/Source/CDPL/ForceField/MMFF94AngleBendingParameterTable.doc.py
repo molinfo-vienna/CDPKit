@@ -25,12 +25,12 @@
 class MMFF94AngleBendingParameterTable(Boost.Python.instance):
 
     ##
-    # \brief Data structure for the storage of values associated with a single parameter table entry.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Constructs an empty (uninitialized) parameter entry.
+        # \brief Constructs an empty (uninitialized) <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -41,7 +41,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an entry for the given query and parameter values.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given query and parameter values.
         # 
         # \param angle_type_idx The MMFF94 angle type index.
         # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -246,7 +246,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94AngleBendingParameterTable: pass

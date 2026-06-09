@@ -948,7 +948,7 @@ def hasApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> boo
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The apply-dictionary-atom-types flag. 
+# \return The apply-dictionary-atom types flag. 
 # 
 # \since 1.2
 # 

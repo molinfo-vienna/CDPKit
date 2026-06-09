@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Lookup table mapping numeric UFF atom types to the per-atom-type parameters used by the <em>Universal Force Field (UFF)</em>.
+# \brief Lookup table mapping numeric UFF atom types to the per-atom type parameters used by the <em>Universal Force Field (UFF)</em>.
 # 
 # Each entry provides the natural bond radius and bond angle of the atom type, its Van der Waals parameters (well distance, well depth, and scaling factor), and the effective atomic charge used by the UFF electrostatic terms.
 # 
@@ -29,7 +29,7 @@
 class UFFAtomTypePropertyTable(Boost.Python.instance):
 
     ##
-    # \brief A single UFF atom-type property record.
+    # \brief A single UFF atom type property record.
     # 
     class Entry(Boost.Python.instance):
 
@@ -48,7 +48,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         # \brief Constructs an <tt>Entry</tt> for the numeric UFF atom type <em>atom_type</em>.
         # 
         # \param atom_type The numeric UFF atom type.
-        # \param atom_type_sym The symbolic UFF atom-type label.
+        # \param atom_type_sym The symbolic UFF atom type label.
         # \param atomic_no The atomic number of atoms of this type.
         # \param bond_rad The natural bond radius.
         # \param bond_ang The natural bond angle.
@@ -93,9 +93,9 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         def getAtomicNumber() -> int: pass
 
         ##
-        # \brief Returns the symbolic UFF atom-type label of the entry.
+        # \brief Returns the symbolic UFF atom type label of the entry.
         # 
-        # \return A reference to the symbolic atom-type label.
+        # \return A reference to the symbolic atom type label.
         # 
         def getAtomTypeSymbol() -> str: pass
 
@@ -200,7 +200,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     # \brief Adds (or overwrites) the entry for the numeric UFF atom type <em>atom_type</em>.
     # 
     # \param atom_type The numeric UFF atom type.
-    # \param atom_type_sym The symbolic UFF atom-type label.
+    # \param atom_type_sym The symbolic UFF atom type label.
     # \param atomic_no The atomic number of atoms of this type.
     # \param bond_rad The natural bond radius.
     # \param bond_ang The natural bond angle.
@@ -248,7 +248,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief Loads the built-in default UFF atom-type property entries.
+    # \brief Loads the built-in default UFF atom type property entries.
     # 
     def loadDefaults() -> None: pass
 
@@ -270,7 +270,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A reference to the default table shared reference.
     # 
     @staticmethod
     def get(: ) -> UFFAtomTypePropertyTable: pass

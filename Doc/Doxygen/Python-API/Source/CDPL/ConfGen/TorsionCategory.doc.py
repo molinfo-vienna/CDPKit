@@ -303,7 +303,7 @@ class TorsionCategory(Boost.Python.instance):
     def getCategories() -> CategorySequence: pass
 
     ##
-    # \brief Removes all child categories and contained rules and resets the pattern/atom-type data.
+    # \brief Removes all child categories and contained rules and resets the pattern/atom type data.
     # 
     def clear() -> None: pass
 

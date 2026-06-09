@@ -236,7 +236,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A \c const reference to the default table shared pointer.
              */
             static const SharedPointer& get();
 

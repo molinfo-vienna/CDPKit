@@ -160,7 +160,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Biomol::ControlParameter::APPLY_DICT_ATOM_TYPES parameter of \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The apply-dictionary-atom-types flag.
+         * \return The apply-dictionary-atom types flag.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);

@@ -48,10 +48,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping numeric MMFF94 atom types to per-atom-type Van der Waals parameters
+         * \brief Lookup table mapping numeric MMFF94 atom types to per-atom type Van der Waals parameters
          *        (atomic polarizability, effective electron number, scaling factors A/G, and H-donor/-acceptor classification).
          *
-         * In addition to the per-atom-type entries, the table also stores the five global scalar parameters
+         * In addition to the per-atom type entries, the table also stores the five global scalar parameters
          * (exponent, B, beta, DARAD, DAEPS) used by the buffered 14-7 MMFF94 Van der Waals energy expression.
          */
         class CDPL_FORCEFIELD_API MMFF94VanDerWaalsParameterTable
@@ -70,7 +70,7 @@ namespace CDPL
             typedef MMFF94VanDerWaalsInteraction::HDonorAcceptorType HDonorAcceptorType;
 
             /**
-             * \brief A single per-atom-type Van der Waals parameter record.
+             * \brief A single per-atom type Van der Waals parameter record.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -336,7 +336,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A \c const reference to the default table shared pointer.
              */
             static const SharedPointer& get();
 

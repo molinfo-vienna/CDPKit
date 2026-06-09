@@ -289,7 +289,7 @@ namespace CDPL
             void swap(TorsionCategory& cat);
 
             /**
-             * \brief Removes all child categories and contained rules and resets the pattern/atom-type data.
+             * \brief Removes all child categories and contained rules and resets the pattern/atom type data.
              */
             void clear();
 

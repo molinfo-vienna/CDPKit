@@ -51,7 +51,7 @@ namespace CDPL
          * \brief Assigns MMFF94 bond type indices to the bonds of a molecular graph.
          *
          * A bond receives the nonstandard type index \e 1 when it is a single bond between two non-aromatic
-         * atoms whose MMFF94 atom-type properties carry an \c sbmb flag, or when it connects two atoms that
+         * atoms whose MMFF94 atom type properties carry an \c sbmb flag, or when it connects two atoms that
          * belong to two different aromatic rings (as in the central C-C bond of biphenyl). All other bonds
          * receive the standard type index \e 0.
          */

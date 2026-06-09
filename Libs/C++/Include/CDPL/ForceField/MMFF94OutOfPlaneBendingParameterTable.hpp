@@ -48,10 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (terminal-atom-1 type, center-atom type, terminal-atom-2 type, out-of-plane-atom type)
-         *        quadruples to MMFF94 out-of-plane bending force constants.
-         *
-         * The table maintains separate process-wide defaults per MMFF94 parameter set (see Util::MMFF94ParameterSet).
+         * \brief Data structure for the storage and lookup of MMFF94 out-of-plane bending interaction force constants.
          */
         class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingParameterTable
         {
@@ -67,7 +64,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94OutOfPlaneBendingParameterTable> SharedPointer;
 
             /**
-             * \brief A single out-of-plane bending parameter record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -79,7 +76,7 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+                 * \brief Constructs an \c %Entry instance storing the given query values and force constant.
                  * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
                  * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
                  * \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
@@ -150,7 +147,7 @@ namespace CDPL
             MMFF94OutOfPlaneBendingParameterTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+             * \brief Adds a new (or overwrites an existing) entry for the given query values and force constant.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
              * \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
@@ -161,12 +158,12 @@ namespace CDPL
                           unsigned int oop_atom_type, double force_const);
 
             /**
-             * \brief Returns the entry for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
              * \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
              * \param oop_atom_type The numeric MMFF94 atom type of the out-of-plane atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type,
                                   unsigned int oop_atom_type) const;
@@ -183,7 +180,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+             * \brief Removes the entry matching the specified query values.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
              * \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
@@ -263,14 +260,14 @@ namespace CDPL
             /**
              * \brief Replaces the process-wide default table for \a param_set by \a table.
              * \param table The new default table (a \c nullptr resets to the built-in default).
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default slot to replace.
+             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default table to replace.
              */
             static void set(const SharedPointer& table, unsigned int param_set);
 
             /**
              * \brief Returns the process-wide default table for \a param_set (lazily initialized on first call).
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default slot to return.
-             * \return A \c const reference to the selected default-table shared pointer.
+             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default table to return.
+             * \return A shared pointer to the selected default table.
              */
             static const SharedPointer& get(unsigned int param_set);
 

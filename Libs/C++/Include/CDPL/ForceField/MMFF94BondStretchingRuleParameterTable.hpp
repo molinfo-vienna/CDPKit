@@ -49,7 +49,7 @@ namespace CDPL
 
         /**
          * \brief Lookup table mapping (atomic-number 1, atomic-number 2) pairs to fallback MMFF94 bond-stretching
-         *        parameters used when no atom-type-specific entry is available.
+         *        parameters used when no atom type-specific entry is available.
          */
         class CDPL_FORCEFIELD_API MMFF94BondStretchingRuleParameterTable
         {
@@ -248,7 +248,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A \c const reference to the default table shared pointer.
              */
             static const SharedPointer& get();
 

@@ -25,7 +25,7 @@
 class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
     ##
-    # \brief A single primary-to-parameter atom-type-map record.
+    # \brief A single primary-to-parameter atom type-map record.
     # 
     class Entry(Boost.Python.instance):
 
@@ -177,7 +177,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default primary-to-parameter atom-type mappings.
+    # \brief Loads the built-in default primary-to-parameter atom type mappings.
     # 
     def loadDefaults() -> None: pass
 

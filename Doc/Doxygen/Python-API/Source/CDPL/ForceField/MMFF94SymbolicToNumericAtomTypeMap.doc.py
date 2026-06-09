@@ -152,7 +152,7 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default symbolic-to-numeric atom-type mappings.
+    # \brief Loads the built-in default symbolic-to-numeric atom type mappings.
     # 
     def loadDefaults() -> None: pass
 

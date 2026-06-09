@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Lookup table mapping numeric MMFF94 atom types to per-atom-type Van der Waals parameters (atomic polarizability, effective electron number, scaling factors A/G, and H-donor/-acceptor classification).
+# \brief Lookup table mapping numeric MMFF94 atom types to per-atom type Van der Waals parameters (atomic polarizability, effective electron number, scaling factors A/G, and H-donor/-acceptor classification).
 # 
-# In addition to the per-atom-type entries, the table also stores the five global scalar parameters (exponent, B, beta, DARAD, DAEPS) used by the buffered 14-7 MMFF94 Van der Waals energy expression.
+# In addition to the per-atom type entries, the table also stores the five global scalar parameters (exponent, B, beta, DARAD, DAEPS) used by the buffered 14-7 MMFF94 Van der Waals energy expression.
 # 
 class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single per-atom-type Van der Waals parameter record.
+    # \brief A single per-atom type Van der Waals parameter record.
     # 
     class Entry(Boost.Python.instance):
 
@@ -312,7 +312,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A reference to the default table shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94VanDerWaalsParameterTable: pass

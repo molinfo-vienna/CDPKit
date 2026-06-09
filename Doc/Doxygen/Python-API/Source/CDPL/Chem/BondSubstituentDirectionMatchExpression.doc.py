@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.MatchExpression that constrains target double-bond geometry via the per-substituent bond-direction annotations carried by the query (in the style of <em>Daylight SMARTS</em> [\ref SMARTS] <em>cis/<em>trans</em> patterns</em>).
+# \brief Chem.MatchExpression that constrains target double bond geometry via the per-substituent bond-direction annotations carried by the query (in the style of <em>Daylight SMARTS</em> [\ref SMARTS] <em>cis/<em>trans</em> patterns</em>).
 # 
 # <em>Daylight SMARTS</em> [\ref SMARTS] substructure search patterns specify cis/trans geometry constraints for a double bond by indicating the relative direction of the bonds to its substituent atoms.
 # 

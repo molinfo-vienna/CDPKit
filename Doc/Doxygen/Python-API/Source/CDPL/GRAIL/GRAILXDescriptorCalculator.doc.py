@@ -22,7 +22,7 @@
 ##
 # \brief Calculation of the extended GRAIL-X descriptor for protein-ligand complexes.
 # 
-# <tt>GRAILXDescriptorCalculator</tt> is the SYBYL-atom-type-aware variant of GRAIL.GRAILDescriptorCalculator. The resulting 177-element descriptor refines the generic hydrogen-bond donor/acceptor terms by also resolving the chemical environment (N3, N2, Nar, Nam, Npl3, N4, O3, O2, Oco2, S3, S2) of the participating heavy atom. The full element layout is given by ElementIndex.
+# <tt>GRAILXDescriptorCalculator</tt> is the SYBYL-atom type-aware variant of GRAIL.GRAILDescriptorCalculator. The resulting 177-element descriptor refines the generic hydrogen-bond donor/acceptor terms by also resolving the chemical environment (N3, N2, Nar, Nam, Npl3, N4, O3, O2, Oco2, S3, S2) of the participating heavy atom. The full element layout is given by ElementIndex.
 # 
 # \see [\ref GRADE]
 # 

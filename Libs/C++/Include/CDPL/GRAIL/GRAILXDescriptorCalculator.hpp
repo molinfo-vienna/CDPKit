@@ -55,7 +55,7 @@ namespace CDPL
         /**
          * \brief Calculation of the extended GRAIL-X descriptor for protein-ligand complexes.
          *
-         * \c %GRAILXDescriptorCalculator is the SYBYL-atom-type-aware variant of
+         * \c %GRAILXDescriptorCalculator is the SYBYL-atom type-aware variant of
          * GRAIL::GRAILDescriptorCalculator. The resulting 177-element descriptor refines the
          * generic hydrogen-bond donor/acceptor terms by also resolving the chemical environment
          * (N3, N2, Nar, Nam, Npl3, N4, O3, O2, Oco2, S3, S2) of the participating heavy atom.

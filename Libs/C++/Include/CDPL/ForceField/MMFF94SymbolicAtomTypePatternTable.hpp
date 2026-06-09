@@ -71,7 +71,7 @@ namespace CDPL
             typedef DataStorage::iterator       EntryIterator;
 
             /**
-             * \brief A single atom-type pattern record.
+             * \brief A single atom type pattern record.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -210,7 +210,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default atom-type patterns.
+             * \brief Loads the built-in default atom type patterns.
              */
             void loadDefaults();
 
@@ -222,7 +222,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A \c const reference to the default table shared pointer.
              */
             static const SharedPointer& get();
 

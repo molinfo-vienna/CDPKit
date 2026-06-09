@@ -47,7 +47,7 @@ namespace CDPL
          * \brief Functor for the calculation of a heuristic stability score of a tautomeric form
          *        represented as a molecular graph.
          *
-         * The score is computed from contributions of atom-type, hybridization, ring-membership and
+         * The score is computed from contributions of atom type, hybridization, ring-membership and
          * specific structural motifs (amide-like nitrogens, carboxylic oxygens, exocyclic hydroxyls,
          * 2,4-hydroxy-pyridine-like rings, etc.) and is typically used to rank tautomeric forms of a
          * molecule from least to most stable.

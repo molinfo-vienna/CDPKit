@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief Lookup table mapping (terminal-atom-1 type, center-atom type, terminal-atom-2 type, out-of-plane-atom type) quadruples to MMFF94 out-of-plane bending force constants.
-# 
-# The table maintains separate process-wide defaults per MMFF94 parameter set (see Util.MMFF94ParameterSet).
+# \brief Data structure for the storage and lookup of MMFF94 out-of-plane bending interaction force constants.
 # 
 class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single out-of-plane bending parameter record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -43,7 +41,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given query values and force constant.
         # 
         # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
         # \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -155,7 +153,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+    # \brief Adds a new (or overwrites an existing) entry for the given query values and force constant.
     # 
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
     # \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -166,7 +164,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     def addEntry(term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, oop_atom_type: int, force_const: float) -> None: pass
 
     ##
-    # \brief Removes the entry for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+    # \brief Removes the entry matching the specified query values.
     # 
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
     # \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -178,14 +176,14 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     def removeEntry(term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, oop_atom_type: int) -> bool: pass
 
     ##
-    # \brief Returns the entry for the given (terminal-atom 1, center atom, terminal-atom 2, out-of-plane atom) quadruple.
+    # \brief Returns a reference to the entry matching the specified query values.
     # 
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
     # \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
     # \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
     # \param oop_atom_type The numeric MMFF94 atom type of the out-of-plane atom.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, oop_atom_type: int) -> Entry: pass
 
@@ -232,7 +230,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     # \brief Replaces the process-wide default table for <em>param_set</em> by <em>table</em>.
     # 
     # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
-    # \param param_set The Util.MMFF94ParameterSet identifier selecting which default slot to replace.
+    # \param param_set The Util.MMFF94ParameterSet identifier selecting which default table to replace.
     # 
     @staticmethod
     def set(table: MMFF94OutOfPlaneBendingParameterTable, param_set: int) -> None: pass
@@ -240,9 +238,9 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table for <em>param_set</em> (lazily initialized on first call).
     # 
-    # \param param_set The Util.MMFF94ParameterSet identifier selecting which default slot to return.
+    # \param param_set The Util.MMFF94ParameterSet identifier selecting which default table to return.
     # 
-    # \return A reference to the selected default-table shared reference.
+    # \return A shared reference to the selected default table.
     # 
     @staticmethod
     def get(param_set: int) -> MMFF94OutOfPlaneBendingParameterTable: pass

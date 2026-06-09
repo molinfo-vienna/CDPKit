@@ -151,7 +151,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default heavy-to-hydrogen atom-type mappings.
+    # \brief Loads the built-in default heavy-to-hydrogen atom type mappings.
     # 
     def loadDefaults() -> None: pass
 

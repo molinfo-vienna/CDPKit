@@ -299,7 +299,7 @@ namespace CDPL
             /**
              * \brief Returns the process-wide default table for \a param_set (lazily initialized on first call).
              * \param param_set The Util::MMFF94ParameterSet identifier selecting which default slot to return.
-             * \return A \c const reference to the selected default-table shared pointer.
+             * \return A \c const reference to the selected default table shared pointer.
              */
             static const SharedPointer& get(unsigned int param_set);
 

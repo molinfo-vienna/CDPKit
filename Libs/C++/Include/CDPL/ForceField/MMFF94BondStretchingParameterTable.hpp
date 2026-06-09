@@ -64,19 +64,19 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94BondStretchingParameterTable> SharedPointer;
 
             /**
-             * \brief Data structure for the storage of values associated with a single parameter table entry.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 /**
-                 * \brief Constructs an empty (uninitialized) parameter entry.
+                 * \brief Constructs an empty (uninitialized) \c %Entry instance.
                  */
                 Entry();
 
                 /**
-                 * \brief Constructs an entry for the given query and parameter values.
+                 * \brief Constructs an \c %Entry instance storing the given query and parameter values.
                  * \param bond_type_idx The MMFF94 bond type index.
                  * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
                  * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
@@ -260,7 +260,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

@@ -64,7 +64,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94PrimaryToParameterAtomTypeMap> SharedPointer;
 
             /**
-             * \brief A single primary-to-parameter atom-type-map record.
+             * \brief A single primary-to-parameter atom type-map record.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -92,7 +92,7 @@ namespace CDPL
                 unsigned int getAtomType() const;
 
                 /**
-                 * \brief Returns a pointer to the fallback parameter-atom-type array of length \c NUM_TYPES.
+                 * \brief Returns a pointer to the fallback parameter-atom type array of length \c NUM_TYPES.
                  * \return A pointer to the parameter-type array.
                  */
                 const unsigned int* getParameterTypes() const;
@@ -218,7 +218,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default primary-to-parameter atom-type mappings.
+             * \brief Loads the built-in default primary-to-parameter atom type mappings.
              */
             void loadDefaults();
 

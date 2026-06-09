@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Lookup table mapping (stretch-bend type, terminal-atom-1 type, center-atom type, terminal-atom-2 type) quadruples to MMFF94 stretch-bend coupling force constants.
+# \brief Data structure for the storage and lookup of MMFF94 stretch-bend interaction parameters.
 # 
 # Two directional force constants are stored per entry: <tt>IJK</tt> couples the bond <em>i-j</em> to the angle <em>i-j-k</em>, and <tt>KJI</tt> couples the bond <em>j-k</em> to the same angle.
 # 
 class MMFF94StretchBendParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single stretch-bend coupling parameter record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -43,7 +43,7 @@ class MMFF94StretchBendParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given query and parameter values.
         # 
         # \param sb_type_idx The MMFF94 stretch-bend type index.
         # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -165,7 +165,7 @@ class MMFF94StretchBendParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+    # \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
     # 
     # \param sb_type_idx The MMFF94 stretch-bend type index.
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -177,7 +177,7 @@ class MMFF94StretchBendParameterTable(Boost.Python.instance):
     def addEntry(sb_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, ijk_force_const: float, kji_force_const: float) -> None: pass
 
     ##
-    # \brief Removes the entry for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+    # \brief Removes the entry matching the specified query values.
     # 
     # \param sb_type_idx The MMFF94 stretch-bend type index.
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -189,14 +189,14 @@ class MMFF94StretchBendParameterTable(Boost.Python.instance):
     def removeEntry(sb_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int) -> bool: pass
 
     ##
-    # \brief Returns the entry for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+    # \brief Returns a reference to the entry matching the specified query values.
     # 
     # \param sb_type_idx The MMFF94 stretch-bend type index.
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
     # \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
     # \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(sb_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int) -> Entry: pass
 
@@ -248,7 +248,7 @@ class MMFF94StretchBendParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94StretchBendParameterTable: pass

@@ -165,32 +165,32 @@ namespace CDPL
             void clearFilterFunctions();
 
             /**
-             * \brief Sets the symbolic-atom-type pattern table to use during atom typing.
-             * \param table The new symbolic-atom-type pattern table.
+             * \brief Sets the symbolic-atom type pattern table to use during atom typing.
+             * \param table The new symbolic-atom type pattern table.
              */
             void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
             /**
-             * \brief Sets the heavy-to-hydrogen atom-type map used to derive hydrogen atom types from their non-hydrogen neighbors.
-             * \param map The new heavy-to-hydrogen atom-type map.
+             * \brief Sets the heavy-to-hydrogen atom type map used to derive hydrogen atom types from their non-hydrogen neighbors.
+             * \param map The new heavy-to-hydrogen atom type map.
              */
             void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
 
             /**
-             * \brief Sets the symbolic-to-numeric atom-type map used to convert symbolic types to numeric ones.
-             * \param map The new symbolic-to-numeric atom-type map.
+             * \brief Sets the symbolic-to-numeric atom type map used to convert symbolic types to numeric ones.
+             * \param map The new symbolic-to-numeric atom type map.
              */
             void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
 
             /**
-             * \brief Sets the aromatic-atom-type definition table used to override types of aromatic atoms.
-             * \param table The new aromatic-atom-type definition table.
+             * \brief Sets the aromatic-atom type definition table used to override types of aromatic atoms.
+             * \param table The new aromatic-atom type definition table.
              */
             void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
 
             /**
-             * \brief Sets the atom-type property table used to resolve per-numeric-type properties.
-             * \param table The new atom-type property table.
+             * \brief Sets the atom type property table used to resolve per-numeric-type properties.
+             * \param table The new atom type property table.
              */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
@@ -213,8 +213,8 @@ namespace CDPL
             void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
 
             /**
-             * \brief Sets the primary-to-parameter atom-type map used by the parameter look-ups.
-             * \param map The new primary-to-parameter atom-type map.
+             * \brief Sets the primary-to-parameter atom type map used by the parameter look-ups.
+             * \param map The new primary-to-parameter atom type map.
              */
             void setPrimaryToParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 

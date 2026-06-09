@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Lookup table mapping (terminal-atom-1 PTE row, center-atom PTE row, terminal-atom-2 PTE row) triples to fallback MMFF94 stretch-bend coupling force constants used when no atom-type-specific entry is available.
+# \brief Lookup table mapping (terminal-atom-1 PTE row, center-atom PTE row, terminal-atom-2 PTE row) triples to fallback MMFF94 stretch-bend coupling force constants used when no atom type-specific entry is available.
 # 
 # The PTE row of an atom is the row index in the periodic table of the elements. Two directional force constants are stored per entry (<tt>IJK</tt> and <tt>KJI</tt>) — see Util.MMFF94StretchBendParameterTable for the coupling semantics.
 # 
@@ -235,7 +235,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A reference to the default table shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94DefaultStretchBendParameterTable: pass

@@ -163,7 +163,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default heavy-to-hydrogen atom-type mappings.
+             * \brief Loads the built-in default heavy-to-hydrogen atom type mappings.
              */
             void loadDefaults();
 

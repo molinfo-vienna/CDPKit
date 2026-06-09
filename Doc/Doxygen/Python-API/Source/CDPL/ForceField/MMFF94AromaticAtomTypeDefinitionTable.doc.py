@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Definitions for the second-stage MMFF94 aromatic atom typing.
+# \brief Data structure for the storage and lookup of MMFF94 aromatic atom type definitions.
 # 
-# After the initial pattern-based typing has produced provisional ("old") atom types, this table is consulted to upgrade aromatic-ring atoms to their proper MMFF94 aromatic types based on atomic number, ring size, distance to the next heteroatom in the ring, and special-case flags for imidazolium-like cations and 5-ring anions.
+# After the initial pattern-based typing has produced provisional atom types, this table is consulted to upgrade aromatic-ring atoms to their proper MMFF94 aromatic types based on atomic number, ring size, distance to the next heteroatom in the ring, and special-case flags for imidazolium-like cations and 5-ring anions.
 # 
 class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
 
     ##
-    # \brief A single aromatic-atom-type definition.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -38,7 +38,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the conversion of a provisional aromatic-ring atom type to its proper MMFF94 type.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given values.
         # 
         # \param old_type The symbolic provisional atom type assigned by initial typing.
         # \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
@@ -158,7 +158,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Appends a new aromatic-atom-type definition to the table.
+    # \brief Adds a new entry to the table that stores the given values.
     # 
     # \param old_type The symbolic provisional atom type assigned by initial typing.
     # \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
@@ -171,7 +171,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def addEntry(old_type: str, aro_type: str, atomic_no: int, ring_size: int, het_atom_dist: int, im_cation: bool, n5_anion: bool) -> None: pass
 
     ##
-    # \brief Removes the entry at the zero-based index <em>idx</em>.
+    # \brief Removes the entry at index <em>idx</em>.
     # 
     # \param idx The zero-based entry index.
     # 
@@ -180,7 +180,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def removeEntry(idx: int) -> None: pass
 
     ##
-    # \brief Returns the entry at the zero-based index <em>idx</em>.
+    # \brief Returns the entry at index <em>idx</em>.
     # 
     # \param idx The zero-based entry index.
     # 
@@ -216,7 +216,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default aromatic-atom-type definitions.
+    # \brief Loads the built-in default aromatic atom type definitions.
     # 
     def loadDefaults() -> None: pass
 
@@ -238,7 +238,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94AromaticAtomTypeDefinitionTable: pass

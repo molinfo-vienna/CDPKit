@@ -564,12 +564,12 @@ namespace CDPL
 
         /** \brief Returns the Chem::AtomProperty::SYBYL_TYPE property of \a atom (see namespace Chem::SybylAtomType).
          *  \param atom The atom to query.
-         *  \return The stored Sybyl atom-type code. */
+         *  \return The stored Sybyl atom type code. */
         CDPL_CHEM_API unsigned int getSybylType(const Atom& atom);
 
         /** \brief Sets the Chem::AtomProperty::SYBYL_TYPE property of \a atom to \a type (see namespace Chem::SybylAtomType).
          *  \param atom The atom to modify.
-         *  \param type The new Sybyl atom-type code. */
+         *  \param type The new Sybyl atom type code. */
         CDPL_CHEM_API void setSybylType(Atom& atom, unsigned int type);
 
         /** \brief Removes the Chem::AtomProperty::SYBYL_TYPE property from \a atom.

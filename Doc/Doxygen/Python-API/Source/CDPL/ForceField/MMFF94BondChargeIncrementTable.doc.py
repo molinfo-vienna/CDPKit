@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Lookup table mapping (bond type, atom-type 1, atom-type 2) triples to MMFF94 bond charge increments.
+# \brief Data structure for the storage and lookup of MMFF94 bond charge increments.
 # 
 # The charge increment is applied to atom 1 (and its negative to atom 2) when partitioning partial atomic charges along bonded pairs in the MMFF94 charge model.
 # 
 class MMFF94BondChargeIncrementTable(Boost.Python.instance):
 
     ##
-    # \brief A single bond charge increment table record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -43,7 +43,7 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the given (bond type, atom type 1, atom type 2) triple with charge increment <em>bond_chg_inc</em>.
+        # \brief Constructs an <tt>Entry</tt> for the given query values and charge increment.
         # 
         # \param bond_type_idx The MMFF94 bond type index.
         # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
@@ -95,7 +95,7 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
         ##
         # \brief Returns the bond charge increment.
         # 
-        # \return The charge increment applied to atom 1.
+        # \return The charge increment applied to the bonded atoms.
         # 
         def getChargeIncrement() -> float: pass
 
@@ -145,7 +145,7 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the given (bond type, atom type 1, atom type 2) triple.
+    # \brief Adds a new (or overwrites an existing) entry for the given query values and charge increment.
     # 
     # \param bond_type_idx The MMFF94 bond type index.
     # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
@@ -155,7 +155,7 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
     def addEntry(bond_type_idx: int, atom1_type: int, atom2_type: int, bond_chg_inc: float) -> None: pass
 
     ##
-    # \brief Removes the entry for the given (bond type, atom type 1, atom type 2) triple.
+    # \brief Removes the entry matching the specified query values.
     # 
     # \param bond_type_idx The MMFF94 bond type index.
     # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
@@ -222,7 +222,7 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94BondChargeIncrementTable: pass

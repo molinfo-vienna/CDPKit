@@ -109,7 +109,7 @@ namespace CDPL
 
                 /**
                  * \brief Returns the whitespace-separated list of neighbour atom types used by the assignment.
-                 * \return A \c const reference to the neighbour atom-type list.
+                 * \return A \c const reference to the neighbour atom type list.
                  */
                 const std::string& getAtomTypeList() const;
 
@@ -250,7 +250,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A \c const reference to the default table shared pointer.
              */
             static const SharedPointer& get();
 

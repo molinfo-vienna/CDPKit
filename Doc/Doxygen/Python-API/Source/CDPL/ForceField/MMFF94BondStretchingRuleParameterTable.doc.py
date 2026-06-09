@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Lookup table mapping (atomic-number 1, atomic-number 2) pairs to fallback MMFF94 bond-stretching parameters used when no atom-type-specific entry is available.
+# \brief Lookup table mapping (atomic-number 1, atomic-number 2) pairs to fallback MMFF94 bond-stretching parameters used when no atom type-specific entry is available.
 # 
 class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
 
@@ -220,7 +220,7 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A reference to the default table shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94BondStretchingRuleParameterTable: pass

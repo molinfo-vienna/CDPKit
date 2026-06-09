@@ -3231,7 +3231,7 @@ def clearStructureData(molgraph: MolecularGraph) -> None: pass
 ##
 # \brief Returns the canonical textual representation of the Sybyl atom type <em>sybyl_type</em>.
 # 
-# \param sybyl_type The Sybyl atom-type identifier (Chem.SybylAtomType value).
+# \param sybyl_type The Sybyl atom type identifier (Chem.SybylAtomType value).
 # 
 # \return A reference to the type-name string (empty for unknown types).
 # 
@@ -3250,7 +3250,7 @@ def getSybylBondTypeString(sybyl_type: int) -> str: pass
 # \brief Sets the Chem.AtomProperty.SYBYL_TYPE property of <em>atom</em> to <em>type</em> (see namespace Chem.SybylAtomType).
 # 
 # \param atom The atom to modify.
-# \param type The new Sybyl atom-type code.
+# \param type The new Sybyl atom type code.
 # 
 def setSybylType(atom: Atom, type: int) -> None: pass
 
@@ -3268,7 +3268,7 @@ def hasSybylType(atom: Atom) -> bool: pass
 # 
 # \param atom The atom to query.
 # 
-# \return The stored Sybyl atom-type code.
+# \return The stored Sybyl atom type code.
 # 
 def getSybylType(atom: Atom) -> int: pass
 
@@ -3712,7 +3712,7 @@ def alignConformations(cntnr: AtomContainer, ref_atoms: AtomContainer) -> bool: 
 def applyConformation(cntnr: AtomContainer, conf_idx: int) -> None: pass
 
 ##
-# \brief Tells whether the target atom type <em>tgt_type</em> matches the query atom type <em>qry_type</em> (taking generic atom-type classes like Chem.AtomType.HET into account).
+# \brief Tells whether the target atom type <em>tgt_type</em> matches the query atom type <em>qry_type</em> (taking generic atom type classes like Chem.AtomType.HET into account).
 # 
 # \param qry_type The query atom type (Chem.AtomType value).
 # \param tgt_type The target atom type (Chem.AtomType value).
@@ -4283,7 +4283,7 @@ def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgra
 def generateAdjacencyMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
-# \brief Builds a matrix combining bond order and atom-type information of the endpoints of every bond in <em>molgraph</em>.
+# \brief Builds a matrix combining bond order and atom type information of the endpoints of every bond in <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect.
 # \param mtx The output sparse matrix receiving the combined entries.
@@ -5028,9 +5028,9 @@ def removeAtomsIfNot(mol: Molecule, pred: AtomPredicate) -> None: pass
 def splitIntoFragments(molgraph: MolecularGraph, frag_list: FragmentList, split_bond_mask: Util.BitSet, append: bool = False) -> None: pass
 
 ##
-# \brief Translates a Sybyl atom-type identifier to the corresponding generic Chem.AtomType value.
+# \brief Translates a Sybyl atom type identifier to the corresponding generic Chem.AtomType value.
 # 
-# \param sybyl_type The Sybyl atom-type identifier (Chem.SybylAtomType value).
+# \param sybyl_type The Sybyl atom type identifier (Chem.SybylAtomType value).
 # 
 # \return The corresponding Chem.AtomType value.
 # 

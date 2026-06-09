@@ -86,15 +86,17 @@ namespace CDPL
         /**
          * \brief Assigns MMFF94 atom types to the atoms of \a molgraph.
          * \param molgraph The molecular graph whose atoms will be typed.
-         * \param strict If \c true, atom typing operates in strict MMFF94 mode (rejecting unsupported chemistries).
-         * \param overwrite Specifies whether already assigned atom-type properties should be replaced.
+         * \param strict If \c true, atoms for which no MMFF94 type could be perceived cause an error to be reported.
+         *               Otherwise, perception never fails and problematic atoms get assigned a suitable fallback type.
+         * \param overwrite Specifies whether already assigned atom type properties should be replaced.
          */
         CDPL_FORCEFIELD_API void assignMMFF94AtomTypes(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
 
         /**
          * \brief Assigns MMFF94 bond type indices to the bonds of \a molgraph.
          * \param molgraph The molecular graph whose bonds will be typed.
-         * \param strict If \c true, bond typing operates in strict MMFF94 mode (rejecting unsupported chemistries).
+         * \param strict If \c true, strict parameterization will be peformed that might fail.
+         *               Otherwise, bonds with parameterization problems receive the type index \e 0.
          * \param overwrite Specifies whether already assigned bond-type-index properties should be replaced.
          */
         CDPL_FORCEFIELD_API void assignMMFF94BondTypeIndices(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
@@ -102,7 +104,8 @@ namespace CDPL
         /**
          * \brief Calculates and assigns MMFF94 partial atomic charges to the atoms of \a molgraph.
          * \param molgraph The molecular graph whose atoms will be charged.
-         * \param strict If \c true, charge calculation operates in strict MMFF94 mode (rejecting unsupported chemistries).
+         * \param strict If \c true, strict parameterization is performed (and may fail).
+         *               Otherwise, in case of parameterization problems, fallback strategies take effect.
          * \param overwrite Specifies whether already assigned charge properties should be replaced.
          */
         CDPL_FORCEFIELD_API void calcMMFF94AtomCharges(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
@@ -111,7 +114,7 @@ namespace CDPL
         /**
          * \brief Assigns UFF atom types to the atoms of \a molgraph.
          * \param molgraph The molecular graph whose atoms will be typed.
-         * \param overwrite Specifies whether already assigned atom-type properties should be replaced.
+         * \param overwrite Specifies whether already assigned atom type properties should be replaced.
          */
         CDPL_FORCEFIELD_API void assignUFFAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
     } // namespace ForceField

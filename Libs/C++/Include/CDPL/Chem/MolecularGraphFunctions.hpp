@@ -713,7 +713,7 @@ namespace CDPL
          *  \param mtx The output sparse matrix receiving the bond-electron counts. */
         CDPL_CHEM_API void generateBondElectronMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-        /** \brief Builds a matrix combining bond order and atom-type information of the endpoints of every bond in \a molgraph.
+        /** \brief Builds a matrix combining bond order and atom type information of the endpoints of every bond in \a molgraph.
          *  \param molgraph The molecular graph to inspect.
          *  \param mtx The output sparse matrix receiving the combined entries. */
         CDPL_CHEM_API void generateBondAtomTypeMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);

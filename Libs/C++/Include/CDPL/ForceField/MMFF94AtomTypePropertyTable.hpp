@@ -47,12 +47,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping numeric MMFF94 atom types to per-atom-type structural and chemical
-         *        property data used during MMFF94 atom and bond typing.
+         * \brief Data structure for the storage and lookup of structural and chemical
+         *        property data associated with numeric MMFF94 atom types.
          *
          * Each entry provides the corresponding atomic number, the standard neighbour count and valence,
-         * and flags describing pi-lone-pair character, aromaticity, linear-bond-angle geometry, and the
-         * ability to form multi-bond or single-bond patterns.
+         * and flags describing pi lone pair character, aromaticity, linear bond angle geometry, and the
+         * ability to form multi bond or single bond patterns.
          */
         class CDPL_FORCEFIELD_API MMFF94AtomTypePropertyTable
         {
@@ -68,7 +68,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94AtomTypePropertyTable> SharedPointer;
 
             /**
-             * \brief A single atom-type property record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -80,16 +80,16 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the numeric MMFF94 atom type \a atom_type.
+                 * \brief Constructs an \c %Entry instance storing the given values.
                  * \param atom_type The numeric MMFF94 atom type.
                  * \param atomic_no The atomic number of atoms of this type.
                  * \param num_nbrs The standard number of explicit neighbour atoms.
                  * \param valence The standard valence.
                  * \param has_pi_lp \c true if the atom type carries a pi lone pair.
-                 * \param mltb_desig The MMFF94 multi-bond designator.
+                 * \param mltb_desig The MMFF94 multi bond designator.
                  * \param is_arom \c true if the atom type is aromatic.
                  * \param lin_bnd_ang \c true if the atom type forms linear bond angles.
-                 * \param has_mb_or_sb \c true if the atom type can form multi-bond or single-bond patterns.
+                 * \param has_mb_or_sb \c true if the atom type can form multi bond or single bond patterns.
                  */
                 Entry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence,
                       bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
@@ -125,8 +125,8 @@ namespace CDPL
                 bool hasPiLonePair() const;
 
                 /**
-                 * \brief Returns the MMFF94 multi-bond designator.
-                 * \return The multi-bond designator.
+                 * \brief Returns the MMFF94 multi bond designator.
+                 * \return The multi bond designator.
                  */
                 unsigned int getMultiBondDesignator() const;
 
@@ -143,7 +143,7 @@ namespace CDPL
                 bool formsLinearBondAngle() const;
 
                 /**
-                 * \brief Tells whether the atom type can form multi-bond or single-bond patterns.
+                 * \brief Tells whether the atom type can form multi bond or single bond patterns.
                  * \return \c true if such patterns are allowed, and \c false otherwise.
                  */
                 bool formsMultiOrSingleBonds() const;
@@ -183,16 +183,16 @@ namespace CDPL
             MMFF94AtomTypePropertyTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the numeric MMFF94 atom type \a atom_type.
+             * \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type \a atom_type with the given property values.
              * \param atom_type The numeric MMFF94 atom type.
              * \param atomic_no The atomic number of atoms of this type.
              * \param num_nbrs The standard number of explicit neighbour atoms.
              * \param valence The standard valence.
              * \param has_pi_lp \c true if the atom type carries a pi lone pair.
-             * \param mltb_desig The MMFF94 multi-bond designator.
+             * \param mltb_desig The MMFF94 multi bond designator.
              * \param is_arom \c true if the atom type is aromatic.
              * \param lin_bnd_ang \c true if the atom type forms linear bond angles.
-             * \param has_mb_or_sb \c true if the atom type can form multi-bond or single-bond patterns.
+             * \param has_mb_or_sb \c true if the atom type can form multi bond or single bond patterns.
              */
             void addEntry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence,
                           bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
@@ -284,7 +284,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default atom-type property entries.
+             * \brief Loads the built-in default atom type property entries.
              */
             void loadDefaults();
 
@@ -296,7 +296,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

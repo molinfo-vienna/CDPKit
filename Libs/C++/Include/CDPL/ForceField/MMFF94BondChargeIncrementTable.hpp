@@ -48,7 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (bond type, atom-type 1, atom-type 2) triples to MMFF94 bond charge increments.
+         * \brief Data structure for the storage and lookup of MMFF94 bond charge increments.
          *
          * The charge increment is applied to atom 1 (and its negative to atom 2) when partitioning partial atomic
          * charges along bonded pairs in the MMFF94 charge model.
@@ -67,7 +67,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
 
             /**
-             * \brief A single bond charge increment table record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -79,7 +79,7 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (bond type, atom type 1, atom type 2) triple with charge increment \a bond_chg_inc.
+                 * \brief Constructs an \c %Entry for the given query values and charge increment.
                  * \param bond_type_idx The MMFF94 bond type index.
                  * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
                  * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
@@ -107,7 +107,7 @@ namespace CDPL
 
                 /**
                  * \brief Returns the bond charge increment.
-                 * \return The charge increment applied to atom 1.
+                 * \return The charge increment applied to the bonded atoms.
                  */
                 double getChargeIncrement() const;
 
@@ -141,7 +141,7 @@ namespace CDPL
             MMFF94BondChargeIncrementTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (bond type, atom type 1, atom type 2) triple.
+             * \brief Adds a new (or overwrites an existing) entry for the given query values and charge increment.
              * \param bond_type_idx The MMFF94 bond type index.
              * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
              * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
@@ -150,11 +150,11 @@ namespace CDPL
             void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
 
             /**
-             * \brief Returns the entry for the given (bond type, atom type 1, atom type 2) triple.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param bond_type_idx The MMFF94 bond type index.
              * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
              * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
 
@@ -170,7 +170,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (bond type, atom type 1, atom type 2) triple.
+             * \brief Removes the entry matching the specified query values.
              * \param bond_type_idx The MMFF94 bond type index.
              * \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
              * \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
@@ -252,7 +252,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

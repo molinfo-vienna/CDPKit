@@ -277,7 +277,7 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
     # 
     # \param param_set The Util.MMFF94ParameterSet identifier selecting which default slot to return.
     # 
-    # \return A reference to the selected default-table shared reference.
+    # \return A reference to the selected default table shared reference.
     # 
     @staticmethod
     def get(param_set: int) -> MMFF94TorsionParameterTable: pass

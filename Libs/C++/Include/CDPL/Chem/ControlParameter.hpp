@@ -527,7 +527,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
-             * \brief Specifies whether to enable the extended Sybyl atom-type set when reading/writing
+             * \brief Specifies whether to enable the extended Sybyl atom type set when reading/writing
              *        <em>Sybyl MOL2</em> data.
              * \valuetype \c bool
              */

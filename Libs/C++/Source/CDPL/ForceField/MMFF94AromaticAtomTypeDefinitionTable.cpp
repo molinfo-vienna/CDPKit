@@ -192,7 +192,7 @@ ForceField::MMFF94AromaticAtomTypeDefinitionTable::EntryIterator
 ForceField::MMFF94AromaticAtomTypeDefinitionTable::removeEntry(const EntryIterator& it)
 {
     if (it >= entries.end())
-        throw Base::IndexError("MMFF94AromaticAtomTypeDefinitionTable: iterator out of bounds");
+        throw Base::RangeError("MMFF94AromaticAtomTypeDefinitionTable: iterator out of bounds");
 
     return entries.erase(it);
 }

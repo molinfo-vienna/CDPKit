@@ -385,7 +385,7 @@ class ControlParameter(Boost.Python.instance):
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief Specifies whether to enable the extended Sybyl atom-type set when reading/writing <em>Sybyl MOL2</em> data. 
+    # \brief Specifies whether to enable the extended Sybyl atom type set when reading/writing <em>Sybyl MOL2</em> data. 
     # \valuetype  <tt>bool</tt>.
     # 
     MOL2_ENABLE_EXTENDED_ATOM_TYPES = CDPL.Base.LookupKey('MOL2_ENABLE_EXTENDED_ATOM_TYPES')

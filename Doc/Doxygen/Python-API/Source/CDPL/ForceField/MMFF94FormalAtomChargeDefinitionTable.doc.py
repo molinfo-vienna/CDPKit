@@ -95,7 +95,7 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         ##
         # \brief Returns the whitespace-separated list of neighbour atom types used by the assignment.
         # 
-        # \return A reference to the neighbour atom-type list.
+        # \return A reference to the neighbour atom type list.
         # 
         def getAtomTypeList() -> str: pass
 
@@ -219,7 +219,7 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A reference to the default table shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94FormalAtomChargeDefinitionTable: pass

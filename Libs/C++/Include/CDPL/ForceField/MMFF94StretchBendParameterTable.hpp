@@ -48,8 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (stretch-bend type, terminal-atom-1 type, center-atom type, terminal-atom-2 type)
-         *        quadruples to MMFF94 stretch-bend coupling force constants.
+         * \brief Data structure for the storage and lookup of MMFF94 stretch-bend interaction parameters.
          *
          * Two directional force constants are stored per entry: \c IJK couples the bond <em>i-j</em> to the angle
          * <em>i-j-k</em>, and \c KJI couples the bond <em>j-k</em> to the same angle.
@@ -68,7 +67,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94StretchBendParameterTable> SharedPointer;
 
             /**
-             * \brief A single stretch-bend coupling parameter record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -80,7 +79,7 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+                 * \brief Constructs an \c %Entry instance storing the given query and parameter values.
                  * \param sb_type_idx The MMFF94 stretch-bend type index.
                  * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
                  * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -159,7 +158,7 @@ namespace CDPL
             MMFF94StretchBendParameterTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+             * \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
              * \param sb_type_idx The MMFF94 stretch-bend type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -171,12 +170,12 @@ namespace CDPL
                           unsigned int term_atom2_type, double ijk_force_const, double kji_force_const);
 
             /**
-             * \brief Returns the entry for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param sb_type_idx The MMFF94 stretch-bend type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
              * \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type,
                                   unsigned int term_atom2_type) const;
@@ -193,7 +192,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (stretch-bend type, terminal-atom 1, center atom, terminal-atom 2) quadruple.
+             * \brief Removes the entry matching the specified query values.
              * \param sb_type_idx The MMFF94 stretch-bend type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -277,7 +276,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

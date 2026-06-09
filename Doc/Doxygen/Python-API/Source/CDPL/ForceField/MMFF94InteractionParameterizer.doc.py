@@ -107,37 +107,37 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def clearFilterFunctions() -> None: pass
 
     ##
-    # \brief Sets the symbolic-atom-type pattern table to use during atom typing.
+    # \brief Sets the symbolic-atom type pattern table to use during atom typing.
     # 
-    # \param table The new symbolic-atom-type pattern table.
+    # \param table The new symbolic-atom type pattern table.
     # 
     def setSymbolicAtomTypePatternTable(table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
 
     ##
-    # \brief Sets the heavy-to-hydrogen atom-type map used to derive hydrogen atom types from their non-hydrogen neighbors.
+    # \brief Sets the heavy-to-hydrogen atom type map used to derive hydrogen atom types from their non-hydrogen neighbors.
     # 
-    # \param map The new heavy-to-hydrogen atom-type map.
+    # \param map The new heavy-to-hydrogen atom type map.
     # 
     def setHeavyToHydrogenAtomTypeMap(map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
 
     ##
-    # \brief Sets the symbolic-to-numeric atom-type map used to convert symbolic types to numeric ones.
+    # \brief Sets the symbolic-to-numeric atom type map used to convert symbolic types to numeric ones.
     # 
-    # \param map The new symbolic-to-numeric atom-type map.
+    # \param map The new symbolic-to-numeric atom type map.
     # 
     def setSymbolicToNumericAtomTypeMap(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 
     ##
-    # \brief Sets the aromatic-atom-type definition table used to override types of aromatic atoms.
+    # \brief Sets the aromatic-atom type definition table used to override types of aromatic atoms.
     # 
-    # \param table The new aromatic-atom-type definition table.
+    # \param table The new aromatic-atom type definition table.
     # 
     def setAromaticAtomTypeDefinitionTable(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 
     ##
-    # \brief Sets the atom-type property table used to resolve per-numeric-type properties.
+    # \brief Sets the atom type property table used to resolve per-numeric-type properties.
     # 
-    # \param table The new atom-type property table.
+    # \param table The new atom type property table.
     # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
@@ -163,9 +163,9 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setPartialBondChargeIncrementTable(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
     ##
-    # \brief Sets the primary-to-parameter atom-type map used by the parameter look-ups.
+    # \brief Sets the primary-to-parameter atom type map used by the parameter look-ups.
     # 
-    # \param map The new primary-to-parameter atom-type map.
+    # \param map The new primary-to-parameter atom type map.
     # 
     def setPrimaryToParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 

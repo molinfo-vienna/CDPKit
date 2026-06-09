@@ -45,7 +45,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Chem::MatchExpression that constrains target double-bond geometry via the per-substituent bond-direction
+         * \brief Chem::MatchExpression that constrains target double bond geometry via the per-substituent bond-direction
          *        annotations carried by the query (in the style of <em>Daylight SMARTS</em> [\ref SMARTS] \e cis/\e trans patterns).
          *
          * <em>Daylight SMARTS</em> [\ref SMARTS] substructure search patterns specify cis/trans geometry constraints for a double bond by

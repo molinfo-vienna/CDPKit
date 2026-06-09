@@ -45,9 +45,9 @@ namespace CDPL
     {
 
         /**
-         * \brief Definitions for the second-stage MMFF94 aromatic atom typing.
+         * \brief Data structure for the storage and lookup of MMFF94 aromatic atom type definitions.
          *
-         * After the initial pattern-based typing has produced provisional ("old") atom types, this table
+         * After the initial pattern-based typing has produced provisional atom types, this table
          * is consulted to upgrade aromatic-ring atoms to their proper MMFF94 aromatic types based on
          * atomic number, ring size, distance to the next heteroatom in the ring, and special-case flags
          * for imidazolium-like cations and 5-ring anions.
@@ -71,14 +71,14 @@ namespace CDPL
             typedef DataStorage::iterator       EntryIterator;
 
             /**
-             * \brief A single aromatic-atom-type definition.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 /**
-                 * \brief Constructs an \c %Entry for the conversion of a provisional aromatic-ring atom type to its proper MMFF94 type.
+                 * \brief Constructs an \c %Entry instance storing the given values.
                  * \param old_type The symbolic provisional atom type assigned by initial typing.
                  * \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
                  * \param atomic_no The atomic number required for the match.
@@ -154,7 +154,7 @@ namespace CDPL
             std::size_t getNumEntries() const;
 
             /**
-             * \brief Appends a new aromatic-atom-type definition to the table.
+             * \brief Adds a new entry to the table that stores the given values.
              * \param old_type The symbolic provisional atom type assigned by initial typing.
              * \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
              * \param atomic_no The atomic number required for the match.
@@ -167,7 +167,7 @@ namespace CDPL
                           std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
 
             /**
-             * \brief Returns the entry at the zero-based index \a idx.
+             * \brief Returns the entry at index \a idx.
              * \param idx The zero-based entry index.
              * \return A \c const reference to the entry.
              * \throw Base::IndexError if the number of entries is zero or \a idx is not in the range [0, getNumEntries() - 1].
@@ -180,7 +180,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry at the zero-based index \a idx.
+             * \brief Removes the entry at index \a idx.
              * \param idx The zero-based entry index.
              * \throw Base::IndexError if the number of entries is zero or \a idx is not in the range [0, getNumEntries() - 1].
              */
@@ -190,6 +190,7 @@ namespace CDPL
              * \brief Removes the entry pointed to by the iterator \a it.
              * \param it An iterator pointing to the entry to remove.
              * \return An iterator pointing to the entry immediately following the removed one.
+             * \throw Base::RangeError if the number of entries is zero or \a it is not in the range [getEntriesBegin(), getEntriesEnd() - 1].
              */
             EntryIterator removeEntry(const EntryIterator& it);
 
@@ -248,7 +249,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default aromatic-atom-type definitions.
+             * \brief Loads the built-in default aromatic atom type definitions.
              */
             void loadDefaults();
 
@@ -260,7 +261,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default-table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

@@ -27,7 +27,7 @@
 class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
 
     ##
-    # \brief A single atom-type pattern record.
+    # \brief A single atom type pattern record.
     # 
     class Entry(Boost.Python.instance):
 
@@ -172,7 +172,7 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default atom-type patterns.
+    # \brief Loads the built-in default atom type patterns.
     # 
     def loadDefaults() -> None: pass
 
@@ -194,7 +194,7 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default-table shared reference.
+    # \return A reference to the default table shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94SymbolicAtomTypePatternTable: pass

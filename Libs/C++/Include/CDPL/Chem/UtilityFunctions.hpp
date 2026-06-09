@@ -135,7 +135,7 @@ namespace CDPL
 
         /**
          * \brief Tells whether the target atom type \a tgt_type matches the query atom type \a qry_type
-         *        (taking generic atom-type classes like Chem::AtomType::HET into account).
+         *        (taking generic atom type classes like Chem::AtomType::HET into account).
          * \param qry_type The query atom type (Chem::AtomType value).
          * \param tgt_type The target atom type (Chem::AtomType value).
          * \return \c true if the target matches the query, and \c false otherwise.
@@ -144,15 +144,15 @@ namespace CDPL
 
 
         /**
-         * \brief Translates a Sybyl atom-type identifier to the corresponding generic Chem::AtomType value.
-         * \param sybyl_type The Sybyl atom-type identifier (Chem::SybylAtomType value).
+         * \brief Translates a Sybyl atom type identifier to the corresponding generic Chem::AtomType value.
+         * \param sybyl_type The Sybyl atom type identifier (Chem::SybylAtomType value).
          * \return The corresponding Chem::AtomType value.
          */
         CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
 
         /**
          * \brief Returns the canonical textual representation of the Sybyl atom type \a sybyl_type.
-         * \param sybyl_type The Sybyl atom-type identifier (Chem::SybylAtomType value).
+         * \param sybyl_type The Sybyl atom type identifier (Chem::SybylAtomType value).
          * \return A \c const reference to the type-name string (empty for unknown types).
          */
         CDPL_CHEM_API const std::string& getSybylAtomTypeString(unsigned int sybyl_type);
