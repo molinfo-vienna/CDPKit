@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Lookup table mapping numeric MMFF94 atom types to per-atom type Van der Waals parameters (atomic polarizability, effective electron number, scaling factors A/G, and H-donor/-acceptor classification).
+# \brief Data structure for the storage and lookup of MMFF94 interaction parameters.
 # 
 # In addition to the per-atom type entries, the table also stores the five global scalar parameters (exponent, B, beta, DARAD, DAEPS) used by the buffered 14-7 MMFF94 Van der Waals energy expression.
 # 
 class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single per-atom type Van der Waals parameter record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -43,7 +43,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the numeric MMFF94 atom type <em>atom_type</em>.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given values.
         # 
         # \param atom_type The numeric MMFF94 atom type.
         # \param atom_pol The atomic polarizability parameter.
@@ -165,7 +165,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type <em>atom_type</em> that stores the given parameter values.
     # 
     # \param atom_type The numeric MMFF94 atom type.
     # \param atom_pol The atomic polarizability parameter.
@@ -190,7 +190,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     # 
     # \param atom_type The numeric MMFF94 atom type.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atom_type: int) -> Entry: pass
 
@@ -220,7 +220,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default Van der Waals parameter entries and global scalar parameters.
+    # \brief Loads the built-in default MMFF94 Van der Waals parameter entries and global scalar parameters.
     # 
     def loadDefaults() -> None: pass
 
@@ -312,7 +312,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94VanDerWaalsParameterTable: pass

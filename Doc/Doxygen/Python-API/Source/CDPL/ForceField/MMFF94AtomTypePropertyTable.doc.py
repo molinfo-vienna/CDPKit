@@ -195,7 +195,7 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type <em>atom_type</em> with the given property values.
+    # \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type <em>atom_type</em> that stores the given property values.
     # 
     # \param atom_type The numeric MMFF94 atom type.
     # \param atomic_no The atomic number of atoms of this type.
@@ -223,7 +223,7 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     # 
     # \param atom_type The numeric MMFF94 atom type.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atom_type: int) -> Entry: pass
 
@@ -253,7 +253,7 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default atom type property entries.
+    # \brief Loads the built-in default MMFF94 atom type property entries.
     # 
     def loadDefaults() -> None: pass
 

@@ -200,7 +200,7 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default bond charge increment entries.
+    # \brief Loads the built-in default MMFF94 bond charge increment entries.
     # 
     def loadDefaults() -> None: pass
 

@@ -261,7 +261,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default angle-bending parameter entries.
+             * \brief Loads the built-in default MMFF94 angle-bending parameter entries.
              */
             void loadDefaults();
 

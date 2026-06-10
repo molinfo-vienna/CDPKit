@@ -211,7 +211,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default bond-stretching parameter entries.
+    # \brief Loads the built-in default MMFF94 bond-stretching parameter entries.
     # 
     def loadDefaults() -> None: pass
 

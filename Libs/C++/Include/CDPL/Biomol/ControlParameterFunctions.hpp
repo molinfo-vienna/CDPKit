@@ -132,7 +132,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Biomol::ControlParameter::APPLY_DICT_FORMAL_CHARGES parameter of \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The apply-dictionary-formal-charges flag.
+         * \return The apply-dictionary-formal charges flag.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getApplyDictFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
@@ -188,7 +188,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Biomol::ControlParameter::CALC_MISSING_FORMAL_CHARGES parameter of \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The calc-missing-formal-charges flag.
+         * \return The calc-missing-formal charges flag.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
@@ -441,14 +441,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Biomol::ControlParameter::PDB_IGNORE_FORMAL_CHARGE_FIELD parameter of \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The PDB-ignore-formal-charge-field flag.
+         * \return The PDB-ignore-formal charge-field flag.
          */
         CDPL_BIOMOL_API bool getPDBIgnoreFormalChargeFieldParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_IGNORE_FORMAL_CHARGE_FIELD parameter of \a cntnr to \a ignore.
          * \param cntnr The control-parameter container.
-         * \param ignore \c true to ignore the formal-charge field of \c ATOM/\c HETATM records, and \c false to honor it.
+         * \param ignore \c true to ignore the formal charge field of \c ATOM/\c HETATM records, and \c false to honor it.
          */
         CDPL_BIOMOL_API void setPDBIgnoreFormalChargeFieldParameter(Base::ControlParameterContainer& cntnr, bool ignore);
 
@@ -524,7 +524,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_FORMAL_CHARGES parameter of \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The PDB-output-formal-charges flag.
+         * \return The PDB-output-formal charges flag.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getPDBOutputFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
@@ -532,7 +532,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_OUTPUT_FORMAL_CHARGES parameter of \a cntnr to \a output.
          * \param cntnr The control-parameter container.
-         * \param output \c true to write the formal-charge field of \c ATOM/\c HETATM records, and \c false to leave it blank.
+         * \param output \c true to write the formal charge field of \c ATOM/\c HETATM records, and \c false to leave it blank.
          */
         CDPL_BIOMOL_API void setPDBOutputFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool output);
 

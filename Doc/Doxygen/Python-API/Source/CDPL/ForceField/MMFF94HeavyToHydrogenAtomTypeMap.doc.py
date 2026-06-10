@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Lookup table mapping each heavy atom symbolic MMFF94 type to the symbolic MMFF94 type used for hydrogen atoms bonded to it.
+# \brief Data structure for the storage and lookup of heavy-to-hydrogen symbolic MMFF94 atom type mappings.
 # 
 class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
 
     ##
-    # \brief The map entry type (a (parent type, hydrogen type) key/value pair).
+    # \brief The type of the map entries.
     # 
     class Entry(Boost.Python.instance):
 
@@ -108,7 +108,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def addEntry(parent_type: str, h_atom_type: str) -> None: pass
 
     ##
-    # \brief Removes the mapping for the heavy atom type <em>parent_type</em>.
+    # \brief Removes the mapping for the symbolic MMFF94 heavy atom type <em>parent_type</em>.
     # 
     # \param parent_type The symbolic MMFF94 type of the heavy parent atom.
     # 
@@ -117,7 +117,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def removeEntry(parent_type: str) -> bool: pass
 
     ##
-    # \brief Returns the hydrogen MMFF94 type associated with the heavy atom type <em>parent_type</em>.
+    # \brief Returns the symbolic MMFF94 hydrogen type associated with the heavy atom type <em>parent_type</em>.
     # 
     # \param parent_type The symbolic MMFF94 type of the heavy parent atom.
     # 
@@ -151,7 +151,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default heavy-to-hydrogen atom type mappings.
+    # \brief Loads the built-in default MMFF94 heavy-to-hydrogen symbolic atom type mappings.
     # 
     def loadDefaults() -> None: pass
 
@@ -173,7 +173,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default map (lazily initialized on first call).
     # 
-    # \return A reference to the default-map shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94HeavyToHydrogenAtomTypeMap: pass

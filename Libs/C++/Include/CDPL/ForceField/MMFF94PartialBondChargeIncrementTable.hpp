@@ -47,8 +47,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping numeric MMFF94 atom types to per-atom partial bond charge increments
-         *        and formal-charge adjustment factors used by the MMFF94 charge model.
+         * \brief Data structure for the storage and lookup of MMFF94 per-atom partial bond charge increment
+         *        and formal charge adjustment factors.
          */
         class CDPL_FORCEFIELD_API MMFF94PartialBondChargeIncrementTable
         {
@@ -64,7 +64,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94PartialBondChargeIncrementTable> SharedPointer;
 
             /**
-             * \brief A single partial-bond-charge-increment record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -76,10 +76,10 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the numeric MMFF94 atom type \a atom_type.
+                 * \brief Constructs an \c %Entry instance storing the given values.
                  * \param atom_type The numeric MMFF94 atom type.
                  * \param part_bond_chg_inc The partial bond charge increment.
-                 * \param form_chg_adj_factor The formal-charge adjustment factor.
+                 * \param form_chg_adj_factor The formal charge adjustment factor.
                  */
                 Entry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
 
@@ -96,8 +96,8 @@ namespace CDPL
                 double getPartialChargeIncrement() const;
 
                 /**
-                 * \brief Returns the formal-charge adjustment factor.
-                 * \return The formal-charge adjustment factor.
+                 * \brief Returns the formal charge adjustment factor.
+                 * \return The formal charge adjustment factor.
                  */
                 double getFormalChargeAdjustmentFactor() const;
 
@@ -130,17 +130,17 @@ namespace CDPL
             MMFF94PartialBondChargeIncrementTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the numeric MMFF94 atom type \a atom_type.
+             * \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type \a atom_type that stores the given parameter values.
              * \param atom_type The numeric MMFF94 atom type.
              * \param part_bond_chg_inc The partial bond charge increment.
-             * \param form_chg_adj_factor The formal-charge adjustment factor.
+             * \param form_chg_adj_factor The formal charge adjustment factor.
              */
             void addEntry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
 
             /**
              * \brief Returns the entry for the numeric MMFF94 atom type \a atom_type.
              * \param atom_type The numeric MMFF94 atom type.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int atom_type) const;
 
@@ -224,7 +224,8 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default partial-bond-charge-increment entries.
+             * \brief Loads the built-in default MMFF94 partial bond charge increment
+             *        and formal charge adjustment factors.
              */
             void loadDefaults();
 
@@ -236,7 +237,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

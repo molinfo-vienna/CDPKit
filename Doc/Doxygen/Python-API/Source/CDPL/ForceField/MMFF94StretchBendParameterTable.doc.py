@@ -226,7 +226,7 @@ class MMFF94StretchBendParameterTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default stretch-bend parameter entries.
+    # \brief Loads the built-in default MMFF94 stretch-bend parameter entries.
     # 
     def loadDefaults() -> None: pass
 

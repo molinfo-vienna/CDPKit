@@ -45,8 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping each heavy atom symbolic MMFF94 type to the symbolic MMFF94 type
-         *        used for hydrogen atoms bonded to it.
+         * \brief Data structure for the storage and lookup of heavy-to-hydrogen symbolic MMFF94 atom type mappings.
          */
         class CDPL_FORCEFIELD_API MMFF94HeavyToHydrogenAtomTypeMap
         {
@@ -61,7 +60,7 @@ namespace CDPL
             typedef DataStorage::const_iterator ConstEntryIterator;
             /** \brief A mutable iterator over the entries of the map. */
             typedef DataStorage::iterator       EntryIterator;
-            /** \brief The map entry type (a (parent type, hydrogen type) key/value pair). */
+            /** \brief The type of the map entries. */
             typedef DataStorage::value_type     Entry;
 
             /**
@@ -70,14 +69,14 @@ namespace CDPL
             MMFF94HeavyToHydrogenAtomTypeMap();
 
             /**
-             * \brief Adds (or overwrites) the heavy atom-to-hydrogen-type mapping for \a parent_type.
+             * \brief Adds a new (or overwrites an existing) mapping from \a parent_type to \a hyd_type.
              * \param parent_type The symbolic MMFF94 type of the heavy parent atom.
-             * \param hyd_type The symbolic MMFF94 type to assign to hydrogen atoms bonded to such parents.
+             * \param hyd_type The symbolic MMFF94 type to assign to bonded hydrogen atoms.
              */
             void addEntry(const std::string& parent_type, const std::string& hyd_type);
 
             /**
-             * \brief Returns the hydrogen MMFF94 type associated with the heavy atom type \a parent_type.
+             * \brief Returns the symbolic MMFF94 hydrogen type associated with the heavy atom type \a parent_type.
              * \param parent_type The symbolic MMFF94 type of the heavy parent atom.
              * \return A \c const reference to the symbolic hydrogen type, or to an empty string if no mapping exists.
              */
@@ -95,7 +94,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the mapping for the heavy atom type \a parent_type.
+             * \brief Removes the mapping for the symbolic MMFF94 heavy atom type \a parent_type.
              * \param parent_type The symbolic MMFF94 type of the heavy parent atom.
              * \return \c true if a matching entry was removed, and \c false if no such entry existed.
              */
@@ -163,7 +162,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default heavy-to-hydrogen atom type mappings.
+             * \brief Loads the built-in default MMFF94 heavy-to-hydrogen symbolic atom type mappings.
              */
             void loadDefaults();
 
@@ -175,7 +174,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default map (lazily initialized on first call).
-             * \return A \c const reference to the default-map shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

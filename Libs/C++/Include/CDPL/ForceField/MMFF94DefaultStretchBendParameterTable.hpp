@@ -48,11 +48,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (terminal-atom-1 PTE row, center-atom PTE row, terminal-atom-2 PTE row) triples
-         *        to fallback MMFF94 stretch-bend coupling force constants used when no atom type-specific entry is available.
+         * \brief Data structure for the storage and lookup of MMFF94 stretch-bend interaction fallback parameters.
          *
          * The PTE row of an atom is the row index in the periodic table of the elements. Two directional force constants
-         * are stored per entry (\c IJK and \c KJI) — see Util::MMFF94StretchBendParameterTable for the coupling semantics.
+         * are stored per entry (\c IJK and \c KJI) — see ForceFIeld::MMFF94StretchBendParameterTable for the coupling semantics.
          */
         class CDPL_FORCEFIELD_API MMFF94DefaultStretchBendParameterTable
         {
@@ -68,7 +67,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94DefaultStretchBendParameterTable> SharedPointer;
 
             /**
-             * \brief A single PTE-row-based default stretch-bend parameter record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -80,7 +79,7 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+                 * \brief Constructs an \c %Entry instance storing the given query and parameter values.
                  * \param term_atom1_pte_row The PTE row of the first terminal atom.
                  * \param ctr_atom_pte_row The PTE row of the center atom.
                  * \param term_atom2_pte_row The PTE row of the second terminal atom.
@@ -151,7 +150,7 @@ namespace CDPL
             MMFF94DefaultStretchBendParameterTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+             * \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
              * \param term_atom1_pte_row The PTE row of the first terminal atom.
              * \param ctr_atom_pte_row The PTE row of the center atom.
              * \param term_atom2_pte_row The PTE row of the second terminal atom.
@@ -162,11 +161,11 @@ namespace CDPL
                           unsigned int term_atom2_pte_row, double ijk_force_const, double kji_force_const);
 
             /**
-             * \brief Returns the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param term_atom1_pte_row The PTE row of the first terminal atom.
              * \param ctr_atom_pte_row The PTE row of the center atom.
              * \param term_atom2_pte_row The PTE row of the second terminal atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row,
                                   unsigned int term_atom2_pte_row) const;
@@ -183,7 +182,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+             * \brief Removes the entry matching the specified query values.
              * \param term_atom1_pte_row The PTE row of the first terminal atom.
              * \param ctr_atom_pte_row The PTE row of the center atom.
              * \param term_atom2_pte_row The PTE row of the second terminal atom.
@@ -254,7 +253,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default stretch-bend fallback entries.
+             * \brief Loads the built-in default MMFF94 stretch-bend fallback parameter entries.
              */
             void loadDefaults();
 
@@ -266,7 +265,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

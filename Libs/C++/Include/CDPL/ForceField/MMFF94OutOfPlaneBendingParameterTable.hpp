@@ -253,20 +253,20 @@ namespace CDPL
 
             /**
              * \brief Loads the built-in default out-of-plane bending parameter entries for the specified MMFF94 parameter set.
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which built-in defaults to load.
+             * \param param_set The parameter set identifier (see namespace ForceField::MMFF94ParameterSet) selecting which built-in defaults to load.
              */
             void loadDefaults(unsigned int param_set);
 
             /**
              * \brief Replaces the process-wide default table for \a param_set by \a table.
              * \param table The new default table (a \c nullptr resets to the built-in default).
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default table to replace.
+             * \param param_set The parameter set identifier (see namespace ForceField::MMFF94ParameterSet) selecting which default table to replace.
              */
             static void set(const SharedPointer& table, unsigned int param_set);
 
             /**
              * \brief Returns the process-wide default table for \a param_set (lazily initialized on first call).
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default table to return.
+             * \param param_set The parameter set identifier (see namespace ForceField::MMFF94ParameterSet) selecting which default table to return.
              * \return A shared pointer to the selected default table.
              */
             static const SharedPointer& get(unsigned int param_set);

@@ -120,7 +120,7 @@ class ControlParameter(Boost.Python.instance):
     PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS = CDPL.Base.LookupKey('PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS')
 
     ##
-    # \brief Specifies whether to ignore the formal-charge field of <tt>ATOM/<tt>HETATM</tt> records</tt> when reading <em>PDB</em> data.
+    # \brief Specifies whether to ignore the formal charge field of <tt>ATOM/<tt>HETATM</tt> records</tt> when reading <em>PDB</em> data.
     # 
     # \valuetype  <tt>bool</tt>
     # 

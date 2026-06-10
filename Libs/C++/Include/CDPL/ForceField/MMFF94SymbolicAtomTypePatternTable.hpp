@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Ordered list of SMARTS-style substructure patterns used to assign symbolic MMFF94 atom types
+         * \brief Data structure storing SMARTS-style substructure patterns used to assign symbolic MMFF94 atom types
          *        during atom typing.
          *
          * Each entry pairs a pattern with the symbolic MMFF94 type to assign on a match. Patterns marked as
@@ -210,7 +210,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default atom type patterns.
+             * \brief Loads the built-in default MMFF94 atom type patterns.
              */
             void loadDefaults();
 

@@ -49,7 +49,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping symbolic MMFF94 atom types to their formal-charge definitions used
+         * \brief Data structure for the storage and lookup of formal charge definitions used
          *        by the MMFF94 charge model.
          *
          * Each entry specifies a formal charge plus an assignment-mode flag that controls how the charge
@@ -69,7 +69,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94FormalAtomChargeDefinitionTable> SharedPointer;
 
             /**
-             * \brief A single formal-charge definition.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -81,7 +81,7 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the symbolic MMFF94 atom type \a atom_type.
+                 * \brief Constructs an \c %Entry instance storing the given values.
                  * \param atom_type The symbolic MMFF94 atom type.
                  * \param ass_mode The charge-assignment mode flag.
                  * \param charge The formal charge value.
@@ -143,7 +143,7 @@ namespace CDPL
             MMFF94FormalAtomChargeDefinitionTable();
 
             /**
-             * \brief Adds (or overwrites) the formal-charge definition for the symbolic atom type \a atom_type.
+             * \brief Adds a new (or overwrites an existing) entry for the symbolic MMFF94 atom type \a atom_type that stores the given parameters.
              * \param atom_type The symbolic MMFF94 atom type.
              * \param ass_mode The charge-assignment mode flag.
              * \param charge The formal charge value.
@@ -154,7 +154,7 @@ namespace CDPL
             /**
              * \brief Returns the entry for the symbolic MMFF94 atom type \a atom_type.
              * \param atom_type The symbolic MMFF94 atom type.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(const std::string& atom_type) const;
 
@@ -170,7 +170,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the symbolic atom type \a atom_type.
+             * \brief Removes the entry for the symbolic MMFF94 atom type \a atom_type.
              * \param atom_type The symbolic MMFF94 atom type.
              * \return \c true if a matching entry was removed, and \c false if no such entry existed.
              */
@@ -238,7 +238,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default formal-charge definitions.
+             * \brief Loads the built-in default MMFF94 formal charge definitions.
              */
             void loadDefaults();
 
@@ -250,7 +250,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

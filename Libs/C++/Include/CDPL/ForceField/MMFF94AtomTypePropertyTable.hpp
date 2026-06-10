@@ -183,8 +183,8 @@ namespace CDPL
             MMFF94AtomTypePropertyTable();
 
             /**
-             * \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type \a atom_type with the given property values.
-             * \param atom_type The numeric MMFF94 atom type.
+             * \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type \a atom_type that stores the given property values.
+             * \param atom_type The numeric MMFF94 atom type. 
              * \param atomic_no The atomic number of atoms of this type.
              * \param num_nbrs The standard number of explicit neighbour atoms.
              * \param valence The standard valence.
@@ -200,7 +200,7 @@ namespace CDPL
             /**
              * \brief Returns the entry for the numeric MMFF94 atom type \a atom_type.
              * \param atom_type The numeric MMFF94 atom type.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int atom_type) const;
 
@@ -284,7 +284,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default atom type property entries.
+             * \brief Loads the built-in default MMFF94 atom type property entries.
              */
             void loadDefaults();
 

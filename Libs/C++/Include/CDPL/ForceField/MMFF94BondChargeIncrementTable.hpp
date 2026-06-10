@@ -240,7 +240,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default bond charge increment entries.
+             * \brief Loads the built-in default MMFF94 bond charge increment entries.
              */
             void loadDefaults();
 

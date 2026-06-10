@@ -107,7 +107,7 @@ namespace CDPL
 
             /**
              * \brief Constructs the parameterizer with the default tables for the chosen MMFF94 parameter set.
-             * \param param_set The parameter-set variant (see namespace ForceField::MMFF94ParameterSet).
+             * \param param_set The parameter set variant (see namespace ForceField::MMFF94ParameterSet).
              */
             MMFF94InteractionParameterizer(unsigned int param_set = MMFF94ParameterSet::STATIC);
 
@@ -280,8 +280,8 @@ namespace CDPL
             void setDistanceExponent(double dist_expo);
 
             /**
-             * \brief Switches the active MMFF94 parameter-set variant and reinstalls the matching default tables.
-             * \param param_set The new parameter-set variant (see namespace ForceField::MMFF94ParameterSet).
+             * \brief Switches the active MMFF94 parameter set variant and reinstalls the matching default tables.
+             * \param param_set The new parameter set variant (see namespace ForceField::MMFF94ParameterSet).
              */
             void setParameterSet(unsigned int param_set);
 

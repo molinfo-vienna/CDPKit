@@ -154,7 +154,7 @@ namespace CDPL
             std::size_t getNumEntries() const;
 
             /**
-             * \brief Adds a new entry to the table that stores the given values.
+             * \brief Adds a new (or overwrites an existing) entry to the table that stores the given values.
              * \param old_type The symbolic provisional atom type assigned by initial typing.
              * \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
              * \param atomic_no The atomic number required for the match.
@@ -249,7 +249,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default aromatic atom type definitions.
+             * \brief Loads the built-in default MMFF94 aromatic atom type definitions.
              */
             void loadDefaults();
 

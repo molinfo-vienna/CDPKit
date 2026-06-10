@@ -248,7 +248,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default bond-stretching parameter entries.
+             * \brief Loads the built-in default MMFF94 bond-stretching parameter entries.
              */
             void loadDefaults();
 

@@ -47,8 +47,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping numeric UFF atom types to the per-atom type parameters used by the
-         *        <em>Universal Force Field (UFF)</em>.
+         * \brief Data structure for the storage and lookup of various properties associated with numeric UFF atom types.
          *
          * Each entry provides the natural bond radius and bond angle of the atom type, its Van der Waals
          * parameters (well distance, well depth, and scaling factor), and the effective atomic charge used
@@ -70,7 +69,7 @@ namespace CDPL
             typedef std::shared_ptr<UFFAtomTypePropertyTable> SharedPointer;
 
             /**
-             * \brief A single UFF atom type property record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -82,9 +81,9 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the numeric UFF atom type \a atom_type.
+                 * \brief Constructs an \c %Entry instance storing the given values.
                  * \param atom_type The numeric UFF atom type.
-                 * \param atom_type_sym The symbolic UFF atom type label.
+                 * \param atom_type_sym The UFF atom type symbol.
                  * \param atomic_no The atomic number of atoms of this type.
                  * \param bond_rad The natural bond radius.
                  * \param bond_ang The natural bond angle.
@@ -103,8 +102,8 @@ namespace CDPL
                 unsigned int getAtomType() const;
 
                 /**
-                 * \brief Returns the symbolic UFF atom type label of the entry.
-                 * \return A \c const reference to the symbolic atom type label.
+                 * \brief Returns the UFF atom type symbol.
+                 * \return A \c const reference to the atom type symbol.
                  */
                 const std::string& getAtomTypeSymbol() const;
 
@@ -185,9 +184,9 @@ namespace CDPL
             UFFAtomTypePropertyTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the numeric UFF atom type \a atom_type.
+             * \brief Adds a new (or overwrites an existing) entry for the numeric UFF atom type \a atom_type that stores the given property values.
              * \param atom_type The numeric UFF atom type.
-             * \param atom_type_sym The symbolic UFF atom type label.
+             * \param atom_type_sym The UFF atom type symbol.
              * \param atomic_no The atomic number of atoms of this type.
              * \param bond_rad The natural bond radius.
              * \param bond_ang The natural bond angle.
@@ -202,7 +201,7 @@ namespace CDPL
             /**
              * \brief Returns the entry for the numeric UFF atom type \a atom_type.
              * \param atom_type The numeric UFF atom type.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int atom_type) const;
 
@@ -292,7 +291,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

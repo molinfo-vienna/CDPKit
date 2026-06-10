@@ -177,7 +177,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
 
             /**
-             * \brief Specifies whether to ignore the formal-charge field of \c ATOM/\c HETATM records when reading <em>PDB</em> data.
+             * \brief Specifies whether to ignore the formal charge field of \c ATOM/\c HETATM records when reading <em>PDB</em> data.
              *
              * \valuetype \c bool
              */
@@ -200,7 +200,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_TRUNCATE_LINES;
 
             /**
-             * \brief Specifies whether to write the formal-charge field of \c ATOM/\c HETATM records when generating <em>PDB</em> output.
+             * \brief Specifies whether to write the formal charge field of \c ATOM/\c HETATM records when generating <em>PDB</em> output.
              *
              * \valuetype \c bool
              * \since 1.2

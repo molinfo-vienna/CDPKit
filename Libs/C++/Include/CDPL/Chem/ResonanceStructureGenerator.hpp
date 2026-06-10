@@ -87,7 +87,7 @@ namespace CDPL
               public:
                 /**
                  * \brief Returns the per-atom formal charges of this resonance structure.
-                 * \return A \c const reference to the per-atom formal-charge array.
+                 * \return A \c const reference to the per-atom formal charge array.
                  */
                 const Util::LArray& getAtomCharges() const;
 
@@ -175,7 +175,7 @@ namespace CDPL
             bool carbonBond12ChargesMinimized() const;
 
             /**
-             * \brief Sets the maximum allowed difference between the lowest and highest formal-charge count of accepted resonance structures.
+             * \brief Sets the maximum allowed difference between the lowest and highest formal charge count of accepted resonance structures.
              * \param win_size The new charge-count window size.
              */
             void setChargeCountWindow(std::size_t win_size);

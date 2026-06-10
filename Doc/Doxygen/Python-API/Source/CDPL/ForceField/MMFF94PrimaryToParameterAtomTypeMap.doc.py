@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Lookup table mapping each primary numeric MMFF94 atom type to the ordered list of fallback numeric atom types used when looking up missing interaction parameters.
+# \brief Data structure for the storage and lookup of primary numeric MMFF94 atom type to fallback parameter atom type list mappings.
 # 
 class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
     ##
-    # \brief A single primary-to-parameter atom type-map record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Number of parameter atom types stored per entry.
+        # \brief Number of fallback parameter atom types stored per entry.
         # 
         NUM_TYPES = 4
 
@@ -126,15 +126,15 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the primary atom type <em>atom_type</em>.
+    # \brief Adds a new (or overwrites an existing) entry for the primary numeric MMFF94 atom type <em>atom_type</em> and its associated fallback list <em>param_types</em>.
     # 
     # \param atom_type The primary numeric MMFF94 atom type.
-    # \param param_types A length-<tt>Entry.NUM_TYPES</tt> array of fallback parameter atom types.
+    # \param param_types An <tt>Entry.NUM_TYPES</tt>-element array of fallback parameter atom types.
     # 
     def addEntry(atom_type: int, param_types: object) -> None: pass
 
     ##
-    # \brief Removes the entry for the primary atom type <em>atom_type</em>.
+    # \brief Removes the entry for the primary numeric MMFF94 atom type <em>atom_type</em>.
     # 
     # \param atom_type The primary numeric MMFF94 atom type.
     # 
@@ -143,11 +143,11 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def removeEntry(atom_type: int) -> bool: pass
 
     ##
-    # \brief Returns the entry for the primary atom type <em>atom_type</em>.
+    # \brief Returns the entry for the primary numeric MMFF94 atom type <em>atom_type</em>.
     # 
     # \param atom_type The primary numeric MMFF94 atom type.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atom_type: int) -> Entry: pass
 
@@ -177,7 +177,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default primary-to-parameter atom type mappings.
+    # \brief Loads the built-in default MMFF94 primary-to-parameter numeric atom type mappings.
     # 
     def loadDefaults() -> None: pass
 
@@ -198,7 +198,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default map (lazily initialized on first call).
     # 
-    # \return A reference to the default-map shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94PrimaryToParameterAtomTypeMap: pass

@@ -983,7 +983,7 @@ def hasApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The apply-dictionary-formal-charges flag. 
+# \return The apply-dictionary-formal charges flag. 
 # 
 # \since 1.2
 # 
@@ -1018,7 +1018,7 @@ def hasCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) 
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The calc-missing-formal-charges flag. 
+# \return The calc-missing-formal charges flag. 
 # 
 # \since 1.2
 # 
@@ -1506,7 +1506,7 @@ def clearPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) 
 # \brief Sets the Biomol.ControlParameter.PDB_IGNORE_FORMAL_CHARGE_FIELD parameter of <em>cntnr</em> to <em>ignore</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param ignore <tt>True</tt> to ignore the formal-charge field of <tt>ATOM/<tt>HETATM</tt> records</tt>, and <tt>False</tt> to honor it.
+# \param ignore <tt>True</tt> to ignore the formal charge field of <tt>ATOM/<tt>HETATM</tt> records</tt>, and <tt>False</tt> to honor it.
 # 
 def setPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
@@ -1524,7 +1524,7 @@ def hasPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-ignore-formal-charge-field flag.
+# \return The PDB-ignore-formal charge-field flag.
 # 
 def getPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1644,7 +1644,7 @@ def clearPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlP
 # \brief Sets the Biomol.ControlParameter.PDB_OUTPUT_FORMAL_CHARGES parameter of <em>cntnr</em> to <em>output</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param output <tt>True</tt> to write the formal-charge field of <tt>ATOM/<tt>HETATM</tt> records</tt>, and <tt>False</tt> to leave it blank.
+# \param output <tt>True</tt> to write the formal charge field of <tt>ATOM/<tt>HETATM</tt> records</tt>, and <tt>False</tt> to leave it blank.
 # 
 def setPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
@@ -1662,7 +1662,7 @@ def hasPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-output-formal-charges flag. 
+# \return The PDB-output-formal charges flag. 
 # 
 # \since 1.2
 # 

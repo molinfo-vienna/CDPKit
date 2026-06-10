@@ -48,10 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (torsion type, terminal-atom-1 type, center-atom-1 type, center-atom-2 type, terminal-atom-2 type)
-         *        quintuples to the three MMFF94 torsion-energy Fourier-series parameters (V1, V2, V3).
-         *
-         * The table maintains separate process-wide defaults per MMFF94 parameter set (see Util::MMFF94ParameterSet).
+         * \brief Data structure for the storage and lookup of MMFF94 torsion interaction parameters.
          */
         class CDPL_FORCEFIELD_API MMFF94TorsionParameterTable
         {
@@ -67,7 +64,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94TorsionParameterTable> SharedPointer;
 
             /**
-             * \brief A single torsion parameter record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -79,7 +76,7 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (torsion type, terminal-atom 1, center-atom 1, center-atom 2, terminal-atom 2) quintuple.
+                 * \brief Constructs an \c %Entry instance storing the given query and parameter values.
                  * \param tor_type_idx The MMFF94 torsion type index.
                  * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
                  * \param ctr_atom1_type The numeric MMFF94 atom type of the first center atom.
@@ -174,7 +171,7 @@ namespace CDPL
             MMFF94TorsionParameterTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (torsion type, terminal-atom 1, center-atom 1, center-atom 2, terminal-atom 2) quintuple.
+             * \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
              * \param tor_type_idx The MMFF94 torsion type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom1_type The numeric MMFF94 atom type of the first center atom.
@@ -188,13 +185,13 @@ namespace CDPL
                           unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
             /**
-             * \brief Returns the entry for the given (torsion type, terminal-atom 1, center-atom 1, center-atom 2, terminal-atom 2) quintuple.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param tor_type_idx The MMFF94 torsion type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom1_type The numeric MMFF94 atom type of the first center atom.
              * \param ctr_atom2_type The numeric MMFF94 atom type of the second center atom.
              * \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
                                   unsigned int term_atom2_type) const;
@@ -211,7 +208,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (torsion type, terminal-atom 1, center-atom 1, center-atom 2, terminal-atom 2) quintuple.
+             * \brief Removes the entry matching the specified query values.
              * \param tor_type_idx The MMFF94 torsion type index.
              * \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
              * \param ctr_atom1_type The numeric MMFF94 atom type of the first center atom.
@@ -285,21 +282,21 @@ namespace CDPL
 
             /**
              * \brief Loads the built-in default torsion parameter entries for the specified MMFF94 parameter set.
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which built-in defaults to load.
+             * \param param_set The parameter set identifier (see namespace ForceField::MMFF94ParameterSet) selecting which built-in defaults to load.
              */
             void loadDefaults(unsigned int param_set);
 
             /**
              * \brief Replaces the process-wide default table for \a param_set by \a table.
              * \param table The new default table (a \c nullptr resets to the built-in default).
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default slot to replace.
+             * \param param_set The parameter set identifier (see namespace ForceField::MMFF94ParameterSet) selecting which default slot to replace.
              */
             static void set(const SharedPointer& table, unsigned int param_set);
 
             /**
              * \brief Returns the process-wide default table for \a param_set (lazily initialized on first call).
-             * \param param_set The Util::MMFF94ParameterSet identifier selecting which default slot to return.
-             * \return A \c const reference to the selected default table shared pointer.
+             * \param param_set The parameter set identifier (see namespace ForceField::MMFF94ParameterSet) selecting which default slot to return.
+             * \return A shared pointer to the selected default table.
              */
             static const SharedPointer& get(unsigned int param_set);
 

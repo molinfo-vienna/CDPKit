@@ -20,31 +20,31 @@
 #
 
 ##
-# \brief Provides flags for the specification of the MMFF94 parameter set to use.
+# \brief Provides constants for the specification of a particular MMFF94 parameter set variant.
 # 
 class MMFF94ParameterSet(Boost.Python.instance):
 
     ##
-    # \brief Original (dynamic) MMFF94 parameter set.
+    # \brief Original dynamic MMFF94 parameter set.
     # 
     DYNAMIC = 0
 
     ##
-    # \brief Static MMFF94s parameter set (used for energy minimization).
+    # \brief Original static MMFF94 parameter set.
     # 
     STATIC = 1
 
     ##
-    # \brief Static MMFF94s parameter set with extended out-of-plane bending parameters.
+    # \brief Static MMFF94 parameter set with extended out-of-plane bending parameters.
     # 
     STATIC_XOOP = 2
 
     ##
-    # \brief Static MMFF94s parameter set with restricted (refined) torsion parameters.
+    # \brief Static MMFF94 parameter set with refined torsion parameters.
     # 
     STATIC_RTOR = 3
 
     ##
-    # \brief Static MMFF94s parameter set with both extended out-of-plane bending and restricted torsion parameters.
+    # \brief Static MMFF94 parameter set with both extended out-of-plane bending and refined torsion parameters.
     # 
     STATIC_RTOR_XOOP = 4

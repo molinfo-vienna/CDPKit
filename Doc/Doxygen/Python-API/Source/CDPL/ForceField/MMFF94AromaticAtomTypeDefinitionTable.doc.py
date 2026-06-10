@@ -158,7 +158,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds a new entry to the table that stores the given values.
+    # \brief Adds a new (or overwrites an existing) entry to the table that stores the given values.
     # 
     # \param old_type The symbolic provisional atom type assigned by initial typing.
     # \param aro_type The symbolic MMFF94 aromatic atom type to assign on a match.
@@ -216,7 +216,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default aromatic atom type definitions.
+    # \brief Loads the built-in default MMFF94 aromatic atom type definitions.
     # 
     def loadDefaults() -> None: pass
 

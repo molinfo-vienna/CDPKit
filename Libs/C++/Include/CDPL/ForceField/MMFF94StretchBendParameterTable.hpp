@@ -264,7 +264,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default stretch-bend parameter entries.
+             * \brief Loads the built-in default MMFF94 stretch-bend parameter entries.
              */
             void loadDefaults();
 

@@ -29,7 +29,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Constructs the parameterizer with the default tables for the chosen MMFF94 parameter set.
     # 
-    # \param param_set The parameter-set variant (see namespace ForceField.MMFF94ParameterSet).
+    # \param param_set The parameter set variant (see namespace ForceField.MMFF94ParameterSet).
     # 
     def __init__(param_set: int = 1) -> None: pass
 
@@ -240,9 +240,9 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
-    # \brief Switches the active MMFF94 parameter-set variant and reinstalls the matching default tables.
+    # \brief Switches the active MMFF94 parameter set variant and reinstalls the matching default tables.
     # 
-    # \param param_set The new parameter-set variant (see namespace ForceField.MMFF94ParameterSet).
+    # \param param_set The new parameter set variant (see namespace ForceField.MMFF94ParameterSet).
     # 
     def setParameterSet(param_set: int) -> None: pass
 

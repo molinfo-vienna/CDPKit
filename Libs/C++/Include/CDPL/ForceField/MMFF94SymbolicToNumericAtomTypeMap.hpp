@@ -162,7 +162,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default symbolic-to-numeric atom type mappings.
+             * \brief Loads the built-in default MMFF94 symbolic-to-numeric atom type mappings.
              */
             void loadDefaults();
 

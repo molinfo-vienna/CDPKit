@@ -59,7 +59,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         ##
         # \brief Returns the per-atom formal charges of this resonance structure.
         # 
-        # \return A reference to the per-atom formal-charge array.
+        # \return A reference to the per-atom formal charge array.
         # 
         def getAtomCharges() -> Util.LArray: pass
 
@@ -166,7 +166,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     def getChargeCountWindow() -> int: pass
 
     ##
-    # \brief Sets the maximum allowed difference between the lowest and highest formal-charge count of accepted resonance structures.
+    # \brief Sets the maximum allowed difference between the lowest and highest formal charge count of accepted resonance structures.
     # 
     # \param win_size The new charge-count window size.
     # 

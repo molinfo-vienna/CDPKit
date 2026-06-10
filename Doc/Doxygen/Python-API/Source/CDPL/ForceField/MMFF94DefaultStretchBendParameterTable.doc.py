@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Lookup table mapping (terminal-atom-1 PTE row, center-atom PTE row, terminal-atom-2 PTE row) triples to fallback MMFF94 stretch-bend coupling force constants used when no atom type-specific entry is available.
+# \brief Data structure for the storage and lookup of MMFF94 stretch-bend interaction fallback parameters.
 # 
-# The PTE row of an atom is the row index in the periodic table of the elements. Two directional force constants are stored per entry (<tt>IJK</tt> and <tt>KJI</tt>) — see Util.MMFF94StretchBendParameterTable for the coupling semantics.
+# The PTE row of an atom is the row index in the periodic table of the elements. Two directional force constants are stored per entry (<tt>IJK</tt> and <tt>KJI</tt>) — see ForceFIeld.MMFF94StretchBendParameterTable for the coupling semantics.
 # 
 class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single PTE-row-based default stretch-bend parameter record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -43,7 +43,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given query and parameter values.
         # 
         # \param term_atom1_pte_row The PTE row of the first terminal atom.
         # \param ctr_atom_pte_row The PTE row of the center atom.
@@ -155,7 +155,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+    # \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
     # 
     # \param term_atom1_pte_row The PTE row of the first terminal atom.
     # \param ctr_atom_pte_row The PTE row of the center atom.
@@ -166,7 +166,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def addEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int, ijk_force_const: float, kji_force_const: float) -> None: pass
 
     ##
-    # \brief Removes the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+    # \brief Removes the entry matching the specified query values.
     # 
     # \param term_atom1_pte_row The PTE row of the first terminal atom.
     # \param ctr_atom_pte_row The PTE row of the center atom.
@@ -177,13 +177,13 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def removeEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int) -> bool: pass
 
     ##
-    # \brief Returns the entry for the given (terminal-atom 1 PTE row, center-atom PTE row, terminal-atom 2 PTE row) triple.
+    # \brief Returns a reference to the entry matching the specified query values.
     # 
     # \param term_atom1_pte_row The PTE row of the first terminal atom.
     # \param ctr_atom_pte_row The PTE row of the center atom.
     # \param term_atom2_pte_row The PTE row of the second terminal atom.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int) -> Entry: pass
 
@@ -213,7 +213,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default stretch-bend fallback entries.
+    # \brief Loads the built-in default MMFF94 stretch-bend fallback parameter entries.
     # 
     def loadDefaults() -> None: pass
 
@@ -235,7 +235,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94DefaultStretchBendParameterTable: pass

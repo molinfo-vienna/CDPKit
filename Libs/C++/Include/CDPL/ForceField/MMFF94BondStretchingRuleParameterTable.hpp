@@ -48,8 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping (atomic-number 1, atomic-number 2) pairs to fallback MMFF94 bond-stretching
-         *        parameters used when no atom type-specific entry is available.
+         * \brief Data structure for the storage and lookup of MMFF94 bond-stretching interaction fallback parameters.
          */
         class CDPL_FORCEFIELD_API MMFF94BondStretchingRuleParameterTable
         {
@@ -65,7 +64,7 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94BondStretchingRuleParameterTable> SharedPointer;
 
             /**
-             * \brief A single rule-based bond-stretching parameter record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
@@ -77,7 +76,7 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the given (atomic number 1, atomic number 2) pair.
+                 * \brief Constructs an \c %Entry instance storing the given query and parameter values.
                  * \param atomic_no1 The atomic number of the first bonded atom.
                  * \param atomic_no2 The atomic number of the second bonded atom.
                  * \param force_const The bond-stretching force constant.
@@ -139,7 +138,7 @@ namespace CDPL
             MMFF94BondStretchingRuleParameterTable();
 
             /**
-             * \brief Adds (or overwrites) the entry for the given (atomic number 1, atomic number 2) pair.
+             * \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
              * \param atomic_no1 The atomic number of the first bonded atom.
              * \param atomic_no2 The atomic number of the second bonded atom.
              * \param force_const The bond-stretching force constant.
@@ -148,10 +147,10 @@ namespace CDPL
             void addEntry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
 
             /**
-             * \brief Returns the entry for the given (atomic number 1, atomic number 2) pair.
+             * \brief Returns a reference to the entry matching the specified query values.
              * \param atomic_no1 The atomic number of the first bonded atom.
              * \param atomic_no2 The atomic number of the second bonded atom.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int atomic_no1, unsigned int atomic_no2) const;
 
@@ -167,7 +166,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the given (atomic number 1, atomic number 2) pair.
+             * \brief Removes the entry matching the specified query values.
              * \param atomic_no1 The atomic number of the first bonded atom.
              * \param atomic_no2 The atomic number of the second bonded atom.
              * \return \c true if a matching entry was removed, and \c false if no such entry existed.
@@ -236,7 +235,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default bond-stretching rule parameter entries.
+             * \brief Loads the built-in default MMFF94 bond-stretching rule parameter entries.
              */
             void loadDefaults();
 
@@ -248,7 +247,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default table (lazily initialized on first call).
-             * \return A \c const reference to the default table shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

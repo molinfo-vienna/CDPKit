@@ -140,11 +140,11 @@ def getFeatureCount(cntnr: FeatureContainer) -> int: pass
 def getFeatureCount(cntnr: FeatureContainer, type: int) -> int: pass
 
 ##
-# \brief Returns a human-readable name for the given Pharm.FeatureType identifier (e.g. <em>"H"</em> for H-bond donor).
+# \brief Returns a concise human-readable string (e.g. <em>"HBD"</em> for H-bond donor) for the given numeric feature type identifier <em>ftr_type</em>.
 # 
-# \param ftr_type The Pharm.FeatureType identifier.
+# \param ftr_type The numeric feature type identifier (see namespace Pharm.FeatureType).
 # 
-# \return A reference to the type name string.
+# \return A reference to the feature type string.
 # 
 def getFeatureTypeString(ftr_type: int) -> str: pass
 

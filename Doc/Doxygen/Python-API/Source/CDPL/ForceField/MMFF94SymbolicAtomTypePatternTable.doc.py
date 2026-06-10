@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Ordered list of SMARTS-style substructure patterns used to assign symbolic MMFF94 atom types during atom typing.
+# \brief Data structure storing SMARTS-style substructure patterns used to assign symbolic MMFF94 atom types during atom typing.
 # 
 # Each entry pairs a pattern with the symbolic MMFF94 type to assign on a match. Patterns marked as fallback are only considered after no non-fallback pattern matches.
 # 
@@ -172,7 +172,7 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default atom type patterns.
+    # \brief Loads the built-in default MMFF94 atom type patterns.
     # 
     def loadDefaults() -> None: pass
 

@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Lookup table mapping (atomic-number 1, atomic-number 2) pairs to fallback MMFF94 bond-stretching parameters used when no atom type-specific entry is available.
+# \brief Data structure for the storage and lookup of MMFF94 bond-stretching interaction fallback parameters.
 # 
 class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
 
     ##
-    # \brief A single rule-based bond-stretching parameter record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -41,7 +41,7 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the given (atomic number 1, atomic number 2) pair.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given query and parameter values.
         # 
         # \param atomic_no1 The atomic number of the first bonded atom.
         # \param atomic_no2 The atomic number of the second bonded atom.
@@ -143,7 +143,7 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the given (atomic number 1, atomic number 2) pair.
+    # \brief Adds a new (or overwrites an existing) entry for the given query and parameter values.
     # 
     # \param atomic_no1 The atomic number of the first bonded atom.
     # \param atomic_no2 The atomic number of the second bonded atom.
@@ -153,7 +153,7 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     def addEntry(atomic_no1: int, atomic_no2: int, force_const: float, ref_length: float) -> None: pass
 
     ##
-    # \brief Removes the entry for the given (atomic number 1, atomic number 2) pair.
+    # \brief Removes the entry matching the specified query values.
     # 
     # \param atomic_no1 The atomic number of the first bonded atom.
     # \param atomic_no2 The atomic number of the second bonded atom.
@@ -163,12 +163,12 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     def removeEntry(atomic_no1: int, atomic_no2: int) -> bool: pass
 
     ##
-    # \brief Returns the entry for the given (atomic number 1, atomic number 2) pair.
+    # \brief Returns a reference to the entry matching the specified query values.
     # 
     # \param atomic_no1 The atomic number of the first bonded atom.
     # \param atomic_no2 The atomic number of the second bonded atom.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atomic_no1: int, atomic_no2: int) -> Entry: pass
 
@@ -198,7 +198,7 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default bond-stretching rule parameter entries.
+    # \brief Loads the built-in default MMFF94 bond-stretching rule parameter entries.
     # 
     def loadDefaults() -> None: pass
 
@@ -220,7 +220,7 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94BondStretchingRuleParameterTable: pass

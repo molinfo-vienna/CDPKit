@@ -47,8 +47,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Lookup table mapping each primary numeric MMFF94 atom type to the ordered list of
-         *        fallback numeric atom types used when looking up missing interaction parameters.
+         * \brief Data structure for the storage and lookup of primary numeric MMFF94 atom type to
+         *        fallback parameter atom type list mappings.
          */
         class CDPL_FORCEFIELD_API MMFF94PrimaryToParameterAtomTypeMap
         {
@@ -64,13 +64,13 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94PrimaryToParameterAtomTypeMap> SharedPointer;
 
             /**
-             * \brief A single primary-to-parameter atom type-map record.
+             * \brief Data structure for the storage of values associated with a single table entry.
              */
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
-                /** \brief Number of parameter atom types stored per entry. */
+                /** \brief Number of fallback parameter atom types stored per entry. */
                 static constexpr std::size_t NUM_TYPES = 4;
 
                 /**
@@ -79,9 +79,10 @@ namespace CDPL
                 Entry();
 
                 /**
-                 * \brief Constructs an \c %Entry for the primary atom type \a atom_type with the fallback list \a param_types.
+                 * \brief Constructs an \c %Entry for the primary numeric MMFF94 atom type \a atom_type and
+                 *        its associated fallback list \a param_types.
                  * \param atom_type The primary numeric MMFF94 atom type.
-                 * \param param_types A length-\c NUM_TYPES array of fallback parameter atom types.
+                 * \param param_types A <tt>NUM_TYPES</tt>-element array of fallback parameter atom types.
                  */
                 Entry(unsigned int atom_type, unsigned int param_types[]);
 
@@ -92,8 +93,8 @@ namespace CDPL
                 unsigned int getAtomType() const;
 
                 /**
-                 * \brief Returns a pointer to the fallback parameter-atom type array of length \c NUM_TYPES.
-                 * \return A pointer to the parameter-type array.
+                 * \brief Returns a pointer to the fallback parameter atom type array of length \c NUM_TYPES.
+                 * \return A pointer to the fallback parameter atom type array.
                  */
                 const unsigned int* getParameterTypes() const;
 
@@ -125,16 +126,17 @@ namespace CDPL
             MMFF94PrimaryToParameterAtomTypeMap();
 
             /**
-             * \brief Adds (or overwrites) the entry for the primary atom type \a atom_type.
+             * \brief Adds a new (or overwrites an existing) entry for the primary numeric MMFF94 atom type \a atom_type and its
+             *        associated fallback list \a param_types.
              * \param atom_type The primary numeric MMFF94 atom type.
-             * \param param_types A length-\c Entry::NUM_TYPES array of fallback parameter atom types.
+             * \param param_types An <tt>Entry::NUM_TYPES</tt>-element array of fallback parameter atom types.
              */
             void addEntry(unsigned int atom_type, unsigned int param_types[]);
 
             /**
-             * \brief Returns the entry for the primary atom type \a atom_type.
+             * \brief Returns the entry for the primary numeric MMFF94 atom type \a atom_type.
              * \param atom_type The primary numeric MMFF94 atom type.
-             * \return A \c const reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns \c false) if no match exists.
+             * \return A \c const reference to the matching entry or to an uninitialized entry if no matching entry exists.
              */
             const Entry& getEntry(unsigned int atom_type) const;
 
@@ -150,7 +152,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Removes the entry for the primary atom type \a atom_type.
+             * \brief Removes the entry for the primary numeric MMFF94 atom type \a atom_type.
              * \param atom_type The primary numeric MMFF94 atom type.
              * \return \c true if a matching entry was removed, and \c false if no such entry existed.
              */
@@ -218,7 +220,7 @@ namespace CDPL
             void load(std::istream& is);
 
             /**
-             * \brief Loads the built-in default primary-to-parameter atom type mappings.
+             * \brief Loads the built-in default MMFF94 primary-to-parameter numeric atom type mappings.
              */
             void loadDefaults();
 
@@ -230,7 +232,7 @@ namespace CDPL
 
             /**
              * \brief Returns the process-wide default map (lazily initialized on first call).
-             * \return A \c const reference to the default-map shared pointer.
+             * \return A shared pointer to the default table.
              */
             static const SharedPointer& get();
 

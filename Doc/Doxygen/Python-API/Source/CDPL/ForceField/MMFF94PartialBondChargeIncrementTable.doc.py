@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Lookup table mapping numeric MMFF94 atom types to per-atom partial bond charge increments and formal-charge adjustment factors used by the MMFF94 charge model.
+# \brief Data structure for the storage and lookup of MMFF94 per-atom partial bond charge increment and formal charge adjustment factors.
 # 
 class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
 
     ##
-    # \brief A single partial-bond-charge-increment record.
+    # \brief Data structure for the storage of values associated with a single table entry.
     # 
     class Entry(Boost.Python.instance):
 
@@ -41,11 +41,11 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Constructs an <tt>Entry</tt> for the numeric MMFF94 atom type <em>atom_type</em>.
+        # \brief Constructs an <tt>Entry</tt> instance storing the given values.
         # 
         # \param atom_type The numeric MMFF94 atom type.
         # \param part_bond_chg_inc The partial bond charge increment.
-        # \param form_chg_adj_factor The formal-charge adjustment factor.
+        # \param form_chg_adj_factor The formal charge adjustment factor.
         # 
         def __init__(atom_type: int, part_bond_chg_inc: float, form_chg_adj_factor: float) -> None: pass
 
@@ -83,9 +83,9 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
         def getPartialChargeIncrement() -> float: pass
 
         ##
-        # \brief Returns the formal-charge adjustment factor.
+        # \brief Returns the formal charge adjustment factor.
         # 
-        # \return The formal-charge adjustment factor.
+        # \return The formal charge adjustment factor.
         # 
         def getFormalChargeAdjustmentFactor() -> float: pass
 
@@ -133,11 +133,11 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the entry for the numeric MMFF94 atom type <em>atom_type</em>.
+    # \brief Adds a new (or overwrites an existing) entry for the numeric MMFF94 atom type <em>atom_type</em> that stores the given parameter values.
     # 
     # \param atom_type The numeric MMFF94 atom type.
     # \param part_bond_chg_inc The partial bond charge increment.
-    # \param form_chg_adj_factor The formal-charge adjustment factor.
+    # \param form_chg_adj_factor The formal charge adjustment factor.
     # 
     def addEntry(atom_type: int, part_bond_chg_inc: float, form_chg_adj_factor: float) -> None: pass
 
@@ -155,7 +155,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     # 
     # \param atom_type The numeric MMFF94 atom type.
     # 
-    # \return A reference to the matching entry, or to an uninitialized entry (whose <tt>operator bool()</tt> returns <tt>False</tt>) if no match exists.
+    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atom_type: int) -> Entry: pass
 
@@ -185,7 +185,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in default partial-bond-charge-increment entries.
+    # \brief Loads the built-in default MMFF94 partial bond charge increment and formal charge adjustment factors.
     # 
     def loadDefaults() -> None: pass
 
@@ -207,7 +207,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default table shared reference.
+    # \return A shared reference to the default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94PartialBondChargeIncrementTable: pass
