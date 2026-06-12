@@ -930,7 +930,9 @@ def matchesResidueInfo(molgraph: Chem.MolecularGraph, res_code: str = '', chain_
 # \brief Sets the Biomol.ControlParameter.APPLY_DICT_ATOM_TYPES parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived atom types, and <tt>False</tt> to skip them.
+# \param apply <tt>True</tt> to apply dictionary-derived atom types, and <tt>False</tt> if not.
+# 
+# \since 1.2
 # 
 def setApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -939,7 +941,9 @@ def setApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer, apply:
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -948,7 +952,7 @@ def hasApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> boo
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The apply-dictionary-atom types flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -959,13 +963,17 @@ def getApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> boo
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.APPLY_DICT_FORMAL_CHARGES parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived formal charges, and <tt>False</tt> to skip them.
+# \param apply <tt>True</tt> to apply dictionary-derived formal charges, and <tt>False</tt> if not.
+# 
+# \since 1.2
 # 
 def setApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -974,7 +982,9 @@ def setApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer, ap
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -983,7 +993,7 @@ def hasApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The apply-dictionary-formal charges flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -994,6 +1004,8 @@ def getApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1002,6 +1014,8 @@ def clearApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) 
 # \param cntnr The control-parameter container.
 # \param calc <tt>True</tt> to calculate missing formal charges, and <tt>False</tt> to leave them unset.
 # 
+# \since 1.2
+# 
 def setCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
 
 ##
@@ -1009,7 +1023,9 @@ def setCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer, 
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1018,7 +1034,7 @@ def hasCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) 
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The calc-missing-formal charges flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1028,6 +1044,8 @@ def getCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) 
 # \brief Removes the Biomol.ControlParameter.CALC_MISSING_FORMAL_CHARGES parameter from <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
+# 
+# \since 1.2
 # 
 def clearCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
@@ -1053,7 +1071,7 @@ def hasCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: 
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The check-line-length flag.
+# \return The value of the flag.
 # 
 def getCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1086,7 +1104,7 @@ def hasCombineInterferingResidueCoordinatesParameter(cntnr: Base.ControlParamete
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The combine-interfering-residue-coordinates flag.
+# \return The value of the flag.
 # 
 def getCombineInterferingResidueCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1101,7 +1119,9 @@ def clearCombineInterferingResidueCoordinatesParameter(cntnr: Base.ControlParame
 # \brief Sets the Biomol.ControlParameter.MMCIF_APPLY_DICT_ATOM_BONDING parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived atom-bonding during mmCIF input, and <tt>False</tt> to skip it.
+# \param apply <tt>True</tt> to apply dictionary-derived atom-bonding during mmCIF input, and <tt>False</tt> if not.
+# 
+# \since 1.2
 # 
 def setMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -1110,7 +1130,9 @@ def setMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer,
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1119,7 +1141,7 @@ def hasMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer)
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The mmCIF-apply-dict-atom-bonding flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1130,13 +1152,17 @@ def getMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer)
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.MMCIF_APPLY_DICT_BOND_ORDERS parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived bond orders during mmCIF input, and <tt>False</tt> to skip them.
+# \param apply <tt>True</tt> to apply dictionary-derived bond orders during mmCIF input, and <tt>False</tt> if not.
+# 
+# \since 1.2
 # 
 def setMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -1145,7 +1171,9 @@ def setMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer, 
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1154,7 +1182,7 @@ def hasMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer) 
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The mmCIF-apply-dict-bond-orders flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1165,13 +1193,17 @@ def getMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer) 
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP parameter of <em>cntnr</em> to <em>output</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param output <tt>True</tt> to emit biopolymer residues using the <tt>chem_comp</tt> data category, and <tt>False</tt> to use the regular polymer-residue encoding.
+# \param output <tt>True</tt> if explicit residue structures shall be emitted as <tt>chem_comp</tt> data category data, and <tt>False</tt> if not.
+# 
+# \since 1.2
 # 
 def setMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
@@ -1180,7 +1212,9 @@ def setMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterCon
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1189,7 +1223,7 @@ def hasMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterCon
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The mmCIF-output-biopolymers-as-chem-comp flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1200,13 +1234,17 @@ def getMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterCon
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION parameter of <em>cntnr</em> to <em>func</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param func The new mmCIF-output data-postprocessing function.
+# \param func The new mmCIF output data postprocessing function.
+# 
+# \since 1.2
 # 
 def setMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterContainer, func: MMCIFDataProcessingFunction) -> None: pass
 
@@ -1215,7 +1253,9 @@ def setMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterCont
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1224,7 +1264,7 @@ def hasMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterCont
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return A reference to the mmCIF-output data-postprocessing function. 
+# \return A reference to the mmCIF output data postprocessing function. 
 # 
 # \since 1.2
 # 
@@ -1235,13 +1275,15 @@ def getMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterCont
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived atom-bonding to non-standard residues, and <tt>False</tt> to skip it.
+# \param apply <tt>True</tt> to apply dictionary-derived atom-bonding to non-standard residues, and <tt>False</tt> if not.
 # 
 def setPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -1259,7 +1301,7 @@ def hasPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlParam
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-apply-dict-atom-bonding-to-non-std-residues flag.
+# \return The value of the flag.
 # 
 def getPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1274,7 +1316,7 @@ def clearPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlPar
 # \brief Sets the Biomol.ControlParameter.PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived atom-bonding to standard residues, and <tt>False</tt> to skip it.
+# \param apply <tt>True</tt> to apply dictionary-derived atom-bonding to standard residues, and <tt>False</tt> if not.
 # 
 def setPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -1292,7 +1334,7 @@ def hasPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParamete
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-apply-dict-atom-bonding-to-std-residues flag.
+# \return The value of the flag.
 # 
 def getPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1307,7 +1349,7 @@ def clearPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParame
 # \brief Sets the Biomol.ControlParameter.PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived bond orders to non-standard residues, and <tt>False</tt> to skip it.
+# \param apply <tt>True</tt> to apply dictionary-derived bond orders to non-standard residues, and <tt>False</tt> if not.
 # 
 def setPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -1325,7 +1367,7 @@ def hasPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlParame
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-apply-dict-bond-orders-to-non-std-residues flag.
+# \return The value of the flag.
 # 
 def getPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1340,7 +1382,7 @@ def clearPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlPara
 # \brief Sets the Biomol.ControlParameter.PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES parameter of <em>cntnr</em> to <em>apply</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param apply <tt>True</tt> to apply dictionary-derived bond orders to standard residues, and <tt>False</tt> to skip it.
+# \param apply <tt>True</tt> to apply dictionary-derived bond orders to standard residues, and <tt>False</tt> if not.
 # 
 def setPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
@@ -1358,7 +1400,7 @@ def hasPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameter
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-apply-dict-bond-orders-to-std-residues flag.
+# \return The value of the flag.
 # 
 def getPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1391,7 +1433,7 @@ def hasPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParamete
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-deduce-bond-orders-from-CONECT-records flag.
+# \return The value of the flag.
 # 
 def getPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1423,7 +1465,7 @@ def hasPDBEvaluateMASTERRecordParameter(cntnr: Base.ControlParameterContainer) -
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-evaluate-MASTER-record flag.
+# \return The value of the flag.
 # 
 def getPDBEvaluateMASTERRecordParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1473,6 +1515,8 @@ def clearPDBFormatVersionParameter(cntnr: Base.ControlParameterContainer) -> Non
 # \param cntnr The control-parameter container.
 # \param ignore <tt>True</tt> to skip <tt>CONECT</tt> records during PDB data input, and <tt>False</tt> to process them.
 # 
+# \since 1.3
+# 
 def setPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
 ##
@@ -1480,7 +1524,9 @@ def setPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, ig
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.3
 # 
 def hasPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1489,7 +1535,7 @@ def hasPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-ignore-CONECT-records flag. 
+# \return The value of the flag. 
 # 
 # \since 1.3
 # 
@@ -1500,13 +1546,15 @@ def getPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.3
+# 
 def clearPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.PDB_IGNORE_FORMAL_CHARGE_FIELD parameter of <em>cntnr</em> to <em>ignore</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param ignore <tt>True</tt> to ignore the formal charge field of <tt>ATOM/<tt>HETATM</tt> records</tt>, and <tt>False</tt> to honor it.
+# \param ignore <tt>True</tt> to ignore the formal charge field of <tt>ATOM/HETATM</tt> records, and <tt>False</tt> to honor it.
 # 
 def setPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
@@ -1524,7 +1572,7 @@ def hasPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-ignore-formal charge-field flag.
+# \return The value of the flag.
 # 
 def getPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1541,6 +1589,8 @@ def clearPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContain
 # \param cntnr The control-parameter container.
 # \param output <tt>True</tt> to write <tt>CONECT</tt> records for all bonds (and not only for non-standard ones), and <tt>False</tt> to write them only for non-standard bonds.
 # 
+# \since 1.2
+# 
 def setPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
@@ -1548,7 +1598,9 @@ def setPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterCo
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1557,7 +1609,7 @@ def hasPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterCo
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-output-CONECT-records-for-all-bonds flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1568,13 +1620,17 @@ def getPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterCo
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.PDB_OUTPUT_CONECT_RECORDS parameter of <em>cntnr</em> to <em>output</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param output <tt>True</tt> to write <tt>CONECT</tt> records, and <tt>False</tt> to skip them.
+# \param output <tt>True</tt> to write <tt>CONECT</tt> records, and <tt>False</tt> if not.
+# 
+# \since 1.2
 # 
 def setPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
@@ -1583,7 +1639,9 @@ def setPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, ou
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1592,7 +1650,7 @@ def hasPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-output-CONECT-records flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1603,6 +1661,8 @@ def getPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1611,6 +1671,8 @@ def clearPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) 
 # \param cntnr The control-parameter container.
 # \param output <tt>True</tt> to encode the bond order via the duplication count of bonded atom pairs in <tt>CONECT</tt> records, and <tt>False</tt> to emit each pair only once.
 # 
+# \since 1.2
+# 
 def setPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
@@ -1618,7 +1680,9 @@ def setPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlPar
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1627,7 +1691,7 @@ def hasPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlPar
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-output-CONECT-records-reflecting-bond-order flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1638,13 +1702,17 @@ def getPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlPar
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Biomol.ControlParameter.PDB_OUTPUT_FORMAL_CHARGES parameter of <em>cntnr</em> to <em>output</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param output <tt>True</tt> to write the formal charge field of <tt>ATOM/<tt>HETATM</tt> records</tt>, and <tt>False</tt> to leave it blank.
+# \param output <tt>True</tt> to write the formal charge field of <tt>ATOM/HETATM</tt> records, and <tt>False</tt> to leave it blank.
+# 
+# \since 1.2
 # 
 def setPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
@@ -1653,7 +1721,9 @@ def setPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, ou
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1662,7 +1732,7 @@ def hasPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-output-formal charges flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1672,6 +1742,8 @@ def getPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 # \brief Removes the Biomol.ControlParameter.PDB_OUTPUT_FORMAL_CHARGES parameter from <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
+# 
+# \since 1.2
 # 
 def clearPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
@@ -1697,7 +1769,7 @@ def hasPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool:
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The PDB-truncate-lines flag.
+# \return The value of the flag.
 # 
 def getPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1714,6 +1786,8 @@ def clearPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> Non
 # \param cntnr The control-parameter container.
 # \param perceive <tt>True</tt> to perceive missing bond orders, and <tt>False</tt> to leave them unset.
 # 
+# \since 1.2
+# 
 def setPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
@@ -1721,7 +1795,9 @@ def setPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer,
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1730,7 +1806,7 @@ def hasPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer)
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The perceive-missing-bond-orders flag. 
+# \return The value of the flag. 
 # 
 # \since 1.2
 # 
@@ -1741,6 +1817,8 @@ def getPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer)
 # 
 # \param cntnr The control-parameter container.
 # 
+# \since 1.2
+# 
 def clearPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1749,6 +1827,8 @@ def clearPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContaine
 # \param cntnr The control-parameter container.
 # \param dict The new residue dictionary.
 # 
+# \since 1.2
+# 
 def setResidueDictionaryParameter(cntnr: Base.ControlParameterContainer, dict: ResidueDictionary) -> None: pass
 
 ##
@@ -1756,7 +1836,9 @@ def setResidueDictionaryParameter(cntnr: Base.ControlParameterContainer, dict: R
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
 # 
 def hasResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
@@ -1775,6 +1857,8 @@ def getResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> Resi
 # \brief Removes the Biomol.ControlParameter.RESIDUE_DICTIONARY parameter from <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
+# 
+# \since 1.2
 # 
 def clearResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
@@ -1800,7 +1884,7 @@ def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bo
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The strict-error-checking flag.
+# \return The value of the flag.
 # 
 def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 

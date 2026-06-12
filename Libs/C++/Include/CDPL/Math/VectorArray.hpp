@@ -49,7 +49,7 @@ namespace CDPL
         {
 
           public:
-            /** \brief The vector element value type stored in the array. */
+            /** \brief The vector type stored by the array. */
             typedef V ValueType;
 
             /**

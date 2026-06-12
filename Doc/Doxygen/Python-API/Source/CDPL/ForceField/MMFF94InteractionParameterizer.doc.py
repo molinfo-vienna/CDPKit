@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief One-stop MMFF94 parameterizer that combines atom typing, bond typing, partial-charge assignment and per-interaction-type parameter look-up into a single <tt>parameterize()</tt> call.
+# \brief Highly configurable implementation of the complete workflow for molecular graph MMFF94 interaction perception and parameterization.
 # 
-# The constructor installs default parameter tables and atom-/bond-typing helpers for the selected ForceField.MMFF94ParameterSet variant (<tt>STATIC</tt>, <tt>DYNAMIC</tt>, etc.); every table, map and filter function can be overridden via the corresponding setter. Calling parameterize() runs atom typing, bond typing, formal/partial-charge assignment, aromaticity perception and topological-distance calculation, then dispatches to the seven per-interaction MMFF94*InteractionParameterizer members and stores the resulting interaction lists in the supplied ForceField.MMFF94InteractionData object.
+# The constructor installs default parameter tables and atom-/bond-typing helpers for the selected force field variant (see namespace ForceField.MMFF94ParameterSet). Every table, map and filter function can be overridden via the corresponding setter methods. Calling parameterize() runs atom typing, bond typing, formal/partial charge assignment, aromaticity perception and topological distance calculation, then dispatches to the seven per-interaction <em>MMFF94*InteractionParameterizer</em> members and stores the resulting interaction parameter records in the supplied ForceField.MMFF94InteractionData object.
 # 
 class MMFF94InteractionParameterizer(Boost.Python.instance):
 
@@ -95,21 +95,21 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setElectrostaticFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief Installs a filter that decides whether a candidate van-der-Waals interaction is kept.
+    # \brief Installs a filter that decides whether a candidate Van der Waals interaction is kept.
     # 
     # \param func The filter functor (returns <tt>True</tt> to keep the interaction).
     # 
     def setVanDerWaalsFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief Removes every previously installed interaction-filter function.
+    # \brief Removes all previously installed interaction filter functions.
     # 
     def clearFilterFunctions() -> None: pass
 
     ##
-    # \brief Sets the symbolic-atom type pattern table to use during atom typing.
+    # \brief Sets the symbolic atom type pattern table to use during atom typing.
     # 
-    # \param table The new symbolic-atom type pattern table.
+    # \param table The new symbolic atom type pattern table.
     # 
     def setSymbolicAtomTypePatternTable(table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
 
@@ -128,37 +128,37 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setSymbolicToNumericAtomTypeMap(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 
     ##
-    # \brief Sets the aromatic-atom type definition table used to override types of aromatic atoms.
+    # \brief Sets the aromatic atom type definition table used to override types of aromatic atoms.
     # 
-    # \param table The new aromatic-atom type definition table.
+    # \param table The new aromatic atom type definition table.
     # 
     def setAromaticAtomTypeDefinitionTable(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 
     ##
-    # \brief Sets the atom type property table used to resolve per-numeric-type properties.
+    # \brief Sets the atom type property table used to retrieve per-numeric type properties.
     # 
     # \param table The new atom type property table.
     # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief Sets the formal-atomic-charge definition table used during charge assignment.
+    # \brief Sets the formal atom charge definition table used during charge assignment.
     # 
-    # \param table The new formal-atomic-charge definition table.
+    # \param table The new formal atom charge definition table.
     # 
     def setFormalAtomChargeDefinitionTable(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
     ##
     # \brief Sets the bond charge-increment table used during partial-charge calculation.
     # 
-    # \param table The new bond-charge-increment table.
+    # \param table The new bond charge-increment table.
     # 
     def setBondChargeIncrementTable(table: MMFF94BondChargeIncrementTable) -> None: pass
 
     ##
-    # \brief Sets the partial bond charge-increment table used during partial-charge calculation.
+    # \brief Sets the partial bond charge-increment table used during partial charge calculation.
     # 
-    # \param table The new partial-bond-charge-increment table.
+    # \param table The new partial bond charge-increment table.
     # 
     def setPartialBondChargeIncrementTable(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
@@ -184,7 +184,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setBondStretchingParameterTable(table: MMFF94BondStretchingParameterTable) -> None: pass
 
     ##
-    # \brief Sets the bond-stretching rule parameter table used as a fallback when no explicit bond-stretching entry is available.
+    # \brief Sets the bond-stretching rule parameter table used as a fallback when no explicit bond-stretching parameter entry is available.
     # 
     # \param table The new bond-stretching rule parameter table.
     # 
@@ -219,9 +219,9 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setTorsionParameterTable(table: MMFF94TorsionParameterTable) -> None: pass
 
     ##
-    # \brief Sets the van-der-Waals parameter table to use.
+    # \brief Sets the Van der Waals parameter table to use.
     # 
-    # \param table The new van-der-Waals parameter table.
+    # \param table The new Van der Waals parameter table.
     # 
     def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
@@ -240,7 +240,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
-    # \brief Switches the active MMFF94 parameter set variant and reinstalls the matching default tables.
+    # \brief Switches the active MMFF94 parameter set variant to a different one.
     # 
     # \param param_set The new parameter set variant (see namespace ForceField.MMFF94ParameterSet).
     # 
@@ -259,9 +259,9 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     # \brief Parameterizes the MMFF94 force field interactions for <em>molgraph</em> and stores them in <em>ia_data</em>.
     # 
     # \param molgraph The molecular graph to parameterize.
-    # \param ia_data The output container receiving the perceived interactions.
-    # \param ia_types A bitmask of ForceField.InteractionType flags selecting which interaction types are parameterized.
-    # \param strict If <tt>True</tt>, the parameterization fails when any required parameter is missing; otherwise fallback strategies (rule-based parameters, default values) are used.
+    # \param ia_data The output container receiving the perceived interactions and their parameters.
+    # \param ia_types A bitmask of flags specifying which interaction types to parameterize (see namespace ForceField.InteractionType).
+    # \param strict If <tt>True</tt>, the parameterization fails when any required parameter is missing. Otherwise, fallback strategies (rule-based parameters, default values) are used.
     # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_data: MMFF94InteractionData, ia_types: int = 127, strict: bool = True) -> None: pass
 

@@ -1573,11 +1573,11 @@ def calcOutOfPlaneAngle(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector
 def calcSquaredDistance(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D) -> float: pass
 
 ##
-# \brief Filters an MMFF94 interaction-data set, retaining only those interactions that exclusively reference atoms in <em>inc_atom_mask</em>.
+# \brief Filters an MMFF94 interaction data set, retaining only those interactions that exclusively reference atoms in <em>inc_atom_mask</em>.
 # 
-# \param ia_data The input interaction-data set.
-# \param filtered_ia_data The output interaction-data set receiving the retained interactions.
-# \param inc_atom_mask A bit set whose set bits identify the atom indices that may appear in a retained interaction.
+# \param ia_data The input interaction data set.
+# \param filtered_ia_data The output interaction data set receiving the retained interactions.
+# \param inc_atom_mask A bit set whose set bits correspond to the indices of atoms that may appear in a retained interaction.
 # 
 def filterInteractions(ia_data: MMFF94InteractionData, filtered_ia_data: MMFF94InteractionData, inc_atom_mask: Util.BitSet) -> None: pass
 

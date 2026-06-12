@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implements the extraction of all rings in the SSSR of a molecular graph that are aromatic according to MMFF94 conventions.
+# \brief Implements the extraction of all rings in the SSSR of a molecular graph that are considered aromatic according to the MMFF94 aromaticity model.
 # 
 class MMFF94AromaticSSSRSubset(Chem.FragmentList):
 
@@ -44,7 +44,7 @@ class MMFF94AromaticSSSRSubset(Chem.FragmentList):
     def extract(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph <em>molgraph</em>.
+    # \brief Replaces the current set of rings by the aromatic rings in the supplied SSSR of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to extract the aromatic rings.
     # \param sssr The SSSR of the molecular graph <em>molgraph</em>.

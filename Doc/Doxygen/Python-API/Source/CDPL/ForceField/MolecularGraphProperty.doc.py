@@ -25,7 +25,7 @@
 class MolecularGraphProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the list of aromatic rings used by the MMFF94 force field.
+    # \brief Specifies the list of rings that are considered aromatic according to the MMFF94 aromaticity model.
     # 
     # \valuetype  Chem.FragmentList.SharedPointer
     # 

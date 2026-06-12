@@ -85,15 +85,15 @@ namespace CDPL
         class MMFF94InteractionData;
 
         /**
-         * \brief One-stop MMFF94 parameterizer that combines atom typing, bond typing, partial-charge
-         *        assignment and per-interaction-type parameter look-up into a single \c parameterize() call.
+         * \brief Highly configurable implementation of the complete workflow for molecular graph MMFF94
+         *        interaction perception and parameterization.
          *
          * The constructor installs default parameter tables and atom-/bond-typing helpers for the
-         * selected ForceField::MMFF94ParameterSet variant (\c STATIC, \c DYNAMIC, etc.); every table,
-         * map and filter function can be overridden via the corresponding setter. Calling parameterize()
-         * runs atom typing, bond typing, formal/partial-charge assignment, aromaticity perception and
-         * topological-distance calculation, then dispatches to the seven per-interaction
-         * MMFF94*InteractionParameterizer members and stores the resulting interaction lists in the
+         * selected force field variant (see namespace ForceField::MMFF94ParameterSet). Every table,
+         * map and filter function can be overridden via the corresponding setter methods. Calling parameterize()
+         * runs atom typing, bond typing, formal/partial charge assignment, aromaticity perception and
+         * topological distance calculation, then dispatches to the seven per-interaction
+         * <em>MMFF94*InteractionParameterizer</em> members and stores the resulting interaction parameter records in the
          * supplied ForceField::MMFF94InteractionData object.
          */
         class CDPL_FORCEFIELD_API MMFF94InteractionParameterizer
@@ -154,19 +154,19 @@ namespace CDPL
             void setElectrostaticFilterFunction(const InteractionFilterFunction2& func);
 
             /**
-             * \brief Installs a filter that decides whether a candidate van-der-Waals interaction is kept.
+             * \brief Installs a filter that decides whether a candidate Van der Waals interaction is kept.
              * \param func The filter functor (returns \c true to keep the interaction).
              */
             void setVanDerWaalsFilterFunction(const InteractionFilterFunction2& func);
 
             /**
-             * \brief Removes every previously installed interaction-filter function.
+             * \brief Removes all previously installed interaction filter functions.
              */
             void clearFilterFunctions();
 
             /**
-             * \brief Sets the symbolic-atom type pattern table to use during atom typing.
-             * \param table The new symbolic-atom type pattern table.
+             * \brief Sets the symbolic atom type pattern table to use during atom typing.
+             * \param table The new symbolic atom type pattern table.
              */
             void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
@@ -183,32 +183,32 @@ namespace CDPL
             void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
 
             /**
-             * \brief Sets the aromatic-atom type definition table used to override types of aromatic atoms.
-             * \param table The new aromatic-atom type definition table.
+             * \brief Sets the aromatic atom type definition table used to override types of aromatic atoms.
+             * \param table The new aromatic atom type definition table.
              */
             void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
 
             /**
-             * \brief Sets the atom type property table used to resolve per-numeric-type properties.
+             * \brief Sets the atom type property table used to retrieve per-numeric type properties.
              * \param table The new atom type property table.
              */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
             /**
-             * \brief Sets the formal-atomic-charge definition table used during charge assignment.
-             * \param table The new formal-atomic-charge definition table.
+             * \brief Sets the formal atom charge definition table used during charge assignment.
+             * \param table The new formal atom charge definition table.
              */
             void setFormalAtomChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
 
             /**
              * \brief Sets the bond charge-increment table used during partial-charge calculation.
-             * \param table The new bond-charge-increment table.
+             * \param table The new bond charge-increment table.
              */
             void setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table);
 
             /**
-             * \brief Sets the partial bond charge-increment table used during partial-charge calculation.
-             * \param table The new partial-bond-charge-increment table.
+             * \brief Sets the partial bond charge-increment table used during partial charge calculation.
+             * \param table The new partial bond charge-increment table.
              */
             void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
 
@@ -232,7 +232,7 @@ namespace CDPL
 
             /**
              * \brief Sets the bond-stretching rule parameter table used as a fallback when no explicit
-             *        bond-stretching entry is available.
+             *        bond-stretching parameter entry is available.
              * \param table The new bond-stretching rule parameter table.
              */
             void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
@@ -262,8 +262,8 @@ namespace CDPL
             void setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table);
 
             /**
-             * \brief Sets the van-der-Waals parameter table to use.
-             * \param table The new van-der-Waals parameter table.
+             * \brief Sets the Van der Waals parameter table to use.
+             * \param table The new Van der Waals parameter table.
              */
             void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
@@ -280,7 +280,7 @@ namespace CDPL
             void setDistanceExponent(double dist_expo);
 
             /**
-             * \brief Switches the active MMFF94 parameter set variant and reinstalls the matching default tables.
+             * \brief Switches the active MMFF94 parameter set variant to a different one.
              * \param param_set The new parameter set variant (see namespace ForceField::MMFF94ParameterSet).
              */
             void setParameterSet(unsigned int param_set);
@@ -295,9 +295,9 @@ namespace CDPL
             /**
              * \brief Parameterizes the MMFF94 force field interactions for \a molgraph and stores them in \a ia_data.
              * \param molgraph The molecular graph to parameterize.
-             * \param ia_data The output container receiving the perceived interactions.
-             * \param ia_types A bitmask of ForceField::InteractionType flags selecting which interaction types are parameterized.
-             * \param strict If \c true, the parameterization fails when any required parameter is missing; otherwise
+             * \param ia_data The output container receiving the perceived interactions and their parameters.
+             * \param ia_types A bitmask of flags specifying which interaction types to parameterize (see namespace ForceField::InteractionType).
+             * \param strict If \c true, the parameterization fails when any required parameter is missing. Otherwise,
              *               fallback strategies (rule-based parameters, default values) are used.
              */
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,

@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Provides constants for the specification of <em>Universal Force Field (UFF)</em> atom types.
+# \brief Provides constants for the specification of numeric <em>Universal Force Field (UFF)</em> atom types.
 # 
 # \see [\ref UFF]
 # 
 class UFFAtomType(Boost.Python.instance):
 
     ##
-    # \brief Atom with no matching UFF atom type.
+    # \brief Atom with no matching UFF type.
     # 
     NONE = 0
 
@@ -37,7 +37,7 @@ class UFFAtomType(Boost.Python.instance):
     H   = 1
 
     ##
-    # \brief Hydrogen bridging between two boron atoms.
+    # \brief Hydrogen (bridging boron atoms).
     # 
     H_b = 2
 
@@ -52,22 +52,22 @@ class UFFAtomType(Boost.Python.instance):
     Li = 4
 
     ##
-    # \brief Beryllium (tetrahedral).
+    # \brief Beryllium.
     # 
     Be_3_2 = 5
 
     ##
-    # \brief Boron (sp3, tetrahedral).
+    # \brief Boron (sp3).
     # 
     B_3 = 6
 
     ##
-    # \brief Boron (sp2, trigonal-planar).
+    # \brief Boron (sp2).
     # 
     B_2 = 7
 
     ##
-    # \brief Carbon (sp3, tetrahedral).
+    # \brief Carbon (sp3).
     # 
     C_3 = 8
 
@@ -77,17 +77,17 @@ class UFFAtomType(Boost.Python.instance):
     C_R = 9
 
     ##
-    # \brief Carbon (sp2, trigonal-planar).
+    # \brief Carbon (sp2).
     # 
     C_2 = 10
 
     ##
-    # \brief Carbon (sp, linear).
+    # \brief Carbon (sp).
     # 
     C_1 = 11
 
     ##
-    # \brief Nitrogen (sp3, pyramidal).
+    # \brief Nitrogen (sp3).
     # 
     N_3 = 12
 
@@ -97,12 +97,12 @@ class UFFAtomType(Boost.Python.instance):
     N_R = 13
 
     ##
-    # \brief Nitrogen (sp2, trigonal-planar).
+    # \brief Nitrogen (sp2).
     # 
     N_2 = 14
 
     ##
-    # \brief Nitrogen (sp, linear).
+    # \brief Nitrogen (sp).
     # 
     N_1 = 15
 
@@ -112,7 +112,7 @@ class UFFAtomType(Boost.Python.instance):
     O_3 = 16
 
     ##
-    # \brief Oxygen in a zeolite framework.
+    # \brief Oxygen (sp3, in zeolite framework).
     # 
     O_3_z = 17
 
@@ -127,7 +127,7 @@ class UFFAtomType(Boost.Python.instance):
     O_2 = 19
 
     ##
-    # \brief Oxygen (sp, linear, e.g. carbonyl in CO).
+    # \brief Oxygen (sp).
     # 
     O_1 = 20
 
@@ -147,47 +147,47 @@ class UFFAtomType(Boost.Python.instance):
     Na = 23
 
     ##
-    # \brief Magnesium (tetrahedral).
+    # \brief Magnesium.
     # 
     Mg_3_2 = 24
 
     ##
-    # \brief Aluminum (tetrahedral).
+    # \brief Aluminum.
     # 
     Al_3 = 25
 
     ##
-    # \brief Silicon (tetrahedral).
+    # \brief Silicon.
     # 
     Si_3 = 26
 
     ##
-    # \brief Phosphorus (sp3, three-coordinate).
+    # \brief Phosphorus (sp3, trivalent).
     # 
     P_3_3 = 27
 
     ##
-    # \brief Phosphorus (sp3, five-coordinate, e.g. phosphate).
+    # \brief Phosphorus (sp3, pentavalent).
     # 
     P_3_5 = 28
 
     ##
-    # \brief Phosphorus in organometallic complexes.
+    # \brief Phosphorus (sp3, in organometallic complexes).
     # 
     P_3_q = 29
 
     ##
-    # \brief Sulfur (sp3, two-coordinate).
+    # \brief Sulfur (sp3, bivalent).
     # 
     S_3_2 = 30
 
     ##
-    # \brief Sulfur (sp3, four-coordinate, e.g. sulfoxide).
+    # \brief Sulfur (sp3, tetravalent).
     # 
     S_3_4 = 31
 
     ##
-    # \brief Sulfur (sp3, six-coordinate, e.g. sulfone).
+    # \brief Sulfur (sp3, hexavalent).
     # 
     S_3_6 = 32
 
@@ -217,12 +217,12 @@ class UFFAtomType(Boost.Python.instance):
     K = 37
 
     ##
-    # \brief Calcium (octahedral).
+    # \brief Calcium.
     # 
     Ca_6_2 = 38
 
     ##
-    # \brief Scandium (tetrahedral).
+    # \brief Scandium.
     # 
     Sc_3_3 = 39
 
@@ -237,17 +237,17 @@ class UFFAtomType(Boost.Python.instance):
     Ti_6_4 = 41
 
     ##
-    # \brief Vanadium (tetrahedral).
+    # \brief Vanadium.
     # 
     V_3_5 = 42
 
     ##
-    # \brief Chromium (octahedral).
+    # \brief Chromium.
     # 
     Cr_6_3 = 43
 
     ##
-    # \brief Manganese (octahedral).
+    # \brief Manganese.
     # 
     Mn_6_2 = 44
 
@@ -262,42 +262,42 @@ class UFFAtomType(Boost.Python.instance):
     Fe_6_2 = 46
 
     ##
-    # \brief Cobalt (octahedral).
+    # \brief Cobalt.
     # 
     Co_6_3 = 47
 
     ##
-    # \brief Nickel (square-planar).
+    # \brief Nickel.
     # 
     Ni_4_2 = 48
 
     ##
-    # \brief Copper (tetrahedral).
+    # \brief Copper.
     # 
     Cu_3_1 = 49
 
     ##
-    # \brief Zinc (tetrahedral).
+    # \brief Zinc.
     # 
     Zn_3_2 = 50
 
     ##
-    # \brief Gallium (tetrahedral).
+    # \brief Gallium.
     # 
     Ga_3_3 = 51
 
     ##
-    # \brief Germanium (tetrahedral).
+    # \brief Germanium.
     # 
     Ge_3 = 52
 
     ##
-    # \brief Arsenic (tetrahedral).
+    # \brief Arsenic.
     # 
     As_3_3 = 53
 
     ##
-    # \brief Selenium (tetrahedral).
+    # \brief Selenium.
     # 
     Se_3_2 = 54
 
@@ -317,22 +317,22 @@ class UFFAtomType(Boost.Python.instance):
     Rb = 57
 
     ##
-    # \brief Strontium (octahedral).
+    # \brief Strontium.
     # 
     Sr_6_2 = 58
 
     ##
-    # \brief Yttrium (tetrahedral).
+    # \brief Yttrium.
     # 
     Y_3_3 = 59
 
     ##
-    # \brief Zirconium (tetrahedral).
+    # \brief Zirconium.
     # 
     Zr_3_4 = 60
 
     ##
-    # \brief Niobium (tetrahedral).
+    # \brief Niobium.
     # 
     Nb_3_5 = 61
 
@@ -347,52 +347,52 @@ class UFFAtomType(Boost.Python.instance):
     Mo_3_6 = 63
 
     ##
-    # \brief Technetium (octahedral).
+    # \brief Technetium.
     # 
     Tc_6_5 = 64
 
     ##
-    # \brief Ruthenium (octahedral).
+    # \brief Ruthenium.
     # 
     Ru_6_2 = 65
 
     ##
-    # \brief Rhodium (octahedral).
+    # \brief Rhodium.
     # 
     Rh_6_3 = 66
 
     ##
-    # \brief Palladium (square-planar).
+    # \brief Palladium.
     # 
     Pd_4_2 = 67
 
     ##
-    # \brief Silver (linear).
+    # \brief Silver.
     # 
     Ag_1_1 = 68
 
     ##
-    # \brief Cadmium (tetrahedral).
+    # \brief Cadmium.
     # 
     Cd_3_2 = 69
 
     ##
-    # \brief Indium (tetrahedral).
+    # \brief Indium.
     # 
     In_3_3 = 70
 
     ##
-    # \brief Tin (tetrahedral).
+    # \brief Tin.
     # 
     Sn_3 = 71
 
     ##
-    # \brief Antimony (tetrahedral).
+    # \brief Antimony.
     # 
     Sb_3_3 = 72
 
     ##
-    # \brief Tellurium (tetrahedral).
+    # \brief Tellurium.
     # 
     Te_3_2 = 73
 
@@ -412,92 +412,92 @@ class UFFAtomType(Boost.Python.instance):
     Cs = 76
 
     ##
-    # \brief Barium (octahedral).
+    # \brief Barium.
     # 
     Ba_6_2 = 77
 
     ##
-    # \brief Lanthanum (tetrahedral).
+    # \brief Lanthanum.
     # 
     La_3_3 = 78
 
     ##
-    # \brief Cerium (octahedral).
+    # \brief Cerium.
     # 
     Ce_6_3 = 79
 
     ##
-    # \brief Praseodymium (octahedral).
+    # \brief Praseodymium.
     # 
     Pr_6_3 = 80
 
     ##
-    # \brief Neodymium (octahedral).
+    # \brief Neodymium.
     # 
     Nd_6_3 = 81
 
     ##
-    # \brief Promethium (octahedral).
+    # \brief Promethium.
     # 
     Pm_6_3 = 82
 
     ##
-    # \brief Samarium (octahedral).
+    # \brief Samarium.
     # 
     Sm_6_3 = 83
 
     ##
-    # \brief Europium (octahedral).
+    # \brief Europium.
     # 
     Eu_6_3 = 84
 
     ##
-    # \brief Gadolinium (octahedral).
+    # \brief Gadolinium.
     # 
     Gd_6_3 = 85
 
     ##
-    # \brief Terbium (octahedral).
+    # \brief Terbium.
     # 
     Tb_6_3 = 86
 
     ##
-    # \brief Dysprosium (octahedral).
+    # \brief Dysprosium.
     # 
     Dy_6_3 = 87
 
     ##
-    # \brief Holmium (octahedral).
+    # \brief Holmium.
     # 
     Ho_6_3 = 88
 
     ##
-    # \brief Erbium (octahedral).
+    # \brief Erbium.
     # 
     Er_6_3 = 89
 
     ##
-    # \brief Thulium (octahedral).
+    # \brief Thulium.
     # 
     Tm_6_3 = 90
 
     ##
-    # \brief Ytterbium (octahedral).
+    # \brief Ytterbium.
     # 
     Yb_6_3 = 91
 
     ##
-    # \brief Lutetium (octahedral).
+    # \brief Lutetium.
     # 
     Lu_6_3 = 92
 
     ##
-    # \brief Hafnium (tetrahedral).
+    # \brief Hafnium.
     # 
     Hf_3_4 = 93
 
     ##
-    # \brief Tantalum (tetrahedral).
+    # \brief Tantalum.
     # 
     Ta_3_5 = 94
 
@@ -527,47 +527,47 @@ class UFFAtomType(Boost.Python.instance):
     Re_3_7 = 99
 
     ##
-    # \brief Osmium (octahedral).
+    # \brief Osmium.
     # 
     Os_6_6 = 100
 
     ##
-    # \brief Iridium (octahedral).
+    # \brief Iridium.
     # 
     Ir_6_3 = 101
 
     ##
-    # \brief Platinum (square-planar).
+    # \brief Platinum.
     # 
     Pt_4_2 = 102
 
     ##
-    # \brief Gold (square-planar).
+    # \brief Gold.
     # 
     Au_4_3 = 103
 
     ##
-    # \brief Mercury (linear).
+    # \brief Mercury.
     # 
     Hg_1_2 = 104
 
     ##
-    # \brief Thallium (tetrahedral).
+    # \brief Thallium.
     # 
     Tl_3_3 = 105
 
     ##
-    # \brief Lead (tetrahedral).
+    # \brief Lead.
     # 
     Pb_3 = 106
 
     ##
-    # \brief Bismuth (tetrahedral).
+    # \brief Bismuth.
     # 
     Bi_3_3 = 107
 
     ##
-    # \brief Polonium (tetrahedral).
+    # \brief Polonium.
     # 
     Po_3_2 = 108
 
@@ -587,86 +587,86 @@ class UFFAtomType(Boost.Python.instance):
     Fr = 111
 
     ##
-    # \brief Radium (octahedral).
+    # \brief Radium.
     # 
     Ra_6_2 = 112
 
     ##
-    # \brief Actinium (octahedral).
+    # \brief Actinium.
     # 
     Ac_6_3 = 113
 
     ##
-    # \brief Thorium (octahedral).
+    # \brief Thorium.
     # 
     Th_6_4 = 114
 
     ##
-    # \brief Protactinium (octahedral).
+    # \brief Protactinium.
     # 
     Pa_6_4 = 115
 
     ##
-    # \brief Uranium (octahedral).
+    # \brief Uranium.
     # 
     U_6_4 = 116
 
     ##
-    # \brief Neptunium (octahedral).
+    # \brief Neptunium.
     # 
     Np_6_4 = 117
 
     ##
-    # \brief Plutonium (octahedral).
+    # \brief Plutonium.
     # 
     Pu_6_4 = 118
 
     ##
-    # \brief Americium (octahedral).
+    # \brief Americium.
     # 
     Am_6_4 = 119
 
     ##
-    # \brief Curium (octahedral).
+    # \brief Curium.
     # 
     Cm_6_3 = 120
 
     ##
-    # \brief Berkelium (octahedral).
+    # \brief Berkelium.
     # 
     Bk_6_3 = 121
 
     ##
-    # \brief Californium (octahedral).
+    # \brief Californium.
     # 
     Cf_6_3 = 122
 
     ##
-    # \brief Einsteinium (octahedral).
+    # \brief Einsteinium.
     # 
     Es_6_3 = 123
 
     ##
-    # \brief Fermium (octahedral).
+    # \brief Fermium.
     # 
     Fm_6_3 = 124
 
     ##
-    # \brief Mendelevium (octahedral).
+    # \brief Mendelevium.
     # 
     Md_6_3 = 125
 
     ##
-    # \brief Nobelium (octahedral).
+    # \brief Nobelium.
     # 
     No_6_3 = 126
 
     ##
-    # \brief Lawrencium (octahedral).
+    # \brief Lawrencium.
     # 
     Lr_6_3 = 127
 
     ##
-    # \brief Marks the end of all supported UFF atom types.
+    # \brief The highest UFF atom type value.
     # 
     MAX_TYPE = 127

@@ -44,12 +44,13 @@ namespace CDPL
         class MMFF94InteractionData;
 
         /**
-         * \brief Filters an MMFF94 interaction-data set, retaining only those interactions that exclusively reference atoms in \a inc_atom_mask.
-         * \param ia_data The input interaction-data set.
-         * \param filtered_ia_data The output interaction-data set receiving the retained interactions.
-         * \param inc_atom_mask A bit set whose set bits identify the atom indices that may appear in a retained interaction.
+         * \brief Filters an MMFF94 interaction data set, retaining only those interactions that exclusively reference atoms in \a inc_atom_mask.
+         * \param ia_data The input interaction data set.
+         * \param filtered_ia_data The output interaction data set receiving the retained interactions.
+         * \param inc_atom_mask A bit set whose set bits correspond to the indices of atoms that may appear in a retained interaction.
          */
-        CDPL_FORCEFIELD_API void filterInteractions(const MMFF94InteractionData& ia_data, MMFF94InteractionData& filtered_ia_data, const Util::BitSet& inc_atom_mask);
+        CDPL_FORCEFIELD_API void filterInteractions(const MMFF94InteractionData& ia_data, MMFF94InteractionData& filtered_ia_data,
+                                                    const Util::BitSet& inc_atom_mask);
 
         /**
          *\brief Calculates the squared distance \f$ r_{ij}^2 \f$ between two atoms \e i and \e j.

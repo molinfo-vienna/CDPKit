@@ -56,7 +56,7 @@ namespace CDPL
 
             /** \brief The variable-array type. */
             typedef A                     ArrayType;
-            /** \brief The scalar value type stored in the array. */
+            /** \brief The scalar value type stored by the array. */
             typedef typename A::ValueType ValueType;
             /** \brief The size type used by the array. */
             typedef typename A::SizeType  SizeType;
@@ -169,7 +169,7 @@ namespace CDPL
 
         /**
          * \brief Math::MinimizerVariableArrayTraits specialization for Math::VectorArray storage (a sequence of fixed-size vectors).
-         * \tparam V The inner vector type stored in the array.
+         * \tparam V The inner vector type stored by the array.
          */
         template <typename V>
         struct MinimizerVariableArrayTraits<VectorArray<V> >
