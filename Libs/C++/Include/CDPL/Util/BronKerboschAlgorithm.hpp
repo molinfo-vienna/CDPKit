@@ -1,5 +1,7 @@
 /* 
- * BronKerboschAlgorithm.hpp 
+ * BronKerboschAlgorithm.hpp
+ *
+ * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *

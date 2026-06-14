@@ -70,11 +70,23 @@ namespace CDPL
              */
             Base::DataWriter<Object3D>& write(const Object3D& obj);
 
+            /**
+             * \brief Returns a pointer that is non-null while the writer is in a good state and \c nullptr after a failed write.
+             * \return A non-null pointer in a good state, \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether a previous write operation has failed.
+             * \return \c true if the writer is in a failed state, and \c false otherwise.
+             */
             bool operator!() const;
 
             VRMLObject3DWriter& operator=(const VRMLObject3DWriter&) = delete;
 
+            /**
+             * \brief Finalizes the VRML output and flushes the underlying stream.
+             */
             void close();
             
           private:

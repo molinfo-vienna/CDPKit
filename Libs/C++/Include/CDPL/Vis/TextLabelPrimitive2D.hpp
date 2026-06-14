@@ -61,6 +61,10 @@ namespace CDPL
              */
             TextLabelPrimitive2D();
 
+            /**
+             * \brief Renders the text label via \a renderer using the configured pen and font.
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer) const;
 
             /**
@@ -118,8 +122,17 @@ namespace CDPL
              */
             const Font& getFont() const;
 
+            /**
+             * \brief Creates a dynamically allocated copy of this primitive.
+             * \return A smart pointer to the copy.
+             */
             GraphicsPrimitive2D::SharedPointer clone() const;
 
+            /**
+             * \brief Computes the axis-aligned bounding rectangle of the text label.
+             * \param bounds The Rectangle2D instance storing the result.
+             * \param font_metrics The font metrics object used for the bounds calculation.
+             */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics) const;
 
           private:

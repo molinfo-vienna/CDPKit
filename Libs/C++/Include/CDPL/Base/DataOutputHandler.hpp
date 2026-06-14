@@ -54,8 +54,10 @@ namespace CDPL
         {
 
           public:
+            /** \brief The type of the Base::DataWriter instances created by this handler. */
             typedef DataWriter<T> WriterType;
 
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataOutputHandler instances. */
             typedef std::shared_ptr<DataOutputHandler> SharedPointer;
 
             /**
