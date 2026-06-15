@@ -1,5 +1,7 @@
 /* 
- * DGCoordinatesGenerator.hpp 
+ * DGCoordinatesGenerator.hpp
+ *
+ * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
@@ -372,8 +374,11 @@ namespace CDPL
             typedef std::vector<VolumeConstraint> VolumeConstraintList;
 
           public:
+            /** \brief The scalar value type used for coordinates and constraint bounds. */
             typedef typename BaseType::ValueType                  ValueType;
+            /** \brief A mutable iterator over the configured volume constraints. */
             typedef typename VolumeConstraintList::iterator       VolumeConstraintIterator;
+            /** \brief A constant iterator over the configured volume constraints. */
             typedef typename VolumeConstraintList::const_iterator ConstVolumeConstraintIterator;
 
             /**

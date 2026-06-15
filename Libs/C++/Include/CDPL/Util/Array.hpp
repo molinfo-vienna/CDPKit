@@ -92,6 +92,9 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief The type of the \c std::vector used for the internal storage of the array elements.
+             */
             typedef std::vector<ValueType> StorageType;
 
             /**
@@ -100,12 +103,12 @@ namespace CDPL
             typedef std::shared_ptr<Array> SharedPointer;
 
             /**
-             * \brief The type of objects stored by the array. 
+             * \brief The type of objects stored by the array.
              */
             typedef ValueType ElementType;
 
             /**
-             * \brief The type of objects stored by the array. 
+             * \brief An unsigned integral type used to represent sizes and indices.
              */
             typedef std::size_t SizeType;
 

@@ -700,9 +700,17 @@ namespace CDPL
             ~StructureView2D();
 
             StructureView2D& operator=(const StructureView2D&) = delete;
-            
+
+            /**
+             * \brief Renders the visualized chemical structure via \a renderer.
+             * \param renderer The renderer that performs the drawing operations.
+             */
             void render(Renderer2D& renderer);
 
+            /**
+             * \brief Specifies the font metrics object used for text-size calculations.
+             * \param font_metrics A pointer to the font metrics object (or \e null to clear).
+             */
             void setFontMetrics(FontMetrics* font_metrics);
 
             /**
