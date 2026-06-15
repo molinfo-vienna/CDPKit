@@ -108,7 +108,7 @@ namespace CDPL
             /**
              * \brief Specifies whether the specified size has to follow output scaling operations.
              *
-             * Output scaling is a post-processing step (performed by some other part of the system) where an output size quantity
+             * Output scaling is a postprocessing step (performed by some other part of the system) where an output size quantity
              * is scaled to fulfill a certain constraint. An example is the scaling of output atom
              * coordinates to fit the 2D depiction of a chemical structure or reaction into the viewport area. 
              *

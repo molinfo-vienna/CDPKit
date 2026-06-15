@@ -173,7 +173,7 @@ def setupFixedSubstructureData(sub_search: Chem.SubstructureSearch, max_num_matc
 ##
 # \brief Sets the value of the ConfGen.ControlParameter.STRICT_ERROR_CHECKING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param strict The new STRICT_ERROR_CHECKING value.
 # 
 def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
@@ -181,7 +181,7 @@ def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, stric
 ##
 # \brief Tells whether the ConfGen.ControlParameter.STRICT_ERROR_CHECKING parameter is set on <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
@@ -199,6 +199,6 @@ def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bo
 ##
 # \brief Removes the ConfGen.ControlParameter.STRICT_ERROR_CHECKING parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # 
 def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass

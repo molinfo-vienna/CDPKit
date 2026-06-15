@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Returns the value of the Pharm::ControlParameter::STRICT_ERROR_CHECKING parameter of \a cntnr.
+         * \brief Returns the value of the Pharm::ControlParameter::STRICT_ERROR_CHECKING parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
          * \return \c true if strict error checking is enabled, and \c false otherwise.
          */
@@ -73,7 +73,7 @@ namespace CDPL
         CDPL_PHARM_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of \a cntnr.
+         * \brief Returns the value of the Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
          * \return \c true if <em>CDF</em> output uses single-precision floats, and \c false otherwise.
          * \since 1.2
@@ -105,7 +105,7 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Pharm::ControlParameter::PSD_CREATION_MODE parameter of \a cntnr.
+         * \brief Returns the value of the Pharm::ControlParameter::PSD_CREATION_MODE parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
          * \return The Pharm::ScreeningDBCreator::Mode value.
          */
@@ -133,7 +133,7 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Pharm::ControlParameter::PSD_ALLOW_DUPLICATES parameter of \a cntnr.
+         * \brief Returns the value of the Pharm::ControlParameter::PSD_ALLOW_DUPLICATES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
          * \return \c true if duplicate database entries are allowed, and \c false otherwise.
          */

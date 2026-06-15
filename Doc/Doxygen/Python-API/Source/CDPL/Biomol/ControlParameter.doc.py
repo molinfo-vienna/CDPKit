@@ -50,14 +50,14 @@ class ControlParameter(Boost.Python.instance):
     RESIDUE_DICTIONARY = CDPL.Base.LookupKey('RESIDUE_DICTIONARY')
 
     ##
-    # \brief Specifies whether to apply the formal atom charges provided by the residue dictionary during input data post-processing.
+    # \brief Specifies whether to apply the formal atom charges provided by the residue dictionary during input data postprocessing.
     # 
     # \valuetype  <tt>bool</tt> \since 1.2
     # 
     APPLY_DICT_FORMAL_CHARGES = CDPL.Base.LookupKey('APPLY_DICT_FORMAL_CHARGES')
 
     ##
-    # \brief Specifies whether to apply the atom types provided by the residue dictionary during input data post-processing.
+    # \brief Specifies whether to apply the atom types provided by the residue dictionary during input data postprocessing.
     # 
     # \valuetype  <tt>bool</tt> \since 1.2
     # 
@@ -99,7 +99,7 @@ class ControlParameter(Boost.Python.instance):
     PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES = CDPL.Base.LookupKey('PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES')
 
     ##
-    # \brief Specifies whether to apply the residue-dictionary bond orders to bonds of non-standard residues when reading <em>PDB</em> data.
+    # \brief Specifies whether to apply the residue dictionary bond orders to bonds of non-standard residues when reading <em>PDB</em> data.
     # 
     # \valuetype  <tt>bool</tt>
     # 
@@ -120,7 +120,7 @@ class ControlParameter(Boost.Python.instance):
     PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS = CDPL.Base.LookupKey('PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS')
 
     ##
-    # \brief Specifies whether to ignore the formal charge field of <tt>ATOM/<tt>HETATM</tt> records</tt> when reading <em>PDB</em> data.
+    # \brief Specifies whether to ignore the formal charge field of <tt>ATOM/HETATM</tt> records when reading <em>PDB</em> data.
     # 
     # \valuetype  <tt>bool</tt>
     # 
@@ -181,21 +181,21 @@ class ControlParameter(Boost.Python.instance):
     MMCIF_APPLY_DICT_ATOM_BONDING = CDPL.Base.LookupKey('MMCIF_APPLY_DICT_ATOM_BONDING')
 
     ##
-    # \brief Specifies whether to apply the residue-dictionary bond orders when reading <em>mmCIF</em> data.
+    # \brief Specifies whether to apply the residue dictionary bond orders when reading <em>mmCIF</em> data.
     # 
     # \valuetype  <tt>bool</tt> \since 1.2
     # 
     MMCIF_APPLY_DICT_BOND_ORDERS = CDPL.Base.LookupKey('MMCIF_APPLY_DICT_BOND_ORDERS')
 
     ##
-    # \brief Specifies whether to emit biopolymer residues using the <tt>chem_comp</tt> data category (instead of the regular polymer-residue encoding) when generating <em>mmCIF</em> output.
+    # \brief Specifies whether or not residue structures shall be emitted as <tt>chem_comp</tt> category data when generating <em>mmCIF</em> output.
     # 
     # \valuetype  <tt>bool</tt> \since 1.2
     # 
     MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP = CDPL.Base.LookupKey('MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP')
 
     ##
-    # \brief Specifies a post-processing function that is applied to the constructed <em>mmCIF</em> data record before it is written to the output stream.
+    # \brief Specifies a postprocessing function that is applied to the constructed <em>mmCIF</em> data record before it is written to the output stream.
     # 
     # \valuetype  Biomol.MMCIFDataProcessingFunction \since 1.2
     # 

@@ -42,29 +42,29 @@ namespace CDPL
         class Entity3D;
 
         /**
-         * \brief Returns the 3D coordinates stored as Chem::Entity3DProperty::COORDINATES_3D of \a entity.
-         * \param entity The entity to query.
-         * \return The 3D coordinates of \a entity.
+         * \brief Returns the value of the Chem::Entity3DProperty::COORDINATES_3D property of the 3D entity \a entity.
+         * \param entity The 3D entity for which to return the property value.
+         * \return The stored 3D coordinates.
          * \throw Base::ItemNotFound if the property has not been set.
          */
         CDPL_CHEM_API const Math::Vector3D& get3DCoordinates(const Entity3D& entity);
 
         /**
-         * \brief Sets the 3D coordinates of \a entity (Chem::Entity3DProperty::COORDINATES_3D) to \a coords.
-         * \param entity The entity to modify.
-         * \param coords The 3D coordinates to store.
+         * \brief Sets the value of the Chem::Entity3DProperty::COORDINATES_3D property of the 3D entity \a entity to \a coords.
+         * \param entity The 3D entity for which to set the property value.
+         * \param coords The new 3D coordinates.
          */
         CDPL_CHEM_API void set3DCoordinates(Entity3D& entity, const Math::Vector3D& coords);
 
         /**
-         * \brief Removes the Chem::Entity3DProperty::COORDINATES_3D property from \a entity.
-         * \param entity The entity to modify.
+         * \brief Clears the value of the Chem::Entity3DProperty::COORDINATES_3D property of the 3D entity \a entity.
+         * \param entity The 3D entity for which to clear the property value.
          */
         CDPL_CHEM_API void clear3DCoordinates(Entity3D& entity);
 
         /**
-         * \brief Tells whether \a entity carries the Chem::Entity3DProperty::COORDINATES_3D property.
-         * \param entity The entity to query.
+         * \brief Tells whether the Chem::Entity3DProperty::COORDINATES_3D property of the 3D entity \a entity is set.
+         * \param entity The 3D entity for which to query the property value.
          * \return \c true if the property is set, and \c false otherwise.
          */
         CDPL_CHEM_API bool has3DCoordinates(const Entity3D& entity);

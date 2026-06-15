@@ -234,7 +234,7 @@ class Reaction(Base.PropertyContainer):
     def getProducts() -> ComponentSequence: pass
 
     ##
-    # \brief Registers a global post-processing function invoked after every reaction copy operation.
+    # \brief Registers a global postprocessing function invoked after every reaction copy operation.
     # 
     # \param func The function to register.
     # 
@@ -242,7 +242,7 @@ class Reaction(Base.PropertyContainer):
     def registerCopyPostprocessingFunction(func: VoidMoleculeMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Invokes all registered copy post-processing functions with <tt>self</tt> as the target reaction and <em>src_rxn</em> as the source.
+    # \brief Invokes all registered copy postprocessing functions with <tt>self</tt> as the target reaction and <em>src_rxn</em> as the source.
     # 
     # \param src_rxn The source reaction the copy was made from.
     # 

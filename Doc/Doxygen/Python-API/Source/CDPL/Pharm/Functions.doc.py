@@ -707,7 +707,7 @@ def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em>.
+# \brief Returns the value of the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -744,7 +744,7 @@ def setPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer, allow:
 def hasPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter of <em>cntnr</em>.
+# \brief Returns the value of the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -777,7 +777,7 @@ def setPSDCreationModeParameter(cntnr: Base.ControlParameterContainer, mode: Mod
 def hasPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Pharm.ControlParameter.PSD_CREATION_MODE parameter of <em>cntnr</em>.
+# \brief Returns the value of the Pharm.ControlParameter.PSD_CREATION_MODE parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -810,7 +810,7 @@ def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, stric
 def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em>.
+# \brief Returns the value of the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 

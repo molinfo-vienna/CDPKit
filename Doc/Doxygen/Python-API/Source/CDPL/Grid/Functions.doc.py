@@ -104,7 +104,7 @@ def clearName(grid: AttributedGrid) -> None: pass
 def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries an explicit Grid.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter.
+# \brief Tells whether the Grid.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em> is set.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -115,7 +115,7 @@ def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Grid.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em>.
+# \brief Returns the value of the Grid.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -138,14 +138,14 @@ def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterCon
 # \brief Sets the Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter of <em>cntnr</em> to <em>is_name</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param is_name <tt>True</tt> to interpret the CUBE comment line as the grid name, and <tt>False</tt> to treat it as a regular comment.
+# \param is_name <tt>True</tt> to interpret the <em>CUBE</em> comment line as the grid name, and <tt>False</tt> to treat it as a regular comment.
 # 
 # \since 1.4
 # 
 def setCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries an explicit Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter.
+# \brief Tells whether the Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter of <em>cntnr</em> is set.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -156,11 +156,11 @@ def setCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name
 def hasCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter of <em>cntnr</em>.
+# \brief Returns the value of the Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the CUBE comment line is interpreted as the grid name, and <tt>False</tt> otherwise. 
+# \return <tt>True</tt> if the <em>CUBE</em> comment line is interpreted as the grid name, and <tt>False</tt> otherwise. 
 # 
 # \since 1.4
 # 
@@ -179,14 +179,14 @@ def clearCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> No
 # \brief Sets the Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param factor The new distance scaling factor applied to CUBE input.
+# \param factor The new distance scaling factor applied to <em>CUBE</em> input.
 # 
 # \since 1.4
 # 
 def setCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer, factor: float) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries an explicit Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter.
+# \brief Tells whether the Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> is set.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -197,11 +197,11 @@ def setCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterConta
 def hasCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em>.
+# \brief Returns the value of the Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The CUBE input distance scaling factor. 
+# \return The <em>CUBE</em> input distance scaling factor. 
 # 
 # \since 1.4
 # 
@@ -220,14 +220,14 @@ def clearCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterCon
 # \brief Sets the Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param factor The new distance scaling factor applied to CUBE output.
+# \param factor The new distance scaling factor applied to <em>CUBE</em> output.
 # 
 # \since 1.4
 # 
 def setCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer, factor: float) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries an explicit Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter.
+# \brief Tells whether the Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> is set.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -238,11 +238,11 @@ def setCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterCont
 def hasCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em>.
+# \brief Returns the value of the Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The CUBE output distance scaling factor. 
+# \return The <em>CUBE</em> output distance scaling factor. 
 # 
 # \since 1.4
 # 
@@ -266,7 +266,7 @@ def clearCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterCo
 def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries an explicit Grid.ControlParameter.STRICT_ERROR_CHECKING parameter.
+# \brief Tells whether the Grid.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em> is set.
 # 
 # \param cntnr The control-parameter container.
 # 
@@ -275,7 +275,7 @@ def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, stric
 def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Grid.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em>.
+# \brief Returns the value of the Grid.ControlParameter.STRICT_ERROR_CHECKING parameter stored in <em>cntnr</em>.
 # 
 # \param cntnr The control-parameter container.
 # 

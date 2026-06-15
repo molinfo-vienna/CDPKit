@@ -20,35 +20,35 @@
 #
 
 ##
-# \brief Sets the Chem.AtomProperty.COORDINATES_2D property of <em>atom</em> to <em>coords</em>.
+# \brief Sets the value of the Chem.AtomProperty.COORDINATES_2D property of the atom <em>atom</em> to <em>coords</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param coords The new 2D coordinates.
 # 
 def set2DCoordinates(atom: Atom, coords: Math.Vector2D) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.COORDINATES_2D property.
+# \brief Tells whether the Chem.AtomProperty.COORDINATES_2D property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def has2DCoordinates(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.COORDINATES_2D property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.COORDINATES_2D property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored 2D coordinates.
 # 
 def get2DCoordinates(atom: Atom) -> Math.Vector2D: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.COORDINATES_2D property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.COORDINATES_2D property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clear2DCoordinates(atom: Atom) -> None: pass
 
@@ -103,35 +103,35 @@ def get2DStereoFlag(bond: Bond) -> int: pass
 def clear2DStereoFlag(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.COORDINATES_3D_ARRAY property of <em>atom</em> to <em>coords_array</em>.
+# \brief Sets the value of the Chem.AtomProperty.COORDINATES_3D_ARRAY property of the atom <em>atom</em> to <em>coords_array</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param coords_array The new 3D conformer-coordinates array.
 # 
 def set3DCoordinatesArray(atom: Atom, coords_array: Math.Vector3DArray) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.COORDINATES_3D_ARRAY property.
+# \brief Tells whether the Chem.AtomProperty.COORDINATES_3D_ARRAY property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def has3DCoordinatesArray(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.COORDINATES_3D_ARRAY property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.COORDINATES_3D_ARRAY property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored 3D conformer-coordinates array.
 # 
 def get3DCoordinatesArray(atom: Atom) -> Math.Vector3DArray: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.COORDINATES_3D_ARRAY property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.COORDINATES_3D_ARRAY property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clear3DCoordinatesArray(atom: Atom) -> None: pass
 
@@ -146,37 +146,37 @@ def clear3DCoordinatesArray(atom: Atom) -> None: pass
 def get3DCoordinates(cntnr: AtomContainer, coords: Math.Vector3DArray, coords_func: Atom3DCoordinatesFunction, append: bool = False) -> None: pass
 
 ##
-# \brief Sets the 3D coordinates of <em>entity</em> (Chem.Entity3DProperty.COORDINATES_3D) to <em>coords</em>.
+# \brief Sets the value of the Chem.Entity3DProperty.COORDINATES_3D property of the 3D entity <em>entity</em> to <em>coords</em>.
 # 
-# \param entity The entity to modify.
-# \param coords The 3D coordinates to store.
+# \param entity The 3D entity for which to set the property value.
+# \param coords The new 3D coordinates.
 # 
 def set3DCoordinates(entity: Entity3D, coords: Math.Vector3D) -> None: pass
 
 ##
-# \brief Tells whether <em>entity</em> carries the Chem.Entity3DProperty.COORDINATES_3D property.
+# \brief Tells whether the Chem.Entity3DProperty.COORDINATES_3D property of the 3D entity <em>entity</em> is set.
 # 
-# \param entity The entity to query.
+# \param entity The 3D entity for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def has3DCoordinates(entity: Entity3D) -> bool: pass
 
 ##
-# \brief Returns the 3D coordinates stored as Chem.Entity3DProperty.COORDINATES_3D of <em>entity</em>.
+# \brief Returns the value of the Chem.Entity3DProperty.COORDINATES_3D property of the 3D entity <em>entity</em>.
 # 
-# \param entity The entity to query.
+# \param entity The 3D entity for which to return the property value.
 # 
-# \return The 3D coordinates of <em>entity</em>. 
+# \return The stored 3D coordinates. 
 # 
 # \throw Base.ItemNotFound if the property has not been set.
 # 
 def get3DCoordinates(entity: Entity3D) -> Math.Vector3D: pass
 
 ##
-# \brief Removes the Chem.Entity3DProperty.COORDINATES_3D property from <em>entity</em>.
+# \brief Clears the value of the Chem.Entity3DProperty.COORDINATES_3D property of the 3D entity <em>entity</em>.
 # 
-# \param entity The entity to modify.
+# \param entity The 3D entity for which to clear the property value.
 # 
 def clear3DCoordinates(entity: Entity3D) -> None: pass
 
@@ -198,7 +198,7 @@ def set3DCoordinates(cntnr: Entity3DContainer, coords: Math.Vector3DArray) -> No
 def get3DCoordinates(cntnr: Entity3DContainer, coords: Math.Vector3DArray, append: bool = False) -> None: pass
 
 ##
-# \brief Returns the subset of the aromatic rings of <em>molgraph</em> (a fresh list, not stored on <em>molgraph</em>).
+# \brief Returns the subset of the aromatic rings of the molecular graph <em>molgraph</em> (a fresh list, not stored on <em>molgraph</em>).
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -207,7 +207,7 @@ def get3DCoordinates(cntnr: Entity3DContainer, coords: Math.Vector3DArray, appen
 def getAromaticRings(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Returns the subset of the SSSR of <em>molgraph</em> that contains only aromatic rings (a fresh list, not stored on <em>molgraph</em>).
+# \brief Returns the subset of the SSSR of the molecular graph <em>molgraph</em> that contains only aromatic rings (a fresh list, not stored on <em>molgraph</em>).
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -216,68 +216,68 @@ def getAromaticRings(molgraph: MolecularGraph) -> FragmentList: pass
 def getAromaticSSSRSubset(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property of <em>molgraph</em> to <em>substruct</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em> to <em>substruct</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param substruct The new aromatic substructure.
 # 
 def setAromaticSubstructure(molgraph: MolecularGraph, substruct: Fragment) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property.
+# \brief Tells whether the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasAromaticSubstructure(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored aromatic substructure.
 # 
 def getAromaticSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearAromaticSubstructure(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.AROMATICITY_FLAG property of <em>atom</em> to <em>aromatic</em>.
+# \brief Sets the value of the Chem.AtomProperty.AROMATICITY_FLAG property of the atom <em>atom</em> to <em>aromatic</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param aromatic <tt>True</tt> to flag the atom as aromatic, and <tt>False</tt> to flag it as non-aromatic.
 # 
 def setAromaticityFlag(atom: Atom, aromatic: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.AROMATICITY_FLAG property.
+# \brief Tells whether the Chem.AtomProperty.AROMATICITY_FLAG property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasAromaticityFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.AROMATICITY_FLAG property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.AROMATICITY_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return <tt>True</tt> if the atom is flagged as aromatic, and <tt>False</tt> otherwise.
 # 
 def getAromaticityFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.AROMATICITY_FLAG property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.AROMATICITY_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearAromaticityFlag(atom: Atom) -> None: pass
 
@@ -323,73 +323,73 @@ def clearAromaticityFlag(bond: Bond) -> None: pass
 def setAromaticityFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.ATOM_MAPPING_ID property of <em>atom</em> to <em>id</em>.
+# \brief Sets the value of the Chem.AtomProperty.ATOM_MAPPING_ID property of the atom <em>atom</em> to <em>id</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param id The new reactant-to-product atom-mapping ID.
 # 
 def setAtomMappingID(atom: Atom, id: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.ATOM_MAPPING_ID property.
+# \brief Tells whether the Chem.AtomProperty.ATOM_MAPPING_ID property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasAtomMappingID(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.ATOM_MAPPING_ID property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.ATOM_MAPPING_ID property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored reactant-to-product atom-mapping ID.
 # 
 def getAtomMappingID(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.ATOM_MAPPING_ID property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.ATOM_MAPPING_ID property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearAtomMappingID(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.ATOM_MAPPING property of <em>rxn</em> to <em>mapping</em>.
+# \brief Sets the value of the Chem.ReactionProperty.ATOM_MAPPING property of the reaction <em>rxn</em> to <em>mapping</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param mapping The new reactant-to-product atom mapping.
 # 
 def setAtomMapping(rxn: Reaction, mapping: AtomMapping) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.ATOM_MAPPING property.
+# \brief Tells whether the Chem.ReactionProperty.ATOM_MAPPING property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasAtomMapping(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.ATOM_MAPPING property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.ATOM_MAPPING property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored reactant-to-product atom mapping.
 # 
 def getAtomMapping(rxn: Reaction) -> AtomMapping: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.ATOM_MAPPING property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.ATOM_MAPPING property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearAtomMapping(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the atom-level match-constraint list <em>constr</em> on every atom of <em>molgraph</em>.
+# \brief Sets the atom-level match-constraint list <em>constr</em> on every atom of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param constr The match-constraint list to assign.
@@ -398,7 +398,7 @@ def clearAtomMapping(rxn: Reaction) -> None: pass
 def setAtomMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the atom-level match-constraint list <em>constr</em> on every atom of every component of <em>rxn</em>.
+# \brief Sets the atom-level match-constraint list <em>constr</em> on every atom of every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
 # \param constr The match-constraint list to assign.
@@ -407,7 +407,7 @@ def setAtomMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintLis
 def setAtomMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the atom symbols of <em>molgraph</em> from their atom types.
+# \brief Sets the atom symbols of the molecular graph <em>molgraph</em> from their atom types.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing atom symbols.
@@ -415,7 +415,7 @@ def setAtomMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrit
 def setAtomSymbolsFromTypes(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the atom types of <em>molgraph</em> from their element symbols.
+# \brief Sets the atom types of the molecular graph <em>molgraph</em> from their element symbols.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing atom types.
@@ -423,7 +423,7 @@ def setAtomSymbolsFromTypes(molgraph: MolecularGraph, overwrite: bool) -> None: 
 def setAtomTypesFromSymbols(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the bond-level match-constraint list <em>constr</em> on every bond of <em>molgraph</em>.
+# \brief Sets the bond-level match-constraint list <em>constr</em> on every bond of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param constr The match-constraint list to assign.
@@ -432,7 +432,7 @@ def setAtomTypesFromSymbols(molgraph: MolecularGraph, overwrite: bool) -> None: 
 def setBondMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the bond-level match-constraint list <em>constr</em> on every bond of every component of <em>rxn</em>.
+# \brief Sets the bond-level match-constraint list <em>constr</em> on every bond of every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
 # \param constr The match-constraint list to assign.
@@ -441,35 +441,35 @@ def setBondMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintLis
 def setBondMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.CIP_CONFIGURATION property of <em>atom</em> to <em>config</em> (see namespace Chem.CIPDescriptor).
+# \brief Sets the value of the Chem.AtomProperty.CIP_CONFIGURATION property of the atom <em>atom</em> to <em>config</em> (see namespace Chem.CIPDescriptor).
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param config The new CIP configuration label.
 # 
 def setCIPConfiguration(atom: Atom, config: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.CIP_CONFIGURATION property.
+# \brief Tells whether the Chem.AtomProperty.CIP_CONFIGURATION property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasCIPConfiguration(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.CIP_CONFIGURATION property of <em>atom</em> (see namespace Chem.CIPDescriptor).
+# \brief Returns the value of the Chem.AtomProperty.CIP_CONFIGURATION property of the atom <em>atom</em> (see namespace Chem.CIPDescriptor).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored CIP configuration label.
 # 
 def getCIPConfiguration(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.CIP_CONFIGURATION property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.CIP_CONFIGURATION property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearCIPConfiguration(atom: Atom) -> None: pass
 
@@ -507,139 +507,139 @@ def getCIPConfiguration(bond: Bond) -> int: pass
 def clearCIPConfiguration(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.CIP_PRIORITY property of <em>atom</em> to <em>priority</em>.
+# \brief Sets the value of the Chem.AtomProperty.CIP_PRIORITY property of the atom <em>atom</em> to <em>priority</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param priority The new CIP priority.
 # 
 def setCIPPriority(atom: Atom, priority: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.CIP_PRIORITY property.
+# \brief Tells whether the Chem.AtomProperty.CIP_PRIORITY property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasCIPPriority(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.CIP_PRIORITY property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.CIP_PRIORITY property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored CIP priority.
 # 
 def getCIPPriority(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.CIP_PRIORITY property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.CIP_PRIORITY property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearCIPPriority(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.CANONICAL_NUMBER property of <em>atom</em> to <em>num</em>.
+# \brief Sets the value of the Chem.AtomProperty.CANONICAL_NUMBER property of the atom <em>atom</em> to <em>num</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param num The new canonical number.
 # 
 def setCanonicalNumber(atom: Atom, num: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.CANONICAL_NUMBER property.
+# \brief Tells whether the Chem.AtomProperty.CANONICAL_NUMBER property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasCanonicalNumber(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.CANONICAL_NUMBER property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.CANONICAL_NUMBER property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored canonical number.
 # 
 def getCanonicalNumber(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.CANONICAL_NUMBER property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.CANONICAL_NUMBER property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearCanonicalNumber(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.COMMENT property of <em>molgraph</em> to <em>comment</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.COMMENT property of the molecular graph <em>molgraph</em> to <em>comment</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param comment The new comment string.
 # 
 def setComment(molgraph: MolecularGraph, comment: str) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.COMMENT property.
+# \brief Tells whether the Chem.MolecularGraphProperty.COMMENT property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasComment(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.COMMENT property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.COMMENT property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored comment.
 # 
 def getComment(molgraph: MolecularGraph) -> str: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.COMMENT property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.COMMENT property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearComment(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.COMMENT property of <em>rxn</em> to <em>comment</em>.
+# \brief Sets the value of the Chem.ReactionProperty.COMMENT property of the reaction <em>rxn</em> to <em>comment</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param comment The new comment string.
 # 
 def setComment(rxn: Reaction, comment: str) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.COMMENT property.
+# \brief Tells whether the Chem.ReactionProperty.COMMENT property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasComment(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.COMMENT property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.COMMENT property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored comment.
 # 
 def getComment(rxn: Reaction) -> str: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.COMMENT property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.COMMENT property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearComment(rxn: Reaction) -> None: pass
 
 ##
-# \brief Returns the number of bonds of <em>molgraph</em> that lie between two atoms of <em>molgraph</em> (i.e. no dangling cross-graph bonds).
+# \brief Returns the number of bonds of the molecular graph <em>molgraph</em> that lie between two atoms of <em>molgraph</em> (i.e. no dangling cross-graph bonds).
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -648,106 +648,106 @@ def clearComment(rxn: Reaction) -> None: pass
 def getCompleteBondCount(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.COMPONENT_GROUP_ID property of <em>atom</em> to <em>id</em>.
+# \brief Sets the value of the Chem.AtomProperty.COMPONENT_GROUP_ID property of the atom <em>atom</em> to <em>id</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param id The new component-group ID.
 # 
 def setComponentGroupID(atom: Atom, id: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.COMPONENT_GROUP_ID property.
+# \brief Tells whether the Chem.AtomProperty.COMPONENT_GROUP_ID property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasComponentGroupID(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.COMPONENT_GROUP_ID property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.COMPONENT_GROUP_ID property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored component-group ID.
 # 
 def getComponentGroupID(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.COMPONENT_GROUP_ID property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.COMPONENT_GROUP_ID property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearComponentGroupID(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.COMPONENT_GROUPS property of <em>molgraph</em> to <em>comp_groups</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.COMPONENT_GROUPS property of the molecular graph <em>molgraph</em> to <em>comp_groups</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param comp_groups The new component-group fragment list.
 # 
 def setComponentGroups(molgraph: MolecularGraph, comp_groups: FragmentList) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.COMPONENT_GROUPS property.
+# \brief Tells whether the Chem.MolecularGraphProperty.COMPONENT_GROUPS property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasComponentGroups(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.COMPONENT_GROUPS property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.COMPONENT_GROUPS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored component-group fragment list.
 # 
 def getComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.COMPONENT_GROUPS property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.COMPONENT_GROUPS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearComponentGroups(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.COMPONENT_GROUPS property of <em>rxn</em> to <em>comp_groups</em>.
+# \brief Sets the value of the Chem.ReactionProperty.COMPONENT_GROUPS property of the reaction <em>rxn</em> to <em>comp_groups</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param comp_groups The new component-group fragment list.
 # 
 def setComponentGroups(rxn: Reaction, comp_groups: FragmentList) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.COMPONENT_GROUPS property.
+# \brief Tells whether the Chem.ReactionProperty.COMPONENT_GROUPS property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasComponentGroups(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.COMPONENT_GROUPS property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.COMPONENT_GROUPS property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored component-group fragment list.
 # 
 def getComponentGroups(rxn: Reaction) -> FragmentList: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.COMPONENT_GROUPS property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.COMPONENT_GROUPS property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearComponentGroups(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the molecular graph-level match-constraint list <em>constr</em> on every component of <em>rxn</em>.
+# \brief Sets the molecular graph-level match-constraint list <em>constr</em> on every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
 # \param constr The match-constraint list to assign.
@@ -756,35 +756,35 @@ def clearComponentGroups(rxn: Reaction) -> None: pass
 def setComponentMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.COMPONENTS property of <em>molgraph</em> to <em>comps</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.COMPONENTS property of the molecular graph <em>molgraph</em> to <em>comps</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param comps The new connected-component list.
 # 
 def setComponents(molgraph: MolecularGraph, comps: FragmentList) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.COMPONENTS property.
+# \brief Tells whether the Chem.MolecularGraphProperty.COMPONENTS property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasComponents(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.COMPONENTS property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.COMPONENTS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored connected-component list.
 # 
 def getComponents(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.COMPONENTS property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.COMPONENTS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearComponents(molgraph: MolecularGraph) -> None: pass
 
@@ -809,35 +809,35 @@ def getConformation(cntnr: AtomContainer, conf_idx: int, coords: Math.Vector3DAr
 def getConformationEnergy(molgraph: MolecularGraph, conf_idx: int) -> float: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.CONFORMATION_INDEX property of <em>molgraph</em> to <em>index</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.CONFORMATION_INDEX property of the molecular graph <em>molgraph</em> to <em>index</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param index The new zero-based conformation index.
 # 
 def setConformationIndex(molgraph: MolecularGraph, index: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.CONFORMATION_INDEX property.
+# \brief Tells whether the Chem.MolecularGraphProperty.CONFORMATION_INDEX property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasConformationIndex(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.CONFORMATION_INDEX property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.CONFORMATION_INDEX property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored zero-based conformation index.
 # 
 def getConformationIndex(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.CONFORMATION_INDEX property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.CONFORMATION_INDEX property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearConformationIndex(molgraph: MolecularGraph) -> None: pass
 
@@ -859,9 +859,9 @@ def setConformation(molgraph: MolecularGraph, conf_idx: int, coords: Math.Vector
 def clearConformations(cntnr: AtomContainer) -> None: pass
 
 ##
-# \brief Returns the 3D coordinates of <em>atom</em> for conformer <em>conf_idx</em> (from the Chem.AtomProperty.COORDINATES_3D_ARRAY property).
+# \brief Returns the 3D coordinates of the atom <em>atom</em> for conformer <em>conf_idx</em> (from the Chem.AtomProperty.COORDINATES_3D_ARRAY property).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the conformer 3D coordinates.
 # \param conf_idx The zero-based conformer index.
 # 
 # \return The 3D coordinates of the specified conformer.
@@ -869,35 +869,35 @@ def clearConformations(cntnr: AtomContainer) -> None: pass
 def getConformer3DCoordinates(atom: Atom, conf_idx: int) -> Math.Vector3D: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property of <em>molgraph</em> to <em>energies</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property of the molecular graph <em>molgraph</em> to <em>energies</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param energies The new per-conformer energy array.
 # 
 def setConformerEnergies(molgraph: MolecularGraph, energies: Util.DArray) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property.
+# \brief Tells whether the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasConformerEnergies(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored per-conformer energy array.
 # 
 def getConformerEnergies(molgraph: MolecularGraph) -> Util.DArray: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.CONFORMER_ENERGIES property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearConformerEnergies(molgraph: MolecularGraph) -> None: pass
 
@@ -973,35 +973,35 @@ def getContainingFragments(molgraph: MolecularGraph, frag_list: FragmentList, co
 def hasCoordinates(cntnr: AtomContainer, dim: int) -> bool: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property of <em>molgraph</em> to <em>substruct</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em> to <em>substruct</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param substruct The new cyclic substructure.
 # 
 def setCyclicSubstructure(molgraph: MolecularGraph, substruct: Fragment) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property.
+# \brief Tells whether the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasCyclicSubstructure(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored cyclic substructure.
 # 
 def getCyclicSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearCyclicSubstructure(molgraph: MolecularGraph) -> None: pass
 
@@ -1039,7 +1039,7 @@ def getDirection(bond: Bond) -> int: pass
 def clearDirection(bond: Bond) -> None: pass
 
 ##
-# \brief Collects every atom of <em>molgraph</em> that is within <em>max_dist</em> bonds of <em>atom</em> into the fragment <em>env</em>.
+# \brief Collects every atom of <em>molgraph</em> that is within <em>max_dist</em> bonds of the atom <em>atom</em> into the fragment <em>env</em>.
 # 
 # \param atom The seed atom.
 # \param molgraph The molecular graph providing the bonding context.
@@ -1052,40 +1052,40 @@ def clearDirection(bond: Bond) -> None: pass
 def getEnvironment(atom: Atom, molgraph: MolecularGraph, max_dist: int, env: Fragment, append: bool = False) -> int: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.FORMAL_CHARGE property of <em>atom</em> to <em>charge</em>.
+# \brief Sets the value of the Chem.AtomProperty.FORMAL_CHARGE property of the atom <em>atom</em> to <em>charge</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param charge The new formal charge.
 # 
 def setFormalCharge(atom: Atom, charge: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.FORMAL_CHARGE property.
+# \brief Tells whether the Chem.AtomProperty.FORMAL_CHARGE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasFormalCharge(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.FORMAL_CHARGE property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.FORMAL_CHARGE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored formal charge.
 # 
 def getFormalCharge(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.FORMAL_CHARGE property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.FORMAL_CHARGE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearFormalCharge(atom: Atom) -> None: pass
 
 ##
-# \brief Returns the generic atom type (e.g. <tt>A</tt>, <tt>Q</tt>, <tt>X</tt>, ...) that the atom's Chem.AtomProperty.TYPE belongs to.
+# \brief Returns the generic atom type that the atom's Chem.AtomProperty.TYPE property value belongs to.
 # 
 # \param atom The atom to query.
 # 
@@ -1094,134 +1094,134 @@ def clearFormalCharge(atom: Atom) -> None: pass
 def getGenericType(atom: Atom) -> int: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property of <em>molgraph</em> to <em>mtx</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em> to <em>mtx</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param mtx The new geometrical-distance matrix.
 # 
 def setGeometricalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.DMatrix) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property.
+# \brief Tells whether the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasGeometricalDistanceMatrix(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored geometrical-distance matrix.
 # 
 def getGeometricalDistanceMatrix(molgraph: MolecularGraph) -> Math.DMatrix: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.GEOMETRICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearGeometricalDistanceMatrix(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.HASH_CODE property of <em>molgraph</em> to <em>hash_code</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.HASH_CODE property of the molecular graph <em>molgraph</em> to <em>hash_code</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param hash_code The new 64-bit hash code.
 # 
 def setHashCode(molgraph: MolecularGraph, hash_code: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.HASH_CODE property.
+# \brief Tells whether the Chem.MolecularGraphProperty.HASH_CODE property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasHashCode(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.HASH_CODE property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.HASH_CODE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored 64-bit hash code.
 # 
 def getHashCode(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.HASH_CODE property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.HASH_CODE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearHashCode(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.HYBRIDIZATION property of <em>atom</em> to <em>state</em> (see namespace Chem.HybridizationState).
+# \brief Sets the value of the Chem.AtomProperty.HYBRIDIZATION property of the atom <em>atom</em> to <em>state</em> (see namespace Chem.HybridizationState).
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param state The new hybridization state.
 # 
 def setHybridizationState(atom: Atom, state: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.HYBRIDIZATION property.
+# \brief Tells whether the Chem.AtomProperty.HYBRIDIZATION property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasHybridizationState(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.HYBRIDIZATION property of <em>atom</em> (see namespace Chem.HybridizationState).
+# \brief Returns the value of the Chem.AtomProperty.HYBRIDIZATION property of the atom <em>atom</em> (see namespace Chem.HybridizationState).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored hybridization state.
 # 
 def getHybridizationState(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.HYBRIDIZATION property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.HYBRIDIZATION property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearHybridizationState(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property of <em>atom</em> to <em>count</em>.
+# \brief Sets the value of the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property of the atom <em>atom</em> to <em>count</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param count The new implicit-hydrogen count.
 # 
 def setImplicitHydrogenCount(atom: Atom, count: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property.
+# \brief Tells whether the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasImplicitHydrogenCount(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored implicit-hydrogen count.
 # 
 def getImplicitHydrogenCount(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearImplicitHydrogenCount(atom: Atom) -> None: pass
 
@@ -1236,827 +1236,827 @@ def clearImplicitHydrogenCount(atom: Atom) -> None: pass
 def getIncidentBonds(atom: Atom, molgraph: MolecularGraph, bonds: list, excl_atom: Atom) -> int: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.ISOTOPE property of <em>atom</em> to <em>isotope</em>.
+# \brief Sets the value of the Chem.AtomProperty.ISOTOPE property of the atom <em>atom</em> to <em>isotope</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param isotope The new mass number (zero for the natural isotope mixture).
 # 
 def setIsotope(atom: Atom, isotope: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.ISOTOPE property.
+# \brief Tells whether the Chem.AtomProperty.ISOTOPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasIsotope(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.ISOTOPE property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.ISOTOPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored mass number, or zero for the natural isotope mixture.
 # 
 def getIsotope(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.ISOTOPE property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.ISOTOPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearIsotope(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of <em>molgraph</em> to <em>version</em> (see namespace Chem.MDLDataFormatVersion).
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of the molecular graph <em>molgraph</em> to <em>version</em> (see namespace Chem.MDLDataFormatVersion).
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param version The new CTab version.
 # 
 def setMDLCTABVersion(molgraph: MolecularGraph, version: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLCTABVersion(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of <em>molgraph</em> (see namespace Chem.MDLDataFormatVersion).
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of the molecular graph <em>molgraph</em> (see namespace Chem.MDLDataFormatVersion).
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored CTab version.
 # 
 def getMDLCTABVersion(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLCTABVersion(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property of <em>molgraph</em> to <em>flag</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property of the molecular graph <em>molgraph</em> to <em>flag</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param flag The new MDL chiral flag.
 # 
 def setMDLChiralFlag(molgraph: MolecularGraph, flag: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLChiralFlag(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL chiral flag.
 # 
 def getMDLChiralFlag(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLChiralFlag(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property of <em>molgraph</em> to <em>dim</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property of the molecular graph <em>molgraph</em> to <em>dim</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param dim The new MDL coordinate dimensionality.
 # 
 def setMDLDimensionality(molgraph: MolecularGraph, dim: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLDimensionality(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL coordinate dimensionality.
 # 
 def getMDLDimensionality(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLDimensionality(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_ENERGY property of <em>molgraph</em> to <em>energy</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_ENERGY property of the molecular graph <em>molgraph</em> to <em>energy</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param energy The new MDL energy.
 # 
 def setMDLEnergy(molgraph: MolecularGraph, energy: float) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_ENERGY property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_ENERGY property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLEnergy(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_ENERGY property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_ENERGY property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL energy.
 # 
 def getMDLEnergy(molgraph: MolecularGraph) -> float: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_ENERGY property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_ENERGY property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLEnergy(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of <em>rxn</em> to <em>reg_no</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em> to <em>reg_no</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param reg_no The new MDL external registry number.
 # 
 def setMDLExternalRegistryNumber(rxn: Reaction, reg_no: str) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property.
+# \brief Tells whether the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLExternalRegistryNumber(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored MDL external registry number.
 # 
 def getMDLExternalRegistryNumber(rxn: Reaction) -> str: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMDLExternalRegistryNumber(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of <em>rxn</em> to <em>reg_no</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em> to <em>reg_no</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param reg_no The new MDL internal registry number.
 # 
 def setMDLInternalRegistryNumber(rxn: Reaction, reg_no: str) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property.
+# \brief Tells whether the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLInternalRegistryNumber(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored MDL internal registry number.
 # 
 def getMDLInternalRegistryNumber(rxn: Reaction) -> str: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMDLInternalRegistryNumber(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of <em>rxn</em> to <em>mol_rec</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of the reaction <em>rxn</em> to <em>mol_rec</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param mol_rec The new MDL molecule record.
 # 
 def setMDLMoleculeRecord(rxn: Reaction, mol_rec: Molecule) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_MOLECULE_RECORD property.
+# \brief Tells whether the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLMoleculeRecord(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored MDL molecule record (typically the structure component of an RD-file).
 # 
 def getMDLMoleculeRecord(rxn: Reaction) -> Molecule: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MDL_MOLECULE_RECORD property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMDLMoleculeRecord(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MDL_PARITY property of <em>atom</em> to <em>parity</em> (see namespace Chem.MDLParity).
+# \brief Sets the value of the Chem.AtomProperty.MDL_PARITY property of the atom <em>atom</em> to <em>parity</em> (see namespace Chem.MDLParity).
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param parity The new MDL stereo parity.
 # 
 def setMDLParity(atom: Atom, parity: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MDL_PARITY property.
+# \brief Tells whether the Chem.AtomProperty.MDL_PARITY property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLParity(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MDL_PARITY property of <em>atom</em> (see namespace Chem.MDLParity).
+# \brief Returns the value of the Chem.AtomProperty.MDL_PARITY property of the atom <em>atom</em> (see namespace Chem.MDLParity).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored MDL stereo parity.
 # 
 def getMDLParity(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MDL_PARITY property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MDL_PARITY property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMDLParity(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property of <em>molgraph</em> to <em>name</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property of the molecular graph <em>molgraph</em> to <em>name</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param name The new MDL program name.
 # 
 def setMDLProgramName(molgraph: MolecularGraph, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLProgramName(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL program name.
 # 
 def getMDLProgramName(molgraph: MolecularGraph) -> str: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLProgramName(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MDL_PROGRAM_NAME property of <em>rxn</em> to <em>name</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MDL_PROGRAM_NAME property of the reaction <em>rxn</em> to <em>name</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param name The new MDL program name.
 # 
 def setMDLProgramName(rxn: Reaction, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_PROGRAM_NAME property.
+# \brief Tells whether the Chem.ReactionProperty.MDL_PROGRAM_NAME property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLProgramName(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MDL_PROGRAM_NAME property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MDL_PROGRAM_NAME property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored MDL program name.
 # 
 def getMDLProgramName(rxn: Reaction) -> str: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MDL_PROGRAM_NAME property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MDL_PROGRAM_NAME property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMDLProgramName(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of <em>rxn</em> to <em>version</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of the reaction <em>rxn</em> to <em>version</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param version The new RXN-file version (see Chem.MDLDataFormatVersion).
 # 
 def setMDLRXNFileVersion(rxn: Reaction, version: int) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property.
+# \brief Tells whether the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLRXNFileVersion(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored RXN-file version (see Chem.MDLDataFormatVersion).
 # 
 def getMDLRXNFileVersion(rxn: Reaction) -> int: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMDLRXNFileVersion(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property of <em>molgraph</em> to <em>reg_no</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property of the molecular graph <em>molgraph</em> to <em>reg_no</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param reg_no The new MDL registry number.
 # 
 def setMDLRegistryNumber(molgraph: MolecularGraph, reg_no: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLRegistryNumber(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL registry number.
 # 
 def getMDLRegistryNumber(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLRegistryNumber(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of <em>rxn</em> to <em>reg_no</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of the reaction <em>rxn</em> to <em>reg_no</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param reg_no The new MDL registry number.
 # 
 def setMDLRegistryNumber(rxn: Reaction, reg_no: int) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property.
+# \brief Tells whether the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLRegistryNumber(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored MDL registry number.
 # 
 def getMDLRegistryNumber(rxn: Reaction) -> int: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMDLRegistryNumber(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property of <em>molgraph</em> to <em>factor</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property of the molecular graph <em>molgraph</em> to <em>factor</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param factor The new MDL scaling factor 1.
 # 
 def setMDLScalingFactor1(molgraph: MolecularGraph, factor: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLScalingFactor1(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL scaling factor 1.
 # 
 def getMDLScalingFactor1(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLScalingFactor1(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property of <em>molgraph</em> to <em>factor</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property of the molecular graph <em>molgraph</em> to <em>factor</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param factor The new MDL scaling factor 2.
 # 
 def setMDLScalingFactor2(molgraph: MolecularGraph, factor: float) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLScalingFactor2(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL scaling factor 2.
 # 
 def getMDLScalingFactor2(molgraph: MolecularGraph) -> float: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLScalingFactor2(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property of <em>atom</em> to <em>flag</em>.
+# \brief Sets the value of the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property of the atom <em>atom</em> to <em>flag</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param flag The new MDL stereo-care flag.
 # 
 def setMDLStereoCareFlag(atom: Atom, flag: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property.
+# \brief Tells whether the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLStereoCareFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored MDL stereo-care flag.
 # 
 def getMDLStereoCareFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMDLStereoCareFlag(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MDL_USER_INITIALS property of <em>molgraph</em> to <em>initials</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MDL_USER_INITIALS property of the molecular graph <em>molgraph</em> to <em>initials</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param initials The new MDL user initials.
 # 
 def setMDLUserInitials(molgraph: MolecularGraph, initials: str) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MDL_USER_INITIALS property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MDL_USER_INITIALS property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLUserInitials(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MDL_USER_INITIALS property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MDL_USER_INITIALS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL user initials.
 # 
 def getMDLUserInitials(molgraph: MolecularGraph) -> str: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MDL_USER_INITIALS property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MDL_USER_INITIALS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMDLUserInitials(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MDL_USER_INITIALS property of <em>rxn</em> to <em>initials</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MDL_USER_INITIALS property of the reaction <em>rxn</em> to <em>initials</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param initials The new MDL user initials.
 # 
 def setMDLUserInitials(rxn: Reaction, initials: str) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MDL_USER_INITIALS property.
+# \brief Tells whether the Chem.ReactionProperty.MDL_USER_INITIALS property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLUserInitials(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MDL_USER_INITIALS property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MDL_USER_INITIALS property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored MDL user initials.
 # 
 def getMDLUserInitials(rxn: Reaction) -> str: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MDL_USER_INITIALS property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MDL_USER_INITIALS property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMDLUserInitials(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MOL2_CHARGE property of <em>atom</em> to <em>charge</em>.
+# \brief Sets the value of the Chem.AtomProperty.MOL2_CHARGE property of the atom <em>atom</em> to <em>charge</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param charge The new Sybyl partial charge.
 # 
 def setMOL2Charge(atom: Atom, charge: float) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MOL2_CHARGE property.
+# \brief Tells whether the Chem.AtomProperty.MOL2_CHARGE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2Charge(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MOL2_CHARGE property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MOL2_CHARGE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored Sybyl partial charge.
 # 
 def getMOL2Charge(atom: Atom) -> float: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MOL2_CHARGE property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MOL2_CHARGE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMOL2Charge(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property of <em>molgraph</em> to <em>type</em> (see namespace Chem.MOL2ChargeType).
+# \brief Sets the value of the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property of the molecular graph <em>molgraph</em> to <em>type</em> (see namespace Chem.MOL2ChargeType).
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param type The new MOL2 charge type.
 # 
 def setMOL2ChargeType(molgraph: MolecularGraph, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2ChargeType(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property of <em>molgraph</em> (see namespace Chem.MOL2ChargeType).
+# \brief Returns the value of the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property of the molecular graph <em>molgraph</em> (see namespace Chem.MOL2ChargeType).
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MOL2 charge type.
 # 
 def getMOL2ChargeType(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMOL2ChargeType(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property of <em>molgraph</em> to <em>type</em> (see namespace Chem.MOL2MoleculeType).
+# \brief Sets the value of the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property of the molecular graph <em>molgraph</em> to <em>type</em> (see namespace Chem.MOL2MoleculeType).
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param type The new MOL2 molecule type.
 # 
 def setMOL2MoleculeType(molgraph: MolecularGraph, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2MoleculeType(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property of <em>molgraph</em> (see namespace Chem.MOL2MoleculeType).
+# \brief Returns the value of the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property of the molecular graph <em>molgraph</em> (see namespace Chem.MOL2MoleculeType).
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MOL2 molecule type.
 # 
 def getMOL2MoleculeType(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMOL2MoleculeType(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MOL2_NAME property of <em>atom</em> to <em>name</em>.
+# \brief Sets the value of the Chem.AtomProperty.MOL2_NAME property of the atom <em>atom</em> to <em>name</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param name The new MOL2 atom name.
 # 
 def setMOL2Name(atom: Atom, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MOL2_NAME property.
+# \brief Tells whether the Chem.AtomProperty.MOL2_NAME property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2Name(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MOL2_NAME property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MOL2_NAME property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored MOL2 atom name.
 # 
 def getMOL2Name(atom: Atom) -> str: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MOL2_NAME property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MOL2_NAME property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMOL2Name(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property of <em>atom</em> to <em>chain</em>.
+# \brief Sets the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property of the atom <em>atom</em> to <em>chain</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param chain The new MOL2 substructure chain identifier.
 # 
 def setMOL2SubstructureChain(atom: Atom, chain: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property.
+# \brief Tells whether the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2SubstructureChain(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored MOL2 substructure chain identifier.
 # 
 def getMOL2SubstructureChain(atom: Atom) -> str: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_CHAIN property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMOL2SubstructureChain(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property of <em>atom</em> to <em>id</em>.
+# \brief Sets the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property of the atom <em>atom</em> to <em>id</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param id The new MOL2 substructure ID.
 # 
 def setMOL2SubstructureID(atom: Atom, id: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property.
+# \brief Tells whether the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2SubstructureID(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored MOL2 substructure ID.
 # 
 def getMOL2SubstructureID(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_ID property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMOL2SubstructureID(atom: Atom) -> None: pass
 
@@ -2068,93 +2068,93 @@ def clearMOL2SubstructureID(atom: Atom) -> None: pass
 def setMOL2SubstructureName(atom: Atom, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MOL2_SUBSTRUCTURE_NAME property.
+# \brief Tells whether the Chem.AtomProperty.MOL2_SUBSTRUCTURE_NAME property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2SubstructureName(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MOL2_SUBSTRUCTURE_NAME property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_NAME property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored MOL2 substructure name.
 # 
 def getMOL2SubstructureName(atom: Atom) -> str: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MOL2_SUBSTRUCTURE_NAME property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_NAME property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMOL2SubstructureName(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property of <em>atom</em> to <em>subtype</em>.
+# \brief Sets the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property of the atom <em>atom</em> to <em>subtype</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param subtype The new MOL2 substructure subtype string.
 # 
 def setMOL2SubstructureSubtype(atom: Atom, subtype: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property.
+# \brief Tells whether the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2SubstructureSubtype(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored MOL2 substructure subtype string.
 # 
 def getMOL2SubstructureSubtype(atom: Atom) -> str: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MOL2_SUBSTRUCTURE_SUBTYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMOL2SubstructureSubtype(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MATCH_CONSTRAINTS property of <em>atom</em> to <em>constr</em>.
+# \brief Sets the value of the Chem.AtomProperty.MATCH_CONSTRAINTS property of the atom <em>atom</em> to <em>constr</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param constr The new match-constraint list.
 # 
 def setMatchConstraints(atom: Atom, constr: MatchConstraintList) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MATCH_CONSTRAINTS property.
+# \brief Tells whether the Chem.AtomProperty.MATCH_CONSTRAINTS property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMatchConstraints(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MATCH_CONSTRAINTS property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MATCH_CONSTRAINTS property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored match-constraint list.
 # 
 def getMatchConstraints(atom: Atom) -> MatchConstraintList: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MATCH_CONSTRAINTS property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MATCH_CONSTRAINTS property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMatchConstraints(atom: Atom) -> None: pass
 
@@ -2192,101 +2192,101 @@ def getMatchConstraints(bond: Bond) -> MatchConstraintList: pass
 def clearMatchConstraints(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property of <em>molgraph</em> to <em>constr</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property of the molecular graph <em>molgraph</em> to <em>constr</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param constr The new top-level match-constraint list.
 # 
 def setMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMatchConstraints(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored top-level match-constraint list.
 # 
 def getMatchConstraints(molgraph: MolecularGraph) -> MatchConstraintList: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMatchConstraints(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MATCH_CONSTRAINTS property of <em>rxn</em> to <em>constr</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MATCH_CONSTRAINTS property of the reaction <em>rxn</em> to <em>constr</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param constr The new match-constraint list to store.
 # 
 def setMatchConstraints(rxn: Reaction, constr: MatchConstraintList) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MATCH_CONSTRAINTS property.
+# \brief Tells whether the Chem.ReactionProperty.MATCH_CONSTRAINTS property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMatchConstraints(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MATCH_CONSTRAINTS property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MATCH_CONSTRAINTS property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored top-level match-constraint list.
 # 
 def getMatchConstraints(rxn: Reaction) -> MatchConstraintList: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MATCH_CONSTRAINTS property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MATCH_CONSTRAINTS property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMatchConstraints(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MATCH_EXPRESSION property of <em>atom</em> to <em>expr</em>.
+# \brief Sets the value of the Chem.AtomProperty.MATCH_EXPRESSION property of the atom <em>atom</em> to <em>expr</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param expr The new atom-level match expression.
 # 
 def setMatchExpression(atom: Atom, expr: AtomMatchExpression) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MATCH_EXPRESSION property.
+# \brief Tells whether the Chem.AtomProperty.MATCH_EXPRESSION property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMatchExpression(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MATCH_EXPRESSION property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MATCH_EXPRESSION property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored atom-level match expression.
 # 
 def getMatchExpression(atom: Atom) -> AtomMatchExpression: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MATCH_EXPRESSION property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MATCH_EXPRESSION property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMatchExpression(atom: Atom) -> None: pass
 
@@ -2324,101 +2324,101 @@ def getMatchExpression(bond: Bond) -> BondMatchExpression: pass
 def clearMatchExpression(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.MATCH_EXPRESSION property of <em>molgraph</em> to <em>expr</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.MATCH_EXPRESSION property of the molecular graph <em>molgraph</em> to <em>expr</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param expr The new top-level match expression.
 # 
 def setMatchExpression(molgraph: MolecularGraph, expr: MolecularGraphMatchExpression) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.MATCH_EXPRESSION property.
+# \brief Tells whether the Chem.MolecularGraphProperty.MATCH_EXPRESSION property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMatchExpression(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.MATCH_EXPRESSION property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.MATCH_EXPRESSION property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored top-level match expression.
 # 
 def getMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpression: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.MATCH_EXPRESSION property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.MATCH_EXPRESSION property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMatchExpression(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.MATCH_EXPRESSION property of <em>rxn</em> to <em>expr</em>.
+# \brief Sets the value of the Chem.ReactionProperty.MATCH_EXPRESSION property of the reaction <em>rxn</em> to <em>expr</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param expr The new match expression to store.
 # 
 def setMatchExpression(rxn: Reaction, expr: ReactionMatchExpression) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.MATCH_EXPRESSION property.
+# \brief Tells whether the Chem.ReactionProperty.MATCH_EXPRESSION property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMatchExpression(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.MATCH_EXPRESSION property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.MATCH_EXPRESSION property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored top-level reaction match expression.
 # 
 def getMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.MATCH_EXPRESSION property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.MATCH_EXPRESSION property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearMatchExpression(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MATCH_EXPRESSION_STRING property of <em>atom</em> to <em>expr_str</em>.
+# \brief Sets the value of the Chem.AtomProperty.MATCH_EXPRESSION_STRING property of the atom <em>atom</em> to <em>expr_str</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param expr_str The new match-expression string.
 # 
 def setMatchExpressionString(atom: Atom, expr_str: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MATCH_EXPRESSION_STRING property.
+# \brief Tells whether the Chem.AtomProperty.MATCH_EXPRESSION_STRING property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMatchExpressionString(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MATCH_EXPRESSION_STRING property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MATCH_EXPRESSION_STRING property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored match-expression string.
 # 
 def getMatchExpressionString(atom: Atom) -> str: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MATCH_EXPRESSION_STRING property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MATCH_EXPRESSION_STRING property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMatchExpressionString(atom: Atom) -> None: pass
 
@@ -2483,7 +2483,7 @@ def getMaxAtomMappingID(rxn: Reaction) -> int: pass
 def getMaxComponentGroupID(cntnr: AtomContainer) -> int: pass
 
 ##
-# \brief Returns the largest component-group ID found on any of the components of <em>rxn</em>.
+# \brief Returns the largest component-group ID found on any of the components of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to scan.
 # 
@@ -2492,134 +2492,134 @@ def getMaxComponentGroupID(cntnr: AtomContainer) -> int: pass
 def getMaxComponentGroupID(rxn: Reaction) -> int: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.MORGAN_NUMBER property of <em>atom</em> to <em>num</em>.
+# \brief Sets the value of the Chem.AtomProperty.MORGAN_NUMBER property of the atom <em>atom</em> to <em>num</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param num The new Morgan number.
 # 
 def setMorganNumber(atom: Atom, num: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.MORGAN_NUMBER property.
+# \brief Tells whether the Chem.AtomProperty.MORGAN_NUMBER property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMorganNumber(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.MORGAN_NUMBER property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.MORGAN_NUMBER property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored Morgan number.
 # 
 def getMorganNumber(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.MORGAN_NUMBER property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.MORGAN_NUMBER property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMorganNumber(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.NAME property of <em>atom</em> to <em>name</em>.
+# \brief Sets the value of the Chem.AtomProperty.NAME property of the atom <em>atom</em> to <em>name</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param name The new atom name.
 # 
 def setName(atom: Atom, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.NAME property.
+# \brief Tells whether the Chem.AtomProperty.NAME property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasName(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.NAME property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.NAME property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored atom name.
 # 
 def getName(atom: Atom) -> str: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.NAME property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.NAME property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearName(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.NAME property of <em>molgraph</em> to <em>name</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.NAME property of the molecular graph <em>molgraph</em> to <em>name</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param name The new name.
 # 
 def setName(molgraph: MolecularGraph, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.NAME property.
+# \brief Tells whether the Chem.MolecularGraphProperty.NAME property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasName(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.NAME property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.NAME property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored name.
 # 
 def getName(molgraph: MolecularGraph) -> str: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.NAME property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.NAME property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearName(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.NAME property of <em>rxn</em> to <em>name</em>.
+# \brief Sets the value of the Chem.ReactionProperty.NAME property of the reaction <em>rxn</em> to <em>name</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param name The new reaction name.
 # 
 def setName(rxn: Reaction, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.NAME property.
+# \brief Tells whether the Chem.ReactionProperty.NAME property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasName(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.NAME property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.NAME property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored reaction name.
 # 
 def getName(rxn: Reaction) -> str: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.NAME property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.NAME property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearName(rxn: Reaction) -> None: pass
 
@@ -2633,7 +2633,7 @@ def clearName(rxn: Reaction) -> None: pass
 def getNumConformations(cntnr: AtomContainer) -> int: pass
 
 ##
-# \brief Returns the number of fragments in <em>frag_list</em> that contain <em>atom</em>.
+# \brief Returns the number of fragments in <em>frag_list</em> that contain the atom <em>atom</em>.
 # 
 # \param atom The atom to query.
 # \param frag_list The list of fragments to search.
@@ -2686,101 +2686,101 @@ def getOrder(bond: Bond) -> int: pass
 def clearOrder(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property of <em>molgraph</em> to <em>pi_systems</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property of the molecular graph <em>molgraph</em> to <em>pi_systems</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param pi_systems The new pi-electron-system list.
 # 
 def setPiElectronSystems(molgraph: MolecularGraph, pi_systems: ElectronSystemList) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property.
+# \brief Tells whether the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasPiElectronSystems(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored pi-electron-system list.
 # 
 def getPiElectronSystems(molgraph: MolecularGraph) -> ElectronSystemList: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.PI_ELECTRON_SYSTEMS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearPiElectronSystems(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.RADICAL_TYPE property of <em>atom</em> to <em>type</em> (see namespace Chem.RadicalType).
+# \brief Sets the value of the Chem.AtomProperty.RADICAL_TYPE property of the atom <em>atom</em> to <em>type</em> (see namespace Chem.RadicalType).
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param type The new radical type.
 # 
 def setRadicalType(atom: Atom, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.RADICAL_TYPE property.
+# \brief Tells whether the Chem.AtomProperty.RADICAL_TYPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasRadicalType(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.RADICAL_TYPE property of <em>atom</em> (see namespace Chem.RadicalType).
+# \brief Returns the value of the Chem.AtomProperty.RADICAL_TYPE property of the atom <em>atom</em> (see namespace Chem.RadicalType).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored radical type.
 # 
 def getRadicalType(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.RADICAL_TYPE property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.RADICAL_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearRadicalType(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.REACTION_CENTER_STATUS property of <em>atom</em> to <em>status</em>.
+# \brief Sets the value of the Chem.AtomProperty.REACTION_CENTER_STATUS property of the atom <em>atom</em> to <em>status</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param status The new reaction-center status.
 # 
 def setReactionCenterStatus(atom: Atom, status: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.REACTION_CENTER_STATUS property.
+# \brief Tells whether the Chem.AtomProperty.REACTION_CENTER_STATUS property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionCenterStatus(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.REACTION_CENTER_STATUS property of <em>atom</em> (see namespace Chem.ReactionCenterStatus).
+# \brief Returns the value of the Chem.AtomProperty.REACTION_CENTER_STATUS property of the atom <em>atom</em> (see namespace Chem.ReactionCenterStatus).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored reaction-center status.
 # 
 def getReactionCenterStatus(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.REACTION_CENTER_STATUS property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.REACTION_CENTER_STATUS property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearReactionCenterStatus(atom: Atom) -> None: pass
 
@@ -2818,68 +2818,68 @@ def getReactionCenterStatus(bond: Bond) -> int: pass
 def clearReactionCenterStatus(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.REACTION_DATA property of <em>rxn</em> to <em>data</em>.
+# \brief Sets the value of the Chem.ReactionProperty.REACTION_DATA property of the reaction <em>rxn</em> to <em>data</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param data The new MDL reaction data block.
 # 
 def setReactionData(rxn: Reaction, data: StringDataBlock) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.REACTION_DATA property.
+# \brief Tells whether the Chem.ReactionProperty.REACTION_DATA property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionData(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.REACTION_DATA property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.REACTION_DATA property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored MDL reaction data block.
 # 
 def getReactionData(rxn: Reaction) -> StringDataBlock: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.REACTION_DATA property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.REACTION_DATA property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearReactionData(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.RING_FLAG property of <em>atom</em> to <em>in_ring</em>.
+# \brief Sets the value of the Chem.AtomProperty.RING_FLAG property of the atom <em>atom</em> to <em>in_ring</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param in_ring <tt>True</tt> to flag the atom as part of a ring, and <tt>False</tt> to flag it as acyclic.
 # 
 def setRingFlag(atom: Atom, in_ring: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.RING_FLAG property.
+# \brief Tells whether the Chem.AtomProperty.RING_FLAG property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasRingFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.RING_FLAG property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.RING_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return <tt>True</tt> if the atom is flagged as part of any ring, and <tt>False</tt> otherwise.
 # 
 def getRingFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.RING_FLAG property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.RING_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearRingFlag(atom: Atom) -> None: pass
 
@@ -2925,73 +2925,73 @@ def clearRingFlag(bond: Bond) -> None: pass
 def setRingFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.RINGS property of <em>molgraph</em> to <em>rings</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.RINGS property of the molecular graph <em>molgraph</em> to <em>rings</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param rings The new full ring set.
 # 
 def setRings(molgraph: MolecularGraph, rings: FragmentList) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.RINGS property.
+# \brief Tells whether the Chem.MolecularGraphProperty.RINGS property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasRings(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.RINGS property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.RINGS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored full ring set.
 # 
 def getRings(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.RINGS property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.RINGS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearRings(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.SSSR property of <em>molgraph</em> to <em>sssr</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.SSSR property of the molecular graph <em>molgraph</em> to <em>sssr</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param sssr The new Smallest Set of Smallest Rings.
 # 
 def setSSSR(molgraph: MolecularGraph, sssr: FragmentList) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.SSSR property.
+# \brief Tells whether the Chem.MolecularGraphProperty.SSSR property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasSSSR(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.SSSR property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.SSSR property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored Smallest Set of Smallest Rings.
 # 
 def getSSSR(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.SSSR property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.SSSR property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearSSSR(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Returns the size (in atoms) of the largest fragment in <em>frag_list</em> that contains <em>atom</em>.
+# \brief Returns the size (in atoms) of the largest fragment in <em>frag_list</em> that contains the atom <em>atom</em>.
 # 
 # \param atom The atom to query.
 # \param frag_list The list of fragments to search.
@@ -3011,7 +3011,7 @@ def getSizeOfLargestContainingFragment(atom: Atom, frag_list: FragmentList) -> i
 def getSizeOfLargestContainingFragment(bond: Bond, frag_list: FragmentList) -> int: pass
 
 ##
-# \brief Returns the size (in atoms) of the smallest fragment in <em>frag_list</em> that contains <em>atom</em>.
+# \brief Returns the size (in atoms) of the smallest fragment in <em>frag_list</em> that contains the atom <em>atom</em>.
 # 
 # \param atom The atom to query.
 # \param frag_list The list of fragments to search.
@@ -3031,35 +3031,35 @@ def getSizeOfSmallestContainingFragment(atom: Atom, frag_list: FragmentList) -> 
 def getSizeOfSmallestContainingFragment(bond: Bond, frag_list: FragmentList) -> int: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.STEREO_CENTER_FLAG property of <em>atom</em> to <em>is_center</em>.
+# \brief Sets the value of the Chem.AtomProperty.STEREO_CENTER_FLAG property of the atom <em>atom</em> to <em>is_center</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param is_center <tt>True</tt> to flag the atom as a stereo center, and <tt>False</tt> otherwise.
 # 
 def setStereoCenterFlag(atom: Atom, is_center: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.STEREO_CENTER_FLAG property.
+# \brief Tells whether the Chem.AtomProperty.STEREO_CENTER_FLAG property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasStereoCenterFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.STEREO_CENTER_FLAG property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.STEREO_CENTER_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return <tt>True</tt> if the atom is flagged as a stereo center, and <tt>False</tt> otherwise.
 # 
 def getStereoCenterFlag(atom: Atom) -> bool: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.STEREO_CENTER_FLAG property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.STEREO_CENTER_FLAG property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearStereoCenterFlag(atom: Atom) -> None: pass
 
@@ -3097,35 +3097,35 @@ def getStereoCenterFlag(bond: Bond) -> bool: pass
 def clearStereoCenterFlag(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.STEREO_DESCRIPTOR property of <em>atom</em> to <em>descr</em>.
+# \brief Sets the value of the Chem.AtomProperty.STEREO_DESCRIPTOR property of the atom <em>atom</em> to <em>descr</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param descr The new stereo descriptor.
 # 
 def setStereoDescriptor(atom: Atom, descr: StereoDescriptor) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.STEREO_DESCRIPTOR property.
+# \brief Tells whether the Chem.AtomProperty.STEREO_DESCRIPTOR property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasStereoDescriptor(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.STEREO_DESCRIPTOR property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.STEREO_DESCRIPTOR property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored stereo descriptor.
 # 
 def getStereoDescriptor(atom: Atom) -> StereoDescriptor: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.STEREO_DESCRIPTOR property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.STEREO_DESCRIPTOR property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearStereoDescriptor(atom: Atom) -> None: pass
 
@@ -3163,68 +3163,68 @@ def getStereoDescriptor(bond: Bond) -> StereoDescriptor: pass
 def clearStereoDescriptor(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property of <em>molgraph</em> to <em>num</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property of the molecular graph <em>molgraph</em> to <em>num</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param num The new stoichiometric number.
 # 
 def setStoichiometricNumber(molgraph: MolecularGraph, num: float) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property.
+# \brief Tells whether the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasStoichiometricNumber(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored stoichiometric number.
 # 
 def getStoichiometricNumber(molgraph: MolecularGraph) -> float: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.STOICHIOMETRIC_NUMBER property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearStoichiometricNumber(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.STRUCTURE_DATA property of <em>molgraph</em> to <em>data</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.STRUCTURE_DATA property of the molecular graph <em>molgraph</em> to <em>data</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param data The new MDL structure-data block.
 # 
 def setStructureData(molgraph: MolecularGraph, data: StringDataBlock) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.STRUCTURE_DATA property.
+# \brief Tells whether the Chem.MolecularGraphProperty.STRUCTURE_DATA property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasStructureData(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.STRUCTURE_DATA property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.STRUCTURE_DATA property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored MDL structure-data block.
 # 
 def getStructureData(molgraph: MolecularGraph) -> StringDataBlock: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.STRUCTURE_DATA property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.STRUCTURE_DATA property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearStructureData(molgraph: MolecularGraph) -> None: pass
 
@@ -3247,35 +3247,35 @@ def getSybylAtomTypeString(sybyl_type: int) -> str: pass
 def getSybylBondTypeString(sybyl_type: int) -> str: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.SYBYL_TYPE property of <em>atom</em> to <em>type</em> (see namespace Chem.SybylAtomType).
+# \brief Sets the value of the Chem.AtomProperty.SYBYL_TYPE property of the atom <em>atom</em> to <em>type</em> (see namespace Chem.SybylAtomType).
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param type The new Sybyl atom type code.
 # 
 def setSybylType(atom: Atom, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.SYBYL_TYPE property.
+# \brief Tells whether the Chem.AtomProperty.SYBYL_TYPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasSybylType(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.SYBYL_TYPE property of <em>atom</em> (see namespace Chem.SybylAtomType).
+# \brief Returns the value of the Chem.AtomProperty.SYBYL_TYPE property of the atom <em>atom</em> (see namespace Chem.SybylAtomType).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored Sybyl atom type code.
 # 
 def getSybylType(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.SYBYL_TYPE property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.SYBYL_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearSybylType(atom: Atom) -> None: pass
 
@@ -3313,40 +3313,40 @@ def getSybylType(bond: Bond) -> int: pass
 def clearSybylType(bond: Bond) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.SYMBOL property of <em>atom</em> to <em>symbol</em>.
+# \brief Sets the value of the Chem.AtomProperty.SYMBOL property of the atom <em>atom</em> to <em>symbol</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param symbol The new element symbol.
 # 
 def setSymbol(atom: Atom, symbol: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.SYMBOL property.
+# \brief Tells whether the Chem.AtomProperty.SYMBOL property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasSymbol(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.SYMBOL property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.SYMBOL property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored element symbol.
 # 
 def getSymbol(atom: Atom) -> str: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.SYMBOL property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.SYMBOL property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearSymbol(atom: Atom) -> None: pass
 
 ##
-# \brief Returns the element symbol that corresponds to the Chem.AtomProperty.TYPE of <em>atom</em>.
+# \brief Returns the element symbol that corresponds to the Chem.AtomProperty.TYPE property of the atom <em>atom</em>.
 # 
 # \param atom The atom to query.
 # 
@@ -3355,101 +3355,101 @@ def clearSymbol(atom: Atom) -> None: pass
 def getSymbolForType(atom: Atom) -> str: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.SYMMETRY_CLASS property of <em>atom</em> to <em>class_id</em>.
+# \brief Sets the value of the Chem.AtomProperty.SYMMETRY_CLASS property of the atom <em>atom</em> to <em>class_id</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param class_id The new topological-symmetry class ID.
 # 
 def setSymmetryClass(atom: Atom, class_id: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.SYMMETRY_CLASS property.
+# \brief Tells whether the Chem.AtomProperty.SYMMETRY_CLASS property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasSymmetryClass(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.SYMMETRY_CLASS property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.SYMMETRY_CLASS property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored topological-symmetry class ID.
 # 
 def getSymmetryClass(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.SYMMETRY_CLASS property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.SYMMETRY_CLASS property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearSymmetryClass(atom: Atom) -> None: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.TIMESTAMP property of <em>molgraph</em> to <em>time</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.TIMESTAMP property of the molecular graph <em>molgraph</em> to <em>time</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param time The new timestamp value.
 # 
 def setTimestamp(molgraph: MolecularGraph, time: int) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.TIMESTAMP property.
+# \brief Tells whether the Chem.MolecularGraphProperty.TIMESTAMP property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasTimestamp(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.TIMESTAMP property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.TIMESTAMP property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored timestamp.
 # 
 def getTimestamp(molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.TIMESTAMP property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.TIMESTAMP property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearTimestamp(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.ReactionProperty.TIMESTAMP property of <em>rxn</em> to <em>time</em>.
+# \brief Sets the value of the Chem.ReactionProperty.TIMESTAMP property of the reaction <em>rxn</em> to <em>time</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to set the property value.
 # \param time The new timestamp value.
 # 
 def setTimestamp(rxn: Reaction, time: int) -> None: pass
 
 ##
-# \brief Tells whether <em>rxn</em> carries the Chem.ReactionProperty.TIMESTAMP property.
+# \brief Tells whether the Chem.ReactionProperty.TIMESTAMP property of the reaction <em>rxn</em> is set.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasTimestamp(rxn: Reaction) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ReactionProperty.TIMESTAMP property of <em>rxn</em>.
+# \brief Returns the value of the Chem.ReactionProperty.TIMESTAMP property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to query.
+# \param rxn The reaction for which to return the property value.
 # 
 # \return The stored timestamp.
 # 
 def getTimestamp(rxn: Reaction) -> int: pass
 
 ##
-# \brief Removes the Chem.ReactionProperty.TIMESTAMP property from <em>rxn</em>.
+# \brief Clears the value of the Chem.ReactionProperty.TIMESTAMP property of the reaction <em>rxn</em>.
 # 
-# \param rxn The reaction to modify.
+# \param rxn The reaction for which to clear the property value.
 # 
 def clearTimestamp(rxn: Reaction) -> None: pass
 
@@ -3465,73 +3465,73 @@ def clearTimestamp(rxn: Reaction) -> None: pass
 def getTopologicalDistance(atom1: Atom, atom2: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Sets the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property of <em>molgraph</em> to <em>mtx</em>.
+# \brief Sets the value of the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em> to <em>mtx</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to set the property value.
 # \param mtx The new topological-distance matrix.
 # 
 def setTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.ULMatrix) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property.
+# \brief Tells whether the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasTopologicalDistanceMatrix(molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property of <em>molgraph</em>.
+# \brief Returns the value of the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to query.
+# \param molgraph The molecular graph for which to return the property value.
 # 
 # \return The stored topological-distance matrix.
 # 
 def getTopologicalDistanceMatrix(molgraph: MolecularGraph) -> Math.ULMatrix: pass
 
 ##
-# \brief Removes the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property from <em>molgraph</em>.
+# \brief Clears the value of the Chem.MolecularGraphProperty.TOPOLOGICAL_DISTANCE_MATRIX property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to modify.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearTopologicalDistanceMatrix(molgraph: MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.TYPE property of <em>atom</em> to <em>type</em> (see namespace Chem.AtomType).
+# \brief Sets the value of the Chem.AtomProperty.TYPE property of the atom <em>atom</em> to <em>type</em> (see namespace Chem.AtomType).
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to set the property value.
 # \param type The new atom type.
 # 
 def setType(atom: Atom, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.TYPE property.
+# \brief Tells whether the Chem.AtomProperty.TYPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasType(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.TYPE property of <em>atom</em> (see namespace Chem.AtomType).
+# \brief Returns the value of the Chem.AtomProperty.TYPE property of the atom <em>atom</em> (see namespace Chem.AtomType).
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
 # \return The stored atom type.
 # 
 def getType(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.TYPE property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearType(atom: Atom) -> None: pass
 
 ##
-# \brief Returns the atom type that corresponds to the Chem.AtomProperty.SYMBOL of <em>atom</em>.
+# \brief Returns the atom type that corresponds to the Chem.AtomProperty.SYMBOL property of the atom <em>atom</em>.
 # 
 # \param atom The atom to query.
 # 
@@ -3540,35 +3540,35 @@ def clearType(atom: Atom) -> None: pass
 def getTypeForSymbol(atom: Atom) -> int: pass
 
 ##
-# \brief Sets the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property of <em>atom</em> to <em>count</em>.
+# \brief Sets the value of the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property of the atom <em>atom</em> to <em>count</em>.
 # 
-# \param atom The atom to modify.
-# \param count The new unpaired-electron count.
+# \param atom The atom for which to set the property value.
+# \param count The new unpaired electron count.
 # 
 def setUnpairedElectronCount(atom: Atom, count: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property.
+# \brief Tells whether the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasUnpairedElectronCount(atom: Atom) -> bool: pass
 
 ##
-# \brief Returns the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property of <em>atom</em>.
+# \brief Returns the value of the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property of the atom <em>atom</em>.
 # 
-# \param atom The atom to query.
+# \param atom The atom for which to return the property value.
 # 
-# \return The stored unpaired-electron count.
+# \return The stored unpaired electron count.
 # 
 def getUnpairedElectronCount(atom: Atom) -> int: pass
 
 ##
-# \brief Removes the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property from <em>atom</em>.
+# \brief Clears the value of the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property of the atom <em>atom</em>.
 # 
-# \param atom The atom to modify.
+# \param atom The atom for which to clear the property value.
 # 
 def clearUnpairedElectronCount(atom: Atom) -> None: pass
 
@@ -3595,7 +3595,7 @@ def addConformation(molgraph: MolecularGraph, coords: Math.Vector3DArray, energy
 # \param molgraph The molecular graph to align.
 # \param atoms The atoms used as alignment anchors.
 # \param ref_coords Reference 2D coordinates of the alignment-anchor atoms.
-# \param fix_bond_stereo If <tt>True</tt>, post-process bond stereo flags so that they remain consistent with the aligned coordinates.
+# \param fix_bond_stereo If <tt>True</tt>, postprocess bond stereo flags so that they remain consistent with the aligned coordinates.
 # 
 # \return <tt>True</tt> if the alignment succeeded, and <tt>False</tt> otherwise. 
 # 
@@ -3608,7 +3608,7 @@ def align2DCoordinates(molgraph: MolecularGraph, atoms: AtomContainer, ref_coord
 # 
 # \param molgraph The molecular graph to align.
 # \param ref_atom_mpg The atom mapping providing the target atom→atom correspondence.
-# \param fix_bond_stereo If <tt>True</tt>, post-process bond stereo flags so that they remain consistent with the aligned coordinates.
+# \param fix_bond_stereo If <tt>True</tt>, postprocess bond stereo flags so that they remain consistent with the aligned coordinates.
 # 
 # \return <tt>True</tt> if the alignment succeeded, and <tt>False</tt> otherwise. 
 # 
@@ -3632,7 +3632,7 @@ def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, u
 # \param molgraph The molecular graph to align.
 # \param ref_molgraph The reference molecular graph providing the target coordinates.
 # \param substr_ptn The substructure pattern that defines the atom correspondence.
-# \param fix_bond_stereo If <tt>True</tt>, post-process bond stereo flags so that they remain consistent with the aligned coordinates.
+# \param fix_bond_stereo If <tt>True</tt>, postprocess bond stereo flags so that they remain consistent with the aligned coordinates.
 # 
 # \return <tt>True</tt> if the alignment succeeded, and <tt>False</tt> otherwise. 
 # 
@@ -3730,7 +3730,7 @@ def atomTypesMatch(qry_type: int, tgt_type: int) -> bool: pass
 def calc2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes and stores CIP configuration labels for the atoms of <em>molgraph</em>.
+# \brief Computes and stores CIP configuration labels for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing CIP configuration labels.
@@ -3738,7 +3738,7 @@ def calc2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 def calcAtomCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Derives atom stereo descriptors of <em>molgraph</em> from previously-assigned MDL parities.
+# \brief Derives atom stereo descriptors of the molecular graph <em>molgraph</em> from previously-assigned MDL parities.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing stereo descriptors.
@@ -3746,7 +3746,7 @@ def calcAtomCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None
 def calcAtomStereoDescriptorsFromMDLParities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes and stores stereo descriptors for the atoms of <em>molgraph</em> from their geometric layout.
+# \brief Computes and stores stereo descriptors for the atoms of the molecular graph <em>molgraph</em> from their geometric layout.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing stereo descriptors.
@@ -3756,7 +3756,7 @@ def calcAtomStereoDescriptorsFromMDLParities(molgraph: MolecularGraph, overwrite
 def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1, check_stc_flag: bool = True) -> None: pass
 
 ##
-# \brief Computes the basic per-atom/per-bond properties (aromaticity, ring info, etc.) of <em>molgraph</em>.
+# \brief Computes the basic per-atom/per-bond properties (aromaticity, ring info, etc.) of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
@@ -3766,7 +3766,7 @@ def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 def calcBasicProperties(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes the basic per-component properties (aromaticity, ring info, etc.) of every component of <em>rxn</em>.
+# \brief Computes the basic per-component properties (aromaticity, ring info, etc.) of every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
 # \param overwrite If <tt>True</tt>, recomputes derived data; if <tt>False</tt>, leaves up-to-date data unchanged.
@@ -3776,7 +3776,7 @@ def calcBasicProperties(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 def calcBasicProperties(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
-# \brief Derives 2D wedge/hash bond stereo flags for the bonds of <em>molgraph</em> from the atoms' stereo descriptors and 2D layout.
+# \brief Derives 2D wedge/hash bond stereo flags for the bonds of the molecular graph <em>molgraph</em> from the atoms' stereo descriptors and 2D layout.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing 2D stereo flags.
@@ -3784,7 +3784,7 @@ def calcBasicProperties(rxn: Reaction, overwrite: bool) -> None: pass
 def calcBond2DStereoFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes and stores CIP configuration labels for the bonds of <em>molgraph</em>.
+# \brief Computes and stores CIP configuration labels for the bonds of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing CIP configuration labels.
@@ -3792,7 +3792,7 @@ def calcBond2DStereoFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pa
 def calcBondCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes and stores stereo descriptors for the bonds of <em>molgraph</em> from their geometric layout.
+# \brief Computes and stores stereo descriptors for the bonds of the molecular graph <em>molgraph</em> from their geometric layout.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing stereo descriptors.
@@ -3823,7 +3823,7 @@ def calcBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D
 def calcBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D, reset: bool = True) -> None: pass
 
 ##
-# \brief Computes and stores CIP priorities for the atoms of <em>molgraph</em>.
+# \brief Computes and stores CIP priorities for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing CIP-priority values.
@@ -3831,7 +3831,7 @@ def calcBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vect
 def calcCIPPriorities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes and stores canonical atom numbers for the atoms of <em>molgraph</em>.
+# \brief Computes and stores canonical atom numbers for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing canonical numbers.
@@ -3875,8 +3875,8 @@ def calcCentroid(cntnr: Entity3DContainer, ctr: Math.Vector3D) -> bool: pass
 ##
 # \brief Derives the atom configuration label from the supplied descriptor and 3D coordinates.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to calculate the configuration.
+# \param molgraph The molecular graph providing the structural context.
 # \param descr The stereo descriptor whose configuration is to be evaluated.
 # \param coords The 3D atomic coordinates used by the evaluation.
 # 
@@ -3897,17 +3897,17 @@ def calcConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDescrip
 def calcConfiguration(bond: Bond, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
 
 ##
-# \brief Computes the formal charge of <em>atom</em> from its valence environment in <em>molgraph</em>.
+# \brief Computes the formal charge of the atom <em>atom</em> from its valence environment in <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to calculate the charge.
+# \param molgraph The molecular graph providing the structural context.
 # 
 # \return The computed formal charge.
 # 
 def calcFormalCharge(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Computes and stores formal charges for the atoms of <em>molgraph</em> from their valence environment.
+# \brief Computes and stores formal charges for the atoms of the molecular graph <em>molgraph</em> from their valence environment.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing formal charges.
@@ -3923,7 +3923,7 @@ def calcFormalCharges(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 def calcGeometricalDistanceMatrix(cntnr: Entity3DContainer, mtx: Math.DMatrix) -> None: pass
 
 ##
-# \brief Computes and (optionally) stores the geometrical-distance matrix of <em>molgraph</em> from its 3D coordinates.
+# \brief Computes and (optionally) stores the geometrical-distance matrix of the molecular graph <em>molgraph</em> from its 3D coordinates.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing geometrical-distance matrix.
@@ -3958,7 +3958,7 @@ def calcHashCode(molgraph: MolecularGraph, atom_flags: int = 2147483648, bond_fl
 def calcHashCode(rxn: Reaction, role_mask: int = 7, atom_flags: int = 2147483648, bond_flags: int = 2147483648, ord_h_deplete: bool = True) -> int: pass
 
 ##
-# \brief Computes 3D coordinates for the hydrogen atoms of <em>molgraph</em> from the geometry of their non-hydrogen neighbors.
+# \brief Computes 3D coordinates for the hydrogen atoms of the molecular graph <em>molgraph</em> from the geometry of their non-hydrogen neighbors.
 # 
 # \param molgraph The molecular graph to modify.
 # \param undef_only If <tt>True</tt>, only hydrogens without prior 3D coordinates are placed; if <tt>False</tt>, all hydrogen coordinates are recomputed.
@@ -3966,17 +3966,17 @@ def calcHashCode(rxn: Reaction, role_mask: int = 7, atom_flags: int = 2147483648
 def calcHydrogen3DCoordinates(molgraph: MolecularGraph, undef_only: bool = True) -> None: pass
 
 ##
-# \brief Computes the implicit hydrogen count of <em>atom</em> from its valence environment in <em>molgraph</em>.
+# \brief Computes the implicit hydrogen count of the atom <em>atom</em> from its valence environment in <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to calculate the hydrogen count.
+# \param molgraph The molecular graph providing the structural context.
 # 
 # \return The computed implicit-hydrogen count.
 # 
 def calcImplicitHydrogenCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Computes and stores implicit-hydrogen counts for the atoms of <em>molgraph</em>.
+# \brief Computes and stores implicit-hydrogen counts for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing implicit-hydrogen counts.
@@ -3984,7 +3984,7 @@ def calcImplicitHydrogenCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
 def calcImplicitHydrogenCounts(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes and stores MDL parities for the atoms of <em>molgraph</em>.
+# \brief Computes and stores MDL parities for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing MDL parities.
@@ -3992,17 +3992,17 @@ def calcImplicitHydrogenCounts(molgraph: MolecularGraph, overwrite: bool) -> Non
 def calcMDLParities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes the MDL parity of <em>atom</em> from its 2D layout and stereo flags in <em>molgraph</em>.
+# \brief Computes the MDL parity of the atom <em>atom</em> from its 2D layout and stereo flags in <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to calculate the parity.
+# \param molgraph The molecular graph providing the structural context.
 # 
 # \return The computed MDL parity (see namespace Chem.MDLParity).
 # 
 def calcMDLParity(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Computes and stores Morgan numbers for the atoms of <em>molgraph</em>.
+# \brief Computes and stores Morgan numbers for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing Morgan numbers.
@@ -4010,10 +4010,10 @@ def calcMDLParity(atom: Atom, molgraph: MolecularGraph) -> int: pass
 def calcMorganNumbering(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes the stereo descriptor for <em>atom</em> based on the geometry of <em>molgraph</em>.
+# \brief Computes the stereo descriptor for the atom <em>atom</em> based on the geometry of <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to calculate the stereo descriptor.
+# \param molgraph The molecular graph providing the structural context.
 # \param dim The dimensionality of the atomic coordinates to use (<em>2</em> or <em>3</em>).
 # 
 # \return The computed stereo descriptor.
@@ -4032,17 +4032,17 @@ def calcStereoDescriptor(atom: Atom, molgraph: MolecularGraph, dim: int = 1) -> 
 def calcStereoDescriptor(bond: Bond, molgraph: MolecularGraph, dim: int = 1) -> StereoDescriptor: pass
 
 ##
-# \brief Derives the stereo descriptor of <em>atom</em> from its MDL parity in <em>molgraph</em>.
+# \brief Derives the stereo descriptor of the atom <em>atom</em> from its MDL parity in <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to calculate the stereo descriptor.
+# \param molgraph The molecular graph providing the structural context.
 # 
 # \return The derived stereo descriptor.
 # 
 def calcStereoDescriptorFromMDLParity(atom: Atom, molgraph: MolecularGraph) -> StereoDescriptor: pass
 
 ##
-# \brief Computes and (optionally) stores the topological-distance matrix of <em>molgraph</em>.
+# \brief Computes and (optionally) stores the topological-distance matrix of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing topological-distance matrix.
@@ -4052,7 +4052,7 @@ def calcStereoDescriptorFromMDLParity(atom: Atom, molgraph: MolecularGraph) -> S
 def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> Math.ULMatrix: pass
 
 ##
-# \brief Computes the topological-distance matrix of <em>molgraph</em> into the supplied <em>mtx</em>.
+# \brief Computes the topological-distance matrix of the molecular graph <em>molgraph</em> into the supplied <em>mtx</em>.
 # 
 # \param molgraph The molecular graph to inspect.
 # \param mtx The output dense matrix receiving the topological distances.
@@ -4060,7 +4060,7 @@ def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> 
 def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.ULMatrix) -> None: pass
 
 ##
-# \brief Reorders the atoms (and optionally their neighbors and bonds) of <em>molgraph</em> according to the canonical-numbering attached to its atoms.
+# \brief Reorders the atoms (and optionally their neighbors and bonds) of the molecular graph <em>molgraph</em> according to the canonical-numbering attached to its atoms.
 # 
 # \param molgraph The molecular graph to canonicalize.
 # \param atoms <tt>True</tt> to sort atoms.
@@ -4071,7 +4071,7 @@ def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.ULMatrix) 
 def canonicalize(molgraph: MolecularGraph, atoms: bool = True, atom_nbrs: bool = True, bonds: bool = True, bond_atoms: bool = False) -> None: pass
 
 ##
-# \brief Reorders the atoms (and optionally their neighbors and bonds) of <em>molgraph</em> according to a user-supplied comparator.
+# \brief Reorders the atoms (and optionally their neighbors and bonds) of the molecular graph <em>molgraph</em> according to a user-supplied comparator.
 # 
 # \param molgraph The molecular graph to canonicalize.
 # \param func The atom comparator that defines the canonical ordering.
@@ -4126,8 +4126,8 @@ def containsFragmentWithMinSize(frag_list: FragmentList, min_size: int) -> bool:
 # 
 # \param molgraph The host molecular graph.
 # \param sub_molgraph The candidate sub-graph.
-# \param atoms If <tt>True</tt>, every atom of <em>sub_molgraph</em> must be a member of <em>molgraph</em>.
-# \param bonds If <tt>True</tt>, every bond of <em>sub_molgraph</em> must be a member of <em>molgraph</em>.
+# \param atoms If <tt>True</tt>, every atom of <em>sub_molgraph</em> must be a member of the molecular graph <em>molgraph</em>.
+# \param bonds If <tt>True</tt>, every bond of <em>sub_molgraph</em> must be a member of the molecular graph <em>molgraph</em>.
 # 
 # \return <tt>True</tt> if the requested containment relations all hold, and <tt>False</tt> otherwise.
 # 
@@ -4226,7 +4226,7 @@ def editSubstructures(mol: Molecule, search_ptns: str, result_ptn: str, exclude_
 def extendBoundingBox(min: Math.Vector3D, max: Math.Vector3D, coords: Math.Vector3D, reset: bool = False) -> None: pass
 
 ##
-# \brief Collects every atom and bond of <em>molgraph</em> that carries a reaction-center flag into the fragment <em>rxn_center</em>.
+# \brief Collects every atom and bond of the molecular graph <em>molgraph</em> that carries a reaction-center flag into the fragment <em>rxn_center</em>.
 # 
 # \param molgraph The molecular graph to inspect.
 # \param rxn_center The output fragment receiving the reaction-center atoms and bonds.
@@ -4275,7 +4275,7 @@ def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgra
 def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: Math.ULMatrix) -> None: pass
 
 ##
-# \brief Builds the adjacency matrix of <em>molgraph</em> (entry <tt></tt>(i,j) is the bond count between atoms <tt>i</tt> and <tt>j</tt>).
+# \brief Builds the adjacency matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is the bond count between atoms <tt>i</tt> and <tt>j</tt>).
 # 
 # \param molgraph The molecular graph to inspect.
 # \param mtx The output sparse matrix receiving the adjacency entries.
@@ -4291,7 +4291,7 @@ def generateAdjacencyMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) 
 def generateBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
-# \brief Builds the bond-electron-count matrix of <em>molgraph</em> (entry <tt></tt>(i,j) is the number of bonding electrons between atoms <tt>i</tt> and <tt>j</tt>).
+# \brief Builds the bond-electron-count matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is the number of bonding electrons between atoms <tt>i</tt> and <tt>j</tt>).
 # 
 # \param molgraph The molecular graph to inspect.
 # \param mtx The output sparse matrix receiving the bond-electron counts.
@@ -4299,7 +4299,7 @@ def generateBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatri
 def generateBondElectronMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
-# \brief Builds the bond-order matrix of <em>molgraph</em> (entry <tt></tt>(i,j) is the order of the bond between atoms <tt>i</tt> and <tt>j</tt>).
+# \brief Builds the bond-order matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is the order of the bond between atoms <tt>i</tt> and <tt>j</tt>).
 # 
 # \param molgraph The molecular graph to inspect.
 # \param mtx The output sparse matrix receiving the bond-order entries.
@@ -4323,7 +4323,7 @@ def generateINCHIKey(molgraph: MolecularGraph) -> object: pass
 def generateINCHI(molgraph: MolecularGraph, options: str = '/WarnOnEmptyStructure /AuxNone /NEWPSOFF', dim: int = 0) -> object: pass
 
 ##
-# \brief Builds the atom/bond incidence matrix of <em>molgraph</em> (entry <tt></tt>(i,j) is <tt>1</tt> if atom <tt>i</tt> is an endpoint of bond <tt>j</tt>).
+# \brief Builds the atom/bond incidence matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is <tt>1</tt> if atom <tt>i</tt> is an endpoint of bond <tt>j</tt>).
 # 
 # \param molgraph The molecular graph to inspect.
 # \param mtx The output sparse matrix receiving the incidence entries.
@@ -4331,10 +4331,10 @@ def generateINCHI(molgraph: MolecularGraph, options: str = '/WarnOnEmptyStructur
 def generateIncidenceMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
-# \brief Builds an atom-level match expression from the match-constraint list attached to <em>atom</em>.
+# \brief Builds an atom-level match expression from the match-constraint list attached to the atom <em>atom</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to generate the expression.
+# \param molgraph The molecular graph providing the structural context.
 # 
 # \return The generated match expression.
 # 
@@ -4360,7 +4360,7 @@ def generateMatchExpression(bond: Bond, molgraph: MolecularGraph) -> BondMatchEx
 def generateMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpression: pass
 
 ##
-# \brief Builds and (optionally) stores the top-level match expression of <em>molgraph</em>.
+# \brief Builds and (optionally) stores the top-level match expression of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing match expression; otherwise the existing one (if any) is returned unchanged.
@@ -4379,7 +4379,7 @@ def generateMatchExpression(molgraph: MolecularGraph, overwrite: bool) -> Molecu
 def generateMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
 
 ##
-# \brief Builds and (optionally) stores the reaction-level match expression of <em>rxn</em>.
+# \brief Builds and (optionally) stores the reaction-level match expression of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to inspect/modify.
 # \param overwrite If <tt>True</tt>, the generated expression replaces any existing Chem.ReactionProperty.MATCH_EXPRESSION; if <tt>False</tt>, the existing one (if any) is returned unchanged.
@@ -4405,7 +4405,7 @@ def generateMatchExpressionString(atom: Atom, molgraph: MolecularGraph) -> str: 
 def generateMatchExpressionString(bond: Bond, molgraph: MolecularGraph) -> str: pass
 
 ##
-# \brief Generates and stores textual representations of the match expressions of <em>molgraph</em>.
+# \brief Generates and stores textual representations of the match expressions of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing match-expression strings.
@@ -4551,7 +4551,7 @@ def intersectsBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Mat
 def isAromatic(ring: Fragment, molgraph: MolecularGraph, arom_bond_mask: Util.BitSet) -> bool: pass
 
 ##
-# \brief Tells whether <em>atom</em> is a member of any fragment in <em>frag_list</em> whose size matches <em>size</em>.
+# \brief Tells whether the atom <em>atom</em> is a member of any fragment in <em>frag_list</em> whose size matches <em>size</em>.
 # 
 # \param atom The atom to query.
 # \param frag_list The list of fragments to search.
@@ -4583,10 +4583,10 @@ def isInFragmentOfSize(bond: Bond, frag_list: FragmentList, size: int) -> bool: 
 def isNotAromatic(ring: Fragment, molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief Tells whether <em>atom</em> qualifies as a stereo center in the context of <em>molgraph</em>.
+# \brief Tells whether the atom <em>atom</em> qualifies as a stereo center in the context of <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom to evaluate.
+# \param molgraph The molecular graph providing the structural context.
 # \param check_asym <tt>True</tt> to enforce non-equivalent ligand environments.
 # \param check_inv_n <tt>True</tt> to reject inversion-prone nitrogen centers (umbrella inversion).
 # \param check_quart_n <tt>True</tt> to accept positively charged quaternary nitrogen centers.
@@ -4613,7 +4613,7 @@ def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_asym: bool = True
 def isStereoCenter(bond: Bond, molgraph: MolecularGraph, check_asym: bool = True, check_term_n: bool = True, check_order: bool = True, min_ring_size: int = 8) -> bool: pass
 
 ##
-# \brief Assigns Kekulé bond orders to the aromatic bonds of <em>molgraph</em>.
+# \brief Assigns Kekulé bond orders to the aromatic bonds of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # 
@@ -4674,7 +4674,7 @@ def makeOrdinaryHydrogenDeplete(frag: Fragment, flags: int) -> bool: pass
 def makeOrdinaryHydrogenDeplete(mol: Molecule, flags: int, corr_impl_h_count: bool = True) -> bool: pass
 
 ##
-# \brief Sets bits in <em>atom_mask</em> for every atom of <em>molgraph</em> that is reachable from <em>atom</em> through the bonds of <em>molgraph</em>.
+# \brief Sets bits in <em>atom_mask</em> for every atom of <em>molgraph</em> that is reachable from the atom <em>atom</em> through the bonds of <em>molgraph</em>.
 # 
 # \param atom The seed atom.
 # \param molgraph The molecular graph providing the bonding context.
@@ -4724,7 +4724,7 @@ def parseSMILES(smiles: str) -> Molecule: pass
 def parseSMILES(smiles: str, mol: Molecule) -> bool: pass
 
 ##
-# \brief Perceives the aromatic substructure of <em>molgraph</em> without modifying it.
+# \brief Perceives the aromatic substructure of the molecular graph <em>molgraph</em> without modifying it.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4733,7 +4733,7 @@ def parseSMILES(smiles: str, mol: Molecule) -> bool: pass
 def perceiveAromaticSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 
 ##
-# \brief Perceives and (optionally) stores the aromatic substructure of <em>molgraph</em>.
+# \brief Perceives and (optionally) stores the aromatic substructure of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing aromatic substructure.
@@ -4743,7 +4743,7 @@ def perceiveAromaticSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 def perceiveAromaticSubstructure(molgraph: MolecularGraph, overwrite: bool) -> Fragment: pass
 
 ##
-# \brief Derives the reactant-to-product atom mapping from the atom mapping IDs of <em>rxn</em> without modifying it.
+# \brief Derives the reactant-to-product atom mapping from the atom mapping IDs of the reaction <em>rxn</em> without modifying it.
 # 
 # \param rxn The reaction to inspect.
 # 
@@ -4752,7 +4752,7 @@ def perceiveAromaticSubstructure(molgraph: MolecularGraph, overwrite: bool) -> F
 def perceiveAtomMapping(rxn: Reaction) -> AtomMapping: pass
 
 ##
-# \brief Derives and (optionally) stores the reactant-to-product atom mapping of <em>rxn</em>.
+# \brief Derives and (optionally) stores the reactant-to-product atom mapping of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to inspect/modify.
 # \param overwrite If <tt>True</tt>, the perceived mapping replaces any existing Chem.ReactionProperty.ATOM_MAPPING; if <tt>False</tt>, the existing one (if any) is returned unchanged.
@@ -4762,7 +4762,7 @@ def perceiveAtomMapping(rxn: Reaction) -> AtomMapping: pass
 def perceiveAtomMapping(rxn: Reaction, overwrite: bool) -> AtomMapping: pass
 
 ##
-# \brief Flags the atoms of <em>molgraph</em> that qualify as stereo centers under the supplied criteria.
+# \brief Flags the atoms of the molecular graph <em>molgraph</em> that qualify as stereo centers under the supplied criteria.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing stereo-center flags.
@@ -4776,7 +4776,7 @@ def perceiveAtomMapping(rxn: Reaction, overwrite: bool) -> AtomMapping: pass
 def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, check_inv_n: bool = True, check_quart_n: bool = True, check_plan_n: bool = True, check_amide_n: bool = True, check_res_ctrs: bool = True) -> None: pass
 
 ##
-# \brief Perceives bond orders for the bonds of <em>molgraph</em> from atom geometry and ligand environment.
+# \brief Perceives bond orders for the bonds of the molecular graph <em>molgraph</em> from atom geometry and ligand environment.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing bond orders.
@@ -4784,7 +4784,7 @@ def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_a
 def perceiveBondOrders(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Flags the bonds of <em>molgraph</em> that qualify as stereo centers under the supplied criteria.
+# \brief Flags the bonds of the molecular graph <em>molgraph</em> that qualify as stereo centers under the supplied criteria.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing stereo-center flags.
@@ -4796,7 +4796,7 @@ def perceiveBondOrders(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, check_term_n: bool = True, check_order: bool = True, min_ring_size: int = 8) -> None: pass
 
 ##
-# \brief Perceives the component groups of <em>molgraph</em> (from atom-level Chem.AtomProperty.COMPONENT_GROUP_ID values).
+# \brief Perceives the component groups of the molecular graph <em>molgraph</em> (from atom-level Chem.AtomProperty.COMPONENT_GROUP_ID values).
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4805,7 +4805,7 @@ def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_a
 def perceiveComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Perceives and (optionally) stores the component groups of <em>molgraph</em>.
+# \brief Perceives and (optionally) stores the component groups of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing component-group list; otherwise the existing one (if any) is returned unchanged.
@@ -4815,7 +4815,7 @@ def perceiveComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
 def perceiveComponentGroups(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
 ##
-# \brief Perceives the component groups of <em>rxn</em> without modifying it.
+# \brief Perceives the component groups of the reaction <em>rxn</em> without modifying it.
 # 
 # \param rxn The reaction to inspect.
 # 
@@ -4824,7 +4824,7 @@ def perceiveComponentGroups(molgraph: MolecularGraph, overwrite: bool) -> Fragme
 def perceiveComponentGroups(rxn: Reaction) -> FragmentList: pass
 
 ##
-# \brief Perceives and (optionally) stores the component groups of <em>rxn</em>.
+# \brief Perceives and (optionally) stores the component groups of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to inspect/modify.
 # \param overwrite If <tt>True</tt>, the perceived list replaces any existing Chem.ReactionProperty.COMPONENT_GROUPS; if <tt>False</tt>, the existing one (if any) is returned unchanged.
@@ -4834,7 +4834,7 @@ def perceiveComponentGroups(rxn: Reaction) -> FragmentList: pass
 def perceiveComponentGroups(rxn: Reaction, overwrite: bool) -> FragmentList: pass
 
 ##
-# \brief Perceives the connected components of <em>molgraph</em> without modifying it.
+# \brief Perceives the connected components of the molecular graph <em>molgraph</em> without modifying it.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4843,7 +4843,7 @@ def perceiveComponentGroups(rxn: Reaction, overwrite: bool) -> FragmentList: pas
 def perceiveComponents(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Perceives and (optionally) stores the connected components of <em>molgraph</em>.
+# \brief Perceives and (optionally) stores the connected components of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing component list; otherwise the existing one (if any) is returned unchanged.
@@ -4853,7 +4853,7 @@ def perceiveComponents(molgraph: MolecularGraph) -> FragmentList: pass
 def perceiveComponents(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
 ##
-# \brief Perceives the cyclic substructure (union of all rings) of <em>molgraph</em> without modifying it.
+# \brief Perceives the cyclic substructure (union of all rings) of the molecular graph <em>molgraph</em> without modifying it.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4862,7 +4862,7 @@ def perceiveComponents(molgraph: MolecularGraph, overwrite: bool) -> FragmentLis
 def perceiveCyclicSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 
 ##
-# \brief Perceives and (optionally) stores the cyclic substructure of <em>molgraph</em>.
+# \brief Perceives and (optionally) stores the cyclic substructure of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing cyclic substructure; otherwise the existing one (if any) is returned unchanged.
@@ -4872,17 +4872,17 @@ def perceiveCyclicSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 def perceiveCyclicSubstructure(molgraph: MolecularGraph, overwrite: bool) -> Fragment: pass
 
 ##
-# \brief Derives the hybridization state of <em>atom</em> from its valence environment in <em>molgraph</em>.
+# \brief Derives the hybridization state of the atom <em>atom</em> from its valence environment in <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to perceive the hybridzation state.
+# \param molgraph The molecular graph providing the structural context.
 # 
 # \return The perceived hybridization state (see namespace Chem.HybridizationState).
 # 
 def perceiveHybridizationState(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Computes and stores hybridization states for the atoms of <em>molgraph</em> from their valence environment.
+# \brief Computes and stores hybridization states for the atoms of the molecular graph <em>molgraph</em> from their valence environment.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing hybridization states.
@@ -4890,7 +4890,7 @@ def perceiveHybridizationState(atom: Atom, molgraph: MolecularGraph) -> int: pas
 def perceiveHybridizationStates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Perceives the pi-electron systems of <em>molgraph</em> without modifying it.
+# \brief Perceives the pi-electron systems of the molecular graph <em>molgraph</em> without modifying it.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4899,7 +4899,7 @@ def perceiveHybridizationStates(molgraph: MolecularGraph, overwrite: bool) -> No
 def perceivePiElectronSystems(molgraph: MolecularGraph) -> ElectronSystemList: pass
 
 ##
-# \brief Perceives and (optionally) stores the pi-electron systems of <em>molgraph</em>.
+# \brief Perceives and (optionally) stores the pi-electron systems of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing pi-electron-system list.
@@ -4909,7 +4909,7 @@ def perceivePiElectronSystems(molgraph: MolecularGraph) -> ElectronSystemList: p
 def perceivePiElectronSystems(molgraph: MolecularGraph, overwrite: bool) -> ElectronSystemList: pass
 
 ##
-# \brief Perceives the full set of rings of <em>molgraph</em> without modifying it.
+# \brief Perceives the full set of rings of the molecular graph <em>molgraph</em> without modifying it.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4918,7 +4918,7 @@ def perceivePiElectronSystems(molgraph: MolecularGraph, overwrite: bool) -> Elec
 def perceiveRings(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Perceives and (optionally) stores the full set of rings of <em>molgraph</em>.
+# \brief Perceives and (optionally) stores the full set of rings of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing ring set; otherwise the existing one (if any) is returned unchanged.
@@ -4928,7 +4928,7 @@ def perceiveRings(molgraph: MolecularGraph) -> FragmentList: pass
 def perceiveRings(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
 ##
-# \brief Perceives the Smallest Set of Smallest Rings of <em>molgraph</em> without modifying it.
+# \brief Perceives the Smallest Set of Smallest Rings of the molecular graph <em>molgraph</em> without modifying it.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4937,7 +4937,7 @@ def perceiveRings(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pa
 def perceiveSSSR(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
-# \brief Perceives and (optionally) stores the Smallest Set of Smallest Rings of <em>molgraph</em>.
+# \brief Perceives and (optionally) stores the Smallest Set of Smallest Rings of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
 # \param overwrite If <tt>True</tt>, replaces any existing SSSR; otherwise the existing one (if any) is returned unchanged.
@@ -4947,7 +4947,7 @@ def perceiveSSSR(molgraph: MolecularGraph) -> FragmentList: pass
 def perceiveSSSR(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
 ##
-# \brief Perceives Sybyl atom types for the atoms of <em>molgraph</em>.
+# \brief Perceives Sybyl atom types for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing Sybyl atom types.
@@ -4955,10 +4955,10 @@ def perceiveSSSR(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pas
 def perceiveSybylAtomTypes(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Derives the Sybyl atom type of <em>atom</em> from its valence environment in <em>molgraph</em>.
+# \brief Derives the Sybyl atom type of the atom <em>atom</em> from its valence environment in <em>molgraph</em>.
 # 
-# \param atom The atom to inspect.
-# \param molgraph The molecular graph providing the atom context.
+# \param atom The atom for which to perceive the type.
+# \param molgraph The molecular graph providing the structural context.
 # 
 # \return The perceived Sybyl atom type (see namespace Chem.SybylAtomType).
 # 
@@ -4975,7 +4975,7 @@ def perceiveSybylType(atom: Atom, molgraph: MolecularGraph) -> int: pass
 def perceiveSybylType(bond: Bond, molgraph: MolecularGraph) -> int: pass
 
 ##
-# \brief Computes and stores topological-symmetry classes for the atoms of <em>molgraph</em>.
+# \brief Computes and stores topological-symmetry classes for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing symmetry-class IDs.
@@ -5094,40 +5094,40 @@ def translateFragments(src_molgraph: MolecularGraph, src_frag_list: FragmentList
 ##
 # \brief Sets the value of the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter in <em>cntnr</em> to <em>fix</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param fix The new parameter value.
 # 
 def setBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer, fix: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter in <em>cntnr</em> to <em>single_prec</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param single_prec The new parameter value.
 # 
 # \since 1.2
@@ -5135,9 +5135,9 @@ def clearBondMemberSwapStereoFixParameter(cntnr: Base.ControlParameterContainer)
 def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5146,11 +5146,11 @@ def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5159,7 +5159,7 @@ def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 ##
 # \brief Removes the Chem.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5168,7 +5168,7 @@ def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterCon
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param enable The new parameter value.
 # 
 # \since 1.3
@@ -5176,9 +5176,9 @@ def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterCon
 def setCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5187,11 +5187,11 @@ def setCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer
 def hasCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.3
 # 
@@ -5200,7 +5200,7 @@ def getCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Removes the Chem.ControlParameter.CML_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.3
 # 
@@ -5209,7 +5209,7 @@ def clearCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5217,9 +5217,9 @@ def clearCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContain
 def setCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5228,11 +5228,11 @@ def setCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer, outpu
 def hasCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5241,7 +5241,7 @@ def getCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> bo
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_ATOM_PARITY parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5250,7 +5250,7 @@ def clearCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5258,9 +5258,9 @@ def clearCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> 
 def setCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5269,11 +5269,11 @@ def setCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer, 
 def hasCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5282,7 +5282,7 @@ def getCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_COMPACT_ATOM_DATA parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5291,7 +5291,7 @@ def clearCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5299,9 +5299,9 @@ def clearCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer
 def setCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5310,11 +5310,11 @@ def setCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer, 
 def hasCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5323,7 +5323,7 @@ def getCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_COMPACT_BOND_DATA parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5332,7 +5332,7 @@ def clearCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5340,9 +5340,9 @@ def clearCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer
 def setCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5351,11 +5351,11 @@ def setCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer,
 def hasCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5364,7 +5364,7 @@ def getCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_DOUBLE_BOND_STEREO parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5373,7 +5373,7 @@ def clearCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter in <em>cntnr</em> to <em>ns</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param ns The new XML-namespace string.
 # 
 # \since 1.2
@@ -5381,9 +5381,9 @@ def clearCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContaine
 def setCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer, ns: str) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5392,9 +5392,9 @@ def setCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer,
 def hasCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The stored XML-namespace string. 
 # 
@@ -5405,7 +5405,7 @@ def getCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5414,7 +5414,7 @@ def clearCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5422,9 +5422,9 @@ def clearCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContaine
 def setCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5433,11 +5433,11 @@ def setCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, output: 
 def hasCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5446,7 +5446,7 @@ def getCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool:
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5455,7 +5455,7 @@ def clearCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> Non
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5463,9 +5463,9 @@ def clearCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> Non
 def setCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5474,11 +5474,11 @@ def setCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer, out
 def hasCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5487,7 +5487,7 @@ def getCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_MOLECULE_NAME parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5496,7 +5496,7 @@ def clearCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5504,9 +5504,9 @@ def clearCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -
 def setCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5515,11 +5515,11 @@ def setCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer,
 def hasCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5528,7 +5528,7 @@ def getCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_SINGLE_BOND_STEREO parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5537,7 +5537,7 @@ def clearCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5545,9 +5545,9 @@ def clearCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContaine
 def setCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5556,11 +5556,11 @@ def setCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer,
 def hasCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5569,7 +5569,7 @@ def getCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_SPIN_MULTIPLICITY parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5578,7 +5578,7 @@ def clearCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5586,9 +5586,9 @@ def clearCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContaine
 def setCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5597,11 +5597,11 @@ def setCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer, ou
 def hasCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5610,7 +5610,7 @@ def getCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_STRUCTURE_DATA parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5619,7 +5619,7 @@ def clearCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -5627,9 +5627,9 @@ def clearCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) 
 def setCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5638,11 +5638,11 @@ def setCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer, o
 def hasCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -5651,7 +5651,7 @@ def getCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Removes the Chem.ControlParameter.CML_OUTPUT_XML_DECLARATION parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -5660,123 +5660,123 @@ def clearCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Chem.ControlParameter.CHECK_LINE_LENGTH parameter in <em>cntnr</em> to <em>check</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param check The new parameter value.
 # 
 def setCheckLineLengthParameter(cntnr: Base.ControlParameterContainer, check: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CHECK_LINE_LENGTH parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CHECK_LINE_LENGTH parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CHECK_LINE_LENGTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CHECK_LINE_LENGTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.CHECK_LINE_LENGTH parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter in <em>cntnr</em> to <em>pattern</em>.
 # 
-# \param cntnr The control-parameter container to modify.
-# \param pattern The new suffix-pattern string.
+# \param cntnr The control-parameter container.
+# \param pattern The new suffix pattern string.
 # 
 def setConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer, pattern: str) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored suffix-pattern string.
+# \return The stored suffix pattern string.
 # 
 def getConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.CONF_INDEX_NAME_SUFFIX_PATTERN parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.COORDINATES_DIMENSION parameter in <em>cntnr</em> to <em>dim</em>.
 # 
-# \param cntnr The control-parameter container to modify.
-# \param dim The new coordinate dimensionality.
+# \param cntnr The control-parameter container.
+# \param dim The new coordinates dimensionality.
 # 
 def setCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer, dim: int) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.COORDINATES_DIMENSION parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.COORDINATES_DIMENSION parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.COORDINATES_DIMENSION parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.COORDINATES_DIMENSION parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored coordinate dimensionality.
+# \return The stored coordinates dimensionality.
 # 
 def getCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.COORDINATES_DIMENSION parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearCoordinatesDimensionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter in <em>cntnr</em> to <em>opts</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param opts The new InChI input-options string.
 # 
 def setINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer, opts: str) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The stored InChI input-options string.
 # 
@@ -5785,97 +5785,97 @@ def getINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer) -> str:
 ##
 # \brief Removes the Chem.ControlParameter.INCHI_INPUT_OPTIONS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearINCHIInputOptionsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter in <em>cntnr</em> to <em>opts</em>.
 # 
-# \param cntnr The control-parameter container to modify.
-# \param opts The new InChI output-options string.
+# \param cntnr The control-parameter container.
+# \param opts The new <em>InChI</em> output-options string.
 # 
 def setINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer, opts: str) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored InChI output-options string.
+# \return The stored <em>InChI</em> output-options string.
 # 
 def getINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.INCHI_OUTPUT_OPTIONS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter in <em>cntnr</em> to <em>separate</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param separate The new parameter value.
 # 
 def setJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer, separate: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.JME_SEPARATE_COMPONENTS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_CTAB_VERSION parameter in <em>cntnr</em> to <em>version</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param version The new CTab version (see namespace Chem.MDLDataFormatVersion).
 # 
 def setMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_CTAB_VERSION parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_CTAB_VERSION parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_CTAB_VERSION parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_CTAB_VERSION parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The stored CTab version (see namespace Chem.MDLDataFormatVersion).
 # 
@@ -5884,31 +5884,31 @@ def getMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pa
 ##
 # \brief Removes the Chem.ControlParameter.MDL_CTAB_VERSION parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter in <em>cntnr</em> to <em>tag</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param tag The new SD-tag string.
 # 
 def setMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer, tag: str) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The stored SD-tag string.
 # 
@@ -5917,14 +5917,14 @@ def getMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> str
 ##
 # \brief Removes the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param enable The new parameter value.
 # 
 # \since 1.3
@@ -5932,9 +5932,9 @@ def clearMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> N
 def setMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5943,11 +5943,11 @@ def setMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer
 def hasMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.3
 # 
@@ -5956,7 +5956,7 @@ def getMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Removes the Chem.ControlParameter.MDL_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.3
 # 
@@ -5965,123 +5965,123 @@ def clearMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_IGNORE_PARITY parameter in <em>cntnr</em> to <em>ignore</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param ignore The new parameter value.
 # 
 def setMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_IGNORE_PARITY parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_IGNORE_PARITY parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_IGNORE_PARITY parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_IGNORE_PARITY parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_IGNORE_PARITY parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 def setMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 def setMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter in <em>cntnr</em> to <em>version</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param version The new RXN-file version (see namespace Chem.MDLDataFormatVersion).
 # 
 def setMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The stored RXN-file version (see namespace Chem.MDLDataFormatVersion).
 # 
@@ -6090,344 +6090,344 @@ def getMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> int:
 ##
 # \brief Removes the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_TRIM_LINES parameter in <em>cntnr</em> to <em>trim</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param trim The new parameter value.
 # 
 def setMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer, trim: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRIM_LINES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_TRIM_LINES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_TRIM_LINES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRIM_LINES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_TRIM_LINES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLTrimLinesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_TRIM_STRINGS parameter in <em>cntnr</em> to <em>trim</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param trim The new parameter value.
 # 
 def setMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer, trim: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRIM_STRINGS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_TRIM_STRINGS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_TRIM_STRINGS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRIM_STRINGS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_TRIM_STRINGS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLTrimStringsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter in <em>cntnr</em> to <em>trunc</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param trunc The new parameter value.
 # 
 def setMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer, trunc: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_TRUNCATE_LINES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_TRUNCATE_LINES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter in <em>cntnr</em> to <em>trunc</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param trunc The new parameter value.
 # 
 def setMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer, trunc: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_TRUNCATE_STRINGS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLTruncateStringsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter in <em>cntnr</em> to <em>update</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param update The new parameter value.
 # 
 def setMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer, update: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MDL_UPDATE_TIMESTAMP parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMDLUpdateTimestampParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>calc</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param calc The new parameter value.
 # 
 def setMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter in <em>cntnr</em> to <em>type</em>.
 # 
-# \param cntnr The control-parameter container to modify.
-# \param type The new MOL2 charge type (see namespace Chem.MOL2ChargeType).
+# \param cntnr The control-parameter container.
+# \param type The new <em>Sybyl MOL2</em> charge type (see namespace Chem.MOL2ChargeType).
 # 
 def setMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_CHARGE_TYPE parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored MOL2 charge type (see namespace Chem.MOL2ChargeType).
+# \return The stored <em>Sybyl MOL2</em> charge type (see namespace Chem.MOL2ChargeType).
 # 
 def getMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param enable The new parameter value.
 # 
 def setMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_ENABLE_AROMATIC_BOND_TYPES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter in <em>cntnr</em> to <em>enable</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param enable The new parameter value.
 # 
 def setMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_ENABLE_EXTENDED_ATOM_TYPES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter in <em>cntnr</em> to <em>type</em>.
 # 
-# \param cntnr The control-parameter container to modify.
-# \param type The new MOL2 molecule type (see namespace Chem.MOL2MoleculeType).
+# \param cntnr The control-parameter container.
+# \param type The new <em>Sybyl MOL2</em> molecule type (see namespace Chem.MOL2MoleculeType).
 # 
 def setMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored MOL2 molecule type (see namespace Chem.MOL2MoleculeType).
+# \return The stored <em>Sybyl MOL2</em> molecule type (see namespace Chem.MOL2MoleculeType).
 # 
 def getMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2.3
@@ -6435,9 +6435,9 @@ def clearMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> Non
 def setMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6446,11 +6446,11 @@ def setMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, o
 def hasMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2.3
 # 
@@ -6459,7 +6459,7 @@ def getMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_OUTPUT_FORMAL_CHARGES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2.3
 # 
@@ -6468,40 +6468,40 @@ def clearMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 def setMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_OUTPUT_SUBSTRUCTURES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>read</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param read The new parameter value.
 # 
 # \since 1.2.3
@@ -6509,9 +6509,9 @@ def clearMOL2OutputSubstructuresParameter(cntnr: Base.ControlParameterContainer)
 def setMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer, read: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6520,11 +6520,11 @@ def setMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterConta
 def hasMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2.3
 # 
@@ -6533,7 +6533,7 @@ def getMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterConta
 ##
 # \brief Removes the Chem.ControlParameter.MOL2_READ_PARTIAL_AS_FORMAL_CHARGES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2.3
 # 
@@ -6542,222 +6542,222 @@ def clearMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterCon
 ##
 # \brief Sets the value of the Chem.ControlParameter.MULTI_CONF_EXPORT parameter in <em>cntnr</em> to <em>multi_conf</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param multi_conf The new parameter value.
 # 
 def setMultiConfExportParameter(cntnr: Base.ControlParameterContainer, multi_conf: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MULTI_CONF_EXPORT parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MULTI_CONF_EXPORT parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMultiConfExportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_EXPORT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_EXPORT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMultiConfExportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MULTI_CONF_EXPORT parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMultiConfExportParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MULTI_CONF_IMPORT parameter in <em>cntnr</em> to <em>multi_conf</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param multi_conf The new parameter value.
 # 
 def setMultiConfImportParameter(cntnr: Base.ControlParameterContainer, multi_conf: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MULTI_CONF_IMPORT parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MULTI_CONF_IMPORT parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMultiConfImportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_IMPORT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_IMPORT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getMultiConfImportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MULTI_CONF_IMPORT parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMultiConfImportParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter in <em>cntnr</em> to <em>proc</em>.
 # 
-# \param cntnr The control-parameter container to modify.
-# \param proc The new MultiConfMoleculeInputProcessor reference.
+# \param cntnr The control-parameter container.
+# \param proc The new Chem.MultiConfMoleculeInputProcessor implementation reference.
 # 
 def setMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer, proc: MultiConfMoleculeInputProcessor) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored MultiConfMoleculeInputProcessor reference.
+# \return The stored Chem.MultiConfMoleculeInputProcessor implementation reference.
 # 
 def getMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer) -> MultiConfMoleculeInputProcessor: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearMultiConfInputProcessorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter in <em>cntnr</em> to <em>deplete</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param deplete The new parameter value.
 # 
 def setOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer, deplete: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearOrdinaryHydrogenDepleteParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 def setOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.RECORD_SEPARATOR parameter in <em>cntnr</em> to <em>sep</em>.
 # 
-# \param cntnr The control-parameter container to modify.
-# \param sep The new record-separator string.
+# \param cntnr The control-parameter container.
+# \param sep The new record separator string.
 # 
 def setRecordSeparatorParameter(cntnr: Base.ControlParameterContainer, sep: str) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.RECORD_SEPARATOR parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.RECORD_SEPARATOR parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasRecordSeparatorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.RECORD_SEPARATOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.RECORD_SEPARATOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored record-separator string.
+# \return The stored record separator string.
 # 
 def getRecordSeparatorParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.RECORD_SEPARATOR parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearRecordSeparatorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter in <em>cntnr</em> to <em>min_size</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param min_size The new minimum ring size.
 # 
 def setSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContainer, min_size: int) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The stored minimum ring size.
 # 
@@ -6766,14 +6766,14 @@ def getSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -6781,9 +6781,9 @@ def clearSMILESMinStereoBondRingSizeParameter(cntnr: Base.ControlParameterContai
 def setSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6792,11 +6792,11 @@ def setSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContain
 def hasSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -6805,7 +6805,7 @@ def getSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_MOL_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -6814,40 +6814,40 @@ def clearSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterConta
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter in <em>cntnr</em> to <em>no_subset</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param no_subset The new parameter value.
 # 
 def setSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer, no_subset: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -6855,9 +6855,9 @@ def clearSMILESNoOrganicSubsetParameter(cntnr: Base.ControlParameterContainer) -
 def setSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6866,11 +6866,11 @@ def setSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer,
 def hasSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -6879,7 +6879,7 @@ def getSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -6888,7 +6888,7 @@ def clearSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -6896,9 +6896,9 @@ def clearSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContaine
 def setSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6907,11 +6907,11 @@ def setSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer, ou
 def hasSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -6920,7 +6920,7 @@ def getSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -6929,7 +6929,7 @@ def clearSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -6937,9 +6937,9 @@ def clearSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) 
 def setSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6948,11 +6948,11 @@ def setSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer, ou
 def hasSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -6961,7 +6961,7 @@ def getSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -6970,7 +6970,7 @@ def clearSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -6978,9 +6978,9 @@ def clearSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) 
 def setSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6989,11 +6989,11 @@ def setSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer,
 def hasSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -7002,7 +7002,7 @@ def getSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -7011,7 +7011,7 @@ def clearSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.3
@@ -7019,9 +7019,9 @@ def clearSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContaine
 def setSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7030,11 +7030,11 @@ def setSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer,
 def hasSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.3
 # 
@@ -7043,7 +7043,7 @@ def getSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.3
 # 
@@ -7052,7 +7052,7 @@ def clearSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -7060,9 +7060,9 @@ def clearSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContaine
 def setSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7071,11 +7071,11 @@ def setSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, outpu
 def hasSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -7084,7 +7084,7 @@ def getSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bo
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -7093,7 +7093,7 @@ def clearSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -7101,9 +7101,9 @@ def clearSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> 
 def setSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7112,11 +7112,11 @@ def setSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer, ou
 def hasSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -7125,7 +7125,7 @@ def getSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -7134,7 +7134,7 @@ def clearSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -7142,9 +7142,9 @@ def clearSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) 
 def setSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7153,11 +7153,11 @@ def setSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer
 def hasSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -7166,7 +7166,7 @@ def getSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -7175,7 +7175,7 @@ def clearSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -7183,9 +7183,9 @@ def clearSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContain
 def setSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7194,11 +7194,11 @@ def setSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer, o
 def hasSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -7207,7 +7207,7 @@ def getSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -7216,24 +7216,24 @@ def clearSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter in <em>cntnr</em> to <em>format</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param format The new record-format string.
 # 
 def setSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer, format: str) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_RECORD_FORMAT parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The stored record-format string.
 # 
@@ -7242,14 +7242,14 @@ def getSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer) -> str
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_RECORD_FORMAT parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter in <em>cntnr</em> to <em>output</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param output The new parameter value.
 # 
 # \since 1.2
@@ -7257,9 +7257,9 @@ def clearSMILESRecordFormatParameter(cntnr: Base.ControlParameterContainer) -> N
 def setSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7268,11 +7268,11 @@ def setSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContain
 def hasSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.2
 # 
@@ -7281,7 +7281,7 @@ def getSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Removes the Chem.ControlParameter.SMILES_RXN_OUTPUT_ATOM_MAPPING_ID parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.2
 # 
@@ -7290,40 +7290,40 @@ def clearSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterConta
 ##
 # \brief Sets the value of the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter in <em>cntnr</em> to <em>strict</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param strict The new parameter value.
 # 
 def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.STRICT_ERROR_CHECKING parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value.
+# \return The value of the parameter.
 # 
 def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Chem.ControlParameter.STRICT_ERROR_CHECKING parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the value of the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter in <em>cntnr</em> to <em>calc</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param calc The new parameter value.
 # 
 # \since 1.1
@@ -7331,9 +7331,9 @@ def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> 
 def setXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7342,11 +7342,11 @@ def setXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc
 def hasXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.1
 # 
@@ -7355,7 +7355,7 @@ def getXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> b
 ##
 # \brief Removes the Chem.ControlParameter.XYZ_CALC_FORMAL_CHARGES parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.1
 # 
@@ -7364,7 +7364,7 @@ def clearXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter in <em>cntnr</em> to <em>is_name</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param is_name The new parameter value.
 # 
 # \since 1.1
@@ -7372,9 +7372,9 @@ def clearXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 def setXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7383,11 +7383,11 @@ def setXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name:
 def hasXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.1
 # 
@@ -7396,7 +7396,7 @@ def getXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool:
 ##
 # \brief Removes the Chem.ControlParameter.XYZ_COMMENT_IS_NAME parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.1
 # 
@@ -7405,7 +7405,7 @@ def clearXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> Non
 ##
 # \brief Sets the value of the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter in <em>cntnr</em> to <em>perceive</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param perceive The new parameter value.
 # 
 # \since 1.1
@@ -7413,9 +7413,9 @@ def clearXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> Non
 def setXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7424,11 +7424,11 @@ def setXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer, per
 def hasXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.1
 # 
@@ -7437,7 +7437,7 @@ def getXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Removes the Chem.ControlParameter.XYZ_PERCEIVE_BOND_ORDERS parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.1
 # 
@@ -7446,7 +7446,7 @@ def clearXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter in <em>cntnr</em> to <em>perceive</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # \param perceive The new parameter value.
 # 
 # \since 1.1
@@ -7454,9 +7454,9 @@ def clearXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -
 def setXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
-# \brief Tells whether <em>cntnr</em> carries the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter.
+# \brief Tells whether <em>cntnr</em> carries an explicit Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -7465,11 +7465,11 @@ def setXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer, p
 def hasXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter from <em>cntnr</em>.
+# \brief Returns the value of the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
-# \return The stored parameter value. 
+# \return The value of the parameter. 
 # 
 # \since 1.1
 # 
@@ -7478,7 +7478,7 @@ def getXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Removes the Chem.ControlParameter.XYZ_PERCEIVE_CONNECTIVITY parameter from <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to modify.
+# \param cntnr The control-parameter container.
 # 
 # \since 1.1
 # 

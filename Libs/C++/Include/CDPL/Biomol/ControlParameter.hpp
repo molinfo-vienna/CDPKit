@@ -87,7 +87,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to apply the formal atom charges provided by the residue dictionary during input data
-             *        post-processing.
+             *        postprocessing.
              *
              * \valuetype \c bool
              * \since 1.2
@@ -96,7 +96,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to apply the atom types provided by the residue dictionary during input data
-             *        post-processing.
+             *        postprocessing.
              *
              * \valuetype \c bool
              * \since 1.2
@@ -146,7 +146,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
 
             /**
-             * \brief Specifies whether to apply the residue-dictionary bond orders to bonds of non-standard residues when
+             * \brief Specifies whether to apply the residue dictionary bond orders to bonds of non-standard residues when
              *        reading <em>PDB</em> data.
              *
              * \valuetype \c bool
@@ -154,7 +154,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES;
 
             /**
-             * \brief Specifies whether to apply the residue-dictionary bond orders to bonds of standard residues when
+             * \brief Specifies whether to apply the residue dictionary bond orders to bonds of standard residues when
              *        reading <em>PDB</em> data.
              *
              * \valuetype \c bool
@@ -177,7 +177,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
 
             /**
-             * \brief Specifies whether to ignore the formal charge field of \c ATOM/\c HETATM records when reading <em>PDB</em> data.
+             * \brief Specifies whether to ignore the formal charge field of <tt>ATOM/HETATM</tt> records when reading <em>PDB</em> data.
              *
              * \valuetype \c bool
              */
@@ -200,7 +200,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_TRUNCATE_LINES;
 
             /**
-             * \brief Specifies whether to write the formal charge field of \c ATOM/\c HETATM records when generating <em>PDB</em> output.
+             * \brief Specifies whether to write the formal charge field of <tt>ATOM/HETATM</tt> records when generating <em>PDB</em> output.
              *
              * \valuetype \c bool
              * \since 1.2
@@ -249,7 +249,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_APPLY_DICT_ATOM_BONDING;
 
             /**
-             * \brief Specifies whether to apply the residue-dictionary bond orders when reading <em>mmCIF</em> data.
+             * \brief Specifies whether to apply the residue dictionary bond orders when reading <em>mmCIF</em> data.
              *
              * \valuetype \c bool
              * \since 1.2
@@ -257,8 +257,8 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_APPLY_DICT_BOND_ORDERS;
 
             /**
-             * \brief Specifies whether to emit biopolymer residues using the \c chem_comp data category (instead of the
-             *        regular polymer-residue encoding) when generating <em>mmCIF</em> output.
+             * \brief Specifies whether or not residue structures shall be emitted as \c chem_comp category data
+             *        when generating <em>mmCIF</em> output.
              *
              * \valuetype \c bool
              * \since 1.2
@@ -266,7 +266,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP;
 
             /**
-             * \brief Specifies a post-processing function that is applied to the constructed <em>mmCIF</em> data record before it is
+             * \brief Specifies a postprocessing function that is applied to the constructed <em>mmCIF</em> data record before it is
              *        written to the output stream.
              *
              * \valuetype Biomol::MMCIFDataProcessingFunction

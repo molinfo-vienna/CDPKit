@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Sets the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of <em>grid</em>.
+# \brief Sets the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of the grid <em>grid</em>.
 # 
-# \param grid The grid whose feature type to set.
+# \param grid The grid for which to set the property value.
 # \param type The new feature type value.
 # 
 def setFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
@@ -30,32 +30,32 @@ def setFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
 ##
 # \brief Tells whether <em>grid</em> carries an explicit GRAIL.AttributedGridProperty.FEATURE_TYPE property.
 # 
-# \param grid The grid to query.
+# \param grid The grid for which to query the property value.
 # 
-# \return <tt>True</tt> if the property is set on the grid, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasFeatureType(grid: Grid.AttributedGrid) -> bool: pass
 
 ##
-# \brief Returns the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of <em>grid</em>.
+# \brief Returns the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of the grid <em>grid</em>.
 # 
-# \param grid The grid whose feature type is requested.
+# \param grid The grid for which to return the property value.
 # 
 # \return The feature type value.
 # 
 def getFeatureType(grid: Grid.AttributedGrid) -> int: pass
 
 ##
-# \brief Removes the GRAIL.AttributedGridProperty.FEATURE_TYPE property from <em>grid</em>.
+# \brief Clears the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of the grid <em>grid</em>.
 # 
-# \param grid The grid to clear the property from.
+# \param grid The grid for which to clear the property value.
 # 
 def clearFeatureType(grid: Grid.AttributedGrid) -> None: pass
 
 ##
-# \brief Sets the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of <em>grid</em>.
+# \brief Sets the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of the grid <em>grid</em>.
 # 
-# \param grid The grid whose target feature type to set.
+# \param grid The grid for which to set the property value.
 # \param type The new target feature type value.
 # 
 def setTargetFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
@@ -63,25 +63,25 @@ def setTargetFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
 ##
 # \brief Tells whether <em>grid</em> carries an explicit GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property.
 # 
-# \param grid The grid to query.
+# \param grid The grid for which to query the property value.
 # 
-# \return <tt>True</tt> if the property is set on the grid, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasTargetFeatureType(grid: Grid.AttributedGrid) -> bool: pass
 
 ##
-# \brief Returns the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of <em>grid</em>.
+# \brief Returns the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of the grid <em>grid</em>.
 # 
-# \param grid The grid whose target feature type is requested.
+# \param grid The grid for which to return the property value.
 # 
 # \return The target feature type value.
 # 
 def getTargetFeatureType(grid: Grid.AttributedGrid) -> int: pass
 
 ##
-# \brief Removes the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property from <em>grid</em>.
+# \brief Clears the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of the grid <em>grid</em>.
 # 
-# \param grid The grid to clear the property from.
+# \param grid The grid for which to clear the property value.
 # 
 def clearTargetFeatureType(grid: Grid.AttributedGrid) -> None: pass
 

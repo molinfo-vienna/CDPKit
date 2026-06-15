@@ -85,7 +85,7 @@ namespace CDPL
             typedef FeatureInteractionScoreGridCalculator::ScoreCombinationFunction ScoreCombinationFunction;
 
             /**
-             * \brief Type of the generic functor used to post-process a generated pharmacophore prior to grid calculation.
+             * \brief Type of the generic functor used to postprocess a generated pharmacophore prior to grid calculation.
              */
             typedef std::function<void(CDPL::Pharm::Pharmacophore&)> PharmacophoreProcessingFunction;
 

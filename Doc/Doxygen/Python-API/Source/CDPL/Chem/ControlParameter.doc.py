@@ -546,7 +546,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_SPIN_MULTIPLICITY = CDPL.Base.LookupKey('CML_OUTPUT_SPIN_MULTIPLICITY')
 
     ##
-    # \brief Specifies whether to use <em>CML</em>'s compact (array-style) representation for atom data on output. 
+    # \brief Specifies whether to use a compact (array-style) representation for atom data when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2
@@ -554,7 +554,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_COMPACT_ATOM_DATA = CDPL.Base.LookupKey('CML_OUTPUT_COMPACT_ATOM_DATA')
 
     ##
-    # \brief Specifies whether to use <em>CML</em>'s compact (array-style) representation for bond data on output. 
+    # \brief Specifies whether to use a compact (array-style) representation for bond data when generating <em>CML</em> output. 
     # \valuetype  <tt>bool</tt>.
     # 
     # \since 1.2

@@ -47,9 +47,9 @@ namespace CDPL
     {
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::STRICT_ERROR_CHECKING parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::STRICT_ERROR_CHECKING parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -73,11 +73,10 @@ namespace CDPL
          */
         CDPL_BIOMOL_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
-
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::CHECK_LINE_LENGTH parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::CHECK_LINE_LENGTH parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getCheckLineLengthParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -102,9 +101,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearCheckLineLengthParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::RESIDUE_DICTIONARY parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::RESIDUE_DICTIONARY parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return A \c const reference to the residue-dictionary shared pointer.
+         * \return A \c const pointer to the residue dictionary.
          * \since 1.2
          */
         CDPL_BIOMOL_API const ResidueDictionary::SharedPointer& getResidueDictionaryParameter(const Base::ControlParameterContainer& cntnr);
@@ -133,9 +132,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearResidueDictionaryParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::APPLY_DICT_FORMAL_CHARGES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::APPLY_DICT_FORMAL_CHARGES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getApplyDictFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
@@ -164,9 +163,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearApplyDictFormalChargesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::APPLY_DICT_ATOM_TYPES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::APPLY_DICT_ATOM_TYPES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
@@ -195,9 +194,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearApplyDictAtomTypesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::CALC_MISSING_FORMAL_CHARGES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::CALC_MISSING_FORMAL_CHARGES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
@@ -226,9 +225,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearCalcMissingFormalChargesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PERCEIVE_MISSING_BOND_ORDERS parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PERCEIVE_MISSING_BOND_ORDERS parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getPerceiveMissingBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
@@ -257,9 +256,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPerceiveMissingBondOrdersParameter(Base::ControlParameterContainer& cntnr);
         
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::COMBINE_INTERFERING_RESIDUE_COORDINATES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::COMBINE_INTERFERING_RESIDUE_COORDINATES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -284,16 +283,16 @@ namespace CDPL
         CDPL_BIOMOL_API void clearCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBApplyDictAtomBondingToStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES parameter of \a cntnr to \a apply.
          * \param cntnr The control-parameter container.
-         * \param apply \c true to apply dictionary-derived atom-bonding to standard residues, and \c false if not.
+         * \param apply \c true to apply dictionary-derived atom-bonding information to standard residues, and \c false if not.
          */
         CDPL_BIOMOL_API void setPDBApplyDictAtomBondingToStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool apply);
 
@@ -311,16 +310,16 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBApplyDictAtomBondingToStdResiduesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBApplyDictAtomBondingToNonStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES parameter of \a cntnr to \a apply.
          * \param cntnr The control-parameter container.
-         * \param apply \c true to apply dictionary-derived atom-bonding to non-standard residues, and \c false if not.
+         * \param apply \c true to apply dictionary-derived atom-bonding information to non-standard residues, and \c false if not.
          */
         CDPL_BIOMOL_API void setPDBApplyDictAtomBondingToNonStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool apply);
 
@@ -338,16 +337,16 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBApplyDictAtomBondingToNonStdResiduesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBApplyDictBondOrdersToStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES parameter of \a cntnr to \a apply.
          * \param cntnr The control-parameter container.
-         * \param apply \c true to apply dictionary-derived bond orders to standard residues, and \c false if not.
+         * \param apply \c true to apply dictionary-derived bond order information to standard residues, and \c false if not.
          */
         CDPL_BIOMOL_API void setPDBApplyDictBondOrdersToStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool apply);
 
@@ -365,16 +364,16 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBApplyDictBondOrdersToStdResiduesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBApplyDictBondOrdersToNonStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES parameter of \a cntnr to \a apply.
          * \param cntnr The control-parameter container.
-         * \param apply \c true to apply dictionary-derived bond orders to non-standard residues, and \c false if not.
+         * \param apply \c true to apply dictionary-derived bond order information to non-standard residues, and \c false if not.
          */
         CDPL_BIOMOL_API void setPDBApplyDictBondOrdersToNonStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool apply);
 
@@ -392,9 +391,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBApplyDictBondOrdersToNonStdResiduesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_IGNORE_CONECT_RECORDS parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_IGNORE_CONECT_RECORDS parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.3
          */
         CDPL_BIOMOL_API bool getPDBIgnoreCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
@@ -402,7 +401,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_IGNORE_CONECT_RECORDS parameter of \a cntnr to \a ignore.
          * \param cntnr The control-parameter container.
-         * \param ignore \c true to skip \c CONECT records during PDB data input, and \c false to process them.
+         * \param ignore \c true to ignore \c CONECT records during PDB data input, and \c false to process them.
          * \since 1.3
          */
         CDPL_BIOMOL_API void setPDBIgnoreCONECTRecordsParameter(Base::ControlParameterContainer& cntnr, bool ignore);
@@ -423,9 +422,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBIgnoreCONECTRecordsParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBDeduceBondOrdersFromCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -450,9 +449,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBDeduceBondOrdersFromCONECTRecordsParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_IGNORE_FORMAL_CHARGE_FIELD parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_IGNORE_FORMAL_CHARGE_FIELD parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBIgnoreFormalChargeFieldParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -477,9 +476,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBIgnoreFormalChargeFieldParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_EVALUATE_MASTER_RECORD parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_EVALUATE_MASTER_RECORD parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBEvaluateMASTERRecordParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -504,16 +503,16 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBEvaluateMASTERRecordParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_TRUNCATE_LINES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_TRUNCATE_LINES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          */
         CDPL_BIOMOL_API bool getPDBTruncateLinesParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_TRUNCATE_LINES parameter of \a cntnr to \a trunc.
          * \param cntnr The control-parameter container.
-         * \param trunc \c true to truncate output PDB data lines exceeding the maximum allowed line length, and \c false to fail the write operation instead.
+         * \param trunc \c true to truncate output PDB data lines exceeding the maximum allowed line length, and \c false to not truncate them.
          */
         CDPL_BIOMOL_API void setPDBTruncateLinesParameter(Base::ControlParameterContainer& cntnr, bool trunc);
 
@@ -531,9 +530,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBTruncateLinesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_FORMAL_CHARGES parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_FORMAL_CHARGES parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getPDBOutputFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
@@ -562,9 +561,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBOutputFormalChargesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getPDBOutputCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
@@ -593,9 +592,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBOutputCONECTRecordsParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getPDBOutputCONECTRecordsForAllBondsParameter(const Base::ControlParameterContainer& cntnr);
@@ -603,7 +602,8 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS parameter of \a cntnr to \a output.
          * \param cntnr The control-parameter container.
-         * \param output \c true to write \c CONECT records for all bonds (and not only for non-standard ones), and \c false to write them only for non-standard bonds.
+         * \param output \c true to write \c CONECT records for all bonds (and not only for non-standard residue ones),
+         *               and \c false to write them only for non-standard residue bonds.
          * \since 1.2
          */
         CDPL_BIOMOL_API void setPDBOutputCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr, bool output);
@@ -624,9 +624,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBOutputCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getPDBOutputCONECTRecordsReflectingBondOrderParameter(const Base::ControlParameterContainer& cntnr);
@@ -655,7 +655,7 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBOutputCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::PDB_FORMAT_VERSION parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::PDB_FORMAT_VERSION parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
          * \return The PDB format version (see Biomol::PDBFormatVersion).
          */
@@ -682,9 +682,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBFormatVersionParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_APPLY_DICT_ATOM_BONDING parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_APPLY_DICT_ATOM_BONDING parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getMMCIFApplyDictAtomBondingParameter(const Base::ControlParameterContainer& cntnr);
@@ -692,7 +692,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::MMCIF_APPLY_DICT_ATOM_BONDING parameter of \a cntnr to \a apply.
          * \param cntnr The control-parameter container.
-         * \param apply \c true to apply dictionary-derived atom-bonding during mmCIF input, and \c false if not.
+         * \param apply \c true to apply dictionary-derived atom-bonding information during mmCIF input, and \c false if not.
          * \since 1.2
          */
         CDPL_BIOMOL_API void setMMCIFApplyDictAtomBondingParameter(Base::ControlParameterContainer& cntnr, bool apply);
@@ -713,9 +713,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearMMCIFApplyDictAtomBondingParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_APPLY_DICT_BOND_ORDERS parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_APPLY_DICT_BOND_ORDERS parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getMMCIFApplyDictBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
@@ -723,7 +723,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::MMCIF_APPLY_DICT_BOND_ORDERS parameter of \a cntnr to \a apply.
          * \param cntnr The control-parameter container.
-         * \param apply \c true to apply dictionary-derived bond orders during mmCIF input, and \c false if not.
+         * \param apply \c true to apply dictionary-derived bond order information during mmCIF input, and \c false if not.
          * \since 1.2
          */
         CDPL_BIOMOL_API void setMMCIFApplyDictBondOrdersParameter(Base::ControlParameterContainer& cntnr, bool apply);
@@ -744,9 +744,9 @@ namespace CDPL
         CDPL_BIOMOL_API void clearMMCIFApplyDictBondOrdersParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The value of the flag.
+         * \return The value of the parameter.
          * \since 1.2
          */
         CDPL_BIOMOL_API bool getMMCIFOutputBiopolymersAsChemCompParameter(const Base::ControlParameterContainer& cntnr);
@@ -754,7 +754,7 @@ namespace CDPL
         /**
          * \brief Sets the Biomol::ControlParameter::MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP parameter of \a cntnr to \a output.
          * \param cntnr The control-parameter container.
-         * \param output \c true if explicit residue structures shall be emitted as \c chem_comp data category data, and \c false if not.
+         * \param output \c true if explicit residue structures shall be emitted as \c chem_comp category data, and \c false if not.
          * \since 1.2
          */
         CDPL_BIOMOL_API void setMMCIFOutputBiopolymersAsChemCompParameter(Base::ControlParameterContainer& cntnr, bool output);
@@ -775,7 +775,7 @@ namespace CDPL
         CDPL_BIOMOL_API void clearMMCIFOutputBiopolymersAsChemCompParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION parameter of \a cntnr.
+         * \brief Returns the value of the Biomol::ControlParameter::MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
          * \return A \c const reference to the mmCIF output data postprocessing function.
          * \since 1.2

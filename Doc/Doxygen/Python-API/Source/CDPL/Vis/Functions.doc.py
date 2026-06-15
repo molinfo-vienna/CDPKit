@@ -3825,7 +3825,7 @@ def translate(mesh: TriangleMesh3D, trans_x: float, trans_y: float, trans_z: flo
 ##
 # \brief Sets the value of the Vis.ControlParameter.ALIGNMENT parameter of <em>cntnr</em> to <em>alignment</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param alignment The new alignment flag combination (see Vis.Alignment).
 # 
 def setAlignmentParameter(cntnr: Base.ControlParameterContainer, alignment: int) -> None: pass
@@ -3833,16 +3833,16 @@ def setAlignmentParameter(cntnr: Base.ControlParameterContainer, alignment: int)
 ##
 # \brief Tells whether the Vis.ControlParameter.ALIGNMENT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasAlignmentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ALIGNMENT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ALIGNMENT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ALIGNMENT parameter.
 # 
@@ -3858,7 +3858,7 @@ def clearAlignmentParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new atom color.
 # 
 def setAtomColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
@@ -3866,16 +3866,16 @@ def setAtomColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasAtomColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_COLOR parameter.
 # 
@@ -3891,7 +3891,7 @@ def clearAtomColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_COLOR_TABLE parameter of <em>cntnr</em> to <em>colors</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param colors The new atom color table.
 # 
 def setAtomColorTableParameter(cntnr: Base.ControlParameterContainer, colors: ColorTable) -> None: pass
@@ -3899,16 +3899,16 @@ def setAtomColorTableParameter(cntnr: Base.ControlParameterContainer, colors: Co
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_COLOR_TABLE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_COLOR_TABLE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_COLOR_TABLE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_COLOR_TABLE parameter.
 # 
@@ -3924,7 +3924,7 @@ def clearAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> None:
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new atom configuration label color.
 # 
 # \since 1.2
@@ -3934,7 +3934,7 @@ def setAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -3943,9 +3943,9 @@ def setAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContaine
 def hasAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR parameter. 
 # 
@@ -3965,7 +3965,7 @@ def clearAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new atom configuration label font.
 # 
 # \since 1.1
@@ -3975,7 +3975,7 @@ def setAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -3984,9 +3984,9 @@ def setAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer
 def hasAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT parameter. 
 # 
@@ -4006,7 +4006,7 @@ def clearAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new atom configuration label size.
 # 
 # \since 1.1
@@ -4016,7 +4016,7 @@ def setAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4025,9 +4025,9 @@ def setAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer
 def hasAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE parameter. 
 # 
@@ -4047,7 +4047,7 @@ def clearAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new atom custom label color.
 # 
 # \since 1.2
@@ -4057,7 +4057,7 @@ def setAtomCustomLabelColorParameter(cntnr: Base.ControlParameterContainer, colo
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4066,9 +4066,9 @@ def setAtomCustomLabelColorParameter(cntnr: Base.ControlParameterContainer, colo
 def hasAtomCustomLabelColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR parameter. 
 # 
@@ -4088,7 +4088,7 @@ def clearAtomCustomLabelColorParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new atom custom label font.
 # 
 # \since 1.2
@@ -4098,7 +4098,7 @@ def setAtomCustomLabelFontParameter(cntnr: Base.ControlParameterContainer, font:
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4107,9 +4107,9 @@ def setAtomCustomLabelFontParameter(cntnr: Base.ControlParameterContainer, font:
 def hasAtomCustomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT parameter. 
 # 
@@ -4129,7 +4129,7 @@ def clearAtomCustomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new atom custom label size.
 # 
 # \since 1.2
@@ -4139,7 +4139,7 @@ def setAtomCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size:
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4148,9 +4148,9 @@ def setAtomCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size:
 def hasAtomCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE parameter. 
 # 
@@ -4170,7 +4170,7 @@ def clearAtomCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH parameter of <em>cntnr</em> to <em>brush</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param brush The new atom highlight area brush.
 # 
 # \since 1.2
@@ -4180,7 +4180,7 @@ def setAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer, br
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4189,9 +4189,9 @@ def setAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer, br
 def hasAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH parameter. 
 # 
@@ -4211,7 +4211,7 @@ def clearAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN parameter of <em>cntnr</em> to <em>pen</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param pen The new atom highlight area outline pen.
 # 
 # \since 1.2
@@ -4221,7 +4221,7 @@ def setAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4230,9 +4230,9 @@ def setAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContaine
 def hasAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN parameter. 
 # 
@@ -4252,7 +4252,7 @@ def clearAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new atom highlight area size.
 # 
 # \since 1.2
@@ -4262,7 +4262,7 @@ def setAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer, siz
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4271,9 +4271,9 @@ def setAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer, siz
 def hasAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE parameter. 
 # 
@@ -4293,7 +4293,7 @@ def clearAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_LABEL_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new atom label font.
 # 
 def setAtomLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
@@ -4301,16 +4301,16 @@ def setAtomLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font)
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_LABEL_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_LABEL_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_LABEL_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_LABEL_FONT parameter.
 # 
@@ -4326,7 +4326,7 @@ def clearAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> None: 
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_LABEL_MARGIN parameter of <em>cntnr</em> to <em>margin</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param margin The new atom label margin.
 # 
 def setAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
@@ -4334,16 +4334,16 @@ def setAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer, margin: S
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_LABEL_MARGIN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_LABEL_MARGIN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_LABEL_MARGIN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_LABEL_MARGIN parameter.
 # 
@@ -4359,7 +4359,7 @@ def clearAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> None
 ##
 # \brief Sets the value of the Vis.ControlParameter.ATOM_LABEL_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new atom label size.
 # 
 def setAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
@@ -4367,16 +4367,16 @@ def setAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeS
 ##
 # \brief Tells whether the Vis.ControlParameter.ATOM_LABEL_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ATOM_LABEL_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ATOM_LABEL_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ATOM_LABEL_SIZE parameter.
 # 
@@ -4392,7 +4392,7 @@ def clearAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BACKGROUND_BRUSH parameter of <em>cntnr</em> to <em>brush</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param brush The new background brush.
 # 
 # \since 1.2
@@ -4402,7 +4402,7 @@ def setBackgroundBrushParameter(cntnr: Base.ControlParameterContainer, brush: Br
 ##
 # \brief Tells whether the Vis.ControlParameter.BACKGROUND_BRUSH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4411,9 +4411,9 @@ def setBackgroundBrushParameter(cntnr: Base.ControlParameterContainer, brush: Br
 def hasBackgroundBrushParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BACKGROUND_BRUSH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BACKGROUND_BRUSH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BACKGROUND_BRUSH parameter. 
 # 
@@ -4433,7 +4433,7 @@ def clearBackgroundBrushParameter(cntnr: Base.ControlParameterContainer) -> None
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new bond color.
 # 
 def setBondColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
@@ -4441,16 +4441,16 @@ def setBondColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_COLOR parameter.
 # 
@@ -4466,7 +4466,7 @@ def clearBondColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new bond configuration label color.
 # 
 # \since 1.2
@@ -4476,7 +4476,7 @@ def setBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4485,9 +4485,9 @@ def setBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContaine
 def hasBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR parameter. 
 # 
@@ -4507,7 +4507,7 @@ def clearBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new bond configuration label font.
 # 
 # \since 1.1
@@ -4517,7 +4517,7 @@ def setBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4526,9 +4526,9 @@ def setBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer
 def hasBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT parameter. 
 # 
@@ -4548,7 +4548,7 @@ def clearBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new bond configuration label size.
 # 
 # \since 1.1
@@ -4558,7 +4558,7 @@ def setBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4567,9 +4567,9 @@ def setBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer
 def hasBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE parameter. 
 # 
@@ -4589,7 +4589,7 @@ def clearBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new bond custom label color.
 # 
 # \since 1.2
@@ -4599,7 +4599,7 @@ def setBondCustomLabelColorParameter(cntnr: Base.ControlParameterContainer, colo
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4608,9 +4608,9 @@ def setBondCustomLabelColorParameter(cntnr: Base.ControlParameterContainer, colo
 def hasBondCustomLabelColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR parameter. 
 # 
@@ -4630,7 +4630,7 @@ def clearBondCustomLabelColorParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new bond custom label font.
 # 
 # \since 1.2
@@ -4640,7 +4640,7 @@ def setBondCustomLabelFontParameter(cntnr: Base.ControlParameterContainer, font:
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4649,9 +4649,9 @@ def setBondCustomLabelFontParameter(cntnr: Base.ControlParameterContainer, font:
 def hasBondCustomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT parameter. 
 # 
@@ -4671,7 +4671,7 @@ def clearBondCustomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new bond custom label size.
 # 
 # \since 1.2
@@ -4681,7 +4681,7 @@ def setBondCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size:
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4690,9 +4690,9 @@ def setBondCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size:
 def hasBondCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE parameter. 
 # 
@@ -4712,7 +4712,7 @@ def clearBondCustomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH parameter of <em>cntnr</em> to <em>brush</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param brush The new bond highlight area brush.
 # 
 # \since 1.2
@@ -4722,7 +4722,7 @@ def setBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer, br
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4731,9 +4731,9 @@ def setBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer, br
 def hasBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH parameter. 
 # 
@@ -4753,7 +4753,7 @@ def clearBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN parameter of <em>cntnr</em> to <em>pen</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param pen The new bond highlight area outline pen.
 # 
 # \since 1.2
@@ -4763,7 +4763,7 @@ def setBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4772,9 +4772,9 @@ def setBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContaine
 def hasBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN parameter. 
 # 
@@ -4794,7 +4794,7 @@ def clearBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new bond highlight area width.
 # 
 # \since 1.2
@@ -4804,7 +4804,7 @@ def setBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer, wi
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -4813,9 +4813,9 @@ def setBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer, wi
 def hasBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH parameter. 
 # 
@@ -4835,7 +4835,7 @@ def clearBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_LABEL_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new bond label font.
 # 
 def setBondLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
@@ -4843,16 +4843,16 @@ def setBondLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font)
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_LABEL_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_LABEL_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_LABEL_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_LABEL_FONT parameter.
 # 
@@ -4868,7 +4868,7 @@ def clearBondLabelFontParameter(cntnr: Base.ControlParameterContainer) -> None: 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_LABEL_MARGIN parameter of <em>cntnr</em> to <em>margin</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param margin The new bond label margin.
 # 
 def setBondLabelMarginParameter(cntnr: Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
@@ -4876,16 +4876,16 @@ def setBondLabelMarginParameter(cntnr: Base.ControlParameterContainer, margin: S
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_LABEL_MARGIN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_LABEL_MARGIN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_LABEL_MARGIN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_LABEL_MARGIN parameter.
 # 
@@ -4901,7 +4901,7 @@ def clearBondLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> None
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_LABEL_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new bond label size.
 # 
 def setBondLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
@@ -4909,16 +4909,16 @@ def setBondLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeS
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_LABEL_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_LABEL_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_LABEL_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_LABEL_SIZE parameter.
 # 
@@ -4934,7 +4934,7 @@ def clearBondLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_LENGTH parameter of <em>cntnr</em> to <em>length</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param length The new average bond length.
 # 
 def setBondLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
@@ -4942,16 +4942,16 @@ def setBondLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSp
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_LENGTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_LENGTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_LENGTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_LENGTH parameter.
 # 
@@ -4967,7 +4967,7 @@ def clearBondLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pas
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_LINE_SPACING parameter of <em>cntnr</em> to <em>spacing</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param spacing The new bond line spacing.
 # 
 def setBondLineSpacingParameter(cntnr: Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
@@ -4975,16 +4975,16 @@ def setBondLineSpacingParameter(cntnr: Base.ControlParameterContainer, spacing: 
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_LINE_SPACING parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_LINE_SPACING parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_LINE_SPACING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_LINE_SPACING parameter.
 # 
@@ -5000,7 +5000,7 @@ def clearBondLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> None
 ##
 # \brief Sets the value of the Vis.ControlParameter.BOND_LINE_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new bond line width.
 # 
 def setBondLineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
@@ -5008,16 +5008,16 @@ def setBondLineWidthParameter(cntnr: Base.ControlParameterContainer, width: Size
 ##
 # \brief Tells whether the Vis.ControlParameter.BOND_LINE_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasBondLineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BOND_LINE_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BOND_LINE_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BOND_LINE_WIDTH parameter.
 # 
@@ -5033,7 +5033,7 @@ def clearBondLineWidthParameter(cntnr: Base.ControlParameterContainer) -> None: 
 ##
 # \brief Sets the value of the Vis.ControlParameter.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE parameter of <em>cntnr</em> to <em>brk</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param brk <tt>True</tt> to break the outline at incident highlighted bonds, and <tt>False</tt> otherwise.
 # 
 # \since 1.2
@@ -5043,7 +5043,7 @@ def setBreakAtomHighlightAreaOutlineParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Tells whether the Vis.ControlParameter.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5052,9 +5052,9 @@ def setBreakAtomHighlightAreaOutlineParameter(cntnr: Base.ControlParameterContai
 def hasBreakAtomHighlightAreaOutlineParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE parameter. 
 # 
@@ -5081,7 +5081,7 @@ def setDefaultMaterialParameter(cntnr: Base.ControlParameterContainer, matrial: 
 ##
 # \brief Tells whether the Vis.ControlParameter.DEFAULT_MATERIAL parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5090,9 +5090,9 @@ def setDefaultMaterialParameter(cntnr: Base.ControlParameterContainer, matrial: 
 def hasDefaultMaterialParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.DEFAULT_MATERIAL parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.DEFAULT_MATERIAL parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.DEFAULT_MATERIAL parameter. 
 # 
@@ -5112,7 +5112,7 @@ def clearDefaultMaterialParameter(cntnr: Base.ControlParameterContainer) -> None
 ##
 # \brief Sets the value of the Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH parameter of <em>cntnr</em> to <em>length</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param length The new double bond trim length.
 # 
 def setDoubleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
@@ -5120,16 +5120,16 @@ def setDoubleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer, leng
 ##
 # \brief Tells whether the Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasDoubleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH parameter.
 # 
@@ -5152,7 +5152,7 @@ def setEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer, en
 ##
 # \brief Tells whether the Vis.ControlParameter.ENABLE_ATOM_HIGHLIGHTING parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5161,9 +5161,9 @@ def setEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer, en
 def hasEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ENABLE_ATOM_HIGHLIGHTING parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ENABLE_ATOM_HIGHLIGHTING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ENABLE_ATOM_HIGHLIGHTING parameter. 
 # 
@@ -5183,7 +5183,7 @@ def clearEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING parameter of <em>cntnr</em> to <em>enable</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param enable <tt>True</tt> to enable bond highlighting, and <tt>False</tt> to disable it.
 # 
 # \since 1.2
@@ -5193,7 +5193,7 @@ def setEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer, en
 ##
 # \brief Tells whether the Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5202,9 +5202,9 @@ def setEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer, en
 def hasEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING parameter. 
 # 
@@ -5224,7 +5224,7 @@ def clearEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.FEATURE_COLOR_TABLE parameter of <em>cntnr</em> to <em>colors</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param colors The new pharmacophoric feature color table.
 # 
 # \since 1.3
@@ -5234,7 +5234,7 @@ def setFeatureColorTableParameter(cntnr: Base.ControlParameterContainer, colors:
 ##
 # \brief Tells whether the Vis.ControlParameter.FEATURE_COLOR_TABLE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5243,9 +5243,9 @@ def setFeatureColorTableParameter(cntnr: Base.ControlParameterContainer, colors:
 def hasFeatureColorTableParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.FEATURE_COLOR_TABLE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.FEATURE_COLOR_TABLE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.FEATURE_COLOR_TABLE parameter. 
 # 
@@ -5265,7 +5265,7 @@ def clearFeatureColorTableParameter(cntnr: Base.ControlParameterContainer) -> No
 ##
 # \brief Sets the value of the Vis.ControlParameter.GRID_VIEW_BORDER_PEN parameter of <em>cntnr</em> to <em>pen</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param pen The new grid view border pen.
 # 
 # \since 1.2
@@ -5275,7 +5275,7 @@ def setGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer, pen: Pe
 ##
 # \brief Tells whether the Vis.ControlParameter.GRID_VIEW_BORDER_PEN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5284,9 +5284,9 @@ def setGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer, pen: Pe
 def hasGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_BORDER_PEN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_BORDER_PEN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.GRID_VIEW_BORDER_PEN parameter. 
 # 
@@ -5306,7 +5306,7 @@ def clearGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer) -> No
 ##
 # \brief Sets the value of the Vis.ControlParameter.GRID_VIEW_CELL_PADDING parameter of <em>cntnr</em> to <em>padding</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param padding The new grid view cell padding.
 # 
 # \since 1.2
@@ -5316,7 +5316,7 @@ def setGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer, paddi
 ##
 # \brief Tells whether the Vis.ControlParameter.GRID_VIEW_CELL_PADDING parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5325,9 +5325,9 @@ def setGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer, paddi
 def hasGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_CELL_PADDING parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_CELL_PADDING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.GRID_VIEW_CELL_PADDING parameter. 
 # 
@@ -5347,7 +5347,7 @@ def clearGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN parameter of <em>cntnr</em> to <em>pen</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param pen The new grid view column separator pen.
 # 
 # \since 1.2
@@ -5357,7 +5357,7 @@ def setGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Tells whether the Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5366,9 +5366,9 @@ def setGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContainer
 def hasGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN parameter. 
 # 
@@ -5388,7 +5388,7 @@ def clearGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Sets the value of the Vis.ControlParameter.GRID_VIEW_MARGIN parameter of <em>cntnr</em> to <em>margin</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param margin The new grid view outer margin.
 # 
 # \since 1.2
@@ -5398,7 +5398,7 @@ def setGridViewMarginParameter(cntnr: Base.ControlParameterContainer, margin: fl
 ##
 # \brief Tells whether the Vis.ControlParameter.GRID_VIEW_MARGIN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5407,9 +5407,9 @@ def setGridViewMarginParameter(cntnr: Base.ControlParameterContainer, margin: fl
 def hasGridViewMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_MARGIN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_MARGIN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.GRID_VIEW_MARGIN parameter. 
 # 
@@ -5429,7 +5429,7 @@ def clearGridViewMarginParameter(cntnr: Base.ControlParameterContainer) -> None:
 ##
 # \brief Sets the value of the Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN parameter of <em>cntnr</em> to <em>pen</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param pen The new grid view row separator pen.
 # 
 # \since 1.2
@@ -5439,7 +5439,7 @@ def setGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer, p
 ##
 # \brief Tells whether the Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5448,9 +5448,9 @@ def setGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer, p
 def hasGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN parameter. 
 # 
@@ -5470,7 +5470,7 @@ def clearGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Vis.ControlParameter.GRID_VIEW_TEXT_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new grid view text color.
 # 
 # \since 1.2
@@ -5480,7 +5480,7 @@ def setGridViewTextColorParameter(cntnr: Base.ControlParameterContainer, color: 
 ##
 # \brief Tells whether the Vis.ControlParameter.GRID_VIEW_TEXT_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5489,9 +5489,9 @@ def setGridViewTextColorParameter(cntnr: Base.ControlParameterContainer, color: 
 def hasGridViewTextColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_TEXT_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_TEXT_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.GRID_VIEW_TEXT_COLOR parameter. 
 # 
@@ -5511,7 +5511,7 @@ def clearGridViewTextColorParameter(cntnr: Base.ControlParameterContainer) -> No
 ##
 # \brief Sets the value of the Vis.ControlParameter.GRID_VIEW_TEXT_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new grid view text font.
 # 
 # \since 1.2
@@ -5521,7 +5521,7 @@ def setGridViewTextFontParameter(cntnr: Base.ControlParameterContainer, font: Fo
 ##
 # \brief Tells whether the Vis.ControlParameter.GRID_VIEW_TEXT_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5530,9 +5530,9 @@ def setGridViewTextFontParameter(cntnr: Base.ControlParameterContainer, font: Fo
 def hasGridViewTextFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_TEXT_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.GRID_VIEW_TEXT_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.GRID_VIEW_TEXT_FONT parameter. 
 # 
@@ -5552,7 +5552,7 @@ def clearGridViewTextFontParameter(cntnr: Base.ControlParameterContainer) -> Non
 ##
 # \brief Sets the value of the Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new highlight area outline width.
 # 
 # \since 1.2
@@ -5562,7 +5562,7 @@ def setHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContainer,
 ##
 # \brief Tells whether the Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5571,9 +5571,9 @@ def setHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContainer,
 def hasHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH parameter. 
 # 
@@ -5593,7 +5593,7 @@ def clearHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Vis.ControlParameter.OUTPUT_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param factor The new parameter value.
 # 
 # \since 1.2
@@ -5603,7 +5603,7 @@ def setOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer, facto
 ##
 # \brief Tells whether the Vis.ControlParameter.OUTPUT_SCALING_FACTOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -5612,9 +5612,9 @@ def setOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer, facto
 def hasOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.OUTPUT_SCALING_FACTOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.OUTPUT_SCALING_FACTOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.OUTPUT_SCALING_FACTOR parameter. 
 # 
@@ -5634,7 +5634,7 @@ def clearOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new radical electron dot size.
 # 
 def setRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
@@ -5642,16 +5642,16 @@ def setRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer, si
 ##
 # \brief Tells whether the Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE parameter.
 # 
@@ -5667,7 +5667,7 @@ def clearRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_AGENT_ALIGNMENT parameter of <em>cntnr</em> to <em>alignment</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param alignment The new agent alignment (see Vis.Alignment).
 # 
 def setReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer, alignment: int) -> None: pass
@@ -5675,16 +5675,16 @@ def setReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer, al
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_AGENT_ALIGNMENT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_AGENT_ALIGNMENT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_AGENT_ALIGNMENT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_AGENT_ALIGNMENT parameter.
 # 
@@ -5700,7 +5700,7 @@ def clearReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION parameter of <em>cntnr</em> to <em>dir</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param dir The new agent layout direction (see Vis.LayoutDirection).
 # 
 def setReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer, dir: int) -> None: pass
@@ -5708,16 +5708,16 @@ def setReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION parameter.
 # 
@@ -5733,7 +5733,7 @@ def clearReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterConta
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT parameter of <em>cntnr</em> to <em>layout</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param layout The new agent layout style (see Vis.LayoutStyle).
 # 
 def setReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer, layout: int) -> None: pass
@@ -5741,16 +5741,16 @@ def setReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer, layou
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_AGENT_LAYOUT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_AGENT_LAYOUT parameter.
 # 
@@ -5766,7 +5766,7 @@ def clearReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_ARROW_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new arrow color.
 # 
 def setReactionArrowColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
@@ -5774,16 +5774,16 @@ def setReactionArrowColorParameter(cntnr: Base.ControlParameterContainer, color:
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_ARROW_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionArrowColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_ARROW_COLOR parameter.
 # 
@@ -5799,7 +5799,7 @@ def clearReactionArrowColorParameter(cntnr: Base.ControlParameterContainer) -> N
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH parameter of <em>cntnr</em> to <em>length</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param length The new arrow head length.
 # 
 def setReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
@@ -5807,16 +5807,16 @@ def setReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer, l
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH parameter.
 # 
@@ -5832,7 +5832,7 @@ def clearReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new arrow head width.
 # 
 def setReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
@@ -5840,16 +5840,16 @@ def setReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer, wi
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH parameter.
 # 
@@ -5872,16 +5872,16 @@ def setReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer, lengt
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_ARROW_LENGTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_LENGTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_LENGTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_ARROW_LENGTH parameter.
 # 
@@ -5897,7 +5897,7 @@ def clearReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer) -> 
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new arrow outline width.
 # 
 def setReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
@@ -5905,16 +5905,16 @@ def setReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer, wi
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH parameter.
 # 
@@ -5930,7 +5930,7 @@ def clearReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new arrow shaft width.
 # 
 def setReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
@@ -5938,16 +5938,16 @@ def setReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer, w
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH parameter.
 # 
@@ -5963,7 +5963,7 @@ def clearReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_ARROW_STYLE parameter of <em>cntnr</em> to <em>style</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param style The new arrow style (see Vis.ArrowStyle).
 # 
 def setReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer, style: int) -> None: pass
@@ -5971,16 +5971,16 @@ def setReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer, style:
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_ARROW_STYLE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_STYLE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_ARROW_STYLE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_ARROW_STYLE parameter.
 # 
@@ -5996,7 +5996,7 @@ def clearReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer) -> N
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH parameter of <em>cntnr</em> to <em>length</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param length The new reaction center line length.
 # 
 def setReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
@@ -6004,16 +6004,16 @@ def setReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer, 
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH parameter.
 # 
@@ -6029,7 +6029,7 @@ def clearReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_CENTER_LINE_SPACING parameter of <em>cntnr</em> to <em>spacing</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param spacing The new reaction center line spacing.
 # 
 def setReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
@@ -6037,16 +6037,16 @@ def setReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContainer,
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_CENTER_LINE_SPACING parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_CENTER_LINE_SPACING parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_CENTER_LINE_SPACING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_CENTER_LINE_SPACING parameter.
 # 
@@ -6062,7 +6062,7 @@ def clearReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION parameter of <em>cntnr</em> to <em>dir</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param dir The new layout direction (see Vis.LayoutDirection).
 # 
 def setReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer, dir: int) -> None: pass
@@ -6070,16 +6070,16 @@ def setReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterCon
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION parameter.
 # 
@@ -6095,7 +6095,7 @@ def clearReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterC
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT parameter of <em>cntnr</em> to <em>layout</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param layout The new layout style (see Vis.LayoutStyle).
 # 
 def setReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer, layout: int) -> None: pass
@@ -6103,16 +6103,16 @@ def setReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer, l
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_COMPONENT_LAYOUT parameter.
 # 
@@ -6128,7 +6128,7 @@ def clearReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_COMPONENT_MARGIN parameter of <em>cntnr</em> to <em>margin</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param margin The new component margin.
 # 
 def setReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
@@ -6136,16 +6136,16 @@ def setReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer, m
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_COMPONENT_MARGIN parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_COMPONENT_MARGIN parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_COMPONENT_MARGIN parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_COMPONENT_MARGIN parameter.
 # 
@@ -6161,7 +6161,7 @@ def clearReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer)
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_COLOR parameter of <em>cntnr</em> to <em>color</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param color The new plus-sign color.
 # 
 def setReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
@@ -6169,16 +6169,16 @@ def setReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer, col
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_PLUS_SIGN_COLOR parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_COLOR parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_COLOR parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_PLUS_SIGN_COLOR parameter.
 # 
@@ -6194,7 +6194,7 @@ def clearReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new plus-sign line width.
 # 
 def setReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
@@ -6202,16 +6202,16 @@ def setReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContainer,
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH parameter.
 # 
@@ -6227,7 +6227,7 @@ def clearReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Sets the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new plus-sign size.
 # 
 def setReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
@@ -6235,16 +6235,16 @@ def setReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer, size
 ##
 # \brief Tells whether the Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE parameter.
 # 
@@ -6260,7 +6260,7 @@ def clearReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT parameter of <em>cntnr</em> to <em>font</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param font The new secondary atom label font.
 # 
 def setSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
@@ -6268,16 +6268,16 @@ def setSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer, fo
 ##
 # \brief Tells whether the Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT parameter.
 # 
@@ -6293,7 +6293,7 @@ def clearSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE parameter of <em>cntnr</em> to <em>size</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param size The new secondary atom label size.
 # 
 def setSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
@@ -6301,16 +6301,16 @@ def setSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer, si
 ##
 # \brief Tells whether the Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE parameter.
 # 
@@ -6326,7 +6326,7 @@ def clearSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) 
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show atom configuration descriptor labels, and <tt>False</tt> to hide them.
 # 
 # \since 1.1
@@ -6336,7 +6336,7 @@ def setShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6345,9 +6345,9 @@ def setShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContaine
 def hasShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS parameter. 
 # 
@@ -6367,7 +6367,7 @@ def clearShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show atom custom text labels, and <tt>False</tt> to hide them.
 # 
 # \since 1.2
@@ -6377,7 +6377,7 @@ def setShowAtomCustomLabelsParameter(cntnr: Base.ControlParameterContainer, show
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6386,9 +6386,9 @@ def setShowAtomCustomLabelsParameter(cntnr: Base.ControlParameterContainer, show
 def hasShowAtomCustomLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS parameter. 
 # 
@@ -6408,7 +6408,7 @@ def clearShowAtomCustomLabelsParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show query atom match expressions, and <tt>False</tt> to hide them.
 # 
 def setShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6416,16 +6416,16 @@ def setShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer, show: 
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS parameter.
 # 
@@ -6441,7 +6441,7 @@ def clearShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> N
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show reaction atom-atom mapping numbers, and <tt>False</tt> to hide them.
 # 
 def setShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6449,16 +6449,16 @@ def setShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer, sho
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS parameter.
 # 
@@ -6474,7 +6474,7 @@ def clearShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show bond configuration descriptor labels, and <tt>False</tt> to hide them.
 # 
 # \since 1.1
@@ -6484,7 +6484,7 @@ def setShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6493,9 +6493,9 @@ def setShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContaine
 def hasShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS parameter. 
 # 
@@ -6515,7 +6515,7 @@ def clearShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show bond custom text labels, and <tt>False</tt> to hide them.
 # 
 # \since 1.2
@@ -6525,7 +6525,7 @@ def setShowBondCustomLabelsParameter(cntnr: Base.ControlParameterContainer, show
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6534,9 +6534,9 @@ def setShowBondCustomLabelsParameter(cntnr: Base.ControlParameterContainer, show
 def hasShowBondCustomLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS parameter. 
 # 
@@ -6556,7 +6556,7 @@ def clearShowBondCustomLabelsParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_BOND_QUERY_INFOS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show query bond match expressions, and <tt>False</tt> to hide them.
 # 
 def setShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6564,16 +6564,16 @@ def setShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer, show: 
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_BOND_QUERY_INFOS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_QUERY_INFOS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_QUERY_INFOS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_BOND_QUERY_INFOS parameter.
 # 
@@ -6589,7 +6589,7 @@ def clearShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> N
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_BOND_REACTION_INFOS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to draw reaction center marks, and <tt>False</tt> to hide them.
 # 
 def setShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6597,16 +6597,16 @@ def setShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer, sho
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_BOND_REACTION_INFOS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_REACTION_INFOS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_BOND_REACTION_INFOS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_BOND_REACTION_INFOS parameter.
 # 
@@ -6622,7 +6622,7 @@ def clearShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_CARBONS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show carbon element labels, and <tt>False</tt> to hide them.
 # 
 def setShowCarbonsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6630,16 +6630,16 @@ def setShowCarbonsParameter(cntnr: Base.ControlParameterContainer, show: bool) -
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_CARBONS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowCarbonsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_CARBONS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_CARBONS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_CARBONS parameter.
 # 
@@ -6655,7 +6655,7 @@ def clearShowCarbonsParameter(cntnr: Base.ControlParameterContainer) -> None: pa
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_CHARGES parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show formal charges, and <tt>False</tt> to hide them.
 # 
 def setShowChargesParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6663,16 +6663,16 @@ def setShowChargesParameter(cntnr: Base.ControlParameterContainer, show: bool) -
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_CHARGES parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_CHARGES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_CHARGES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_CHARGES parameter.
 # 
@@ -6688,7 +6688,7 @@ def clearShowChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pa
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_EXPLICIT_HYDROGENS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show explicit hydrogens, and <tt>False</tt> to hide them.
 # 
 def setShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6696,16 +6696,16 @@ def setShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer, sho
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_EXPLICIT_HYDROGENS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_EXPLICIT_HYDROGENS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_EXPLICIT_HYDROGENS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_EXPLICIT_HYDROGENS parameter.
 # 
@@ -6721,7 +6721,7 @@ def clearShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_FEATURE_CENTERS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show feature center spheres, and <tt>False</tt> to hide them.
 # 
 # \since 1.3
@@ -6731,7 +6731,7 @@ def setShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer, show: 
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_FEATURE_CENTERS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
 # 
@@ -6740,9 +6740,9 @@ def setShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer, show: 
 def hasShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_FEATURE_CENTERS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_FEATURE_CENTERS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_FEATURE_CENTERS parameter. 
 # 
@@ -6762,7 +6762,7 @@ def clearShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer) -> N
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_HYDROGEN_COUNTS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show implicit hydrogen counts, and <tt>False</tt> to hide them.
 # 
 def setShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6770,16 +6770,16 @@ def setShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer, show: 
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_HYDROGEN_COUNTS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_HYDROGEN_COUNTS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_HYDROGEN_COUNTS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_HYDROGEN_COUNTS parameter.
 # 
@@ -6795,7 +6795,7 @@ def clearShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> N
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_ISOTOPES parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show isotopic mass values, and <tt>False</tt> to hide them.
 # 
 def setShowIsotopesParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6803,16 +6803,16 @@ def setShowIsotopesParameter(cntnr: Base.ControlParameterContainer, show: bool) 
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_ISOTOPES parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowIsotopesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_ISOTOPES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_ISOTOPES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_ISOTOPES parameter.
 # 
@@ -6828,7 +6828,7 @@ def clearShowIsotopesParameter(cntnr: Base.ControlParameterContainer) -> None: p
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_NON_CARBON_HYDROGEN_COUNTS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show non-carbon implicit hydrogen counts, and <tt>False</tt> to hide them.
 # 
 def setShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6836,16 +6836,16 @@ def setShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContaine
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_NON_CARBON_HYDROGEN_COUNTS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_NON_CARBON_HYDROGEN_COUNTS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_NON_CARBON_HYDROGEN_COUNTS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_NON_CARBON_HYDROGEN_COUNTS parameter.
 # 
@@ -6861,7 +6861,7 @@ def clearShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContai
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_RADICAL_ELECTRONS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show radical electron dots, and <tt>False</tt> to hide them.
 # 
 def setShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6869,16 +6869,16 @@ def setShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer, show
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_RADICAL_ELECTRONS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_RADICAL_ELECTRONS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_RADICAL_ELECTRONS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_RADICAL_ELECTRONS parameter.
 # 
@@ -6894,7 +6894,7 @@ def clearShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_REACTION_AGENTS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show the reaction agents, and <tt>False</tt> to hide them.
 # 
 def setShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6902,16 +6902,16 @@ def setShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer, show: 
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_REACTION_AGENTS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_AGENTS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_AGENTS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_REACTION_AGENTS parameter.
 # 
@@ -6927,7 +6927,7 @@ def clearShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer) -> N
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_REACTION_PLUS_SIGNS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to draw the '+' signs, and <tt>False</tt> to hide them.
 # 
 def setShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6935,16 +6935,16 @@ def setShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer, sho
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_REACTION_PLUS_SIGNS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_PLUS_SIGNS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_PLUS_SIGNS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_REACTION_PLUS_SIGNS parameter.
 # 
@@ -6960,7 +6960,7 @@ def clearShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_REACTION_PRODUCTS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show the reaction products, and <tt>False</tt> to hide them.
 # 
 def setShowReactionProductsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -6968,16 +6968,16 @@ def setShowReactionProductsParameter(cntnr: Base.ControlParameterContainer, show
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_REACTION_PRODUCTS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowReactionProductsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_PRODUCTS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_PRODUCTS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_REACTION_PRODUCTS parameter.
 # 
@@ -6993,7 +6993,7 @@ def clearShowReactionProductsParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_REACTION_REACTANTS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to show the reaction reactants, and <tt>False</tt> to hide them.
 # 
 def setShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -7001,16 +7001,16 @@ def setShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer, sho
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_REACTION_REACTANTS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_REACTANTS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_REACTION_REACTANTS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_REACTION_REACTANTS parameter.
 # 
@@ -7026,7 +7026,7 @@ def clearShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.SHOW_STEREO_BONDS parameter of <em>cntnr</em> to <em>show</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param show <tt>True</tt> to draw stereo bonds, and <tt>False</tt> to disable stereo bond rendering.
 # 
 def setShowStereoBondsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
@@ -7034,16 +7034,16 @@ def setShowStereoBondsParameter(cntnr: Base.ControlParameterContainer, show: boo
 ##
 # \brief Tells whether the Vis.ControlParameter.SHOW_STEREO_BONDS parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasShowStereoBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SHOW_STEREO_BONDS parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SHOW_STEREO_BONDS parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SHOW_STEREO_BONDS parameter.
 # 
@@ -7059,7 +7059,7 @@ def clearShowStereoBondsParameter(cntnr: Base.ControlParameterContainer) -> None
 ##
 # \brief Sets the value of the Vis.ControlParameter.SIZE_ADJUSTMENT parameter of <em>cntnr</em> to <em>adjustment</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param adjustment The new size-adjustment policy (see Vis.SizeAdjustment).
 # 
 def setSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer, adjustment: int) -> None: pass
@@ -7067,16 +7067,16 @@ def setSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer, adjustment
 ##
 # \brief Tells whether the Vis.ControlParameter.SIZE_ADJUSTMENT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.SIZE_ADJUSTMENT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.SIZE_ADJUSTMENT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.SIZE_ADJUSTMENT parameter.
 # 
@@ -7092,7 +7092,7 @@ def clearSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer) -> None:
 ##
 # \brief Sets the value of the Vis.ControlParameter.STEREO_BOND_HASH_SPACING parameter of <em>cntnr</em> to <em>spacing</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param spacing The new stereo bond hash spacing.
 # 
 def setStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
@@ -7100,16 +7100,16 @@ def setStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer, spa
 ##
 # \brief Tells whether the Vis.ControlParameter.STEREO_BOND_HASH_SPACING parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.STEREO_BOND_HASH_SPACING parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.STEREO_BOND_HASH_SPACING parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.STEREO_BOND_HASH_SPACING parameter.
 # 
@@ -7125,7 +7125,7 @@ def clearStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer) -
 ##
 # \brief Sets the value of the Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH parameter of <em>cntnr</em> to <em>width</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param width The new stereo bond wedge width.
 # 
 def setStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
@@ -7133,16 +7133,16 @@ def setStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer, widt
 ##
 # \brief Tells whether the Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH parameter.
 # 
@@ -7158,7 +7158,7 @@ def clearStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH parameter of <em>cntnr</em> to <em>length</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param length The new triple bond trim length.
 # 
 def setTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
@@ -7166,16 +7166,16 @@ def setTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer, leng
 ##
 # \brief Tells whether the Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH parameter.
 # 
@@ -7191,7 +7191,7 @@ def clearTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) ->
 ##
 # \brief Sets the value of the Vis.ControlParameter.USE_CALCULATED_ATOM_COORDINATES parameter of <em>cntnr</em> to <em>use</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param use <tt>True</tt> to use calculated atom coordinates, and <tt>False</tt> to use stored ones when available.
 # 
 def setUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContainer, use: bool) -> None: pass
@@ -7199,16 +7199,16 @@ def setUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContain
 ##
 # \brief Tells whether the Vis.ControlParameter.USE_CALCULATED_ATOM_COORDINATES parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.USE_CALCULATED_ATOM_COORDINATES parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.USE_CALCULATED_ATOM_COORDINATES parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.USE_CALCULATED_ATOM_COORDINATES parameter.
 # 
@@ -7224,7 +7224,7 @@ def clearUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterConta
 ##
 # \brief Sets the value of the Vis.ControlParameter.VIEWPORT parameter of <em>cntnr</em> to <em>viewport</em>.
 # 
-# \param cntnr The control-parameter container to update.
+# \param cntnr The control-parameter container.
 # \param viewport The new viewport rectangle.
 # 
 def setViewportParameter(cntnr: Base.ControlParameterContainer, viewport: Rectangle2D) -> None: pass
@@ -7232,16 +7232,16 @@ def setViewportParameter(cntnr: Base.ControlParameterContainer, viewport: Rectan
 ##
 # \brief Tells whether the Vis.ControlParameter.VIEWPORT parameter of <em>cntnr</em> is set.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
 # 
 def hasViewportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief Returns the value of the Vis.ControlParameter.VIEWPORT parameter from <em>cntnr</em>.
+# \brief Returns the value of the Vis.ControlParameter.VIEWPORT parameter stored in <em>cntnr</em>.
 # 
-# \param cntnr The control-parameter container to query.
+# \param cntnr The control-parameter container.
 # 
 # \return The value of the Vis.ControlParameter.VIEWPORT parameter.
 # 

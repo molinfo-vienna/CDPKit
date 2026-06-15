@@ -53,21 +53,21 @@ namespace CDPL
 
         /**
          * \brief Sets the value of the ConfGen::ControlParameter::STRICT_ERROR_CHECKING parameter stored in \a cntnr.
-         * \param cntnr The control-parameter container to update.
+         * \param cntnr The control-parameter container.
          * \param strict The new STRICT_ERROR_CHECKING value.
          */
         CDPL_CONFGEN_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
 
         /**
          * \brief Tells whether the ConfGen::ControlParameter::STRICT_ERROR_CHECKING parameter is set on \a cntnr.
-         * \param cntnr The control-parameter container to query.
+         * \param cntnr The control-parameter container.
          * \return \c true if the parameter is set, and \c false otherwise.
          */
         CDPL_CONFGEN_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Removes the ConfGen::ControlParameter::STRICT_ERROR_CHECKING parameter from \a cntnr.
-         * \param cntnr The control-parameter container to update.
+         * \param cntnr The control-parameter container.
          */
         CDPL_CONFGEN_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 

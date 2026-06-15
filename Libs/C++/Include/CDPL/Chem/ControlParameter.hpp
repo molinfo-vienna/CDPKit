@@ -684,14 +684,14 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_SPIN_MULTIPLICITY;
 
             /**
-             * \brief Specifies whether to use <em>CML</em>'s compact (array-style) representation for atom data on output.
+             * \brief Specifies whether to use a compact (array-style) representation for atom data when generating <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_COMPACT_ATOM_DATA;
 
             /**
-             * \brief Specifies whether to use <em>CML</em>'s compact (array-style) representation for bond data on output.
+             * \brief Specifies whether to use a compact (array-style) representation for bond data when generating <em>CML</em> output.
              * \valuetype \c bool
              * \since 1.2
              */
