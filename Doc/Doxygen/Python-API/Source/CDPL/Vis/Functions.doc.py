@@ -3684,18 +3684,24 @@ def getTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> SizeSpecification:
 def clearTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param weight_face_size 
-#
+# \brief Computes per-vertex normals of <em>mesh</em> from its face normals and stores them in the mesh.
+# 
+# \param mesh The triangle mesh for which to compute vertex normals (modified in place).
+# \param weight_face_size If <tt>True</tt>, each face normal is weighted by the face area when accumulated into the vertex normals.
+# 
+# \since 1.3
+# 
 def calcVertexFromFaceNormals(mesh: TriangleMesh3D, weight_face_size: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param normals 
-# \param weight_face_size 
-#
+# \brief Computes per-vertex normals of <em>mesh</em> from its face normals and stores them in <em>normals</em>.
+# 
+# \param mesh The triangle mesh for which to compute vertex normals.
+# \param normals The output array receiving the computed per-vertex normals.
+# \param weight_face_size If <tt>True</tt>, each face normal is weighted by the face area when accumulated into the vertex normals.
+# 
+# \since 1.3
+# 
 def calcVertexFromFaceNormals(mesh: TriangleMesh3D, normals: Math.Vector3DArray, weight_face_size: bool = False) -> None: pass
 
 ##
@@ -3717,76 +3723,103 @@ def prepareFor2DVisualization(molgraph: Chem.MolecularGraph) -> None: pass
 def prepareFor2DVisualization(rxn: Chem.Reaction) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param check_vn 
-# \param tol 
-# \return 
-#
+# \brief Merges duplicate vertices of <em>mesh</em> and updates the face vertex indices accordingly.
+# 
+# \param mesh The triangle mesh to deduplicate (modified in place).
+# \param check_vn If <tt>True</tt>, two vertices are only merged when their associated vertex normals also agree.
+# \param tol The position-equality tolerance; vertices closer than <em>tol</em> are considered duplicates.
+# 
+# \return The number of removed (merged-away) vertices. 
+# 
+# \since 1.3
+# 
 def removeVertexDuplicates(mesh: TriangleMesh3D, check_vn: bool = True, tol: float = 0.0) -> int: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param angle 
-# \param vtx_offs 
-# \param vtx_count 
-#
+# \brief Rotates the vertices of <em>mesh</em> around the x-axis by the angle <em>angle</em>.
+# 
+# \param mesh The triangle mesh to rotate (modified in place).
+# \param angle The rotation angle in radians.
+# \param vtx_offs The index of the first vertex to rotate.
+# \param vtx_count The number of vertices to rotate (<em>0</em> to process all vertices from <em>vtx_offs</em> onwards).
+# 
+# \since 1.3
+# 
 def rotateX(mesh: TriangleMesh3D, angle: float, vtx_offs: int = 0, vtx_count: int = 0) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param angle 
-# \param vtx_offs 
-# \param vtx_count 
-#
+# \brief Rotates the vertices of <em>mesh</em> around the y-axis by the angle <em>angle</em>.
+# 
+# \param mesh The triangle mesh to rotate (modified in place).
+# \param angle The rotation angle in radians.
+# \param vtx_offs The index of the first vertex to rotate.
+# \param vtx_count The number of vertices to rotate (<em>0</em> to process all vertices from <em>vtx_offs</em> onwards).
+# 
+# \since 1.3
+# 
 def rotateY(mesh: TriangleMesh3D, angle: float, vtx_offs: int = 0, vtx_count: int = 0) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param angle 
-# \param vtx_offs 
-# \param vtx_count 
-#
+# \brief Rotates the vertices of <em>mesh</em> around the z-axis by the angle <em>angle</em>.
+# 
+# \param mesh The triangle mesh to rotate (modified in place).
+# \param angle The rotation angle in radians.
+# \param vtx_offs The index of the first vertex to rotate.
+# \param vtx_count The number of vertices to rotate (<em>0</em> to process all vertices from <em>vtx_offs</em> onwards).
+# 
+# \since 1.3
+# 
 def rotateZ(mesh: TriangleMesh3D, angle: float, vtx_offs: int = 0, vtx_count: int = 0) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param scale_x 
-# \param scale_y 
-# \param scale_z 
-# \param vtx_offs 
-# \param vtx_count 
-#
+# \brief Scales the vertices of <em>mesh</em> by the per-axis factors <em>(scale_x, scale_y, scale_z)</em>.
+# 
+# \param mesh The triangle mesh to scale (modified in place).
+# \param scale_x The scaling factor along the x-axis.
+# \param scale_y The scaling factor along the y-axis.
+# \param scale_z The scaling factor along the z-axis.
+# \param vtx_offs The index of the first vertex to scale.
+# \param vtx_count The number of vertices to scale (<em>0</em> to process all vertices from <em>vtx_offs</em> onwards).
+# 
+# \since 1.3
+# 
 def scale(mesh: TriangleMesh3D, scale_x: float, scale_y: float, scale_z: float, vtx_offs: int = 0, vtx_count: int = 0) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-#
+# \brief Subdivides each triangle face of <em>mesh</em> and projects the new vertices onto the unit sphere.
+# 
+# Each face is split into four sub-triangles by inserting a new vertex at the midpoint of every edge; the new vertices are then normalized so that they lie on the unit sphere. Repeated application yields a finer spherical approximation.
+# 
+# \param mesh The triangle mesh to subdivide (modified in place).
+# 
+# \since 1.3
+# 
 def subdivideSpherical(mesh: TriangleMesh3D) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param mtx 
-# \param vtx_offs 
-# \param vtx_count 
-#
+# \brief Applies the affine transformation matrix <em>mtx</em> to the vertices of <em>mesh</em>.
+# 
+# \param mesh The triangle mesh to transform (modified in place).
+# \param mtx The \f$ 4 \times 4 \f$ homogeneous transformation matrix to apply.
+# \param vtx_offs The index of the first vertex to transform.
+# \param vtx_count The number of vertices to transform (<em>0</em> to process all vertices from <em>vtx_offs</em> onwards).
+# 
+# \since 1.3
+# 
 def transform(mesh: TriangleMesh3D, mtx: Math.Matrix4D, vtx_offs: int = 0, vtx_count: int = 0) -> None: pass
 
 ##
-# \brief 
-# \param mesh 
-# \param trans_x 
-# \param trans_y 
-# \param trans_z 
-# \param vtx_offs 
-# \param vtx_count 
-#
+# \brief Translates the vertices of <em>mesh</em> by the vector <em>(trans_x, trans_y, trans_z)</em>.
+# 
+# \param mesh The triangle mesh to translate (modified in place).
+# \param trans_x The translation along the x-axis.
+# \param trans_y The translation along the y-axis.
+# \param trans_z The translation along the z-axis.
+# \param vtx_offs The index of the first vertex to translate.
+# \param vtx_count The number of vertices to translate (<em>0</em> to process all vertices from <em>vtx_offs</em> onwards).
+# 
+# \since 1.3
+# 
 def translate(mesh: TriangleMesh3D, trans_x: float, trans_y: float, trans_z: float, vtx_offs: int = 0, vtx_count: int = 0) -> None: pass
 
 ##
