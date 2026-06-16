@@ -63,7 +63,7 @@ namespace CDPL
          * \brief Extracts the 2D coordinates of all atoms in \a cntnr into \a coords.
          * \param cntnr The atom container.
          * \param coords The output 2D-coordinate array.
-         * \param append If \c true, the coordinates are appended to \a coords; otherwise \a coords is cleared first.
+         * \param append If \c true, the coordinates are appended to \a coords. Otherwise, \a coords is cleared first.
          */
         CDPL_CHEM_API void get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords, bool append = false);
 
@@ -87,7 +87,7 @@ namespace CDPL
          * \param cntnr The atom container.
          * \param coords The output 3D-coordinate array.
          * \param coords_func The function returning the 3D coordinates of an atom.
-         * \param append If \c true, the coordinates are appended to \a coords; otherwise \a coords is cleared first.
+         * \param append If \c true, the coordinates are appended to \a coords. Otherwise, \a coords is cleared first.
          */
         CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append = false);
 
@@ -117,7 +117,7 @@ namespace CDPL
          * \param cntnr The atom container.
          * \param conf_idx The zero-based conformation index.
          * \param coords The output 3D-coordinate array.
-         * \param append If \c true, the coordinates are appended to \a coords; otherwise \a coords is cleared first.
+         * \param append If \c true, the coordinates are appended to \a coords. Otherwise, \a coords is cleared first.
          */
         CDPL_CHEM_API void getConformation(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords, bool append = false);
 
@@ -214,8 +214,8 @@ namespace CDPL
          * \param cntnr The atom container.
          * \param mask The output bit mask (bit \e i is set if atom \e i of \a cntnr has the requested type).
          * \param type The query atom type (Chem::AtomType value, possibly a generic class such as Chem::AtomType::HET).
-         * \param reset If \c true, \a mask is reset before processing; otherwise existing bits are preserved.
-         * \param strict If \c true, only exact type matches are accepted; if \c false, generic-class matches also set the bit.
+         * \param reset If \c true, \a mask is reset before processing. Otherwise, existing bits are preserved.
+         * \param strict If \c true, only exact type matches are accepted. If \c false, generic-class matches also set the bit.
          * \return The number of atoms whose bit was set.
          */
         CDPL_CHEM_API std::size_t createAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true, bool strict = true);
@@ -226,7 +226,7 @@ namespace CDPL
          * \param cntnr The source atom container.
          * \param mol The target molecule.
          * \param pred The predicate evaluated for each atom; only atoms for which it returns \c true are copied.
-         * \param append If \c true, atoms are appended to \a mol; otherwise \a mol is cleared first.
+         * \param append If \c true, atoms are appended to \a mol. Otherwise, \a mol is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
 
@@ -235,7 +235,7 @@ namespace CDPL
          * \param cntnr The source atom container.
          * \param frag The target fragment.
          * \param pred The predicate evaluated for each atom; only atoms for which it returns \c true are copied.
-         * \param append If \c true, atoms are appended to \a frag; otherwise \a frag is cleared first.
+         * \param append If \c true, atoms are appended to \a frag. Otherwise, \a frag is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
 
@@ -244,7 +244,7 @@ namespace CDPL
          * \param cntnr The source atom container.
          * \param mol The target molecule.
          * \param pred The predicate evaluated for each atom; only atoms for which it returns \c false are copied.
-         * \param append If \c true, atoms are appended to \a mol; otherwise \a mol is cleared first.
+         * \param append If \c true, atoms are appended to \a mol. Otherwise, \a mol is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
 
@@ -253,7 +253,7 @@ namespace CDPL
          * \param cntnr The source atom container.
          * \param frag The target fragment.
          * \param pred The predicate evaluated for each atom; only atoms for which it returns \c false are copied.
-         * \param append If \c true, atoms are appended to \a frag; otherwise \a frag is cleared first.
+         * \param append If \c true, atoms are appended to \a frag. Otherwise, \a frag is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
 
@@ -282,7 +282,7 @@ namespace CDPL
          * \param min The output lower-left corner of the bounding box.
          * \param max The output upper-right corner of the bounding box.
          * \param coords_func The function returning the 3D coordinates of an atom.
-         * \param reset If \c true, the bounding box is reset to the first atom; otherwise \a min and \a max are extended in place.
+         * \param reset If \c true, the bounding box is reset to the first atom. Otherwise, \a min and \a max are extended in place.
          */
         CDPL_CHEM_API void calcBoundingBox(const AtomContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func, bool reset = true);
 

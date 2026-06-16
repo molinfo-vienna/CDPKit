@@ -161,7 +161,7 @@ namespace CDPL
              * \brief Searches the associated TorsionLibrary for rules that apply to the bond \a bond of \a molgraph.
              * \param bond The rotatable bond for which matching torsion rules are sought.
              * \param molgraph The molecular graph the bond belongs to.
-             * \param append If \c true, new matches are appended to the previously stored ones; otherwise stored matches are cleared first.
+             * \param append If \c true, new matches are appended to the previously stored ones. Otherwise, stored matches are cleared first.
              * \return \c true if at least one matching rule was found, and \c false otherwise.
              */
             bool findMatches(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool append = false);

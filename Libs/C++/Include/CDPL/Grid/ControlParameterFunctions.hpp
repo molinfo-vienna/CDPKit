@@ -52,7 +52,7 @@ namespace CDPL
         CDPL_GRID_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Grid::ControlParameter::STRICT_ERROR_CHECKING parameter of \a cntnr to \a strict.
+         * \brief Sets the value of the Grid::ControlParameter::STRICT_ERROR_CHECKING parameter of \a cntnr to \a strict.
          * \param cntnr The control-parameter container.
          * \param strict \c true to enable strict error checking, and \c false to disable it.
          */
@@ -80,7 +80,7 @@ namespace CDPL
         CDPL_GRID_API bool getCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Grid::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of \a cntnr to \a single_prec.
+         * \brief Sets the value of the Grid::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of \a cntnr to \a single_prec.
          * \param cntnr The control-parameter container.
          * \param single_prec \c true to write single-precision floats, and \c false to write double-precision floats.
          * \since 1.2
@@ -111,7 +111,7 @@ namespace CDPL
         CDPL_GRID_API bool getCUBECommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Grid::ControlParameter::CUBE_COMMENT_IS_NAME parameter of \a cntnr to \a is_name.
+         * \brief Sets the value of the Grid::ControlParameter::CUBE_COMMENT_IS_NAME parameter of \a cntnr to \a is_name.
          * \param cntnr The control-parameter container.
          * \param is_name \c true to interpret the \e CUBE comment line as the grid name, and \c false to treat it as a regular comment.
          * \since 1.4
@@ -142,7 +142,7 @@ namespace CDPL
         CDPL_GRID_API double getCUBEInputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of \a cntnr to \a factor.
+         * \brief Sets the value of the Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of \a cntnr to \a factor.
          * \param cntnr The control-parameter container.
          * \param factor The new distance scaling factor applied to \e CUBE input.
          * \since 1.4
@@ -173,7 +173,7 @@ namespace CDPL
         CDPL_GRID_API double getCUBEOutputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of \a cntnr to \a factor.
+         * \brief Sets the value of the Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of \a cntnr to \a factor.
          * \param cntnr The control-parameter container.
          * \param factor The new distance scaling factor applied to \e CUBE output.
          * \since 1.4

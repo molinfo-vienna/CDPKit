@@ -53,14 +53,14 @@ namespace CDPL
         CDPL_PHARM_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Pharm::ControlParameter::STRICT_ERROR_CHECKING parameter of \a cntnr to \a strict.
+         * \brief Sets the value of the Pharm::ControlParameter::STRICT_ERROR_CHECKING parameter of \a cntnr to \a strict.
          * \param cntnr The control-parameter container.
          * \param strict \c true to enable strict error checking, and \c false to disable it.
          */
         CDPL_PHARM_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
 
         /**
-         * \brief Tells whether \a cntnr carries an explicit Pharm::ControlParameter::STRICT_ERROR_CHECKING parameter.
+         * \brief Tells whether the Pharm::ControlParameter::STRICT_ERROR_CHECKING parameter of \a cntnr is set.
          * \param cntnr The control-parameter container.
          * \return \c true if the parameter is set, and \c false otherwise.
          */
@@ -81,7 +81,7 @@ namespace CDPL
         CDPL_PHARM_API bool getCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of \a cntnr to \a single_prec.
+         * \brief Sets the value of the Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of \a cntnr to \a single_prec.
          * \param cntnr The control-parameter container.
          * \param single_prec \c true to write single-precision floats, and \c false to write double-precision floats.
          * \since 1.2
@@ -89,7 +89,7 @@ namespace CDPL
         CDPL_PHARM_API void setCDFOutputSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
 
         /**
-         * \brief Tells whether \a cntnr carries an explicit Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter.
+         * \brief Tells whether the Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of \a cntnr is set.
          * \param cntnr The control-parameter container.
          * \return \c true if the parameter is set, and \c false otherwise.
          * \since 1.2
@@ -112,14 +112,14 @@ namespace CDPL
         CDPL_PHARM_API ScreeningDBCreator::Mode getPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Pharm::ControlParameter::PSD_CREATION_MODE parameter of \a cntnr to \a mode.
+         * \brief Sets the value of the Pharm::ControlParameter::PSD_CREATION_MODE parameter of \a cntnr to \a mode.
          * \param cntnr The control-parameter container.
          * \param mode The new Pharm::ScreeningDBCreator::Mode value.
          */
         CDPL_PHARM_API void setPSDCreationModeParameter(Base::ControlParameterContainer& cntnr, ScreeningDBCreator::Mode mode);
 
         /**
-         * \brief Tells whether \a cntnr carries an explicit Pharm::ControlParameter::PSD_CREATION_MODE parameter.
+         * \brief Tells whether the Pharm::ControlParameter::PSD_CREATION_MODE parameter of \a cntnr is set.
          * \param cntnr The control-parameter container.
          * \return \c true if the parameter is set, and \c false otherwise.
          */
@@ -140,14 +140,14 @@ namespace CDPL
         CDPL_PHARM_API bool getPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
-         * \brief Sets the Pharm::ControlParameter::PSD_ALLOW_DUPLICATES parameter of \a cntnr to \a allow.
+         * \brief Sets the value of the Pharm::ControlParameter::PSD_ALLOW_DUPLICATES parameter of \a cntnr to \a allow.
          * \param cntnr The control-parameter container.
          * \param allow \c true to allow duplicate database entries, and \c false to reject them.
          */
         CDPL_PHARM_API void setPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr, bool allow);
 
         /**
-         * \brief Tells whether \a cntnr carries an explicit Pharm::ControlParameter::PSD_ALLOW_DUPLICATES parameter.
+         * \brief Tells whether the Pharm::ControlParameter::PSD_ALLOW_DUPLICATES parameter of \a cntnr is set.
          * \param cntnr The control-parameter container.
          * \return \c true if the parameter is set, and \c false otherwise.
          */

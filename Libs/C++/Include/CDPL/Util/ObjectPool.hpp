@@ -140,7 +140,7 @@ namespace CDPL
             /**
              * \brief Destructor. Destroys all currently idle pool entries.
              * \warning All previously handed-out smart pointers must have been released before
-             *          destruction; otherwise the deferred put() will operate on a destroyed pool.
+             *          destruction. Otherwise, the deferred put() will operate on a destroyed pool.
              */
             ~ObjectPool()
             {

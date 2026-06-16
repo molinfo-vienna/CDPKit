@@ -607,8 +607,11 @@ namespace CDPL
         CDPL_VIS_API void clearShowPlusSigns(Chem::Reaction& rxn);
 
         /**
-         * \brief Prepares \a rxn for 2D visualization by perceiving all properties (aromaticity, hybridization, rings,
-         *        stereo, etc.) that downstream 2D-rendering code expects to be set on each reaction component.
+         * \brief Prepares the reaction \a rxn for 2D visualization.
+         *
+         * The reaction gets prepared by perceiving all properties (aromaticity, hybridization, rings,
+         * stereo, etc.) which the downstream 2D rendering code expects to be set on each reaction component.
+         *
          * \param rxn The reaction to prepare (modified in place).
          * \since 1.3
          */

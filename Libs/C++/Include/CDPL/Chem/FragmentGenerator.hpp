@@ -166,7 +166,7 @@ namespace CDPL
 
                 /**
                  * \brief Sets whether this exclude pattern is generic.
-                 * \param generic If \c true, the pattern applies to all rules; if \c false, only to the configured rule ID.
+                 * \param generic If \c true, the pattern applies to all rules. If \c false, only to the configured rule ID.
                  */
                 void setGeneric(bool generic);
 
@@ -459,7 +459,7 @@ namespace CDPL
              * \brief Performs the fragmentation of \a molgraph and writes the resulting fragments to \a frag_list.
              * \param molgraph The molecular graph to fragment.
              * \param frag_list The output fragment list.
-             * \param append If \c true, new fragments are appended to \a frag_list; otherwise the list is cleared first.
+             * \param append If \c true, new fragments are appended to \a frag_list. Otherwise, the list is cleared first.
              */
             void generate(const MolecularGraph& molgraph, FragmentList& frag_list, bool append = false);
 

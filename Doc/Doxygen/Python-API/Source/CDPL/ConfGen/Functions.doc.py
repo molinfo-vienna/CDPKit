@@ -133,7 +133,9 @@ def parameterizeMMFF94Interactions(molgraph: Chem.MolecularGraph, parameterizer:
 def perceiveFragmentType(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief Prepares <em>mol</em> for conformer generation by completing its hydrogens, perceiving SSSR, ring flags, implicit hydrogen counts, hybridization states, aromaticity and (optionally) canonicalizing the atom ordering.
+# \brief Prepares the molecule <em>mol</em> for conformer generation.
+# 
+# The molecules gets prepared by completing its hydrogens, perceiving the SSSR, ring flags, implicit hydrogen counts, hybridization states, aromaticity and (optionally) canonicalizing the atom ordering.
 # 
 # \param mol The molecule to prepare (modified in place).
 # \param canonicalize If <tt>True</tt>, the atom ordering of <em>mol</em> is canonicalized.

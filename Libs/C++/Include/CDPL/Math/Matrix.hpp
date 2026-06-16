@@ -901,7 +901,7 @@ namespace CDPL
              * \brief Resizes the matrix to \f$ m \times n \f$ elements.
              * \param m The new row count.
              * \param n The new column count.
-             * \param preserve If \c true, existing element values at indices that remain valid are kept; if \c false, all elements are set to \a v.
+             * \param preserve If \c true, existing element values at indices that remain valid are kept. If \c false, all elements are set to \a v.
              * \param v The fill value for newly added elements (or for all elements when \a preserve is \c false).
              */
             void resize(SizeType m, SizeType n, bool preserve = true, const ValueType& v = ValueType())

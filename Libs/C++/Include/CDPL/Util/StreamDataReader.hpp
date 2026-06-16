@@ -76,7 +76,7 @@ namespace CDPL
             /**
              * \brief Reads the next data record into \a obj by delegating to \a ReaderImpl::readData().
              * \param obj The output data object.
-             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced. Otherwise, the new data is merged.
              * \return A reference to itself.
              */
             Base::DataReader<DataType>& read(DataType& obj, bool overwrite = true);
@@ -85,7 +85,7 @@ namespace CDPL
              * \brief Reads the data record at index \a idx into \a obj by delegating to \a ReaderImpl::readData().
              * \param idx The zero-based index of the record to read.
              * \param obj The output data object.
-             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced. Otherwise, the new data is merged.
              * \return A reference to itself.
              * \throw Base::IndexError if the number of records is zero or \a idx is not in the range [0, getNumRecords() - 1].
              */

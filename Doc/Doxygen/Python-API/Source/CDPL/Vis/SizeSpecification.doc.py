@@ -73,7 +73,7 @@ class SizeSpecification(Boost.Python.instance):
     ##
     # \brief Specifies whether the specified size has to follow input scaling operations.
     # 
-    # Input scaling is a pre-processing step (performed by some other part of the system) where an input size quantity is scaled to fulfill a certain constraint. An example is the scaling of input atom coordinates to obtain a certain average bond length for the 2D depiction of a chemical structure or reaction.
+    # Input scaling is a preprocessing step (performed by some other part of the system) where an input size quantity is scaled to fulfill a certain constraint. An example is the scaling of input atom coordinates to obtain a certain average bond length for the 2D depiction of a chemical structure or reaction.
     # 
     # \param follow <tt>True</tt> if the specified size has to follow input scaling operations, and <tt>False</tt> otherwise.
     # 

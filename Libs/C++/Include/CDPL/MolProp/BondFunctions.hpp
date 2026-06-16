@@ -48,45 +48,45 @@ namespace CDPL
     {
 
         /**
-         * \brief Returns the value of the MolProp::BondProperty::MHMO_PI_ORDER property of \a bond.
-         * \param bond The bond.
+         * \brief Returns the value of the MolProp::BondProperty::MHMO_PI_ORDER property of the bond \a bond.
+         * \param bond The bond for which to return the property value.
          * \return The MHMO pi-bond order.
          */
         CDPL_MOLPROP_API double getMHMOPiOrder(const Chem::Bond& bond);
 
         /**
-         * \brief Sets the value of the MolProp::BondProperty::MHMO_PI_ORDER property of \a bond.
-         * \param bond The bond.
+         * \brief Sets the value of the MolProp::BondProperty::MHMO_PI_ORDER property of the bond \a bond to \a order.
+         * \param bond The bond for which to set the property value.
          * \param order The MHMO pi-bond order.
          */
         CDPL_MOLPROP_API void setMHMOPiOrder(Chem::Bond& bond, double order);
 
         /**
-         * \brief Removes the MolProp::BondProperty::MHMO_PI_ORDER property from \a bond.
-         * \param bond The bond.
+         * \brief Clears the value of the MolProp::BondProperty::MHMO_PI_ORDER property of the bond \a bond.
+         * \param bond The bond for which to clear the property value.
          */
         CDPL_MOLPROP_API void clearMHMOPiOrder(Chem::Bond& bond);
 
         /**
-         * \brief Tells whether \a bond carries an explicit MolProp::BondProperty::MHMO_PI_ORDER property.
-         * \param atom The bond.
+         * \brief Tells whether the MolProp::BondProperty::MHMO_PI_ORDER property of the bond \a bond is set.
+         * \param atom The bond for which to query the property value.
          * \return \c true if the property is set, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool hasMHMOPiOrder(const Chem::Bond& atom);
 
 
         /**
-         * \brief Calculates the bond polarizability of \a bond within \a molgraph.
+         * \brief Calculates the bond polarizability of the bond \a bond within the molecular graph \a molgraph.
          * \param bond The bond.
-         * \param molgraph The molecular graph containing \a bond.
-         * \param damping The damping factor applied to remote-atom contributions.
+         * \param molgraph The molecular graph containing the bond \a bond.
+         * \param damping The damping factor applied to remote atom contributions.
          * \return The calculated bond polarizability.
          */
         CDPL_MOLPROP_API double calcPolarizability(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, double damping = 0.75);
 
 
         /**
-         * \brief Tells whether \a Bond is part of any ring of \a molgraph.
+         * \brief Tells whether the bond \a bond is part of any ring of the molecular graph \a molgraph.
          * \param Bond The bond.
          * \param molgraph The molecular graph containing the bond.
          * \return \c true if the bond is part of a ring, and \c false otherwise.
@@ -94,7 +94,7 @@ namespace CDPL
         CDPL_MOLPROP_API bool isInRing(const Chem::Bond& Bond, const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Tells whether \a bond is part of a ring of the specified size in \a molgraph.
+         * \brief Tells whether the bond \a bond is part of a ring of the specified size in the molecular graph \a molgraph.
          * \param bond The bond.
          * \param molgraph The molecular graph containing the bond.
          * \param size The ring size to test for.
@@ -103,7 +103,7 @@ namespace CDPL
         CDPL_MOLPROP_API bool isInRingOfSize(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, std::size_t size);
 
         /**
-         * \brief Returns the number of SSSR rings of \a molgraph that contain \a bond.
+         * \brief Returns the number of SSSR rings of the molecular graph \a molgraph that contain the bond \a bond.
          * \param bond The bond.
          * \param molgraph The molecular graph containing the bond.
          * \return The number of SSSR rings containing the bond.
@@ -112,7 +112,7 @@ namespace CDPL
 
 
         /**
-         * \brief Tells whether \a bond is a rotatable bond whose rotation only moves hydrogen atoms.
+         * \brief Tells whether the bond \a bond is a rotatable bond whose rotation only moves hydrogen atoms.
          * \param bond The bond.
          * \param molgraph The molecular graph containing the bond.
          * \return \c true if the bond is a hydrogen-only rotor, and \c false otherwise.
@@ -120,15 +120,15 @@ namespace CDPL
         CDPL_MOLPROP_API bool isHydrogenRotor(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Tells whether \a bond is a hydrogen-only rotor where the rotating end is a heteroatom-bound hydrogen.
+         * \brief Tells whether the bond \a bond is a heteroatom hydrogen-only rotor.
          * \param bond The bond.
          * \param molgraph The molecular graph containing the bond.
-         * \return \c true if the bond is a heteroatom-hydrogen rotor, and \c false otherwise.
+         * \return \c true if the bond is a heteroatom hydrogen-only rotor, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool isHeteroAtomHydrogenRotor(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Tells whether \a bond is rotatable.
+         * \brief Tells whether the bond \a bond is rotatable.
          * \param bond The bond.
          * \param molgraph The molecular graph containing the bond.
          * \param h_rotors If \c true, hydrogen-only rotors are counted as rotatable.
@@ -139,18 +139,18 @@ namespace CDPL
         CDPL_MOLPROP_API bool isRotatable(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool h_rotors = false, bool ring_bonds = false, bool amide_bonds = false);
 
         /**
-         * \brief Tells whether \a bond is a hydrogen bond (one of the bonded atoms is a hydrogen).
+         * \brief Tells whether the bond \a bond is a hydrogen bond (one of the bonded atoms is a hydrogen).
          * \param bond The bond.
          * \return \c true if the bond involves a hydrogen, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool isHydrogenBond(const Chem::Bond& bond);
 
         /**
-         * \brief Tells whether \a bond is an amide bond in \a molgraph.
+         * \brief Tells whether \a bond is an amide bond in the molecular graph \a molgraph.
          * \param bond The bond.
          * \param molgraph The molecular graph containing the bond.
-         * \param c_only If \c true, only C(=O)N bonds are recognized (more restrictive).
-         * \param db_o_only If \c true, the C=O must be a double bond to oxygen specifically.
+         * \param c_only If \c true, only C(=X)N bonds are recognized (more restrictive).
+         * \param db_o_only If \c true, the C=X must be a double bond to oxygen only.
          * \return \c true if the bond is an amide bond under the given criteria, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);

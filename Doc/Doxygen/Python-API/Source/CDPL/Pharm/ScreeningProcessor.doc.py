@@ -224,14 +224,14 @@ class ScreeningProcessor(Boost.Python.instance):
     def getMaxNumOmittedFeatures() -> int: pass
 
     ##
-    # \brief Specifies whether the alignment shall check exclusion-volume clashes between the query and the hit molecule.
+    # \brief Specifies whether the alignment shall check exclusion volume clashes between the query and the hit molecule.
     # 
     # \param check <tt>True</tt> to enable the clash check, and <tt>False</tt> to disable it.
     # 
     def checkXVolumeClashes(check: bool) -> None: pass
 
     ##
-    # \brief Tells whether exclusion-volume clashes are checked during alignment.
+    # \brief Tells whether exclusion volume clashes are checked during alignment.
     # 
     # \return <tt>True</tt> if the clash check is enabled, and <tt>False</tt> otherwise.
     # 
@@ -298,7 +298,7 @@ class ScreeningProcessor(Boost.Python.instance):
     # 
     # \param query The query feature container.
     # \param mol_start_idx The zero-based index of the first molecule to screen.
-    # \param mol_end_idx The exclusive upper bound of the molecule range; if <em>0</em>, the search runs through the end of the database.
+    # \param mol_end_idx The exclusive upper bound of the molecule range. If <em>0</em>, the search runs through the end of the database.
     # 
     # \return The number of accepted hits produced by the search.
     # 

@@ -50,66 +50,69 @@ namespace CDPL
         class FeatureContainer;
 
         /**
-         * \brief Removes positional duplicate features from \a pharm in place.
+         * \brief Removes positional duplicate features from the pharmacophore \a pharm in place.
          *
-         * Two features count as duplicates if they have identical Pharm::FeatureType and their position vectors either match
+         * Two features count as duplicates if they have identical type and their position vectors either match
          * exactly (\a pos_tol &le; 0) or lie within \a pos_tol from each other. When a duplicate is detected, the feature with
          * the larger position tolerance is retained.
          *
          * \param pharm The pharmacophore to deduplicate.
-         * \param pos_tol The position-equality tolerance in &Aring;ngstrom; values &le; 0 require an exact position match.
+         * \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; 0 require an exact position match.
          * \return \c true if at least one feature was removed, and \c false otherwise.
          * \since 1.2
          */
         CDPL_PHARM_API bool removePositionalDuplicates(Pharmacophore& pharm, double pos_tol = 0.0);
 
         /**
-         * \brief Removes every feature in \a pharm whose Pharm::FeatureType matches \a type.
+         * \brief Removes every feature in the pharmacophore \a pharm whose type matches \a type.
          * \param pharm The pharmacophore to filter.
-         * \param type The Pharm::FeatureType to remove.
+         * \param type The feature type to remove (see namespace Pharm::FeatureType).
          * \return \c true if at least one feature was removed, and \c false otherwise.
          * \since 1.2
          */
         CDPL_PHARM_API bool removeFeaturesWithType(Pharmacophore& pharm, unsigned int type);
 
         /**
-         * \brief Builds an interaction pharmacophore from the supplied feature-to-feature mapping by emitting one feature
-         *        per source feature, optionally enriched with orientation vectors and environment substructures derived
-         *        from the mapped partner features.
+         * \brief Builds an interaction pharmacophore from the supplied feature mapping.
+         *
+         * At least one output feature per interacting ligand feature is emitted. For H-bond donor/acceptor and X-bonding interactions
+         * separate vector features are output. The environment substructure properties of the output features are
+         * set to the (combined) substructures covered by the interacting target features.
+         *
          * \param pharm The output pharmacophore where to add the generated features.
-         * \param iactions The feature-to-feature mapping describing the interactions.
-         * \param append If \c false, \a pharm is cleared before any features are added.
+         * \param iactions The feature mapping describing the interactions.
+         * \param append If \c false, the pharmacophore \a pharm is cleared before any features are added.
          */
         CDPL_PHARM_API void generateInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append = false);
 
         /**
-         * \brief Creates exclusion-volume features at the 3D positions of the atoms in \a cntnr and appends them to \a pharm.
+         * \brief Creates exclusion volume features at the 3D positions of the atoms in \a cntnr and appends them to the pharmacophore \a pharm.
          * \param pharm The pharmacophore receiving the new exclusion volumes.
          * \param cntnr The atom container providing the seed positions.
          * \param coords_func The function returning the 3D coordinates of an atom.
          * \param tol The position tolerance to assign to new exclusion volumes (if &le; 0, the per-atom vdW radius is used).
          * \param min_dist Minimum distance (\a rel_dist controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
-         * \param rel_dist If \c true, the per-pair tolerance sum is subtracted from the pair distance before testing against \a min_dist; otherwise the absolute distance is tested.
-         * \param append If \c false, \a pharm is cleared before any exclusion volumes are added.
+         * \param rel_dist If \c true, the per-pair tolerance sum is subtracted from the pair distance before testing against \a min_dist. Otherwise, the absolute distance is tested.
+         * \param append If \c false, the pharmacophore \a pharm is cleared before any exclusion volumes are added.
          */
         CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,
                                                    const Chem::Atom3DCoordinatesFunction& coords_func,
                                                    double tol = 0.0, double min_dist = 0.0, bool rel_dist = true, bool append = true);
 
         /**
-         * \brief Creates exclusion-volume features at the 3D positions of the features in \a cntnr and appends them to \a pharm.
+         * \brief Creates exclusion volume features at the 3D positions of the features in \a cntnr and appends them to the pharmacophore \a pharm.
          * \param pharm The pharmacophore receiving the new exclusion volumes.
          * \param cntnr The feature container providing the seed positions.
          * \param tol The position tolerance to assign to new exclusion volumes (if &le; 0, the per-feature tolerance is used).
          * \param min_dist Minimum distance (\a rel_dist controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
-         * \param rel_dist If \c true, the per-pair tolerance sum is subtracted from the pair distance before testing against \a min_dist; otherwise the absolute distance is tested.
-         * \param append If \c false, \a pharm is cleared before any exclusion volumes are added.
+         * \param rel_dist If \c true, the per-pair tolerance sum is subtracted from the pair distance before testing against \a min_dist. Otherwise, the absolute distance is tested.
+         * \param append If \c false, the pharmacophore \a pharm is cleared before any exclusion volumes are added.
          */
         CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer& cntnr,
                                                    double tol = 0.0, double min_dist = 0.0, bool rel_dist = true, bool append = true);
 
         /**
-         * \brief Removes every Pharm::FeatureType::EXCLUSION_VOLUME feature of \a pharm whose tolerance sphere clashes with
+         * \brief Removes every exclusion volume feature from the pharmacophore \a pharm whose tolerance sphere clashes with
          *        any atom of \a cntnr.
          * \param pharm The pharmacophore to filter.
          * \param cntnr The atom container providing the clash partners.
@@ -121,8 +124,11 @@ namespace CDPL
                                                               const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact = 1.0);
 
         /**
-         * \brief Shrinks the tolerance of every Pharm::FeatureType::EXCLUSION_VOLUME feature of \a pharm whose tolerance sphere
-         *        clashes with any atom of \a cntnr; removes the exclusion volume when the resulting tolerance falls below 0.25.
+         * \brief Shrinks the tolerance of every exclusion volume feature in the pharmacophore \a pharm whose tolerance sphere
+         *        clashes with any atom of \a cntnr.
+         *
+         * If the resulting tolerance falls below 0.25 then the exclusion volume feature is removed.
+         *
          * \param pharm The pharmacophore to modify.
          * \param cntnr The atom container providing the clash partners.
          * \param coords_func The function returning the 3D coordinates of an atom.

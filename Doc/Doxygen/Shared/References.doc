@@ -251,14 +251,6 @@ JME Molecular Editor website: http://www.molinspiration.com/jme/
 </tr>
 
 <tr>
-<td valign="top">\anchor KBPD<i>[KBPD]</i></td>
-<td valign="top">
-T. Kuvek, Z. Jandova, K.-J. Schleifer, C. Oostenbrink, Binding Site Vectors Enable Mapping of Cytochrome P450 Functional
-Landscapes, <i>J. Chem. Inf. Model.</i> <b>2026</b>, 66, 1604–1616
-</td>
-</tr>
-
-<tr>
 <td valign="top">\anchor KABA<i>[KABA]</i></td>
 <td valign="top">
 W. Kabsch, A solution for the best rotation to relate two sets of vectors, 
@@ -269,6 +261,22 @@ W. Kabsch, A solution for the best rotation to relate two sets of vectors,
 <td valign="top">
 W. Kabsch, A discussion of the solution for the best rotation to relate two sets of vectors, 
 <i>Acta Cryst. A</i> <b>1978</b>, 34, 827-828
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor KBPD<i>[KBPD]</i></td>
+<td valign="top">
+T. Kuvek, Z. Jandova, K.-J. Schleifer, C. Oostenbrink, Binding Site Vectors Enable Mapping of Cytochrome P450 Functional
+Landscapes, <i>J. Chem. Inf. Model.</i> <b>2026</b>, 66, 1604–1616
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor KJPM<i>[KJPM]</i></td>
+<td valign="top">
+Y. K. Kang, M. S. Jhon, Additivity of atomic static polarizabilities and dispersion coefficients, 
+<i>Theoretica Chimica Acta</i> <b>1982</b>
 </td>
 </tr>
 

@@ -790,7 +790,7 @@ namespace CDPL
              * \param m The new first-axis size.
              * \param n The new second-axis size.
              * \param o The new third-axis size.
-             * \param preserve If \c true, existing cell values at indices that remain valid are kept; if \c false, all cells are set to \a v.
+             * \param preserve If \c true, existing cell values at indices that remain valid are kept. If \c false, all cells are set to \a v.
              * \param v The fill value for newly added cells (or for all cells when \a preserve is \c false).
              */
             void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType())

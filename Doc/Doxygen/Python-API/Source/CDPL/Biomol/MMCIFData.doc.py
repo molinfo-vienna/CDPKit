@@ -433,7 +433,7 @@ class MMCIFData(Boost.Python.instance):
     # If a category with the given name already exists, no new category is added and a reference to the existing category is returned.
     # 
     # \param name The mmCIF category name (without the leading underscore).
-    # \param front If <tt>True</tt>, the new category is inserted at the front of the category list; if <tt>False</tt>, it is appended.
+    # \param front If <tt>True</tt>, the new category is inserted at the front of the category list. If <tt>False</tt>, it is appended.
     # 
     # \return A mutable reference to the added (or pre-existing) category.
     # 

@@ -87,7 +87,7 @@ namespace CDPL
              * \brief Opens the database identified by \a name in the specified \a mode.
              * \param name The database name (path, URI, etc., interpreted by the concrete subclass).
              * \param mode The open mode (see Mode).
-             * \param allow_dup_entries If \c true, duplicate molecule entries are allowed; if \c false, duplicates are rejected.
+             * \param allow_dup_entries If \c true, duplicate molecule entries are allowed. If \c false, duplicates are rejected.
              */
             virtual void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true) = 0;
 

@@ -43,7 +43,7 @@ namespace CDPL
         /**
          * \brief Returns a concise human-readable string (e.g. \e "HBD" for H-bond donor)
          *        for the given numeric feature type identifier \a ftr_type.
-         * \param ftr_type The numeric feature type identifier (see namespace Pharm::FeatureType).
+         * \param ftr_type The feature type identifier (see namespace Pharm::FeatureType).
          * \return A \c const reference to the feature type string.
          */
         CDPL_PHARM_API const std::string& getFeatureTypeString(unsigned int ftr_type);

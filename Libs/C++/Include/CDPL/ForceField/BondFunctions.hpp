@@ -45,28 +45,28 @@ namespace CDPL
     {
 
         /**
-         * \brief Returns the value of the ForceField::BondProperty::MMFF94_TYPE_INDEX property of \a bond.
-         * \param bond The bond.
+         * \brief Returns the value of the ForceField::BondProperty::MMFF94_TYPE_INDEX property of the bond \a bond.
+         * \param bond The bond for which to return the property value.
          * \return The MMFF94 bond type index.
          */
         CDPL_FORCEFIELD_API unsigned int getMMFF94TypeIndex(const Chem::Bond& bond);
 
         /**
-         * \brief Sets the value of the ForceField::BondProperty::MMFF94_TYPE_INDEX property of \a bond to \a type_idx.
-         * \param bond The bond.
+         * \brief Sets the value of the ForceField::BondProperty::MMFF94_TYPE_INDEX property of the bond \a bond to \a type_idx.
+         * \param bond The bond for which to set the property value.
          * \param type_idx The new MMFF94 bond type index.
          */
         CDPL_FORCEFIELD_API void setMMFF94TypeIndex(Chem::Bond& bond, unsigned int type_idx);
 
         /**
-         * \brief Removes the ForceField::BondProperty::MMFF94_TYPE_INDEX property from \a bond.
-         * \param bond The bond.
+         * \brief Clears the value of the ForceField::BondProperty::MMFF94_TYPE_INDEX property of the bond \a bond.
+         * \param bond The bond for which to clear the property value.
          */
         CDPL_FORCEFIELD_API void clearMMFF94TypeIndex(Chem::Bond& bond);
 
         /**
-         * \brief Tells whether \a bond carries an explicit ForceField::BondProperty::MMFF94_TYPE_INDEX property.
-         * \param bond The bond.
+         * \brief Tells whether the ForceField::BondProperty::MMFF94_TYPE_INDEX property of the bond \a bond is set.
+         * \param bond The bond for which to query the property value.
          * \return \c true if the MMFF94 bond type index is set, and \c false otherwise.
          */
         CDPL_FORCEFIELD_API bool hasMMFF94TypeIndex(const Chem::Bond& bond);

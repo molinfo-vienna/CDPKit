@@ -321,7 +321,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \param tgt_env The target environment.
     # \param coords_func The function used to retrieve atom 3D-coordinates from <em>tgt_env</em>.
     # \param grid_set The output grid set.
-    # \param append If <tt>True</tt>, the new grids are appended to <em>grid_set</em>; otherwise <em>grid_set</em> is cleared first.
+    # \param append If <tt>True</tt>, the new grids are appended to <em>grid_set</em>. Otherwise, <em>grid_set</em> is cleared first.
     # 
     def calcInteractionGrids(tgt_env: Chem.MolecularGraph, coords_func: Chem.Atom3DCoordinatesFunction, grid_set: Grid.DRegularGridSet, append: bool = False) -> None: pass
 

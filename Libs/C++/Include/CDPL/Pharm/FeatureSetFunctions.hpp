@@ -43,15 +43,15 @@ namespace CDPL
         class FeatureMapping;
 
         /**
-         * \brief Extracts features from \a mapping into \a ftr_set.
+         * \brief Extracts features from \a mapping into the feature set \a ftr_set.
          * \param ftr_set The output feature set.
          * \param mapping The feature mapping.
-         * \param first If \c true, the first feature of each mapping pair is added; otherwise the second feature.
+         * \param first If \c true, the first feature of each mapping pair is added. Otherwise, the second feature.
          */
         CDPL_PHARM_API void getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first);
 
         /**
-         * \brief Removes features from \a ftr_set whose 3D position duplicates that of another feature of the same type.
+         * \brief Removes features from the feature set \a ftr_set whose 3D position duplicates that of another feature of the same type.
          * \param ftr_set The feature set to clean (modified in place).
          * \param pos_tol The positional tolerance below which two features are considered duplicates.
          * \return \c true if at least one feature was removed, and \c false otherwise.
@@ -60,7 +60,7 @@ namespace CDPL
         CDPL_PHARM_API bool removePositionalDuplicates(FeatureSet& ftr_set, double pos_tol = 0.0);
 
         /**
-         * \brief Removes features of the given type from \a ftr_set.
+         * \brief Removes features of the given type from the feature set \a ftr_set.
          * \param ftr_set The feature set to clean (modified in place).
          * \param type The feature type to remove (see namespace Pharm::FeatureType).
          * \return \c true if at least one feature was removed, and \c false otherwise.

@@ -333,7 +333,7 @@ namespace CDPL
              * \param tgt_env The target environment.
              * \param coords_func The function used to retrieve atom 3D-coordinates from \a tgt_env.
              * \param grid_set The output grid set.
-             * \param append If \c true, the new grids are appended to \a grid_set; otherwise \a grid_set is cleared first.
+             * \param append If \c true, the new grids are appended to \a grid_set. Otherwise, \a grid_set is cleared first.
              */
             void calcInteractionGrids(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,
                                       Grid::DRegularGridSet& grid_set, bool append = false);

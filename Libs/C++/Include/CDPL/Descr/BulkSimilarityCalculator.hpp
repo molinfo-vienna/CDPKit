@@ -255,7 +255,7 @@ namespace CDPL
              * \brief Computes the similarity between the query \a descr and every stored descriptor.
              * \param descr The query descriptor.
              * \param sort If \c true, the resulting (index, similarity) pairs are sorted by similarity value.
-             * \param sort_desc If \c true (default), sorting is in descending order of similarity; if \c false, in ascending order.
+             * \param sort_desc If \c true (default), sorting is in descending order of similarity. If \c false, in ascending order.
              */
             void calculate(const Descriptor& descr, bool sort = false, bool sort_desc = true);
 

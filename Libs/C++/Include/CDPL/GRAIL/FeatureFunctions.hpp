@@ -49,7 +49,7 @@ namespace CDPL
          *        of the given Pharm::Feature instance.
          * \param feature The feature for which to perceive the extended type.
          * \param lig_side If \c true, the perception is performed assuming the feature is part of a
-         *                 ligand; otherwise it is assumed to be part of a target structure.
+         *                 ligand. Otherwise, it is assumed to be part of a target structure.
          * \return The perceived extended feature type (see namespace GRAIL::FeatureType).
          */
         CDPL_GRAIL_API unsigned int perceiveExtendedType(const Pharm::Feature& feature, bool lig_side);

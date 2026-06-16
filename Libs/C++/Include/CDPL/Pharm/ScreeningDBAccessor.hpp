@@ -106,7 +106,7 @@ namespace CDPL
              * \brief Reads the molecule at index \a mol_idx into \a mol.
              * \param mol_idx The zero-based molecule index.
              * \param mol The output molecule.
-             * \param overwrite If \c true, \a mol is cleared before reading; if \c false, the atoms/bonds are appended.
+             * \param overwrite If \c true, \a mol is cleared before reading. If \c false, the atoms/bonds are appended.
              */
             virtual void getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite = true) const = 0;
 
@@ -114,7 +114,7 @@ namespace CDPL
              * \brief Reads the pharmacophore at index \a pharm_idx into \a pharm.
              * \param pharm_idx The zero-based pharmacophore index (across all molecules).
              * \param pharm The output pharmacophore.
-             * \param overwrite If \c true, \a pharm is cleared before reading; if \c false, the features are appended.
+             * \param overwrite If \c true, \a pharm is cleared before reading. If \c false, the features are appended.
              */
             virtual void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite = true) const = 0;
 
@@ -123,7 +123,7 @@ namespace CDPL
              * \param mol_idx The zero-based molecule index.
              * \param mol_conf_idx The zero-based conformer index within the molecule.
              * \param pharm The output pharmacophore.
-             * \param overwrite If \c true, \a pharm is cleared before reading; if \c false, the features are appended.
+             * \param overwrite If \c true, \a pharm is cleared before reading. If \c false, the features are appended.
              */
             virtual void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite = true) const = 0;
 

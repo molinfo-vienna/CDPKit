@@ -43,58 +43,59 @@ namespace CDPL
         class AttributedGrid;
 
         /**
-         * \brief Returns the value of the Grid::AttributedGridProperty::NAME property of \a grid.
-         * \param grid The attributed grid.
+         * \brief Returns the value of the Grid::AttributedGridProperty::NAME property of the attributed grid \a grid.
+         * \param grid The attributed grid for which to return the property value.
          * \return A \c const reference to the name.
          */
         CDPL_GRID_API const std::string& getName(const AttributedGrid& grid);
 
         /**
-         * \brief Sets the value of the Grid::AttributedGridProperty::NAME property of \a grid.
-         * \param grid The attributed grid.
+         * \brief Sets the value of the Grid::AttributedGridProperty::NAME property of the attributed grid \a grid to \a name.
+         * \param grid The attributed grid for which to set the property value.
          * \param name The new name.
          */
         CDPL_GRID_API void setName(AttributedGrid& grid, const std::string& name);
 
         /**
-         * \brief Removes the Grid::AttributedGridProperty::NAME property from \a grid.
-         * \param grid The attributed grid.
+         * \brief Clears the value of the Grid::AttributedGridProperty::NAME property of the attributed grid \a grid.
+         * \param grid The attributed grid for which to clear the property value.
          */
         CDPL_GRID_API void clearName(AttributedGrid& grid);
 
         /**
-         * \brief Tells whether \a grid carries an explicit Grid::AttributedGridProperty::NAME property.
-         * \param grid The attributed grid.
+         * \brief Tells whether the Grid::AttributedGridProperty::NAME property of the attributed grid \a grid is set.
+         * \param grid The attributed grid for which to query the property value.
          * \return \c true if the name property is set, and \c false otherwise.
          */
         CDPL_GRID_API bool hasName(const AttributedGrid& grid);
 
+
         /**
-         * \brief Returns the value of the Grid::AttributedGridProperty::COMMENT property of \a grid.
-         * \param grid The attributed grid.
+         * \brief Returns the value of the Grid::AttributedGridProperty::COMMENT property of the attributed grid \a grid.
+         * \param grid The attributed grid for which to return the property value.
          * \return A \c const reference to the comment.
          * \since 1.4
          */
         CDPL_GRID_API const std::string& getComment(const AttributedGrid& grid);
 
         /**
-         * \brief Sets the value of the Grid::AttributedGridProperty::COMMENT property of \a grid.
-         * \param grid The attributed grid.
+         * \brief Sets the value of the Grid::AttributedGridProperty::COMMENT property of the attributed grid \a grid to \a comment.
+         * \param grid The attributed grid for which to set the property value.
          * \param comment The new comment.
          * \since 1.4
          */
         CDPL_GRID_API void setComment(AttributedGrid& grid, const std::string& comment);
 
         /**
-         * \brief Removes the Grid::AttributedGridProperty::COMMENT property from \a grid.
-         * \param grid The attributed grid.
+         * \brief Clears the value of the Grid::AttributedGridProperty::COMMENT property of the attributed grid \a grid.
+         * \param grid The attributed grid for which to clear the property value.
          * \since 1.4
          */
         CDPL_GRID_API void clearComment(AttributedGrid& grid);
 
         /**
-         * \brief Tells whether \a grid carries an explicit Grid::AttributedGridProperty::COMMENT property.
-         * \param grid The attributed grid.
+         * \brief Tells whether the Grid::AttributedGridProperty::COMMENT property of the attributed grid \a grid is set.
+         * \param grid The attributed grid for which to query the property value.
          * \return \c true if the comment property is set, and \c false otherwise.
          * \since 1.4
          */

@@ -185,7 +185,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasFormalCharge(const Atom& atom);
 
         /**
-         * \brief Computes the formal charge of the atom \a atom from its valence environment in \a molgraph.
+         * \brief Computes the formal charge of the atom \a atom from its valence environment in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the charge.
          * \param molgraph The molecular graph providing the structural context.
          * \return The computed formal charge.
@@ -277,7 +277,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasHybridizationState(const Atom& atom);
 
         /**
-         * \brief Derives the hybridization state of the atom \a atom from its valence environment in \a molgraph.
+         * \brief Derives the hybridization state of the atom \a atom from its valence environment in the molecular graph \a molgraph.
          * \param atom The atom for which to perceive the hybridzation state.
          * \param molgraph The molecular graph providing the structural context.
          * \return The perceived hybridization state (see namespace Chem::HybridizationState).
@@ -351,7 +351,7 @@ namespace CDPL
          * \param atom The atom to query.
          * \param frag_list The list of fragments to search.
          * \param cont_frag_list The output fragment list receiving the matches.
-         * \param append If \c true, matches are appended to \a cont_frag_list; otherwise it is cleared first.
+         * \param append If \c true, matches are appended to \a cont_frag_list. Otherwise, it is cleared first.
          */
         CDPL_CHEM_API void getContainingFragments(const Atom& atom, const FragmentList& frag_list, FragmentList& cont_frag_list, bool append = false);
 
@@ -440,7 +440,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasImplicitHydrogenCount(const Atom& atom);
 
         /**
-         * \brief Computes the implicit hydrogen count of the atom \a atom from its valence environment in \a molgraph.
+         * \brief Computes the implicit hydrogen count of the atom \a atom from its valence environment in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the hydrogen count.
          * \param molgraph The molecular graph providing the structural context.
          * \return The computed implicit-hydrogen count.
@@ -681,7 +681,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasStereoDescriptor(const Atom& atom);
 
         /**
-         * \brief Computes the stereo descriptor for the atom \a atom based on the geometry of \a molgraph.
+         * \brief Computes the stereo descriptor for the atom \a atom based on the geometry of the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the stereo descriptor.
          * \param molgraph The molecular graph providing the structural context.
          * \param dim The dimensionality of the atomic coordinates to use (\e 2 or \e 3).
@@ -690,7 +690,7 @@ namespace CDPL
         CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Atom& atom, const MolecularGraph& molgraph, std::size_t dim = 1);
 
         /**
-         * \brief Derives the stereo descriptor of the atom \a atom from its MDL parity in \a molgraph.
+         * \brief Derives the stereo descriptor of the atom \a atom from its MDL parity in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the stereo descriptor.
          * \param molgraph The molecular graph providing the structural context.
          * \return The derived stereo descriptor.
@@ -737,7 +737,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasStereoCenterFlag(const Atom& atom);
 
         /**
-         * \brief Tells whether the atom \a atom qualifies as a stereo center in the context of \a molgraph.
+         * \brief Tells whether the atom \a atom qualifies as a stereo center in the context of the molecular graph \a molgraph.
          * \param atom The atom to evaluate.
          * \param molgraph The molecular graph providing the structural context.
          * \param check_asym \c true to enforce non-equivalent ligand environments.
@@ -754,16 +754,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::AtomProperty::SYBYL_TYPE property of the atom \a atom (see namespace Chem::SybylAtomType).
+         * \brief Returns the value of the Chem::AtomProperty::SYBYL_TYPE property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored Sybyl atom type code.
+         * \return The stored <em>Sybyl MOL2</em> atom type (see namespace Chem::SybylAtomType).
          */
         CDPL_CHEM_API unsigned int getSybylType(const Atom& atom);
 
         /**
-         * \brief Sets the value of the Chem::AtomProperty::SYBYL_TYPE property of the atom \a atom to \a type (see namespace Chem::SybylAtomType).
+         * \brief Sets the value of the Chem::AtomProperty::SYBYL_TYPE property of the atom \a atom to \a type.
          * \param atom The atom for which to set the property value.
-         * \param type The new Sybyl atom type code.
+         * \param type The new <em>Sybyl MOL2</em> atom type (see namespace Chem::SybylAtomType).
          */
         CDPL_CHEM_API void setSybylType(Atom& atom, unsigned int type);
 
@@ -781,10 +781,10 @@ namespace CDPL
         CDPL_CHEM_API bool hasSybylType(const Atom& atom);
 
         /**
-         * \brief Derives the Sybyl atom type of the atom \a atom from its valence environment in \a molgraph.
+         * \brief Derives the Sybyl atom type of the atom \a atom from its valence environment in the molecular graph \a molgraph.
          * \param atom The atom for which to perceive the type.
          * \param molgraph The molecular graph providing the structural context.
-         * \return The perceived Sybyl atom type (see namespace Chem::SybylAtomType).
+         * \return The perceived <em>Sybyl MOL2</em> atom type (see namespace Chem::SybylAtomType).
          */
         CDPL_CHEM_API unsigned int perceiveSybylType(const Atom& atom, const MolecularGraph& molgraph);
 
@@ -792,14 +792,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MOL2_NAME property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MOL2 atom name.
+         * \return The stored <em>Sybyl MOL2</em> atom name.
          */
         CDPL_CHEM_API const std::string& getMOL2Name(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MOL2_NAME property of the atom \a atom to \a name.
          * \param atom The atom for which to set the property value.
-         * \param name The new MOL2 atom name.
+         * \param name The new <em>Sybyl MOL2</em> atom name.
          */
         CDPL_CHEM_API void setMOL2Name(Atom& atom, const std::string& name);
 
@@ -820,14 +820,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MOL2_CHARGE property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored Sybyl partial charge.
+         * \return The stored <em>Sybyl MOL2</em> partial charge.
          */
         CDPL_CHEM_API double getMOL2Charge(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MOL2_CHARGE property of the atom \a atom to \a charge.
          * \param atom The atom for which to set the property value.
-         * \param charge The new Sybyl partial charge.
+         * \param charge The new <em>Sybyl MOL2</em> partial charge.
          */
         CDPL_CHEM_API void setMOL2Charge(Atom& atom, double charge);
 
@@ -848,14 +848,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_ID property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MOL2 substructure ID.
+         * \return The stored <em>Sybyl MOL2</em> substructure ID.
          */
         CDPL_CHEM_API std::size_t getMOL2SubstructureID(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_ID property of the atom \a atom to \a id.
          * \param atom The atom for which to set the property value.
-         * \param id The new MOL2 substructure ID.
+         * \param id The new <em>Sybyl MOL2</em> substructure ID.
          */
         CDPL_CHEM_API void setMOL2SubstructureID(Atom& atom, std::size_t id);
 
@@ -876,14 +876,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_NAME property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MOL2 substructure name.
+         * \return The stored <em>Sybyl MOL2</em> substructure name.
          */
         CDPL_CHEM_API const std::string& getMOL2SubstructureName(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_NAME property of the atom \a atom to \a id.
          * \param atom The atom for which to set the property value.
-         * \param id The new MOL2 substructure name.
+         * \param id The new <em>Sybyl MOL2</em> substructure name.
          */
         CDPL_CHEM_API void setMOL2SubstructureName(Atom& atom, const std::string& id);
 
@@ -904,14 +904,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_SUBTYPE property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MOL2 substructure subtype string.
+         * \return The stored <em>Sybyl MOL2</em> substructure subtype string.
          */
         CDPL_CHEM_API const std::string& getMOL2SubstructureSubtype(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_SUBTYPE property of the atom \a atom to \a subtype.
          * \param atom The atom for which to set the property value.
-         * \param subtype The new MOL2 substructure subtype string.
+         * \param subtype The new <em>Sybyl MOL2</em> substructure subtype string.
          */
         CDPL_CHEM_API void setMOL2SubstructureSubtype(Atom& atom, const std::string& subtype);
 
@@ -932,14 +932,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_CHAIN property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MOL2 substructure chain identifier.
+         * \return The stored <em>Sybyl MOL2</em> substructure chain identifier.
          */
         CDPL_CHEM_API const std::string& getMOL2SubstructureChain(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MOL2_SUBSTRUCTURE_CHAIN property of the atom \a atom to \a chain.
          * \param atom The atom for which to set the property value.
-         * \param chain The new MOL2 substructure chain identifier.
+         * \param chain The new <em>Sybyl MOL2</em> substructure chain identifier.
          */
         CDPL_CHEM_API void setMOL2SubstructureChain(Atom& atom, const std::string& chain);
 
@@ -985,7 +985,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasMDLParity(const Atom& atom);
 
         /**
-         * \brief Computes the MDL parity of the atom \a atom from its 2D layout and stereo flags in \a molgraph.
+         * \brief Computes the MDL parity of the atom \a atom from its 2D layout and stereo flags in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the parity.
          * \param molgraph The molecular graph providing the structural context.
          * \return The computed MDL parity (see namespace Chem::MDLParity).
@@ -1206,17 +1206,17 @@ namespace CDPL
 
 
         /**
-         * \brief Sets bits in \a atom_mask for every atom of \a molgraph that is reachable from the atom \a atom through the bonds of \a molgraph.
+         * \brief Sets bits in \a atom_mask for every atom of the molecular graph \a molgraph that is reachable from the atom \a atom through the bonds of \a molgraph.
          * \param atom The seed atom.
          * \param molgraph The molecular graph providing the bonding context.
          * \param atom_mask The output bit mask.
-         * \param reset If \c true, \a atom_mask is cleared first; otherwise existing bits are preserved.
+         * \param reset If \c true, \a atom_mask is cleared first. Otherwise, existing bits are preserved.
          */
         CDPL_CHEM_API void markReachableAtoms(const Atom& atom, const MolecularGraph& molgraph,
                                               Util::BitSet& atom_mask, bool reset = true);
 
         /**
-         * \brief Returns the topological distance (number of edges along the shortest path) between two atoms of \a molgraph.
+         * \brief Returns the topological distance between two atoms of the molecular graph \a molgraph.
          * \param atom1 The first atom.
          * \param atom2 The second atom.
          * \param molgraph The molecular graph providing the bonding context.
@@ -1225,19 +1225,19 @@ namespace CDPL
         CDPL_CHEM_API std::size_t getTopologicalDistance(const Atom& atom1, const Atom& atom2, const MolecularGraph& molgraph);
 
         /**
-         * \brief Collects every atom of \a molgraph that is within \a max_dist bonds of the atom \a atom into the fragment \a env.
+         * \brief Collects every atom of the molecular graph \a molgraph that is within \a max_dist bonds of the atom \a atom into the fragment \a env.
          * \param atom The seed atom.
          * \param molgraph The molecular graph providing the bonding context.
          * \param max_dist The maximum topological distance.
          * \param env The output fragment receiving the environment atoms and the bonds between them.
-         * \param append If \c true, atoms/bonds are appended to \a env; otherwise it is cleared first.
+         * \param append If \c true, atoms/bonds are appended to \a env. Otherwise, it is cleared first.
          * \return The number of atoms appended to \a env.
          */
         CDPL_CHEM_API std::size_t getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std::size_t max_dist, Fragment& env, bool append = false);
 
 
         /**
-         * \brief Writes every neighbor of the atom \a atom (with bonds belonging to \a molgraph) into \a it, skipping \a excl_atom.
+         * \brief Writes every neighbor of the atom \a atom (with bonds belonging to the molecular graph \a molgraph) into \a it, skipping \a excl_atom.
          * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>); the constness selects between AtomIterator and ConstAtomIterator.
          * \tparam OutputIterator The output iterator type receiving pointers to the neighbor atoms.
          * \param atom The atom whose neighbors are to be enumerated.
@@ -1270,7 +1270,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Writes every bond incident to the atom \a atom (with both endpoints belonging to \a molgraph) into \a it, skipping bonds to \a excl_atom.
+         * \brief Writes every bond incident to the atom \a atom (with both endpoints belonging to the molecular graph \a molgraph) into \a it, skipping bonds to \a excl_atom.
          * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>).
          * \tparam OutputIterator The output iterator type receiving pointers to the incident bonds.
          * \param atom The atom whose incident bonds are to be enumerated.
@@ -1303,7 +1303,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Writes every neighbor of the atom \a atom and the corresponding incident bond (both filtered by \a molgraph) into the supplied output iterators.
+         * \brief Writes every neighbor of the atom \a atom and the corresponding incident bond (both filtered by the molecular graph \a molgraph) into the supplied output iterators.
          * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>).
          * \tparam AtomOutputIterator The output iterator type receiving neighbor-atom pointers.
          * \tparam BondOutputIterator The output iterator type receiving incident-bond pointers.

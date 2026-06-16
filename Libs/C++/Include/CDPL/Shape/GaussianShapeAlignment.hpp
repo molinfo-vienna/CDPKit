@@ -364,14 +364,14 @@ namespace CDPL
             /**
              * \brief Adds \a shape to the reference shapes.
              * \param shape The reference shape.
-             * \param new_set If \c true, \a shape is added to a new reference set; otherwise it is appended to the most recent reference set.
+             * \param new_set If \c true, \a shape is added to a new reference set. Otherwise, it is appended to the most recent reference set.
              */
             void addReferenceShape(const GaussianShape& shape, bool new_set = true);
 
             /**
              * \brief Adds the shapes in \a shapes to the reference shapes.
              * \param shapes The reference shapes.
-             * \param new_set If \c true, the shapes are added to a new reference set; otherwise they are appended to the most recent reference set.
+             * \param new_set If \c true, the shapes are added to a new reference set. Otherwise, they are appended to the most recent reference set.
              */
             void addReferenceShapes(const GaussianShapeSet& shapes, bool new_set = true);
 

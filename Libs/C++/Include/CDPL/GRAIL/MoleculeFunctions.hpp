@@ -45,14 +45,14 @@ namespace CDPL
     {
 
         /**
-         * \brief Prepares a molecule for GRAIL descriptor calculation.
+         * \brief Prepares the molecule \a mol for GRAIL descriptor calculation.
          *
-         * Performs the pre-processing steps (e.g. ring perception, atom typing, hydrogen handling)
-         * required by GRAIL::GRAILDescriptorCalculator on the molecular structure.
+         * Performs all molecular structure preprocessing steps (e.g. ring perception, atom typing, hydrogen handling)
+         * required by the descriptor calculation procedure (implemented by GRAIL::GRAILDescriptorCalculator).
          *
          * \param mol The molecule to prepare. The molecule is modified in place.
          * \param std_prot_state If \c true, the standard protonation state of the molecule is assigned
-         *                       prior to the GRAIL-specific pre-processing.
+         *                       prior to the GRAIL-specific preprocessing.
          */
         CDPL_GRAIL_API void prepareForGRAILDescriptorCalculation(Chem::Molecule& mol, bool std_prot_state = false);
     }

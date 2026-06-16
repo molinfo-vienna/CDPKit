@@ -166,8 +166,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpression(const Reaction& rxn);
 
         /**
-         * \brief Builds a reaction-level match expression from the constraints currently attached to \a rxn
-         *        and returns it without modifying \a rxn.
+         * \brief Builds a reaction-level match expression from the constraints currently attached to the reaction \a rxn.
          * \param rxn The reaction to inspect.
          * \return The generated match expression.
          */
@@ -177,7 +176,7 @@ namespace CDPL
          * \brief Builds and (optionally) stores the reaction-level match expression of the reaction \a rxn.
          * \param rxn The reaction to inspect/modify.
          * \param overwrite If \c true, the generated expression replaces any existing
-         *                  Chem::ReactionProperty::MATCH_EXPRESSION; if \c false, the existing one (if any)
+         *                  Chem::ReactionProperty::MATCH_EXPRESSION. If \c false, the existing one (if any)
          *                  is returned unchanged.
          * \return The generated (or pre-existing) match expression.
          */
@@ -240,7 +239,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasComponentGroups(const Reaction& rxn);
 
         /**
-         * \brief Perceives the component groups of the reaction \a rxn without modifying it.
+         * \brief Perceives the component groups of the reaction \a rxn.
          * \param rxn The reaction to inspect.
          * \return The perceived component-group fragment list.
          */
@@ -250,7 +249,7 @@ namespace CDPL
          * \brief Perceives and (optionally) stores the component groups of the reaction \a rxn.
          * \param rxn The reaction to inspect/modify.
          * \param overwrite If \c true, the perceived list replaces any existing
-         *                  Chem::ReactionProperty::COMPONENT_GROUPS; if \c false, the existing one (if any)
+         *                  Chem::ReactionProperty::COMPONENT_GROUPS. If \c false, the existing one (if any)
          *                  is returned unchanged.
          * \return The perceived (or pre-existing) component-group fragment list.
          */
@@ -285,8 +284,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasAtomMapping(const Reaction& rxn);
 
         /**
-         * \brief Derives the reactant-to-product atom mapping from the atom mapping IDs of the reaction \a rxn
-         *        without modifying it.
+         * \brief Derives the reactant-to-product atom mapping from the atom mapping IDs of the reaction \a rxn.
          * \param rxn The reaction to inspect.
          * \return The perceived atom mapping.
          */
@@ -296,7 +294,7 @@ namespace CDPL
          * \brief Derives and (optionally) stores the reactant-to-product atom mapping of the reaction \a rxn.
          * \param rxn The reaction to inspect/modify.
          * \param overwrite If \c true, the perceived mapping replaces any existing
-         *                  Chem::ReactionProperty::ATOM_MAPPING; if \c false, the existing one (if any)
+         *                  Chem::ReactionProperty::ATOM_MAPPING property. If \c false, the existing one (if any)
          *                  is returned unchanged.
          * \return The perceived (or pre-existing) atom mapping.
          */
@@ -304,7 +302,7 @@ namespace CDPL
 
 
         /**
-         * \brief Generates a reaction SMILES string for \a rxn.
+         * \brief Generates a reaction SMILES string for the reaction \a rxn.
          * \param rxn The reaction to encode.
          * \param smiles The string to receive the generated reaction SMILES.
          * \param canonical \c true to emit a canonical reaction SMILES; \c false for an arbitrary atom ordering.
@@ -318,7 +316,7 @@ namespace CDPL
                                           unsigned int bond_flags = BondPropertyFlag::DEFAULT);
 
         /**
-         * \brief Computes a 64-bit hash code for \a rxn taking into account the specified reaction
+         * \brief Computes a 64-bit hash code for the reaction \a rxn taking into account the specified reaction
          *        roles and atom/bond properties.
          * \param rxn The reaction to hash.
          * \param role_mask A bitmask of Chem::ReactionRole flags selecting the considered component sets.
@@ -576,7 +574,7 @@ namespace CDPL
          * \brief Sets the atom-level match-constraint list \a constr on every atom of every component of the reaction \a rxn.
          * \param rxn The reaction to modify.
          * \param constr The match-constraint list to assign.
-         * \param overwrite If \c true, replaces any existing per-atom constraints; if \c false, leaves
+         * \param overwrite If \c true, replaces any existing per-atom constraints. If \c false, leaves
          *                  atoms that already carry a list unchanged.
          */
         CDPL_CHEM_API void setAtomMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
@@ -585,7 +583,7 @@ namespace CDPL
          * \brief Sets the bond-level match-constraint list \a constr on every bond of every component of the reaction \a rxn.
          * \param rxn The reaction to modify.
          * \param constr The match-constraint list to assign.
-         * \param overwrite If \c true, replaces any existing per-bond constraints; if \c false, leaves
+         * \param overwrite If \c true, replaces any existing per-bond constraints. If \c false, leaves
          *                  bonds that already carry a list unchanged.
          */
         CDPL_CHEM_API void setBondMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
@@ -594,32 +592,32 @@ namespace CDPL
          * \brief Sets the molecular graph-level match-constraint list \a constr on every component of the reaction \a rxn.
          * \param rxn The reaction to modify.
          * \param constr The match-constraint list to assign.
-         * \param overwrite If \c true, replaces any existing per-component constraints; if \c false, leaves
+         * \param overwrite If \c true, replaces any existing per-component constraints. If \c false, leaves
          *                  components that already carry a list unchanged.
          */
         CDPL_CHEM_API void setComponentMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
 
         /**
-         * \brief Generates and stores match expressions for the atoms, bonds, components, and \a rxn itself.
+         * \brief Generates and stores match expressions for the atoms, bonds, components, and the reaction \a rxn itself.
          * \param rxn The reaction to modify.
-         * \param overwrite If \c true, replaces any existing match expressions; if \c false, leaves
+         * \param overwrite If \c true, replaces any existing match expressions. If \c false, leaves
          *                  items that already carry a match expression unchanged.
          */
         CDPL_CHEM_API void generateMatchExpressions(Reaction& rxn, bool overwrite);
 
         /**
-         * \brief Prepares \a rxn for use as a substructure search query (e.g. by pre-computing
+         * \brief Prepares the reaction \a rxn for use as a substructure search query (e.g. by pre-computing
          *        match expressions and required cached properties).
          * \param rxn The reaction to modify.
-         * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
          */
         CDPL_CHEM_API void initSubstructureSearchQuery(Reaction& rxn, bool overwrite);
 
         /**
-         * \brief Prepares \a rxn for use as a substructure search target (e.g. by pre-computing
+         * \brief Prepares the reaction \a rxn for use as a substructure search target (e.g. by pre-computing
          *        required cached properties).
          * \param rxn The reaction to modify.
-         * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
          */
         CDPL_CHEM_API void initSubstructureSearchTarget(Reaction& rxn, bool overwrite);
 
@@ -627,7 +625,7 @@ namespace CDPL
          * \brief Computes the basic per-component properties (aromaticity, ring info, etc.) of every
          *        component of the reaction \a rxn.
          * \param rxn The reaction to modify.
-         * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
          * \since 1.1
          */
         CDPL_CHEM_API void calcBasicProperties(Reaction& rxn, bool overwrite);

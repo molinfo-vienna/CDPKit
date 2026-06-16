@@ -820,7 +820,7 @@ namespace CDPL
              * \param m The new first-dimension size.
              * \param n The new second-dimension size.
              * \param o The new third-dimension size.
-             * \param preserve If \c true, existing cell values are kept where the indices remain valid; if \c false, all cells are set to \a v.
+             * \param preserve If \c true, existing cell values are kept where the indices remain valid. If \c false, all cells are set to \a v.
              * \param v The fill value used for newly added cells (and for all cells if \a preserve is \c false).
              */
             void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType())

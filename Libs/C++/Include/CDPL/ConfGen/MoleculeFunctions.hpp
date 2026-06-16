@@ -45,9 +45,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Prepares \a mol for conformer generation by completing its hydrogens, perceiving SSSR, ring flags,
-         *        implicit hydrogen counts, hybridization states, aromaticity and (optionally) canonicalizing the
-         *        atom ordering.
+         * \brief Prepares the molecule \a mol for conformer generation.
+         *
+         * The molecules gets prepared by completing its hydrogens, perceiving the SSSR, ring flags,
+         * implicit hydrogen counts, hybridization states, aromaticity and (optionally) canonicalizing the
+         * atom ordering.
+         *
          * \param mol The molecule to prepare (modified in place).
          * \param canonicalize If \c true, the atom ordering of \a mol is canonicalized.
          */

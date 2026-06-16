@@ -97,7 +97,7 @@ namespace CDPL
          * \brief Returns the number of explicit atoms in \a cntnr that match the given atom type.
          * \param cntnr The atom container.
          * \param type The atom type to match (see namespace Chem::AtomType).
-         * \param strict If \c true, atoms must match the type strictly; otherwise generic-type matching applies.
+         * \param strict If \c true, atoms must match the type strictly. Otherwise, generic-type matching applies.
          * \return The number of matching explicit atoms.
          */
         CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);

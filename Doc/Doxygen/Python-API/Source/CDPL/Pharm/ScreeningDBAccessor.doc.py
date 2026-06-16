@@ -88,7 +88,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     # 
     # \param mol_idx The zero-based molecule index.
     # \param mol The output molecule.
-    # \param overwrite If <tt>True</tt>, <em>mol</em> is cleared before reading; if <tt>False</tt>, the atoms/bonds are appended.
+    # \param overwrite If <tt>True</tt>, <em>mol</em> is cleared before reading. If <tt>False</tt>, the atoms/bonds are appended.
     # 
     def getMolecule(mol_idx: int, mol: Chem.Molecule, overwrite: bool = True) -> None: pass
 
@@ -97,7 +97,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     # 
     # \param pharm_idx The zero-based pharmacophore index (across all molecules).
     # \param pharm The output pharmacophore.
-    # \param overwrite If <tt>True</tt>, <em>pharm</em> is cleared before reading; if <tt>False</tt>, the features are appended.
+    # \param overwrite If <tt>True</tt>, <em>pharm</em> is cleared before reading. If <tt>False</tt>, the features are appended.
     # 
     def getPharmacophore(pharm_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
 
@@ -107,7 +107,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     # \param mol_idx The zero-based molecule index.
     # \param mol_conf_idx The zero-based conformer index within the molecule.
     # \param pharm The output pharmacophore.
-    # \param overwrite If <tt>True</tt>, <em>pharm</em> is cleared before reading; if <tt>False</tt>, the features are appended.
+    # \param overwrite If <tt>True</tt>, <em>pharm</em> is cleared before reading. If <tt>False</tt>, the features are appended.
     # 
     def getPharmacophore(mol_idx: int, mol_conf_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
 

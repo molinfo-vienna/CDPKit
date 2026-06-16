@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
+# \brief Generic wrapper class used to store a user-defined MMFF94 partial atom charge retrieval function.
 # 
 class MMFF94AtomChargeFunction(Boost.Python.instance):
 

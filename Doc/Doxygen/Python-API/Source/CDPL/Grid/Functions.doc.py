@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Sets the value of the Grid.AttributedGridProperty.COMMENT property of <em>grid</em>.
+# \brief Sets the value of the Grid.AttributedGridProperty.COMMENT property of the attributed grid <em>grid</em> to <em>comment</em>.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to set the property value.
 # \param comment The new comment.
 # 
 # \since 1.4
@@ -30,9 +30,9 @@
 def setComment(grid: AttributedGrid, comment: str) -> None: pass
 
 ##
-# \brief Tells whether <em>grid</em> carries an explicit Grid.AttributedGridProperty.COMMENT property.
+# \brief Tells whether the Grid.AttributedGridProperty.COMMENT property of the attributed grid <em>grid</em> is set.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to query the property value.
 # 
 # \return <tt>True</tt> if the comment property is set, and <tt>False</tt> otherwise. 
 # 
@@ -41,9 +41,9 @@ def setComment(grid: AttributedGrid, comment: str) -> None: pass
 def hasComment(grid: AttributedGrid) -> bool: pass
 
 ##
-# \brief Returns the value of the Grid.AttributedGridProperty.COMMENT property of <em>grid</em>.
+# \brief Returns the value of the Grid.AttributedGridProperty.COMMENT property of the attributed grid <em>grid</em>.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to return the property value.
 # 
 # \return A reference to the comment. 
 # 
@@ -52,49 +52,49 @@ def hasComment(grid: AttributedGrid) -> bool: pass
 def getComment(grid: AttributedGrid) -> str: pass
 
 ##
-# \brief Removes the Grid.AttributedGridProperty.COMMENT property from <em>grid</em>.
+# \brief Clears the value of the Grid.AttributedGridProperty.COMMENT property of the attributed grid <em>grid</em>.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to clear the property value.
 # 
 # \since 1.4
 # 
 def clearComment(grid: AttributedGrid) -> None: pass
 
 ##
-# \brief Sets the value of the Grid.AttributedGridProperty.NAME property of <em>grid</em>.
+# \brief Sets the value of the Grid.AttributedGridProperty.NAME property of the attributed grid <em>grid</em> to <em>name</em>.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to set the property value.
 # \param name The new name.
 # 
 def setName(grid: AttributedGrid, name: str) -> None: pass
 
 ##
-# \brief Tells whether <em>grid</em> carries an explicit Grid.AttributedGridProperty.NAME property.
+# \brief Tells whether the Grid.AttributedGridProperty.NAME property of the attributed grid <em>grid</em> is set.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to query the property value.
 # 
 # \return <tt>True</tt> if the name property is set, and <tt>False</tt> otherwise.
 # 
 def hasName(grid: AttributedGrid) -> bool: pass
 
 ##
-# \brief Returns the value of the Grid.AttributedGridProperty.NAME property of <em>grid</em>.
+# \brief Returns the value of the Grid.AttributedGridProperty.NAME property of the attributed grid <em>grid</em>.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to return the property value.
 # 
 # \return A reference to the name.
 # 
 def getName(grid: AttributedGrid) -> str: pass
 
 ##
-# \brief Removes the Grid.AttributedGridProperty.NAME property from <em>grid</em>.
+# \brief Clears the value of the Grid.AttributedGridProperty.NAME property of the attributed grid <em>grid</em>.
 # 
-# \param grid The attributed grid.
+# \param grid The attributed grid for which to clear the property value.
 # 
 def clearName(grid: AttributedGrid) -> None: pass
 
 ##
-# \brief Sets the Grid.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em> to <em>single_prec</em>.
+# \brief Sets the value of the Grid.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em> to <em>single_prec</em>.
 # 
 # \param cntnr The control-parameter container.
 # \param single_prec <tt>True</tt> to write single-precision floats, and <tt>False</tt> to write double-precision floats.
@@ -135,7 +135,7 @@ def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief Sets the Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter of <em>cntnr</em> to <em>is_name</em>.
+# \brief Sets the value of the Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter of <em>cntnr</em> to <em>is_name</em>.
 # 
 # \param cntnr The control-parameter container.
 # \param is_name <tt>True</tt> to interpret the <em>CUBE</em> comment line as the grid name, and <tt>False</tt> to treat it as a regular comment.
@@ -176,7 +176,7 @@ def getCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool
 def clearCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief Sets the Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
+# \brief Sets the value of the Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
 # 
 # \param cntnr The control-parameter container.
 # \param factor The new distance scaling factor applied to <em>CUBE</em> input.
@@ -217,7 +217,7 @@ def getCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterConta
 def clearCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief Sets the Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
+# \brief Sets the value of the Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
 # 
 # \param cntnr The control-parameter container.
 # \param factor The new distance scaling factor applied to <em>CUBE</em> output.
@@ -258,7 +258,7 @@ def getCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterCont
 def clearCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief Sets the Grid.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em> to <em>strict</em>.
+# \brief Sets the value of the Grid.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em> to <em>strict</em>.
 # 
 # \param cntnr The control-parameter container.
 # \param strict <tt>True</tt> to enable strict error checking, and <tt>False</tt> to disable it.

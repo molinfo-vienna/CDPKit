@@ -170,7 +170,7 @@ namespace CDPL
              * \brief Returns the energy window size that applies for molecules with \a num_rot_bonds rotatable bonds.
              *
              * If a rotatable bond-specific range was registered via addEnergyWindowRange(), the matching value
-             * is returned; otherwise the global window from getEnergyWindow() is used.
+             * is returned. Otherwise, the global window from getEnergyWindow() is used.
              *
              * \param num_rot_bonds The rotatable bond count.
              * \return The energy window size in kcal/mol.
@@ -307,7 +307,7 @@ namespace CDPL
              * \brief Returns the maximum number of output conformers that applies for molecules with \a num_rot_bonds rotatable bonds.
              *
              * If a rotatable bond-specific range was registered via addMaxNumOutputConformersRange(), the matching value
-             * is returned; otherwise the global limit from getMaxNumOutputConformers() is used.
+             * is returned. Otherwise, the global limit from getMaxNumOutputConformers() is used.
              *
              * \param num_rot_bonds The rotatable bond count.
              * \return The output conformer limit.
@@ -345,7 +345,7 @@ namespace CDPL
              * \brief Returns the minimum RMSD threshold that applies for molecules with \a num_rot_bonds rotatable bonds.
              *
              * If a rotatable bond-specific range was registered via addMinRMSDRange(), the matching value
-             * is returned; otherwise the global threshold from getMinRMSD() is used.
+             * is returned. Otherwise, the global threshold from getMinRMSD() is used.
              *
              * \param num_rot_bonds The rotatable bond count.
              * \return The minimum RMSD threshold (in &Aring;).

@@ -66,7 +66,7 @@ class ScreeningDBCreator(Boost.Python.instance):
     # 
     # \param name The database name (path, URI, etc., interpreted by the concrete subclass).
     # \param mode The open mode (see Mode).
-    # \param allow_dup_entries If <tt>True</tt>, duplicate molecule entries are allowed; if <tt>False</tt>, duplicates are rejected.
+    # \param allow_dup_entries If <tt>True</tt>, duplicate molecule entries are allowed. If <tt>False</tt>, duplicates are rejected.
     # 
     def open(name: str, mode: Mode = CDPL.Pharm.Mode.CREATE, allow_dup_entries: bool = True) -> None: pass
 

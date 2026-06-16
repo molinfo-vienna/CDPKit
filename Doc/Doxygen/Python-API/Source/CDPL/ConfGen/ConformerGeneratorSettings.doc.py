@@ -204,7 +204,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns the energy window size that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # If a rotatable bond-specific range was registered via addEnergyWindowRange(), the matching value is returned; otherwise the global window from getEnergyWindow() is used.
+    # If a rotatable bond-specific range was registered via addEnergyWindowRange(), the matching value is returned. Otherwise, the global window from getEnergyWindow() is used.
     # 
     # \param num_rot_bonds The rotatable bond count.
     # 
@@ -363,7 +363,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns the maximum number of output conformers that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # If a rotatable bond-specific range was registered via addMaxNumOutputConformersRange(), the matching value is returned; otherwise the global limit from getMaxNumOutputConformers() is used.
+    # If a rotatable bond-specific range was registered via addMaxNumOutputConformersRange(), the matching value is returned. Otherwise, the global limit from getMaxNumOutputConformers() is used.
     # 
     # \param num_rot_bonds The rotatable bond count.
     # 
@@ -407,7 +407,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns the minimum RMSD threshold that applies for molecules with <em>num_rot_bonds</em> rotatable bonds.
     # 
-    # If a rotatable bond-specific range was registered via addMinRMSDRange(), the matching value is returned; otherwise the global threshold from getMinRMSD() is used.
+    # If a rotatable bond-specific range was registered via addMinRMSDRange(), the matching value is returned. Otherwise, the global threshold from getMinRMSD() is used.
     # 
     # \param num_rot_bonds The rotatable bond count.
     # 

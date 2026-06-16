@@ -176,7 +176,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Sets whether this exclude pattern is generic.
         # 
-        # \param generic If <tt>True</tt>, the pattern applies to all rules; if <tt>False</tt>, only to the configured rule ID.
+        # \param generic If <tt>True</tt>, the pattern applies to all rules. If <tt>False</tt>, only to the configured rule ID.
         # 
         def setGeneric(generic: bool) -> None: pass
 
@@ -432,7 +432,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph to fragment.
     # \param frag_list The output fragment list.
-    # \param append If <tt>True</tt>, new fragments are appended to <em>frag_list</em>; otherwise the list is cleared first.
+    # \param append If <tt>True</tt>, new fragments are appended to <em>frag_list</em>. Otherwise, the list is cleared first.
     # 
     def generate(molgraph: MolecularGraph, frag_list: FragmentList, append: bool = False) -> None: pass
 

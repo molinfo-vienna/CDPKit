@@ -120,7 +120,7 @@ namespace CDPL
             /**
              * \brief Reads the next data record into \a obj.
              * \param obj The output data object.
-             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced. Otherwise, the new data is merged.
              * \return A reference to itself.
              */
             MultiFormatDataReader& read(DataType& obj, bool overwrite = true);
@@ -129,7 +129,7 @@ namespace CDPL
              * \brief Reads the data record at index \a idx into \a obj.
              * \param idx The zero-based index of the record to read.
              * \param obj The output data object.
-             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced. Otherwise, the new data is merged.
              * \return A reference to itself.
              */
             MultiFormatDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);

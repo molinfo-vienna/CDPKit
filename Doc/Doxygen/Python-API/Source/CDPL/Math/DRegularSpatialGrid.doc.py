@@ -70,7 +70,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # \param m The new first-dimension size.
     # \param n The new second-dimension size.
     # \param o The new third-dimension size.
-    # \param preserve If <tt>True</tt>, existing cell values are kept where the indices remain valid; if <tt>False</tt>, all cells are set to <em>v</em>.
+    # \param preserve If <tt>True</tt>, existing cell values are kept where the indices remain valid. If <tt>False</tt>, all cells are set to <em>v</em>.
     # \param v The fill value used for newly added cells (and for all cells if <em>preserve</em> is <tt>False</tt>).
     # 
     def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass

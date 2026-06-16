@@ -71,13 +71,13 @@ namespace CDPL
             /**
              * \brief Specifies the reference or aligned shape function used by the overlap evaluation.
              * \param func The shape function.
-             * \param is_ref If \c true, \a func is the reference shape function; otherwise the aligned shape function.
+             * \param is_ref If \c true, \a func is the reference shape function. Otherwise, the aligned shape function.
              */
             virtual void setShapeFunction(const GaussianShapeFunction& func, bool is_ref) = 0;
 
             /**
              * \brief Returns the reference or aligned shape function.
-             * \param ref If \c true, the reference shape function is returned; otherwise the aligned shape function.
+             * \param ref If \c true, the reference shape function is returned. Otherwise, the aligned shape function.
              * \return A pointer to the requested shape function (or \c nullptr if none is associated).
              */
             virtual const GaussianShapeFunction* getShapeFunction(bool ref) const = 0;
@@ -108,14 +108,14 @@ namespace CDPL
 
             /**
              * \brief Calculates the shape-only self-overlap of the reference or aligned shape function.
-             * \param ref If \c true, the reference self-overlap is returned; otherwise the aligned self-overlap.
+             * \param ref If \c true, the reference self-overlap is returned. Otherwise, the aligned self-overlap.
              * \return The self-overlap value.
              */
             virtual double calcSelfOverlap(bool ref) const = 0;
 
             /**
              * \brief Calculates the color self-overlap of the reference or aligned shape function.
-             * \param ref If \c true, the reference color self-overlap is returned; otherwise the aligned color self-overlap.
+             * \param ref If \c true, the reference color self-overlap is returned. Otherwise, the aligned color self-overlap.
              * \return The color self-overlap value.
              */
             virtual double calcColorSelfOverlap(bool ref) const = 0;

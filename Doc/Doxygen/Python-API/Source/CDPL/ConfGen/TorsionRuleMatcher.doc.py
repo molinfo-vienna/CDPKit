@@ -117,7 +117,7 @@ class TorsionRuleMatcher(Boost.Python.instance):
     # 
     # \param bond The rotatable bond for which matching torsion rules are sought.
     # \param molgraph The molecular graph the bond belongs to.
-    # \param append If <tt>True</tt>, new matches are appended to the previously stored ones; otherwise stored matches are cleared first.
+    # \param append If <tt>True</tt>, new matches are appended to the previously stored ones. Otherwise, stored matches are cleared first.
     # 
     # \return <tt>True</tt> if at least one matching rule was found, and <tt>False</tt> otherwise.
     # 

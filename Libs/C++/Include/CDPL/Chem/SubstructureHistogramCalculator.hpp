@@ -149,7 +149,7 @@ namespace CDPL
              * \param molgraph The SMARTS query molecular graph.
              * \param id The histogram-bin ID to which matches of this pattern contribute.
              * \param priority The pattern's priority; higher-priority patterns are evaluated first.
-             * \param all_matches If \c true, every match of the query is processed; otherwise only the first.
+             * \param all_matches If \c true, every match of the query is processed. Otherwise, only the first.
              * \param unique_matches If \c true, only one of multiple equivalent substructure mappings is processed per match.
              */
             void addPattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id, std::size_t priority = 0,

@@ -221,13 +221,13 @@ namespace CDPL
             std::size_t getMaxNumOmittedFeatures() const;
 
             /**
-             * \brief Specifies whether the alignment shall check exclusion-volume clashes between the query and the hit molecule.
+             * \brief Specifies whether the alignment shall check exclusion volume clashes between the query and the hit molecule.
              * \param check \c true to enable the clash check, and \c false to disable it.
              */
             void checkXVolumeClashes(bool check);
 
             /**
-             * \brief Tells whether exclusion-volume clashes are checked during alignment.
+             * \brief Tells whether exclusion volume clashes are checked during alignment.
              * \return \c true if the clash check is enabled, and \c false otherwise.
              */
             bool xVolumeClashesChecked() const;
@@ -284,7 +284,7 @@ namespace CDPL
              * \brief Screens the database with the supplied query pharmacophore.
              * \param query The query feature container.
              * \param mol_start_idx The zero-based index of the first molecule to screen.
-             * \param mol_end_idx The exclusive upper bound of the molecule range; if \e 0, the search runs through the end of the database.
+             * \param mol_end_idx The exclusive upper bound of the molecule range. If \e 0, the search runs through the end of the database.
              * \return The number of accepted hits produced by the search.
              */
             std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx = 0, std::size_t mol_end_idx = 0);

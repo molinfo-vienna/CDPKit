@@ -94,11 +94,11 @@ def clearTargetFeatureType(grid: Grid.AttributedGrid) -> None: pass
 def perceiveExtendedType(feature: Pharm.Feature, ligand: bool) -> int: pass
 
 ##
-# \brief Prepares a molecule for GRAIL descriptor calculation.
+# \brief Prepares the molecule <em>mol</em> for GRAIL descriptor calculation.
 # 
-# Performs the pre-processing steps (e.g. ring perception, atom typing, hydrogen handling) required by GRAIL.GRAILDescriptorCalculator on the molecular structure.
+# Performs all molecular structure preprocessing steps (e.g. ring perception, atom typing, hydrogen handling) required by the descriptor calculation procedure (implemented by GRAIL.GRAILDescriptorCalculator).
 # 
 # \param mol The molecule to prepare. The molecule is modified in place.
-# \param std_prot_state If <tt>True</tt>, the standard protonation state of the molecule is assigned prior to the GRAIL-specific pre-processing.
+# \param std_prot_state If <tt>True</tt>, the standard protonation state of the molecule is assigned prior to the GRAIL-specific preprocessing.
 # 
 def prepareForGRAILDescriptorCalculation(mol: Chem.Molecule, std_prot_state: bool = False) -> None: pass

@@ -79,7 +79,7 @@ class FGrid(Boost.Python.instance):
     # \param m The new first-axis size.
     # \param n The new second-axis size.
     # \param o The new third-axis size.
-    # \param preserve If <tt>True</tt>, existing cell values at indices that remain valid are kept; if <tt>False</tt>, all cells are set to <em>v</em>.
+    # \param preserve If <tt>True</tt>, existing cell values at indices that remain valid are kept. If <tt>False</tt>, all cells are set to <em>v</em>.
     # \param v The fill value for newly added cells (or for all cells when <em>preserve</em> is <tt>False</tt>).
     # 
     def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass

@@ -20,223 +20,223 @@
 #
 
 ##
-# \brief Sets the value of the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property of <em>molgraph</em> to <em>rings</em>.
+# \brief Sets the value of the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property of the molecular graph <em>molgraph</em> to <em>rings</em>.
 # 
-# \param molgraph The molecular graph.
+# \param molgraph The molecular graph for which to set the property value.
 # \param rings The new list of MMFF94 aromatic rings.
 # 
 def setMMFF94AromaticRings(molgraph: Chem.MolecularGraph, rings: Chem.FragmentList) -> None: pass
 
 ##
-# \brief Tells whether <em>molgraph</em> carries an explicit ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property.
+# \brief Tells whether the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property of the molecular graph <em>molgraph</em> is set.
 # 
-# \param molgraph The molecular graph.
+# \param molgraph The molecular graph for which to query the property value.
 # 
-# \return <tt>True</tt> if the list of MMFF94 aromatic rings is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the property is set, and <tt>False</tt> otherwise.
 # 
 def hasMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief Returns the value of the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property of <em>molgraph</em>.
+# \brief Returns the value of the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph.
+# \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A reference to the list of MMFF94 aromatic rings.
+# \return A shared reference to the list of MMFF94 aromatic rings.
 # 
 def getMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
 
 ##
-# \brief Removes the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property from <em>molgraph</em>.
+# \brief Clears the value of the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph.
+# \param molgraph The molecular graph for which to clear the property value.
 # 
 def clearMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief Sets the value of the ForceField.AtomProperty.MMFF94_CHARGE property of <em>atom</em> to <em>charge</em>.
+# \brief Sets the value of the ForceField.AtomProperty.MMFF94_CHARGE property of the atom <em>atom</em> to <em>charge</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to set the property value.
 # \param charge The new MMFF94 partial atomic charge.
 # 
 def setMMFF94Charge(atom: Chem.Atom, charge: float) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries an explicit ForceField.AtomProperty.MMFF94_CHARGE property.
+# \brief Tells whether the ForceField.AtomProperty.MMFF94_CHARGE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the MMFF94 partial atomic charge is set, and <tt>False</tt> otherwise.
 # 
 def hasMMFF94Charge(atom: Chem.Atom) -> bool: pass
 
 ##
-# \brief Returns the value of the ForceField.AtomProperty.MMFF94_CHARGE property of <em>atom</em>.
+# \brief Returns the value of the ForceField.AtomProperty.MMFF94_CHARGE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to return the property value.
 # 
 # \return The MMFF94 partial atomic charge.
 # 
 def getMMFF94Charge(atom: Chem.Atom) -> float: pass
 
 ##
-# \brief Removes the ForceField.AtomProperty.MMFF94_CHARGE property from <em>atom</em>.
+# \brief Clears the value of the ForceField.AtomProperty.MMFF94_CHARGE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMMFF94Charge(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief Sets the value of the ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property of <em>atom</em> to <em>type</em>.
+# \brief Sets the value of the ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to set the property value.
 # \param type The new numeric MMFF94 atom type.
 # 
 def setMMFF94NumericType(atom: Chem.Atom, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries an explicit ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property.
+# \brief Tells whether the ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the numeric MMFF94 atom type is set, and <tt>False</tt> otherwise.
 # 
 def hasMMFF94NumericType(atom: Chem.Atom) -> bool: pass
 
 ##
-# \brief Returns the value of the ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property of <em>atom</em>.
+# \brief Returns the value of the ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to return the property value.
 # 
 # \return The numeric MMFF94 atom type.
 # 
 def getMMFF94NumericType(atom: Chem.Atom) -> int: pass
 
 ##
-# \brief Removes the ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property from <em>atom</em>.
+# \brief Clears the value of the ForceField.AtomProperty.MMFF94_NUMERIC_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMMFF94NumericType(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief Sets the value of the ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property of <em>atom</em> to <em>type</em>.
+# \brief Sets the value of the ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to set the property value.
 # \param type The new symbolic MMFF94 atom type.
 # 
 def setMMFF94SymbolicType(atom: Chem.Atom, type: str) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries an explicit ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property.
+# \brief Tells whether the ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the symbolic MMFF94 atom type is set, and <tt>False</tt> otherwise.
 # 
 def hasMMFF94SymbolicType(atom: Chem.Atom) -> bool: pass
 
 ##
-# \brief Returns the value of the ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property of <em>atom</em>.
+# \brief Returns the value of the ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to return the property value.
 # 
 # \return The symbolic MMFF94 atom type.
 # 
 def getMMFF94SymbolicType(atom: Chem.Atom) -> str: pass
 
 ##
-# \brief Removes the ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property from <em>atom</em>.
+# \brief Clears the value of the ForceField.AtomProperty.MMFF94_SYMBOLIC_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to clear the property value.
 # 
 def clearMMFF94SymbolicType(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief Sets the value of the ForceField.BondProperty.MMFF94_TYPE_INDEX property of <em>bond</em> to <em>type_idx</em>.
+# \brief Sets the value of the ForceField.BondProperty.MMFF94_TYPE_INDEX property of the bond <em>bond</em> to <em>type_idx</em>.
 # 
-# \param bond The bond.
+# \param bond The bond for which to set the property value.
 # \param type_idx The new MMFF94 bond type index.
 # 
 def setMMFF94TypeIndex(bond: Chem.Bond, type_idx: int) -> None: pass
 
 ##
-# \brief Tells whether <em>bond</em> carries an explicit ForceField.BondProperty.MMFF94_TYPE_INDEX property.
+# \brief Tells whether the ForceField.BondProperty.MMFF94_TYPE_INDEX property of the bond <em>bond</em> is set.
 # 
-# \param bond The bond.
+# \param bond The bond for which to query the property value.
 # 
 # \return <tt>True</tt> if the MMFF94 bond type index is set, and <tt>False</tt> otherwise.
 # 
 def hasMMFF94TypeIndex(bond: Chem.Bond) -> bool: pass
 
 ##
-# \brief Returns the value of the ForceField.BondProperty.MMFF94_TYPE_INDEX property of <em>bond</em>.
+# \brief Returns the value of the ForceField.BondProperty.MMFF94_TYPE_INDEX property of the bond <em>bond</em>.
 # 
-# \param bond The bond.
+# \param bond The bond for which to return the property value.
 # 
 # \return The MMFF94 bond type index.
 # 
 def getMMFF94TypeIndex(bond: Chem.Bond) -> int: pass
 
 ##
-# \brief Removes the ForceField.BondProperty.MMFF94_TYPE_INDEX property from <em>bond</em>.
+# \brief Clears the value of the ForceField.BondProperty.MMFF94_TYPE_INDEX property of the bond <em>bond</em>.
 # 
-# \param bond The bond.
+# \param bond The bond for which to clear the property value.
 # 
 def clearMMFF94TypeIndex(bond: Chem.Bond) -> None: pass
 
 ##
-# \brief Sets the value of the ForceField.AtomProperty.UFF_TYPE property of <em>atom</em> to <em>type</em>.
+# \brief Sets the value of the ForceField.AtomProperty.UFF_TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to set the property value.
 # \param type The new numeric UFF atom type.
 # 
 def setUFFType(atom: Chem.Atom, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>atom</em> carries an explicit ForceField.AtomProperty.UFF_TYPE property.
+# \brief Tells whether the ForceField.AtomProperty.UFF_TYPE property of the atom <em>atom</em> is set.
 # 
-# \param atom The atom.
+# \param atom The atom for which to query the property value.
 # 
 # \return <tt>True</tt> if the numeric UFF atom type is set, and <tt>False</tt> otherwise.
 # 
 def hasUFFType(atom: Chem.Atom) -> bool: pass
 
 ##
-# \brief Returns the value of the ForceField.AtomProperty.UFF_TYPE property of <em>atom</em>.
+# \brief Returns the value of the ForceField.AtomProperty.UFF_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to return the property value.
 # 
 # \return The numeric UFF atom type.
 # 
 def getUFFType(atom: Chem.Atom) -> int: pass
 
 ##
-# \brief Removes the ForceField.AtomProperty.UFF_TYPE property from <em>atom</em>.
+# \brief Clears the value of the ForceField.AtomProperty.UFF_TYPE property of the atom <em>atom</em>.
 # 
-# \param atom The atom.
+# \param atom The atom for which to clear the property value.
 # 
 def clearUFFType(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief Assigns MMFF94 atom types to the atoms of <em>molgraph</em>.
+# \brief Assigns MMFF94 atom types to the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph whose atoms will be typed.
-# \param strict If <tt>True</tt>, atoms for which no MMFF94 type could be perceived cause an error to be reported. Otherwise, perception never fails and problematic atoms get assigned a suitable fallback type.
+# \param strict If <tt>True</tt>, atoms for which no MMFF94 type could be perceived cause an error to be reported. Otherwise, perception never fails and problematic atoms are assigned a suitable fallback type.
 # \param overwrite Specifies whether already assigned atom type properties should be replaced.
 # 
 def assignMMFF94AtomTypes(molgraph: Chem.MolecularGraph, strict: bool, overwrite: bool) -> None: pass
 
 ##
-# \brief Assigns MMFF94 bond type indices to the bonds of <em>molgraph</em>.
+# \brief Assigns MMFF94 bond type indices to the bonds of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph whose bonds will be typed.
 # \param strict If <tt>True</tt>, strict parameterization will be peformed that might fail. Otherwise, bonds with parameterization problems receive the type index <em>0</em>.
-# \param overwrite Specifies whether already assigned bond-type-index properties should be replaced.
+# \param overwrite Specifies whether already assigned bond type index properties should be replaced.
 # 
 def assignMMFF94BondTypeIndices(molgraph: Chem.MolecularGraph, strict: bool, overwrite: bool) -> None: pass
 
 ##
-# \brief Assigns UFF atom types to the atoms of <em>molgraph</em>.
+# \brief Assigns UFF atom types to the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph whose atoms will be typed.
 # \param overwrite Specifies whether already assigned atom type properties should be replaced.
@@ -726,9 +726,9 @@ def calcMMFF94AngleBendingGradient(ia_list: MMFF94AngleBendingInteractionList, c
 def calcMMFF94AngleBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
 ##
-# \brief Calculates and assigns MMFF94 partial atomic charges to the atoms of <em>molgraph</em>.
+# \brief Calculates and assigns MMFF94 partial atomic charges to the atoms of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph whose atoms will be charged.
+# \param molgraph The molecular graph for which to assign atom charges.
 # \param strict If <tt>True</tt>, strict parameterization is performed (and may fail). Otherwise, in case of parameterization problems, fallback strategies take effect.
 # \param overwrite Specifies whether already assigned charge properties should be replaced.
 # 
@@ -1582,7 +1582,7 @@ def calcSquaredDistance(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D) -> f
 def filterInteractions(ia_data: MMFF94InteractionData, filtered_ia_data: MMFF94InteractionData, inc_atom_mask: Util.BitSet) -> None: pass
 
 ##
-# \brief Perceives the list of MMFF94 aromatic rings of the molecular graph <em>molgraph</em> without storing the result.
+# \brief Perceives the list of MMFF94 aromatic rings of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph.
 # 
@@ -1591,21 +1591,21 @@ def filterInteractions(ia_data: MMFF94InteractionData, filtered_ia_data: MMFF94I
 def perceiveMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
 
 ##
-# \brief Perceives the list of MMFF94 aromatic rings of <em>molgraph</em> and stores the result as the value of the ForceField.MolecularGraphProperty.MMFF94_AROMATIC_RINGS property.
+# \brief Perceives and (optionally) stores the list of MMFF94 aromatic rings of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph.
+# \param molgraph The molecular graph to inspect/modify.
 # \param overwrite Specifies whether an already existing value of the property should be replaced.
 # 
-# \return A shared reference to the perceived list of MMFF94 aromatic rings.
+# \return A shared reference to the perceived (or pre-existing) list of MMFF94 aromatic rings.
 # 
 def perceiveMMFF94AromaticRings(molgraph: Chem.MolecularGraph, overwrite: bool) -> Chem.FragmentList: pass
 
 ##
-# \brief Perceives the UFF atom type of <em>atom</em> in the context of the molecular graph <em>molgraph</em>.
+# \brief Perceives the UFF atom type of the atom <em>atom</em> in the context of the molecular graph <em>molgraph</em>.
 # 
 # \param atom The atom whose UFF type is to be perceived.
 # \param molgraph The molecular graph providing the atom environment for type perception.
 # 
-# \return The perceived numeric UFF atom type.
+# \return The perceived numeric UFF atom type (see namespace ForceField.UFFAtomType).
 # 
 def perceiveUFFType(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass

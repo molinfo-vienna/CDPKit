@@ -88,7 +88,7 @@ class ULMatrix(Boost.Python.instance):
     # 
     # \param m The new row count.
     # \param n The new column count.
-    # \param preserve If <tt>True</tt>, existing element values at indices that remain valid are kept; if <tt>False</tt>, all elements are set to <em>v</em>.
+    # \param preserve If <tt>True</tt>, existing element values at indices that remain valid are kept. If <tt>False</tt>, all elements are set to <em>v</em>.
     # \param v The fill value for newly added elements (or for all elements when <em>preserve</em> is <tt>False</tt>).
     # 
     def resize(m: int, n: int, preserve: bool = True, v: int = 0) -> None: pass

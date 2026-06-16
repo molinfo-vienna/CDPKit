@@ -208,7 +208,7 @@ namespace CDPL
         /**
          * \brief Builds and (optionally) stores the top-level match expression of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing match expression; otherwise the existing one (if any) is returned unchanged.
+         * \param overwrite If \c true, replaces any existing match expression. Otherwise, the existing one (if any) is returned unchanged.
          * \return The generated (or pre-existing) match expression.
          */
         CDPL_CHEM_API MatchExpression<MolecularGraph>::SharedPointer generateMatchExpression(MolecularGraph& molgraph, bool overwrite);
@@ -242,7 +242,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasRings(const MolecularGraph& molgraph);
 
         /**
-         * \brief Perceives the full set of rings of the molecular graph \a molgraph without modifying it.
+         * \brief Perceives the full set of rings of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The perceived ring set.
          */
@@ -251,7 +251,7 @@ namespace CDPL
         /**
          * \brief Perceives and (optionally) stores the full set of rings of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing ring set; otherwise the existing one (if any) is returned unchanged.
+         * \param overwrite If \c true, replaces any existing ring set. Otherwise, the existing one (if any) is returned unchanged.
          * \return The perceived (or pre-existing) ring set.
          */
         CDPL_CHEM_API FragmentList::SharedPointer perceiveRings(MolecularGraph& molgraph, bool overwrite);
@@ -285,22 +285,22 @@ namespace CDPL
         CDPL_CHEM_API bool hasSSSR(const MolecularGraph& molgraph);
 
         /**
-         * \brief Perceives the Smallest Set of Smallest Rings of the molecular graph \a molgraph without modifying it.
+         * \brief Perceives the Smallest Set of Smallest Rings of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
-         * \return The perceived SSSR.
+         * \return A shared pointer to the perceived SSSR.
          */
         CDPL_CHEM_API FragmentList::SharedPointer perceiveSSSR(const MolecularGraph& molgraph);
 
         /**
          * \brief Perceives and (optionally) stores the Smallest Set of Smallest Rings of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing SSSR; otherwise the existing one (if any) is returned unchanged.
+         * \param overwrite If \c true, replaces any existing SSSR. Otherwise, the existing one (if any) is returned unchanged.
          * \return The perceived (or pre-existing) SSSR.
          */
         CDPL_CHEM_API FragmentList::SharedPointer perceiveSSSR(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Extracts the subset of the SSSR of \a src_molgraph whose rings consist of atoms and bonds of \a tgt_molgraph.
+         * \brief Extracts the subset of the SSSR of the molecular graph \a src_molgraph whose rings consist of atoms and bonds of \a tgt_molgraph.
          * \param src_molgraph The source molecular graph whose SSSR is to be projected.
          * \param tgt_molgraph The target molecular graph providing the membership filter.
          * \return The extracted SSSR subset.
@@ -308,7 +308,7 @@ namespace CDPL
         CDPL_CHEM_API FragmentList::SharedPointer extractSSSRSubset(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph);
 
         /**
-         * \brief Extracts the SSSR subset of \a src_molgraph that fits within \a tgt_molgraph and (optionally) stores it on the latter.
+         * \brief Extracts the SSSR subset of the molecular graph \a src_molgraph that fits within \a tgt_molgraph and (optionally) stores it on the latter.
          * \param src_molgraph The source molecular graph whose SSSR is to be projected.
          * \param tgt_molgraph The target molecular graph that receives the projected SSSR.
          * \param overwrite If \c true, replaces any existing SSSR on \a tgt_molgraph.
@@ -345,7 +345,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasCyclicSubstructure(const MolecularGraph& molgraph);
 
         /**
-         * \brief Perceives the cyclic substructure (union of all rings) of the molecular graph \a molgraph without modifying it.
+         * \brief Perceives the cyclic substructure (union of all rings) of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The perceived cyclic substructure.
          */
@@ -354,7 +354,7 @@ namespace CDPL
         /**
          * \brief Perceives and (optionally) stores the cyclic substructure of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing cyclic substructure; otherwise the existing one (if any) is returned unchanged.
+         * \param overwrite If \c true, replaces any existing cyclic substructure. Otherwise, the existing one (if any) is returned unchanged.
          * \return The perceived (or pre-existing) cyclic substructure.
          */
         CDPL_CHEM_API Fragment::SharedPointer perceiveCyclicSubstructure(MolecularGraph& molgraph, bool overwrite);
@@ -388,7 +388,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasComponents(const MolecularGraph& molgraph);
 
         /**
-         * \brief Perceives the connected components of the molecular graph \a molgraph without modifying it.
+         * \brief Perceives the connected components of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The perceived connected-component list.
          */
@@ -397,7 +397,7 @@ namespace CDPL
         /**
          * \brief Perceives and (optionally) stores the connected components of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing component list; otherwise the existing one (if any) is returned unchanged.
+         * \param overwrite If \c true, replaces any existing component list. Otherwise, the existing one (if any) is returned unchanged.
          * \return The perceived (or pre-existing) component list.
          */
         CDPL_CHEM_API FragmentList::SharedPointer perceiveComponents(MolecularGraph& molgraph, bool overwrite);
@@ -440,7 +440,7 @@ namespace CDPL
         /**
          * \brief Perceives and (optionally) stores the component groups of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing component-group list; otherwise the existing one (if any) is returned unchanged.
+         * \param overwrite If \c true, replaces any existing component-group list. Otherwise, the existing one (if any) is returned unchanged.
          * \return The perceived (or pre-existing) component-group list.
          */
         CDPL_CHEM_API FragmentList::SharedPointer perceiveComponentGroups(MolecularGraph& molgraph, bool overwrite);
@@ -1018,7 +1018,7 @@ namespace CDPL
         CDPL_CHEM_API void calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
 
         /**
-         * \brief Extracts the topological-distance sub-matrix of \a src_molgraph that covers the atoms of \a tgt_molgraph and (optionally) stores it on the latter.
+         * \brief Extracts the topological-distance sub-matrix of the molecular graph \a src_molgraph that covers the atoms of \a tgt_molgraph and (optionally) stores it on the latter.
          * \param src_molgraph The source molecular graph providing the full matrix.
          * \param tgt_molgraph The target molecular graph providing the atom subset and (optionally) receiving the sub-matrix.
          * \param overwrite If \c true, replaces any existing matrix on \a tgt_molgraph.
@@ -1027,7 +1027,7 @@ namespace CDPL
         CDPL_CHEM_API Math::ULMatrix::SharedPointer extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite);
 
         /**
-         * \brief Extracts the topological-distance sub-matrix of \a src_molgraph that covers the atoms of \a tgt_molgraph into the supplied \a mtx.
+         * \brief Extracts the topological-distance sub-matrix of the molecular graph \a src_molgraph that covers the atoms of \a tgt_molgraph into the supplied \a mtx.
          * \param src_molgraph The source molecular graph providing the full matrix.
          * \param tgt_molgraph The target molecular graph providing the atom subset.
          * \param mtx The output dense matrix receiving the sub-matrix entries.
@@ -1099,7 +1099,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasAromaticSubstructure(const MolecularGraph& molgraph);
 
         /**
-         * \brief Perceives the aromatic substructure of the molecular graph \a molgraph without modifying it.
+         * \brief Perceives the aromatic substructure of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The perceived aromatic substructure.
          */
@@ -1142,7 +1142,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasPiElectronSystems(const MolecularGraph& molgraph);
 
         /**
-         * \brief Perceives the pi-electron systems of the molecular graph \a molgraph without modifying it.
+         * \brief Perceives the pi-electron systems of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The perceived pi-electron-system list.
          */
@@ -1217,7 +1217,7 @@ namespace CDPL
         /**
          * \brief Computes 2D atom coordinates for \a molgraph and stores them as Chem::AtomProperty::COORDINATES_2D.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, replaces any existing 2D coordinates; otherwise leaves atoms that already carry coordinates unchanged.
+         * \param overwrite If \c true, replaces any existing 2D coordinates. Otherwise, leaves atoms that already carry coordinates unchanged.
          */
         CDPL_CHEM_API void calc2DCoordinates(MolecularGraph& molgraph, bool overwrite);
 
@@ -1246,7 +1246,7 @@ namespace CDPL
          * \brief Aligns \a molgraph's 2D coordinates onto those of \a ref_molgraph, using either a maximum-common-substructure search or substructure matching.
          * \param molgraph The molecular graph to align.
          * \param ref_molgraph The reference molecular graph providing the target coordinates.
-         * \param use_mcss If \c true, the atom correspondence is found by maximum-common-substructure search; otherwise by substructure matching.
+         * \param use_mcss If \c true, the atom correspondence is found by maximum-common-substructure search. Otherwise, by substructure matching.
          * \param fix_bond_stereo If \c true, postprocess bond stereo flags so that they remain consistent with the aligned coordinates.
          * \return \c true if the alignment succeeded, and \c false otherwise.
          * \since 1.3
@@ -1268,7 +1268,7 @@ namespace CDPL
         /**
          * \brief Computes 3D coordinates for the hydrogen atoms of the molecular graph \a molgraph from the geometry of their non-hydrogen neighbors.
          * \param molgraph The molecular graph to modify.
-         * \param undef_only If \c true, only hydrogens without prior 3D coordinates are placed; if \c false, all hydrogen coordinates are recomputed.
+         * \param undef_only If \c true, only hydrogens without prior 3D coordinates are placed. If \c false, all hydrogen coordinates are recomputed.
          */
         CDPL_CHEM_API void calcHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);
 
@@ -1292,7 +1292,7 @@ namespace CDPL
          * \param overwrite If \c true, replaces any existing symmetry-class IDs.
          * \param atom_flags A bitmask of Chem::AtomPropertyFlag flags controlling which atomic properties enter the perception.
          * \param bond_flags A bitmask of Chem::BondPropertyFlag flags controlling which bond properties enter the perception.
-         * \param inc_impl_h If \c true, implicit hydrogens are treated as if they were explicit; otherwise they are ignored.
+         * \param inc_impl_h If \c true, implicit hydrogens are treated as if they were explicit. Otherwise, they are ignored.
          */
         CDPL_CHEM_API void perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
                                                    unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
@@ -1428,7 +1428,7 @@ namespace CDPL
          * \brief Sets the atom-level match-constraint list \a constr on every atom of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
          * \param constr The match-constraint list to assign.
-         * \param overwrite If \c true, replaces any existing per-atom constraints; if \c false, leaves atoms that already carry a list unchanged.
+         * \param overwrite If \c true, replaces any existing per-atom constraints. If \c false, leaves atoms that already carry a list unchanged.
          */
         CDPL_CHEM_API void setAtomMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr,
                                                    bool overwrite);
@@ -1437,7 +1437,7 @@ namespace CDPL
          * \brief Sets the bond-level match-constraint list \a constr on every bond of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
          * \param constr The match-constraint list to assign.
-         * \param overwrite If \c true, replaces any existing per-bond constraints; if \c false, leaves bonds that already carry a list unchanged.
+         * \param overwrite If \c true, replaces any existing per-bond constraints. If \c false, leaves bonds that already carry a list unchanged.
          */
         CDPL_CHEM_API void setBondMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr,
                                                    bool overwrite);
@@ -1445,7 +1445,7 @@ namespace CDPL
         /**
          * \brief Generates and stores match expressions for every atom, bond and the molecular graph itself.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, replaces any existing match expressions; if \c false, leaves items that already carry a match expression unchanged.
+         * \param overwrite If \c true, replaces any existing match expressions. If \c false, leaves items that already carry a match expression unchanged.
          */
         CDPL_CHEM_API void generateMatchExpressions(MolecularGraph& molgraph, bool overwrite);
 
@@ -1457,28 +1457,28 @@ namespace CDPL
         CDPL_CHEM_API void generateMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Prepares \a molgraph for use as a substructure search query (precomputes match expressions and required cached properties).
+         * \brief Prepares the molecular graph \a molgraph for use as a substructure search query (precomputes match expressions and required cached properties).
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
          */
         CDPL_CHEM_API void initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Prepares \a molgraph for use as a substructure search target (precomputes required cached properties).
+         * \brief Prepares the molecular graph \a molgraph for use as a substructure search target (precomputes required cached properties).
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
          */
         CDPL_CHEM_API void initSubstructureSearchTarget(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Perceives aromaticity and sets the corresponding atom/bond aromaticity flags on \a molgraph.
+         * \brief Perceives aromaticity and sets the corresponding atom/bond aromaticity flags on the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
          * \param overwrite If \c true, replaces any existing aromaticity flags.
          */
         CDPL_CHEM_API void setAromaticityFlags(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Perceives ring membership and sets the corresponding atom/bond ring flags on \a molgraph.
+         * \brief Perceives ring membership and sets the corresponding atom/bond ring flags on the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
          * \param overwrite If \c true, replaces any existing ring flags.
          */
@@ -1506,21 +1506,21 @@ namespace CDPL
         CDPL_CHEM_API void perceiveSybylAtomTypes(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Returns the subset of the aromatic rings of the molecular graph \a molgraph (a fresh list, not stored on \a molgraph).
+         * \brief Returns the subset of the aromatic rings of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The aromatic rings.
          */
         CDPL_CHEM_API FragmentList::SharedPointer getAromaticRings(const MolecularGraph& molgraph);
 
         /**
-         * \brief Returns the subset of the SSSR of the molecular graph \a molgraph that contains only aromatic rings (a fresh list, not stored on \a molgraph).
+         * \brief Returns the subset of the SSSR of the molecular graph \a molgraph that contains only aromatic rings,
          * \param molgraph The molecular graph to inspect.
          * \return The aromatic-SSSR subset.
          */
         CDPL_CHEM_API FragmentList::SharedPointer getAromaticSSSRSubset(const MolecularGraph& molgraph);
 
         /**
-         * \brief Tells whether \a molgraph contains the atoms and/or bonds of \a sub_molgraph.
+         * \brief Tells whether the molecular graph \a molgraph contains the atoms and/or bonds of \a sub_molgraph.
          * \param molgraph The host molecular graph.
          * \param sub_molgraph The candidate sub-graph.
          * \param atoms If \c true, every atom of \a sub_molgraph must be a member of the molecular graph \a molgraph.
@@ -1531,11 +1531,11 @@ namespace CDPL
                                                   bool atoms = true, bool bonds = true);
 
         /**
-         * \brief Collects the fragments in \a frag_list that are fully contained in \a molgraph into \a cont_frag_list.
+         * \brief Collects the fragments in \a frag_list that are fully contained in the molecular graph \a molgraph into \a cont_frag_list.
          * \param molgraph The host molecular graph.
          * \param frag_list The candidate fragment list.
          * \param cont_frag_list The output fragment list receiving the matches.
-         * \param append If \c true, matches are appended to \a cont_frag_list; otherwise it is cleared first.
+         * \param append If \c true, matches are appended to \a cont_frag_list. Otherwise, it is cleared first.
          * \param atoms If \c true, atom membership is required for a match.
          * \param bonds If \c true, bond membership is required for a match.
          */
@@ -1544,11 +1544,11 @@ namespace CDPL
                                                  bool bonds = true);
 
         /**
-         * \brief Collects the fragments in \a frag_list that contain \a molgraph into \a cont_frag_list.
+         * \brief Collects the fragments in \a frag_list that contain the molecular graph \a molgraph into \a cont_frag_list.
          * \param molgraph The query molecular graph.
          * \param frag_list The candidate fragment list.
          * \param cont_frag_list The output fragment list receiving the matches.
-         * \param append If \c true, matches are appended to \a cont_frag_list; otherwise it is cleared first.
+         * \param append If \c true, matches are appended to \a cont_frag_list. Otherwise, it is cleared first.
          * \param atoms If \c true, atom membership is required for a match.
          * \param bonds If \c true, bond membership is required for a match.
          */
@@ -1557,54 +1557,54 @@ namespace CDPL
                                                   bool bonds = true);
 
         /**
-         * \brief Translates the atoms/bonds of \a src_frag (a fragment of \a src_molgraph) to the corresponding atoms/bonds of \a tgt_molgraph and stores them in \a tgt_frag.
+         * \brief Translates the atoms/bonds of \a src_frag to the corresponding atoms/bonds of \a tgt_molgraph and stores them in \a tgt_frag.
          * \param src_molgraph The source molecular graph providing the original atoms/bonds.
-         * \param src_frag The fragment defining the atom/bond subset to translate.
+         * \param src_frag The fragment defining the atom/bond subset to translate (a fragment of the molecular graph \a src_molgraph).
          * \param tgt_molgraph The target molecular graph providing the translated atoms/bonds.
          * \param tgt_frag The output fragment receiving the translated atoms/bonds.
-         * \param append If \c true, atoms/bonds are appended to \a tgt_frag; otherwise it is cleared first.
+         * \param append If \c true, atoms/bonds are appended to \a tgt_frag. Otherwise, it is cleared first.
          */
         CDPL_CHEM_API void translateFragment(const MolecularGraph& src_molgraph, const Fragment& src_frag,
                                              const MolecularGraph& tgt_molgraph, Fragment& tgt_frag, bool append = false);
 
         /**
-         * \brief Translates every fragment in \a src_frag_list (defined on \a src_molgraph) to the corresponding fragments on \a tgt_molgraph.
+         * \brief Translates every fragment in \a src_frag_list to the corresponding fragments on \a tgt_molgraph.
          * \param src_molgraph The source molecular graph providing the original atoms/bonds.
-         * \param src_frag_list The fragments to translate.
+         * \param src_frag_list The fragments to translate (fragments of the molecular graph \a src_molgraph).
          * \param tgt_molgraph The target molecular graph providing the translated atoms/bonds.
          * \param tgt_frag_list The output fragment list receiving the translated fragments.
-         * \param append If \c true, fragments are appended to \a tgt_frag_list; otherwise it is cleared first.
+         * \param append If \c true, fragments are appended to \a tgt_frag_list. Otherwise, it is cleared first.
          */
         CDPL_CHEM_API void translateFragments(const MolecularGraph& src_molgraph, const FragmentList& src_frag_list,
                                               const MolecularGraph& tgt_molgraph, FragmentList& tgt_frag_list, bool append = false);
 
         /**
-         * \brief Splits \a molgraph into connected fragments by removing the bonds flagged in \a split_bond_mask.
+         * \brief Splits the molecular graph \a molgraph into connected fragments by removing the bonds flagged in \a split_bond_mask.
          * \param molgraph The molecular graph to split.
          * \param frag_list The output fragment list receiving the resulting fragments.
          * \param split_bond_mask Bit mask selecting the bonds to be virtually removed before fragmentation (bit \c i corresponds to the bond at index \c i in \a molgraph).
-         * \param append If \c true, fragments are appended to \a frag_list; otherwise it is cleared first.
+         * \param append If \c true, fragments are appended to \a frag_list. Otherwise, it is cleared first.
          */
         CDPL_CHEM_API void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frag_list,
                                               const Util::BitSet& split_bond_mask, bool append = false);
 
         /**
-         * \brief Returns the number of bonds of the molecular graph \a molgraph that lie between two atoms of \a molgraph (i.e. no dangling cross-graph bonds).
+         * \brief Returns the number of bonds of the molecular graph \a molgraph whose connected atoms are likewise contained in \a molgraph.
          * \param molgraph The molecular graph to inspect.
-         * \return The count of fully-contained bonds.
+         * \return The count of non-dangling bonds.
          */
         CDPL_CHEM_API std::size_t getCompleteBondCount(const MolecularGraph& molgraph);
 
         /**
          * \brief Computes the basic per-atom/per-bond properties (aromaticity, ring info, etc.) of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, recomputes derived data; if \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
          * \since 1.1
          */
         CDPL_CHEM_API void calcBasicProperties(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Builds \a result_mol from \a molgraph by replacing all substructures matching the SMARTS patterns in \a search_ptns with \a result_ptn.
+         * \brief Builds the molecule \a result_mol from the molecular graph \a molgraph by replacing all substructures matching the SMARTS patterns in \a search_ptns with \a result_ptn.
          * \param molgraph The source molecular graph.
          * \param result_mol The molecule receiving the edited result.
          * \param search_ptns A whitespace-separated list of SMARTS patterns matching the substructures to replace.

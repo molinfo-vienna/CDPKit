@@ -47,14 +47,14 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # \brief Specifies the reference or aligned shape function used by the overlap evaluation.
     # 
     # \param func The shape function.
-    # \param is_ref If <tt>True</tt>, <em>func</em> is the reference shape function; otherwise the aligned shape function.
+    # \param is_ref If <tt>True</tt>, <em>func</em> is the reference shape function. Otherwise, the aligned shape function.
     # 
     def setShapeFunction(func: GaussianShapeFunction, is_ref: bool) -> None: pass
 
     ##
     # \brief Returns the reference or aligned shape function.
     # 
-    # \param ref If <tt>True</tt>, the reference shape function is returned; otherwise the aligned shape function.
+    # \param ref If <tt>True</tt>, the reference shape function is returned. Otherwise, the aligned shape function.
     # 
     # \return A reference to the requested shape function (or <tt>nullptr</tt> if none is associated).
     # 
@@ -91,7 +91,7 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     ##
     # \brief Calculates the shape-only self-overlap of the reference or aligned shape function.
     # 
-    # \param ref If <tt>True</tt>, the reference self-overlap is returned; otherwise the aligned self-overlap.
+    # \param ref If <tt>True</tt>, the reference self-overlap is returned. Otherwise, the aligned self-overlap.
     # 
     # \return The self-overlap value.
     # 
@@ -100,7 +100,7 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     ##
     # \brief Calculates the color self-overlap of the reference or aligned shape function.
     # 
-    # \param ref If <tt>True</tt>, the reference color self-overlap is returned; otherwise the aligned color self-overlap.
+    # \param ref If <tt>True</tt>, the reference color self-overlap is returned. Otherwise, the aligned color self-overlap.
     # 
     # \return The color self-overlap value.
     # 

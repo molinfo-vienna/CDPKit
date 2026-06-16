@@ -55,7 +55,7 @@ namespace CDPL
          * \brief Stores the 3D coordinates of the entities of \a cntnr in \a coords.
          * \param cntnr The entity 3D container providing the source coordinates.
          * \param coords The output coordinates array.
-         * \param append If \c true, the entity coordinates are appended to \a coords; if \c false, \a coords is cleared first.
+         * \param append If \c true, the entity coordinates are appended to \a coords. If \c false, \a coords is cleared first.
          */
         CDPL_CHEM_API void get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords, bool append = false);
 
@@ -98,7 +98,7 @@ namespace CDPL
          * \param cntnr The entity 3D container.
          * \param min The output vector receiving the per-axis minimum coordinates.
          * \param max The output vector receiving the per-axis maximum coordinates.
-         * \param reset If \c true, \a min and \a max are reset before the calculation; if \c false, the box is extended to include the existing range.
+         * \param reset If \c true, \a min and \a max are reset before the calculation. If \c false, the box is extended to include the existing range.
          */
         CDPL_CHEM_API void calcBoundingBox(const Entity3DContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, bool reset = true);
 

@@ -3705,7 +3705,9 @@ def calcVertexFromFaceNormals(mesh: TriangleMesh3D, weight_face_size: bool = Fal
 def calcVertexFromFaceNormals(mesh: TriangleMesh3D, normals: Math.Vector3DArray, weight_face_size: bool = False) -> None: pass
 
 ##
-# \brief Prepares <em>molgraph</em> for 2D visualization by perceiving all properties (aromaticity, hybridization, rings, stereo, etc.) that downstream 2D-rendering code expects to be set.
+# \brief Prepares the molecular graph <em>molgraph</em> for 2D visualization.
+# 
+# The molecular graph gets prepared by perceiving all properties (aromaticity, hybridization, rings, stereo, etc.) which the downstream 2D rendering code expects to be set.
 # 
 # \param molgraph The molecular graph to prepare (modified in place).
 # 
@@ -3714,7 +3716,9 @@ def calcVertexFromFaceNormals(mesh: TriangleMesh3D, normals: Math.Vector3DArray,
 def prepareFor2DVisualization(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief Prepares <em>rxn</em> for 2D visualization by perceiving all properties (aromaticity, hybridization, rings, stereo, etc.) that downstream 2D-rendering code expects to be set on each reaction component.
+# \brief Prepares the reaction <em>rxn</em> for 2D visualization.
+# 
+# The reaction gets prepared by perceiving all properties (aromaticity, hybridization, rings, stereo, etc.) which the downstream 2D rendering code expects to be set on each reaction component.
 # 
 # \param rxn The reaction to prepare (modified in place).
 # 

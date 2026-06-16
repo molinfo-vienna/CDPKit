@@ -144,7 +144,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # \param molgraph The SMARTS query molecular graph.
     # \param atom_label The atom label to assign to matched atoms.
     # \param priority The pattern's priority; higher-priority patterns are evaluated first.
-    # \param all_matches If <tt>True</tt>, every match of the query is processed; otherwise only the first.
+    # \param all_matches If <tt>True</tt>, every match of the query is processed. Otherwise, only the first.
     # \param unique_matches If <tt>True</tt>, only one of multiple equivalent substructure mappings is processed per match.
     # 
     def addPattern(molgraph: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass

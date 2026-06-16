@@ -62,7 +62,7 @@ namespace CDPL
          * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be corrected,
          *                          \c false if the property shall be left unchanged.
          * \return \c false if \a mol was not altered, \c true otherwise.
-         * \see Chem::isOrdinaryHydrogen
+         * \see MolProp::isOrdinaryHydrogen
          */
         CDPL_CHEM_API bool makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags, bool corr_impl_h_count = true);
 
@@ -76,7 +76,7 @@ namespace CDPL
         CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count = true);
 
         /**
-         * \brief Adds bonds between atoms of \a mol whose 3D distance falls within the covalent-radii sum plus \a dist_tol.
+         * \brief Adds bonds between atoms of the molecule \a mol whose 3D distance falls within the covalent-radii sum plus \a dist_tol.
          * \param mol The molecule whose atoms are to be connected.
          * \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
          * \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to \a atom_idx_offs
@@ -85,7 +85,7 @@ namespace CDPL
         CDPL_CHEM_API void connectAtoms(Molecule& mol, double dist_tol = 0.3, std::size_t atom_idx_offs = 0);
 
         /**
-         * \brief Adds bonds between atoms of \a mol whose 3D distance (obtained via \a coords_func) falls within the covalent-radii sum plus \a dist_tol.
+         * \brief Adds bonds between atoms of the molecule \a mol whose 3D distance (obtained via \a coords_func) falls within the covalent-radii sum plus \a dist_tol.
          * \param mol The molecule whose atoms are to be connected.
          * \param coords_func The function used to retrieve the 3D coordinates of an atom.
          * \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.

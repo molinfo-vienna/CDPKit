@@ -499,7 +499,7 @@ namespace CDPL
              * category is returned.
              *
              * \param name The mmCIF category name (without the leading underscore).
-             * \param front If \c true, the new category is inserted at the front of the category list; if \c false, it is appended.
+             * \param front If \c true, the new category is inserted at the front of the category list. If \c false, it is appended.
              * \return A mutable reference to the added (or pre-existing) category.
              */
             Category& addCategory(const std::string& name, bool front = false);

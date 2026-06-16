@@ -200,7 +200,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Specifies whether the bonding geometries (bond lengths and angles) of the input fragment shall be preserved.
     # 
-    # \param preserve If <tt>True</tt>, the bonding geometry of the input is reused; otherwise it is rebuilt.
+    # \param preserve If <tt>True</tt>, the bonding geometry of the input is reused. Otherwise, it is rebuilt.
     # 
     def preserveInputBondingGeometries(preserve: bool) -> None: pass
 

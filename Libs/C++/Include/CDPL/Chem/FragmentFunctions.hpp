@@ -53,7 +53,7 @@ namespace CDPL
          * \param frag The fragment for which to remove all explicit ordinary hydrogen atoms.
          * \param flags Specifies the set of atom properties to check (see namespace Chem::AtomPropertyFlag).
          * \return \c false if \a frag was not altered, \c true otherwise.
-         * \see Chem::isOrdinaryHydrogen
+         * \see MolProp::isOrdinaryHydrogen
          */
         CDPL_CHEM_API bool makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags);
 
