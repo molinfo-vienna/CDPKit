@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Generic rule-based molecule fragmentation engine that splits a molecular graph along bonds matching user-defined SMARTS fragmentation rules.
+# \brief Generic rule-based molecule fragmentation engine that splits a molecular graph along bonds matching user-defined fragmentation rules.
 # 
-# Fragmentation rules are added via addFragmentationRule() (each rule has a SMARTS pattern matching a bond plus a numeric rule ID). Bonds matching any registered rule are scheduled for splitting, unless a registered exclude pattern overrides the split. The optional fragment filter rejects generated fragments based on a user-supplied predicate. The connectivity between the resulting fragments is exposed via the FragmentLink list, recording for each cleaved bond the two adjacent fragment indices, the cleaved bond, the matching rule and per-side atom labels.
+# Fragmentation rules are added via addFragmentationRule() (each rule has a substructure pattern describing a bond plus a numeric rule ID). Bonds matching any registered rule are scheduled for splitting, unless a registered exclude pattern overrides the split. The optional fragment filter rejects generated fragments based on a user-supplied predicate. The connectivity between the resulting fragments is exposed via the FragmentLink list, recording for each cleaved bond the two adjacent fragment indices, the cleaved bond, the matching rule and per-side atom labels.
 # 
 class FragmentGenerator(Boost.Python.instance):
 
     ##
-    # \brief A single fragmentation rule, consisting of a SMARTS match pattern and a numeric rule ID.
+    # \brief A single fragmentation rule, consisting of a bond substructure match pattern and a numeric rule ID.
     # 
     class FragmentationRule(Boost.Python.instance):
 
@@ -40,7 +40,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Constructs the fragmentation rule.
         # 
-        # \param match_ptn The SMARTS match pattern (must match a single bond to be cleaved).
+        # \param match_ptn The bond substructure match pattern (must match a single bond to be cleaved).
         # \param id The rule identifier (forwarded to FragmentLink.getRuleID() for cleaved bonds).
         # 
         def __init__(match_ptn: MolecularGraph, id: int) -> None: pass
@@ -65,16 +65,16 @@ class FragmentGenerator(Boost.Python.instance):
         def assign(rule: FragmentationRule) -> FragmentationRule: pass
 
         ##
-        # \brief Returns the SMARTS match pattern of this rule.
+        # \brief Returns the bond substructure match pattern of this rule.
         # 
-        # \return A reference to the pattern smart reference.
+        # \return A shared reference to the match pattern molecular graph.
         # 
         def getMatchPattern() -> MolecularGraph: pass
 
         ##
-        # \brief Sets the SMARTS match pattern of this rule.
+        # \brief Sets the bond substructure match pattern of this rule.
         # 
-        # \param ptn The new pattern.
+        # \param ptn The new bond substructure match pattern.
         # 
         def setMatchPattern(ptn: MolecularGraph) -> None: pass
 
@@ -99,7 +99,7 @@ class FragmentGenerator(Boost.Python.instance):
         id = property(getID, setID)
 
     ##
-    # \brief A pattern overriding a fragmentation rule: bonds matching the pattern are not cleaved.
+    # \brief A pattern descriptor specifying bonds that shall not be cleaved.
     # 
     # An exclude pattern is either rule-specific (only the matching rule is suppressed) or generic (all rules are suppressed for the matching bonds).
     # 
@@ -114,7 +114,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Constructs a rule-specific exclude pattern.
         # 
-        # \param match_ptn The SMARTS match pattern.
+        # \param match_ptn The substructure match pattern.
         # \param rule_id The rule ID this exclusion applies to.
         # 
         def __init__(match_ptn: MolecularGraph, rule_id: int) -> None: pass
@@ -139,16 +139,16 @@ class FragmentGenerator(Boost.Python.instance):
         def assign(excl_ptn: ExcludePattern) -> ExcludePattern: pass
 
         ##
-        # \brief Returns the SMARTS match pattern.
+        # \brief Returns the substructure match pattern.
         # 
-        # \return A reference to the pattern smart reference.
+        # \return A shared reference to the match pattern molecular graph.
         # 
         def getMatchPattern() -> MolecularGraph: pass
 
         ##
-        # \brief Sets the SMARTS match pattern.
+        # \brief Sets the substructure match pattern.
         # 
-        # \param ptn The new pattern.
+        # \param ptn The new substructure match pattern.
         # 
         def setMatchPattern(ptn: MolecularGraph) -> None: pass
 
@@ -202,8 +202,8 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Constructs the fragment link.
         # 
-        # \param frag1_idx The index of the first fragment in the output FragmentList.
-        # \param frag2_idx The index of the second fragment in the output FragmentList.
+        # \param frag1_idx The index of the first fragment in the output fragment list.
+        # \param frag2_idx The index of the second fragment in the output fragment list.
         # \param bond The cleaved bond (from the original molecular graph).
         # \param rule_id The rule ID that triggered the cleavage.
         # \param atom1_label The label assigned to the first atom of the cleaved bond.
@@ -231,14 +231,14 @@ class FragmentGenerator(Boost.Python.instance):
         def assign(link: FragmentLink) -> FragmentLink: pass
 
         ##
-        # \brief Returns the index of the first fragment in the output FragmentList.
+        # \brief Returns the index of the first fragment in the output fragment list.
         # 
         # \return The first fragment index.
         # 
         def getFragment1Index() -> int: pass
 
         ##
-        # \brief Returns the index of the second fragment in the output FragmentList.
+        # \brief Returns the index of the second fragment in the output fragment list.
         # 
         # \return The second fragment index.
         # 
@@ -313,16 +313,16 @@ class FragmentGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the state of this generator by a copy of the state of <em>gen</em>.
     # 
-    # \param gen The source <tt>FragmentGenerator</tt>.
+    # \param gen The <tt>FragmentGenerator</tt> instance to copy.
     # 
     # \return \a self
     # 
     def assign(gen: FragmentGenerator) -> FragmentGenerator: pass
 
     ##
-    # \brief Registers a new fragmentation rule by its SMARTS match pattern and rule ID.
+    # \brief Registers a new fragmentation rule by its bond substructure match pattern and rule ID.
     # 
-    # \param match_ptn The SMARTS match pattern (must match a single bond to be cleaved).
+    # \param match_ptn The bond substructure match pattern (must match a single bond to be cleaved).
     # \param rule_id The rule identifier.
     # 
     def addFragmentationRule(match_ptn: MolecularGraph, rule_id: int) -> None: pass
@@ -369,7 +369,7 @@ class FragmentGenerator(Boost.Python.instance):
     ##
     # \brief Registers a rule-specific exclude pattern.
     # 
-    # \param match_ptn The SMARTS match pattern.
+    # \param match_ptn The substructure match pattern.
     # \param rule_id The rule ID this exclusion applies to.
     # 
     def addExcludePattern(match_ptn: MolecularGraph, rule_id: int) -> None: pass
@@ -416,19 +416,19 @@ class FragmentGenerator(Boost.Python.instance):
     ##
     # \brief Sets the predicate used to filter the generated fragments (fragments for which the predicate returns <tt>False</tt> are discarded).
     # 
-    # \param func The new fragment-filter function.
+    # \param func The new fragment filter function.
     # 
     def setFragmentFilterFunction(func: BoolConstMolecularGraphFunctor) -> None: pass
 
     ##
     # \brief Returns the predicate used to filter the generated fragments.
     # 
-    # \return A reference to the fragment-filter function.
+    # \return A reference to the fragment filter function.
     # 
     def getFragmentFilterFunction() -> BoolConstMolecularGraphFunctor: pass
 
     ##
-    # \brief Performs the fragmentation of <em>molgraph</em> and writes the resulting fragments to <em>frag_list</em>.
+    # \brief Performs the fragmentation of <em>molgraph</em> and appends the resulting fragments to <em>frag_list</em>.
     # 
     # \param molgraph The molecular graph to fragment.
     # \param frag_list The output fragment list.
@@ -450,7 +450,7 @@ class FragmentGenerator(Boost.Python.instance):
     ##
     # \brief Returns the number of fragment links produced by the most recent generate() call.
     # 
-    # \return The fragment-link count.
+    # \return The fragment link count.
     # 
     def getNumFragmentLinks() -> int: pass
 

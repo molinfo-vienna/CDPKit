@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Finds torsion rules from a TorsionLibrary that apply to a given rotatable bond.
+# \brief Finds torsion rules from a ConfGen.TorsionLibrary instance that match a given rotatable bond.
 # 
-# For a queried bond in a molecular graph the matcher iterates the configured TorsionLibrary (top-down through torsion categories) and reports every rule whose central bond SMARTS pattern matches at the queried bond. Each match is stored as a TorsionRuleMatch object providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
+# For a queried bond in a molecular graph the matcher iterates the configured torsion library (top-down through torsion categories) and reports every rule whose central bond pattern matches the queried bond. Each match is stored as a ConfGen.TorsionRuleMatch object providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
 # 
 class TorsionRuleMatcher(Boost.Python.instance):
 
@@ -113,7 +113,7 @@ class TorsionRuleMatcher(Boost.Python.instance):
     def getMatch(idx: int) -> TorsionRuleMatch: pass
 
     ##
-    # \brief Searches the associated TorsionLibrary for rules that apply to the bond <em>bond</em> of <em>molgraph</em>.
+    # \brief Searches the associated torsion library for rules that match the bond <em>bond</em> of the molecular graph <em>molgraph</em>.
     # 
     # \param bond The rotatable bond for which matching torsion rules are sought.
     # \param molgraph The molecular graph the bond belongs to.

@@ -41,7 +41,7 @@ namespace CDPL
 
         /**
          * \brief Pharm::FeatureGenerator implementation that perceives negative ionizable group features by
-         *        matching a built-in set of SMARTS-like substructure patterns.
+         *        matching a built-in set of \e SMARTS patterns.
          */
         class CDPL_PHARM_API NegIonizableFeatureGenerator : public PatternBasedFeatureGenerator
         {

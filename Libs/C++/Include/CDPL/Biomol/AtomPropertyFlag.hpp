@@ -73,7 +73,7 @@ namespace CDPL
             constexpr unsigned int CHAIN_ID = 0x2000;
 
             /**
-             * \brief Specifies the PDB model number of an atom.
+             * \brief Specifies the \e PDB model number of an atom.
              */
             constexpr unsigned int MODEL_NUMBER = 0x4000;
             

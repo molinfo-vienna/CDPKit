@@ -80,15 +80,15 @@ namespace CDPL
             const HierarchyViewChain& getChain(std::size_t idx) const;
 
             /**
-             * \brief Tells whether this model contains a chain with the given PDB chain ID.
-             * \param id The PDB chain ID.
+             * \brief Tells whether this model contains a chain with the given chain ID.
+             * \param id The chain ID.
              * \return \c true if such a chain exists, and \c false otherwise.
              */
             bool hasChainWithID(const std::string& id) const;
 
             /**
-             * \brief Returns the chain identified by the given PDB chain ID.
-             * \param id The PDB chain ID.
+             * \brief Returns the chain identified by the given chain ID.
+             * \param id The chain ID.
              * \return A \c const reference to the chain.
              * \throw Base::ItemNotFound if no chain with the requested ID exists.
              */

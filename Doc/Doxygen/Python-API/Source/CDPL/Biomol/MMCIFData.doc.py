@@ -27,14 +27,14 @@
 class MMCIFData(Boost.Python.instance):
 
     ##
-    # \brief A single data item (column) of an mmCIF category, holding an ordered list of string values.
+    # \brief A single data item (column) of an <em>mmCIF</em> category, holding an ordered list of string values.
     # 
     class Item(Boost.Python.instance):
 
         ##
         # \brief Constructs an empty <tt>Item</tt> with the data-item name <em>name</em>.
         # 
-        # \param name The fully-qualified mmCIF data-item name (including the <tt>_</tt> prefix).
+        # \param name The fully-qualified <em>mmCIF</em> data-item name (including the <tt>_</tt> prefix).
         # 
         def __init__(name: str) -> None: pass
 
@@ -158,14 +158,14 @@ class MMCIFData(Boost.Python.instance):
         name = property(getName)
 
     ##
-    # \brief A single mmCIF data category, holding an ordered list of data items (columns).
+    # \brief A single <em>mmCIF</em> data category, holding an ordered list of data items (columns).
     # 
     class Category(Boost.Python.instance):
 
         ##
         # \brief Constructs an empty <tt>Category</tt> with the name <em>name</em>.
         # 
-        # \param name The mmCIF category name (without the leading underscore).
+        # \param name The <em>mmCIF</em> category name (without the leading underscore).
         # 
         def __init__(name: str) -> None: pass
 
@@ -362,7 +362,7 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Constructs an empty <tt>MMCIFData</tt> instance with the data-block ID <em>id</em>.
     # 
-    # \param id The mmCIF data-block ID.
+    # \param id The <em>mmCIF</em> data-block ID.
     # 
     def __init__(id: str) -> None: pass
 
@@ -379,14 +379,14 @@ class MMCIFData(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the mmCIF data-block ID.
+    # \brief Returns the <em>mmCIF</em> data-block ID.
     # 
     # \return A reference to the data-block ID.
     # 
     def getID() -> str: pass
 
     ##
-    # \brief Sets the mmCIF data-block ID to <em>id</em>.
+    # \brief Sets the <em>mmCIF</em> data-block ID to <em>id</em>.
     # 
     # \param id The new data-block ID.
     # 
@@ -421,7 +421,7 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Returns a mutable reference to the category with name <em>name</em>, or <tt>nullptr</tt> if no matching category exists.
     # 
-    # \param name The mmCIF category name (without the leading underscore).
+    # \param name The <em>mmCIF</em> category name (without the leading underscore).
     # 
     # \return A mutable reference to the matching category, or <tt>nullptr</tt>.
     # 
@@ -432,7 +432,7 @@ class MMCIFData(Boost.Python.instance):
     # 
     # If a category with the given name already exists, no new category is added and a reference to the existing category is returned.
     # 
-    # \param name The mmCIF category name (without the leading underscore).
+    # \param name The <em>mmCIF</em> category name (without the leading underscore).
     # \param front If <tt>True</tt>, the new category is inserted at the front of the category list. If <tt>False</tt>, it is appended.
     # 
     # \return A mutable reference to the added (or pre-existing) category.
@@ -442,7 +442,7 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Returns a reference to the category with name <em>name</em>.
     # 
-    # \param name The mmCIF category name (without the leading underscore).
+    # \param name The <em>mmCIF</em> category name (without the leading underscore).
     # 
     # \return A reference to the matching category. 
     # 
@@ -473,7 +473,7 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Removes the category with name <em>name</em>.
     # 
-    # \param name The mmCIF category name (without the leading underscore).
+    # \param name The <em>mmCIF</em> category name (without the leading underscore).
     # 
     # \return <tt>True</tt> if a matching category was removed, and <tt>False</tt> if no such category existed.
     # 

@@ -89,26 +89,26 @@ namespace CDPL
             void setName(const std::string& name);
 
             /**
-             * \brief Returns the SMARTS string used to perceive bonds belonging to this category.
-             * \return A \c const reference to the SMARTS string.
+             * \brief Returns the \e SMARTS match pattern describing the bonds that belong to this category.
+             * \return A \c const reference to the \e SMARTS match pattern.
              */
             const std::string& getMatchPatternString() const;
 
             /**
-             * \brief Sets the SMARTS string used to perceive bonds belonging to this category.
-             * \param ptn_str The new SMARTS pattern string.
+             * \brief Sets the \e SMARTS match pattern describing the bonds that belong to this category.
+             * \param ptn_str The new \e SMARTS match pattern.
              */
             void setMatchPatternString(const std::string& ptn_str);
 
             /**
-             * \brief Returns the molecular graph pattern used to perceive bonds belonging to this category.
-             * \return A \c const reference to the pattern smart pointer.
+             * \brief Returns the match pattern molecular graph used to perceive the bonds that belong to this category.
+             * \return A \c const shared pointer to the match pattern molecular graph.
              */
             const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
             /**
-             * \brief Sets the molecular graph pattern used to perceive bonds belonging to this category.
-             * \param ptn The new molecular graph pattern.
+             * \brief Sets the match pattern molecular graph used to perceive the bonds that belong to this category.
+             * \param ptn The new match pattern molecular graph.
              */
             void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
 

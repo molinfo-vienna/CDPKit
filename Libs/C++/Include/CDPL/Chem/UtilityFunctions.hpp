@@ -46,16 +46,16 @@ namespace CDPL
     {
 
         /**
-         * \brief Parses the SMARTS string \a smarts into a freshly allocated query Chem::Molecule.
-         * \param smarts The SMARTS string to parse.
+         * \brief Parses the \e SMARTS string \a smarts into a freshly allocated query Chem::Molecule.
+         * \param smarts The \e SMARTS string to parse.
          * \param init_qry If \c true, query-specific perception (e.g. ring-membership, aromaticity) is run on the parsed molecule.
          * \return A smart pointer to the parsed molecule, or an empty smart pointer if parsing failed.
          */
         CDPL_CHEM_API Molecule::SharedPointer parseSMARTS(const std::string& smarts, bool init_qry = true);
 
         /**
-         * \brief Parses the SMARTS string \a smarts into the supplied molecule \a mol.
-         * \param smarts The SMARTS string to parse.
+         * \brief Parses the \e SMARTS string \a smarts into the supplied molecule \a mol.
+         * \param smarts The \e SMARTS string to parse.
          * \param mol The molecule to populate (cleared before parsing).
          * \param init_qry If \c true, query-specific perception is run on the parsed molecule.
          * \return \c true if parsing succeeded, and \c false otherwise.
@@ -64,15 +64,15 @@ namespace CDPL
 
 
         /**
-         * \brief Parses the SMILES string \a smiles into a freshly allocated Chem::Molecule.
-         * \param smiles The SMILES string to parse.
+         * \brief Parses the \e SMILES string \a smiles into a freshly allocated Chem::Molecule.
+         * \param smiles The \e SMILES string to parse.
          * \return A smart pointer to the parsed molecule, or an empty smart pointer if parsing failed.
          */
         CDPL_CHEM_API Molecule::SharedPointer parseSMILES(const std::string& smiles);
 
         /**
-         * \brief Parses the SMILES string \a smiles into the supplied molecule \a mol.
-         * \param smiles The SMILES string to parse.
+         * \brief Parses the \e SMILES string \a smiles into the supplied molecule \a mol.
+         * \param smiles The \e SMILES string to parse.
          * \param mol The molecule to populate (cleared before parsing).
          * \return \c true if parsing succeeded, and \c false otherwise.
          */

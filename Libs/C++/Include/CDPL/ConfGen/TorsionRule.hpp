@@ -46,7 +46,7 @@ namespace CDPL
         /**
          * \brief Data structure for the representation of single torsion library rules.
          *
-         * Eeach rule consists of a SMARTS-like atom-mapping pattern and a list of
+         * Eeach rule consists of a \e SMARTS match pattern and a list of
          * preferred torsion angles (each with tolerances and a score).
          */
         class CDPL_CONFGEN_API TorsionRule
@@ -125,26 +125,26 @@ namespace CDPL
             typedef AngleEntryList::const_iterator ConstAngleEntryIterator;
 
             /**
-             * \brief Returns the SMARTS-like match pattern in textual form.
-             * \return A \c const reference to the match-pattern string.
+             * \brief Returns the \e SMARTS match pattern.
+             * \return A \c const reference to the \e SMARTS match pattern.
              */
             const std::string& getMatchPatternString() const;
 
             /**
-             * \brief Sets the SMARTS-like match pattern in textual form.
-             * \param ptn_str The new match-pattern string.
+             * \brief Sets the \e SMARTS match pattern.
+             * \param ptn_str The new \e SMARTS match pattern.
              */
             void setMatchPatternString(const std::string& ptn_str);
 
             /**
-             * \brief Returns the compiled match-pattern molecular graph.
-             * \return A \c const reference to the compiled pattern shared pointer.
+             * \brief Returns the match pattern molecular graph.
+             * \return A \c const shared pointer to the match pattern molecular graph.
              */
             const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
             /**
-             * \brief Sets the compiled match-pattern molecular graph.
-             * \param ptn The new match pattern.
+             * \brief Sets the match pattern molecular graph.
+             * \param ptn The new match pattern molecular graph.
              */
             void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
 

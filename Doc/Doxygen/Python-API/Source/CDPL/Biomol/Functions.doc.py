@@ -232,7 +232,7 @@ def setHydrogenResidueSequenceInfo(molgraph: Chem.MolecularGraph, overwrite: boo
 # \brief Sets the value of the Biomol.MolecularGraphProperty.MMCIF_DATA property of the molecular graph <em>molgraph</em> to <em>data</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param data The new mmCIF data record.
+# \param data The new <em>mmCIF</em> data record.
 # 
 def setMMCIFData(molgraph: Chem.MolecularGraph, data: MMCIFData) -> None: pass
 
@@ -241,7 +241,7 @@ def setMMCIFData(molgraph: Chem.MolecularGraph, data: MMCIFData) -> None: pass
 # 
 # \param molgraph The molecular graph for which to query the property value.
 # 
-# \return <tt>True</tt> if the mmCIF data record is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the <em>mmCIF</em> data record is set, and <tt>False</tt> otherwise.
 # 
 def hasMMCIFData(molgraph: Chem.MolecularGraph) -> bool: pass
 
@@ -250,7 +250,7 @@ def hasMMCIFData(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A reference to the mmCIF data record shared reference. 
+# \return A reference to the <em>mmCIF</em> data record shared reference. 
 # 
 # \since 1.2
 # 
@@ -366,7 +366,7 @@ def clearOccupancy(atom: Chem.Atom) -> None: pass
 # \brief Sets the value of the Biomol.MolecularGraphProperty.PDB_DATA property of the molecular graph <em>molgraph</em> to <em>data</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param data The new PDB data record.
+# \param data The new <em>PDB</em> data record.
 # 
 def setPDBData(molgraph: Chem.MolecularGraph, data: PDBData) -> None: pass
 
@@ -375,7 +375,7 @@ def setPDBData(molgraph: Chem.MolecularGraph, data: PDBData) -> None: pass
 # 
 # \param molgraph The molecular graph for which to query the property value.
 # 
-# \return <tt>True</tt> if the PDB data record is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the <em>PDB</em> data record is set, and <tt>False</tt> otherwise.
 # 
 def hasPDBData(molgraph: Chem.MolecularGraph) -> bool: pass
 
@@ -384,7 +384,7 @@ def hasPDBData(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A reference to the PDB data record shared reference.
+# \return A reference to the <em>PDB</em> data record shared reference.
 # 
 def getPDBData(molgraph: Chem.MolecularGraph) -> PDBData: pass
 
@@ -772,7 +772,7 @@ def areInSameResidue(atom1: Chem.Atom, atom2: Chem.Atom, flags: int = 2147483648
 ##
 # \brief Merges alternative residue conformers in <em>mol</em> whose residue centers lie within <em>max_ctr_dist</em> of one another.
 # 
-# Many PDB and mmCIF structures encode alternative conformations of a residue as multiple residues with distinct alternate-location identifiers but mostly overlapping atom positions. This function detects such interfering residue copies (residues whose geometric centers are closer than <em>max_ctr_dist</em>) and combines them into a single residue with all observed atom positions, leaving the molecule's topology and residue ordering otherwise unchanged.
+# Many <em>PDB</em> and <em>mmCIF</em> structures encode alternative conformations of a residue as multiple residues with distinct alternate-location identifiers but mostly overlapping atom positions. This function detects such interfering residue copies (residues whose geometric centers are closer than <em>max_ctr_dist</em>) and combines them into a single residue with all observed atom positions, leaving the molecule's topology and residue ordering otherwise unchanged.
 # 
 # \param mol The molecule whose interfering residues are to be combined.
 # \param max_ctr_dist The maximum distance between residue centers that still qualifies them as interfering copies of one another.
@@ -898,13 +898,13 @@ def isPDBBackboneAtom(atom: Chem.Atom) -> bool: pass
 # Each filter argument is ignored when set to its sentinel value (<tt>nullptr</tt> / <tt>0</tt> / IGNORE_SEQUENCE_NO / IGNORE_SERIAL_NO). All supplied filters must match for the function to return <tt>True</tt>.
 # 
 # \param atom The atom to test.
-# \param res_code The PDB three-letter residue code to match (or <tt>nullptr</tt> to ignore).
-# \param chain_id The PDB chain ID to match (or <tt>nullptr</tt> to ignore).
-# \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-# \param ins_code The PDB insertion code to match (or <tt>0</tt> to ignore).
-# \param model_no The PDB model number to match (or <tt>0</tt> to ignore).
-# \param atom_name The PDB atom name to match (or <tt>nullptr</tt> to ignore).
-# \param serial_no The PDB atom serial number to match (or IGNORE_SERIAL_NO to ignore).
+# \param res_code The <em>PDB</em> three-letter residue code to match (or <tt>nullptr</tt> to ignore).
+# \param chain_id The <em>PDB</em> chain ID to match (or <tt>nullptr</tt> to ignore).
+# \param res_seq_no The <em>PDB</em> residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+# \param ins_code The <em>PDB</em> insertion code to match (or <tt>0</tt> to ignore).
+# \param model_no The <em>PDB</em> model number to match (or <tt>0</tt> to ignore).
+# \param atom_name The <em>PDB</em> atom name to match (or <tt>nullptr</tt> to ignore).
+# \param serial_no The <em>PDB</em> atom serial number to match (or IGNORE_SERIAL_NO to ignore).
 # 
 # \return <tt>True</tt> if all supplied filters match, and <tt>False</tt> otherwise.
 # 
@@ -916,11 +916,11 @@ def matchesResidueInfo(atom: Chem.Atom, res_code: str = '', chain_id: str = '', 
 # Each filter argument is ignored when set to its sentinel value (<tt>nullptr</tt> / <tt>0</tt> / IGNORE_SEQUENCE_NO). All supplied filters must match for the function to return <tt>True</tt>.
 # 
 # \param molgraph The molecular graph to test.
-# \param res_code The PDB three-letter residue code to match (or <tt>nullptr</tt> to ignore).
-# \param chain_id The PDB chain ID to match (or <tt>nullptr</tt> to ignore).
-# \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-# \param ins_code The PDB insertion code to match (or <tt>0</tt> to ignore).
-# \param model_no The PDB model number to match (or <tt>0</tt> to ignore).
+# \param res_code The <em>PDB</em> three-letter residue code to match (or <tt>nullptr</tt> to ignore).
+# \param chain_id The <em>PDB</em> chain ID to match (or <tt>nullptr</tt> to ignore).
+# \param res_seq_no The <em>PDB</em> residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+# \param ins_code The <em>PDB</em> insertion code to match (or <tt>0</tt> to ignore).
+# \param model_no The <em>PDB</em> model number to match (or <tt>0</tt> to ignore).
 # 
 # \return <tt>True</tt> if all supplied filters match, and <tt>False</tt> otherwise.
 # 

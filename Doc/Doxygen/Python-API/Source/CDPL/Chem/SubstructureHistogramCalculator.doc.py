@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Counts occurrences of registered SMARTS substructure queries in a molecular graph, emitting the per-pattern hit counts into a user-supplied histogram container.
+# \brief Counts occurrences of registered substructure patterns in a molecular graph, emitting the per-pattern hit counts into a user-supplied histogram container.
 # 
-# Patterns are added via addPattern() (each pattern carries a numeric ID, a priority and match-handling flags). On calculate() the registered patterns are run in priority order against the input molecular graph; matched atom/bond regions are masked so that subsequent lower-priority patterns cannot re-count overlapping substructures. The per-pattern hit count is then forwarded to the histogram via the expression <tt>histo</tt>[id]++ for every accepted match.
+# Patterns are added via addPattern() (each pattern carries a query molecular graph, a numeric ID, a priority and match-handling flags). On calculate() the registered patterns are run in priority order against the input molecular graph. Matched atom/bond regions are masked so that subsequent lower-priority patterns cannot re-count overlapping substructures. The per-pattern hit count is then forwarded to the histogram via the expression <tt>histo</tt>[id]++ for every accepted match.
 # 
 class SubstructureHistogramCalculator(Boost.Python.instance):
 
     ##
-    # \brief Holds a single SMARTS query pattern, its histogram ID, its priority and match-handling flags.
+    # \brief Stores a single substructure query molecular graph, its histogram ID, its priority and match-handling flags.
     # 
     class Pattern(Boost.Python.instance):
 
@@ -38,12 +38,12 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         def __init__(pattern: Pattern) -> None: pass
 
         ##
-        # \brief Constructs a pattern from the query molecular graph <em>molgraph</em>.
+        # \brief Constructs a <tt>Pattern</tt> instance for the specified values.
         # 
-        # \param molgraph The SMARTS query molecular graph.
-        # \param id The histogram-bin ID to which matches of this pattern contribute.
-        # \param priority The priority of this pattern; higher-priority patterns are evaluated first.
-        # \param all_matches If <tt>True</tt>, every match of <em>molgraph</em> in the target is processed; if <tt>False</tt>, only the first match is processed.
+        # \param molgraph The query molecular graph.
+        # \param id The histogram bin ID to which matches of this pattern contribute.
+        # \param priority The priority of this pattern (higher priority patterns are evaluated first).
+        # \param all_matches If <tt>True</tt>, every match of <em>molgraph</em> in the target is processed. If <tt>False</tt>, only the first match is processed.
         # \param unique_matches If <tt>True</tt>, only one of multiple equivalent substructure mappings is processed per match.
         # 
         def __init__(molgraph: MolecularGraph, id: int, priority: int = 0, all_matches: bool = True, unique_matches: bool = True) -> None: pass
@@ -68,9 +68,9 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         def assign(pattern: Pattern) -> Pattern: pass
 
         ##
-        # \brief Returns the SMARTS query molecular graph of this pattern.
+        # \brief Returns the query molecular graph of this pattern.
         # 
-        # \return A reference to the query smart reference.
+        # \return A shared reference to the query molecular graph.
         # 
         def getStructure() -> MolecularGraph: pass
 
@@ -82,9 +82,9 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         def getPriority() -> int: pass
 
         ##
-        # \brief Returns the histogram-bin ID of this pattern.
+        # \brief Returns the histogram bin ID of this pattern.
         # 
-        # \return The histogram-bin ID.
+        # \return The histogram bin ID.
         # 
         def getID() -> int: pass
 
@@ -140,9 +140,9 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     ##
     # \brief Registers a new pattern by its query molecular graph and per-pattern settings.
     # 
-    # \param molgraph The SMARTS query molecular graph.
-    # \param id The histogram-bin ID to which matches of this pattern contribute.
-    # \param priority The pattern's priority; higher-priority patterns are evaluated first.
+    # \param molgraph The query molecular graph.
+    # \param id The histogram bin ID to which matches of this pattern contribute.
+    # \param priority The pattern's priority (higher priority patterns are evaluated first).
     # \param all_matches If <tt>True</tt>, every match of the query is processed. Otherwise, only the first.
     # \param unique_matches If <tt>True</tt>, only one of multiple equivalent substructure mappings is processed per match.
     # 

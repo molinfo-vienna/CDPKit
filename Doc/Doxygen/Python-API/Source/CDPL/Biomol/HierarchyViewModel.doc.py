@@ -45,18 +45,18 @@ class HierarchyViewModel(HierarchyViewNode):
     def getChain(idx: int) -> HierarchyViewChain: pass
 
     ##
-    # \brief Tells whether this model contains a chain with the given PDB chain ID.
+    # \brief Tells whether this model contains a chain with the given chain ID.
     # 
-    # \param id The PDB chain ID.
+    # \param id The chain ID.
     # 
     # \return <tt>True</tt> if such a chain exists, and <tt>False</tt> otherwise.
     # 
     def hasChainWithID(id: str) -> bool: pass
 
     ##
-    # \brief Returns the chain identified by the given PDB chain ID.
+    # \brief Returns the chain identified by the given chain ID.
     # 
-    # \param id The PDB chain ID.
+    # \param id The chain ID.
     # 
     # \return A reference to the chain. 
     # 

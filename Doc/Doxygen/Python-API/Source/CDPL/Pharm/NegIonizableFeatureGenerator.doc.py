@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Pharm.FeatureGenerator implementation that perceives negative ionizable group features by matching a built-in set of SMARTS-like substructure patterns.
+# \brief Pharm.FeatureGenerator implementation that perceives negative ionizable group features by matching a built-in set of <em>SMARTS</em> patterns.
 # 
 class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
 

@@ -55,6 +55,6 @@ class AtomPropertyFlag(Boost.Python.instance):
     CHAIN_ID = 8192
 
     ##
-    # \brief Specifies the PDB model number of an atom.
+    # \brief Specifies the <em>PDB</em> model number of an atom.
     # 
     MODEL_NUMBER = 16384

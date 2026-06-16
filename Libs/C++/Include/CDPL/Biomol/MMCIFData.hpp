@@ -58,7 +58,7 @@ namespace CDPL
             typedef std::shared_ptr<MMCIFData> SharedPointer;
 
             /**
-             * \brief A single data item (column) of an mmCIF category, holding an ordered list of string values.
+             * \brief A single data item (column) of an \e mmCIF category, holding an ordered list of string values.
              */
             class CDPL_BIOMOL_API Item
             {
@@ -73,13 +73,13 @@ namespace CDPL
 
                 /**
                  * \brief Constructs an empty \c %Item with the data-item name \a name.
-                 * \param name The fully-qualified mmCIF data-item name (including the \c _ prefix).
+                 * \param name The fully-qualified \e mmCIF data-item name (including the \c _ prefix).
                  */
                 Item(const std::string& name):
                     name(name) {}
 
                 /**
-                 * \brief Returns the fully-qualified mmCIF data-item name.
+                 * \brief Returns the fully-qualified \e mmCIF data-item name.
                  * \return A \c const reference to the data-item name.
                  */
                 const std::string& getName() const;
@@ -205,7 +205,7 @@ namespace CDPL
             };
 
             /**
-             * \brief A single mmCIF data category, holding an ordered list of data items (columns).
+             * \brief A single \e mmCIF data category, holding an ordered list of data items (columns).
              */
             class CDPL_BIOMOL_API Category
             {
@@ -220,13 +220,13 @@ namespace CDPL
 
                 /**
                  * \brief Constructs an empty \c %Category with the name \a name.
-                 * \param name The mmCIF category name (without the leading underscore).
+                 * \param name The \e mmCIF category name (without the leading underscore).
                  */
                 Category(const std::string& name):
                   name(name) {}
 
                 /**
-                 * \brief Returns the mmCIF category name.
+                 * \brief Returns the \e mmCIF category name.
                  * \return A \c const reference to the category name.
                  */
                 const std::string& getName() const;
@@ -405,18 +405,18 @@ namespace CDPL
 
             /**
              * \brief Constructs an empty \c %MMCIFData instance with the data-block ID \a id.
-             * \param id The mmCIF data-block ID.
+             * \param id The \e mmCIF data-block ID.
              */
             MMCIFData(const std::string& id);
 
             /**
-             * \brief Sets the mmCIF data-block ID to \a id.
+             * \brief Sets the \e mmCIF data-block ID to \a id.
              * \param id The new data-block ID.
              */
             void setID(const std::string& id);
 
             /**
-             * \brief Returns the mmCIF data-block ID.
+             * \brief Returns the \e mmCIF data-block ID.
              * \return A \c const reference to the data-block ID.
              */
             const std::string& getID() const;
@@ -450,7 +450,7 @@ namespace CDPL
 
             /**
              * \brief Returns a mutable reference to the category with name \a name.
-             * \param name The mmCIF category name (without the leading underscore).
+             * \param name The \e mmCIF category name (without the leading underscore).
              * \return A mutable reference to the matching category.
              * \throw Base::ItemNotFound if no matching category exists.
              */
@@ -458,7 +458,7 @@ namespace CDPL
 
             /**
              * \brief Returns a \c const reference to the category with name \a name.
-             * \param name The mmCIF category name (without the leading underscore).
+             * \param name The \e mmCIF category name (without the leading underscore).
              * \return A \c const reference to the matching category.
              * \throw Base::ItemNotFound if no matching category exists.
              */
@@ -466,14 +466,14 @@ namespace CDPL
 
             /**
              * \brief Returns a pointer to the category with name \a name, or \c nullptr if no matching category exists.
-             * \param name The mmCIF category name (without the leading underscore).
+             * \param name The \e mmCIF category name (without the leading underscore).
              * \return A \c const pointer to the matching category, or \c nullptr.
              */
             const Category* findCategory(const std::string& name) const;
 
             /**
              * \brief Returns a mutable pointer to the category with name \a name, or \c nullptr if no matching category exists.
-             * \param name The mmCIF category name (without the leading underscore).
+             * \param name The \e mmCIF category name (without the leading underscore).
              * \return A mutable pointer to the matching category, or \c nullptr.
              */
             Category* findCategory(const std::string& name);
@@ -498,7 +498,7 @@ namespace CDPL
              * If a category with the given name already exists, no new category is added and a reference to the existing
              * category is returned.
              *
-             * \param name The mmCIF category name (without the leading underscore).
+             * \param name The \e mmCIF category name (without the leading underscore).
              * \param front If \c true, the new category is inserted at the front of the category list. If \c false, it is appended.
              * \return A mutable reference to the added (or pre-existing) category.
              */
@@ -513,7 +513,7 @@ namespace CDPL
 
             /**
              * \brief Removes the category with name \a name.
-             * \param name The mmCIF category name (without the leading underscore).
+             * \param name The \e mmCIF category name (without the leading underscore).
              * \return \c true if a matching category was removed, and \c false if no such category existed.
              */
             bool removeCategory(const std::string& name);
@@ -589,18 +589,18 @@ namespace CDPL
         };
 
         /**
-         * \brief Writes the mmCIF data record \a data in textual mmCIF format to the output stream \a os.
+         * \brief Writes the \e mmCIF data record \a data in textual \e mmCIF format to the output stream \a os.
          * \param os The output stream to write to.
-         * \param data The mmCIF data record to write.
+         * \param data The \e mmCIF data record to write.
          * \return A reference to \a os.
          * \since 1.2
          */
         CDPL_BIOMOL_API std::ostream& operator<<(std::ostream& os, const MMCIFData& data);
 
         /**
-         * \brief Writes the mmCIF category \a cat in textual mmCIF format to the output stream \a os.
+         * \brief Writes the \e mmCIF category \a cat in textual \e mmCIF format to the output stream \a os.
          * \param os The output stream to write to.
-         * \param cat The mmCIF category to write.
+         * \param cat The \e mmCIF category to write.
          * \return A reference to \a os.
          * \since 1.2
          */

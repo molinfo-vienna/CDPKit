@@ -22,7 +22,7 @@
 ##
 # \brief Data structure representing a single entry of a conformer generation fragment library.
 # 
-# Each entry is identified by the hash code of the associated ConfGen.CanonicalFragment and stores the canonical SMILES string plus a list of ConformerData instances (one per stored conformer).
+# Each entry is identified by the hash code of the associated ConfGen.CanonicalFragment and stores the canonical <em>SMILES</em> string plus a list of ConformerData instances (one per stored conformer).
 # 
 class FragmentLibraryEntry(Boost.Python.instance):
 
@@ -71,16 +71,16 @@ class FragmentLibraryEntry(Boost.Python.instance):
     def getHashCode() -> int: pass
 
     ##
-    # \brief Sets the canonical SMILES string describing the stored fragment.
+    # \brief Sets the canonical <em>SMILES</em> string describing the stored fragment.
     # 
-    # \param smiles The new SMILES string.
+    # \param smiles The new <em>SMILES</em> string.
     # 
     def setSMILES(smiles: str) -> None: pass
 
     ##
-    # \brief Returns the canonical SMILES string describing the stored fragment.
+    # \brief Returns the canonical <em>SMILES</em> string describing the stored fragment.
     # 
-    # \return A reference to the SMILES string.
+    # \return A reference to the <em>SMILES</em> string.
     # 
     def getSMILES() -> str: pass
 

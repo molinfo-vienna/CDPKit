@@ -128,7 +128,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey ALT_LOCATION_ID;
 
             /**
-             * \brief Specifies the identifier of the entity the atom belongs to (e.g. an mmCIF entity ID).
+             * \brief Specifies the identifier of the entity the atom belongs to (e.g. an \e mmCIF entity ID).
              *
              * \valuetype \c std::string
              * \since 1.2

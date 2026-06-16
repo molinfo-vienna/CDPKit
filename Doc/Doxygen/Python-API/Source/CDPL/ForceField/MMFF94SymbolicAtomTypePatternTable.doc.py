@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Data structure storing SMARTS-style substructure patterns used to assign symbolic MMFF94 atom types during atom typing.
+# \brief Data structure storing <em>SMARTS</em> substructure patterns used to assign symbolic MMFF94 atom types during atom typing.
 # 
 # Each entry pairs a pattern with the symbolic MMFF94 type to assign on a match. Patterns marked as fallback are only considered after no non-fallback pattern matches.
 # 

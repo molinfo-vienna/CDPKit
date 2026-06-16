@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Pharm.FeatureGenerator implementation that perceives pharmacophore features by SMARTS-like substructure pattern matching, with separate include and exclude pattern lists.
+# \brief Pharm.FeatureGenerator implementation that perceives pharmacophore features by substructure pattern matching, with separate include and exclude pattern lists.
 # 
 class PatternBasedFeatureGenerator(FeatureGenerator):
 

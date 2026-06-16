@@ -1158,7 +1158,7 @@ namespace CDPL
 
 
         /**
-         * \brief Generates a SMILES string for \a molgraph.
+         * \brief Generates a \e SMILES string for \a molgraph.
          * \param molgraph The molecular graph to encode.
          * \param smiles The string to receive the generated SMILES.
          * \param canonical \c true to emit a canonical SMILES; \c false for an arbitrary atom ordering.
@@ -1604,12 +1604,12 @@ namespace CDPL
         CDPL_CHEM_API void calcBasicProperties(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Builds the molecule \a result_mol from the molecular graph \a molgraph by replacing all substructures matching the SMARTS patterns in \a search_ptns with \a result_ptn.
+         * \brief Builds the molecule \a result_mol from the molecular graph \a molgraph by replacing all substructures matching the \e SMARTS patterns in \a search_ptns with \a result_ptn.
          * \param molgraph The source molecular graph.
          * \param result_mol The molecule receiving the edited result.
-         * \param search_ptns A whitespace-separated list of SMARTS patterns matching the substructures to replace.
-         * \param result_ptn The SMARTS replacement pattern.
-         * \param exclude_ptns A whitespace-separated list of SMARTS patterns matching substructures that shall be retained even if they also match \a search_ptns.
+         * \param search_ptns A whitespace-separated list of \e SMARTS patterns matching the substructures to replace.
+         * \param result_ptn The \e SMARTS replacement pattern.
+         * \param exclude_ptns A whitespace-separated list of \e SMARTS patterns matching substructures that shall be retained even if they also match \a search_ptns.
          * \return The number of applied substructure replacements.
          * \since 1.3
          */

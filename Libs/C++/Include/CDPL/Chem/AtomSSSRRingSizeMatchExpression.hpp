@@ -46,7 +46,7 @@ namespace CDPL
          *
          * For each target atom the expression iterates the perceived SSSR of the target molecular graph and applies the
          * supplied binary functor \a MatchFunc to compare the target ring size against the configured query ring size.
-         * Used in SMARTS substructure searches with ring-size atom constraints (e.g. \c [R6]).
+         * Used in \e SMARTS substructure searches with ring-size atom constraints (e.g. \c [R6]).
          *
          * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the size of rings containing
          *                   the target atom against the query ring size. The overloaded function call operator is

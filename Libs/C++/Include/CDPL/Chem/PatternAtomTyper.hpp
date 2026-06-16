@@ -46,12 +46,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Assigns numeric labels to the atoms of a molecular graph by SMARTS-pattern matching.
+         * \brief Assigns numeric labels to specific atoms of a molecular graph that are described by substructure patterns.
          *
-         * Patterns are added via addPattern() (each pattern carries an atom-label value, a priority and
+         * Patterns are added via addPattern() (each pattern carries a query molecular graph, an atom-label value, a priority and
          * match-handling flags). On execute() the typer iterates the registered patterns in priority order,
          * runs each as a substructure query and assigns the corresponding atom label to every matched atom
-         * unless the atom has already received a label from a higher-priority pattern.
+         * unless the atom has already received a label from a pattern with higher priority.
          */
         class CDPL_CHEM_API PatternAtomTyper
         {
@@ -73,7 +73,7 @@ namespace CDPL
             typedef PatternList::iterator       PatternIterator;
 
             /**
-             * \brief Holds a single SMARTS query pattern, its atom-label value, its priority and match-handling flags.
+             * \brief Stores a single substructure query molecular graph, its atom label value, its priority and match-handling flags.
              */
             class CDPL_CHEM_API Pattern
             {
@@ -82,20 +82,19 @@ namespace CDPL
 
               public:
                 /**
-                 * \brief Constructs a pattern from the query molecular graph \a molgraph.
-                 * \param molgraph The SMARTS query molecular graph.
+                 * \brief Constructs a \c %Pattern instance for the specified values.
+                 * \param molgraph The query molecular graph.
                  * \param atom_label The atom label to assign to atoms matching this pattern.
-                 * \param priority The priority of this pattern; higher-priority patterns are evaluated first.
-                 * \param all_matches If \c true, every match of \a molgraph in the target is processed;
-                 *                    if \c false, only the first match is processed.
+                 * \param priority The priority of this pattern (higher-priority patterns are evaluated first).
+                 * \param all_matches If \c true, every match of \a molgraph in the target is processed. If \c false, only the first match is processed.
                  * \param unique_matches If \c true, only one of multiple equivalent substructure mappings is reported per match.
                  */
                 Pattern(const MolecularGraph::SharedPointer& molgraph, std::size_t atom_label = 0, std::size_t priority = 0,
                         bool all_matches = true, bool unique_matches = false);
 
                 /**
-                 * \brief Returns the SMARTS query molecular graph of this pattern.
-                 * \return A \c const reference to the query smart pointer.
+                 * \brief Returns the query molecular graph of this pattern.
+                 * \return A \c const shared pointer to the query molecular graph.
                  */
                 const MolecularGraph::SharedPointer& getStructure() const;
 
@@ -150,9 +149,9 @@ namespace CDPL
 
             /**
              * \brief Registers a new pattern by its query molecular graph and per-pattern settings.
-             * \param molgraph The SMARTS query molecular graph.
+             * \param molgraph The query molecular graph.
              * \param atom_label The atom label to assign to matched atoms.
-             * \param priority The pattern's priority; higher-priority patterns are evaluated first.
+             * \param priority The pattern's priority (higher priority patterns are evaluated first).
              * \param all_matches If \c true, every match of the query is processed. Otherwise, only the first.
              * \param unique_matches If \c true, only one of multiple equivalent substructure mappings is processed per match.
              */

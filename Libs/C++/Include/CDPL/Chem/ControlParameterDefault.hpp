@@ -208,14 +208,14 @@ namespace CDPL
 
             /**
              * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_MAPPING_ID
-             *        on reaction SMILES output.
+             *        on reaction \e SMILES output.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_RXN_OUTPUT_ATOM_MAPPING_ID;
 
             /**
              * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_MAPPING_ID
-             *        on molecule SMILES output.
+             *        on molecule \e SMILES output.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_MOL_OUTPUT_ATOM_MAPPING_ID;

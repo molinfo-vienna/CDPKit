@@ -95,7 +95,7 @@ class AtomProperty(Boost.Python.instance):
     ALT_LOCATION_ID = CDPL.Base.LookupKey('ALT_LOCATION_ID')
 
     ##
-    # \brief Specifies the identifier of the entity the atom belongs to (e.g. an mmCIF entity ID).
+    # \brief Specifies the identifier of the entity the atom belongs to (e.g. an <em>mmCIF</em> entity ID).
     # 
     # \valuetype  <tt>std::string</tt> \since 1.2
     # 

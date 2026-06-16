@@ -49,12 +49,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Counts occurrences of registered SMARTS substructure queries in a molecular graph,
+         * \brief Counts occurrences of registered substructure patterns in a molecular graph,
          *        emitting the per-pattern hit counts into a user-supplied histogram container.
          *
-         * Patterns are added via addPattern() (each pattern carries a numeric ID, a priority and
+         * Patterns are added via addPattern() (each pattern carries a query molecular graph, a numeric ID, a priority and
          * match-handling flags). On calculate() the registered patterns are run in priority order
-         * against the input molecular graph; matched atom/bond regions are masked so that subsequent
+         * against the input molecular graph. Matched atom/bond regions are masked so that subsequent
          * lower-priority patterns cannot re-count overlapping substructures. The per-pattern hit count
          * is then forwarded to the histogram via the expression \c histo[id]++ for every accepted match.
          */
@@ -77,33 +77,32 @@ namespace CDPL
             typedef PatternList::iterator       PatternIterator;
 
             /**
-             * \brief Holds a single SMARTS query pattern, its histogram ID, its priority and match-handling flags.
+             * \brief Stores a single substructure query molecular graph, its histogram ID, its priority and match-handling flags.
              */
             class CDPL_CHEM_API Pattern
             {
 
               public:
                 /**
-                 * \brief Constructs a pattern from the query molecular graph \a molgraph.
-                 * \param molgraph The SMARTS query molecular graph.
-                 * \param id The histogram-bin ID to which matches of this pattern contribute.
-                 * \param priority The priority of this pattern; higher-priority patterns are evaluated first.
-                 * \param all_matches If \c true, every match of \a molgraph in the target is processed;
-                 *                    if \c false, only the first match is processed.
+                 * \brief Constructs a \c %Pattern instance for the specified values.
+                 * \param molgraph The query molecular graph.
+                 * \param id The histogram bin ID to which matches of this pattern contribute.
+                 * \param priority The priority of this pattern (higher priority patterns are evaluated first).
+                 * \param all_matches If \c true, every match of \a molgraph in the target is processed. If \c false, only the first match is processed.
                  * \param unique_matches If \c true, only one of multiple equivalent substructure mappings is processed per match.
                  */
                 Pattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id, std::size_t priority = 0,
                         bool all_matches = true, bool unique_matches = true);
 
                 /**
-                 * \brief Returns the SMARTS query molecular graph of this pattern.
-                 * \return A \c const reference to the query smart pointer.
+                 * \brief Returns the query molecular graph of this pattern.
+                 * \return A \c const shared pointer to the query molecular graph.
                  */
                 const MolecularGraph::SharedPointer& getStructure() const;
 
                 /**
-                 * \brief Returns the histogram-bin ID of this pattern.
-                 * \return The histogram-bin ID.
+                 * \brief Returns the histogram bin ID of this pattern.
+                 * \return The histogram bin ID.
                  */
                 std::size_t getID() const;
 
@@ -146,9 +145,9 @@ namespace CDPL
 
             /**
              * \brief Registers a new pattern by its query molecular graph and per-pattern settings.
-             * \param molgraph The SMARTS query molecular graph.
-             * \param id The histogram-bin ID to which matches of this pattern contribute.
-             * \param priority The pattern's priority; higher-priority patterns are evaluated first.
+             * \param molgraph The query molecular graph.
+             * \param id The histogram bin ID to which matches of this pattern contribute.
+             * \param priority The pattern's priority (higher priority patterns are evaluated first).
              * \param all_matches If \c true, every match of the query is processed. Otherwise, only the first.
              * \param unique_matches If \c true, only one of multiple equivalent substructure mappings is processed per match.
              */

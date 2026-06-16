@@ -22,12 +22,12 @@
 ##
 # \brief Implementation of the amide &harr; imidic-acid tautomerization rule.
 # 
-# The rule is registered with TautomerizationType.AMIDE_IMIDIC_ACID and uses PatternBasedTautomerizationRule to encode the SMARTS patterns and bond-order transformations required for the interconversion of amide and imidic-acid tautomers.
+# The rule is registered with TautomerizationType.AMIDE_IMIDIC_ACID and uses PatternBasedTautomerizationRule to encode the match patterns and bond-order transformations required for the interconversion of amide and imidic-acid tautomers.
 # 
 class AmideImidicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the <tt>AmideImidicAcidTautomerization</tt> instance and registers the SMARTS patterns and bond-order changes of the rule.
+    # \brief Constructs the <tt>AmideImidicAcidTautomerization</tt> instance and registers the match patterns and bond-order changes of the rule.
     # 
     def __init__() -> None: pass
 

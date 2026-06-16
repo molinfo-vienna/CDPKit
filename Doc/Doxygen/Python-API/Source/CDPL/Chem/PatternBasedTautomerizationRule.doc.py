@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief SMARTS-pattern-based implementation of a Chem.TautomerizationRule.
+# \brief Match pattern-based implementation of the Chem.TautomerizationRule interface.
 # 
-# The rule is configured with a set of <em>transformation patterns</em> (SMARTS queries describing the source substructure together with per-atom-pair bond-order changes that apply when the pattern matches) plus optional <em>exclude patterns</em> (substructures that, when present, suppress the application of the rule). The setup() / generate() pair from the base class then enumerates the tautomers reachable from the parent molecular graph by applying the configured transformations.
+# The rule is configured with a set of <em>transformation patterns</em> describing the source substructure together with per-atom pair bond order changes that apply when the pattern matches plus optional <em>exclude patterns</em> (substructures that, when present, suppress the application of the rule). The setup() / generate() pair from the base class then enumerates the tautomers reachable from the parent molecular graph by applying the configured transformations.
 # 
 class PatternBasedTautomerizationRule(TautomerizationRule):
 
@@ -126,9 +126,11 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     def addTransformationPattern(molgraph: MolecularGraph, bond_chgs: object) -> None: pass
 
     ##
-    # \brief Registers an exclude pattern: when this substructure is present in the parent molecular graph, the matching transformation will not be applied.
+    # \brief Registers a rule exclude pattern.
     # 
-    # \param molgraph The exclude SMARTS pattern.
+    # When this substructure is present in the parent molecular graph then the matching transformation will not be applied.
+    # 
+    # \param molgraph The exclude pattern.
     # 
     def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 

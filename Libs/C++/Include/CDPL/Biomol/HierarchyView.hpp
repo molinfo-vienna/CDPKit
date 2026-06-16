@@ -99,14 +99,14 @@ namespace CDPL
 
             /**
              * \brief Tells whether a model with number \a num exists.
-             * \param num The PDB model number.
+             * \param num The model number.
              * \return \c true if such a model exists, and \c false otherwise.
              */
             bool hasModelWithNumber(std::size_t num) const;
 
             /**
              * \brief Returns the model identified by model number \a num.
-             * \param num The PDB model number.
+             * \param num The model number.
              * \return A \c const reference to the model.
              * \throw Base::ItemNotFound if no model with the requested number exists.
              */

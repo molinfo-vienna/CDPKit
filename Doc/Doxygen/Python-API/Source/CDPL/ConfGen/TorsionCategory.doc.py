@@ -145,30 +145,30 @@ class TorsionCategory(Boost.Python.instance):
     def assign(cat: TorsionCategory) -> TorsionCategory: pass
 
     ##
-    # \brief Returns the SMARTS string used to perceive bonds belonging to this category.
+    # \brief Returns the <em>SMARTS</em> match pattern describing the bonds that belong to this category.
     # 
-    # \return A reference to the SMARTS string.
+    # \return A reference to the <em>SMARTS</em> match pattern.
     # 
     def getMatchPatternString() -> str: pass
 
     ##
-    # \brief Sets the SMARTS string used to perceive bonds belonging to this category.
+    # \brief Sets the <em>SMARTS</em> match pattern describing the bonds that belong to this category.
     # 
-    # \param ptn_str The new SMARTS pattern string.
+    # \param ptn_str The new <em>SMARTS</em> match pattern.
     # 
     def setMatchPatternString(ptn_str: str) -> None: pass
 
     ##
-    # \brief Returns the molecular graph pattern used to perceive bonds belonging to this category.
+    # \brief Returns the match pattern molecular graph used to perceive the bonds that belong to this category.
     # 
-    # \return A reference to the pattern smart reference.
+    # \return A shared reference to the match pattern molecular graph.
     # 
     def getMatchPattern() -> Chem.MolecularGraph: pass
 
     ##
-    # \brief Sets the molecular graph pattern used to perceive bonds belonging to this category.
+    # \brief Sets the match pattern molecular graph used to perceive the bonds that belong to this category.
     # 
-    # \param ptn The new molecular graph pattern.
+    # \param ptn The new match pattern molecular graph.
     # 
     def setMatchPattern(ptn: Chem.MolecularGraph) -> None: pass
 

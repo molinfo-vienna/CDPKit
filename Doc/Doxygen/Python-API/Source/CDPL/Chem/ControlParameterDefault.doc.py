@@ -191,14 +191,14 @@ class ControlParameterDefault(Boost.Python.instance):
     SMILES_OUTPUT_HYDROGEN_COUNT = True
 
     ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_MAPPING_ID on reaction SMILES output.
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_MAPPING_ID on reaction <em>SMILES</em> output.
     # 
     # \since 1.2
     # 
     SMILES_RXN_OUTPUT_ATOM_MAPPING_ID = True
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_MAPPING_ID on molecule SMILES output.
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_MAPPING_ID on molecule <em>SMILES</em> output.
     # 
     # \since 1.2
     # 

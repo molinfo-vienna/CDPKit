@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Assigns numeric labels to the atoms of a molecular graph by SMARTS-pattern matching.
+# \brief Assigns numeric labels to specific atoms of a molecular graph that are described by substructure patterns.
 # 
-# Patterns are added via addPattern() (each pattern carries an atom-label value, a priority and match-handling flags). On execute() the typer iterates the registered patterns in priority order, runs each as a substructure query and assigns the corresponding atom label to every matched atom unless the atom has already received a label from a higher-priority pattern.
+# Patterns are added via addPattern() (each pattern carries a query molecular graph, an atom-label value, a priority and match-handling flags). On execute() the typer iterates the registered patterns in priority order, runs each as a substructure query and assigns the corresponding atom label to every matched atom unless the atom has already received a label from a pattern with higher priority.
 # 
 class PatternAtomTyper(Boost.Python.instance):
 
     ##
-    # \brief Holds a single SMARTS query pattern, its atom-label value, its priority and match-handling flags.
+    # \brief Stores a single substructure query molecular graph, its atom label value, its priority and match-handling flags.
     # 
     class Pattern(Boost.Python.instance):
 
@@ -38,12 +38,12 @@ class PatternAtomTyper(Boost.Python.instance):
         def __init__(pattern: Pattern) -> None: pass
 
         ##
-        # \brief Constructs a pattern from the query molecular graph <em>molgraph</em>.
+        # \brief Constructs a <tt>Pattern</tt> instance for the specified values.
         # 
-        # \param molgraph The SMARTS query molecular graph.
+        # \param molgraph The query molecular graph.
         # \param atom_label The atom label to assign to atoms matching this pattern.
-        # \param priority The priority of this pattern; higher-priority patterns are evaluated first.
-        # \param all_matches If <tt>True</tt>, every match of <em>molgraph</em> in the target is processed; if <tt>False</tt>, only the first match is processed.
+        # \param priority The priority of this pattern (higher-priority patterns are evaluated first).
+        # \param all_matches If <tt>True</tt>, every match of <em>molgraph</em> in the target is processed. If <tt>False</tt>, only the first match is processed.
         # \param unique_matches If <tt>True</tt>, only one of multiple equivalent substructure mappings is reported per match.
         # 
         def __init__(molgraph: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
@@ -68,9 +68,9 @@ class PatternAtomTyper(Boost.Python.instance):
         def assign(pattern: Pattern) -> Pattern: pass
 
         ##
-        # \brief Returns the SMARTS query molecular graph of this pattern.
+        # \brief Returns the query molecular graph of this pattern.
         # 
-        # \return A reference to the query smart reference.
+        # \return A shared reference to the query molecular graph.
         # 
         def getStructure() -> MolecularGraph: pass
 
@@ -141,9 +141,9 @@ class PatternAtomTyper(Boost.Python.instance):
     ##
     # \brief Registers a new pattern by its query molecular graph and per-pattern settings.
     # 
-    # \param molgraph The SMARTS query molecular graph.
+    # \param molgraph The query molecular graph.
     # \param atom_label The atom label to assign to matched atoms.
-    # \param priority The pattern's priority; higher-priority patterns are evaluated first.
+    # \param priority The pattern's priority (higher priority patterns are evaluated first).
     # \param all_matches If <tt>True</tt>, every match of the query is processed. Otherwise, only the first.
     # \param unique_matches If <tt>True</tt>, only one of multiple equivalent substructure mappings is processed per match.
     # 

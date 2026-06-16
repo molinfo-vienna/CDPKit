@@ -52,7 +52,7 @@ namespace CDPL
         class Pharmacophore;
 
         /**
-         * \brief Pharm::FeatureGenerator implementation that perceives pharmacophore features by SMARTS-like
+         * \brief Pharm::FeatureGenerator implementation that perceives pharmacophore features by
          *        substructure pattern matching, with separate include and exclude pattern lists.
          */
         class CDPL_PHARM_API PatternBasedFeatureGenerator : public FeatureGenerator
@@ -141,7 +141,7 @@ namespace CDPL
 
             /**
              * \brief Creates a deep copy of the \c %PatternBasedFeatureGenerator instance.
-             * \return A smart pointer to the cloned feature generator.
+             * \return A shared pointer to the cloned feature generator.
              */
             FeatureGenerator::SharedPointer clone() const;
 

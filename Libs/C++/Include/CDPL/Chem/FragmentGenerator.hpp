@@ -49,9 +49,9 @@ namespace CDPL
 
         /**
          * \brief Generic rule-based molecule fragmentation engine that splits a molecular graph along
-         *        bonds matching user-defined SMARTS fragmentation rules.
+         *        bonds matching user-defined fragmentation rules.
          *
-         * Fragmentation rules are added via addFragmentationRule() (each rule has a SMARTS pattern matching
+         * Fragmentation rules are added via addFragmentationRule() (each rule has a substructure pattern describing
          * a bond plus a numeric rule ID). Bonds matching any registered rule are scheduled for splitting,
          * unless a registered exclude pattern overrides the split. The optional fragment filter rejects
          * generated fragments based on a user-supplied predicate. The connectivity between the resulting
@@ -69,7 +69,7 @@ namespace CDPL
             typedef std::function<bool(const MolecularGraph&)> FragmentFilterFunction;
 
             /**
-             * \brief A single fragmentation rule, consisting of a SMARTS match pattern and a numeric rule ID.
+             * \brief A single fragmentation rule, consisting of a bond substructure match pattern and a numeric rule ID.
              */
             class CDPL_CHEM_API FragmentationRule
             {
@@ -77,20 +77,20 @@ namespace CDPL
               public:
                 /**
                  * \brief Constructs the fragmentation rule.
-                 * \param match_ptn The SMARTS match pattern (must match a single bond to be cleaved).
+                 * \param match_ptn The bond substructure match pattern (must match a single bond to be cleaved).
                  * \param id The rule identifier (forwarded to FragmentLink::getRuleID() for cleaved bonds).
                  */
                 FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int id);
 
                 /**
-                 * \brief Returns the SMARTS match pattern of this rule.
-                 * \return A \c const reference to the pattern smart pointer.
+                 * \brief Returns the bond substructure match pattern of this rule.
+                 * \return A \c const shared pointer to the match pattern molecular graph.
                  */
                 const MolecularGraph::SharedPointer& getMatchPattern() const;
 
                 /**
-                 * \brief Sets the SMARTS match pattern of this rule.
-                 * \param ptn The new pattern.
+                 * \brief Sets the bond substructure match pattern of this rule.
+                 * \param ptn The new bond substructure match pattern.
                  */
                 void setMatchPattern(const MolecularGraph::SharedPointer& ptn);
 
@@ -112,7 +112,7 @@ namespace CDPL
             };
 
             /**
-             * \brief A pattern overriding a fragmentation rule: bonds matching the pattern are not cleaved.
+             * \brief A pattern descriptor specifying bonds that shall not be cleaved.
              *
              * An exclude pattern is either rule-specific (only the matching rule is suppressed) or generic
              * (all rules are suppressed for the matching bonds).
@@ -123,26 +123,26 @@ namespace CDPL
               public:
                 /**
                  * \brief Constructs a rule-specific exclude pattern.
-                 * \param match_ptn The SMARTS match pattern.
+                 * \param match_ptn The substructure match pattern.
                  * \param rule_id The rule ID this exclusion applies to.
                  */
                 ExcludePattern(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
 
                 /**
                  * \brief Constructs a generic exclude pattern (applies to all fragmentation rules).
-                 * \param match_ptn The SMARTS match pattern.
+                 * \param match_ptn The substructure match pattern.
                  */
                 ExcludePattern(const MolecularGraph::SharedPointer& match_ptn);
 
                 /**
-                 * \brief Returns the SMARTS match pattern.
-                 * \return A \c const reference to the pattern smart pointer.
+                 * \brief Returns the substructure match pattern.
+                 * \return A \c const shared pointer to the match pattern molecular graph.
                  */
                 const MolecularGraph::SharedPointer& getMatchPattern() const;
 
                 /**
-                 * \brief Sets the SMARTS match pattern.
-                 * \param ptn The new pattern.
+                 * \brief Sets the substructure match pattern.
+                 * \param ptn The new substructure match pattern.
                  */
                 void setMatchPattern(const MolecularGraph::SharedPointer& ptn);
 
@@ -185,8 +185,8 @@ namespace CDPL
               public:
                 /**
                  * \brief Constructs the fragment link.
-                 * \param frag1_idx The index of the first fragment in the output FragmentList.
-                 * \param frag2_idx The index of the second fragment in the output FragmentList.
+                 * \param frag1_idx The index of the first fragment in the output fragment list.
+                 * \param frag2_idx The index of the second fragment in the output fragment list.
                  * \param bond The cleaved bond (from the original molecular graph).
                  * \param rule_id The rule ID that triggered the cleavage.
                  * \param atom1_label The label assigned to the first atom of the cleaved bond.
@@ -196,13 +196,13 @@ namespace CDPL
                              unsigned int rule_id, unsigned int atom1_label, unsigned int atom2_label);
 
                 /**
-                 * \brief Returns the index of the first fragment in the output FragmentList.
+                 * \brief Returns the index of the first fragment in the output fragment list.
                  * \return The first fragment index.
                  */
                 std::size_t getFragment1Index() const;
 
                 /**
-                 * \brief Returns the index of the second fragment in the output FragmentList.
+                 * \brief Returns the index of the second fragment in the output fragment list.
                  * \return The second fragment index.
                  */
                 std::size_t getFragment2Index() const;
@@ -277,14 +277,14 @@ namespace CDPL
 
             /**
              * \brief Replaces the state of this generator by a copy of the state of \a gen.
-             * \param gen The source \c %FragmentGenerator.
+             * \param gen The \c %FragmentGenerator instance to copy.
              * \return A reference to itself.
              */
             FragmentGenerator& operator=(const FragmentGenerator& gen);
 
             /**
-             * \brief Registers a new fragmentation rule by its SMARTS match pattern and rule ID.
-             * \param match_ptn The SMARTS match pattern (must match a single bond to be cleaved).
+             * \brief Registers a new fragmentation rule by its bond substructure match pattern and rule ID.
+             * \param match_ptn The bond substructure match pattern (must match a single bond to be cleaved).
              * \param rule_id The rule identifier.
              */
             void addFragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
@@ -355,14 +355,14 @@ namespace CDPL
 
             /**
              * \brief Registers a rule-specific exclude pattern.
-             * \param match_ptn The SMARTS match pattern.
+             * \param match_ptn The substructure match pattern.
              * \param rule_id The rule ID this exclusion applies to.
              */
             void addExcludePattern(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
 
             /**
              * \brief Registers a generic exclude pattern (applies to all fragmentation rules).
-             * \param match_ptn The SMARTS match pattern.
+             * \param match_ptn The substructure match pattern.
              */
             void addExcludePattern(const MolecularGraph::SharedPointer& match_ptn);
 
@@ -444,19 +444,19 @@ namespace CDPL
 
             /**
              * \brief Returns the predicate used to filter the generated fragments.
-             * \return A \c const reference to the fragment-filter function.
+             * \return A \c const reference to the fragment filter function.
              */
             const FragmentFilterFunction& getFragmentFilterFunction() const;
 
             /**
              * \brief Sets the predicate used to filter the generated fragments (fragments for which the
              *        predicate returns \c false are discarded).
-             * \param func The new fragment-filter function.
+             * \param func The new fragment filter function.
              */
             void setFragmentFilterFunction(const FragmentFilterFunction& func);
 
             /**
-             * \brief Performs the fragmentation of \a molgraph and writes the resulting fragments to \a frag_list.
+             * \brief Performs the fragmentation of \a molgraph and appends the resulting fragments to \a frag_list.
              * \param molgraph The molecular graph to fragment.
              * \param frag_list The output fragment list.
              * \param append If \c true, new fragments are appended to \a frag_list. Otherwise, the list is cleared first.
@@ -465,7 +465,7 @@ namespace CDPL
 
             /**
              * \brief Returns the number of fragment links produced by the most recent generate() call.
-             * \return The fragment-link count.
+             * \return The fragment link count.
              */
             std::size_t getNumFragmentLinks() const;
 

@@ -30,11 +30,11 @@ class PDBFormatVersion(Boost.Python.instance):
     UNDEF = 0
 
     ##
-    # \brief Specifies the PDB format version <em>V2</em>.
+    # \brief Specifies the <em>PDB</em> format version <em>V2</em>.
     # 
     V2 = 2
 
     ##
-    # \brief Specifies the PDB format version <em>V3</em>.
+    # \brief Specifies the <em>PDB</em> format version <em>V3</em>.
     # 
     V3 = 3

@@ -196,14 +196,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Biomol::MolecularGraphProperty::PDB_DATA property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return A \c const reference to the PDB data record shared pointer.
+         * \return A \c const reference to the \e PDB data record shared pointer.
          */
         CDPL_BIOMOL_API const PDBData::SharedPointer& getPDBData(const Chem::MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Biomol::MolecularGraphProperty::PDB_DATA property of the molecular graph \a molgraph to \a data.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param data The new PDB data record.
+         * \param data The new \e PDB data record.
          */
         CDPL_BIOMOL_API void setPDBData(Chem::MolecularGraph& molgraph, const PDBData::SharedPointer& data);
 
@@ -216,14 +216,14 @@ namespace CDPL
         /**
          * \brief Tells whether the Biomol::MolecularGraphProperty::PDB_DATA property of the molecular graph \a molgraph is set.
          * \param molgraph The molecular graph for which to query the property value.
-         * \return \c true if the PDB data record is set, and \c false otherwise.
+         * \return \c true if the \e PDB data record is set, and \c false otherwise.
          */
         CDPL_BIOMOL_API bool hasPDBData(const Chem::MolecularGraph& molgraph);
 
         /**
          * \brief Returns the value of the Biomol::MolecularGraphProperty::MMCIF_DATA property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return A \c const reference to the mmCIF data record shared pointer.
+         * \return A \c const reference to the \e mmCIF data record shared pointer.
          * \since 1.2
          */
         CDPL_BIOMOL_API const MMCIFData::SharedPointer& getMMCIFData(const Chem::MolecularGraph& molgraph);
@@ -231,7 +231,7 @@ namespace CDPL
         /**
          * \brief Sets the value of the Biomol::MolecularGraphProperty::MMCIF_DATA property of the molecular graph \a molgraph to \a data.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param data The new mmCIF data record.
+         * \param data The new \e mmCIF data record.
          */
         CDPL_BIOMOL_API void setMMCIFData(Chem::MolecularGraph& molgraph, const MMCIFData::SharedPointer& data);
 
@@ -244,7 +244,7 @@ namespace CDPL
         /**
          * \brief Tells whether the Biomol::MolecularGraphProperty::MMCIF_DATA property of the molecular graph \a molgraph is set.
          * \param molgraph The molecular graph for which to query the property value.
-         * \return \c true if the mmCIF data record is set, and \c false otherwise.
+         * \return \c true if the \e mmCIF data record is set, and \c false otherwise.
          */
         CDPL_BIOMOL_API bool hasMMCIFData(const Chem::MolecularGraph& molgraph);
 
@@ -325,11 +325,11 @@ namespace CDPL
          * All supplied filters must match for the function to return \c true.
          *
          * \param molgraph The molecular graph to test.
-         * \param res_code The PDB three-letter residue code to match (or \c nullptr to ignore).
-         * \param chain_id The PDB chain ID to match (or \c nullptr to ignore).
-         * \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-         * \param ins_code The PDB insertion code to match (or \c 0 to ignore).
-         * \param model_no The PDB model number to match (or \c 0 to ignore).
+         * \param res_code The \e PDB three-letter residue code to match (or \c nullptr to ignore).
+         * \param chain_id The \e PDB chain ID to match (or \c nullptr to ignore).
+         * \param res_seq_no The \e PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The \e PDB insertion code to match (or \c 0 to ignore).
+         * \param model_no The \e PDB model number to match (or \c 0 to ignore).
          * \return \c true if all supplied filters match, and \c false otherwise.
          */
         CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,

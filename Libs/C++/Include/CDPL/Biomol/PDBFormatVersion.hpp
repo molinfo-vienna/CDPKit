@@ -49,12 +49,12 @@ namespace CDPL
             constexpr unsigned int UNDEF = 0;
 
             /**
-             * \brief Specifies the PDB format version \e V2.
+             * \brief Specifies the \e PDB format version \e V2.
              */
             constexpr unsigned int V2 = 2;
 
             /**
-             * \brief Specifies the PDB format version \e V3.
+             * \brief Specifies the \e PDB format version \e V3.
              */
             constexpr unsigned int V3 = 3;
         } // namespace PDBFormatVersion

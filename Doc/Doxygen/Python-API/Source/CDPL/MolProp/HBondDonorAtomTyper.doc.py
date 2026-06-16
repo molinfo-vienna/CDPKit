@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Perception of H-bond donor atom types (see namespace MolProp.HBondDonorAtomType) by SMARTS pattern matching.
+# \brief Implements the perception of H-bond donor atom types (see namespace MolProp.HBondDonorAtomType).
 # 
 class HBondDonorAtomTyper(Boost.Python.instance):
 

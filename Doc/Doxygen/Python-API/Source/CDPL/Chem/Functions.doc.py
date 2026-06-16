@@ -1027,7 +1027,7 @@ def hasDirection(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored SMILES/SMARTS bond direction descriptor (see namespace Chem.BondDirection).
+# \return The stored <em>SMILES/SMARTS</em> bond direction descriptor (see namespace Chem.BondDirection).
 # 
 def getDirection(bond: Bond) -> int: pass
 
@@ -4187,13 +4187,13 @@ def copyAtomsIfNot(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, ap
 def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset: bool = True, strict: bool = True) -> int: pass
 
 ##
-# \brief Builds the molecule <em>result_mol</em> from the molecular graph <em>molgraph</em> by replacing all substructures matching the SMARTS patterns in <em>search_ptns</em> with <em>result_ptn</em>.
+# \brief Builds the molecule <em>result_mol</em> from the molecular graph <em>molgraph</em> by replacing all substructures matching the <em>SMARTS</em> patterns in <em>search_ptns</em> with <em>result_ptn</em>.
 # 
 # \param molgraph The source molecular graph.
 # \param result_mol The molecule receiving the edited result.
-# \param search_ptns A whitespace-separated list of SMARTS patterns matching the substructures to replace.
-# \param result_ptn The SMARTS replacement pattern.
-# \param exclude_ptns A whitespace-separated list of SMARTS patterns matching substructures that shall be retained even if they also match <em>search_ptns</em>.
+# \param search_ptns A whitespace-separated list of <em>SMARTS</em> patterns matching the substructures to replace.
+# \param result_ptn The <em>SMARTS</em> replacement pattern.
+# \param exclude_ptns A whitespace-separated list of <em>SMARTS</em> patterns matching substructures that shall be retained even if they also match <em>search_ptns</em>.
 # 
 # \return The number of applied substructure replacements. 
 # 
@@ -4202,12 +4202,12 @@ def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset
 def editSubstructures(molgraph: MolecularGraph, result_mol: Molecule, search_ptns: str, result_ptn: str, exclude_ptns: str = '') -> int: pass
 
 ##
-# \brief Edits the molecule <em>mol</em> by replacing all substructures matching the SMARTS search patterns in <em>search_ptns</em> with the SMARTS replacement pattern <em>result_ptn</em>, optionally skipping matches that also match <em>exclude_ptns</em>.
+# \brief Edits the molecule <em>mol</em> by replacing all substructures matching the <em>SMARTS</em> search patterns in <em>search_ptns</em> with the <em>SMARTS</em> replacement pattern <em>result_ptn</em>, optionally skipping matches that also match <em>exclude_ptns</em>.
 # 
 # \param mol The molecule to edit in place.
-# \param search_ptns A whitespace-separated list of SMARTS patterns matching the substructures to replace.
-# \param result_ptn The SMARTS replacement pattern.
-# \param exclude_ptns A whitespace-separated list of SMARTS patterns matching substructures that shall be retained even if they match <em>search_ptns</em>.
+# \param search_ptns A whitespace-separated list of <em>SMARTS</em> patterns matching the substructures to replace.
+# \param result_ptn The <em>SMARTS</em> replacement pattern.
+# \param exclude_ptns A whitespace-separated list of <em>SMARTS</em> patterns matching substructures that shall be retained even if they match <em>search_ptns</em>.
 # 
 # \return The number of replaced substructures. 
 # 
@@ -4684,9 +4684,9 @@ def makeOrdinaryHydrogenDeplete(mol: Molecule, flags: int, corr_impl_h_count: bo
 def markReachableAtoms(atom: Atom, molgraph: MolecularGraph, atom_mask: Util.BitSet, reset: bool = True) -> None: pass
 
 ##
-# \brief Parses the SMARTS string <em>smarts</em> into a freshly allocated query Chem.Molecule.
+# \brief Parses the <em>SMARTS</em> string <em>smarts</em> into a freshly allocated query Chem.Molecule.
 # 
-# \param smarts The SMARTS string to parse.
+# \param smarts The <em>SMARTS</em> string to parse.
 # \param init_qry If <tt>True</tt>, query-specific perception (e.g. ring-membership, aromaticity) is run on the parsed molecule.
 # 
 # \return A smart reference to the parsed molecule, or an empty smart reference if parsing failed.
@@ -4694,9 +4694,9 @@ def markReachableAtoms(atom: Atom, molgraph: MolecularGraph, atom_mask: Util.Bit
 def parseSMARTS(smarts: str, init_qry: bool = True) -> Molecule: pass
 
 ##
-# \brief Parses the SMARTS string <em>smarts</em> into the supplied molecule <em>mol</em>.
+# \brief Parses the <em>SMARTS</em> string <em>smarts</em> into the supplied molecule <em>mol</em>.
 # 
-# \param smarts The SMARTS string to parse.
+# \param smarts The <em>SMARTS</em> string to parse.
 # \param mol The molecule to populate (cleared before parsing).
 # \param init_qry If <tt>True</tt>, query-specific perception is run on the parsed molecule.
 # 
@@ -4705,18 +4705,18 @@ def parseSMARTS(smarts: str, init_qry: bool = True) -> Molecule: pass
 def parseSMARTS(smarts: str, mol: Molecule, init_qry: bool = True) -> bool: pass
 
 ##
-# \brief Parses the SMILES string <em>smiles</em> into a freshly allocated Chem.Molecule.
+# \brief Parses the <em>SMILES</em> string <em>smiles</em> into a freshly allocated Chem.Molecule.
 # 
-# \param smiles The SMILES string to parse.
+# \param smiles The <em>SMILES</em> string to parse.
 # 
 # \return A smart reference to the parsed molecule, or an empty smart reference if parsing failed.
 # 
 def parseSMILES(smiles: str) -> Molecule: pass
 
 ##
-# \brief Parses the SMILES string <em>smiles</em> into the supplied molecule <em>mol</em>.
+# \brief Parses the <em>SMILES</em> string <em>smiles</em> into the supplied molecule <em>mol</em>.
 # 
-# \param smiles The SMILES string to parse.
+# \param smiles The <em>SMILES</em> string to parse.
 # \param mol The molecule to populate (cleared before parsing).
 # 
 # \return <tt>True</tt> if parsing succeeded, and <tt>False</tt> otherwise.

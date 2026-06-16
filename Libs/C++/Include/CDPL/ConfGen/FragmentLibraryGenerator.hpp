@@ -49,7 +49,7 @@ namespace CDPL
          *        molecular fragments.
          *
          * For each input fragment the generator constructs the corresponding ConfGen::CanonicalFragment,
-         * computes its hash code and SMILES string, generates a representative conformer ensemble using
+         * computes its hash code and \e SMILES string, generates a representative conformer ensemble using
          * ConfGen::FragmentConformerGenerator and stores the result as a new FragmentLibraryEntry in
          * the associated FragmentLibrary. Already-present entries (identified by hash code) are skipped.
          */

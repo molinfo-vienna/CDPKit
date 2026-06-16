@@ -83,7 +83,7 @@ class HierarchyView(Boost.Python.instance):
     ##
     # \brief Tells whether a model with number <em>num</em> exists.
     # 
-    # \param num The PDB model number.
+    # \param num The model number.
     # 
     # \return <tt>True</tt> if such a model exists, and <tt>False</tt> otherwise.
     # 
@@ -92,7 +92,7 @@ class HierarchyView(Boost.Python.instance):
     ##
     # \brief Returns the model identified by model number <em>num</em>.
     # 
-    # \param num The PDB model number.
+    # \param num The model number.
     # 
     # \return A reference to the model. 
     # 

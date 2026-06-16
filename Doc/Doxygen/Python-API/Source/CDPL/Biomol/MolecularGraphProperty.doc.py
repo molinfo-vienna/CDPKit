@@ -60,14 +60,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     MODEL_NUMBER = CDPL.Base.LookupKey('MODEL_NUMBER')
 
     ##
-    # \brief Specifies the associated PDB data record.
+    # \brief Specifies the associated <em>PDB</em> data record.
     # 
     # \valuetype  Biomol.PDBData.SharedPointer
     # 
     PDB_DATA = CDPL.Base.LookupKey('PDB_DATA')
 
     ##
-    # \brief Specifies the associated mmCIF data record.
+    # \brief Specifies the associated <em>mmCIF</em> data record.
     # 
     # \valuetype  Biomol.MMCIFData.SharedPointer \since 1.2
     # 

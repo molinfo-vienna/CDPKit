@@ -302,7 +302,7 @@ namespace CDPL
 
 
         /**
-         * \brief Generates a reaction SMILES string for the reaction \a rxn.
+         * \brief Generates a reaction \e SMILES string for the reaction \a rxn.
          * \param rxn The reaction to encode.
          * \param smiles The string to receive the generated reaction SMILES.
          * \param canonical \c true to emit a canonical reaction SMILES; \c false for an arbitrary atom ordering.

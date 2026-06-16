@@ -50,7 +50,7 @@ namespace CDPL
          * \brief Data structure representing a single entry of a conformer generation fragment library.
          *
          * Each entry is identified by the hash code of the associated ConfGen::CanonicalFragment and stores
-         * the canonical SMILES string plus a list of ConformerData instances (one per stored conformer).
+         * the canonical \e SMILES string plus a list of ConformerData instances (one per stored conformer).
          */
         class CDPL_CONFGEN_API FragmentLibraryEntry
         {
@@ -84,14 +84,14 @@ namespace CDPL
             std::uint64_t getHashCode() const;
 
             /**
-             * \brief Sets the canonical SMILES string describing the stored fragment.
-             * \param smiles The new SMILES string.
+             * \brief Sets the canonical \e SMILES string describing the stored fragment.
+             * \param smiles The new \e SMILES string.
              */
             void setSMILES(const std::string& smiles);
 
             /**
-             * \brief Returns the canonical SMILES string describing the stored fragment.
-             * \return A \c const reference to the SMILES string.
+             * \brief Returns the canonical \e SMILES string describing the stored fragment.
+             * \return A \c const reference to the \e SMILES string.
              */
             const std::string& getSMILES() const;
 

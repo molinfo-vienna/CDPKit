@@ -51,11 +51,11 @@ namespace CDPL
     {
 
         /**
-         * \brief SMARTS-pattern-based implementation of a Chem::TautomerizationRule.
+         * \brief Match pattern-based implementation of the Chem::TautomerizationRule interface.
          *
-         * The rule is configured with a set of <em>transformation patterns</em> (SMARTS queries describing
-         * the source substructure together with per-atom-pair bond-order changes that apply when the pattern
-         * matches) plus optional <em>exclude patterns</em> (substructures that, when present, suppress the
+         * The rule is configured with a set of <em>transformation patterns</em> describing
+         * the source substructure together with per-atom pair bond order changes that apply when the pattern
+         * matches plus optional <em>exclude patterns</em> (substructures that, when present, suppress the
          * application of the rule). The setup() / generate() pair from the base class then enumerates the
          * tautomers reachable from the parent molecular graph by applying the configured transformations.
          */
@@ -77,7 +77,7 @@ namespace CDPL
                 std::size_t atom1ID;
                 /** \brief Pattern-atom ID of the second atom of the bond whose order changes. */
                 std::size_t atom2ID;
-                /** \brief Signed bond-order delta applied to the matched bond (positive = increase, negative = decrease). */
+                /** \brief Signed bond order delta applied to the matched bond (positive = increase, negative = decrease). */
                 long        orderChange;
             };
 
@@ -101,15 +101,15 @@ namespace CDPL
             PatternBasedTautomerizationRule& operator=(const PatternBasedTautomerizationRule& rule);
 
             /**
-             * \brief Registers a new transformation pattern together with the associated bond-order changes.
+             * \brief Registers a new transformation pattern.
              *
-             * Bond-order changes are read from the iterator range [\a bond_chgs_beg, \a bond_chgs_end);
-             * each element must be a BondOrderChange value referring to atom IDs of \a molgraph.
+             * Bond order changes are read from the iterator range [\a bond_chgs_beg, \a bond_chgs_end).
+             * Each element must be a value of type BondOrderChange referring to atom IDs of \a molgraph.
              *
              * \tparam Iter Input iterator type yielding BondOrderChange values.
-             * \param molgraph The SMARTS transformation pattern.
-             * \param bond_chgs_beg Iterator pointing to the first bond-order change.
-             * \param bond_chgs_end Iterator pointing one past the last bond-order change.
+             * \param molgraph The match pattern specifying the substructure to transform.
+             * \param bond_chgs_beg Iterator pointing to the first bond order change.
+             * \param bond_chgs_end Iterator pointing one past the last bond order change.
              */
             template <typename Iter>
             void addTransformationPattern(const MolecularGraph::SharedPointer& molgraph, Iter bond_chgs_beg, Iter bond_chgs_end)
@@ -122,9 +122,12 @@ namespace CDPL
             }
 
             /**
-             * \brief Registers an exclude pattern: when this substructure is present in the parent molecular
-             *        graph, the matching transformation will not be applied.
-             * \param molgraph The exclude SMARTS pattern.
+             * \brief Registers a rule exclude pattern.
+             *
+             * When this substructure is present in the parent molecular
+             * graph then the matching transformation will not be applied.
+             *
+             * \param molgraph The exclude pattern.
              */
             void addExcludePattern(const MolecularGraph::SharedPointer& molgraph);
 
@@ -161,7 +164,7 @@ namespace CDPL
 
             /**
              * \brief Creates and returns a deep copy of this rule.
-             * \return A smart pointer to the cloned Chem::TautomerizationRule.
+             * \return A smart pointer to the cloned Chem::TautomerizationRule instance.
              */
             TautomerizationRule::SharedPointer clone() const;
 

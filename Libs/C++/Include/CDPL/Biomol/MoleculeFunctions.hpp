@@ -47,7 +47,7 @@ namespace CDPL
         /**
          * \brief Merges alternative residue conformers in \a mol whose residue centers lie within \a max_ctr_dist of one another.
          *
-         * Many PDB and mmCIF structures encode alternative conformations of a residue as multiple residues
+         * Many \e PDB and \e mmCIF structures encode alternative conformations of a residue as multiple residues
          * with distinct alternate-location identifiers but mostly overlapping atom positions. This function
          * detects such interfering residue copies (residues whose geometric centers are closer than
          * \a max_ctr_dist) and combines them into a single residue with all observed atom positions, leaving

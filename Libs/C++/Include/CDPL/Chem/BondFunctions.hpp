@@ -322,7 +322,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::BondProperty::DIRECTION property of the bond \a bond.
          * \param bond The bond for which to return the property value.
-         * \return The stored SMILES/SMARTS bond direction descriptor (see namespace Chem::BondDirection).
+         * \return The stored <em>SMILES/SMARTS</em> bond direction descriptor (see namespace Chem::BondDirection).
          */
         CDPL_CHEM_API unsigned int getDirection(const Bond& bond);
 

@@ -55,13 +55,13 @@ namespace CDPL
          * \tparam Iter The (forward) iterator type whose value type is \c Chem::Atom.
          * \param it Iterator pointing to the first atom of the range.
          * \param end Iterator pointing one past the last atom of the range.
-         * \param res_code The PDB three-letter residue code to match (or \c nullptr to ignore).
-         * \param chain_id The PDB chain ID to match (or \c nullptr to ignore).
-         * \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-         * \param ins_code The PDB insertion code to match (or 0 to ignore).
-         * \param model_no The PDB model number to match (or 0 to ignore).
-         * \param atom_name The PDB atom name to match (or \c nullptr to ignore).
-         * \param serial_no The PDB atom serial number to match (or IGNORE_SERIAL_NO to ignore).
+         * \param res_code The \e PDB three-letter residue code to match (or \c nullptr to ignore).
+         * \param chain_id The \e PDB chain ID to match (or \c nullptr to ignore).
+         * \param res_seq_no The \e PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The \e PDB insertion code to match (or 0 to ignore).
+         * \param model_no The \e PDB model number to match (or 0 to ignore).
+         * \param atom_name The \e PDB atom name to match (or \c nullptr to ignore).
+         * \param serial_no The \e PDB atom serial number to match (or IGNORE_SERIAL_NO to ignore).
          * \return An iterator pointing to the first matching atom, or \a end if no match was found.
          */
         template <typename Iter>
@@ -84,13 +84,13 @@ namespace CDPL
          * \tparam Iter The (forward) iterator type whose value type is convertible to \c Chem::MolecularGraph.
          * \param it Iterator pointing to the first residue of the range.
          * \param end Iterator pointing one past the last residue of the range.
-         * \param res_code The PDB three-letter residue code to match (or \c nullptr to ignore).
-         * \param chain_id The PDB chain ID to match (or \c nullptr to ignore).
-         * \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-         * \param ins_code The PDB insertion code to match (or 0 to ignore).
-         * \param model_no The PDB model number to match (or 0 to ignore).
-         * \param atom_name The PDB atom name an atom of the residue must match (or \c nullptr to ignore).
-         * \param serial_no The PDB atom serial number an atom of the residue must match (or IGNORE_SERIAL_NO to ignore).
+         * \param res_code The \e PDB three-letter residue code to match (or \c nullptr to ignore).
+         * \param chain_id The \e PDB chain ID to match (or \c nullptr to ignore).
+         * \param res_seq_no The \e PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The \e PDB insertion code to match (or 0 to ignore).
+         * \param model_no The \e PDB model number to match (or 0 to ignore).
+         * \param atom_name The \e PDB atom name an atom of the residue must match (or \c nullptr to ignore).
+         * \param serial_no The \e PDB atom serial number an atom of the residue must match (or IGNORE_SERIAL_NO to ignore).
          * \return An iterator pointing to the first matching residue, or \a end if no match was found.
          */
         template <typename Iter>

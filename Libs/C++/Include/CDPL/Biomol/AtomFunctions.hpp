@@ -485,13 +485,13 @@ namespace CDPL
          * IGNORE_SERIAL_NO). All supplied filters must match for the function to return \c true.
          *
          * \param atom The atom to test.
-         * \param res_code The PDB three-letter residue code to match (or \c nullptr to ignore).
-         * \param chain_id The PDB chain ID to match (or \c nullptr to ignore).
-         * \param res_seq_no The PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-         * \param ins_code The PDB insertion code to match (or \c 0 to ignore).
-         * \param model_no The PDB model number to match (or \c 0 to ignore).
-         * \param atom_name The PDB atom name to match (or \c nullptr to ignore).
-         * \param serial_no The PDB atom serial number to match (or IGNORE_SERIAL_NO to ignore).
+         * \param res_code The \e PDB three-letter residue code to match (or \c nullptr to ignore).
+         * \param chain_id The \e PDB chain ID to match (or \c nullptr to ignore).
+         * \param res_seq_no The \e PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The \e PDB insertion code to match (or \c 0 to ignore).
+         * \param model_no The \e PDB model number to match (or \c 0 to ignore).
+         * \param atom_name The \e PDB atom name to match (or \c nullptr to ignore).
+         * \param serial_no The \e PDB atom serial number to match (or IGNORE_SERIAL_NO to ignore).
          * \return \c true if all supplied filters match, and \c false otherwise.
          */
         CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::Atom& atom, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,

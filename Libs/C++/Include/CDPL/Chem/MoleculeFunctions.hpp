@@ -109,12 +109,12 @@ namespace CDPL
         CDPL_CHEM_API void removeAtomsIfNot(Molecule& mol, const AtomPredicate& pred);
 
         /**
-         * \brief Edits the molecule \a mol by replacing all substructures matching the SMARTS search patterns in \a search_ptns
-         *        with the SMARTS replacement pattern \a result_ptn, optionally skipping matches that also match \a exclude_ptns.
+         * \brief Edits the molecule \a mol by replacing all substructures matching the \e SMARTS search patterns in \a search_ptns
+         *        with the \e SMARTS replacement pattern \a result_ptn, optionally skipping matches that also match \a exclude_ptns.
          * \param mol The molecule to edit in place.
-         * \param search_ptns A whitespace-separated list of SMARTS patterns matching the substructures to replace.
-         * \param result_ptn The SMARTS replacement pattern.
-         * \param exclude_ptns A whitespace-separated list of SMARTS patterns matching substructures that shall be retained even if they match \a search_ptns.
+         * \param search_ptns A whitespace-separated list of \e SMARTS patterns matching the substructures to replace.
+         * \param result_ptn The \e SMARTS replacement pattern.
+         * \param exclude_ptns A whitespace-separated list of \e SMARTS patterns matching substructures that shall be retained even if they match \a search_ptns.
          * \return The number of replaced substructures.
          * \since 1.3
          */

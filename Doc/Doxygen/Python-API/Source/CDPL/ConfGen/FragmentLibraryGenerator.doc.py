@@ -22,7 +22,7 @@
 ##
 # \brief Driver for populating a ConfGen.FragmentLibrary with conformers of canonicalized molecular fragments.
 # 
-# For each input fragment the generator constructs the corresponding ConfGen.CanonicalFragment, computes its hash code and SMILES string, generates a representative conformer ensemble using ConfGen.FragmentConformerGenerator and stores the result as a new FragmentLibraryEntry in the associated FragmentLibrary. Already-present entries (identified by hash code) are skipped.
+# For each input fragment the generator constructs the corresponding ConfGen.CanonicalFragment, computes its hash code and <em>SMILES</em> string, generates a representative conformer ensemble using ConfGen.FragmentConformerGenerator and stores the result as a new FragmentLibraryEntry in the associated FragmentLibrary. Already-present entries (identified by hash code) are skipped.
 # 
 class FragmentLibraryGenerator(Boost.Python.instance):
 

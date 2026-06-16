@@ -22,7 +22,7 @@
 ##
 # \brief Data structure for the representation of single torsion library rules.
 # 
-# Eeach rule consists of a SMARTS-like atom-mapping pattern and a list of preferred torsion angles (each with tolerances and a score).
+# Eeach rule consists of a <em>SMARTS</em> match pattern and a list of preferred torsion angles (each with tolerances and a score).
 # 
 class TorsionRule(Boost.Python.instance):
 
@@ -135,30 +135,30 @@ class TorsionRule(Boost.Python.instance):
     def assign(rule: TorsionRule) -> TorsionRule: pass
 
     ##
-    # \brief Returns the SMARTS-like match pattern in textual form.
+    # \brief Returns the <em>SMARTS</em> match pattern.
     # 
-    # \return A reference to the match-pattern string.
+    # \return A reference to the <em>SMARTS</em> match pattern.
     # 
     def getMatchPatternString() -> str: pass
 
     ##
-    # \brief Sets the SMARTS-like match pattern in textual form.
+    # \brief Sets the <em>SMARTS</em> match pattern.
     # 
-    # \param ptn_str The new match-pattern string.
+    # \param ptn_str The new <em>SMARTS</em> match pattern.
     # 
     def setMatchPatternString(ptn_str: str) -> None: pass
 
     ##
-    # \brief Returns the compiled match-pattern molecular graph.
+    # \brief Returns the match pattern molecular graph.
     # 
-    # \return A reference to the compiled pattern shared reference.
+    # \return A shared reference to the match pattern molecular graph.
     # 
     def getMatchPattern() -> Chem.MolecularGraph: pass
 
     ##
-    # \brief Sets the compiled match-pattern molecular graph.
+    # \brief Sets the match pattern molecular graph.
     # 
-    # \param ptn The new match pattern.
+    # \param ptn The new match pattern molecular graph.
     # 
     def setMatchPattern(ptn: Chem.MolecularGraph) -> None: pass
 

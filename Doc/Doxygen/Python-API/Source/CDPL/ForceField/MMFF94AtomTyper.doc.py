@@ -22,7 +22,7 @@
 ##
 # \brief Assigns MMFF94 symbolic and numeric atom types to the atoms of a molecular graph.
 # 
-# Typing is performed in four stages: provisional symbolic types are assigned by SMARTS pattern matching, aromatic atom types are then reassigned according to the MMFF94 aromatic-ring rules, hydrogen atoms receive types derived from their heavy atom neighbors, and finally the symbolic types are translated to the corresponding numeric type indices used by the rest of the MMFF94 parameter tables.
+# Typing is performed in four stages: provisional symbolic types are assigned by <em>SMARTS</em> pattern matching, aromatic atom types are then reassigned according to the MMFF94 aromatic-ring rules, hydrogen atoms receive types derived from their heavy atom neighbors, and finally the symbolic types are translated to the corresponding numeric type indices used by the rest of the MMFF94 parameter tables.
 # 
 class MMFF94AtomTyper(Boost.Python.instance):
 
@@ -60,7 +60,7 @@ class MMFF94AtomTyper(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Sets the SMARTS-pattern table used for provisional symbolic atom type assignment.
+    # \brief Sets the <em>SMARTS</em> pattern table used for provisional symbolic atom type assignment.
     # 
     # \param table The new symbolic atom type pattern table.
     # 

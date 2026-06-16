@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Data structure storing SMARTS-style substructure patterns used to assign symbolic MMFF94 atom types
+         * \brief Data structure storing \e SMARTS substructure patterns used to assign symbolic MMFF94 atom types
          *        during atom typing.
          *
          * Each entry pairs a pattern with the symbolic MMFF94 type to assign on a match. Patterns marked as

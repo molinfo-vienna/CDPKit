@@ -86,14 +86,14 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
 
             /**
-             * \brief Specifies the associated PDB data record.
+             * \brief Specifies the associated \e PDB data record.
              *
              * \valuetype Biomol::PDBData::SharedPointer
              */
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_DATA;
 
             /**
-             * \brief Specifies the associated mmCIF data record.
+             * \brief Specifies the associated \e mmCIF data record.
              *
              * \valuetype Biomol::MMCIFData::SharedPointer
              * \since 1.2
