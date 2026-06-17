@@ -378,6 +378,20 @@ S. R. Hall, F. H. Allen, I. D. Brown, The Crystallographic Information File (CIF
 </tr>
 
 <tr>
+<td valign="top">\anchor MMFF94<i>[MMFF94]</i></td>
+<td valign="top">
+T. A. Halgren, Merck molecular force field. I. Basis, form, scope, parameterization, and performance of MMFF94, <i>J. Comput. Chem.</i> <b>1996</b>, 490-519
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MMFF94s<i>[MMFF94s]</i></td>
+<td valign="top">
+T. A. Halgren, MMFF VI. MMFF94s option for energy minimization studies, <i>J. Comput. Chem.</i> <b>1999</b>, 720-729
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor MMTF<i>[MMTF]</i></td>
 <td valign="top">
 Macromolecular Transmission Format specification: https://github.com/rcsb/mmtf/blob/v1.0/spec.md

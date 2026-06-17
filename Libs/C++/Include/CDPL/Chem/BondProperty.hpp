@@ -93,8 +93,8 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
 
             /**
-             * \brief Specifies the bond direction in \e SMILES and \e SMARTS strings (see [\ref SMILES, \ref SMARTS], namespace Chem::BondDirection).
-             *
+             * \brief Specifies the bond direction in \e SMILES and \e SMARTS strings (see namespace Chem::BondDirection).
+             * \see [\ref SMILES, \ref SMARTS]
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey DIRECTION;

@@ -39,6 +39,7 @@ namespace CDPL
         /**
          * \brief Provides constants used to specify the forcefield that shall be used 
          *        for 3D coordinates refinement and energy calculations.
+         * \see [\ref MMFF94, \ref MMFF94s]
          */
         namespace ForceFieldType
         {

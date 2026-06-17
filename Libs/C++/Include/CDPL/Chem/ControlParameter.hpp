@@ -86,11 +86,11 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
             /**
-             * \brief Specifies the separator for \e SMILES, \e SMARTS, \e JME and \e InChI output data records
-             *        [\ref SMILES, \ref SMARTS, \ref JME, \ref INCHI].
+             * \brief Specifies the separator for \e SMILES, \e SMARTS, \e JME and \e InChI output data records.
              *
              * Typical separators are, for example, space (" "), tab ("\t") or newline ("\n").
              *
+             * \see [\ref SMILES, \ref SMARTS, \ref JME, \ref INCHI]
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey RECORD_SEPARATOR;
@@ -116,7 +116,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the desired version of the connection table data format for the output of molecular graphs in
-             *        <em>MDL SD-</em> or \e Mol-File format [\ref CTFILE].
+             *        <em>MDL SD-</em> or \e Mol-File format.
              *
              * The desired data format version is specified by one of the constants defined in namespace CDPL::Chem::MDLDataFormatVersion.
              * If \c %MDL_CTAB_VERSION has not been set or the parameter value equals CDPL::Chem::MDLDataFormatVersion::UNDEF, the
@@ -128,26 +128,28 @@ namespace CDPL
              *   <em>V2000</em> format
              * - and in the format <em>V3000</em> otherwise
              *
+             * \see [\ref CTFILE]
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
 
             /**
              * \brief Specifies whether the stereo parity of atoms shall be ignored when reading or writing data 
-             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format.
              *
              * If the control-parameter is set to \c true, the stereo parity of atoms will be ignored both on
              * reading (i.e. the read MDL parity of an input atom will not be converted to the corresponding Chem::StereoDescriptor
              * object and stored in the Chem::Atom property Chem::AtomProperty::STEREO_DESCRIPTOR) and writing (i.e. the property
              * Chem::AtomProperty::MDL_PARITY is not written to the corresponding connection table data field).
              *
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_IGNORE_PARITY;
 
             /**
              * \brief Specifies whether to update the timestamp of \e Mol- and \e Rxn-File header blocks when writing data
-             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format.
              *
              * If the control-parameter is set to \c true, the timestamp of molecule and reaction data records will
              * specify the time of their writing. If \c %MDL_UPDATE_TIMESTAMP is \c false, the time specified by one of the
@@ -155,56 +157,61 @@ namespace CDPL
              * Chem::ReactionProperty::TIMESTAMP (for reaction output) will be used. If the output data object does not
              * provide a value for the timestamp property, the current time will be used as a fallback.
              *
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_UPDATE_TIMESTAMP;
 
             /**
              * \brief Specifies whether to remove leading and trailing whitespace from string values when reading or writing data
-             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format.
              *
              * If the control-parameter is set to \c true, leading and trailing whitespace of string data field
              * values will be removed before processing continues.
              * Otherwise, whitespace is considered to be significant and will be preserved.
              *
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_TRIM_STRINGS;
 
             /**
              * \brief Specifies whether to remove leading and trailing whitespace from data lines when reading or writing data 
-             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format.
              *
              * If the control-parameter is set to \c true, leading and trailing whitespace of data lines 
              * will be removed before processing continues.
              * Otherwise, whitespace is considered to be significant and will be preserved.
              *
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_TRIM_LINES;
 
             /**
              * \brief Specifies whether string values that exceed the size of an output data field may be truncated when writing data
-             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format.
              *
              * If the control-parameter is set to \c true, output string values whose length exceeds the size of the target data
              * field are silently truncated to the respective field size.
              * If \c %MDL_TRUNCATE_STRINGS is \c false, the attempt to write a string value which is too large for the target
              * data field is considered as an error condition and causes the output operation to fail.
              *
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_TRUNCATE_STRINGS;
 
             /**
              * \brief Specifies whether data lines that exceed the maximum allowed line length may be truncated when writing data
-             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format.
              *
              * If the control-parameter is set to \c true, output data lines which exceed the maximum allowed line length
              * (according to the <em>MDL CTFile</em> specification) are silently truncated before they get written.
              * If \c %MDL_TRUNCATE_LINES is \c false, an attempt to write a data line that exceeds maximum line length is considered
              * as an error condition and causes the output operation to fail.
              *
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              * \note The setting has only an effect if the control-parameter Chem::ControlParameter::IGNORE_LINE_LENGTH_LIMIT
              *       is \c false.
@@ -213,37 +220,40 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to write conformer energies into the energy field of the molecule header block
-             *        when writing data in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        when writing data in an <em>MDL CTFile</em> based format.
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD;
 
             /**
              * \brief Specifies whether to write conformer energies as an SD-file entry when writing data in
-             *        an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        an <em>MDL CTFile</em> based format.
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY;
 
             /**
              * \brief Specifies the SD-file tag used for the conformer energy entry (see MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY).
+             * \see [\ref CTFILE]
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CONF_ENERGY_SD_TAG;
 
             /**
              * \brief Specifies whether to output the 'aromatic' bond type value (\c 4) in the type field of aromatic bonds when writing 
-             *        molecular graph data in an <em>MDL CTFile</em> based format [\ref CTFILE]. On data reading, the aromaticity flag
+             *        molecular graph data in an <em>MDL CTFile</em> based format. On data reading, the aromaticity flag
              *        property of bonds having this type will be set to \c true and to \c false if the bond type specifies a defined 
              *        bond order.
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              * \since 1.3
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_ENABLE_AROMATIC_BOND_TYPES;
             
             /**
-             * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data
-             *        in an <em>MDL</em> [\ref CTFILE] format.
+             * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data.
              *
              * If the control-parameter is set to \c true, the length of data lines that were read from or have to
              * be written to data encoded in one of the above mentioned formats will be checked against the maximum
@@ -257,7 +267,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the desired data format version for the output of reactions in an <em>MDL Rxn-</em> or \e RD-File
-             *        format [\ref CTFILE].
+             *        format.
              *
              * The desired data format version is specified by one of the constants defined in namespace CDPL::Chem::MDLDataFormatVersion.
              * If \c %MDL_RXN_FILE_VERSION has not been set or the parameter value equals CDPL::Chem::MDLDataFormatVersion::UNDEF, the
@@ -269,24 +279,26 @@ namespace CDPL
              *   the <em>V2000</em> format
              * - and in the format <em>V3000</em> otherwise
              *
+             * \see [\ref CTFILE]
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_RXN_FILE_VERSION;
 
             /**
-             * \brief Specifies for the output of data in \e JME format [\ref JME] whether the components of a molecular graph
+             * \brief Specifies for the output of data in \e JME format whether the components of a molecular graph
              *        shall be written separately or all together as a single \e JME component.
              *
              * If the control-parameter is set to \c true, each component of a molecular graph will be represented by a
              * corresponding \e JME molecule component in the output data record. If \c %JME_SEPARATE_COMPONENTS is \c false,
              * the components of the output molecular graph are written all together as a single \e JME component.
              *
+             * \see [\ref JME]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey JME_SEPARATE_COMPONENTS;
 
             /**
-             * \brief Specifies the format of \e SMILES molecular graph or reaction data records [\ref SMILES].
+             * \brief Specifies the format of \e SMILES molecular graph or reaction data records.
              *
              * The data record format is specified by one of the two following format strings:
              * - "S"
@@ -295,12 +307,13 @@ namespace CDPL
              * The character 'S' denotes the \e SMILES representation of the molecular graph or reaction, and 'N' the name of the
              * molecular graph/reaction (see Chem::MolecularGraphProperty::NAME and Chem::ReactionProperty::NAME).
              *
+             * \see [\ref SMILES]
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_RECORD_FORMAT;
 
             /**
-             * \brief Specifies whether to generate canonical \e SMILES strings [\ref SMILES].
+             * \brief Specifies whether to generate canonical \e SMILES strings.
              *
              * If the control-parameter is set to \c true, canonical \e SMILES strings will be generated. A canonical \e SMILES
              * string is unique for a given chemical structure and is always identical regardless of the atom and bond order in
@@ -315,7 +328,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_CANONICAL_FORM;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with kekulized aromatic rings.
+             * \brief Specifies whether to generate \e SMILES strings with kekulized aromatic rings.
              *
              * If the control-parameter is set to \c true, aromatic rings will be represented as \e Kekul&eacute; structures with
              * standard (non-lowercase) atom element symbols and localized bond orders.
@@ -323,38 +336,41 @@ namespace CDPL
              * and aromatic atoms of type <em>C, N, O, S, Se, Te</em> or \e As will be indicated by lowercase atom element
              * symbols.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_KEKULE_FORM;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with atom parity specifications.
+             * \brief Specifies whether to generate \e SMILES strings with atom parity specifications.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify the parity
              * of terahedral stereogenic atoms. If the value of the control-parameter is \c false, the parity of
              * stereogenic atoms is left unspecified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_ATOM_STEREO;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] that include directional bonds for the definition of
+             * \brief Specifies whether to generate \e SMILES strings that include directional bonds for the definition of
              *        double bond geometries.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will contain directional bonds for
              * the specification of chain double bond geometries. If the value of the control-parameter is \c false, the 
              * geometry of double bonds is left unspecified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_BOND_STEREO;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] that also include directional bonds for the definition of
+             * \brief Specifies whether to generate \e SMILES strings that also include directional bonds for the definition of
              *        ring double bond geometries.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify the geometry of
@@ -362,6 +378,7 @@ namespace CDPL
              * Chem::ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE. 
              * If the value of the control-parameter is \c false, the geometry of ring double bonds will not be specified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \note The setting of this control-parameter has only an effect if Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO
              *       is set to \c true.
@@ -371,79 +388,86 @@ namespace CDPL
 
             /**
              * \brief Specifies the minimum ring size that is required for the specification of ring double bond geometries
-             *        in generated \e SMILES strings [\ref SMILES].
+             *        in generated \e SMILES strings.
              * 
+             * \see [\ref SMILES]
              * \valuetype \c std::size_t
              * \see Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_MIN_STEREO_BOND_RING_SIZE;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with isotopic mass specifications.
+             * \brief Specifies whether to generate \e SMILES strings with isotopic mass specifications.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify the isotopic mass of
              * of atoms (if non-standard). 
              * If the value of \c %SMILES_OUTPUT_ISOTOPE is \c false, the isotopic mass is left unspecified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_ISOTOPE;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with implicit hydrogen count specifications.
+             * \brief Specifies whether to generate \e SMILES strings with implicit hydrogen count specifications.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify the implicit hydrogen count
              * of atoms (if non-standard). 
              * If the value of \c %SMILES_OUTPUT_HYDROGEN_COUNT is \c false, the implicit hydrogen count is always left unspecified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.3
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_HYDROGEN_COUNT;
             
             /**
-             * \brief Specifies whether to generate molecule \e SMILES strings [\ref SMILES] that contain atom-atom mapping numbers.
+             * \brief Specifies whether to generate molecule \e SMILES strings that contain atom-atom mapping numbers.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify reaction atom-atom
              * mapping numbers (see Chem::AtomProperty::ATOM_MAPPING_ID). 
              * If the value of \c %SMILES_OUTPUT_ATOM_MAPPING_ID is \c false, atom-atom mapping numbers will not be specified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_MOL_OUTPUT_ATOM_MAPPING_ID;
 
             /**
-             * \brief Specifies whether to generate reaction \e SMILES strings [\ref SMILES] that contain atom-atom mapping numbers.
+             * \brief Specifies whether to generate reaction \e SMILES strings that contain atom-atom mapping numbers.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify reaction atom-atom
              * mapping numbers (see Chem::AtomProperty::ATOM_MAPPING_ID). 
              * If the value of \c %SMILES_OUTPUT_ATOM_MAPPING_ID is \c false, atom-atom mapping numbers will not be specified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_RXN_OUTPUT_ATOM_MAPPING_ID;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with explicit single bond specifications.
+             * \brief Specifies whether to generate \e SMILES strings with explicit single bond specifications.
              *
              * If the control-parameter is set to \c true, generated \e SMILES strings will not only specify double and triple
              * bonds, but also single bonds.
              * If the value of \c %SMILES_OUTPUT_SINGLE_BONDS is \c false, single bonds are left unspecified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_SINGLE_BONDS;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with explicit aromatic bond specifications.
+             * \brief Specifies whether to generate \e SMILES strings with explicit aromatic bond specifications.
              *
              * If the control-parameter is set to \c true, generated \e SMILES strings will explicitly specify aromatic bonds.
              * If the value of \c %SMILES_OUTPUT_AROMATIC_BONDS is \c false, aromatic bonds are left unspecified.
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              * \note The setting of this control-parameter has only an effect if Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM
              *       is set to \c false.
@@ -452,7 +476,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_AROMATIC_BONDS;
 
             /**
-             * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] where all atom symbols are enclosed in brackets.
+             * \brief Specifies whether to generate \e SMILES strings where all atom symbols are enclosed in brackets.
              *
              * If the control-parameter is set to \c true, \e SMILES strings will be generated where all atoms are enclosed in
              * square brackets regardless of their atom type and the necessity to specify additional atom properties.
@@ -460,6 +484,7 @@ namespace CDPL
              * require the specification of additional atomic properties (charge, hydrogen count, isotope, ...)
              * or are not part of the organic subset (i.e. <em>C, N, O, S, P, F, Cl, Br</em> and <em>I</em>).
              *
+             * \see [\ref SMILES]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_NO_ORGANIC_SUBSET;
@@ -615,6 +640,7 @@ namespace CDPL
             /**
              * \brief Specifies whether to emit an XML declaration at the
              *        beginning of <em>CML</em> output records.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -622,6 +648,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the XML namespace URI emitted with the root element when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c std::string
              * \since 1.2
              */
@@ -629,6 +656,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to encode tetrahedral atom parities when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -636,6 +664,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to emit wedge/hash stereo flags for single bonds when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -643,6 +672,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to encode cis/trans descriptors for double bonds when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -650,6 +680,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to interpret/write <em>CML</em>'s aromatic bond type \c "a" when reading/wrting <em>CML</em> data.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.3
              */
@@ -657,6 +688,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to emit the title attribute (molecule name) when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -664,6 +696,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to emit attached structure-data fields when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -671,6 +704,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to emit the isotopic mass number of non-standard isotopes when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -678,6 +712,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to emit the atom spin multiplicity when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -685,6 +720,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to use a compact (array-style) representation for atom data when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
@@ -692,6 +728,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to use a compact (array-style) representation for bond data when generating <em>CML</em> output.
+             * \see [\ref CML]
              * \valuetype \c bool
              * \since 1.2
              */
