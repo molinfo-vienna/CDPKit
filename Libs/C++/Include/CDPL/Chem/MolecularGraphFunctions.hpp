@@ -688,16 +688,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_CTAB_VERSION property of the molecular graph \a molgraph (see namespace Chem::MDLDataFormatVersion).
+         * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_CTAB_VERSION property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored CTab version.
+         * \return The stored CTab version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API unsigned int getMDLCTABVersion(const MolecularGraph& molgraph);
 
         /**
-         * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_CTAB_VERSION property of the molecular graph \a molgraph to \a version (see namespace Chem::MDLDataFormatVersion).
+         * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_CTAB_VERSION property of the molecular graph \a molgraph to \a version.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param version The new CTab version.
+         * \param version The new CTab version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API void setMDLCTABVersion(MolecularGraph& molgraph, unsigned int version);
 
@@ -884,16 +884,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE property of the molecular graph \a molgraph (see namespace Chem::MOL2MoleculeType).
+         * \brief Returns the value of the Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MOL2 molecule type.
+         * \return The stored <em>Sybyl MOL2</em> molecule type (see namespace Chem::MOL2MoleculeType).
          */
         CDPL_CHEM_API unsigned int getMOL2MoleculeType(const MolecularGraph& molgraph);
 
         /**
-         * \brief Sets the value of the Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE property of the molecular graph \a molgraph to \a type (see namespace Chem::MOL2MoleculeType).
+         * \brief Sets the value of the Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE property of the molecular graph \a molgraph to \a type.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param type The new MOL2 molecule type.
+         * \param type The new <em>Sybyl MOL2</em> molecule type (see namespace Chem::MOL2MoleculeType).
          */
         CDPL_CHEM_API void setMOL2MoleculeType(MolecularGraph& molgraph, unsigned int type);
 
@@ -912,16 +912,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE property of the molecular graph \a molgraph (see namespace Chem::MOL2ChargeType).
+         * \brief Returns the value of the Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MOL2 charge type.
+         * \return The stored <em>Sybyl MOL2</em> charge type (see namespace Chem::MOL2ChargeType).
          */
         CDPL_CHEM_API unsigned int getMOL2ChargeType(const MolecularGraph& molgraph);
 
         /**
-         * \brief Sets the value of the Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE property of the molecular graph \a molgraph to \a type (see namespace Chem::MOL2ChargeType).
+         * \brief Sets the value of the Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE property of the molecular graph \a molgraph to \a type.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param type The new MOL2 charge type.
+         * \param type The new <em>Sybyl MOL2</em> charge type (see namespace Chem::MOL2ChargeType).
          */
         CDPL_CHEM_API void setMOL2ChargeType(MolecularGraph& molgraph, unsigned int type);
 
@@ -1161,7 +1161,7 @@ namespace CDPL
          * \brief Generates a \e SMILES string for \a molgraph.
          * \param molgraph The molecular graph to encode.
          * \param smiles The string to receive the generated SMILES.
-         * \param canonical \c true to emit a canonical SMILES; \c false for an arbitrary atom ordering.
+         * \param canonical \c true to emit a canonical SMILES and \c false for an arbitrary atom ordering.
          * \param ord_h_deplete \c true to suppress ordinary hydrogens.
          * \param atom_flags A bitmask of Chem::AtomPropertyFlag flags controlling which atomic properties to encode.
          * \param bond_flags A bitmask of Chem::BondPropertyFlag flags controlling which bond properties to encode.

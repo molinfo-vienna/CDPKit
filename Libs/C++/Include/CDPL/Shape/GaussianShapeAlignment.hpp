@@ -225,8 +225,8 @@ namespace CDPL
             const ScoringFunction& getScoringFunction() const;
 
             /**
-             * \brief Sets the alignment-result selection mode (see namespace Shape::AlignmentResultSelectionMode).
-             * \param mode The new result-selection mode.
+             * \brief Sets the alignment-result selection mode.
+             * \param mode The new result-selection mode (see namespace Shape::AlignmentResultSelectionMode).
              */
             void setResultSelectionMode(unsigned int mode);
 

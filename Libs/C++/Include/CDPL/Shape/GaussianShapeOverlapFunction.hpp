@@ -65,7 +65,9 @@ namespace CDPL
             /** \brief Type of the function used to decide whether two color features match. */
             typedef std::function<bool(std::size_t, std::size_t)> ColorMatchFunction;
 
-            /** \brief Virtual destructor. */
+            /** 
+             * \brief Virtual destructor. 
+             */
             virtual ~GaussianShapeOverlapFunction() {}
 
             /**

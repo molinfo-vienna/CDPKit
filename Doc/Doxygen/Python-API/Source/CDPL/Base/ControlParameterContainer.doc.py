@@ -106,7 +106,7 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Erases all container entries.
     # 
-    # For each container entry, any callback functions registered by registerParameterRemovedCallback() will be invoked with the key of the removed control-parameter entry as an argument. Callbacks of affected direct and indirect children which do not have an entry for the erased control-parameter also get invoked.
+    # For each container entry, any callback functions registered by registerParameterRemovedCallback() will be invoked with the key of the removed control-parameter entry as an argument. Callbacks of affected direct and indirect children which do not have an entry for the erased control-parameter also get invoked. <br>
     # 
     def clearParameters() -> None: pass
 

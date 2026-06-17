@@ -57,7 +57,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief Virtual destructor. */
+            /** 
+             * \brief Virtual destructor. 
+             */
             virtual ~GaussianShapeAlignmentStartGenerator() {}
 
             /**

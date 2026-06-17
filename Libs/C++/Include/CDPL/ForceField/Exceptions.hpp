@@ -53,7 +53,7 @@ namespace CDPL
             Error(const std::string& msg = "");
 
             /**
-             * \brief Destructor.
+             * \brief Virtual destructor.
              */
             virtual ~Error() throw();
         };
@@ -72,7 +72,7 @@ namespace CDPL
             ParameterizationFailed(const std::string& msg = "");
 
             /**
-             * \brief Destructor.
+             * \brief Virtual destructor.
              */
             virtual ~ParameterizationFailed() throw();
         };

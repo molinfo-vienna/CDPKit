@@ -175,16 +175,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::BondProperty::STEREO_2D_FLAG property of the bond \a bond (see namespace Chem::BondStereoFlag).
+         * \brief Returns the value of the Chem::BondProperty::STEREO_2D_FLAG property of the bond \a bond.
          * \param bond The bond for which to return the property value.
-         * \return The stored 2D stereo flag.
+         * \return The stored 2D stereo flag (see namespace Chem::BondStereoFlag).
          */
         CDPL_CHEM_API unsigned int get2DStereoFlag(const Bond& bond);
 
         /**
-         * \brief Sets the value of the Chem::BondProperty::STEREO_2D_FLAG property of the bond \a bond to \a flag (see namespace Chem::BondStereoFlag).
+         * \brief Sets the value of the Chem::BondProperty::STEREO_2D_FLAG property of the bond \a bond to \a flag.
          * \param bond The bond for which to set the property value.
-         * \param flag The new 2D stereo flag value.
+         * \param flag The new 2D stereo flag value (see namespace Chem::BondStereoFlag).
          */
         CDPL_CHEM_API void set2DStereoFlag(Bond& bond, unsigned int flag);
 
@@ -203,16 +203,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::BondProperty::CIP_CONFIGURATION property of the bond \a bond (see namespace Chem::CIPDescriptor).
+         * \brief Returns the value of the Chem::BondProperty::CIP_CONFIGURATION property of the bond \a bond.
          * \param bond The bond for which to return the property value.
-         * \return The stored CIP configuration label.
+         * \return The stored CIP configuration label (see namespace Chem::CIPDescriptor).
          */
         CDPL_CHEM_API unsigned int getCIPConfiguration(const Bond& bond);
 
         /**
-         * \brief Sets the value of the Chem::BondProperty::CIP_CONFIGURATION property of the bond \a bond to \a config (see namespace Chem::CIPDescriptor).
+         * \brief Sets the value of the Chem::BondProperty::CIP_CONFIGURATION property of the bond \a bond to \a config.
          * \param bond The bond for which to set the property value.
-         * \param config The new CIP configuration label.
+         * \param config The new CIP configuration label (see namespace Chem::CIPDescriptor).
          */
         CDPL_CHEM_API void setCIPConfiguration(Bond& bond, unsigned int config);
 

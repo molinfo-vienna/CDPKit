@@ -64,10 +64,10 @@ namespace CDPL
                                               Math::Vector3D& z_axis, Math::Vector3D& moments);
 
         /**
-         * \brief Classifies the rotational symmetry of a shape from its principal moments (see namespace Shape::SymmetryClass).
+         * \brief Classifies the rotational symmetry of a shape from its principal moments.
          * \param moments The principal moments.
          * \param eq_thresh The relative threshold below which two moments are considered equal.
-         * \return The perceived symmetry class.
+         * \return The perceived symmetry class (see namespace Shape::SymmetryClass).
          */
         CDPL_SHAPE_API unsigned int perceiveSymmetryClass(const Math::Vector3D& moments, double eq_thresh = 0.15);
 

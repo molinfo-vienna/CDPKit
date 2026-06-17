@@ -181,9 +181,9 @@ class GaussianShapeAlignment(Boost.Python.instance):
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
-    # \brief Sets the alignment-result selection mode (see namespace Shape.AlignmentResultSelectionMode).
+    # \brief Sets the alignment-result selection mode.
     # 
-    # \param mode The new result-selection mode.
+    # \param mode The new result-selection mode (see namespace Shape.AlignmentResultSelectionMode).
     # 
     def setResultSelectionMode(mode: int) -> None: pass
 

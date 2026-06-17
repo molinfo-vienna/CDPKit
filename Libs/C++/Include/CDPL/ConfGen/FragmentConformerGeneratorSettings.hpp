@@ -154,7 +154,7 @@ namespace CDPL
             FragmentConformerGeneratorSettings();
 
             /**
-             * \brief Destructor.
+             * \brief Virtual destructor.
              */
             virtual ~FragmentConformerGeneratorSettings() {}
 

@@ -269,12 +269,12 @@ def generateGaussianShape(features: Pharm.FeatureContainer, shape: GaussianShape
 def matrixToQuaternion(mtx: Math.Matrix4D, quat: Math.Vector7D) -> None: pass
 
 ##
-# \brief Classifies the rotational symmetry of a shape from its principal moments (see namespace Shape.SymmetryClass).
+# \brief Classifies the rotational symmetry of a shape from its principal moments.
 # 
 # \param moments The principal moments.
 # \param eq_thresh The relative threshold below which two moments are considered equal.
 # 
-# \return The perceived symmetry class.
+# \return The perceived symmetry class (see namespace Shape.SymmetryClass).
 # 
 def perceiveSymmetryClass(moments: Math.Vector3D, eq_thresh: float = 0.15) -> int: pass
 

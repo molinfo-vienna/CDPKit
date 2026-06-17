@@ -398,7 +398,7 @@ namespace CDPL
                 parameters(cntnr.parameters), parent(0) {}
 
             /**
-             * \brief Destructor.
+             * \brief Virtual destructor.
              *
              * The parent pointer of any children will be set to \e null before the instance gets
              * destroyed (see setParent()).  

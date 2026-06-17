@@ -54,7 +54,7 @@ namespace CDPL
             DGConstraintGeneratorSettings();
 
             /**
-             * \brief Destructor.
+             * \brief Virtual destructor.
              */
             virtual ~DGConstraintGeneratorSettings() {}
 

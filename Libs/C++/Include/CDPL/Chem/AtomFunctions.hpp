@@ -116,16 +116,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::AtomProperty::TYPE property of the atom \a atom (see namespace Chem::AtomType).
+         * \brief Returns the value of the Chem::AtomProperty::TYPE property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored atom type.
+         * \return The stored atom type (see namespace Chem::AtomType).
          */
         CDPL_CHEM_API unsigned int getType(const Atom& atom);
 
         /**
-         * \brief Sets the value of the Chem::AtomProperty::TYPE property of the atom \a atom to \a type (see namespace Chem::AtomType).
+         * \brief Sets the value of the Chem::AtomProperty::TYPE property of the atom \a atom to \a type.
          * \param atom The atom for which to set the property value.
-         * \param type The new atom type.
+         * \param type The new atom type (see namespace Chem::AtomType).
          */
         CDPL_CHEM_API void setType(Atom& atom, unsigned int type);
 
@@ -222,16 +222,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::AtomProperty::RADICAL_TYPE property of the atom \a atom (see namespace Chem::RadicalType).
+         * \brief Returns the value of the Chem::AtomProperty::RADICAL_TYPE property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored radical type.
+         * \return The stored radical type (see namespace Chem::RadicalType).
          */
         CDPL_CHEM_API unsigned int getRadicalType(const Atom& atom);
 
         /**
-         * \brief Sets the value of the Chem::AtomProperty::RADICAL_TYPE property of the atom \a atom to \a type (see namespace Chem::RadicalType).
+         * \brief Sets the value of the Chem::AtomProperty::RADICAL_TYPE property of the atom \a atom to \a type.
          * \param atom The atom for which to set the property value.
-         * \param type The new radical type.
+         * \param type The new radical type (see namespace Chem::RadicalType).
          */
         CDPL_CHEM_API void setRadicalType(Atom& atom, unsigned int type);
 
@@ -250,16 +250,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::AtomProperty::HYBRIDIZATION property of the atom \a atom (see namespace Chem::HybridizationState).
+         * \brief Returns the value of the Chem::AtomProperty::HYBRIDIZATION property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored hybridization state.
+         * \return The stored hybridization state (see namespace Chem::HybridizationState).
          */
         CDPL_CHEM_API unsigned int getHybridizationState(const Atom& atom);
 
         /**
-         * \brief Sets the value of the Chem::AtomProperty::HYBRIDIZATION property of the atom \a atom to \a state (see namespace Chem::HybridizationState).
+         * \brief Sets the value of the Chem::AtomProperty::HYBRIDIZATION property of the atom \a atom to \a state.
          * \param atom The atom for which to set the property value.
-         * \param state The new hybridization state.
+         * \param state The new hybridization state (see namespace Chem::HybridizationState).
          */
         CDPL_CHEM_API void setHybridizationState(Atom& atom, unsigned int state);
 
@@ -626,16 +626,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::AtomProperty::CIP_CONFIGURATION property of the atom \a atom (see namespace Chem::CIPDescriptor).
+         * \brief Returns the value of the Chem::AtomProperty::CIP_CONFIGURATION property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored CIP configuration label.
+         * \return The stored CIP configuration label (see namespace Chem::CIPDescriptor).
          */
         CDPL_CHEM_API unsigned int getCIPConfiguration(const Atom& atom);
 
         /**
-         * \brief Sets the value of the Chem::AtomProperty::CIP_CONFIGURATION property of the atom \a atom to \a config (see namespace Chem::CIPDescriptor).
+         * \brief Sets the value of the Chem::AtomProperty::CIP_CONFIGURATION property of the atom \a atom to \a config.
          * \param atom The atom for which to set the property value.
-         * \param config The new CIP configuration label.
+         * \param config The new CIP configuration label (see namespace Chem::CIPDescriptor).
          */
         CDPL_CHEM_API void setCIPConfiguration(Atom& atom, unsigned int config);
 
@@ -958,16 +958,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::AtomProperty::MDL_PARITY property of the atom \a atom (see namespace Chem::MDLParity).
+         * \brief Returns the value of the Chem::AtomProperty::MDL_PARITY property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MDL stereo parity.
+         * \return The stored MDL stereo parity (see namespace Chem::MDLParity).
          */
         CDPL_CHEM_API unsigned int getMDLParity(const Atom& atom);
 
         /**
-         * \brief Sets the value of the Chem::AtomProperty::MDL_PARITY property of the atom \a atom to \a parity (see namespace Chem::MDLParity).
+         * \brief Sets the value of the Chem::AtomProperty::MDL_PARITY property of the atom \a atom to \a parity.
          * \param atom The atom for which to set the property value.
-         * \param parity The new MDL stereo parity.
+         * \param parity The new MDL stereo parity (see namespace Chem::MDLParity).
          */
         CDPL_CHEM_API void setMDLParity(Atom& atom, unsigned int parity);
 
@@ -1022,16 +1022,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the value of the Chem::AtomProperty::REACTION_CENTER_STATUS property of the atom \a atom (see namespace Chem::ReactionCenterStatus).
+         * \brief Returns the value of the Chem::AtomProperty::REACTION_CENTER_STATUS property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored reaction-center status.
+         * \return The stored reaction-center status (see namespace Chem::ReactionCenterStatus).
          */
         CDPL_CHEM_API unsigned int getReactionCenterStatus(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::REACTION_CENTER_STATUS property of the atom \a atom to \a status.
          * \param atom The atom for which to set the property value.
-         * \param status The new reaction-center status.
+         * \param status The new reaction-center status (see namespace Chem::ReactionCenterStatus).
          */
         CDPL_CHEM_API void setReactionCenterStatus(Atom& atom, unsigned int status);
 

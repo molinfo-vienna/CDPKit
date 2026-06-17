@@ -64,7 +64,9 @@ namespace CDPL
              */
             PharmacophoreGenerator(const PharmacophoreGenerator& gen);
 
-            /** \brief Virtual destructor. */
+            /** 
+             * \brief Virtual destructor. 
+             */
             virtual ~PharmacophoreGenerator() {}
 
             /**
