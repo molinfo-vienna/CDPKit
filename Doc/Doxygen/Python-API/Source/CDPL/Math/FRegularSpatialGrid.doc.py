@@ -34,9 +34,9 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # \brief Constructs the grid with anisotropic per-axis step sizes initialized to the supplied grid data.
     # 
     # \param data The grid data container.
-    # \param xs The step size along the X axis.
-    # \param ys The step size along the Y axis.
-    # \param zs The step size along the Z axis.
+    # \param xs The step size along the x-axis.
+    # \param ys The step size along the y-axis.
+    # \param zs The step size along the z-axis.
     # 
     def __init__(data: FGrid, xs: float, ys: float, zs: float) -> None: pass
 
@@ -51,9 +51,9 @@ class FRegularSpatialGrid(Boost.Python.instance):
     ##
     # \brief Constructs an empty grid with anisotropic per-axis step sizes.
     # 
-    # \param xs The step size along the X axis.
-    # \param ys The step size along the Y axis.
-    # \param zs The step size along the Z axis.
+    # \param xs The step size along the x-axis.
+    # \param ys The step size along the y-axis.
+    # \param zs The step size along the z-axis.
     # 
     def __init__(xs: float, ys: float, zs: float) -> None: pass
 
@@ -83,65 +83,65 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def clear(v: float = 0.0) -> None: pass
 
     ##
-    # \brief Returns the spatial extent of the grid along the X axis ( \f$ (\mathrm{size}_1 - 1) \cdot \mathrm{xStep} \f$ for non-empty grids).
+    # \brief Returns the spatial extent of the grid along the x-axis ( \f$ (\mathrm{size}_1 - 1) \cdot \mathrm{xStep} \f$ for non-empty grids).
     # 
-    # \return The X-axis extent.
+    # \return The x-axis extent.
     # 
     def getXExtent() -> float: pass
 
     ##
-    # \brief Returns the spatial extent of the grid along the Y axis.
+    # \brief Returns the spatial extent of the grid along the y-axis.
     # 
-    # \return The Y-axis extent.
+    # \return The y-axis extent.
     # 
     def getYExtent() -> float: pass
 
     ##
-    # \brief Returns the spatial extent of the grid along the Z axis.
+    # \brief Returns the spatial extent of the grid along the z-axis.
     # 
-    # \return The Z-axis extent.
+    # \return The z-axis extent.
     # 
     def getZExtent() -> float: pass
 
     ##
-    # \brief Returns the per-cell step size along the X axis.
+    # \brief Returns the per-cell step size along the x-axis.
     # 
-    # \return The X-axis step size.
+    # \return The x-axis step size.
     # 
     def getXStepSize() -> float: pass
 
     ##
-    # \brief Returns the per-cell step size along the Y axis.
+    # \brief Returns the per-cell step size along the y-axis.
     # 
-    # \return The Y-axis step size.
+    # \return The y-axis step size.
     # 
     def getYStepSize() -> float: pass
 
     ##
-    # \brief Returns the per-cell step size along the Z axis.
+    # \brief Returns the per-cell step size along the z-axis.
     # 
-    # \return The Z-axis step size.
+    # \return The z-axis step size.
     # 
     def getZStepSize() -> float: pass
 
     ##
-    # \brief Sets the per-cell step size along the X axis to <em>xs</em>.
+    # \brief Sets the per-cell step size along the x-axis to <em>xs</em>.
     # 
-    # \param xs The new X-axis step size.
+    # \param xs The new x-axis step size.
     # 
     def setXStepSize(xs: float) -> None: pass
 
     ##
-    # \brief Sets the per-cell step size along the Y axis to <em>ys</em>.
+    # \brief Sets the per-cell step size along the y-axis to <em>ys</em>.
     # 
-    # \param ys The new Y-axis step size.
+    # \param ys The new y-axis step size.
     # 
     def setYStepSize(ys: float) -> None: pass
 
     ##
-    # \brief Sets the per-cell step size along the Z axis to <em>zs</em>.
+    # \brief Sets the per-cell step size along the z-axis to <em>zs</em>.
     # 
-    # \param zs The new Z-axis step size.
+    # \param zs The new z-axis step size.
     # 
     def setZStepSize(zs: float) -> None: pass
 

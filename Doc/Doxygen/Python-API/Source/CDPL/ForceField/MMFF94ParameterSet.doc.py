@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Provides constants for the specification of MMFF94 parameter set variant.
+# \brief Provides constants for the specification of a MMFF94 parameter set variant.
 # 
-# \see [\ref MMFF94, \ref MMFF94s]
+# \see [\ref MMFF94, \ref MMFF94s, \ref RTOR]
 # 
 class MMFF94ParameterSet(Boost.Python.instance):
 

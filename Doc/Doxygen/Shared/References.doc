@@ -472,6 +472,14 @@ Raster3D File Format Specification: http://www.bmsc.washington.edu/raster3d/html
 </td>
 </tr>
 
+<td valign="top">\anchor RTOR<i>[RTOR]</i></td>
+<td valign="top">
+J. Wahl, F. Freyss, M. von Korff, T. Sander,
+Accuracy Evaluation and Addition of Improved Dihedral Parameters for the MMFF94s,
+<i>J. Cheminformatics</i> <b>2019</b>, 11, 53
+</td>
+</tr>
+
 <tr>
 <td valign="top">\anchor QTDOC<i>[QTDOC]</i></td>
 <td valign="top">

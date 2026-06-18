@@ -198,9 +198,9 @@ namespace CDPL
 
             /**
              * \brief Constructs an empty grid with anisotropic per-axis step sizes.
-             * \param xs The step size along the X axis.
-             * \param ys The step size along the Y axis.
-             * \param zs The step size along the Z axis.
+             * \param xs The step size along the x-axis.
+             * \param ys The step size along the y-axis.
+             * \param zs The step size along the z-axis.
              */
             RegularSpatialGrid(const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs):
                 xStep(xs), yStep(ys), zStep(zs)
@@ -213,9 +213,9 @@ namespace CDPL
             /**
              * \brief Constructs the grid with anisotropic per-axis step sizes initialized to the supplied grid data.
              * \param data The grid data container.
-             * \param xs The step size along the X axis.
-             * \param ys The step size along the Y axis.
-             * \param zs The step size along the Z axis.
+             * \param xs The step size along the x-axis.
+             * \param ys The step size along the y-axis.
+             * \param zs The step size along the z-axis.
              */
             RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs):
                 data(data), xStep(xs), yStep(ys), zStep(zs)
@@ -388,8 +388,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the per-cell step size along the X axis.
-             * \return The X-axis step size.
+             * \brief Returns the per-cell step size along the x-axis.
+             * \return The x-axis step size.
              */
             CoordinatesValueType getXStepSize() const
             {
@@ -397,8 +397,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the per-cell step size along the Y axis.
-             * \return The Y-axis step size.
+             * \brief Returns the per-cell step size along the y-axis.
+             * \return The y-axis step size.
              */
             CoordinatesValueType getYStepSize() const
             {
@@ -406,8 +406,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the per-cell step size along the Z axis.
-             * \return The Z-axis step size.
+             * \brief Returns the per-cell step size along the z-axis.
+             * \return The z-axis step size.
              */
             CoordinatesValueType getZStepSize() const
             {
@@ -415,8 +415,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Sets the per-cell step size along the X axis to \a xs.
-             * \param xs The new X-axis step size.
+             * \brief Sets the per-cell step size along the x-axis to \a xs.
+             * \param xs The new x-axis step size.
              */
             void setXStepSize(const CoordinatesValueType& xs)
             {
@@ -424,8 +424,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Sets the per-cell step size along the Y axis to \a ys.
-             * \param ys The new Y-axis step size.
+             * \brief Sets the per-cell step size along the y-axis to \a ys.
+             * \param ys The new y-axis step size.
              */
             void setYStepSize(const CoordinatesValueType& ys)
             {
@@ -433,8 +433,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Sets the per-cell step size along the Z axis to \a zs.
-             * \param zs The new Z-axis step size.
+             * \brief Sets the per-cell step size along the z-axis to \a zs.
+             * \param zs The new z-axis step size.
              */
             void setZStepSize(const CoordinatesValueType& zs)
             {
@@ -442,8 +442,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the spatial extent of the grid along the X axis (\f$ (\mathrm{size}_1 - 1) \cdot \mathrm{xStep} \f$ for non-empty grids).
-             * \return The X-axis extent.
+             * \brief Returns the spatial extent of the grid along the x-axis (\f$ (\mathrm{size}_1 - 1) \cdot \mathrm{xStep} \f$ for non-empty grids).
+             * \return The x-axis extent.
              */
             CoordinatesValueType getXExtent() const
             {
@@ -451,8 +451,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the spatial extent of the grid along the Y axis.
-             * \return The Y-axis extent.
+             * \brief Returns the spatial extent of the grid along the y-axis.
+             * \return The y-axis extent.
              */
             CoordinatesValueType getYExtent() const
             {
@@ -460,8 +460,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the spatial extent of the grid along the Z axis.
-             * \return The Z-axis extent.
+             * \brief Returns the spatial extent of the grid along the z-axis.
+             * \return The z-axis extent.
              */
             CoordinatesValueType getZExtent() const
             {

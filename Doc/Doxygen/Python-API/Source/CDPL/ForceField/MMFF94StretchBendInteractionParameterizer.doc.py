@@ -20,12 +20,16 @@
 #
 
 ##
-# \brief 
-#
+# \brief Detects and parameterizes the MMFF94 stretch-bend interactions of a molecular graph.
+# 
+# Stretch-bend interactions couple the bending of an <em>i-<em>j-<em>k</em> bond</em> angle</em> to the stretching of the two participating bonds <em>i-<em>j</em> and</em> <em>j-<em>k</em>.</em> For every non-filtered atom triplet the parameterizer derives the stretch-bend type index from the bond type indices and angle type index of the already-parameterized bond-stretching and angle-bending interactions, looks up the matching stretch-bend force constants (falling back to the periodic-table-row-based default parameter table when no exact entry is available) and appends an MMFF94StretchBendInteraction instance to the output list.
+# 
+# \see [\ref MMFF94]
+# 
 class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94StretchBendInteractionParameterizer instance.
+    # \brief Constructs an <tt>MMFF94StretchBendInteractionParameterizer</tt> instance using the default MMFF94 parameter tables.
     # 
     def __init__() -> None: pass
 
@@ -36,12 +40,13 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     def __init__(parameterizer: MMFF94StretchBendInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94StretchBendInteractionParameterizer instance.
-    # \param molgraph 
-    # \param bs_ia_list 
-    # \param ab_ia_list 
-    # \param ia_list 
-    # \param strict 
+    # \brief Constructs the parameterizer and processes the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to parameterize the stretch-bend interactions.
+    # \param bs_ia_list The list of already-parameterized MMFF94 bond-stretching interactions (provides per-bond type indices and reference lengths).
+    # \param ab_ia_list The list of already-parameterized MMFF94 angle-bending interactions (provides per-angle type indices and reference angles).
+    # \param ia_list Output list receiving the generated MMFF94StretchBendInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
     # 
     def __init__(molgraph: Chem.MolecularGraph, bs_ia_list: MMFF94BondStretchingInteractionList, ab_ia_list: MMFF94AngleBendingInteractionList, ia_list: MMFF94StretchBendInteractionList, strict: bool) -> None: pass
 
@@ -58,33 +63,38 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the filter function used to skip atom triplets during parameterization.
+    # 
+    # \param func The new three-atom filter function (when it returns <tt>False</tt>, the triplet is skipped).
+    # 
     def setFilterFunction(func: InteractionFilterFunction3) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+    # 
+    # \param func The new numeric atom type lookup function.
+    # 
     def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the primary table providing stretch-bend type-specific stretch-bend parameters.
+    # 
+    # \param table The new stretch-bend parameter table.
+    # 
     def setStretchBendParameterTable(table: MMFF94StretchBendParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the fallback table providing periodic-table-row-based default stretch-bend parameters.
+    # 
+    # \param table The new default stretch-bend parameter table.
+    # 
     def setDefaultStretchBendParameterTable(table: MMFF94DefaultStretchBendParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the table providing MMFF94 numeric atom type property data (used to look up the periodic table row of an atom for the default-parameter fallback).
+    # 
+    # \param table The new atom type property table.
+    # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
@@ -95,13 +105,14 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     def assign(parameterizer: MMFF94StretchBendInteractionParameterizer) -> MMFF94StretchBendInteractionParameterizer: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param bs_ia_list 
-    # \param ab_ia_list 
-    # \param ia_list 
-    # \param strict 
-    #
+    # \brief Perceives the MMFF94 stretch-bend interactions for <em>molgraph</em> and outputs the corresponding parameter data into <em>ia_list</em>.
+    # 
+    # \param molgraph The molecular graph for which to parameterize the stretch-bend interactions.
+    # \param bs_ia_list The list of already-parameterized MMFF94 bond-stretching interactions (provides per-bond type indices and reference lengths).
+    # \param ab_ia_list The list of already-parameterized MMFF94 angle-bending interactions (provides per-angle type indices and reference angles).
+    # \param ia_list Output list receiving the generated MMFF94StretchBendInteraction instances.
+    # \param strict If <tt>True</tt>, missing/ambiguous parameters cause a parameterization failure. Otherwise, in case of parameterization problems, suitable fallback parameters will be used.
+    # 
     def parameterize(molgraph: Chem.MolecularGraph, bs_ia_list: MMFF94BondStretchingInteractionList, ab_ia_list: MMFF94AngleBendingInteractionList, ia_list: MMFF94StretchBendInteractionList, strict: bool) -> None: pass
 
     objectID = property(getObjectID)
