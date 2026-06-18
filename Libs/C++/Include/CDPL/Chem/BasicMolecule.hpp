@@ -339,6 +339,10 @@ namespace CDPL
 
             using Molecule::operator+=;
 
+            /**
+             * \brief Creates a deep copy of the molecule.
+             * \return A smart pointer to the cloned molecule.
+             */
             MolecularGraph::SharedPointer clone() const;
 
             /**

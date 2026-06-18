@@ -80,9 +80,21 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief An unsigned integral type used to represent sizes and indices.
+             */
             typedef typename CommonType<typename Vector<T>::SizeType, typename Matrix<T>::SizeType>::Type SizeType;
+            /**
+             * \brief The value type used in calculations and for the storage of data points.
+             */
             typedef T                                                                                     ValueType;
+            /**
+             * \brief The matrix type used for the storage of the regression input data.
+             */
             typedef Matrix<T>                                                                             MatrixType;
+            /**
+             * \brief The vector type used for the storage of response values and regression coefficients.
+             */
             typedef Vector<T>                                                                             VectorType;
 
             /**

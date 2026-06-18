@@ -59,9 +59,21 @@ namespace CDPL
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RegularGrid instances.
              */
             typedef std::shared_ptr<RegularGrid>                            SharedPointer;
+            /**
+             * \brief The type of the stored grid data elements.
+             */
             typedef typename SpatialGrid<T, CVT>::ValueType                 ValueType;
+            /**
+             * \brief The value type of the grid point coordinate components.
+             */
             typedef typename SpatialGrid<T, CVT>::CoordinatesValueType      CoordinatesValueType;
+            /**
+             * \brief The type used to store the coordinates of a grid point.
+             */
             typedef typename SpatialGrid<T, CVT>::CoordinatesType           CoordinatesType;
+            /**
+             * \brief The type of the underlying grid data storage.
+             */
             typedef typename Math::RegularSpatialGrid<T, CVT>::GridDataType GridDataType;
 
             /**
