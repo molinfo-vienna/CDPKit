@@ -37,7 +37,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants for MMFF94 parameter set variant specification.
+         * \brief Provides constants for the specification of MMFF94 parameter set variant.
          * \see [\ref MMFF94, \ref MMFF94s]
          */
         namespace MMFF94ParameterSet

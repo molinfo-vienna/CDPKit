@@ -24,6 +24,8 @@
 # 
 # A bond receives the nonstandard type index <em>1</em> when it is a single bond between two non-aromatic atoms whose MMFF94 atom type properties carry an <tt>sbmb</tt> flag, or when it connects two atoms that belong to two different aromatic rings (as in the central C-C bond of biphenyl). All other bonds receive the standard type index <em>0</em>.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94BondTyper(Boost.Python.instance):
 
     ##

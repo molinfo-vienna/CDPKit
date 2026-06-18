@@ -54,6 +54,8 @@ namespace CDPL
          *
          * Each entry specifies a formal charge plus an assignment-mode flag that controls how the charge
          * is distributed across the atom and its neighbours of selected types.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94FormalAtomChargeDefinitionTable
         {

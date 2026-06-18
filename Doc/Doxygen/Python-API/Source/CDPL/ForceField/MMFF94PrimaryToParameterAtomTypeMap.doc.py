@@ -22,6 +22,8 @@
 ##
 # \brief Data structure for the storage and lookup of primary numeric MMFF94 atom type to fallback parameter atom type list mappings.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
     ##

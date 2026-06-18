@@ -66,6 +66,8 @@ namespace CDPL
          * neighbors the parameterizer determines the MMFF94 angle type index (0-8, accounting for ring membership
          * and double bond character), looks up the matching MMFF94 angle-bending parameters, falls back to the
          * empirical rule when no exact entry is found and emits an MMFF94AngleBendingInteraction instance.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94AngleBendingInteractionParameterizer
         {

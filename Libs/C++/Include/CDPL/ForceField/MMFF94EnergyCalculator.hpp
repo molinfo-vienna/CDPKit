@@ -51,6 +51,7 @@ namespace CDPL
          * via the dedicated accessors, the calculated sum is returned by operator()() and getTotalEnergy().
          *
          * \tparam ValueType The floating-point value type used to represent the computed energies.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType>
         class MMFF94EnergyCalculator

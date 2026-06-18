@@ -59,6 +59,8 @@ namespace CDPL
          * For every non-filtered bond the parameterizer looks up the matching MMFF94 bond type-specific
          * parameters from the supplied tables (falling back to the rule-based table when no exact match is
          * available) and appends an MMFF94BondStretchingInteraction instance to the output list.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94BondStretchingInteractionParameterizer
         {

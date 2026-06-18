@@ -91,6 +91,7 @@ namespace CDPL
          * \param force_const The bond stretching force constant \f$ kb_{IJ} \f$.
          * \param ref_length The reference bond length \f$ r_{IJ}^0 \f$.
          * \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94BondStretchingEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
@@ -117,10 +118,10 @@ namespace CDPL
          * \param force_const The bond stretching force constant \f$ kb_{IJ} \f$.
          * \param ref_length The reference bond length \f$ r_{IJ}^0 \f$.
          * \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType>
         ValueType calcMMFF94BondStretchingEnergy(const ValueType& r_ij, const ValueType& force_const, const ValueType& ref_length);
-
 
         /**
          * \brief Sums the angle-bending interaction energies of all MMFF94 angle-bending interactions in the iterator range <em>[beg, end)</em>.
@@ -173,6 +174,7 @@ namespace CDPL
          * \param force_const The angle bending force constant \f$ ka_{IJK} \f$.
          * \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
          * \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
@@ -207,12 +209,12 @@ namespace CDPL
          * \param force_const The angle bending force constant \f$ ka_{IJK} \f$.
          * \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
          * \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                const ValueType& r_ij, const ValueType& r_jk,
                                                bool linear, const ValueType& force_const, const ValueType& ref_angle);
-
 
         /**
          * \brief Sums the stretch-bend coupling interaction energies of all MMFF94 stretch-bend interactions in the iterator range <em>[beg, end)</em>.
@@ -267,7 +269,8 @@ namespace CDPL
          * \param ref_length1 The reference bond length \f$ r_{IJ}^0 \f$.
          * \param ref_length2 The reference bond length \f$ r_{KJ}^0 \f$.
          * \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
-          */
+         * \see [\ref MMFF94]
+         */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                               const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle,
@@ -304,13 +307,13 @@ namespace CDPL
          * \param ref_length1 The reference bond length \f$ r_{IJ}^0 \f$.
          * \param ref_length2 The reference bond length \f$ r_{KJ}^0 \f$.
          * \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
-          */
+         * \see [\ref MMFF94]
+         */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                               const ValueType& r_ij, const ValueType& r_jk,
                                               const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle,
                                               const ValueType& ref_length1, const ValueType& ref_length2);
-
 
         /**
          * \brief Sums the out-of-plane bending interaction energies of all MMFF94 out-of-plane bending interactions in the iterator range <em>[beg, end)</em>.
@@ -352,6 +355,7 @@ namespace CDPL
          * \param oop_atom_pos The position of the out-of-plane atom \e l.
          * \param force_const The out-of-plane bending force constant \f$ koop_{IJK \colon L} \f$.
          * \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
@@ -374,11 +378,11 @@ namespace CDPL
          * \param r_jl The length of the bond between atom \e j and atom \e l.
          * \param force_const The out-of-plane bending force constant \f$ koop_{IJK \colon L} \f$.
          * \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                     const CoordsVec& oop_atom_pos, const ValueType& r_jl, const ValueType& force_const);
-
 
         /**
          * \brief Sums the torsion interaction energies of all MMFF94 torsion interactions in the iterator range <em>[beg, end)</em>.
@@ -424,6 +428,7 @@ namespace CDPL
          * \param tor_param2 The torsion parameter \f$ V_2 \f$.
          * \param tor_param3 The torsion parameter \f$ V_3 \f$.
          * \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94TorsionEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos,
@@ -480,6 +485,7 @@ namespace CDPL
          * \param de_const The dielectric constant \f$ D \f$.
          * \param dist_expo The exponent \f$ n \f$.
          * \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94ElectrostaticEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& atom1_chg,
@@ -510,6 +516,7 @@ namespace CDPL
          * \param de_const The dielectric constant \f$ D \f$.
          * \param dist_expo The exponent \f$ n \f$.
          * \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType>
         ValueType calcMMFF94ElectrostaticEnergy(const ValueType& r_ij, const ValueType& atom1_chg, const ValueType& atom2_chg,
@@ -574,6 +581,7 @@ namespace CDPL
          * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
          * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
          * \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& e_IJ,
@@ -612,6 +620,7 @@ namespace CDPL
          * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
          * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
          * \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType>
         ValueType calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ,

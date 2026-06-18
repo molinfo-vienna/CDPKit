@@ -64,6 +64,8 @@ namespace CDPL
          * aromatic atom types are then reassigned according to the MMFF94 aromatic-ring rules, hydrogen atoms
          * receive types derived from their heavy atom neighbors, and finally the symbolic types are translated
          * to the corresponding numeric type indices used by the rest of the MMFF94 parameter tables.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94AtomTyper
         {

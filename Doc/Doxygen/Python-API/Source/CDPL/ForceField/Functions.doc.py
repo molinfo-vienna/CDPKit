@@ -624,7 +624,9 @@ def calcMMFF94AngleBendingEnergy(ia_list: MMFF94AngleBendingInteractionList, coo
 # \param force_const The angle bending force constant \f$ ka_{IJK} \f$.
 # \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
 # 
-# \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
+# \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94AngleBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
@@ -653,7 +655,9 @@ def calcMMFF94AngleBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Ma
 # \param force_const The angle bending force constant \f$ ka_{IJK} \f$.
 # \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
 # 
-# \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
+# \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94AngleBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
@@ -721,7 +725,9 @@ def calcMMFF94AngleBendingGradient(ia_list: MMFF94AngleBendingInteractionList, c
 # 
 # \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94AngleBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
@@ -769,7 +775,9 @@ def calcMMFF94BondStretchingEnergy(ia_list: MMFF94BondStretchingInteractionList,
 # \param force_const The bond stretching force constant \f$ kb_{IJ} \f$.
 # \param ref_length The reference bond length \f$ r_{IJ}^0 \f$.
 # 
-# \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
+# \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94BondStretchingEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
@@ -789,7 +797,9 @@ def calcMMFF94BondStretchingEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vec
 # \param force_const The bond stretching force constant \f$ kb_{IJ} \f$.
 # \param ref_length The reference bond length \f$ r_{IJ}^0 \f$.
 # 
-# \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
+# \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94BondStretchingEnergy(r_ij: float, force_const: float, ref_length: float) -> float: pass
 
@@ -845,7 +855,9 @@ def calcMMFF94BondStretchingGradient(ia_list: MMFF94BondStretchingInteractionLis
 # 
 # \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94BondStretchingGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
@@ -890,7 +902,9 @@ def calcMMFF94ElectrostaticEnergy(ia_list: MMFF94ElectrostaticInteractionList, c
 # \param de_const The dielectric constant \f$ D \f$.
 # \param dist_expo The exponent \f$ n \f$.
 # 
-# \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
+# \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94ElectrostaticEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
 
@@ -916,7 +930,9 @@ def calcMMFF94ElectrostaticEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vect
 # \param de_const The dielectric constant \f$ D \f$.
 # \param dist_expo The exponent \f$ n \f$.
 # 
-# \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
+# \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94ElectrostaticEnergy(r_ij: float, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
 
@@ -978,7 +994,9 @@ def calcMMFF94ElectrostaticGradient(ia_list: MMFF94ElectrostaticInteractionList,
 # 
 # \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94ElectrostaticGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
 
@@ -1015,7 +1033,9 @@ def calcMMFF94OutOfPlaneBendingEnergy(ia_list: MMFF94OutOfPlaneBendingInteractio
 # \param oop_atom_pos The position of the out-of-plane atom <em>l</em>.
 # \param force_const The out-of-plane bending force constant \f$ koop_{IJK \colon L} \f$.
 # 
-# \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
+# \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, force_const: float) -> float: pass
 
@@ -1035,7 +1055,9 @@ def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_po
 # \param r_jl The length of the bond between atom <em>j</em> and atom <em>l</em>.
 # \param force_const The out-of-plane bending force constant \f$ koop_{IJK \colon L} \f$.
 # 
-# \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
+# \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, r_jl: float, force_const: float) -> float: pass
 
@@ -1094,7 +1116,9 @@ def calcMMFF94OutOfPlaneBendingGradient(ia_list: MMFF94OutOfPlaneBendingInteract
 # 
 # \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94OutOfPlaneBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, oop_atom_grad: Math.Vector3D, force_const: float) -> float: pass
 
@@ -1141,7 +1165,9 @@ def calcMMFF94StretchBendEnergy(ia_list: MMFF94StretchBendInteractionList, coord
 # \param ref_length1 The reference bond length \f$ r_{IJ}^0 \f$.
 # \param ref_length2 The reference bond length \f$ r_{KJ}^0 \f$.
 # 
-# \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
+# \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94StretchBendEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
@@ -1172,7 +1198,9 @@ def calcMMFF94StretchBendEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Mat
 # \param ref_length1 The reference bond length \f$ r_{IJ}^0 \f$.
 # \param ref_length2 The reference bond length \f$ r_{KJ}^0 \f$.
 # 
-# \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
+# \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94StretchBendEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
@@ -1239,7 +1267,9 @@ def calcMMFF94StretchBendGradient(ia_list: MMFF94StretchBendInteractionList, coo
 # 
 # \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94StretchBendGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
@@ -1278,7 +1308,9 @@ def calcMMFF94TorsionEnergy(ia_list: MMFF94TorsionInteractionList, coords: Math.
 # \param tor_param2 The torsion parameter \f$ V_2 \f$.
 # \param tor_param3 The torsion parameter \f$ V_3 \f$.
 # 
-# \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$.
+# \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94TorsionEnergy(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
 
@@ -1338,7 +1370,9 @@ def calcMMFF94TorsionGradient(ia_list: MMFF94TorsionInteractionList, coords: Mat
 # 
 # \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94TorsionGradient(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom1_grad: Math.Vector3D, ctr_atom2_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
 
@@ -1382,7 +1416,9 @@ def calcMMFF94VanDerWaalsEnergy(ia_list: MMFF94VanDerWaalsInteractionList, coord
 # \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
 # \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
 # 
-# \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+# \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94VanDerWaalsEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
 
@@ -1407,7 +1443,9 @@ def calcMMFF94VanDerWaalsEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector
 # \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
 # \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
 # 
-# \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+# \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$. 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94VanDerWaalsEnergy(r_ij: float, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
 
@@ -1468,7 +1506,9 @@ def calcMMFF94VanDerWaalsGradient(ia_list: MMFF94VanDerWaalsInteractionList, coo
 # 
 # \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \see [\ref MMFF94]
 # 
 def calcMMFF94VanDerWaalsGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
 

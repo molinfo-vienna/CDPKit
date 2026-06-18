@@ -22,6 +22,8 @@
 ##
 # \brief Data structure for the storage and lookup of heavy-to-hydrogen symbolic MMFF94 atom type mappings.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
 
     ##

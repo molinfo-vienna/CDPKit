@@ -22,6 +22,8 @@
 ##
 # \brief Stores parameters for a single MMFF94 bond-stretching interaction between two bonded atoms.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94BondStretchingInteraction(Boost.Python.instance):
 
     ##

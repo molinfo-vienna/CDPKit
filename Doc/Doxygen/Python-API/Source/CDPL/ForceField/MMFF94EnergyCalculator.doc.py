@@ -24,6 +24,8 @@
 # 
 # The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions for a supplied set of atom 3D coordinates. The per-component energies are retained and made available via the dedicated accessors, the calculated sum is returned by __call__() and getTotalEnergy().
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94EnergyCalculator(Boost.Python.instance):
 
     ##

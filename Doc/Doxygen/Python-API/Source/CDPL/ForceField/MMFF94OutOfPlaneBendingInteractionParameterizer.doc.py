@@ -24,6 +24,8 @@
 # 
 # For every atom <em>j</em> with exactly three neighbors that is a trigonal center (per the MMFF94 atom type properties) the parameterizer generates three out-of-plane parameter sets - one for each permutation of the three neighbors as the out-of-plane atom <em>l</em> with the remaining two as in-plane terminal atoms. The required out-of-plane force constants are taken from the parameter table, falling back through the primary-to-parameter atom type map when no exact entry is available.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
 
     ##

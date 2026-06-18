@@ -40,6 +40,7 @@ namespace CDPL
 
         /**
          * \brief Stores parameters for a single MMFF94 torsion interaction over an atom quadruplet \e i-\e j-\e k-\e l.
+         * \see [\ref MMFF94]
          */
         class MMFF94TorsionInteraction
         {

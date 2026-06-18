@@ -95,6 +95,8 @@ namespace CDPL
          * topological distance calculation, then dispatches to the seven per-interaction
          * <em>MMFF94*InteractionParameterizer</em> members and stores the resulting interaction parameter records in the
          * supplied ForceField::MMFF94InteractionData object.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94InteractionParameterizer
         {

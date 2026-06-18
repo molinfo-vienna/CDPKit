@@ -49,6 +49,7 @@ namespace CDPL
 
         /**
          * \brief Data structure for the storage and lookup of MMFF94 out-of-plane bending interaction force constants.
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingParameterTable
         {

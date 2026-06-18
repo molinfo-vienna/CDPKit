@@ -53,6 +53,8 @@ namespace CDPL
          * Each entry provides the corresponding atomic number, the standard neighbour count and valence,
          * and flags describing pi lone pair character, aromaticity, linear bond angle geometry, and the
          * ability to form multi bond or single bond patterns.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94AtomTypePropertyTable
         {

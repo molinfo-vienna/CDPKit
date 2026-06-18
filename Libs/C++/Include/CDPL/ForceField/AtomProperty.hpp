@@ -73,7 +73,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the numeric UFF atom type (see namespace ForceField::UFFAtomType).
-             *
+             * \see [\ref UFF]
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_FORCEFIELD_API const Base::LookupKey UFF_TYPE;

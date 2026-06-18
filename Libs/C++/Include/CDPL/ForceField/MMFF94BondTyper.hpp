@@ -54,6 +54,8 @@ namespace CDPL
          * atoms whose MMFF94 atom type properties carry an \c sbmb flag, or when it connects two atoms that
          * belong to two different aromatic rings (as in the central C-C bond of biphenyl). All other bonds
          * receive the standard type index \e 0.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94BondTyper
         {

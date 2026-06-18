@@ -40,6 +40,7 @@ namespace CDPL
 
         /**
          * \brief Stores paramters for a single MMFF94 stretch-bend coupling interaction.
+         * \see [\ref MMFF94]
          */
         class MMFF94StretchBendInteraction
         {

@@ -52,6 +52,8 @@ namespace CDPL
          *
          * The PTE row of an atom is the row index in the periodic table of the elements. Two directional force constants
          * are stored per entry (\c IJK and \c KJI) — see ForceFIeld::MMFF94StretchBendParameterTable for the coupling semantics.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94DefaultStretchBendParameterTable
         {

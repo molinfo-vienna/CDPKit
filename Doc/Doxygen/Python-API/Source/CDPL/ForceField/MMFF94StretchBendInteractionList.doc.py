@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Data structure for the storage of MMFF94 stretch-bend coupling interaction parameter set records.
+# \brief Data structure for the storage of MMFF94 stretch-bend coupling interaction parameter records.
+# 
+# \see [\ref MMFF94]
 # 
 class MMFF94StretchBendInteractionList(Boost.Python.instance):
 

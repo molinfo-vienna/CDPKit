@@ -62,6 +62,8 @@ namespace CDPL
          * and per-bond charge-increment contributions according to the MMFF94 parameterization.
          * Parameter tables and atom-/bond-typing functions can be customized via the corresponding
          * setter methods; default tables and typing functions match the standard MMFF94 reference.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94ChargeCalculator
         {

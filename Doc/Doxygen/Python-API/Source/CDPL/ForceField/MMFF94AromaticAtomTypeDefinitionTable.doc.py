@@ -24,6 +24,8 @@
 # 
 # After the initial pattern-based typing has produced provisional atom types, this table is consulted to upgrade aromatic-ring atoms to their proper MMFF94 aromatic types based on atomic number, ring size, distance to the next heteroatom in the ring, and special-case flags for imidazolium-like cations and 5-ring anions.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
 
     ##

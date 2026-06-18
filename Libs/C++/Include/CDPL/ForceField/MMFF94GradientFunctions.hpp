@@ -112,11 +112,11 @@ namespace CDPL
          * \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType calcMMFF94BondStretchingGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
                                                    const ValueType& force_const, const ValueType& ref_length);
-
 
         /**
          * \brief Sums the MMFF94 angle-bending interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
@@ -194,12 +194,12 @@ namespace CDPL
          * \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType calcMMFF94AngleBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                  GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad, bool linear,
                                                  const ValueType& force_const, const ValueType& ref_angle);
-
 
         /**
          * \brief Sums the MMFF94 stretch-bend coupling interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
@@ -277,13 +277,13 @@ namespace CDPL
          * \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType
         calcMMFF94StretchBendGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, GradVec& term_atom1_grad,
                                       GradVec& ctr_atom_grad, GradVec& term_atom2_grad, const ValueType& ijk_force_const, const ValueType& kji_force_const,
                                       const ValueType& ref_angle, const ValueType& ref_length1, const ValueType& ref_length2);
-
 
         /**
          * \brief Sums the MMFF94 out-of-plane bending interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
@@ -349,12 +349,12 @@ namespace CDPL
          * \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType calcMMFF94OutOfPlaneBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                       const CoordsVec& oop_atom_pos, GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad,
                                                       GradVec& oop_atom_grad, const ValueType& force_const);
-
 
         /**
          * \brief Sums the MMFF94 torsion interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
@@ -422,12 +422,12 @@ namespace CDPL
          * \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType calcMMFF94TorsionGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos,
                                             const CoordsVec& term_atom2_pos, GradVec& term_atom1_grad, GradVec& ctr_atom1_grad, GradVec& ctr_atom2_grad,
                                             GradVec& term_atom2_grad, const ValueType& tor_param1, const ValueType& tor_param2, const ValueType& tor_param3);
-
 
         /**
          * \brief Sums the MMFF94 electrostatic interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
@@ -497,12 +497,12 @@ namespace CDPL
          * \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType calcMMFF94ElectrostaticGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
                                                   const ValueType& atom1_chg, const ValueType& atom2_chg, const ValueType& scale_fact,
                                                   const ValueType& de_const, const ValueType& dist_expo);
-
 
         /**
          * \brief Sums the MMFF94 Van der Waals interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
@@ -531,11 +531,6 @@ namespace CDPL
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94VanDerWaalsGradient(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords, GradVector& grad);
-        /*
-         * dEvdwij/dVi = dEvdwij/dRij * dRij/dVi
-         * dEvdwij/dRij = -R*IJ^7 * eIJ / (Rij + 0.07 * R*IJ)^8 / (Rij^7 + 0.12 * R*IJ^7)^2 * 
-         *               (-22.48094067 * Rij^14 + 19.78322779 * Rij^7 * R*IJ^7 + 0.8812528743 * Rij^6 * R*IJ^8 + 1.186993667 * R*IJ^14)
-         */
 
         /**
          * \brief Calculates the Van der Waals interaction energy gradient \f$ \nabla E_{vdW_{ij}} \f$ for the atom pair \e i-j.
@@ -586,6 +581,7 @@ namespace CDPL
          * \return The calculated Van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \see [\ref MMFF94]
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,

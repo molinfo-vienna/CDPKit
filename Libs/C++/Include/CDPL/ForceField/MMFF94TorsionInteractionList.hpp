@@ -40,7 +40,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Data structure for the storage of MMFF94 torsion interaction parameter set records.
+         * \brief Data structure for the storage of MMFF94 torsion interaction parameter records.
+         * \see [\ref MMFF94]
          */
         typedef Util::Array<MMFF94TorsionInteraction> MMFF94TorsionInteractionList;
     }

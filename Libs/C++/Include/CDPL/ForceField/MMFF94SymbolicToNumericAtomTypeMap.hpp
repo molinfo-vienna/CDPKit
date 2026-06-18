@@ -46,6 +46,7 @@ namespace CDPL
 
         /**
          * \brief Lookup table mapping each symbolic MMFF94 atom type to its corresponding numeric MMFF94 atom type.
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94SymbolicToNumericAtomTypeMap
         {

@@ -22,6 +22,8 @@
 ##
 # \brief Lookup table mapping each symbolic MMFF94 atom type to its corresponding numeric MMFF94 atom type.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
 
     ##

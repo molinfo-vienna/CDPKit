@@ -22,6 +22,8 @@
 ##
 # \brief Data structure for the storage and lookup of MMFF94 bond-stretching interaction parameters.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94BondStretchingParameterTable(Boost.Python.instance):
 
     ##

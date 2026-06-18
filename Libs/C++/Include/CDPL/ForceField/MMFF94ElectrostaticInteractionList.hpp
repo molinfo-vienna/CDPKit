@@ -40,7 +40,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Data structure for the storage of MMFF94 electrostatic interaction parameter set records.
+         * \brief Data structure for the storage of MMFF94 electrostatic interaction parameter records.
+         * \see [\ref MMFF94]
          */
         typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionList;
     }

@@ -53,6 +53,7 @@ namespace CDPL
         /**
          * \brief Implements the extraction of all rings in the SSSR of a molecular graph that 
          *        are considered aromatic according to the MMFF94 aromaticity model.
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94AromaticSSSRSubset : public Chem::FragmentList
         {

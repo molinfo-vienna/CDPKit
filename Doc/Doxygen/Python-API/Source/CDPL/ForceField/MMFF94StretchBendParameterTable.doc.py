@@ -24,6 +24,8 @@
 # 
 # Two directional force constants are stored per entry: <tt>IJK</tt> couples the bond <em>i-j</em> to the angle <em>i-j-k</em>, and <tt>KJI</tt> couples the bond <em>j-k</em> to the same angle.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94StretchBendParameterTable(Boost.Python.instance):
 
     ##

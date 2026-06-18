@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Data structure for the storage of MMFF94 electrostatic interaction parameter set records.
+# \brief Data structure for the storage of MMFF94 electrostatic interaction parameter records.
+# 
+# \see [\ref MMFF94]
 # 
 class MMFF94ElectrostaticInteractionList(Boost.Python.instance):
 

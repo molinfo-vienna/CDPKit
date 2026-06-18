@@ -40,6 +40,7 @@ namespace CDPL
 
         /**
          * \brief Stores parameters for a single MMFF94 out-of-plane bending interaction at a trigonal center.
+         * \see [\ref MMFF94]
          */
         class MMFF94OutOfPlaneBendingInteraction
         {

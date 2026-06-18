@@ -24,6 +24,8 @@
 # 
 # The constructor installs default parameter tables and atom-/bond-typing helpers for the selected force field variant (see namespace ForceField.MMFF94ParameterSet). Every table, map and filter function can be overridden via the corresponding setter methods. Calling parameterize() runs atom typing, bond typing, formal/partial charge assignment, aromaticity perception and topological distance calculation, then dispatches to the seven per-interaction <em>MMFF94*InteractionParameterizer</em> members and stores the resulting interaction parameter records in the supplied ForceField.MMFF94InteractionData object.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94InteractionParameterizer(Boost.Python.instance):
 
     ##

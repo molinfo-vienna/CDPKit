@@ -24,6 +24,8 @@
 # 
 # For every pair of atoms that is at least 1,4-separated (1,4-pairs use a scaling factor of <em>0.75</em>; 1,5 and farther pairs use <em>1.0</em>) the parameterizer emits an MMFF94ElectrostaticInteraction instance storing the partial charges, the configured dielectric constant and the configured distance exponent.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
 
     ##

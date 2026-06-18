@@ -24,6 +24,8 @@
 # 
 # Typing is performed in four stages: provisional symbolic types are assigned by <em>SMARTS</em> pattern matching, aromatic atom types are then reassigned according to the MMFF94 aromatic-ring rules, hydrogen atoms receive types derived from their heavy atom neighbors, and finally the symbolic types are translated to the corresponding numeric type indices used by the rest of the MMFF94 parameter tables.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94AtomTyper(Boost.Python.instance):
 
     ##

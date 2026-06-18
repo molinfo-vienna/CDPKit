@@ -22,6 +22,8 @@
 ##
 # \brief Stores parameters for a single MMFF94 angle-bending interaction defined over an atom triplet.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94AngleBendingInteraction(Boost.Python.instance):
 
     ##

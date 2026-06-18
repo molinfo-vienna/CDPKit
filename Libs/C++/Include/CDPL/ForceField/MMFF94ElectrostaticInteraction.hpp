@@ -40,6 +40,7 @@ namespace CDPL
 
         /**
          * \brief Stores parameters for a single MMFF94 electrostatic interaction between two non-bonded atoms.
+         * \see [\ref MMFF94]
          */
         class MMFF94ElectrostaticInteraction
         {

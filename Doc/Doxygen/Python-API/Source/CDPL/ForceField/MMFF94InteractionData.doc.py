@@ -20,9 +20,11 @@
 #
 
 ##
-# \brief Container holding the full set of MMFF94 interaction parameters for a molecular graph.
+# \brief Container holding the full set of MMFF94 interaction parameter records for a molecular graph.
 # 
 # The class aggregates the seven per-interaction lists that together describe the energy expression of the MMFF94 force field (bond stretching, angle bending, stretch-bend coupling, out-of-plane bending, torsion, electrostatic and Van der Waals interactions). Instances are typically produced by ForceField.MMFF94InteractionParameterizer and consumed by ForceField.MMFF94EnergyCalculator or ForceField.MMFF94GradientCalculator.
+# 
+# \see [\ref MMFF94]
 # 
 class MMFF94InteractionData(Boost.Python.instance):
 

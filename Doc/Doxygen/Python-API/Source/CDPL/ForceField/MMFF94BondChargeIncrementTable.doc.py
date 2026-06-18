@@ -24,6 +24,8 @@
 # 
 # The charge increment is applied to atom 1 (and its negative to atom 2) when partitioning partial atomic charges along bonded pairs in the MMFF94 charge model.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94BondChargeIncrementTable(Boost.Python.instance):
 
     ##

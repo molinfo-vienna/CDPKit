@@ -62,6 +62,8 @@ namespace CDPL
          * three neighbors as the out-of-plane atom \e l with the remaining two as in-plane terminal atoms.
          * The required out-of-plane force constants are taken from the parameter table, falling back through
          * the primary-to-parameter atom type map when no exact entry is available.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteractionParameterizer
         {

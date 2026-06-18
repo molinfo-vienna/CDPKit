@@ -24,6 +24,8 @@
 # 
 # For every non-filtered atom triplet (<em>i-<em>j-<em>k</em>)</em> consisting</em> of a central atom <em>j</em> and two of its neighbors the parameterizer determines the MMFF94 angle type index (0-8, accounting for ring membership and double bond character), looks up the matching MMFF94 angle-bending parameters, falls back to the empirical rule when no exact entry is found and emits an MMFF94AngleBendingInteraction instance.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94AngleBendingInteractionParameterizer(Boost.Python.instance):
 
     ##

@@ -41,6 +41,7 @@ namespace CDPL
 
         /**
          * \brief Stores parameters for a single MMFF94 Van der Waals interaction between two non-bonded atoms.
+         * \see [\ref MMFF94]
          */
         class MMFF94VanDerWaalsInteraction
         {

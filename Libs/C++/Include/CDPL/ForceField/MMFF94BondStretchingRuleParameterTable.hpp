@@ -49,6 +49,7 @@ namespace CDPL
 
         /**
          * \brief Data structure for the storage and lookup of MMFF94 bond-stretching interaction fallback parameters.
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94BondStretchingRuleParameterTable
         {

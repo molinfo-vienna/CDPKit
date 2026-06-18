@@ -52,6 +52,8 @@ namespace CDPL
          *
          * In addition to the per-atom type entries, the table also stores the five global scalar parameters
          * (exponent, B, beta, DARAD, DAEPS) used by the buffered 14-7 MMFF94 Van der Waals energy expression.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94VanDerWaalsParameterTable
         {

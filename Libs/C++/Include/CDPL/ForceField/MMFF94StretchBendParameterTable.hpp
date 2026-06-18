@@ -52,6 +52,8 @@ namespace CDPL
          *
          * Two directional force constants are stored per entry: \c IJK couples the bond <em>i-j</em> to the angle
          * <em>i-j-k</em>, and \c KJI couples the bond <em>j-k</em> to the same angle.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94StretchBendParameterTable
         {

@@ -56,6 +56,8 @@ namespace CDPL
          * For every pair of atoms that is at least 1,4-separated (1,4-pairs use a scaling factor of \e 0.75; 1,5
          * and farther pairs use \e 1.0) the parameterizer emits an MMFF94ElectrostaticInteraction instance storing
          * the partial charges, the configured dielectric constant and the configured distance exponent.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteractionParameterizer
         {

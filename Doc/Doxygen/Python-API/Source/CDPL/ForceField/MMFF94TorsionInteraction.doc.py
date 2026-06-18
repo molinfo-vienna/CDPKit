@@ -22,6 +22,8 @@
 ##
 # \brief Stores parameters for a single MMFF94 torsion interaction over an atom quadruplet <em>i-<em>j-<em>k-<em>l</em>.</em> </em> </em>
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94TorsionInteraction(Boost.Python.instance):
 
     ##

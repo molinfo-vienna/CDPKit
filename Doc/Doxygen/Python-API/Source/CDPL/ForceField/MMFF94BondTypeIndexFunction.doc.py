@@ -22,6 +22,8 @@
 ##
 # \brief Generic wrapper class used to store a user-defined MMFF94 bond type index retrieval function.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94BondTypeIndexFunction(Boost.Python.instance):
 
     ##

@@ -51,6 +51,8 @@ namespace CDPL
          *
          * Each entry pairs a pattern with the symbolic MMFF94 type to assign on a match. Patterns marked as
          * fallback are only considered after no non-fallback pattern matches.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94SymbolicAtomTypePatternTable
         {

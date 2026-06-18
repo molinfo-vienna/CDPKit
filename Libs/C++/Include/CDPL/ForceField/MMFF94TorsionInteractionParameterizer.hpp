@@ -62,6 +62,8 @@ namespace CDPL
          * and one neighbor each on \e j and \e k the parameterizer looks up the matching MMFF94 torsion type-specific
          * parameters \f$ V_1, V_2, V_3 \f$ from the supplied parameter table, falling back to the primary-to-parameter
          * atom type map for atoms with no exact parameter entry, and emits an MMFF94TorsionInteraction instance.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94TorsionInteractionParameterizer
         {

@@ -24,6 +24,8 @@
 # 
 # For every non-filtered atom quadruplet (<em>i-<em>j-<em>k-<em>l</em>)</em> consisting</em> of</em> a central bond <em>j-<em>k</em> and</em> one neighbor each on <em>j</em> and <em>k</em> the parameterizer looks up the matching MMFF94 torsion type-specific parameters \f$ V_1, V_2, V_3 \f$ from the supplied parameter table, falling back to the primary-to-parameter atom type map for atoms with no exact parameter entry, and emits an MMFF94TorsionInteraction instance.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
 
     ##

@@ -22,6 +22,8 @@
 ##
 # \brief Generic wrapper class used to store a user-defined numeric MMFF94 atom type retrieval function.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94NumericAtomTypeFunction(Boost.Python.instance):
 
     ##

@@ -57,6 +57,8 @@ namespace CDPL
          * For every pair of atoms separated by at least three bonds the parameterizer looks up the per-atom type
          * Van der Waals parameters and the donor/acceptor classification from the supplied parameter table,
          * applies the MMFF94 combining rules and emits an MMFF94VanDerWaalsInteraction instance.
+         *
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
         {

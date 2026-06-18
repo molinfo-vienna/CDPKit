@@ -22,6 +22,8 @@
 ##
 # \brief Generic wrapper class used to store a user-defined MMFF94 ring set retrieval function.
 # 
+# \see [\ref MMFF94]
+# 
 class MMFF94RingSetFunction(Boost.Python.instance):
 
     ##

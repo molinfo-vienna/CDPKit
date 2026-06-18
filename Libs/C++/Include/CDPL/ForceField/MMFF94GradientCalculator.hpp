@@ -55,6 +55,7 @@ namespace CDPL
          * contributions are zeroed, freezing them during an energy minimization run.
          *
          * \tparam ValueType The floating-point value type used to represent the computed energies and gradient vector elements.
+         * \see [\ref MMFF94]
          */
         template <typename ValueType>
         class MMFF94GradientCalculator

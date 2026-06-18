@@ -52,26 +52,31 @@ namespace CDPL
 
         /**
          * \brief Generic wrapper class used to store a user-defined numeric MMFF94 atom type retrieval function.
+         * \see [\ref MMFF94]
          */
         typedef std::function<unsigned int(const Chem::Atom&)> MMFF94NumericAtomTypeFunction;
 
         /**
          * \brief Generic wrapper class used to store a user-defined symbolic MMFF94 atom type retrieval function.
+         * \see [\ref MMFF94]
          */
         typedef std::function<const std::string&(const Chem::Atom&)> MMFF94SymbolicAtomTypeFunction;
 
         /**
          * \brief Generic wrapper class used to store a user-defined MMFF94 partial atom charge retrieval function.
+         * \see [\ref MMFF94]
          */
         typedef std::function<double(const Chem::Atom&)> MMFF94AtomChargeFunction;
 
         /**
          * \brief Generic wrapper class used to store a user-defined MMFF94 bond type index retrieval function.
+         * \see [\ref MMFF94]
          */
         typedef std::function<unsigned int(const Chem::Bond&)> MMFF94BondTypeIndexFunction;
 
         /**
          * \brief Generic wrapper class used to store a user-defined MMFF94 ring set retrieval function.
+         * \see [\ref MMFF94]
          */
         typedef std::function<const Chem::FragmentList::SharedPointer&(const Chem::MolecularGraph&)> MMFF94RingSetFunction;
     } // namespace ForceField

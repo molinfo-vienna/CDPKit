@@ -49,6 +49,7 @@ namespace CDPL
         /**
          * \brief Data structure for the storage and lookup of MMFF94 per-atom partial bond charge increment
          *        and formal charge adjustment factors.
+         * \see [\ref MMFF94]
          */
         class CDPL_FORCEFIELD_API MMFF94PartialBondChargeIncrementTable
         {
