@@ -47,9 +47,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum hydrophobic feature pair distance in &Aring;ngstrom. */
+            /**
+             * \brief Default minimum hydrophobic feature pair distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_DISTANCE = 2.0;
-            /** \brief Default maximum hydrophobic feature pair distance in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum hydrophobic feature pair distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_DISTANCE = 6.0;
 
             /**

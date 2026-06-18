@@ -88,78 +88,182 @@ namespace CDPL
             enum ElementIndex
             {
 
-                /** \brief Positive-ionizable feature count (ligand). */
+                /**
+                 * \brief Positive-ionizable feature count (ligand).
+                 */
                 PI_COUNT,
-                /** \brief Negative-ionizable feature count (ligand). */
+
+                /**
+                 * \brief Negative-ionizable feature count (ligand).
+                 */
                 NI_COUNT,
-                /** \brief Aromatic feature count (ligand). */
+
+                /**
+                 * \brief Aromatic feature count (ligand).
+                 */
                 AR_COUNT,
-                /** \brief Hydrophobic feature count (ligand). */
+
+                /**
+                 * \brief Hydrophobic feature count (ligand).
+                 */
                 H_COUNT,
-                /** \brief Hydrogen-bond donor feature count (ligand). */
+
+                /**
+                 * \brief Hydrogen-bond donor feature count (ligand).
+                 */
                 HBD_COUNT,
-                /** \brief Hydrogen-bond acceptor feature count (ligand). */
+
+                /**
+                 * \brief Hydrogen-bond acceptor feature count (ligand).
+                 */
                 HBA_COUNT,
-                /** \brief Halogen-bond donor feature count (ligand). */
+
+                /**
+                 * \brief Halogen-bond donor feature count (ligand).
+                 */
                 XBD_COUNT,
-                /** \brief Halogen-bond acceptor feature count (ligand). */
+
+                /**
+                 * \brief Halogen-bond acceptor feature count (ligand).
+                 */
                 XBA_COUNT,
-                /** \brief Heavy atom count (ligand). */
+
+                /**
+                 * \brief Heavy atom count (ligand).
+                 */
                 HVY_ATOM_COUNT,
-                /** \brief Rotatable bond count (ligand). */
+
+                /**
+                 * \brief Rotatable bond count (ligand).
+                 */
                 ROT_BOND_COUNT,
-                /** \brief Total computed hydrophobicity (ligand). */
+
+                /**
+                 * \brief Total computed hydrophobicity (ligand).
+                 */
                 TOTAL_HYD,
-                /** \brief Computed \f$ \log P \f$ (ligand). */
+
+                /**
+                 * \brief Computed \f$ \log P \f$ (ligand).
+                 */
                 LOGP,
-                /** \brief Computed topological polar surface area (ligand). */
+
+                /**
+                 * \brief Computed topological polar surface area (ligand).
+                 */
                 TPSA,
-                /** \brief Sum of HBA occupancy scores against the target environment. */
+
+                /**
+                 * \brief Sum of HBA occupancy scores against the target environment.
+                 */
                 ENV_HBA_OCC_SUM,
-                /** \brief Maximum HBA occupancy score against the target environment. */
+
+                /**
+                 * \brief Maximum HBA occupancy score against the target environment.
+                 */
                 ENV_HBA_OCC_MAX,
-                /** \brief Sum of HBD occupancy scores against the target environment. */
+
+                /**
+                 * \brief Sum of HBD occupancy scores against the target environment.
+                 */
                 ENV_HBD_OCC_SUM,
-                /** \brief Maximum HBD occupancy score against the target environment. */
+
+                /**
+                 * \brief Maximum HBD occupancy score against the target environment.
+                 */
                 ENV_HBD_OCC_MAX,
-                /** \brief Sum of (ligand positive-ionizable &rarr; target aromatic) interaction scores. */
+
+                /**
+                 * \brief Sum of (ligand positive-ionizable &rarr; target aromatic) interaction scores.
+                 */
                 PI_AR_SCORE_SUM,
-                /** \brief Maximum (ligand positive-ionizable &rarr; target aromatic) interaction score. */
+
+                /**
+                 * \brief Maximum (ligand positive-ionizable &rarr; target aromatic) interaction score.
+                 */
                 PI_AR_SCORE_MAX,
-                /** \brief Sum of (ligand aromatic &rarr; target positive-ionizable) interaction scores. */
+
+                /**
+                 * \brief Sum of (ligand aromatic &rarr; target positive-ionizable) interaction scores.
+                 */
                 AR_PI_SCORE_SUM,
-                /** \brief Maximum (ligand aromatic &rarr; target positive-ionizable) interaction score. */
+
+                /**
+                 * \brief Maximum (ligand aromatic &rarr; target positive-ionizable) interaction score.
+                 */
                 AR_PI_SCORE_MAX,
-                /** \brief Sum of hydrophobic-hydrophobic interaction scores. */
+
+                /**
+                 * \brief Sum of hydrophobic-hydrophobic interaction scores.
+                 */
                 H_H_SCORE_SUM,
-                /** \brief Maximum hydrophobic-hydrophobic interaction score. */
+
+                /**
+                 * \brief Maximum hydrophobic-hydrophobic interaction score.
+                 */
                 H_H_SCORE_MAX,
-                /** \brief Sum of aromatic-aromatic interaction scores. */
+
+                /**
+                 * \brief Sum of aromatic-aromatic interaction scores.
+                 */
                 AR_AR_SCORE_SUM,
-                /** \brief Maximum aromatic-aromatic interaction score. */
+
+                /**
+                 * \brief Maximum aromatic-aromatic interaction score.
+                 */
                 AR_AR_SCORE_MAX,
-                /** \brief Sum of (ligand HBD &rarr; target HBA) interaction scores. */
+
+                /**
+                 * \brief Sum of (ligand HBD &rarr; target HBA) interaction scores.
+                 */
                 HBD_HBA_SCORE_SUM,
-                /** \brief Maximum (ligand HBD &rarr; target HBA) interaction score. */
+
+                /**
+                 * \brief Maximum (ligand HBD &rarr; target HBA) interaction score.
+                 */
                 HBD_HBA_SCORE_MAX,
-                /** \brief Sum of (ligand HBA &rarr; target HBD) interaction scores. */
+
+                /**
+                 * \brief Sum of (ligand HBA &rarr; target HBD) interaction scores.
+                 */
                 HBA_HBD_SCORE_SUM,
-                /** \brief Maximum (ligand HBA &rarr; target HBD) interaction score. */
+
+                /**
+                 * \brief Maximum (ligand HBA &rarr; target HBD) interaction score.
+                 */
                 HBA_HBD_SCORE_MAX,
-                /** \brief Sum of (ligand XBD &rarr; target XBA) interaction scores. */
+
+                /**
+                 * \brief Sum of (ligand XBD &rarr; target XBA) interaction scores.
+                 */
                 XBD_XBA_SCORE_SUM,
-                /** \brief Maximum (ligand XBD &rarr; target XBA) interaction score. */
+
+                /**
+                 * \brief Maximum (ligand XBD &rarr; target XBA) interaction score.
+                 */
                 XBD_XBA_SCORE_MAX,
-                /** \brief Electrostatic interaction energy. */
+
+                /**
+                 * \brief Electrostatic interaction energy.
+                 */
                 ES_ENERGY,
-                /** \brief Electrostatic interaction energy with squared atom-pair distance dependency. */
+
+                /**
+                 * \brief Electrostatic interaction energy with squared atom-pair distance dependency.
+                 */
                 ES_ENERGY_SQRD_DIST,
-                /** \brief Attractive part of the Van der Waals interaction energy. */
+
+                /**
+                 * \brief Attractive part of the Van der Waals interaction energy.
+                 */
                 VDW_ENERGY_ATT,
-                /** \brief Repulsive part of the Van der Waals interaction energy. */
+
+                /**
+                 * \brief Repulsive part of the Van der Waals interaction energy.
+                 */
                 VDW_ENERGY_REP
             };
-
+            
             /**
              * \brief Constructs the \c %GRAILDescriptorCalculator instance.
              */

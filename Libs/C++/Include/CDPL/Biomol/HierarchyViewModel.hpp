@@ -62,7 +62,9 @@ namespace CDPL
             typedef std::vector<ChainPtr>               ChainList;
 
           public:
-            /** \brief A constant iterator over the contained chains. */
+            /**
+             * \brief A constant iterator over the contained chains.
+             */
             typedef boost::indirect_iterator<ChainList::const_iterator, const HierarchyViewChain> ConstChainIterator;
 
             /**

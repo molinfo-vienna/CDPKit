@@ -38,7 +38,9 @@ namespace CDPL
     namespace Shape
     {
 
-        /** \brief Functor wrapping Shape::calcTotalOverlapTanimotoScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcTotalOverlapTanimotoScore().
+         */
         class TotalOverlapTanimotoScore
         {
 
@@ -54,7 +56,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Functor wrapping Shape::calcShapeTanimotoScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcShapeTanimotoScore().
+         */
         class ShapeTanimotoScore
         {
 
@@ -70,7 +74,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Functor wrapping Shape::calcColorTanimotoScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcColorTanimotoScore().
+         */
         class ColorTanimotoScore
         {
 
@@ -86,7 +92,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Functor wrapping Shape::calcTanimotoComboScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcTanimotoComboScore().
+         */
         class TanimotoComboScore
         {
 
@@ -102,7 +110,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Functor wrapping Shape::calcTotalOverlapTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcTotalOverlapTverskyScore().
+         */
         class TotalOverlapTverskyScore
         {
 
@@ -130,7 +140,9 @@ namespace CDPL
             double beta;
         };
 
-        /** \brief Functor wrapping Shape::calcShapeTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcShapeTverskyScore().
+         */
         class ShapeTverskyScore
         {
 
@@ -158,7 +170,9 @@ namespace CDPL
             double beta;
         };
 
-        /** \brief Functor wrapping Shape::calcColorTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcColorTverskyScore().
+         */
         class ColorTverskyScore
         {
 
@@ -186,7 +200,9 @@ namespace CDPL
             double beta;
         };
 
-        /** \brief Functor wrapping Shape::calcTverskyComboScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcTverskyComboScore().
+         */
         class TverskyComboScore
         {
 
@@ -214,7 +230,9 @@ namespace CDPL
             double beta;
         };
 
-        /** \brief Functor wrapping Shape::calcReferenceTotalOverlapTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcReferenceTotalOverlapTverskyScore().
+         */
         class ReferenceTotalOverlapTverskyScore
         {
 
@@ -240,7 +258,9 @@ namespace CDPL
             double alpha;
         };
 
-        /** \brief Functor wrapping Shape::calcReferenceShapeTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcReferenceShapeTverskyScore().
+         */
         class ReferenceShapeTverskyScore
         {
 
@@ -266,7 +286,9 @@ namespace CDPL
             double alpha;
         };
 
-        /** \brief Functor wrapping Shape::calcReferenceColorTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcReferenceColorTverskyScore().
+         */
         class ReferenceColorTverskyScore
         {
 
@@ -292,7 +314,9 @@ namespace CDPL
             double alpha;
         };
 
-        /** \brief Functor wrapping Shape::calcReferenceTverskyComboScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcReferenceTverskyComboScore().
+         */
         class ReferenceTverskyComboScore
         {
 
@@ -318,7 +342,9 @@ namespace CDPL
             double alpha;
         };
 
-        /** \brief Functor wrapping Shape::calcAlignedTotalOverlapTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcAlignedTotalOverlapTverskyScore().
+         */
         class AlignedTotalOverlapTverskyScore
         {
 
@@ -344,7 +370,9 @@ namespace CDPL
             double beta;
         };
 
-        /** \brief Functor wrapping Shape::calcAlignedShapeTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcAlignedShapeTverskyScore().
+         */
         class AlignedShapeTverskyScore
         {
 
@@ -370,7 +398,9 @@ namespace CDPL
             double beta;
         };
 
-        /** \brief Functor wrapping Shape::calcAlignedColorTverskyScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcAlignedColorTverskyScore().
+         */
         class AlignedColorTverskyScore
         {
 
@@ -396,7 +426,9 @@ namespace CDPL
             double beta;
         };
 
-        /** \brief Functor wrapping Shape::calcAlignedTverskyComboScore(). */
+        /**
+         * \brief Functor wrapping Shape::calcAlignedTverskyComboScore().
+         */
         class AlignedTverskyComboScore
         {
 

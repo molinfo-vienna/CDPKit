@@ -71,9 +71,14 @@ namespace CDPL
             typedef std::vector<StructureDataPtr>           StructureDataList;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResonanceStructureGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResonanceStructureGenerator instances.
+             */
             typedef std::shared_ptr<ResonanceStructureGenerator>                                     SharedPointer;
-            /** \brief A constant iterator over the generated resonance-structure records. */
+
+            /**
+             * \brief A constant iterator over the generated resonance-structure records.
+             */
             typedef boost::indirect_iterator<StructureDataList::const_iterator, const StructureData> ConstStructureDataIterator;
 
             /**

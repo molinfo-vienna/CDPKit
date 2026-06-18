@@ -69,22 +69,34 @@ namespace CDPL
             typedef std::vector<Result> ResultList;
 
           public:
-            /** \brief Default gradient norm at which the overlap optimization is stopped. */
+            /**
+             * \brief Default gradient norm at which the overlap optimization is stopped.
+             */
             static constexpr double DEF_OPTIMIZATION_STOP_GRADIENT       = 1.0;
 
-            /** \brief Default maximum number of overlap-optimization iterations. */
+            /**
+             * \brief Default maximum number of overlap-optimization iterations.
+             */
             static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeFunctionAlignment instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeFunctionAlignment instances.
+             */
             typedef std::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
 
-            /** \brief A constant iterator over the alignment results. */
+            /**
+             * \brief A constant iterator over the alignment results.
+             */
             typedef ResultList::const_iterator ConstResultIterator;
 
-            /** \brief Type of the function used to filter color (pharmacophore) features by type. */
+            /**
+             * \brief Type of the function used to filter color (pharmacophore) features by type.
+             */
             typedef GaussianShapeOverlapFunction::ColorFilterFunction ColorFilterFunction;
 
-            /** \brief Type of the function used to decide whether two color features match. */
+            /**
+             * \brief Type of the function used to decide whether two color features match.
+             */
             typedef GaussianShapeOverlapFunction::ColorMatchFunction  ColorMatchFunction;
 
             /**
@@ -155,7 +167,9 @@ namespace CDPL
 
             GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment) = delete;
 
-            /** \brief Destructor. */
+            /**
+             * \brief Destructor.
+             */
             ~GaussianShapeFunctionAlignment();
 
             GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment) = delete;

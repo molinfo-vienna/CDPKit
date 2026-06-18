@@ -45,7 +45,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A static instance providing configuration parameter default values. */
+            /**
+             * \brief A static instance providing configuration parameter default values.
+             */
             static const DGConstraintGeneratorSettings DEFAULT;
 
             /**

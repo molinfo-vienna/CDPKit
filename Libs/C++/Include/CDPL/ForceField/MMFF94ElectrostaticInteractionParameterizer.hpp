@@ -61,14 +61,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default value of the distance exponent in the MMFF94 electrostatic potential (\e 1.0 — Coulomb form). */
+            /**
+             * \brief Default value of the distance exponent in the MMFF94 electrostatic potential (\e 1.0 — Coulomb form).
+             */
             static constexpr double DEF_DISTANCE_EXPONENT     = 1.0;
-            /** \brief Default value of the dielectric constant (\e 1.0 — gas-phase). */
+
+            /**
+             * \brief Default value of the dielectric constant (\e 1.0 — gas-phase).
+             */
             static constexpr double DEF_DIELECTRIC_CONSTANT   = 1.0;
-            /** \brief Convenience constant: dielectric constant of bulk water at room temperature (\e 80.0). */
+
+            /**
+             * \brief Convenience constant: dielectric constant of bulk water at room temperature (\e 80.0).
+             */
             static constexpr double DIELECTRIC_CONSTANT_WATER = 80.0;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94ElectrostaticInteractionParameterizer instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94ElectrostaticInteractionParameterizer instances.
+             */
             typedef std::shared_ptr<MMFF94ElectrostaticInteractionParameterizer> SharedPointer;
 
             /**

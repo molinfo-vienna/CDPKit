@@ -53,9 +53,14 @@ namespace CDPL
         struct GradientVectorTraits
         {
 
-            /** \brief The gradient vector container type. */
+            /**
+             * \brief The gradient vector container type.
+             */
             typedef GV          VectorType;
-            /** \brief The type used to specify gradient vector container element counts. */
+
+            /**
+             * \brief The type used to specify gradient vector container element counts.
+             */
             typedef std::size_t SizeType;
 
             /**
@@ -81,13 +86,24 @@ namespace CDPL
         struct GradientVectorTraits<Math::VectorArray<V> >
         {
 
-            /** \brief The gradient vector container type. */
+            /**
+             * \brief The gradient vector container type.
+             */
             typedef Math::VectorArray<V>          VectorType;
-            /** \brief The gradient vector type stored in the container. */
+
+            /**
+             * \brief The gradient vector type stored in the container.
+             */
             typedef V                             ElementType;
-            /** \brief The value type of the gradient vector components. */
+
+            /**
+             * \brief The value type of the gradient vector components.
+             */
             typedef typename V::ValueType         ValueType;
-            /** \brief The type used to specify gradient vector container element counts. */
+
+            /**
+             * \brief The type used to specify gradient vector container element counts.
+             */
             typedef typename VectorType::SizeType SizeType;
 
             /**
@@ -110,13 +126,24 @@ namespace CDPL
         struct GradientVectorTraits<std::vector<V> >
         {
 
-            /** \brief The gradient vector container type. */
+            /**
+             * \brief The gradient vector container type.
+             */
             typedef std::vector<V>                 VectorType;
-            /** \brief The gradient vector type stored in the container. */
+
+            /**
+             * \brief The gradient vector type stored in the container.
+             */
             typedef V                              ElementType;
-            /** \brief The value type of the gradient vector components. */
+
+            /**
+             * \brief The value type of the gradient vector components.
+             */
             typedef typename V::ValueType          ValueType;
-            /** \brief The type used to specify gradient vector container element counts. */
+
+            /**
+             * \brief The type used to specify gradient vector container element counts.
+             */
             typedef typename VectorType::size_type SizeType;
 
             /**

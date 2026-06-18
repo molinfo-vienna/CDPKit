@@ -50,13 +50,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum H-bond length in &Aring;ngstrom. */
+            /**
+             * \brief Default minimum H-bond length in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_HB_LENGTH = 1.2;
-            /** \brief Default maximum H-bond length in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum H-bond length in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_HB_LENGTH = 2.8;
-            /** \brief Default minimum acceptor-hydrogen-donor angle in degrees. */
+
+            /**
+             * \brief Default minimum acceptor-hydrogen-donor angle in degrees.
+             */
             static constexpr double DEF_MIN_AHD_ANGLE = 150.0;
-            /** \brief Default maximum H-bond direction to acceptor-vector angle in degrees. */
+
+            /**
+             * \brief Default maximum H-bond direction to acceptor-vector angle in degrees.
+             */
             static constexpr double DEF_MAX_ACC_ANGLE = 75.0;
 
             /**
@@ -64,9 +75,14 @@ namespace CDPL
              */
             typedef std::shared_ptr<HBondingInteractionScore> SharedPointer;
 
-            /** \brief Type of the function mapping an H-bond length to its score contribution. */
+            /**
+             * \brief Type of the function mapping an H-bond length to its score contribution.
+             */
             typedef std::function<double(double)> DistanceScoringFunction;
-            /** \brief Type of the function mapping an H-bond geometry angle to its score contribution. */
+
+            /**
+             * \brief Type of the function mapping an H-bond geometry angle to its score contribution.
+             */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**

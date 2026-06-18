@@ -58,10 +58,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default scaling factor applied to Van der Waals radii for the proximity-check pruning. */
+            /**
+             * \brief Default scaling factor applied to Van der Waals radii for the proximity-check pruning.
+             */
             static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.4;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FastGaussianShapeOverlapFunction instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FastGaussianShapeOverlapFunction instances.
+             */
             typedef std::shared_ptr<FastGaussianShapeOverlapFunction> SharedPointer;
 
             /**

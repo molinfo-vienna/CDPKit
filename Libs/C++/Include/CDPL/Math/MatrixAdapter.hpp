@@ -42,7 +42,9 @@ namespace CDPL
         template <typename T>
         class Range;
 
-        /** \brief Tag selecting the lower-triangular view (entries strictly above the diagonal read as zero) for Math::TriangularAdapter. */
+        /**
+         * \brief Tag selecting the lower-triangular view (entries strictly above the diagonal read as zero) for Math::TriangularAdapter.
+         */
         struct Lower
         {
 
@@ -64,7 +66,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Tag selecting the unit-lower-triangular view (zero above the diagonal, one on the diagonal) for Math::TriangularAdapter. */
+        /**
+         * \brief Tag selecting the unit-lower-triangular view (zero above the diagonal, one on the diagonal) for Math::TriangularAdapter.
+         */
         struct UnitLower
         {
 
@@ -89,7 +93,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Tag selecting the upper-triangular view (entries strictly below the diagonal read as zero) for Math::TriangularAdapter. */
+        /**
+         * \brief Tag selecting the upper-triangular view (entries strictly below the diagonal read as zero) for Math::TriangularAdapter.
+         */
         struct Upper
         {
 
@@ -111,7 +117,9 @@ namespace CDPL
             }
         };
 
-        /** \brief Tag selecting the unit-upper-triangular view (zero below the diagonal, one on the diagonal) for Math::TriangularAdapter. */
+        /**
+         * \brief Tag selecting the unit-upper-triangular view (zero below the diagonal, one on the diagonal) for Math::TriangularAdapter.
+         */
         struct UnitUpper
         {
 
@@ -153,31 +161,63 @@ namespace CDPL
             friend struct UnitUpper;
 
           public:
-            /** \brief The wrapped matrix type. */
+            /**
+             * \brief The wrapped matrix type.
+             */
             typedef M                                                        MatrixType;
-            /** \brief The triangular-view selection policy. */
+
+            /**
+             * \brief The triangular-view selection policy.
+             */
             typedef Tri                                                      TriangularType;
-            /** \brief The size type used by the underlying matrix. */
+
+            /**
+             * \brief The size type used by the underlying matrix.
+             */
             typedef typename M::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the underlying matrix. */
+
+            /**
+             * \brief The signed difference type used by the underlying matrix.
+             */
             typedef typename M::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the underlying matrix. */
+
+            /**
+             * \brief The element value type of the underlying matrix.
+             */
             typedef typename M::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element of the underlying matrix. */
+
+            /**
+             * \brief Constant reference type to an element of the underlying matrix.
+             */
             typedef typename M::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped matrix internally (mutable or const flavor). */
+
+            /**
+             * \brief Closure type used to store the wrapped matrix internally (mutable or const flavor).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
-            /** \brief Constant closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this adapter appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this adapter appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
-            /** \brief The Math::Range type used to address sub-ranges. */
+
+            /**
+             * \brief The Math::Range type used to address sub-ranges.
+             */
             typedef Range<SizeType>                                          RangeType;
 
             /**

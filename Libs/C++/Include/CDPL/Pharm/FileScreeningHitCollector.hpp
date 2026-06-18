@@ -56,7 +56,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief Type of the underlying molecular graph data writer. */
+            /**
+             * \brief Type of the underlying molecular graph data writer.
+             */
             typedef Base::DataWriter<Chem::MolecularGraph> MolecularGraphWriter;
 
             /**

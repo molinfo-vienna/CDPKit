@@ -58,13 +58,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default relative threshold for treating two principal moments as equal. */
+            /**
+             * \brief Default relative threshold for treating two principal moments as equal.
+             */
             static constexpr double DEF_SYMMETRY_THRESHOLD          = 0.15;
 
-            /** \brief Default number of random starting transformations. */
+            /**
+             * \brief Default number of random starting transformations.
+             */
             static constexpr std::size_t DEF_NUM_RANDOM_STARTS      = 4;
 
-            /** \brief Default maximum random translation magnitude applied to random starts. */
+            /**
+             * \brief Default maximum random translation magnitude applied to random starts.
+             */
             static constexpr double      DEF_MAX_RANDOM_TRANSLATION = 2.0;
 
             /**

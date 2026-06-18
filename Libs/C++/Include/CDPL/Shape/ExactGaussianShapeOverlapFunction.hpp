@@ -54,10 +54,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ExactGaussianShapeOverlapFunction instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ExactGaussianShapeOverlapFunction instances.
+             */
             typedef std::shared_ptr<ExactGaussianShapeOverlapFunction> SharedPointer;
 
-            /** \brief Constructs the \c %ExactGaussianShapeOverlapFunction instance without associated shape functions. */
+            /**
+             * \brief Constructs the \c %ExactGaussianShapeOverlapFunction instance without associated shape functions.
+             */
             ExactGaussianShapeOverlapFunction();
 
             /**
@@ -74,7 +78,9 @@ namespace CDPL
             ExactGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
                                               const GaussianShapeFunction& ovl_shape_func);
 
-            /** \brief Destructor. */
+            /**
+             * \brief Destructor.
+             */
             ~ExactGaussianShapeOverlapFunction();
 
             /**

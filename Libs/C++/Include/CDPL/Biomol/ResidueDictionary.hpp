@@ -61,7 +61,9 @@ namespace CDPL
             {
 
               public:
-                /** \brief Generic wrapper for storing a user-defined function that retrieves the residue structure for a given three-letter code. */
+                /**
+                 * \brief Generic wrapper for storing a user-defined function that retrieves the residue structure for a given three-letter code.
+                 */
                 typedef std::function<Chem::MolecularGraph::SharedPointer(const std::string&)> StructureRetrievalFunction;
 
                 /**
@@ -169,10 +171,14 @@ namespace CDPL
             typedef std::unordered_map<std::string, Entry, CIStringHashFunc, CIStringCmpFunc> EntryLookupTable;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResidueDictionary instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResidueDictionary instances.
+             */
             typedef std::shared_ptr<ResidueDictionary> SharedPointer;
 
-            /** \brief A constant iterator over the entries of the dictionary. */
+            /**
+             * \brief A constant iterator over the entries of the dictionary.
+             */
             typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>,
                                               EntryLookupTable::const_iterator>   ConstEntryIterator;
 

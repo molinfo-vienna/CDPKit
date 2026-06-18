@@ -25,6 +25,6 @@
 class ControlParameterDefault(Boost.Python.instance):
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter ConfGen.ControlParameter.STRICT_ERROR_CHECKING.
+    # \brief Default setting (= <tt>False</tt>) of the control-parameter ConfGen.ControlParameter.STRICT_ERROR_CHECKING.
     # 
     STRICT_ERROR_CHECKING = False

@@ -48,11 +48,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief A static instance providing configuration parameter default values. */
+            /**
+             * \brief A static instance providing configuration parameter default values.
+             */
             static const FragmentConformerGeneratorSettings DEFAULT;
-            /** \brief A static instance preconfigured for fast (less thorough) conformer generation. */
+
+            /**
+             * \brief A static instance preconfigured for fast (less thorough) conformer generation.
+             */
             static const FragmentConformerGeneratorSettings FAST;
-            /** \brief A static instance preconfigured for thorough (slower) conformer generation. */
+
+            /**
+             * \brief A static instance preconfigured for thorough (slower) conformer generation.
+             */
             static const FragmentConformerGeneratorSettings THOROUGH;
 
             /**

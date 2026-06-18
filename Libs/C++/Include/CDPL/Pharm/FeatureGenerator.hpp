@@ -58,7 +58,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureGenerator instances.
+             */
             typedef std::shared_ptr<FeatureGenerator> SharedPointer;
 
             /**

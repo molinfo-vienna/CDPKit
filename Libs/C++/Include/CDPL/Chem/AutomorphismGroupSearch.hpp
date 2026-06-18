@@ -73,7 +73,9 @@ namespace CDPL
                 BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
                 BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AutomorphismGroupSearch instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AutomorphismGroupSearch instances.
+             */
             typedef std::shared_ptr<AutomorphismGroupSearch> SharedPointer;
 
             /**
@@ -86,7 +88,9 @@ namespace CDPL
              */
             typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
 
-            /** \brief Type of the callback invoked for every found mapping (return \c false to abort the search). */
+            /**
+             * \brief Type of the callback invoked for every found mapping (return \c false to abort the search).
+             */
             typedef std::function<bool(const MolecularGraph&, const AtomBondMapping&)> MappingCallbackFunction;
 
             /**

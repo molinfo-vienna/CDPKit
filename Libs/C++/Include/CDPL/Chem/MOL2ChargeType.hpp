@@ -42,31 +42,69 @@ namespace CDPL
         namespace MOL2ChargeType
         {
 
-            /** \brief Specifies that the charge type is unknown. */
+            /**
+             * \brief Specifies that the charge type is unknown.
+             */
             constexpr unsigned int UNKNOWN    = 0;
-            /** \brief Specifies that the file contains no charge information. */
+
+            /**
+             * \brief Specifies that the file contains no charge information.
+             */
             constexpr unsigned int NO_CHARGES = 1;
-            /** \brief Specifies Del Re partial atomic charges. */
+
+            /**
+             * \brief Specifies Del Re partial atomic charges.
+             */
             constexpr unsigned int DEL_RE     = 2;
-            /** \brief Specifies Gasteiger partial atomic charges. */
+
+            /**
+             * \brief Specifies Gasteiger partial atomic charges.
+             */
             constexpr unsigned int GASTEIGER  = 3;
-            /** \brief Specifies Gasteiger-Hückel partial atomic charges. */
+
+            /**
+             * \brief Specifies Gasteiger-Hückel partial atomic charges.
+             */
             constexpr unsigned int GAST_HUCK  = 4;
-            /** \brief Specifies Hückel partial atomic charges. */
+
+            /**
+             * \brief Specifies Hückel partial atomic charges.
+             */
             constexpr unsigned int HUCKEL     = 5;
-            /** \brief Specifies Pullman partial atomic charges. */
+
+            /**
+             * \brief Specifies Pullman partial atomic charges.
+             */
             constexpr unsigned int PULLMAN    = 6;
-            /** \brief Specifies <em>Gaussian 80</em> derived partial atomic charges. */
+
+            /**
+             * \brief Specifies <em>Gaussian 80</em> derived partial atomic charges.
+             */
             constexpr unsigned int GAUSS80    = 7;
-            /** \brief Specifies <em>AMPAC</em> derived partial atomic charges. */
+
+            /**
+             * \brief Specifies <em>AMPAC</em> derived partial atomic charges.
+             */
             constexpr unsigned int AMPAC      = 8;
-            /** \brief Specifies Mulliken partial atomic charges. */
+
+            /**
+             * \brief Specifies Mulliken partial atomic charges.
+             */
             constexpr unsigned int MULLIKEN   = 9;
-            /** \brief Specifies dictionary-derived charges. */
+
+            /**
+             * \brief Specifies dictionary-derived charges.
+             */
             constexpr unsigned int DICT       = 10;
-            /** \brief Specifies MMFF94 partial atomic charges. */
+
+            /**
+             * \brief Specifies MMFF94 partial atomic charges.
+             */
             constexpr unsigned int MMFF94     = 11;
-            /** \brief Specifies user-supplied charges. */
+
+            /**
+             * \brief Specifies user-supplied charges.
+             */
             constexpr unsigned int USER       = 12;
         } // namespace MOL2ChargeType
     } // namespace Chem

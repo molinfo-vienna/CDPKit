@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides constants for the labeling of atoms in bonds matched by a RECAP fragmentation rule.
+# \brief Provides constants for the labeling of atoms of bonds matched by a RECAP fragmentation rule.
 # 
 # \see [\ref RECAP]
 # 

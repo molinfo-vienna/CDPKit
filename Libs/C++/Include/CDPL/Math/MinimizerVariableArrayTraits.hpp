@@ -54,11 +54,19 @@ namespace CDPL
         struct MinimizerVariableArrayTraits
         {
 
-            /** \brief The variable-array type. */
+            /**
+             * \brief The variable-array type.
+             */
             typedef A                     ArrayType;
-            /** \brief The scalar value type stored by the array. */
+
+            /**
+             * \brief The scalar value type stored by the array.
+             */
             typedef typename A::ValueType ValueType;
-            /** \brief The size type used by the array. */
+
+            /**
+             * \brief The size type used by the array.
+             */
             typedef typename A::SizeType  SizeType;
 
             /**
@@ -175,13 +183,24 @@ namespace CDPL
         struct MinimizerVariableArrayTraits<VectorArray<V> >
         {
 
-            /** \brief The vector-array type. */
+            /**
+             * \brief The vector-array type.
+             */
             typedef VectorArray<V>               ArrayType;
-            /** \brief The vector type of the array elements. */
+
+            /**
+             * \brief The vector type of the array elements.
+             */
             typedef V                            VectorType;
-            /** \brief The scalar value type stored in the array elements. */
+
+            /**
+             * \brief The scalar value type stored in the array elements.
+             */
             typedef typename V::ValueType        ValueType;
-            /** \brief The size type used by the vector array. */
+
+            /**
+             * \brief The size type used by the vector array.
+             */
             typedef typename ArrayType::SizeType SizeType;
 
             /**
@@ -314,13 +333,24 @@ namespace CDPL
         struct MinimizerVariableArrayTraits<std::vector<V> >
         {
 
-            /** \brief The vector-array type. */
+            /**
+             * \brief The vector-array type.
+             */
             typedef std::vector<V>                ArrayType;
-            /** \brief The vector type of the array elements. */
+
+            /**
+             * \brief The vector type of the array elements.
+             */
             typedef V                             VectorType;
-            /** \brief The scalar value type stored in the array elements. */
+
+            /**
+             * \brief The scalar value type stored in the array elements.
+             */
             typedef typename V::ValueType         ValueType;
-            /** \brief The size type used by the vector array. */
+
+            /**
+             * \brief The size type used by the vector array.
+             */
             typedef typename ArrayType::size_type SizeType;
 
             /**

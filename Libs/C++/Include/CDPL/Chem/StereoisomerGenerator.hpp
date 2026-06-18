@@ -66,10 +66,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %StereoisomerGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %StereoisomerGenerator instances.
+             */
             typedef std::shared_ptr<StereoisomerGenerator> SharedPointer;
 
-            /** \brief Array of StereoDescriptor values (one per atom or one per bond of the input molecular graph). */
+            /**
+             * \brief Array of StereoDescriptor values (one per atom or one per bond of the input molecular graph).
+             */
             typedef Util::Array<StereoDescriptor> StereoDescriptorArray;
 
             /**

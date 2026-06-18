@@ -49,7 +49,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RegularGridSet instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RegularGridSet instances.
+             */
             typedef std::shared_ptr<RegularGridSet> SharedPointer;
 
           private:
@@ -59,9 +61,14 @@ namespace CDPL
             }
         };
 
-        /** \brief Convenience alias for the double-precision regular spatial grid sets. */
+        /**
+         * \brief Convenience alias for the double-precision regular spatial grid sets.
+         */
         typedef RegularGridSet<double> DRegularGridSet;
-        /** \brief Convenience alias for the single-precision regular spatial grid sets. */
+        
+        /**
+         * \brief Convenience alias for the single-precision regular spatial grid sets.
+         */
         typedef RegularGridSet<float>  FRegularGridSet;
     } // namespace Grid
 } // namespace CDPL

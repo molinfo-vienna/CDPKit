@@ -52,108 +52,175 @@ namespace CDPL
              */
             constexpr unsigned int NONE = 1;
 
-            /** \brief Water oxygen acceptor. */
+            /**
+             * \brief Water oxygen acceptor.
+             */
             constexpr unsigned int O_H2O = 2;
 
-            /** \brief Urea oxygen acceptor. */
+            /**
+             * \brief Urea oxygen acceptor.
+             */
             constexpr unsigned int O_UREA = 3;
 
-            /** \brief Barbituric-acid oxygen acceptor. */
+            /**
+             * \brief Barbituric-acid oxygen acceptor.
+             */
             constexpr unsigned int O_BARBITURIC_ACID = 4;
 
-            /** \brief Uric-acid oxygen acceptor. */
+            /**
+             * \brief Uric-acid oxygen acceptor.
+             */
             constexpr unsigned int O_URIC_ACID = 5;
 
-            /** \brief Ether oxygen acceptor. */
+            /**
+             * \brief Ether oxygen acceptor.
+             */
             constexpr unsigned int O_ETHER = 6;
 
-            /** \brief Amide oxygen acceptor. */
+            /**
+             * \brief Amide oxygen acceptor.
+             */
             constexpr unsigned int O_AMIDE = 7;
 
-            /** \brief N-oxide oxygen acceptor. */
+            /**
+             * \brief N-oxide oxygen acceptor.
+             */
             constexpr unsigned int O_N_OXIDE = 8;
 
-            /** \brief Carboxylic-acid oxygen acceptor. */
+            /**
+             * \brief Carboxylic-acid oxygen acceptor.
+             */
             constexpr unsigned int O_ACID = 9;
 
-            /** \brief Ester oxygen acceptor. */
+            /**
+             * \brief Ester oxygen acceptor.
+             */
             constexpr unsigned int O_ESTER = 10;
 
-            /** \brief Sulfoxide oxygen acceptor. */
+            /**
+             * \brief Sulfoxide oxygen acceptor.
+             */
             constexpr unsigned int O_SULFOXIDE = 11;
 
-            /** \brief Nitro-group oxygen acceptor. */
+            /**
+             * \brief Nitro-group oxygen acceptor.
+             */
             constexpr unsigned int O_NITRO = 12;
 
-            /** \brief Selenium-oxide oxygen acceptor. */
+            /**
+             * \brief Selenium-oxide oxygen acceptor.
+             */
             constexpr unsigned int O_SELEN_OXIDE = 13;
 
-            /** \brief Aldehyde oxygen acceptor. */
+            /**
+             * \brief Aldehyde oxygen acceptor.
+             */
             constexpr unsigned int O_ALDEHYD = 14;
 
-            /** \brief Ketone oxygen acceptor. */
+            /**
+             * \brief Ketone oxygen acceptor.
+             */
             constexpr unsigned int O_KETONE = 15;
 
-            /** \brief Alcohol oxygen acceptor. */
+            /**
+             * \brief Alcohol oxygen acceptor.
+             */
             constexpr unsigned int O_ALCOHOL = 16;
 
-            /** \brief Ammonia nitrogen acceptor. */
+            /**
+             * \brief Ammonia nitrogen acceptor.
+             */
             constexpr unsigned int N_NH3 = 17;
 
-            /** \brief Diamine nitrogen acceptor. */
+            /**
+             * \brief Diamine nitrogen acceptor.
+             */
             constexpr unsigned int N_DIAMINE = 18;
 
-            /** \brief Mono-/di-nitro-aniline nitrogen acceptor. */
+            /**
+             * \brief Mono-/di-nitro-aniline nitrogen acceptor.
+             */
             constexpr unsigned int N_MONO_DI_NITRO_ANILINE = 19;
 
-            /** \brief Tri-nitro-aniline nitrogen acceptor. */
+            /**
+             * \brief Tri-nitro-aniline nitrogen acceptor.
+             */
             constexpr unsigned int N_TRI_NITRO_ANILINE = 20;
 
-            /** \brief Halogeno-aniline nitrogen acceptor. */
+            /**
+             * \brief Halogeno-aniline nitrogen acceptor.
+             */
             constexpr unsigned int N_HALOGENO_ANILINE = 21;
 
-            /** \brief Aniline nitrogen acceptor. */
+            /**
+             * \brief Aniline nitrogen acceptor.
+             */
             constexpr unsigned int N_ANILINE = 22;
 
-            /** \brief Nitrile nitrogen acceptor. */
+            /**
+             * \brief Nitrile nitrogen acceptor.
+             */
             constexpr unsigned int N_NITRILE = 23;
 
-            /** \brief Azole (five-membered aromatic) nitrogen acceptor. */
+            /**
+             * \brief Azole (five-membered aromatic) nitrogen acceptor.
+             */
             constexpr unsigned int N_AZOLE = 24;
 
-            /** \brief Aliphatic amine nitrogen acceptor. */
+            /**
+             * \brief Aliphatic amine nitrogen acceptor.
+             */
             constexpr unsigned int N_AMINE = 25;
 
-            /** \brief Amidine nitrogen acceptor. */
+            /**
+             * \brief Amidine nitrogen acceptor.
+             */
             constexpr unsigned int N_AMIDINE = 26;
 
-            /** \brief Azo (N=N) nitrogen acceptor. */
+            /**
+             * \brief Azo (N=N) nitrogen acceptor.
+             */
             constexpr unsigned int N_AZO = 27;
 
-            /** \brief Azine (six-membered aromatic N) nitrogen acceptor. */
+            /**
+             * \brief Azine (six-membered aromatic N) nitrogen acceptor.
+             */
             constexpr unsigned int N_AZINE = 28;
 
-            /** \brief Diazine (six-membered aromatic with two N) nitrogen acceptor. */
+            /**
+             * \brief Diazine (six-membered aromatic with two N) nitrogen acceptor.
+             */
             constexpr unsigned int N_DIAZINE = 29;
 
-            /** \brief Imine nitrogen acceptor. */
+            /**
+             * \brief Imine nitrogen acceptor.
+             */
             constexpr unsigned int N_IMINE = 30;
 
-            /** \brief Sulfide sulfur acceptor. */
+            /**
+             * \brief Sulfide sulfur acceptor.
+             */
             constexpr unsigned int S_SULFIDE = 31;
 
-            /** \brief Thiourea sulfur acceptor. */
+            /**
+             * \brief Thiourea sulfur acceptor.
+             */
             constexpr unsigned int S_THIOUREA = 32;
 
-            /** \brief Mono-/di-phosphine phosphorus acceptor. */
+            /**
+             * \brief Mono-/di-phosphine phosphorus acceptor.
+             */
             constexpr unsigned int P_MONO_DI_PHOSPHINE = 33;
 
-            /** \brief Tri-phosphine phosphorus acceptor. */
+            /**
+             * \brief Tri-phosphine phosphorus acceptor.
+             */
             constexpr unsigned int P_TRI_PHOSPHINE = 34;
 
-            /** \brief Highest H-bond acceptor type constant defined in this namespace. */
+            /**
+             * \brief Highest H-bond acceptor type constant defined in this namespace.
+             */
             constexpr unsigned int MAX_TYPE = P_TRI_PHOSPHINE;
-
         } // namespace HBondAcceptorAtomType
     } // namespace MolProp
 } // namespace CDPL

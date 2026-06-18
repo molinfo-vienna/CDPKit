@@ -44,23 +44,44 @@ namespace CDPL
         namespace FeaturePropertyDefault
         {
 
-            /** \brief Default value of the Pharm::FeatureProperty::OPTIONAL_FLAG property. */
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::OPTIONAL_FLAG property.
+             */
             extern CDPL_PHARM_API const bool         OPTIONAL_FLAG;
-            /** \brief Default value of the Pharm::FeatureProperty::DISABLED_FLAG property. */
+
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::DISABLED_FLAG property.
+             */
             extern CDPL_PHARM_API const bool         DISABLED_FLAG;
 
-            /** \brief Default value of the Pharm::FeatureProperty::LENGTH property. */
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::LENGTH property.
+             */
             extern CDPL_PHARM_API const double       LENGTH;
-            /** \brief Default value of the Pharm::FeatureProperty::TOLERANCE property. */
+
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::TOLERANCE property.
+             */
             extern CDPL_PHARM_API const double       TOLERANCE;
-            /** \brief Default value of the Pharm::FeatureProperty::WEIGHT property. */
+
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::WEIGHT property.
+             */
             extern CDPL_PHARM_API const double       WEIGHT;
-            /** \brief Default value of the Pharm::FeatureProperty::HYDROPHOBICITY property. */
+
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::HYDROPHOBICITY property.
+             */
             extern CDPL_PHARM_API const double       HYDROPHOBICITY;
 
-            /** \brief Default value of the Pharm::FeatureProperty::TYPE property. */
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::TYPE property.
+             */
             extern CDPL_PHARM_API const unsigned int TYPE;
-            /** \brief Default value of the Pharm::FeatureProperty::GEOMETRY property. */
+
+            /**
+             * \brief Default value of the Pharm::FeatureProperty::GEOMETRY property.
+             */
             extern CDPL_PHARM_API const unsigned int GEOMETRY;
         } // namespace FeaturePropertyDefault
     } // namespace Pharm

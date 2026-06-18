@@ -55,27 +55,53 @@ namespace CDPL
             typedef MatrixRow<M> SelfType;
 
           public:
-            /** \brief The wrapped matrix type. */
+            /**
+             * \brief The wrapped matrix type.
+             */
             typedef M                                                        MatrixType;
-            /** \brief The size type used by the wrapped matrix. */
+
+            /**
+             * \brief The size type used by the wrapped matrix.
+             */
             typedef typename M::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped matrix. */
+
+            /**
+             * \brief The signed difference type used by the wrapped matrix.
+             */
             typedef typename M::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped matrix. */
+
+            /**
+             * \brief The element value type of the wrapped matrix.
+             */
             typedef typename M::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename M::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped matrix internally (mutable or const flavor). */
+
+            /**
+             * \brief Closure type used to store the wrapped matrix internally (mutable or const flavor).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
 
             /**
@@ -322,27 +348,53 @@ namespace CDPL
             typedef MatrixColumn<M> SelfType;
 
           public:
-            /** \brief The wrapped matrix type. */
+            /**
+             * \brief The wrapped matrix type.
+             */
             typedef M                                                        MatrixType;
-            /** \brief The size type used by the wrapped matrix. */
+
+            /**
+             * \brief The size type used by the wrapped matrix.
+             */
             typedef typename M::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped matrix. */
+
+            /**
+             * \brief The signed difference type used by the wrapped matrix.
+             */
             typedef typename M::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped matrix. */
+
+            /**
+             * \brief The element value type of the wrapped matrix.
+             */
             typedef typename M::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename M::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped matrix internally. */
+
+            /**
+             * \brief Closure type used to store the wrapped matrix internally.
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
 
             /**
@@ -589,29 +641,58 @@ namespace CDPL
             typedef MatrixRange<M> SelfType;
 
           public:
-            /** \brief The wrapped matrix type. */
+            /**
+             * \brief The wrapped matrix type.
+             */
             typedef M                                                        MatrixType;
-            /** \brief The size type used by the wrapped matrix. */
+
+            /**
+             * \brief The size type used by the wrapped matrix.
+             */
             typedef typename M::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped matrix. */
+
+            /**
+             * \brief The signed difference type used by the wrapped matrix.
+             */
             typedef typename M::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped matrix. */
+
+            /**
+             * \brief The element value type of the wrapped matrix.
+             */
             typedef typename M::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename M::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped matrix internally. */
+
+            /**
+             * \brief Closure type used to store the wrapped matrix internally.
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
-            /** \brief Range type used to specify the row and column index ranges. */
+
+            /**
+             * \brief Range type used to specify the row and column index ranges.
+             */
             typedef Range<SizeType>                                          RangeType;
 
             /**
@@ -860,29 +941,58 @@ namespace CDPL
             typedef MatrixSlice<M> SelfType;
 
           public:
-            /** \brief The wrapped matrix type. */
+            /**
+             * \brief The wrapped matrix type.
+             */
             typedef M                                                        MatrixType;
-            /** \brief The size type used by the wrapped matrix. */
+
+            /**
+             * \brief The size type used by the wrapped matrix.
+             */
             typedef typename M::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped matrix. */
+
+            /**
+             * \brief The signed difference type used by the wrapped matrix.
+             */
             typedef typename M::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped matrix. */
+
+            /**
+             * \brief The element value type of the wrapped matrix.
+             */
             typedef typename M::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename M::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped matrix internally. */
+
+            /**
+             * \brief Closure type used to store the wrapped matrix internally.
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
-            /** \brief Slice type used to specify the row and column slices (start, stride, size). */
+
+            /**
+             * \brief Slice type used to specify the row and column slices (start, stride, size).
+             */
             typedef Slice<SizeType, DifferenceType>                          SliceType;
 
             /**
@@ -1138,82 +1248,114 @@ namespace CDPL
             SliceType         slice2;
         };
 
-        /** \brief Vector-temporary trait specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<MatrixRow<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Vector-temporary trait specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixRow<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixRow<M> > : public MatrixTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixRow<M> > : public MatrixTemporaryTraits<M>
         {};
 
-        /** \brief Vector-temporary trait specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<MatrixColumn<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Vector-temporary trait specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixColumn<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixColumn<M> > : public MatrixTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixColumn<M> > : public MatrixTemporaryTraits<M>
         {};
 
-        /** \brief Vector-temporary trait specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<MatrixRange<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Vector-temporary trait specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixRange<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixRange<M> > : public MatrixTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixRange<M> > : public MatrixTemporaryTraits<M>
         {};
 
-        /** \brief Vector-temporary trait specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<MatrixSlice<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Vector-temporary trait specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Vector-temporary trait specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixSlice<M> > : public VectorTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixSlice<M> > : public MatrixTemporaryTraits<M>
         {};
 
-        /** \brief Matrix-temporary trait specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix. */
+        /**
+         * \brief Matrix-temporary trait specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixSlice<M> > : public MatrixTemporaryTraits<M>
         {};
@@ -1226,7 +1368,6 @@ namespace CDPL
          * \return A Math::MatrixRow proxy referring to row \a i of \a e.
          */
         template <typename M>
-
         MatrixRow<M>
         row(MatrixExpression<M>& e, typename MatrixRow<M>::SizeType i)
         {

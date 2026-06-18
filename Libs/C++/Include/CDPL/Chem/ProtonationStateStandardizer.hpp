@@ -58,7 +58,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ProtonationStateStandardizer instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ProtonationStateStandardizer instances.
+             */
             typedef std::shared_ptr<ProtonationStateStandardizer> SharedPointer;
 
             /**
@@ -67,11 +69,19 @@ namespace CDPL
             enum Flavor
             {
 
-                /** \brief Minimize the total number of formally charged atoms (neutralize where possible). */
+                /**
+                 * \brief Minimize the total number of formally charged atoms (neutralize where possible).
+                 */
                 MIN_CHARGED_ATOM_COUNT,
-                /** \brief Set the protonation state expected under physiological conditions (pH ~7.4). */
+
+                /**
+                 * \brief Set the protonation state expected under physiological conditions (pH ~7.4).
+                 */
                 PHYSIOLOGICAL_CONDITION_STATE,
-                /** \brief Maximize the cancellation of opposite formal charges (neutralize zwitterion-like pairs). */
+
+                /**
+                 * \brief Maximize the cancellation of opposite formal charges (neutralize zwitterion-like pairs).
+                 */
                 MAX_CHARGE_COMPENSATION
             };
 

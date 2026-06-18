@@ -62,10 +62,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentGenerator instances.
+             */
             typedef std::shared_ptr<FragmentGenerator> SharedPointer;
 
-            /** \brief Type of a predicate accepting/rejecting a generated fragment. */
+            /**
+             * \brief Type of a predicate accepting/rejecting a generated fragment.
+             */
             typedef std::function<bool(const MolecularGraph&)> FragmentFilterFunction;
 
             /**
@@ -246,17 +250,29 @@ namespace CDPL
             typedef std::vector<FragmentLink>      FragmentLinkList;
 
           public:
-            /** \brief A constant iterator over the registered fragmentation rules. */
+            /**
+             * \brief A constant iterator over the registered fragmentation rules.
+             */
             typedef FragmentationRuleList::const_iterator ConstFragmentationRuleIterator;
-            /** \brief A mutable iterator over the registered fragmentation rules. */
+            
+            /**
+             * \brief A mutable iterator over the registered fragmentation rules.
+             */
             typedef FragmentationRuleList::iterator       FragmentationRuleIterator;
 
-            /** \brief A constant iterator over the registered exclude patterns. */
+            /**
+             * \brief A constant iterator over the registered exclude patterns.
+             */
             typedef ExcludePatternList::const_iterator ConstExcludePatternIterator;
-            /** \brief A mutable iterator over the registered exclude patterns. */
+            
+            /**
+             * \brief A mutable iterator over the registered exclude patterns.
+             */
             typedef ExcludePatternList::iterator       ExcludePatternIterator;
 
-            /** \brief A constant iterator over the generated fragment links. */
+            /**
+             * \brief A constant iterator over the generated fragment links.
+             */
             typedef FragmentLinkList::const_iterator ConstFragmentLinkIterator;
 
             /**

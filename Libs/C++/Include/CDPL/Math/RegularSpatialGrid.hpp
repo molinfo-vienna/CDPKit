@@ -129,33 +129,71 @@ namespace CDPL
             typedef RegularSpatialGrid<T, C, GD, XF> SelfType;
 
           public:
-            /** \brief The grid cell value type. */
+            /**
+             * \brief The grid cell value type.
+             */
             typedef T                                                       ValueType;
-            /** \brief The coordinate (real) value type used in the world frame. */
+
+            /**
+             * \brief The coordinate (real) value type used in the world frame.
+             */
             typedef C                                                       CoordinatesValueType;
-            /** \brief The underlying grid data container type. */
+
+            /**
+             * \brief The underlying grid data container type.
+             */
             typedef GD                                                      GridDataType;
-            /** \brief The coordinate transformation type mapping cell indices to world coordinates. */
+
+            /**
+             * \brief The coordinate transformation type mapping cell indices to world coordinates.
+             */
             typedef XF                                                      CoordinatesTransformType;
-            /** \brief The inverse coordinate transformation type. */
+
+            /**
+             * \brief The inverse coordinate transformation type.
+             */
             typedef typename CoordinatesTransformType::MatrixTemporaryType  InvCoordinatesTransformType;
-            /** \brief Mutable reference type to a grid cell (degrades to ConstReference when the data container is \c const). */
+
+            /**
+             * \brief Mutable reference type to a grid cell (degrades to ConstReference when the data container is \c const).
+             */
             typedef typename std::conditional<std::is_const<GD>::value,
                                               typename GD::ConstReference,
                                               typename GD::Reference>::type Reference;
-            /** \brief Constant reference type to a grid cell. */
+
+            /**
+             * \brief Constant reference type to a grid cell.
+             */
             typedef typename GD::ConstReference                             ConstReference;
-            /** \brief The unsigned size type used by the grid data container. */
+
+            /**
+             * \brief The unsigned size type used by the grid data container.
+             */
             typedef typename GD::SizeType                                   SizeType;
-            /** \brief A signed size type used for offset arithmetic. */
+
+            /**
+             * \brief A signed size type used for offset arithmetic.
+             */
             typedef std::ptrdiff_t                                          SSizeType;
-            /** \brief The signed difference type used by the grid data container. */
+
+            /**
+             * \brief The signed difference type used by the grid data container.
+             */
             typedef typename GD::DifferenceType                             DifferenceType;
-            /** \brief Closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this grid appears inside another expression.
+             */
             typedef SelfType                                                ClosureType;
-            /** \brief Constant closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this grid appears inside another expression.
+             */
             typedef const SelfType                                          ConstClosureType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RegularSpatialGrid instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RegularSpatialGrid instances.
+             */
             typedef std::shared_ptr<SelfType>                               SharedPointer;
 
             /**

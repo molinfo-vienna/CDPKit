@@ -55,11 +55,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default contribution weight of the matched-feature-count term. */
+            /**
+             * \brief Default contribution weight of the matched-feature-count term.
+             */
             static constexpr double DEF_FTR_MATCH_COUNT_WEIGHT = 1.0;
-            /** \brief Default contribution weight of the feature-position-deviation term. */
+
+            /**
+             * \brief Default contribution weight of the feature-position-deviation term.
+             */
             static constexpr double DEF_FTR_POS_MATCH_WEIGHT   = 0.5;
-            /** \brief Default contribution weight of the feature-geometry-match term. */
+
+            /**
+             * \brief Default contribution weight of the feature-geometry-match term.
+             */
             static constexpr double DEF_FTR_GEOM_MATCH_WEIGHT  = 0.4;
 
             /**

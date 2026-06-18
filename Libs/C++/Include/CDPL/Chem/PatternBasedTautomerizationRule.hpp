@@ -63,7 +63,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PatternBasedTautomerizationRule instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PatternBasedTautomerizationRule instances.
+             */
             typedef std::shared_ptr<PatternBasedTautomerizationRule> SharedPointer;
 
             /**
@@ -73,11 +75,19 @@ namespace CDPL
             struct BondOrderChange
             {
 
-                /** \brief Pattern-atom ID of the first atom of the bond whose order changes. */
+                /**
+                 * \brief Pattern-atom ID of the first atom of the bond whose order changes.
+                 */
                 std::size_t atom1ID;
-                /** \brief Pattern-atom ID of the second atom of the bond whose order changes. */
+    
+                /**
+                 * \brief Pattern-atom ID of the second atom of the bond whose order changes.
+                 */
                 std::size_t atom2ID;
-                /** \brief Signed bond order delta applied to the matched bond (positive = increase, negative = decrease). */
+    
+                /**
+                 * \brief Signed bond order delta applied to the matched bond (positive = increase, negative = decrease).
+                 */
                 long        orderChange;
             };
 

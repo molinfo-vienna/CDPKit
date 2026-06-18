@@ -20,93 +20,93 @@
 #
 
 ##
-# \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
+# \brief Provides constants for the labeling of atoms of bonds matched by a BRICS fragmentation rule.
 # 
 # \see [\ref BRICS]
 # 
 class BRICSAtomLabel(Boost.Python.instance):
 
     ##
-    # \brief Specifies that the atom carries no BRICS label.
+    # \brief Specifies that the atom carries no label.
     # 
     NONE = 0
 
     ##
-    # \brief Specifies the BRICS atom label <em>L1</em>.
+    # \brief Specifies the atom label <em>L1</em>.
     # 
     L1 = 1
 
     ##
-    # \brief Specifies the BRICS atom label <em>L2</em>.
+    # \brief Specifies the atom label <em>L2</em>.
     # 
     L2 = 2
 
     ##
-    # \brief Specifies the BRICS atom label <em>L3</em>.
+    # \brief Specifies the atom label <em>L3</em>.
     # 
     L3 = 3
 
     ##
-    # \brief Specifies the BRICS atom label <em>L4</em>.
+    # \brief Specifies the atom label <em>L4</em>.
     # 
     L4 = 4
 
     ##
-    # \brief Specifies the BRICS atom label <em>L5</em>.
+    # \brief Specifies the atom label <em>L5</em>.
     # 
     L5 = 5
 
     ##
-    # \brief Specifies the BRICS atom label <em>L6</em>.
+    # \brief Specifies the atom label <em>L6</em>.
     # 
     L6 = 6
 
     ##
-    # \brief Specifies the BRICS atom label <em>L7</em>.
+    # \brief Specifies the atom label <em>L7</em>.
     # 
     L7 = 7
 
     ##
-    # \brief Specifies the BRICS atom label <em>L8</em>.
+    # \brief Specifies the atom label <em>L8</em>.
     # 
     L8 = 8
 
     ##
-    # \brief Specifies the BRICS atom label <em>L9</em>.
+    # \brief Specifies the atom label <em>L9</em>.
     # 
     L9 = 9
 
     ##
-    # \brief Specifies the BRICS atom label <em>L10</em>.
+    # \brief Specifies the atom label <em>L10</em>.
     # 
     L10 = 10
 
     ##
-    # \brief Specifies the BRICS atom label <em>L11</em>.
+    # \brief Specifies the atom label <em>L11</em>.
     # 
     L11 = 11
 
     ##
-    # \brief Specifies the BRICS atom label <em>L12</em>.
+    # \brief Specifies the atom label <em>L12</em>.
     # 
     L12 = 12
 
     ##
-    # \brief Specifies the BRICS atom label <em>L13</em>.
+    # \brief Specifies the atom label <em>L13</em>.
     # 
     L13 = 13
 
     ##
-    # \brief Specifies the BRICS atom label <em>L14</em>.
+    # \brief Specifies the atom label <em>L14</em>.
     # 
     L14 = 14
 
     ##
-    # \brief Specifies the BRICS atom label <em>L15</em>.
+    # \brief Specifies the atom label <em>L15</em>.
     # 
     L15 = 15
 
     ##
-    # \brief Specifies the BRICS atom label <em>L16</em>.
+    # \brief Specifies the atom label <em>L16</em>.
     # 
     L16 = 16

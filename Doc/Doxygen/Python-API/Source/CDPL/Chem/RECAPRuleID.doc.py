@@ -27,61 +27,61 @@
 class RECAPRuleID(Boost.Python.instance):
 
     ##
-    # \brief Specifies that no RECAP rule matched the bond.
+    # \brief Specifies that no rule matched the bond.
     # 
     NONE = 0
 
     ##
-    # \brief Specifies the RECAP rule for amide bond cleavage.
+    # \brief Specifies the rule for amide bond cleavage.
     # 
     AMIDE = 1
 
     ##
-    # \brief Specifies the RECAP rule for ester bond cleavage.
+    # \brief Specifies the rule for ester bond cleavage.
     # 
     ESTER = 2
 
     ##
-    # \brief Specifies the RECAP rule for amine bond cleavage.
+    # \brief Specifies the rule for amine bond cleavage.
     # 
     AMINE = 3
 
     ##
-    # \brief Specifies the RECAP rule for urea bond cleavage.
+    # \brief Specifies the rule for urea bond cleavage.
     # 
     UREA = 4
 
     ##
-    # \brief Specifies the RECAP rule for ether bond cleavage.
+    # \brief Specifies the rule for ether bond cleavage.
     # 
     ETHER = 5
 
     ##
-    # \brief Specifies the RECAP rule for olefinic-bond cleavage.
+    # \brief Specifies the rule for olefinic-bond cleavage.
     # 
     OLEFIN = 6
 
     ##
-    # \brief Specifies the RECAP rule for quaternary-nitrogen bond cleavage.
+    # \brief Specifies the rule for quaternary-nitrogen bond cleavage.
     # 
     QUARTERNARY_N = 7
 
     ##
-    # \brief Specifies the RECAP rule for aromatic-N to aliphatic-C bond cleavage.
+    # \brief Specifies the rule for aromatic-N to aliphatic-C bond cleavage.
     # 
     AROMATIC_N_ALIPHATIC_C = 8
 
     ##
-    # \brief Specifies the RECAP rule for lactam-N to aliphatic-C bond cleavage.
+    # \brief Specifies the rule for lactam-N to aliphatic-C bond cleavage.
     # 
     LACTAM_N_ALIPHATIC_C = 9
 
     ##
-    # \brief Specifies the RECAP rule for aromatic-C to aromatic-C bond cleavage (biaryl).
+    # \brief Specifies the rule for aromatic-C to aromatic-C bond cleavage (biaryl).
     # 
     AROMATIC_C_AROMATIC_C = 10
 
     ##
-    # \brief Specifies the RECAP rule for sulfonamide bond cleavage.
+    # \brief Specifies the rule for sulfonamide bond cleavage.
     # 
     SULFONAMIDE = 11

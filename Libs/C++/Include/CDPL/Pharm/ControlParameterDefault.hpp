@@ -46,23 +46,23 @@ namespace CDPL
         {
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Pharm::ControlParameter::STRICT_ERROR_CHECKING.
+             * \brief Default value (= \c false) of the control-parameter Pharm::ControlParameter::STRICT_ERROR_CHECKING.
              */
             extern CDPL_PHARM_API const bool STRICT_ERROR_CHECKING;
 
             /**
-             * \brief Default setting for the control-parameter Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
+             * \brief Default value of the control-parameter Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
              * \since 1.2
              */
             extern CDPL_PHARM_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
-             * \brief Default setting for the control-parameter Pharm::ControlParameter::PSD_CREATION_MODE.
+             * \brief Default value of the control-parameter Pharm::ControlParameter::PSD_CREATION_MODE.
              */
             extern CDPL_PHARM_API const ScreeningDBCreator::Mode PSD_CREATION_MODE;
 
             /**
-             * \brief Default setting for the control-parameter Pharm::ControlParameter::PSD_ALLOW_DUPLICATES.
+             * \brief Default value of the control-parameter Pharm::ControlParameter::PSD_ALLOW_DUPLICATES.
              */
             extern CDPL_PHARM_API const bool PSD_ALLOW_DUPLICATES;
         } // namespace ControlParameterDefault

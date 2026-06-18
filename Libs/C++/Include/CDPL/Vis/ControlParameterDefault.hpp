@@ -54,517 +54,516 @@ namespace CDPL
         {
 
             /**
-             * \brief Default setting (= \c 1.0) for the control-parameter Vis::ControlParameter::OUTPUT_SCALING_FACTOR.
+             * \brief Default value (= \c 1.0) of the control-parameter Vis::ControlParameter::OUTPUT_SCALING_FACTOR.
              */
             extern CDPL_VIS_API const double OUTPUT_SCALING_FACTOR;
 
             /**
-             * \brief Default setting (= \c %Rectangle2D()) for the control-parameter Vis::ControlParameter::VIEWPORT.
+             * \brief Default value (= \c %Rectangle2D()) of the control-parameter Vis::ControlParameter::VIEWPORT.
              */
             extern CDPL_VIS_API const Rectangle2D VIEWPORT;
 
             /**
-             * \brief Default setting (= \c %SizeAdjustment::IF_REQUIRED) for the control-parameter Vis::ControlParameter::SIZE_ADJUSTMENT.
+             * \brief Default value (= \c SizeAdjustment::IF_REQUIRED) of the control-parameter Vis::ControlParameter::SIZE_ADJUSTMENT.
              */
             extern CDPL_VIS_API const unsigned int SIZE_ADJUSTMENT;
 
             /**
-             * \brief Default setting (= \c %Alignment::CENTER) for the control-parameter Vis::ControlParameter::ALIGNMENT.
+             * \brief Default value (= \c Alignment::CENTER) of the control-parameter Vis::ControlParameter::ALIGNMENT.
              */
             extern CDPL_VIS_API const unsigned int ALIGNMENT;
 
             /**
-             * \brief Default setting (= \c %Brush(Color::WHITE, Brush::NO_PATTERN)) for the control-parameter Vis::ControlParameter::BACKGROUND_BRUSH.
+             * \brief Default value (= \c %Brush(Color::WHITE, Brush::NO_PATTERN)) of the control-parameter Vis::ControlParameter::BACKGROUND_BRUSH.
              */
             extern CDPL_VIS_API const Brush BACKGROUND_BRUSH;
 
             /**
-             * \brief Default setting (= \c %ArrowStyle::REACTION_SOLID) for the control-parameter Vis::ControlParameter::REACTION_ARROW_STYLE.
+             * \brief Default value (= \c ArrowStyle::REACTION_SOLID) of the control-parameter Vis::ControlParameter::REACTION_ARROW_STYLE.
              */
             extern CDPL_VIS_API const unsigned int REACTION_ARROW_STYLE;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::REACTION_ARROW_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::REACTION_ARROW_COLOR.
              */
             extern CDPL_VIS_API const Color REACTION_ARROW_COLOR;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(35.0, true, true, true)) for the control-parameter Vis::ControlParameter::REACTION_ARROW_LENGTH.
+             * \brief Default value (= \c %SizeSpecification(35.0, true, true, true)) of the control-parameter Vis::ControlParameter::REACTION_ARROW_LENGTH.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_ARROW_LENGTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(8.0, false, true, true)) for the control-parameter Vis::ControlParameter::REACTION_ARROW_HEAD_LENGTH.
+             * \brief Default value (= \c %SizeSpecification(8.0, false, true, true)) of the control-parameter Vis::ControlParameter::REACTION_ARROW_HEAD_LENGTH.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_ARROW_HEAD_LENGTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(5.0, false, true, true)) for the control-parameter Vis::ControlParameter::REACTION_ARROW_HEAD_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(5.0, false, true, true)) of the control-parameter Vis::ControlParameter::REACTION_ARROW_HEAD_WIDTH.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_ARROW_HEAD_WIDTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.0, false, true, true)) for the control-parameter Vis::ControlParameter::REACTION_ARROW_SHAFT_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(0.0, false, true, true)) of the control-parameter Vis::ControlParameter::REACTION_ARROW_SHAFT_WIDTH.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_ARROW_SHAFT_WIDTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(1.0, false, true, true)) for the control-parameter Vis::ControlParameter::REACTION_ARROW_LINE_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(1.0, false, true, true)) of the control-parameter Vis::ControlParameter::REACTION_ARROW_LINE_WIDTH.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_ARROW_LINE_WIDTH;
 
             /**
-             * \brief Default setting (= \c %LayoutStyle::PACKED) for the control-parameter Vis::ControlParameter::REACTION_COMPONENT_LAYOUT.
+             * \brief Default value (= \c LayoutStyle::PACKED) of the control-parameter Vis::ControlParameter::REACTION_COMPONENT_LAYOUT.
              */
             extern CDPL_VIS_API const unsigned int REACTION_COMPONENT_LAYOUT;
 
             /**
-             * \brief Default setting (= \c %LayoutDirection::HORIZONTAL) for the control-parameter Vis::ControlParameter::REACTION_COMPONENT_LAYOUT_DIRECTION.
+             * \brief Default value (= \c LayoutDirection::HORIZONTAL) of the control-parameter Vis::ControlParameter::REACTION_COMPONENT_LAYOUT_DIRECTION.
              */
             extern CDPL_VIS_API const unsigned int REACTION_COMPONENT_LAYOUT_DIRECTION;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(5.0, false, true, true)) for the control-parameter Vis::ControlParameter::REACTION_COMPONENT_MARGIN.
+             * \brief Default value (= \c %SizeSpecification(5.0, false, true, true)) of the control-parameter Vis::ControlParameter::REACTION_COMPONENT_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_COMPONENT_MARGIN;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_REACTION_REACTANTS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_REACTION_REACTANTS.
              */
             extern CDPL_VIS_API const bool SHOW_REACTION_REACTANTS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_REACTION_AGENTS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_REACTION_AGENTS.
              */
             extern CDPL_VIS_API const bool SHOW_REACTION_AGENTS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_REACTION_PRODUCTS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_REACTION_PRODUCTS.
              */
             extern CDPL_VIS_API const bool SHOW_REACTION_PRODUCTS;
 
             /**
-             * \brief Default setting (= \c %Alignment::V_CENTER) for the control-parameter Vis::ControlParameter::REACTION_AGENT_ALIGNMENT.
+             * \brief Default value (= \c Alignment::V_CENTER) of the control-parameter Vis::ControlParameter::REACTION_AGENT_ALIGNMENT.
              */
             extern CDPL_VIS_API const unsigned int REACTION_AGENT_ALIGNMENT;
 
             /**
-             * \brief Default setting (= \c %LayoutStyle::LINEAR) for the control-parameter Vis::ControlParameter::REACTION_AGENT_LAYOUT.
+             * \brief Default value (= \c LayoutStyle::LINEAR) of the control-parameter Vis::ControlParameter::REACTION_AGENT_LAYOUT.
              */
             extern CDPL_VIS_API const unsigned int REACTION_AGENT_LAYOUT;
 
             /**
-             * \brief Default setting (= \c %LayoutDirection::HORIZONTAL) for the control-parameter Vis::ControlParameter::REACTION_AGENT_LAYOUT_DIRECTION.
+             * \brief Default value (= \c LayoutDirection::HORIZONTAL) of the control-parameter Vis::ControlParameter::REACTION_AGENT_LAYOUT_DIRECTION.
              */
             extern CDPL_VIS_API const unsigned int REACTION_AGENT_LAYOUT_DIRECTION;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::REACTION_PLUS_SIGN_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::REACTION_PLUS_SIGN_COLOR.
              */
             extern CDPL_VIS_API const Color REACTION_PLUS_SIGN_COLOR;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(10.0, false, true, true)) for the control-parameter Vis::ControlParameter::REACTION_PLUS_SIGN_SIZE.
+             * \brief Default value (= \c %SizeSpecification(10.0, false, true, true)) of the control-parameter Vis::ControlParameter::REACTION_PLUS_SIGN_SIZE.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_PLUS_SIGN_SIZE;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(3.0, false, true, true)) for the control-parameter Vis::ControlParameter::REACTION_PLUS_SIGN_LINE_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(3.0, false, true, true)) of the control-parameter Vis::ControlParameter::REACTION_PLUS_SIGN_LINE_WIDTH.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_PLUS_SIGN_LINE_WIDTH;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_REACTION_PLUS_SIGNS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_REACTION_PLUS_SIGNS.
              */
             extern CDPL_VIS_API const bool SHOW_REACTION_PLUS_SIGNS;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::ATOM_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::ATOM_COLOR.
              */
             extern CDPL_VIS_API const Color ATOM_COLOR;
 
             /**
-             * \brief Default setting (= \c %ColorTable()) for the control-parameter Vis::ControlParameter::ATOM_COLOR_TABLE.
+             * \brief Default value (= \c %ColorTable()) of the control-parameter Vis::ControlParameter::ATOM_COLOR_TABLE.
              */
             extern CDPL_VIS_API const ColorTable::SharedPointer ATOM_COLOR_TABLE;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::USE_CALCULATED_ATOM_COORDINATES.
+             * \brief Default value (= \c false) of the control-parameter Vis::ControlParameter::USE_CALCULATED_ATOM_COORDINATES.
              */
             extern CDPL_VIS_API const bool USE_CALCULATED_ATOM_COORDINATES;
 
             /**
-             * \brief Default setting (= \c %Font()) for the control-parameter Vis::ControlParameter::ATOM_LABEL_FONT.
+             * \brief Default value (= \c %Font()) of the control-parameter Vis::ControlParameter::ATOM_LABEL_FONT.
              */
             extern CDPL_VIS_API const Font ATOM_LABEL_FONT;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(10.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_LABEL_SIZE.
+             * \brief Default value (= \c %SizeSpecification(10.0, false, false, true)) of the control-parameter Vis::ControlParameter::ATOM_LABEL_SIZE.
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_LABEL_SIZE;
 
             /**
-             * \brief Default setting (= \c %Font()) for the control-parameter Vis::ControlParameter::SECONDARY_ATOM_LABEL_FONT.
+             * \brief Default value (= \c %Font()) of the control-parameter Vis::ControlParameter::SECONDARY_ATOM_LABEL_FONT.
              */
             extern CDPL_VIS_API const Font SECONDARY_ATOM_LABEL_FONT;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(6.0, false, false, true)) for the control-parameter Vis::ControlParameter::SECONDARY_ATOM_LABEL_SIZE.
+             * \brief Default value (= \c %SizeSpecification(6.0, false, false, true)) of the control-parameter Vis::ControlParameter::SECONDARY_ATOM_LABEL_SIZE.
              */
             extern CDPL_VIS_API const SizeSpecification SECONDARY_ATOM_LABEL_SIZE;
 
             /**
-             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT.
+             * \brief Default value (= \c %Font("", 8.0, false, true)) of the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT.
              * \since 1.1
              */
             extern CDPL_VIS_API const Font ATOM_CONFIGURATION_LABEL_FONT;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE.
+             * \brief Default value (= \c %SizeSpecification(8.0, false, false, true)) of the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE.
              * \since 1.1
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_CONFIGURATION_LABEL_SIZE;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR.
              * \since 1.2
              */
             extern CDPL_VIS_API const Color ATOM_CONFIGURATION_LABEL_COLOR;
  
             /**
-             * \brief Default setting (= \c %Font("", 8.0, false, false)) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_FONT.
+             * \brief Default value (= \c %Font("", 8.0, false, false)) of the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_FONT.
              * \since 1.2
              */
             extern CDPL_VIS_API const Font ATOM_CUSTOM_LABEL_FONT;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_SIZE.
+             * \brief Default value (= \c %SizeSpecification(8.0, false, false, true)) of the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_SIZE.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_CUSTOM_LABEL_SIZE;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_COLOR.
              * \since 1.2
              */
             extern CDPL_VIS_API const Color ATOM_CUSTOM_LABEL_COLOR;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_LABEL_MARGIN.
+             * \brief Default value (= \c %SizeSpecification(2.0, false, false, true)) of the control-parameter Vis::ControlParameter::ATOM_LABEL_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_LABEL_MARGIN;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(1.0, false, false, true)) for the control-parameter Vis::ControlParameter::RADICAL_ELECTRON_DOT_SIZE.
+             * \brief Default value (= \c %SizeSpecification(1.0, false, false, true)) of the control-parameter Vis::ControlParameter::RADICAL_ELECTRON_DOT_SIZE.
              */
             extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(16.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE.
+             * \brief Default value (= \c %SizeSpecification(16.0, false, false, true)) of the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_HIGHLIGHT_AREA_SIZE;
 
             /**
-             * \brief Default setting (= \c %Brush(Color(0.8, 0.8, 1.0)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH.
+             * \brief Default value (= \c %Brush(Color(0.8, 0.8, 1.0)) of the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH.
              * \since 1.2
              */
             extern CDPL_VIS_API const Brush ATOM_HIGHLIGHT_AREA_BRUSH;
 
             /**
-             * \brief Default setting (= \c %Pen(Color(0.6, 0.6, 0.75)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \brief Default value (= \c %Pen(Color(0.6, 0.6, 0.75)) of the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE.
+             * \brief Default value (= \c false) of the control-parameter Vis::ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE.
              * \since 1.2
              */
             extern CDPL_VIS_API const bool BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_CARBONS.
+             * \brief Default value (= \c false) of the control-parameter Vis::ControlParameter::SHOW_CARBONS.
              */
             extern CDPL_VIS_API const bool SHOW_CARBONS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_EXPLICIT_HYDROGENS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_EXPLICIT_HYDROGENS.
              */
             extern CDPL_VIS_API const bool SHOW_EXPLICIT_HYDROGENS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_CHARGES.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_CHARGES.
              */
             extern CDPL_VIS_API const bool SHOW_CHARGES;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_ISOTOPES.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_ISOTOPES.
              */
             extern CDPL_VIS_API const bool SHOW_ISOTOPES;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_HYDROGEN_COUNTS.
+             * \brief Default value (= \c false) of the control-parameter Vis::ControlParameter::SHOW_HYDROGEN_COUNTS.
              */
             extern CDPL_VIS_API const bool SHOW_HYDROGEN_COUNTS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_NON_CARBON_HYDROGEN_COUNTS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_NON_CARBON_HYDROGEN_COUNTS.
              */
             extern CDPL_VIS_API const bool SHOW_NON_CARBON_HYDROGEN_COUNTS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_ATOM_QUERY_INFOS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_ATOM_QUERY_INFOS.
              */
             extern CDPL_VIS_API const bool SHOW_ATOM_QUERY_INFOS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_ATOM_REACTION_INFOS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_ATOM_REACTION_INFOS.
              */
             extern CDPL_VIS_API const bool SHOW_ATOM_REACTION_INFOS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_RADICAL_ELECTRONS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_RADICAL_ELECTRONS.
              */
             extern CDPL_VIS_API const bool SHOW_RADICAL_ELECTRONS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS.
+             * \brief Default value (= \c false) of the control-parameter Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS.
              * \since 1.1
              */
             extern CDPL_VIS_API const bool SHOW_ATOM_CONFIGURATION_LABELS;
   
            /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_ATOM_CUSTOM_LABELS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_ATOM_CUSTOM_LABELS.
              * \since 1.2
              */
             extern CDPL_VIS_API const bool SHOW_ATOM_CUSTOM_LABELS;
              
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::ENABLE_ATOM_HIGHLIGHTING.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::ENABLE_ATOM_HIGHLIGHTING.
              * \since 1.2
              */
             extern CDPL_VIS_API const bool ENABLE_ATOM_HIGHLIGHTING;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(1.0, false, false, true)) for the control-parameter Vis::ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(1.0, false, false, true)) of the control-parameter Vis::ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification HIGHLIGHT_AREA_OUTLINE_WIDTH;
        
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::BOND_COLOR.
              */
             extern CDPL_VIS_API const Color BOND_COLOR;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(30.0)) for the control-parameter Vis::ControlParameter::BOND_LENGTH.
+             * \brief Default value (= \c %SizeSpecification(30.0)) of the control-parameter Vis::ControlParameter::BOND_LENGTH.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LENGTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(1.5, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LINE_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(1.5, false, false, true)) of the control-parameter Vis::ControlParameter::BOND_LINE_WIDTH.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LINE_WIDTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.15, true, true, true)) for the control-parameter Vis::ControlParameter::BOND_LINE_SPACING.
+             * \brief Default value (= \c %SizeSpecification(0.15, true, true, true)) of the control-parameter Vis::ControlParameter::BOND_LINE_SPACING.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LINE_SPACING;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.15, true, true, true)) for the control-parameter Vis::ControlParameter::STEREO_BOND_WEDGE_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(0.15, true, true, true)) of the control-parameter Vis::ControlParameter::STEREO_BOND_WEDGE_WIDTH.
              */
             extern CDPL_VIS_API const SizeSpecification STEREO_BOND_WEDGE_WIDTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.1, true, true, true)) for the control-parameter Vis::ControlParameter::STEREO_BOND_HASH_SPACING.
+             * \brief Default value (= \c %SizeSpecification(0.1, true, true, true)) of the control-parameter Vis::ControlParameter::STEREO_BOND_HASH_SPACING.
              */
             extern CDPL_VIS_API const SizeSpecification STEREO_BOND_HASH_SPACING;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.4, true, true, true)) for the control-parameter Vis::ControlParameter::REACTION_CENTER_LINE_LENGTH.
+             * \brief Default value (= \c %SizeSpecification(0.4, true, true, true)) of the control-parameter Vis::ControlParameter::REACTION_CENTER_LINE_LENGTH.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_LENGTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.1, true, true, true)) for the control-parameter Vis::ControlParameter::REACTION_CENTER_LINE_SPACING.
+             * \brief Default value (= \c %SizeSpecification(0.1, true, true, true)) of the control-parameter Vis::ControlParameter::REACTION_CENTER_LINE_SPACING.
              */
             extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_SPACING;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.1, true, true, true)) for the control-parameter Vis::ControlParameter::DOUBLE_BOND_TRIM_LENGTH.
+             * \brief Default value (= \c %SizeSpecification(0.1, true, true, true)) of the control-parameter Vis::ControlParameter::DOUBLE_BOND_TRIM_LENGTH.
              */
             extern CDPL_VIS_API const SizeSpecification DOUBLE_BOND_TRIM_LENGTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(0.1, true, true, true)) for the control-parameter Vis::ControlParameter::TRIPLE_BOND_TRIM_LENGTH.
+             * \brief Default value (= \c %SizeSpecification(0.1, true, true, true)) of the control-parameter Vis::ControlParameter::TRIPLE_BOND_TRIM_LENGTH.
              */
             extern CDPL_VIS_API const SizeSpecification TRIPLE_BOND_TRIM_LENGTH;
 
             /**
-             * \brief Default setting (= \c %Font()) for the control-parameter Vis::ControlParameter::BOND_LABEL_FONT.
+             * \brief Default value (= \c %Font()) of the control-parameter Vis::ControlParameter::BOND_LABEL_FONT.
              */
             extern CDPL_VIS_API const Font BOND_LABEL_FONT;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LABEL_SIZE.
+             * \brief Default value (= \c %SizeSpecification(8.0, false, false, true)) of the control-parameter Vis::ControlParameter::BOND_LABEL_SIZE.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LABEL_SIZE;
 
             /**
-             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT.
+             * \brief Default value (= \c %Font("", 8.0, false, true)) of the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT.
              * \since 1.1
              */
             extern CDPL_VIS_API const Font BOND_CONFIGURATION_LABEL_FONT;
             
             /**
-             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE.
+             * \brief Default value (= \c %SizeSpecification(8.0, false, false, true)) of the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE.
              * \since 1.1
              */
             extern CDPL_VIS_API const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR.
              * \since 1.2
              */
             extern CDPL_VIS_API const Color BOND_CONFIGURATION_LABEL_COLOR;
             
             /**
-             * \brief Default setting (= \c %Font("", 8.0, false, false)) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT.
+             * \brief Default value (= \c %Font("", 8.0, false, false)) of the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT.
              * \since 1.2
              */
             extern CDPL_VIS_API const Font BOND_CUSTOM_LABEL_FONT;
             
             /**
-             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_SIZE.
+             * \brief Default value (= \c %SizeSpecification(8.0, false, false, true)) of the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_SIZE.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification BOND_CUSTOM_LABEL_SIZE;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_COLOR.
              * \since 1.2
              */
             extern CDPL_VIS_API const Color BOND_CUSTOM_LABEL_COLOR;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LABEL_MARGIN.
+             * \brief Default value (= \c %SizeSpecification(2.0, false, false, true)) of the control-parameter Vis::ControlParameter::BOND_LABEL_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LABEL_MARGIN;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(12.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH.
+             * \brief Default value (= \c %SizeSpecification(12.0, false, false, true)) of the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification BOND_HIGHLIGHT_AREA_WIDTH;
 
             /**
-             * \brief Default setting (= \c %Brush(Color(0.8, 0.8, 1.0)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH.
+             * \brief Default value (= \c %Brush(Color(0.8, 0.8, 1.0)) of the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH.
              * \since 1.2
              */
             extern CDPL_VIS_API const Brush BOND_HIGHLIGHT_AREA_BRUSH;
 
             /**
-             * \brief Default setting (= \c %Pen(Color(0.6, 0.6, 0.75)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \brief Default value (= \c %Pen(Color(0.6, 0.6, 0.75)) of the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen BOND_HIGHLIGHT_AREA_OUTLINE_PEN;
      
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_BOND_REACTION_INFOS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_BOND_REACTION_INFOS.
              */
             extern CDPL_VIS_API const bool SHOW_BOND_REACTION_INFOS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_BOND_QUERY_INFOS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_BOND_QUERY_INFOS.
              */
             extern CDPL_VIS_API const bool SHOW_BOND_QUERY_INFOS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_STEREO_BONDS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_STEREO_BONDS.
              */
             extern CDPL_VIS_API const bool SHOW_STEREO_BONDS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS.
+             * \brief Default value (= \c false) of the control-parameter Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS.
              * \since 1.1
              */
             extern CDPL_VIS_API const bool SHOW_BOND_CONFIGURATION_LABELS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_BOND_CUSTOM_LABELS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_BOND_CUSTOM_LABELS.
              * \since 1.2
              */
             extern CDPL_VIS_API const bool SHOW_BOND_CUSTOM_LABELS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::ENABLE_BOND_HIGHLIGHTING.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::ENABLE_BOND_HIGHLIGHTING.
              * \since 1.2
              */
             extern CDPL_VIS_API const bool ENABLE_BOND_HIGHLIGHTING;
 
             /**
-             * \brief Default setting (= \c %Pen(Pen::NO_LINE)) for the control-parameter Vis::ControlParameter::GRID_VIEW_BORDER_PEN.
+             * \brief Default value (= \c %Pen(Pen::NO_LINE)) of the control-parameter Vis::ControlParameter::GRID_VIEW_BORDER_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen GRID_VIEW_BORDER_PEN;
 
             /**
-             * \brief Default setting (= \c %Pen(Pen::NO_LINE)) for the control-parameter Vis::ControlParameter::GRID_VIEW_ROW_SEPARATOR_PEN.
+             * \brief Default value (= \c %Pen(Pen::NO_LINE)) of the control-parameter Vis::ControlParameter::GRID_VIEW_ROW_SEPARATOR_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen GRID_VIEW_ROW_SEPARATOR_PEN;
 
             /**
-             * \brief Default setting (= \c %Pen(Pen::NO_LINE)) for the control-parameter Vis::ControlParameter::GRID_VIEW_COLUMN_SEPARATOR_PEN.
+             * \brief Default value (= \c %Pen(Pen::NO_LINE)) of the control-parameter Vis::ControlParameter::GRID_VIEW_COLUMN_SEPARATOR_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen GRID_VIEW_COLUMN_SEPARATOR_PEN;
 
             /**
-             * \brief Default setting (= \c 0.0) for the control-parameter Vis::ControlParameter::GRID_VIEW_MARGIN.
+             * \brief Default value (= \c 0.0) of the control-parameter Vis::ControlParameter::GRID_VIEW_MARGIN.
              * \since 1.2
              */
             extern CDPL_VIS_API const double GRID_VIEW_MARGIN;
    
             /**
-             * \brief Default setting (= \c 5.0) for the control-parameter Vis::ControlParameter::GRID_VIEW_CELL_PADDING.
+             * \brief Default value (= \c 5.0) of the control-parameter Vis::ControlParameter::GRID_VIEW_CELL_PADDING.
              * \since 1.2
              */
             extern CDPL_VIS_API const double GRID_VIEW_CELL_PADDING;
             
             /**
-             * \brief Default setting (= \c %Font("", 10.0)) for the control-parameter Vis::ControlParameter::GRID_VIEW_TEXT_FONT.
+             * \brief Default value (= \c %Font("", 10.0)) of the control-parameter Vis::ControlParameter::GRID_VIEW_TEXT_FONT.
              * \since 1.2
              */
             extern CDPL_VIS_API const Font GRID_VIEW_TEXT_FONT;
 
             /**
-             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::GRID_VIEW_TEXT_COLOR.
+             * \brief Default value (= \c Color::BLACK) of the control-parameter Vis::ControlParameter::GRID_VIEW_TEXT_COLOR.
              * \since 1.2
              */
             extern CDPL_VIS_API const Color GRID_VIEW_TEXT_COLOR;
 
             /**
-             * \brief Default setting (= \c %DefaultAtomColorTable()) for the control-parameter Vis::ControlParameter::FEATURE_COLOR_TABLE.
+             * \brief Default value (= \c %DefaultAtomColorTable()) of the control-parameter Vis::ControlParameter::FEATURE_COLOR_TABLE.
              * \since 1.3
              */
             extern CDPL_VIS_API const ColorTable::SharedPointer FEATURE_COLOR_TABLE;
 
             /**
-             * \brief Default setting (= \c %Material(0.5, Color(0.7, 0.7, 0.7), Color(1.0, 1.0, 1.0), 0.1)) 
-             *        for the control-parameter Vis::ControlParameter::DEFAULT_MATERIAL.
+             * \brief Default value (= \c %Material(0.5, Color(0.7, 0.7, 0.7), Color(1.0, 1.0, 1.0), 0.1)) 
+             *        of the control-parameter Vis::ControlParameter::DEFAULT_MATERIAL.
              * \since 1.3
              */
             extern CDPL_VIS_API const Material DEFAULT_MATERIAL;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_FEATURE_CENTERS.
+             * \brief Default value (= \c true) of the control-parameter Vis::ControlParameter::SHOW_FEATURE_CENTERS.
              * \since 1.3
              */
             extern CDPL_VIS_API const bool SHOW_FEATURE_CENTERS;
-
         } // namespace ControlParameterDefault
     } // namespace Vis
 } // namespace CDPL

@@ -50,7 +50,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PharmacophoreGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PharmacophoreGenerator instances.
+             */
             typedef std::shared_ptr<PharmacophoreGenerator> SharedPointer;
 
             /**

@@ -67,11 +67,19 @@ namespace CDPL
             enum HitReportMode
             {
 
-                /** \brief Report the first conformer that matches the query. */
+                /**
+                 * \brief Report the first conformer that matches the query.
+                 */
                 FIRST_MATCHING_CONF,
-                /** \brief Report only the best-scoring matching conformer. */
+
+                /**
+                 * \brief Report only the best-scoring matching conformer.
+                 */
                 BEST_MATCHING_CONF,
-                /** \brief Report every conformer that matches the query. */
+
+                /**
+                 * \brief Report every conformer that matches the query.
+                 */
                 ALL_MATCHING_CONFS
             };
 
@@ -158,14 +166,25 @@ namespace CDPL
                 std::size_t               confIndex;
             };
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ScreeningProcessor instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ScreeningProcessor instances.
+             */
             typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
 
-            /** \brief Type of the callback invoked for every alignment hit (return: \c true to continue, \c false to abort the search). */
+            /**
+             * \brief Type of the callback invoked for every alignment hit (return: \c true to continue, \c false to abort the search).
+             */
             typedef std::function<bool(const SearchHit&, double)> HitCallbackFunction;
-            /** \brief Type of the function used to score a search hit. */
+
+            /**
+             * \brief Type of the function used to score a search hit.
+             */
             typedef std::function<double(const SearchHit&)>       ScoringFunction;
-            /** \brief Type of the progress-reporting callback (arguments: current molecule index, total molecule count; return: \c true to continue, \c false to abort). */
+
+            /**
+             * \brief Type of the progress-reporting callback (arguments: current molecule index, total molecule count; return: \c true to continue, \c false to abort).
+             */
             typedef std::function<bool(std::size_t, std::size_t)> ProgressCallbackFunction;
 
             /**

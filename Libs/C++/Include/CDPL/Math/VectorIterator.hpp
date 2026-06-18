@@ -153,15 +153,29 @@ namespace CDPL
         struct VectorIteratorTraits
         {
 
-            /** \brief The (mutable) vector expression type being iterated. */
+            /**
+             * \brief The (mutable) vector expression type being iterated.
+             */
             typedef E                                                               VectorType;
-            /** \brief The size type used by the iterated vector. */
+
+            /**
+             * \brief The size type used by the iterated vector.
+             */
             typedef typename E::SizeType                                            SizeType;
-            /** \brief The element value type of the iterated vector. */
+
+            /**
+             * \brief The element value type of the iterated vector.
+             */
             typedef typename E::ValueType                                           ValueType;
-            /** \brief The element-access functor type used to materialize iterator references. */
+
+            /**
+             * \brief The element-access functor type used to materialize iterator references.
+             */
             typedef VectorElementAccessor<E>                                        AccessorType;
-            /** \brief The constructed iterator type (a Util::IndexedElementIterator specialization). */
+
+            /**
+             * \brief The constructed iterator type (a Util::IndexedElementIterator specialization).
+             */
             typedef Util::IndexedElementIterator<ValueType, AccessorType, SizeType> IteratorType;
 
             /**
@@ -184,15 +198,29 @@ namespace CDPL
         struct VectorIteratorTraits<const E>
         {
 
-            /** \brief The constant vector expression type being iterated. */
+            /**
+             * \brief The constant vector expression type being iterated.
+             */
             typedef E                                                                     VectorType;
-            /** \brief The size type used by the iterated vector. */
+
+            /**
+             * \brief The size type used by the iterated vector.
+             */
             typedef typename E::SizeType                                                  SizeType;
-            /** \brief The element value type of the iterated vector. */
+
+            /**
+             * \brief The element value type of the iterated vector.
+             */
             typedef typename E::ValueType                                                 ValueType;
-            /** \brief The element-access functor type used to materialize iterator references (const-qualified). */
+
+            /**
+             * \brief The element-access functor type used to materialize iterator references (const-qualified).
+             */
             typedef VectorElementAccessor<const E>                                        AccessorType;
-            /** \brief The constructed constant iterator type (a Util::IndexedElementIterator specialization). */
+
+            /**
+             * \brief The constructed constant iterator type (a Util::IndexedElementIterator specialization).
+             */
             typedef Util::IndexedElementIterator<const ValueType, AccessorType, SizeType> IteratorType;
 
             /**

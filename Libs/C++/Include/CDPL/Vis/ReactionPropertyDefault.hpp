@@ -47,45 +47,104 @@ namespace CDPL
         namespace ReactionPropertyDefault
         {
 
-            /** \brief Default value of the Vis::ReactionProperty::ARROW_STYLE property. */
+            /**
+             * \brief Default value of the Vis::ReactionProperty::ARROW_STYLE property.
+             */
             extern CDPL_VIS_API const unsigned int      ARROW_STYLE;
-            /** \brief Default value of the Vis::ReactionProperty::ARROW_COLOR property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::ARROW_COLOR property.
+             */
             extern CDPL_VIS_API const Color             ARROW_COLOR;
-            /** \brief Default value of the Vis::ReactionProperty::ARROW_LENGTH property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::ARROW_LENGTH property.
+             */
             extern CDPL_VIS_API const SizeSpecification ARROW_LENGTH;
-            /** \brief Default value of the Vis::ReactionProperty::ARROW_HEAD_LENGTH property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::ARROW_HEAD_LENGTH property.
+             */
             extern CDPL_VIS_API const SizeSpecification ARROW_HEAD_LENGTH;
-            /** \brief Default value of the Vis::ReactionProperty::ARROW_HEAD_WIDTH property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::ARROW_HEAD_WIDTH property.
+             */
             extern CDPL_VIS_API const SizeSpecification ARROW_HEAD_WIDTH;
-            /** \brief Default value of the Vis::ReactionProperty::ARROW_SHAFT_WIDTH property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::ARROW_SHAFT_WIDTH property.
+             */
             extern CDPL_VIS_API const SizeSpecification ARROW_SHAFT_WIDTH;
-            /** \brief Default value of the Vis::ReactionProperty::ARROW_LINE_WIDTH property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::ARROW_LINE_WIDTH property.
+             */
             extern CDPL_VIS_API const SizeSpecification ARROW_LINE_WIDTH;
-            /** \brief Default value of the Vis::ReactionProperty::COMPONENT_LAYOUT property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::COMPONENT_LAYOUT property.
+             */
             extern CDPL_VIS_API const unsigned int      COMPONENT_LAYOUT;
-            /** \brief Default value of the Vis::ReactionProperty::COMPONENT_LAYOUT_DIRECTION property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::COMPONENT_LAYOUT_DIRECTION property.
+             */
             extern CDPL_VIS_API const unsigned int      COMPONENT_LAYOUT_DIRECTION;
-            /** \brief Default value of the Vis::ReactionProperty::COMPONENT_MARGIN property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::COMPONENT_MARGIN property.
+             */
             extern CDPL_VIS_API const SizeSpecification COMPONENT_MARGIN;
-            /** \brief Default value of the Vis::ReactionProperty::SHOW_REACTANTS property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::SHOW_REACTANTS property.
+             */
             extern CDPL_VIS_API const bool              SHOW_REACTANTS;
-            /** \brief Default value of the Vis::ReactionProperty::SHOW_AGENTS property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::SHOW_AGENTS property.
+             */
             extern CDPL_VIS_API const bool              SHOW_AGENTS;
-            /** \brief Default value of the Vis::ReactionProperty::SHOW_PRODUCTS property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::SHOW_PRODUCTS property.
+             */
             extern CDPL_VIS_API const bool              SHOW_PRODUCTS;
-            /** \brief Default value of the Vis::ReactionProperty::AGENT_ALIGNMENT property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::AGENT_ALIGNMENT property.
+             */
             extern CDPL_VIS_API const unsigned int      AGENT_ALIGNMENT;
-            /** \brief Default value of the Vis::ReactionProperty::AGENT_LAYOUT property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::AGENT_LAYOUT property.
+             */
             extern CDPL_VIS_API const unsigned int      AGENT_LAYOUT;
-            /** \brief Default value of the Vis::ReactionProperty::AGENT_LAYOUT_DIRECTION property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::AGENT_LAYOUT_DIRECTION property.
+             */
             extern CDPL_VIS_API const unsigned int      AGENT_LAYOUT_DIRECTION;
-            /** \brief Default value of the Vis::ReactionProperty::PLUS_SIGN_COLOR property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::PLUS_SIGN_COLOR property.
+             */
             extern CDPL_VIS_API const Color             PLUS_SIGN_COLOR;
-            /** \brief Default value of the Vis::ReactionProperty::PLUS_SIGN_SIZE property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::PLUS_SIGN_SIZE property.
+             */
             extern CDPL_VIS_API const SizeSpecification PLUS_SIGN_SIZE;
-            /** \brief Default value of the Vis::ReactionProperty::PLUS_SIGN_LINE_WIDTH property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::PLUS_SIGN_LINE_WIDTH property.
+             */
             extern CDPL_VIS_API const SizeSpecification PLUS_SIGN_LINE_WIDTH;
-            /** \brief Default value of the Vis::ReactionProperty::SHOW_PLUS_SIGNS property. */
+
+            /**
+             * \brief Default value of the Vis::ReactionProperty::SHOW_PLUS_SIGNS property.
+             */
             extern CDPL_VIS_API const bool              SHOW_PLUS_SIGNS;
         } // namespace ReactionPropertyDefault
     } // namespace Vis

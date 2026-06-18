@@ -74,8 +74,9 @@ class BondProperty(Boost.Python.instance):
     CIP_CONFIGURATION = CDPL.Base.LookupKey('CIP_CONFIGURATION')
 
     ##
-    # \brief Specifies the bond direction in <em>SMILES</em> and <em>SMARTS</em> strings (see [\ref SMILES, \ref SMARTS], namespace Chem.BondDirection).
+    # \brief Specifies the bond direction in <em>SMILES</em> and <em>SMARTS</em> strings (see namespace Chem.BondDirection).
     # 
+    # \see [\ref SMILES, \ref SMARTS] 
     # \valuetype  <tt>unsigned int</tt>
     # 
     DIRECTION = CDPL.Base.LookupKey('DIRECTION')

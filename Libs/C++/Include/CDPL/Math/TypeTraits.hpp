@@ -85,13 +85,24 @@ namespace CDPL
         struct ScalarTraits
         {
 
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T               ValueType;
-            /** \brief The real-valued type (identical to ValueType for scalar traits). */
+
+            /**
+             * \brief The real-valued type (identical to ValueType for scalar traits).
+             */
             typedef T               RealType;
-            /** \brief Constant-reference type to a value. */
+
+            /**
+             * \brief Constant-reference type to a value.
+             */
             typedef const T&        ConstReference;
-            /** \brief Convenience alias for this traits instantiation. */
+
+            /**
+             * \brief Convenience alias for this traits instantiation.
+             */
             typedef ScalarTraits<T> SelfType;
 
             /**
@@ -185,13 +196,24 @@ namespace CDPL
         struct ComplexTraits
         {
 
-            /** \brief The complex value type (a \c std::complex specialization). */
+            /**
+             * \brief The complex value type (a \c std::complex specialization).
+             */
             typedef T                      ValueType;
-            /** \brief The underlying real-valued type. */
+
+            /**
+             * \brief The underlying real-valued type.
+             */
             typedef typename T::value_type RealType;
-            /** \brief Constant-reference type to a value. */
+
+            /**
+             * \brief Constant-reference type to a value.
+             */
             typedef const T&               ConstReference;
-            /** \brief Convenience alias for this traits instantiation. */
+
+            /**
+             * \brief Convenience alias for this traits instantiation.
+             */
             typedef ComplexTraits<T>       SelfType;
 
             /**
@@ -300,7 +322,9 @@ namespace CDPL
         struct VectorTemporaryTraits
         {
 
-            /** \brief The concrete temporary vector type compatible with the vector expression \a V. */
+            /**
+             * \brief The concrete temporary vector type compatible with the vector expression \a V.
+             */
             typedef typename V::VectorTemporaryType Type;
         };
 
@@ -312,7 +336,9 @@ namespace CDPL
         struct MatrixTemporaryTraits
         {
 
-            /** \brief The concrete temporary matrix type compatible with the matrix expression \a M. */
+            /**
+             * \brief The concrete temporary matrix type compatible with the matrix expression \a M.
+             */
             typedef typename M::MatrixTemporaryType Type;
         };
 
@@ -324,7 +350,9 @@ namespace CDPL
         struct QuaternionTemporaryTraits
         {
 
-            /** \brief The concrete temporary quaternion type compatible with the quaternion expression \a Q. */
+            /**
+             * \brief The concrete temporary quaternion type compatible with the quaternion expression \a Q.
+             */
             typedef typename Q::QuaternionTemporaryType Type;
         };
 
@@ -336,7 +364,9 @@ namespace CDPL
         struct GridTemporaryTraits
         {
 
-            /** \brief The concrete temporary grid type compatible with the grid expression \a G. */
+            /**
+             * \brief The concrete temporary grid type compatible with the grid expression \a G.
+             */
             typedef typename G::GridTemporaryType Type;
         };
 

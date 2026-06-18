@@ -45,35 +45,35 @@ namespace CDPL
         {
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Grid::ControlParameter::STRICT_ERROR_CHECKING.
+             * \brief Default value (= \c false) of the control-parameter Grid::ControlParameter::STRICT_ERROR_CHECKING.
              */
             extern CDPL_GRID_API const bool STRICT_ERROR_CHECKING;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Grid::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
+             * \brief Default value (= \c false) of the control-parameter Grid::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
              * \since 1.2
              */
             extern CDPL_GRID_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Grid::ControlParameter::CUBE_COMMENT_IS_NAME.
+             * \brief Default value (= \c false) of the control-parameter Grid::ControlParameter::CUBE_COMMENT_IS_NAME.
              * \since 1.4
              */
             extern CDPL_GRID_API const bool CUBE_COMMENT_IS_NAME;
 
             /**
-             * \brief Default setting for the control-parameter Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR.
+             * \brief Default value (= <tt>1/0.52918</tt>) of the control-parameter Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR.
              *
-             * The default value (= <em>1/0.52918</em>) performs a conversion from Bohr to Angstrom.
+             * The default value performs a conversion from Bohr to Ångstrom.
              *
              * \since 1.4
              */
             extern CDPL_GRID_API const double CUBE_INPUT_DISTANCE_SCALING_FACTOR;
 
             /**
-             * \brief Default setting for the control-parameter Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR.
+             * \brief Default value (= \c 0.52918) of the control-parameter Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR.
              *
-             * The default value (= \e 0.52918) performs a conversion from Angstrom to Bohr.
+             * The default value performs a conversion from Ångstrom to Bohr.
              *
              * \since 1.4
              */

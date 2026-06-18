@@ -63,19 +63,39 @@ namespace CDPL
             typedef typename E::ConstClosureType ExpressionClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType     ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType            ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType            Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType             ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                   ClosureType;
-            /** \brief The size type inherited from the wrapped expression. */
+
+            /**
+             * \brief The size type inherited from the wrapped expression.
+             */
             typedef typename E::SizeType       SizeType;
-            /** \brief The signed difference type inherited from the wrapped expression. */
+
+            /**
+             * \brief The signed difference type inherited from the wrapped expression.
+             */
             typedef typename E::DifferenceType DifferenceType;
 
             /**
@@ -127,9 +147,14 @@ namespace CDPL
         struct MatrixUnaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef MatrixUnary<E, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType    ResultType;
         };
 
@@ -148,19 +173,39 @@ namespace CDPL
             typedef typename E::ConstClosureType ExpressionClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType     ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType            ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType            Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType             ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                   ClosureType;
-            /** \brief The size type inherited from the wrapped vector expression. */
+
+            /**
+             * \brief The size type inherited from the wrapped vector expression.
+             */
             typedef typename E::SizeType       SizeType;
-            /** \brief The signed difference type inherited from the wrapped vector expression. */
+
+            /**
+             * \brief The signed difference type inherited from the wrapped vector expression.
+             */
             typedef typename E::DifferenceType DifferenceType;
 
             /**
@@ -212,9 +257,14 @@ namespace CDPL
         struct VectorMatrixUnaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef VectorMatrixUnary<E, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType          ResultType;
         };
 
@@ -236,19 +286,39 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType                                                              ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType                                                                     ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType                                                                     Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType                                                                      ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                                                                            ClosureType;
-            /** \brief The common size type of the two wrapped expressions. */
+
+            /**
+             * \brief The common size type of the two wrapped expressions.
+             */
             typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
-            /** \brief The common signed difference type of the two wrapped expressions. */
+
+            /**
+             * \brief The common signed difference type of the two wrapped expressions.
+             */
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
@@ -305,9 +375,14 @@ namespace CDPL
         struct MatrixBinary1Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef MatrixBinary1<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType           ResultType;
         };
 
@@ -334,19 +409,39 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType                                                              ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType                                                                     ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType                                                                     Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType                                                                      ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                                                                            ClosureType;
-            /** \brief The common size type of the two wrapped expressions. */
+
+            /**
+             * \brief The common size type of the two wrapped expressions.
+             */
             typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
-            /** \brief The common signed difference type of the two wrapped expressions. */
+
+            /**
+             * \brief The common signed difference type of the two wrapped expressions.
+             */
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
@@ -401,9 +496,14 @@ namespace CDPL
         struct MatrixBinary2Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef MatrixBinary2<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType           ResultType;
         };
 
@@ -426,19 +526,39 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType                                                              ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType                                                                     ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType                                                                     Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType                                                                      ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                                                                            ClosureType;
-            /** \brief The common size type of the two wrapped vector expressions. */
+
+            /**
+             * \brief The common size type of the two wrapped vector expressions.
+             */
             typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
-            /** \brief The common signed difference type of the two wrapped vector expressions. */
+
+            /**
+             * \brief The common signed difference type of the two wrapped vector expressions.
+             */
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
@@ -493,9 +613,14 @@ namespace CDPL
         struct VectorMatrixBinaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef VectorMatrixBinary<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                ResultType;
         };
 
@@ -521,19 +646,39 @@ namespace CDPL
             typedef typename E2::ConstClosureType  Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType                                                              ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType                                                                     ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType                                                                     Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType                                                                      ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                                                                            ClosureType;
-            /** \brief The common size type of the wrapped matrix and vector expressions. */
+
+            /**
+             * \brief The common size type of the wrapped matrix and vector expressions.
+             */
             typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
-            /** \brief The common signed difference type of the wrapped matrix and vector expressions. */
+
+            /**
+             * \brief The common signed difference type of the wrapped matrix and vector expressions.
+             */
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
@@ -588,9 +733,14 @@ namespace CDPL
         struct Matrix1VectorBinaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Matrix1VectorBinary<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                 ResultType;
         };
 
@@ -616,19 +766,39 @@ namespace CDPL
             typedef typename E2::ConstClosureType  Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType                                                              ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType                                                                     ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType                                                                     Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType                                                                      ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                                                                            ClosureType;
-            /** \brief The common size type of the wrapped vector and matrix expressions. */
+
+            /**
+             * \brief The common size type of the wrapped vector and matrix expressions.
+             */
             typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
-            /** \brief The common signed difference type of the wrapped vector and matrix expressions. */
+
+            /**
+             * \brief The common signed difference type of the wrapped vector and matrix expressions.
+             */
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
@@ -683,9 +853,14 @@ namespace CDPL
         struct Matrix2VectorBinaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Matrix2VectorBinary<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                 ResultType;
         };
 
@@ -707,19 +882,39 @@ namespace CDPL
             typedef typename E2::ConstClosureType  Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType      ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType             ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType             Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType              ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                    ClosureType;
-            /** \brief The size type inherited from the wrapped matrix expression. */
+
+            /**
+             * \brief The size type inherited from the wrapped matrix expression.
+             */
             typedef typename E2::SizeType       SizeType;
-            /** \brief The signed difference type inherited from the wrapped matrix expression. */
+
+            /**
+             * \brief The signed difference type inherited from the wrapped matrix expression.
+             */
             typedef typename E2::DifferenceType DifferenceType;
 
             /**
@@ -774,9 +969,14 @@ namespace CDPL
         struct Scalar1MatrixBinaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar1MatrixBinary<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                 ResultType;
         };
 
@@ -798,19 +998,39 @@ namespace CDPL
             typedef const E2                       Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType      ValueType;
-            /** \brief Constant reference type to an element value. */
+
+            /**
+             * \brief Constant reference type to an element value.
+             */
             typedef const ValueType             ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType             Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType              ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType                    ClosureType;
-            /** \brief The size type inherited from the wrapped matrix expression. */
+
+            /**
+             * \brief The size type inherited from the wrapped matrix expression.
+             */
             typedef typename E1::SizeType       SizeType;
-            /** \brief The signed difference type inherited from the wrapped matrix expression. */
+
+            /**
+             * \brief The signed difference type inherited from the wrapped matrix expression.
+             */
             typedef typename E1::DifferenceType DifferenceType;
 
             /**
@@ -865,9 +1085,14 @@ namespace CDPL
         struct Scalar2MatrixBinaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar2MatrixBinary<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                 ResultType;
         };
 
@@ -882,27 +1107,53 @@ namespace CDPL
             typedef MatrixTranspose<M> SelfType;
 
           public:
-            /** \brief The wrapped matrix type. */
+            /**
+             * \brief The wrapped matrix type.
+             */
             typedef M                                                        MatrixType;
-            /** \brief The size type used by the wrapped matrix. */
+
+            /**
+             * \brief The size type used by the wrapped matrix.
+             */
             typedef typename M::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped matrix. */
+
+            /**
+             * \brief The signed difference type used by the wrapped matrix.
+             */
             typedef typename M::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped matrix. */
+
+            /**
+             * \brief The element value type of the wrapped matrix.
+             */
             typedef typename M::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename M::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped matrix internally. */
+
+            /**
+             * \brief Closure type used to store the wrapped matrix internally.
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstClosureType,
                                               typename M::ClosureType>::type MatrixClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
 
             /**

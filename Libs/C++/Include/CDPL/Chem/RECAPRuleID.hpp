@@ -43,29 +43,64 @@ namespace CDPL
         namespace RECAPRuleID
         {
 
-            /** \brief Specifies that no RECAP rule matched the bond. */
+            /**
+             * \brief Specifies that no rule matched the bond.
+             */
             constexpr unsigned int NONE                   = 0;
-            /** \brief Specifies the RECAP rule for amide bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for amide bond cleavage.
+             */
             constexpr unsigned int AMIDE                  = 1;
-            /** \brief Specifies the RECAP rule for ester bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for ester bond cleavage.
+             */
             constexpr unsigned int ESTER                  = 2;
-            /** \brief Specifies the RECAP rule for amine bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for amine bond cleavage.
+             */
             constexpr unsigned int AMINE                  = 3;
-            /** \brief Specifies the RECAP rule for urea bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for urea bond cleavage.
+             */
             constexpr unsigned int UREA                   = 4;
-            /** \brief Specifies the RECAP rule for ether bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for ether bond cleavage.
+             */
             constexpr unsigned int ETHER                  = 5;
-            /** \brief Specifies the RECAP rule for olefinic-bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for olefinic-bond cleavage.
+             */
             constexpr unsigned int OLEFIN                 = 6;
-            /** \brief Specifies the RECAP rule for quaternary-nitrogen bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for quaternary-nitrogen bond cleavage.
+             */
             constexpr unsigned int QUARTERNARY_N          = 7;
-            /** \brief Specifies the RECAP rule for aromatic-N to aliphatic-C bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for aromatic-N to aliphatic-C bond cleavage.
+             */
             constexpr unsigned int AROMATIC_N_ALIPHATIC_C = 8;
-            /** \brief Specifies the RECAP rule for lactam-N to aliphatic-C bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for lactam-N to aliphatic-C bond cleavage.
+             */
             constexpr unsigned int LACTAM_N_ALIPHATIC_C   = 9;
-            /** \brief Specifies the RECAP rule for aromatic-C to aromatic-C bond cleavage (biaryl). */
+
+            /**
+             * \brief Specifies the rule for aromatic-C to aromatic-C bond cleavage (biaryl).
+             */
             constexpr unsigned int AROMATIC_C_AROMATIC_C  = 10;
-            /** \brief Specifies the RECAP rule for sulfonamide bond cleavage. */
+
+            /**
+             * \brief Specifies the rule for sulfonamide bond cleavage.
+             */
             constexpr unsigned int SULFONAMIDE            = 11;
         } // namespace RECAPRuleID
     } // namespace Chem

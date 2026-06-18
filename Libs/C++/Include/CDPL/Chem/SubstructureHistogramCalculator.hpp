@@ -68,12 +68,19 @@ namespace CDPL
             typedef std::vector<Pattern> PatternList;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SubstructureHistogramCalculator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SubstructureHistogramCalculator instances.
+             */
             typedef std::shared_ptr<SubstructureHistogramCalculator> SharedPointer;
 
-            /** \brief A constant iterator over the registered patterns. */
+            /**
+             * \brief A constant iterator over the registered patterns.
+             */
             typedef PatternList::const_iterator ConstPatternIterator;
-            /** \brief A mutable iterator over the registered patterns. */
+
+            /**
+             * \brief A mutable iterator over the registered patterns.
+             */
             typedef PatternList::iterator       PatternIterator;
 
             /**

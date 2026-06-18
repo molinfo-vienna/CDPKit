@@ -60,7 +60,9 @@ namespace CDPL
             typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94PrimaryToParameterAtomTypeMap instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94PrimaryToParameterAtomTypeMap instances.
+             */
             typedef std::shared_ptr<MMFF94PrimaryToParameterAtomTypeMap> SharedPointer;
 
             /**
@@ -70,7 +72,9 @@ namespace CDPL
             {
 
               public:
-                /** \brief Number of fallback parameter atom types stored per entry. */
+                /**
+                 * \brief Number of fallback parameter atom types stored per entry.
+                 */
                 static constexpr std::size_t NUM_TYPES = 4;
 
                 /**
@@ -110,12 +114,16 @@ namespace CDPL
                 bool         initialized;
             };
 
-            /** \brief A constant iterator over the entries of the map. */
+            /**
+             * \brief A constant iterator over the entries of the map.
+             */
             typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
                                               DataStorage::const_iterator>
                 ConstEntryIterator;
 
-            /** \brief A mutable iterator over the entries of the map. */
+            /**
+             * \brief A mutable iterator over the entries of the map.
+             */
             typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
                                               DataStorage::iterator>
                 EntryIterator;

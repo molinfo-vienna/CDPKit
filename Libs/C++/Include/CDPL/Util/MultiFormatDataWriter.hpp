@@ -54,7 +54,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiFormatDataWriter instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiFormatDataWriter instances.
+             */
             typedef std::shared_ptr<MultiFormatDataWriter> SharedPointer;
 
             /**

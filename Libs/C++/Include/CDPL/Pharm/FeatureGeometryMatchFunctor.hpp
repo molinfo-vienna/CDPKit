@@ -52,17 +52,34 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default maximum H-bond acceptor interaction direction angle in degrees. */
+            /**
+             * \brief Default maximum H-bond acceptor interaction direction angle in degrees.
+             */
             static constexpr double DEF_MAX_HBA_INTERACTION_DIR_ANGLE     = 85.0;
-            /** \brief Default maximum H-bond acceptor orientation deviation in degrees. */
+
+            /**
+             * \brief Default maximum H-bond acceptor orientation deviation in degrees.
+             */
             static constexpr double DEF_MAX_HBA_ORIENTATION_DEVIATION     = 45.0;
-            /** \brief Default maximum H-bond donor interaction direction deviation in degrees. */
+
+            /**
+             * \brief Default maximum H-bond donor interaction direction deviation in degrees.
+             */
             static constexpr double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0;
-            /** \brief Default maximum halogen-bond acceptor interaction direction deviation in degrees. */
+
+            /**
+             * \brief Default maximum halogen-bond acceptor interaction direction deviation in degrees.
+             */
             static constexpr double DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0;
-            /** \brief Default maximum halogen-bond donor interaction direction deviation in degrees. */
+
+            /**
+             * \brief Default maximum halogen-bond donor interaction direction deviation in degrees.
+             */
             static constexpr double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
-            /** \brief Default maximum aromatic feature orientation deviation in degrees. */
+
+            /**
+             * \brief Default maximum aromatic feature orientation deviation in degrees.
+             */
             static constexpr double DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
 
             /**

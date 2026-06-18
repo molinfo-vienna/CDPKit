@@ -64,23 +64,46 @@ namespace CDPL
             typedef VectorReference<V> SelfType;
 
           public:
-            /** \brief The wrapped vector type. */
+            /**
+             * \brief The wrapped vector type.
+             */
             typedef V                                                      VectorType;
-            /** \brief The element value type of the wrapped vector. */
+
+            /**
+             * \brief The element value type of the wrapped vector.
+             */
             typedef typename V::ValueType                                  ValueType;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename V::ConstReference                             ConstReference;
-            /** \brief The unsigned size type of the wrapped vector. */
+
+            /**
+             * \brief The unsigned size type of the wrapped vector.
+             */
             typedef typename V::SizeType                                   SizeType;
-            /** \brief The signed difference type of the wrapped vector. */
+
+            /**
+             * \brief The signed difference type of the wrapped vector.
+             */
             typedef typename V::DifferenceType                             DifferenceType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                               ClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                         ConstClosureType;
 
             /**
@@ -326,23 +349,50 @@ namespace CDPL
 
           public:
             typedef InitListVector                                SelfType;
-            /** \brief The wrapped \c std::initializer_list type. */
+
+            /**
+             * \brief The wrapped \c std::initializer_list type.
+             */
             typedef std::initializer_list<T>                      InitializerListType;
-            /** \brief The scalar value type. */
+
+            /**
+             * \brief The scalar value type.
+             */
             typedef typename InitializerListType::value_type      ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename InitializerListType::const_reference ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference for the immutable initializer list). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference for the immutable initializer list).
+             */
             typedef typename InitializerListType::reference       Reference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef typename InitializerListType::size_type       SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef typename std::ptrdiff_t                       DifferenceType;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef SelfType                                      ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const SelfType                                ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery.
+             */
             typedef Vector<T, std::vector<T> >                    VectorTemporaryType;
 
             /**
@@ -432,31 +482,69 @@ namespace CDPL
             typedef Vector<T, A> SelfType;
 
           public:
-            /** \brief The scalar value type stored in the vector. */
+            /**
+             * \brief The scalar value type stored in the vector.
+             */
             typedef T                                     ValueType;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef T&                                    Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type used by the underlying storage container. */
+
+            /**
+             * \brief The unsigned size type used by the underlying storage container.
+             */
             typedef typename A::size_type                 SizeType;
-            /** \brief The signed difference type used by the underlying storage container. */
+
+            /**
+             * \brief The signed difference type used by the underlying storage container.
+             */
             typedef typename A::difference_type           DifferenceType;
-            /** \brief The underlying storage container type. */
+
+            /**
+             * \brief The underlying storage container type.
+             */
             typedef A                                     ArrayType;
-            /** \brief Pointer type for raw element access. */
+
+            /**
+             * \brief Pointer type for raw element access.
+             */
             typedef T*                                    Pointer;
-            /** \brief Constant pointer type for raw element access. */
+
+            /**
+             * \brief Constant pointer type for raw element access.
+             */
             typedef const T*                              ConstPointer;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef VectorReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const VectorReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery.
+             */
             typedef SelfType                              VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Vector instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Vector instances.
+             */
             typedef std::shared_ptr<SelfType>             SharedPointer;
-            /** \brief Type of the brace-initializer list accepted by the corresponding constructor. */
+
+            /**
+             * \brief Type of the brace-initializer list accepted by the corresponding constructor.
+             */
             typedef std::initializer_list<T>              InitializerListType;
 
             /**
@@ -900,32 +988,74 @@ namespace CDPL
             typedef SparseVector<T> SelfType;
 
           public:
+            /**
+             * \brief The scalar value type stored in the vector.
+             */
             typedef T                                         ValueType;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                               SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                            DifferenceType;
-            /** \brief The key type used by the underlying associative container. */
+
+            /**
+             * \brief The key type used by the underlying associative container.
+             */
             typedef typename A::key_type                      KeyType;
-            /** \brief Constant reference type to a stored element value. */
+
+            /**
+             * \brief Constant reference type to a stored element value.
+             */
             typedef const T&                                  ConstReference;
-            /** \brief Mutable reference type (a proxy object that inserts on assignment to a previously-absent key). */
+
+            /**
+             * \brief Mutable reference type (a proxy object that inserts on assignment to a previously-absent key).
+             */
             typedef SparseContainerElement<SelfType, KeyType> Reference;
-            /** \brief The underlying associative container type. */
+
+            /**
+             * \brief The underlying associative container type.
+             */
             typedef A                                         ArrayType;
-            /** \brief Pointer type for raw access to stored entries. */
+
+            /**
+             * \brief Pointer type for raw access to stored entries.
+             */
             typedef T*                                        Pointer;
-            /** \brief Constant pointer type for raw access to stored entries. */
+
+            /**
+             * \brief Constant pointer type for raw access to stored entries.
+             */
             typedef const T*                                  ConstPointer;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef VectorReference<SelfType>                 ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const VectorReference<const SelfType>     ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery.
+             */
             typedef SelfType                                  VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SparseVector instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SparseVector instances.
+             */
             typedef std::shared_ptr<SelfType>                 SharedPointer;
-            /** \brief The initializer-list type accepted by constructors and assignment. */
+
+            /**
+             * \brief The initializer-list type accepted by constructors and assignment.
+             */
             typedef std::initializer_list<T>                  InitializerListType;
 
             /**
@@ -1390,34 +1520,75 @@ namespace CDPL
             typedef BoundedVector<T, N> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef T&                                    Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief The fixed-capacity C-array type used for in-memory storage. */
+
+            /**
+             * \brief The fixed-capacity C-array type used for in-memory storage.
+             */
             typedef ValueType                             ArrayType[N];
-            /** \brief Pointer type for raw access to the element array. */
+
+            /**
+             * \brief Pointer type for raw access to the element array.
+             */
             typedef T*                                    Pointer;
-            /** \brief Constant pointer type for raw access to the element array. */
+
+            /**
+             * \brief Constant pointer type for raw access to the element array.
+             */
             typedef const T*                              ConstPointer;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef VectorReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const VectorReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery (one element larger than the bound). */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery (one element larger than the bound).
+             */
             typedef BoundedVector<T, N + 1>               VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BoundedVector instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BoundedVector instances.
+             */
             typedef std::shared_ptr<SelfType>             SharedPointer;
-            /** \brief The initializer-list type accepted by constructors and assignment. */
+
+            /**
+             * \brief The initializer-list type accepted by constructors and assignment.
+             */
             typedef std::initializer_list<T>              InitializerListType;
 
-            /** \brief The compile-time maximum capacity \a N. */
+
+            /**
+             * \brief The compile-time maximum capacity \a N.
+             */
             static const SizeType MaxSize = N;
 
             /**
@@ -1878,34 +2049,75 @@ namespace CDPL
             typedef CVector<T, N> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef T&                                    Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief The fixed-size C-array type used for in-memory storage of \a N elements. */
+
+            /**
+             * \brief The fixed-size C-array type used for in-memory storage of \a N elements.
+             */
             typedef ValueType                             ArrayType[N];
-            /** \brief Pointer type for raw access to the element array. */
+
+            /**
+             * \brief Pointer type for raw access to the element array.
+             */
             typedef T*                                    Pointer;
-            /** \brief Constant pointer type for raw access to the element array. */
+
+            /**
+             * \brief Constant pointer type for raw access to the element array.
+             */
             typedef const T*                              ConstPointer;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef VectorReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const VectorReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery (a Math::BoundedVector of \a N + 1 capacity). */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery (a Math::BoundedVector of \a N + 1 capacity).
+             */
             typedef BoundedVector<T, N + 1>               VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CVector instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CVector instances.
+             */
             typedef std::shared_ptr<SelfType>             SharedPointer;
-            /** \brief The initializer-list type accepted by constructors and assignment. */
+
+            /**
+             * \brief The initializer-list type accepted by constructors and assignment.
+             */
             typedef std::initializer_list<T>              InitializerListType;
 
-            /** \brief The compile-time fixed size \a N. */
+
+            /**
+             * \brief The compile-time fixed size \a N.
+             */
             static const SizeType Size = N;
 
             /**
@@ -2314,21 +2526,44 @@ namespace CDPL
             typedef ZeroVector<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Reference type (always a \c const reference — all elements are zero). */
+
+            /**
+             * \brief Reference type (always a \c const reference — all elements are zero).
+             */
             typedef const T&                              Reference;
-            /** \brief Constant reference type to the zero element. */
+
+            /**
+             * \brief Constant reference type to the zero element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef VectorReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const VectorReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery.
+             */
             typedef Vector<T>                             VectorTemporaryType;
 
             /**
@@ -2460,21 +2695,44 @@ namespace CDPL
             typedef UnitVector<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Reference type (always a \c const reference — elements are immutable). */
+
+            /**
+             * \brief Reference type (always a \c const reference — elements are immutable).
+             */
             typedef const T&                              Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef VectorReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const VectorReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery.
+             */
             typedef Vector<T>                             VectorTemporaryType;
 
             /**
@@ -2627,21 +2885,44 @@ namespace CDPL
             typedef ScalarVector<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Reference type (always a \c const reference — elements are immutable). */
+
+            /**
+             * \brief Reference type (always a \c const reference — elements are immutable).
+             */
             typedef const T&                              Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief Closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this vector appears inside another expression.
+             */
             typedef VectorReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this vector appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this vector appears inside another expression.
+             */
             typedef const VectorReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary vector type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery.
+             */
             typedef Vector<T>                             VectorTemporaryType;
 
             /**

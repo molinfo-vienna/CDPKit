@@ -56,15 +56,29 @@ namespace CDPL
             typedef typename E::ConstClosureType ExpressionClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -123,9 +137,14 @@ namespace CDPL
         struct QuaternionUnary1Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef QuaternionUnary1<E, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType         ResultType;
         };
 
@@ -146,15 +165,29 @@ namespace CDPL
             typedef typename E::ConstClosureType ExpressionClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -213,9 +246,14 @@ namespace CDPL
         struct QuaternionUnary2Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef QuaternionUnary2<E, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType         ResultType;
         };
 
@@ -237,15 +275,29 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -307,9 +359,14 @@ namespace CDPL
         struct QuaternionBinary1Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef QuaternionBinary1<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType               ResultType;
         };
 
@@ -332,15 +389,29 @@ namespace CDPL
             typedef typename E2::ConstClosureType Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -402,9 +473,14 @@ namespace CDPL
         struct QuaternionBinary2Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef QuaternionBinary2<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType               ResultType;
         };
 
@@ -426,15 +502,29 @@ namespace CDPL
             typedef typename E2::ConstClosureType       Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -496,9 +586,14 @@ namespace CDPL
         struct Scalar1QuaternionBinary1Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar1QuaternionBinary1<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                      ResultType;
         };
 
@@ -521,15 +616,29 @@ namespace CDPL
             typedef typename E2::ConstClosureType       Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -591,9 +700,14 @@ namespace CDPL
         struct Scalar1QuaternionBinary2Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar1QuaternionBinary2<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                      ResultType;
         };
 
@@ -615,15 +729,29 @@ namespace CDPL
             typedef const E2                            Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -685,9 +813,14 @@ namespace CDPL
         struct Scalar2QuaternionBinary1Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar2QuaternionBinary1<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                      ResultType;
         };
 
@@ -710,15 +843,29 @@ namespace CDPL
             typedef const E2                            Expression2ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -780,9 +927,14 @@ namespace CDPL
         struct Scalar2QuaternionBinary2Traits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar2QuaternionBinary2<E1, E2, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                      ResultType;
         };
 
@@ -808,15 +960,29 @@ namespace CDPL
             typedef const E3                                Expression3ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -881,9 +1047,14 @@ namespace CDPL
         struct Scalar3QuaternionTernaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar3QuaternionTernary<E1, E2, E3, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                          ResultType;
         };
 
@@ -909,15 +1080,29 @@ namespace CDPL
             typedef const E3                                 Expression3ClosureType;
 
           public:
-            /** \brief The element value type of the expression (the functor's result type). */
+            /**
+             * \brief The element value type of the expression (the functor's result type).
+             */
             typedef typename F::ResultType ValueType;
-            /** \brief Constant reference type to a component value. */
+
+            /**
+             * \brief Constant reference type to a component value.
+             */
             typedef const ValueType        ConstReference;
-            /** \brief Mutable reference type (degrades to \c const for expression-template results). */
+
+            /**
+             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             */
             typedef const ValueType        Reference;
-            /** \brief Constant closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this expression appears inside another expression.
+             */
             typedef const SelfType         ConstClosureType;
-            /** \brief Closure type used when this expression appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this expression appears inside another expression.
+             */
             typedef SelfType               ClosureType;
 
             /**
@@ -982,9 +1167,14 @@ namespace CDPL
         struct Scalar13QuaternionTernaryTraits
         {
 
-            /** \brief The expression-template node type. */
+            /**
+             * \brief The expression-template node type.
+             */
             typedef Scalar13QuaternionTernary<E1, E2, E3, F> ExpressionType;
-            /** \brief The expression-template result type returned by free-function operators. */
+
+            /**
+             * \brief The expression-template result type returned by free-function operators.
+             */
             typedef ExpressionType                           ResultType;
         };
 

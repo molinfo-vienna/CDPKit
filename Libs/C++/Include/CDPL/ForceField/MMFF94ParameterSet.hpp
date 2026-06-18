@@ -43,15 +43,29 @@ namespace CDPL
         namespace MMFF94ParameterSet
         {
 
-            /** \brief Original dynamic MMFF94 parameter set. */
+            /**
+             * \brief Original dynamic MMFF94 parameter set.
+             */
             constexpr unsigned int DYNAMIC          = 0;
-            /** \brief Original static MMFF94 parameter set. */
+
+            /**
+             * \brief Original static MMFF94 parameter set.
+             */
             constexpr unsigned int STATIC           = 1;
-            /** \brief Static MMFF94 parameter set with extended out-of-plane bending parameters. */
+
+            /**
+             * \brief Static MMFF94 parameter set with extended out-of-plane bending parameters.
+             */
             constexpr unsigned int STATIC_XOOP      = 2;
-            /** \brief Static MMFF94 parameter set with refined torsion parameters. */
+
+            /**
+             * \brief Static MMFF94 parameter set with refined torsion parameters.
+             */
             constexpr unsigned int STATIC_RTOR      = 3;
-            /** \brief Static MMFF94 parameter set with both extended out-of-plane bending and refined torsion parameters. */
+
+            /**
+             * \brief Static MMFF94 parameter set with both extended out-of-plane bending and refined torsion parameters.
+             */
             constexpr unsigned int STATIC_RTOR_XOOP = 4;
         } // namespace MMFF94ParameterSet
     } // namespace ForceField

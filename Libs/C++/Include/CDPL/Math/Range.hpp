@@ -51,7 +51,9 @@ namespace CDPL
             typedef Range<S> SelfType;
 
           public:
-            /** \brief The integral size/index type. */
+            /**
+             * \brief The integral size/index type.
+             */
             typedef S SizeType;
 
             /**

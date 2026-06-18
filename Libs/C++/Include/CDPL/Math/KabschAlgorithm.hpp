@@ -62,11 +62,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T         ValueType;
-            /** \brief The matrix type used for the transformation, the covariance matrix and the working buffers. */
+
+            /**
+             * \brief The matrix type used for the transformation, the covariance matrix and the working buffers.
+             */
             typedef Matrix<T> MatrixType;
-            /** \brief The vector type used for the centroids and singular-value vectors. */
+
+            /**
+             * \brief The vector type used for the centroids and singular-value vectors.
+             */
             typedef Vector<T> VectorType;
 
             /**

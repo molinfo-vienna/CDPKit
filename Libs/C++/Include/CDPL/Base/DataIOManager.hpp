@@ -110,14 +110,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief The type of the registered input handler instances. */
+            /**
+             * \brief The type of the registered input handler instances.
+             */
             typedef DataInputHandler<T>  InputHandlerType;
-            /** \brief The type of the registered output handler instances. */
+
+            /**
+             * \brief The type of the registered output handler instances.
+             */
             typedef DataOutputHandler<T> OutputHandlerType;
 
-            /** \brief A reference-counted smart pointer to a registered input handler instance. */
+            /**
+             * \brief A reference-counted smart pointer to a registered input handler instance.
+             */
             typedef typename InputHandlerType::SharedPointer  InputHandlerPointer;
-            /** \brief A reference-counted smart pointer to a registered output handler instance. */
+
+            /**
+             * \brief A reference-counted smart pointer to a registered output handler instance.
+             */
             typedef typename OutputHandlerType::SharedPointer OutputHandlerPointer;
 
           private:

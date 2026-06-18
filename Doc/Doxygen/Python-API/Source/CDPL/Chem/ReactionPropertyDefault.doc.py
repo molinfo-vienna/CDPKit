@@ -25,31 +25,31 @@
 class ReactionPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief Default value for the Chem.ReactionProperty.NAME property (empty string).
+    # \brief Default value of the Chem.ReactionProperty.NAME property (empty string).
     # 
     NAME = ''
 
     ##
-    # \brief Default value for the Chem.ReactionProperty.COMMENT property (empty string).
+    # \brief Default value of the Chem.ReactionProperty.COMMENT property (empty string).
     # 
     COMMENT = ''
 
     ##
-    # \brief Default value for the Chem.ReactionProperty.MATCH_CONSTRAINTS property (empty Chem.MatchConstraintList).
+    # \brief Default value of the Chem.ReactionProperty.MATCH_CONSTRAINTS property (empty Chem.MatchConstraintList).
     # 
     MATCH_CONSTRAINTS = MatchConstraintList()
 
     ##
-    # \brief Default value for the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property (Chem.MDLDataFormatVersion.UNDEF).
+    # \brief Default value of the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property (Chem.MDLDataFormatVersion.UNDEF).
     # 
     MDL_RXN_FILE_VERSION = 0
 
     ##
-    # \brief Default value for the Chem.ReactionProperty.MDL_PROGRAM_NAME property (<tt>"CDPL"</tt>).
+    # \brief Default value of the Chem.ReactionProperty.MDL_PROGRAM_NAME property (<tt>"CDPL"</tt>).
     # 
     MDL_PROGRAM_NAME = 'CDPL'
 
     ##
-    # \brief Default value for the Chem.ReactionProperty.MDL_USER_INITIALS property (empty string).
+    # \brief Default value of the Chem.ReactionProperty.MDL_USER_INITIALS property (empty string).
     # 
     MDL_USER_INITIALS = ''

@@ -67,9 +67,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief A constant iterator over the generated conformers. */
+            /**
+             * \brief A constant iterator over the generated conformers.
+             */
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-            /** \brief A mutable iterator over the generated conformers. */
+
+            /**
+             * \brief A mutable iterator over the generated conformers.
+             */
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData>       ConformerIterator;
 
             /**

@@ -52,13 +52,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief The vector-array type. */
+            /**
+             * \brief The vector-array type.
+             */
             typedef VA                                              VectorArrayType;
-            /** \brief The vector element type of \a VectorArrayType. */
+
+            /**
+             * \brief The vector element type of \a VectorArrayType.
+             */
             typedef V                                               VectorType;
-            /** \brief The scalar value type. */
+
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                               ValueType;
-            /** \brief The matrix type used for the computed transformation. */
+
+            /**
+             * \brief The matrix type used for the computed transformation.
+             */
             typedef typename KabschAlgorithm<ValueType>::MatrixType MatrixType;
 
             /**

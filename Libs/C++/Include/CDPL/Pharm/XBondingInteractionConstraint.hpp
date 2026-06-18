@@ -48,13 +48,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum halogen-acceptor distance in &Aring;ngstrom. */
+            /**
+             * \brief Default minimum halogen-acceptor distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
-            /** \brief Default maximum halogen-acceptor distance in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum halogen-acceptor distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_AX_DISTANCE = 3.75;
-            /** \brief Default minimum acceptor-halogen-bound-atom angle in degrees. */
+
+            /**
+             * \brief Default minimum acceptor-halogen-bound-atom angle in degrees.
+             */
             static constexpr double DEF_MIN_AXB_ANGLE   = 135.0;
-            /** \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees. */
+
+            /**
+             * \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees.
+             */
             static constexpr double DEF_MAX_ACC_ANGLE   = 45.0;
 
             /**

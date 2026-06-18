@@ -72,30 +72,59 @@ namespace CDPL
             typedef std::vector<AlignmentResult> ResultList;
 
           public:
-            /** \brief Default gradient norm at which the overlap optimization is stopped. */
+            /**
+             * \brief Default gradient norm at which the overlap optimization is stopped.
+             */
             static constexpr double DEF_OPTIMIZATION_STOP_GRADIENT        = 1.0;
-            /** \brief Default maximum number of overlap-optimization iterations. */
+
+            /**
+             * \brief Default maximum number of overlap-optimization iterations.
+             */
             static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-            /** \brief Default alignment-result selection mode. */
+
+            /**
+             * \brief Default alignment-result selection mode.
+             */
             static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
-            /** \brief Default relative threshold for treating two principal moments as equal. */
+
+            /**
+             * \brief Default relative threshold for treating two principal moments as equal.
+             */
             static constexpr double       DEF_SYMMETRY_THRESHOLD          = 0.15;
-            /** \brief Default number of random starting transformations. */
+
+            /**
+             * \brief Default number of random starting transformations.
+             */
             static constexpr std::size_t DEF_NUM_RANDOM_STARTS            = 4;
-            /** \brief Default maximum random translation magnitude applied to random starts. */
+
+            /**
+             * \brief Default maximum random translation magnitude applied to random starts.
+             */
             static constexpr double      DEF_MAX_RANDOM_TRANSLATION       = 2.0;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FastGaussianShapeAlignment instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FastGaussianShapeAlignment instances.
+             */
             typedef std::shared_ptr<FastGaussianShapeAlignment> SharedPointer;
 
-            /** \brief A constant iterator over the alignment results. */
+            /**
+             * \brief A constant iterator over the alignment results.
+             */
             typedef ResultList::const_iterator ConstResultIterator;
-            /** \brief A mutable iterator over the alignment results. */
+
+            /**
+             * \brief A mutable iterator over the alignment results.
+             */
             typedef ResultList::iterator       ResultIterator;
 
-            /** \brief Type of the function used to score an alignment result. */
+            /**
+             * \brief Type of the function used to score an alignment result.
+             */
             typedef std::function<double(const AlignmentResult&)>                       ScoringFunction;
-            /** \brief Type of the function used to compare two alignment results. */
+
+            /**
+             * \brief Type of the function used to compare two alignment results.
+             */
             typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
             /**

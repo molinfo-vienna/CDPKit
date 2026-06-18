@@ -57,7 +57,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiSubstructureSearch instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiSubstructureSearch instances.
+             */
             typedef std::shared_ptr<MultiSubstructureSearch> SharedPointer;
 
             /**

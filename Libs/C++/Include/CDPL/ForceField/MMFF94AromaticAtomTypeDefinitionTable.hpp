@@ -62,12 +62,19 @@ namespace CDPL
             typedef std::vector<Entry> DataStorage;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AromaticAtomTypeDefinitionTable instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AromaticAtomTypeDefinitionTable instances.
+             */
             typedef std::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
 
-            /** \brief A constant iterator over the entries of the table. */
+            /**
+             * \brief A constant iterator over the entries of the table.
+             */
             typedef DataStorage::const_iterator ConstEntryIterator;
-            /** \brief A mutable iterator over the entries of the table. */
+
+            /**
+             * \brief A mutable iterator over the entries of the table.
+             */
             typedef DataStorage::iterator       EntryIterator;
 
             /**

@@ -56,9 +56,14 @@ namespace CDPL
             typedef Slice<S, D> SelfType;
 
           public:
-            /** \brief The integral size/index type. */
+            /**
+             * \brief The integral size/index type.
+             */
             typedef S SizeType;
-            /** \brief The signed difference type used for the stride. */
+
+            /**
+             * \brief The signed difference type used for the stride.
+             */
             typedef D DifferenceType;
 
             /**

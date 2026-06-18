@@ -52,13 +52,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum halogen-acceptor distance in &Aring;ngstrom. */
+            /**
+             * \brief Default minimum halogen-acceptor distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
-            /** \brief Default maximum halogen-acceptor distance in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum halogen-acceptor distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_AX_DISTANCE = 4.0;
-            /** \brief Default minimum acceptor-halogen-bound-atom angle in degrees. */
+
+            /**
+             * \brief Default minimum acceptor-halogen-bound-atom angle in degrees.
+             */
             static constexpr double DEF_MIN_AXB_ANGLE   = 150.0;
-            /** \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees. */
+
+            /**
+             * \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees.
+             */
             static constexpr double DEF_MAX_ACC_ANGLE   = 35.0;
 
             /**
@@ -66,9 +77,14 @@ namespace CDPL
              */
             typedef std::shared_ptr<XBondingInteractionScore> SharedPointer;
 
-            /** \brief Type of the function mapping a halogen-acceptor distance to its score contribution. */
+            /**
+             * \brief Type of the function mapping a halogen-acceptor distance to its score contribution.
+             */
             typedef std::function<double(double)> DistanceScoringFunction;
-            /** \brief Type of the function mapping a halogen-bond geometry angle to its score contribution. */
+
+            /**
+             * \brief Type of the function mapping a halogen-bond geometry angle to its score contribution.
+             */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**

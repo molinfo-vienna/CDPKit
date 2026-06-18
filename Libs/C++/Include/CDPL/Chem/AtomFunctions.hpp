@@ -781,7 +781,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasSybylType(const Atom& atom);
 
         /**
-         * \brief Derives the Sybyl atom type of the atom \a atom from its valence environment in the molecular graph \a molgraph.
+         * \brief Derives the <em>Sybyl MOL2</em> atom type of the atom \a atom from its valence environment in the molecular graph \a molgraph.
          * \param atom The atom for which to perceive the type.
          * \param molgraph The molecular graph providing the structural context.
          * \return The perceived <em>Sybyl MOL2</em> atom type (see namespace Chem::SybylAtomType).

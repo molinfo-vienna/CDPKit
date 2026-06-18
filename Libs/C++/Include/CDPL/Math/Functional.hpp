@@ -64,9 +64,14 @@ namespace CDPL
         struct ScalarBinaryAssignmentFunctor
         {
 
-            /** \brief The (modifiable) first argument type. */
+            /**
+             * \brief The (modifiable) first argument type.
+             */
             typedef T1        Argument1Type;
-            /** \brief The second (source) argument type. */
+
+            /**
+             * \brief The second (source) argument type.
+             */
             typedef const T2& Argument2Type;
         };
 
@@ -197,11 +202,19 @@ namespace CDPL
         struct ScalarUnaryFunctor
         {
 
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T         ValueType;
-            /** \brief The argument type (a \c const reference to ValueType). */
+
+            /**
+             * \brief The argument type (a \c const reference to ValueType).
+             */
             typedef const T&  ArgumentType;
-            /** \brief The result type of apply(). */
+
+            /**
+             * \brief The result type of apply().
+             */
             typedef ValueType ResultType;
         };
 
@@ -259,11 +272,19 @@ namespace CDPL
         struct ScalarRealUnaryFunctor
         {
 
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                ValueType;
-            /** \brief The argument type (a \c const reference to ValueType). */
+
+            /**
+             * \brief The argument type (a \c const reference to ValueType).
+             */
             typedef const T&                         ArgumentType;
-            /** \brief The real-valued result type derived from ValueType via Math::TypeTraits. */
+
+            /**
+             * \brief The real-valued result type derived from ValueType via Math::TypeTraits.
+             */
             typedef typename TypeTraits<T>::RealType ResultType;
         };
 
@@ -326,11 +347,19 @@ namespace CDPL
         struct ScalarBinaryFunctor
         {
 
-            /** \brief The first argument type. */
+            /**
+             * \brief The first argument type.
+             */
             typedef const T1&                         Argument1Type;
-            /** \brief The second argument type. */
+
+            /**
+             * \brief The second argument type.
+             */
             typedef const T2&                         Argument2Type;
-            /** \brief The result type (common type of \a T1 and \a T2). */
+
+            /**
+             * \brief The result type (common type of \a T1 and \a T2).
+             */
             typedef typename CommonType<T1, T2>::Type ResultType;
         };
 
@@ -443,7 +472,9 @@ namespace CDPL
         struct VectorScalarBinaryFunctor
         {
 
-            /** \brief The scalar result type (common type of the two vector element types). */
+            /**
+             * \brief The scalar result type (common type of the two vector element types).
+             */
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ResultType;
         };
 
@@ -519,11 +550,19 @@ namespace CDPL
         struct VectorBooleanBinaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The unsigned size type (common type of the two vector size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the two vector size types).
+             */
             typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type   SizeType;
-            /** \brief The element value type (common type of the two vector element types). */
+
+            /**
+             * \brief The element value type (common type of the two vector element types).
+             */
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ValueType;
         };
 
@@ -569,13 +608,24 @@ namespace CDPL
         struct Scalar3VectorBooleanTernaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The third (scalar) argument type. */
+
+            /**
+             * \brief The third (scalar) argument type.
+             */
             typedef const T&                                                                  Argument3Type;
-            /** \brief The unsigned size type (common type of the two vector size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the two vector size types).
+             */
             typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type   SizeType;
-            /** \brief The element value type (common type of the two vector element types). */
+
+            /**
+             * \brief The element value type (common type of the two vector element types).
+             */
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ValueType;
         };
 
@@ -627,7 +677,9 @@ namespace CDPL
         struct VectorBinaryFunctor
         {
 
-            /** \brief The element result type (common type of the two vector element types). */
+            /**
+             * \brief The element result type (common type of the two vector element types).
+             */
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ResultType;
         };
 
@@ -684,9 +736,14 @@ namespace CDPL
         struct VectorScalarUnaryFunctor
         {
 
-            /** \brief The scalar result type (the vector's element value type). */
+            /**
+             * \brief The scalar result type (the vector's element value type).
+             */
             typedef typename V::ValueType ResultType;
-            /** \brief The unsigned size type used by the vector. */
+
+            /**
+             * \brief The unsigned size type used by the vector.
+             */
             typedef typename V::SizeType  SizeType;
         };
 
@@ -726,11 +783,19 @@ namespace CDPL
         struct VectorScalarRealUnaryFunctor
         {
 
-            /** \brief The vector's element value type. */
+            /**
+             * \brief The vector's element value type.
+             */
             typedef typename V::ValueType                    ValueType;
-            /** \brief The real-valued type derived from ValueType via Math::TypeTraits. */
+
+            /**
+             * \brief The real-valued type derived from ValueType via Math::TypeTraits.
+             */
             typedef typename TypeTraits<ValueType>::RealType RealType;
-            /** \brief The real-valued result type. */
+
+            /**
+             * \brief The real-valued result type.
+             */
             typedef RealType                                 ResultType;
         };
 
@@ -839,11 +904,19 @@ namespace CDPL
         struct VectorScalarIndexUnaryFunctor
         {
 
-            /** \brief The vector's element value type. */
+            /**
+             * \brief The vector's element value type.
+             */
             typedef typename V::ValueType                    ValueType;
-            /** \brief The real-valued type derived from ValueType via Math::TypeTraits. */
+
+            /**
+             * \brief The real-valued type derived from ValueType via Math::TypeTraits.
+             */
             typedef typename TypeTraits<ValueType>::RealType RealType;
-            /** \brief The result type (the vector's size type, used for element indices). */
+
+            /**
+             * \brief The result type (the vector's size type, used for element indices).
+             */
             typedef typename V::SizeType                     ResultType;
         };
 
@@ -893,11 +966,19 @@ namespace CDPL
         struct MatrixBooleanBinaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The unsigned size type (common type of the two matrix size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the two matrix size types).
+             */
             typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type   SizeType;
-            /** \brief The element value type (common type of the two matrix element types). */
+
+            /**
+             * \brief The element value type (common type of the two matrix element types).
+             */
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
         };
 
@@ -947,13 +1028,24 @@ namespace CDPL
         struct Scalar3MatrixBooleanTernaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The third (scalar) argument type. */
+
+            /**
+             * \brief The third (scalar) argument type.
+             */
             typedef const T&                                                                  Argument3Type;
-            /** \brief The unsigned size type (common type of the two matrix size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the two matrix size types).
+             */
             typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type   SizeType;
-            /** \brief The element value type (common type of the two matrix element types). */
+
+            /**
+             * \brief The element value type (common type of the two matrix element types).
+             */
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
         };
 
@@ -1008,7 +1100,9 @@ namespace CDPL
         struct MatrixScalarUnaryFunctor
         {
 
-            /** \brief The scalar result type (the matrix's element value type). */
+            /**
+             * \brief The scalar result type (the matrix's element value type).
+             */
             typedef typename M::ValueType ResultType;
         };
 
@@ -1081,11 +1175,19 @@ namespace CDPL
         struct MatrixScalarRealUnaryFunctor
         {
 
-            /** \brief The matrix's element value type. */
+            /**
+             * \brief The matrix's element value type.
+             */
             typedef typename M::ValueType                    ValueType;
-            /** \brief The real-valued type derived from ValueType via Math::TypeTraits. */
+
+            /**
+             * \brief The real-valued type derived from ValueType via Math::TypeTraits.
+             */
             typedef typename TypeTraits<ValueType>::RealType RealType;
-            /** \brief The real-valued result type. */
+
+            /**
+             * \brief The real-valued result type.
+             */
             typedef RealType                                 ResultType;
         };
 
@@ -1212,9 +1314,14 @@ namespace CDPL
         struct VectorMatrixUnaryFunctor
         {
 
-            /** \brief The matrix-entry result type (the vector's element value type). */
+            /**
+             * \brief The matrix-entry result type (the vector's element value type).
+             */
             typedef typename V::ValueType ResultType;
-            /** \brief The unsigned size type used by the vector. */
+
+            /**
+             * \brief The unsigned size type used by the vector.
+             */
             typedef typename V::SizeType  SizeType;
         };
 
@@ -1331,11 +1438,19 @@ namespace CDPL
         struct MatrixVectorBinaryFunctor
         {
 
-            /** \brief The element value type (common type of the matrix and vector element types). */
+            /**
+             * \brief The element value type (common type of the matrix and vector element types).
+             */
             typedef typename CommonType<typename M::ValueType, typename V::ValueType>::Type ValueType;
-            /** \brief The unsigned size type (common type of the matrix and vector size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the matrix and vector size types).
+             */
             typedef typename CommonType<typename M::SizeType, typename V::SizeType>::Type   SizeType;
-            /** \brief The scalar result type (alias for ValueType). */
+
+            /**
+             * \brief The scalar result type (alias for ValueType).
+             */
             typedef ValueType                                                               ResultType;
         };
 
@@ -1420,11 +1535,19 @@ namespace CDPL
         struct MatrixBinaryFunctor
         {
 
-            /** \brief The element value type (common type of the two matrix element types). */
+            /**
+             * \brief The element value type (common type of the two matrix element types).
+             */
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
-            /** \brief The unsigned size type (common type of the two matrix size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the two matrix size types).
+             */
             typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type   SizeType;
-            /** \brief The scalar result type (alias for ValueType). */
+
+            /**
+             * \brief The scalar result type (alias for ValueType).
+             */
             typedef ValueType                                                                 ResultType;
         };
 
@@ -1474,9 +1597,14 @@ namespace CDPL
         struct QuaternionBooleanBinaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The component value type (common type of the two quaternion element types). */
+
+            /**
+             * \brief The component value type (common type of the two quaternion element types).
+             */
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ValueType;
         };
 
@@ -1514,11 +1642,19 @@ namespace CDPL
         struct Scalar3QuaternionBooleanTernaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The third (scalar) argument type. */
+
+            /**
+             * \brief The third (scalar) argument type.
+             */
             typedef const T&                                                                  Argument3Type;
-            /** \brief The component value type (common type of the two quaternion element types). */
+
+            /**
+             * \brief The component value type (common type of the two quaternion element types).
+             */
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ValueType;
         };
 
@@ -1561,7 +1697,9 @@ namespace CDPL
         struct QuaternionScalarUnaryFunctor
         {
 
-            /** \brief The scalar result type (the quaternion's element value type). */
+            /**
+             * \brief The scalar result type (the quaternion's element value type).
+             */
             typedef typename Q::ValueType ResultType;
         };
 
@@ -1594,11 +1732,19 @@ namespace CDPL
         struct QuaternionScalarRealUnaryFunctor
         {
 
-            /** \brief The quaternion's component value type. */
+            /**
+             * \brief The quaternion's component value type.
+             */
             typedef typename Q::ValueType ValueType;
-            /** \brief The real-valued type (alias for ValueType). */
+
+            /**
+             * \brief The real-valued type (alias for ValueType).
+             */
             typedef ValueType             RealType;
-            /** \brief The real-valued result type. */
+
+            /**
+             * \brief The real-valued result type.
+             */
             typedef RealType              ResultType;
         };
 
@@ -1666,7 +1812,9 @@ namespace CDPL
         struct QuaternionUnaryFunctor
         {
 
-            /** \brief The component result type (the quaternion's element value type). */
+            /**
+             * \brief The component result type (the quaternion's element value type).
+             */
             typedef typename Q::ValueType ResultType;
         };
 
@@ -1797,9 +1945,14 @@ namespace CDPL
         struct Scalar1QuaternionBinaryFunctor
         {
 
-            /** \brief The component result type (common type of the scalar and the quaternion's element value type). */
+            /**
+             * \brief The component result type (common type of the scalar and the quaternion's element value type).
+             */
             typedef typename CommonType<T, typename Q::ValueType>::Type ResultType;
-            /** \brief The first (scalar) argument type. */
+
+            /**
+             * \brief The first (scalar) argument type.
+             */
             typedef const T&                                            Argument1Type;
         };
 
@@ -1936,9 +2089,14 @@ namespace CDPL
         struct Scalar2QuaternionBinaryFunctor
         {
 
-            /** \brief The component result type (common type of the quaternion's element value type and the scalar). */
+            /**
+             * \brief The component result type (common type of the quaternion's element value type and the scalar).
+             */
             typedef typename CommonType<typename Q::ValueType, T>::Type ResultType;
-            /** \brief The second (scalar) argument type. */
+
+            /**
+             * \brief The second (scalar) argument type.
+             */
             typedef const T&                                            Argument2Type;
         };
 
@@ -2140,7 +2298,9 @@ namespace CDPL
         struct QuaternionBinaryFunctor
         {
 
-            /** \brief The component result type (common type of the two quaternion element types). */
+            /**
+             * \brief The component result type (common type of the two quaternion element types).
+             */
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ResultType;
         };
 
@@ -2226,9 +2386,14 @@ namespace CDPL
         struct Scalar3QuaternionTernaryFunctor
         {
 
-            /** \brief The component result type (common type of the two quaternion element types and the scalar). */
+            /**
+             * \brief The component result type (common type of the two quaternion element types and the scalar).
+             */
             typedef typename CommonType<typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type, T>::Type ResultType;
-            /** \brief The third (scalar) argument type. */
+
+            /**
+             * \brief The third (scalar) argument type.
+             */
             typedef const T&                                                                                                Argument3Type;
         };
 
@@ -2320,11 +2485,19 @@ namespace CDPL
         struct Scalar13QuaternionTernaryFunctor
         {
 
-            /** \brief The component result type (common type of \a T1, the quaternion's element value type, and \a T2). */
+            /**
+             * \brief The component result type (common type of \a T1, the quaternion's element value type, and \a T2).
+             */
             typedef typename CommonType<typename CommonType<T1, typename Q::ValueType>::Type, T2>::Type ResultType;
-            /** \brief The first (scalar) argument type. */
+
+            /**
+             * \brief The first (scalar) argument type.
+             */
             typedef const T1&                                                                           Argument1Type;
-            /** \brief The third (scalar) argument type. */
+
+            /**
+             * \brief The third (scalar) argument type.
+             */
             typedef const T2&                                                                           Argument3Type;
         };
 
@@ -2408,11 +2581,19 @@ namespace CDPL
         struct QuaternionVectorBinaryFunctor
         {
 
-            /** \brief The element value type (common type of the quaternion and vector element types). */
+            /**
+             * \brief The element value type (common type of the quaternion and vector element types).
+             */
             typedef typename CommonType<typename Q::ValueType, typename V::ValueType>::Type ValueType;
-            /** \brief The unsigned size type used by the vector. */
+
+            /**
+             * \brief The unsigned size type used by the vector.
+             */
             typedef typename V::SizeType                                                    SizeType;
-            /** \brief The scalar result type (alias for ValueType). */
+
+            /**
+             * \brief The scalar result type (alias for ValueType).
+             */
             typedef ValueType                                                               ResultType;
         };
 
@@ -2489,11 +2670,19 @@ namespace CDPL
         struct GridBooleanBinaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The unsigned size type (common type of the two grid size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the two grid size types).
+             */
             typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type   SizeType;
-            /** \brief The cell value type (common type of the two grid cell types). */
+
+            /**
+             * \brief The cell value type (common type of the two grid cell types).
+             */
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
@@ -2547,13 +2736,24 @@ namespace CDPL
         struct Scalar3GridBooleanTernaryFunctor
         {
 
-            /** \brief The boolean result type. */
+            /**
+             * \brief The boolean result type.
+             */
             typedef bool                                                                      ResultType;
-            /** \brief The third (scalar) argument type. */
+
+            /**
+             * \brief The third (scalar) argument type.
+             */
             typedef const T&                                                                  Argument3Type;
-            /** \brief The unsigned size type (common type of the two grid size types). */
+
+            /**
+             * \brief The unsigned size type (common type of the two grid size types).
+             */
             typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type   SizeType;
-            /** \brief The cell value type (common type of the two grid cell types). */
+
+            /**
+             * \brief The cell value type (common type of the two grid cell types).
+             */
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
@@ -2612,7 +2812,9 @@ namespace CDPL
         struct GridScalarUnaryFunctor
         {
 
-            /** \brief The scalar result type (the grid's cell value type). */
+            /**
+             * \brief The scalar result type (the grid's cell value type).
+             */
             typedef typename M::ValueType ResultType;
         };
 

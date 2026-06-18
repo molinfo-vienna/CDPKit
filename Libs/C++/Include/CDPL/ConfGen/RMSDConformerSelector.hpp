@@ -62,7 +62,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default maximum number of considered automorphism (symmetry) mappings per setup() call. */
+            /**
+             * \brief Default maximum number of considered automorphism (symmetry) mappings per setup() call.
+             */
             static constexpr std::size_t DEF_MAX_NUM_SYMMETRY_MAPPINGS = 32768;
 
             /**

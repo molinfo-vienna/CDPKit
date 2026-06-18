@@ -52,7 +52,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The functor's result type (made available to STL adaptors). */
+            /**
+             * \brief The functor's result type (for STL adaptors).
+             */
             typedef ResType result_type;
 
             /**
@@ -77,7 +79,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The functor's result type (made available to STL adaptors). */
+            /**
+             * \brief The functor's result type (for STL adaptors).
+             */
             typedef ResType result_type;
 
             /**

@@ -54,16 +54,29 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum per-atom hydrophobicity required for emitting a feature. */
+            /**
+             * \brief Default minimum per-atom hydrophobicity required for emitting a feature.
+             */
             static constexpr double       DEF_HYD_THRESHOLD = 0.5;
-            /** \brief Default value for the feature tolerance property of generated hydrophobic features. */
+
+            /**
+             * \brief Default value for the feature tolerance property of generated hydrophobic features.
+             */
             static constexpr double       DEF_FEATURE_TOL   = 1.5;
-            /** \brief Default value for the feature type property of generated hydrophobic features (Pharm::FeatureType::HYDROPHOBIC). */
+
+            /**
+             * \brief Default value for the feature type property of generated hydrophobic features (Pharm::FeatureType::HYDROPHOBIC).
+             */
             static constexpr unsigned int DEF_FEATURE_TYPE  = FeatureType::HYDROPHOBIC;
-            /** \brief Default value for the feature geometry property of generated hydrophobic features (Pharm::FeatureGeometry::SPHERE). */
+
+            /**
+             * \brief Default value for the feature geometry property of generated hydrophobic features (Pharm::FeatureGeometry::SPHERE).
+             */
             static constexpr unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::SPHERE;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HydrophobicAtomFeatureGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HydrophobicAtomFeatureGenerator instances.
+             */
             typedef std::shared_ptr<HydrophobicAtomFeatureGenerator> SharedPointer;
 
             /**

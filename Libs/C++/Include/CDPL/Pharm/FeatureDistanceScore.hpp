@@ -56,7 +56,9 @@ namespace CDPL
              */
             typedef std::shared_ptr<FeatureDistanceScore> SharedPointer;
 
-            /** \brief Type of the function mapping a raw feature-pair distance to a score contribution. */
+            /**
+             * \brief Type of the function mapping a raw feature-pair distance to a score contribution.
+             */
             typedef std::function<double(double)> DistanceScoringFunction;
 
             /**

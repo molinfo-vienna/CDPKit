@@ -43,11 +43,19 @@ namespace CDPL
         namespace FragmentType
         {
 
-            /** \brief Open-chain fragment (no rings). */
+            /**
+             * \brief Open-chain fragment (no rings).
+             */
             constexpr unsigned int CHAIN                = 0;
-            /** \brief Flexible ring system (macrocycle or otherwise non-rigid set of fused rings). */
+
+            /**
+             * \brief Flexible ring system (macrocycle or otherwise non-rigid set of fused rings).
+             */
             constexpr unsigned int FLEXIBLE_RING_SYSTEM = 1;
-            /** \brief Rigid (small) ring system whose conformation is essentially fixed. */
+
+            /**
+             * \brief Rigid (small) ring system whose conformation is essentially fixed.
+             */
             constexpr unsigned int RIGID_RING_SYSTEM    = 2;
         } // namespace FragmentType
     } // namespace ConfGen

@@ -53,27 +53,53 @@ namespace CDPL
             typedef HomogenousCoordsAdapter<V> SelfType;
 
           public:
-            /** \brief The wrapped vector type. */
+            /**
+             * \brief The wrapped vector type.
+             */
             typedef V                                                        VectorType;
-            /** \brief The size type used by the wrapped vector. */
+
+            /**
+             * \brief The size type used by the wrapped vector.
+             */
             typedef typename V::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped vector. */
+
+            /**
+             * \brief The signed difference type used by the wrapped vector.
+             */
             typedef typename V::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped vector. */
+
+            /**
+             * \brief The element value type of the wrapped vector.
+             */
             typedef typename V::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename V::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped vector internally (mutable or const flavor). */
+
+            /**
+             * \brief Closure type used to store the wrapped vector internally (mutable or const flavor).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstClosureType,
                                               typename V::ClosureType>::type VectorClosureType;
-            /** \brief Constant closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this adapter appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this adapter appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
 
             /**
@@ -326,23 +352,43 @@ namespace CDPL
             typedef VectorQuaternionAdapter<V> SelfType;
 
           public:
-            /** \brief The wrapped 4-element vector type. */
+            /**
+             * \brief The wrapped 4-element vector type.
+             */
             typedef V                                                        VectorType;
-            /** \brief The element value type. */
+
+            /**
+             * \brief The element value type.
+             */
             typedef typename V::ValueType                                    ValueType;
-            /** \brief Constant reference type to a component. */
+
+            /**
+             * \brief Constant reference type to a component.
+             */
             typedef typename V::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped vector internally. */
+
+            /**
+             * \brief Closure type used to store the wrapped vector internally.
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstClosureType,
                                               typename V::ClosureType>::type VectorClosureType;
-            /** \brief Constant closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this adapter appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this adapter appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
 
             /**
@@ -682,7 +728,9 @@ namespace CDPL
         struct QuaternionTemporaryTraits<VectorQuaternionAdapter<V> >
         {
 
-            /** \brief The Math::Quaternion specialization used as the temporary quaternion type. */
+            /**
+             * \brief The Math::Quaternion specialization used as the temporary quaternion type.
+             */
             typedef Quaternion<typename V::ValueType> Type;
         };
 
@@ -694,7 +742,9 @@ namespace CDPL
         struct QuaternionTemporaryTraits<const VectorQuaternionAdapter<V> >
         {
 
-            /** \brief The Math::Quaternion specialization used as the temporary quaternion type. */
+            /**
+             * \brief The Math::Quaternion specialization used as the temporary quaternion type.
+             */
             typedef Quaternion<typename V::ValueType> Type;
         };
 

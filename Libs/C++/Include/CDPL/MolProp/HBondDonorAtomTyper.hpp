@@ -49,10 +49,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HBondDonorAtomTyper instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HBondDonorAtomTyper instances.
+             */
             typedef std::shared_ptr<HBondDonorAtomTyper> SharedPointer;
 
-            /** \brief Constructs the \c %HBondDonorAtomTyper instance. */
+            /**
+             * \brief Constructs the \c %HBondDonorAtomTyper instance.
+             */
             HBondDonorAtomTyper();
 
             /**

@@ -72,20 +72,35 @@ namespace CDPL
             enum Mode
             {
 
-                /** \brief Report a generated tautomer only if its molecular graph is not topologically equivalent to an already reported one. */
+                /**
+                 * \brief Report a generated tautomer only if its molecular graph is not topologically equivalent to an already reported one.
+                 */
                 TOPOLOGICALLY_UNIQUE,
-                /** \brief Report a generated tautomer only if its ordinary H-deplete molecular graph connection table is different from already reported ones. */
+
+                /**
+                 * \brief Report a generated tautomer only if its ordinary H-deplete molecular graph connection table is different from already reported ones.
+                 */
                 GEOMETRICALLY_UNIQUE,
-                /** \brief Report a generated tautomer only if its molecular graph connection table is different from already reported ones. */
+
+                /**
+                 * \brief Report a generated tautomer only if its molecular graph connection table is different from already reported ones.
+                 */
                 EXHAUSTIVE
             };
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TautomerGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TautomerGenerator instances.
+             */
             typedef std::shared_ptr<TautomerGenerator> SharedPointer;
 
-            /** \brief Type of the callback invoked for every generated tautomer (returning \c false aborts the enumeration). */
+            /**
+             * \brief Type of the callback invoked for every generated tautomer (returning \c false aborts the enumeration).
+             */
             typedef std::function<bool(MolecularGraph&)> CallbackFunction;
-            /** \brief Type of the optional setup function invoked on the input molecular graph before enumeration starts. */
+
+            /**
+             * \brief Type of the optional setup function invoked on the input molecular graph before enumeration starts.
+             */
             typedef std::function<void(MolecularGraph&)> CustomSetupFunction;
 
             /**

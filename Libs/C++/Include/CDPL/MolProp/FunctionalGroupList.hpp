@@ -54,10 +54,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FunctionalGroupList instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FunctionalGroupList instances.
+             */
             typedef std::shared_ptr<FunctionalGroupList> SharedPointer;
 
-            /** \brief Constructs an empty \c %FunctionalGroupList instance. */
+            /**
+             * \brief Constructs an empty \c %FunctionalGroupList instance.
+             */
             FunctionalGroupList();
 
             /**

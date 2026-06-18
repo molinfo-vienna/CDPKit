@@ -50,19 +50,39 @@ namespace CDPL
         {
 
           public:
-            /** \brief Instance providing configuration parameter default values. */
+            /**
+             * \brief Instance providing configuration parameter default values.
+             */
             static const ConformerGeneratorSettings DEFAULT;
-            /** \brief Preset producing a small, diversity-optimized conformer ensemble. */
+
+            /**
+             * \brief Preset producing a small, diversity-optimized conformer ensemble.
+             */
             static const ConformerGeneratorSettings SMALL_SET_DIVERSE;
-            /** \brief Preset producing a medium-sized, diversity-optimized conformer ensemble. */
+
+            /**
+             * \brief Preset producing a medium-sized, diversity-optimized conformer ensemble.
+             */
             static const ConformerGeneratorSettings MEDIUM_SET_DIVERSE;
-            /** \brief Preset producing a large, diversity-optimized conformer ensemble. */
+
+            /**
+             * \brief Preset producing a large, diversity-optimized conformer ensemble.
+             */
             static const ConformerGeneratorSettings LARGE_SET_DIVERSE;
-            /** \brief Preset producing a small, dense conformer ensemble (tight RMSD threshold). */
+
+            /**
+             * \brief Preset producing a small, dense conformer ensemble (tight RMSD threshold).
+             */
             static const ConformerGeneratorSettings SMALL_SET_DENSE;
-            /** \brief Preset producing a medium-sized, dense conformer ensemble (tight RMSD threshold). */
+
+            /**
+             * \brief Preset producing a medium-sized, dense conformer ensemble (tight RMSD threshold).
+             */
             static const ConformerGeneratorSettings MEDIUM_SET_DENSE;
-            /** \brief Preset producing a large, dense conformer ensemble (tight RMSD threshold). */
+
+            /**
+             * \brief Preset producing a large, dense conformer ensemble (tight RMSD threshold).
+             */
             static const ConformerGeneratorSettings LARGE_SET_DENSE;
 
             /**

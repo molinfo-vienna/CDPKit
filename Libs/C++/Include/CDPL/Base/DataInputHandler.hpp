@@ -55,10 +55,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief The type of the Base::DataReader instances created by this handler. */
+            /**
+             * \brief The type of the Base::DataReader instances created by this handler.
+             */
             typedef DataReader<T> ReaderType;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataInputHandler instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataInputHandler instances.
+             */
             typedef std::shared_ptr<DataInputHandler> SharedPointer;
 
             /**

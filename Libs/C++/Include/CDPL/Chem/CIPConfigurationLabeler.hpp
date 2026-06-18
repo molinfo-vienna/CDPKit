@@ -60,7 +60,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CIPConfigurationLabeler instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CIPConfigurationLabeler instances.
+             */
             typedef std::shared_ptr<CIPConfigurationLabeler> SharedPointer;
 
             /**

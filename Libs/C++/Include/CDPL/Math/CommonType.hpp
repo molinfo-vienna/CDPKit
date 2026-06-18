@@ -45,7 +45,9 @@ namespace CDPL
         struct CommonType
         {
 
-            /** \brief The common type. */
+            /**
+             * \brief The common type.
+             */
             typedef typename std::common_type<T1, T2>::type Type;
         };
     } // namespace Math

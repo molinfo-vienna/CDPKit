@@ -42,49 +42,79 @@ namespace CDPL
         namespace ReturnCode
         {
 
-            /** \brief Operation completed successfully. */
+            /**
+             * \brief Operation completed successfully.
+             */
             const int SUCCESS                        = 0;
 
-            /** \brief The operation could not be carried out due to uninitialized input data. */
+            /**
+             * \brief The operation could not be carried out due to uninitialized input data.
+             */
             const int UNINITIALIZED                  = 1;
 
-            /** \brief The operation was terminated because the configured wall clock time limit was exceeded. */
+            /**
+             * \brief The operation was terminated because the configured wall clock time limit was exceeded.
+             */
             const int TIMEOUT                        = 2;
 
-            /** \brief The operation was terminated through the registered abort callback. */
+            /**
+             * \brief The operation was terminated through the registered abort callback.
+             */
             const int ABORTED                        = 3;
 
-            /** \brief The MMFF94 force field parameterization step failed (typically due to missing/ambiguous parameters under strict mode). */
+            /**
+             * \brief The MMFF94 force field parameterization step failed (typically due to missing/ambiguous parameters under strict mode).
+             */
             const int FORCEFIELD_SETUP_FAILED        = 4;
 
-            /** \brief The MMFF94 energy-minimization step failed to converge or produced an invalid result. */
+            /**
+             * \brief The MMFF94 energy-minimization step failed to converge or produced an invalid result.
+             */
             const int FORCEFIELD_MINIMIZATION_FAILED = 5;
 
-            /** \brief No fragment library has been configured (required for fragment-based structure generation). */
+            /**
+             * \brief No fragment library has been configured (required for fragment-based structure generation).
+             */
             const int FRAGMENT_LIBRARY_NOT_SET       = 6;
 
-            /** \brief Conformer generation for at least one fragment failed. */
+            /**
+             * \brief Conformer generation for at least one fragment failed.
+             */
             const int FRAGMENT_CONF_GEN_FAILED       = 7;
 
-            /** \brief Conformer generation for at least one fragment timed out. */
+            /**
+             * \brief Conformer generation for at least one fragment timed out.
+             */
             const int FRAGMENT_CONF_GEN_TIMEOUT      = 8;
 
-            /** \brief The submitted fragment has already been processed. */
+            /**
+             * \brief The submitted fragment has already been processed.
+             */
             const int FRAGMENT_ALREADY_PROCESSED     = 9;
 
-            /** \brief The torsion-driving step failed. */
+            /**
+             * \brief The torsion-driving step failed.
+             */
             const int TORSION_DRIVING_FAILED         = 10;
 
-            /** \brief The overall conformer generation pipeline failed. */
+            /**
+             * \brief The overall conformer generation pipeline failed.
+             */
             const int CONF_GEN_FAILED                = 11;
 
-            /** \brief The molecule exhibits too high a symmetry to enumerate all symmetry mappings within the configured limit. */
+            /**
+             * \brief The molecule exhibits too high a symmetry to enumerate all symmetry mappings within the configured limit.
+             */
             const int TOO_MUCH_SYMMETRY              = 12;
 
-            /** \brief The input molecule's rotatable bond count exceeds the configured maximum. */
+            /**
+             * \brief The input molecule's rotatable bond count exceeds the configured maximum.
+             */
             const int MAX_ROT_BOND_COUNT_EXCEEDED    = 13;
 
-            /** \brief A fixed substructure was specified but no 3D coordinates were supplied for it. */
+            /**
+             * \brief A fixed substructure was specified but no 3D coordinates were supplied for it.
+             */
             const int NO_FIXED_SUBSTRUCT_COORDS      = 14;
         } // namespace ReturnCode
     } // namespace ConfGen

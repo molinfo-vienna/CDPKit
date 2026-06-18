@@ -49,15 +49,21 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DefaultMultiConfMoleculeInputProcessor instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DefaultMultiConfMoleculeInputProcessor instances.
+             */
             typedef std::shared_ptr<DefaultMultiConfMoleculeInputProcessor> SharedPointer;
 
-            /** \brief Specifies the default set of atom properties considered when checking conformer compatibility. */
+            /**
+             * \brief Specifies the default set of atom properties considered when checking conformer compatibility.
+             */
             static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
                 AtomPropertyFlag::FORMAL_CHARGE;
 
-            /** \brief Specifies the default set of bond properties considered when checking conformer compatibility. */
+            /**
+             * \brief Specifies the default set of bond properties considered when checking conformer compatibility.
+             */
             static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER;
 

@@ -43,7 +43,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived expression type (made available to expression-template machinery). */
+            /**
+             * \brief The derived expression type (made available to expression-template machinery).
+             */
             typedef E ExpressionType;
 
           protected:
@@ -66,7 +68,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived vector expression type. */
+            /**
+             * \brief The derived vector expression type.
+             */
             typedef E ExpressionType;
 
             /**
@@ -104,7 +108,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived matrix expression type. */
+            /**
+             * \brief The derived matrix expression type.
+             */
             typedef E ExpressionType;
 
             /**
@@ -142,7 +148,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived quaternion expression type. */
+            /**
+             * \brief The derived quaternion expression type.
+             */
             typedef E ExpressionType;
 
             /**
@@ -180,7 +188,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived grid expression type. */
+            /**
+             * \brief The derived grid expression type.
+             */
             typedef E ExpressionType;
 
             /**
@@ -215,7 +225,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived vector container type. */
+            /**
+             * \brief The derived vector container type.
+             */
             typedef C ContainerType;
 
             /**
@@ -250,7 +262,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived matrix container type. */
+            /**
+             * \brief The derived matrix container type.
+             */
             typedef C ContainerType;
 
             /**
@@ -285,7 +299,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived quaternion container type. */
+            /**
+             * \brief The derived quaternion container type.
+             */
             typedef C ContainerType;
 
             /**
@@ -320,7 +336,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief The derived grid container type. */
+            /**
+             * \brief The derived grid container type.
+             */
             typedef C ContainerType;
 
             /**

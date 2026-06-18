@@ -65,7 +65,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ChEMBLStandardizer instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ChEMBLStandardizer instances.
+             */
             typedef std::shared_ptr<ChEMBLStandardizer> SharedPointer;
 
             /**
@@ -74,31 +76,69 @@ namespace CDPL
             enum ChangeFlags
             {
 
-                /** \brief No changes were applied. */
-                NONE                         = 0x0,
-                /** \brief The molecule matched a ChEMBL exclusion criterion and was not processed further. */
-                EXCLUDED                     = 0x1,
-                /** \brief Removable explicit hydrogen atoms were removed. */
-                EXPLICIT_HYDROGENS_REMOVED   = 0x2,
-                /** \brief Atoms/bonds with unknown stereo descriptors were standardized. */
-                UNKNOWN_STEREO_STANDARDIZED  = 0x4,
-                /** \brief Aromatic bonds were kekulized to alternating single/double bonds. */
-                BONDS_KEKULIZED              = 0x8,
-                /** \brief Functional-group structure normalizations were applied. */
-                STRUCTURE_NORMALIZED         = 0x10,
-                /** \brief Atom formal charges were removed where possible. */
-                CHARGES_REMOVED              = 0x20,
-                /** \brief Defined stereo at tartrate-like substructures was cleared. */
-                TARTRATE_STEREO_CLEARED      = 0x40,
-                /** \brief 2D bond-angle artefacts were corrected. */
-                STRUCTURE_2D_CORRECTED       = 0x80,
-                /** \brief Atom isotope information was cleared. */
-                ISOTOPE_INFO_CLEARED         = 0x100,
-                /** \brief Salt components were removed (parent extraction only). */
-                SALT_COMPONENTS_REMOVED      = 0x200,
-                /** \brief Common solvent components were removed (parent extraction only). */
-                SOLVENT_COMPONENTS_REMOVED   = 0x400,
-                /** \brief Duplicate disconnected components were collapsed (parent extraction only). */
+                /**
+                 * \brief No changes were applied.
+                 */
+                NONE = 0x0,
+
+                /**
+                 * \brief The molecule matched a ChEMBL exclusion criterion and was not processed further.
+                 */
+                EXCLUDED = 0x1,
+
+                /**
+                 * \brief Removable explicit hydrogen atoms were removed.
+                 */
+                EXPLICIT_HYDROGENS_REMOVED = 0x2,
+
+                /**
+                 * \brief Atoms/bonds with unknown stereo descriptors were standardized.
+                 */
+                UNKNOWN_STEREO_STANDARDIZED = 0x4,
+
+                /**
+                 * \brief Aromatic bonds were kekulized to alternating single/double bonds.
+                 */
+                BONDS_KEKULIZED = 0x8,
+
+                /**
+                 * \brief Functional-group structure normalizations were applied.
+                 */
+                STRUCTURE_NORMALIZED = 0x10,
+
+                /**
+                 * \brief Atom formal charges were removed where possible.
+                 */
+                CHARGES_REMOVED = 0x20,
+
+                /**
+                 * \brief Defined stereo at tartrate-like substructures was cleared.
+                 */
+                TARTRATE_STEREO_CLEARED = 0x40,
+
+                /**
+                 * \brief 2D bond-angle artefacts were corrected.
+                 */
+                STRUCTURE_2D_CORRECTED = 0x80,
+
+                /**
+                 * \brief Atom isotope information was cleared.
+                 */
+                ISOTOPE_INFO_CLEARED = 0x100,
+
+                /**
+                 * \brief Salt components were removed (parent extraction only).
+                 */
+                SALT_COMPONENTS_REMOVED = 0x200,
+
+                /**
+                 * \brief Common solvent components were removed (parent extraction only).
+                 */
+                SOLVENT_COMPONENTS_REMOVED = 0x400,
+
+                /**
+                 * \brief Duplicate disconnected components were collapsed (parent extraction only).
+                 */
                 DUPLICATE_COMPONENTS_REMOVED = 0x800
             };
 

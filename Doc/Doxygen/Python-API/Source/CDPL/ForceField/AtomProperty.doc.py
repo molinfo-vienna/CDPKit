@@ -27,6 +27,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the symbolic MMFF94 atom type.
     # 
+    # \see [\ref MMFF94] 
     # \valuetype  <tt>std::string</tt>
     # 
     MMFF94_SYMBOLIC_TYPE = CDPL.Base.LookupKey('MMFF94_SYMBOLIC_TYPE')
@@ -34,6 +35,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the numeric MMFF94 atom type.
     # 
+    # \see [\ref MMFF94] 
     # \valuetype  <tt>unsigned int</tt>
     # 
     MMFF94_NUMERIC_TYPE = CDPL.Base.LookupKey('MMFF94_NUMERIC_TYPE')
@@ -41,6 +43,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the MMFF94 partial atomic charge.
     # 
+    # \see [\ref MMFF94] 
     # \valuetype  <tt>double</tt>
     # 
     MMFF94_CHARGE = CDPL.Base.LookupKey('MMFF94_CHARGE')

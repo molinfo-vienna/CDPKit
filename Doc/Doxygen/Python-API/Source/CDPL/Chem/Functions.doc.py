@@ -4955,7 +4955,7 @@ def perceiveSSSR(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pas
 def perceiveSybylAtomTypes(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Derives the Sybyl atom type of the atom <em>atom</em> from its valence environment in the molecular graph <em>molgraph</em>.
+# \brief Derives the <em>Sybyl MOL2</em> atom type of the atom <em>atom</em> from its valence environment in the molecular graph <em>molgraph</em>.
 # 
 # \param atom The atom for which to perceive the type.
 # \param molgraph The molecular graph providing the structural context.

@@ -78,14 +78,18 @@ namespace CDPL
         {
 
           public:
-            /** \brief Pair holding an atom or bond index plus the associated stereo descriptor. */
+            /**
+             * \brief Pair holding an atom or bond index plus the associated stereo descriptor.
+             */
             typedef std::pair<std::size_t, Chem::StereoDescriptor> StereoCenterData;
 
           private:
             typedef std::vector<StereoCenterData> StereoCenterDataArray;
 
           public:
-            /** \brief A constant iterator over StereoCenterData entries. */
+            /**
+             * \brief A constant iterator over StereoCenterData entries.
+             */
             typedef StereoCenterDataArray::const_iterator ConstStereoCenterDataIterator;
 
             /**

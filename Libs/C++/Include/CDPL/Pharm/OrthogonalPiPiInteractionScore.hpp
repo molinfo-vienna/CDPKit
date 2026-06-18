@@ -50,13 +50,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default maximum vertical (out-of-plane) ring-center separation in &Aring;ngstrom. */
+            /**
+             * \brief Default maximum vertical (out-of-plane) ring-center separation in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_V_DISTANCE = 1.4;
-            /** \brief Default minimum horizontal (in-plane) ring-center separation in &Aring;ngstrom. */
+
+            /**
+             * \brief Default minimum horizontal (in-plane) ring-center separation in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_H_DISTANCE = 4.0;
-            /** \brief Default maximum horizontal (in-plane) ring-center separation in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum horizontal (in-plane) ring-center separation in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_H_DISTANCE = 6.0;
-            /** \brief Default maximum angle deviation from 90&deg; of the two ring-plane normals in degrees. */
+
+            /**
+             * \brief Default maximum angle deviation from 90&deg; of the two ring-plane normals in degrees.
+             */
             static constexpr double DEF_MAX_ANGLE      = 20.0;
 
             /**
@@ -64,9 +75,14 @@ namespace CDPL
              */
             typedef std::shared_ptr<OrthogonalPiPiInteractionScore> SharedPointer;
 
-            /** \brief Type of the function mapping a feature-pair distance to its score contribution. */
+            /**
+             * \brief Type of the function mapping a feature-pair distance to its score contribution.
+             */
             typedef std::function<double(double)> DistanceScoringFunction;
-            /** \brief Type of the function mapping a ring-plane angle to its score contribution. */
+
+            /**
+             * \brief Type of the function mapping a ring-plane angle to its score contribution.
+             */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**

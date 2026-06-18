@@ -54,7 +54,10 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMCIFData instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMCIFData instances.
+             */
             typedef std::shared_ptr<MMCIFData> SharedPointer;
 
             /**
@@ -66,9 +69,14 @@ namespace CDPL
                 typedef std::vector<std::string> ValueList;
 
               public:
-                /** \brief A constant iterator over the value list of the item. */
+                /**
+                 * \brief A constant iterator over the value list of the item.
+                 */
                 typedef ValueList::const_iterator ConstValueIterator;
-                /** \brief A mutable iterator over the value list of the item. */
+    
+                /**
+                 * \brief A mutable iterator over the value list of the item.
+                 */
                 typedef ValueList::iterator       ValueIterator;
 
                 /**
@@ -213,10 +221,15 @@ namespace CDPL
                 typedef boost::ptr_vector<Item> ItemList;
 
               public:
-                /** \brief A constant iterator over the items of the category. */
+                /**
+                 * \brief A constant iterator over the items of the category.
+                 */
                 typedef ItemList::const_iterator ConstItemIterator;
-                /** \brief A mutable iterator over the items of the category. */
-                typedef ItemList::iterator       ItemIterator;
+
+                /**
+                 * \brief A mutable iterator over the items of the category.
+                 */
+                typedef ItemList::iterator ItemIterator;
 
                 /**
                  * \brief Constructs an empty \c %Category with the name \a name.
@@ -393,9 +406,14 @@ namespace CDPL
             typedef boost::ptr_deque<Category> CategoryList;
             
           public:
-            /** \brief A constant iterator over the categories of the data record. */
+            /**
+             * \brief A constant iterator over the categories of the data record.
+             */
             typedef CategoryList::const_iterator ConstCategoryIterator;
-            /** \brief A mutable iterator over the categories of the data record. */
+
+            /**
+             * \brief A mutable iterator over the categories of the data record.
+             */
             typedef CategoryList::iterator       CategoryIterator;
 
             /**

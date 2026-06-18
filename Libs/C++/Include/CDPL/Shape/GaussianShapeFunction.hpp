@@ -61,16 +61,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default maximum order of the Gaussian-product expansion. */
+            /**
+             * \brief Default maximum order of the Gaussian-product expansion.
+             */
             static constexpr std::size_t DEF_MAX_PRODUCT_ORDER = 6;
 
-            /** \brief Default distance cutoff for pruning negligible Gaussian-product contributions. */
+            /**
+             * \brief Default distance cutoff for pruning negligible Gaussian-product contributions.
+             */
             static constexpr double      DEF_DISTANCE_CUTOFF   = 0.0;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeFunction instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeFunction instances.
+             */
             typedef std::shared_ptr<GaussianShapeFunction> SharedPointer;
 
-            /** \brief Constructs the \c %GaussianShapeFunction instance without an associated shape. */
+            /**
+             * \brief Constructs the \c %GaussianShapeFunction instance without an associated shape.
+             */
             GaussianShapeFunction();
 
             /**
@@ -85,7 +93,9 @@ namespace CDPL
              */
             GaussianShapeFunction(const GaussianShape& shape);
 
-            /** \brief Destructor. */
+            /**
+             * \brief Destructor.
+             */
             ~GaussianShapeFunction();
 
             /**
@@ -124,7 +134,9 @@ namespace CDPL
              */
             const GaussianShape* getShape() const;
 
-            /** \brief Resets the function by discarding the cached Gaussian-product expansion. */
+            /**
+             * \brief Resets the function by discarding the cached Gaussian-product expansion.
+             */
             void reset();
 
             /**

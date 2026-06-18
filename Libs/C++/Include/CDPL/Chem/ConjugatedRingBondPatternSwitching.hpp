@@ -53,7 +53,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ConjugatedRingBondPatternSwitching instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ConjugatedRingBondPatternSwitching instances.
+             */
             typedef std::shared_ptr<ConjugatedRingBondPatternSwitching> SharedPointer;
 
             /**

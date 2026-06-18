@@ -25,81 +25,81 @@
 class AtomPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief Default value for the Chem.AtomProperty.SYMBOL property.
+    # \brief Default value of the Chem.AtomProperty.SYMBOL property.
     # 
     SYMBOL = ''
 
     ##
-    # \brief Default value for the Chem.AtomProperty.NAME property.
+    # \brief Default value of the Chem.AtomProperty.NAME property.
     # 
     NAME = ''
 
     ##
-    # \brief Default value for the Chem.AtomProperty.FORMAL_CHARGE property.
+    # \brief Default value of the Chem.AtomProperty.FORMAL_CHARGE property.
     # 
     FORMAL_CHARGE = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.ISOTOPE property.
+    # \brief Default value of the Chem.AtomProperty.ISOTOPE property.
     # 
     ISOTOPE = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property.
+    # \brief Default value of the Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT property.
     # 
     UNPAIRED_ELECTRON_COUNT = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.RADICAL_TYPE property.
+    # \brief Default value of the Chem.AtomProperty.RADICAL_TYPE property.
     # 
     RADICAL_TYPE = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.TYPE property.
+    # \brief Default value of the Chem.AtomProperty.TYPE property.
     # 
     TYPE = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.SYBYL_TYPE property.
+    # \brief Default value of the Chem.AtomProperty.SYBYL_TYPE property.
     # 
     SYBYL_TYPE = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.REACTION_CENTER_STATUS property.
+    # \brief Default value of the Chem.AtomProperty.REACTION_CENTER_STATUS property.
     # 
     REACTION_CENTER_STATUS = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.STEREO_DESCRIPTOR property.
+    # \brief Default value of the Chem.AtomProperty.STEREO_DESCRIPTOR property.
     # 
     STEREO_DESCRIPTOR = StereoDescriptor(config=0)
 
     ##
-    # \brief Default value for the Chem.AtomProperty.COMPONENT_GROUP_ID property.
+    # \brief Default value of the Chem.AtomProperty.COMPONENT_GROUP_ID property.
     # 
     COMPONENT_GROUP_ID = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.ATOM_MAPPING_ID property.
+    # \brief Default value of the Chem.AtomProperty.ATOM_MAPPING_ID property.
     # 
     ATOM_MAPPING_ID = 0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.MATCH_CONSTRAINTS property.
+    # \brief Default value of the Chem.AtomProperty.MATCH_CONSTRAINTS property.
     # 
     MATCH_CONSTRAINTS = MatchConstraintList()
 
     ##
-    # \brief Default value for the Chem.AtomProperty.MOL2_NAME property.
+    # \brief Default value of the Chem.AtomProperty.MOL2_NAME property.
     # 
     MOL2_NAME = ''
 
     ##
-    # \brief Default value for the Chem.AtomProperty.MOL2_CHARGE property.
+    # \brief Default value of the Chem.AtomProperty.MOL2_CHARGE property.
     # 
     MOL2_CHARGE = 0.0
 
     ##
-    # \brief Default value for the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property.
+    # \brief Default value of the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property.
     # 
     MDL_DB_STEREO_CARE_FLAG = False

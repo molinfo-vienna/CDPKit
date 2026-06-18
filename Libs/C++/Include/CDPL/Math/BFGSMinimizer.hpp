@@ -42,28 +42,41 @@ namespace CDPL
     {
 
         /**
-         * \brief Fletcher's implementation of the BFGS method.
+         * \brief Implementation of the <em>Broyden-Fletcher-Goldfarb-Shanno (BFGS)</em> algorithm for
+         *        solving unconstrained nonlinear optimization problems.
          *
-         * The implementation has been taken from the <em>GNU Scientific Library</em>.
+         * The base implementation has been taken from the <em>GNU Scientific Library</em>.
          *
-         * \see R. Fletcher, "Practical Method's of Optimization", Second
-         *      Edition, ISBN 0471915475.  Algorithms 2.6.2 and 2.6.4. 
+         * \see [\ref BFGS, \ref GSL]
          */
         template <typename VA, typename VT = typename MinimizerVariableArrayTraits<VA>::ValueType, typename FVT = VT>
         class BFGSMinimizer
         {
 
           public:
-            /** \brief The type of the variable array passed to the minimizer. */
+            /**
+             * \brief The type of the variable array passed to the minimizer.
+             */
             typedef VA  VariableArrayType;
-            /** \brief The scalar value type of \a VariableArrayType. */
+
+            /**
+             * \brief The scalar value type of \a VariableArrayType.
+             */
             typedef VT  ValueType;
-            /** \brief The scalar return type of the objective and gradient functions. */
+
+            /**
+             * \brief The scalar return type of the objective and gradient functions.
+             */
             typedef FVT FunctionValueType;
 
-            /** \brief Type of the gradient function (computes the objective value and writes the gradient into the second argument). */
+            /**
+             * \brief Type of the gradient function (computes the objective value and writes the gradient into the second argument).
+             */
             typedef typename std::function<FVT(const VA&, VA&)> GradientFunction;
-            /** \brief Type of the objective function. */
+
+            /**
+             * \brief Type of the objective function.
+             */
             typedef typename std::function<FVT(const VA&)>      ObjectiveFunction;
 
             /**
@@ -72,16 +85,30 @@ namespace CDPL
             enum Status
             {
 
-                /** \brief Iteration step completed successfully (no termination condition met yet). */
-                SUCCESS            = 0,
-                /** \brief No more progress towards the solution can be made. */
-                NO_PROGRESS        = 1,
-                /** \brief The maximum number of minimization iterations has been reached. */
+                /**
+                 * \brief Iteration step completed successfully (no termination condition met yet).
+                 */
+                SUCCESS = 0,
+
+                /**
+                 * \brief No more progress towards the solution can be made.
+                 */
+                NO_PROGRESS = 1,
+
+                /**
+                 * \brief The maximum number of minimization iterations has been reached.
+                 */
                 ITER_LIMIT_REACHED = 2,
-                /** \brief The configured gradient-norm threshold has been reached. */
-                GNORM_REACHED      = 4,
-                /** \brief The configured function-value delta between successive iterations has been reached. */
-                DELTAF_REACHED     = 8
+
+                /**
+                 * \brief The configured gradient-norm threshold has been reached.
+                 */
+                GNORM_REACHED = 4,
+
+                /**
+                 * \brief The configured function-value delta between successive iterations has been reached.
+                 */
+                DELTAF_REACHED = 8
             };
 
             /**

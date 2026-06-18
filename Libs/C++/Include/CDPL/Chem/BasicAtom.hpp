@@ -87,13 +87,24 @@ namespace CDPL
             };
 
           public:
-            /** \brief Mutable random-access iterator over the connected (neighbor) atoms. */
+            /**
+             * \brief Mutable random-access iterator over the connected (neighbor) atoms.
+             */
             typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator>             AtomIterator;
-            /** \brief Constant random-access iterator over the connected (neighbor) atoms. */
+
+            /**
+             * \brief Constant random-access iterator over the connected (neighbor) atoms.
+             */
             typedef boost::transform_iterator<AtomAccessor<const BasicAtom>, NeighborList::const_iterator> ConstAtomIterator;
-            /** \brief Mutable random-access iterator over the incident bonds. */
+
+            /**
+             * \brief Mutable random-access iterator over the incident bonds.
+             */
             typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator>             BondIterator;
-            /** \brief Constant random-access iterator over the incident bonds. */
+
+            /**
+             * \brief Constant random-access iterator over the incident bonds.
+             */
             typedef boost::transform_iterator<BondAccessor<const BasicBond>, NeighborList::const_iterator> ConstBondIterator;
 
             /**

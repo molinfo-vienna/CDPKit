@@ -52,9 +52,14 @@ namespace CDPL
         enum CompressionAlgo
         {
 
-            /** \brief Identifier for the gzip compression algorithm. */
+            /**
+             * \brief Identifier for the gzip compression algorithm.
+             */
             GZIP,
-            /** \brief Identifier for the bzip2 compression algorithm. */
+
+            /**
+             * \brief Identifier for the bzip2 compression algorithm.
+             */
             BZIP2
         };
 
@@ -73,9 +78,14 @@ namespace CDPL
         struct CompressionAlgoTraits<GZIP>
         {
 
-            /** \brief Decompression filter type (gzip). */
+            /**
+             * \brief Decompression filter type (gzip).
+             */
             typedef boost::iostreams::gzip_decompressor DecompFilter;
-            /** \brief Compression filter type (gzip). */
+
+            /**
+             * \brief Compression filter type (gzip).
+             */
             typedef boost::iostreams::gzip_compressor   CompFilter;
         };
 
@@ -86,9 +96,14 @@ namespace CDPL
         struct CompressionAlgoTraits<BZIP2>
         {
 
-            /** \brief Decompression filter type (bzip2). */
+            /**
+             * \brief Decompression filter type (bzip2).
+             */
             typedef boost::iostreams::bzip2_decompressor DecompFilter;
-            /** \brief Compression filter type (bzip2). */
+
+            /**
+             * \brief Compression filter type (bzip2).
+             */
             typedef boost::iostreams::bzip2_compressor   CompFilter;
         };
 
@@ -106,19 +121,39 @@ namespace CDPL
         {
 
           public:
-            /** \brief The character type of the wrapped stream. */
+            /**
+             * \brief The character type of the wrapped stream.
+             */
             typedef typename StreamType::char_type             char_type;
-            /** \brief The character traits type of the wrapped stream. */
+
+            /**
+             * \brief The character traits type of the wrapped stream.
+             */
             typedef typename StreamType::traits_type           traits_type;
-            /** \brief The integer type used to represent characters and EOF. */
+
+            /**
+             * \brief The integer type used to represent characters and EOF.
+             */
             typedef typename StreamType::int_type              int_type;
-            /** \brief The type used to represent stream positions. */
+
+            /**
+             * \brief The type used to represent stream positions.
+             */
             typedef typename StreamType::pos_type              pos_type;
-            /** \brief The type used to represent stream offsets. */
+
+            /**
+             * \brief The type used to represent stream offsets.
+             */
             typedef typename StreamType::off_type              off_type;
-            /** \brief Input-stream type with matching character and traits types. */
+
+            /**
+             * \brief Input-stream type with matching character and traits types.
+             */
             typedef std::basic_istream<char_type, traits_type> IStreamType;
-            /** \brief Output-stream type with matching character and traits types. */
+
+            /**
+             * \brief Output-stream type with matching character and traits types.
+             */
             typedef std::basic_ostream<char_type, traits_type> OStreamType;
 
             /**
@@ -153,17 +188,34 @@ namespace CDPL
         {
 
           public:
-            /** \brief The underlying input-stream type. */
+            /**
+             * \brief The underlying input-stream type.
+             */
             typedef typename std::basic_istream<CharT, TraitsT> StreamType;
-            /** \brief The character type of the stream. */
+
+            /**
+             * \brief The character type of the stream.
+             */
             typedef typename StreamType::char_type              char_type;
-            /** \brief The character traits type of the stream. */
+
+            /**
+             * \brief The character traits type of the stream.
+             */
             typedef typename StreamType::traits_type            traits_type;
-            /** \brief The integer type used to represent characters and EOF. */
+
+            /**
+             * \brief The integer type used to represent characters and EOF.
+             */
             typedef typename StreamType::int_type               int_type;
-            /** \brief The type used to represent stream positions. */
+
+            /**
+             * \brief The type used to represent stream positions.
+             */
             typedef typename StreamType::pos_type               pos_type;
-            /** \brief The type used to represent stream offsets. */
+
+            /**
+             * \brief The type used to represent stream offsets.
+             */
             typedef typename StreamType::off_type               off_type;
 
             /**
@@ -202,17 +254,34 @@ namespace CDPL
         {
 
           public:
-            /** \brief The underlying output-stream type. */
+            /**
+             * \brief The underlying output-stream type.
+             */
             typedef typename std::basic_ostream<CharT, TraitsT> StreamType;
-            /** \brief The character type of the stream. */
+
+            /**
+             * \brief The character type of the stream.
+             */
             typedef typename StreamType::char_type              char_type;
-            /** \brief The character traits type of the stream. */
+
+            /**
+             * \brief The character traits type of the stream.
+             */
             typedef typename StreamType::traits_type            traits_type;
-            /** \brief The integer type used to represent characters and EOF. */
+
+            /**
+             * \brief The integer type used to represent characters and EOF.
+             */
             typedef typename StreamType::int_type               int_type;
-            /** \brief The type used to represent stream positions. */
+
+            /**
+             * \brief The type used to represent stream positions.
+             */
             typedef typename StreamType::pos_type               pos_type;
-            /** \brief The type used to represent stream offsets. */
+
+            /**
+             * \brief The type used to represent stream offsets.
+             */
             typedef typename StreamType::off_type               off_type;
 
             /**
@@ -260,17 +329,34 @@ namespace CDPL
         {
 
           public:
-            /** \brief The underlying input/output-stream type. */
+            /**
+             * \brief The underlying input/output-stream type.
+             */
             typedef typename std::basic_iostream<CharT, TraitsT> StreamType;
-            /** \brief The character type of the stream. */
+
+            /**
+             * \brief The character type of the stream.
+             */
             typedef typename StreamType::char_type               char_type;
-            /** \brief The character traits type of the stream. */
+
+            /**
+             * \brief The character traits type of the stream.
+             */
             typedef typename StreamType::traits_type             traits_type;
-            /** \brief The integer type used to represent characters and EOF. */
+
+            /**
+             * \brief The integer type used to represent characters and EOF.
+             */
             typedef typename StreamType::int_type                int_type;
-            /** \brief The type used to represent stream positions. */
+
+            /**
+             * \brief The type used to represent stream positions.
+             */
             typedef typename StreamType::pos_type                pos_type;
-            /** \brief The type used to represent stream offsets. */
+
+            /**
+             * \brief The type used to represent stream offsets.
+             */
             typedef typename StreamType::off_type                off_type;
 
             /**
@@ -305,18 +391,35 @@ namespace CDPL
             off_type    outPos;
         };
 
-        /** \brief Input stream that transparently decompresses gzip-compressed data. */
-        typedef DecompressionIStream<GZIP>  GZipIStream;
-        /** \brief Input stream that transparently decompresses bzip2-compressed data. */
+        /**
+         * \brief Input stream that transparently decompresses gzip-compressed data.
+         */
+        typedef DecompressionIStream<GZIP> GZipIStream;
+
+        /**
+         * \brief Input stream that transparently decompresses bzip2-compressed data.
+         */
         typedef DecompressionIStream<BZIP2> BZip2IStream;
-        /** \brief Output stream that transparently writes gzip-compressed data. */
-        typedef CompressionOStream<GZIP>    GZipOStream;
-        /** \brief Output stream that transparently writes bzip2-compressed data. */
-        typedef CompressionOStream<BZIP2>   BZip2OStream;
-        /** \brief Bidirectional stream that transparently (de)compresses gzip data. */
-        typedef CompressedIOStream<GZIP>    GZipIOStream;
-        /** \brief Bidirectional stream that transparently (de)compresses bzip2 data. */
-        typedef CompressedIOStream<BZIP2>   BZip2IOStream;
+
+        /**
+         * \brief Output stream that transparently writes gzip-compressed data.
+         */
+        typedef CompressionOStream<GZIP> GZipOStream;
+
+        /**
+         * \brief Output stream that transparently writes bzip2-compressed data.
+         */
+        typedef CompressionOStream<BZIP2> BZip2OStream;
+
+        /**
+         * \brief Bidirectional stream that transparently (de)compresses gzip data.
+         */
+        typedef CompressedIOStream<GZIP> GZipIOStream;
+
+        /**
+         * \brief Bidirectional stream that transparently (de)compresses bzip2 data.
+         */
+        typedef CompressedIOStream<BZIP2> BZip2IOStream;
     } // namespace Util
 } // namespace CDPL
 

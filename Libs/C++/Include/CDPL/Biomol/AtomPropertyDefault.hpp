@@ -46,17 +46,34 @@ namespace CDPL
         namespace AtomPropertyDefault
         {
 
-            /** \brief Default value for the Biomol::AtomProperty::MODEL_NUMBER property. */
+            /**
+             * \brief Default value of the Biomol::AtomProperty::MODEL_NUMBER property.
+             */
             extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
-            /** \brief Default value for the Biomol::AtomProperty::B_FACTOR property. */
+
+            /**
+             * \brief Default value of the Biomol::AtomProperty::B_FACTOR property.
+             */
             extern CDPL_BIOMOL_API const double      B_FACTOR;
-            /** \brief Default value for the Biomol::AtomProperty::OCCUPANCY property. */
+
+            /**
+             * \brief Default value of the Biomol::AtomProperty::OCCUPANCY property.
+             */
             extern CDPL_BIOMOL_API const double      OCCUPANCY;
-            /** \brief Default value for the Biomol::AtomProperty::RESIDUE_LEAVING_ATOM_FLAG property. */
+
+            /**
+             * \brief Default value of the Biomol::AtomProperty::RESIDUE_LEAVING_ATOM_FLAG property.
+             */
             extern CDPL_BIOMOL_API const bool        RESIDUE_LEAVING_ATOM_FLAG;
-            /** \brief Default value for the Biomol::AtomProperty::RESIDUE_LINKING_ATOM_FLAG property. */
+
+            /**
+             * \brief Default value of the Biomol::AtomProperty::RESIDUE_LINKING_ATOM_FLAG property.
+             */
             extern CDPL_BIOMOL_API const bool        RESIDUE_LINKING_ATOM_FLAG;
-            /** \brief Default value for the Biomol::AtomProperty::RESIDUE_INSERTION_CODE property. */
+
+            /**
+             * \brief Default value of the Biomol::AtomProperty::RESIDUE_INSERTION_CODE property.
+             */
             extern CDPL_BIOMOL_API const char        RESIDUE_INSERTION_CODE;
         } // namespace AtomPropertyDefault
     } // namespace Biomol

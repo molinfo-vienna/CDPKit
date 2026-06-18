@@ -61,9 +61,14 @@ namespace CDPL
              */
             typedef std::shared_ptr<FragmentLibraryEntry> SharedPointer;
 
-            /** \brief A constant iterator over the stored conformers (dereferences to \c const ConformerData). */
+            /**
+             * \brief A constant iterator over the stored conformers (dereferences to \c const ConformerData).
+             */
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-            /** \brief A mutable iterator over the stored conformers (dereferences to ConformerData). */
+
+            /**
+             * \brief A mutable iterator over the stored conformers (dereferences to ConformerData).
+             */
             typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData>             ConformerIterator;
 
             /**

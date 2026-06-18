@@ -119,9 +119,15 @@ namespace CDPL
                 double score;
             };
 
-            /** \brief A mutable iterator over the angle entries. */
+
+            /**
+             * \brief A mutable iterator over the angle entries.
+             */
             typedef AngleEntryList::iterator       AngleEntryIterator;
-            /** \brief A constant iterator over the angle entries. */
+
+            /**
+             * \brief A constant iterator over the angle entries.
+             */
             typedef AngleEntryList::const_iterator ConstAngleEntryIterator;
 
             /**

@@ -54,12 +54,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CompoundDataReader instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CompoundDataReader instances.
+             */
             typedef std::shared_ptr<CompoundDataReader> SharedPointer;
 
-            /** \brief Type of the underlying Base::DataReader specialization. */
+            /**
+             * \brief Type of the underlying Base::DataReader specialization.
+             */
             typedef Base::DataReader<DataType>         ReaderType;
-            /** \brief Shared-pointer type for the underlying readers. */
+
+            /**
+             * \brief Shared-pointer type for the underlying readers.
+             */
             typedef typename ReaderType::SharedPointer ReaderPointer;
 
             /**

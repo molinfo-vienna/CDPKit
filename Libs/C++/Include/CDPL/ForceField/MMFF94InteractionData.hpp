@@ -60,7 +60,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94InteractionData instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94InteractionData instances.
+             */
             typedef std::shared_ptr<MMFF94InteractionData> SharedPointer;
 
             /**

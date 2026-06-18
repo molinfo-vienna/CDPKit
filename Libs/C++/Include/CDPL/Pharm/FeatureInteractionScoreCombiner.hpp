@@ -54,10 +54,14 @@ namespace CDPL
              */
             typedef std::shared_ptr<FeatureInteractionScoreCombiner> SharedPointer;
 
-            /** \brief Type of the binary function that combines two score values into the final score. */
+            /**
+             * \brief Type of the binary function that combines two score values into the final score.
+             */
             typedef std::function<double(double, double)> CombinationFunction;
 
-            /** \brief Type of the shared pointer to an underlying interaction score. */
+            /**
+             * \brief Type of the shared pointer to an underlying interaction score.
+             */
             typedef FeatureInteractionScore::SharedPointer InteractionScore;
 
             /**

@@ -72,13 +72,24 @@ namespace CDPL
              */
             typedef std::shared_ptr<BasicMolecule> SharedPointer;
 
-            /** \brief Mutable random-access iterator over the atoms of the molecule. */
+            /**
+             * \brief Mutable random-access iterator over the atoms of the molecule.
+             */
             typedef boost::indirect_iterator<AtomList::iterator, BasicAtom>             AtomIterator;
-            /** \brief Constant random-access iterator over the atoms of the molecule. */
+
+            /**
+             * \brief Constant random-access iterator over the atoms of the molecule.
+             */
             typedef boost::indirect_iterator<AtomList::const_iterator, const BasicAtom> ConstAtomIterator;
-            /** \brief Mutable random-access iterator over the bonds of the molecule. */
+
+            /**
+             * \brief Mutable random-access iterator over the bonds of the molecule.
+             */
             typedef boost::indirect_iterator<BondList::iterator, BasicBond>             BondIterator;
-            /** \brief Constant random-access iterator over the bonds of the molecule. */
+
+            /**
+             * \brief Constant random-access iterator over the bonds of the molecule.
+             */
             typedef boost::indirect_iterator<BondList::const_iterator, const BasicBond> ConstBondIterator;
 
             /**

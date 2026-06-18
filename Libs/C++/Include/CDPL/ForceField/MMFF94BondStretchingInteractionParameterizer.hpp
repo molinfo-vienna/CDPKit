@@ -64,7 +64,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94BondStretchingInteractionParameterizer instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94BondStretchingInteractionParameterizer instances.
+             */
             typedef std::shared_ptr<MMFF94BondStretchingInteractionParameterizer> SharedPointer;
 
             /**

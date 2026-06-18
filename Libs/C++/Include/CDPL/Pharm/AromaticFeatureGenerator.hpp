@@ -51,11 +51,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default value for the feature tolerance property of generated aromatic features. */
+            /**
+             * \brief Default value for the feature tolerance property of generated aromatic features.
+             */
             static constexpr double       DEF_FEATURE_TOL  = 0.9;
-            /** \brief Default value for the feature type property of generated aromatic features (Pharm::FeatureType::AROMATIC). */
+
+            /**
+             * \brief Default value for the feature type property of generated aromatic features (Pharm::FeatureType::AROMATIC).
+             */
             static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::AROMATIC;
-            /** \brief Default value for the feature geometry property of generated aromatic features (Pharm::FeatureGeometry::PLANE). */
+
+            /**
+             * \brief Default value for the feature geometry property of generated aromatic features (Pharm::FeatureGeometry::PLANE).
+             */
             static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::PLANE;
 
             /**

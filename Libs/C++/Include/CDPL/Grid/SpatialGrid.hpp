@@ -53,13 +53,24 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SpatialGrid instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SpatialGrid instances.
+             */
             typedef std::shared_ptr<SpatialGrid> SharedPointer;
-            /** \brief The grid element value type. */
+
+            /**
+             * \brief The grid element value type.
+             */
             typedef T                            ValueType;
-            /** \brief The coordinate value type. */
+
+            /**
+             * \brief The coordinate value type.
+             */
             typedef CVT                          CoordinatesValueType;
-            /** \brief The fixed-size 3D coordinate vector type. */
+
+            /**
+             * \brief The fixed-size 3D coordinate vector type.
+             */
             typedef Math::CVector<CVT, 3>        CoordinatesType;
 
             /**
@@ -91,9 +102,14 @@ namespace CDPL
             }
         };
 
-        /** \brief Convenience alias for the single-precision spatial-grid abstract base. */
+        /**
+         * \brief Convenience alias for the single-precision spatial-grid abstract base.
+         */
         typedef SpatialGrid<float>  FSpatialGrid;
-        /** \brief Convenience alias for the double-precision spatial-grid abstract base. */
+        
+        /**
+         * \brief Convenience alias for the double-precision spatial-grid abstract base.
+         */
         typedef SpatialGrid<double> DSpatialGrid;
     } // namespace Grid
 } // namespace CDPL

@@ -49,7 +49,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentList instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentList instances.
+             */
             typedef std::shared_ptr<FragmentList> SharedPointer;
 
           private:

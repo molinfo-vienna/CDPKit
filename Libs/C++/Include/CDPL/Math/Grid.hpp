@@ -60,23 +60,46 @@ namespace CDPL
             typedef GridReference<G> SelfType;
 
           public:
-            /** \brief The wrapped grid type. */
+            /**
+             * \brief The wrapped grid type.
+             */
             typedef G                                                      GridType;
-            /** \brief The element value type of the wrapped grid. */
+
+            /**
+             * \brief The element value type of the wrapped grid.
+             */
             typedef typename G::ValueType                                  ValueType;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped grid is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped grid is \c const).
+             */
             typedef typename std::conditional<std::is_const<G>::value,
                                               typename G::ConstReference,
                                               typename G::Reference>::type Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename G::ConstReference                             ConstReference;
-            /** \brief The unsigned size type used by the wrapped grid. */
+
+            /**
+             * \brief The unsigned size type used by the wrapped grid.
+             */
             typedef typename G::SizeType                                   SizeType;
-            /** \brief The signed difference type used by the wrapped grid. */
+
+            /**
+             * \brief The signed difference type used by the wrapped grid.
+             */
             typedef typename G::DifferenceType                             DifferenceType;
-            /** \brief Closure type used when this reference appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this reference appears inside another expression.
+             */
             typedef SelfType                                               ClosureType;
-            /** \brief Constant closure type used when this reference appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this reference appears inside another expression.
+             */
             typedef const SelfType                                         ConstClosureType;
 
             /**
@@ -380,29 +403,64 @@ namespace CDPL
             typedef Grid<T, A> SelfType;
 
           public:
-            /** \brief The scalar value type stored in the grid. */
+            /**
+             * \brief The scalar value type stored in the grid.
+             */
             typedef T                                   ValueType;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef T&                                  Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                            ConstReference;
-            /** \brief The unsigned size type used by the underlying storage container. */
+
+            /**
+             * \brief The unsigned size type used by the underlying storage container.
+             */
             typedef typename A::size_type               SizeType;
-            /** \brief The signed difference type used by the underlying storage container. */
+
+            /**
+             * \brief The signed difference type used by the underlying storage container.
+             */
             typedef typename A::difference_type         DifferenceType;
-            /** \brief The underlying storage container type. */
+
+            /**
+             * \brief The underlying storage container type.
+             */
             typedef A                                   ArrayType;
-            /** \brief Pointer type for raw element access. */
+
+            /**
+             * \brief Pointer type for raw element access.
+             */
             typedef T*                                  Pointer;
-            /** \brief Constant pointer type for raw element access. */
+
+            /**
+             * \brief Constant pointer type for raw element access.
+             */
             typedef const T*                            ConstPointer;
-            /** \brief Closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this grid appears inside another expression.
+             */
             typedef GridReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this grid appears inside another expression.
+             */
             typedef const GridReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary grid type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary grid type used by expression-template machinery.
+             */
             typedef SelfType                            GridTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Grid instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Grid instances.
+             */
             typedef std::shared_ptr<SelfType>           SharedPointer;
 
             /**
@@ -842,21 +900,44 @@ namespace CDPL
             typedef ZeroGrid<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                   ValueType;
-            /** \brief Reference type (always a \c const reference — all cells are zero). */
+
+            /**
+             * \brief Reference type (always a \c const reference — all cells are zero).
+             */
             typedef const T&                            Reference;
-            /** \brief Constant reference type to the zero element. */
+
+            /**
+             * \brief Constant reference type to the zero element.
+             */
             typedef const T&                            ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                         SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                      DifferenceType;
-            /** \brief Closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this grid appears inside another expression.
+             */
             typedef GridReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this grid appears inside another expression.
+             */
             typedef const GridReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary grid type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary grid type used by expression-template machinery.
+             */
             typedef Grid<T>                             GridTemporaryType;
 
             /**
@@ -1052,21 +1133,44 @@ namespace CDPL
             typedef ScalarGrid<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                   ValueType;
-            /** \brief Reference type (always a \c const reference — cells are immutable). */
+
+            /**
+             * \brief Reference type (always a \c const reference — cells are immutable).
+             */
             typedef const T&                            Reference;
-            /** \brief Constant reference type to a cell. */
+
+            /**
+             * \brief Constant reference type to a cell.
+             */
             typedef const T&                            ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                         SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                      DifferenceType;
-            /** \brief Closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this grid appears inside another expression.
+             */
             typedef GridReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this grid appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this grid appears inside another expression.
+             */
             typedef const GridReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary grid type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary grid type used by expression-template machinery.
+             */
             typedef Grid<T>                             GridTemporaryType;
 
             /**

@@ -95,360 +95,890 @@ namespace CDPL
              */
             enum ElementIndex
             {
-
-                /** \brief Positive-ionizable feature count (ligand). */
+    
+                /**
+                 * \brief Positive-ionizable feature count (ligand).
+                 */
                 PI_COUNT,
-                /** \brief Negative-ionizable feature count (ligand). */
+    
+                /**
+                 * \brief Negative-ionizable feature count (ligand).
+                 */
                 NI_COUNT,
-                /** \brief Aromatic feature count (ligand). */
+    
+                /**
+                 * \brief Aromatic feature count (ligand).
+                 */
                 AR_COUNT,
-                /** \brief Hydrophobic feature count (ligand). */
+    
+                /**
+                 * \brief Hydrophobic feature count (ligand).
+                 */
                 H_COUNT,
-                /** \brief Hydrogen-bond donor feature count (ligand). */
+    
+                /**
+                 * \brief Hydrogen-bond donor feature count (ligand).
+                 */
                 HBD_COUNT,
-                /** \brief Hydrogen-bond acceptor feature count (ligand). */
+    
+                /**
+                 * \brief Hydrogen-bond acceptor feature count (ligand).
+                 */
                 HBA_COUNT,
-                /** \brief Halogen-bond donor feature count (ligand). */
+    
+                /**
+                 * \brief Halogen-bond donor feature count (ligand).
+                 */
                 XBD_COUNT,
-                /** \brief Halogen-bond acceptor feature count (ligand). */
+    
+                /**
+                 * \brief Halogen-bond acceptor feature count (ligand).
+                 */
                 XBA_COUNT,
-                /** \brief Ligand HBD feature count with N3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with N3 heavy atom.
+                 */
                 HBD_N3_COUNT,
-                /** \brief Ligand HBD feature count with N2 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with N2 heavy atom.
+                 */
                 HBD_N2_COUNT,
-                /** \brief Ligand HBD feature count with Nar heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with Nar heavy atom.
+                 */
                 HBD_Nar_COUNT,
-                /** \brief Ligand HBD feature count with Nam heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with Nam heavy atom.
+                 */
                 HBD_Nam_COUNT,
-                /** \brief Ligand HBD feature count with Npl3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with Npl3 heavy atom.
+                 */
                 HBD_Npl3_COUNT,
-                /** \brief Ligand HBD feature count with N4 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with N4 heavy atom.
+                 */
                 HBD_N4_COUNT,
-                /** \brief Ligand HBD feature count with O3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with O3 heavy atom.
+                 */
                 HBD_O3_COUNT,
-                /** \brief Ligand HBD feature count with S3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBD feature count with S3 heavy atom.
+                 */
                 HBD_S3_COUNT,
-                /** \brief Ligand HBA feature count with N3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with N3 heavy atom.
+                 */
                 HBA_N3_COUNT,
-                /** \brief Ligand HBA feature count with N2 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with N2 heavy atom.
+                 */
                 HBA_N2_COUNT,
-                /** \brief Ligand HBA feature count with N1 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with N1 heavy atom.
+                 */
                 HBA_N1_COUNT,
-                /** \brief Ligand HBA feature count with Nar heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with Nar heavy atom.
+                 */
                 HBA_Nar_COUNT,
-                /** \brief Ligand HBA feature count with Npl3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with Npl3 heavy atom.
+                 */
                 HBA_Npl3_COUNT,
-                /** \brief Ligand HBA feature count with O3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with O3 heavy atom.
+                 */
                 HBA_O3_COUNT,
-                /** \brief Ligand HBA feature count with O2 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with O2 heavy atom.
+                 */
                 HBA_O2_COUNT,
-                /** \brief Ligand HBA feature count with Oco2 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with Oco2 heavy atom.
+                 */
                 HBA_Oco2_COUNT,
-                /** \brief Ligand HBA feature count with S3 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with S3 heavy atom.
+                 */
                 HBA_S3_COUNT,
-                /** \brief Ligand HBA feature count with S2 heavy atom. */
+    
+                /**
+                 * \brief Ligand HBA feature count with S2 heavy atom.
+                 */
                 HBA_S2_COUNT,
-                /** \brief Heavy atom count (ligand). */
+    
+                /**
+                 * \brief Heavy atom count (ligand).
+                 */
                 HVY_ATOM_COUNT,
-                /** \brief Rotatable bond count (ligand). */
+    
+                /**
+                 * \brief Rotatable bond count (ligand).
+                 */
                 ROT_BOND_COUNT,
-                /** \brief Total computed hydrophobicity (ligand). */
+    
+                /**
+                 * \brief Total computed hydrophobicity (ligand).
+                 */
                 TOTAL_HYD,
-                /** \brief Computed \f$ \log P \f$ (ligand). */
+    
+                /**
+                 * \brief Computed \f$ \log P \f$ (ligand).
+                 */
                 LOGP,
-                /** \brief Computed topological polar surface area (ligand). */
+    
+                /**
+                 * \brief Computed topological polar surface area (ligand).
+                 */
                 TPSA,
-                /** \brief Sum of environment HBA occupancy scores against ligand HBD-N atoms. */
+    
+                /**
+                 * \brief Sum of environment HBA occupancy scores against ligand HBD-N atoms.
+                 */
                 ENV_HBA_N_OCC_SUM,
-                /** \brief Maximum environment HBA occupancy score against ligand HBD-N atoms. */
+    
+                /**
+                 * \brief Maximum environment HBA occupancy score against ligand HBD-N atoms.
+                 */
                 ENV_HBA_N_OCC_MAX,
-                /** \brief Sum of environment HBA occupancy scores against ligand HBD-O atoms. */
+    
+                /**
+                 * \brief Sum of environment HBA occupancy scores against ligand HBD-O atoms.
+                 */
                 ENV_HBA_O_OCC_SUM,
-                /** \brief Maximum environment HBA occupancy score against ligand HBD-O atoms. */
+    
+                /**
+                 * \brief Maximum environment HBA occupancy score against ligand HBD-O atoms.
+                 */
                 ENV_HBA_O_OCC_MAX,
-                /** \brief Sum of environment HBA occupancy scores against ligand HBD-S atoms. */
+    
+                /**
+                 * \brief Sum of environment HBA occupancy scores against ligand HBD-S atoms.
+                 */
                 ENV_HBA_S_OCC_SUM,
-                /** \brief Maximum environment HBA occupancy score against ligand HBD-S atoms. */
+    
+                /**
+                 * \brief Maximum environment HBA occupancy score against ligand HBD-S atoms.
+                 */
                 ENV_HBA_S_OCC_MAX,
-                /** \brief Sum of environment HBD occupancy scores against ligand HBA-N atoms. */
+    
+                /**
+                 * \brief Sum of environment HBD occupancy scores against ligand HBA-N atoms.
+                 */
                 ENV_HBD_N_OCC_SUM,
-                /** \brief Maximum environment HBD occupancy score against ligand HBA-N atoms. */
+    
+                /**
+                 * \brief Maximum environment HBD occupancy score against ligand HBA-N atoms.
+                 */
                 ENV_HBD_N_OCC_MAX,
-                /** \brief Sum of environment HBD occupancy scores against ligand HBA-O atoms. */
+    
+                /**
+                 * \brief Sum of environment HBD occupancy scores against ligand HBA-O atoms.
+                 */
                 ENV_HBD_O_OCC_SUM,
-                /** \brief Maximum environment HBD occupancy score against ligand HBA-O atoms. */
+    
+                /**
+                 * \brief Maximum environment HBD occupancy score against ligand HBA-O atoms.
+                 */
                 ENV_HBD_O_OCC_MAX,
-                /** \brief Sum of environment HBD occupancy scores against ligand HBA-S atoms. */
+    
+                /**
+                 * \brief Sum of environment HBD occupancy scores against ligand HBA-S atoms.
+                 */
                 ENV_HBD_S_OCC_SUM,
-                /** \brief Maximum environment HBD occupancy score against ligand HBA-S atoms. */
+    
+                /**
+                 * \brief Maximum environment HBD occupancy score against ligand HBA-S atoms.
+                 */
                 ENV_HBD_S_OCC_MAX,
-                /** \brief Sum of (ligand positive-ionizable &rarr; target aromatic) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand positive-ionizable &rarr; target aromatic) interaction scores.
+                 */
                 PI_AR_SCORE_SUM,
-                /** \brief Maximum (ligand positive-ionizable &rarr; target aromatic) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand positive-ionizable &rarr; target aromatic) interaction score.
+                 */
                 PI_AR_SCORE_MAX,
-                /** \brief Sum of (ligand aromatic &rarr; target positive-ionizable) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand aromatic &rarr; target positive-ionizable) interaction scores.
+                 */
                 AR_PI_SCORE_SUM,
-                /** \brief Maximum (ligand aromatic &rarr; target positive-ionizable) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand aromatic &rarr; target positive-ionizable) interaction score.
+                 */
                 AR_PI_SCORE_MAX,
-                /** \brief Sum of hydrophobic-hydrophobic interaction scores. */
+    
+                /**
+                 * \brief Sum of hydrophobic-hydrophobic interaction scores.
+                 */
                 H_H_SCORE_SUM,
-                /** \brief Maximum hydrophobic-hydrophobic interaction score. */
+    
+                /**
+                 * \brief Maximum hydrophobic-hydrophobic interaction score.
+                 */
                 H_H_SCORE_MAX,
-                /** \brief Sum of aromatic-aromatic interaction scores. */
+    
+                /**
+                 * \brief Sum of aromatic-aromatic interaction scores.
+                 */
                 AR_AR_SCORE_SUM,
-                /** \brief Maximum aromatic-aromatic interaction score. */
+    
+                /**
+                 * \brief Maximum aromatic-aromatic interaction score.
+                 */
                 AR_AR_SCORE_MAX,
-                /** \brief Sum of (any ligand HBD &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (any ligand HBD &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_HBA_N_SCORE_SUM,
-                /** \brief Maximum (any ligand HBD &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (any ligand HBD &rarr; target HBA-N) interaction score.
+                 */
                 HBD_HBA_N_SCORE_MAX,
-                /** \brief Sum of (any ligand HBD &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (any ligand HBD &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_HBA_O_SCORE_SUM,
-                /** \brief Maximum (any ligand HBD &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (any ligand HBD &rarr; target HBA-O) interaction score.
+                 */
                 HBD_HBA_O_SCORE_MAX,
-                /** \brief Sum of (any ligand HBD &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (any ligand HBD &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_HBA_S_SCORE_SUM,
-                /** \brief Maximum (any ligand HBD &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (any ligand HBD &rarr; target HBA-S) interaction score.
+                 */
                 HBD_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N3 &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N3 &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_N3_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N3 &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N3 &rarr; target HBA-N) interaction score.
+                 */
                 HBD_N3_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N3 &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N3 &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_N3_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N3 &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N3 &rarr; target HBA-O) interaction score.
+                 */
                 HBD_N3_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N3 &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N3 &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_N3_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N3 &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N3 &rarr; target HBA-S) interaction score.
+                 */
                 HBD_N3_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N2 &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N2 &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_N2_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N2 &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N2 &rarr; target HBA-N) interaction score.
+                 */
                 HBD_N2_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N2 &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N2 &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_N2_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N2 &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N2 &rarr; target HBA-O) interaction score.
+                 */
                 HBD_N2_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N2 &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N2 &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_N2_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N2 &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N2 &rarr; target HBA-S) interaction score.
+                 */
                 HBD_N2_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Nar &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Nar &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_Nar_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Nar &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Nar &rarr; target HBA-N) interaction score.
+                 */
                 HBD_Nar_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Nar &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Nar &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_Nar_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Nar &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Nar &rarr; target HBA-O) interaction score.
+                 */
                 HBD_Nar_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Nar &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Nar &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_Nar_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Nar &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Nar &rarr; target HBA-S) interaction score.
+                 */
                 HBD_Nar_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Nam &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Nam &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_Nam_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Nam &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Nam &rarr; target HBA-N) interaction score.
+                 */
                 HBD_Nam_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Nam &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Nam &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_Nam_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Nam &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Nam &rarr; target HBA-O) interaction score.
+                 */
                 HBD_Nam_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Nam &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Nam &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_Nam_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Nam &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Nam &rarr; target HBA-S) interaction score.
+                 */
                 HBD_Nam_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Npl3 &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Npl3 &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_Npl3_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Npl3 &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Npl3 &rarr; target HBA-N) interaction score.
+                 */
                 HBD_Npl3_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Npl3 &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Npl3 &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_Npl3_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Npl3 &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Npl3 &rarr; target HBA-O) interaction score.
+                 */
                 HBD_Npl3_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-Npl3 &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-Npl3 &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_Npl3_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-Npl3 &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-Npl3 &rarr; target HBA-S) interaction score.
+                 */
                 HBD_Npl3_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N4 &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N4 &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_N4_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N4 &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N4 &rarr; target HBA-N) interaction score.
+                 */
                 HBD_N4_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N4 &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N4 &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_N4_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N4 &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N4 &rarr; target HBA-O) interaction score.
+                 */
                 HBD_N4_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-N4 &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-N4 &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_N4_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-N4 &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-N4 &rarr; target HBA-S) interaction score.
+                 */
                 HBD_N4_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-O3 &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-O3 &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_O3_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-O3 &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-O3 &rarr; target HBA-N) interaction score.
+                 */
                 HBD_O3_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-O3 &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-O3 &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_O3_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-O3 &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-O3 &rarr; target HBA-O) interaction score.
+                 */
                 HBD_O3_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-O3 &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-O3 &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_O3_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-O3 &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-O3 &rarr; target HBA-S) interaction score.
+                 */
                 HBD_O3_HBA_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-S3 &rarr; target HBA-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-S3 &rarr; target HBA-N) interaction scores.
+                 */
                 HBD_S3_HBA_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-S3 &rarr; target HBA-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-S3 &rarr; target HBA-N) interaction score.
+                 */
                 HBD_S3_HBA_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-S3 &rarr; target HBA-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-S3 &rarr; target HBA-O) interaction scores.
+                 */
                 HBD_S3_HBA_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-S3 &rarr; target HBA-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-S3 &rarr; target HBA-O) interaction score.
+                 */
                 HBD_S3_HBA_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBD-S3 &rarr; target HBA-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBD-S3 &rarr; target HBA-S) interaction scores.
+                 */
                 HBD_S3_HBA_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBD-S3 &rarr; target HBA-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBD-S3 &rarr; target HBA-S) interaction score.
+                 */
                 HBD_S3_HBA_S_SCORE_MAX,
-                /** \brief Sum of (any ligand HBA &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (any ligand HBA &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_HBD_N_SCORE_SUM,
-                /** \brief Maximum (any ligand HBA &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (any ligand HBA &rarr; target HBD-N) interaction score.
+                 */
                 HBA_HBD_N_SCORE_MAX,
-                /** \brief Sum of (any ligand HBA &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (any ligand HBA &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_HBD_O_SCORE_SUM,
-                /** \brief Maximum (any ligand HBA &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (any ligand HBA &rarr; target HBD-O) interaction score.
+                 */
                 HBA_HBD_O_SCORE_MAX,
-                /** \brief Sum of (any ligand HBA &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (any ligand HBA &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_HBD_S_SCORE_SUM,
-                /** \brief Maximum (any ligand HBA &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (any ligand HBA &rarr; target HBD-S) interaction score.
+                 */
                 HBA_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N3 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N3 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_N3_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N3 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N3 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_N3_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N3 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N3 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_N3_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N3 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N3 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_N3_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N3 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N3 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_N3_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N3 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N3 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_N3_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N2 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N2 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_N2_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N2 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N2 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_N2_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N2 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N2 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_N2_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N2 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N2 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_N2_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N2 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N2 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_N2_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N2 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N2 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_N2_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N1 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N1 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_N1_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N1 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N1 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_N1_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N1 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N1 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_N1_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N1 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N1 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_N1_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-N1 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-N1 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_N1_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-N1 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-N1 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_N1_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Nar &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Nar &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_Nar_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Nar &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Nar &rarr; target HBD-N) interaction score.
+                 */
                 HBA_Nar_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Nar &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Nar &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_Nar_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Nar &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Nar &rarr; target HBD-O) interaction score.
+                 */
                 HBA_Nar_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Nar &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Nar &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_Nar_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Nar &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Nar &rarr; target HBD-S) interaction score.
+                 */
                 HBA_Nar_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Npl3 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Npl3 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_Npl3_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Npl3 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Npl3 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_Npl3_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Npl3 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Npl3 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_Npl3_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Npl3 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Npl3 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_Npl3_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Npl3 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Npl3 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_Npl3_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Npl3 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Npl3 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_Npl3_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-O3 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-O3 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_O3_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-O3 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-O3 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_O3_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-O3 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-O3 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_O3_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-O3 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-O3 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_O3_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-O3 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-O3 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_O3_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-O3 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-O3 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_O3_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-O2 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-O2 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_O2_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-O2 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-O2 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_O2_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-O2 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-O2 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_O2_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-O2 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-O2 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_O2_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-O2 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-O2 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_O2_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-O2 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-O2 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_O2_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Oco2 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Oco2 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_Oco2_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Oco2 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Oco2 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_Oco2_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Oco2 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Oco2 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_Oco2_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Oco2 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Oco2 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_Oco2_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-Oco2 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-Oco2 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_Oco2_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-Oco2 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-Oco2 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_Oco2_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-S3 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-S3 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_S3_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-S3 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-S3 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_S3_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-S3 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-S3 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_S3_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-S3 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-S3 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_S3_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-S3 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-S3 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_S3_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-S3 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-S3 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_S3_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-S2 &rarr; target HBD-N) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-S2 &rarr; target HBD-N) interaction scores.
+                 */
                 HBA_S2_HBD_N_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-S2 &rarr; target HBD-N) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-S2 &rarr; target HBD-N) interaction score.
+                 */
                 HBA_S2_HBD_N_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-S2 &rarr; target HBD-O) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-S2 &rarr; target HBD-O) interaction scores.
+                 */
                 HBA_S2_HBD_O_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-S2 &rarr; target HBD-O) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-S2 &rarr; target HBD-O) interaction score.
+                 */
                 HBA_S2_HBD_O_SCORE_MAX,
-                /** \brief Sum of (ligand HBA-S2 &rarr; target HBD-S) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand HBA-S2 &rarr; target HBD-S) interaction scores.
+                 */
                 HBA_S2_HBD_S_SCORE_SUM,
-                /** \brief Maximum (ligand HBA-S2 &rarr; target HBD-S) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand HBA-S2 &rarr; target HBD-S) interaction score.
+                 */
                 HBA_S2_HBD_S_SCORE_MAX,
-                /** \brief Sum of (ligand XBD &rarr; target XBA) interaction scores. */
+    
+                /**
+                 * \brief Sum of (ligand XBD &rarr; target XBA) interaction scores.
+                 */
                 XBD_XBA_SCORE_SUM,
-                /** \brief Maximum (ligand XBD &rarr; target XBA) interaction score. */
+    
+                /**
+                 * \brief Maximum (ligand XBD &rarr; target XBA) interaction score.
+                 */
                 XBD_XBA_SCORE_MAX,
-                /** \brief Electrostatic interaction energy. */
+    
+                /**
+                 * \brief Electrostatic interaction energy.
+                 */
                 ES_ENERGY,
-                /** \brief Electrostatic interaction energy with squared atom-pair distance dependency. */
+    
+                /**
+                 * \brief Electrostatic interaction energy with squared atom-pair distance dependency.
+                 */
                 ES_ENERGY_SQRD_DIST,
-                /** \brief Attractive part of the Van der Waals interaction energy. */
+    
+                /**
+                 * \brief Attractive part of the Van der Waals interaction energy.
+                 */
                 VDW_ENERGY_ATT,
-                /** \brief Repulsive part of the Van der Waals interaction energy. */
+    
+                /**
+                 * \brief Repulsive part of the Van der Waals interaction energy.
+                 */
                 VDW_ENERGY_REP
             };
 

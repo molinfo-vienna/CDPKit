@@ -57,7 +57,9 @@ namespace CDPL
             typedef std::vector<TorsionRuleMatch> RuleMatchList;
 
           public:
-            /** \brief A constant iterator over the stored torsion rule matches. */
+            /**
+             * \brief A constant iterator over the stored torsion rule matches.
+             */
             typedef RuleMatchList::const_iterator ConstMatchIterator;
 
             /**

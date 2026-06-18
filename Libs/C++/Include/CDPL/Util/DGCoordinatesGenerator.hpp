@@ -65,22 +65,44 @@ namespace CDPL
             typedef std::vector<DistanceConstraint> DistanceConstraintList;
 
           public:
-            /** \brief A mutable iterator over the configured distance constraints. */
+            /**
+             * \brief A mutable iterator over the configured distance constraints.
+             */
             typedef typename DistanceConstraintList::iterator       DistanceConstraintIterator;
-            /** \brief A constant iterator over the configured distance constraints. */
+
+            /**
+             * \brief A constant iterator over the configured distance constraints.
+             */
             typedef typename DistanceConstraintList::const_iterator ConstDistanceConstraintIterator;
-            /** \brief The scalar value type used for coordinates and constraint bounds. */
+
+            /**
+             * \brief The scalar value type used for coordinates and constraint bounds.
+             */
             typedef T                                               ValueType;
 
-            /** \brief Dimensionality of the coordinate space. */
+            /**
+             * \brief Dimensionality of the coordinate space.
+             */
             static constexpr std::size_t COORDS_DIM                  = Dim;
-            /** \brief Default number of optimization cycles. */
+
+            /**
+             * \brief Default number of optimization cycles.
+             */
             static constexpr std::size_t DEF_NUM_CYCLES              = 50;
-            /** \brief Default per-cycle step-count multiplier (steps per cycle = factor * number of constraints). */
+
+            /**
+             * \brief Default per-cycle step-count multiplier (steps per cycle = factor * number of constraints).
+             */
             static constexpr double      DEF_CYCLE_STEP_COUNT_FACTOR = 1.0;
-            /** \brief Default initial learning rate. */
+
+            /**
+             * \brief Default initial learning rate.
+             */
             static constexpr ValueType   DEF_START_LEARNING_RATE     = 1;
-            /** \brief Default per-cycle decrement subtracted from the learning rate. */
+
+            /**
+             * \brief Default per-cycle decrement subtracted from the learning rate.
+             */
             static constexpr ValueType   DEF_LEARNING_RATE_DECREMENT = 0.95 / 50;
 
             /**
@@ -374,11 +396,19 @@ namespace CDPL
             typedef std::vector<VolumeConstraint> VolumeConstraintList;
 
           public:
-            /** \brief The scalar value type used for coordinates and constraint bounds. */
+            /**
+             * \brief The scalar value type used for coordinates and constraint bounds.
+             */
             typedef typename BaseType::ValueType                  ValueType;
-            /** \brief A mutable iterator over the configured volume constraints. */
+
+            /**
+             * \brief A mutable iterator over the configured volume constraints.
+             */
             typedef typename VolumeConstraintList::iterator       VolumeConstraintIterator;
-            /** \brief A constant iterator over the configured volume constraints. */
+
+            /**
+             * \brief A constant iterator over the configured volume constraints.
+             */
             typedef typename VolumeConstraintList::const_iterator ConstVolumeConstraintIterator;
 
             /**
@@ -545,7 +575,9 @@ namespace CDPL
             VolumeConstraintList volConstraints;
         };
 
-        /** \brief Convenience alias for the 3D coordinates generator with double-precision values. */
+        /**
+         * \brief Convenience alias for the 3D coordinates generator with double-precision values.
+         */
         typedef DGCoordinatesGenerator<3, double> DG3DCoordinatesGenerator;
     } // namespace Util
 } // namespace CDPL

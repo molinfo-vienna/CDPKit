@@ -66,23 +66,46 @@ namespace CDPL
             typedef MatrixReference<M> SelfType;
 
           public:
-            /** \brief The wrapped matrix type. */
+            /**
+             * \brief The wrapped matrix type.
+             */
             typedef M                                                      MatrixType;
-            /** \brief The element value type of the wrapped matrix. */
+
+            /**
+             * \brief The element value type of the wrapped matrix.
+             */
             typedef typename M::ValueType                                  ValueType;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename M::ConstReference                             ConstReference;
-            /** \brief The unsigned size type of the wrapped matrix. */
+
+            /**
+             * \brief The unsigned size type of the wrapped matrix.
+             */
             typedef typename M::SizeType                                   SizeType;
-            /** \brief The signed difference type of the wrapped matrix. */
+
+            /**
+             * \brief The signed difference type of the wrapped matrix.
+             */
             typedef typename M::DifferenceType                             DifferenceType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                               ClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                         ConstClosureType;
 
             /**
@@ -338,27 +361,59 @@ namespace CDPL
         {
 
           public:
-            /** \brief Convenience alias for this instantiation. */
+            /**
+             * \brief Convenience alias for this instantiation.
+             */
             typedef InitListMatrix                                            SelfType;
-            /** \brief The nested \c std::initializer_list type wrapped by this matrix. */
+
+            /**
+             * \brief The nested \c std::initializer_list type wrapped by this matrix.
+             */
             typedef std::initializer_list<std::initializer_list<T> >          InitializerListType;
-            /** \brief The scalar value type. */
+
+            /**
+             * \brief The scalar value type.
+             */
             typedef typename InitializerListType::value_type::value_type      ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename InitializerListType::value_type::const_reference ConstReference;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef typename InitializerListType::value_type::reference       Reference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef typename InitializerListType::size_type                   SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef typename std::ptrdiff_t                                   DifferenceType;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef SelfType                                                  ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const SelfType                                            ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery.
+             */
             typedef Matrix<T, std::vector<T> >                                MatrixTemporaryType;
-            /** \brief Concrete temporary vector type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary vector type used by expression-template machinery.
+             */
             typedef Vector<T, std::vector<T> >                                VectorTemporaryType;
 
             /**
@@ -457,33 +512,74 @@ namespace CDPL
             typedef Matrix<T, A> SelfType;
 
           public:
-            /** \brief The scalar value type stored in the matrix. */
+            /**
+             * \brief The scalar value type stored in the matrix.
+             */
             typedef T                                                ValueType;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef T&                                               Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                                         ConstReference;
-            /** \brief The unsigned size type used by the underlying storage container. */
+
+            /**
+             * \brief The unsigned size type used by the underlying storage container.
+             */
             typedef typename A::size_type                            SizeType;
-            /** \brief The signed difference type used by the underlying storage container. */
+
+            /**
+             * \brief The signed difference type used by the underlying storage container.
+             */
             typedef typename A::difference_type                      DifferenceType;
-            /** \brief The underlying storage container type (row-major linear storage). */
+
+            /**
+             * \brief The underlying storage container type (row-major linear storage).
+             */
             typedef A                                                ArrayType;
-            /** \brief Pointer type for raw element access. */
+
+            /**
+             * \brief Pointer type for raw element access.
+             */
             typedef T*                                               Pointer;
-            /** \brief Constant pointer type for raw element access. */
+
+            /**
+             * \brief Constant pointer type for raw element access.
+             */
             typedef const T*                                         ConstPointer;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef MatrixReference<SelfType>                        ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const MatrixReference<const SelfType>            ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery.
+             */
             typedef SelfType                                         MatrixTemporaryType;
-            /** \brief Concrete temporary vector type compatible with this matrix's value type and storage. */
+
+            /**
+             * \brief Concrete temporary vector type compatible with this matrix's value type and storage.
+             */
             typedef Vector<T, A>                                     VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Matrix instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Matrix instances.
+             */
             typedef std::shared_ptr<SelfType>                        SharedPointer;
-            /** \brief Type of the brace-initializer list of lists accepted by the corresponding constructor (one inner list per row). */
+
+            /**
+             * \brief Type of the brace-initializer list of lists accepted by the corresponding constructor (one inner list per row).
+             */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
             /**
@@ -949,35 +1045,79 @@ namespace CDPL
             typedef SparseMatrix<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                                ValueType;
-            /** \brief The packed (row, column) key type used by the underlying associative container. */
+
+            /**
+             * \brief The packed (row, column) key type used by the underlying associative container.
+             */
             typedef typename A::key_type                             KeyType;
-            /** \brief Mutable reference type (a proxy object that inserts on assignment to a previously-absent cell). */
+
+            /**
+             * \brief Mutable reference type (a proxy object that inserts on assignment to a previously-absent cell).
+             */
             typedef SparseContainerElement<SelfType>                 Reference;
-            /** \brief Constant reference type to a stored element value. */
+
+            /**
+             * \brief Constant reference type to a stored element value.
+             */
             typedef const T&                                         ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::uint32_t                                    SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                                   DifferenceType;
-            /** \brief The underlying associative container type. */
+
+            /**
+             * \brief The underlying associative container type.
+             */
             typedef A                                                ArrayType;
-            /** \brief Pointer type for raw access to stored entries. */
+
+            /**
+             * \brief Pointer type for raw access to stored entries.
+             */
             typedef T*                                               Pointer;
-            /** \brief Constant pointer type for raw access to stored entries. */
+
+            /**
+             * \brief Constant pointer type for raw access to stored entries.
+             */
             typedef const T*                                         ConstPointer;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef MatrixReference<SelfType>                        ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const MatrixReference<const SelfType>            ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery.
+             */
             typedef SelfType                                         MatrixTemporaryType;
-            /** \brief Concrete temporary vector type used when assembling vectors from this matrix. */
+
+            /**
+             * \brief Concrete temporary vector type used when assembling vectors from this matrix.
+             */
             typedef Vector<T, std::vector<T> >                       VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SparseMatrix instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SparseMatrix instances.
+             */
             typedef std::shared_ptr<SelfType>                        SharedPointer;
-            /** \brief The initializer-list-of-rows type accepted by constructors and assignment. */
+
+            /**
+             * \brief The initializer-list-of-rows type accepted by constructors and assignment.
+             */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
             /**
@@ -1463,42 +1603,95 @@ namespace CDPL
             typedef BoundedMatrix<T, M, N> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T              ValueType;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef T&             Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&       ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t    SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t DifferenceType;
-            /** \brief The fixed-capacity 2D C-array type used for in-memory storage. */
+
+            /**
+             * \brief The fixed-capacity 2D C-array type used for in-memory storage.
+             */
             typedef ValueType      ArrayType[M][N];
-            /** \brief Pointer-to-row type for raw access to the element array. */
+
+            /**
+             * \brief Pointer-to-row type for raw access to the element array.
+             */
             typedef T (*ArrayPointer)[N];
-            /** \brief Constant pointer-to-row type for raw access to the element array. */
+
+            /**
+             * \brief Constant pointer-to-row type for raw access to the element array.
+             */
             typedef const T (*ConstArrayPointer)[N];
-            /** \brief Pointer type to a single element. */
+
+            /**
+             * \brief Pointer type to a single element.
+             */
             typedef T*                                               Pointer;
-            /** \brief Constant pointer type to a single element. */
+
+            /**
+             * \brief Constant pointer type to a single element.
+             */
             typedef const T*                                         ConstPointer;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef MatrixReference<SelfType>                        ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const MatrixReference<const SelfType>            ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery.
+             */
             typedef SelfType                                         MatrixTemporaryType;
-            /** \brief Concrete temporary vector type used when assembling vectors from this matrix (a bounded vector of capacity \a M * \a N). */
+
+            /**
+             * \brief Concrete temporary vector type used when assembling vectors from this matrix (a bounded vector of capacity \a M * \a N).
+             */
             typedef BoundedVector<T, M * N>                          VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BoundedMatrix instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BoundedMatrix instances.
+             */
             typedef std::shared_ptr<SelfType>                        SharedPointer;
-            /** \brief The initializer-list-of-rows type accepted by constructors and assignment. */
+
+            /**
+             * \brief The initializer-list-of-rows type accepted by constructors and assignment.
+             */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
-            /** \brief The compile-time maximum number of rows \a M. */
+
+            /**
+             * \brief The compile-time maximum number of rows \a M.
+             */
             static const SizeType MaxSize1 = M;
-            /** \brief The compile-time maximum number of columns \a N. */
+
+            /**
+             * \brief The compile-time maximum number of columns \a N.
+             */
             static const SizeType MaxSize2 = N;
 
             /**
@@ -1989,42 +2182,95 @@ namespace CDPL
             typedef CMatrix<T, M, N> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T              ValueType;
-            /** \brief Mutable reference type to an element. */
+
+            /**
+             * \brief Mutable reference type to an element.
+             */
             typedef T&             Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&       ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t    SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t DifferenceType;
-            /** \brief The fixed-size 2D C-array type used for in-memory storage of \a M \f$ \times \f$ \a N elements. */
+
+            /**
+             * \brief The fixed-size 2D C-array type used for in-memory storage of \a M \f$ \times \f$ \a N elements.
+             */
             typedef ValueType      ArrayType[M][N];
-            /** \brief Pointer-to-row type for raw access to the element array. */
+
+            /**
+             * \brief Pointer-to-row type for raw access to the element array.
+             */
             typedef T (*ArrayPointer)[N];
-            /** \brief Constant pointer-to-row type for raw access to the element array. */
+
+            /**
+             * \brief Constant pointer-to-row type for raw access to the element array.
+             */
             typedef const T (*ConstArrayPointer)[N];
-            /** \brief Pointer type to a single element. */
+
+            /**
+             * \brief Pointer type to a single element.
+             */
             typedef T*                                               Pointer;
-            /** \brief Constant pointer type to a single element. */
+
+            /**
+             * \brief Constant pointer type to a single element.
+             */
             typedef const T*                                         ConstPointer;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef MatrixReference<SelfType>                        ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const MatrixReference<const SelfType>            ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery (a Math::BoundedMatrix of equal capacity). */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery (a Math::BoundedMatrix of equal capacity).
+             */
             typedef BoundedMatrix<T, M, N>                           MatrixTemporaryType;
-            /** \brief Concrete temporary vector type used when assembling vectors from this matrix. */
+
+            /**
+             * \brief Concrete temporary vector type used when assembling vectors from this matrix.
+             */
             typedef BoundedVector<T, M * N>                          VectorTemporaryType;
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CMatrix instances. */
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CMatrix instances.
+             */
             typedef std::shared_ptr<SelfType>                        SharedPointer;
-            /** \brief The initializer-list-of-rows type accepted by constructors and assignment. */
+
+            /**
+             * \brief The initializer-list-of-rows type accepted by constructors and assignment.
+             */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
-            /** \brief The compile-time fixed row count \a M. */
+
+            /**
+             * \brief The compile-time fixed row count \a M.
+             */
             static const SizeType Size1 = M;
-            /** \brief The compile-time fixed column count \a N. */
+
+            /**
+             * \brief The compile-time fixed column count \a N.
+             */
             static const SizeType Size2 = N;
 
             /**
@@ -2454,23 +2700,49 @@ namespace CDPL
             typedef ZeroMatrix<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Reference type (always a \c const reference — all elements are zero). */
+
+            /**
+             * \brief Reference type (always a \c const reference — all elements are zero).
+             */
             typedef const T&                              Reference;
-            /** \brief Constant reference type to the zero element. */
+
+            /**
+             * \brief Constant reference type to the zero element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef MatrixReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery.
+             */
             typedef Matrix<T>                             MatrixTemporaryType;
-            /** \brief Concrete temporary vector type used when assembling vectors from this matrix. */
+
+            /**
+             * \brief Concrete temporary vector type used when assembling vectors from this matrix.
+             */
             typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
             /**
@@ -2620,23 +2892,49 @@ namespace CDPL
             typedef ScalarMatrix<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Reference type (always a \c const reference — elements are immutable). */
+
+            /**
+             * \brief Reference type (always a \c const reference — elements are immutable).
+             */
             typedef const T&                              Reference;
-            /** \brief Constant reference type to the common value. */
+
+            /**
+             * \brief Constant reference type to the common value.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef MatrixReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery.
+             */
             typedef Matrix<T>                             MatrixTemporaryType;
-            /** \brief Concrete temporary vector type used when assembling vectors from this matrix. */
+
+            /**
+             * \brief Concrete temporary vector type used when assembling vectors from this matrix.
+             */
             typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
             /**
@@ -2786,23 +3084,49 @@ namespace CDPL
             typedef IdentityMatrix<T> SelfType;
 
           public:
-            /** \brief The scalar value type. */
+            /**
+             * \brief The scalar value type.
+             */
             typedef T                                     ValueType;
-            /** \brief Reference type (always a \c const reference — elements are immutable). */
+
+            /**
+             * \brief Reference type (always a \c const reference — elements are immutable).
+             */
             typedef const T&                              Reference;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef const T&                              ConstReference;
-            /** \brief The unsigned size type. */
+
+            /**
+             * \brief The unsigned size type.
+             */
             typedef std::size_t                           SizeType;
-            /** \brief The signed difference type. */
+
+            /**
+             * \brief The signed difference type.
+             */
             typedef std::ptrdiff_t                        DifferenceType;
-            /** \brief Closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this matrix appears inside another expression.
+             */
             typedef MatrixReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this matrix appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this matrix appears inside another expression.
+             */
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary matrix type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary matrix type used by expression-template machinery.
+             */
             typedef Matrix<T>                             MatrixTemporaryType;
-            /** \brief Concrete temporary vector type used when assembling vectors from this matrix. */
+
+            /**
+             * \brief Concrete temporary vector type used when assembling vectors from this matrix.
+             */
             typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
             /**

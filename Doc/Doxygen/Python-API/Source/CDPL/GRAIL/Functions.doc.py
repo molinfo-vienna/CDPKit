@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Sets the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of the grid <em>grid</em>.
+# \brief Sets the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of the grid <em>grid</em> to <em>type</em>.
 # 
 # \param grid The grid for which to set the property value.
 # \param type The new feature type value.
@@ -28,7 +28,7 @@
 def setFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>grid</em> carries an explicit GRAIL.AttributedGridProperty.FEATURE_TYPE property.
+# \brief Tells whether the GRAIL.AttributedGridProperty.FEATURE_TYPE property of the grid <em>grid</em> is set.
 # 
 # \param grid The grid for which to query the property value.
 # 
@@ -53,7 +53,7 @@ def getFeatureType(grid: Grid.AttributedGrid) -> int: pass
 def clearFeatureType(grid: Grid.AttributedGrid) -> None: pass
 
 ##
-# \brief Sets the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of the grid <em>grid</em>.
+# \brief Sets the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of the grid <em>grid</em> to <em>type</em>.
 # 
 # \param grid The grid for which to set the property value.
 # \param type The new target feature type value.
@@ -61,7 +61,7 @@ def clearFeatureType(grid: Grid.AttributedGrid) -> None: pass
 def setTargetFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
 
 ##
-# \brief Tells whether <em>grid</em> carries an explicit GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property.
+# \brief Tells whether the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of the grid <em>grid</em> is set.
 # 
 # \param grid The grid for which to query the property value.
 # 

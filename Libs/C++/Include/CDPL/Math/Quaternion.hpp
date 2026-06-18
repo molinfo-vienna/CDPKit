@@ -54,19 +54,36 @@ namespace CDPL
             typedef QuaternionReference<Q> SelfType;
 
           public:
-            /** \brief The wrapped quaternion type. */
+            /**
+             * \brief The wrapped quaternion type.
+             */
             typedef Q                                                      QuaternionType;
-            /** \brief The scalar component value type of the wrapped quaternion. */
+
+            /**
+             * \brief The scalar component value type of the wrapped quaternion.
+             */
             typedef typename Q::ValueType                                  ValueType;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped quaternion is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped quaternion is \c const).
+             */
             typedef typename std::conditional<std::is_const<Q>::value,
                                               typename Q::ConstReference,
                                               typename Q::Reference>::type Reference;
-            /** \brief Constant reference type to a component. */
+
+            /**
+             * \brief Constant reference type to a component.
+             */
             typedef typename Q::ConstReference                             ConstReference;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                               ClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                         ConstClosureType;
 
             /**
@@ -398,23 +415,49 @@ namespace CDPL
             typedef Quaternion<T> SelfType;
 
           public:
-            /** \brief The scalar component value type. */
+            /**
+             * \brief The scalar component value type.
+             */
             typedef T                                         ValueType;
-            /** \brief Mutable reference type to a component. */
+
+            /**
+             * \brief Mutable reference type to a component.
+             */
             typedef T&                                        Reference;
-            /** \brief Constant reference type to a component. */
+
+            /**
+             * \brief Constant reference type to a component.
+             */
             typedef const T&                                  ConstReference;
-            /** \brief The plain C-array type used for in-memory storage of the four components. */
+
+            /**
+             * \brief The plain C-array type used for in-memory storage of the four components.
+             */
             typedef ValueType                                 ArrayType[4];
-            /** \brief Pointer type for raw access to the component array. */
+
+            /**
+             * \brief Pointer type for raw access to the component array.
+             */
             typedef T*                                        Pointer;
-            /** \brief Constant pointer type for raw access to the component array. */
+
+            /**
+             * \brief Constant pointer type for raw access to the component array.
+             */
             typedef const T*                                  ConstPointer;
-            /** \brief Closure type used when this quaternion appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this quaternion appears inside another expression.
+             */
             typedef QuaternionReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this quaternion appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this quaternion appears inside another expression.
+             */
             typedef const QuaternionReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary quaternion type used by expression-template machinery. */
+
+            /**
+             * \brief Concrete temporary quaternion type used by expression-template machinery.
+             */
             typedef SelfType                                  QuaternionTemporaryType;
 
             /**
@@ -831,17 +874,34 @@ namespace CDPL
             typedef RealQuaternion<T> SelfType;
 
           public:
-            /** \brief The scalar component value type. */
+            /**
+             * \brief The scalar component value type.
+             */
             typedef T                                         ValueType;
-            /** \brief Reference type (always a \c const reference — only the real component is mutable, via assignment). */
+
+            /**
+             * \brief Reference type (always a \c const reference — only the real component is mutable, via assignment).
+             */
             typedef const T&                                  Reference;
-            /** \brief Constant reference type to the real component. */
+
+            /**
+             * \brief Constant reference type to the real component.
+             */
             typedef const T&                                  ConstReference;
-            /** \brief Closure type used when this quaternion appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this quaternion appears inside another expression.
+             */
             typedef QuaternionReference<SelfType>             ClosureType;
-            /** \brief Constant closure type used when this quaternion appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this quaternion appears inside another expression.
+             */
             typedef const QuaternionReference<const SelfType> ConstClosureType;
-            /** \brief Concrete temporary quaternion type used by expression-template machinery (a general Math::Quaternion<T>). */
+
+            /**
+             * \brief Concrete temporary quaternion type used by expression-template machinery (a general Math::Quaternion<T>).
+             */
             typedef Quaternion<T>                             QuaternionTemporaryType;
 
             /**

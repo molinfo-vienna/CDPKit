@@ -57,13 +57,24 @@ namespace CDPL
             typedef boost::ptr_vector<TorsionRule>     RuleList;
 
           public:
-            /** \brief A mutable iterator over the child categories. */
+            /**
+             * \brief A mutable iterator over the child categories.
+             */
             typedef CategoryList::iterator       CategoryIterator;
-            /** \brief A constant iterator over the child categories. */
+
+            /**
+             * \brief A constant iterator over the child categories.
+             */
             typedef CategoryList::const_iterator ConstCategoryIterator;
-            /** \brief A mutable iterator over the contained rules. */
+
+            /**
+             * \brief A mutable iterator over the contained rules.
+             */
             typedef RuleList::iterator           RuleIterator;
-            /** \brief A constant iterator over the contained rules. */
+
+            /**
+             * \brief A constant iterator over the contained rules.
+             */
             typedef RuleList::const_iterator     ConstRuleIterator;
 
             /**

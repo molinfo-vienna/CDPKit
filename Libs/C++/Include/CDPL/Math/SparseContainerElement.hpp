@@ -52,19 +52,39 @@ namespace CDPL
         {
 
           public:
-            /** \brief The sparse container type the proxy references. */
+            /**
+             * \brief The sparse container type the proxy references.
+             */
             typedef C                                      ContainerType;
-            /** \brief The key type used to address an entry of the container. */
+
+            /**
+             * \brief The key type used to address an entry of the container.
+             */
             typedef K                                      KeyType;
-            /** \brief The value type stored in the container. */
+
+            /**
+             * \brief The value type stored in the container.
+             */
             typedef typename ContainerType::ValueType      ValueType;
-            /** \brief The size type used by the container. */
+
+            /**
+             * \brief The size type used by the container.
+             */
             typedef typename ContainerType::SizeType       SizeType;
-            /** \brief Mutable reference type to a value. */
+
+            /**
+             * \brief Mutable reference type to a value.
+             */
             typedef ValueType&                             Reference;
-            /** \brief Constant reference type to a value (as defined by the container). */
+
+            /**
+             * \brief Constant reference type to a value (as defined by the container).
+             */
             typedef typename ContainerType::ConstReference ConstReference;
-            /** \brief Underlying associative-array type of the container (typically a \c std::map / \c std::unordered_map specialization). */
+
+            /**
+             * \brief Underlying associative-array type of the container (typically a \c std::map / \c std::unordered_map specialization).
+             */
             typedef typename ContainerType::ArrayType      ArrayType;
 
             /**

@@ -49,359 +49,357 @@ namespace CDPL
         {
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::STRICT_ERROR_CHECKING.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::STRICT_ERROR_CHECKING.
              */
             extern CDPL_CHEM_API const bool STRICT_ERROR_CHECKING;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::ORDINARY_HYDROGEN_DEPLETE.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::ORDINARY_HYDROGEN_DEPLETE.
              */
             extern CDPL_CHEM_API const bool ORDINARY_HYDROGEN_DEPLETE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::BOND_MEMBER_SWAP_STEREO_FIX.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::BOND_MEMBER_SWAP_STEREO_FIX.
              */
             extern CDPL_CHEM_API const bool BOND_MEMBER_SWAP_STEREO_FIX;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::CHECK_LINE_LENGTH.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::CHECK_LINE_LENGTH.
              */
             extern CDPL_CHEM_API const bool CHECK_LINE_LENGTH;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::JME_SEPARATE_COMPONENTS.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::JME_SEPARATE_COMPONENTS.
              */
             extern CDPL_CHEM_API const bool JME_SEPARATE_COMPONENTS;
 
             /**
-             * \brief Default setting (= \c "\n") for the control-parameter Chem::ControlParameter::RECORD_SEPARATOR.
+             * \brief Default value (= \c "\n") of the control-parameter Chem::ControlParameter::RECORD_SEPARATOR.
              */
             extern CDPL_CHEM_API const std::string RECORD_SEPARATOR;
 
             /**
-             * \brief Default setting (= \c "") for the control-parameter Chem::ControlParameter::INCHI_INPUT_OPTIONS.
+             * \brief Default value (= \c "") of the control-parameter Chem::ControlParameter::INCHI_INPUT_OPTIONS.
              */
             extern CDPL_CHEM_API const std::string INCHI_INPUT_OPTIONS;
 
             /**
-             * \brief Default setting (= \c "/WarnOnEmptyStructure /AuxNone /NEWPSOFF") for the control-parameter Chem::ControlParameter::INCHI_OUTPUT_OPTIONS.
+             * \brief Default value (= \c "/WarnOnEmptyStructure /AuxNone /NEWPSOFF") of the control-parameter Chem::ControlParameter::INCHI_OUTPUT_OPTIONS.
              */
             extern CDPL_CHEM_API const std::string INCHI_OUTPUT_OPTIONS;
 
             /**
-             * \brief Default setting (= \c 1) for the control-parameter Chem::ControlParameter::COORDINATES_DIMENSION.
+             * \brief Default value (= \c 1) of the control-parameter Chem::ControlParameter::COORDINATES_DIMENSION.
              */
             extern CDPL_CHEM_API const std::size_t COORDINATES_DIMENSION;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_IGNORE_PARITY.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_IGNORE_PARITY.
              */
             extern CDPL_CHEM_API const bool MDL_IGNORE_PARITY;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::MDL_TRIM_STRINGS.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::MDL_TRIM_STRINGS.
              */
             extern CDPL_CHEM_API const bool MDL_TRIM_STRINGS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_TRIM_LINES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_TRIM_LINES.
              */
             extern CDPL_CHEM_API const bool MDL_TRIM_LINES;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_TRUNCATE_STRINGS.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_TRUNCATE_STRINGS.
              */
             extern CDPL_CHEM_API const bool MDL_TRUNCATE_STRINGS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_TRUNCATE_LINES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_TRUNCATE_LINES.
              */
             extern CDPL_CHEM_API const bool MDL_TRUNCATE_LINES;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_UPDATE_TIMESTAMP.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_UPDATE_TIMESTAMP.
              */
             extern CDPL_CHEM_API const bool MDL_UPDATE_TIMESTAMP;
 
             /**
-             * \brief Default setting (= \c %MDLDataFormatVersion::UNDEF) for the control-parameter Chem::ControlParameter::MDL_CTAB_VERSION.
+             * \brief Default value (= \c MDLDataFormatVersion::UNDEF) of the control-parameter Chem::ControlParameter::MDL_CTAB_VERSION.
              */
             extern CDPL_CHEM_API const unsigned int MDL_CTAB_VERSION;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD.
              */
             extern CDPL_CHEM_API const bool MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY.
              */
             extern CDPL_CHEM_API const bool MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_ENABLE_AROMATIC_BOND_TYPES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MDL_ENABLE_AROMATIC_BOND_TYPES.
              * \since 1.3
              */
             extern CDPL_CHEM_API const bool MDL_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
-             * \brief Default setting (= \c "<Energy>") for the control-parameter Chem::ControlParameter::MDL_CONF_ENERGY_SD_TAG.
+             * \brief Default value (= \c "<Energy>") of the control-parameter Chem::ControlParameter::MDL_CONF_ENERGY_SD_TAG.
              */
             extern CDPL_CHEM_API const std::string MDL_CONF_ENERGY_SD_TAG;
 
             /**
-             * \brief Default setting (= \c %MDLDataFormatVersion::UNDEF) for the control-parameter Chem::ControlParameter::MDL_RXN_FILE_VERSION.
+             * \brief Default value (= \c MDLDataFormatVersion::UNDEF) of the control-parameter Chem::ControlParameter::MDL_RXN_FILE_VERSION.
              */
             extern CDPL_CHEM_API const unsigned int MDL_RXN_FILE_VERSION;
 
             /**
-             * \brief Default setting (= \c "S") for the control-parameter Chem::ControlParameter::SMILES_RECORD_FORMAT.
+             * \brief Default value (= \c "S") of the control-parameter Chem::ControlParameter::SMILES_RECORD_FORMAT.
              */
             extern CDPL_CHEM_API const std::string SMILES_RECORD_FORMAT;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_CANONICAL_FORM.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_CANONICAL_FORM.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_CANONICAL_FORM;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_KEKULE_FORM;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_STEREO.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_STEREO.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_ATOM_STEREO;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_BOND_STEREO;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_RING_BOND_STEREO;
 
             /**
-             * \brief Default setting (= \c 8) for the control-parameter Chem::ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE.
+             * \brief Default value (= \c 8) of the control-parameter Chem::ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE.
              */
             extern CDPL_CHEM_API const std::size_t SMILES_MIN_STEREO_BOND_RING_SIZE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ISOTOPE.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ISOTOPE.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_ISOTOPE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_HYDROGEN_COUNT.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_HYDROGEN_COUNT.
              * \since 1.3
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_HYDROGEN_COUNT;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_MAPPING_ID
-             *        on reaction \e SMILES output.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::SMILES_RXN_OUTPUT_ATOM_MAPPING_ID.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_RXN_OUTPUT_ATOM_MAPPING_ID;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_MAPPING_ID
-             *        on molecule \e SMILES output.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::SMILES_MOL_OUTPUT_ATOM_MAPPING_ID.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_MOL_OUTPUT_ATOM_MAPPING_ID;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_SINGLE_BONDS.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_SINGLE_BONDS.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_SINGLE_BONDS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_AROMATIC_BONDS.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::SMILES_OUTPUT_AROMATIC_BONDS.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_AROMATIC_BONDS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_NO_ORGANIC_SUBSET.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::SMILES_NO_ORGANIC_SUBSET.
              */
             extern CDPL_CHEM_API const bool SMILES_NO_ORGANIC_SUBSET;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::MULTI_CONF_IMPORT.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::MULTI_CONF_IMPORT.
              */
             extern CDPL_CHEM_API const bool MULTI_CONF_IMPORT;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::MULTI_CONF_EXPORT.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::MULTI_CONF_EXPORT.
              */
             extern CDPL_CHEM_API const bool MULTI_CONF_EXPORT;
 
             /**
-             * \brief Default setting (= pointer to Chem::DefaultMultiConfMoleculeInputProcessor instance) for the control-parameter 
+             * \brief Default value (= pointer to Chem::DefaultMultiConfMoleculeInputProcessor instance) of the control-parameter 
              *        Chem::ControlParameter::MULTI_CONF_INPUT_PROCESSOR.
              */
             extern CDPL_CHEM_API const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::OUTPUT_CONF_ENERGY_AS_COMMENT.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::OUTPUT_CONF_ENERGY_AS_COMMENT.
              */
             extern CDPL_CHEM_API const bool OUTPUT_CONF_ENERGY_AS_COMMENT;
 
             /**
-             * \brief Default setting (= \c "") for the control-parameter Chem::ControlParameter::CONF_INDEX_NAME_SUFFIX_PATTERN.
+             * \brief Default value (= \c "") of the control-parameter Chem::ControlParameter::CONF_INDEX_NAME_SUFFIX_PATTERN.
              */
             extern CDPL_CHEM_API const std::string CONF_INDEX_NAME_SUFFIX_PATTERN;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
              */
             extern CDPL_CHEM_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_ENABLE_EXTENDED_ATOM_TYPES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MOL2_ENABLE_EXTENDED_ATOM_TYPES.
              */
             extern CDPL_CHEM_API const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_ENABLE_AROMATIC_BOND_TYPES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MOL2_ENABLE_AROMATIC_BOND_TYPES.
              */
             extern CDPL_CHEM_API const bool MOL2_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES.
              * \since 1.2.3
              */
             extern CDPL_CHEM_API const bool MOL2_READ_PARTIAL_AS_FORMAL_CHARGES;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::MOL2_CALC_FORMAL_CHARGES.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::MOL2_CALC_FORMAL_CHARGES.
              */
             extern CDPL_CHEM_API const bool MOL2_CALC_FORMAL_CHARGES;
 
             /**
-             * \brief Default setting (= \c %MOL2ChargeType::NO_CHARGES) for the control-parameter Chem::ControlParameter::MOL2_CHARGE_TYPE.
+             * \brief Default value (= \c MOL2ChargeType::NO_CHARGES) of the control-parameter Chem::ControlParameter::MOL2_CHARGE_TYPE.
              */
             extern CDPL_CHEM_API const unsigned int MOL2_CHARGE_TYPE;
 
             /**
-             * \brief Default setting (= \c %MOL2MoleculeType::SMALL) for the control-parameter Chem::ControlParameter::MOL2_MOLECULE_TYPE.
+             * \brief Default value (= \c MOL2MoleculeType::SMALL) of the control-parameter Chem::ControlParameter::MOL2_MOLECULE_TYPE.
              */
             extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::MOL2_OUTPUT_SUBSTRUCTURES.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::MOL2_OUTPUT_SUBSTRUCTURES.
              */
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MOL2_OUTPUT_FORMAL_CHARGES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::MOL2_OUTPUT_FORMAL_CHARGES.
              * \since 1.2.3
              */
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_FORMAL_CHARGES;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_COMMENT_IS_NAME.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::XYZ_COMMENT_IS_NAME.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_COMMENT_IS_NAME;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_PERCEIVE_CONNECTIVITY.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::XYZ_PERCEIVE_CONNECTIVITY.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_CONNECTIVITY;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_PERCEIVE_BOND_ORDERS.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::XYZ_PERCEIVE_BOND_ORDERS.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_BOND_ORDERS;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::XYZ_CALC_FORMAL_CHARGES.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::XYZ_CALC_FORMAL_CHARGES.
              * \since 1.1
              */
             extern CDPL_CHEM_API const bool XYZ_CALC_FORMAL_CHARGES;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_XML_DECLARATION.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_XML_DECLARATION.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_XML_DECLARATION;
 
             /**
-             * \brief Default setting (= \c "") for the control-parameter Chem::ControlParameter::CML_OUTPUT_ELEMENT_NAMESPACE.
+             * \brief Default value (= \c "") of the control-parameter Chem::ControlParameter::CML_OUTPUT_ELEMENT_NAMESPACE.
              * \since 1.2
              */
             extern CDPL_CHEM_API const std::string CML_OUTPUT_ELEMENT_NAMESPACE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_ATOM_PARITY.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_ATOM_PARITY.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_ATOM_PARITY;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_SINGLE_BOND_STEREO.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_SINGLE_BOND_STEREO.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_SINGLE_BOND_STEREO;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_DOUBLE_BOND_STEREO.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_DOUBLE_BOND_STEREO.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_DOUBLE_BOND_STEREO;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::CML_ENABLE_AROMATIC_BOND_TYPES.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::CML_ENABLE_AROMATIC_BOND_TYPES.
              * \since 1.3
              */
             extern CDPL_CHEM_API const bool CML_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_MOLECULE_NAME.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_MOLECULE_NAME.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_MOLECULE_NAME;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_STRUCTURE_DATA.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_STRUCTURE_DATA.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_STRUCTURE_DATA;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_ISOTOPE.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_ISOTOPE.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_ISOTOPE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::CML_OUTPUT_SPIN_MULTIPLICITY.
+             * \brief Default value (= \c true) of the control-parameter Chem::ControlParameter::CML_OUTPUT_SPIN_MULTIPLICITY.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_SPIN_MULTIPLICITY;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::CML_OUTPUT_COMPACT_ATOM_DATA.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::CML_OUTPUT_COMPACT_ATOM_DATA.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_COMPACT_ATOM_DATA;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::CML_OUTPUT_COMPACT_BOND_DATA.
+             * \brief Default value (= \c false) of the control-parameter Chem::ControlParameter::CML_OUTPUT_COMPACT_BOND_DATA.
              * \since 1.2
              */
             extern CDPL_CHEM_API const bool CML_OUTPUT_COMPACT_BOND_DATA;

@@ -42,13 +42,19 @@ namespace CDPL
         namespace NitrogenEnumerationMode
         {
 
-            /** \brief Do not enumerate invertible nitrogens. */
+            /**
+             * \brief Do not enumerate invertible nitrogens.
+             */
             const int NONE = 0;
 
-            /** \brief Enumerate all invertible nitrogens. */
+            /**
+             * \brief Enumerate all invertible nitrogens.
+             */
             const int ALL = 1;
 
-            /** \brief Enumerate only those invertible nitrogens whose configuration has not been explicitly specified. */
+            /**
+             * \brief Enumerate only those invertible nitrogens whose configuration has not been explicitly specified.
+             */
             const int UNSPECIFIED_STEREO = 2;
         } // namespace NitrogenEnumerationMode
     } // namespace ConfGen

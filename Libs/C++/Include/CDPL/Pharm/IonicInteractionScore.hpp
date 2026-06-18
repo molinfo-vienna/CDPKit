@@ -47,9 +47,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum ionic feature pair distance in &Aring;ngstrom. */
+            /**
+             * \brief Default minimum ionic feature pair distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_DISTANCE = 1.5;
-            /** \brief Default maximum ionic feature pair distance in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum ionic feature pair distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_DISTANCE = 5.5;
 
             /**

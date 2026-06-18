@@ -25,23 +25,23 @@
 class ControlParameterDefault(Boost.Python.instance):
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Pharm.ControlParameter.STRICT_ERROR_CHECKING.
+    # \brief Default value (= <tt>False</tt>) of the control-parameter Pharm.ControlParameter.STRICT_ERROR_CHECKING.
     # 
     STRICT_ERROR_CHECKING = False
 
     ##
-    # \brief Default setting for the control-parameter Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
+    # \brief Default value of the control-parameter Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
     # 
     # \since 1.2
     # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = True
 
     ##
-    # \brief Default setting for the control-parameter Pharm.ControlParameter.PSD_CREATION_MODE.
+    # \brief Default value of the control-parameter Pharm.ControlParameter.PSD_CREATION_MODE.
     # 
     PSD_CREATION_MODE = CREATE
 
     ##
-    # \brief Default setting for the control-parameter Pharm.ControlParameter.PSD_ALLOW_DUPLICATES.
+    # \brief Default value of the control-parameter Pharm.ControlParameter.PSD_ALLOW_DUPLICATES.
     # 
     PSD_ALLOW_DUPLICATES = True

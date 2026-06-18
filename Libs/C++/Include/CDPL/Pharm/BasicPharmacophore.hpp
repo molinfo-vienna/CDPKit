@@ -62,9 +62,14 @@ namespace CDPL
              */
             typedef std::shared_ptr<BasicPharmacophore> SharedPointer;
 
-            /** \brief A mutable random access iterator used to iterate over the stored Pharm::BasicFeature objects. */
+            /**
+             * \brief A mutable random access iterator used to iterate over the stored Pharm::BasicFeature objects.
+             */
             typedef boost::indirect_iterator<FeatureList::iterator, BasicFeature>             FeatureIterator;
-            /** \brief A constant random access iterator used to iterate over the stored \c const Pharm::BasicFeature objects. */
+
+            /**
+             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::BasicFeature objects.
+             */
             typedef boost::indirect_iterator<FeatureList::const_iterator, const BasicFeature> ConstFeatureIterator;
 
             /**

@@ -52,7 +52,7 @@ namespace CDPL
         CDPL_GRAIL_API unsigned int getFeatureType(const Grid::AttributedGrid& grid);
 
         /**
-         * \brief Sets the value of the GRAIL::AttributedGridProperty::FEATURE_TYPE property of the grid \a grid.
+         * \brief Sets the value of the GRAIL::AttributedGridProperty::FEATURE_TYPE property of the grid \a grid to \a type.
          * \param grid The grid for which to set the property value.
          * \param type The new feature type value.
          */
@@ -65,7 +65,7 @@ namespace CDPL
         CDPL_GRAIL_API void clearFeatureType(Grid::AttributedGrid& grid);
 
         /**
-         * \brief Tells whether \a grid carries an explicit GRAIL::AttributedGridProperty::FEATURE_TYPE property.
+         * \brief Tells whether the GRAIL::AttributedGridProperty::FEATURE_TYPE property of the grid \a grid is set.
          * \param grid The grid for which to query the property value.
          * \return \c true if the property is set, and \c false otherwise.
          */
@@ -80,7 +80,7 @@ namespace CDPL
         CDPL_GRAIL_API unsigned int getTargetFeatureType(const Grid::AttributedGrid& grid);
 
         /**
-         * \brief Sets the value of the GRAIL::AttributedGridProperty::TARGET_FEATURE_TYPE property of the grid \a grid.
+         * \brief Sets the value of the GRAIL::AttributedGridProperty::TARGET_FEATURE_TYPE property of the grid \a grid to \a type.
          * \param grid The grid for which to set the property value.
          * \param type The new target feature type value.
          */
@@ -93,7 +93,7 @@ namespace CDPL
         CDPL_GRAIL_API void clearTargetFeatureType(Grid::AttributedGrid& grid);
 
         /**
-         * \brief Tells whether \a grid carries an explicit GRAIL::AttributedGridProperty::TARGET_FEATURE_TYPE property.
+         * \brief Tells whether the GRAIL::AttributedGridProperty::TARGET_FEATURE_TYPE property of the grid \a grid is set.
          * \param grid The grid for which to query the property value.
          * \return \c true if the property is set, and \c false otherwise.
          */

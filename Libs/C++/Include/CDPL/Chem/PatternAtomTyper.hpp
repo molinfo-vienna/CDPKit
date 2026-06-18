@@ -64,12 +64,19 @@ namespace CDPL
             typedef std::vector<std::size_t> SizeTypeArray;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PatternAtomTyper instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PatternAtomTyper instances.
+             */
             typedef std::shared_ptr<PatternAtomTyper> SharedPointer;
 
-            /** \brief A constant iterator over the registered patterns. */
+            /**
+             * \brief A constant iterator over the registered patterns.
+             */
             typedef PatternList::const_iterator ConstPatternIterator;
-            /** \brief A mutable iterator over the registered patterns. */
+
+            /**
+             * \brief A mutable iterator over the registered patterns.
+             */
             typedef PatternList::iterator       PatternIterator;
 
             /**

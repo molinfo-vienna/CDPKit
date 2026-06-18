@@ -45,7 +45,7 @@ namespace CDPL
         {
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter ConfGen::ControlParameter::STRICT_ERROR_CHECKING.
+             * \brief Default setting (= \c false) of the control-parameter ConfGen::ControlParameter::STRICT_ERROR_CHECKING.
              */
             extern CDPL_CONFGEN_API const bool STRICT_ERROR_CHECKING;
         } // namespace ControlParameterDefault

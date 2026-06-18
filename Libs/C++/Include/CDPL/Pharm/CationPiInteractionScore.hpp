@@ -49,11 +49,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum cation-to-aromatic-center distance in &Aring;ngstrom. */
+            /**
+             * \brief Default minimum cation-to-aromatic-center distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_DISTANCE = 3.5;
-            /** \brief Default maximum cation-to-aromatic-center distance in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum cation-to-aromatic-center distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_DISTANCE = 5.5;
-            /** \brief Default maximum angle between cation displacement and aromatic-ring plane normal in degrees. */
+
+            /**
+             * \brief Default maximum angle between cation displacement and aromatic-ring plane normal in degrees.
+             */
             static constexpr double DEF_MAX_ANGLE    = 30.0;
 
             /**
@@ -61,9 +69,14 @@ namespace CDPL
              */
             typedef std::shared_ptr<CationPiInteractionScore> SharedPointer;
 
-            /** \brief Type of the function mapping a cation-aromatic distance to its score contribution. */
+            /**
+             * \brief Type of the function mapping a cation-aromatic distance to its score contribution.
+             */
             typedef std::function<double(double)> DistanceScoringFunction;
-            /** \brief Type of the function mapping a cation-displacement angle to its score contribution. */
+
+            /**
+             * \brief Type of the function mapping a cation-displacement angle to its score contribution.
+             */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**

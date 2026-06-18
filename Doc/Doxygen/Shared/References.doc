@@ -34,6 +34,13 @@ G. Moreau, P. Broto, Autocorrelation of Molecular Structures, Application to SAR
 </tr>
 
 <tr>
+<td valign="top">\anchor BFGS<i>[BFGS]</i></td>
+<td valign="top">
+Wikipedia article about the BFGS algorithm: https://en.wikipedia.org/wiki/Broyden-Fletcher-Goldfarb-Shanno_algorithm
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor BKA<i>[BKA]</i></td>
 <td valign="top">
 C. Bron, J. Kerbosch, Algorithm 457: finding all cliques of an undirected graph, 
@@ -212,6 +219,13 @@ D. A. Schuetz <i>et al.</i>, GRAIL: GRids of phArmacophore Interaction fieLds,
 <td valign="top">\anchor GSIM<i>[GSIM]</i></td>
 <td valign="top">
 OpenEye GraphSim TK documentation: https://docs.eyesopen.com/toolkits/cpp/graphsimtk/
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor GSL<i>[GSL]</i></td>
+<td valign="top">
+Wikipedia article about the GNU Scientific Library: https://en.wikipedia.org/wiki/GNU_Scientific_Library
 </td>
 </tr>
 

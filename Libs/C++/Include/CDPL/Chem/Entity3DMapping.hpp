@@ -54,7 +54,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Entity3DMapping instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Entity3DMapping instances.
+             */
             typedef std::shared_ptr<Entity3DMapping> SharedPointer;
 
             /**

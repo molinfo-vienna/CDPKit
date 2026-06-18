@@ -52,7 +52,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeSet instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeSet instances.
+             */
             typedef std::shared_ptr<GaussianShapeSet> SharedPointer;
 
           private:

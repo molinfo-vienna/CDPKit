@@ -63,7 +63,9 @@ namespace CDPL
              */
             typedef std::shared_ptr<HierarchyView> SharedPointer;
 
-            /** \brief A constant iterator over the biological macromolecule models. */
+            /**
+             * \brief A constant iterator over the biological macromolecule models.
+             */
             typedef boost::indirect_iterator<ModelList::const_iterator, const HierarchyViewModel> ConstModelIterator;
 
             /**

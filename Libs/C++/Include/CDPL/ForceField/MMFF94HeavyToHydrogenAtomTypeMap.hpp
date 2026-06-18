@@ -53,14 +53,24 @@ namespace CDPL
             typedef std::unordered_map<std::string, std::string> DataStorage;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94HeavyToHydrogenAtomTypeMap instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94HeavyToHydrogenAtomTypeMap instances.
+             */
             typedef std::shared_ptr<MMFF94HeavyToHydrogenAtomTypeMap> SharedPointer;
 
-            /** \brief A constant iterator over the entries of the map. */
+            /**
+             * \brief A constant iterator over the entries of the map.
+             */
             typedef DataStorage::const_iterator ConstEntryIterator;
-            /** \brief A mutable iterator over the entries of the map. */
+
+            /**
+             * \brief A mutable iterator over the entries of the map.
+             */
             typedef DataStorage::iterator       EntryIterator;
-            /** \brief The type of the map entries. */
+
+            /**
+             * \brief The type of the map entries.
+             */
             typedef DataStorage::value_type     Entry;
 
             /**

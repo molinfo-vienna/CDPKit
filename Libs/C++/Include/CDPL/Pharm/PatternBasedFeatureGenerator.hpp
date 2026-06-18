@@ -59,7 +59,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PatternBasedFeatureGenerator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PatternBasedFeatureGenerator instances.
+             */
             typedef std::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
 
             /**
@@ -70,13 +72,24 @@ namespace CDPL
             enum PatternAtomLabelFlag
             {
 
-                /** \brief The atom is part of the generated feature's substructure. */
-                FEATURE_ATOM_FLAG   = 0x01,
-                /** \brief The atom contributes (via centroid averaging) to the feature's 3D position. */
-                POS_REF_ATOM_FLAG   = 0x02,
-                /** \brief The atom defines the first orientation reference (used by both vector- and plane-type features). */
+                /**
+                 * \brief The atom is part of the generated feature's substructure.
+                 */
+                FEATURE_ATOM_FLAG = 0x01,
+
+                /**
+                 * \brief The atom contributes (via centroid averaging) to the feature's 3D position.
+                 */
+                POS_REF_ATOM_FLAG = 0x02,
+
+                /**
+                 * \brief The atom defines the first orientation reference (used by both vector- and plane-type features).
+                 */
                 GEOM_REF_ATOM1_FLAG = 0x04,
-                /** \brief The atom defines the second orientation reference (used by plane-type features). */
+
+                /**
+                 * \brief The atom defines the second orientation reference (used by plane-type features).
+                 */
                 GEOM_REF_ATOM2_FLAG = 0x08
             };
 

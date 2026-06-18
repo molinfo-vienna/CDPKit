@@ -72,34 +72,69 @@ namespace CDPL
             typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
 
           public:
-            /** \brief Default gradient norm at which the overlap optimization is stopped. */
+            /**
+             * \brief Default gradient norm at which the overlap optimization is stopped.
+             */
             static constexpr double DEF_OPTIMIZATION_STOP_GRADIENT       = 1.0;
-            /** \brief Default maximum number of overlap-optimization iterations. */
+
+            /**
+             * \brief Default maximum number of overlap-optimization iterations.
+             */
             static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-            /** \brief Default maximum order of the Gaussian-product expansion. */
+
+            /**
+             * \brief Default maximum order of the Gaussian-product expansion.
+             */
             static constexpr std::size_t  DEF_MAX_PRODUCT_ORDER          = 1;
-            /** \brief Default alignment-result selection mode. */
+
+            /**
+             * \brief Default alignment-result selection mode.
+             */
             static constexpr unsigned int DEF_RESULT_SELECTION_MODE      = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
-            /** \brief Default distance cutoff for pruning negligible overlap contributions. */
+
+            /**
+             * \brief Default distance cutoff for pruning negligible overlap contributions.
+             */
             static constexpr double       DEF_DISTANCE_CUTOFF            = 0.0;
 
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeAlignment instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeAlignment instances.
+             */
             typedef std::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
-            /** \brief A constant iterator over the alignment results. */
+            /**
+             * \brief A constant iterator over the alignment results.
+             */
             typedef ResultList::const_iterator                                                     ConstResultIterator;
-            /** \brief A mutable iterator over the alignment results. */
+
+            /**
+             * \brief A mutable iterator over the alignment results.
+             */
             typedef ResultList::iterator                                                           ResultIterator;
-            /** \brief A constant iterator over the reference shapes. */
+
+            /**
+             * \brief A constant iterator over the reference shapes.
+             */
             typedef boost::transform_iterator<GetShapeFunction, ShapeFunctionList::const_iterator> ConstShapeIterator;
 
-            /** \brief Type of the function used to filter color (pharmacophore) features by type. */
+            /**
+             * \brief Type of the function used to filter color (pharmacophore) features by type.
+             */
             typedef GaussianShapeFunctionAlignment::ColorFilterFunction                 ColorFilterFunction;
-            /** \brief Type of the function used to decide whether two color features match. */
+
+            /**
+             * \brief Type of the function used to decide whether two color features match.
+             */
             typedef GaussianShapeFunctionAlignment::ColorMatchFunction                  ColorMatchFunction;
-            /** \brief Type of the function used to score an alignment result. */
+
+            /**
+             * \brief Type of the function used to score an alignment result.
+             */
             typedef std::function<double(const AlignmentResult&)>                       ScoringFunction;
-            /** \brief Type of the function used to compare two alignment results. */
+
+            /**
+             * \brief Type of the function used to compare two alignment results.
+             */
             typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
             /**

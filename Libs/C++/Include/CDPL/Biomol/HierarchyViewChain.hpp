@@ -61,7 +61,9 @@ namespace CDPL
             typedef std::vector<FragmentPtr>               FragmentList;
 
           public:
-            /** \brief A constant iterator over the chain fragments. */
+            /**
+             * \brief A constant iterator over the chain fragments.
+             */
             typedef boost::indirect_iterator<FragmentList::const_iterator, const HierarchyViewFragment> ConstFragmentIterator;
 
             /**

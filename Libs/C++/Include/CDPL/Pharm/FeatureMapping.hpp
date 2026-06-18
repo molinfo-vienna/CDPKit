@@ -54,7 +54,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureMapping instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureMapping instances.
+             */
             typedef std::shared_ptr<FeatureMapping> SharedPointer;
 
           private:

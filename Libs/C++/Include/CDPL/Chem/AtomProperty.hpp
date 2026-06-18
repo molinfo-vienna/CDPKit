@@ -93,14 +93,14 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey RADICAL_TYPE;
 
             /**
-             * \brief Specifies the hybridization state of the atom (see namespace Chem::HybridizationState).
+             * \brief Specifies the orbital hybridization state of the atom (see namespace Chem::HybridizationState).
              *
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey HYBRIDIZATION;
 
             /**
-             * \brief Specifies whether the atom is a member of any ring.
+             * \brief Specifies whether the atom is a member of a ring system.
              *
              * \valuetype \c bool
              */
@@ -135,36 +135,36 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey COORDINATES_2D;
 
             /**
-             * \brief Specifies an array with the 3D coordinates of the atom for one or more molecular conformations.
+             * \brief Specifies an array of atom 3D coordinates for one or more molecular conformations.
              *
              * \valuetype Math::Vector3DArray::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D_ARRAY;
 
             /**
-             * \brief Specifies the Morgan extended connectivity value of the atom.
-             *
+             * \brief Specifies the canonical number of the atom obtained by the Morgan algorithm.
+             * \see  [\ref MOCAN]
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey MORGAN_NUMBER;
 
             /**
-             * \brief Specifies the canonical numbering of the atom.
+             * \brief Specifies the canonical number of the atom.
              *
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey CANONICAL_NUMBER;
 
             /**
-             * \brief Specifies the CIP priority of the atom.
-             *
+             * \brief Specifies the topological CIP priority of the atom.
+             * \see [\ref TCIP]
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey CIP_PRIORITY;
 
             /**
              * \brief Specifies the topological symmetry class of the atom.
-             *
+             * \see [\ref TOPSY]
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey SYMMETRY_CLASS;
@@ -184,70 +184,70 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
 
             /**
-             * \brief Specifies the CIP stereochemical configuration label of the atom (see namespace Chem::CIPDescriptor).
+             * \brief Specifies the \e CIP stereochemical configuration label of the atom (see namespace Chem::CIPDescriptor).
              *
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
 
             /**
-             * \brief Specifies the MDL stereo parity of the atom (see namespace Chem::MDLParity).
-             *
+             * \brief Specifies the \e MDL stereo parity of the atom (see namespace Chem::MDLParity).
+             * \see [\ref CTFILE]
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_PARITY;
 
             /**
-             * \brief Specifies the value of the MDL <em>stereo care</em> flag of the atom.
-             *
+             * \brief Specifies the value of the \e MDL <em>stereo care</em> flag of the atom.
+             * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_DB_STEREO_CARE_FLAG;
 
             /**
-             * \brief Specifies the SYBYL atom type (see namespace Chem::SybylAtomType).
+             * \brief Specifies the <em>Sybyl MOL2</em> atom type (see namespace Chem::SybylAtomType).
              *
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
 
             /**
-             * \brief Specifies the atomic partial charge as read from or written to a <em>Sybyl MOL2</em> file.
+             * \brief Specifies the atomic partial charge as read from/to write to <em>Sybyl MOL2</em> data.
              *
              * \valuetype \c double
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;
 
             /**
-             * \brief Specifies the atom name as read from or written to a <em>Sybyl MOL2</em> file.
+             * \brief Specifies the atom name as read from/to write to <em>Sybyl MOL2</em> data.
              *
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_NAME;
 
             /**
-             * \brief Specifies the ID of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+             * \brief Specifies the numeric identifier of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
              *
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_ID;
 
             /**
-             * \brief Specifies the name of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+             * \brief Specifies the name of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
              *
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_NAME;
 
             /**
-             * \brief Specifies the subtype of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+             * \brief Specifies the subtype of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
              *
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_SUBTYPE;
 
             /**
-             * \brief Specifies the chain identifier of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+             * \brief Specifies the chain identifier of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
              *
              * \valuetype \c std::string
              */
@@ -261,7 +261,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
 
             /**
-             * \brief Specifies the atom-atom mapping ID used to relate reactant atoms to product atoms in a reaction.
+             * \brief Specifies the atom-atom mapping ID relating reaction reactant atoms to product atoms.
              *
              * \valuetype \c std::size_t
              */

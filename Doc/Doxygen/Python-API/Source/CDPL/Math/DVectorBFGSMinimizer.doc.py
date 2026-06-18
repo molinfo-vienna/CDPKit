@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Fletcher's implementation of the BFGS method.
+# \brief Implementation of the <em>Broyden-Fletcher-Goldfarb-Shanno (BFGS)</em> algorithm for solving unconstrained nonlinear optimization problems.
 # 
-# The implementation has been taken from the <em>GNU Scientific Library</em>.
+# The base implementation has been taken from the <em>GNU Scientific Library</em>.
 # 
-# \see R. Fletcher, "Practical Method's of Optimization", Second Edition, ISBN 0471915475. Algorithms 2.6.2 and 2.6.4.
+# \see [\ref BFGS, \ref GSL]
 # 
 class DVectorBFGSMinimizer(Boost.Python.instance):
 

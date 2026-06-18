@@ -25,31 +25,31 @@
 class AtomPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief Default value for the Biomol.AtomProperty.MODEL_NUMBER property.
+    # \brief Default value of the Biomol.AtomProperty.MODEL_NUMBER property.
     # 
     MODEL_NUMBER = 0
 
     ##
-    # \brief Default value for the Biomol.AtomProperty.B_FACTOR property.
+    # \brief Default value of the Biomol.AtomProperty.B_FACTOR property.
     # 
     B_FACTOR = 0.0
 
     ##
-    # \brief Default value for the Biomol.AtomProperty.OCCUPANCY property.
+    # \brief Default value of the Biomol.AtomProperty.OCCUPANCY property.
     # 
     OCCUPANCY = 1.0
 
     ##
-    # \brief Default value for the Biomol.AtomProperty.RESIDUE_LEAVING_ATOM_FLAG property.
+    # \brief Default value of the Biomol.AtomProperty.RESIDUE_LEAVING_ATOM_FLAG property.
     # 
     RESIDUE_LEAVING_ATOM_FLAG = False
 
     ##
-    # \brief Default value for the Biomol.AtomProperty.RESIDUE_LINKING_ATOM_FLAG property.
+    # \brief Default value of the Biomol.AtomProperty.RESIDUE_LINKING_ATOM_FLAG property.
     # 
     RESIDUE_LINKING_ATOM_FLAG = False
 
     ##
-    # \brief Default value for the Biomol.AtomProperty.RESIDUE_INSERTION_CODE property.
+    # \brief Default value of the Biomol.AtomProperty.RESIDUE_INSERTION_CODE property.
     # 
     RESIDUE_INSERTION_CODE = ' '

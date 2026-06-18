@@ -60,7 +60,9 @@ namespace CDPL
             typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AngleBendingParameterTable instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AngleBendingParameterTable instances.
+             */
             typedef std::shared_ptr<MMFF94AngleBendingParameterTable> SharedPointer;
 
             /**
@@ -139,12 +141,16 @@ namespace CDPL
                 bool         initialized;
             };
 
-            /** \brief A constant iterator over the entries of the table. */
+            /**
+             * \brief A constant iterator over the entries of the table.
+             */
             typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
                                               DataStorage::const_iterator>
                 ConstEntryIterator;
 
-            /** \brief A mutable iterator over the entries of the table. */
+            /**
+             * \brief A mutable iterator over the entries of the table.
+             */
             typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
                                               DataStorage::iterator>
                 EntryIterator;

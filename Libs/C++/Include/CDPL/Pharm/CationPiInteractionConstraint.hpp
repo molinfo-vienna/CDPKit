@@ -48,11 +48,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief Default minimum cation-to-aromatic-center distance in &Aring;ngstrom. */
+            /**
+             * \brief Default minimum cation-to-aromatic-center distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MIN_DISTANCE = 3.5;
-            /** \brief Default maximum cation-to-aromatic-center distance in &Aring;ngstrom. */
+
+            /**
+             * \brief Default maximum cation-to-aromatic-center distance in &Aring;ngstrom.
+             */
             static constexpr double DEF_MAX_DISTANCE = 5.5;
-            /** \brief Default maximum angle between cation displacement and aromatic-ring plane normal in degrees. */
+
+            /**
+             * \brief Default maximum angle between cation displacement and aromatic-ring plane normal in degrees.
+             */
             static constexpr double DEF_MAX_ANGLE    = 45.0;
 
             /**

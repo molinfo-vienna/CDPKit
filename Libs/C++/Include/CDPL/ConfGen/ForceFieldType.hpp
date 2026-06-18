@@ -44,25 +44,54 @@ namespace CDPL
         namespace ForceFieldType
         {
 
-            /** \brief Standard MMFF94 force field with electrostatic interactions enabled. */
+            /**
+             * \brief Standard MMFF94 force field with electrostatic interactions enabled.
+             */
             constexpr unsigned int MMFF94                     = 0;
-            /** \brief Standard MMFF94 force field with electrostatic interactions disabled. */
+
+            /**
+             * \brief Standard MMFF94 force field with electrostatic interactions disabled.
+             */
             constexpr unsigned int MMFF94_NO_ESTAT            = 1;
-            /** \brief Standard static MMFF94 force field with electrostatic interactions enabled. */
+
+            /**
+             * \brief Standard static MMFF94 force field with electrostatic interactions enabled.
+             */
             constexpr unsigned int MMFF94S                    = 2;
-            /** \brief Standard static MMFF94 force field with electrostatic interactions disabled. */
+
+            /**
+             * \brief Standard static MMFF94 force field with electrostatic interactions disabled.
+             */
             constexpr unsigned int MMFF94S_NO_ESTAT           = 3;
-            /** \brief Static MMFF94 force field employing extended out-of-plane bending parameters with electrostatic interactions enabled. */
+
+            /**
+             * \brief Static MMFF94 force field employing extended out-of-plane bending parameters with electrostatic interactions enabled.
+             */
             constexpr unsigned int MMFF94S_XOOP               = 4;
-            /** \brief Static MMFF94 force field employing extended out-of-plane bending parameters with electrostatic interactions disabled. */
+
+            /**
+             * \brief Static MMFF94 force field employing extended out-of-plane bending parameters with electrostatic interactions disabled.
+             */
             constexpr unsigned int MMFF94S_XOOP_NO_ESTAT      = 5;
-            /** \brief Static MMFF94 force field employing refined torsion parameters with electrostatic interactions enabled. */
+
+            /**
+             * \brief Static MMFF94 force field employing refined torsion parameters with electrostatic interactions enabled.
+             */
             constexpr unsigned int MMFF94S_RTOR               = 6;
-            /** \brief Static MMFF94 force field employing refined torsion parameters with electrostatic interactions disabled. */
+
+            /**
+             * \brief Static MMFF94 force field employing refined torsion parameters with electrostatic interactions disabled.
+             */
             constexpr unsigned int MMFF94S_RTOR_NO_ESTAT      = 7;
-            /** \brief Static MMFF94 force field employing refined torsion and extended out-of-plane parameters with electrostatic interactions enabled. */
+
+            /**
+             * \brief Static MMFF94 force field employing refined torsion and extended out-of-plane parameters with electrostatic interactions enabled.
+             */
             constexpr unsigned int MMFF94S_RTOR_XOOP          = 8;
-            /** \brief Static MMFF94 force field employing refined torsion and extended out-of-plane parameters with electrostatic interactions disabled. */
+
+            /**
+             * \brief Static MMFF94 force field employing refined torsion and extended out-of-plane parameters with electrostatic interactions disabled.
+             */
             constexpr unsigned int MMFF94S_RTOR_XOOP_NO_ESTAT = 9;
         } // namespace ForceFieldType
     } // namespace ConfGen

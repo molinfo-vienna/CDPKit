@@ -71,11 +71,19 @@ namespace CDPL
             typedef std::vector<const Chem::MolecularGraph*> MolecularGraphList;
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ScreeningProcessor instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ScreeningProcessor instances.
+             */
             typedef std::shared_ptr<ScreeningProcessor>                                                                   SharedPointer;
-            /** \brief A constant iterator over the query molecules. */
+
+            /**
+             * \brief A constant iterator over the query molecules.
+             */
             typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph>              ConstMolecularGraphIterator;
-            /** \brief Type of the callback invoked for each alignment hit (arguments: query, hit, alignment result). */
+
+            /**
+             * \brief Type of the callback invoked for each alignment hit (arguments: query, hit, alignment result).
+             */
             typedef std::function<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&)> HitCallbackFunction;
 
             /**

@@ -55,13 +55,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief A static instance with default-initialized values. */
+            /**
+             * \brief A static instance with default-initialized values.
+             */
             static const ScreeningSettings DEFAULT;
 
-            /** \brief Sentinel value (NaN) used to disable the score cutoff. */
+            /**
+             * \brief Sentinel value (NaN) used to disable the score cutoff.
+             */
             static constexpr double        NO_CUTOFF = std::numeric_limits<double>::quiet_NaN();
 
-            /** \brief Type of the function used to score an alignment result. */
+            /**
+             * \brief Type of the function used to score an alignment result.
+             */
             typedef std::function<double(const AlignmentResult&)> ScoringFunction;
 
             /**
@@ -70,11 +76,19 @@ namespace CDPL
             enum ScreeningMode
             {
 
-                /** \brief Report only the single best-scoring alignment hit across all queries. */
+                /**
+                 * \brief Report only the single best-scoring alignment hit across all queries.
+                 */
                 BEST_OVERALL_MATCH,
-                /** \brief Report the best-scoring alignment hit per query molecule. */
+                
+                /**
+                 * \brief Report the best-scoring alignment hit per query molecule.
+                 */
                 BEST_MATCH_PER_QUERY,
-                /** \brief Report the best-scoring alignment hit per (query, query conformer) pair. */
+                
+                /**
+                 * \brief Report the best-scoring alignment hit per (query, query conformer) pair.
+                 */
                 BEST_MATCH_PER_QUERY_CONF
             };
 
@@ -84,11 +98,19 @@ namespace CDPL
             enum ColorFeatureType
             {
 
-                /** \brief Disable color features (shape-only alignment). */
+                /**
+                 * \brief Disable color features (shape-only alignment).
+                 */
                 NO_FEATURES,
-                /** \brief Use pharmacophore features derived from explicit charges. */
+                
+                /**
+                 * \brief Use pharmacophore features derived from explicit charges.
+                 */
                 PHARMACOPHORE_EXP_CHARGES,
-                /** \brief Use pharmacophore features derived from perceived (implicit) charges. */
+                
+                /**
+                 * \brief Use pharmacophore features derived from perceived (implicit) charges.
+                 */
                 PHARMACOPHORE_IMP_CHARGES
             };
 
@@ -98,15 +120,29 @@ namespace CDPL
             enum AlignmentMode
             {
 
-                /** \brief Disable alignment entirely (overlap is computed in the input pose only). */
+                /**
+                 * \brief Disable alignment entirely (overlap is computed in the input pose only).
+                 */
                 NO_ALIGNMENT          = 0x0,
-                /** \brief Place the aligned shape at the centroid of the reference shape. */
+                
+                /**
+                 * \brief Place the aligned shape at the centroid of the reference shape.
+                 */
                 SHAPE_CENTROID        = 0x1,
-                /** \brief Seed alignments by superimposing pairs of atom centers. */
+                
+                /**
+                 * \brief Seed alignments by superimposing pairs of atom centers.
+                 */
                 ATOM_CENTERS          = 0x2,
-                /** \brief Seed alignments by superimposing pairs of color (pharmacophore) feature centers. */
+                
+                /**
+                 * \brief Seed alignments by superimposing pairs of color (pharmacophore) feature centers.
+                 */
                 COLOR_FEATURE_CENTERS = 0x4,
-                /** \brief Seed alignments with random rotations. */
+                
+                /**
+                 * \brief Seed alignments with random rotations.
+                 */
                 RANDOM                = 0x8
             };
 

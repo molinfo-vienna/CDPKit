@@ -53,7 +53,9 @@ namespace CDPL
         {
 
           public:
-            /** \brief Type of the Base::DataWriter specialization produced by this handler. */
+            /**
+             * \brief Type of the Base::DataWriter specialization produced by this handler.
+             */
             typedef typename Base::DataOutputHandler<DataType>::WriterType WriterType;
 
             /**

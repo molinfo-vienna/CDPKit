@@ -54,27 +54,53 @@ namespace CDPL
             typedef QuaternionVectorAdapter<Q> SelfType;
 
           public:
-            /** \brief The wrapped quaternion type. */
+            /**
+             * \brief The wrapped quaternion type.
+             */
             typedef Q                                                        QuaternionType;
-            /** \brief The size type (\c std::size_t). */
+
+            /**
+             * \brief The size type (\c std::size_t).
+             */
             typedef typename std::size_t                                     SizeType;
-            /** \brief The signed difference type (\c std::ptrdiff_t). */
+
+            /**
+             * \brief The signed difference type (\c std::ptrdiff_t).
+             */
             typedef typename std::ptrdiff_t                                  DifferenceType;
-            /** \brief The element value type of the wrapped quaternion. */
+
+            /**
+             * \brief The element value type of the wrapped quaternion.
+             */
             typedef typename Q::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element of the wrapped quaternion. */
+
+            /**
+             * \brief Constant reference type to an element of the wrapped quaternion.
+             */
             typedef typename Q::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped quaternion is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped quaternion is \c const).
+             */
             typedef typename std::conditional<std::is_const<Q>::value,
                                               typename Q::ConstReference,
                                               typename Q::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped quaternion internally (mutable or const flavor). */
+
+            /**
+             * \brief Closure type used to store the wrapped quaternion internally (mutable or const flavor).
+             */
             typedef typename std::conditional<std::is_const<Q>::value,
                                               typename Q::ConstClosureType,
                                               typename Q::ClosureType>::type QuaternionClosureType;
-            /** \brief Constant closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this adapter appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this adapter appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this adapter appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
 
             /**

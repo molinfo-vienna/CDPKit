@@ -56,13 +56,19 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeOverlapFunction instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeOverlapFunction instances.
+             */
             typedef std::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
 
-            /** \brief Type of the function used to filter color (pharmacophore) features by type. */
+            /**
+             * \brief Type of the function used to filter color (pharmacophore) features by type.
+             */
             typedef std::function<bool(std::size_t)>              ColorFilterFunction;
 
-            /** \brief Type of the function used to decide whether two color features match. */
+            /**
+             * \brief Type of the function used to decide whether two color features match.
+             */
             typedef std::function<bool(std::size_t, std::size_t)> ColorMatchFunction;
 
             /** 

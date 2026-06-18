@@ -46,15 +46,25 @@ namespace CDPL
         {
 
           public:
-            /** \brief MMFF94 hydrogen-bond donor/acceptor classification of an atom. */
+            /**
+             * \brief MMFF94 hydrogen-bond donor/acceptor classification of an atom.
+             */
             enum HDonorAcceptorType
             {
 
-                /** \brief The atom is neither a hydrogen-bond donor nor an acceptor. */
+                /**
+                 * \brief The atom is neither a hydrogen-bond donor nor an acceptor.
+                 */
                 NONE,
-                /** \brief The atom is a hydrogen-bond donor. */
+                
+                /**
+                 * \brief The atom is a hydrogen-bond donor.
+                 */
                 DONOR,
-                /** \brief The atom is a hydrogen-bond acceptor. */
+                
+                /**
+                 * \brief The atom is a hydrogen-bond acceptor.
+                 */
                 ACCEPTOR
             };
 

@@ -51,19 +51,39 @@ namespace CDPL
         namespace AtomPropertyDefault
         {
 
-            /** \brief Default value of the Vis::AtomProperty::COLOR property. */
+            /**
+             * \brief Default value of the Vis::AtomProperty::COLOR property.
+             */
             extern CDPL_VIS_API const Color             COLOR;
-            /** \brief Default value of the Vis::AtomProperty::LABEL_FONT property. */
+
+            /**
+             * \brief Default value of the Vis::AtomProperty::LABEL_FONT property.
+             */
             extern CDPL_VIS_API const Font              LABEL_FONT;
-            /** \brief Default value of the Vis::AtomProperty::LABEL_SIZE property. */
+
+            /**
+             * \brief Default value of the Vis::AtomProperty::LABEL_SIZE property.
+             */
             extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
-            /** \brief Default value of the Vis::AtomProperty::SECONDARY_LABEL_FONT property. */
+
+            /**
+             * \brief Default value of the Vis::AtomProperty::SECONDARY_LABEL_FONT property.
+             */
             extern CDPL_VIS_API const Font              SECONDARY_LABEL_FONT;
-            /** \brief Default value of the Vis::AtomProperty::SECONDARY_LABEL_SIZE property. */
+
+            /**
+             * \brief Default value of the Vis::AtomProperty::SECONDARY_LABEL_SIZE property.
+             */
             extern CDPL_VIS_API const SizeSpecification SECONDARY_LABEL_SIZE;
-            /** \brief Default value of the Vis::AtomProperty::LABEL_MARGIN property. */
+
+            /**
+             * \brief Default value of the Vis::AtomProperty::LABEL_MARGIN property.
+             */
             extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
-            /** \brief Default value of the Vis::AtomProperty::RADICAL_ELECTRON_DOT_SIZE property. */
+
+            /**
+             * \brief Default value of the Vis::AtomProperty::RADICAL_ELECTRON_DOT_SIZE property.
+             */
             extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
 
             /**
@@ -125,7 +145,6 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen               HIGHLIGHT_AREA_OUTLINE_PEN;
-            
         } // namespace AtomPropertyDefault
     } // namespace Vis
 } // namespace CDPL

@@ -67,14 +67,14 @@ class AtomProperty(Boost.Python.instance):
     RADICAL_TYPE = CDPL.Base.LookupKey('RADICAL_TYPE')
 
     ##
-    # \brief Specifies the hybridization state of the atom (see namespace Chem.HybridizationState).
+    # \brief Specifies the orbital hybridization state of the atom (see namespace Chem.HybridizationState).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     HYBRIDIZATION = CDPL.Base.LookupKey('HYBRIDIZATION')
 
     ##
-    # \brief Specifies whether the atom is a member of any ring.
+    # \brief Specifies whether the atom is a member of a ring system.
     # 
     # \valuetype  <tt>bool</tt>
     # 
@@ -109,29 +109,31 @@ class AtomProperty(Boost.Python.instance):
     COORDINATES_2D = CDPL.Base.LookupKey('COORDINATES_2D')
 
     ##
-    # \brief Specifies an array with the 3D coordinates of the atom for one or more molecular conformations.
+    # \brief Specifies an array of atom 3D coordinates for one or more molecular conformations.
     # 
     # \valuetype  Math.Vector3DArray.SharedPointer
     # 
     COORDINATES_3D_ARRAY = CDPL.Base.LookupKey('COORDINATES_3D_ARRAY')
 
     ##
-    # \brief Specifies the Morgan extended connectivity value of the atom.
+    # \brief Specifies the canonical number of the atom obtained by the Morgan algorithm.
     # 
+    # \see [\ref MOCAN] 
     # \valuetype  <tt>std::size_t</tt>
     # 
     MORGAN_NUMBER = CDPL.Base.LookupKey('MORGAN_NUMBER')
 
     ##
-    # \brief Specifies the canonical numbering of the atom.
+    # \brief Specifies the canonical number of the atom.
     # 
     # \valuetype  <tt>std::size_t</tt>
     # 
     CANONICAL_NUMBER = CDPL.Base.LookupKey('CANONICAL_NUMBER')
 
     ##
-    # \brief Specifies the CIP priority of the atom.
+    # \brief Specifies the topological CIP priority of the atom.
     # 
+    # \see [\ref TCIP] 
     # \valuetype  <tt>std::size_t</tt>
     # 
     CIP_PRIORITY = CDPL.Base.LookupKey('CIP_PRIORITY')
@@ -139,6 +141,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the topological symmetry class of the atom.
     # 
+    # \see [\ref TOPSY] 
     # \valuetype  <tt>std::size_t</tt>
     # 
     SYMMETRY_CLASS = CDPL.Base.LookupKey('SYMMETRY_CLASS')
@@ -158,70 +161,72 @@ class AtomProperty(Boost.Python.instance):
     STEREO_CENTER_FLAG = CDPL.Base.LookupKey('STEREO_CENTER_FLAG')
 
     ##
-    # \brief Specifies the CIP stereochemical configuration label of the atom (see namespace Chem.CIPDescriptor).
+    # \brief Specifies the <em>CIP</em> stereochemical configuration label of the atom (see namespace Chem.CIPDescriptor).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     CIP_CONFIGURATION = CDPL.Base.LookupKey('CIP_CONFIGURATION')
 
     ##
-    # \brief Specifies the MDL stereo parity of the atom (see namespace Chem.MDLParity).
+    # \brief Specifies the <em>MDL</em> stereo parity of the atom (see namespace Chem.MDLParity).
     # 
+    # \see [\ref CTFILE] 
     # \valuetype  <tt>unsigned int</tt>
     # 
     MDL_PARITY = CDPL.Base.LookupKey('MDL_PARITY')
 
     ##
-    # \brief Specifies the value of the MDL <em>stereo care</em> flag of the atom.
+    # \brief Specifies the value of the <em>MDL</em> <em>stereo care</em> flag of the atom.
     # 
+    # \see [\ref CTFILE] 
     # \valuetype  <tt>bool</tt>
     # 
     MDL_DB_STEREO_CARE_FLAG = CDPL.Base.LookupKey('MDL_DB_STEREO_CARE_FLAG')
 
     ##
-    # \brief Specifies the SYBYL atom type (see namespace Chem.SybylAtomType).
+    # \brief Specifies the <em>Sybyl MOL2</em> atom type (see namespace Chem.SybylAtomType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     SYBYL_TYPE = CDPL.Base.LookupKey('SYBYL_TYPE')
 
     ##
-    # \brief Specifies the atom name as read from or written to a <em>Sybyl MOL2</em> file.
+    # \brief Specifies the atom name as read from/to write to <em>Sybyl MOL2</em> data.
     # 
     # \valuetype  <tt>std::string</tt>
     # 
     MOL2_NAME = CDPL.Base.LookupKey('MOL2_NAME')
 
     ##
-    # \brief Specifies the atomic partial charge as read from or written to a <em>Sybyl MOL2</em> file.
+    # \brief Specifies the atomic partial charge as read from/to write to <em>Sybyl MOL2</em> data.
     # 
     # \valuetype  <tt>double</tt>
     # 
     MOL2_CHARGE = CDPL.Base.LookupKey('MOL2_CHARGE')
 
     ##
-    # \brief Specifies the ID of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+    # \brief Specifies the numeric identifier of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
     # 
     # \valuetype  <tt>std::size_t</tt>
     # 
     MOL2_SUBSTRUCTURE_ID = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_ID')
 
     ##
-    # \brief Specifies the name of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+    # \brief Specifies the name of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
     # 
     # \valuetype  <tt>std::string</tt>
     # 
     MOL2_SUBSTRUCTURE_NAME = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_NAME')
 
     ##
-    # \brief Specifies the subtype of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+    # \brief Specifies the subtype of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
     # 
     # \valuetype  <tt>std::string</tt>
     # 
     MOL2_SUBSTRUCTURE_SUBTYPE = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_SUBTYPE')
 
     ##
-    # \brief Specifies the chain identifier of the substructure the atom belongs to (as read from or written to a <em>Sybyl MOL2</em> file).
+    # \brief Specifies the chain identifier of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
     # 
     # \valuetype  <tt>std::string</tt>
     # 
@@ -235,7 +240,7 @@ class AtomProperty(Boost.Python.instance):
     REACTION_CENTER_STATUS = CDPL.Base.LookupKey('REACTION_CENTER_STATUS')
 
     ##
-    # \brief Specifies the atom-atom mapping ID used to relate reactant atoms to product atoms in a reaction.
+    # \brief Specifies the atom-atom mapping ID relating reaction reactant atoms to product atoms.
     # 
     # \valuetype  <tt>std::size_t</tt>
     # 

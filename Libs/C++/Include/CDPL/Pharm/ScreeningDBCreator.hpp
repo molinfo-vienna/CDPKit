@@ -58,10 +58,14 @@ namespace CDPL
         {
 
           public:
-            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ScreeningDBCreator instances. */
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ScreeningDBCreator instances.
+             */
             typedef std::shared_ptr<ScreeningDBCreator> SharedPointer;
 
-            /** \brief Type of the progress-reporting callback (argument: fraction in [0, 1], return: \c true to continue, \c false to abort). */
+            /**
+             * \brief Type of the progress-reporting callback (argument: fraction in [0, 1], return: \c true to continue, \c false to abort).
+             */
             typedef std::function<bool(double)> ProgressCallbackFunction;
 
             /**
@@ -70,11 +74,19 @@ namespace CDPL
             enum Mode
             {
 
-                /** \brief Create a new database (replacing any existing file). */
+                /**
+                 * \brief Create a new database (replacing any existing file).
+                 */
                 CREATE,
-                /** \brief Update an existing database in place. */
+
+                /**
+                 * \brief Update an existing database in place.
+                 */
                 UPDATE,
-                /** \brief Append to an existing database. */
+
+                /**
+                 * \brief Append to an existing database.
+                 */
                 APPEND
             };
 

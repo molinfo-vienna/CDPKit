@@ -54,29 +54,58 @@ namespace CDPL
             typedef VectorRange<V> SelfType;
 
           public:
-            /** \brief The wrapped vector type. */
+            /**
+             * \brief The wrapped vector type.
+             */
             typedef V                                                        VectorType;
-            /** \brief The size type used by the wrapped vector. */
+
+            /**
+             * \brief The size type used by the wrapped vector.
+             */
             typedef typename V::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped vector. */
+
+            /**
+             * \brief The signed difference type used by the wrapped vector.
+             */
             typedef typename V::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped vector. */
+
+            /**
+             * \brief The element value type of the wrapped vector.
+             */
             typedef typename V::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename V::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped vector internally (mutable or const flavor). */
+
+            /**
+             * \brief Closure type used to store the wrapped vector internally (mutable or const flavor).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstClosureType,
                                               typename V::ClosureType>::type VectorClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
-            /** \brief The Math::Range type defining the half-open index subrange. */
+
+            /**
+             * \brief The Math::Range type defining the half-open index subrange.
+             */
             typedef Range<SizeType>                                          RangeType;
 
             /**
@@ -324,29 +353,58 @@ namespace CDPL
             typedef VectorSlice<V> SelfType;
 
           public:
-            /** \brief The wrapped vector type. */
+            /**
+             * \brief The wrapped vector type.
+             */
             typedef V                                                        VectorType;
-            /** \brief The size type used by the wrapped vector. */
+
+            /**
+             * \brief The size type used by the wrapped vector.
+             */
             typedef typename V::SizeType                                     SizeType;
-            /** \brief The signed difference type used by the wrapped vector. */
+
+            /**
+             * \brief The signed difference type used by the wrapped vector.
+             */
             typedef typename V::DifferenceType                               DifferenceType;
-            /** \brief The element value type of the wrapped vector. */
+
+            /**
+             * \brief The element value type of the wrapped vector.
+             */
             typedef typename V::ValueType                                    ValueType;
-            /** \brief Constant reference type to an element. */
+
+            /**
+             * \brief Constant reference type to an element.
+             */
             typedef typename V::ConstReference                               ConstReference;
-            /** \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const). */
+
+            /**
+             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type   Reference;
-            /** \brief Closure type used to store the wrapped vector internally (mutable or const flavor). */
+
+            /**
+             * \brief Closure type used to store the wrapped vector internally (mutable or const flavor).
+             */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstClosureType,
                                               typename V::ClosureType>::type VectorClosureType;
-            /** \brief Constant closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Constant closure type used when this proxy appears inside another expression.
+             */
             typedef const SelfType                                           ConstClosureType;
-            /** \brief Closure type used when this proxy appears inside another expression. */
+
+            /**
+             * \brief Closure type used when this proxy appears inside another expression.
+             */
             typedef SelfType                                                 ClosureType;
-            /** \brief The Math::Slice type defining the (start, stride, size) selection. */
+
+            /**
+             * \brief The Math::Slice type defining the (start, stride, size) selection.
+             */
             typedef Slice<SizeType, DifferenceType>                          SliceType;
 
             /**
