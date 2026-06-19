@@ -32,14 +32,14 @@ class BondProperty(Boost.Python.instance):
     ORDER = CDPL.Base.LookupKey('ORDER')
 
     ##
-    # \brief Specifies the SYBYL bond type (see namespace Chem.SybylBondType).
+    # \brief Specifies the <em>Sybyl MOL2</em> bond type (see namespace Chem.SybylBondType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     SYBYL_TYPE = CDPL.Base.LookupKey('SYBYL_TYPE')
 
     ##
-    # \brief Specifies whether the bond is a member of any ring.
+    # \brief Specifies whether the bond is a member of a ring system.
     # 
     # \valuetype  <tt>bool</tt>
     # 
@@ -67,7 +67,7 @@ class BondProperty(Boost.Python.instance):
     STEREO_CENTER_FLAG = CDPL.Base.LookupKey('STEREO_CENTER_FLAG')
 
     ##
-    # \brief Specifies the CIP stereochemical configuration label of the bond (see namespace Chem.CIPDescriptor).
+    # \brief Specifies the <em>CIP</em> stereochemical configuration label of the bond (see namespace Chem.CIPDescriptor).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -96,21 +96,21 @@ class BondProperty(Boost.Python.instance):
     REACTION_CENTER_STATUS = CDPL.Base.LookupKey('REACTION_CENTER_STATUS')
 
     ##
-    # \brief Specifies the substructure matching constraints associated with the bond.
+    # \brief Specifies the substructure match constraints associated with the bond.
     # 
     # \valuetype  Chem.MatchConstraintList.SharedPointer
     # 
     MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
-    # \brief Specifies the substructure matching expression associated with the bond.
+    # \brief Specifies the substructure match expression associated with the bond.
     # 
     # \valuetype  Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph>.SharedPointer
     # 
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 
     ##
-    # \brief Specifies a string representation of the substructure matching expression associated with the bond.
+    # \brief Specifies a string representation of the substructure match expression associated with the bond.
     # 
     # \valuetype  <tt>std::string</tt>
     # 

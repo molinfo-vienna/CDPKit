@@ -55,7 +55,7 @@ namespace CDPL
          * \brief Enumerates the resonance structures of a molecular graph by redistributing &pi;-electrons across the
          *        resonance-active bonds.
          *
-         * For each generated resonance structure the per-atom formal charges and per-bond bond-orders are reported as a
+         * For each generated resonance structure the per-atom formal charges and per-bond orders are reported as a
          * Chem::ResonanceStructureGenerator::StructureData record. Optional postprocessing minimizes octet-rule
          * violations, sp-hybridization-geometry violations, and 1,2-charge separations on adjacent carbon atoms.
          */
@@ -82,7 +82,7 @@ namespace CDPL
             typedef boost::indirect_iterator<StructureDataList::const_iterator, const StructureData> ConstStructureDataIterator;
 
             /**
-             * \brief Holds the per-atom formal charges and per-bond bond-orders that define a single resonance structure.
+             * \brief Holds the per-atom formal charges and per-bond orders that define a single resonance structure.
              */
             class CDPL_CHEM_API StructureData
             {
@@ -97,8 +97,8 @@ namespace CDPL
                 const Util::LArray& getAtomCharges() const;
 
                 /**
-                 * \brief Returns the per-bond bond-orders of this resonance structure.
-                 * \return A \c const reference to the per-bond bond-order array.
+                 * \brief Returns the bond orders of this resonance structure.
+                 * \return A \c const reference to the bond order array.
                  */
                 const Util::STArray& getBondOrders() const;
 

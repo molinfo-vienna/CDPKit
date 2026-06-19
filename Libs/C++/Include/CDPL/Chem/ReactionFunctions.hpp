@@ -186,14 +186,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MATCH_CONSTRAINTS property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored top-level match-constraint list.
+         * \return The stored top-level match constraint list.
          */
         CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MATCH_CONSTRAINTS property of the reaction \a rxn to \a constr.
          * \param rxn The reaction for which to set the property value.
-         * \param constr The new match-constraint list to store.
+         * \param constr The new match constraint list to store.
          */
         CDPL_CHEM_API void setMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr);
 
@@ -571,27 +571,27 @@ namespace CDPL
 
 
         /**
-         * \brief Sets the atom-level match-constraint list \a constr on every atom of every component of the reaction \a rxn.
+         * \brief Sets the atom-level match constraint list \a constr on every atom of every component of the reaction \a rxn.
          * \param rxn The reaction to modify.
-         * \param constr The match-constraint list to assign.
+         * \param constr The match constraint list to assign.
          * \param overwrite If \c true, replaces any existing per-atom constraints. If \c false, leaves
          *                  atoms that already carry a list unchanged.
          */
         CDPL_CHEM_API void setAtomMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
 
         /**
-         * \brief Sets the bond-level match-constraint list \a constr on every bond of every component of the reaction \a rxn.
+         * \brief Sets the bond-level match constraint list \a constr on every bond of every component of the reaction \a rxn.
          * \param rxn The reaction to modify.
-         * \param constr The match-constraint list to assign.
+         * \param constr The match constraint list to assign.
          * \param overwrite If \c true, replaces any existing per-bond constraints. If \c false, leaves
          *                  bonds that already carry a list unchanged.
          */
         CDPL_CHEM_API void setBondMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
 
         /**
-         * \brief Sets the molecular graph-level match-constraint list \a constr on every component of the reaction \a rxn.
+         * \brief Sets the molecular graph-level match constraint list \a constr on every component of the reaction \a rxn.
          * \param rxn The reaction to modify.
-         * \param constr The match-constraint list to assign.
+         * \param constr The match constraint list to assign.
          * \param overwrite If \c true, replaces any existing per-component constraints. If \c false, leaves
          *                  components that already carry a list unchanged.
          */

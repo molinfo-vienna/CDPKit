@@ -44,7 +44,7 @@ namespace CDPL
          * \brief Chem::MatchExpression decorator that negates the result of a wrapped Chem::MatchExpression instance.
          *
          * The expression evaluates to the logical negation of its wrapped expression. Useful for expressing
-         * "match-not-X" constraints in substructure searches.
+         * "!X" constraints in substructure searches.
          * \tparam ObjType1 The type of the primary query/target objects for which the expression gets evaluated.
          * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
          *                  expression evaluation.
@@ -110,7 +110,7 @@ namespace CDPL
          * \brief Chem::MatchExpression decorator that negates the result of a wrapped Chem::MatchExpression instance.
          *
          * The expression evaluates to the logical negation of its wrapped expression. Useful for expressing
-         * "match-not-X" constraints in substructure searches.
+         * "!X" constraints in substructure searches.
          * \tparam ObjType The type of the query/target objects for which the expression gets evaluated.
          */
         template <typename ObjType>

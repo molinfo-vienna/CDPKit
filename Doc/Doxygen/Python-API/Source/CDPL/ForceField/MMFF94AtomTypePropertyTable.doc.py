@@ -22,7 +22,7 @@
 ##
 # \brief Data structure for the storage and lookup of structural and chemical property data associated with numeric MMFF94 atom types.
 # 
-# Each entry provides the corresponding atomic number, the standard neighbour count and valence, and flags describing pi lone pair character, aromaticity, linear bond angle geometry, and the ability to form multi bond or single bond patterns.
+# Each entry provides the corresponding atomic number, the standard neighbour count and valence, and flags describing &pi;-lone-pair character, aromaticity, linear bond angle geometry, and the ability to form multi bond or single bond patterns.
 # 
 # \see [\ref MMFF94]
 # 
@@ -51,7 +51,7 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         # \param atomic_no The atomic number of atoms of this type.
         # \param num_nbrs The standard number of explicit neighbour atoms.
         # \param valence The standard valence.
-        # \param has_pi_lp <tt>True</tt> if the atom type carries a pi lone pair.
+        # \param has_pi_lp <tt>True</tt> if the atom type carries a &pi;-lone pair.
         # \param mltb_desig The MMFF94 multi bond designator.
         # \param is_arom <tt>True</tt> if the atom type is aromatic.
         # \param lin_bnd_ang <tt>True</tt> if the atom type forms linear bond angles.
@@ -107,9 +107,9 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         def getValence() -> int: pass
 
         ##
-        # \brief Tells whether the atom type carries a pi lone pair.
+        # \brief Tells whether the atom type carries a &pi;-lone pair.
         # 
-        # \return <tt>True</tt> if the atom type carries a pi lone pair, and <tt>False</tt> otherwise.
+        # \return <tt>True</tt> if the atom type carries a &pi;-lone pair, and <tt>False</tt> otherwise.
         # 
         def hasPiLonePair() -> bool: pass
 
@@ -203,7 +203,7 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     # \param atomic_no The atomic number of atoms of this type.
     # \param num_nbrs The standard number of explicit neighbour atoms.
     # \param valence The standard valence.
-    # \param has_pi_lp <tt>True</tt> if the atom type carries a pi lone pair.
+    # \param has_pi_lp <tt>True</tt> if the atom type carries a &pi;-lone pair.
     # \param mltb_desig The MMFF94 multi bond designator.
     # \param is_arom <tt>True</tt> if the atom type is aromatic.
     # \param lin_bnd_ang <tt>True</tt> if the atom type forms linear bond angles.

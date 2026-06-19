@@ -56,7 +56,7 @@ namespace CDPL
 
         /**
          * \brief Calculator that uses the <em>Partial Equalization of Orbital Electronegativities</em>
-         *        (PEOE) method of Gasteiger and Marsili to compute sigma atomic charges and electronegativities
+         *        (PEOE) method of Gasteiger and Marsili to compute &sigma; atomic charges and electronegativities
          *        of a molecular graph.
          *
          * The calculation iteratively shifts partial charges between bonded atoms until the orbital
@@ -92,7 +92,7 @@ namespace CDPL
             PEOESigmaChargeCalculator(const PEOESigmaChargeCalculator&) = delete;
             
             /**
-             * \brief Constructs the \c %PEOESigmaChargeCalculator instance and calculates the sigma charges and
+             * \brief Constructs the \c %PEOESigmaChargeCalculator instance and calculates the &sigma;-charges and
              *        electronegativities of the atoms in the molecular graph \a molgraph by the \e PEOE method.
              * \param molgraph The molecular graph for which to perform the calculations.
              */
@@ -127,13 +127,13 @@ namespace CDPL
             double getDampingFactor() const;
 
             /**
-             * \brief Calculates the sigma charges and electronegativities of the atoms in the molecular graph \a molgraph by the \e PEOE method.
+             * \brief Calculates the &sigma;-charges and electronegativities of the atoms in the molecular graph \a molgraph by the \e PEOE method.
              * \param molgraph The molecular graph for which to perform the calculations.  
              */
             void calculate(const Chem::MolecularGraph& molgraph);
 
             /**
-             * \brief Returns the calculated sigma charge of the atom with index \a idx.
+             * \brief Returns the calculated &sigma;-charge of the atom with index \a idx.
              * \param idx The index of the atom for which to return the charge.
              * \throw Base::IndexError If \a idx is not in the range <i>[0, NA - 1]</i> where <i>NA</i> is the
              *        number of atoms of the molecular graph for which the calculations have been performed.
@@ -141,7 +141,7 @@ namespace CDPL
             double getCharge(std::size_t idx) const;
 
             /**
-             * \brief Returns the calculated sigma electronegativity of the atom with index \a idx.
+             * \brief Returns the calculated &sigma;-electronegativity of the atom with index \a idx.
              * \param idx The index of the atom for which to return the electronegativity.
              * \throw Base::IndexError If \a idx is not in the range <i>[0, NA - 1]</i> where <i>NA</i> is the
              *        number of atoms of the molecular graph for which the calculations have been performed.

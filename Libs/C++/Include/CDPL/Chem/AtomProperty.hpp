@@ -212,42 +212,42 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
 
             /**
-             * \brief Specifies the atomic partial charge as read from/to write to <em>Sybyl MOL2</em> data.
+             * \brief Specifies the <em>Sybyl MOL2</em> atomic partial charge.
              *
              * \valuetype \c double
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;
 
             /**
-             * \brief Specifies the atom name as read from/to write to <em>Sybyl MOL2</em> data.
+             * \brief Specifies the <em>Sybyl MOL2</em> atom name.
              *
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_NAME;
 
             /**
-             * \brief Specifies the numeric identifier of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
+             * \brief Specifies the <em>Sybyl MOL2</em> numeric substructure identifier associated with the atom.
              *
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_ID;
 
             /**
-             * \brief Specifies the name of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
+             * \brief Specifies the <em>Sybyl MOL2</em> substructure name associated with the atom.
              *
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_NAME;
 
             /**
-             * \brief Specifies the subtype of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
+             * \brief Specifies the <em>Sybyl MOL2</em> substructure subtype associated with the atom.
              *
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_SUBTYPE;
 
             /**
-             * \brief Specifies the chain identifier of the substructure the atom belongs to as read from/to write to <em>Sybyl MOL2</em> data.
+             * \brief Specifies the <em>Sybyl MOL2</em> chain identifier associated with the atom.
              *
              * \valuetype \c std::string
              */
@@ -268,21 +268,21 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING_ID;
 
             /**
-             * \brief Specifies the substructure matching constraints associated with the atom.
+             * \brief Specifies the substructure match constraints associated with the atom.
              *
              * \valuetype Chem::MatchConstraintList::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
 
             /**
-             * \brief Specifies the substructure matching expression associated with the atom.
+             * \brief Specifies the substructure match expression associated with the atom.
              *
              * \valuetype Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph>::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
 
             /**
-             * \brief Specifies a string representation of the substructure matching expression associated with the atom.
+             * \brief Specifies a string representation of the substructure match expression associated with the atom.
              *
              * \valuetype \c std::string
              */

@@ -259,7 +259,7 @@ namespace CDPL
         CDPL_MOLPROP_API double calcMeanPolarizability(const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Calculates PEOE sigma charges and electronegativities for the atoms of the molecular graph \a molgraph and stores them as atom properties.
+         * \brief Calculates PEOE &sigma;-charges and electronegativities for the atoms of the molecular graph \a molgraph and stores them as atom properties.
          * \param molgraph The molecular graph (modified in place).
          * \param overwrite If \c true, existing atom properties are overwritten.
          * \param num_iter The number of charge-shifting iterations.
@@ -269,7 +269,7 @@ namespace CDPL
                                                  double damping = 0.48);
 
         /**
-         * \brief Calculates MHMO pi charges and pi bond orders for the molecular graph \a molgraph and stores them as atom/bond properties.
+         * \brief Calculates MHMO &pi;-charges and &pi;-bond orders for the molecular graph \a molgraph and stores them as atom/bond properties.
          * \param molgraph The molecular graph (modified in place).
          * \param overwrite If \c true, existing atom/bond properties are overwritten.
          */

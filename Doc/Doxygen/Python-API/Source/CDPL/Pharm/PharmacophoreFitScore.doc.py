@@ -75,51 +75,51 @@ class PharmacophoreFitScore(Boost.Python.instance):
     def assign(score: PharmacophoreFitScore) -> PharmacophoreFitScore: pass
 
     ##
-    # \brief Returns the currently configured weight of the matched-feature-count contribution.
+    # \brief Returns the currently configured weight of the matched feature count contribution.
     # 
-    # \return The match-count weight.
+    # \return The feature match count weight.
     # 
     def getFeatureMatchCountWeight() -> float: pass
 
     ##
-    # \brief Sets the weight of the matched-feature-count contribution.
+    # \brief Sets the weight of the matched feature count contribution.
     # 
-    # \param weight The new match-count weight.
+    # \param weight The new feature match count weight.
     # 
     def setFeatureMatchCountWeight(weight: float) -> None: pass
 
     ##
-    # \brief Returns the currently configured weight of the feature-position-deviation contribution.
+    # \brief Returns the currently configured weight of the feature position deviation contribution.
     # 
-    # \return The position-match weight.
+    # \return The position match weight.
     # 
     def getFeaturePositionMatchWeight() -> float: pass
 
     ##
-    # \brief Sets the weight of the feature-position-deviation contribution.
+    # \brief Sets the weight of the feature position deviation contribution.
     # 
-    # \param weight The new position-match weight.
+    # \param weight The new position match weight.
     # 
     def setFeaturePositionMatchWeight(weight: float) -> None: pass
 
     ##
-    # \brief Returns the currently configured weight of the feature-geometry-match contribution.
+    # \brief Returns the currently configured weight of the feature geometry match contribution.
     # 
-    # \return The geometry-match weight.
+    # \return The geometry match weight.
     # 
     def getFeatureGeometryMatchWeight() -> float: pass
 
     ##
-    # \brief Sets the weight of the feature-geometry-match contribution.
+    # \brief Sets the weight of the feature geometry match contribution.
     # 
-    # \param weight The new geometry-match weight.
+    # \param weight The new geometry match weight.
     # 
     def setFeatureGeometryMatchWeight(weight: float) -> None: pass
 
     ##
     # \brief Tells whether reference features are grouped before scoring.
     # 
-    # \return <tt>True</tt> if reference-feature grouping is enabled, and <tt>False</tt> otherwise. 
+    # \return <tt>True</tt> if reference feature grouping is enabled, and <tt>False</tt> otherwise. 
     # 
     # \since 1.2
     # 
@@ -128,14 +128,14 @@ class PharmacophoreFitScore(Boost.Python.instance):
     ##
     # \brief Specifies whether reference features should be grouped before scoring (groups share a common mandatory/optional status and contribute jointly to the score).
     # 
-    # \param group <tt>True</tt> to enable reference-feature grouping, and <tt>False</tt> to score every feature individually.
+    # \param group <tt>True</tt> to enable reference feature grouping, and <tt>False</tt> to score every feature individually.
     # 
     # \since 1.2
     # 
     def groupReferenceFeatures(group: bool) -> None: pass
 
     ##
-    # \brief Computes the fit score of <em>algnd_ftrs</em> against <em>ref_ftrs</em> after applying the rigid-body transformation <em>xform</em>.
+    # \brief Computes the fit score of <em>algnd_ftrs</em> against <em>ref_ftrs</em> after applying the rigid body transformation <em>xform</em>.
     # 
     # \param ref_ftrs The reference pharmacophore features.
     # \param algnd_ftrs The aligned candidate features.

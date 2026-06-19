@@ -27,7 +27,7 @@
 class PatternBasedTautomerizationRule(TautomerizationRule):
 
     ##
-    # \brief Encodes a single bond-order change between two pattern atoms applied when the parent transformation pattern matches.
+    # \brief Encodes a single bond order change between two pattern atoms applied when the parent transformation pattern matches.
     # 
     class BondOrderChange(Boost.Python.instance):
 

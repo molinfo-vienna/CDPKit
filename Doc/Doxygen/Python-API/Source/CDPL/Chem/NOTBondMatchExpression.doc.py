@@ -22,7 +22,7 @@
 ##
 # \brief Chem.MatchExpression decorator that negates the result of a wrapped Chem.MatchExpression instance.
 # 
-# The expression evaluates to the logical negation of its wrapped expression. Useful for expressing "match-not-X" constraints in substructure searches.
+# The expression evaluates to the logical negation of its wrapped expression. Useful for expressing "!X" constraints in substructure searches.
 # 
 class NOTBondMatchExpression(BondMatchExpression):
 

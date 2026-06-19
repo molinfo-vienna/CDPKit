@@ -51,7 +51,7 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies a textual name (or title) of the molecular graph.
+             * \brief Specifies the name (or title) of the molecular graph.
              *
              * \valuetype \c std::string
              */
@@ -65,7 +65,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey COMMENT;
 
             /**
-             * \brief Specifies the timestamp at which the molecular graph was created/last modified.
+             * \brief Specifies a creation/modification timestamp associated with the molecular graph.
              *
              * \valuetype \c std::time_t
              */
@@ -79,7 +79,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey COMPONENTS;
 
             /**
-             * \brief Specifies the perceived rings of the molecular graph.
+             * \brief Specifies the complete set of rings of the molecular graph.
              *
              * \valuetype Chem::FragmentList::SharedPointer
              */
@@ -100,7 +100,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CYCLIC_SUBSTRUCTURE;
 
             /**
-             * \brief Specifies the perceived aromatic substructure of the molecular graph.
+             * \brief Specifies the union of all aromatic rings (the aromatic substructure) of the molecular graph.
              *
              * \valuetype Chem::Fragment::SharedPointer
              */
@@ -114,14 +114,14 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey PI_ELECTRON_SYSTEMS;
 
             /**
-             * \brief Specifies the substructure search match constraints attached to the molecular graph.
+             * \brief Specifies the substructure match constraints associated with the molecular graph.
              *
              * \valuetype Chem::MatchConstraintList::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
 
             /**
-             * \brief Specifies a cached substructure search match expression compiled from MATCH_CONSTRAINTS.
+             * \brief Specifies the substructure match expression associated with the molecular graph.
              *
              * \valuetype Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer
              */
@@ -135,7 +135,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;
 
             /**
-             * \brief Specifies the topological (bond-count) all-pair distance matrix.
+             * \brief Specifies the topological (bond count) all-pair distance matrix.
              *
              * \valuetype Math::ULMatrix::SharedPointer
              */
@@ -156,28 +156,28 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey STOICHIOMETRIC_NUMBER;
 
             /**
-             * \brief Specifies the index of the active conformation (within the per-atom 3D-coordinates arrays).
+             * \brief Specifies the index of the active conformation (within the per-atom 3D coordinates arrays).
              *
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey CONFORMATION_INDEX;
 
             /**
-             * \brief Specifies the per-conformation energy values.
+             * \brief Specifies the conformer energy values.
              *
              * \valuetype Util::DArray::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey CONFORMER_ENERGIES;
 
             /**
-             * \brief Specifies structured data tags attached to the molecular graph (e.g. MDL SD-file data fields).
+             * \brief Specifies structured data tags attached to the molecular graph (e.g. \e MDL SD-file data fields).
              *
              * \valuetype Chem::StringDataBlock::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey STRUCTURE_DATA;
 
             /**
-             * \brief Specifies a 64-bit topological hash code identifying the molecular graph.
+             * \brief Specifies the 64-bit topological hash code of the molecular graph.
              *
              * \valuetype \c std::uint64_t
              */

@@ -1,8 +1,5 @@
 /* 
  * MHMOPiChargeCalculator.hpp 
- * 
- * Modified Hueckel Molecular Orbital calculation of various pi electron system properties
- * (according to T. Kleinöder, PhD Thesis, FAU Erlangen-Nuremberg, 2005) 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -61,11 +58,11 @@ namespace CDPL
         
         /**
          * \brief Calculator that uses a Modified Hückel Molecular Orbital (MHMO) treatment to compute
-         *        pi-electron densities, pi-charges, pi-bond orders and the total pi-electron energy of a
+         *        &pi;-electron densities, &pi;-charges, &pi;-bond orders and the total &pi;-electron energy of a
          *        molecular graph.
          *
-         * The calculator can either perceive the pi-electron systems of the molecular graph itself
-         * (via Chem::ElectronSystemList) or accept a pre-computed list of pi-systems. The MHMO
+         * The calculator can either perceive the &pi;-electron systems of the molecular graph itself
+         * (via Chem::ElectronSystemList) or accept a pre-computed list of &pi;-systems. The MHMO
          * parameter set follows the parameterization described in the PhD thesis of Thomas Kleinöder (Computer Chemistry Center, Univ. Erlangen-Nuremberg, 2005).
          *
          * \see [\ref MHMO]
@@ -87,7 +84,7 @@ namespace CDPL
             /**
              * \brief Constructs the \c %MHMOPiChargeCalculator instance and performs the MHMO calculation for \a molgraph.
              *
-             * The pi-electron systems are perceived from \a molgraph.
+             * The &pi;-electron systems are perceived from \a molgraph.
              *
              * \param molgraph The molecular graph for which to perform the MHMO calculation.
              */
@@ -95,8 +92,8 @@ namespace CDPL
 
             /**
              * \brief Constructs the \c %MHMOPiChargeCalculator instance and performs the MHMO calculation for the given
-             *        pi-electron systems of \a molgraph.
-             * \param pi_sys_list The list of pi-electron systems.
+             *        &pi;-electron systems of \a molgraph.
+             * \param pi_sys_list The list of &pi;-electron systems.
              * \param molgraph The molecular graph.
              */
             MHMOPiChargeCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
@@ -112,56 +109,56 @@ namespace CDPL
 
             /**
              * \brief Specifies whether the calculation shall use localized pi-bonds.
-             * \param localized If \c true, conjugated pi-systems are treated as a set of localized pi-bonds.
+             * \param localized If \c true, conjugated &pi;-systems are treated as a set of localized pi-bonds.
              */
             void localizedPiBonds(bool localized);
 
             /**
-             * \brief Tells whether the calculation uses localized pi-bonds.
-             * \return \c true if the calculation uses localized pi-bonds, and \c false otherwise.
+             * \brief Tells whether the calculation uses localized &pi;-bonds.
+             * \return \c true if the calculation uses localized &pi;-bonds, and \c false otherwise.
              */
             bool localizedPiBonds() const;
 
             /**
-             * \brief Performs the MHMO calculation for \a molgraph, perceiving the pi-electron systems on the fly.
+             * \brief Performs the MHMO calculation for \a molgraph, perceiving the &pi;-electron systems on the fly.
              * \param molgraph The molecular graph for which to perform the MHMO calculation.
              */
             void calculate(const Chem::MolecularGraph& molgraph);
 
             /**
-             * \brief Performs the MHMO calculation for the given pi-electron systems of \a molgraph.
-             * \param pi_sys_list The list of pi-electron systems.
+             * \brief Performs the MHMO calculation for the given &pi;-electron systems of \a molgraph.
+             * \param pi_sys_list The list of &pi;-electron systems.
              * \param molgraph The molecular graph.
              */
             void calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
             /**
-             * \brief Returns the calculated pi-electron density of the atom at index \a atom_idx.
+             * \brief Returns the calculated &pi;-electron density of the atom at index \a atom_idx.
              * \param atom_idx The zero-based atom index.
-             * \return The calculated pi-electron density.
+             * \return The calculated &pi;-electron density.
              * \throw Base::IndexError if \a atom_idx is out of bounds.
              */
             double getElectronDensity(std::size_t atom_idx) const;
 
             /**
-             * \brief Returns the calculated pi-charge of the atom at index \a atom_idx.
+             * \brief Returns the calculated &pi;-charge of the atom at index \a atom_idx.
              * \param atom_idx The zero-based atom index.
-             * \return The calculated pi-charge.
+             * \return The calculated &pi;-charge.
              * \throw Base::IndexError if \a atom_idx is out of bounds.
              */
             double getCharge(std::size_t atom_idx) const;
 
             /**
-             * \brief Returns the calculated pi-bond order of the bond at index \a bond_idx.
+             * \brief Returns the calculated &pi;-bond order of the bond at index \a bond_idx.
              * \param bond_idx The zero-based bond index.
-             * \return The calculated pi-bond order.
+             * \return The calculated &pi;-bond order.
              * \throw Base::IndexError if \a bond_idx is out of bounds.
              */
             double getBondOrder(std::size_t bond_idx) const;
 
             /**
-             * \brief Returns the total pi-electron energy of the molecular graph from the last calculation.
-             * \return The total pi-electron energy.
+             * \brief Returns the total &pi;-electron energy of the molecular graph from the last calculation.
+             * \return The total &pi;-electron energy.
              */
             double getEnergy() const;
 

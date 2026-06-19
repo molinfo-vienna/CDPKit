@@ -45,7 +45,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Implements the perception of all pi electron systems present in a molecule.
+         * \brief Implements the perception of all &pi;-electron systems present in a molecule.
          */
         class CDPL_CHEM_API PiElectronSystemList : public ElectronSystemList
         {
@@ -62,14 +62,14 @@ namespace CDPL
             PiElectronSystemList();
 
             /**
-             * \brief Constructs a \c %PiElectronSystemList instance storing all pi electron systems of the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to perceive the pi electron systems.
+             * \brief Constructs a \c %PiElectronSystemList instance storing all &pi;-electron systems of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the &pi;-electron systems.
              */
             PiElectronSystemList(const MolecularGraph& molgraph);
 
             /**
-             * \brief Perceives all pi electron systems present in the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to perceive the pi electron systems.
+             * \brief Perceives all &pi;-electron systems present in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the &pi;-electron systems.
              */
             void perceive(const MolecularGraph& molgraph);
 

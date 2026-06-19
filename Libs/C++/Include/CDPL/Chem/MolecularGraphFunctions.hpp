@@ -146,14 +146,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MATCH_CONSTRAINTS property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored top-level match-constraint list.
+         * \return The stored top-level match constraint list.
          */
         CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MATCH_CONSTRAINTS property of the molecular graph \a molgraph to \a constr.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param constr The new top-level match-constraint list.
+         * \param constr The new top-level match constraint list.
          */
         CDPL_CHEM_API void setMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr);
 
@@ -199,7 +199,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpression(const MolecularGraph& molgraph);
 
         /**
-         * \brief Builds a top-level match expression from the match-constraint list attached to \a molgraph.
+         * \brief Builds a top-level match expression from the match constraint list attached to \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The generated match expression.
          */
@@ -954,9 +954,9 @@ namespace CDPL
         CDPL_CHEM_API void generateIncidenceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
         /**
-         * \brief Builds the bond-order matrix of the molecular graph \a molgraph (entry \c (i,j) is the order of the bond between atoms \c i and \c j).
+         * \brief Builds the bond order matrix of the molecular graph \a molgraph (entry \c (i,j) is the order of the bond between atoms \c i and \c j).
          * \param molgraph The molecular graph to inspect.
-         * \param mtx The output sparse matrix receiving the bond-order entries.
+         * \param mtx The output sparse matrix receiving the bond order entries.
          */
         CDPL_CHEM_API void generateBondMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
@@ -1425,18 +1425,18 @@ namespace CDPL
         CDPL_CHEM_API void calcBondCIPConfigurations(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Sets the atom-level match-constraint list \a constr on every atom of the molecular graph \a molgraph.
+         * \brief Sets the atom-level match constraint list \a constr on every atom of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
-         * \param constr The match-constraint list to assign.
+         * \param constr The match constraint list to assign.
          * \param overwrite If \c true, replaces any existing per-atom constraints. If \c false, leaves atoms that already carry a list unchanged.
          */
         CDPL_CHEM_API void setAtomMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr,
                                                    bool overwrite);
 
         /**
-         * \brief Sets the bond-level match-constraint list \a constr on every bond of the molecular graph \a molgraph.
+         * \brief Sets the bond-level match constraint list \a constr on every bond of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
-         * \param constr The match-constraint list to assign.
+         * \param constr The match constraint list to assign.
          * \param overwrite If \c true, replaces any existing per-bond constraints. If \c false, leaves bonds that already carry a list unchanged.
          */
         CDPL_CHEM_API void setBondMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr,
@@ -1452,7 +1452,7 @@ namespace CDPL
         /**
          * \brief Generates and stores textual representations of the match expressions of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, replaces any existing match-expression strings.
+         * \param overwrite If \c true, replaces any existing match expression strings.
          */
         CDPL_CHEM_API void generateMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite);
 

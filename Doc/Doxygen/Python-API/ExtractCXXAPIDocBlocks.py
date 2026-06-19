@@ -185,6 +185,8 @@ def getTextRecursive(parent_node):
             rc.append('&ge;')
         elif node.nodeName == 'pi':
             rc.append('&pi;')
+        elif node.nodeName == 'sigma':
+            rc.append('&sigma;')
         elif node.nodeName == 'deg':
             rc.append('&deg;')
         elif node.nodeName == 'infin':

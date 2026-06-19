@@ -22,12 +22,12 @@
 ##
 # \brief Enumerates the resonance structures of a molecular graph by redistributing &pi;-electrons across the resonance-active bonds.
 # 
-# For each generated resonance structure the per-atom formal charges and per-bond bond-orders are reported as a Chem.ResonanceStructureGenerator.StructureData record. Optional postprocessing minimizes octet-rule violations, sp-hybridization-geometry violations, and 1,2-charge separations on adjacent carbon atoms.
+# For each generated resonance structure the per-atom formal charges and per-bond orders are reported as a Chem.ResonanceStructureGenerator.StructureData record. Optional postprocessing minimizes octet-rule violations, sp-hybridization-geometry violations, and 1,2-charge separations on adjacent carbon atoms.
 # 
 class ResonanceStructureGenerator(Boost.Python.instance):
 
     ##
-    # \brief Holds the per-atom formal charges and per-bond bond-orders that define a single resonance structure.
+    # \brief Holds the per-atom formal charges and per-bond orders that define a single resonance structure.
     # 
     class StructureData(Boost.Python.instance):
 
@@ -64,9 +64,9 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         def getAtomCharges() -> Util.LArray: pass
 
         ##
-        # \brief Returns the per-bond bond-orders of this resonance structure.
+        # \brief Returns the bond orders of this resonance structure.
         # 
-        # \return A reference to the per-bond bond-order array.
+        # \return A reference to the bond order array.
         # 
         def getBondOrders() -> Util.STArray: pass
 

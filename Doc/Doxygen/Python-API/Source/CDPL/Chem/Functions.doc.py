@@ -389,19 +389,19 @@ def getAtomMapping(rxn: Reaction) -> AtomMapping: pass
 def clearAtomMapping(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the atom-level match-constraint list <em>constr</em> on every atom of the molecular graph <em>molgraph</em>.
+# \brief Sets the atom-level match constraint list <em>constr</em> on every atom of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
-# \param constr The match-constraint list to assign.
+# \param constr The match constraint list to assign.
 # \param overwrite If <tt>True</tt>, replaces any existing per-atom constraints. If <tt>False</tt>, leaves atoms that already carry a list unchanged.
 # 
 def setAtomMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the atom-level match-constraint list <em>constr</em> on every atom of every component of the reaction <em>rxn</em>.
+# \brief Sets the atom-level match constraint list <em>constr</em> on every atom of every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
-# \param constr The match-constraint list to assign.
+# \param constr The match constraint list to assign.
 # \param overwrite If <tt>True</tt>, replaces any existing per-atom constraints. If <tt>False</tt>, leaves atoms that already carry a list unchanged.
 # 
 def setAtomMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
@@ -423,19 +423,19 @@ def setAtomSymbolsFromTypes(molgraph: MolecularGraph, overwrite: bool) -> None: 
 def setAtomTypesFromSymbols(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the bond-level match-constraint list <em>constr</em> on every bond of the molecular graph <em>molgraph</em>.
+# \brief Sets the bond-level match constraint list <em>constr</em> on every bond of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
-# \param constr The match-constraint list to assign.
+# \param constr The match constraint list to assign.
 # \param overwrite If <tt>True</tt>, replaces any existing per-bond constraints. If <tt>False</tt>, leaves bonds that already carry a list unchanged.
 # 
 def setBondMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList, overwrite: bool) -> None: pass
 
 ##
-# \brief Sets the bond-level match-constraint list <em>constr</em> on every bond of every component of the reaction <em>rxn</em>.
+# \brief Sets the bond-level match constraint list <em>constr</em> on every bond of every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
-# \param constr The match-constraint list to assign.
+# \param constr The match constraint list to assign.
 # \param overwrite If <tt>True</tt>, replaces any existing per-bond constraints. If <tt>False</tt>, leaves bonds that already carry a list unchanged.
 # 
 def setBondMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
@@ -747,10 +747,10 @@ def getComponentGroups(rxn: Reaction) -> FragmentList: pass
 def clearComponentGroups(rxn: Reaction) -> None: pass
 
 ##
-# \brief Sets the molecular graph-level match-constraint list <em>constr</em> on every component of the reaction <em>rxn</em>.
+# \brief Sets the molecular graph-level match constraint list <em>constr</em> on every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
-# \param constr The match-constraint list to assign.
+# \param constr The match constraint list to assign.
 # \param overwrite If <tt>True</tt>, replaces any existing per-component constraints. If <tt>False</tt>, leaves components that already carry a list unchanged.
 # 
 def setComponentMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrite: bool) -> None: pass
@@ -2129,7 +2129,7 @@ def clearMOL2SubstructureSubtype(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.MATCH_CONSTRAINTS property of the atom <em>atom</em> to <em>constr</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param constr The new match-constraint list.
+# \param constr The new match constraint list.
 # 
 def setMatchConstraints(atom: Atom, constr: MatchConstraintList) -> None: pass
 
@@ -2147,7 +2147,7 @@ def hasMatchConstraints(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored match-constraint list.
+# \return The stored match constraint list.
 # 
 def getMatchConstraints(atom: Atom) -> MatchConstraintList: pass
 
@@ -2162,7 +2162,7 @@ def clearMatchConstraints(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.BondProperty.MATCH_CONSTRAINTS property of the bond <em>bond</em> to <em>constr</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param constr The new match-constraint list.
+# \param constr The new match constraint list.
 # 
 def setMatchConstraints(bond: Bond, constr: MatchConstraintList) -> None: pass
 
@@ -2180,7 +2180,7 @@ def hasMatchConstraints(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored match-constraint list.
+# \return The stored match constraint list.
 # 
 def getMatchConstraints(bond: Bond) -> MatchConstraintList: pass
 
@@ -2195,7 +2195,7 @@ def clearMatchConstraints(bond: Bond) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MATCH_CONSTRAINTS property of the molecular graph <em>molgraph</em> to <em>constr</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param constr The new top-level match-constraint list.
+# \param constr The new top-level match constraint list.
 # 
 def setMatchConstraints(molgraph: MolecularGraph, constr: MatchConstraintList) -> None: pass
 
@@ -2213,7 +2213,7 @@ def hasMatchConstraints(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored top-level match-constraint list.
+# \return The stored top-level match constraint list.
 # 
 def getMatchConstraints(molgraph: MolecularGraph) -> MatchConstraintList: pass
 
@@ -2228,7 +2228,7 @@ def clearMatchConstraints(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MATCH_CONSTRAINTS property of the reaction <em>rxn</em> to <em>constr</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param constr The new match-constraint list to store.
+# \param constr The new match constraint list to store.
 # 
 def setMatchConstraints(rxn: Reaction, constr: MatchConstraintList) -> None: pass
 
@@ -2246,7 +2246,7 @@ def hasMatchConstraints(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored top-level match-constraint list.
+# \return The stored top-level match constraint list.
 # 
 def getMatchConstraints(rxn: Reaction) -> MatchConstraintList: pass
 
@@ -2393,7 +2393,7 @@ def clearMatchExpression(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.MATCH_EXPRESSION_STRING property of the atom <em>atom</em> to <em>expr_str</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param expr_str The new match-expression string.
+# \param expr_str The new match expression string.
 # 
 def setMatchExpressionString(atom: Atom, expr_str: str) -> None: pass
 
@@ -2411,7 +2411,7 @@ def hasMatchExpressionString(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored match-expression string.
+# \return The stored match expression string.
 # 
 def getMatchExpressionString(atom: Atom) -> str: pass
 
@@ -2426,7 +2426,7 @@ def clearMatchExpressionString(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.BondProperty.MATCH_EXPRESSION_STRING property of the bond <em>bond</em> to <em>expr_str</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param expr_str The new match-expression string.
+# \param expr_str The new match expression string.
 # 
 def setMatchExpressionString(bond: Bond, expr_str: str) -> None: pass
 
@@ -2444,7 +2444,7 @@ def hasMatchExpressionString(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored match-expression string.
+# \return The stored match expression string.
 # 
 def getMatchExpressionString(bond: Bond) -> str: pass
 
@@ -4299,10 +4299,10 @@ def generateBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatri
 def generateBondElectronMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
-# \brief Builds the bond-order matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is the order of the bond between atoms <tt>i</tt> and <tt>j</tt>).
+# \brief Builds the bond order matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is the order of the bond between atoms <tt>i</tt> and <tt>j</tt>).
 # 
 # \param molgraph The molecular graph to inspect.
-# \param mtx The output sparse matrix receiving the bond-order entries.
+# \param mtx The output sparse matrix receiving the bond order entries.
 # 
 def generateBondMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
@@ -4331,7 +4331,7 @@ def generateINCHI(molgraph: MolecularGraph, options: str = '/WarnOnEmptyStructur
 def generateIncidenceMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
-# \brief Builds an atom-level match expression from the match-constraint list attached to the atom <em>atom</em>.
+# \brief Builds an atom-level match expression from the match constraint list attached to the atom <em>atom</em>.
 # 
 # \param atom The atom for which to generate the expression.
 # \param molgraph The molecular graph providing the structural context.
@@ -4341,7 +4341,7 @@ def generateIncidenceMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) 
 def generateMatchExpression(atom: Atom, molgraph: MolecularGraph) -> AtomMatchExpression: pass
 
 ##
-# \brief Builds a bond-level match expression from the match-constraint list attached to the bond <em>bond</em>.
+# \brief Builds a bond-level match expression from the match constraint list attached to the bond <em>bond</em>.
 # 
 # \param bond The bond to inspect.
 # \param molgraph The molecular graph providing the structural context.
@@ -4351,7 +4351,7 @@ def generateMatchExpression(atom: Atom, molgraph: MolecularGraph) -> AtomMatchEx
 def generateMatchExpression(bond: Bond, molgraph: MolecularGraph) -> BondMatchExpression: pass
 
 ##
-# \brief Builds a top-level match expression from the match-constraint list attached to <em>molgraph</em>.
+# \brief Builds a top-level match expression from the match constraint list attached to <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4408,7 +4408,7 @@ def generateMatchExpressionString(bond: Bond, molgraph: MolecularGraph) -> str: 
 # \brief Generates and stores textual representations of the match expressions of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
-# \param overwrite If <tt>True</tt>, replaces any existing match-expression strings.
+# \param overwrite If <tt>True</tt>, replaces any existing match expression strings.
 # 
 def generateMatchExpressionStrings(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 

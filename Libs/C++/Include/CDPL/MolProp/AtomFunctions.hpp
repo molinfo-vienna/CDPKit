@@ -80,14 +80,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the MolProp::AtomProperty::PEOE_SIGMA_CHARGE property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The PEOE sigma charge value.
+         * \return The PEOE &sigma;-charge value.
          */
         CDPL_MOLPROP_API double getPEOESigmaCharge(const Chem::Atom& atom);
 
         /**
          * \brief Sets the value of the MolProp::AtomProperty::PEOE_SIGMA_CHARGE property of the atom \a atom to \a charge.
          * \param atom The atom for which to set the property value.
-         * \param charge The new PEOE sigma charge value.
+         * \param charge The new PEOE &sigma;-charge value.
          */
         CDPL_MOLPROP_API void setPEOESigmaCharge(Chem::Atom& atom, double charge);
 
@@ -100,7 +100,7 @@ namespace CDPL
         /**
          * \brief Tells whether the MolProp::AtomProperty::PEOE_SIGMA_CHARGE property of the atom \a atom is set.
          * \param atom The atom for which to query the property value.
-         * \return \c true if the PEOE sigma charge property is set, and \c false otherwise.
+         * \return \c true if the PEOE &sigma;-charge property is set, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool hasPEOESigmaCharge(const Chem::Atom& atom);
 
@@ -108,14 +108,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the MolProp::AtomProperty::PEOE_SIGMA_ELECTRONEGATIVITY property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The PEOE sigma electronegativity value.
+         * \return The PEOE &sigma;-electronegativity value.
          */
         CDPL_MOLPROP_API double getPEOESigmaElectronegativity(const Chem::Atom& atom);
 
         /**
          * \brief Sets the value of the MolProp::AtomProperty::PEOE_SIGMA_ELECTRONEGATIVITY property of the atom \a atom to \a e_neg.
          * \param atom The atom for which to set the property value.
-         * \param e_neg The new PEOE sigma electronegativity value.
+         * \param e_neg The new PEOE &sigma;-electronegativity value.
          */
         CDPL_MOLPROP_API void setPEOESigmaElectronegativity(Chem::Atom& atom, double e_neg);
 
@@ -128,7 +128,7 @@ namespace CDPL
         /**
          * \brief Tells whether the MolProp::AtomProperty::PEOE_SIGMA_ELECTRONEGATIVITY property of the atom \a atom is set.
          * \param atom The atom for which to query the property value.
-         * \return \c true if the PEOE sigma electronegativity property is set, and \c false otherwise.
+         * \return \c true if the PEOE &sigma;-electronegativity property is set, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool hasPEOESigmaElectronegativity(const Chem::Atom& atom);
 
@@ -136,14 +136,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the MolProp::AtomProperty::MHMO_PI_CHARGE property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The MHMO pi charge value.
+         * \return The MHMO &pi;-charge value.
          */
         CDPL_MOLPROP_API double getMHMOPiCharge(const Chem::Atom& atom);
 
         /**
          * \brief Sets the value of the MolProp::AtomProperty::MHMO_PI_CHARGE property of the atom \a atom to \a charge.
          * \param atom The atom for which to set the property value.
-         * \param charge The new MHMO pi charge value.
+         * \param charge The new MHMO &pi;-charge value.
          */
         CDPL_MOLPROP_API void setMHMOPiCharge(Chem::Atom& atom, double charge);
 
@@ -156,7 +156,7 @@ namespace CDPL
         /**
          * \brief Tells whether the MolProp::AtomProperty::MHMO_PI_CHARGE property of the atom \a atom is set.
          * \param atom The atom for which to query the property value.
-         * \return \c true if the MHMO pi charge property is set, and \c false otherwise.
+         * \return \c true if the MHMO &pi;-charge property is set, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool hasMHMOPiCharge(const Chem::Atom& atom);
 
@@ -733,7 +733,7 @@ namespace CDPL
         /**
          * \brief Calculates the total partial charge of the atom \a atom.
          *
-         * The total partial charge is calculated as the sum of stored PEOE sigma and MHMO pi charge contributions.
+         * The total partial charge is calculated as the sum of stored PEOE &sigma;- and MHMO &pi;-charge contributions.
          *
          * \param atom The atom.
          * \return The total partial charge.
@@ -749,10 +749,10 @@ namespace CDPL
         CDPL_MOLPROP_API double calcLonePairElectronegativity(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Calculates the pi electronegativity of the atom \a atom in the molecular graph \a molgraph.
+         * \brief Calculates the &pi;-electronegativity of the atom \a atom in the molecular graph \a molgraph.
          * \param atom The atom.
          * \param molgraph The molecular graph.
-         * \return The pi electronegativity.
+         * \return The &pi;-electronegativity.
          */
         CDPL_MOLPROP_API double calcPiElectronegativity(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 

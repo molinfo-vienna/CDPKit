@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implements the perception of all pi electron systems present in a molecule.
+# \brief Implements the perception of all &pi;-electron systems present in a molecule.
 # 
 class PiElectronSystemList(ElectronSystemList):
 
@@ -30,15 +30,15 @@ class PiElectronSystemList(ElectronSystemList):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs a <tt>PiElectronSystemList</tt> instance storing all pi electron systems of the molecular graph <em>molgraph</em>.
+    # \brief Constructs a <tt>PiElectronSystemList</tt> instance storing all &pi;-electron systems of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to perceive the pi electron systems.
+    # \param molgraph The molecular graph for which to perceive the &pi;-electron systems.
     # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Perceives all pi electron systems present in the molecular graph <em>molgraph</em>.
+    # \brief Perceives all &pi;-electron systems present in the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to perceive the pi electron systems.
+    # \param molgraph The molecular graph for which to perceive the &pi;-electron systems.
     # 
     def perceive(molgraph: MolecularGraph) -> None: pass

@@ -58,21 +58,21 @@ namespace CDPL
             extern CDPL_MOLPROP_API const Base::LookupKey HYDROPHOBICITY;
 
             /**
-             * \brief Specifies the calculated PEOE sigma charge of the atom.
+             * \brief Specifies the calculated PEOE &sigma;-charge of the atom.
              *
              * \valuetype \c double
              */
             extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_CHARGE;
 
             /**
-             * \brief Specifies the calculated PEOE sigma electronegativity of the atom.
+             * \brief Specifies the calculated PEOE &sigma;-electronegativity of the atom.
              *
              * \valuetype \c double
              */
             extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_ELECTRONEGATIVITY;
 
             /**
-             * \brief Specifies the calculated MHMO pi charge of the atom.
+             * \brief Specifies the calculated MHMO &pi;-charge of the atom.
              *
              * \valuetype \c double
              */

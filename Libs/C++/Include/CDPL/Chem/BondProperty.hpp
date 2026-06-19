@@ -58,7 +58,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey ORDER;
 
             /**
-             * \brief Specifies whether the bond is a member of any ring.
+             * \brief Specifies whether the bond is a member of a ring system.
              *
              * \valuetype \c bool
              */
@@ -86,7 +86,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
 
             /**
-             * \brief Specifies the CIP stereochemical configuration label of the bond (see namespace Chem::CIPDescriptor).
+             * \brief Specifies the \e CIP stereochemical configuration label of the bond (see namespace Chem::CIPDescriptor).
              *
              * \valuetype <tt>unsigned int</tt>
              */
@@ -107,7 +107,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey STEREO_2D_FLAG;
 
             /**
-             * \brief Specifies the SYBYL bond type (see namespace Chem::SybylBondType).
+             * \brief Specifies the <em>Sybyl MOL2</em> bond type (see namespace Chem::SybylBondType).
              *
              * \valuetype <tt>unsigned int</tt>
              */
@@ -121,21 +121,21 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
 
             /**
-             * \brief Specifies the substructure matching constraints associated with the bond.
+             * \brief Specifies the substructure match constraints associated with the bond.
              *
              * \valuetype Chem::MatchConstraintList::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
 
             /**
-             * \brief Specifies the substructure matching expression associated with the bond.
+             * \brief Specifies the substructure match expression associated with the bond.
              *
              * \valuetype Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph>::SharedPointer
              */
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
 
             /**
-             * \brief Specifies a string representation of the substructure matching expression associated with the bond.
+             * \brief Specifies a string representation of the substructure match expression associated with the bond.
              *
              * \valuetype \c std::string
              */

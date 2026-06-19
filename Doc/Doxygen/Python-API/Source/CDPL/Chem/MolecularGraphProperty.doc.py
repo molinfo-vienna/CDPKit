@@ -25,7 +25,7 @@
 class MolecularGraphProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies a textual name (or title) of the molecular graph.
+    # \brief Specifies the name (or title) of the molecular graph.
     # 
     # \valuetype  <tt>std::string</tt>
     # 
@@ -39,7 +39,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     COMMENT = CDPL.Base.LookupKey('COMMENT')
 
     ##
-    # \brief Specifies the timestamp at which the molecular graph was created/last modified.
+    # \brief Specifies a creation/modification timestamp associated with the molecular graph.
     # 
     # \valuetype  <tt>std::time_t</tt>
     # 
@@ -53,7 +53,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     COMPONENTS = CDPL.Base.LookupKey('COMPONENTS')
 
     ##
-    # \brief Specifies the perceived rings of the molecular graph.
+    # \brief Specifies the complete set of rings of the molecular graph.
     # 
     # \valuetype  Chem.FragmentList.SharedPointer
     # 
@@ -74,7 +74,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     CYCLIC_SUBSTRUCTURE = CDPL.Base.LookupKey('CYCLIC_SUBSTRUCTURE')
 
     ##
-    # \brief Specifies the perceived aromatic substructure of the molecular graph.
+    # \brief Specifies the union of all aromatic rings (the aromatic substructure) of the molecular graph.
     # 
     # \valuetype  Chem.Fragment.SharedPointer
     # 
@@ -88,14 +88,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     PI_ELECTRON_SYSTEMS = CDPL.Base.LookupKey('PI_ELECTRON_SYSTEMS')
 
     ##
-    # \brief Specifies the substructure search match constraints attached to the molecular graph.
+    # \brief Specifies the substructure match constraints associated with the molecular graph.
     # 
     # \valuetype  Chem.MatchConstraintList.SharedPointer
     # 
     MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
-    # \brief Specifies a cached substructure search match expression compiled from MATCH_CONSTRAINTS.
+    # \brief Specifies the substructure match expression associated with the molecular graph.
     # 
     # \valuetype  Chem.MatchExpression<Chem.MolecularGraph>.SharedPointer
     # 
@@ -109,7 +109,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     COMPONENT_GROUPS = CDPL.Base.LookupKey('COMPONENT_GROUPS')
 
     ##
-    # \brief Specifies the topological (bond-count) all-pair distance matrix.
+    # \brief Specifies the topological (bond count) all-pair distance matrix.
     # 
     # \valuetype  Math.ULMatrix.SharedPointer
     # 
@@ -130,28 +130,28 @@ class MolecularGraphProperty(Boost.Python.instance):
     STOICHIOMETRIC_NUMBER = CDPL.Base.LookupKey('STOICHIOMETRIC_NUMBER')
 
     ##
-    # \brief Specifies the index of the active conformation (within the per-atom 3D-coordinates arrays).
+    # \brief Specifies the index of the active conformation (within the per-atom 3D coordinates arrays).
     # 
     # \valuetype  <tt>std::size_t</tt>
     # 
     CONFORMATION_INDEX = CDPL.Base.LookupKey('CONFORMATION_INDEX')
 
     ##
-    # \brief Specifies the per-conformation energy values.
+    # \brief Specifies the conformer energy values.
     # 
     # \valuetype  Util.DArray.SharedPointer
     # 
     CONFORMER_ENERGIES = CDPL.Base.LookupKey('CONFORMER_ENERGIES')
 
     ##
-    # \brief Specifies structured data tags attached to the molecular graph (e.g. MDL SD-file data fields).
+    # \brief Specifies structured data tags attached to the molecular graph (e.g. <em>MDL</em> SD-file data fields).
     # 
     # \valuetype  Chem.StringDataBlock.SharedPointer
     # 
     STRUCTURE_DATA = CDPL.Base.LookupKey('STRUCTURE_DATA')
 
     ##
-    # \brief Specifies a 64-bit topological hash code identifying the molecular graph.
+    # \brief Specifies the 64-bit topological hash code of the molecular graph.
     # 
     # \valuetype  <tt>std::uint64_t</tt>
     # 

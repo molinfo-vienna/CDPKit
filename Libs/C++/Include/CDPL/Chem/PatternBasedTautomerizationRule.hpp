@@ -69,7 +69,7 @@ namespace CDPL
             typedef std::shared_ptr<PatternBasedTautomerizationRule> SharedPointer;
 
             /**
-             * \brief Encodes a single bond-order change between two pattern atoms applied when the parent
+             * \brief Encodes a single bond order change between two pattern atoms applied when the parent
              *        transformation pattern matches.
              */
             struct BondOrderChange

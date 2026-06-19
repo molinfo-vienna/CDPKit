@@ -378,14 +378,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::BondProperty::MATCH_CONSTRAINTS property of the bond \a bond.
          * \param bond The bond for which to return the property value.
-         * \return The stored match-constraint list.
+         * \return The stored match constraint list.
          */
         CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Bond& bond);
 
         /**
          * \brief Sets the value of the Chem::BondProperty::MATCH_CONSTRAINTS property of the bond \a bond to \a constr.
          * \param bond The bond for which to set the property value.
-         * \param constr The new match-constraint list.
+         * \param constr The new match constraint list.
          */
         CDPL_CHEM_API void setMatchConstraints(Bond& bond, const MatchConstraintList::SharedPointer& constr);
 
@@ -431,7 +431,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpression(const Bond& bond);
 
         /**
-         * \brief Builds a bond-level match expression from the match-constraint list attached to the bond \a bond.
+         * \brief Builds a bond-level match expression from the match constraint list attached to the bond \a bond.
          * \param bond The bond to inspect.
          * \param molgraph The molecular graph providing the structural context.
          * \return The generated match expression.
@@ -442,14 +442,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::BondProperty::MATCH_EXPRESSION_STRING property of the bond \a bond.
          * \param bond The bond for which to return the property value.
-         * \return The stored match-expression string.
+         * \return The stored match expression string.
          */
         CDPL_CHEM_API const std::string& getMatchExpressionString(const Bond& bond);
 
         /**
          * \brief Sets the value of the Chem::BondProperty::MATCH_EXPRESSION_STRING property of the bond \a bond to \a expr_str.
          * \param bond The bond for which to set the property value.
-         * \param expr_str The new match-expression string.
+         * \param expr_str The new match expression string.
          */
         CDPL_CHEM_API void setMatchExpressionString(Bond& bond, const std::string& expr_str);
 
@@ -470,7 +470,7 @@ namespace CDPL
          * \brief Writes a textual representation of the bond-level match expression of the bond \a bond into \a str.
          * \param bond The bond to inspect.
          * \param molgraph The molecular graph providing the structural context.
-         * \param str The output string receiving the match-expression text.
+         * \param str The output string receiving the match expression text.
          */
         CDPL_CHEM_API void generateMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& str);
 

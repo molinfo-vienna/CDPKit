@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Calculator that uses the <em>Partial Equalization of Orbital Electronegativities</em> (PEOE) method of Gasteiger and Marsili to compute sigma atomic charges and electronegativities of a molecular graph.
+# \brief Calculator that uses the <em>Partial Equalization of Orbital Electronegativities</em> (PEOE) method of Gasteiger and Marsili to compute &sigma; atomic charges and electronegativities of a molecular graph.
 # 
 # The calculation iteratively shifts partial charges between bonded atoms until the orbital electronegativities are (approximately) equalized. The number of iterations and the damping factor that controls the shift attenuation per iteration can be configured.
 # 
@@ -44,7 +44,7 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs the <tt>PEOESigmaChargeCalculator</tt> instance and calculates the sigma charges and electronegativities of the atoms in the molecular graph <em>molgraph</em> by the <em>PEOE</em> method.
+    # \brief Constructs the <tt>PEOESigmaChargeCalculator</tt> instance and calculates the &sigma;-charges and electronegativities of the atoms in the molecular graph <em>molgraph</em> by the <em>PEOE</em> method.
     # 
     # \param molgraph The molecular graph for which to perform the calculations.
     # 
@@ -95,14 +95,14 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     def getDampingFactor() -> float: pass
 
     ##
-    # \brief Calculates the sigma charges and electronegativities of the atoms in the molecular graph <em>molgraph</em> by the <em>PEOE</em> method.
+    # \brief Calculates the &sigma;-charges and electronegativities of the atoms in the molecular graph <em>molgraph</em> by the <em>PEOE</em> method.
     # 
     # \param molgraph The molecular graph for which to perform the calculations.
     # 
     def calculate(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Returns the calculated sigma charge of the atom with index <em>idx</em>.
+    # \brief Returns the calculated &sigma;-charge of the atom with index <em>idx</em>.
     # 
     # \param idx The index of the atom for which to return the charge.
     # 
@@ -111,7 +111,7 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     def getCharge(idx: int) -> float: pass
 
     ##
-    # \brief Returns the calculated sigma electronegativity of the atom with index <em>idx</em>.
+    # \brief Returns the calculated &sigma;-electronegativity of the atom with index <em>idx</em>.
     # 
     # \param idx The index of the atom for which to return the electronegativity.
     # 

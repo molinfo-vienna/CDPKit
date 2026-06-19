@@ -85,58 +85,58 @@ namespace CDPL
                                   double geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
             /**
-             * \brief Returns the currently configured weight of the matched-feature-count contribution.
-             * \return The match-count weight.
+             * \brief Returns the currently configured weight of the matched feature count contribution.
+             * \return The feature match count weight.
              */
             double getFeatureMatchCountWeight() const;
 
             /**
-             * \brief Sets the weight of the matched-feature-count contribution.
-             * \param weight The new match-count weight.
+             * \brief Sets the weight of the matched feature count contribution.
+             * \param weight The new feature match count weight.
              */
             void setFeatureMatchCountWeight(double weight);
 
             /**
-             * \brief Returns the currently configured weight of the feature-position-deviation contribution.
-             * \return The position-match weight.
+             * \brief Returns the currently configured weight of the feature position deviation contribution.
+             * \return The position match weight.
              */
             double getFeaturePositionMatchWeight() const;
 
             /**
-             * \brief Sets the weight of the feature-position-deviation contribution.
-             * \param weight The new position-match weight.
+             * \brief Sets the weight of the feature position deviation contribution.
+             * \param weight The new position match weight.
              */
             void setFeaturePositionMatchWeight(double weight);
 
             /**
-             * \brief Returns the currently configured weight of the feature-geometry-match contribution.
-             * \return The geometry-match weight.
+             * \brief Returns the currently configured weight of the feature geometry match contribution.
+             * \return The geometry match weight.
              */
             double getFeatureGeometryMatchWeight() const;
 
             /**
-             * \brief Sets the weight of the feature-geometry-match contribution.
-             * \param weight The new geometry-match weight.
+             * \brief Sets the weight of the feature geometry match contribution.
+             * \param weight The new geometry match weight.
              */
             void setFeatureGeometryMatchWeight(double weight);
 
             /**
              * \brief Specifies whether reference features should be grouped before scoring (groups share a common
              *        mandatory/optional status and contribute jointly to the score).
-             * \param group \c true to enable reference-feature grouping, and \c false to score every feature individually.
+             * \param group \c true to enable reference feature grouping, and \c false to score every feature individually.
              * \since 1.2
              */
             void groupReferenceFeatures(bool group);
 
             /**
              * \brief Tells whether reference features are grouped before scoring.
-             * \return \c true if reference-feature grouping is enabled, and \c false otherwise.
+             * \return \c true if reference feature grouping is enabled, and \c false otherwise.
              * \since 1.2
              */
             bool referenceFeaturesGrouped() const;
 
             /**
-             * \brief Computes the fit score of \a algnd_ftrs against \a ref_ftrs after applying the rigid-body transformation \a xform.
+             * \brief Computes the fit score of \a algnd_ftrs against \a ref_ftrs after applying the rigid body transformation \a xform.
              * \param ref_ftrs The reference pharmacophore features.
              * \param algnd_ftrs The aligned candidate features.
              * \param xform The transformation applied to the aligned features before the comparison.

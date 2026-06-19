@@ -620,7 +620,7 @@ def getImplicitHydrogenCount(molgraph: Chem.MolecularGraph) -> int: pass
 # \brief Sets the value of the MolProp.AtomProperty.MHMO_PI_CHARGE property of the atom <em>atom</em> to <em>charge</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param charge The new MHMO pi charge value.
+# \param charge The new MHMO &pi;-charge value.
 # 
 def setMHMOPiCharge(atom: Chem.Atom, charge: float) -> None: pass
 
@@ -629,7 +629,7 @@ def setMHMOPiCharge(atom: Chem.Atom, charge: float) -> None: pass
 # 
 # \param atom The atom for which to query the property value.
 # 
-# \return <tt>True</tt> if the MHMO pi charge property is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the MHMO &pi;-charge property is set, and <tt>False</tt> otherwise.
 # 
 def hasMHMOPiCharge(atom: Chem.Atom) -> bool: pass
 
@@ -638,7 +638,7 @@ def hasMHMOPiCharge(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The MHMO pi charge value.
+# \return The MHMO &pi;-charge value.
 # 
 def getMHMOPiCharge(atom: Chem.Atom) -> float: pass
 
@@ -738,7 +738,7 @@ def getOrdinaryHydrogenCount(molgraph: Chem.MolecularGraph, flags: int = 2147483
 # \brief Sets the value of the MolProp.AtomProperty.PEOE_SIGMA_CHARGE property of the atom <em>atom</em> to <em>charge</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param charge The new PEOE sigma charge value.
+# \param charge The new PEOE &sigma;-charge value.
 # 
 def setPEOESigmaCharge(atom: Chem.Atom, charge: float) -> None: pass
 
@@ -747,7 +747,7 @@ def setPEOESigmaCharge(atom: Chem.Atom, charge: float) -> None: pass
 # 
 # \param atom The atom for which to query the property value.
 # 
-# \return <tt>True</tt> if the PEOE sigma charge property is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the PEOE &sigma;-charge property is set, and <tt>False</tt> otherwise.
 # 
 def hasPEOESigmaCharge(atom: Chem.Atom) -> bool: pass
 
@@ -756,7 +756,7 @@ def hasPEOESigmaCharge(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The PEOE sigma charge value.
+# \return The PEOE &sigma;-charge value.
 # 
 def getPEOESigmaCharge(atom: Chem.Atom) -> float: pass
 
@@ -771,7 +771,7 @@ def clearPEOESigmaCharge(atom: Chem.Atom) -> None: pass
 # \brief Sets the value of the MolProp.AtomProperty.PEOE_SIGMA_ELECTRONEGATIVITY property of the atom <em>atom</em> to <em>e_neg</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param e_neg The new PEOE sigma electronegativity value.
+# \param e_neg The new PEOE &sigma;-electronegativity value.
 # 
 def setPEOESigmaElectronegativity(atom: Chem.Atom, e_neg: float) -> None: pass
 
@@ -780,7 +780,7 @@ def setPEOESigmaElectronegativity(atom: Chem.Atom, e_neg: float) -> None: pass
 # 
 # \param atom The atom for which to query the property value.
 # 
-# \return <tt>True</tt> if the PEOE sigma electronegativity property is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the PEOE &sigma;-electronegativity property is set, and <tt>False</tt> otherwise.
 # 
 def hasPEOESigmaElectronegativity(atom: Chem.Atom) -> bool: pass
 
@@ -789,7 +789,7 @@ def hasPEOESigmaElectronegativity(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The PEOE sigma electronegativity value.
+# \return The PEOE &sigma;-electronegativity value.
 # 
 def getPEOESigmaElectronegativity(atom: Chem.Atom) -> float: pass
 
@@ -1041,7 +1041,7 @@ def calcLogS(molgraph: Chem.MolecularGraph) -> float: pass
 def calcLonePairElectronegativity(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief Calculates MHMO pi charges and pi bond orders for the molecular graph <em>molgraph</em> and stores them as atom/bond properties.
+# \brief Calculates MHMO &pi;-charges and &pi;-bond orders for the molecular graph <em>molgraph</em> and stores them as atom/bond properties.
 # 
 # \param molgraph The molecular graph (modified in place).
 # \param overwrite If <tt>True</tt>, existing atom/bond properties are overwritten.
@@ -1075,7 +1075,7 @@ def calcMass(molgraph: Chem.MolecularGraph) -> float: pass
 def calcMeanPolarizability(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief Calculates PEOE sigma charges and electronegativities for the atoms of the molecular graph <em>molgraph</em> and stores them as atom properties.
+# \brief Calculates PEOE &sigma;-charges and electronegativities for the atoms of the molecular graph <em>molgraph</em> and stores them as atom properties.
 # 
 # \param molgraph The molecular graph (modified in place).
 # \param overwrite If <tt>True</tt>, existing atom properties are overwritten.
@@ -1085,12 +1085,12 @@ def calcMeanPolarizability(molgraph: Chem.MolecularGraph) -> float: pass
 def calcPEOEProperties(molgraph: Chem.MolecularGraph, overwrite: bool, num_iter: int = 20, damping: float = 0.48) -> None: pass
 
 ##
-# \brief Calculates the pi electronegativity of the atom <em>atom</em> in the molecular graph <em>molgraph</em>.
+# \brief Calculates the &pi;-electronegativity of the atom <em>atom</em> in the molecular graph <em>molgraph</em>.
 # 
 # \param atom The atom.
 # \param molgraph The molecular graph.
 # 
-# \return The pi electronegativity.
+# \return The &pi;-electronegativity.
 # 
 def calcPiElectronegativity(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> float: pass
 
@@ -1129,7 +1129,7 @@ def calcTPSA(molgraph: Chem.MolecularGraph) -> float: pass
 ##
 # \brief Calculates the total partial charge of the atom <em>atom</em>.
 # 
-# The total partial charge is calculated as the sum of stored PEOE sigma and MHMO pi charge contributions.
+# The total partial charge is calculated as the sum of stored PEOE &sigma;- and MHMO &pi;-charge contributions.
 # 
 # \param atom The atom.
 # 

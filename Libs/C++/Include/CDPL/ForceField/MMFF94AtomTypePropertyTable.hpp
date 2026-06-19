@@ -51,7 +51,7 @@ namespace CDPL
          *        property data associated with numeric MMFF94 atom types.
          *
          * Each entry provides the corresponding atomic number, the standard neighbour count and valence,
-         * and flags describing pi lone pair character, aromaticity, linear bond angle geometry, and the
+         * and flags describing &pi;-lone-pair character, aromaticity, linear bond angle geometry, and the
          * ability to form multi bond or single bond patterns.
          *
          * \see [\ref MMFF94]
@@ -89,7 +89,7 @@ namespace CDPL
                  * \param atomic_no The atomic number of atoms of this type.
                  * \param num_nbrs The standard number of explicit neighbour atoms.
                  * \param valence The standard valence.
-                 * \param has_pi_lp \c true if the atom type carries a pi lone pair.
+                 * \param has_pi_lp \c true if the atom type carries a &pi;-lone pair.
                  * \param mltb_desig The MMFF94 multi bond designator.
                  * \param is_arom \c true if the atom type is aromatic.
                  * \param lin_bnd_ang \c true if the atom type forms linear bond angles.
@@ -123,8 +123,8 @@ namespace CDPL
                 std::size_t getValence() const;
 
                 /**
-                 * \brief Tells whether the atom type carries a pi lone pair.
-                 * \return \c true if the atom type carries a pi lone pair, and \c false otherwise.
+                 * \brief Tells whether the atom type carries a &pi;-lone pair.
+                 * \return \c true if the atom type carries a &pi;-lone pair, and \c false otherwise.
                  */
                 bool hasPiLonePair() const;
 
@@ -196,7 +196,7 @@ namespace CDPL
              * \param atomic_no The atomic number of atoms of this type.
              * \param num_nbrs The standard number of explicit neighbour atoms.
              * \param valence The standard valence.
-             * \param has_pi_lp \c true if the atom type carries a pi lone pair.
+             * \param has_pi_lp \c true if the atom type carries a &pi;-lone pair.
              * \param mltb_desig The MMFF94 multi bond designator.
              * \param is_arom \c true if the atom type is aromatic.
              * \param lin_bnd_ang \c true if the atom type forms linear bond angles.

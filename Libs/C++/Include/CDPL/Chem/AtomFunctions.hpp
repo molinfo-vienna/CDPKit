@@ -1108,14 +1108,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MATCH_CONSTRAINTS property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored match-constraint list.
+         * \return The stored match constraint list.
          */
         CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MATCH_CONSTRAINTS property of the atom \a atom to \a constr.
          * \param atom The atom for which to set the property value.
-         * \param constr The new match-constraint list.
+         * \param constr The new match constraint list.
          */
         CDPL_CHEM_API void setMatchConstraints(Atom& atom, const MatchConstraintList::SharedPointer& constr);
 
@@ -1161,7 +1161,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpression(const Atom& atom);
 
         /**
-         * \brief Builds an atom-level match expression from the match-constraint list attached to the atom \a atom.
+         * \brief Builds an atom-level match expression from the match constraint list attached to the atom \a atom.
          * \param atom The atom for which to generate the expression.
          * \param molgraph The molecular graph providing the structural context.
          * \return The generated match expression.
@@ -1172,14 +1172,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MATCH_EXPRESSION_STRING property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored match-expression string.
+         * \return The stored match expression string.
          */
         CDPL_CHEM_API const std::string& getMatchExpressionString(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MATCH_EXPRESSION_STRING property of the atom \a atom to \a expr_str.
          * \param atom The atom for which to set the property value.
-         * \param expr_str The new match-expression string.
+         * \param expr_str The new match expression string.
          */
         CDPL_CHEM_API void setMatchExpressionString(Atom& atom, const std::string& expr_str);
 
@@ -1200,7 +1200,7 @@ namespace CDPL
          * \brief Writes a textual representation of the atom-level match expression of the atom \a atom into \a expr_str.
          * \param atom The atom for which to generate the expression string.
          * \param molgraph The molecular graph providing the structural context.
-         * \param expr_str The output string receiving the match-expression text.
+         * \param expr_str The output string receiving the match expression text.
          */
         CDPL_CHEM_API void generateMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
 

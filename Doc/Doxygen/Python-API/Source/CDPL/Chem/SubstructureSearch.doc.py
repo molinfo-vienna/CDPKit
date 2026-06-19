@@ -22,7 +22,7 @@
 ##
 # \brief Subgraph-isomorphism search of a query molecular graph against a target molecular graph, implemented after the <em>VF2</em> algorithm.
 # 
-# Successive calls to setQuery() and findMappings() (or mappingExists() for a yes/no answer) produce all atom/bond mapping solutions; mappings are retrieved through the getMapping*() / begin()-end() iterator pair. Per-atom, per-bond and per-molecular graph match-expression accessor functions can be installed to extend equivalence beyond pure topology (the defaults pull expressions from the Chem.AtomProperty / Chem.BondProperty / Chem.MolecularGraphProperty objects). Result accumulation is bounded by setMaxNumMappings() and uniqueMappingsOnly(); the search can also be aborted from a callback via stopSearch().
+# Successive calls to setQuery() and findMappings() (or mappingExists() for a yes/no answer) produce all atom/bond mapping solutions; mappings are retrieved through the getMapping*() / begin()-end() iterator pair. Per-atom, per-bond and per-molecular graph match expression accessor functions can be installed to extend equivalence beyond pure topology (the defaults pull expressions from the Chem.AtomProperty / Chem.BondProperty / Chem.MolecularGraphProperty objects). Result accumulation is bounded by setMaxNumMappings() and uniqueMappingsOnly(); the search can also be aborted from a callback via stopSearch().
 # 
 # \see [\ref VFLIB2]
 # 
@@ -102,7 +102,7 @@ class SubstructureSearch(Boost.Python.instance):
     ##
     # \brief Aborts the currently running subgraph mapping search.
     # 
-    # Intended to be invoked from a callback (typically a match-expression evaluator) running on the same thread as findMappings(); once flagged, findMappings() returns at the next loop boundary.
+    # Intended to be invoked from a callback (typically a match expression evaluator) running on the same thread as findMappings(); once flagged, findMappings() returns at the next loop boundary.
     # 
     def stopSearch() -> None: pass
 
