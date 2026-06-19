@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Pharm.FeatureInteractionScore implementation that scores a halogen-bond donor/acceptor feature pair by combining per-component scores for halogen-acceptor distance, acceptor-halogen-bound-atom angle and acceptor-direction angle.
+# \brief Pharm.FeatureInteractionScore implementation that scores a halogen-bond donor/acceptor feature pair by combining per-component scores for halogen-acceptor distance, acceptor-halogen-bound-atom angle and acceptor direction angle.
 # 
 class XBondingInteractionScore(FeatureInteractionScore):
 

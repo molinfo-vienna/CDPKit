@@ -214,14 +214,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ControlParameter::MDL_CTAB_VERSION parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The stored CTab version (see namespace Chem::MDLDataFormatVersion).
+         * \return The stored CTAB version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API unsigned int getMDLCTABVersionParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the value of the Chem::ControlParameter::MDL_CTAB_VERSION parameter of \a cntnr to \a version.
          * \param cntnr The control-parameter container.
-         * \param version The new CTab version (see namespace Chem::MDLDataFormatVersion).
+         * \param version The new CTAB version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API void setMDLCTABVersionParameter(Base::ControlParameterContainer& cntnr, unsigned int version);
 

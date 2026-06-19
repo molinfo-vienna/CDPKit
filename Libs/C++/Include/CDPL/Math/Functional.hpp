@@ -684,7 +684,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Vector cross-product functor: <tt>apply(e1, e2, i)</tt> returns the \a i-th component of the 3-vector cross product \f$ e_1 \times e_2 \f$.
+         * \brief Vector cross-product functor: <tt>apply(e1, e2, i)</tt> returns the \a i-th component of the 3D vector cross product \f$ e_1 \times e_2 \f$.
          * \tparam V1 The first vector expression type.
          * \tparam V2 The second vector expression type.
          */
@@ -699,8 +699,8 @@ namespace CDPL
              * \tparam E1 The first concrete vector expression type.
              * \tparam E2 The second concrete vector expression type.
              * \tparam SizeType The component-index type.
-             * \param e1 The first 3-vector expression.
-             * \param e2 The second 3-vector expression.
+             * \param e1 The first 3D vector expression.
+             * \param e2 The second 3D vector expression.
              * \param i The zero-based component index (0, 1, or 2).
              * \return The \a i-th component of the cross product.
              * \throw Base::SizeError if either vector is not of size 3.
@@ -1315,7 +1315,7 @@ namespace CDPL
         {
 
             /**
-             * \brief The matrix-entry result type (the vector's element value type).
+             * \brief The matrix element result type (the vector's element value type).
              */
             typedef typename V::ValueType ResultType;
 
@@ -1326,7 +1326,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Functor producing the diagonal-matrix entry at (\e i, \e j) from a vector expression (\f$ e(i) \f$ on the diagonal, \c 0 elsewhere).
+         * \brief Functor producing the diagonal matrix element at (\e i, \e j) from a vector expression (\f$ e(i) \f$ on the diagonal, \c 0 elsewhere).
          * \tparam V The vector expression type.
          */
         template <typename V>
@@ -1342,7 +1342,7 @@ namespace CDPL
              * \param e The vector expression.
              * \param i The zero-based row index.
              * \param j The zero-based column index.
-             * \return The diagonal-matrix entry.
+             * \return The diagonal matrix element.
              */
             template <typename E>
             static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j)
@@ -1355,7 +1355,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Functor producing the cross-product (skew-symmetric) matrix entry at (\e i, \e j) for a 3-vector expression.
+         * \brief Functor producing the cross-product (skew-symmetric) matrix element at (\e i, \e j) for a 3D vector expression.
          * \tparam V The vector expression type.
          */
         template <typename V>
@@ -1366,12 +1366,12 @@ namespace CDPL
             typedef typename VectorScalarUnaryFunctor<V>::SizeType   SizeType;
 
             /**
-             * \brief Returns the (\a i, \a j) entry of the skew-symmetric matrix \f$ [e]_\times \f$ corresponding to the 3-vector \a e.
+             * \brief Returns the (\a i, \a j) element of the skew-symmetric matrix \f$ [e]_\times \f$ corresponding to the 3D vector \a e.
              * \tparam E The vector expression type.
-             * \param e The 3-vector expression.
+             * \param e The 3D vector expression.
              * \param i The zero-based row index.
              * \param j The zero-based column index.
-             * \return The corresponding entry of \f$ [e]_\times \f$.
+             * \return The corresponding element of \f$ [e]_\times \f$.
              * \throw Base::SizeError if \a e does not have size 3.
              */
             template <typename E>
@@ -1430,7 +1430,7 @@ namespace CDPL
         };
 
         /**
-         * \brief %Base class for binary functors that take a matrix expression and a vector expression and return a vector-element scalar result (Math::MatrixVectorProduct, Math::VectorMatrixProduct).
+         * \brief %Base class for binary functors that take a matrix expression and a vector expression and return a vector element scalar result (Math::MatrixVectorProduct, Math::VectorMatrixProduct).
          * \tparam M The matrix expression type.
          * \tparam V The vector expression type.
          */
@@ -1527,7 +1527,7 @@ namespace CDPL
         };
 
         /**
-         * \brief %Base class for binary functors that take two matrix expressions and return a matrix-element scalar result (Math::MatrixProduct).
+         * \brief %Base class for binary functors that take two matrix expressions and return a matrix element scalar result (Math::MatrixProduct).
          * \tparam M1 The first matrix expression type.
          * \tparam M2 The second matrix expression type.
          */
@@ -1552,7 +1552,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Functor returning entry (\e i, \e j) of the matrix product \f$ e_1 \cdot e_2 \f$.
+         * \brief Functor returning element (\e i, \e j) of the matrix product \f$ e_1 \cdot e_2 \f$.
          * \tparam M1 The first matrix expression type.
          * \tparam M2 The second matrix expression type.
          */
@@ -1565,13 +1565,13 @@ namespace CDPL
             typedef typename MatrixVectorBinaryFunctor<M1, M2>::ResultType ResultType;
 
             /**
-             * \brief Returns entry (\e i, \e j) of the matrix product \f$ e_1 \cdot e_2 \f$.
+             * \brief Returns element (\e i, \e j) of the matrix product \f$ e_1 \cdot e_2 \f$.
              * \tparam E1 The first matrix expression type.
              * \tparam E2 The second matrix expression type.
              * \param e1 The first matrix expression.
              * \param e2 The second matrix expression.
-             * \param i The zero-based row index of the result entry.
-             * \param j The zero-based column index of the result entry.
+             * \param i The zero-based row index of the result element.
+             * \param j The zero-based column index of the result element.
              * \return \f$ \sum_k e_1(i, k) \cdot e_2(k, j) \f$.
              * \throw Base::SizeError if \c e1.getSize2() does not equal \c e2.getSize1().
              */
@@ -2573,7 +2573,7 @@ namespace CDPL
         };
 
         /**
-         * \brief %Base class for binary functors that take a quaternion expression and a vector expression and return a vector-element scalar (Math::QuaternionVectorRotation).
+         * \brief %Base class for binary functors that take a quaternion expression and a vector expression and return a vector element scalar (Math::QuaternionVectorRotation).
          * \tparam Q The quaternion expression type.
          * \tparam V The vector expression type.
          */
@@ -2612,11 +2612,11 @@ namespace CDPL
             typedef typename QuaternionVectorBinaryFunctor<Q, V>::ResultType ResultType;
 
             /**
-             * \brief Returns element \a i (\f$ 0 \le i < 3 \f$) of the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+             * \brief Returns element \a i (\f$ 0 \le i < 3 \f$) of the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
              * \tparam E1 The quaternion expression type.
              * \tparam E2 The vector expression type.
              * \param e1 The quaternion expression (rotation).
-             * \param e2 The 3-vector expression to rotate.
+             * \param e2 The 3D vector expression to rotate.
              * \param i The zero-based element index (\c 0, \c 1, or \c 2).
              * \return The rotated vector's \a i-th element (zero for \a i &gt; 2).
              * \throw Base::SizeError if \a e2 has fewer than 3 elements.

@@ -102,7 +102,7 @@ namespace CDPL
             /**
              * \brief Computes the axis-aligned bounding rectangle of the path.
              * \param bounds The Rectangle2D instance storing the result.
-             * \param font_metrics Unused for paths; included to satisfy the GraphicsPrimitive2D interface.
+             * \param font_metrics Unused for paths.
              */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 

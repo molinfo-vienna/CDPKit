@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Provides constants that are used to specify the connection table and <em>Rxn-File</em> version for the I/O of molecular graphs and reactions in <em>MDL</em> format [\ref CTFILE].
+# \brief Provides constants that are used to specify the connection table and <em>Rxn-File</em> version for the I/O of molecular graphs and reactions in an <em>MDL CTFile</em> based data format.
+# 
+# \see [\ref CTFILE]
 # 
 class MDLDataFormatVersion(Boost.Python.instance):
 

@@ -563,7 +563,7 @@ namespace CDPL
             /**
              * \brief Constructs a vector of size \a n with every element initialized to \a v.
              * \param n The desired vector size.
-             * \param v The element value used to initialize every entry.
+             * \param v The value used to initialize every element.
              */
             Vector(SizeType n, const ValueType& v):
                 data(storageSize(n), v) {}
@@ -2148,7 +2148,7 @@ namespace CDPL
 
             /**
              * \brief Constructs a fixed-size vector with the contents of the initializer list \a l.
-             * \param l The initializer list providing the initial elements (truncated to \a N if longer; zero-padded if shorter).
+             * \param l The initializer list providing the initial elements (truncated to \a N if longer and zero-padded if shorter).
              */
             CVector(InitializerListType l)
             {
@@ -2272,7 +2272,7 @@ namespace CDPL
 
             /**
              * \brief Assigns the contents of the initializer list \a l to this fixed-size vector.
-             * \param l The initializer list providing the new elements (truncated to \a N if longer; zero-padded if shorter).
+             * \param l The initializer list providing the new elements (truncated to \a N if longer and zero-padded if shorter).
              * \return A reference to itself.
              */
             CVector& operator=(InitializerListType l)
@@ -2742,9 +2742,9 @@ namespace CDPL
                 size(0), index(0) {}
 
             /**
-             * \brief Constructs a unit vector of size \a n with the \c 1 entry at index \a i.
+             * \brief Constructs a unit vector of size \a n with the \c 1 element at index \a i.
              * \param n The element count.
-             * \param i The zero-based index of the non-zero entry.
+             * \param i The zero-based index of the non-zero element.
              */
             UnitVector(SizeType n, SizeType i):
                 size(n), index(i) {}
@@ -2799,7 +2799,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the index of the non-zero (unit) entry.
+             * \brief Returns the index of the non-zero (unit) element.
              * \return The zero-based unit index.
              */
             SizeType getIndex() const

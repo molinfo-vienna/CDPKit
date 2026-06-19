@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Constraint functor that tests whether a Pharm.Feature pair satisfies geometric H-bond criteria (H-bond length plus acceptor-H-donor and H-bond-direction-to-acceptor-vector angles).
+# \brief Constraint functor that tests whether a Pharm.Feature pair satisfies geometric H-bond criteria (H-bond length plus acceptor-H-donor and H-bond direction to acceptor vector angles).
 # 
 class HBondingInteractionConstraint(Boost.Python.instance):
 

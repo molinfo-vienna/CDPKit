@@ -38,7 +38,8 @@ namespace CDPL
 
         /**
          * \brief Provides constants that are used to specify the connection table and \e Rxn-File version for the
-         *        I/O of molecular graphs and reactions in \e MDL format [\ref CTFILE].
+         *        I/O of molecular graphs and reactions in an <em>MDL CTFile</em> based data format.
+         * \see [\ref CTFILE]
          */
         namespace MDLDataFormatVersion
         {

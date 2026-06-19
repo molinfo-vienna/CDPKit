@@ -375,7 +375,7 @@ def getExplicitHydrogenBondCount(cntnr: Chem.BondContainer) -> int: pass
 # \brief Returns the number of explicit ordinary hydrogens in the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph.
-# \param flags Bitmask of Chem.AtomPropertyFlag values that qualify "ordinary"; an empty bitmask makes any hydrogen ordinary.
+# \param flags Bitmask of Chem.AtomPropertyFlag values that qualify "ordinary". An empty bitmask makes any hydrogen ordinary.
 # 
 # \return The explicit ordinary hydrogen count. 
 # 
@@ -726,7 +726,7 @@ def getOrdinaryHydrogenCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, fla
 # \brief Returns the number of ordinary hydrogens in the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph.
-# \param flags Bitmask of Chem.AtomPropertyFlag values that qualify "ordinary"; an empty bitmask makes any hydrogen ordinary.
+# \param flags Bitmask of Chem.AtomPropertyFlag values that qualify "ordinary". An empty bitmask makes any hydrogen ordinary.
 # 
 # \return The ordinary hydrogen count. 
 # 

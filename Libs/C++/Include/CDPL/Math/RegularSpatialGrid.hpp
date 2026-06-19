@@ -550,7 +550,7 @@ namespace CDPL
 
             /**
              * \brief Tells whether the world-space point \a pos lies within the grid bounds.
-             * \tparam V The point-vector type.
+             * \tparam V The point vector type.
              * \param pos The world-space 3D position to test.
              * \return \c true if \a pos is inside the grid, and \c false otherwise.
              */
@@ -566,7 +566,7 @@ namespace CDPL
 
             /**
              * \brief Tells whether the local-space point \a pos lies within the grid bounds.
-             * \tparam V The point-vector type.
+             * \tparam V The point vector type.
              * \param pos The local-frame 3D position to test.
              * \return \c true if \a pos is inside the grid, and \c false otherwise.
              */

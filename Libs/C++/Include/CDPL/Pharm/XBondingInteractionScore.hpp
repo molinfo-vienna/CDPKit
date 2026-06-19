@@ -46,7 +46,7 @@ namespace CDPL
         /**
          * \brief Pharm::FeatureInteractionScore implementation that scores a halogen-bond donor/acceptor feature pair
          *        by combining per-component scores for halogen-acceptor distance, acceptor-halogen-bound-atom angle and
-         *        acceptor-direction angle.
+         *        acceptor direction angle.
          */
         class CDPL_PHARM_API XBondingInteractionScore : public FeatureInteractionScore
         {

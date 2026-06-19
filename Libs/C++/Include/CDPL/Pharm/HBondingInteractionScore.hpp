@@ -43,8 +43,8 @@ namespace CDPL
 
         /**
          * \brief Pharm::FeatureInteractionScore implementation that scores a donor/acceptor feature pair by combining
-         *        per-component scores for H-bond length, acceptor-hydrogen-donor angle and H-bond-direction to
-         *        acceptor-vector angle.
+         *        per-component scores for H-bond length, acceptor-H-donor angle and H-bond direction to
+         *        acceptor vector angle.
          */
         class CDPL_PHARM_API HBondingInteractionScore : public FeatureInteractionScore
         {
@@ -66,7 +66,7 @@ namespace CDPL
             static constexpr double DEF_MIN_AHD_ANGLE = 150.0;
 
             /**
-             * \brief Default maximum H-bond direction to acceptor-vector angle in degrees.
+             * \brief Default maximum H-bond direction to acceptor vector angle in degrees.
              */
             static constexpr double DEF_MAX_ACC_ANGLE = 75.0;
 
@@ -116,7 +116,7 @@ namespace CDPL
             double getMinAHDAngle() const;
 
             /**
-             * \brief Returns the currently configured maximum H-bond direction to acceptor-vector angle.
+             * \brief Returns the currently configured maximum H-bond direction to acceptor vector angle.
              * \return The maximum acceptor angle in degrees.
              */
             double getMaxAcceptorAngle() const;
@@ -128,7 +128,7 @@ namespace CDPL
             void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
             /**
-             * \brief Specifies the function that maps the H-bond direction to acceptor-vector angle to its score contribution.
+             * \brief Specifies the function that maps the H-bond direction to acceptor vector angle to its score contribution.
              * \param func The acceptor-angle scoring function.
              */
             void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);

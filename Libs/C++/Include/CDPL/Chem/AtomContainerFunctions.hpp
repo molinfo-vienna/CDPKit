@@ -225,7 +225,7 @@ namespace CDPL
          * \brief Copies every atom of \a cntnr that satisfies \a pred into the molecule \a mol.
          * \param cntnr The source atom container.
          * \param mol The target molecule.
-         * \param pred The predicate evaluated for each atom; only atoms for which it returns \c true are copied.
+         * \param pred The predicate evaluated for each atom. Only atoms for which it returns \c true are copied.
          * \param append If \c true, atoms are appended to \a mol. Otherwise, \a mol is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
@@ -234,7 +234,7 @@ namespace CDPL
          * \brief Copies every atom of \a cntnr that satisfies \a pred into the fragment \a frag.
          * \param cntnr The source atom container.
          * \param frag The target fragment.
-         * \param pred The predicate evaluated for each atom; only atoms for which it returns \c true are copied.
+         * \param pred The predicate evaluated for each atom. Only atoms for which it returns \c true are copied.
          * \param append If \c true, atoms are appended to \a frag. Otherwise, \a frag is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
@@ -243,7 +243,7 @@ namespace CDPL
          * \brief Copies every atom of \a cntnr that does \e not satisfy \a pred into the molecule \a mol.
          * \param cntnr The source atom container.
          * \param mol The target molecule.
-         * \param pred The predicate evaluated for each atom; only atoms for which it returns \c false are copied.
+         * \param pred The predicate evaluated for each atom. Only atoms for which it returns \c false are copied.
          * \param append If \c true, atoms are appended to \a mol. Otherwise, \a mol is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
@@ -252,7 +252,7 @@ namespace CDPL
          * \brief Copies every atom of \a cntnr that does \e not satisfy \a pred into the fragment \a frag.
          * \param cntnr The source atom container.
          * \param frag The target fragment.
-         * \param pred The predicate evaluated for each atom; only atoms for which it returns \c false are copied.
+         * \param pred The predicate evaluated for each atom. Only atoms for which it returns \c false are copied.
          * \param append If \c true, atoms are appended to \a frag. Otherwise, \a frag is cleared first.
          */
         CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);

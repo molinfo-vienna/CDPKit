@@ -1919,9 +1919,9 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3-vector expression \a e (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
+         * \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3D vector expression \a e (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
          * \tparam E The vector expression type.
-         * \param e The 3-vector expression.
+         * \param e The 3D vector expression.
          * \return An expression-template node representing the skew-symmetric matrix.
          */
         template <typename E>

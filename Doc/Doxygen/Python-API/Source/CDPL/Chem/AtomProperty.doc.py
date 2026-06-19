@@ -168,7 +168,7 @@ class AtomProperty(Boost.Python.instance):
     CIP_CONFIGURATION = CDPL.Base.LookupKey('CIP_CONFIGURATION')
 
     ##
-    # \brief Specifies the <em>MDL</em> stereo parity of the atom (see namespace Chem.MDLParity).
+    # \brief Specifies the MDL stereo parity of the atom (see namespace Chem.MDLParity).
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>unsigned int</tt>
@@ -176,7 +176,7 @@ class AtomProperty(Boost.Python.instance):
     MDL_PARITY = CDPL.Base.LookupKey('MDL_PARITY')
 
     ##
-    # \brief Specifies the value of the <em>MDL</em> <em>stereo care</em> flag of the atom.
+    # \brief Specifies the value of the MDL <em>stereo care</em> flag of the atom.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>bool</tt>

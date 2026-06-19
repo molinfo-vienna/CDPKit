@@ -87,7 +87,7 @@ namespace CDPL
         /**
          * \brief Computes an in-place LU decomposition of the matrix \a e with partial (row) pivoting.
          * \tparam E The matrix expression type.
-         * \tparam PV The permutation-vector type (must support indexed write access).
+         * \tparam PV The permutation vector type (must support indexed write access).
          * \tparam T An arithmetic counter type.
          * \param e The matrix to decompose (modified in place).
          * \param pv The output permutation vector recording the row pivots (\a pv[i] = pivot row index for step \a i).
@@ -145,7 +145,7 @@ namespace CDPL
         /**
          * \brief Applies the permutation vector \a pv to the vector expression \a e by swapping element \a i with element \a pv[i].
          * \tparam E The vector expression type.
-         * \tparam PV The permutation-vector type.
+         * \tparam PV The permutation vector type.
          * \param e The vector to permute in place.
          * \param pv The permutation vector.
          */
@@ -164,7 +164,7 @@ namespace CDPL
         /**
          * \brief Applies the permutation vector \a pv to the rows of the matrix expression \a e by swapping row \a i with row \a pv[i].
          * \tparam E The matrix expression type.
-         * \tparam PV The permutation-vector type.
+         * \tparam PV The permutation vector type.
          * \param e The matrix to permute in place.
          * \param pv The permutation vector.
          */
@@ -204,7 +204,7 @@ namespace CDPL
          * \brief Solves \f$ LU\,x = b \f$ for \a b in place, given the LU decomposition \a lu and pivot vector \a pv.
          * \tparam E1 The matrix expression type of \a lu.
          * \tparam E2 The vector expression type of \a b.
-         * \tparam PV The permutation-vector type.
+         * \tparam PV The permutation vector type.
          * \param lu The LU decomposition (with pivoting).
          * \param pv The permutation vector recorded during the LU decomposition.
          * \param b The right-hand side vector, overwritten with the solution.
@@ -241,7 +241,7 @@ namespace CDPL
          * \brief Solves \f$ LU\,X = B \f$ for the matrix \a b in place, given the LU decomposition \a lu and pivot vector \a pv.
          * \tparam E1 The matrix expression type of \a lu.
          * \tparam E2 The matrix expression type of \a b.
-         * \tparam PV The permutation-vector type.
+         * \tparam PV The permutation vector type.
          * \param lu The LU decomposition (with pivoting).
          * \param pv The permutation vector recorded during the LU decomposition.
          * \param b The right-hand side matrix, overwritten with the solution.

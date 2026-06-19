@@ -305,7 +305,7 @@ namespace CDPL
          * \brief Generates a reaction \e SMILES string for the reaction \a rxn.
          * \param rxn The reaction to encode.
          * \param smiles The string to receive the generated reaction SMILES.
-         * \param canonical \c true to emit a canonical reaction SMILES; \c false for an arbitrary atom ordering.
+         * \param canonical \c true to emit a canonical reaction SMILES.
          * \param ord_h_deplete \c true to suppress ordinary hydrogens.
          * \param atom_flags A bitmask of Chem::AtomPropertyFlag flags controlling which atomic properties to encode.
          * \param bond_flags A bitmask of Chem::BondPropertyFlag flags controlling which bond properties to encode.

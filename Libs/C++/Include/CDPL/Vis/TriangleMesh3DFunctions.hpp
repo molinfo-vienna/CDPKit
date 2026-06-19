@@ -60,7 +60,7 @@ namespace CDPL
          * \brief Merges duplicate vertices of \a mesh and updates the face vertex indices accordingly.
          * \param mesh The triangle mesh to deduplicate (modified in place).
          * \param check_vn If \c true, two vertices are only merged when their associated vertex normals also agree.
-         * \param tol The position-equality tolerance; vertices closer than \a tol are considered duplicates.
+         * \param tol The position-equality tolerance. Vertices closer than \a tol are considered duplicates.
          * \return The number of removed (merged-away) vertices.
          * \since 1.3
          */

@@ -3731,7 +3731,7 @@ def prepareFor2DVisualization(rxn: Chem.Reaction) -> None: pass
 # 
 # \param mesh The triangle mesh to deduplicate (modified in place).
 # \param check_vn If <tt>True</tt>, two vertices are only merged when their associated vertex normals also agree.
-# \param tol The position-equality tolerance; vertices closer than <em>tol</em> are considered duplicates.
+# \param tol The position-equality tolerance. Vertices closer than <em>tol</em> are considered duplicates.
 # 
 # \return The number of removed (merged-away) vertices. 
 # 

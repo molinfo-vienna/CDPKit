@@ -458,76 +458,76 @@ def conj(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 def conj(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3-vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
+# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3D vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
 # 
-# \param e The 3-vector expression.
+# \param e The 3D vector expression.
 # 
 # \return An expression-template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 
 ##
-# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3-vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
+# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3D vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
 # 
-# \param e The 3-vector expression.
+# \param e The 3D vector expression.
 # 
 # \return An expression-template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 
 ##
-# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3-vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
+# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3D vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
 # 
-# \param e The 3-vector expression.
+# \param e The 3D vector expression.
 # 
 # \return An expression-template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 
 ##
-# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3-vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
+# \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3D vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
 # 
-# \param e The 3-vector expression.
+# \param e The 3D vector expression.
 # 
 # \return An expression-template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the 3-vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
 # 
-# \param e1 The first 3-vector expression.
-# \param e2 The second 3-vector expression.
+# \param e1 The first 3D vector expression.
+# \param e2 The second 3D vector expression.
 # 
 # \return An expression-template node representing the cross product.
 # 
 def crossProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the 3-vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
 # 
-# \param e1 The first 3-vector expression.
-# \param e2 The second 3-vector expression.
+# \param e1 The first 3D vector expression.
+# \param e2 The second 3D vector expression.
 # 
 # \return An expression-template node representing the cross product.
 # 
 def crossProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the 3-vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
 # 
-# \param e1 The first 3-vector expression.
-# \param e2 The second 3-vector expression.
+# \param e1 The first 3D vector expression.
+# \param e2 The second 3D vector expression.
 # 
 # \return An expression-template node representing the cross product.
 # 
 def crossProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the 3-vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
 # 
-# \param e1 The first 3-vector expression.
-# \param e2 The second 3-vector expression.
+# \param e1 The first 3D vector expression.
+# \param e2 The second 3D vector expression.
 # 
 # \return An expression-template node representing the cross product.
 # 
@@ -3108,7 +3108,7 @@ def real(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstDQuaternionExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -3118,7 +3118,7 @@ def rotate(e1: ConstDQuaternionExpression, e2: ConstDVectorExpression) -> ConstD
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstFQuaternionExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -3128,7 +3128,7 @@ def rotate(e1: ConstFQuaternionExpression, e2: ConstFVectorExpression) -> ConstF
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -3138,7 +3138,7 @@ def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstL
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstULQuaternionExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 

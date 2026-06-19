@@ -191,14 +191,14 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
 
             /**
-             * \brief Specifies the \e MDL stereo parity of the atom (see namespace Chem::MDLParity).
+             * \brief Specifies the MDL stereo parity of the atom (see namespace Chem::MDLParity).
              * \see [\ref CTFILE]
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_PARITY;
 
             /**
-             * \brief Specifies the value of the \e MDL <em>stereo care</em> flag of the atom.
+             * \brief Specifies the value of the MDL <em>stereo care</em> flag of the atom.
              * \see [\ref CTFILE]
              * \valuetype \c bool
              */

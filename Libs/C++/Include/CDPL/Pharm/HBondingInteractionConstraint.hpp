@@ -42,7 +42,7 @@ namespace CDPL
 
         /**
          * \brief Constraint functor that tests whether a Pharm::Feature pair satisfies geometric H-bond criteria
-         *        (H-bond length plus acceptor-H-donor and H-bond-direction-to-acceptor-vector angles).
+         *        (H-bond length plus acceptor-H-donor and H-bond direction to acceptor vector angles).
          */
         class CDPL_PHARM_API HBondingInteractionConstraint
         {

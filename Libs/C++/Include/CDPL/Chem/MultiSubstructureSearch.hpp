@@ -120,7 +120,7 @@ namespace CDPL
             /**
              * \brief Validates the syntax of \a qry_expr without compiling it for evaluation.
              * \param qry_expr The expression to validate.
-             * \param max_substr_id Largest accepted substructure ID; expressions referencing larger IDs are rejected.
+             * \param max_substr_id Largest accepted substructure ID. Expressions referencing larger IDs are rejected.
              * \return An empty string if \a qry_expr is well-formed, otherwise an error message describing the failure.
              */
             std::string validate(const std::string& qry_expr, std::size_t max_substr_id);

@@ -518,7 +518,7 @@ def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: Chem
 # \param pharm The pharmacophore receiving the new exclusion volumes.
 # \param cntnr The atom container providing the seed positions.
 # \param coords_func The function returning the 3D coordinates of an atom.
-# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0, the per-atom vdW radius is used).
+# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0 the per-atom VdW radius is used).
 # \param min_dist Minimum distance (<em>rel_dist</em> controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
 # \param rel_dist If <tt>True</tt>, the per-pair tolerance sum is subtracted from the pair distance before testing against <em>min_dist</em>. Otherwise, the absolute distance is tested.
 # \param append If <tt>False</tt>, the pharmacophore <em>pharm</em> is cleared before any exclusion volumes are added.
@@ -530,7 +530,7 @@ def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coor
 # 
 # \param pharm The pharmacophore receiving the new exclusion volumes.
 # \param cntnr The feature container providing the seed positions.
-# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0, the per-feature tolerance is used).
+# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0 the per-feature tolerance is used).
 # \param min_dist Minimum distance (<em>rel_dist</em> controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
 # \param rel_dist If <tt>True</tt>, the per-pair tolerance sum is subtracted from the pair distance before testing against <em>min_dist</em>. Otherwise, the absolute distance is tested.
 # \param append If <tt>False</tt>, the pharmacophore <em>pharm</em> is cleared before any exclusion volumes are added.
@@ -541,7 +541,7 @@ def createExclusionVolumes(pharm: Pharmacophore, cntnr: FeatureContainer, tol: f
 # \brief Computes a per-feature type frequency histogram of the features in the feature container <em>cntr</em>.
 # 
 # \param cntnr The feature container.
-# \param hist The output histogram (feature type &rarr; count).
+# \param hist The output histogram (feature type to count).
 # \param append If <tt>False</tt>, <em>hist</em> is cleared before the counts are accumulated.
 # 
 def generateFeatureTypeHistogram(cntnr: FeatureContainer, hist: FeatureTypeHistogram, append: bool = False) -> None: pass

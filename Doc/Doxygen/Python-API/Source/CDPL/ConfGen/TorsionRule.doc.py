@@ -165,14 +165,14 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Returns the number of stored angle entries.
     # 
-    # \return The angle-entry count.
+    # \return The angle entry count.
     # 
     def getNumAngles() -> int: pass
 
     ##
     # \brief Returns the angle entry at index <em>idx</em>.
     # 
-    # \param idx The zero-based angle-entry index.
+    # \param idx The zero-based angle entry index.
     # 
     # \return A reference to the angle entry. 
     # 
@@ -183,7 +183,7 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Removes the angle entry at index <em>idx</em>.
     # 
-    # \param idx The zero-based angle-entry index.
+    # \param idx The zero-based angle entry index.
     # 
     # \throw Base.IndexError if the number of angle entries is zero or <em>idx</em> is not in the range [0, getNumAngles() - 1].
     # 

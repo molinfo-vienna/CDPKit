@@ -690,14 +690,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_CTAB_VERSION property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored CTab version (see namespace Chem::MDLDataFormatVersion).
+         * \return The stored CTAB version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API unsigned int getMDLCTABVersion(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_CTAB_VERSION property of the molecular graph \a molgraph to \a version.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param version The new CTab version (see namespace Chem::MDLDataFormatVersion).
+         * \param version The new CTAB version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API void setMDLCTABVersion(MolecularGraph& molgraph, unsigned int version);
 

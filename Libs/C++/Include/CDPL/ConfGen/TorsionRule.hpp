@@ -171,13 +171,13 @@ namespace CDPL
 
             /**
              * \brief Returns the number of stored angle entries.
-             * \return The angle-entry count.
+             * \return The angle entry count.
              */
             std::size_t getNumAngles() const;
 
             /**
              * \brief Returns the angle entry at index \a idx.
-             * \param idx The zero-based angle-entry index.
+             * \param idx The zero-based angle entry index.
              * \return A \c const reference to the angle entry.
              * \throw Base::IndexError if the number of angle entries is zero or \a idx is not in the range [0, getNumAngles() - 1].
              */
@@ -185,7 +185,7 @@ namespace CDPL
 
             /**
              * \brief Removes the angle entry at index \a idx.
-             * \param idx The zero-based angle-entry index.
+             * \param idx The zero-based angle entry index.
              * \throw Base::IndexError if the number of angle entries is zero or \a idx is not in the range [0, getNumAngles() - 1].
              */
             void removeAngle(std::size_t idx);

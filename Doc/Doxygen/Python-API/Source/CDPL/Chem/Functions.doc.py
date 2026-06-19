@@ -1272,7 +1272,7 @@ def clearIsotope(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of the molecular graph <em>molgraph</em> to <em>version</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param version The new CTab version (see namespace Chem.MDLDataFormatVersion).
+# \param version The new CTAB version (see namespace Chem.MDLDataFormatVersion).
 # 
 def setMDLCTABVersion(molgraph: MolecularGraph, version: int) -> None: pass
 
@@ -1290,7 +1290,7 @@ def hasMDLCTABVersion(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored CTab version (see namespace Chem.MDLDataFormatVersion).
+# \return The stored CTAB version (see namespace Chem.MDLDataFormatVersion).
 # 
 def getMDLCTABVersion(molgraph: MolecularGraph) -> int: pass
 
@@ -4138,7 +4138,7 @@ def containsMolecularGraph(molgraph: MolecularGraph, sub_molgraph: MolecularGrap
 # 
 # \param cntnr The source atom container.
 # \param mol The target molecule.
-# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>True</tt> are copied.
+# \param pred The predicate evaluated for each atom. Only atoms for which it returns <tt>True</tt> are copied.
 # \param append If <tt>True</tt>, atoms are appended to <em>mol</em>. Otherwise, <em>mol</em> is cleared first.
 # 
 def copyAtomsIf(cntnr: AtomContainer, mol: Molecule, pred: AtomPredicate, append: bool = False) -> None: pass
@@ -4148,7 +4148,7 @@ def copyAtomsIf(cntnr: AtomContainer, mol: Molecule, pred: AtomPredicate, append
 # 
 # \param cntnr The source atom container.
 # \param frag The target fragment.
-# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>True</tt> are copied.
+# \param pred The predicate evaluated for each atom. Only atoms for which it returns <tt>True</tt> are copied.
 # \param append If <tt>True</tt>, atoms are appended to <em>frag</em>. Otherwise, <em>frag</em> is cleared first.
 # 
 def copyAtomsIf(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, append: bool = False) -> None: pass
@@ -4158,7 +4158,7 @@ def copyAtomsIf(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, appen
 # 
 # \param cntnr The source atom container.
 # \param mol The target molecule.
-# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>False</tt> are copied.
+# \param pred The predicate evaluated for each atom. Only atoms for which it returns <tt>False</tt> are copied.
 # \param append If <tt>True</tt>, atoms are appended to <em>mol</em>. Otherwise, <em>mol</em> is cleared first.
 # 
 def copyAtomsIfNot(cntnr: AtomContainer, mol: Molecule, pred: AtomPredicate, append: bool = False) -> None: pass
@@ -4168,7 +4168,7 @@ def copyAtomsIfNot(cntnr: AtomContainer, mol: Molecule, pred: AtomPredicate, app
 # 
 # \param cntnr The source atom container.
 # \param frag The target fragment.
-# \param pred The predicate evaluated for each atom; only atoms for which it returns <tt>False</tt> are copied.
+# \param pred The predicate evaluated for each atom. Only atoms for which it returns <tt>False</tt> are copied.
 # \param append If <tt>True</tt>, atoms are appended to <em>frag</em>. Otherwise, <em>frag</em> is cleared first.
 # 
 def copyAtomsIfNot(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, append: bool = False) -> None: pass
@@ -5859,7 +5859,7 @@ def clearJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -
 # \brief Sets the value of the Chem.ControlParameter.MDL_CTAB_VERSION parameter of <em>cntnr</em> to <em>version</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param version The new CTab version (see namespace Chem.MDLDataFormatVersion).
+# \param version The new CTAB version (see namespace Chem.MDLDataFormatVersion).
 # 
 def setMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
@@ -5877,7 +5877,7 @@ def hasMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> bool: p
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored CTab version (see namespace Chem.MDLDataFormatVersion).
+# \return The stored CTAB version (see namespace Chem.MDLDataFormatVersion).
 # 
 def getMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 

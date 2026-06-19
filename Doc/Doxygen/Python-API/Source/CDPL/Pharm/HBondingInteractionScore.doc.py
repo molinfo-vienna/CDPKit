@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Pharm.FeatureInteractionScore implementation that scores a donor/acceptor feature pair by combining per-component scores for H-bond length, acceptor-hydrogen-donor angle and H-bond-direction to acceptor-vector angle.
+# \brief Pharm.FeatureInteractionScore implementation that scores a donor/acceptor feature pair by combining per-component scores for H-bond length, acceptor-H-donor angle and H-bond direction to acceptor vector angle.
 # 
 class HBondingInteractionScore(FeatureInteractionScore):
 
@@ -40,7 +40,7 @@ class HBondingInteractionScore(FeatureInteractionScore):
     DEF_MIN_AHD_ANGLE = 150.0
 
     ##
-    # \brief Default maximum H-bond direction to acceptor-vector angle in degrees.
+    # \brief Default maximum H-bond direction to acceptor vector angle in degrees.
     # 
     DEF_MAX_ACC_ANGLE = 75.0
 
@@ -69,7 +69,7 @@ class HBondingInteractionScore(FeatureInteractionScore):
     def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief Specifies the function that maps the H-bond direction to acceptor-vector angle to its score contribution.
+    # \brief Specifies the function that maps the H-bond direction to acceptor vector angle to its score contribution.
     # 
     # \param func The acceptor-angle scoring function.
     # 
@@ -104,7 +104,7 @@ class HBondingInteractionScore(FeatureInteractionScore):
     def getMinAHDAngle() -> float: pass
 
     ##
-    # \brief Returns the currently configured maximum H-bond direction to acceptor-vector angle.
+    # \brief Returns the currently configured maximum H-bond direction to acceptor vector angle.
     # 
     # \return The maximum acceptor angle in degrees.
     # 

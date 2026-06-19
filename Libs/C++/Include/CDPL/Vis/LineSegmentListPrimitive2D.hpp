@@ -91,7 +91,7 @@ namespace CDPL
             /**
              * \brief Computes the axis-aligned bounding rectangle that contains all line-segment endpoints.
              * \param bounds The Rectangle2D instance storing the result.
-             * \param font_mtrics Unused for line-segment lists; included to satisfy the GraphicsPrimitive2D interface.
+             * \param font_mtrics Unused for line-segment lists.
              */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_mtrics = 0) const;
 

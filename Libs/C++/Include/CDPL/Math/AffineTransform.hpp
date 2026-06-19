@@ -128,7 +128,7 @@ namespace CDPL
 
             /**
              * \brief Constructs an \f$ N \times N \f$ rotation matrix from an axis-angle representation.
-             * \tparam T1 The rotation-angle scalar type.
+             * \tparam T1 The rotation angle scalar type.
              * \tparam T2 The x-axis component scalar type.
              * \tparam T3 The y-axis component scalar type.
              * \tparam T4 The z-axis component scalar type.
@@ -171,7 +171,7 @@ namespace CDPL
 
             /**
              * \brief Sets the rotation from an axis-angle representation.
-             * \tparam T1 The rotation-angle scalar type.
+             * \tparam T1 The rotation angle scalar type.
              * \tparam T2 The x-axis component scalar type.
              * \tparam T3 The y-axis component scalar type.
              * \tparam T4 The z-axis component scalar type.
@@ -190,10 +190,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the rotation-matrix entry at (\a i, \a j).
+             * \brief Returns the rotation matrix element at (\a i, \a j).
              * \param i The zero-based row index.
              * \param j The zero-based column index.
-             * \return The matrix entry (computed from the stored unit quaternion).
+             * \return The matrix element (computed from the stored unit quaternion).
              * \throw Base::IndexError if either index is out of range.
              */
             ConstReference operator()(SizeType i, SizeType j) const
@@ -464,10 +464,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the scaling-matrix entry at (\a i, \a j).
+             * \brief Returns the scaling matrix element at (\a i, \a j).
              * \param i The zero-based row index.
              * \param j The zero-based column index.
-             * \return The scale factor on the diagonal at positions \c 0, \c 1, \c 2 (1 elsewhere on the diagonal; 0 off the diagonal).
+             * \return The corresponding axis scaling factor on a diagonal position and 0 off the diagonal.
              * \throw Base::IndexError if either index is out of range.
              */
             ConstReference operator()(SizeType i, SizeType j) const
@@ -681,7 +681,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the translation-matrix entry at (\a i, \a j).
+             * \brief Returns the translation matrix element at (\a i, \a j).
              * \param i The zero-based row index.
              * \param j The zero-based column index.
              * \return 1 on the diagonal; the corresponding translation component in the last column (rows 0-2); 0 elsewhere.

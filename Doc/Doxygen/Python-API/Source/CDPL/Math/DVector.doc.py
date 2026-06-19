@@ -47,7 +47,7 @@ class DVector(Boost.Python.instance):
     # \brief Constructs a vector of size <em>n</em> with every element initialized to <em>v</em>.
     # 
     # \param n The desired vector size.
-    # \param v The element value used to initialize every entry.
+    # \param v The value used to initialize every element.
     # 
     def __init__(n: int, v: float) -> None: pass
 

@@ -124,7 +124,7 @@ namespace CDPL
         /**
          * \brief Returns the number of ordinary hydrogens in the molecular graph \a molgraph.
          * \param molgraph The molecular graph.
-         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary"; an empty bitmask makes any hydrogen ordinary.
+         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary". An empty bitmask makes any hydrogen ordinary.
          * \return The ordinary hydrogen count.
          * \see MolProp::isOrdinaryHydrogen() for the definition of "ordinary".
          */
@@ -133,7 +133,7 @@ namespace CDPL
         /**
          * \brief Returns the number of explicit ordinary hydrogens in the molecular graph \a molgraph.
          * \param molgraph The molecular graph.
-         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary"; an empty bitmask makes any hydrogen ordinary.
+         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary". An empty bitmask makes any hydrogen ordinary.
          * \return The explicit ordinary hydrogen count.
          * \see MolProp::isOrdinaryHydrogen() for the definition of "ordinary".
          */

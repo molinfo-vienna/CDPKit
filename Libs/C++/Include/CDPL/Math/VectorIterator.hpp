@@ -97,7 +97,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs the accessor from a mutable-vector accessor (relaxing it to read-only access).
+             * \brief Constructs the accessor from a mutable vector accessor (relaxing it to read-only access).
              * \param accessor The source mutable accessor.
              */
             VectorElementAccessor(const VectorElementAccessor<E>& accessor):

@@ -100,7 +100,7 @@ namespace CDPL
         /**
          * \brief Computes a per-feature type frequency histogram of the features in the feature container \a cntr.
          * \param cntnr The feature container.
-         * \param hist The output histogram (feature type &rarr; count).
+         * \param hist The output histogram (feature type to count).
          * \param append If \c false, \a hist is cleared before the counts are accumulated.
          */
         CDPL_PHARM_API void generateFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist, bool append = false);

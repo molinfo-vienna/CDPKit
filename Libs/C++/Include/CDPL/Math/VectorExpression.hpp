@@ -1003,11 +1003,11 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the 3-vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+         * \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
-         * \param e1 The first 3-vector expression.
-         * \param e2 The second 3-vector expression.
+         * \param e1 The first 3D vector expression.
+         * \param e2 The second 3D vector expression.
          * \return An expression-template node representing the cross product.
          */
         template <typename E1, typename E2>
@@ -1163,7 +1163,7 @@ namespace CDPL
          * \tparam E2 The vector expression type.
          * \param e1 The unit quaternion expression encoding the rotation.
          * \param e2 The vector expression to rotate.
-         * \return An expression-template node representing the rotated 3-vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+         * \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
          */
         template <typename E1, typename E2>
         typename QuaternionVectorBinaryTraits<E1, E2, QuaternionVectorRotation<E1, E2> >::ResultType

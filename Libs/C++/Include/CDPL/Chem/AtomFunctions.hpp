@@ -1238,7 +1238,7 @@ namespace CDPL
 
         /**
          * \brief Writes every neighbor of the atom \a atom (with bonds belonging to the molecular graph \a molgraph) into \a it, skipping \a excl_atom.
-         * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>); the constness selects between AtomIterator and ConstAtomIterator.
+         * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>).
          * \tparam OutputIterator The output iterator type receiving pointers to the neighbor atoms.
          * \param atom The atom whose neighbors are to be enumerated.
          * \param molgraph The molecular graph used to filter the atom/bond membership.

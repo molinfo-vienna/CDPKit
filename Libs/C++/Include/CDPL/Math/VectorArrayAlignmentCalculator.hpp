@@ -74,7 +74,7 @@ namespace CDPL
 
             /**
              * \brief Aligns \a points onto \a ref_points (with per-point weights) using the Kabsch algorithm.
-             * \tparam VE The weight-vector expression type.
+             * \tparam VE The weight vector expression type.
              * \param points The vector array containing the points to align.
              * \param ref_points The vector array containing the reference points.
              * \param weights The per-point weights.
