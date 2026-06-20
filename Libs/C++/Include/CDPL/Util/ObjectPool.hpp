@@ -91,6 +91,10 @@ namespace CDPL
             struct DefaultConstructor
             {
 
+                /**
+                 * \brief Creates a new instance of \c ObjectType via \c new.
+                 * \return A pointer to the newly created object.
+                 */
                 T* operator()() const
                 {
                     return new T();
@@ -103,6 +107,10 @@ namespace CDPL
             struct DefaultDestructor
             {
 
+                /**
+                 * \brief Destroys the instance pointed to by \a obj via \c delete.
+                 * \param obj A pointer to the object to destroy.
+                 */
                 void operator()(T* obj) const
                 {
                     delete obj;

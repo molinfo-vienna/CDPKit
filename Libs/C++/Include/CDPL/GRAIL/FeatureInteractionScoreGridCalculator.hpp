@@ -104,6 +104,11 @@ namespace CDPL
             struct MaxScoreFunctor
             {
 
+                /**
+                 * \brief Returns the maximum (infinity norm) of the per-feature scores.
+                 * \param scores The vector of per-feature scores.
+                 * \return The largest of the scores.
+                 */
                 double operator()(const Math::DVector& scores) const
                 {
                     return normInf(scores);
@@ -116,6 +121,11 @@ namespace CDPL
             struct ScoreSumFunctor
             {
 
+                /**
+                 * \brief Returns the sum of the per-feature scores.
+                 * \param scores The vector of per-feature scores.
+                 * \return The sum of the scores.
+                 */
                 double operator()(const Math::DVector& scores) const
                 {
                     return sum(scores);

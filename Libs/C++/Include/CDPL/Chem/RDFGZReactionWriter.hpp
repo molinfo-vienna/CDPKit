@@ -39,6 +39,9 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Writer for reaction data in the gzip-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+         */
         typedef Util::CompressedDataWriter<RDFReactionWriter, Util::GZipOStream> RDFGZReactionWriter;
     }
 } // namespace CDPL

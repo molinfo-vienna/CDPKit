@@ -43,6 +43,17 @@ namespace CDPL
     namespace Vis
     {
 
+        /**
+         * \brief Traits class providing the reference-count management functions for a particular \e Cairo data type \a T.
+         *
+         * \c %CairoPointerTraits has to be specialized for each \e Cairo data type that shall be manageable by a
+         * Vis::CairoPointer. Each specialization provides the static methods \c reference() and \c destroy(), which
+         * increment and decrement the reference count of the wrapped object, respectively. Specializations are
+         * provided for \c cairo_t, \c cairo_surface_t and \c cairo_pattern_t.
+         *
+         * \tparam T The type of the managed \e Cairo data structure.
+         * \see Vis::CairoPointer
+         */
         template <typename T>
         struct CairoPointerTraits;
 

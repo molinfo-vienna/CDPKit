@@ -39,6 +39,9 @@ namespace CDPL
     {
 
         template <typename T> class RegularGrid<T>;
+        /**
+         * \brief A regular spatial grid storing double-precision floating-point values.
+         */
         typedef RegularGrid<double> DRegularGrid;
         
         /**
