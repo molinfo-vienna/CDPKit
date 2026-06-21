@@ -45,25 +45,46 @@ namespace CDPL
     namespace Util
     {
 
+        /**
+         * \brief Helper supplying the default value returned by Util::Map when a queried key is absent.
+         * \tparam ValueType The type of the mapped values.
+         * \tparam Allow Whether returning a default value is allowed (\c true) or shall raise an error (\c false).
+         */
         template <typename ValueType, bool Allow = true>
         struct MapDefaultValue
         {
 
+            /**
+             * \brief Returns a \c const reference to the shared default-constructed value.
+             * \return A \c const reference to the default value.
+             */
             static const ValueType& get()
             {
                 return defValue;
             }
 
+            /**
+             * \brief The default-constructed value returned for an absent key.
+             */
             static const ValueType defValue;
         };
 
         template <typename ValueType, bool Allow>
         const ValueType MapDefaultValue<ValueType, Allow>::defValue = ValueType();
 
+        /**
+         * \brief Util::MapDefaultValue specialization for the case in which default values are not allowed.
+         * \tparam ValueType The type of the mapped values.
+         */
         template <typename ValueType>
         struct MapDefaultValue<ValueType, false>
         {
 
+            /**
+             * \brief Always throws, since default values are not supported for this map configuration.
+             * \return Never returns normally.
+             * \throw Base::OperationFailed unconditionally.
+             */
             static const ValueType& get()
             {
                 throw Base::OperationFailed("Map: default value not supported");

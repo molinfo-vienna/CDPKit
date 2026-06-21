@@ -39,6 +39,9 @@ namespace CDPL
     {
 
         template <typename T> class RegularGridSet<T>;
+        /**
+         * \brief Convenience alias for the double-precision regular spatial grid sets.
+         */
         typedef RegularGridSet<double> DRegularGridSet;
 
         /**

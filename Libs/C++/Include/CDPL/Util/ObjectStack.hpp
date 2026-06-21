@@ -77,6 +77,10 @@ namespace CDPL
             struct DefaultConstructor
             {
 
+                /**
+                 * \brief Creates a new instance of \c ObjectType via \c new.
+                 * \return A pointer to the newly created object.
+                 */
                 T* operator()() const
                 {
                     return new T();

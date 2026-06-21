@@ -39,6 +39,10 @@ namespace CDPL
     namespace Chem
     {
 
+        /**
+         * \brief Reader for molecule data in the gzip-compressed <em>XYZ</em> format.
+         * \since 1.1
+         */
         typedef Util::CompressedDataReader<XYZMoleculeReader, Util::GZipIStream> XYZGZMoleculeReader;
     }
 } // namespace CDPL

@@ -798,19 +798,55 @@ namespace CDPL
             ArrayType data;
         };
 
+        /**
+         * \brief Scaling matrix holding floating point values of type <tt>float</tt>.
+         */
         typedef ScalingMatrix<float>         FScalingMatrix;
+        /**
+         * \brief Scaling matrix holding floating point values of type <tt>double</tt>.
+         */
         typedef ScalingMatrix<double>        DScalingMatrix;
+        /**
+         * \brief Scaling matrix holding integer values of type <tt>long</tt>.
+         */
         typedef ScalingMatrix<long>          LScalingMatrix;
+        /**
+         * \brief Scaling matrix holding unsigned integer values of type <tt>unsigned long</tt>.
+         */
         typedef ScalingMatrix<unsigned long> ULScalingMatrix;
 
+        /**
+         * \brief Rotation matrix holding floating point values of type <tt>float</tt>.
+         */
         typedef RotationMatrix<float>         FRotationMatrix;
+        /**
+         * \brief Rotation matrix holding floating point values of type <tt>double</tt>.
+         */
         typedef RotationMatrix<double>        DRotationMatrix;
+        /**
+         * \brief Rotation matrix holding integer values of type <tt>long</tt>.
+         */
         typedef RotationMatrix<long>          LRotationMatrix;
+        /**
+         * \brief Rotation matrix holding unsigned integer values of type <tt>unsigned long</tt>.
+         */
         typedef RotationMatrix<unsigned long> ULRotationMatrix;
 
+        /**
+         * \brief Translation matrix holding floating point values of type <tt>float</tt>.
+         */
         typedef TranslationMatrix<float>         FTranslationMatrix;
+        /**
+         * \brief Translation matrix holding floating point values of type <tt>double</tt>.
+         */
         typedef TranslationMatrix<double>        DTranslationMatrix;
+        /**
+         * \brief Translation matrix holding integer values of type <tt>long</tt>.
+         */
         typedef TranslationMatrix<long>          LTranslationMatrix;
+        /**
+         * \brief Translation matrix holding unsigned integer values of type <tt>unsigned long</tt>.
+         */
         typedef TranslationMatrix<unsigned long> ULTranslationMatrix;
     } // namespace Math
 } // namespace CDPL
