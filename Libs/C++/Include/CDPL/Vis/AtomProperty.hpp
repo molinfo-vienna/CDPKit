@@ -225,6 +225,10 @@ namespace CDPL
 
             /**
              * \brief Specifies the brush to use for filling atom highlighting areas.
+             *
+             * The brush specified by this property takes precedence over the brushes specified by Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH
+             * and Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_BRUSH.
+             *
              * \valuetype Vis::Brush
              * \since 1.2
              */
@@ -232,11 +236,14 @@ namespace CDPL
    
             /**
              * \brief Specifies the pen to use for drawing atom highlighting area outlines.
+             *
+             * The pen specified by this property takes precedence over the pens specified by Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN
+             * and Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+             *
              * \valuetype Vis::Pen
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey HIGHLIGHT_AREA_OUTLINE_PEN;
-            
         } // namespace AtomProperty
     } // namespace Vis
 } // namespace CDPL

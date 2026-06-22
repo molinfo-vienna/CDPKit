@@ -690,7 +690,7 @@ namespace CDPL
         CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Atom& atom, const MolecularGraph& molgraph, std::size_t dim = 1);
 
         /**
-         * \brief Derives the stereo descriptor of the atom \a atom from its MDL parity in the molecular graph \a molgraph.
+         * \brief Derives the stereo descriptor of the atom \a atom from its \e MDL parity in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the stereo descriptor.
          * \param molgraph The molecular graph providing the structural context.
          * \return The derived stereo descriptor.
@@ -960,14 +960,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MDL_PARITY property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MDL stereo parity (see namespace Chem::MDLParity).
+         * \return The stored \e MDL stereo parity (see namespace Chem::MDLParity).
          */
         CDPL_CHEM_API unsigned int getMDLParity(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MDL_PARITY property of the atom \a atom to \a parity.
          * \param atom The atom for which to set the property value.
-         * \param parity The new MDL stereo parity (see namespace Chem::MDLParity).
+         * \param parity The new \e MDL stereo parity (see namespace Chem::MDLParity).
          */
         CDPL_CHEM_API void setMDLParity(Atom& atom, unsigned int parity);
 
@@ -985,10 +985,10 @@ namespace CDPL
         CDPL_CHEM_API bool hasMDLParity(const Atom& atom);
 
         /**
-         * \brief Computes the MDL parity of the atom \a atom from its 2D layout and stereo flags in the molecular graph \a molgraph.
+         * \brief Computes the \e MDL parity of the atom \a atom from its 2D layout and stereo flags in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the parity.
          * \param molgraph The molecular graph providing the structural context.
-         * \return The computed MDL parity (see namespace Chem::MDLParity).
+         * \return The computed \e MDL parity (see namespace Chem::MDLParity).
          */
         CDPL_CHEM_API unsigned int calcMDLParity(const Atom& atom, const MolecularGraph& molgraph);
 
@@ -996,14 +996,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::MDL_DB_STEREO_CARE_FLAG property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored MDL stereo-care flag.
+         * \return The stored \e MDL stereo-care flag.
          */
         CDPL_CHEM_API bool getMDLStereoCareFlag(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::MDL_DB_STEREO_CARE_FLAG property of the atom \a atom to \a flag.
          * \param atom The atom for which to set the property value.
-         * \param flag The new MDL stereo-care flag.
+         * \param flag The new \e MDL stereo-care flag.
          */
         CDPL_CHEM_API void setMDLStereoCareFlag(Atom& atom, bool flag);
 

@@ -106,9 +106,9 @@ class ControlParameter(Boost.Python.instance):
     MDL_CTAB_VERSION = CDPL.Base.LookupKey('MDL_CTAB_VERSION')
 
     ##
-    # \brief Specifies whether the stereo parity of atoms shall be ignored when reading or writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether the stereo parity of atoms shall be ignored when reading or writing data in an <em>MDL CTFile</em>-based format.
     # 
-    # If the control-parameter is set to <tt>True</tt>, the stereo parity of atoms will be ignored both on reading (i.e. the read MDL parity of an input atom will not be converted to the corresponding Chem.StereoDescriptor object and stored in the Chem.Atom property Chem.AtomProperty.STEREO_DESCRIPTOR) and writing (i.e. the property Chem.AtomProperty.MDL_PARITY is not written to the corresponding connection table data field).
+    # If the control-parameter is set to <tt>True</tt>, the stereo parity of atoms will be ignored both on reading (i.e. the read <em>MDL</em> parity of an input atom will not be converted to the corresponding Chem.StereoDescriptor object and stored in the Chem.Atom property Chem.AtomProperty.STEREO_DESCRIPTOR) and writing (i.e. the property Chem.AtomProperty.MDL_PARITY is not written to the corresponding connection table data field).
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>bool</tt>
@@ -116,7 +116,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_IGNORE_PARITY = CDPL.Base.LookupKey('MDL_IGNORE_PARITY')
 
     ##
-    # \brief Specifies the desired data format version for the output of reactions in an <em>MDL Rxn-</em> or <em>RD-File</em> format.
+    # \brief Specifies the desired data format version for the output of reactions in <em>MDL Rxn-</em> or <em>RD-File</em> format.
     # 
     # The desired data format version is specified by one of the constants defined in namespace CDPL.Chem.MDLDataFormatVersion. If <tt>MDL_RXN_FILE_VERSION</tt> has not been set or the parameter value equals CDPL.Chem.MDLDataFormatVersion.UNDEF, the format specified by the Chem.Reaction property Chem.ReactionProperty.MDL_RXN_FILE_VERSION will take effect.
     # 
@@ -130,7 +130,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_RXN_FILE_VERSION = CDPL.Base.LookupKey('MDL_RXN_FILE_VERSION')
 
     ##
-    # \brief Specifies whether to remove leading and trailing whitespace from data lines when reading or writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether to remove leading and trailing whitespace from data lines when reading or writing data in an <em>MDL CTFile</em>-based format.
     # 
     # If the control-parameter is set to <tt>True</tt>, leading and trailing whitespace of data lines will be removed before processing continues. Otherwise, whitespace is considered to be significant and will be preserved.
     # 
@@ -140,7 +140,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_TRIM_LINES = CDPL.Base.LookupKey('MDL_TRIM_LINES')
 
     ##
-    # \brief Specifies whether to remove leading and trailing whitespace from string values when reading or writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether to remove leading and trailing whitespace from string values when reading or writing data in an <em>MDL CTFile</em>-based format.
     # 
     # If the control-parameter is set to <tt>True</tt>, leading and trailing whitespace of string data field values will be removed before processing continues. Otherwise, whitespace is considered to be significant and will be preserved.
     # 
@@ -150,7 +150,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_TRIM_STRINGS = CDPL.Base.LookupKey('MDL_TRIM_STRINGS')
 
     ##
-    # \brief Specifies whether data lines that exceed the maximum allowed line length may be truncated when writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether data lines that exceed the maximum allowed line length may be truncated when writing data in an <em>MDL CTFile</em>-based format.
     # 
     # If the control-parameter is set to <tt>True</tt>, output data lines which exceed the maximum allowed line length (according to the <em>MDL CTFile</em> specification) are silently truncated before they get written. If <tt>MDL_TRUNCATE_LINES</tt> is <tt>False</tt>, an attempt to write a data line that exceeds maximum line length is considered as an error condition and causes the output operation to fail.
     # 
@@ -162,7 +162,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_TRUNCATE_LINES = CDPL.Base.LookupKey('MDL_TRUNCATE_LINES')
 
     ##
-    # \brief Specifies whether string values that exceed the size of an output data field may be truncated when writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether string values that exceed the size of an output data field may be truncated when writing data in an <em>MDL CTFile</em>-based format.
     # 
     # If the control-parameter is set to <tt>True</tt>, output string values whose length exceeds the size of the target data field are silently truncated to the respective field size. If <tt>MDL_TRUNCATE_STRINGS</tt> is <tt>False</tt>, the attempt to write a string value which is too large for the target data field is considered as an error condition and causes the output operation to fail.
     # 
@@ -172,7 +172,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_TRUNCATE_STRINGS = CDPL.Base.LookupKey('MDL_TRUNCATE_STRINGS')
 
     ##
-    # \brief Specifies whether to update the timestamp of <em>Mol-</em> and <em>Rxn-File</em> header blocks when writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether to update the timestamp of <em>Mol-</em> and <em>Rxn-File</em> header blocks when writing data in an <em>MDL CTFile</em>-based format.
     # 
     # If the control-parameter is set to <tt>True</tt>, the timestamp of molecule and reaction data records will specify the time of their writing. If <tt>MDL_UPDATE_TIMESTAMP</tt> is <tt>False</tt>, the time specified by one of the properties Chem.MolecularGraphProperty.TIMESTAMP (for molecular graph output) or Chem.ReactionProperty.TIMESTAMP (for reaction output) will be used. If the output data object does not provide a value for the timestamp property, the current time will be used as a fallback.
     # 
@@ -182,7 +182,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_UPDATE_TIMESTAMP = CDPL.Base.LookupKey('MDL_UPDATE_TIMESTAMP')
 
     ##
-    # \brief Specifies whether to write conformer energies into the energy field of the molecule header block when writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether to write conformer energies into the energy field of the molecule header block when writing data in an <em>MDL CTFile</em>-based format.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>bool</tt>
@@ -190,7 +190,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD = CDPL.Base.LookupKey('MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD')
 
     ##
-    # \brief Specifies whether to write conformer energies as an SD-file entry when writing data in an <em>MDL CTFile</em> based format.
+    # \brief Specifies whether to write conformer energies as an <em>MDL SD-File</em> structure data entry when writing data in an <em>MDL CTFile</em>-based format.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>bool</tt>
@@ -198,7 +198,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY = CDPL.Base.LookupKey('MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY')
 
     ##
-    # \brief Specifies the SD-file tag used for the conformer energy entry (see MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY).
+    # \brief Specifies the <em>MDL SD-File</em> structure data entry header used for the conformer energy (see MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY).
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>std::string</tt>
@@ -206,7 +206,7 @@ class ControlParameter(Boost.Python.instance):
     MDL_CONF_ENERGY_SD_TAG = CDPL.Base.LookupKey('MDL_CONF_ENERGY_SD_TAG')
 
     ##
-    # \brief Specifies whether to output the 'aromatic' bond type value (<tt>4</tt>) in the type field of aromatic bonds when writing molecular graph data in an <em>MDL CTFile</em> based format. On data reading, the aromaticity flag property of bonds having this type will be set to <tt>True</tt> and to <tt>False</tt> if the bond type specifies a defined bond order.
+    # \brief Specifies whether to output the 'aromatic' bond type value (<tt>4</tt>) in the type field of aromatic bonds when writing molecular graph data in an <em>MDL CTFile</em>-based format. On data reading, the aromaticity flag property of bonds having this type will be set to <tt>True</tt> and to <tt>False</tt> if the bond type specifies a defined bond order.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>bool</tt> 

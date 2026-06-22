@@ -345,7 +345,6 @@ namespace CDPL
          * \since 1.3
          */
         CDPL_MOLPROP_API Chem::FragmentList::SharedPointer perceiveFunctionalGroups(Chem::MolecularGraph& molgraph, bool overwrite);
-        
     } // namespace MolProp
 } // namespace CDPL
 

@@ -70,21 +70,24 @@ namespace CDPL
             extern CDPL_GRID_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
-             * \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> [\ref CUBE] file is taken as the grid name on input (\c true) or treated as a regular comment (\c false).
+             * \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> file is taken as the grid name or treated as a regular comment on data I/O.
+             * \see [\ref CUBE]
              * \valuetype \c bool
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_COMMENT_IS_NAME;
 
             /**
-             * \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> [\ref CUBE] format.
+             * \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> format.
+             * \see [\ref CUBE]
              * \valuetype \c double
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_INPUT_DISTANCE_SCALING_FACTOR;
 
             /**
-             * \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> [\ref CUBE] format data output.
+             * \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> format data output.
+             * \see [\ref CUBE]
              * \valuetype \c double
              * \since 1.4
              */

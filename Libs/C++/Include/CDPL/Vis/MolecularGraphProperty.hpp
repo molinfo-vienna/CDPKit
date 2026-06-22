@@ -550,7 +550,6 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_OUTLINE_PEN;
-            
         } // namespace MolecularGraphProperty
     } // namespace Vis
 } // namespace CDPL

@@ -1305,7 +1305,7 @@ def clearMDLCTABVersion(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_CHIRAL_FLAG property of the molecular graph <em>molgraph</em> to <em>flag</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param flag The new MDL chiral flag.
+# \param flag The new <em>MDL</em> chiral flag.
 # 
 def setMDLChiralFlag(molgraph: MolecularGraph, flag: bool) -> None: pass
 
@@ -1323,7 +1323,7 @@ def hasMDLChiralFlag(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL chiral flag.
+# \return The stored <em>MDL</em> chiral flag.
 # 
 def getMDLChiralFlag(molgraph: MolecularGraph) -> bool: pass
 
@@ -1338,7 +1338,7 @@ def clearMDLChiralFlag(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_DIMENSIONALITY property of the molecular graph <em>molgraph</em> to <em>dim</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param dim The new MDL coordinate dimensionality.
+# \param dim The new <em>MDL</em> coordinate dimensionality.
 # 
 def setMDLDimensionality(molgraph: MolecularGraph, dim: int) -> None: pass
 
@@ -1356,7 +1356,7 @@ def hasMDLDimensionality(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL coordinate dimensionality.
+# \return The stored <em>MDL</em> coordinate dimensionality.
 # 
 def getMDLDimensionality(molgraph: MolecularGraph) -> int: pass
 
@@ -1371,7 +1371,7 @@ def clearMDLDimensionality(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_ENERGY property of the molecular graph <em>molgraph</em> to <em>energy</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param energy The new MDL energy.
+# \param energy The new <em>MDL</em> energy.
 # 
 def setMDLEnergy(molgraph: MolecularGraph, energy: float) -> None: pass
 
@@ -1389,7 +1389,7 @@ def hasMDLEnergy(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL energy.
+# \return The stored <em>MDL</em> energy.
 # 
 def getMDLEnergy(molgraph: MolecularGraph) -> float: pass
 
@@ -1404,7 +1404,7 @@ def clearMDLEnergy(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_EXTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em> to <em>reg_no</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param reg_no The new MDL external registry number.
+# \param reg_no The new <em>MDL</em> external registry number.
 # 
 def setMDLExternalRegistryNumber(rxn: Reaction, reg_no: str) -> None: pass
 
@@ -1422,7 +1422,7 @@ def hasMDLExternalRegistryNumber(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored MDL external registry number.
+# \return The stored <em>MDL</em> external registry number.
 # 
 def getMDLExternalRegistryNumber(rxn: Reaction) -> str: pass
 
@@ -1437,7 +1437,7 @@ def clearMDLExternalRegistryNumber(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_INTERNAL_REGISTRY_NUMBER property of the reaction <em>rxn</em> to <em>reg_no</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param reg_no The new MDL internal registry number.
+# \param reg_no The new <em>MDL</em> internal registry number.
 # 
 def setMDLInternalRegistryNumber(rxn: Reaction, reg_no: str) -> None: pass
 
@@ -1455,7 +1455,7 @@ def hasMDLInternalRegistryNumber(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored MDL internal registry number.
+# \return The stored <em>MDL</em> internal registry number.
 # 
 def getMDLInternalRegistryNumber(rxn: Reaction) -> str: pass
 
@@ -1470,7 +1470,7 @@ def clearMDLInternalRegistryNumber(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of the reaction <em>rxn</em> to <em>mol_rec</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param mol_rec The new MDL molecule record.
+# \param mol_rec The new <em>MDL</em> molecule record.
 # 
 def setMDLMoleculeRecord(rxn: Reaction, mol_rec: Molecule) -> None: pass
 
@@ -1488,7 +1488,7 @@ def hasMDLMoleculeRecord(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored MDL molecule record (typically the structure component of an RD-file).
+# \return The stored <em>MDL RD-File</em> molecule record.
 # 
 def getMDLMoleculeRecord(rxn: Reaction) -> Molecule: pass
 
@@ -1503,7 +1503,7 @@ def clearMDLMoleculeRecord(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.MDL_PARITY property of the atom <em>atom</em> to <em>parity</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param parity The new MDL stereo parity (see namespace Chem.MDLParity).
+# \param parity The new <em>MDL</em> stereo parity (see namespace Chem.MDLParity).
 # 
 def setMDLParity(atom: Atom, parity: int) -> None: pass
 
@@ -1521,7 +1521,7 @@ def hasMDLParity(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored MDL stereo parity (see namespace Chem.MDLParity).
+# \return The stored <em>MDL</em> stereo parity (see namespace Chem.MDLParity).
 # 
 def getMDLParity(atom: Atom) -> int: pass
 
@@ -1536,7 +1536,7 @@ def clearMDLParity(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_PROGRAM_NAME property of the molecular graph <em>molgraph</em> to <em>name</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param name The new MDL program name.
+# \param name The new <em>MDL</em> program name.
 # 
 def setMDLProgramName(molgraph: MolecularGraph, name: str) -> None: pass
 
@@ -1554,7 +1554,7 @@ def hasMDLProgramName(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL program name.
+# \return The stored <em>MDL</em> program name.
 # 
 def getMDLProgramName(molgraph: MolecularGraph) -> str: pass
 
@@ -1569,7 +1569,7 @@ def clearMDLProgramName(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_PROGRAM_NAME property of the reaction <em>rxn</em> to <em>name</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param name The new MDL program name.
+# \param name The new <em>MDL</em> program name.
 # 
 def setMDLProgramName(rxn: Reaction, name: str) -> None: pass
 
@@ -1587,7 +1587,7 @@ def hasMDLProgramName(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored MDL program name.
+# \return The stored <em>MDL</em> program name.
 # 
 def getMDLProgramName(rxn: Reaction) -> str: pass
 
@@ -1602,7 +1602,7 @@ def clearMDLProgramName(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_RXN_FILE_VERSION property of the reaction <em>rxn</em> to <em>version</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param version The new RXN-file version (see Chem.MDLDataFormatVersion).
+# \param version The new <em>MDL Rxn-File</em> version (see Chem.MDLDataFormatVersion).
 # 
 def setMDLRXNFileVersion(rxn: Reaction, version: int) -> None: pass
 
@@ -1620,7 +1620,7 @@ def hasMDLRXNFileVersion(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored RXN-file version (see Chem.MDLDataFormatVersion).
+# \return The stored <em>MDL Rxn-File</em> version (see Chem.MDLDataFormatVersion).
 # 
 def getMDLRXNFileVersion(rxn: Reaction) -> int: pass
 
@@ -1635,7 +1635,7 @@ def clearMDLRXNFileVersion(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_REGISTRY_NUMBER property of the molecular graph <em>molgraph</em> to <em>reg_no</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param reg_no The new MDL registry number.
+# \param reg_no The new <em>MDL</em> registry number.
 # 
 def setMDLRegistryNumber(molgraph: MolecularGraph, reg_no: int) -> None: pass
 
@@ -1653,7 +1653,7 @@ def hasMDLRegistryNumber(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL registry number.
+# \return The stored <em>MDL</em> registry number.
 # 
 def getMDLRegistryNumber(molgraph: MolecularGraph) -> int: pass
 
@@ -1668,7 +1668,7 @@ def clearMDLRegistryNumber(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_REGISTRY_NUMBER property of the reaction <em>rxn</em> to <em>reg_no</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param reg_no The new MDL registry number.
+# \param reg_no The new <em>MDL</em> registry number.
 # 
 def setMDLRegistryNumber(rxn: Reaction, reg_no: int) -> None: pass
 
@@ -1686,7 +1686,7 @@ def hasMDLRegistryNumber(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored MDL registry number.
+# \return The stored <em>MDL</em> registry number.
 # 
 def getMDLRegistryNumber(rxn: Reaction) -> int: pass
 
@@ -1701,7 +1701,7 @@ def clearMDLRegistryNumber(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR1 property of the molecular graph <em>molgraph</em> to <em>factor</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param factor The new MDL scaling factor 1.
+# \param factor The new <em>MDL</em> scaling factor 1.
 # 
 def setMDLScalingFactor1(molgraph: MolecularGraph, factor: int) -> None: pass
 
@@ -1719,7 +1719,7 @@ def hasMDLScalingFactor1(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL scaling factor 1.
+# \return The stored <em>MDL</em> scaling factor 1.
 # 
 def getMDLScalingFactor1(molgraph: MolecularGraph) -> int: pass
 
@@ -1734,7 +1734,7 @@ def clearMDLScalingFactor1(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_SCALING_FACTOR2 property of the molecular graph <em>molgraph</em> to <em>factor</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param factor The new MDL scaling factor 2.
+# \param factor The new <em>MDL</em> scaling factor 2.
 # 
 def setMDLScalingFactor2(molgraph: MolecularGraph, factor: float) -> None: pass
 
@@ -1752,7 +1752,7 @@ def hasMDLScalingFactor2(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL scaling factor 2.
+# \return The stored <em>MDL</em> scaling factor 2.
 # 
 def getMDLScalingFactor2(molgraph: MolecularGraph) -> float: pass
 
@@ -1767,7 +1767,7 @@ def clearMDLScalingFactor2(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.MDL_DB_STEREO_CARE_FLAG property of the atom <em>atom</em> to <em>flag</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param flag The new MDL stereo-care flag.
+# \param flag The new <em>MDL</em> stereo-care flag.
 # 
 def setMDLStereoCareFlag(atom: Atom, flag: bool) -> None: pass
 
@@ -1785,7 +1785,7 @@ def hasMDLStereoCareFlag(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored MDL stereo-care flag.
+# \return The stored <em>MDL</em> stereo-care flag.
 # 
 def getMDLStereoCareFlag(atom: Atom) -> bool: pass
 
@@ -1800,7 +1800,7 @@ def clearMDLStereoCareFlag(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_USER_INITIALS property of the molecular graph <em>molgraph</em> to <em>initials</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param initials The new MDL user initials.
+# \param initials The new <em>MDL</em> user initials.
 # 
 def setMDLUserInitials(molgraph: MolecularGraph, initials: str) -> None: pass
 
@@ -1818,7 +1818,7 @@ def hasMDLUserInitials(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL user initials.
+# \return The stored <em>MDL</em> user initials.
 # 
 def getMDLUserInitials(molgraph: MolecularGraph) -> str: pass
 
@@ -1833,7 +1833,7 @@ def clearMDLUserInitials(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_USER_INITIALS property of the reaction <em>rxn</em> to <em>initials</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param initials The new MDL user initials.
+# \param initials The new <em>MDL</em> user initials.
 # 
 def setMDLUserInitials(rxn: Reaction, initials: str) -> None: pass
 
@@ -1851,7 +1851,7 @@ def hasMDLUserInitials(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored MDL user initials.
+# \return The stored <em>MDL</em> user initials.
 # 
 def getMDLUserInitials(rxn: Reaction) -> str: pass
 
@@ -2821,7 +2821,7 @@ def clearReactionCenterStatus(bond: Bond) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.REACTION_DATA property of the reaction <em>rxn</em> to <em>data</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param data The new MDL reaction data block.
+# \param data The new <em>MDL</em> reaction data block.
 # 
 def setReactionData(rxn: Reaction, data: StringDataBlock) -> None: pass
 
@@ -2839,7 +2839,7 @@ def hasReactionData(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored MDL reaction data block.
+# \return The stored <em>MDL</em> reaction data block.
 # 
 def getReactionData(rxn: Reaction) -> StringDataBlock: pass
 
@@ -3199,7 +3199,7 @@ def clearStoichiometricNumber(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.STRUCTURE_DATA property of the molecular graph <em>molgraph</em> to <em>data</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param data The new MDL structure-data block.
+# \param data The new structure-data block.
 # 
 def setStructureData(molgraph: MolecularGraph, data: StringDataBlock) -> None: pass
 
@@ -3217,7 +3217,7 @@ def hasStructureData(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored MDL structure-data block.
+# \return The stored structure-data block.
 # 
 def getStructureData(molgraph: MolecularGraph) -> StringDataBlock: pass
 
@@ -3738,7 +3738,7 @@ def calc2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 def calcAtomCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Derives atom stereo descriptors of the molecular graph <em>molgraph</em> from previously-assigned MDL parities.
+# \brief Derives atom stereo descriptors of the molecular graph <em>molgraph</em> from previously-assigned <em>MDL</em> parities.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing stereo descriptors.
@@ -3984,20 +3984,20 @@ def calcImplicitHydrogenCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
 def calcImplicitHydrogenCounts(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes and stores MDL parities for the atoms of the molecular graph <em>molgraph</em>.
+# \brief Computes and stores <em>MDL</em> parities for the atoms of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
-# \param overwrite If <tt>True</tt>, replaces any existing MDL parities.
+# \param overwrite If <tt>True</tt>, replaces any existing <em>MDL</em> parities.
 # 
 def calcMDLParities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes the MDL parity of the atom <em>atom</em> from its 2D layout and stereo flags in the molecular graph <em>molgraph</em>.
+# \brief Computes the <em>MDL</em> parity of the atom <em>atom</em> from its 2D layout and stereo flags in the molecular graph <em>molgraph</em>.
 # 
 # \param atom The atom for which to calculate the parity.
 # \param molgraph The molecular graph providing the structural context.
 # 
-# \return The computed MDL parity (see namespace Chem.MDLParity).
+# \return The computed <em>MDL</em> parity (see namespace Chem.MDLParity).
 # 
 def calcMDLParity(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
@@ -4032,7 +4032,7 @@ def calcStereoDescriptor(atom: Atom, molgraph: MolecularGraph, dim: int = 1) -> 
 def calcStereoDescriptor(bond: Bond, molgraph: MolecularGraph, dim: int = 1) -> StereoDescriptor: pass
 
 ##
-# \brief Derives the stereo descriptor of the atom <em>atom</em> from its MDL parity in the molecular graph <em>molgraph</em>.
+# \brief Derives the stereo descriptor of the atom <em>atom</em> from its <em>MDL</em> parity in the molecular graph <em>molgraph</em>.
 # 
 # \param atom The atom for which to calculate the stereo descriptor.
 # \param molgraph The molecular graph providing the structural context.
@@ -5892,7 +5892,7 @@ def clearMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> None:
 # \brief Sets the value of the Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG parameter of <em>cntnr</em> to <em>tag</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param tag The new SD-tag string.
+# \param tag The new <em>MDL SD-File</em> structure data record header string.
 # 
 def setMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer, tag: str) -> None: pass
 
@@ -5910,7 +5910,7 @@ def hasMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> boo
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored SD-tag string.
+# \return The stored <em>MDL SD-File</em> structure data record header string.
 # 
 def getMDLConfEnergySDTagParameter(cntnr: Base.ControlParameterContainer) -> str: pass
 
@@ -6065,7 +6065,7 @@ def clearMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterC
 # \brief Sets the value of the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter of <em>cntnr</em> to <em>version</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param version The new RXN-file version (see namespace Chem.MDLDataFormatVersion).
+# \param version The new <em>MDL Rxn-File</em> version (see namespace Chem.MDLDataFormatVersion).
 # 
 def setMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
@@ -6083,7 +6083,7 @@ def hasMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> bool
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored RXN-file version (see namespace Chem.MDLDataFormatVersion).
+# \return The stored <em>MDL Rxn-File</em> version (see namespace Chem.MDLDataFormatVersion).
 # 
 def getMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 

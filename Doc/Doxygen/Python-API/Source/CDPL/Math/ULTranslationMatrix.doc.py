@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Translation matrix holding unsigned integer values of type <tt>unsigned long</tt>.
+# 
 class ULTranslationMatrix(Boost.Python.instance):
 
     ##

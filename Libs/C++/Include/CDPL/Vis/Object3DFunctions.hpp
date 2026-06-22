@@ -135,7 +135,6 @@ namespace CDPL
          * \since 1.3
          */
         CDPL_VIS_API void clearMaterial(Object3D& obj);
-        
     } // namespace Vis
 } // namespace CDPL
 

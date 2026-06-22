@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Rotation matrix holding integer values of type <tt>long</tt>.
+# 
 class LRotationMatrix(Boost.Python.instance):
 
     ##

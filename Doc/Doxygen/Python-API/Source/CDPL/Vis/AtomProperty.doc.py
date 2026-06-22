@@ -158,17 +158,19 @@ class AtomProperty(Boost.Python.instance):
     HIGHLIGHTED_FLAG = CDPL.Base.LookupKey('HIGHLIGHTED_FLAG')
 
     ##
-    # \brief Specifies the brush to use for filling atom highlighting areas. 
-    # \valuetype  Vis.Brush.
+    # \brief Specifies the brush to use for filling atom highlighting areas.
     # 
-    # \since 1.2
+    # The brush specified by this property takes precedence over the brushes specified by Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH and Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH.
+    # 
+    # \valuetype  Vis.Brush \since 1.2
     # 
     HIGHLIGHT_AREA_BRUSH = CDPL.Base.LookupKey('HIGHLIGHT_AREA_BRUSH')
 
     ##
-    # \brief Specifies the pen to use for drawing atom highlighting area outlines. 
-    # \valuetype  Vis.Pen.
+    # \brief Specifies the pen to use for drawing atom highlighting area outlines.
     # 
-    # \since 1.2
+    # The pen specified by this property takes precedence over the pens specified by Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN and Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # 
+    # \valuetype  Vis.Pen \since 1.2
     # 
     HIGHLIGHT_AREA_OUTLINE_PEN = CDPL.Base.LookupKey('HIGHLIGHT_AREA_OUTLINE_PEN')

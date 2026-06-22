@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Scaling matrix holding integer values of type <tt>long</tt>.
+# 
 class LScalingMatrix(Boost.Python.instance):
 
     ##

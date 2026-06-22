@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief Provides keys for MolProp-specific Chem.Atom properties.
+# \brief Provides keys for built-in Chem.Atom properties.
 # 
 class AtomProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the calculated atom hydrophobicity contribution.
+    # \brief Specifies the hydrophobicity of the atom.
     # 
+    # \see MolProp.calcAtomHydrophobicities() 
     # \valuetype  <tt>double</tt>
     # 
     HYDROPHOBICITY = CDPL.Base.LookupKey('HYDROPHOBICITY')
@@ -34,6 +35,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the calculated PEOE &sigma;-charge of the atom.
     # 
+    # \see [\ref PEOE] 
     # \valuetype  <tt>double</tt>
     # 
     PEOE_SIGMA_CHARGE = CDPL.Base.LookupKey('PEOE_SIGMA_CHARGE')
@@ -41,6 +43,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the calculated PEOE &sigma;-electronegativity of the atom.
     # 
+    # \see [\ref PEOE] 
     # \valuetype  <tt>double</tt>
     # 
     PEOE_SIGMA_ELECTRONEGATIVITY = CDPL.Base.LookupKey('PEOE_SIGMA_ELECTRONEGATIVITY')
@@ -48,6 +51,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the calculated MHMO &pi;-charge of the atom.
     # 
+    # \see [\ref MHMO] 
     # \valuetype  <tt>double</tt>
     # 
     MHMO_PI_CHARGE = CDPL.Base.LookupKey('MHMO_PI_CHARGE')

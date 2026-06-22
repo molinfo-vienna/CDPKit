@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Translation matrix holding integer values of type <tt>long</tt>.
+# 
 class LTranslationMatrix(Boost.Python.instance):
 
     ##

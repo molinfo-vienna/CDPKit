@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for reaction data in the bzip2-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+# 
 class RDFBZ2ReactionWriter(ReactionWriterBase):
 
     ##

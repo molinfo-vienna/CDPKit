@@ -403,14 +403,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ControlParameter::MDL_RXN_FILE_VERSION parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The stored RXN-file version (see namespace Chem::MDLDataFormatVersion).
+         * \return The stored <em>MDL Rxn-File</em> version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API unsigned int getMDLRXNFileVersionParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the value of the Chem::ControlParameter::MDL_RXN_FILE_VERSION parameter of \a cntnr to \a version.
          * \param cntnr The control-parameter container.
-         * \param version The new RXN-file version (see namespace Chem::MDLDataFormatVersion).
+         * \param version The new <em>MDL Rxn-File</em> version (see namespace Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API void setMDLRXNFileVersionParameter(Base::ControlParameterContainer& cntnr, unsigned int version);
 
@@ -515,14 +515,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ControlParameter::MDL_CONF_ENERGY_SD_TAG parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The stored SD-tag string.
+         * \return The stored <em>MDL SD-File</em> structure data record header string.
          */
         CDPL_CHEM_API const std::string& getMDLConfEnergySDTagParameter(const Base::ControlParameterContainer& cntnr);
 
         /**
          * \brief Sets the value of the Chem::ControlParameter::MDL_CONF_ENERGY_SD_TAG parameter of \a cntnr to \a tag.
          * \param cntnr The control-parameter container.
-         * \param tag The new SD-tag string.
+         * \param tag The new <em>MDL SD-File</em> structure data record header string.
          */
         CDPL_CHEM_API void setMDLConfEnergySDTagParameter(Base::ControlParameterContainer& cntnr, const std::string& tag);
 

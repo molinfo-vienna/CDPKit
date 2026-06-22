@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the gzip-compressed <em>XYZ</em> format.
+# 
+# \since 1.1
+# 
 class XYZGZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

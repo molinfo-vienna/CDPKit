@@ -105,7 +105,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Grid::ControlParameter::CUBE_COMMENT_IS_NAME parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return \c true if the \e CUBE comment line is interpreted as the grid name, and \c false otherwise.
+         * \return \c true if the <em>Gaussian CUBE</em> comment line is interpreted as the grid name, and \c false otherwise.
          * \since 1.4
          */
         CDPL_GRID_API bool getCUBECommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
@@ -113,7 +113,7 @@ namespace CDPL
         /**
          * \brief Sets the value of the Grid::ControlParameter::CUBE_COMMENT_IS_NAME parameter of \a cntnr to \a is_name.
          * \param cntnr The control-parameter container.
-         * \param is_name \c true to interpret the \e CUBE comment line as the grid name, and \c false to treat it as a regular comment.
+         * \param is_name \c true to interpret the <em>Gaussian CUBE</em> comment line as the grid name, and \c false to treat it as a regular comment.
          * \since 1.4
          */
         CDPL_GRID_API void setCUBECommentIsNameParameter(Base::ControlParameterContainer& cntnr, bool is_name);
@@ -136,7 +136,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The \e CUBE input distance scaling factor.
+         * \return The input distance scaling factor.
          * \since 1.4
          */
         CDPL_GRID_API double getCUBEInputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
@@ -144,7 +144,7 @@ namespace CDPL
         /**
          * \brief Sets the value of the Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of \a cntnr to \a factor.
          * \param cntnr The control-parameter container.
-         * \param factor The new distance scaling factor applied to \e CUBE input.
+         * \param factor The new input distance scaling.
          * \since 1.4
          */
         CDPL_GRID_API void setCUBEInputDistanceScalingFactorParameter(Base::ControlParameterContainer& cntnr, double factor);
@@ -167,7 +167,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter stored in \a cntnr.
          * \param cntnr The control-parameter container.
-         * \return The \e CUBE output distance scaling factor.
+         * \return The output distance scaling factor.
          * \since 1.4
          */
         CDPL_GRID_API double getCUBEOutputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
@@ -175,7 +175,7 @@ namespace CDPL
         /**
          * \brief Sets the value of the Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of \a cntnr to \a factor.
          * \param cntnr The control-parameter container.
-         * \param factor The new distance scaling factor applied to \e CUBE output.
+         * \param factor The new output distance scaling factor.
          * \since 1.4
          */
         CDPL_GRID_API void setCUBEOutputDistanceScalingFactorParameter(Base::ControlParameterContainer& cntnr, double factor);

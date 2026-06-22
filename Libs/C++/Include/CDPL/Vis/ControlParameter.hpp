@@ -1319,7 +1319,6 @@ namespace CDPL
              * \since 1.3
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_FEATURE_CENTERS;
-            
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

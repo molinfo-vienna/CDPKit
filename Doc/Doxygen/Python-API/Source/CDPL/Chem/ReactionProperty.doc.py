@@ -74,14 +74,14 @@ class ReactionProperty(Boost.Python.instance):
     ATOM_MAPPING = CDPL.Base.LookupKey('ATOM_MAPPING')
 
     ##
-    # \brief Specifies the reaction data block associated with the reaction (typically read from/written to the data section of an MDL RD-File).
+    # \brief Specifies the reaction data block associated with the reaction (typically read from/written to the data section of an <em>MDL RD-File</em>).
     # 
     # \valuetype  Chem.StringDataBlock.SharedPointer
     # 
     REACTION_DATA = CDPL.Base.LookupKey('REACTION_DATA')
 
     ##
-    # \brief Specifies the user initials field read from the MDL Rxn-File.
+    # \brief Specifies the user initials stored in the <em>MDL Rxn-File</em> header.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>std::string</tt>
@@ -89,7 +89,7 @@ class ReactionProperty(Boost.Python.instance):
     MDL_USER_INITIALS = CDPL.Base.LookupKey('MDL_USER_INITIALS')
 
     ##
-    # \brief Specifies the program name field read from the MDL Rxn-File.
+    # \brief Specifies the program name stored in the <em>MDL Rxn-File</em> header.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>std::string</tt>
@@ -97,7 +97,7 @@ class ReactionProperty(Boost.Python.instance):
     MDL_PROGRAM_NAME = CDPL.Base.LookupKey('MDL_PROGRAM_NAME')
 
     ##
-    # \brief Specifies the MDL registry number of the reaction.
+    # \brief Specifies the <em>MDL</em> registry number of the reaction.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>std::size_t</tt>
@@ -105,7 +105,7 @@ class ReactionProperty(Boost.Python.instance):
     MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey('MDL_REGISTRY_NUMBER')
 
     ##
-    # \brief Specifies the embedded MDL molecule record associated with the reaction.
+    # \brief Specifies the embedded <em>MDL</em> molecule record associated with the reaction.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  Chem.Molecule.SharedPointer
@@ -113,7 +113,7 @@ class ReactionProperty(Boost.Python.instance):
     MDL_MOLECULE_RECORD = CDPL.Base.LookupKey('MDL_MOLECULE_RECORD')
 
     ##
-    # \brief Specifies the MDL internal registry number string of the reaction.
+    # \brief Specifies the <em>MDL</em> internal registry number string of the reaction.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>std::string</tt>
@@ -121,7 +121,7 @@ class ReactionProperty(Boost.Python.instance):
     MDL_INTERNAL_REGISTRY_NUMBER = CDPL.Base.LookupKey('MDL_INTERNAL_REGISTRY_NUMBER')
 
     ##
-    # \brief Specifies the MDL external registry number string of the reaction.
+    # \brief Specifies the <em>MDL</em> external registry number string of the reaction.
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>std::string</tt>
@@ -129,7 +129,7 @@ class ReactionProperty(Boost.Python.instance):
     MDL_EXTERNAL_REGISTRY_NUMBER = CDPL.Base.LookupKey('MDL_EXTERNAL_REGISTRY_NUMBER')
 
     ##
-    # \brief Specifies the version of the MDL Rxn-File the reaction was read from.
+    # \brief Specifies the <em>MDL Rxn-File</em> version (see namespace Chem.MDLDataFormatVersion).
     # 
     # \see [\ref CTFILE] 
     # \valuetype  <tt>unsigned int</tt>

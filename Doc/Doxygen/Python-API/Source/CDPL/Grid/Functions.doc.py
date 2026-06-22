@@ -138,7 +138,7 @@ def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterCon
 # \brief Sets the value of the Grid.ControlParameter.CUBE_COMMENT_IS_NAME parameter of <em>cntnr</em> to <em>is_name</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param is_name <tt>True</tt> to interpret the <em>CUBE</em> comment line as the grid name, and <tt>False</tt> to treat it as a regular comment.
+# \param is_name <tt>True</tt> to interpret the <em>Gaussian CUBE</em> comment line as the grid name, and <tt>False</tt> to treat it as a regular comment.
 # 
 # \since 1.4
 # 
@@ -160,7 +160,7 @@ def hasCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return <tt>True</tt> if the <em>CUBE</em> comment line is interpreted as the grid name, and <tt>False</tt> otherwise. 
+# \return <tt>True</tt> if the <em>Gaussian CUBE</em> comment line is interpreted as the grid name, and <tt>False</tt> otherwise. 
 # 
 # \since 1.4
 # 
@@ -179,7 +179,7 @@ def clearCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> No
 # \brief Sets the value of the Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param factor The new distance scaling factor applied to <em>CUBE</em> input.
+# \param factor The new input distance scaling.
 # 
 # \since 1.4
 # 
@@ -201,7 +201,7 @@ def hasCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterConta
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The <em>CUBE</em> input distance scaling factor. 
+# \return The input distance scaling factor. 
 # 
 # \since 1.4
 # 
@@ -220,7 +220,7 @@ def clearCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterCon
 # \brief Sets the value of the Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR parameter of <em>cntnr</em> to <em>factor</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param factor The new distance scaling factor applied to <em>CUBE</em> output.
+# \param factor The new output distance scaling factor.
 # 
 # \since 1.4
 # 
@@ -242,7 +242,7 @@ def hasCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterCont
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The <em>CUBE</em> output distance scaling factor. 
+# \return The output distance scaling factor. 
 # 
 # \since 1.4
 # 

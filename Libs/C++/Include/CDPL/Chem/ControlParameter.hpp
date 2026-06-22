@@ -135,10 +135,10 @@ namespace CDPL
 
             /**
              * \brief Specifies whether the stereo parity of atoms shall be ignored when reading or writing data 
-             *        in an <em>MDL CTFile</em> based format.
+             *        in an <em>MDL CTFile</em>-based format.
              *
              * If the control-parameter is set to \c true, the stereo parity of atoms will be ignored both on
-             * reading (i.e. the read MDL parity of an input atom will not be converted to the corresponding Chem::StereoDescriptor
+             * reading (i.e. the read \e MDL parity of an input atom will not be converted to the corresponding Chem::StereoDescriptor
              * object and stored in the Chem::Atom property Chem::AtomProperty::STEREO_DESCRIPTOR) and writing (i.e. the property
              * Chem::AtomProperty::MDL_PARITY is not written to the corresponding connection table data field).
              *
@@ -149,7 +149,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to update the timestamp of \e Mol- and \e Rxn-File header blocks when writing data
-             *        in an <em>MDL CTFile</em> based format.
+             *        in an <em>MDL CTFile</em>-based format.
              *
              * If the control-parameter is set to \c true, the timestamp of molecule and reaction data records will
              * specify the time of their writing. If \c %MDL_UPDATE_TIMESTAMP is \c false, the time specified by one of the
@@ -164,7 +164,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to remove leading and trailing whitespace from string values when reading or writing data
-             *        in an <em>MDL CTFile</em> based format.
+             *        in an <em>MDL CTFile</em>-based format.
              *
              * If the control-parameter is set to \c true, leading and trailing whitespace of string data field
              * values will be removed before processing continues.
@@ -177,7 +177,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to remove leading and trailing whitespace from data lines when reading or writing data 
-             *        in an <em>MDL CTFile</em> based format.
+             *        in an <em>MDL CTFile</em>-based format.
              *
              * If the control-parameter is set to \c true, leading and trailing whitespace of data lines 
              * will be removed before processing continues.
@@ -190,7 +190,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether string values that exceed the size of an output data field may be truncated when writing data
-             *        in an <em>MDL CTFile</em> based format.
+             *        in an <em>MDL CTFile</em>-based format.
              *
              * If the control-parameter is set to \c true, output string values whose length exceeds the size of the target data
              * field are silently truncated to the respective field size.
@@ -204,7 +204,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether data lines that exceed the maximum allowed line length may be truncated when writing data
-             *        in an <em>MDL CTFile</em> based format.
+             *        in an <em>MDL CTFile</em>-based format.
              *
              * If the control-parameter is set to \c true, output data lines which exceed the maximum allowed line length
              * (according to the <em>MDL CTFile</em> specification) are silently truncated before they get written.
@@ -220,22 +220,22 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to write conformer energies into the energy field of the molecule header block
-             *        when writing data in an <em>MDL CTFile</em> based format.
+             *        when writing data in an <em>MDL CTFile</em>-based format.
              * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD;
 
             /**
-             * \brief Specifies whether to write conformer energies as an SD-file entry when writing data in
-             *        an <em>MDL CTFile</em> based format.
+             * \brief Specifies whether to write conformer energies as an <em>MDL SD-File</em> structure data entry when writing data in
+             *        an <em>MDL CTFile</em>-based format.
              * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY;
 
             /**
-             * \brief Specifies the SD-file tag used for the conformer energy entry (see MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY).
+             * \brief Specifies the <em>MDL SD-File</em> structure data entry header used for the conformer energy (see MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY).
              * \see [\ref CTFILE]
              * \valuetype \c std::string
              */
@@ -243,7 +243,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to output the 'aromatic' bond type value (\c 4) in the type field of aromatic bonds when writing 
-             *        molecular graph data in an <em>MDL CTFile</em> based format. On data reading, the aromaticity flag
+             *        molecular graph data in an <em>MDL CTFile</em>-based format. On data reading, the aromaticity flag
              *        property of bonds having this type will be set to \c true and to \c false if the bond type specifies a defined 
              *        bond order.
              * \see [\ref CTFILE]
@@ -266,7 +266,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CHECK_LINE_LENGTH;
 
             /**
-             * \brief Specifies the desired data format version for the output of reactions in an <em>MDL Rxn-</em> or \e RD-File
+             * \brief Specifies the desired data format version for the output of reactions in <em>MDL Rxn-</em> or \e RD-File
              *        format.
              *
              * The desired data format version is specified by one of the constants defined in namespace CDPL::Chem::MDLDataFormatVersion.

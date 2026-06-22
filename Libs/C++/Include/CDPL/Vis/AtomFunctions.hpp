@@ -556,7 +556,6 @@ namespace CDPL
          * \since 1.2
          */
         CDPL_VIS_API void clearHighlightAreaOutlinePen(Chem::Atom& atom);
-
     } // namespace Vis
 } // namespace CDPL
 

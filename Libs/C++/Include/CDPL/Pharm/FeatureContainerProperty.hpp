@@ -51,7 +51,7 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies the name of the feature container.
+             * \brief Specifies the name (or title) of the feature container.
              *
              * \valuetype \c std::string
              */

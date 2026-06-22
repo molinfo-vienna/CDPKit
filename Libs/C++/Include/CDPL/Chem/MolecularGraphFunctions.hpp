@@ -606,14 +606,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_USER_INITIALS property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL user initials.
+         * \return The stored \e MDL user initials.
          */
         CDPL_CHEM_API const std::string& getMDLUserInitials(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_USER_INITIALS property of the molecular graph \a molgraph to \a initials.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param initials The new MDL user initials.
+         * \param initials The new \e MDL user initials.
          */
         CDPL_CHEM_API void setMDLUserInitials(MolecularGraph& molgraph, const std::string& initials);
 
@@ -634,14 +634,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_PROGRAM_NAME property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL program name.
+         * \return The stored \e MDL program name.
          */
         CDPL_CHEM_API const std::string& getMDLProgramName(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_PROGRAM_NAME property of the molecular graph \a molgraph to \a name.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param name The new MDL program name.
+         * \param name The new \e MDL program name.
          */
         CDPL_CHEM_API void setMDLProgramName(MolecularGraph& molgraph, const std::string& name);
 
@@ -662,14 +662,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_REGISTRY_NUMBER property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL registry number.
+         * \return The stored \e MDL registry number.
          */
         CDPL_CHEM_API std::size_t getMDLRegistryNumber(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_REGISTRY_NUMBER property of the molecular graph \a molgraph to \a reg_no.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param reg_no The new MDL registry number.
+         * \param reg_no The new \e MDL registry number.
          */
         CDPL_CHEM_API void setMDLRegistryNumber(MolecularGraph& molgraph, std::size_t reg_no);
 
@@ -718,14 +718,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::STRUCTURE_DATA property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL structure-data block.
+         * \return The stored structure-data block.
          */
         CDPL_CHEM_API const StringDataBlock::SharedPointer& getStructureData(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::STRUCTURE_DATA property of the molecular graph \a molgraph to \a data.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param data The new MDL structure-data block.
+         * \param data The new structure-data block.
          */
         CDPL_CHEM_API void setStructureData(MolecularGraph& molgraph, const StringDataBlock::SharedPointer& data);
 
@@ -746,14 +746,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_DIMENSIONALITY property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL coordinate dimensionality.
+         * \return The stored \e MDL coordinate dimensionality.
          */
         CDPL_CHEM_API std::size_t getMDLDimensionality(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_DIMENSIONALITY property of the molecular graph \a molgraph to \a dim.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param dim The new MDL coordinate dimensionality.
+         * \param dim The new \e MDL coordinate dimensionality.
          */
         CDPL_CHEM_API void setMDLDimensionality(MolecularGraph& molgraph, std::size_t dim);
 
@@ -774,14 +774,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_SCALING_FACTOR1 property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL scaling factor 1.
+         * \return The stored \e MDL scaling factor 1.
          */
         CDPL_CHEM_API long getMDLScalingFactor1(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_SCALING_FACTOR1 property of the molecular graph \a molgraph to \a factor.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param factor The new MDL scaling factor 1.
+         * \param factor The new \e MDL scaling factor 1.
          */
         CDPL_CHEM_API void setMDLScalingFactor1(MolecularGraph& molgraph, long factor);
 
@@ -802,14 +802,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_SCALING_FACTOR2 property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL scaling factor 2.
+         * \return The stored \e MDL scaling factor 2.
          */
         CDPL_CHEM_API double getMDLScalingFactor2(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_SCALING_FACTOR2 property of the molecular graph \a molgraph to \a factor.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param factor The new MDL scaling factor 2.
+         * \param factor The new \e MDL scaling factor 2.
          */
         CDPL_CHEM_API void setMDLScalingFactor2(MolecularGraph& molgraph, double factor);
 
@@ -830,14 +830,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_ENERGY property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL energy.
+         * \return The stored \e MDL energy.
          */
         CDPL_CHEM_API double getMDLEnergy(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_ENERGY property of the molecular graph \a molgraph to \a energy.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param energy The new MDL energy.
+         * \param energy The new \e MDL energy.
          */
         CDPL_CHEM_API void setMDLEnergy(MolecularGraph& molgraph, double energy);
 
@@ -858,14 +858,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::MDL_CHIRAL_FLAG property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored MDL chiral flag.
+         * \return The stored \e MDL chiral flag.
          */
         CDPL_CHEM_API bool getMDLChiralFlag(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::MDL_CHIRAL_FLAG property of the molecular graph \a molgraph to \a flag.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param flag The new MDL chiral flag.
+         * \param flag The new \e MDL chiral flag.
          */
         CDPL_CHEM_API void setMDLChiralFlag(MolecularGraph& molgraph, bool flag);
 
@@ -1378,9 +1378,9 @@ namespace CDPL
                                                      bool check_term_n = true, bool check_order = true, std::size_t min_ring_size = 8);
 
         /**
-         * \brief Computes and stores MDL parities for the atoms of the molecular graph \a molgraph.
+         * \brief Computes and stores \e MDL parities for the atoms of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, replaces any existing MDL parities.
+         * \param overwrite If \c true, replaces any existing \e MDL parities.
          */
         CDPL_CHEM_API void calcMDLParities(MolecularGraph& molgraph, bool overwrite);
 
@@ -1394,7 +1394,7 @@ namespace CDPL
         CDPL_CHEM_API void calcAtomStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim = 1, bool check_stc_flag = true);
 
         /**
-         * \brief Derives atom stereo descriptors of the molecular graph \a molgraph from previously-assigned MDL parities.
+         * \brief Derives atom stereo descriptors of the molecular graph \a molgraph from previously-assigned \e MDL parities.
          * \param molgraph The molecular graph to modify.
          * \param overwrite If \c true, replaces any existing stereo descriptors.
          */

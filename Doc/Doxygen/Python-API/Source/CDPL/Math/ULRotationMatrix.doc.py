@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Rotation matrix holding unsigned integer values of type <tt>unsigned long</tt>.
+# 
 class ULRotationMatrix(Boost.Python.instance):
 
     ##

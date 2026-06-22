@@ -616,7 +616,6 @@ namespace CDPL
          * \since 1.3
          */
         CDPL_VIS_API void prepareFor2DVisualization(Chem::Reaction& rxn);
-
     } // namespace Vis
 } // namespace CDPL
 

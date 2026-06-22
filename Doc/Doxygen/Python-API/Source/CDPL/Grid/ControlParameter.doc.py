@@ -42,24 +42,30 @@ class ControlParameter(Boost.Python.instance):
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> [\ref CUBE] file is taken as the grid name on input (<tt>True</tt>) or treated as a regular comment (<tt>False</tt>). 
-    # \valuetype  <tt>bool</tt>.
+    # \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> file is taken as the grid name or treated as a regular comment on data I/O.
+    # 
+    # \see [\ref CUBE] 
+    # \valuetype  <tt>bool</tt> 
     # 
     # \since 1.4
     # 
     CUBE_COMMENT_IS_NAME = CDPL.Base.LookupKey('CUBE_COMMENT_IS_NAME')
 
     ##
-    # \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> [\ref CUBE] format. 
-    # \valuetype  <tt>double</tt>.
+    # \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> format.
+    # 
+    # \see [\ref CUBE] 
+    # \valuetype  <tt>double</tt> 
     # 
     # \since 1.4
     # 
     CUBE_INPUT_DISTANCE_SCALING_FACTOR = CDPL.Base.LookupKey('CUBE_INPUT_DISTANCE_SCALING_FACTOR')
 
     ##
-    # \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> [\ref CUBE] format data output. 
-    # \valuetype  <tt>double</tt>.
+    # \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> format data output.
+    # 
+    # \see [\ref CUBE] 
+    # \valuetype  <tt>double</tt> 
     # 
     # \since 1.4
     # 

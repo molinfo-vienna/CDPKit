@@ -37,7 +37,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants that are used to specify the MDL stereo parity of atoms.
+         * \brief Provides constants that are used to specify the \e MDL stereo parity of atoms.
          * \see [\ref CTFILE]
          */
         namespace MDLParity

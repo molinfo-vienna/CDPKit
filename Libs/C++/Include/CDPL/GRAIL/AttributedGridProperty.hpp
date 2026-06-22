@@ -51,14 +51,14 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies the (extended) pharmacophore feature type the grid was generated for.
+             * \brief Specifies the ligand-side pharmacophore feature type.
              *
              * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_GRAIL_API const Base::LookupKey FEATURE_TYPE;
 
             /**
-             * \brief Specifies the target (extended) pharmacophore feature type the grid scores interactions with.
+             * \brief Specifies the interaction target pharmacophore feature type.
              *
              * \valuetype <tt>unsigned int</tt>
              */

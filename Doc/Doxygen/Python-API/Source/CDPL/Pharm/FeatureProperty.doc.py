@@ -67,14 +67,14 @@ class FeatureProperty(Boost.Python.instance):
     WEIGHT = CDPL.Base.LookupKey('WEIGHT')
 
     ##
-    # \brief Specifies the chemical substructure the feature was derived from.
+    # \brief Specifies the atoms and bonds associated with the feature.
     # 
     # \valuetype  Chem.Fragment.SharedPointer
     # 
     SUBSTRUCTURE = CDPL.Base.LookupKey('SUBSTRUCTURE')
 
     ##
-    # \brief Specifies whether the feature is currently disabled (and thus not considered in pharmacophore matching).
+    # \brief Specifies whether the feature is currently disabled (not considered in pharmacophore matching).
     # 
     # \valuetype  <tt>bool</tt>
     # 
@@ -88,14 +88,14 @@ class FeatureProperty(Boost.Python.instance):
     OPTIONAL_FLAG = CDPL.Base.LookupKey('OPTIONAL_FLAG')
 
     ##
-    # \brief Specifies the calculated hydrophobicity contribution of the feature.
+    # \brief Specifies the summed hydrophobicities of the atoms that are covered by the feature.
     # 
     # \valuetype  <tt>double</tt>
     # 
     HYDROPHOBICITY = CDPL.Base.LookupKey('HYDROPHOBICITY')
 
     ##
-    # \brief Specifies the environment substructure (e.g. interacting pocket residues) associated with the feature.
+    # \brief Specifies the environment atoms and bonds (e.g. of interacting pocket residues) associated with the feature.
     # 
     # \valuetype  Chem.Fragment.SharedPointer \since 1.4
     # 

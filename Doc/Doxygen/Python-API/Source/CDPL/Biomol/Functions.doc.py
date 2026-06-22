@@ -639,7 +639,7 @@ def setResidueLinkingAtomFlag(atom: Chem.Atom, linking: bool) -> None: pass
 # 
 # \param atom The atom for which to query the property value.
 # 
-# \return <tt>True</tt> if the linking-atom flag is set, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if the linking atom flag is set, and <tt>False</tt> otherwise.
 # 
 def hasResidueLinkingAtomFlag(atom: Chem.Atom) -> bool: pass
 

@@ -25,35 +25,35 @@
 class MolecularGraphProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the residue code (three-letter code) of the residue described by the molecular graph.
+    # \brief Specifies the three-letter code of the residue described by the molecular graph.
     # 
     # \valuetype  <tt>std::string</tt>
     # 
     RESIDUE_CODE = CDPL.Base.LookupKey('RESIDUE_CODE')
 
     ##
-    # \brief Specifies the residue sequence number of the residue described by the molecular graph.
+    # \brief Specifies the sequence number of the residue described by the molecular graph.
     # 
     # \valuetype  <tt>long</tt>
     # 
     RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey('RESIDUE_SEQUENCE_NUMBER')
 
     ##
-    # \brief Specifies the residue insertion code of the residue described by the molecular graph.
+    # \brief Specifies the insertion code of the residue described by the molecular graph.
     # 
     # \valuetype  <tt>char</tt>
     # 
     RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey('RESIDUE_INSERTION_CODE')
 
     ##
-    # \brief Specifies the identifier of the chain the molecular graph belongs to.
+    # \brief Specifies the identifier of the chain the residue described by the molecular graph belongs to.
     # 
     # \valuetype  <tt>std::string</tt>
     # 
     CHAIN_ID = CDPL.Base.LookupKey('CHAIN_ID')
 
     ##
-    # \brief Specifies the model number assigned to the molecular graph.
+    # \brief Specifies the model number of the residue described by the molecular graph.
     # 
     # \valuetype  <tt>std::size_t</tt>
     # 

@@ -149,7 +149,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey GEOMETRICAL_DISTANCE_MATRIX;
 
             /**
-             * \brief Specifies the stoichiometric multiplier of the molecular graph in a reaction (defaults to \e 1).
+             * \brief Specifies the stoichiometric multiplier of the molecular graph in a reaction.
              *
              * \valuetype \c double
              */
@@ -171,7 +171,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the structure data block associated with the molecular graph
-             *        (typically read from/written to MDL SD-file data fields).
+             *        (typically read from/written to <em>MDL SD-file</em> data fields).
              *
              * \valuetype Chem::StringDataBlock::SharedPointer
              */
@@ -185,79 +185,79 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey HASH_CODE;
 
             /**
-             * \brief Specifies the user initials stored in the MDL CTAB header.
+             * \brief Specifies the user initials stored in the \e MDL CTAB header.
              * \see [\ref CTFILE]
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
 
             /**
-             * \brief Specifies the program name stored in the MDL CTAB header.
+             * \brief Specifies the program name stored in the \e MDL CTAB header.
              * \see [\ref CTFILE]
              * \valuetype \c std::string
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
 
             /**
-             * \brief Specifies the registry number stored in the MDL CTAB header.
+             * \brief Specifies the registry number stored in the \e MDL CTAB header.
              * \see [\ref CTFILE]
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
 
             /**
-             * \brief Specifies the MDL connection table version.
+             * \brief Specifies the \e MDL connection table (CTAB) version (see namespace Chem::MDLDataFormatVersion).
              * \see [\ref CTFILE]
-             * \valuetype <tt>unsigned int</tt> (Chem::MDLDataFormatVersion value)
+             * \valuetype <tt>unsigned int</tt> 
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
 
             /**
-             * \brief Specifies the dimensionality flag stored in the MDL CTAB header (\e 0 = unspecified, \e 2 = 2D, \e 3 = 3D).
+             * \brief Specifies the dimensionality flag stored in the \e MDL CTAB header (\e 0 = unspecified, \e 2 = 2D, \e 3 = 3D).
              * \see [\ref CTFILE]
              * \valuetype \c std::size_t
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_DIMENSIONALITY;
 
             /**
-             * \brief Specifies the first (integer) scaling factor stored in the MDL CTAB header.
+             * \brief Specifies the first (integer) scaling factor stored in the \e MDL CTAB header.
              * \see [\ref CTFILE]
              * \valuetype \c long
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR1;
 
             /**
-             * \brief Specifies the second (floating-point) scaling factor stored in the MDL CTAB header.
+             * \brief Specifies the second (floating-point) scaling factor stored in the \e MDL CTAB header.
              * \see [\ref CTFILE]
              * \valuetype \c double
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR2;
 
             /**
-             * \brief Specifies the energy value stored in the MDL CTAB header.
+             * \brief Specifies the energy value stored in the \e MDL CTAB header.
              * \see [\ref CTFILE]
              * \valuetype \c double
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_ENERGY;
 
             /**
-             * \brief Specifies the chiral flag stored in the MDL CTAB header.
+             * \brief Specifies the chiral flag stored in the \e MDL CTAB header.
              * \see [\ref CTFILE]
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CHIRAL_FLAG;
 
             /**
-             * \brief Specifies the <em>Sybyl MOL2</em> partial-charge type of the molecular graph.
+             * \brief Specifies the <em>Sybyl MOL2</em> partial atom charge type (see namespace Chem::MOL2ChargeType).
              *
-             * \valuetype <tt>unsigned int</tt> (Chem::MOL2ChargeType value)
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
 
             /**
-             * \brief Specifies the <em>Sybyl MOL2</em> molecule type of the molecular graph.
+             * \brief Specifies the <em>Sybyl MOL2</em> molecule type of the molecular graph (see namespace Chem::MOL2MoleculeType).
              *
-             * \valuetype <tt>unsigned int</tt> (Chem::MOL2MoleculeType value)
+             * \valuetype <tt>unsigned int</tt>
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
         } // namespace MolecularGraphProperty

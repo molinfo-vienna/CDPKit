@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for reaction data in the gzip-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+# 
 class RDFGZReactionReader(ReactionReaderBase):
 
     ##

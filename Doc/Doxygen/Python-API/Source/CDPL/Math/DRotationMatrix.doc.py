@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Rotation matrix holding floating point values of type <tt>double</tt>.
+# 
 class DRotationMatrix(Boost.Python.instance):
 
     ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Scaling matrix holding unsigned integer values of type <tt>unsigned long</tt>.
+# 
 class ULScalingMatrix(Boost.Python.instance):
 
     ##

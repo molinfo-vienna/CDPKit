@@ -37,10 +37,12 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief 
-        # \param scores 
-        # \return 
-        #
+        # \brief Returns the maximum (infinity norm) of the per-feature scores.
+        # 
+        # \param scores The vector of per-feature scores.
+        # 
+        # \return The largest of the scores.
+        # 
         def __call__(scores: Math.DVector) -> float: pass
 
     ##
@@ -54,10 +56,12 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief 
-        # \param scores 
-        # \return 
-        #
+        # \brief Returns the sum of the per-feature scores.
+        # 
+        # \param scores The vector of per-feature scores.
+        # 
+        # \return The sum of the scores.
+        # 
         def __call__(scores: Math.DVector) -> float: pass
 
     ##

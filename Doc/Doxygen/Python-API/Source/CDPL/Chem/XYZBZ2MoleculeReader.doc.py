@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the bzip2-compressed <em>XYZ</em> format.
+# 
+# \since 1.1
+# 
 class XYZBZ2MoleculeReader(MoleculeReaderBase):
 
     ##

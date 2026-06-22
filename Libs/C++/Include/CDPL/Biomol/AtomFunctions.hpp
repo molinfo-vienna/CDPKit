@@ -158,7 +158,7 @@ namespace CDPL
         /**
          * \brief Tells whether the Biomol::AtomProperty::RESIDUE_LINKING_ATOM_FLAG property of the atom \a atom is set.
          * \param atom The atom for which to query the property value.
-         * \return \c true if the linking-atom flag is set, and \c false otherwise.
+         * \return \c true if the linking atom flag is set, and \c false otherwise.
          */
         CDPL_BIOMOL_API bool hasResidueLinkingAtomFlag(const Chem::Atom& atom);
 

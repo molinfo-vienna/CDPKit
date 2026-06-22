@@ -45,20 +45,20 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides keys for built-in biomolecular Chem::Atom properties.
+         * \brief Provides keys for built-in Chem::Atom properties.
          */
         namespace AtomProperty
         {
 
             /**
-             * \brief Specifies the residue-local name of the atom (e.g. \e CA, \e CB).
+             * \brief Specifies the residue name of the atom (e.g. \e CA, \e CB).
              *
              * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_ATOM_NAME;
 
             /**
-             * \brief Specifies the alternative residue-local name of the atom.
+             * \brief Specifies the alternative residue name of the atom.
              *
              * \valuetype \c std::string
              */
@@ -79,7 +79,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_LINKING_ATOM_FLAG;
 
             /**
-             * \brief Specifies the residue code (three-letter code) of the residue the atom belongs to.
+             * \brief Specifies the three-letter code of the residue the atom belongs to.
              *
              * \valuetype \c std::string
              */
@@ -100,35 +100,35 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
 
             /**
-             * \brief Specifies whether the atom is a heteroatom (HETATM record in PDB).
+             * \brief Specifies whether the atom is a heteroatom.
              *
              * \valuetype \c bool
              */
             extern CDPL_BIOMOL_API const Base::LookupKey HETERO_ATOM_FLAG;
 
             /**
-             * \brief Specifies the serial number of the atom as read from or written to the input file.
+             * \brief Specifies the serial number of the atom.
              *
              * \valuetype \c long
              */
             extern CDPL_BIOMOL_API const Base::LookupKey SERIAL_NUMBER;
 
             /**
-             * \brief Specifies the chain identifier of the chain the atom belongs to.
+             * \brief Specifies the identifier of the chain the atom belongs to.
              *
              * \valuetype \c std::string
              */
             extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
 
             /**
-             * \brief Specifies the alternate-location identifier of the atom.
+             * \brief Specifies the alternate location identifier of the atom.
              *
              * \valuetype \c char
              */
             extern CDPL_BIOMOL_API const Base::LookupKey ALT_LOCATION_ID;
 
             /**
-             * \brief Specifies the identifier of the entity the atom belongs to (e.g. an \e mmCIF entity ID).
+             * \brief Specifies the identifier of the entity the atom belongs to).
              *
              * \valuetype \c std::string
              * \since 1.2
@@ -136,21 +136,21 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey ENTITY_ID;
 
             /**
-             * \brief Specifies the model number of the model the atom belongs to.
+             * \brief Specifies the number of the model the atom belongs to.
              *
              * \valuetype \c std::size_t
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
 
             /**
-             * \brief Specifies the occupancy of the atom as read from or written to the input file.
+             * \brief Specifies the occupancy of the atom.
              *
              * \valuetype \c double
              */
             extern CDPL_BIOMOL_API const Base::LookupKey OCCUPANCY;
 
             /**
-             * \brief Specifies the isotropic temperature (B-) factor of the atom.
+             * \brief Specifies the isotropic temperature (B) factor of the atom.
              *
              * \valuetype \c double
              */

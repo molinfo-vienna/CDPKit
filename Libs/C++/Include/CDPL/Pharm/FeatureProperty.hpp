@@ -93,14 +93,14 @@ namespace CDPL
             extern CDPL_PHARM_API const Base::LookupKey WEIGHT;
 
             /**
-             * \brief Specifies the chemical substructure the feature was derived from.
+             * \brief Specifies the atoms and bonds associated with the feature.
              *
              * \valuetype Chem::Fragment::SharedPointer
              */
             extern CDPL_PHARM_API const Base::LookupKey SUBSTRUCTURE;
 
             /**
-             * \brief Specifies whether the feature is currently disabled (and thus not considered in pharmacophore matching).
+             * \brief Specifies whether the feature is currently disabled (not considered in pharmacophore matching).
              *
              * \valuetype \c bool
              */
@@ -114,14 +114,14 @@ namespace CDPL
             extern CDPL_PHARM_API const Base::LookupKey OPTIONAL_FLAG;
 
             /**
-             * \brief Specifies the calculated hydrophobicity contribution of the feature.
+             * \brief Specifies the summed hydrophobicities of the atoms that are covered by the feature.
              *
              * \valuetype \c double
              */
             extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
 
             /**
-             * \brief Specifies the environment substructure (e.g. interacting pocket residues) associated with the feature.
+             * \brief Specifies the environment atoms and bonds (e.g. of interacting pocket residues) associated with the feature.
              *
              * \valuetype Chem::Fragment::SharedPointer
              * \since 1.4

@@ -1209,7 +1209,6 @@ namespace CDPL
          * \since 1.3
          */
         CDPL_VIS_API void prepareFor2DVisualization(Chem::MolecularGraph& molgraph);
-
     } // namespace Vis
 } // namespace CDPL
 

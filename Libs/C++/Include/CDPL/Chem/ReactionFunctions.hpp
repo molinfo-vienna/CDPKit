@@ -334,14 +334,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MDL_USER_INITIALS property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored MDL user initials.
+         * \return The stored \e MDL user initials.
          */
         CDPL_CHEM_API const std::string& getMDLUserInitials(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MDL_USER_INITIALS property of the reaction \a rxn to \a initials.
          * \param rxn The reaction for which to set the property value.
-         * \param initials The new MDL user initials.
+         * \param initials The new \e MDL user initials.
          */
         CDPL_CHEM_API void setMDLUserInitials(Reaction& rxn, const std::string& initials);
 
@@ -362,14 +362,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MDL_PROGRAM_NAME property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored MDL program name.
+         * \return The stored \e MDL program name.
          */
         CDPL_CHEM_API const std::string& getMDLProgramName(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MDL_PROGRAM_NAME property of the reaction \a rxn to \a name.
          * \param rxn The reaction for which to set the property value.
-         * \param name The new MDL program name.
+         * \param name The new \e MDL program name.
          */
         CDPL_CHEM_API void setMDLProgramName(Reaction& rxn, const std::string& name);
 
@@ -390,14 +390,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MDL_REGISTRY_NUMBER property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored MDL registry number.
+         * \return The stored \e MDL registry number.
          */
         CDPL_CHEM_API std::size_t getMDLRegistryNumber(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MDL_REGISTRY_NUMBER property of the reaction \a rxn to \a reg_no.
          * \param rxn The reaction for which to set the property value.
-         * \param reg_no The new MDL registry number.
+         * \param reg_no The new \e MDL registry number.
          */
         CDPL_CHEM_API void setMDLRegistryNumber(Reaction& rxn, std::size_t reg_no);
 
@@ -418,14 +418,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::REACTION_DATA property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored MDL reaction data block.
+         * \return The stored \e MDL reaction data block.
          */
         CDPL_CHEM_API const StringDataBlock::SharedPointer& getReactionData(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::REACTION_DATA property of the reaction \a rxn to \a data.
          * \param rxn The reaction for which to set the property value.
-         * \param data The new MDL reaction data block.
+         * \param data The new \e MDL reaction data block.
          */
         CDPL_CHEM_API void setReactionData(Reaction& rxn, const StringDataBlock::SharedPointer& data);
 
@@ -446,14 +446,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MDL_MOLECULE_RECORD property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored MDL molecule record (typically the structure component of an RD-file).
+         * \return The stored <em>MDL RD-File</em> molecule record.
          */
         CDPL_CHEM_API const Molecule::SharedPointer& getMDLMoleculeRecord(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MDL_MOLECULE_RECORD property of the reaction \a rxn to \a mol_rec.
          * \param rxn The reaction for which to set the property value.
-         * \param mol_rec The new MDL molecule record.
+         * \param mol_rec The new \e MDL molecule record.
          */
         CDPL_CHEM_API void setMDLMoleculeRecord(Reaction& rxn, const Molecule::SharedPointer& mol_rec);
 
@@ -474,14 +474,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MDL_INTERNAL_REGISTRY_NUMBER property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored MDL internal registry number.
+         * \return The stored \e MDL internal registry number.
          */
         CDPL_CHEM_API const std::string& getMDLInternalRegistryNumber(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MDL_INTERNAL_REGISTRY_NUMBER property of the reaction \a rxn to \a reg_no.
          * \param rxn The reaction for which to set the property value.
-         * \param reg_no The new MDL internal registry number.
+         * \param reg_no The new \e MDL internal registry number.
          */
         CDPL_CHEM_API void setMDLInternalRegistryNumber(Reaction& rxn, const std::string& reg_no);
 
@@ -502,14 +502,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MDL_EXTERNAL_REGISTRY_NUMBER property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored MDL external registry number.
+         * \return The stored \e MDL external registry number.
          */
         CDPL_CHEM_API const std::string& getMDLExternalRegistryNumber(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MDL_EXTERNAL_REGISTRY_NUMBER property of the reaction \a rxn to \a reg_no.
          * \param rxn The reaction for which to set the property value.
-         * \param reg_no The new MDL external registry number.
+         * \param reg_no The new \e MDL external registry number.
          */
         CDPL_CHEM_API void setMDLExternalRegistryNumber(Reaction& rxn, const std::string& reg_no);
 
@@ -530,14 +530,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::ReactionProperty::MDL_RXN_FILE_VERSION property of the reaction \a rxn.
          * \param rxn The reaction for which to return the property value.
-         * \return The stored RXN-file version (see Chem::MDLDataFormatVersion).
+         * \return The stored <em>MDL Rxn-File</em> version (see Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API unsigned int getMDLRXNFileVersion(const Reaction& rxn);
 
         /**
          * \brief Sets the value of the Chem::ReactionProperty::MDL_RXN_FILE_VERSION property of the reaction \a rxn to \a version.
          * \param rxn The reaction for which to set the property value.
-         * \param version The new RXN-file version (see Chem::MDLDataFormatVersion).
+         * \param version The new <em>MDL Rxn-File</em> version (see Chem::MDLDataFormatVersion).
          */
         CDPL_CHEM_API void setMDLRXNFileVersion(Reaction& rxn, unsigned int version);
 
