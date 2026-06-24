@@ -799,11 +799,11 @@ namespace CDPL
         };
 
         /**
-         * \brief Scaling matrix holding floating point values of type <tt>float</tt>.
+         * \brief Scaling matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef ScalingMatrix<float>         FScalingMatrix;
         /**
-         * \brief Scaling matrix holding floating point values of type <tt>double</tt>.
+         * \brief Scaling matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef ScalingMatrix<double>        DScalingMatrix;
         /**
@@ -816,11 +816,11 @@ namespace CDPL
         typedef ScalingMatrix<unsigned long> ULScalingMatrix;
 
         /**
-         * \brief Rotation matrix holding floating point values of type <tt>float</tt>.
+         * \brief Rotation matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef RotationMatrix<float>         FRotationMatrix;
         /**
-         * \brief Rotation matrix holding floating point values of type <tt>double</tt>.
+         * \brief Rotation matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef RotationMatrix<double>        DRotationMatrix;
         /**
@@ -833,11 +833,11 @@ namespace CDPL
         typedef RotationMatrix<unsigned long> ULRotationMatrix;
 
         /**
-         * \brief Translation matrix holding floating point values of type <tt>float</tt>.
+         * \brief Translation matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef TranslationMatrix<float>         FTranslationMatrix;
         /**
-         * \brief Translation matrix holding floating point values of type <tt>double</tt>.
+         * \brief Translation matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef TranslationMatrix<double>        DTranslationMatrix;
         /**

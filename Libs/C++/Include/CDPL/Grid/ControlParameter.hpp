@@ -53,9 +53,9 @@ namespace CDPL
             /**
              * \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
              *
-             * If the control-parameter is set to \c true, not only severe errors cause an I/O operation to fail, but also
+             * If the parameter is set to \c true, not only severe errors cause an I/O operation to fail, but also
              * non-fatal errors from which a recovery would be possible. 
-             * If the control-parameter is set to \c false, I/O operations will proceed even if a non-fatal error has been
+             * If the parameter is set to \c false, I/O operations will proceed even if a non-fatal error has been
              * detected.
              *
              * \valuetype \c bool
@@ -63,36 +63,40 @@ namespace CDPL
             extern CDPL_GRID_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
             /**
-             * \brief Specifies whether CDF-format grid output uses single-precision floats (\c true) or double-precision (\c false).
+             * \brief Specifies whether floating-point values shall be output in single-precision (\c true) or double-precision (\c false)
+             *        when writing data in \e CDF format.
+             *
              * \valuetype \c bool
              * \since 1.2
              */
             extern CDPL_GRID_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             /**
-             * \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> file is taken as the grid name or treated as a regular comment on data I/O.
-             * \see [\ref CUBE]
+             * \brief Specifies whether to interpret the comment line of a <em>Gaussian CUBE</em> file as the grid name on data I/O.
+             *
              * \valuetype \c bool
+             * \see [\ref CUBE]
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_COMMENT_IS_NAME;
 
             /**
              * \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> format.
-             * \see [\ref CUBE]
+             *
              * \valuetype \c double
+             * \see [\ref CUBE]
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_INPUT_DISTANCE_SCALING_FACTOR;
 
             /**
-             * \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> format data output.
-             * \see [\ref CUBE]
+             * \brief Specifies the scaling factor to apply to distances when generating <em>Gaussian CUBE</em> output.
+             *
              * \valuetype \c double
+             * \see [\ref CUBE]
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey CUBE_OUTPUT_DISTANCE_SCALING_FACTOR;
-            
         } // namespace ControlParameter
     } // namespace Grid
 } // namespace CDPL

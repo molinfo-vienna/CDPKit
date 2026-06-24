@@ -27,14 +27,14 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
     # 
-    # If the control-parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the control-parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
+    # If the parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
     # 
     # \valuetype  <tt>bool</tt>
     # 
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')
 
     ##
-    # \brief Specifies whether floating-point values stored in <em>CDF</em> output shall use single (instead of double) precision.
+    # \brief Specifies whether floating-point values shall be output in single-precision (<tt>True</tt>) or double-precision (<tt>False</tt>) when writing data in <em>CDF</em> format.
     # 
     # \valuetype  <tt>bool</tt> \since 1.2
     # 

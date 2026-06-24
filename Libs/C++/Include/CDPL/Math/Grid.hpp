@@ -1392,12 +1392,12 @@ namespace CDPL
         typedef ScalarGrid<double> DScalarGrid;
 
         /**
-         * \brief Unbounded dense grid storing floating point values of type <tt>float</tt>.
+         * \brief Unbounded dense grid storing floating-point values of type <tt>float</tt>.
          */
         typedef Grid<float> FGrid;
 
         /**
-         * \brief Unbounded dense grid storing floating point values of type <tt>double</tt>.
+         * \brief Unbounded dense grid storing floating-point values of type <tt>double</tt>.
          */
         typedef Grid<double> DGrid;
     } // namespace Math

@@ -53,6 +53,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the Vis::Shape3D instance associated with the 3D object.
+             *
              * \valuetype Vis::Shape3D::SharedPointer
              * \since 1.3
              */
@@ -60,6 +61,7 @@ namespace CDPL
 
             /**
              * \brief Specifies a transformation to apply to the geometry of the 3D object and all sub-objects.
+             *
              * \valuetype Math::Matrix4D
              * \since 1.3
              */
@@ -67,6 +69,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the material properties of the 3D object and all sub-objects.
+             *
              * \valuetype Vis::Material
              * \since 1.3
              */

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Array storing floating point values of type <tt>double</tt>.
+# \brief Array storing floating-point values of type <tt>double</tt>.
 # 
 class DArray(Boost.Python.instance):
 

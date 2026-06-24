@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Rotation matrix holding floating point values of type <tt>float</tt>.
+# \brief Rotation matrix holding floating-point values of type <tt>float</tt>.
 # 
 class FRotationMatrix(Boost.Python.instance):
 

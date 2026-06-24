@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Scaling matrix holding floating point values of type <tt>float</tt>.
+# \brief Scaling matrix holding floating-point values of type <tt>float</tt>.
 # 
 class FScalingMatrix(Boost.Python.instance):
 

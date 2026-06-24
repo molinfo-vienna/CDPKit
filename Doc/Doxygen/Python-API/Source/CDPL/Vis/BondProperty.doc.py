@@ -92,7 +92,8 @@ class BondProperty(Boost.Python.instance):
     # 
     # The length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The line length specified by this property takes precedence over the length specified by Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH or Vis.MolecularGraphProperty.REACTION_CENTER_LINE_LENGTH. <br>
     # 
-    # \valuetype  Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
+    # \valuetype  Vis.SizeSpecification 
+    # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
     REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey('REACTION_CENTER_LINE_LENGTH')
 
@@ -101,7 +102,8 @@ class BondProperty(Boost.Python.instance):
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The line spacing specified by this property takes precedence over the spacing specified by Vis.ControlParameter.REACTION_CENTER_LINE_SPACING or Vis.MolecularGraphProperty.REACTION_CENTER_LINE_SPACING. <br>
     # 
-    # \valuetype  Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
+    # \valuetype  Vis.SizeSpecification 
+    # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
     REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey('REACTION_CENTER_LINE_SPACING')
 

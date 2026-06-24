@@ -42,7 +42,7 @@ namespace CDPL
          * \brief Specifies a color in terms of its red, green and blue components and an alpha-channel
          *        for transparency.
          *
-         * Each component of the RGBA quadruplet is represented by a double precision floating-point value
+         * Each component of the RGBA quadruplet is represented by a double-precision floating-point value
          * in the interval <em>[0, 1]</em>, where \e 0 corresponds to the lowest (zero) intensity
          * of a color component and the value \e 1 represents the highest intensity. Likewise, a
          * value of \e 1 for the alpha-channel corresponds to complete opaqueness and \e 0 represents

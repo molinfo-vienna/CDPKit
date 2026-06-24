@@ -127,7 +127,6 @@ namespace CDPL
              * \since 1.4
              */
             extern CDPL_PHARM_API const Base::LookupKey ENVIRONMENT_SUBSTRUCTURE;
-            
         } // namespace FeatureProperty
     } // namespace Pharm
 } // namespace CDPL

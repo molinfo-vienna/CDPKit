@@ -96,7 +96,8 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
     ##
     # \brief Calculates the topological autocorrelation vector of the molecular graph <em>molgraph</em>.
     # 
-    # The elements of the calculated vector provide the sum of the weights of all atom pairs with a topological distance equal to the element index. The size of the vector is limited by the topological diameter of the molecular graph or the specified maximum considered bond path length (\see setMaxDistance()).
+    # The elements of the calculated vector provide the sum of the weights of all atom pairs with a topological distance equal to the element index. The size of the vector is limited by the topological diameter of the molecular graph or the specified maximum considered bond path length (
+    # \see setMaxDistance()).
     # 
     # \param molgraph The molecular graph for which to calculate the autocorrelation vector.
     # \param corr_vec The calculated autocorrelation vector.

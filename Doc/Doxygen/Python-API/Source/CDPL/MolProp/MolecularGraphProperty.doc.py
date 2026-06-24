@@ -29,8 +29,8 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the list of functional groups perceived for the molecular graph.
     # 
-    # \see [\ref FGPE] 
     # \valuetype  Chem.FragmentList.SharedPointer 
+    # \see [\ref FGPE] 
     # 
     # \since 1.3
     # 

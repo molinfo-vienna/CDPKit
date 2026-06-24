@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Unbounded dense regular grid storing floating point values of type <tt>float</tt>.
+# \brief Unbounded dense regular grid storing floating-point values of type <tt>float</tt>.
 # 
 class FRegularSpatialGrid(Boost.Python.instance):
 

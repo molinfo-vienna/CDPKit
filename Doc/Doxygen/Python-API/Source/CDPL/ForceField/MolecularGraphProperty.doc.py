@@ -27,7 +27,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the list of rings that are considered aromatic according to the MMFF94 aromaticity model.
     # 
-    # \see [\ref MMFF94] 
-    # \valuetype  Chem.FragmentList.SharedPointer
+    # \valuetype  Chem.FragmentList.SharedPointer 
+    # \see [\ref MMFF94]
     # 
     MMFF94_AROMATIC_RINGS = CDPL.Base.LookupKey('MMFF94_AROMATIC_RINGS')

@@ -971,12 +971,12 @@ namespace CDPL
         }
 
         /**
-         * \brief Unbounded dense regular grid storing floating point values of type <tt>float</tt>.
+         * \brief Unbounded dense regular grid storing floating-point values of type <tt>float</tt>.
          */
         typedef RegularSpatialGrid<float> FRegularSpatialGrid;
 
         /**
-         * \brief Unbounded dense regular grid storing floating point values of type <tt>double</tt>.
+         * \brief Unbounded dense regular grid storing floating-point values of type <tt>double</tt>.
          */
         typedef RegularSpatialGrid<double> DRegularSpatialGrid;
     } // namespace Math

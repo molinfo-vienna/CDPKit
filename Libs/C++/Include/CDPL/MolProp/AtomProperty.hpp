@@ -52,29 +52,33 @@ namespace CDPL
 
             /**
              * \brief Specifies the hydrophobicity of the atom.
-             * \see MolProp::calcAtomHydrophobicities()
+             *
              * \valuetype \c double
+             * \see MolProp::calcAtomHydrophobicities()
              */
             extern CDPL_MOLPROP_API const Base::LookupKey HYDROPHOBICITY;
 
             /**
              * \brief Specifies the calculated PEOE &sigma;-charge of the atom.
-             * \see [\ref PEOE]
+             *
              * \valuetype \c double
+             * \see [\ref PEOE]
              */
             extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_CHARGE;
 
             /**
              * \brief Specifies the calculated PEOE &sigma;-electronegativity of the atom.
-             * \see [\ref PEOE]
+             *
              * \valuetype \c double
+             * \see [\ref PEOE]
              */
             extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_ELECTRONEGATIVITY;
 
             /**
              * \brief Specifies the calculated MHMO &pi;-charge of the atom.
-             * \see [\ref MHMO]
+             *
              * \valuetype \c double
+             * \see [\ref MHMO]
              */
             extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_CHARGE;
 

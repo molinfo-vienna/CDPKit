@@ -52,6 +52,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the 3D position of the entity.
+             *
              * \valuetype Math::Vector3D
              */
             extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D;

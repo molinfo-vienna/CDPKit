@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Translation matrix holding floating point values of type <tt>double</tt>.
+# \brief Translation matrix holding floating-point values of type <tt>double</tt>.
 # 
 class DTranslationMatrix(Boost.Python.instance):
 

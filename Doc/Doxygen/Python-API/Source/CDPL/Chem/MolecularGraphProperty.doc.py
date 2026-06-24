@@ -160,16 +160,16 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the user initials stored in the <em>MDL</em> CTAB header.
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>std::string</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_USER_INITIALS = CDPL.Base.LookupKey('MDL_USER_INITIALS')
 
     ##
     # \brief Specifies the program name stored in the <em>MDL</em> CTAB header.
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>std::string</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_PROGRAM_NAME = CDPL.Base.LookupKey('MDL_PROGRAM_NAME')
 
@@ -184,16 +184,16 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the <em>MDL</em> connection table (CTAB) version (see namespace Chem.MDLDataFormatVersion).
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_CTAB_VERSION = CDPL.Base.LookupKey('MDL_CTAB_VERSION')
 
     ##
     # \brief Specifies the dimensionality flag stored in the <em>MDL</em> CTAB header (<em>0</em> = unspecified, <em>2</em> = 2D, <em>3</em> = 3D).
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>std::size_t</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_DIMENSIONALITY = CDPL.Base.LookupKey('MDL_DIMENSIONALITY')
 
@@ -208,24 +208,24 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the second (floating-point) scaling factor stored in the <em>MDL</em> CTAB header.
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>double</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_SCALING_FACTOR2 = CDPL.Base.LookupKey('MDL_SCALING_FACTOR2')
 
     ##
     # \brief Specifies the energy value stored in the <em>MDL</em> CTAB header.
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>double</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_ENERGY = CDPL.Base.LookupKey('MDL_ENERGY')
 
     ##
     # \brief Specifies the chiral flag stored in the <em>MDL</em> CTAB header.
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>bool</tt>
+    # \valuetype  <tt>bool</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_CHIRAL_FLAG = CDPL.Base.LookupKey('MDL_CHIRAL_FLAG')
 

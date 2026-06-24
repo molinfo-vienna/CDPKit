@@ -22,7 +22,7 @@
 ##
 # \brief Specifies a color in terms of its red, green and blue components and an alpha-channel for transparency.
 # 
-# Each component of the RGBA quadruplet is represented by a double precision floating-point value in the interval <em>[0, 1]</em>, where <em>0</em> corresponds to the lowest (zero) intensity of a color component and the value <em>1</em> represents the highest intensity. Likewise, a value of <em>1</em> for the alpha-channel corresponds to complete opaqueness and <em>0</em> represents complete transparency.
+# Each component of the RGBA quadruplet is represented by a double-precision floating-point value in the interval <em>[0, 1]</em>, where <em>0</em> corresponds to the lowest (zero) intensity of a color component and the value <em>1</em> represents the highest intensity. Likewise, a value of <em>1</em> for the alpha-channel corresponds to complete opaqueness and <em>0</em> represents complete transparency.
 # 
 class Color(Boost.Python.instance):
 

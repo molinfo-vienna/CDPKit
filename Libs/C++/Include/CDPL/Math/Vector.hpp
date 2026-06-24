@@ -3193,37 +3193,37 @@ namespace CDPL
         typedef UnitVector<unsigned long> ULUnitVector;
 
         /**
-         * \brief Bounded 2 element vector holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 2 element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 2> Vector2F;
 
         /**
-         * \brief Bounded 3 element vector holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 3 element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 3> Vector3F;
 
         /**
-         * \brief Bounded 4 element vector holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 4 element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 4> Vector4F;
 
         /**
-         * \brief Bounded 2 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 2 element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 2> Vector2D;
 
         /**
-         * \brief Bounded 3 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 3 element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 3> Vector3D;
 
         /**
-         * \brief Bounded 4 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 4 element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 4> Vector4D;
 
         /**
-         * \brief Bounded 7 element vector holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 7 element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 7> Vector7D;
 
@@ -3258,12 +3258,12 @@ namespace CDPL
         typedef CVector<unsigned long, 4> Vector4UL;
 
         /**
-         * \brief Unbounded dense vector holding floating point values of type <tt>float</tt>.
+         * \brief Unbounded dense vector holding floating-point values of type <tt>float</tt>.
          */
         typedef Vector<float> FVector;
 
         /**
-         * \brief Unbounded dense vector holding floating point values of type <tt>double</tt>.
+         * \brief Unbounded dense vector holding floating-point values of type <tt>double</tt>.
          */
         typedef Vector<double> DVector;
 
@@ -3278,12 +3278,12 @@ namespace CDPL
         typedef Vector<unsigned long> ULVector;
 
         /**
-         * \brief Unbounded sparse vector holding floating point values of type <tt>float</tt>.
+         * \brief Unbounded sparse vector holding floating-point values of type <tt>float</tt>.
          */
         typedef SparseVector<float> SparseFVector;
 
         /**
-         * \brief Unbounded sparse vector holding floating point values of type <tt>double</tt>.
+         * \brief Unbounded sparse vector holding floating-point values of type <tt>double</tt>.
          */
         typedef SparseVector<double> SparseDVector;
 

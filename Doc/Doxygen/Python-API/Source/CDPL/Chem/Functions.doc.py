@@ -3199,7 +3199,7 @@ def clearStoichiometricNumber(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.STRUCTURE_DATA property of the molecular graph <em>molgraph</em> to <em>data</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param data The new structure-data block.
+# \param data The new structure data block.
 # 
 def setStructureData(molgraph: MolecularGraph, data: StringDataBlock) -> None: pass
 
@@ -3217,7 +3217,7 @@ def hasStructureData(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored structure-data block.
+# \return The stored structure data block.
 # 
 def getStructureData(molgraph: MolecularGraph) -> StringDataBlock: pass
 

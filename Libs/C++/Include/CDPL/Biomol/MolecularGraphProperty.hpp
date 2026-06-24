@@ -99,7 +99,6 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_DATA;
-
         } // namespace MolecularGraphProperty
     } // namespace Biomol
 } // namespace CDPL

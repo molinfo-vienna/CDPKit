@@ -52,12 +52,14 @@ namespace CDPL
 
             /**
              * \brief Specifies the name (or title) of the attributed grid.
+             *
              * \valuetype \c std::string
              */
             extern CDPL_GRID_API const Base::LookupKey NAME;
 
             /**
              * \brief Specifies a free-text comment associated with the attributed grid.
+             *
              * \valuetype \c std::string
              * \since 1.4
              */

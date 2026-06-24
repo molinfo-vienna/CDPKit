@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Bounded 4x4 matrix holding floating point values of type <tt>double</tt>.
+# \brief Bounded 4x4 matrix holding floating-point values of type <tt>double</tt>.
 # 
 class Matrix4D(Boost.Python.instance):
 

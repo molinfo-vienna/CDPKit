@@ -203,7 +203,7 @@ def getTextRecursive(parent_node):
             kind = node.attributes['kind'].value
             
             if kind == 'see':
-                rc.append('\\see ')
+                rc.append('\n\\see ')
             elif kind  == 'return':
                 rc.append('\\return ')
             elif kind == 'note':

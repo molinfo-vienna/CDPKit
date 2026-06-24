@@ -52,8 +52,9 @@ namespace CDPL
 
             /**
              * \brief Specifies the list of rings that are considered aromatic according to the MMFF94 aromaticity model.
-             * \see [\ref MMFF94]
+             *
              * \valuetype Chem::FragmentList::SharedPointer
+             * \see [\ref MMFF94]
              */
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_AROMATIC_RINGS;
         }

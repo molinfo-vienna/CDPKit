@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Bounded 2 element vector holding floating point values of type <tt>float</tt>.
+# \brief Bounded 2 element vector holding floating-point values of type <tt>float</tt>.
 # 
 class Vector2F(Boost.Python.instance):
 

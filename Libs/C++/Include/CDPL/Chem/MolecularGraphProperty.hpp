@@ -186,15 +186,17 @@ namespace CDPL
 
             /**
              * \brief Specifies the user initials stored in the \e MDL CTAB header.
-             * \see [\ref CTFILE]
+             *
              * \valuetype \c std::string
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
 
             /**
              * \brief Specifies the program name stored in the \e MDL CTAB header.
-             * \see [\ref CTFILE]
+             *
              * \valuetype \c std::string
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
 
@@ -207,15 +209,17 @@ namespace CDPL
 
             /**
              * \brief Specifies the \e MDL connection table (CTAB) version (see namespace Chem::MDLDataFormatVersion).
-             * \see [\ref CTFILE]
+             *
              * \valuetype <tt>unsigned int</tt> 
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
 
             /**
              * \brief Specifies the dimensionality flag stored in the \e MDL CTAB header (\e 0 = unspecified, \e 2 = 2D, \e 3 = 3D).
-             * \see [\ref CTFILE]
+             *
              * \valuetype \c std::size_t
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_DIMENSIONALITY;
 
@@ -228,22 +232,25 @@ namespace CDPL
 
             /**
              * \brief Specifies the second (floating-point) scaling factor stored in the \e MDL CTAB header.
-             * \see [\ref CTFILE]
+             *
              * \valuetype \c double
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR2;
 
             /**
              * \brief Specifies the energy value stored in the \e MDL CTAB header.
-             * \see [\ref CTFILE]
+             *
              * \valuetype \c double
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_ENERGY;
 
             /**
              * \brief Specifies the chiral flag stored in the \e MDL CTAB header.
-             * \see [\ref CTFILE]
+             *
              * \valuetype \c bool
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_CHIRAL_FLAG;
 

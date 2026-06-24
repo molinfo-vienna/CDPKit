@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Unbounded sparse matrix holding floating point values of type <tt>double</tt>..
+# \brief Unbounded sparse matrix holding floating-point values of type <tt>double</tt>..
 # 
 class SparseDMatrix(Boost.Python.instance):
 

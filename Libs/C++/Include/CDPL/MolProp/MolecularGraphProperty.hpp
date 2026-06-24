@@ -53,8 +53,9 @@ namespace CDPL
 
             /**
              * \brief Specifies the list of functional groups perceived for the molecular graph.
-             * \see [\ref FGPE]
+             *
              * \valuetype Chem::FragmentList::SharedPointer
+             * \see [\ref FGPE]
              * \since 1.3
              */
             extern CDPL_MOLPROP_API const Base::LookupKey FUNCTIONAL_GROUPS;

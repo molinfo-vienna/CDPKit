@@ -118,8 +118,8 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the canonical number of the atom obtained by the Morgan algorithm.
     # 
-    # \see [\ref MOCAN] 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>std::size_t</tt> 
+    # \see [\ref MOCAN]
     # 
     MORGAN_NUMBER = CDPL.Base.LookupKey('MORGAN_NUMBER')
 
@@ -133,16 +133,16 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the topological CIP priority of the atom.
     # 
-    # \see [\ref TCIP] 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>std::size_t</tt> 
+    # \see [\ref TCIP]
     # 
     CIP_PRIORITY = CDPL.Base.LookupKey('CIP_PRIORITY')
 
     ##
     # \brief Specifies the topological symmetry class of the atom.
     # 
-    # \see [\ref TOPSY] 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>std::size_t</tt> 
+    # \see [\ref TOPSY]
     # 
     SYMMETRY_CLASS = CDPL.Base.LookupKey('SYMMETRY_CLASS')
 
@@ -170,16 +170,16 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the <em>MDL</em> stereo parity of the atom (see namespace Chem.MDLParity).
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_PARITY = CDPL.Base.LookupKey('MDL_PARITY')
 
     ##
     # \brief Specifies the value of the <em>MDL</em> <em>stereo care</em> flag of the atom.
     # 
-    # \see [\ref CTFILE] 
-    # \valuetype  <tt>bool</tt>
+    # \valuetype  <tt>bool</tt> 
+    # \see [\ref CTFILE]
     # 
     MDL_DB_STEREO_CARE_FLAG = CDPL.Base.LookupKey('MDL_DB_STEREO_CARE_FLAG')
 
@@ -198,10 +198,8 @@ class AtomProperty(Boost.Python.instance):
     MOL2_NAME = CDPL.Base.LookupKey('MOL2_NAME')
 
     ##
-    # \brief Specifies the <em>Sybyl MOL2</em> atomic partial charge.
-    # 
-    # \valuetype  <tt>double</tt>
-    # 
+    # \brief 
+    #
     MOL2_CHARGE = CDPL.Base.LookupKey('MOL2_CHARGE')
 
     ##

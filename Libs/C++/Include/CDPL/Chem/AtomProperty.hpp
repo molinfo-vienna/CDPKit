@@ -143,8 +143,9 @@ namespace CDPL
 
             /**
              * \brief Specifies the canonical number of the atom obtained by the Morgan algorithm.
-             * \see  [\ref MOCAN]
+             *
              * \valuetype \c std::size_t
+             * \see  [\ref MOCAN]
              */
             extern CDPL_CHEM_API const Base::LookupKey MORGAN_NUMBER;
 
@@ -157,15 +158,17 @@ namespace CDPL
 
             /**
              * \brief Specifies the topological CIP priority of the atom.
-             * \see [\ref TCIP]
+             *
              * \valuetype \c std::size_t
+             * \see [\ref TCIP]
              */
             extern CDPL_CHEM_API const Base::LookupKey CIP_PRIORITY;
 
             /**
              * \brief Specifies the topological symmetry class of the atom.
-             * \see [\ref TOPSY]
+             *
              * \valuetype \c std::size_t
+             * \see [\ref TOPSY]
              */
             extern CDPL_CHEM_API const Base::LookupKey SYMMETRY_CLASS;
 
@@ -192,15 +195,17 @@ namespace CDPL
 
             /**
              * \brief Specifies the \e MDL stereo parity of the atom (see namespace Chem::MDLParity).
-             * \see [\ref CTFILE]
+             *
              * \valuetype <tt>unsigned int</tt>
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_PARITY;
 
             /**
              * \brief Specifies the value of the \e MDL <em>stereo care</em> flag of the atom.
-             * \see [\ref CTFILE]
+             *
              * \valuetype \c bool
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_DB_STEREO_CARE_FLAG;
 
@@ -213,7 +218,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the <em>Sybyl MOL2</em> atomic partial charge.
-             *
+x             *
              * \valuetype \c double
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;

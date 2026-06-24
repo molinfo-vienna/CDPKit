@@ -718,14 +718,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::MolecularGraphProperty::STRUCTURE_DATA property of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to return the property value.
-         * \return The stored structure-data block.
+         * \return The stored structure data block.
          */
         CDPL_CHEM_API const StringDataBlock::SharedPointer& getStructureData(const MolecularGraph& molgraph);
 
         /**
          * \brief Sets the value of the Chem::MolecularGraphProperty::STRUCTURE_DATA property of the molecular graph \a molgraph to \a data.
          * \param molgraph The molecular graph for which to set the property value.
-         * \param data The new structure-data block.
+         * \param data The new structure data block.
          */
         CDPL_CHEM_API void setStructureData(MolecularGraph& molgraph, const StringDataBlock::SharedPointer& data);
 

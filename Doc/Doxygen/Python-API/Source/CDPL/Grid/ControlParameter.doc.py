@@ -27,25 +27,24 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
     # 
-    # If the control-parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the control-parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
+    # If the parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
     # 
     # \valuetype  <tt>bool</tt>
     # 
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')
 
     ##
-    # \brief Specifies whether CDF-format grid output uses single-precision floats (<tt>True</tt>) or double-precision (<tt>False</tt>). 
-    # \valuetype  <tt>bool</tt>.
+    # \brief Specifies whether floating-point values shall be output in single-precision (<tt>True</tt>) or double-precision (<tt>False</tt>) when writing data in <em>CDF</em> format.
     # 
-    # \since 1.2
+    # \valuetype  <tt>bool</tt> \since 1.2
     # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief Specifies whether the comment line of a <em>Gaussian CUBE</em> file is taken as the grid name or treated as a regular comment on data I/O.
+    # \brief Specifies whether to interpret the comment line of a <em>Gaussian CUBE</em> file as the grid name on data I/O.
     # 
-    # \see [\ref CUBE] 
     # \valuetype  <tt>bool</tt> 
+    # \see [\ref CUBE] 
     # 
     # \since 1.4
     # 
@@ -54,18 +53,18 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> format.
     # 
-    # \see [\ref CUBE] 
     # \valuetype  <tt>double</tt> 
+    # \see [\ref CUBE] 
     # 
     # \since 1.4
     # 
     CUBE_INPUT_DISTANCE_SCALING_FACTOR = CDPL.Base.LookupKey('CUBE_INPUT_DISTANCE_SCALING_FACTOR')
 
     ##
-    # \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> format data output.
+    # \brief Specifies the scaling factor to apply to distances when generating <em>Gaussian CUBE</em> output.
     # 
-    # \see [\ref CUBE] 
     # \valuetype  <tt>double</tt> 
+    # \see [\ref CUBE] 
     # 
     # \since 1.4
     # 

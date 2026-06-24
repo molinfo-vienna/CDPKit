@@ -3459,12 +3459,12 @@ namespace CDPL
         typedef IdentityMatrix<unsigned long> ULIdentityMatrix;
 
         /**
-         * \brief Unbounded dense matrix holding floating point values of type <tt>float</tt>..
+         * \brief Unbounded dense matrix holding floating-point values of type <tt>float</tt>..
          */
         typedef Matrix<float> FMatrix;
 
         /**
-         * \brief Unbounded dense matrix holding floating point values of type <tt>double</tt>..
+         * \brief Unbounded dense matrix holding floating-point values of type <tt>double</tt>..
          */
         typedef Matrix<double> DMatrix;
 
@@ -3479,32 +3479,32 @@ namespace CDPL
         typedef Matrix<unsigned long> ULMatrix;
 
         /**
-         * \brief Bounded 2x2 matrix holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 2x2 matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 2, 2> Matrix2F;
 
         /**
-         * \brief Bounded 3x3 matrix holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 3x3 matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 3, 3> Matrix3F;
 
         /**
-         * \brief Bounded 4x4 matrix holding floating point values of type <tt>float</tt>.
+         * \brief Bounded 4x4 matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 4, 4> Matrix4F;
 
         /**
-         * \brief Bounded 2x2 matrix holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 2x2 matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 2, 2> Matrix2D;
 
         /**
-         * \brief Bounded 3x3 matrix holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 3x3 matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 3, 3> Matrix3D;
 
         /**
-         * \brief Bounded 4x4 matrix holding floating point values of type <tt>double</tt>.
+         * \brief Bounded 4x4 matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 4, 4> Matrix4D;
 
@@ -3539,12 +3539,12 @@ namespace CDPL
         typedef CMatrix<unsigned long, 4, 4> Matrix4UL;
 
         /**
-         * \brief Unbounded sparse matrix holding floating point values of type <tt>float</tt>..
+         * \brief Unbounded sparse matrix holding floating-point values of type <tt>float</tt>..
          */
         typedef SparseMatrix<float> SparseFMatrix;
 
         /**
-         * \brief Unbounded sparse matrix holding floating point values of type <tt>double</tt>..
+         * \brief Unbounded sparse matrix holding floating-point values of type <tt>double</tt>..
          */
         typedef SparseMatrix<double> SparseDMatrix;
 

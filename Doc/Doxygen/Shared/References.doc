@@ -438,7 +438,7 @@ ISBN 0-521-43108-5, http://www.nr.com/
 <tr>
 <td valign="top">\anchor PDB<i>[PDB]</i></td>
 <td valign="top">
-PDB File-Format Specification website: http://www.wwpdb.org/docs.html
+PDB File-Format Specification website: https://www.wwpdb.org/documentation/file-format
 </td>
 </tr>
 
@@ -472,6 +472,7 @@ Raster3D File Format Specification: http://www.bmsc.washington.edu/raster3d/html
 </td>
 </tr>
 
+<tr>
 <td valign="top">\anchor RTOR<i>[RTOR]</i></td>
 <td valign="top">
 J. Wahl, F. Freyss, M. von Korff, T. Sander,

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Unbounded dense grid storing floating point values of type <tt>double</tt>.
+# \brief Unbounded dense grid storing floating-point values of type <tt>double</tt>.
 # 
 class DGrid(Boost.Python.instance):
 
