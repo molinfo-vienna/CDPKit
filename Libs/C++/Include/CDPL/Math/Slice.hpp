@@ -67,7 +67,7 @@ namespace CDPL
             typedef D DifferenceType;
 
             /**
-             * \brief Constructs an empty slice (\f$ 0, 0, 0 \f$).
+             * \brief Constructs an empty slice.
              */
             Slice():
                 start(0), stride(0), size(0) {}

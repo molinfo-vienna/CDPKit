@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Bounded 4 element vector holding floating-point values of type <tt>double</tt>.
+# \brief Bounded <em>4</em> element vector holding floating-point values of type <tt>double</tt>.
 # 
 class Vector4D(Boost.Python.instance):
 

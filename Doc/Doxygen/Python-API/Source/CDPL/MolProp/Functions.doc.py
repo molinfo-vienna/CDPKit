@@ -873,19 +873,19 @@ def getRotatableBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, h_roto
 def getRotatableBondCount(molgraph: Chem.MolecularGraph, h_rotors: bool = False, ring_bonds: bool = False, amide_bonds: bool = False) -> int: pass
 
 ##
-# \brief Returns the Lipinski rule-of-five score of the molecular graph <em>molgraph</em>, defined as the number of satisfied criteria (0-4).
+# \brief Returns the Lipinski rule-of-five score of the molecular graph <em>molgraph</em>, defined as the number of satisfied criteria (<em>0</em> to <em>4</em>).
 # 
 # The four criteria evaluated are:
-#  - the number of H-bond donor atoms is &le; 5,
-#  - the number of H-bond acceptor atoms is &le; 10,
-#  - the <em>XLogP</em> value is &le; 5.0,
-#  - the molecular mass is &le; 500.0.
+#  - the number of H-bond donor atoms is &le; <em>5</em>,
+#  - the number of H-bond acceptor atoms is &le; <em>10</em>,
+#  - the <em>XLogP</em> value is &le; <em>5.0</em>,
+#  - the molecular mass is &le; <em>500.0</em>.
 # 
-# A score of 4 indicates full compliance with the Lipinski rule of five.
+# A score of <em>4</em> indicates full compliance with the Lipinski rule of five.
 # 
 # \param molgraph The molecular graph.
 # 
-# \return The rule-of-five score (0-4).
+# \return The rule-of-five score (<em>0</em> to <em>4</em>).
 # 
 def getRuleOfFiveScore(molgraph: Chem.MolecularGraph) -> int: pass
 

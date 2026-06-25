@@ -895,16 +895,16 @@ def isPDBBackboneAtom(atom: Chem.Atom) -> bool: pass
 ##
 # \brief Tells whether the residue attributes of the atom <em>atom</em> match the given filter values.
 # 
-# Each filter argument is ignored when set to its sentinel value (<tt>nullptr</tt> / <tt>0</tt> / IGNORE_SEQUENCE_NO / IGNORE_SERIAL_NO). All supplied filters must match for the function to return <tt>True</tt>.
+# Each filter argument is ignored when set to its sentinel value (<tt>nullptr</tt> / <em>0</em> / Biomol.IGNORE_SEQUENCE_NO / Biomol.IGNORE_SERIAL_NO). All supplied filters must match for the function to return <tt>True</tt>.
 # 
 # \param atom The atom to test.
 # \param res_code The <em>PDB</em> three-letter residue code to match (or <tt>nullptr</tt> to ignore).
 # \param chain_id The <em>PDB</em> chain ID to match (or <tt>nullptr</tt> to ignore).
-# \param res_seq_no The <em>PDB</em> residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-# \param ins_code The <em>PDB</em> insertion code to match (or <tt>0</tt> to ignore).
-# \param model_no The <em>PDB</em> model number to match (or <tt>0</tt> to ignore).
+# \param res_seq_no The <em>PDB</em> residue sequence number to match (or Biomol.IGNORE_SEQUENCE_NO to ignore).
+# \param ins_code The <em>PDB</em> insertion code to match (or <em>0</em> to ignore).
+# \param model_no The <em>PDB</em> model number to match (or <em>0</em> to ignore).
 # \param atom_name The <em>PDB</em> atom name to match (or <tt>nullptr</tt> to ignore).
-# \param serial_no The <em>PDB</em> atom serial number to match (or IGNORE_SERIAL_NO to ignore).
+# \param serial_no The <em>PDB</em> atom serial number to match (or Biomol.IGNORE_SERIAL_NO to ignore).
 # 
 # \return <tt>True</tt> if all supplied filters match, and <tt>False</tt> otherwise.
 # 
@@ -913,14 +913,14 @@ def matchesResidueInfo(atom: Chem.Atom, res_code: str = '', chain_id: str = '', 
 ##
 # \brief Tells whether the residue identity attributes of the molecular graph <em>molgraph</em> match the given filter values.
 # 
-# Each filter argument is ignored when set to its sentinel value (<tt>nullptr</tt> / <tt>0</tt> / IGNORE_SEQUENCE_NO). All supplied filters must match for the function to return <tt>True</tt>.
+# Each filter argument is ignored when set to its sentinel value (<tt>nullptr</tt> / <em>0</em> / Biomol.IGNORE_SEQUENCE_NO). All supplied filters must match for the function to return <tt>True</tt>.
 # 
 # \param molgraph The molecular graph to test.
 # \param res_code The <em>PDB</em> three-letter residue code to match (or <tt>nullptr</tt> to ignore).
 # \param chain_id The <em>PDB</em> chain ID to match (or <tt>nullptr</tt> to ignore).
-# \param res_seq_no The <em>PDB</em> residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-# \param ins_code The <em>PDB</em> insertion code to match (or <tt>0</tt> to ignore).
-# \param model_no The <em>PDB</em> model number to match (or <tt>0</tt> to ignore).
+# \param res_seq_no The <em>PDB</em> residue sequence number to match (or Biomol.IGNORE_SEQUENCE_NO to ignore).
+# \param ins_code The <em>PDB</em> insertion code to match (or <em>0</em> to ignore).
+# \param model_no The <em>PDB</em> model number to match (or <em>0</em> to ignore).
 # 
 # \return <tt>True</tt> if all supplied filters match, and <tt>False</tt> otherwise.
 # 

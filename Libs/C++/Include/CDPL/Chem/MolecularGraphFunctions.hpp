@@ -947,7 +947,7 @@ namespace CDPL
         CDPL_CHEM_API void generateAdjacencyMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
         /**
-         * \brief Builds the atom/bond incidence matrix of the molecular graph \a molgraph (entry \c (i,j) is \c 1 if atom \c i is an endpoint of bond \c j).
+         * \brief Builds the atom/bond incidence matrix of the molecular graph \a molgraph (entry \c (i,j) is \e 1 if atom \e i is an endpoint of bond \e j).
          * \param molgraph The molecular graph to inspect.
          * \param mtx The output sparse matrix receiving the incidence entries.
          */

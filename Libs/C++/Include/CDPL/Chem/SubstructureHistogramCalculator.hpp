@@ -251,7 +251,7 @@ namespace CDPL
             /**
              * \brief Counts substructure occurrences in \a molgraph and writes the per-pattern hit counts to \a histo.
              *
-             * For every accepted match, the histogram is updated via \c histo[id] += 1 with the ID being the
+             * For every accepted match, the histogram is updated via <tt>histo[id] += 1</tt> with the ID being the
              * histogram-bin ID of the matching pattern.
              *
              * \tparam T The histogram type (must support \c operator[] returning an arithmetic value).

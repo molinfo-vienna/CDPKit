@@ -4157,12 +4157,12 @@ def svDecompose(a: ULMatrixExpression, w: ULVectorExpression, v: ULMatrixExpress
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4176,12 +4176,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4195,12 +4195,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4214,12 +4214,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4233,12 +4233,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4252,12 +4252,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4271,12 +4271,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4290,12 +4290,12 @@ def svSubstitute(u: ConstULMatrixExpression, w: ConstULVectorExpression, v: Cons
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4737,7 +4737,7 @@ def vec(e: ConstULQuaternionExpression) -> ConstULQuaternionVectorAdapter: pass
 def vec(t1: float, t2: float) -> Vector2F: pass
 
 ##
-# \brief Constructs a Math.CVector of size 3 from the components <em>t1</em>, <em>t2</em> and <em>t3</em>.
+# \brief Constructs a Math.CVector of size <em>3</em> from the components <em>t1</em>, <em>t2</em> and <em>t3</em>.
 # 
 # \param t1 The first component.
 # \param t2 The second component.
@@ -4748,7 +4748,7 @@ def vec(t1: float, t2: float) -> Vector2F: pass
 def vec(t1: float, t2: float, t3: float) -> Vector3F: pass
 
 ##
-# \brief Constructs a Math.CVector of size 4 from the components <em>t1</em>, <em>t2</em>, <em>t3</em> and <em>t4</em>.
+# \brief Constructs a Math.CVector of size <em>4</em> from the components <em>t1</em>, <em>t2</em>, <em>t3</em> and <em>t4</em>.
 # 
 # \param t1 The first component.
 # \param t2 The second component.
@@ -4770,7 +4770,7 @@ def vec(t1: float, t2: float, t3: float, t4: float) -> Vector4F: pass
 def vec(t1: int, t2: int) -> Vector2L: pass
 
 ##
-# \brief Constructs a Math.CVector of size 3 from the components <em>t1</em>, <em>t2</em> and <em>t3</em>.
+# \brief Constructs a Math.CVector of size <em>3</em> from the components <em>t1</em>, <em>t2</em> and <em>t3</em>.
 # 
 # \param t1 The first component.
 # \param t2 The second component.
@@ -4781,7 +4781,7 @@ def vec(t1: int, t2: int) -> Vector2L: pass
 def vec(t1: int, t2: int, t3: int) -> Vector3L: pass
 
 ##
-# \brief Constructs a Math.CVector of size 4 from the components <em>t1</em>, <em>t2</em>, <em>t3</em> and <em>t4</em>.
+# \brief Constructs a Math.CVector of size <em>4</em> from the components <em>t1</em>, <em>t2</em>, <em>t3</em> and <em>t4</em>.
 # 
 # \param t1 The first component.
 # \param t2 The second component.

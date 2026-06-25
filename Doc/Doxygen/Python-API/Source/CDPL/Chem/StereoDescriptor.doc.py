@@ -154,7 +154,7 @@ class StereoDescriptor(Boost.Python.instance):
     # \param atom3 The third atom.
     # \param atom4 The fourth atom.
     # 
-    # \return <tt>1</tt> if an <em>odd</em> number of transpositions is required, <tt>2</tt> if an <em>even</em> number of transpositions is required and <tt>0</tt> if the argument atoms do not match the stored reference atoms.
+    # \return <em>1</em> if an <em>odd</em> number of transpositions is required, <em>2</em> if an <em>even</em> number of transpositions is required and <em>0</em> if the argument atoms do not match the stored reference atoms.
     # 
     def getPermutationParity(atom1: Atom, atom2: Atom, atom3: Atom, atom4: Atom) -> int: pass
 
@@ -173,7 +173,7 @@ class StereoDescriptor(Boost.Python.instance):
     ##
     # \brief Tells whether this <tt>StereoDescriptor</tt> instance is valid for the specified center atom.
     # 
-    # The method checks if the number of reference atoms is at least 3, the reference atoms are distinct and if every reference atom is connected to the argument atom.
+    # The method checks if the number of reference atoms is at least <em>3</em>, the reference atoms are distinct and if every reference atom is connected to the argument atom.
     # 
     # \param atom The stereogenic center atom.
     # 

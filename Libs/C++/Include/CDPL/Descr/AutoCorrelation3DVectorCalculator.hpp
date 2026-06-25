@@ -90,7 +90,7 @@ namespace CDPL
             /**
              * \brief Sets the starting value of the radius.
              * \param start_radius The starting value of the radius.
-             * \note The default starting radius is <em>0.0</em>&Aring;.
+             * \note The default starting radius is <em>0.0</em> &Aring;.
              */
             void setStartRadius(double start_radius);
 
@@ -103,7 +103,7 @@ namespace CDPL
             /**
              * \brief Sets the radius step size between successive autocorrelation vector elements.
              * \param radius_inc The radius step size.
-             * \note The default radius step size is <em>0.1</em>&Aring;.
+             * \note The default radius step size is <em>0.1</em> &Aring;.
              */
             void setRadiusIncrement(double radius_inc);
 

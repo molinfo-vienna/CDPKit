@@ -55,9 +55,9 @@ namespace CDPL
         /**
          * \brief \f$ N \times N \f$ rotation matrix backed by a unit quaternion (or an axis-angle representation).
          *
-         * The first \f$ 3 \times 3 \f$ block holds the rotation; the remaining diagonal entries are 1 (identity)
-         * and all other entries are 0. The size \f$ N \f$ is configurable and typically chosen to fit the surrounding
-         * coordinate system (e.g. 4 for homogeneous transformations).
+         * The first \f$ 3 \times 3 \f$ block holds the rotation, the remaining diagonal entries are \e 1 (identity)
+         * and all other entries are \e 0. The size \f$ N \f$ is configurable and typically chosen to fit the surrounding
+         * coordinate system (e.g. \e 4 for homogeneous transformations).
          *
          * \tparam T The scalar value type.
          */
@@ -368,7 +368,7 @@ namespace CDPL
         /**
          * \brief \f$ N \times N \f$ diagonal scaling matrix.
          *
-         * The diagonal entries hold the per-axis scale factors; all off-diagonal entries are 0. The size \f$ N \f$
+         * The diagonal entries hold the per-axis scale factors; all off-diagonal entries are \e 0. The size \f$ N \f$
          * is configurable so the matrix can be combined with homogeneous coordinates.
          *
          * \tparam T The scalar value type.
@@ -467,7 +467,7 @@ namespace CDPL
              * \brief Returns the scaling matrix element at (\a i, \a j).
              * \param i The zero-based row index.
              * \param j The zero-based column index.
-             * \return The corresponding axis scaling factor on a diagonal position and 0 off the diagonal.
+             * \return The corresponding axis scaling factor on a diagonal position and \e 0 off the diagonal.
              * \throw Base::IndexError if either index is out of range.
              */
             ConstReference operator()(SizeType i, SizeType j) const
@@ -585,8 +585,8 @@ namespace CDPL
          * \brief \f$ N \times N \f$ translation matrix in homogeneous coordinates.
          *
          * The diagonal entries are all 1; the last column (above the diagonal) holds the per-axis translation
-         * components; all other entries are 0. The size \f$ N \f$ is configurable to fit the embedding coordinate
-         * dimension plus one (e.g. 4 for translations of 3D points in homogeneous form).
+         * components; all other entries are \e 0. The size \f$ N \f$ is configurable to fit the embedding coordinate
+         * dimension plus one (e.g. \e 4 for translations of 3D points in homogeneous form).
          *
          * \tparam T The scalar value type.
          */
@@ -684,7 +684,7 @@ namespace CDPL
              * \brief Returns the translation matrix element at (\a i, \a j).
              * \param i The zero-based row index.
              * \param j The zero-based column index.
-             * \return 1 on the diagonal; the corresponding translation component in the last column (rows 0-2); 0 elsewhere.
+             * \return \e 1 on the diagonal, the corresponding translation component in the last column (rows 0-2) and \e 0 elsewhere.
              * \throw Base::IndexError if either index is out of range.
              */
             ConstReference operator()(SizeType i, SizeType j) const

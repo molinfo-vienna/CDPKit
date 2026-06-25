@@ -44,7 +44,7 @@ class ControlParameterDefault(Boost.Python.instance):
     CUBE_COMMENT_IS_NAME = False
 
     ##
-    # \brief Default value (= <tt>1/0.52918</tt>) of the control-parameter Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR.
+    # \brief Default value (= <em>1/0.52918</em>) of the control-parameter Grid.ControlParameter.CUBE_INPUT_DISTANCE_SCALING_FACTOR.
     # 
     # The default value performs a conversion from Bohr to Ångstrom.
     # 
@@ -53,7 +53,7 @@ class ControlParameterDefault(Boost.Python.instance):
     CUBE_INPUT_DISTANCE_SCALING_FACTOR = 0.52918
 
     ##
-    # \brief Default value (= <tt>0.52918</tt>) of the control-parameter Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR.
+    # \brief Default value (= <em>0.52918</em>) of the control-parameter Grid.ControlParameter.CUBE_OUTPUT_DISTANCE_SCALING_FACTOR.
     # 
     # The default value performs a conversion from Ångstrom to Bohr.
     # 

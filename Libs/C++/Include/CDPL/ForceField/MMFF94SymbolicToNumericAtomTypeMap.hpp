@@ -89,7 +89,7 @@ namespace CDPL
             /**
              * \brief Returns the numeric MMFF94 atom type associated with \a sym_type.
              * \param sym_type The symbolic MMFF94 atom type.
-             * \return The corresponding numeric MMFF94 atom type, or \c 0 if no mapping exists.
+             * \return The corresponding numeric MMFF94 atom type, or \e 0 if no mapping exists.
              */
             unsigned int getEntry(const std::string& sym_type) const;
 

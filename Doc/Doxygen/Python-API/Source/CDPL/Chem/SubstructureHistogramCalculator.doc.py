@@ -190,7 +190,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     ##
     # \brief Counts substructure occurrences in <em>molgraph</em> and writes the per-pattern hit counts to <em>histo</em>.
     # 
-    # For every accepted match, the histogram is updated via <tt>histo</tt>[id] += 1 with the ID being the histogram-bin ID of the matching pattern.
+    # For every accepted match, the histogram is updated via <tt>histo[id] += 1</tt> with the ID being the histogram-bin ID of the matching pattern.
     # 
     # \param molgraph The molecular graph to be analyzed.
     # \param histo The histogram receiving the hit counts.

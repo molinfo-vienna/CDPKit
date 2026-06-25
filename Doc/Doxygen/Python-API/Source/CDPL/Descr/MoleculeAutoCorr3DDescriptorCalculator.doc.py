@@ -111,7 +111,7 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     # 
     # \param radius_inc The radius step size.
     # 
-    # \note The default radius step size is <em>0.1</em>&Aring;.
+    # \note The default radius step size is <em>0.1</em> &Aring;.
     # 
     def setRadiusIncrement(radius_inc: float) -> None: pass
 
@@ -127,7 +127,7 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     # 
     # \param start_radius The starting value of the radius.
     # 
-    # \note The default starting radius is <em>0.0</em>&Aring;.
+    # \note The default starting radius is <em>0.0</em> &Aring;.
     # 
     def setStartRadius(start_radius: float) -> None: pass
 

@@ -62,7 +62,7 @@ namespace CDPL
             extern CDPL_GRID_API const bool CUBE_COMMENT_IS_NAME;
 
             /**
-             * \brief Default value (= <tt>1/0.52918</tt>) of the control-parameter Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR.
+             * \brief Default value (= <em>1/0.52918</em>) of the control-parameter Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR.
              *
              * The default value performs a conversion from Bohr to Ångstrom.
              *
@@ -71,7 +71,7 @@ namespace CDPL
             extern CDPL_GRID_API const double CUBE_INPUT_DISTANCE_SCALING_FACTOR;
 
             /**
-             * \brief Default value (= \c 0.52918) of the control-parameter Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR.
+             * \brief Default value (= \e 0.52918) of the control-parameter Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR.
              *
              * The default value performs a conversion from Ångstrom to Bohr.
              *

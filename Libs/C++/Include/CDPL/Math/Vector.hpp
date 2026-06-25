@@ -2100,7 +2100,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery (a Math::BoundedVector of \a N + 1 capacity).
+             * \brief Concrete temporary vector type used by expression-template machinery (a Math::BoundedVector of \a N + \e 1 capacity).
              */
             typedef BoundedVector<T, N + 1>               VectorTemporaryType;
 
@@ -2685,7 +2685,7 @@ namespace CDPL
         const typename ZeroVector<T>::ValueType ZeroVector<T>::zero = ZeroVector<T>::ValueType();
 
         /**
-         * \brief Constant vector expression \f$ e_i \f$ that contains \c 1 at a single specified index and \c 0 elsewhere.
+         * \brief Constant vector expression \f$ e_i \f$ that contains \e 1 at a single specified index and \e 0 elsewhere.
          * \tparam T The scalar value type.
          */
         template <typename T>
@@ -2742,7 +2742,7 @@ namespace CDPL
                 size(0), index(0) {}
 
             /**
-             * \brief Constructs a unit vector of size \a n with the \c 1 element at index \a i.
+             * \brief Constructs a unit vector of size \a n with the \e 1 element at index \a i.
              * \param n The element count.
              * \param i The zero-based index of the non-zero element.
              */
@@ -2759,7 +2759,7 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
              * \param i The zero-based element index.
-             * \return A \c const reference to either \c 1 (if \a i equals the unit index) or \c 0.
+             * \return A \c const reference to either \e 1 (if \a i equals the unit index) or \e 0.
              * \throw Base::IndexError if \a i is out of range.
              */
             ConstReference operator[](SizeType i) const
@@ -2770,7 +2770,7 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
-             * \return A \c const reference to either \c 1 (if \a i equals the unit index) or \c 0.
+             * \return A \c const reference to either \e 1 (if \a i equals the unit index) or \e 0.
              * \throw Base::IndexError if \a i is out of range.
              */
             ConstReference operator()(SizeType i) const
@@ -3084,7 +3084,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Constructs a Math::CVector of size 3 from the components \a t1, \a t2 and \a t3.
+         * \brief Constructs a Math::CVector of size \e 3 from the components \a t1, \a t2 and \a t3.
          * \tparam T1 The type of the first component.
          * \tparam T2 The type of the second component.
          * \tparam T3 The type of the third component.
@@ -3107,7 +3107,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Constructs a Math::CVector of size 4 from the components \a t1, \a t2, \a t3 and \a t4.
+         * \brief Constructs a Math::CVector of size \e 4 from the components \a t1, \a t2, \a t3 and \a t4.
          * \tparam T1 The type of the first component.
          * \tparam T2 The type of the second component.
          * \tparam T3 The type of the third component.
@@ -3193,32 +3193,32 @@ namespace CDPL
         typedef UnitVector<unsigned long> ULUnitVector;
 
         /**
-         * \brief Bounded 2 element vector holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded \e 2 element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 2> Vector2F;
 
         /**
-         * \brief Bounded 3 element vector holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded \e 3 element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 3> Vector3F;
 
         /**
-         * \brief Bounded 4 element vector holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded \e 4 element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 4> Vector4F;
 
         /**
-         * \brief Bounded 2 element vector holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded \e 2 element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 2> Vector2D;
 
         /**
-         * \brief Bounded 3 element vector holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded \e 3 element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 3> Vector3D;
 
         /**
-         * \brief Bounded 4 element vector holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded \e 4 element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 4> Vector4D;
 
@@ -3228,32 +3228,32 @@ namespace CDPL
         typedef CVector<double, 7> Vector7D;
 
         /**
-         * \brief Bounded 2 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded \e 2 element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 2> Vector2L;
 
         /**
-         * \brief Bounded 3 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded \e 3 element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 3> Vector3L;
 
         /**
-         * \brief Bounded 4 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded \e 4 element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 4> Vector4L;
 
         /**
-         * \brief Bounded 2 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded \e 2 element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 2> Vector2UL;
 
         /**
-         * \brief Bounded 3 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded \e 3 element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 3> Vector3UL;
 
         /**
-         * \brief Bounded 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded \e 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 4> Vector4UL;
 

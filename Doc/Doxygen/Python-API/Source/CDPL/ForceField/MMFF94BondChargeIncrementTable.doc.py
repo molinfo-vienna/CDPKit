@@ -22,7 +22,7 @@
 ##
 # \brief Data structure for the storage and lookup of MMFF94 bond charge increments.
 # 
-# The charge increment is applied to atom 1 (and its negative to atom 2) when partitioning partial atomic charges along bonded pairs in the MMFF94 charge model.
+# The charge increment is applied to the first atom (and its negative to the second atom) when partitioning partial atomic charges along bonded pairs in the MMFF94 charge model.
 # 
 # \see [\ref MMFF94]
 # 

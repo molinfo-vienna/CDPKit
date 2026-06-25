@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Bounded 3 element vector holding floating-point values of type <tt>double</tt>.
+# \brief Bounded <em>3</em> element vector holding floating-point values of type <tt>double</tt>.
 # 
 class Vector3D(Boost.Python.instance):
 

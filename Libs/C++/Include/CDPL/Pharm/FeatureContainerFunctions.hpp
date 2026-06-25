@@ -134,7 +134,7 @@ namespace CDPL
          *
          * \param cntnr The feature container providing the input features.
          * \param tgt_set The feature set receiving the deduplicated features.
-         * \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; 0 require an exact position match.
+         * \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; \e 0 require an exact position match.
          * \param append If \c false, \a tgt_set is cleared before adding any features.
          * \return \c true if at least one duplicate was detected, and \c false otherwise.
          * \since 1.2
@@ -172,7 +172,7 @@ namespace CDPL
          * \param atom_cntnr The atom container providing the test atoms.
          * \param coords_func The function returning the 3D coordinates of an atom.
          * \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
-         * \param vdw_factor Scaling factor for the per-atom Van der Waals radii. If &le; 0 the atoms are treated as point particles.
+         * \param vdw_factor Scaling factor for the per-atom Van der Waals radii. If &le; \e 0 the atoms are treated as point particles.
          * \return \c true if no clash is detected, and \c false otherwise.
          */
         CDPL_PHARM_API bool checkForExclusionVolumeClashes(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr,

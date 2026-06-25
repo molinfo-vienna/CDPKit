@@ -27,7 +27,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the dimension of atom coordinates.
     # 
-    # A parameter value of <em>2</em> specifies 2D-coordinates and a value of <em>3</em> 3D-coordinates. Other values usually trigger the selection of an implementation defined default dimension.
+    # A parameter value of <em>2</em> specifies 2D coordinates and a value of <em>3</em> 3D coordinates. Other values usually trigger the selection of an implementation defined default dimension.
     # 
     # \valuetype  <tt>std::size_t</tt>
     # 
@@ -154,10 +154,9 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the parameter is set to <tt>True</tt>, output data lines which exceed the maximum allowed line length (according to the <em>MDL CTFile</em> specification) are silently truncated before they get written. If <tt>MDL_TRUNCATE_LINES</tt> is <tt>False</tt>, an attempt to write a data line that exceeds maximum line length is considered as an error condition and causes the output operation to fail.
     # 
-    # \valuetype  <tt>bool</tt> 
-    # \see [\ref CTFILE] 
+    # \valuetype  <tt>bool</tt> \note The setting has only an effect if the parameter Chem.ControlParameter.IGNORE_LINE_LENGTH_LIMIT is <tt>False</tt>. 
     # 
-    # \note The setting has only an effect if the parameter Chem.ControlParameter.IGNORE_LINE_LENGTH_LIMIT is <tt>False</tt>.
+    # \see [\ref CTFILE]
     # 
     MDL_TRUNCATE_LINES = CDPL.Base.LookupKey('MDL_TRUNCATE_LINES')
 
@@ -233,9 +232,7 @@ class ControlParameter(Boost.Python.instance):
     # \brief Specifies the minimum ring size that is required for the specification of ring double bond configurations in generated <em>SMILES</em> strings.
     # 
     # \valuetype  <tt>std::size_t</tt> 
-    # \see [\ref SMILES] 
-    # 
-    # \see Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO
+    # \see [\ref SMILES], Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO
     # 
     SMILES_MIN_STEREO_BOND_RING_SIZE = CDPL.Base.LookupKey('SMILES_MIN_STEREO_BOND_RING_SIZE')
 
@@ -254,10 +251,9 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the parameter is set to <tt>True</tt>, generated <em>SMILES</em> strings will explicitly specify aromatic bonds. If the value of <tt>SMILES_OUTPUT_AROMATIC_BONDS</tt> is <tt>False</tt>, aromatic bonds are left unspecified.
     # 
-    # \valuetype  <tt>bool</tt> 
-    # \see [\ref SMILES] 
+    # \valuetype  <tt>bool</tt> \note The setting of this parameter has only an effect if the value of Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM is <tt>False</tt>. 
     # 
-    # \note The setting of this parameter has only an effect if the value of Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM is <tt>False</tt>. 
+    # \see [\ref SMILES] 
     # 
     # \since 1.2
     # 
@@ -364,10 +360,9 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify the configuration (if known) of any double bond that is not a member of a ring which is smaller than the size specified by Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE. If the value of the parameter is <tt>False</tt>, the stereochemistry of ring double bonds will not be specified.
     # 
-    # \valuetype  <tt>bool</tt> 
-    # \see [\ref SMILES] 
+    # \valuetype  <tt>bool</tt> \note The setting of this parameter has only an effect if Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO is set to <tt>True</tt>. 
     # 
-    # \note The setting of this parameter has only an effect if Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO is set to <tt>True</tt>. 
+    # \see [\ref SMILES] 
     # 
     # \since 1.2
     # 

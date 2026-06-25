@@ -894,7 +894,7 @@ namespace CDPL
          * \tparam C The coordinate value type.
          * \tparam GD The underlying grid data container type.
          * \tparam XF The coordinate transformation type.
-         * \tparam V The position vector type (indexable via <tt>operator[]</tt> for 3 components).
+         * \tparam V The position vector type (indexable via <tt>operator[]</tt> for \e 3 components).
          * \param grid The regular spatial grid.
          * \param pos The query position.
          * \param local_pos If \c true, \a pos is interpreted as local (cell-index space) coordinates;

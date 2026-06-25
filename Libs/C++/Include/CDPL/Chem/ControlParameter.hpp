@@ -66,7 +66,7 @@ namespace CDPL
             /**
              * \brief Specifies the dimension of atom coordinates.
              *
-             * A parameter value of \e 2 specifies 2D-coordinates and a value of \e 3 3D-coordinates. 
+             * A parameter value of \e 2 specifies 2D coordinates and a value of \e 3 3D coordinates. 
              * Other values usually trigger the selection of an implementation defined default dimension.
              *
              * \valuetype \c std::size_t
@@ -212,9 +212,9 @@ namespace CDPL
              * as an error condition and causes the output operation to fail.
              *
              * \valuetype \c bool
-             * \see [\ref CTFILE]
              * \note The setting has only an effect if the parameter Chem::ControlParameter::IGNORE_LINE_LENGTH_LIMIT
              *       is \c false.
+             * \see [\ref CTFILE]
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_TRUNCATE_LINES;
 
@@ -384,9 +384,9 @@ namespace CDPL
              * If the value of the parameter is \c false, the stereochemistry of ring double bonds will not be specified.
              *
              * \valuetype \c bool
-             * \see [\ref SMILES]
              * \note The setting of this parameter has only an effect if Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO
              *       is set to \c true.
+             * \see [\ref SMILES]
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_RING_BOND_STEREO;
@@ -396,8 +396,7 @@ namespace CDPL
              *        in generated \e SMILES strings.
              * 
              * \valuetype \c std::size_t
-             * \see [\ref SMILES]
-             * \see Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO
+             * \see [\ref SMILES], Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_MIN_STEREO_BOND_RING_SIZE;
 
@@ -473,9 +472,9 @@ namespace CDPL
              * If the value of \c %SMILES_OUTPUT_AROMATIC_BONDS is \c false, aromatic bonds are left unspecified.
              *
              * \valuetype \c bool
-             * \see [\ref SMILES]
              * \note The setting of this parameter has only an effect if the value of Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM
              *       is \c false.
+             * \see [\ref SMILES]
              * \since 1.2
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_AROMATIC_BONDS;

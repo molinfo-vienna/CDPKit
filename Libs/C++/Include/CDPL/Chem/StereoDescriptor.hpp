@@ -172,7 +172,7 @@ namespace CDPL
             /**
              * \brief Tells whether this \c %StereoDescriptor instance is valid for the specified center atom.
              *
-             * The method checks if the number of reference atoms is at least 3, the reference atoms are distinct 
+             * The method checks if the number of reference atoms is at least \e 3, the reference atoms are distinct 
              * and if every reference atom is connected to the argument atom.
              *
              * \param atom The stereogenic center atom.
@@ -183,9 +183,9 @@ namespace CDPL
             /**
              * \brief Tells whether this \c %StereoDescriptor instance is valid for the specified center bond.
              *
-             * The method checks if the number of reference atoms is 4, the reference atoms are distinct,
-             * the specified bond connects reference atoms 2 and 3 and if reference atoms 1 and 4 are connected
-             * to reference atom 2 and 3, respectively.
+             * The method checks if the number of reference atoms is \e 4, the reference atoms are distinct,
+             * the specified bond connects reference atoms \e 2 and \e 3 and if reference atoms \e 1 and \e 4 are connected
+             * to reference atom \e 2 and \e 3, respectively.
              *
              * \param bond The stereogenic center bond.
              * \return \c true if valid, \c false otherwise.
@@ -198,8 +198,8 @@ namespace CDPL
              * \param atom1 The first atom.
              * \param atom2 The second atom.
              * \param atom3 The third atom.
-             * \return \c 1 if an \e odd number of transpositions is required, \c 2 if an \e even number of transpositions is required and
-             *         \c 0 if the argument atoms do not match the stored reference atoms.
+             * \return \e 1 if an \e odd number of transpositions is required, \e 2 if an \e even number of transpositions is required and
+             *         \e 0 if the argument atoms do not match the stored reference atoms.
              */
             unsigned int getPermutationParity(const Atom& atom1, const Atom& atom2,
                                               const Atom& atom3) const;
@@ -211,8 +211,8 @@ namespace CDPL
              * \param atom2 The second atom.
              * \param atom3 The third atom.
              * \param atom4 The fourth atom.
-             * \return \c 1 if an \e odd number of transpositions is required, \c 2 if an \e even number of transpositions is required and
-             *         \c 0 if the argument atoms do not match the stored reference atoms.
+             * \return \e 1 if an \e odd number of transpositions is required, \e 2 if an \e even number of transpositions is required and
+             *         \e 0 if the argument atoms do not match the stored reference atoms.
              */
             unsigned int getPermutationParity(const Atom& atom1, const Atom& atom2,
                                               const Atom& atom3, const Atom& atom4) const;

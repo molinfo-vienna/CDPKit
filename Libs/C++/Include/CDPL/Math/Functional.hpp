@@ -1326,7 +1326,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Functor producing the diagonal matrix element at (\e i, \e j) from a vector expression (\f$ e(i) \f$ on the diagonal, \c 0 elsewhere).
+         * \brief Functor producing the diagonal matrix element at (\e i, \e j) from a vector expression (\f$ e(i) \f$ on the diagonal, \e 0 elsewhere).
          * \tparam V The vector expression type.
          */
         template <typename V>
@@ -1337,7 +1337,7 @@ namespace CDPL
             typedef typename VectorScalarUnaryFunctor<V>::SizeType   SizeType;
 
             /**
-             * \brief Returns \f$ e(i) \f$ if \a i equals \a j, otherwise \c 0.
+             * \brief Returns \f$ e(i) \f$ if \a i equals \a j, otherwise \e 0.
              * \tparam E The vector expression type.
              * \param e The vector expression.
              * \param i The zero-based row index.
@@ -2617,9 +2617,9 @@ namespace CDPL
              * \tparam E2 The vector expression type.
              * \param e1 The quaternion expression (rotation).
              * \param e2 The 3D vector expression to rotate.
-             * \param i The zero-based element index (\c 0, \c 1, or \c 2).
-             * \return The rotated vector's \a i-th element (zero for \a i &gt; 2).
-             * \throw Base::SizeError if \a e2 has fewer than 3 elements.
+             * \param i The zero-based element index (\e 0, \e 1, or \e 2).
+             * \return The rotated vector's \e i-th element (zero for \a i &gt; \e 2).
+             * \throw Base::SizeError if \a e2 has fewer than \e 3 elements.
              */
             template <typename E1, typename E2>
             static ResultType apply(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i)

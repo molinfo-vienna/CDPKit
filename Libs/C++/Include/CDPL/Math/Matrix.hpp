@@ -3074,7 +3074,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Constant identity-matrix expression (\f$ 1 \f$ on the diagonal, \f$ 0 \f$ elsewhere).
+         * \brief Constant identity-matrix expression (\e 1 on the diagonal, \e 0 elsewhere).
          * \tparam T The scalar value type.
          */
         template <typename T>
@@ -3136,7 +3136,7 @@ namespace CDPL
                 size1(0), size2(0) {}
 
             /**
-             * \brief Constructs an identity matrix of size \f$ m \times n \f$ (\c 1 on the diagonal, \c 0 elsewhere).
+             * \brief Constructs an identity matrix of size \f$ m \times n \f$ (\e 1 on the diagonal, \e 0 elsewhere).
              * \param m The number of rows.
              * \param n The number of columns.
              */
@@ -3151,10 +3151,10 @@ namespace CDPL
                 size1(m.size1), size2(m.size2) {}
 
             /**
-             * \brief Returns a \c const reference to either \c 1 (if \a i equals \a j) or \c 0.
+             * \brief Returns a \c const reference to either \e 1 (on the diagonal) or \e 0 (off the diagonal).
              * \param i The zero-based row index.
              * \param j The zero-based column index.
-             * \return A \c const reference to either \c 1 (on the diagonal) or \c 0 (off the diagonal).
+             * \return A \c const reference to \e 1 (on the diagonal) or \e 0 (off the diagonal).
              * \throw Base::IndexError if either index is out of range.
              */
             ConstReference operator()(SizeType i, SizeType j) const

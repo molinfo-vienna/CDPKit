@@ -49,19 +49,19 @@ namespace CDPL
          * \brief Searches the iterator range [\a it, \a end) for the first atom whose PDB-style residue
          *        identity attributes match the given filter values.
          *
-         * Each filter argument is ignored when set to its sentinel value (\c nullptr / 0 / IGNORE_SEQUENCE_NO /
-         * IGNORE_SERIAL_NO). All supplied filters must match for an atom to be considered a hit.
+         * Each filter argument is ignored when set to its sentinel value (\c nullptr / \e 0 / Biomol::IGNORE_SEQUENCE_NO /
+         * Biomol::IGNORE_SERIAL_NO). All supplied filters must match for an atom to be considered a hit.
          *
          * \tparam Iter The (forward) iterator type whose value type is \c Chem::Atom.
          * \param it Iterator pointing to the first atom of the range.
          * \param end Iterator pointing one past the last atom of the range.
          * \param res_code The \e PDB three-letter residue code to match (or \c nullptr to ignore).
          * \param chain_id The \e PDB chain ID to match (or \c nullptr to ignore).
-         * \param res_seq_no The \e PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-         * \param ins_code The \e PDB insertion code to match (or 0 to ignore).
-         * \param model_no The \e PDB model number to match (or 0 to ignore).
+         * \param res_seq_no The \e PDB residue sequence number to match (or Biomol::IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The \e PDB insertion code to match (or \e 0 to ignore).
+         * \param model_no The \e PDB model number to match (or \e 0 to ignore).
          * \param atom_name The \e PDB atom name to match (or \c nullptr to ignore).
-         * \param serial_no The \e PDB atom serial number to match (or IGNORE_SERIAL_NO to ignore).
+         * \param serial_no The \e PDB atom serial number to match (or Biomol::IGNORE_SERIAL_NO to ignore).
          * \return An iterator pointing to the first matching atom, or \a end if no match was found.
          */
         template <typename Iter>
@@ -86,11 +86,11 @@ namespace CDPL
          * \param end Iterator pointing one past the last residue of the range.
          * \param res_code The \e PDB three-letter residue code to match (or \c nullptr to ignore).
          * \param chain_id The \e PDB chain ID to match (or \c nullptr to ignore).
-         * \param res_seq_no The \e PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-         * \param ins_code The \e PDB insertion code to match (or 0 to ignore).
-         * \param model_no The \e PDB model number to match (or 0 to ignore).
+         * \param res_seq_no The \e PDB residue sequence number to match (or Biomol::IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The \e PDB insertion code to match (or \e 0 to ignore).
+         * \param model_no The \e PDB model number to match (or \e 0 to ignore).
          * \param atom_name The \e PDB atom name an atom of the residue must match (or \c nullptr to ignore).
-         * \param serial_no The \e PDB atom serial number an atom of the residue must match (or IGNORE_SERIAL_NO to ignore).
+         * \param serial_no The \e PDB atom serial number an atom of the residue must match (or Biomol::IGNORE_SERIAL_NO to ignore).
          * \return An iterator pointing to the first matching residue, or \a end if no match was found.
          */
         template <typename Iter>

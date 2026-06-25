@@ -85,13 +85,13 @@ namespace CDPL
         /**
          * \brief Converts an affine 4x4 transformation matrix to a quaternion-plus-translation representation.
          * \param mtx The input transformation matrix.
-         * \param quat The output Shape::QuaternionTransformation (4 quaternion + 3 translation components).
+         * \param quat The output Shape::QuaternionTransformation (\e 4 quaternion + \e 3 translation components).
          */
         CDPL_SHAPE_API void matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat);
 
         /**
          * \brief Converts a quaternion-plus-translation representation back to an affine 4x4 transformation matrix.
-         * \param quat The input Shape::QuaternionTransformation (4 quaternion + 3 translation components).
+         * \param quat The input Shape::QuaternionTransformation (\e 4 quaternion + \e 3 translation components).
          * \param mtx The output transformation matrix.
          */
         CDPL_SHAPE_API void quaternionToMatrix(const QuaternionTransformation& quat, Math::Matrix4D& mtx);

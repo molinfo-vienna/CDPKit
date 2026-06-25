@@ -124,7 +124,7 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     # 
     # \param sym_type The symbolic MMFF94 atom type.
     # 
-    # \return The corresponding numeric MMFF94 atom type, or <tt>0</tt> if no mapping exists.
+    # \return The corresponding numeric MMFF94 atom type, or <em>0</em> if no mapping exists.
     # 
     def getEntry(sym_type: str) -> int: pass
 

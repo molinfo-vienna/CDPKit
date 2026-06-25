@@ -4323,7 +4323,7 @@ def generateINCHIKey(molgraph: MolecularGraph) -> object: pass
 def generateINCHI(molgraph: MolecularGraph, options: str = '/WarnOnEmptyStructure /AuxNone /NEWPSOFF', dim: int = 0) -> object: pass
 
 ##
-# \brief Builds the atom/bond incidence matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is <tt>1</tt> if atom <tt>i</tt> is an endpoint of bond <tt>j</tt>).
+# \brief Builds the atom/bond incidence matrix of the molecular graph <em>molgraph</em> (entry <tt></tt>(i,j) is <em>1</em> if atom <em>i</em> is an endpoint of bond <em>j</em>).
 # 
 # \param molgraph The molecular graph to inspect.
 # \param mtx The output sparse matrix receiving the incidence entries.

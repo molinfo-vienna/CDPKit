@@ -57,7 +57,7 @@ namespace CDPL
          * the larger position tolerance is retained.
          *
          * \param pharm The pharmacophore to deduplicate.
-         * \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; 0 require an exact position match.
+         * \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; \e 0 require an exact position match.
          * \return \c true if at least one feature was removed, and \c false otherwise.
          * \since 1.2
          */
@@ -90,7 +90,7 @@ namespace CDPL
          * \param pharm The pharmacophore receiving the new exclusion volumes.
          * \param cntnr The atom container providing the seed positions.
          * \param coords_func The function returning the 3D coordinates of an atom.
-         * \param tol The position tolerance to assign to new exclusion volumes (if &le; 0 the per-atom VdW radius is used).
+         * \param tol The position tolerance to assign to new exclusion volumes (if &le; \e 0 the per-atom VdW radius is used).
          * \param min_dist Minimum distance (\a rel_dist controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
          * \param rel_dist If \c true, the per-pair tolerance sum is subtracted from the pair distance before testing against \a min_dist. Otherwise, the absolute distance is tested.
          * \param append If \c false, the pharmacophore \a pharm is cleared before any exclusion volumes are added.
@@ -103,7 +103,7 @@ namespace CDPL
          * \brief Creates exclusion volume features at the 3D positions of the features in \a cntnr and appends them to the pharmacophore \a pharm.
          * \param pharm The pharmacophore receiving the new exclusion volumes.
          * \param cntnr The feature container providing the seed positions.
-         * \param tol The position tolerance to assign to new exclusion volumes (if &le; 0 the per-feature tolerance is used).
+         * \param tol The position tolerance to assign to new exclusion volumes (if &le; \e 0 the per-feature tolerance is used).
          * \param min_dist Minimum distance (\a rel_dist controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
          * \param rel_dist If \c true, the per-pair tolerance sum is subtracted from the pair distance before testing against \a min_dist. Otherwise, the absolute distance is tested.
          * \param append If \c false, the pharmacophore \a pharm is cleared before any exclusion volumes are added.

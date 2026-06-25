@@ -76,8 +76,8 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief Specifies the bond direction in <em>SMILES</em> and <em>SMARTS</em> strings (see namespace Chem.BondDirection).
     # 
-    # \see [\ref SMILES, \ref SMARTS] 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>unsigned int</tt> 
+    # \see [\ref SMILES, \ref SMARTS]
     # 
     DIRECTION = CDPL.Base.LookupKey('DIRECTION')
 

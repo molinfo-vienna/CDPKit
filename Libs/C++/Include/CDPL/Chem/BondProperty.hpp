@@ -94,8 +94,9 @@ namespace CDPL
 
             /**
              * \brief Specifies the bond direction in \e SMILES and \e SMARTS strings (see namespace Chem::BondDirection).
-             * \see [\ref SMILES, \ref SMARTS]
+             *
              * \valuetype <tt>unsigned int</tt>
+             * \see [\ref SMILES, \ref SMARTS]
              */
             extern CDPL_CHEM_API const Base::LookupKey DIRECTION;
 

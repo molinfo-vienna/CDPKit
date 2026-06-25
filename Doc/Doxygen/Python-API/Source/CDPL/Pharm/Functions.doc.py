@@ -506,7 +506,7 @@ def clearWeight(feature: Feature) -> None: pass
 # \param atom_cntnr The atom container providing the test atoms.
 # \param coords_func The function returning the 3D coordinates of an atom.
 # \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
-# \param vdw_factor Scaling factor for the per-atom Van der Waals radii. If &le; 0 the atoms are treated as point particles.
+# \param vdw_factor Scaling factor for the per-atom Van der Waals radii. If &le; <em>0</em> the atoms are treated as point particles.
 # 
 # \return <tt>True</tt> if no clash is detected, and <tt>False</tt> otherwise.
 # 
@@ -518,7 +518,7 @@ def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: Chem
 # \param pharm The pharmacophore receiving the new exclusion volumes.
 # \param cntnr The atom container providing the seed positions.
 # \param coords_func The function returning the 3D coordinates of an atom.
-# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0 the per-atom VdW radius is used).
+# \param tol The position tolerance to assign to new exclusion volumes (if &le; <em>0</em> the per-atom VdW radius is used).
 # \param min_dist Minimum distance (<em>rel_dist</em> controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
 # \param rel_dist If <tt>True</tt>, the per-pair tolerance sum is subtracted from the pair distance before testing against <em>min_dist</em>. Otherwise, the absolute distance is tested.
 # \param append If <tt>False</tt>, the pharmacophore <em>pharm</em> is cleared before any exclusion volumes are added.
@@ -530,7 +530,7 @@ def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coor
 # 
 # \param pharm The pharmacophore receiving the new exclusion volumes.
 # \param cntnr The feature container providing the seed positions.
-# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0 the per-feature tolerance is used).
+# \param tol The position tolerance to assign to new exclusion volumes (if &le; <em>0</em> the per-feature tolerance is used).
 # \param min_dist Minimum distance (<em>rel_dist</em> controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
 # \param rel_dist If <tt>True</tt>, the per-pair tolerance sum is subtracted from the pair distance before testing against <em>min_dist</em>. Otherwise, the absolute distance is tested.
 # \param append If <tt>False</tt>, the pharmacophore <em>pharm</em> is cleared before any exclusion volumes are added.
@@ -632,7 +632,7 @@ def removeFeaturesWithType(pharm: Pharmacophore, type: int) -> bool: pass
 # 
 # \param cntnr The feature container providing the input features.
 # \param tgt_set The feature set receiving the deduplicated features.
-# \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; 0 require an exact position match.
+# \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; <em>0</em> require an exact position match.
 # \param append If <tt>False</tt>, <em>tgt_set</em> is cleared before adding any features.
 # 
 # \return <tt>True</tt> if at least one duplicate was detected, and <tt>False</tt> otherwise. 
@@ -659,7 +659,7 @@ def removePositionalDuplicates(ftr_set: FeatureSet, pos_tol: float = 0.0) -> boo
 # Two features count as duplicates if they have identical type and their position vectors either match exactly (<em>pos_tol</em> &le; 0) or lie within <em>pos_tol</em> from each other. When a duplicate is detected, the feature with the larger position tolerance is retained.
 # 
 # \param pharm The pharmacophore to deduplicate.
-# \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; 0 require an exact position match.
+# \param pos_tol The position-equality tolerance in &Aring;ngstrom. Values &le; <em>0</em> require an exact position match.
 # 
 # \return <tt>True</tt> if at least one feature was removed, and <tt>False</tt> otherwise. 
 # 

@@ -27,7 +27,7 @@
 class Slice(Boost.Python.instance):
 
     ##
-    # \brief Constructs an empty slice ( \f$ 0, 0, 0 \f$).
+    # \brief Constructs an empty slice.
     # 
     def __init__() -> None: pass
 

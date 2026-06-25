@@ -60,7 +60,7 @@ namespace CDPL
          * \param w The \f$ N \f$-dimensional output vector \f$ W \f$ holding the singular 
          *          values.
          * \param v The \f$ N \times N \f$-dimensional output matrix \f$ V \f$.
-         * \param max_iter The maximum number of iterations to perform, or \a 0 if no limit. 
+         * \param max_iter The maximum number of iterations to perform, or \e 0 if no limit. 
          * \return \c true if convergence has been reached in \a max_iter
          *         iterations, and \c false otherwise. 
          * \pre <tt>w().getSize() >= a().getSize2()</tt>, <tt>v().getSize1() >= a().getSize2() and v().getSize2() >= a().getSize2()</tt>. 

@@ -235,18 +235,18 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the Lipinski rule-of-five score of the molecular graph \a molgraph, defined as the number of satisfied criteria (0-4).
+         * \brief Returns the Lipinski rule-of-five score of the molecular graph \a molgraph, defined as the number of satisfied criteria (\e 0 to \e 4).
          *
          * The four criteria evaluated are:
-         *   - the number of H-bond donor atoms is &le; 5,
-         *   - the number of H-bond acceptor atoms is &le; 10,
-         *   - the \e XLogP value is &le; 5.0,
-         *   - the molecular mass is &le; 500.0.
+         *   - the number of H-bond donor atoms is &le; \e 5,
+         *   - the number of H-bond acceptor atoms is &le; \e 10,
+         *   - the \e XLogP value is &le; \e 5.0,
+         *   - the molecular mass is &le; \e 500.0.
          *
-         * A score of 4 indicates full compliance with the Lipinski rule of five.
+         * A score of \e 4 indicates full compliance with the Lipinski rule of five.
          *
          * \param molgraph The molecular graph.
-         * \return The rule-of-five score (0-4).
+         * \return The rule-of-five score (\e 0 to \e 4).
          */
         CDPL_MOLPROP_API std::size_t getRuleOfFiveScore(const Chem::MolecularGraph& molgraph);
 

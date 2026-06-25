@@ -321,15 +321,15 @@ namespace CDPL
         /**
          * \brief Tells whether the residue identity attributes of the molecular graph \a molgraph match the given filter values.
          *
-         * Each filter argument is ignored when set to its sentinel value (\c nullptr / \c 0 / IGNORE_SEQUENCE_NO).
+         * Each filter argument is ignored when set to its sentinel value (\c nullptr / \e 0 / Biomol::IGNORE_SEQUENCE_NO).
          * All supplied filters must match for the function to return \c true.
          *
          * \param molgraph The molecular graph to test.
          * \param res_code The \e PDB three-letter residue code to match (or \c nullptr to ignore).
          * \param chain_id The \e PDB chain ID to match (or \c nullptr to ignore).
-         * \param res_seq_no The \e PDB residue sequence number to match (or IGNORE_SEQUENCE_NO to ignore).
-         * \param ins_code The \e PDB insertion code to match (or \c 0 to ignore).
-         * \param model_no The \e PDB model number to match (or \c 0 to ignore).
+         * \param res_seq_no The \e PDB residue sequence number to match (or Biomol::IGNORE_SEQUENCE_NO to ignore).
+         * \param ins_code The \e PDB insertion code to match (or \e 0 to ignore).
+         * \param model_no The \e PDB model number to match (or \e 0 to ignore).
          * \return \c true if all supplied filters match, and \c false otherwise.
          */
         CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,

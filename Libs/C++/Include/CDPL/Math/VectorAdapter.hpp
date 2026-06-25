@@ -43,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Vector expression that exposes a vector \a V as its homogeneous-coordinate extension by appending an implicit \c 1 at the end.
+         * \brief Vector expression that exposes a vector \a V as its homogeneous-coordinate extension by appending an implicit \e 1 at the end.
          * \tparam V The wrapped vector type.
          */
         template <typename V>
@@ -399,7 +399,7 @@ namespace CDPL
                 data(v) {}
 
             /**
-             * \brief Returns a mutable reference to component C1 (mapped to element 0 of the wrapped vector).
+             * \brief Returns a mutable reference to component C1 (mapped to element \e 0 of the wrapped vector).
              * \return A mutable reference to C1.
              */
             Reference getC1()
@@ -408,7 +408,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to component C2 (mapped to element 1 of the wrapped vector).
+             * \brief Returns a mutable reference to component C2 (mapped to element \e 1 of the wrapped vector).
              * \return A mutable reference to C2.
              */
             Reference getC2()
@@ -417,7 +417,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to component C3 (mapped to element 2 of the wrapped vector).
+             * \brief Returns a mutable reference to component C3 (mapped to element \e 2 of the wrapped vector).
              * \return A mutable reference to C3.
              */
             Reference getC3()
@@ -426,7 +426,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to component C4 (mapped to element 3 of the wrapped vector).
+             * \brief Returns a mutable reference to component C4 (mapped to element \e 3 of the wrapped vector).
              * \return A mutable reference to C4.
              */
             Reference getC4()

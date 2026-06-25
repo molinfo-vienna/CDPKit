@@ -264,7 +264,7 @@ def generateGaussianShape(features: Pharm.FeatureContainer, shape: GaussianShape
 # \brief Converts an affine 4x4 transformation matrix to a quaternion-plus-translation representation.
 # 
 # \param mtx The input transformation matrix.
-# \param quat The output Shape.QuaternionTransformation (4 quaternion + 3 translation components).
+# \param quat The output Shape.QuaternionTransformation (<em>4</em> quaternion + <em>3</em> translation components).
 # 
 def matrixToQuaternion(mtx: Math.Matrix4D, quat: Math.Vector7D) -> None: pass
 
@@ -281,7 +281,7 @@ def perceiveSymmetryClass(moments: Math.Vector3D, eq_thresh: float = 0.15) -> in
 ##
 # \brief Converts a quaternion-plus-translation representation back to an affine 4x4 transformation matrix.
 # 
-# \param quat The input Shape.QuaternionTransformation (4 quaternion + 3 translation components).
+# \param quat The input Shape.QuaternionTransformation (<em>4</em> quaternion + <em>3</em> translation components).
 # \param mtx The output transformation matrix.
 # 
 def quaternionToMatrix(quat: Math.Vector7D, mtx: Math.Matrix4D) -> None: pass

@@ -153,7 +153,7 @@ namespace CDPL
          * \tparam Dim The vector dimension.
          * \param va1 The first vector array.
          * \param va2 The second vector array.
-         * \return The RMSD value, or 0 if either array is empty.
+         * \return The RMSD value, or \e 0 if either array is empty.
          */
         template <typename T, std::size_t Dim>
         T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2)
@@ -197,7 +197,7 @@ namespace CDPL
          * \param va1 The first vector array (transformed via \a va1_xform on the fly).
          * \param va2 The second vector array.
          * \param va1_xform The transformation matrix applied to \a va1 (with implicit homogeneous coordinate 1).
-         * \return The RMSD value, or 0 if either array is empty.
+         * \return The RMSD value, or \e 0 if either array is empty.
          */
         template <typename T, std::size_t Dim, typename T1>
         T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2, const CMatrix<T1, Dim + 1, Dim + 1>& va1_xform)
