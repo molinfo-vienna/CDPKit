@@ -47,9 +47,9 @@ namespace CDPL
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::ElasticPotential instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
-         * \param beg Iterator pointing to the first elastic potential parameter set.
-         * \param end Iterator pointing past the last elastic potential parameter set.
-         * \param coords The atom 3D coordinates for which the energies shall be accumulated.
+         * \param beg Iterator pointing to the first elastic potential parameter record.
+         * \param end Iterator pointing one past the last elastic potential parameter record.
+         * \param coords The atom 3D coordinates for which the energies shall be calculated.
          * \return The accumulated elastic potential energies.
          * \since 1.1
          */
@@ -96,9 +96,9 @@ namespace CDPL
          * \tparam Iter The iterator type yielding ForceField::ElasticPotential instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
-         * \param beg Iterator pointing to the first elastic potential parameter set.
-         * \param end Iterator pointing past the last elastic potential parameter set.
-         * \param coords The atom 3D coordinates for which the energies/gradients shall be accumulated.
+         * \param beg Iterator pointing to the first elastic potential parameter record.
+         * \param end Iterator pointing one past the last elastic potential parameter record.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
          * \return The accumulated elastic potential energies.
          * \note Gradient contributions for an atom are \e added to the corresponding entry of \a grad.

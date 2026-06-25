@@ -30,6 +30,7 @@
 #define CDPL_GRID_DREGULARGRIDSETWRITER_HPP
 
 #include "CDPL/Util/MultiFormatDataWriter.hpp"
+#include "CDPL/Grid/RegularGridSet.hpp"
 
 
 namespace CDPL
@@ -38,14 +39,8 @@ namespace CDPL
     namespace Grid
     {
 
-        template <typename T> class RegularGridSet<T>;
         /**
-         * \brief Convenience alias for the double-precision regular spatial grid sets.
-         */
-        typedef RegularGridSet<double> DRegularGridSet;
-
-        /**
-         * \brief Writer for grid set data of type Grid::DRegularGridSet in any supported format.
+         * \brief Writer for regular spatial grid set data of type Grid::DRegularGridSet in any supported format.
          */
         typedef Util::MultiFormatDataWriter<DRegularGridSet> DRegularGridSetWriter;
 

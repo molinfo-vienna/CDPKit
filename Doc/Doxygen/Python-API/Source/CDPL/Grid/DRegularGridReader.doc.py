@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Reader for grid data of type Grid.DRegularGrid in any supported format.
+# \brief Reader for regular spatial grid data of type Grid.DRegularGrid in any supported format.
 # 
 class DRegularGridReader(DRegularGridReaderBase):
 

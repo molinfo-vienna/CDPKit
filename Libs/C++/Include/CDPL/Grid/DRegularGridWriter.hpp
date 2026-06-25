@@ -30,6 +30,7 @@
 #define CDPL_GRID_DREGULARGRIDWRITER_HPP
 
 #include "CDPL/Util/MultiFormatDataWriter.hpp"
+#include "CDPL/Grid/RegularGrid.hpp"
 
 
 namespace CDPL
@@ -37,12 +38,6 @@ namespace CDPL
 
     namespace Grid
     {
-
-        template <typename T> class RegularGrid<T>;
-        /**
-         * \brief A regular spatial grid storing double-precision floating-point values.
-         */
-        typedef RegularGrid<double> DRegularGrid;
 
         /**
          * \brief Writer for grid data of type Grid::DRegularGrid in any supported format.

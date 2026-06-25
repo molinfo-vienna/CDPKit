@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Writer for grid set data of type Grid.DRegularGridSet in any supported format.
+# \brief Writer for regular spatial grid set data of type Grid.DRegularGridSet in any supported format.
 # 
 class DRegularGridSetWriter(DRegularGridSetWriterBase):
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Reader for grid set data of type Grid.DRegularGridSet in any supported format.
+# \brief Reader for regular spatial grid set data of type Grid.DRegularGridSet in any supported format.
 # 
 class DRegularGridSetReader(DRegularGridSetReaderBase):
 
