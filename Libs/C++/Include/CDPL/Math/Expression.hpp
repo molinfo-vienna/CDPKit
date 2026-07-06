@@ -35,7 +35,7 @@ namespace CDPL
     {
 
         /**
-         * \brief CRTP %base class for all numeric expression types in the Math namespace (Barton-Nackman idiom).
+         * \brief CRTP base class of all numeric expression types in the Math namespace.
          * \tparam E The derived expression type.
          */
         template <typename E>
@@ -44,7 +44,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief The derived expression type (made available to expression-template machinery).
+             * \brief The derived expression type.
              */
             typedef E ExpressionType;
 
@@ -57,9 +57,9 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP %base class for all vector expression types.
+         * \brief CRTP base class of all vector expression types.
          *
-         * Provides downcast access to the concrete derived expression via \c operator().
+         * Provides downcast access to the concrete derived expression class instance via the function call operator.
          *
          * \tparam E The derived vector expression type.
          */
@@ -74,8 +74,8 @@ namespace CDPL
             typedef E ExpressionType;
 
             /**
-             * \brief Returns a \c const reference to the derived vector expression.
-             * \return A \c const reference downcast to ExpressionType.
+             * \brief Returns a \c const reference to the derived vector expression class instance.
+             * \return A \c const reference to the expression subclass instance.
              */
             const ExpressionType& operator()() const
             {
@@ -83,8 +83,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived vector expression.
-             * \return A reference downcast to ExpressionType.
+             * \brief Returns a reference to the derived vector expression class instance.
+             * \return A reference to the expression subclass instance.
              */
             ExpressionType& operator()()
             {
@@ -97,9 +97,9 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP %base class for all matrix expression types.
+         * \brief CRTP base class of all matrix expression types.
          *
-         * Provides downcast access to the concrete derived expression via \c operator().
+         * Provides downcast access to the concrete derived expression class instance via the function call operator.
          *
          * \tparam E The derived matrix expression type.
          */
@@ -114,8 +114,8 @@ namespace CDPL
             typedef E ExpressionType;
 
             /**
-             * \brief Returns a \c const reference to the derived matrix expression.
-             * \return A \c const reference downcast to ExpressionType.
+             * \brief Returns a \c const reference to the derived matrix expression class instance.
+             * \return A \c const reference to the expression subclass instance.
              */
             const ExpressionType& operator()() const
             {
@@ -123,8 +123,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived matrix expression.
-             * \return A reference downcast to ExpressionType.
+             * \brief Returns a reference to the derived matrix expression class instance.
+             * \return A reference to the expression subclass instance.
              */
             ExpressionType& operator()()
             {
@@ -137,9 +137,9 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP %base class for all quaternion expression types.
+         * \brief CRTP base class of all quaternion expression types.
          *
-         * Provides downcast access to the concrete derived expression via \c operator().
+         * Provides downcast access to the concrete derived expression class instance via the function call operator.
          *
          * \tparam E The derived quaternion expression type.
          */
@@ -154,8 +154,8 @@ namespace CDPL
             typedef E ExpressionType;
 
             /**
-             * \brief Returns a \c const reference to the derived quaternion expression.
-             * \return A \c const reference downcast to ExpressionType.
+             * \brief Returns a \c const reference to the derived quaternion expression class instance.
+             * \return A \c const reference to the expression subclass instance.
              */
             const ExpressionType& operator()() const
             {
@@ -163,8 +163,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived quaternion expression.
-             * \return A reference downcast to ExpressionType.
+             * \brief Returns a reference to the derived quaternion expression class instance.
+             * \return A reference to the expression subclass instance.
              */
             ExpressionType& operator()()
             {
@@ -177,9 +177,9 @@ namespace CDPL
         };
 
         /**
-         * \brief CRTP %base class for all grid expression types.
+         * \brief CRTP base class of all grid expression types.
          *
-         * Provides downcast access to the concrete derived expression via \c operator().
+         * Provides downcast access to the concrete derived expression class instance via the function call operator.
          *
          * \tparam E The derived grid expression type.
          */
@@ -194,8 +194,8 @@ namespace CDPL
             typedef E ExpressionType;
 
             /**
-             * \brief Returns a \c const reference to the derived grid expression.
-             * \return A \c const reference downcast to ExpressionType.
+             * \brief Returns a \c const reference to the derived grid expression class instance.
+             * \return A \c const reference to the expression subclass instance.
              */
             const ExpressionType& operator()() const
             {
@@ -203,8 +203,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived grid expression.
-             * \return A reference downcast to ExpressionType.
+             * \brief Returns a reference to the derived grid expression class instance.
+             * \return A reference to the expression subclass instance.
              */
             ExpressionType& operator()()
             {
@@ -231,8 +231,8 @@ namespace CDPL
             typedef C ContainerType;
 
             /**
-             * \brief Returns a \c const reference to the derived vector container.
-             * \return A \c const reference downcast to ContainerType.
+             * \brief Returns a \c const reference to the derived vector container class instance.
+             * \return A \c const reference to the container subclass instance.
              */
             const ContainerType& operator()() const
             {
@@ -240,8 +240,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived vector container.
-             * \return A reference downcast to ContainerType.
+             * \brief Returns a reference to the derived vector container class instance.
+             * \return A reference to the container subclass instance.
              */
             ContainerType& operator()()
             {
@@ -268,8 +268,8 @@ namespace CDPL
             typedef C ContainerType;
 
             /**
-             * \brief Returns a \c const reference to the derived matrix container.
-             * \return A \c const reference downcast to ContainerType.
+             * \brief Returns a \c const reference to the derived matrix container class instance.
+             * \return A \c const reference to the container subclass instance.
              */
             const ContainerType& operator()() const
             {
@@ -277,8 +277,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived matrix container.
-             * \return A reference downcast to ContainerType.
+             * \brief Returns a reference to the derived matrix container class instance.
+             * \return A reference to the container subclass instance.
              */
             ContainerType& operator()()
             {
@@ -305,8 +305,8 @@ namespace CDPL
             typedef C ContainerType;
 
             /**
-             * \brief Returns a \c const reference to the derived quaternion container.
-             * \return A \c const reference downcast to ContainerType.
+             * \brief Returns a \c const reference to the derived quaternion container class instance.
+             * \return A \c const reference to the container subclass instance.
              */
             const ContainerType& operator()() const
             {
@@ -314,8 +314,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived quaternion container.
-             * \return A reference downcast to ContainerType.
+             * \brief Returns a reference to the derived quaternion container class instance.
+             * \return A reference to the container subclass instance.
              */
             ContainerType& operator()()
             {
@@ -342,8 +342,8 @@ namespace CDPL
             typedef C ContainerType;
 
             /**
-             * \brief Returns a \c const reference to the derived grid container.
-             * \return A \c const reference downcast to ContainerType.
+             * \brief Returns a \c const reference to the derived grid container class instance.
+             * \return A \c const reference to the container subclass instance.
              */
             const ContainerType& operator()() const
             {
@@ -351,8 +351,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a reference to the derived grid container.
-             * \return A reference downcast to ContainerType.
+             * \brief Returns a reference to the derived grid container class instance.
+             * \return A reference to the container subclass instance.
              */
             ContainerType& operator()()
             {

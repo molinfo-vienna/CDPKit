@@ -48,29 +48,29 @@ namespace CDPL
     {
 
         /**
-         * \brief Sums the MMFF94 bond-stretching interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \brief Accumulates the bond-stretching interaction energies and the corresponding per-atom gradient contributions calculated for the interactions specified by the iterators in the given range.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::MMFF94BondStretchingInteraction instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param beg Iterator pointing to the first interaction parameter record.
          * \param end Iterator pointing one past the last interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The summed bond-stretching interaction energy.
+         * \return The accumulated bond-stretching interaction energies.
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94BondStretchingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         /**
-         * \brief Calculates the bond-stretching interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \brief Calculates the energy of a single bond-stretching interaction \a iaction and accumulates the corresponding per-atom gradient contributions.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param iaction The MMFF94 bond-stretching interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The bond-stretching interaction energy of \a iaction.
+         * \return The calculated bond-stretching interaction energy.
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94BondStretchingGradient(const MMFF94BondStretchingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
@@ -119,29 +119,29 @@ namespace CDPL
                                                    const ValueType& force_const, const ValueType& ref_length);
 
         /**
-         * \brief Sums the MMFF94 angle-bending interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \brief Accumulates the angle-bending interaction energies and the corresponding per-atom gradient contributions calculated for the interactions specified by the iterators in the given range.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::MMFF94AngleBendingInteraction instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param beg Iterator pointing to the first interaction parameter record.
          * \param end Iterator pointing one past the last interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The summed angle-bending interaction energy.
+         * \return The accumulated angle-bending interaction energies.
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94AngleBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         /**
-         * \brief Calculates the angle-bending interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \brief Calculates the energy of a single angle-bending interaction \a iaction and accumulates the corresponding per-atom gradient contributions.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param iaction The MMFF94 angle-bending interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The angle-bending interaction energy of \a iaction.
+         * \return The calculated angle-bending interaction energy.
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94AngleBendingGradient(const MMFF94AngleBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
@@ -202,29 +202,29 @@ namespace CDPL
                                                  const ValueType& force_const, const ValueType& ref_angle);
 
         /**
-         * \brief Sums the MMFF94 stretch-bend coupling interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \brief Accumulates the stretch-bend coupling interaction energies and the corresponding per-atom gradient contributions calculated for the interactions specified by the iterators in the given range.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::MMFF94StretchBendInteraction instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param beg Iterator pointing to the first interaction parameter record.
          * \param end Iterator pointing one past the last interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The summed stretch-bend interaction energy.
+         * \return The accumulated stretch-bend interaction energies.
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94StretchBendGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         /**
-         * \brief Calculates the stretch-bend coupling interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \brief Calculates the energy of a single stretch-bend coupling interaction \a iaction and accumulates the corresponding per-atom gradient contributions.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param iaction The MMFF94 stretch-bend interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The stretch-bend interaction energy of \a iaction.
+         * \return The calculated stretch-bend interaction energy.
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94StretchBendGradient(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords, GradVector& grad);
@@ -286,29 +286,29 @@ namespace CDPL
                                       const ValueType& ref_angle, const ValueType& ref_length1, const ValueType& ref_length2);
 
         /**
-         * \brief Sums the MMFF94 out-of-plane bending interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \brief Accumulates the out-of-plane bending interaction energies and the corresponding per-atom gradient contributions calculated for the interactions specified by the iterators in the given range.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::MMFF94OutOfPlaneBendingInteraction instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param beg Iterator pointing to the first interaction parameter record.
          * \param end Iterator pointing one past the last interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The summed out-of-plane bending interaction energy.
+         * \return The accumulated out-of-plane bending interaction energies.
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94OutOfPlaneBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         /**
-         * \brief Calculates the out-of-plane bending interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \brief Calculates the energy of a single out-of-plane bending interaction \a iaction and accumulates the corresponding per-atom gradient contributions.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param iaction The MMFF94 out-of-plane bending interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The out-of-plane bending interaction energy of \a iaction.
+         * \return The calculated out-of-plane bending interaction energy.
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94OutOfPlaneBendingGradient(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
@@ -357,29 +357,29 @@ namespace CDPL
                                                       GradVec& oop_atom_grad, const ValueType& force_const);
 
         /**
-         * \brief Sums the MMFF94 torsion interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \brief Accumulates the torsion interaction energies and the corresponding per-atom gradient contributions calculated for the interactions specified by the iterators in the given range.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::MMFF94TorsionInteraction instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param beg Iterator pointing to the first interaction parameter record.
          * \param end Iterator pointing one past the last interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The summed torsion interaction energy.
+         * \return The accumulated torsion interaction energies.
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94TorsionGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         /**
-         * \brief Calculates the torsion interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \brief Calculates the energy of a single torsion interaction \a iaction and accumulates the corresponding per-atom gradient contributions.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param iaction The MMFF94 torsion interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The torsion interaction energy of \a iaction.
+         * \return The calculated torsion interaction energy.
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94TorsionGradient(const MMFF94TorsionInteraction& iaction, const CoordsArray& coords, GradVector& grad);
@@ -430,29 +430,29 @@ namespace CDPL
                                             GradVec& term_atom2_grad, const ValueType& tor_param1, const ValueType& tor_param2, const ValueType& tor_param3);
 
         /**
-         * \brief Sums the MMFF94 electrostatic interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \brief Accumulates the electrostatic interaction energies and the corresponding per-atom gradient contributions calculated for the interactions specified by the iterators in the given range.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::MMFF94ElectrostaticInteraction instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param beg Iterator pointing to the first interaction parameter record.
          * \param end Iterator pointing one past the last interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The summed electrostatic interaction energy.
+         * \return The accumulated electrostatic interaction energies.
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94ElectrostaticGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         /**
-         * \brief Calculates the electrostatic interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \brief Calculates the energy of a single electrostatic interaction \a iaction and accumulates the corresponding per-atom gradient contributions.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param iaction The MMFF94 electrostatic interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The electrostatic interaction energy of \a iaction.
+         * \return The calculated electrostatic interaction energy.
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94ElectrostaticGradient(const MMFF94ElectrostaticInteraction& iaction, const CoordsArray& coords, GradVector& grad);
@@ -505,29 +505,29 @@ namespace CDPL
                                                   const ValueType& de_const, const ValueType& dist_expo);
 
         /**
-         * \brief Sums the MMFF94 Van der Waals interaction energies of the interactions in <em>[beg, end)</em> and accumulates the corresponding atom-position gradient contributions into \a grad.
+         * \brief Accumulates the Van der Waals interaction energies and the corresponding per-atom gradient contributions calculated for the interactions specified by the iterators in the given range.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam Iter The iterator type yielding ForceField::MMFF94VanDerWaalsInteraction instances.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param beg Iterator pointing to the first interaction parameter record.
          * \param end Iterator pointing one past the last interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The summed Van der Waals interaction energy.
+         * \return The accumulated Van der Waals interaction energies.
          */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94VanDerWaalsGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         /**
-         * \brief Calculates the Van der Waals interaction energy of \a iaction and accumulates the corresponding atom-position gradient contribution into \a grad.
+         * \brief Calculates the energy of a single Van der Waals interaction \a iaction and accumulates the corresponding per-atom gradient contributions.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \tparam GradVector The array type storing the atom gradient vectors.
          * \param iaction The MMFF94 Van der Waals interaction parameter record.
-         * \param The atom 3D coordinates for which the energies/gradients shall be calculated.
+         * \param coords The atom 3D coordinates for which the energies/gradients shall be calculated.
          * \param grad The atom gradient vector array receiving the accumulated contributions.
-         * \return The Van der Waals interaction energy of \a iaction.
+         * \return The calculated Van der Waals interaction energy.
          */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94VanDerWaalsGradient(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords, GradVector& grad);

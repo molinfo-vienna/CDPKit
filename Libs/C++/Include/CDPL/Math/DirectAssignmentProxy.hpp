@@ -35,8 +35,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Proxy that converts an assignment to a Math container into the corresponding direct-assignment call
-         *        on the container (\c assign / \c plusAssign / \c minusAssign) bypassing alias detection.
+         * \brief Proxy that converts assignment operator calls on a Math container into calls of corresponding direct-assignment methods
+         *        that bypass alias detection.
          * \tparam C The container type whose closure is wrapped.
          */
         template <typename C>
@@ -48,21 +48,21 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs the proxy wrapping the lvalue \a lval.
+             * \brief Constructs a \c %DirectAssignmentProxy instance wrapping the container lvalue \a lval.
              * \param lval The container lvalue to wrap.
              */
             explicit DirectAssignmentProxy(LValueType& lval):
                 lvalue(lval) {}
 
             /**
-             * \brief Copy-constructs the proxy from \a proxy.
-             * \param proxy The proxy to copy.
+             * \brief Creates a \c %DirectAssignmentProxy instance that is a copy of \a proxy.
+             * \param proxy The proxy instance to copy.
              */
             DirectAssignmentProxy(const DirectAssignmentProxy& proxy):
                 lvalue(proxy.lvalue) {}
 
             /**
-             * \brief Forwards the assignment of \a e to the wrapped lvalue's direct-assignment method.
+             * \brief Forwards the assignment of \a e to \c *this to the wrapped lvalue's <tt>assign()</tt> method.
              * \tparam E The source expression type.
              * \param e The source expression.
              * \return A reference to the wrapped lvalue closure.
@@ -75,7 +75,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Forwards the compound addition of \a e to the wrapped lvalue's direct-plus-assignment method.
+             * \brief Forwards the in-place addition of \a e to \c *this to the wrapped lvalue's <tt>plusAssign()</tt>  method.
              * \tparam E The source expression type.
              * \param e The expression to add.
              * \return A reference to the wrapped lvalue closure.
@@ -88,7 +88,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Forwards the compound subtraction of \a e to the wrapped lvalue's direct-minus-assignment method.
+             * \brief Forwards the in-place subtraction of \a e from \c *this to the wrapped lvalue's <tt>minusAssign()</tt> method.
              * \tparam E The source expression type.
              * \param e The expression to subtract.
              * \return A reference to the wrapped lvalue closure.
@@ -109,10 +109,10 @@ namespace CDPL
         };
 
         /**
-         * \brief Convenience factory creating a Math::DirectAssignmentProxy for a \c const lvalue.
+         * \brief Factory function creating a Math::DirectAssignmentProxy instance for a \c const lvalue.
          * \tparam C The container type.
-         * \param lvalue The lvalue to wrap.
-         * \return A Math::DirectAssignmentProxy bound to \a lvalue.
+         * \param lvalue The container lvalue to wrap.
+         * \return A Math::DirectAssignmentProxy instance bound to \a lvalue.
          */
         template <typename C>
         DirectAssignmentProxy<const C> direct(const C& lvalue)
@@ -121,10 +121,10 @@ namespace CDPL
         }
 
         /**
-         * \brief Convenience factory creating a Math::DirectAssignmentProxy for a mutable lvalue.
+         * \brief Factory function creating a Math::DirectAssignmentProxy instance for a mutable lvalue.
          * \tparam C The container type.
-         * \param lvalue The lvalue to wrap.
-         * \return A Math::DirectAssignmentProxy bound to \a lvalue.
+         * \param lvalue The container lvalue to wrap.
+         * \return A Math::DirectAssignmentProxy instance bound to \a lvalue.
          */
         template <typename C>
         DirectAssignmentProxy<C> direct(C& lvalue)

@@ -59,7 +59,7 @@ namespace CDPL
         ValueType calcMMFF94BondStretchingEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the energy of a single bond-stretching interaction \a iaction for the supplied atom coordinates \a coords.
+         * \brief Calculates the energy of a single bond-stretching interaction \a iaction.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \param iaction The MMFF94 bond-stretching interaction parameter record.
@@ -137,7 +137,7 @@ namespace CDPL
         ValueType calcMMFF94AngleBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the energy of a single angle-bending interaction \a iaction for the supplied atom coordinates \a coords.
+         * \brief Calculates the energy of a single angle-bending interaction \a iaction.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \param iaction The MMFF94 angle-bending interaction parameter record.
@@ -230,7 +230,7 @@ namespace CDPL
         ValueType calcMMFF94StretchBendEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the energy of a single stretch-bend coupling interaction \a iaction for the supplied atom coordinates \a coords.
+         * \brief Calculates the energy of a single stretch-bend coupling interaction \a iaction.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \param iaction The MMFF94 stretch-bend interaction parameter record.
@@ -329,7 +329,7 @@ namespace CDPL
         ValueType calcMMFF94OutOfPlaneBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the energy of a single out-of-plane bending interaction \a iaction for the supplied atom coordinates \a coords.
+         * \brief Calculates the energy of a single out-of-plane bending interaction \a iaction.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \param iaction The MMFF94 out-of-plane bending interaction parameter record.
@@ -398,7 +398,7 @@ namespace CDPL
         ValueType calcMMFF94TorsionEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the energy of a single torsion interaction \a iaction for the supplied atom coordinates \a coords.
+         * \brief Calculates the energy of a single torsion interaction \a iaction.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \param iaction The MMFF94 torsion interaction parameter record.
@@ -450,7 +450,7 @@ namespace CDPL
         ValueType calcMMFF94ElectrostaticEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the energy of a single electrostatic interaction \a iaction for the supplied atom coordinates \a coords.
+         * \brief Calculates the energy of a single electrostatic interaction \a iaction.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \param iaction The MMFF94 electrostatic interaction parameter record.
@@ -537,7 +537,7 @@ namespace CDPL
         ValueType calcMMFF94VanDerWaalsEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
         /**
-         * \brief Calculates the energy of a single Van der Waals interaction \a iaction for the supplied atom coordinates \a coords.
+         * \brief Calculates the energy of a single Van der Waals interaction \a iaction.
          * \tparam ValueType The energy/atom coordinate value type.
          * \tparam CoordsArray The array type storing the atom 3D coordinates.
          * \param iaction The MMFF94 Van der Waals interaction parameter record.
