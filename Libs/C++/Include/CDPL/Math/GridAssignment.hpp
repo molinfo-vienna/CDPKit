@@ -43,7 +43,7 @@ namespace CDPL
         template <typename E>
         class GridExpression;
         /**
-         * \brief Applies the element-wise functor \a F to every (grid cell, source cell) pair, i.e. \c F::apply(g(i,j,k), e()(i,j,k)).
+         * \brief Applies the element-wise functor \a F to every (grid element, source element) pair, i.e. \c F::apply(g(i,j,k), e()(i,j,k)).
          * \tparam F The element-wise binary functor template.
          * \tparam G The destination grid container type.
          * \tparam E The source grid expression type.
@@ -69,12 +69,12 @@ namespace CDPL
         }
 
         /**
-         * \brief Applies the element-wise functor \a F to every (grid cell, scalar) pair, i.e. \c F::apply(g(i,j,k), t).
+         * \brief Applies the element-wise functor \a F to every (grid element, scalar) pair, i.e. \c F::apply(g(i,j,k), t).
          * \tparam F The element-wise binary functor template.
          * \tparam G The destination grid container type.
          * \tparam T The scalar type.
          * \param g The destination grid.
-         * \param t The scalar value applied to every cell.
+         * \param t The scalar value applied to every element.
          */
         template <template <typename T1, typename T2> class F, typename G, typename T>
         void gridAssignScalar(G& g, const T& t)
@@ -93,7 +93,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Swaps the cells of two equally sized grid expressions cell by cell.
+         * \brief Swaps the elements of two equally sized grid expressions element by element.
          * \tparam G The first grid container type.
          * \tparam E The second grid expression type.
          * \param g The first grid.

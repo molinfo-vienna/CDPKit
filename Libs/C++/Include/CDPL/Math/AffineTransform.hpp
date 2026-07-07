@@ -53,10 +53,10 @@ namespace CDPL
         class Matrix;
 
         /**
-         * \brief \f$ N \times N \f$ rotation matrix backed by a unit quaternion (or an axis-angle representation).
+         * \brief <em>N&times;N</em> rotation matrix backed by a unit quaternion (or an axis-angle representation).
          *
-         * The first \f$ 3 \times 3 \f$ block holds the rotation, the remaining diagonal entries are \e 1 (identity)
-         * and all other entries are \e 0. The size \f$ N \f$ is configurable and typically chosen to fit the surrounding
+         * The first <em>3&times;3</em> block holds the rotation, the remaining diagonal entries are \e 1 (identity)
+         * and all other entries are \e 0. The size \e N is configurable and typically chosen to fit the surrounding
          * coordinate system (e.g. \e 4 for homogeneous transformations).
          *
          * \tparam T The scalar value type.
@@ -74,12 +74,12 @@ namespace CDPL
             typedef T                                     ValueType;
 
             /**
-             * \brief Reference type (always a \c const reference — elements are computed).
+             * \brief Element reference type (always a \c const reference — elements are computed).
              */
             typedef const T                               Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T                               ConstReference;
 
@@ -104,7 +104,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef Matrix<T, std::vector<T> >            MatrixTemporaryType;
 
@@ -114,7 +114,7 @@ namespace CDPL
             typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
             /**
-             * \brief Constructs an \f$ N \times N \f$ rotation matrix from the unit quaternion \a q.
+             * \brief Constructs an <em>N&times;N</em> rotation matrix from the unit quaternion \a q.
              * \tparam E The quaternion expression type.
              * \param n The matrix dimension \a N.
              * \param q The unit quaternion expressing the rotation.
@@ -127,7 +127,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs an \f$ N \times N \f$ rotation matrix from an axis-angle representation.
+             * \brief Constructs an <em>N&times;N</em> rotation matrix from an axis-angle representation.
              * \tparam T1 The rotation angle scalar type.
              * \tparam T2 The x-axis component scalar type.
              * \tparam T3 The y-axis component scalar type.
@@ -366,7 +366,7 @@ namespace CDPL
         };
 
         /**
-         * \brief \f$ N \times N \f$ diagonal scaling matrix.
+         * \brief <em>N&times;N</em> diagonal scaling matrix.
          *
          * The diagonal entries hold the per-axis scale factors; all off-diagonal entries are \e 0. The size \f$ N \f$
          * is configurable so the matrix can be combined with homogeneous coordinates.
@@ -386,12 +386,12 @@ namespace CDPL
             typedef T                                     ValueType;
 
             /**
-             * \brief Reference type (always a \c const reference — elements are computed).
+             * \brief Element reference type (always a \c const reference — elements are computed).
              */
             typedef const T                               Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T                               ConstReference;
 
@@ -416,7 +416,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef Matrix<T, std::vector<T> >            MatrixTemporaryType;
 
@@ -426,7 +426,7 @@ namespace CDPL
             typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
             /**
-             * \brief Constructs an \f$ N \times N \f$ scaling matrix with the supplied per-axis scale factors.
+             * \brief Constructs an <em>N&times;N</em> scaling matrix with the supplied per-axis scale factors.
              * \param n The matrix dimension \a N.
              * \param sx The x-axis scale factor (default: 1).
              * \param sy The y-axis scale factor (default: 1).
@@ -582,7 +582,7 @@ namespace CDPL
         };
 
         /**
-         * \brief \f$ N \times N \f$ translation matrix in homogeneous coordinates.
+         * \brief <em>N&times;N</em> translation matrix in homogeneous coordinates.
          *
          * The diagonal entries are all 1; the last column (above the diagonal) holds the per-axis translation
          * components; all other entries are \e 0. The size \f$ N \f$ is configurable to fit the embedding coordinate
@@ -603,12 +603,12 @@ namespace CDPL
             typedef T                                     ValueType;
 
             /**
-             * \brief Reference type (always a \c const reference — elements are computed).
+             * \brief Element reference type (always a \c const reference — elements are computed).
              */
             typedef const T                               Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T                               ConstReference;
 
@@ -633,7 +633,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef Matrix<T, std::vector<T> >            MatrixTemporaryType;
 
@@ -643,7 +643,7 @@ namespace CDPL
             typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
             /**
-             * \brief Constructs an \f$ N \times N \f$ translation matrix with the supplied per-axis translation components.
+             * \brief Constructs an <em>N&times;N</em> translation matrix with the supplied per-axis translation components.
              * \param n The matrix dimension \a N.
              * \param tx The x-axis translation (default: 0).
              * \param ty The y-axis translation (default: 0).
@@ -802,14 +802,17 @@ namespace CDPL
          * \brief Scaling matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef ScalingMatrix<float>         FScalingMatrix;
+        
         /**
          * \brief Scaling matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef ScalingMatrix<double>        DScalingMatrix;
+        
         /**
          * \brief Scaling matrix holding integer values of type <tt>long</tt>.
          */
         typedef ScalingMatrix<long>          LScalingMatrix;
+        
         /**
          * \brief Scaling matrix holding unsigned integer values of type <tt>unsigned long</tt>.
          */
@@ -819,14 +822,17 @@ namespace CDPL
          * \brief Rotation matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef RotationMatrix<float>         FRotationMatrix;
+        
         /**
          * \brief Rotation matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef RotationMatrix<double>        DRotationMatrix;
+        
         /**
          * \brief Rotation matrix holding integer values of type <tt>long</tt>.
          */
         typedef RotationMatrix<long>          LRotationMatrix;
+        
         /**
          * \brief Rotation matrix holding unsigned integer values of type <tt>unsigned long</tt>.
          */
@@ -836,14 +842,17 @@ namespace CDPL
          * \brief Translation matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef TranslationMatrix<float>         FTranslationMatrix;
+        
         /**
          * \brief Translation matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef TranslationMatrix<double>        DTranslationMatrix;
+        
         /**
          * \brief Translation matrix holding integer values of type <tt>long</tt>.
          */
         typedef TranslationMatrix<long>          LTranslationMatrix;
+        
         /**
          * \brief Translation matrix holding unsigned integer values of type <tt>unsigned long</tt>.
          */

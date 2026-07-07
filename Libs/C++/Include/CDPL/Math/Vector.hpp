@@ -75,14 +75,14 @@ namespace CDPL
             typedef typename V::ValueType                                  ValueType;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped vector is \c const).
              */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
                                               typename V::Reference>::type Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename V::ConstReference                             ConstReference;
 
@@ -114,7 +114,7 @@ namespace CDPL
                 data(v) {}
 
             /**
-             * \brief Returns a mutable reference to the element at index \a i (alias for operator()).
+             * \brief Returns a mutable reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A mutable reference to the element.
              */
@@ -124,7 +124,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A \c const reference to the element.
              */
@@ -361,12 +361,12 @@ namespace CDPL
             typedef typename InitializerListType::value_type      ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename InitializerListType::const_reference ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference for the immutable initializer list).
+             * \brief Mutable element reference type (degrades to ConstReference for the immutable initializer list).
              */
             typedef typename InitializerListType::reference       Reference;
 
@@ -391,7 +391,7 @@ namespace CDPL
             typedef const SelfType                                ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery.
+             * \brief Concrete temporary vector type used by expression template machinery.
              */
             typedef Vector<T, std::vector<T> >                    VectorTemporaryType;
 
@@ -403,7 +403,7 @@ namespace CDPL
                 list(l) {}
 
             /**
-             * \brief Returns a reference to the element at index \a i (alias for operator()).
+             * \brief Returns a reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -414,7 +414,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A \c const reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -488,12 +488,12 @@ namespace CDPL
             typedef T                                     ValueType;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef T&                                    Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                              ConstReference;
 
@@ -533,7 +533,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery.
+             * \brief Concrete temporary vector type used by expression template machinery.
              */
             typedef SelfType                              VectorTemporaryType;
 
@@ -563,7 +563,7 @@ namespace CDPL
             /**
              * \brief Constructs a vector of size \a n with every element initialized to \a v.
              * \param n The desired vector size.
-             * \param v The value used to initialize every element.
+             * \param v The value used for element initialization.
              */
             Vector(SizeType n, const ValueType& v):
                 data(storageSize(n), v) {}
@@ -609,7 +609,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at index \a i (alias for operator()).
+             * \brief Returns a mutable reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A mutable reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -620,7 +620,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A \c const reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -1014,7 +1014,7 @@ namespace CDPL
             typedef const T&                                  ConstReference;
 
             /**
-             * \brief Mutable reference type (a proxy object that inserts on assignment to a previously-absent key).
+             * \brief Mutable element reference type (a proxy object that inserts on assignment to a previously-absent key).
              */
             typedef SparseContainerElement<SelfType, KeyType> Reference;
 
@@ -1044,7 +1044,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType>     ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery.
+             * \brief Concrete temporary vector type used by expression template machinery.
              */
             typedef SelfType                                  VectorTemporaryType;
 
@@ -1054,7 +1054,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>                 SharedPointer;
 
             /**
-             * \brief The initializer-list type accepted by constructors and assignment.
+             * \brief The initializer list type accepted by constructors and assignment.
              */
             typedef std::initializer_list<T>                  InitializerListType;
 
@@ -1110,7 +1110,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable proxy reference to the element at index \a i (alias for operator()).
+             * \brief Returns a mutable proxy reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A mutable proxy reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -1121,7 +1121,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A \c const reference to the element (or to the zero element if no entry is stored at \a i).
              * \throw Base::IndexError if \a i is out of range.
@@ -1526,12 +1526,12 @@ namespace CDPL
             typedef T                                     ValueType;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef T&                                    Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                              ConstReference;
 
@@ -1571,7 +1571,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery (one element larger than the bound).
+             * \brief Concrete temporary vector type used by expression template machinery (one element larger than the bound).
              */
             typedef BoundedVector<T, N + 1>               VectorTemporaryType;
 
@@ -1581,7 +1581,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>             SharedPointer;
 
             /**
-             * \brief The initializer-list type accepted by constructors and assignment.
+             * \brief The initializer list type accepted by constructors and assignment.
              */
             typedef std::initializer_list<T>              InitializerListType;
 
@@ -1654,7 +1654,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at index \a i (alias for operator()).
+             * \brief Returns a mutable reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A mutable reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -1665,7 +1665,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A \c const reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -1910,7 +1910,7 @@ namespace CDPL
              * \brief Resizes this vector to match \a l and copies the elements of \a l in.
              * \param l The initializer list providing the new elements.
              * \return A reference to itself.
-             * \throw Base::SizeError if \c l.size() exceeds the bound \a N.
+             * \throw Base::SizeError if the size of \a l exceeds the bound \a N.
              */
             BoundedVector& assign(InitializerListType l)
             {
@@ -2055,12 +2055,12 @@ namespace CDPL
             typedef T                                     ValueType;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef T&                                    Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                              ConstReference;
 
@@ -2100,7 +2100,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery (a Math::BoundedVector of \a N + \e 1 capacity).
+             * \brief Concrete temporary vector type used by expression template machinery (a Math::BoundedVector of \a N + \e 1 capacity).
              */
             typedef BoundedVector<T, N + 1>               VectorTemporaryType;
 
@@ -2110,7 +2110,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>             SharedPointer;
 
             /**
-             * \brief The initializer-list type accepted by constructors and assignment.
+             * \brief The initializer list type accepted by constructors and assignment.
              */
             typedef std::initializer_list<T>              InitializerListType;
 
@@ -2121,7 +2121,7 @@ namespace CDPL
             static const SizeType Size = N;
 
             /**
-             * \brief Constructs a zero-initialized \a N-element vector.
+             * \brief Constructs a zero-initialized \a N element vector.
              */
             CVector()
             {
@@ -2167,7 +2167,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at index \a i (alias for operator()).
+             * \brief Returns a mutable reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A mutable reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -2178,7 +2178,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A \c const reference to the element.
              * \throw Base::IndexError if \a i is out of range.
@@ -2418,7 +2418,7 @@ namespace CDPL
              * \brief Assigns the contents of the initializer list \a l to this fixed-size vector (truncated to \a N if longer; zero-padded if shorter).
              * \param l The initializer list providing the new elements.
              * \return A reference to itself.
-             * \throw Base::SizeError if \c l.size() exceeds \a N.
+             * \throw Base::SizeError if the size of \a l exceeds \a N.
              */
             CVector& assign(InitializerListType l)
             {
@@ -2562,7 +2562,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery.
+             * \brief Concrete temporary vector type used by expression template machinery.
              */
             typedef Vector<T>                             VectorTemporaryType;
 
@@ -2587,7 +2587,7 @@ namespace CDPL
                 size(v.size) {}
 
             /**
-             * \brief Returns a \c const reference to the zero element (alias for operator()).
+             * \brief Returns a \c const reference to the zero element.
              * \param i The zero-based element index.
              * \return A \c const reference to the zero element.
              * \throw Base::IndexError if \a i is out of range.
@@ -2706,7 +2706,7 @@ namespace CDPL
             typedef const T&                              Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                              ConstReference;
 
@@ -2731,7 +2731,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery.
+             * \brief Concrete temporary vector type used by expression template machinery.
              */
             typedef Vector<T>                             VectorTemporaryType;
 
@@ -2757,7 +2757,7 @@ namespace CDPL
                 size(v.size), index(v.index) {}
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i.
              * \param i The zero-based element index.
              * \return A \c const reference to either \e 1 (if \a i equals the unit index) or \e 0.
              * \throw Base::IndexError if \a i is out of range.
@@ -2896,7 +2896,7 @@ namespace CDPL
             typedef const T&                              Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                              ConstReference;
 
@@ -2921,7 +2921,7 @@ namespace CDPL
             typedef const VectorReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery.
+             * \brief Concrete temporary vector type used by expression template machinery.
              */
             typedef Vector<T>                             VectorTemporaryType;
 
@@ -2947,7 +2947,7 @@ namespace CDPL
                 size(v.size), value(v.value) {}
 
             /**
-             * \brief Returns a \c const reference to the common element value (alias for operator()).
+             * \brief Returns a \c const reference to the common element value.
              * \param i The zero-based element index.
              * \return A \c const reference to the common element value.
              * \throw Base::IndexError if \a i is out of range.

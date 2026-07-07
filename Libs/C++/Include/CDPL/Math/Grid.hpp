@@ -71,14 +71,14 @@ namespace CDPL
             typedef typename G::ValueType                                  ValueType;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped grid is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped grid is \c const).
              */
             typedef typename std::conditional<std::is_const<G>::value,
                                               typename G::ConstReference,
                                               typename G::Reference>::type Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename G::ConstReference                             ConstReference;
 
@@ -130,10 +130,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at the (\a i, \a j, \a k) cell of the wrapped grid.
-             * \param i The zero-based first-dimension index.
-             * \param j The zero-based second-dimension index.
-             * \param k The zero-based third-dimension index.
+             * \brief Returns a mutable reference to the element (\a i, \a j, \a k) of the wrapped grid.
+             * \param i The zero-based first dimension index.
+             * \param j The zero-based second dimension index.
+             * \param k The zero-based third dimension index.
              * \return A mutable reference to the element.
              */
             Reference operator()(SizeType i, SizeType j, SizeType k)
@@ -142,10 +142,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at the (\a i, \a j, \a k) cell of the wrapped grid.
-             * \param i The zero-based first-dimension index.
-             * \param j The zero-based second-dimension index.
-             * \param k The zero-based third-dimension index.
+             * \brief Returns a \c const reference to the element (\a i, \a j, \a k) of the wrapped grid.
+             * \param i The zero-based first dimension index.
+             * \param j The zero-based second dimension index.
+             * \param k The zero-based third dimension index.
              * \return A \c const reference to the element.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -154,8 +154,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the total number of cells of the wrapped grid.
-             * \return The wrapped grid's total cell count.
+             * \brief Returns the total number of elements of the wrapped grid.
+             * \return The wrapped grid's total element count.
              */
             SizeType getSize() const
             {
@@ -164,7 +164,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid along the first dimension.
-             * \return The wrapped grid's first-dimension size.
+             * \return The wrapped grid's size in the first dimension.
              */
             SizeType getSize1() const
             {
@@ -173,7 +173,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid along the second dimension.
-             * \return The wrapped grid's second-dimension size.
+             * \return The wrapped grid's size in the second dimension.
              */
             SizeType getSize2() const
             {
@@ -182,7 +182,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid along the third dimension.
-             * \return The wrapped grid's third-dimension size.
+             * \return The wrapped grid's size in the third dimension.
              */
             SizeType getSize3() const
             {
@@ -190,8 +190,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the maximum total number of cells the wrapped grid can hold.
-             * \return The wrapped grid's maximum total cell capacity.
+             * \brief Returns the maximum total number of elements the wrapped grid can hold.
+             * \return The wrapped grid's maximum total element capacity.
              */
             SizeType getMaxSize() const
             {
@@ -200,7 +200,7 @@ namespace CDPL
 
             /**
              * \brief Returns the maximum size of the wrapped grid along the first dimension.
-             * \return The wrapped grid's maximum first-dimension size.
+             * \return The wrapped grid's maximum size in the first dimension.
              */
             SizeType getMaxSize1() const
             {
@@ -209,7 +209,7 @@ namespace CDPL
 
             /**
              * \brief Returns the maximum size of the wrapped grid along the second dimension.
-             * \return The wrapped grid's maximum second-dimension size.
+             * \return The wrapped grid's maximum size in the second dimension.
              */
             SizeType getMaxSize2() const
             {
@@ -218,7 +218,7 @@ namespace CDPL
 
             /**
              * \brief Returns the maximum size of the wrapped grid along the third dimension.
-             * \return The wrapped grid's maximum third-dimension size.
+             * \return The wrapped grid's maximum size in the third dimension.
              */
             SizeType getMaxSize3() const
             {
@@ -226,7 +226,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the wrapped grid is empty (zero cells along any dimension).
+             * \brief Tells whether the wrapped grid is empty (zero elements along any dimension).
              * \return \c true if the wrapped grid is empty, and \c false otherwise.
              */
             bool isEmpty() const
@@ -253,7 +253,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Copies the cells of \a r into the wrapped grid.
+             * \brief Copies the elements of \a r into the wrapped grid.
              * \param r The source reference.
              * \return A reference to itself.
              */
@@ -277,7 +277,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Adds the grid expression \a e cell-wise to the wrapped grid.
+             * \brief Adds the grid expression \a e element-wise to the wrapped grid.
              * \tparam E The source grid expression type.
              * \param e The grid expression to add.
              * \return A reference to itself.
@@ -290,7 +290,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Subtracts the grid expression \a e cell-wise from the wrapped grid.
+             * \brief Subtracts the grid expression \a e element-wise from the wrapped grid.
              * \tparam E The source grid expression type.
              * \param e The grid expression to subtract.
              * \return A reference to itself.
@@ -303,7 +303,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Multiplies every cell of the wrapped grid by the scalar \a t.
+             * \brief Multiplies every element of the wrapped grid by the scalar \a t.
              * \tparam T The scalar type.
              * \param t The scalar multiplier.
              * \return A reference to itself.
@@ -316,7 +316,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Divides every cell of the wrapped grid by the scalar \a t.
+             * \brief Divides every element of the wrapped grid by the scalar \a t.
              * \tparam T The scalar type.
              * \param t The scalar divisor.
              * \return A reference to itself.
@@ -392,7 +392,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Dynamically-sized dense 3D grid (\f$ d_1 \times d_2 \times d_3 \f$) with configurable underlying storage.
+         * \brief Dynamically-sized dense 3D grid with configurable underlying storage.
          * \tparam T The scalar value type.
          * \tparam A The underlying storage container type (default: \c std::vector).
          */
@@ -409,12 +409,12 @@ namespace CDPL
             typedef T                                   ValueType;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef T&                                  Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                            ConstReference;
 
@@ -454,7 +454,7 @@ namespace CDPL
             typedef const GridReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary grid type used by expression-template machinery.
+             * \brief Concrete temporary grid type used by expression template machinery.
              */
             typedef SelfType                            GridTemporaryType;
 
@@ -470,7 +470,7 @@ namespace CDPL
                 data(), size1(0), size2(0), size3(0) {}
 
             /**
-             * \brief Constructs an \e m &times; \e n &times; \e o grid with default-initialized elements.
+             * \brief Constructs an <em>m&times;n&times;o</em> grid with default-initialized elements.
              * \param m The size along the first axis.
              * \param n The size along the second axis.
              * \param o The size along the third axis.
@@ -479,11 +479,11 @@ namespace CDPL
                 data(storageSize(m, n, o)), size1(m), size2(n), size3(o) {}
 
             /**
-             * \brief Constructs an \e m &times; \e n &times; \e o grid with every element initialized to \a v.
+             * \brief Constructs an <em>m&times;n&times;o</em> grid with every element initialized to \a v.
              * \param m The size along the first axis.
              * \param n The size along the second axis.
              * \param o The size along the third axis.
-             * \param v The element value used to initialize every cell.
+             * \param v The value used for element initialization.
              */
             Grid(SizeType m, SizeType n, SizeType o, const ValueType& v):
                 data(storageSize(m, n, o), v), size1(m), size2(n), size3(o) {}
@@ -520,7 +520,7 @@ namespace CDPL
             /**
              * \brief Returns a mutable reference to the element at linear index \a i.
              * \param i The zero-based linear index.
-             * \return A mutable reference to the cell.
+             * \return A mutable reference to the element.
              * \throw Base::IndexError if \a i is out of range.
              */
             Reference operator()(SizeType i)
@@ -532,7 +532,7 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the element at linear index \a i.
              * \param i The zero-based linear index.
-             * \return A \c const reference to the cell.
+             * \return A \c const reference to the element.
              * \throw Base::IndexError if \a i is out of range.
              */
             ConstReference operator()(SizeType i) const
@@ -546,7 +546,7 @@ namespace CDPL
              * \param i The zero-based first-axis index.
              * \param j The zero-based second-axis index.
              * \param k The zero-based third-axis index.
-             * \return A mutable reference to the cell.
+             * \return A mutable reference to the element.
              * \throw Base::IndexError if any of the indices is out of range.
              */
             Reference operator()(SizeType i, SizeType j, SizeType k)
@@ -560,7 +560,7 @@ namespace CDPL
              * \param i The zero-based first-axis index.
              * \param j The zero-based second-axis index.
              * \param k The zero-based third-axis index.
-             * \return A \c const reference to the cell.
+             * \return A \c const reference to the element.
              * \throw Base::IndexError if any of the indices is out of range.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -579,8 +579,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the total cell count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
-             * \return The total number of cells.
+             * \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+             * \return The total number of elements.
              */
             SizeType getSize() const
             {
@@ -615,8 +615,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the maximum total cell count the underlying storage container can hold.
-             * \return The maximum cell count.
+             * \brief Returns the maximum total element count the underlying storage container can hold.
+             * \return The maximum element count.
              */
             SizeType getMaxSize() const
             {
@@ -693,7 +693,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Adds the contents of the grid container \a c cell-wise to this grid (no alias check needed).
+             * \brief Adds the contents of the grid container \a c element-wise to this grid (no alias check needed).
              * \tparam C The source grid container type.
              * \param c The source grid container.
              * \return A reference to itself.
@@ -705,7 +705,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Adds the grid expression \a e cell-wise to this grid (via a temporary to handle aliasing).
+             * \brief Adds the grid expression \a e element-wise to this grid (via a temporary to handle aliasing).
              * \tparam E The source grid expression type.
              * \param e The source grid expression.
              * \return A reference to itself.
@@ -719,7 +719,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Subtracts the contents of the grid container \a c cell-wise from this grid (no alias check needed).
+             * \brief Subtracts the contents of the grid container \a c element-wise from this grid (no alias check needed).
              * \tparam C The source grid container type.
              * \param c The source grid container.
              * \return A reference to itself.
@@ -731,7 +731,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Subtracts the grid expression \a e cell-wise from this grid (via a temporary to handle aliasing).
+             * \brief Subtracts the grid expression \a e element-wise from this grid (via a temporary to handle aliasing).
              * \tparam E The source grid expression type.
              * \param e The source grid expression.
              * \return A reference to itself.
@@ -745,7 +745,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Multiplies every cell by the scalar \a t.
+             * \brief Multiplies every element by the scalar \a t.
              * \tparam T1 The scalar type.
              * \param t The scalar multiplier.
              * \return A reference to itself.
@@ -758,7 +758,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Divides every cell by the scalar \a t.
+             * \brief Divides every element by the scalar \a t.
              * \tparam T1 The scalar type.
              * \param t The scalar divisor.
              * \return A reference to itself.
@@ -771,7 +771,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes this grid to match \a e and assigns its cells without intermediate temporary.
+             * \brief Resizes this grid to match \a e and assigns its elements without intermediate temporary.
              * \tparam E The source grid expression type.
              * \param e The source grid expression.
              * \return A reference to itself.
@@ -785,7 +785,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Adds the cells of the grid expression \a e to this grid without intermediate temporary.
+             * \brief Adds the elements of the grid expression \a e to this grid without intermediate temporary.
              * \tparam E The source grid expression type.
              * \param e The source grid expression.
              * \return A reference to itself.
@@ -798,7 +798,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Subtracts the cells of the grid expression \a e from this grid without intermediate temporary.
+             * \brief Subtracts the elements of the grid expression \a e from this grid without intermediate temporary.
              * \tparam E The source grid expression type.
              * \param e The source grid expression.
              * \return A reference to itself.
@@ -835,7 +835,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Sets every cell of the grid to the value \a v.
+             * \brief Sets every element of the grid to the value \a v.
              * \param v The fill value.
              */
             void clear(const ValueType& v = ValueType())
@@ -844,12 +844,12 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the grid to \f$ m \times n \times o \f$ cells.
+             * \brief Resizes the grid to <em>m&times;n&times;o</em> elements.
              * \param m The new first-axis size.
              * \param n The new second-axis size.
              * \param o The new third-axis size.
-             * \param preserve If \c true, existing cell values at indices that remain valid are kept. If \c false, all cells are set to \a v.
-             * \param v The fill value for newly added cells (or for all cells when \a preserve is \c false).
+             * \param preserve If \c true, existing element values at indices that remain valid are kept. If \c false, all elements are set to \a v.
+             * \param v The fill value for newly added elements (or for all elements when \a preserve is \c false).
              */
             void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType())
             {
@@ -890,7 +890,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Constant grid expression whose cells are all zero.
+         * \brief Constant grid expression whose elements are all zero.
          * \tparam T The scalar value type.
          */
         template <typename T>
@@ -906,7 +906,7 @@ namespace CDPL
             typedef T                                   ValueType;
 
             /**
-             * \brief Reference type (always a \c const reference — all cells are zero).
+             * \brief Reference type (always a \c const reference — all elements are zero).
              */
             typedef const T&                            Reference;
 
@@ -936,7 +936,7 @@ namespace CDPL
             typedef const GridReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary grid type used by expression-template machinery.
+             * \brief Concrete temporary grid type used by expression template machinery.
              */
             typedef Grid<T>                             GridTemporaryType;
 
@@ -947,7 +947,7 @@ namespace CDPL
                 size1(0), size2(0), size3(0) {}
 
             /**
-             * \brief Constructs a zero grid of size \f$ m \times n \times o \f$.
+             * \brief Constructs a zero grid of size <em>m&times;n&times;o</em>.
              * \param m The first-axis size.
              * \param n The second-axis size.
              * \param o The third-axis size.
@@ -998,8 +998,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the total cell count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
-             * \return The total number of cells.
+             * \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+             * \return The total number of elements.
              */
             SizeType getSize() const
             {
@@ -1123,7 +1123,7 @@ namespace CDPL
         const typename ZeroGrid<T>::ValueType ZeroGrid<T>::zero = ZeroGrid<T>::ValueType();
 
         /**
-         * \brief Constant grid expression in which every cell equals the same scalar value.
+         * \brief Constant grid expression in which every element equals the same scalar value.
          * \tparam T The scalar value type.
          */
         template <typename T>
@@ -1139,12 +1139,12 @@ namespace CDPL
             typedef T                                   ValueType;
 
             /**
-             * \brief Reference type (always a \c const reference — cells are immutable).
+             * \brief Mutable element reference type (always a \c const reference — elements are immutable).
              */
             typedef const T&                            Reference;
 
             /**
-             * \brief Constant reference type to a cell.
+             * \brief Constant element reference type.
              */
             typedef const T&                            ConstReference;
 
@@ -1169,7 +1169,7 @@ namespace CDPL
             typedef const GridReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary grid type used by expression-template machinery.
+             * \brief Concrete temporary grid type used by expression template machinery.
              */
             typedef Grid<T>                             GridTemporaryType;
 
@@ -1180,11 +1180,11 @@ namespace CDPL
                 size1(0), size2(0), size3(0), value() {}
 
             /**
-             * \brief Constructs a scalar grid of size \f$ m \times n \times o \f$ in which every cell equals \a v.
+             * \brief Constructs a scalar grid of size <em>m&times;n&times;o</em> in which every element equals \a v.
              * \param m The first-axis size.
              * \param n The second-axis size.
              * \param o The third-axis size.
-             * \param v The common cell value.
+             * \param v The common element value.
              */
             ScalarGrid(SizeType m, SizeType n, SizeType o, const ValueType& v = ValueType()):
                 size1(m), size2(n), size3(o), value(v) {}
@@ -1197,9 +1197,9 @@ namespace CDPL
                 size1(m.size1), size2(m.size2), size3(m.size3), value(m.value) {}
 
             /**
-             * \brief Returns a \c const reference to the common cell value (linear-index form).
+             * \brief Returns a \c const reference to the common element value (linear-index form).
              * \param i The zero-based linear index.
-             * \return A \c const reference to the common cell value.
+             * \return A \c const reference to the common element value.
              * \throw Base::IndexError if \a i is out of range.
              */
             ConstReference operator()(SizeType i) const
@@ -1209,11 +1209,11 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the common cell value (3D-index form).
+             * \brief Returns a \c const reference to the common element value (3D-index form).
              * \param i The zero-based first-axis index.
              * \param j The zero-based second-axis index.
              * \param k The zero-based third-axis index.
-             * \return A \c const reference to the common cell value.
+             * \return A \c const reference to the common element value.
              * \throw Base::IndexError if any of the indices is out of range.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -1232,8 +1232,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the total cell count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
-             * \return The total number of cells.
+             * \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+             * \return The total number of elements.
              */
             SizeType getSize() const
             {

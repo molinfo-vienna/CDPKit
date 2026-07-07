@@ -77,14 +77,14 @@ namespace CDPL
             typedef typename M::ValueType                                  ValueType;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped matrix is \c const).
              */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
                                               typename M::Reference>::type Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename M::ConstReference                             ConstReference;
 
@@ -377,12 +377,12 @@ namespace CDPL
             typedef typename InitializerListType::value_type::value_type      ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename InitializerListType::value_type::const_reference ConstReference;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef typename InitializerListType::value_type::reference       Reference;
 
@@ -407,19 +407,19 @@ namespace CDPL
             typedef const SelfType                                            ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef Matrix<T, std::vector<T> >                                MatrixTemporaryType;
 
             /**
-             * \brief Concrete temporary vector type used by expression-template machinery.
+             * \brief Concrete temporary vector type used by expression template machinery.
              */
             typedef Vector<T, std::vector<T> >                                VectorTemporaryType;
 
             /**
              * \brief Constructs an \c %InitListMatrix wrapping the nested initializer list \a l.
              *
-             * The second-dimension size is the longest inner list's length; shorter rows are zero-padded on access.
+             * The number of columns is the longest inner list's length; shorter rows are zero-padded on access.
              *
              * \param l The nested initializer list.
              */
@@ -466,7 +466,7 @@ namespace CDPL
 
             /**
              * \brief Returns the number of rows.
-             * \return The first-dimension size.
+             * \return The number of rows.
              */
             SizeType getSize1() const
             {
@@ -475,7 +475,7 @@ namespace CDPL
 
             /**
              * \brief Returns the number of columns (the longest row length).
-             * \return The second-dimension size.
+             * \return The number of columns.
              */
             SizeType getSize2() const
             {
@@ -518,12 +518,12 @@ namespace CDPL
             typedef T                                                ValueType;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef T&                                               Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                                         ConstReference;
 
@@ -563,7 +563,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType>            ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef SelfType                                         MatrixTemporaryType;
 
@@ -589,7 +589,7 @@ namespace CDPL
                 size1(0), size2(0), data() {}
 
             /**
-             * \brief Constructs an \e m &times; \e n matrix with default-initialized elements.
+             * \brief Constructs an <em>m&times;n</em> matrix with default-initialized elements.
              * \param m The number of rows.
              * \param n The number of columns.
              */
@@ -597,10 +597,10 @@ namespace CDPL
                 size1(m), size2(n), data(storageSize(m, n)) {}
 
             /**
-             * \brief Constructs an \e m &times; \e n matrix with every element initialized to \a v.
+             * \brief Constructs an <em>m&times;n</em> matrix with every element initialized to \a v.
              * \param m The number of rows.
              * \param n The number of columns.
-             * \param v The element value used to initialize every cell.
+             * \param v The value used for element initialization.
              */
             Matrix(SizeType m, SizeType n, const ValueType& v):
                 size1(m), size2(n), data(storageSize(m, n), v) {}
@@ -625,7 +625,7 @@ namespace CDPL
             /**
              * \brief Constructs the matrix from a brace-initializer list of rows.
              *
-             * The outer list yields the rows; each inner list yields the row elements. The size is derived
+             * The outer list yields the rows andeach inner list yields the row elements. The size is derived
              * from the dimensions of the supplied initializer (all inner lists must have the same length).
              *
              * \param l The initializer list of rows.
@@ -994,7 +994,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the matrix to \f$ m \times n \f$ elements.
+             * \brief Resizes the matrix to <em>m&times;n</em> elements.
              * \param m The new row count.
              * \param n The new column count.
              * \param preserve If \c true, existing element values at indices that remain valid are kept. If \c false, all elements are set to \a v.
@@ -1056,12 +1056,12 @@ namespace CDPL
             typedef typename A::key_type                             KeyType;
 
             /**
-             * \brief Mutable reference type (a proxy object that inserts on assignment to a previously-absent cell).
+             * \brief Mutable element reference type (a proxy object that inserts on assignment to a previously-absent element).
              */
             typedef SparseContainerElement<SelfType>                 Reference;
 
             /**
-             * \brief Constant reference type to a stored element value.
+             * \brief Constant element reference type.
              */
             typedef const T&                                         ConstReference;
 
@@ -1101,7 +1101,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType>            ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef SelfType                                         MatrixTemporaryType;
 
@@ -1116,7 +1116,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>                        SharedPointer;
 
             /**
-             * \brief The initializer-list-of-rows type accepted by constructors and assignment.
+             * \brief The initializer list type accepted by constructors and assignment.
              */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
@@ -1127,7 +1127,7 @@ namespace CDPL
                 size1(0), size2(0), data() {}
 
             /**
-             * \brief Constructs a sparse matrix of size \f$ m \times n \f$ with no stored entries.
+             * \brief Constructs a sparse matrix of size <em>m&times;n</em> with no stored entries.
              * \param m The number of rows.
              * \param n The number of columns.
              * \throw Base::SizeError if \f$ m \cdot n \f$ exceeds the underlying container's capacity.
@@ -1540,7 +1540,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the logical dimensions to \f$ m \times n \f$, dropping any stored entries that fall outside the new bounds.
+             * \brief Resizes the logical dimensions to <em>m&times;n</em>, dropping any stored entries that fall outside the new bounds.
              * \param m The new row count.
              * \param n The new column count.
              * \throw Base::SizeError if \f$ m \cdot n \f$ exceeds the underlying container's capacity.
@@ -1591,7 +1591,7 @@ namespace CDPL
         class BoundedVector;
 
         /**
-         * \brief Variable-size matrix with fixed upper capacities \a M \f$ \times \f$ \a N stored in a stack-allocated array.
+         * \brief Variable-size matrix with fixed upper dimension <em>M&times;N</em> backed by a stack-allocated array.
          * \tparam T The scalar value type.
          * \tparam M The maximum number of rows.
          * \tparam N The maximum number of columns.
@@ -1609,12 +1609,12 @@ namespace CDPL
             typedef T              ValueType;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef T&             Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&       ConstReference;
 
@@ -1664,7 +1664,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType>            ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef SelfType                                         MatrixTemporaryType;
 
@@ -1679,7 +1679,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>                        SharedPointer;
 
             /**
-             * \brief The initializer-list-of-rows type accepted by constructors and assignment.
+             * \brief The initializer list type accepted by constructors and assignment.
              */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
@@ -1701,7 +1701,7 @@ namespace CDPL
                 size1(0), size2(0) {}
 
             /**
-             * \brief Constructs a bounded matrix of size \f$ m \times n \f$ with value-initialized elements.
+             * \brief Constructs a bounded matrix of size <em>m&times;n</em> with value-initialized elements.
              * \param m The initial row count.
              * \param n The initial column count.
              * \throw Base::SizeError if \a m exceeds the bound \a M or \a n exceeds \a N.
@@ -1713,7 +1713,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs a bounded matrix of size \f$ m \times n \f$ with every element initialized to \a v.
+             * \brief Constructs a bounded matrix of size <em>m&times;n</em> with every element initialized to \a v.
              * \param m The initial row count.
              * \param n The initial column count.
              * \param v The initial element value.
@@ -2117,7 +2117,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the matrix to \f$ m \times n \f$ elements (new elements are left value-uninitialized).
+             * \brief Resizes the matrix to <em>m&times;n</em> elements (new elements are left value-uninitialized).
              * \param m The new row count.
              * \param n The new column count.
              * \throw Base::SizeError if \a m exceeds \a M or \a n exceeds \a N.
@@ -2132,10 +2132,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the matrix to \f$ m \times n \f$ elements; newly added cells are set to \a v.
+             * \brief Resizes the matrix to <em>m&times;n</em> elements (newly added elements are set to \a v).
              * \param m The new row count.
              * \param n The new column count.
-             * \param v The fill value for newly added cells.
+             * \param v The fill value for newly added elements.
              * \throw Base::SizeError if \a m exceeds \a M or \a n exceeds \a N.
              */
             void resize(SizeType m, SizeType n, const ValueType& v)
@@ -2170,7 +2170,7 @@ namespace CDPL
         const typename BoundedMatrix<T, M, N>::SizeType BoundedMatrix<T, M, N>::MaxSize2;
 
         /**
-         * \brief Fixed-size dense matrix of dimensions \a M \f$ \times \f$ \a N backed by a 2D C-array (no dynamic allocation).
+         * \brief Fixed-size dense matrix of dimension <em>M&times;N</em> backed by a stack-allocated array.
          * \tparam T The scalar value type.
          * \tparam M The fixed number of rows.
          * \tparam N The fixed number of columns.
@@ -2188,12 +2188,12 @@ namespace CDPL
             typedef T              ValueType;
 
             /**
-             * \brief Mutable reference type to an element.
+             * \brief Mutable element reference type.
              */
             typedef T&             Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&       ConstReference;
 
@@ -2208,7 +2208,7 @@ namespace CDPL
             typedef std::ptrdiff_t DifferenceType;
 
             /**
-             * \brief The fixed-size 2D C-array type used for in-memory storage of \a M \f$ \times \f$ \a N elements.
+             * \brief The fixed-size 2D C-array type used for in-memory storage of <em>M&times;N</em> elements.
              */
             typedef ValueType      ArrayType[M][N];
 
@@ -2243,7 +2243,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType>            ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery (a Math::BoundedMatrix of equal capacity).
+             * \brief Concrete temporary matrix type used by expression template machinery (a Math::BoundedMatrix of equal capacity).
              */
             typedef BoundedMatrix<T, M, N>                           MatrixTemporaryType;
 
@@ -2258,7 +2258,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>                        SharedPointer;
 
             /**
-             * \brief The initializer-list-of-rows type accepted by constructors and assignment.
+             * \brief The initializer list type accepted by constructors and assignment.
              */
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 
@@ -2274,7 +2274,7 @@ namespace CDPL
             static const SizeType Size2 = N;
 
             /**
-             * \brief Constructs a zero-initialized \f$ M \times N \f$ matrix.
+             * \brief Constructs a zero-initialized <em>M&times;N</em> matrix.
              */
             CMatrix()
             {
@@ -2283,7 +2283,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs an \f$ M \times N \f$ matrix with every element initialized to \a v.
+             * \brief Constructs an <em>M&times;N</em> matrix with every element initialized to \a v.
              * \param v The initial element value.
              */
             explicit CMatrix(const ValueType& v)
@@ -2304,7 +2304,7 @@ namespace CDPL
 
             /**
              * \brief Constructs a fixed-size matrix with the contents of the initializer list of rows \a l.
-             * \param l The initializer list of rows (clipped or zero-padded to \a M \f$ \times \f$ \a N).
+             * \param l The initializer list of rows (clipped or zero-padded to <em>M&times;N</em>).
              */
             CMatrix(InitializerListType l)
             {
@@ -2439,7 +2439,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Assigns the rows in \a l to this fixed-size matrix (clipped or zero-padded to \a M \f$ \times \f$ \a N).
+             * \brief Assigns the rows in \a l to this fixed-size matrix (clipped or zero-padded to <em>M&times;N</em>).
              * \param l The initializer list of rows.
              * \return A reference to itself.
              */
@@ -2572,10 +2572,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Assigns the rows in \a l to this fixed-size matrix (clipped or zero-padded to \a M \f$ \times \f$ \a N).
+             * \brief Assigns the rows in \a l to this fixed-size matrix (clipped or zero-padded to <em>M&times;N</em>).
              * \param l The initializer list of rows.
              * \return A reference to itself.
-             * \throw Base::SizeError if \c l.size() exceeds \a M or any row's size exceeds \a N.
+             * \throw Base::SizeError if the size of \a l exceeds \a M or any row's size exceeds \a N.
              */
             CMatrix& assign(InitializerListType l)
             {
@@ -2736,7 +2736,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef Matrix<T>                             MatrixTemporaryType;
 
@@ -2752,7 +2752,7 @@ namespace CDPL
                 size1(0), size2(0) {}
 
             /**
-             * \brief Constructs a zero matrix of size \f$ m \times n \f$.
+             * \brief Constructs a zero matrix of size <em>m&times;n</em>.
              * \param m The number of rows.
              * \param n The number of columns.
              */
@@ -2862,7 +2862,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the dimensions to \f$ m \times n \f$.
+             * \brief Resizes the dimensions to <em>m&times;n</em>.
              * \param m The new row count.
              * \param n The new column count.
              */
@@ -2928,7 +2928,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef Matrix<T>                             MatrixTemporaryType;
 
@@ -2944,7 +2944,7 @@ namespace CDPL
                 size1(0), size2(0), value() {}
 
             /**
-             * \brief Constructs a scalar matrix of size \f$ m \times n \f$ in which every entry equals \a v.
+             * \brief Constructs a scalar matrix of size <em>m&times;n</em> in which every entry equals \a v.
              * \param m The number of rows.
              * \param n The number of columns.
              * \param v The common entry value.
@@ -3057,7 +3057,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the dimensions to \f$ m \times n \f$.
+             * \brief Resizes the dimensions to <em>m&times;n</em>.
              * \param m The new row count.
              * \param n The new column count.
              */
@@ -3095,7 +3095,7 @@ namespace CDPL
             typedef const T&                              Reference;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef const T&                              ConstReference;
 
@@ -3120,7 +3120,7 @@ namespace CDPL
             typedef const MatrixReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary matrix type used by expression-template machinery.
+             * \brief Concrete temporary matrix type used by expression template machinery.
              */
             typedef Matrix<T>                             MatrixTemporaryType;
 
@@ -3136,7 +3136,7 @@ namespace CDPL
                 size1(0), size2(0) {}
 
             /**
-             * \brief Constructs an identity matrix of size \f$ m \times n \f$ (\e 1 on the diagonal, \e 0 elsewhere).
+             * \brief Constructs an identity matrix of size <em>m&times;n</em> (\e 1 on the diagonal, \e 0 elsewhere).
              * \param m The number of rows.
              * \param n The number of columns.
              */
@@ -3246,7 +3246,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Resizes the dimensions to \f$ m \times n \f$.
+             * \brief Resizes the dimensions to <em>m&times;n</em>.
              * \param m The new row count.
              * \param n The new column count.
              */
@@ -3479,62 +3479,62 @@ namespace CDPL
         typedef Matrix<unsigned long> ULMatrix;
 
         /**
-         * \brief Bounded 2x2 matrix holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded <em>2&times;2</em> matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 2, 2> Matrix2F;
 
         /**
-         * \brief Bounded 3x3 matrix holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded <em>3&times;3</em> matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 3, 3> Matrix3F;
 
         /**
-         * \brief Bounded 4x4 matrix holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded <em>4&times;4</em> matrix holding floating-point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 4, 4> Matrix4F;
 
         /**
-         * \brief Bounded 2x2 matrix holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded <em>2&times;2</em> matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 2, 2> Matrix2D;
 
         /**
-         * \brief Bounded 3x3 matrix holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded <em>3&times;3</em> matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 3, 3> Matrix3D;
 
         /**
-         * \brief Bounded 4x4 matrix holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded <em>4&times;4</em> matrix holding floating-point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 4, 4> Matrix4D;
 
         /**
-         * \brief Bounded 2x2 matrix holding signed integers of type <tt>long</tt>.
+         * \brief Bounded <em>2&times;2</em> matrix holding signed integers of type <tt>long</tt>.
          */
         typedef CMatrix<long, 2, 2> Matrix2L;
 
         /**
-         * \brief Bounded 3x3 matrix holding signed integers of type <tt>long</tt>.
+         * \brief Bounded <em>3&times;3</em> matrix holding signed integers of type <tt>long</tt>.
          */
         typedef CMatrix<long, 3, 3> Matrix3L;
 
         /**
-         * \brief Bounded 4x4 matrix holding signed integers of type <tt>long</tt>.
+         * \brief Bounded <em>4&times;4</em> matrix holding signed integers of type <tt>long</tt>.
          */
         typedef CMatrix<long, 4, 4> Matrix4L;
 
         /**
-         * \brief Bounded 2x2 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded <em>2&times;2</em> matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CMatrix<unsigned long, 2, 2> Matrix2UL;
 
         /**
-         * \brief Bounded 3x3 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded <em>3&times;3</em> matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CMatrix<unsigned long, 3, 3> Matrix3UL;
 
         /**
-         * \brief Bounded 4x4 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded <em>4&times;4</em> matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CMatrix<unsigned long, 4, 4> Matrix4UL;
 

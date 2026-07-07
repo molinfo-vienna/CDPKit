@@ -74,12 +74,12 @@ namespace CDPL
             typedef typename V::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename V::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped vector is \c const).
              */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
@@ -140,7 +140,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at index \a i of the view (alias for operator()).
+             * \brief Returns a mutable reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
              * \return A mutable reference to the element.
              */
@@ -153,7 +153,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i of the view (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
              * \return A \c const reference to the element.
              */
@@ -363,12 +363,12 @@ namespace CDPL
             typedef typename V::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to a component.
+             * \brief Constant component reference type.
              */
             typedef typename V::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             * \brief Mutable component reference type (degrades to ConstReference when the wrapped vector is \c const).
              */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,

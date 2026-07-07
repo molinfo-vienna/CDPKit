@@ -505,7 +505,7 @@ def clearWeight(feature: Feature) -> None: pass
 # \param ftr_cntnr The feature container providing the exclusion volume features.
 # \param atom_cntnr The atom container providing the test atoms.
 # \param coords_func The function returning the 3D coordinates of an atom.
-# \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
+# \param xform The <em>4&times;4</em> transformation applied to the atom coordinates before the clash test.
 # \param vdw_factor Scaling factor for the per-atom Van der Waals radii. If &le; <em>0</em> the atoms are treated as point particles.
 # 
 # \return <tt>True</tt> if no clash is detected, and <tt>False</tt> otherwise.
@@ -685,7 +685,7 @@ def resizeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomCont
 # \brief Applies the affine transformation <em>mtx</em> to the 3D position property and, if set, the orientation property of every feature in the feature container <em>cntr</em>.
 # 
 # \param cntnr The feature container to transform.
-# \param mtx The 4x4 transformation matrix.
+# \param mtx The <em>4&times;4</em> transformation matrix.
 # 
 def transform3DCoordinates(cntnr: FeatureContainer, mtx: Math.Matrix4D) -> None: pass
 

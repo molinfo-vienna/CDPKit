@@ -37,7 +37,7 @@ class LMatrix(Boost.Python.instance):
     def __init__(m: LMatrix) -> None: pass
 
     ##
-    # \brief Constructs an <em>m</em> &times; <em>n</em> matrix with default-initialized elements.
+    # \brief Constructs an <em>m&times;n</em> matrix with default-initialized elements.
     # 
     # \param m The number of rows.
     # \param n The number of columns.
@@ -45,11 +45,11 @@ class LMatrix(Boost.Python.instance):
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Constructs an <em>m</em> &times; <em>n</em> matrix with every element initialized to <em>v</em>.
+    # \brief Constructs an <em>m&times;n</em> matrix with every element initialized to <em>v</em>.
     # 
     # \param m The number of rows.
     # \param n The number of columns.
-    # \param v The element value used to initialize every cell.
+    # \param v The value used for element initialization.
     # 
     def __init__(m: int, n: int, v: int) -> None: pass
 
@@ -84,7 +84,7 @@ class LMatrix(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief Resizes the matrix to \f$ m \times n \f$ elements.
+    # \brief Resizes the matrix to <em>m&times;n</em> elements.
     # 
     # \param m The new row count.
     # \param n The new column count.

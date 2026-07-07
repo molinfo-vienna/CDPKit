@@ -49,7 +49,7 @@ namespace CDPL
         class MatrixContainer;
 
         /**
-         * \brief Expression-template node applying a unary functor \a F element-wise to a matrix expression \a E.
+         * \brief Expression template node applying a unary functor \a F element-wise to a matrix expression \a E.
          * \tparam E The wrapped matrix expression type.
          * \tparam F The unary functor type.
          */
@@ -69,12 +69,12 @@ namespace CDPL
             typedef typename F::ResultType     ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType            ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType            Reference;
 
@@ -99,14 +99,14 @@ namespace CDPL
             typedef typename E::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e.
+             * \brief Constructs the expression template node wrapping \a e.
              * \param e The matrix expression to wrap.
              */
             MatrixUnary(const ExpressionType& e):
                 expr(e) {}
 
             /**
-             * \brief Returns the wrapped expression's first-dimension size.
+             * \brief Returns the wrapped expression's number of rows.
              * \return The number of rows.
              */
             SizeType getSize1() const
@@ -115,7 +115,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the wrapped expression's second-dimension size.
+             * \brief Returns the wrapped expression's number of columns.
              * \return The number of columns.
              */
             SizeType getSize2() const
@@ -139,7 +139,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::MatrixUnary instantiation <\a E, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::MatrixUnary instantiation <\a E, \a F>.
          * \tparam E The matrix expression type.
          * \tparam F The unary functor type.
          */
@@ -148,18 +148,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef MatrixUnary<E, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType    ResultType;
         };
 
         /**
-         * \brief Expression-template node interpreting a vector expression \a E as a column matrix via the per-element functor \a F.
+         * \brief Expression template node interpreting a vector expression \a E as a column matrix via the per-element functor \a F.
          * \tparam E The wrapped vector expression type.
          * \tparam F The unary functor type producing matrix elements from vector elements.
          */
@@ -179,12 +179,12 @@ namespace CDPL
             typedef typename F::ResultType     ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType            ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType            Reference;
 
@@ -209,7 +209,7 @@ namespace CDPL
             typedef typename E::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping the vector expression \a e.
+             * \brief Constructs the expression template node wrapping the vector expression \a e.
              * \param e The vector expression to wrap.
              */
             VectorMatrixUnary(const ExpressionType& e):
@@ -249,7 +249,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::VectorMatrixUnary instantiation <\a E, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::VectorMatrixUnary instantiation <\a E, \a F>.
          * \tparam E The vector expression type.
          * \tparam F The unary functor type producing matrix elements from vector elements.
          */
@@ -258,18 +258,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef VectorMatrixUnary<E, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType          ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two matrix expressions \a E1 and \a E2 element-wise via the binary functor \a F.
+         * \brief Expression template node combining two matrix expressions \a E1 and \a E2 element-wise via the binary functor \a F.
          * \tparam E1 The first wrapped matrix expression type.
          * \tparam E2 The second wrapped matrix expression type.
          * \tparam F The binary functor type.
@@ -292,12 +292,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -322,7 +322,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first matrix expression.
              * \param e2 The second matrix expression.
              */
@@ -332,7 +332,7 @@ namespace CDPL
             /**
              * \brief Returns the number of rows after verifying that both wrapped expressions agree on it.
              * \return The number of rows.
-             * \throw Base::SizeError if the two wrapped expressions report different first-dimension sizes.
+             * \throw Base::SizeError if the two wrapped expressions report different row numbers.
              */
             SizeType getSize1() const
             {
@@ -342,7 +342,7 @@ namespace CDPL
             /**
              * \brief Returns the number of columns after verifying that both wrapped expressions agree on it.
              * \return The number of columns.
-             * \throw Base::SizeError if the two wrapped expressions report different second-dimension sizes.
+             * \throw Base::SizeError if the two wrapped expressions report different column numbers.
              */
             SizeType getSize2() const
             {
@@ -366,7 +366,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::MatrixBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::MatrixBinary1 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The first matrix expression type.
          * \tparam E2 The second matrix expression type.
          * \tparam F The binary functor type.
@@ -376,22 +376,22 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef MatrixBinary1<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType           ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two matrix expressions \a E1 and \a E2 via a binary functor \a F that
-         *        is invoked with both expressions plus the (\e i, \e j) cell indices.
+         * \brief Expression template node combining two matrix expressions \a E1 and \a E2 via a binary functor \a F that
+         *        is invoked with both expressions plus the (\e i, \e j) element indices.
          *
          * Unlike Math::MatrixBinary1 (which is element-wise), the functor here receives both expressions verbatim
-         * along with the cell coordinates — used for matrix products and similar non-element-wise combinations.
+         * along with the element coordinates — used for matrix products and similar non-element-wise combinations.
          *
          * \tparam E1 The first wrapped matrix expression type.
          * \tparam E2 The second wrapped matrix expression type.
@@ -415,12 +415,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -445,7 +445,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first matrix expression.
              * \param e2 The second matrix expression.
              */
@@ -453,7 +453,7 @@ namespace CDPL
                 expr1(e1), expr2(e2) {}
 
             /**
-             * \brief Returns the first wrapped expression's first-dimension size (number of rows of the result).
+             * \brief Returns the first wrapped expression's number of rows (= number of rows of the result).
              * \return The number of rows.
              */
             SizeType getSize1() const
@@ -462,7 +462,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the second wrapped expression's second-dimension size (number of columns of the result).
+             * \brief Returns the second wrapped expression's number of columns (= number of columns of the result).
              * \return The number of columns.
              */
             SizeType getSize2() const
@@ -487,7 +487,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::MatrixBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::MatrixBinary2 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The first matrix expression type.
          * \tparam E2 The second matrix expression type.
          * \tparam F The binary functor type.
@@ -497,22 +497,22 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef MatrixBinary2<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType           ResultType;
         };
 
         /**
-         * \brief Expression-template node interpreting a binary combination of two vector expressions as a matrix
-         *        (e.g. outer product), via the per-cell functor \a F invoked with both expressions and the cell coordinates.
+         * \brief Expression template node interpreting a binary combination of two vector expressions as a matrix
+         *        (e.g. outer product), via the per-element functor \a F invoked with both expressions and the element coordinates.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
-         * \tparam F The per-cell functor type.
+         * \tparam F The per-element functor type.
          */
         template <typename E1, typename E2, typename F>
         class VectorMatrixBinary : public MatrixExpression<VectorMatrixBinary<E1, E2, F> >
@@ -532,12 +532,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -562,7 +562,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first vector expression (row source).
              * \param e2 The second vector expression (column source).
              */
@@ -604,28 +604,28 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::VectorMatrixBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::VectorMatrixBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
-         * \tparam F The per-cell functor type.
+         * \tparam F The per-element functor type.
          */
         template <typename E1, typename E2, typename F>
         struct VectorMatrixBinaryTraits
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef VectorMatrixBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                ResultType;
         };
 
         /**
-         * \brief Expression-template node interpreting a binary combination of a matrix expression \a E1 and a vector expression \a E2
+         * \brief Expression template node interpreting a binary combination of a matrix expression \a E1 and a vector expression \a E2
          *        as a vector (e.g. matrix-vector product), via the per-element functor \a F invoked with both expressions and the index.
          *
          * The resulting vector has size <tt>e1.getSize1()</tt> (i.e. the matrix expression's number of rows).
@@ -652,12 +652,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -682,7 +682,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping the matrix expression \a e1 and the vector expression \a e2.
+             * \brief Constructs the expression template node wrapping the matrix expression \a e1 and the vector expression \a e2.
              * \param e1 The matrix expression.
              * \param e2 The vector expression.
              */
@@ -690,7 +690,7 @@ namespace CDPL
                 expr1(e1), expr2(e2) {}
 
             /**
-             * \brief Returns the wrapped matrix expression's first-dimension size (number of rows = size of the result vector).
+             * \brief Returns the wrapped matrix expression's number of rows (number of rows = size of the result vector).
              * \return The result vector size.
              */
             SizeType getSize() const
@@ -724,7 +724,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Matrix1VectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Matrix1VectorBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The matrix expression type.
          * \tparam E2 The vector expression type.
          * \tparam F The per-element functor type.
@@ -734,18 +734,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Matrix1VectorBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                 ResultType;
         };
 
         /**
-         * \brief Expression-template node interpreting a binary combination of a vector expression \a E1 and a matrix expression \a E2
+         * \brief Expression template node interpreting a binary combination of a vector expression \a E1 and a matrix expression \a E2
          *        as a vector (e.g. vector-matrix product), via the per-element functor \a F invoked with both expressions and the index.
          *
          * The resulting vector has size <tt>e2.getSize2()</tt> (i.e. the matrix expression's number of columns).
@@ -772,12 +772,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -802,7 +802,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping the vector expression \a e1 and the matrix expression \a e2.
+             * \brief Constructs the expression template node wrapping the vector expression \a e1 and the matrix expression \a e2.
              * \param e1 The vector expression.
              * \param e2 The matrix expression.
              */
@@ -810,7 +810,7 @@ namespace CDPL
                 expr1(e1), expr2(e2) {}
 
             /**
-             * \brief Returns the wrapped matrix expression's second-dimension size (number of columns = size of the result vector).
+             * \brief Returns the wrapped matrix expression's number of columns (number of columns = size of the result vector).
              * \return The result vector size.
              */
             SizeType getSize() const
@@ -844,7 +844,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Matrix2VectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Matrix2VectorBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The vector expression type.
          * \tparam E2 The matrix expression type.
          * \tparam F The per-element functor type.
@@ -854,18 +854,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Matrix2VectorBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                 ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a scalar \a E1 (lhs) and a matrix expression \a E2 (rhs) element-wise via the binary functor \a F.
+         * \brief Expression template node combining a scalar \a E1 (lhs) and a matrix expression \a E2 (rhs) element-wise via the binary functor \a F.
          * \tparam E1 The scalar type appearing on the left-hand side.
          * \tparam E2 The wrapped matrix expression type.
          * \tparam F The binary functor type.
@@ -888,12 +888,12 @@ namespace CDPL
             typedef typename F::ResultType      ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType             ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType             Reference;
 
@@ -918,7 +918,7 @@ namespace CDPL
             typedef typename E2::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node combining the scalar \a e1 and the matrix expression \a e2.
+             * \brief Constructs the expression template node combining the scalar \a e1 and the matrix expression \a e2.
              * \param e1 The scalar value on the left-hand side.
              * \param e2 The matrix expression on the right-hand side.
              */
@@ -926,7 +926,7 @@ namespace CDPL
                 expr1(e1), expr2(e2) {}
 
             /**
-             * \brief Returns the wrapped matrix expression's first-dimension size (number of rows).
+             * \brief Returns the wrapped matrix expression's number of rows.
              * \return The number of rows.
              */
             SizeType getSize1() const
@@ -935,7 +935,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the wrapped matrix expression's second-dimension size (number of columns).
+             * \brief Returns the wrapped matrix expression's number of columns.
              * \return The number of columns.
              */
             SizeType getSize2() const
@@ -960,7 +960,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1MatrixBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar1MatrixBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The scalar type on the left-hand side.
          * \tparam E2 The matrix expression type.
          * \tparam F The binary functor type.
@@ -970,18 +970,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar1MatrixBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                 ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a matrix expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
+         * \brief Expression template node combining a matrix expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
          * \tparam E1 The wrapped matrix expression type.
          * \tparam E2 The scalar type appearing on the right-hand side.
          * \tparam F The binary functor type.
@@ -1004,12 +1004,12 @@ namespace CDPL
             typedef typename F::ResultType      ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType             ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType             Reference;
 
@@ -1034,7 +1034,7 @@ namespace CDPL
             typedef typename E1::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node combining the matrix expression \a e1 and the scalar \a e2.
+             * \brief Constructs the expression template node combining the matrix expression \a e1 and the scalar \a e2.
              * \param e1 The matrix expression on the left-hand side.
              * \param e2 The scalar value on the right-hand side.
              */
@@ -1042,7 +1042,7 @@ namespace CDPL
                 expr1(e1), expr2(e2) {}
 
             /**
-             * \brief Returns the wrapped matrix expression's first-dimension size (number of rows).
+             * \brief Returns the wrapped matrix expression's number of rows.
              * \return The number of rows.
              */
             SizeType getSize1() const
@@ -1051,7 +1051,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the wrapped matrix expression's second-dimension size (number of columns).
+             * \brief Returns the wrapped matrix expression's number of columns.
              * \return The number of columns.
              */
             SizeType getSize2() const
@@ -1076,7 +1076,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2MatrixBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar2MatrixBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The matrix expression type.
          * \tparam E2 The scalar type on the right-hand side.
          * \tparam F The binary functor type.
@@ -1086,12 +1086,12 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar2MatrixBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                 ResultType;
         };
@@ -1128,12 +1128,12 @@ namespace CDPL
             typedef typename M::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename M::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped matrix is \c const).
              */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
@@ -1426,7 +1426,7 @@ namespace CDPL
          * \brief Returns the element-wise negation of the matrix expression \a e.
          * \tparam E The matrix expression type.
          * \param e The matrix expression.
-         * \return An expression-template node representing \f$ -e \f$.
+         * \return An expression template node representing \f$ -e \f$.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarNegation<typename E::ValueType> >::ResultType
@@ -1456,7 +1456,7 @@ namespace CDPL
          * \tparam E2 The second matrix expression type.
          * \param e1 The first matrix expression.
          * \param e2 The second matrix expression.
-         * \return An expression-template node representing \f$ e_1 + e_2 \f$.
+         * \return An expression template node representing \f$ e_1 + e_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1474,7 +1474,7 @@ namespace CDPL
          * \tparam E2 The second matrix expression type.
          * \param e1 The first matrix expression.
          * \param e2 The second matrix expression.
-         * \return An expression-template node representing \f$ e_1 - e_2 \f$.
+         * \return An expression template node representing \f$ e_1 - e_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1492,7 +1492,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The matrix expression.
          * \param t The scalar multiplier.
-         * \return An expression-template node representing \f$ e \cdot t \f$.
+         * \return An expression template node representing \f$ e \cdot t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2MatrixBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
@@ -1510,7 +1510,7 @@ namespace CDPL
          * \tparam E The matrix expression type.
          * \param t The scalar multiplier.
          * \param e The matrix expression.
-         * \return An expression-template node representing \f$ t \cdot e \f$.
+         * \return An expression template node representing \f$ t \cdot e \f$.
          */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1MatrixBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
@@ -1528,7 +1528,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The matrix expression.
          * \param t The scalar divisor.
-         * \return An expression-template node representing \f$ e / t \f$.
+         * \return An expression template node representing \f$ e / t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2MatrixBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
@@ -1591,7 +1591,7 @@ namespace CDPL
          * \brief Returns the element-wise complex conjugate of the matrix expression \a e (identity for real-valued matrices).
          * \tparam E The matrix expression type.
          * \param e The matrix expression.
-         * \return An expression-template node representing \f$ \overline{e} \f$.
+         * \return An expression template node representing \f$ \overline{e} \f$.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
@@ -1606,7 +1606,7 @@ namespace CDPL
          * \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression \a e — currently aliased to conj() pending transpose support.
          * \tparam E The matrix expression type.
          * \param e The matrix expression.
-         * \return An expression-template node representing \f$ \overline{e} \f$.
+         * \return An expression template node representing \f$ \overline{e} \f$.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
@@ -1621,7 +1621,7 @@ namespace CDPL
          * \brief Returns the element-wise real part of the matrix expression \a e.
          * \tparam E The matrix expression type.
          * \param e The matrix expression.
-         * \return An expression-template node representing the real part of \a e.
+         * \return An expression template node representing the real part of \a e.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
@@ -1636,7 +1636,7 @@ namespace CDPL
          * \brief Returns the element-wise imaginary part of the matrix expression \a e.
          * \tparam E The matrix expression type.
          * \param e The matrix expression.
-         * \return An expression-template node representing the imaginary part of \a e.
+         * \return An expression template node representing the imaginary part of \a e.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
@@ -1653,7 +1653,7 @@ namespace CDPL
          * \tparam E2 The second vector expression type.
          * \param e1 The first vector expression.
          * \param e2 The second vector expression.
-         * \return An expression-template node representing the outer product.
+         * \return An expression template node representing the outer product.
          */
         template <typename E1, typename E2>
         typename VectorMatrixBinaryTraits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1671,7 +1671,7 @@ namespace CDPL
          * \tparam E2 The second matrix expression type.
          * \param e1 The numerator matrix expression.
          * \param e2 The denominator matrix expression.
-         * \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         * \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1689,7 +1689,7 @@ namespace CDPL
          * \tparam E2 The second matrix expression type.
          * \param e1 The first matrix expression.
          * \param e2 The second matrix expression.
-         * \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         * \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1707,7 +1707,7 @@ namespace CDPL
          * \tparam E2 The vector expression type.
          * \param e1 The matrix expression.
          * \param e2 The vector expression.
-         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename Matrix1VectorBinaryTraits<E1, E2, MatrixVectorProduct<E1, E2> >::ResultType
@@ -1724,7 +1724,7 @@ namespace CDPL
          * \tparam E2 The vector expression type.
          * \param e1 The matrix expression.
          * \param e2 The vector expression.
-         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename Matrix1VectorBinaryTraits<E1, E2, MatrixVectorProduct<E1, E2> >::ResultType
@@ -1757,7 +1757,7 @@ namespace CDPL
          * \tparam E2 The matrix expression type.
          * \param e1 The vector expression.
          * \param e2 The matrix expression.
-         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename Matrix2VectorBinaryTraits<E1, E2, VectorMatrixProduct<E1, E2> >::ResultType
@@ -1774,7 +1774,7 @@ namespace CDPL
          * \tparam E2 The matrix expression type.
          * \param e1 The vector expression.
          * \param e2 The matrix expression.
-         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename Matrix2VectorBinaryTraits<E1, E2, VectorMatrixProduct<E1, E2> >::ResultType
@@ -1807,7 +1807,7 @@ namespace CDPL
          * \tparam E2 The second matrix expression type.
          * \param e1 The first matrix expression.
          * \param e2 The second matrix expression.
-         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary2Traits<E1, E2, MatrixProduct<E1, E2> >::ResultType
@@ -1824,7 +1824,7 @@ namespace CDPL
          * \tparam E2 The second matrix expression type.
          * \param e1 The first matrix expression.
          * \param e2 The second matrix expression.
-         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary2Traits<E1, E2, MatrixProduct<E1, E2> >::ResultType
@@ -1907,7 +1907,7 @@ namespace CDPL
          * \brief Returns a diagonal matrix whose diagonal entries are the components of the vector expression \a e.
          * \tparam E The vector expression type.
          * \param e The vector expression.
-         * \return An expression-template node representing the diagonal matrix.
+         * \return An expression template node representing the diagonal matrix.
          */
         template <typename E>
         typename VectorMatrixUnaryTraits<E, DiagonalMatrixFromVector<E> >::ResultType
@@ -1922,7 +1922,7 @@ namespace CDPL
          * \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3D vector expression \a e (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
          * \tparam E The vector expression type.
          * \param e The 3D vector expression.
-         * \return An expression-template node representing the skew-symmetric matrix.
+         * \return An expression template node representing the skew-symmetric matrix.
          */
         template <typename E>
         typename VectorMatrixUnaryTraits<E, CrossProductMatrixFromVector<E> >::ResultType

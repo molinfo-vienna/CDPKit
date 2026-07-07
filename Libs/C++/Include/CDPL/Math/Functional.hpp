@@ -1307,7 +1307,7 @@ namespace CDPL
         };
 
         /**
-         * \brief %Base class for unary functors that produce a matrix element from a vector expression and (\e i, \e j) cell indices (Math::DiagonalMatrixFromVector, Math::CrossProductMatrixFromVector).
+         * \brief %Base class for unary functors that produce a matrix element from a vector expression and (\e i, \e j) element indices (Math::DiagonalMatrixFromVector, Math::CrossProductMatrixFromVector).
          * \tparam V The vector expression type.
          */
         template <typename V>
@@ -2681,13 +2681,13 @@ namespace CDPL
             typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type   SizeType;
 
             /**
-             * \brief The cell value type (common type of the two grid cell types).
+             * \brief The element value type (common type of the two grid element types).
              */
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
         /**
-         * \brief Functor checking cell-wise equality of two grid expressions.
+         * \brief Functor checking element-wise equality of two grid expressions.
          * \tparam G1 The first grid expression type.
          * \tparam G2 The second grid expression type.
          */
@@ -2700,10 +2700,10 @@ namespace CDPL
             typedef typename GridBooleanBinaryFunctor<G1, G2>::ResultType ResultType;
 
             /**
-             * \brief Tells whether \a e1 and \a e2 have the same dimensions and equal cell values.
+             * \brief Tells whether \a e1 and \a e2 have the same dimensions and equal element values.
              * \param e1 The first grid expression.
              * \param e2 The second grid expression.
-             * \return \c true if the grids agree in dimensions and cell-wise values, and \c false otherwise.
+             * \return \c true if the grids agree in dimensions and element-wise values, and \c false otherwise.
              */
             static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2)
             {
@@ -2752,13 +2752,13 @@ namespace CDPL
             typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type   SizeType;
 
             /**
-             * \brief The cell value type (common type of the two grid cell types).
+             * \brief The element value type (common type of the two grid element types).
              */
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
         /**
-         * \brief Functor checking cell-wise approximate equality of two grid expressions within an absolute tolerance.
+         * \brief Functor checking element-wise approximate equality of two grid expressions within an absolute tolerance.
          * \tparam G1 The first grid expression type.
          * \tparam G2 The second grid expression type.
          * \tparam T The tolerance scalar type.
@@ -2773,11 +2773,11 @@ namespace CDPL
             typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::Argument3Type Argument3Type;
 
             /**
-             * \brief Tells whether \a e1 and \a e2 agree cell-wise within the absolute tolerance \a epsilon.
+             * \brief Tells whether \a e1 and \a e2 agree element-wise within the absolute tolerance \a epsilon.
              * \param e1 The first grid expression.
              * \param e2 The second grid expression.
              * \param epsilon The non-negative absolute tolerance.
-             * \return \c true if the grids have equal dimensions and all cells agree within \a epsilon, and \c false otherwise.
+             * \return \c true if the grids have equal dimensions and all elements agree within \a epsilon, and \c false otherwise.
              */
             static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2, Argument3Type epsilon)
             {
@@ -2813,13 +2813,13 @@ namespace CDPL
         {
 
             /**
-             * \brief The scalar result type (the grid's cell value type).
+             * \brief The scalar result type (the grid's element value type).
              */
             typedef typename M::ValueType ResultType;
         };
 
         /**
-         * \brief Functor returning the sum of all cells of a grid expression.
+         * \brief Functor returning the sum of all elements of a grid expression.
          * \tparam G The grid expression type.
          */
         template <typename G>
@@ -2829,7 +2829,7 @@ namespace CDPL
             typedef typename GridScalarUnaryFunctor<G>::ResultType ResultType;
 
             /**
-             * \brief Returns the cell sum of \a e.
+             * \brief Returns the element sum of \a e.
              * \param e The grid expression.
              * \return \f$ \sum_{i, j, k} e(i, j, k) \f$.
              */

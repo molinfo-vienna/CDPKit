@@ -47,7 +47,7 @@ class LVector(Boost.Python.instance):
     # \brief Constructs a vector of size <em>n</em> with every element initialized to <em>v</em>.
     # 
     # \param n The desired vector size.
-    # \param v The value used to initialize every element.
+    # \param v The value used for element initialization.
     # 
     def __init__(n: int, v: int) -> None: pass
 

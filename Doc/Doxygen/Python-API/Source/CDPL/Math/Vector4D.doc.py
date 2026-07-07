@@ -25,7 +25,7 @@
 class Vector4D(Boost.Python.instance):
 
     ##
-    # \brief Constructs a zero-initialized <em>N-element</em> vector.
+    # \brief Constructs a zero-initialized <em>N</em> element vector.
     # 
     def __init__() -> None: pass
 

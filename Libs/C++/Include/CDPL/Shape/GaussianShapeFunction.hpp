@@ -141,7 +141,7 @@ namespace CDPL
 
             /**
              * \brief Applies an affine transformation to the element positions of the associated shape.
-             * \param xform The 4x4 transformation matrix.
+             * \param xform The <em>4&times;4</em> transformation matrix.
              */
             void transform(const Math::Matrix4D& xform);
 
@@ -194,7 +194,7 @@ namespace CDPL
             /**
              * \brief Calculates the quadrupole tensor of the Gaussian shape with respect to the reference point \a ctr.
              * \param ctr The reference point (typically the shape centroid).
-             * \param quad_tensor The output 3x3 quadrupole tensor.
+             * \param quad_tensor The output <em>3&times;3</em> quadrupole tensor.
              */
             void calcQuadrupoleTensor(const Math::Vector3D& ctr, Math::Matrix3D& quad_tensor) const;
 

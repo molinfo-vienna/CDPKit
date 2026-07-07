@@ -3804,7 +3804,7 @@ def subdivideSpherical(mesh: TriangleMesh3D) -> None: pass
 # \brief Applies the affine transformation matrix <em>mtx</em> to the vertices of <em>mesh</em>.
 # 
 # \param mesh The triangle mesh to transform (modified in place).
-# \param mtx The \f$ 4 \times 4 \f$ homogeneous transformation matrix to apply.
+# \param mtx The <em>4&times;4</em> homogeneous transformation matrix to apply.
 # \param vtx_offs The index of the first vertex to transform.
 # \param vtx_count The number of vertices to transform (<em>0</em> to process all vertices from <em>vtx_offs</em> onwards).
 # 

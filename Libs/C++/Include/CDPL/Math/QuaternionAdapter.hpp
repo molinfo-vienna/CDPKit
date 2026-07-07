@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief View adapter that exposes a quaternion as a 4-element vector expression (indices map to the components C1, C2, C3, C4).
+         * \brief Adapter that exposes a quaternion as a \e 4 element vector expression (indices map to the components C1, C2, C3, C4).
          * \tparam Q The wrapped quaternion type.
          */
         template <typename Q>
@@ -75,12 +75,12 @@ namespace CDPL
             typedef typename Q::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element of the wrapped quaternion.
+             * \brief Constant element reference type of the wrapped quaternion.
              */
             typedef typename Q::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped quaternion is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped quaternion is \c const).
              */
             typedef typename std::conditional<std::is_const<Q>::value,
                                               typename Q::ConstReference,
@@ -105,7 +105,7 @@ namespace CDPL
 
             /**
              * \brief Constructs the adapter wrapping the quaternion \a q.
-             * \param q The quaternion to be viewed as a 4-element vector.
+             * \param q The quaternion to be viewed as a \e 4 element vector.
              */
             explicit QuaternionVectorAdapter(QuaternionType& q):
                 data(q) {}
@@ -165,7 +165,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the quaternion component at index \a i (alias for operator()).
+             * \brief Returns a mutable reference to the quaternion component at index \a i.
              * \param i The zero-based component index.
              * \return A mutable reference to the component.
              * \throw Base::IndexError if \a i is not in the range [0, 3].
@@ -176,7 +176,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the quaternion component at index \a i (alias for operator()).
+             * \brief Returns a \c const reference to the quaternion component at index \a i.
              * \param i The zero-based component index.
              * \return A \c const reference to the component.
              * \throw Base::IndexError if \a i is not in the range [0, 3].
@@ -188,7 +188,7 @@ namespace CDPL
 
             /**
              * \brief Returns the dimensionality of the view (always \e 4).
-             * \return The size value \e 4.
+             * \return \e 4.
              */
             SizeType getSize() const
             {
@@ -196,7 +196,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the view is empty (always \c false; the view is fixed-size with 4 components).
+             * \brief Tells whether the view is empty (always \c false, the view is fixed-size with 4 components).
              * \return \c false.
              */
             bool isEmpty() const
@@ -397,7 +397,7 @@ namespace CDPL
          * \brief Creates a mutable Math::QuaternionVectorAdapter view of the quaternion expression \a e.
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression to wrap.
-         * \return A mutable 4-element vector view of \a e.
+         * \return A mutable \e 4 element vector view of \a e.
          */
         template <typename E>
         QuaternionVectorAdapter<E>
@@ -410,7 +410,7 @@ namespace CDPL
          * \brief Creates a constant Math::QuaternionVectorAdapter view of the quaternion expression \a e.
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression to wrap.
-         * \return A constant 4-element vector view of \a e.
+         * \return A constant \e 4 element vector view of \a e.
          */
         template <typename E>
         QuaternionVectorAdapter<const E>

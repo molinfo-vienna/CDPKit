@@ -145,7 +145,7 @@ namespace CDPL
         /**
          * \brief Applies the affine transformation matrix \a mtx to the vertices of \a mesh.
          * \param mesh The triangle mesh to transform (modified in place).
-         * \param mtx The \f$ 4 \times 4 \f$ homogeneous transformation matrix to apply.
+         * \param mtx The <em>4&times;4</em> homogeneous transformation matrix to apply.
          * \param vtx_offs The index of the first vertex to transform.
          * \param vtx_count The number of vertices to transform (\e 0 to process all vertices from \a vtx_offs onwards).
          * \since 1.3

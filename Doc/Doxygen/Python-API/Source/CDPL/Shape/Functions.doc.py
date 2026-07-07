@@ -103,7 +103,7 @@ def calcColorTverskyScore(res: AlignmentResult, alpha: float = 0.95, beta: float
 def calcPrincipalAxes(quad_tensor: Math.Matrix3D, x_axis: Math.Vector3D, y_axis: Math.Vector3D, z_axis: Math.Vector3D, moments: Math.Vector3D) -> None: pass
 
 ##
-# \brief Calculates the eigen-decomposition of a 3x3 quadrupole tensor.
+# \brief Calculates the eigen-decomposition of a <em>3&times;3</em> quadrupole tensor.
 # 
 # \param quad_tensor The input symmetric quadrupole tensor.
 # \param eigen_vecs The output eigenvector matrix (columns are eigenvectors).
@@ -261,7 +261,7 @@ def generateGaussianShape(atoms: Chem.AtomContainer, shape: GaussianShape, coord
 def generateGaussianShape(features: Pharm.FeatureContainer, shape: GaussianShape, append: bool = False, radius: float = -1.0, inc_xv: bool = False, p: float = 5.0) -> None: pass
 
 ##
-# \brief Converts an affine 4x4 transformation matrix to a quaternion-plus-translation representation.
+# \brief Converts an affine <em>4&times;4</em> transformation matrix to a quaternion-plus-translation representation.
 # 
 # \param mtx The input transformation matrix.
 # \param quat The output Shape.QuaternionTransformation (<em>4</em> quaternion + <em>3</em> translation components).
@@ -279,7 +279,7 @@ def matrixToQuaternion(mtx: Math.Matrix4D, quat: Math.Vector7D) -> None: pass
 def perceiveSymmetryClass(moments: Math.Vector3D, eq_thresh: float = 0.15) -> int: pass
 
 ##
-# \brief Converts a quaternion-plus-translation representation back to an affine 4x4 transformation matrix.
+# \brief Converts a quaternion-plus-translation representation back to an affine <em>4&times;4</em> transformation matrix.
 # 
 # \param quat The input Shape.QuaternionTransformation (<em>4</em> quaternion + <em>3</em> translation components).
 # \param mtx The output transformation matrix.
@@ -290,6 +290,6 @@ def quaternionToMatrix(quat: Math.Vector7D, mtx: Math.Matrix4D) -> None: pass
 # \brief Applies an affine transformation to the element positions of <em>shape</em>.
 # 
 # \param shape The Gaussian shape to transform (modified in place).
-# \param xform The 4x4 transformation matrix.
+# \param xform The <em>4&times;4</em> transformation matrix.
 # 
 def transform(shape: GaussianShape, xform: Math.Matrix4D) -> None: pass

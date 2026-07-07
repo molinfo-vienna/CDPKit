@@ -126,7 +126,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     ##
     # \brief Applies an affine transformation to the element positions of the associated shape.
     # 
-    # \param xform The 4x4 transformation matrix.
+    # \param xform The <em>4&times;4</em> transformation matrix.
     # 
     def transform(xform: Math.Matrix4D) -> None: pass
 
@@ -191,7 +191,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     # \brief Calculates the quadrupole tensor of the Gaussian shape with respect to the reference point <em>ctr</em>.
     # 
     # \param ctr The reference point (typically the shape centroid).
-    # \param quad_tensor The output 3x3 quadrupole tensor.
+    # \param quad_tensor The output <em>3&times;3</em> quadrupole tensor.
     # 
     def calcQuadrupoleTensor(ctr: Math.Vector3D, quad_tensor: Math.Matrix3D) -> None: pass
 

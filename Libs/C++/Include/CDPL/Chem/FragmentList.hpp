@@ -43,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Data type for the storage of Chem::Fragment objects.
+         * \brief Data structure for the storage of Chem::Fragment objects.
          */
         class CDPL_CHEM_API FragmentList : public Util::IndirectArray<Fragment>
         {

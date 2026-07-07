@@ -65,14 +65,14 @@ namespace CDPL
             typedef typename Q::ValueType                                  ValueType;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped quaternion is \c const).
+             * \brief Mutable component reference type (degrades to ConstReference when the wrapped quaternion is \c const).
              */
             typedef typename std::conditional<std::is_const<Q>::value,
                                               typename Q::ConstReference,
                                               typename Q::Reference>::type Reference;
 
             /**
-             * \brief Constant reference type to a component.
+             * \brief Constant component reference type.
              */
             typedef typename Q::ConstReference                             ConstReference;
 
@@ -421,12 +421,12 @@ namespace CDPL
             typedef T                                         ValueType;
 
             /**
-             * \brief Mutable reference type to a component.
+             * \brief Mutable component reference type.
              */
             typedef T&                                        Reference;
 
             /**
-             * \brief Constant reference type to a component.
+             * \brief Constant component reference type.
              */
             typedef const T&                                  ConstReference;
 
@@ -456,7 +456,7 @@ namespace CDPL
             typedef const QuaternionReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary quaternion type used by expression-template machinery.
+             * \brief Concrete temporary quaternion type used by expression template machinery.
              */
             typedef SelfType                                  QuaternionTemporaryType;
 
@@ -900,7 +900,7 @@ namespace CDPL
             typedef const QuaternionReference<const SelfType> ConstClosureType;
 
             /**
-             * \brief Concrete temporary quaternion type used by expression-template machinery (a general Math::Quaternion<T>).
+             * \brief Concrete temporary quaternion type used by expression template machinery (a general Math::Quaternion<T>).
              */
             typedef Quaternion<T>                             QuaternionTemporaryType;
 

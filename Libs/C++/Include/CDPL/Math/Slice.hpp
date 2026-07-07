@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Index slice (\f$ start, stride, size \f$) used for strided slicing of vector and matrix expressions.
+         * \brief Index slice <em>(start, stride, size )</em> used for strided slicing of vector and matrix expressions.
          *
          * Local position \a i is mapped to the global index \f$ start + i \cdot stride \f$. Negative strides
          * (reverse iteration) are supported as long as the resulting indices stay non-negative.
@@ -89,7 +89,7 @@ namespace CDPL
              * \brief Maps the local position \a i to the global index \f$ start + i \cdot stride \f$.
              * \param i The zero-based local position.
              * \return The global index.
-             * \throw Base::IndexError if \a i is not in the range \f$ [0, size) \f$.
+             * \throw Base::IndexError if \a i is not in the range [0, getSize()).
              */
             SizeType operator()(SizeType i) const
             {
@@ -184,7 +184,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Convenience factory for Math::Slice with \c std::size_t indices and \c std::ptrdiff_t stride.
+         * \brief Convenience factory function for Math::Slice with \c std::size_t indices and \c std::ptrdiff_t stride.
          * \param start The starting global index.
          * \param stride The signed step size between consecutive entries.
          * \param size The number of entries.

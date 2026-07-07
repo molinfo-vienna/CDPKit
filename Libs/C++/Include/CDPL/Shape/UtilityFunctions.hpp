@@ -44,7 +44,7 @@ namespace CDPL
         class GaussianShapeFunction;
 
         /**
-         * \brief Calculates the eigen-decomposition of a 3x3 quadrupole tensor.
+         * \brief Calculates the eigen-decomposition of a <em>3&times;3</em> quadrupole tensor.
          * \param quad_tensor The input symmetric quadrupole tensor.
          * \param eigen_vecs The output eigenvector matrix (columns are eigenvectors).
          * \param eigen_vals The output eigenvalues.
@@ -83,14 +83,14 @@ namespace CDPL
                                                                   Math::Matrix4D& from_ctr_xform, double mom_eq_thresh = 0.15);
 
         /**
-         * \brief Converts an affine 4x4 transformation matrix to a quaternion-plus-translation representation.
+         * \brief Converts an affine <em>4&times;4</em> transformation matrix to a quaternion-plus-translation representation.
          * \param mtx The input transformation matrix.
          * \param quat The output Shape::QuaternionTransformation (\e 4 quaternion + \e 3 translation components).
          */
         CDPL_SHAPE_API void matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat);
 
         /**
-         * \brief Converts a quaternion-plus-translation representation back to an affine 4x4 transformation matrix.
+         * \brief Converts a quaternion-plus-translation representation back to an affine <em>4&times;4</em> transformation matrix.
          * \param quat The input Shape::QuaternionTransformation (\e 4 quaternion + \e 3 translation components).
          * \param mtx The output transformation matrix.
          */

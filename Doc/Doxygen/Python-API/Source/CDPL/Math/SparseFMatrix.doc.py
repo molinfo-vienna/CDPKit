@@ -37,7 +37,7 @@ class SparseFMatrix(Boost.Python.instance):
     def __init__(m: SparseFMatrix) -> None: pass
 
     ##
-    # \brief Constructs a sparse matrix of size \f$ m \times n \f$ with no stored entries.
+    # \brief Constructs a sparse matrix of size <em>m&times;n</em> with no stored entries.
     # 
     # \param m The number of rows.
     # \param n The number of columns.
@@ -77,7 +77,7 @@ class SparseFMatrix(Boost.Python.instance):
     def __init__(a: object) -> None: pass
 
     ##
-    # \brief Resizes the logical dimensions to \f$ m \times n \f$, dropping any stored entries that fall outside the new bounds.
+    # \brief Resizes the logical dimensions to <em>m&times;n</em>, dropping any stored entries that fall outside the new bounds.
     # 
     # \param m The new row count.
     # \param n The new column count.

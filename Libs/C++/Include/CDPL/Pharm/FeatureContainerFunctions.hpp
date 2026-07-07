@@ -156,7 +156,7 @@ namespace CDPL
          * \brief Applies the affine transformation \a mtx to the 3D position property and, if set, the orientation property of every
          *        feature in the feature container \a cntr.
          * \param cntnr The feature container to transform.
-         * \param mtx The 4x4 transformation matrix.
+         * \param mtx The <em>4&times;4</em> transformation matrix.
          */
         CDPL_PHARM_API void transform3DCoordinates(FeatureContainer& cntnr, const Math::Matrix4D& mtx);
 
@@ -171,7 +171,7 @@ namespace CDPL
          * \param ftr_cntnr The feature container providing the exclusion volume features.
          * \param atom_cntnr The atom container providing the test atoms.
          * \param coords_func The function returning the 3D coordinates of an atom.
-         * \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
+         * \param xform The <em>4&times;4</em> transformation applied to the atom coordinates before the clash test.
          * \param vdw_factor Scaling factor for the per-atom Van der Waals radii. If &le; \e 0 the atoms are treated as point particles.
          * \return \c true if no clash is detected, and \c false otherwise.
          */

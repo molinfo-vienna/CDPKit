@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
+         * \brief Half-open index range <em>[start, stop)</em> used for slicing vector and matrix expressions.
          * \tparam S The integral size/index type.
          */
         template <typename S>
@@ -57,13 +57,13 @@ namespace CDPL
             typedef S SizeType;
 
             /**
-             * \brief Constructs an empty range \f$ [0, 0) \f$.
+             * \brief Constructs an empty range [0, 0).
              */
             Range():
                 start(0), stop(0) {}
 
             /**
-             * \brief Constructs the range \f$ [start, stop) \f$.
+             * \brief Constructs the range [\a start, \a stop).
              * \param start The lower (inclusive) bound.
              * \param stop The upper (exclusive) bound.
              * \throw Base::RangeError if \a start \> \a stop.
@@ -75,10 +75,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Maps the local position \a i to the global index \a start + \a i.
+             * \brief Maps the local position \a i to the global index \f$ start + i \f$.
              * \param i The zero-based local position.
              * \return The global index.
-             * \throw Base::IndexError if \a i is not in the range \f$ [0, size) \f$.
+             * \throw Base::IndexError if \a i is not in the range [0, getSize()).
              */
             SizeType operator()(SizeType i) const
             {
@@ -105,7 +105,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the size of the range, \f$ stop - start \f$.
+             * \brief Returns the size of the range.
              * \return The range size.
              */
             SizeType getSize() const
@@ -171,7 +171,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Convenience factory for Math::Range with \c std::size_t indices.
+         * \brief Convenience factory function for Math::Range with \c std::size_t indices.
          * \param start The lower (inclusive) bound.
          * \param stop The upper (exclusive) bound.
          * \return The constructed Math::Range instance.

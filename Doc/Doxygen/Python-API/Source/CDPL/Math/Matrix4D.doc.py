@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bounded 4x4 matrix holding floating-point values of type <tt>double</tt>.
+# \brief Bounded <em>4&times;4</em> matrix holding floating-point values of type <tt>double</tt>.
 # 
 class Matrix4D(Boost.Python.instance):
 
     ##
-    # \brief Constructs a zero-initialized \f$ M \times N \f$ matrix.
+    # \brief Constructs a zero-initialized <em>M&times;N</em> matrix.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs an \f$ M \times N \f$ matrix with every element initialized to <em>v</em>.
+    # \brief Constructs an <em>M&times;N</em> matrix with every element initialized to <em>v</em>.
     # 
     # \param v The initial element value.
     # 

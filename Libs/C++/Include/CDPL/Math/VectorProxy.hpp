@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Vector-expression proxy that views a contiguous half-open subrange of an underlying vector.
+         * \brief Vector expression proxy that views a contiguous half-open subrange of an underlying vector.
          * \tparam V The wrapped vector type.
          */
         template <typename V>
@@ -75,12 +75,12 @@ namespace CDPL
             typedef typename V::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename V::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped vector is \c const).
              */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
@@ -137,7 +137,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at index \a i of the view (alias for operator()).
+             * \brief Returns a mutable reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
              * \return A mutable reference to the underlying element.
              */
@@ -147,7 +147,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i of the view (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
              * \return A \c const reference to the underlying element.
              */
@@ -343,7 +343,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Vector-expression proxy that views a strided slice of an underlying vector.
+         * \brief Vector expression proxy that views a strided slice of an underlying vector.
          * \tparam V The wrapped vector type.
          */
         template <typename V>
@@ -374,12 +374,12 @@ namespace CDPL
             typedef typename V::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename V::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped vector is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped vector is \c const).
              */
             typedef typename std::conditional<std::is_const<V>::value,
                                               typename V::ConstReference,
@@ -436,7 +436,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at index \a i of the view (alias for operator()).
+             * \brief Returns a mutable reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
              * \return A mutable reference to the underlying element.
              */
@@ -446,7 +446,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at index \a i of the view (alias for operator()).
+             * \brief Returns a \c const reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
              * \return A \c const reference to the underlying element.
              */

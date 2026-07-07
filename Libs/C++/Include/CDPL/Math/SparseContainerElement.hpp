@@ -73,12 +73,12 @@ namespace CDPL
             typedef typename ContainerType::SizeType       SizeType;
 
             /**
-             * \brief Mutable reference type to a value.
+             * \brief Mutable element value reference type.
              */
             typedef ValueType&                             Reference;
 
             /**
-             * \brief Constant reference type to a value (as defined by the container).
+             * \brief Constant element value reference type (as defined by the container).
              */
             typedef typename ContainerType::ConstReference ConstReference;
 

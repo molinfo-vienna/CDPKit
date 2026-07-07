@@ -47,7 +47,7 @@ namespace CDPL
         class GridContainer;
 
         /**
-         * \brief Expression-template node applying a unary functor \a F element-wise to a grid expression \a E.
+         * \brief Expression template node applying a unary functor \a F element-wise to a grid expression \a E.
          * \tparam E The wrapped grid expression type.
          * \tparam F The unary functor type.
          */
@@ -67,12 +67,12 @@ namespace CDPL
             typedef typename F::ResultType     ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType            ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType            Reference;
 
@@ -97,7 +97,7 @@ namespace CDPL
             typedef typename E::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e.
+             * \brief Constructs the expression template node wrapping \a e.
              * \param e The grid expression to wrap.
              */
             GridUnary(const ExpressionType& e):
@@ -105,7 +105,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the first dimension.
-             * \return The wrapped expression's first-dimension size.
+             * \return The wrapped expression's size in the first dimension.
              */
             SizeType getSize1() const
             {
@@ -114,7 +114,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the second dimension.
-             * \return The wrapped expression's second-dimension size.
+             * \return The wrapped expression's size in the second dimension.
              */
             SizeType getSize2() const
             {
@@ -123,7 +123,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the third dimension.
-             * \return The wrapped expression's third-dimension size.
+             * \return The wrapped expression's size in the third dimension.
              */
             SizeType getSize3() const
             {
@@ -132,9 +132,9 @@ namespace CDPL
 
             /**
              * \brief Applies the unary functor to the element at (\a i, \a j, \a k) of the wrapped expression and returns the result.
-             * \param i The zero-based first-dimension index.
-             * \param j The zero-based second-dimension index.
-             * \param k The zero-based third-dimension index.
+             * \param i The zero-based first dimension index.
+             * \param j The zero-based second dimension index.
+             * \param k The zero-based third dimension index.
              * \return The element value as transformed by the functor.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -147,7 +147,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::GridUnary instantiation <\a E, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::GridUnary instantiation <\a E, \a F>.
          * \tparam E The grid expression type.
          * \tparam F The unary functor type.
          */
@@ -156,18 +156,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef GridUnary<E, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType  ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two grid expressions \a E1 and \a E2 element-wise via the binary functor \a F.
+         * \brief Expression template node combining two grid expressions \a E1 and \a E2 element-wise via the binary functor \a F.
          * \tparam E1 The first wrapped grid expression type.
          * \tparam E2 The second wrapped grid expression type.
          * \tparam F The binary functor type.
@@ -190,12 +190,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -220,7 +220,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first grid expression.
              * \param e2 The second grid expression.
              */
@@ -229,8 +229,8 @@ namespace CDPL
 
             /**
              * \brief Returns the size along the first dimension after verifying that both wrapped expressions agree on it.
-             * \return The first-dimension size.
-             * \throw Base::SizeError if the two wrapped expressions report different first-dimension sizes.
+             * \return The size in the first dimension.
+             * \throw Base::SizeError if the two wrapped expressions report different first dimension sizes.
              */
             SizeType getSize1() const
             {
@@ -239,8 +239,8 @@ namespace CDPL
 
             /**
              * \brief Returns the size along the second dimension after verifying that both wrapped expressions agree on it.
-             * \return The second-dimension size.
-             * \throw Base::SizeError if the two wrapped expressions report different second-dimension sizes.
+             * \return The size in the second dimension.
+             * \throw Base::SizeError if the two wrapped expressions report different second dimension sizes.
              */
             SizeType getSize2() const
             {
@@ -249,8 +249,8 @@ namespace CDPL
 
             /**
              * \brief Returns the size along the third dimension after verifying that both wrapped expressions agree on it.
-             * \return The third-dimension size.
-             * \throw Base::SizeError if the two wrapped expressions report different third-dimension sizes.
+             * \return The size in the third dimension.
+             * \throw Base::SizeError if the two wrapped expressions report different third dimension sizes.
              */
             SizeType getSize3() const
             {
@@ -259,9 +259,9 @@ namespace CDPL
 
             /**
              * \brief Applies the binary functor to the elements at (\a i, \a j, \a k) of the two wrapped expressions and returns the result.
-             * \param i The zero-based first-dimension index.
-             * \param j The zero-based second-dimension index.
-             * \param k The zero-based third-dimension index.
+             * \param i The zero-based first dimension index.
+             * \param j The zero-based second dimension index.
+             * \param k The zero-based third dimension index.
              * \return The element value as combined by the functor.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -275,7 +275,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::GridBinary1 instantiation Binary <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::GridBinary1 instantiation Binary <\a E1, \a E2, \a F>.
          * \tparam E1 The first grid expression type.
          * \tparam E2 The second grid expression type.
          * \tparam F The binary functor type.
@@ -285,18 +285,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef GridBinary1<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType         ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a scalar \a E1 (lhs) and a grid expression \a E2 (rhs) element-wise via the binary functor \a F.
+         * \brief Expression template node combining a scalar \a E1 (lhs) and a grid expression \a E2 (rhs) element-wise via the binary functor \a F.
          * \tparam E1 The scalar type appearing on the left-hand side.
          * \tparam E2 The wrapped grid expression type.
          * \tparam F The binary functor type.
@@ -319,12 +319,12 @@ namespace CDPL
             typedef typename F::ResultType      ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType             ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType             Reference;
 
@@ -349,7 +349,7 @@ namespace CDPL
             typedef typename E2::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node combining the scalar \a e1 and the grid expression \a e2.
+             * \brief Constructs the expression template node combining the scalar \a e1 and the grid expression \a e2.
              * \param e1 The scalar value on the left-hand side.
              * \param e2 The grid expression on the right-hand side.
              */
@@ -358,7 +358,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the first dimension.
-             * \return The wrapped expression's first-dimension size.
+             * \return The wrapped expression's size in the first dimension.
              */
             SizeType getSize1() const
             {
@@ -367,7 +367,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the second dimension.
-             * \return The wrapped expression's second-dimension size.
+             * \return The wrapped expression's size in the second dimension.
              */
             SizeType getSize2() const
             {
@@ -376,7 +376,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the third dimension.
-             * \return The wrapped expression's third-dimension size.
+             * \return The wrapped expression's size in the third dimension.
              */
             SizeType getSize3() const
             {
@@ -385,9 +385,9 @@ namespace CDPL
 
             /**
              * \brief Applies the binary functor to the scalar and the element at (\a i, \a j, \a k) of the wrapped grid expression and returns the result.
-             * \param i The zero-based first-dimension index.
-             * \param j The zero-based second-dimension index.
-             * \param k The zero-based third-dimension index.
+             * \param i The zero-based first dimension index.
+             * \param j The zero-based second dimension index.
+             * \param k The zero-based third dimension index.
              * \return The element value as combined by the functor.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -401,7 +401,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1GridBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar1GridBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The scalar type on the left-hand side.
          * \tparam E2 The grid expression type.
          * \tparam F The binary functor type.
@@ -410,18 +410,18 @@ namespace CDPL
         struct Scalar1GridBinaryTraits
         {
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar1GridBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType               ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a grid expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
+         * \brief Expression template node combining a grid expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
          * \tparam E1 The wrapped grid expression type.
          * \tparam E2 The scalar type appearing on the right-hand side.
          * \tparam F The binary functor type.
@@ -444,12 +444,12 @@ namespace CDPL
             typedef typename F::ResultType      ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType             ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType             Reference;
 
@@ -474,7 +474,7 @@ namespace CDPL
             typedef typename E1::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node combining the grid expression \a e1 and the scalar \a e2.
+             * \brief Constructs the expression template node combining the grid expression \a e1 and the scalar \a e2.
              * \param e1 The grid expression on the left-hand side.
              * \param e2 The scalar value on the right-hand side.
              */
@@ -483,7 +483,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the first dimension.
-             * \return The wrapped expression's first-dimension size.
+             * \return The wrapped expression's size in the first dimension.
              */
             SizeType getSize1() const
             {
@@ -492,7 +492,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the second dimension.
-             * \return The wrapped expression's second-dimension size.
+             * \return The wrapped expression's size in the second dimension.
              */
             SizeType getSize2() const
             {
@@ -501,7 +501,7 @@ namespace CDPL
 
             /**
              * \brief Returns the size of the wrapped grid expression along the third dimension.
-             * \return The wrapped expression's third-dimension size.
+             * \return The wrapped expression's size in the third dimension.
              */
             SizeType getSize3() const
             {
@@ -510,9 +510,9 @@ namespace CDPL
 
             /**
              * \brief Applies the binary functor to the element at (\a i, \a j, \a k) of the wrapped grid expression and the scalar and returns the result.
-             * \param i The zero-based first-dimension index.
-             * \param j The zero-based second-dimension index.
-             * \param k The zero-based third-dimension index.
+             * \param i The zero-based first dimension index.
+             * \param j The zero-based second dimension index.
+             * \param k The zero-based third dimension index.
              * \return The element value as combined by the functor.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -526,7 +526,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2GridBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar2GridBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The grid expression type.
          * \tparam E2 The scalar type on the right-hand side.
          * \tparam F The binary functor type.
@@ -536,12 +536,12 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar2GridBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType               ResultType;
         };
@@ -550,7 +550,7 @@ namespace CDPL
          * \brief Returns the element-wise negation of the grid expression \a e.
          * \tparam E The grid expression type.
          * \param e The grid expression.
-         * \return An expression-template node representing \f$ -e \f$.
+         * \return An expression template node representing \f$ -e \f$.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarNegation<typename E::ValueType> >::ResultType
@@ -568,7 +568,6 @@ namespace CDPL
          * \return A \c const reference to \a e.
          */
         template <typename E>
-
         const E&
         operator+(const GridExpression<E>& e)
         {
@@ -581,7 +580,7 @@ namespace CDPL
          * \tparam E2 The second grid expression type.
          * \param e1 The first grid expression.
          * \param e2 The second grid expression.
-         * \return An expression-template node representing \f$ e_1 + e_2 \f$.
+         * \return An expression template node representing \f$ e_1 + e_2 \f$.
          */
         template <typename E1, typename E2>
         typename GridBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -599,7 +598,7 @@ namespace CDPL
          * \tparam E2 The second grid expression type.
          * \param e1 The first grid expression.
          * \param e2 The second grid expression.
-         * \return An expression-template node representing \f$ e_1 - e_2 \f$.
+         * \return An expression template node representing \f$ e_1 - e_2 \f$.
          */
         template <typename E1, typename E2>
         typename GridBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -617,7 +616,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The grid expression.
          * \param t The scalar multiplier.
-         * \return An expression-template node representing \f$ e \cdot t \f$.
+         * \return An expression template node representing \f$ e \cdot t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2GridBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
@@ -635,7 +634,7 @@ namespace CDPL
          * \tparam E The grid expression type.
          * \param t The scalar multiplier.
          * \param e The grid expression.
-         * \return An expression-template node representing \f$ t \cdot e \f$.
+         * \return An expression template node representing \f$ t \cdot e \f$.
          */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1GridBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
@@ -653,7 +652,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The grid expression.
          * \param t The scalar divisor.
-         * \return An expression-template node representing \f$ e / t \f$.
+         * \return An expression template node representing \f$ e / t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2GridBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
@@ -716,7 +715,7 @@ namespace CDPL
          * \brief Returns the element-wise complex conjugate of the grid expression \a e (identity for real-valued grids).
          * \tparam E The grid expression type.
          * \param e The grid expression.
-         * \return An expression-template node representing \f$ \overline{e} \f$.
+         * \return An expression template node representing \f$ \overline{e} \f$.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
@@ -731,7 +730,7 @@ namespace CDPL
          * \brief Returns the Hermitian conjugate of the grid expression \a e (alias of conj() for grids).
          * \tparam E The grid expression type.
          * \param e The grid expression.
-         * \return An expression-template node representing \f$ \overline{e} \f$.
+         * \return An expression template node representing \f$ \overline{e} \f$.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
@@ -746,7 +745,7 @@ namespace CDPL
          * \brief Returns the element-wise real part of the grid expression \a e.
          * \tparam E The grid expression type.
          * \param e The grid expression.
-         * \return An expression-template node representing the real part of \a e.
+         * \return An expression template node representing the real part of \a e.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
@@ -761,7 +760,7 @@ namespace CDPL
          * \brief Returns the element-wise imaginary part of the grid expression \a e.
          * \tparam E The grid expression type.
          * \param e The grid expression.
-         * \return An expression-template node representing the imaginary part of \a e.
+         * \return An expression template node representing the imaginary part of \a e.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
@@ -778,7 +777,7 @@ namespace CDPL
          * \tparam E2 The second grid expression type.
          * \param e1 The numerator grid expression.
          * \param e2 The denominator grid expression.
-         * \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         * \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
          */
         template <typename E1, typename E2>
         typename GridBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -796,7 +795,7 @@ namespace CDPL
          * \tparam E2 The second grid expression type.
          * \param e1 The first grid expression.
          * \param e2 The second grid expression.
-         * \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         * \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename GridBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType

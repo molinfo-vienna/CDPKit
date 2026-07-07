@@ -75,7 +75,7 @@ namespace CDPL
         CDPL_CHEM_API void set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coords);
 
         /**
-         * \brief Transforms the 2D coordinates of all atoms in \a cntnr by the affine 3&times;3 matrix \a mtx.
+         * \brief Transforms the 2D coordinates of all atoms in \a cntnr by the affine <em>3&times;3</em> matrix \a mtx.
          * \param cntnr The atom container.
          * \param mtx The 2D affine transformation matrix.
          */
@@ -137,17 +137,17 @@ namespace CDPL
         CDPL_CHEM_API void addConformation(AtomContainer& cntnr, const Math::Vector3DArray& coords);
 
         /**
-         * \brief Transforms the conformation at index \a conf_idx by the homogeneous 4&times;4 matrix \a mtx.
+         * \brief Transforms the conformation at index \a conf_idx by the homogeneous <em>4&times;4</em> matrix \a mtx.
          * \param cntnr The atom container.
          * \param conf_idx The zero-based conformation index.
-         * \param mtx The homogeneous 4&times;4 transformation matrix.
+         * \param mtx The homogeneous <em>4&times;4</em> transformation matrix.
          */
         CDPL_CHEM_API void transformConformation(AtomContainer& cntnr, std::size_t conf_idx, const Math::Matrix4D& mtx);
 
         /**
-         * \brief Transforms every stored conformation of the atoms in \a cntnr by the homogeneous 4&times;4 matrix \a mtx.
+         * \brief Transforms every stored conformation of the atoms in \a cntnr by the homogeneous <em>4&times;4</em> matrix \a mtx.
          * \param cntnr The atom container.
-         * \param mtx The homogeneous 4&times;4 transformation matrix.
+         * \param mtx The homogeneous <em>4&times;4</em> transformation matrix.
          */
         CDPL_CHEM_API void transformConformations(AtomContainer& cntnr, const Math::Matrix4D& mtx);
 

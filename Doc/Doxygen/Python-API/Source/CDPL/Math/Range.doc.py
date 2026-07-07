@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
+# \brief Half-open index range <em>[start, stop)</em> used for slicing vector and matrix expressions.
 # 
 class Range(Boost.Python.instance):
 
     ##
-    # \brief Constructs an empty range \f$ [0, 0) \f$.
+    # \brief Constructs an empty range [0, 0).
     # 
     def __init__() -> None: pass
 
@@ -36,7 +36,7 @@ class Range(Boost.Python.instance):
     def __init__(r: Range) -> None: pass
 
     ##
-    # \brief Constructs the range \f$ [start, stop) \f$.
+    # \brief Constructs the range [<em>start</em>, <em>stop</em>).
     # 
     # \param start The lower (inclusive) bound.
     # \param stop The upper (exclusive) bound.
@@ -60,7 +60,7 @@ class Range(Boost.Python.instance):
     def getStop() -> int: pass
 
     ##
-    # \brief Returns the size of the range, \f$ stop - start \f$.
+    # \brief Returns the size of the range.
     # 
     # \return The range size.
     # 
@@ -125,13 +125,13 @@ class Range(Boost.Python.instance):
     def __ne__(r: Range) -> bool: pass
 
     ##
-    # \brief Maps the local position <em>i</em> to the global index <em>start</em> + <em>i</em>.
+    # \brief Maps the local position <em>i</em> to the global index \f$ start + i \f$.
     # 
     # \param i The zero-based local position.
     # 
     # \return The global index. 
     # 
-    # \throw Base.IndexError if <em>i</em> is not in the range \f$ [0, size) \f$.
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, getSize()).
     # 
     def __call__(i: int) -> int: pass
 

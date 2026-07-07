@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bounded 3x3 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief Bounded <em>3&times;3</em> matrix holding unsigned integers of type <tt>unsigned long</tt>.
 # 
 class Matrix3UL(Boost.Python.instance):
 
     ##
-    # \brief Constructs a zero-initialized \f$ M \times N \f$ matrix.
+    # \brief Constructs a zero-initialized <em>M&times;N</em> matrix.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs an \f$ M \times N \f$ matrix with every element initialized to <em>v</em>.
+    # \brief Constructs an <em>M&times;N</em> matrix with every element initialized to <em>v</em>.
     # 
     # \param v The initial element value.
     # 

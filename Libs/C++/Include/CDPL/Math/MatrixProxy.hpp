@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Vector-expression proxy that views a single row of an underlying matrix.
+         * \brief Vector expression proxy that views a single row of an underlying matrix.
          * \tparam M The wrapped matrix type.
          */
         template <typename M>
@@ -76,12 +76,12 @@ namespace CDPL
             typedef typename M::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename M::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped matrix is \c const).
              */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
@@ -133,7 +133,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at column \a i of the row (alias for operator()).
+             * \brief Returns a mutable reference to the element at column \a i of the row.
              * \param i The zero-based column index.
              * \return A mutable reference to the underlying element.
              */
@@ -143,7 +143,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at column \a i of the row (alias for operator()).
+             * \brief Returns a \c const reference to the element at column \a i of the row.
              * \param i The zero-based column index.
              * \return A \c const reference to the underlying element.
              */
@@ -338,7 +338,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Vector-expression proxy that views a single column of an underlying matrix.
+         * \brief Vector expression proxy that views a single column of an underlying matrix.
          * \tparam M The wrapped matrix type.
          */
         template <typename M>
@@ -369,12 +369,12 @@ namespace CDPL
             typedef typename M::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename M::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped matrix is \c const).
              */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
@@ -426,7 +426,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the element at row \a i of the column (alias for operator()).
+             * \brief Returns a mutable reference to the element at row \a i of the column.
              * \param i The zero-based row index.
              * \return A mutable reference to the underlying element.
              */
@@ -436,7 +436,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the element at row \a i of the column (alias for operator()).
+             * \brief Returns a \c const reference to the element at row \a i of the column.
              * \param i The zero-based row index.
              * \return A \c const reference to the underlying element.
              */
@@ -631,7 +631,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Matrix-expression proxy that views a contiguous rectangular subrange of an underlying matrix.
+         * \brief Matrix expression proxy that views a contiguous rectangular subrange of an underlying matrix.
          * \tparam M The wrapped matrix type.
          */
         template <typename M>
@@ -662,12 +662,12 @@ namespace CDPL
             typedef typename M::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename M::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped matrix is \c const).
              */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
@@ -931,7 +931,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Matrix-expression proxy that views a strided rectangular slice of an underlying matrix.
+         * \brief Matrix expression proxy that views a strided rectangular slice of an underlying matrix.
          * \tparam M The wrapped matrix type.
          */
         template <typename M>
@@ -962,12 +962,12 @@ namespace CDPL
             typedef typename M::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element.
+             * \brief Constant element reference type.
              */
             typedef typename M::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped matrix is \c const).
              */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,
@@ -1249,112 +1249,112 @@ namespace CDPL
         };
 
         /**
-         * \brief Vector-temporary trait specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<MatrixRow<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Vector-temporary trait specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixRow<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for Math::MatrixRow — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixRow<M> > : public MatrixTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for \c const Math::MatrixRow — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixRow<M> > : public MatrixTemporaryTraits<M>
         {};
 
         /**
-         * \brief Vector-temporary trait specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<MatrixColumn<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Vector-temporary trait specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixColumn<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixColumn<M> > : public MatrixTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for \c const Math::MatrixColumn — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixColumn<M> > : public MatrixTemporaryTraits<M>
         {};
 
         /**
-         * \brief Vector-temporary trait specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<MatrixRange<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Vector-temporary trait specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixRange<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for Math::MatrixRange — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixRange<M> > : public MatrixTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for \c const Math::MatrixRange — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixRange<M> > : public MatrixTemporaryTraits<M>
         {};
 
         /**
-         * \brief Vector-temporary trait specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<MatrixSlice<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Vector-temporary trait specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         * \brief Math::VectorTemporaryTraits specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct VectorTemporaryTraits<const MatrixSlice<M> > : public VectorTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<MatrixSlice<M> > : public MatrixTemporaryTraits<M>
         {};
 
         /**
-         * \brief Matrix-temporary trait specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
+         * \brief Math::MatrixTemporaryTraits specialization for \c const Math::MatrixSlice — inherits the temporary type from the wrapped matrix.
          */
         template <typename M>
         struct MatrixTemporaryTraits<const MatrixSlice<M> > : public MatrixTemporaryTraits<M>

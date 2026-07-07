@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Index slice ( \f$ start, stride, size \f$) used for strided slicing of vector and matrix expressions.
+# \brief Index slice <em>(start, stride, size )</em> used for strided slicing of vector and matrix expressions.
 # 
 # Local position <em>i</em> is mapped to the global index \f$ start + i \cdot stride \f$. Negative strides (reverse iteration) are supported as long as the resulting indices stay non-negative.
 # 
@@ -134,7 +134,7 @@ class Slice(Boost.Python.instance):
     # 
     # \return The global index. 
     # 
-    # \throw Base.IndexError if <em>i</em> is not in the range \f$ [0, size) \f$.
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, getSize()).
     # 
     def __call__(i: int) -> int: pass
 

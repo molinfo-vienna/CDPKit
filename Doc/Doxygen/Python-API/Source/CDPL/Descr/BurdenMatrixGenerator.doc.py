@@ -22,7 +22,7 @@
 ##
 # \brief Calculation of the <em>Burden</em> matrix of a molecular graph.
 # 
-# The <em>Burden</em> matrix is a square matrix of dimension <em>N &times; N</em>, where <em>N</em> is the number of atoms of the molecular graph. The diagonal elements default to the atom type but can be replaced via a user-supplied atom weight function (see setAtomWeightFunction()). The off-diagonal elements encode the bond orders of the connecting bonds.
+# The <em>Burden</em> matrix is a square matrix of dimension <em>N&times;N</em>, where <em>N</em> is the number of atoms of the molecular graph. The diagonal elements default to the atom type but can be replaced via a user-supplied atom weight function (see setAtomWeightFunction()). The off-diagonal elements encode the bond orders of the connecting bonds.
 # 
 # \see [\ref BURMA]
 # 

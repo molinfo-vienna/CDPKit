@@ -81,8 +81,8 @@ namespace CDPL
              * \brief Computes the rigid body transformation that aligns a set of \f$ N \f$ \f$ D \f$-dimensional points
              *        \a points with a corresponding set of reference points \a ref_points at a minimum RMSD.
              *
-             * \param points A \f$ D \times N \f$-matrix storing the points to align as column vectors.
-             * \param ref_points A \f$ D \times N \f$-matrix storing the reference points as column vectors.
+             * \param points A <em>D&times;N</em>-matrix storing the points to align as column vectors.
+             * \param ref_points A <em>D&times;N</em>-matrix storing the reference points as column vectors.
              * \param weights A \f$ N \f$-dimensional vector storing the non-negative weights that are assigned to the points.
              * \param do_center \c true if centering of the data points needs to be performed, and \c false if not.
              * \param max_svd_iter The maximum number of iterations to perform in the SV-decomposition, or \e 0 if no limit. 
@@ -159,8 +159,8 @@ namespace CDPL
              * \brief Computes the rigid body transformation that aligns a set of \f$ N \f$ \f$ D \f$-dimensional points
              *        \a points with a corresponding set of reference points \a ref_points at a minimum RMSD.
              *
-             * \param points A \f$ D \times N \f$-matrix storing the points to align as column vectors.
-             * \param ref_points A \f$ D \times N \f$-matrix storing the reference points as column vectors.
+             * \param points A <em>D&times;N</em>-matrix storing the points to align as column vectors.
+             * \param ref_points A <em>D&times;N</em>-matrix storing the reference points as column vectors.
              * \param do_center \c true if centering of the data points needs to be performed, and \c false if not.
              * \param max_svd_iter The maximum number of iterations to perform in the SV-decomposition, or \e 0 if no limit. 
              * \return \c true if convergence in the internal SV-decomposition has been reached in \a max_svd_iter iterations, and \c false otherwise. 

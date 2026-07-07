@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Expression-template node applying a unary functor \a F element-wise to a vector expression \a E.
+         * \brief Expression template node applying a unary functor \a F element-wise to a vector expression \a E.
          * \tparam E The wrapped vector expression type.
          * \tparam F The unary functor type.
          */
@@ -64,12 +64,12 @@ namespace CDPL
             typedef typename F::ResultType     ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType            ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType            Reference;
 
@@ -94,7 +94,7 @@ namespace CDPL
             typedef typename E::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e.
+             * \brief Constructs the expression template node wrapping \a e.
              * \param e The vector expression to wrap.
              */
             VectorUnary(const ExpressionType& e):
@@ -134,7 +134,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::VectorUnary instantiation <\a E, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::VectorUnary instantiation <\a E, \a F>.
          * \tparam E The vector expression type.
          * \tparam F The unary functor type.
          */
@@ -143,18 +143,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef VectorUnary<E, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType    ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two vector expressions \a E1 and \a E2 element-wise via the binary functor \a F.
+         * \brief Expression template node combining two vector expressions \a E1 and \a E2 element-wise via the binary functor \a F.
          * \tparam E1 The first wrapped vector expression type.
          * \tparam E2 The second wrapped vector expression type.
          * \tparam F The binary functor type.
@@ -177,12 +177,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -207,7 +207,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first vector expression.
              * \param e2 The second vector expression.
              */
@@ -250,7 +250,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::VectorBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::VectorBinary1 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
          * \tparam F The binary functor type.
@@ -260,18 +260,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef VectorBinary1<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType           ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two vector expressions \a E1 and \a E2 via a binary functor \a F
+         * \brief Expression template node combining two vector expressions \a E1 and \a E2 via a binary functor \a F
          *        invoked with both expressions plus the element index \e i.
          *
          * Unlike Math::VectorBinary1 (which is element-wise), the functor here receives both expressions verbatim
@@ -299,12 +299,12 @@ namespace CDPL
             typedef typename F::ResultType                                                              ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType                                                                     ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType                                                                     Reference;
 
@@ -329,7 +329,7 @@ namespace CDPL
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first vector expression.
              * \param e2 The second vector expression.
              */
@@ -372,7 +372,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::VectorBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::VectorBinary2 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
          * \tparam F The binary functor type.
@@ -382,18 +382,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef VectorBinary2<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType           ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a scalar \a E1 (lhs) and a vector expression \a E2 (rhs) element-wise via the binary functor \a F.
+         * \brief Expression template node combining a scalar \a E1 (lhs) and a vector expression \a E2 (rhs) element-wise via the binary functor \a F.
          * \tparam E1 The scalar type appearing on the left-hand side.
          * \tparam E2 The wrapped vector expression type.
          * \tparam F The binary functor type.
@@ -416,12 +416,12 @@ namespace CDPL
             typedef typename F::ResultType      ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType             ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType             Reference;
 
@@ -446,7 +446,7 @@ namespace CDPL
             typedef typename E2::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node combining the scalar \a e1 and the vector expression \a e2.
+             * \brief Constructs the expression template node combining the scalar \a e1 and the vector expression \a e2.
              * \param e1 The scalar value on the left-hand side.
              * \param e2 The vector expression on the right-hand side.
              */
@@ -488,7 +488,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1VectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar1VectorBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The scalar type on the left-hand side.
          * \tparam E2 The vector expression type.
          * \tparam F The binary functor type.
@@ -498,18 +498,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar1VectorBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                 ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a vector expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
+         * \brief Expression template node combining a vector expression \a E1 (lhs) and a scalar \a E2 (rhs) element-wise via the binary functor \a F.
          * \tparam E1 The wrapped vector expression type.
          * \tparam E2 The scalar type appearing on the right-hand side.
          * \tparam F The binary functor type.
@@ -532,12 +532,12 @@ namespace CDPL
             typedef typename F::ResultType      ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType             ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType             Reference;
 
@@ -562,7 +562,7 @@ namespace CDPL
             typedef typename E1::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node combining the vector expression \a e1 and the scalar \a e2.
+             * \brief Constructs the expression template node combining the vector expression \a e1 and the scalar \a e2.
              * \param e1 The vector expression on the left-hand side.
              * \param e2 The scalar value on the right-hand side.
              */
@@ -604,7 +604,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2VectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar2VectorBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The vector expression type.
          * \tparam E2 The scalar type on the right-hand side.
          * \tparam F The binary functor type.
@@ -614,18 +614,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar2VectorBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                 ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a quaternion expression \a E1 and a vector expression \a E2
+         * \brief Expression template node combining a quaternion expression \a E1 and a vector expression \a E2
          *        into a vector expression via the per-element functor \a F (used e.g. for quaternion-vector rotation).
          * \tparam E1 The wrapped quaternion expression type.
          * \tparam E2 The wrapped vector expression type.
@@ -649,12 +649,12 @@ namespace CDPL
             typedef typename F::ResultType      ValueType;
 
             /**
-             * \brief Constant reference type to an element value.
+             * \brief Constant element reference type.
              */
             typedef const ValueType             ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable element reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType             Reference;
 
@@ -679,7 +679,7 @@ namespace CDPL
             typedef typename E2::DifferenceType DifferenceType;
 
             /**
-             * \brief Constructs the expression-template node combining the quaternion expression \a e1 and the vector expression \a e2.
+             * \brief Constructs the expression template node combining the quaternion expression \a e1 and the vector expression \a e2.
              * \param e1 The quaternion expression.
              * \param e2 The vector expression.
              */
@@ -721,7 +721,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionVectorBinary instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::QuaternionVectorBinary instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The quaternion expression type.
          * \tparam E2 The vector expression type.
          * \tparam F The binary functor type.
@@ -731,12 +731,12 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef QuaternionVectorBinary<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                    ResultType;
         };
@@ -745,7 +745,7 @@ namespace CDPL
          * \brief Returns the element-wise negation of the vector expression \a e.
          * \tparam E The vector expression type.
          * \param e The vector expression.
-         * \return An expression-template node representing \f$ -e \f$.
+         * \return An expression template node representing \f$ -e \f$.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarNegation<typename E::ValueType> >::ResultType
@@ -775,7 +775,7 @@ namespace CDPL
          * \tparam E2 The second vector expression type.
          * \param e1 The first vector expression.
          * \param e2 The second vector expression.
-         * \return An expression-template node representing \f$ e_1 + e_2 \f$.
+         * \return An expression template node representing \f$ e_1 + e_2 \f$.
          */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -793,7 +793,7 @@ namespace CDPL
          * \tparam E2 The second vector expression type.
          * \param e1 The first vector expression.
          * \param e2 The second vector expression.
-         * \return An expression-template node representing \f$ e_1 - e_2 \f$.
+         * \return An expression template node representing \f$ e_1 - e_2 \f$.
          */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -811,7 +811,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The vector expression.
          * \param t The scalar multiplier.
-         * \return An expression-template node representing \f$ e \cdot t \f$.
+         * \return An expression template node representing \f$ e \cdot t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2VectorBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
@@ -829,7 +829,7 @@ namespace CDPL
          * \tparam E The vector expression type.
          * \param t The scalar multiplier.
          * \param e The vector expression.
-         * \return An expression-template node representing \f$ t \cdot e \f$.
+         * \return An expression template node representing \f$ t \cdot e \f$.
          */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1VectorBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
@@ -847,7 +847,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The vector expression.
          * \param t The scalar divisor.
-         * \return An expression-template node representing \f$ e / t \f$.
+         * \return An expression template node representing \f$ e / t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2VectorBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
@@ -910,7 +910,7 @@ namespace CDPL
          * \brief Returns the element-wise complex conjugate of the vector expression \a e (identity for real-valued vectors).
          * \tparam E The vector expression type.
          * \param e The vector expression.
-         * \return An expression-template node representing \f$ \overline{e} \f$.
+         * \return An expression template node representing \f$ \overline{e} \f$.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
@@ -925,7 +925,7 @@ namespace CDPL
          * \brief Returns the Hermitian conjugate of the vector expression \a e (alias of conj() for vectors).
          * \tparam E The vector expression type.
          * \param e The vector expression.
-         * \return An expression-template node representing \f$ \overline{e} \f$.
+         * \return An expression template node representing \f$ \overline{e} \f$.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
@@ -940,7 +940,7 @@ namespace CDPL
          * \brief Returns the element-wise real part of the vector expression \a e.
          * \tparam E The vector expression type.
          * \param e The vector expression.
-         * \return An expression-template node representing the real part of \a e.
+         * \return An expression template node representing the real part of \a e.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
@@ -955,7 +955,7 @@ namespace CDPL
          * \brief Returns the element-wise imaginary part of the vector expression \a e.
          * \tparam E The vector expression type.
          * \param e The vector expression.
-         * \return An expression-template node representing the imaginary part of \a e.
+         * \return An expression template node representing the imaginary part of \a e.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
@@ -972,7 +972,7 @@ namespace CDPL
          * \tparam E2 The second vector expression type.
          * \param e1 The numerator vector expression.
          * \param e2 The denominator vector expression.
-         * \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         * \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
          */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -990,7 +990,7 @@ namespace CDPL
          * \tparam E2 The second vector expression type.
          * \param e1 The first vector expression.
          * \param e2 The second vector expression.
-         * \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         * \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1003,12 +1003,12 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+         * \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
          * \param e1 The first 3D vector expression.
          * \param e2 The second 3D vector expression.
-         * \return An expression-template node representing the cross product.
+         * \return An expression template node representing the cross product.
          */
         template <typename E1, typename E2>
         typename VectorBinary2Traits<E1, E2, VectorCrossProduct<E1, E2> >::ResultType
@@ -1163,7 +1163,7 @@ namespace CDPL
          * \tparam E2 The vector expression type.
          * \param e1 The unit quaternion expression encoding the rotation.
          * \param e2 The vector expression to rotate.
-         * \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+         * \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
          */
         template <typename E1, typename E2>
         typename QuaternionVectorBinaryTraits<E1, E2, QuaternionVectorRotation<E1, E2> >::ResultType

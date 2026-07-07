@@ -5037,7 +5037,7 @@ def splitIntoFragments(molgraph: MolecularGraph, frag_list: FragmentList, split_
 def sybylToAtomType(sybyl_type: int) -> int: pass
 
 ##
-# \brief Transforms the 2D coordinates of all atoms in <em>cntnr</em> by the affine 3&times;3 matrix <em>mtx</em>.
+# \brief Transforms the 2D coordinates of all atoms in <em>cntnr</em> by the affine <em>3&times;3</em> matrix <em>mtx</em>.
 # 
 # \param cntnr The atom container.
 # \param mtx The 2D affine transformation matrix.
@@ -5048,24 +5048,24 @@ def transform2DCoordinates(cntnr: AtomContainer, mtx: Math.Matrix3D) -> None: pa
 # \brief Transforms the 3D coordinates of the entities of <em>cntnr</em> by the affine matrix <em>mtx</em>.
 # 
 # \param cntnr The entity 3D container whose coordinates are to be transformed.
-# \param mtx The \f$ 4 \times 4 \f$ affine transformation matrix.
+# \param mtx The <em>4&times;4</em> affine transformation matrix.
 # 
 def transform3DCoordinates(cntnr: Entity3DContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##
-# \brief Transforms the conformation at index <em>conf_idx</em> by the homogeneous 4&times;4 matrix <em>mtx</em>.
+# \brief Transforms the conformation at index <em>conf_idx</em> by the homogeneous <em>4&times;4</em> matrix <em>mtx</em>.
 # 
 # \param cntnr The atom container.
 # \param conf_idx The zero-based conformation index.
-# \param mtx The homogeneous 4&times;4 transformation matrix.
+# \param mtx The homogeneous <em>4&times;4</em> transformation matrix.
 # 
 def transformConformation(cntnr: AtomContainer, conf_idx: int, mtx: Math.Matrix4D) -> None: pass
 
 ##
-# \brief Transforms every stored conformation of the atoms in <em>cntnr</em> by the homogeneous 4&times;4 matrix <em>mtx</em>.
+# \brief Transforms every stored conformation of the atoms in <em>cntnr</em> by the homogeneous <em>4&times;4</em> matrix <em>mtx</em>.
 # 
 # \param cntnr The atom container.
-# \param mtx The homogeneous 4&times;4 transformation matrix.
+# \param mtx The homogeneous <em>4&times;4</em> transformation matrix.
 # 
 def transformConformations(cntnr: AtomContainer, mtx: Math.Matrix4D) -> None: pass
 

@@ -65,11 +65,11 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def __init__(s: float) -> None: pass
 
     ##
-    # \brief Resizes the grid to \f$ m \times n \times o \f$ cells.
+    # \brief Resizes the grid to <em>m&times;n&times;o</em> cells.
     # 
-    # \param m The new first-dimension size.
-    # \param n The new second-dimension size.
-    # \param o The new third-dimension size.
+    # \param m The new size in the first dimension.
+    # \param n The new size in the second dimension.
+    # \param o The new size in the third dimension.
     # \param preserve If <tt>True</tt>, existing cell values are kept where the indices remain valid. If <tt>False</tt>, all cells are set to <em>v</em>.
     # \param v The fill value used for newly added cells (and for all cells if <em>preserve</em> is <tt>False</tt>).
     # 
@@ -171,9 +171,9 @@ class FRegularSpatialGrid(Boost.Python.instance):
     ##
     # \brief Writes the world-space 3D position of the cell at (<em>i</em>, <em>j</em>, <em>k</em>) into <em>coords</em>.
     # 
-    # \param i The first-dimension cell index.
-    # \param j The second-dimension cell index.
-    # \param k The third-dimension cell index.
+    # \param i The first dimension cell index.
+    # \param j The second dimension cell index.
+    # \param k The third dimension cell index.
     # \param coords The output vector receiving the X/Y/Z position.
     # 
     def getCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
@@ -191,9 +191,9 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # 
     # Local coordinates are centered at the grid origin (the cell-center cell-index coordinate system before applying the world-space transformation).
     # 
-    # \param i The first-dimension cell index.
-    # \param j The second-dimension cell index.
-    # \param k The third-dimension cell index.
+    # \param i The first dimension cell index.
+    # \param j The second dimension cell index.
+    # \param k The third dimension cell index.
     # \param coords The output vector receiving the local X/Y/Z position.
     # 
     def getLocalCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
@@ -527,21 +527,21 @@ class FRegularSpatialGrid(Boost.Python.instance):
     ##
     # \brief Returns the size of the grid along the first dimension.
     # 
-    # \return The first-dimension size.
+    # \return The size in the first dimension.
     # 
     def getSize1() -> int: pass
 
     ##
     # \brief Returns the size of the grid along the second dimension.
     # 
-    # \return The second-dimension size.
+    # \return The size in the second dimension.
     # 
     def getSize2() -> int: pass
 
     ##
     # \brief Returns the size of the grid along the third dimension.
     # 
-    # \return The third-dimension size.
+    # \return The size in the third dimension.
     # 
     def getSize3() -> int: pass
 
@@ -606,9 +606,9 @@ class FRegularSpatialGrid(Boost.Python.instance):
     ##
     # \brief Returns a reference to the cell at the (<em>i</em>, <em>j</em>, <em>k</em>) position.
     # 
-    # \param i The zero-based first-dimension index.
-    # \param j The zero-based second-dimension index.
-    # \param k The zero-based third-dimension index.
+    # \param i The zero-based first dimension index.
+    # \param j The zero-based second dimension index.
+    # \param k The zero-based third dimension index.
     # 
     # \return A reference to the cell value.
     # 

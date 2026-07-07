@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Expression-template node applying a unary functor \a F that returns a quaternion result to a quaternion expression \a E.
+         * \brief Expression template node applying a unary functor \a F that returns a quaternion result to a quaternion expression \a E.
          * \tparam E The wrapped quaternion expression type.
          * \tparam F The unary functor type returning a quaternion.
          */
@@ -62,12 +62,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -82,7 +82,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e.
+             * \brief Constructs the expression template node wrapping \a e.
              * \param e The quaternion expression to wrap.
              */
             QuaternionUnary1(const ExpressionType& e):
@@ -129,7 +129,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionUnary1 instantiation <\a E, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::QuaternionUnary1 instantiation <\a E, \a F>.
          * \tparam E The quaternion expression type.
          * \tparam F The unary functor type.
          */
@@ -138,18 +138,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef QuaternionUnary1<E, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType         ResultType;
         };
 
         /**
-         * \brief Expression-template node applying a per-component functor \a F to a quaternion expression \a E,
+         * \brief Expression template node applying a per-component functor \a F to a quaternion expression \a E,
          *        where \a F exposes four separate apply methods (\c applyC1 / \c applyC2 / \c applyC3 / \c applyC4)
          *        operating on the whole source expression.
          * \tparam E The wrapped quaternion expression type.
@@ -171,12 +171,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -191,7 +191,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e.
+             * \brief Constructs the expression template node wrapping \a e.
              * \param e The quaternion expression to wrap.
              */
             QuaternionUnary2(const ExpressionType& e):
@@ -238,7 +238,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionUnary2 instantiation <\a E, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::QuaternionUnary2 instantiation <\a E, \a F>.
          * \tparam E The quaternion expression type.
          * \tparam F The per-component functor type.
          */
@@ -247,18 +247,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef QuaternionUnary2<E, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType         ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two quaternion expressions \a E1 and \a E2 component-wise via the binary functor \a F.
+         * \brief Expression template node combining two quaternion expressions \a E1 and \a E2 component-wise via the binary functor \a F.
          * \tparam E1 The first wrapped quaternion expression type.
          * \tparam E2 The second wrapped quaternion expression type.
          * \tparam F The binary functor type.
@@ -281,12 +281,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -301,7 +301,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first quaternion expression.
              * \param e2 The second quaternion expression.
              */
@@ -350,7 +350,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The first quaternion expression type.
          * \tparam E2 The second quaternion expression type.
          * \tparam F The binary functor type.
@@ -360,18 +360,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef QuaternionBinary1<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType               ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two quaternion expressions \a E1 and \a E2 via the per-component functor \a F
+         * \brief Expression template node combining two quaternion expressions \a E1 and \a E2 via the per-component functor \a F
          *        (which exposes four separate \c applyC1 / \c applyC2 / \c applyC3 / \c applyC4 methods operating on the whole source expressions).
          * \tparam E1 The first wrapped quaternion expression type.
          * \tparam E2 The second wrapped quaternion expression type.
@@ -395,12 +395,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -415,7 +415,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node wrapping \a e1 and \a e2.
+             * \brief Constructs the expression template node wrapping \a e1 and \a e2.
              * \param e1 The first quaternion expression.
              * \param e2 The second quaternion expression.
              */
@@ -464,7 +464,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The first quaternion expression type.
          * \tparam E2 The second quaternion expression type.
          * \tparam F The per-component functor type.
@@ -474,18 +474,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef QuaternionBinary2<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType               ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a scalar \a E1 (lhs) and a quaternion expression \a E2 (rhs) component-wise via the binary functor \a F.
+         * \brief Expression template node combining a scalar \a E1 (lhs) and a quaternion expression \a E2 (rhs) component-wise via the binary functor \a F.
          * \tparam E1 The scalar type appearing on the left-hand side.
          * \tparam E2 The wrapped quaternion expression type.
          * \tparam F The binary functor type.
@@ -508,12 +508,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -528,7 +528,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node combining the scalar \a e1 and the quaternion expression \a e2.
+             * \brief Constructs the expression template node combining the scalar \a e1 and the quaternion expression \a e2.
              * \param e1 The scalar value on the left-hand side.
              * \param e2 The quaternion expression on the right-hand side.
              */
@@ -577,7 +577,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar1QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The scalar type on the left-hand side.
          * \tparam E2 The quaternion expression type.
          * \tparam F The binary functor type.
@@ -587,18 +587,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar1QuaternionBinary1<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                      ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a scalar \a E1 (lhs) and a quaternion expression \a E2 (rhs) via the per-component functor \a F
+         * \brief Expression template node combining a scalar \a E1 (lhs) and a quaternion expression \a E2 (rhs) via the per-component functor \a F
          *        (which exposes \c applyC1 / \c applyC2 / \c applyC3 / \c applyC4 methods).
          * \tparam E1 The scalar type appearing on the left-hand side.
          * \tparam E2 The wrapped quaternion expression type.
@@ -622,12 +622,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -642,7 +642,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node combining the scalar \a e1 and the quaternion expression \a e2.
+             * \brief Constructs the expression template node combining the scalar \a e1 and the quaternion expression \a e2.
              * \param e1 The scalar value on the left-hand side.
              * \param e2 The quaternion expression on the right-hand side.
              */
@@ -691,7 +691,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar1QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar1QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The scalar type on the left-hand side.
          * \tparam E2 The quaternion expression type.
          * \tparam F The per-component functor type.
@@ -701,18 +701,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar1QuaternionBinary2<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                      ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a quaternion expression \a E1 (lhs) and a scalar \a E2 (rhs) component-wise via the binary functor \a F.
+         * \brief Expression template node combining a quaternion expression \a E1 (lhs) and a scalar \a E2 (rhs) component-wise via the binary functor \a F.
          * \tparam E1 The wrapped quaternion expression type.
          * \tparam E2 The scalar type appearing on the right-hand side.
          * \tparam F The binary functor type.
@@ -735,12 +735,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -755,7 +755,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node combining the quaternion expression \a e1 and the scalar \a e2.
+             * \brief Constructs the expression template node combining the quaternion expression \a e1 and the scalar \a e2.
              * \param e1 The quaternion expression on the left-hand side.
              * \param e2 The scalar value on the right-hand side.
              */
@@ -804,7 +804,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar2QuaternionBinary1 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The quaternion expression type.
          * \tparam E2 The scalar type on the right-hand side.
          * \tparam F The binary functor type.
@@ -814,18 +814,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar2QuaternionBinary1<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                      ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a quaternion expression \a E1 (lhs) and a scalar \a E2 (rhs) via the per-component functor \a F
+         * \brief Expression template node combining a quaternion expression \a E1 (lhs) and a scalar \a E2 (rhs) via the per-component functor \a F
          *        (which exposes \c applyC1 / \c applyC2 / \c applyC3 / \c applyC4 methods).
          * \tparam E1 The wrapped quaternion expression type.
          * \tparam E2 The scalar type appearing on the right-hand side.
@@ -849,12 +849,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -869,7 +869,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node combining the quaternion expression \a e1 and the scalar \a e2.
+             * \brief Constructs the expression template node combining the quaternion expression \a e1 and the scalar \a e2.
              * \param e1 The quaternion expression on the left-hand side.
              * \param e2 The scalar value on the right-hand side.
              */
@@ -918,7 +918,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar2QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar2QuaternionBinary2 instantiation <\a E1, \a E2, \a F>.
          * \tparam E1 The quaternion expression type.
          * \tparam E2 The scalar type on the right-hand side.
          * \tparam F The per-component functor type.
@@ -928,18 +928,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar2QuaternionBinary2<E1, E2, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                      ResultType;
         };
 
         /**
-         * \brief Expression-template node combining two quaternion expressions \a E1 (lhs) and \a E2 (middle) with a scalar \a E3 (rhs)
+         * \brief Expression template node combining two quaternion expressions \a E1 (lhs) and \a E2 (middle) with a scalar \a E3 (rhs)
          *        via the per-component ternary functor \a F.
          * \tparam E1 The first wrapped quaternion expression type.
          * \tparam E2 The second wrapped quaternion expression type.
@@ -966,12 +966,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -986,7 +986,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node combining the two quaternion expressions and the scalar.
+             * \brief Constructs the expression template node combining the two quaternion expressions and the scalar.
              * \param e1 The first quaternion expression.
              * \param e2 The second quaternion expression.
              * \param e3 The scalar value on the right-hand side.
@@ -1037,7 +1037,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar3QuaternionTernary instantiation <\a E1, \a E2, \a E3, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar3QuaternionTernary instantiation <\a E1, \a E2, \a E3, \a F>.
          * \tparam E1 The first quaternion expression type.
          * \tparam E2 The second quaternion expression type.
          * \tparam E3 The scalar type on the right-hand side.
@@ -1048,18 +1048,18 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar3QuaternionTernary<E1, E2, E3, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                          ResultType;
         };
 
         /**
-         * \brief Expression-template node combining a scalar \a E1 (lhs), a quaternion expression \a E2 (middle), and a scalar \a E3 (rhs)
+         * \brief Expression template node combining a scalar \a E1 (lhs), a quaternion expression \a E2 (middle), and a scalar \a E3 (rhs)
          *        via the per-component ternary functor \a F.
          * \tparam E1 The scalar type appearing on the left-hand side.
          * \tparam E2 The wrapped quaternion expression type.
@@ -1086,12 +1086,12 @@ namespace CDPL
             typedef typename F::ResultType ValueType;
 
             /**
-             * \brief Constant reference type to a component value.
+             * \brief Constant component reference type.
              */
             typedef const ValueType        ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to \c const for expression-template results).
+             * \brief Mutable component reference type (degrades to \c const for expression template results).
              */
             typedef const ValueType        Reference;
 
@@ -1106,7 +1106,7 @@ namespace CDPL
             typedef SelfType               ClosureType;
 
             /**
-             * \brief Constructs the expression-template node combining the two scalars and the wrapped quaternion expression.
+             * \brief Constructs the expression template node combining the two scalars and the wrapped quaternion expression.
              * \param e1 The scalar value on the left-hand side.
              * \param e2 The wrapped quaternion expression.
              * \param e3 The scalar value on the right-hand side.
@@ -1157,7 +1157,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Traits selecting the expression-template node and its result type for the Math::Scalar13QuaternionTernary instantiation <\a E1, \a E2, \a E3, \a F>.
+         * \brief Traits selecting the expression template node and its result type for the Math::Scalar13QuaternionTernary instantiation <\a E1, \a E2, \a E3, \a F>.
          * \tparam E1 The scalar type on the left-hand side.
          * \tparam E2 The quaternion expression type.
          * \tparam E3 The scalar type on the right-hand side.
@@ -1168,12 +1168,12 @@ namespace CDPL
         {
 
             /**
-             * \brief The expression-template node type.
+             * \brief The expression template node type.
              */
             typedef Scalar13QuaternionTernary<E1, E2, E3, F> ExpressionType;
 
             /**
-             * \brief The expression-template result type returned by free-function operators.
+             * \brief The expression template result type returned by free-function operators.
              */
             typedef ExpressionType                           ResultType;
         };
@@ -1182,7 +1182,7 @@ namespace CDPL
          * \brief Returns the component-wise negation of the quaternion expression \a e.
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression.
-         * \return An expression-template node representing \f$ -e \f$.
+         * \return An expression template node representing \f$ -e \f$.
          */
         template <typename E>
         typename QuaternionUnary1Traits<E, ScalarNegation<typename E::ValueType> >::ResultType
@@ -1212,7 +1212,7 @@ namespace CDPL
          * \tparam E2 The second quaternion expression type.
          * \param e1 The first quaternion expression.
          * \param e2 The second quaternion expression.
-         * \return An expression-template node representing \f$ e_1 + e_2 \f$.
+         * \return An expression template node representing \f$ e_1 + e_2 \f$.
          */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1230,7 +1230,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The quaternion expression.
          * \param t The scalar summand.
-         * \return An expression-template node representing \f$ e + t \f$.
+         * \return An expression template node representing \f$ e + t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionAddition<E, T> >::ResultType>::type
@@ -1247,7 +1247,7 @@ namespace CDPL
          * \tparam E The quaternion expression type.
          * \param t The scalar summand.
          * \param e The quaternion expression.
-         * \return An expression-template node representing \f$ t + e \f$.
+         * \return An expression template node representing \f$ t + e \f$.
          */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionAddition<T, E> >::ResultType>::type
@@ -1264,7 +1264,7 @@ namespace CDPL
          * \tparam E2 The second quaternion expression type.
          * \param e1 The first quaternion expression.
          * \param e2 The second quaternion expression.
-         * \return An expression-template node representing \f$ e_1 - e_2 \f$.
+         * \return An expression template node representing \f$ e_1 - e_2 \f$.
          */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1282,7 +1282,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The quaternion expression.
          * \param t The scalar subtrahend.
-         * \return An expression-template node representing \f$ e - t \f$.
+         * \return An expression template node representing \f$ e - t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionSubtraction<E, T> >::ResultType>::type
@@ -1299,7 +1299,7 @@ namespace CDPL
          * \tparam E The quaternion expression type.
          * \param t The scalar minuend.
          * \param e The quaternion expression to subtract.
-         * \return An expression-template node representing \f$ t - e \f$.
+         * \return An expression template node representing \f$ t - e \f$.
          */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionSubtraction<T, E> >::ResultType>::type
@@ -1316,7 +1316,7 @@ namespace CDPL
          * \tparam E2 The second quaternion expression type.
          * \param e1 The first quaternion expression.
          * \param e2 The second quaternion expression.
-         * \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
          */
         template <typename E1, typename E2>
         typename QuaternionBinary2Traits<E1, E2, QuaternionProduct<E1, E2> >::ResultType
@@ -1333,7 +1333,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The quaternion expression.
          * \param t The scalar multiplier.
-         * \return An expression-template node representing \f$ e \cdot t \f$.
+         * \return An expression template node representing \f$ e \cdot t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary1Traits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
@@ -1351,7 +1351,7 @@ namespace CDPL
          * \tparam E The quaternion expression type.
          * \param t The scalar multiplier.
          * \param e The quaternion expression.
-         * \return An expression-template node representing \f$ t \cdot e \f$.
+         * \return An expression template node representing \f$ t \cdot e \f$.
          */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary1Traits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
@@ -1364,12 +1364,12 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the quaternion division \f$ e_1 \cdot e_2^{-1} \f$ as an expression-template node.
+         * \brief Returns the quaternion division \f$ e_1 \cdot e_2^{-1} \f$ as an expression template node.
          * \tparam E1 The first quaternion expression type.
          * \tparam E2 The second quaternion expression type.
          * \param e1 The dividend quaternion expression.
          * \param e2 The divisor quaternion expression.
-         * \return An expression-template node representing \f$ e_1 / e_2 \f$.
+         * \return An expression template node representing \f$ e_1 / e_2 \f$.
          */
         template <typename E1, typename E2>
         typename Scalar3QuaternionTernaryTraits<E1, E2, typename QuaternionNorm2<E2>::ResultType,
@@ -1388,7 +1388,7 @@ namespace CDPL
          * \tparam T The scalar type.
          * \param e The quaternion expression.
          * \param t The scalar divisor.
-         * \return An expression-template node representing \f$ e / t \f$.
+         * \return An expression template node representing \f$ e / t \f$.
          */
         template <typename E, typename T>
         typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary1Traits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
@@ -1406,7 +1406,7 @@ namespace CDPL
          * \tparam E The quaternion expression type.
          * \param t The scalar dividend.
          * \param e The quaternion expression divisor.
-         * \return An expression-template node representing \f$ t / e \f$.
+         * \return An expression template node representing \f$ t / e \f$.
          */
         template <typename T, typename E>
         typename std::enable_if<IsScalar<T>::value,
@@ -1473,7 +1473,7 @@ namespace CDPL
          * \tparam E2 The second quaternion expression type.
          * \param e1 The numerator quaternion expression.
          * \param e2 The denominator quaternion expression.
-         * \return An expression-template node representing the component-wise quotient.
+         * \return An expression template node representing the component-wise quotient.
          */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1491,7 +1491,7 @@ namespace CDPL
          * \tparam E2 The second quaternion expression type.
          * \param e1 The first quaternion expression.
          * \param e2 The second quaternion expression.
-         * \return An expression-template node representing the component-wise product.
+         * \return An expression template node representing the component-wise product.
          */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
@@ -1520,7 +1520,7 @@ namespace CDPL
          * \brief Returns the unreal (pure-quaternion) part of the quaternion expression \a e (with C1 zeroed out).
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression.
-         * \return An expression-template node representing the unreal part of \a e.
+         * \return An expression template node representing the unreal part of \a e.
          */
         template <typename E>
         typename QuaternionUnary2Traits<E, QuaternionUnreal<E> >::ResultType
@@ -1535,7 +1535,7 @@ namespace CDPL
          * \brief Returns the quaternion conjugate of the quaternion expression \a e (negates C2, C3, C4).
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression.
-         * \return An expression-template node representing \f$ \overline{e} \f$.
+         * \return An expression template node representing \f$ \overline{e} \f$.
          */
         template <typename E>
         typename QuaternionUnary2Traits<E, QuaternionConjugate<E> >::ResultType
@@ -1550,7 +1550,7 @@ namespace CDPL
          * \brief Returns the multiplicative inverse of the quaternion expression \a e (\f$ \overline{e} / |e|^2 \f$).
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression.
-         * \return An expression-template node representing \f$ e^{-1} \f$.
+         * \return An expression template node representing \f$ e^{-1} \f$.
          */
         template <typename E>
         typename Scalar2QuaternionBinary2Traits<E, typename QuaternionNorm2<E>::ResultType,

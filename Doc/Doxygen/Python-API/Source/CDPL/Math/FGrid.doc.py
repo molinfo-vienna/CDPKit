@@ -37,7 +37,7 @@ class FGrid(Boost.Python.instance):
     def __init__(g: FGrid) -> None: pass
 
     ##
-    # \brief Constructs an <em>m</em> &times; <em>n</em> &times; <em>o</em> grid with default-initialized elements.
+    # \brief Constructs an <em>m&times;n&times;o</em> grid with default-initialized elements.
     # 
     # \param m The size along the first axis.
     # \param n The size along the second axis.
@@ -46,12 +46,12 @@ class FGrid(Boost.Python.instance):
     def __init__(m: int, n: int, o: int) -> None: pass
 
     ##
-    # \brief Constructs an <em>m</em> &times; <em>n</em> &times; <em>o</em> grid with every element initialized to <em>v</em>.
+    # \brief Constructs an <em>m&times;n&times;o</em> grid with every element initialized to <em>v</em>.
     # 
     # \param m The size along the first axis.
     # \param n The size along the second axis.
     # \param o The size along the third axis.
-    # \param v The element value used to initialize every cell.
+    # \param v The value used for element initialization.
     # 
     def __init__(m: int, n: int, o: int, v: float) -> None: pass
 
@@ -74,18 +74,18 @@ class FGrid(Boost.Python.instance):
     def __init__(e: object) -> None: pass
 
     ##
-    # \brief Resizes the grid to \f$ m \times n \times o \f$ cells.
+    # \brief Resizes the grid to <em>m&times;n&times;o</em> elements.
     # 
     # \param m The new first-axis size.
     # \param n The new second-axis size.
     # \param o The new third-axis size.
-    # \param preserve If <tt>True</tt>, existing cell values at indices that remain valid are kept. If <tt>False</tt>, all cells are set to <em>v</em>.
-    # \param v The fill value for newly added cells (or for all cells when <em>preserve</em> is <tt>False</tt>).
+    # \param preserve If <tt>True</tt>, existing element values at indices that remain valid are kept. If <tt>False</tt>, all elements are set to <em>v</em>.
+    # \param v The fill value for newly added elements (or for all elements when <em>preserve</em> is <tt>False</tt>).
     # 
     def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
 
     ##
-    # \brief Sets every cell of the grid to the value <em>v</em>.
+    # \brief Sets every element of the grid to the value <em>v</em>.
     # 
     # \param v The fill value.
     # 
@@ -104,7 +104,7 @@ class FGrid(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Resizes this grid to match <em>e</em> and assigns its cells without intermediate temporary.
+    # \brief Resizes this grid to match <em>e</em> and assigns its elements without intermediate temporary.
     # 
     # \param e The source grid expression.
     # 
@@ -113,7 +113,7 @@ class FGrid(Boost.Python.instance):
     def assign(e: ConstFGridExpression) -> FGrid: pass
 
     ##
-    # \brief Resizes this grid to match <em>e</em> and assigns its cells without intermediate temporary.
+    # \brief Resizes this grid to match <em>e</em> and assigns its elements without intermediate temporary.
     # 
     # \param e The source grid expression.
     # 
@@ -122,7 +122,7 @@ class FGrid(Boost.Python.instance):
     def assign(e: ConstDGridExpression) -> FGrid: pass
 
     ##
-    # \brief Resizes this grid to match <em>e</em> and assigns its cells without intermediate temporary.
+    # \brief Resizes this grid to match <em>e</em> and assigns its elements without intermediate temporary.
     # 
     # \param e The source grid expression.
     # 
@@ -190,9 +190,9 @@ class FGrid(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns the total cell count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+    # \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
     # 
-    # \return The total number of cells.
+    # \return The total number of elements.
     # 
     def getSize() -> int: pass
 
@@ -226,7 +226,7 @@ class FGrid(Boost.Python.instance):
     # \param j The zero-based second-axis index.
     # \param k The zero-based third-axis index.
     # 
-    # \return A reference to the cell. 
+    # \return A reference to the element. 
     # 
     # \throw Base.IndexError if any of the indices is out of range.
     # 
@@ -237,7 +237,7 @@ class FGrid(Boost.Python.instance):
     # 
     # \param i The zero-based linear index.
     # 
-    # \return A reference to the cell. 
+    # \return A reference to the element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

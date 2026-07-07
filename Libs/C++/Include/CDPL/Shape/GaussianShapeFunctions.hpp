@@ -95,7 +95,7 @@ namespace CDPL
         /**
          * \brief Applies an affine transformation to the element positions of \a shape.
          * \param shape The Gaussian shape to transform (modified in place).
-         * \param xform The 4x4 transformation matrix.
+         * \param xform The <em>4&times;4</em> transformation matrix.
          */
         CDPL_SHAPE_API void transform(GaussianShape& shape, const Math::Matrix4D& xform);
 

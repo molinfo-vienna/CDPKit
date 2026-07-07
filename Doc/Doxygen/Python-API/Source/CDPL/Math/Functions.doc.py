@@ -336,7 +336,7 @@ def column(e: ULMatrixExpression, i: int) -> ULMatrixColumn: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -345,7 +345,7 @@ def conj(e: ConstDGridExpression) -> ConstDGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -354,7 +354,7 @@ def conj(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -363,7 +363,7 @@ def conj(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -372,7 +372,7 @@ def conj(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -381,7 +381,7 @@ def conj(e: ConstFGridExpression) -> ConstFGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -390,7 +390,7 @@ def conj(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -399,7 +399,7 @@ def conj(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -408,7 +408,7 @@ def conj(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -417,7 +417,7 @@ def conj(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -426,7 +426,7 @@ def conj(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -435,7 +435,7 @@ def conj(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -444,7 +444,7 @@ def conj(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -453,7 +453,7 @@ def conj(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def conj(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -462,7 +462,7 @@ def conj(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression-template node representing the skew-symmetric matrix.
+# \return An expression template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 
@@ -471,7 +471,7 @@ def cross(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression-template node representing the skew-symmetric matrix.
+# \return An expression template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 
@@ -480,7 +480,7 @@ def cross(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression-template node representing the skew-symmetric matrix.
+# \return An expression template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 
@@ -489,47 +489,47 @@ def cross(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression-template node representing the skew-symmetric matrix.
+# \return An expression template node representing the skew-symmetric matrix.
 # 
 def cross(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression-template node representing the cross product.
+# \return An expression template node representing the cross product.
 # 
 def crossProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression-template node representing the cross product.
+# \return An expression template node representing the cross product.
 # 
 def crossProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression-template node representing the cross product.
+# \return An expression template node representing the cross product.
 # 
 def crossProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression-template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression-template node representing the cross product.
+# \return An expression template node representing the cross product.
 # 
 def crossProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -574,7 +574,7 @@ def det(e: ConstULMatrixExpression) -> int: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the diagonal matrix.
+# \return An expression template node representing the diagonal matrix.
 # 
 def diag(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 
@@ -583,7 +583,7 @@ def diag(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the diagonal matrix.
+# \return An expression template node representing the diagonal matrix.
 # 
 def diag(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 
@@ -592,7 +592,7 @@ def diag(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the diagonal matrix.
+# \return An expression template node representing the diagonal matrix.
 # 
 def diag(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 
@@ -601,7 +601,7 @@ def diag(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the diagonal matrix.
+# \return An expression template node representing the diagonal matrix.
 # 
 def diag(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
@@ -611,7 +611,7 @@ def diag(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstDGridExpression, e2: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -621,7 +621,7 @@ def elemDiv(e1: ConstDGridExpression, e2: ConstDGridExpression) -> ConstDGridExp
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -631,7 +631,7 @@ def elemDiv(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMat
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstDQuaternionExpression, e2: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -641,7 +641,7 @@ def elemDiv(e1: ConstDQuaternionExpression, e2: ConstDQuaternionExpression) -> C
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -651,7 +651,7 @@ def elemDiv(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVec
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstFGridExpression, e2: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -661,7 +661,7 @@ def elemDiv(e1: ConstFGridExpression, e2: ConstFGridExpression) -> ConstFGridExp
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -671,7 +671,7 @@ def elemDiv(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMat
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstFQuaternionExpression, e2: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -681,7 +681,7 @@ def elemDiv(e1: ConstFQuaternionExpression, e2: ConstFQuaternionExpression) -> C
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -691,7 +691,7 @@ def elemDiv(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVec
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -701,7 +701,7 @@ def elemDiv(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMat
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstLQuaternionExpression, e2: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -711,7 +711,7 @@ def elemDiv(e1: ConstLQuaternionExpression, e2: ConstLQuaternionExpression) -> C
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -721,7 +721,7 @@ def elemDiv(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVec
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -731,7 +731,7 @@ def elemDiv(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstUL
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstULQuaternionExpression, e2: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -741,7 +741,7 @@ def elemDiv(e1: ConstULQuaternionExpression, e2: ConstULQuaternionExpression) ->
 # \param e1 The numerator vector expression.
 # \param e2 The denominator vector expression.
 # 
-# \return An expression-template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
 # 
 def elemDiv(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -751,7 +751,7 @@ def elemDiv(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstUL
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstDGridExpression, e2: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -761,7 +761,7 @@ def elemProd(e1: ConstDGridExpression, e2: ConstDGridExpression) -> ConstDGridEx
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -771,7 +771,7 @@ def elemProd(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMa
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstDQuaternionExpression, e2: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -781,7 +781,7 @@ def elemProd(e1: ConstDQuaternionExpression, e2: ConstDQuaternionExpression) -> 
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -791,7 +791,7 @@ def elemProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVe
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstFGridExpression, e2: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -801,7 +801,7 @@ def elemProd(e1: ConstFGridExpression, e2: ConstFGridExpression) -> ConstFGridEx
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -811,7 +811,7 @@ def elemProd(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMa
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstFQuaternionExpression, e2: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -821,7 +821,7 @@ def elemProd(e1: ConstFQuaternionExpression, e2: ConstFQuaternionExpression) -> 
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -831,7 +831,7 @@ def elemProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVe
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -841,7 +841,7 @@ def elemProd(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMa
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstLQuaternionExpression, e2: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -851,7 +851,7 @@ def elemProd(e1: ConstLQuaternionExpression, e2: ConstLQuaternionExpression) -> 
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -861,7 +861,7 @@ def elemProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVe
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -871,7 +871,7 @@ def elemProd(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstU
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstULQuaternionExpression, e2: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -881,7 +881,7 @@ def elemProd(e1: ConstULQuaternionExpression, e2: ConstULQuaternionExpression) -
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
 # 
 def elemProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -1075,7 +1075,7 @@ def generalizedBell(x: float, a: float, b: float, c: float) -> float: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -1084,7 +1084,7 @@ def herm(e: ConstDGridExpression) -> ConstDGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -1093,7 +1093,7 @@ def herm(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -1102,7 +1102,7 @@ def herm(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -1111,7 +1111,7 @@ def herm(e: ConstFGridExpression) -> ConstFGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -1120,7 +1120,7 @@ def herm(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -1129,7 +1129,7 @@ def herm(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -1138,7 +1138,7 @@ def herm(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -1147,7 +1147,7 @@ def herm(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -1156,7 +1156,7 @@ def herm(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{e} \f$.
 # 
 def herm(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -1237,7 +1237,7 @@ def homog(e: ULVectorExpression) -> ULHomogenousCoordsAdapter: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -1246,7 +1246,7 @@ def imag(e: ConstDGridExpression) -> ConstDGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -1255,7 +1255,7 @@ def imag(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -1264,7 +1264,7 @@ def imag(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -1273,7 +1273,7 @@ def imag(e: ConstFGridExpression) -> ConstFGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -1282,7 +1282,7 @@ def imag(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -1291,7 +1291,7 @@ def imag(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -1300,7 +1300,7 @@ def imag(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -1309,7 +1309,7 @@ def imag(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -1318,7 +1318,7 @@ def imag(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the imaginary part of <em>e</em>.
+# \return An expression template node representing the imaginary part of <em>e</em>.
 # 
 def imag(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -1389,7 +1389,7 @@ def interpolateTrilinear(grid: FRegularSpatialGrid, pos: Vector3F, local_pos: bo
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing \f$ e^{-1} \f$.
+# \return An expression template node representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -1398,7 +1398,7 @@ def inv(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing \f$ e^{-1} \f$.
+# \return An expression template node representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -1407,7 +1407,7 @@ def inv(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing \f$ e^{-1} \f$.
+# \return An expression template node representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -1416,7 +1416,7 @@ def inv(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing \f$ e^{-1} \f$.
+# \return An expression template node representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -2147,7 +2147,7 @@ def normInfIndex(e: ConstULVectorExpression) -> int: pass
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the outer product.
+# \return An expression template node representing the outer product.
 # 
 def outerProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 
@@ -2157,7 +2157,7 @@ def outerProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDM
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the outer product.
+# \return An expression template node representing the outer product.
 # 
 def outerProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 
@@ -2167,7 +2167,7 @@ def outerProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFM
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the outer product.
+# \return An expression template node representing the outer product.
 # 
 def outerProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 
@@ -2177,7 +2177,7 @@ def outerProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLM
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression-template node representing the outer product.
+# \return An expression template node representing the outer product.
 # 
 def outerProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
@@ -2194,7 +2194,7 @@ def prime(i: int) -> int: pass
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstDMatrixExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -2215,7 +2215,7 @@ def prod(e1: ConstDMatrixExpression, e2: ConstDVectorExpression, c: DVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -2236,7 +2236,7 @@ def prod(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression, c: DMatrixExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstDVectorExpression, e2: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
@@ -2257,7 +2257,7 @@ def prod(e1: ConstDVectorExpression, e2: ConstDMatrixExpression, c: DVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstFMatrixExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -2278,7 +2278,7 @@ def prod(e1: ConstFMatrixExpression, e2: ConstFVectorExpression, c: FVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -2299,7 +2299,7 @@ def prod(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression, c: FMatrixExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstFVectorExpression, e2: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
@@ -2320,7 +2320,7 @@ def prod(e1: ConstFVectorExpression, e2: ConstFMatrixExpression, c: FVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstLMatrixExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -2341,7 +2341,7 @@ def prod(e1: ConstLMatrixExpression, e2: ConstLVectorExpression, c: LVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -2362,7 +2362,7 @@ def prod(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression, c: LMatrixExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstLVectorExpression, e2: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
@@ -2383,7 +2383,7 @@ def prod(e1: ConstLVectorExpression, e2: ConstLMatrixExpression, c: LVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstULMatrixExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -2404,7 +2404,7 @@ def prod(e1: ConstULMatrixExpression, e2: ConstULVectorExpression, c: ULVectorEx
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -2425,7 +2425,7 @@ def prod(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression, c: ULMatrixEx
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression-template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstULVectorExpression, e2: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
@@ -2967,7 +2967,7 @@ def range(e: ULVectorExpression, r: Range) -> ULVectorRange: pass
 def range(e: ULVectorExpression, start: int, stop: int) -> ULVectorRange: pass
 
 ##
-# \brief Convenience factory for Math.Range with <tt>std::size_t</tt> indices.
+# \brief Convenience factory function for Math.Range with <tt>std::size_t</tt> indices.
 # 
 # \param start The lower (inclusive) bound.
 # \param stop The upper (exclusive) bound.
@@ -2981,7 +2981,7 @@ def range(start: int, stop: int) -> Range: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -2990,7 +2990,7 @@ def real(e: ConstDGridExpression) -> ConstDGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -2999,7 +2999,7 @@ def real(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstDQuaternionExpression) -> float: pass
 
@@ -3008,7 +3008,7 @@ def real(e: ConstDQuaternionExpression) -> float: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -3017,7 +3017,7 @@ def real(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -3026,7 +3026,7 @@ def real(e: ConstFGridExpression) -> ConstFGridExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -3035,7 +3035,7 @@ def real(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstFQuaternionExpression) -> float: pass
 
@@ -3044,7 +3044,7 @@ def real(e: ConstFQuaternionExpression) -> float: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -3053,7 +3053,7 @@ def real(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -3062,7 +3062,7 @@ def real(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstLQuaternionExpression) -> int: pass
 
@@ -3071,7 +3071,7 @@ def real(e: ConstLQuaternionExpression) -> int: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -3080,7 +3080,7 @@ def real(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -3089,7 +3089,7 @@ def real(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstULQuaternionExpression) -> int: pass
 
@@ -3098,7 +3098,7 @@ def real(e: ConstULQuaternionExpression) -> int: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression-template node representing the real part of <em>e</em>.
+# \return An expression template node representing the real part of <em>e</em>.
 # 
 def real(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -3108,7 +3108,7 @@ def real(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstDQuaternionExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -3118,7 +3118,7 @@ def rotate(e1: ConstDQuaternionExpression, e2: ConstDVectorExpression) -> ConstD
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstFQuaternionExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -3128,7 +3128,7 @@ def rotate(e1: ConstFQuaternionExpression, e2: ConstFVectorExpression) -> ConstF
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -3138,7 +3138,7 @@ def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstL
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression-template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstULQuaternionExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -3617,7 +3617,7 @@ def slice(e: ULVectorExpression, s: Slice) -> ULVectorSlice: pass
 def slice(e: ULVectorExpression, start: int, stride: int, size: int) -> ULVectorSlice: pass
 
 ##
-# \brief Convenience factory for Math.Slice with <tt>std::size_t</tt> indices and <tt>std::ptrdiff_t</tt> stride.
+# \brief Convenience factory function for Math.Slice with <tt>std::size_t</tt> indices and <tt>std::ptrdiff_t</tt> stride.
 # 
 # \param start The starting global index.
 # \param stride The signed step size between consecutive entries.
@@ -4659,7 +4659,7 @@ def triang(e: ConstULMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangu
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing the unreal part of <em>e</em>.
+# \return An expression template node representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -4668,7 +4668,7 @@ def unreal(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing the unreal part of <em>e</em>.
+# \return An expression template node representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -4677,7 +4677,7 @@ def unreal(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing the unreal part of <em>e</em>.
+# \return An expression template node representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -4686,7 +4686,7 @@ def unreal(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression-template node representing the unreal part of <em>e</em>.
+# \return An expression template node representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -4695,7 +4695,7 @@ def unreal(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 # 
 # \param e The quaternion expression to wrap.
 # 
-# \return A constant 4-element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>e</em>.
 # 
 def vec(e: ConstDQuaternionExpression) -> ConstDQuaternionVectorAdapter: pass
 
@@ -4704,7 +4704,7 @@ def vec(e: ConstDQuaternionExpression) -> ConstDQuaternionVectorAdapter: pass
 # 
 # \param e The quaternion expression to wrap.
 # 
-# \return A constant 4-element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>e</em>.
 # 
 def vec(e: ConstFQuaternionExpression) -> ConstFQuaternionVectorAdapter: pass
 
@@ -4713,7 +4713,7 @@ def vec(e: ConstFQuaternionExpression) -> ConstFQuaternionVectorAdapter: pass
 # 
 # \param e The quaternion expression to wrap.
 # 
-# \return A constant 4-element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>e</em>.
 # 
 def vec(e: ConstLQuaternionExpression) -> ConstLQuaternionVectorAdapter: pass
 
@@ -4722,7 +4722,7 @@ def vec(e: ConstLQuaternionExpression) -> ConstLQuaternionVectorAdapter: pass
 # 
 # \param e The quaternion expression to wrap.
 # 
-# \return A constant 4-element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>e</em>.
 # 
 def vec(e: ConstULQuaternionExpression) -> ConstULQuaternionVectorAdapter: pass
 

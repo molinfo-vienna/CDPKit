@@ -187,12 +187,12 @@ namespace CDPL
             typedef typename M::ValueType                                    ValueType;
 
             /**
-             * \brief Constant reference type to an element of the underlying matrix.
+             * \brief Constant element reference type of the underlying matrix.
              */
             typedef typename M::ConstReference                               ConstReference;
 
             /**
-             * \brief Mutable reference type (degrades to ConstReference when the wrapped matrix is \c const).
+             * \brief Mutable element reference type (degrades to ConstReference when the wrapped matrix is \c const).
              */
             typedef typename std::conditional<std::is_const<M>::value,
                                               typename M::ConstReference,

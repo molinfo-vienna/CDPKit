@@ -69,7 +69,7 @@ namespace CDPL
         /**
          * \brief Transforms the 3D coordinates of the entities of \a cntnr by the affine matrix \a mtx.
          * \param cntnr The entity 3D container whose coordinates are to be transformed.
-         * \param mtx The \f$ 4 \times 4 \f$ affine transformation matrix.
+         * \param mtx The <em>4&times;4</em> affine transformation matrix.
          */
         CDPL_CHEM_API void transform3DCoordinates(Entity3DContainer& cntnr, const Math::Matrix4D& mtx);
 

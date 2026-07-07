@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Bounded 2x2 matrix holding floating-point values of type <tt>float</tt>.
+# \brief Bounded <em>2&times;2</em> matrix holding floating-point values of type <tt>float</tt>.
 # 
 class Matrix2F(Boost.Python.instance):
 
     ##
-    # \brief Constructs a zero-initialized \f$ M \times N \f$ matrix.
+    # \brief Constructs a zero-initialized <em>M&times;N</em> matrix.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs an \f$ M \times N \f$ matrix with every element initialized to <em>v</em>.
+    # \brief Constructs an <em>M&times;N</em> matrix with every element initialized to <em>v</em>.
     # 
     # \param v The initial element value.
     # 
