@@ -48,7 +48,7 @@ class Pharmacophore(FeatureContainer):
     # 
     # \param idx The index of the feature to remove.
     # 
-    # \throw Base.IndexError if the number of features is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
     # 
     def removeFeature(idx: int) -> None: pass
 
@@ -129,7 +129,7 @@ class Pharmacophore(FeatureContainer):
     # 
     # \return A reference to the feature at the specified index. 
     # 
-    # \throw Base.IndexError if the number of featuress is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
     # 
     def getFeature(idx: int) -> Feature: pass
 

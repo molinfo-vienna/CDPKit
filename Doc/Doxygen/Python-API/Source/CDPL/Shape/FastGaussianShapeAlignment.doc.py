@@ -406,7 +406,7 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     # 
     # \return A reference to the result. 
     # 
-    # \throw Base.IndexError if the number of results is zero or <em>idx</em> is not in the range [0, getNumResults() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumResults()).
     # 
     def getResult(idx: int) -> AlignmentResult: pass
 

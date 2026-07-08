@@ -135,7 +135,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \return A reference to the reaction component with the specified role and index. 
     # 
-    # \throw Base.IndexError if the number of components with the specified role is zero or <em>idx</em> is not in the range [0, <tt>getNumComponents(role) - 1</tt>]. Base.ValueError if the value of <em>role</em> is not equal to Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, <tt>getNumComponents(role)</tt>). Base.ValueError if the value of <em>role</em> is not equal to Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
     def getComponent(idx: int, role: int) -> Molecule: pass
 
@@ -146,7 +146,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \return A reference to the reaction component at the specified index. 
     # 
-    # \throw Base.IndexError if the number of components is zero or <em>idx</em> is not in the range [0, getNumComponents() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumComponents()).
     # 
     def getComponent(idx: int) -> Molecule: pass
 
@@ -165,7 +165,7 @@ class Reaction(Base.PropertyContainer):
     # \param idx The zero-based index of the component to remove.
     # \param role The reaction role of the components
     # 
-    # \throw Base.IndexError if the number of components with the specified role is zero or <em>idx</em> is not in the range [0, <tt>getNumComponents(role) - 1</tt>]. Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, <tt>getNumComponents(role)</tt>). Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
     def removeComponent(idx: int, role: int) -> None: pass
 
@@ -174,7 +174,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \param idx The zero-based index of the component to remove.
     # 
-    # \throw Base.IndexError if the number of components is zero or <em>idx</em> is not in the range [0, getNumComponents() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumComponents()).
     # 
     def removeComponent(idx: int) -> None: pass
 

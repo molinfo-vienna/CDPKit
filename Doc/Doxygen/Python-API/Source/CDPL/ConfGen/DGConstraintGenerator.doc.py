@@ -140,7 +140,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     # 
     # \return A reference to the stereo-center data. 
     # 
-    # \throw Base.IndexError if the number of atom stereo centers is zero or <em>idx</em> is not in the range [0, getNumAtomStereoCenters() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtomStereoCenters()).
     # 
     def getAtomStereoCenterData(idx: int) -> StereoCenterData: pass
 
@@ -151,7 +151,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     # 
     # \return A reference to the stereo-center data. 
     # 
-    # \throw Base.IndexError if the number of bond stereo centers is zero or <em>idx</em> is not in the range [0, getNumBondStereoCenters() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBondStereoCenters()).
     # 
     def getBondStereoCenterData(idx: int) -> StereoCenterData: pass
 

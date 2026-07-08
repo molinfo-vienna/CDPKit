@@ -184,7 +184,7 @@ namespace CDPL
              * \brief Returns the distance constraint at index \a idx.
              * \param idx The zero-based constraint index.
              * \return A \c const reference to the distance constraint.
-             * \throw Base::IndexError if the number of distance constraints is zero or \a idx is not in the range [0, getNumDistanceConstraints() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDistanceConstraints()).
              */
             const DistanceConstraint& getDistanceConstraint(std::size_t idx) const;
 
@@ -192,21 +192,21 @@ namespace CDPL
              * \brief Returns the distance constraint at index \a idx.
              * \param idx The zero-based constraint index.
              * \return A reference to the distance constraint.
-             * \throw Base::IndexError if the number of distance constraints is zero or \a idx is not in the range [0, getNumDistanceConstraints() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDistanceConstraints()).
              */
             DistanceConstraint& getDistanceConstraint(std::size_t idx);
 
             /**
              * \brief Removes the distance constraint at index \a idx.
              * \param idx The zero-based constraint index.
-             * \throw Base::IndexError if the number of distance constraints is zero or \a idx is not in the range [0, getNumDistanceConstraints() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDistanceConstraints()).
              */
             void removeDistanceConstraint(std::size_t idx);
 
             /**
              * \brief Removes the distance constraint referenced by iterator \a it.
              * \param it The iterator pointing to the distance constraint.
-             * \throw Base::IndexError if \a it is not in the range [getDistanceConstraintsBegin(), getDistanceConstraintsEnd() - 1].
+             * \throw Base::IndexError if \a it is not in the range [getDistanceConstraintsBegin(), getDistanceConstraintsEnd()).
              */
             void removeDistanceConstraint(const DistanceConstraintIterator& it);
 
@@ -502,7 +502,7 @@ namespace CDPL
              * \brief Returns the volume constraint at index \a idx.
              * \param idx The zero-based constraint index.
              * \return A \c const reference to the volume constraint.
-             * \throw Base::IndexError if the number of volume constraints is zero or \a idx is not in the range [0, getNumVolumeConstraints() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumVolumeConstraints()).
              */
             const VolumeConstraint& getVolumeConstraint(std::size_t idx) const;
 
@@ -510,21 +510,21 @@ namespace CDPL
              * \brief Returns the volume constraint at index \a idx.
              * \param idx The zero-based constraint index.
              * \return A reference to the volume constraint.
-             * \throw Base::IndexError if the number of volume constraints is zero or \a idx is not in the range [0, getNumVolumeConstraints() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumVolumeConstraints()).
              */
             VolumeConstraint& getVolumeConstraint(std::size_t idx);
 
             /**
              * \brief Removes the volume constraint at index \a idx.
              * \param idx The zero-based constraint index.
-             * \throw Base::IndexError if the number of volume constraints is zero or \a idx is not in the range [0, getNumVolumeConstraints() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumVolumeConstraints()).
              */
             void removeVolumeConstraint(std::size_t idx);
 
             /**
              * \brief Removes the volume constraint referenced by iterator \a it.
              * \param it The iterator pointing to the volume constraint.
-             * \throw Base::IndexError if \a it is not in the range [getVolumeConstraintsBegin(), getVolumeConstraintsEnd() - 1].
+             * \throw Base::IndexError if \a it is not in the range [getVolumeConstraintsBegin(), getVolumeConstraintsEnd()).
              */
             void removeVolumeConstraint(const VolumeConstraintIterator& it);
 

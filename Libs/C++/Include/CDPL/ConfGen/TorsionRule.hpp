@@ -179,21 +179,21 @@ namespace CDPL
              * \brief Returns the angle entry at index \a idx.
              * \param idx The zero-based angle entry index.
              * \return A \c const reference to the angle entry.
-             * \throw Base::IndexError if the number of angle entries is zero or \a idx is not in the range [0, getNumAngles() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAngles()).
              */
             const AngleEntry& getAngle(std::size_t idx) const;
 
             /**
              * \brief Removes the angle entry at index \a idx.
              * \param idx The zero-based angle entry index.
-             * \throw Base::IndexError if the number of angle entries is zero or \a idx is not in the range [0, getNumAngles() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAngles()).
              */
             void removeAngle(std::size_t idx);
 
             /**
              * \brief Removes the angle entry referenced by iterator \a it.
              * \param it The iterator pointing to the angle entry.
-             * \throw Base::RangeError if the number of angle entries is zero or \a it is not in the range [getAnglesBegin(), getAnglesEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getAnglesBegin(), getAnglesEnd()).
              */
             void removeAngle(const AngleEntryIterator& it);
 

@@ -38,7 +38,7 @@ class AtomContainer(Entity3DContainer):
     # 
     # \return A reference to the atom at the specified index. 
     # 
-    # \throw Base.IndexError if the number of atoms is zero or <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
     def getAtom(idx: int) -> Atom: pass
 
@@ -83,7 +83,7 @@ class AtomContainer(Entity3DContainer):
     # 
     # \return A reference to the Chem.Entity3D instance at the specified index. 
     # 
-    # \throw Base.IndexError if the container is empty or <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
     def getEntity(idx: int) -> Entity3D: pass
 

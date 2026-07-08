@@ -211,7 +211,7 @@ namespace CDPL
             /**
              * \brief Removes the file extension list entry pointed to by the iterator \a it.
              * \param it An iterator pointing to the extension list entry to remove.
-             * \throw Base::RangeError if \a it is not in the range [getFileExtensionsBegin(), getFileExtensionsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getFileExtensionsBegin(), getFileExtensionsEnd()).
              */
             FileExtensionIterator removeFileExtension(const FileExtensionIterator& it);
 

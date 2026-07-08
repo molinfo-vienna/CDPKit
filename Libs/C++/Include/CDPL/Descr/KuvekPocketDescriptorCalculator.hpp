@@ -129,7 +129,7 @@ namespace CDPL
              * \brief Returns the test vector at index \a idx (generated on demand).
              * \param idx The test vector index.
              * \return A \c const reference to the test vector.
-             * \throw Base::IndexError if the number of test vectors is zero or \a idx is not in the range [0, getNumTestVectors() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumTestVectors()).
              */
             const Math::Vector3D& getTestVector(std::size_t idx);
 

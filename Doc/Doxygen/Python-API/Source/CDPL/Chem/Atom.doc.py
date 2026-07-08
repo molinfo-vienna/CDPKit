@@ -143,7 +143,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \return A reference to the connected atom at index <em>idx</em>. 
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
     # \note The order of connected atoms corresponds to the order of connecting bonds.
     # 
@@ -204,7 +204,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \return A reference to the incident bond at index <em>idx</em>. 
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
     # 
     # \note The order of incident bonds corresponds to the order of connected atoms.
     # 

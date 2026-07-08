@@ -179,7 +179,7 @@ namespace CDPL
              * \brief Returns the entry at index \a idx.
              * \param idx The zero-based entry index.
              * \return A \c const reference to the entry.
-             * \throw Base::IndexError if the number of entries is zero or \a idx is not in the range [0, getNumEntries() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumEntries()).
              */
             const Entry& getEntry(std::size_t idx) const;
 
@@ -191,7 +191,7 @@ namespace CDPL
             /**
              * \brief Removes the entry at index \a idx.
              * \param idx The zero-based entry index.
-             * \throw Base::IndexError if the number of entries is zero or \a idx is not in the range [0, getNumEntries() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumEntries()).
              */
             void removeEntry(std::size_t idx);
 
@@ -199,7 +199,7 @@ namespace CDPL
              * \brief Removes the entry pointed to by the iterator \a it.
              * \param it An iterator pointing to the entry to remove.
              * \return An iterator pointing to the entry immediately following the removed one.
-             * \throw Base::RangeError if the number of entries is zero or \a it is not in the range [getEntriesBegin(), getEntriesEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getEntriesBegin(), getEntriesEnd()).
              */
             EntryIterator removeEntry(const EntryIterator& it);
 

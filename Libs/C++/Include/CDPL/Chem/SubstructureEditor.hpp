@@ -119,14 +119,14 @@ namespace CDPL
              * \brief Returns the molecular graph of the search pattern at index \a idx.
              * \param idx The zero-based search-pattern index.
              * \return The molecular graph of the search pattern at index \a idx.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns()).
              */
             const MolecularGraph::SharedPointer& getSearchPattern(std::size_t idx) const;
 
             /**
              * \brief Removes the search pattern at index \a idx.
              * \param idx The zero-based search-pattern index to remove.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns()).
              */
             void removeSearchPattern(std::size_t idx);
 
@@ -182,14 +182,14 @@ namespace CDPL
              * \brief Returns the molecular graph of the exclude pattern at index \a idx.
              * \param idx The zero-based exclude-pattern index.
              * \return The molecular graph of the exclude pattern at index \a idx.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns()).
              */
             const MolecularGraph::SharedPointer& getExcludePattern(std::size_t idx) const;
 
             /**
              * \brief Removes the exclude pattern at index \a idx.
              * \param idx The zero-based exclude-pattern index to remove.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns()).
              */
             void removeExcludePattern(std::size_t idx);
 

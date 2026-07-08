@@ -106,7 +106,7 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     # 
     # \param idx The index of the atom for which to return the charge.
     # 
-    # \throw Base.IndexError If <em>idx</em> is not in the range <em>[0, NA - 1]</em> where <em>NA</em> is the number of atoms of the molecular graph for which the calculations have been performed.
+    # \throw Base.IndexError If <em>idx</em> is not in the range <em>[0, N)</em>, where <em>N</em> is the number of atoms of the molecular graph for which the calculations have been performed.
     # 
     def getCharge(idx: int) -> float: pass
 
@@ -115,7 +115,7 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     # 
     # \param idx The index of the atom for which to return the electronegativity.
     # 
-    # \throw Base.IndexError If <em>idx</em> is not in the range <em>[0, NA - 1]</em> where <em>NA</em> is the number of atoms of the molecular graph for which the calculations have been performed.
+    # \throw Base.IndexError If <em>idx</em> is not in the range <em>[0, N)</em>, where <em>N</em> is the number of atoms of the molecular graph for which the calculations have been performed.
     # 
     def getElectronegativity(idx: int) -> float: pass
 

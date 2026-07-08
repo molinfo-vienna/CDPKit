@@ -78,7 +78,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the Chem::Atom instance at index \a idx.
              * \param idx The zero-based index of the Chem::Atom instance to return.
              * \return A \c const reference to the Chem::Atom instance at the specified index.
-             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual const Atom& getAtom(std::size_t idx) const = 0;
 
@@ -86,7 +86,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the atom at index \a idx.
              * \param idx The zero-based index of the Chem::Atom instance to return.
              * \return A non-\c const reference to the atom at the specified index.
-             * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual Atom& getAtom(std::size_t idx) = 0;
 
@@ -163,7 +163,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the Chem::Entity3D instance at index \a idx (equivalent to getAtom(idx)).
              * \param idx The zero-based index of the Chem::Entity3D instance to return.
              * \return A \c const reference to the Chem::Entity3D instance at the specified index.
-             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual const Entity3D& getEntity(std::size_t idx) const;
 
@@ -171,7 +171,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the Chem::Entity3D instance at index \a idx (equivalent to getAtom(idx)).
              * \param idx The zero-based index of the Chem::Entity3D instance to return.
              * \return A non-\c const reference to the Chem::Entity3D instance at the specified index.
-             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual Entity3D& getEntity(std::size_t idx);
 

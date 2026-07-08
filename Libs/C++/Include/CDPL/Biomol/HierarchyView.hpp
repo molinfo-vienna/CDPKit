@@ -95,7 +95,7 @@ namespace CDPL
              * \brief Returns the model at index \a idx.
              * \param idx The zero-based model index.
              * \return A \c const reference to the model.
-             * \throw Base::IndexError if the number of models is zero or \a idx is not in the range [0, getNumModels() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumModels()).
              */
             const HierarchyViewModel& getModel(std::size_t idx) const;
 

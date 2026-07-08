@@ -130,8 +130,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the stored reaction-site data object at index \a idx.
              * \param idx The zero-based index of the reaction-site data object to return.
              * \return A non-\c const reference to the reaction-site data object at index \a idx.
-             * \throw Base::IndexError if no reactions-site data objects are available or \a idx is not in
-             *        the range [0, getNumReactionSites() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumReactionSites()).
              */
             ReactionSite& getReactionSite(std::size_t idx);
 
@@ -139,8 +138,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the stored reaction-site data object at index \a idx.
              * \param idx The zero-based index of the reaction-site data object to return.
              * \return A \c const reference to the reaction-site data object at index \a idx.
-             * \throw Base::IndexError if no reactions-site data objects are available or \a idx is not in
-             *        the range [0, getNumReactionSites() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumReactionSites()).
              */
             const ReactionSite& getReactionSite(std::size_t idx) const;
 

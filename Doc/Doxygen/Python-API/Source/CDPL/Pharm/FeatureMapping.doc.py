@@ -57,7 +57,7 @@ class FeatureMapping(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief Tells whether the map is empty (getSize() == 0).
+    # \brief Tells whether the map is empty (<tt>getSize() == 0</tt>).
     # 
     # \return <tt>True</tt> if the map is empty, and <tt>False</tt> otherwise.
     # 

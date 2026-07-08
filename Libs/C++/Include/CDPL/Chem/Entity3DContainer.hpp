@@ -76,7 +76,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the Chem::Entity3D instance at index \a idx.
              * \param idx The zero-based index of the Chem::Entity3D instance to return.
              * \return A \c const reference to the Chem::Entity3D instance at the specified index.
-             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumEntities() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumEntities()).
              */
             virtual const Entity3D& getEntity(std::size_t idx) const = 0;
 
@@ -84,7 +84,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the entity at index \a idx.
              * \param idx The zero-based index of the Chem::Entity3D instance to return.
              * \return A non-\c const reference to the entity at the specified index.
-             * \throw Base::IndexError if the number of entities is zero or \a idx is not in the range [0, getNumEntities() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumEntities()).
              */
             virtual Entity3D& getEntity(std::size_t idx) = 0;
 

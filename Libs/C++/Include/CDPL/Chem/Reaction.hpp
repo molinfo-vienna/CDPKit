@@ -233,7 +233,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the reaction component at index \a idx.
              * \param idx The zero-based index of the reaction component to return.
              * \return A \c const reference to the reaction component at the specified index.
-             * \throw Base::IndexError if the number of components is zero or \a idx is not in the range [0, getNumComponents() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumComponents()).
              */
             virtual const Molecule& getComponent(std::size_t idx) const = 0;
 
@@ -241,7 +241,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the reaction component at index \a idx.
              * \param idx The zero-based index of the reaction component to return.
              * \return A non-\c const reference to the reaction component at the specified index.
-             * \throw Base::IndexError if the number of components is zero or \a idx is not in the range [0, getNumComponents() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumComponents()).
              */
             virtual Molecule& getComponent(std::size_t idx) = 0;
 
@@ -251,8 +251,7 @@ namespace CDPL
              * \param idx The zero-based index of the reaction component to return.
              * \param role A flag indicating the reaction role of the component (see namespace Chem::ReactionRole).
              * \return A \c const reference to the reaction component with the specified role and index.
-             * \throw Base::IndexError if the number of components with the specified role is zero or \a idx is not in the range
-             *        [0, <tt>getNumComponents(role) - 1</tt>].
+             * \throw Base::IndexError if \a idx is not in the range [0, <tt>getNumComponents(role)</tt>).
              *        Base::ValueError if the value of \a role is not equal to Chem::ReactionRole::REACTANT,
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
@@ -264,8 +263,7 @@ namespace CDPL
              * \param idx The zero-based index of the reaction component to return.
              * \param role A flag indicating the reaction role of the component (see namespace Chem::ReactionRole).
              * \return A non-\c const reference to the reaction component with the specified role and index.
-             * \throw Base::IndexError if the number of components with the specified role is zero or \a idx is not in the range
-             *        [0, <tt>getNumComponents(role) - 1</tt>].
+             * \throw Base::IndexError if \a idx is not in the range [0, <tt>getNumComponents(role)</tt>).
              *        Base::ValueError if the value of \a role is not equal to Chem::ReactionRole::REACTANT, 
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
@@ -295,7 +293,7 @@ namespace CDPL
             /**
              * \brief Removes the reaction component at the specified index.
              * \param idx The zero-based index of the component to remove.
-             * \throw Base::IndexError if the number of components is zero or \a idx is not in the range [0, getNumComponents() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumComponents()).
              */
             virtual void removeComponent(std::size_t idx) = 0;
 
@@ -303,8 +301,7 @@ namespace CDPL
              * \brief Removes the reaction component at index \a idx in the list of components with the specified role.
              * \param idx The zero-based index of the component to remove.
              * \param role The reaction role of the components
-             * \throw Base::IndexError if the number of components with the specified role is zero or \a idx is not in the range 
-             *        [0, <tt>getNumComponents(role) - 1</tt>].
+             * \throw Base::IndexError if \a idx is not in the range [0, <tt>getNumComponents(role)</tt>).
              *        Base::ValueError if the value of \a role is not Chem::ReactionRole::REACTANT,
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
@@ -314,8 +311,7 @@ namespace CDPL
              * \brief Removes the reaction component specified by the iterator \a it.
              * \param it A mutable iterator that specifies the component to remove.
              * \return A mutable iterator pointing to the next reaction component in the list.
-             * \throw Base::RangeError if the number of reaction components is zero or \a it is not in the range 
-             *        [getComponentsBegin(), getComponentsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getComponentsBegin(), getComponentsEnd()).
              */
             ComponentIterator removeComponent(const ComponentIterator& it);
 

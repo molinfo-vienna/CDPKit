@@ -203,7 +203,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the atom at index \a idx.
              * \param idx The zero-based index of the atom to return.
              * \return A \c const reference to the atom at the specified index.
-             * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             const Atom& getAtom(std::size_t idx) const;
 
@@ -211,7 +211,7 @@ namespace CDPL
              * \brief Returns a \c non-const reference to the atom at index \a idx.
              * \param idx The zero-based index of the atom to return.
              * \return A \c non-const reference to the atom at the specified index.
-             * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             Atom& getAtom(std::size_t idx);
 
@@ -219,7 +219,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the bond at index \a idx.
              * \param idx The zero-based index of the bond to return.
              * \return A \c const reference to the bond at the specified index.
-             * \throw Base::IndexError if the number of bonds is zero or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             const Bond& getBond(std::size_t idx) const;
 
@@ -227,7 +227,7 @@ namespace CDPL
              * \brief Returns a \c non-const reference to the bond at index \a idx.
              * \param idx The zero-based index of the bond to return.
              * \return A \c non-const reference to the bond at the specified index.
-             * \throw Base::IndexError if the number of bonds is zero or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             Bond& getBond(std::size_t idx);
 
@@ -256,7 +256,7 @@ namespace CDPL
              * will also be removed.
              *
              * \param idx The zero-based index of the atom to remove.
-             * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             void removeAtom(std::size_t idx);
 
@@ -268,8 +268,7 @@ namespace CDPL
              *
              * \param it An iterator that specifies the atom to remove.
              * \return A mutable iterator pointing to the next atom in the list.
-             * \throw Base::RangeError if the number of atoms is zero or \a it is not in the range
-             *        [getAtomsBegin(), getAtomsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getAtomsBegin(), getAtomsEnd()).
              */
             AtomIterator removeAtom(const AtomIterator& it);
 
@@ -287,7 +286,7 @@ namespace CDPL
             /**
              * \brief Removes the bond at the specified index.
              * \param idx The zero-based index of the bond to remove.
-             * \throw Base::IndexError if the number of bonds is zero or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             void removeBond(std::size_t idx);
 
@@ -295,8 +294,7 @@ namespace CDPL
              * \brief Removes the bond specified by the iterator \a it.
              * \param it An iterator that specifies the bond to remove.
              * \return A mutable iterator pointing to the next bond in the list.
-             * \throw Base::RangeError if the number of bonds is zero or \a it is not in the range
-             *        [getBondsBegin(), getBondsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getBondsBegin(), getBondsEnd()).
              */
             BondIterator removeBond(const BondIterator& it);
 

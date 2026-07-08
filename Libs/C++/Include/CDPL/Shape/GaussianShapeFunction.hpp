@@ -149,7 +149,7 @@ namespace CDPL
              * \brief Returns the 3D position of the element at index \a idx.
              * \param idx The element index.
              * \return A \c const reference to the element 3D position.
-             * \throw Base::IndexError if no shape is associated with this function or \a idx is not in the range [0, getShape()->getNumElements() - 1].
+             * \throw Base::IndexError if no shape is associated with this function or \a idx is not in the range [0, <tt>getShape()->getNumElements()</tt>).
              */
             const Math::Vector3D& getElementPosition(std::size_t idx) const;
 

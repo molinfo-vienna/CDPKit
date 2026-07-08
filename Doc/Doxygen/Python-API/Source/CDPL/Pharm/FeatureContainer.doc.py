@@ -36,7 +36,7 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     # 
     # \return A reference to the feature at the specified index. 
     # 
-    # \throw Base.IndexError if the number of features is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
     # 
     def getFeature(idx: int) -> Feature: pass
 
@@ -77,7 +77,7 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     # 
     # \return A reference to the entity at the specified index. 
     # 
-    # \throw Base.IndexError if the number of features is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
     # 
     def getEntity(idx: int) -> Chem.Entity3D: pass
 

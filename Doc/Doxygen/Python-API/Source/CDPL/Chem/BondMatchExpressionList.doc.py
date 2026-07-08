@@ -57,7 +57,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def getSize() -> int: pass
 
     ##
-    # \brief Tells whether the list is empty (getSize() == 0).
+    # \brief Tells whether the list is empty (<tt>getSize() == 0</tt>).
     # 
     # \return <tt>True</tt> if the list is empty, <tt>False</tt> otherwise.
     # 
@@ -132,7 +132,7 @@ class BondMatchExpressionList(BondMatchExpression):
     # \param idx The location where to insert the new element.
     # \param value The value of the element to insert.
     # 
-    # \throw Base.IndexError if the list is empty or <em>idx</em> is not in the range [0, getSize()].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()].
     # 
     def insertElement(idx: int, value: BondMatchExpression) -> None: pass
 
@@ -166,7 +166,7 @@ class BondMatchExpressionList(BondMatchExpression):
     # 
     # \param idx The zero-based index of the element to remove.
     # 
-    # \throw Base.IndexError if the list is empty or <em>idx</em> is not in the range [0, getSize() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def removeElement(idx: int) -> None: pass
 
@@ -204,7 +204,7 @@ class BondMatchExpressionList(BondMatchExpression):
     # 
     # \return A reference to the element. 
     # 
-    # \throw Base.IndexError if the list is empty or <em>idx</em> is not in the range [0, getSize() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def getElement(idx: int) -> BondMatchExpression: pass
 
@@ -214,7 +214,7 @@ class BondMatchExpressionList(BondMatchExpression):
     # \param idx The zero-based index of the element for which to assign a new value.
     # \param value The new value of the element after assignment.
     # 
-    # \throw Base.IndexError if the list is empty or <em>idx</em> is not in the range [0, getSize() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def setElement(idx: int, value: BondMatchExpression) -> None: pass
 

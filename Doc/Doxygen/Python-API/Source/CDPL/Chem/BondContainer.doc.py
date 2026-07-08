@@ -38,7 +38,7 @@ class BondContainer(Boost.Python.instance):
     # 
     # \return A reference to the bond at the specified index. 
     # 
-    # \throw Base.IndexError if the number of bonds is zero or <em>idx</em> is not in the range [0, getNumBonds() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
     # 
     def getBond(idx: int) -> Bond: pass
 

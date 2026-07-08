@@ -48,14 +48,14 @@ namespace CDPL
 
         /**
          * \brief Global dictionary for the lookup of meta-data associated with the residues
-         *        in biological macromolecules.
+         *        of biological macromolecules.
          */
         class CDPL_BIOMOL_API ResidueDictionary
         {
 
           public:
             /**
-             * \brief A single residue dictionary entry.
+             * \brief Data structure representing a single dictionary entry.
              */
             class CDPL_BIOMOL_API Entry
             {
@@ -83,31 +83,31 @@ namespace CDPL
                       const StructureRetrievalFunction& struc_ret_func);
 
                 /**
-                 * \brief Constructs an empty (default-initialized) \c %Entry instance.
+                 * \brief Constructs an empty \c %Entry instance.
                  */
                 Entry();
 
                 /**
-                 * \brief Returns the three-letter code (TLC) of the residue.
+                 * \brief Returns the three-letter code of the residue.
                  * \return A \c const reference to the three-letter residue code.
                  */
                 const std::string& getCode() const;
 
                 /**
-                 * \brief Returns the TLC of the residue this entry replaces.
-                 * \return A \c const reference to the replaced-residue code (or an empty string if this entry does not replace any other residue).
+                 * \brief Returns the three-letter code of the residue this entry replaces.
+                 * \return A \c const reference to the replaced residue code (or an empty string if this entry does not replace any other residue).
                  */
                 const std::string& getReplacedCode() const;
 
                 /**
-                 * \brief Returns the TLC of the residue that replaces this one.
-                 * \return A \c const reference to the replacing-residue code (or an empty string if this entry has not been replaced).
+                 * \brief Returns the three-letter code of the residue that replaces this one.
+                 * \return A \c const reference to the replacing residue code (or an empty string if this entry has not been replaced).
                  */
                 const std::string& getReplacedByCode() const;
 
                 /**
-                 * \brief Returns the TLC of the parent residue.
-                 * \return A \c const reference to the parent-residue code (or an empty string if there is no parent).
+                 * \brief Returns the three-letter code of the parent residue.
+                 * \return A \c const reference to the parent residue code (or an empty string if there is no parent).
                  * \since 1.2
                  */
                 const std::string& getParentCode() const;
@@ -138,7 +138,7 @@ namespace CDPL
                 unsigned int getType() const;
 
                 /**
-                 * \brief Retrieves the residue structure via the configured structure-retrieval function.
+                 * \brief Retrieves the residue structure via the configured structure retrieval function.
                  * \return A shared pointer to the residue structure (or an empty pointer if no structure could be retrieved).
                  */
                 Chem::MolecularGraph::SharedPointer getStructure() const;
@@ -258,21 +258,21 @@ namespace CDPL
             ConstEntryIterator end() const;
 
             /**
-             * \brief Returns the TLC of the residue replaced by the residue with three-letter code \a code.
+             * \brief Returns the three-letter code of the residue replaced by the residue with code \a code.
              * \param code The residue three-letter code.
              * \return A \c const reference to the replaced-residue code (or an empty string if no matching entry exists or the entry does not replace any other residue).
              */
             const std::string& getReplacedCode(const std::string& code) const;
 
             /**
-             * \brief Returns the TLC of the residue that replaces the residue with three-letter code \a code.
+             * \brief Returns the three-letter code of the residue that replaces the residue with code \a code.
              * \param code The residue three-letter code.
              * \return A \c const reference to the replacing-residue code (or an empty string if no matching entry exists or the entry has not been replaced).
              */
             const std::string& getReplacedByCode(const std::string& code) const;
 
             /**
-             * \brief Returns the TLC of the parent residue of the residue with three-letter code \a code.
+             * \brief Returns the three-letter code of the parent residue of the residue with code \a code.
              * \param code The residue three-letter code.
              * \return A \c const reference to the parent-residue code (or an empty string if no matching entry exists or the residue has no parent).
              * \since 1.2

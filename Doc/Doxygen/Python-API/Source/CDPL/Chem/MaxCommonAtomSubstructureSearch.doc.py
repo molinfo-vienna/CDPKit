@@ -107,7 +107,7 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     # 
     # \return A reference to the atom/bond mapping object at index <em>idx</em>. 
     # 
-    # \throw Base.IndexError if no mappings are available or <em>idx</em> is not in the range [0, getNumMappings() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 
     def getMapping(idx: int) -> AtomBondMapping: pass
 

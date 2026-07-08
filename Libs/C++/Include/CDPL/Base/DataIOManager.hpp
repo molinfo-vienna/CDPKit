@@ -212,14 +212,14 @@ namespace CDPL
             /**
              * \brief Unregisters the Base::DataInputHandler implementation instance pointed to by the iterator \a it.
              * \param it An iterator pointing to the Base::DataInputHandler implementation instance to unregister.
-             * \throw Base::RangeError if \a it is not in the range [getInputHandlersBegin(), getInputHandlersEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getInputHandlersBegin(), getInputHandlersEnd()).
              */
             static InputHandlerIterator unregisterInputHandler(const InputHandlerIterator& it);
 
             /**
              * \brief Unregisters the Base::DataOutputHandler implementation instance implementation instance pointed to by the iterator \a it.
              * \param it An iterator pointing to the Base::DataOutputHandler implementation instance to unregister.
-             * \throw Base::RangeError if \a it is not in the range [getOutputHandlersBegin(), getOutputHandlersEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getOutputHandlersBegin(), getOutputHandlersEnd()).
              */
             static OutputHandlerIterator unregisterOutputHandler(const OutputHandlerIterator& it);
 

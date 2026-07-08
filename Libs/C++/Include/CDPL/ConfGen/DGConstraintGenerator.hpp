@@ -158,7 +158,7 @@ namespace CDPL
              * \brief Returns the stereo-center data for the atom stereo center at index \a idx.
              * \param idx The zero-based stereo-center index.
              * \return A \c const reference to the stereo-center data.
-             * \throw Base::IndexError if the number of atom stereo centers is zero or \a idx is not in the range [0, getNumAtomStereoCenters() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtomStereoCenters()).
              */
             const StereoCenterData& getAtomStereoCenterData(std::size_t idx) const;
 
@@ -166,7 +166,7 @@ namespace CDPL
              * \brief Returns the stereo-center data for the bond stereo center at index \a idx.
              * \param idx The zero-based stereo-center index.
              * \return A \c const reference to the stereo-center data.
-             * \throw Base::IndexError if the number of bond stereo centers is zero or \a idx is not in the range [0, getNumBondStereoCenters() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBondStereoCenters()).
              */
             const StereoCenterData& getBondStereoCenterData(std::size_t idx) const;
 

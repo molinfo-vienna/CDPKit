@@ -77,7 +77,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the Chem::Bond instance at index \a idx.
              * \param idx The zero-based index of the Chem::Bond instance to return.
              * \return A \c const reference to the Chem::Bond instance at the specified index.
-             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             virtual const Bond& getBond(std::size_t idx) const = 0;
 
@@ -85,7 +85,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the bond at index \a idx.
              * \param idx The zero-based index of the Chem::Bond instance to return.
              * \return A non-\c const reference to the bond at the specified index.
-             * \throw Base::IndexError if the number of bonds is zero or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             virtual Bond& getBond(std::size_t idx) = 0;
 

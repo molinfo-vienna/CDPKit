@@ -108,7 +108,7 @@ class TorsionRuleMatcher(Boost.Python.instance):
     # 
     # \return A reference to the torsion rule match object at index <em>idx</em>. 
     # 
-    # \throw Base.IndexError if no torsion rule matches are available or <em>idx</em> is not in the range [0, getNumMatches() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMatches()).
     # 
     def getMatch(idx: int) -> TorsionRuleMatch: pass
 

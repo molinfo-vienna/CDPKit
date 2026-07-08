@@ -77,7 +77,7 @@ namespace CDPL
              * \brief Returns the chain at index \a idx.
              * \param idx The zero-based chain index.
              * \return A \c const reference to the chain.
-             * \throw Base::IndexError if the number of chains is zero or \a idx is not in the range [0, getNumChains() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumChains()).
              */
             const HierarchyViewChain& getChain(std::size_t idx) const;
 

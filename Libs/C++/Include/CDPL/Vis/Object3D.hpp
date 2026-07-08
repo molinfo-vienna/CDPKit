@@ -156,7 +156,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the sub-object at index \a idx.
              * \param idx The zero-based sub-object index.
              * \return A \c const reference to the sub-object.
-             * \throw Base::IndexError if the number of sub-objects is zero or \a idx is not in the range [0, getNumSubObjects() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumSubObjects()).
              */
             const Object3D& getSubObject(std::size_t idx) const;
 
@@ -164,7 +164,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the sub-object at index \a idx.
              * \param idx The zero-based sub-object index.
              * \return A non-\c const reference to the sub-object.
-             * \throw Base::IndexError if the number of sub-objects is zero or \a idx is not in the range [0, getNumSubObjects() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumSubObjects()).
              */
             Object3D& getSubObject(std::size_t idx);
 
@@ -184,7 +184,7 @@ namespace CDPL
             /**
              * \brief Removes the sub-object at index \a idx.
              * \param idx The zero-based index of the sub-object to remove.
-             * \throw Base::IndexError if the number of sub-objects is zero or \a idx is not in the range [0, getNumSubObjects() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumSubObjects()).
              */
             void removeSubObject(std::size_t idx);
 
@@ -193,8 +193,7 @@ namespace CDPL
              *
              * \param it An iterator that specifies the sub-object to remove.
              * \return A mutable iterator pointing to the next sub-object in the list.
-             * \throw Base::RangeError if the number of sub-objects is zero or \a it is not in the range
-             *        [getSubObjectsBegin(), getSubObjectsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getSubObjectsBegin(), getSubObjectsEnd()).
              */
             Object3DIterator removeSubObject(const Object3DIterator& it);
 

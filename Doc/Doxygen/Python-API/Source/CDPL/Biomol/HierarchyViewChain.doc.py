@@ -40,7 +40,7 @@ class HierarchyViewChain(HierarchyViewNode):
     # 
     # \return A reference to the chain fragment. 
     # 
-    # \throw Base.IndexError if the number of chain fragments is zero or <em>idx</em> is not in the range [0, getNumFragments() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFragments()).
     # 
     def getFragment(idx: int) -> HierarchyViewFragment: pass
 

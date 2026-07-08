@@ -116,7 +116,7 @@ namespace CDPL
             /**
              * \brief Constructs an <em>N&times;N</em> rotation matrix from the unit quaternion \a q.
              * \tparam E The quaternion expression type.
-             * \param n The matrix dimension \a N.
+             * \param n The matrix dimension \e N.
              * \param q The unit quaternion expressing the rotation.
              */
             template <typename E>
@@ -132,7 +132,7 @@ namespace CDPL
              * \tparam T2 The x-axis component scalar type.
              * \tparam T3 The y-axis component scalar type.
              * \tparam T4 The z-axis component scalar type.
-             * \param n The matrix dimension \a N.
+             * \param n The matrix dimension \e N.
              * \param w The rotation angle (in radians).
              * \param ux The x-component of the rotation axis (unit vector).
              * \param uy The y-component of the rotation axis (unit vector).
@@ -269,7 +269,7 @@ namespace CDPL
 
             /**
              * \brief Tells whether the matrix is empty (size zero).
-             * \return \c true if \a N is zero, and \c false otherwise.
+             * \return \c true if \e N is zero, and \c false otherwise.
              */
             bool isEmpty() const
             {
@@ -277,8 +277,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the dimension \a N (the row count).
-             * \return \a N.
+             * \brief Returns the dimension \e N (the row count).
+             * \return \e N.
              */
             SizeType getSize1() const
             {
@@ -286,8 +286,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the dimension \a N (the column count).
-             * \return \a N.
+             * \brief Returns the dimension \e N (the column count).
+             * \return \e N.
              */
             SizeType getSize2() const
             {
@@ -427,7 +427,7 @@ namespace CDPL
 
             /**
              * \brief Constructs an <em>N&times;N</em> scaling matrix with the supplied per-axis scale factors.
-             * \param n The matrix dimension \a N.
+             * \param n The matrix dimension \e N.
              * \param sx The x-axis scale factor (default: 1).
              * \param sy The y-axis scale factor (default: 1).
              * \param sz The z-axis scale factor (default: 1).
@@ -485,7 +485,7 @@ namespace CDPL
 
             /**
              * \brief Tells whether the matrix is empty (size zero).
-             * \return \c true if \a N is zero, and \c false otherwise.
+             * \return \c true if \e N is zero, and \c false otherwise.
              */
             bool isEmpty() const
             {
@@ -493,8 +493,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the dimension \a N (the row count).
-             * \return \a N.
+             * \brief Returns the dimension \e N (the row count).
+             * \return \e N.
              */
             SizeType getSize1() const
             {
@@ -502,8 +502,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the dimension \a N (the column count).
-             * \return \a N.
+             * \brief Returns the dimension \e N (the column count).
+             * \return \e N.
              */
             SizeType getSize2() const
             {
@@ -644,7 +644,7 @@ namespace CDPL
 
             /**
              * \brief Constructs an <em>N&times;N</em> translation matrix with the supplied per-axis translation components.
-             * \param n The matrix dimension \a N.
+             * \param n The matrix dimension \e N.
              * \param tx The x-axis translation (default: 0).
              * \param ty The y-axis translation (default: 0).
              * \param tz The z-axis translation (default: 0).
@@ -702,7 +702,7 @@ namespace CDPL
 
             /**
              * \brief Tells whether the matrix is empty (size zero).
-             * \return \c true if \a N is zero, and \c false otherwise.
+             * \return \c true if \e N is zero, and \c false otherwise.
              */
             bool isEmpty() const
             {
@@ -710,8 +710,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the dimension \a N (the row count).
-             * \return \a N.
+             * \brief Returns the dimension \e N (the row count).
+             * \return \e N.
              */
             SizeType getSize1() const
             {
@@ -719,8 +719,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the dimension \a N (the column count).
-             * \return \a N.
+             * \brief Returns the dimension \e N (the column count).
+             * \return \e N.
              */
             SizeType getSize2() const
             {

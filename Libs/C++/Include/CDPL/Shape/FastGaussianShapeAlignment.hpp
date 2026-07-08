@@ -424,7 +424,7 @@ namespace CDPL
              * \brief Returns the alignment result at index \a idx.
              * \param idx The zero-based result index.
              * \return A \c const reference to the result.
-             * \throw Base::IndexError if the number of results is zero or \a idx is not in the range [0, getNumResults() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumResults()).
              */
             const AlignmentResult& getResult(std::size_t idx) const;
 
@@ -432,7 +432,7 @@ namespace CDPL
              * \brief Returns the alignment result at index \a idx.
              * \param idx The zero-based result index.
              * \return A reference to the result.
-             * \throw Base::IndexError if the number of results is zero or \a idx is not in the range [0, getNumResults() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumResults()).
              */
             AlignmentResult& getResult(std::size_t idx);
 

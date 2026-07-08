@@ -76,7 +76,7 @@ class HierarchyView(Boost.Python.instance):
     # 
     # \return A reference to the model. 
     # 
-    # \throw Base.IndexError if the number of models is zero or <em>idx</em> is not in the range [0, getNumModels() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumModels()).
     # 
     def getModel(idx: int) -> HierarchyViewModel: pass
 

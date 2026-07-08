@@ -80,7 +80,7 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     # \return The molecular graph of the search pattern at index <em>idx</em>. 
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns()).
     # 
     def getSearchPattern(idx: int) -> MolecularGraph: pass
 
@@ -89,7 +89,7 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     # \param idx The zero-based search-pattern index to remove.
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns()).
     # 
     def removeSearchPattern(idx: int) -> None: pass
 
@@ -119,7 +119,7 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     # \return The molecular graph of the exclude pattern at index <em>idx</em>. 
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
     def getExcludePattern(idx: int) -> MolecularGraph: pass
 
@@ -128,7 +128,7 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     # \param idx The zero-based exclude-pattern index to remove.
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
     def removeExcludePattern(idx: int) -> None: pass
 

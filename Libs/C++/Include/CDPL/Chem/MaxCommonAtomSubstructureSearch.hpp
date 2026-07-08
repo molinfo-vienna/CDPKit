@@ -178,7 +178,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
              * \return A non-\c const reference to the atom/bond mapping object at index \a idx.
-             * \throw Base::IndexError if no mappings are available or \a idx is not in the range [0, getNumMappings() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             AtomBondMapping& getMapping(std::size_t idx);
 
@@ -186,7 +186,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
              * \return A \c const reference to the atom/bond mapping object at index \a idx.
-             * \throw Base::IndexError if no mappings are available or \a idx is not in the range [0, getNumMappings() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             const AtomBondMapping& getMapping(std::size_t idx) const;
 

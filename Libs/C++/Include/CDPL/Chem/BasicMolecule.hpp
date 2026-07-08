@@ -225,8 +225,7 @@ namespace CDPL
              *
              * \param it An iterator that specifies the atom to remove.
              * \return A mutable iterator pointing to the next atom in the list.
-             * \throw Base::RangeError if the number of atoms is zero or \a it is not in the range
-             *        [getAtomsBegin(), getAtomsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getAtomsBegin(), getAtomsEnd()).
              */
             AtomIterator removeAtom(const AtomIterator& it);
 
@@ -266,8 +265,7 @@ namespace CDPL
              * \brief Removes the bond specified by the iterator \a it.
              * \param it An iterator that specifies the bond to remove.
              * \return A mutable iterator pointing to the next bond in the list.
-             * \throw Base::RangeError if the number of bonds is zero or \a it is not in the range
-             *        [getBondsBegin(), getBondsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getBondsBegin(), getBondsEnd()).
              */
             BondIterator removeBond(const BondIterator& it);
 

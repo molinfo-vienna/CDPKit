@@ -230,7 +230,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \return A reference to the rule. 
     # 
-    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumRules() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumRules()).
     # 
     def getRule(idx: int) -> TorsionRule: pass
 
@@ -239,7 +239,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \param idx The zero-based rule index.
     # 
-    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumRules() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumRules()).
     # 
     def removeRule(idx: int) -> None: pass
 
@@ -274,7 +274,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \return A reference to the child category. 
     # 
-    # \throw Base.IndexError if the number of child categories is zero or <em>idx</em> is not in the range [0, getNumCategories() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumCategories()).
     # 
     def getCategory(idx: int) -> TorsionCategory: pass
 
@@ -283,7 +283,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \param idx The zero-based child category index.
     # 
-    # \throw Base.IndexError if the number of child categories is zero or <em>idx</em> is not in the range [0, getNumCategories() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumCategories()).
     # 
     def removeCategory(idx: int) -> None: pass
 

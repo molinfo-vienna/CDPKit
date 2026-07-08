@@ -142,7 +142,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the feature at index \a idx.
              * \param idx The zero-based feature index.
              * \return A \c const reference to the feature at the specified index.
-             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
              */
             const BasicFeature& getFeature(std::size_t idx) const;
 
@@ -150,7 +150,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the feature at index \a idx.
              * \param idx The zero-based feature index.
              * \return A non-\c const reference to the feature at the specified index.
-             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
              */
             BasicFeature& getFeature(std::size_t idx);
 
@@ -163,7 +163,7 @@ namespace CDPL
             /**
              * \brief Removes the feature at index \a idx.
              * \param idx The zero-based feature index.
-             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
              */
             void removeFeature(std::size_t idx);
 
@@ -171,8 +171,7 @@ namespace CDPL
              * \brief Removes the feature specified by the iterator \a it.
              * \param it An iterator that specifies the feature to remove.
              * \return A mutable iterator pointing to the next feature in the list.
-             * \throw Base::RangeError if the number of features is zero or \a it is not in the range
-             *        [getFeaturesBegin(), getFeaturesEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getFeaturesBegin(), getFeaturesEnd()).
              */
             FeatureIterator removeFeature(const FeatureIterator& it);
 

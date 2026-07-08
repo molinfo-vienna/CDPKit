@@ -162,7 +162,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     # 
     # \return A reference to the pattern. 
     # 
-    # \throw Base.IndexError if the number of patterns is zero or <em>idx</em> is not in the range [0, getNumPatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumPatterns()).
     # 
     def getPattern(idx: int) -> Pattern: pass
 
@@ -171,7 +171,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     # 
     # \param idx The zero-based pattern index.
     # 
-    # \throw Base.IndexError if the number of patterns is zero or <em>idx</em> is not in the range [0, getNumPatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumPatterns()).
     # 
     def removePattern(idx: int) -> None: pass
 

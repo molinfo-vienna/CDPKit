@@ -91,7 +91,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the pharmacophore feature at index \a idx.
              * \param idx The zero-based index of the feature to return.
              * \return A \c const reference to the feature at the specified index.
-             * \throw Base::IndexError if the number of pharmacophore features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
              */
             virtual const Feature& getFeature(std::size_t idx) const = 0;
 
@@ -99,7 +99,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the pharmacophore feature at index \a idx.
              * \param idx The zero-based index of the feature to return.
              * \return A non-\c const reference to the feature at the specified index.
-             * \throw Base::IndexError if the number of featuress is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
              */
             virtual Feature& getFeature(std::size_t idx) = 0;
 
@@ -112,7 +112,7 @@ namespace CDPL
             /**
              * \brief Removes the pharmacophore feature at the specified index.
              * \param idx The index of the feature to remove.
-             * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
              */
             virtual void removeFeature(std::size_t idx) = 0;
 
@@ -120,8 +120,7 @@ namespace CDPL
              * \brief Removes the pharmacophore feature specified by the iterator \a it.
              * \param it An iterator that specifies the feature to remove.
              * \return A mutable iterator pointing to the next feature in the list.
-             * \throw Base::RangeError if the number of features is zero or \a it is not in the range
-             *        [getFeaturesBegin(), getFeaturesEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getFeaturesBegin(), getFeaturesEnd()).
              */
             FeatureIterator removeFeature(const FeatureIterator& it);
 

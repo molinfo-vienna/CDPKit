@@ -44,8 +44,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Data structure for the storage of data records found in PDB
-         *        formatted data [\ref PDB].
+         * \brief Data structure for the storage of preprocessed <em>Brookhaven Protein Data Bank (PDB)</em> data.
+         * \see [\ref PDB]
          */
         class CDPL_BIOMOL_API PDBData
         {
@@ -57,228 +57,228 @@ namespace CDPL
             typedef std::shared_ptr<PDBData> SharedPointer;
 
             /**
-             * \brief Identifies the type of \e PDB data record.
+             * \brief Specifies the type of a stored \e PDB data record.
              */
             enum RecordType
             {
 
                 /**
-                 * \brief \e PDB \c HEADER record (structure classification, deposition date, \e PDB ID).
+                 * \brief \c HEADER record (structure classification, deposition date, \e PDB ID).
                  */
                 HEADER,
     
                 /**
-                 * \brief \e PDB \c OBSLTE record (PDB IDs that have replaced this entry).
+                 * \brief \c OBSLTE record (PDB IDs that have replaced this entry).
                  */
                 OBSLTE,
     
                 /**
-                 * \brief \e PDB \c TITLE record (title of the entry).
+                 * \brief \c TITLE record (title of the entry).
                  */
                 TITLE,
     
                 /**
-                 * \brief \e PDB \c SPLIT record (list of entries that together form the complete structure).
+                 * \brief \c SPLIT record (list of entries that together form the complete structure).
                  */
                 SPLIT,
     
                 /**
-                 * \brief \e PDB \c CAVEAT record (caveats about the structure).
+                 * \brief \c CAVEAT record (warns of errors and unresolved issues of the entry).
                  */
                 CAVEAT,
     
                 /**
-                 * \brief \e PDB \c COMPND record (description of macromolecular contents).
+                 * \brief \c COMPND record (description of the macromolecular contents).
                  */
                 COMPND,
     
                 /**
-                 * \brief \e PDB \c SOURCE record (source organism information).
+                 * \brief \c SOURCE record (specifies the biological and/or chemical source of each biological molecule).
                  */
                 SOURCE,
     
                 /**
-                 * \brief \e PDB \c KEYWDS record (keywords describing the entry).
+                 * \brief \c KEYWDS record (a set of terms relevant to the entry).
                  */
                 KEYWDS,
     
                 /**
-                 * \brief \e PDB \c EXPDTA record (experimental technique).
+                 * \brief \c EXPDTA record (information about the experiment).
                  */
                 EXPDTA,
     
                 /**
-                 * \brief \e PDB \c AUTHOR record (authors of the entry).
+                 * \brief \c AUTHOR record (contains the names of the people responsible for the contents of the entry).
                  */
                 AUTHOR,
     
                 /**
-                 * \brief \e PDB \c REVDAT record (revision history of the entry).
+                 * \brief \c REVDAT record (revision history of the entry).
                  */
                 REVDAT,
     
                 /**
-                 * \brief \e PDB \c SPRSDE record (PDB IDs that this entry supersedes).
+                 * \brief \c SPRSDE record (PDB IDs that this entry supersedes).
                  */
                 SPRSDE,
     
                 /**
-                 * \brief \e PDB \c JRNL record (literature citation associated with the entry).
+                 * \brief \c JRNL record (literature citation associated with the entry).
                  */
                 JRNL,
     
                 /**
-                 * \brief \e PDB \c REMARK record (free-text annotations).
+                 * \brief \c REMARK record (experimental details, annotations, comments, and information not included in other records).
                  */
                 REMARK,
     
                 /**
-                 * \brief \e PDB \c DBREF record (cross-references to external sequence databases).
+                 * \brief \c DBREF record (cross-reference links between \e PDB sequences and a corresponding database sequence).
                  */
                 DBREF,
     
                 /**
-                 * \brief \e PDB \c DBREF1 record (first part of a two-line database cross-reference).
+                 * \brief \c DBREF1 record (first part of a two-line database cross-reference).
                  */
                 DBREF1,
     
                 /**
-                 * \brief \e PDB \c DBREF2 record (second part of a two-line database cross-reference).
+                 * \brief \c DBREF2 record (second part of a two-line database cross-reference).
                  */
                 DBREF2,
     
                 /**
-                 * \brief \e PDB \c SEQADV record (sequence differences relative to the reference database).
+                 * \brief \c SEQADV record (differences between sequence information in the \c SEQRES record and the sequence database entry given in \c DBREF).
                  */
                 SEQADV,
     
                 /**
-                 * \brief \e PDB \c SEQRES record (residue sequence of biopolymer chains).
+                 * \brief \c SEQRES record (residue sequence of biopolymer chains).
                  */
                 SEQRES,
     
                 /**
-                 * \brief \e PDB \c MODRES record (modified residues).
+                 * \brief \c MODRES record (descriptions of modifications to protein and nucleic acid residues).
                  */
                 MODRES,
     
                 /**
-                 * \brief \e PDB \c HET record (non-standard residue identification).
+                 * \brief \c HET record (describes non-standard residues for which coordinates are supplied).
                  */
                 HET,
     
                 /**
-                 * \brief \e PDB \c FORMUL record (chemical formula of non-standard residues).
+                 * \brief \c FORMUL record (chemical formula of non-standard residues).
                  */
                 FORMUL,
     
                 /**
-                 * \brief \e PDB \c HETNAM record (chemical name of non-standard residues).
+                 * \brief \c HETNAM record (chemical names of non-standard residues).
                  */
                 HETNAM,
     
                 /**
-                 * \brief \e PDB \c HETSYN record (synonyms for non-standard residues).
+                 * \brief \c HETSYN record (synonyms for non-standard residues).
                  */
                 HETSYN,
     
                 /**
-                 * \brief \e PDB \c HELIX record (helix secondary-structure annotations).
+                 * \brief \c HELIX record (helix secondary structure annotations).
                  */
                 HELIX,
     
                 /**
-                 * \brief \e PDB \c SHEET record (sheet secondary-structure annotations).
+                 * \brief \c SHEET record (sheet secondary structure annotations).
                  */
                 SHEET,
     
                 /**
-                 * \brief \e PDB \c TURN record (turn secondary-structure annotations).
+                 * \brief \c TURN record (locations of short loop turns that connect standard secondary structure segments).
                  */
                 TURN,
     
                 /**
-                 * \brief \e PDB \c SSBOND record (disulfide bond annotations).
+                 * \brief \c SSBOND record (identifies disulfide bonds in protein and polypeptide structures).
                  */
                 SSBOND,
     
                 /**
-                 * \brief \e PDB \c LINK record (covalent links between non-standard residues).
+                 * \brief \c LINK record (bonds between residues that are not implied by the primary structure).
                  */
                 LINK,
     
                 /**
-                 * \brief \e PDB \c CISPEP record (cis peptide bond annotations).
+                 * \brief \c CISPEP record (specifies prolines and other peptides found to be in the cis conformation).
                  */
                 CISPEP,
     
                 /**
-                 * \brief \e PDB \c SITE record (groups of residues describing an active or binding site).
+                 * \brief \c SITE record (specifies residues of an active or binding site).
                  */
                 SITE,
     
                 /**
-                 * \brief \e PDB \c CRYST1 record (unit cell parameters and space group).
+                 * \brief \c CRYST1 record (unit cell parameters, space group, and Z value).
                  */
                 CRYST1,
     
                 /**
-                 * \brief \e PDB \c MTRIX1 record (first row of a non-crystallographic-symmetry transformation matrix).
+                 * \brief \c MTRIX1 record (first row of a non-crystallographic symmetry transformation matrix).
                  */
                 MTRIX1,
     
                 /**
-                 * \brief \e PDB \c MTRIX2 record (second row of a non-crystallographic-symmetry transformation matrix).
+                 * \brief \c MTRIX2 record (second row of a non-crystallographic symmetry transformation matrix).
                  */
                 MTRIX2,
     
                 /**
-                 * \brief \e PDB \c MTRIX3 record (third row of a non-crystallographic-symmetry transformation matrix).
+                 * \brief \c MTRIX3 record (third row of a non-crystallographic symmetry transformation matrix).
                  */
                 MTRIX3,
     
                 /**
-                 * \brief \e PDB \c ORIGX1 record (first row of the orthogonal-to-submitted-coordinates transformation).
+                 * \brief \c ORIGX1 record (first row of the orthogonal to submitted coordinates transformation).
                  */
                 ORIGX1,
     
                 /**
-                 * \brief \e PDB \c ORIGX2 record (second row of the orthogonal-to-submitted-coordinates transformation).
+                 * \brief \c ORIGX2 record (second row of the orthogonal to submitted coordinates transformation).
                  */
                 ORIGX2,
     
                 /**
-                 * \brief \e PDB \c ORIGX3 record (third row of the orthogonal-to-submitted-coordinates transformation).
+                 * \brief \c ORIGX3 record (third row of the orthogonal to submitted coordinates transformation).
                  */
                 ORIGX3,
     
                 /**
-                 * \brief \e PDB \c SCALE1 record (first row of the orthogonal-to-fractional-coordinates transformation).
+                 * \brief \c SCALE1 record (first row of the orthogonal to fractional coordinates transformation).
                  */
                 SCALE1,
     
                 /**
-                 * \brief \e PDB \c SCALE2 record (second row of the orthogonal-to-fractional-coordinates transformation).
+                 * \brief \c SCALE2 record (second row of the orthogonal to fractional coordinates transformation).
                  */
                 SCALE2,
     
                 /**
-                 * \brief \e PDB \c SCALE3 record (third row of the orthogonal-to-fractional-coordinates transformation).
+                 * \brief \c SCALE3 record (third row of the orthogonal to fractional coordinates transformation).
                  */
                 SCALE3,
     
                 /**
-                 * \brief Derived: the 4-character \e PDB identifier extracted from the \c HEADER record.
+                 * \brief The 4 character \e PDB identifier extracted from the \c HEADER record.
                  */
                 STRUCTURE_ID,
     
                 /**
-                 * \brief Derived: the deposition date extracted from the \c HEADER record.
+                 * \brief The deposition date extracted from the \c HEADER record.
                  */
                 DEPOSITION_DATE,
     
                 /**
-                 * \brief Derived: the experimental resolution extracted from \c REMARK records.
+                 * \brief The experimental resolution extracted from \c REMARK records.
                  */
                 RESOLUTION
             };
@@ -288,7 +288,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief The type of a stored (record-type, record-data) pair.
+             * \brief The type of the stored record type and data pairs.
              */
             typedef typename TypeToDataMap::value_type Record;
 
@@ -310,7 +310,7 @@ namespace CDPL
 
             /**
              * \brief Constructs a copy of the \c %PDBData instance \a other.
-             * \param other The \c %PDBData to copy.
+             * \param other The \c %PDBData instance to copy.
              */
             PDBData(const PDBData& other):
                 data(other.data) {}
@@ -335,7 +335,7 @@ namespace CDPL
             /**
              * \brief Tells whether a record of the given type is stored.
              * \param type The queried record type.
-             * \return \c true if a record of the given type is stored, and \c false otherwise.
+             * \return \c true if a record of the given type has been found, and \c false otherwise.
              */
             bool containsRecord(const RecordType& type) const;
 
@@ -373,7 +373,7 @@ namespace CDPL
 
             /**
              * \brief Removes the record referenced by the given iterator.
-             * \param it Iterator referencing the record to remove.
+             * \param it Iterator pointing to the record to remove.
              */
             void removeRecord(const RecordIterator& it);
 
@@ -385,17 +385,17 @@ namespace CDPL
             bool removeRecord(const RecordType& type);
 
             /**
-             * \brief Stores the given record. Any pre-existing record of the same type is replaced.
+             * \brief Stores the given record (any pre-existing record of the same type is replaced).
              * \param rec The record to store.
-             * \return An iterator referencing the stored record.
+             * \return An iterator pointing to the stored record.
              */
             RecordIterator setRecord(const Record& rec);
 
             /**
-             * \brief Stores a record built from \a type and \a data. Any pre-existing record of the same type is replaced.
+             * \brief Stores a record built from \a type and \a data (any pre-existing record of the same type is replaced).
              * \param type The record type.
              * \param data The record data string.
-             * \return An iterator referencing the stored record.
+             * \return An iterator pointing to the stored record.
              */
             RecordIterator setRecord(const RecordType& type, const std::string& data);
 

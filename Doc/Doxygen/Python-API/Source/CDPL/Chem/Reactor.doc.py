@@ -86,7 +86,7 @@ class Reactor(Boost.Python.instance):
     # 
     # \return A reference to the reaction-site data object at index <em>idx</em>. 
     # 
-    # \throw Base.IndexError if no reactions-site data objects are available or <em>idx</em> is not in the range [0, getNumReactionSites() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReactionSites()).
     # 
     def getReactionSite(idx: int) -> AtomBondMapping: pass
 

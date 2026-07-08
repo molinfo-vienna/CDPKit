@@ -172,7 +172,7 @@ Description of several chemical structure file formats used by computer programs
 <tr>
 <td valign="top">\anchor CUBE<i>[CUBE]</i></td>
 <td valign="top">
-Gaussian CUBE File Format specification: https://h5cube-spec.readthedocs.io/en/latest/cubeformat.html
+Gaussian CUBE File Format Specification: https://h5cube-spec.readthedocs.io/en/latest/cubeformat.html
 </td>
 </tr>
 
@@ -408,7 +408,7 @@ T. A. Halgren, MMFF VI. MMFF94s option for energy minimization studies, <i>J. Co
 <tr>
 <td valign="top">\anchor MMTF<i>[MMTF]</i></td>
 <td valign="top">
-Macromolecular Transmission Format specification: https://github.com/rcsb/mmtf/blob/v1.0/spec.md
+Macromolecular Transmission Format Specification: https://github.com/rcsb/mmtf/blob/v1.0/spec.md
 </td>
 </tr>
 
@@ -431,14 +431,14 @@ ISBN 0-521-43108-5, http://www.nr.com/
 <tr>
 <td valign="top">\anchor PCDS<i>[PCDS]</i></td>
 <td valign="top">
-\c PubChem Data Specification: https://pubchem.ncbi.nlm.nih.gov/docs/data-specification
+\c PubChem Fingerprint Specification: https://pubchem.ncbi.nlm.nih.gov/docs/data-specification
 </td>
 </tr>
 
 <tr>
 <td valign="top">\anchor PDB<i>[PDB]</i></td>
 <td valign="top">
-PDB File-Format Specification website: https://www.wwpdb.org/documentation/file-format
+PDB File Format Specification: https://www.wwpdb.org/documentation/file-format
 </td>
 </tr>
 
@@ -590,7 +590,7 @@ http://amalfi.dis.unina.it/graph/db/papers/vf-algorithm.pdf
 <tr>
 <td valign="top">\anchor VRML97<i>[VRML97]</i></td>
 <td valign="top">
-Virtual Reality Modeling Language 1997 (V2.0) specification: https://www.web3d.org/documents/specifications/14772/V2.0/index.html
+Virtual Reality Modeling Language 1997 (V2.0) Specification: https://www.web3d.org/documents/specifications/14772/V2.0/index.html
 </td>
 </tr>
 

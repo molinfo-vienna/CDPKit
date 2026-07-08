@@ -131,7 +131,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the stored torsion rule match object at index \a idx.
              * \param idx The zero-based index of the torsion rule match object to return.
              * \return A \c const reference to the torsion rule match object at index \a idx.
-             * \throw Base::IndexError if no torsion rule matches are available or \a idx is not in the range [0, getNumMatches() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumMatches()).
              */
             const TorsionRuleMatch& getMatch(std::size_t idx) const;
 

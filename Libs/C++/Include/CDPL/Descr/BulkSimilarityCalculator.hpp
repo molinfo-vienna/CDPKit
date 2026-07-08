@@ -231,14 +231,14 @@ namespace CDPL
              * \brief Returns the stored descriptor at index \a idx.
              * \param idx The zero-based descriptor index.
              * \return A \c const reference to the descriptor.
-             * \throw Base::IndexError if the number of descriptors is zero or \a idx is not in the range [0, getNumDescriptors() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDescriptors()).
              */
             const Descriptor& getDescriptor(std::size_t idx) const;
 
             /**
              * \brief Removes the descriptor at index \a idx.
              * \param idx The zero-based descriptor index.
-             * \throw Base::IndexError if the number of descriptors is zero or \a idx is not in the range [0, getNumDescriptors() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDescriptors()).
              */
             void removeDescriptor(std::size_t idx);
 
@@ -246,8 +246,7 @@ namespace CDPL
              * \brief Removes the descriptor referenced by \a it.
              * \param it Iterator referencing the descriptor to remove.
              * \return A mutable iterator pointing to the descriptor following the removed one.
-             * \throw Base::RangeError if the number of descriptors is zero or \a it is not in the
-                      range [getDescriptorsBegin(), getDescriptorsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getDescriptorsBegin(), getDescriptorsEnd()).
              */
             DescriptorIterator removeDescriptor(const DescriptorIterator& it);
 
@@ -287,7 +286,7 @@ namespace CDPL
              * \brief Returns the result at the given index.
              * \param idx The zero-based result index.
              * \return A \c const reference to the (descriptor index, similarity) pair.
-             * \throw Base::IndexError if the number of descriptors is zero or \a idx is not in the range [0, getNumDescriptors() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDescriptors()).
              */
             const Result& getResult(std::size_t idx) const;
 
@@ -295,7 +294,7 @@ namespace CDPL
              * \brief Returns the similarity value of the result at the given index.
              * \param idx The zero-based result index.
              * \return A \c const reference to the similarity value.
-             * \throw Base::IndexError if the number of descriptors is zero or \a idx is not in the range [0, getNumDescriptors() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDescriptors()).
              */
             const SimilarityValue& getSimilarity(std::size_t idx) const;
 
@@ -303,7 +302,7 @@ namespace CDPL
              * \brief Returns the index of the target descriptor referenced by the result at the given result index.
              * \param idx The zero-based result index.
              * \return The descriptor index referenced by the result.
-             * \throw Base::IndexError if the number of descriptors is zero or \a idx is not in the range [0, getNumDescriptors() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumDescriptors()).
              */
             std::size_t getDescriptorIndex(std::size_t idx) const;
 

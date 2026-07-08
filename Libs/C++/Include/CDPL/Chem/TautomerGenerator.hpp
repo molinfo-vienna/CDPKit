@@ -136,14 +136,14 @@ namespace CDPL
              * \brief Returns the registered tautomerization rule at index \a idx.
              * \param idx The zero-based rule index.
              * \return A \c const reference to the rule smart pointer.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumTautomerizationRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumTautomerizationRules()).
              */
             const TautomerizationRule::SharedPointer& getTautomerizationRule(std::size_t idx) const;
 
             /**
              * \brief Removes the registered tautomerization rule at index \a idx.
              * \param idx The zero-based rule index.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumTautomerizationRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumTautomerizationRules()).
              */
             void removeTautomerizationRule(std::size_t idx);
 

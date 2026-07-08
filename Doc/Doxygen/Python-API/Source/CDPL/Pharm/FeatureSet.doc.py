@@ -77,7 +77,7 @@ class FeatureSet(FeatureContainer):
     # 
     # \param idx The zero-based index of the feature to remove.
     # 
-    # \throw Base.IndexError if the number of features is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
     # 
     def removeFeature(idx: int) -> None: pass
 

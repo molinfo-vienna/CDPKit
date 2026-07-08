@@ -84,7 +84,6 @@ namespace CDPL
              */
             typedef std::function<void(Molecule&, const MolecularGraph&)> CopyPostprocessingFunction;
 
-
             /**
              * \brief Virtual destructor.
              *
@@ -119,7 +118,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the atom at index \a idx.
              * \param idx The zero-based index of the atom to return.
              * \return A \c const reference to the atom at the specified index.
-             * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual const Atom& getAtom(std::size_t idx) const = 0;
 
@@ -127,7 +126,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the atom at index \a idx.
              * \param idx The zero-based index of the atom to return.
              * \return A non-\c const reference to the atom at the specified index.
-             * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual Atom& getAtom(std::size_t idx) = 0;
 
@@ -147,7 +146,7 @@ namespace CDPL
              * will also be removed.
              *
              * \param idx The index of the atom to remove.
-             * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual void removeAtom(std::size_t idx) = 0;
 
@@ -159,8 +158,7 @@ namespace CDPL
              *
              * \param it An iterator that specifies the atom to remove.
              * \return A mutable iterator pointing to the next atom in the list.
-             * \throw Base::RangeError if the number of atoms is zero or \a it is not in the range
-             *        [getAtomsBegin(), getAtomsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getAtomsBegin(), getAtomsEnd()).
              */
             AtomIterator removeAtom(const AtomIterator& it);
 
@@ -168,7 +166,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the bond at index \a idx.
              * \param idx The zero-based index of the bond to return.
              * \return A \c const reference to the bond at the specified index.
-             * \throw Base::IndexError if the number of bonds is zero or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             virtual const Bond& getBond(std::size_t idx) const = 0;
 
@@ -176,7 +174,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the bond at index \a idx.
              * \param idx The zero-based index of the bond to return.
              * \return A non-\c const reference to the bond at the specified index.
-             * \throw Base::IndexError if the number of bonds is zero or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             virtual Bond& getBond(std::size_t idx) = 0;
 
@@ -191,15 +189,14 @@ namespace CDPL
              * \param atom1_idx The zero-based index of the first atom of the bond.
              * \param atom2_idx The zero-based index of the second atom of the bond.
              * \return A reference to the newly created or already existing bond between the specified atoms.
-             * \throw Base::IndexError if the number of atoms is zero or \a atom1_idx and/or \a atom2_idx is not in the
-             *        range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a atom1_idx and/or \a atom2_idx is not in the range [0, getNumAtoms()).
              */
             virtual Bond& addBond(std::size_t atom1_idx, std::size_t atom2_idx) = 0;
 
             /**
              * \brief Removes the bond at the specified index.
              * \param idx The zero-based index of the bond to remove.
-             * \throw Base::IndexError if the number of bonds is zero or \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             virtual void removeBond(std::size_t idx) = 0;
 
@@ -207,8 +204,7 @@ namespace CDPL
              * \brief Removes the bond specified by the iterator \a it.
              * \param it An iterator that specifies the bond to remove.
              * \return A mutable iterator pointing to the next bond in the list.
-             * \throw Base::RangeError if the number of bonds is zero or \a it is not in the range
-             *        [getBondsBegin(), getBondsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getBondsBegin(), getBondsEnd()).
              */
             BondIterator removeBond(const BondIterator& it);
 

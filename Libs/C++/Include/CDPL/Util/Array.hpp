@@ -213,7 +213,7 @@ namespace CDPL
             std::size_t size() const;
 
             /**
-             * \brief Tells whether the array is empty (getSize() == 0).
+             * \brief Tells whether the array is empty (<tt>getSize() == 0</tt>).
              * \return \c true if the array is empty, \c false otherwise.
              */
             bool isEmpty() const;
@@ -293,7 +293,7 @@ namespace CDPL
              * \brief Inserts a new element before the location specified by the index \a idx.
              * \param idx The location where to insert the new element.
              * \param value The value of the element to insert.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize()].
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()].
              */
             void insertElement(std::size_t idx, const ValueType& value = ValueType());
 
@@ -353,7 +353,7 @@ namespace CDPL
             /**
              * \brief Removes the element at the position specified by the index \a idx.
              * \param idx The zero-based index of the element to remove.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */
             void removeElement(std::size_t idx);
 
@@ -362,7 +362,7 @@ namespace CDPL
              * \param it The iterator specifying the element to remove.
              * \return An iterator pointing to the position of the element immediately 
              *         following the one that was removed.
-             * \throw Base::RangeError if the array is empty or \a it is not in the range [getElementsBegin(), getElementsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd()).
              */
             ElementIterator removeElement(const ElementIterator& it);
 
@@ -484,7 +484,7 @@ namespace CDPL
              *
              * \param idx The zero-based index of the element.
              * \return A \c const reference to the element.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */
             const ValueType& getElement(std::size_t idx) const;
 
@@ -495,7 +495,7 @@ namespace CDPL
              *
              * \param idx The zero-based index of the element.
              * \return A non-\c const reference to the element.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */
             ValueType& getElement(std::size_t idx);
 
@@ -503,7 +503,7 @@ namespace CDPL
              * \brief Assigns a new value to the element specified by the index \a idx.
              * \param idx The zero-based index of the element for which to assign a new value.
              * \param value The new value of the element after assignment.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */
             void setElement(std::size_t idx, const ValueType& value = ValueType());
 
@@ -511,7 +511,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the element at index \a idx.
              * \param idx The zero-based index of the element.
              * \return A \c const reference to the element.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */
             const ValueType& operator[](std::size_t idx) const;
 
@@ -519,7 +519,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the element at index \a idx.
              * \param idx The zero-based index of the element.
              * \return A non-\c const reference to the element.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */
             ValueType& operator[](std::size_t idx);
 

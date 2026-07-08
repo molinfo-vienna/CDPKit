@@ -247,7 +247,7 @@ namespace CDPL
              * \param idx The zero-based index of the entity instance to return.
              * \param first_set \c true, if the entity to return is stored in the first set. \c false, if stored in the second set.
              * \return A non-\c const reference to the entity stored at index \a idx in the specified set.
-             * \throw Base::IndexError if the number of entities in the specified set is zero or \a idx is not in the range [0, getNumEntities() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumEntities()).
              */
             const EntityType& getEntity(std::size_t idx, bool first_set) const;
 

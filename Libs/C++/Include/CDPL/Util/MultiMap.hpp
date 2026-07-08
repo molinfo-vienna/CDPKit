@@ -231,7 +231,7 @@ namespace CDPL
             std::size_t getSize() const;
 
             /**
-             * \brief Tells whether the map is empty (getSize() == 0).
+             * \brief Tells whether the map is empty (<tt>getSize() == 0</tt>).
              * \return \c true if the map is empty, and \c false otherwise.
              */
             bool isEmpty() const;

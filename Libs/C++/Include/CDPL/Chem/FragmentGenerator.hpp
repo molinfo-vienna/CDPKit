@@ -315,7 +315,7 @@ namespace CDPL
              * \brief Returns the fragmentation rule at index \a idx.
              * \param idx The zero-based rule index.
              * \return A \c const reference to the rule.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumFragmentationRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFragmentationRules()).
              */
             const FragmentationRule& getFragmentationRule(std::size_t idx) const;
 
@@ -323,7 +323,7 @@ namespace CDPL
              * \brief Returns the fragmentation rule at index \a idx.
              * \param idx The zero-based rule index.
              * \return A reference to the rule.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumFragmentationRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFragmentationRules()).
              */
             FragmentationRule& getFragmentationRule(std::size_t idx);
 
@@ -354,7 +354,7 @@ namespace CDPL
             /**
              * \brief Removes the fragmentation rule at index \a idx.
              * \param idx The zero-based rule index.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumFragmentationRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFragmentationRules()).
              */
             void removeFragmentationRule(std::size_t idx);
 
@@ -392,7 +392,7 @@ namespace CDPL
              * \brief Returns the exclude pattern at index \a idx.
              * \param idx The zero-based pattern index.
              * \return A \c const reference to the exclude pattern.
-             * \throw Base::IndexError if the number of exclude patterns is zero or \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns()).
              */
             const ExcludePattern& getExcludePattern(std::size_t idx) const;
 
@@ -400,7 +400,7 @@ namespace CDPL
              * \brief Returns the exclude pattern at index \a idx.
              * \param idx The zero-based pattern index.
              * \return A reference to the exclude pattern.
-             * \throw Base::IndexError if the number of exclude patterns is zero or \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns()).
              */
             ExcludePattern& getExcludePattern(std::size_t idx);
 
@@ -431,7 +431,7 @@ namespace CDPL
             /**
              * \brief Removes the exclude pattern at index \a idx.
              * \param idx The zero-based pattern index.
-             * \throw Base::IndexError if the number of exclude patterns is zero or \a idx is not in the range [0, getNumExcludePatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns()).
              */
             void removeExcludePattern(std::size_t idx);
 
@@ -489,7 +489,7 @@ namespace CDPL
              * \brief Returns the fragment link at index \a idx.
              * \param idx The zero-based link index.
              * \return A \c const reference to the fragment link.
-             * \throw Base::IndexError if the number of fragment links is zero or \a idx is not in the range [0, getNumFragmentLinks() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFragmentLinks()).
              */
             const FragmentLink& getFragmentLink(std::size_t idx) const;
 

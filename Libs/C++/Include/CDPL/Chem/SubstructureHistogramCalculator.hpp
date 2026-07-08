@@ -171,21 +171,21 @@ namespace CDPL
              * \brief Returns the registered pattern at index \a idx.
              * \param idx The zero-based pattern index.
              * \return A \c const reference to the pattern.
-             * \throw Base::IndexError if the number of patterns is zero or \a idx is not in the range [0, getNumPatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumPatterns()).
              */
             const Pattern& getPattern(std::size_t idx) const;
 
             /**
              * \brief Removes the registered pattern at index \a idx.
              * \param idx The zero-based pattern index.
-             * \throw Base::IndexError if the number of patterns is zero or \a idx is not in the range [0, getNumPatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumPatterns()).
              */
             void removePattern(std::size_t idx);
 
             /**
              * \brief Removes the registered pattern referenced by \a it.
              * \param it Iterator referencing the pattern to remove.
-             * \throw Base::IndexError if \a it is not in the range [getPatternsBegin(), getPatternsEnd() - 1].
+             * \throw Base::IndexError if \a it is not in the range [getPatternsBegin(), getPatternsEnd()).
              */
             void removePattern(const PatternIterator& it);
 

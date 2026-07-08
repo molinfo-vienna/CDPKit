@@ -151,7 +151,7 @@ namespace CDPL
              * \brief Returns the query molecule at index \a idx.
              * \param idx The zero-based index of the query molecule.
              * \return A \c const reference to the query molecule.
-             * \throw Base::IndexError if the number of query molecules is zero or \a idx is not in the range [0, getQuerySetSize() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getQuerySetSize()).
              */
             const Chem::MolecularGraph& getQuery(std::size_t idx) const;
 

@@ -38,7 +38,7 @@ class Entity3DContainer(Boost.Python.instance):
     # 
     # \return A reference to the entity at the specified index. 
     # 
-    # \throw Base.IndexError if the number of entities is zero or <em>idx</em> is not in the range [0, getNumEntities() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntities()).
     # 
     def getEntity(idx: int) -> Entity3D: pass
 

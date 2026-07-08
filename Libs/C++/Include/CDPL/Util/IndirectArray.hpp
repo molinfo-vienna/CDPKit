@@ -189,7 +189,7 @@ namespace CDPL
              * \param it The iterator specifying the pointer to remove.
              * \return An iterator pointing to the position of the pointer element immediately 
              *         following the one that was removed.
-             * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd() - 1].
+             * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd()).
              */
             ElementIterator removeElement(const ElementIterator& it);
 
@@ -334,7 +334,7 @@ namespace CDPL
              *
              * \param idx The zero-based index of the pointer element.
              * \return A \c const reference to the pointed-to object.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1]. 
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()). 
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.
              */
             const ValueType& getElement(std::size_t idx) const;
@@ -347,7 +347,7 @@ namespace CDPL
              *
              * \param idx The zero-based index of the pointer element.
              * \return A non-\c const reference to the pointed-to object.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1]. 
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()). 
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.
              */
             ValueType& getElement(std::size_t idx);
@@ -357,7 +357,7 @@ namespace CDPL
              *        element at index \a idx.
              * \param idx The zero-based index of the pointer element.
              * \return A \c const reference to the pointed-to object.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1]. 
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()). 
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.
              */
             const ValueType& operator[](std::size_t idx) const;
@@ -367,7 +367,7 @@ namespace CDPL
              *        pointer element at index \a idx.
              * \param idx The zero-based index of the pointer element.
              * \return A non-\c const reference to the pointed-to object.
-             * \throw Base::IndexError if the array is empty or \a idx is not in the range [0, getSize() - 1].  
+             * \throw Base::IndexError if \a idx is not in the range [0, getSize()).  
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.
              */
             ValueType& operator[](std::size_t idx);

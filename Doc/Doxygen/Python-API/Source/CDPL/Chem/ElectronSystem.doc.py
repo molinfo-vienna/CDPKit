@@ -82,7 +82,7 @@ class ElectronSystem(AtomContainer):
     # 
     # \param idx The zero-based index of the atom to remove.
     # 
-    # \throw Base.IndexError if the number of atoms is zero or <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
     def removeAtom(idx: int) -> None: pass
 

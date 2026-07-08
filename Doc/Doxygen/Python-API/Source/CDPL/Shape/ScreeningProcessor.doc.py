@@ -97,7 +97,7 @@ class ScreeningProcessor(Boost.Python.instance):
     # 
     # \return A reference to the query molecule. 
     # 
-    # \throw Base.IndexError if the number of query molecules is zero or <em>idx</em> is not in the range [0, getQuerySetSize() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getQuerySetSize()).
     # 
     def getQuery(idx: int) -> Chem.MolecularGraph: pass
 

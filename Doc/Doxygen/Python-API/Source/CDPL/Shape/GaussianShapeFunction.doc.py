@@ -144,7 +144,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     # 
     # \return A reference to the element 3D position. 
     # 
-    # \throw Base.IndexError if no shape is associated with this function or <em>idx</em> is not in the range [0, getShape()->getNumElements() - 1].
+    # \throw Base.IndexError if no shape is associated with this function or <em>idx</em> is not in the range [0, <tt>getShape()->getNumElements()</tt>).
     # 
     def getElementPosition(idx: int) -> Math.Vector3D: pass
 

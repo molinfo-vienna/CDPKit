@@ -191,7 +191,7 @@ namespace CDPL
              * \brief Returns the child category at index \a idx.
              * \param idx The zero-based child category index.
              * \return A reference to the child category.
-             * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumCategories()).
              */
             TorsionCategory& getCategory(std::size_t idx);
 
@@ -199,7 +199,7 @@ namespace CDPL
              * \brief Returns the child category at index \a idx.
              * \param idx The zero-based child category index.
              * \return A \c const reference to the child category.
-             * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumCategories()).
              */
             const TorsionCategory& getCategory(std::size_t idx) const;
 
@@ -207,7 +207,7 @@ namespace CDPL
              * \brief Returns the torsion rule at index \a idx.
              * \param idx The zero-based rule index.
              * \return A reference to the rule.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumRules()).
              */
             TorsionRule& getRule(std::size_t idx);
 
@@ -215,21 +215,21 @@ namespace CDPL
              * \brief Returns the torsion rule at index \a idx.
              * \param idx The zero-based rule index.
              * \return A \c const reference to the rule.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumRules()).
              */
             const TorsionRule& getRule(std::size_t idx) const;
 
             /**
              * \brief Removes the child category at index \a idx.
              * \param idx The zero-based child category index.
-             * \throw Base::IndexError if the number of child categories is zero or \a idx is not in the range [0, getNumCategories() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumCategories()).
              */
             void removeCategory(std::size_t idx);
 
             /**
              * \brief Removes the torsion rule at index \a idx.
              * \param idx The zero-based rule index.
-             * \throw Base::IndexError if the number of rules is zero or \a idx is not in the range [0, getNumRules() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumRules()).
              */
             void removeRule(std::size_t idx);
 

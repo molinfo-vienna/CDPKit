@@ -48,7 +48,7 @@ class CompoundReactionReader(ReactionReaderBase):
     # 
     # \param idx The zero-based reader index.
     # 
-    # \throw Base.IndexError if the number of readers is zero or <em>idx</em> is not in the range [0, getNumReaders() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReaders()).
     # 
     def removeReader(idx: int) -> None: pass
 
@@ -64,7 +64,7 @@ class CompoundReactionReader(ReactionReaderBase):
     # 
     # \return A reference to the reader shared reference. 
     # 
-    # \throw Base.IndexError if the number of readers is zero or <em>idx</em> is not in the range [0, getNumReaders() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReaders()).
     # 
     def getReader(idx: int) -> ReactionReaderBase: pass
 

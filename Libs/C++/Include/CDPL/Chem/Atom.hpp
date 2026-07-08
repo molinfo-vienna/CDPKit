@@ -155,7 +155,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the incident bond at index \a idx.
              * \param idx The index of the incident bond to return.
              * \return A \c const reference to the incident bond at index \a idx.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              * \note The order of incident bonds corresponds to the order of the connected atoms.
              */
             virtual const Bond& getBond(std::size_t idx) const = 0;
@@ -164,7 +164,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the incident bond at index \a idx.
              * \param idx The index of the incident bond to return.
              * \return A non-\c const reference to the incident bond at index \a idx.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              * \note The order of incident bonds corresponds to the order of connected atoms.
              */
             virtual Bond& getBond(std::size_t idx) = 0;
@@ -173,7 +173,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the connected atom at index \a idx.
              * \param idx The index of the atom to return.
              * \return A \c const reference to the connected atom at index \a idx.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              * \note The order of connected atoms corresponds to the order of connecting bonds.
              */
             virtual const Atom& getAtom(std::size_t idx) const = 0;
@@ -182,7 +182,7 @@ namespace CDPL
              * \brief Returns a non-\c const reference to the connected atom at index \a idx.
              * \param idx The index of the atom to return.
              * \return A non-\c const reference to the connected atom at index \a idx.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              * \note The order of connected atoms corresponds to the order of connecting bonds.
              */
             virtual Atom& getAtom(std::size_t idx) = 0;

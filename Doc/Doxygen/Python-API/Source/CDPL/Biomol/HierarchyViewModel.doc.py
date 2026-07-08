@@ -40,7 +40,7 @@ class HierarchyViewModel(HierarchyViewNode):
     # 
     # \return A reference to the chain. 
     # 
-    # \throw Base.IndexError if the number of chains is zero or <em>idx</em> is not in the range [0, getNumChains() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumChains()).
     # 
     def getChain(idx: int) -> HierarchyViewChain: pass
 

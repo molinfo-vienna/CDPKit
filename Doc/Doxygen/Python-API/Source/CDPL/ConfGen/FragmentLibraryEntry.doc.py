@@ -117,7 +117,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     # 
     # \return A reference to the conformer. 
     # 
-    # \throw Base.IndexError if the number of stored conformers is zero or <em>idx</em> is not in the range [0, getNumConformers() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumConformers()).
     # 
     def getConformer(idx: int) -> ConformerData: pass
 

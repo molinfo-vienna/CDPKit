@@ -176,7 +176,7 @@ class TorsionRule(Boost.Python.instance):
     # 
     # \return A reference to the angle entry. 
     # 
-    # \throw Base.IndexError if the number of angle entries is zero or <em>idx</em> is not in the range [0, getNumAngles() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAngles()).
     # 
     def getAngle(idx: int) -> AngleEntry: pass
 
@@ -185,7 +185,7 @@ class TorsionRule(Boost.Python.instance):
     # 
     # \param idx The zero-based angle entry index.
     # 
-    # \throw Base.IndexError if the number of angle entries is zero or <em>idx</em> is not in the range [0, getNumAngles() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAngles()).
     # 
     def removeAngle(idx: int) -> None: pass
 

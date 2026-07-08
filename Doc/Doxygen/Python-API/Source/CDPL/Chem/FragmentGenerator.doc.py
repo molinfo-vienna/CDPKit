@@ -339,7 +339,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based rule index.
     # 
-    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumFragmentationRules() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFragmentationRules()).
     # 
     def removeFragmentationRule(idx: int) -> None: pass
 
@@ -350,7 +350,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \return A reference to the rule. 
     # 
-    # \throw Base.IndexError if the number of rules is zero or <em>idx</em> is not in the range [0, getNumFragmentationRules() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFragmentationRules()).
     # 
     def getFragmentationRule(idx: int) -> FragmentationRule: pass
 
@@ -386,7 +386,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based pattern index.
     # 
-    # \throw Base.IndexError if the number of exclude patterns is zero or <em>idx</em> is not in the range [0, getNumExcludePatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
     def removeExcludePattern(idx: int) -> None: pass
 
@@ -397,7 +397,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \return A reference to the exclude pattern. 
     # 
-    # \throw Base.IndexError if the number of exclude patterns is zero or <em>idx</em> is not in the range [0, getNumExcludePatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
     def getExcludePattern(idx: int) -> ExcludePattern: pass
 
@@ -443,7 +443,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \return A reference to the fragment link. 
     # 
-    # \throw Base.IndexError if the number of fragment links is zero or <em>idx</em> is not in the range [0, getNumFragmentLinks() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFragmentLinks()).
     # 
     def getFragmentLink(idx: int) -> FragmentLink: pass
 

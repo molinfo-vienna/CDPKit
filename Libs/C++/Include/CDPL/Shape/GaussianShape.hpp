@@ -195,7 +195,7 @@ namespace CDPL
             /**
              * \brief Removes the element at index \a idx.
              * \param idx The index of the element to remove.
-             * \throw Base::IndexError if the number of elements is zero or \a idx is not in the range [0, getNumElements() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumElements()).
              */
             void removeElement(std::size_t idx);
 
@@ -203,7 +203,7 @@ namespace CDPL
              * \brief Returns a \c const reference to the element at index \a idx.
              * \param idx The index of the element.
              * \return A \c const reference to the element.
-             * \throw Base::IndexError if the number of elements is zero or \a idx is not in the range [0, getNumElements() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumElements()).
              */
             const Element& getElement(std::size_t idx) const;
 
@@ -211,7 +211,7 @@ namespace CDPL
              * \brief Returns a reference to the element at index \a idx.
              * \param idx The index of the element.
              * \return A reference to the element.
-             * \throw Base::IndexError if the number of elements is zero or \a idx is not in the range [0, getNumElements() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumElements()).
              */
             Element& getElement(std::size_t idx);
 

@@ -153,7 +153,7 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     # 
     # \return A reference to the test vector. 
     # 
-    # \throw Base.IndexError if the number of test vectors is zero or <em>idx</em> is not in the range [0, getNumTestVectors() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumTestVectors()).
     # 
     def getTestVector(idx: int) -> Math.Vector3D: pass
 

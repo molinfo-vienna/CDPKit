@@ -61,7 +61,7 @@ class Vector3ULArray(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief Tells whether the array is empty (getSize() == 0).
+    # \brief Tells whether the array is empty (<tt>getSize() == 0</tt>).
     # 
     # \return <tt>True</tt> if the array is empty, <tt>False</tt> otherwise.
     # 
@@ -143,7 +143,7 @@ class Vector3ULArray(Boost.Python.instance):
     # \param idx The location where to insert the new element.
     # \param value The value of the element to insert.
     # 
-    # \throw Base.IndexError if the array is empty or <em>idx</em> is not in the range [0, getSize()].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()].
     # 
     def insertElement(idx: int, value: Vector3UL) -> None: pass
 
@@ -177,7 +177,7 @@ class Vector3ULArray(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the element to remove.
     # 
-    # \throw Base.IndexError if the array is empty or <em>idx</em> is not in the range [0, getSize() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def removeElement(idx: int) -> None: pass
 
@@ -215,7 +215,7 @@ class Vector3ULArray(Boost.Python.instance):
     # 
     # \return A reference to the element. 
     # 
-    # \throw Base.IndexError if the array is empty or <em>idx</em> is not in the range [0, getSize() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def getElement(idx: int) -> Vector3UL: pass
 
@@ -225,7 +225,7 @@ class Vector3ULArray(Boost.Python.instance):
     # \param idx The zero-based index of the element for which to assign a new value.
     # \param value The new value of the element after assignment.
     # 
-    # \throw Base.IndexError if the array is empty or <em>idx</em> is not in the range [0, getSize() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def setElement(idx: int, value: Vector3UL) -> None: pass
 

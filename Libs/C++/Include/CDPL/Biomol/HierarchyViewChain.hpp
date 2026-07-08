@@ -76,7 +76,7 @@ namespace CDPL
              * \brief Returns the chain fragment at index \a idx.
              * \param idx The zero-based fragment index.
              * \return A \c const reference to the chain fragment.
-             * \throw Base::IndexError if the number of chain fragments is zero or \a idx is not in the range [0, getNumFragments() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumFragments()).
              */
             const HierarchyViewFragment& getFragment(std::size_t idx) const;
 

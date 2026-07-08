@@ -251,7 +251,7 @@ namespace CDPL
              * \brief Returns the starting transformation at index \a idx.
              * \param idx The zero-based index of the starting transformation.
              * \return A \c const reference to the starting transformation.
-             * \throw Base::IndexError if the number of starting transformations is zero or \a idx is not in the range [0, getNumStartTransforms() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumStartTransforms()).
              */
             const QuaternionTransformation& getStartTransform(std::size_t idx) const;
 

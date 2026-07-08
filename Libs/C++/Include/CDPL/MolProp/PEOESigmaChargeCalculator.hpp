@@ -135,7 +135,7 @@ namespace CDPL
             /**
              * \brief Returns the calculated &sigma;-charge of the atom with index \a idx.
              * \param idx The index of the atom for which to return the charge.
-             * \throw Base::IndexError If \a idx is not in the range <i>[0, NA - 1]</i> where <i>NA</i> is the
+             * \throw Base::IndexError If \a idx is not in the range <i>[0, N)</i>, where <i>N</i> is the
              *        number of atoms of the molecular graph for which the calculations have been performed.
              */
             double getCharge(std::size_t idx) const;
@@ -143,7 +143,7 @@ namespace CDPL
             /**
              * \brief Returns the calculated &sigma;-electronegativity of the atom with index \a idx.
              * \param idx The index of the atom for which to return the electronegativity.
-             * \throw Base::IndexError If \a idx is not in the range <i>[0, NA - 1]</i> where <i>NA</i> is the
+             * \throw Base::IndexError If \a idx is not in the range <i>[0, N)</i>, where <i>N</i> is the
              *        number of atoms of the molecular graph for which the calculations have been performed.
              */
             double getElectronegativity(std::size_t idx) const;

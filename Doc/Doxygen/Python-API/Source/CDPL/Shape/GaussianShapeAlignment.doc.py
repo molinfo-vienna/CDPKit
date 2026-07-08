@@ -369,7 +369,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     # 
     # \return A reference to the reference shape. 
     # 
-    # \throw Base.IndexError if the number of reference shapes is zero or <em>idx</em> is not in the range [0, getNumReferenceShapes() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReferenceShapes()).
     # 
     def getReferenceShape(idx: int) -> GaussianShape: pass
 
@@ -405,7 +405,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     # 
     # \return A reference to the result. 
     # 
-    # \throw Base.IndexError if the number of results is zero or <em>idx</em> is not in the range [0, getNumResults() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumResults()).
     # 
     def getResult(idx: int) -> AlignmentResult: pass
 

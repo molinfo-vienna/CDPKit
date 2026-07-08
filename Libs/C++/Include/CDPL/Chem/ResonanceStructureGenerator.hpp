@@ -219,7 +219,7 @@ namespace CDPL
              * \brief Returns the resonance-structure record at index \a idx.
              * \param idx The zero-based structure index.
              * \return A \c const reference to the resonance-structure record.
-             * \throw Base::IndexError if the number of resonance structures is zero or \a idx is not in the range [0, getNumStructures() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumStructures()).
              */
             const StructureData& getStructureData(std::size_t idx) const;
 

@@ -20,232 +20,234 @@
 #
 
 ##
-# \brief Data structure for the storage of data records found in PDB formatted data [\ref PDB].
+# \brief Data structure for the storage of preprocessed <em>Brookhaven Protein Data Bank (PDB)</em> data.
+# 
+# \see [\ref PDB]
 # 
 class PDBData(Boost.Python.instance):
 
     ##
-    # \brief Identifies the type of <em>PDB</em> data record.
+    # \brief Specifies the type of a stored <em>PDB</em> data record.
     # 
     class RecordType(Boost.Python.enum):
 
         ##
-        # \brief <em>PDB</em> <tt>HEADER</tt> record (structure classification, deposition date, <em>PDB</em> ID).
+        # \brief <tt>HEADER</tt> record (structure classification, deposition date, <em>PDB</em> ID).
         # 
         HEADER = 0
 
         ##
-        # \brief <em>PDB</em> <tt>OBSLTE</tt> record (PDB IDs that have replaced this entry).
+        # \brief <tt>OBSLTE</tt> record (PDB IDs that have replaced this entry).
         # 
         OBSLTE = 1
 
         ##
-        # \brief <em>PDB</em> <tt>TITLE</tt> record (title of the entry).
+        # \brief <tt>TITLE</tt> record (title of the entry).
         # 
         TITLE = 2
 
         ##
-        # \brief <em>PDB</em> <tt>SPLIT</tt> record (list of entries that together form the complete structure).
+        # \brief <tt>SPLIT</tt> record (list of entries that together form the complete structure).
         # 
         SPLIT = 3
 
         ##
-        # \brief <em>PDB</em> <tt>CAVEAT</tt> record (caveats about the structure).
+        # \brief <tt>CAVEAT</tt> record (warns of errors and unresolved issues of the entry).
         # 
         CAVEAT = 4
 
         ##
-        # \brief <em>PDB</em> <tt>COMPND</tt> record (description of macromolecular contents).
+        # \brief <tt>COMPND</tt> record (description of the macromolecular contents).
         # 
         COMPND = 5
 
         ##
-        # \brief <em>PDB</em> <tt>SOURCE</tt> record (source organism information).
+        # \brief <tt>SOURCE</tt> record (specifies the biological and/or chemical source of each biological molecule).
         # 
         SOURCE = 6
 
         ##
-        # \brief <em>PDB</em> <tt>KEYWDS</tt> record (keywords describing the entry).
+        # \brief <tt>KEYWDS</tt> record (a set of terms relevant to the entry).
         # 
         KEYWDS = 7
 
         ##
-        # \brief <em>PDB</em> <tt>EXPDTA</tt> record (experimental technique).
+        # \brief <tt>EXPDTA</tt> record (information about the experiment).
         # 
         EXPDTA = 8
 
         ##
-        # \brief <em>PDB</em> <tt>AUTHOR</tt> record (authors of the entry).
+        # \brief <tt>AUTHOR</tt> record (contains the names of the people responsible for the contents of the entry).
         # 
         AUTHOR = 9
 
         ##
-        # \brief <em>PDB</em> <tt>REVDAT</tt> record (revision history of the entry).
+        # \brief <tt>REVDAT</tt> record (revision history of the entry).
         # 
         REVDAT = 10
 
         ##
-        # \brief <em>PDB</em> <tt>SPRSDE</tt> record (PDB IDs that this entry supersedes).
+        # \brief <tt>SPRSDE</tt> record (PDB IDs that this entry supersedes).
         # 
         SPRSDE = 11
 
         ##
-        # \brief <em>PDB</em> <tt>JRNL</tt> record (literature citation associated with the entry).
+        # \brief <tt>JRNL</tt> record (literature citation associated with the entry).
         # 
         JRNL = 12
 
         ##
-        # \brief <em>PDB</em> <tt>REMARK</tt> record (free-text annotations).
+        # \brief <tt>REMARK</tt> record (experimental details, annotations, comments, and information not included in other records).
         # 
         REMARK = 13
 
         ##
-        # \brief <em>PDB</em> <tt>DBREF</tt> record (cross-references to external sequence databases).
+        # \brief <tt>DBREF</tt> record (cross-reference links between <em>PDB</em> sequences and a corresponding database sequence).
         # 
         DBREF = 14
 
         ##
-        # \brief <em>PDB</em> <tt>DBREF1</tt> record (first part of a two-line database cross-reference).
+        # \brief <tt>DBREF1</tt> record (first part of a two-line database cross-reference).
         # 
         DBREF1 = 15
 
         ##
-        # \brief <em>PDB</em> <tt>DBREF2</tt> record (second part of a two-line database cross-reference).
+        # \brief <tt>DBREF2</tt> record (second part of a two-line database cross-reference).
         # 
         DBREF2 = 16
 
         ##
-        # \brief <em>PDB</em> <tt>SEQADV</tt> record (sequence differences relative to the reference database).
+        # \brief <tt>SEQADV</tt> record (differences between sequence information in the <tt>SEQRES</tt> record and the sequence database entry given in <tt>DBREF</tt>).
         # 
         SEQADV = 17
 
         ##
-        # \brief <em>PDB</em> <tt>SEQRES</tt> record (residue sequence of biopolymer chains).
+        # \brief <tt>SEQRES</tt> record (residue sequence of biopolymer chains).
         # 
         SEQRES = 18
 
         ##
-        # \brief <em>PDB</em> <tt>MODRES</tt> record (modified residues).
+        # \brief <tt>MODRES</tt> record (descriptions of modifications to protein and nucleic acid residues).
         # 
         MODRES = 19
 
         ##
-        # \brief <em>PDB</em> <tt>HET</tt> record (non-standard residue identification).
+        # \brief <tt>HET</tt> record (describes non-standard residues for which coordinates are supplied).
         # 
         HET = 20
 
         ##
-        # \brief <em>PDB</em> <tt>FORMUL</tt> record (chemical formula of non-standard residues).
+        # \brief <tt>FORMUL</tt> record (chemical formula of non-standard residues).
         # 
         FORMUL = 21
 
         ##
-        # \brief <em>PDB</em> <tt>HETNAM</tt> record (chemical name of non-standard residues).
+        # \brief <tt>HETNAM</tt> record (chemical names of non-standard residues).
         # 
         HETNAM = 22
 
         ##
-        # \brief <em>PDB</em> <tt>HETSYN</tt> record (synonyms for non-standard residues).
+        # \brief <tt>HETSYN</tt> record (synonyms for non-standard residues).
         # 
         HETSYN = 23
 
         ##
-        # \brief <em>PDB</em> <tt>HELIX</tt> record (helix secondary-structure annotations).
+        # \brief <tt>HELIX</tt> record (helix secondary structure annotations).
         # 
         HELIX = 24
 
         ##
-        # \brief <em>PDB</em> <tt>SHEET</tt> record (sheet secondary-structure annotations).
+        # \brief <tt>SHEET</tt> record (sheet secondary structure annotations).
         # 
         SHEET = 25
 
         ##
-        # \brief <em>PDB</em> <tt>TURN</tt> record (turn secondary-structure annotations).
+        # \brief <tt>TURN</tt> record (locations of short loop turns that connect standard secondary structure segments).
         # 
         TURN = 26
 
         ##
-        # \brief <em>PDB</em> <tt>SSBOND</tt> record (disulfide bond annotations).
+        # \brief <tt>SSBOND</tt> record (identifies disulfide bonds in protein and polypeptide structures).
         # 
         SSBOND = 27
 
         ##
-        # \brief <em>PDB</em> <tt>LINK</tt> record (covalent links between non-standard residues).
+        # \brief <tt>LINK</tt> record (bonds between residues that are not implied by the primary structure).
         # 
         LINK = 28
 
         ##
-        # \brief <em>PDB</em> <tt>CISPEP</tt> record (cis peptide bond annotations).
+        # \brief <tt>CISPEP</tt> record (specifies prolines and other peptides found to be in the cis conformation).
         # 
         CISPEP = 29
 
         ##
-        # \brief <em>PDB</em> <tt>SITE</tt> record (groups of residues describing an active or binding site).
+        # \brief <tt>SITE</tt> record (specifies residues of an active or binding site).
         # 
         SITE = 30
 
         ##
-        # \brief <em>PDB</em> <tt>CRYST1</tt> record (unit cell parameters and space group).
+        # \brief <tt>CRYST1</tt> record (unit cell parameters, space group, and Z value).
         # 
         CRYST1 = 31
 
         ##
-        # \brief <em>PDB</em> <tt>MTRIX1</tt> record (first row of a non-crystallographic-symmetry transformation matrix).
+        # \brief <tt>MTRIX1</tt> record (first row of a non-crystallographic symmetry transformation matrix).
         # 
         MTRIX1 = 32
 
         ##
-        # \brief <em>PDB</em> <tt>MTRIX2</tt> record (second row of a non-crystallographic-symmetry transformation matrix).
+        # \brief <tt>MTRIX2</tt> record (second row of a non-crystallographic symmetry transformation matrix).
         # 
         MTRIX2 = 33
 
         ##
-        # \brief <em>PDB</em> <tt>MTRIX3</tt> record (third row of a non-crystallographic-symmetry transformation matrix).
+        # \brief <tt>MTRIX3</tt> record (third row of a non-crystallographic symmetry transformation matrix).
         # 
         MTRIX3 = 34
 
         ##
-        # \brief <em>PDB</em> <tt>ORIGX1</tt> record (first row of the orthogonal-to-submitted-coordinates transformation).
+        # \brief <tt>ORIGX1</tt> record (first row of the orthogonal to submitted coordinates transformation).
         # 
         ORIGX1 = 35
 
         ##
-        # \brief <em>PDB</em> <tt>ORIGX2</tt> record (second row of the orthogonal-to-submitted-coordinates transformation).
+        # \brief <tt>ORIGX2</tt> record (second row of the orthogonal to submitted coordinates transformation).
         # 
         ORIGX2 = 36
 
         ##
-        # \brief <em>PDB</em> <tt>ORIGX3</tt> record (third row of the orthogonal-to-submitted-coordinates transformation).
+        # \brief <tt>ORIGX3</tt> record (third row of the orthogonal to submitted coordinates transformation).
         # 
         ORIGX3 = 37
 
         ##
-        # \brief <em>PDB</em> <tt>SCALE1</tt> record (first row of the orthogonal-to-fractional-coordinates transformation).
+        # \brief <tt>SCALE1</tt> record (first row of the orthogonal to fractional coordinates transformation).
         # 
         SCALE1 = 38
 
         ##
-        # \brief <em>PDB</em> <tt>SCALE2</tt> record (second row of the orthogonal-to-fractional-coordinates transformation).
+        # \brief <tt>SCALE2</tt> record (second row of the orthogonal to fractional coordinates transformation).
         # 
         SCALE2 = 39
 
         ##
-        # \brief <em>PDB</em> <tt>SCALE3</tt> record (third row of the orthogonal-to-fractional-coordinates transformation).
+        # \brief <tt>SCALE3</tt> record (third row of the orthogonal to fractional coordinates transformation).
         # 
         SCALE3 = 40
 
         ##
-        # \brief Derived: the 4-character <em>PDB</em> identifier extracted from the <tt>HEADER</tt> record.
+        # \brief The 4 character <em>PDB</em> identifier extracted from the <tt>HEADER</tt> record.
         # 
         STRUCTURE_ID = 41
 
         ##
-        # \brief Derived: the deposition date extracted from the <tt>HEADER</tt> record.
+        # \brief The deposition date extracted from the <tt>HEADER</tt> record.
         # 
         DEPOSITION_DATE = 42
 
         ##
-        # \brief Derived: the experimental resolution extracted from <tt>REMARK</tt> records.
+        # \brief The experimental resolution extracted from <tt>REMARK</tt> records.
         # 
         RESOLUTION = 43
 
@@ -303,7 +305,7 @@ class PDBData(Boost.Python.instance):
     # 
     # \param type The queried record type.
     # 
-    # \return <tt>True</tt> if a record of the given type is stored, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if a record of the given type has been found, and <tt>False</tt> otherwise.
     # 
     def containsRecord(type: RecordType) -> bool: pass
 
@@ -328,12 +330,12 @@ class PDBData(Boost.Python.instance):
     def removeRecord(type: RecordType) -> bool: pass
 
     ##
-    # \brief Stores a record built from <em>type</em> and <em>data</em>. Any pre-existing record of the same type is replaced.
+    # \brief Stores a record built from <em>type</em> and <em>data</em> (any pre-existing record of the same type is replaced).
     # 
     # \param type The record type.
     # \param data The record data string.
     # 
-    # \return An iterator referencing the stored record.
+    # \return An iterator pointing to the stored record.
     # 
     def setRecord(type: RecordType, data: str) -> None: pass
 

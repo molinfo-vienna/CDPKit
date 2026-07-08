@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief Global dictionary for the lookup of meta-data associated with the residues in biological macromolecules.
+# \brief Global dictionary for the lookup of meta-data associated with the residues of biological macromolecules.
 # 
 class ResidueDictionary(Boost.Python.instance):
 
     ##
-    # \brief A single residue dictionary entry.
+    # \brief Data structure representing a single dictionary entry.
     # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Constructs an empty (default-initialized) <tt>Entry</tt> instance.
+        # \brief Constructs an empty <tt>Entry</tt> instance.
         # 
         def __init__() -> None: pass
 
@@ -75,30 +75,30 @@ class ResidueDictionary(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief Returns the three-letter code (TLC) of the residue.
+        # \brief Returns the three-letter code of the residue.
         # 
         # \return A reference to the three-letter residue code.
         # 
         def getCode() -> str: pass
 
         ##
-        # \brief Returns the TLC of the residue this entry replaces.
+        # \brief Returns the three-letter code of the residue this entry replaces.
         # 
-        # \return A reference to the replaced-residue code (or an empty string if this entry does not replace any other residue).
+        # \return A reference to the replaced residue code (or an empty string if this entry does not replace any other residue).
         # 
         def getReplacedCode() -> str: pass
 
         ##
-        # \brief Returns the TLC of the residue that replaces this one.
+        # \brief Returns the three-letter code of the residue that replaces this one.
         # 
-        # \return A reference to the replacing-residue code (or an empty string if this entry has not been replaced).
+        # \return A reference to the replacing residue code (or an empty string if this entry has not been replaced).
         # 
         def getReplacedByCode() -> str: pass
 
         ##
-        # \brief Returns the TLC of the parent residue.
+        # \brief Returns the three-letter code of the parent residue.
         # 
-        # \return A reference to the parent-residue code (or an empty string if there is no parent). 
+        # \return A reference to the parent residue code (or an empty string if there is no parent). 
         # 
         # \since 1.2
         # 
@@ -135,7 +135,7 @@ class ResidueDictionary(Boost.Python.instance):
         def isObsolete() -> bool: pass
 
         ##
-        # \brief Retrieves the residue structure via the configured structure-retrieval function.
+        # \brief Retrieves the residue structure via the configured structure retrieval function.
         # 
         # \return A shared reference to the residue structure (or an empty reference if no structure could be retrieved).
         # 

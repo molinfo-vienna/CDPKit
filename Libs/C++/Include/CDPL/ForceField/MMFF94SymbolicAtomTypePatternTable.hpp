@@ -141,7 +141,7 @@ namespace CDPL
              * \brief Returns the entry at the zero-based index \a idx.
              * \param idx The zero-based entry index.
              * \return A \c const reference to the entry.
-             * \throw Base::IndexError if the number of entries is zero or \a idx is not in the range [0, getNumEntries() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumEntries()).
              */
             const Entry& getEntry(std::size_t idx) const;
 
@@ -153,7 +153,7 @@ namespace CDPL
             /**
              * \brief Removes the entry at the zero-based index \a idx.
              * \param idx The zero-based entry index.
-             * \throw Base::IndexError if the number of entries is zero or \a idx is not in the range [0, getNumEntries() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumEntries()).
              */
             void removeEntry(std::size_t idx);
 

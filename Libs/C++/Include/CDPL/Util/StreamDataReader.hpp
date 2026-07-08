@@ -87,7 +87,7 @@ namespace CDPL
              * \param obj The output data object.
              * \param overwrite If \c true, any pre-existing content of \a obj is replaced. Otherwise, the new data is merged.
              * \return A reference to itself.
-             * \throw Base::IndexError if the number of records is zero or \a idx is not in the range [0, getNumRecords() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumRecords()).
              */
             Base::DataReader<DataType>& read(std::size_t idx, DataType& obj, bool overwrite = true);
 

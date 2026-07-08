@@ -200,7 +200,7 @@ namespace CDPL
              * \brief Returns the conformer at index \a idx.
              * \param idx The zero-based conformer index.
              * \return A \c const reference to the conformer data.
-             * \throw Base::IndexError if the number of conformers is zero or \a idx is not in the range [0, getNumConformers() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumConformers()).
              */
             const ConformerData& getConformer(std::size_t idx) const;
 
@@ -208,7 +208,7 @@ namespace CDPL
              * \brief Returns the conformer at index \a idx.
              * \param idx The zero-based conformer index.
              * \return A reference to the conformer data.
-             * \throw Base::IndexError if the number of conformers is zero or \a idx is not in the range [0, getNumConformers() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumConformers()).
              */
             ConformerData& getConformer(std::size_t idx);
 

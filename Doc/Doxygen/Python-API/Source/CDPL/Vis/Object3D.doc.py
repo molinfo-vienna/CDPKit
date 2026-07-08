@@ -57,7 +57,7 @@ class Object3D(Base.PropertyContainer):
     # 
     # \param idx The zero-based index of the sub-object to remove.
     # 
-    # \throw Base.IndexError if the number of sub-objects is zero or <em>idx</em> is not in the range [0, getNumSubObjects() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSubObjects()).
     # 
     def removeSubObject(idx: int) -> None: pass
 
@@ -68,7 +68,7 @@ class Object3D(Base.PropertyContainer):
     # 
     # \return A reference to the sub-object. 
     # 
-    # \throw Base.IndexError if the number of sub-objects is zero or <em>idx</em> is not in the range [0, getNumSubObjects() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSubObjects()).
     # 
     def getSubObject(idx: int) -> Object3D: pass
 

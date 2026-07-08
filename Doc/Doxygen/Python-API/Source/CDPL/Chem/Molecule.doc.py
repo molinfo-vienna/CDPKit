@@ -135,7 +135,7 @@ class Molecule(MolecularGraph):
     # 
     # \return A reference to the newly created or already existing bond between the specified atoms. 
     # 
-    # \throw Base.IndexError if the number of atoms is zero or <em>atom1_idx</em> and/or <em>atom2_idx</em> is not in the range [0, getNumAtoms() - 1].
+    # \throw Base.IndexError if <em>atom1_idx</em> and/or <em>atom2_idx</em> is not in the range [0, getNumAtoms()).
     # 
     def addBond(atom1_idx: int, atom2_idx: int) -> Bond: pass
 
@@ -146,7 +146,7 @@ class Molecule(MolecularGraph):
     # 
     # \param idx The index of the atom to remove.
     # 
-    # \throw Base.IndexError if the number of atoms is zero or <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
     def removeAtom(idx: int) -> None: pass
 
@@ -155,7 +155,7 @@ class Molecule(MolecularGraph):
     # 
     # \param idx The zero-based index of the bond to remove.
     # 
-    # \throw Base.IndexError if the number of bonds is zero or <em>idx</em> is not in the range [0, getNumBonds() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
     # 
     def removeBond(idx: int) -> None: pass
 
@@ -258,7 +258,7 @@ class Molecule(MolecularGraph):
     # 
     # \return A reference to the atom at the specified index. 
     # 
-    # \throw Base.IndexError if the number of atoms is zero or <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
     def getAtom(idx: int) -> Atom: pass
 
@@ -315,7 +315,7 @@ class Molecule(MolecularGraph):
     # 
     # \return A reference to the bond at the specified index. 
     # 
-    # \throw Base.IndexError if the number of bonds is zero or <em>idx</em> is not in the range [0, getNumBonds() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
     # 
     def getBond(idx: int) -> Bond: pass
 

@@ -175,21 +175,21 @@ namespace CDPL
              * \brief Returns the registered pattern at index \a idx.
              * \param idx The zero-based pattern index.
              * \return A \c const reference to the pattern.
-             * \throw Base::IndexError if the number of patterns is zero or \a idx is not in the range [0, getNumPatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumPatterns()).
              */
             const Pattern& getPattern(std::size_t idx) const;
 
             /**
              * \brief Removes the registered pattern at index \a idx.
              * \param idx The zero-based pattern index.
-             * \throw Base::IndexError if the number of patterns is zero or \a idx is not in the range [0, getNumPatterns() - 1].
+             * \throw Base::IndexError if \a idx is not in the range [0, getNumPatterns()).
              */
             void removePattern(std::size_t idx);
 
             /**
              * \brief Removes the registered pattern referenced by \a it.
              * \param it Iterator referencing the pattern to remove.
-             * \throw Base::IndexError if \a it is not in the range [getPatternsBegin(), getPatternsEnd() - 1].
+             * \throw Base::IndexError if \a it is not in the range [getPatternsBegin(), getPatternsEnd()).
              */
             void removePattern(const PatternIterator& it);
 
@@ -256,7 +256,7 @@ namespace CDPL
              * \brief Tells whether the atom at index \a idx has received a label from any matching pattern.
              * \param idx The zero-based atom index in the molecular graph last processed by execute().
              * \return \c true if the atom carries a label, and \c false otherwise.
-             * \throw Base::IndexError if \a idx is not in the range [0, N - 1], where N is the number of atoms of the molecular graph last processed by execute().
+             * \throw Base::IndexError if \a idx is not in the range <i>[0, N)</i>, where <i>N</i> is the number of atoms of the molecular graph last processed by execute().
              */
             bool hasAtomLabel(std::size_t idx) const;
 
@@ -264,7 +264,7 @@ namespace CDPL
              * \brief Returns the atom label assigned to the atom at index \a idx during the last execute() call.
              * \param idx The zero-based atom index.
              * \return The atom label (zero if no pattern matched the atom).
-             * \throw Base::IndexError if \a idx is not in the range [0, N - 1], where N is the number of atoms of the molecular graph last processed by execute().
+             * \throw Base::IndexError if \a idx is not in the range <i>[0, N)</i>, where <i>N</i> is the number of atoms of the molecular graph last processed by execute().
              */
             std::size_t getAtomLabel(std::size_t idx) const;
 
@@ -272,7 +272,7 @@ namespace CDPL
              * \brief Returns the index of the pattern that produced the label of the atom at index \a idx.
              * \param idx The zero-based atom index.
              * \return The matching pattern index (returns an undefined value if hasAtomLabel(idx) is \c false).
-             * \throw Base::IndexError if \a idx is not in the range [0, N - 1], where N is the number of atoms of the molecular graph last processed by execute().
+             * \throw Base::IndexError if \a idx is not in the range <i>[0, N)</i>, where <i>N</i> is the number of atoms of the molecular graph last processed by execute().
              */
             std::size_t getPatternIndex(std::size_t idx) const;
 

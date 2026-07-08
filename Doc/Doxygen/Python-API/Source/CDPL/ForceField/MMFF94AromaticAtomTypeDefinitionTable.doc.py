@@ -177,7 +177,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     # 
     # \param idx The zero-based entry index.
     # 
-    # \throw Base.IndexError if the number of entries is zero or <em>idx</em> is not in the range [0, getNumEntries() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntries()).
     # 
     def removeEntry(idx: int) -> None: pass
 
@@ -188,7 +188,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     # 
     # \return A reference to the entry. 
     # 
-    # \throw Base.IndexError if the number of entries is zero or <em>idx</em> is not in the range [0, getNumEntries() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntries()).
     # 
     def getEntry(idx: int) -> Entry: pass
 

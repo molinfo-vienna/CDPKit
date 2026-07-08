@@ -163,7 +163,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # 
     # \return A reference to the pattern. 
     # 
-    # \throw Base.IndexError if the number of patterns is zero or <em>idx</em> is not in the range [0, getNumPatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumPatterns()).
     # 
     def getPattern(idx: int) -> Pattern: pass
 
@@ -172,7 +172,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # 
     # \param idx The zero-based pattern index.
     # 
-    # \throw Base.IndexError if the number of patterns is zero or <em>idx</em> is not in the range [0, getNumPatterns() - 1].
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumPatterns()).
     # 
     def removePattern(idx: int) -> None: pass
 
@@ -195,7 +195,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # 
     # \return The atom label (zero if no pattern matched the atom). 
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, N - 1], where N is the number of atoms of the molecular graph last processed by execute().
+    # \throw Base.IndexError if <em>idx</em> is not in the range <em>[0, N)</em>, where <em>N</em> is the number of atoms of the molecular graph last processed by execute().
     # 
     def getAtomLabel(idx: int) -> int: pass
 
@@ -206,7 +206,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # 
     # \return The matching pattern index (returns an undefined value if hasAtomLabel(idx) is <tt>False</tt>). 
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, N - 1], where N is the number of atoms of the molecular graph last processed by execute().
+    # \throw Base.IndexError if <em>idx</em> is not in the range <em>[0, N)</em>, where <em>N</em> is the number of atoms of the molecular graph last processed by execute().
     # 
     def getPatternIndex(idx: int) -> int: pass
 
@@ -217,7 +217,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the atom carries a label, and <tt>False</tt> otherwise. 
     # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, N - 1], where N is the number of atoms of the molecular graph last processed by execute().
+    # \throw Base.IndexError if <em>idx</em> is not in the range <em>[0, N)</em>, where <em>N</em> is the number of atoms of the molecular graph last processed by execute().
     # 
     def hasAtomLabel(idx: int) -> bool: pass
 
