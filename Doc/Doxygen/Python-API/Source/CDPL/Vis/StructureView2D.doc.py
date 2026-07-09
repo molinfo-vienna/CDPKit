@@ -197,7 +197,7 @@ class StructureView2D(View2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>StructureView2D</tt> instance for the visualization of the chemical structure specified by <em>molgraph</em>.
+    # \brief Constructs and initializes a <tt>StructureView2D</tt> instance for the visualization of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph A reference to the Chem.MolecularGraph object to visualize.
     # 
@@ -206,7 +206,7 @@ class StructureView2D(View2D):
     ##
     # \brief Specifies the chemical structure to visualize.
     # 
-    # If the chemical structure or a property has changed <em>after</em> this method has been called for a Chem.MolecularGraph object, the method needs to be called again for the object to make the changes visible.
+    # If the structure or any properties of <em>molgraph</em> have changed <em>after</em> this method has been called then the method needs to be invoked again for the object to make the changes visible.
     # 
     # \param molgraph A reference to the Chem.MolecularGraph object to visualize, or <tt>None</tt>.
     # 

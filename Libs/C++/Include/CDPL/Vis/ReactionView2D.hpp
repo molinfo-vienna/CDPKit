@@ -836,7 +836,7 @@ namespace CDPL
 
             /**
              * \brief Constructs and initializes a \c %ReactionView2D instance for the visualization of the chemical
-             *        reaction specified by \a rxn.
+             *        reaction \a rxn.
              * \param rxn A pointer to the Chem::Reaction object to visualize.
              */
             ReactionView2D(const Chem::Reaction* rxn = 0);
@@ -863,8 +863,8 @@ namespace CDPL
             /**
              * \brief Specifies the chemical reaction to visualize.
              *
-             * If the components of a chemical reaction or any properties have changed \e after this method has been called
-             * for a Chem::Reaction object, the method needs to be called again for the object to make the changes visible.
+             * If components or any properties of \a rxn have changed \e after this method has been called
+             * then the method needs to be invoked again for the object to make the changes visible.
              *
              * \param rxn A pointer to the Chem::Reaction object to visualize, or \c nullptr.
              */

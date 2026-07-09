@@ -44,9 +44,13 @@ namespace CDPL
     {
 
         /**
-         * \brief Generic writer that converts Pharm::FeatureContainer instances into a 3D scene representation
-         *        (via Vis::FeatureContainerObject3DFactory) and forwards them to a \a WriterImpl Object3D writer.
-         * \tparam WriterImpl The underlying Object3D writer implementation (e.g. an STL/VRML/PLY writer).
+         * \brief Generic Base::DataWriter implementation for the generation and output of Pharm::FeatureContainer 3D visualization data.
+         *
+         * The write() method first converts the Pharm::FeatureContainer instance into a 3D scene graph described by a Vis::Object3D
+         * instance (via Vis::FeatureContainerObject3DFactory). The 3D scene is then output using an embedded instance of the specified Vis::Object3D
+         * writer implementation.
+         *
+         * \tparam WriterImpl The Vis::Object3D writer to use for output (e.g. an STL/VRML/PLY writer).
          * \since 1.3
          */
         template <typename WriterImpl>
@@ -55,32 +59,35 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %FeatureContainerObject3DWriter instance that will write 3D models of Pharm::FeatureContainer objects to the output stream \a os.
+             * \brief Constructs a \c %FeatureContainerObject3DWriter instance that will write 3D models
+             *        of Pharm::FeatureContainer instances to the output stream \a os.
              * \param os The output stream to write to.
              */
             FeatureContainerObject3DWriter(std::ostream& os);
+            
             FeatureContainerObject3DWriter(const FeatureContainerObject3DWriter&) = delete;
 
             /**
-             * \brief Destructor; closes the underlying Object3D writer.
+             * \brief Destructor.
+             * \note Calls close() on the embedded \a WriterImpl instance.
              */
             ~FeatureContainerObject3DWriter();
 
             /**
-             * \brief Builds a 3D scene representation of \a cntnr and forwards it to the underlying \a WriterImpl.
-             * \param cntnr The feature container to write.
+             * \brief Builds a 3D scene representation of \a cntnr and outputs it using the embedded \a WriterImpl instance.
+             * \param cntnr The Pharm::FeatureContainer instance to visualize and output.
              * \return A reference to itself.
              */
             Base::DataWriter<Pharm::FeatureContainer>& write(const Pharm::FeatureContainer& cntnr);
 
             /**
-             * \brief Tells whether the underlying writer is in a good (writable) state.
+             * \brief Tells whether the embedded \a WriterImpl instance is in a good (writable) state.
              * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
              */
             operator const void*() const;
 
             /**
-             * \brief Tells whether the underlying writer is in a bad (non-writable) state.
+             * \brief Tells whether the embedded \a WriterImpl instance is in a bad (non-writable) state.
              * \return \c true if the writer is in a bad state, and \c false otherwise.
              */
             bool operator!() const;
@@ -88,7 +95,7 @@ namespace CDPL
             FeatureContainerObject3DWriter& operator=(const FeatureContainerObject3DWriter&) = delete;
 
             /**
-             * \brief Closes the underlying Object3D writer.
+             * \brief Closes the embedded \a WriterImpl instance.
              */
             void close();
 

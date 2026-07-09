@@ -243,7 +243,7 @@ class ReactionView2D(View2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>ReactionView2D</tt> instance for the visualization of the chemical reaction specified by <em>rxn</em>.
+    # \brief Constructs and initializes a <tt>ReactionView2D</tt> instance for the visualization of the chemical reaction <em>rxn</em>.
     # 
     # \param rxn A reference to the Chem.Reaction object to visualize.
     # 
@@ -252,7 +252,7 @@ class ReactionView2D(View2D):
     ##
     # \brief Specifies the chemical reaction to visualize.
     # 
-    # If the components of a chemical reaction or any properties have changed <em>after</em> this method has been called for a Chem.Reaction object, the method needs to be called again for the object to make the changes visible.
+    # If components or any properties of <em>rxn</em> have changed <em>after</em> this method has been called then the method needs to be invoked again for the object to make the changes visible.
     # 
     # \param rxn A reference to the Chem.Reaction object to visualize, or <tt>None</tt>.
     # 

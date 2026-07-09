@@ -686,8 +686,7 @@ namespace CDPL
             typedef std::shared_ptr<StructureView2D> SharedPointer;
 
             /**
-             * \brief Constructs and initializes a \c %StructureView2D instance for the visualization of the chemical
-             *        structure specified by \a molgraph.
+             * \brief Constructs and initializes a \c %StructureView2D instance for the visualization of the molecular graph \a molgraph.
              * \param molgraph A pointer to the Chem::MolecularGraph object to visualize.
              */
             StructureView2D(const Chem::MolecularGraph* molgraph = 0);
@@ -714,9 +713,8 @@ namespace CDPL
             /**
              * \brief Specifies the chemical structure to visualize.
              *
-             * If the chemical structure or a property has changed \e after this method has been called
-             * for a Chem::MolecularGraph object, the method needs to be called again for the object
-             * to make the changes visible.
+             * If the structure or any properties of \a molgraph have changed \e after this method has been called
+             * then the method needs to be invoked again for the object to make the changes visible.
              *
              * \param molgraph A pointer to the Chem::MolecularGraph object to visualize, or \c nullptr.
              */
