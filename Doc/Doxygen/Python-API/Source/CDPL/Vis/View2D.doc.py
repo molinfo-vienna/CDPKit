@@ -34,20 +34,20 @@ class View2D(Base.ControlParameterContainer):
     ##
     # \brief Renders the visual representation of the model using the specified Vis.Renderer2D instance.
     # 
-    # \param renderer The Renderer2D instance.
+    # \param renderer The Vis.Renderer2D instance that performs the drawing operations.
     # 
     def render(renderer: Renderer2D) -> None: pass
 
     ##
-    # \brief Specifies a font metrics object that will be used to measure the dimension of text labels.
+    # \brief Specifies a Vis.FontMetrics instance that will be used to measure the dimension of text labels.
     # 
-    # \param font_metrics A reference to the font metrics object or <em>None</em>.
+    # \param font_metrics A reference to the Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 
     def setFontMetrics(font_metrics: FontMetrics) -> None: pass
 
     ##
-    # \brief Calculates the bounding rectangle of the visualized model.
+    # \brief Calculates the axis-aligned bounding rectangle of the visualized model.
     # 
-    # \param bounds A Rectangle2D object storing the calculated bounding rectangle.
+    # \param bounds A Vis.Rectangle2D object storing the calculated bounding rectangle.
     # 
     def getModelBounds(bounds: Rectangle2D) -> None: pass

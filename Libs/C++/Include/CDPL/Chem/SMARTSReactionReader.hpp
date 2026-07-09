@@ -46,19 +46,6 @@ namespace CDPL
 
         /**
          * \brief Reader for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
-         *
-         * \c %SMARTSReactionReader supports the following control-parameter:
-         *
-         * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-         *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
-         *   <td align="center">\c false</td>
-         *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
-         *  </tr>
-         * </table>
          */
         class CDPL_CHEM_API SMARTSReactionReader : public Util::StreamDataReader<Reaction, SMARTSReactionReader>
         {

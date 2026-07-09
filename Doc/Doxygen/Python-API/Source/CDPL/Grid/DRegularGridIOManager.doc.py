@@ -199,7 +199,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param fmt Specifies the data format that is associated with the requested Grid.DRegularGridInputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the specified data format, or <em>None</em> if not available.
+    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the specified data format, or <tt>None</tt> if not available.
     # 
     @staticmethod
     def getInputHandlerByFormat(fmt: Base.DataFormat) -> DRegularGridInputHandler: pass
@@ -209,7 +209,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param name Specifies the name of the data format that is associated with the requested Grid.DRegularGridInputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format with the specified name, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format with the specified name, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the name is not case-sensitive.
     # 
@@ -221,7 +221,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param file_ext Specifies the file extension of the data format that is associated with the requested Grid.DRegularGridInputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format with the specified file extension, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format with the specified file extension, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the file extension is not case-sensitive.
     # 
@@ -233,7 +233,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param file_name Specifies the file name for which to search for a data format that matches its extension.
     # 
-    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the file extension is not case-sensitive.
     # 
@@ -245,7 +245,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param mime_type Specifies the mime-type of the data format that is associated with the requested Grid.DRegularGridInputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format with the specified mime-type, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridInputHandler implementation instance registered for the data format with the specified mime-type, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the mime-type is not case-sensitive.
     # 
@@ -325,7 +325,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param fmt Specifies the data format that is associated with the requested Grid.DRegularGridOutputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the specified data format, or <em>None</em> if not available.
+    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the specified data format, or <tt>None</tt> if not available.
     # 
     @staticmethod
     def getOutputHandlerByFormat(fmt: Base.DataFormat) -> DRegularGridOutputHandler: pass
@@ -335,7 +335,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param name Specifies the name of the data format that is associated with the requested Grid.DRegularGridOutputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format with the specified name, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format with the specified name, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the name is not case-sensitive.
     # 
@@ -347,7 +347,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param file_ext Specifies the file extension of the data format that is associated with the requested Grid.DRegularGridOutputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format with the specified file extension, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format with the specified file extension, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the file extension is not case-sensitive.
     # 
@@ -359,7 +359,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param file_name Specifies the file name for which to search for a data format that matches its extension.
     # 
-    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the file extension is not case-sensitive.
     # 
@@ -371,7 +371,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     # 
     # \param mime_type Specifies the mime-type of the data format that is associated with the requested Grid.DRegularGridOutputHandler implementation instance.
     # 
-    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format with the specified mime-type, or <em>None</em> if not available. 
+    # \return A reference to a Grid.DRegularGridOutputHandler implementation instance registered for the data format with the specified mime-type, or <tt>None</tt> if not available. 
     # 
     # \note The matching of the mime-type is not case-sensitive.
     # 

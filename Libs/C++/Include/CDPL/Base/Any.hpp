@@ -251,7 +251,7 @@ namespace CDPL
 
             /**
              * \brief Returns a raw pointer to the memory occupied by the stored data.
-             * \return A \c void pointer to the storage occupied by the held data, or \e nullptr if the
+             * \return A \c void pointer to the storage occupied by the held data, or \c nullptr if the
              *         \c %Any instance is empty.
              * \throw None.
              */

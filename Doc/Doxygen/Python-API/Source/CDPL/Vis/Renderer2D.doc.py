@@ -68,7 +68,7 @@ class Renderer2D(Boost.Python.instance):
     ##
     # \brief Saves the current renderer state.
     # 
-    # The method saves the current pen, brush, font and transformation matrix on an internal stack. The last saved state can be restored later on by a call to restoreState().
+    # The method saves the current pen, brush, font, clip path and transformation matrix on an internal stack. The last saved state can be restored later on by a call to restoreState().
     # 
     # \see restoreState()
     # 
@@ -84,14 +84,14 @@ class Renderer2D(Boost.Python.instance):
     ##
     # \brief Sets the applied affine transformation matrix to <em>xform</em>.
     # 
-    # \param xform The new affine transformation matrix.
+    # \param xform The new transformation matrix.
     # 
     def setTransform(xform: Math.Matrix3D) -> None: pass
 
     ##
-    # \brief Multiplies the current affine transformation matrix by <em>xform</em>.
+    # \brief Right-multiplies the current affine transformation matrix by <em>xform</em>.
     # 
-    # \param xform The matrix by which the current affine transformation matrix is multiplied.
+    # \param xform The matrix by which the current transformation matrix is multiplied.
     # 
     def transform(xform: Math.Matrix3D) -> None: pass
 
@@ -137,7 +137,7 @@ class Renderer2D(Boost.Python.instance):
     def drawRectangle(x: float, y: float, width: float, height: float) -> None: pass
 
     ##
-    # \brief Draws an ellipse with the given width and height around the center position <em>(x, y)</em>.
+    # \brief Draws an axis-aligned ellipse with the given width and height around the center position <em>(x, y)</em>.
     # 
     # The ellipse is filled as specified by the current brush and the outline will be drawn as specified by the current pen.
     # 
@@ -243,7 +243,7 @@ class Renderer2D(Boost.Python.instance):
     def setClipPath(path: Path2D) -> None: pass
 
     ##
-    # \brief Disables clipping.
+    # \brief Disables any currently active clipping region.
     # 
     def clearClipPath() -> None: pass
 

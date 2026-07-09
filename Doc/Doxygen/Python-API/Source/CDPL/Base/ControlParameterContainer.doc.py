@@ -192,7 +192,7 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Returns a reference to the parent control-parameter container.
     # 
-    # \return A reference to the parent control-parameter container, or <em>None</em> if no parent container has been set. 
+    # \return A reference to the parent control-parameter container, or <tt>None</tt> if no parent container has been set. 
     # 
     # \see setParent()
     # 
@@ -203,9 +203,9 @@ class ControlParameterContainer(Boost.Python.instance):
     # 
     # A control-parameter container that has been set as a parent gets used whenever a request for a control-parameter value cannot be satisfied locally by the container itself. That is, if a key/value entry for a given control-parameter does not exist, the request is simply forwarded to the parent container (which may also forward the request).
     # 
-    # Any callback functions registered by registerParentChangedCallback() will be invoked after the new parent container has been set (or the old container was detached by providing a <em>None</em> reference). Callbacks of any direct and indirect children also get invoked.
+    # Any callback functions registered by registerParentChangedCallback() will be invoked after the new parent container has been set (or the old container was detached by providing <tt>None</tt>). Callbacks of any direct and indirect children also get invoked.
     # 
-    # \param cntnr A reference to the parent control-parameter container or <em>None</em>. If the reference is <em>None</em>, the currently set parent container (if any) gets detached.
+    # \param cntnr A reference to the parent control-parameter container or <tt>None</tt>. If the reference equals <tt>None</tt>, the currently set parent container (if any) gets detached.
     # 
     def setParent(cntnr: ControlParameterContainer) -> None: pass
 

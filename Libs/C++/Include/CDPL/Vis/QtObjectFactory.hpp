@@ -53,9 +53,9 @@ namespace CDPL
 
         /**
          * \brief Provides methods for the creation of \c QFont, \c QColor, \c QPen and \c QBrush objects
-         *        from Font, Color, Pen and Brush instances.
+         *        from Vis::Font, Vis::Color, Vis::Pen and Vis::Brush instances.
          *
-         * For information about \c QFont, \c QColor, \c QPen and \c QBrush see [\ref QTDOC].
+         * \see [\ref QTDOC] for more information about \c QFont, \c QColor, \c QPen and \c QBrush.
          */
         class CDPL_VIS_QT_API QtObjectFactory
         {

@@ -56,7 +56,7 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # 
     # \param ref If <tt>True</tt>, the reference shape function is returned. Otherwise, the aligned shape function.
     # 
-    # \return A reference to the requested shape function (or <tt>nullptr</tt> if none is associated).
+    # \return A reference to the requested shape function (or <tt>None</tt> if none is associated).
     # 
     def getShapeFunction(ref: bool) -> GaussianShapeFunction: pass
 

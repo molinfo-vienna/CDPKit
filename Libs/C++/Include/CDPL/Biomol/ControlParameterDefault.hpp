@@ -59,7 +59,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const bool CHECK_LINE_LENGTH;
 
             /**
-             * \brief Default value (= empty shared pointer) of the control-parameter
+             * \brief Default value (= <tt>ResidueDictionary::SharedPointer()</tt>) of the control-parameter
              *        Biomol::ControlParameter::RESIDUE_DICTIONARY (an empty shared pointer selects the built-in default dictionary).
              * \since 1.2
              */
@@ -187,7 +187,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const bool MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP;
 
             /**
-             * \brief Default value (= empty function object) of the control-parameter
+             * \brief Default value (= <tt>MMCIFDataProcessingFunction()</tt>) of the control-parameter
              *        Biomol::ControlParameter::MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION.
              * \since 1.2
              */

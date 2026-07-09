@@ -69,7 +69,7 @@ def createRotatableBondMask(molgraph: Chem.MolecularGraph, excl_bond_mask: Util.
 # \brief Initializes <em>molgraph</em> as a fixed-substructure pattern matched against the supplied <em>tmplt</em> template.
 # 
 # \param molgraph The molecular graph to initialize.
-# \param tmplt The template molecular graph (may be <tt>nullptr</tt>).
+# \param tmplt The template molecular graph (may be <tt>None</tt>).
 # 
 # \return <tt>True</tt> if the initialization succeeded, and <tt>False</tt> otherwise. 
 # 

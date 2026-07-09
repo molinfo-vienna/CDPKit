@@ -47,18 +47,19 @@ namespace CDPL
     {
 
         /**
-         * \brief Implements the Renderer2D interface on top of the <em>Qt Toolkit</em>.
+         * \brief Implements the Vis::Renderer2D interface on top of the <em>Qt Toolkit</em>.
          *
          * \c %QtRenderer2D is implemented by forwarding the drawing operations to a provided \c QPainter
          * instance which has been created for the desired output device (screen, printer, off-screen image, ...). 
-         * For more information about \c QPainter and the <em>Qt Toolkit</em> see [\ref QTDOC].
+         *
+         * \see [\ref QTDOC] for more information about \c QPainter and the <em>Qt Toolkit</em>.
          */
         class CDPL_VIS_QT_API QtRenderer2D : public Renderer2D
         {
 
           public:
             /**
-             * \brief Constructs a renderer object which uses the \c QPainter instance \a painter for its drawing operations.
+             * \brief Constructs a %QtRenderer2D instance which uses the \c QPainter instance \a painter for its drawing operations.
              * \param painter The wrapped \c QPainter instance.
              */
             QtRenderer2D(QPainter& painter);
@@ -72,121 +73,40 @@ namespace CDPL
 
             QtRenderer2D& operator=(const QtRenderer2D&) = delete;
 
-            /**
-             * \brief Pushes the current pen, brush, font, transformation and clip path onto an internal state stack.
-             */
             void saveState();
 
-            /**
-             * \brief Pops the topmost stack entry and restores the renderer to the saved state.
-             */
             void restoreState();
 
-            /**
-             * \brief Replaces the current transformation matrix by \a xform.
-             * \param xform The new transformation matrix.
-             */
             void setTransform(const Math::Matrix3D& xform);
 
-            /**
-             * \brief Right-multiplies the current transformation matrix by \a xform.
-             * \param xform The transformation matrix to append.
-             */
             void transform(const Math::Matrix3D& xform);
 
-            /**
-             * \brief Sets the pen used for drawing outlines and lines.
-             * \param pen The new pen.
-             */
             void setPen(const Pen& pen);
 
-            /**
-             * \brief Sets the brush used for filling shapes.
-             * \param brush The new brush.
-             */
             void setBrush(const Brush& brush);
 
-            /**
-             * \brief Sets the font used for rendering text.
-             * \param font The new font.
-             */
             void setFont(const Font& font);
 
-            /**
-             * \brief Draws an axis-aligned rectangle from <em>(x1, y1)</em> to <em>(x2, y2)</em>.
-             * \param x1 The x-coordinate of the first corner.
-             * \param y1 The y-coordinate of the first corner.
-             * \param x2 The x-coordinate of the opposing corner.
-             * \param y2 The y-coordinate of the opposing corner.
-             */
             void drawRectangle(double x1, double y1, double x2, double y2);
 
-            /**
-             * \brief Draws the (filled) polygon defined by the vertex sequence \a points.
-             * \param points The polygon's vertex sequence.
-             */
             void drawPolygon(const Math::Vector2DArray& points);
 
-            /**
-             * \brief Draws a single line segment from <em>(x1, y1)</em> to <em>(x2, y2)</em>.
-             * \param x1 The x-coordinate of the line's start point.
-             * \param y1 The y-coordinate of the line's start point.
-             * \param x2 The x-coordinate of the line's end point.
-             * \param y2 The y-coordinate of the line's end point.
-             */
             void drawLine(double x1, double y1, double x2, double y2);
 
-            /**
-             * \brief Draws the open polyline defined by the vertex sequence \a points.
-             * \param points The polyline's vertex sequence.
-             */
             void drawPolyline(const Math::Vector2DArray& points);
 
-            /**
-             * \brief Draws the disjoint line segments defined by consecutive vertex pairs in \a points.
-             * \param points The vertex sequence (size must be even).
-             */
             void drawLineSegments(const Math::Vector2DArray& points);
 
-            /**
-             * \brief Draws a single point at <em>(x, y)</em>.
-             * \param x The point's x-coordinate.
-             * \param y The point's y-coordinate.
-             */
             void drawPoint(double x, double y);
 
-            /**
-             * \brief Draws the text \a txt with its baseline starting at <em>(x, y)</em>.
-             * \param x The baseline x-coordinate.
-             * \param y The baseline y-coordinate.
-             * \param txt The text to draw.
-             */
             void drawText(double x, double y, const std::string& txt);
 
-            /**
-             * \brief Draws an axis-aligned ellipse centered at <em>(x, y)</em> with the given \a width and \a height.
-             * \param x The x-coordinate of the ellipse's center.
-             * \param y The y-coordinate of the ellipse's center.
-             * \param width The width of the ellipse.
-             * \param height The height of the ellipse.
-             */
             void drawEllipse(double x, double y, double width, double height);
 
-            /**
-             * \brief Draws (strokes and fills) the 2D path \a path.
-             * \param path The path to draw.
-             */
             void drawPath(const Path2D& path);
 
-            /**
-             * \brief Sets the renderer's active clipping region to \a path.
-             * \param path The path defining the new clipping region.
-             */
             void setClipPath(const Path2D& path);
 
-            /**
-             * \brief Disables any currently active clipping region.
-             */
             void clearClipPath();
 
           private:

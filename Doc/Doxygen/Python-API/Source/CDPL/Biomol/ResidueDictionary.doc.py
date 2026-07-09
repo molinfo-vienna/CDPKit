@@ -251,7 +251,7 @@ class ResidueDictionary(Boost.Python.instance):
     ##
     # \brief Replaces the process-wide default dictionary by <em>dict</em>.
     # 
-    # \param dict The new default dictionary (a <tt>nullptr</tt> resets to the built-in default).
+    # \param dict The new default dictionary (<tt>None</tt> resets to the built-in default).
     # 
     @staticmethod
     def set(dict: ResidueDictionary) -> None: pass

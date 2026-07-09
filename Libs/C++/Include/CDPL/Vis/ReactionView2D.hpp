@@ -83,19 +83,19 @@ namespace CDPL
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::VIEWPORT</td>
-         *   <td>Specifies a rectangular viewport area which constrains the location and size of the generated reaction diagram</td>
+         *   <td>Specifies a rectangular viewport area which constrains the location and size of the generated structure diagram</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::SIZE_ADJUSTMENT</td>
-         *   <td>Specifies how to adjust the size of the reaction diagram relative to the available viewport area</td>
+         *   <td>Specifies how to adjust the size of the structure diagram relative to the available viewport area</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::ALIGNMENT</td>
-         *   <td>Specifies the alignment of the reaction diagram within the viewport area</td>
+         *   <td>Specifies the alignment of the structure diagram within the viewport area</td>
          *  </tr>
          *  <tr>
-         *   <td>Vis::ControlParameter::BACKGROUND_COLOR</td>
-         *   <td>Specifies the backround color of the reaction diagram</td>
+         *   <td>Vis::ControlParameter::BACKGROUND_BRUSH</td>
+         *   <td>Specifies the brush for filling the background of the reaction rendering</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::ATOM_COLOR</td>
@@ -126,12 +126,48 @@ namespace CDPL
          *   <td>Specifies the size of text labels that show the value of various atomic properties</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CUSTOM_LABEL_FONT</td>
+         *   <td>Specifies the font for atom custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CUSTOM_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CUSTOM_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom custom labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::ControlParameter::ATOM_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around atom labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::RADICAL_ELECTRON_DOT_SIZE</td>
          *   <td>Specifies the size of radical electron dots</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE</td>
+         *   <td>Specifies the minimum size of atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing atom highlighting area outlines</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::SHOW_EXPLICIT_HYDROGENS</td>
@@ -170,6 +206,22 @@ namespace CDPL
          *   <td>Specifies whether or not to draw radical electron dots</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS</td>
+         *   <td>Specifies whether or not to show atom confiuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::SHOW_ATOM_CUSTOM_LABELS</td>
+         *   <td>Specifies whether or not to show atom confiuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ENABLE_ATOM_HIGHLIGHTING</td>
+         *   <td>Specifies whether or not to enable the highlighting of atoms</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH</td>
+         *   <td>Specifies the line width for drawing atom or bond highlighting area outlines</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::ControlParameter::BOND_LENGTH</td>
          *   <td>Specifies the desired average bond length</td>
          *  </tr>
@@ -199,7 +251,7 @@ namespace CDPL
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::REACTION_CENTER_LINE_SPACING</td>
-         *   <td>Specifies the distance between the lines in reaction center marks</td>
+         *   <td>Specifies the distance between lines in reaction center marks</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::DOUBLE_BOND_TRIM_LENGTH</td>
@@ -218,8 +270,44 @@ namespace CDPL
          *   <td>Specifies the size of bond labels</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT</td>
+         *   <td>Specifies the font for bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CUSTOM_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CUSTOM_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond custom labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::ControlParameter::BOND_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around bond labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH</td>
+         *   <td>Specifies the width of bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing bond highlighting area outlines</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::SHOW_BOND_REACTION_INFOS</td>
@@ -232,6 +320,18 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::ControlParameter::SHOW_STEREO_BONDS</td>
          *   <td>Specifies whether or not to draw stereo bonds</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS</td>
+         *   <td>Specifies whether or not to show bond confiuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::SHOW_BOND_CUSTOM_LABELS</td>
+         *   <td>Specifies whether or not to show bond confiuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ENABLE_BOND_HIGHLIGHTING</td>
+         *   <td>Specifies whether or not to enable the highlighting of bonds</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::REACTION_ARROW_STYLE</td>
@@ -315,7 +415,7 @@ namespace CDPL
          *  </tr>
          * </table>
          *
-         * Default values for most of the control-parameters are defined in namespace Vis::ControlParameterDefault.
+         * Default values for the control-parameters are defined in namespace Vis::ControlParameterDefault.
          *
          * Supported Chem::Reaction properties:
          *
@@ -436,12 +536,52 @@ namespace CDPL
          *   <td>Specifies the size of text labels that show the value of various atomic properties</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_FONT</td>
+         *   <td>Specifies the font for atom custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom custom labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::MolecularGraphProperty::ATOM_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around atom labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::MolecularGraphProperty::RADICAL_ELECTRON_DOT_SIZE</td>
          *   <td>Specifies the size of radical electron dots</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_SIZE</td>
+         *   <td>Specifies the minimum size of atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing atom highlighting area outlines</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH</td>
+         *   <td>Specifies the line width for drawing atom or bond highlighting area outlines</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::MolecularGraphProperty::BOND_COLOR</td>
@@ -488,8 +628,44 @@ namespace CDPL
          *   <td>Specifies the size of bond labels</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_FONT</td>
+         *   <td>Specifies the font for bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond custom labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::MolecularGraphProperty::BOND_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around bond labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH</td>
+         *   <td>Specifies the width of bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing bond highlighting area outlines</td>
          *  </tr>
          * </table>
          *
@@ -521,11 +697,43 @@ namespace CDPL
          *  </tr>
          *  <tr>
          *   <td>Vis::AtomProperty::LABEL_MARGIN</td>
-         *   <td>Specifies the margin of free space around text labels</td>
+         *   <td>Specifies the margin of free space around atom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CUSTOM_LABEL_FONT</td>
+         *   <td>Specifies the font for atom custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CUSTOM_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CUSTOM_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom custom labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::AtomProperty::RADICAL_ELECTRON_DOT_SIZE</td>
          *   <td>Specifies the size of radical electron dots</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing highlighting area outlines</td>
          *  </tr>
          * </table>
          *
@@ -583,6 +791,38 @@ namespace CDPL
          *   <td>Vis::BondProperty::LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around bond labels</td>
          *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CUSTOM_LABEL_FONT</td>
+         *   <td>Specifies the font for bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CUSTOM_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CUSTOM_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing highlighting area outlines</td>
+         *  </tr>
          * </table>
          */
         class CDPL_VIS_API ReactionView2D : public View2D
@@ -610,21 +850,13 @@ namespace CDPL
 
             ReactionView2D& operator=(const ReactionView2D&) = delete;
 
-            /**
-             * \brief Renders the visualized reaction via \a renderer.
-             * \param renderer The renderer that performs the drawing operations.
-             */
             void render(Renderer2D& renderer);
 
-            /**
-             * \brief Specifies the font metrics object used for text-size calculations.
-             * \param font_metrics A pointer to the font metrics object (or \e null to clear).
-             */
             void setFontMetrics(FontMetrics* font_metrics);
 
             /**
-             * \brief Returns a pointer to the used font metrics object.
-             * \return A pointer to the used font metrics object, or \e null if none was specified.
+             * \brief Returns a pointer to the Vis::FontMetrics instance used for measuring the dimension of text labels.
+             * \return A pointer to the used Vis::FontMetrics instance, or \c nullptr if none was specified.
              */
             FontMetrics* getFontMetrics() const;
 
@@ -634,20 +866,16 @@ namespace CDPL
              * If the components of a chemical reaction or any properties have changed \e after this method has been called
              * for a Chem::Reaction object, the method needs to be called again for the object to make the changes visible.
              *
-             * \param rxn A pointer to the Chem::Reaction object to visualize, or \e null.
+             * \param rxn A pointer to the Chem::Reaction object to visualize, or \c nullptr.
              */
             void setReaction(const Chem::Reaction* rxn);
 
             /**
              * \brief Returns a pointer to the visualized chemical reaction.
-             * \return A pointer to the visualized Chem::Reaction object, or \e null if none was specified.
+             * \return A pointer to the visualized Chem::Reaction object, or \c nullptr if none was specified.
              */
             const Chem::Reaction* getReaction() const;
 
-            /**
-             * \brief Computes the axis-aligned bounding rectangle that contains the rendered reaction model.
-             * \param bounds The Rectangle2D instance storing the result.
-             */
             void getModelBounds(Rectangle2D& bounds);
 
           private:

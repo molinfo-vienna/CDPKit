@@ -53,12 +53,10 @@ namespace CDPL
 
         /**
          * \brief Calculation of the aqueous solubility (\f$ \log S \f$) of molecular graphs using the
-         *        atom-contribution method of Hou, Xia, Zhang and Xu.
+         *        atom-contribution method of Hou, Xia, Zhang and Xu [\ref LOGS].
          *
          * \f$ \log S \f$ denotes the decadic logarithm of the molar aqueous solubility of a compound. The model
          * sums the contributions of 79 structural atom feature types into a single \f$ \log S \f$ value.
-         *
-         * \see [\ref LOGS]
          */
         class CDPL_MOLPROP_API LogSCalculator
         {

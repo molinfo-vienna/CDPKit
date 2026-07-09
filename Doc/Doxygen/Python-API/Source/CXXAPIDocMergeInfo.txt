@@ -21,6 +21,7 @@ pointer % reference
 true % True
 false % False
 <em>null</em> % <em>None</em>
+nullptr % None
 A reference to itself. % \a self
 int idx % idx: int
 

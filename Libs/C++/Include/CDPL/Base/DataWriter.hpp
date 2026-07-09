@@ -96,7 +96,7 @@ namespace CDPL
              * if (writer.write(...)) { ...
              * \endcode
              *
-             * \return A non-\e null pointer if the writer is in a good state, a \e null pointer otherwise.
+             * \return A non-\e null pointer if the writer is in a good state, \c nullptr otherwise.
              * \note The returned pointer is not meant to be dereferenced, it is just a state indicator.
              * \see operator!()
              */

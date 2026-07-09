@@ -56,7 +56,7 @@ class BasicReaction(Reaction):
     # \brief Creates a new reaction component with the supplied <em>role</em>, optionally copying the contents of <em>mol</em>.
     # 
     # \param role The Chem.ReactionRole flag indicating where the new component is inserted (REACTANT, AGENT, or PRODUCT).
-    # \param mol The molecule whose contents are copied into the new component, or <tt>nullptr</tt> to create an empty component.
+    # \param mol The molecule whose contents are copied into the new component, or <tt>None</tt> to create an empty component.
     # 
     # \return A reference to the newly added component.
     # 

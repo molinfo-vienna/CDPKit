@@ -44,7 +44,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Traits class providing the reference-count management functions for a particular \e Cairo data type \a T.
+         * \brief Traits class providing the reference-count management functions for a particular
+         *        <em>Cairo 2D Graphics Library</em> data type \e T.
          *
          * \c %CairoPointerTraits has to be specialized for each \e Cairo data type that shall be manageable by a
          * Vis::CairoPointer. Each specialization provides the static methods \c reference() and \c destroy(), which
@@ -52,13 +53,13 @@ namespace CDPL
          * provided for \c cairo_t, \c cairo_surface_t and \c cairo_pattern_t.
          *
          * \tparam T The type of the managed \e Cairo data structure.
-         * \see Vis::CairoPointer
+         * \see Vis::CairoPointer, [\ref CAIRO]
          */
         template <typename T>
         struct CairoPointerTraits;
 
         /**
-         * \brief Specialization of \c %CairoPointerTraits for the object type \c cairo_t.
+         * \brief Vis::CairoPointerTraits specialization for the object type \c cairo_t.
          * \see Vis::CairoPointer
          */
         template <>
@@ -78,7 +79,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Specialization of \c %CairoPointerTraits for the object type \c cairo_surface_t.
+         * \brief Vis::CairoPointerTraits specialization for the object type \c cairo_surface_t.
          * \see Vis::CairoPointer
          */
         template <>
@@ -98,7 +99,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Specialization of \c %CairoPointerTraits for the object type \c cairo_pattern_t.
+         * \brief Vis::CairoPointerTraits specialization for the object type \c cairo_pattern_t.
          * \see Vis::CairoPointer
          */
         template <>
@@ -118,18 +119,17 @@ namespace CDPL
         };
 
         /**
-         * \brief A smart pointer managing the lifetime of allocated \e Cairo data structures.
+         * \brief A smart pointer managing the lifetime of allocated <em>Cairo 2D Graphics Library</em> data structures.
          *
-         * Data structures required for interfacing with the <em>Cairo 2D Graphics Library</em> [\ref CAIRO] 
-         * generally have to be allocated dynamically via specialized functions and are passed as pointers
-         * from and to the \e Cairo library. The lifetime of an allocated data structure is determined by its
-         * reference count which has to be managed explicitely by the client code. \c %CairoPointer automatizes
+         * Data structures required for interfacing with the \e Cairo generally have to be allocated dynamically via specialized
+         * functions and are passed as pointers from and to the \e Cairo library. The lifetime of an allocated data structure is
+         * determined by its reference count which has to be managed explicitely by the client code. \c %CairoPointer automatizes
          * the reference count management by incrementing the reference count of the wrapped object whenever a
          * \c %CairoPointer instance is copied, and decrementing the reference count if the \c %CairoPointer is
          * destroyed or gets overwritten by assignment of another pointer instance of the same type. 
          *
          * Since the \e Cairo library is written in C and functions for changing the reference count of different
-         * \e Cairo data structures are named differently, \c %CairoPointer relies on the traits class \c CairoPointerTraits<T>
+         * \e Cairo data structures are named differently, \c %CairoPointer relies on the traits class Vis::CairoPointerTraits
          * which has to be specialized for a particular data type and performs the actual work of incrementing
          * and decrementing the reference count by calling the appropriate functions. Note that only a \e Cairo data structure
          * for which such a specialization exists can be managed by a \c %CairoPointer. An attempt to instantiate \c %CairoPointer
@@ -141,6 +141,7 @@ namespace CDPL
          *   - \c cairo_pattern_t
          *
          * \tparam T The type of the managed \e Cairo data structure.
+         * \see [\ref CAIRO]
          */
         template <typename T>
         class CairoPointer
@@ -201,22 +202,22 @@ namespace CDPL
              *
              * The method is equivalent to get().
              *
-             * \return A pointer to the referenced object, or \e null if no object is referenced.
+             * \return A pointer to the referenced object, or \c nullptr if no object is referenced.
              * \see get()
              */
             T* operator->() const throw();
 
             /**
              * \brief Returns a pointer to the referenced object.
-             * \return A pointer to the referenced object, or \e null if no object is referenced.
+             * \return A pointer to the referenced object, or \c nullptr if no object is referenced.
              */
             T* get() const throw();
 
             /**
              * \brief Releases the currently referenced object.
-             * \return A pointer to the formerly referenced object, or \e null if no object was referenced.
+             * \return A pointer to the formerly referenced object, or \c nullptr if no object was referenced.
              * \post The reference count of the previously pointed-to object is decremented by \e 1
-             *       and the internal pointer to the referenced object is set to \e null.
+             *       and the internal pointer to the referenced object is set to \c nullptr.
              */
             T* release() throw();
 

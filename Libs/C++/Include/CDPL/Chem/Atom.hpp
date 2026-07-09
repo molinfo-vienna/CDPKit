@@ -114,7 +114,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to the \c const Chem::Bond object that connects this atom to the argument atom.
              * \param atom The adjacent atom for which to return a pointer to the connecting bond.
-             * \return A pointer to the \c const Chem::Bond object that connects this atom to the argument atom, or \e null
+             * \return A pointer to the \c const Chem::Bond object that connects this atom to the argument atom, or \c nullptr
              *         if the argument atom is not connected.
              */
             virtual const Bond* findBondToAtom(const Atom& atom) const = 0;
@@ -122,7 +122,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to the non-\c const Chem::Bond object that connects this atom to the argument atom.
              * \param atom The adjacent atom for which to return a pointer to the connecting bond.
-             * \return A pointer to the non-\c const Chem::Bond object that connects this atom to the argument atom, or \e null
+             * \return A pointer to the non-\c const Chem::Bond object that connects this atom to the argument atom, or \c nullptr
              *         if the argument atom is not connected.
              */
             virtual Bond* findBondToAtom(const Atom& atom) = 0;

@@ -46,19 +46,20 @@ namespace CDPL
     {
 
         /**
-         * \brief Implements the FontMetrics interface for the \e Qt rendering backend.
+         * \brief Implements the Vis::FontMetrics interface for the \e Qt rendering backend.
          *
          * \c %QtFontMetrics is implemented by wrapping a corresponding \c QFontMetrics instance created for the
-         * font specified by setFont(). For more information about \c QFontMetrics and the <em>Qt Toolkit</em> see
-         * [\ref QTDOC].
+         * font specified by setFont().
+         *
+         * \see [\ref QTDOC] for more information about \c QFontMetrics and the <em>Qt Toolkit</em>.
          */
         class CDPL_VIS_QT_API QtFontMetrics : public FontMetrics
         {
 
           public:
             /**
-             * \brief Constructs a font metrics object for \e Qt's default font and the given paint device.
-             * \param paint_dev A pointer to the \e Qt paint device, or \e null if unspecified.
+             * \brief Constructs a \c %QtFontMetrics instance for \e Qt's default font and the given paint device.
+             * \param paint_dev A pointer to the \e Qt paint device, or \c nullptr if unspecified.
              */
             QtFontMetrics(QPaintDevice* paint_dev = 0);
 
@@ -71,62 +72,22 @@ namespace CDPL
 
             QtFontMetrics& operator=(const QtFontMetrics&) = delete;
 
-            /**
-             * \brief Specifies the font to use for the calculation of text metrics.
-             * \param font The font used for the calculation of text metrics.
-             */
             void setFont(const Font& font);
 
-            /**
-             * \brief Returns the ascent of the current font.
-             * \return The ascent of the current font.
-             */
             double getAscent() const;
 
-            /**
-             * \brief Returns the descent of the current font.
-             * \return The descent of the current font.
-             */
             double getDescent() const;
 
-            /**
-             * \brief Returns the height of the current font.
-             * \return The height of the current font.
-             */
             double getHeight() const;
 
-            /**
-             * \brief Returns the leading of the current font.
-             * \return The leading of the current font.
-             */
             double getLeading() const;
 
-            /**
-             * \brief Returns the total advance width of the rendered string \a str in the current font.
-             * \param str The string for which to retrieve the total advance width.
-             * \return The total advance width of \a str.
-             */
             double getWidth(const std::string& str) const;
 
-            /**
-             * \brief Returns the advance width of the rendered character \a ch in the current font.
-             * \param ch The character for which to retrieve the advance width.
-             * \return The advance width of \a ch.
-             */
             double getWidth(char ch) const;
 
-            /**
-             * \brief Computes the tight bounding rectangle of the rendered string \a str in the current font.
-             * \param str The string for which to compute the bounding rectangle.
-             * \param bounds The Rectangle2D instance receiving the result.
-             */
             void getBounds(const std::string& str, Rectangle2D& bounds) const;
 
-            /**
-             * \brief Computes the tight bounding rectangle of the rendered character \a ch in the current font.
-             * \param ch The character for which to compute the bounding rectangle.
-             * \param bounds The Rectangle2D instance receiving the result.
-             */
             void getBounds(char ch, Rectangle2D& bounds) const;
 
           private:

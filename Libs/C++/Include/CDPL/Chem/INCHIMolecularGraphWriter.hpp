@@ -63,70 +63,6 @@ namespace CDPL
          * operation (see Chem::INCHIReturnCode) and can be accessed by the method getReturnCode().
          * Produced error and log messages are accessible via the methods getMessage() and getLogOutput(), respectively.
          *
-         * The generation of \e InChI strings requires values of the following Chem::Atom and Chem::Bond properties:
-         *
-         * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-         *   <th>Chem::Atom Property</th> <th>Description</th> <th>Notes</th>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::AtomProperty::COORDINATES_2D</td>
-         *   <td>Specifies the 2D position of the atom</td>
-         *   <td>Only required if 2D atom coordinates are written</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::AtomProperty::COORDINATES_3D</td>
-         *   <td>Specifies the 3D-coordinates of the atom</td>
-         *   <td>Only required if 3D atom coordinates are written</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::AtomProperty::SYMBOL</td>
-         *   <td>Specifies the symbol of the atom's element</td>
-         *   <td align="center">-</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::AtomProperty::ISOTOPE</td>
-         *   <td>Specifies the isotopic mass of the atom</td>
-         *   <td align="center">-</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::AtomProperty::FORMAL_CHARGE</td>
-         *   <td>Specifies the formal charge of the atom</td>
-         *   <td align="center">-</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::AtomProperty::RADICAL_TYPE</td>
-         *   <td>Specifies the radical type (see Chem::RadicalType)</td>
-         *   <td align="center">-</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::AtomProperty::STEREO_DESCRIPTOR</td>
-         *   <td>Specifies the atom stereo descriptor (see Chem::AtomConfiguration, Chem::StereoDescriptor)</td>
-         *   <td>Only required if no atom coordinates are written</td>
-         *  </tr>
-         * </table>
-         * <br>
-         * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-         *   <th>Chem::Bond Property</th> <th>Description</th> <th>Notes</th>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::BondProperty::ORDER</td>
-         *   <td>Specifies the order of the bond</td>
-         *   <td align="center">-</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::BondProperty::STEREO_2D_FLAG</td>
-         *   <td>Specifies the 2D stereo bond type (see Chem::BondStereoFlag)</td>
-         *   <td>Only required if 2D or 3D atom coordinates are written</td>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::BondProperty::STEREO_DESCRIPTOR</td>
-         *   <td>Specifies the stereo descriptor of the bond (see Chem::BondConfiguration, Chem::StereoDescriptor)</td>
-         *   <td>Only required if no atom coordinates are written</td>
-         *  </tr>
-         * </table>
-         *
          * \c %INCHIMolecularGraphWriter can be configured with the following control-parameters:
          *
          * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
@@ -136,9 +72,8 @@ namespace CDPL
          *  <tr>
          *   <td>Chem::ControlParameter::COORDINATES_DIMENSION</td>
          *   <td align="center">\c 1</td>
-         *   <td>Specifies the dimension of the atom coordinates (a value of \e 2 specifies 2D, a value of \e 3 specifies 3D,
-         *       a value of zero specifies that no atom coordinates shall be written; any other value specifies that 3D-coordinates
-         *       shall be written if they are available, and no coordinates otherwise)</td>
+         *   <td>Specifies the dimension of the atom coordinates to use for output generation. A value of \e 2 specifies 2D, a value of \e 3 specifies 3D,
+         *       other values specify that any availables coordinates shall be used (3D takes precedence over 2D), and no coordinates otherwise</td>
          *  </tr>
          *  <tr>
          *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>

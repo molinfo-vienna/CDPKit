@@ -89,7 +89,7 @@ namespace CDPL
              *                          the reaction roles that were considered in the performed reaction substructure search.
              * \return \c true if the reactant to product atom mapping of the target reaction matches the query atom mapping, and \c false
              *         otherwise.
-             * \note If an invalid query reactant to product atom mapping has been specified (\e null pointer or empty mapping) or the reaction substructure
+             * \note If an invalid query reactant to product atom mapping has been specified (\c nullptr or empty mapping) or the reaction substructure
              *       matching is incomplete (the RSSS did not consider both the reactants and products of the query reaction - see argument \a matched_rxn_roles),
              *       the expression will evaluate to \c true.
              */

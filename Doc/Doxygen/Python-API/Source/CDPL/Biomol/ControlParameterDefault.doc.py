@@ -35,7 +35,7 @@ class ControlParameterDefault(Boost.Python.instance):
     CHECK_LINE_LENGTH = False
 
     ##
-    # \brief Default value (= empty shared reference) of the control-parameter Biomol.ControlParameter.RESIDUE_DICTIONARY (an empty shared reference selects the built-in default dictionary).
+    # \brief Default value (= <tt>ResidueDictionary.SharedPointer()</tt>) of the control-parameter Biomol.ControlParameter.RESIDUE_DICTIONARY (an empty shared reference selects the built-in default dictionary).
     # 
     # \since 1.2
     # 
@@ -167,7 +167,7 @@ class ControlParameterDefault(Boost.Python.instance):
     MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP = False
 
     ##
-    # \brief Default value (= empty function object) of the control-parameter Biomol.ControlParameter.MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION.
+    # \brief Default value (= <tt>MMCIFDataProcessingFunction()</tt>) of the control-parameter Biomol.ControlParameter.MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION.
     # 
     # \since 1.2
     # 

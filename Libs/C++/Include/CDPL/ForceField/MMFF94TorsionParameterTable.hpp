@@ -295,7 +295,7 @@ namespace CDPL
 
             /**
              * \brief Replaces the process-wide default table for \a param_set by \a table.
-             * \param table The new default table (a \c nullptr resets to the built-in default).
+             * \param table The new default table (\c nullptr resets to the built-in default).
              * \param param_set The parameter set identifier (see namespace ForceField::MMFF94ParameterSet) selecting which default slot to replace.
              */
             static void set(const SharedPointer& table, unsigned int param_set);

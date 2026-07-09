@@ -88,7 +88,7 @@ namespace CDPL
              * \brief Returns a reference to or copy of the pointed-to argument object.
              * \param ptr A pointer of type \a ArgType to an object.
              * \return A copy of or reference to the object. 
-             * \throw Base::NullPointerException if \a ptr is \e null.
+             * \throw Base::NullPointerException if \a ptr equals \c nullptr.
              */
             ResType operator()(const ArgType& ptr) const;
         };

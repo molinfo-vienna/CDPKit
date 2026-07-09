@@ -68,8 +68,8 @@ namespace CDPL
          * \c %StructureGridView2D relies on Vis::StructureView2D for 2D structure visualization and thus supports all 
          * all of its parameters controlling the graphical details of the generated structure diagrams (colors, fonts,
          * line-widths etc.). Structure visualization parameters of a \c %StructureGridView2D instance can be set for individual grid
-         * cells as well as for the whole grid. Furthermore, any Chem::Atom, Chem::Bond and Chem::MolecularGraph relevant for 2D visualization
-         * properties will also be regarded (see Vis::StructureView2D for the list of supported properties).
+         * cells as well as for the whole grid. Furthermore, any Chem::Atom, Chem::Bond and Chem::MolecularGraph properties relevant for 2D visualization
+         * will also be regarded (see Vis::StructureView2D for the list of supported properties).
          * Properties of the visualized structures have a higher priority than the corresponding control-parameters of
          * the grid cells hosting the structures.
          * Likewise, control-parameters set for individual grid cells override the corresponding settings of the \c %StructureGridView2D instance.
@@ -118,7 +118,7 @@ namespace CDPL
          *  </tr>
          * </table>
          *
-         * Default values for most of the control-parameters are defined in namespace Vis::ControlParameterDefault.
+         * Default values for the control-parameters are defined in namespace Vis::ControlParameterDefault.
          *
          * \since 1.2
          */
@@ -285,10 +285,6 @@ namespace CDPL
              */
             ~StructureGridView2D();
 
-            /**
-             * \brief Renders the structure grid via \a renderer.
-             * \param renderer The renderer that performs the drawing operations.
-             */
             void render(Renderer2D& renderer);
 
 #ifdef HAVE_CAIRO
@@ -358,22 +354,14 @@ namespace CDPL
 
 #endif // HAVE_CAIRO
 
-            /**
-             * \brief Specifies the font metrics object used for text-size calculations.
-             * \param font_metrics A pointer to the font metrics object (or \e null to clear).
-             */
             void setFontMetrics(FontMetrics* font_metrics);
 
             /**
-             * \brief Returns a pointer to the used font metrics object.
-             * \return A pointer to the used font metrics object, or \e null if none was specified.
+             * \brief Returns a pointer to the Vis::FontMetrics instance used for measuring the dimension of text labels.
+             * \return A pointer to the used Vis::FontMetrics instance, or \c nullptr if none was specified.
              */
             FontMetrics* getFontMetrics() const;
 
-            /**
-             * \brief Computes the axis-aligned bounding rectangle that contains the rendered grid model.
-             * \param bounds The Rectangle2D instance storing the result.
-             */
             void getModelBounds(Rectangle2D& bounds);
 
             /**

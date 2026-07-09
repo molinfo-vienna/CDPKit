@@ -309,17 +309,17 @@ namespace CDPL
              * does not exist, the request is simply forwarded to the parent container (which may also forward the request).
              *
              * Any callback functions registered by registerParentChangedCallback() will be invoked after the new parent container has
-             * been set (or the old container was detached by providing a \e null pointer). Callbacks of any direct and indirect
+             * been set (or the old container was detached by providing \c nullptr). Callbacks of any direct and indirect
              * children also get invoked.
              * 
-             * \param cntnr A pointer to the parent control-parameter container or \e null. If the pointer is \e null,
+             * \param cntnr A pointer to the parent control-parameter container or \c nullptr. If the pointer equals \c nullptr,
              *            the currently set parent container (if any) gets detached. 
              */
             void setParent(const ControlParameterContainer* cntnr);
 
             /**
              * \brief Returns a pointer to the parent control-parameter container.
-             * \return A pointer to the parent control-parameter container, or \e null if no parent container has been set.
+             * \return A pointer to the parent control-parameter container, or \c nullptr if no parent container has been set.
              * \see setParent()
              */
             const ControlParameterContainer* getParent() const;
@@ -400,7 +400,7 @@ namespace CDPL
             /**
              * \brief Virtual destructor.
              *
-             * The parent pointer of any children will be set to \e null before the instance gets
+             * The parent pointer of any children will be set to \c nullptr before the instance gets
              * destroyed (see setParent()).  
              */
             virtual ~ControlParameterContainer();

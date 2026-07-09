@@ -179,7 +179,7 @@ namespace CDPL
 
             /**
              * \brief Replaces the process-wide default map by \a map.
-             * \param map The new default map (a \c nullptr resets to the built-in default).
+             * \param map The new default map (\c nullptr resets to the built-in default).
              */
             static void set(const SharedPointer& map);
 

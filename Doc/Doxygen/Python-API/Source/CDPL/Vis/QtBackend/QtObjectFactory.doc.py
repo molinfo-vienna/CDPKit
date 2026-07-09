@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Provides methods for the creation of <tt>QFont</tt>, <tt>QColor</tt>, <tt>QPen</tt> and <tt>QBrush</tt> objects from Font, Color, Pen and Brush instances.
+# \brief Provides methods for the creation of <tt>QFont</tt>, <tt>QColor</tt>, <tt>QPen</tt> and <tt>QBrush</tt> objects from Vis.Font, Vis.Color, Vis.Pen and Vis.Brush instances.
 # 
-# For information about <tt>QFont</tt>, <tt>QColor</tt>, <tt>QPen</tt> and <tt>QBrush</tt> see [\ref QTDOC].
+# \see [\ref QTDOC] for more information about <tt>QFont</tt>, <tt>QColor</tt>, <tt>QPen</tt> and <tt>QBrush</tt>.
 # 
 class QtObjectFactory(builtins.object):
 

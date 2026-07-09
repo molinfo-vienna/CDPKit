@@ -168,7 +168,7 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     ##
     # \brief Replaces the process-wide default map by <em>map</em>.
     # 
-    # \param map The new default map (a <tt>nullptr</tt> resets to the built-in default).
+    # \param map The new default map (<tt>None</tt> resets to the built-in default).
     # 
     @staticmethod
     def set(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass

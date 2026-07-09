@@ -47,7 +47,7 @@ namespace CDPL
          * Atoms mappings are stored as pairs of pointers to the mapped \c const Chem::Atom objects.
          * Mappings do not have to be unique and multiple mappings of a given atom to other atoms are possible.
          * If a mapping entry for a particular atom does not exist, the methods AtomMapping::getValue()
-         * and AtomMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
+         * and AtomMapping::operator[]() return \c nullptr to indicate that the lookup of the 
          * mapped atom has failed.
          */
         class CDPL_CHEM_API AtomMapping : public Util::MultiMap<const Atom*, const Atom*, true>

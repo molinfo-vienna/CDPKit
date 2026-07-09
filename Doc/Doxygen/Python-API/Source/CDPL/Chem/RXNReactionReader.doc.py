@@ -22,17 +22,6 @@
 ##
 # \brief Reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 # 
-# <tt>RXNReactionReader</tt> supports the following control-parameters:
-# 
-# <table>
-#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
-#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td></tr>
-#  <tr><td>Chem.ControlParameter.MDL_IGNORE_PARITY</td><td><tt>False</tt></td><td>Specifies whether the stereo parity of atoms shall be ignored</td></tr>
-#  <tr><td>Chem.ControlParameter.MDL_TRIM_STRINGS</td><td><tt>True</tt></td><td>Specifies whether to remove leading and trailing whitespace from string values</td></tr>
-#  <tr><td>Chem.ControlParameter.MDL_TRIM_LINES</td><td><tt>False</tt></td><td>Specifies whether to remove leading and trailing whitespace from data lines</td></tr>
-#  <tr><td>Chem.ControlParameter.MDL_IGNORE_LINE_LENGTH_LIMIT</td><td><tt>True</tt></td><td>Specifies whether to check if data lines exceed the maximum allowed line length</td></tr>
-# </table>
-# 
 class RXNReactionReader(ReactionReaderBase):
 
     ##

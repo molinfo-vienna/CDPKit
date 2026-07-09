@@ -84,7 +84,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     def setShape(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Returns a reference to the associated Gaussian shape (or <tt>nullptr</tt> if none is associated).
+    # \brief Returns a reference to the associated Gaussian shape (or <tt>None</tt> if none is associated).
     # 
     # \return A reference to the associated Gaussian shape.
     # 

@@ -278,7 +278,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the specified data format.
              * \param fmt Specifies the data format that is associated with the requested Base::DataInputHandler implementation instance.
-             * \return A pointer to a Base::DataInputHandler implementation instance registered for the specified data format, or \e null if 
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the specified data format, or \c nullptr if 
              *         not available.
              */
             static InputHandlerPointer getInputHandlerByFormat(const DataFormat& fmt);
@@ -286,7 +286,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified name.
              * \param name Specifies the name of the data format that is associated with the requested Base::DataInputHandler implementation instance.
-             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified name, or \e null if
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified name, or \c nullptr if
              *         not available.
              * \note The matching of the name is not case-sensitive.
              */
@@ -296,7 +296,7 @@ namespace CDPL
              * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified file extension.
              * \param file_ext Specifies the file extension of the data format that is associated with the
              *                 requested Base::DataInputHandler implementation instance.
-             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified file extension, or \e null if
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified file extension, or \c nullptr if
              *         not available.
              * \note The matching of the file extension is not case-sensitive.
              */
@@ -305,7 +305,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format matching the extension of \a file_name.
              * \param file_name Specifies the file name for which to search for a data format that matches its extension.
-             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format matching the extension of \a file_name, or \e null if
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format matching the extension of \a file_name, or \c nullptr if
              *         not available.
              * \note The matching of the file extension is not case-sensitive.
              */
@@ -315,7 +315,7 @@ namespace CDPL
              * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified mime-type.
              * \param mime_type Specifies the mime-type of the data format that is associated with the
              *                  requested Base::DataInputHandler implementation instance.
-             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified mime-type, or \e null if
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified mime-type, or \c nullptr if
              *         not available.
              * \note The matching of the mime-type is not case-sensitive.
              */
@@ -324,7 +324,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the specified data format.
              * \param fmt Specifies the data format that is associated with the requested Base::DataOutputHandler implementation instance.
-             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the specified data format, or \e null if
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the specified data format, or \c nullptr if
              *         not available.
              */
             static OutputHandlerPointer getOutputHandlerByFormat(const DataFormat& fmt);
@@ -332,7 +332,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified name.
              * \param name Specifies the name of the data format that is associated with the requested Base::DataOutputHandler implementation instance.
-             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified name, or \e null if
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified name, or \c nullptr if
              *         not available.
              * \note The matching of the name is not case-sensitive.
              */
@@ -342,7 +342,7 @@ namespace CDPL
              * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified file extension.
              * \param file_ext Specifies the file extension of the data format that is associated with the
              *                 requested Base::DataOutputHandler implementation instance.
-             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified file extension, or \e null if
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified file extension, or \c nullptr if
              *         not available.
              * \note The matching of the file extension is not case-sensitive.
              */
@@ -351,7 +351,7 @@ namespace CDPL
             /**
              * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format matching the extension of \a file_name.
              * \param file_name Specifies the file name for which to search for a data format that matches its extension.
-             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format matching the extension of \a file_name, or \e null if
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format matching the extension of \a file_name, or \c nullptr if
              *         not available.
              * \note The matching of the file extension is not case-sensitive.
              */
@@ -361,7 +361,7 @@ namespace CDPL
              * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified mime-type.
              * \param mime_type Specifies the mime-type of the data format that is associated with the
              *                  requested Base::DataOutputHandler implementation instance.
-             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified mime-type, or \e null if
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified mime-type, or \c nullptr if
              *         not available.
              * \note The matching of the mime-type is not case-sensitive.
              */

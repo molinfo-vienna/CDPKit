@@ -66,19 +66,19 @@ namespace CDPL
 
             /**
              * \brief Renders the visual representation of the model using the specified Vis::Renderer2D instance.
-             * \param renderer The Renderer2D instance.
+             * \param renderer The Vis::Renderer2D instance that performs the drawing operations.
              */
             virtual void render(Renderer2D& renderer) = 0;
 
             /**
-             * \brief Specifies a font metrics object that will be used to measure the dimension of text labels.
-             * \param font_metrics A pointer to the font metrics object or \e null.
+             * \brief Specifies a Vis::FontMetrics instance that will be used to measure the dimension of text labels.
+             * \param font_metrics A pointer to the Vis::FontMetrics instance, or \c nullptr if none was specified.
              */
             virtual void setFontMetrics(FontMetrics* font_metrics) = 0;
 
             /**
-             * \brief Calculates the bounding rectangle of the visualized model.
-             * \param bounds A Rectangle2D object storing the calculated bounding rectangle.
+             * \brief Calculates the axis-aligned bounding rectangle of the visualized model.
+             * \param bounds A Vis::Rectangle2D object storing the calculated bounding rectangle.
              */
             virtual void getModelBounds(Rectangle2D& bounds) = 0;
         };

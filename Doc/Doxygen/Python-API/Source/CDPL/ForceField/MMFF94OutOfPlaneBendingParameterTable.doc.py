@@ -231,7 +231,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     ##
     # \brief Replaces the process-wide default table for <em>param_set</em> by <em>table</em>.
     # 
-    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # \param table The new default table (<tt>None</tt> resets to the built-in default).
     # \param param_set The parameter set identifier (see namespace ForceField.MMFF94ParameterSet) selecting which default table to replace.
     # 
     @staticmethod

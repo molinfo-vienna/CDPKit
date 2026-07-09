@@ -113,8 +113,8 @@ namespace CDPL
          *   <td>Specifies the alignment of the structure diagram within the viewport area</td>
          *  </tr>
          *  <tr>
-         *   <td>Vis::ControlParameter::BACKGROUND_COLOR</td>
-         *   <td>Specifies the backround color of the structure diagram</td>
+         *   <td>Vis::ControlParameter::BACKGROUND_BRUSH</td>
+         *   <td>Specifies the brush for filling the background of the structure diagram</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::ATOM_COLOR</td>
@@ -354,7 +354,7 @@ namespace CDPL
          *  </tr>
          * </table>
          *
-         * Default values for most of the control-parameters are defined in namespace Vis::ControlParameterDefault.
+         * Default values for the control-parameters are defined in namespace Vis::ControlParameterDefault.
          *
          * Supported Chem::MolecularGraph properties:
          *
@@ -701,21 +701,13 @@ namespace CDPL
 
             StructureView2D& operator=(const StructureView2D&) = delete;
 
-            /**
-             * \brief Renders the visualized chemical structure via \a renderer.
-             * \param renderer The renderer that performs the drawing operations.
-             */
             void render(Renderer2D& renderer);
 
-            /**
-             * \brief Specifies the font metrics object used for text-size calculations.
-             * \param font_metrics A pointer to the font metrics object (or \e null to clear).
-             */
             void setFontMetrics(FontMetrics* font_metrics);
 
             /**
-             * \brief Returns a pointer to the used font metrics object.
-             * \return A pointer to the used font metrics object, or \e null if none was specified.
+             * \brief Returns a pointer to the Vis::FontMetrics instance used for measuring the dimension of text labels.
+             * \return A pointer to the used Vis::FontMetrics instance, or \c nullptr if none was specified.
              */
             FontMetrics* getFontMetrics() const;
 
@@ -726,20 +718,16 @@ namespace CDPL
              * for a Chem::MolecularGraph object, the method needs to be called again for the object
              * to make the changes visible.
              *
-             * \param molgraph A pointer to the Chem::MolecularGraph object to visualize, or \e null.
+             * \param molgraph A pointer to the Chem::MolecularGraph object to visualize, or \c nullptr.
              */
             void setStructure(const Chem::MolecularGraph* molgraph);
 
             /**
              * \brief Returns a pointer to the visualized chemical structure.
-             * \return A pointer to the visualized Chem::MolecularGraph object, or \e null if none was specified.
+             * \return A pointer to the visualized Chem::MolecularGraph object, or \c nullptr if none was specified.
              */
             const Chem::MolecularGraph* getStructure() const;
 
-            /**
-             * \brief Calculates the bounds of the rendered structure in output space.
-             * \param bounds The object storing the calculated bounding box.
-             */
             void getModelBounds(Rectangle2D& bounds);
 
           private:

@@ -237,11 +237,11 @@ class MMCIFData(Boost.Python.instance):
         def swap(cat: Category) -> None: pass
 
         ##
-        # \brief Returns a mutable reference to the item with name <em>name</em>, or <tt>nullptr</tt> if no matching item exists.
+        # \brief Returns a mutable reference to the item with name <em>name</em>, or <tt>None</tt> if no matching item exists.
         # 
         # \param name The data item name.
         # 
-        # \return A mutable reference to the matching item, or <tt>nullptr</tt>.
+        # \return A mutable reference to the matching item, or <tt>None</tt>.
         # 
         def findItem(name: str) -> Item: pass
 
@@ -421,11 +421,11 @@ class MMCIFData(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Returns a mutable reference to the category with name <em>name</em>, or <tt>nullptr</tt> if no matching category exists.
+    # \brief Returns a mutable reference to the category with name <em>name</em>, or <tt>None</tt> if no matching category exists.
     # 
     # \param name The <em>mmCIF</em> category name (without the leading underscore!).
     # 
-    # \return A mutable reference to the matching category, or <tt>nullptr</tt>.
+    # \return A mutable reference to the matching category, or <tt>None</tt>.
     # 
     def findCategory(name: str) -> Category: pass
 

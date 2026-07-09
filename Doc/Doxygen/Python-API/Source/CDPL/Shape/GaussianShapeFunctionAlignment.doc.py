@@ -160,7 +160,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     def setReference(func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
-    # \brief Returns the current reference shape function (or <tt>nullptr</tt> if none is set).
+    # \brief Returns the current reference shape function (or <tt>None</tt> if none is set).
     # 
     # \return A reference to the reference shape function.
     # 

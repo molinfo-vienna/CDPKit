@@ -47,7 +47,7 @@ namespace CDPL
          * Bonds mappings are stored as pairs of pointers to the mapped \c const Chem::Bond objects.
          * Mappings do not have to be unique and multiple mappings of a given bond to other bonds are possible.
          * If a mapping entry for a particular bond does not exist, the methods BondMapping::getValue()
-         * and BondMapping::operator[]() return a \e null pointer to indicate that the lookup of the
+         * and BondMapping::operator[]() return \c nullptr to indicate that the lookup of the
          * mapped bond has failed.
          */
         class CDPL_CHEM_API BondMapping : public Util::MultiMap<const Bond*, const Bond*, true>

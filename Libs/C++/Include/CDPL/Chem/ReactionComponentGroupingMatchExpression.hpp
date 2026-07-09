@@ -95,7 +95,7 @@ namespace CDPL
              * \param aux_data Auxiliary information for expression evaluation (ignored).
              * \return \c true if the provided query to target mapping fulfills the component-level grouping constraints, and \c false
              *         otherwise.
-             * \note If invalid component-level grouping constraints have been specified (\e null pointer or empty fragment list), the expression will always
+             * \note If invalid component-level grouping constraints have been specified (\c nullptr or empty fragment list), the expression will always
              *       evaluate to \c true.
              */
             bool operator()(const Reaction& query_rxn, const Reaction& target_rxn, const AtomBondMapping& mapping,

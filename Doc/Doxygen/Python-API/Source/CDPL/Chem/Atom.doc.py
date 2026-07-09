@@ -104,7 +104,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \param atom The adjacent atom for which to return a reference to the connecting bond.
     # 
-    # \return A reference to the Chem.Bond object that connects this atom to the argument atom, or <em>None</em> if the argument atom is not connected.
+    # \return A reference to the Chem.Bond object that connects this atom to the argument atom, or <tt>None</tt> if the argument atom is not connected.
     # 
     def findBondToAtom(atom: Atom) -> Bond: pass
 

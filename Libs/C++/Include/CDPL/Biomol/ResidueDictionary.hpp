@@ -322,7 +322,7 @@ namespace CDPL
 
             /**
              * \brief Replaces the process-wide default dictionary by \a dict.
-             * \param dict The new default dictionary (a \c nullptr resets to the built-in default).
+             * \param dict The new default dictionary (\c nullptr resets to the built-in default).
              */
             static void set(const SharedPointer& dict);
 

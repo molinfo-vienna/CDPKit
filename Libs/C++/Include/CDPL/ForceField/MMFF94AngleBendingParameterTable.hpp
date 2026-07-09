@@ -274,7 +274,7 @@ namespace CDPL
 
             /**
              * \brief Replaces the process-wide default table by \a table.
-             * \param table The new default table (a \c nullptr resets to the built-in default).
+             * \param table The new default table (\c nullptr resets to the built-in default).
              */
             static void set(const SharedPointer& table);
 

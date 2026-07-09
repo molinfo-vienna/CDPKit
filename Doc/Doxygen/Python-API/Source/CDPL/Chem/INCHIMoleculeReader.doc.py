@@ -26,26 +26,6 @@
 # 
 # For the actual decoding of the <em>InChI</em> input, <tt>INCHIMoleculeReader</tt> uses an appropriate function (<tt>GetStructFromINCHI()</tt> for <em>InChI</em> strings and <tt>Get_inchi_Input_FromAuxInfo()</tt> for auxiliary <em>InChI</em> information) of the <em>InChI C-API</em>. The return value of the called function provides information about the status of the performed operation (see Chem.INCHIReturnCode) and can be accessed by the method getReturnCode(). Produced error and log messages are accessible via the methods getMessage() and getLogOutput(), respectively.
 # 
-# Atom and bond attributes of a read input molecule are stored as properties of allocated Chem.Atom and Chem.Bond objects. The affected properties are summarized in the tables below:
-# 
-# <table>
-#  <tr><th>Chem.Atom Property</th><th>Description</th><th>Notes</th></tr>
-#  <tr><td>Chem.AtomProperty.COORDINATES_2D</td><td>Specifies the 2D position of the atom</td><td>Only set if auxiliary information with 2D-coordinates is available</td></tr>
-#  <tr><td>Chem.AtomProperty.COORDINATES_3D</td><td>Specifies the 3D-coordinates of the atom</td><td>Only set if auxiliary information with 3D-coordinates is available</td></tr>
-#  <tr><td>Chem.AtomProperty.SYMBOL</td><td>Specifies the symbol of the atom's element</td><td>-</td></tr>
-#  <tr><td>Chem.AtomProperty.ISOTOPE</td><td>Specifies the isotopic mass of the atom</td><td>-</td></tr>
-#  <tr><td>Chem.AtomProperty.FORMAL_CHARGE</td><td>Specifies the formal charge of the atom</td><td>Only set if the charge is different from zero</td></tr>
-#  <tr><td>Chem.AtomProperty.RADICAL_TYPE</td><td>Specifies the radical type (see Chem.RadicalType)</td><td>Only set if the atom is a radical</td></tr>
-#  <tr><td>Chem.AtomProperty.STEREO_DESCRIPTOR</td><td>Specifies the atom stereo descriptor (see Chem.AtomConfiguration, Chem.StereoDescriptor)</td><td>Only set if 0D stereo information is available and the atom is a tetrahedral stereogenic center</td></tr>
-# </table>
-# <br>
-#  <table>
-#  <tr><th>Chem.Bond Property</th><th>Description</th><th>Notes</th></tr>
-#  <tr><td>Chem.BondProperty.ORDER</td><td>Specifies the order of the bond</td><td>-</td></tr>
-#  <tr><td>Chem.BondProperty.STEREO_2D_FLAG</td><td>Specifies the 2D stereo bond type (see Chem.BondStereoFlag)</td><td>Only set if auxiliary information with 2D stereo information is available</td></tr>
-#  <tr><td>Chem.BondProperty.STEREO_DESCRIPTOR</td><td>Specifies the bond stereo descriptor (see Chem.BondConfiguration, Chem.StereoDescriptor)</td><td>Only set if 0D stereo information is available and the bond is stereogenic center</td></tr>
-# </table>
-# 
 # <tt>INCHIMoleculeReader</tt> can be configured with the following control-parameters:
 # 
 # <table>

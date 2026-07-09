@@ -47,7 +47,7 @@ namespace CDPL
          * Features mappings are stored as pairs of pointers to the mapped \c const Pharm::Feature objects.
          * Mappings do not have to be unique and multiple mappings of a given feature to other features are possible.
          * If a mapping entry for a particular feature does not exist, the methods FeatureMapping::getValue()
-         * and FeatureMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
+         * and FeatureMapping::operator[]() return \c nullptr to indicate that the lookup of the 
          * mapped feature has failed.
          */
         class CDPL_PHARM_API FeatureMapping : public Util::MultiMap<const Feature*, const Feature*, true>

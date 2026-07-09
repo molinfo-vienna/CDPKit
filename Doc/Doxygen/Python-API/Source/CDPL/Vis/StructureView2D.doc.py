@@ -33,7 +33,7 @@
 #  <tr><td>Vis.ControlParameter.VIEWPORT</td><td>Specifies a rectangular viewport area which constrains the location and size of the generated structure diagram</td></tr>
 #  <tr><td>Vis.ControlParameter.SIZE_ADJUSTMENT</td><td>Specifies how to adjust the size of the structure diagram relative to the available viewport area</td></tr>
 #  <tr><td>Vis.ControlParameter.ALIGNMENT</td><td>Specifies the alignment of the structure diagram within the viewport area</td></tr>
-#  <tr><td>Vis.ControlParameter.BACKGROUND_COLOR</td><td>Specifies the backround color of the structure diagram</td></tr>
+#  <tr><td>Vis.ControlParameter.BACKGROUND_BRUSH</td><td>Specifies the brush for filling the background of the structure diagram</td></tr>
 #  <tr><td>Vis.ControlParameter.ATOM_COLOR</td><td>Specifies the color of atom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.ATOM_COLOR_TABLE</td><td>Specifies a lookup table for the atom type dependent coloring of atom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.USE_CALCULATED_ATOM_COORDINATES</td><td>Specifies whether or not to use calculated atom coordinates</td></tr>
@@ -95,7 +95,7 @@
 #  <tr><td>Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING</td><td>Specifies whether or not to enable the highlighting of bonds</td></tr>
 # </table>
 # 
-# Default values for most of the control-parameters are defined in namespace Vis.ControlParameterDefault.
+# Default values for the control-parameters are defined in namespace Vis.ControlParameterDefault.
 # 
 # Supported Chem.MolecularGraph properties:
 # 
@@ -208,21 +208,21 @@ class StructureView2D(View2D):
     # 
     # If the chemical structure or a property has changed <em>after</em> this method has been called for a Chem.MolecularGraph object, the method needs to be called again for the object to make the changes visible.
     # 
-    # \param molgraph A reference to the Chem.MolecularGraph object to visualize, or <em>None</em>.
+    # \param molgraph A reference to the Chem.MolecularGraph object to visualize, or <tt>None</tt>.
     # 
     def setStructure(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns a reference to the visualized chemical structure.
     # 
-    # \return A reference to the visualized Chem.MolecularGraph object, or <em>None</em> if none was specified.
+    # \return A reference to the visualized Chem.MolecularGraph object, or <tt>None</tt> if none was specified.
     # 
     def getStructure() -> Chem.MolecularGraph: pass
 
     ##
-    # \brief Returns a reference to the used font metrics object.
+    # \brief Returns a reference to the Vis.FontMetrics instance used for measuring the dimension of text labels.
     # 
-    # \return A reference to the used font metrics object, or <em>None</em> if none was specified.
+    # \return A reference to the used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 
     def getFontMetrics() -> FontMetrics: pass
 

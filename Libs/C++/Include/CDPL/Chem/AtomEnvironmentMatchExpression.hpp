@@ -80,7 +80,7 @@ namespace CDPL
              * \return If the matching mode is 'not match' (see constructor), the method returns \c false if the structural environment of the
              *         target atom matches the query environment pattern, and \c true if the pattern is not matched. 
              *         Otherwise, \c true is returned if the atom environments match, and \c false if they do not.
-             * \note If an invalid query environment pattern has been specified (\e null pointer or the atom count is zero), the method will always return
+             * \note If an invalid query environment pattern has been specified (\c nullptr or the atom count is zero), the method will always return
              *       \c true - irrespective of matching mode and target atom environment.
              */
             bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,

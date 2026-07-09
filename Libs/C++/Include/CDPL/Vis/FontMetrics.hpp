@@ -78,7 +78,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the font for which to obtain the metrics.
-             * \param font Specifies the font for which to retrieve the metrics.
+             * \param font The font for which to retrieve the metrics.
              */
             virtual void setFont(const Font& font) = 0;
 

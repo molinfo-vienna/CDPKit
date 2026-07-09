@@ -246,7 +246,7 @@ namespace CDPL
             extern CDPL_CHEM_API const bool MULTI_CONF_EXPORT;
 
             /**
-             * \brief Default value (= pointer to Chem::DefaultMultiConfMoleculeInputProcessor instance) of the control-parameter 
+             * \brief Default value (= <tt>MultiConfMoleculeInputProcessor::SharedPointer()</tt>) of the control-parameter 
              *        Chem::ControlParameter::MULTI_CONF_INPUT_PROCESSOR.
              */
             extern CDPL_CHEM_API const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR;

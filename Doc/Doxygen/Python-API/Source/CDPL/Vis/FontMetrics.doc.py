@@ -56,7 +56,7 @@ class FontMetrics(Boost.Python.instance):
     ##
     # \brief Specifies the font for which to obtain the metrics.
     # 
-    # \param font Specifies the font for which to retrieve the metrics.
+    # \param font The font for which to retrieve the metrics.
     # 
     def setFont(font: Font) -> None: pass
 

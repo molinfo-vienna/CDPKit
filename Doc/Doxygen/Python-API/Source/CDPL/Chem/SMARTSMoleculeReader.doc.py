@@ -22,13 +22,6 @@
 ##
 # \brief Reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 # 
-# <tt>SMARTSMoleculeReader</tt> supports the following control-parameter:
-# 
-# <table>
-#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
-#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td></tr>
-# </table>
-# 
 class SMARTSMoleculeReader(MoleculeReaderBase):
 
     ##

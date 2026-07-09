@@ -240,7 +240,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     ##
     # \brief Replaces the process-wide default table by <em>table</em>.
     # 
-    # \param table The new default table (a <tt>nullptr</tt> resets to the built-in default).
+    # \param table The new default table (<tt>None</tt> resets to the built-in default).
     # 
     @staticmethod
     def set(table: MMFF94AngleBendingParameterTable) -> None: pass

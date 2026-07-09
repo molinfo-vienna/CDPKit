@@ -94,7 +94,7 @@ namespace CDPL
             /**
              * \brief Saves the current renderer state.
              *
-             * The method saves the current pen, brush, font and transformation matrix on an internal stack.
+             * The method saves the current pen, brush, font, clip path and transformation matrix on an internal stack.
              * The last saved state can be restored later on by a call to restoreState().
              *
              * \see restoreState()
@@ -109,13 +109,13 @@ namespace CDPL
 
             /**
              * \brief Sets the applied affine transformation matrix to \a xform.
-             * \param xform The new affine transformation matrix.
+             * \param xform The new transformation matrix.
              */
             virtual void setTransform(const Math::Matrix3D& xform) = 0;
 
             /**
-             * \brief Multiplies the current affine transformation matrix by \a xform.
-             * \param xform The matrix by which the current affine transformation matrix is multiplied.
+             * \brief Right-multiplies the current affine transformation matrix by \a xform.
+             * \param xform The matrix by which the current transformation matrix is multiplied.
              */
             virtual void transform(const Math::Matrix3D& xform) = 0;
 
@@ -216,7 +216,7 @@ namespace CDPL
             virtual void drawPoint(double x, double y) = 0;
 
             /**
-             * \brief Draws an ellipse with the given width and height around the center position <em>(x, y)</em>.
+             * \brief Draws an axis-aligned ellipse with the given width and height around the center position <em>(x, y)</em>.
              *
              * The ellipse is filled as specified by the current brush and the outline will be drawn as specified by
              * the current pen.
@@ -264,7 +264,7 @@ namespace CDPL
             virtual void setClipPath(const Path2D& path) = 0;
 
             /**
-             * \brief Disables clipping.
+             * \brief Disables any currently active clipping region.
              */
             virtual void clearClipPath() = 0;
         };

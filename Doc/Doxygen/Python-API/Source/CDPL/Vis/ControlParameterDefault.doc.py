@@ -30,7 +30,7 @@ class ControlParameterDefault(Boost.Python.instance):
     OUTPUT_SCALING_FACTOR = 1.0
 
     ##
-    # \brief Default value (= <tt>Rectangle2D</tt>()) of the control-parameter Vis.ControlParameter.VIEWPORT.
+    # \brief Default value (= <tt>Rectangle2D()</tt>) of the control-parameter Vis.ControlParameter.VIEWPORT.
     # 
     VIEWPORT = Rectangle2D()
 
@@ -45,7 +45,7 @@ class ControlParameterDefault(Boost.Python.instance):
     ALIGNMENT = 15
 
     ##
-    # \brief Default value (= <tt>Brush</tt>(Color.WHITE, Brush.NO_PATTERN)) of the control-parameter Vis.ControlParameter.BACKGROUND_BRUSH.
+    # \brief Default value (= <tt>Brush(Color.WHITE, Brush.NO_PATTERN)</tt>) of the control-parameter Vis.ControlParameter.BACKGROUND_BRUSH.
     # 
     BACKGROUND_BRUSH = Brush(color=Color(r=1, g=1, b=1), style=NO_PATTERN)
 
@@ -60,27 +60,27 @@ class ControlParameterDefault(Boost.Python.instance):
     REACTION_ARROW_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(35.0, True, True, True)) of the control-parameter Vis.ControlParameter.REACTION_ARROW_LENGTH.
+    # \brief Default value (= <tt>SizeSpecification(35.0, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_ARROW_LENGTH.
     # 
     REACTION_ARROW_LENGTH = SizeSpecification(value=35, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(8.0, False, True, True)) of the control-parameter Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH.
+    # \brief Default value (= <tt>SizeSpecification(8.0, False, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_ARROW_HEAD_LENGTH.
     # 
     REACTION_ARROW_HEAD_LENGTH = SizeSpecification(value=8, relative=False, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(5.0, False, True, True)) of the control-parameter Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(5.0, False, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_ARROW_HEAD_WIDTH.
     # 
     REACTION_ARROW_HEAD_WIDTH = SizeSpecification(value=5, relative=False, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.0, False, True, True)) of the control-parameter Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(0.0, False, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_ARROW_SHAFT_WIDTH.
     # 
     REACTION_ARROW_SHAFT_WIDTH = SizeSpecification(value=0, relative=False, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(1.0, False, True, True)) of the control-parameter Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(1.0, False, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_ARROW_LINE_WIDTH.
     # 
     REACTION_ARROW_LINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=True, out_scaling=True)
 
@@ -95,7 +95,7 @@ class ControlParameterDefault(Boost.Python.instance):
     REACTION_COMPONENT_LAYOUT_DIRECTION = 0
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(5.0, False, True, True)) of the control-parameter Vis.ControlParameter.REACTION_COMPONENT_MARGIN.
+    # \brief Default value (= <tt>SizeSpecification(5.0, False, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_COMPONENT_MARGIN.
     # 
     REACTION_COMPONENT_MARGIN = SizeSpecification(value=5, relative=False, in_scaling=True, out_scaling=True)
 
@@ -135,12 +135,12 @@ class ControlParameterDefault(Boost.Python.instance):
     REACTION_PLUS_SIGN_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(10.0, False, True, True)) of the control-parameter Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(10.0, False, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_PLUS_SIGN_SIZE.
     # 
     REACTION_PLUS_SIGN_SIZE = SizeSpecification(value=10, relative=False, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(3.0, False, True, True)) of the control-parameter Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(3.0, False, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_PLUS_SIGN_LINE_WIDTH.
     # 
     REACTION_PLUS_SIGN_LINE_WIDTH = SizeSpecification(value=3, relative=False, in_scaling=True, out_scaling=True)
 
@@ -155,7 +155,7 @@ class ControlParameterDefault(Boost.Python.instance):
     USE_CALCULATED_ATOM_COORDINATES = False
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(1.0, False, False, True)) of the control-parameter Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(1.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH.
     # 
     # \since 1.2
     # 
@@ -167,46 +167,46 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>Font</tt>()) of the control-parameter Vis.ControlParameter.ATOM_LABEL_FONT.
+    # \brief Default value (= <tt>Font()</tt>) of the control-parameter Vis.ControlParameter.ATOM_LABEL_FONT.
     # 
     ATOM_LABEL_FONT = Font()
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(10.0, False, False, True)) of the control-parameter Vis.ControlParameter.ATOM_LABEL_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(10.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.ATOM_LABEL_SIZE.
     # 
     ATOM_LABEL_SIZE = SizeSpecification(value=10, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>Font</tt>()) of the control-parameter Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT.
+    # \brief Default value (= <tt>Font()</tt>) of the control-parameter Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT.
     # 
     SECONDARY_ATOM_LABEL_FONT = Font()
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(6.0, False, False, True)) of the control-parameter Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(6.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE.
     # 
     SECONDARY_ATOM_LABEL_SIZE = SizeSpecification(value=6, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(2.0, False, False, True)) of the control-parameter Vis.ControlParameter.ATOM_LABEL_MARGIN.
+    # \brief Default value (= <tt>SizeSpecification(2.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.ATOM_LABEL_MARGIN.
     # 
     ATOM_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(16.0, False, False, True)) of the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(16.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE.
     # 
     # \since 1.2
     # 
     ATOM_HIGHLIGHT_AREA_SIZE = SizeSpecification(value=16, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>Brush</tt>(Color(0.8, 0.8, 1.0)) of the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH.
+    # \brief Default value (= <tt>Brush(Color(0.8, 0.8, 1.0)</tt>) of the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH.
     # 
     # \since 1.2
     # 
     ATOM_HIGHLIGHT_AREA_BRUSH = Brush(color=Color(r=0.8, g=0.8, b=1), style=SOLID_PATTERN)
 
     ##
-    # \brief Default value (= <tt>Pen</tt>(Color(0.6, 0.6, 0.75)) of the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # \brief Default value (= <tt>Pen(Color(0.6, 0.6, 0.75)</tt>) of the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
     # \since 1.2
     # 
@@ -220,7 +220,7 @@ class ControlParameterDefault(Boost.Python.instance):
     BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE = False
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(1.0, False, False, True)) of the control-parameter Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(1.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE.
     # 
     RADICAL_ELECTRON_DOT_SIZE = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
 
@@ -332,74 +332,74 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(30.0)) of the control-parameter Vis.ControlParameter.BOND_LENGTH.
+    # \brief Default value (= <tt>SizeSpecification(30.0)</tt>) of the control-parameter Vis.ControlParameter.BOND_LENGTH.
     # 
     BOND_LENGTH = SizeSpecification(value=30, relative=False, in_scaling=False, out_scaling=False)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(1.5, False, False, True)) of the control-parameter Vis.ControlParameter.BOND_LINE_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(1.5, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_LINE_WIDTH.
     # 
     BOND_LINE_WIDTH = SizeSpecification(value=1.5, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.15, True, True, True)) of the control-parameter Vis.ControlParameter.BOND_LINE_SPACING.
+    # \brief Default value (= <tt>SizeSpecification(0.15, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_LINE_SPACING.
     # 
     BOND_LINE_SPACING = SizeSpecification(value=0.15, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.15, True, True, True)) of the control-parameter Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(0.15, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.STEREO_BOND_WEDGE_WIDTH.
     # 
     STEREO_BOND_WEDGE_WIDTH = SizeSpecification(value=0.15, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.1, True, True, True)) of the control-parameter Vis.ControlParameter.STEREO_BOND_HASH_SPACING.
+    # \brief Default value (= <tt>SizeSpecification(0.1, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.STEREO_BOND_HASH_SPACING.
     # 
     STEREO_BOND_HASH_SPACING = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.4, True, True, True)) of the control-parameter Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH.
+    # \brief Default value (= <tt>SizeSpecification(0.4, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_CENTER_LINE_LENGTH.
     # 
     REACTION_CENTER_LINE_LENGTH = SizeSpecification(value=0.4, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.1, True, True, True)) of the control-parameter Vis.ControlParameter.REACTION_CENTER_LINE_SPACING.
+    # \brief Default value (= <tt>SizeSpecification(0.1, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.REACTION_CENTER_LINE_SPACING.
     # 
     REACTION_CENTER_LINE_SPACING = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.1, True, True, True)) of the control-parameter Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH.
+    # \brief Default value (= <tt>SizeSpecification(0.1, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH.
     # 
     DOUBLE_BOND_TRIM_LENGTH = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(0.1, True, True, True)) of the control-parameter Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH.
+    # \brief Default value (= <tt>SizeSpecification(0.1, True, True, True)</tt>) of the control-parameter Vis.ControlParameter.TRIPLE_BOND_TRIM_LENGTH.
     # 
     TRIPLE_BOND_TRIM_LENGTH = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>Font</tt>()) of the control-parameter Vis.ControlParameter.BOND_LABEL_FONT.
+    # \brief Default value (= <tt>Font()</tt>) of the control-parameter Vis.ControlParameter.BOND_LABEL_FONT.
     # 
     BOND_LABEL_FONT = Font()
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(8.0, False, False, True)) of the control-parameter Vis.ControlParameter.BOND_LABEL_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(8.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_LABEL_SIZE.
     # 
     BOND_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(2.0, False, False, True)) of the control-parameter Vis.ControlParameter.BOND_LABEL_MARGIN.
+    # \brief Default value (= <tt>SizeSpecification(2.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_LABEL_MARGIN.
     # 
     BOND_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>Font</tt>("", 8.0, False, True)) of the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT.
+    # \brief Default value (= <tt>Font("", 8.0, False, True)</tt>) of the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT.
     # 
     # \since 1.1
     # 
     ATOM_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(8.0, False, False, True)) of the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(8.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE.
     # 
     # \since 1.1
     # 
@@ -413,14 +413,14 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>Font</tt>("", 8.0, False, False)) of the control-parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT.
+    # \brief Default value (= <tt>Font("", 8.0, False, False)</tt>) of the control-parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT.
     # 
     # \since 1.2
     # 
     ATOM_CUSTOM_LABEL_FONT = Font(family='', size=8, bold=False, italic=False, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(8.0, False, False, True)) of the control-parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(8.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE.
     # 
     # \since 1.2
     # 
@@ -434,14 +434,14 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>Font</tt>("", 8.0, False, True)) of the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT.
+    # \brief Default value (= <tt>Font("", 8.0, False, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT.
     # 
     # \since 1.1
     # 
     BOND_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(8.0, False, False, True)) of the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(8.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE.
     # 
     # \since 1.1
     # 
@@ -455,14 +455,14 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>Font</tt>("", 8.0, False, False)) of the control-parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT.
+    # \brief Default value (= <tt>Font("", 8.0, False, False)</tt>) of the control-parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT.
     # 
     # \since 1.2
     # 
     BOND_CUSTOM_LABEL_FONT = Font(family='', size=8, bold=False, italic=False, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(8.0, False, False, True)) of the control-parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE.
+    # \brief Default value (= <tt>SizeSpecification(8.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE.
     # 
     # \since 1.2
     # 
@@ -476,42 +476,42 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>SizeSpecification</tt>(12.0, False, False, True)) of the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH.
+    # \brief Default value (= <tt>SizeSpecification(12.0, False, False, True)</tt>) of the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH.
     # 
     # \since 1.2
     # 
     BOND_HIGHLIGHT_AREA_WIDTH = SizeSpecification(value=12, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default value (= <tt>Brush</tt>(Color(0.8, 0.8, 1.0)) of the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH.
+    # \brief Default value (= <tt>Brush(Color(0.8, 0.8, 1.0)</tt>) of the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH.
     # 
     # \since 1.2
     # 
     BOND_HIGHLIGHT_AREA_BRUSH = Brush(color=Color(r=0.8, g=0.8, b=1), style=SOLID_PATTERN)
 
     ##
-    # \brief Default value (= <tt>Pen</tt>(Color(0.6, 0.6, 0.75)) of the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # \brief Default value (= <tt>Pen(Color(0.6, 0.6, 0.75)</tt>) of the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
     # \since 1.2
     # 
     BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(color=Color(r=0.6, g=0.6, b=0.75), width=1, line_style=SOLID_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
 
     ##
-    # \brief Default value (= <tt>Pen</tt>(Pen.NO_LINE)) of the control-parameter Vis.ControlParameter.GRID_VIEW_BORDER_PEN.
+    # \brief Default value (= <tt>Pen(Pen.NO_LINE)</tt>) of the control-parameter Vis.ControlParameter.GRID_VIEW_BORDER_PEN.
     # 
     # \since 1.2
     # 
     GRID_VIEW_BORDER_PEN = Pen(color=Color(), width=1, line_style=NO_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
 
     ##
-    # \brief Default value (= <tt>Pen</tt>(Pen.NO_LINE)) of the control-parameter Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN.
+    # \brief Default value (= <tt>Pen(Pen.NO_LINE)</tt>) of the control-parameter Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN.
     # 
     # \since 1.2
     # 
     GRID_VIEW_ROW_SEPARATOR_PEN = Pen(color=Color(), width=1, line_style=NO_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
 
     ##
-    # \brief Default value (= <tt>Pen</tt>(Pen.NO_LINE)) of the control-parameter Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN.
+    # \brief Default value (= <tt>Pen(Pen.NO_LINE)</tt>) of the control-parameter Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN.
     # 
     # \since 1.2
     # 
@@ -532,7 +532,7 @@ class ControlParameterDefault(Boost.Python.instance):
     GRID_VIEW_CELL_PADDING = 5.0
 
     ##
-    # \brief Default value (= <tt>Font</tt>("", 10.0)) of the control-parameter Vis.ControlParameter.GRID_VIEW_TEXT_FONT.
+    # \brief Default value (= <tt>Font("", 10.0)</tt>) of the control-parameter Vis.ControlParameter.GRID_VIEW_TEXT_FONT.
     # 
     # \since 1.2
     # 
@@ -546,14 +546,14 @@ class ControlParameterDefault(Boost.Python.instance):
     GRID_VIEW_TEXT_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default value (= <tt>DefaultAtomColorTable</tt>()) of the control-parameter Vis.ControlParameter.FEATURE_COLOR_TABLE.
+    # \brief Default value (= <tt>DefaultAtomColorTable()</tt>) of the control-parameter Vis.ControlParameter.FEATURE_COLOR_TABLE.
     # 
     # \since 1.3
     # 
     FEATURE_COLOR_TABLE = ColorTable({0: (0.6, 0.5, 0, 0.5), 1: (0.8, 0.6, 0.04, 0.5), 2: (0.14, 0.15, 0.45, 0.5), 3: (0.48, 0.12, 0.12, 0.5), 4: (0.12, 0.12, 0.48, 0.5), 5: (0.12, 0.48, 0.12, 0.5), 6: (0.48, 0.12, 0.12, 0.5), 7: (0.69, 0.4, 0.69, 0.5), 8: (0.69, 0.4, 0.69, 0.5), 9: (0.24, 0.24, 0.24, 0.5)})
 
     ##
-    # \brief Default value (= <tt>Material</tt>(0.5, Color(0.7, 0.7, 0.7), Color(1.0, 1.0, 1.0), 0.1)) of the control-parameter Vis.ControlParameter.DEFAULT_MATERIAL.
+    # \brief Default value (= <tt>Material(0.5, Color(0.7, 0.7, 0.7), Color(1.0, 1.0, 1.0), 0.1)</tt>) of the control-parameter Vis.ControlParameter.DEFAULT_MATERIAL.
     # 
     # \since 1.3
     # 
