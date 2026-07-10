@@ -43,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Data structure for describing the geometric shape of 3D objects by means of a triangle mesh.
+         * \brief Data structure for the storage of 3D triangle mesh vertices, vertex normals and faces.
          * \since 1.3
          */
         class CDPL_VIS_API TriangleMesh3D : public Shape3D
@@ -115,27 +115,27 @@ namespace CDPL
 
             /**
              * \brief Returns the number of stored vertex normals.
-             * \return The vertex-normal count.
+             * \return The vertex normal count.
              */
             std::size_t getNumVertexNormals() const;
 
             /**
-             * \brief Returns a non-\c const reference to the array storing the triangle faces (vertex-index triplets).
+             * \brief Returns a non-\c const reference to the array storing the triangle faces.
              * \return A non-\c const reference to the face array.
              */
             Math::Vector3ULArray& getFaces();
 
             /**
-             * \brief Returns a \c const reference to the array storing the triangle faces (vertex-index triplets).
+             * \brief Returns a \c const reference to the array storing the triangle faces.
              * \return A \c const reference to the face array.
              */
             const Math::Vector3ULArray& getFaces() const;
 
             /**
              * \brief Appends a new triangle face defined by the three vertex indices \a v1_idx, \a v2_idx and \a v3_idx.
-             * \param v1_idx The index of the first vertex.
-             * \param v2_idx The index of the second vertex.
-             * \param v3_idx The index of the third vertex.
+             * \param v1_idx The zero-based index of the first vertex.
+             * \param v2_idx The zero-based index of the second vertex.
+             * \param v3_idx The zero-based index of the third vertex.
              */
             void addFace(unsigned long v1_idx, unsigned long v2_idx, unsigned long v3_idx);
 
@@ -163,14 +163,14 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Swaps the contents of this mesh with those of \a mesh.
+             * \brief Swaps the vertices, vertex normals and faces of this mesh with those of \a mesh.
              * \param mesh The mesh to swap with.
              */
             void swap(TriangleMesh3D& mesh);
 
             /**
-             * \brief Appends the vertices, vertex normals and (index-shifted) faces of \a mesh to this mesh.
-             * \param mesh The mesh whose contents are appended.
+             * \brief Appends the vertices, vertex normals and (vertex index corrected) faces of \a mesh to this mesh.
+             * \param mesh The mesh to append.
              * \return A reference to itself.
              */
             TriangleMesh3D& operator+=(const TriangleMesh3D& mesh);

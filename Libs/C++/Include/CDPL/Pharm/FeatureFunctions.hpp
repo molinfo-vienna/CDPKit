@@ -215,7 +215,7 @@ namespace CDPL
         /**
          * \brief Returns the value of the Pharm::FeatureProperty::SUBSTRUCTURE property of the feature \a feature (the underlying atoms/bonds).
          * \param feature The feature for which to get the property value.
-         * \return A \c const shared pointer to the feature substructure.
+         * \return The stored feature substructure.
          */
         CDPL_PHARM_API const Chem::Fragment::SharedPointer& getSubstructure(const Feature& feature);
 
@@ -240,7 +240,7 @@ namespace CDPL
         CDPL_PHARM_API bool hasSubstructure(const Feature& feature);
 
         /**
-         * \brief Generates a string describing the residue environment of the feature \a feature (residue names of interacting pocket residues).
+         * \brief Generates a string describing the environment residues associated with the feature \a feature.
          * \param feature The feature.
          * \return The generated environment residue info string.
          * \since 1.3
@@ -248,16 +248,16 @@ namespace CDPL
         CDPL_PHARM_API std::string getEnvironmentResidueInfo(const Feature& feature);
 
         /**
-         * \brief Generates a string describing the residue environment of the feature \a feature into \a info.
+         * \brief Generates a string describing the environment residues associated with the feature \a feature.
          * \param feature The feature.
-         * \param info The output string.
+         * \param info Will store the generated environment residue info string.
          * \return A reference to \a info.
          * \since 1.4
          */
         CDPL_PHARM_API std::string& getEnvironmentResidueInfo(const Feature& feature, std::string& info);
 
         /**
-         * \brief Generates a string describing the per-atom residue environment of the feature \a feature (residue names and atom names of interacting pocket atoms).
+         * \brief Generates a string describing the environment residue atoms associated with the feature \a feature.
          * \param feature The feature.
          * \return The generated environment residue atom info string.
          * \since 1.4
@@ -265,18 +265,18 @@ namespace CDPL
         CDPL_PHARM_API std::string getEnvironmentResidueAtomInfo(const Feature& feature);
 
         /**
-         * \brief Generates a string describing the per-atom residue environment of the feature \a feature into \a info.
+         * \brief Generates a string describing the environment residue atoms associated with the feature \a feature.
          * \param feature The feature.
-         * \param info The output string.
+         * \param info Will store the generated environment residue atom info string.
          * \return A reference to \a info.
          * \since 1.4
          */
         CDPL_PHARM_API std::string& getEnvironmentResidueAtomInfo(const Feature& feature, std::string& info);
 
         /**
-         * \brief Returns the value of the Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE property of the feature \a feature (interacting pocket residues).
+         * \brief Returns the value of the Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE property of the feature \a feature.
          * \param feature The feature for which to get the property value.
-         * \return A \c const shared pointer to the environment substructure.
+         * \return The stored environment substructure.
          * \since 1.4
          */
         CDPL_PHARM_API const Chem::Fragment::SharedPointer& getEnvironmentSubstructure(const Feature& feature);

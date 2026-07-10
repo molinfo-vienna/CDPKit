@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Data structure for describing the geometric shape of 3D objects by means of a triangle mesh.
+# \brief Data structure for the storage of 3D triangle mesh vertices, vertex normals and faces.
 # 
 # \since 1.3
 # 
@@ -86,12 +86,12 @@ class TriangleMesh3D(Shape3D):
     ##
     # \brief Returns the number of stored vertex normals.
     # 
-    # \return The vertex-normal count.
+    # \return The vertex normal count.
     # 
     def getNumVertexNormals() -> int: pass
 
     ##
-    # \brief Returns a reference to the array storing the triangle faces (vertex-index triplets).
+    # \brief Returns a reference to the array storing the triangle faces.
     # 
     # \return A reference to the face array.
     # 
@@ -100,9 +100,9 @@ class TriangleMesh3D(Shape3D):
     ##
     # \brief Appends a new triangle face defined by the three vertex indices <em>v1_idx</em>, <em>v2_idx</em> and <em>v3_idx</em>.
     # 
-    # \param v1_idx The index of the first vertex.
-    # \param v2_idx The index of the second vertex.
-    # \param v3_idx The index of the third vertex.
+    # \param v1_idx The zero-based index of the first vertex.
+    # \param v2_idx The zero-based index of the second vertex.
+    # \param v3_idx The zero-based index of the third vertex.
     # 
     def addFace(v1_idx: int, v2_idx: int, v3_idx: int) -> None: pass
 
@@ -133,7 +133,7 @@ class TriangleMesh3D(Shape3D):
     def clear() -> None: pass
 
     ##
-    # \brief Swaps the contents of this mesh with those of <em>mesh</em>.
+    # \brief Swaps the vertices, vertex normals and faces of this mesh with those of <em>mesh</em>.
     # 
     # \param mesh The mesh to swap with.
     # 

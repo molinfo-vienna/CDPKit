@@ -27,7 +27,7 @@
 class IcosahedronMesh3D(TriangleMesh3D):
 
     ##
-    # \brief Constructs an icosahedron mesh whose vertices lie on the sphere of the given <em>radius</em>.
+    # \brief Generates an icosahedron mesh whose vertices lie on the sphere of the given <em>radius</em>.
     # 
     # \param radius The circumscribed-sphere radius of the icosahedron.
     # 

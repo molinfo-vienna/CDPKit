@@ -22,7 +22,7 @@
 ##
 # \brief Data type for the storage of element histograms of chemical compounds.
 # 
-# <tt>ElementHistogram</tt> is an unique associative map where the keys specify the atom type (defined in namespace Chem.AtomType) of the chemical elements and the mapped integer values correspond to the element frequencies.
+# <tt>ElementHistogram</tt> is a unique associative map where the keys specify the atom type (defined in namespace Chem.AtomType) of the chemical elements and the mapped integer values correspond to the element frequencies.
 # 
 class ElementHistogram(Boost.Python.instance):
 

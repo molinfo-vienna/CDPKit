@@ -53,7 +53,7 @@ def getDisabledFlag(feature: Feature) -> bool: pass
 def clearDisabledFlag(feature: Feature) -> None: pass
 
 ##
-# \brief Generates a string describing the per-atom residue environment of the feature <em>feature</em> (residue names and atom names of interacting pocket atoms).
+# \brief Generates a string describing the environment residue atoms associated with the feature <em>feature</em>.
 # 
 # \param feature The feature.
 # 
@@ -64,7 +64,7 @@ def clearDisabledFlag(feature: Feature) -> None: pass
 def getEnvironmentResidueAtomInfo(feature: Feature) -> str: pass
 
 ##
-# \brief Generates a string describing the residue environment of the feature <em>feature</em> (residue names of interacting pocket residues).
+# \brief Generates a string describing the environment residues associated with the feature <em>feature</em>.
 # 
 # \param feature The feature.
 # 
@@ -92,11 +92,11 @@ def setEnvironmentSubstructure(feature: Feature, substruct: Chem.Fragment) -> No
 def hasEnvironmentSubstructure(feature: Feature) -> bool: pass
 
 ##
-# \brief Returns the value of the Pharm.FeatureProperty.ENVIRONMENT_SUBSTRUCTURE property of the feature <em>feature</em> (interacting pocket residues).
+# \brief Returns the value of the Pharm.FeatureProperty.ENVIRONMENT_SUBSTRUCTURE property of the feature <em>feature</em>.
 # 
 # \param feature The feature for which to get the property value.
 # 
-# \return A shared reference to the environment substructure. 
+# \return The stored environment substructure. 
 # 
 # \since 1.4
 # 
@@ -387,7 +387,7 @@ def hasSubstructure(feature: Feature) -> bool: pass
 # 
 # \param feature The feature for which to get the property value.
 # 
-# \return A shared reference to the feature substructure.
+# \return The stored feature substructure.
 # 
 def getSubstructure(feature: Feature) -> Chem.Fragment: pass
 

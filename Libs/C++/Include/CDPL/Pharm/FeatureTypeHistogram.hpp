@@ -42,7 +42,7 @@ namespace CDPL
         /**
          * \brief Data type for the storage of feature type histograms of pharmacophores.
          *
-         * \c %FeatureTypeHistogram is an unique associative map where the keys specify the feature type
+         * \c %FeatureTypeHistogram is a unique associative map where the keys specify the feature type
          * (defined in namespace Pharm::FeatureType) of the pharmacophore features and the mapped integer values
          * correspond to the feature type frequencies.
          */

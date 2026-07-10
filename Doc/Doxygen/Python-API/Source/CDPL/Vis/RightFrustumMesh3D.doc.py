@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief A pre-defined triangle mesh providing the vertices and faces of a right frustum specified by the contructor arguments.
+# \brief A pre-defined triangle mesh providing the vertices and faces of a right frustum.
 # 
 # \since 1.3
 # 
 class RightFrustumMesh3D(TriangleMesh3D):
 
     ##
-    # \brief Constructs a right-frustum triangle mesh with the specified bottom radius, top radius, height, side count and optional bottom/top caps.
+    # \brief Genberates a right frustum triangle mesh with the specified bottom radius, top radius, height, side count and optional bottom/top caps.
     # 
-    # \param radius1 The radius of the bottom circle.
-    # \param radius2 The radius of the top circle.
+    # \param radius1 The radius of the bottom circle (<em>0.0</em> results in a sharp tip).
+    # \param radius2 The radius of the top circle (<em>0.0</em> results in a sharp tip).
     # \param height The height of the frustum.
-    # \param num_sides The number of sides used to approximate the lateral surface.
-    # \param close_btm <tt>True</tt> to include the bottom cap, and <tt>False</tt> to leave the bottom open.
-    # \param close_top <tt>True</tt> to include the top cap, and <tt>False</tt> to leave the top open.
+    # \param num_sides The number of sides used to approximate the lateral surface (must be > <em>1</em>).
+    # \param close_btm <tt>True</tt> if the bottom shall be closed, and <tt>False</tt> to leave the bottom open.
+    # \param close_top <tt>True</tt> if the top shall be closed, and <tt>False</tt> to leave the top open.
     # 
     def __init__(radius1: float, radius2: float, height: float, num_sides: int, close_btm: bool = True, close_top: bool = True) -> None: pass
 

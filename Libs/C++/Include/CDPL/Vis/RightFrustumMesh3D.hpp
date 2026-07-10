@@ -42,8 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A pre-defined triangle mesh providing the vertices and faces of a right frustum specified
-         *        by the contructor arguments.
+         * \brief A pre-defined triangle mesh providing the vertices and faces of a right frustum.
          * \since 1.3
          */
         class CDPL_VIS_API RightFrustumMesh3D : public TriangleMesh3D
@@ -56,14 +55,14 @@ namespace CDPL
             typedef std::shared_ptr<RightFrustumMesh3D> SharedPointer;
 
             /**
-             * \brief Constructs a right-frustum triangle mesh with the specified bottom radius, top radius, height,
+             * \brief Genberates a right frustum triangle mesh with the specified bottom radius, top radius, height,
              *        side count and optional bottom/top caps.
-             * \param radius1 The radius of the bottom circle.
-             * \param radius2 The radius of the top circle.
+             * \param radius1 The radius of the bottom circle (\e 0.0 results in a sharp tip).
+             * \param radius2 The radius of the top circle (\e 0.0 results in a sharp tip).
              * \param height The height of the frustum.
-             * \param num_sides The number of sides used to approximate the lateral surface.
-             * \param close_btm \c true to include the bottom cap, and \c false to leave the bottom open.
-             * \param close_top \c true to include the top cap, and \c false to leave the top open.
+             * \param num_sides The number of sides used to approximate the lateral surface (must be > \e 1).
+             * \param close_btm \c true if the bottom shall be closed, and \c false to leave the bottom open.
+             * \param close_top \c true if the top shall be closed, and \c false to leave the top open.
              */
             RightFrustumMesh3D(double radius1, double radius2, double height, std::size_t num_sides,
                                bool close_btm = true, bool close_top = true);

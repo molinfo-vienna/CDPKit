@@ -97,7 +97,7 @@ namespace CDPL
          * Since \c %Map is a sorted associative container, it uses an ordering relation on its keys.
          * Two keys are considered to be equivalent if neither one is less than the other. \c %Map
          * guarantees that the complexity for most operations is never worse than logarithmic, and
-         * the entries are always sorted in ascending order by key. It is also an unique associative
+         * the entries are always sorted in ascending order by key. It is also a unique associative
          * container, meaning that no two entries have the same key. \c %Map has the important property
          * that inserting a new entry does not invalidate iterators that point to existing
          * entries. Erasing an entry also does not invalidate any iterators, except, of course,

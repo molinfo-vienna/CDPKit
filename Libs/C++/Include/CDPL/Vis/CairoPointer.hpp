@@ -152,35 +152,35 @@ namespace CDPL
              * \brief Constructs a \c %CairoPointer that manages the reference count of the object
              *        pointed to by \a ptr.
              * \param ptr A pointer to the object whose reference count has to be managed.
-             * \note The reference count of the object pointed to by \a ptr is not incremented.
+             * \note The reference count of the object specified by \a ptr is not incremented.
              */
             explicit CairoPointer(T* ptr = 0) throw();
 
             /**
              * \brief Constructs a copy of the \c %CairoPointer \a ptr.
              * \param ptr The other \c %CairoPointer to copy.
-             * \post The reference count of the object pointed to by \a ptr is incremented by \e 1.
+             * \post The reference count of the object managed by \a ptr is incremented by \e 1.
              */
             CairoPointer(const CairoPointer& ptr) throw();
 
             /**
              * \brief Destroys the \c %CairoPointer.
-             * \post The reference count of the pointed-to object is decremented by \e 1.
+             * \post The reference count of the managed object is decremented by \e 1.
              */
             ~CairoPointer();
 
             /**
              * \brief Assignment operator.
              *
-             * The pointer to the currently referenced object will be replaced by a pointer to the object referenced
-             * by \a ptr. The reference count of the currently pointed-to object will be decremented and the reference
-             * count of the object pointed to by \a ptr is incremented. A self assignment has no effect.
+             * The currently managed object will be replaced by the object managed by \a ptr.
+             * The reference count of the previously managed object will be decremented and the reference
+             * count of the new object is incremented. A self assignment has no effect.
              *
              * \param ptr The other \c %CairoPointer to copy.
              * \return A reference to itself.
              * \post The \c %CairoPointer references the same object as \a ptr. The reference count of the
-             *       new pointed-to object is incremented by \e 1 and the reference count of the old 
-             *       pointed-to object is decremented by \e 1.
+             *       new object is incremented by \e 1 and the reference count of the previously managed
+             *       object is decremented by \e 1.
              */
             CairoPointer& operator=(const CairoPointer& ptr) throw();
 
@@ -191,44 +191,44 @@ namespace CDPL
             bool operator!() const throw();
 
             /**
-             * \brief Returns a non-\c const reference to the pointed-to object.
-             * \return A non-\c const reference to the pointed-to object.
+             * \brief Returns a non-\c const reference to the managed object.
+             * \return A non-\c const reference to the managed object.
              * \note A \e null pointer check is not performed.
              */
             T& operator*() const throw();
 
             /**
-             * \brief Returns a pointer to the referenced object.
+             * \brief Returns a pointer to the managed object.
              *
              * The method is equivalent to get().
              *
-             * \return A pointer to the referenced object, or \c nullptr if no object is referenced.
+             * \return A pointer to the managed object, or \c nullptr if no object is referenced.
              * \see get()
              */
             T* operator->() const throw();
 
             /**
-             * \brief Returns a pointer to the referenced object.
-             * \return A pointer to the referenced object, or \c nullptr if no object is referenced.
+             * \brief Returns a pointer to the managed object.
+             * \return A pointer to the managed object, or \c nullptr if no object is referenced.
              */
             T* get() const throw();
 
             /**
-             * \brief Releases the currently referenced object.
-             * \return A pointer to the formerly referenced object, or \c nullptr if no object was referenced.
-             * \post The reference count of the previously pointed-to object is decremented by \e 1
-             *       and the internal pointer to the referenced object is set to \c nullptr.
+             * \brief Releases the currently managed object.
+             * \return A pointer to the formerly managed object, or \c nullptr if no object was referenced.
+             * \post The reference count of the previously managed object is decremented by \e 1
+             *       and the internal pointer to the managed object is set to \c nullptr.
              */
             T* release() throw();
 
             /**
-             * \brief Replaces the current object reference with a reference to the object pointed to by \a ptr.
+             * \brief Replaces the currently managed object with the object pointed to by \a ptr.
              *
-             * The method has no effect if the currently referenced object and the object pointed to by
+             * The method has no effect if the currently managed object and the object pointed to by
              * \a ptr are identical.
              *
-             * \post The reference count of the previously pointed-to object is decremented by \e 1. The
-             *       newly referenced object is the object pointed to by \a ptr.
+             * \post The reference count of the previously managed is decremented by \e 1. The
+             *       newly managed object is the object specified by \a ptr.
              */
             void reset(T* ptr = 0) throw();
 

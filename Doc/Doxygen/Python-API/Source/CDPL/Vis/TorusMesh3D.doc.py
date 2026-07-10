@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief Pre-defined triangle mesh providing the vertices and faces of a torus specified by the contructor arguments.
+# \brief Pre-defined triangle mesh providing the vertices and faces of a torus.
 # 
 # \since 1.3
 # 
 class TorusMesh3D(TriangleMesh3D):
 
     ##
-    # \brief Constructs a torus triangle mesh with the specified ring radius, tube radius, ring/tube subdivision counts and optional start-angle/first-section sizing.
+    # \brief Constructs a torus triangle mesh with the specified ring radius, tube radius, ring/tube subdivision counts and optional tube start angle/first section sizing.
     # 
     # \param radius1 The radius of the torus ring (distance from the torus center to the tube center).
     # \param radius2 The radius of the tube.
-    # \param num_sect1 The number of sections subdividing the torus ring.
-    # \param num_sect2 The number of sections subdividing the tube.
-    # \param start_angle The angle (in radians) at which the first ring section starts.
-    # \param first_sect_size The angular size of the first ring section (<em>0</em> to use a uniform section size).
+    # \param num_sect1 The number of sections subdividing the torus ring (must be > <em>2</em>).
+    # \param num_sect2 The number of sections subdividing the tube (must be > <em>2</em>).
+    # \param start_angle The angle (in radians) at which the first tube section starts.
+    # \param first_sect_size The angular size (in radians) of the first tube section (<em>0</em> to use a uniform section size).
     # 
     def __init__(radius1: float, radius2: float, num_sect1: int, num_sect2: int, start_angle: float = 0.0, first_sect_size: float = 0.0) -> None: pass
 
