@@ -202,9 +202,9 @@ namespace CDPL
         CDPL_CHEM_API std::size_t getMaxComponentGroupID(const AtomContainer& cntnr);
 
         /**
-         * \brief Returns the largest atom-mapping ID assigned to any atom of \a cntnr.
+         * \brief Returns the largest atom mapping ID assigned to any atom of \a cntnr.
          * \param cntnr The atom container.
-         * \return The largest atom-mapping ID (zero if no atom carries an atom-mapping ID).
+         * \return The largest atom mapping ID (zero if no atom carries an atom mapping ID).
          */
         CDPL_CHEM_API std::size_t getMaxAtomMappingID(const AtomContainer& cntnr);
 

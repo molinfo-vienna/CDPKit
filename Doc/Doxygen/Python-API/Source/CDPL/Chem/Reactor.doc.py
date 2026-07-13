@@ -22,7 +22,7 @@
 ##
 # \brief Applies a Chem.Reaction template to the reactant components of a target Chem.Reaction to generate the corresponding product molecules.
 # 
-# The reaction pattern (a Chem.Reaction with atom-mapped reactant and product templates) is installed via setReactionPattern(). findReactionSites() then locates all matching substructures on the target reaction's reactants — internally using Chem.ReactionSubstructureSearch — and stores them as Reactor.ReactionSite instances. Calling performReaction() for a given reaction-site copies the matched reactants, applies the bond/atom changes encoded in the pattern, and appends the resulting product molecules to the target reaction's product list.
+# The reaction pattern (a Chem.Reaction with atom mapped reactant and product templates) is installed via setReactionPattern(). findReactionSites() then locates all matching substructures on the target reaction's reactants — internally using Chem.ReactionSubstructureSearch — and stores them as Reactor.ReactionSite instances. Calling performReaction() for a given reaction-site copies the matched reactants, applies the bond/atom changes encoded in the pattern, and appends the resulting product molecules to the target reaction's product list.
 # 
 class Reactor(Boost.Python.instance):
 

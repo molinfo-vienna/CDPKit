@@ -50,7 +50,7 @@ namespace CDPL
          * \brief Applies a Chem::Reaction template to the reactant components of a target Chem::Reaction to
          *        generate the corresponding product molecules.
          *
-         * The reaction pattern (a Chem::Reaction with atom-mapped reactant and product templates) is installed
+         * The reaction pattern (a Chem::Reaction with atom mapped reactant and product templates) is installed
          * via setReactionPattern(). findReactionSites() then locates all matching substructures on the target
          * reaction's reactants — internally using Chem::ReactionSubstructureSearch — and stores them as
          * Reactor::ReactionSite instances. Calling performReaction() for a given reaction-site copies the

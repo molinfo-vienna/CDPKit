@@ -1052,14 +1052,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::ATOM_MAPPING_ID property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored reactant-to-product atom-mapping ID.
+         * \return The stored reactant-to-product atom mapping ID.
          */
         CDPL_CHEM_API std::size_t getAtomMappingID(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::ATOM_MAPPING_ID property of the atom \a atom to \a id.
          * \param atom The atom for which to set the property value.
-         * \param id The new reactant-to-product atom-mapping ID.
+         * \param id The new reactant-to-product atom mapping ID.
          */
         CDPL_CHEM_API void setAtomMappingID(Atom& atom, std::size_t id);
 

@@ -98,7 +98,7 @@ namespace CDPL
             constexpr unsigned int CONFIGURATION = 0x100;
 
             /**
-             * \brief Specifies the atom-mapping ID an atom in a reaction.
+             * \brief Specifies the atom mapping ID an atom in a reaction.
              */
             constexpr unsigned int ATOM_MAPPING_ID = 0x200;
 

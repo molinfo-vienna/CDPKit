@@ -326,7 +326,7 @@ def setAromaticityFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.ATOM_MAPPING_ID property of the atom <em>atom</em> to <em>id</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param id The new reactant-to-product atom-mapping ID.
+# \param id The new reactant-to-product atom mapping ID.
 # 
 def setAtomMappingID(atom: Atom, id: int) -> None: pass
 
@@ -344,7 +344,7 @@ def hasAtomMappingID(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored reactant-to-product atom-mapping ID.
+# \return The stored reactant-to-product atom mapping ID.
 # 
 def getAtomMappingID(atom: Atom) -> int: pass
 
@@ -1470,7 +1470,7 @@ def clearMDLInternalRegistryNumber(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.MDL_MOLECULE_RECORD property of the reaction <em>rxn</em> to <em>mol_rec</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param mol_rec The new <em>MDL</em> molecule record.
+# \param mol_rec The new <em>MDL RD-File</em> molecule record.
 # 
 def setMDLMoleculeRecord(rxn: Reaction, mol_rec: Molecule) -> None: pass
 
@@ -2456,20 +2456,20 @@ def getMatchExpressionString(bond: Bond) -> str: pass
 def clearMatchExpressionString(bond: Bond) -> None: pass
 
 ##
-# \brief Returns the largest atom-mapping ID assigned to any atom of <em>cntnr</em>.
+# \brief Returns the largest atom mapping ID assigned to any atom of <em>cntnr</em>.
 # 
 # \param cntnr The atom container.
 # 
-# \return The largest atom-mapping ID (zero if no atom carries an atom-mapping ID).
+# \return The largest atom mapping ID (zero if no atom carries an atom mapping ID).
 # 
 def getMaxAtomMappingID(cntnr: AtomContainer) -> int: pass
 
 ##
-# \brief Returns the largest atom-mapping ID found on any of the atoms in <em>rxn</em>.
+# \brief Returns the largest atom mapping ID found for any of the atoms of the components of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to scan.
 # 
-# \return The largest atom-mapping ID, or zero if no IDs are assigned.
+# \return The largest atom mapping ID, or zero if no IDs are assigned.
 # 
 def getMaxAtomMappingID(rxn: Reaction) -> int: pass
 
@@ -2483,11 +2483,11 @@ def getMaxAtomMappingID(rxn: Reaction) -> int: pass
 def getMaxComponentGroupID(cntnr: AtomContainer) -> int: pass
 
 ##
-# \brief Returns the largest component-group ID found on any of the components of the reaction <em>rxn</em>.
+# \brief Returns the largest component group ID found for any of the atoms of the components of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to scan.
 # 
-# \return The largest component-group ID, or zero if no IDs are assigned.
+# \return The largest component group ID, or zero if no IDs are assigned.
 # 
 def getMaxComponentGroupID(rxn: Reaction) -> int: pass
 
@@ -2821,7 +2821,7 @@ def clearReactionCenterStatus(bond: Bond) -> None: pass
 # \brief Sets the value of the Chem.ReactionProperty.REACTION_DATA property of the reaction <em>rxn</em> to <em>data</em>.
 # 
 # \param rxn The reaction for which to set the property value.
-# \param data The new <em>MDL</em> reaction data block.
+# \param data The new reaction data block.
 # 
 def setReactionData(rxn: Reaction, data: StringDataBlock) -> None: pass
 
@@ -2839,7 +2839,7 @@ def hasReactionData(rxn: Reaction) -> bool: pass
 # 
 # \param rxn The reaction for which to return the property value.
 # 
-# \return The stored <em>MDL</em> reaction data block.
+# \return The stored reaction data block.
 # 
 def getReactionData(rxn: Reaction) -> StringDataBlock: pass
 
@@ -3641,9 +3641,9 @@ def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, u
 def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, substr_ptn: MolecularGraph, fix_bond_stereo: bool = True) -> bool: pass
 
 ##
-# \brief Rigid-body aligns the 3D coordinates of <em>cntnr</em> to the reference geometry defined by the entity-coordinate pair (<em>ref_entities</em>, <em>ref_coords</em>).
+# \brief Transforms the 3D coordinates of the entities of <em>cntnr</em> by the affine matrix that is calculated for the rigid-body alignment of the 3D coordinates of the entities of <em>ref_entities</em> with the given reference coordinates <em>ref_coords</em>.
 # 
-# \param cntnr The entity 3D container whose coordinates are to be aligned.
+# \param cntnr The entity 3D container whose coordinates are to be transformed.
 # \param ref_entities The reference entity 3D container.
 # \param ref_coords The reference coordinates corresponding to the entities of <em>ref_entities</em>.
 # 
@@ -3722,7 +3722,7 @@ def applyConformation(cntnr: AtomContainer, conf_idx: int) -> None: pass
 def atomTypesMatch(qry_type: int, tgt_type: int) -> bool: pass
 
 ##
-# \brief Computes 2D atom coordinates for <em>molgraph</em> and stores them as Chem.AtomProperty.COORDINATES_2D.
+# \brief Computes 2D atom coordinates for the molecular graph <em>molgraph</em> and stores them as Chem.AtomProperty.COORDINATES_2D.
 # 
 # \param molgraph The molecular graph to modify.
 # \param overwrite If <tt>True</tt>, replaces any existing 2D coordinates. Otherwise, leaves atoms that already carry coordinates unchanged.
@@ -3756,20 +3756,20 @@ def calcAtomStereoDescriptorsFromMDLParities(molgraph: MolecularGraph, overwrite
 def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1, check_stc_flag: bool = True) -> None: pass
 
 ##
-# \brief Computes the basic per-atom/per-bond properties (aromaticity, ring info, etc.) of the molecular graph <em>molgraph</em>.
+# \brief Computes the basic atom/bond/molecular graph properties (aromaticity, ring info, etc.) of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
-# \param overwrite If <tt>True</tt>, recomputes derived data. If <tt>False</tt>, leaves up-to-date data unchanged.
+# \param overwrite If <tt>True</tt>, recomputes and stores basic property values. If <tt>False</tt>, leaves already available property values unchanged.
 # 
 # \since 1.1
 # 
 def calcBasicProperties(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Computes the basic per-component properties (aromaticity, ring info, etc.) of every component of the reaction <em>rxn</em>.
+# \brief Computes basic atom/bond/molecular graph properties (aromaticity, ring info, etc.) for every component of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to modify.
-# \param overwrite If <tt>True</tt>, recomputes derived data. If <tt>False</tt>, leaves up-to-date data unchanged.
+# \param overwrite If <tt>True</tt>, recomputes and stores basic property values. If <tt>False</tt>, leaves already available property values unchanged.
 # 
 # \since 1.1
 # 
@@ -3813,12 +3813,12 @@ def calcBondStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 def calcBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction, reset: bool = True) -> None: pass
 
 ##
-# \brief Calculates the axis-aligned bounding box of the 3D coordinates of <em>cntnr</em>.
+# \brief Calculates the axis-aligned bounding box of the 3D coordinates of the entities of <em>cntnr</em>.
 # 
 # \param cntnr The entity 3D container.
 # \param min The output vector receiving the per-axis minimum coordinates.
 # \param max The output vector receiving the per-axis maximum coordinates.
-# \param reset If <tt>True</tt>, <em>min</em> and <em>max</em> are reset before the calculation. If <tt>False</tt>, the box is extended to include the existing range.
+# \param reset If <tt>True</tt>, <em>min</em> and <em>max</em> are reset before the calculation. If <tt>False</tt>, the given bounding box is extended.
 # 
 def calcBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D, reset: bool = True) -> None: pass
 
@@ -3863,7 +3863,7 @@ def calcCenterOfMass(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunctio
 def calcCentroid(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: Math.Vector3D) -> bool: pass
 
 ##
-# \brief Calculates the geometric centroid of the entities of <em>cntnr</em>.
+# \brief Calculates the geometric centroid of the 3D coordinates of the entities of <em>cntnr</em>.
 # 
 # \param cntnr The entity 3D container.
 # \param ctr The output centroid vector.
@@ -3933,7 +3933,7 @@ def calcGeometricalDistanceMatrix(cntnr: Entity3DContainer, mtx: Math.DMatrix) -
 def calcGeometricalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> Math.DMatrix: pass
 
 ##
-# \brief Computes a 64-bit hash code for <em>molgraph</em> taking into account the specified atom and bond properties.
+# \brief Computes a 64-bit hash code for the molecular graph <em>molgraph</em> taking into account the specified atom and bond properties.
 # 
 # \param molgraph The molecular graph to hash.
 # \param atom_flags A bitmask of Chem.AtomPropertyFlag flags controlling which atomic properties enter the hash.
@@ -4090,14 +4090,18 @@ def canonicalize(molgraph: MolecularGraph, func: BoolAtom2Functor, atoms: bool =
 # \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
 # \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to <em>atom_idx_offs</em>.
 # 
+# \note The minimum atom pair distance is <em>0.5</em> &Aring;.
+# 
 def connectAtoms(mol: Molecule, coords_func: Atom3DCoordinatesFunction, dist_tol: float = 0.3, atom_idx_offs: int = 0) -> None: pass
 
 ##
 # \brief Adds bonds between atoms of the molecule <em>mol</em> whose 3D distance falls within the covalent-radii sum plus <em>dist_tol</em>.
 # 
-# \param mol The molecule whose atoms are to be connected.
+# \param mol The molecule whose atoms shall be connected.
 # \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
-# \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to <em>atom_idx_offs</em> (useful to extend an existing bonding network without re-evaluating already-connected atoms).
+# \param atom_idx_offs Bonds are only added when at least one of the two atom indices is greater than or equal to <em>atom_idx_offs</em>.
+# 
+# \note The minimum atom pair distance is <em>0.5</em> &Aring;.
 # 
 def connectAtoms(mol: Molecule, dist_tol: float = 0.3, atom_idx_offs: int = 0) -> None: pass
 
@@ -4202,7 +4206,26 @@ def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset
 def editSubstructures(molgraph: MolecularGraph, result_mol: Molecule, search_ptns: str, result_ptn: str, exclude_ptns: str = '') -> int: pass
 
 ##
-# \brief Edits the molecule <em>mol</em> by replacing all substructures matching the <em>SMARTS</em> search patterns in <em>search_ptns</em> with the <em>SMARTS</em> replacement pattern <em>result_ptn</em>, optionally skipping matches that also match <em>exclude_ptns</em>.
+# \brief Edits the molecule <em>mol</em> by replacing all substructures matching the <em>SMARTS</em> search patterns in <em>search_ptns</em> with the <em>SMILES</em> replacement pattern <em>result_ptn</em>, optionally skipping matches that also match <em>exclude_ptns</em>.
+# 
+# A molecule editing operation is specified via a string of one or more <em>SMARTS</em> patterns (<em>search_ptns</em>) describing the substructures to edit, optional substructure exclude patterns (<em>exclude_ptns</em>) and a <em>SMILES</em> string (<em>result_ptn</em>) encoding the specific atom and bond modifications to perform. If multiple search and/or exclude patterns are specified then they need to be separated by a whitespace character.
+# 
+# In the substructure search pattern(s), any atoms to be edited and/or atoms connected by bonds to be modified must be labeled by a unique non-zero integer number (by means of a colon followed the integer number at the end of the <em>SMARTS</em> atom specification). These numeric ids are used to establish an unambiguous mapping between the atoms/bonds of the search pattern and the <em>SMILES</em> string encoding the editing instructions. As mentioned above, the atom/bond editing operations are all specified by means of a simple <em>SMILES</em> string. For the purpose of substructure editing, the <em>SMILES</em> format has been extended by additional atom type and bond order symbols that allow to mark atom/bonds for deletion or act as a 'do not change' marker for atom type or bond order.
+# 
+# Editing result <em>SMILES</em> strings have to be composed according to the following rules:
+#  - Atoms of the molecule matching labeled search pattern atoms are referenced by their numeric id (likewise specified by means of a colon followed by the integer number at the end of the <em>SMILES</em> atom specification)
+#  - A bond between two labeled atoms in the result <em>SMILES</em> string will be mapped to the bond of the molecule that matched the corresponding bond of the search pattern
+#  - If such a bond of the molecule does not exist it will be created with the specified bond order
+#  - A molecule bond connecting two atoms that match labeled search pattern atoms which is not occurring in the result <em>SMILES</em> string will be left unchanged
+#  - A molecule atom matching a labeled search pattern atom which is not occurring in the result <em>SMILES</em> string will be left unchanged
+#  - A labeled atom in the result <em>SMILES</em> string with a numeric id that does not occur in the search pattern will be created with specified properties (symbol, form. charge, isotope, chirality, ...)
+#  - Any unlabeled atoms in the result <em>SMILES</em> string will be created with the specified properties (symbol, form. charge, isotope, chirality, ...)
+#  - Bonds to/between unlabeled result <em>SMILES</em> string atoms will be created with the specified bond order
+#  - For a mapped molecule atom only those properties (symbol, form. charge, isotope, chirality, ...) that were specified for the corresponding result <em>SMILES</em> string atom will be modified
+#  - The special result <em>SMILES</em> string atom type symbol <tt>x</tt> (only valid in brackets) results in the removal of the mapped molecule atom including any incident bonds
+#  - The special result <em>SMILES</em> string atom type symbol <tt>~</tt> (only valid in brackets) indicates that the type of the mapped molecule atom shall be left unchanged
+#  - The special result <em>SMILES</em> string bond order symbol <tt>x</tt> results in the removal of the mapped molecule bond
+#  - The special result <em>SMILES</em> string bond order symbol <tt>~</tt> indicates that the order of the mapped molecule bond shall be left unchanged
 # 
 # \param mol The molecule to edit in place.
 # \param search_ptns A whitespace-separated list of <em>SMARTS</em> patterns matching the substructures to replace.
@@ -4351,7 +4374,7 @@ def generateMatchExpression(atom: Atom, molgraph: MolecularGraph) -> AtomMatchEx
 def generateMatchExpression(bond: Bond, molgraph: MolecularGraph) -> BondMatchExpression: pass
 
 ##
-# \brief Builds a top-level match expression from the match constraint list attached to <em>molgraph</em>.
+# \brief Builds a top-level match expression from the match constraints currently attached to the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect.
 # 
@@ -4370,7 +4393,7 @@ def generateMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpr
 def generateMatchExpression(molgraph: MolecularGraph, overwrite: bool) -> MolecularGraphMatchExpression: pass
 
 ##
-# \brief Builds a reaction-level match expression from the constraints currently attached to the reaction <em>rxn</em>.
+# \brief Builds a reaction-level match expression from the match constraints currently attached to the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to inspect.
 # 
@@ -4382,7 +4405,7 @@ def generateMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
 # \brief Builds and (optionally) stores the reaction-level match expression of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to inspect/modify.
-# \param overwrite If <tt>True</tt>, the generated expression replaces any existing Chem.ReactionProperty.MATCH_EXPRESSION. If <tt>False</tt>, the existing one (if any) is returned unchanged.
+# \param overwrite If <tt>True</tt>, the generated expression replaces any existing match expression. Otherwise, the existing one (if any) is returned unchanged.
 # 
 # \return The generated (or pre-existing) match expression.
 # 
@@ -4405,18 +4428,18 @@ def generateMatchExpressionString(atom: Atom, molgraph: MolecularGraph) -> str: 
 def generateMatchExpressionString(bond: Bond, molgraph: MolecularGraph) -> str: pass
 
 ##
-# \brief Generates and stores textual representations of the match expressions of the molecular graph <em>molgraph</em>.
+# \brief Generates and stores textual representations of the atom/bond match expressions of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to modify.
-# \param overwrite If <tt>True</tt>, replaces any existing match expression strings.
+# \param overwrite If <tt>True</tt>, replaces any existing match expression strings. If <tt>False</tt>, leaves atoms/bonds that already carry a match expression string unchanged.
 # 
 def generateMatchExpressionStrings(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Generates and stores match expressions for every atom, bond and the molecular graph itself.
+# \brief Generates and stores match expressions for every atom, bond and the molecular graph <em>molgraph</em> itself.
 # 
 # \param molgraph The molecular graph to modify.
-# \param overwrite If <tt>True</tt>, replaces any existing match expressions. If <tt>False</tt>, leaves items that already carry a match expression unchanged.
+# \param overwrite If <tt>True</tt>, replaces any existing match expressions. If <tt>False</tt>, leaves atoms/bonds that already carry a match expression unchanged.
 # 
 def generateMatchExpressions(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
@@ -4424,7 +4447,7 @@ def generateMatchExpressions(molgraph: MolecularGraph, overwrite: bool) -> None:
 # \brief Generates and stores match expressions for the atoms, bonds, components, and the reaction <em>rxn</em> itself.
 # 
 # \param rxn The reaction to modify.
-# \param overwrite If <tt>True</tt>, replaces any existing match expressions. If <tt>False</tt>, leaves items that already carry a match expression unchanged.
+# \param overwrite If <tt>True</tt>, replaces any existing match expressions. If <tt>False</tt>, leaves objects that already carry a match expression unchanged.
 # 
 def generateMatchExpressions(rxn: Reaction, overwrite: bool) -> None: pass
 
@@ -4451,34 +4474,34 @@ def generateSMILES(molgraph: MolecularGraph, canonical: bool = False, ord_h_depl
 def generateSMILES(rxn: Reaction, canonical: bool = False, ord_h_deplete: bool = True, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> object: pass
 
 ##
-# \brief Prepares the molecular graph <em>molgraph</em> for use as a substructure search query (precomputes match expressions and required cached properties).
+# \brief Prepares the molecular graph <em>molgraph</em> for use as a substructure search query.
 # 
 # \param molgraph The molecular graph to modify.
-# \param overwrite If <tt>True</tt>, recomputes derived data. If <tt>False</tt>, leaves up-to-date data unchanged.
+# \param overwrite If <tt>True</tt>, recomputes and stores any required property values. If <tt>False</tt>, leaves already available property values unchanged.
 # 
 def initSubstructureSearchQuery(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Prepares the reaction <em>rxn</em> for use as a substructure search query (e.g. by pre-computing match expressions and required cached properties).
+# \brief Prepares the reaction <em>rxn</em> for use as a reaction substructure search query.
 # 
 # \param rxn The reaction to modify.
-# \param overwrite If <tt>True</tt>, recomputes derived data. If <tt>False</tt>, leaves up-to-date data unchanged.
+# \param overwrite If <tt>True</tt>, recomputes and stores any required property values. If <tt>False</tt>, leaves already available property values unchanged.
 # 
 def initSubstructureSearchQuery(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
-# \brief Prepares the molecular graph <em>molgraph</em> for use as a substructure search target (precomputes required cached properties).
+# \brief Prepares the molecular graph <em>molgraph</em> for use as a substructure search target.
 # 
 # \param molgraph The molecular graph to modify.
-# \param overwrite If <tt>True</tt>, recomputes derived data. If <tt>False</tt>, leaves up-to-date data unchanged.
+# \param overwrite If <tt>True</tt>, recomputes and stores any required property values. If <tt>False</tt>, leaves already available property values unchanged.
 # 
 def initSubstructureSearchTarget(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief Prepares the reaction <em>rxn</em> for use as a substructure search target (e.g. by pre-computing required cached properties).
+# \brief Prepares the reaction <em>rxn</em> for use as a reaction substructure search target.
 # 
 # \param rxn The reaction to modify.
-# \param overwrite If <tt>True</tt>, recomputes derived data. If <tt>False</tt>, leaves up-to-date data unchanged.
+# \param overwrite If <tt>True</tt>, recomputes and stores any required property values. If <tt>False</tt>, leaves already available property values unchanged.
 # 
 def initSubstructureSearchTarget(rxn: Reaction, overwrite: bool) -> None: pass
 
@@ -4495,13 +4518,13 @@ def initSubstructureSearchTarget(rxn: Reaction, overwrite: bool) -> None: pass
 def insideBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
 
 ##
-# \brief Tells whether all entities of <em>cntnr</em> lie within the axis-aligned box defined by <em>min</em> and <em>max</em>.
+# \brief Tells whether all 3D coordinates of the entities of <em>cntnr</em> lie within the axis-aligned bounding box defined by <em>min</em> and <em>max</em>.
 # 
 # \param cntnr The entity 3D container.
 # \param min The per-axis minimum coordinates of the box.
 # \param max The per-axis maximum coordinates of the box.
 # 
-# \return <tt>True</tt> if every entity coordinate is inside the box, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if every entity coordinate is inside the bounding box, and <tt>False</tt> otherwise.
 # 
 def insideBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
@@ -4529,13 +4552,13 @@ def insideBoundingBox(min: Math.Vector3D, max: Math.Vector3D, coords: Math.Vecto
 def intersectsBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
 
 ##
-# \brief Tells whether at least one entity of <em>cntnr</em> lies within the axis-aligned box defined by <em>min</em> and <em>max</em>.
+# \brief Tells whether at least one entity of <em>cntnr</em> lies within the axis-aligned bounding box defined by <em>min</em> and <em>max</em>.
 # 
 # \param cntnr The entity 3D container.
 # \param min The per-axis minimum coordinates of the box.
 # \param max The per-axis maximum coordinates of the box.
 # 
-# \return <tt>True</tt> if any entity coordinate is inside the box, and <tt>False</tt> otherwise.
+# \return <tt>True</tt> if any entity coordinate is inside the bounding box, and <tt>False</tt> otherwise.
 # 
 def intersectsBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
@@ -4623,7 +4646,7 @@ def kekulizeBonds(molgraph: MolecularGraph) -> None: pass
 # \brief Converts all implicit hydrogens of the molecule <em>mol</em> to explicit hydrogen atoms.
 # 
 # \param mol The molecule that has to be made hydrogen complete.
-# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the hydrogen completed atoms shall be set to zero, <tt>False</tt> if the property shall be left unchanged.
+# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the hydrogen completed shall be set to zero, <tt>False</tt> if the property shall be left unchanged.
 # 
 # \return <tt>False</tt> if <em>mol</em> was not altered, <tt>True</tt> otherwise.
 # 
@@ -4642,7 +4665,7 @@ def makeHydrogenDeplete(frag: Fragment) -> bool: pass
 # \brief Removes all explicit hydrogen atoms from the molecule <em>mol</em>.
 # 
 # \param mol The molecule for which to remove all explicit hydrogen atoms.
-# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the hydrogen completed atoms shall be corrected, <tt>False</tt> if the property shall be left unchanged.
+# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the affected remaining atoms shall be corrected, <tt>False</tt> if the property shall be left unchanged.
 # 
 # \return <tt>False</tt> if <em>mol</em> was not altered, <tt>True</tt> otherwise.
 # 
@@ -4665,7 +4688,7 @@ def makeOrdinaryHydrogenDeplete(frag: Fragment, flags: int) -> bool: pass
 # 
 # \param mol The molecule for which to remove all explicit ordinary hydrogen atoms.
 # \param flags Specifies the set of atom properties to check (see namespace Chem.AtomPropertyFlag).
-# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the hydrogen completed atoms shall be corrected, <tt>False</tt> if the property shall be left unchanged.
+# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the affected remaining atoms shall be corrected, <tt>False</tt> if the property shall be left unchanged.
 # 
 # \return <tt>False</tt> if <em>mol</em> was not altered, <tt>True</tt> otherwise. 
 # 
@@ -4755,7 +4778,7 @@ def perceiveAtomMapping(rxn: Reaction) -> AtomMapping: pass
 # \brief Derives and (optionally) stores the reactant-to-product atom mapping of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to inspect/modify.
-# \param overwrite If <tt>True</tt>, the perceived mapping replaces any existing Chem.ReactionProperty.ATOM_MAPPING property. If <tt>False</tt>, the existing one (if any) is returned unchanged.
+# \param overwrite If <tt>True</tt>, the perceived mapping replaces any existing atom mapping. If <tt>False</tt>, the existing one (if any) is returned unchanged.
 # 
 # \return The perceived (or pre-existing) atom mapping.
 # 
@@ -4800,7 +4823,7 @@ def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_a
 # 
 # \param molgraph The molecular graph to inspect.
 # 
-# \return The perceived component-group fragment list.
+# \return The perceived component group fragment list.
 # 
 def perceiveComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
 
@@ -4808,9 +4831,9 @@ def perceiveComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
 # \brief Perceives and (optionally) stores the component groups of the molecular graph <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph to inspect/modify.
-# \param overwrite If <tt>True</tt>, replaces any existing component-group list. Otherwise, the existing one (if any) is returned unchanged.
+# \param overwrite If <tt>True</tt>, replaces any existing component group list. Otherwise, the existing one (if any) is returned unchanged.
 # 
-# \return The perceived (or pre-existing) component-group list.
+# \return The perceived (or pre-existing) component group fragment list.
 # 
 def perceiveComponentGroups(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
@@ -4819,7 +4842,7 @@ def perceiveComponentGroups(molgraph: MolecularGraph, overwrite: bool) -> Fragme
 # 
 # \param rxn The reaction to inspect.
 # 
-# \return The perceived component-group fragment list.
+# \return The perceived component group fragment list.
 # 
 def perceiveComponentGroups(rxn: Reaction) -> FragmentList: pass
 
@@ -4827,9 +4850,9 @@ def perceiveComponentGroups(rxn: Reaction) -> FragmentList: pass
 # \brief Perceives and (optionally) stores the component groups of the reaction <em>rxn</em>.
 # 
 # \param rxn The reaction to inspect/modify.
-# \param overwrite If <tt>True</tt>, the perceived list replaces any existing Chem.ReactionProperty.COMPONENT_GROUPS. If <tt>False</tt>, the existing one (if any) is returned unchanged.
+# \param overwrite If <tt>True</tt>, replaces any existing component group list. Otherwise, the existing one (if any) is returned unchanged.
 # 
-# \return The perceived (or pre-existing) component-group fragment list.
+# \return The perceived (or pre-existing) component group fragment list.
 # 
 def perceiveComponentGroups(rxn: Reaction, overwrite: bool) -> FragmentList: pass
 

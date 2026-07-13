@@ -100,6 +100,6 @@ class AtomPropertyFlag(Boost.Python.instance):
     HYBRIDIZATION_STATE = 8192
 
     ##
-    # \brief Specifies the atom-mapping ID an atom in a reaction.
+    # \brief Specifies the atom mapping ID an atom in a reaction.
     # 
     ATOM_MAPPING_ID = 512

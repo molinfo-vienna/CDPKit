@@ -199,7 +199,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpression(const MolecularGraph& molgraph);
 
         /**
-         * \brief Builds a top-level match expression from the match constraint list attached to \a molgraph.
+         * \brief Builds a top-level match expression from the match constraints currently attached to the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect.
          * \return The generated match expression.
          */
@@ -208,7 +208,8 @@ namespace CDPL
         /**
          * \brief Builds and (optionally) stores the top-level match expression of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing match expression. Otherwise, the existing one (if any) is returned unchanged.
+         * \param overwrite If \c true, replaces any existing match expression.
+         *                  Otherwise, the existing one (if any) is returned unchanged.
          * \return The generated (or pre-existing) match expression.
          */
         CDPL_CHEM_API MatchExpression<MolecularGraph>::SharedPointer generateMatchExpression(MolecularGraph& molgraph, bool overwrite);
@@ -433,15 +434,16 @@ namespace CDPL
         /**
          * \brief Perceives the component groups of the molecular graph \a molgraph (from atom-level Chem::AtomProperty::COMPONENT_GROUP_ID values).
          * \param molgraph The molecular graph to inspect.
-         * \return The perceived component-group fragment list.
+         * \return The perceived component group fragment list.
          */
         CDPL_CHEM_API FragmentList::SharedPointer perceiveComponentGroups(const MolecularGraph& molgraph);
 
         /**
          * \brief Perceives and (optionally) stores the component groups of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to inspect/modify.
-         * \param overwrite If \c true, replaces any existing component-group list. Otherwise, the existing one (if any) is returned unchanged.
-         * \return The perceived (or pre-existing) component-group list.
+         * \param overwrite If \c true, replaces any existing component group list.
+         *                  Otherwise, the existing one (if any) is returned unchanged.
+         * \return The perceived (or pre-existing) component group fragment list.
          */
         CDPL_CHEM_API FragmentList::SharedPointer perceiveComponentGroups(MolecularGraph& molgraph, bool overwrite);
 
@@ -556,7 +558,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasHashCode(const MolecularGraph& molgraph);
 
         /**
-         * \brief Computes a 64-bit hash code for \a molgraph taking into account the specified atom and bond properties.
+         * \brief Computes a 64-bit hash code for the molecular graph \a molgraph taking into account the specified atom and bond properties.
          * \param molgraph The molecular graph to hash.
          * \param atom_flags A bitmask of Chem::AtomPropertyFlag flags controlling which atomic properties enter the hash.
          * \param bond_flags A bitmask of Chem::BondPropertyFlag flags controlling which bond properties enter the hash.
@@ -1158,11 +1160,11 @@ namespace CDPL
 
 
         /**
-         * \brief Generates a \e SMILES string for \a molgraph.
+         * \brief Generates a \e SMILES string for the molecular graph \a molgraph.
          * \param molgraph The molecular graph to encode.
-         * \param smiles The string to receive the generated SMILES.
-         * \param canonical \c true to emit a canonical SMILES and \c false for an arbitrary atom ordering.
-         * \param ord_h_deplete \c true to suppress ordinary hydrogens.
+         * \param smiles The string receiving the generated SMILES.
+         * \param canonical \c true to emit a canonical SMILES.
+         * \param ord_h_deplete \c true to suppress the output of ordinary hydrogens.
          * \param atom_flags A bitmask of Chem::AtomPropertyFlag flags controlling which atomic properties to encode.
          * \param bond_flags A bitmask of Chem::BondPropertyFlag flags controlling which bond properties to encode.
          * \return \c true on success, and \c false if an unrecoverable error was encountered.
@@ -1172,11 +1174,11 @@ namespace CDPL
                                           unsigned int bond_flags = BondPropertyFlag::DEFAULT);
 
         /**
-         * \brief Generates an InChI string for \a molgraph using the InChI C-API.
+         * \brief Generates an InChI string for the molecular graph \a molgraph using the InChI C-API.
          * \param molgraph The molecular graph to encode.
-         * \param inchi The string to receive the generated InChI.
+         * \param inchi The string receiving the generated InChI.
          * \param options The InChI C-API option string (see Chem::ControlParameter::INCHI_OUTPUT_OPTIONS).
-         * \param dim The dimensionality of the atomic coordinates to forward to the InChI library (0 = no coordinates).
+         * \param dim The dimensionality of the atomic coordinates to forward to the InChI library.
          * \return The InChI return code (see namespace Chem::INCHIReturnCode).
          */
         CDPL_CHEM_API int generateINCHI(const MolecularGraph& molgraph, std::string& inchi,
@@ -1184,9 +1186,9 @@ namespace CDPL
                                         std::size_t        dim     = 0);
 
         /**
-         * \brief Generates an InChIKey for \a molgraph using the InChI C-API.
+         * \brief Generates an InChIKey for the molecular graph \a molgraph using the InChI C-API.
          * \param molgraph The molecular graph to encode.
-         * \param inchi_key The string to receive the generated InChIKey.
+         * \param inchi_key The string receiving the generated InChIKey.
          * \return The InChI return code (see namespace Chem::INCHIReturnCode).
          */
         CDPL_CHEM_API int generateINCHIKey(const MolecularGraph& molgraph, std::string& inchi_key);
@@ -1215,7 +1217,7 @@ namespace CDPL
                                         bool bonds = true, bool bond_atoms = false);
 
         /**
-         * \brief Computes 2D atom coordinates for \a molgraph and stores them as Chem::AtomProperty::COORDINATES_2D.
+         * \brief Computes 2D atom coordinates for the molecular graph \a molgraph and stores them as Chem::AtomProperty::COORDINATES_2D.
          * \param molgraph The molecular graph to modify.
          * \param overwrite If \c true, replaces any existing 2D coordinates. Otherwise, leaves atoms that already carry coordinates unchanged.
          */
@@ -1428,7 +1430,8 @@ namespace CDPL
          * \brief Sets the atom-level match constraint list \a constr on every atom of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
          * \param constr The match constraint list to assign.
-         * \param overwrite If \c true, replaces any existing per-atom constraints. If \c false, leaves atoms that already carry a list unchanged.
+         * \param overwrite If \c true, replaces any existing per-atom constraints.
+         *                  If \c false, leaves atoms that already carry a list unchanged.
          */
         CDPL_CHEM_API void setAtomMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr,
                                                    bool overwrite);
@@ -1437,36 +1440,41 @@ namespace CDPL
          * \brief Sets the bond-level match constraint list \a constr on every bond of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
          * \param constr The match constraint list to assign.
-         * \param overwrite If \c true, replaces any existing per-bond constraints. If \c false, leaves bonds that already carry a list unchanged.
+         * \param overwrite If \c true, replaces any existing per-bond constraints.
+         *                  If \c false, leaves bonds that already carry a list unchanged.
          */
         CDPL_CHEM_API void setBondMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr,
                                                    bool overwrite);
 
         /**
-         * \brief Generates and stores match expressions for every atom, bond and the molecular graph itself.
+         * \brief Generates and stores match expressions for every atom, bond and the molecular graph \a molgraph itself.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, replaces any existing match expressions. If \c false, leaves items that already carry a match expression unchanged.
+         * \param overwrite If \c true, replaces any existing match expressions.
+         *                  If \c false, leaves atoms/bonds that already carry a match expression unchanged.
          */
         CDPL_CHEM_API void generateMatchExpressions(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Generates and stores textual representations of the match expressions of the molecular graph \a molgraph.
+         * \brief Generates and stores textual representations of the atom/bond match expressions of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
          * \param overwrite If \c true, replaces any existing match expression strings.
+         *                  If \c false, leaves atoms/bonds that already carry a match expression string unchanged.
          */
         CDPL_CHEM_API void generateMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Prepares the molecular graph \a molgraph for use as a substructure search query (precomputes match expressions and required cached properties).
+         * \brief Prepares the molecular graph \a molgraph for use as a substructure search query.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes and stores any required property values.
+         *                  If \c false, leaves already available property values unchanged.
          */
         CDPL_CHEM_API void initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite);
 
         /**
-         * \brief Prepares the molecular graph \a molgraph for use as a substructure search target (precomputes required cached properties).
+         * \brief Prepares the molecular graph \a molgraph for use as a substructure search target.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes and stores any required property values.
+         *                  If \c false, leaves already available property values unchanged.
          */
         CDPL_CHEM_API void initSubstructureSearchTarget(MolecularGraph& molgraph, bool overwrite);
 
@@ -1596,9 +1604,10 @@ namespace CDPL
         CDPL_CHEM_API std::size_t getCompleteBondCount(const MolecularGraph& molgraph);
 
         /**
-         * \brief Computes the basic per-atom/per-bond properties (aromaticity, ring info, etc.) of the molecular graph \a molgraph.
+         * \brief Computes the basic atom/bond/molecular graph properties (aromaticity, ring info, etc.) of the molecular graph \a molgraph.
          * \param molgraph The molecular graph to modify.
-         * \param overwrite If \c true, recomputes derived data. If \c false, leaves up-to-date data unchanged.
+         * \param overwrite If \c true, recomputes and stores basic property values.
+         *                  If \c false, leaves already available property values unchanged.
          * \since 1.1
          */
         CDPL_CHEM_API void calcBasicProperties(MolecularGraph& molgraph, bool overwrite);
