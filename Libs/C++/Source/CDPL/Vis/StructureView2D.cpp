@@ -3328,7 +3328,7 @@ void Vis::StructureView2D::calcInputStructureBounds()
 {
     std::size_t num_atoms = structure->getNumAtoms();
 
-    if (num_atoms == 1 && parameters->getViewport().isDefined()) {
+    if (num_atoms == 1) {
         viewportAdjustmentScalingFactor = 1.0;
 
         calcOutputAtomCoords();

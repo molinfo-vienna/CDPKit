@@ -1,5 +1,6 @@
 master:
 
+ - Fixed the incorrect sizing of single atom reaction components in 2D visualizations with "best fit" scaling policy setting
  - New control-paramter Grid::ControlParameter::CUBE_COMMENT_IS_NAME plus associated function
  - New control-paramter Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR plus associated function
  - New control-paramter Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR plus associated function  
