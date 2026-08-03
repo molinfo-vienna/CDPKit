@@ -46,7 +46,7 @@ namespace CDPL
          * \brief N-point pharmacophore fingerprint generator that uses topological feature distances.
          *
          * The fingerprint encodes the binned topological distances between all pairs of
-         * features in tuples generated from a molecular graph. The choice of how feature-pair topological
+         * features in tuples generated from a molecular graph. The choice of how feature pair topological
          * distance is computed (min, max or average over the topological distances between the
          * underlying atoms) is configurable via FeatureDistanceType.
          *
@@ -111,7 +111,7 @@ namespace CDPL
             NPoint2DPharmacophoreFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
 
             /**
-             * \brief Sets the type of feature-pair topological distance to use.
+             * \brief Sets the type of feature pair topological distance to use.
              * \param dist_type The feature distance type.
              */
             void setFeatureDistanceType(FeatureDistanceType dist_type);

@@ -75,7 +75,7 @@ namespace CDPL
 
         /**
          * \brief Perceives and (optionally) stores the list of MMFF94 aromatic rings of the molecular graph \a molgraph.
-         * \param molgraph The molecular graph to inspect/modify.
+         * \param molgraph The molecular graph.
          * \param overwrite Specifies whether an already existing value of the property should be replaced.
          * \return A shared pointer to the perceived (or pre-existing) list of MMFF94 aromatic rings.
          */

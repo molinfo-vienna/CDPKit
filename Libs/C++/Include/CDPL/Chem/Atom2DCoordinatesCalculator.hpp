@@ -59,7 +59,7 @@ namespace CDPL
 
         /**
          * \brief Generates 2D coordinates for the atoms of a molecular graph using a layout algorithm
-         *        that combines ring-system templates, chain extension, and substituent placement.
+         *        that combines ring system templates, chain extension, and substituent placement.
          *
          * The resulting coordinates are deterministic, free of intra-molecular overlaps where possible, and
          * respect bond stereochemistry. The calculator is reusable: after calling calculate() the instance can
@@ -75,10 +75,10 @@ namespace CDPL
             Atom2DCoordinatesCalculator();
 
             /**
-             * \brief Constructs the \c %Atom2DCoordinatesCalculator instance and calculates 2D-coordinates for
+             * \brief Constructs the \c %Atom2DCoordinatesCalculator instance and calculates 2D coordinates for
              *        the atoms of the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to calculate 2D-coordinates.
-             * \param coords An array containing the calculated 2D-coordinates. The coordinates
+             * \param molgraph The molecular graph for which to calculate 2D coordinates.
+             * \param coords An array containing the calculated 2D coordinates. The coordinates
              *         are stored in the same order as the atoms appear in the atom list of
              *         the molecular graph (i.e. the coordinates of an atom are accessible via
              *         its index).
@@ -90,9 +90,9 @@ namespace CDPL
             Atom2DCoordinatesCalculator& operator=(const Atom2DCoordinatesCalculator&) = delete;
 
             /**
-             * \brief Calculates 2D-coordinates for the atoms of the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to calculate 2D-coordinates.
-             * \param coords An array containing the calculated 2D-coordinates. The coordinates
+             * \brief Calculates 2D coordinates for the atoms of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate 2D coordinates.
+             * \param coords An array containing the calculated 2D coordinates. The coordinates
              *         are stored in the same order as the atoms appear in the atom list of
              *         the molecular graph (i.e. the coordinates of an atom are accessible via
              *         its index).

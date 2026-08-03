@@ -71,7 +71,7 @@ namespace CDPL
          * \brief Builds a Gaussian shape from the atoms of \a atoms using \a coords_func to retrieve atom positions.
          * \param atoms The atom container.
          * \param shape The output Gaussian shape.
-         * \param coords_func The function used to retrieve atom 3D-coordinates.
+         * \param coords_func The function used to retrieve atom 3D coordinates.
          * \param append If \c true, the new elements are appended to \a shape. Otherwise, \a shape is cleared first.
          * \param radius The sphere radius to use for all atoms, or a negative value to use atom-specific Van der Waals radii.
          * \param inc_h If \c true, hydrogen atoms are also included in the shape.

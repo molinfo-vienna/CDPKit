@@ -125,14 +125,14 @@ namespace CDPL
             std::size_t getNumTestRays() const;
 
             /**
-             * \brief Specifies a function for the retrieval of atom 3D-coordinates for buriedness calculation.
-             * \param func The atom 3D-coordinates function.
+             * \brief Specifies a function for the retrieval of atom 3D coordinates for buriedness calculation.
+             * \param func The atom 3D coordinates function.
              */
             void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
             /**
-             * \brief Returns the function used for the retrieval of atom 3D-coordinates.
-             * \return The configured atom 3D-coordinates function.
+             * \brief Returns the function used for the retrieval of atom 3D coordinates.
+             * \return The configured atom 3D coordinates function.
              */
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 

@@ -76,7 +76,7 @@ namespace CDPL
             typedef std::shared_ptr<OrthogonalPiPiInteractionScore> SharedPointer;
 
             /**
-             * \brief Type of the function mapping a feature-pair distance to its score contribution.
+             * \brief Type of the function mapping a feature pair distance to its score contribution.
              */
             typedef std::function<double(double)> DistanceScoringFunction;
 
@@ -120,7 +120,7 @@ namespace CDPL
             double getMaxAngle() const;
 
             /**
-             * \brief Specifies the function that maps a feature-pair distance to its score contribution.
+             * \brief Specifies the function that maps a feature pair distance to its score contribution.
              * \param func The distance-scoring function.
              */
             void setDistanceScoringFunction(const DistanceScoringFunction& func);

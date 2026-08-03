@@ -259,7 +259,7 @@ namespace CDPL
 
         /**
          * \brief Computes the stereo descriptor for the bond \a bond based on the geometry of the molecular graph \a molgraph.
-         * \param bond The bond to inspect.
+         * \param bond The bond.
          * \param molgraph The molecular graph providing the structural context.
          * \param dim The dimensionality of the atomic coordinates to use (\e 2 or \e 3).
          * \return The computed stereo descriptor.
@@ -268,7 +268,7 @@ namespace CDPL
 
         /**
          * \brief Derives the bond configuration label from the supplied descriptor and 3D coordinates.
-         * \param bond The bond to inspect.
+         * \param bond The bond.
          * \param molgraph The molecular graph providing the structural context.
          * \param descr The stereo descriptor whose configuration is to be evaluated.
          * \param coords The 3D atomic coordinates used by the evaluation.
@@ -307,7 +307,7 @@ namespace CDPL
 
         /**
          * \brief Tells whether the bond \a bond qualifies as a stereo center in the context of the molecular graph \a molgraph.
-         * \param bond The bond to inspect.
+         * \param bond The bond.
          * \param molgraph The molecular graph providing the structural context.
          * \param check_asym \c true to enforce non-equivalent ligand environments.
          * \param check_term_n \c true to reject bonds to terminal nitrogen atoms.
@@ -432,7 +432,7 @@ namespace CDPL
 
         /**
          * \brief Builds a bond-level match expression from the match constraint list attached to the bond \a bond.
-         * \param bond The bond to inspect.
+         * \param bond The bond.
          * \param molgraph The molecular graph providing the structural context.
          * \return The generated match expression.
          */
@@ -468,7 +468,7 @@ namespace CDPL
 
         /**
          * \brief Writes a textual representation of the bond-level match expression of the bond \a bond into \a str.
-         * \param bond The bond to inspect.
+         * \param bond The bond.
          * \param molgraph The molecular graph providing the structural context.
          * \param str The output string receiving the match expression text.
          */
@@ -504,7 +504,7 @@ namespace CDPL
 
         /**
          * \brief Derives the <em>Sybyl MOL2</em> bond type of the bond \a bond from its bond order, aromaticity and ligand environment in the molecular graph \a molgraph.
-         * \param bond The bond to inspect.
+         * \param bond The bond.
          * \param molgraph The molecular graph providing the structural context.
          * \return The perceived <em>Sybyl MOL2</em> bond type (see namespace Chem::SybylBondType).
          */

@@ -182,7 +182,7 @@ namespace CDPL
             /**
              * \brief Transfers the generated conformer ensemble onto \a molgraph.
              *
-             * The per-conformer 3D coordinates are written to each atom's 3D-coordinates array
+             * The per-conformer 3D coordinates are written to each atom's 3D coordinates array
              * (via Chem::set3DCoordinatesArray) and the corresponding per-conformer energies are
              * attached to the molecular graph (via Chem::setConformerEnergies).
              *

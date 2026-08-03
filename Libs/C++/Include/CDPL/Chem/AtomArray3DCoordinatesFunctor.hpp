@@ -61,9 +61,9 @@ namespace CDPL
                 coordinates(&coords), molGraph(&molgraph) {}
 
             /**
-             * \brief Returns the 3D-coordinates of the argument atom.
+             * \brief Returns the 3D coordinates of the argument atom.
              * \param atom The atom.
-             * \return The 3D-coordinates of the atom.
+             * \return The 3D coordinates of the atom.
              */
             const Math::Vector3D& operator()(const Atom& atom) const;
 

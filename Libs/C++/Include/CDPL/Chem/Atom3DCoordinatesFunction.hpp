@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type declaration of a generic wrapper class for storing user-defined Chem::Atom 3D-coordinates functions.
+ * \brief Type declaration of a generic wrapper class for storing user-defined Chem::Atom 3D coordinates functions.
  */
 
 #ifndef CDPL_CHEM_ATOM3DCOORDINATESFUNCTION_HPP
@@ -43,7 +43,7 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief Generic wrapper class used to store a user-defined Chem::Atom 3D-coordinates function.
+         * \brief Generic wrapper class used to store a user-defined Chem::Atom 3D coordinates function.
          */
         typedef std::function<const Math::Vector3D&(const Chem::Atom&)> Atom3DCoordinatesFunction;
     } // namespace Chem

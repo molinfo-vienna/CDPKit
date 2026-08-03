@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type declaration of a generic wrapper class for storing user-defined Pharm::Feature 3D-coordinates functions.
+ * \brief Type declaration of a generic wrapper class for storing user-defined Pharm::Feature 3D coordinates functions.
  */
 
 #ifndef CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
@@ -43,7 +43,7 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief Generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
+         * \brief Generic wrapper class used to store a user-defined Pharm::Feature 3D coordinates function.
          */
         typedef std::function<const Math::Vector3D&(const Pharm::Feature&)> Feature3DCoordinatesFunction;
     } // namespace Pharm

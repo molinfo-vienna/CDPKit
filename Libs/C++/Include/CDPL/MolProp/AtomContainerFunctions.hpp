@@ -140,16 +140,16 @@ namespace CDPL
 
 
         /**
-         * \brief Calculates the dipole moment of \a cntnr using the supplied atom 3D-coordinates function.
+         * \brief Calculates the dipole moment of \a cntnr using the supplied atom 3D coordinates function.
          * \param cntnr The atom container.
-         * \param coords_func The function used to retrieve atom 3D-coordinates.
+         * \param coords_func The function used to retrieve atom 3D coordinates.
          * \param moment The output dipole-moment vector.
          * \return \c true if the dipole moment could be calculated, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func, Math::Vector3D& moment);
 
         /**
-         * \brief Calculates the dipole moment of \a cntnr using the standard atom 3D-coordinates accessor.
+         * \brief Calculates the dipole moment of \a cntnr using the standard atom 3D coordinates accessor.
          * \param cntnr The atom container.
          * \param moment The output dipole-moment vector.
          * \return \c true if the dipole moment could be calculated, and \c false otherwise.

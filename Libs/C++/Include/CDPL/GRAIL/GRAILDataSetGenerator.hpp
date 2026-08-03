@@ -331,7 +331,7 @@ namespace CDPL
             /**
              * \brief Calculates the interaction-score grids for all enabled feature-type pairs and stores them in \a grid_set.
              * \param tgt_env The target environment.
-             * \param coords_func The function used to retrieve atom 3D-coordinates from \a tgt_env.
+             * \param coords_func The function used to retrieve atom 3D coordinates from \a tgt_env.
              * \param grid_set The output grid set.
              * \param append If \c true, the new grids are appended to \a grid_set. Otherwise, \a grid_set is cleared first.
              */
@@ -341,7 +341,7 @@ namespace CDPL
             /**
              * \brief Calculates an atom-density grid for the given atoms.
              * \param atoms The atoms contributing to the density.
-             * \param coords_func The function used to retrieve atom 3D-coordinates.
+             * \param coords_func The function used to retrieve atom 3D coordinates.
              * \param grid_name The name to assign to the resulting grid.
              * \return A smart pointer to the calculated atom-density grid.
              */

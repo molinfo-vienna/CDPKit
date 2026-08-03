@@ -62,7 +62,7 @@ namespace CDPL
         /**
          * \brief Extracts the 2D coordinates of all atoms in \a cntnr into \a coords.
          * \param cntnr The atom container.
-         * \param coords The output 2D-coordinate array.
+         * \param coords The output 2D coordinate array.
          * \param append If \c true, the coordinates are appended to \a coords. Otherwise, \a coords is cleared first.
          */
         CDPL_CHEM_API void get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords, bool append = false);
@@ -85,7 +85,7 @@ namespace CDPL
         /**
          * \brief Extracts the 3D coordinates of all atoms in \a cntnr into \a coords using the per-atom coordinate lookup function \a coords_func.
          * \param cntnr The atom container.
-         * \param coords The output 3D-coordinate array.
+         * \param coords The output 3D coordinate array.
          * \param coords_func The function returning the 3D coordinates of an atom.
          * \param append If \c true, the coordinates are appended to \a coords. Otherwise, \a coords is cleared first.
          */
@@ -116,7 +116,7 @@ namespace CDPL
          * \brief Extracts the conformation at index \a conf_idx into \a coords.
          * \param cntnr The atom container.
          * \param conf_idx The zero-based conformation index.
-         * \param coords The output 3D-coordinate array.
+         * \param coords The output 3D coordinate array.
          * \param append If \c true, the coordinates are appended to \a coords. Otherwise, \a coords is cleared first.
          */
         CDPL_CHEM_API void getConformation(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords, bool append = false);

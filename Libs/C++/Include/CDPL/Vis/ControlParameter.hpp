@@ -394,7 +394,7 @@ namespace CDPL
              * \brief Specifies whether or not to use calculated atom coordinates for the visualization of chemical structures.
              *
              * If the parameter is set to \c false and assigned 2D atom coordinates are available, then the 
-             * assigned coordinates will be used. If the parameter is \c true or no assigned 2D-coordinates 
+             * assigned coordinates will be used. If the parameter is \c true or no assigned 2D coordinates 
              * are available, the atom coordinates will be calculated. If the parameter is left unspecified,
              * the default setting Vis::ControlParameterDefault::USE_CALCULATED_ATOM_COORDINATES will be used.
              *

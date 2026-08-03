@@ -49,9 +49,9 @@ namespace CDPL
 
           public:
             /**
-             * \brief Returns the 3D-coordinates of the argument entity object.
+             * \brief Returns the 3D coordinates of the argument entity object.
              * \param entity The entity object.
-             * \return The 3D-coordinates of the entity object.
+             * \return The 3D coordinates of the entity object.
              * \see Chem::get3DCoordinates(const Entity3D&)
              */
             const Math::Vector3D& operator()(const Entity3D& entity) const;

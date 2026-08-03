@@ -89,7 +89,7 @@ namespace CDPL
             typedef std::function<bool(const Util::STPairArray&)> TopologicalAlignmentConstraintFunction;
 
             /**
-             * \brief Generic wrapper class used to store a user-defined entity 3D-coordinates function.
+             * \brief Generic wrapper class used to store a user-defined entity 3D coordinates function.
              */
             typedef std::function<const Math::Vector3D&(const EntityType&)> Entity3DCoordinatesFunction;
 
@@ -133,14 +133,14 @@ namespace CDPL
             std::size_t getMinTopologicalMappingSize();
 
             /**
-             * \brief Specifies a function for the retrieval of entity 3D-coordinates.
-             * \param func The entity 3D-coordinates function.
+             * \brief Specifies a function for the retrieval of entity 3D coordinates.
+             * \param func The entity 3D coordinates function.
              */
             void setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func);
 
             /**
-             * \brief Returns the function that was registered for the retrieval of entity 3D-coordinates.
-             * \return The registered entity 3D-coordinates function.
+             * \brief Returns the function that was registered for the retrieval of entity 3D coordinates.
+             * \return The registered entity 3D coordinates function.
              */
             const Entity3DCoordinatesFunction& getEntity3DCoordinatesFunction() const;
 

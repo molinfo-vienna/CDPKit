@@ -44,7 +44,7 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief Pharm::FeatureInteractionScore implementation that scores a feature pair based on whether their 3D-position
+         * \brief Pharm::FeatureInteractionScore implementation that scores a feature pair based on whether their 3D position
          *        distance falls within a configured [min, max] interval.
          */
         class CDPL_PHARM_API FeatureDistanceScore : public FeatureInteractionScore
@@ -57,7 +57,7 @@ namespace CDPL
             typedef std::shared_ptr<FeatureDistanceScore> SharedPointer;
 
             /**
-             * \brief Type of the function mapping a raw feature-pair distance to a score contribution.
+             * \brief Type of the function mapping a raw feature pair distance to a score contribution.
              */
             typedef std::function<double(double)> DistanceScoringFunction;
 
@@ -82,7 +82,7 @@ namespace CDPL
             double getMaxDistance() const;
 
             /**
-             * \brief Specifies the function that maps a feature-pair distance to its score contribution.
+             * \brief Specifies the function that maps a feature pair distance to its score contribution.
              * \param func The distance-scoring function.
              */
             void setDistanceScoringFunction(const DistanceScoringFunction& func);

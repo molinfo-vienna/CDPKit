@@ -43,7 +43,7 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief Match functor that quantifies the goodness of the 3D-position match between two pharmacophore
+         * \brief Match functor that quantifies the goodness of the 3D position match between two pharmacophore
          *        features by comparing their separation against the configured per-feature tolerance.
          */
         class CDPL_PHARM_API FeaturePositionMatchFunctor

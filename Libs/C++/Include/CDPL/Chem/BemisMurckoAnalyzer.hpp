@@ -91,13 +91,13 @@ namespace CDPL
 
             /**
              * \brief Returns the perceived ring systems of the input molecular graph.
-             * \return A \c const reference to the list of ring-system fragments.
+             * \return A \c const reference to the list of ring system fragments.
              */
             const FragmentList& getRingSystems() const;
 
             /**
              * \brief Returns the side chains (acyclic substituents) of the input molecular graph.
-             * \return A \c const reference to the list of side-chain fragments.
+             * \return A \c const reference to the list of side chain fragments.
              */
             const FragmentList& getSideChains() const;
 

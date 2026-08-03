@@ -52,7 +52,7 @@ namespace CDPL
          * \brief Abstract base for N-point pharmacophore fingerprint generators.
          *
          * The base class implements the common machinery for enumerating feature tuples of size in
-         * <em>[minTupleSize, maxTupleSize]</em>, binning the feature-pair distances of each tuple and
+         * <em>[minTupleSize, maxTupleSize]</em>, binning the feature pair distances of each tuple and
          * setting the corresponding bits of the output fingerprint. The concrete distance
          * (topological vs. 3D) is provided by the derived class via the pure virtual
          * \c getDistance() hook.
@@ -108,7 +108,7 @@ namespace CDPL
             std::size_t getMaxFeatureTupleSize() const;
 
             /**
-             * \brief Sets the size of the bins used to discretize feature-pair distances.
+             * \brief Sets the size of the bins used to discretize feature pair distances.
              * \param bin_size The bin size.
              */
             void setBinSize(double bin_size);

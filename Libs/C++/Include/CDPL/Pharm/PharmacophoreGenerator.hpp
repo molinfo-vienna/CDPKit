@@ -131,14 +131,14 @@ namespace CDPL
             void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool append = false);
 
             /**
-             * \brief Specifies a function for the retrieval of atom 3D-coordinates for feature generation.
-             * \param func The atom 3D-coordinates function.
+             * \brief Specifies a function for the retrieval of atom 3D coordinates for feature generation.
+             * \param func The atom 3D coordinates function.
              */
             void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
             /**
-             * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
-             * \return The registered atom 3D-coordinates function.
+             * \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
+             * \return The registered atom 3D coordinates function.
              */
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 

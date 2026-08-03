@@ -50,7 +50,7 @@ namespace CDPL
          * The molecule gets prepared by completing its hydrogens, perceiving the
          * SSSR, ring flags, implicit H counts, hybridization states and aromaticity, generating 3D coordinates
          * for newly added hydrogens and (optionally) calculating per-atom hydrophobicities.
-         * Failures of the hydrogen 3D-coordinate or residue sequence info derivation steps are silently caught and
+         * Failures of the hydrogen 3D coordinate or residue sequence info derivation steps are silently caught and
          * ignored. All other exceptions propagate.
          *
          * \param mol The molecule to prepare (modified in place).

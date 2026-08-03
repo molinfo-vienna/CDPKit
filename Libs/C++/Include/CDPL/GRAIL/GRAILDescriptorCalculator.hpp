@@ -290,7 +290,7 @@ namespace CDPL
             /**
              * \brief Initializes the calculator with target-environment data for subsequent descriptor calculations.
              * \param tgt_env The target environment (e.g. binding-site residues).
-             * \param coords_func The function used to retrieve atom 3D-coordinates from \a tgt_env.
+             * \param coords_func The function used to retrieve atom 3D coordinates from \a tgt_env.
              * \param tgt_env_changed If \c true, the target environment is reinitialized even if the same target was supplied previously.
              */
             void initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,

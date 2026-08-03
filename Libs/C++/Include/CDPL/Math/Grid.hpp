@@ -963,7 +963,7 @@ namespace CDPL
                 size1(m.size1), size2(m.size2), size3(m.size3) {}
 
             /**
-             * \brief Returns a \c const reference to the zero element (linear-index form).
+             * \brief Returns a \c const reference to the zero element.
              * \param i The zero-based linear index.
              * \return A \c const reference to the zero element.
              * \throw Base::IndexError if \a i is out of range.
@@ -975,7 +975,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the zero element (3D-index form).
+             * \brief Returns a \c const reference to the zero element.
              * \param i The zero-based first-axis index.
              * \param j The zero-based second-axis index.
              * \param k The zero-based third-axis index.
@@ -1197,7 +1197,7 @@ namespace CDPL
                 size1(m.size1), size2(m.size2), size3(m.size3), value(m.value) {}
 
             /**
-             * \brief Returns a \c const reference to the common element value (linear-index form).
+             * \brief Returns a \c const reference to the common element value.
              * \param i The zero-based linear index.
              * \return A \c const reference to the common element value.
              * \throw Base::IndexError if \a i is out of range.
@@ -1209,7 +1209,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the common element value (3D-index form).
+             * \brief Returns a \c const reference to the common element value.
              * \param i The zero-based first-axis index.
              * \param j The zero-based second-axis index.
              * \param k The zero-based third-axis index.
