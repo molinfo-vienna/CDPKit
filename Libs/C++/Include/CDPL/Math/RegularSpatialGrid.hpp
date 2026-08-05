@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Reusable transformation traits used by Math::RegularSpatialGrid when the coordinate transform is a <em>4&times;4</em> matrix.
+         * \brief Reusable transformation traits used by Math::RegularSpatialGrid when the grid-coordinate transform is a <em>4&times;4</em> matrix.
          * \tparam MatrixType The <em>4&times;4</em> transformation matrix type.
          */
         template <typename MatrixType>
@@ -90,14 +90,14 @@ namespace CDPL
         };
 
         /**
-         * \brief Primary traits template for grid-coordinate transformations of type \a T (left unspecialized; specialize for new transform types).
+         * \brief Primary traits template for grid-coordinate transformations of type \a T (left unspecialized).
          * \tparam T The coordinate transformation type.
          */
         template <typename T>
         struct GridCoordinatesTransformTraits;
 
         /**
-         * \brief Math::GridCoordinatesTransformTraits specialization for the fixed-size Math::CMatrix <em>4&times;4</em> transformation type.
+         * \brief Math::GridCoordinatesTransformTraits specialization for transformations represented by fixed-size <em>4&times;4</em> Math::CMatrix instances.
          * \tparam T The matrix element value type.
          */
         template <typename T>
@@ -105,7 +105,7 @@ namespace CDPL
         {};
 
         /**
-         * \brief Math::GridCoordinatesTransformTraits specialization for the bounded Math::BoundedMatrix <em>4&times;4</em> transformation type.
+         * \brief Math::GridCoordinatesTransformTraits specialization for transformations represented by <em>4&times;4</em> Math::BoundedMatrix instances.
          * \tparam T The matrix element value type.
          */
         template <typename T>
@@ -114,11 +114,11 @@ namespace CDPL
 
 
         /**
-         * \brief 3D grid data structure combining a Math::Grid data store with a coordinate-system transformation
+         * \brief 3D grid data structure combining a grid data store with a coordinate-system transformation
          *        that maps grid cell indices to 3D world positions.
          *
          * \tparam T The grid cell value type.
-         * \tparam C The coordinate (real) value type used in the world frame.
+         * \tparam C The xyz-coordinates value type.
          * \tparam GD The underlying grid data container type (default: Math::Grid).
          * \tparam XF The transformation type that maps cell indices to world coordinates.
          */
@@ -135,7 +135,7 @@ namespace CDPL
             typedef T                                                       ValueType;
 
             /**
-             * \brief The coordinate (real) value type used in the world frame.
+             * \brief The xyz-coordinates value type.
              */
             typedef C                                                       CoordinatesValueType;
 
@@ -145,12 +145,12 @@ namespace CDPL
             typedef GD                                                      GridDataType;
 
             /**
-             * \brief The coordinate transformation type mapping cell indices to world coordinates.
+             * \brief The coordinate transformation type mapping grid space coordinates to world coordinates.
              */
             typedef XF                                                      CoordinatesTransformType;
 
             /**
-             * \brief The inverse coordinate transformation type.
+             * \brief The inverse coordinate transformation type mapping world coordinates to grid space coordinates.
              */
             typedef typename CoordinatesTransformType::MatrixTemporaryType  InvCoordinatesTransformType;
 
@@ -197,7 +197,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>                               SharedPointer;
 
             /**
-             * \brief Constructs an empty grid with anisotropic per-axis step sizes.
+             * \brief Constructs an empty grid with the specified anisotropic per-axis step sizes.
              * \param xs The step size along the x-axis.
              * \param ys The step size along the y-axis.
              * \param zs The step size along the z-axis.
@@ -211,7 +211,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs the grid with anisotropic per-axis step sizes initialized to the supplied grid data.
+             * \brief Constructs the grid with the specified anisotropic per-axis step sizes initialized to the supplied grid data.
              * \param data The grid data container.
              * \param xs The step size along the x-axis.
              * \param ys The step size along the y-axis.
@@ -226,7 +226,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs an empty grid with isotropic step size \a s on all three axes.
+             * \brief Constructs an empty grid with the specified isotropic step size \a s on all three axes.
              * \param s The step size used on every axis.
              */
             explicit RegularSpatialGrid(const CoordinatesValueType& s):
@@ -238,7 +238,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs the grid with isotropic step size \a s and the supplied grid data.
+             * \brief Constructs the grid with the isotropic step size \a s and the supplied grid data.
              * \param data The grid data container.
              * \param s The step size used on every axis.
              */
@@ -282,7 +282,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the cell at the linear index \a i.
+             * \brief Returns a \c const reference to the value of the cell at the linear index \a i.
              * \param i The zero-based linear cell index.
              * \return A \c const reference to the cell value.
              */
@@ -292,10 +292,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to the cell at the (\a i, \a j, \a k) position.
-             * \param i The zero-based first dimension index.
-             * \param j The zero-based second dimension index.
-             * \param k The zero-based third dimension index.
+             * \brief Returns a mutable reference to the value of cell at (\a i, \a j, \a k).
+             * \param i The zero-based cell index along the x-axis.
+             * \param j The zero-based cell index along the y-axis.
+             * \param k The zero-based cell index along the z-axis.
              * \return A mutable reference to the cell value.
              */
             Reference operator()(SizeType i, SizeType j, SizeType k)
@@ -304,10 +304,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to the cell at the (\a i, \a j, \a k) position.
-             * \param i The zero-based first dimension index.
-             * \param j The zero-based second dimension index.
-             * \param k The zero-based third dimension index.
+             * \brief Returns a \c const reference to the value of cell at (\a i, \a j, \a k).
+             * \param i The zero-based cell index along the x-axis.
+             * \param j The zero-based cell index along the y-axis.
+             * \param k The zero-based cell index along the z-axis.
              * \return A \c const reference to the cell value.
              */
             ConstReference operator()(SizeType i, SizeType j, SizeType k) const
@@ -325,8 +325,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the size of the grid along the first dimension.
-             * \return The size in the first dimension.
+             * \brief Returns the number of cells along the x-axis.
+             * \return The number of cells along the x-axis.
              */
             SizeType getSize1() const
             {
@@ -334,8 +334,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the size of the grid along the second dimension.
-             * \return The size in the second dimension.
+             * \brief Returns the number of cells along the y-axis.
+             * \return The number of cells along the y-axis.
              */
             SizeType getSize2() const
             {
@@ -343,8 +343,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the size of the grid along the third dimension.
-             * \return The size in the third dimension.
+             * \brief Returns the number of cells along the z-axis.
+             * \return The number of cells along the z-axis.
              */
             SizeType getSize3() const
             {
@@ -361,8 +361,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the maximum size of the grid along the first dimension.
-             * \return The maximum size in the first dimension.
+             * \brief Returns the maximum number of cells along the x-axis.
+             * \return The maximum number of cells along the x-axis.
              */
             SizeType getMaxSize1() const
             {
@@ -370,8 +370,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the maximum size of the grid along the second dimension.
-             * \return The maximum size in the second dimension.
+             * \brief Returns the maximum number of cells along the y-axis.
+             * \return The maximum number of cells along the y-axis.
              */
             SizeType getMaxSize2() const
             {
@@ -379,8 +379,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the maximum size of the grid along the third dimension.
-             * \return The maximum size in the third dimension.
+             * \brief Returns the maximum number of cells along the z-axis.
+             * \return The maximum number of cells along the z-axis.
              */
             SizeType getMaxSize3() const
             {
@@ -442,7 +442,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the spatial extent of the grid along the x-axis (\f$ (\mathrm{size}_1 - 1) \cdot \mathrm{xStep} \f$ for non-empty grids).
+             * \brief Returns the spatial extent of the grid along the x-axis.
              * \return The x-axis extent.
              */
             CoordinatesValueType getXExtent() const
@@ -469,10 +469,10 @@ namespace CDPL
             }
 
             /**
-             * \brief Writes the world-space 3D position of the cell with linear index \a i into \a coords.
-             * \tparam V The output vector type (must be indexable via <tt>operator[]</tt>).
+             * \brief Outputs the world space 3D position of the cell with linear index \a i into \a coords.
+             * \tparam V The output vector type.
              * \param i The zero-based linear cell index.
-             * \param coords The output vector receiving the X/Y/Z position.
+             * \param coords The output vector receiving the xyz-coordinates.
              */
             template <typename V>
             void getCoordinates(SizeType i, V& coords) const
@@ -486,12 +486,12 @@ namespace CDPL
             }
 
             /**
-             * \brief Writes the world-space 3D position of the cell at (\a i, \a j, \a k) into \a coords.
+             * \brief Writes the world space 3D position of the cell at (\a i, \a j, \a k) into \a coords.
              * \tparam V The output vector type.
-             * \param i The first dimension cell index.
-             * \param j The second dimension cell index.
-             * \param k The third dimension cell index.
-             * \param coords The output vector receiving the X/Y/Z position.
+             * \param i The zero-based cell index along the x-axis.
+             * \param j The zero-based cell index along the y-axis.
+             * \param k The zero-based cell index along the z-axis.
+             * \param coords The output vector receiving the world space 3D position.
              */
             template <typename V>
             void getCoordinates(SSizeType i, SSizeType j, SSizeType k, V& coords) const
@@ -510,16 +510,16 @@ namespace CDPL
             }
 
             /**
-             * \brief Writes the local-space 3D position of the cell at (\a i, \a j, \a k) into \a coords.
+             * \brief Writes the grid space 3D position of the cell at (\a i, \a j, \a k) into \a coords.
              *
-             * Local coordinates are centered at the grid origin (the cell-center cell-index coordinate system
-             * before applying the world-space transformation).
+             * Grid space coordinates are centered at the grid origin (the cell-center cell-index coordinate system
+             * before applying the world space transformation).
              *
              * \tparam V The output vector type.
-             * \param i The first dimension cell index.
-             * \param j The second dimension cell index.
-             * \param k The third dimension cell index.
-             * \param coords The output vector receiving the local X/Y/Z position.
+             * \param i The zero-based cell index along the x-axis.
+             * \param j The zero-based cell index along the y-axis.
+             * \param k The zero-based cell index along the z-axis.
+             * \param coords The output vector receiving the grid space 3D position.
              */
             template <typename V>
             void getLocalCoordinates(SSizeType i, SSizeType j, SSizeType k, V& coords) const
@@ -530,11 +530,11 @@ namespace CDPL
             }
 
             /**
-             * \brief Transforms the world-space point \a world_coords into the grid's local coordinate frame and stores the result in \a local_coords.
+             * \brief Transforms the world space point \a world_coords into the grid's local coordinate frame and stores the result in \a local_coords.
              * \tparam V1 The input vector type.
              * \tparam V2 The output vector type.
-             * \param world_coords The input world-space 3D position.
-             * \param local_coords The output vector receiving the local-frame 3D position.
+             * \param world_coords The input world space 3D position.
+             * \param local_coords The output vector receiving the grid space 3D position.
              */
             template <typename V1, typename V2>
             void getLocalCoordinates(const V1& world_coords, V2& local_coords) const
@@ -549,9 +549,9 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the world-space point \a pos lies within the grid bounds.
+             * \brief Tells whether the world space point \a pos lies within the grid bounds.
              * \tparam V The point vector type.
-             * \param pos The world-space 3D position to test.
+             * \param pos The world space 3D position to test.
              * \return \c true if \a pos is inside the grid, and \c false otherwise.
              */
             template <typename V>
@@ -565,9 +565,9 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the local-space point \a pos lies within the grid bounds.
+             * \brief Tells whether the grid space point \a pos lies within the grid bounds.
              * \tparam V The point vector type.
-             * \param pos The local-frame 3D position to test.
+             * \param pos The grid space 3D position to test.
              * \return \c true if \a pos is inside the grid, and \c false otherwise.
              */
             template <typename V>
@@ -595,11 +595,11 @@ namespace CDPL
             }
 
             /**
-             * \brief Writes the (i, j, k) cell indices of the cell containing the world-space point \a pos into \a indices.
+             * \brief Writes the (\e i, \e j, \e k) indices of the cell containing the world space point \a pos into \a indices.
              * \tparam V1 The input point type.
              * \tparam V2 The output indices type.
-             * \param pos The world-space 3D position.
-             * \param indices The output vector receiving the three cell indices.
+             * \param pos The world space 3D position.
+             * \param indices The output vector receiving the three zero-based cell indices.
              */
             template <typename V1, typename V2>
             void getContainingCell(const V1& pos, V2& indices) const
@@ -612,11 +612,11 @@ namespace CDPL
             }
 
             /**
-             * \brief Writes the (i, j, k) cell indices of the cell containing the local-space point \a pos into \a indices.
+             * \brief Writes the (\e i, \e j, \e k) indices of the cell containing the grid space point \a pos into \a indices.
              * \tparam V1 The input point type.
              * \tparam V2 The output indices type.
              * \param pos The local-frame 3D position.
-             * \param indices The output vector receiving the three cell indices.
+             * \param indices The output vector receiving the three zero-based cell indices.
              */
             template <typename V1, typename V2>
             void getLocalContainingCell(const V1& pos, V2& indices) const
@@ -658,7 +658,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the coordinate transformation mapping cell-index coordinates to world coordinates.
+             * \brief Returns the coordinate transformation mapping grid space to world coordinates.
              * \return A \c const reference to the transformation matrix.
              */
             const CoordinatesTransformType& getCoordinatesTransform() const
@@ -667,7 +667,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Sets the cell-index to world-coordinate transformation to \a xform and caches its inverse.
+             * \brief Sets the grid space to world coordinates transformation to \a xform and caches its calculated inverse.
              * \tparam T1 A type assignable to CoordinatesTransformType.
              * \param xform The new transformation.
              * \throw Base::CalculationFailed if the transformation cannot be inverted (only when math checks are enabled).
@@ -685,7 +685,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Copy-assigns from \a usg.
+             * \brief Copy-assigns the state of \a usg to this grid.
              * \param usg The source grid.
              * \return A reference to itself.
              */
@@ -701,7 +701,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Move-assigns from \a usg.
+             * \brief Move-assigns the state of \a usg to this grid.
              * \param usg The source grid (left in a valid but unspecified state).
              * \return A reference to itself.
              */
@@ -756,7 +756,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Multiplies every cell by the scalar \a t.
+             * \brief Multiplies every cell value by the scalar \a t.
              * \tparam T1 The scalar type.
              * \param t The scalar multiplier.
              * \return A reference to itself.
@@ -769,7 +769,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Divides every cell by the scalar \a t.
+             * \brief Divides every cell value by the scalar \a t.
              * \tparam T1 The scalar type.
              * \param t The scalar divisor.
              * \return A reference to itself.
@@ -821,7 +821,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Swaps the contents of this grid with those of \a usg.
+             * \brief Swaps the data of this grid with those of \a usg.
              * \param usg The grid to swap with.
              */
             void swap(RegularSpatialGrid& usg)
@@ -855,9 +855,9 @@ namespace CDPL
 
             /**
              * \brief Resizes the grid to <em>m&times;n&times;o</em> cells.
-             * \param m The new size in the first dimension.
-             * \param n The new size in the second dimension.
-             * \param o The new size in the third dimension.
+             * \param m The new size along the x-axis.
+             * \param n The new size along the y-axis.
+             * \param o The new size along the z-axis.
              * \param preserve If \c true, existing cell values are kept where the indices remain valid. If \c false, all cells are set to \a v.
              * \param v The fill value used for newly added cells (and for all cells if \a preserve is \c false).
              */
@@ -889,7 +889,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Returns the trilinearly-interpolated value of \a grid at \a pos.
+         * \brief Returns the trilinearly interpolated cell value of the regular spatial grid \a grid at the position \a pos.
          * \tparam T The grid cell value type.
          * \tparam C The coordinate value type.
          * \tparam GD The underlying grid data container type.
@@ -897,9 +897,8 @@ namespace CDPL
          * \tparam V The position vector type (indexable via <tt>operator[]</tt> for \e 3 components).
          * \param grid The regular spatial grid.
          * \param pos The query position.
-         * \param local_pos If \c true, \a pos is interpreted as local (cell-index space) coordinates;
-         *                  if \c false, \a pos is interpreted as world coordinates and converted via the inverse transform.
-         * \return The trilinearly-interpolated cell value at \a pos (zero if \a grid is empty).
+         * \param local_pos If \c true, \a pos specifies local grid coordinates and world coordinates otherwise.
+         * \return The trilinearly interpolated grid cell value at \a pos (zero if the grid is empty).
          */
         template <typename T, typename C, typename GD, typename XF, typename V>
         T interpolateTrilinear(const RegularSpatialGrid<T, C, GD, XF>& grid, const V& pos, bool local_pos)
@@ -971,12 +970,12 @@ namespace CDPL
         }
 
         /**
-         * \brief Unbounded dense regular grid storing floating-point values of type <tt>float</tt>.
+         * \brief Unbounded dense regular spatial grid storing floating-point values of type <tt>float</tt>.
          */
         typedef RegularSpatialGrid<float> FRegularSpatialGrid;
 
         /**
-         * \brief Unbounded dense regular grid storing floating-point values of type <tt>double</tt>.
+         * \brief Unbounded dense regular spatial grid storing floating-point values of type <tt>double</tt>.
          */
         typedef RegularSpatialGrid<double> DRegularSpatialGrid;
     } // namespace Math

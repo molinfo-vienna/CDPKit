@@ -849,7 +849,7 @@ namespace CDPL
              * \param n The new second-axis size.
              * \param o The new third-axis size.
              * \param preserve If \c true, existing element values at indices that remain valid are kept. If \c false, all elements are set to \a v.
-             * \param v The fill value for newly added elements (or for all elements when \a preserve is \c false).
+             * \param v The fill value for newly added elements (and for all elements when \a preserve is \c false).
              */
             void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType())
             {

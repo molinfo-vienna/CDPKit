@@ -1363,24 +1363,24 @@ def innerProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> int: pa
 def innerProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> int: pass
 
 ##
-# \brief Returns the trilinearly-interpolated value of <em>grid</em> at <em>pos</em>.
+# \brief Returns the trilinearly interpolated cell value of the regular spatial grid <em>grid</em> at the position <em>pos</em>.
 # 
 # \param grid The regular spatial grid.
 # \param pos The query position.
-# \param local_pos If <tt>True</tt>, <em>pos</em> is interpreted as local (cell-index space) coordinates; if <tt>False</tt>, <em>pos</em> is interpreted as world coordinates and converted via the inverse transform.
+# \param local_pos If <tt>True</tt>, <em>pos</em> specifies local grid coordinates and world coordinates otherwise.
 # 
-# \return The trilinearly-interpolated cell value at <em>pos</em> (zero if <em>grid</em> is empty).
+# \return The trilinearly interpolated grid cell value at <em>pos</em> (zero if the grid is empty).
 # 
 def interpolateTrilinear(grid: DRegularSpatialGrid, pos: Vector3D, local_pos: bool) -> float: pass
 
 ##
-# \brief Returns the trilinearly-interpolated value of <em>grid</em> at <em>pos</em>.
+# \brief Returns the trilinearly interpolated cell value of the regular spatial grid <em>grid</em> at the position <em>pos</em>.
 # 
 # \param grid The regular spatial grid.
 # \param pos The query position.
-# \param local_pos If <tt>True</tt>, <em>pos</em> is interpreted as local (cell-index space) coordinates; if <tt>False</tt>, <em>pos</em> is interpreted as world coordinates and converted via the inverse transform.
+# \param local_pos If <tt>True</tt>, <em>pos</em> specifies local grid coordinates and world coordinates otherwise.
 # 
-# \return The trilinearly-interpolated cell value at <em>pos</em> (zero if <em>grid</em> is empty).
+# \return The trilinearly interpolated grid cell value at <em>pos</em> (zero if the grid is empty).
 # 
 def interpolateTrilinear(grid: FRegularSpatialGrid, pos: Vector3F, local_pos: bool) -> float: pass
 
