@@ -51,7 +51,7 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies the MHMO pi-bond order of the bond.
+             * \brief Specifies the MHMO &pi;-bond order of the bond.
              *
              * \valuetype \c double
              * \see [\ref MHMO]

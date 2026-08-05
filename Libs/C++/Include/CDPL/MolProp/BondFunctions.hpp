@@ -50,14 +50,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the MolProp::BondProperty::MHMO_PI_ORDER property of the bond \a bond.
          * \param bond The bond for which to return the property value.
-         * \return The MHMO pi-bond order.
+         * \return The MHMO &pi;-bond order.
          */
         CDPL_MOLPROP_API double getMHMOPiOrder(const Chem::Bond& bond);
 
         /**
          * \brief Sets the value of the MolProp::BondProperty::MHMO_PI_ORDER property of the bond \a bond to \a order.
          * \param bond The bond for which to set the property value.
-         * \param order The MHMO pi-bond order.
+         * \param order The MHMO &pi;-bond order.
          */
         CDPL_MOLPROP_API void setMHMOPiOrder(Chem::Bond& bond, double order);
 

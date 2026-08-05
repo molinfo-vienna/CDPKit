@@ -108,9 +108,9 @@ namespace CDPL
         CDPL_CHEM_API bool hasSymbol(const Atom& atom);
 
         /**
-         * \brief Returns the element symbol that corresponds to the Chem::AtomProperty::TYPE property of the atom \a atom.
+         * \brief Returns the symbol that corresponds to the numeric type property of the atom \a atom.
          * \param atom The atom to query.
-         * \return The element symbol mapped from the atom's type (see namespace Chem::AtomType).
+         * \return The symbol associated with the numeric type (see namespace Chem::AtomType).
          */
         CDPL_CHEM_API const std::string& getSymbolForType(const Atom& atom);
 
@@ -143,16 +143,16 @@ namespace CDPL
         CDPL_CHEM_API bool hasType(const Atom& atom);
 
         /**
-         * \brief Returns the atom type that corresponds to the Chem::AtomProperty::SYMBOL property of the atom \a atom.
+         * \brief Returns the numeric atom type that corresponds to the symbol property of the atom \a atom.
          * \param atom The atom to query.
-         * \return The atom type mapped from the element symbol.
+         * \return The numeric atom type (see namespace Chem::AtomType) associated with the symbol.
          */
         CDPL_CHEM_API unsigned int getTypeForSymbol(const Atom& atom);
 
         /**
-         * \brief Returns the generic atom type that the atom's Chem::AtomProperty::TYPE property value belongs to.
+         * \brief Returns the generic atom type associated with numeric type property of the atom \a atom.
          * \param atom The atom to query.
-         * \return The generic atom type.
+         * \return The generic atom type (see namespace Chem::AtomType).
          */
         CDPL_CHEM_API unsigned int getGenericType(const Atom& atom); //move
 
@@ -185,7 +185,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasFormalCharge(const Atom& atom);
 
         /**
-         * \brief Computes the formal charge of the atom \a atom from its valence environment in the molecular graph \a molgraph.
+         * \brief Computes the formal charge of the atom \a atom from its connectivity in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the charge.
          * \param molgraph The molecular graph providing the structural context.
          * \return The computed formal charge.
@@ -277,7 +277,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasHybridizationState(const Atom& atom);
 
         /**
-         * \brief Derives the hybridization state of the atom \a atom from its valence environment in the molecular graph \a molgraph.
+         * \brief Derives the hybridization state of the atom \a atom from its connectivity in the molecular graph \a molgraph.
          * \param atom The atom for which to perceive the hybridzation state.
          * \param molgraph The molecular graph providing the structural context.
          * \return The perceived hybridization state (see namespace Chem::HybridizationState).
@@ -318,7 +318,7 @@ namespace CDPL
          * \param atom The atom to query.
          * \param frag_list The list of fragments to search.
          * \param size The required fragment size (in number of atoms).
-         * \return \c true if at least one matching fragment contains \a atom, and \c false otherwise.
+         * \return \c true if at least one matching fragment contains the atom \a atom, and \c false otherwise.
          */
         CDPL_CHEM_API bool isInFragmentOfSize(const Atom& atom, const FragmentList& frag_list, std::size_t size);
 
@@ -326,7 +326,7 @@ namespace CDPL
          * \brief Returns the size (in atoms) of the smallest fragment in \a frag_list that contains the atom \a atom.
          * \param atom The atom to query.
          * \param frag_list The list of fragments to search.
-         * \return The smallest containing fragment's size, or zero if no fragment contains \a atom.
+         * \return The smallest containing fragment's size, or zero if no fragment contains the atom \a atom.
          */
         CDPL_CHEM_API std::size_t getSizeOfSmallestContainingFragment(const Atom& atom, const FragmentList& frag_list);
 
@@ -334,7 +334,7 @@ namespace CDPL
          * \brief Returns the size (in atoms) of the largest fragment in \a frag_list that contains the atom \a atom.
          * \param atom The atom to query.
          * \param frag_list The list of fragments to search.
-         * \return The largest containing fragment's size, or zero if no fragment contains \a atom.
+         * \return The largest containing fragment's size, or zero if no fragment contains the atom \a atom.
          */
         CDPL_CHEM_API std::size_t getSizeOfLargestContainingFragment(const Atom& atom, const FragmentList& frag_list);
 
@@ -415,14 +415,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::IMPLICIT_HYDROGEN_COUNT property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored implicit-hydrogen count.
+         * \return The stored implicit hydrogen count.
          */
         CDPL_CHEM_API std::size_t getImplicitHydrogenCount(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::IMPLICIT_HYDROGEN_COUNT property of the atom \a atom to \a count.
          * \param atom The atom for which to set the property value.
-         * \param count The new implicit-hydrogen count.
+         * \param count The new implicit hydrogen count.
          */
         CDPL_CHEM_API void setImplicitHydrogenCount(Atom& atom, std::size_t count);
 
@@ -440,10 +440,10 @@ namespace CDPL
         CDPL_CHEM_API bool hasImplicitHydrogenCount(const Atom& atom);
 
         /**
-         * \brief Computes the implicit hydrogen count of the atom \a atom from its valence environment in the molecular graph \a molgraph.
+         * \brief Computes the implicit hydrogen count of the atom \a atom from its connectivity in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the hydrogen count.
          * \param molgraph The molecular graph providing the structural context.
-         * \return The computed implicit-hydrogen count.
+         * \return The computed implicit hydrogen count.
          */
         CDPL_CHEM_API std::size_t calcImplicitHydrogenCount(const Atom& atom, const MolecularGraph& molgraph);
 
@@ -477,10 +477,11 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the 3D coordinates of the atom \a atom for conformer \a conf_idx (from the Chem::AtomProperty::COORDINATES_3D_ARRAY property).
+         * \brief Returns the 3D coordinates of the atom \a atom in the conformer with index \a conf_idx.
          * \param atom The atom for which to return the conformer 3D coordinates.
          * \param conf_idx The zero-based conformer index.
          * \return The 3D coordinates of the specified conformer.
+         * \throw Base::IndexError if \a conf_idx is out of the valid range.
          */
         CDPL_CHEM_API const Math::Vector3D& getConformer3DCoordinates(const Atom& atom, std::size_t conf_idx);
 
@@ -572,14 +573,14 @@ namespace CDPL
         /**
          * \brief Returns the value of the Chem::AtomProperty::CIP_PRIORITY property of the atom \a atom.
          * \param atom The atom for which to return the property value.
-         * \return The stored CIP priority.
+         * \return The stored topological CIP priority.
          */
         CDPL_CHEM_API std::size_t getCIPPriority(const Atom& atom);
 
         /**
          * \brief Sets the value of the Chem::AtomProperty::CIP_PRIORITY property of the atom \a atom to \a priority.
          * \param atom The atom for which to set the property value.
-         * \param priority The new CIP priority.
+         * \param priority The new topological CIP priority.
          */
         CDPL_CHEM_API void setCIPPriority(Atom& atom, std::size_t priority);
 
@@ -681,29 +682,30 @@ namespace CDPL
         CDPL_CHEM_API bool hasStereoDescriptor(const Atom& atom);
 
         /**
-         * \brief Computes the stereo descriptor for the atom \a atom based on the geometry of the molecular graph \a molgraph.
+         * \brief Computes the stereo descriptor for the atom \a atom in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the stereo descriptor.
          * \param molgraph The molecular graph providing the structural context.
-         * \param dim The dimensionality of the atomic coordinates to use (\e 2 or \e 3).
+         * \param dim The dimensionality of the atomic coordinates to use
+         *            (\e 2 = 2D, \e 3 = 3D, \e 0 = recalc. existing descriptor, other values = use any information available).
          * \return The computed stereo descriptor.
          */
         CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Atom& atom, const MolecularGraph& molgraph, std::size_t dim = 1);
 
         /**
-         * \brief Derives the stereo descriptor of the atom \a atom from its \e MDL parity in the molecular graph \a molgraph.
+         * \brief Calculates the stereo descriptor of the atom \a atom from its \e MDL parity in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the stereo descriptor.
          * \param molgraph The molecular graph providing the structural context.
-         * \return The derived stereo descriptor.
+         * \return The calculated stereo descriptor.
          */
         CDPL_CHEM_API StereoDescriptor calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph);
 
         /**
-         * \brief Derives the atom configuration label from the supplied descriptor and 3D coordinates.
+         * \brief Calculates the atom configuration from the supplied descriptor and reference atom 3D coordinates.
          * \param atom The atom for which to calculate the configuration.
          * \param molgraph The molecular graph providing the structural context.
-         * \param descr The stereo descriptor whose configuration is to be evaluated.
-         * \param coords The 3D atomic coordinates used by the evaluation.
-         * \return The derived configuration label (see namespace Chem::AtomConfiguration).
+         * \param descr The stereo descriptor providing the reference atoms.
+         * \param coords The atom 3D coordinates to use for the calculation.
+         * \return The calculated configuration (see namespace Chem::AtomConfiguration).
          */
         CDPL_CHEM_API unsigned int calcConfiguration(const Atom& atom, const MolecularGraph& molgraph, const StereoDescriptor& descr,
                                                      const Math::Vector3DArray& coords);
@@ -740,11 +742,11 @@ namespace CDPL
          * \brief Tells whether the atom \a atom qualifies as a stereo center in the context of the molecular graph \a molgraph.
          * \param atom The atom to evaluate.
          * \param molgraph The molecular graph providing the structural context.
-         * \param check_asym \c true to enforce non-equivalent ligand environments.
+         * \param check_asym \c true to consider only topologically non-equivalent ligand environments.
          * \param check_inv_n \c true to reject inversion-prone nitrogen centers (umbrella inversion).
          * \param check_quart_n \c true to accept positively charged quaternary nitrogen centers.
          * \param check_plan_n \c true to reject planar nitrogen centers.
-         * \param check_amide_n \c true to reject amide-nitrogen centers.
+         * \param check_amide_n \c true to reject amide nitrogen centers.
          * \param check_res_ctrs \c true to reject centers participating in resonance.
          * \return \c true if the atom qualifies as a stereo center under the given conditions, and \c false otherwise.
          */
@@ -781,7 +783,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasSybylType(const Atom& atom);
 
         /**
-         * \brief Derives the <em>Sybyl MOL2</em> atom type of the atom \a atom from its valence environment in the molecular graph \a molgraph.
+         * \brief Derives the <em>Sybyl MOL2</em> atom type of the atom \a atom in the molecular graph \a molgraph.
          * \param atom The atom for which to perceive the type.
          * \param molgraph The molecular graph providing the structural context.
          * \return The perceived <em>Sybyl MOL2</em> atom type (see namespace Chem::SybylAtomType).
@@ -985,10 +987,10 @@ namespace CDPL
         CDPL_CHEM_API bool hasMDLParity(const Atom& atom);
 
         /**
-         * \brief Computes the \e MDL parity of the atom \a atom from its 2D layout and stereo flags in the molecular graph \a molgraph.
+         * \brief Calculates the \e MDL parity of the atom \a atom in the molecular graph \a molgraph.
          * \param atom The atom for which to calculate the parity.
          * \param molgraph The molecular graph providing the structural context.
-         * \return The computed \e MDL parity (see namespace Chem::MDLParity).
+         * \return The calculated \e MDL parity (see namespace Chem::MDLParity).
          */
         CDPL_CHEM_API unsigned int calcMDLParity(const Atom& atom, const MolecularGraph& molgraph);
 
@@ -1161,7 +1163,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpression(const Atom& atom);
 
         /**
-         * \brief Builds an atom-level match expression from the match constraint list attached to the atom \a atom.
+         * \brief Builds an match expression from the match constraint list attached to the atom \a atom.
          * \param atom The atom for which to generate the expression.
          * \param molgraph The molecular graph providing the structural context.
          * \return The generated match expression.
@@ -1197,18 +1199,20 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpressionString(const Atom& atom);
 
         /**
-         * \brief Writes a textual representation of the atom-level match expression of the atom \a atom into \a expr_str.
-         * \param atom The atom for which to generate the expression string.
+         * \brief Generates a textual representation of the match expression resulting from the match constraint
+         *        list attached to the atom \a atom.
+         * \param atom The atom for which to generate the match expression string.
          * \param molgraph The molecular graph providing the structural context.
-         * \param expr_str The output string receiving the match expression text.
+         * \param expr_str Stores the generated match expression string.
          */
         CDPL_CHEM_API void generateMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
 
 
         /**
-         * \brief Sets bits in \a atom_mask for every atom of the molecular graph \a molgraph that is reachable from the atom \a atom through the bonds of \a molgraph.
+         * \brief Sets bits in \a atom_mask for every atom of the molecular graph \a molgraph that is reachable from
+         *        the atom \a atom through the bonds of \a molgraph.
          * \param atom The seed atom.
-         * \param molgraph The molecular graph providing the bonding context.
+         * \param molgraph The molecular graph providing the structural context.
          * \param atom_mask The output bit mask.
          * \param reset If \c true, \a atom_mask is cleared first. Otherwise, existing bits are preserved.
          */
@@ -1216,10 +1220,10 @@ namespace CDPL
                                               Util::BitSet& atom_mask, bool reset = true);
 
         /**
-         * \brief Returns the topological distance between two atoms of the molecular graph \a molgraph.
+         * \brief Returns the topological distance between the two atoms in the molecular graph \a molgraph.
          * \param atom1 The first atom.
          * \param atom2 The second atom.
-         * \param molgraph The molecular graph providing the bonding context.
+         * \param molgraph The molecular graph providing the structural context.
          * \return The topological distance between \a atom1 and \a atom2.
          */
         CDPL_CHEM_API std::size_t getTopologicalDistance(const Atom& atom1, const Atom& atom2, const MolecularGraph& molgraph);
@@ -1227,24 +1231,25 @@ namespace CDPL
         /**
          * \brief Collects every atom of the molecular graph \a molgraph that is within \a max_dist bonds of the atom \a atom into the fragment \a env.
          * \param atom The seed atom.
-         * \param molgraph The molecular graph providing the bonding context.
+         * \param molgraph The molecular graph providing the structural context.
          * \param max_dist The maximum topological distance.
          * \param env The output fragment receiving the environment atoms and the bonds between them.
-         * \param append If \c true, atoms/bonds are appended to \a env. Otherwise, it is cleared first.
-         * \return The number of atoms appended to \a env.
+         * \param append If \c false, \a env gets cleared before adding any atoms and bonds.
+         * \return The number of atoms added to \a env.
          */
         CDPL_CHEM_API std::size_t getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std::size_t max_dist, Fragment& env, bool append = false);
 
 
         /**
-         * \brief Writes every neighbor of the atom \a atom (with bonds belonging to the molecular graph \a molgraph) into \a it, skipping \a excl_atom.
-         * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>).
-         * \tparam OutputIterator The output iterator type receiving pointers to the neighbor atoms.
-         * \param atom The atom whose neighbors are to be enumerated.
-         * \param molgraph The molecular graph used to filter the atom/bond membership.
-         * \param it The output iterator receiving the neighbor pointers.
-         * \param excl_atom If non-null, a neighbor matching this pointer is skipped.
-         * \return The number of neighbors written to \a it.
+         * \brief Writes every neighbor of the atom \a atom that is connected by a bond belonging to the molecular
+         *        graph \a molgraph into the output iterator \a it, skipping \a excl_atom.
+         * \tparam AtomType The atom object type.
+         * \tparam OutputIterator The output iterator type receiving pointers to the connected atoms.
+         * \param atom The atom whose connected neighbors in \a molgraph shall be retrieved.
+         * \param molgraph The molecular graph providing the structural context.
+         * \param it The output iterator receiving the connected atom pointers.
+         * \param excl_atom If non-null, a connected atom matching this pointer is skipped.
+         * \return The number of connected atoms written to \a it.
          */
         template <typename AtomType, typename OutputIterator>
         std::size_t getConnectedAtoms(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it, AtomType* excl_atom = 0)
@@ -1270,14 +1275,15 @@ namespace CDPL
         }
 
         /**
-         * \brief Writes every bond incident to the atom \a atom (with both endpoints belonging to the molecular graph \a molgraph) into \a it, skipping bonds to \a excl_atom.
-         * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>).
+         * \brief Writes every bond incident to the atom \a atom where the bond itself and both atoms are members of the molecular
+         *        graph \a molgraph into the output iterator \a it, skipping bonds to \a excl_atom.
+         * \tparam AtomType The atom object type.
          * \tparam OutputIterator The output iterator type receiving pointers to the incident bonds.
-         * \param atom The atom whose incident bonds are to be enumerated.
-         * \param molgraph The molecular graph used to filter the atom/bond membership.
-         * \param it The output iterator receiving the bond pointers.
-         * \param excl_atom If non-null, bonds whose neighbor matches this pointer are skipped.
-         * \return The number of bonds written to \a it.
+         * \param atom The atom whose incident bonds in \a molgraph shall be retrieved.
+         * \param molgraph The molecular graph providing the structural context.
+         * \param it The output iterator receiving the incident bond pointers.
+         * \param excl_atom If non-null, a bond connecting to an atom matching this pointer is skipped.
+         * \return The number of incident bonds written to \a it.
          */
         template <typename AtomType, typename OutputIterator>
         std::size_t getIncidentBonds(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it, AtomType* excl_atom = 0)
@@ -1303,15 +1309,16 @@ namespace CDPL
         }
 
         /**
-         * \brief Writes every neighbor of the atom \a atom and the corresponding incident bond (both filtered by the molecular graph \a molgraph) into the supplied output iterators.
-         * \tparam AtomType The atom type (\c Atom or <tt>const Atom</tt>).
-         * \tparam AtomOutputIterator The output iterator type receiving neighbor-atom pointers.
-         * \tparam BondOutputIterator The output iterator type receiving incident-bond pointers.
-         * \param atom The atom whose neighborhood is to be enumerated.
-         * \param molgraph The molecular graph used to filter the atom/bond membership.
-         * \param ao_it The output iterator receiving the neighbor-atom pointers.
-         * \param bo_it The output iterator receiving the corresponding incident-bond pointers.
-         * \param excl_atom If non-null, a neighbor matching this pointer (and its bond) is skipped.
+         * \brief Writes every connected neighbor of the atom \a atom and the corresponding incident bond that are both members of
+         *        molecular graph \a molgraph into the supplied output iterators.
+         * \tparam AtomType The atom object type.
+         * \tparam AtomOutputIterator The output iterator type receiving connected atom pointers.
+         * \tparam BondOutputIterator The output iterator type receiving incident bond pointers.
+         * \param atom The atom for which connected atoms/bonds in \a molgraph shall be retrieved.
+         * \param molgraph The molecular graph providing the structural context.
+         * \param ao_it The output iterator receiving the neighbor atom pointers.
+         * \param bo_it The output iterator receiving the corresponding incident bond pointers.
+         * \param excl_atom If non-null, a connection to an atom matching this pointer is skipped.
          * \return The number of atom/bond pairs written to the iterators.
          */
         template <typename AtomType, typename AtomOutputIterator, typename BondOutputIterator>

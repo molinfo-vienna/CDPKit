@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Generates 2D coordinates for the atoms of a molecular graph using a layout algorithm that combines ring-system templates, chain extension, and substituent placement.
+# \brief Generates 2D coordinates for the atoms of a molecular graph using a layout algorithm that combines ring system templates, chain extension, and substituent placement.
 # 
 # The resulting coordinates are deterministic, free of intra-molecular overlaps where possible, and respect bond stereochemistry. The calculator is reusable: after calling calculate() the instance can be applied to further molecular graphs.
 # 
@@ -32,10 +32,10 @@ class Atom2DCoordinatesCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs the <tt>Atom2DCoordinatesCalculator</tt> instance and calculates 2D-coordinates for the atoms of the molecular graph <em>molgraph</em>.
+    # \brief Constructs the <tt>Atom2DCoordinatesCalculator</tt> instance and calculates 2D coordinates for the atoms of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to calculate 2D-coordinates.
-    # \param coords An array containing the calculated 2D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
+    # \param molgraph The molecular graph for which to calculate 2D coordinates.
+    # \param coords An array containing the calculated 2D coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # 
     def __init__(molgraph: MolecularGraph, coords: Math.Vector2DArray) -> None: pass
 
@@ -52,10 +52,10 @@ class Atom2DCoordinatesCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Calculates 2D-coordinates for the atoms of the molecular graph <em>molgraph</em>.
+    # \brief Calculates 2D coordinates for the atoms of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to calculate 2D-coordinates.
-    # \param coords An array containing the calculated 2D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
+    # \param molgraph The molecular graph for which to calculate 2D coordinates.
+    # \param coords An array containing the calculated 2D coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # 
     def calculate(molgraph: MolecularGraph, coords: Math.Vector2DArray) -> None: pass
 

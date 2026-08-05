@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Match functor that quantifies the goodness of the 3D-position match between two pharmacophore features by comparing their separation against the configured per-feature tolerance.
+# \brief Match functor that quantifies the goodness of the 3D position match between two pharmacophore features by comparing their separation against the configured per-feature tolerance.
 # 
 class FeaturePositionMatchFunctor(Boost.Python.instance):
 

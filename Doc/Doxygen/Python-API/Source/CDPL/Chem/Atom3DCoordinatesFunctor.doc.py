@@ -50,11 +50,11 @@ class Atom3DCoordinatesFunctor(Boost.Python.instance):
     def assign(func: Atom3DCoordinatesFunctor) -> Atom3DCoordinatesFunctor: pass
 
     ##
-    # \brief Returns the 3D-coordinates of the argument atom.
+    # \brief Returns the 3D coordinates of the argument atom.
     # 
     # \param atom The atom.
     # 
-    # \return The 3D-coordinates of the atom. 
+    # \return The 3D coordinates of the atom. 
     # 
     # \see Chem.get3DCoordinates(const Atom&)
     # 

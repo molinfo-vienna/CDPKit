@@ -258,21 +258,22 @@ namespace CDPL
         CDPL_CHEM_API bool hasStereoDescriptor(const Bond& bond);
 
         /**
-         * \brief Computes the stereo descriptor for the bond \a bond based on the geometry of the molecular graph \a molgraph.
-         * \param bond The bond.
+         * \brief Computes the stereo descriptor for the bond \a bond in the molecular graph \a molgraph.
+         * \param bond The bond for which to calculate the stereo descriptor.
          * \param molgraph The molecular graph providing the structural context.
-         * \param dim The dimensionality of the atomic coordinates to use (\e 2 or \e 3).
+         * \param dim The dimensionality of the atomic coordinates to use
+         *            (\e 2 = 2D, \e 3 = 3D, \e 0 = recalc. existing descriptor, other values = use any information available).
          * \return The computed stereo descriptor.
          */
         CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Bond& bond, const MolecularGraph& molgraph, std::size_t dim = 1);
 
         /**
-         * \brief Derives the bond configuration label from the supplied descriptor and 3D coordinates.
-         * \param bond The bond.
+         * \brief Calculates the bond configuration from the supplied descriptor and reference atom 3D coordinates.
+         * \param bond The bond for which to calculate the configuration.
          * \param molgraph The molecular graph providing the structural context.
-         * \param descr The stereo descriptor whose configuration is to be evaluated.
-         * \param coords The 3D atomic coordinates used by the evaluation.
-         * \return The derived configuration label (see namespace Chem::BondConfiguration).
+         * \param descr The stereo descriptor providing the reference atoms.
+         * \param coords The atom 3D coordinates to use for the calculation.
+         * \return The calculated configuration (see namespace Chem::BondConfiguration).
          */
         CDPL_CHEM_API unsigned int calcConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr,
                                                      const Math::Vector3DArray& coords);
@@ -307,9 +308,9 @@ namespace CDPL
 
         /**
          * \brief Tells whether the bond \a bond qualifies as a stereo center in the context of the molecular graph \a molgraph.
-         * \param bond The bond.
+         * \param bond The bond to evaluate.
          * \param molgraph The molecular graph providing the structural context.
-         * \param check_asym \c true to enforce non-equivalent ligand environments.
+         * \param check_asym \c true to consider only topologically non-equivalent ligand environments.
          * \param check_term_n \c true to reject bonds to terminal nitrogen atoms.
          * \param check_order \c true to require that the bond order matches a stereogenic pattern.
          * \param min_ring_size If the bond \a bond is a ring bond, the containing ring must have at least this size to qualify.
@@ -431,8 +432,8 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpression(const Bond& bond);
 
         /**
-         * \brief Builds a bond-level match expression from the match constraint list attached to the bond \a bond.
-         * \param bond The bond.
+         * \brief Builds a match expression from the match constraint list attached to the bond \a bond.
+         * \param bond The bond for which to generate the expression..
          * \param molgraph The molecular graph providing the structural context.
          * \return The generated match expression.
          */
@@ -467,10 +468,11 @@ namespace CDPL
         CDPL_CHEM_API bool hasMatchExpressionString(const Bond& bond);
 
         /**
-         * \brief Writes a textual representation of the bond-level match expression of the bond \a bond into \a str.
-         * \param bond The bond.
+         * \brief Generates a textual representation of the match expression resulting from the match constraint
+         *        list attached to the bond \a bond.
+         * \param bond The bond for which to generate the match expression string.
          * \param molgraph The molecular graph providing the structural context.
-         * \param str The output string receiving the match expression text.
+         * \param str Stores the generated match expression string.
          */
         CDPL_CHEM_API void generateMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& str);
 
@@ -503,8 +505,8 @@ namespace CDPL
         CDPL_CHEM_API bool hasSybylType(const Bond& bond);
 
         /**
-         * \brief Derives the <em>Sybyl MOL2</em> bond type of the bond \a bond from its bond order, aromaticity and ligand environment in the molecular graph \a molgraph.
-         * \param bond The bond.
+         * \brief Derives the <em>Sybyl MOL2</em> bond type of the bond \a bond in the molecular graph \a molgraph.
+         * \param bond The bond for which to perceive the type..
          * \param molgraph The molecular graph providing the structural context.
          * \return The perceived <em>Sybyl MOL2</em> bond type (see namespace Chem::SybylBondType).
          */

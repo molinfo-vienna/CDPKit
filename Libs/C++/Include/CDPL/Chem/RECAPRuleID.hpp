@@ -79,7 +79,7 @@ namespace CDPL
             constexpr unsigned int OLEFIN                 = 6;
 
             /**
-             * \brief Specifies the rule for quaternary-nitrogen bond cleavage.
+             * \brief Specifies the rule for quaternary nitrogen bond cleavage.
              */
             constexpr unsigned int QUARTERNARY_N          = 7;
 

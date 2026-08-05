@@ -104,7 +104,7 @@ namespace CDPL
             constexpr unsigned int OLEFIN_C                 = 11;
 
             /**
-             * \brief Specifies the quaternary-nitrogen side of a bond cleaved by the RECAP \c QUARTERNARY_N rule.
+             * \brief Specifies the quaternary nitrogen side of a bond cleaved by the RECAP \c QUARTERNARY_N rule.
              */
             constexpr unsigned int QUARTERNARY_N_N          = 12;
 

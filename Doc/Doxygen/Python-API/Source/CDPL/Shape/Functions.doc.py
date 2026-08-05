@@ -240,7 +240,7 @@ def generateGaussianShape(atoms: Chem.AtomContainer, shape: GaussianShape, appen
 # 
 # \param atoms The atom container.
 # \param shape The output Gaussian shape.
-# \param coords_func The function used to retrieve atom 3D-coordinates.
+# \param coords_func The function used to retrieve atom 3D coordinates.
 # \param append If <tt>True</tt>, the new elements are appended to <em>shape</em>. Otherwise, <em>shape</em> is cleared first.
 # \param radius The sphere radius to use for all atoms, or a negative value to use atom-specific Van der Waals radii.
 # \param inc_h If <tt>True</tt>, hydrogen atoms are also included in the shape.

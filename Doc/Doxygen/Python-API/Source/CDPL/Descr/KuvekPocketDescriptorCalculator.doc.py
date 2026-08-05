@@ -76,16 +76,16 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     def assign(calc: KuvekPocketDescriptorCalculator) -> KuvekPocketDescriptorCalculator: pass
 
     ##
-    # \brief Specifies a function for the retrieval of atom 3D-coordinates.
+    # \brief Specifies a function for the retrieval of atom 3D coordinates.
     # 
-    # \param func The atom 3D-coordinates function.
+    # \param func The atom 3D coordinates function.
     # 
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief Returns the function used for the retrieval of atom 3D-coordinates.
+    # \brief Returns the function used for the retrieval of atom 3D coordinates.
     # 
-    # \return The configured atom 3D-coordinates function.
+    # \return The configured atom 3D coordinates function.
     # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 

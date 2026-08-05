@@ -87,7 +87,7 @@ class RECAPAtomLabel(Boost.Python.instance):
     OLEFIN_C = 11
 
     ##
-    # \brief Specifies the quaternary-nitrogen side of a bond cleaved by the RECAP <tt>QUARTERNARY_N</tt> rule.
+    # \brief Specifies the quaternary nitrogen side of a bond cleaved by the RECAP <tt>QUARTERNARY_N</tt> rule.
     # 
     QUARTERNARY_N_N = 12
 

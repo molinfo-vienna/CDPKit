@@ -256,7 +256,7 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
     # \brief Initializes the calculator with target-environment data for subsequent descriptor calculations.
     # 
     # \param tgt_env The target environment (e.g. binding-site residues).
-    # \param coords_func The function used to retrieve atom 3D-coordinates from <em>tgt_env</em>.
+    # \param coords_func The function used to retrieve atom 3D coordinates from <em>tgt_env</em>.
     # \param tgt_env_changed If <tt>True</tt>, the target environment is reinitialized even if the same target was supplied previously.
     # 
     def initTargetData(tgt_env: Chem.MolecularGraph, coords_func: Chem.Atom3DCoordinatesFunction, tgt_env_changed: bool = True) -> None: pass

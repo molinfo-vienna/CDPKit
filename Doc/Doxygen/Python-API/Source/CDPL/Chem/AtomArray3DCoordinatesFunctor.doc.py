@@ -58,11 +58,11 @@ class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
     def assign(func: AtomArray3DCoordinatesFunctor) -> AtomArray3DCoordinatesFunctor: pass
 
     ##
-    # \brief Returns the 3D-coordinates of the argument atom.
+    # \brief Returns the 3D coordinates of the argument atom.
     # 
     # \param atom The atom.
     # 
-    # \return The 3D-coordinates of the atom.
+    # \return The 3D coordinates of the atom.
     # 
     def __call__(atom: Atom) -> Math.Vector3D: pass
 

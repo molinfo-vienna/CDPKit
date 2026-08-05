@@ -319,7 +319,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \brief Calculates the interaction-score grids for all enabled feature-type pairs and stores them in <em>grid_set</em>.
     # 
     # \param tgt_env The target environment.
-    # \param coords_func The function used to retrieve atom 3D-coordinates from <em>tgt_env</em>.
+    # \param coords_func The function used to retrieve atom 3D coordinates from <em>tgt_env</em>.
     # \param grid_set The output grid set.
     # \param append If <tt>True</tt>, the new grids are appended to <em>grid_set</em>. Otherwise, <em>grid_set</em> is cleared first.
     # 
@@ -329,7 +329,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \brief Calculates an atom-density grid for the given atoms.
     # 
     # \param atoms The atoms contributing to the density.
-    # \param coords_func The function used to retrieve atom 3D-coordinates.
+    # \param coords_func The function used to retrieve atom 3D coordinates.
     # \param grid_name The name to assign to the resulting grid.
     # 
     # \return A smart reference to the calculated atom-density grid.

@@ -1633,7 +1633,7 @@ def perceiveMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> Chem.FragmentL
 ##
 # \brief Perceives and (optionally) stores the list of MMFF94 aromatic rings of the molecular graph <em>molgraph</em>.
 # 
-# \param molgraph The molecular graph to inspect/modify.
+# \param molgraph The molecular graph.
 # \param overwrite Specifies whether an already existing value of the property should be replaced.
 # 
 # \return A shared reference to the perceived (or pre-existing) list of MMFF94 aromatic rings.

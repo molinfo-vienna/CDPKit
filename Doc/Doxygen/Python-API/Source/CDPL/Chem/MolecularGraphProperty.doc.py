@@ -60,7 +60,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     RINGS = CDPL.Base.LookupKey('RINGS')
 
     ##
-    # \brief Specifies the smallest set of smallest rings (SSSR) of the molecular graph.
+    # \brief Specifies the Smallest Set of Smallest Rings (SSSR) of the molecular graph.
     # 
     # \valuetype  Chem.FragmentList.SharedPointer
     # 

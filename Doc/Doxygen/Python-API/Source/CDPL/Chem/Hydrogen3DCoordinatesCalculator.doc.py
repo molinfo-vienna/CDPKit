@@ -32,12 +32,12 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs the <tt>Hydrogen3DCoordinatesCalculator</tt> instance and calculates 3D-coordinates for the hydrogen atoms of the molecular graph <em>molgraph</em>.
+    # \brief Constructs the <tt>Hydrogen3DCoordinatesCalculator</tt> instance and calculates 3D coordinates for the hydrogen atoms of the molecular graph <em>molgraph</em>.
     # 
     # The calculated coordinates can be retrieved by a call to getResult().
     # 
-    # \param molgraph The molecular graph for which to calculate 3D-coordinates.
-    # \param coords An array containing the heavy atom and calculated hydrogen 3D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
+    # \param molgraph The molecular graph for which to calculate 3D coordinates.
+    # \param coords An array containing the heavy atom and calculated hydrogen 3D coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # \param undef_only Specifies whether or not to recalculate already defined hydrogen atom coordinates.
     # 
     def __init__(molgraph: MolecularGraph, coords: Math.Vector3DArray, undef_only: bool = True) -> None: pass
@@ -71,16 +71,16 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     def undefinedOnly() -> bool: pass
 
     ##
-    # \brief Specifies a function for the retrieval of atom 3D-coordinates.
+    # \brief Specifies a function for the retrieval of atom 3D coordinates.
     # 
-    # \param func The atom 3D-coordinates function.
+    # \param func The atom 3D coordinates function.
     # 
     def setAtom3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+    # \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
     # 
-    # \return The registered atom 3D-coordinates function.
+    # \return The registered atom 3D coordinates function.
     # 
     def getAtom3DCoordinatesFunction() -> Atom3DCoordinatesFunction: pass
 
@@ -108,18 +108,18 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     def setup(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Calculates 3D-coordinates for the hydrogen atoms of the molecular graph <em>molgraph</em>.
+    # \brief Calculates 3D coordinates for the hydrogen atoms of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to calculate 3D-coordinates.
-    # \param coords An array containing the heavy atom and calculated hydrogen 3D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
+    # \param molgraph The molecular graph for which to calculate 3D coordinates.
+    # \param coords An array containing the heavy atom and calculated hydrogen 3D coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # \param init_coords If <tt>False</tt>, defined atom coordinates are already present in <em>coords</em> and thus won't get assigned again.
     # 
     def calculate(molgraph: MolecularGraph, coords: Math.Vector3DArray, init_coords: bool = True) -> None: pass
 
     ##
-    # \brief Calculates 3D-coordinates for the hydrogen atoms of the molecular graph previously specified via setup().
+    # \brief Calculates 3D coordinates for the hydrogen atoms of the molecular graph previously specified via setup().
     # 
-    # \param coords An array containing the heavy atom and calculated hydrogen 3D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
+    # \param coords An array containing the heavy atom and calculated hydrogen 3D coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # \param init_coords If <tt>False</tt>, defined atom coordinates are already present in <em>coords</em> and thus won't get assigned again.
     # 
     def calculate(coords: Math.Vector3DArray, init_coords: bool = True) -> None: pass

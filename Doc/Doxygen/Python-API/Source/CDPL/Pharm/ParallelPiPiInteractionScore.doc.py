@@ -61,7 +61,7 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, max_ang: float = 20.0) -> None: pass
 
     ##
-    # \brief Specifies the function that maps a feature-pair distance to its score contribution.
+    # \brief Specifies the function that maps a feature pair distance to its score contribution.
     # 
     # \param func The distance-scoring function.
     # 

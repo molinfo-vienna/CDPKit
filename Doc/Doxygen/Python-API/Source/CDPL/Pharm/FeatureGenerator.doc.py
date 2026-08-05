@@ -42,16 +42,16 @@ class FeatureGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Specifies a function for the retrieval of atom 3D-coordinates.
+    # \brief Specifies a function for the retrieval of atom 3D coordinates.
     # 
-    # \param func The atom 3D-coordinates function.
+    # \param func The atom 3D coordinates function.
     # 
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+    # \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
     # 
-    # \return A reference to the registered atom 3D-coordinates function.
+    # \return A reference to the registered atom 3D coordinates function.
     # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 

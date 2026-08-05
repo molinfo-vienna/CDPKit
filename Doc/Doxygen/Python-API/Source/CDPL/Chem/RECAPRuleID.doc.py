@@ -62,7 +62,7 @@ class RECAPRuleID(Boost.Python.instance):
     OLEFIN = 6
 
     ##
-    # \brief Specifies the rule for quaternary-nitrogen bond cleavage.
+    # \brief Specifies the rule for quaternary nitrogen bond cleavage.
     # 
     QUARTERNARY_N = 7
 

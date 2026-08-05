@@ -61,7 +61,7 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, max_ang: float = 20.0) -> None: pass
 
     ##
-    # \brief Specifies the function that maps a feature-pair distance to its score contribution.
+    # \brief Specifies the function that maps a feature pair distance to its score contribution.
     # 
     # \param func The distance-scoring function.
     # 

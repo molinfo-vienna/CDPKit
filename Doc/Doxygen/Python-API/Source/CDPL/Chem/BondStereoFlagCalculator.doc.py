@@ -22,7 +22,7 @@
 ##
 # \brief Calculator that derives 2D wedge/hash bond stereo flags from atom 2D coordinates and stereochemical descriptors of a molecular graph.
 # 
-# The result is an array of stereo flag values (see namespace Chem.BondStereoFlag) indexed by the bond index in the molecular graph. The atom 2D-coordinates accessor function can be customized via setAtom2DCoordinatesFunction().
+# The result is an array of stereo flag values (see namespace Chem.BondStereoFlag) indexed by the bond index in the molecular graph. The atom 2D coordinates accessor function can be customized via setAtom2DCoordinatesFunction().
 # 
 class BondStereoFlagCalculator(Boost.Python.instance):
 
@@ -52,16 +52,16 @@ class BondStereoFlagCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Specifies a function for the retrieval of atom 2D-coordinates.
+    # \brief Specifies a function for the retrieval of atom 2D coordinates.
     # 
-    # \param func The atom 2D-coordinates function.
+    # \param func The atom 2D coordinates function.
     # 
     def setAtom2DCoordinatesFunction(func: Vector2DAtomFunctor) -> None: pass
 
     ##
-    # \brief Returns the function that was registered for the retrieval of atom 2D-coordinates.
+    # \brief Returns the function that was registered for the retrieval of atom 2D coordinates.
     # 
-    # \return The registered atom 2D-coordinates function.
+    # \return The registered atom 2D coordinates function.
     # 
     def getAtom2DCoordinatesFunction() -> Vector2DAtomFunctor: pass
 

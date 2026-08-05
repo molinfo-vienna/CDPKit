@@ -108,8 +108,8 @@ namespace CDPL
             MHMOPiChargeCalculator& operator=(const MHMOPiChargeCalculator&) = delete;
 
             /**
-             * \brief Specifies whether the calculation shall use localized pi-bonds.
-             * \param localized If \c true, conjugated &pi;-systems are treated as a set of localized pi-bonds.
+             * \brief Specifies whether the calculation shall use localized &pi;-bonds.
+             * \param localized If \c true, conjugated &pi;-systems are treated as a set of localized &pi;-bonds.
              */
             void localizedPiBonds(bool localized);
 

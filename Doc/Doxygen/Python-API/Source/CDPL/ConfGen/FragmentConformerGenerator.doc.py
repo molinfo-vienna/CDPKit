@@ -136,7 +136,7 @@ class FragmentConformerGenerator(Boost.Python.instance):
     ##
     # \brief Transfers the generated conformer ensemble onto <em>molgraph</em>.
     # 
-    # The per-conformer 3D coordinates are written to each atom's 3D-coordinates array (via Chem.set3DCoordinatesArray) and the corresponding per-conformer energies are attached to the molecular graph (via Chem.setConformerEnergies).
+    # The per-conformer 3D coordinates are written to each atom's 3D coordinates array (via Chem.set3DCoordinatesArray) and the corresponding per-conformer energies are attached to the molecular graph (via Chem.setConformerEnergies).
     # 
     # \param molgraph The molecular graph that receives the conformer coordinates and energies.
     # 

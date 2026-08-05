@@ -653,7 +653,7 @@ def clearMHMOPiCharge(atom: Chem.Atom) -> None: pass
 # \brief Sets the value of the MolProp.BondProperty.MHMO_PI_ORDER property of the bond <em>bond</em> to <em>order</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param order The MHMO pi-bond order.
+# \param order The MHMO &pi;-bond order.
 # 
 def setMHMOPiOrder(bond: Chem.Bond, order: float) -> None: pass
 
@@ -669,7 +669,7 @@ def hasMHMOPiOrder(bond: Chem.Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The MHMO pi-bond order.
+# \return The MHMO &pi;-bond order.
 # 
 def getMHMOPiOrder(bond: Chem.Bond) -> float: pass
 
@@ -938,7 +938,7 @@ def calcAtomHydrophobicities(molgraph: Chem.MolecularGraph, overwrite: bool, fro
 def calcCyclomaticNumber(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief Calculates the dipole moment of <em>cntnr</em> using the standard atom 3D-coordinates accessor.
+# \brief Calculates the dipole moment of <em>cntnr</em> using the standard atom 3D coordinates accessor.
 # 
 # \param cntnr The atom container.
 # \param moment The output dipole-moment vector.
@@ -948,10 +948,10 @@ def calcCyclomaticNumber(molgraph: Chem.MolecularGraph) -> int: pass
 def calcDipoleMoment(cntnr: Chem.AtomContainer, moment: Math.Vector3D) -> bool: pass
 
 ##
-# \brief Calculates the dipole moment of <em>cntnr</em> using the supplied atom 3D-coordinates function.
+# \brief Calculates the dipole moment of <em>cntnr</em> using the supplied atom 3D coordinates function.
 # 
 # \param cntnr The atom container.
-# \param coords_func The function used to retrieve atom 3D-coordinates.
+# \param coords_func The function used to retrieve atom 3D coordinates.
 # \param moment The output dipole-moment vector.
 # 
 # \return <tt>True</tt> if the dipole moment could be calculated, and <tt>False</tt> otherwise.

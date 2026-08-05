@@ -46,7 +46,7 @@ class ReactionProperty(Boost.Python.instance):
     TIMESTAMP = CDPL.Base.LookupKey('TIMESTAMP')
 
     ##
-    # \brief Specifies the match expression associated with the reaction.
+    # \brief Specifies the substructure match expression associated with the reaction.
     # 
     # \valuetype  Chem.MatchExpression<Chem.Reaction>.SharedPointer
     # 
@@ -60,7 +60,7 @@ class ReactionProperty(Boost.Python.instance):
     MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
-    # \brief Specifies the per-component groupings of the reaction's reactants and products for substructure searching.
+    # \brief Specifies the per-component groupings of the reactant and product molecules for substructure searching.
     # 
     # \valuetype  Chem.FragmentList.SharedPointer
     # 

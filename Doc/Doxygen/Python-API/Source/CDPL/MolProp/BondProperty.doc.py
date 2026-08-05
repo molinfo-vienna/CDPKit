@@ -25,7 +25,7 @@
 class BondProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the MHMO pi-bond order of the bond.
+    # \brief Specifies the MHMO &pi;-bond order of the bond.
     # 
     # \valuetype  <tt>double</tt> 
     # \see [\ref MHMO]

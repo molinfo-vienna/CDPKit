@@ -65,16 +65,16 @@ class PharmacophoreGenerator(Boost.Python.instance):
     def clone() -> PharmacophoreGenerator: pass
 
     ##
-    # \brief Specifies a function for the retrieval of atom 3D-coordinates for feature generation.
+    # \brief Specifies a function for the retrieval of atom 3D coordinates for feature generation.
     # 
-    # \param func The atom 3D-coordinates function.
+    # \param func The atom 3D coordinates function.
     # 
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+    # \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
     # 
-    # \return The registered atom 3D-coordinates function.
+    # \return The registered atom 3D coordinates function.
     # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 

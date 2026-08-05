@@ -85,7 +85,8 @@ namespace CDPL
         CDPL_CHEM_API void connectAtoms(Molecule& mol, double dist_tol = 0.3, std::size_t atom_idx_offs = 0);
 
         /**
-         * \brief Adds bonds between atoms of the molecule \a mol whose 3D distance (obtained via \a coords_func) falls within the covalent-radii sum plus \a dist_tol.
+         * \brief Adds bonds between atoms of the molecule \a mol whose 3D distance (obtained via \a coords_func)
+         *        falls within the covalent-radii sum plus \a dist_tol.
          * \param mol The molecule whose atoms are to be connected.
          * \param coords_func The function used to retrieve the 3D coordinates of an atom.
          * \param dist_tol The tolerance added to the sum of the two atoms' covalent radii.
@@ -145,10 +146,11 @@ namespace CDPL
          * - The special result \e SMILES string bond order symbol <tt>~</tt> indicates that the order of the mapped molecule bond shall be left unchanged
          *
          * \param mol The molecule to edit in place.
-         * \param search_ptns A whitespace-separated list of \e SMARTS patterns matching the substructures to replace.
+         * \param search_ptns A whitespace-separated list of \e SMARTS patterns specifying the substructures to replace.
          * \param result_ptn The \e SMARTS replacement pattern.
-         * \param exclude_ptns A whitespace-separated list of \e SMARTS patterns matching substructures that shall be retained even if they match \a search_ptns.
-         * \return The number of replaced substructures.
+         * \param exclude_ptns A whitespace-separated list of \e SMARTS patterns specifying substructures that shall be
+         *                     retained even if they match \a search_ptns.
+         * \return The number of performed substructure replacements.
          * \since 1.3
          */
         CDPL_CHEM_API std::size_t editSubstructures(Molecule& mol, const std::string& search_ptns,

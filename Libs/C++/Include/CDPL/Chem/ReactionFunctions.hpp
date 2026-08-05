@@ -566,7 +566,7 @@ namespace CDPL
 
         /**
          * \brief Sets the atom-level match constraint list \a constr on every atom of every component of the reaction \a rxn.
-         * \param rxn The reaction to modify.
+         * \param rxn The reaction.
          * \param constr The match constraint list to assign.
          * \param overwrite Specifies whether already existing match constraints properties should be replaced.
          */
@@ -574,7 +574,7 @@ namespace CDPL
 
         /**
          * \brief Sets the bond-level match constraint list \a constr on every bond of every component of the reaction \a rxn.
-         * \param rxn The reaction to modify.
+         * \param rxn The reaction.
          * \param constr The match constraint list to assign.
          * \param overwrite Specifies whether already existing match constraint properties should be replaced.
          */
@@ -582,7 +582,7 @@ namespace CDPL
 
         /**
          * \brief Sets the molecular graph-level match constraint list \a constr on every component of the reaction \a rxn.
-         * \param rxn The reaction to modify.
+         * \param rxn The reaction.
          * \param constr The match constraint list to assign.
          * \param overwrite Specifies whether already existing match constraint properties should be replaced.
          */
@@ -590,21 +590,21 @@ namespace CDPL
 
         /**
          * \brief Generates and stores match expressions for the atoms, bonds, components, and the reaction \a rxn itself.
-         * \param rxn The reaction to modify.
+         * \param rxn The reaction.
          * \param overwrite Specifies whether already existing match expression properties should be replaced.
          */
         CDPL_CHEM_API void generateMatchExpressions(Reaction& rxn, bool overwrite);
 
         /**
          * \brief Prepares the reaction \a rxn for use as a reaction substructure search query.
-         * \param rxn The reaction to modify.
+         * \param rxn The reaction.
          * \param overwrite Specifies whether already existing property values should be replaced.
          */
         CDPL_CHEM_API void initSubstructureSearchQuery(Reaction& rxn, bool overwrite);
 
         /**
          * \brief Prepares the reaction \a rxn for use as a reaction substructure search target.
-         * \param rxn The reaction to modify.
+         * \param rxn The reaction.
          * \param overwrite Specifies whether already existing property values should be replaced.
          */
         CDPL_CHEM_API void initSubstructureSearchTarget(Reaction& rxn, bool overwrite);
@@ -612,7 +612,7 @@ namespace CDPL
         /**
          * \brief Computes basic atom/bond/molecular graph properties (aromaticity, ring info, etc.) for every
          *        component of the reaction \a rxn.
-         * \param rxn The reaction to modify.
+         * \param rxn The reaction.
          * \param overwrite Specifies whether already existing property values should be replaced.
          * \since 1.1
          */

@@ -63,16 +63,16 @@ class MHMOPiChargeCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Specifies whether the calculation shall use localized pi-bonds.
+    # \brief Specifies whether the calculation shall use localized &pi;-bonds.
     # 
-    # \param localized If <tt>True</tt>, conjugated &pi;-systems are treated as a set of localized pi-bonds.
+    # \param localized If <tt>True</tt>, conjugated &pi;-systems are treated as a set of localized &pi;-bonds.
     # 
     def localizedPiBonds(localized: bool) -> None: pass
 
     ##
-    # \brief Specifies whether the calculation shall use localized pi-bonds.
+    # \brief Specifies whether the calculation shall use localized &pi;-bonds.
     # 
-    # \param localized If <tt>True</tt>, conjugated &pi;-systems are treated as a set of localized pi-bonds.
+    # \param localized If <tt>True</tt>, conjugated &pi;-systems are treated as a set of localized &pi;-bonds.
     # 
     def localizedPiBonds() -> bool: pass
 
