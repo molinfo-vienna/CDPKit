@@ -202,8 +202,8 @@ namespace CDPL
 
           protected:
             /**
-             * \brief Replaces the current set of pharmacophore features and properties by a copy of the
-             *        features and properties of the container \a cntnr.
+             * \brief Replaces the current set of properties by a copy of the
+             *        properties of the container \a cntnr.
              * \param cntnr The container to copy.
              * \return A reference to itself.
              */

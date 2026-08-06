@@ -134,22 +134,34 @@ class BasicMolecule(Molecule):
     def assign(molgraph: MolecularGraph) -> BasicMolecule: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += mol</tt>.
-    # \param mol Specifies the second addend.
-    # \return The updated \c %BasicMolecule instance \a self.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # 
+    # Internally calls append() to perform the actual work.
+    # 
+    # \param mol The molecule providing the atoms and bonds to append.
+    # 
+    # \return \a self
     # 
     def __iadd__(mol: BasicMolecule) -> BasicMolecule: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += mol</tt>.
-    # \param mol Specifies the second addend.
-    # \return The updated \c %BasicMolecule instance \a self.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # 
+    # Internally calls append() to perform the actual work.
+    # 
+    # \param mol The molecule providing the atoms and bonds to append.
+    # 
+    # \return \a self
     # 
     def __iadd__(mol: Molecule) -> BasicMolecule: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
-    # \param molgraph Specifies the second addend.
-    # \return The updated \c %BasicMolecule instance \a self.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # 
+    # Internally calls append() to perform the actual work.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to append.
+    # 
+    # \return \a self
     # 
     def __iadd__(molgraph: MolecularGraph) -> BasicMolecule: pass

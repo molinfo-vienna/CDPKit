@@ -272,16 +272,24 @@ class Fragment(MolecularGraph):
     def __len__() -> int: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
-    # \param molgraph Specifies the second addend.
-    # \return The updated \c %Fragment instance \a self.
+    # \brief Extends the current set of atoms and bonds by the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to add.
+    # 
+    # \return \a self 
+    # 
+    # \note Does not affect any properties.
     # 
     def __iadd__(molgraph: MolecularGraph) -> Fragment: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= molgraph</tt>.
-    # \param molgraph Specifies the subtrahend.
-    # \return The updated \c %Fragment instance \a self.
+    # \brief Removes the atoms and bonds referenced by the molecular graph <em>molgraph</em> from this <tt>Fragment</tt> instance.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance specifying the atoms and bonds to remove.
+    # 
+    # \return \a self 
+    # 
+    # \note Does not affect any properties if <tt>this != &molgraph</tt>.
     # 
     def __isub__(molgraph: MolecularGraph) -> Fragment: pass
 

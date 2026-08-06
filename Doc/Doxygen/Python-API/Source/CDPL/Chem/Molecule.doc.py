@@ -360,23 +360,35 @@ class Molecule(MolecularGraph):
     def __getstate__() -> tuple: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += mol</tt>.
-    # \param mol Specifies the second addend.
-    # \return The updated \c %Molecule instance \a self.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # 
+    # Internally calls append() to perform the actual work.
+    # 
+    # \param mol The molecule providing the atoms and bonds to append.
+    # 
+    # \return \a self
     # 
     def __iadd__(mol: Molecule) -> Molecule: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
-    # \param molgraph Specifies the second addend.
-    # \return The updated \c %Molecule instance \a self.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # 
+    # Internally calls append() to perform the actual work.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to append.
+    # 
+    # \return \a self
     # 
     def __iadd__(molgraph: MolecularGraph) -> Molecule: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= molgraph</tt>.
-    # \param molgraph Specifies the subtrahend.
-    # \return The updated \c %Molecule instance \a self.
+    # \brief Removes atoms and bonds referenced by the molecular graph <em>molgraph</em> that are part of this <tt>Molecule</tt> instance.
+    # 
+    # Internally calls remove() to perform the actual work.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance specifying the atoms and bonds to remove.
+    # 
+    # \return \a self
     # 
     def __isub__(molgraph: MolecularGraph) -> Molecule: pass
 

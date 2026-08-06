@@ -49,8 +49,7 @@ namespace CDPL
          * \brief Concrete Pharm::FeatureContainer implementation that stores references to existing Pharm::Feature instances.
          *
          * Unlike Pharm::BasicPharmacophore, a \c %FeatureSet does not own its features. It is typically used
-         * to represent subsets/selections of features that live elsewhere (e.g. for feature mappings or
-         * for collecting features matching a query).
+         * to represent subsets/selections of features that live elsewhere.
          */
         class CDPL_PHARM_API FeatureSet : public FeatureContainer
         {
@@ -106,7 +105,7 @@ namespace CDPL
             /**
              * \brief Tells whether the specified feature is part of this feature set.
              * \param ftr The feature to look for.
-             * \return \c true if \a feature is part of this feature set, and \c false otherwise.
+             * \return \c true if \a ftr is part of this feature set, and \c false otherwise.
              */
             bool containsFeature(const Feature& ftr) const;
 
@@ -226,7 +225,7 @@ namespace CDPL
              * \brief Removes the pharmacophore features referenced by the feature container \a cntnr from this \c %FeatureSet instance.
              * \param cntnr The Pharm::FeatureContainer instance providing the features to remove.
              * \return A reference to itself.
-             * \note Does not affect any properties if <tt>this != &cntr</tt>.
+             * \note Equivalent to clear() if <tt>this == &cntr</tt>.
              */
             FeatureSet& operator-=(const FeatureContainer& cntnr);
 

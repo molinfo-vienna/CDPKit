@@ -140,9 +140,11 @@ class TriangleMesh3D(Shape3D):
     def swap(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += mesh</tt>.
-    # \param mesh Specifies the second addend.
-    # \return The updated \c %TriangleMesh3D instance \a self.
+    # \brief Appends the vertices, vertex normals and (vertex index corrected) faces of <em>mesh</em> to this mesh.
+    # 
+    # \param mesh The mesh to append.
+    # 
+    # \return \a self
     # 
     def __iadd__(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
 

@@ -22,7 +22,7 @@
 ##
 # \brief Concrete Pharm.FeatureContainer implementation that stores references to existing Pharm.Feature instances.
 # 
-# Unlike Pharm.BasicPharmacophore, a <tt>FeatureSet</tt> does not own its features. It is typically used to represent subsets/selections of features that live elsewhere (e.g. for feature mappings or for collecting features matching a query).
+# Unlike Pharm.BasicPharmacophore, a <tt>FeatureSet</tt> does not own its features. It is typically used to represent subsets/selections of features that live elsewhere.
 # 
 class FeatureSet(FeatureContainer):
 
@@ -144,15 +144,23 @@ class FeatureSet(FeatureContainer):
     def __len__() -> int: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
-    # \param cntnr Specifies the second addend.
-    # \return The updated \c %FeatureSet instance \a self.
+    # \brief Extends the current set of features by the features in the feature container <em>cntnr</em>.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features to append.
+    # 
+    # \return \a self 
+    # 
+    # \note Does not affect any properties.
     # 
     def __iadd__(cntnr: FeatureContainer) -> FeatureSet: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= cntnr</tt>.
-    # \param cntnr Specifies the subtrahend.
-    # \return The updated \c %FeatureSet instance \a self.
+    # \brief Removes the pharmacophore features referenced by the feature container <em>cntnr</em> from this <tt>FeatureSet</tt> instance.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features to remove.
+    # 
+    # \return \a self 
+    # 
+    # \note Equivalent to clear() if <tt>this == &cntr</tt>.
     # 
     def __isub__(cntnr: FeatureContainer) -> FeatureSet: pass

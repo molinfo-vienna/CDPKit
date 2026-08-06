@@ -46,8 +46,7 @@ namespace CDPL
          *
          * \c %Pharmacophore extends the read-only Pharm::FeatureContainer interface with feature
          * creation/removal, content replacement (copy, append, remove) and a cloning facility for
-         * polymorphic deep copies. Concrete subclasses (e.g. Pharm::BasicPharmacophore,
-         * Pharm::FeatureSet) implement the pure virtual member functions.
+         * polymorphic deep copies.
          */
         class CDPL_PHARM_API Pharmacophore : public FeatureContainer
         {
@@ -149,12 +148,12 @@ namespace CDPL
             /**
              * \brief Replaces the current set of pharmacophore features and properties by a copy of the
              *        features and properties of the feature container \a cntnr.
-             * \param cntnr The Pharm::FeatureContainer instance providing the features and properties to copy.
+             * \param cntnr The feature container providing the features and properties to copy.
              */
             virtual void copy(const FeatureContainer& cntnr) = 0;
 
             /**
-             * \brief Extends the current set of pharmacophore features by a copy of the features in the
+             * \brief Extends the current set of features by a copy of the features in the
              *        pharmacophore \a pharm.
              * \param pharm The pharmacophore providing the features to append.
              * \note Does not affect any properties.
@@ -164,15 +163,15 @@ namespace CDPL
             /**
              * \brief Extends the current set of pharmacophore features by a copy of the features in the
              *        feature container \a cntnr.
-             * \param cntnr The Pharm::FeatureContainer instance providing the features to append.
+             * \param cntnr The feature container providing the features to append.
              * \note Does not affect any properties.
              */
             virtual void append(const FeatureContainer& cntnr) = 0;
 
             /**
-             * \brief Removes the pharmacophore features referenced by the feature container \a cntnr from this \c %Pharmacophore instance.
-             * \param cntnr The Pharm::FeatureContainer instance providing the features to remove.
-             * \note Does not affect any properties if <tt>this != &cntr</tt>.
+             * \brief Removes the pharmacophore features referenced by the feature container \a cntnr from this instance.
+             * \param cntnr The feature container providing the features to remove.
+             * \note Equivalent to clear() if <tt>this == &cntr</tt>.
              */
             virtual void remove(const FeatureContainer& cntnr) = 0;
 
@@ -199,7 +198,7 @@ namespace CDPL
              *
              * Internally calls copy() to perform the actual work.
              *
-             * \param cntnr The Pharm::FeatureContainer instance providing the features and properties to copy.
+             * \param cntnr The feature container providing the features and properties to copy.
              * \return A reference to itself.
              */
             Pharmacophore& operator=(const FeatureContainer& cntnr);
@@ -221,7 +220,7 @@ namespace CDPL
              *
              * Internally calls append() to perform the actual work.
              *
-             * \param cntnr The Pharm::FeatureContainer instance providing the features to append.
+             * \param cntnr The feature container providing the features to append.
              * \return A reference to itself.
              */
             Pharmacophore& operator+=(const FeatureContainer& cntnr);
@@ -231,7 +230,7 @@ namespace CDPL
              *
              * Internally calls remove() to perform the actual work.
              *
-             * \param cntnr The Pharm::FeatureContainer instance providing the features to remove.
+             * \param cntnr The feature container providing the features to remove.
              * \return A reference to itself.
              */
             Pharmacophore& operator-=(const FeatureContainer& cntnr);

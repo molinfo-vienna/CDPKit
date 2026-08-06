@@ -151,10 +151,17 @@ class PropertyContainer(Boost.Python.instance):
     def swap(cntnr: PropertyContainer) -> None: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
+    # \brief Returns the value of the property specified by <em>key</em>.
+    # 
+    # If an entry for the specified property exists, the stored value will be returned. Otherwise a Base.ItemNotFound exception will be thrown.
+    # 
+    # \param key The key of the property value to return.
+    # 
+    # 
+    # \return The stored property value. 
+    # 
+    # \throw Base.ItemNotFound if an entry for the requested property value does not exist.
+    # 
     def __getitem__(key: LookupKey) -> Any: pass
 
     ##

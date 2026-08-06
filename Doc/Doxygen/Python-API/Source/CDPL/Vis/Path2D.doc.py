@@ -287,9 +287,11 @@ class Path2D(Boost.Python.instance):
     def addRectangle(pos: Math.Vector2D, width: float, height: float) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += path</tt>.
-    # \param path Specifies the second addend.
-    # \return The updated \c %Path2D instance \a self.
+    # \brief Appends the elements stored in the <tt>Path2D</tt> instance <em>path</em> to this path.
+    # 
+    # \param path The <tt>Path2D</tt> instance providing the elements to append.
+    # 
+    # \return \a self
     # 
     def __iadd__(path: Path2D) -> Path2D: pass
 

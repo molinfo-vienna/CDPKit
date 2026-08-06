@@ -14,6 +14,8 @@ operator> % __gt__
 operator< % __lt__
 operator() % __call__
 operator[] % __getitem__
+operator-= % __isub__
+operator+= % __iadd__
 '<tt>non-const</tt> ' % 
 pointer % reference
 'non-<tt>const</tt> ' % 
@@ -24,6 +26,21 @@ false % False
 nullptr % None
 A reference to itself. % \a self
 int idx % idx: int
+
+#
+# --- General method name replacements ---
+#
+.__isub__ % .operator-=
+
+.__sub__ % .operator-
+
+.__iadd__ % .operator+=
+
+.__add__ % .operator+
+
+.__getitem__ % .operator[]
+
+.__call__ % .operator()
 
 #
 # --- CDPL package ---
@@ -44,6 +61,12 @@ Defined % True
 #
 Base.Any % Base.Any
 std::experimental.any % std::experimental::any
+
+Base.PropertyContainer.__getitem__(key) % Base.PropertyContainer.getProperty(key,throw_)
+Otherwise an empty Base.Any object gets returned if <em>_throw</em> is <tt>False</tt>, and a Base.ItemNotFound exception will be thrown if <em>_throw</em> is <tt>True</tt> % Otherwise a Base.ItemNotFound exception will be thrown
+\param throw_ Specifies whether to throw a Base.ItemNotFound exception or to return an empty Base.Any object if the requested property value does not exist. %
+\throw Base.ItemNotFound if an entry for the requested property value does not exist and <em>throw_</em> is <tt>True</tt> % \throw Base.ItemNotFound if an entry for the requested property value does not exist
+\return The stored property value or and empty Base.Any object % \return The stored property value
 
 #
 # --- CDPL.Math package ---
