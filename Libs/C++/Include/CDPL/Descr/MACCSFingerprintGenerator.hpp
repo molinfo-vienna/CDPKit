@@ -65,7 +65,7 @@ namespace CDPL
             /**
              * \brief Copy constructor.
              * \param gen The other \c %MACCSFingerprintGenerator instance.
-             * \note The internal state of \a gen is not copied; the new instance is default-initialized.
+             * \note The internal state of \a gen is not copied and the new instance is default-initialized.
              */
             MACCSFingerprintGenerator(const MACCSFingerprintGenerator& gen);
 
@@ -88,7 +88,7 @@ namespace CDPL
              * \brief Assignment operator.
              * \param gen The other \c %MACCSFingerprintGenerator instance.
              * \return A reference to itself.
-             * \note The internal state of \a gen is not copied; the assignee remains unchanged.
+             * \note The internal state of \a gen is not copied and the assignee remains unchanged.
              */
             MACCSFingerprintGenerator& operator=(const MACCSFingerprintGenerator& gen)
             {

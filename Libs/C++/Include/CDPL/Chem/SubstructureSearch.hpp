@@ -66,7 +66,7 @@ namespace CDPL
          * match expression accessor functions can be installed to extend equivalence beyond pure
          * topology (the defaults pull expressions from the Chem::AtomProperty / Chem::BondProperty
          * / Chem::MolecularGraphProperty objects). Result accumulation is bounded by setMaxNumMappings()
-         * and uniqueMappingsOnly(); the search can also be aborted from a callback via stopSearch().
+         * and uniqueMappingsOnly(). The search can also be aborted from a callback via stopSearch().
          *
          * \see [\ref VFLIB2]
          */

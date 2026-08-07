@@ -175,7 +175,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the view is empty (always \c false; the view always has at least the extension element).
+             * \brief Tells whether the view is empty (always \c false and the view always has at least the extension element).
              * \return \c false.
              */
             bool isEmpty() const

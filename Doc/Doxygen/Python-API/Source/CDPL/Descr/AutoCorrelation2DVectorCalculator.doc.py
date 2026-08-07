@@ -22,7 +22,7 @@
 ##
 # \brief Calculation of the topological (2D) auto-correlation vector of a molecular graph.
 # 
-# For every topological distance \f$ d \in [0, d_{max}] \f$, the corresponding element of the auto-correlation vector is the sum of the atom-pair weights of all atom pairs whose topological distance equals \f$ d \f$. The atom-pair weight function and the maximum topological distance considered can be customized via setAtomPairWeightFunction() and setMaxDistance().
+# For every topological distance \f$ d \in [0, d_{max}] \f$, the corresponding element of the auto-correlation vector is the sum of the atom pair weights of all atom pairs whose topological distance equals \f$ d \f$. The atom pair weight function and the maximum topological distance considered can be customized via setAtomPairWeightFunction() and setMaxDistance().
 # 
 # \see [\ref AUCOR, \ref HBMD]
 # 

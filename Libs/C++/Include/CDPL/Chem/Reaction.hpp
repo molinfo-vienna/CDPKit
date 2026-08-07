@@ -48,7 +48,7 @@ namespace CDPL
         /**
          * \brief Abstract base class for chemical reactions composed of role-tagged Chem::Molecule components.
          *
-         * Each component carries a Chem::ReactionRole (\c REACTANT, \c AGENT or \c PRODUCT); the role is the
+         * Each component carries a Chem::ReactionRole (\c REACTANT, \c AGENT or \c PRODUCT). The role is the
          * primary indexing axis exposed by getComponentRole(), getNumComponents(role), getComponent(idx, role)
          * and the role-restricted iterator pair getComponentsBegin(role)/getComponentsEnd(role). Editing
          * methods (addComponent, removeComponent, swapComponentRoles, clear) are pure virtual and supplied

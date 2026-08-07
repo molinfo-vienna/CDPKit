@@ -22,7 +22,7 @@
 ##
 # \brief Abstract base class for chemical reactions composed of role-tagged Chem.Molecule components.
 # 
-# Each component carries a Chem.ReactionRole (<tt>REACTANT</tt>, <tt>AGENT</tt> or <tt>PRODUCT</tt>); the role is the primary indexing axis exposed by getComponentRole(), getNumComponents(role), getComponent(idx, role) and the role-restricted iterator pair getComponentsBegin(role)/getComponentsEnd(role). Editing methods (addComponent, removeComponent, swapComponentRoles, clear) are pure virtual and supplied by concrete subclasses such as Chem.BasicReaction. Properties common to all components are inherited from Base.PropertyContainer.
+# Each component carries a Chem.ReactionRole (<tt>REACTANT</tt>, <tt>AGENT</tt> or <tt>PRODUCT</tt>). The role is the primary indexing axis exposed by getComponentRole(), getNumComponents(role), getComponent(idx, role) and the role-restricted iterator pair getComponentsBegin(role)/getComponentsEnd(role). Editing methods (addComponent, removeComponent, swapComponentRoles, clear) are pure virtual and supplied by concrete subclasses such as Chem.BasicReaction. Properties common to all components are inherited from Base.PropertyContainer.
 # 
 class Reaction(Base.PropertyContainer):
 

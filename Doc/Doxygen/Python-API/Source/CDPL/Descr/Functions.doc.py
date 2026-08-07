@@ -527,7 +527,7 @@ def calcTanimotoSimilarity(v1: Math.LVector, v2: Math.LVector) -> float: pass
 def calcTanimotoSimilarity(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 
 ##
-# \brief Calculates the topological diameter (maximum atom-pair topological distance) of <em>molgraph</em>.
+# \brief Calculates the topological diameter (maximum atom pair topological distance) of <em>molgraph</em>.
 # 
 # \param molgraph The molecular graph.
 # 

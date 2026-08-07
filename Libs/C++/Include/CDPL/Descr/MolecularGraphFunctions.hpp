@@ -54,7 +54,7 @@ namespace CDPL
         CDPL_DESCR_API std::size_t calcTopologicalRadius(const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Calculates the topological diameter (maximum atom-pair topological distance) of \a molgraph.
+         * \brief Calculates the topological diameter (maximum atom pair topological distance) of \a molgraph.
          * \param molgraph The molecular graph.
          * \return The topological diameter.
          */

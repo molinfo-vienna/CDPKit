@@ -51,7 +51,7 @@ class PubChemFingerprintGenerator(Boost.Python.instance):
     # 
     # \param gen The other <tt>PubChemFingerprintGenerator</tt> instance.
     # 
-    # \note The internal state of <em>gen</em> is not copied; the new instance is default-initialized.
+    # \note The internal state of <em>gen</em> is not copied and the new instance is default-initialized.
     # 
     def __init__(gen: PubChemFingerprintGenerator) -> None: pass
 
@@ -74,7 +74,7 @@ class PubChemFingerprintGenerator(Boost.Python.instance):
     # 
     # \return \a self 
     # 
-    # \note The internal state of <em>gen</em> is not copied; the assignee remains unchanged.
+    # \note The internal state of <em>gen</em> is not copied and the assignee remains unchanged.
     # 
     def assign(gen: PubChemFingerprintGenerator) -> PubChemFingerprintGenerator: pass
 

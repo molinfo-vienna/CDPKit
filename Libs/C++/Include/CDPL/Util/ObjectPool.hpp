@@ -120,7 +120,7 @@ namespace CDPL
             /**
              * \brief Copy constructor.
              * \param pool The other \c %ObjectPool instance.
-             * \note The pool of allocated objects of \a pool is not copied; the new instance starts
+             * \note The pool of allocated objects of \a pool is not copied. The new instance starts
              *       with an empty pool.
              */
             ObjectPool(const ObjectPool& pool):

@@ -47,15 +47,16 @@ namespace CDPL
     {
 
         /**
-         * \brief Computes a topological alignment between two sets of entities by reducing the alignment
-         *        problem to a maximum-common-subgraph search on a compatibility graph.
+         * \brief Computes a topological alignment between two sets of arbitrary entities by performing
+         *        a maximum common subgraph search on a entity pair compatibility graph.
          *
-         * The compatibility graph is built from the two stored entity sets: a node \c (i, j) is created
-         * for every pair of entities that satisfies the optional EntityMatchFunction, and edges connect
-         * mutually compatible node pairs (compatibility being decided by the optional EntityPairMatchFunction,
-         * which always sees pairs whose first/second entities already match). Each call to nextAlignment()
-         * advances the underlying Util::BronKerboschAlgorithm one maximal clique forward and reports the
-         * corresponding entity mapping; reset() forces a fresh search on the next nextAlignment() call.
+         * The compatibility graph is built from the two stored entity sets: a node (\e i, \e j) is created
+         * for every pair of matching entities (checked by an optionally provided EntityMatchFunction instance; default behavior: always matching),
+         * and edges connect mutually compatible node pairs (compatibility being decided by an optionally provided EntityPairMatchFunction
+         * instance which always sees pairs whose first/second entities already match; default behavior: always compatible).
+         * Each call to nextAlignment() advances the underlying Bron-Kerbosch algorithm one maximal clique forward and reports the
+         * corresponding entity mapping between the first an second set. Via the method reset() a fresh search on the next nextAlignment()
+         * call can be enforced.
          *
          * \tparam T The entity type to align.
          */
@@ -85,7 +86,7 @@ namespace CDPL
             typedef std::function<bool(const EntityType&, const EntityType&)> EntityMatchFunction;
 
             /**
-             * \brief Generic wrapper class used to store a user-defined entity-pair match constraint function.
+             * \brief Generic wrapper class used to store a user-defined entity pair match constraint function.
              */
             typedef std::function<bool(const EntityType&, const EntityType&, const EntityType&, const EntityType&)> EntityPairMatchFunction;
 
@@ -113,14 +114,14 @@ namespace CDPL
             const EntityMatchFunction& getEntityMatchFunction() const;
 
             /**
-             * \brief Specifies a function for checking the compatibility of entity-pairs in the search for alignment solutions.
+             * \brief Specifies a function for checking the compatibility of entity pairs in the search for alignment solutions.
              * \param func The constraint check function.
              * \note This function gets only called for pairs with already matching first and second entities.
              */
             void setEntityPairMatchFunction(const EntityPairMatchFunction& func);
 
             /**
-             * \brief Returns the function that was registered for checking the compatibility of entity-pairs.
+             * \brief Returns the function that was registered for checking the compatibility of entity pairs.
              * \return The registered constraint check function.
              */
             const EntityPairMatchFunction& getEntityPairMatchFunction() const;
@@ -177,8 +178,8 @@ namespace CDPL
             bool nextAlignment(Util::STPairArray& mapping);
 
             /**
-             * \brief Discards the current alignment-search state so that the next call to nextAlignment()
-             *        restarts the compatibility-graph search from scratch.
+             * \brief Discards the current alignment search state so that the next call to nextAlignment()
+             *        restarts the compatibility graph search from scratch.
              */
             void reset();
 

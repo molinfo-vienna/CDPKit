@@ -47,7 +47,7 @@ namespace CDPL
         /**
          * \brief Subdivides each triangle face of \a mesh and projects the new vertices onto the unit sphere.
          *
-         * Each face is split into four sub-triangles by inserting a new vertex at the midpoint of every edge; the new
+         * Each face is split into four sub-triangles by inserting a new vertex at the midpoint of every edge. The new
          * vertices are then normalized so that they lie on the unit sphere. Repeated application yields a finer spherical
          * approximation.
          *

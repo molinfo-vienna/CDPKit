@@ -24,7 +24,7 @@
 /**
  * \file
  * \brief Type definition of generic wrapper class for storing an user-defined
- *        topological atom-pair distance function.
+ *        topological atom pair distance function.
  */
 
 #ifndef CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTION_HPP
@@ -48,7 +48,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Generic wrapper class used to store a user-defined topological atom-pair distance function.
+         * \brief Generic wrapper class used to store a user-defined topological atom pair distance function.
          */
         typedef std::function<std::size_t(const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&)> TopologicalAtomDistanceFunction;
     } // namespace ForceField

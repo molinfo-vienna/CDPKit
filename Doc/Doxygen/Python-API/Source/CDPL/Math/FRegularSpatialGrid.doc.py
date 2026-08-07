@@ -189,8 +189,6 @@ class FRegularSpatialGrid(Boost.Python.instance):
     ##
     # \brief Writes the grid space 3D position of the cell at (<em>i</em>, <em>j</em>, <em>k</em>) into <em>coords</em>.
     # 
-    # Grid space coordinates are centered at the grid origin (the cell-center cell-index coordinate system before applying the world space transformation).
-    # 
     # \param i The zero-based cell index along the x-axis.
     # \param j The zero-based cell index along the y-axis.
     # \param k The zero-based cell index along the z-axis.

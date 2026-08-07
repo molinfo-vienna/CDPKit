@@ -67,7 +67,7 @@ namespace CDPL
             const std::string& getPath() const;
 
             /**
-             * \brief Replaces the currently held path with \a new_path; the previously held file is removed immediately.
+             * \brief Replaces the currently held path with \a new_path and removes the previously held file immediately.
              * \param new_path The new file-system path to guard.
              */
             void reset(const std::string& new_path);

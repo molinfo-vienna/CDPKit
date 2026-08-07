@@ -52,17 +52,17 @@ namespace CDPL
     {
 
         /**
-         * \brief Computes a spatial alignment between two sets of entities (with 3D coordinates)
-         *        by composing topological entity matching with Kabsch-style 3D superposition.
+         * \brief Computes a spatial alignment between two sets of 3D entities
+         *        by combining topological entity matching with Kabsch-style 3D superposition.
          *
-         * The class drives an internal Chem::TopologicalEntityAlignment over the two entity sets to
-         * enumerate candidate index mappings (subject to setMinTopologicalMappingSize() and the
-         * optional setTopAlignmentConstraintFunction()), then computes the optimal rigid-body
-         * transformation for each accepted mapping using Math::KabschAlgorithm with the entity
-         * 3D coordinates supplied by setEntity3DCoordinatesFunction() and (optionally) the per-entity
-         * weights supplied by setEntityWeightFunction(). Calls to nextAlignment() advance the search;
-         * the resulting transformation and the corresponding topological mapping are retrieved with
-         * getTransform() and getTopologicalMapping().
+         * The class drives an internal Chem::TopologicalEntityAlignment instance over the two entity sets to
+         * enumerate candidate entity mappings (subject to constraints specified via setMinTopologicalMappingSize() and 
+         * setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted
+         * mapping using Kabsch's algorithm with the entity 3D coordinates supplied by a retrieval function
+         * specified via setEntity3DCoordinatesFunction() and (optionally) the per-entity weights supplied by a function
+         * specified by setEntityWeightFunction().
+         * Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping
+         * can be accessed by the methods getTransform() and getTopologicalMapping(), respectively.
          *
          * \tparam T The entity type to align.
          */
@@ -104,7 +104,7 @@ namespace CDPL
             typedef typename TopologicalAlignment::EntityMatchFunction EntityMatchFunction;
 
             /**
-             * \brief Generic wrapper class used to store a user-defined entity-pair match constraint function.
+             * \brief Generic wrapper class used to store a user-defined entity pair match constraint function.
              */
             typedef typename TopologicalAlignment::EntityPairMatchFunction EntityPairMatchFunction;
 
@@ -169,55 +169,53 @@ namespace CDPL
             const TopologicalAlignmentConstraintFunction& getTopAlignmentConstraintFunction() const;
 
             /**
-             * \brief Specifies a function for restricting allowed topological entity mappings in the search for alignment solutions.
+             * \brief Specifies a function for restricting allowed entity mappings in the search for alignment solutions.
              * \param func The constraint check function.
              */
             void setEntityMatchFunction(const EntityMatchFunction& func);
 
             /**
-             * \brief Returns the function that was registered for restricting allowed topological entity mappings.
+             * \brief Returns the function that was registered for restricting allowed entity mappings.
              * \return The registered constraint check function.
              */
             const EntityMatchFunction& getEntityMatchFunction() const;
 
             /**
-             * \brief Specifies a function for checking the compatibility of entity-pairs in the search for alignment solutions.
+             * \brief Specifies a function for checking the compatibility of entity pairs in the search for alignment solutions.
              * \param func The constraint check function.
              * \note This function gets only called for pairs with already matching first and second entities.
              */
             void setEntityPairMatchFunction(const EntityPairMatchFunction& func);
 
             /**
-             * \brief Returns the function that was registered for checking the compatibility of entity-pairs.
+             * \brief Returns the function that was registered for checking the compatibility of entity pairs.
              * \return The registered constraint check function.
              */
             const EntityPairMatchFunction& getEntityPairMatchFunction() const;
 
             /**
-             * \brief Specifies whether topological mappings shall be enumerated exhaustively before
-             *        spatial alignment, or one-by-one as nextAlignment() is called.
-             * \param exhaustive \c true to enumerate all topological mappings up front, and \c false to
-             *                   enumerate them lazily.
+             * \brief Specifies whether additional topological entity mappings (derived from the found max. mappings) shall be enumerated 
+             *        in order to increase the number of generated spatial alignment candidates.
+             * \param exhaustive \c true to enumerate additional topological mappings, and \c false if only the primary max. mappings shall be used.
              */
             void performExhaustiveSearch(bool exhaustive);
 
             /**
-             * \brief Tells whether topological mappings are enumerated exhaustively before spatial
-             *        alignment.
+             * \brief Tells whether or not additional topological entity mappings (derived from the found max. mappings) are enumerated.
              * \return \c true if exhaustive enumeration is enabled, and \c false otherwise.
              * \see performExhaustiveSearch()
              */
             bool exhaustiveSearchPerformed() const;
 
             /**
-             * \brief Adds an entity to the specified alignment entity set.
+             * \brief Adds an entity to the specified entity set.
              * \param entity The entity object to add.
              * \param first_set If \c true, the entity is added to the first entity set, if \c false to the second one.
              */
             void addEntity(const EntityType& entity, bool first_set);
 
             /**
-             * \brief Removes all entities in the specified alignment entity set.
+             * \brief Removes all entities in the specified entity set.
              * \param first_set If \c true, the first entity set is cleared, if \c false the second one.
              */
             void clearEntities(bool first_set);
@@ -258,8 +256,8 @@ namespace CDPL
             bool nextAlignment();
 
             /**
-             * \brief Discards the current alignment-search state so that the next call to nextAlignment()
-             *        restarts the topological-mapping enumeration from scratch.
+             * \brief Discards the current alignment search state so that the next call to nextAlignment()
+             *        restarts the topological mapping enumeration from scratch.
              */
             void reset();
 

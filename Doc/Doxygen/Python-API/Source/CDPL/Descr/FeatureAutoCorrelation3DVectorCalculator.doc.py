@@ -22,7 +22,7 @@
 ##
 # \brief AutoCorrelation3DVectorCalculator specialization for feature-centered 3D auto-correlation vectors of pharmacophores.
 # 
-# The feature 3D coordinates accessor function is preset to Chem.get3DCoordinates(); the entity-pair weight function and other calculation parameters can be configured via the inherited setter methods of the base class.
+# The feature 3D coordinates accessor function is preset to Chem.get3DCoordinates(). The entity pair weight function and other calculation parameters can be configured via the inherited setter methods of the base class.
 # 
 # \see [\ref CITB, \ref HBMD]
 # 

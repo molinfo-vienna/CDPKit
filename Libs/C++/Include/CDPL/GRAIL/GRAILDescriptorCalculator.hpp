@@ -249,7 +249,7 @@ namespace CDPL
                 ES_ENERGY,
 
                 /**
-                 * \brief Electrostatic interaction energy with squared atom-pair distance dependency.
+                 * \brief Electrostatic interaction energy with squared atom pair distance dependency.
                  */
                 ES_ENERGY_SQRD_DIST,
 

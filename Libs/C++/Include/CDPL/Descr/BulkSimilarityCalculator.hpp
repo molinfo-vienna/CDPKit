@@ -52,7 +52,7 @@ namespace CDPL
          * \brief Calculator that performs a bulk pairwise comparison of a single query descriptor
          *        against a stored set of target descriptors using a configurable similarity function.
          *
-         * Stored descriptors are held by shared pointer; the calculator can therefore share descriptor
+         * Stored descriptors are held by shared pointer and the calculator can therefore share descriptor
          * ownership with external code. After a call to calculate() the per-target similarity values
          * are available in stored order and can optionally be sorted.
          *

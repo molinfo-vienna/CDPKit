@@ -22,7 +22,7 @@
 ##
 # \brief RDFCodeCalculator implementation for the calculation of feature-centered radial distribution function (RDF) codes of pharmacophores.
 # 
-# <tt>FeatureRDFCodeCalculator</tt> is a specialization of <tt>RDFCodeCalculator</tt> for entities of type Pharm.Feature. The feature 3D coordinates accessor function is preset to Chem.get3DCoordinates() and the entity-pair weight function as well as any other RDF calculation parameters can be configured via the inherited setter methods of the base class.
+# <tt>FeatureRDFCodeCalculator</tt> is a specialization of <tt>RDFCodeCalculator</tt> for entities of type Pharm.Feature. The feature 3D coordinates accessor function is preset to Chem.get3DCoordinates() and the entity pair weight function as well as any other RDF calculation parameters can be configured via the inherited setter methods of the base class.
 # 
 # \see [\ref CITB, \ref HBMD]
 # 

@@ -584,8 +584,8 @@ namespace CDPL
         /**
          * \brief <em>N&times;N</em> translation matrix in homogeneous coordinates.
          *
-         * The diagonal entries are all 1; the last column (above the diagonal) holds the per-axis translation
-         * components; all other entries are \e 0. The size \f$ N \f$ is configurable to fit the embedding coordinate
+         * The diagonal entries are all \e 1, the last column (above the diagonal) holds the per-axis translation
+         * components and all other entries are \e 0. The size \e N is configurable to fit the embedding coordinate
          * dimension plus one (e.g. \e 4 for translations of 3D points in homogeneous form).
          *
          * \tparam T The scalar value type.

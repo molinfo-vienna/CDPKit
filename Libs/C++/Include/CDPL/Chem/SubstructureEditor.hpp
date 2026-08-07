@@ -56,8 +56,8 @@ namespace CDPL
          * \brief Pattern-driven editor that rewrites matched substructures of a Chem::Molecule using a
          *        result template, with optional exclude patterns guarding sites that must not be touched.
          *
-         * Search patterns supply the substructures the editor will look for; the (single) result pattern
-         * defines what each match is rewritten to; exclude patterns mark matches that must be skipped (a
+         * Search patterns supply the substructures the editor will look for. The (single) result pattern
+         * defines what each match is rewritten to and exclude patterns mark matches that must be skipped (a
          * search match is discarded when its atoms/bonds form a subset of any exclude match). The editor
          * iterates until no further matches can be transformed and returns the number of applied edits.
          *

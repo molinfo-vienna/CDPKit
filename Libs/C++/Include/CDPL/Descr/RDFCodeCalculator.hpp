@@ -49,7 +49,7 @@ namespace CDPL
          *        sequences of entities of arbitrary type.
          *
          * The actual entity type is specified by the template parameter \a T. User-defined functions for the
-         * retrieval of entity 3D coordinates and for the calculation of entity-pair weights can be provided via
+         * retrieval of entity 3D coordinates and for the calculation of entity pair weights can be provided via
          * setEntity3DCoordinatesFunction() and setEntityPairWeightFunction().
          *
          * \tparam T The type of the entities for which the RDF code shall be calculated.

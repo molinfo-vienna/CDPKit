@@ -53,7 +53,7 @@ namespace CDPL
          *
          * \c %AtomRDFCodeCalculator is a specialization of \c %RDFCodeCalculator for entities of type
          * Chem::Atom. The atom 3D coordinates accessor function is preset to Chem::get3DCoordinates() and
-         * the entity-pair weight function as well as any other RDF calculation parameters can be configured
+         * the entity pair weight function as well as any other RDF calculation parameters can be configured
          * via the inherited setter methods of the base class.
          *
          * \see [\ref CITB, \ref HBMD]

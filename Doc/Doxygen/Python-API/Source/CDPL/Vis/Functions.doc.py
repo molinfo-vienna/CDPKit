@@ -3792,7 +3792,7 @@ def scale(mesh: TriangleMesh3D, scale_x: float, scale_y: float, scale_z: float, 
 ##
 # \brief Subdivides each triangle face of <em>mesh</em> and projects the new vertices onto the unit sphere.
 # 
-# Each face is split into four sub-triangles by inserting a new vertex at the midpoint of every edge; the new vertices are then normalized so that they lie on the unit sphere. Repeated application yields a finer spherical approximation.
+# Each face is split into four sub-triangles by inserting a new vertex at the midpoint of every edge. The new vertices are then normalized so that they lie on the unit sphere. Repeated application yields a finer spherical approximation.
 # 
 # \param mesh The triangle mesh to subdivide (modified in place).
 # 

@@ -22,7 +22,7 @@
 ##
 # \brief RDFCodeCalculator implementation for the calculation of atom-centered radial distribution function (RDF) codes of chemical structures.
 # 
-# <tt>AtomRDFCodeCalculator</tt> is a specialization of <tt>RDFCodeCalculator</tt> for entities of type Chem.Atom. The atom 3D coordinates accessor function is preset to Chem.get3DCoordinates() and the entity-pair weight function as well as any other RDF calculation parameters can be configured via the inherited setter methods of the base class.
+# <tt>AtomRDFCodeCalculator</tt> is a specialization of <tt>RDFCodeCalculator</tt> for entities of type Chem.Atom. The atom 3D coordinates accessor function is preset to Chem.get3DCoordinates() and the entity pair weight function as well as any other RDF calculation parameters can be configured via the inherited setter methods of the base class.
 # 
 # \see [\ref CITB, \ref HBMD]
 # 

@@ -116,7 +116,6 @@ namespace CDPL
         /**
          * \brief 3D grid data structure combining a grid data store with a coordinate-system transformation
          *        that maps grid cell indices to 3D world positions.
-         *
          * \tparam T The grid cell value type.
          * \tparam C The xyz-coordinates value type.
          * \tparam GD The underlying grid data container type (default: Math::Grid).
@@ -511,10 +510,6 @@ namespace CDPL
 
             /**
              * \brief Writes the grid space 3D position of the cell at (\a i, \a j, \a k) into \a coords.
-             *
-             * Grid space coordinates are centered at the grid origin (the cell-center cell-index coordinate system
-             * before applying the world space transformation).
-             *
              * \tparam V The output vector type.
              * \param i The zero-based cell index along the x-axis.
              * \param j The zero-based cell index along the y-axis.
@@ -530,7 +525,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Transforms the world space point \a world_coords into the grid's local coordinate frame and stores the result in \a local_coords.
+             * \brief Transforms the world space point \a world_coords into the grid's local coordinate frame and
+             *        stores the result in \a local_coords.
              * \tparam V1 The input vector type.
              * \tparam V2 The output vector type.
              * \param world_coords The input world space 3D position.

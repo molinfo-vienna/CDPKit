@@ -90,7 +90,7 @@ namespace CDPL
             /**
              * \brief Copy constructor.
              * \param stack The other \c %ObjectStack instance.
-             * \note The pool of allocated objects of \a stack is not copied; the new instance starts
+             * \note The pool of allocated objects of \a stack is not copied. The new instance starts
              *       with an empty pool.
              */
             ObjectStack(const ObjectStack& stack):
@@ -245,7 +245,7 @@ namespace CDPL
              * \brief Copy assignment operator.
              * \param stack The other \c %ObjectStack instance.
              * \return A reference to itself.
-             * \note The pool of allocated objects of \a stack is not copied; the pool of \c *this is left intact.
+             * \note The pool of allocated objects of \a stack is not copied and the pool of \c *this is left intact.
              */
             ObjectStack& operator=(const ObjectStack& stack)
             {

@@ -67,7 +67,7 @@ namespace CDPL
             /**
              * \brief Copy constructor.
              * \param gen The other \c %PubChemFingerprintGenerator instance.
-             * \note The internal state of \a gen is not copied; the new instance is default-initialized.
+             * \note The internal state of \a gen is not copied and the new instance is default-initialized.
              */
             PubChemFingerprintGenerator(const PubChemFingerprintGenerator& gen);
 
@@ -90,7 +90,7 @@ namespace CDPL
              * \brief Assignment operator.
              * \param gen The other \c %PubChemFingerprintGenerator instance.
              * \return A reference to itself.
-             * \note The internal state of \a gen is not copied; the assignee remains unchanged.
+             * \note The internal state of \a gen is not copied and the assignee remains unchanged.
              */
             PubChemFingerprintGenerator& operator=(const PubChemFingerprintGenerator& gen)
             {

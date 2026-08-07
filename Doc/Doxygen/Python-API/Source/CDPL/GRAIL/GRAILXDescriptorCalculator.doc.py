@@ -912,7 +912,7 @@ class GRAILXDescriptorCalculator(Boost.Python.instance):
         ES_ENERGY = 173
 
         ##
-        # \brief Electrostatic interaction energy with squared atom-pair distance dependency.
+        # \brief Electrostatic interaction energy with squared atom pair distance dependency.
         # 
         ES_ENERGY_SQRD_DIST = 174
 
