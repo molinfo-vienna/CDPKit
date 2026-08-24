@@ -69,10 +69,10 @@ void CDPLPythonPharm::exportFeatureSet()
              python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("assign", copyFtrContainerFunc, (python::arg("self"), python::arg("cntnr")),
              python::return_self<python::with_custodian_and_ward<1, 2> >())
-        .def("addFeature", &addFeature, (python::arg("self"), python::arg("ftr")),
+        .def("addFeature", &addFeature, (python::arg("self"), python::arg("feature")),
              python::with_custodian_and_ward<1, 2>())
         .def("removeFeature", removeFeatureFunc, (python::arg("self"), python::arg("idx")))
-        .def("removeFeature", &removeFeature, (python::arg("self"), python::arg("ftr")))
+        .def("removeFeature", &removeFeature, (python::arg("self"), python::arg("feature")))
         .def("clear", &Pharm::FeatureSet::clear, python::arg("self"))
         .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def(FeatureContainerSpecialFunctionsVisitor(false))

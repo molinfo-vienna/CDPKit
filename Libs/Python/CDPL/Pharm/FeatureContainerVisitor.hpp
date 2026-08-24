@@ -124,8 +124,8 @@ namespace CDPLPythonPharm
             cl
                 .def("getFeature", python::pure_virtual(static_cast<Pharm::Feature& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getFeature)),
                      (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
-                .def("containsFeature", python::pure_virtual(&this->containsFeature), (python::arg("self"), python::arg("ftr")))
-                .def("getFeatureIndex", python::pure_virtual(&getFeatureIndex), (python::arg("self"), python::arg("ftr")))
+                .def("containsFeature", python::pure_virtual(&this->containsFeature), (python::arg("self"), python::arg("feature")))
+                .def("getFeatureIndex", python::pure_virtual(&getFeatureIndex), (python::arg("self"), python::arg("feature")))
                 .def("getNumFeatures", python::pure_virtual(&Pharm::FeatureContainer::getNumFeatures), python::arg("self"))
                 .def("orderFeatures", python::pure_virtual(&Pharm::FeatureContainer::orderFeatures), (python::arg("self"), python::arg("func")))
                 .def("getEntity", static_cast<Chem::Entity3D& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getEntity),
@@ -157,7 +157,7 @@ namespace CDPLPythonPharm
             using namespace boost;
             using namespace CDPL;
 
-            cl.def("__contains__", &this->containsFeature, (python::arg("self"), python::arg("ftr")));
+            cl.def("__contains__", &this->containsFeature, (python::arg("self"), python::arg("feature")));
 
             if (containsOnly)
                 return;
