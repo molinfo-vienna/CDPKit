@@ -116,14 +116,14 @@ class Pharmacophore(FeatureContainer):
     def assign(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
-    # \brief Creates a copy of the current pharmacophore state.
+    # \brief Creates a deep copy of the current pharmacophore state.
     # 
     # \return A smart reference to the copy of the pharmacophore.
     # 
     def clone() -> Pharmacophore: pass
 
     ##
-    # \brief Returns a reference to the pharmacophore feature at index <em>idx</em>.
+    # \brief Returns a reference to the feature at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the feature to return.
     # 
@@ -134,43 +134,59 @@ class Pharmacophore(FeatureContainer):
     def getFeature(idx: int) -> Feature: pass
 
     ##
-    # \brief 
-    # \param ftr 
-    # \return 
-    #
-    def containsFeature(ftr: Feature) -> bool: pass
+    # \brief Tells whether the specified feature is part of the feature set.
+    # 
+    # \param feature The feature to look for.
+    # 
+    # \return <tt>True</tt> if <em>feature</em> is part of the set, and <tt>False</tt> otherwise.
+    # 
+    def containsFeature(feature: Feature) -> bool: pass
 
     ##
-    # \brief 
-    # \param ftr 
-    # \return 
-    #
-    def getFeatureIndex(ftr: Feature) -> int: pass
+    # \brief Returns the index of the specified feature.
+    # 
+    # \param feature The feature for which to return the index.
+    # 
+    # \return The zero-based index of the specified feature. 
+    # 
+    # \throw Base.ItemNotFound if the specified feature could not be found.
+    # 
+    def getFeatureIndex(feature: Feature) -> int: pass
 
     ##
-    # \brief Returns the number of pharmacophore features.
+    # \brief Returns the number of features.
     # 
     # \return The number of features.
     # 
     def getNumFeatures() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Orders the features according to criteria implemented by the provided feature comparison function.
+    # 
+    # \param func The feature comparison function implementing the applied ordering criteria.
+    # 
     def orderFeatures(func: BoolFeature2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # 
+    # Forwards to getFeature() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \param idx The zero-based entity index.
+    # 
+    # \return A reference to the entity at the specified index. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
+    # 
     def getEntity(idx: int) -> Chem.Entity3D: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entities.
+    # 
+    # Forwards to getNumFeatures() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \return The number of contained features.
+    # 
     def getNumEntities() -> int: pass
 
     ##
@@ -248,11 +264,11 @@ class Pharmacophore(FeatureContainer):
     def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param ftr The value to test for membership.
+    # \brief Returns the result of the membership test operation <tt>feature in self</tt>.
+    # \param feature The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(ftr: Feature) -> bool: pass
+    def __contains__(feature: Feature) -> bool: pass
 
     ##
     # \brief 

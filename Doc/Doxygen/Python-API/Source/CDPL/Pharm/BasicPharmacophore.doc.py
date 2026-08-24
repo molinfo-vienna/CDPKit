@@ -32,21 +32,21 @@ class BasicPharmacophore(Pharmacophore):
     ##
     # \brief Constructs a <tt>BasicPharmacophore</tt> instance that is a copy of the pharmacophore <em>pharm</em>.
     # 
-    # \param pharm The other pharmacophore instance to copy.
+    # \param pharm The other pharmacophore to copy.
     # 
     def __init__(pharm: BasicPharmacophore) -> None: pass
 
     ##
     # \brief Constructs a <tt>BasicPharmacophore</tt> instance that is a copy of the pharmacophore <em>pharm</em>.
     # 
-    # \param pharm The other pharmacophore instance to copy.
+    # \param pharm The other pharmacophore to copy.
     # 
     def __init__(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Constructs a <tt>BasicPharmacophore</tt> instance with copies of the features provided by the feature container <em>cntnr</em>.
+    # \brief Constructs a <tt>BasicPharmacophore</tt> instance with copies of the features and properties provided by the feature container <em>cntnr</em>.
     # 
-    # \param cntnr The feature container providing the features to copy.
+    # \param cntnr The feature container providing the features and properties to copy.
     # 
     def __init__(cntnr: FeatureContainer) -> None: pass
 

@@ -22,7 +22,7 @@
 ##
 # \brief Abstract base class representing a chemical bond between two Chem.Atom instances.
 # 
-# <tt>Bond</tt> combines the per-bond property storage inherited from Base.PropertyContainer with a fixed-size (always two atoms) Chem.AtomContainer interface that yields the bond's begin and end atoms. Concrete implementations (Chem.BasicBond) are owned by their parent molecule.
+# <tt>Bond</tt> combines the per-bond property storage inherited from Base.PropertyContainer with a fixed-size (always two atoms) Chem.AtomContainer interface that yields the bond's begin and end atoms. Concrete implementation (Chem.BasicBond) instances are created, owned and managed by a parent Chem.Molecule instance.
 # 
 class Bond(AtomContainer, Base.PropertyContainer):
 
@@ -70,12 +70,16 @@ class Bond(AtomContainer, Base.PropertyContainer):
     ##
     # \brief Returns a reference to the start atom of the bond.
     # 
+    # Equivalent to calling <tt>getAtom(0)</tt>.
+    # 
     # \return A reference to the start atom of the bond.
     # 
     def getBegin() -> Atom: pass
 
     ##
     # \brief Returns a reference to the end atom of the bond.
+    # 
+    # Equivalent to calling <tt>getAtom(1)</tt>.
     # 
     # \return A reference to the end atom of the bond.
     # 
@@ -105,9 +109,10 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def assign(bond: Bond) -> Bond: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to itself.
+    # 
+    # \return \a self
+    # 
     def getAtoms() -> AtomSequence: pass
 
     ##
@@ -155,22 +160,32 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def getNumAtoms() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Orders the atoms according to criteria implemented by the provided atom comparison function.
+    # 
+    # \param func The atom comparison function implementing the applied ordering criteria.
+    # 
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # 
+    # Forwards to getAtom() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \param idx The zero-based entity index.
+    # 
+    # \return A reference to the entity at the specified index. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
+    # 
     def getEntity(idx: int) -> Entity3D: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored Chem.Entity3D objects.
+    # 
+    # Forwards to getNumAtoms() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \return The number of contained atoms.
+    # 
     def getNumEntities() -> int: pass
 
     ##

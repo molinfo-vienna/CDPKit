@@ -42,7 +42,7 @@ namespace CDPL
         class Pharmacophore;
 
         /**
-         * \brief Abstract base class representing a single pharmacophore feature within a parent Pharm::Pharmacophore.
+         * \brief Abstract base class representing a single pharmacophore feature.
          */
         class CDPL_PHARM_API Feature : public Chem::Entity3D
         {

@@ -34,7 +34,7 @@ class AtomContainer(Entity3DContainer):
     ##
     # \brief Returns a reference to the atom at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the Chem.Atom instance to return.
+    # \param idx The zero-based index of the atom to return.
     # 
     # \return A reference to the atom at the specified index. 
     # 
@@ -43,54 +43,58 @@ class AtomContainer(Entity3DContainer):
     def getAtom(idx: int) -> Atom: pass
 
     ##
-    # \brief Tells whether the specified Chem.Atom instance is stored in this container.
+    # \brief Tells whether the specified atom is part of the atom sequence.
     # 
-    # \param atom The Chem.Atom instance to look for.
+    # \param atom The atom to look for.
     # 
-    # \return <tt>True</tt> if <em>atom</em> is stored in the container, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if <em>atom</em> is part of the sequence, and <tt>False</tt> otherwise.
     # 
     def containsAtom(atom: Atom) -> bool: pass
 
     ##
-    # \brief Returns the index of the specified Chem.Atom instance in this container.
+    # \brief Returns the index of the specified atom.
     # 
-    # \param atom The Chem.Atom instance for which to return the index.
+    # \param atom The atom for which to return the index.
     # 
-    # \return The zero-based index of the specified Chem.Atom instance. 
+    # \return The zero-based index of the specified atom. 
     # 
-    # \throw Base.ItemNotFound if the specified Chem.Atom instance could not be found.
+    # \throw Base.ItemNotFound if the specified atom could not be found.
     # 
     def getAtomIndex(atom: Atom) -> int: pass
 
     ##
-    # \brief Returns the number of stored Chem.Atom objects.
+    # \brief Returns the number of atoms.
     # 
-    # \return The number of stored Chem.Atom objects.
+    # \return The number of atoms.
     # 
     def getNumAtoms() -> int: pass
 
     ##
-    # \brief Orders the stored atoms according to criteria implemented by the provided atom comparison function.
+    # \brief Orders the atoms according to criteria implemented by the provided atom comparison function.
     # 
     # \param func The atom comparison function implementing the applied ordering criteria.
     # 
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief Returns a reference to the Chem.Entity3D instance at index <em>idx</em> (equivalent to getAtom(idx)).
+    # \brief Returns a reference to the entity at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the Chem.Entity3D instance to return.
+    # Forwards to getAtom() and exists to satisfy the Chem.Entity3DContainer interface.
     # 
-    # \return A reference to the Chem.Entity3D instance at the specified index. 
+    # \param idx The zero-based entity index.
+    # 
+    # \return A reference to the entity at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
     def getEntity(idx: int) -> Entity3D: pass
 
     ##
-    # \brief Returns the number of stored Chem.Entity3D objects (equivalent to getNumAtoms()).
+    # \brief Returns the number of stored Chem.Entity3D objects.
     # 
-    # \return The number of stored Chem.Entity3D objects.
+    # Forwards to getNumAtoms() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \return The number of contained atoms.
     # 
     def getNumEntities() -> int: pass
 

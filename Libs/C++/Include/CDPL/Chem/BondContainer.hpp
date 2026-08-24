@@ -68,22 +68,22 @@ namespace CDPL
             typedef Util::IndexedElementIterator<Bond, BondAccessor> BondIterator;
 
             /**
-             * \brief Returns the number of stored Chem::Bond objects.
-             * \return The number of stored Chem::Bond objects.
+             * \brief Returns the number of bonds.
+             * \return The number of bonds.
              */
             virtual std::size_t getNumBonds() const = 0;
 
             /**
-             * \brief Returns a \c const reference to the Chem::Bond instance at index \a idx.
-             * \param idx The zero-based index of the Chem::Bond instance to return.
-             * \return A \c const reference to the Chem::Bond instance at the specified index.
+             * \brief Returns a \c const reference to the bond at index \a idx.
+             * \param idx The zero-based index of the bond to return.
+             * \return A \c const reference to the bond at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
             virtual const Bond& getBond(std::size_t idx) const = 0;
 
             /**
              * \brief Returns a non-\c const reference to the bond at index \a idx.
-             * \param idx The zero-based index of the Chem::Bond instance to return.
+             * \param idx The zero-based index of the bond to return.
              * \return A non-\c const reference to the bond at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
              */
@@ -138,22 +138,22 @@ namespace CDPL
             BondIterator end();
 
             /**
-             * \brief Tells whether the specified Chem::Bond instance is stored in this container.
-             * \param bond The Chem::Bond instance to look for.
-             * \return \c true if \a bond is stored in the container, and \c false otherwise.
+             * \brief Tells whether the specified bond is part of the bond sequence.
+             * \param bond The bond to look for.
+             * \return \c true if \a bond is part of the sequence, and \c false otherwise.
              */
             virtual bool containsBond(const Bond& bond) const = 0;
 
             /**
-             * \brief Returns the index of the specified Chem::Bond instance in this container.
-             * \param bond The Chem::Bond instance for which to return the index.
-             * \return The zero-based index of the specified Chem::Bond instance.
-             * \throw Base::ItemNotFound if the specified Chem::Bond instance could not be found.
+             * \brief Returns the index of the specified bond.
+             * \param bond The bond for which to return the index.
+             * \return The zero-based index of the specified bond.
+             * \throw Base::ItemNotFound if the specified bond could not be found.
              */
             virtual std::size_t getBondIndex(const Bond& bond) const = 0;
 
             /**
-              * \brief Orders the stored bonds according to criteria implemented by the provided bond comparison function.
+              * \brief Orders the bonds according to criteria implemented by the provided bond comparison function.
               * \param func The bond comparison function implementing the applied ordering criteria.
               */
             virtual void orderBonds(const BondCompareFunction& func) = 0;
@@ -183,8 +183,9 @@ namespace CDPL
             virtual ~BondContainer() {}
 
             /**
-             * \brief Assignment operator.
-             * \param cntnr The other container to copy.
+             * \brief Replaces the current set of properties by a copy of the
+             *        properties of the container \a cntnr.
+             * \param cntnr The container to copy.
              * \return A reference to itself.
              */
             BondContainer& operator=(const BondContainer& cntnr);

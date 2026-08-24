@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Concrete Chem.Atom implementation used as the atom type of Chem.BasicMolecule.
+# \brief Default implementation of the Chem.Atom interface.
 # 
-# Stores its own incident-bond list and provides constant-time access to neighbor atoms and bonds via the inherited Chem.Atom interface. <tt>BasicAtom</tt> instances are owned by a Chem.BasicMolecule and are not constructed directly by client code; use Chem.BasicMolecule.addAtom() instead.
+# Provides constant-time access to connected atoms and incident bonds via the inherited Chem.Atom interface. <tt>BasicAtom</tt> instances are created, owned and managed exclusively by a Chem.BasicMolecule instance.
 # 
 class BasicAtom(Atom):
 

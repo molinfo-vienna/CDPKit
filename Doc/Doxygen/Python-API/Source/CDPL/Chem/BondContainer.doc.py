@@ -34,7 +34,7 @@ class BondContainer(Boost.Python.instance):
     ##
     # \brief Returns a reference to the bond at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the Chem.Bond instance to return.
+    # \param idx The zero-based index of the bond to return.
     # 
     # \return A reference to the bond at the specified index. 
     # 
@@ -43,36 +43,36 @@ class BondContainer(Boost.Python.instance):
     def getBond(idx: int) -> Bond: pass
 
     ##
-    # \brief Tells whether the specified Chem.Bond instance is stored in this container.
+    # \brief Tells whether the specified bond is part of the bond sequence.
     # 
-    # \param bond The Chem.Bond instance to look for.
+    # \param bond The bond to look for.
     # 
-    # \return <tt>True</tt> if <em>bond</em> is stored in the container, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if <em>bond</em> is part of the sequence, and <tt>False</tt> otherwise.
     # 
     def containsBond(bond: Bond) -> bool: pass
 
     ##
-    # \brief Orders the stored bonds according to criteria implemented by the provided bond comparison function.
+    # \brief Orders the bonds according to criteria implemented by the provided bond comparison function.
     # 
     # \param func The bond comparison function implementing the applied ordering criteria.
     # 
     def orderBonds(func: BoolBond2Functor) -> None: pass
 
     ##
-    # \brief Returns the index of the specified Chem.Bond instance in this container.
+    # \brief Returns the index of the specified bond.
     # 
-    # \param bond The Chem.Bond instance for which to return the index.
+    # \param bond The bond for which to return the index.
     # 
-    # \return The zero-based index of the specified Chem.Bond instance. 
+    # \return The zero-based index of the specified bond. 
     # 
-    # \throw Base.ItemNotFound if the specified Chem.Bond instance could not be found.
+    # \throw Base.ItemNotFound if the specified bond could not be found.
     # 
     def getBondIndex(bond: Bond) -> int: pass
 
     ##
-    # \brief Returns the number of stored Chem.Bond objects.
+    # \brief Returns the number of bonds.
     # 
-    # \return The number of stored Chem.Bond objects.
+    # \return The number of bonds.
     # 
     def getNumBonds() -> int: pass
 

@@ -69,22 +69,22 @@ namespace CDPL
             typedef Util::IndexedElementIterator<Atom, AtomAccessor> AtomIterator;
 
             /**
-             * \brief Returns the number of stored Chem::Atom objects.
-             * \return The number of stored Chem::Atom objects.
+             * \brief Returns the number of atoms
+             * \return The number of atoms.
              */
             virtual std::size_t getNumAtoms() const = 0;
 
             /**
-             * \brief Returns a \c const reference to the Chem::Atom instance at index \a idx.
-             * \param idx The zero-based index of the Chem::Atom instance to return.
-             * \return A \c const reference to the Chem::Atom instance at the specified index.
+             * \brief Returns a \c const reference to the atom at index \a idx.
+             * \param idx The zero-based index of the atom to return.
+             * \return A \c const reference to the atom at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
             virtual const Atom& getAtom(std::size_t idx) const = 0;
 
             /**
              * \brief Returns a non-\c const reference to the atom at index \a idx.
-             * \param idx The zero-based index of the Chem::Atom instance to return.
+             * \param idx The zero-based index of the atom to return.
              * \return A non-\c const reference to the atom at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
@@ -139,44 +139,53 @@ namespace CDPL
             AtomIterator end();
 
             /**
-             * \brief Tells whether the specified Chem::Atom instance is stored in this container.
-             * \param atom The Chem::Atom instance to look for.
-             * \return \c true if \a atom is stored in the container, and \c false otherwise.
+             * \brief Tells whether the specified atom is part of the atom sequence.
+             * \param atom The atom to look for.
+             * \return \c true if \a atom is part of the sequence, and \c false otherwise.
              */
             virtual bool containsAtom(const Atom& atom) const = 0;
 
             /**
-             * \brief Returns the index of the specified Chem::Atom instance in this container.
-             * \param atom The Chem::Atom instance for which to return the index.
-             * \return The zero-based index of the specified Chem::Atom instance.
-             * \throw Base::ItemNotFound if the specified Chem::Atom instance could not be found.
+             * \brief Returns the index of the specified atom.
+             * \param atom The atom for which to return the index.
+             * \return The zero-based index of the specified atom.
+             * \throw Base::ItemNotFound if the specified atom could not be found.
              */
             virtual std::size_t getAtomIndex(const Atom& atom) const = 0;
 
             /**
-             * \brief Returns the number of stored Chem::Entity3D objects (equivalent to getNumAtoms()).
-             * \return The number of stored Chem::Entity3D objects.
+             * \brief Returns the number of stored Chem::Entity3D objects.
+             *
+             * Forwards to getNumAtoms() and exists to satisfy the Chem::Entity3DContainer interface.
+             *
+             * \return The number of contained atoms.
              */
             virtual std::size_t getNumEntities() const;
 
             /**
-             * \brief Returns a \c const reference to the Chem::Entity3D instance at index \a idx (equivalent to getAtom(idx)).
-             * \param idx The zero-based index of the Chem::Entity3D instance to return.
-             * \return A \c const reference to the Chem::Entity3D instance at the specified index.
+             * \brief Returns a \c const reference to the entity at index \a idx.
+             *
+             * Forwards to getAtom() and exists to satisfy the Chem::Entity3DContainer interface.
+             *
+             * \param idx The zero-based entity index.
+             * \return A \c const reference to the entity at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
-            virtual const Entity3D& getEntity(std::size_t idx) const;
+            virtual const Chem::Entity3D& getEntity(std::size_t idx) const;
 
             /**
-             * \brief Returns a non-\c const reference to the Chem::Entity3D instance at index \a idx (equivalent to getAtom(idx)).
-             * \param idx The zero-based index of the Chem::Entity3D instance to return.
-             * \return A non-\c const reference to the Chem::Entity3D instance at the specified index.
+             * \brief Returns a non-\c const reference to the entity at index \a idx.
+             *
+             * Forwards to getAtom() and exists to satisfy the Chem::Entity3DContainer interface.
+             *
+             * \param idx The zero-based entity index.
+             * \return A non-\c const reference to the entity at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
              */
-            virtual Entity3D& getEntity(std::size_t idx);
+            virtual Chem::Entity3D& getEntity(std::size_t idx);
 
             /**
-             * \brief Orders the stored atoms according to criteria implemented by the provided atom comparison function.
+             * \brief Orders the atoms according to criteria implemented by the provided atom comparison function.
              * \param func The atom comparison function implementing the applied ordering criteria.
              */
             virtual void orderAtoms(const AtomCompareFunction& func) = 0;
@@ -206,8 +215,9 @@ namespace CDPL
             virtual ~AtomContainer() {}
 
             /**
-             * \brief Assignment operator.
-             * \param cntnr The other container to copy.
+             * \brief Replaces the current set of properties by a copy of the
+             *        properties of the container \a cntnr.
+             * \param cntnr The container to copy.
              * \return A reference to itself.
              */
             AtomContainer& operator=(const AtomContainer& cntnr);

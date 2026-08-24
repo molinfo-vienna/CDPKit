@@ -49,7 +49,8 @@ namespace CDPL
          * \c %Atom combines the per-atom property storage inherited from Chem::Entity3D (and via it
          * Base::PropertyContainer) with two adjacency views: a Chem::AtomContainer over the connected
          * neighbor atoms and a Chem::BondContainer over the incident bonds, in matching order. Concrete
-         * implementations (Chem::BasicAtom) are owned by their parent molecule.
+         * implementation (Chem::BasicAtom) instances are created, owned and managed by a parent Chem::Molecule
+         * instance.
          */
         class CDPL_CHEM_API Atom : public AtomContainer,
                                    public BondContainer,
@@ -58,22 +59,22 @@ namespace CDPL
 
           public:
             /**
-             * \brief A mutable random access iterator used to iterate over the connected atoms.
+             * \brief A mutable random access iterator used to iterate over the connected Chem::Atom objects.
              */
             typedef AtomContainer::AtomIterator AtomIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the connected atoms.
+             * \brief A constant random access iterator used to iterate over the connected \c const Chem::Atom objects.
              */
             typedef AtomContainer::ConstAtomIterator ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the incident bonds.
+             * \brief A mutable random access iterator used to iterate over the incident Chem::Bond objects.
              */
             typedef BondContainer::BondIterator BondIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the incident bonds.
+             * \brief A constant random access iterator used to iterate over the incident \c const Chem::Bond objects.
              */
             typedef BondContainer::ConstBondIterator ConstBondIterator;
 
@@ -96,33 +97,33 @@ namespace CDPL
             virtual Molecule& getMolecule() = 0;
 
             /**
-             * \brief Returns a \c const reference to the Chem::Bond object that connects this atom to the argument atom.
+             * \brief Returns a \c const reference to the bond that connects this atom to the argument atom.
              * \param atom The adjacent atom for which to return the connecting bond.
-             * \return A \c const reference to the Chem::Bond object connecting this atom and the argument atom.
+             * \return A \c const reference to the bond connecting this atom and the argument atom.
              * \throw Base::ItemNotFound if the argument atom is not connected to this atom. 
              */
             virtual const Bond& getBondToAtom(const Atom& atom) const = 0;
 
             /**
-             * \brief Returns a non-\c const reference to the Chem::Bond object that connects this atom to the argument atom.
+             * \brief Returns a non-\c const reference to the bond that connects this atom to the argument atom.
              * \param atom The adjacent atom for which to return the connecting bond.
-             * \return A non-\c const reference to the Chem::Bond object connecting this atom and the argument atom.
+             * \return A non-\c const reference to the bond connecting this atom and the argument atom.
              * \throw Base::ItemNotFound if the argument atom is not connected to this atom. 
              */
             virtual Bond& getBondToAtom(const Atom& atom) = 0;
 
             /**
-             * \brief Returns a pointer to the \c const Chem::Bond object that connects this atom to the argument atom.
+             * \brief Returns a pointer to the \c const bond that connects this atom to the argument atom.
              * \param atom The adjacent atom for which to return a pointer to the connecting bond.
-             * \return A pointer to the \c const Chem::Bond object that connects this atom to the argument atom, or \c nullptr
+             * \return A pointer to the \c const bond that connects this atom to the argument atom, or \c nullptr
              *         if the argument atom is not connected.
              */
             virtual const Bond* findBondToAtom(const Atom& atom) const = 0;
 
             /**
-             * \brief Returns a pointer to the non-\c const Chem::Bond object that connects this atom to the argument atom.
+             * \brief Returns a pointer to the non-\c const bond that connects this atom to the argument atom.
              * \param atom The adjacent atom for which to return a pointer to the connecting bond.
-             * \return A pointer to the non-\c const Chem::Bond object that connects this atom to the argument atom, or \c nullptr
+             * \return A pointer to the non-\c const bond that connects this atom to the argument atom, or \c nullptr
              *         if the argument atom is not connected.
              */
             virtual Bond* findBondToAtom(const Atom& atom) = 0;
@@ -188,7 +189,7 @@ namespace CDPL
             virtual Atom& getAtom(std::size_t idx) = 0;
 
             /**
-             * \brief Tells whether this atom and the argument atom are connected by a bond.
+             * \brief Tells whether this atom and the specified atom are connected by a bond.
              * \param atom The atom to test for adjacency.
              * \return \c true if the argument atom is connected to this atom, and \c false otherwise.
              */

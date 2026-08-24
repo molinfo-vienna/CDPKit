@@ -47,8 +47,10 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief Abstract base class for containers holding a sequence of Pharm::Feature objects with associated
-         *        properties (e.g. a pharmacophore or feature set).
+         * \brief Common interface for data structures that support a random access to stored Pharm::Feature instances.
+         *
+         * Implementations have to guarantee that a given Pharm::Feature object is stored only once and its index is unique amongst
+         * all contained Pharm::Feature instances. Otherwise algorithms that rely on this behaviour may not work correctly!
          */
         class CDPL_PHARM_API FeatureContainer : public Chem::Entity3DContainer,
                                                 public Base::PropertyContainer
@@ -79,7 +81,7 @@ namespace CDPL
             virtual ~FeatureContainer() {}
 
             /**
-             * \brief Returns the number of contained features.
+             * \brief Returns the number of features.
              * \return The number of features.
              */
             virtual std::size_t getNumFeatures() const = 0;
@@ -93,7 +95,7 @@ namespace CDPL
             virtual const Feature& getFeature(std::size_t idx) const = 0;
 
             /**
-             * \brief Returns a non-\c const reference to the pharmacophore feature at index \a idx.
+             * \brief Returns a non-\c const reference to the feature at index \a idx.
              * \param idx The zero-based index of the feature to return.
              * \return A non-\c const reference to the feature at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
@@ -102,16 +104,16 @@ namespace CDPL
 
             /**
              * \brief Returns the index of the specified feature.
-             * \param feature The feature instance for which to return the index.
-             * \return The zero-based index of the specified feature instance.
-             * \throw Base::ItemNotFound if the specified feature instance could not be found.
+             * \param feature The feature for which to return the index.
+             * \return The zero-based index of the specified feature.
+             * \throw Base::ItemNotFound if the specified feature could not be found.
              */
             virtual std::size_t getFeatureIndex(const Feature& feature) const = 0;
 
             /**
-             * \brief Tells whether the specified feature instance is stored in this pharmacophore.
+             * \brief Tells whether the specified feature is part of the feature set.
              * \param feature The feature to look for.
-             * \return \c true if \a feature is stored in the pharmacophore, and \c false otherwise.
+             * \return \c true if \a feature is part of the set, and \c false otherwise.
              */
             virtual bool containsFeature(const Feature& feature) const = 0;
 
@@ -164,13 +166,13 @@ namespace CDPL
             FeatureIterator end();
 
             /**
-             * \brief Orders the stored features according to criteria implemented by the provided feature comparison function.
+             * \brief Orders the features according to criteria implemented by the provided feature comparison function.
              * \param func The feature comparison function implementing the applied ordering criteria.
              */
             virtual void orderFeatures(const FeatureCompareFunction& func) = 0;
 
             /**
-             * \brief Returns the number of stored Chem::Entity3D objects.
+             * \brief Returns the number of entities.
              *
              * Forwards to getNumFeatures() and exists to satisfy the Chem::Entity3DContainer interface.
              *
@@ -179,7 +181,7 @@ namespace CDPL
             virtual std::size_t getNumEntities() const;
 
             /**
-             * \brief Returns a \c const reference to the Chem::Entity3D at index \a idx.
+             * \brief Returns a \c const reference to the entity at index \a idx.
              *
              * Forwards to getFeature() and exists to satisfy the Chem::Entity3DContainer interface.
              *
@@ -190,7 +192,7 @@ namespace CDPL
             virtual const Chem::Entity3D& getEntity(std::size_t idx) const;
 
             /**
-             * \brief Returns a non-\c const reference to the Chem::Entity3D at index \a idx.
+             * \brief Returns a non-\c const reference to the entity at index \a idx.
              *
              * Forwards to getFeature() and exists to satisfy the Chem::Entity3DContainer interface.
              *

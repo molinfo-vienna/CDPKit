@@ -79,20 +79,20 @@ namespace CDPL
 
             /**
              * \brief Constructs a \c %BasicPharmacophore instance that is a copy of the pharmacophore \a pharm.
-             * \param pharm The other pharmacophore instance to copy.
+             * \param pharm The other pharmacophore to copy.
              */
             BasicPharmacophore(const BasicPharmacophore& pharm);
 
             /**
              * \brief Constructs a \c %BasicPharmacophore instance that is a copy of the pharmacophore \a pharm.
-             * \param pharm The other pharmacophore instance to copy.
+             * \param pharm The other pharmacophore to copy.
              */
             BasicPharmacophore(const Pharmacophore& pharm);
 
             /**
              * \brief Constructs a \c %BasicPharmacophore instance with copies of the features 
-             *        provided by the feature container \a cntnr.
-             * \param cntnr The feature container providing the features to copy.
+             *        and properties provided by the feature container \a cntnr.
+             * \param cntnr The feature container providing the features and properties to copy.
              */
             explicit BasicPharmacophore(const FeatureContainer& cntnr);
 

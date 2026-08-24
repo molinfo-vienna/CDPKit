@@ -67,22 +67,22 @@ namespace CDPL
             typedef Util::IndexedElementIterator<Entity3D, EntityAccessor> EntityIterator;
 
             /**
-             * \brief Returns the number of stored Chem::Entity3D objects.
-             * \return The number of stored Chem::Entity3D objects.
+             * \brief Returns the number of entities.
+             * \return The number of entities.
              */
             virtual std::size_t getNumEntities() const = 0;
 
             /**
-             * \brief Returns a \c const reference to the Chem::Entity3D instance at index \a idx.
-             * \param idx The zero-based index of the Chem::Entity3D instance to return.
-             * \return A \c const reference to the Chem::Entity3D instance at the specified index.
+             * \brief Returns a \c const reference to the entity at index \a idx.
+             * \param idx The zero-based index of the entity to return.
+             * \return A \c const reference to the entity at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumEntities()).
              */
             virtual const Entity3D& getEntity(std::size_t idx) const = 0;
 
             /**
              * \brief Returns a non-\c const reference to the entity at index \a idx.
-             * \param idx The zero-based index of the Chem::Entity3D instance to return.
+             * \param idx The zero-based index of the entity to return.
              * \return A non-\c const reference to the entity at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumEntities()).
              */

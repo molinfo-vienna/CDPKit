@@ -41,7 +41,7 @@ class FeatureSet(FeatureContainer):
     ##
     # \brief Constructs a <tt>FeatureSet</tt> instance storing the features and properties of the feature container <em>cntnr</em>.
     # 
-    # \param cntnr The Pharm.FeatureContainer instance providing the features and properties to store.
+    # \param cntnr The feature container providing the features and properties to store.
     # 
     def __init__(cntnr: FeatureContainer) -> None: pass
 
@@ -57,7 +57,7 @@ class FeatureSet(FeatureContainer):
     ##
     # \brief Replaces the current set of features and properties by the features and properties of the feature container <em>cntnr</em>.
     # 
-    # \param cntnr The Pharm.FeatureContainer instance providing the features and properties to copy.
+    # \param cntnr The feature container providing the features and properties to copy.
     # 
     # \return \a self
     # 
@@ -66,11 +66,11 @@ class FeatureSet(FeatureContainer):
     ##
     # \brief Extends the feature set by the specified feature.
     # 
-    # \param ftr The feature to add.
+    # \param feature The feature to add.
     # 
     # \return <tt>True</tt> if the feature was not already a part of the feature set, and <tt>False</tt> otherwise.
     # 
-    def addFeature(ftr: Feature) -> bool: pass
+    def addFeature(feature: Feature) -> bool: pass
 
     ##
     # \brief Removes the feature at the specified index.
@@ -84,11 +84,11 @@ class FeatureSet(FeatureContainer):
     ##
     # \brief Removes the specified feature.
     # 
-    # \param ftr The feature to remove.
+    # \param feature The feature to remove.
     # 
     # \return <tt>True</tt> if the feature was part of the feature set and has been removed, and <tt>False</tt> otherwise.
     # 
-    def removeFeature(ftr: Feature) -> bool: pass
+    def removeFeature(feature: Feature) -> bool: pass
 
     ##
     # \brief Removes all features and properties.
@@ -117,11 +117,11 @@ class FeatureSet(FeatureContainer):
     def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param ftr The value to test for membership.
+    # \brief Returns the result of the membership test operation <tt>feature in self</tt>.
+    # \param feature The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(ftr: Feature) -> bool: pass
+    def __contains__(feature: Feature) -> bool: pass
 
     ##
     # \brief 
@@ -146,7 +146,7 @@ class FeatureSet(FeatureContainer):
     ##
     # \brief Extends the current set of features by the features in the feature container <em>cntnr</em>.
     # 
-    # \param cntnr The Pharm.FeatureContainer instance providing the features to append.
+    # \param cntnr The feature container providing the features to append.
     # 
     # \return \a self 
     # 
@@ -157,7 +157,7 @@ class FeatureSet(FeatureContainer):
     ##
     # \brief Removes the pharmacophore features referenced by the feature container <em>cntnr</em> from this <tt>FeatureSet</tt> instance.
     # 
-    # \param cntnr The Pharm.FeatureContainer instance providing the features to remove.
+    # \param cntnr The feature container providing the features to remove.
     # 
     # \return \a self 
     # 

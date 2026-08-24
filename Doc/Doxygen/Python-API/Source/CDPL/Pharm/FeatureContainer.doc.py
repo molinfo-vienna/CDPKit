@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Abstract base class for containers holding a sequence of Pharm.Feature objects with associated properties (e.g. a pharmacophore or feature set).
+# \brief Common interface for data structures that support a random access to stored Pharm.Feature instances.
+# 
+# Implementations have to guarantee that a given Pharm.Feature object is stored only once and its index is unique amongst all contained Pharm.Feature instances. Otherwise algorithms that rely on this behaviour may not work correctly!
 # 
 class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
 
@@ -30,7 +32,7 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the pharmacophore feature at index <em>idx</em>.
+    # \brief Returns a reference to the feature at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the feature to return.
     # 
@@ -41,35 +43,41 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def getFeature(idx: int) -> Feature: pass
 
     ##
-    # \brief 
-    # \param ftr 
-    # \return 
-    #
-    def containsFeature(ftr: Feature) -> bool: pass
+    # \brief Tells whether the specified feature is part of the feature set.
+    # 
+    # \param feature The feature to look for.
+    # 
+    # \return <tt>True</tt> if <em>feature</em> is part of the set, and <tt>False</tt> otherwise.
+    # 
+    def containsFeature(feature: Feature) -> bool: pass
 
     ##
-    # \brief 
-    # \param ftr 
-    # \return 
-    #
-    def getFeatureIndex(ftr: Feature) -> int: pass
+    # \brief Returns the index of the specified feature.
+    # 
+    # \param feature The feature for which to return the index.
+    # 
+    # \return The zero-based index of the specified feature. 
+    # 
+    # \throw Base.ItemNotFound if the specified feature could not be found.
+    # 
+    def getFeatureIndex(feature: Feature) -> int: pass
 
     ##
-    # \brief Returns the number of contained features.
+    # \brief Returns the number of features.
     # 
     # \return The number of features.
     # 
     def getNumFeatures() -> int: pass
 
     ##
-    # \brief Orders the stored features according to criteria implemented by the provided feature comparison function.
+    # \brief Orders the features according to criteria implemented by the provided feature comparison function.
     # 
     # \param func The feature comparison function implementing the applied ordering criteria.
     # 
     def orderFeatures(func: BoolFeature2Functor) -> None: pass
 
     ##
-    # \brief Returns a reference to the Chem.Entity3D at index <em>idx</em>.
+    # \brief Returns a reference to the entity at index <em>idx</em>.
     # 
     # Forwards to getFeature() and exists to satisfy the Chem.Entity3DContainer interface.
     # 
@@ -82,7 +90,7 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def getEntity(idx: int) -> Chem.Entity3D: pass
 
     ##
-    # \brief Returns the number of stored Chem.Entity3D objects.
+    # \brief Returns the number of entities.
     # 
     # Forwards to getNumFeatures() and exists to satisfy the Chem.Entity3DContainer interface.
     # 
@@ -112,11 +120,11 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param ftr The value to test for membership.
+    # \brief Returns the result of the membership test operation <tt>feature in self</tt>.
+    # \param feature The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(ftr: Feature) -> bool: pass
+    def __contains__(feature: Feature) -> bool: pass
 
     ##
     # \brief 

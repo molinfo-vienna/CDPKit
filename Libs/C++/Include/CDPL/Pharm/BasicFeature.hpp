@@ -42,7 +42,9 @@ namespace CDPL
         class BasicPharmacophore;
 
         /**
-         * \brief Pharm::Feature implementation owned by a Pharm::BasicPharmacophore parent.
+         * \brief Default implementation of the Pharm::Feature interface.
+         *
+         * \c %BasicFeature instances are created, owned and managed by a Pharm::BasicPharmacophore instance.
          */
         class CDPL_PHARM_API BasicFeature : public Feature
         {
@@ -50,22 +52,10 @@ namespace CDPL
             friend class BasicPharmacophore;
 
           public:
-            /**
-             * \brief Returns the parent Pharm::BasicPharmacophore that owns this feature.
-             * \return A \c const reference to the parent pharmacophore.
-             */
             const Pharmacophore& getPharmacophore() const;
 
-            /**
-             * \brief Returns the parent Pharm::BasicPharmacophore that owns this feature.
-             * \return A reference to the parent pharmacophore.
-             */
             Pharmacophore& getPharmacophore();
 
-            /**
-             * \brief Returns the zero-based index of this feature within its parent pharmacophore.
-             * \return The feature index.
-             */
             std::size_t getIndex() const;
 
             /**

@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Pharm.Feature implementation owned by a Pharm.BasicPharmacophore parent.
+# \brief Default implementation of the Pharm.Feature interface.
+# 
+# <tt>BasicFeature</tt> instances are created, owned and managed by a Pharm.BasicPharmacophore instance.
 # 
 class BasicFeature(Feature):
 

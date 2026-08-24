@@ -34,7 +34,7 @@ class Entity3DContainer(Boost.Python.instance):
     ##
     # \brief Returns a reference to the entity at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the Chem.Entity3D instance to return.
+    # \param idx The zero-based index of the entity to return.
     # 
     # \return A reference to the entity at the specified index. 
     # 
@@ -43,9 +43,9 @@ class Entity3DContainer(Boost.Python.instance):
     def getEntity(idx: int) -> Entity3D: pass
 
     ##
-    # \brief Returns the number of stored Chem.Entity3D objects.
+    # \brief Returns the number of entities.
     # 
-    # \return The number of stored Chem.Entity3D objects.
+    # \return The number of entities.
     # 
     def getNumEntities() -> int: pass
 

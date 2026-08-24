@@ -47,7 +47,7 @@ namespace CDPL
          *
          * \c %Bond combines the per-bond property storage inherited from Base::PropertyContainer with a
          * fixed-size (always two atoms) Chem::AtomContainer interface that yields the bond's begin and end atoms.
-         * Concrete implementations (Chem::BasicBond) are owned by their parent molecule.
+         * Concrete implementation (Chem::BasicBond) instances are created, owned and managed by a parent Chem::Molecule instance.
          */
         class CDPL_CHEM_API Bond : public AtomContainer,
                                    public Base::PropertyContainer
@@ -55,12 +55,12 @@ namespace CDPL
 
           public:
             /**            
-             * \brief A mutable random access iterator used to iterate over the connected atoms.
+             * \brief A mutable random access iterator used to iterate over the connected Chem::Atom objects.
              */
             typedef AtomContainer::AtomIterator AtomIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the connected atoms.
+             * \brief A constant random access iterator used to iterate over the connected const Chem::Atom objects.
              */
             typedef AtomContainer::ConstAtomIterator ConstAtomIterator;
 
@@ -81,24 +81,36 @@ namespace CDPL
 
             /**
              * \brief Returns a \c const reference to the start atom of the bond.
+             *
+             * Equivalent to calling <tt>getAtom(0)</tt>.
+             *
              * \return A \c const reference to the start atom of the bond.
              */
             virtual const Atom& getBegin() const = 0;
 
             /**
              * \brief Returns a non-\c const reference to the start atom of the bond.
+             *
+             * Equivalent to calling <tt>getAtom(0)</tt>.
+             *
              * \return A non-\c const reference to the start atom of the bond.
              */
             virtual Atom& getBegin() = 0;
 
             /**
              * \brief Returns a \c const reference to the end atom of the bond.
+             *
+             * Equivalent to calling <tt>getAtom(1)</tt>.
+             *
              * \return A \c const reference to the end atom of the bond.
              */
             virtual const Atom& getEnd() const = 0;
 
             /**
              * \brief Returns a non-\c const reference to the end atom of the bond.
+             *
+             * Equivalent to calling <tt>getAtom(1)</tt>.
+             *
              * \return A non-\c const reference to the end atom of the bond.
              */
             virtual Atom& getEnd() = 0;

@@ -423,6 +423,11 @@ ORMatch % ORReactionMatch
 NOTReactionMatch % NOTMatch
 NOTMatch % NOTReactionMatch
 
+Chem.Atom % Chem.AtomContainer
+Chem.Atom % Chem.BondContainer
+
+Chem.Bond % Chem.AtomContainer
+
 #
 # --- CDPL.Pharm package ---
 #
@@ -486,6 +491,8 @@ Pharm.CompoundPharmacophoreReader % Util.CompoundDataReader
 Pharm.FeatureTypeHistogram. % Util.Map.
 
 Pharm.FeatureMapping. % Util.MultiMap.
+
+Pharm.Pharmacophore. % Pharm.FeatureContainer.
 
 #
 # --- CDPL.Grid package ---

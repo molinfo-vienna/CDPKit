@@ -64,10 +64,10 @@ namespace CDPL
 
             /**
              * \brief Assignment operator.
-             * \param cntnr The \c %Entity3D instance to copy.
+             * \param entity The \c %Entity3D instance to copy.
              * \return A reference to itself.
              */
-            Entity3D& operator=(const Entity3D& cntnr);
+            Entity3D& operator=(const Entity3D& entity);
         };
     } // namespace Chem
 } // namespace CDPL

@@ -22,7 +22,7 @@
 ##
 # \brief Abstract base class representing a chemical atom and its bonded neighborhood.
 # 
-# <tt>Atom</tt> combines the per-atom property storage inherited from Chem.Entity3D (and via it Base.PropertyContainer) with two adjacency views: a Chem.AtomContainer over the connected neighbor atoms and a Chem.BondContainer over the incident bonds, in matching order. Concrete implementations (Chem.BasicAtom) are owned by their parent molecule.
+# <tt>Atom</tt> combines the per-atom property storage inherited from Chem.Entity3D (and via it Base.PropertyContainer) with two adjacency views: a Chem.AtomContainer over the connected neighbor atoms and a Chem.BondContainer over the incident bonds, in matching order. Concrete implementation (Chem.BasicAtom) instances are created, owned and managed by a parent Chem.Molecule instance.
 # 
 class Atom(AtomContainer, BondContainer, Entity3D):
 
@@ -89,22 +89,22 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getMolecule() -> Molecule: pass
 
     ##
-    # \brief Returns a reference to the Chem.Bond object that connects this atom to the argument atom.
+    # \brief Returns a reference to the bond that connects this atom to the argument atom.
     # 
     # \param atom The adjacent atom for which to return the connecting bond.
     # 
-    # \return A reference to the Chem.Bond object connecting this atom and the argument atom. 
+    # \return A reference to the bond connecting this atom and the argument atom. 
     # 
     # \throw Base.ItemNotFound if the argument atom is not connected to this atom.
     # 
     def getBondToAtom(atom: Atom) -> Bond: pass
 
     ##
-    # \brief Returns a reference to the Chem.Bond object that connects this atom to the argument atom.
+    # \brief Returns a reference to the bond that connects this atom to the argument atom.
     # 
     # \param atom The adjacent atom for which to return a reference to the connecting bond.
     # 
-    # \return A reference to the Chem.Bond object that connects this atom to the argument atom, or <tt>None</tt> if the argument atom is not connected.
+    # \return A reference to the bond that connects this atom to the argument atom, or <tt>None</tt> if the argument atom is not connected.
     # 
     def findBondToAtom(atom: Atom) -> Bond: pass
 
@@ -125,9 +125,10 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def assign(atom: Atom) -> Atom: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to itself.
+    # 
+    # \return \a self
+    # 
     def getAtoms() -> AtomSequence: pass
 
     ##
@@ -150,7 +151,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getAtom(idx: int) -> Atom: pass
 
     ##
-    # \brief Tells whether this atom and the argument atom are connected by a bond.
+    # \brief Tells whether this atom and the specified atom are connected by a bond.
     # 
     # \param atom The atom to test for adjacency.
     # 
@@ -179,22 +180,32 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getNumAtoms() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Orders the atoms according to criteria implemented by the provided atom comparison function.
+    # 
+    # \param func The atom comparison function implementing the applied ordering criteria.
+    # 
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # 
+    # Forwards to getAtom() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \param idx The zero-based entity index.
+    # 
+    # \return A reference to the entity at the specified index. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
+    # 
     def getEntity(idx: int) -> Entity3D: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored Chem.Entity3D objects.
+    # 
+    # Forwards to getNumAtoms() and exists to satisfy the Chem.Entity3DContainer interface.
+    # 
+    # \return The number of contained atoms.
+    # 
     def getNumEntities() -> int: pass
 
     ##

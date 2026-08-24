@@ -85,7 +85,7 @@ namespace CDPL
 
             /**
              * \brief Constructs a \c %FeatureSet instance storing the features and properties of the feature container \a cntnr.
-             * \param cntnr The Pharm::FeatureContainer instance providing the features and properties to store.
+             * \param cntnr The feature container providing the features and properties to store.
              */
             explicit FeatureSet(const FeatureContainer& cntnr);
 
@@ -96,26 +96,11 @@ namespace CDPL
              */
             ~FeatureSet();
 
-            /**
-             * \brief Returns the number of features.
-             * \return The number of features.
-             */
             std::size_t getNumFeatures() const;
 
-            /**
-             * \brief Tells whether the specified feature is part of this feature set.
-             * \param ftr The feature to look for.
-             * \return \c true if \a ftr is part of this feature set, and \c false otherwise.
-             */
-            bool containsFeature(const Feature& ftr) const;
+            bool containsFeature(const Feature& feature) const;
 
-            /**
-             * \brief Returns the index of the specified feature.
-             * \param ftr The feature for which to return the index.
-             * \return The zero-based index of the specified feature.
-             * \throw Base::ItemNotFound if the specified feature is not part of the feature set.
-             */
-            std::size_t getFeatureIndex(const Feature& ftr) const;
+            std::size_t getFeatureIndex(const Feature& feature) const;
 
             /**
              * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
@@ -141,28 +126,16 @@ namespace CDPL
              */
             FeatureIterator getFeaturesEnd();
 
-            /**
-             * \brief Returns a \c const reference to the feature at index \a idx.
-             * \param idx The zero-based index of the feature to return.
-             * \return A \c const reference to the feature at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
-             */
             const Feature& getFeature(std::size_t idx) const;
 
-            /**
-             * \brief Returns a \c non-const reference to the feature at index \a idx.
-             * \param idx The zero-based index of the feature to return.
-             * \return A \c non-const reference to the feature at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumFeatures()).
-             */
             Feature& getFeature(std::size_t idx);
 
             /**
              * \brief Extends the feature set by the specified feature.
-             * \param ftr The feature to add.
+             * \param feature The feature to add.
              * \return \c true if the feature was not already a part of the feature set, and \c false otherwise.
              */
-            bool addFeature(const Feature& ftr);
+            bool addFeature(const Feature& feature);
 
             /**
              * \brief Removes the feature at the specified index.
@@ -181,20 +154,16 @@ namespace CDPL
 
             /**
              * \brief Removes the specified feature.
-             * \param ftr The feature to remove.
+             * \param feature The feature to remove.
              * \return \c true if the feature was part of the feature set and has been removed, and \c false otherwise.
              */
-            bool removeFeature(const Feature& ftr);
+            bool removeFeature(const Feature& feature);
 
             /**
              * \brief Removes all features and properties.
              */
             void clear();
 
-            /**
-             * \brief Orders the stored features according to criteria implemented by the provided feature comparison function.
-             * \param func The feature comparison function implementing the applied ordering criteria.
-             */
             void orderFeatures(const FeatureCompareFunction& func);
             
             /**
@@ -208,14 +177,14 @@ namespace CDPL
             /**
              * \brief Replaces the current set of features and properties by the features and properties
              *        of the feature container \a cntnr.
-             * \param cntnr The Pharm::FeatureContainer instance providing the features and properties to copy.
+             * \param cntnr The feature container providing the features and properties to copy.
              * \return A reference to itself.
              */
             FeatureSet& operator=(const FeatureContainer& cntnr);
 
             /**
              * \brief Extends the current set of features by the features in the feature container \a cntnr.
-             * \param cntnr The Pharm::FeatureContainer instance providing the features to append.
+             * \param cntnr The feature container providing the features to append.
              * \return A reference to itself.
              * \note Does not affect any properties.
              */
@@ -223,7 +192,7 @@ namespace CDPL
 
             /**
              * \brief Removes the pharmacophore features referenced by the feature container \a cntnr from this \c %FeatureSet instance.
-             * \param cntnr The Pharm::FeatureContainer instance providing the features to remove.
+             * \param cntnr The feature container providing the features to remove.
              * \return A reference to itself.
              * \note Equivalent to clear() if <tt>this == &cntr</tt>.
              */
