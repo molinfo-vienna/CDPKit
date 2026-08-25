@@ -46,14 +46,13 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Abstract base class for chemical reactions composed of role-tagged Chem::Molecule components.
+         * \brief Abstract base class for chemical reactions composed of role-tagged reaction components of type Chem::Molecule.
          *
-         * Each component carries a Chem::ReactionRole (\c REACTANT, \c AGENT or \c PRODUCT). The role is the
-         * primary indexing axis exposed by getComponentRole(), getNumComponents(role), getComponent(idx, role)
-         * and the role-restricted iterator pair getComponentsBegin(role)/getComponentsEnd(role). Editing
-         * methods (addComponent, removeComponent, swapComponentRoles, clear) are pure virtual and supplied
-         * by concrete subclasses such as Chem::BasicReaction. Properties common to all components are
-         * inherited from Base::PropertyContainer.
+         * Each component carries a reaction role that is specified by one of the constants declared in namespace Chem::ReactionRole.
+         * %Reaction roles divide the components into three differents subsets: reactant, agents/catalysts and products. 
+         * For component management/access the methods getComponentRole(), getNumComponents(), getComponent(), getComponentsBegin()
+         * and getComponentsEnd() are available. For reaction editing the methods addComponent(), removeComponent(), swapComponentRoles()
+         * and clear(). %Reaction properties can be stored/retrieved via methods inherited from Base::PropertyContainer.
          */
         class CDPL_CHEM_API Reaction : public Base::PropertyContainer
         {
@@ -68,12 +67,12 @@ namespace CDPL
             typedef std::shared_ptr<Reaction> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the components of the reaction.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Molecule objects.
              */
             typedef Util::IndexedElementIterator<const Molecule, ConstComponentAccessor> ConstComponentIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the components of the reaction.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Molecule objects.
              */
             typedef Util::IndexedElementIterator<Molecule, ComponentAccessor> ComponentIterator;
 
@@ -98,8 +97,8 @@ namespace CDPL
             virtual void clear() = 0;
 
             /**
-             * \brief Returns the number of reaction components.
-             * \return The number of reaction components.
+             * \brief Returns the total number of reaction components.
+             * \return The total number of reaction components.
              */
             virtual std::size_t getNumComponents() const = 0;
 
@@ -271,7 +270,7 @@ namespace CDPL
 
             /**
              * \brief Creates a new reaction component with the specified role.
-             * \param role A flag specifying the reaction role of the new component (see namespace Chem::ReactionRole).
+             * \param role The reaction role of the new component (see namespace Chem::ReactionRole).
              * \return A reference to the newly created component molecule.
              * \throw Base::ValueError if the value of \a role is not Chem::ReactionRole::REACTANT,
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
@@ -283,8 +282,8 @@ namespace CDPL
              *
              * If \a role1 is equal to \a role2, the method has no effect.
              *
-             * \param role1 A flag specifying the reaction role of the first component set (see namespace Chem::ReactionRole).
-             * \param role2 A flag specifying the reaction role of the second component set (see namespace Chem::ReactionRole).
+             * \param role1 The reaction role of the first component set (see namespace Chem::ReactionRole).
+             * \param role2 The reaction role of the second component set (see namespace Chem::ReactionRole).
              * \throw Base::ValueError if the value of \a role1 and/or \a role2 is not equal to Chem::ReactionRole::REACTANT, 
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
@@ -300,7 +299,7 @@ namespace CDPL
             /**
              * \brief Removes the reaction component at index \a idx in the list of components with the specified role.
              * \param idx The zero-based index of the component to remove.
-             * \param role The reaction role of the components
+             * \param role The reaction role of the component (see namespace Chem::ReactionRole).
              * \throw Base::IndexError if \a idx is not in the range [0, <tt>getNumComponents(role)</tt>).
              *        Base::ValueError if the value of \a role is not Chem::ReactionRole::REACTANT,
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
@@ -317,14 +316,14 @@ namespace CDPL
 
             /**    
              * \brief Removes all components with the specified role.
-             * \param role A flag specifying the reaction role of the components to remove (see namespace Chem::ReactionRole).
+             * \param role The reaction role of the components to remove (see namespace Chem::ReactionRole).
              * \throw Base::ValueError if the value of \a role is not Chem::ReactionRole::REACTANT,
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             virtual void removeComponents(unsigned int role) = 0;
 
             /**
-             * \brief Creates a copy of the current reaction state.
+             * \brief Creates a deep copy of the current reaction state.
              * \return A smart pointer to the copy of the reaction.
              */
             virtual SharedPointer clone() const = 0;
@@ -356,7 +355,7 @@ namespace CDPL
           protected:
             /**
              * \brief Invokes all registered copy postprocessing functions with \c *this as the
-             *        target reaction and \a src_rxn as the source.
+             *        target and \a src_rxn as the source reaction.
              * \param src_rxn The source reaction the copy was made from.
              */
             void invokeCopyPostprocessingFunctions(const Reaction& src_rxn);

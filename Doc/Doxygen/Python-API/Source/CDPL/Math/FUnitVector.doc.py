@@ -42,17 +42,8 @@ class FUnitVector(Boost.Python.instance):
     # 
     def __init__(n: int, i: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param n 
-    #
     def resize(n: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def getIndex() -> int: pass
 
     ##
@@ -67,29 +58,12 @@ class FUnitVector(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -99,10 +73,6 @@ class FUnitVector(Boost.Python.instance):
     # 
     def assign(v: FUnitVector) -> FUnitVector: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def swap(v: FUnitVector) -> None: pass
 
     ##
@@ -133,24 +103,10 @@ class FUnitVector(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -159,16 +115,8 @@ class FUnitVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> FUnitVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFVectorExpression: pass
 
     ##

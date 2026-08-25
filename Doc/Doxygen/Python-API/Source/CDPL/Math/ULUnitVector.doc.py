@@ -42,17 +42,8 @@ class ULUnitVector(Boost.Python.instance):
     # 
     def __init__(n: int, i: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param n 
-    #
     def resize(n: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def getIndex() -> int: pass
 
     ##
@@ -67,29 +58,12 @@ class ULUnitVector(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -99,10 +73,6 @@ class ULUnitVector(Boost.Python.instance):
     # 
     def assign(v: ULUnitVector) -> ULUnitVector: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def swap(v: ULUnitVector) -> None: pass
 
     ##
@@ -133,24 +103,10 @@ class ULUnitVector(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -159,16 +115,8 @@ class ULUnitVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULUnitVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULVectorExpression: pass
 
     ##

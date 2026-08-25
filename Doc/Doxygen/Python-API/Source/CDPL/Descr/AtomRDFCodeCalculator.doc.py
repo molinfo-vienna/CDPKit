@@ -68,88 +68,32 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     # 
     def assign(calc: AtomRDFCodeCalculator) -> AtomRDFCodeCalculator: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityPairWeightFunction(func: Chem.DoubleAtom2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntity3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
-    ##
-    # \brief 
-    # \param num_steps 
-    #
     def setNumSteps(num_steps: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumSteps() -> int: pass
 
-    ##
-    # \brief 
-    # \param radius_inc 
-    #
     def setRadiusIncrement(radius_inc: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getRadiusIncrement() -> float: pass
 
-    ##
-    # \brief 
-    # \param start_radius 
-    #
     def setStartRadius(start_radius: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStartRadius() -> float: pass
 
-    ##
-    # \brief 
-    # \param factor 
-    #
     def setSmoothingFactor(factor: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSmoothingFactor() -> float: pass
 
-    ##
-    # \brief 
-    # \param factor 
-    #
     def setScalingFactor(factor: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getScalingFactor() -> float: pass
 
-    ##
-    # \brief 
-    # \param enable 
-    #
     def enableDistanceToIntervalCenterRounding(enable: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def distanceToIntervalsCenterRoundingEnabled() -> bool: pass
 
     ##

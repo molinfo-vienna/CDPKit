@@ -165,18 +165,8 @@ class Matrix4F(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -186,12 +176,6 @@ class Matrix4F(Boost.Python.instance):
     # 
     def swap(m: Matrix4F) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
@@ -206,17 +190,8 @@ class Matrix4F(Boost.Python.instance):
     # 
     def __call__(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -253,16 +228,8 @@ class Matrix4F(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> Matrix4F: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFMatrixExpression: pass
 
     ##
@@ -321,11 +288,6 @@ class Matrix4F(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
@@ -370,11 +332,6 @@ class Matrix4F(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> Matrix4F: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> Matrix4F: pass
 
     objectID = property(getObjectID)

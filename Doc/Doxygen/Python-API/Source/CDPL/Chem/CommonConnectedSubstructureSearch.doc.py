@@ -199,31 +199,12 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
     # 
     def setQuery(query: MolecularGraph) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> AtomBondMapping: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __nonzero__(self: MolecularGraph) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __bool__(self: MolecularGraph) -> bool: pass
 
     objectID = property(getObjectID)

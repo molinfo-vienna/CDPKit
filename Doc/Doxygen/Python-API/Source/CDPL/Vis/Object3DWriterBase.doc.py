@@ -29,26 +29,10 @@ class Object3DWriterBase(Base.DataIOBase):
     # 
     def __init__() -> None: pass
 
-    ##
-    # \brief 
-    # \param cntnr 
-    # \return 
-    #
     def write(cntnr: Object3D) -> Object3DWriterBase: pass
 
-    ##
-    # \brief 
-    #
     def close() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

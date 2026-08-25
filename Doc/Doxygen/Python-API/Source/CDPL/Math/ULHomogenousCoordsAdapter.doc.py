@@ -90,48 +90,18 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param r 
-    #
     def swap(r: ULHomogenousCoordsAdapter) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getData() -> ULVectorExpression: pass
 
     ##
@@ -162,24 +132,10 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -188,16 +144,8 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULHomogenousCoordsAdapter: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULVectorExpression: pass
 
     ##
@@ -249,11 +197,6 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
@@ -298,11 +241,6 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> ULHomogenousCoordsAdapter: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULHomogenousCoordsAdapter: pass
 
     objectID = property(getObjectID)

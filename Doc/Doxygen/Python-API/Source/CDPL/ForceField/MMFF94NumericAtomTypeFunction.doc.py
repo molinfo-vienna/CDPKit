@@ -43,21 +43,8 @@ class MMFF94NumericAtomTypeFunction(Boost.Python.instance):
     # 
     def __init__(callable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __call__(arg1: Chem.Atom) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

@@ -29,23 +29,10 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     #
     class VolumeConstraintList(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> VolumeConstraint: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
     ##
@@ -89,40 +76,16 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         # 
         def assign(constr: VolumeConstraint) -> VolumeConstraint: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getPoint1Index() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getPoint2Index() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getPoint3Index() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getPoint4Index() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getLowerBound() -> float: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getUpperBound() -> float: pass
 
         objectID = property(getObjectID)
@@ -144,23 +107,10 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     #
     class DistanceConstraintList(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> DistanceConstraint: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
     ##
@@ -202,28 +152,12 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         # 
         def assign(constr: DistanceConstraint) -> DistanceConstraint: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getPoint1Index() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getPoint2Index() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getLowerBound() -> float: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getUpperBound() -> float: pass
 
         objectID = property(getObjectID)
@@ -291,159 +225,52 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     # 
     def assign(gen: DG3DCoordinatesGenerator) -> DG3DCoordinatesGenerator: pass
 
-    ##
-    # \brief 
-    #
     def clearDistanceConstraints() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumDistanceConstraints() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getDistanceConstraint(idx: int) -> DistanceConstraint: pass
 
-    ##
-    # \brief 
-    # \param pt1_idx 
-    # \param pt2_idx 
-    # \param lb 
-    # \param ub 
-    #
     def addDistanceConstraint(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def removeDistanceConstraint(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param num_cycles 
-    #
     def setNumCycles(num_cycles: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumCycles() -> int: pass
 
-    ##
-    # \brief 
-    # \param fact 
-    #
     def setCycleStepCountFactor(fact: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getCycleStepCountFactor() -> float: pass
 
-    ##
-    # \brief 
-    # \param rate 
-    #
     def setStartLearningRate(rate: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStartLearningRate() -> float: pass
 
-    ##
-    # \brief 
-    # \param decr 
-    #
     def setLearningRateDecrement(decr: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getLearningRateDecrement() -> float: pass
 
-    ##
-    # \brief 
-    # \param seed 
-    #
     def setRandomSeed(seed: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param num_points 
-    # \param coords 
-    #
     def generate(num_points: int, coords: Math.Vector3DArray) -> None: pass
 
-    ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
     def getDistanceError(coords: Math.Vector3DArray) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getDistanceConstraints() -> DistanceConstraintList: pass
 
-    ##
-    # \brief 
-    #
     def clearVolumeConstraints() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumVolumeConstraints() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getVolumeConstraint(idx: int) -> VolumeConstraint: pass
 
-    ##
-    # \brief 
-    # \param pt1_idx 
-    # \param pt2_idx 
-    # \param pt3_idx 
-    # \param pt4_idx 
-    # \param lb 
-    # \param ub 
-    #
     def addVolumeConstraint(pt1_idx: int, pt2_idx: int, pt3_idx: int, pt4_idx: int, lb: float, ub: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def removeVolumeConstraint(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
     def getVolumeError(coords: Math.Vector3DArray) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getVolumeConstraints() -> VolumeConstraintList: pass
 
     objectID = property(getObjectID)

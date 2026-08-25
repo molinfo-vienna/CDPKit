@@ -423,6 +423,8 @@ def printMethod(class_obj, func_obj, method_name, out_file, ident, scope):
             if doc_block:
                 out_file.write(doc_block)
             else:
+                pass
+            '''
                 out_file.write(ident + '##\n')
                 #out_file.write(ident + '# \\brief ' + method_name + '.\n')
                 out_file.write(ident + '# \\brief \n')
@@ -439,7 +441,7 @@ def printMethod(class_obj, func_obj, method_name, out_file, ident, scope):
                     out_file.write(ident + '# \\return \n')
 
                 out_file.write(ident + '#\n')
-
+            '''
             if is_static:
                 out_file.write(ident + '@staticmethod\n')
 

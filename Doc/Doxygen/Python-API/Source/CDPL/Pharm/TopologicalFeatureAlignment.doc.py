@@ -47,75 +47,26 @@ class TopologicalFeatureAlignment(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityMatchFunction(func: BoolFeature2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityMatchFunction() -> BoolFeature2Functor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityPairMatchFunction(func: BoolFeature4Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityPairMatchFunction() -> BoolFeature4Functor: pass
 
-    ##
-    # \brief 
-    # \param entity 
-    # \param first_set 
-    #
     def addEntity(entity: Feature, first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    #
     def clearEntities(first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getNumEntities(first_set: bool) -> int: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getEntities(first_set: bool) -> object: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param first_set 
-    # \return 
-    #
     def getEntity(idx: int, first_set: bool) -> Feature: pass
 
-    ##
-    # \brief 
-    #
     def reset() -> None: pass
 
-    ##
-    # \brief 
-    # \param mapping 
-    # \return 
-    #
     def nextAlignment(mapping: Util.STPairArray) -> bool: pass
 
     ##

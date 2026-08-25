@@ -54,10 +54,6 @@ class StereoDescriptor(Boost.Python.instance):
     #
     class ReferenceAtomArray(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
         ##
@@ -67,11 +63,6 @@ class StereoDescriptor(Boost.Python.instance):
         # 
         def __contains__(atom: Atom) -> bool: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Atom: pass
 
     ##

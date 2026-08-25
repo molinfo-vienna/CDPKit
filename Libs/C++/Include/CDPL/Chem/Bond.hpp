@@ -43,7 +43,7 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Abstract base class representing a chemical bond between two Chem::Atom instances.
+         * \brief Abstract base class representing a chemical bond between two atoms (represented by Chem::Atom instances).
          *
          * \c %Bond combines the per-bond property storage inherited from Base::PropertyContainer with a
          * fixed-size (always two atoms) Chem::AtomContainer interface that yields the bond's begin and end atoms.
@@ -190,7 +190,7 @@ namespace CDPL
             virtual std::size_t getAtomIndex(const Atom& atom) const = 0;
 
             /**
-             * \brief Assignment operator that replaces the current set of properties with the properties of \a bond;
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a bond.
              * \param bond The bond whose properties get copied.
              * \return A reference to itself.
              */

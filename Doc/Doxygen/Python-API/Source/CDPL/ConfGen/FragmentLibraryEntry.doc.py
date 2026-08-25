@@ -121,11 +121,6 @@ class FragmentLibraryEntry(Boost.Python.instance):
     # 
     def getConformer(idx: int) -> ConformerData: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> ConformerData: pass
 
     objectID = property(getObjectID)

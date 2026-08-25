@@ -41,25 +41,10 @@ class Object3DInputHandler(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getDataFormat() -> Base.DataFormat: pass
 
-    ##
-    # \brief 
-    # \param is 
-    # \return 
-    #
     def createReader(is: Base.IStream) -> Object3DReaderBase: pass
 
-    ##
-    # \brief 
-    # \param file_name 
-    # \param mode 
-    # \return 
-    #
     def createReader(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> Object3DReaderBase: pass
 
     objectID = property(getObjectID)

@@ -122,78 +122,20 @@ class Pharmacophore(FeatureContainer):
     # 
     def clone() -> Pharmacophore: pass
 
-    ##
-    # \brief Returns a reference to the feature at index <em>idx</em>.
-    # 
-    # \param idx The zero-based index of the feature to return.
-    # 
-    # \return A reference to the feature at the specified index. 
-    # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
-    # 
     def getFeature(idx: int) -> Feature: pass
 
-    ##
-    # \brief Tells whether the specified feature is part of the feature set.
-    # 
-    # \param feature The feature to look for.
-    # 
-    # \return <tt>True</tt> if <em>feature</em> is part of the set, and <tt>False</tt> otherwise.
-    # 
     def containsFeature(feature: Feature) -> bool: pass
 
-    ##
-    # \brief Returns the index of the specified feature.
-    # 
-    # \param feature The feature for which to return the index.
-    # 
-    # \return The zero-based index of the specified feature. 
-    # 
-    # \throw Base.ItemNotFound if the specified feature could not be found.
-    # 
     def getFeatureIndex(feature: Feature) -> int: pass
 
-    ##
-    # \brief Returns the number of features.
-    # 
-    # \return The number of features.
-    # 
     def getNumFeatures() -> int: pass
 
-    ##
-    # \brief Orders the features according to criteria implemented by the provided feature comparison function.
-    # 
-    # \param func The feature comparison function implementing the applied ordering criteria.
-    # 
     def orderFeatures(func: BoolFeature2Functor) -> None: pass
 
-    ##
-    # \brief Returns a reference to the entity at index <em>idx</em>.
-    # 
-    # Forwards to getFeature() and exists to satisfy the Chem.Entity3DContainer interface.
-    # 
-    # \param idx The zero-based entity index.
-    # 
-    # \return A reference to the entity at the specified index. 
-    # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFeatures()).
-    # 
     def getEntity(idx: int) -> Chem.Entity3D: pass
 
-    ##
-    # \brief Returns the number of entities.
-    # 
-    # Forwards to getNumFeatures() and exists to satisfy the Chem.Entity3DContainer interface.
-    # 
-    # \return The number of contained features.
-    # 
     def getNumEntities() -> int: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __getstate__() -> tuple: pass
 
     ##
@@ -229,31 +171,12 @@ class Pharmacophore(FeatureContainer):
     # 
     def __isub__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Feature: pass
 
     ##
@@ -270,15 +193,6 @@ class Pharmacophore(FeatureContainer):
     # 
     def __contains__(feature: Feature) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass

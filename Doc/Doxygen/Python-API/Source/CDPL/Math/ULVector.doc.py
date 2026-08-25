@@ -174,17 +174,8 @@ class ULVector(Boost.Python.instance):
     # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -194,11 +185,6 @@ class ULVector(Boost.Python.instance):
     # 
     def swap(v: ULVector) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: int) -> None: pass
 
     ##
@@ -240,17 +226,8 @@ class ULVector(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -259,16 +236,8 @@ class ULVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULVectorExpression: pass
 
     ##
@@ -320,11 +289,6 @@ class ULVector(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
@@ -369,11 +333,6 @@ class ULVector(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> ULVector: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULVector: pass
 
     objectID = property(getObjectID)

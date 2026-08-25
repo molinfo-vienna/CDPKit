@@ -90,48 +90,18 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param r 
-    #
     def swap(r: DHomogenousCoordsAdapter) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getData() -> DVectorExpression: pass
 
     ##
@@ -162,24 +132,10 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -188,16 +144,8 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DHomogenousCoordsAdapter: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDVectorExpression: pass
 
     ##
@@ -249,11 +197,6 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -298,11 +241,6 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> DHomogenousCoordsAdapter: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DHomogenousCoordsAdapter: pass
 
     objectID = property(getObjectID)

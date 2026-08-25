@@ -64,17 +64,8 @@ class HierarchyViewModel(HierarchyViewNode):
     # 
     def getChainByID(id: str) -> HierarchyViewChain: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> HierarchyViewChain: pass
 
     numChains = property(getNumChains)

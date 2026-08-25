@@ -101,16 +101,8 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         # 
         def getAtomTypeList() -> str: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __nonzero__() -> bool: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __bool__() -> bool: pass
 
         objectID = property(getObjectID)
@@ -146,13 +138,6 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param atom_type 
-    # \param ass_mode 
-    # \param charge 
-    # \param type_list 
-    #
     def addEntry(atom_type: str, ass_mode: int, charge: float, type_list: str) -> None: pass
 
     ##
@@ -185,10 +170,6 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##

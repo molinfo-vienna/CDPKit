@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all quaternion expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class ULQuaternionExpression(ConstULQuaternionExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: ULQuaternionExpression) -> None: pass
 
     ##
@@ -72,37 +70,14 @@ class ULQuaternionExpression(ConstULQuaternionExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC1(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC2(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC3(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC4(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param c1 
-    # \param c2 
-    # \param c3 
-    # \param c4 
-    #
     def set(c1: int = 0, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
@@ -189,23 +164,8 @@ class ULQuaternionExpression(ConstULQuaternionExpression):
     # 
     def __idiv__(q: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
     def __itruediv__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: ConstULQuaternionExpression) -> ULQuaternionExpression: pass

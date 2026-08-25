@@ -149,11 +149,6 @@ class FragmentConformerGenerator(Boost.Python.instance):
     # 
     def getNumConformers() -> int: pass
 
-    ##
-    # \brief 
-    # \param conf_idx 
-    # \return 
-    #
     def getConformer(conf_idx: int) -> ConformerData: pass
 
     ##
@@ -163,11 +158,6 @@ class FragmentConformerGenerator(Boost.Python.instance):
     # 
     def getSettings() -> FragmentConformerGeneratorSettings: pass
 
-    ##
-    # \brief 
-    # \param conf_idx 
-    # \return 
-    #
     def __getitem__(conf_idx: int) -> ConformerData: pass
 
     objectID = property(getObjectID)

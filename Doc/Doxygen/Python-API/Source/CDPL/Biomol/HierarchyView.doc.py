@@ -100,17 +100,8 @@ class HierarchyView(Boost.Python.instance):
     # 
     def getModelByNumber(num: int) -> HierarchyViewModel: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> HierarchyViewModel: pass
 
     objectID = property(getObjectID)

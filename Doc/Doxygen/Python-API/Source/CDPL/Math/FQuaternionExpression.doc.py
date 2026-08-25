@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all quaternion expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class FQuaternionExpression(ConstFQuaternionExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: FQuaternionExpression) -> None: pass
 
     ##
@@ -72,37 +70,14 @@ class FQuaternionExpression(ConstFQuaternionExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC1(v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC2(v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC3(v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC4(v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param c1 
-    # \param c2 
-    # \param c3 
-    # \param c4 
-    #
     def set(c1: float = 0.0, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
     ##
@@ -189,23 +164,8 @@ class FQuaternionExpression(ConstFQuaternionExpression):
     # 
     def __idiv__(q: ConstFQuaternionExpression) -> FQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> FQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
     def __itruediv__(e: FQuaternionExpression) -> FQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: ConstFQuaternionExpression) -> FQuaternionExpression: pass

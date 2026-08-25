@@ -286,10 +286,6 @@ class AtomDictionary(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##

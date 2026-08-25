@@ -76,11 +76,6 @@ class Slice(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getIndex(i: int) -> int: pass
 
     ##
@@ -138,11 +133,6 @@ class Slice(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
     objectID = property(getObjectID)

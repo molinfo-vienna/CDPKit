@@ -139,6 +139,12 @@ namespace CDPL
 
             void removeFeature(std::size_t idx);
 
+            /**
+             * \brief Removes the pharmacophore feature specified by the iterator \a it.
+             * \param it An iterator that specifies the feature to remove.
+             * \return A mutable iterator pointing to the next feature in the list.
+             * \throw Base::RangeError if \a it is not in the range [getFeaturesBegin(), getFeaturesEnd()).
+             */
             FeatureIterator removeFeature(const FeatureIterator& it);
 
             bool containsFeature(const Feature& feature) const;

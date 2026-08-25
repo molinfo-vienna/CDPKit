@@ -43,24 +43,8 @@ class InteractionFilterFunction4(Boost.Python.instance):
     # 
     def __init__(callable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    # \param arg3 
-    # \param arg4 
-    # \return 
-    #
     def __call__(arg1: Chem.Atom, arg2: Chem.Atom, arg3: Chem.Atom, arg4: Chem.Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

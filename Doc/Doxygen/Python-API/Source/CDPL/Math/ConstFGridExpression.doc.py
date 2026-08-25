@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all grid expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class ConstFGridExpression(Boost.Python.instance):
 
     ##
@@ -36,65 +38,22 @@ class ConstFGridExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize3() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
     def getElement(i: int, j: int, k: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
     def __call__(i: int, j: int, k: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ijk 
-    # \return 
-    #
     def __getitem__(ijk: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -117,16 +76,8 @@ class ConstFGridExpression(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstFGridExpression: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFGridExpression: pass
 
     ##

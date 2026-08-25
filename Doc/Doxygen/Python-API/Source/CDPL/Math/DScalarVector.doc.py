@@ -42,10 +42,6 @@ class DScalarVector(Boost.Python.instance):
     # 
     def __init__(n: int, v: float = 0.0) -> None: pass
 
-    ##
-    # \brief 
-    # \param n 
-    #
     def resize(n: int) -> None: pass
 
     ##
@@ -60,29 +56,12 @@ class DScalarVector(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -92,10 +71,6 @@ class DScalarVector(Boost.Python.instance):
     # 
     def assign(v: DScalarVector) -> DScalarVector: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def swap(v: DScalarVector) -> None: pass
 
     ##
@@ -126,24 +101,10 @@ class DScalarVector(Boost.Python.instance):
     # 
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -152,16 +113,8 @@ class DScalarVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DScalarVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDVectorExpression: pass
 
     ##

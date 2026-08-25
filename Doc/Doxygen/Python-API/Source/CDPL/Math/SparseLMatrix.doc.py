@@ -183,18 +183,8 @@ class SparseLMatrix(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -204,12 +194,6 @@ class SparseLMatrix(Boost.Python.instance):
     # 
     def swap(m: SparseLMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
     ##
@@ -224,17 +208,8 @@ class SparseLMatrix(Boost.Python.instance):
     # 
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -271,16 +246,8 @@ class SparseLMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> SparseLMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLMatrixExpression: pass
 
     ##
@@ -339,11 +306,6 @@ class SparseLMatrix(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstLMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -388,11 +350,6 @@ class SparseLMatrix(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> SparseLMatrix: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> SparseLMatrix: pass
 
     objectID = property(getObjectID)

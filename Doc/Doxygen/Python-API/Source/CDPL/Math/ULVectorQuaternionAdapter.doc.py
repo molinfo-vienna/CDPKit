@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices 0-3 map to C1-C4).
+# 
 class ULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
@@ -49,113 +49,110 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFQuaternionExpression instance \a e.
-    # \param e The \c %ConstFQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDQuaternionExpression instance \a e.
-    # \param e The \c %ConstDQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLQuaternionExpression instance \a e.
-    # \param e The \c %ConstLQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULQuaternionExpression instance \a e.
-    # \param e The \c %ConstULQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ULVectorQuaternionAdapter instance \a a.
-    # \param a The \c %ULVectorQuaternionAdapter instance to copy.
+    # \brief Copies the components of <em>a</em> into this view (writing through to the wrapped vector).
+    # 
+    # \param a The source adapter.
+    # 
     # \return \a self
     # 
     def assign(a: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C1.
+    # 
+    # \return A reference to C1.
+    # 
     def getC1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C2.
+    # 
+    # \return A reference to C2.
+    # 
     def getC2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C3.
+    # 
+    # \return A reference to C3.
+    # 
     def getC3() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C4.
+    # 
+    # \return A reference to C4.
+    # 
     def getC4() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Swaps the components of this view with those of <em>a</em>.
+    # 
+    # \param a The adapter to swap with.
+    # 
     def swap(a: ULVectorQuaternionAdapter) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC1(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC2(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC3(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC4(v: int) -> None: pass
 
     ##
-    # \brief 
-    # \param c1 
-    # \param c2 
-    # \param c3 
-    # \param c4 
-    #
+    # \brief Assigns the four supplied component values to this view (writing through to the wrapped vector).
+    # 
+    # \param c1 The C1 component value.
+    # \param c2 The C2 component value.
+    # \param c3 The C3 component value.
+    # \param c4 The C4 component value.
+    # 
     def set(c1: int = 0, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ULVectorExpression: pass
 
     ##
@@ -192,16 +189,8 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULVectorQuaternionAdapter: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULQuaternionExpression: pass
 
     ##
@@ -218,11 +207,6 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __add__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -239,11 +223,6 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __sub__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -288,11 +267,6 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __truediv__(t: int) -> ConstULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -379,25 +353,10 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __idiv__(q: ConstULQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULVectorQuaternionAdapter: pass
 
-    ##
-    # \brief 
-    # \param a 
-    # \return 
-    #
     def __itruediv__(a: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: ConstULQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     objectID = property(getObjectID)

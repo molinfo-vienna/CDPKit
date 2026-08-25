@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a contiguous half-open subrange of an underlying vector.
+# 
 class DVectorRange(Boost.Python.instance):
 
     ##
@@ -38,9 +38,10 @@ class DVectorRange(Boost.Python.instance):
     def __init__(e: DVectorExpression, r: Range) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the start index of the viewed range within the wrapped vector.
+    # 
+    # \return The start index of the range.
+    # 
     def getStart() -> int: pass
 
     ##
@@ -56,36 +57,46 @@ class DVectorRange(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> DVectorRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> DVectorRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> DVectorRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> DVectorRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DVectorRange instance \a r.
-    # \param r The \c %DVectorRange instance to copy.
+    # \brief Copies the elements of <em>r</em> into this view (writing through to the wrapped vector).
+    # 
+    # \param r The source range view.
+    # 
     # \return \a self
     # 
     def assign(r: DVectorRange) -> DVectorRange: pass
@@ -98,47 +109,37 @@ class DVectorRange(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the view is empty (zero-length range).
+    # 
+    # \return <tt>True</tt> if the range is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the view (number of elements covered by the range).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param r 
-    #
+    # \brief Swaps the elements of this view with those of <em>r</em>.
+    # 
+    # \param r The view to swap with.
+    # 
     def swap(r: DVectorRange) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> DVectorExpression: pass
 
     ##
@@ -170,23 +171,16 @@ class DVectorRange(Boost.Python.instance):
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return A reference to the underlying element <tt>v(range(i))</tt>.
+    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -195,16 +189,8 @@ class DVectorRange(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DVectorRange: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDVectorExpression: pass
 
     ##
@@ -256,11 +242,6 @@ class DVectorRange(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -305,11 +286,6 @@ class DVectorRange(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> DVectorRange: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DVectorRange: pass
 
     objectID = property(getObjectID)

@@ -22,7 +22,7 @@
 ##
 # \brief Concrete Chem.Molecule implementation that owns Chem.BasicAtom and Chem.BasicBond instances.
 # 
-# <tt>BasicMolecule</tt> provides the default in-memory representation of a molecular graph: atoms and bonds are allocated from internal object pools and accessed through random-access iterators. The class implements the full editing interface inherited from Chem.Molecule (addAtom, addBond, removeAtom, removeBond, copy, append, remove, reserveMemoryForAtoms, reserveMemoryForBonds) and is the standard concrete type used by readers and downstream algorithms throughout CDPKit.
+# <tt>BasicMolecule</tt> provides the default in-memory representation of a molecular graph: atoms and bonds are allocated from internal object pools and accessed through random-access iterators. The class implements the full editing interface inherited from Chem.Molecule (addAtom, addBond, removeAtom, removeBond, copy, append, remove, reserveMemoryForAtoms, reserveMemoryForBonds) and is the standard concrete type used by readers and downstream algorithms throughout the <em>CDPL</em>.
 # 
 class BasicMolecule(Molecule):
 
@@ -53,48 +53,48 @@ class BasicMolecule(Molecule):
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current set of atoms, bonds and properties by a copy of <em>mol</em>.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
     # 
-    # \param mol The source molecule.
+    # \param mol The molecule to copy.
     # 
     def copy(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief Replaces the current set of atoms, bonds and properties by a copy of <em>mol</em>.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
     # 
-    # \param mol The source molecule.
+    # \param mol The molecule to copy.
     # 
     def copy(mol: Molecule) -> None: pass
 
     ##
-    # \brief Replaces the current set of atoms, bonds and properties by a copy of <em>molgraph</em>.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The source molecular graph.
+    # \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
     # 
     def copy(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of those in <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
     # 
-    # \param mol The source molecule.
+    # \param mol The molecule providing the atoms and bonds to append.
     # 
     # \note Does not affect any properties.
     # 
     def append(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of those in <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
     # 
-    # \param mol The source molecule.
+    # \param mol The molecule providing the atoms and bonds to append.
     # 
     # \note Does not affect any properties.
     # 
     def append(mol: Molecule) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of those in <em>molgraph</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The source molecular graph.
+    # \param molgraph The molecular graph providing the atoms and bonds to append.
     # 
     # \note Does not affect any properties.
     # 

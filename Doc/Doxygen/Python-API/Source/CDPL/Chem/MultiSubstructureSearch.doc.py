@@ -66,25 +66,10 @@ class MultiSubstructureSearch(Boost.Python.instance):
     # 
     def clear() -> None: pass
 
-    ##
-    # \brief 
-    # \param target 
-    # \return 
-    #
     def matches(target: MolecularGraph) -> bool: pass
 
-    ##
-    # \brief 
-    # \param expr 
-    #
     def setup(expr: str = '') -> None: pass
 
-    ##
-    # \brief 
-    # \param expr 
-    # \param max_substr_id 
-    # \return 
-    #
     def validate(expr: str, max_substr_id: int) -> str: pass
 
     objectID = property(getObjectID)

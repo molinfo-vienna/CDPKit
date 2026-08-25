@@ -253,10 +253,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     # 
     def getDielectricConstant() -> float: pass
 
-    ##
-    # \brief 
-    # \param dist_expo 
-    #
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
@@ -266,10 +262,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     # 
     def getDistanceExponent() -> float: pass
 
-    ##
-    # \brief 
-    # \param max_num 
-    #
     def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
@@ -293,10 +285,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     # 
     def getRefinementStopGradient() -> float: pass
 
-    ##
-    # \brief 
-    # \param max_size 
-    #
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
@@ -327,10 +315,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     # 
     def getSmallRingSystemSettings() -> FragmentSettings: pass
 
-    ##
-    # \brief 
-    # \param min_rmsd 
-    #
     def setSmallRingSystemSamplingFactor(min_rmsd: int) -> None: pass
 
     ##

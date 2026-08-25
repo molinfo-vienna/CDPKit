@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all quaternion expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class LQuaternionExpression(ConstLQuaternionExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: LQuaternionExpression) -> None: pass
 
     ##
@@ -72,37 +70,14 @@ class LQuaternionExpression(ConstLQuaternionExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC1(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC2(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC3(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC4(v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param c1 
-    # \param c2 
-    # \param c3 
-    # \param c4 
-    #
     def set(c1: int = 0, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
@@ -189,23 +164,8 @@ class LQuaternionExpression(ConstLQuaternionExpression):
     # 
     def __idiv__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> LQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
     def __itruediv__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass

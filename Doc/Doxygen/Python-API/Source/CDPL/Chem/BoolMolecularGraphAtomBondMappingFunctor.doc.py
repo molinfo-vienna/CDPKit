@@ -41,22 +41,8 @@ class BoolMolecularGraphAtomBondMappingFunctor(Boost.Python.instance):
     # 
     def __init__(callable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    # \return 
-    #
     def __call__(arg1: MolecularGraph, arg2: AtomBondMapping) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

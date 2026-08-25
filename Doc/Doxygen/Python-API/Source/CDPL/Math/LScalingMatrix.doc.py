@@ -39,12 +39,6 @@ class LScalingMatrix(Boost.Python.instance):
     # 
     def __init__(n: int, sx: int = 1, sy: int = 1, sz: int = 1) -> None: pass
 
-    ##
-    # \brief 
-    # \param sx 
-    # \param sy 
-    # \param sz 
-    #
     def set(sx: int = 1, sy: int = 1, sz: int = 1) -> None: pass
 
     ##
@@ -59,36 +53,14 @@ class LScalingMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -98,31 +70,12 @@ class LScalingMatrix(Boost.Python.instance):
     # 
     def assign(m: LScalingMatrix) -> LScalingMatrix: pass
 
-    ##
-    # \brief 
-    # \param m 
-    #
     def swap(m: LScalingMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -159,16 +112,8 @@ class LScalingMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> LScalingMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLMatrixExpression: pass
 
     ##

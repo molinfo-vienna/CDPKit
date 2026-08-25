@@ -35,75 +35,28 @@ class BZip2OStream(Base.OStream):
     # 
     def __init__(os: Base.OStream) -> None: pass
 
-    ##
-    # \brief 
-    #
     def flush() -> None: pass
 
-    ##
-    # \brief 
-    # \param string 
-    #
     def write(string: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param iterable 
-    #
     def writelines(iterable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def tellw() -> int: pass
 
-    ##
-    # \brief 
-    # \param offs 
-    # \param whence 
-    #
     def seekw(offs: int, whence: int = 0) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isClosed() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getOpenModeString() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getOpenModeFlags() -> OpenMode: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSoftSpace() -> bool: pass
 
-    ##
-    # \brief 
-    # \param value 
-    #
     def setSoftSpace(value: bool) -> None: pass
 
-    ##
-    # \brief 
-    #
     def close() -> None: pass
 
-    ##
-    # \brief 
-    # \param os 
-    #
     def open(os: Base.OStream) -> None: pass
 
     closed = property(isClosed)

@@ -33,17 +33,8 @@ class CanonicalFragment(Chem.MolecularGraph):
     # 
     class AtomMapping(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Chem.Atom: pass
 
     ##

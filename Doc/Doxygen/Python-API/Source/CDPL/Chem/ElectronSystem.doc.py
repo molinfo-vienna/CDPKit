@@ -200,17 +200,8 @@ class ElectronSystem(AtomContainer):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Atom: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

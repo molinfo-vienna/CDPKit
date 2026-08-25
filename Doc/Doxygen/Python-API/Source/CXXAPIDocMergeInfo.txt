@@ -71,17 +71,29 @@ Otherwise an empty Base.Any object gets returned if <em>_throw</em> is <tt>False
 #
 # --- CDPL.Math package ---
 #
-Math.FGrid. % Math.Grid.
+Math.ConstFGrid % Math.Grid
 
-Math.DGrid. % Math.Grid.
+Math.ConstDGrid % Math.Grid
 
-Math.FMatrix. % Math.Matrix.
+Math.ConstFMatrix % Math.Matrix
 
-Math.DMatrix. % Math.Matrix.
+Math.ConstDMatrix % Math.Matrix
 
-Math.LMatrix. % Math.Matrix.
+Math.ConstLMatrix % Math.Matrix
 
-Math.ULMatrix. % Math.Matrix.
+Math.ConstULMatrix % Math.Matrix
+
+Math.FGrid % Math.Grid
+
+Math.DGrid % Math.Grid
+
+Math.FMatrix % Math.Matrix
+
+Math.DMatrix % Math.Matrix
+
+Math.LMatrix % Math.Matrix
+
+Math.ULMatri. % Math.Matrix
 
 Math.Matrix2F. % Math.CMatrix.
 
@@ -145,13 +157,21 @@ Math.Vector3UL. % Math.CVector.
 
 Math.Vector4UL. % Math.CVector.
 
-Math.FVector. % Math.Vector.
+Math.ConstFVector % Math.Vector
 
-Math.DVector. % Math.Vector.
+Math.ConstDVector % Math.Vector
 
-Math.LVector. % Math.Vector.
+Math.ConstLVector % Math.Vector
 
-Math.ULVector. % Math.Vector.
+Math.ConstULVector % Math.Vector
+
+Math.FVector % Math.Vector
+
+Math.DVector % Math.Vector
+
+Math.LVector % Math.Vector
+
+Math.ULVector % Math.Vector
 
 Math.SparseFVector. % Math.SparseVector.
 
@@ -204,6 +224,22 @@ Math.FSparse % Math.Sparse
 Math.DVectorBFGSMinimizer % Math.BFGSMinimizer
 
 Math.FVectorBFGSMinimizer % Math.BFGSMinimizer
+
+Math.ConstFQuaternion % Math.Quaternion
+
+Math.ConstDQuaternion % Math.Quaternion
+
+Math.ConstLQuaternion % Math.Quaternion
+
+Math.ConstULQuaternion % Math.Quaternion
+
+Math.FQuaternion % Math.Quaternion
+
+Math.DQuaternion % Math.Quaternion
+
+Math.LQuaternion % Math.Quaternion
+
+Math.ULQuaternion % Math.Quaternion
 
 #
 # --- CDPL.Util package ---
@@ -423,11 +459,6 @@ ORMatch % ORReactionMatch
 NOTReactionMatch % NOTMatch
 NOTMatch % NOTReactionMatch
 
-Chem.Atom % Chem.AtomContainer
-Chem.Atom % Chem.BondContainer
-
-Chem.Bond % Chem.AtomContainer
-
 #
 # --- CDPL.Pharm package ---
 #
@@ -491,8 +522,6 @@ Pharm.CompoundPharmacophoreReader % Util.CompoundDataReader
 Pharm.FeatureTypeHistogram. % Util.Map.
 
 Pharm.FeatureMapping. % Util.MultiMap.
-
-Pharm.Pharmacophore. % Pharm.FeatureContainer.
 
 #
 # --- CDPL.Grid package ---
@@ -599,7 +628,11 @@ Grid.DRegularGridSetWriter. % Util.MultiFormatDataWriter.
 
 Grid.CompoundDRegularGridSetReader % Util.CompoundDataReader
 
+Grid.DRegular % Math.RegularSpatial
+
 Grid.DRegular % Grid.Regular
+
+Grid.FRegular % Math.RegularSpatial
 
 Grid.FRegular % Grid.Regular
 

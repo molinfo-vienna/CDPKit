@@ -41,21 +41,8 @@ class VoidMoleculeMolecularGraphFunctor(Boost.Python.instance):
     # 
     def __init__(callable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
     def __call__(arg1: Reaction, arg2: Reaction) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

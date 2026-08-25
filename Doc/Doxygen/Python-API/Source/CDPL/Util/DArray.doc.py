@@ -118,10 +118,6 @@ class DArray(Boost.Python.instance):
     # 
     def addElement(value: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param values 
-    #
     def addElements(values: DArray) -> None: pass
 
     ##
@@ -145,11 +141,6 @@ class DArray(Boost.Python.instance):
     # 
     def insertElements(idx: int, num_elem: int, value: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param values 
-    #
     def insertElements(index: int, values: DArray) -> None: pass
 
     ##
@@ -168,11 +159,6 @@ class DArray(Boost.Python.instance):
     # 
     def removeElement(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param begin_idx 
-    # \param end_idx 
-    #
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
@@ -216,30 +202,12 @@ class DArray(Boost.Python.instance):
     # 
     def setElement(idx: int, value: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param value 
-    #
     def __setitem__(index: int, value: float) -> None: pass
 
     ##

@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all matrix expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class LMatrixExpression(ConstLMatrixExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: LMatrixExpression) -> None: pass
 
     ##
@@ -72,19 +70,8 @@ class LMatrixExpression(ConstLMatrixExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -129,9 +116,4 @@ class LMatrixExpression(ConstLMatrixExpression):
     # 
     def __idiv__(t: int) -> LMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> LMatrixExpression: pass

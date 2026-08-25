@@ -82,16 +82,6 @@ class QtFontMetrics(Vis.FontMetrics):
     # 
     def getLeading() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getWidth() -> float: pass
 
-    ##
-    # \brief 
-    # \param string 
-    # \param bounds 
-    # \return 
-    #
     def getBounds(string: str, bounds: Vis.Rectangle2D) -> float: pass

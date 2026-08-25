@@ -158,17 +158,8 @@ class Vector3F(Boost.Python.instance):
     # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -178,11 +169,6 @@ class Vector3F(Boost.Python.instance):
     # 
     def swap(v: Vector3F) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
@@ -224,17 +210,8 @@ class Vector3F(Boost.Python.instance):
     # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -243,16 +220,8 @@ class Vector3F(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> Vector3F: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFVectorExpression: pass
 
     ##
@@ -304,11 +273,6 @@ class Vector3F(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -353,11 +317,6 @@ class Vector3F(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> Vector3F: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> Vector3F: pass
 
     objectID = property(getObjectID)

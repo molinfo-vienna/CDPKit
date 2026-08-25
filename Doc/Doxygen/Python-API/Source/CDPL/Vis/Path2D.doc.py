@@ -313,10 +313,6 @@ class Path2D(Boost.Python.instance):
     # 
     def __ne__(path: Path2D) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
     objectID = property(getObjectID)

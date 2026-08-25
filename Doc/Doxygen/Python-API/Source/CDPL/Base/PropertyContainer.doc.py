@@ -56,24 +56,10 @@ class PropertyContainer(Boost.Python.instance):
     # 
     def getNumProperties() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param def_value 
-    # \return 
-    #
     def getPropertyOrDefault(key: LookupKey, def_value: Any) -> Any: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getPropertyKeys() -> list: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getPropertyValues() -> list: pass
 
     ##
@@ -83,11 +69,6 @@ class PropertyContainer(Boost.Python.instance):
     # 
     def getProperties() -> list: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def setProperty(key: LookupKey, value: Any) -> None: pass
 
     ##
@@ -171,24 +152,10 @@ class PropertyContainer(Boost.Python.instance):
     # 
     def __contains__(key: LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: LookupKey, value: Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

@@ -106,10 +106,6 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     # 
     def getMaxDistance() -> int: pass
 
-    ##
-    # \brief 
-    # \param max_dist 
-    #
     def setMode(max_dist: Mode) -> None: pass
 
     ##
@@ -126,11 +122,6 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     # 
     def setAtomPairWeightFunction(func: Chem.DoubleAtom2UInt2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \param molgraph 
-    # \param corr_vec 
-    #
     def calculate(molgraph: Chem.MolecularGraph, corr_vec: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

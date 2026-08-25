@@ -43,12 +43,6 @@ class FZeroGrid(Boost.Python.instance):
     # 
     def __init__(m: int, n: int, o: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param m 
-    # \param n 
-    # \param o 
-    #
     def resize(m: int, n: int, o: int) -> None: pass
 
     ##
@@ -63,56 +57,20 @@ class FZeroGrid(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize3() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
     def getElement(i: int, j: int, k: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
     ##
@@ -122,46 +80,16 @@ class FZeroGrid(Boost.Python.instance):
     # 
     def assign(g: FZeroGrid) -> FZeroGrid: pass
 
-    ##
-    # \brief 
-    # \param g 
-    #
     def swap(g: FZeroGrid) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
     def __call__(i: int, j: int, k: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ijk 
-    # \return 
-    #
     def __getitem__(ijk: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -198,16 +126,8 @@ class FZeroGrid(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> FZeroGrid: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFGridExpression: pass
 
     ##

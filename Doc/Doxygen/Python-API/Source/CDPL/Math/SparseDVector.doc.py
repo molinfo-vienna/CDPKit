@@ -170,17 +170,8 @@ class SparseDVector(Boost.Python.instance):
     # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -190,11 +181,6 @@ class SparseDVector(Boost.Python.instance):
     # 
     def swap(v: SparseDVector) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
@@ -236,17 +222,8 @@ class SparseDVector(Boost.Python.instance):
     # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -255,16 +232,8 @@ class SparseDVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> SparseDVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDVectorExpression: pass
 
     ##
@@ -316,11 +285,6 @@ class SparseDVector(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -365,11 +329,6 @@ class SparseDVector(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> SparseDVector: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> SparseDVector: pass
 
     objectID = property(getObjectID)

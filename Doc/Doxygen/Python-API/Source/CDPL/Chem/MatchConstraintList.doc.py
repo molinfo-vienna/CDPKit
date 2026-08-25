@@ -76,40 +76,16 @@ class MatchConstraintList(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param num_elem 
-    # \param value 
-    #
     def resize(num_elem: int, value: MatchConstraint) -> None: pass
 
-    ##
-    # \brief 
-    # \param num_elem 
-    #
     def reserve(num_elem: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getCapacity() -> int: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
     ##
@@ -119,17 +95,8 @@ class MatchConstraintList(Boost.Python.instance):
     # 
     def assign(array: MatchConstraintList) -> MatchConstraintList: pass
 
-    ##
-    # \brief 
-    # \param num_elem 
-    # \param value 
-    #
     def assign(num_elem: int, value: MatchConstraint) -> None: pass
 
-    ##
-    # \brief 
-    # \param value 
-    #
     def addElement(value: MatchConstraint) -> None: pass
 
     ##
@@ -149,76 +116,26 @@ class MatchConstraintList(Boost.Python.instance):
     # 
     def addElement(id: int, rel: Relation, val: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param values 
-    #
     def addElements(values: MatchConstraintList) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param value 
-    #
     def insertElement(idx: int, value: MatchConstraint) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param num_elem 
-    # \param value 
-    #
     def insertElements(idx: int, num_elem: int, value: MatchConstraint) -> None: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param values 
-    #
     def insertElements(index: int, values: MatchConstraintList) -> None: pass
 
-    ##
-    # \brief 
-    #
     def popLastElement() -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def removeElement(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param begin_idx 
-    # \param end_idx 
-    #
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getFirstElement() -> MatchConstraint: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getLastElement() -> MatchConstraint: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getElement(idx: int) -> MatchConstraint: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param value 
-    #
     def setElement(idx: int, value: MatchConstraint) -> None: pass
 
     ##
@@ -235,30 +152,12 @@ class MatchConstraintList(Boost.Python.instance):
     # 
     def setType(type: Type) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> MatchConstraint: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param value 
-    #
     def __setitem__(index: int, value: MatchConstraint) -> None: pass
 
     ##

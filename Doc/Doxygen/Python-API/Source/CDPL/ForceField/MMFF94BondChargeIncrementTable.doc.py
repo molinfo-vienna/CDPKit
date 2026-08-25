@@ -101,16 +101,8 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
         # 
         def getChargeIncrement() -> float: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __nonzero__() -> bool: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __bool__() -> bool: pass
 
         objectID = property(getObjectID)
@@ -167,13 +159,6 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
     # 
     def removeEntry(bond_type_idx: int, atom1_type: int, atom2_type: int) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    # \param atom_type 
-    # \return 
-    #
     def getEntry(arg2: int, self: int, atom_type: int) -> Entry: pass
 
     ##
@@ -188,10 +173,6 @@ class MMFF94BondChargeIncrementTable(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##

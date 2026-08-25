@@ -171,10 +171,6 @@ class StructureGeneratorSettings(Boost.Python.instance):
     # 
     def getDielectricConstant() -> float: pass
 
-    ##
-    # \brief 
-    # \param dist_expo 
-    #
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
@@ -184,10 +180,6 @@ class StructureGeneratorSettings(Boost.Python.instance):
     # 
     def getDistanceExponent() -> float: pass
 
-    ##
-    # \brief 
-    # \param max_num 
-    #
     def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
@@ -211,10 +203,6 @@ class StructureGeneratorSettings(Boost.Python.instance):
     # 
     def getRefinementTolerance() -> float: pass
 
-    ##
-    # \brief 
-    # \param max_size 
-    #
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##

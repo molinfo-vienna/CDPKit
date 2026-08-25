@@ -45,36 +45,14 @@ class StereoisomerGenerator(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getSize() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def isEmpty() -> bool: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def getElement(idx: int) -> StereoDescriptor: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> StereoDescriptor: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
         objectID = property(getObjectID)

@@ -29,9 +29,4 @@ class FeatureContainerObject3DFactoryBase(Base.ControlParameterContainer):
     # 
     def __init__() -> None: pass
 
-    ##
-    # \brief 
-    # \param data 
-    # \return 
-    #
     def create(data: Pharm.FeatureContainer) -> Object3D: pass

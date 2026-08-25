@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all vector expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class ULVectorExpression(ConstULVectorExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: ULVectorExpression) -> None: pass
 
     ##
@@ -72,18 +70,8 @@ class ULVectorExpression(ConstULVectorExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
@@ -128,9 +116,4 @@ class ULVectorExpression(ConstULVectorExpression):
     # 
     def __idiv__(t: int) -> ULVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULVectorExpression: pass

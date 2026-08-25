@@ -41,21 +41,8 @@ class DoubleVector2DArrayFunctor(Boost.Python.instance):
     # 
     def __init__(callable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __call__(arg1: Vector2DArray) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

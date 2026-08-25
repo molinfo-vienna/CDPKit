@@ -49,40 +49,16 @@ class ElasticPotentialList(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param num_elem 
-    # \param value 
-    #
     def resize(num_elem: int, value: ElasticPotential) -> None: pass
 
-    ##
-    # \brief 
-    # \param num_elem 
-    #
     def reserve(num_elem: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getCapacity() -> int: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
     ##
@@ -92,115 +68,38 @@ class ElasticPotentialList(Boost.Python.instance):
     # 
     def assign(array: ElasticPotentialList) -> ElasticPotentialList: pass
 
-    ##
-    # \brief 
-    # \param num_elem 
-    # \param value 
-    #
     def assign(num_elem: int, value: ElasticPotential) -> None: pass
 
-    ##
-    # \brief 
-    # \param value 
-    #
     def addElement(value: ElasticPotential) -> None: pass
 
-    ##
-    # \brief 
-    # \param values 
-    #
     def addElements(values: ElasticPotentialList) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param value 
-    #
     def insertElement(idx: int, value: ElasticPotential) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param num_elem 
-    # \param value 
-    #
     def insertElements(idx: int, num_elem: int, value: ElasticPotential) -> None: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param values 
-    #
     def insertElements(index: int, values: ElasticPotentialList) -> None: pass
 
-    ##
-    # \brief 
-    #
     def popLastElement() -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def removeElement(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param begin_idx 
-    # \param end_idx 
-    #
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getFirstElement() -> ElasticPotential: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getLastElement() -> ElasticPotential: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getElement(idx: int) -> ElasticPotential: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param value 
-    #
     def setElement(idx: int, value: ElasticPotential) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> ElasticPotential: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param value 
-    #
     def __setitem__(index: int, value: ElasticPotential) -> None: pass
 
     objectID = property(getObjectID)

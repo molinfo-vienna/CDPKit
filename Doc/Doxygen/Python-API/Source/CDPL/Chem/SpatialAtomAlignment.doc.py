@@ -47,141 +47,48 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityMatchFunction(func: BoolAtom2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityMatchFunction() -> BoolAtom2Functor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityPairMatchFunction(func: ForceField.InteractionFilterFunction4) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityPairMatchFunction() -> ForceField.InteractionFilterFunction4: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setTopAlignmentConstraintFunction(func: BoolSTPairArrayFunctor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTopAlignmentConstraintFunction() -> BoolSTPairArrayFunctor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntity3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntity3DCoordinatesFunction() -> Atom3DCoordinatesFunction: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityWeightFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityWeightFunction() -> ForceField.MMFF94AtomChargeFunction: pass
 
-    ##
-    # \brief 
-    # \param exhaustive 
-    #
     def performExhaustiveSearch(exhaustive: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def exhaustiveSearchPerformed() -> bool: pass
 
-    ##
-    # \brief 
-    # \param entity 
-    # \param first_set 
-    #
     def addEntity(entity: Atom, first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    #
     def clearEntities(first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getNumEntities(first_set: bool) -> int: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getEntities(first_set: bool) -> object: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param first_set 
-    # \return 
-    #
     def getEntity(idx: int, first_set: bool) -> Atom: pass
 
-    ##
-    # \brief 
-    # \param min_size 
-    #
     def setMinTopologicalMappingSize(min_size: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getMinTopologicalMappingSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param reset 
-    #
     def reset() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def nextAlignment() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTransform() -> Math.Matrix4D: pass
 
     ##
@@ -191,10 +98,6 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # 
     def assign(alignment: SpatialAtomAlignment) -> SpatialAtomAlignment: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTopologicalMapping() -> Util.STPairArray: pass
 
     objectID = property(getObjectID)

@@ -63,10 +63,6 @@ class TorsionLibrary(TorsionCategory):
     # 
     def assign(lib: TorsionLibrary) -> TorsionLibrary: pass
 
-    ##
-    # \brief 
-    # \param map 
-    #
     @staticmethod
     def set(map: TorsionLibrary) -> None: pass
 

@@ -236,11 +236,6 @@ class Line2D(Boost.Python.instance):
     # 
     def containsPoint(pt: Math.Vector2D) -> bool: pass
 
-    ##
-    # \brief 
-    # \param pt 
-    # \return 
-    #
     def getIntersectionPoint(pt: Line2D) -> object: pass
 
     ##

@@ -59,7 +59,7 @@ namespace CDPL
             std::size_t getIndex() const;
 
             /**
-             * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a feature.
              * \param feature The feature whose properties get copied.
              * \return A reference to itself.
              */

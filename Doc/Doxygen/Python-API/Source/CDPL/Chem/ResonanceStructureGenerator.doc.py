@@ -211,17 +211,8 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     # 
     def getStructureData(idx: int) -> StructureData: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> StructureData: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

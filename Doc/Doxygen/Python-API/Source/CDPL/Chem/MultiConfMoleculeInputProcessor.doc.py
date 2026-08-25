@@ -41,30 +41,10 @@ class MultiConfMoleculeInputProcessor(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param tgt_molgraph 
-    # \return 
-    #
     def init(tgt_molgraph: MolecularGraph) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param tgt_molgraph 
-    # \param conf_molgraph 
-    # \return 
-    #
     def isConformation(tgt_molgraph: MolecularGraph, conf_molgraph: MolecularGraph) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param tgt_molgraph 
-    # \param conf_molgraph 
-    # \return 
-    #
     def addConformation(tgt_molgraph: MolecularGraph, conf_molgraph: MolecularGraph) -> bool: pass
 
     objectID = property(getObjectID)

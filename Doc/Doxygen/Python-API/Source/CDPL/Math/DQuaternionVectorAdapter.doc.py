@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components C1, C2, C3, C4).
+# 
 class DQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
@@ -49,89 +49,91 @@ class DQuaternionVectorAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> DQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> DQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> DQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> DQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DQuaternionVectorAdapter instance \a a.
-    # \param a The \c %DQuaternionVectorAdapter instance to copy.
+    # \brief Copies the components of <em>a</em> into this view (writing through to the wrapped quaternion).
+    # 
+    # \param a The source adapter.
+    # 
     # \return \a self
     # 
     def assign(a: DQuaternionVectorAdapter) -> DQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
-    # \param a The \c %object instance to copy.
+    # \brief Copies the components of <em>a</em> into this view (writing through to the wrapped quaternion).
+    # 
+    # \param a The source adapter.
+    # 
     # \return \a self
     # 
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the view is empty (always <tt>False</tt>, the view is fixed-size with 4 components).
+    # 
+    # \return <tt>False</tt>.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the dimensionality of the view (always <em>4</em>).
+    # 
+    # \return <em>4</em>.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Swaps the components of this view with those of <em>a</em>.
+    # 
+    # \param a The adapter to swap with.
+    # 
     def swap(a: DQuaternionVectorAdapter) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped quaternion (via its stored closure).
+    # 
+    # \return A reference to the wrapped quaternion closure.
+    # 
     def getData() -> DQuaternionExpression: pass
 
     ##
@@ -163,23 +165,18 @@ class DQuaternionVectorAdapter(Boost.Python.instance):
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the quaternion component at index <em>i</em>.
+    # 
+    # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
+    # 
+    # \return A reference to the component. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
+    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -188,16 +185,8 @@ class DQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DQuaternionVectorAdapter: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDVectorExpression: pass
 
     ##
@@ -249,11 +238,6 @@ class DQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -298,11 +282,6 @@ class DQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> DQuaternionVectorAdapter: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DQuaternionVectorAdapter: pass
 
     objectID = property(getObjectID)

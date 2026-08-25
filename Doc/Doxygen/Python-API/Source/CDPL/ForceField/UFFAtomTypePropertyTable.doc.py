@@ -141,16 +141,8 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         # 
         def getEffectiveCharge() -> float: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __nonzero__() -> bool: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __bool__() -> bool: pass
 
         objectID = property(getObjectID)
@@ -241,10 +233,6 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##

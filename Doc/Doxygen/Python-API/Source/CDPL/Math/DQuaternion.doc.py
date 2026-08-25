@@ -25,22 +25,24 @@
 class DQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %DQuaternion instance.
+    # \brief Constructs an uninitialized quaternion.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DQuaternion instance \a q.
-    # \param q The \c %DQuaternion instance to copy.
+    # \brief Constructs a copy of the quaternion <em>q</em>.
+    # 
+    # \param q The quaternion to copy.
     # 
     def __init__(q: DQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \c %DQuaternion instance.
-    # \param c1 
-    # \param c2 
-    # \param c3 
-    # \param c4 
+    # \brief Constructs the quaternion with the supplied component values (omitted components default to the value-initialized ValueType).
+    # 
+    # \param c1 The real component.
+    # \param c2 The first imaginary component.
+    # \param c3 The second imaginary component.
+    # \param c4 The third imaginary component.
     # 
     def __init__(c1: float, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
@@ -87,36 +89,46 @@ class DQuaternion(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFQuaternionExpression instance \a e.
-    # \param e The \c %ConstFQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFQuaternionExpression) -> DQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDQuaternionExpression instance \a e.
-    # \param e The \c %ConstDQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDQuaternionExpression) -> DQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLQuaternionExpression instance \a e.
-    # \param e The \c %ConstLQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLQuaternionExpression) -> DQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULQuaternionExpression instance \a e.
-    # \param e The \c %ConstULQuaternionExpression instance to copy.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # 
+    # \param e The source quaternion expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULQuaternionExpression) -> DQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DQuaternion instance \a q.
-    # \param q The \c %DQuaternion instance to copy.
+    # \brief Copy-assigns the components of <em>q</em> to this quaternion.
+    # 
+    # \param q The source quaternion.
+    # 
     # \return \a self
     # 
     def assign(q: DQuaternion) -> DQuaternion: pass
@@ -129,72 +141,58 @@ class DQuaternion(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the real component <em>C1</em>.
+    # 
+    # \return A reference to <em>C1</em>.
+    # 
     def getC1() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the imaginary component <em>C2</em>.
+    # 
+    # \return A reference to <em>C2</em>.
+    # 
     def getC2() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the imaginary component <em>C3</em>.
+    # 
+    # \return A reference to <em>C3</em>.
+    # 
     def getC3() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the imaginary component <em>C4</em>.
+    # 
+    # \return A reference to <em>C4</em>.
+    # 
     def getC4() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param q 
-    #
+    # \brief Swaps the four components of this quaternion with those of <em>q</em>.
+    # 
+    # \param q The quaternion to swap with.
+    # 
     def swap(q: DQuaternion) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC1(v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC2(v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC3(v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def setC4(v: float) -> None: pass
 
     ##
-    # \brief 
-    # \param c1 
-    # \param c2 
-    # \param c3 
-    # \param c4 
-    #
+    # \brief Sets the four quaternion components to the supplied values (omitted arguments default to the value-initialized ValueType).
+    # 
+    # \param c1 The new real component.
+    # \param c2 The new first imaginary component.
+    # \param c3 The new second imaginary component.
+    # \param c4 The new third imaginary component.
+    # 
     def set(c1: float = 0.0, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
     ##
@@ -231,16 +229,8 @@ class DQuaternion(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DQuaternion: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
@@ -257,11 +247,6 @@ class DQuaternion(Boost.Python.instance):
     # 
     def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -278,11 +263,6 @@ class DQuaternion(Boost.Python.instance):
     # 
     def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -327,11 +307,6 @@ class DQuaternion(Boost.Python.instance):
     # 
     def __truediv__(t: float) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -418,25 +393,10 @@ class DQuaternion(Boost.Python.instance):
     # 
     def __idiv__(q: ConstDQuaternionExpression) -> DQuaternion: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: DQuaternion) -> DQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: ConstDQuaternionExpression) -> DQuaternion: pass
 
     objectID = property(getObjectID)

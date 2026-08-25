@@ -37,10 +37,6 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def __init__(e: ULMatrixExpression, i: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getIndex() -> int: pass
 
     ##
@@ -97,48 +93,18 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param r 
-    #
     def swap(r: ULMatrixRow) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getData() -> ULMatrixExpression: pass
 
     ##
@@ -169,24 +135,10 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -195,16 +147,8 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULMatrixRow: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULVectorExpression: pass
 
     ##
@@ -256,11 +200,6 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
@@ -305,11 +244,6 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> ULMatrixRow: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULMatrixRow: pass
 
     objectID = property(getObjectID)

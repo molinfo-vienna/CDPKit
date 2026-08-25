@@ -40,13 +40,6 @@ class DRotationMatrix(Boost.Python.instance):
     # 
     def __init__(n: int, w: float, ux: float, uy: float, uz: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param w 
-    # \param ux 
-    # \param uy 
-    # \param uz 
-    #
     def set(w: float, ux: float, uy: float, uz: float) -> None: pass
 
     ##
@@ -61,36 +54,14 @@ class DRotationMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -100,31 +71,12 @@ class DRotationMatrix(Boost.Python.instance):
     # 
     def assign(m: DRotationMatrix) -> DRotationMatrix: pass
 
-    ##
-    # \brief 
-    # \param m 
-    #
     def swap(m: DRotationMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -161,16 +113,8 @@ class DRotationMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DRotationMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##

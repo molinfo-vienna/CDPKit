@@ -29,30 +29,12 @@ class DSpatialGrid(AttributedGrid):
     # 
     def __init__() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumElements() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param value 
-    #
     def setElement(i: int, value: float) -> None: pass
 
     ##
@@ -72,38 +54,14 @@ class DSpatialGrid(AttributedGrid):
     # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param value 
-    #
     def __setitem__(i: int, value: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
@@ -113,9 +71,4 @@ class DSpatialGrid(AttributedGrid):
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass

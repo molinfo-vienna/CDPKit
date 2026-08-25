@@ -131,10 +131,6 @@ class Vector2LArray(Boost.Python.instance):
     # 
     def addElement(value: Vector2L) -> None: pass
 
-    ##
-    # \brief 
-    # \param values 
-    #
     def addElements(values: Vector2LArray) -> None: pass
 
     ##
@@ -158,11 +154,6 @@ class Vector2LArray(Boost.Python.instance):
     # 
     def insertElements(idx: int, num_elem: int, value: Vector2L) -> None: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param values 
-    #
     def insertElements(index: int, values: Vector2LArray) -> None: pass
 
     ##
@@ -181,11 +172,6 @@ class Vector2LArray(Boost.Python.instance):
     # 
     def removeElement(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param begin_idx 
-    # \param end_idx 
-    #
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
@@ -229,37 +215,14 @@ class Vector2LArray(Boost.Python.instance):
     # 
     def setElement(idx: int, value: Vector2L) -> None: pass
 
-    ##
-    # \brief 
-    # \param as_vec 
-    # \return 
-    #
     def toArray(as_vec: bool) -> object: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Vector2L: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param value 
-    #
     def __setitem__(index: int, value: Vector2L) -> None: pass
 
     ##

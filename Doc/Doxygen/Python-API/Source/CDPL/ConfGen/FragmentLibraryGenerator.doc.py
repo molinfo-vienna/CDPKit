@@ -106,12 +106,6 @@ class FragmentLibraryGenerator(Boost.Python.instance):
     # 
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param frag 
-    # \return 
-    #
     def process(self: MolecularGraph, frag: Chem.MolecularGraph) -> int: pass
 
     ##

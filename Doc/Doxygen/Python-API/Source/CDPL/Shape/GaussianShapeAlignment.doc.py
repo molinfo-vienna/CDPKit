@@ -409,17 +409,8 @@ class GaussianShapeAlignment(Boost.Python.instance):
     # 
     def getResult(idx: int) -> AlignmentResult: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> AlignmentResult: pass
 
     objectID = property(getObjectID)

@@ -137,10 +137,6 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     def clearExcludePatterns() -> None: pass
 
-    ##
-    # \brief 
-    # \param molgraph 
-    #
     def setResultPattern(molgraph: MolecularGraph) -> None: pass
 
     ##

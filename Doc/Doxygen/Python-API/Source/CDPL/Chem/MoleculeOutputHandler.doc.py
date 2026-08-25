@@ -41,25 +41,10 @@ class MoleculeOutputHandler(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getDataFormat() -> Base.DataFormat: pass
 
-    ##
-    # \brief 
-    # \param os 
-    # \return 
-    #
     def createWriter(os: Base.OStream) -> object: pass
 
-    ##
-    # \brief 
-    # \param file_name 
-    # \param mode 
-    # \return 
-    #
     def createWriter(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> object: pass
 
     objectID = property(getObjectID)

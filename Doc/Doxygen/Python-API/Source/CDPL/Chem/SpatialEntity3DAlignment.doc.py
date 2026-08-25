@@ -47,141 +47,48 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityMatchFunction(func: BoolEntity3D2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityMatchFunction() -> BoolEntity3D2Functor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityPairMatchFunction(func: BoolEntity3D4Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityPairMatchFunction() -> BoolEntity3D4Functor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setTopAlignmentConstraintFunction(func: BoolSTPairArrayFunctor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTopAlignmentConstraintFunction() -> BoolSTPairArrayFunctor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntity3DCoordinatesFunction(func: Vector3DEntity3DFunctor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntity3DCoordinatesFunction() -> Vector3DEntity3DFunctor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityWeightFunction(func: DoubleEntity3DFunctor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityWeightFunction() -> DoubleEntity3DFunctor: pass
 
-    ##
-    # \brief 
-    # \param exhaustive 
-    #
     def performExhaustiveSearch(exhaustive: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def exhaustiveSearchPerformed() -> bool: pass
 
-    ##
-    # \brief 
-    # \param entity 
-    # \param first_set 
-    #
     def addEntity(entity: Entity3D, first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    #
     def clearEntities(first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getNumEntities(first_set: bool) -> int: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getEntities(first_set: bool) -> object: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param first_set 
-    # \return 
-    #
     def getEntity(idx: int, first_set: bool) -> Entity3D: pass
 
-    ##
-    # \brief 
-    # \param min_size 
-    #
     def setMinTopologicalMappingSize(min_size: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getMinTopologicalMappingSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param reset 
-    #
     def reset() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def nextAlignment() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTransform() -> Math.Matrix4D: pass
 
     ##
@@ -191,10 +98,6 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # 
     def assign(alignment: SpatialEntity3DAlignment) -> SpatialEntity3DAlignment: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTopologicalMapping() -> Util.STPairArray: pass
 
     objectID = property(getObjectID)

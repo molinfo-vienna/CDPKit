@@ -171,10 +171,6 @@ class TorsionDriverSettings(Boost.Python.instance):
     # 
     def getDielectricConstant() -> float: pass
 
-    ##
-    # \brief 
-    # \param dist_expo 
-    #
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##

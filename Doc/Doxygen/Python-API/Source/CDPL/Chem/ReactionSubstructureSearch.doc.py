@@ -161,31 +161,12 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     # 
     def setQuery(query: Reaction) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> AtomBondMapping: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __nonzero__(self: Reaction) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __bool__(self: Reaction) -> bool: pass
 
     objectID = property(getObjectID)

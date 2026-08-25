@@ -71,10 +71,6 @@ class Vector7D(Boost.Python.instance):
     # 
     def __init__(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def clear(v: float = 0.0) -> None: pass
 
     ##
@@ -131,42 +127,16 @@ class Vector7D(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def swap(v: Math.Vector7D) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
@@ -197,24 +167,10 @@ class Vector7D(Boost.Python.instance):
     # 
     def __ne__(e: Math.ConstDVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -223,16 +179,8 @@ class Vector7D(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> Math.Vector7D: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> Math.ConstDVectorExpression: pass
 
     ##
@@ -284,11 +232,6 @@ class Vector7D(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> Math.ConstDVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -333,11 +276,6 @@ class Vector7D(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> Math.Vector7D: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> Math.Vector7D: pass
 
     objectID = property(getObjectID)

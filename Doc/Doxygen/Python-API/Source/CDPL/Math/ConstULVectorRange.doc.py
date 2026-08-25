@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a contiguous half-open subrange of an underlying vector.
+# 
 class ConstULVectorRange(Boost.Python.instance):
 
     ##
@@ -38,9 +38,10 @@ class ConstULVectorRange(Boost.Python.instance):
     def __init__(e: ConstULVectorExpression, r: Range) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the start index of the viewed range within the wrapped vector.
+    # 
+    # \return The start index of the range.
+    # 
     def getStart() -> int: pass
 
     ##
@@ -56,34 +57,28 @@ class ConstULVectorRange(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the view is empty (zero-length range).
+    # 
+    # \return <tt>True</tt> if the range is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the view (number of elements covered by the range).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ConstULVectorExpression: pass
 
     ##
@@ -115,23 +110,16 @@ class ConstULVectorRange(Boost.Python.instance):
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return A reference to the underlying element <tt>v(range(i))</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -140,16 +128,8 @@ class ConstULVectorRange(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstULVectorRange: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULVectorExpression: pass
 
     ##

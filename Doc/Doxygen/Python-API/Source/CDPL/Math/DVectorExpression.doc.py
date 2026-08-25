@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all vector expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class DVectorExpression(ConstDVectorExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: DVectorExpression) -> None: pass
 
     ##
@@ -72,18 +70,8 @@ class DVectorExpression(ConstDVectorExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -128,9 +116,4 @@ class DVectorExpression(ConstDVectorExpression):
     # 
     def __idiv__(t: float) -> DVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DVectorExpression: pass

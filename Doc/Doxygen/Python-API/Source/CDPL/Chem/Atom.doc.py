@@ -31,17 +31,8 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     #
     class AtomSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Atom: pass
 
         ##
@@ -56,17 +47,8 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     #
     class BondSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Bond: pass
 
         ##
@@ -116,7 +98,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getIndex() -> int: pass
 
     ##
-    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>;.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>.
     # 
     # \param atom The atom whose properties get copied.
     # 
@@ -124,17 +106,8 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     def assign(atom: Atom) -> Atom: pass
 
-    ##
-    # \brief Returns a reference to itself.
-    # 
-    # \return \a self
-    # 
     def getAtoms() -> AtomSequence: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getBonds() -> BondSequence: pass
 
     ##
@@ -179,33 +152,10 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     def getNumAtoms() -> int: pass
 
-    ##
-    # \brief Orders the atoms according to criteria implemented by the provided atom comparison function.
-    # 
-    # \param func The atom comparison function implementing the applied ordering criteria.
-    # 
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
-    ##
-    # \brief Returns a reference to the entity at index <em>idx</em>.
-    # 
-    # Forwards to getAtom() and exists to satisfy the Chem.Entity3DContainer interface.
-    # 
-    # \param idx The zero-based entity index.
-    # 
-    # \return A reference to the entity at the specified index. 
-    # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
-    # 
     def getEntity(idx: int) -> Entity3D: pass
 
-    ##
-    # \brief Returns the number of stored Chem.Entity3D objects.
-    # 
-    # Forwards to getNumAtoms() and exists to satisfy the Chem.Entity3DContainer interface.
-    # 
-    # \return The number of contained atoms.
-    # 
     def getNumEntities() -> int: pass
 
     ##
@@ -230,10 +180,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     def containsBond(bond: Bond) -> bool: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def orderBonds(func: BoolBond2Functor) -> None: pass
 
     ##
@@ -256,11 +202,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     def getNumBonds() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
@@ -284,24 +225,10 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     molecule = property(getMolecule)

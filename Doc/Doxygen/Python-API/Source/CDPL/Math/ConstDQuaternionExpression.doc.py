@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all quaternion expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class ConstDQuaternionExpression(Boost.Python.instance):
 
     ##
@@ -36,34 +38,14 @@ class ConstDQuaternionExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC1() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC2() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC3() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC4() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -86,16 +68,8 @@ class ConstDQuaternionExpression(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
@@ -112,11 +86,6 @@ class ConstDQuaternionExpression(Boost.Python.instance):
     # 
     def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -133,11 +102,6 @@ class ConstDQuaternionExpression(Boost.Python.instance):
     # 
     def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -182,11 +146,6 @@ class ConstDQuaternionExpression(Boost.Python.instance):
     # 
     def __truediv__(t: float) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
     objectID = property(getObjectID)

@@ -160,10 +160,6 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##

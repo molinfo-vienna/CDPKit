@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Abstract base class representing a mutable molecular graph that owns its atoms and bonds.
+# \brief Abstract base class representing a mutable molecular graph that owns and manages its atoms and bonds.
 # 
-# Extends Chem.MolecularGraph with editing operations (addAtom, addBond, removeAtom, removeBond, copy, append, remove) and supports a global registry of copy-postprocessing callbacks invoked after copy() / operator=() to keep derived state in sync with the source molecular graph.
+# Extends the Chem.MolecularGraph interface with editing methods (addAtom(), addBond(), removeAtom(), removeBond(), copy(), append(), remove()) and supports a global registry of copy postprocessing functions invoked after copying/append operations to properly transform properties referencing atoms and bonds of the source molecular graph.
 # 
 class Molecule(MolecularGraph):
 
@@ -31,23 +31,10 @@ class Molecule(MolecularGraph):
     #
     class AtomSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Atom: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
         ##
@@ -62,23 +49,10 @@ class Molecule(MolecularGraph):
     #
     class BondSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Bond: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
         ##
@@ -128,7 +102,7 @@ class Molecule(MolecularGraph):
     ##
     # \brief Creates a new or returns an already existing bond between the atoms specified by <em>atom1_idx</em> and <em>atom2_idx</em>.
     # 
-    # If a bond between the specified atoms already exists, then the existing bond will be returned. If a bond does not yet exist, a new bond will be created. The atom specified by <em>atom1_idx</em> becomes the start atom and the atom specified by <em>atom2_idx</em> the end atom of the newly created bond.
+    # If a bond between the specified atoms already exists then the existing bond will be returned. If a bond does not yet exist, a new bond will be created. The atom specified by <em>atom1_idx</em> becomes the start atom and the atom specified by <em>atom2_idx</em> the end atom of the newly created bond.
     # 
     # \param atom1_idx The zero-based index of the first atom of the bond.
     # \param atom2_idx The zero-based index of the second atom of the bond.
@@ -142,7 +116,7 @@ class Molecule(MolecularGraph):
     ##
     # \brief Removes the atom at the specified index.
     # 
-    # If the specified atom is connected to any other atoms of the molecule, the connecting bonds will also be removed.
+    # If the specified atom is connected to any other atoms of the molecule then the connecting bonds will also be removed.
     # 
     # \param idx The index of the atom to remove.
     # 
@@ -169,7 +143,7 @@ class Molecule(MolecularGraph):
     ##
     # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The Chem.MolecularGraph instance providing the atoms, bonds and properties to copy.
+    # \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
     # 
     def copy(molgraph: MolecularGraph) -> None: pass
 
@@ -185,7 +159,7 @@ class Molecule(MolecularGraph):
     ##
     # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to append.
+    # \param molgraph The molecular graph providing the atoms and bonds to append.
     # 
     # \note Does not affect any properties.
     # 
@@ -194,7 +168,7 @@ class Molecule(MolecularGraph):
     ##
     # \brief Removes atoms and bonds referenced by the molecular graph <em>molgraph</em> that are part of this <tt>Molecule</tt> instance.
     # 
-    # \param molgraph The Chem.MolecularGraph instance specifying the atoms and bonds to remove.
+    # \param molgraph The molecular graph specifying the atoms and bonds to remove.
     # 
     # \note Does not affect any properties if <tt>this != &molgraph</tt>.
     # 
@@ -222,141 +196,51 @@ class Molecule(MolecularGraph):
     # 
     def assign(molgraph: MolecularGraph) -> Molecule: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getAtoms() -> AtomSequence: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getBonds() -> BondSequence: pass
 
     ##
-    # \brief Registers a new copy-postprocessing function in the global registry.
+    # \brief Registers a new copy postprocessing function in the global registry.
     # 
-    # Registered callbacks are invoked in registration order after each copy() / operator=() that populates a Chem.Molecule from a Chem.MolecularGraph.
+    # Registered functions are invoked in registration order typically after copy/append operations that populate a Chem.Molecule instance with atoms and bonds from a source Chem.MolecularGraph instance.
     # 
-    # \param func The callback to register.
+    # \param func The callback function to register.
     # 
     @staticmethod
     def registerCopyPostprocessingFunction(func: VoidMoleculeMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Invokes all registered copy-postprocessing functions on this molecule with <em>src_molgraph</em> as the source.
+    # \brief Invokes all registered copy postprocessing functions on this molecule with <em>src_molgraph</em> as the source molecular graph.
     # 
-    # \param src_molgraph The molecular graph that was copied into this molecule.
+    # \param src_molgraph The source molecular graph that provided the copied atoms and bonds.
     # 
     def invokeCopyPostprocessingFunctions(src_molgraph: MolecularGraph) -> None: pass
 
-    ##
-    # \brief Returns a reference to the atom at index <em>idx</em>.
-    # 
-    # \param idx The zero-based index of the atom to return.
-    # 
-    # \return A reference to the atom at the specified index. 
-    # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
-    # 
     def getAtom(idx: int) -> Atom: pass
 
-    ##
-    # \brief Tells whether the specified atom is part of this molecule.
-    # 
-    # \param atom The atom to look for.
-    # 
-    # \return <tt>True</tt> if <em>atom</em> is part of the molecule, and <tt>False</tt> otherwise.
-    # 
     def containsAtom(atom: Atom) -> bool: pass
 
-    ##
-    # \brief Returns the index of the specified atom.
-    # 
-    # \param atom The atom for which to return the index.
-    # 
-    # \return The zero-based index of the specified atom. 
-    # 
-    # \throw Base.ItemNotFound if the specified atom is not part of the molecule.
-    # 
     def getAtomIndex(atom: Atom) -> int: pass
 
-    ##
-    # \brief Returns the number of explicit atoms.
-    # 
-    # \return The number of explicit atoms.
-    # 
     def getNumAtoms() -> int: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getEntity(idx: int) -> Entity3D: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumEntities() -> int: pass
 
-    ##
-    # \brief Returns a reference to the bond at index <em>idx</em>.
-    # 
-    # \param idx The zero-based index of the bond to return.
-    # 
-    # \return A reference to the bond at the specified index. 
-    # 
-    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
-    # 
     def getBond(idx: int) -> Bond: pass
 
-    ##
-    # \brief Tells whether the specified bond is part of this molecule.
-    # 
-    # \param bond The bond to look for.
-    # 
-    # \return <tt>True</tt> if <em>bond</em> is part of the molecule, and <tt>False</tt> otherwise.
-    # 
     def containsBond(bond: Bond) -> bool: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def orderBonds(func: BoolBond2Functor) -> None: pass
 
-    ##
-    # \brief Returns the index of the specified bond.
-    # 
-    # \param bond The bond for which to return the index.
-    # 
-    # \return The zero-based index of the specified bond. 
-    # 
-    # \throw Base.ItemNotFound if the specified bond is not part of the molecule.
-    # 
     def getBondIndex(bond: Bond) -> int: pass
 
-    ##
-    # \brief Returns the number of explicit bonds.
-    # 
-    # \return The number of explicit bonds.
-    # 
     def getNumBonds() -> int: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __getstate__() -> tuple: pass
 
     ##
@@ -392,11 +276,6 @@ class Molecule(MolecularGraph):
     # 
     def __isub__(molgraph: MolecularGraph) -> Molecule: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
@@ -420,24 +299,10 @@ class Molecule(MolecularGraph):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     atoms = property(getAtoms)

@@ -29,34 +29,14 @@ class CompoundObject3DReader(Object3DReaderBase):
     # 
     def __init__() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumReaders() -> int: pass
 
-    ##
-    # \brief 
-    # \param reader 
-    #
     def addReader(reader: Object3DReaderBase) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def removeReader(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getReader(idx: int) -> Object3DReaderBase: pass
 
     numReaders = property(getNumReaders)

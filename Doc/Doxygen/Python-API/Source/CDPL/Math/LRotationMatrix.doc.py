@@ -40,13 +40,6 @@ class LRotationMatrix(Boost.Python.instance):
     # 
     def __init__(n: int, w: float, ux: int, uy: int, uz: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param w 
-    # \param ux 
-    # \param uy 
-    # \param uz 
-    #
     def set(w: int, ux: int, uy: int, uz: int) -> None: pass
 
     ##
@@ -61,36 +54,14 @@ class LRotationMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -100,31 +71,12 @@ class LRotationMatrix(Boost.Python.instance):
     # 
     def assign(m: LRotationMatrix) -> LRotationMatrix: pass
 
-    ##
-    # \brief 
-    # \param m 
-    #
     def swap(m: LRotationMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -161,16 +113,8 @@ class LRotationMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> LRotationMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLMatrixExpression: pass
 
     ##

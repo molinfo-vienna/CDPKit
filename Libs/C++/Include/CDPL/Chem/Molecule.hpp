@@ -43,11 +43,11 @@ namespace CDPL
     {
 
         /**
-         * \brief Abstract base class representing a mutable molecular graph that owns its atoms and bonds.
+         * \brief Abstract base class representing a mutable molecular graph that owns and manages its atoms and bonds.
          *
-         * Extends Chem::MolecularGraph with editing operations (addAtom, addBond, removeAtom, removeBond,
-         * copy, append, remove) and supports a global registry of copy-postprocessing callbacks invoked
-         * after copy() / operator=() to keep derived state in sync with the source molecular graph.
+         * Extends the Chem::MolecularGraph interface with editing methods (addAtom(), addBond(), removeAtom(), removeBond(),
+         * copy(), append(), remove()) and supports a global registry of copy postprocessing functions invoked after copying/append
+         * operations to properly transform properties referencing atoms and bonds of the source molecular graph.
          */
         class CDPL_CHEM_API Molecule : public MolecularGraph
         {
@@ -59,28 +59,29 @@ namespace CDPL
             typedef std::shared_ptr<Molecule> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the atoms of the molecule.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom objects.
              */
             typedef AtomContainer::ConstAtomIterator ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the atoms of the molecule.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Atom objects.
              */
             typedef AtomContainer::AtomIterator AtomIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the bonds of the molecule.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Bond objects.
              */
             typedef BondContainer::ConstBondIterator ConstBondIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the bonds of the molecule.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Bond objects.
              */
             typedef BondContainer::BondIterator BondIterator;
 
             /**
-             * \brief Type of a callback invoked after a molecule has been copied from a source molecular graph
-             *        (first argument: the freshly populated destination molecule; second argument: the source graph).
+             * \brief Type of function invoked after a molecule has been altered due to copying/appending a source molecular graph.
+             *
+             * First argument: the modified destination molecule, second argument: the source molecular graph.
              */
             typedef std::function<void(Molecule&, const MolecularGraph&)> CopyPostprocessingFunction;
 
@@ -103,34 +104,6 @@ namespace CDPL
             virtual void clear() = 0;
 
             /**
-             * \brief Returns the number of explicit atoms.
-             * \return The number of explicit atoms.
-             */
-            virtual std::size_t getNumAtoms() const = 0;
-
-            /**
-             * \brief Returns the number of explicit bonds.
-             * \return The number of explicit bonds.
-             */
-            virtual std::size_t getNumBonds() const = 0;
-
-            /**
-             * \brief Returns a \c const reference to the atom at index \a idx.
-             * \param idx The zero-based index of the atom to return.
-             * \return A \c const reference to the atom at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
-             */
-            virtual const Atom& getAtom(std::size_t idx) const = 0;
-
-            /**
-             * \brief Returns a non-\c const reference to the atom at index \a idx.
-             * \param idx The zero-based index of the atom to return.
-             * \return A non-\c const reference to the atom at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
-             */
-            virtual Atom& getAtom(std::size_t idx) = 0;
-
-            /**
              * \brief Creates a new atom and adds it to the molecule.
              *
              * Note that this method does not create any bonds - the returned atom is always unconnected.
@@ -142,7 +115,7 @@ namespace CDPL
             /**
              * \brief Removes the atom at the specified index.
              *
-             * If the specified atom is connected to any other atoms of the molecule, the connecting bonds
+             * If the specified atom is connected to any other atoms of the molecule then the connecting bonds
              * will also be removed.
              *
              * \param idx The index of the atom to remove.
@@ -153,7 +126,7 @@ namespace CDPL
             /**
              * \brief Removes the atom specified by the iterator \a it.
              *
-             * If the specified atom is connected to any other atoms of the molecule, the connecting bonds
+             * If the specified atom is connected to any other atoms of the molecule then the connecting bonds
              * will also be removed.
              *
              * \param it An iterator that specifies the atom to remove.
@@ -163,26 +136,10 @@ namespace CDPL
             AtomIterator removeAtom(const AtomIterator& it);
 
             /**
-             * \brief Returns a \c const reference to the bond at index \a idx.
-             * \param idx The zero-based index of the bond to return.
-             * \return A \c const reference to the bond at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
-             */
-            virtual const Bond& getBond(std::size_t idx) const = 0;
-
-            /**
-             * \brief Returns a non-\c const reference to the bond at index \a idx.
-             * \param idx The zero-based index of the bond to return.
-             * \return A non-\c const reference to the bond at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
-             */
-            virtual Bond& getBond(std::size_t idx) = 0;
-
-            /**
              * \brief Creates a new or returns an already existing bond between the atoms specified by
              *        \a atom1_idx and \a atom2_idx.
              *
-             * If a bond between the specified atoms already exists, then the existing bond will be returned. If a bond
+             * If a bond between the specified atoms already exists then the existing bond will be returned. If a bond
              * does not yet exist, a new bond will be created. The atom specified by \a atom1_idx becomes the start atom
              * and the atom specified by \a atom2_idx the end atom of the newly created bond. 
              *
@@ -209,36 +166,6 @@ namespace CDPL
             BondIterator removeBond(const BondIterator& it);
 
             /**
-             * \brief Tells whether the specified atom is part of this molecule.
-             * \param atom The atom to look for.
-             * \return \c true if \a atom is part of the molecule, and \c false otherwise.
-             */
-            virtual bool containsAtom(const Atom& atom) const = 0;
-
-            /**
-             * \brief Tells whether the specified bond is part of this molecule.
-             * \param bond The bond to look for.
-             * \return \c true if \a bond is part of the molecule, and \c false otherwise.
-             */
-            virtual bool containsBond(const Bond& bond) const = 0;
-
-            /**
-             * \brief Returns the index of the specified atom.
-             * \param atom The atom for which to return the index.
-             * \return The zero-based index of the specified atom.
-             * \throw Base::ItemNotFound if the specified atom is not part of the molecule.
-             */
-            virtual std::size_t getAtomIndex(const Atom& atom) const = 0;
-
-            /**
-             * \brief Returns the index of the specified bond.
-             * \param bond The bond for which to return the index.
-             * \return The zero-based index of the specified bond.
-             * \throw Base::ItemNotFound if the specified bond is not part of the molecule.
-             */
-            virtual std::size_t getBondIndex(const Bond& bond) const = 0;
-
-            /**
              * \brief Replaces the current set of atoms, bonds and properties by a copy of the
              *        atoms, bonds and properties of the molecule \a mol.
              * \param mol The molecule to copy.
@@ -248,7 +175,7 @@ namespace CDPL
             /**
              * \brief Replaces the current set of atoms, bonds and properties by a copy of the
              *        atoms, bonds and properties of the molecular graph \a molgraph.
-             * \param molgraph The Chem::MolecularGraph instance providing the atoms, bonds and properties to copy.
+             * \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
              */
             virtual void copy(const MolecularGraph& molgraph) = 0;
 
@@ -263,14 +190,14 @@ namespace CDPL
             /**
              * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
              *        molecular graph \a molgraph.
-             * \param molgraph The Chem::MolecularGraph instance providing the atoms and bonds to append.
+             * \param molgraph The molecular graph providing the atoms and bonds to append.
              * \note Does not affect any properties.
              */
             virtual void append(const MolecularGraph& molgraph) = 0;
 
             /**
              * \brief Removes atoms and bonds referenced by the molecular graph \a molgraph that are part of this \c %Molecule instance.
-             * \param molgraph The Chem::MolecularGraph instance specifying the atoms and bonds to remove.
+             * \param molgraph The molecular graph specifying the atoms and bonds to remove.
              * \note Does not affect any properties if <tt>this != &molgraph</tt>.
              */
             virtual void remove(const MolecularGraph& molgraph) = 0;
@@ -348,19 +275,20 @@ namespace CDPL
             Molecule& operator-=(const MolecularGraph& molgraph);
 
             /**
-             * \brief Registers a new copy-postprocessing function in the global registry.
+             * \brief Registers a new copy postprocessing function in the global registry.
              *
-             * Registered callbacks are invoked in registration order after each copy() / operator=() that
-             * populates a Chem::Molecule from a Chem::MolecularGraph.
+             * Registered functions are invoked in registration order typically after copy/append operations that
+             * populate a Chem::Molecule instance with atoms and bonds from a source Chem::MolecularGraph instance.
              *
-             * \param func The callback to register.
+             * \param func The callback function to register.
              */
             static void registerCopyPostprocessingFunction(const CopyPostprocessingFunction& func);
 
           protected:
             /**
-             * \brief Invokes all registered copy-postprocessing functions on this molecule with \a src_molgraph as the source.
-             * \param src_molgraph The molecular graph that was copied into this molecule.
+             * \brief Invokes all registered copy postprocessing functions on this molecule with \a src_molgraph as
+             *        the source molecular graph.
+             * \param src_molgraph The source molecular graph that provided the copied atoms and bonds.
              */
             void invokeCopyPostprocessingFunctions(const MolecularGraph& src_molgraph);
         };

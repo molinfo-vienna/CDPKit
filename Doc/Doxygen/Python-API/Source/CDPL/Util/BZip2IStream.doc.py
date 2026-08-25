@@ -35,98 +35,34 @@ class BZip2IStream(Base.IStream):
     # 
     def __init__(is: Base.IStream) -> None: pass
 
-    ##
-    # \brief 
-    # \param size 
-    # \return 
-    #
     def readline(size: int = -1) -> str: pass
 
-    ##
-    # \brief 
-    # \param size 
-    # \return 
-    #
     def readlines(size: int = -1) -> list: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def xreadlines() -> BZip2IStream: pass
 
-    ##
-    # \brief 
-    # \param size 
-    # \return 
-    #
     def read(size: int = -1) -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def tell() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def tellr() -> int: pass
 
-    ##
-    # \brief 
-    # \param offs 
-    # \param whence 
-    #
     def seek(offs: int, whence: int = 0) -> None: pass
 
-    ##
-    # \brief 
-    # \param offs 
-    # \param whence 
-    #
     def seekr(offs: int, whence: int = 0) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def next() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isClosed() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getOpenModeString() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getOpenModeFlags() -> OpenMode: pass
 
-    ##
-    # \brief 
-    #
     def close() -> None: pass
 
-    ##
-    # \brief 
-    # \param is 
-    #
     def open(is: Base.IStream) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __iter__() -> BZip2IStream: pass
 
     closed = property(isClosed)

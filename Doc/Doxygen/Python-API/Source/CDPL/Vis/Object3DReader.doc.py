@@ -63,10 +63,6 @@ class Object3DReader(Object3DReaderBase):
     # 
     def __init__(is: Base.IStream, fmt: Base.DataFormat) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getDataFormat() -> Base.DataFormat: pass
 
     dataFormat = property(getDataFormat)

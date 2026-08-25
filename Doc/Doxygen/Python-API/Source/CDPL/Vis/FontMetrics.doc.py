@@ -100,18 +100,8 @@ class FontMetrics(Boost.Python.instance):
     # 
     def getLeading() -> float: pass
 
-    ##
-    # \brief 
-    # \param string 
-    # \return 
-    #
     def getWidth(string: str) -> float: pass
 
-    ##
-    # \brief 
-    # \param string 
-    # \param bounds 
-    #
     def getBounds(string: str, bounds: Rectangle2D) -> None: pass
 
     objectID = property(getObjectID)

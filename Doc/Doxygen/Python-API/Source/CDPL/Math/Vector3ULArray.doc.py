@@ -131,10 +131,6 @@ class Vector3ULArray(Boost.Python.instance):
     # 
     def addElement(value: Vector3UL) -> None: pass
 
-    ##
-    # \brief 
-    # \param values 
-    #
     def addElements(values: Vector3ULArray) -> None: pass
 
     ##
@@ -158,11 +154,6 @@ class Vector3ULArray(Boost.Python.instance):
     # 
     def insertElements(idx: int, num_elem: int, value: Vector3UL) -> None: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param values 
-    #
     def insertElements(index: int, values: Vector3ULArray) -> None: pass
 
     ##
@@ -181,11 +172,6 @@ class Vector3ULArray(Boost.Python.instance):
     # 
     def removeElement(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param begin_idx 
-    # \param end_idx 
-    #
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
@@ -229,37 +215,14 @@ class Vector3ULArray(Boost.Python.instance):
     # 
     def setElement(idx: int, value: Vector3UL) -> None: pass
 
-    ##
-    # \brief 
-    # \param as_vec 
-    # \return 
-    #
     def toArray(as_vec: bool) -> object: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Vector3UL: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param value 
-    #
     def __setitem__(index: int, value: Vector3UL) -> None: pass
 
     ##

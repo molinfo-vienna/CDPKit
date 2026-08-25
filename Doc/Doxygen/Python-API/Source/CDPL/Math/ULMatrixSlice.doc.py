@@ -38,28 +38,12 @@ class ULMatrixSlice(Boost.Python.instance):
     # 
     def __init__(e: ULMatrixExpression, s1: Slice, s2: Slice) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStart1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStart2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStride1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStride2() -> int: pass
 
     ##
@@ -116,77 +100,26 @@ class ULMatrixSlice(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param s 
-    #
     def swap(s: ULMatrixSlice) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getData() -> ULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -223,16 +156,8 @@ class ULMatrixSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULMatrixSlice: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##
@@ -291,11 +216,6 @@ class ULMatrixSlice(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -340,11 +260,6 @@ class ULMatrixSlice(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> ULMatrixSlice: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULMatrixSlice: pass
 
     objectID = property(getObjectID)

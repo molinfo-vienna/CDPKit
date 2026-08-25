@@ -106,9 +106,4 @@ class PatternBasedFeatureGenerator(FeatureGenerator):
     # 
     def generate(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
-    ##
-    # \brief 
-    # \param molgraph 
-    # \param pharm 
-    #
     def __call__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass

@@ -60,89 +60,30 @@ class ULVectorBulkSimilarityCalculator(Boost.Python.instance):
     # 
     def assign(calc: ULVectorBulkSimilarityCalculator) -> ULVectorBulkSimilarityCalculator: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setSimilarityFunction(func: DoubleULVector2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSimilarityFunction() -> DoubleULVector2Functor: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumDescriptors() -> int: pass
 
-    ##
-    # \brief 
-    # \param descr 
-    #
     def addDescriptor(descr: Math.ULVector) -> None: pass
 
-    ##
-    # \brief 
-    # \param descr 
-    # \return 
-    #
     def containsDescriptor(descr: Math.ULVector) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getDescriptor(idx: int) -> Math.ULVector: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def removeDescriptor(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param descr 
-    # \param sort 
-    # \param sort_desc 
-    #
     def calculate(descr: Math.ULVector, sort: bool = False, sort_desc: bool = True) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getResult(idx: int) -> tuple: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getSimilarity(idx: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getDescriptorIndex(idx: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> tuple: pass
 
     ##

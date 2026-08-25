@@ -150,11 +150,6 @@ class HashCodeCalculator(Boost.Python.instance):
     # 
     def getResult() -> int: pass
 
-    ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
     def __call__(molgraph: MolecularGraph) -> int: pass
 
     objectID = property(getObjectID)

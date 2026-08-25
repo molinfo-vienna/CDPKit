@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a strided slice of an underlying vector.
+# 
 class ConstLVectorSlice(Boost.Python.instance):
 
     ##
@@ -38,15 +38,17 @@ class ConstLVectorSlice(Boost.Python.instance):
     def __init__(e: ConstLVectorExpression, s: Slice) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the start index of the slice within the wrapped vector.
+    # 
+    # \return The start index of the slice.
+    # 
     def getStart() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the stride of the slice (step between successive viewed elements).
+    # 
+    # \return The stride.
+    # 
     def getStride() -> int: pass
 
     ##
@@ -62,34 +64,28 @@ class ConstLVectorSlice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the view is empty (zero-length slice).
+    # 
+    # \return <tt>True</tt> if the slice is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the view (number of elements covered by the slice).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ConstLVectorExpression: pass
 
     ##
@@ -121,23 +117,16 @@ class ConstLVectorSlice(Boost.Python.instance):
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return A reference to the underlying element <tt>v(slice(i))</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -146,16 +135,8 @@ class ConstLVectorSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstLVectorSlice: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLVectorExpression: pass
 
     ##

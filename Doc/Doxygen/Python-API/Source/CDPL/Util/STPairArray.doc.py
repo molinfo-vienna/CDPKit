@@ -118,10 +118,6 @@ class STPairArray(Boost.Python.instance):
     # 
     def addElement(value: STPair) -> None: pass
 
-    ##
-    # \brief 
-    # \param values 
-    #
     def addElements(values: STPairArray) -> None: pass
 
     ##
@@ -145,11 +141,6 @@ class STPairArray(Boost.Python.instance):
     # 
     def insertElements(idx: int, num_elem: int, value: STPair) -> None: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param values 
-    #
     def insertElements(index: int, values: STPairArray) -> None: pass
 
     ##
@@ -168,11 +159,6 @@ class STPairArray(Boost.Python.instance):
     # 
     def removeElement(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param begin_idx 
-    # \param end_idx 
-    #
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
@@ -216,30 +202,12 @@ class STPairArray(Boost.Python.instance):
     # 
     def setElement(idx: int, value: STPair) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> STPair: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \param value 
-    #
     def __setitem__(index: int, value: STPair) -> None: pass
 
     ##

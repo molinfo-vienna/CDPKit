@@ -47,75 +47,26 @@ class TopologicalAtomAlignment(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityMatchFunction(func: BoolAtom2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityMatchFunction() -> BoolAtom2Functor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setEntityPairMatchFunction(func: ForceField.InteractionFilterFunction4) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntityPairMatchFunction() -> ForceField.InteractionFilterFunction4: pass
 
-    ##
-    # \brief 
-    # \param entity 
-    # \param first_set 
-    #
     def addEntity(entity: Atom, first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    #
     def clearEntities(first_set: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getNumEntities(first_set: bool) -> int: pass
 
-    ##
-    # \brief 
-    # \param first_set 
-    # \return 
-    #
     def getEntities(first_set: bool) -> object: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param first_set 
-    # \return 
-    #
     def getEntity(idx: int, first_set: bool) -> Atom: pass
 
-    ##
-    # \brief 
-    #
     def reset() -> None: pass
 
-    ##
-    # \brief 
-    # \param mapping 
-    # \return 
-    #
     def nextAlignment(mapping: Util.STPairArray) -> bool: pass
 
     ##

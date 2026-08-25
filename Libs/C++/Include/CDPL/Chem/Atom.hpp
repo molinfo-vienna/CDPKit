@@ -219,7 +219,7 @@ namespace CDPL
             virtual std::size_t getBondIndex(const Bond& bond) const = 0;
 
             /**
-             * \brief Assignment operator that replaces the current set of properties with the properties of \a atom;
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a atom.
              * \param atom The atom whose properties get copied.
              * \return A reference to itself.
              */

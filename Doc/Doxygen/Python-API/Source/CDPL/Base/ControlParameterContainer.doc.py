@@ -47,11 +47,6 @@ class ControlParameterContainer(Boost.Python.instance):
     # 
     def __init__() -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def setParameter(key: LookupKey, value: Any) -> None: pass
 
     ##
@@ -82,13 +77,6 @@ class ControlParameterContainer(Boost.Python.instance):
     # 
     def getParameter(key: LookupKey, throw_: bool = False, local: bool = False) -> Any: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param def_value 
-    # \param local 
-    # \return 
-    #
     def getParameterOrDefault(key: LookupKey, def_value: Any, local: bool = False) -> Any: pass
 
     ##
@@ -209,16 +197,8 @@ class ControlParameterContainer(Boost.Python.instance):
     # 
     def setParent(cntnr: ControlParameterContainer) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getParameterKeys() -> list: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getParameterValues() -> list: pass
 
     ##
@@ -240,25 +220,10 @@ class ControlParameterContainer(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: LookupKey) -> Any: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: LookupKey, value: Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: LookupKey) -> bool: pass
 
     ##
@@ -268,10 +233,6 @@ class ControlParameterContainer(Boost.Python.instance):
     # 
     def __contains__(key: LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

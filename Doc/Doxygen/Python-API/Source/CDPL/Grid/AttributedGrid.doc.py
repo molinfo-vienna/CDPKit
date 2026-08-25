@@ -45,17 +45,8 @@ class AttributedGrid(Base.PropertyContainer):
     # 
     def getNumElements() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
@@ -65,18 +56,8 @@ class AttributedGrid(Base.PropertyContainer):
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
     numElements = property(getNumElements)

@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all matrix expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class DMatrixExpression(ConstDMatrixExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: DMatrixExpression) -> None: pass
 
     ##
@@ -72,19 +70,8 @@ class DMatrixExpression(ConstDMatrixExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
@@ -129,9 +116,4 @@ class DMatrixExpression(ConstDMatrixExpression):
     # 
     def __idiv__(t: float) -> DMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DMatrixExpression: pass

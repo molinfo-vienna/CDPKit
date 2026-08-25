@@ -339,49 +339,18 @@ class PDBData(Boost.Python.instance):
     # 
     def setRecord(type: RecordType, data: str) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getRecordTypes() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getRecordData() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getRecords() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
     def __getitem__(type: RecordType) -> str: pass
 
-    ##
-    # \brief 
-    # \param type 
-    # \param data 
-    #
     def __setitem__(type: RecordType, data: str) -> None: pass
 
-    ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
     def __delitem__(type: RecordType) -> bool: pass
 
     ##

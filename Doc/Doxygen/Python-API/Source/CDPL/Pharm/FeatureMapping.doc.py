@@ -121,47 +121,18 @@ class FeatureMapping(Boost.Python.instance):
     # 
     def setEntry(key: Feature, value: Feature) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getKeys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def keys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getValues() -> object: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def getValues(key: Feature) -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def values() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def items() -> object: pass
 
     ##
@@ -192,31 +163,12 @@ class FeatureMapping(Boost.Python.instance):
     # 
     def insertEntry(key: Feature, value: Feature) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Feature) -> Feature: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Feature, value: Feature) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Feature) -> bool: pass
 
     ##

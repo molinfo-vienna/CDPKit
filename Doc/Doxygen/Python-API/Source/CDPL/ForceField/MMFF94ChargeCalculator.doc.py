@@ -145,11 +145,6 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     # 
     def getFormalCharges() -> Util.DArray: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def formalCharges() -> Util.DArray: pass
 
     objectID = property(getObjectID)

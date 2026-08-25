@@ -87,10 +87,6 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     # 
     def getNitrogenEnumerationMode() -> int: pass
 
-    ##
-    # \brief 
-    # \param reuse 
-    #
     def generateCoordinatesFromScratch(reuse: bool) -> None: pass
 
     ##

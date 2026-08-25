@@ -49,21 +49,10 @@ class Entity3DMapping(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
     ##
@@ -73,124 +62,40 @@ class Entity3DMapping(Boost.Python.instance):
     # 
     def assign(map: Entity3DMapping) -> Entity3DMapping: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def getValue(key: Entity3D) -> Entity3D: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param def_value 
-    # \return 
-    #
     def getValue(key: Entity3D, def_value: Entity3D) -> Entity3D: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def removeEntry(key: Entity3D) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def setEntry(key: Entity3D, value: Entity3D) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getKeys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def keys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getValues() -> object: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def getValues(key: Entity3D) -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def values() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def items() -> object: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def getNumEntries(key: Entity3D) -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def removeEntries(key: Entity3D) -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def insertEntry(key: Entity3D, value: Entity3D) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Entity3D) -> Entity3D: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Entity3D, value: Entity3D) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Entity3D) -> bool: pass
 
     ##

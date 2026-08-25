@@ -86,7 +86,7 @@ namespace CDPL
             void orderAtoms(const AtomCompareFunction& func);
 
             /**
-             * \brief Assignment operator that replaces the current set of properties with the properties of \a bond;
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a bond.
              * \param bond The bond whose properties get copied.
              * \return A reference to itself.
              */

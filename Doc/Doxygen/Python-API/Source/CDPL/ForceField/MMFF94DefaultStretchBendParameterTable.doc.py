@@ -109,16 +109,8 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         # 
         def getKJIForceConstant() -> float: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __nonzero__() -> bool: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __bool__() -> bool: pass
 
         objectID = property(getObjectID)
@@ -201,10 +193,6 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##

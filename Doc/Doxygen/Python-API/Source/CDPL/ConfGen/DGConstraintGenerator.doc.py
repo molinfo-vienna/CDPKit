@@ -56,16 +56,8 @@ class DGConstraintGenerator(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getCenterIndex() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getDescriptor() -> Chem.StereoDescriptor: pass
 
         objectID = property(getObjectID)

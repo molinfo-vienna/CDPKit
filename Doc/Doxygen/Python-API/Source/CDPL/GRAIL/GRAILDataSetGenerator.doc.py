@@ -138,12 +138,6 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # 
     def isInteractionEnabled(ftr_type: int, tgt_ftr_type: int) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    # \return 
-    #
     def clearEnabledInteractions(arg2: int, self: int) -> bool: pass
 
     ##
@@ -202,10 +196,6 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # 
     def environmentAtomDensityGridStored() -> bool: pass
 
-    ##
-    # \brief 
-    # \param  
-    #
     def setEnvironmentAtomDensityGridName(: str) -> None: pass
 
     ##

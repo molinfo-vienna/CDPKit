@@ -42,11 +42,6 @@ class DZeroMatrix(Boost.Python.instance):
     # 
     def __init__(m: int, n: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param m 
-    # \param n 
-    #
     def resize(m: int, n: int) -> None: pass
 
     ##
@@ -61,36 +56,14 @@ class DZeroMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -100,31 +73,12 @@ class DZeroMatrix(Boost.Python.instance):
     # 
     def assign(m: DZeroMatrix) -> DZeroMatrix: pass
 
-    ##
-    # \brief 
-    # \param m 
-    #
     def swap(m: DZeroMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -161,16 +115,8 @@ class DZeroMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DZeroMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##

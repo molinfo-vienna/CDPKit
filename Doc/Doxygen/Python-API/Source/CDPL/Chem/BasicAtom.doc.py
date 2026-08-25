@@ -27,7 +27,7 @@
 class BasicAtom(Atom):
 
     ##
-    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>;.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>.
     # 
     # \param atom The atom whose properties get copied.
     # 
@@ -36,7 +36,7 @@ class BasicAtom(Atom):
     def assign(atom: Atom) -> Atom: pass
 
     ##
-    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>;.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>.
     # 
     # \param atom The atom whose properties get copied.
     # 

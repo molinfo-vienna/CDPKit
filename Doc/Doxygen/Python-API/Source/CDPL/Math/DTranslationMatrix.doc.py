@@ -39,12 +39,6 @@ class DTranslationMatrix(Boost.Python.instance):
     # 
     def __init__(n: int, tx: float = 0.0, ty: float = 0.0, tz: float = 0.0) -> None: pass
 
-    ##
-    # \brief 
-    # \param tx 
-    # \param ty 
-    # \param tz 
-    #
     def set(tx: float = 0.0, ty: float = 0.0, tz: float = 0.0) -> None: pass
 
     ##
@@ -59,36 +53,14 @@ class DTranslationMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -98,31 +70,12 @@ class DTranslationMatrix(Boost.Python.instance):
     # 
     def assign(m: DTranslationMatrix) -> DTranslationMatrix: pass
 
-    ##
-    # \brief 
-    # \param m 
-    #
     def swap(m: DTranslationMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -159,16 +112,8 @@ class DTranslationMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DTranslationMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##

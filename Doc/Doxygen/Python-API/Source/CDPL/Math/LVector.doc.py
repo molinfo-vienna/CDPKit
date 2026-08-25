@@ -174,17 +174,8 @@ class LVector(Boost.Python.instance):
     # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -194,11 +185,6 @@ class LVector(Boost.Python.instance):
     # 
     def swap(v: LVector) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: int) -> None: pass
 
     ##
@@ -240,17 +226,8 @@ class LVector(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -259,16 +236,8 @@ class LVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> LVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLVectorExpression: pass
 
     ##
@@ -320,11 +289,6 @@ class LVector(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstLVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
@@ -369,11 +333,6 @@ class LVector(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> LVector: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> LVector: pass
 
     objectID = property(getObjectID)

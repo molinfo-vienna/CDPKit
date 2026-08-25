@@ -42,10 +42,6 @@ class ULScalarVector(Boost.Python.instance):
     # 
     def __init__(n: int, v: int = 0) -> None: pass
 
-    ##
-    # \brief 
-    # \param n 
-    #
     def resize(n: int) -> None: pass
 
     ##
@@ -60,29 +56,12 @@ class ULScalarVector(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -92,10 +71,6 @@ class ULScalarVector(Boost.Python.instance):
     # 
     def assign(v: ULScalarVector) -> ULScalarVector: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def swap(v: ULScalarVector) -> None: pass
 
     ##
@@ -126,24 +101,10 @@ class ULScalarVector(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -152,16 +113,8 @@ class ULScalarVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULScalarVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULVectorExpression: pass
 
     ##

@@ -61,16 +61,8 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getParentAtomType() -> str: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getHydrogenAtomType() -> str: pass
 
         objectID = property(getObjectID)
@@ -102,11 +94,6 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param parent_type 
-    # \param h_atom_type 
-    #
     def addEntry(parent_type: str, h_atom_type: str) -> None: pass
 
     ##
@@ -139,10 +126,6 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##

@@ -196,17 +196,8 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     # 
     def getFoundMappingCallback() -> BoolMolecularGraphAtomBondMappingFunctor: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> AtomBondMapping: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

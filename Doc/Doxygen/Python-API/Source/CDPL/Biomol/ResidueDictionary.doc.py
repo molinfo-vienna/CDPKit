@@ -230,10 +230,6 @@ class ResidueDictionary(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##
@@ -264,52 +260,16 @@ class ResidueDictionary(Boost.Python.instance):
     @staticmethod
     def get(: ) -> ResidueDictionary: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def getReplacedCode(code: str) -> str: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def getReplacedByCode(code: str) -> str: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def getParentCode(code: str) -> str: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def getOneLetterCode(code: str) -> str: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def isObsolete(code: str) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def getName(code: str) -> str: pass
 
     ##
@@ -322,20 +282,8 @@ class ResidueDictionary(Boost.Python.instance):
     @staticmethod
     def isStdResidue(code: str) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def getType(code: str) -> int: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param code 
-    # \return 
-    #
     def getStructure(code: str) -> Chem.MolecularGraph: pass
 
     objectID = property(getObjectID)

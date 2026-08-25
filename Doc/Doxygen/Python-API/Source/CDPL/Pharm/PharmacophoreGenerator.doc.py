@@ -110,18 +110,8 @@ class PharmacophoreGenerator(Boost.Python.instance):
     # 
     def enableFeature(type: int, enable: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param ft_type 
-    # \return 
-    #
     def isFeatureEnabled(ft_type: int) -> bool: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def clearEnabledFeatures(self: int) -> bool: pass
 
     ##

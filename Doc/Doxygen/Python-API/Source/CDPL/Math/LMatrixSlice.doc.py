@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Matrix expression proxy that views a strided rectangular slice of an underlying matrix.
+# 
 class LMatrixSlice(Boost.Python.instance):
 
     ##
@@ -39,27 +39,31 @@ class LMatrixSlice(Boost.Python.instance):
     def __init__(e: LMatrixExpression, s1: Slice, s2: Slice) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the row slice's start index in the wrapped matrix.
+    # 
+    # \return The start row index.
+    # 
     def getStart1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the column slice's start index in the wrapped matrix.
+    # 
+    # \return The start column index.
+    # 
     def getStart2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the row slice's stride in the wrapped matrix.
+    # 
+    # \return The row stride.
+    # 
     def getStride1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the column slice's stride in the wrapped matrix.
+    # 
+    # \return The column stride.
+    # 
     def getStride2() -> int: pass
 
     ##
@@ -75,36 +79,46 @@ class LMatrixSlice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
-    # \param e The \c %ConstFMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> LMatrixSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
-    # \param e The \c %ConstDMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> LMatrixSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
-    # \param e The \c %ConstLMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> LMatrixSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
-    # \param e The \c %ConstULMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> LMatrixSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %LMatrixSlice instance \a s.
-    # \param s The \c %LMatrixSlice instance to copy.
+    # \brief Copy-assigns the contents of <em>s</em> to this matrix slice (via a temporary to handle aliasing).
+    # 
+    # \param s The source matrix slice.
+    # 
     # \return \a self
     # 
     def assign(s: LMatrixSlice) -> LMatrixSlice: pass
@@ -117,76 +131,58 @@ class LMatrixSlice(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of rows in the proxy (size of the row slice).
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of columns in the proxy (size of the column slice).
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the proxy is empty (either slice has size zero).
+    # 
+    # \return <tt>True</tt> if either slice has zero size, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param s 
-    #
+    # \brief Swaps the contents of this matrix slice with those of <em>s</em> (via element-wise swap of the underlying matrix elements).
+    # 
+    # \param s The matrix slice to swap with.
+    # 
     def swap(s: LMatrixSlice) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> LMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
+    # \brief Returns a reference to the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return A reference to the underlying element <tt>m(s1(i), s2(j))</tt>.
+    # 
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -223,16 +219,8 @@ class LMatrixSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> LMatrixSlice: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLMatrixExpression: pass
 
     ##
@@ -291,11 +279,6 @@ class LMatrixSlice(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstLMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -340,11 +323,6 @@ class LMatrixSlice(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> LMatrixSlice: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> LMatrixSlice: pass
 
     objectID = property(getObjectID)

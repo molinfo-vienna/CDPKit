@@ -31,73 +31,80 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def __init__(grid: FRegularGrid) -> None: pass
 
     ##
-    # \brief Constructs a <tt>RegularGrid</tt> initialized from <em>data</em>, with the given grid spacing in <em>x</em>, <em>y</em> and <em>z</em> direction.
+    # \brief Constructs the grid with the specified anisotropic per-axis step sizes initialized to the supplied grid data.
     # 
-    # \param data The initial grid data.
-    # \param xs The grid spacing in the <em>x</em> direction.
-    # \param ys The grid spacing in the <em>y</em> direction.
-    # \param zs The grid spacing in the <em>z</em> direction.
+    # \param data The grid data container.
+    # \param xs The step size along the x-axis.
+    # \param ys The step size along the y-axis.
+    # \param zs The step size along the z-axis.
     # 
     def __init__(data: Math.FGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Constructs a <tt>RegularGrid</tt> initialized from <em>data</em> with isotropic grid spacing.
+    # \brief Constructs the grid with the isotropic step size <em>s</em> and the supplied grid data.
     # 
-    # \param data The initial grid data.
-    # \param s The isotropic grid spacing applied to all three spatial dimensions.
+    # \param data The grid data container.
+    # \param s The step size used on every axis.
     # 
     def __init__(data: Math.FGrid, s: float) -> None: pass
 
     ##
-    # \brief Constructs an empty <tt>RegularGrid</tt> with the given grid spacing in <em>x</em>, <em>y</em> and <em>z</em> direction.
+    # \brief Constructs an empty grid with the specified anisotropic per-axis step sizes.
     # 
-    # \param xs The grid spacing in the <em>x</em> direction.
-    # \param ys The grid spacing in the <em>y</em> direction.
-    # \param zs The grid spacing in the <em>z</em> direction.
+    # \param xs The step size along the x-axis.
+    # \param ys The step size along the y-axis.
+    # \param zs The step size along the z-axis.
     # 
     def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Constructs an empty <tt>RegularGrid</tt> with isotropic grid spacing.
+    # \brief Constructs an empty grid with the specified isotropic step size <em>s</em> on all three axes.
     # 
-    # \param s The isotropic grid spacing applied to all three spatial dimensions.
+    # \param s The step size used on every axis.
     # 
     def __init__(s: float) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \param coords 
-    #
+    # \brief Writes the world space 3D position of the cell at (<em>i</em>, <em>j</em>, <em>k</em>) into <em>coords</em>.
+    # 
+    # \param i The zero-based cell index along the x-axis.
+    # \param j The zero-based cell index along the y-axis.
+    # \param k The zero-based cell index along the z-axis.
+    # \param coords The output vector receiving the world space 3D position.
+    # 
     def getCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
 
     ##
-    # \brief Returns the 3D coordinates of the grid element at linear index <em>i</em>.
+    # \brief Outputs the world space 3D position of the cell with linear index <em>i</em> into <em>coords</em>.
     # 
-    # \param i The linear element index.
-    # \param coords The output coordinates.
+    # \param i The zero-based linear cell index.
+    # \param coords The output vector receiving the xyz-coordinates.
     # 
     def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFGridExpression instance \a e.
-    # \param e The \c %ConstFGridExpression instance to copy.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDGridExpression instance \a e.
-    # \param e The \c %ConstDGridExpression instance to copy.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: Math.ConstDGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a e.
-    # \param e The \c %object instance to copy.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # 
+    # \param e The source grid expression.
+    # 
     # \return \a self
     # 
     def assign(e: object) -> Math.FRegularSpatialGrid: pass
@@ -110,99 +117,56 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def assign(g: Math.FRegularSpatialGrid) -> Math.FRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of cells along the x-axis.
+    # 
+    # \return The number of cells along the x-axis.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of cells along the y-axis.
+    # 
+    # \return The number of cells along the y-axis.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of cells along the z-axis.
+    # 
+    # \return The number of cells along the z-axis.
+    # 
     def getSize3() -> int: pass
 
     ##
-    # \brief Tells whether the grid is empty.
+    # \brief Tells whether the grid is empty (zero cells along any dimension).
     # 
     # \return <tt>True</tt> if the grid is empty, and <tt>False</tt> otherwise.
     # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
     def getElement(i: int, j: int, k: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of cells of the grid.
+    # 
+    # \return The total cell count.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param g 
-    #
     def swap(g: Math.FRegularSpatialGrid) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \param v 
-    #
     def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
-    ##
-    # \brief 
-    # \param ijk 
-    # \return 
-    #
     def __getitem__(ijk: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
     ##
@@ -212,55 +176,33 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param ijk 
-    # \param v 
-    #
     def __setitem__(ijk: tuple, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
+    # \brief Returns a reference to the value of cell at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based cell index along the x-axis.
+    # \param j The zero-based cell index along the y-axis.
+    # \param k The zero-based cell index along the z-axis.
+    # 
+    # \return A reference to the cell value.
+    # 
     def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the grid element at linear index <em>i</em>.
+    # \brief Returns a reference to the value of the cell at the linear index <em>i</em>.
     # 
-    # \param i The linear element index.
+    # \param i The zero-based linear cell index.
     # 
-    # \return A reference to the grid element.
+    # \return A reference to the cell value.
     # 
     def __call__(i: int) -> float: pass
 
@@ -298,16 +240,8 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> Math.FRegularSpatialGrid: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> Math.ConstFGridExpression: pass
 
     ##
@@ -394,11 +328,6 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     def __idiv__(t: float) -> Math.FRegularSpatialGrid: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> Math.FRegularSpatialGrid: pass
 
     size1 = property(getSize1)

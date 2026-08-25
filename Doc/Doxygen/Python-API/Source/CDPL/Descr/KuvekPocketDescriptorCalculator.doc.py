@@ -119,10 +119,6 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     # 
     def getSphereRadius() -> float: pass
 
-    ##
-    # \brief 
-    # \param radius 
-    #
     def setMaxAtomToSphereSurfaceDistance(radius: float) -> None: pass
 
     ##

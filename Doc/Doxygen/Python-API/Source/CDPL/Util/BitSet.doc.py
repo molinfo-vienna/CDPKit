@@ -67,10 +67,6 @@ class BitSet(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    #
     def swap(bs: BitSet) -> None: pass
 
     ##
@@ -80,167 +76,54 @@ class BitSet(Boost.Python.instance):
     # 
     def assign(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param num_bits 
-    # \param value 
-    #
     def resize(num_bits: int, value: bool = False) -> None: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
-    ##
-    # \brief 
-    # \param value 
-    #
     def append(value: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def flip() -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def flip(idx: int) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def set() -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param value 
-    # \return 
-    #
     def set(idx: int, value: bool = True) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def reset() -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def reset(idx: int) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def test(idx: int) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def findFirst() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def findNext(idx: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def isSubsetOf(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def isProperSubsetOf(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getCount() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getMaxSize() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def hasAny() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def hasNone() -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \param value 
-    #
     def __setitem__(idx: int, value: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def __and__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def __or__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def __xor__(bs: BitSet) -> BitSet: pass
 
     ##
@@ -250,25 +133,10 @@ class BitSet(Boost.Python.instance):
     # 
     def __sub__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def __iand__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def __ior__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
     def __ixor__(bs: BitSet) -> BitSet: pass
 
     ##
@@ -278,44 +146,16 @@ class BitSet(Boost.Python.instance):
     # 
     def __isub__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __long__() -> int: pass
 
-    ##
-    # \brief 
-    # \param num_bits 
-    # \return 
-    #
     def __ilshift__(num_bits: int) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param num_bits 
-    # \return 
-    #
     def __lshift__(num_bits: int) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param num_bits 
-    # \return 
-    #
     def __irshift__(num_bits: int) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \param num_bits 
-    # \return 
-    #
     def __rshift__(num_bits: int) -> BitSet: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __invert__() -> BitSet: pass
 
     ##
@@ -360,22 +200,10 @@ class BitSet(Boost.Python.instance):
     # 
     def __ge__(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
     ##

@@ -20,14 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all grid expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class DGridExpression(ConstDGridExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: DGridExpression) -> None: pass
 
     ##
@@ -58,20 +56,8 @@ class DGridExpression(ConstDGridExpression):
     # 
     def assign(e: object) -> DGridExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \param v 
-    #
     def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param ijk 
-    # \param v 
-    #
     def __setitem__(ijk: tuple, v: float) -> None: pass
 
     ##
@@ -116,9 +102,4 @@ class DGridExpression(ConstDGridExpression):
     # 
     def __idiv__(t: float) -> DGridExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DGridExpression: pass

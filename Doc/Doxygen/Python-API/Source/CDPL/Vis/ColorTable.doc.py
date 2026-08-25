@@ -47,21 +47,10 @@ class ColorTable(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
     ##
@@ -71,111 +60,36 @@ class ColorTable(Boost.Python.instance):
     # 
     def assign(map: ColorTable) -> ColorTable: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def getValue(key: int) -> Color: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param def_value 
-    # \return 
-    #
     def getValue(key: int, def_value: Color) -> Color: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def removeEntry(key: int) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def setEntry(key: int, value: Color) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getKeys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def keys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getValues() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def values() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def items() -> object: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def containsEntry(key: int) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    # \return 
-    #
     def insertEntry(key: int, value: Color) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: int) -> Color: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: int, value: Color) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: int) -> bool: pass
 
     ##

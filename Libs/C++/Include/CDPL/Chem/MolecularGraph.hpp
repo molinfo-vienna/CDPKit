@@ -44,12 +44,15 @@ namespace CDPL
     {
 
         /**
-         * \brief Abstract base class for representations of a chemical structure as a graph of bonded atoms.
+         * \brief Abstract base class for data structures that represent chemical structures as molecular graphs.
          *
-         * \c %MolecularGraph combines the atom-, bond- and property-related interfaces inherited from
-         * Chem::AtomContainer, Chem::BondContainer and Base::PropertyContainer. Concrete graph types
-         * (e.g. Chem::Molecule, Chem::Fragment) implement the pure virtual clone() method to provide
-         * a copy of the graph.
+         * Vertices (= atoms) of the molecular graph are represented by Chem::Atom instances and edges (= bonds)
+         * by Chem::Bond instances. Read-only access to the Chem::Atom and Chem::Bond objects is enabled by
+         * corresponding methods inherited from Chem::AtomContainer and Chem::BondContainer, respectively.
+         * Molecular graph properties can be stored/retrieved via methods provided by the Base::PropertyContainer
+         * base class.
+         * Deep copies of the molecular graph are created by the pure virtual clone() method which needs to
+         * be implemented by concrete subclasses (e.g. Chem::BasicMolecule, Chem::Fragment) of \c %MolecularGraph.
          */
         class CDPL_CHEM_API MolecularGraph : public AtomContainer,
                                              public BondContainer,
@@ -68,7 +71,7 @@ namespace CDPL
             virtual ~MolecularGraph() {}
 
             /**
-             * \brief Creates a copy of the molecular graph.
+             * \brief Creates a deep copy of the molecular graph.
              * \return A smart pointer to the copy of the molecular graph.
              */
             virtual SharedPointer clone() const = 0;
@@ -76,7 +79,7 @@ namespace CDPL
           protected:
             /**
              * \brief Assignment operator.
-             * \param molgraph The other \c MolecularGraph instance to copy.
+             * \param molgraph The other \c %MolecularGraph instance to copy.
              * \return A reference to itself.
              */
             MolecularGraph& operator=(const MolecularGraph& molgraph);

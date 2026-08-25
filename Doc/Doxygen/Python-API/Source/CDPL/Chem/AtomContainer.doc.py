@@ -105,17 +105,8 @@ class AtomContainer(Entity3DContainer):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Atom: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     numAtoms = property(getNumAtoms)

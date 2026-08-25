@@ -80,22 +80,10 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         # 
         def getAtomType() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getParameterAtomTypes() -> object: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __nonzero__() -> bool: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __bool__() -> bool: pass
 
         objectID = property(getObjectID)
@@ -165,10 +153,6 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> list: pass
 
     ##
@@ -190,10 +174,6 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     # 
     def assign(map: MMFF94PrimaryToParameterAtomTypeMap) -> MMFF94PrimaryToParameterAtomTypeMap: pass
 
-    ##
-    # \brief 
-    # \param map 
-    #
     @staticmethod
     def set(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 

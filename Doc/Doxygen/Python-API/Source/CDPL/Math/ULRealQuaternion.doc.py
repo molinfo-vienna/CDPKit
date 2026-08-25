@@ -41,11 +41,6 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def __init__(r: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param r 
-    # \return 
-    #
     def set(r: int = 0) -> ULRealQuaternion: pass
 
     ##
@@ -60,34 +55,14 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC3() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC4() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -97,10 +72,6 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def assign(q: ULRealQuaternion) -> ULRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    #
     def swap(q: ULRealQuaternion) -> None: pass
 
     ##
@@ -159,18 +130,8 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def __idiv__(q: object) -> ULRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: object) -> ULRealQuaternion: pass
 
     ##
@@ -207,16 +168,8 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULQuaternionExpression: pass
 
     ##
@@ -233,11 +186,6 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def __add__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -254,11 +202,6 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def __sub__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -303,11 +246,6 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def __truediv__(t: int) -> ConstULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: int) -> ConstULQuaternionExpression: pass
 
     objectID = property(getObjectID)

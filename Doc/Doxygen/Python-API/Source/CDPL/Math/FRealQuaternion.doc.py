@@ -41,11 +41,6 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def __init__(r: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param r 
-    # \return 
-    #
     def set(r: float = 0.0) -> FRealQuaternion: pass
 
     ##
@@ -60,34 +55,14 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC1() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC2() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC3() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC4() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -97,10 +72,6 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def assign(q: FRealQuaternion) -> FRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    #
     def swap(q: FRealQuaternion) -> None: pass
 
     ##
@@ -159,18 +130,8 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def __idiv__(q: object) -> FRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> FRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: object) -> FRealQuaternion: pass
 
     ##
@@ -207,16 +168,8 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> FRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFQuaternionExpression: pass
 
     ##
@@ -233,11 +186,6 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def __add__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
@@ -254,11 +202,6 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def __sub__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
@@ -303,11 +246,6 @@ class FRealQuaternion(Boost.Python.instance):
     # 
     def __truediv__(t: float) -> ConstFQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: float) -> ConstFQuaternionExpression: pass
 
     objectID = property(getObjectID)

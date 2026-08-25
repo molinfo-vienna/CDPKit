@@ -90,77 +90,26 @@ class ULMatrixTranspose(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param mt 
-    #
     def swap(mt: ULMatrixTranspose) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getData() -> ULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -197,16 +146,8 @@ class ULMatrixTranspose(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULMatrixTranspose: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##
@@ -265,11 +206,6 @@ class ULMatrixTranspose(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -314,11 +250,6 @@ class ULMatrixTranspose(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> ULMatrixTranspose: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULMatrixTranspose: pass
 
     objectID = property(getObjectID)

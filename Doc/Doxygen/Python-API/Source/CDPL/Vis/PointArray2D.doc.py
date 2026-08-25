@@ -42,8 +42,4 @@ class PointArray2D(Math.Vector2DArray):
     # 
     def translate(vec: Math.Vector2D) -> None: pass
 
-    ##
-    # \brief 
-    # \param bbox 
-    #
     def getBounds(bbox: Rectangle2D) -> None: pass

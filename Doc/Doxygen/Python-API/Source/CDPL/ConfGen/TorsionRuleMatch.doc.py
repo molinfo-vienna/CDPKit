@@ -29,10 +29,6 @@ class TorsionRuleMatch(Boost.Python.instance):
     #
     class AtomArray(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
         ##
@@ -42,11 +38,6 @@ class TorsionRuleMatch(Boost.Python.instance):
         # 
         def __contains__(atom: Chem.Atom) -> bool: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Chem.Atom: pass
 
     ##

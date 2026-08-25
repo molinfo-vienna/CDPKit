@@ -185,18 +185,8 @@ class DMatrix(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -206,12 +196,6 @@ class DMatrix(Boost.Python.instance):
     # 
     def swap(m: DMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
@@ -226,17 +210,8 @@ class DMatrix(Boost.Python.instance):
     # 
     def __call__(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -273,16 +248,8 @@ class DMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##
@@ -341,11 +308,6 @@ class DMatrix(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstDMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
@@ -390,11 +352,6 @@ class DMatrix(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> DMatrix: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DMatrix: pass
 
     objectID = property(getObjectID)

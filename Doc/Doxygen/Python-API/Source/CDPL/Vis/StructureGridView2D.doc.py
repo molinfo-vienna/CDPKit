@@ -79,10 +79,6 @@ class StructureGridView2D(View2D):
         # 
         def clearStructure() -> None: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def hashStructure() -> bool: pass
 
         ##
@@ -153,43 +149,14 @@ class StructureGridView2D(View2D):
     # 
     def __init__(grid_view: StructureGridView2D) -> None: pass
 
-    ##
-    # \brief 
-    # \param file_name 
-    # \return 
-    #
     def write(file_name: str) -> bool: pass
 
-    ##
-    # \brief 
-    # \param file_name 
-    # \param fmt 
-    # \return 
-    #
     def write(file_name: str, fmt: str) -> bool: pass
 
-    ##
-    # \brief 
-    # \param file_name 
-    # \param fmt 
-    # \return 
-    #
     def write(file_name: str, fmt: Base.DataFormat) -> bool: pass
 
-    ##
-    # \brief 
-    # \param os 
-    # \param fmt 
-    # \return 
-    #
     def write(os: Base.OStream, fmt: str) -> bool: pass
 
-    ##
-    # \brief 
-    # \param os 
-    # \param fmt 
-    # \return 
-    #
     def write(os: Base.OStream, fmt: Base.DataFormat) -> bool: pass
 
     ##
@@ -284,11 +251,6 @@ class StructureGridView2D(View2D):
     # 
     def __call__(row: int, col: int) -> Cell: pass
 
-    ##
-    # \brief 
-    # \param row_and_col 
-    # \return 
-    #
     def __getitem__(row_and_col: tuple) -> Cell: pass
 
     cellWidth = property(getCellWidth)

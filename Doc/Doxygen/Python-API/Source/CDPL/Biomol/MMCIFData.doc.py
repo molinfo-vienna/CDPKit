@@ -65,10 +65,6 @@ class MMCIFData(Boost.Python.instance):
         # 
         def assign(item: Item) -> Item: pass
 
-        ##
-        # \brief 
-        # \param cat 
-        #
         def swap(cat: Item) -> None: pass
 
         ##
@@ -76,11 +72,6 @@ class MMCIFData(Boost.Python.instance):
         # 
         def clear() -> None: pass
 
-        ##
-        # \brief 
-        # \param arg1 
-        # \return 
-        #
         def getName() -> str: pass
 
         ##
@@ -127,30 +118,12 @@ class MMCIFData(Boost.Python.instance):
         # 
         def removeValue(index: int) -> None: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param index 
-        # \return 
-        #
         def __getitem__(index: int) -> str: pass
 
-        ##
-        # \brief 
-        # \param index 
-        #
         def __delitem__(index: int) -> None: pass
 
-        ##
-        # \brief 
-        # \param index 
-        # \param value 
-        #
         def __setitem__(index: int, value: str) -> None: pass
 
         objectID = property(getObjectID)
@@ -203,11 +176,6 @@ class MMCIFData(Boost.Python.instance):
         # 
         def assign(cat: MMCIFData) -> MMCIFData: pass
 
-        ##
-        # \brief 
-        # \param arg1 
-        # \return 
-        #
         def getName() -> str: pass
 
         ##
@@ -296,37 +264,14 @@ class MMCIFData(Boost.Python.instance):
         # 
         def removeItem(index: int) -> None: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
         def __getitem__(name: str) -> Item: pass
 
-        ##
-        # \brief 
-        # \param index 
-        # \return 
-        #
         def __getitem__(index: int) -> Item: pass
 
-        ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
         def __delitem__(name: str) -> bool: pass
 
-        ##
-        # \brief 
-        # \param index 
-        #
         def __delitem__(index: int) -> None: pass
 
         ##
@@ -490,37 +435,14 @@ class MMCIFData(Boost.Python.instance):
     # 
     def removeCategory(index: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param name 
-    # \return 
-    #
     def __getitem__(name: str) -> Category: pass
 
-    ##
-    # \brief 
-    # \param index 
-    # \return 
-    #
     def __getitem__(index: int) -> Category: pass
 
-    ##
-    # \brief 
-    # \param name 
-    # \return 
-    #
     def __delitem__(name: str) -> bool: pass
 
-    ##
-    # \brief 
-    # \param index 
-    #
     def __delitem__(index: int) -> None: pass
 
     ##

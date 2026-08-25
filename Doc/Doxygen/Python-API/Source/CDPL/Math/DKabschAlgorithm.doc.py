@@ -54,52 +54,14 @@ class DKabschAlgorithm(Boost.Python.instance):
     # 
     def assign(algo: DKabschAlgorithm) -> DKabschAlgorithm: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTransform() -> DMatrix: pass
 
-    ##
-    # \brief 
-    # \param points 
-    # \param ref_points 
-    # \param do_center 
-    # \param max_svd_iter 
-    # \return 
-    #
     def align(points: ConstFMatrixExpression, ref_points: ConstFMatrixExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
-    ##
-    # \brief 
-    # \param points 
-    # \param ref_points 
-    # \param do_center 
-    # \param max_svd_iter 
-    # \return 
-    #
     def align(points: ConstDMatrixExpression, ref_points: ConstDMatrixExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
-    ##
-    # \brief 
-    # \param points 
-    # \param ref_points 
-    # \param weights 
-    # \param do_center 
-    # \param max_svd_iter 
-    # \return 
-    #
     def align(points: ConstFMatrixExpression, ref_points: ConstFMatrixExpression, weights: ConstFVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
-    ##
-    # \brief 
-    # \param points 
-    # \param ref_points 
-    # \param weights 
-    # \param do_center 
-    # \param max_svd_iter 
-    # \return 
-    #
     def align(points: ConstDMatrixExpression, ref_points: ConstDMatrixExpression, weights: ConstDVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
     objectID = property(getObjectID)

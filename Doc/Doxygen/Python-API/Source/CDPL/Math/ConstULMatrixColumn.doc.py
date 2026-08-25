@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a single column of an underlying matrix.
+# 
 class ConstULMatrixColumn(Boost.Python.instance):
 
     ##
@@ -38,9 +38,10 @@ class ConstULMatrixColumn(Boost.Python.instance):
     def __init__(e: ConstULMatrixExpression, i: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the column index this proxy refers to within the wrapped matrix.
+    # 
+    # \return The zero-based column index.
+    # 
     def getIndex() -> int: pass
 
     ##
@@ -56,34 +57,28 @@ class ConstULMatrixColumn(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the column is empty (the wrapped matrix has zero rows).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix has zero rows, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> ConstULMatrixExpression: pass
 
     ##
@@ -115,23 +110,16 @@ class ConstULMatrixColumn(Boost.Python.instance):
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return A reference to the underlying element <tt>m(i, index)</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -140,16 +128,8 @@ class ConstULMatrixColumn(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstULMatrixColumn: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULVectorExpression: pass
 
     ##

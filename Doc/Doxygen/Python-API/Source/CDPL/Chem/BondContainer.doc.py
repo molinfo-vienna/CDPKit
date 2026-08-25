@@ -95,17 +95,8 @@ class BondContainer(Boost.Python.instance):
     # 
     def __contains__(bond: Bond) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Bond: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

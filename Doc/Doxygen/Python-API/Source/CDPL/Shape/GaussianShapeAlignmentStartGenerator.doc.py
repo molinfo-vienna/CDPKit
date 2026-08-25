@@ -63,11 +63,6 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # 
     def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
-    ##
-    # \brief 
-    # \param func 
-    # \param sym_class 
-    #
     def setReference(func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
@@ -107,17 +102,8 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # 
     def getStartTransform(idx: int) -> Math.Vector7D: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Math.Vector7D: pass
 
     objectID = property(getObjectID)

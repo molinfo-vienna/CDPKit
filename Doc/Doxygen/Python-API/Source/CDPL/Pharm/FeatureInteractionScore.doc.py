@@ -41,20 +41,8 @@ class FeatureInteractionScore(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    # \return 
-    #
     def __call__(arg2: Feature, self: Feature) -> float: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    # \return 
-    #
     def __call__(arg2: Math.Vector3D, self: Feature) -> float: pass
 
     objectID = property(getObjectID)

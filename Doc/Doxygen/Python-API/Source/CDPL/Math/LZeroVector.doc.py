@@ -41,10 +41,6 @@ class LZeroVector(Boost.Python.instance):
     # 
     def __init__(n: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param n 
-    #
     def resize(n: int) -> None: pass
 
     ##
@@ -59,29 +55,12 @@ class LZeroVector(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -91,10 +70,6 @@ class LZeroVector(Boost.Python.instance):
     # 
     def assign(v: LZeroVector) -> LZeroVector: pass
 
-    ##
-    # \brief 
-    # \param v 
-    #
     def swap(v: LZeroVector) -> None: pass
 
     ##
@@ -125,24 +100,10 @@ class LZeroVector(Boost.Python.instance):
     # 
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -151,16 +112,8 @@ class LZeroVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> LZeroVector: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLVectorExpression: pass
 
     ##

@@ -27,7 +27,7 @@
 class BasicBond(Bond):
 
     ##
-    # \brief Assignment operator that replaces the current set of properties with the properties of <em>bond</em>;.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>bond</em>.
     # 
     # \param bond The bond whose properties get copied.
     # 
@@ -36,7 +36,7 @@ class BasicBond(Bond):
     def assign(bond: Bond) -> Bond: pass
 
     ##
-    # \brief Assignment operator that replaces the current set of properties with the properties of <em>bond</em>;.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>bond</em>.
     # 
     # \param bond The bond whose properties get copied.
     # 

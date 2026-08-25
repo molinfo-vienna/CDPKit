@@ -24,10 +24,6 @@
 #
 class ULMatrixExpression(ConstULMatrixExpression):
 
-    ##
-    # \brief 
-    # \param e 
-    #
     def swap(e: ULMatrixExpression) -> None: pass
 
     ##
@@ -72,19 +68,8 @@ class ULMatrixExpression(ConstULMatrixExpression):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -129,9 +114,4 @@ class ULMatrixExpression(ConstULMatrixExpression):
     # 
     def __idiv__(t: int) -> ULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULMatrixExpression: pass

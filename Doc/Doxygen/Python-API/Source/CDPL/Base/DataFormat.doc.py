@@ -29,30 +29,12 @@ class DataFormat(Boost.Python.instance):
     #
     class FileExtensionSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> str: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \param file_ext 
-        #
         def __setitem__(idx: int, file_ext: str) -> None: pass
 
         ##
@@ -232,10 +214,6 @@ class DataFormat(Boost.Python.instance):
     # 
     def setMultiRecordFormat(multi_rec: bool) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getFileExtensions() -> FileExtensionSequence: pass
 
     ##

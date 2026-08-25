@@ -121,47 +121,18 @@ class BondMapping(Boost.Python.instance):
     # 
     def setEntry(key: Bond, value: Bond) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getKeys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def keys() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getValues() -> object: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def getValues(key: Bond) -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def values() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getEntries() -> object: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def items() -> object: pass
 
     ##
@@ -192,31 +163,12 @@ class BondMapping(Boost.Python.instance):
     # 
     def insertEntry(key: Bond, value: Bond) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Bond) -> Bond: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Bond, value: Bond) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Bond) -> bool: pass
 
     ##

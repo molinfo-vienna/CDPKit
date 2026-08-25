@@ -54,42 +54,12 @@ class Vector2DArrayAlignmentCalculator(Boost.Python.instance):
     # 
     def assign(algo: Vector2DArrayAlignmentCalculator) -> Vector2DArrayAlignmentCalculator: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getTransform() -> DMatrix: pass
 
-    ##
-    # \brief 
-    # \param points 
-    # \param ref_points 
-    # \param do_center 
-    # \param max_svd_iter 
-    # \return 
-    #
     def calculate(points: Vector2DArray, ref_points: Vector2DArray, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
-    ##
-    # \brief 
-    # \param points 
-    # \param ref_points 
-    # \param weights 
-    # \param do_center 
-    # \param max_svd_iter 
-    # \return 
-    #
     def calculate(points: Vector2DArray, ref_points: Vector2DArray, weights: ConstFVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
-    ##
-    # \brief 
-    # \param points 
-    # \param ref_points 
-    # \param weights 
-    # \param do_center 
-    # \param max_svd_iter 
-    # \return 
-    #
     def calculate(points: Vector2DArray, ref_points: Vector2DArray, weights: ConstDVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
     objectID = property(getObjectID)

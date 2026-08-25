@@ -101,43 +101,16 @@ namespace CDPL
              */
             ~BasicReaction();
 
-            /**
-             * \brief Returns the reaction role of the component \a mol (see namespace Chem::ReactionRole).
-             * \param mol The molecule whose role is requested.
-             * \return The reaction role of the component.
-             */
             unsigned int getComponentRole(const Molecule& mol) const;
 
-            /**
-             * \brief Returns the index of the component \a mol in the reaction.
-             * \param mol The molecule whose index is requested.
-             * \return The zero-based index of the component.
-             */
             std::size_t getComponentIndex(const Molecule& mol) const;
 
-            /**
-             * \brief Tells whether \a mol is a component of the reaction.
-             * \param mol The molecule to look up.
-             * \return \c true if \a mol is a component of the reaction, and \c false otherwise.
-             */
             bool containsComponent(const Molecule& mol) const;
 
-            /**
-             * \brief Removes all components and clears all properties of the reaction.
-             */
             void clear();
 
-            /**
-             * \brief Returns the total number of components in the reaction.
-             * \return The total number of components.
-             */
             std::size_t getNumComponents() const;
 
-            /**
-             * \brief Returns the number of components with the given reaction role.
-             * \param role The reaction role (see namespace Chem::ReactionRole).
-             * \return The number of components with the specified role.
-             */
             std::size_t getNumComponents(unsigned int role) const;
 
             /**
@@ -192,41 +165,14 @@ namespace CDPL
              */
             ComponentIterator getComponentsEnd(unsigned int role);
 
-            /**
-             * \brief Returns a \c const reference to the component at the specified index.
-             * \param idx The zero-based component index.
-             * \return A \c const reference to the component.
-             */
             const BasicMolecule& getComponent(std::size_t idx) const;
 
-            /**
-             * \brief Returns a reference to the component at the specified index.
-             * \param idx The zero-based component index.
-             * \return A reference to the component.
-             */
             BasicMolecule& getComponent(std::size_t idx);
 
-            /**
-             * \brief Returns a \c const reference to the component at the given index within its reaction role.
-             * \param idx The zero-based component index within the role.
-             * \param role The reaction role (see namespace Chem::ReactionRole).
-             * \return A \c const reference to the component.
-             */
             const BasicMolecule& getComponent(std::size_t idx, unsigned int role) const;
 
-            /**
-             * \brief Returns a reference to the component at the given index within its reaction role.
-             * \param idx The zero-based component index within the role.
-             * \param role The reaction role (see namespace Chem::ReactionRole).
-             * \return A reference to the component.
-             */
             BasicMolecule& getComponent(std::size_t idx, unsigned int role);
 
-            /**
-             * \brief Adds a new empty component with the specified reaction role.
-             * \param role The reaction role of the new component (see namespace Chem::ReactionRole).
-             * \return A reference to the newly created component molecule.
-             */
             BasicMolecule& addComponent(unsigned int role);
 
             /**
@@ -240,24 +186,10 @@ namespace CDPL
              */
             BasicMolecule& addComponent(unsigned int role, const Molecule& mol);
 
-            /**
-             * \brief Swaps the reaction roles of two component groups.
-             * \param role1 The first reaction role.
-             * \param role2 The second reaction role.
-             */
             void swapComponentRoles(unsigned int role1, unsigned int role2);
 
-            /**
-             * \brief Removes the component at the specified index.
-             * \param idx The zero-based component index.
-             */
             void removeComponent(std::size_t idx);
 
-            /**
-             * \brief Removes the component at the given index within its reaction role.
-             * \param idx The zero-based component index within the role.
-             * \param role The reaction role (see namespace Chem::ReactionRole).
-             */
             void removeComponent(std::size_t idx, unsigned int role);
 
             /**
@@ -267,16 +199,8 @@ namespace CDPL
              */
             ComponentIterator removeComponent(const ComponentIterator& it);
 
-            /**
-             * \brief Removes all components with the specified reaction role.
-             * \param role The reaction role of the components to remove (see namespace Chem::ReactionRole).
-             */
             void removeComponents(unsigned int role);
 
-            /**
-             * \brief Creates a deep copy of the reaction.
-             * \return A smart pointer to the cloned reaction.
-             */
             Reaction::SharedPointer clone() const;
 
             /**
@@ -299,11 +223,6 @@ namespace CDPL
              */
             void copy(const BasicReaction& rxn);
 
-            /**
-             * \brief Replaces the current set of reaction components and properties by a copy of the
-             *        components and properties of the reaction \a rxn.
-             * \param rxn The reaction to copy.
-             */
             void copy(const Reaction& rxn);
 
           private:

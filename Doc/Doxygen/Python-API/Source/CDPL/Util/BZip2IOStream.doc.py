@@ -35,140 +35,48 @@ class BZip2IOStream(Base.IOStream):
     # 
     def __init__(ios: Base.IOStream) -> None: pass
 
-    ##
-    # \brief 
-    # \param size 
-    # \return 
-    #
     def readline(size: int = -1) -> str: pass
 
-    ##
-    # \brief 
-    # \param size 
-    # \return 
-    #
     def readlines(size: int = -1) -> list: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def xreadlines() -> BZip2IOStream: pass
 
-    ##
-    # \brief 
-    # \param size 
-    # \return 
-    #
     def read(size: int = -1) -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def tell() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def tellr() -> int: pass
 
-    ##
-    # \brief 
-    # \param offs 
-    # \param whence 
-    #
     def seek(offs: int, whence: int = 0) -> None: pass
 
-    ##
-    # \brief 
-    # \param offs 
-    # \param whence 
-    #
     def seekr(offs: int, whence: int = 0) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def next() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isClosed() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getOpenModeString() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getOpenModeFlags() -> OpenMode: pass
 
-    ##
-    # \brief 
-    #
     def flush() -> None: pass
 
-    ##
-    # \brief 
-    # \param string 
-    #
     def write(string: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param iterable 
-    #
     def writelines(iterable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def tellw() -> int: pass
 
-    ##
-    # \brief 
-    # \param offs 
-    # \param whence 
-    #
     def seekw(offs: int, whence: int = 0) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSoftSpace() -> bool: pass
 
-    ##
-    # \brief 
-    # \param value 
-    #
     def setSoftSpace(value: bool) -> None: pass
 
-    ##
-    # \brief 
-    #
     def close() -> None: pass
 
-    ##
-    # \brief 
-    # \param ios 
-    #
     def open(ios: Base.IOStream) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __iter__() -> BZip2IOStream: pass
 
     closed = property(isClosed)

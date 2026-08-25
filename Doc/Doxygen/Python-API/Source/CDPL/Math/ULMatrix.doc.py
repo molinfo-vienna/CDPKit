@@ -25,31 +25,28 @@
 class ULMatrix(Boost.Python.instance):
 
     ##
-    # \brief Constructs an empty matrix (zero rows and zero columns).
+    # \brief Initializes the \c %ULMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Move-constructs a matrix from <em>m</em> (<em>m</em> is left in a valid empty state).
-    # 
-    # \param m The matrix to move from.
+    # \brief Initializes a copy of the \c %ULMatrix instance \a m.
+    # \param m The \c %ULMatrix instance to copy.
     # 
     def __init__(m: ULMatrix) -> None: pass
 
     ##
-    # \brief Constructs an <em>m&times;n</em> matrix with default-initialized elements.
-    # 
-    # \param m The number of rows.
-    # \param n The number of columns.
+    # \brief Initializes the \c %ULMatrix instance.
+    # \param m 
+    # \param n 
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Constructs an <em>m&times;n</em> matrix with every element initialized to <em>v</em>.
-    # 
-    # \param m The number of rows.
-    # \param n The number of columns.
-    # \param v The value used for element initialization.
+    # \brief Initializes the \c %ULMatrix instance.
+    # \param m 
+    # \param n 
+    # \param v 
     # 
     def __init__(m: int, n: int, v: int) -> None: pass
 
@@ -83,21 +80,8 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __init__(a: object) -> None: pass
 
-    ##
-    # \brief Resizes the matrix to <em>m&times;n</em> elements.
-    # 
-    # \param m The new row count.
-    # \param n The new column count.
-    # \param preserve If <tt>True</tt>, existing element values at indices that remain valid are kept. If <tt>False</tt>, all elements are set to <em>v</em>.
-    # \param v The fill value for newly added elements (or for all elements when <em>preserve</em> is <tt>False</tt>).
-    # 
     def resize(m: int, n: int, preserve: bool = True, v: int = 0) -> None: pass
 
-    ##
-    # \brief Sets every element of the matrix to the value <em>v</em>.
-    # 
-    # \param v The fill value.
-    # 
     def clear(v: int = 0) -> None: pass
 
     ##
@@ -113,46 +97,36 @@ class ULMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
-    # 
-    # \param e The source matrix expression.
-    # 
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
+    # \param e The \c %ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
-    # 
-    # \param e The source matrix expression.
-    # 
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
+    # \param e The \c %ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
-    # 
-    # \param e The source matrix expression.
-    # 
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
+    # \param e The \c %ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
-    # 
-    # \param e The source matrix expression.
-    # 
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
+    # \param e The \c %ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Move-assigns the contents of <em>m</em> to this matrix.
-    # 
-    # \param m The source matrix (left in a valid but unspecified state).
-    # 
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ULMatrix instance \a m.
+    # \param m The \c %ULMatrix instance to copy.
     # \return \a self
     # 
     def assign(m: ULMatrix) -> ULMatrix: pass
@@ -164,79 +138,24 @@ class ULMatrix(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief Returns the number of rows.
-    # 
-    # \return The number of rows.
-    # 
     def getSize1() -> int: pass
 
-    ##
-    # \brief Returns the number of columns.
-    # 
-    # \return The number of columns.
-    # 
     def getSize2() -> int: pass
 
-    ##
-    # \brief Tells whether the matrix is empty.
-    # 
-    # \return <tt>True</tt> if the underlying storage holds no elements, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief Swaps the contents of this matrix with those of <em>m</em>.
-    # 
-    # \param m The matrix to swap with.
-    # 
     def swap(m: ULMatrix) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
-    ##
-    # \brief Returns a reference to the element at (<em>i</em>, <em>j</em>).
-    # 
-    # \param i The zero-based row index.
-    # \param j The zero-based column index.
-    # 
-    # \return A reference to the element. 
-    # 
-    # \throw Base.IndexError if either index is out of range.
-    # 
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -273,16 +192,8 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULMatrix: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##
@@ -341,11 +252,6 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -390,11 +296,6 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> ULMatrix: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULMatrix: pass
 
     objectID = property(getObjectID)

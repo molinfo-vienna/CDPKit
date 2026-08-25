@@ -73,65 +73,20 @@ class Vector3FArrayBFGSMinimizer(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getGradientNorm() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getFunctionDelta() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getFunctionValue() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumIterations() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStatus() -> Status: pass
 
-    ##
-    # \brief 
-    # \param x 
-    # \param g 
-    # \param max_iter 
-    # \param g_norm 
-    # \param delta_f 
-    # \param do_setup 
-    # \return 
-    #
     def minimize(x: Vector3FArray, g: Vector3FArray, max_iter: int, g_norm: float, delta_f: float, do_setup: bool = True) -> Status: pass
 
-    ##
-    # \brief 
-    # \param x 
-    # \param g 
-    # \param step_size 
-    # \param tol 
-    # \return 
-    #
     def setup(x: Vector3FArray, g: Vector3FArray, step_size: float = 0.001, tol: float = 0.15) -> float: pass
 
-    ##
-    # \brief 
-    # \param f 
-    # \param x 
-    # \param g 
-    # \return 
-    #
     def iterate(f: float, x: Vector3FArray, g: Vector3FArray) -> tuple: pass
 
     objectID = property(getObjectID)

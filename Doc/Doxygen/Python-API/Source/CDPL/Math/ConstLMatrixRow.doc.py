@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a single row of an underlying matrix.
+# 
 class ConstLMatrixRow(Boost.Python.instance):
 
     ##
@@ -38,9 +38,10 @@ class ConstLMatrixRow(Boost.Python.instance):
     def __init__(e: ConstLMatrixExpression, i: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the row index this proxy refers to within the wrapped matrix.
+    # 
+    # \return The zero-based row index.
+    # 
     def getIndex() -> int: pass
 
     ##
@@ -56,34 +57,28 @@ class ConstLMatrixRow(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the row is empty (the wrapped matrix has zero columns).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix has zero columns, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the row (number of columns of the wrapped matrix).
+    # 
+    # \return The number of columns.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> ConstLMatrixExpression: pass
 
     ##
@@ -115,23 +110,16 @@ class ConstLMatrixRow(Boost.Python.instance):
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at column <em>i</em> of the row.
+    # 
+    # \param i The zero-based column index.
+    # 
+    # \return A reference to the underlying element <tt>m(index, i)</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -140,16 +128,8 @@ class ConstLMatrixRow(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstLMatrixRow: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLVectorExpression: pass
 
     ##

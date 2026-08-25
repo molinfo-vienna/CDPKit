@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a single column of an underlying matrix.
+# 
 class DMatrixColumn(Boost.Python.instance):
 
     ##
@@ -38,9 +38,10 @@ class DMatrixColumn(Boost.Python.instance):
     def __init__(e: DMatrixExpression, i: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the column index this proxy refers to within the wrapped matrix.
+    # 
+    # \return The zero-based column index.
+    # 
     def getIndex() -> int: pass
 
     ##
@@ -56,36 +57,46 @@ class DMatrixColumn(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> DMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> DMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> DMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column without intermediate temporary.
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> DMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DMatrixColumn instance \a c.
-    # \param c The \c %DMatrixColumn instance to copy.
+    # \brief Copy-assigns the contents of <em>c</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param c The source column.
+    # 
     # \return \a self
     # 
     def assign(c: DMatrixColumn) -> DMatrixColumn: pass
@@ -98,47 +109,37 @@ class DMatrixColumn(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the column is empty (the wrapped matrix has zero rows).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix has zero rows, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param c 
-    #
+    # \brief Swaps the contents of this column with those of <em>c</em> (via element-wise swap of the underlying matrix elements).
+    # 
+    # \param c The column to swap with.
+    # 
     def swap(c: DMatrixColumn) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> DMatrixExpression: pass
 
     ##
@@ -170,23 +171,16 @@ class DMatrixColumn(Boost.Python.instance):
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return A reference to the underlying element <tt>m(i, index)</tt>.
+    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -195,16 +189,8 @@ class DMatrixColumn(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DMatrixColumn: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDVectorExpression: pass
 
     ##
@@ -256,11 +242,6 @@ class DMatrixColumn(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -305,11 +286,6 @@ class DMatrixColumn(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> DMatrixColumn: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DMatrixColumn: pass
 
     objectID = property(getObjectID)

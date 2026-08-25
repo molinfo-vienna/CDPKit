@@ -234,10 +234,6 @@ class ScreeningSettings(Boost.Python.instance):
     # 
     def allCarbonMode() -> bool: pass
 
-    ##
-    # \brief 
-    # \param all_c 
-    #
     def singleConformerSearch(all_c: bool) -> None: pass
 
     ##

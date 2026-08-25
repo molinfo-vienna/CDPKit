@@ -86,25 +86,10 @@ class Object3D(Base.PropertyContainer):
     # 
     def addSubObject() -> Object3D: pass
 
-    ##
-    # \brief 
-    # \param obj 
-    # \return 
-    #
     def addSubObject(obj: Object3D) -> Object3D: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Object3D: pass
 
     ##
@@ -114,30 +99,12 @@ class Object3D(Base.PropertyContainer):
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     numSubObjects = property(getNumSubObjects)

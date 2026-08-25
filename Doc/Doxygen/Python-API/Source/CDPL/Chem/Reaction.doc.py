@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Abstract base class for chemical reactions composed of role-tagged Chem.Molecule components.
+# \brief Abstract base class for chemical reactions composed of role-tagged reaction components of type Chem.Molecule.
 # 
-# Each component carries a Chem.ReactionRole (<tt>REACTANT</tt>, <tt>AGENT</tt> or <tt>PRODUCT</tt>). The role is the primary indexing axis exposed by getComponentRole(), getNumComponents(role), getComponent(idx, role) and the role-restricted iterator pair getComponentsBegin(role)/getComponentsEnd(role). Editing methods (addComponent, removeComponent, swapComponentRoles, clear) are pure virtual and supplied by concrete subclasses such as Chem.BasicReaction. Properties common to all components are inherited from Base.PropertyContainer.
+# Each component carries a reaction role that is specified by one of the constants declared in namespace Chem.ReactionRole. Reaction roles divide the components into three differents subsets: reactant, agents/catalysts and products. For component management/access the methods getComponentRole(), getNumComponents(), getComponent(), getComponentsBegin() and getComponentsEnd() are available. For reaction editing the methods addComponent(), removeComponent(), swapComponentRoles() and clear(). Reaction properties can be stored/retrieved via methods inherited from Base.PropertyContainer.
 # 
 class Reaction(Base.PropertyContainer):
 
@@ -38,23 +38,10 @@ class Reaction(Base.PropertyContainer):
         # 
         def __contains__(mol: Molecule) -> bool: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Molecule: pass
 
     ##
@@ -70,7 +57,7 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief Creates a new reaction component with the specified role.
     # 
-    # \param role A flag specifying the reaction role of the new component (see namespace Chem.ReactionRole).
+    # \param role The reaction role of the new component (see namespace Chem.ReactionRole).
     # 
     # \return A reference to the newly created component molecule. 
     # 
@@ -121,9 +108,9 @@ class Reaction(Base.PropertyContainer):
     def getNumComponents(role: int) -> int: pass
 
     ##
-    # \brief Returns the number of reaction components.
+    # \brief Returns the total number of reaction components.
     # 
-    # \return The number of reaction components.
+    # \return The total number of reaction components.
     # 
     def getNumComponents() -> int: pass
 
@@ -153,7 +140,7 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief Removes all components with the specified role.
     # 
-    # \param role A flag specifying the reaction role of the components to remove (see namespace Chem.ReactionRole).
+    # \param role The reaction role of the components to remove (see namespace Chem.ReactionRole).
     # 
     # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
@@ -163,7 +150,7 @@ class Reaction(Base.PropertyContainer):
     # \brief Removes the reaction component at index <em>idx</em> in the list of components with the specified role.
     # 
     # \param idx The zero-based index of the component to remove.
-    # \param role The reaction role of the components
+    # \param role The reaction role of the component (see namespace Chem.ReactionRole).
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, <tt>getNumComponents(role)</tt>). Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
@@ -183,15 +170,15 @@ class Reaction(Base.PropertyContainer):
     # 
     # If <em>role1</em> is equal to <em>role2</em>, the method has no effect.
     # 
-    # \param role1 A flag specifying the reaction role of the first component set (see namespace Chem.ReactionRole).
-    # \param role2 A flag specifying the reaction role of the second component set (see namespace Chem.ReactionRole).
+    # \param role1 The reaction role of the first component set (see namespace Chem.ReactionRole).
+    # \param role2 The reaction role of the second component set (see namespace Chem.ReactionRole).
     # 
     # \throw Base.ValueError if the value of <em>role1</em> and/or <em>role2</em> is not equal to Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
     def swapComponentRoles(role1: int, role2: int) -> None: pass
 
     ##
-    # \brief Creates a copy of the current reaction state.
+    # \brief Creates a deep copy of the current reaction state.
     # 
     # \return A smart reference to the copy of the reaction.
     # 
@@ -215,22 +202,10 @@ class Reaction(Base.PropertyContainer):
     # 
     def assign(rxn: Reaction) -> Reaction: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getReactants() -> ComponentSequence: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getAgents() -> ComponentSequence: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getProducts() -> ComponentSequence: pass
 
     ##
@@ -242,31 +217,16 @@ class Reaction(Base.PropertyContainer):
     def registerCopyPostprocessingFunction(func: VoidMoleculeMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Invokes all registered copy postprocessing functions with <tt>self</tt> as the target reaction and <em>src_rxn</em> as the source.
+    # \brief Invokes all registered copy postprocessing functions with <tt>self</tt> as the target and <em>src_rxn</em> as the source reaction.
     # 
     # \param src_rxn The source reaction the copy was made from.
     # 
     def invokeCopyPostprocessingFunctions(src_rxn: Reaction) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
     def __getstate__() -> tuple: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> Molecule: pass
 
     ##
@@ -283,30 +243,12 @@ class Reaction(Base.PropertyContainer):
     # 
     def __contains__(mol: Molecule) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     reactants = property(getReactants)

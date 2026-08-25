@@ -154,10 +154,6 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     # 
     def getScoreCombinationFunction() -> Math.DoubleDVectorFunctor: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setFeatureSelectionPredicate(func: Pharm.BoolFeatureFunctor) -> None: pass
 
     ##

@@ -54,7 +54,7 @@ namespace CDPL
          * are allocated from internal object pools and accessed through random-access iterators. The class
          * implements the full editing interface inherited from Chem::Molecule (addAtom, addBond, removeAtom,
          * removeBond, copy, append, remove, reserveMemoryForAtoms, reserveMemoryForBonds) and is the standard
-         * concrete type used by readers and downstream algorithms throughout CDPKit.
+         * concrete type used by readers and downstream algorithms throughout the \e %CDPL.
          */
         class CDPL_CHEM_API BasicMolecule : public Molecule
         {
@@ -123,21 +123,10 @@ namespace CDPL
              */
             ~BasicMolecule();
 
-            /**
-             * \brief Removes all atoms, bonds, and properties of the molecule.
-             */
             void clear();
 
-            /**
-             * \brief Returns the number of atoms in the molecule.
-             * \return The atom count.
-             */
             std::size_t getNumAtoms() const;
 
-            /**
-             * \brief Returns the number of bonds in the molecule.
-             * \return The bond count.
-             */
             std::size_t getNumBonds() const;
 
             /**
@@ -188,39 +177,18 @@ namespace CDPL
              */
             BondIterator getBondsEnd();
 
-            /**
-             * \brief Returns a \c const reference to the atom at index \a idx.
-             * \param idx The zero-based atom index.
-             * \return A \c const reference to the atom.
-             * \throw Base::IndexError if \a idx is not less than getNumAtoms().
-             */
             const BasicAtom& getAtom(std::size_t idx) const;
 
-            /**
-             * \brief Returns a mutable reference to the atom at index \a idx.
-             * \param idx The zero-based atom index.
-             * \return A mutable reference to the atom.
-             * \throw Base::IndexError if \a idx is not less than getNumAtoms().
-             */
             BasicAtom& getAtom(std::size_t idx);
 
-            /**
-             * \brief Creates and appends a new atom and returns a reference to it.
-             * \return A reference to the newly added atom.
-             */
             BasicAtom& addAtom();
 
-            /**
-             * \brief Removes the atom at index \a idx (along with any incident bonds).
-             * \param idx The zero-based atom index.
-             * \throw Base::IndexError if \a idx is not less than getNumAtoms().
-             */
             void removeAtom(std::size_t idx);
 
             /**
              * \brief Removes the atom specified by the iterator \a it.
              *
-             * If the specified atom is connected to any other atoms of the molecule, the connecting bonds
+             * If the specified atom is connected to any other atoms of the molecule then the connecting bonds
              * will also be removed.
              *
              * \param it An iterator that specifies the atom to remove.
@@ -229,36 +197,12 @@ namespace CDPL
              */
             AtomIterator removeAtom(const AtomIterator& it);
 
-            /**
-             * \brief Returns a \c const reference to the bond at index \a idx.
-             * \param idx The zero-based bond index.
-             * \return A \c const reference to the bond.
-             * \throw Base::IndexError if \a idx is not less than getNumBonds().
-             */
             const BasicBond& getBond(std::size_t idx) const;
 
-            /**
-             * \brief Returns a mutable reference to the bond at index \a idx.
-             * \param idx The zero-based bond index.
-             * \return A mutable reference to the bond.
-             * \throw Base::IndexError if \a idx is not less than getNumBonds().
-             */
             BasicBond& getBond(std::size_t idx);
 
-            /**
-             * \brief Creates a new bond between the atoms at indices \a atom1_idx and \a atom2_idx and returns a reference to it.
-             * \param atom1_idx The zero-based index of the first end atom.
-             * \param atom2_idx The zero-based index of the second end atom.
-             * \return A reference to the newly added bond.
-             * \throw Base::IndexError if either index is not less than getNumAtoms().
-             */
             BasicBond& addBond(std::size_t atom1_idx, std::size_t atom2_idx);
 
-            /**
-             * \brief Removes the bond at index \a idx.
-             * \param idx The zero-based bond index.
-             * \throw Base::IndexError if \a idx is not less than getNumBonds().
-             */
             void removeBond(std::size_t idx);
 
             /**
@@ -269,46 +213,16 @@ namespace CDPL
              */
             BondIterator removeBond(const BondIterator& it);
 
-            /**
-             * \brief Tells whether \a atom is part of this molecule.
-             * \param atom The atom to look up.
-             * \return \c true if \a atom is in the molecule, and \c false otherwise.
-             */
             bool containsAtom(const Atom& atom) const;
 
-            /**
-             * \brief Tells whether \a bond is part of this molecule.
-             * \param bond The bond to look up.
-             * \return \c true if \a bond is in the molecule, and \c false otherwise.
-             */
             bool containsBond(const Bond& bond) const;
 
-            /**
-             * \brief Returns the index of atom \a atom in this molecule.
-             * \param atom The atom to look up.
-             * \return The zero-based atom index.
-             * \throw Base::ItemNotFound if \a atom is not part of the molecule.
-             */
             std::size_t getAtomIndex(const Atom& atom) const;
 
-            /**
-             * \brief Returns the index of bond \a bond in this molecule.
-             * \param bond The bond to look up.
-             * \return The zero-based bond index.
-             * \throw Base::ItemNotFound if \a bond is not part of the molecule.
-             */
             std::size_t getBondIndex(const Bond& bond) const;
 
-            /**
-             * \brief Reorders the atom list using the binary comparator \a func.
-             * \param func The strict-weak-ordering comparator used to sort the atoms.
-             */
             void orderAtoms(const AtomCompareFunction& func);
 
-            /**
-             * \brief Reorders the bond list using the binary comparator \a func.
-             * \param func The strict-weak-ordering comparator used to sort the bonds.
-             */
             void orderBonds(const BondCompareFunction& func);
 
             /**
@@ -337,10 +251,6 @@ namespace CDPL
 
             using Molecule::operator+=;
 
-            /**
-             * \brief Creates a deep copy of the molecule.
-             * \return A smart pointer to the cloned molecule.
-             */
             MolecularGraph::SharedPointer clone() const;
 
             /**
@@ -350,16 +260,8 @@ namespace CDPL
              */
             void copy(const BasicMolecule& mol);
 
-            /**
-             * \brief Replaces the current set of atoms, bonds and properties by a copy of \a mol.
-             * \param mol The source molecule.
-             */
             void copy(const Molecule& mol);
 
-            /**
-             * \brief Replaces the current set of atoms, bonds and properties by a copy of \a molgraph.
-             * \param molgraph The source molecular graph.
-             */
             void copy(const MolecularGraph& molgraph);
 
             /**
@@ -370,36 +272,14 @@ namespace CDPL
              */
             void append(const BasicMolecule& mol);
 
-            /**
-             * \brief Extends the current set of atoms and bonds by a copy of those in \a mol.
-             * \param mol The source molecule.
-             * \note Does not affect any properties.
-             */
             void append(const Molecule& mol);
 
-            /**
-             * \brief Extends the current set of atoms and bonds by a copy of those in \a molgraph.
-             * \param molgraph The source molecular graph.
-             * \note Does not affect any properties.
-             */
             void append(const MolecularGraph& molgraph);
 
-            /**
-             * \brief Removes the atoms and bonds of \a molgraph from this molecule.
-             * \param molgraph The molecular graph specifying the atoms and bonds to remove.
-             */
             void remove(const MolecularGraph& molgraph);
 
-            /**
-             * \brief Reserves storage for at least \a num_atoms atoms to avoid reallocations on subsequent additions.
-             * \param num_atoms The minimum number of atoms to accommodate.
-             */
             void reserveMemoryForAtoms(std::size_t num_atoms);
 
-            /**
-             * \brief Reserves storage for at least \a num_bonds bonds to avoid reallocations on subsequent additions.
-             * \param num_bonds The minimum number of bonds to accommodate.
-             */
             void reserveMemoryForBonds(std::size_t num_bonds);
 
           private:

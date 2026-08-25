@@ -31,23 +31,10 @@ class Fragment(MolecularGraph):
     #
     class AtomSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Atom: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
         ##
@@ -62,23 +49,10 @@ class Fragment(MolecularGraph):
     #
     class BondSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Bond: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
         ##
@@ -197,16 +171,8 @@ class Fragment(MolecularGraph):
     # 
     def swap(frag: Fragment) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getAtoms() -> AtomSequence: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getBonds() -> BondSequence: pass
 
     ##
@@ -223,11 +189,6 @@ class Fragment(MolecularGraph):
     # 
     def reserveMemoryForBonds(num_bonds: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
@@ -251,24 +212,10 @@ class Fragment(MolecularGraph):
     # 
     def __contains__(bond: Bond) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##

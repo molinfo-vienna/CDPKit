@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Matrix expression proxy that views a contiguous rectangular subrange of an underlying matrix.
+# 
 class ConstLMatrixRange(Boost.Python.instance):
 
     ##
@@ -39,15 +39,17 @@ class ConstLMatrixRange(Boost.Python.instance):
     def __init__(e: ConstLMatrixExpression, r1: Range, r2: Range) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the row index range's start index in the wrapped matrix.
+    # 
+    # \return The start row index.
+    # 
     def getStart1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the column index range's start index in the wrapped matrix.
+    # 
+    # \return The start column index.
+    # 
     def getStart2() -> int: pass
 
     ##
@@ -63,62 +65,49 @@ class ConstLMatrixRange(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of rows in the proxy (size of the row range).
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of columns in the proxy (size of the column range).
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the proxy is empty (either range has size zero).
+    # 
+    # \return <tt>True</tt> if either range has zero size, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> ConstLMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
+    # \brief Returns a reference to the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return A reference to the underlying element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -155,16 +144,8 @@ class ConstLMatrixRange(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstLMatrixRange: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLMatrixExpression: pass
 
     ##

@@ -39,58 +39,24 @@ class FeatureContainerIOManager(Boost.Python.instance):
     #
     class InputHandlerSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         @staticmethod
         def __getitem__(idx: int) -> object: pass
 
-        ##
-        # \brief 
-        # \param fmt 
-        # \return 
-        #
         @staticmethod
         def __getitem__(fmt: Base.DataFormat) -> object: pass
 
-        ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
         @staticmethod
         def __getitem__(name: str) -> object: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         @staticmethod
         def __delitem__(idx: int) -> None: pass
 
-        ##
-        # \brief 
-        # \param fmt 
-        # \return 
-        #
         @staticmethod
         def __delitem__(fmt: Base.DataFormat) -> bool: pass
 
-        ##
-        # \brief 
-        # \param handler 
-        # \return 
-        #
         @staticmethod
         def __delitem__(handler: object) -> bool: pass
 
-        ##
-        # \brief 
-        # \param  
-        # \return 
-        #
         @staticmethod
         def __len__(: ) -> int: pass
 
@@ -99,58 +65,24 @@ class FeatureContainerIOManager(Boost.Python.instance):
     #
     class OutputHandlerSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         @staticmethod
         def __getitem__(idx: int) -> FeatureContainerOutputHandler: pass
 
-        ##
-        # \brief 
-        # \param fmt 
-        # \return 
-        #
         @staticmethod
         def __getitem__(fmt: Base.DataFormat) -> FeatureContainerOutputHandler: pass
 
-        ##
-        # \brief 
-        # \param name 
-        # \return 
-        #
         @staticmethod
         def __getitem__(name: str) -> FeatureContainerOutputHandler: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         @staticmethod
         def __delitem__(idx: int) -> None: pass
 
-        ##
-        # \brief 
-        # \param fmt 
-        # \return 
-        #
         @staticmethod
         def __delitem__(fmt: Base.DataFormat) -> bool: pass
 
-        ##
-        # \brief 
-        # \param handler 
-        # \return 
-        #
         @staticmethod
         def __delitem__(handler: FeatureContainerOutputHandler) -> bool: pass
 
-        ##
-        # \brief 
-        # \param  
-        # \return 
-        #
         @staticmethod
         def __len__(: ) -> int: pass
 
@@ -292,11 +224,6 @@ class FeatureContainerIOManager(Boost.Python.instance):
     @staticmethod
     def getNumInputHandlers(: ) -> int: pass
 
-    ##
-    # \brief 
-    # \param  
-    # \return 
-    #
     @staticmethod
     def getInputHandlers(: ) -> InputHandlerSequence: pass
 
@@ -418,10 +345,5 @@ class FeatureContainerIOManager(Boost.Python.instance):
     @staticmethod
     def getNumOutputHandlers(: ) -> int: pass
 
-    ##
-    # \brief 
-    # \param  
-    # \return 
-    #
     @staticmethod
     def getOutputHandlers(: ) -> OutputHandlerSequence: pass

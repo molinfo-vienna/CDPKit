@@ -41,24 +41,8 @@ class BoolAtom4Functor(Boost.Python.instance):
     # 
     def __init__(callable: object) -> None: pass
 
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    # \param arg3 
-    # \param arg4 
-    # \return 
-    #
     def __call__(arg1: Atom, arg2: Atom, arg3: Atom, arg4: Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

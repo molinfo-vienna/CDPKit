@@ -63,10 +63,6 @@ class Object3DWriter(Object3DWriterBase):
     # 
     def __init__(ios: Base.IOStream, fmt: Base.DataFormat) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getDataFormat() -> Base.DataFormat: pass
 
     dataFormat = property(getDataFormat)

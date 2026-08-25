@@ -49,23 +49,10 @@ class TorsionCategory(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> TorsionRule: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
         objectID = property(getObjectID)
@@ -93,23 +80,10 @@ class TorsionCategory(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> TorsionCategory: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        #
         def __delitem__(idx: int) -> None: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
         objectID = property(getObjectID)
@@ -252,10 +226,6 @@ class TorsionCategory(Boost.Python.instance):
     # 
     def addRule(rule: TorsionRule) -> TorsionRule: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getRules() -> RuleSequence: pass
 
     ##
@@ -296,10 +266,6 @@ class TorsionCategory(Boost.Python.instance):
     # 
     def addCategory(cat: TorsionCategory) -> TorsionCategory: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getCategories() -> CategorySequence: pass
 
     ##

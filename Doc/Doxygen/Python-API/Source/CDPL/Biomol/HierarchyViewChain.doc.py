@@ -44,17 +44,8 @@ class HierarchyViewChain(HierarchyViewNode):
     # 
     def getFragment(idx: int) -> HierarchyViewFragment: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> HierarchyViewFragment: pass
 
     numFragments = property(getNumFragments)

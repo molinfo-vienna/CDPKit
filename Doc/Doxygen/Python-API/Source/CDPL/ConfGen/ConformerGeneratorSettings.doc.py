@@ -333,10 +333,6 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     # 
     def getDielectricConstant() -> float: pass
 
-    ##
-    # \brief 
-    # \param dist_expo 
-    #
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
@@ -434,10 +430,6 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     # 
     def addMinRMSDRange(num_rot_bonds: int, min_rmsd: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param max_num 
-    #
     def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
@@ -447,10 +439,6 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     # 
     def getMaxNumRefinementIterations() -> int: pass
 
-    ##
-    # \brief 
-    # \param tol 
-    #
     def setRefinementStopGradient(tol: float) -> None: pass
 
     ##
@@ -488,10 +476,6 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     # 
     def getConvergenceCheckCycleSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param max_size 
-    #
     def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##

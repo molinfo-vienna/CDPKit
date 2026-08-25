@@ -196,13 +196,6 @@ class TorsionRule(Boost.Python.instance):
     # 
     def addAngle(ang_entry: AngleEntry) -> None: pass
 
-    ##
-    # \brief 
-    # \param ang 
-    # \param tol1 
-    # \param tol2 
-    # \param score 
-    #
     def addAngle(ang: float, tol1: float, tol2: float, score: float) -> None: pass
 
     ##
@@ -217,23 +210,10 @@ class TorsionRule(Boost.Python.instance):
     # 
     def swap(rule: TorsionRule) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> AngleEntry: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def __delitem__(idx: int) -> None: pass
 
     ##

@@ -41,11 +41,6 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def __init__(r: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param r 
-    # \return 
-    #
     def set(r: float = 0.0) -> DRealQuaternion: pass
 
     ##
@@ -60,34 +55,14 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC1() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC2() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC3() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC4() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -97,10 +72,6 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def assign(q: DRealQuaternion) -> DRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    #
     def swap(q: DRealQuaternion) -> None: pass
 
     ##
@@ -159,18 +130,8 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def __idiv__(q: object) -> DRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> DRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
     def __itruediv__(q: object) -> DRealQuaternion: pass
 
     ##
@@ -207,16 +168,8 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> DRealQuaternion: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
@@ -233,11 +186,6 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -254,11 +202,6 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -303,11 +246,6 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def __truediv__(t: float) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
     objectID = property(getObjectID)

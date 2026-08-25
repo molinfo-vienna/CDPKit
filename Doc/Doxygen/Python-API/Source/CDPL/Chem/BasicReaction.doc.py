@@ -44,11 +44,13 @@ class BasicReaction(Reaction):
     def __init__(mol: Reaction) -> None: pass
 
     ##
-    # \brief Adds a new empty component with the specified reaction role.
+    # \brief Creates a new reaction component with the specified role.
     # 
     # \param role The reaction role of the new component (see namespace Chem.ReactionRole).
     # 
-    # \return A reference to the newly created component molecule.
+    # \return A reference to the newly created component molecule. 
+    # 
+    # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
     def addComponent(role: int) -> BasicMolecule: pass
 

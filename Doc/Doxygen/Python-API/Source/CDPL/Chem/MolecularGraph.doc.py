@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Abstract base class for representations of a chemical structure as a graph of bonded atoms.
+# \brief Abstract base class for data structures that represent chemical structures as molecular graphs.
 # 
-# <tt>MolecularGraph</tt> combines the atom-, bond- and property-related interfaces inherited from Chem.AtomContainer, Chem.BondContainer and Base.PropertyContainer. Concrete graph types (e.g. Chem.Molecule, Chem.Fragment) implement the pure virtual clone() method to provide a copy of the graph.
+# Vertices (= atoms) of the molecular graph are represented by Chem.Atom instances and edges (= bonds) by Chem.Bond instances. Read-only access to the Chem.Atom and Chem.Bond objects is enabled by corresponding methods inherited from Chem.AtomContainer and Chem.BondContainer, respectively. Molecular graph properties can be stored/retrieved via methods provided by the Base.PropertyContainer base class. Deep copies of the molecular graph are created by the pure virtual clone() method which needs to be implemented by concrete subclasses (e.g. Chem.BasicMolecule, Chem.Fragment) of <tt>MolecularGraph</tt>.
 # 
 class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
 
@@ -31,17 +31,8 @@ class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
     #
     class AtomSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Atom: pass
 
         ##
@@ -56,17 +47,8 @@ class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
     #
     class BondSequence(Boost.Python.instance):
 
-        ##
-        # \brief 
-        # \return 
-        #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        # \param idx 
-        # \return 
-        #
         def __getitem__(idx: int) -> Bond: pass
 
         ##
@@ -81,109 +63,41 @@ class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
     # 
     def __init__() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getAtoms() -> AtomSequence: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getBonds() -> BondSequence: pass
 
     ##
-    # \brief Creates a copy of the molecular graph.
+    # \brief Creates a deep copy of the molecular graph.
     # 
     # \return A smart reference to the copy of the molecular graph.
     # 
     def clone() -> MolecularGraph: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getAtom(idx: int) -> Atom: pass
 
-    ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
     def containsAtom(atom: Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
     def getAtomIndex(atom: Atom) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumAtoms() -> int: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getEntity(idx: int) -> Entity3D: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumEntities() -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getBond(idx: int) -> Bond: pass
 
-    ##
-    # \brief 
-    # \param bond 
-    # \return 
-    #
     def containsBond(bond: Bond) -> bool: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def orderBonds(func: BoolBond2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \param bond 
-    # \return 
-    #
     def getBondIndex(bond: Bond) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumBonds() -> int: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
@@ -207,24 +121,10 @@ class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     atoms = property(getAtoms)

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices 0-3 map to C1-C4).
+# 
 class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
@@ -49,39 +49,40 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C1.
+    # 
+    # \return A reference to C1.
+    # 
     def getC1() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C2.
+    # 
+    # \return A reference to C2.
+    # 
     def getC2() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C3.
+    # 
+    # \return A reference to C3.
+    # 
     def getC3() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to component C4.
+    # 
+    # \return A reference to C4.
+    # 
     def getC4() -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ConstDVectorExpression: pass
 
     ##
@@ -118,16 +119,8 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstDVectorQuaternionAdapter: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
@@ -144,11 +137,6 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -165,11 +153,6 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
@@ -214,11 +197,6 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __truediv__(t: float) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
     objectID = property(getObjectID)

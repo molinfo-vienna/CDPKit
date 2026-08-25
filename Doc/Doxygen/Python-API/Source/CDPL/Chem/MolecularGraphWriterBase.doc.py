@@ -53,14 +53,6 @@ class MolecularGraphWriterBase(Base.DataIOBase):
     # 
     def close() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __nonzero__() -> bool: pass

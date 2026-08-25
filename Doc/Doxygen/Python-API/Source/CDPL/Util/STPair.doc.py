@@ -42,28 +42,12 @@ class STPair(Boost.Python.instance):
     # 
     def __init__(first: int, second: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getFirst() -> int: pass
 
-    ##
-    # \brief 
-    # \param value 
-    #
     def setFirst(value: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSecond() -> int: pass
 
-    ##
-    # \brief 
-    # \param value 
-    #
     def setSecond(value: int) -> None: pass
 
     ##

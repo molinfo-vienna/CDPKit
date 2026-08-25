@@ -38,16 +38,8 @@ class ULMatrixRange(Boost.Python.instance):
     # 
     def __init__(e: ULMatrixExpression, r1: Range, r2: Range) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStart1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getStart2() -> int: pass
 
     ##
@@ -104,77 +96,26 @@ class ULMatrixRange(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param r 
-    #
     def swap(r: ULMatrixRange) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: int) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getData() -> ULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def __call__(i: int, j: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -211,16 +152,8 @@ class ULMatrixRange(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ULMatrixRange: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##
@@ -279,11 +212,6 @@ class ULMatrixRange(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
@@ -328,11 +256,6 @@ class ULMatrixRange(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> ULMatrixRange: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: int) -> ULMatrixRange: pass
 
     objectID = property(getObjectID)

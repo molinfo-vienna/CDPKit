@@ -172,12 +172,6 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     # 
     def getNumTestPoints() -> int: pass
 
-    ##
-    # \brief 
-    # \param cntr 
-    # \param parent_molgraph 
-    # \param frag 
-    #
     def extract(cntr: AtomContainer, parent_molgraph: MolecularGraph, frag: Fragment) -> None: pass
 
     ##

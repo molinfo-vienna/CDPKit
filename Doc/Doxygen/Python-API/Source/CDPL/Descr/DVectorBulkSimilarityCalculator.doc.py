@@ -60,89 +60,30 @@ class DVectorBulkSimilarityCalculator(Boost.Python.instance):
     # 
     def assign(calc: DVectorBulkSimilarityCalculator) -> DVectorBulkSimilarityCalculator: pass
 
-    ##
-    # \brief 
-    # \param func 
-    #
     def setSimilarityFunction(func: Math.DoubleDVector2Functor) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSimilarityFunction() -> Math.DoubleDVector2Functor: pass
 
-    ##
-    # \brief 
-    #
     def clear() -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getNumDescriptors() -> int: pass
 
-    ##
-    # \brief 
-    # \param descr 
-    #
     def addDescriptor(descr: Math.DVector) -> None: pass
 
-    ##
-    # \brief 
-    # \param descr 
-    # \return 
-    #
     def containsDescriptor(descr: Math.DVector) -> bool: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getDescriptor(idx: int) -> Math.DVector: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    #
     def removeDescriptor(idx: int) -> None: pass
 
-    ##
-    # \brief 
-    # \param descr 
-    # \param sort 
-    # \param sort_desc 
-    #
     def calculate(descr: Math.DVector, sort: bool = False, sort_desc: bool = True) -> None: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getResult(idx: int) -> tuple: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getSimilarity(idx: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def getDescriptorIndex(idx: int) -> int: pass
 
-    ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
     def __getitem__(idx: int) -> tuple: pass
 
     ##

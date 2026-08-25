@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief CRTP base class of all quaternion expression types.
+# 
+# Provides downcast access to the concrete derived expression class instance via the function call operator.
+# 
 class ConstLQuaternionExpression(Boost.Python.instance):
 
     ##
@@ -36,34 +38,14 @@ class ConstLQuaternionExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC1() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC2() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC3() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getC4() -> int: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -86,16 +68,8 @@ class ConstLQuaternionExpression(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> ConstLQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstLQuaternionExpression: pass
 
     ##
@@ -112,11 +86,6 @@ class ConstLQuaternionExpression(Boost.Python.instance):
     # 
     def __add__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __radd__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
@@ -133,11 +102,6 @@ class ConstLQuaternionExpression(Boost.Python.instance):
     # 
     def __sub__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rsub__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
@@ -182,11 +146,6 @@ class ConstLQuaternionExpression(Boost.Python.instance):
     # 
     def __truediv__(t: int) -> ConstLQuaternionExpression: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __rdiv__(t: int) -> ConstLQuaternionExpression: pass
 
     objectID = property(getObjectID)

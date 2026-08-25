@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Matrix expression proxy that views a contiguous rectangular subrange of an underlying matrix.
+# 
 class FMatrixRange(Boost.Python.instance):
 
     ##
@@ -39,15 +39,17 @@ class FMatrixRange(Boost.Python.instance):
     def __init__(e: FMatrixExpression, r1: Range, r2: Range) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the row index range's start index in the wrapped matrix.
+    # 
+    # \return The start row index.
+    # 
     def getStart1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the column index range's start index in the wrapped matrix.
+    # 
+    # \return The start column index.
+    # 
     def getStart2() -> int: pass
 
     ##
@@ -63,36 +65,46 @@ class FMatrixRange(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
-    # \param e The \c %ConstFMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
-    # \param e The \c %ConstDMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
-    # \param e The \c %ConstLMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
-    # \param e The \c %ConstULMatrixExpression instance to copy.
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range without intermediate temporary.
+    # 
+    # \param e The source matrix expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FMatrixRange instance \a r.
-    # \param r The \c %FMatrixRange instance to copy.
+    # \brief Copy-assigns the contents of <em>r</em> to this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param r The source matrix range.
+    # 
     # \return \a self
     # 
     def assign(r: FMatrixRange) -> FMatrixRange: pass
@@ -105,76 +117,58 @@ class FMatrixRange(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of rows in the proxy (size of the row range).
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of columns in the proxy (size of the column range).
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the proxy is empty (either range has size zero).
+    # 
+    # \return <tt>True</tt> if either range has zero size, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
     def getElement(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param r 
-    #
+    # \brief Swaps the contents of this matrix range with those of <em>r</em> (via element-wise swap of the underlying matrix elements).
+    # 
+    # \param r The matrix range to swap with.
+    # 
     def swap(r: FMatrixRange) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param v 
-    #
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> FMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \return 
-    #
+    # \brief Returns a reference to the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return A reference to the underlying element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def __call__(i: int, j: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \return 
-    #
     def __getitem__(ij: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -211,16 +205,8 @@ class FMatrixRange(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> FMatrixRange: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFMatrixExpression: pass
 
     ##
@@ -279,11 +265,6 @@ class FMatrixRange(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFMatrixExpression: pass
 
-    ##
-    # \brief 
-    # \param ij 
-    # \param v 
-    #
     def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
@@ -328,11 +309,6 @@ class FMatrixRange(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> FMatrixRange: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> FMatrixRange: pass
 
     objectID = property(getObjectID)

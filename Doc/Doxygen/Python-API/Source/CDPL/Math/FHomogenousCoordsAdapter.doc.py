@@ -90,48 +90,18 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
-    ##
-    # \brief 
-    # \param r 
-    #
     def swap(r: FHomogenousCoordsAdapter) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def getData() -> FVectorExpression: pass
 
     ##
@@ -162,24 +132,10 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -188,16 +144,8 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> FHomogenousCoordsAdapter: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFVectorExpression: pass
 
     ##
@@ -249,11 +197,6 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -298,11 +241,6 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> FHomogenousCoordsAdapter: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> FHomogenousCoordsAdapter: pass
 
     objectID = property(getObjectID)

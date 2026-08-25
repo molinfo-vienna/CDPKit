@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a strided slice of an underlying vector.
+# 
 class FVectorSlice(Boost.Python.instance):
 
     ##
@@ -38,15 +38,17 @@ class FVectorSlice(Boost.Python.instance):
     def __init__(e: FVectorExpression, s: Slice) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the start index of the slice within the wrapped vector.
+    # 
+    # \return The start index of the slice.
+    # 
     def getStart() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the stride of the slice (step between successive viewed elements).
+    # 
+    # \return The stride.
+    # 
     def getStride() -> int: pass
 
     ##
@@ -62,36 +64,46 @@ class FVectorSlice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Assigns the vector expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FVectorSlice instance \a s.
-    # \param s The \c %FVectorSlice instance to copy.
+    # \brief Copies the elements of <em>s</em> into this view (writing through to the wrapped vector).
+    # 
+    # \param s The source slice view.
+    # 
     # \return \a self
     # 
     def assign(s: FVectorSlice) -> FVectorSlice: pass
@@ -104,47 +116,37 @@ class FVectorSlice(Boost.Python.instance):
     def assign(a: object) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the view is empty (zero-length slice).
+    # 
+    # \return <tt>True</tt> if the slice is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size of the view (number of elements covered by the slice).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param s 
-    #
+    # \brief Swaps the elements of this view with those of <em>s</em>.
+    # 
+    # \param s The view to swap with.
+    # 
     def swap(s: FVectorSlice) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> FVectorExpression: pass
 
     ##
@@ -176,23 +178,16 @@ class FVectorSlice(Boost.Python.instance):
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return A reference to the underlying element <tt>v(slice(i))</tt>.
+    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -201,16 +196,8 @@ class FVectorSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> FVectorSlice: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFVectorExpression: pass
 
     ##
@@ -262,11 +249,6 @@ class FVectorSlice(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFVectorExpression: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -311,11 +293,6 @@ class FVectorSlice(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> FVectorSlice: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> FVectorSlice: pass
 
     objectID = property(getObjectID)

@@ -167,26 +167,10 @@ class FGrid(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \return 
-    #
     def getElement(i: int, j: int, k: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def getElement(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def toArray() -> object: pass
 
     ##
@@ -203,20 +187,8 @@ class FGrid(Boost.Python.instance):
     # 
     def swap(g: FGrid) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param j 
-    # \param k 
-    # \param v 
-    #
     def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def setElement(i: int, v: float) -> None: pass
 
     ##
@@ -243,24 +215,10 @@ class FGrid(Boost.Python.instance):
     # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \param ijk 
-    # \return 
-    #
     def __getitem__(ijk: tuple) -> float: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __len__() -> int: pass
 
     ##
@@ -297,16 +255,8 @@ class FGrid(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __pos__() -> FGrid: pass
 
-    ##
-    # \brief 
-    # \return 
-    #
     def __neg__() -> ConstFGridExpression: pass
 
     ##
@@ -351,18 +301,8 @@ class FGrid(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFGridExpression: pass
 
-    ##
-    # \brief 
-    # \param ijk 
-    # \param v 
-    #
     def __setitem__(ijk: tuple, v: float) -> None: pass
 
-    ##
-    # \brief 
-    # \param i 
-    # \param v 
-    #
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
@@ -407,11 +347,6 @@ class FGrid(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> FGrid: pass
 
-    ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
     def __itruediv__(t: float) -> FGrid: pass
 
     objectID = property(getObjectID)

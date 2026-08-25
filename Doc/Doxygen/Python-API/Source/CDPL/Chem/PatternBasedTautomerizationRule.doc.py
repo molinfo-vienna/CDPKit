@@ -61,40 +61,16 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getAtom1ID() -> int: pass
 
-        ##
-        # \brief 
-        # \param id 
-        #
         def setAtom1ID(id: int) -> None: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getAtom2ID() -> int: pass
 
-        ##
-        # \brief 
-        # \param id 
-        #
         def setAtom2ID(id: int) -> None: pass
 
-        ##
-        # \brief 
-        # \return 
-        #
         def getOrderChange() -> int: pass
 
-        ##
-        # \brief 
-        # \param value 
-        #
         def setOrderChange(value: int) -> None: pass
 
         objectID = property(getObjectID)
@@ -118,11 +94,6 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     # 
     def __init__(rule: PatternBasedTautomerizationRule) -> None: pass
 
-    ##
-    # \brief 
-    # \param molgraph 
-    # \param bond_chgs 
-    #
     def addTransformationPattern(molgraph: MolecularGraph, bond_chgs: object) -> None: pass
 
     ##
