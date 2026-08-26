@@ -287,32 +287,40 @@ class LQuaternion(Boost.Python.instance):
     def __rmul__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLQuaternionExpression instance holding the result of the division.
+    # \brief Divides every component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // e</tt>.
-    # \param e Specifies the divisor.
-    # \return A \c %ConstLQuaternionExpression instance holding the result of the division.
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
+    # 
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self
     # 
     def __div__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLQuaternionExpression instance holding the result of the division.
+    # \brief Divides every component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstLQuaternionExpression: pass
 
     def __rdiv__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param t Specifies the second addend.
-    # \return The updated \c %LQuaternion instance \a self.
+    # \brief Adds the scalar <em>t</em> to the real component.
+    # 
+    # \param t The scalar addend.
+    # 
+    # \return \a self
     # 
     def __iadd__(t: int) -> LQuaternion: pass
 
@@ -331,9 +339,11 @@ class LQuaternion(Boost.Python.instance):
     def __iadd__(q: ConstLQuaternionExpression) -> LQuaternion: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param t Specifies the subtrahend.
-    # \return The updated \c %LQuaternion instance \a self.
+    # \brief Subtracts the scalar <em>t</em> from the real component.
+    # 
+    # \param t The scalar subtrahend.
+    # 
+    # \return \a self
     # 
     def __isub__(t: int) -> LQuaternion: pass
 
@@ -352,9 +362,11 @@ class LQuaternion(Boost.Python.instance):
     def __isub__(q: ConstLQuaternionExpression) -> LQuaternion: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %LQuaternion instance \a self.
+    # \brief Multiplies every component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: int) -> LQuaternion: pass
 

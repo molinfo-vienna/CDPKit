@@ -204,8 +204,22 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
 
     def __delitem__(idx: int) -> None: pass
 
+    ##
+    # \brief Returns a reference to the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __getitem__(idx: int) -> MolecularGraphMatchExpression: pass
 
+    ##
+    # \brief Returns the number of elements stored in the list.
+    # 
+    # \return The size of the list.
+    # 
     def __len__() -> int: pass
 
     def __setitem__(index: int, value: MolecularGraphMatchExpression) -> None: pass

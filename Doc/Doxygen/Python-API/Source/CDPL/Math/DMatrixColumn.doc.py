@@ -179,8 +179,20 @@ class DMatrixColumn(Boost.Python.instance):
     # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return A reference to the underlying element.
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -222,16 +234,20 @@ class DMatrixColumn(Boost.Python.instance):
     def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstDVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstDVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstDVectorExpression: pass
 
@@ -252,9 +268,11 @@ class DMatrixColumn(Boost.Python.instance):
     def __iadd__(c: DMatrixColumn) -> DMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %DMatrixColumn instance \a self.
+    # \brief Adds the elements of the vector expression <em>e</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstDVectorExpression) -> DMatrixColumn: pass
 
@@ -266,16 +284,20 @@ class DMatrixColumn(Boost.Python.instance):
     def __isub__(c: DMatrixColumn) -> DMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %DMatrixColumn instance \a self.
+    # \brief Subtracts the elements of the vector expression <em>e</em> from this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstDVectorExpression) -> DMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %DMatrixColumn instance \a self.
+    # \brief Multiplies every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: float) -> DMatrixColumn: pass
 

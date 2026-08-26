@@ -259,16 +259,20 @@ class LMatrixSlice(Boost.Python.instance):
     def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of this matrix slice by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstLMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of this matrix slice by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstLMatrixExpression: pass
 
@@ -289,9 +293,11 @@ class LMatrixSlice(Boost.Python.instance):
     def __iadd__(s: LMatrixSlice) -> LMatrixSlice: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %LMatrixSlice instance \a self.
+    # \brief Adds the elements of the matrix expression <em>e</em> to this matrix slice (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstLMatrixExpression) -> LMatrixSlice: pass
 
@@ -303,16 +309,20 @@ class LMatrixSlice(Boost.Python.instance):
     def __isub__(s: LMatrixSlice) -> LMatrixSlice: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %LMatrixSlice instance \a self.
+    # \brief Subtracts the elements of the matrix expression <em>e</em> from this matrix slice (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstLMatrixExpression) -> LMatrixSlice: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %LMatrixSlice instance \a self.
+    # \brief Multiplies every element of this matrix slice by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: int) -> LMatrixSlice: pass
 

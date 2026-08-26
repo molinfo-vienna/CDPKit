@@ -342,7 +342,25 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                     mem_name = '__eq__'
                 elif mem_name == 'operator()':
                     mem_name = '__call__'
-
+                elif mem_name == 'operator-=':
+                    mem_name = '__isub__'
+                elif mem_name == 'operator-':
+                    mem_name = '__sub__'
+                elif mem_name == 'operator+=':
+                    mem_name = '__iadd__'
+                elif mem_name == 'operator+':
+                    mem_name = '__add__'
+                elif mem_name == 'operator*=':
+                    mem_name = '__imul__'
+                elif mem_name == 'operator*':
+                    mem_name = '__mul__'
+                elif mem_name == 'operator/=':
+                    mem_name = '__div__'
+                elif mem_name == 'operator/':
+                    mem_name = '__div__'
+                elif mem_name == 'operator[]':
+                    mem_name = '__getitem__'
+                    
                 arg_names = ''
                     
                 for decl_name in mem_def.getElementsByTagName('declname'):

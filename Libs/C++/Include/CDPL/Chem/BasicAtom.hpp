@@ -167,8 +167,8 @@ namespace CDPL
             BondIterator getBondsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the incident \c const Chem:::BasicBond objects.
-             * \return A constant iterator pointing to the end of the incident \c const Chem:::BasicBond objects.
+             * \brief Returns a constant iterator pointing to the end of the incident \c const Chem::BasicBond objects.
+             * \return A constant iterator pointing to the end of the incident \c const Chem::BasicBond objects.
              */
             ConstBondIterator getBondsEnd() const;
 

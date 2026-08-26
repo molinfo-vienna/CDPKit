@@ -118,8 +118,20 @@ class ConstLMatrixColumn(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return A reference to the underlying element.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -161,16 +173,20 @@ class ConstLMatrixColumn(Boost.Python.instance):
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstLVectorExpression: pass
 

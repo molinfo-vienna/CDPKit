@@ -184,16 +184,20 @@ class ConstDMatrixRange(Boost.Python.instance):
     def __mul__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstDMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of this matrix range by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstDMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstDMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of this matrix range by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstDMatrixExpression: pass
 

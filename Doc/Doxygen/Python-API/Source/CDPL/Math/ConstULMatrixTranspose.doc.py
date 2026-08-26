@@ -168,16 +168,20 @@ class ConstULMatrixTranspose(Boost.Python.instance):
     def __mul__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of the wrapped matrix by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstULMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of the wrapped matrix by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstULMatrixExpression: pass
 

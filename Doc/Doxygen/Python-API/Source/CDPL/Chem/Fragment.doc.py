@@ -20,9 +20,11 @@
 #
 
 ##
-# \brief Concrete Chem.MolecularGraph implementation that stores references to a selectable subset of atoms and bonds (typically of a parent Chem.Molecule).
+# \brief Concrete implementation of the Chem.MolecularGraph interface that stores references to selectable Chem.Atom and Chem.Bond instances.
 # 
-# Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond(); adding a bond automatically adds its end atoms when needed. <tt>Fragment</tt> does not own the referenced atoms or bonds — they must outlive any <tt>Fragment</tt> instance that references them.
+# Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond(). Adding a bond automatically adds its end atoms when needed and removing an atom automatically removes any stored incident bonds. Unlike a Chem.Molecule instance, a <tt>Fragment</tt> object does not own its atoms and bonds. It is typically used to represent substructures comprising atoms and bonds that live elsewhere.
+# 
+# \note Since <tt>Fragment</tt> does not own the stored atoms or bonds they must outlive any <tt>Fragment</tt> instance that references them!
 # 
 class Fragment(MolecularGraph):
 
@@ -93,7 +95,7 @@ class Fragment(MolecularGraph):
     ##
     # \brief Replaces the current set of atoms, bonds and properties by the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The Chem.MolecularGraph instance providing the atoms, bonds and properties to copy.
+    # \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
     # 
     # \return \a self
     # 
@@ -219,9 +221,9 @@ class Fragment(MolecularGraph):
     def __len__() -> int: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # \brief Extends the current set of atoms and bonds by the atoms and bonds of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to add.
+    # \param molgraph The molecular graph providing the atoms and bonds to add.
     # 
     # \return \a self 
     # 
@@ -232,7 +234,7 @@ class Fragment(MolecularGraph):
     ##
     # \brief Removes the atoms and bonds referenced by the molecular graph <em>molgraph</em> from this <tt>Fragment</tt> instance.
     # 
-    # \param molgraph The Chem.MolecularGraph instance specifying the atoms and bonds to remove.
+    # \param molgraph The molecular graph providing the atoms and bonds to remove.
     # 
     # \return \a self 
     # 

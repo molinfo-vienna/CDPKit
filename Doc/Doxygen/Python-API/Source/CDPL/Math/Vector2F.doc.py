@@ -210,8 +210,22 @@ class Vector2F(Boost.Python.instance):
     # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns a reference to the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the fixed element count <em>N</em>.
+    # 
+    # \return The element count.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -253,16 +267,20 @@ class Vector2F(Boost.Python.instance):
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFVectorExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFVectorExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstFVectorExpression: pass
 
@@ -283,9 +301,11 @@ class Vector2F(Boost.Python.instance):
     def __iadd__(v: Vector2F) -> Vector2F: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %Vector2F instance \a self.
+    # \brief Adds the vector expression <em>e</em> element-wise to this fixed-size vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstFVectorExpression) -> Vector2F: pass
 
@@ -297,16 +317,20 @@ class Vector2F(Boost.Python.instance):
     def __isub__(v: Vector2F) -> Vector2F: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %Vector2F instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> element-wise from this fixed-size vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstFVectorExpression) -> Vector2F: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %Vector2F instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: float) -> Vector2F: pass
 

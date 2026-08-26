@@ -22,7 +22,7 @@
 ##
 # \brief Abstract base class for chemical reactions composed of role-tagged reaction components of type Chem.Molecule.
 # 
-# Each component carries a reaction role that is specified by one of the constants declared in namespace Chem.ReactionRole. Reaction roles divide the components into three differents subsets: reactant, agents/catalysts and products. For component management/access the methods getComponentRole(), getNumComponents(), getComponent(), getComponentsBegin() and getComponentsEnd() are available. For reaction editing the methods addComponent(), removeComponent(), swapComponentRoles() and clear(). Reaction properties can be stored/retrieved via methods inherited from Base.PropertyContainer.
+# Each component carries a reaction role that is specified by one of the constants declared in namespace Chem.ReactionRole. Reaction roles divide the components into three different subsets: reactants, agents/catalysts and products. For component management/access the methods getComponentRole(), getNumComponents(), getComponent(), getComponentsBegin() and getComponentsEnd() are available. For reaction editing the methods addComponent(), removeComponent(), swapComponentRoles() and clear(). The method clone() allows the creation of polymorphic deep copies and reaction properties can be stored/retrieved via the methods of the Base.PropertyContainer base class.
 # 
 class Reaction(Base.PropertyContainer):
 
@@ -81,7 +81,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \param mol The component for which to return the reaction role.
     # 
-    # \return A flag that specifies the reaction role of the component (see namespace Chem.ReactionRole).
+    # \return The reaction role of the component (see namespace Chem.ReactionRole).
     # 
     def getComponentRole(mol: Molecule) -> int: pass
 
@@ -99,7 +99,7 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief Returns the number of reaction components with the specified role.
     # 
-    # \param role A flag that specifies the reaction role (see namespace Chem.ReactionRole).
+    # \param role The reaction role (see namespace Chem.ReactionRole).
     # 
     # \return The number of reaction components with the specified role. 
     # 

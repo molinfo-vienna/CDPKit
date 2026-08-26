@@ -148,7 +148,7 @@ class Molecule(MolecularGraph):
     def copy(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecule <em>mol</em>.
     # 
     # \param mol The molecule providing the atoms and bonds to append.
     # 
@@ -157,7 +157,7 @@ class Molecule(MolecularGraph):
     def append(mol: Molecule) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph providing the atoms and bonds to append.
     # 
@@ -244,7 +244,7 @@ class Molecule(MolecularGraph):
     def __getstate__() -> tuple: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecule <em>mol</em>.
     # 
     # Internally calls append() to perform the actual work.
     # 
@@ -255,7 +255,7 @@ class Molecule(MolecularGraph):
     def __iadd__(mol: Molecule) -> Molecule: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecular graph <em>molgraph</em>.
     # 
     # Internally calls append() to perform the actual work.
     # 

@@ -204,8 +204,22 @@ class LArray(Boost.Python.instance):
 
     def __delitem__(idx: int) -> None: pass
 
+    ##
+    # \brief Returns a reference to the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __getitem__(idx: int) -> int: pass
 
+    ##
+    # \brief Returns the number of elements stored in the array.
+    # 
+    # \return The size of the array.
+    # 
     def __len__() -> int: pass
 
     def __setitem__(index: int, value: int) -> None: pass

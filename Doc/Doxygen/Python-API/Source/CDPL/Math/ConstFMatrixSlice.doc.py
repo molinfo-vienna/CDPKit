@@ -198,16 +198,20 @@ class ConstFMatrixSlice(Boost.Python.instance):
     def __mul__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of this matrix slice by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstFMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFMatrixExpression instance holding the result of the division.
+    # \brief Divides every element of this matrix slice by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstFMatrixExpression: pass
 

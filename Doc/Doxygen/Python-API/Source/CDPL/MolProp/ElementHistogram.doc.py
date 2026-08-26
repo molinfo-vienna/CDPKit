@@ -152,8 +152,26 @@ class ElementHistogram(Boost.Python.instance):
     # 
     def insertEntry(key: int, value: int) -> bool: pass
 
+    ##
+    # \brief Returns the size (number of entries) of the map.
+    # 
+    # \return The size of the map.
+    # 
     def __len__() -> int: pass
 
+    ##
+    # \brief Returns a reference to the value associated with the specified key.
+    # 
+    # The method is equivalent to getValue(const Key&) const.
+    # 
+    # \param key The key associated with the requested value.
+    # 
+    # \return A reference to the requested value. 
+    # 
+    # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
+    # 
+    # \see getValue(const Key&) const
+    # 
     def __getitem__(key: int) -> int: pass
 
     def __setitem__(key: int, value: int) -> None: pass

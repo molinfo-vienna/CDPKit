@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief Concrete Pharm.Pharmacophore implementation that owns its features as Pharm.BasicFeature instances managed through an internal object pool.
+# \brief Default implementation of the Pharm.Pharmacophore interface.
+# 
+# <tt>BasicPharmacophore</tt> implements the full editing interface inherited from Pharm.Pharmacophore and is the standard concrete type used for the creation, manipulation and processing of pharmacophore data throughout the <em>CDPL.x</em>
 # 
 class BasicPharmacophore(Pharmacophore):
 

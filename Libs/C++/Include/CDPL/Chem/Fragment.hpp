@@ -46,12 +46,15 @@ namespace CDPL
     {
 
         /**
-         * \brief Concrete Chem::MolecularGraph implementation that stores references to a selectable subset
-         *        of atoms and bonds (typically of a parent Chem::Molecule).
+         * \brief Concrete implementation of the Chem::MolecularGraph interface that stores references to selectable Chem::Atom and Chem::Bond instances.
          *
-         * Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond();
-         * adding a bond automatically adds its end atoms when needed. \c %Fragment does not own the referenced
-         * atoms or bonds — they must outlive any \c %Fragment instance that references them.
+         * Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond().
+         * Adding a bond automatically adds its end atoms when needed and removing an atom automatically 
+         * removes any stored incident bonds. Unlike a Chem::Molecule instance, a \c %Fragment object does not own its atoms and bonds. 
+         * It is typically used to represent substructures comprising atoms and bonds that live elsewhere.
+         *
+         * \note Since \c %Fragment does not own the stored atoms or bonds they must outlive 
+         *       any \c %Fragment instance that references them!
          */
         class CDPL_CHEM_API Fragment : public MolecularGraph
         {
@@ -71,7 +74,7 @@ namespace CDPL
             typedef boost::indirect_iterator<AtomList::const_iterator, const Atom> ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored \c const Chem::Atom objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Atom objects.
              */
             typedef boost::indirect_iterator<AtomList::iterator, Atom> AtomIterator;
 
@@ -81,7 +84,7 @@ namespace CDPL
             typedef boost::indirect_iterator<BondList::const_iterator, const Bond> ConstBondIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored \c const Chem::Bond objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Bond objects.
              */
             typedef boost::indirect_iterator<BondList::iterator, Bond> BondIterator;
 
@@ -109,46 +112,16 @@ namespace CDPL
              */
             ~Fragment();
 
-            /**
-             * \brief Returns the number of atoms.
-             * \return The number of atoms.
-             */
             std::size_t getNumAtoms() const;
 
-            /**
-             * \brief Returns the number of bonds.
-             * \return The number of bonds.
-             */
             std::size_t getNumBonds() const;
 
-            /**
-             * \brief Tells whether the specified atom is part of this fragment.
-             * \param atom The atom to look for.
-             * \return \c true if \a atom is part of this fragment, and \c false otherwise.
-             */
             bool containsAtom(const Atom& atom) const;
 
-            /**
-             * \brief Tells whether the specified bond is part of this fragment.
-             * \param bond The bond to look for.
-             * \return \c true if \a bond is part of this fragment, and \c false otherwise.
-             */
             bool containsBond(const Bond& bond) const;
 
-            /**
-             * \brief Returns the index of the specified atom.
-             * \param atom The atom for which to return the index.
-             * \return The zero-based index of the specified atom.
-             * \throw Base::ItemNotFound if the specified atom is not part of the fragment.
-             */
             std::size_t getAtomIndex(const Atom& atom) const;
 
-            /**
-             * \brief Returns the index of the specified bond.
-             * \param bond The bond for which to return the index.
-             * \return The zero-based index of the specified bond.
-             * \throw Base::ItemNotFound if the specified bond is not part of the fragment.
-             */
             std::size_t getBondIndex(const Bond& bond) const;
 
             /**
@@ -158,8 +131,8 @@ namespace CDPL
             ConstAtomIterator getAtomsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
-             * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Atom objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Atom objects.
              */
             AtomIterator getAtomsBegin();
 
@@ -170,8 +143,8 @@ namespace CDPL
             ConstAtomIterator getAtomsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored \c const Chem::Atom objects.
-             * \return A mutable iterator pointing to the end of the stored \c const Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Atom objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::Atom objects.
              */
             AtomIterator getAtomsEnd();
 
@@ -182,8 +155,8 @@ namespace CDPL
             ConstBondIterator getBondsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored \c const Chem::Bond objects.
-             * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Bond objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Bond objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Bond objects.
              */
             BondIterator getBondsBegin();
 
@@ -194,41 +167,17 @@ namespace CDPL
             ConstBondIterator getBondsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored \c const Chem::Bond objects.
-             * \return A mutable iterator pointing to the end of the stored \c const Chem::Bond objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Bond objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::Bond objects.
              */
             BondIterator getBondsEnd();
 
-            /**
-             * \brief Returns a \c const reference to the atom at index \a idx.
-             * \param idx The zero-based index of the atom to return.
-             * \return A \c const reference to the atom at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
-             */
             const Atom& getAtom(std::size_t idx) const;
 
-            /**
-             * \brief Returns a \c non-const reference to the atom at index \a idx.
-             * \param idx The zero-based index of the atom to return.
-             * \return A \c non-const reference to the atom at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumAtoms()).
-             */
             Atom& getAtom(std::size_t idx);
 
-            /**
-             * \brief Returns a \c const reference to the bond at index \a idx.
-             * \param idx The zero-based index of the bond to return.
-             * \return A \c const reference to the bond at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
-             */
             const Bond& getBond(std::size_t idx) const;
 
-            /**
-             * \brief Returns a \c non-const reference to the bond at index \a idx.
-             * \param idx The zero-based index of the bond to return.
-             * \return A \c non-const reference to the bond at the specified index.
-             * \throw Base::IndexError if \a idx is not in the range [0, getNumBonds()).
-             */
             Bond& getBond(std::size_t idx);
 
             /**
@@ -318,17 +267,9 @@ namespace CDPL
              * \param frag The fragment the atoms, bonds and properties get exchanged with.
              */
             void swap(Fragment& frag);
-
-            /**
-             * \brief Orders the stored atoms according to criteria implemented by the provided atom comparison function.
-             * \param func The atom comparison function implementing the applied ordering criteria.
-             */
+          
             void orderAtoms(const AtomCompareFunction& func);
 
-            /**
-             * \brief Orders the stored bonds according to criteria implemented by the provided bond comparison function.
-             * \param func The bond comparison function implementing the applied ordering criteria.
-             */
             void orderBonds(const BondCompareFunction& func);
 
             /**
@@ -342,15 +283,15 @@ namespace CDPL
             /**
              * \brief Replaces the current set of atoms, bonds and properties by the atoms, bonds and properties
              *        of the molecular graph \a molgraph.
-             * \param molgraph The Chem::MolecularGraph instance providing the atoms, bonds and properties to copy.
+             * \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
              * \return A reference to itself.
              */
             Fragment& operator=(const MolecularGraph& molgraph);
 
             /**
-             * \brief Extends the current set of atoms and bonds by the atoms and bonds in the
+             * \brief Extends the current set of atoms and bonds by the atoms and bonds of the
              *        molecular graph \a molgraph.
-             * \param molgraph The Chem::MolecularGraph instance providing the atoms and bonds to add.
+             * \param molgraph The molecular graph providing the atoms and bonds to add.
              * \return A reference to itself.
              * \note Does not affect any properties.
              */
@@ -358,16 +299,12 @@ namespace CDPL
 
             /**
              * \brief Removes the atoms and bonds referenced by the molecular graph \a molgraph from this \c %Fragment instance.
-             * \param molgraph The Chem::MolecularGraph instance specifying the atoms and bonds to remove.
+             * \param molgraph The molecular graph providing the atoms and bonds to remove.
              * \return A reference to itself.
              * \note Does not affect any properties if <tt>this != &molgraph</tt>.
              */
             Fragment& operator-=(const MolecularGraph& molgraph);
 
-            /**
-             * \brief Creates a deep copy of this fragment (including the copied properties).
-             * \return A smart pointer to the cloned Chem::MolecularGraph.
-             */
             MolecularGraph::SharedPointer clone() const;
 
             /**

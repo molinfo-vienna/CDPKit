@@ -288,16 +288,20 @@ class DMatrix(Boost.Python.instance):
     def __mul__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstDMatrixExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstDMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstDMatrixExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstDMatrixExpression: pass
 
@@ -318,9 +322,11 @@ class DMatrix(Boost.Python.instance):
     def __iadd__(m: DMatrix) -> DMatrix: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %DMatrix instance \a self.
+    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrix: pass
 
@@ -332,16 +338,20 @@ class DMatrix(Boost.Python.instance):
     def __isub__(m: DMatrix) -> DMatrix: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %DMatrix instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %DMatrix instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: float) -> DMatrix: pass
 

@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Concrete Chem.Molecule implementation that owns Chem.BasicAtom and Chem.BasicBond instances.
+# \brief Default implementation of the Chem.Molecule interface.
 # 
-# <tt>BasicMolecule</tt> provides the default in-memory representation of a molecular graph: atoms and bonds are allocated from internal object pools and accessed through random-access iterators. The class implements the full editing interface inherited from Chem.Molecule (addAtom, addBond, removeAtom, removeBond, copy, append, remove, reserveMemoryForAtoms, reserveMemoryForBonds) and is the standard concrete type used by readers and downstream algorithms throughout the <em>CDPL</em>.
+# <tt>BasicMolecule</tt> implements the full editing interface inherited from Chem.Molecule and is the standard concrete type used for the creation, manipulation and processing of molecule/molecular graph data throughout the <em>CDPL</em>.
 # 
 class BasicMolecule(Molecule):
 
@@ -32,23 +32,23 @@ class BasicMolecule(Molecule):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs a copy of the Chem.Molecule instance <em>mol</em>.
+    # \brief Constructs a <tt>BasicMolecule</tt> instance that is a copy of the molecule <em>mol</em>.
     # 
-    # \param mol The other Chem.Molecule instance to copy.
+    # \param mol The other molecule to copy.
     # 
     def __init__(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief Constructs a copy of the Chem.Molecule instance <em>mol</em>.
+    # \brief Constructs a <tt>BasicMolecule</tt> instance that is a copy of the molecule <em>mol</em>.
     # 
-    # \param mol The other Chem.Molecule instance to copy.
+    # \param mol The other molecule to copy.
     # 
     def __init__(mol: Molecule) -> None: pass
 
     ##
-    # \brief Constructs a <tt>BasicMolecule</tt> instance with copies of the atoms and bonds of the Chem.MolecularGraph instance <em>molgraph</em>.
+    # \brief Constructs a <tt>BasicMolecule</tt> instance with copies of the atoms, bonds and properties provided by the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to copy.
+    # \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
     # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
@@ -74,7 +74,7 @@ class BasicMolecule(Molecule):
     def copy(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecule <em>mol</em>.
     # 
     # \param mol The molecule providing the atoms and bonds to append.
     # 
@@ -83,7 +83,7 @@ class BasicMolecule(Molecule):
     def append(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecule <em>mol</em>.
     # 
     # \param mol The molecule providing the atoms and bonds to append.
     # 
@@ -92,7 +92,7 @@ class BasicMolecule(Molecule):
     def append(mol: Molecule) -> None: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph providing the atoms and bonds to append.
     # 
@@ -134,7 +134,7 @@ class BasicMolecule(Molecule):
     def assign(molgraph: MolecularGraph) -> BasicMolecule: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecule <em>mol</em>.
     # 
     # Internally calls append() to perform the actual work.
     # 
@@ -145,7 +145,7 @@ class BasicMolecule(Molecule):
     def __iadd__(mol: BasicMolecule) -> BasicMolecule: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecule <em>mol</em>.
     # 
     # Internally calls append() to perform the actual work.
     # 
@@ -156,7 +156,7 @@ class BasicMolecule(Molecule):
     def __iadd__(mol: Molecule) -> BasicMolecule: pass
 
     ##
-    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the molecular graph <em>molgraph</em>.
     # 
     # Internally calls append() to perform the actual work.
     # 

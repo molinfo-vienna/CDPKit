@@ -125,8 +125,20 @@ class ConstULVectorSlice(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return A reference to the underlying element.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the slice).
+    # 
+    # \return The number of elements in the view.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -168,16 +180,20 @@ class ConstULVectorSlice(Boost.Python.instance):
     def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstULVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstULVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstULVectorExpression: pass
 

@@ -219,6 +219,11 @@ class FGrid(Boost.Python.instance):
 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+    # 
+    # \return The total number of elements.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -281,16 +286,20 @@ class FGrid(Boost.Python.instance):
     def __mul__(t: float) -> ConstFGridExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFGridExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstFGridExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFGridExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstFGridExpression: pass
 
@@ -313,9 +322,11 @@ class FGrid(Boost.Python.instance):
     def __iadd__(g: FGrid) -> FGrid: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %FGrid instance \a self.
+    # \brief Adds the grid expression <em>e</em> element-wise to this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstFGridExpression) -> FGrid: pass
 
@@ -327,16 +338,20 @@ class FGrid(Boost.Python.instance):
     def __isub__(g: FGrid) -> FGrid: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %FGrid instance \a self.
+    # \brief Subtracts the grid expression <em>e</em> element-wise from this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstFGridExpression) -> FGrid: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %FGrid instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: float) -> FGrid: pass
 

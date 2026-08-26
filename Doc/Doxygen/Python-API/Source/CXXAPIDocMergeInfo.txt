@@ -1,5 +1,5 @@
 #
-# --- General string replacements ---
+# --- General doc block string replacements ---
 #
 :: % .
 \n\n\n % \n\n
@@ -30,17 +30,8 @@ int idx % idx: int
 #
 # --- General method name replacements ---
 #
-.__isub__ % .operator-=
-
-.__sub__ % .operator-
-
-.__iadd__ % .operator+=
-
-.__add__ % .operator+
-
-.__getitem__ % .operator[]
-
-.__call__ % .operator()
+.__len__ % .getSize
+.__truediv__ % .__div__
 
 #
 # --- CDPL package ---

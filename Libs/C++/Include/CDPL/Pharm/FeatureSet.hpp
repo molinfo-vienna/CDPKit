@@ -46,10 +46,13 @@ namespace CDPL
     {
 
         /**
-         * \brief Concrete Pharm::FeatureContainer implementation that stores references to existing Pharm::Feature instances.
+         * \brief Concrete implementation of the Pharm::FeatureContainer interface that stores references to selectable Pharm::Feature instances.
          *
-         * Unlike Pharm::BasicPharmacophore, a \c %FeatureSet does not own its features. It is typically used
+         * Unlike a Pharm::Pharmacophore instance, a \c %FeatureSet object does not own its features. It is typically used
          * to represent subsets/selections of features that live elsewhere.
+         *
+         * \note Since \c %FeatureSet does not own the stored features they must outlive 
+         *       any \c %FeatureSet instance that references them!
          */
         class CDPL_PHARM_API FeatureSet : public FeatureContainer
         {

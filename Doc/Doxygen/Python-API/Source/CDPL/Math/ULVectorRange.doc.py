@@ -179,8 +179,20 @@ class ULVectorRange(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return A reference to the underlying element.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the range).
+    # 
+    # \return The number of elements in the view.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -222,16 +234,20 @@ class ULVectorRange(Boost.Python.instance):
     def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstULVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstULVectorExpression instance holding the result of the division.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstULVectorExpression: pass
 
@@ -252,9 +268,11 @@ class ULVectorRange(Boost.Python.instance):
     def __iadd__(r: ULVectorRange) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %ULVectorRange instance \a self.
+    # \brief Adds the vector expression <em>e</em> componentwise to this view.
+    # 
+    # \param e The vector expression to add.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstULVectorExpression) -> ULVectorRange: pass
 
@@ -266,16 +284,20 @@ class ULVectorRange(Boost.Python.instance):
     def __isub__(r: ULVectorRange) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %ULVectorRange instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> componentwise from this view.
+    # 
+    # \param e The vector expression to subtract.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstULVectorExpression) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %ULVectorRange instance \a self.
+    # \brief Multiplies every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: int) -> ULVectorRange: pass
 

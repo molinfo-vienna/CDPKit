@@ -247,32 +247,40 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     def __rmul__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFQuaternionExpression instance holding the result of the division.
+    # \brief Divides every component of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // e</tt>.
-    # \param e Specifies the divisor.
-    # \return A \c %ConstFQuaternionExpression instance holding the result of the division.
+    # \brief Divides this view by the quaternion expression <em>e</em> (Hamilton-quotient semantics).
+    # 
+    # \param e The quaternion expression to divide by.
+    # 
+    # \return \a self
     # 
     def __div__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFQuaternionExpression instance holding the result of the division.
+    # \brief Divides every component of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstFQuaternionExpression: pass
 
     def __rdiv__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param t Specifies the second addend.
-    # \return The updated \c %FVectorQuaternionAdapter instance \a self.
+    # \brief Adds the scalar <em>t</em> to component C1 of this view.
+    # 
+    # \param t The scalar summand.
+    # 
+    # \return \a self
     # 
     def __iadd__(t: float) -> FVectorQuaternionAdapter: pass
 
@@ -291,9 +299,11 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     def __iadd__(q: ConstFQuaternionExpression) -> FVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param t Specifies the subtrahend.
-    # \return The updated \c %FVectorQuaternionAdapter instance \a self.
+    # \brief Subtracts the scalar <em>t</em> from component C1 of this view.
+    # 
+    # \param t The scalar subtrahend.
+    # 
+    # \return \a self
     # 
     def __isub__(t: float) -> FVectorQuaternionAdapter: pass
 
@@ -312,9 +322,11 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     def __isub__(q: ConstFQuaternionExpression) -> FVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %FVectorQuaternionAdapter instance \a self.
+    # \brief Multiplies every component of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: float) -> FVectorQuaternionAdapter: pass
 

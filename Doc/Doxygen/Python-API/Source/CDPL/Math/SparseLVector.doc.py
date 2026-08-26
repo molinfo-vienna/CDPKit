@@ -222,8 +222,22 @@ class SparseLVector(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns a reference to the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the element (or to the zero element if no entry is stored at <em>i</em>). 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the logical element count.
+    # 
+    # \return The number of elements.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -265,16 +279,20 @@ class SparseLVector(Boost.Python.instance):
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \brief Divides every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \brief Divides every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstLVectorExpression: pass
 
@@ -295,9 +313,11 @@ class SparseLVector(Boost.Python.instance):
     def __iadd__(v: SparseLVector) -> SparseLVector: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %SparseLVector instance \a self.
+    # \brief Adds the vector expression <em>e</em> element-wise to this sparse vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstLVectorExpression) -> SparseLVector: pass
 
@@ -309,16 +329,20 @@ class SparseLVector(Boost.Python.instance):
     def __isub__(v: SparseLVector) -> SparseLVector: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %SparseLVector instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> element-wise from this sparse vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstLVectorExpression) -> SparseLVector: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %SparseLVector instance \a self.
+    # \brief Multiplies every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: int) -> SparseLVector: pass
 

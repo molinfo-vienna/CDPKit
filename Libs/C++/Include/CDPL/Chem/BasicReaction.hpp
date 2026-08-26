@@ -47,11 +47,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Default concrete implementation of the Chem::Reaction abstract interface.
+         * \brief Default implementation of the Chem::Reaction interface.
          *
-         * \c %BasicReaction stores reaction components as Chem::BasicMolecule instances grouped by
-         * reaction role (reactant, agent, product). Components are pooled via a Util::ObjectPool to
-         * minimize allocation overhead in batch processing scenarios.
+         * \c %BasicReaction implements the full Chem::Reaction interface and is the standard concrete type
+         * used for the creation, manipulation and processing of chemical reaction information throughout the \e %CDPL.
          */
         class CDPL_CHEM_API BasicReaction : public Reaction
         {
@@ -65,7 +64,6 @@ namespace CDPL
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BasicReaction instances.
              */
             typedef std::shared_ptr<BasicReaction> SharedPointer;
-
 
             /**
              * \brief A mutable random access iterator used to iterate over the stored Chem::BasicMolecule reaction components.
@@ -83,14 +81,14 @@ namespace CDPL
             BasicReaction();
 
             /**
-             * \brief Constructs a copy of the \c %BasicReaction instance \a rxn.
-             * \param rxn The other \c %Reaction instance to copy.
+             * \brief Constructs a \c %BasicReaction instance that is a copy of the reaction \a rxn.
+             * \param rxn The other reaction to copy.
              */
             BasicReaction(const BasicReaction& rxn);
 
             /**
-             * \brief Constructs a copy of the Chem::Reaction instance \a rxn.
-             * \param rxn The other Chem::Reaction instance to copy.
+             * \brief Constructs a \c %BasicReaction instance that is a copy of the reaction \a rxn.
+             * \param rxn The other reaction to copy.
              */
             BasicReaction(const Reaction& rxn);
 
@@ -114,54 +112,70 @@ namespace CDPL
             std::size_t getNumComponents(unsigned int role) const;
 
             /**
-             * \brief Returns a constant iterator pointing to the first component of the reaction.
-             * \return A constant iterator pointing to the first component.
+             * \brief Returns a constant iterator pointing to the beginning of the reaction components.
+             * \return A constant iterator pointing to the beginning of the reaction components.
              */
             ConstComponentIterator getComponentsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the first component of the reaction.
-             * \return A mutable iterator pointing to the first component.
+             * \brief Returns a mutable iterator pointing to the beginning of the reaction components.
+             * \return A mutable iterator pointing to the beginning of the reaction components.
              */
             ComponentIterator getComponentsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing one past the last component of the reaction.
-             * \return A constant iterator pointing one past the last component.
+             * \brief Returns a constant iterator pointing to the end of the reaction components.
+             * \return A constant iterator pointing to the end of the reaction components.
              */
             ConstComponentIterator getComponentsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing one past the last component of the reaction.
-             * \return A mutable iterator pointing one past the last component.
+             * \brief Returns a mutable iterator pointing to the end of the reaction components.
+             * \return A mutable iterator pointing to the end of the reaction components.
              */
             ComponentIterator getComponentsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the first component with the given reaction role.
+             * \brief Returns a constant iterator pointing to the beginning of the reaction components
+             *        with the specified role.
              * \param role The reaction role (see namespace Chem::ReactionRole).
-             * \return A constant iterator pointing to the first component with the specified role.
+             * \return A constant iterator pointing to the beginning of the reaction components
+             *         with the specified role.
+             * \throw Base::ValueError if the value of \a role is not equal to Chem::ReactionRole::REACTANT, 
+             *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             ConstComponentIterator getComponentsBegin(unsigned int role) const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the first component with the given reaction role.
+             * \brief Returns a mutable iterator pointing to the beginning of the reaction components
+             *        with the specified role.
              * \param role The reaction role (see namespace Chem::ReactionRole).
-             * \return A mutable iterator pointing to the first component with the specified role.
+             * \return A mutable iterator pointing to the beginning of the reaction components
+             *         with the specified role.
+             * \throw Base::ValueError if the value of \a role is not equal to Chem::ReactionRole::REACTANT, 
+             *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             ComponentIterator getComponentsBegin(unsigned int role);
 
             /**
-             * \brief Returns a constant iterator pointing one past the last component with the given reaction role.
+             * \brief Returns a constant iterator pointing to the end of the reaction components
+             *        with the specified role.
              * \param role The reaction role (see namespace Chem::ReactionRole).
-             * \return A constant iterator pointing one past the last component with the specified role.
+             * \return A constant iterator pointing to the end of the reaction components
+             *         with the specified role.
+             * \throw Base::ValueError if the value of \a role is not equal to Chem::ReactionRole::REACTANT,
+             *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             ConstComponentIterator getComponentsEnd(unsigned int role) const;
 
             /**
-             * \brief Returns a mutable iterator pointing one past the last component with the given reaction role.
+             * \brief Returns a mutable iterator pointing to the end of the reaction components
+             *        with the specified role.
              * \param role The reaction role (see namespace Chem::ReactionRole).
-             * \return A mutable iterator pointing one past the last component with the specified role.
+             * \return A mutable iterator pointing to the end of the reaction components
+             *         with the specified role.
+             * \throw Base::ValueError if the value of \a role is not equal to Chem::ReactionRole::REACTANT, 
+             *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             ComponentIterator getComponentsEnd(unsigned int role);
 

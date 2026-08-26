@@ -286,16 +286,20 @@ class SparseFMatrix(Boost.Python.instance):
     def __mul__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFMatrixExpression instance holding the result of the division.
+    # \brief Divides every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: float) -> ConstFMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstFMatrixExpression instance holding the result of the division.
+    # \brief Divides every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: float) -> ConstFMatrixExpression: pass
 
@@ -316,9 +320,11 @@ class SparseFMatrix(Boost.Python.instance):
     def __iadd__(m: SparseFMatrix) -> SparseFMatrix: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %SparseFMatrix instance \a self.
+    # \brief Adds the matrix expression <em>e</em> element-wise to this sparse matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstFMatrixExpression) -> SparseFMatrix: pass
 
@@ -330,16 +336,20 @@ class SparseFMatrix(Boost.Python.instance):
     def __isub__(m: SparseFMatrix) -> SparseFMatrix: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %SparseFMatrix instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this sparse matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstFMatrixExpression) -> SparseFMatrix: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %SparseFMatrix instance \a self.
+    # \brief Multiplies every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: float) -> SparseFMatrix: pass
 

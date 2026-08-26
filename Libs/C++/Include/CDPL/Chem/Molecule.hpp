@@ -180,7 +180,7 @@ namespace CDPL
             virtual void copy(const MolecularGraph& molgraph) = 0;
 
             /**
-             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
+             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the
              *        molecule \a mol.
              * \param mol The molecule providing the atoms and bonds to append.
              * \note Does not affect any properties.
@@ -188,7 +188,7 @@ namespace CDPL
             virtual void append(const Molecule& mol) = 0;
 
             /**
-             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
+             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the
              *        molecular graph \a molgraph.
              * \param molgraph The molecular graph providing the atoms and bonds to append.
              * \note Does not affect any properties.
@@ -243,7 +243,7 @@ namespace CDPL
             Molecule& operator=(const MolecularGraph& molgraph);
 
             /**
-             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
+             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the
              *        molecule \a mol.
              *
              * Internally calls append() to perform the actual work.
@@ -254,7 +254,7 @@ namespace CDPL
             Molecule& operator+=(const Molecule& mol);
 
             /**
-             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
+             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the
              *        molecular graph \a molgraph.
              *
              * Internally calls append() to perform the actual work.

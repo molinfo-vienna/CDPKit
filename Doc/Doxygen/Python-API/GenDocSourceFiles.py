@@ -77,6 +77,7 @@ DOC_BLOCKS = []
 CPP_API_DOC_BLOCKS = {}
 CPP_API_DOC_MERGE_INFO = []
 CPP_API_DOC_STR_REPLACEMENTS = []
+CPP_API_DOC_KEY_STR_REPLACEMENTS = []
 
 
 def readLine(in_file):
@@ -141,9 +142,11 @@ def parseStringReplacement(line):
 def loadCPPAPIDocMergeInfo(file_name):
     global CPP_API_DOC_MERGE_INFO
     global CPP_API_DOC_STR_REPLACEMENTS
+    global CPP_API_DOC_KEY_STR_REPLACEMENTS
     
     info_ipt = open(file_name)
-    gen_repl_read = False
+    gen_repl_read = True
+    key_repl_read = False
         
     while True:
         line = readLine(info_ipt)
@@ -154,7 +157,7 @@ def loadCPPAPIDocMergeInfo(file_name):
         if len(line.strip()) == 0:
             continue
 
-        if not gen_repl_read:
+        if gen_repl_read:
             while True:
                 if not line:
                     return
@@ -165,9 +168,29 @@ def loadCPPAPIDocMergeInfo(file_name):
                 CPP_API_DOC_STR_REPLACEMENTS.append(parseStringReplacement(line))
                 line = readLine(info_ipt)
                 
-            gen_repl_read = True
+            gen_repl_read = False
+            key_repl_read = True
             continue
+
+        if key_repl_read:
+            while True:
+                if not line:
+                    return
+
+                if len(line.strip()) == 0:
+                    break
+
+                entry = line.split('%')
+
+                entry[0] = entry[0].strip()
+                entry[1] = entry[1].strip()
+
+                CPP_API_DOC_KEY_STR_REPLACEMENTS.append(entry)
+                line = readLine(info_ipt)
                 
+            key_repl_read = False
+            continue
+        
         entry = line.split('%')
 
         entry[0] = entry[0].strip()
@@ -265,9 +288,13 @@ def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_na
         key = sys.argv[1] + '.' + key
 
     doc_block = None
+    mod_orig_key = key
     
+    for entry in CPP_API_DOC_KEY_STR_REPLACEMENTS:
+        mod_orig_key = mod_orig_key.replace(entry[0], entry[1])
+        
     for entry in CPP_API_DOC_MERGE_INFO:
-        mod_key = key.replace(entry[0], entry[1])
+        mod_key = mod_orig_key.replace(entry[0], entry[1])
 
         if mod_key in CPP_API_DOC_BLOCKS:
             doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_key])

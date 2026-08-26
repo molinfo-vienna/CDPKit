@@ -226,8 +226,22 @@ class LVector(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns a reference to the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the current element count.
+    # 
+    # \return The number of elements.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -269,16 +283,20 @@ class LVector(Boost.Python.instance):
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self // t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
-    # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __truediv__(t: int) -> ConstLVectorExpression: pass
 
@@ -299,9 +317,11 @@ class LVector(Boost.Python.instance):
     def __iadd__(v: LVector) -> LVector: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c %LVector instance \a self.
+    # \brief Adds the vector expression <em>e</em> element-wise to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __iadd__(e: ConstLVectorExpression) -> LVector: pass
 
@@ -313,16 +333,20 @@ class LVector(Boost.Python.instance):
     def __isub__(v: LVector) -> LVector: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c %LVector instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> element-wise from this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self
     # 
     def __isub__(e: ConstLVectorExpression) -> LVector: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c %LVector instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self
     # 
     def __imul__(t: int) -> LVector: pass
 

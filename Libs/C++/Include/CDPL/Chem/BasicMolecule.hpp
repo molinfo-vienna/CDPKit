@@ -48,13 +48,11 @@ namespace CDPL
     {
 
         /**
-         * \brief Concrete Chem::Molecule implementation that owns Chem::BasicAtom and Chem::BasicBond instances.
+         * \brief Default implementation of the Chem::Molecule interface.
          *
-         * \c %BasicMolecule provides the default in-memory representation of a molecular graph: atoms and bonds
-         * are allocated from internal object pools and accessed through random-access iterators. The class
-         * implements the full editing interface inherited from Chem::Molecule (addAtom, addBond, removeAtom,
-         * removeBond, copy, append, remove, reserveMemoryForAtoms, reserveMemoryForBonds) and is the standard
-         * concrete type used by readers and downstream algorithms throughout the \e %CDPL.
+         * \c %BasicMolecule implements the full editing interface inherited from Chem::Molecule 
+         * and is the standard concrete type used for the creation, manipulation and processing of 
+         * molecule/molecular graph data throughout the \e %CDPL.
          */
         class CDPL_CHEM_API BasicMolecule : public Molecule
         {
@@ -73,22 +71,22 @@ namespace CDPL
             typedef std::shared_ptr<BasicMolecule> SharedPointer;
 
             /**
-             * \brief Mutable random-access iterator over the atoms of the molecule.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::BasicAtom objects.
              */
             typedef boost::indirect_iterator<AtomList::iterator, BasicAtom>             AtomIterator;
 
             /**
-             * \brief Constant random-access iterator over the atoms of the molecule.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::BasicAtom objects.
              */
             typedef boost::indirect_iterator<AtomList::const_iterator, const BasicAtom> ConstAtomIterator;
 
             /**
-             * \brief Mutable random-access iterator over the bonds of the molecule.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::BasicBond objects.
              */
             typedef boost::indirect_iterator<BondList::iterator, BasicBond>             BondIterator;
 
             /**
-             * \brief Constant random-access iterator over the bonds of the molecule.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::BasicBond objects.
              */
             typedef boost::indirect_iterator<BondList::const_iterator, const BasicBond> ConstBondIterator;
 
@@ -98,21 +96,21 @@ namespace CDPL
             BasicMolecule();
 
             /**
-             * \brief Constructs a copy of the \c %BasicMolecule instance \a mol.
-             * \param mol The other \c %BasicMolecule instance to copy.
+             * \brief Constructs a \c %BasicMolecule instance that is a copy of the molecule \a mol.
+             * \param mol The other molecule to copy.
              */
             BasicMolecule(const BasicMolecule& mol);
 
             /**
-             * \brief Constructs a copy of the Chem::Molecule instance \a mol.
-             * \param mol The other Chem::Molecule instance to copy.
+             * \brief Constructs a \c %BasicMolecule instance that is a copy of the molecule \a mol.
+             * \param mol The other molecule to copy.
              */
             BasicMolecule(const Molecule& mol);
 
             /**
-             * \brief Constructs a \c %BasicMolecule instance with copies of the atoms and bonds 
-             *        of the Chem::MolecularGraph instance \a molgraph.
-             * \param molgraph The Chem::MolecularGraph instance providing the atoms and bonds to copy.
+             * \brief Constructs a \c %BasicMolecule instance with copies of the atoms, bonds 
+             *        and properties provided by the molecular graph \a molgraph.
+             * \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
              */
             explicit BasicMolecule(const MolecularGraph& molgraph);
 
@@ -130,53 +128,53 @@ namespace CDPL
             std::size_t getNumBonds() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the atoms.
-             * \return A constant iterator pointing to the beginning of the atoms.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::BasicAtom objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::BasicAtom objects.
              */
             ConstAtomIterator getAtomsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the atoms.
-             * \return A mutable iterator pointing to the beginning of the atoms.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::BasicAtom objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::BasicAtom objects.
              */
             AtomIterator getAtomsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the atoms.
-             * \return A constant iterator pointing to the end of the atoms.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::BasicAtom objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::BasicAtom objects.
              */
             ConstAtomIterator getAtomsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the atoms.
-             * \return A mutable iterator pointing to the end of the atoms.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::BasicAtom objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::BasicAtom objects.
              */
             AtomIterator getAtomsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the bonds.
-             * \return A constant iterator pointing to the beginning of the bonds.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::BasicBond objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::BasicBond objects.
              */
             ConstBondIterator getBondsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the bonds.
-             * \return A mutable iterator pointing to the beginning of the bonds.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::BasicBond objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::BasicBond objects.
              */
             BondIterator getBondsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the bonds.
-             * \return A constant iterator pointing to the end of the bonds.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::BasicBond objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::BasicBond objects.
              */
             ConstBondIterator getBondsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the bonds.
-             * \return A mutable iterator pointing to the end of the bonds.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::BasicBond objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::BasicBond objects.
              */
             BondIterator getBondsEnd();
-
+            
             const BasicAtom& getAtom(std::size_t idx) const;
 
             BasicAtom& getAtom(std::size_t idx);
@@ -239,7 +237,7 @@ namespace CDPL
             using Molecule::operator=;
 
             /**
-             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
+             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the
              *        molecule \a mol.
              *
              * Internally calls append() to perform the actual work.
@@ -265,7 +263,7 @@ namespace CDPL
             void copy(const MolecularGraph& molgraph);
 
             /**
-             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
+             * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds of the
              *        molecule \a mol.
              * \param mol The molecule providing the atoms and bonds to append.
              * \note Does not affect any properties.

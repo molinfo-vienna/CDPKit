@@ -20,9 +20,11 @@
 #
 
 ##
-# \brief Concrete Pharm.FeatureContainer implementation that stores references to existing Pharm.Feature instances.
+# \brief Concrete implementation of the Pharm.FeatureContainer interface that stores references to selectable Pharm.Feature instances.
 # 
-# Unlike Pharm.BasicPharmacophore, a <tt>FeatureSet</tt> does not own its features. It is typically used to represent subsets/selections of features that live elsewhere.
+# Unlike a Pharm.Pharmacophore instance, a <tt>FeatureSet</tt> object does not own its features. It is typically used to represent subsets/selections of features that live elsewhere.
+# 
+# \note Since <tt>FeatureSet</tt> does not own the stored features they must outlive any <tt>FeatureSet</tt> instance that references them!
 # 
 class FeatureSet(FeatureContainer):
 

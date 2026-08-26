@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Default concrete implementation of the Chem.Reaction abstract interface.
+# \brief Default implementation of the Chem.Reaction interface.
 # 
-# <tt>BasicReaction</tt> stores reaction components as Chem.BasicMolecule instances grouped by reaction role (reactant, agent, product). Components are pooled via a Util.ObjectPool to minimize allocation overhead in batch processing scenarios.
+# <tt>BasicReaction</tt> implements the full Chem.Reaction interface and is the standard concrete type used for the creation, manipulation and processing of chemical reaction information throughout the <em>CDPL</em>.
 # 
 class BasicReaction(Reaction):
 
