@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Match pattern-based implementation of the Chem.TautomerizationRule interface.
+# \brief Substructure search pattern-based implementation of the Chem.TautomerizationRule interface.
 # 
 # The rule is configured with a set of <em>transformation patterns</em> describing the source substructure together with per-atom pair bond order changes that apply when the pattern matches plus optional <em>exclude patterns</em> (substructures that, when present, suppress the application of the rule). The setup() / generate() pair from the base class then enumerates the tautomers reachable from the parent molecular graph by applying the configured transformations.
 # 
@@ -88,9 +88,9 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     def __init__(id: int) -> None: pass
 
     ##
-    # \brief Constructs a copy of the <tt>PatternBasedTautomerizationRule</tt> instance <em>rule</em>.
+    # \brief Constructs a <tt>PatternBasedTautomerizationRule</tt> instance that is copy of <em>rule</em>.
     # 
-    # \param rule The <tt>PatternBasedTautomerizationRule</tt> to copy.
+    # \param rule The other rule to copy.
     # 
     def __init__(rule: PatternBasedTautomerizationRule) -> None: pass
 
@@ -99,16 +99,16 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     ##
     # \brief Registers a rule exclude pattern.
     # 
-    # When this substructure is present in the parent molecular graph then the matching transformation will not be applied.
+    # Any matching substructures present in the parent molecular graph will be excluded from structure transformations.
     # 
-    # \param molgraph The exclude pattern.
+    # \param molgraph The exclude match pattern.
     # 
     def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Copies all exclude patterns of <em>rule</em> into this rule.
+    # \brief Appends all registered search patterns of <em>rule</em> to the exclude pattern list of this rule.
     # 
-    # \param rule The source rule whose exclude patterns are copied.
+    # \param rule The source rule whose search patterns shall be added.
     # 
     def addExcludePatterns(rule: PatternBasedTautomerizationRule) -> None: pass
 
@@ -120,7 +120,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     ##
     # \brief Replaces the state of this rule by a copy of the state of <em>rule</em>.
     # 
-    # \param rule The source <tt>PatternBasedTautomerizationRule</tt>.
+    # \param rule The other rule to copy.
     # 
     # \return \a self
     # 

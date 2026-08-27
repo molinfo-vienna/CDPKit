@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief Chem.TautomerizationRule implementation that enumerates tautomers obtained by a generic 1,5-hydrogen shift (a proton migrates between atoms separated by four bonds along a conjugated path, with the corresponding single/double bond pattern flipping).
+# \brief Chem.TautomerizationRule implementation for the generation of tautomeric forms that result from proton migration between atoms separated by four bonds.
 # 
 class GenericHydrogen15ShiftTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the underlying generic 1,5-H-shift substructure pattern.
+    # \brief Constructs the rule and registers the built-in 1,5-H-shift transformation patterns.
+    # 
+    # Numeric rule ID: Chem.TautomerizationType.GENERIC_H_15_SHIFT.
     # 
     def __init__() -> None: pass
 

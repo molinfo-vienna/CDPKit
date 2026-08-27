@@ -27,6 +27,6 @@
 class DefaultFeatureColorTable(ColorTable):
 
     ##
-    # \brief Initializes the table with default colors for builtin pharmacophoric feature types.
+    # \brief Initializes the table with default colors for built-in pharmacophoric feature types.
     # 
     def __init__() -> None: pass

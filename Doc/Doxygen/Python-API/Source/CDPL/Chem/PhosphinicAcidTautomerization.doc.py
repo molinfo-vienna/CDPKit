@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief Chem.PatternBasedTautomerizationRule implementation that enumerates phosphinic-acid tautomers (Chem.TautomerizationType.PHOSPHINIC_ACID).
+# \brief Chem.TautomerizationRule implementation for the generation of phosphinic acid tautomers.
 # 
 class PhosphinicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in phosphinic-acid tautomerization patterns.
+    # \brief Constructs the rule and registers the built-in phosphinic acid tautomer transformation patterns.
+    # 
+    # Numeric rule ID: Chem.TautomerizationType.PHOSPHINIC_ACID.
     # 
     def __init__() -> None: pass
 

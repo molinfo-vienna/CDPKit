@@ -355,7 +355,7 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                 elif mem_name == 'operator*':
                     mem_name = '__mul__'
                 elif mem_name == 'operator/=':
-                    mem_name = '__div__'
+                    mem_name = '__idiv__'
                 elif mem_name == 'operator/':
                     mem_name = '__div__'
                 elif mem_name == 'operator[]':

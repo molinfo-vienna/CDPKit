@@ -40,15 +40,16 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::PatternBasedTautomerizationRule implementation that enumerates nitroso/oxime tautomers
-         *        (Chem::TautomerizationType::NITROSO_OXIME).
+         * \brief Chem::TautomerizationRule implementation for the generation of nitroso ⇄ oxime tautomers.
          */
         class CDPL_CHEM_API NitrosoOximeTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
             /**
-             * \brief Constructs the rule and registers the built-in nitroso/oxime tautomerization patterns.
+             * \brief Constructs the rule and registers the built-in nitroso ⇄ oxime transformation patterns.
+             *
+             * Numeric rule ID: Chem::TautomerizationType::NITROSO_OXIME.
              */
             NitrosoOximeTautomerization();
         };

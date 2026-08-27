@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.TautomerGenerator preconfigured with the standard CDPKit tautomerization rules.
+# \brief Tautomer generator implementation preconfigured with the default set of tautomerization rules.
 # 
 # <tt>DefaultTautomerGenerator</tt> registers the following rules on construction (in order): Chem.GenericHydrogen13ShiftTautomerization, Chem.GenericHydrogen15ShiftTautomerization, Chem.KeteneYnolTautomerization, Chem.PhosphinicAcidTautomerization, Chem.SulfenicAcidTautomerization, and Chem.ConjugatedRingBondPatternSwitching.
 # 

@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief Chem.PatternBasedTautomerizationRule implementation that enumerates nitroso/oxime tautomers (Chem.TautomerizationType.NITROSO_OXIME).
+# \brief Chem.TautomerizationRule implementation for the generation of nitroso ⇄ oxime tautomers.
 # 
 class NitrosoOximeTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in nitroso/oxime tautomerization patterns.
+    # \brief Constructs the rule and registers the built-in nitroso ⇄ oxime transformation patterns.
+    # 
+    # Numeric rule ID: Chem.TautomerizationType.NITROSO_OXIME.
     # 
     def __init__() -> None: pass
 

@@ -44,7 +44,7 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Abstract base class for all tautomerization rule implementations used by the Chem::TautomerGenerator.
+         * \brief Abstract base class for tautomerization rule implementations employed by the Chem::TautomerGenerator class.
          */
         class CDPL_CHEM_API TautomerizationRule
         {
@@ -61,22 +61,23 @@ namespace CDPL
             virtual ~TautomerizationRule() {}
 
             /**
-             * \brief Sets the parent molecular graph for which the rule is to enumerate tautomers.
-             * \param parent_molgraph The molecular graph to be tautomerized.
-             * \return \c true if the rule applies to \a parent_molgraph and the iteration has been initialized, and \c false otherwise.
+             * \brief Performs rule-specific setup work for the given molecular graph that shall be tautomerized.
+             * \param parent_molgraph The molecular graph to tautomerize.
+             * \return \c true if the rule can be applied to \a parent_molgraph and has been initialized, and \c false otherwise.
              */
             virtual bool setup(MolecularGraph& parent_molgraph) = 0;
 
             /**
-             * \brief Returns the rule's identifier (see Chem::TautomerizationType).
-             * \return The rule identifier.
+             * \brief Returns the rule identifier.
+             * \return The rule identifier (see namespace Chem::TautomerizationType for IDs of built-in rules).
              */
             virtual unsigned int getID() const = 0;
 
             /**
-             * \brief Generates the next tautomer.
-             * \param tautomer The tautomer output molecule object.
-             * \return \c true if a tautomer was generated, \c false if no more tautomers are available.
+             * \brief Generates the next tautomer of the parent molecular graph and stores it in \a molecule.
+             * \param tautomer The tautomer output molecule.
+             * \return \c true if a tautomer was generated, \c false if no more tautomers could be generated.
+             * \see setup()
              */
             virtual bool generate(Molecule& tautomer) = 0;
 

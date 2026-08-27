@@ -51,7 +51,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Match pattern-based implementation of the Chem::TautomerizationRule interface.
+         * \brief Substructure search pattern-based implementation of the Chem::TautomerizationRule interface.
          *
          * The rule is configured with a set of <em>transformation patterns</em> describing
          * the source substructure together with per-atom pair bond order changes that apply when the pattern
@@ -76,12 +76,12 @@ namespace CDPL
             {
 
                 /**
-                 * \brief Pattern-atom ID of the first atom of the bond whose order changes.
+                 * \brief Pattern atom mapping ID of the first atom of the bond whose order changes.
                  */
                 std::size_t atom1ID;
     
                 /**
-                 * \brief Pattern-atom ID of the second atom of the bond whose order changes.
+                 * \brief Pattern atom mapping ID of the second atom of the bond whose order changes.
                  */
                 std::size_t atom2ID;
     
@@ -93,19 +93,19 @@ namespace CDPL
 
             /**
              * \brief Constructs the \c %PatternBasedTautomerizationRule instance with the given rule identifier.
-             * \param rule_id The numeric rule identifier (returned by getID() and forwarded to the generated tautomers).
+             * \param rule_id The rule identifier (returned by getID()).
              */
             PatternBasedTautomerizationRule(unsigned int rule_id);
 
             /**
-             * \brief Constructs a copy of the \c %PatternBasedTautomerizationRule instance \a rule.
-             * \param rule The \c %PatternBasedTautomerizationRule to copy.
+             * \brief Constructs a \c %PatternBasedTautomerizationRule instance that is copy of \a rule.
+             * \param rule The other rule to copy.
              */
             PatternBasedTautomerizationRule(const PatternBasedTautomerizationRule& rule);
 
             /**
              * \brief Replaces the state of this rule by a copy of the state of \a rule.
-             * \param rule The source \c %PatternBasedTautomerizationRule.
+             * \param rule The other rule to copy.
              * \return A reference to itself.
              */
             PatternBasedTautomerizationRule& operator=(const PatternBasedTautomerizationRule& rule);
@@ -114,7 +114,8 @@ namespace CDPL
              * \brief Registers a new transformation pattern.
              *
              * Bond order changes are read from the iterator range [\a bond_chgs_beg, \a bond_chgs_end).
-             * Each element must be a value of type BondOrderChange referring to atom IDs of \a molgraph.
+             * Each element must be a value of type BondOrderChange that specifies the bond to change
+             * via the mapping IDs of the match pattern atoms.
              *
              * \tparam Iter Input iterator type yielding BondOrderChange values.
              * \param molgraph The match pattern specifying the substructure to transform.
@@ -134,16 +135,16 @@ namespace CDPL
             /**
              * \brief Registers a rule exclude pattern.
              *
-             * When this substructure is present in the parent molecular
-             * graph then the matching transformation will not be applied.
+             * Any matching substructures present in the parent molecular
+             * graph will be excluded from structure transformations.
              *
-             * \param molgraph The exclude pattern.
+             * \param molgraph The exclude match pattern.
              */
             void addExcludePattern(const MolecularGraph::SharedPointer& molgraph);
 
             /**
-             * \brief Copies all exclude patterns of \a rule into this rule.
-             * \param rule The source rule whose exclude patterns are copied.
+             * \brief Appends all registered search patterns of \a rule to the exclude pattern list of this rule.
+             * \param rule The source rule whose search patterns shall be added.
              */
             void addExcludePatterns(const PatternBasedTautomerizationRule& rule);
 
@@ -152,30 +153,12 @@ namespace CDPL
              */
             void clearExcludePatterns();
 
-            /**
-             * \brief Prepares the rule for tautomer enumeration on \a parent_molgraph.
-             * \param parent_molgraph The parent molecular graph from which tautomers are generated.
-             * \return \c true if the rule could be set up (at least one transformation pattern matched), and \c false otherwise.
-             */
             bool setup(MolecularGraph& parent_molgraph);
 
-            /**
-             * \brief Returns the rule identifier supplied at construction.
-             * \return The numeric rule ID.
-             */
             unsigned int getID() const;
 
-            /**
-             * \brief Writes the next tautomer reachable from the parent molecular graph into \a tautomer.
-             * \param tautomer The output molecule receiving the next tautomer.
-             * \return \c true if a new tautomer was generated, and \c false when the enumeration is exhausted.
-             */
             bool generate(Molecule& tautomer);
 
-            /**
-             * \brief Creates and returns a deep copy of this rule.
-             * \return A smart pointer to the cloned Chem::TautomerizationRule instance.
-             */
             TautomerizationRule::SharedPointer clone() const;
 
           private:

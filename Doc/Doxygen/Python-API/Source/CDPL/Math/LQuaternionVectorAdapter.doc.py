@@ -232,20 +232,16 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Divides every component of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstLVectorExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Divides every component of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstLVectorExpression instance holding the result of the division.
     # 
     def __truediv__(t: int) -> ConstLVectorExpression: pass
 
@@ -300,9 +296,11 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def __imul__(t: int) -> LQuaternionVectorAdapter: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c %LQuaternionVectorAdapter instance \a self.
+    # \brief Divides every component of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __idiv__(t: int) -> LQuaternionVectorAdapter: pass
 

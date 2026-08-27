@@ -241,20 +241,16 @@ class FVectorSlice(Boost.Python.instance):
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
-    # \brief Divides every element of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstFVectorExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
-    # \brief Divides every element of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstFVectorExpression instance holding the result of the division.
     # 
     def __truediv__(t: float) -> ConstFVectorExpression: pass
 
@@ -309,9 +305,11 @@ class FVectorSlice(Boost.Python.instance):
     def __imul__(t: float) -> FVectorSlice: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c %FVectorSlice instance \a self.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __idiv__(t: float) -> FVectorSlice: pass
 

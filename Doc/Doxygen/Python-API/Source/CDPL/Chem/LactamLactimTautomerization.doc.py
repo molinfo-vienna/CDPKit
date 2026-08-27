@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief Chem.TautomerizationRule implementation that enumerates the lactam/lactim tautomers of a cyclic amide \f$ {-}NH{-}C(=O){-} \rightleftharpoons {-}N=C(OH){-} \f$ system.
+# \brief Chem.TautomerizationRule implementation for the generation of lactam ⇄ lactim tautomers.
 # 
 class LactamLactimTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the underlying lactam/lactim substructure pattern.
+    # \brief Constructs the rule and registers the built-in lactam ⇄ lactim transformation patterns.
+    # 
+    # Numeric rule ID: Chem.TautomerizationType.LACTAM_LACTIM.
     # 
     def __init__() -> None: pass
 

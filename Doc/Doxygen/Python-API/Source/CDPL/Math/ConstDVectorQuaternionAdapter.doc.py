@@ -177,29 +177,23 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     def __rmul__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
-    # \brief Divides every component of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
-    # \brief Divides this view by the quaternion expression <em>e</em> (Hamilton-quotient semantics).
-    # 
-    # \param e The quaternion expression to divide by.
-    # 
-    # \return \a self
+    # \brief Returns the result of the division operation <tt>self // e</tt>.
+    # \param e Specifies the divisor.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the division.
     # 
     def __div__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
-    # \brief Divides every component of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the division.
     # 
     def __truediv__(t: float) -> ConstDQuaternionExpression: pass
 

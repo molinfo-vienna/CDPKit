@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::TautomerGenerator preconfigured with the standard CDPKit tautomerization rules.
+         * \brief Tautomer generator implementation preconfigured with the default set of tautomerization rules.
          *
          * \c %DefaultTautomerGenerator registers the following rules on construction (in order):
          * Chem::GenericHydrogen13ShiftTautomerization, Chem::GenericHydrogen15ShiftTautomerization,

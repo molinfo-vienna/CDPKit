@@ -234,20 +234,16 @@ class ULVectorRange(Boost.Python.instance):
     def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
-    # \brief Divides every element of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstULVectorExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
-    # \brief Divides every element of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstULVectorExpression instance holding the result of the division.
     # 
     def __truediv__(t: int) -> ConstULVectorExpression: pass
 
@@ -302,9 +298,11 @@ class ULVectorRange(Boost.Python.instance):
     def __imul__(t: int) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c %ULVectorRange instance \a self.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __idiv__(t: int) -> ULVectorRange: pass
 

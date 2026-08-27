@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief Chem.TautomerizationRule implementation that enumerates the sulfenic-acid tautomers of an \f$ R{-}S{-}OH \rightleftharpoons R{-}S(=O)H \f$ system.
+# \brief Chem.TautomerizationRule implementation for the generation of sulfenic acid tautomers.
 # 
 class SulfenicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the underlying sulfenic-acid substructure pattern.
+    # \brief Constructs the rule and registers the built-in sulfenic tautomer transformation patterns.
+    # 
+    # Numeric rule ID: Chem.TautomerizationType.SULFENIC_ACID.
     # 
     def __init__() -> None: pass
 

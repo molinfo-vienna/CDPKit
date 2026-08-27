@@ -287,29 +287,23 @@ class LQuaternion(Boost.Python.instance):
     def __rmul__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
-    # \brief Divides every component by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstLQuaternionExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
-    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
-    # 
-    # \param e The right-hand quaternion expression.
-    # 
-    # \return \a self
+    # \brief Returns the result of the division operation <tt>self // e</tt>.
+    # \param e Specifies the divisor.
+    # \return A \c %ConstLQuaternionExpression instance holding the result of the division.
     # 
     def __div__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
     ##
-    # \brief Divides every component by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstLQuaternionExpression instance holding the result of the division.
     # 
     def __truediv__(t: int) -> ConstLQuaternionExpression: pass
 
@@ -385,9 +379,11 @@ class LQuaternion(Boost.Python.instance):
     def __imul__(q: ConstLQuaternionExpression) -> LQuaternion: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c %LQuaternion instance \a self.
+    # \brief Divides every component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self
     # 
     def __idiv__(t: int) -> LQuaternion: pass
 

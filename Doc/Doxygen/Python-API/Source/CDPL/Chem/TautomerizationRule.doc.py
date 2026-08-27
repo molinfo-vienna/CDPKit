@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Abstract base class for all tautomerization rule implementations used by the Chem.TautomerGenerator.
+# \brief Abstract base class for tautomerization rule implementations employed by the Chem.TautomerGenerator class.
 # 
 class TautomerizationRule(Boost.Python.instance):
 
@@ -42,27 +42,29 @@ class TautomerizationRule(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the rule's identifier (see Chem.TautomerizationType).
+    # \brief Returns the rule identifier.
     # 
-    # \return The rule identifier.
+    # \return The rule identifier (see namespace Chem.TautomerizationType for IDs of built-in rules).
     # 
     def getID() -> int: pass
 
     ##
-    # \brief Sets the parent molecular graph for which the rule is to enumerate tautomers.
+    # \brief Performs rule-specific setup work for the given molecular graph that shall be tautomerized.
     # 
-    # \param parent_molgraph The molecular graph to be tautomerized.
+    # \param parent_molgraph The molecular graph to tautomerize.
     # 
-    # \return <tt>True</tt> if the rule applies to <em>parent_molgraph</em> and the iteration has been initialized, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if the rule can be applied to <em>parent_molgraph</em> and has been initialized, and <tt>False</tt> otherwise.
     # 
     def setup(parent_molgraph: MolecularGraph) -> bool: pass
 
     ##
-    # \brief Generates the next tautomer.
+    # \brief Generates the next tautomer of the parent molecular graph and stores it in <em>molecule</em>.
     # 
-    # \param tautomer The tautomer output molecule object.
+    # \param tautomer The tautomer output molecule.
     # 
-    # \return <tt>True</tt> if a tautomer was generated, <tt>False</tt> if no more tautomers are available.
+    # \return <tt>True</tt> if a tautomer was generated, <tt>False</tt> if no more tautomers could be generated. 
+    # 
+    # \see setup()
     # 
     def generate(tautomer: Molecule) -> bool: pass
 
