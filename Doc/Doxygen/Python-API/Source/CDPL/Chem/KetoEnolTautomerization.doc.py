@@ -25,7 +25,7 @@
 class KetoEnolTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in keto ⇄ enol transformation patterns.
+    # \brief Constructs the rule and registers the corresponding keto ⇄ enol transformation patterns.
     # 
     # Numeric rule ID: Chem.TautomerizationType.KETO_ENOL.
     # 

@@ -25,7 +25,7 @@
 class NitrosoOximeTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in nitroso ⇄ oxime transformation patterns.
+    # \brief Constructs the rule and registers the corresponding nitroso ⇄ oxime transformation patterns.
     # 
     # Numeric rule ID: Chem.TautomerizationType.NITROSO_OXIME.
     # 

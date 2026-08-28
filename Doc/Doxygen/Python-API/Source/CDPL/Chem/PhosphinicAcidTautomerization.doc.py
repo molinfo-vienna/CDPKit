@@ -25,7 +25,7 @@
 class PhosphinicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in phosphinic acid tautomer transformation patterns.
+    # \brief Constructs the rule and registers the corresponding phosphinic acid tautomer transformation patterns.
     # 
     # Numeric rule ID: Chem.TautomerizationType.PHOSPHINIC_ACID.
     # 

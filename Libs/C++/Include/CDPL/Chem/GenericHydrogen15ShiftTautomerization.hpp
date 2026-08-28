@@ -41,14 +41,14 @@ namespace CDPL
 
         /**
          * \brief Chem::TautomerizationRule implementation for the generation of tautomeric forms that result from
-         *        proton migration between atoms separated by four bonds.
+         *        proton migration between susceptible atoms separated by four bonds.
          */
         class CDPL_CHEM_API GenericHydrogen15ShiftTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
             /**
-             * \brief Constructs the rule and registers the built-in 1,5-H-shift transformation patterns.
+             * \brief Constructs the rule and registers the corresponding 1,5-H-shift transformation patterns.
              *
              * Numeric rule ID: Chem::TautomerizationType::GENERIC_H_15_SHIFT.
              */

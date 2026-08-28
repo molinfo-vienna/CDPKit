@@ -25,7 +25,7 @@
 class SulfenicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in sulfenic tautomer transformation patterns.
+    # \brief Constructs the rule and registers the corresponding sulfenic tautomer transformation patterns.
     # 
     # Numeric rule ID: Chem.TautomerizationType.SULFENIC_ACID.
     # 

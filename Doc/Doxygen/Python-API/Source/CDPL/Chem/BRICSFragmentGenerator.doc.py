@@ -29,7 +29,7 @@
 class BRICSFragmentGenerator(FragmentGenerator):
 
     ##
-    # \brief Constructs the <tt>BRICSFragmentGenerator</tt> instance with the full BRICS rule and exclude-pattern set registered.
+    # \brief Constructs the <tt>BRICSFragmentGenerator</tt> instance and registers the full BRICS rule and exclude-pattern set.
     # 
     def __init__() -> None: pass
 

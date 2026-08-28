@@ -25,7 +25,7 @@
 class ImineEnamineTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in imine ⇄ enamine transformation patterns.
+    # \brief Constructs the rule and registers the corresponding imine ⇄ enamine transformation patterns.
     # 
     # Numeric rule ID: Chem.TautomerizationType.IMINE_ENAMINE.
     # 

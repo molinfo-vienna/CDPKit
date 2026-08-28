@@ -47,7 +47,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs the rule and registers the built-in lactam ⇄ lactim transformation patterns.
+             * \brief Constructs the rule and registers the corresponding lactam ⇄ lactim transformation patterns.
              *
              * Numeric rule ID: Chem::TautomerizationType::LACTAM_LACTIM.
              */

@@ -44,16 +44,20 @@ namespace CDPL
         class Atom;
 
         /**
-         * \brief Helper-functor for retrieving the 3D coordinates of an atom for a specific conformer (via the
-         *        Chem::AtomProperty::CONFORMER_COORDINATES_3D conformer-array property).
+         * \brief Functor for retrieving atom 3D coordinates from a specific conformer.
+         *
+         * The conformer-specific atom 3D coordinates are taken from the atom property
+         * Chem::AtomProperty::CONFORMER_COORDINATES_3D. The conformer index 
+         * is provided as argument to the constructor.
          */
         class CDPL_CHEM_API AtomConformer3DCoordinatesFunctor
         {
 
           public:
             /**
-             * \brief Constructs the functor for retrieving the coordinates of conformer \a conf_idx.
-             * \param conf_idx The zero-based conformer index to retrieve.
+             * \brief Constructs the \c %AtomConformer3DCoordinatesFunctor instance which will retrieve
+             *        atom 3D coordinates from the conformer with index \a conf_idx.
+             * \param conf_idx The zero-based conformer index.
              */
             AtomConformer3DCoordinatesFunctor(std::size_t conf_idx):
                 confIndex(conf_idx) {}

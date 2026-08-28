@@ -55,7 +55,7 @@ namespace CDPL
             typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
 
             /**
-             * \brief Constructs the \c %RECAPFragmentGenerator instance and registers the built-in RECAP cleavage rules.
+             * \brief Constructs the \c %RECAPFragmentGenerator instance and registers the corresponding RECAP cleavage rules.
              */
             RECAPFragmentGenerator();
         };

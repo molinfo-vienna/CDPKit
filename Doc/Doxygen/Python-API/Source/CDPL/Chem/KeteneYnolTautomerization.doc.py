@@ -25,7 +25,7 @@
 class KeteneYnolTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in ketene ⇄ ynol transformation patterns.
+    # \brief Constructs the rule and registers the corresponding ketene ⇄ ynol transformation patterns.
     # 
     # Numeric rule ID: Chem.TautomerizationType.KETENE_YNOL.
     # 

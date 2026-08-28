@@ -60,7 +60,7 @@ namespace CDPL
             typedef std::shared_ptr<BRICSFragmentGenerator> SharedPointer;
 
             /**
-             * \brief Constructs the \c %BRICSFragmentGenerator instance with the full BRICS rule and exclude-pattern set registered.
+             * \brief Constructs the \c %BRICSFragmentGenerator instance and registers the full BRICS rule and exclude-pattern set.
              */
             BRICSFragmentGenerator();
         };

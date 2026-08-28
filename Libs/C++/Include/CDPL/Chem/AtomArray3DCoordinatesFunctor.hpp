@@ -45,17 +45,17 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Helper-functor for retrieving the 3D coordinates of an atom from a separately-stored coordinates
-         *        array, indexed by the atom's position in the underlying molecular graph.
+         * \brief Functor for retrieving atom 3D coordinates from a provided coordinates
+         *        array via index of the atoms in a specified molecular graph.
          */
         class CDPL_CHEM_API AtomArray3DCoordinatesFunctor
         {
 
           public:
             /**
-             * \brief Constructs the functor that resolves atom coordinates against \a coords using the atom-index ordering of \a molgraph.
-             * \param coords The atom-coordinate array.
-             * \param molgraph The molecular graph providing the atom indexing.
+             * \brief Constructs the \c %AtomArray3DCoordinatesFunctor instance which retrieves atom 3D coordinates from \a coords via index of the atoms in \a molgraph.
+             * \param coords The atom 3D coordinates array.
+             * \param molgraph The molecular graph providing the atom indices.
              */
             AtomArray3DCoordinatesFunctor(const Math::Vector3DArray& coords, const MolecularGraph& molgraph):
                 coordinates(&coords), molGraph(&molgraph) {}

@@ -25,7 +25,7 @@
 class RECAPFragmentGenerator(FragmentGenerator):
 
     ##
-    # \brief Constructs the <tt>RECAPFragmentGenerator</tt> instance and registers the built-in RECAP cleavage rules.
+    # \brief Constructs the <tt>RECAPFragmentGenerator</tt> instance and registers the corresponding RECAP cleavage rules.
     # 
     def __init__() -> None: pass
 

@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Chem.TautomerizationRule implementation for the generation of tautomeric forms that result from proton migration between atoms separated by two bonds.
+# \brief Chem.TautomerizationRule implementation for the generation of tautomeric forms that result from proton migration between susceptible atoms separated by two bonds.
 # 
 class GenericHydrogen13ShiftTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Constructs the rule and registers the built-in 1,3-H-shift transformation patterns.
+    # \brief Constructs the rule and registers the corresponding 1,3-H-shift transformation patterns.
     # 
     # Numeric rule ID: Chem.TautomerizationType.GENERIC_H_13_SHIFT.
     # 
