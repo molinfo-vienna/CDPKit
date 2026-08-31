@@ -61,8 +61,7 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \f[   S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} 
-    # \f]
+    # \f[ S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set in the first bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset.
     # 
@@ -80,8 +79,7 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
-    # \f]
+    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -95,8 +93,7 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
-    # \f]
+    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -110,8 +107,7 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
-    # \f]
+    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -125,8 +121,7 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
-    # \f]
+    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.

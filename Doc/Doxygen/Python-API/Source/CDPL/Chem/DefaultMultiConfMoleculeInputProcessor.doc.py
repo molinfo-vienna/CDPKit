@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Default Chem.MultiConfMoleculeInputProcessor implementation that detects multi-conformer input by comparing atom and bond properties (and optionally molecule names) between successive input molecules.
+# \brief Default Chem.MultiConfMoleculeInputProcessor implementation that detects multi-conformer input by comparing atom and bond properties (and optionally molecule names) between successively read molecules.
 # 
 class DefaultMultiConfMoleculeInputProcessor(MultiConfMoleculeInputProcessor):
 
@@ -35,7 +35,7 @@ class DefaultMultiConfMoleculeInputProcessor(MultiConfMoleculeInputProcessor):
     DEF_BOND_PROPERTY_FLAGS = 2
 
     ##
-    # \brief Constructs the processor with the given property-comparison configuration.
+    # \brief Constructs the processor with the given atom/bond property comparison configuration.
     # 
     # \param comp_names If <tt>True</tt>, the molecule name property must agree between successive conformers.
     # \param atom_flags The bitwise-OR combination of Chem.AtomPropertyFlag values that must agree atom-wise.

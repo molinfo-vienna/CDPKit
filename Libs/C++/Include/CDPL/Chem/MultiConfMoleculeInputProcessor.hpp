@@ -43,7 +43,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Abstract base interface for processors that detect and assemble multi-conformer molecules from a
+         * \brief Abstract base for classes that detect and assemble multi-conformer molecules from a
          *        stream of successive single-conformer input molecules.
          */
         class CDPL_CHEM_API MultiConfMoleculeInputProcessor
@@ -52,7 +52,7 @@ namespace CDPL
           public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated 
-             *        \c %MultiConfMoleculeInputProcessor implementations.
+             *        \c %MultiConfMoleculeInputProcessor instances.
              */
             typedef std::shared_ptr<MultiConfMoleculeInputProcessor> SharedPointer;
 
@@ -64,26 +64,25 @@ namespace CDPL
             virtual ~MultiConfMoleculeInputProcessor() {}
 
             /**
-             * \brief Performs initial tests and necessary setup tasks for a newly read-in potential multi-conformer molecule. 
-             * \param tgt_molgraph The concerned part of the read-in molecule that stores the conformations.
-             * \return \c true if \a tgt_molgraph is a possible multi-conformer molecule, and \c false otherwise.
+             * \brief Performs initial tests and setup tasks for \a tgt_molgraph as the new conformer collection target.
+             * \param tgt_molgraph The molecular graph that will store the read conformers.
+             * \return \c true if \a tgt_molgraph fulfills all prerequisites and was successfully initialized, and \c false otherwise.
              */
             virtual bool init(MolecularGraph& tgt_molgraph) const = 0;
 
             /**
-             * \brief Checks if \a conf_molgraph represents a conformation of \a tgt_molgraph.
-             * \param tgt_molgraph The molecular graph for which to check if \a conf_molgraph represents a new conformation.
-             * \param conf_molgraph A molecular graph representing a possible conformation of \a tgt_molgraph.
-             * \return \c false if \a conf_molgraph does not represent a conformer of \a tgt_molgraph, and \c true otherwise.
+             * \brief Tells whether \a conf_molgraph is a conformer of the conformer collection target \a tgt_molgraph.
+             * \param tgt_molgraph The conformer collection target.
+             * \param conf_molgraph The molecular graph representing the conformer to check.
+             * \return \c true if \a conf_molgraph could be identified as a conformer of tgt_molgraph, and \c false otherwise.
              */
             virtual bool isConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const = 0;
 
             /**
-             * \brief Tries to append a new conformation to the list of previously read-in conformers of \a tgt_molgraph.
-             * \param tgt_molgraph The concerned part of target molecule that stores the read-in conformations.
-             * \param conf_molgraph A molecular graph storing the conformation to append.
-             * \return \c false if \a conf_molgraph does not represent a conformer of \a tgt_molgraph, and \c true if the
-             *         new conformation was successfully appended.
+             * \brief Adds the set of atom 3D coordinates of \a conf_molgraph as a new conformer to \a tgt_molgraph.
+             * \param tgt_molgraph The conformer collection target.
+             * \param conf_molgraph The molecular graph representing the conformer to add.
+             * \return \c true if the conformer was added, and \c false if the addition failed.
              */
             virtual bool addConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const = 0;
         };

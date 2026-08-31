@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Abstract base interface for processors that detect and assemble multi-conformer molecules from a stream of successive single-conformer input molecules.
+# \brief Abstract base for classes that detect and assemble multi-conformer molecules from a stream of successive single-conformer input molecules.
 # 
 class MultiConfMoleculeInputProcessor(Boost.Python.instance):
 

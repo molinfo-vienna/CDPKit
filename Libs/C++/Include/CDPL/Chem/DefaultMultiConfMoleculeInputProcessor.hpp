@@ -43,7 +43,7 @@ namespace CDPL
 
         /**
          * \brief Default Chem::MultiConfMoleculeInputProcessor implementation that detects multi-conformer input by
-         *        comparing atom and bond properties (and optionally molecule names) between successive input molecules.
+         *        comparing atom and bond properties (and optionally molecule names) between successively read molecules.
          */
         class CDPL_CHEM_API DefaultMultiConfMoleculeInputProcessor : public MultiConfMoleculeInputProcessor
         {
@@ -68,34 +68,17 @@ namespace CDPL
                 BondPropertyFlag::ORDER;
 
             /**
-             * \brief Constructs the processor with the given property-comparison configuration.
+             * \brief Constructs the processor with the given atom/bond property comparison configuration.
              * \param comp_names If \c true, the molecule name property must agree between successive conformers.
              * \param atom_flags The bitwise-OR combination of Chem::AtomPropertyFlag values that must agree atom-wise.
              * \param bond_flags The bitwise-OR combination of Chem::BondPropertyFlag values that must agree bond-wise.
              */
             DefaultMultiConfMoleculeInputProcessor(bool comp_names = true, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
 
-            /**
-             * \brief Initializes the processor state for \a tgt_molgraph as the new conformer-collection target.
-             * \param tgt_molgraph The molecular graph that will accumulate conformers.
-             * \return \c true if the target was successfully initialized, and \c false otherwise.
-             */
             bool init(MolecularGraph& tgt_molgraph) const;
 
-            /**
-             * \brief Tells whether \a conf_molgraph is a conformer of the already-accumulated \a tgt_molgraph.
-             * \param tgt_molgraph The current conformer-collection target.
-             * \param conf_molgraph The candidate conformer molecular graph.
-             * \return \c true if \a conf_molgraph matches \a tgt_molgraph under the configured comparison flags, and \c false otherwise.
-             */
             bool isConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
 
-            /**
-             * \brief Adds the atom-coordinate set of \a conf_molgraph as a new conformer to \a tgt_molgraph.
-             * \param tgt_molgraph The conformer-collection target.
-             * \param conf_molgraph The conformer to add.
-             * \return \c true if the conformer was added, and \c false if the addition failed (e.g. coordinate mismatch).
-             */
             bool addConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
 
           private:
