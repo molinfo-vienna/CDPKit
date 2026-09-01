@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Provides constants for the identification of RECAP fragmentation rules.
+# \brief Provides constants for the identification of <em>RECAP</em> fragmentation rules.
 # 
 # \see [\ref RECAP]
 # 
 class RECAPRuleID(Boost.Python.instance):
 
     ##
-    # \brief Specifies that no rule matched the bond.
+    # \brief Specifies that no rule applies.
     # 
     NONE = 0
 
@@ -57,27 +57,27 @@ class RECAPRuleID(Boost.Python.instance):
     ETHER = 5
 
     ##
-    # \brief Specifies the rule for olefinic-bond cleavage.
+    # \brief Specifies the rule for olefinic bond cleavage.
     # 
     OLEFIN = 6
 
     ##
-    # \brief Specifies the rule for quaternary nitrogen bond cleavage.
+    # \brief Specifies the rule for quaternary amine bond cleavage.
     # 
-    QUARTERNARY_N = 7
+    QUATERNARY_N = 7
 
     ##
-    # \brief Specifies the rule for aromatic-N to aliphatic-C bond cleavage.
+    # \brief Specifies the rule for aromatic nitrogen to aliphatic carbon bond cleavage.
     # 
     AROMATIC_N_ALIPHATIC_C = 8
 
     ##
-    # \brief Specifies the rule for lactam-N to aliphatic-C bond cleavage.
+    # \brief Specifies the rule for lactam bond cleavage.
     # 
     LACTAM_N_ALIPHATIC_C = 9
 
     ##
-    # \brief Specifies the rule for aromatic-C to aromatic-C bond cleavage (biaryl).
+    # \brief Specifies the rule for aromatic carbon-carbon bond cleavage (biaryl).
     # 
     AROMATIC_C_AROMATIC_C = 10
 

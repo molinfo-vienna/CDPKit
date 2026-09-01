@@ -43,137 +43,137 @@ namespace CDPL
         {
 
             /**
-             * \brief Atom with no matching Sybyl atom type.
+             * \brief Atom with no matching \e Sybyl atom type.
              */
             constexpr unsigned int UNKNOWN = 0;
 
             /**
-             * \brief Specifies sp3 \e Carbon.
+             * \brief Specifies sp3 carbon.
              */
             constexpr unsigned int C_3 = 1;
 
             /**
-             * \brief Specifies sp2 \e Carbon.
+             * \brief Specifies sp2 carbon.
              */
             constexpr unsigned int C_2 = 2;
 
             /**
-             * \brief Specifies sp \e Carbon.
+             * \brief Specifies sp carbon.
              */
             constexpr unsigned int C_1 = 3;
 
             /**
-             * \brief Specifies an aromatic \e Carbon.
+             * \brief Specifies an aromatic carbon.
              */
             constexpr unsigned int C_ar = 4;
 
             /**
-             * \brief Specifies a \e Carbocation (C+), used only in a guanidinium group.
+             * \brief Specifies a carbocation (C+), used only in a guanidinium group.
              */
             constexpr unsigned int C_cat = 5;
 
             /**
-             * \brief Specifies sp3 \e Nitrogen.
+             * \brief Specifies sp3 nitrogen.
              */
             constexpr unsigned int N_3 = 6;
 
             /**
-             * \brief Specifies sp2 \e Nitrogen.
+             * \brief Specifies sp2 nitrogen.
              */
             constexpr unsigned int N_2 = 7;
 
             /**
-             * \brief Specifies sp \e Nitrogen.
+             * \brief Specifies sp nitrogen.
              */
             constexpr unsigned int N_1 = 8;
 
             /**
-             * \brief Specifies an aromatic \e Nitrogen.
+             * \brief Specifies an aromatic nitrogen.
              */
             constexpr unsigned int N_ar = 9;
 
             /**
-             * \brief Specifies \e Nitrogen in amides.
+             * \brief Specifies nitrogen in amides.
              */
             constexpr unsigned int N_am = 10;
 
             /**
-             * \brief Specifies a trigonal planar \e Nitrogen.
+             * \brief Specifies a trigonal planar nitrogen.
              */
             constexpr unsigned int N_pl3 = 11;
 
             /**
-             * \brief Specifies a positively charged sp3 \e Nitrogen.
+             * \brief Specifies a positively charged sp3 nitrogen.
              */
             constexpr unsigned int N_4 = 12;
 
             /**
-             * \brief Specifies sp3 \e Oxygen.
+             * \brief Specifies sp3 oxygen.
              */
             constexpr unsigned int O_3 = 13;
 
             /**
-             * \brief Specifies sp2 \e Oxygen.
+             * \brief Specifies sp2 oxygen.
              */
             constexpr unsigned int O_2 = 14;
 
             /**
-             * \brief Specifies \e Oxygen in carboxylate and phosphate groups.
+             * \brief Specifies oxygen in carboxylate and phosphate groups.
              */
             constexpr unsigned int O_co2 = 15;
 
             /**
-             * \brief Specifies \e Oxygen in the <em>Single Point Charge (SPC)</em> water model.
+             * \brief Specifies oxygen in the <em>Single Point Charge (SPC)</em> water model.
              */
             constexpr unsigned int O_spc = 16;
 
             /**
-             * \brief Specifies \e Oxygen in the <em>Transferable Intermolecular Potential (TIP3P)</em> water model.
+             * \brief Specifies oxygen in the <em>Transferable Intermolecular Potential (TIP3P)</em> water model.
              */
             constexpr unsigned int O_t3p = 17;
 
             /**
-             * \brief Specifies sp3 \e Sulfur.
+             * \brief Specifies sp3 sulfur.
              */
             constexpr unsigned int S_3 = 18;
 
             /**
-             * \brief Specifies sp2 \e Sulfur.
+             * \brief Specifies sp2 sulfur.
              */
             constexpr unsigned int S_2 = 19;
 
             /**
-             * \brief Specifies \e Sulfur in sulfoxides.
+             * \brief Specifies sulfur in sulfoxides.
              */
             constexpr unsigned int S_O = 20;
 
             /**
-             * \brief Specifies \e Sulfur in sulfones.
+             * \brief Specifies sulfur in sulfones.
              */
             constexpr unsigned int S_O2 = 21;
 
             /**
-             * \brief Specifies sp3 \e Phosphorous.
+             * \brief Specifies sp3 phosphorous.
              */
             constexpr unsigned int P_3 = 22;
 
             /**
-             * \brief Specifies \e Fluorine.
+             * \brief Specifies fluorine.
              */
             constexpr unsigned int F = 23;
 
             /**
-             * \brief Specifies \e Hydrogen.
+             * \brief Specifies hydrogen.
              */
             constexpr unsigned int H = 24;
 
             /**
-             * \brief Specifies \e Hydrogen in the <em>Single Point Charge (SPC)</em> water model.
+             * \brief Specifies hydrogen in the <em>Single Point Charge (SPC)</em> water model.
              */
             constexpr unsigned int H_spc = 25;
 
             /**
-             * \brief Specifies \e Hydrogen in the <em>Transferable intermolecular Potential (TIP3P)</em> water model.
+             * \brief Specifies hydrogen in the <em>Transferable intermolecular Potential (TIP3P)</em> water model.
              */
             constexpr unsigned int H_t3p = 26;
 
@@ -188,7 +188,7 @@ namespace CDPL
             constexpr unsigned int Du = 28;
 
             /**
-             * \brief Specifies a dummy \e Carbon.
+             * \brief Specifies a dummy carbon.
              */
             constexpr unsigned int Du_C = 29;
 
@@ -213,102 +213,102 @@ namespace CDPL
             constexpr unsigned int Hev = 33;
 
             /**
-             * \brief Specifies \e Lithium.
+             * \brief Specifies lithium.
              */
             constexpr unsigned int Li = 34;
 
             /**
-             * \brief Specifies \e Sodium.
+             * \brief Specifies sodium.
              */
             constexpr unsigned int Na = 35;
 
             /**
-             * \brief Specifies \e Magnesium.
+             * \brief Specifies magnesium.
              */
             constexpr unsigned int Mg = 36;
 
             /**
-             * \brief Specifies \e Aluminum.
+             * \brief Specifies aluminum.
              */
             constexpr unsigned int Al = 37;
 
             /**
-             * \brief Specifies \e Silicon.
+             * \brief Specifies silicon.
              */
             constexpr unsigned int Si = 38;
 
             /**
-             * \brief Specifies \e Potassium.
+             * \brief Specifies potassium.
              */
             constexpr unsigned int K = 39;
 
             /**
-             * \brief Specifies \e Calcium.
+             * \brief Specifies calcium.
              */
             constexpr unsigned int Ca = 40;
 
             /**
-             * \brief Specifies \e Chromium (tetrahedral).
+             * \brief Specifies chromium (tetrahedral).
              */
             constexpr unsigned int Cr_th = 41;
 
             /**
-             * \brief Specifies \e Chromium (octahedral).
+             * \brief Specifies chromium (octahedral).
              */
             constexpr unsigned int Cr_oh = 42;
 
             /**
-             * \brief Specifies \e Manganese.
+             * \brief Specifies manganese.
              */
             constexpr unsigned int Mn = 43;
 
             /**
-             * \brief Specifies \e Iron.
+             * \brief Specifies iron.
              */
             constexpr unsigned int Fe = 44;
 
             /**
-             * \brief Specifies \e Cobalt (octahedral).
+             * \brief Specifies cobalt (octahedral).
              */
             constexpr unsigned int Co_oh = 45;
 
             /**
-             * \brief Specifies \e Copper.
+             * \brief Specifies copper.
              */
             constexpr unsigned int Cu = 46;
 
             /**
-             * \brief Specifies \e Chlorine.
+             * \brief Specifies chlorine.
              */
             constexpr unsigned int Cl = 47;
 
             /**
-             * \brief Specifies \e Bromine.
+             * \brief Specifies bromine.
              */
             constexpr unsigned int Br = 48;
 
             /**
-             * \brief Specifies \e Iodine.
+             * \brief Specifies iodine.
              */
             constexpr unsigned int I = 49;
 
             /**
-             * \brief Specifies \e Zinc.
+             * \brief Specifies zinc.
              */
             constexpr unsigned int Zn = 50;
 
             /**
-             * \brief Specifies \e Selenium.
+             * \brief Specifies selenium.
              */
             constexpr unsigned int Se = 51;
 
             /**
-             * \brief Specifies \e Molybdenum.
+             * \brief Specifies molybdenum.
              */
             constexpr unsigned int Mo = 52;
 
             /**
-             * \brief Specifies \e Tin.
+             * \brief Specifies tin.
              */
             constexpr unsigned int Sn = 53;
 
@@ -318,12 +318,12 @@ namespace CDPL
             constexpr unsigned int MAX_DEFAULT_TYPE = Sn;
 
             /**
-             * \brief Specifies \e Boron.
+             * \brief Specifies boron.
              */
             constexpr unsigned int B = 54;
 
             /**
-             * \brief Specifies \e Platinum.
+             * \brief Specifies platinum.
              */
             constexpr unsigned int Pt = 55;
 

@@ -42,13 +42,11 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::FragmentGenerator preconfigured with the 16 <em>BRICS</em> bond-cleavage rules and the associated
-         *        exclude patterns for combinatorial fragmentation of organic molecules.
+         * \brief Molecular graph fragment generator implementing the \e BRICS bond-cleavage rule set.
          *
-         * The rule and exclude-pattern set follows the original <em>Breaking of Retrosynthetically Interesting Chemical
-         * Substructures</em> publication. Each rule has the corresponding Chem::BRICSRuleID value.
-         *
-         * \see [\ref BRICS]
+         * The rule (and exclude-pattern) set follows the original publication [\ref BRICS].
+         * \e BRICS rule IDs are defined in namespace Chem::BRICSRuleID and the corresponding
+         * atom label values in namespace Chem::BRICSAtomLabel.
          */
         class CDPL_CHEM_API BRICSFragmentGenerator : public FragmentGenerator
         {
@@ -60,7 +58,7 @@ namespace CDPL
             typedef std::shared_ptr<BRICSFragmentGenerator> SharedPointer;
 
             /**
-             * \brief Constructs the \c %BRICSFragmentGenerator instance and registers the full BRICS rule and exclude-pattern set.
+             * \brief Constructs the \c %BRICSFragmentGenerator instance and registers the corresponding \e BRICS fragmentation rules.
              */
             BRICSFragmentGenerator();
         };

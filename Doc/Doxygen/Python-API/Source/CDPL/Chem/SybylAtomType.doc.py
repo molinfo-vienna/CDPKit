@@ -25,137 +25,137 @@
 class SybylAtomType(Boost.Python.instance):
 
     ##
-    # \brief Atom with no matching Sybyl atom type.
+    # \brief Atom with no matching <em>Sybyl</em> atom type.
     # 
     UNKNOWN = 0
 
     ##
-    # \brief Specifies sp3 <em>Carbon</em>.
+    # \brief Specifies sp3 carbon.
     # 
     C_3 = 1
 
     ##
-    # \brief Specifies sp2 <em>Carbon</em>.
+    # \brief Specifies sp2 carbon.
     # 
     C_2 = 2
 
     ##
-    # \brief Specifies sp <em>Carbon</em>.
+    # \brief Specifies sp carbon.
     # 
     C_1 = 3
 
     ##
-    # \brief Specifies an aromatic <em>Carbon</em>.
+    # \brief Specifies an aromatic carbon.
     # 
     C_ar = 4
 
     ##
-    # \brief Specifies a <em>Carbocation</em> (C+), used only in a guanidinium group.
+    # \brief Specifies a carbocation (C+), used only in a guanidinium group.
     # 
     C_cat = 5
 
     ##
-    # \brief Specifies sp3 <em>Nitrogen</em>.
+    # \brief Specifies sp3 nitrogen.
     # 
     N_3 = 6
 
     ##
-    # \brief Specifies sp2 <em>Nitrogen</em>.
+    # \brief Specifies sp2 nitrogen.
     # 
     N_2 = 7
 
     ##
-    # \brief Specifies sp <em>Nitrogen</em>.
+    # \brief Specifies sp nitrogen.
     # 
     N_1 = 8
 
     ##
-    # \brief Specifies an aromatic <em>Nitrogen</em>.
+    # \brief Specifies an aromatic nitrogen.
     # 
     N_ar = 9
 
     ##
-    # \brief Specifies <em>Nitrogen</em> in amides.
+    # \brief Specifies nitrogen in amides.
     # 
     N_am = 10
 
     ##
-    # \brief Specifies a trigonal planar <em>Nitrogen</em>.
+    # \brief Specifies a trigonal planar nitrogen.
     # 
     N_pl3 = 11
 
     ##
-    # \brief Specifies a positively charged sp3 <em>Nitrogen</em>.
+    # \brief Specifies a positively charged sp3 nitrogen.
     # 
     N_4 = 12
 
     ##
-    # \brief Specifies sp3 <em>Oxygen</em>.
+    # \brief Specifies sp3 oxygen.
     # 
     O_3 = 13
 
     ##
-    # \brief Specifies sp2 <em>Oxygen</em>.
+    # \brief Specifies sp2 oxygen.
     # 
     O_2 = 14
 
     ##
-    # \brief Specifies <em>Oxygen</em> in carboxylate and phosphate groups.
+    # \brief Specifies oxygen in carboxylate and phosphate groups.
     # 
     O_co2 = 15
 
     ##
-    # \brief Specifies <em>Oxygen</em> in the <em>Single Point Charge (SPC)</em> water model.
+    # \brief Specifies oxygen in the <em>Single Point Charge (SPC)</em> water model.
     # 
     O_spc = 16
 
     ##
-    # \brief Specifies <em>Oxygen</em> in the <em>Transferable Intermolecular Potential (TIP3P)</em> water model.
+    # \brief Specifies oxygen in the <em>Transferable Intermolecular Potential (TIP3P)</em> water model.
     # 
     O_t3p = 17
 
     ##
-    # \brief Specifies sp3 <em>Sulfur</em>.
+    # \brief Specifies sp3 sulfur.
     # 
     S_3 = 18
 
     ##
-    # \brief Specifies sp2 <em>Sulfur</em>.
+    # \brief Specifies sp2 sulfur.
     # 
     S_2 = 19
 
     ##
-    # \brief Specifies <em>Sulfur</em> in sulfoxides.
+    # \brief Specifies sulfur in sulfoxides.
     # 
     S_O = 20
 
     ##
-    # \brief Specifies <em>Sulfur</em> in sulfones.
+    # \brief Specifies sulfur in sulfones.
     # 
     S_O2 = 21
 
     ##
-    # \brief Specifies sp3 <em>Phosphorous</em>.
+    # \brief Specifies sp3 phosphorous.
     # 
     P_3 = 22
 
     ##
-    # \brief Specifies <em>Fluorine</em>.
+    # \brief Specifies fluorine.
     # 
     F = 23
 
     ##
-    # \brief Specifies <em>Hydrogen</em>.
+    # \brief Specifies hydrogen.
     # 
     H = 24
 
     ##
-    # \brief Specifies <em>Hydrogen</em> in the <em>Single Point Charge (SPC)</em> water model.
+    # \brief Specifies hydrogen in the <em>Single Point Charge (SPC)</em> water model.
     # 
     H_spc = 25
 
     ##
-    # \brief Specifies <em>Hydrogen</em> in the <em>Transferable intermolecular Potential (TIP3P)</em> water model.
+    # \brief Specifies hydrogen in the <em>Transferable intermolecular Potential (TIP3P)</em> water model.
     # 
     H_t3p = 26
 
@@ -170,7 +170,7 @@ class SybylAtomType(Boost.Python.instance):
     Du = 28
 
     ##
-    # \brief Specifies a dummy <em>Carbon</em>.
+    # \brief Specifies a dummy carbon.
     # 
     Du_C = 29
 
@@ -195,52 +195,52 @@ class SybylAtomType(Boost.Python.instance):
     Hev = 33
 
     ##
-    # \brief Specifies <em>Lithium</em>.
+    # \brief Specifies lithium.
     # 
     Li = 34
 
     ##
-    # \brief Specifies <em>Sodium</em>.
+    # \brief Specifies sodium.
     # 
     Na = 35
 
     ##
-    # \brief Specifies <em>Magnesium</em>.
+    # \brief Specifies magnesium.
     # 
     Mg = 36
 
     ##
-    # \brief Specifies <em>Aluminum</em>.
+    # \brief Specifies aluminum.
     # 
     Al = 37
 
     ##
-    # \brief Specifies <em>Silicon</em>.
+    # \brief Specifies silicon.
     # 
     Si = 38
 
     ##
-    # \brief Specifies <em>Potassium</em>.
+    # \brief Specifies potassium.
     # 
     K = 39
 
     ##
-    # \brief Specifies <em>Calcium</em>.
+    # \brief Specifies calcium.
     # 
     Ca = 40
 
     ##
-    # \brief Specifies <em>Chromium</em> (tetrahedral).
+    # \brief Specifies chromium (tetrahedral).
     # 
     Cr_th = 41
 
     ##
-    # \brief Specifies <em>Chromium</em> (octahedral).
+    # \brief Specifies chromium (octahedral).
     # 
     Cr_oh = 42
 
     ##
-    # \brief Specifies <em>Manganese</em>.
+    # \brief Specifies manganese.
     # 
     Mn = 43
 
@@ -250,47 +250,47 @@ class SybylAtomType(Boost.Python.instance):
     e = 44
 
     ##
-    # \brief Specifies <em>Cobalt</em> (octahedral).
+    # \brief Specifies cobalt (octahedral).
     # 
     Co_oh = 45
 
     ##
-    # \brief Specifies <em>Copper</em>.
+    # \brief Specifies copper.
     # 
     Cu = 46
 
     ##
-    # \brief Specifies <em>Chlorine</em>.
+    # \brief Specifies chlorine.
     # 
     Cl = 47
 
     ##
-    # \brief Specifies <em>Bromine</em>.
+    # \brief Specifies bromine.
     # 
     Br = 48
 
     ##
-    # \brief Specifies <em>Iodine</em>.
+    # \brief Specifies iodine.
     # 
     I = 49
 
     ##
-    # \brief Specifies <em>Zinc</em>.
+    # \brief Specifies zinc.
     # 
     Zn = 50
 
     ##
-    # \brief Specifies <em>Selenium</em>.
+    # \brief Specifies selenium.
     # 
     Se = 51
 
     ##
-    # \brief Specifies <em>Molybdenum</em>.
+    # \brief Specifies molybdenum.
     # 
     Mo = 52
 
     ##
-    # \brief Specifies <em>Tin</em>.
+    # \brief Specifies tin.
     # 
     Sn = 53
 

@@ -42,8 +42,11 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::FragmentGenerator implementation applying the <em>RECAP</em> [\ref RECAP] cleavage rules
-         *        (see Chem::RECAPRuleID) to produce a set of fragment building blocks from a molecular graph.
+         * \brief Molecular graph fragment generator implementing the \e RECAP bond-cleavage rule set.
+         *
+         * The rule (and exclude-pattern) set follows the original publication [\ref RECAP].
+         * \e RECAP rule IDs are defined in namespace Chem::RECAPRuleID and the corresponding
+         * atom label values in namespace Chem::RECAPAtomLabel.
          */
         class CDPL_CHEM_API RECAPFragmentGenerator : public FragmentGenerator
         {
@@ -55,7 +58,7 @@ namespace CDPL
             typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
 
             /**
-             * \brief Constructs the \c %RECAPFragmentGenerator instance and registers the corresponding RECAP cleavage rules.
+             * \brief Constructs the \c %RECAPFragmentGenerator instance and registers the corresponding \e RECAP fragmentation rules.
              */
             RECAPFragmentGenerator();
         };

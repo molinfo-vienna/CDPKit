@@ -101,9 +101,9 @@ namespace
         olefinPattern3              = parseSMARTS("[CX3H0:" + str(RECAPAtomLabel::OLEFIN_C) + "](-[#6])(-[#6])=!@[CX3H1:" + str(RECAPAtomLabel::OLEFIN_C) + "]-[#6]");
         olefinPattern4              = parseSMARTS("[CX3H1:" + str(RECAPAtomLabel::OLEFIN_C) + "](-[#6])=!@[CX3H1:" + str(RECAPAtomLabel::OLEFIN_C) + "]-[#6]");
         
-        quarternaryNPattern1        = parseSMARTS("[NX4+1H0:" + str(RECAPAtomLabel::QUARTERNARY_N_N) + "](-[#6])(-[#6])(-[#6])-!@[CX4!R:" + str(RECAPAtomLabel::QUARTERNARY_N_C) + "]");
-        quarternaryNPattern2        = parseSMARTS("[NX4+1H1:" + str(RECAPAtomLabel::QUARTERNARY_N_N) + "](-[#6])(-[#6])-!@[CX4!R:" + str(RECAPAtomLabel::QUARTERNARY_N_C) + "]");
-        quarternaryNPattern3        = parseSMARTS("[NX4+1H2:" + str(RECAPAtomLabel::QUARTERNARY_N_N) + "](-[#6])-!@[CX4!R:" + str(RECAPAtomLabel::QUARTERNARY_N_C) + "]");
+        quarternaryNPattern1        = parseSMARTS("[NX4+1H0:" + str(RECAPAtomLabel::QUATERNARY_N_N) + "](-[#6])(-[#6])(-[#6])-!@[CX4!R:" + str(RECAPAtomLabel::QUATERNARY_N_C) + "]");
+        quarternaryNPattern2        = parseSMARTS("[NX4+1H1:" + str(RECAPAtomLabel::QUATERNARY_N_N) + "](-[#6])(-[#6])-!@[CX4!R:" + str(RECAPAtomLabel::QUATERNARY_N_C) + "]");
+        quarternaryNPattern3        = parseSMARTS("[NX4+1H2:" + str(RECAPAtomLabel::QUATERNARY_N_N) + "](-[#6])-!@[CX4!R:" + str(RECAPAtomLabel::QUATERNARY_N_C) + "]");
                         
         aromaticNAliphaticCPattern = parseSMARTS("[n:" + str(RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_N) + "]-!@[CX4:" + str(RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_C) + "]");
         lactamNAliphaticCPattern   = parseSMARTS("[Nv3X3R:" + str(RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_N) + "](-@[#6R])(-!@[CX4!R:" + str(RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_C) + "])-@[CR](=O)(-@[#6R])");
@@ -148,9 +148,9 @@ Chem::RECAPFragmentGenerator::RECAPFragmentGenerator():
     addFragmentationRule(olefinPattern3, RECAPRuleID::OLEFIN);
     addFragmentationRule(olefinPattern4, RECAPRuleID::OLEFIN);
                 
-    addFragmentationRule(quarternaryNPattern1, RECAPRuleID::QUARTERNARY_N);
-    addFragmentationRule(quarternaryNPattern2, RECAPRuleID::QUARTERNARY_N);
-    addFragmentationRule(quarternaryNPattern3, RECAPRuleID::QUARTERNARY_N);
+    addFragmentationRule(quarternaryNPattern1, RECAPRuleID::QUATERNARY_N);
+    addFragmentationRule(quarternaryNPattern2, RECAPRuleID::QUATERNARY_N);
+    addFragmentationRule(quarternaryNPattern3, RECAPRuleID::QUATERNARY_N);
             
     addFragmentationRule(aromaticNAliphaticCPattern, RECAPRuleID::AROMATIC_N_ALIPHATIC_C);
     addFragmentationRule(lactamNAliphaticCPattern, RECAPRuleID::LACTAM_N_ALIPHATIC_C);

@@ -37,7 +37,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants for the labeling of atoms of bonds matched by a BRICS fragmentation rule.
+         * \brief Provides constants for labeling the endpoints of bonds matched by \e BRICS fragmentation rules.
          * \see [\ref BRICS]
          */
         namespace BRICSAtomLabel

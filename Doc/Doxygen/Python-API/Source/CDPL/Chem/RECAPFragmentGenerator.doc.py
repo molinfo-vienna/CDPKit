@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief Chem.FragmentGenerator implementation applying the <em>RECAP</em> [\ref RECAP] cleavage rules (see Chem.RECAPRuleID) to produce a set of fragment building blocks from a molecular graph.
+# \brief Molecular graph fragment generator implementing the <em>RECAP</em> bond-cleavage rule set.
+# 
+# The rule (and exclude-pattern) set follows the original publication [\ref RECAP]. <em>RECAP</em> rule IDs are defined in namespace Chem.RECAPRuleID and the corresponding atom label values in namespace Chem.RECAPAtomLabel.
 # 
 class RECAPFragmentGenerator(FragmentGenerator):
 
     ##
-    # \brief Constructs the <tt>RECAPFragmentGenerator</tt> instance and registers the corresponding RECAP cleavage rules.
+    # \brief Constructs the <tt>RECAPFragmentGenerator</tt> instance and registers the corresponding <em>RECAP</em> fragmentation rules.
     # 
     def __init__() -> None: pass
 

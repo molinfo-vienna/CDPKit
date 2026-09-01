@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides constants for the labeling of atoms of bonds matched by a BRICS fragmentation rule.
+# \brief Provides constants for labeling the endpoints of bonds matched by <em>BRICS</em> fragmentation rules.
 # 
 # \see [\ref BRICS]
 # 

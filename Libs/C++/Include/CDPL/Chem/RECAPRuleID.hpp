@@ -37,14 +37,14 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants for the identification of RECAP fragmentation rules.
+         * \brief Provides constants for the identification of \e RECAP fragmentation rules.
          * \see [\ref RECAP]
          */
         namespace RECAPRuleID
         {
 
             /**
-             * \brief Specifies that no rule matched the bond.
+             * \brief Specifies that no rule applies.
              */
             constexpr unsigned int NONE                   = 0;
 
@@ -74,27 +74,27 @@ namespace CDPL
             constexpr unsigned int ETHER                  = 5;
 
             /**
-             * \brief Specifies the rule for olefinic-bond cleavage.
+             * \brief Specifies the rule for olefinic bond cleavage.
              */
             constexpr unsigned int OLEFIN                 = 6;
 
             /**
-             * \brief Specifies the rule for quaternary nitrogen bond cleavage.
+             * \brief Specifies the rule for quaternary amine bond cleavage.
              */
-            constexpr unsigned int QUARTERNARY_N          = 7;
+            constexpr unsigned int QUATERNARY_N           = 7;
 
             /**
-             * \brief Specifies the rule for aromatic-N to aliphatic-C bond cleavage.
+             * \brief Specifies the rule for aromatic nitrogen to aliphatic carbon bond cleavage.
              */
             constexpr unsigned int AROMATIC_N_ALIPHATIC_C = 8;
 
             /**
-             * \brief Specifies the rule for lactam-N to aliphatic-C bond cleavage.
+             * \brief Specifies the rule for lactam bond cleavage.
              */
             constexpr unsigned int LACTAM_N_ALIPHATIC_C   = 9;
 
             /**
-             * \brief Specifies the rule for aromatic-C to aromatic-C bond cleavage (biaryl).
+             * \brief Specifies the rule for aromatic carbon-carbon bond cleavage (biaryl).
              */
             constexpr unsigned int AROMATIC_C_AROMATIC_C  = 10;
 
