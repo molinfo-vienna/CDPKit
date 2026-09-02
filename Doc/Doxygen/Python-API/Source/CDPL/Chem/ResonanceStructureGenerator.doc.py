@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Enumerates the resonance structures of a molecular graph by redistributing &pi;-electrons across the resonance-active bonds.
+# \brief Enumerates the resonance structures of a molecular graph by redistributing &pi;-electrons across conjugated bonds.
 # 
-# For each generated resonance structure the per-atom formal charges and per-bond orders are reported as a Chem.ResonanceStructureGenerator.StructureData record. Optional postprocessing minimizes octet-rule violations, sp-hybridization-geometry violations, and 1,2-charge separations on adjacent carbon atoms.
+# For each generated resonance structure the formal atom charges and bond orders are reported as a StructureData record. Optional postprocessing minimizes octet rule violations, sp-hybridization geometry violations, and 1,2-charge separations on adjacent carbon atoms.
 # 
 class ResonanceStructureGenerator(Boost.Python.instance):
 
     ##
-    # \brief Holds the per-atom formal charges and per-bond orders that define a single resonance structure.
+    # \brief Data structure storing formal atom charges and bond orders that define a single resonance structure.
     # 
     class StructureData(Boost.Python.instance):
 
@@ -57,9 +57,9 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         def assign(data: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 
         ##
-        # \brief Returns the per-atom formal charges of this resonance structure.
+        # \brief Returns the formal atom charges of this resonance structure.
         # 
-        # \return A reference to the per-atom formal charge array.
+        # \return A reference to the formal charge array.
         # 
         def getAtomCharges() -> Util.LArray: pass
 
@@ -84,7 +84,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     ##
     # \brief Constructs a copy of the <tt>ResonanceStructureGenerator</tt> instance <em>gen</em>.
     # 
-    # \param gen The <tt>ResonanceStructureGenerator</tt> to copy.
+    # \param gen The generator to copy.
     # 
     def __init__(gen: ResonanceStructureGenerator) -> None: pass
 
@@ -103,86 +103,86 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the state of this generator by a copy of the state of <em>gen</em>.
     # 
-    # \param gen The source <tt>ResonanceStructureGenerator</tt>.
+    # \param gen The generator to copy.
     # 
     # \return \a self
     # 
     def assign(gen: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 
     ##
-    # \brief Tells whether octet-rule violations are minimized.
+    # \brief Tells whether octet rule violations are minimized.
     # 
-    # \return <tt>True</tt> if octet-rule violations are minimized, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if octet rule violations are minimized, and <tt>False</tt> otherwise.
     # 
     def octetRuleViolationsMinimized() -> bool: pass
 
     ##
     # \brief Specifies whether resonance structures violating the octet rule shall be filtered out.
     # 
-    # \param minimize If <tt>True</tt>, structures with octet-rule violations on the configured atom types are minimized.
+    # \param minimize If <tt>True</tt>, structures with octet rule violations on the configured atom types are minimized.
     # 
     def minimizeOctetRuleViolations(minimize: bool) -> None: pass
 
     ##
-    # \brief Tells whether sp-hybridization-geometry violations are minimized.
+    # \brief Tells whether sp-hybridization geometry violations are minimized.
     # 
     # \return <tt>True</tt> if sp-geometry violations are minimized, and <tt>False</tt> otherwise.
     # 
     def sp1GeometryViolationsMinimized() -> bool: pass
 
     ##
-    # \brief Specifies whether resonance structures with sp-hybridization-geometry violations shall be filtered out.
+    # \brief Specifies whether resonance structures with sp-hybridization geometry violations shall be filtered out.
     # 
-    # \param minimize If <tt>True</tt>, sp-hybridization-geometry violations are minimized.
+    # \param minimize If <tt>True</tt>, sp-hybridization geometry violations are minimized.
     # 
     def minimizeSP1GeometryViolations(minimize: bool) -> None: pass
 
     ##
     # \brief Tells whether 1,2-charge separations on adjacent carbon atoms are minimized.
     # 
-    # \return <tt>True</tt> if 1,2-charged C&minus;C resonance forms are minimized, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if 1,2-charged carbon-carbon bonds are minimized, and <tt>False</tt> otherwise.
     # 
     def carbonBond12ChargesMinimized() -> bool: pass
 
     ##
     # \brief Specifies whether resonance structures with 1,2-charge separations on adjacent carbon atoms shall be filtered out.
     # 
-    # \param minimize If <tt>True</tt>, 1,2-charged C&minus;C resonance forms are minimized.
+    # \param minimize If <tt>True</tt>, 1,2-charged carbon-carbon bonds are minimized.
     # 
     def minimizeCarbonBond12Charges(minimize: bool) -> None: pass
 
     ##
-    # \brief Returns the bit mask of atom types subjected to the octet-rule check during minimization.
+    # \brief Returns the bit mask of atom types subjected to the octet rule check during violation minimization.
     # 
     # \return A reference to the bit mask (indexed by Chem.AtomType value).
     # 
     def getOctetRuleCheckAtomTypes() -> Util.BitSet: pass
 
     ##
-    # \brief Returns the configured charge-count window size.
+    # \brief Returns the configured total absolute formal atom charge count window size.
     # 
-    # \return The charge-count window size.
+    # \return The total absolute formal atom charge count window size.
     # 
     def getChargeCountWindow() -> int: pass
 
     ##
-    # \brief Sets the maximum allowed difference between the lowest and highest formal charge count of accepted resonance structures.
+    # \brief Sets the maximum allowed difference between the lowest and highest total absolute formal atom charge count of accepted resonance structures.
     # 
-    # \param win_size The new charge-count window size.
+    # \param win_size The new total absolute formal atom charge count window size.
     # 
     def setChargeCountWindow(win_size: int) -> None: pass
 
     ##
-    # \brief Returns the upper limit on the number of resonance structures generated per molecule.
+    # \brief Returns the upper limit on the number of resonance structures generated per molecular graph.
     # 
-    # \return The output-structure limit.
+    # \return The output structure limit.
     # 
     def getMaxNumGeneratedStructures() -> int: pass
 
     ##
-    # \brief Sets the upper limit on the number of resonance structures generated per molecule.
+    # \brief Sets the upper limit on the number of resonance structures generated per molecular graph.
     # 
-    # \param max_num The new output-structure limit.
+    # \param max_num The new output structure limit.
     # 
     def setMaxNumGeneratedStructures(max_num: int) -> None: pass
 
@@ -196,16 +196,16 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     ##
     # \brief Returns the number of generated resonance structures.
     # 
-    # \return The resonance-structure count.
+    # \return The resonance structure count.
     # 
     def getNumStructures() -> int: pass
 
     ##
-    # \brief Returns the resonance-structure record at index <em>idx</em>.
+    # \brief Returns the resonance structure record at index <em>idx</em>.
     # 
     # \param idx The zero-based structure index.
     # 
-    # \return A reference to the resonance-structure record. 
+    # \return A reference to the resonance structure record. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumStructures()).
     # 

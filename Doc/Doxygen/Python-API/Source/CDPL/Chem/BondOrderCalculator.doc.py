@@ -22,7 +22,7 @@
 ##
 # \brief Perceives bond orders of a molecular graph from its 3D structure and atom connectivity.
 # 
-# The calculator combines per-atom geometry analysis (linear, trigonal-planar, tetrahedral, ...), functional-group substructure matching, conjugated &pi;-system detection, and free-valence accounting to assign single, double, or triple bonds. By default only bonds whose order is currently undefined are assigned; this can be toggled via undefinedOnly().
+# The calculator combines per-atom geometry analysis (linear, trigonal-planar, tetrahedral, ...), functional group substructure matching, conjugated &pi;-system detection, and free valence accounting to assign single, double, or triple bonds.
 # 
 class BondOrderCalculator(Boost.Python.instance):
 
@@ -34,8 +34,10 @@ class BondOrderCalculator(Boost.Python.instance):
     ##
     # \brief Constructs the <tt>BondOrderCalculator</tt> instance and perceives the order of the bonds in the molecular graph <em>molgraph</em>.
     # 
+    # The orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so that the order of a particular bond is accessible via its index.
+    # 
     # \param molgraph The molecular graph for which to perceive the bond orders.
-    # \param orders An array containing the perceived bond orders. The orders are stored in the same sequence as the bonds appear in the input molecular graph, i.e. the order of a particular bond is accessible via its index in the molecular graph.
+    # \param orders An array containing the perceived bond orders.
     # \param undef_only Specifies whether or not to perceive only undefined (= unset) bond orders.
     # 
     def __init__(molgraph: MolecularGraph, orders: Util.STArray, undef_only: bool = True) -> None: pass
@@ -55,7 +57,7 @@ class BondOrderCalculator(Boost.Python.instance):
     ##
     # \brief Allows to specify whether already defined bond orders should be left unchanged.
     # 
-    # \param undef_only Specifies whether or not to perceive only undefined (= unset) bond orders.
+    # \param undef_only If <tt>True</tt> only undefined (= unset) bond orders are perceived.
     # 
     # \note The default setting is to perceive only the order of undefined bonds.
     # 
@@ -71,8 +73,10 @@ class BondOrderCalculator(Boost.Python.instance):
     ##
     # \brief Perceives the order of the bonds in the molecular graph <em>molgraph</em> from its 3D structure and atom connectivity.
     # 
+    # The orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so that the order of a particular bond is accessible via its index.
+    # 
     # \param molgraph The molecular graph for which to perceive the bond orders.
-    # \param orders An array containing the perceived bond orders. The orders are stored in the same sequence as the bonds appear in the input molecular graph, i.e. the order of a particular bond is accessible via its index in the molecular graph.
+    # \param orders An array containing the perceived bond orders.
     # 
     def calculate(molgraph: MolecularGraph, orders: Util.STArray) -> None: pass
 
