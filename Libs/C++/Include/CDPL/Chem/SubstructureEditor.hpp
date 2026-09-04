@@ -53,8 +53,7 @@ namespace CDPL
         class StereoDescriptor;
 
         /**
-         * \brief Pattern-driven editor that rewrites matched substructures of a Chem::Molecule using a
-         *        result template, with optional exclude patterns guarding sites that must not be touched.
+         * \brief Pattern-driven editor that rewrites matched substructures of a molecule according to a given editing template.
          *
          * Search patterns supply the substructures the editor will look for. The (single) result pattern
          * defines what each match is rewritten to and exclude patterns mark matches that must be skipped (a
@@ -78,12 +77,12 @@ namespace CDPL
             typedef std::shared_ptr<SubstructureEditor> SharedPointer;
 
             /**
-             * \brief A constant iterator over the molecular graphs of the stored search/exclude patterns.
+             * \brief A constant iterator used to iterate over the stored search/exclude pattern Chem::MolecularGraph objects.
              */
             typedef boost::transform_iterator<GetMolGraphFunc, PatternList::const_iterator> ConstPatternIterator;
 
             /**
-             * \brief A mutable iterator over the molecular graphs of the stored search/exclude patterns.
+             * \brief A mutable iterator used to iterate over the stored search/exclude pattern Chem::MolecularGraph objects.
              */
             typedef boost::transform_iterator<GetMolGraphFunc, PatternList::iterator>       PatternIterator;
 
@@ -94,18 +93,20 @@ namespace CDPL
 
             /**
              * \brief Constructs a copy of the \c %SubstructureEditor instance \a editor.
-             * \param editor The \c %SubstructureEditor instance to copy.
+             * \param editor The other editor instance to copy.
              */
             SubstructureEditor(const SubstructureEditor& editor);
 
             /**
              * \brief Destructor.
+             *
+             * Destroys the \c %SubstructureEditor instance and frees all allocated resources.
              */
             ~SubstructureEditor();
 
             /**
              * \brief Appends a new substructure search pattern to the current set of patterns.
-             * \param molgraph The molecular graph of the substructure search pattern to add.
+             * \param molgraph A smart pointer to the molecular graph of the substructure search pattern to add.
              */
             void addSearchPattern(const MolecularGraph::SharedPointer& molgraph);
 
@@ -116,87 +117,87 @@ namespace CDPL
             std::size_t getNumSearchPatterns() const;
 
             /**
-             * \brief Returns the molecular graph of the search pattern at index \a idx.
-             * \param idx The zero-based search-pattern index.
-             * \return The molecular graph of the search pattern at index \a idx.
+             * \brief Returns the molecular graph of the substructure search pattern at index \a idx.
+             * \param idx The zero-based search pattern index.
+             * \return A smart pointer to the molecular graph of the search pattern at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns()).
              */
             const MolecularGraph::SharedPointer& getSearchPattern(std::size_t idx) const;
 
             /**
-             * \brief Removes the search pattern at index \a idx.
-             * \param idx The zero-based search-pattern index to remove.
+             * \brief Removes the substructure search pattern at index \a idx.
+             * \param idx The zero-based search pattern index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumSearchPatterns()).
              */
             void removeSearchPattern(std::size_t idx);
 
             /**
-             * \brief Removes the search pattern pointed to by \a it.
-             * \param it An iterator pointing to the search pattern to remove.
-             * \throw Base::RangeError if \a it does not point into the current search-pattern range.
+             * \brief Removes the substructure search pattern pointed to by \a it.
+             * \param it An iterator pointing to the search pattern.
+             * \throw Base::RangeError if \a it is not in the range [getSearchPatternsBegin(), getSearchPatternsEnd()).
              */
             void removeSearchPattern(const PatternIterator& it);
 
             /**
-             * \brief Clears the current set of substructuresearch patterns.
+             * \brief Clears the current set of substructure search patterns.
              */
             void clearSearchPatterns();
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored search patterns.
-             * \return A mutable iterator pointing to the beginning of the stored search patterns.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored search pattern Chem::MolecularGraph objects.
+             * \return A mutable iterator pointing to the beginning of the stored search pattern Chem::MolecularGraph objects.
              */
             PatternIterator getSearchPatternsBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored search patterns.
-             * \return A mutable iterator pointing to the end of the stored search patterns.
+             * \brief Returns a mutable iterator pointing to the end of the stored search pattern Chem::MolecularGraph objects.
+             * \return A mutable iterator pointing to the end of the stored search pattern Chem::MolecularGraph objects.
              */
             PatternIterator getSearchPatternsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored search patterns.
-             * \return A constant iterator pointing to the beginning of the stored search patterns.
+             * \brief Returns a constant iterator pointing to the beginning of the stored search pattern \c const Chem::MolecularGraph objects.
+             * \return A constant iterator pointing to the beginning of the stored search pattern \c const Chem::MolecularGraph objects.
              */
             ConstPatternIterator getSearchPatternsBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored search patterns.
-             * \return A constant iterator pointing to the end of the stored search patterns.
+             * \brief Returns a constant iterator pointing to the end of the stored search pattern \c const Chem::MolecularGraph objects.
+             * \return A constant iterator pointing to the end of the stored search pattern \c const Chem::MolecularGraph objects.
              */
             ConstPatternIterator getSearchPatternsEnd() const;
 
             /**
              * \brief Appends a new substructure exclude pattern to the current set of patterns.
-             * \param molgraph The molecular graph of the substructure exclude pattern to add.
+             * \param molgraph A smart pointer to the molecular graph of the substructure exclude pattern to add.
              */
             void addExcludePattern(const MolecularGraph::SharedPointer& molgraph);
 
             /**
-             * \brief Returns the number of stored substructure-exclude patterns.
+             * \brief Returns the number of stored substructure exclude patterns.
              * \return The number of stored exclude patterns.
              */
             std::size_t getNumExcludePatterns() const;
 
             /**
-             * \brief Returns the molecular graph of the exclude pattern at index \a idx.
-             * \param idx The zero-based exclude-pattern index.
-             * \return The molecular graph of the exclude pattern at index \a idx.
+             * \brief Returns the molecular graph of the substructure exclude pattern at index \a idx.
+             * \param idx The zero-based exclude pattern index.
+             * \return A smart pointer to the molecular graph of the exclude pattern at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns()).
              */
             const MolecularGraph::SharedPointer& getExcludePattern(std::size_t idx) const;
 
             /**
-             * \brief Removes the exclude pattern at index \a idx.
-             * \param idx The zero-based exclude-pattern index to remove.
+             * \brief Removes the substructure exclude pattern at index \a idx.
+             * \param idx The zero-based exclude pattern index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumExcludePatterns()).
              */
             void removeExcludePattern(std::size_t idx);
 
             /**
-             * \brief Removes the exclude pattern pointed to by \a it.
-             * \param it An iterator pointing to the exclude pattern to remove.
-             * \throw Base::RangeError if \a it does not point into the current exclude-pattern range.
+             * \brief Removes the substructure exclude pattern pointed to by \a it.
+             * \param it An iterator pointing to the exclude pattern.
+             * \throw Base::RangeError if \a it is not in the range [getExcludePatternsBegin(), getExcludePatternsEnd()).
              */
             void removeExcludePattern(const PatternIterator& it);
 
@@ -206,38 +207,38 @@ namespace CDPL
             void clearExcludePatterns();
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored exclude patterns.
-             * \return A mutable iterator pointing to the beginning of the stored exclude patterns.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored exclude pattern Chem::MolecularGraph objects.
+             * \return A mutable iterator pointing to the beginning of the stored exclude pattern Chem::MolecularGraph objects.
              */
             PatternIterator getExcludePatternsBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored exclude patterns.
-             * \return A mutable iterator pointing to the end of the stored exclude patterns.
+             * \brief Returns a mutable iterator pointing to the end of the stored exclude pattern Chem::MolecularGraph objects.
+             * \return A mutable iterator pointing to the end of the stored exclude pattern Chem::MolecularGraph objects.
              */
             PatternIterator getExcludePatternsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored exclude patterns.
-             * \return A constant iterator pointing to the beginning of the stored exclude patterns.
+             * \brief Returns a constant iterator pointing to the beginning of the stored exclude pattern \c const Chem::MolecularGraph objects.
+             * \return A constant iterator pointing to the beginning of the stored exclude pattern \c const Chem::MolecularGraph objects.
              */
             ConstPatternIterator getExcludePatternsBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored exclude patterns.
-             * \return A constant iterator pointing to the end of the stored exclude patterns.
+             * \brief Returns a constant iterator pointing to the end of the stored exclude pattern \c const Chem::MolecularGraph objects.
+             * \return A constant iterator pointing to the end of the stored exclude pattern \c const Chem::MolecularGraph objects.
              */
             ConstPatternIterator getExcludePatternsEnd() const;
 
             /**
-             * \brief Sets the result pattern that defines how each matched search-pattern instance will be rewritten.
-             * \param pattern The molecular graph of the result pattern.
+             * \brief Sets the result pattern that defines how each matched search pattern instance will be rewritten.
+             * \param pattern A smart pointer to the molecular graph of the result pattern.
              */
             void setResultPattern(const MolecularGraph::SharedPointer& pattern);
 
             /**
              * \brief Returns the currently set result pattern.
-             * \return The currently set result pattern, or a null pointer if none has been set.
+             * \return A smart pointer to the molecular graph of the currently set result pattern, or a null pointer if none has been set.
              */
             const MolecularGraph::SharedPointer& getResultPattern() const;
 
@@ -247,15 +248,15 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Edits \a mol in place by applying the result pattern at every search-pattern match
-             *        that is not covered by an exclude pattern; repeats until no further changes occur.
+             * \brief Edits the molecule \a mol in place by applying the result pattern at every search pattern match
+             *        that is not covered by an exclude pattern.
              * \param mol The molecule to edit.
              * \return The number of applied transformations.
              */
             std::size_t edit(Molecule& mol);
 
             /**
-             * \brief Copies \a molgraph into \a res_mol and then edits \a res_mol via edit(Molecule&).
+             * \brief Copies the molecular graph \a molgraph into the molecule \a res_mol and then edits it by calling edit(Molecule&).
              * \param molgraph The source molecular graph.
              * \param res_mol The molecule receiving the edited result.
              * \return The number of applied transformations.
@@ -264,7 +265,7 @@ namespace CDPL
 
             /**
              * \brief Copies the state of the \c %SubstructureEditor instance \a gen.
-             * \param gen The \c %SubstructureEditor instance to copy.
+             * \param gen The other editor instance to copy.
              * \return A reference to itself.
              */
             SubstructureEditor& operator=(const SubstructureEditor& gen);

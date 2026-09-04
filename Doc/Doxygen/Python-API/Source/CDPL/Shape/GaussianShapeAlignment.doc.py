@@ -37,7 +37,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     DEF_MAX_OPTIMIZATION_ITERATIONS = 20
 
     ##
-    # \brief Default maximum order of the Gaussian-product expansion.
+    # \brief Default maximum order of the Gaussian product expansion.
     # 
     DEF_MAX_PRODUCT_ORDER = 1
 
@@ -47,7 +47,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     DEF_DISTANCE_CUTOFF = 0.0
 
     ##
-    # \brief Default alignment-result selection mode.
+    # \brief Default alignment result selection mode.
     # 
     DEF_RESULT_SELECTION_MODE = 3
 
@@ -83,7 +83,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Specifies the Gaussian-shape overlap function used during alignment.
+    # \brief Specifies the Gaussian shape overlap function used during alignment.
     # 
     # \param func The overlap function.
     # 
@@ -155,14 +155,14 @@ class GaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Specifies the function used to compare two alignment results for sorting and filtering.
     # 
-    # \param func The result-compare function.
+    # \param func The result compare function.
     # 
     def setResultCompareFunction(func: BoolAlignmentResult2Functor) -> None: pass
 
     ##
-    # \brief Returns the currently configured result-compare function.
+    # \brief Returns the currently configured result compare function.
     # 
-    # \return A reference to the result-compare function.
+    # \return A reference to the result compare function.
     # 
     def getResultCompareFunction() -> BoolAlignmentResult2Functor: pass
 
@@ -181,14 +181,14 @@ class GaussianShapeAlignment(Boost.Python.instance):
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
-    # \brief Sets the alignment-result selection mode.
+    # \brief Sets the alignment result selection mode.
     # 
     # \param mode The new result-selection mode (see namespace Shape.AlignmentResultSelectionMode).
     # 
     def setResultSelectionMode(mode: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured alignment-result selection mode.
+    # \brief Returns the currently configured alignment result selection mode.
     # 
     # \return The result-selection mode (see namespace Shape.AlignmentResultSelectionMode).
     # 
@@ -307,14 +307,14 @@ class GaussianShapeAlignment(Boost.Python.instance):
     def calcColorSelfOverlaps() -> bool: pass
 
     ##
-    # \brief Sets the maximum order of the Gaussian-product expansion used by the overlap function.
+    # \brief Sets the maximum order of the Gaussian product expansion used by the overlap function.
     # 
     # \param max_order The new maximum product order.
     # 
     def setMaxOrder(max_order: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured maximum order of the Gaussian-product expansion.
+    # \brief Returns the currently configured maximum order of the Gaussian product expansion.
     # 
     # \return The maximum product order.
     # 

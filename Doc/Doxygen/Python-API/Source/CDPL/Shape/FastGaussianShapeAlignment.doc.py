@@ -22,7 +22,7 @@
 ##
 # \brief High-level driver for the fast alignment of Gaussian shapes against a set of reference shapes.
 # 
-# Unlike Shape.GaussianShapeAlignment, which delegates the alignment to a separate Shape.GaussianShapeFunctionAlignment instance, <tt>FastGaussianShapeAlignment</tt> integrates the entire pipeline (start-transform generation, BFGS overlap optimization, result selection) into one class and operates on a self-contained Gaussian-product representation. The configuration combines settings exposed by Shape.PrincipalAxesAlignmentStartGenerator (start-transform options) and the iterative overlap optimization.
+# Unlike Shape.GaussianShapeAlignment, which delegates the alignment to a separate Shape.GaussianShapeFunctionAlignment instance, <tt>FastGaussianShapeAlignment</tt> integrates the entire pipeline (start-transform generation, BFGS overlap optimization, result selection) into one class and operates on a self-contained Gaussian product representation. The configuration combines settings exposed by Shape.PrincipalAxesAlignmentStartGenerator (start-transform options) and the iterative overlap optimization.
 # 
 class FastGaussianShapeAlignment(Boost.Python.instance):
 
@@ -37,7 +37,7 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     DEF_MAX_OPTIMIZATION_ITERATIONS = 20
 
     ##
-    # \brief Default alignment-result selection mode.
+    # \brief Default alignment result selection mode.
     # 
     DEF_RESULT_SELECTION_MODE = 3
 
@@ -90,14 +90,14 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Specifies the function used to compare two alignment results for sorting and filtering.
     # 
-    # \param func The result-compare function.
+    # \param func The result compare function.
     # 
     def setResultCompareFunction(func: BoolAlignmentResult2Functor) -> None: pass
 
     ##
-    # \brief Returns the currently configured result-compare function.
+    # \brief Returns the currently configured result compare function.
     # 
-    # \return A reference to the result-compare function.
+    # \return A reference to the result compare function.
     # 
     def getResultCompareFunction() -> BoolAlignmentResult2Functor: pass
 
@@ -116,14 +116,14 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
-    # \brief Sets the alignment-result selection mode.
+    # \brief Sets the alignment result selection mode.
     # 
     # \param mode The new result-selection mode (see namespace Shape.AlignmentResultSelectionMode).
     # 
     def setResultSelectionMode(mode: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured alignment-result selection mode.
+    # \brief Returns the currently configured alignment result selection mode.
     # 
     # \return The result-selection mode (see namespace Shape.AlignmentResultSelectionMode).
     # 

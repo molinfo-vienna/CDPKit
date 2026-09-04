@@ -50,14 +50,15 @@ namespace CDPL
         class Fragment;
 
         /**
-         * \brief Extracts the solvent-accessible surface atoms of a set of atoms.
+         * \brief Identifies the accessible surface atoms in a given set of atoms.
          *
-         * For each candidate atom, a configurable number of probe-sphere test points is generated on
-         * the atom's van-der-Waals surface and tested against the surrounding atoms (looked up via an
+         * For each candidate atom, a configurable number of probe sphere test points is generated on
+         * the atom's Van der Waals surface and tested against the surrounding atoms (looked up via an
          * internal 3D grid for efficiency). An atom is reported as surface-accessible when at least the
          * minimum required fraction of its test points is reachable by the probe sphere. The probe
-         * radius, accessibility threshold, test-point count, and grid parameters can be tuned via the
-         * setters; atom 3D coordinates are obtained through a user-replaceable accessor function.
+         * radius, accessibility threshold, test point count, and grid parameters can be tuned via the
+         * provided dedicated methods. Atom 3D coordinates are obtained through an accessor function
+         * that can be customized to specific needs.
          */
         class CDPL_CHEM_API SurfaceAtomExtractor
         {
@@ -68,11 +69,11 @@ namespace CDPL
              */
             static constexpr double DEF_PROBE_RADIUS         = 1.2;
             /**
-             * \brief The default margin (in Å) added to each side of the bounding box for the atom-lookup grid.
+             * \brief The default margin (in Å) added to each side of the bounding box for the atom lookup grid.
              */
             static constexpr double DEF_GRID_OVERSIZE        = 5.0;
             /**
-             * \brief The default distance between grid points (in Å) along each axis of the atom-lookup grid.
+             * \brief The default distance between grid points (in Å) along each axis of the atom lookup grid.
              */
             static constexpr double DEF_GRID_STEP_SIZE       = 0.75;
             /**
@@ -80,7 +81,7 @@ namespace CDPL
              */
             static constexpr double DEF_MIN_SURFACE_ACC      = 0.01;
             /**
-             * \brief The default number of test points generated per atom on its van-der-Waals surface.
+             * \brief The default number of test points generated per atom on its Van der Waals surface.
              */
             static constexpr std::size_t DEF_NUM_TEST_POINTS = 250;
 
@@ -90,8 +91,8 @@ namespace CDPL
             SurfaceAtomExtractor();
 
             /**
-             * \brief Perceives the surface accessible atoms of \a cntnr and adds them to the fragment \a frag.
-             * \param cntnr The set of atoms for which to perceive the surface accessibility.
+             * \brief Perceives the surface-accessible atoms of \a cntnr and adds them to the fragment \a frag.
+             * \param cntnr The set of atoms for which to perceive the surface-accessibility.
              * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
              * \param frag The output fragment where to store the perceived surface atoms.
              */
@@ -111,30 +112,30 @@ namespace CDPL
             double getProbeRadius() const;
 
             /**
-             * \brief Specifies the distance between the grid-points in space which store lists of atoms with proximal positions.
-             * \param size The distance between the grid-points along each axis.
+             * \brief Specifies the distance between the grid points in space which store lists of atoms with proximal positions.
+             * \param size The distance between the grid points along each axis.
              * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_STEP_SIZE.
              */
             void setGridStepSize(double size);
 
             /**
-             * \brief Return the distance between the grid-points for proximal atom lookup.
-             * \return The used distance between the grid-points along each axis.
+             * \brief Return the distance between the grid points for proximal atom lookup.
+             * \return The used distance between the grid points along each axis.
              */
             double getGridStepSize() const;
 
             /**
-             * \brief Specifies the margin that gets added to each side of the molecular graph's bounding-box for the calculation
-             *        of the final atom-lookup grid dimensions.
-             * \param size The margin that gets added to the molecular graph's bounding-box.
+             * \brief Specifies the margin that gets added to each side of the molecular graph's bounding box for the calculation
+             *        of the final atom lookup grid dimensions.
+             * \param size The margin that gets added to the molecular graph's bounding box.
              * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_OVERSIZE.
              */
             void setGridOversize(double size);
 
             /**
-             * \brief Returns the margin that gets added to each side of the molecular graph's bounding-box for the calculation
-             *        of the final atom-lookup grid dimensions.
-             * \return The margin that gets added to the molecular graph's bounding-box.
+             * \brief Returns the margin that gets added to each side of the molecular graph's bounding box for the calculation
+             *        of the final atom lookup grid dimensions.
+             * \return The margin that gets added to the molecular graph's bounding box.
              */
             double getGridOversize() const;
 
@@ -154,14 +155,14 @@ namespace CDPL
             double getMinSurfaceAccessibility() const;
 
             /**
-             * \brief Specifies the number of points on the atom surface at which a test for surface accessibility is carried out.
+             * \brief Specifies the number of points on the atom surface at which a test for surface-accessibility is carried out.
              * \param num_points The number of test points.
              * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_NUM_TEST_POINTS.
              */
             void setNumTestPoints(std::size_t num_points);
 
             /**
-             * \brief Returns the number of points on the atom surface at which a test for surface accessibility is carried out.
+             * \brief Returns the number of points on the atom surface at which a test for surface-accessibility is carried out.
              * \return The number of test points.
              */
             std::size_t getNumTestPoints() const;
@@ -179,9 +180,9 @@ namespace CDPL
             const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
             /**
-             * \brief Perceives the surface accessible atoms of \a cntnr that are part of \a molgraph and adds 
+             * \brief Perceives the surface-accessible atoms of \a cntnr that are part of \a molgraph and adds 
              *        them to the fragment \a frag.
-             * \param cntnr The set of atoms for which to perceive the surface accessibility.
+             * \param cntnr The set of atoms for which to perceive the surface-accessibility.
              * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
              * \param frag The output fragment where to store the perceived surface atoms.
              */

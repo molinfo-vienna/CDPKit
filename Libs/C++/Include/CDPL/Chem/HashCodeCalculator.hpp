@@ -50,16 +50,17 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief Computes a 64-bit hash code that identifies a molecular graph up to a configurable
-         *        set of atom and bond properties.
+         * \brief Computes 64-bit hash codes that are characteristic for the topology of a molecular graph and
+         *        the properties of its atoms and bonds.
          *
          * The algorithm assigns initial seeds to each atom and bond through the user-replaceable
          * functors HashCodeCalculator::AtomHashSeedFunction and HashCodeCalculator::BondHashSeedFunction,
          * iteratively propagates the seeds over the graph topology in the spirit of Morgan-style
-         * extended-connectivity hashing, and finally folds the per-atom hash codes into a single
-         * \c std::uint64_t result via an SHA-style mixing step. The default seed functors
+         * extended connectivity hashing, and finally folds the per-atom hash codes into a single
+         * 64-bit unsigned integer result via an SHA-style mixing step. The default seed functors
          * (DefAtomHashSeedFunctor, DefBondHashSeedFunctor) take into account the property flags
-         * combined into DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS, respectively.
+         * specified by the static constants DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS,
+         * respectively.
          *
          * \see [\ref MHASH]
          */
@@ -85,14 +86,14 @@ namespace CDPL
                 BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION;
 
             /**
-             * \brief The default functor for the generation of atom hash seeds.
+             * \brief Default functor for the generation of atom hash seeds.
              */
             class CDPL_CHEM_API DefAtomHashSeedFunctor
             {
 
               public:
                 /**
-                 * \brief Constructs the atom hash seed functor object for the specified set of atomic properties.
+                 * \brief Constructs the \c %DefAtomHashSeedFunctor instance for the specified set of atomic properties.
                  *
                  * The \a flags argument is an OR combination of the constants defined in namespace
                  * Chem::AtomPropertyFlag. Supported property flags are:
@@ -133,14 +134,14 @@ namespace CDPL
             };
 
             /**
-             * \brief The default functor for the generation of bond hash seeds.
+             * \brief Default functor for the generation of bond hash seeds.
              */
             class CDPL_CHEM_API DefBondHashSeedFunctor
             {
 
               public:
                 /**
-                 * \brief Constructs the bond hash seed functor object for the specified set of bond properties.
+                 * \brief Constructs the \c %DefBondHashSeedFunctor instance for the specified set of bond properties.
                  *
                  * The \a flags argument is an OR combination of the constants defined in namespace
                  * Chem::BondPropertyFlag. Supported property flags are:

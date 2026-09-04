@@ -27,12 +27,12 @@
 class GaussianShapeFunction(Boost.Python.instance):
 
     ##
-    # \brief Default maximum order of the Gaussian-product expansion.
+    # \brief Default maximum order of the Gaussian product expansion.
     # 
     DEF_MAX_PRODUCT_ORDER = 6
 
     ##
-    # \brief Default distance cutoff for pruning negligible Gaussian-product contributions.
+    # \brief Default distance cutoff for pruning negligible Gaussian product contributions.
     # 
     DEF_DISTANCE_CUTOFF = 0.0
 
@@ -91,21 +91,21 @@ class GaussianShapeFunction(Boost.Python.instance):
     def getShape() -> GaussianShape: pass
 
     ##
-    # \brief Sets the maximum order of the Gaussian-product expansion.
+    # \brief Sets the maximum order of the Gaussian product expansion.
     # 
     # \param max_order The maximum order.
     # 
     def setMaxOrder(max_order: int) -> None: pass
 
     ##
-    # \brief Returns the currently configured maximum order of the Gaussian-product expansion.
+    # \brief Returns the currently configured maximum order of the Gaussian product expansion.
     # 
     # \return The configured maximum order.
     # 
     def getMaxOrder() -> int: pass
 
     ##
-    # \brief Sets the distance cutoff for pruning negligible Gaussian-product contributions.
+    # \brief Sets the distance cutoff for pruning negligible Gaussian product contributions.
     # 
     # \param cutoff The cutoff distance.
     # 
@@ -119,7 +119,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     def getDistanceCutoff() -> float: pass
 
     ##
-    # \brief Resets the function by discarding the cached Gaussian-product expansion.
+    # \brief Resets the function by discarding the cached Gaussian product expansion.
     # 
     def reset() -> None: pass
 

@@ -1,10 +1,6 @@
 /* 
  * CanonicalNumberingCalculator.hpp 
  *
- * B.D. McKay, Practical graph isomorphism. Proceedings of
- * the 10th Manitoba Conference on Numerical Maths and
- * Computing. Congressus Numerantium, 30 (1981) 45-87.
- *
  * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
@@ -60,11 +56,11 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief Calculation of canonical atom numberings for molecular graphs using McKay's algorithm.
+         * \brief Computes canonical atom numberings for molecular graphs using McKay's algorithm.
          *
          * The set of atom and bond properties used to break ties during numbering can be configured via
-         * setAtomPropertyFlags() and setBondPropertyFlags(); a custom hydrogen-count function used for
-         * label generation can be installed via setHydrogenCountFunction().
+         * setAtomPropertyFlags() and setBondPropertyFlags(). A custom function used for retrieving
+         * atom hydrogen counts in the preprocessing step can be installed via setHydrogenCountFunction().
          *
          * \see [\ref MCKAY]
          */
@@ -88,7 +84,8 @@ namespace CDPL
                 BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
             /**
-             * \brief Type of the generic functor used to retrieve the (implicit + explicit) hydrogen count of an atom.
+             * \brief Type of the generic functor class used to store user-defined functions or function objects for
+             *        the retrieval of atom hydrogen counts (implicit + explicit).
              */
             typedef std::function<std::size_t(const Atom&, const MolecularGraph&)> HydrogenCountFunction;
 
@@ -100,10 +97,12 @@ namespace CDPL
             /**
              * \brief Constructs the \c %CanonicalNumberingCalculator instance and performs a canonical numbering
              *        of the atoms in the molecular graph \a molgraph.
+             *
+             * The generated atom labels are stored in the same order as the atoms appear in the atom list of the molecular graph
+             * so that the label of an atom is accessible via its index.
+             *
              * \param molgraph The molecular graph for which to perform the canonical numbering.
-             * \param numbering An array that contains the calculated canonical atom labels. The labels
-             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-             *         (i.e. the canonical number of an atom is accessible via its index).
+             * \param numbering An array that contains the calculated canonical atom labels.
              */
             CanonicalNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering);
 
@@ -174,10 +173,12 @@ namespace CDPL
 
             /**
              * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
+             *
+             * The generated atom labels are stored in the same order as the atoms appear in the atom list of the molecular graph
+             * so that the label of an atom is accessible via its index.
+             *
              * \param molgraph The molecular graph for which to perform the canonical numbering.
-             * \param numbering An array that contains the calculated canonical atom labels. The labels
-             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-             *         (i.e. the canonical number of an atom is accessible via its index).
+             * \param numbering An array that contains the calculated canonical atom labels.
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& numbering);
 

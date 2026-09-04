@@ -49,8 +49,8 @@ namespace CDPL
          *        Shape::ExactGaussianShapeOverlapFunction.
          *
          * Two independent acceleration features can be enabled:
-         *   - **Proximity optimization** prunes Gaussian-product pair contributions based on a
-         *     scaled van-der-Waals proximity test (see setRadiusScalingFactor()).
+         *   - **Proximity optimization** prunes Gaussian product pair contributions based on a
+         *     scaled Van der Waals proximity test (see setRadiusScalingFactor()).
          *   - **Fast exponential function** replaces the expensive \c std::exp call with a fast
          *     approximation that is accurate enough for screening-style overlap evaluation.
          */
@@ -93,13 +93,13 @@ namespace CDPL
             ~FastGaussianShapeOverlapFunction();
 
             /**
-             * \brief Enables or disables the proximity-check pruning of Gaussian-product pair contributions.
+             * \brief Enables or disables the proximity check pruning of Gaussian product pair contributions.
              * \param enable \c true to enable the proximity check, and \c false to disable it.
              */
             void proximityOptimization(bool enable);
 
             /**
-             * \brief Tells whether the proximity-check pruning is enabled.
+             * \brief Tells whether the proximity check pruning is enabled.
              * \return \c true if the proximity check is enabled, and \c false otherwise.
              */
             bool proximityOptimization() const;
@@ -118,13 +118,13 @@ namespace CDPL
 
             /**
              * \brief Enables or disables the use of a fast approximation for the exponential function.
-             * \param enable \c true to enable the fast-exponential approximation, and \c false to use the standard exponential.
+             * \param enable \c true to enable the fast exponential approximation, and \c false to use the standard exponential.
              */
             void fastExpFunction(bool enable);
 
             /**
-             * \brief Tells whether the fast-exponential approximation is enabled.
-             * \return \c true if the fast-exponential approximation is enabled, and \c false otherwise.
+             * \brief Tells whether the fast exponential approximation is enabled.
+             * \return \c true if the fast exponential approximation is enabled, and \c false otherwise.
              */
             bool fastExpFunction() const;
 

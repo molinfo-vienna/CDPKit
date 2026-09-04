@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Perceives topological-symmetry classes of the atoms in a molecular graph.
+# \brief Perceives the topological symmetry classes of the atoms in a molecular graph.
 # 
-# Two atoms are placed in the same class when the topology and configurable atom/bond properties (see DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS) of their respective graph neighbourhoods are indistinguishable. The class identifiers are returned as a Util.STArray indexed by the atom index in the molecular graph. Treatment of implicit hydrogens can be configured via includeImplicitHydrogens().
+# Two atoms are placed in the same class when the topology and configurable atom/bond properties (see DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS) of their respective graph neighbourhoods are indistinguishable. The class identifiers are returned as a Util.STArray ordered by the index of the atoms in the molecular graph. Treatment of implicit hydrogens can be configured via includeImplicitHydrogens().
 # 
 # \see [\ref TOPSY]
 # 
@@ -46,8 +46,10 @@ class SymmetryClassCalculator(Boost.Python.instance):
     ##
     # \brief Constructs the <tt>SymmetryClassCalculator</tt> instance and perceives the topological symmetry classes of the atoms in the molecular graph <em>molgraph</em>.
     # 
+    # The perceived class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph so that the symmetry class of an atom is accessible via its index.
+    # 
     # \param molgraph The molecular graph for which to perceive the symmetry classes.
-    # \param class_ids An array containing the perceived symmetry class IDs. The class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the symmetry class of an atom is accessible via its index).
+    # \param class_ids An array containing the perceived symmetry class IDs.
     # 
     def __init__(molgraph: MolecularGraph, class_ids: Util.STArray) -> None: pass
 
@@ -129,8 +131,10 @@ class SymmetryClassCalculator(Boost.Python.instance):
     ##
     # \brief Perceives the topological symmetry classes of the atoms in the molecular graph <em>molgraph</em>.
     # 
+    # The perceived class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph so that the symmetry class of an atom is accessible via its index.
+    # 
     # \param molgraph The molecular graph for which to perceive the symmetry classes.
-    # \param class_ids An array containing the perceived symmetry class IDs. The class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the symmetry class of an atom is accessible via its index).
+    # \param class_ids An array containing the perceived symmetry class IDs.
     # 
     def calculate(molgraph: MolecularGraph, class_ids: Util.STArray) -> None: pass
 

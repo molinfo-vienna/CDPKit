@@ -20,16 +20,16 @@
 #
 
 ##
-# \brief Computes a 64-bit hash code that identifies a molecular graph up to a configurable set of atom and bond properties.
+# \brief Computes 64-bit hash codes that are characteristic for the topology of a molecular graph and the properties of its atoms and bonds.
 # 
-# The algorithm assigns initial seeds to each atom and bond through the user-replaceable functors HashCodeCalculator.AtomHashSeedFunction and HashCodeCalculator.BondHashSeedFunction, iteratively propagates the seeds over the graph topology in the spirit of Morgan-style extended-connectivity hashing, and finally folds the per-atom hash codes into a single <tt>std::uint64_t</tt> result via an SHA-style mixing step. The default seed functors (DefAtomHashSeedFunctor, DefBondHashSeedFunctor) take into account the property flags combined into DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS, respectively.
+# The algorithm assigns initial seeds to each atom and bond through the user-replaceable functors HashCodeCalculator.AtomHashSeedFunction and HashCodeCalculator.BondHashSeedFunction, iteratively propagates the seeds over the graph topology in the spirit of Morgan-style extended connectivity hashing, and finally folds the per-atom hash codes into a single 64-bit unsigned integer result via an SHA-style mixing step. The default seed functors (DefAtomHashSeedFunctor, DefBondHashSeedFunctor) take into account the property flags specified by the static constants DEF_ATOM_PROPERTY_FLAGS and DEF_BOND_PROPERTY_FLAGS, respectively.
 # 
 # \see [\ref MHASH]
 # 
 class HashCodeCalculator(Boost.Python.instance):
 
     ##
-    # \brief The default functor for the generation of atom hash seeds.
+    # \brief Default functor for the generation of atom hash seeds.
     # 
     class DefAtomHashSeedFunctor(Boost.Python.instance):
 
@@ -52,12 +52,12 @@ class HashCodeCalculator(Boost.Python.instance):
         def __call__(atom: Atom) -> int: pass
 
     ##
-    # \brief The default functor for the generation of bond hash seeds.
+    # \brief Default functor for the generation of bond hash seeds.
     # 
     class DefBondHashSeedFunctor(Boost.Python.instance):
 
         ##
-        # \brief Constructs the bond hash seed functor object for the specified set of bond properties.
+        # \brief Constructs the <tt>DefBondHashSeedFunctor</tt> instance for the specified set of bond properties.
         # 
         # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag. Supported property flags are:
         #  - Chem.BondPropertyFlag.ORDER

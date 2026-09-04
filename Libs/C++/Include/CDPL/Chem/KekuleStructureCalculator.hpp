@@ -48,8 +48,8 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief Assigns an alternating single/double bond pattern (Kekulé structure) to the previously undefined bonds
-         *        of a molecular graph (typically used to convert aromatic-bond annotations into explicit single/double bonds).
+         * \brief Assigns an alternating single/double bond pattern (Kekulé structure) to undefined bonds
+         *        of a molecular graph.
          */
         class CDPL_CHEM_API KekuleStructureCalculator
         {
@@ -63,19 +63,23 @@ namespace CDPL
             /**
              * \brief Constructs the \c %KekuleStructureCalculator instance and calculates an alternating
              *        single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
+             *
+             * The perceived orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so
+             * that the order of a particular bond is accessible via its index.
+             *
              * \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
-             * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
-             *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
-             *         accessible via its index in the molecular graph.
+             * \param orders An array containing the assigned bond orders.
              */
             KekuleStructureCalculator(const MolecularGraph& molgraph, Util::STArray& orders);
 
             /**
              * \brief Calculates an alternating single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
+             *
+             * The perceived orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so
+             * that the order of a particular bond is accessible via its index.
+             *
              * \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
-             * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
-             *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
-             *         accessible via its index in the molecular graph.
+             * \param orders An array containing the assigned bond orders.
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& orders);
 

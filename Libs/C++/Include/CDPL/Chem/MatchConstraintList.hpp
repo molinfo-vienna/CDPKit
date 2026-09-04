@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Describes a single attribute-comparison constraint between a query and a target object used by
+         * \brief Describes a single attribute comparison constraint between a query and a target object used by
          *        molecular graph matching algorithms.
          *
          * Each constraint is identified by an integer \a id (typically a Chem::*MatchConstraint constant such as

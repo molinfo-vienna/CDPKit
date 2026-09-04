@@ -83,12 +83,12 @@ namespace CDPL
             static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
             /**
-             * \brief Default maximum order of the Gaussian-product expansion.
+             * \brief Default maximum order of the Gaussian product expansion.
              */
             static constexpr std::size_t  DEF_MAX_PRODUCT_ORDER          = 1;
 
             /**
-             * \brief Default alignment-result selection mode.
+             * \brief Default alignment result selection mode.
              */
             static constexpr unsigned int DEF_RESULT_SELECTION_MODE      = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
 
@@ -164,7 +164,7 @@ namespace CDPL
             GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment) = delete;
 
             /**
-             * \brief Specifies the Gaussian-shape overlap function used during alignment.
+             * \brief Specifies the Gaussian shape overlap function used during alignment.
              * \param func The overlap function.
              */
             void setOverlapFunction(GaussianShapeOverlapFunction& func);
@@ -237,13 +237,13 @@ namespace CDPL
 
             /**
              * \brief Specifies the function used to compare two alignment results for sorting and filtering.
-             * \param func The result-compare function.
+             * \param func The result compare function.
              */
             void setResultCompareFunction(const ResultCompareFunction& func);
 
             /**
-             * \brief Returns the currently configured result-compare function.
-             * \return A \c const reference to the result-compare function.
+             * \brief Returns the currently configured result compare function.
+             * \return A \c const reference to the result compare function.
              */
             const ResultCompareFunction& getResultCompareFunction() const;
 
@@ -260,13 +260,13 @@ namespace CDPL
             const ScoringFunction& getScoringFunction() const;
 
             /**
-             * \brief Sets the alignment-result selection mode.
+             * \brief Sets the alignment result selection mode.
              * \param mode The new result-selection mode (see namespace Shape::AlignmentResultSelectionMode).
              */
             void setResultSelectionMode(unsigned int mode);
 
             /**
-             * \brief Returns the currently configured alignment-result selection mode.
+             * \brief Returns the currently configured alignment result selection mode.
              * \return The result-selection mode (see namespace Shape::AlignmentResultSelectionMode).
              */
             unsigned int getResultSelectionMode() const;
@@ -368,13 +368,13 @@ namespace CDPL
             double getOptimizationStopGradient() const;
 
             /**
-             * \brief Sets the maximum order of the Gaussian-product expansion used by the overlap function.
+             * \brief Sets the maximum order of the Gaussian product expansion used by the overlap function.
              * \param max_order The new maximum product order.
              */
             void setMaxOrder(std::size_t max_order);
 
             /**
-             * \brief Returns the currently configured maximum order of the Gaussian-product expansion.
+             * \brief Returns the currently configured maximum order of the Gaussian product expansion.
              * \return The maximum product order.
              */
             std::size_t getMaxOrder() const;

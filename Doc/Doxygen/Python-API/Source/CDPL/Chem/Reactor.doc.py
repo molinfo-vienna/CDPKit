@@ -27,12 +27,12 @@
 class Reactor(Boost.Python.instance):
 
     ##
-    # \brief Constructs and initializes a <tt>Reactor</tt> instance.
+    # \brief Constructs and initializes the <tt>Reactor</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>Reactor</tt> instance for the specified reaction pattern.
+    # \brief Constructs and initializes the <tt>Reactor</tt> instance for the specified reaction pattern.
     # 
     # \param rxn_pattern The reaction pattern describing the transformation of reactants to products.
     # 
@@ -58,44 +58,44 @@ class Reactor(Boost.Python.instance):
     def setReactionPattern(rxn_pattern: Reaction) -> None: pass
 
     ##
-    # \brief Perceives all possible reaction-sites on the reactants of the given reaction target where the specified reaction pattern can be applied.
+    # \brief Perceives all possible reaction sites on the reactants of the given reaction target where the specified reaction pattern can be applied.
     # 
     # The specified Chem.Reaction instance <em>rxn_target</em> serves both as a provider for the starting materials (reactant components) in a later reaction transformation (see performReaction()) as well as a container for the generated reaction products.
     # 
     # \param rxn_target The reaction target providing the reactants to be transformed.
     # 
-    # \return <tt>True</tt> if matching reaction-sites were found, and <tt>False</tt> otherwise. 
+    # \return <tt>True</tt> if matching reaction sites were found, and <tt>False</tt> otherwise. 
     # 
-    # \note Any reaction-site mappings that were recorded in a previous call to findReactionSites() will be discarded. 
+    # \note Any reaction site mappings that were recorded in a previous call to findReactionSites() will be discarded. 
     # 
     # \see performReaction()
     # 
     def findReactionSites(rxn_target: Reaction) -> bool: pass
 
     ##
-    # \brief Returns the number of recorded reactions-sites in the last call to findReactionSites().
+    # \brief Returns the number of recorded reactions sites in the last call to findReactionSites().
     # 
-    # \return The number of recorded reactions-sites in the last call to findReactionSites().
+    # \return The number of recorded reactions sites in the last call to findReactionSites().
     # 
     def getNumReactionSites() -> int: pass
 
     ##
-    # \brief Returns a reference to the stored reaction-site data object at index <em>idx</em>.
+    # \brief Returns a reference to the stored reaction site data object at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the reaction-site data object to return.
     # 
-    # \return A reference to the reaction-site data object at index <em>idx</em>. 
+    # \return A reference to the reaction-site data object at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReactionSites()).
     # 
     def getReactionSite(idx: int) -> AtomBondMapping: pass
 
     ##
-    # \brief Performs a transformation of the target reactants to corresponding products at the specified reaction-site.
+    # \brief Performs a transformation of the target reactants to corresponding products at the reaction site <em>rxn_site</em>.
     # 
     # The reactant components of the Chem.Reaction object specified in a prior call to findReactionSites() serve as starting materials for the reaction transformation into corresponding product molecules (according to the set reaction pattern). The input molecules are left unchanged by the transformation. New molecules will be generated that are directly stored as the product components of the given target reaction object. Note that the product molecules generated in a previous call will not be discarded and are still accessible after new products have been generated.
     # 
-    # \param rxn_site Specifies the reaction-site where the transformation shall take place.
+    # \param rxn_site Specifies the reaction site where the transformation shall take place.
     # 
     # \see setReactionPattern(), findReactionSites()
     # 

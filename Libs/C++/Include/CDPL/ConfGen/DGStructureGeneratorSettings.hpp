@@ -58,13 +58,13 @@ namespace CDPL
 
             /**
              * \brief Sets the edge length of the bounding box used by the distance-geometry embedder.
-             * \param size The new bounding-box edge length.
+             * \param size The new bounding box edge length.
              */
             void setBoxSize(double size);
 
             /**
              * \brief Returns the edge length of the bounding box used by the distance-geometry embedder.
-             * \return The bounding-box edge length.
+             * \return The bounding box edge length.
              */
             double getBoxSize() const;
 

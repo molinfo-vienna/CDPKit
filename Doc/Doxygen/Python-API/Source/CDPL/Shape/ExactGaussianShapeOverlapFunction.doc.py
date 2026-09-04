@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Shape.GaussianShapeOverlapFunction implementation that evaluates the overlap analytically using the full Gaussian-product expansion (no approximations).
+# \brief Shape.GaussianShapeOverlapFunction implementation that evaluates the overlap analytically using the full Gaussian product expansion (no approximations).
 # 
 # The exact evaluation is more accurate but typically slower than Shape.FastGaussianShapeOverlapFunction.
 # 

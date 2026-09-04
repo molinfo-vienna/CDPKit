@@ -34,7 +34,7 @@ class Atom2DCoordinatesCalculator(Boost.Python.instance):
     ##
     # \brief Constructs the <tt>Atom2DCoordinatesCalculator</tt> instance and calculates 2D coordinates for the atoms of the molecular graph <em>molgraph</em>.
     # 
-    # The coordinate are stored in the same order as the atoms appear in the atom list of the molecular graph so that the coordinates of an atom are accessible via its index.
+    # The generated coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph so that the coordinates of an atom are accessible via its index.
     # 
     # \param molgraph The molecular graph for which to calculate atom 2D coordinates.
     # \param coords An array containing the calculated 2D coordinates.
@@ -56,7 +56,7 @@ class Atom2DCoordinatesCalculator(Boost.Python.instance):
     ##
     # \brief Calculates 2D coordinates for the atoms of the molecular graph <em>molgraph</em>.
     # 
-    # The coordinate are stored in the same order as the atoms appear in the atom list of the molecular graph so that the coordinates of an atom are accessible via its index.
+    # The generated coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph so that the coordinates of an atom are accessible via its index.
     # 
     # \param molgraph The molecular graph for which to calculate atom 2D coordinates.
     # \param coords An array containing the calculated 2D coordinates.

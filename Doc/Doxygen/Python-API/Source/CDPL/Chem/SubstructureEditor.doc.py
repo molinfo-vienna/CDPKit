@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Pattern-driven editor that rewrites matched substructures of a Chem.Molecule using a result template, with optional exclude patterns guarding sites that must not be touched.
+# \brief Pattern-driven editor that rewrites matched substructures of a molecule according to a given editing template.
 # 
 # Search patterns supply the substructures the editor will look for. The (single) result pattern defines what each match is rewritten to and exclude patterns mark matches that must be skipped (a search match is discarded when its atoms/bonds form a subset of any exclude match). The editor iterates until no further matches can be transformed and returns the number of applied edits.
 # 
@@ -36,7 +36,7 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Constructs a copy of the <tt>SubstructureEditor</tt> instance <em>editor</em>.
     # 
-    # \param editor The <tt>SubstructureEditor</tt> instance to copy.
+    # \param editor The other editor instance to copy.
     # 
     def __init__(editor: SubstructureEditor) -> None: pass
 
@@ -62,7 +62,7 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Appends a new substructure search pattern to the current set of patterns.
     # 
-    # \param molgraph The molecular graph of the substructure search pattern to add.
+    # \param molgraph A smart reference to the molecular graph of the substructure search pattern to add.
     # 
     def addSearchPattern(molgraph: MolecularGraph) -> None: pass
 
@@ -74,59 +74,59 @@ class SubstructureEditor(Boost.Python.instance):
     def getNumSearchPatterns() -> int: pass
 
     ##
-    # \brief Returns the molecular graph of the search pattern at index <em>idx</em>.
+    # \brief Returns the molecular graph of the substructure search pattern at index <em>idx</em>.
     # 
-    # \param idx The zero-based search-pattern index.
+    # \param idx The zero-based search pattern index.
     # 
-    # \return The molecular graph of the search pattern at index <em>idx</em>. 
+    # \return A smart reference to the molecular graph of the search pattern at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns()).
     # 
     def getSearchPattern(idx: int) -> MolecularGraph: pass
 
     ##
-    # \brief Removes the search pattern at index <em>idx</em>.
+    # \brief Removes the substructure search pattern at index <em>idx</em>.
     # 
-    # \param idx The zero-based search-pattern index to remove.
+    # \param idx The zero-based search pattern index.
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns()).
     # 
     def removeSearchPattern(idx: int) -> None: pass
 
     ##
-    # \brief Clears the current set of substructuresearch patterns.
+    # \brief Clears the current set of substructure search patterns.
     # 
     def clearSearchPatterns() -> None: pass
 
     ##
     # \brief Appends a new substructure exclude pattern to the current set of patterns.
     # 
-    # \param molgraph The molecular graph of the substructure exclude pattern to add.
+    # \param molgraph A smart reference to the molecular graph of the substructure exclude pattern to add.
     # 
     def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Returns the number of stored substructure-exclude patterns.
+    # \brief Returns the number of stored substructure exclude patterns.
     # 
     # \return The number of stored exclude patterns.
     # 
     def getNumExcludePatterns() -> int: pass
 
     ##
-    # \brief Returns the molecular graph of the exclude pattern at index <em>idx</em>.
+    # \brief Returns the molecular graph of the substructure exclude pattern at index <em>idx</em>.
     # 
-    # \param idx The zero-based exclude-pattern index.
+    # \param idx The zero-based exclude pattern index.
     # 
-    # \return The molecular graph of the exclude pattern at index <em>idx</em>. 
+    # \return A smart reference to the molecular graph of the exclude pattern at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
     def getExcludePattern(idx: int) -> MolecularGraph: pass
 
     ##
-    # \brief Removes the exclude pattern at index <em>idx</em>.
+    # \brief Removes the substructure exclude pattern at index <em>idx</em>.
     # 
-    # \param idx The zero-based exclude-pattern index to remove.
+    # \param idx The zero-based exclude pattern index.
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
@@ -142,7 +142,7 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Returns the currently set result pattern.
     # 
-    # \return The currently set result pattern, or a null reference if none has been set.
+    # \return A smart reference to the molecular graph of the currently set result pattern, or a null reference if none has been set.
     # 
     def getResultPattern() -> MolecularGraph: pass
 
@@ -152,7 +152,7 @@ class SubstructureEditor(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Edits <em>mol</em> in place by applying the result pattern at every search-pattern match that is not covered by an exclude pattern; repeats until no further changes occur.
+    # \brief Edits the molecule <em>mol</em> in place by applying the result pattern at every search pattern match that is not covered by an exclude pattern.
     # 
     # \param mol The molecule to edit.
     # 
@@ -161,7 +161,7 @@ class SubstructureEditor(Boost.Python.instance):
     def edit(mol: Molecule) -> int: pass
 
     ##
-    # \brief Copies <em>molgraph</em> into <em>res_mol</em> and then edits <em>res_mol</em> via edit(Molecule&).
+    # \brief Copies the molecular graph <em>molgraph</em> into the molecule <em>res_mol</em> and then edits it by calling edit(Molecule&).
     # 
     # \param molgraph The source molecular graph.
     # \param res_mol The molecule receiving the edited result.

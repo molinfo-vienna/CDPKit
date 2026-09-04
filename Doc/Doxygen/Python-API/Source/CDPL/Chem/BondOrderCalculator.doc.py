@@ -34,7 +34,7 @@ class BondOrderCalculator(Boost.Python.instance):
     ##
     # \brief Constructs the <tt>BondOrderCalculator</tt> instance and perceives the order of the bonds in the molecular graph <em>molgraph</em>.
     # 
-    # The orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so that the order of a particular bond is accessible via its index.
+    # The perceived orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so that the order of a particular bond is accessible via its index.
     # 
     # \param molgraph The molecular graph for which to perceive the bond orders.
     # \param orders An array containing the perceived bond orders.
@@ -73,7 +73,7 @@ class BondOrderCalculator(Boost.Python.instance):
     ##
     # \brief Perceives the order of the bonds in the molecular graph <em>molgraph</em> from its 3D structure and atom connectivity.
     # 
-    # The orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so that the order of a particular bond is accessible via its index.
+    # The perceived orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so that the order of a particular bond is accessible via its index.
     # 
     # \param molgraph The molecular graph for which to perceive the bond orders.
     # \param orders An array containing the perceived bond orders.

@@ -23,7 +23,7 @@
 # \brief Shape.GaussianShapeOverlapFunction implementation that uses two approximation techniques to trade some accuracy for a substantial speedup compared to Shape.ExactGaussianShapeOverlapFunction.
 # 
 # Two independent acceleration features can be enabled:
-#  - <b>Proximity optimization</b> prunes Gaussian-product pair contributions based on a scaled van-der-Waals proximity test (see setRadiusScalingFactor()).
+#  - <b>Proximity optimization</b> prunes Gaussian product pair contributions based on a scaled Van der Waals proximity test (see setRadiusScalingFactor()).
 #  - <b>Fast exponential function</b> replaces the expensive <tt>std::exp</tt> call with a fast approximation that is accurate enough for screening-style overlap evaluation.
 # 
 class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
@@ -63,14 +63,14 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     def assign(func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass
 
     ##
-    # \brief Enables or disables the proximity-check pruning of Gaussian-product pair contributions.
+    # \brief Enables or disables the proximity check pruning of Gaussian product pair contributions.
     # 
     # \param enable <tt>True</tt> to enable the proximity check, and <tt>False</tt> to disable it.
     # 
     def proximityOptimization(enable: bool) -> None: pass
 
     ##
-    # \brief Tells whether the proximity-check pruning is enabled.
+    # \brief Tells whether the proximity check pruning is enabled.
     # 
     # \return <tt>True</tt> if the proximity check is enabled, and <tt>False</tt> otherwise.
     # 
@@ -93,14 +93,14 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     ##
     # \brief Enables or disables the use of a fast approximation for the exponential function.
     # 
-    # \param enable <tt>True</tt> to enable the fast-exponential approximation, and <tt>False</tt> to use the standard exponential.
+    # \param enable <tt>True</tt> to enable the fast exponential approximation, and <tt>False</tt> to use the standard exponential.
     # 
     def fastExpFunction(enable: bool) -> None: pass
 
     ##
-    # \brief Tells whether the fast-exponential approximation is enabled.
+    # \brief Tells whether the fast exponential approximation is enabled.
     # 
-    # \return <tt>True</tt> if the fast-exponential approximation is enabled, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if the fast exponential approximation is enabled, and <tt>False</tt> otherwise.
     # 
     def fastExpFunction() -> bool: pass
 

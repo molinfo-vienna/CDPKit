@@ -73,7 +73,7 @@ namespace CDPL
              * \brief Constructs the \c %BondOrderCalculator instance and perceives the order of the bonds
              *        in the molecular graph \a molgraph.
              *
-             * The orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so
+             * The perceived orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so
              * that the order of a particular bond is accessible via its index.
              *
              * \param molgraph The molecular graph for which to perceive the bond orders.
@@ -99,7 +99,7 @@ namespace CDPL
              * \brief Perceives the order of the bonds in the molecular graph \a molgraph from its 3D structure 
              *        and atom connectivity.
              *
-             * The orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so
+             * The perceived orders are stored in the same sequence as the bonds appear in the bond list of the molecular graph so
              * that the order of a particular bond is accessible via its index.
              *
              * \param molgraph The molecular graph for which to perceive the bond orders.

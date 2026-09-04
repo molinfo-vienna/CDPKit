@@ -20,9 +20,7 @@
 #
 
 ##
-# \brief Computes a canonical atom numbering of a molecular graph using a modified Morgan algorithm.
-# 
-# The result is an array of canonical atom indices in the same order as the molecular graph's atom list, so the canonical number of an atom is accessible via its index. Symmetry classes are broken by additional invariants (atomic symbol, formal charge, isotope, bond multiplicity).
+# \brief Computes canonical atom numberings for molecular graphs using Morgan's algorithm.
 # 
 # \see [\ref MOCAN]
 # 
@@ -36,8 +34,10 @@ class MorganNumberingCalculator(Boost.Python.instance):
     ##
     # \brief Constructs the <tt>MorganNumberingCalculator</tt> instance and performs a canonical numbering of the atoms in the molecular graph <em>molgraph</em>.
     # 
+    # The generated atom labels are stored in the same order as the atoms appear in the atom list of the molecular graph so that the label of an atom is accessible via its index.
+    # 
     # \param molgraph The molecular graph for which to perform the canonical numbering.
-    # \param numbering An array that contains the calculated canonical atom numbering. The numbers are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the canonical number of an atom is accessible via its index).
+    # \param numbering An array that contains the calculated canonical atom numbering.
     # 
     def __init__(molgraph: MolecularGraph, numbering: Util.STArray) -> None: pass
 
@@ -56,8 +56,10 @@ class MorganNumberingCalculator(Boost.Python.instance):
     ##
     # \brief Performs a canonical numbering of the atoms in the molecular graph <em>molgraph</em>.
     # 
+    # The generated atom labels are stored in the same order as the atoms appear in the atom list of the molecular graph so that the label of an atom is accessible via its index.
+    # 
     # \param molgraph The molecular graph for which to perform the canonical numbering.
-    # \param numbering An array that contains the calculated canonical atom numbering. The numbers are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the canonical number of an atom is accessible via its index).
+    # \param numbering An array that contains the calculated canonical atom labels.
     # 
     def calculate(molgraph: MolecularGraph, numbering: Util.STArray) -> None: pass
 

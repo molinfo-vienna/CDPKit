@@ -62,7 +62,7 @@ namespace CDPL
          * Unlike Shape::GaussianShapeAlignment, which delegates the alignment to a separate
          * Shape::GaussianShapeFunctionAlignment instance, \c %FastGaussianShapeAlignment integrates
          * the entire pipeline (start-transform generation, BFGS overlap optimization, result selection)
-         * into one class and operates on a self-contained Gaussian-product representation. The
+         * into one class and operates on a self-contained Gaussian product representation. The
          * configuration combines settings exposed by Shape::PrincipalAxesAlignmentStartGenerator
          * (start-transform options) and the iterative overlap optimization.
          */
@@ -83,7 +83,7 @@ namespace CDPL
             static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
             /**
-             * \brief Default alignment-result selection mode.
+             * \brief Default alignment result selection mode.
              */
             static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
 
@@ -155,13 +155,13 @@ namespace CDPL
 
             /**
              * \brief Specifies the function used to compare two alignment results for sorting and filtering.
-             * \param func The result-compare function.
+             * \param func The result compare function.
              */
             void setResultCompareFunction(const ResultCompareFunction& func);
 
             /**
-             * \brief Returns the currently configured result-compare function.
-             * \return A \c const reference to the result-compare function.
+             * \brief Returns the currently configured result compare function.
+             * \return A \c const reference to the result compare function.
              */
             const ResultCompareFunction& getResultCompareFunction() const;
 
@@ -178,13 +178,13 @@ namespace CDPL
             const ScoringFunction& getScoringFunction() const;
 
             /**
-             * \brief Sets the alignment-result selection mode.
+             * \brief Sets the alignment result selection mode.
              * \param mode The new result-selection mode (see namespace Shape::AlignmentResultSelectionMode).
              */
             void setResultSelectionMode(unsigned int mode);
 
             /**
-             * \brief Returns the currently configured alignment-result selection mode.
+             * \brief Returns the currently configured alignment result selection mode.
              * \return The result-selection mode (see namespace Shape::AlignmentResultSelectionMode).
              */
             unsigned int getResultSelectionMode() const;

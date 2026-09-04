@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Extracts the solvent-accessible surface atoms of a set of atoms.
+# \brief Identifies the accessible surface atoms in a given set of atoms.
 # 
-# For each candidate atom, a configurable number of probe-sphere test points is generated on the atom's van-der-Waals surface and tested against the surrounding atoms (looked up via an internal 3D grid for efficiency). An atom is reported as surface-accessible when at least the minimum required fraction of its test points is reachable by the probe sphere. The probe radius, accessibility threshold, test-point count, and grid parameters can be tuned via the setters; atom 3D coordinates are obtained through a user-replaceable accessor function.
+# For each candidate atom, a configurable number of probe sphere test points is generated on the atom's Van der Waals surface and tested against the surrounding atoms (looked up via an internal 3D grid for efficiency). An atom is reported as surface-accessible when at least the minimum required fraction of its test points is reachable by the probe sphere. The probe radius, accessibility threshold, test point count, and grid parameters can be tuned via the provided dedicated methods. Atom 3D coordinates are obtained through an accessor function that can be customized to specific needs.
 # 
 class SurfaceAtomExtractor(Boost.Python.instance):
 
@@ -32,12 +32,12 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     DEF_PROBE_RADIUS = 1.2
 
     ##
-    # \brief The default margin (in Å) added to each side of the bounding box for the atom-lookup grid.
+    # \brief The default margin (in Å) added to each side of the bounding box for the atom lookup grid.
     # 
     DEF_GRID_OVERSIZE = 5.0
 
     ##
-    # \brief The default distance between grid points (in Å) along each axis of the atom-lookup grid.
+    # \brief The default distance between grid points (in Å) along each axis of the atom lookup grid.
     # 
     DEF_GRID_STEP_SIZE = 0.75
 
@@ -58,9 +58,9 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def __init__(extractor: SurfaceAtomExtractor) -> None: pass
 
     ##
-    # \brief Perceives the surface accessible atoms of <em>cntnr</em> and adds them to the fragment <em>frag</em>.
+    # \brief Perceives the surface-accessible atoms of <em>cntnr</em> and adds them to the fragment <em>frag</em>.
     # 
-    # \param cntnr The set of atoms for which to perceive the surface accessibility.
+    # \param cntnr The set of atoms for which to perceive the surface-accessibility.
     # \param parent_molgraph The parent molecular graph which embeds the atoms in <em>cntnr</em>.
     # \param frag The output fragment where to store the perceived surface atoms.
     # 
@@ -102,18 +102,18 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def setProbeRadius(radius: float) -> None: pass
 
     ##
-    # \brief Specifies the distance between the grid-points in space which store lists of atoms with proximal positions.
+    # \brief Specifies the distance between the grid points in space which store lists of atoms with proximal positions.
     # 
-    # \param size The distance between the grid-points along each axis.
+    # \param size The distance between the grid points along each axis.
     # 
     # \note The default value is specified by the constant SurfaceAtomExtractor.DEF_GRID_STEP_SIZE.
     # 
     def setGridStepSize(size: float) -> None: pass
 
     ##
-    # \brief Specifies the margin that gets added to each side of the molecular graph's bounding-box for the calculation of the final atom-lookup grid dimensions.
+    # \brief Specifies the margin that gets added to each side of the molecular graph's bounding box for the calculation of the final atom lookup grid dimensions.
     # 
-    # \param size The margin that gets added to the molecular graph's bounding-box.
+    # \param size The margin that gets added to the molecular graph's bounding box.
     # 
     # \note The default value is specified by the constant SurfaceAtomExtractor.DEF_GRID_OVERSIZE.
     # 
@@ -129,7 +129,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def setMinSurfaceAccessibility(min_acc: float) -> None: pass
 
     ##
-    # \brief Specifies the number of points on the atom surface at which a test for surface accessibility is carried out.
+    # \brief Specifies the number of points on the atom surface at which a test for surface-accessibility is carried out.
     # 
     # \param num_points The number of test points.
     # 
@@ -145,16 +145,16 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def getProbeRadius() -> float: pass
 
     ##
-    # \brief Return the distance between the grid-points for proximal atom lookup.
+    # \brief Return the distance between the grid points for proximal atom lookup.
     # 
-    # \return The used distance between the grid-points along each axis.
+    # \return The used distance between the grid points along each axis.
     # 
     def getGridStepSize() -> float: pass
 
     ##
-    # \brief Returns the margin that gets added to each side of the molecular graph's bounding-box for the calculation of the final atom-lookup grid dimensions.
+    # \brief Returns the margin that gets added to each side of the molecular graph's bounding box for the calculation of the final atom lookup grid dimensions.
     # 
-    # \return The margin that gets added to the molecular graph's bounding-box.
+    # \return The margin that gets added to the molecular graph's bounding box.
     # 
     def getGridOversize() -> float: pass
 
@@ -166,7 +166,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def getMinSurfaceAccessibility() -> float: pass
 
     ##
-    # \brief Returns the number of points on the atom surface at which a test for surface accessibility is carried out.
+    # \brief Returns the number of points on the atom surface at which a test for surface-accessibility is carried out.
     # 
     # \return The number of test points.
     # 

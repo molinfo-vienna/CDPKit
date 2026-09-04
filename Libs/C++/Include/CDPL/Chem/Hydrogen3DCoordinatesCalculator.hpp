@@ -57,8 +57,8 @@ namespace CDPL
          * For every hydrogen-bearing center the calculator picks a coordination geometry (linear, trigonal-planar,
          * tetrahedral, square-planar, trigonal-/pentagonal-bipyramidal or octahedral) consistent with the heavy atom
          * neighborhood and places the hydrogens at appropriate template positions, oriented to avoid clashes with
-         * already-positioned substituents. Heavy-atom coordinates can be supplied through user-defined accessor
-         * functions; by default only hydrogens without 3D coordinates are placed (see undefinedOnly()).
+         * already positioned substituents. Heavy-atom coordinates can be supplied through user-defined accessor
+         * functions. By default only hydrogens without specified 3D coordinates are placed (see undefinedOnly()).
          */
         class CDPL_CHEM_API Hydrogen3DCoordinatesCalculator
         {
@@ -73,27 +73,25 @@ namespace CDPL
              * \brief Constructs the \c %Hydrogen3DCoordinatesCalculator instance and calculates 3D coordinates for
              *        the hydrogen atoms of the molecular graph \a molgraph.
              *
-             * The calculated coordinates can be retrieved by a call to getResult().
+             * The output coordinates are stored in the same order as the atoms appear in the atom list of
+             * the molecular graph so that the coordinates of an atom are accessible via its index.
              *
-             * \param molgraph The molecular graph for which to calculate 3D coordinates.
-             * \param coords An array containing the heavy atom and calculated hydrogen 3D coordinates. The coordinates
-             *         are stored in the same order as the atoms appear in the atom list of
-             *         the molecular graph (i.e. the coordinates of an atom are accessible via
-             *         its index).
-             * \param undef_only Specifies whether or not to recalculate already defined hydrogen atom coordinates.
+             * \param molgraph The molecular graph for which to calculate hydrogen 3D coordinates.
+             * \param coords An array containing the output heavy atom and hydrogen 3D coordinates.
+             * \param undef_only Specifies whether or not to recalculate already defined hydrogen 3D coordinates.
              */
             Hydrogen3DCoordinatesCalculator(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool undef_only = true);
 
             /**
-             * \brief Allows to specify whether already defined hydrogen atom coordinates have to be recalculated or are left unchanged.
-             * \param undef_only \c true if already defined hydrogen atom coordinates have to be left unchanged, and \c false otherwise.
-             * \note The default setting is to calculate coordinates only for hydrogens with not yet defined positions.
+             * \brief Allows to specify whether already defined hydrogen atom 3D coordinates have to be recalculated or are left unchanged.
+             * \param undef_only \c true if already defined hydrogen 3D coordinates have to be left unchanged, and \c false otherwise.
+             * \note The default setting is to calculate coordinates only for hydrogens without defined 3D coordinates.
              */
             void undefinedOnly(bool undef_only);
 
             /**
-             * \brief Tells whether already defined hydrogen atom coordinates are recalculated or left unchanged.
-             * \return \c true if already defined hydrogen atom coordinates are left unchanged, and \c false otherwise.
+             * \brief Tells whether already defined hydrogen atom 3D coordinates are recalculated or left unchanged.
+             * \return \c true if already defined hydrogen 3D coordinates are left unchanged, and \c false otherwise.
              */
             bool undefinedOnly() const;
 
@@ -111,21 +109,20 @@ namespace CDPL
 
             /**
              * \brief Specifies a function for the retrieval of atom 3D coordinates.
-             * \param func The atom 3D coordinates function.
+             * \param func The atom 3D coordinates retrieval function.
              */
             void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
             /**
              * \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
-             * \return The registered atom 3D coordinates function.
+             * \return The registered atom 3D coordinates retrieval function.
              */
             const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
             /**
-             * \brief Initializes the calculator for the molecular graph \a molgraph (perceives hydrogen-bearing centers
-             *        and prepares the working state) without yet writing any coordinates.
+             * \brief Initializes the calculator for the molecular graph \a molgraph.
              *
-             * Call calculate(Math::Vector3DArray&, bool) afterwards to perform the placement.
+             * The actual hydrogen placement is performed by calling calculate(Math::Vector3DArray&, bool).
              *
              * \param molgraph The molecular graph for which to set up the calculation.
              */
@@ -133,22 +130,26 @@ namespace CDPL
 
             /**
              * \brief Calculates 3D coordinates for the hydrogen atoms of the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to calculate 3D coordinates.
-             * \param coords An array containing the heavy atom and calculated hydrogen 3D coordinates. The coordinates
-             *         are stored in the same order as the atoms appear in the atom list of
-             *         the molecular graph (i.e. the coordinates of an atom are accessible via
-             *         its index).
-             * \param init_coords If \c false, defined atom coordinates are already present in \a coords and thus won't get assigned again.
+             *
+             * The output coordinates are stored in the same order as the atoms appear in the atom list of
+             * the molecular graph so that the coordinates of an atom are accessible via its index.
+             *
+             * \param molgraph The molecular graph for which to calculate hydrogen 3D coordinates.
+             * \param coords An array containing the output heavy atom and hydrogen 3D coordinates.
+             * \param init_coords If \c false, defined atom 3D coordinates are already present in \a coords
+             *                    and thus won't get assigned again.
              */
             void calculate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool init_coords = true);
 
             /**
              * \brief Calculates 3D coordinates for the hydrogen atoms of the molecular graph previously specified via setup().
-             * \param coords An array containing the heavy atom and calculated hydrogen 3D coordinates. The coordinates
-             *         are stored in the same order as the atoms appear in the atom list of
-             *         the molecular graph (i.e. the coordinates of an atom are accessible via
-             *         its index).
-             * \param init_coords If \c false, defined atom coordinates are already present in \a coords and thus won't get assigned again.
+             *
+             * The output coordinates are stored in the same order as the atoms appear in the atom list of
+             * the molecular graph so that the coordinates of an atom are accessible via its index.
+             *
+             * \param coords An array containing the output heavy atom and hydrogen 3D coordinates. 
+             * \param init_coords If \c false, defined atom 3D coordinates are already present in \a coords
+             *                    and thus won't get assigned again.
              */
             void calculate(Math::Vector3DArray& coords, bool init_coords = true);
 

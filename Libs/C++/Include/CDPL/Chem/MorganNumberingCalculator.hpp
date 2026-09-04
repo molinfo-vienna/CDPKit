@@ -1,9 +1,6 @@
 /* 
  * MorganNumberingCalculator.hpp 
  *
- * Morgan Algorithm for canonical numbering
- * (H. L. Morgan, J. Chem. Doc. 1965, 5, 107)
- *
  * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
@@ -51,12 +48,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Computes a canonical atom numbering of a molecular graph using a modified Morgan algorithm.
-         *
-         * The result is an array of canonical atom indices in the same order as the molecular graph's atom list,
-         * so the canonical number of an atom is accessible via its index. Symmetry classes are broken by
-         * additional invariants (atomic symbol, formal charge, isotope, bond multiplicity).
-         *
+         * \brief Computes canonical atom numberings for molecular graphs using Morgan's algorithm.
          * \see [\ref MOCAN]
          */
         class CDPL_CHEM_API MorganNumberingCalculator
@@ -71,10 +63,12 @@ namespace CDPL
             /**
              * \brief Constructs the \c %MorganNumberingCalculator instance and performs a canonical numbering
              *        of the atoms in the molecular graph \a molgraph.
+             *
+             * The generated atom labels are stored in the same order as the atoms appear in the atom list of the molecular graph
+             * so that the label of an atom is accessible via its index.
+             *
              * \param molgraph The molecular graph for which to perform the canonical numbering.
-             * \param numbering An array that contains the calculated canonical atom numbering. The numbers
-             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-             *         (i.e. the canonical number of an atom is accessible via its index).
+             * \param numbering An array that contains the calculated canonical atom numbering.
              */
             MorganNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering);
 
@@ -84,10 +78,12 @@ namespace CDPL
 
             /**
              * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
+             *
+             * The generated atom labels are stored in the same order as the atoms appear in the atom list of the molecular graph
+             * so that the label of an atom is accessible via its index.
+             *
              * \param molgraph The molecular graph for which to perform the canonical numbering.
-             * \param numbering An array that contains the calculated canonical atom numbering. The numbers
-             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-             *         (i.e. the canonical number of an atom is accessible via its index).
+             * \param numbering An array that contains the calculated canonical atom labels.
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
