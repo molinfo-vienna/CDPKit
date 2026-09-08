@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Reaction-level analogue of Chem.SubstructureSearch that locates atom/bond mappings of a query reaction pattern in a target reaction.
+# \brief Searches for substructures of the components of a target reaction that match a given query reaction pattern.
 # 
-# Use setQuery() to fix the query reaction and mappingExists() / findMappings() to evaluate it against a target Chem.Reaction. Per-component reaction-role visibility is controlled with setEnabledReactionRoles() (Chem.ReactionRole bitmask). The matcher considers atom-, bond-, and reaction-level Chem.MatchExpression objects attached to the query reaction's components. The result set is bounded by setMaxNumMappings() / uniqueMappingsOnly() and accessed through the same mapping-iterator interface as Chem.SubstructureSearch.
+# Use setQuery() to fix the query reaction pattern and mappingExists() / findMappings() to evaluate it against a specified target Chem.Reaction instance. Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by methods begin() and end(), respectively. Component visibility based on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem.ReactionRole). The search algorithm considers atom-, bond-, and reaction-level Chem.MatchExpression implementation instances attached to the query reaction's components as corresponding property values (see Chem.SubstructureSearch). The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
 # 
 class ReactionSubstructureSearch(Boost.Python.instance):
 
@@ -32,7 +32,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>ReactionSubstructureSearch</tt> instance for the specified query reaction pattern.
+    # \brief Constructs and initializes a <tt>ReactionSubstructureSearch</tt> instance for the specified query reaction pattern <em>query</em>.
     # 
     # \param query The query reaction.
     # 
@@ -51,26 +51,26 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Tells whether the query reaction pattern matches the specified target reaction.
+    # \brief Tells whether the query reaction pattern matches the target reaction <em>target</em>.
     # 
     # The method does not store any atom/bond mappings between the query and target reaction - it just tells if a complete mapping of the query is possible. If you need access to the atom/bond mappings, use findMappings() instead.
     # 
-    # \param target The reaction that has to be searched for a match of the query reaction pattern.
+    # \param target The target reaction that has to be searched for a match of the query.
     # 
-    # \return <tt>True</tt> if the query pattern matches the target reaction, and <tt>False</tt> otherwise. 
+    # \return <tt>True</tt> if the query matches the target reaction, and <tt>False</tt> otherwise. 
     # 
     # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
     # 
     def mappingExists(target: Reaction) -> bool: pass
 
     ##
-    # \brief Searches for all possible atom/bond between the query reaction pattern and the specified target reaction.
+    # \brief Searches for all possible atom/bond mappings between the query reaction pattern and the target reaction <em>target</em>.
     # 
     # The method will store all found atom/bond mapping solutions up to the maximum number of recorded mappings specified by setMaxNumMappings(). If only unique mappings have to be stored (see uniqueMappingsOnly(bool unique)), any duplicates of previously found mappings will be discarded.
     # 
-    # \param target The reaction that has to be searched for matches of the query reaction pattern.
+    # \param target The target reaction that has to be searched for matches of the query.
     # 
-    # \return <tt>True</tt> if the query pattern can be mapped to the specified target reaction, and <tt>False</tt> otherwise. 
+    # \return <tt>True</tt> if the query can be mapped to the specified target reaction, and <tt>False</tt> otherwise. 
     # 
     # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
     # 
@@ -88,7 +88,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the atom/bond mapping object to return.
     # 
-    # \return A reference to the atom/bond mapping object at index <em>idx</em>. 
+    # \return A reference to the Chem.AtomBondMapping object at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 
@@ -97,7 +97,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     ##
     # \brief Allows to specify whether or not to store only unique atom/bond mappings.
     # 
-    # A mapping of the query pattern to the target reaction is considered to be unique if it differs from all previously found mappings by at least one atom or bond. If the <em>unique</em> argument is <tt>True</tt> and a newly discovered mapping covers the same atoms and bonds of the target (including all permutations) as a mapping that was found earlier in the search process, it is considered as a duplicate and will be discarded.
+    # A mapping of the query to the target reaction is considered to be unique if it differs from all previously found mappings by at least one atom or bond. If the <em>unique</em> argument is <tt>True</tt> and a newly discovered mapping covers the same atoms and bonds of the target (including all permutations) as a mapping that was found earlier in the search process, it is considered as a duplicate and will be discarded.
     # 
     # \param unique If <tt>True</tt>, only unique mappings will be stored, and all found mappings otherwise.
     # 
@@ -146,7 +146,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     ##
     # \brief Allows the reaction role specific exclusion of query and target components from the search for matching reaction substructures.
     # 
-    # The <em>roles</em> argument is a bitwise OR combination of the flags defined in namespace Chem.ReactionRole. When the flag for a particular reaction role is missing in the provided bitmask, then all reaction components with this role assignment (both in the query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing' the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
+    # The <em>roles</em> argument is a bitwise OR combination of the flags defined in namespace Chem.ReactionRole. When the flag for a particular reaction role is missing in the provided bitmask then all reaction components with this role assignment (both in the query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing' the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
     # 
     # \param roles A bitmask specifying the non-excluded reaction component roles.
     # 
@@ -155,9 +155,9 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     def setEnabledReactionRoles(roles: int) -> None: pass
 
     ##
-    # \brief Allows to specify a new query reaction pattern.
+    # \brief Sets <em>query</em> as the new query reaction pattern.
     # 
-    # \param query Specifies the reaction pattern to search for.
+    # \param query A reaction that represents the new query.
     # 
     def setQuery(query: Reaction) -> None: pass
 

@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Subgraph-isomorphism search of a query molecular graph against a target molecular graph, implemented after the <em>VF2</em> algorithm.
+# \brief Searches for substructures of a target molecular graph that match the topology of a given query molecular graph.
 # 
-# Successive calls to setQuery() and findMappings() (or mappingExists() for a yes/no answer) produce all atom/bond mapping solutions; mappings are retrieved through the getMapping*() / begin()-end() iterator pair. Per-atom, per-bond and per-molecular graph match expression accessor functions can be installed to extend equivalence beyond pure topology (the defaults pull expressions from the Chem.AtomProperty / Chem.BondProperty / Chem.MolecularGraphProperty objects). Result accumulation is bounded by setMaxNumMappings() and uniqueMappingsOnly(). The search can also be aborted from a callback via stopSearch().
+# Successive calls to setQuery() and findMappings() produce all possible atom/bond mapping solutions. If just the information whether or not a mapping exists is of interest then the method mappingExists() can be used which is more efficient for this purpose (no mappings are recorded and the search stops after first match). Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by methods begin() and end(), respectively. User-defined per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instance accessor functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions saved as corresponding atom, bond and molecular graph property values (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION. Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly(). stopSearch() allows an immediate abort of the search process. Furthermore, query <-> target atom and bond mappings can be restricted to user-defined subsets by the methods addAtomMappingConstraint() and addBondMappingConstraint(), respectively.
 # 
-# \see [\ref VFLIB2]
+# \see [\ref VFLIB2] for details on the underlying algorithm.
 # 
 class SubstructureSearch(Boost.Python.instance):
 
@@ -34,7 +34,7 @@ class SubstructureSearch(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>SubstructureSearch</tt> instance for the specified query structure.
+    # \brief Constructs and initializes a <tt>SubstructureSearch</tt> instance for the query molecular graph <em>query</em>.
     # 
     # \param query A molecular graph that represents the query structure.
     # 
@@ -53,32 +53,32 @@ class SubstructureSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Installs a function that resolves the atom-level Chem.MatchExpression for a query atom.
+    # \brief Installs a function that resolves the Chem.MatchExpression implementation instance for a query atom.
     # 
     # \param func The accessor function to use.
     # 
     def setAtomMatchExpressionFunction(func: AtomMatchExpressionPtrAtomFunctor) -> None: pass
 
     ##
-    # \brief Installs a function that resolves the bond-level Chem.MatchExpression for a query bond.
+    # \brief Installs a function that resolves the Chem.MatchExpression implementation instance for a query bond.
     # 
     # \param func The accessor function to use.
     # 
     def setBondMatchExpressionFunction(func: BondMatchExpressionPtrBondFunctor) -> None: pass
 
     ##
-    # \brief Installs a function that resolves the graph-level Chem.MatchExpression for the query molecular graph.
+    # \brief Installs a function that resolves the Chem.MatchExpression implementation instance for the query molecular graph.
     # 
     # \param func The accessor function to use.
     # 
     def setMolecularGraphMatchExpressionFunction(func: MolGraphMatchExpressionPtrMolGraphFunctor) -> None: pass
 
     ##
-    # \brief Tells whether the query structure matches a substructure of the specified target molecular graph.
+    # \brief Tells whether the query molecular graph matches a substructure of the target molecular graph <em>target</em>.
     # 
-    # The method does not store any atom/bond mappings between the query and target structure - it just tells if a complete mapping of the query is possible. If you need access to the atom/bond mappings, use findMappings() instead.
+    # The method does not store any atom/bond mappings between the query and target molecular graph - it just tells if a complete mapping of the query is possible. If you need access to the atom/bond mappings, use findMappings() instead.
     # 
-    # \param target The molecular graph that has to be searched for a match of the query structure.
+    # \param target The target molecular graph that has to be searched for a match of the query.
     # 
     # \return <tt>True</tt> if the query matches a substructure of the target molecular graph, and <tt>False</tt> otherwise. 
     # 
@@ -87,11 +87,11 @@ class SubstructureSearch(Boost.Python.instance):
     def mappingExists(target: MolecularGraph) -> bool: pass
 
     ##
-    # \brief Searches for all possible atom/bond mappings of the query structure to substructures of the specified target molecular graph.
+    # \brief Searches for all possible atom/bond mappings of the query molecular graph to substructures of the target molecular graph <em>target</em>.
     # 
     # The method will store all found subgraph mapping solutions up to the maximum number of recorded mappings specified by setMaxNumMappings(). If only unique mappings have to be stored (see uniqueMappingsOnly(bool unique)), any duplicates of previously found mappings will be discarded.
     # 
-    # \param target The molecular graph that has to be searched for matches of the query structure.
+    # \param target The target molecular graph that has to be searched for matches of the query.
     # 
     # \return <tt>True</tt> if the query matches at least one substructure of the specified target molecular graph, and <tt>False</tt> otherwise. 
     # 
@@ -100,9 +100,9 @@ class SubstructureSearch(Boost.Python.instance):
     def findMappings(target: MolecularGraph) -> bool: pass
 
     ##
-    # \brief Aborts the currently running subgraph mapping search.
+    # \brief Aborts the currently running substructure search process.
     # 
-    # Intended to be invoked from a callback (typically a match expression evaluator) running on the same thread as findMappings(); once flagged, findMappings() returns at the next loop boundary.
+    # Intended to be invoked from a callback (typically a match expression evaluator) running on the same thread as findMappings(). Once flagged, findMappings() returns at the next loop boundary.
     # 
     def stopSearch() -> None: pass
 
@@ -118,7 +118,7 @@ class SubstructureSearch(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the atom/bond mapping object to return.
     # 
-    # \return A reference to the atom/bond mapping object at index <em>idx</em>. 
+    # \return A reference to the Chem.AtomBondMapping object at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 
@@ -127,7 +127,7 @@ class SubstructureSearch(Boost.Python.instance):
     ##
     # \brief Allows to specify whether or not to store only unique atom/bond mappings.
     # 
-    # A mapping of the query pattern to a substructure of the target molecular graph is considered to be unique if it differs from all previously found mappings by at least one atom or bond. If the <em>unique</em> argument is <tt>True</tt>, and a newly discovered mapping covers the same atoms and bonds of the target (including all permutations) as a mapping that was found earlier in the search process, it is considered as a duplicate and will be discarded.
+    # A mapping of the query to a substructure of the target molecular graph is considered to be unique if it differs from all previously found mappings by at least one atom or bond. If the <em>unique</em> argument is <tt>True</tt>, and a newly discovered mapping covers the same atoms and bonds of the target (including all permutations) as a mapping that was found earlier in the search process, it is considered as a duplicate and will be discarded.
     # 
     # \param unique If <tt>True</tt>, only unique mappings will be stored, and all found mappings otherwise.
     # 
@@ -165,43 +165,43 @@ class SubstructureSearch(Boost.Python.instance):
     def setMaxNumMappings(max_num_mappings: int) -> None: pass
 
     ##
-    # \brief Clears all previously defined query to target atom mapping constraints.
+    # \brief Clears all previously defined query to target molecular graph atom mapping constraints.
     # 
     # \see addAtomMappingConstraint()
     # 
     def clearAtomMappingConstraints() -> None: pass
 
     ##
-    # \brief Adds a constraint on the allowed mappings between query and target structure atoms.
+    # \brief Adds a constraint on the allowed mappings between query and target molecular graph atoms.
     # 
-    # By default, an atom of the query structure is free to match any suitable target structure atom. When this method gets called for a particular query/target atom pair (specified by <em>query_atom_idx</em> and <em>target_atom_idx</em>), future substructure searches will find only those subgraph mapping solutions (if any) where the given query atom maps to the specified target structure atom. Multiple calls to addAtomMappingConstraint() for the same query atom have an additive effect and allow to restrict the valid query atom mappings not only to a single but also a larger set of target structure atoms.
+    # By default, an atom of the query molecular graph is free to match any suitable target atom. When this method gets called for a particular query/target atom pair (specified by <em>query_atom_idx</em> and <em>target_atom_idx</em>), future substructure searches will find only those subgraph mapping solutions (if any) where the given query atom maps to the specified target molecular graph atom. Multiple calls to addAtomMappingConstraint() for the same query atom have an additive effect and allow to restrict the valid query atom mappings not only to a single but also a larger set of target molecular graph atoms.
     # 
-    # \param query_atom_idx The index of the query structure atom.
-    # \param target_atom_idx The index of the target structure atom that has to be matched by the query atom.
+    # \param query_atom_idx The index of the query molecular graph atom.
+    # \param target_atom_idx The index of the target molecular graph atom that has to be matched by the query atom.
     # 
     def addAtomMappingConstraint(query_atom_idx: int, target_atom_idx: int) -> None: pass
 
     ##
-    # \brief Clears all previously defined query to target bond mapping constraints.
+    # \brief Clears all previously defined query to target molecular graph bond mapping constraints.
     # 
     # \see addBondMappingConstraint()
     # 
     def clearBondMappingConstraints() -> None: pass
 
     ##
-    # \brief Adds a constraint on the allowed mappings between query and target structure bonds.
+    # \brief Adds a constraint on the allowed mappings between query and target molecular graph bonds.
     # 
-    # By default, a bond of the query structure is free to match any suitable target structure bond. When this method gets called for a particular query/target bond pair (specified by <em>query_bond_idx</em> and <em>target_bond_idx</em>), future substructure searches will find only those subgraph mapping solutions (if any) where the given query bond maps to the specified target structure bond. Multiple calls to addBondMappingConstraint() for the same query bond have an additive effect and allow to restrict the valid query bond mappings not only to a single but also a larger set of target structure bonds.
+    # By default, a bond of the query molecular graph is free to match any suitable target bond. When this method gets called for a particular query/target bond pair (specified by <em>query_bond_idx</em> and <em>target_bond_idx</em>), future substructure searches will find only those subgraph mapping solutions (if any) where the given query bond maps to the specified target molecular graph bond. Multiple calls to addBondMappingConstraint() for the same query bond have an additive effect and allow to restrict the valid query bond mappings not only to a single but also a larger set of target molecular graph bonds.
     # 
-    # \param query_bond_idx The index of the query structure bond.
-    # \param target_bond_idx The index of the target structure bond that has to be matched by the query bond.
+    # \param query_bond_idx The index of the query molecular graph bond.
+    # \param target_bond_idx The index of the target molecular graph bond that has to be matched by the query bond.
     # 
     def addBondMappingConstraint(query_bond_idx: int, target_bond_idx: int) -> None: pass
 
     ##
-    # \brief Allows to specify a new query structure.
+    # \brief Sets <em>query</em> as the new query molecular graph.
     # 
-    # \param query A molecular graph that represents the query structure.
+    # \param query A molecular graph that represents the new query.
     # 
     def setQuery(query: MolecularGraph) -> None: pass
 

@@ -56,15 +56,16 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief Reaction-level analogue of Chem::SubstructureSearch that locates atom/bond mappings of a
-         *        query reaction pattern in a target reaction.
+         * \brief Searches for substructures of the components of a target reaction that match a given query reaction pattern.
          *
-         * Use setQuery() to fix the query reaction and mappingExists() / findMappings() to evaluate it
-         * against a target Chem::Reaction. Per-component reaction-role visibility is controlled with
-         * setEnabledReactionRoles() (Chem::ReactionRole bitmask). The matcher considers atom-, bond-,
-         * and reaction-level Chem::MatchExpression objects attached to the query reaction's components.
-         * The result set is bounded by setMaxNumMappings() / uniqueMappingsOnly() and accessed through
-         * the same mapping-iterator interface as Chem::SubstructureSearch.
+         * Use setQuery() to fix the query reaction pattern and mappingExists() / findMappings() to evaluate it
+         * against a specified target Chem::Reaction instance. Found mappings are recorded as Chem::AtomBondMapping
+         * objects that can be accessed via index through the method getMapping() or iteration using the iterator pair
+         * returned by methods begin() and end(), respectively.
+         * Component visibility based  on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem::ReactionRole).
+         * The search algorithm considers atom-, bond-, and reaction-level Chem::MatchExpression implementation instances attached to the
+         * query reaction's components as corresponding property values (see Chem::SubstructureSearch).
+         * The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
          */
         class CDPL_CHEM_API ReactionSubstructureSearch
         {
@@ -73,12 +74,12 @@ namespace CDPL
 
           public:
             /**
-             * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::AtomBondMapping mapping objects.
              */
             typedef boost::indirect_iterator<ABMappingList::iterator, AtomBondMapping> MappingIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored atom/bond mapping objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::AtomBondMapping objects.
              */
             typedef boost::indirect_iterator<ABMappingList::const_iterator, const AtomBondMapping> ConstMappingIterator;
 
@@ -88,7 +89,7 @@ namespace CDPL
             ReactionSubstructureSearch();
 
             /**
-             * \brief Constructs and initializes a \c %ReactionSubstructureSearch instance for the specified query reaction pattern.
+             * \brief Constructs and initializes a \c %ReactionSubstructureSearch instance for the specified query reaction pattern \a query.
              * \param query The query reaction.
              */
             ReactionSubstructureSearch(const Reaction& query);
@@ -105,35 +106,35 @@ namespace CDPL
             ReactionSubstructureSearch& operator=(const ReactionSubstructureSearch&) = delete;
 
             /**
-             * \brief Allows to specify a new query reaction pattern.
-             * \param query Specifies the reaction pattern to search for.
+             * \brief Sets \a query as the new query reaction pattern.
+             * \param query A reaction that represents the new query.
              */
             void setQuery(const Reaction& query);
 
             /**
-             * \brief Tells whether the query reaction pattern matches the specified target reaction.
+             * \brief Tells whether the query reaction pattern matches the target reaction \a target.
              *
              * The method does not store any atom/bond mappings between the query and target reaction - it just tells
              * if a complete mapping of the query is possible. If you need access to the atom/bond mappings, use findMappings()
              * instead.
              *
-             * \param target The reaction that has to be searched for a match of the query reaction pattern.
-             * \return \c true if the query pattern matches the target reaction, and \c false otherwise.
+             * \param target The target reaction that has to be searched for a match of the query.
+             * \return \c true if the query matches the target reaction, and \c false otherwise.
              * \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be
              *       discarded.
              */
             bool mappingExists(const Reaction& target);
 
             /**
-             * \brief Searches for all possible atom/bond between the query reaction pattern and the specified target
-             *        reaction.
+             * \brief Searches for all possible atom/bond mappings between the query reaction pattern and the target
+             *        reaction \a target.
              *
              * The method will store all found atom/bond mapping solutions up to the maximum number of recorded mappings
              * specified by setMaxNumMappings(). If only unique mappings have to be stored (see uniqueMappingsOnly(bool unique)),
              * any duplicates of previously found mappings will be discarded.
              *
-             * \param target The reaction that has to be searched for matches of the query reaction pattern.
-             * \return \c true if the query pattern can be mapped to the specified target reaction, and \c false
+             * \param target The target reaction that has to be searched for matches of the query.
+             * \return \c true if the query can be mapped to the specified target reaction, and \c false
              *         otherwise.
              * \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be
              *       discarded.
@@ -149,7 +150,7 @@ namespace CDPL
             /**
              * \brief Returns a non-\c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A non-\c const reference to the atom/bond mapping object at index \a idx.
+             * \return A non-\c const reference to the Chem::AtomBondMapping object at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             AtomBondMapping& getMapping(std::size_t idx);
@@ -157,63 +158,63 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A \c const reference to the atom/bond mapping object at index \a idx.
+             * \return A \c const reference to the Chem::AtomBondMapping object at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             const AtomBondMapping& getMapping(std::size_t idx) const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator getMappingsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator getMappingsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator getMappingsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator getMappingsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator begin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator begin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator end();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator end() const;
-
+            
             /**
              * \brief Allows to specify whether or not to store only unique atom/bond mappings.
              *
-             * A mapping of the query pattern to the target reaction is considered to be unique if it differs
+             * A mapping of the query to the target reaction is considered to be unique if it differs
              * from all previously found mappings by at least one atom or bond. If the \a unique argument is \c true and a newly discovered
              * mapping covers the same atoms and bonds of the target (including all permutations) as a mapping that was found earlier
              * in the search process, it is considered as a duplicate and will be discarded.
@@ -253,7 +254,7 @@ namespace CDPL
              * \brief Allows the reaction role specific exclusion of query and target components from the search for matching reaction substructures.
              *
              * The \a roles argument is a bitwise OR combination of the flags defined in namespace Chem::ReactionRole. When the flag for a
-             * particular reaction role is missing in the provided bitmask, then all reaction components with this role assignment (both in the
+             * particular reaction role is missing in the provided bitmask then all reaction components with this role assignment (both in the
              * query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing'
              * the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
              *
