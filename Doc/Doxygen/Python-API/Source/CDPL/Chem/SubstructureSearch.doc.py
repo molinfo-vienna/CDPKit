@@ -22,19 +22,19 @@
 ##
 # \brief Searches for substructures of a target molecular graph that match the topology of a given query molecular graph.
 # 
-# Successive calls to setQuery() and findMappings() produce all possible atom/bond mapping solutions. If just the information whether or not a mapping exists is of interest then the method mappingExists() can be used which is more efficient for this purpose (no mappings are recorded and the search stops after first match). Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by methods begin() and end(), respectively. User-defined per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instance accessor functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions saved as corresponding atom, bond and molecular graph property values (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION. Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly(). stopSearch() allows an immediate abort of the search process. Furthermore, query <-> target atom and bond mappings can be restricted to user-defined subsets by the methods addAtomMappingConstraint() and addBondMappingConstraint(), respectively.
+# Successive calls to setQuery() and findMappings() produce all possible atom/bond mapping solutions. If just the information whether or not a mapping exists is of interest then the method mappingExists() can be used which is more efficient for this purpose (no mappings are recorded and the search stops after the first match). Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. User-defined per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instance accessor functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions saved as corresponding atom, bond and molecular graph property values (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION. Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly(). stopSearch() allows an immediate abort of the search process. Furthermore, query &harr; target atom and bond mappings can be restricted to user-defined subsets by the methods addAtomMappingConstraint() and addBondMappingConstraint(), respectively.
 # 
 # \see [\ref VFLIB2] for details on the underlying algorithm.
 # 
 class SubstructureSearch(Boost.Python.instance):
 
     ##
-    # \brief Constructs and initializes a <tt>SubstructureSearch</tt> instance.
+    # \brief Constructs and initializes the <tt>SubstructureSearch</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>SubstructureSearch</tt> instance for the query molecular graph <em>query</em>.
+    # \brief Constructs and initializes the <tt>SubstructureSearch</tt> instance for the query molecular graph <em>query</em>.
     # 
     # \param query A molecular graph that represents the query structure.
     # 

@@ -59,14 +59,19 @@ namespace CDPL
          * \brief Enumerates all maximal common connected substructures shared between a query and
          *        a target molecular graph.
          *
-         * Unlike Chem::MaxCommonAtomSubstructureSearch / Chem::MaxCommonBondSubstructureSearch, the
+         * Unlike Chem::MaxCommonAtomSubstructureSearch and Chem::MaxCommonBondSubstructureSearch, the
          * matches reported here are required to be \e connected — i.e. each mapping covers a single
-         * connected subgraph of both the query and the target. The usual lifecycle applies: setQuery()
-         * fixes the query, mappingExists() returns a yes/no answer (subject to the
-         * setMinSubstructureSize() lower bound), findAllMappings() enumerates all matches, and the
-         * result set is bounded by setMaxNumMappings() / uniqueMappingsOnly(). Per-atom, -bond and
-         * -graph Chem::MatchExpression objects can be substituted via the corresponding
-         * \c set*MatchExpressionFunction setters.
+         * connected subgraph of both the query and the target. 
+         * Successive calls to setQuery() and findAllMappings()/findMaxMappings() produce all possible common substructure atom/bond mapping solutions.
+         * If just the information whether or not a common subructure exists is of interest then the method mappingExists() can be used
+         * which is more efficient for this purpose.
+         * Found common substructures are recorded as Chem::AtomBondMapping objects that can be accessed via index through
+         * the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively.
+         * User-defined per-atom, per-bond and per-molecular graph Chem::MatchExpression implementation instance accessor
+         * functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions
+         * saved as corresponding atom, bond and molecular graph property values (see Chem::AtomProperty::MATCH_EXPRESSION,
+         * Chem::BondProperty::MATCH_EXPRESSION and Chem::MolecularGraphProperty::MATCH_EXPRESSION.
+         * Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
          *
          * \see [\ref MCSA]
          */
@@ -87,37 +92,37 @@ namespace CDPL
             typedef std::shared_ptr<CommonConnectedSubstructureSearch> SharedPointer;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::AtomBondMapping objects.
              */
             typedef boost::indirect_iterator<ABMappingList::iterator, AtomBondMapping> MappingIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored atom/bond mapping objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::AtomBondMapping objects.
              */
             typedef boost::indirect_iterator<ABMappingList::const_iterator, const AtomBondMapping> ConstMappingIterator;
 
             /**
-             * \brief Type of the functor used to retrieve the atom-level Chem::MatchExpression for a query atom.
+             * \brief Type of the functor used to retrieve the Chem::MatchExpression implementation instance for a query atom.
              */
             typedef std::function<const AtomMatchExprPtr&(const Atom&)>               AtomMatchExpressionFunction;
 
             /**
-             * \brief Type of the functor used to retrieve the bond-level Chem::MatchExpression for a query bond.
+             * \brief Type of the functor used to retrieve the Chem::MatchExpression implementation instance for a query bond.
              */
             typedef std::function<const BondMatchExprPtr&(const Bond&)>               BondMatchExpressionFunction;
 
             /**
-             * \brief Type of the functor used to retrieve the graph-level Chem::MatchExpression for the query molecular graph.
+             * \brief Type of the functor used to retrieve the Chem::MatchExpression implementation instance for the query molecular graph.
              */
             typedef std::function<const MolGraphMatchExprPtr&(const MolecularGraph&)> MolecularGraphMatchExpressionFunction;
 
             /**
-             * \brief Constructs and initializes a \c %CommonConnectedSubstructureSearch instance.
+             * \brief Constructs and initializes the \c %CommonConnectedSubstructureSearch instance.
              */
             CommonConnectedSubstructureSearch();
 
             /**
-             * \brief Constructs and initializes a \c %CommonConnectedSubstructureSearch instance for the specified query structure.
+             * \brief Constructs and initializes the \c %CommonConnectedSubstructureSearch instance for the query molecular graph \a query.
              * \param query A molecular graph that represents the query structure.
              */
             CommonConnectedSubstructureSearch(const MolecularGraph& query);
@@ -134,33 +139,33 @@ namespace CDPL
             CommonConnectedSubstructureSearch& operator=(const CommonConnectedSubstructureSearch&) = delete;
 
             /**
-             * \brief Installs a function that resolves the atom-level Chem::MatchExpression for a query atom.
+             * \brief Installs a function that resolves the Chem::MatchExpression implementation instance for a query atom.
              * \param func The accessor function to use.
              */
             void setAtomMatchExpressionFunction(const AtomMatchExpressionFunction& func);
 
             /**
-             * \brief Installs a function that resolves the bond-level Chem::MatchExpression for a query bond.
+             * \brief Installs a function that resolves the Chem::MatchExpression implementation instance for a query bond.
              * \param func The accessor function to use.
              */
             void setBondMatchExpressionFunction(const BondMatchExpressionFunction& func);
 
             /**
-             * \brief Installs a function that resolves the graph-level Chem::MatchExpression for the query molecular graph.
+             * \brief Installs a function that resolves the Chem::MatchExpression implementation instance for the query molecular graph.
              * \param func The accessor function to use.
              */
             void setMolecularGraphMatchExpressionFunction(const MolecularGraphMatchExpressionFunction& func);
 
             /**
-             * \brief Allows to specify a new query structure.
-             * \param query A molecular graph that represents the query structure.
+             * \brief Sets \a query as the new query molecular graph.
+             * \param query A molecular graph that represents the new query.
              */
             void setQuery(const MolecularGraph& query);
 
             /**
-             * \brief Searches for a common connected substructure between the query and the specified target molecular graph.
+             * \brief Searches for a common connected substructure between the query and the target molecular graph \a target.
              *
-             * The method does not store any atom/bond mappings between query and target substructures - it just tells
+             * The method does not store any atom/bond mappings between query and target molecular graphs - it just tells
              * if a valid common substructure mapping solution involving at least getMinSubstructureSize() atoms could be found. If you need
              * access to the atom/bond mappings, use findAllMappings() or findMaxMappings() instead.
              *
@@ -174,13 +179,13 @@ namespace CDPL
 
             /**
              * \brief Searches for all possible atom/bond mappings of connected query subgraphs to substructures of
-             *        the specified target molecular graph.
+             *        the target molecular graph \a target.
              *
              * The method will store all found common substructure mapping solutions involving at least getMinSubstructureSize() atoms up to
              * the maximum number of recorded mappings specified by setMaxNumMappings(). If only unique mappings have to be
              * stored (see uniqueMappingsOnly(bool unique)), any duplicates of previously found mappings will be discarded.
              *
-             * \param target The molecular graph that has to be searched for all connected substructures in common with the query.
+             * \param target The target molecular graph that has to be searched for all connected substructures in common with the query.
              * \return \c true if common substructures of at least the minimum accepted size were found, and \c false
              *         otherwise.
              * \note Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxMappings() will be
@@ -190,13 +195,13 @@ namespace CDPL
 
             /**
              * \brief Searches for all maximum-sized atom/bond mappings of connected query subgraphs to substructures of
-             *        the specified target molecular graph.
+             *        the target molecular graph \a target.
              *
              * The method will store all maximum-sized common substructure mapping solutions involving at least getMinSubstructureSize() atoms up to
              * the maximum number of recorded mappings specified by setMaxNumMappings(). If only unique mappings have to be stored (see
              * uniqueMappingsOnly(bool unique)), any duplicates of previously found mappings will be discarded.
              *
-             * \param target The molecular graph that has to be searched for all maximum-sized connected substructures in common with the query.
+             * \param target The target molecular graph that has to be searched for all maximum-sized connected substructures in common with the query.
              * \return \c true if common substructures of at least the minimum accepted size were found, and \c false
              *         otherwise.
              * \note Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxMappings() will be
@@ -214,7 +219,7 @@ namespace CDPL
             /**
              * \brief Returns a non-\c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A non-\c const reference to the atom/bond mapping object at index \a idx.
+             * \return A non-\c const reference to the Chem::AtomBondMapping object at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             AtomBondMapping& getMapping(std::size_t idx);
@@ -222,63 +227,63 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A \c const reference to the atom/bond mapping object at index \a idx.
+             * \return A \c const reference to the Chem::AtomBondMapping object at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             const AtomBondMapping& getMapping(std::size_t idx) const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator getMappingsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator getMappingsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator getMappingsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator getMappingsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator begin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator begin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator end();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator end() const;
 
             /**
              * \brief Allows to specify whether or not to store only unique atom/bond mappings.
              *
-             * The mapping of a query pattern subgraph to a substructure of the target molecular graph is considered to be unique if it differs
+             * The mapping of a query subgraph to a substructure of the target molecular graph is considered to be unique if it differs
              * from all previously found mappings by at least one atom or bond. If the \a unique argument is \c true, and a newly discovered
              * mapping covers the same atoms and bonds of the target (including all permutations) as a mapping that was found earlier
              * in the search process, it is considered as a duplicate and will be discarded.

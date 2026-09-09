@@ -62,7 +62,7 @@ namespace CDPL
 
             /**
              * \brief Constructs an \c %BondDirectionMatchExpression instance for the specified matching mode and bond direction constraints.
-             * \param dir_flags A bitwise OR combination of the flags defined in namespace Chem::BondDirection that specifies constraints on
+             * \param dir_flags A bitwise-OR combination of the flags defined in namespace Chem::BondDirection that specifies constraints on
              *                  the direction of matching target bonds.
              * \param not_match Specifies whether the direction of a target bond actually has to match (\c true) or \e not match (\c false)
              *                  the query direction constraints.

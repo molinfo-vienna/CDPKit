@@ -93,7 +93,7 @@ namespace CDPL
 
                 /**
                  * \brief Full-split partitioning: atom pair contributions are grouped by distinct
-                 *        combinations of involved atom types (e.g. Chem::AtomType::C <-> Chem::AtomType::Cl, see class documentation
+                 *        combinations of involved atom types (e.g. Chem::AtomType::C &harr; Chem::AtomType::Cl, see class documentation
                  *        for considered atom types).
                  */
                 FULL_SPLIT

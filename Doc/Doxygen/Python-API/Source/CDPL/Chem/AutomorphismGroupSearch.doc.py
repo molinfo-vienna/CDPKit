@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Enumerates the atom/bond automorphisms of a molecular graph.
+# \brief Enumerates the atom and bond self-mappings (automorphism group) of a molecular graph.
 # 
-# The automorphism group of a molecular graph is the set of self-mappings (atom-permutations and the induced bond-permutations) that preserve the molecular graph structure under the configured atom and bond property flags. Atom and bond matching is configurable via the Chem.AtomPropertyFlag and Chem.BondPropertyFlag bit masks. Found mappings are stored as Chem.AtomBondMapping objects and can be iterated or accessed by index.
+# The automorphism group of a molecular graph is the set of self-mappings (atom permutations and the induced bond permutations) that preserve the molecular graph structure under the configured atom and bond mapping constraints. Atom and bond matching is configurable via bit masks composed by a bitwise-OR combination of the constants defined in namespace Chem.AtomPropertyFlag and Chem.BondPropertyFlag that are set using the methods setAtomPropertyFlags() and setBondPropertyFlags(), respectively. Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(). The method setFoundMappingCallback() allows to register a user-defined callback function that gets invoked whenever a new mapping has been found. The maximum number of stored solutions can be bounded by setMaxNumMappings() and stopSearch() allows an immediate abort of the search process. Furthermore, query &harr; target atom and bond mappings can be restricted to user-defined subsets by the methods addAtomMappingConstraint() and addBondMappingConstraint(), respectively.
 # 
 class AutomorphismGroupSearch(Boost.Python.instance):
 
     ##
-    # \brief Constructs and initializes a <tt>AutomorphismGroupSearch</tt> instance.
+    # \brief Constructs and initializes the <tt>AutomorphismGroupSearch</tt> instance for the specified atom and bond properties.
     # 
     # \param atom_flags The bitwise-OR combination of Chem.AtomPropertyFlag values considered for atom matching.
     # \param bond_flags The bitwise-OR combination of Chem.BondPropertyFlag values considered for bond matching.
@@ -89,7 +89,7 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def identityMappingIncluded() -> bool: pass
 
     ##
-    # \brief Searches for the possible atom/bond mappings in the automorphism group of the given molecular graph.
+    # \brief Searches for the possible atom/bond mappings in the automorphism group of the molecular graph <em>molgraph</em>.
     # 
     # The method will store all found mappings up to the maximum number of recorded mappings specified by setMaxNumMappings().
     # 
@@ -120,7 +120,7 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the atom/bond mapping object to return.
     # 
-    # \return A reference to the atom/bond mapping object at index <em>idx</em>. 
+    # \return A reference to the Chem.AtomBondMapping object at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 
@@ -183,16 +183,16 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     ##
     # \brief Sets a callback that is invoked for every atom/bond mapping found during findMappings().
     # 
-    # Returning <tt>False</tt> from the callback aborts the search (equivalent to calling stopSearch()).
+    # Returning <tt>False</tt> from the callback discards the found mapping (will not be part of the search results).
     # 
-    # \param func The new found-mapping callback.
+    # \param func The new callback function.
     # 
     def setFoundMappingCallback(func: BoolMolecularGraphAtomBondMappingFunctor) -> None: pass
 
     ##
-    # \brief Returns the currently installed found-mapping callback.
+    # \brief Returns the currently installed callback function invoked for every found atom/bond mapping.
     # 
-    # \return A reference to the found-mapping callback.
+    # \return A reference to the installed callback function.
     # 
     def getFoundMappingCallback() -> BoolMolecularGraphAtomBondMappingFunctor: pass
 

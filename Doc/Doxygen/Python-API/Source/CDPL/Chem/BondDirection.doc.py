@@ -42,7 +42,7 @@ class BondDirection(Boost.Python.instance):
     # \brief In a substructure search query pattern this flag indicates that the specified query bond direction is not mandatory and that target bonds with an unspecified direction shall also be considered as a match.
     # 
     # The flag only has a meaning for directional bonds in <em>SMARTS</em> patterns where
-    #  - its resulting bitwise OR combination with BondDirection.UP specifies that a matching target bond is required to have an <em>upward or unspecified</em> direction
+    #  - its resulting bitwise-OR combination with BondDirection.UP specifies that a matching target bond is required to have an <em>upward or unspecified</em> direction
     #  - and its combination with BondDirection.DOWN specifies that a target bond must have a <em>downward or unspecified</em> direction to be considered as a match.
     # 
     UNSPECIFIED = 4

@@ -40,7 +40,7 @@ namespace CDPL
          * \brief Provides flags that are used to describe state changes of atoms and bonds in a
          *        reaction center.
          * \note The flags ReactionCenterStatus::IS_CENTER, ReactionCenterStatus::BOND_MADE, ReactionCenterStatus::BOND_BROKEN,
-         *       and ReactionCenterStatus::BOND_ORDER_CHANGE may be combined by bitwise OR operations to obtain a composite
+         *       and ReactionCenterStatus::BOND_ORDER_CHANGE may be combined by bitwise-OR operations to obtain a composite
          *       reaction center state.
          */
         namespace ReactionCenterStatus

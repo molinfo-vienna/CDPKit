@@ -33,7 +33,7 @@ class BondReactionCenterStatusMatchExpression(BondMatchExpression):
     ##
     # \brief Constructs a <tt>BondReactionCenterStatusMatchExpression</tt> instance for the specified query reaction center status.
     # 
-    # \param status The query reaction center status as a (valid) bitwise OR combination of the flags defined in namespace Chem.ReactionCenterStatus. The following flags are supported: Chem.ReactionCenterStatus.NO_CENTER, Chem.ReactionCenterStatus.IS_CENTER, Chem.ReactionCenterStatus.BOND_MADE, Chem.ReactionCenterStatus.BOND_BROKEN, Chem.ReactionCenterStatus.BOND_ORDER_CHANGE and Chem.ReactionCenterStatus.NO_CHANGE - all other flags are ignored. For valid flag combinations see __call__().
+    # \param status The query reaction center status as a (valid) bitwise-OR combination of the flags defined in namespace Chem.ReactionCenterStatus. The following flags are supported: Chem.ReactionCenterStatus.NO_CENTER, Chem.ReactionCenterStatus.IS_CENTER, Chem.ReactionCenterStatus.BOND_MADE, Chem.ReactionCenterStatus.BOND_BROKEN, Chem.ReactionCenterStatus.BOND_ORDER_CHANGE and Chem.ReactionCenterStatus.NO_CHANGE - all other flags are ignored. For valid flag combinations see __call__().
     # 
     def __init__(status: int) -> None: pass
 

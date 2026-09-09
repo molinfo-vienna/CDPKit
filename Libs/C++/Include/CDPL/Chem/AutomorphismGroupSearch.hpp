@@ -46,13 +46,21 @@ namespace CDPL
     {
 
         /**
-         * \brief Enumerates the atom/bond automorphisms of a molecular graph.
+         * \brief Enumerates the atom and bond self-mappings (automorphism group) of a molecular graph.
          *
-         * The automorphism group of a molecular graph is the set of self-mappings (atom-permutations and
-         * the induced bond-permutations) that preserve the molecular graph structure under the configured
-         * atom and bond property flags. Atom and bond matching is configurable via the Chem::AtomPropertyFlag
-         * and Chem::BondPropertyFlag bit masks. Found mappings are stored as Chem::AtomBondMapping objects
-         * and can be iterated or accessed by index.
+         * The automorphism group of a molecular graph is the set of self-mappings (atom permutations and
+         * the induced bond permutations) that preserve the molecular graph structure under the configured
+         * atom and bond mapping constraints. %Atom and bond matching is configurable via bit masks composed by
+         * a bitwise-OR combination of the constants defined in namespace Chem::AtomPropertyFlag
+         * and Chem::BondPropertyFlag that are set using the methods setAtomPropertyFlags() and setBondPropertyFlags(), respectively.
+         * Found mappings are recorded as Chem::AtomBondMapping objects that can be accessed via index through
+         * the method getMapping() or iteration using the iterator pair returned by the methods begin() and end().
+         * The method setFoundMappingCallback() allows to register a user-defined callback function that gets invoked
+         * whenever a new mapping has been found.
+         * The maximum number of stored solutions can be bounded by setMaxNumMappings() and stopSearch() allows an immediate
+         * abort of the search process.
+         * Furthermore, query &harr; target atom and bond mappings can be restricted to user-defined subsets by the methods
+         * addAtomMappingConstraint() and addBondMappingConstraint(), respectively.
          */
         class CDPL_CHEM_API AutomorphismGroupSearch
         {
@@ -79,22 +87,24 @@ namespace CDPL
             typedef std::shared_ptr<AutomorphismGroupSearch> SharedPointer;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::AtomBondMapping objects.
              */
             typedef SubstructureSearch::MappingIterator MappingIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored atom/bond mapping objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::AtomBondMapping objects.
              */
             typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
 
             /**
-             * \brief Type of the callback invoked for every found mapping (return \c false to abort the search).
+             * \brief Type of the callback function invoked for every found mapping.
+             *
+             * Returning \c false discards the mapping.
              */
             typedef std::function<bool(const MolecularGraph&, const AtomBondMapping&)> MappingCallbackFunction;
 
             /**
-             * \brief Constructs and initializes a \c %AutomorphismGroupSearch instance.
+             * \brief Constructs and initializes the \c %AutomorphismGroupSearch instance for the specified atom and bond properties.
              * \param atom_flags The bitwise-OR combination of Chem::AtomPropertyFlag values considered for atom matching.
              * \param bond_flags The bitwise-OR combination of Chem::BondPropertyFlag values considered for bond matching.
              */
@@ -142,7 +152,7 @@ namespace CDPL
             bool identityMappingIncluded() const;
 
             /**
-             * \brief Searches for the possible atom/bond mappings in the automorphism group of the given molecular graph.
+             * \brief Searches for the possible atom/bond mappings in the automorphism group of the molecular graph \a molgraph.
              *
              * The method will store all found mappings up to the maximum number of recorded mappings specified
              * by setMaxNumMappings(). 
@@ -172,7 +182,7 @@ namespace CDPL
             /**
              * \brief Returns a non-\c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A non-\c const reference to the atom/bond mapping object at index \a idx.
+             * \return A non-\c const reference to the Chem::AtomBondMapping object at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             AtomBondMapping& getMapping(std::size_t idx);
@@ -180,56 +190,56 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the stored atom/bond mapping object at index \a idx.
              * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A \c const reference to the atom/bond mapping object at index \a idx.
+             * \return A \c const reference to the Chem::AtomBondMapping object at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             const AtomBondMapping& getMapping(std::size_t idx) const;
 
-            /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             /**
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator getMappingsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator getMappingsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator getMappingsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator getMappingsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator begin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator begin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
              */
             MappingIterator end();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
              */
             ConstMappingIterator end() const;
 
@@ -295,15 +305,15 @@ namespace CDPL
             /**
              * \brief Sets a callback that is invoked for every atom/bond mapping found during findMappings().
              *
-             * Returning \c false from the callback aborts the search (equivalent to calling stopSearch()).
+             * Returning \c false from the callback discards the found mapping (will not be part of the search results).
              *
-             * \param func The new found-mapping callback.
+             * \param func The new callback function.
              */
             void setFoundMappingCallback(const MappingCallbackFunction& func);
 
             /**
-             * \brief Returns the currently installed found-mapping callback.
-             * \return A \c const reference to the found-mapping callback.
+             * \brief Returns the currently installed callback function invoked for every found atom/bond mapping.
+             * \return A \c const reference to the installed callback function.
              */
             const MappingCallbackFunction& getFoundMappingCallback() const;
 

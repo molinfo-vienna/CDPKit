@@ -35,7 +35,7 @@ class BondDirectionMatchExpression(BondMatchExpression):
     ##
     # \brief Constructs an <tt>BondDirectionMatchExpression</tt> instance for the specified matching mode and bond direction constraints.
     # 
-    # \param dir_flags A bitwise OR combination of the flags defined in namespace Chem.BondDirection that specifies constraints on the direction of matching target bonds.
+    # \param dir_flags A bitwise-OR combination of the flags defined in namespace Chem.BondDirection that specifies constraints on the direction of matching target bonds.
     # \param not_match Specifies whether the direction of a target bond actually has to match (<tt>True</tt>) or <em>not</em> match (<tt>False</tt>) the query direction constraints.
     # 
     def __init__(dir_flags: int, not_match: bool) -> None: pass

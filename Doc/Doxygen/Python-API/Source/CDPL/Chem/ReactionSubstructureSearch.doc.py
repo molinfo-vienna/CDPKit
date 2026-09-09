@@ -22,17 +22,17 @@
 ##
 # \brief Searches for substructures of the components of a target reaction that match a given query reaction pattern.
 # 
-# Use setQuery() to fix the query reaction pattern and mappingExists() / findMappings() to evaluate it against a specified target Chem.Reaction instance. Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by methods begin() and end(), respectively. Component visibility based on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem.ReactionRole). The search algorithm considers atom-, bond-, and reaction-level Chem.MatchExpression implementation instances attached to the query reaction's components as corresponding property values (see Chem.SubstructureSearch). The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
+# Use setQuery() to fix the query reaction pattern and mappingExists() / findMappings() to evaluate it against a specified target Chem.Reaction instance. Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Component visibility based on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem.ReactionRole). The search algorithm considers atom-, bond-, and reaction-level Chem.MatchExpression implementation instances attached to the query reaction's components as corresponding property values (see Chem.SubstructureSearch). The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
 # 
 class ReactionSubstructureSearch(Boost.Python.instance):
 
     ##
-    # \brief Constructs and initializes a <tt>ReactionSubstructureSearch</tt> instance.
+    # \brief Constructs and initializes the <tt>ReactionSubstructureSearch</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>ReactionSubstructureSearch</tt> instance for the specified query reaction pattern <em>query</em>.
+    # \brief Constructs and initializes the <tt>ReactionSubstructureSearch</tt> instance for the specified query reaction pattern <em>query</em>.
     # 
     # \param query The query reaction.
     # 
@@ -146,7 +146,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     ##
     # \brief Allows the reaction role specific exclusion of query and target components from the search for matching reaction substructures.
     # 
-    # The <em>roles</em> argument is a bitwise OR combination of the flags defined in namespace Chem.ReactionRole. When the flag for a particular reaction role is missing in the provided bitmask then all reaction components with this role assignment (both in the query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing' the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
+    # The <em>roles</em> argument is a bitwise-OR combination of the flags defined in namespace Chem.ReactionRole. When the flag for a particular reaction role is missing in the provided bitmask then all reaction components with this role assignment (both in the query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing' the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
     # 
     # \param roles A bitmask specifying the non-excluded reaction component roles.
     # 

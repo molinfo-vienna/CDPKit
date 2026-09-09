@@ -85,7 +85,7 @@ namespace CDPL
              * \param query_rxn The query reaction .
              * \param target_rxn The checked target reaction.
              * \param mapping The current query to target atom/bond mapping candidate.
-             * \param matched_rxn_roles Holds a bitwise OR combination of the flags defined in namespace Chem::ReactionRole specifying
+             * \param matched_rxn_roles Holds a bitwise-OR combination of the flags defined in namespace Chem::ReactionRole specifying
              *                          the reaction roles that were considered in the performed reaction substructure search.
              * \return \c true if the reactant to product atom mapping of the target reaction matches the query atom mapping, and \c false
              *         otherwise.

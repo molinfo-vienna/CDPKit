@@ -61,7 +61,7 @@ namespace CDPL
          * Use setQuery() to fix the query reaction pattern and mappingExists() / findMappings() to evaluate it
          * against a specified target Chem::Reaction instance. Found mappings are recorded as Chem::AtomBondMapping
          * objects that can be accessed via index through the method getMapping() or iteration using the iterator pair
-         * returned by methods begin() and end(), respectively.
+         * returned by the methods begin() and end(), respectively.
          * Component visibility based  on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem::ReactionRole).
          * The search algorithm considers atom-, bond-, and reaction-level Chem::MatchExpression implementation instances attached to the
          * query reaction's components as corresponding property values (see Chem::SubstructureSearch).
@@ -84,12 +84,12 @@ namespace CDPL
             typedef boost::indirect_iterator<ABMappingList::const_iterator, const AtomBondMapping> ConstMappingIterator;
 
             /**
-             * \brief Constructs and initializes a \c %ReactionSubstructureSearch instance.
+             * \brief Constructs and initializes the \c %ReactionSubstructureSearch instance.
              */
             ReactionSubstructureSearch();
 
             /**
-             * \brief Constructs and initializes a \c %ReactionSubstructureSearch instance for the specified query reaction pattern \a query.
+             * \brief Constructs and initializes the \c %ReactionSubstructureSearch instance for the specified query reaction pattern \a query.
              * \param query The query reaction.
              */
             ReactionSubstructureSearch(const Reaction& query);
@@ -253,7 +253,7 @@ namespace CDPL
             /**
              * \brief Allows the reaction role specific exclusion of query and target components from the search for matching reaction substructures.
              *
-             * The \a roles argument is a bitwise OR combination of the flags defined in namespace Chem::ReactionRole. When the flag for a
+             * The \a roles argument is a bitwise-OR combination of the flags defined in namespace Chem::ReactionRole. When the flag for a
              * particular reaction role is missing in the provided bitmask then all reaction components with this role assignment (both in the
              * query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing'
              * the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
