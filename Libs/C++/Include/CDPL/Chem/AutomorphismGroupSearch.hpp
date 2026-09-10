@@ -105,8 +105,10 @@ namespace CDPL
 
             /**
              * \brief Constructs and initializes the \c %AutomorphismGroupSearch instance for the specified atom and bond properties.
-             * \param atom_flags The bitwise-OR combination of Chem::AtomPropertyFlag values considered for atom matching.
-             * \param bond_flags The bitwise-OR combination of Chem::BondPropertyFlag values considered for bond matching.
+             * \param atom_flags Bitwise-OR combination of Chem::AtomPropertyFlag values specifying
+             *                   atomic properties considered for atom matching.
+             * \param bond_flags Bitwise-OR combination of Chem::BondPropertyFlag values specifying
+             *                   bond properties considered for bond matching.
              */
             AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS,
                                     unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
@@ -117,25 +119,25 @@ namespace CDPL
 
             /**
              * \brief Specifies the atomic properties considered for atom matching during automorphism search.
-             * \param flags The new bitwise-OR combination of Chem::AtomPropertyFlag values.
+             * \param flags The new bitwise-OR combination of corresponding Chem::AtomPropertyFlag values.
              */
             void setAtomPropertyFlags(unsigned int flags);
 
             /**
              * \brief Returns the atomic properties currently considered for atom matching.
-             * \return The bitwise-OR combination of Chem::AtomPropertyFlag values.
+             * \return The currently set bitwise-OR combination of corresponding Chem::AtomPropertyFlag values.
              */
             unsigned int getAtomPropertyFlags() const;
 
             /**
              * \brief Specifies the bond properties considered for bond matching during automorphism search.
-             * \param flags The new bitwise-OR combination of Chem::BondPropertyFlag values.
+             * \param flags The new bitwise-OR combination of corresponding Chem::BondPropertyFlag values.
              */
             void setBondPropertyFlags(unsigned int flags);
 
             /**
              * \brief Returns the bond properties currently considered for bond matching.
-             * \return The bitwise-OR combination of Chem::BondPropertyFlag values.
+             * \return The currently set bitwise-OR combination of corresponding Chem::BondPropertyFlag values.
              */
             unsigned int getBondPropertyFlags() const;
 
@@ -303,9 +305,9 @@ namespace CDPL
             void clearBondMappingConstraints();
             
             /**
-             * \brief Sets a callback that is invoked for every atom/bond mapping found during findMappings().
+             * \brief Sets a callback function that is invoked for every atom/bond mapping found during findMappings().
              *
-             * Returning \c false from the callback discards the found mapping (will not be part of the search results).
+             * Returning \c false from the function discards the found mapping (will not be part of the search results).
              *
              * \param func The new callback function.
              */

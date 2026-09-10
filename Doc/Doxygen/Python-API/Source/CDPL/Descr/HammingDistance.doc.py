@@ -61,7 +61,8 @@ class HammingDistance(Boost.Python.instance):
     # 
     # The <em>Hamming Distance</em> \f$ D_{ab} \f$ is calculated by:
     # 
-    # \f[ D_{ab} = N_a + N_b \f]
+    # \f[   D_{ab} = N_a + N_b
+    # \f]
     # 
     # where \f$ N_a \f$ is the number of bits that are set in the first bitset but not in the second bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset but not in the first one.
     # 

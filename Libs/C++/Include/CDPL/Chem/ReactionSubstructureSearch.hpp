@@ -58,13 +58,13 @@ namespace CDPL
         /**
          * \brief Searches for substructures of the components of a target reaction that match a given query reaction pattern.
          *
-         * Use setQuery() to fix the query reaction pattern and mappingExists() / findMappings() to evaluate it
+         * Use setQuery() to fix the query reaction pattern and mappingExists() or findMappings() to evaluate it
          * against a specified target Chem::Reaction instance. Found mappings are recorded as Chem::AtomBondMapping
          * objects that can be accessed via index through the method getMapping() or iteration using the iterator pair
          * returned by the methods begin() and end(), respectively.
          * Component visibility based  on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem::ReactionRole).
          * The search algorithm considers atom-, bond-, and reaction-level Chem::MatchExpression implementation instances attached to the
-         * query reaction's components as corresponding property values (see Chem::SubstructureSearch).
+         * query reaction and its components as corresponding property values (see Chem::SubstructureSearch and Chem::ReactionProperty::MATCH_EXPRESSION).
          * The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
          */
         class CDPL_CHEM_API ReactionSubstructureSearch
@@ -114,7 +114,7 @@ namespace CDPL
             /**
              * \brief Tells whether the query reaction pattern matches the target reaction \a target.
              *
-             * The method does not store any atom/bond mappings between the query and target reaction - it just tells
+             * The method does not store any atom/bond mappings between the query and target reaction — it just tells
              * if a complete mapping of the query is possible. If you need access to the atom/bond mappings, use findMappings()
              * instead.
              *

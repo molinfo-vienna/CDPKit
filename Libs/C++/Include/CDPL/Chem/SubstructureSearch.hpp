@@ -60,14 +60,13 @@ namespace CDPL
          * \brief Searches for substructures of a target molecular graph that match the topology of a given query molecular graph.
          *
          * Successive calls to setQuery() and findMappings() produce all possible atom/bond mapping solutions.
-         * If just the information whether or not a mapping exists is of interest then the method mappingExists() can be used
-         * which is more efficient for this purpose (no mappings are recorded and the search stops after the first match).
+         * If just the information whether or not a mapping exists is of interest then the more efficient method mappingExists() can be used.
          * Found mappings are recorded as Chem::AtomBondMapping objects that can be accessed via index through
          * the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively.
          * User-defined per-atom, per-bond and per-molecular graph Chem::MatchExpression implementation instance accessor
          * functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions
          * saved as corresponding atom, bond and molecular graph property values (see Chem::AtomProperty::MATCH_EXPRESSION,
-         * Chem::BondProperty::MATCH_EXPRESSION and Chem::MolecularGraphProperty::MATCH_EXPRESSION.
+         * Chem::BondProperty::MATCH_EXPRESSION and Chem::MolecularGraphProperty::MATCH_EXPRESSION).
          * Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly(). stopSearch() allows an immediate
          * abort of the search process.
          * Furthermore, query &harr; target atom and bond mappings can be restricted to user-defined subsets by the methods
@@ -164,7 +163,7 @@ namespace CDPL
             /**
              * \brief Tells whether the query molecular graph matches a substructure of the target molecular graph \a target.
              *
-             * The method does not store any atom/bond mappings between the query and target molecular graph - it just tells
+             * The method does not store any atom/bond mappings between the query and target molecular graph — it just tells
              * if a complete mapping of the query is possible. If you need access to the atom/bond mappings, use findMappings()
              * instead.
              *

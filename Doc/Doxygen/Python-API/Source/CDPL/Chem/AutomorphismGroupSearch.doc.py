@@ -29,8 +29,8 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     ##
     # \brief Constructs and initializes the <tt>AutomorphismGroupSearch</tt> instance for the specified atom and bond properties.
     # 
-    # \param atom_flags The bitwise-OR combination of Chem.AtomPropertyFlag values considered for atom matching.
-    # \param bond_flags The bitwise-OR combination of Chem.BondPropertyFlag values considered for bond matching.
+    # \param atom_flags Bitwise-OR combination of Chem.AtomPropertyFlag values specifying atomic properties considered for atom matching.
+    # \param bond_flags Bitwise-OR combination of Chem.BondPropertyFlag values specifying bond properties considered for bond matching.
     # 
     def __init__(atom_flags: int = 12702, bond_flags: int = 30) -> None: pass
 
@@ -49,28 +49,28 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     ##
     # \brief Specifies the atomic properties considered for atom matching during automorphism search.
     # 
-    # \param flags The new bitwise-OR combination of Chem.AtomPropertyFlag values.
+    # \param flags The new bitwise-OR combination of corresponding Chem.AtomPropertyFlag values.
     # 
     def setAtomPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief Returns the atomic properties currently considered for atom matching.
     # 
-    # \return The bitwise-OR combination of Chem.AtomPropertyFlag values.
+    # \return The currently set bitwise-OR combination of corresponding Chem.AtomPropertyFlag values.
     # 
     def getAtomPropertyFlags() -> int: pass
 
     ##
     # \brief Specifies the bond properties considered for bond matching during automorphism search.
     # 
-    # \param flags The new bitwise-OR combination of Chem.BondPropertyFlag values.
+    # \param flags The new bitwise-OR combination of corresponding Chem.BondPropertyFlag values.
     # 
     def setBondPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief Returns the bond properties currently considered for bond matching.
     # 
-    # \return The bitwise-OR combination of Chem.BondPropertyFlag values.
+    # \return The currently set bitwise-OR combination of corresponding Chem.BondPropertyFlag values.
     # 
     def getBondPropertyFlags() -> int: pass
 
@@ -181,9 +181,9 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def addBondMappingConstraint(bond1_idx: int, bond2_idx: int) -> None: pass
 
     ##
-    # \brief Sets a callback that is invoked for every atom/bond mapping found during findMappings().
+    # \brief Sets a callback function that is invoked for every atom/bond mapping found during findMappings().
     # 
-    # Returning <tt>False</tt> from the callback discards the found mapping (will not be part of the search results).
+    # Returning <tt>False</tt> from the function discards the found mapping (will not be part of the search results).
     # 
     # \param func The new callback function.
     # 

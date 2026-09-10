@@ -42,37 +42,37 @@ class Brush(Boost.Python.instance):
         SOLID_PATTERN = 1
 
         ##
-        # \brief Specifies a pattern with <em>6.25%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>6.25%</em> uniformly distributed transparent pixels.
         # 
         DENSE1_PATTERN = 2
 
         ##
-        # \brief Specifies a pattern with <em>12.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>12.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE2_PATTERN = 3
 
         ##
-        # \brief Specifies a pattern with <em>37.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>37.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE3_PATTERN = 4
 
         ##
-        # \brief Specifies a pattern with <em>50.0%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>50.0%</em> uniformly distributed transparent pixels.
         # 
         DENSE4_PATTERN = 5
 
         ##
-        # \brief Specifies a pattern with <em>62.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>62.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE5_PATTERN = 6
 
         ##
-        # \brief Specifies a pattern with <em>87.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>87.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE6_PATTERN = 7
 
         ##
-        # \brief Specifies a pattern with <em>93.75%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>93.75%</em> uniformly distributed transparent pixels.
         # 
         DENSE7_PATTERN = 8
 

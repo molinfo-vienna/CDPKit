@@ -62,15 +62,16 @@ namespace CDPL
          * Unlike Chem::MaxCommonAtomSubstructureSearch and Chem::MaxCommonBondSubstructureSearch, the
          * matches reported here are required to be \e connected — i.e. each mapping covers a single
          * connected subgraph of both the query and the target. 
-         * Successive calls to setQuery() and findAllMappings()/findMaxMappings() produce all possible common substructure atom/bond mapping solutions.
-         * If just the information whether or not a common subructure exists is of interest then the method mappingExists() can be used
-         * which is more efficient for this purpose.
+         * Successive calls to setQuery() and findAllMappings() or findMaxMappings() produce all possible
+         * common substructure atom/bond mapping solutions (subject to an atom count lower bound set by setMinSubstructureSize()).
+         * If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest
+         * then the more efficient method mappingExists() can be used.
          * Found common substructures are recorded as Chem::AtomBondMapping objects that can be accessed via index through
          * the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively.
          * User-defined per-atom, per-bond and per-molecular graph Chem::MatchExpression implementation instance accessor
          * functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions
          * saved as corresponding atom, bond and molecular graph property values (see Chem::AtomProperty::MATCH_EXPRESSION,
-         * Chem::BondProperty::MATCH_EXPRESSION and Chem::MolecularGraphProperty::MATCH_EXPRESSION.
+         * Chem::BondProperty::MATCH_EXPRESSION and Chem::MolecularGraphProperty::MATCH_EXPRESSION).
          * Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
          *
          * \see [\ref MCSA]
@@ -165,7 +166,7 @@ namespace CDPL
             /**
              * \brief Searches for a common connected substructure between the query and the target molecular graph \a target.
              *
-             * The method does not store any atom/bond mappings between query and target molecular graphs - it just tells
+             * The method does not store any atom/bond mappings between query and target molecular graphs — it just tells
              * if a valid common substructure mapping solution involving at least getMinSubstructureSize() atoms could be found. If you need
              * access to the atom/bond mappings, use findAllMappings() or findMaxMappings() instead.
              *
@@ -303,7 +304,7 @@ namespace CDPL
             /**
              * \brief Allows to specify a limit on the number of stored atom/bond mappings.
              *
-             * In a call to findAllMappings or findMaxMappings() the common substructure search will terminate as soon as the specified
+             * In a call to findAllMappings() or findMaxMappings() the common substructure search will terminate as soon as the specified
              * maximum number of stored atom/bond mappings has been reached. A previously set limit on the number of mappings can
              * be disabled by providing zero for the value of \a max_num_mappings.
              *
@@ -315,7 +316,7 @@ namespace CDPL
             /**
              * \brief Returns the specified limit on the number of stored atom/bond mappings.
              * \return The specified maximum number of stored atom/bond mappings.
-             * \see setMaxNumMappings(), findMappings() 
+             * \see setMaxNumMappings(), findAllMappings(), findMaxMappings() 
              */
             std::size_t getMaxNumMappings() const;
 

@@ -20,21 +20,23 @@
 #
 
 ##
-# \brief Computes the maximum common atom substructure between a query and a target molecular graph by reducing the problem to maximum-clique enumeration on an association (modular product) graph.
+# \brief Searches for the maximum common atom substructures between a query and a target molecular graph.
 # 
-# setQuery() fixes the query molecular graph; mappingExists() returns a yes/no answer (subject to the setMinSubstructureSize() lower bound), findAllMappings() enumerates all atom-count-maximal common substructures, and findMaxBondMappings() restricts the output to atom-and-bond-count-maximal substructures. Per-atom/-bond/-graph Chem.MatchExpression objects attached to the query are honoured. The result set is bounded by setMaxNumMappings() / uniqueMappingsOnly() and accessed through the same iterator pair as Chem.SubstructureSearch.
+# Successive calls to setQuery() and findAllMappings() or findMaxBondMappings() produce all possible common substructure atom/bond mapping solutions (subject to an atom count lower bound set by setMinSubstructureSize()). The method findAllMappings() enumerates all atom count-maximal common substructures, and findMaxBondMappings() restricts the output to atom and bond count-maximal substructures. If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest then the more efficient method mappingExists() can be used. Found common substructures are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instances are retrieved as values of the corresponding atom, bond and molecular graph properties (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION). Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
 # 
-# \see [\ref MCASA]
+# \see [\ref MCASA] 
+# 
+# \note The implemented algorithm reduces the search problem to maximum-clique enumeration on an atom-based association graph. Processing times thus can be high for large molecular graphs!
 # 
 class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
 
     ##
-    # \brief Constructs and initializes a <tt>MaxCommonAtomSubstructureSearch</tt> instance.
+    # \brief Constructs and initializes the <tt>MaxCommonAtomSubstructureSearch</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>MaxCommonAtomSubstructureSearch</tt> instance for the specified query structure.
+    # \brief Constructs and initializes the <tt>MaxCommonAtomSubstructureSearch</tt> instance for the query molecular graph <em>query</em>.
     # 
     # \param query A molecular graph that represents the query structure.
     # 
@@ -53,24 +55,24 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Searches for a common substructure between the query and the specified target molecular graph.
+    # \brief Searches for a common substructure between the query and the target molecular graph <em>target</em>.
     # 
-    # The method does not store any atom/bond mappings between query and target substructures - it just tells if a valid common substructure mapping solution involving at least getMinSubstructureSize() atoms could be found. If you need access to the atom/bond mappings, use findAllMappings() or findMaxBondMappings() instead.
+    # The method does not store any atom/bond mappings between query and target molecular graphs — it just tells if a valid common substructure mapping solution involving at least getMinSubstructureSize() atoms could be found. If you need access to the atom/bond mappings, use findAllMappings() or findMaxBondMappings() instead.
     # 
-    # \param target The molecular graph that has to be searched for a substructure in common with the query.
+    # \param target The target molecular graph that has to be searched for a substructure in common with the query.
     # 
     # \return <tt>True</tt> if a common substructure of at least the minimum accepted size could be found, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxMappings() will be discarded.
+    # \note Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxBondMappings() will be discarded.
     # 
     def mappingExists(target: MolecularGraph) -> bool: pass
 
     ##
-    # \brief Searches for all atom/bond mappings of query subgraphs to substructures of the specified target molecular graph with a maximum atom count.
+    # \brief Searches for all atom/bond mappings of query subgraphs to substructures of the target molecular graph <em>target</em> with a maximum atom count.
     # 
     # The method will store all maximum-sized (in number of atoms) common substructure mapping solutions involving at least getMinSubstructureSize() atoms up to the maximum number of recorded mappings specified by setMaxNumMappings(). If only unique mappings have to be stored (see uniqueMappingsOnly(bool unique)), any duplicates of previously found mappings will be discarded.
     # 
-    # \param target The molecular graph that has to be searched for all maximum-sized substructures in common with the query.
+    # \param target The target molecular graph that has to be searched for all maximum-sized substructures in common with the query.
     # 
     # \return <tt>True</tt> if common substructures of at least the minimum accepted size were found, and <tt>False</tt> otherwise. 
     # 
@@ -79,11 +81,11 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     def findAllMappings(target: MolecularGraph) -> bool: pass
 
     ##
-    # \brief Searches for all atom/bond mappings of query subgraphs to substructures of the specified target molecular graph with a maximum atom and bond count.
+    # \brief Searches for all atom/bond mappings of query subgraphs to substructures of the target molecular graph <em>target</em> with a maximum atom and bond count.
     # 
     # The method will store all maximum-sized (both in number of atoms and bonds) common substructure mapping solutions involving at least getMinSubstructureSize() atoms up to the maximum number of recorded mappings specified by setMaxNumMappings(). If only unique mappings have to be stored (see uniqueMappingsOnly(bool unique)), any duplicates of previously found mappings will be discarded.
     # 
-    # \param target The molecular graph that has to be searched for all maximum-sized substructures in common with the query.
+    # \param target The target molecular graph that has to be searched for all maximum-sized substructures in common with the query.
     # 
     # \return <tt>True</tt> if common substructures of at least the minimum accepted size were found, and <tt>False</tt> otherwise. 
     # 
@@ -105,7 +107,7 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the atom/bond mapping object to return.
     # 
-    # \return A reference to the atom/bond mapping object at index <em>idx</em>. 
+    # \return A reference to the Chem.AtomBondMapping object at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 
@@ -136,7 +138,7 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     # 
     # \return The specified maximum number of stored atom/bond mappings. 
     # 
-    # \see setMaxNumMappings(), findMappings()
+    # \see setMaxNumMappings(), findAllMappings(), findMaxBondMappings()
     # 
     def getMaxNumMappings() -> int: pass
 
@@ -172,9 +174,9 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     def setMinSubstructureSize(min_size: int) -> None: pass
 
     ##
-    # \brief Allows to specify a new query structure.
+    # \brief Sets <em>query</em> as the new query molecular graph.
     # 
-    # \param query A molecular graph that represents the query structure.
+    # \param query A molecular graph that represents the new query.
     # 
     def setQuery(query: MolecularGraph) -> None: pass
 

@@ -61,7 +61,8 @@ class ManhattanSimilarity(Boost.Python.instance):
     # 
     # The <em>Manhattan Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \f[ S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}} \f]
+    # \f[   S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}}
+    # \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set only in the first bitset, \f$ N_b \f$ is the number of bits that are set only in the second bitset and \f$ N_{!ab} \f$ is the number of bits that are not set in both bitsets.
     # 
