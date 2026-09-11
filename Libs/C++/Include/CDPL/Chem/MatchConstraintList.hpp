@@ -44,14 +44,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Describes a single attribute comparison constraint between a query and a target object used by
-         *        molecular graph matching algorithms.
+         * \brief Describes a single attribute comparison constraint between a query and a target object.
          *
-         * Each constraint is identified by an integer \a id (typically a Chem::*MatchConstraint constant such as
-         * Chem::AtomMatchConstraint::AROMATICITY) and pairs it with a Relation (\c LESS, \c EQUAL, \c GREATER,
-         * \c LESS_OR_EQUAL, \c GREATER_OR_EQUAL, \c NOT_EQUAL, or \c ANY) plus an optional query-side value
-         * stored in a Base::Any. The matching algorithm reads back \a id, \a relation and \a value to decide
-         * whether a query/target attribute pair satisfies the constraint.
+         * Each constraint is identified by an integer identifier (e.g. Chem::AtomMatchConstraint::AROMATICITY) and pairs
+         * it with a relation (<, ==, >, <=, >=, != or any) plus an optional query-side value stored in a Base::Any instance. 
          */
         class CDPL_CHEM_API MatchConstraint
         {
@@ -107,7 +103,7 @@ namespace CDPL
             };
 
             /**
-             * \brief Constructs a \c %MatchConstraint object with the given identifier and relational constraint on the values of matching query/target
+             * \brief Constructs the \c %MatchConstraint instance with the given identifier and relational constraint on the values of matching query/target
              *        attribute pairs.
              * \param id The identifier of the match constraint.
              * \param relation The relational constraint on the values of matching query/target attribute pairs.
@@ -116,7 +112,7 @@ namespace CDPL
                 id(id), relation(relation) {}
 
             /**
-             * \brief Constructs a \c %MatchConstraint object with the given identifier, relational constraint on the values of matching query/target
+             * \brief Constructs the \c %MatchConstraint instance with the given identifier, relational constraint on the values of matching query/target
              *        attribute pairs and value of the query attribute.
              * \param id The identifier of the match constraint.
              * \param rel The relational constraint on the values of matching query/target attribute pairs.
@@ -180,7 +176,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells wether a query attribute value has been set.
+             * \brief Tells whether a query attribute value has been set.
              * \return \c true if the value of the query attribute has been set, \c false otherwise.
              */
             bool hasValue() const;
@@ -192,14 +188,11 @@ namespace CDPL
         };
 
         /**
-         * \brief List of Chem::MatchConstraint instances combined with a logical Type (\c AND_LIST,
-         *        \c NOT_AND_LIST, \c OR_LIST, or \c NOT_OR_LIST) that controls how the contained
-         *        constraints are aggregated during query/target evaluation.
+         * \brief Data structure storing a set of Chem::MatchConstraint objects together with a logical type.
          *
-         * Match-constraint lists are typically attached as object properties (e.g. via
-         * Chem::setMatchConstraints) and consulted by substructure search algorithms such as
-         * Chem::SubstructureSearch to express composite atom-, bond- or molecular graph-level
-         * constraints.
+         * Match constraint lists are usually stored as object properties (e.g. Chem::AtomProperty::MATCH_CONSTRAINTS) and
+         * evaluated by code building corresponding Chem::MatchExpression implementation instances for substructure searching
+         * purposes.
          */
         class CDPL_CHEM_API MatchConstraintList : public Util::Array<MatchConstraint>
         {
@@ -238,7 +231,7 @@ namespace CDPL
             };
 
             /**
-             * \brief Constructs a \c %MatchConstraintList object with the specified logical type.
+             * \brief Constructs the \c %MatchConstraintList instance with the specified logical type.
              * \param type The logical type of the match constraint list.
              */
             MatchConstraintList(Type type = AND_LIST):

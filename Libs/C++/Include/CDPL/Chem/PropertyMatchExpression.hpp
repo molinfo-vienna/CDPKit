@@ -41,21 +41,21 @@ namespace CDPL
     {
 
         /**
-         * \brief Generic Chem::MatchExpression specialisation that evaluates a binary
+         * \brief Generic Chem::MatchExpression specialization for the binary
          *        comparison between a query- and a target-derived property value retrieved
          *        through a user-supplied accessor function.
          *
+         * This class implements the two-object overload (primary plus secondary objects) of Chem::MatchExpression.
          * The constructor either binds a fixed query value (taken verbatim from the constructor
-         * argument) or retrieves the query value through the same accessor as the target value;
-         * the actual comparison is delegated to the \a MatchFunc functor. This class implements
-         * the two-object overload (primary plus secondary objects) of MatchExpression.
+         * argument) or retrieves the query value through the same accessor as the target value.
+         * The actual comparison is delegated to the \a MatchFunc functor whose function call operator
+         * takes the target property value as its first argument and the query value as the
+         * second argument (both provided as \c const reference to \c ValueType). The returned result
+         * must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
          *
          * \tparam ValueType The type of the checked property values.
          * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
-         *                   values against the query property values. The overloaded function call operator is
-         *                   required to take the target property value as its first argument and the query value as the
-         *                   second argument (both provided as \c const reference to \c ValueType). The returned result
-         *                   must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
+         *                   values against the query property values. 
          * \tparam ObjType1 The type of the primary query/target objects for which the expression gets evaluated.
          * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
          *                  expression evaluation.
@@ -81,7 +81,7 @@ namespace CDPL
             /**
              * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
              *        property values returned by \a property_func.
-             * \param property_func A PropertyMatchExpression::PropertyFunction2 instance that wraps the specified property value accessor function.
+             * \param property_func A PropertyFunction instance that wraps the specified property value accessor function.
              */
             PropertyMatchExpression(const PropertyFunction& property_func):
                 value(), matchFunc(), propertyFunc(property_func), fixed(false) {}
@@ -90,7 +90,7 @@ namespace CDPL
              * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
              *        target object property values returned by \a property_func and the specified query value.
              * \param value The query property value.
-             * \param property_func A PropertyMatchExpression::PropertyFunction2 instance that wraps the specified target property value accessor function.
+             * \param property_func A PropertyFunction instance that wraps the specified target property value accessor function.
              */
             PropertyMatchExpression(const ValueType& value, const PropertyFunction& property_func):
                 value(value), matchFunc(), propertyFunc(property_func), fixed(true) {}
@@ -120,18 +120,20 @@ namespace CDPL
         };
 
         /**
-         * \brief Single-object specialisation of Chem::PropertyMatchExpression for query/target equivalence
-         *        tests on a single attribute retrieved from a single object via the user-supplied accessor.
+         * \brief Single-object specialization of Chem::PropertyMatchExpression for the binary
+         *        comparison between a query- and a target-derived property value retrieved
+         *        through a user-supplied accessor function.
          *
-         * Like the two-object form, the constructor either binds a fixed query value or fetches it on the
-         * fly through the accessor, and the actual comparison is delegated to the \a MatchFunc functor.
+         * Like the two-object form, the constructor either binds a fixed query value (taken verbatim from the constructor
+         * argument) or retrieves the query value through the same accessor as the target value.
+         * The actual comparison is delegated to the \a MatchFunc functor whose function call operator
+         * takes the target property value as its first argument and the query value as the
+         * second argument (both provided as \c const reference to \c ValueType). The returned result
+         * must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
          *
          * \tparam ValueType The type of the checked property values.
          * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
-         *                   values against the query property values. The overloaded function call operator is
-         *                   required to take the target property value as its first argument and the query value as the
-         *                   second argument (both provided as \c const reference to \c ValueType). The returned result
-         *                   must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
+         *                   values against the query property values. 
          * \tparam ObjType The type of the query/target objects for which the expression gets evaluated.
          */
         template <typename ValueType, typename MatchFunc, typename ObjType>

@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Describes a single attribute comparison constraint between a query and a target object used by molecular graph matching algorithms.
+# \brief Describes a single attribute comparison constraint between a query and a target object.
 # 
-# Each constraint is identified by an integer <em>id</em> (typically a Chem.*MatchConstraint constant such as Chem.AtomMatchConstraint.AROMATICITY) and pairs it with a Relation (<tt>LESS</tt>, <tt>EQUAL</tt>, <tt>GREATER</tt>, <tt>LESS_OR_EQUAL</tt>, <tt>GREATER_OR_EQUAL</tt>, <tt>NOT_EQUAL</tt>, or <tt>ANY</tt>) plus an optional query-side value stored in a Base.Any. The matching algorithm reads back <em>id</em>, <em>relation</em> and <em>value</em> to decide whether a query/target attribute pair satisfies the constraint.
+# Each constraint is identified by an integer identifier (e.g. Chem.AtomMatchConstraint.AROMATICITY) and pairs it with a relation (<, ==, >, <=, >=, != or any) plus an optional query-side value stored in a Base.Any instance.
 # 
 class MatchConstraint(Boost.Python.instance):
 
@@ -80,7 +80,7 @@ class MatchConstraint(Boost.Python.instance):
     def __init__(id: int, rel: Relation) -> None: pass
 
     ##
-    # \brief Constructs a <tt>MatchConstraint</tt> object with the given identifier, relational constraint on the values of matching query/target attribute pairs and value of the query attribute.
+    # \brief Constructs the <tt>MatchConstraint</tt> instance with the given identifier, relational constraint on the values of matching query/target attribute pairs and value of the query attribute.
     # 
     # \param id The identifier of the match constraint.
     # \param rel The relational constraint on the values of matching query/target attribute pairs.
@@ -140,7 +140,7 @@ class MatchConstraint(Boost.Python.instance):
     def setValue(val: Base.Any) -> None: pass
 
     ##
-    # \brief Tells wether a query attribute value has been set.
+    # \brief Tells whether a query attribute value has been set.
     # 
     # \return <tt>True</tt> if the value of the query attribute has been set, <tt>False</tt> otherwise.
     # 
