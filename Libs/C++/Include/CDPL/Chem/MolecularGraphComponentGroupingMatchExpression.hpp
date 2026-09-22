@@ -45,9 +45,9 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::MatchExpression that constrains the substructure mapping by the query's component-level groupings
-         *        (typically derived from the parenthesization of a <em>Daylight SMARTS</em> [\ref SMARTS] pattern).
-         * \see [\ref SMARTS]
+         * \brief Chem::MatchExpression implementation that constrains the substructure mapping by the query's component-level groupings.
+         *
+         * Component groupings are typically specified via parenthesization of dot-separated <em>Daylight SMARTS</em> pattern sequences [\ref SMARTS].
          */
         class CDPL_CHEM_API MolecularGraphComponentGroupingMatchExpression : public MatchExpression<MolecularGraph>
         {
@@ -60,13 +60,13 @@ namespace CDPL
             typedef std::shared_ptr<MolecularGraphComponentGroupingMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs a \c %MolecularGraphComponentGroupingMatchExpression instance for the specified component-level grouping.
+             * \brief Constructs the \c %MolecularGraphComponentGroupingMatchExpression instance for the specified component-level grouping.
              * \param comp_grouping Specifies the component-level grouping constraints that have to be fulfilled by matching target molecular graphs.
              */
             MolecularGraphComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
 
             /**
-             * \brief Copy-constructs the expression from \a rhs (the per-evaluation working storage is left in an unspecified empty state).
+             * \brief Constructs a copy of the \c %MolecularGraphComponentGroupingMatchExpression instance \a rhs.
              * \param rhs The expression to copy.
              */
             MolecularGraphComponentGroupingMatchExpression(const MolecularGraphComponentGroupingMatchExpression& rhs);
@@ -102,7 +102,7 @@ namespace CDPL
             bool requiresAtomBondMapping() const;
 
             /**
-             * \brief Copy-assigns the component-level grouping constraints from \a rhs.
+             * \brief Replaces the current component-level grouping constraints with the ones of the expression \a rhs.
              * \param rhs The expression to copy from.
              * \return A reference to itself.
              */
