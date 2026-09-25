@@ -20,10 +20,9 @@
 #
 
 ##
-# \brief Chem.MatchExpression that constrains reaction substructure matches by the query's component-level groupings (typically derived from the parenthesization of a <em>Daylight SMARTS</em> [\ref SMARTS] pattern).
+# \brief Chem.MatchExpression implementation that constrains reaction substructure matches by the query's component-level groupings.
 # 
-# Required component groupings are passed as a Chem.FragmentList: query atoms inside the same fragment must map to a single target component, and query atoms in different fragments must map to different target components. 
-# \see [\ref SMARTS]
+# Required component groupings are passed as a Chem.FragmentList instance: query atoms inside the same fragment must map to a single target component, and query atoms in different fragments must map to different target components. Component groupings are typically specified via parenthesization of dot-separated <em>Daylight SMARTS</em> pattern sequences [\ref SMARTS].
 # 
 class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
 
@@ -34,7 +33,7 @@ class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
     def __init__(expr: ReactionComponentGroupingMatchExpression) -> None: pass
 
     ##
-    # \brief Constructs a <tt>ReactionComponentGroupingMatchExpression</tt> instance for the specified component-level grouping.
+    # \brief Constructs the <tt>ReactionComponentGroupingMatchExpression</tt> instance for the specified component-level grouping.
     # 
     # \param comp_grouping Specifies the component-level grouping constraints that must be fulfilled by matching target reactions.
     # 

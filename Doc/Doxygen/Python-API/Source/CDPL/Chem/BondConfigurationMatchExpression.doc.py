@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Chem.MatchExpression that constrains target bonds by their stereo configuration relative to a query bond.
+# \brief Chem.MatchExpression implementation that constrains target bonds by their stereo configuration relative to a query bond.
 # 
-# Used in substructure searches with stereochemistry support: the expression evaluates the target bond's cis/trans stereo configuration (as defined by its Chem.StereoDescriptor) against the configuration constraint flags derived from the query bond's descriptor.
+# The expression evaluates the target bond's cis/trans stereo configuration (as defined by its stereo descriptor) against the configuration constraint flags derived from the query bond's descriptor. The matching logic (match/not-match) and partial mapping tolerance are configurable.
 # 
 class BondConfigurationMatchExpression(BondMatchExpression):
 
@@ -33,7 +33,7 @@ class BondConfigurationMatchExpression(BondMatchExpression):
     def __init__(expr: BondConfigurationMatchExpression) -> None: pass
 
     ##
-    # \brief Constructs an <tt>BondConfigurationMatchExpression</tt> instance for the specified matching mode, cis/trans bond configuration constraints.
+    # \brief Constructs the <tt>BondConfigurationMatchExpression</tt> instance for the specified matching logic and cis/trans bond configuration constraints.
     # 
     # \param query_stereo_descr The descriptor object specifying the query bond's cis/trans configuration reference atoms and associated configuration constraints on matching target bonds.
     # \param query_bond The bond for which this <tt>BondConfigurationMatchExpression</tt> instance gets constructed.

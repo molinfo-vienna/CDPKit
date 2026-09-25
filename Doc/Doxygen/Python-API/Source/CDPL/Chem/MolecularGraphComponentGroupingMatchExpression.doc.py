@@ -22,7 +22,7 @@
 ##
 # \brief Chem.MatchExpression implementation that constrains the substructure mapping by the query's component-level groupings.
 # 
-# Component groupings are typically specified via parenthesization of dot-separated <em>Daylight SMARTS</em> pattern sequences [\ref SMARTS].
+# Required component groupings are passed as a Chem.FragmentList instance: query atoms inside the same fragment must map to a single target component, and query atoms in different fragments must map to different target components. Component groupings are typically specified via parenthesization of dot-separated <em>Daylight SMARTS</em> pattern sequences [\ref SMARTS].
 # 
 class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpression):
 

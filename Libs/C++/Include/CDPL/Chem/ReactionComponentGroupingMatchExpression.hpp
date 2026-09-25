@@ -47,13 +47,13 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief Chem::MatchExpression that constrains reaction substructure matches by the query's component-level
-         *        groupings (typically derived from the parenthesization of a <em>Daylight SMARTS</em> [\ref SMARTS] pattern).
+         * \brief Chem::MatchExpression implementation that constrains reaction substructure matches by the query's component-level
+         *        groupings.
          *
-         * Required component groupings are passed as a Chem::FragmentList: query atoms inside the same fragment must
+         * Required component groupings are passed as a Chem::FragmentList instance: query atoms inside the same fragment must
          * map to a single target component, and query atoms in different fragments must map to different target
          * components.
-         * \see [\ref SMARTS]
+         * Component groupings are typically specified via parenthesization of dot-separated <em>Daylight SMARTS</em> pattern sequences [\ref SMARTS].
          */
         class CDPL_CHEM_API ReactionComponentGroupingMatchExpression : public MatchExpression<Reaction>
         {
@@ -66,13 +66,13 @@ namespace CDPL
             typedef std::shared_ptr<ReactionComponentGroupingMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs a \c %ReactionComponentGroupingMatchExpression instance for the specified component-level grouping.
+             * \brief Constructs the \c %ReactionComponentGroupingMatchExpression instance for the specified component-level grouping.
              * \param comp_grouping Specifies the component-level grouping constraints that must be fulfilled by matching target reactions.
              */
             ReactionComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
 
             /**
-             * \brief Copy-constructs the expression from \a rhs (the per-evaluation working storage is left in an unspecified empty state).
+             * \brief Constructs a copy of the \c %ReactionComponentGroupingMatchExpression instance \a rhs.
              * \param rhs The expression to copy.
              */
             ReactionComponentGroupingMatchExpression(const ReactionComponentGroupingMatchExpression& rhs);
@@ -108,7 +108,7 @@ namespace CDPL
             bool requiresAtomBondMapping() const;
 
             /**
-             * \brief Copy-assigns the component-level grouping constraints from \a rhs.
+             * \brief Replaces the current component-level grouping constraints with the ones of the expression \a rhs.
              * \param rhs The expression to copy from.
              * \return A reference to itself.
              */

@@ -46,11 +46,10 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Chem::MatchExpression that constrains target atoms by their stereo configuration relative to a query atom.
+         * \brief Chem::MatchExpression implementation that constrains target atoms by their stereo configuration relative to a query atom.
          *
-         * Used in substructure searches with stereochemistry support: the expression evaluates the target atom's
-         * stereo configuration (as defined by its Chem::StereoDescriptor) against the configuration constraint flags
-         * derived from the query atom's descriptor. The matching mode (match/not-match) and partial-mapping tolerance
+         * The expression evaluates the target atom's stereo configuration (as defined by its stereo descriptor) against the configuration constraint flags
+         * derived from the query atom's descriptor. The matching logic (match/not-match) and partial mapping tolerance
          * are configurable.
          */
         class CDPL_CHEM_API AtomConfigurationMatchExpression : public MatchExpression<Atom, MolecularGraph>
@@ -63,7 +62,7 @@ namespace CDPL
             typedef std::shared_ptr<AtomConfigurationMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs an \c %AtomConfigurationMatchExpression instance for the specified matching mode and stereo configuration constraints.
+             * \brief Constructs the \c %AtomConfigurationMatchExpression instance for the specified matching logic and stereo configuration constraints.
              * \param query_stereo_descr The descriptor object specifying the query atom's stereo configuration reference atoms and associated configuration constraints
              *                           on matching target atoms.
              * \param query_atom The atom for which this \c %AtomConfigurationMatchExpression instance gets constructed.
@@ -89,12 +88,12 @@ namespace CDPL
              * \param target_molgraph The molecular graph containing the target atom (ignored).
              * \param mapping The current query to target atom/bond mapping candidate.
              * \param aux_data Auxiliary information for expression evaluation (ignored).
-             * \return If the matching mode is 'not match' (see constructor), the method returns \c false if the stereo configuration of the
+             * \return If the matching logic is 'not match' (see constructor), the method returns \c false if the stereo configuration of the
              *         target atom matches one of the specified query configurations, and \c true if not. 
              *         Otherwise, the method will return \c true if the target configuration does match one of the specified configurations, and \c false
              *         if all allowed configurations remain unmatched.
-             * \note If no valid query stereo descriptor was specified or \a query_atom is not identical to the query atom specified in the constrctor,
-             *       the method will return \c true - irrespective of matching mode and actual target atom configuration!
+             * \note If no valid query stereo descriptor was specified or \a query_atom is not identical to the query atom specified in the constructor,
+             *       the method will return \c true - irrespective of matching logic and actual target atom configuration!
              */
             bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
                             const MolecularGraph& target_molgraph, const AtomBondMapping& mapping, const Base::Any& aux_data) const;
