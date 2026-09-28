@@ -45,7 +45,8 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Chem::MatchExpression that constrains target bonds by their reaction-center status (see Chem::ReactionCenterStatus).
+         * \brief Chem::MatchExpression implementation that constrains target bonds by their reaction-center status.
+         * \see Chem::ReactionCenterStatus
          */
         class CDPL_CHEM_API BondReactionCenterStatusMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
@@ -58,11 +59,9 @@ namespace CDPL
             typedef std::shared_ptr<BondReactionCenterStatusMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs a \c %BondReactionCenterStatusMatchExpression instance for the specified query reaction center status.
-             * \param status The query reaction center status as a (valid) bitwise-OR combination of the flags defined in namespace Chem::ReactionCenterStatus.
-             *               The following flags are supported: Chem::ReactionCenterStatus::NO_CENTER, Chem::ReactionCenterStatus::IS_CENTER, 
-             *                 Chem::ReactionCenterStatus::BOND_MADE, Chem::ReactionCenterStatus::BOND_BROKEN, Chem::ReactionCenterStatus::BOND_ORDER_CHANGE 
-             *               and Chem::ReactionCenterStatus::NO_CHANGE - all other flags are ignored. For valid flag combinations see operator()().
+             * \brief Constructs the \c %BondReactionCenterStatusMatchExpression instance for the specified query reaction center status.
+             * \param status The query reaction center status as a (valid) bitwise-OR combination of the flags defined in namespace Chem::ReactionCenterStatus
+             *               (for or valid flag combinations see operator()()).
              */
             BondReactionCenterStatusMatchExpression(unsigned int status);
 

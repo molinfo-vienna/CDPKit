@@ -45,11 +45,12 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Chem::MatchExpression that constrains target bonds by their SMILES/SMARTS bond direction.
+         * \brief Chem::MatchExpression implementation that constrains target bonds by their <em>Daylight SMARTS</em> bond direction.
          *
-         * The expression evaluates the target bond's auxiliary direction value (one of the Chem::BondDirection flags,
-         * supplied as \c aux_data) against the configured direction constraint flags. The matching mode (match/not-match)
-         * is configurable.
+         * The expression evaluates the target bond's direction value (provided as auxiliary matching data) against the configured
+         * direction constraint flags. The matching logic (match/not-match) is configurable.
+         *
+         * \see [\ref SMARTS]
          */
         class CDPL_CHEM_API BondDirectionMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
@@ -61,7 +62,7 @@ namespace CDPL
             typedef std::shared_ptr<BondDirectionMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs an \c %BondDirectionMatchExpression instance for the specified matching mode and bond direction constraints.
+             * \brief Constructs the \c %BondDirectionMatchExpression instance for the specified matching logicand bond direction constraints.
              * \param dir_flags A bitwise-OR combination of the flags defined in namespace Chem::BondDirection that specifies constraints on
              *                  the direction of matching target bonds.
              * \param not_match Specifies whether the direction of a target bond actually has to match (\c true) or \e not match (\c false)
@@ -84,7 +85,7 @@ namespace CDPL
              * \param target_molgraph The molecular graph containing the target bond (ignored).
              * \param mapping The current query to target atom/bond mapping candidate (ignored).
              * \param target_bond_dir Specifies the direction of the target bond by one of the flags defined in namespace Chem::BondDirection. 
-             * \return If the matching mode is 'not match' (see constructor), the method returns \c false if the direction of the
+             * \return If the matching logic is 'not match' (see constructor), the method returns \c false if the direction of the
              *         target bond (given by \a target_bond_dir) matches one of the directions specified in the constructor, and \c true if not. 
              *         If the matching mode is 'match', the expression evaluates to \c true if the target bond matches one of the query directions,
              *         and \c false otherwise.

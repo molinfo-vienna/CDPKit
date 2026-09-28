@@ -42,11 +42,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::MatchExpression that constrains target atoms by the size of the SSSR ring(s) containing them.
+         * \brief Chem::MatchExpression implementation that constrains target atoms by the size of the SSSR ring(s) containing them.
          *
          * For each target atom the expression iterates the perceived SSSR of the target molecular graph and applies the
          * supplied binary functor \a MatchFunc to compare the target ring size against the configured query ring size.
-         * Used in \e SMARTS substructure searches with ring-size atom constraints (e.g. \c [R6]).
+         * Ring size constraints are typically specified as part of atom expressions in <em>Daylight SMARTS</em> patterns [\ref SMARTS]
+         * (e.g. \c [R6] requiring a matching target atom to be contained in a ring of size \e 6).
          *
          * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the size of rings containing
          *                   the target atom against the query ring size. The overloaded function call operator is
@@ -65,7 +66,7 @@ namespace CDPL
             typedef std::shared_ptr<AtomSSSRRingSizeMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs an \c %AtomSSSRRingSizeMatchExpression instance for the specified query ring size.
+             * \brief Constructs the \c %AtomSSSRRingSizeMatchExpression instance for the query ring size \a ring_size.
              * \param ring_size The query ring size that has to be matched (according to the result returned by the
              *                  specified matching functor) by rings containing the checked target atoms. 
              */

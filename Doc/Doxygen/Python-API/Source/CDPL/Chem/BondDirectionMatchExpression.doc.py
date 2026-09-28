@@ -20,9 +20,11 @@
 #
 
 ##
-# \brief Chem.MatchExpression that constrains target bonds by their SMILES/SMARTS bond direction.
+# \brief Chem.MatchExpression implementation that constrains target bonds by their <em>Daylight SMARTS</em> bond direction.
 # 
-# The expression evaluates the target bond's auxiliary direction value (one of the Chem.BondDirection flags, supplied as <tt>aux_data</tt>) against the configured direction constraint flags. The matching mode (match/not-match) is configurable.
+# The expression evaluates the target bond's direction value (provided as auxiliary matching data) against the configured direction constraint flags. The matching logic (match/not-match) is configurable.
+# 
+# \see [\ref SMARTS]
 # 
 class BondDirectionMatchExpression(BondMatchExpression):
 
@@ -33,7 +35,7 @@ class BondDirectionMatchExpression(BondMatchExpression):
     def __init__(expr: BondDirectionMatchExpression) -> None: pass
 
     ##
-    # \brief Constructs an <tt>BondDirectionMatchExpression</tt> instance for the specified matching mode and bond direction constraints.
+    # \brief Constructs the <tt>BondDirectionMatchExpression</tt> instance for the specified matching logicand bond direction constraints.
     # 
     # \param dir_flags A bitwise-OR combination of the flags defined in namespace Chem.BondDirection that specifies constraints on the direction of matching target bonds.
     # \param not_match Specifies whether the direction of a target bond actually has to match (<tt>True</tt>) or <em>not</em> match (<tt>False</tt>) the query direction constraints.

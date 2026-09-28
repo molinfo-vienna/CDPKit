@@ -20,23 +20,23 @@
 #
 
 ##
-# \brief Chem.MatchExpression decorator that negates the result of a wrapped Chem.MatchExpression instance.
+# \brief Chem.MatchExpression implementation that negates the evaluation results of a wrapped external expression instance.
 # 
 # The expression evaluates to the logical negation of its wrapped expression. Useful for expressing "!X" constraints in substructure searches.
 # 
 class NOTBondMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Constructs a <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # \brief Constructs the <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
     # 
-    # \param expr_ptr A reference to the wrapped Chem.MatchExpression instance.
+    # \param expr_ptr A reference to the the match expression instance to wrap.
     # 
     def __init__(expr_ptr: NOTBondMatchExpression) -> None: pass
 
     ##
-    # \brief Constructs a <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # \brief Constructs the <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
     # 
-    # \param expr_ptr A reference to the wrapped Chem.MatchExpression instance.
+    # \param expr_ptr A reference to the the match expression instance to wrap.
     # 
     def __init__(expr_ptr: BondMatchExpression) -> None: pass
 

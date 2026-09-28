@@ -45,11 +45,11 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Chem::MatchExpression that constrains target double bond geometry via the per-substituent bond-direction
-         *        annotations carried by the query (in the style of <em>Daylight SMARTS</em> [\ref SMARTS] \e cis/\e trans patterns).
+         * \brief Chem::MatchExpression implementation that constrains target double bond configuration via the per-substituent bond direction
+         *        annotations carried by the query.
          *
-         * <em>Daylight SMARTS</em> [\ref SMARTS] substructure search patterns specify cis/trans geometry constraints for a double bond by
-         * indicating the relative direction of the bonds to its substituent atoms.
+         * \c %BondSubstituentDirectionMatchExpression implements <em>Daylight SMARTS</em> [\ref SMARTS] cis/trans double bond configuration constraints
+         * that are specified by the relative direction of the bonds to its substituent atoms.
          */
         class CDPL_CHEM_API BondSubstituentDirectionMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
@@ -67,10 +67,10 @@ namespace CDPL
              * The relative directions of the substituent bonds of \a target_bond are considered to match the direction constraints of the
              * \a query_bond substituents if each match expression that is associated with a query substituent bond (taken from the property
              * Chem::BondProperty::MATCH_EXPRESSION) evaluates to \c true for the respective mapped target substituent bond and its direction.
-             * The relative directions of the target substituent bonds are calculated on the fly from the target bond's cis/trans geometry
+             * The relative directions of the target substituent bonds are calculated on the fly from the target bond's cis/trans configuration
              * and get passed to the match expressions via the \a aux_data argument of the function call operator (see
-             * Chem::BondDirectionMatchExpression::operator()()). If the exact cis/trans geometry of \a target_bond was not properly defined (i.e.
-             * the geometry is neither Chem::BondGeometry::CIS nor Chem::BondGeometry::TRANS), the direction of its substituent bonds is set to
+             * Chem::BondDirectionMatchExpression::operator()()). If the exact cis/trans configuration of \a target_bond was not properly defined (i.e.
+             * is neither Chem::BondGeometry::CIS nor Chem::BondGeometry::TRANS), the direction of its substituent bonds is set to
              * Chem::BondDirection::UNSPECIFIED.
              *
              * \param query_bond The query bond.

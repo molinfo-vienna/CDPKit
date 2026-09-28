@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Chem.MatchExpressionList specialization that evaluates the stored expressions as a logical disjunction (OR).
+# \brief Chem.MatchExpressionList implementation that evaluates the stored expressions as a logical disjunction (OR).
 # 
-# The list evaluates to <tt>True</tt> as soon as one contained Chem.MatchExpression evaluates to <tt>True</tt> (short-circuit evaluation). An empty list evaluates to <tt>False</tt>.
+# The list evaluates to <tt>True</tt> as soon as one contained Chem.MatchExpression instance evaluates to <tt>True</tt> for the given query/target object pairs (short-circuit evaluation). An empty list evaluates to <tt>False</tt>.
 # 
 class ORMolecularGraphMatchExpressionList(MolecularGraphMatchExpressionList):
 

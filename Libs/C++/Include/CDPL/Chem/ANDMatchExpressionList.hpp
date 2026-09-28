@@ -41,10 +41,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::MatchExpressionList specialization that evaluates the stored expressions as a logical conjunction (AND).
+         * \brief Chem::MatchExpressionList implementation that evaluates the stored expressions as a logical conjunction (AND).
          *
-         * The list evaluates to \c true if and only if every contained Chem::MatchExpression evaluates to \c true for
-         * the given query/target object pair (short-circuit evaluation). An empty list evaluates to \c true.
+         * The list evaluates to \c true if and only if every contained Chem::MatchExpression instance evaluates to \c true for
+         * the given query/target object pairs (short-circuit evaluation). An empty list evaluates to \c true.
          *
          * \tparam ObjType1 The type of the primary query/target objects for which the expression list gets evaluated.
          * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
@@ -98,9 +98,9 @@ namespace CDPL
         };
 
         /**
-         * \brief Chem::MatchExpressionList specialization (single-object form) that evaluates the stored expressions as a logical conjunction (AND).
+         * \brief Chem::MatchExpressionList specialization that evaluates the stored expressions as a logical conjunction (AND).
          *
-         * The list evaluates to \c true if and only if every contained Chem::MatchExpression evaluates to \c true for
+         * The list evaluates to \c true if and only if every contained Chem::MatchExpression instance evaluates to \c true for
          * the given query/target object pair (short-circuit evaluation). An empty list evaluates to \c true.
          *
          * \tparam ObjType The type of the query/target objects for which the expression list gets evaluated.

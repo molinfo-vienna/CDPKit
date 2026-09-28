@@ -41,10 +41,11 @@ namespace CDPL
     {
 
         /**
-         * \brief Chem::MatchExpression decorator that negates the result of a wrapped Chem::MatchExpression instance.
+         * \brief Chem::MatchExpression implementation that negates the evaluation results of a wrapped external expression instance.
          *
          * The expression evaluates to the logical negation of its wrapped expression. Useful for expressing
          * "!X" constraints in substructure searches.
+         *
          * \tparam ObjType1 The type of the primary query/target objects for which the expression gets evaluated.
          * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
          *                  expression evaluation.
@@ -60,8 +61,8 @@ namespace CDPL
             typedef std::shared_ptr<NOTMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs a \c %NOTMatchExpression object that wraps the match expression instance specified by \a expr_ptr.
-             * \param expr_ptr A pointer to the wrapped Chem::MatchExpression instance.
+             * \brief Constructs the \c %NOTMatchExpression object that wraps the match expression instance specified by \a expr_ptr.
+             * \param expr_ptr A pointer to the the match expression instance to wrap.
              */
             NOTMatchExpression(const typename MatchExpression<ObjType1, ObjType2>::SharedPointer& expr_ptr):
                 expression(expr_ptr) {}
@@ -107,10 +108,11 @@ namespace CDPL
         };
 
         /**
-         * \brief Chem::MatchExpression decorator that negates the result of a wrapped Chem::MatchExpression instance.
+         * \brief Chem::MatchExpression implementation that negates the evaluation results of a wrapped external expression instance.
          *
          * The expression evaluates to the logical negation of its wrapped expression. Useful for expressing
          * "!X" constraints in substructure searches.
+         *
          * \tparam ObjType The type of the query/target objects for which the expression gets evaluated.
          */
         template <typename ObjType>
@@ -124,8 +126,8 @@ namespace CDPL
             typedef std::shared_ptr<NOTMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs a \c %NOTMatchExpressionBase object that wraps the match expression instance specified by \a expr_ptr.
-             * \param expr_ptr A pointer to the wrapped Chem::MatchExpression instance.
+             * \brief Constructs the \c %NOTMatchExpressionBase object that wraps the match expression instance specified by \a expr_ptr.
+             * \param expr_ptr A pointer to the the match expression instance to wrap.
              */
             NOTMatchExpression(const typename MatchExpression<ObjType, void>::SharedPointer& expr_ptr):
                 expression(expr_ptr) {}
