@@ -32,16 +32,16 @@ class FeatureTypeHistogram(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %FeatureTypeHistogram instance \a ft_hist.
-    # \param ft_hist The \c %FeatureTypeHistogram instance to copy.
+    # \brief Initializes a copy of the \c FeatureTypeHistogram instance \a ft_hist.
+    # \param ft_hist The \c FeatureTypeHistogram instance to copy.
     # 
     def __init__(ft_hist: FeatureTypeHistogram) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %FeatureTypeHistogram instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %FeatureTypeHistogram instances \e a and \e b reference different C++ objects. 
+    # Different Python \c FeatureTypeHistogram instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c FeatureTypeHistogram instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -69,8 +69,8 @@ class FeatureTypeHistogram(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FeatureTypeHistogram instance \a map.
-    # \param map The \c %FeatureTypeHistogram instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c FeatureTypeHistogram instance \a map.
+    # \param map The \c FeatureTypeHistogram instance to copy.
     # \return \a self
     # 
     def assign(map: FeatureTypeHistogram) -> FeatureTypeHistogram: pass
@@ -187,42 +187,42 @@ class FeatureTypeHistogram(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == ft_hist</tt>.
-    # \param ft_hist The \c %object instance to be compared with.
+    # \param ft_hist The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != ft_hist</tt>.
-    # \param ft_hist The \c %object instance to be compared with.
+    # \param ft_hist The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= ft_hist</tt>.
-    # \param ft_hist The \c %object instance to be compared with.
+    # \param ft_hist The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= ft_hist</tt>.
-    # \param ft_hist The \c %object instance to be compared with.
+    # \param ft_hist The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ge__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < ft_hist</tt>.
-    # \param ft_hist The \c %object instance to be compared with.
+    # \param ft_hist The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > ft_hist</tt>.
-    # \param ft_hist The \c %object instance to be compared with.
+    # \param ft_hist The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __gt__(ft_hist: object) -> bool: pass

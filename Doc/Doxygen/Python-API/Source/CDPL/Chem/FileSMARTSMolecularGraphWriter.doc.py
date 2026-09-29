@@ -25,7 +25,7 @@
 class FileSMARTSMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c %FileSMARTSMolecularGraphWriter instance.
+    # \brief Initializes the \c FileSMARTSMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

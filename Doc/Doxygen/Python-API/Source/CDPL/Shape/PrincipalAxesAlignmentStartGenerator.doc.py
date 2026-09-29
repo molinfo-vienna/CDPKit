@@ -47,8 +47,8 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %PrincipalAxesAlignmentStartGenerator instance \a gen.
-    # \param gen The \c %PrincipalAxesAlignmentStartGenerator instance to copy.
+    # \brief Initializes a copy of the \c PrincipalAxesAlignmentStartGenerator instance \a gen.
+    # \param gen The \c PrincipalAxesAlignmentStartGenerator instance to copy.
     # 
     def __init__(gen: PrincipalAxesAlignmentStartGenerator) -> None: pass
 
@@ -200,8 +200,8 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     def setRandomSeed(seed: int) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %PrincipalAxesAlignmentStartGenerator instance \a gen.
-    # \param gen The \c %PrincipalAxesAlignmentStartGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c PrincipalAxesAlignmentStartGenerator instance \a gen.
+    # \param gen The \c PrincipalAxesAlignmentStartGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: PrincipalAxesAlignmentStartGenerator) -> PrincipalAxesAlignmentStartGenerator: pass

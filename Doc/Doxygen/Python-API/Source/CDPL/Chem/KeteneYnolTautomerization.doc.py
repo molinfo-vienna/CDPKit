@@ -32,7 +32,7 @@ class KeteneYnolTautomerization(PatternBasedTautomerizationRule):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %KeteneYnolTautomerization instance \a rule.
-    # \param rule The \c %KeteneYnolTautomerization instance to copy.
+    # \brief Initializes a copy of the \c KeteneYnolTautomerization instance \a rule.
+    # \param rule The \c KeteneYnolTautomerization instance to copy.
     # 
     def __init__(rule: KeteneYnolTautomerization) -> None: pass

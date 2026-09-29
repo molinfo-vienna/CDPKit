@@ -25,7 +25,7 @@
 class FileSMARTSReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \c %FileSMARTSReactionWriter instance.
+    # \brief Initializes the \c FileSMARTSReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

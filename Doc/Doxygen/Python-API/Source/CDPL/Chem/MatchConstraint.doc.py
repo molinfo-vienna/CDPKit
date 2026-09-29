@@ -67,13 +67,13 @@ class MatchConstraint(Boost.Python.instance):
         NOT_EQUAL = 6
 
     ##
-    # \brief Initializes a copy of the \c %MatchConstraint instance \a constr.
-    # \param constr The \c %MatchConstraint instance to copy.
+    # \brief Initializes a copy of the \c MatchConstraint instance \a constr.
+    # \param constr The \c MatchConstraint instance to copy.
     # 
     def __init__(constr: MatchConstraint) -> None: pass
 
     ##
-    # \brief Initializes the \c %MatchConstraint instance.
+    # \brief Initializes the \c MatchConstraint instance.
     # \param id 
     # \param rel 
     # 
@@ -89,8 +89,8 @@ class MatchConstraint(Boost.Python.instance):
     def __init__(id: int, rel: Relation, val: Base.Any) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %MatchConstraint instance \a constr.
-    # \param constr The \c %MatchConstraint instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c MatchConstraint instance \a constr.
+    # \param constr The \c MatchConstraint instance to copy.
     # \return \a self
     # 
     def assign(constr: MatchConstraint) -> MatchConstraint: pass

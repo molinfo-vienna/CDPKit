@@ -21,8 +21,9 @@
 
 ##
 # \brief Provides infrastructure for the registration of I/O callback functions.
-# 
-# The purpose of <tt>DataIOBase</tt> is to provide methods for the registration of I/O callback functions to subclasses implementing the input and output of data objects (see Base.DataReader and Base.DataWriter). I/O callbacks allow client code to be notified whenever a data object was read, written or skipped. I/O callbacks are registered by calling the method registerIOCallback() with an argument of type DataIOBase.IOCallbackFunction. DataIOBase.IOCallbackFunction is a generic functor implementation that is able to wrap any compatible (in terms of return and argument type) function reference or function object. Therefore, no special requirements beside return and argument types are imposed on the type of the used I/O callback target function.
+#  
+# The purpose of <tt>DataIOBase</tt> is to provide methods for the registration of I/O callback functions to subclasses implementing the input and output of data objects.
+# I/O callbacks allow client code to be notified whenever a data object was read, written or skipped. I/O callbacks are registered by calling the method registerIOCallback() with an argument of type Base.VoidDataIOBaseFunctor. Base.VoidDataIOBaseFunctor is a generic functor implementation that is able to wrap any compatible (in terms of return and argument type) callable object. Therefore, no special requirements beside return and argument types are imposed on the type of the used I/O callback target function.
 # 
 class DataIOBase(ControlParameterContainer):
 

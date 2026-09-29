@@ -29,43 +29,43 @@ class DMatrixExpression(ConstDMatrixExpression):
     def swap(e: DMatrixExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DMatrixExpression instance \a e.
-    # \param e The \c %DMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c DMatrixExpression instance \a e.
+    # \param e The \c DMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
-    # \param e The \c %ConstFMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFMatrixExpression instance \a e.
+    # \param e The \c ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
-    # \param e The \c %ConstDMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDMatrixExpression instance \a e.
+    # \param e The \c ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
-    # \param e The \c %ConstLMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLMatrixExpression instance \a e.
+    # \param e The \c ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
-    # \param e The \c %ConstULMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULMatrixExpression instance \a e.
+    # \param e The \c ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
-    # \param a The \c %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \param a The \c object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -77,42 +77,42 @@ class DMatrixExpression(ConstDMatrixExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \c %DMatrixExpression instance \a self.
+    # \return The updated \c DMatrixExpression instance \a self.
     # 
     def __iadd__(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \c %DMatrixExpression instance \a self.
+    # \return The updated \c DMatrixExpression instance \a self.
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \c %DMatrixExpression instance \a self.
+    # \return The updated \c DMatrixExpression instance \a self.
     # 
     def __isub__(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \c %DMatrixExpression instance \a self.
+    # \return The updated \c DMatrixExpression instance \a self.
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \c %DMatrixExpression instance \a self.
+    # \return The updated \c DMatrixExpression instance \a self.
     # 
     def __imul__(t: float) -> DMatrixExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \c %DMatrixExpression instance \a self.
+    # \return The updated \c DMatrixExpression instance \a self.
     # 
     def __idiv__(t: float) -> DMatrixExpression: pass
 

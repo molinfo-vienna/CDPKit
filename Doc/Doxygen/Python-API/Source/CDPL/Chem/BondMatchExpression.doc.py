@@ -27,15 +27,15 @@
 class BondMatchExpression(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %BondMatchExpression instance.
+    # \brief Initializes the \c BondMatchExpression instance.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %BondMatchExpression instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %BondMatchExpression instances \e a and \e b reference different C++ objects. 
+    # Different Python \c BondMatchExpression instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c BondMatchExpression instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 

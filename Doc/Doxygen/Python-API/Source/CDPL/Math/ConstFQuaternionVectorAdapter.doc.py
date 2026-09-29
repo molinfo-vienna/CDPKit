@@ -25,13 +25,13 @@
 class ConstFQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c %ConstFQuaternionVectorAdapter instance \a a.
-    # \param a The \c %ConstFQuaternionVectorAdapter instance to copy.
+    # \brief Initializes a copy of the \c ConstFQuaternionVectorAdapter instance \a a.
+    # \param a The \c ConstFQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: ConstFQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c %ConstFQuaternionVectorAdapter instance.
+    # \brief Initializes the \c ConstFQuaternionVectorAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstFQuaternionExpression) -> None: pass
@@ -39,8 +39,8 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %ConstFQuaternionVectorAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %ConstFQuaternionVectorAdapter instances \e a and \e b reference different C++ objects. 
+    # Different Python \c ConstFQuaternionVectorAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c ConstFQuaternionVectorAdapter instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -75,28 +75,28 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c %ConstFQuaternionVectorAdapter instance to be compared with.
+    # \param a The \c ConstFQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(a: ConstFQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \c %ConstFVectorExpression instance to be compared with.
+    # \param e The \c ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c %ConstFQuaternionVectorAdapter instance to be compared with.
+    # \param a The \c ConstFQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(a: ConstFQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \c %ConstFVectorExpression instance to be compared with.
+    # \param e The \c ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
@@ -131,7 +131,7 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \c %ConstFQuaternionVectorAdapter instance.
+    # \brief Returns a string representation of the \c ConstFQuaternionVectorAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -143,49 +143,49 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \c %ConstFVectorExpression instance holding the result of the addition.
+    # \return A \c ConstFVectorExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \c %ConstFQuaternionVectorAdapter instance holding the result of the subtraction.
+    # \return A \c ConstFQuaternionVectorAdapter instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \c %ConstFVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstFVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \c %ConstFVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstFVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstFVectorExpression instance holding the result of the division.
+    # \return A \c ConstFVectorExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstFVectorExpression instance holding the result of the division.
+    # \return A \c ConstFVectorExpression instance holding the result of the division.
     # 
     def __truediv__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
     # \param t Specifies the multiplicand.
-    # \return A \c %ConstFVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstFVectorExpression instance holding the result of the multiplication.
     # 
     def __rmul__(t: float) -> ConstFVectorExpression: pass
 

@@ -20,29 +20,42 @@
 #
 
 ##
-# \brief 
-#
+# \brief A wrapper class for various types of callable objects.
+# 
 class FloatVector3FArrayFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %FloatVector3FArrayFunctor instance.
+    # \brief Initializes the \c FloatVector3FArrayFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %FloatVector3FArrayFunctor instance \a func.
-    # \param func The \c %FloatVector3FArrayFunctor instance to copy.
+    # \brief Initializes a copy of the \c FloatVector3FArrayFunctor instance \a func.
+    # \param func The \c FloatVector3FArrayFunctor instance to copy.
     # 
     def __init__(func: FloatVector3FArrayFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %FloatVector3FArrayFunctor instance.
-    # \param callable 
+    # \brief Initializes the \c FloatVector3FArrayFunctor instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given argument.
+    # \param arg1 The argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Vector3FArray) -> float: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass

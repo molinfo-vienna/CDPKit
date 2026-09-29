@@ -32,16 +32,16 @@ class BondMapping(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %BondMapping instance \a mapping.
-    # \param mapping The \c %BondMapping instance to copy.
+    # \brief Initializes a copy of the \c BondMapping instance \a mapping.
+    # \param mapping The \c BondMapping instance to copy.
     # 
     def __init__(mapping: BondMapping) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %BondMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %BondMapping instances \e a and \e b reference different C++ objects. 
+    # Different Python \c BondMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c BondMapping instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -69,8 +69,8 @@ class BondMapping(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %BondMapping instance \a map.
-    # \param map The \c %BondMapping instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c BondMapping instance \a map.
+    # \param map The \c BondMapping instance to copy.
     # \return \a self
     # 
     def assign(map: BondMapping) -> BondMapping: pass

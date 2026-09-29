@@ -32,14 +32,14 @@ class BRICSFragmentGenerator(FragmentGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %BRICSFragmentGenerator instance \a gen.
-    # \param gen The \c %BRICSFragmentGenerator instance to copy.
+    # \brief Initializes a copy of the \c BRICSFragmentGenerator instance \a gen.
+    # \param gen The \c BRICSFragmentGenerator instance to copy.
     # 
     def __init__(gen: BRICSFragmentGenerator) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %BRICSFragmentGenerator instance \a gen.
-    # \param gen The \c %BRICSFragmentGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c BRICSFragmentGenerator instance \a gen.
+    # \param gen The \c BRICSFragmentGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: BRICSFragmentGenerator) -> BRICSFragmentGenerator: pass

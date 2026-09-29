@@ -25,7 +25,7 @@
 class FileSMILESMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c %FileSMILESMolecularGraphWriter instance.
+    # \brief Initializes the \c FileSMILESMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

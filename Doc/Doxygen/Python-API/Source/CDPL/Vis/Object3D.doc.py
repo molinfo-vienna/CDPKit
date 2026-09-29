@@ -41,8 +41,8 @@ class Object3D(Base.PropertyContainer):
     def __init__(obj: Object3D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a arg1 with a copy of the state of the \c %Object3D instance \a self.
-    # \param self The \c %Object3D instance to copy.
+    # \brief Replaces the current state of \a arg1 with a copy of the state of the \c Object3D instance \a self.
+    # \param self The \c Object3D instance to copy.
     # \return \a arg1
     # 
     def assign(self: Object3D) -> Object3D: pass

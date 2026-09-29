@@ -25,21 +25,21 @@
 class SpatialFeatureAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %SpatialFeatureAlignment instance.
+    # \brief Initializes the \c SpatialFeatureAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %SpatialFeatureAlignment instance \a alignment.
-    # \param alignment The \c %SpatialFeatureAlignment instance to copy.
+    # \brief Initializes a copy of the \c SpatialFeatureAlignment instance \a alignment.
+    # \param alignment The \c SpatialFeatureAlignment instance to copy.
     # 
     def __init__(alignment: SpatialFeatureAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %SpatialFeatureAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %SpatialFeatureAlignment instances \e a and \e b reference different C++ objects. 
+    # Different Python \c SpatialFeatureAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c SpatialFeatureAlignment instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -92,8 +92,8 @@ class SpatialFeatureAlignment(Boost.Python.instance):
     def getTransform() -> Math.Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %SpatialFeatureAlignment instance \a alignment.
-    # \param alignment The \c %SpatialFeatureAlignment instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c SpatialFeatureAlignment instance \a alignment.
+    # \param alignment The \c SpatialFeatureAlignment instance to copy.
     # \return \a self
     # 
     def assign(alignment: SpatialFeatureAlignment) -> SpatialFeatureAlignment: pass

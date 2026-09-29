@@ -40,8 +40,8 @@ class CationPiInteractionScore(FeatureInteractionScore):
     DEF_MAX_ANGLE = 30.0
 
     ##
-    # \brief Initializes a copy of the \c %CationPiInteractionScore instance \a score.
-    # \param score The \c %CationPiInteractionScore instance to copy.
+    # \brief Initializes a copy of the \c CationPiInteractionScore instance \a score.
+    # \param score The \c CationPiInteractionScore instance to copy.
     # 
     def __init__(score: CationPiInteractionScore) -> None: pass
 
@@ -91,8 +91,8 @@ class CationPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %CationPiInteractionScore instance \a constr.
-    # \param constr The \c %CationPiInteractionScore instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c CationPiInteractionScore instance \a constr.
+    # \param constr The \c CationPiInteractionScore instance to copy.
     # \return \a self
     # 
     def assign(constr: CationPiInteractionScore) -> CationPiInteractionScore: pass

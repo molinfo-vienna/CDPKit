@@ -25,7 +25,7 @@
 class FilePMLFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \c %FilePMLFeatureContainerWriter instance.
+    # \brief Initializes the \c FilePMLFeatureContainerWriter instance.
     # \param file_name 
     # \param mode 
     # 

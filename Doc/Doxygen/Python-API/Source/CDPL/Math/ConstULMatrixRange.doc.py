@@ -25,13 +25,13 @@
 class ConstULMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c %ConstULMatrixRange instance \a r.
-    # \param r The \c %ConstULMatrixRange instance to copy.
+    # \brief Initializes a copy of the \c ConstULMatrixRange instance \a r.
+    # \param r The \c ConstULMatrixRange instance to copy.
     # 
     def __init__(r: ConstULMatrixRange) -> None: pass
 
     ##
-    # \brief Initializes the \c %ConstULMatrixRange instance.
+    # \brief Initializes the \c ConstULMatrixRange instance.
     # \param e 
     # \param r1 
     # \param r2 
@@ -55,8 +55,8 @@ class ConstULMatrixRange(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %ConstULMatrixRange instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %ConstULMatrixRange instances \e a and \e b reference different C++ objects. 
+    # Different Python \c ConstULMatrixRange instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c ConstULMatrixRange instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -112,34 +112,34 @@ class ConstULMatrixRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param r The \c %ConstULMatrixRange instance to be compared with.
+    # \param r The \c ConstULMatrixRange instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(r: ConstULMatrixRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \c %ConstULMatrixExpression instance to be compared with.
+    # \param e The \c ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param r The \c %ConstULMatrixRange instance to be compared with.
+    # \param r The \c ConstULMatrixRange instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(r: ConstULMatrixRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \c %ConstULMatrixExpression instance to be compared with.
+    # \param e The \c ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \c %ConstULMatrixRange instance.
+    # \brief Returns a string representation of the \c ConstULMatrixRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -151,56 +151,56 @@ class ConstULMatrixRange(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the addition.
+    # \return A \c ConstULMatrixExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \c %ConstULMatrixRange instance holding the result of the subtraction.
+    # \return A \c ConstULMatrixRange instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the multiplication.
+    # \return A \c ConstULMatrixExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the multiplication.
+    # \return A \c ConstULMatrixExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \c %ConstULVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstULVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the division.
+    # \return A \c ConstULMatrixExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the division.
+    # \return A \c ConstULMatrixExpression instance holding the result of the division.
     # 
     def __truediv__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
     # \param t Specifies the multiplicand.
-    # \return A \c %ConstULMatrixExpression instance holding the result of the multiplication.
+    # \return A \c ConstULMatrixExpression instance holding the result of the multiplication.
     # 
     def __rmul__(t: int) -> ConstULMatrixExpression: pass
 

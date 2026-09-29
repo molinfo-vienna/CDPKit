@@ -35,21 +35,21 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DGStructureGeneratorSettings instance \a settings.
-    # \param settings The \c %DGStructureGeneratorSettings instance to copy.
+    # \brief Initializes a copy of the \c DGStructureGeneratorSettings instance \a settings.
+    # \param settings The \c DGStructureGeneratorSettings instance to copy.
     # 
     def __init__(settings: DGStructureGeneratorSettings) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DGStructureGeneratorSettings instance \a settings.
-    # \param settings The \c %DGStructureGeneratorSettings instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c DGStructureGeneratorSettings instance \a settings.
+    # \param settings The \c DGStructureGeneratorSettings instance to copy.
     # \return \a self
     # 
     def assign(settings: DGStructureGeneratorSettings) -> DGStructureGeneratorSettings: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DGConstraintGeneratorSettings instance \a settings.
-    # \param settings The \c %DGConstraintGeneratorSettings instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c DGConstraintGeneratorSettings instance \a settings.
+    # \param settings The \c DGConstraintGeneratorSettings instance to copy.
     # \return \a self
     # 
     def assign(settings: DGConstraintGeneratorSettings) -> DGStructureGeneratorSettings: pass

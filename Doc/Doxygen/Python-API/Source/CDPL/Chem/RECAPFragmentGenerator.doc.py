@@ -32,14 +32,14 @@ class RECAPFragmentGenerator(FragmentGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %RECAPFragmentGenerator instance \a gen.
-    # \param gen The \c %RECAPFragmentGenerator instance to copy.
+    # \brief Initializes a copy of the \c RECAPFragmentGenerator instance \a gen.
+    # \param gen The \c RECAPFragmentGenerator instance to copy.
     # 
     def __init__(gen: RECAPFragmentGenerator) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %RECAPFragmentGenerator instance \a gen.
-    # \param gen The \c %RECAPFragmentGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c RECAPFragmentGenerator instance \a gen.
+    # \param gen The \c RECAPFragmentGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: RECAPFragmentGenerator) -> RECAPFragmentGenerator: pass

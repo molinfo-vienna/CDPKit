@@ -34,7 +34,7 @@ class IcosahedronMesh3D(TriangleMesh3D):
     def __init__(radius: float = 1.0) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %IcosahedronMesh3D instance \a mesh.
-    # \param mesh The \c %IcosahedronMesh3D instance to copy.
+    # \brief Initializes a copy of the \c IcosahedronMesh3D instance \a mesh.
+    # \param mesh The \c IcosahedronMesh3D instance to copy.
     # 
     def __init__(mesh: IcosahedronMesh3D) -> None: pass

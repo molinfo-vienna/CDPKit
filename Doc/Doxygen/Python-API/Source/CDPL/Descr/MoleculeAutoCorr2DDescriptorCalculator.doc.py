@@ -59,13 +59,13 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
-    # \param calc The \c %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
+    # \brief Initializes a copy of the \c MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
+    # \param calc The \c MoleculeAutoCorr2DDescriptorCalculator instance to copy.
     # 
     def __init__(calc: MoleculeAutoCorr2DDescriptorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %MoleculeAutoCorr2DDescriptorCalculator instance.
+    # \brief Initializes the \c MoleculeAutoCorr2DDescriptorCalculator instance.
     # \param molgraph 
     # \param corr_vec 
     # 
@@ -74,8 +74,8 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %MoleculeAutoCorr2DDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %MoleculeAutoCorr2DDescriptorCalculator instances \e a and \e b reference different C++ objects. 
+    # Different Python \c MoleculeAutoCorr2DDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c MoleculeAutoCorr2DDescriptorCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -84,8 +84,8 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
-    # \param calc The \c %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
+    # \param calc The \c MoleculeAutoCorr2DDescriptorCalculator instance to copy.
     # \return \a self
     # 
     def assign(calc: MoleculeAutoCorr2DDescriptorCalculator) -> MoleculeAutoCorr2DDescriptorCalculator: pass

@@ -20,29 +20,42 @@
 #
 
 ##
-# \brief 
-#
+# \brief A wrapper class for various types of callable objects.
+# 
 class DoubleVector2DArrayFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %DoubleVector2DArrayFunctor instance.
+    # \brief Initializes the \c DoubleVector2DArrayFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DoubleVector2DArrayFunctor instance \a func.
-    # \param func The \c %DoubleVector2DArrayFunctor instance to copy.
+    # \brief Initializes a copy of the \c DoubleVector2DArrayFunctor instance \a func.
+    # \param func The \c DoubleVector2DArrayFunctor instance to copy.
     # 
     def __init__(func: DoubleVector2DArrayFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %DoubleVector2DArrayFunctor instance.
-    # \param callable 
+    # \brief Initializes the \c DoubleVector2DArrayFunctor instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given argument.
+    # \param arg1 The argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Vector2DArray) -> float: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass

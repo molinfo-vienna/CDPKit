@@ -25,7 +25,7 @@
 class FileSDFMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c %FileSDFMoleculeReader instance.
+    # \brief Initializes the \c FileSDFMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

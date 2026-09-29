@@ -25,6 +25,6 @@
 class PMLFeatureContainerOutputHandler(FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \c %PMLFeatureContainerOutputHandler instance.
+    # \brief Initializes the \c PMLFeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

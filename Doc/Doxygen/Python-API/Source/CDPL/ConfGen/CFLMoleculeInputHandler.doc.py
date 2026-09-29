@@ -25,6 +25,6 @@
 class CFLMoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c %CFLMoleculeInputHandler instance.
+    # \brief Initializes the \c CFLMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

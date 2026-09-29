@@ -20,29 +20,43 @@
 #
 
 ##
-# \brief 
-#
+# \brief A wrapper class for various types of callable objects.
+# 
 class DoubleVector3DFeatureFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %DoubleVector3DFeatureFunctor instance.
+    # \brief Initializes the \c DoubleVector3DFeatureFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DoubleVector3DFeatureFunctor instance \a func.
-    # \param func The \c %DoubleVector3DFeatureFunctor instance to copy.
+    # \brief Initializes a copy of the \c DoubleVector3DFeatureFunctor instance \a func.
+    # \param func The \c DoubleVector3DFeatureFunctor instance to copy.
     # 
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %DoubleVector3DFeatureFunctor instance.
-    # \param callable 
+    # \brief Initializes the \c DoubleVector3DFeatureFunctor instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given arguments.
+    # \param arg1 The first argument to forward.
+    # \param arg2 The second argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Math.Vector3D, arg2: Pharm.Feature) -> float: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass

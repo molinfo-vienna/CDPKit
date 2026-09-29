@@ -45,8 +45,8 @@ class XBondingInteractionScore(FeatureInteractionScore):
     DEF_MAX_ACC_ANGLE = 35.0
 
     ##
-    # \brief Initializes a copy of the \c %XBondingInteractionScore instance \a score.
-    # \param score The \c %XBondingInteractionScore instance to copy.
+    # \brief Initializes a copy of the \c XBondingInteractionScore instance \a score.
+    # \param score The \c XBondingInteractionScore instance to copy.
     # 
     def __init__(score: XBondingInteractionScore) -> None: pass
 
@@ -111,8 +111,8 @@ class XBondingInteractionScore(FeatureInteractionScore):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %XBondingInteractionScore instance \a constr.
-    # \param constr The \c %XBondingInteractionScore instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c XBondingInteractionScore instance \a constr.
+    # \param constr The \c XBondingInteractionScore instance to copy.
     # \return \a self
     # 
     def assign(constr: XBondingInteractionScore) -> XBondingInteractionScore: pass

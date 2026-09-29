@@ -27,19 +27,19 @@
 class ORReactionMatchExpressionList(ReactionMatchExpressionList):
 
     ##
-    # \brief Initializes the \c %ORReactionMatchExpressionList instance.
+    # \brief Initializes the \c ORReactionMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %ORReactionMatchExpressionList instance \a expr.
-    # \param expr The \c %ORReactionMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c ORReactionMatchExpressionList instance \a expr.
+    # \param expr The \c ORReactionMatchExpressionList instance to copy.
     # 
     def __init__(expr: ORReactionMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ORReactionMatchExpressionList instance \a expr.
-    # \param expr The \c %ORReactionMatchExpressionList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ORReactionMatchExpressionList instance \a expr.
+    # \param expr The \c ORReactionMatchExpressionList instance to copy.
     # \return \a self
     # 
     def assign(expr: ORReactionMatchExpressionList) -> ORReactionMatchExpressionList: pass

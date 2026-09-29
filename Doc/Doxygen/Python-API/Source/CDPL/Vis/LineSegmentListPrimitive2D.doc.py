@@ -30,14 +30,14 @@ class LineSegmentListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %LineSegmentListPrimitive2D instance \a prim.
-    # \param prim The \c %LineSegmentListPrimitive2D instance to copy.
+    # \brief Initializes a copy of the \c LineSegmentListPrimitive2D instance \a prim.
+    # \param prim The \c LineSegmentListPrimitive2D instance to copy.
     # 
     def __init__(prim: LineSegmentListPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %LineSegmentListPrimitive2D instance \a prim.
-    # \param prim The \c %LineSegmentListPrimitive2D instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c LineSegmentListPrimitive2D instance \a prim.
+    # \param prim The \c LineSegmentListPrimitive2D instance to copy.
     # \return \a self
     # 
     def assign(prim: LineSegmentListPrimitive2D) -> LineSegmentListPrimitive2D: pass

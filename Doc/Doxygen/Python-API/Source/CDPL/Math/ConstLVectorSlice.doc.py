@@ -25,13 +25,13 @@
 class ConstLVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c %ConstLVectorSlice instance \a s.
-    # \param s The \c %ConstLVectorSlice instance to copy.
+    # \brief Initializes a copy of the \c ConstLVectorSlice instance \a s.
+    # \param s The \c ConstLVectorSlice instance to copy.
     # 
     def __init__(s: ConstLVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \c %ConstLVectorSlice instance.
+    # \brief Initializes the \c ConstLVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -54,8 +54,8 @@ class ConstLVectorSlice(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %ConstLVectorSlice instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %ConstLVectorSlice instances \e a and \e b reference different C++ objects. 
+    # Different Python \c ConstLVectorSlice instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c ConstLVectorSlice instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -90,28 +90,28 @@ class ConstLVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == s</tt>.
-    # \param s The \c %ConstLVectorSlice instance to be compared with.
+    # \param s The \c ConstLVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(s: ConstLVectorSlice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \c %ConstLVectorExpression instance to be compared with.
+    # \param e The \c ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != s</tt>.
-    # \param s The \c %ConstLVectorSlice instance to be compared with.
+    # \param s The \c ConstLVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(s: ConstLVectorSlice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \c %ConstLVectorExpression instance to be compared with.
+    # \param e The \c ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstLVectorExpression) -> bool: pass
@@ -142,7 +142,7 @@ class ConstLVectorSlice(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \c %ConstLVectorSlice instance.
+    # \brief Returns a string representation of the \c ConstLVectorSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -154,49 +154,49 @@ class ConstLVectorSlice(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \c %ConstLVectorExpression instance holding the result of the addition.
+    # \return A \c ConstLVectorExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \c %ConstLVectorSlice instance holding the result of the subtraction.
+    # \return A \c ConstLVectorSlice instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \c %ConstLVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstLVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \c %ConstLVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstLVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \return A \c ConstLVectorExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # \return A \c ConstLVectorExpression instance holding the result of the division.
     # 
     def __truediv__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
     # \param t Specifies the multiplicand.
-    # \return A \c %ConstLVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstLVectorExpression instance holding the result of the multiplication.
     # 
     def __rmul__(t: int) -> ConstLVectorExpression: pass
 

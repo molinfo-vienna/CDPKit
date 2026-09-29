@@ -64,9 +64,9 @@ namespace CDPL
             typedef FileExtensionList::iterator FileExtensionIterator;
 
             /**
-             * \brief Constructs and initializes a \c %DataFormat object with the given attributes.
-             * \param name The short-name of the data format, e.g. "PNG".
-             * \param descr A string providing a brief human readable description of the data format, e.g. "Portable Network Graphics".
+             * \brief Constructs and initializes the \c %DataFormat instance with the given attributes.
+             * \param name The short-name of the data format (e.g. "PNG").
+             * \param descr A string providing a brief human readable description of the data format (e.g. "Portable Network Graphics").
              * \param mime_type The mime-type associated with the data format (e.g. "image/png"), or an empty string if the mime-type
              *                  is not available.
              * \param file_ext_begin An iterator pointing to the beginning of the file extension list.
@@ -82,7 +82,7 @@ namespace CDPL
             {}
 
             /**
-             * \brief Default constructor.
+             * \brief Constructs and initializes an empty \c %DataFormat instance.
              *
              * All string attributes are initialized to an empty string, and the multi record format flag is set to \c false.
              */

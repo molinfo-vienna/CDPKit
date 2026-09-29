@@ -25,13 +25,13 @@
 class LTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c %LTranslationMatrix instance \a m.
-    # \param m The \c %LTranslationMatrix instance to copy.
+    # \brief Initializes a copy of the \c LTranslationMatrix instance \a m.
+    # \param m The \c LTranslationMatrix instance to copy.
     # 
     def __init__(m: LTranslationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c %LTranslationMatrix instance.
+    # \brief Initializes the \c LTranslationMatrix instance.
     # \param n 
     # \param tx 
     # \param ty 
@@ -44,8 +44,8 @@ class LTranslationMatrix(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %LTranslationMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %LTranslationMatrix instances \e a and \e b reference different C++ objects. 
+    # Different Python \c LTranslationMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c LTranslationMatrix instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -64,8 +64,8 @@ class LTranslationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %LTranslationMatrix instance \a m.
-    # \param m The \c %LTranslationMatrix instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c LTranslationMatrix instance \a m.
+    # \param m The \c LTranslationMatrix instance to copy.
     # \return \a self
     # 
     def assign(m: LTranslationMatrix) -> LTranslationMatrix: pass
@@ -80,34 +80,34 @@ class LTranslationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
-    # \param m The \c %LTranslationMatrix instance to be compared with.
+    # \param m The \c LTranslationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(m: LTranslationMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \c %ConstLMatrixExpression instance to be compared with.
+    # \param e The \c ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
-    # \param m The \c %LTranslationMatrix instance to be compared with.
+    # \param m The \c LTranslationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(m: LTranslationMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \c %ConstLMatrixExpression instance to be compared with.
+    # \param e The \c ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \c %LTranslationMatrix instance.
+    # \brief Returns a string representation of the \c LTranslationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -119,56 +119,56 @@ class LTranslationMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the addition.
+    # \return A \c ConstLMatrixExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \c %LTranslationMatrix instance holding the result of the subtraction.
+    # \return A \c LTranslationMatrix instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the multiplication.
+    # \return A \c ConstLMatrixExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the multiplication.
+    # \return A \c ConstLMatrixExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \c %ConstLVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstLVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the division.
+    # \return A \c ConstLMatrixExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the division.
+    # \return A \c ConstLMatrixExpression instance holding the result of the division.
     # 
     def __truediv__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
     # \param t Specifies the multiplicand.
-    # \return A \c %ConstLMatrixExpression instance holding the result of the multiplication.
+    # \return A \c ConstLMatrixExpression instance holding the result of the multiplication.
     # 
     def __rmul__(t: int) -> ConstLMatrixExpression: pass
 

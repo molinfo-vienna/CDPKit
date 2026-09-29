@@ -32,16 +32,16 @@ class BondMatchExpressionList(BondMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %BondMatchExpressionList instance \a expr.
-    # \param expr The \c %BondMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c BondMatchExpressionList instance \a expr.
+    # \param expr The \c BondMatchExpressionList instance to copy.
     # 
     def __init__(expr: BondMatchExpressionList) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %BondMatchExpressionList instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %BondMatchExpressionList instances \e a and \e b reference different C++ objects. 
+    # Different Python \c BondMatchExpressionList instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c BondMatchExpressionList instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -97,8 +97,8 @@ class BondMatchExpressionList(BondMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %BondMatchExpressionList instance \a array.
-    # \param array The \c %BondMatchExpressionList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c BondMatchExpressionList instance \a array.
+    # \param array The \c BondMatchExpressionList instance to copy.
     # \return \a self
     # 
     def assign(array: BondMatchExpressionList) -> BondMatchExpressionList: pass
@@ -228,14 +228,14 @@ class BondMatchExpressionList(BondMatchExpression):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == expr</tt>.
-    # \param expr The \c %object instance to be compared with.
+    # \param expr The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(expr: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != expr</tt>.
-    # \param expr The \c %object instance to be compared with.
+    # \param expr The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(expr: object) -> bool: pass

@@ -20,29 +20,42 @@
 #
 
 ##
-# \brief 
-#
+# \brief A wrapper class for various types of callable objects.
+# 
 class UInt64AtomFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %UInt64AtomFunctor instance.
+    # \brief Initializes the \c UInt64AtomFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %UInt64AtomFunctor instance.
+    # \brief Initializes the \c UInt64AtomFunctor instance.
     # \param func 
     # 
     def __init__(func: SizeTypeAtomFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %UInt64AtomFunctor instance.
-    # \param callable 
+    # \brief Initializes the \c UInt64AtomFunctor instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given argument.
+    # \param arg1 The argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Atom) -> int: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass

@@ -25,6 +25,6 @@
 class CDFReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \c %CDFReactionInputHandler instance.
+    # \brief Initializes the \c CDFReactionInputHandler instance.
     # 
     def __init__() -> None: pass

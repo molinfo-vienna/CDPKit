@@ -27,13 +27,13 @@
 class TorsionLibrary(TorsionCategory):
 
     ##
-    # \brief Initializes the \c %TorsionLibrary instance.
+    # \brief Initializes the \c TorsionLibrary instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %TorsionLibrary instance \a lib.
-    # \param lib The \c %TorsionLibrary instance to copy.
+    # \brief Initializes a copy of the \c TorsionLibrary instance \a lib.
+    # \param lib The \c TorsionLibrary instance to copy.
     # 
     def __init__(lib: TorsionLibrary) -> None: pass
 
@@ -57,8 +57,8 @@ class TorsionLibrary(TorsionCategory):
     def save(os: Base.OStream) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %TorsionLibrary instance \a lib.
-    # \param lib The \c %TorsionLibrary instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c TorsionLibrary instance \a lib.
+    # \param lib The \c TorsionLibrary instance to copy.
     # \return \a self
     # 
     def assign(lib: TorsionLibrary) -> TorsionLibrary: pass

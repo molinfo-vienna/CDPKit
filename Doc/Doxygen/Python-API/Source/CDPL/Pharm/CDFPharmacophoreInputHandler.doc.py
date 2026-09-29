@@ -25,6 +25,6 @@
 class CDFPharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
-    # \brief Initializes the \c %CDFPharmacophoreInputHandler instance.
+    # \brief Initializes the \c CDFPharmacophoreInputHandler instance.
     # 
     def __init__() -> None: pass

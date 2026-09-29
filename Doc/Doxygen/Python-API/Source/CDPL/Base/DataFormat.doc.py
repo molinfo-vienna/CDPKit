@@ -45,34 +45,36 @@ class DataFormat(Boost.Python.instance):
         def __contains__(file_ext: str) -> bool: pass
 
     ##
-    # \brief Default constructor.
+    # \brief Constructs and initializes an empty <tt>DataFormat</tt> instance.
     # 
     # All string attributes are initialized to an empty string, and the multi record format flag is set to <tt>False</tt>.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DataFormat instance \a fmt.
-    # \param fmt The \c %DataFormat instance to copy.
+    # \brief Initializes a copy of the \c DataFormat instance \a fmt.
+    # \param fmt The \c DataFormat instance to copy.
     # 
     def __init__(fmt: DataFormat) -> None: pass
 
     ##
-    # \brief Initializes the \c %DataFormat instance.
-    # \param name 
-    # \param descr 
-    # \param mime_type 
-    # \param multi_rec 
+    # \brief Constructs and initializes the \c %DataFormat instance with the given attributes.
+    # \param name The short-name of the data format (e.g. 'PNG')
+    # \param descr A string providing a brief human readable description of the data format (e.g. 'Portable Network Graphics').
+    # \param mime_type The mime-type associated with the data format (e.g. 'image/png'), or an empty string if the mime-type
+    #                  is not available.
+    # \param multi_rec \c True if the data format supports the storage of multiple data records, and \c False otherwise.
     # 
     def __init__(name: str, descr: str, mime_type: str, multi_rec: bool) -> None: pass
 
     ##
-    # \brief Initializes the \c %DataFormat instance.
-    # \param name 
-    # \param descr 
-    # \param mime_type 
-    # \param file_exts 
-    # \param multi_rec 
+    # \brief Constructs and initializes the \c %DataFormat instance with the given attributes.
+    # \param name The short-name of the data format (e.g. 'PNG').
+    # \param descr A string providing a brief human readable description of the data format (e.g. 'Portable Network Graphics').
+    # \param mime_type The mime-type associated with the data format (e.g. 'image/png'), or an empty string if the mime-type
+    #                  is not available.
+    # \param file_exts The file extension sequence.
+    # \param multi_rec \c True if the data format supports the storage of multiple data records, and \c False otherwise.
     # 
     def __init__(name: str, descr: str, mime_type: str, file_exts: object, multi_rec: bool) -> None: pass
 
@@ -217,8 +219,8 @@ class DataFormat(Boost.Python.instance):
     def getFileExtensions() -> FileExtensionSequence: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DataFormat instance \a fmt.
-    # \param fmt The \c %DataFormat instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c DataFormat instance \a fmt.
+    # \param fmt The \c DataFormat instance to copy.
     # \return \a self
     # 
     def assign(fmt: DataFormat) -> DataFormat: pass
@@ -226,8 +228,8 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %DataFormat instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DataFormat instances \e a and \e b reference different C++ objects. 
+    # Different Python \c DataFormat instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c DataFormat instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -236,7 +238,7 @@ class DataFormat(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \c %DataFormat instance.
+    # \brief Returns a string representation of the \c DataFormat instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

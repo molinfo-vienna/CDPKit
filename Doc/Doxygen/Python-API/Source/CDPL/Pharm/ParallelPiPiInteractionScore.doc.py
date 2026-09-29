@@ -45,8 +45,8 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     DEF_MAX_ANGLE = 20.0
 
     ##
-    # \brief Initializes a copy of the \c %ParallelPiPiInteractionScore instance \a score.
-    # \param score The \c %ParallelPiPiInteractionScore instance to copy.
+    # \brief Initializes a copy of the \c ParallelPiPiInteractionScore instance \a score.
+    # \param score The \c ParallelPiPiInteractionScore instance to copy.
     # 
     def __init__(score: ParallelPiPiInteractionScore) -> None: pass
 
@@ -103,8 +103,8 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ParallelPiPiInteractionScore instance \a constr.
-    # \param constr The \c %ParallelPiPiInteractionScore instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ParallelPiPiInteractionScore instance \a constr.
+    # \param constr The \c ParallelPiPiInteractionScore instance to copy.
     # \return \a self
     # 
     def assign(constr: ParallelPiPiInteractionScore) -> ParallelPiPiInteractionScore: pass

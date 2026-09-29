@@ -41,7 +41,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     class DistanceConstraint(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %DistanceConstraint instance.
+        # \brief Initializes the \c DistanceConstraint instance.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param lb 
@@ -50,16 +50,16 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         def __init__(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c %DistanceConstraint instance \a constr.
-        # \param constr The \c %DistanceConstraint instance to copy.
+        # \brief Initializes a copy of the \c DistanceConstraint instance \a constr.
+        # \param constr The \c DistanceConstraint instance to copy.
         # 
         def __init__(constr: DistanceConstraint) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \c %DistanceConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DistanceConstraint instances \e a and \e b reference different C++ objects. 
+        # Different Python \c DistanceConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c DistanceConstraint instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -68,8 +68,8 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c %DistanceConstraint instance \a constr.
-        # \param constr The \c %DistanceConstraint instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c DistanceConstraint instance \a constr.
+        # \param constr The \c DistanceConstraint instance to copy.
         # \return \a self
         # 
         def assign(constr: DistanceConstraint) -> DistanceConstraint: pass
@@ -118,21 +118,21 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     DEF_LEARNING_RATE_DECREMENT = 0.019
 
     ##
-    # \brief Initializes the \c %DG2DCoordinatesGenerator instance.
+    # \brief Initializes the \c DG2DCoordinatesGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DG2DCoordinatesGenerator instance \a gen.
-    # \param gen The \c %DG2DCoordinatesGenerator instance to copy.
+    # \brief Initializes a copy of the \c DG2DCoordinatesGenerator instance \a gen.
+    # \param gen The \c DG2DCoordinatesGenerator instance to copy.
     # 
     def __init__(gen: DG2DCoordinatesGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %DG2DCoordinatesGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DG2DCoordinatesGenerator instances \e a and \e b reference different C++ objects. 
+    # Different Python \c DG2DCoordinatesGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c DG2DCoordinatesGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -141,8 +141,8 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %DG2DCoordinatesGenerator instance \a gen.
-    # \param gen The \c %DG2DCoordinatesGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c DG2DCoordinatesGenerator instance \a gen.
+    # \param gen The \c DG2DCoordinatesGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: DG2DCoordinatesGenerator) -> DG2DCoordinatesGenerator: pass

@@ -30,8 +30,8 @@ class Range(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %Range instance \a r.
-    # \param r The \c %Range instance to copy.
+    # \brief Initializes a copy of the \c Range instance \a r.
+    # \param r The \c Range instance to copy.
     # 
     def __init__(r: Range) -> None: pass
 
@@ -76,8 +76,8 @@ class Range(Boost.Python.instance):
     def getIndex(i: int) -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %Range instance \a r.
-    # \param r The \c %Range instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c Range instance \a r.
+    # \param r The \c Range instance to copy.
     # \return \a self
     # 
     def assign(r: Range) -> Range: pass
@@ -92,8 +92,8 @@ class Range(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %Range instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %Range instances \e a and \e b reference different C++ objects. 
+    # Different Python \c Range instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c Range instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 

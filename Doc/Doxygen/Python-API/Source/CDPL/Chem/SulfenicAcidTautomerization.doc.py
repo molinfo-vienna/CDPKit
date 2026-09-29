@@ -32,7 +32,7 @@ class SulfenicAcidTautomerization(PatternBasedTautomerizationRule):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %SulfenicAcidTautomerization instance \a rule.
-    # \param rule The \c %SulfenicAcidTautomerization instance to copy.
+    # \brief Initializes a copy of the \c SulfenicAcidTautomerization instance \a rule.
+    # \param rule The \c SulfenicAcidTautomerization instance to copy.
     # 
     def __init__(rule: SulfenicAcidTautomerization) -> None: pass

@@ -32,8 +32,8 @@ class PatternAtomTyper(Boost.Python.instance):
     class Pattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \c %Pattern instance \a pattern.
-        # \param pattern The \c %Pattern instance to copy.
+        # \brief Initializes a copy of the \c Pattern instance \a pattern.
+        # \param pattern The \c Pattern instance to copy.
         # 
         def __init__(pattern: Pattern) -> None: pass
 
@@ -51,8 +51,8 @@ class PatternAtomTyper(Boost.Python.instance):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \c %Pattern instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %Pattern instances \e a and \e b reference different C++ objects. 
+        # Different Python \c Pattern instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c Pattern instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -61,8 +61,8 @@ class PatternAtomTyper(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c %Pattern instance \a pattern.
-        # \param pattern The \c %Pattern instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c Pattern instance \a pattern.
+        # \param pattern The \c Pattern instance to copy.
         # \return \a self
         # 
         def assign(pattern: Pattern) -> Pattern: pass
@@ -129,8 +129,8 @@ class PatternAtomTyper(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %PatternAtomTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %PatternAtomTyper instances \e a and \e b reference different C++ objects. 
+    # Different Python \c PatternAtomTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c PatternAtomTyper instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 

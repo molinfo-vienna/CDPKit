@@ -25,7 +25,7 @@
 class FileSVGMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c %FileSVGMolecularGraphWriter instance.
+    # \brief Initializes the \c FileSVGMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

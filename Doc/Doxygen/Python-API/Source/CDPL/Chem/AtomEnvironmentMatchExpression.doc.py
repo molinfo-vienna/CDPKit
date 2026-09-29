@@ -24,7 +24,7 @@
 # 
 # A target atom matches the expression when the supplied atom environment pattern (anchored on the target atom) is found by an inner Chem.SubstructureSearch instance. The matching logic (match/not-match) is configurable.
 # 
-# Environment constraints can be specified as part of atom expressions in <em>Daylight SMARTS</em> patterns by <em>recursive SMARTS</em> using the syntax <tt>\f$(...)</tt> [\ref SMARTS].
+# Environment constraints can be specified as part of atom expressions in <em>Daylight SMARTS</em> patterns by <em>recursive SMARTS</em> using the syntax <tt>$(...)</tt> [\ref SMARTS].
 # 
 class AtomEnvironmentMatchExpression(AtomMatchExpression):
 

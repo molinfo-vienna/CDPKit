@@ -27,43 +27,43 @@ class ULMatrixExpression(ConstULMatrixExpression):
     def swap(e: ULMatrixExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ULMatrixExpression instance \a e.
-    # \param e The \c %ULMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ULMatrixExpression instance \a e.
+    # \param e The \c ULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
-    # \param e The \c %ConstFMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFMatrixExpression instance \a e.
+    # \param e The \c ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
-    # \param e The \c %ConstDMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDMatrixExpression instance \a e.
+    # \param e The \c ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
-    # \param e The \c %ConstLMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLMatrixExpression instance \a e.
+    # \param e The \c ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
-    # \param e The \c %ConstULMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULMatrixExpression instance \a e.
+    # \param e The \c ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
-    # \param a The \c %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \param a The \c object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -75,42 +75,42 @@ class ULMatrixExpression(ConstULMatrixExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \c %ULMatrixExpression instance \a self.
+    # \return The updated \c ULMatrixExpression instance \a self.
     # 
     def __iadd__(e: ULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \c %ULMatrixExpression instance \a self.
+    # \return The updated \c ULMatrixExpression instance \a self.
     # 
     def __iadd__(e: ConstULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \c %ULMatrixExpression instance \a self.
+    # \return The updated \c ULMatrixExpression instance \a self.
     # 
     def __isub__(e: ULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \c %ULMatrixExpression instance \a self.
+    # \return The updated \c ULMatrixExpression instance \a self.
     # 
     def __isub__(e: ConstULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \c %ULMatrixExpression instance \a self.
+    # \return The updated \c ULMatrixExpression instance \a self.
     # 
     def __imul__(t: int) -> ULMatrixExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \c %ULMatrixExpression instance \a self.
+    # \return The updated \c ULMatrixExpression instance \a self.
     # 
     def __idiv__(t: int) -> ULMatrixExpression: pass
 

@@ -27,7 +27,7 @@
 class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
 
     ##
-    # \brief Initializes the \c %FeatureContainer instance.
+    # \brief Initializes the \c FeatureContainer instance.
     # 
     def __init__() -> None: pass
 

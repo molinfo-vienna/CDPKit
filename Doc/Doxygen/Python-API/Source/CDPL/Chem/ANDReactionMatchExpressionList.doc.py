@@ -27,19 +27,19 @@
 class ANDReactionMatchExpressionList(ReactionMatchExpressionList):
 
     ##
-    # \brief Initializes the \c %ANDReactionMatchExpressionList instance.
+    # \brief Initializes the \c ANDReactionMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %ANDReactionMatchExpressionList instance \a expr.
-    # \param expr The \c %ANDReactionMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c ANDReactionMatchExpressionList instance \a expr.
+    # \param expr The \c ANDReactionMatchExpressionList instance to copy.
     # 
     def __init__(expr: ANDReactionMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ANDReactionMatchExpressionList instance \a expr.
-    # \param expr The \c %ANDReactionMatchExpressionList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ANDReactionMatchExpressionList instance \a expr.
+    # \param expr The \c ANDReactionMatchExpressionList instance to copy.
     # \return \a self
     # 
     def assign(expr: ANDReactionMatchExpressionList) -> ANDReactionMatchExpressionList: pass

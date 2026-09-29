@@ -32,8 +32,8 @@ class LookupKey(Boost.Python.instance):
     NONE = LookupKey('NONE')
 
     ##
-    # \brief Initializes a copy of the \c %LookupKey instance \a key.
-    # \param key The \c %LookupKey instance to copy.
+    # \brief Initializes a copy of the \c LookupKey instance \a key.
+    # \param key The \c LookupKey instance to copy.
     # 
     def __init__(key: LookupKey) -> None: pass
 
@@ -57,8 +57,8 @@ class LookupKey(Boost.Python.instance):
     def getID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %LookupKey instance \a key.
-    # \param key The \c %LookupKey instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c LookupKey instance \a key.
+    # \param key The \c LookupKey instance to copy.
     # \return \a self
     # 
     def assign(key: LookupKey) -> LookupKey: pass
@@ -82,8 +82,8 @@ class LookupKey(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %LookupKey instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %LookupKey instances \e a and \e b reference different C++ objects. 
+    # Different Python \c LookupKey instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c LookupKey instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -119,7 +119,7 @@ class LookupKey(Boost.Python.instance):
     def __ne__(key: LookupKey) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \c %LookupKey instance.
+    # \brief Returns a string representation of the \c LookupKey instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

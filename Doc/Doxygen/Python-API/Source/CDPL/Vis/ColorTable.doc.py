@@ -30,16 +30,16 @@ class ColorTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %ColorTable instance \a table.
-    # \param table The \c %ColorTable instance to copy.
+    # \brief Initializes a copy of the \c ColorTable instance \a table.
+    # \param table The \c ColorTable instance to copy.
     # 
     def __init__(table: ColorTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %ColorTable instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %ColorTable instances \e a and \e b reference different C++ objects. 
+    # Different Python \c ColorTable instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c ColorTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -54,8 +54,8 @@ class ColorTable(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ColorTable instance \a map.
-    # \param map The \c %ColorTable instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ColorTable instance \a map.
+    # \param map The \c ColorTable instance to copy.
     # \return \a self
     # 
     def assign(map: ColorTable) -> ColorTable: pass
@@ -100,21 +100,21 @@ class ColorTable(Boost.Python.instance):
     def __contains__(key: int) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \c %ColorTable instance.
+    # \brief Returns a string representation of the \c ColorTable instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == table</tt>.
-    # \param table The \c %object instance to be compared with.
+    # \param table The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(table: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != table</tt>.
-    # \param table The \c %object instance to be compared with.
+    # \param table The \c object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(table: object) -> bool: pass

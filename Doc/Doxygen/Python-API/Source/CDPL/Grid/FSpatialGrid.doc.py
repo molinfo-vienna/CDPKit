@@ -25,7 +25,7 @@
 class FSpatialGrid(AttributedGrid):
 
     ##
-    # \brief Initializes the \c %FSpatialGrid instance.
+    # \brief Initializes the \c FSpatialGrid instance.
     # 
     def __init__() -> None: pass
 

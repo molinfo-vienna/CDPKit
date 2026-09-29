@@ -25,13 +25,13 @@
 class FHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c %FHomogenousCoordsAdapter instance \a a.
-    # \param a The \c %FHomogenousCoordsAdapter instance to copy.
+    # \brief Initializes a copy of the \c FHomogenousCoordsAdapter instance \a a.
+    # \param a The \c FHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: FHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c %FHomogenousCoordsAdapter instance.
+    # \brief Initializes the \c FHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: FVectorExpression) -> None: pass
@@ -39,8 +39,8 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %FHomogenousCoordsAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %FHomogenousCoordsAdapter instances \e a and \e b reference different C++ objects. 
+    # Different Python \c FHomogenousCoordsAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c FHomogenousCoordsAdapter instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -49,43 +49,43 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
-    # \param e The \c %ConstFVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFVectorExpression instance \a e.
+    # \param e The \c ConstFVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
-    # \param e The \c %ConstDVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDVectorExpression instance \a e.
+    # \param e The \c ConstDVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
-    # \param e The \c %ConstLVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLVectorExpression instance \a e.
+    # \param e The \c ConstLVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
-    # \param e The \c %ConstULVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULVectorExpression instance \a e.
+    # \param e The \c ConstULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FHomogenousCoordsAdapter instance \a r.
-    # \param r The \c %FHomogenousCoordsAdapter instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c FHomogenousCoordsAdapter instance \a r.
+    # \param r The \c FHomogenousCoordsAdapter instance to copy.
     # \return \a self
     # 
     def assign(r: FHomogenousCoordsAdapter) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
-    # \param a The \c %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \param a The \c object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -106,28 +106,28 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param r The \c %FHomogenousCoordsAdapter instance to be compared with.
+    # \param r The \c FHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(r: FHomogenousCoordsAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \c %ConstFVectorExpression instance to be compared with.
+    # \param e The \c ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param r The \c %FHomogenousCoordsAdapter instance to be compared with.
+    # \param r The \c FHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(r: FHomogenousCoordsAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \c %ConstFVectorExpression instance to be compared with.
+    # \param e The \c ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
@@ -139,7 +139,7 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \c %FHomogenousCoordsAdapter instance.
+    # \brief Returns a string representation of the \c FHomogenousCoordsAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -151,49 +151,49 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \c %ConstFVectorExpression instance holding the result of the addition.
+    # \return A \c ConstFVectorExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \c %FHomogenousCoordsAdapter instance holding the result of the subtraction.
+    # \return A \c FHomogenousCoordsAdapter instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \c %ConstFVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstFVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \c %ConstFVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstFVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstFVectorExpression instance holding the result of the division.
+    # \return A \c ConstFVectorExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \c %ConstFVectorExpression instance holding the result of the division.
+    # \return A \c ConstFVectorExpression instance holding the result of the division.
     # 
     def __truediv__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
     # \param t Specifies the multiplicand.
-    # \return A \c %ConstFVectorExpression instance holding the result of the multiplication.
+    # \return A \c ConstFVectorExpression instance holding the result of the multiplication.
     # 
     def __rmul__(t: float) -> ConstFVectorExpression: pass
 
@@ -202,42 +202,42 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     ##
     # \brief Performs the in-place addition operation <tt>self += a</tt>.
     # \param a Specifies the second addend.
-    # \return The updated \c %FHomogenousCoordsAdapter instance \a self.
+    # \return The updated \c FHomogenousCoordsAdapter instance \a self.
     # 
     def __iadd__(a: FHomogenousCoordsAdapter) -> FHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \c %FHomogenousCoordsAdapter instance \a self.
+    # \return The updated \c FHomogenousCoordsAdapter instance \a self.
     # 
     def __iadd__(e: ConstFVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
     # \param a Specifies the subtrahend.
-    # \return The updated \c %FHomogenousCoordsAdapter instance \a self.
+    # \return The updated \c FHomogenousCoordsAdapter instance \a self.
     # 
     def __isub__(a: FHomogenousCoordsAdapter) -> FHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \c %FHomogenousCoordsAdapter instance \a self.
+    # \return The updated \c FHomogenousCoordsAdapter instance \a self.
     # 
     def __isub__(e: ConstFVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \c %FHomogenousCoordsAdapter instance \a self.
+    # \return The updated \c FHomogenousCoordsAdapter instance \a self.
     # 
     def __imul__(t: float) -> FHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \c %FHomogenousCoordsAdapter instance \a self.
+    # \return The updated \c FHomogenousCoordsAdapter instance \a self.
     # 
     def __idiv__(t: float) -> FHomogenousCoordsAdapter: pass
 

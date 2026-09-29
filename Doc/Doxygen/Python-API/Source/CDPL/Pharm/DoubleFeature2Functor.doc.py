@@ -20,29 +20,43 @@
 #
 
 ##
-# \brief 
-#
+# \brief A wrapper class for various types of callable objects.
+# 
 class DoubleFeature2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %DoubleFeature2Functor instance.
+    # \brief Initializes the \c DoubleFeature2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %DoubleFeature2Functor instance \a func.
-    # \param func The \c %DoubleFeature2Functor instance to copy.
+    # \brief Initializes a copy of the \c DoubleFeature2Functor instance \a func.
+    # \param func The \c DoubleFeature2Functor instance to copy.
     # 
     def __init__(func: DoubleFeature2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \c %DoubleFeature2Functor instance.
-    # \param callable 
+    # \brief Initializes the \c DoubleFeature2Functor instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given arguments.
+    # \param arg1 The first argument to forward.
+    # \param arg2 The second argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Feature, arg2: Feature) -> float: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass

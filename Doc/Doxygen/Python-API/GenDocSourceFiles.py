@@ -211,7 +211,14 @@ def loadCPPAPIDocMergeInfo(file_name):
             
         CPP_API_DOC_MERGE_INFO.append(entry)
 
-def getDocBlockEntry(key):
+def getDocBlockEntry(key, allow_part_match):
+    if not allow_part_match:
+        for entry in DOC_BLOCKS:
+            if key == entry[0]:
+                return entry
+
+        return None
+    
     for entry in DOC_BLOCKS:
         if entry[0].endswith('^'):
             if key.endswith(entry[0][0:-1]):
@@ -222,7 +229,7 @@ def getDocBlockEntry(key):
 
     return None
       
-def getProvidedDocBlock(key, func_data, func_name, class_name, is_static):
+def getProvidedDocBlock(key, func_data, func_name, class_name, is_static, allow_part_match):
     if not is_static and class_name and func_data and len(func_data['arg_names']) == 2:
         if func_name == '__init__':
             if func_data['arg_types'][1].endswith(class_name):
@@ -231,7 +238,7 @@ def getProvidedDocBlock(key, func_data, func_name, class_name, is_static):
         elif func_name == 'assign':
             key = key.replace('.assign(', '.__copy__assign(')
 
-    doc_block = getDocBlockEntry(key)
+    doc_block = getDocBlockEntry(key, allow_part_match)
 
     if not doc_block:
         return None
@@ -287,28 +294,30 @@ def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_na
     if not verbatim_key:
         key = sys.argv[1] + '.' + key
 
-    doc_block = None
-    mod_orig_key = key
+    doc_block = getProvidedDocBlock(key, func_data, func_name, class_name, is_static, False)
+
+    if not doc_block:
+        mod_orig_key = key
     
-    for entry in CPP_API_DOC_KEY_STR_REPLACEMENTS:
-        mod_orig_key = mod_orig_key.replace(entry[0], entry[1])
+        for entry in CPP_API_DOC_KEY_STR_REPLACEMENTS:
+            mod_orig_key = mod_orig_key.replace(entry[0], entry[1])
         
-    for entry in CPP_API_DOC_MERGE_INFO:
-        mod_key = mod_orig_key.replace(entry[0], entry[1])
+        for entry in CPP_API_DOC_MERGE_INFO:
+            mod_key = mod_orig_key.replace(entry[0], entry[1])
 
-        if mod_key in CPP_API_DOC_BLOCKS:
-            doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_key])
+            if mod_key in CPP_API_DOC_BLOCKS:
+                doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_key])
 
-            for str_repl in entry[2]:
-                doc_block = doc_block.replace(str_repl[0], str_repl[1])
+                for str_repl in entry[2]:
+                    doc_block = doc_block.replace(str_repl[0], str_repl[1])
 
-            break
+                break
                 
     if not doc_block:
         if key in CPP_API_DOC_BLOCKS:
             doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[key])
         else:
-            doc_block = getProvidedDocBlock(key, func_data, func_name, class_name, is_static)
+            doc_block = getProvidedDocBlock(key, func_data, func_name, class_name, is_static, True)
 
     if not doc_block:
         return None
@@ -542,7 +551,7 @@ def printProperty(class_obj, prop_obj, property_name, out_file, ident, scope):
     get_meth_found = (get_meth_name in class_obj.__dict__.keys() )
 
     if not get_meth_found:
-        db_entry = getDocBlockEntry(scope + property_name + '.value')
+        db_entry = getDocBlockEntry(scope + property_name + '.value', True)
 
         if db_entry:
             get_meth_name = db_entry[1].strip()
@@ -608,7 +617,7 @@ def printStaticProperty(property_obj, property_name, out_file, ident, scope, cla
     value_str = getValueString(property_obj)
 
     if value_str == '_HIDDEN_VALUE_':
-        db_entry = getDocBlockEntry(scope + property_name + '.value')
+        db_entry = getDocBlockEntry(scope + property_name + '.value', True)
 
         if db_entry:
             value_str = db_entry[1].strip()

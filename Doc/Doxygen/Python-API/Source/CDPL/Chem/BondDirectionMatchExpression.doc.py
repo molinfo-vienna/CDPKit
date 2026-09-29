@@ -29,8 +29,8 @@
 class BondDirectionMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Initializes a copy of the \c %BondDirectionMatchExpression instance \a expr.
-    # \param expr The \c %BondDirectionMatchExpression instance to copy.
+    # \brief Initializes a copy of the \c BondDirectionMatchExpression instance \a expr.
+    # \param expr The \c BondDirectionMatchExpression instance to copy.
     # 
     def __init__(expr: BondDirectionMatchExpression) -> None: pass
 
@@ -43,8 +43,8 @@ class BondDirectionMatchExpression(BondMatchExpression):
     def __init__(dir_flags: int, not_match: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %BondDirectionMatchExpression instance \a expr.
-    # \param expr The \c %BondDirectionMatchExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c BondDirectionMatchExpression instance \a expr.
+    # \param expr The \c BondDirectionMatchExpression instance to copy.
     # \return \a self
     # 
     def assign(expr: BondDirectionMatchExpression) -> BondDirectionMatchExpression: pass

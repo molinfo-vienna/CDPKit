@@ -20,29 +20,45 @@
 #
 
 ##
-# \brief 
-#
+# \brief A wrapper class for various types of callable objects.
+# 
 class BoolAtom4Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %BoolAtom4Functor instance.
+    # \brief Initializes the \c BoolAtom4Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %BoolAtom4Functor instance.
+    # \brief Initializes the \c BoolAtom4Functor instance.
     # \param func 
     # 
     def __init__(func: ForceField.InteractionFilterFunction4) -> None: pass
 
     ##
-    # \brief Initializes the \c %BoolAtom4Functor instance.
-    # \param callable 
+    # \brief Initializes the \c BoolAtom4Functor instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given arguments.
+    # \param arg1 The first argument to forward.
+    # \param arg2 The second argument to forward.
+    # \param arg3 The third argument to forward.
+    # \param arg4 The fourth argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Atom, arg2: Atom, arg3: Atom, arg4: Atom) -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass
