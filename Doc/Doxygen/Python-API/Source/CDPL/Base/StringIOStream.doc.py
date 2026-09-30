@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Wrapper for C++ \c std::ostream instances
+# 
 class StringIOStream(IOStream):
 
     ##

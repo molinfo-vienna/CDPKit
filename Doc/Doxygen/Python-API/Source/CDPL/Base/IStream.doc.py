@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Wrapper for C++ \c std::istream instances
+# 
 class IStream(Boost.Python.instance):
 
     ##

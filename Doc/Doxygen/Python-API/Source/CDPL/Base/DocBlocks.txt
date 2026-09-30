@@ -1,5 +1,15 @@
+IStream^
+\brief Wrapper for C++ \c std::istream instances
+$$$$
+
 IStream.STD_IN
 \brief The standard input stream of the current process.
+$$$$
+
+#-----
+
+OStream^
+\brief Wrapper for C++ \c std::ostream instances
 $$$$
 
 OStream.STD_OUT
@@ -9,6 +19,89 @@ $$$$
 OStream.STD_ERR
 \brief The standard error stream of the current process.
 $$$$
+
+#-----
+
+IOStream^
+\brief Wrapper for C++ \c std::iostream instances 
+$$$$
+
+#-----
+
+FileIOStream^
+\brief Wrapper for C++ \c std::fstream exposing a Python-style file-oriented I/O interface
+$$$$
+
+FileIOStream.__init__(file_name,mode)
+$$$$
+
+FileIOStream.readline(size)
+$$$$
+
+FileIOStream.readlines(size)
+$$$$
+
+FileIOStream.read(size)
+$$$$
+
+FileIOStream.tell()
+$$$$
+
+FileIOStream.tellr()
+$$$$
+
+FileIOStream.seek(offs: int, whence: int = 0)
+$$$$
+
+FileIOStream.seekr(offs: int, whence: int = 0)
+$$$$
+
+FileIOStream.next()
+$$$$
+
+FileIOStream.isClosed()
+$$$$
+
+FileIOStream.getOpenModeString()
+$$$$
+
+FileIOStream.getOpenModeFlags()
+$$$$
+
+FileIOStream.flush()
+$$$$
+
+FileIOStream.write(string: object)
+$$$$
+
+FileIOStream.writelines(iterable: object)
+$$$$
+
+FileIOStream.tellw()
+$$$$
+
+FileIOStream.seekw(offs: int, whence: int = 0)
+$$$$
+
+FileIOStream.getSoftSpace()
+$$$$
+
+FileIOStream.setSoftSpace(value: bool)
+$$$$
+
+FileIOStream.close()
+$$$$
+
+FileIOStream.__iter__()
+$$$$
+
+#-----
+
+StringIOStream^
+\brief Wrapper for C++ \c std::stringstream exposing a Python-style file-oriented I/O interface
+$$$$
+
+#-----
 
 DataFormat.__init__(name,descr,mime_type,file_exts,multi_rec)
 \brief Constructs and initializes the \c %DataFormat instance with the given attributes.
@@ -28,6 +121,8 @@ DataFormat.__init__(name,descr,mime_type,multi_rec)
                  is not available.
 \param multi_rec \c True if the data format supports the storage of multiple data records, and \c False otherwise.
 $$$$
+
+#-----
 
 CDPL.Base.DataIOBase
 \brief Provides infrastructure for the registration of I/O callback functions.

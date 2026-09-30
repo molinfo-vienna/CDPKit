@@ -20,22 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Wrapper for C++ \c std::ostream instances
+# 
 class FileIOStream(IOStream):
 
-    ##
-    # \brief Initializes the \c FileIOStream instance.
-    # \param file_name 
-    # \param mode 
-    # 
     def __init__(file_name: str, mode: str = 'r') -> None: pass
 
-    ##
-    # \brief Initializes the \c FileIOStream instance.
-    # \param file_name 
-    # \param mode 
-    # 
     def __init__(file_name: str, mode: OpenMode = IOStream.OpenMode.IN) -> None: pass
 
     def readline(size: int = -1) -> str: pass
