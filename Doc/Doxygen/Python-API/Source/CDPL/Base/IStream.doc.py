@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Wrapper for C++ \c std::istream instances
+# \brief Wrapper for C++ \c std::istream instances.
 # 
 class IStream(Boost.Python.instance):
 
     ##
     # \brief The standard input stream of the current process.
     # 
-    STD_IN = \brief The standard input stream of the current process.
+    STD_IN = _HIDDEN_VALUE_
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.

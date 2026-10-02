@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Wrapper for C++ \c std::ostream instances
+# \brief Wrapper for C++ \c std::iostream instances.
 # 
 class IOStream(IStream, OStream):
 
@@ -30,8 +30,8 @@ class IOStream(IStream, OStream):
     class OpenMode(Boost.Python.enum):
 
         ##
-        # \brief IN.
-        #
+        # \brief Specifies to open the stream for input.
+        # 
         IN = 8
 
         ##

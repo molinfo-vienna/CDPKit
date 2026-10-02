@@ -27,12 +27,12 @@ class OStream(Boost.Python.instance):
     ##
     # \brief The standard output stream of the current process.
     # 
-    STD_OUT = \brief The standard output stream of the current process.
+    STD_OUT = _HIDDEN_VALUE_
 
     ##
     # \brief The standard error stream of the current process.
     # 
-    STD_ERR = \brief The standard error stream of the current process.
+    STD_ERR = _HIDDEN_VALUE_
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.

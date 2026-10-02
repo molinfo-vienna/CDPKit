@@ -20,12 +20,22 @@
 #
 
 ##
-# \brief Wrapper for C++ \c std::ostream instances
+# \brief Wrapper for C++ \c std::fstream exposing a Python-style file-oriented I/O interface.
 # 
 class FileIOStream(IOStream):
 
+    ##
+    # \brief Construct the \c FileIOStream instance and opens the specified file in the given mode.
+    # \param file_name The path to the file to open.
+    # \param mode A combination of file open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
+    # 
     def __init__(file_name: str, mode: str = 'r') -> None: pass
 
+    ##
+    # \brief Construct the \c FileIOStream instance and opens the specified file in the given mode.
+    # \param file_name The path to the file to open.
+    # \param mode A combination of file open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
+    # 
     def __init__(file_name: str, mode: OpenMode = IOStream.OpenMode.IN) -> None: pass
 
     def readline(size: int = -1) -> str: pass
@@ -66,7 +76,19 @@ class FileIOStream(IOStream):
 
     def setSoftSpace(value: bool) -> None: pass
 
+    ##
+    # \brief Closes the file.
+    # 
+    # A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a
+    # \c ValueError after the file has been closed. Calling close() more than once is allowed.
+    # 
     def close() -> None: pass
+
+    ##
+    # \brief Return the file path string that got passed to the constructor.
+    # \return The file path string that got passed to the constructor.
+    # 
+    def getFileName() -> str: pass
 
     def __iter__() -> FileIOStream: pass
 

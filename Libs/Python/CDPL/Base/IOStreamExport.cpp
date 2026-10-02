@@ -199,6 +199,8 @@ void CDPLPythonBase::exportIOStreams()
         .def(IStreamVisitor<FileIOStream>())
         .def(OStreamVisitor<FileIOStream>())
         .def("close", &FileIOStream::close, python::arg("self"))
+        .def("getFileName", &FileIOStream::getFileName, python::arg("self"),
+             python::return_value_policy<python::copy_const_reference>())
         .add_property("name", python::make_function(&FileIOStream::getFileName, 
                                                     python::return_value_policy<python::copy_const_reference>()));
 

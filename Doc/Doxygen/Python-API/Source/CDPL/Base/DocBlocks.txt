@@ -1,104 +1,206 @@
-IStream^
-\brief Wrapper for C++ \c std::istream instances
+.IStream^
+\brief Wrapper for C++ \c std::istream instances.
 $$$$
 
-IStream.STD_IN
+.IStream.STD_IN^
 \brief The standard input stream of the current process.
 $$$$
 
 #-----
 
-OStream^
+.OStream^
 \brief Wrapper for C++ \c std::ostream instances
 $$$$
 
-OStream.STD_OUT
+.OStream.STD_OUT^
 \brief The standard output stream of the current process.
 $$$$
 
-OStream.STD_ERR
+.OStream.STD_ERR^
 \brief The standard error stream of the current process.
 $$$$
 
 #-----
 
-IOStream^
-\brief Wrapper for C++ \c std::iostream instances 
+.IOStream^
+\brief Wrapper for C++ \c std::iostream instances.
+$$$$
+
+#-----
+
+.IOStream.OpenMode^
+\brief Provides as set of stream open mode flags that mirror those defined in C++ class \c std::ios_base.
+$$$$
+
+.IOStream.OpenMode.IN
+\brief Specifies to open the stream for reading.
+$$$$
+
+.IOStream.OpenMode.OUT
+\brief Specifies to open the stream for writing.
+$$$$
+
+.IOStream.OpenMode.TRUNC
+\brief Specifies to discard the contents of the stream when opening.
+$$$$
+
+.IOStream.OpenMode.APP
+\brief Specifies to seek to the end of stream before each write.
+$$$$
+
+.IOStream.OpenMode.ATE
+\brief Specifies to seek to the end of stream immediately after opening.
+$$$$
+
+.IOStream.OpenMode.BIN
+\brief Specifies to open the stream for binary data I/O.
 $$$$
 
 #-----
 
 FileIOStream^
-\brief Wrapper for C++ \c std::fstream exposing a Python-style file-oriented I/O interface
+\brief Wrapper for C++ \c std::fstream exposing a Python-style file-oriented I/O interface.
 $$$$
 
 FileIOStream.__init__(file_name,mode)
-$$$$
-
-FileIOStream.readline(size)
-$$$$
-
-FileIOStream.readlines(size)
-$$$$
-
-FileIOStream.read(size)
-$$$$
-
-FileIOStream.tell()
-$$$$
-
-FileIOStream.tellr()
-$$$$
-
-FileIOStream.seek(offs: int, whence: int = 0)
-$$$$
-
-FileIOStream.seekr(offs: int, whence: int = 0)
-$$$$
-
-FileIOStream.next()
-$$$$
-
-FileIOStream.isClosed()
-$$$$
-
-FileIOStream.getOpenModeString()
-$$$$
-
-FileIOStream.getOpenModeFlags()
-$$$$
-
-FileIOStream.flush()
-$$$$
-
-FileIOStream.write(string: object)
-$$$$
-
-FileIOStream.writelines(iterable: object)
-$$$$
-
-FileIOStream.tellw()
-$$$$
-
-FileIOStream.seekw(offs: int, whence: int = 0)
-$$$$
-
-FileIOStream.getSoftSpace()
-$$$$
-
-FileIOStream.setSoftSpace(value: bool)
+\brief Construct the \c FileIOStream instance and opens the specified file in the given mode.
+\param file_name The path to the file to open.
+\param mode A combination of file open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
 $$$$
 
 FileIOStream.close()
+\brief Closes the file.
+
+A closed file cannot be read or written any more. %Any operation which requires that the file be open will raise a
+Base.ValueError after the file has been closed. Calling close() more than once is allowed.
 $$$$
 
-FileIOStream.__iter__()
+FileIOStream.getFileName()
+\brief Return the file path string that got passed to the constructor.
+\return The file path string that got passed to the constructor.
 $$$$
 
 #-----
 
 StringIOStream^
-\brief Wrapper for C++ \c std::stringstream exposing a Python-style file-oriented I/O interface
+\brief Wrapper for C++ \c std::stringstream exposing a Python-style file-oriented I/O interface.
+$$$$
+
+StringIOStream.__init__(string,mode)
+\brief Construct the \c StringIOStream instance for the given string.
+\param string The string to use as initial content of the string stream.
+\param mode A combination of open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
+$$$$
+
+StringIOStream.isatty()
+\brief Returns always \c False.
+\return \c False.
+$$$$
+
+StringIOStream.truncate(length)
+\brief Truncates the contained string to the specified length.
+
+If the optional \a length argument is present, the string is truncated to (at most) that size.
+The size defaults to the current I/O position.
+Note that if a specified length exceeds the strings' current size, the string is extended to the specified size with zeros.
+
+\param length The new size of the string or, by default, the current I/O position.
+\note The current I/O position will be reset to zero.
+$$$$
+
+StringIOStream.getvalue()
+\brief Returns the current string stream content.
+\return The current string stream content.
+$$$$
+
+StringIOStream.getbytes()
+\brief Returns the current string stream content as \c bytes object.
+\return The current string stream content as \c bytes object.
+$$$$
+
+StringIOStream.setvalue(value)
+\brief Replace the current string stream content by \a value.
+\param value The new content of the string stream.
+\note The current I/O position will be reset to zero.
+$$$$
+
+#-----
+
+IOStream.readline(size)
+Read one entire line from the file. A trailing newline character is kept in the string (but may be absent when a file ends with an incomplete line). [6]_ If the size argument is present and non-negative, it is a maximum byte count (including the trailing newline) and an incomplete line may be returned. When size is not 0, an empty string is returned only when EOF is encountered immediately.
+$$$$
+
+IOStream.readlines(size)
+Read until EOF using readline() and return a list containing the lines thus read. If the optional sizehint argument is present, instead of reading up to EOF, whole lines totalling approximately sizehint bytes (possibly after rounding up to an internal buffer size) are read. Objects implementing a file-like interface may choose to ignore sizehint if it cannot be implemented, or cannot be implemented efficiently.
+$$$$
+
+IOStream.read(size)
+Read at most size bytes from the file (less if the read hits EOF before obtaining size bytes). If the size argument is negative or omitted, read all data until EOF is reached. The bytes are returned as a string object. An empty string is returned when EOF is encountered immediately. (For certain files, like ttys, it makes sense to continue reading after an EOF is hit.) Note that this method may call the underlying C function fread() more than once in an effort to acquire as close to size bytes as possible. Also note that when in non-blocking mode, less data than was requested may be returned, even if no size parameter was given.
+$$$$
+
+IOStream.tell()
+Return the file’s current position, like stdio‘s ftell().
+$$$$
+
+IOStream.tellr()
+$$$$
+
+IOStream.seek(offs, whence)
+Set the file’s current position, like stdio‘s fseek(). The whence argument is optional and defaults to os.SEEK_SET or 0 (absolute file positioning); other values are os.SEEK_CUR or 1 (seek relative to the current position) and os.SEEK_END or 2 (seek relative to the file’s end). There is no return value.
+
+For example, f.seek(2, os.SEEK_CUR) advances the position by two and f.seek(-3, os.SEEK_END) sets the position to the third to last.
+
+Note that if the file is opened for appending (mode 'a' or 'a+'), any seek() operations will be undone at the next write. If the file is only opened for writing in append mode (mode 'a'), this method is essentially a no-op, but it remains useful for files opened in append mode with reading enabled (mode 'a+'). If the file is opened in text mode (without 'b'), only offsets returned by tell() are legal. Use of other offsets causes undefined behavior.
+$$$$
+
+IOStream.seekr(offs, whence)
+$$$$
+
+IOStream.next()
+A file object is its own iterator, for example iter(f) returns f (unless f is closed). When a file is used as an iterator, typically in a for loop (for example, for line in f: print line.strip()), the next() method is called repeatedly. This method returns the next input line, or raises StopIteration when EOF is hit when the file is open for reading (behavior is undefined when the file is open for writing). In order to make a for loop the most efficient way of looping over the lines of a file (a very common operation), the next() method uses a hidden read-ahead buffer. As a consequence of using a read-ahead buffer, combining next() with other file methods (like readline()) does not work right. However, using seek() to reposition the file to an absolute position will flush the read-ahead buffer.
+$$$$
+
+IOStream.isClosed()
+bool indicating the current state of the file object. This is a read-only attribute; the close() method changes the value. It may not be available on all file-like objects.
+$$$$
+
+IOStream.getOpenModeString()
+The I/O mode for the file. If the file was created using the open() built-in function, this will be the value of the mode parameter. This is a read-only attribute and may not be present on all file-like objects.
+$$$$
+
+IOStream.getOpenModeFlags()
+$$$$
+
+IOStream.flush()
+Flush the internal buffer, like stdio‘s fflush(). This may be a no-op on some file-like objects.
+$$$$
+
+IOStream.write(string)
+Write a string to the file. There is no return value. Due to buffering, the string may not actually show up in the file until the flush() or close() method is called.
+$$$$
+
+IOStream.writelines(iterable)
+Write a sequence of strings to the file. The sequence can be any iterable object producing strings, typically a list of strings. There is no return value. (The name is intended to match readlines(); writelines() does not add line separators.)
+
+Files support the iterator protocol. Each iteration returns the same result as readline(), and iteration ends when the readline() method returns an empty string.
+
+File objects also offer a number of other interesting attributes. These are not required for file-like objects, but should be implemented if they make sense for the particular object.
+$$$$
+
+IOStream.tellw()
+$$$$
+
+IOStream.seekw(offs, whence)
+$$$$
+
+IOStream.getSoftSpace()
+Boolean that indicates whether a space character needs to be printed before another value when using the print statement. Classes that are trying to simulate a file object should also have a writable softspace attribute, which should be initialized to zero. This will be automatic for most classes implemented in Python (care may be needed for objects that override attribute access); types implemented in C will have to provide a writable softspace attribute.
+$$$$
+
+IOStream.setSoftSpace(value)
+$$$$
+
+IOStream.__iter__()
 $$$$
 
 #-----
