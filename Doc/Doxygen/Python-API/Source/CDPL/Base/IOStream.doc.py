@@ -25,36 +25,36 @@
 class IOStream(IStream, OStream):
 
     ##
-    # \brief 
-    #
+    # \brief Provides as set of stream opening mode flags that mirror those defined in C++ class \c std::ios_base.
+    # 
     class OpenMode(Boost.Python.enum):
 
         ##
-        # \brief Specifies to open the stream for input.
+        # \brief Specifies to open the stream for reading.
         # 
         IN = 8
 
         ##
-        # \brief OUT.
-        #
+        # \brief Specifies to open the stream for writing.
+        # 
         OUT = 16
 
         ##
-        # \brief TRUNC.
-        #
+        # \brief Specifies to discard the contents of the stream when opening.
+        # 
         TRUNC = 32
 
         ##
-        # \brief APP.
-        #
+        # \brief Specifies to seek to the end of stream before each write.
+        # 
         APP = 1
 
         ##
-        # \brief ATE.
-        #
+        # \brief Specifies to seek to the end of stream immediately after opening.
+        # 
         ATE = 2
 
         ##
-        # \brief BIN.
-        #
+        # \brief Specifies to open the stream for binary data I/O.
+        # 
         BIN = 4
