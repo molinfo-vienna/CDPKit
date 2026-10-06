@@ -25,13 +25,13 @@
 class LScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c LScalingMatrix instance \a m.
+    # \brief Contructs a copy of the \c LScalingMatrix instance \a m.
     # \param m The \c LScalingMatrix instance to copy.
     # 
     def __init__(m: LScalingMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c LScalingMatrix instance.
+    # \brief Contructs the \c LScalingMatrix instance.
     # \param n 
     # \param sx 
     # \param sy 
@@ -64,7 +64,7 @@ class LScalingMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c LScalingMatrix instance \a m.
+    # \brief Replaces the current state with a copy of the state of the \c LScalingMatrix instance \a m.
     # \param m The \c LScalingMatrix instance to copy.
     # \return \a self
     # 

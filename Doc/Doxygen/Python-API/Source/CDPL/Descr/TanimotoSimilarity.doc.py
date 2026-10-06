@@ -27,12 +27,12 @@
 class TanimotoSimilarity(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c TanimotoSimilarity instance.
+    # \brief Contructs the \c TanimotoSimilarity instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TanimotoSimilarity instance \a func.
+    # \brief Contructs a copy of the \c TanimotoSimilarity instance \a func.
     # \param func The \c TanimotoSimilarity instance to copy.
     # 
     def __init__(func: TanimotoSimilarity) -> None: pass
@@ -50,7 +50,7 @@ class TanimotoSimilarity(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TanimotoSimilarity instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c TanimotoSimilarity instance \a func.
     # \param func The \c TanimotoSimilarity instance to copy.
     # \return \a self
     # 
@@ -61,7 +61,8 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \f[ S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} \f]
+    # \f[   S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} 
+    # \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set in the first bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset.
     # 
@@ -79,7 +80,8 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -93,7 +95,8 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -107,7 +110,8 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -121,7 +125,8 @@ class TanimotoSimilarity(Boost.Python.instance):
     # 
     # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
     # 
-    # \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+    # \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.

@@ -35,7 +35,7 @@ class ResidueDictionary(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Entry instance \a entry.
+        # \brief Contructs a copy of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -68,7 +68,7 @@ class ResidueDictionary(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Entry instance \a entry.
+        # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # \return \a self
         # 
@@ -162,12 +162,12 @@ class ResidueDictionary(Boost.Python.instance):
         structure = property(getStructure)
 
     ##
-    # \brief Initializes the \c ResidueDictionary instance.
+    # \brief Contructs the \c ResidueDictionary instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ResidueDictionary instance \a dict.
+    # \brief Contructs a copy of the \c ResidueDictionary instance \a dict.
     # \param dict The \c ResidueDictionary instance to copy.
     # 
     def __init__(dict: ResidueDictionary) -> None: pass
@@ -238,7 +238,7 @@ class ResidueDictionary(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ResidueDictionary instance \a dict.
+    # \brief Replaces the current state with a copy of the state of the \c ResidueDictionary instance \a dict.
     # \param dict The \c ResidueDictionary instance to copy.
     # \return \a self
     # 

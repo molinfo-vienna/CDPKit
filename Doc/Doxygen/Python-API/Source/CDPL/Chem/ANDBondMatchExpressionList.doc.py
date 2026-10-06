@@ -27,18 +27,18 @@
 class ANDBondMatchExpressionList(BondMatchExpressionList):
 
     ##
-    # \brief Initializes the \c ANDBondMatchExpressionList instance.
+    # \brief Contructs the \c ANDBondMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ANDBondMatchExpressionList instance \a expr.
+    # \brief Contructs a copy of the \c ANDBondMatchExpressionList instance \a expr.
     # \param expr The \c ANDBondMatchExpressionList instance to copy.
     # 
     def __init__(expr: ANDBondMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ANDBondMatchExpressionList instance \a expr.
+    # \brief Replaces the current state with a copy of the state of the \c ANDBondMatchExpressionList instance \a expr.
     # \param expr The \c ANDBondMatchExpressionList instance to copy.
     # \return \a self
     # 

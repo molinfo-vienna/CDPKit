@@ -25,7 +25,7 @@
 class FileJMEMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c FileJMEMoleculeReader instance.
+    # \brief Contructs the \c FileJMEMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

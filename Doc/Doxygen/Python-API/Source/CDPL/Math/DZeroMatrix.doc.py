@@ -25,18 +25,18 @@
 class DZeroMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DZeroMatrix instance.
+    # \brief Contructs the \c DZeroMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DZeroMatrix instance \a m.
+    # \brief Contructs a copy of the \c DZeroMatrix instance \a m.
     # \param m The \c DZeroMatrix instance to copy.
     # 
     def __init__(m: DZeroMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c DZeroMatrix instance.
+    # \brief Contructs the \c DZeroMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -67,7 +67,7 @@ class DZeroMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DZeroMatrix instance \a m.
+    # \brief Replaces the current state with a copy of the state of the \c DZeroMatrix instance \a m.
     # \param m The \c DZeroMatrix instance to copy.
     # \return \a self
     # 

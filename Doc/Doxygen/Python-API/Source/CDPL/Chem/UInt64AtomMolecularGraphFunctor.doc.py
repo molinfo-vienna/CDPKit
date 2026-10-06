@@ -25,18 +25,18 @@
 class UInt64AtomMolecularGraphFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c UInt64AtomMolecularGraphFunctor instance.
+    # \brief Contructs the \c UInt64AtomMolecularGraphFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c UInt64AtomMolecularGraphFunctor instance.
+    # \brief Contructs the \c UInt64AtomMolecularGraphFunctor instance.
     # \param func 
     # 
     def __init__(func: SizeTypeAtomMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c UInt64AtomMolecularGraphFunctor instance for the specified callable object.
+    # \brief Contructs the \c UInt64AtomMolecularGraphFunctor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

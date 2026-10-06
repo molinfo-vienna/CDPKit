@@ -25,18 +25,18 @@
 class DoubleDVector2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DoubleDVector2Functor instance.
+    # \brief Contructs the \c DoubleDVector2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DoubleDVector2Functor instance \a func.
+    # \brief Contructs a copy of the \c DoubleDVector2Functor instance \a func.
     # \param func The \c DoubleDVector2Functor instance to copy.
     # 
     def __init__(func: DoubleDVector2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \c DoubleDVector2Functor instance for the specified callable object.
+    # \brief Contructs the \c DoubleDVector2Functor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

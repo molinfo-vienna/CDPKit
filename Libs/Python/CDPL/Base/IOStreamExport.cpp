@@ -214,6 +214,6 @@ void CDPLPythonBase::exportIOStreams()
         .def("getvalue", &StringIOStream::getValue, python::arg("self"))
         .def("getbytes", &StringIOStream::getBytes, python::arg("self"))
         .def("setvalue", &StringIOStream::setValue, (python::arg("self"), python::arg("value")))
-        //.def("close", &StringIOStream::closeStream, python::arg("self"))
+        .def("close", &StringIOStream::closeStream, python::arg("self"))
         .add_property("value", &StringIOStream::getValue, &StringIOStream::setValue);
 }

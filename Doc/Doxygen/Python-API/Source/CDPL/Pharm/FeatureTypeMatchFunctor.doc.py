@@ -25,7 +25,7 @@
 class FeatureTypeMatchFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FeatureTypeMatchFunctor instance \a func.
+    # \brief Contructs a copy of the \c FeatureTypeMatchFunctor instance \a func.
     # \param func The \c FeatureTypeMatchFunctor instance to copy.
     # 
     def __init__(func: FeatureTypeMatchFunctor) -> None: pass
@@ -43,7 +43,7 @@ class FeatureTypeMatchFunctor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FeatureTypeMatchFunctor instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c FeatureTypeMatchFunctor instance \a func.
     # \param func The \c FeatureTypeMatchFunctor instance to copy.
     # \return \a self
     # 

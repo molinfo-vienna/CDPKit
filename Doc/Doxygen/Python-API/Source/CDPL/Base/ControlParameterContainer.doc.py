@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Base class providing methods for the storage and lookup of control-parameter values.
+# \brief %Base class providing methods for the storage and lookup of control-parameter values.
 # 
 # The purpose of <tt>ControlParameterContainer</tt> is to provide a common facility for the storage and lookup of dynamic parameter values to subclasses which can be used to control their runtime-behaviour.
 # 
@@ -94,7 +94,7 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Erases all container entries.
     # 
-    # For each container entry, any callback functions registered by registerParameterRemovedCallback() will be invoked with the key of the removed control-parameter entry as an argument. Callbacks of affected direct and indirect children which do not have an entry for the erased control-parameter also get invoked. <br>
+    # For each container entry, any callback functions registered by registerParameterRemovedCallback() will be invoked with the key of the removed control-parameter entry as an argument. Callbacks of affected direct and indirect children which do not have an entry for the erased control-parameter also get invoked.
     # 
     def clearParameters() -> None: pass
 
@@ -178,7 +178,7 @@ class ControlParameterContainer(Boost.Python.instance):
     def unregisterParentChangedCallback(id: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the parent control-parameter container.
+    # \brief Returns the parent control-parameter container.
     # 
     # \return A reference to the parent control-parameter container, or <tt>None</tt> if no parent container has been set. 
     # 

@@ -25,7 +25,7 @@
 class FileScreeningHitCollector(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FileScreeningHitCollector instance \a collector.
+    # \brief Contructs a copy of the \c FileScreeningHitCollector instance \a collector.
     # \param collector The \c FileScreeningHitCollector instance to copy.
     # 
     def __init__(collector: FileScreeningHitCollector) -> None: pass
@@ -50,7 +50,7 @@ class FileScreeningHitCollector(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FileScreeningHitCollector instance \a collector.
+    # \brief Replaces the current state with a copy of the state of the \c FileScreeningHitCollector instance \a collector.
     # \param collector The \c FileScreeningHitCollector instance to copy.
     # \return \a self
     # 

@@ -45,7 +45,7 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     DEF_MAX_ANGLE = 30.0
 
     ##
-    # \brief Initializes a copy of the \c OrthogonalPiPiInteractionConstraint instance \a constr.
+    # \brief Contructs a copy of the \c OrthogonalPiPiInteractionConstraint instance \a constr.
     # \param constr The \c OrthogonalPiPiInteractionConstraint instance to copy.
     # 
     def __init__(constr: OrthogonalPiPiInteractionConstraint) -> None: pass
@@ -101,7 +101,7 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c OrthogonalPiPiInteractionConstraint instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c OrthogonalPiPiInteractionConstraint instance \a constr.
     # \param constr The \c OrthogonalPiPiInteractionConstraint instance to copy.
     # \return \a self
     # 

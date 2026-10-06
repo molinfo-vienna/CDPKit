@@ -25,18 +25,18 @@
 class DRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DRealQuaternion instance.
+    # \brief Contructs the \c DRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DRealQuaternion instance \a q.
+    # \brief Contructs a copy of the \c DRealQuaternion instance \a q.
     # \param q The \c DRealQuaternion instance to copy.
     # 
     def __init__(q: DRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \c DRealQuaternion instance.
+    # \brief Contructs the \c DRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: float) -> None: pass
@@ -66,7 +66,7 @@ class DRealQuaternion(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DRealQuaternion instance \a q.
+    # \brief Replaces the current state with a copy of the state of the \c DRealQuaternion instance \a q.
     # \param q The \c DRealQuaternion instance to copy.
     # \return \a self
     # 

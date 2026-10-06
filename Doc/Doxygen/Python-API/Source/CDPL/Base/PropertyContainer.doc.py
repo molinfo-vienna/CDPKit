@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Base class providing methods for the storage and lookup of object properties.
+# \brief %Base class providing methods for the storage and lookup of object properties.
 # 
 # The purpose of <tt>PropertyContainer</tt> is to provide a common facility for the storage and lookup of dynamic object properties to subclasses and their clients.
 # 
@@ -28,7 +28,7 @@
 # 
 # For the explicit assignment of property values the method setProperty() is provided which expects the key of the property as its first and the value to assign as the second argument. Whether the value of a particular property has been set can be tested by the method isPropertySet(). For the erasure of property values the methods removeProperty() and clearProperties() are provided. The first method clears the value of a single property while the latter method removes all assigned property values.
 # 
-# To access the value of a property, two types of getProperty() methods are available that both expect the key of the property as the first argument. The templated versions return the stored property value (or the specified default if not available) as a reference to an object of the specified template argument type. The non-template method returns the requested property value indirectly as a reference to the Base.Any instance storing the actual value. If the requested property value does not exist, an additional argument decides whether to throw an exception or to return an empty Base.Any instance.
+# To access the value of a property, two types of getProperty() methods are available that both expect the key of the property as the first argument. The templated versions return the stored property value (or the specified default if not available) as a reference to an object of the specified template argument type. The non-template method returns the requested property value indirectly as the Base.Any instance storing the actual value. If the requested property value does not exist, an additional argument decides whether to throw an exception or to return an empty Base.Any instance.
 # 
 class PropertyContainer(Boost.Python.instance):
 

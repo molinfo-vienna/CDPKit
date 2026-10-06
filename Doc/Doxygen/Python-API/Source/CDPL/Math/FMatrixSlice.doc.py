@@ -25,13 +25,13 @@
 class FMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FMatrixSlice instance \a s.
+    # \brief Contructs a copy of the \c FMatrixSlice instance \a s.
     # \param s The \c FMatrixSlice instance to copy.
     # 
     def __init__(s: FMatrixSlice) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrixSlice instance.
+    # \brief Contructs the \c FMatrixSlice instance.
     # \param e 
     # \param s1 
     # \param s2 
@@ -124,7 +124,7 @@ class FMatrixSlice(Boost.Python.instance):
     def assign(s: FMatrixSlice) -> FMatrixSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -165,14 +165,14 @@ class FMatrixSlice(Boost.Python.instance):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> FMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the element at proxy index (<em>i</em>, <em>j</em>).
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based proxy row index.
     # \param j The zero-based proxy column index.

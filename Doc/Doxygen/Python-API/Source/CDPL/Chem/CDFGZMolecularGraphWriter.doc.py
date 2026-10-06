@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Writer for molecular graph data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+# \brief Writer for molecular graph data in the gzip-compressed native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c CDFGZMolecularGraphWriter instance.
+    # \brief Contructs the \c CDFGZMolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

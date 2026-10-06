@@ -25,18 +25,18 @@
 class DZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DZeroVector instance.
+    # \brief Contructs the \c DZeroVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DZeroVector instance \a v.
+    # \brief Contructs a copy of the \c DZeroVector instance \a v.
     # \param v The \c DZeroVector instance to copy.
     # 
     def __init__(v: DZeroVector) -> None: pass
 
     ##
-    # \brief Initializes the \c DZeroVector instance.
+    # \brief Contructs the \c DZeroVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -64,7 +64,7 @@ class DZeroVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DZeroVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c DZeroVector instance \a v.
     # \param v The \c DZeroVector instance to copy.
     # \return \a self
     # 

@@ -54,31 +54,31 @@ class FMatrix(Boost.Python.instance):
     def __init__(m: int, n: int, v: float) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrix instance.
+    # \brief Contructs the \c FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrix instance.
+    # \brief Contructs the \c FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrix instance.
+    # \brief Contructs the \c FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrix instance.
+    # \brief Contructs the \c FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrix instance.
+    # \brief Contructs the \c FMatrix instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -158,7 +158,7 @@ class FMatrix(Boost.Python.instance):
     def assign(m: FMatrix) -> FMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -199,7 +199,7 @@ class FMatrix(Boost.Python.instance):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.

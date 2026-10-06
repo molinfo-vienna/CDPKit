@@ -25,18 +25,18 @@
 class BoolAtom4Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c BoolAtom4Functor instance.
+    # \brief Contructs the \c BoolAtom4Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c BoolAtom4Functor instance.
+    # \brief Contructs the \c BoolAtom4Functor instance.
     # \param func 
     # 
     def __init__(func: ForceField.InteractionFilterFunction4) -> None: pass
 
     ##
-    # \brief Initializes the \c BoolAtom4Functor instance for the specified callable object.
+    # \brief Contructs the \c BoolAtom4Functor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

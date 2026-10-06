@@ -37,7 +37,7 @@ class BuriednessScore(Boost.Python.instance):
     DEF_PROBE_RADIUS = 8.0
 
     ##
-    # \brief Initializes a copy of the \c BuriednessScore instance \a score.
+    # \brief Contructs a copy of the \c BuriednessScore instance \a score.
     # \param score The \c BuriednessScore instance to copy.
     # 
     def __init__(score: BuriednessScore) -> None: pass
@@ -120,7 +120,7 @@ class BuriednessScore(Boost.Python.instance):
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c BuriednessScore instance \a score.
+    # \brief Replaces the current state with a copy of the state of the \c BuriednessScore instance \a score.
     # \param score The \c BuriednessScore instance to copy.
     # \return \a self
     # 

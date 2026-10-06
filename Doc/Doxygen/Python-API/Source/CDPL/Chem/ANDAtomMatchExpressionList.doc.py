@@ -27,18 +27,18 @@
 class ANDAtomMatchExpressionList(AtomMatchExpressionList):
 
     ##
-    # \brief Initializes the \c ANDAtomMatchExpressionList instance.
+    # \brief Contructs the \c ANDAtomMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ANDAtomMatchExpressionList instance \a expr.
+    # \brief Contructs a copy of the \c ANDAtomMatchExpressionList instance \a expr.
     # \param expr The \c ANDAtomMatchExpressionList instance to copy.
     # 
     def __init__(expr: ANDAtomMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ANDAtomMatchExpressionList instance \a expr.
+    # \brief Replaces the current state with a copy of the state of the \c ANDAtomMatchExpressionList instance \a expr.
     # \param expr The \c ANDAtomMatchExpressionList instance to copy.
     # \return \a self
     # 

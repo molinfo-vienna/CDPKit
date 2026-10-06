@@ -25,13 +25,13 @@
 class ConstULMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstULMatrixTranspose instance \a mt.
+    # \brief Contructs a copy of the \c ConstULMatrixTranspose instance \a mt.
     # \param mt The \c ConstULMatrixTranspose instance to copy.
     # 
     def __init__(mt: ConstULMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstULMatrixTranspose instance.
+    # \brief Contructs the \c ConstULMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
@@ -74,14 +74,14 @@ class ConstULMatrixTranspose(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> ConstULMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix's element at (<em>j</em>, <em>i</em>).
+    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
     # 
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.

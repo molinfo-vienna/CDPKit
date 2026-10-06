@@ -27,37 +27,37 @@
 class TorsionLibrary(TorsionCategory):
 
     ##
-    # \brief Initializes the \c TorsionLibrary instance.
+    # \brief Contructs the \c TorsionLibrary instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TorsionLibrary instance \a lib.
+    # \brief Contructs a copy of the \c TorsionLibrary instance \a lib.
     # \param lib The \c TorsionLibrary instance to copy.
     # 
     def __init__(lib: TorsionLibrary) -> None: pass
 
     ##
-    # \brief Reads the library content from the input stream <em>is</em> in the XML-based <em>CDPL</em> torsion library format.
+    # \brief Reads the library content from the input stream <em>is</em> in the XML-based <em>%CDPL</em> torsion library format.
     # 
     # \param is The input stream to read from.
     # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief Loads the built-in <em>CDPL</em> default torsion library.
+    # \brief Loads the built-in <em>%CDPL</em> default torsion library.
     # 
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Writes the library content to the output stream <em>os</em> in the XML-based <em>CDPL</em> torsion library format.
+    # \brief Writes the library content to the output stream <em>os</em> in the XML-based <em>%CDPL</em> torsion library format.
     # 
     # \param os The output stream to write to.
     # 
     def save(os: Base.OStream) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TorsionLibrary instance \a lib.
+    # \brief Replaces the current state with a copy of the state of the \c TorsionLibrary instance \a lib.
     # \param lib The \c TorsionLibrary instance to copy.
     # \return \a self
     # 

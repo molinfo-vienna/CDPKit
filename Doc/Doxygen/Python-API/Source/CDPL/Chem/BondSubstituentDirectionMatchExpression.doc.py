@@ -27,18 +27,18 @@
 class BondSubstituentDirectionMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Initializes the \c BondSubstituentDirectionMatchExpression instance.
+    # \brief Contructs the \c BondSubstituentDirectionMatchExpression instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c BondSubstituentDirectionMatchExpression instance \a expr.
+    # \brief Contructs a copy of the \c BondSubstituentDirectionMatchExpression instance \a expr.
     # \param expr The \c BondSubstituentDirectionMatchExpression instance to copy.
     # 
     def __init__(expr: BondSubstituentDirectionMatchExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c BondSubstituentDirectionMatchExpression instance \a expr.
+    # \brief Replaces the current state with a copy of the state of the \c BondSubstituentDirectionMatchExpression instance \a expr.
     # \param expr The \c BondSubstituentDirectionMatchExpression instance to copy.
     # \return \a self
     # 

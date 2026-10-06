@@ -30,7 +30,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MolecularGraphMatchExpressionList instance \a expr.
+    # \brief Contructs a copy of the \c MolecularGraphMatchExpressionList instance \a expr.
     # \param expr The \c MolecularGraphMatchExpressionList instance to copy.
     # 
     def __init__(expr: MolecularGraphMatchExpressionList) -> None: pass
@@ -95,7 +95,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MolecularGraphMatchExpressionList instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c MolecularGraphMatchExpressionList instance \a array.
     # \param array The \c MolecularGraphMatchExpressionList instance to copy.
     # \return \a self
     # 
@@ -162,7 +162,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the first element of the list.
+    # \brief Returns the first element of the list.
     # 
     # \return A reference to the first element. 
     # 
@@ -171,7 +171,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def getFirstElement() -> MolecularGraphMatchExpression: pass
 
     ##
-    # \brief Returns a reference to the last element of the list.
+    # \brief Returns the last element of the list.
     # 
     # \return A reference to the last element. 
     # 
@@ -180,7 +180,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def getLastElement() -> MolecularGraphMatchExpression: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>idx</em>.
+    # \brief Returns the element at index <em>idx</em>.
     # 
     # The method is equivalent to __getitem__(std::size_t).
     # 
@@ -205,7 +205,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def __delitem__(idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>idx</em>.
+    # \brief Returns the element at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the element.
     # 

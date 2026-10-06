@@ -34,7 +34,7 @@ class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94TorsionInteractionParameterizer instance \a parameterizer.
+    # \brief Contructs a copy of the \c MMFF94TorsionInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94TorsionInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94TorsionInteractionParameterizer) -> None: pass
@@ -110,7 +110,7 @@ class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
     def setParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94TorsionInteractionParameterizer instance \a parameterizer.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94TorsionInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94TorsionInteractionParameterizer instance to copy.
     # \return \a self
     # 

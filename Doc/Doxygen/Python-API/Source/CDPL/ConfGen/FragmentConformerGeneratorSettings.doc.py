@@ -30,7 +30,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     class FragmentSettings(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \c FragmentSettings instance \a settings.
+        # \brief Contructs a copy of the \c FragmentSettings instance \a settings.
         # \param settings The \c FragmentSettings instance to copy.
         # 
         def __init__(settings: FragmentSettings) -> None: pass
@@ -48,7 +48,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c FragmentSettings instance \a settings.
+        # \brief Replaces the current state with a copy of the state of the \c FragmentSettings instance \a settings.
         # \param settings The \c FragmentSettings instance to copy.
         # \return \a self
         # 
@@ -173,7 +173,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FragmentConformerGeneratorSettings instance \a settings.
+    # \brief Contructs a copy of the \c FragmentConformerGeneratorSettings instance \a settings.
     # \param settings The \c FragmentConformerGeneratorSettings instance to copy.
     # 
     def __init__(settings: FragmentConformerGeneratorSettings) -> None: pass
@@ -191,7 +191,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FragmentConformerGeneratorSettings instance \a settings.
+    # \brief Replaces the current state with a copy of the state of the \c FragmentConformerGeneratorSettings instance \a settings.
     # \param settings The \c FragmentConformerGeneratorSettings instance to copy.
     # \return \a self
     # 
@@ -295,21 +295,21 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def getMacrocycleRotorBondCountThreshold() -> int: pass
 
     ##
-    # \brief Returns a reference to the per-fragment-class settings used for chain fragments.
+    # \brief Returns the per-fragment-class settings used for chain fragments.
     # 
     # \return A reference to the chain-fragment settings.
     # 
     def getChainSettings() -> FragmentSettings: pass
 
     ##
-    # \brief Returns a reference to the per-fragment-class settings used for flexible macrocyclic ring systems.
+    # \brief Returns the per-fragment-class settings used for flexible macrocyclic ring systems.
     # 
     # \return A reference to the macrocycle settings.
     # 
     def getMacrocycleSettings() -> FragmentSettings: pass
 
     ##
-    # \brief Returns a reference to the per-fragment-class settings used for small ring systems.
+    # \brief Returns the per-fragment-class settings used for small ring systems.
     # 
     # \return A reference to the small ring system settings.
     # 

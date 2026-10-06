@@ -25,7 +25,7 @@
 class PharmacophoreInputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c PharmacophoreInputHandler instance.
+    # \brief Contructs the \c PharmacophoreInputHandler instance.
     # 
     def __init__() -> None: pass
 

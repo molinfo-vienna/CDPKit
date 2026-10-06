@@ -45,7 +45,7 @@ class HBondingInteractionScore(FeatureInteractionScore):
     DEF_MAX_ACC_ANGLE = 75.0
 
     ##
-    # \brief Initializes a copy of the \c HBondingInteractionScore instance \a score.
+    # \brief Contructs a copy of the \c HBondingInteractionScore instance \a score.
     # \param score The \c HBondingInteractionScore instance to copy.
     # 
     def __init__(score: HBondingInteractionScore) -> None: pass
@@ -111,7 +111,7 @@ class HBondingInteractionScore(FeatureInteractionScore):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c HBondingInteractionScore instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c HBondingInteractionScore instance \a constr.
     # \param constr The \c HBondingInteractionScore instance to copy.
     # \return \a self
     # 

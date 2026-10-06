@@ -45,7 +45,7 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     DEF_MAX_ANGLE = 20.0
 
     ##
-    # \brief Initializes a copy of the \c OrthogonalPiPiInteractionScore instance \a score.
+    # \brief Contructs a copy of the \c OrthogonalPiPiInteractionScore instance \a score.
     # \param score The \c OrthogonalPiPiInteractionScore instance to copy.
     # 
     def __init__(score: OrthogonalPiPiInteractionScore) -> None: pass
@@ -103,7 +103,7 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c OrthogonalPiPiInteractionScore instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c OrthogonalPiPiInteractionScore instance \a constr.
     # \param constr The \c OrthogonalPiPiInteractionScore instance to copy.
     # \return \a self
     # 

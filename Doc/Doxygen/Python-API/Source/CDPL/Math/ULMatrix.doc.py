@@ -25,25 +25,25 @@
 class ULMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ULMatrix instance \a m.
+    # \brief Contructs a copy of the \c ULMatrix instance \a m.
     # \param m The \c ULMatrix instance to copy.
     # 
     def __init__(m: ULMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # \param m 
     # \param n 
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # \param m 
     # \param n 
     # \param v 
@@ -51,31 +51,31 @@ class ULMatrix(Boost.Python.instance):
     def __init__(m: int, n: int, v: int) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrix instance.
+    # \brief Contructs the \c ULMatrix instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -97,42 +97,42 @@ class ULMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
     # \param e The \c ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
     # \param e The \c ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
     # \param e The \c ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
     # \param e The \c ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ULMatrix instance \a m.
+    # \brief Replaces the current state with a copy of the state of the \c ULMatrix instance \a m.
     # \param m The \c ULMatrix instance to copy.
     # \return \a self
     # 
     def assign(m: ULMatrix) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

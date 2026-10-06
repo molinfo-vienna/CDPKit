@@ -25,13 +25,13 @@
 class ConstULHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstULHomogenousCoordsAdapter instance \a a.
+    # \brief Contructs a copy of the \c ConstULHomogenousCoordsAdapter instance \a a.
     # \param a The \c ConstULHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: ConstULHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstULHomogenousCoordsAdapter instance.
+    # \brief Contructs the \c ConstULHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass

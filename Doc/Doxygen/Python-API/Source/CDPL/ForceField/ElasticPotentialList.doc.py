@@ -27,12 +27,12 @@
 class ElasticPotentialList(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ElasticPotentialList instance.
+    # \brief Contructs the \c ElasticPotentialList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ElasticPotentialList instance \a list.
+    # \brief Contructs a copy of the \c ElasticPotentialList instance \a list.
     # \param list The \c ElasticPotentialList instance to copy.
     # 
     def __init__(list: ElasticPotentialList) -> None: pass
@@ -62,7 +62,7 @@ class ElasticPotentialList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ElasticPotentialList instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c ElasticPotentialList instance \a array.
     # \param array The \c ElasticPotentialList instance to copy.
     # \return \a self
     # 

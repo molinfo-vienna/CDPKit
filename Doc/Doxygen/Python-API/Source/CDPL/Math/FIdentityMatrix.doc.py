@@ -25,18 +25,18 @@
 class FIdentityMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FIdentityMatrix instance.
+    # \brief Contructs the \c FIdentityMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FIdentityMatrix instance \a m.
+    # \brief Contructs a copy of the \c FIdentityMatrix instance \a m.
     # \param m The \c FIdentityMatrix instance to copy.
     # 
     def __init__(m: FIdentityMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c FIdentityMatrix instance.
+    # \brief Contructs the \c FIdentityMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -67,7 +67,7 @@ class FIdentityMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FIdentityMatrix instance \a m.
+    # \brief Replaces the current state with a copy of the state of the \c FIdentityMatrix instance \a m.
     # \param m The \c FIdentityMatrix instance to copy.
     # \return \a self
     # 

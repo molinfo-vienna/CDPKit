@@ -25,18 +25,18 @@
 class FloatVector2FArray2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FloatVector2FArray2Functor instance.
+    # \brief Contructs the \c FloatVector2FArray2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FloatVector2FArray2Functor instance \a func.
+    # \brief Contructs a copy of the \c FloatVector2FArray2Functor instance \a func.
     # \param func The \c FloatVector2FArray2Functor instance to copy.
     # 
     def __init__(func: FloatVector2FArray2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \c FloatVector2FArray2Functor instance for the specified callable object.
+    # \brief Contructs the \c FloatVector2FArray2Functor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

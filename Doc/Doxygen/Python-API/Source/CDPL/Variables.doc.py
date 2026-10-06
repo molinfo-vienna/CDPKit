@@ -20,24 +20,24 @@
 #
 
 ##
-# \brief <em>CDPL</em> build system information.
+# \brief <em>%CDPL</em> build system information.
 # 
-BUILD_SYSTEM = 'Linux-5.14.0-687.12.1.el9_8.x86_64'
+BUILD_SYSTEM = 'Linux-6.12.0-211.16.1.el10_2.0.1.x86_64'
 
 ##
-# \brief The <em>CDPL</em> build time in the format <em>YYYYMMDDHHMM</em>.
+# \brief The <em>%CDPL</em> build time in the format <em>YYYYMMDDHHMM</em>.
 # 
-BUILD_TIME = 202610042100
+BUILD_TIME = 202610060821
 
 ##
-# \brief An identifier for the compiler that was used to build the <em>CDPL</em>.
+# \brief An identifier for the compiler that was used to build the <em>%CDPL</em>.
 # 
 COMPILER_ID = 'GNU'
 
 ##
-# \brief The version of the compiler that was used to build the <em>CDPL</em>.
+# \brief The version of the compiler that was used to build the <em>%CDPL</em>.
 # 
-COMPILER_VERSION = '11.5.0'
+COMPILER_VERSION = '14.3.1'
 
 ##
 # \brief True if the <em>Cairo 2D Graphics Library</em> is available.
@@ -75,31 +75,31 @@ HAVE_NUMPY = True
 HAVE_QT = True
 
 ##
-# \brief The full <em>CDPL</em> version number.
+# \brief The full <em>%CDPL</em> version number.
 # 
 VERSION = 10400
 
 ##
-# \brief The <em>CDPL</em> major version.
+# \brief The <em>%CDPL</em> major version.
 # 
 VERSION_MAJOR = 1
 
 ##
-# \brief The <em>CDPL</em> minor version.
+# \brief The <em>%CDPL</em> minor version.
 # 
 VERSION_MINOR = 4
 
 ##
-# \brief The <em>CDPL</em> patch-level.
+# \brief The <em>%CDPL</em> patch-level.
 # 
 VERSION_PATCH = 0
 
 ##
-# \brief The full <em>CDPL</em> version as string.
+# \brief The full <em>%CDPL</em> version as string.
 # 
 VERSION_STRING = '1.4.0.dev1'
 
 ##
-# \brief The full <em>CDPL</em> version as string.
+# \brief The full <em>%CDPL</em> version as string.
 # 
 __version__ = '1.4.0.dev1'

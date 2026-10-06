@@ -41,7 +41,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c GRAILDataSetGenerator instance \a gen.
+    # \brief Contructs a copy of the \c GRAILDataSetGenerator instance \a gen.
     # \param gen The \c GRAILDataSetGenerator instance to copy.
     # 
     def __init__(gen: GRAILDataSetGenerator) -> None: pass
@@ -59,7 +59,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c GRAILDataSetGenerator instance \a gen.
+    # \brief Replaces the current state with a copy of the state of the \c GRAILDataSetGenerator instance \a gen.
     # \param gen The \c GRAILDataSetGenerator instance to copy.
     # \return \a self
     # 

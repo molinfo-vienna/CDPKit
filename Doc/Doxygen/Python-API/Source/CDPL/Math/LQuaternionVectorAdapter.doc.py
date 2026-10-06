@@ -25,13 +25,13 @@
 class LQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c LQuaternionVectorAdapter instance \a a.
+    # \brief Contructs a copy of the \c LQuaternionVectorAdapter instance \a a.
     # \param a The \c LQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: LQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c LQuaternionVectorAdapter instance.
+    # \brief Contructs the \c LQuaternionVectorAdapter instance.
     # \param e 
     # 
     def __init__(e: LQuaternionExpression) -> None: pass
@@ -130,7 +130,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def setElement(i: int, v: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped quaternion (via its stored closure).
+    # \brief Returns the wrapped quaternion (via its stored closure).
     # 
     # \return A reference to the wrapped quaternion closure.
     # 
@@ -165,7 +165,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the quaternion component at index <em>i</em>.
+    # \brief Returns the quaternion component at index <em>i</em>.
     # 
     # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
     # 
@@ -176,7 +176,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def __call__(i: int) -> int: pass
 
     ##
-    # \brief Returns a reference to the quaternion component at index <em>i</em>.
+    # \brief Returns the quaternion component at index <em>i</em>.
     # 
     # \param i The zero-based component index.
     # 

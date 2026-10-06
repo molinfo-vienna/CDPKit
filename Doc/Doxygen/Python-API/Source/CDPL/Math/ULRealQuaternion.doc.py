@@ -25,18 +25,18 @@
 class ULRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ULRealQuaternion instance.
+    # \brief Contructs the \c ULRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ULRealQuaternion instance \a q.
+    # \brief Contructs a copy of the \c ULRealQuaternion instance \a q.
     # \param q The \c ULRealQuaternion instance to copy.
     # 
     def __init__(q: ULRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \c ULRealQuaternion instance.
+    # \brief Contructs the \c ULRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: int) -> None: pass
@@ -66,7 +66,7 @@ class ULRealQuaternion(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ULRealQuaternion instance \a q.
+    # \brief Replaces the current state with a copy of the state of the \c ULRealQuaternion instance \a q.
     # \param q The \c ULRealQuaternion instance to copy.
     # \return \a self
     # 

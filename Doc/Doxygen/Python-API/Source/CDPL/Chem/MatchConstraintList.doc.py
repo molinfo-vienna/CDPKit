@@ -52,7 +52,7 @@ class MatchConstraintList(Boost.Python.instance):
         NOT_OR_LIST = 3
 
     ##
-    # \brief Initializes a copy of the \c MatchConstraintList instance \a list.
+    # \brief Contructs a copy of the \c MatchConstraintList instance \a list.
     # \param list The \c MatchConstraintList instance to copy.
     # 
     def __init__(list: MatchConstraintList) -> None: pass
@@ -89,7 +89,7 @@ class MatchConstraintList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MatchConstraintList instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c MatchConstraintList instance \a array.
     # \param array The \c MatchConstraintList instance to copy.
     # \return \a self
     # 

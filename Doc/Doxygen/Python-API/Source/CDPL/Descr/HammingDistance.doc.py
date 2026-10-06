@@ -27,12 +27,12 @@
 class HammingDistance(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c HammingDistance instance.
+    # \brief Contructs the \c HammingDistance instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c HammingDistance instance \a func.
+    # \brief Contructs a copy of the \c HammingDistance instance \a func.
     # \param func The \c HammingDistance instance to copy.
     # 
     def __init__(func: HammingDistance) -> None: pass
@@ -50,7 +50,7 @@ class HammingDistance(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c HammingDistance instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c HammingDistance instance \a func.
     # \param func The \c HammingDistance instance to copy.
     # \return \a self
     # 
@@ -61,7 +61,8 @@ class HammingDistance(Boost.Python.instance):
     # 
     # The <em>Hamming Distance</em> \f$ D_{ab} \f$ is calculated by:
     # 
-    # \f[ D_{ab} = N_a + N_b \f]
+    # \f[   D_{ab} = N_a + N_b
+    # \f]
     # 
     # where \f$ N_a \f$ is the number of bits that are set in the first bitset but not in the second bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset but not in the first one.
     # 

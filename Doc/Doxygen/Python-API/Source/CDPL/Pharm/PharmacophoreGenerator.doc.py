@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Base class for pharmacophore generators that orchestrate per-feature-type Pharm.FeatureGenerator instances to produce the features of a Pharm.Pharmacophore from a Chem.MolecularGraph.
+# \brief %Base class for pharmacophore generators that orchestrate per-feature-type Pharm.FeatureGenerator instances to produce the features of a Pharm.Pharmacophore from a Chem.MolecularGraph.
 # 
 class PharmacophoreGenerator(Boost.Python.instance):
 

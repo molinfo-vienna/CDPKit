@@ -32,7 +32,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     class MaxScoreFunctor(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c MaxScoreFunctor instance.
+        # \brief Contructs the \c MaxScoreFunctor instance.
         # 
         def __init__() -> None: pass
 
@@ -51,7 +51,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     class ScoreSumFunctor(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c ScoreSumFunctor instance.
+        # \brief Contructs the \c ScoreSumFunctor instance.
         # 
         def __init__() -> None: pass
 

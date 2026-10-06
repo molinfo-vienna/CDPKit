@@ -25,13 +25,13 @@
 class ULMatrixRow(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ULMatrixRow instance \a mr.
+    # \brief Contructs a copy of the \c ULMatrixRow instance \a mr.
     # \param mr The \c ULMatrixRow instance to copy.
     # 
     def __init__(mr: ULMatrixRow) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrixRow instance.
+    # \brief Contructs the \c ULMatrixRow instance.
     # \param e 
     # \param i 
     # 
@@ -52,42 +52,42 @@ class ULMatrixRow(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
     # \param e The \c ConstFVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
     # \param e The \c ConstDVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
     # \param e The \c ConstLVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
     # \param e The \c ConstULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ULMatrixRow instance \a r.
+    # \brief Replaces the current state with a copy of the state of the \c ULMatrixRow instance \a r.
     # \param r The \c ULMatrixRow instance to copy.
     # \return \a self
     # 
     def assign(r: ULMatrixRow) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

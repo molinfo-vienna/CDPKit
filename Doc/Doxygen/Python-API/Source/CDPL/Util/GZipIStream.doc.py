@@ -25,12 +25,12 @@
 class GZipIStream(Base.IStream):
 
     ##
-    # \brief Initializes the \c GZipIStream instance.
+    # \brief Contructs the \c GZipIStream instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c GZipIStream instance.
+    # \brief Contructs the \c GZipIStream instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass
@@ -65,8 +65,17 @@ class GZipIStream(Base.IStream):
 
     def __iter__() -> GZipIStream: pass
 
-    closed = property(isClosed)
+    ##
+    # \brief FIXME!
+    #
+    closed = property(getClosed)
 
-    mode = property(getOpenModeString)
+    ##
+    # \brief FIXME!
+    #
+    mode = property(getMode)
 
-    modeFlags = property(getOpenModeFlags)
+    ##
+    # \brief FIXME!
+    #
+    modeFlags = property(getModeFlags)

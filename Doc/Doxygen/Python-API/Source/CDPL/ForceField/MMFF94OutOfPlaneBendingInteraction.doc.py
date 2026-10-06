@@ -27,7 +27,7 @@
 class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c MMFF94OutOfPlaneBendingInteraction instance \a iactn.
+    # \brief Contructs a copy of the \c MMFF94OutOfPlaneBendingInteraction instance \a iactn.
     # \param iactn The \c MMFF94OutOfPlaneBendingInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94OutOfPlaneBendingInteraction) -> None: pass
@@ -107,7 +107,7 @@ class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
     def getForceConstant() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94OutOfPlaneBendingInteraction instance \a iactn.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94OutOfPlaneBendingInteraction instance \a iactn.
     # \param iactn The \c MMFF94OutOfPlaneBendingInteraction instance to copy.
     # \return \a self
     # 

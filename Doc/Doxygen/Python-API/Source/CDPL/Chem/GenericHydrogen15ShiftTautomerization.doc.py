@@ -32,7 +32,7 @@ class GenericHydrogen15ShiftTautomerization(PatternBasedTautomerizationRule):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c GenericHydrogen15ShiftTautomerization instance \a rule.
+    # \brief Contructs a copy of the \c GenericHydrogen15ShiftTautomerization instance \a rule.
     # \param rule The \c GenericHydrogen15ShiftTautomerization instance to copy.
     # 
     def __init__(rule: GenericHydrogen15ShiftTautomerization) -> None: pass

@@ -27,6 +27,6 @@
 class XYZGZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c XYZGZMoleculeInputHandler instance.
+    # \brief Contructs the \c XYZGZMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

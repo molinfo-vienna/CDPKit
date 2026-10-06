@@ -25,7 +25,7 @@
 class Object3DInputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c Object3DInputHandler instance.
+    # \brief Contructs the \c Object3DInputHandler instance.
     # 
     def __init__() -> None: pass
 

@@ -35,7 +35,7 @@ class IonicInteractionScore(FeatureDistanceScore):
     DEF_MAX_DISTANCE = 5.5
 
     ##
-    # \brief Initializes a copy of the \c IonicInteractionScore instance \a score.
+    # \brief Contructs a copy of the \c IonicInteractionScore instance \a score.
     # \param score The \c IonicInteractionScore instance to copy.
     # 
     def __init__(score: IonicInteractionScore) -> None: pass

@@ -41,7 +41,7 @@ class NOTAtomMatchExpression(AtomMatchExpression):
     def __init__(expr_ptr: AtomMatchExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c NOTAtomMatchExpression instance \a expression.
+    # \brief Replaces the current state with a copy of the state of the \c NOTAtomMatchExpression instance \a expression.
     # \param expression The \c NOTAtomMatchExpression instance to copy.
     # \return \a self
     # 

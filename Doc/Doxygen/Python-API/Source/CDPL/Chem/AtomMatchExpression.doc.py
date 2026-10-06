@@ -27,7 +27,7 @@
 class AtomMatchExpression(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c AtomMatchExpression instance.
+    # \brief Contructs the \c AtomMatchExpression instance.
     # 
     def __init__() -> None: pass
 

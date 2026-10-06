@@ -25,7 +25,7 @@
 class FileCUBEDRegularGridWriter(DRegularGridWriterBase):
 
     ##
-    # \brief Initializes the \c FileCUBEDRegularGridWriter instance.
+    # \brief Contructs the \c FileCUBEDRegularGridWriter instance.
     # \param file_name 
     # \param mode 
     # 

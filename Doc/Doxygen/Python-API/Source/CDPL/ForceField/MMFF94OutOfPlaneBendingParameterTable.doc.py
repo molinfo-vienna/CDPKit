@@ -37,7 +37,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Entry instance \a entry.
+        # \brief Contructs a copy of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -66,7 +66,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Entry instance \a entry.
+        # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # \return \a self
         # 
@@ -129,7 +129,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94OutOfPlaneBendingParameterTable instance \a table.
+    # \brief Contructs a copy of the \c MMFF94OutOfPlaneBendingParameterTable instance \a table.
     # \param table The \c MMFF94OutOfPlaneBendingParameterTable instance to copy.
     # 
     def __init__(table: MMFF94OutOfPlaneBendingParameterTable) -> None: pass
@@ -170,7 +170,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     def removeEntry(term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, oop_atom_type: int) -> bool: pass
 
     ##
-    # \brief Returns a reference to the entry matching the specified query values.
+    # \brief Returns the entry matching the specified query values.
     # 
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
     # \param ctr_atom_type The numeric MMFF94 atom type of the center atom.
@@ -210,7 +210,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     def loadDefaults(param_set: int) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94OutOfPlaneBendingParameterTable instance \a table.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94OutOfPlaneBendingParameterTable instance \a table.
     # \param table The \c MMFF94OutOfPlaneBendingParameterTable instance to copy.
     # \return \a self
     # 

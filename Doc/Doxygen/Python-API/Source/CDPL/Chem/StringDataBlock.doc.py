@@ -27,12 +27,12 @@
 class StringDataBlock(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c StringDataBlock instance.
+    # \brief Contructs the \c StringDataBlock instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c StringDataBlock instance \a data_block.
+    # \brief Contructs a copy of the \c StringDataBlock instance \a data_block.
     # \param data_block The \c StringDataBlock instance to copy.
     # 
     def __init__(data_block: StringDataBlock) -> None: pass
@@ -62,7 +62,7 @@ class StringDataBlock(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c StringDataBlock instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c StringDataBlock instance \a array.
     # \param array The \c StringDataBlock instance to copy.
     # \return \a self
     # 

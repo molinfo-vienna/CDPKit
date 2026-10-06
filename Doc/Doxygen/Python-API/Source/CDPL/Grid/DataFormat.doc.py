@@ -25,17 +25,17 @@
 class DataFormat(Boost.Python.instance):
 
     ##
-    # \brief Provides meta-information about the native binary <em>CDPL</em> format.
+    # \brief Provides meta-information about the native binary <em>%CDPL</em> format.
     # 
     CDF = CDPL.Base.DataFormat(name='CDF', descr='Native CDPL-Format', mime_type'', file_exts=['cdf'], multi_rec=True)
 
     ##
-    # \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+    # \brief Provides meta-information about the gzip-compressed native <em>%CDPL</em> format.
     # 
     CDF_GZ = CDPL.Base.DataFormat(name='CDF_GZ', descr='GZip-Compressed Native CDPL-Format', mime_type'', file_exts=['cdf.gz'], multi_rec=True)
 
     ##
-    # \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+    # \brief Provides meta-information about the bzip2-compressed native <em>%CDPL</em> format.
     # 
     CDF_BZ2 = CDPL.Base.DataFormat(name='CDF_BZ2', descr='BZip2-Compressed Native CDPL-Format', mime_type'', file_exts=['cdf.bz2'], multi_rec=True)
 

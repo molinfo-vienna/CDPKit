@@ -25,12 +25,12 @@
 class GZipOStream(Base.OStream):
 
     ##
-    # \brief Initializes the \c GZipOStream instance.
+    # \brief Contructs the \c GZipOStream instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c GZipOStream instance.
+    # \brief Contructs the \c GZipOStream instance.
     # \param os 
     # 
     def __init__(os: Base.OStream) -> None: pass
@@ -59,10 +59,22 @@ class GZipOStream(Base.OStream):
 
     def open(os: Base.OStream) -> None: pass
 
-    closed = property(isClosed)
+    ##
+    # \brief FIXME!
+    #
+    closed = property(getClosed)
 
-    softspace = property(getSoftSpace, setSoftSpace)
+    ##
+    # \brief FIXME!
+    #
+    softspace = property(getSoftspace, setSoftspace)
 
-    mode = property(getOpenModeString)
+    ##
+    # \brief FIXME!
+    #
+    mode = property(getMode)
 
-    modeFlags = property(getOpenModeFlags)
+    ##
+    # \brief FIXME!
+    #
+    modeFlags = property(getModeFlags)

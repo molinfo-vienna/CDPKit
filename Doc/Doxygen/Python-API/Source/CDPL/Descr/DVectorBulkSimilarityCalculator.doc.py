@@ -25,18 +25,18 @@
 class DVectorBulkSimilarityCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DVectorBulkSimilarityCalculator instance.
+    # \brief Contructs the \c DVectorBulkSimilarityCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DVectorBulkSimilarityCalculator instance \a calc.
+    # \brief Contructs a copy of the \c DVectorBulkSimilarityCalculator instance \a calc.
     # \param calc The \c DVectorBulkSimilarityCalculator instance to copy.
     # 
     def __init__(calc: DVectorBulkSimilarityCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c DVectorBulkSimilarityCalculator instance.
+    # \brief Contructs the \c DVectorBulkSimilarityCalculator instance.
     # \param sim_func 
     # 
     def __init__(sim_func: Math.DoubleDVector2Functor) -> None: pass
@@ -54,7 +54,7 @@ class DVectorBulkSimilarityCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DVectorBulkSimilarityCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c DVectorBulkSimilarityCalculator instance \a calc.
     # \param calc The \c DVectorBulkSimilarityCalculator instance to copy.
     # \return \a self
     # 

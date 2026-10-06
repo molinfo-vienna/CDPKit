@@ -27,12 +27,12 @@
 class BondContainer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c BondContainer instance.
+    # \brief Contructs the \c BondContainer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the bond at index <em>idx</em>.
+    # \brief Returns the bond at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the bond to return.
     # 

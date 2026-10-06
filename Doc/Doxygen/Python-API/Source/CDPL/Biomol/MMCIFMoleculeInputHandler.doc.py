@@ -27,6 +27,6 @@
 class MMCIFMoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c MMCIFMoleculeInputHandler instance.
+    # \brief Contructs the \c MMCIFMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

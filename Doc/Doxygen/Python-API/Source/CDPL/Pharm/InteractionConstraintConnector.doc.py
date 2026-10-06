@@ -25,13 +25,13 @@
 class InteractionConstraintConnector(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c InteractionConstraintConnector instance \a con.
+    # \brief Contructs a copy of the \c InteractionConstraintConnector instance \a con.
     # \param con The \c InteractionConstraintConnector instance to copy.
     # 
     def __init__(con: InteractionConstraintConnector) -> None: pass
 
     ##
-    # \brief Initializes the \c InteractionConstraintConnector instance.
+    # \brief Contructs the \c InteractionConstraintConnector instance.
     # \param and_expr 
     # \param func2 
     # \param func1 
@@ -51,7 +51,7 @@ class InteractionConstraintConnector(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c InteractionConstraintConnector instance \a con.
+    # \brief Replaces the current state with a copy of the state of the \c InteractionConstraintConnector instance \a con.
     # \param con The \c InteractionConstraintConnector instance to copy.
     # \return \a self
     # 

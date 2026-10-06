@@ -25,7 +25,7 @@
 class DSpatialGrid(AttributedGrid):
 
     ##
-    # \brief Initializes the \c DSpatialGrid instance.
+    # \brief Contructs the \c DSpatialGrid instance.
     # 
     def __init__() -> None: pass
 
@@ -46,7 +46,7 @@ class DSpatialGrid(AttributedGrid):
     def getCoordinates(i: int, coords: Math.Vector3D) -> None: pass
 
     ##
-    # \brief Returns a reference to the grid element at linear index <em>i</em>.
+    # \brief Returns the grid element at linear index <em>i</em>.
     # 
     # \param i The linear element index.
     # 

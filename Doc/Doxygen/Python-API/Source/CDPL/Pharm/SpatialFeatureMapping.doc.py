@@ -25,7 +25,7 @@
 class SpatialFeatureMapping(FeatureMapping):
 
     ##
-    # \brief Initializes a copy of the \c SpatialFeatureMapping instance \a mapping.
+    # \brief Contructs a copy of the \c SpatialFeatureMapping instance \a mapping.
     # \param mapping The \c SpatialFeatureMapping instance to copy.
     # 
     def __init__(mapping: SpatialFeatureMapping) -> None: pass
@@ -50,7 +50,7 @@ class SpatialFeatureMapping(FeatureMapping):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c SpatialFeatureMapping instance \a mapping.
+    # \brief Replaces the current state with a copy of the state of the \c SpatialFeatureMapping instance \a mapping.
     # \param mapping The \c SpatialFeatureMapping instance to copy.
     # \return \a self
     # 

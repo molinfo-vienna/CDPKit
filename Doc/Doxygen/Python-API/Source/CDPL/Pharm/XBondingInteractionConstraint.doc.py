@@ -45,7 +45,7 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     DEF_MAX_ACC_ANGLE = 45.0
 
     ##
-    # \brief Initializes a copy of the \c XBondingInteractionConstraint instance \a constr.
+    # \brief Contructs a copy of the \c XBondingInteractionConstraint instance \a constr.
     # \param constr The \c XBondingInteractionConstraint instance to copy.
     # 
     def __init__(constr: XBondingInteractionConstraint) -> None: pass
@@ -102,7 +102,7 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c XBondingInteractionConstraint instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c XBondingInteractionConstraint instance \a constr.
     # \param constr The \c XBondingInteractionConstraint instance to copy.
     # \return \a self
     # 

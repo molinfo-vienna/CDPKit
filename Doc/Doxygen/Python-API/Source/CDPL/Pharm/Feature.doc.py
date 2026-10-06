@@ -25,12 +25,12 @@
 class Feature(Chem.Entity3D):
 
     ##
-    # \brief Initializes the \c Feature instance.
+    # \brief Contructs the \c Feature instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the parent pharmacophore.
+    # \brief Returns the parent pharmacophore.
     # 
     # \return A reference to the parent pharmacophore.
     # 
@@ -44,7 +44,7 @@ class Feature(Chem.Entity3D):
     def getIndex() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Feature instance \a ftr.
+    # \brief Replaces the current state with a copy of the state of the \c Feature instance \a ftr.
     # \param ftr The \c Feature instance to copy.
     # \return \a self
     # 

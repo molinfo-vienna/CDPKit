@@ -25,13 +25,13 @@
 class ConstLMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstLMatrixTranspose instance \a mt.
+    # \brief Contructs a copy of the \c ConstLMatrixTranspose instance \a mt.
     # \param mt The \c ConstLMatrixTranspose instance to copy.
     # 
     def __init__(mt: ConstLMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstLMatrixTranspose instance.
+    # \brief Contructs the \c ConstLMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
@@ -74,14 +74,14 @@ class ConstLMatrixTranspose(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> ConstLMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix's element at (<em>j</em>, <em>i</em>).
+    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
     # 
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.

@@ -27,12 +27,12 @@
 class EuclideanDistance(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c EuclideanDistance instance.
+    # \brief Contructs the \c EuclideanDistance instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c EuclideanDistance instance \a func.
+    # \brief Contructs a copy of the \c EuclideanDistance instance \a func.
     # \param func The \c EuclideanDistance instance to copy.
     # 
     def __init__(func: EuclideanDistance) -> None: pass
@@ -50,7 +50,7 @@ class EuclideanDistance(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c EuclideanDistance instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c EuclideanDistance instance \a func.
     # \param func The \c EuclideanDistance instance to copy.
     # \return \a self
     # 
@@ -61,7 +61,8 @@ class EuclideanDistance(Boost.Python.instance):
     # 
     # The <em>Euclidean Distance</em> \f$ D_{ab} \f$ is calculated by:
     # 
-    # \f[ D_{ab} = \sqrt{N_a + N_b} \f]
+    # \f[   D_{ab} = \sqrt{N_a + N_b}
+    # \f]
     # 
     # where \f$ N_a \f$ is the number of bits that are set in the first bitset but not in the second bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset but not in the first one.
     # 
@@ -79,7 +80,8 @@ class EuclideanDistance(Boost.Python.instance):
     # 
     # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -93,7 +95,8 @@ class EuclideanDistance(Boost.Python.instance):
     # 
     # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -107,7 +110,8 @@ class EuclideanDistance(Boost.Python.instance):
     # 
     # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -121,7 +125,8 @@ class EuclideanDistance(Boost.Python.instance):
     # 
     # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.

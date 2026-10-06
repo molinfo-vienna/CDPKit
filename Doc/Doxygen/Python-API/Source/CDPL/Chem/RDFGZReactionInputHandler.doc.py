@@ -25,6 +25,6 @@
 class RDFGZReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \c RDFGZReactionInputHandler instance.
+    # \brief Contructs the \c RDFGZReactionInputHandler instance.
     # 
     def __init__() -> None: pass

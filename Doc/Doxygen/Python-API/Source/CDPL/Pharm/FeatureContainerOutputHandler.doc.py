@@ -25,7 +25,7 @@
 class FeatureContainerOutputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FeatureContainerOutputHandler instance.
+    # \brief Contructs the \c FeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass
 

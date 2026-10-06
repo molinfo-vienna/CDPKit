@@ -27,12 +27,12 @@
 class MassComposition(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c MassComposition instance.
+    # \brief Contructs the \c MassComposition instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MassComposition instance \a mass_comp.
+    # \brief Contructs a copy of the \c MassComposition instance \a mass_comp.
     # \param mass_comp The \c MassComposition instance to copy.
     # 
     def __init__(mass_comp: MassComposition) -> None: pass
@@ -56,7 +56,7 @@ class MassComposition(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MassComposition instance \a map.
+    # \brief Replaces the current state with a copy of the state of the \c MassComposition instance \a map.
     # \param map The \c MassComposition instance to copy.
     # \return \a self
     # 

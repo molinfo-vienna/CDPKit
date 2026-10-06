@@ -32,7 +32,7 @@ class TautomerScore(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TautomerScore instance \a score.
+    # \brief Contructs a copy of the \c TautomerScore instance \a score.
     # \param score The \c TautomerScore instance to copy.
     # 
     def __init__(score: TautomerScore) -> None: pass
@@ -50,7 +50,7 @@ class TautomerScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TautomerScore instance \a score.
+    # \brief Replaces the current state with a copy of the state of the \c TautomerScore instance \a score.
     # \param score The \c TautomerScore instance to copy.
     # \return \a self
     # 

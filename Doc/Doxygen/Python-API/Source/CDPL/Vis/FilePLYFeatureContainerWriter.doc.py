@@ -25,7 +25,7 @@
 class FilePLYFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \c FilePLYFeatureContainerWriter instance.
+    # \brief Contructs the \c FilePLYFeatureContainerWriter instance.
     # \param file_name 
     # \param mode 
     # 

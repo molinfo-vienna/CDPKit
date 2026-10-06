@@ -25,13 +25,13 @@
 class DMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c DMatrixTranspose instance \a mt.
+    # \brief Contructs a copy of the \c DMatrixTranspose instance \a mt.
     # \param mt The \c DMatrixTranspose instance to copy.
     # 
     def __init__(mt: DMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \c DMatrixTranspose instance.
+    # \brief Contructs the \c DMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: DMatrixExpression) -> None: pass
@@ -94,7 +94,7 @@ class DMatrixTranspose(Boost.Python.instance):
     def assign(mt: DMatrixTranspose) -> DMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -135,14 +135,14 @@ class DMatrixTranspose(Boost.Python.instance):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> DMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix's element at (<em>j</em>, <em>i</em>).
+    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
     # 
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.

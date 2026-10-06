@@ -25,18 +25,18 @@
 class FUnitVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FUnitVector instance.
+    # \brief Contructs the \c FUnitVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FUnitVector instance \a v.
+    # \brief Contructs a copy of the \c FUnitVector instance \a v.
     # \param v The \c FUnitVector instance to copy.
     # 
     def __init__(v: FUnitVector) -> None: pass
 
     ##
-    # \brief Initializes the \c FUnitVector instance.
+    # \brief Contructs the \c FUnitVector instance.
     # \param n 
     # \param i 
     # 
@@ -67,7 +67,7 @@ class FUnitVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FUnitVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c FUnitVector instance \a v.
     # \param v The \c FUnitVector instance to copy.
     # \return \a self
     # 

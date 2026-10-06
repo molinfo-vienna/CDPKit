@@ -192,7 +192,7 @@
 class StructureView2D(View2D):
 
     ##
-    # \brief Initializes the \c StructureView2D instance.
+    # \brief Contructs the \c StructureView2D instance.
     # 
     def __init__() -> None: pass
 
@@ -213,14 +213,14 @@ class StructureView2D(View2D):
     def setStructure(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Returns a reference to the visualized chemical structure.
+    # \brief Returns the visualized chemical structure.
     # 
     # \return A reference to the visualized Chem.MolecularGraph object, or <tt>None</tt> if none was specified.
     # 
     def getStructure() -> Chem.MolecularGraph: pass
 
     ##
-    # \brief Returns a reference to the Vis.FontMetrics instance used for measuring the dimension of text labels.
+    # \brief Returns the Vis.FontMetrics instance used for measuring the dimension of text labels.
     # 
     # \return A reference to the used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 

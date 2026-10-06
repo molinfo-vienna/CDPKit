@@ -25,7 +25,7 @@
 class SizeSpecification(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c SizeSpecification instance \a spec.
+    # \brief Contructs a copy of the \c SizeSpecification instance \a spec.
     # \param spec The \c SizeSpecification instance to copy.
     # 
     def __init__(spec: SizeSpecification) -> None: pass
@@ -55,7 +55,7 @@ class SizeSpecification(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c SizeSpecification instance \a spec.
+    # \brief Replaces the current state with a copy of the state of the \c SizeSpecification instance \a spec.
     # \param spec The \c SizeSpecification instance to copy.
     # \return \a self
     # 

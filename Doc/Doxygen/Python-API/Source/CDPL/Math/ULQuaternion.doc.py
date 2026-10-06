@@ -47,31 +47,31 @@ class ULQuaternion(Boost.Python.instance):
     def __init__(c1: int, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
-    # \brief Initializes the \c ULQuaternion instance.
+    # \brief Contructs the \c ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstFQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULQuaternion instance.
+    # \brief Contructs the \c ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstDQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULQuaternion instance.
+    # \brief Contructs the \c ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstLQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULQuaternion instance.
+    # \brief Contructs the \c ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstULQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c ULQuaternion instance.
+    # \brief Contructs the \c ULQuaternion instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -134,35 +134,35 @@ class ULQuaternion(Boost.Python.instance):
     def assign(q: ULQuaternion) -> ULQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
 
     ##
-    # \brief Returns a reference to the real component <em>C1</em>.
+    # \brief Returns the real component <em>C1</em>.
     # 
     # \return A reference to <em>C1</em>.
     # 
     def getC1() -> int: pass
 
     ##
-    # \brief Returns a reference to the imaginary component <em>C2</em>.
+    # \brief Returns the imaginary component <em>C2</em>.
     # 
     # \return A reference to <em>C2</em>.
     # 
     def getC2() -> int: pass
 
     ##
-    # \brief Returns a reference to the imaginary component <em>C3</em>.
+    # \brief Returns the imaginary component <em>C3</em>.
     # 
     # \return A reference to <em>C3</em>.
     # 
     def getC3() -> int: pass
 
     ##
-    # \brief Returns a reference to the imaginary component <em>C4</em>.
+    # \brief Returns the imaginary component <em>C4</em>.
     # 
     # \return A reference to <em>C4</em>.
     # 

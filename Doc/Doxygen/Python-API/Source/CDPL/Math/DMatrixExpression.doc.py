@@ -29,42 +29,42 @@ class DMatrixExpression(ConstDMatrixExpression):
     def swap(e: DMatrixExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c DMatrixExpression instance \a e.
     # \param e The \c DMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
     # \param e The \c ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
     # \param e The \c ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
     # \param e The \c ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
     # \param e The \c ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

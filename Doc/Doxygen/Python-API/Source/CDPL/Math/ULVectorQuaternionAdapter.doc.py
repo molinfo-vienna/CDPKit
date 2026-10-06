@@ -25,13 +25,13 @@
 class ULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ULVectorQuaternionAdapter instance \a a.
+    # \brief Contructs a copy of the \c ULVectorQuaternionAdapter instance \a a.
     # \param a The \c ULVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: ULVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c ULVectorQuaternionAdapter instance.
+    # \brief Contructs the \c ULVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: ULVectorExpression) -> None: pass
@@ -149,7 +149,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def set(c1: int = 0, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 

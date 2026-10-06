@@ -34,7 +34,7 @@ class MMFF94AtomTyper(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94AtomTyper instance \a typer.
+    # \brief Contructs a copy of the \c MMFF94AtomTyper instance \a typer.
     # \param typer The \c MMFF94AtomTyper instance to copy.
     # 
     def __init__(typer: MMFF94AtomTyper) -> None: pass
@@ -104,7 +104,7 @@ class MMFF94AtomTyper(Boost.Python.instance):
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94AtomTyper instance \a typer.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94AtomTyper instance \a typer.
     # \param typer The \c MMFF94AtomTyper instance to copy.
     # \return \a self
     # 

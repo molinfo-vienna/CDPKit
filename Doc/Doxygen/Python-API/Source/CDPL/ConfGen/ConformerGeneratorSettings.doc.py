@@ -65,7 +65,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ConformerGeneratorSettings instance \a settings.
+    # \brief Contructs a copy of the \c ConformerGeneratorSettings instance \a settings.
     # \param settings The \c ConformerGeneratorSettings instance to copy.
     # 
     def __init__(settings: ConformerGeneratorSettings) -> None: pass
@@ -83,7 +83,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConformerGeneratorSettings instance \a settings.
+    # \brief Replaces the current state with a copy of the state of the \c ConformerGeneratorSettings instance \a settings.
     # \param settings The \c ConformerGeneratorSettings instance to copy.
     # \return \a self
     # 
@@ -486,7 +486,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getMacrocycleRotorBondCountThreshold() -> int: pass
 
     ##
-    # \brief Returns a reference to the nested fragment conformer build settings.
+    # \brief Returns the nested fragment conformer build settings.
     # 
     # \return A reference to the build settings.
     # 

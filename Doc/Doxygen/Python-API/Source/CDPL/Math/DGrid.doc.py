@@ -56,19 +56,19 @@ class DGrid(Boost.Python.instance):
     def __init__(m: int, n: int, o: int, v: float) -> None: pass
 
     ##
-    # \brief Initializes the \c DGrid instance.
+    # \brief Contructs the \c DGrid instance.
     # \param e 
     # 
     def __init__(e: ConstFGridExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c DGrid instance.
+    # \brief Contructs the \c DGrid instance.
     # \param e 
     # 
     def __init__(e: ConstDGridExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c DGrid instance.
+    # \brief Contructs the \c DGrid instance.
     # \param e 
     # 
     def __init__(e: object) -> None: pass
@@ -192,7 +192,7 @@ class DGrid(Boost.Python.instance):
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
     # 
     # \param i The zero-based first-axis index.
     # \param j The zero-based second-axis index.
@@ -205,7 +205,7 @@ class DGrid(Boost.Python.instance):
     def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the element at linear index <em>i</em>.
+    # \brief Returns the element at linear index <em>i</em>.
     # 
     # \param i The zero-based linear index.
     # 

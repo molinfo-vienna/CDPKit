@@ -25,13 +25,13 @@
 class DVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c DVectorSlice instance \a s.
+    # \brief Contructs a copy of the \c DVectorSlice instance \a s.
     # \param s The \c DVectorSlice instance to copy.
     # 
     def __init__(s: DVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \c DVectorSlice instance.
+    # \brief Contructs the \c DVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -109,7 +109,7 @@ class DVectorSlice(Boost.Python.instance):
     def assign(s: DVectorSlice) -> DVectorSlice: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -143,7 +143,7 @@ class DVectorSlice(Boost.Python.instance):
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 
@@ -178,7 +178,7 @@ class DVectorSlice(Boost.Python.instance):
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 
@@ -187,7 +187,7 @@ class DVectorSlice(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 

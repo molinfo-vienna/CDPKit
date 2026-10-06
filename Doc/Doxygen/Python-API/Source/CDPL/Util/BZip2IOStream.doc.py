@@ -25,12 +25,12 @@
 class BZip2IOStream(Base.IOStream):
 
     ##
-    # \brief Initializes the \c BZip2IOStream instance.
+    # \brief Contructs the \c BZip2IOStream instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c BZip2IOStream instance.
+    # \brief Contructs the \c BZip2IOStream instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass
@@ -79,10 +79,22 @@ class BZip2IOStream(Base.IOStream):
 
     def __iter__() -> BZip2IOStream: pass
 
-    closed = property(isClosed)
+    ##
+    # \brief FIXME!
+    #
+    closed = property(getClosed)
 
-    mode = property(getOpenModeString)
+    ##
+    # \brief FIXME!
+    #
+    mode = property(getMode)
 
-    modeFlags = property(getOpenModeFlags)
+    ##
+    # \brief FIXME!
+    #
+    modeFlags = property(getModeFlags)
 
-    softspace = property(getSoftSpace, setSoftSpace)
+    ##
+    # \brief FIXME!
+    #
+    softspace = property(getSoftspace, setSoftspace)

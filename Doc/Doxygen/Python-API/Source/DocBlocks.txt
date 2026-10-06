@@ -3,7 +3,7 @@ Functor^
 $$$$
 
 Functor.__init__(arg1,callable)^
-\brief Initializes the \c @CN@ instance for the specified callable object.
+\brief Contructs the \c @CN@ instance for the specified callable object.
 \param callable The callable object to wrap.
 $$$$
 
@@ -53,13 +53,13 @@ Functor.__nonzero__()^
 $$$$
 
 .__init__
-\brief Initializes the \c @CN@ instance.
+\brief Contructs the \c @CN@ instance.
 \param @A0@ The \c @CN@ instance to initialize.
 \param @ARGS@ 
 $$$$
 
 .__copy__init__
-\brief Initializes a copy of the \c @CN@ instance \a @A1@.
+\brief Contructs a copy of the \c @CN@ instance \a @A1@.
 \param @A0@ The \c @CN@ instance to initialize.
 \param @A1@ The \c @AT1@ instance to copy.
 $$$$
@@ -190,7 +190,7 @@ $$$$
 $$$$
 
 .__copy__assign
-\brief Replaces the current state of \a @A0@ with a copy of the state of the \c @AT1@ instance \a @A1@.
+\brief Replaces the current state with a copy of the state of the \c @AT1@ instance \a @A1@.
 \param @A0@ The \c @CN@ instance this method is called upon.
 \param @A1@ The \c @AT1@ instance to copy.
 \return \a @A0@

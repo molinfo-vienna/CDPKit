@@ -25,7 +25,7 @@
 class FilePMLPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \c FilePMLPharmacophoreReader instance.
+    # \brief Contructs the \c FilePMLPharmacophoreReader instance.
     # \param file_name 
     # \param mode 
     # 

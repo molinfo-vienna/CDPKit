@@ -29,7 +29,7 @@
 class ElasticPotential(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ElasticPotential instance \a pot.
+    # \brief Contructs a copy of the \c ElasticPotential instance \a pot.
     # \param pot The \c ElasticPotential instance to copy.
     # 
     def __init__(pot: ElasticPotential) -> None: pass
@@ -80,7 +80,7 @@ class ElasticPotential(Boost.Python.instance):
     def setReferenceLength(length: float) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ElasticPotential instance \a pot.
+    # \brief Replaces the current state with a copy of the state of the \c ElasticPotential instance \a pot.
     # \param pot The \c ElasticPotential instance to copy.
     # \return \a self
     # 

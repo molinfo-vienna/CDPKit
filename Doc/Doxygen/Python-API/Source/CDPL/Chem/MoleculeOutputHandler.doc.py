@@ -25,7 +25,7 @@
 class MoleculeOutputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c MoleculeOutputHandler instance.
+    # \brief Contructs the \c MoleculeOutputHandler instance.
     # 
     def __init__() -> None: pass
 

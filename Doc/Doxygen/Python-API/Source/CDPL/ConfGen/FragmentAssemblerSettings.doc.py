@@ -35,7 +35,7 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FragmentAssemblerSettings instance \a settings.
+    # \brief Contructs a copy of the \c FragmentAssemblerSettings instance \a settings.
     # \param settings The \c FragmentAssemblerSettings instance to copy.
     # 
     def __init__(settings: FragmentAssemblerSettings) -> None: pass
@@ -53,7 +53,7 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FragmentAssemblerSettings instance \a settings.
+    # \brief Replaces the current state with a copy of the state of the \c FragmentAssemblerSettings instance \a settings.
     # \param settings The \c FragmentAssemblerSettings instance to copy.
     # \return \a self
     # 
@@ -97,7 +97,7 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def generateCoordinatesFromScratch() -> bool: pass
 
     ##
-    # \brief Returns a reference to the nested fragment conformer build settings.
+    # \brief Returns the nested fragment conformer build settings.
     # 
     # \return A reference to the build settings.
     # 

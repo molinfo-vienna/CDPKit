@@ -27,6 +27,6 @@
 class CMLMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c CMLMoleculeInputHandler instance.
+    # \brief Contructs the \c CMLMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

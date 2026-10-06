@@ -40,7 +40,7 @@ class PharmacophoreFitScore(Boost.Python.instance):
     DEF_FTR_GEOM_MATCH_WEIGHT = 0.4
 
     ##
-    # \brief Initializes a copy of the \c PharmacophoreFitScore instance \a score.
+    # \brief Contructs a copy of the \c PharmacophoreFitScore instance \a score.
     # \param score The \c PharmacophoreFitScore instance to copy.
     # 
     def __init__(score: PharmacophoreFitScore) -> None: pass
@@ -68,7 +68,7 @@ class PharmacophoreFitScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c PharmacophoreFitScore instance \a score.
+    # \brief Replaces the current state with a copy of the state of the \c PharmacophoreFitScore instance \a score.
     # \param score The \c PharmacophoreFitScore instance to copy.
     # \return \a self
     # 

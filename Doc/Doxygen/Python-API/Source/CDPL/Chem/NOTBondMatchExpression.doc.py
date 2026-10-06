@@ -41,7 +41,7 @@ class NOTBondMatchExpression(BondMatchExpression):
     def __init__(expr_ptr: BondMatchExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c NOTBondMatchExpression instance \a expression.
+    # \brief Replaces the current state with a copy of the state of the \c NOTBondMatchExpression instance \a expression.
     # \param expression The \c NOTBondMatchExpression instance to copy.
     # \return \a self
     # 

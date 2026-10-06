@@ -30,7 +30,7 @@ class ElectronSystem(AtomContainer):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ElectronSystem instance \a elec_sys.
+    # \brief Contructs a copy of the \c ElectronSystem instance \a elec_sys.
     # \param elec_sys The \c ElectronSystem instance to copy.
     # 
     def __init__(elec_sys: ElectronSystem) -> None: pass
@@ -48,7 +48,7 @@ class ElectronSystem(AtomContainer):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ElectronSystem instance \a elec_sys.
+    # \brief Replaces the current state with a copy of the state of the \c ElectronSystem instance \a elec_sys.
     # \param elec_sys The \c ElectronSystem instance to copy.
     # \return \a self
     # 

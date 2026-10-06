@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Dynamic bitset class.
+# \brief Data structure for the storage and manipulation of variably sized bit sets.
 # 
 # For further information see [\ref BDBS].
 # 
@@ -32,26 +32,33 @@ class BitSet(Boost.Python.instance):
     npos = 18446744073709551615
 
     ##
-    # \brief Initializes the \c BitSet instance.
+    # \brief Constructs a \c BitSet instance of size of zero.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c BitSet instance \a bs.
+    # \brief Contructs a copy of the \c BitSet instance \a bs.
     # \param bs The \c BitSet instance to copy.
     # 
     def __init__(bs: BitSet) -> None: pass
 
     ##
-    # \brief Initializes the \c BitSet instance.
-    # \param num_bits 
-    # \param value 
+    # \brief Constructs a \c BitSet instance of size \a num_bits initialized to the bits in \a value.
+    # 
+    # The first \e M bits (where \e M is the number of bits of the data type <tt>unsigned long</tt>) are initialized to the corresponding bits in
+    # \a value and all other bits, if any, to zero.
+    # 
+    # \param num_bits The size of the bitset.
+    # \param value The value to initialize the bitset from.
     # 
     def __init__(num_bits: int, value: int = 0) -> None: pass
 
     ##
-    # \brief Initializes the \c BitSet instance.
-    # \param bit_str 
+    # \brief Constructs a \c BitSet instance with total size and bit values initialized as specified by the string \a bit_str.
+    # 
+    # The value of bit \e i is specified by the character '1' (= on) or '0' (= off) at index \e i of \a bit_str. 
+    # 
+    # \param bit_str The string specifying the desired bit values.
     # 
     def __init__(bit_str: str) -> None: pass
 
@@ -67,31 +74,75 @@ class BitSet(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Swaps the contents of this bitset and bitset \a bs.
+    # \param bs The other bitset.
+    # 
     def swap(bs: BitSet) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c BitSet instance \a bs.
+    # \brief Replaces the current state with a copy of the state of the \c BitSet instance \a bs.
     # \param bs The \c BitSet instance to copy.
     # \return \a self
     # 
     def assign(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Changes the number of bits of the bitset to \a num_bits.
+    # \param num_bits The new size of the bitset.
+    # \param value The value of emerging new bits.
+    # 
     def resize(num_bits: int, value: bool = False) -> None: pass
 
+    ##
+    # \brief Clears the bitset, i.e. makes its size zero.
+    # 
     def clear() -> None: pass
 
+    ##
+    # \brief Increases the size of the bitset by one, and sets the value of the new most significant bit to \a value.
+    # \param value The value to set the most significant bit to.
+    # 
     def append(value: bool) -> None: pass
 
+    ##
+    # \brief Toggles the value of every bit in this bitset.
+    # \return \c self.
+    # 
     def flip() -> BitSet: pass
 
+    ##
+    # \brief Toggles the value of bit \a idx in this bitset.
+    # \param idx The index of the bit to toggle.
+    # \return \c self.
+    # 
     def flip(idx: int) -> BitSet: pass
 
+    ##
+    # \brief Sets all the bits in this bitset.
+    # \return \c self.
+    # 
     def set() -> BitSet: pass
 
+    ##
+    # \brief Sets the bit \a idx in this bitset to \a value.
+    # \param idx The index of the bit to set or clear.
+    # \param value The value to set the bit to.
+    # \return \c self.
+    # 
     def set(idx: int, value: bool = True) -> BitSet: pass
 
+    ##
+    # \brief Resets all the bits in this bitset.
+    # \return \c self.
+    # 
     def reset() -> BitSet: pass
 
+    ##
+    # \brief Resets the bit \a idx in this bitset.
+    # \param idx The index of the bit to reset.
+    # \return \c self.
+    # 
     def reset(idx: int) -> BitSet: pass
 
     def test(idx: int) -> bool: pass
@@ -126,11 +177,6 @@ class BitSet(Boost.Python.instance):
 
     def __xor__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief Returns the result of the subtraction operation <tt>self - bs</tt>.
-    # \param bs Specifies the subtrahend.
-    # \return A \c BitSet instance holding the result of the subtraction.
-    # 
     def __sub__(bs: BitSet) -> BitSet: pass
 
     def __iand__(bs: BitSet) -> BitSet: pass
@@ -139,11 +185,6 @@ class BitSet(Boost.Python.instance):
 
     def __ixor__(bs: BitSet) -> BitSet: pass
 
-    ##
-    # \brief Performs the in-place subtraction operation <tt>self -= bs</tt>.
-    # \param bs Specifies the subtrahend.
-    # \return The updated \c BitSet instance \a self.
-    # 
     def __isub__(bs: BitSet) -> BitSet: pass
 
     def __long__() -> int: pass
@@ -158,48 +199,22 @@ class BitSet(Boost.Python.instance):
 
     def __invert__() -> BitSet: pass
 
-    ##
-    # \brief Returns the result of the comparison operation <tt>self == bs</tt>.
-    # \param bs The \c BitSet instance to be compared with.
-    # \return The result of the comparison operation.
-    # 
     def __eq__(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief Returns the result of the comparison operation <tt>self != bs</tt>.
-    # \param bs The \c BitSet instance to be compared with.
-    # \return The result of the comparison operation.
-    # 
     def __ne__(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief Returns the result of the comparison operation <tt>self < bs</tt>.
-    # \param bs The \c BitSet instance to be compared with.
-    # \return The result of the comparison operation.
-    # 
     def __lt__(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief Returns the result of the comparison operation <tt>self <= bs</tt>.
-    # \param bs The \c BitSet instance to be compared with.
-    # \return The result of the comparison operation.
-    # 
     def __le__(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief Returns the result of the comparison operation <tt>self > bs</tt>.
-    # \param bs The \c BitSet instance to be compared with.
-    # \return The result of the comparison operation.
-    # 
     def __gt__(bs: BitSet) -> bool: pass
 
-    ##
-    # \brief Returns the result of the comparison operation <tt>self >= bs</tt>.
-    # \param bs The \c BitSet instance to be compared with.
-    # \return The result of the comparison operation.
-    # 
     def __ge__(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Returns the size of the bitset.
+    # \return The size of the bitset.
+    # 
     def __len__() -> int: pass
 
     def __nonzero__() -> bool: pass

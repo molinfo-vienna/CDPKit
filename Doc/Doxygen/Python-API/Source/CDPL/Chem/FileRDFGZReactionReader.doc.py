@@ -25,7 +25,7 @@
 class FileRDFGZReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \c FileRDFGZReactionReader instance.
+    # \brief Contructs the \c FileRDFGZReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

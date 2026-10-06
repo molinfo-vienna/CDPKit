@@ -27,14 +27,14 @@ class FileIOStream(IOStream):
     ##
     # \brief Constructs the \c FileIOStream instance and opens the specified file in the given mode.
     # \param file_name The path to the file to open.
-    # \param mode A combination of file opening mode flags (see IOStream.OpenMode) or a Python-style opening mode string (e.g. 'r+').
+    # \param mode A combination of file open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
     # 
     def __init__(file_name: str, mode: str = 'r') -> None: pass
 
     ##
     # \brief Constructs the \c FileIOStream instance and opens the specified file in the given mode.
     # \param file_name The path to the file to open.
-    # \param mode A combination of file opening mode flags (see IOStream.OpenMode) or a Python-style opening mode string (e.g. 'r+').
+    # \param mode A combination of file open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
     # 
     def __init__(file_name: str, mode: OpenMode = IOStream.OpenMode.IN) -> None: pass
 
@@ -126,19 +126,20 @@ class FileIOStream(IOStream):
     def next() -> str: pass
 
     ##
-    # bool indicating the current state of the file object. This is a read-only attribute; the close() method changes the value. It may not be available on all file-like objects.
+    # \brief Tells whether the stream has been closed.
+    # \see close()
     # 
     def isClosed() -> bool: pass
 
     ##
-    # \brief Returns the opening mode string that was provided as argument to the constructor.
-    # \return The opening mode string (e.g. 'r+') that was provided as argument to the constructor.
+    # \brief Returns the open mode string that was provided as argument to the constructor.
+    # \return The open mode string (e.g. 'r+') that was provided as argument to the constructor.
     # 
     def getOpenModeString() -> str: pass
 
     ##
-    # \brief Returns the opening mode flags that were provided as argument to the constructor.
-    # \return The opening mode flags that were provided as argument to the constructor (see IOStream.OpenMode).
+    # \brief Returns the open mode flags that were provided as argument to the constructor.
+    # \return The open mode flags that were provided as argument to the constructor (see IOStream.OpenMode).
     # 
     def getOpenModeFlags() -> OpenMode: pass
 
@@ -189,10 +190,10 @@ class FileIOStream(IOStream):
     def setSoftSpace(value: bool) -> None: pass
 
     ##
-    # \brief Closes the file.
+    # \brief Closes the stream.
     # 
-    # A closed file cannot be read or written any more. %Any operation which requires that the file be open will raise a
-    # Base.ValueError after the file has been closed. Calling close() more than once is allowed.
+    # A closed stream cannot be read from or written to anymore. %Any operation which requires the stream to be open will raise a
+    # Base.ValueError after the stream has been closed. Calling close() more than once is allowed.
     # 
     def close() -> None: pass
 

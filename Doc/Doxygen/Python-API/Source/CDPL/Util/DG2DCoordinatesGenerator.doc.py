@@ -41,7 +41,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     class DistanceConstraint(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c DistanceConstraint instance.
+        # \brief Contructs the \c DistanceConstraint instance.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param lb 
@@ -50,7 +50,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         def __init__(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c DistanceConstraint instance \a constr.
+        # \brief Contructs a copy of the \c DistanceConstraint instance \a constr.
         # \param constr The \c DistanceConstraint instance to copy.
         # 
         def __init__(constr: DistanceConstraint) -> None: pass
@@ -68,7 +68,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c DistanceConstraint instance \a constr.
+        # \brief Replaces the current state with a copy of the state of the \c DistanceConstraint instance \a constr.
         # \param constr The \c DistanceConstraint instance to copy.
         # \return \a self
         # 
@@ -118,12 +118,12 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     DEF_LEARNING_RATE_DECREMENT = 0.019
 
     ##
-    # \brief Initializes the \c DG2DCoordinatesGenerator instance.
+    # \brief Contructs the \c DG2DCoordinatesGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DG2DCoordinatesGenerator instance \a gen.
+    # \brief Contructs a copy of the \c DG2DCoordinatesGenerator instance \a gen.
     # \param gen The \c DG2DCoordinatesGenerator instance to copy.
     # 
     def __init__(gen: DG2DCoordinatesGenerator) -> None: pass
@@ -141,7 +141,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DG2DCoordinatesGenerator instance \a gen.
+    # \brief Replaces the current state with a copy of the state of the \c DG2DCoordinatesGenerator instance \a gen.
     # \param gen The \c DG2DCoordinatesGenerator instance to copy.
     # \return \a self
     # 

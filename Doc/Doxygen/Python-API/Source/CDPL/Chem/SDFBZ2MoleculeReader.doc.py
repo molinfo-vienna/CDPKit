@@ -25,7 +25,7 @@
 class SDFBZ2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c SDFBZ2MoleculeReader instance.
+    # \brief Contructs the \c SDFBZ2MoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

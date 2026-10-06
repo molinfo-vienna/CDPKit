@@ -25,18 +25,18 @@
 class ULZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ULZeroVector instance.
+    # \brief Contructs the \c ULZeroVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ULZeroVector instance \a v.
+    # \brief Contructs a copy of the \c ULZeroVector instance \a v.
     # \param v The \c ULZeroVector instance to copy.
     # 
     def __init__(v: ULZeroVector) -> None: pass
 
     ##
-    # \brief Initializes the \c ULZeroVector instance.
+    # \brief Contructs the \c ULZeroVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -64,7 +64,7 @@ class ULZeroVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ULZeroVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c ULZeroVector instance \a v.
     # \param v The \c ULZeroVector instance to copy.
     # \return \a self
     # 

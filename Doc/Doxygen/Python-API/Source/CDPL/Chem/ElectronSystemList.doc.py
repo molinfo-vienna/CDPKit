@@ -25,12 +25,12 @@
 class ElectronSystemList(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ElectronSystemList instance.
+    # \brief Contructs the \c ElectronSystemList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ElectronSystemList instance \a list.
+    # \brief Contructs a copy of the \c ElectronSystemList instance \a list.
     # \param list The \c ElectronSystemList instance to copy.
     # 
     def __init__(list: ElectronSystemList) -> None: pass
@@ -60,7 +60,7 @@ class ElectronSystemList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ElectronSystemList instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c ElectronSystemList instance \a array.
     # \param array The \c ElectronSystemList instance to copy.
     # \return \a self
     # 

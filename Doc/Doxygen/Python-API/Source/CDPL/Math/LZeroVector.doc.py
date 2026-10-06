@@ -25,18 +25,18 @@
 class LZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c LZeroVector instance.
+    # \brief Contructs the \c LZeroVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c LZeroVector instance \a v.
+    # \brief Contructs a copy of the \c LZeroVector instance \a v.
     # \param v The \c LZeroVector instance to copy.
     # 
     def __init__(v: LZeroVector) -> None: pass
 
     ##
-    # \brief Initializes the \c LZeroVector instance.
+    # \brief Contructs the \c LZeroVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -64,7 +64,7 @@ class LZeroVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c LZeroVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c LZeroVector instance \a v.
     # \param v The \c LZeroVector instance to copy.
     # \return \a self
     # 

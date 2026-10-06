@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Writer for bzip2-compressed regular spatial grid data in the native I/O format of the <em>CDPL</em>.
+# \brief Writer for bzip2-compressed regular spatial grid data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFBZ2DRegularGridWriter(DRegularGridWriterBase):
 
     ##
-    # \brief Initializes the \c CDFBZ2DRegularGridWriter instance.
+    # \brief Contructs the \c CDFBZ2DRegularGridWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

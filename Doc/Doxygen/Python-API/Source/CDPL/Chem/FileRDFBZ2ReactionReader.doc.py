@@ -25,7 +25,7 @@
 class FileRDFBZ2ReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \c FileRDFBZ2ReactionReader instance.
+    # \brief Contructs the \c FileRDFBZ2ReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

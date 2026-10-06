@@ -27,7 +27,7 @@
 class Pharmacophore(FeatureContainer):
 
     ##
-    # \brief Initializes the \c Pharmacophore instance.
+    # \brief Contructs the \c Pharmacophore instance.
     # 
     def __init__() -> None: pass
 

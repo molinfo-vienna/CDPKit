@@ -25,18 +25,18 @@
 class VoidMoleculeMolecularGraphFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c VoidMoleculeMolecularGraphFunctor instance.
+    # \brief Contructs the \c VoidMoleculeMolecularGraphFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c VoidMoleculeMolecularGraphFunctor instance \a func.
+    # \brief Contructs a copy of the \c VoidMoleculeMolecularGraphFunctor instance \a func.
     # \param func The \c VoidMoleculeMolecularGraphFunctor instance to copy.
     # 
     def __init__(func: VoidMoleculeMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c VoidMoleculeMolecularGraphFunctor instance for the specified callable object.
+    # \brief Contructs the \c VoidMoleculeMolecularGraphFunctor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

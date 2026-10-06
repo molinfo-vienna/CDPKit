@@ -25,7 +25,7 @@
 class FileSMILESGZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c FileSMILESGZMoleculeReader instance.
+    # \brief Contructs the \c FileSMILESGZMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

@@ -34,7 +34,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     class Result(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c Result instance.
+        # \brief Contructs the \c Result instance.
         # \param transform 
         # \param overlap 
         # \param col_overlap 
@@ -42,7 +42,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         def __init__(transform: Math.Matrix4D, overlap: float, col_overlap: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Result instance \a res.
+        # \brief Contructs a copy of the \c Result instance \a res.
         # \param res The \c Result instance to copy.
         # 
         def __init__(res: Result) -> None: pass
@@ -60,7 +60,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Result instance \a res.
+        # \brief Replaces the current state with a copy of the state of the \c Result instance \a res.
         # \param res The \c Result instance to copy.
         # \return \a self
         # 

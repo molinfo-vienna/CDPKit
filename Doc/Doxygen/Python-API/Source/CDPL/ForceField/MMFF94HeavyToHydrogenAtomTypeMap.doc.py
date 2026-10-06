@@ -32,18 +32,18 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c Entry instance.
+        # \brief Contructs the \c Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Entry instance \a entry.
+        # \brief Contructs a copy of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c Entry instance.
+        # \brief Contructs the \c Entry instance.
         # \param parent_type 
         # \param h_atom_type 
         # 
@@ -77,7 +77,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94HeavyToHydrogenAtomTypeMap instance \a map.
+    # \brief Contructs a copy of the \c MMFF94HeavyToHydrogenAtomTypeMap instance \a map.
     # \param map The \c MMFF94HeavyToHydrogenAtomTypeMap instance to copy.
     # 
     def __init__(map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
@@ -141,7 +141,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94HeavyToHydrogenAtomTypeMap instance \a map.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94HeavyToHydrogenAtomTypeMap instance \a map.
     # \param map The \c MMFF94HeavyToHydrogenAtomTypeMap instance to copy.
     # \return \a self
     # 

@@ -25,7 +25,7 @@
 class SMILESGZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c SMILESGZMoleculeReader instance.
+    # \brief Contructs the \c SMILESGZMoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

@@ -26,11 +26,11 @@
 # 
 # Input and output handlers are registered by the methods registerInputHandler() and registerOutputHandler(). These methods expect a reference to an instance of the respective handler implementation as an argument (please note that the registered instance <em>must not be destroyed</em> as long as it is accessible via the <tt>DataIOManager</tt> interface!).
 # 
-# For the removal of registered handlers the unregisterInputHandler() and unregisterOutputHandler() family of overloaded methods is provided. These methods accept a reference to the registered handler instance, the handler index, the handled data format or an iterator pointing to the handler as an argument.
+# For the removal of registered handlers the unregisterInputHandler() and unregisterOutputHandler() family of overloaded methods is provided. These methods accept the registered handler instance, the handler index, the handled data format or an iterator pointing to the handler as an argument.
 # 
 # Registered input handlers can be queried by the methods getInputHandlerByFormat(), getInputHandlerByName(), getInputHandlerByFileExtension() and getInputHandlerByMimeType(), which allow to find a suitable handler for a given data format, data format name, file extension or mime-type. For the registered output handlers similar methods are provided.
 # 
-# I/O handlers for data formats and object types supported by the <em>CDPL</em> are registered in the static library initialization code. These built-in handlers are accessible by the linking client code as soon as the library initialization has finished.
+# I/O handlers for data formats and object types supported by the <em>%CDPL</em> are registered in the static library initialization code. These built-in handlers are accessible by the linking client code as soon as the library initialization has finished.
 # 
 class ReactionIOManager(Boost.Python.instance):
 
@@ -115,7 +115,7 @@ class ReactionIOManager(Boost.Python.instance):
     def registerInputHandler(handler: ReactionInputHandler) -> None: pass
 
     ##
-    # \brief Returns a reference to the registered Chem.ReactionInputHandler implementation instance with the specified index.
+    # \brief Returns the registered Chem.ReactionInputHandler implementation instance with the specified index.
     # 
     # \param idx The zero-based index of the Chem.ReactionInputHandler implementation instance to return.
     # 
@@ -236,7 +236,7 @@ class ReactionIOManager(Boost.Python.instance):
     def registerOutputHandler(handler: ReactionOutputHandler) -> None: pass
 
     ##
-    # \brief Returns a reference to the registered Chem.ReactionOutputHandler implementation instance with the specified index.
+    # \brief Returns the registered Chem.ReactionOutputHandler implementation instance with the specified index.
     # 
     # \param idx The zero-based index of the Chem.ReactionOutputHandler implementation instance to return.
     # 

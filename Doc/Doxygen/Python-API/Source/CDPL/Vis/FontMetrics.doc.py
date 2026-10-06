@@ -37,7 +37,7 @@
 class FontMetrics(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FontMetrics instance.
+    # \brief Contructs the \c FontMetrics instance.
     # 
     def __init__() -> None: pass
 

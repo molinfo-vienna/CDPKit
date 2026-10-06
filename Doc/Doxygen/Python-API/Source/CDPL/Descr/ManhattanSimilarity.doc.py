@@ -27,12 +27,12 @@
 class ManhattanSimilarity(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ManhattanSimilarity instance.
+    # \brief Contructs the \c ManhattanSimilarity instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ManhattanSimilarity instance \a func.
+    # \brief Contructs a copy of the \c ManhattanSimilarity instance \a func.
     # \param func The \c ManhattanSimilarity instance to copy.
     # 
     def __init__(func: ManhattanSimilarity) -> None: pass
@@ -50,7 +50,7 @@ class ManhattanSimilarity(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ManhattanSimilarity instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c ManhattanSimilarity instance \a func.
     # \param func The \c ManhattanSimilarity instance to copy.
     # \return \a self
     # 
@@ -61,7 +61,8 @@ class ManhattanSimilarity(Boost.Python.instance):
     # 
     # The <em>Manhattan Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \f[ S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}} \f]
+    # \f[   S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}}
+    # \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set only in the first bitset, \f$ N_b \f$ is the number of bits that are set only in the second bitset and \f$ N_{!ab} \f$ is the number of bits that are not set in both bitsets.
     # 

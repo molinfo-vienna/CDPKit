@@ -27,25 +27,25 @@
 class TriangleMesh3D(Shape3D):
 
     ##
-    # \brief Initializes the \c TriangleMesh3D instance.
+    # \brief Contructs the \c TriangleMesh3D instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TriangleMesh3D instance \a mesh.
+    # \brief Contructs a copy of the \c TriangleMesh3D instance \a mesh.
     # \param mesh The \c TriangleMesh3D instance to copy.
     # 
     def __init__(mesh: TriangleMesh3D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TriangleMesh3D instance \a mesh.
+    # \brief Replaces the current state with a copy of the state of the \c TriangleMesh3D instance \a mesh.
     # \param mesh The \c TriangleMesh3D instance to copy.
     # \return \a self
     # 
     def assign(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
 
     ##
-    # \brief Returns a reference to the array storing the mesh vertices.
+    # \brief Returns the array storing the mesh vertices.
     # 
     # \return A reference to the vertex array.
     # 
@@ -68,7 +68,7 @@ class TriangleMesh3D(Shape3D):
     def getNumVertices() -> int: pass
 
     ##
-    # \brief Returns a reference to the array storing the per-vertex normals.
+    # \brief Returns the array storing the per-vertex normals.
     # 
     # \return A reference to the vertex-normal array.
     # 
@@ -91,7 +91,7 @@ class TriangleMesh3D(Shape3D):
     def getNumVertexNormals() -> int: pass
 
     ##
-    # \brief Returns a reference to the array storing the triangle faces.
+    # \brief Returns the array storing the triangle faces.
     # 
     # \return A reference to the face array.
     # 

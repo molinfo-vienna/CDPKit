@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief The root of the <em>CDPL</em> exception hierarchy.
+# \brief The root of the <em>%CDPL</em> exception hierarchy.
 # 
 class Exception(builtins.Exception):
 

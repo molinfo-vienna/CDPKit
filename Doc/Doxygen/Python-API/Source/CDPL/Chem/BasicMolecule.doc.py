@@ -22,7 +22,7 @@
 ##
 # \brief Default implementation of the Chem.Molecule interface.
 # 
-# <tt>BasicMolecule</tt> implements the full editing interface inherited from Chem.Molecule and is the standard concrete type used for the creation, manipulation and processing of molecule/molecular graph data throughout the <em>CDPL</em>.
+# <tt>BasicMolecule</tt> implements the full editing interface inherited from Chem.Molecule and is the standard concrete type used for the creation, manipulation and processing of molecule/molecular graph data throughout the <em>%CDPL</em>.
 # 
 class BasicMolecule(Molecule):
 

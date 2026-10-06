@@ -35,13 +35,13 @@ class AtomDictionary(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Entry instance \a entry.
+        # \brief Contructs a copy of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \c Entry instance.
+        # \brief Contructs the \c Entry instance.
         # \param atom_type 
         # \param iso 
         # \param sym 
@@ -73,7 +73,7 @@ class AtomDictionary(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Entry instance \a entry.
+        # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # \return \a self
         # 
@@ -217,12 +217,12 @@ class AtomDictionary(Boost.Python.instance):
         isotopeMasses = property(getIsotopeMasses)
 
     ##
-    # \brief Initializes the \c AtomDictionary instance.
+    # \brief Contructs the \c AtomDictionary instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c AtomDictionary instance \a dict.
+    # \brief Contructs a copy of the \c AtomDictionary instance \a dict.
     # \param dict The \c AtomDictionary instance to copy.
     # 
     def __init__(dict: AtomDictionary) -> None: pass
@@ -294,7 +294,7 @@ class AtomDictionary(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c AtomDictionary instance \a dict.
+    # \brief Replaces the current state with a copy of the state of the \c AtomDictionary instance \a dict.
     # \param dict The \c AtomDictionary instance to copy.
     # \return \a self
     # 

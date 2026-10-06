@@ -25,7 +25,7 @@
 class FileCDFDRegularGridSetWriter(DRegularGridSetWriterBase):
 
     ##
-    # \brief Initializes the \c FileCDFDRegularGridSetWriter instance.
+    # \brief Contructs the \c FileCDFDRegularGridSetWriter instance.
     # \param file_name 
     # \param mode 
     # 

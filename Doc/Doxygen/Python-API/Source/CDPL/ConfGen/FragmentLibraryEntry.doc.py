@@ -32,7 +32,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FragmentLibraryEntry instance \a entry.
+    # \brief Contructs a copy of the \c FragmentLibraryEntry instance \a entry.
     # \param entry The \c FragmentLibraryEntry instance to copy.
     # 
     def __init__(entry: FragmentLibraryEntry) -> None: pass
@@ -50,7 +50,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FragmentLibraryEntry instance \a entry.
+    # \brief Replaces the current state with a copy of the state of the \c FragmentLibraryEntry instance \a entry.
     # \param entry The \c FragmentLibraryEntry instance to copy.
     # \return \a self
     # 
@@ -111,7 +111,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     def addConformer(conf_data: ConformerData) -> None: pass
 
     ##
-    # \brief Returns a reference to the stored conformer at index <em>idx</em>.
+    # \brief Returns the stored conformer at index <em>idx</em>.
     # 
     # \param idx The zero-based conformer index.
     # 

@@ -32,7 +32,7 @@ class Entity3DMapping(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Entity3DMapping instance \a mapping.
+    # \brief Contructs a copy of the \c Entity3DMapping instance \a mapping.
     # \param mapping The \c Entity3DMapping instance to copy.
     # 
     def __init__(mapping: Entity3DMapping) -> None: pass
@@ -56,7 +56,7 @@ class Entity3DMapping(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Entity3DMapping instance \a map.
+    # \brief Replaces the current state with a copy of the state of the \c Entity3DMapping instance \a map.
     # \param map The \c Entity3DMapping instance to copy.
     # \return \a self
     # 

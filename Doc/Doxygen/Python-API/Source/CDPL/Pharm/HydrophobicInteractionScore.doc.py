@@ -35,7 +35,7 @@ class HydrophobicInteractionScore(FeatureDistanceScore):
     DEF_MAX_DISTANCE = 6.0
 
     ##
-    # \brief Initializes a copy of the \c HydrophobicInteractionScore instance \a score.
+    # \brief Contructs a copy of the \c HydrophobicInteractionScore instance \a score.
     # \param score The \c HydrophobicInteractionScore instance to copy.
     # 
     def __init__(score: HydrophobicInteractionScore) -> None: pass

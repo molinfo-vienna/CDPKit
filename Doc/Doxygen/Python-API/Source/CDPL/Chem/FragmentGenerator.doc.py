@@ -32,7 +32,7 @@ class FragmentGenerator(Boost.Python.instance):
     class FragmentationRule(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \c FragmentationRule instance \a rule.
+        # \brief Contructs a copy of the \c FragmentationRule instance \a rule.
         # \param rule The \c FragmentationRule instance to copy.
         # 
         def __init__(rule: FragmentationRule) -> None: pass
@@ -58,7 +58,7 @@ class FragmentGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c FragmentationRule instance \a rule.
+        # \brief Replaces the current state with a copy of the state of the \c FragmentationRule instance \a rule.
         # \param rule The \c FragmentationRule instance to copy.
         # \return \a self
         # 
@@ -106,7 +106,7 @@ class FragmentGenerator(Boost.Python.instance):
     class ExcludePattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \c ExcludePattern instance \a excl_ptn.
+        # \brief Contructs a copy of the \c ExcludePattern instance \a excl_ptn.
         # \param excl_ptn The \c ExcludePattern instance to copy.
         # 
         def __init__(excl_ptn: ExcludePattern) -> None: pass
@@ -132,7 +132,7 @@ class FragmentGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c ExcludePattern instance \a excl_ptn.
+        # \brief Replaces the current state with a copy of the state of the \c ExcludePattern instance \a excl_ptn.
         # \param excl_ptn The \c ExcludePattern instance to copy.
         # \return \a self
         # 
@@ -194,7 +194,7 @@ class FragmentGenerator(Boost.Python.instance):
     class FragmentLink(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \c FragmentLink instance \a link.
+        # \brief Contructs a copy of the \c FragmentLink instance \a link.
         # \param link The \c FragmentLink instance to copy.
         # 
         def __init__(link: FragmentLink) -> None: pass
@@ -224,7 +224,7 @@ class FragmentGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c FragmentLink instance \a link.
+        # \brief Replaces the current state with a copy of the state of the \c FragmentLink instance \a link.
         # \param link The \c FragmentLink instance to copy.
         # \return \a self
         # 

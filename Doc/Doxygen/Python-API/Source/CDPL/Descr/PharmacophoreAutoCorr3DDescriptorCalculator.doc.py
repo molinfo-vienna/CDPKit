@@ -38,7 +38,7 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c PharmacophoreAutoCorr3DDescriptorCalculator instance \a calc.
+    # \brief Contructs a copy of the \c PharmacophoreAutoCorr3DDescriptorCalculator instance \a calc.
     # \param calc The \c PharmacophoreAutoCorr3DDescriptorCalculator instance to copy.
     # 
     def __init__(calc: PharmacophoreAutoCorr3DDescriptorCalculator) -> None: pass
@@ -64,7 +64,7 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c PharmacophoreAutoCorr3DDescriptorCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c PharmacophoreAutoCorr3DDescriptorCalculator instance \a calc.
     # \param calc The \c PharmacophoreAutoCorr3DDescriptorCalculator instance to copy.
     # \return \a self
     # 

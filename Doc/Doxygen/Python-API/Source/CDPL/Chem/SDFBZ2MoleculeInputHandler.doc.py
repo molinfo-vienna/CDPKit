@@ -25,6 +25,6 @@
 class SDFBZ2MoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c SDFBZ2MoleculeInputHandler instance.
+    # \brief Contructs the \c SDFBZ2MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

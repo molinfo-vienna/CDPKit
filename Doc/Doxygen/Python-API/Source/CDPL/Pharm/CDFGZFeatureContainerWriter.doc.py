@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Writer for gzip-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+# \brief Writer for gzip-compressed feature container data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \c CDFGZFeatureContainerWriter instance.
+    # \brief Contructs the \c CDFGZFeatureContainerWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

@@ -25,18 +25,18 @@
 class DZeroGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DZeroGrid instance.
+    # \brief Contructs the \c DZeroGrid instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DZeroGrid instance \a g.
+    # \brief Contructs a copy of the \c DZeroGrid instance \a g.
     # \param g The \c DZeroGrid instance to copy.
     # 
     def __init__(g: DZeroGrid) -> None: pass
 
     ##
-    # \brief Initializes the \c DZeroGrid instance.
+    # \brief Contructs the \c DZeroGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -74,7 +74,7 @@ class DZeroGrid(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DZeroGrid instance \a g.
+    # \brief Replaces the current state with a copy of the state of the \c DZeroGrid instance \a g.
     # \param g The \c DZeroGrid instance to copy.
     # \return \a self
     # 

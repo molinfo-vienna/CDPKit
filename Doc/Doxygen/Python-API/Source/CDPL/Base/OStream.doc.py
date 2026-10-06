@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Wrapper for C++ \c std::ostream instances
+# \brief Wrapper for C++ \c std::ostream instances.
 # 
 class OStream(Boost.Python.instance):
 

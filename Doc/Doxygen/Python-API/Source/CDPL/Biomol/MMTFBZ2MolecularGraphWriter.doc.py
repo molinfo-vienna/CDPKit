@@ -25,7 +25,7 @@
 class MMTFBZ2MolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c MMTFBZ2MolecularGraphWriter instance.
+    # \brief Contructs the \c MMTFBZ2MolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

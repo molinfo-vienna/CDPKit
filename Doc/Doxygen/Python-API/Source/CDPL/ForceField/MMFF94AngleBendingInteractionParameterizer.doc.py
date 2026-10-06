@@ -34,7 +34,7 @@ class MMFF94AngleBendingInteractionParameterizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
+    # \brief Contructs a copy of the \c MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94AngleBendingInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94AngleBendingInteractionParameterizer) -> None: pass
@@ -124,7 +124,7 @@ class MMFF94AngleBendingInteractionParameterizer(Boost.Python.instance):
     def setParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94AngleBendingInteractionParameterizer instance to copy.
     # \return \a self
     # 

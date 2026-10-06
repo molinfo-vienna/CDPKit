@@ -25,7 +25,7 @@
 class FSpatialGrid(AttributedGrid):
 
     ##
-    # \brief Initializes the \c FSpatialGrid instance.
+    # \brief Contructs the \c FSpatialGrid instance.
     # 
     def __init__() -> None: pass
 
@@ -46,7 +46,7 @@ class FSpatialGrid(AttributedGrid):
     def getCoordinates(i: int, coords: Math.Vector3F) -> None: pass
 
     ##
-    # \brief Returns a reference to the grid element at linear index <em>i</em>.
+    # \brief Returns the grid element at linear index <em>i</em>.
     # 
     # \param i The linear element index.
     # 

@@ -122,7 +122,7 @@ class Color(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Color instance \a color.
+    # \brief Contructs a copy of the \c Color instance \a color.
     # \param color The \c Color instance to copy.
     # 
     def __init__(color: Color) -> None: pass
@@ -152,7 +152,7 @@ class Color(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Color instance \a color.
+    # \brief Replaces the current state with a copy of the state of the \c Color instance \a color.
     # \param color The \c Color instance to copy.
     # \return \a self
     # 

@@ -25,18 +25,18 @@
 class FZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FZeroVector instance.
+    # \brief Contructs the \c FZeroVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FZeroVector instance \a v.
+    # \brief Contructs a copy of the \c FZeroVector instance \a v.
     # \param v The \c FZeroVector instance to copy.
     # 
     def __init__(v: FZeroVector) -> None: pass
 
     ##
-    # \brief Initializes the \c FZeroVector instance.
+    # \brief Contructs the \c FZeroVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -64,7 +64,7 @@ class FZeroVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FZeroVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c FZeroVector instance \a v.
     # \param v The \c FZeroVector instance to copy.
     # \return \a self
     # 

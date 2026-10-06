@@ -25,13 +25,13 @@
 class ULMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ULMatrixTranspose instance \a mt.
+    # \brief Contructs a copy of the \c ULMatrixTranspose instance \a mt.
     # \param mt The \c ULMatrixTranspose instance to copy.
     # 
     def __init__(mt: ULMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \c ULMatrixTranspose instance.
+    # \brief Contructs the \c ULMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: ULMatrixExpression) -> None: pass
@@ -49,42 +49,42 @@ class ULMatrixTranspose(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
     # \param e The \c ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
     # \param e The \c ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
     # \param e The \c ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULMatrixExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
     # \param e The \c ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ULMatrixTranspose instance \a mt.
+    # \brief Replaces the current state with a copy of the state of the \c ULMatrixTranspose instance \a mt.
     # \param mt The \c ULMatrixTranspose instance to copy.
     # \return \a self
     # 
     def assign(mt: ULMatrixTranspose) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

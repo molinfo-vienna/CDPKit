@@ -25,7 +25,7 @@
 class FilePDBMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c FilePDBMolecularGraphWriter instance.
+    # \brief Contructs the \c FilePDBMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

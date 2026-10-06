@@ -25,12 +25,12 @@
 class FRegularGridSet(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FRegularGridSet instance.
+    # \brief Contructs the \c FRegularGridSet instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FRegularGridSet instance \a set.
+    # \brief Contructs a copy of the \c FRegularGridSet instance \a set.
     # \param set The \c FRegularGridSet instance to copy.
     # 
     def __init__(set: FRegularGridSet) -> None: pass
@@ -60,7 +60,7 @@ class FRegularGridSet(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FRegularGridSet instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c FRegularGridSet instance \a array.
     # \param array The \c FRegularGridSet instance to copy.
     # \return \a self
     # 

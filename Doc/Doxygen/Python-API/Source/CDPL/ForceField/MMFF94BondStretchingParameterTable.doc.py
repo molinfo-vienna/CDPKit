@@ -37,7 +37,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Entry instance \a entry.
+        # \brief Contructs a copy of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -66,7 +66,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Entry instance \a entry.
+        # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # \return \a self
         # 
@@ -129,7 +129,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94BondStretchingParameterTable instance \a table.
+    # \brief Contructs a copy of the \c MMFF94BondStretchingParameterTable instance \a table.
     # \param table The \c MMFF94BondStretchingParameterTable instance to copy.
     # 
     def __init__(table: MMFF94BondStretchingParameterTable) -> None: pass
@@ -169,7 +169,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def removeEntry(bond_type_idx: int, atom1_type: int, atom2_type: int) -> bool: pass
 
     ##
-    # \brief Returns a reference to the entry matching the specified query values.
+    # \brief Returns the entry matching the specified query values.
     # 
     # \param bond_type_idx The MMFF94 bond type index.
     # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
@@ -206,7 +206,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94BondStretchingParameterTable instance \a table.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94BondStretchingParameterTable instance \a table.
     # \param table The \c MMFF94BondStretchingParameterTable instance to copy.
     # \return \a self
     # 

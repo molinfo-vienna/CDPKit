@@ -25,18 +25,18 @@
 class DoubleDoubleFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DoubleDoubleFunctor instance.
+    # \brief Contructs the \c DoubleDoubleFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DoubleDoubleFunctor instance \a func.
+    # \brief Contructs a copy of the \c DoubleDoubleFunctor instance \a func.
     # \param func The \c DoubleDoubleFunctor instance to copy.
     # 
     def __init__(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c DoubleDoubleFunctor instance for the specified callable object.
+    # \brief Contructs the \c DoubleDoubleFunctor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

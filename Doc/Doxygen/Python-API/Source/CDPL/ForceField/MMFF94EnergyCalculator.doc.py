@@ -36,7 +36,7 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94EnergyCalculator instance \a calc.
+    # \brief Contructs a copy of the \c MMFF94EnergyCalculator instance \a calc.
     # \param calc The \c MMFF94EnergyCalculator instance to copy.
     # 
     def __init__(calc: MMFF94EnergyCalculator) -> None: pass
@@ -61,7 +61,7 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94EnergyCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94EnergyCalculator instance \a calc.
     # \param calc The \c MMFF94EnergyCalculator instance to copy.
     # \return \a self
     # 

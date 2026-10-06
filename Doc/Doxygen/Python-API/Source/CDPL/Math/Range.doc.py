@@ -30,7 +30,7 @@ class Range(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Range instance \a r.
+    # \brief Contructs a copy of the \c Range instance \a r.
     # \param r The \c Range instance to copy.
     # 
     def __init__(r: Range) -> None: pass
@@ -76,7 +76,7 @@ class Range(Boost.Python.instance):
     def getIndex(i: int) -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Range instance \a r.
+    # \brief Replaces the current state with a copy of the state of the \c Range instance \a r.
     # \param r The \c Range instance to copy.
     # \return \a self
     # 

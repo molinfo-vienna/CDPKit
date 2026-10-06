@@ -25,7 +25,7 @@
 class FileCMLGZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c FileCMLGZMoleculeReader instance.
+    # \brief Contructs the \c FileCMLGZMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

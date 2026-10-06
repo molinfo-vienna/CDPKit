@@ -25,7 +25,7 @@
 class FeatureDistanceConstraint(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FeatureDistanceConstraint instance \a constr.
+    # \brief Contructs a copy of the \c FeatureDistanceConstraint instance \a constr.
     # \param constr The \c FeatureDistanceConstraint instance to copy.
     # 
     def __init__(constr: FeatureDistanceConstraint) -> None: pass
@@ -65,7 +65,7 @@ class FeatureDistanceConstraint(Boost.Python.instance):
     def getMaxDistance() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FeatureDistanceConstraint instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c FeatureDistanceConstraint instance \a constr.
     # \param constr The \c FeatureDistanceConstraint instance to copy.
     # \return \a self
     # 

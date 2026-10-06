@@ -328,12 +328,12 @@ namespace CDPLPythonBase
             checkIfInGoodState();
         }
 
-      protected:
         void closeStream()
         {
             closed = true;
         }
 
+      protected:
         void checkIfClosed() const
         {
             if (!closed)

@@ -63,7 +63,7 @@ class Molecule(MolecularGraph):
         def __contains__(bond: Bond) -> bool: pass
 
     ##
-    # \brief Initializes the \c Molecule instance.
+    # \brief Contructs the \c Molecule instance.
     # 
     def __init__() -> None: pass
 

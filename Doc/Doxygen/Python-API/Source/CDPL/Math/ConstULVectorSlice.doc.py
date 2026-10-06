@@ -25,13 +25,13 @@
 class ConstULVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstULVectorSlice instance \a s.
+    # \brief Contructs a copy of the \c ConstULVectorSlice instance \a s.
     # \param s The \c ConstULVectorSlice instance to copy.
     # 
     def __init__(s: ConstULVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstULVectorSlice instance.
+    # \brief Contructs the \c ConstULVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -82,7 +82,7 @@ class ConstULVectorSlice(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 
@@ -117,7 +117,7 @@ class ConstULVectorSlice(Boost.Python.instance):
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 
@@ -126,7 +126,7 @@ class ConstULVectorSlice(Boost.Python.instance):
     def __call__(i: int) -> int: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 

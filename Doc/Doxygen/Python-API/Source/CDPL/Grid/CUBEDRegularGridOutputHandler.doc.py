@@ -27,6 +27,6 @@
 class CUBEDRegularGridOutputHandler(DRegularGridOutputHandler):
 
     ##
-    # \brief Initializes the \c CUBEDRegularGridOutputHandler instance.
+    # \brief Contructs the \c CUBEDRegularGridOutputHandler instance.
     # 
     def __init__() -> None: pass

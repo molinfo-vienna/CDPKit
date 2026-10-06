@@ -102,7 +102,7 @@ class TorsionRuleMatcher(Boost.Python.instance):
     def getNumMatches() -> int: pass
 
     ##
-    # \brief Returns a reference to the stored torsion rule match object at index <em>idx</em>.
+    # \brief Returns the stored torsion rule match object at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the torsion rule match object to return.
     # 

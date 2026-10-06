@@ -27,12 +27,12 @@
 class ManhattanDistance(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ManhattanDistance instance.
+    # \brief Contructs the \c ManhattanDistance instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ManhattanDistance instance \a func.
+    # \brief Contructs a copy of the \c ManhattanDistance instance \a func.
     # \param func The \c ManhattanDistance instance to copy.
     # 
     def __init__(func: ManhattanDistance) -> None: pass
@@ -50,7 +50,7 @@ class ManhattanDistance(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ManhattanDistance instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c ManhattanDistance instance \a func.
     # \param func The \c ManhattanDistance instance to copy.
     # \return \a self
     # 
@@ -61,7 +61,8 @@ class ManhattanDistance(Boost.Python.instance):
     # 
     # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -75,7 +76,8 @@ class ManhattanDistance(Boost.Python.instance):
     # 
     # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -89,7 +91,8 @@ class ManhattanDistance(Boost.Python.instance):
     # 
     # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.
@@ -103,7 +106,8 @@ class ManhattanDistance(Boost.Python.instance):
     # 
     # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
     # 
-    # \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+    # \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+    # \f]
     # 
     # \param v1 The first vector.
     # \param v2 The second vector.

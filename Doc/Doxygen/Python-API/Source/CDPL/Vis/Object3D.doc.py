@@ -41,7 +41,7 @@ class Object3D(Base.PropertyContainer):
     def __init__(obj: Object3D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a arg1 with a copy of the state of the \c Object3D instance \a self.
+    # \brief Replaces the current state with a copy of the state of the \c Object3D instance \a self.
     # \param self The \c Object3D instance to copy.
     # \return \a arg1
     # 
@@ -62,7 +62,7 @@ class Object3D(Base.PropertyContainer):
     def removeSubObject(idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the sub-object at index <em>idx</em>.
+    # \brief Returns the sub-object at index <em>idx</em>.
     # 
     # \param idx The zero-based sub-object index.
     # 

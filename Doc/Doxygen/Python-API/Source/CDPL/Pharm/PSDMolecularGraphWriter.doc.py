@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Writer for molecular graph data in the <em>CDPL</em> <em>PSD</em>-format.
+# \brief Writer for molecular graph data in the <em>%CDPL</em> <em>PSD</em>-format.
 # 
 class PSDMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c PSDMolecularGraphWriter instance.
+    # \brief Contructs the \c PSDMolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

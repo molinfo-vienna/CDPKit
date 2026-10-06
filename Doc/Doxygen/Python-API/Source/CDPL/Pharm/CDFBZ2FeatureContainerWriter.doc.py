@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Writer for bzip2-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+# \brief Writer for bzip2-compressed feature container data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFBZ2FeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \c CDFBZ2FeatureContainerWriter instance.
+    # \brief Contructs the \c CDFBZ2FeatureContainerWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

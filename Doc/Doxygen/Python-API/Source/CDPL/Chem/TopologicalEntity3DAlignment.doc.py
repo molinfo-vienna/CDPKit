@@ -25,12 +25,12 @@
 class TopologicalEntity3DAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c TopologicalEntity3DAlignment instance.
+    # \brief Contructs the \c TopologicalEntity3DAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TopologicalEntity3DAlignment instance \a alignment.
+    # \brief Contructs a copy of the \c TopologicalEntity3DAlignment instance \a alignment.
     # \param alignment The \c TopologicalEntity3DAlignment instance to copy.
     # 
     def __init__(alignment: TopologicalEntity3DAlignment) -> None: pass
@@ -70,7 +70,7 @@ class TopologicalEntity3DAlignment(Boost.Python.instance):
     def nextAlignment(mapping: Util.STPairArray) -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TopologicalEntity3DAlignment instance \a alignment.
+    # \brief Replaces the current state with a copy of the state of the \c TopologicalEntity3DAlignment instance \a alignment.
     # \param alignment The \c TopologicalEntity3DAlignment instance to copy.
     # \return \a self
     # 

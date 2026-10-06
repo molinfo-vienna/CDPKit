@@ -27,12 +27,12 @@
 class Entity3DContainer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c Entity3DContainer instance.
+    # \brief Contructs the \c Entity3DContainer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # \brief Returns the entity at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the entity to return.
     # 

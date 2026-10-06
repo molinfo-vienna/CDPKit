@@ -29,42 +29,42 @@ class FVectorExpression(ConstFVectorExpression):
     def swap(e: FVectorExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c FVectorExpression instance \a e.
     # \param e The \c FVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: FVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
     # \param e The \c ConstFVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
     # \param e The \c ConstDVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
     # \param e The \c ConstLVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
     # \param e The \c ConstULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

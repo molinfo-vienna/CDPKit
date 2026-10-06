@@ -25,6 +25,6 @@
 class SDFMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c SDFMoleculeInputHandler instance.
+    # \brief Contructs the \c SDFMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

@@ -30,17 +30,17 @@ class DataFormat(Boost.Python.instance):
     JME = CDPL.Base.DataFormat(name='JME', descr='JME Molecular Editor String', mime_type'', file_exts=['jme'], multi_rec=True)
 
     ##
-    # \brief Provides meta-information about the native <em>CDPL</em> format.
+    # \brief Provides meta-information about the native <em>%CDPL</em> format.
     # 
     CDF = CDPL.Base.DataFormat(name='CDF', descr='Native CDPL Format', mime_type'', file_exts=['cdf'], multi_rec=True)
 
     ##
-    # \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+    # \brief Provides meta-information about the gzip-compressed native <em>%CDPL</em> format.
     # 
     CDF_GZ = CDPL.Base.DataFormat(name='CDF_GZ', descr='GZip-Compressed Native CDPL Format', mime_type'', file_exts=['cdf.gz'], multi_rec=True)
 
     ##
-    # \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+    # \brief Provides meta-information about the bzip2-compressed native <em>%CDPL</em> format.
     # 
     CDF_BZ2 = CDPL.Base.DataFormat(name='CDF_BZ2', descr='BZip2-Compressed Native CDPL Format', mime_type'', file_exts=['cdf.bz2'], multi_rec=True)
 

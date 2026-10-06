@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Reader for reaction data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+# \brief Reader for reaction data in the gzip-compressed native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \c CDFGZReactionReader instance.
+    # \brief Contructs the \c CDFGZReactionReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

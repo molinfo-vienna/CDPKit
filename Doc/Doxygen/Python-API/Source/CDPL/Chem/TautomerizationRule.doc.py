@@ -25,7 +25,7 @@
 class TautomerizationRule(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c TautomerizationRule instance.
+    # \brief Contructs the \c TautomerizationRule instance.
     # 
     def __init__() -> None: pass
 

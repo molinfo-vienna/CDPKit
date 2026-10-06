@@ -32,7 +32,7 @@ class DefaultTautomerGenerator(TautomerGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DefaultTautomerGenerator instance \a gen.
+    # \brief Contructs a copy of the \c DefaultTautomerGenerator instance \a gen.
     # \param gen The \c DefaultTautomerGenerator instance to copy.
     # 
     def __init__(gen: DefaultTautomerGenerator) -> None: pass

@@ -41,7 +41,7 @@ class NOTReactionMatchExpression(ReactionMatchExpression):
     def __init__(expr_ptr: ReactionMatchExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c NOTReactionMatchExpression instance \a expression.
+    # \brief Replaces the current state with a copy of the state of the \c NOTReactionMatchExpression instance \a expression.
     # \param expression The \c NOTReactionMatchExpression instance to copy.
     # \return \a self
     # 

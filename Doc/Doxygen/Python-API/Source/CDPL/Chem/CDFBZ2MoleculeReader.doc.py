@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Reader for molecule data in the bzip2-compressed native I/O format of the <em>CDPL</em>.
+# \brief Reader for molecule data in the bzip2-compressed native I/O format of the <em>%CDPL</em>.
 # 
 class CDFBZ2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c CDFBZ2MoleculeReader instance.
+    # \brief Contructs the \c CDFBZ2MoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

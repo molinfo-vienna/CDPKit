@@ -55,7 +55,7 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
     DEF_MAX_AR_ORIENTATION_DEVIATION = 45.0
 
     ##
-    # \brief Initializes a copy of the \c FeatureGeometryMatchFunctor instance \a func.
+    # \brief Contructs a copy of the \c FeatureGeometryMatchFunctor instance \a func.
     # \param func The \c FeatureGeometryMatchFunctor instance to copy.
     # 
     def __init__(func: FeatureGeometryMatchFunctor) -> None: pass
@@ -85,7 +85,7 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FeatureGeometryMatchFunctor instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c FeatureGeometryMatchFunctor instance \a func.
     # \param func The \c FeatureGeometryMatchFunctor instance to copy.
     # \return \a self
     # 

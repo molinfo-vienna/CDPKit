@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the input of bzip2-compressed reaction data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the input of bzip2-compressed reaction data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFBZ2ReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \c CDFBZ2ReactionInputHandler instance.
+    # \brief Contructs the \c CDFBZ2ReactionInputHandler instance.
     # 
     def __init__() -> None: pass

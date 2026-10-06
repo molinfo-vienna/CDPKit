@@ -43,12 +43,12 @@ class Bond(AtomContainer, Base.PropertyContainer):
         def __contains__(atom: Atom) -> bool: pass
 
     ##
-    # \brief Initializes the \c Bond instance.
+    # \brief Contructs the \c Bond instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the connected neighbor of the argument atom.
+    # \brief Returns the connected neighbor of the argument atom.
     # 
     # \param atom The atom for which to return the connected neighbor atom.
     # 
@@ -59,7 +59,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def getNeighbor(atom: Atom) -> Atom: pass
 
     ##
-    # \brief Returns a reference to the start atom of the bond.
+    # \brief Returns the start atom of the bond.
     # 
     # Equivalent to calling <tt>getAtom(0)</tt>.
     # 
@@ -68,7 +68,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def getBegin() -> Atom: pass
 
     ##
-    # \brief Returns a reference to the end atom of the bond.
+    # \brief Returns the end atom of the bond.
     # 
     # Equivalent to calling <tt>getAtom(1)</tt>.
     # 
@@ -77,7 +77,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def getEnd() -> Atom: pass
 
     ##
-    # \brief Returns a reference to the parent molecule.
+    # \brief Returns the parent molecule.
     # 
     # \return A reference to the parent molecule.
     # 
@@ -102,7 +102,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def getAtoms() -> AtomSequence: pass
 
     ##
-    # \brief Returns a reference to the atom at index <em>idx</em>.
+    # \brief Returns the atom at index <em>idx</em>.
     # 
     # The index <em>0</em> specifies the start atom (see getBegin() const) and <em>1</em> the end atom of the bond (see getEnd() const).
     # 

@@ -25,7 +25,7 @@
 class FileSMILESBZ2ReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \c FileSMILESBZ2ReactionWriter instance.
+    # \brief Contructs the \c FileSMILESBZ2ReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

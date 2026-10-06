@@ -32,7 +32,7 @@ class AlignedTotalOverlapTverskyScore(Boost.Python.instance):
     def __init__(beta: float = 0.95) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c AlignedTotalOverlapTverskyScore instance \a score.
+    # \brief Contructs a copy of the \c AlignedTotalOverlapTverskyScore instance \a score.
     # \param score The \c AlignedTotalOverlapTverskyScore instance to copy.
     # 
     def __init__(score: AlignedTotalOverlapTverskyScore) -> None: pass
@@ -50,7 +50,7 @@ class AlignedTotalOverlapTverskyScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c AlignedTotalOverlapTverskyScore instance \a score.
+    # \brief Replaces the current state with a copy of the state of the \c AlignedTotalOverlapTverskyScore instance \a score.
     # \param score The \c AlignedTotalOverlapTverskyScore instance to copy.
     # \return \a self
     # 

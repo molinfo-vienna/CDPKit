@@ -29,7 +29,7 @@
 class Material(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c Material instance \a material.
+    # \brief Contructs a copy of the \c Material instance \a material.
     # \param material The \c Material instance to copy.
     # 
     def __init__(material: Material) -> None: pass
@@ -70,7 +70,7 @@ class Material(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Material instance \a material.
+    # \brief Replaces the current state with a copy of the state of the \c Material instance \a material.
     # \param material The \c Material instance to copy.
     # \return \a self
     # 

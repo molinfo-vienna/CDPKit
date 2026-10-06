@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the output of reaction data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the output of reaction data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \c CDFReactionOutputHandler instance.
+    # \brief Contructs the \c CDFReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

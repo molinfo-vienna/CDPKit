@@ -25,13 +25,13 @@
 class FMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FMatrixTranspose instance \a mt.
+    # \brief Contructs a copy of the \c FMatrixTranspose instance \a mt.
     # \param mt The \c FMatrixTranspose instance to copy.
     # 
     def __init__(mt: FMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrixTranspose instance.
+    # \brief Contructs the \c FMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: FMatrixExpression) -> None: pass
@@ -94,7 +94,7 @@ class FMatrixTranspose(Boost.Python.instance):
     def assign(mt: FMatrixTranspose) -> FMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -135,14 +135,14 @@ class FMatrixTranspose(Boost.Python.instance):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> FMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix's element at (<em>j</em>, <em>i</em>).
+    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
     # 
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.

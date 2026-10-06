@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the input of molecule data in the <em>CDPL</em> <em>PSD</em>-format.
+# \brief Handler for the input of molecule data in the <em>%CDPL</em> <em>PSD</em>-format.
 # 
 class PSDMoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c PSDMoleculeInputHandler instance.
+    # \brief Contructs the \c PSDMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

@@ -27,18 +27,18 @@
 class MMFF94SymbolicAtomTypeFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c MMFF94SymbolicAtomTypeFunction instance.
+    # \brief Contructs the \c MMFF94SymbolicAtomTypeFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94SymbolicAtomTypeFunction instance \a func.
+    # \brief Contructs a copy of the \c MMFF94SymbolicAtomTypeFunction instance \a func.
     # \param func The \c MMFF94SymbolicAtomTypeFunction instance to copy.
     # 
     def __init__(func: MMFF94SymbolicAtomTypeFunction) -> None: pass
 
     ##
-    # \brief Initializes the \c MMFF94SymbolicAtomTypeFunction instance.
+    # \brief Contructs the \c MMFF94SymbolicAtomTypeFunction instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

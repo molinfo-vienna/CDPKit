@@ -45,7 +45,7 @@ class Reaction(Base.PropertyContainer):
         def __getitem__(idx: int) -> Molecule: pass
 
     ##
-    # \brief Initializes the \c Reaction instance.
+    # \brief Contructs the \c Reaction instance.
     # 
     def __init__() -> None: pass
 
@@ -115,7 +115,7 @@ class Reaction(Base.PropertyContainer):
     def getNumComponents() -> int: pass
 
     ##
-    # \brief Returns a reference to the reaction component at index <em>idx</em> in the list of components with the specified role.
+    # \brief Returns the reaction component at index <em>idx</em> in the list of components with the specified role.
     # 
     # \param idx The zero-based index of the reaction component to return.
     # \param role A flag indicating the reaction role of the component (see namespace Chem.ReactionRole).
@@ -127,7 +127,7 @@ class Reaction(Base.PropertyContainer):
     def getComponent(idx: int, role: int) -> Molecule: pass
 
     ##
-    # \brief Returns a reference to the reaction component at index <em>idx</em>.
+    # \brief Returns the reaction component at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the reaction component to return.
     # 

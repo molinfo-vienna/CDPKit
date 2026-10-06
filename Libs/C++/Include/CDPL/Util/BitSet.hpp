@@ -39,7 +39,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamic bitset class.
+         * \brief \brief Data structure for the storage and manipulation of variably sized bit sets.
          *
          * For further information see [\ref BDBS].
          */

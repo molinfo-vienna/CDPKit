@@ -45,7 +45,7 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     DEF_MAX_ANGLE = 30.0
 
     ##
-    # \brief Initializes a copy of the \c ParallelPiPiInteractionConstraint instance \a constr.
+    # \brief Contructs a copy of the \c ParallelPiPiInteractionConstraint instance \a constr.
     # \param constr The \c ParallelPiPiInteractionConstraint instance to copy.
     # 
     def __init__(constr: ParallelPiPiInteractionConstraint) -> None: pass
@@ -101,7 +101,7 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ParallelPiPiInteractionConstraint instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c ParallelPiPiInteractionConstraint instance \a constr.
     # \param constr The \c ParallelPiPiInteractionConstraint instance to copy.
     # \return \a self
     # 

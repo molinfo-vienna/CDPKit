@@ -25,18 +25,18 @@
 class LScalarVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c LScalarVector instance.
+    # \brief Contructs the \c LScalarVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c LScalarVector instance \a v.
+    # \brief Contructs a copy of the \c LScalarVector instance \a v.
     # \param v The \c LScalarVector instance to copy.
     # 
     def __init__(v: LScalarVector) -> None: pass
 
     ##
-    # \brief Initializes the \c LScalarVector instance.
+    # \brief Contructs the \c LScalarVector instance.
     # \param n 
     # \param v 
     # 
@@ -65,7 +65,7 @@ class LScalarVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c LScalarVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c LScalarVector instance \a v.
     # \param v The \c LScalarVector instance to copy.
     # \return \a self
     # 

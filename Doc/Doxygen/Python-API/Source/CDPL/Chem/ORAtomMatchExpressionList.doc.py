@@ -27,18 +27,18 @@
 class ORAtomMatchExpressionList(AtomMatchExpressionList):
 
     ##
-    # \brief Initializes the \c ORAtomMatchExpressionList instance.
+    # \brief Contructs the \c ORAtomMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ORAtomMatchExpressionList instance \a expr.
+    # \brief Contructs a copy of the \c ORAtomMatchExpressionList instance \a expr.
     # \param expr The \c ORAtomMatchExpressionList instance to copy.
     # 
     def __init__(expr: ORAtomMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ORAtomMatchExpressionList instance \a expr.
+    # \brief Replaces the current state with a copy of the state of the \c ORAtomMatchExpressionList instance \a expr.
     # \param expr The \c ORAtomMatchExpressionList instance to copy.
     # \return \a self
     # 

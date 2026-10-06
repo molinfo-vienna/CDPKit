@@ -25,13 +25,13 @@
 class ConstFQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstFQuaternionVectorAdapter instance \a a.
+    # \brief Contructs a copy of the \c ConstFQuaternionVectorAdapter instance \a a.
     # \param a The \c ConstFQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: ConstFQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstFQuaternionVectorAdapter instance.
+    # \brief Contructs the \c ConstFQuaternionVectorAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstFQuaternionExpression) -> None: pass
@@ -67,7 +67,7 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped quaternion (via its stored closure).
+    # \brief Returns the wrapped quaternion (via its stored closure).
     # 
     # \return A reference to the wrapped quaternion closure.
     # 
@@ -102,7 +102,7 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the quaternion component at index <em>i</em>.
+    # \brief Returns the quaternion component at index <em>i</em>.
     # 
     # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
     # 
@@ -113,7 +113,7 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the quaternion component at index <em>i</em>.
+    # \brief Returns the quaternion component at index <em>i</em>.
     # 
     # \param i The zero-based component index.
     # 

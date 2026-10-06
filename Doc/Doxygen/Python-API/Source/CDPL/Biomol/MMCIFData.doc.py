@@ -41,7 +41,7 @@ class MMCIFData(Boost.Python.instance):
         def __init__(name: str) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Item instance \a item.
+        # \brief Contructs a copy of the \c Item instance \a item.
         # \param item The \c Item instance to copy.
         # 
         def __init__(item: Item) -> None: pass
@@ -59,7 +59,7 @@ class MMCIFData(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Item instance \a item.
+        # \brief Replaces the current state with a copy of the state of the \c Item instance \a item.
         # \param item The \c Item instance to copy.
         # \return \a self
         # 
@@ -145,7 +145,7 @@ class MMCIFData(Boost.Python.instance):
         def __init__(name: str) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Category instance \a cat.
+        # \brief Contructs a copy of the \c Category instance \a cat.
         # \param cat The \c Category instance to copy.
         # 
         def __init__(cat: Category) -> None: pass
@@ -163,14 +163,14 @@ class MMCIFData(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Category instance \a cat.
+        # \brief Replaces the current state with a copy of the state of the \c Category instance \a cat.
         # \param cat The \c Category instance to copy.
         # \return \a self
         # 
         def assign(cat: Category) -> Category: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c MMCIFData instance \a cat.
+        # \brief Replaces the current state with a copy of the state of the \c MMCIFData instance \a cat.
         # \param cat The \c MMCIFData instance to copy.
         # \return \a self
         # 
@@ -216,7 +216,7 @@ class MMCIFData(Boost.Python.instance):
         ##
         # \brief Appends a new (empty) item with name <em>name</em> to the category.
         # 
-        # If an item with the given name already exists, no new item is added and a reference to the existing item is returned.
+        # If an item with the given name already exists, no new item is added and the existing item is returned.
         # 
         # \param name The data item name.
         # 
@@ -225,7 +225,7 @@ class MMCIFData(Boost.Python.instance):
         def addItem(name: str) -> Item: pass
 
         ##
-        # \brief Returns a reference to the item with name <em>name</em>.
+        # \brief Returns the item with name <em>name</em>.
         # 
         # \param name The data item name.
         # 
@@ -236,7 +236,7 @@ class MMCIFData(Boost.Python.instance):
         def getItem(name: str) -> Item: pass
 
         ##
-        # \brief Returns a reference to the item at index <em>index</em>.
+        # \brief Returns the item at index <em>index</em>.
         # 
         # \param index The zero-based item index.
         # 
@@ -301,7 +301,7 @@ class MMCIFData(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMCIFData instance \a data.
+    # \brief Contructs a copy of the \c MMCIFData instance \a data.
     # \param data The \c MMCIFData instance to copy.
     # 
     def __init__(data: MMCIFData) -> None: pass
@@ -347,7 +347,7 @@ class MMCIFData(Boost.Python.instance):
     def getNumCategories() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMCIFData instance \a data.
+    # \brief Replaces the current state with a copy of the state of the \c MMCIFData instance \a data.
     # \param data The \c MMCIFData instance to copy.
     # \return \a self
     # 
@@ -377,7 +377,7 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Adds a new (empty) category with name <em>name</em> to the data record.
     # 
-    # If a category with the given name already exists, no new category is added and a reference to the existing category is returned.
+    # If a category with the given name already exists, no new category is added and the existing category is returned.
     # 
     # \param name The <em>mmCIF</em> category name (without the leading underscore!).
     # \param front If <tt>True</tt>, the new category is inserted at the front of the category list. If <tt>False</tt>, it is appended.
@@ -387,7 +387,7 @@ class MMCIFData(Boost.Python.instance):
     def addCategory(name: str, front: bool = False) -> Category: pass
 
     ##
-    # \brief Returns a reference to the category with name <em>name</em>.
+    # \brief Returns the category with name <em>name</em>.
     # 
     # \param name The <em>mmCIF</em> category name (without the leading underscore!).
     # 
@@ -398,7 +398,7 @@ class MMCIFData(Boost.Python.instance):
     def getCategory(name: str) -> Category: pass
 
     ##
-    # \brief Returns a reference to the category at index <em>index</em>.
+    # \brief Returns the category at index <em>index</em>.
     # 
     # \param index The zero-based category index.
     # 

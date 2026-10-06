@@ -257,7 +257,7 @@ class PDBData(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c PDBData instance \a data.
+    # \brief Contructs a copy of the \c PDBData instance \a data.
     # \param data The \c PDBData instance to copy.
     # 
     def __init__(data: PDBData) -> None: pass
@@ -294,7 +294,7 @@ class PDBData(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c PDBData instance \a data.
+    # \brief Replaces the current state with a copy of the state of the \c PDBData instance \a data.
     # \param data The \c PDBData instance to copy.
     # \return \a self
     # 

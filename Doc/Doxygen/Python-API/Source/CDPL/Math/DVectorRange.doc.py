@@ -25,13 +25,13 @@
 class DVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c DVectorRange instance \a r.
+    # \brief Contructs a copy of the \c DVectorRange instance \a r.
     # \param r The \c DVectorRange instance to copy.
     # 
     def __init__(r: DVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \c DVectorRange instance.
+    # \brief Contructs the \c DVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -102,7 +102,7 @@ class DVectorRange(Boost.Python.instance):
     def assign(r: DVectorRange) -> DVectorRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -136,7 +136,7 @@ class DVectorRange(Boost.Python.instance):
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 
@@ -171,7 +171,7 @@ class DVectorRange(Boost.Python.instance):
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 
@@ -180,7 +180,7 @@ class DVectorRange(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 

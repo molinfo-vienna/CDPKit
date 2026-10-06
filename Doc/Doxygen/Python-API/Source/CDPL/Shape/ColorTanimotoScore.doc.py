@@ -25,12 +25,12 @@
 class ColorTanimotoScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ColorTanimotoScore instance.
+    # \brief Contructs the \c ColorTanimotoScore instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ColorTanimotoScore instance \a score.
+    # \brief Contructs a copy of the \c ColorTanimotoScore instance \a score.
     # \param score The \c ColorTanimotoScore instance to copy.
     # 
     def __init__(score: ColorTanimotoScore) -> None: pass
@@ -48,7 +48,7 @@ class ColorTanimotoScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ColorTanimotoScore instance \a score.
+    # \brief Replaces the current state with a copy of the state of the \c ColorTanimotoScore instance \a score.
     # \param score The \c ColorTanimotoScore instance to copy.
     # \return \a self
     # 

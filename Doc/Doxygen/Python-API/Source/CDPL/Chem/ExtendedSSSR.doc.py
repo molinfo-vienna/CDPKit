@@ -30,7 +30,7 @@ class ExtendedSSSR(FragmentList):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ExtendedSSSR instance \a esssr.
+    # \brief Contructs a copy of the \c ExtendedSSSR instance \a esssr.
     # \param esssr The \c ExtendedSSSR instance to copy.
     # 
     def __init__(esssr: ExtendedSSSR) -> None: pass
@@ -43,7 +43,7 @@ class ExtendedSSSR(FragmentList):
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ExtendedSSSR instance \a esssr.
+    # \brief Replaces the current state with a copy of the state of the \c ExtendedSSSR instance \a esssr.
     # \param esssr The \c ExtendedSSSR instance to copy.
     # \return \a self
     # 

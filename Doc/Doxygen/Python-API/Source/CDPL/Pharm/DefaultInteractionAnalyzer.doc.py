@@ -30,13 +30,13 @@ class DefaultInteractionAnalyzer(InteractionAnalyzer):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DefaultInteractionAnalyzer instance \a analyzer.
+    # \brief Contructs a copy of the \c DefaultInteractionAnalyzer instance \a analyzer.
     # \param analyzer The \c DefaultInteractionAnalyzer instance to copy.
     # 
     def __init__(analyzer: DefaultInteractionAnalyzer) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DefaultInteractionAnalyzer instance \a analyzer.
+    # \brief Replaces the current state with a copy of the state of the \c DefaultInteractionAnalyzer instance \a analyzer.
     # \param analyzer The \c DefaultInteractionAnalyzer instance to copy.
     # \return \a self
     # 

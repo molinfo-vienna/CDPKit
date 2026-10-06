@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Reader for molecule data in the <em>CDPL</em> <em>PSD</em>-format.
+# \brief Reader for molecule data in the <em>%CDPL</em> <em>PSD</em>-format.
 # 
 class PSDMoleculeReader(Chem.MoleculeReaderBase):
 

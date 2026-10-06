@@ -25,18 +25,18 @@
 class DScalarVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DScalarVector instance.
+    # \brief Contructs the \c DScalarVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DScalarVector instance \a v.
+    # \brief Contructs a copy of the \c DScalarVector instance \a v.
     # \param v The \c DScalarVector instance to copy.
     # 
     def __init__(v: DScalarVector) -> None: pass
 
     ##
-    # \brief Initializes the \c DScalarVector instance.
+    # \brief Contructs the \c DScalarVector instance.
     # \param n 
     # \param v 
     # 
@@ -65,7 +65,7 @@ class DScalarVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DScalarVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c DScalarVector instance \a v.
     # \param v The \c DScalarVector instance to copy.
     # \return \a self
     # 

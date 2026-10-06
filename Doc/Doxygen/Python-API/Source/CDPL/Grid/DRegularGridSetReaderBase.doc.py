@@ -35,7 +35,7 @@
 class DRegularGridSetReaderBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \c DRegularGridSetReaderBase instance.
+    # \brief Contructs the \c DRegularGridSetReaderBase instance.
     # 
     def __init__() -> None: pass
 

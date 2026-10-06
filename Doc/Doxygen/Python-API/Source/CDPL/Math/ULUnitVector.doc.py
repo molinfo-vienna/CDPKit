@@ -25,18 +25,18 @@
 class ULUnitVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ULUnitVector instance.
+    # \brief Contructs the \c ULUnitVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ULUnitVector instance \a v.
+    # \brief Contructs a copy of the \c ULUnitVector instance \a v.
     # \param v The \c ULUnitVector instance to copy.
     # 
     def __init__(v: ULUnitVector) -> None: pass
 
     ##
-    # \brief Initializes the \c ULUnitVector instance.
+    # \brief Contructs the \c ULUnitVector instance.
     # \param n 
     # \param i 
     # 
@@ -67,7 +67,7 @@ class ULUnitVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ULUnitVector instance \a v.
+    # \brief Replaces the current state with a copy of the state of the \c ULUnitVector instance \a v.
     # \param v The \c ULUnitVector instance to copy.
     # \return \a self
     # 

@@ -32,18 +32,18 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     class BondOrderChange(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c BondOrderChange instance.
+        # \brief Contructs the \c BondOrderChange instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c BondOrderChange instance \a bond_chg.
+        # \brief Contructs a copy of the \c BondOrderChange instance \a bond_chg.
         # \param bond_chg The \c BondOrderChange instance to copy.
         # 
         def __init__(bond_chg: BondOrderChange) -> None: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c BondOrderChange instance \a bond_chg.
+        # \brief Replaces the current state with a copy of the state of the \c BondOrderChange instance \a bond_chg.
         # \param bond_chg The \c BondOrderChange instance to copy.
         # \return \a self
         # 
@@ -82,7 +82,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         orderChange = property(getOrderChange)
 
     ##
-    # \brief Initializes the \c PatternBasedTautomerizationRule instance.
+    # \brief Contructs the \c PatternBasedTautomerizationRule instance.
     # \param id 
     # 
     def __init__(id: int) -> None: pass

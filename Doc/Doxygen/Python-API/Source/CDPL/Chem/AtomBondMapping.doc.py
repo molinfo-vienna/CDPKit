@@ -27,12 +27,12 @@
 class AtomBondMapping(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c AtomBondMapping instance.
+    # \brief Contructs the \c AtomBondMapping instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c AtomBondMapping instance \a mapping.
+    # \brief Contructs a copy of the \c AtomBondMapping instance \a mapping.
     # \param mapping The \c AtomBondMapping instance to copy.
     # 
     def __init__(mapping: AtomBondMapping) -> None: pass
@@ -50,21 +50,21 @@ class AtomBondMapping(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c AtomBondMapping instance \a mapping.
+    # \brief Replaces the current state with a copy of the state of the \c AtomBondMapping instance \a mapping.
     # \param mapping The \c AtomBondMapping instance to copy.
     # \return \a self
     # 
     def assign(mapping: AtomBondMapping) -> AtomBondMapping: pass
 
     ##
-    # \brief Returns a reference to the Chem.AtomMapping data member storing the atom to atom mappings.
+    # \brief Returns the Chem.AtomMapping data member storing the atom to atom mappings.
     # 
     # \return A reference to the Chem.AtomMapping data member.
     # 
     def getAtomMapping() -> AtomMapping: pass
 
     ##
-    # \brief Returns a reference to the Chem.BondMapping data member storing the bond to bond mappings.
+    # \brief Returns the Chem.BondMapping data member storing the bond to bond mappings.
     # 
     # \return A reference to the Chem.BondMapping data member.
     # 

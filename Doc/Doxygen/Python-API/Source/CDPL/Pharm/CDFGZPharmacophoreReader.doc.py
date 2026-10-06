@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Reader for gzip-compressed pharmacophore data in the native I/O format of the <em>CDPL</em>.
+# \brief Reader for gzip-compressed pharmacophore data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \c CDFGZPharmacophoreReader instance.
+    # \brief Contructs the \c CDFGZPharmacophoreReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

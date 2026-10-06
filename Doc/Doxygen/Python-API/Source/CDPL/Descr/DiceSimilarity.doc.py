@@ -27,12 +27,12 @@
 class DiceSimilarity(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DiceSimilarity instance.
+    # \brief Contructs the \c DiceSimilarity instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DiceSimilarity instance \a func.
+    # \brief Contructs a copy of the \c DiceSimilarity instance \a func.
     # \param func The \c DiceSimilarity instance to copy.
     # 
     def __init__(func: DiceSimilarity) -> None: pass
@@ -50,7 +50,7 @@ class DiceSimilarity(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DiceSimilarity instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c DiceSimilarity instance \a func.
     # \param func The \c DiceSimilarity instance to copy.
     # \return \a self
     # 
@@ -61,7 +61,8 @@ class DiceSimilarity(Boost.Python.instance):
     # 
     # The <em>Dice Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \f[ S_{ab} = \frac{2 \: N_{ab}}{N_a + N_b + 2 \: N_{ab}} \f]
+    # \f[   S_{ab} = \frac{2 \: N_{ab}}{N_a + N_b + 2 \: N_{ab}} 
+    # \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset.
     # 

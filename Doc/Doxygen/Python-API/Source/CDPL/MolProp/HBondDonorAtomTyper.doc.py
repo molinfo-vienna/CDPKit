@@ -30,7 +30,7 @@ class HBondDonorAtomTyper(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c HBondDonorAtomTyper instance \a typer.
+    # \brief Contructs a copy of the \c HBondDonorAtomTyper instance \a typer.
     # \param typer The \c HBondDonorAtomTyper instance to copy.
     # 
     def __init__(typer: HBondDonorAtomTyper) -> None: pass
@@ -56,7 +56,7 @@ class HBondDonorAtomTyper(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c HBondDonorAtomTyper instance \a typer.
+    # \brief Replaces the current state with a copy of the state of the \c HBondDonorAtomTyper instance \a typer.
     # \param typer The \c HBondDonorAtomTyper instance to copy.
     # \return \a self
     # 

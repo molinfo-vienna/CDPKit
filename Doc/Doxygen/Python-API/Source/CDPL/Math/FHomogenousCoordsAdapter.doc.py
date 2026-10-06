@@ -25,13 +25,13 @@
 class FHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FHomogenousCoordsAdapter instance \a a.
+    # \brief Contructs a copy of the \c FHomogenousCoordsAdapter instance \a a.
     # \param a The \c FHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: FHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c FHomogenousCoordsAdapter instance.
+    # \brief Contructs the \c FHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: FVectorExpression) -> None: pass
@@ -49,42 +49,42 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
     # \param e The \c ConstFVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
     # \param e The \c ConstDVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
     # \param e The \c ConstLVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
     # \param e The \c ConstULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FHomogenousCoordsAdapter instance \a r.
+    # \brief Replaces the current state with a copy of the state of the \c FHomogenousCoordsAdapter instance \a r.
     # \param r The \c FHomogenousCoordsAdapter instance to copy.
     # \return \a self
     # 
     def assign(r: FHomogenousCoordsAdapter) -> FHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

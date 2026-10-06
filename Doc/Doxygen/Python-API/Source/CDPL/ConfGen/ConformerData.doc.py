@@ -32,7 +32,7 @@ class ConformerData(Math.Vector3DArray):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ConformerData instance \a data.
+    # \brief Contructs a copy of the \c ConformerData instance \a data.
     # \param data The \c ConformerData instance to copy.
     # 
     def __init__(data: ConformerData) -> None: pass
@@ -53,14 +53,14 @@ class ConformerData(Math.Vector3DArray):
     def swap(data: ConformerData) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConformerData instance \a data.
+    # \brief Replaces the current state with a copy of the state of the \c ConformerData instance \a data.
     # \param data The \c ConformerData instance to copy.
     # \return \a self
     # 
     def assign(data: ConformerData) -> ConformerData: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Vector3DArray instance \a coords.
+    # \brief Replaces the current state with a copy of the state of the \c Vector3DArray instance \a coords.
     # \param coords The \c Vector3DArray instance to copy.
     # \return \a self
     # 

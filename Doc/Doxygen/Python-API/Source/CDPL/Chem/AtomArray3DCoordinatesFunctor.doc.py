@@ -25,7 +25,7 @@
 class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c AtomArray3DCoordinatesFunctor instance \a func.
+    # \brief Contructs a copy of the \c AtomArray3DCoordinatesFunctor instance \a func.
     # \param func The \c AtomArray3DCoordinatesFunctor instance to copy.
     # 
     def __init__(func: AtomArray3DCoordinatesFunctor) -> None: pass
@@ -51,7 +51,7 @@ class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c AtomArray3DCoordinatesFunctor instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c AtomArray3DCoordinatesFunctor instance \a func.
     # \param func The \c AtomArray3DCoordinatesFunctor instance to copy.
     # \return \a self
     # 

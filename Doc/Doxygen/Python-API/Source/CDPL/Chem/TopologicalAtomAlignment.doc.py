@@ -25,12 +25,12 @@
 class TopologicalAtomAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c TopologicalAtomAlignment instance.
+    # \brief Contructs the \c TopologicalAtomAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TopologicalAtomAlignment instance \a alignment.
+    # \brief Contructs a copy of the \c TopologicalAtomAlignment instance \a alignment.
     # \param alignment The \c TopologicalAtomAlignment instance to copy.
     # 
     def __init__(alignment: TopologicalAtomAlignment) -> None: pass
@@ -70,7 +70,7 @@ class TopologicalAtomAlignment(Boost.Python.instance):
     def nextAlignment(mapping: Util.STPairArray) -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TopologicalAtomAlignment instance \a alignment.
+    # \brief Replaces the current state with a copy of the state of the \c TopologicalAtomAlignment instance \a alignment.
     # \param alignment The \c TopologicalAtomAlignment instance to copy.
     # \return \a self
     # 

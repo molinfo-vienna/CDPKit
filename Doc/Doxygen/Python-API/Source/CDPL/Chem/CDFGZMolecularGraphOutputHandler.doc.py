@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the output of gzip-compressed molecular graph data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the output of gzip-compressed molecular graph data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \c CDFGZMolecularGraphOutputHandler instance.
+    # \brief Contructs the \c CDFGZMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

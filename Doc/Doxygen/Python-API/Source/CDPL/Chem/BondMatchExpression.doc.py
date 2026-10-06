@@ -27,7 +27,7 @@
 class BondMatchExpression(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c BondMatchExpression instance.
+    # \brief Contructs the \c BondMatchExpression instance.
     # 
     def __init__() -> None: pass
 

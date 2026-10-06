@@ -27,7 +27,7 @@
 class MMFF94BondStretchingInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c MMFF94BondStretchingInteraction instance \a iactn.
+    # \brief Contructs a copy of the \c MMFF94BondStretchingInteraction instance \a iactn.
     # \param iactn The \c MMFF94BondStretchingInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94BondStretchingInteraction) -> None: pass
@@ -86,7 +86,7 @@ class MMFF94BondStretchingInteraction(Boost.Python.instance):
     def setReferenceLength(length: float) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94BondStretchingInteraction instance \a iactn.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94BondStretchingInteraction instance \a iactn.
     # \param iactn The \c MMFF94BondStretchingInteraction instance to copy.
     # \return \a self
     # 

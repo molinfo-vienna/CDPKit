@@ -39,7 +39,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Entry instance \a entry.
+        # \brief Contructs a copy of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -68,7 +68,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Entry instance \a entry.
+        # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # \return \a self
         # 
@@ -131,7 +131,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94DefaultStretchBendParameterTable instance \a table.
+    # \brief Contructs a copy of the \c MMFF94DefaultStretchBendParameterTable instance \a table.
     # \param table The \c MMFF94DefaultStretchBendParameterTable instance to copy.
     # 
     def __init__(table: MMFF94DefaultStretchBendParameterTable) -> None: pass
@@ -171,7 +171,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def removeEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int) -> bool: pass
 
     ##
-    # \brief Returns a reference to the entry matching the specified query values.
+    # \brief Returns the entry matching the specified query values.
     # 
     # \param term_atom1_pte_row The PTE row of the first terminal atom.
     # \param ctr_atom_pte_row The PTE row of the center atom.
@@ -208,7 +208,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94DefaultStretchBendParameterTable instance \a table.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94DefaultStretchBendParameterTable instance \a table.
     # \param table The \c MMFF94DefaultStretchBendParameterTable instance to copy.
     # \return \a self
     # 

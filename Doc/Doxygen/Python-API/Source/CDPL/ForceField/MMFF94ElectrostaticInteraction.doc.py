@@ -27,7 +27,7 @@
 class MMFF94ElectrostaticInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c MMFF94ElectrostaticInteraction instance \a iactn.
+    # \brief Contructs a copy of the \c MMFF94ElectrostaticInteraction instance \a iactn.
     # \param iactn The \c MMFF94ElectrostaticInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94ElectrostaticInteraction) -> None: pass
@@ -95,7 +95,7 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
     def getDistanceExponent() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94ElectrostaticInteraction instance \a iactn.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94ElectrostaticInteraction instance \a iactn.
     # \param iactn The \c MMFF94ElectrostaticInteraction instance to copy.
     # \return \a self
     # 

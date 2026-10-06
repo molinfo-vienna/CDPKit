@@ -25,12 +25,12 @@
 class SpatialAtomAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c SpatialAtomAlignment instance.
+    # \brief Contructs the \c SpatialAtomAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c SpatialAtomAlignment instance \a alignment.
+    # \brief Contructs a copy of the \c SpatialAtomAlignment instance \a alignment.
     # \param alignment The \c SpatialAtomAlignment instance to copy.
     # 
     def __init__(alignment: SpatialAtomAlignment) -> None: pass
@@ -92,7 +92,7 @@ class SpatialAtomAlignment(Boost.Python.instance):
     def getTransform() -> Math.Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c SpatialAtomAlignment instance \a alignment.
+    # \brief Replaces the current state with a copy of the state of the \c SpatialAtomAlignment instance \a alignment.
     # \param alignment The \c SpatialAtomAlignment instance to copy.
     # \return \a self
     # 

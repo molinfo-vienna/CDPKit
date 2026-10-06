@@ -39,7 +39,7 @@ class RightFrustumMesh3D(TriangleMesh3D):
     def __init__(radius1: float, radius2: float, height: float, num_sides: int, close_btm: bool = True, close_top: bool = True) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c RightFrustumMesh3D instance \a mesh.
+    # \brief Contructs a copy of the \c RightFrustumMesh3D instance \a mesh.
     # \param mesh The \c RightFrustumMesh3D instance to copy.
     # 
     def __init__(mesh: RightFrustumMesh3D) -> None: pass

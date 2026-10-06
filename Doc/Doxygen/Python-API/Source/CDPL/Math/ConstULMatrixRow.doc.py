@@ -25,13 +25,13 @@
 class ConstULMatrixRow(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstULMatrixRow instance \a r.
+    # \brief Contructs a copy of the \c ConstULMatrixRow instance \a r.
     # \param r The \c ConstULMatrixRow instance to copy.
     # 
     def __init__(r: ConstULMatrixRow) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstULMatrixRow instance.
+    # \brief Contructs the \c ConstULMatrixRow instance.
     # \param e 
     # \param i 
     # 
@@ -75,7 +75,7 @@ class ConstULMatrixRow(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
@@ -110,7 +110,7 @@ class ConstULMatrixRow(Boost.Python.instance):
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at column <em>i</em> of the row.
+    # \brief Returns the element at column <em>i</em> of the row.
     # 
     # \param i The zero-based column index.
     # 
@@ -119,7 +119,7 @@ class ConstULMatrixRow(Boost.Python.instance):
     def __call__(i: int) -> int: pass
 
     ##
-    # \brief Returns a reference to the element at column <em>i</em> of the row.
+    # \brief Returns the element at column <em>i</em> of the row.
     # 
     # \param i The zero-based column index.
     # 

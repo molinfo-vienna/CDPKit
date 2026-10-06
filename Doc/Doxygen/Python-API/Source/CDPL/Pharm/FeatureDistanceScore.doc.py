@@ -25,7 +25,7 @@
 class FeatureDistanceScore(FeatureInteractionScore):
 
     ##
-    # \brief Initializes a copy of the \c FeatureDistanceScore instance \a score.
+    # \brief Contructs a copy of the \c FeatureDistanceScore instance \a score.
     # \param score The \c FeatureDistanceScore instance to copy.
     # 
     def __init__(score: FeatureDistanceScore) -> None: pass
@@ -60,7 +60,7 @@ class FeatureDistanceScore(FeatureInteractionScore):
     def getMaxDistance() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FeatureDistanceScore instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c FeatureDistanceScore instance \a func.
     # \param func The \c FeatureDistanceScore instance to copy.
     # \return \a self
     # 

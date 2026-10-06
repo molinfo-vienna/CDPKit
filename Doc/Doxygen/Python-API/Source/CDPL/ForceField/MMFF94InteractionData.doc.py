@@ -29,12 +29,12 @@
 class MMFF94InteractionData(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c MMFF94InteractionData instance.
+    # \brief Contructs the \c MMFF94InteractionData instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94InteractionData instance \a ia_data.
+    # \brief Contructs a copy of the \c MMFF94InteractionData instance \a ia_data.
     # \param ia_data The \c MMFF94InteractionData instance to copy.
     # 
     def __init__(ia_data: MMFF94InteractionData) -> None: pass
@@ -94,7 +94,7 @@ class MMFF94InteractionData(Boost.Python.instance):
     def getVanDerWaalsInteractions() -> MMFF94VanDerWaalsInteractionList: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94InteractionData instance \a ia_data.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94InteractionData instance \a ia_data.
     # \param ia_data The \c MMFF94InteractionData instance to copy.
     # \return \a self
     # 

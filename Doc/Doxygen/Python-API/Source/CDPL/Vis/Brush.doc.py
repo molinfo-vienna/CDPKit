@@ -42,37 +42,37 @@ class Brush(Boost.Python.instance):
         SOLID_PATTERN = 1
 
         ##
-        # \brief Specifies a pattern with <em>6.25%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>6.25%</em> uniformly distributed transparent pixels.
         # 
         DENSE1_PATTERN = 2
 
         ##
-        # \brief Specifies a pattern with <em>12.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>12.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE2_PATTERN = 3
 
         ##
-        # \brief Specifies a pattern with <em>37.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>37.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE3_PATTERN = 4
 
         ##
-        # \brief Specifies a pattern with <em>50.0%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>50.0%</em> uniformly distributed transparent pixels.
         # 
         DENSE4_PATTERN = 5
 
         ##
-        # \brief Specifies a pattern with <em>62.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>62.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE5_PATTERN = 6
 
         ##
-        # \brief Specifies a pattern with <em>87.5%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>87.5%</em> uniformly distributed transparent pixels.
         # 
         DENSE6_PATTERN = 7
 
         ##
-        # \brief Specifies a pattern with <em>93.75%</em> uniformly distributed transparent pixels. <br>
+        # \brief Specifies a pattern with <em>93.75%</em> uniformly distributed transparent pixels.
         # 
         DENSE7_PATTERN = 8
 
@@ -112,7 +112,7 @@ class Brush(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Brush instance \a brush.
+    # \brief Contructs a copy of the \c Brush instance \a brush.
     # \param brush The \c Brush instance to copy.
     # 
     def __init__(brush: Brush) -> None: pass
@@ -145,7 +145,7 @@ class Brush(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Brush instance \a brush.
+    # \brief Replaces the current state with a copy of the state of the \c Brush instance \a brush.
     # \param brush The \c Brush instance to copy.
     # \return \a self
     # 

@@ -32,7 +32,7 @@ class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(chgd_groups_only: bool) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c NegIonizableFeatureGenerator instance \a gen.
+    # \brief Contructs a copy of the \c NegIonizableFeatureGenerator instance \a gen.
     # \param gen The \c NegIonizableFeatureGenerator instance to copy.
     # 
     def __init__(gen: NegIonizableFeatureGenerator) -> None: pass
@@ -47,7 +47,7 @@ class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, chgd_groups_only: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c NegIonizableFeatureGenerator instance \a gen.
+    # \brief Replaces the current state with a copy of the state of the \c NegIonizableFeatureGenerator instance \a gen.
     # \param gen The \c NegIonizableFeatureGenerator instance to copy.
     # \return \a self
     # 

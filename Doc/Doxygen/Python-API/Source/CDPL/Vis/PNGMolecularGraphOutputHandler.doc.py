@@ -25,6 +25,6 @@
 class PNGMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \c PNGMolecularGraphOutputHandler instance.
+    # \brief Contructs the \c PNGMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

@@ -27,7 +27,7 @@
 class MMFF94TorsionInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c MMFF94TorsionInteraction instance \a iactn.
+    # \brief Contructs a copy of the \c MMFF94TorsionInteraction instance \a iactn.
     # \param iactn The \c MMFF94TorsionInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94TorsionInteraction) -> None: pass
@@ -131,7 +131,7 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
     def getTorsionParameter3() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94TorsionInteraction instance \a iactn.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94TorsionInteraction instance \a iactn.
     # \param iactn The \c MMFF94TorsionInteraction instance to copy.
     # \return \a self
     # 

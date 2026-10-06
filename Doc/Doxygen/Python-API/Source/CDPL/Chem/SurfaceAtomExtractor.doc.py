@@ -52,7 +52,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c SurfaceAtomExtractor instance \a extractor.
+    # \brief Contructs a copy of the \c SurfaceAtomExtractor instance \a extractor.
     # \param extractor The \c SurfaceAtomExtractor instance to copy.
     # 
     def __init__(extractor: SurfaceAtomExtractor) -> None: pass
@@ -175,7 +175,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def extract(cntr: AtomContainer, parent_molgraph: MolecularGraph, frag: Fragment) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c SurfaceAtomExtractor instance \a extractor.
+    # \brief Replaces the current state with a copy of the state of the \c SurfaceAtomExtractor instance \a extractor.
     # \param extractor The \c SurfaceAtomExtractor instance to copy.
     # \return \a self
     # 

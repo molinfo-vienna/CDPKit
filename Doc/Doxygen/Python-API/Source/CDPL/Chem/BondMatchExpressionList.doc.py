@@ -32,7 +32,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c BondMatchExpressionList instance \a expr.
+    # \brief Contructs a copy of the \c BondMatchExpressionList instance \a expr.
     # \param expr The \c BondMatchExpressionList instance to copy.
     # 
     def __init__(expr: BondMatchExpressionList) -> None: pass
@@ -97,7 +97,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c BondMatchExpressionList instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c BondMatchExpressionList instance \a array.
     # \param array The \c BondMatchExpressionList instance to copy.
     # \return \a self
     # 
@@ -164,7 +164,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the first element of the list.
+    # \brief Returns the first element of the list.
     # 
     # \return A reference to the first element. 
     # 
@@ -173,7 +173,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def getFirstElement() -> BondMatchExpression: pass
 
     ##
-    # \brief Returns a reference to the last element of the list.
+    # \brief Returns the last element of the list.
     # 
     # \return A reference to the last element. 
     # 
@@ -182,7 +182,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def getLastElement() -> BondMatchExpression: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>idx</em>.
+    # \brief Returns the element at index <em>idx</em>.
     # 
     # The method is equivalent to __getitem__(std::size_t).
     # 
@@ -207,7 +207,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def __delitem__(idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>idx</em>.
+    # \brief Returns the element at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the element.
     # 

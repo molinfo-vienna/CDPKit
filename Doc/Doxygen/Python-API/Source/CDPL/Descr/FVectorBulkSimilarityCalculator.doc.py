@@ -25,18 +25,18 @@
 class FVectorBulkSimilarityCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FVectorBulkSimilarityCalculator instance.
+    # \brief Contructs the \c FVectorBulkSimilarityCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FVectorBulkSimilarityCalculator instance \a calc.
+    # \brief Contructs a copy of the \c FVectorBulkSimilarityCalculator instance \a calc.
     # \param calc The \c FVectorBulkSimilarityCalculator instance to copy.
     # 
     def __init__(calc: FVectorBulkSimilarityCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c FVectorBulkSimilarityCalculator instance.
+    # \brief Contructs the \c FVectorBulkSimilarityCalculator instance.
     # \param sim_func 
     # 
     def __init__(sim_func: DoubleFVector2Functor) -> None: pass
@@ -54,7 +54,7 @@ class FVectorBulkSimilarityCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FVectorBulkSimilarityCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c FVectorBulkSimilarityCalculator instance \a calc.
     # \param calc The \c FVectorBulkSimilarityCalculator instance to copy.
     # \return \a self
     # 

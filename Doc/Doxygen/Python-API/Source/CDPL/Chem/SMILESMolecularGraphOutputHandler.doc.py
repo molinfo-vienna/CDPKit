@@ -25,6 +25,6 @@
 class SMILESMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \c SMILESMolecularGraphOutputHandler instance.
+    # \brief Contructs the \c SMILESMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

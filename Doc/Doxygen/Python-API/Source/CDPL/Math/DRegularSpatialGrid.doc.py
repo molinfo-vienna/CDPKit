@@ -25,7 +25,7 @@
 class DRegularSpatialGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c DRegularSpatialGrid instance \a grid.
+    # \brief Contructs a copy of the \c DRegularSpatialGrid instance \a grid.
     # \param grid The \c DRegularSpatialGrid instance to copy.
     # 
     def __init__(grid: DRegularSpatialGrid) -> None: pass
@@ -516,7 +516,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def assign(e: object) -> DRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DRegularSpatialGrid instance \a g.
+    # \brief Replaces the current state with a copy of the state of the \c DRegularSpatialGrid instance \a g.
     # \param g The \c DRegularSpatialGrid instance to copy.
     # \return \a self
     # 
@@ -570,7 +570,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the value of cell at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # \brief Returns the value of cell at (<em>i</em>, <em>j</em>, <em>k</em>).
     # 
     # \param i The zero-based cell index along the x-axis.
     # \param j The zero-based cell index along the y-axis.
@@ -581,7 +581,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the value of the cell at the linear index <em>i</em>.
+    # \brief Returns the value of the cell at the linear index <em>i</em>.
     # 
     # \param i The zero-based linear cell index.
     # 

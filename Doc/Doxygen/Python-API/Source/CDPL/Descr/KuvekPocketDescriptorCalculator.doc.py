@@ -51,7 +51,7 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     def __init__(sphere_radius: float = 20.0, num_test_vecs: int = 492, max_atom_to_sphr_surf_dist: float = 2.0) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c KuvekPocketDescriptorCalculator instance \a calc.
+    # \brief Contructs a copy of the \c KuvekPocketDescriptorCalculator instance \a calc.
     # \param calc The \c KuvekPocketDescriptorCalculator instance to copy.
     # 
     def __init__(calc: KuvekPocketDescriptorCalculator) -> None: pass
@@ -69,7 +69,7 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c KuvekPocketDescriptorCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c KuvekPocketDescriptorCalculator instance \a calc.
     # \param calc The \c KuvekPocketDescriptorCalculator instance to copy.
     # \return \a self
     # 

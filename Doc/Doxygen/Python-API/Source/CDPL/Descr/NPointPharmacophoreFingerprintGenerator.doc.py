@@ -51,7 +51,7 @@ class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c NPointPharmacophoreFingerprintGenerator instance \a gen.
+    # \brief Replaces the current state with a copy of the state of the \c NPointPharmacophoreFingerprintGenerator instance \a gen.
     # \param gen The \c NPointPharmacophoreFingerprintGenerator instance to copy.
     # \return \a self
     # 

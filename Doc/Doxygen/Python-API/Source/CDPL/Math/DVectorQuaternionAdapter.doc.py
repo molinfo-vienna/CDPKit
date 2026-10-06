@@ -25,13 +25,13 @@
 class DVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c DVectorQuaternionAdapter instance \a a.
+    # \brief Contructs a copy of the \c DVectorQuaternionAdapter instance \a a.
     # \param a The \c DVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: DVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c DVectorQuaternionAdapter instance.
+    # \brief Contructs the \c DVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: DVectorExpression) -> None: pass
@@ -149,7 +149,7 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def set(c1: float = 0.0, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 

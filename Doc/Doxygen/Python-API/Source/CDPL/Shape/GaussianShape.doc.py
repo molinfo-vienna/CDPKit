@@ -30,7 +30,7 @@ class GaussianShape(Base.PropertyContainer):
     class Element(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \c Element instance \a elem.
+        # \brief Contructs a copy of the \c Element instance \a elem.
         # \param elem The \c Element instance to copy.
         # 
         def __init__(elem: Element) -> None: pass
@@ -48,7 +48,7 @@ class GaussianShape(Base.PropertyContainer):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Element instance \a elem.
+        # \brief Replaces the current state with a copy of the state of the \c Element instance \a elem.
         # \param elem The \c Element instance to copy.
         # \return \a self
         # 
@@ -121,18 +121,18 @@ class GaussianShape(Base.PropertyContainer):
         position = property(getPosition, setPosition)
 
     ##
-    # \brief Initializes the \c GaussianShape instance.
+    # \brief Contructs the \c GaussianShape instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c GaussianShape instance \a shape.
+    # \brief Contructs a copy of the \c GaussianShape instance \a shape.
     # \param shape The \c GaussianShape instance to copy.
     # 
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c GaussianShape instance \a shape.
+    # \brief Replaces the current state with a copy of the state of the \c GaussianShape instance \a shape.
     # \param shape The \c GaussianShape instance to copy.
     # \return \a self
     # 
@@ -177,7 +177,7 @@ class GaussianShape(Base.PropertyContainer):
     def removeElement(idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>idx</em>.
+    # \brief Returns the element at index <em>idx</em>.
     # 
     # \param idx The index of the element.
     # 

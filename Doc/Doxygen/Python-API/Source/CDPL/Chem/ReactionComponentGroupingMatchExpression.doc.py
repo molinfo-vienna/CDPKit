@@ -27,7 +27,7 @@
 class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
 
     ##
-    # \brief Initializes a copy of the \c ReactionComponentGroupingMatchExpression instance \a expr.
+    # \brief Contructs a copy of the \c ReactionComponentGroupingMatchExpression instance \a expr.
     # \param expr The \c ReactionComponentGroupingMatchExpression instance to copy.
     # 
     def __init__(expr: ReactionComponentGroupingMatchExpression) -> None: pass
@@ -40,7 +40,7 @@ class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
     def __init__(comp_grouping: FragmentList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ReactionComponentGroupingMatchExpression instance \a expr.
+    # \brief Replaces the current state with a copy of the state of the \c ReactionComponentGroupingMatchExpression instance \a expr.
     # \param expr The \c ReactionComponentGroupingMatchExpression instance to copy.
     # \return \a self
     # 

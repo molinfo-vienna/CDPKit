@@ -27,12 +27,12 @@
 class GaussianShapeSet(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c GaussianShapeSet instance.
+    # \brief Contructs the \c GaussianShapeSet instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c GaussianShapeSet instance \a list.
+    # \brief Contructs a copy of the \c GaussianShapeSet instance \a list.
     # \param list The \c GaussianShapeSet instance to copy.
     # 
     def __init__(list: GaussianShapeSet) -> None: pass
@@ -62,7 +62,7 @@ class GaussianShapeSet(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c GaussianShapeSet instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c GaussianShapeSet instance \a array.
     # \param array The \c GaussianShapeSet instance to copy.
     # \return \a self
     # 

@@ -30,13 +30,13 @@ class Vector3FArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Vector3FArray instance \a array.
+    # \brief Contructs a copy of the \c Vector3FArray instance \a array.
     # \param array The \c Vector3FArray instance to copy.
     # 
     def __init__(array: Vector3FArray) -> None: pass
 
     ##
-    # \brief Initializes the \c Vector3FArray instance.
+    # \brief Contructs the \c Vector3FArray instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -101,7 +101,7 @@ class Vector3FArray(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Vector3FArray instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c Vector3FArray instance \a array.
     # \param array The \c Vector3FArray instance to copy.
     # \return \a self
     # 
@@ -118,7 +118,7 @@ class Vector3FArray(Boost.Python.instance):
     def assign(num_elem: int, value: Vector3F) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -175,7 +175,7 @@ class Vector3FArray(Boost.Python.instance):
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the first element of the array.
+    # \brief Returns the first element of the array.
     # 
     # \return A reference to the first element. 
     # 
@@ -184,7 +184,7 @@ class Vector3FArray(Boost.Python.instance):
     def getFirstElement() -> Vector3F: pass
 
     ##
-    # \brief Returns a reference to the last element of the array.
+    # \brief Returns the last element of the array.
     # 
     # \return A reference to the last element. 
     # 
@@ -193,7 +193,7 @@ class Vector3FArray(Boost.Python.instance):
     def getLastElement() -> Vector3F: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>idx</em>.
+    # \brief Returns the element at index <em>idx</em>.
     # 
     # The method is equivalent to __getitem__(std::size_t).
     # 
@@ -220,7 +220,7 @@ class Vector3FArray(Boost.Python.instance):
     def __delitem__(idx: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>idx</em>.
+    # \brief Returns the element at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the element.
     # 

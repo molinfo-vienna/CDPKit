@@ -27,12 +27,12 @@
 class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
 
     ##
-    # \brief Initializes the \c FeatureContainer instance.
+    # \brief Contructs the \c FeatureContainer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the feature at index <em>idx</em>.
+    # \brief Returns the feature at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the feature to return.
     # 
@@ -77,7 +77,7 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def orderFeatures(func: BoolFeature2Functor) -> None: pass
 
     ##
-    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # \brief Returns the entity at index <em>idx</em>.
     # 
     # Forwards to getFeature() and exists to satisfy the Chem.Entity3DContainer interface.
     # 

@@ -25,13 +25,13 @@
 class ConstLMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstLMatrixColumn instance \a c.
+    # \brief Contructs a copy of the \c ConstLMatrixColumn instance \a c.
     # \param c The \c ConstLMatrixColumn instance to copy.
     # 
     def __init__(c: ConstLMatrixColumn) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstLMatrixColumn instance.
+    # \brief Contructs the \c ConstLMatrixColumn instance.
     # \param e 
     # \param i 
     # 
@@ -75,7 +75,7 @@ class ConstLMatrixColumn(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
@@ -110,7 +110,7 @@ class ConstLMatrixColumn(Boost.Python.instance):
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # \brief Returns the element at row <em>i</em> of the column.
     # 
     # \param i The zero-based row index.
     # 
@@ -119,7 +119,7 @@ class ConstLMatrixColumn(Boost.Python.instance):
     def __call__(i: int) -> int: pass
 
     ##
-    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # \brief Returns the element at row <em>i</em> of the column.
     # 
     # \param i The zero-based row index.
     # 

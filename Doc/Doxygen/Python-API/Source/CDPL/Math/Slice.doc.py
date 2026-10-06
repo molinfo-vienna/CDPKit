@@ -32,7 +32,7 @@ class Slice(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Slice instance \a s.
+    # \brief Contructs a copy of the \c Slice instance \a s.
     # \param s The \c Slice instance to copy.
     # 
     def __init__(s: Slice) -> None: pass
@@ -79,7 +79,7 @@ class Slice(Boost.Python.instance):
     def getIndex(i: int) -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Slice instance \a s.
+    # \brief Replaces the current state with a copy of the state of the \c Slice instance \a s.
     # \param s The \c Slice instance to copy.
     # \return \a self
     # 

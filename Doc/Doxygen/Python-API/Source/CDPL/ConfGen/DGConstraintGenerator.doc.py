@@ -32,14 +32,14 @@ class DGConstraintGenerator(Boost.Python.instance):
     class StereoCenterData(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c StereoCenterData instance.
+        # \brief Contructs the \c StereoCenterData instance.
         # \param ctr_idx 
         # \param descr 
         # 
         def __init__(ctr_idx: int, descr: Chem.StereoDescriptor) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c StereoCenterData instance \a data.
+        # \brief Contructs a copy of the \c StereoCenterData instance \a data.
         # \param data The \c StereoCenterData instance to copy.
         # 
         def __init__(data: StereoCenterData) -> None: pass
@@ -72,7 +72,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DGConstraintGenerator instance \a gen.
+    # \brief Contructs a copy of the \c DGConstraintGenerator instance \a gen.
     # \param gen The \c DGConstraintGenerator instance to copy.
     # 
     def __init__(gen: DGConstraintGenerator) -> None: pass
@@ -90,7 +90,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DGConstraintGenerator instance \a gen.
+    # \brief Replaces the current state with a copy of the state of the \c DGConstraintGenerator instance \a gen.
     # \param gen The \c DGConstraintGenerator instance to copy.
     # \return \a self
     # 
@@ -211,7 +211,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     def addBondConfigurationConstraints(coords_gen: Util.DG3DCoordinatesGenerator) -> None: pass
 
     ##
-    # \brief Returns a reference to the constraint-generation settings.
+    # \brief Returns the constraint-generation settings.
     # 
     # \return A reference to the settings.
     # 

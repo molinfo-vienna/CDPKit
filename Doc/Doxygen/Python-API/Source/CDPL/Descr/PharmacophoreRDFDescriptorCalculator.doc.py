@@ -40,7 +40,7 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c PharmacophoreRDFDescriptorCalculator instance \a calc.
+    # \brief Contructs a copy of the \c PharmacophoreRDFDescriptorCalculator instance \a calc.
     # \param calc The \c PharmacophoreRDFDescriptorCalculator instance to copy.
     # 
     def __init__(calc: PharmacophoreRDFDescriptorCalculator) -> None: pass
@@ -66,7 +66,7 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c PharmacophoreRDFDescriptorCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c PharmacophoreRDFDescriptorCalculator instance \a calc.
     # \param calc The \c PharmacophoreRDFDescriptorCalculator instance to copy.
     # \return \a self
     # 

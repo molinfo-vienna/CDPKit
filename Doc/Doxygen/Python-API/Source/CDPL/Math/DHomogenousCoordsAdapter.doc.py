@@ -25,13 +25,13 @@
 class DHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c DHomogenousCoordsAdapter instance \a a.
+    # \brief Contructs a copy of the \c DHomogenousCoordsAdapter instance \a a.
     # \param a The \c DHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: DHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c DHomogenousCoordsAdapter instance.
+    # \brief Contructs the \c DHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: DVectorExpression) -> None: pass
@@ -49,42 +49,42 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
     # \param e The \c ConstFVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> DHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
     # \param e The \c ConstDVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> DHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
     # \param e The \c ConstLVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> DHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULVectorExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
     # \param e The \c ConstULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> DHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DHomogenousCoordsAdapter instance \a r.
+    # \brief Replaces the current state with a copy of the state of the \c DHomogenousCoordsAdapter instance \a r.
     # \param r The \c DHomogenousCoordsAdapter instance to copy.
     # \return \a self
     # 
     def assign(r: DHomogenousCoordsAdapter) -> DHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

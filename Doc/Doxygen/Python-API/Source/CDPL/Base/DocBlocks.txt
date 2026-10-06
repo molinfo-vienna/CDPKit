@@ -9,7 +9,7 @@ $$$$
 #-----
 
 .OStream^
-\brief Wrapper for C++ \c std::ostream instances
+\brief Wrapper for C++ \c std::ostream instances.
 $$$$
 
 .OStream.STD_OUT^
@@ -29,7 +29,7 @@ $$$$
 #-----
 
 .IOStream.OpenMode^
-\brief Provides as set of stream opening mode flags that mirror those defined in C++ class \c std::ios_base.
+\brief Provides as set of stream open mode flags that mirror those defined in C++ class \c std::ios_base.
 $$$$
 
 .IOStream.OpenMode.IN
@@ -65,14 +65,7 @@ $$$$
 FileIOStream.__init__(file_name,mode)
 \brief Constructs the \c FileIOStream instance and opens the specified file in the given mode.
 \param file_name The path to the file to open.
-\param mode A combination of file opening mode flags (see IOStream.OpenMode) or a Python-style opening mode string (e.g. 'r+').
-$$$$
-
-FileIOStream.close()
-\brief Closes the file.
-
-A closed file cannot be read or written any more. %Any operation which requires that the file be open will raise a
-Base.ValueError after the file has been closed. Calling close() more than once is allowed.
+\param mode A combination of file open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
 $$$$
 
 FileIOStream.getFileName()
@@ -89,7 +82,7 @@ $$$$
 StringIOStream.__init__(string,mode)
 \brief Constructs the \c StringIOStream instance with the given string as initial content.
 \param string The string to use as initial content of the string stream.
-\param mode A combination of opening mode flags (see IOStream.OpenMode) or a Python-style opening mode string (e.g. 'r+').
+\param mode A combination of open mode flags (see IOStream.OpenMode) or a Python-style open mode string (e.g. 'r+').
 $$$$
 
 StringIOStream.isatty()
@@ -199,18 +192,26 @@ when the stream is open for reading (when the stream has been opened for writing
 \return A string holding the read line.
 $$$$
 
+IOStream.close()
+\brief Closes the stream.
+
+A closed stream cannot be read from or written to anymore. %Any operation which requires the stream to be open will raise a
+Base.ValueError after the stream has been closed. Calling close() more than once is allowed.
+$$$$
+
 IOStream.isClosed()
-bool indicating the current state of the file object. This is a read-only attribute; the close() method changes the value. It may not be available on all file-like objects.
+\brief Tells whether the stream has been closed.
+\see close()
 $$$$
 
 IOStream.getOpenModeString()
-\brief Returns the opening mode string that was provided as argument to the constructor.
-\return The opening mode string (e.g. 'r+') that was provided as argument to the constructor.
+\brief Returns the open mode string that was provided as argument to the constructor.
+\return The open mode string (e.g. 'r+') that was provided as argument to the constructor.
 $$$$
 
 IOStream.getOpenModeFlags()
-\brief Returns the opening mode flags that were provided as argument to the constructor.
-\return The opening mode flags that were provided as argument to the constructor (see IOStream.OpenMode).
+\brief Returns the open mode flags that were provided as argument to the constructor.
+\return The open mode flags that were provided as argument to the constructor (see IOStream.OpenMode).
 $$$$
 
 IOStream.flush()

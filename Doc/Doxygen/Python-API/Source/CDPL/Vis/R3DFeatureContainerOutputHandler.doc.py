@@ -27,6 +27,6 @@
 class R3DFeatureContainerOutputHandler(Pharm.FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \c R3DFeatureContainerOutputHandler instance.
+    # \brief Contructs the \c R3DFeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

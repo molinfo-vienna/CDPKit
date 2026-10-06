@@ -126,7 +126,7 @@ def loadDocBlocks(file_name):
         DOC_BLOCKS.append(entry)
         
 def parseStringReplacement(line):
-    str_rpl = line.split('%')
+    str_rpl = line.split('§')
 
     for i in range(2):
         str_rpl[i] = str_rpl[i].strip().replace('\\n', '\n')
@@ -180,7 +180,7 @@ def loadCPPAPIDocMergeInfo(file_name):
                 if len(line.strip()) == 0:
                     break
 
-                entry = line.split('%')
+                entry = line.split('§')
 
                 entry[0] = entry[0].strip()
                 entry[1] = entry[1].strip()
@@ -191,7 +191,7 @@ def loadCPPAPIDocMergeInfo(file_name):
             key_repl_read = False
             continue
         
-        entry = line.split('%')
+        entry = line.split('§')
 
         entry[0] = entry[0].strip()
         entry[1] = entry[1].strip()

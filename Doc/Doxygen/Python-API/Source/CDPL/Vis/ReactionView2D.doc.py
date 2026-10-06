@@ -238,7 +238,7 @@
 class ReactionView2D(View2D):
 
     ##
-    # \brief Initializes the \c ReactionView2D instance.
+    # \brief Contructs the \c ReactionView2D instance.
     # 
     def __init__() -> None: pass
 
@@ -259,14 +259,14 @@ class ReactionView2D(View2D):
     def setReaction(rxn: Chem.Reaction) -> None: pass
 
     ##
-    # \brief Returns a reference to the visualized chemical reaction.
+    # \brief Returns the visualized chemical reaction.
     # 
     # \return A reference to the visualized Chem.Reaction object, or <tt>None</tt> if none was specified.
     # 
     def getReaction() -> Chem.Reaction: pass
 
     ##
-    # \brief Returns a reference to the Vis.FontMetrics instance used for measuring the dimension of text labels.
+    # \brief Returns the Vis.FontMetrics instance used for measuring the dimension of text labels.
     # 
     # \return A reference to the used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 

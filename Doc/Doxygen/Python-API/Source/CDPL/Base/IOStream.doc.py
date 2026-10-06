@@ -25,7 +25,7 @@
 class IOStream(IStream, OStream):
 
     ##
-    # \brief Provides as set of stream opening mode flags that mirror those defined in C++ class \c std::ios_base.
+    # \brief Provides as set of stream open mode flags that mirror those defined in C++ class \c std::ios_base.
     # 
     class OpenMode(Boost.Python.enum):
 

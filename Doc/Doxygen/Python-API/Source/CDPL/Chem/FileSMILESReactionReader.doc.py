@@ -25,7 +25,7 @@
 class FileSMILESReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \c FileSMILESReactionReader instance.
+    # \brief Contructs the \c FileSMILESReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

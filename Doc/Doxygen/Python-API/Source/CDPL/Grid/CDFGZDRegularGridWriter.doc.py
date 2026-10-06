@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Writer for gzip-compressed regular spatial grid data in the native I/O format of the <em>CDPL</em>.
+# \brief Writer for gzip-compressed regular spatial grid data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZDRegularGridWriter(DRegularGridWriterBase):
 
     ##
-    # \brief Initializes the \c CDFGZDRegularGridWriter instance.
+    # \brief Contructs the \c CDFGZDRegularGridWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

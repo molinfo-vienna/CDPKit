@@ -25,13 +25,13 @@
 class ConstDHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstDHomogenousCoordsAdapter instance \a a.
+    # \brief Contructs a copy of the \c ConstDHomogenousCoordsAdapter instance \a a.
     # \param a The \c ConstDHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: ConstDHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstDHomogenousCoordsAdapter instance.
+    # \brief Contructs the \c ConstDHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass

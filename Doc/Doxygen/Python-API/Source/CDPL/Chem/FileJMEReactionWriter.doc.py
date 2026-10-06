@@ -25,7 +25,7 @@
 class FileJMEReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \c FileJMEReactionWriter instance.
+    # \brief Contructs the \c FileJMEReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

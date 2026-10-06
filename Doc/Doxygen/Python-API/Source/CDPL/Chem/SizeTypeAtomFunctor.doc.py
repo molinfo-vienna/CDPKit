@@ -25,18 +25,18 @@
 class SizeTypeAtomFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c SizeTypeAtomFunctor instance.
+    # \brief Contructs the \c SizeTypeAtomFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c SizeTypeAtomFunctor instance \a func.
+    # \brief Contructs a copy of the \c SizeTypeAtomFunctor instance \a func.
     # \param func The \c SizeTypeAtomFunctor instance to copy.
     # 
     def __init__(func: SizeTypeAtomFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c SizeTypeAtomFunctor instance for the specified callable object.
+    # \brief Contructs the \c SizeTypeAtomFunctor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

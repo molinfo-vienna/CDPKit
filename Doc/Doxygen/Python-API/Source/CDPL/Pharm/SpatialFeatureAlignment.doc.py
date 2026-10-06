@@ -25,12 +25,12 @@
 class SpatialFeatureAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c SpatialFeatureAlignment instance.
+    # \brief Contructs the \c SpatialFeatureAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c SpatialFeatureAlignment instance \a alignment.
+    # \brief Contructs a copy of the \c SpatialFeatureAlignment instance \a alignment.
     # \param alignment The \c SpatialFeatureAlignment instance to copy.
     # 
     def __init__(alignment: SpatialFeatureAlignment) -> None: pass
@@ -92,7 +92,7 @@ class SpatialFeatureAlignment(Boost.Python.instance):
     def getTransform() -> Math.Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c SpatialFeatureAlignment instance \a alignment.
+    # \brief Replaces the current state with a copy of the state of the \c SpatialFeatureAlignment instance \a alignment.
     # \param alignment The \c SpatialFeatureAlignment instance to copy.
     # \return \a self
     # 

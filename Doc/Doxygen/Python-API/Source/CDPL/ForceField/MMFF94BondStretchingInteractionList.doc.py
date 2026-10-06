@@ -27,12 +27,12 @@
 class MMFF94BondStretchingInteractionList(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c MMFF94BondStretchingInteractionList instance.
+    # \brief Contructs the \c MMFF94BondStretchingInteractionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94BondStretchingInteractionList instance \a ia_list.
+    # \brief Contructs a copy of the \c MMFF94BondStretchingInteractionList instance \a ia_list.
     # \param ia_list The \c MMFF94BondStretchingInteractionList instance to copy.
     # 
     def __init__(ia_list: MMFF94BondStretchingInteractionList) -> None: pass
@@ -62,7 +62,7 @@ class MMFF94BondStretchingInteractionList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94BondStretchingInteractionList instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94BondStretchingInteractionList instance \a array.
     # \param array The \c MMFF94BondStretchingInteractionList instance to copy.
     # \return \a self
     # 

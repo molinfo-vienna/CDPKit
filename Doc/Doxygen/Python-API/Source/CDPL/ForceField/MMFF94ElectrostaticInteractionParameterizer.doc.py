@@ -49,7 +49,7 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
+    # \brief Contructs a copy of the \c MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94ElectrostaticInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> None: pass
@@ -111,7 +111,7 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94ElectrostaticInteractionParameterizer instance to copy.
     # \return \a self
     # 

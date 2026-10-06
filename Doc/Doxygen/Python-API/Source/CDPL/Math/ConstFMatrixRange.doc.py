@@ -25,13 +25,13 @@
 class ConstFMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstFMatrixRange instance \a r.
+    # \brief Contructs a copy of the \c ConstFMatrixRange instance \a r.
     # \param r The \c ConstFMatrixRange instance to copy.
     # 
     def __init__(r: ConstFMatrixRange) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstFMatrixRange instance.
+    # \brief Contructs the \c ConstFMatrixRange instance.
     # \param e 
     # \param r1 
     # \param r2 
@@ -90,14 +90,14 @@ class ConstFMatrixRange(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> ConstFMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the element at proxy index (<em>i</em>, <em>j</em>).
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based proxy row index.
     # \param j The zero-based proxy column index.

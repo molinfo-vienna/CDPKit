@@ -25,6 +25,6 @@
 class INCHIMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c INCHIMoleculeInputHandler instance.
+    # \brief Contructs the \c INCHIMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

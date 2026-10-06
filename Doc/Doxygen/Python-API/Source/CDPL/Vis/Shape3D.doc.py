@@ -27,7 +27,7 @@
 class Shape3D(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c Shape3D instance.
+    # \brief Contructs the \c Shape3D instance.
     # 
     def __init__() -> None: pass
 

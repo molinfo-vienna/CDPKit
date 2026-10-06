@@ -25,7 +25,7 @@
 class FeatureContainerObject3DFactoryBase(Base.ControlParameterContainer):
 
     ##
-    # \brief Initializes the \c FeatureContainerObject3DFactoryBase instance.
+    # \brief Contructs the \c FeatureContainerObject3DFactoryBase instance.
     # 
     def __init__() -> None: pass
 

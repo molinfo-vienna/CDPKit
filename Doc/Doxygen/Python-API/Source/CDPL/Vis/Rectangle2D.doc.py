@@ -22,7 +22,7 @@
 ##
 # \brief Specifies an axis aligned rectangular area in 2D space.
 # 
-# The rectangle is defined by a minimum point \f$ (x_{min}, y_{min}) \f$ and a maximum point \f$ (x_{max}, y_{max}) \f$. For a well defined rectangle the coordinates of the minimum and maximum point must satisfy the follwing inequalities: \f$ x_{min} \leq x_{max} \f$ and \f$ y_{min} \leq y_{max} \f$. <br>
+# The rectangle is defined by a minimum point \f$ (x_{min}, y_{min}) \f$ and a maximum point \f$ (x_{max}, y_{max}) \f$. For a well defined rectangle the coordinates of the minimum and maximum point must satisfy the follwing inequalities: \f$ x_{min} \leq x_{max} \f$ and \f$ y_{min} \leq y_{max} \f$.
 # 
 class Rectangle2D(Boost.Python.instance):
 
@@ -34,7 +34,7 @@ class Rectangle2D(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Rectangle2D instance \a rect.
+    # \brief Contructs a copy of the \c Rectangle2D instance \a rect.
     # \param rect The \c Rectangle2D instance to copy.
     # 
     def __init__(rect: Rectangle2D) -> None: pass
@@ -70,7 +70,7 @@ class Rectangle2D(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Rectangle2D instance \a rect.
+    # \brief Replaces the current state with a copy of the state of the \c Rectangle2D instance \a rect.
     # \param rect The \c Rectangle2D instance to copy.
     # \return \a self
     # 
@@ -132,7 +132,7 @@ class Rectangle2D(Boost.Python.instance):
     # 
     # \param pt The point to test.
     # 
-    # \return <tt>True</tt> if <em>pt</em> is within the boundary of the rectangle, and <tt>False</tt> otherwise. <br>
+    # \return <tt>True</tt> if <em>pt</em> is within the boundary of the rectangle, and <tt>False</tt> otherwise.
     # 
     def containsPoint(pt: Math.Vector2D) -> bool: pass
 
@@ -144,7 +144,7 @@ class Rectangle2D(Boost.Python.instance):
     # \param x The x-coordinate of the point to test.
     # \param y The y-coordinate of the point to test.
     # 
-    # \return <tt>True</tt> if the point <em>(x, y)</em> is within the boundary of the rectangle, and <tt>False</tt> otherwise. <br>
+    # \return <tt>True</tt> if the point <em>(x, y)</em> is within the boundary of the rectangle, and <tt>False</tt> otherwise.
     # 
     def containsPoint(x: float, y: float) -> bool: pass
 

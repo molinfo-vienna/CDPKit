@@ -32,7 +32,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     class Pattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \c Pattern instance \a pattern.
+        # \brief Contructs a copy of the \c Pattern instance \a pattern.
         # \param pattern The \c Pattern instance to copy.
         # 
         def __init__(pattern: Pattern) -> None: pass
@@ -61,7 +61,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Pattern instance \a pattern.
+        # \brief Replaces the current state with a copy of the state of the \c Pattern instance \a pattern.
         # \param pattern The \c Pattern instance to copy.
         # \return \a self
         # 
@@ -120,7 +120,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c SubstructureHistogramCalculator instance \a calc.
+    # \brief Contructs a copy of the \c SubstructureHistogramCalculator instance \a calc.
     # \param calc The \c SubstructureHistogramCalculator instance to copy.
     # 
     def __init__(calc: SubstructureHistogramCalculator) -> None: pass
@@ -198,7 +198,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     def calculate(molgraph: MolecularGraph, histo: object) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c SubstructureHistogramCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c SubstructureHistogramCalculator instance \a calc.
     # \param calc The \c SubstructureHistogramCalculator instance to copy.
     # \return \a self
     # 

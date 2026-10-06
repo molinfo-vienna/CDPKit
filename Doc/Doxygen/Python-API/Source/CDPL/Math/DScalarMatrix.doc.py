@@ -25,18 +25,18 @@
 class DScalarMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DScalarMatrix instance.
+    # \brief Contructs the \c DScalarMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DScalarMatrix instance \a m.
+    # \brief Contructs a copy of the \c DScalarMatrix instance \a m.
     # \param m The \c DScalarMatrix instance to copy.
     # 
     def __init__(m: DScalarMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c DScalarMatrix instance.
+    # \brief Contructs the \c DScalarMatrix instance.
     # \param m 
     # \param n 
     # \param v 
@@ -68,7 +68,7 @@ class DScalarMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DScalarMatrix instance \a m.
+    # \brief Replaces the current state with a copy of the state of the \c DScalarMatrix instance \a m.
     # \param m The \c DScalarMatrix instance to copy.
     # \return \a self
     # 

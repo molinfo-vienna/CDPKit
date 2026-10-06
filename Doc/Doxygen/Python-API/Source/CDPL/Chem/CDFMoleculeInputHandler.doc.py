@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the input of molecule data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the input of molecule data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c CDFMoleculeInputHandler instance.
+    # \brief Contructs the \c CDFMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

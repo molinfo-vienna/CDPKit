@@ -27,7 +27,7 @@
 class MMFF94AngleBendingInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c MMFF94AngleBendingInteraction instance \a iactn.
+    # \brief Contructs a copy of the \c MMFF94AngleBendingInteraction instance \a iactn.
     # \param iactn The \c MMFF94AngleBendingInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94AngleBendingInteraction) -> None: pass
@@ -123,7 +123,7 @@ class MMFF94AngleBendingInteraction(Boost.Python.instance):
     def setReferenceAngle(angle: float) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94AngleBendingInteraction instance \a iactn.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94AngleBendingInteraction instance \a iactn.
     # \param iactn The \c MMFF94AngleBendingInteraction instance to copy.
     # \return \a self
     # 

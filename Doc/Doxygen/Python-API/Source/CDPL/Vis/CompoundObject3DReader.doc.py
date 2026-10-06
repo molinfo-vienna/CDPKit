@@ -25,7 +25,7 @@
 class CompoundObject3DReader(Object3DReaderBase):
 
     ##
-    # \brief Initializes the \c CompoundObject3DReader instance.
+    # \brief Contructs the \c CompoundObject3DReader instance.
     # 
     def __init__() -> None: pass
 

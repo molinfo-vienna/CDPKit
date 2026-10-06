@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the output of molecular graph data in the <em>CDPL</em> <em>PSD</em>-format.
+# \brief Handler for the output of molecular graph data in the <em>%CDPL</em> <em>PSD</em>-format.
 # 
 class PSDMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \c PSDMolecularGraphOutputHandler instance.
+    # \brief Contructs the \c PSDMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

@@ -29,42 +29,42 @@ class DQuaternionExpression(ConstDQuaternionExpression):
     def swap(e: DQuaternionExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DQuaternionExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c DQuaternionExpression instance \a e.
     # \param e The \c DQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: DQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFQuaternionExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFQuaternionExpression instance \a e.
     # \param e The \c ConstFQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDQuaternionExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDQuaternionExpression instance \a e.
     # \param e The \c ConstDQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstLQuaternionExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLQuaternionExpression instance \a e.
     # \param e The \c ConstLQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstULQuaternionExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULQuaternionExpression instance \a e.
     # \param e The \c ConstULQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 

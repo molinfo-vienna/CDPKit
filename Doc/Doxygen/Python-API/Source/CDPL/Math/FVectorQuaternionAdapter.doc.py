@@ -25,13 +25,13 @@
 class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FVectorQuaternionAdapter instance \a a.
+    # \brief Contructs a copy of the \c FVectorQuaternionAdapter instance \a a.
     # \param a The \c FVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: FVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c FVectorQuaternionAdapter instance.
+    # \brief Contructs the \c FVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: FVectorExpression) -> None: pass
@@ -149,7 +149,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     def set(c1: float = 0.0, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 

@@ -25,18 +25,18 @@
 class FScalarGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FScalarGrid instance.
+    # \brief Contructs the \c FScalarGrid instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FScalarGrid instance \a g.
+    # \brief Contructs a copy of the \c FScalarGrid instance \a g.
     # \param g The \c FScalarGrid instance to copy.
     # 
     def __init__(g: FScalarGrid) -> None: pass
 
     ##
-    # \brief Initializes the \c FScalarGrid instance.
+    # \brief Contructs the \c FScalarGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -75,7 +75,7 @@ class FScalarGrid(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FScalarGrid instance \a g.
+    # \brief Replaces the current state with a copy of the state of the \c FScalarGrid instance \a g.
     # \param g The \c FScalarGrid instance to copy.
     # \return \a self
     # 

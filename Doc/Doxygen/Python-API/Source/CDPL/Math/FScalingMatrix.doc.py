@@ -25,13 +25,13 @@
 class FScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FScalingMatrix instance \a m.
+    # \brief Contructs a copy of the \c FScalingMatrix instance \a m.
     # \param m The \c FScalingMatrix instance to copy.
     # 
     def __init__(m: FScalingMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c FScalingMatrix instance.
+    # \brief Contructs the \c FScalingMatrix instance.
     # \param n 
     # \param sx 
     # \param sy 
@@ -64,7 +64,7 @@ class FScalingMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FScalingMatrix instance \a m.
+    # \brief Replaces the current state with a copy of the state of the \c FScalingMatrix instance \a m.
     # \param m The \c FScalingMatrix instance to copy.
     # \return \a self
     # 

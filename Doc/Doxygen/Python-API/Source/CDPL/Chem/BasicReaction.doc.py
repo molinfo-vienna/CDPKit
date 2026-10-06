@@ -22,7 +22,7 @@
 ##
 # \brief Default implementation of the Chem.Reaction interface.
 # 
-# <tt>BasicReaction</tt> implements the full Chem.Reaction interface and is the standard concrete type used for the creation, manipulation and processing of chemical reaction information throughout the <em>CDPL</em>.
+# <tt>BasicReaction</tt> implements the full Chem.Reaction interface and is the standard concrete type used for the creation, manipulation and processing of chemical reaction information throughout the <em>%CDPL</em>.
 # 
 class BasicReaction(Reaction):
 
@@ -32,13 +32,13 @@ class BasicReaction(Reaction):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c BasicReaction instance \a mol.
+    # \brief Contructs a copy of the \c BasicReaction instance \a mol.
     # \param mol The \c BasicReaction instance to copy.
     # 
     def __init__(mol: BasicReaction) -> None: pass
 
     ##
-    # \brief Initializes the \c BasicReaction instance.
+    # \brief Contructs the \c BasicReaction instance.
     # \param mol 
     # 
     def __init__(mol: Reaction) -> None: pass

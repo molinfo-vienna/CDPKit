@@ -32,7 +32,7 @@ class InteractionAnalyzer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c InteractionAnalyzer instance \a analyzer.
+    # \brief Contructs a copy of the \c InteractionAnalyzer instance \a analyzer.
     # \param analyzer The \c InteractionAnalyzer instance to copy.
     # 
     def __init__(analyzer: InteractionAnalyzer) -> None: pass
@@ -77,7 +77,7 @@ class InteractionAnalyzer(Boost.Python.instance):
     def getConstraintFunction(type1: int, type2: int) -> BoolFeature2Functor: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c InteractionAnalyzer instance \a analyzer.
+    # \brief Replaces the current state with a copy of the state of the \c InteractionAnalyzer instance \a analyzer.
     # \param analyzer The \c InteractionAnalyzer instance to copy.
     # \return \a self
     # 

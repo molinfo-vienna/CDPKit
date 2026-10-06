@@ -27,7 +27,7 @@
 class R3DFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \c R3DFeatureContainerWriter instance.
+    # \brief Contructs the \c R3DFeatureContainerWriter instance.
     # \param os 
     # 
     def __init__(os: Base.OStream) -> None: pass

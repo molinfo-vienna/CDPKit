@@ -25,12 +25,12 @@
 class DKabschAlgorithm(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DKabschAlgorithm instance.
+    # \brief Contructs the \c DKabschAlgorithm instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DKabschAlgorithm instance \a algo.
+    # \brief Contructs a copy of the \c DKabschAlgorithm instance \a algo.
     # \param algo The \c DKabschAlgorithm instance to copy.
     # 
     def __init__(algo: DKabschAlgorithm) -> None: pass
@@ -48,7 +48,7 @@ class DKabschAlgorithm(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DKabschAlgorithm instance \a algo.
+    # \brief Replaces the current state with a copy of the state of the \c DKabschAlgorithm instance \a algo.
     # \param algo The \c DKabschAlgorithm instance to copy.
     # \return \a self
     # 

@@ -25,12 +25,12 @@
 class DRegularGridSet(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DRegularGridSet instance.
+    # \brief Contructs the \c DRegularGridSet instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DRegularGridSet instance \a set.
+    # \brief Contructs a copy of the \c DRegularGridSet instance \a set.
     # \param set The \c DRegularGridSet instance to copy.
     # 
     def __init__(set: DRegularGridSet) -> None: pass
@@ -60,7 +60,7 @@ class DRegularGridSet(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DRegularGridSet instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c DRegularGridSet instance \a array.
     # \param array The \c DRegularGridSet instance to copy.
     # \return \a self
     # 

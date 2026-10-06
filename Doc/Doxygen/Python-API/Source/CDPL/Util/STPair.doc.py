@@ -25,18 +25,18 @@
 class STPair(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c STPair instance.
+    # \brief Contructs the \c STPair instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c STPair instance \a pair.
+    # \brief Contructs a copy of the \c STPair instance \a pair.
     # \param pair The \c STPair instance to copy.
     # 
     def __init__(pair: STPair) -> None: pass
 
     ##
-    # \brief Initializes the \c STPair instance.
+    # \brief Contructs the \c STPair instance.
     # \param first 
     # \param second 
     # 
@@ -51,7 +51,7 @@ class STPair(Boost.Python.instance):
     def setSecond(value: int) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c STPair instance \a array.
+    # \brief Replaces the current state with a copy of the state of the \c STPair instance \a array.
     # \param array The \c STPair instance to copy.
     # \return \a self
     # 

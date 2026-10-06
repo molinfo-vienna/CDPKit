@@ -37,7 +37,7 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     DEF_PROBE_RADIUS = 0.0
 
     ##
-    # \brief Initializes a copy of the \c GeneralizedBellAtomDensity instance \a func.
+    # \brief Contructs a copy of the \c GeneralizedBellAtomDensity instance \a func.
     # \param func The \c GeneralizedBellAtomDensity instance to copy.
     # 
     def __init__(func: GeneralizedBellAtomDensity) -> None: pass
@@ -77,7 +77,7 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     def getRadiusScalingFactor() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c GeneralizedBellAtomDensity instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c GeneralizedBellAtomDensity instance \a func.
     # \param func The \c GeneralizedBellAtomDensity instance to copy.
     # \return \a self
     # 

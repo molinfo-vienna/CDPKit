@@ -123,7 +123,7 @@ class FragmentLibraryGenerator(Boost.Python.instance):
     def getLibraryEntryHashCode() -> int: pass
 
     ##
-    # \brief Returns a reference to the fragment conformer generation settings.
+    # \brief Returns the fragment conformer generation settings.
     # 
     # \return A reference to the settings.
     # 

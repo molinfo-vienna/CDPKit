@@ -27,12 +27,12 @@
 class AtomContainer(Entity3DContainer):
 
     ##
-    # \brief Initializes the \c AtomContainer instance.
+    # \brief Contructs the \c AtomContainer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the atom at index <em>idx</em>.
+    # \brief Returns the atom at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the atom to return.
     # 
@@ -77,7 +77,7 @@ class AtomContainer(Entity3DContainer):
     def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
-    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # \brief Returns the entity at index <em>idx</em>.
     # 
     # Forwards to getAtom() and exists to satisfy the Chem.Entity3DContainer interface.
     # 

@@ -25,13 +25,13 @@
 class ConstUpperTriangularLMatrixAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstUpperTriangularLMatrixAdapter instance \a a.
+    # \brief Contructs a copy of the \c ConstUpperTriangularLMatrixAdapter instance \a a.
     # \param a The \c ConstUpperTriangularLMatrixAdapter instance to copy.
     # 
     def __init__(a: ConstUpperTriangularLMatrixAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstUpperTriangularLMatrixAdapter instance.
+    # \brief Contructs the \c ConstUpperTriangularLMatrixAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass

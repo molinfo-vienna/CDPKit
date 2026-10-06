@@ -35,7 +35,7 @@ class TverskySimilarity(Boost.Python.instance):
     def __init__(alpha: float = 0.95, beta: float = 0.05) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TverskySimilarity instance \a func.
+    # \brief Contructs a copy of the \c TverskySimilarity instance \a func.
     # \param func The \c TverskySimilarity instance to copy.
     # 
     def __init__(func: TverskySimilarity) -> None: pass
@@ -53,7 +53,7 @@ class TverskySimilarity(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TverskySimilarity instance \a func.
+    # \brief Replaces the current state with a copy of the state of the \c TverskySimilarity instance \a func.
     # \param func The \c TverskySimilarity instance to copy.
     # \return \a self
     # 
@@ -64,7 +64,8 @@ class TverskySimilarity(Boost.Python.instance):
     # 
     # The <em>Tversky Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \f[ S_{ab} = \frac{N_{ab}}{\alpha \: N_a + \beta \: N_b + N_{ab}} \f]
+    # \f[   S_{ab} = \frac{N_{ab}}{\alpha \: N_a + \beta \: N_b + N_{ab}} 
+    # \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset. \f$ \alpha \f$ and \f$ \beta \f$ are bitset contribution weighting factors.
     # 

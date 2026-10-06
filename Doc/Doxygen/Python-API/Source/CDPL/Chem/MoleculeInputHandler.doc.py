@@ -25,7 +25,7 @@
 class MoleculeInputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c MoleculeInputHandler instance.
+    # \brief Contructs the \c MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass
 

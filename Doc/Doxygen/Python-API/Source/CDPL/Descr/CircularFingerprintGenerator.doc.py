@@ -110,7 +110,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c CircularFingerprintGenerator instance \a gen.
+    # \brief Contructs a copy of the \c CircularFingerprintGenerator instance \a gen.
     # \param gen The \c CircularFingerprintGenerator instance to copy.
     # 
     def __init__(gen: CircularFingerprintGenerator) -> None: pass
@@ -277,7 +277,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     def getFeatureSubstructures(bit_idx: int, bs_size: int, frags: Chem.FragmentList, clear: bool = True) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c CircularFingerprintGenerator instance \a gen.
+    # \brief Replaces the current state with a copy of the state of the \c CircularFingerprintGenerator instance \a gen.
     # \param gen The \c CircularFingerprintGenerator instance to copy.
     # \return \a self
     # 

@@ -80,7 +80,7 @@ class Reactor(Boost.Python.instance):
     def getNumReactionSites() -> int: pass
 
     ##
-    # \brief Returns a reference to the stored reaction site data object at index <em>idx</em>.
+    # \brief Returns the stored reaction site data object at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the reaction-site data object to return.
     # 

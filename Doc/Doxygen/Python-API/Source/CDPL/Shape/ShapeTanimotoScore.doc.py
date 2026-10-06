@@ -25,12 +25,12 @@
 class ShapeTanimotoScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c ShapeTanimotoScore instance.
+    # \brief Contructs the \c ShapeTanimotoScore instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ShapeTanimotoScore instance \a score.
+    # \brief Contructs a copy of the \c ShapeTanimotoScore instance \a score.
     # \param score The \c ShapeTanimotoScore instance to copy.
     # 
     def __init__(score: ShapeTanimotoScore) -> None: pass
@@ -48,7 +48,7 @@ class ShapeTanimotoScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ShapeTanimotoScore instance \a score.
+    # \brief Replaces the current state with a copy of the state of the \c ShapeTanimotoScore instance \a score.
     # \param score The \c ShapeTanimotoScore instance to copy.
     # \return \a self
     # 

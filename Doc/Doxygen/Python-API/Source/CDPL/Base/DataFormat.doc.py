@@ -52,7 +52,7 @@ class DataFormat(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DataFormat instance \a fmt.
+    # \brief Contructs a copy of the \c DataFormat instance \a fmt.
     # \param fmt The \c DataFormat instance to copy.
     # 
     def __init__(fmt: DataFormat) -> None: pass
@@ -219,7 +219,7 @@ class DataFormat(Boost.Python.instance):
     def getFileExtensions() -> FileExtensionSequence: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DataFormat instance \a fmt.
+    # \brief Replaces the current state with a copy of the state of the \c DataFormat instance \a fmt.
     # \param fmt The \c DataFormat instance to copy.
     # \return \a self
     # 

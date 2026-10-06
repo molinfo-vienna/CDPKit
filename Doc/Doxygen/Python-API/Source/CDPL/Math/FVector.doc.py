@@ -52,31 +52,31 @@ class FVector(Boost.Python.instance):
     def __init__(n: int, v: float) -> None: pass
 
     ##
-    # \brief Initializes the \c FVector instance.
+    # \brief Contructs the \c FVector instance.
     # \param e 
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FVector instance.
+    # \brief Contructs the \c FVector instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FVector instance.
+    # \brief Contructs the \c FVector instance.
     # \param e 
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FVector instance.
+    # \brief Contructs the \c FVector instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c FVector instance.
+    # \brief Contructs the \c FVector instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -154,7 +154,7 @@ class FVector(Boost.Python.instance):
     def assign(v: FVector) -> FVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -216,7 +216,7 @@ class FVector(Boost.Python.instance):
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em>.
+    # \brief Returns the element at index <em>i</em>.
     # 
     # \param i The zero-based element index.
     # 
@@ -227,7 +227,7 @@ class FVector(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em>.
+    # \brief Returns the element at index <em>i</em>.
     # 
     # \param i The zero-based element index.
     # 

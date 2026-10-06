@@ -35,7 +35,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c StructureGeneratorSettings instance \a settings.
+    # \brief Contructs a copy of the \c StructureGeneratorSettings instance \a settings.
     # \param settings The \c StructureGeneratorSettings instance to copy.
     # 
     def __init__(settings: StructureGeneratorSettings) -> None: pass
@@ -53,7 +53,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c StructureGeneratorSettings instance \a settings.
+    # \brief Replaces the current state with a copy of the state of the \c StructureGeneratorSettings instance \a settings.
     # \param settings The \c StructureGeneratorSettings instance to copy.
     # \return \a self
     # 

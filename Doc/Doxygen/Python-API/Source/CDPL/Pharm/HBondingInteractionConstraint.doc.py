@@ -45,7 +45,7 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     DEF_MAX_ACC_ANGLE = 85.0
 
     ##
-    # \brief Initializes a copy of the \c HBondingInteractionConstraint instance \a constr.
+    # \brief Contructs a copy of the \c HBondingInteractionConstraint instance \a constr.
     # \param constr The \c HBondingInteractionConstraint instance to copy.
     # 
     def __init__(constr: HBondingInteractionConstraint) -> None: pass
@@ -102,7 +102,7 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c HBondingInteractionConstraint instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c HBondingInteractionConstraint instance \a constr.
     # \param constr The \c HBondingInteractionConstraint instance to copy.
     # \return \a self
     # 

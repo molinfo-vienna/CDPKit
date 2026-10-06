@@ -116,7 +116,7 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def getNumMappings() -> int: pass
 
     ##
-    # \brief Returns a reference to the stored atom/bond mapping object at index <em>idx</em>.
+    # \brief Returns the stored atom/bond mapping object at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the atom/bond mapping object to return.
     # 

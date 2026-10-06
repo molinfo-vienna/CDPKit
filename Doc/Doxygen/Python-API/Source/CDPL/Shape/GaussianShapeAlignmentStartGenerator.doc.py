@@ -27,7 +27,7 @@
 class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c GaussianShapeAlignmentStartGenerator instance.
+    # \brief Contructs the \c GaussianShapeAlignmentStartGenerator instance.
     # 
     def __init__() -> None: pass
 

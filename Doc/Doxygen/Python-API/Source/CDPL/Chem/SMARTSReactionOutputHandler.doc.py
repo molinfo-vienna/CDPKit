@@ -25,6 +25,6 @@
 class SMARTSReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \c SMARTSReactionOutputHandler instance.
+    # \brief Contructs the \c SMARTSReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

@@ -22,7 +22,7 @@
 ##
 # \brief Unique lookup key for control-parameter and property values.
 # 
-# <tt>LookupKey</tt> has a private default constructor and a public copy constructor. The creation of not copy constructed new instances is only possible by the method create(const std::string& name). <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards. <br>
+# <tt>LookupKey</tt> has a private default constructor and a public copy constructor. The creation of not copy constructed new instances is only possible by the method create(const std::string& name). <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards.
 # 
 class LookupKey(Boost.Python.instance):
 
@@ -32,7 +32,7 @@ class LookupKey(Boost.Python.instance):
     NONE = LookupKey('NONE')
 
     ##
-    # \brief Initializes a copy of the \c LookupKey instance \a key.
+    # \brief Contructs a copy of the \c LookupKey instance \a key.
     # \param key The \c LookupKey instance to copy.
     # 
     def __init__(key: LookupKey) -> None: pass
@@ -57,7 +57,7 @@ class LookupKey(Boost.Python.instance):
     def getID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c LookupKey instance \a key.
+    # \brief Replaces the current state with a copy of the state of the \c LookupKey instance \a key.
     # \param key The \c LookupKey instance to copy.
     # \return \a self
     # 

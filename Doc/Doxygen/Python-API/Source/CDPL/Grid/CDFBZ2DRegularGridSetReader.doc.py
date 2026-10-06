@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Reader for bzip2-compressed regular spatial grid set data in the native I/O format of the <em>CDPL</em>.
+# \brief Reader for bzip2-compressed regular spatial grid set data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFBZ2DRegularGridSetReader(DRegularGridSetReaderBase):
 
     ##
-    # \brief Initializes the \c CDFBZ2DRegularGridSetReader instance.
+    # \brief Contructs the \c CDFBZ2DRegularGridSetReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

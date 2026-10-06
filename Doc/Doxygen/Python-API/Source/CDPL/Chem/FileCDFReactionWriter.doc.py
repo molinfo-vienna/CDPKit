@@ -25,7 +25,7 @@
 class FileCDFReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \c FileCDFReactionWriter instance.
+    # \brief Contructs the \c FileCDFReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

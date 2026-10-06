@@ -25,13 +25,13 @@
 class ConstFMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstFMatrixSlice instance \a s.
+    # \brief Contructs a copy of the \c ConstFMatrixSlice instance \a s.
     # \param s The \c ConstFMatrixSlice instance to copy.
     # 
     def __init__(s: ConstFMatrixSlice) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstFMatrixSlice instance.
+    # \brief Contructs the \c ConstFMatrixSlice instance.
     # \param e 
     # \param s1 
     # \param s2 
@@ -104,14 +104,14 @@ class ConstFMatrixSlice(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> ConstFMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the element at proxy index (<em>i</em>, <em>j</em>).
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based proxy row index.
     # \param j The zero-based proxy column index.

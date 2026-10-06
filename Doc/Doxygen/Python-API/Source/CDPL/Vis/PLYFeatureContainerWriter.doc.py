@@ -27,7 +27,7 @@
 class PLYFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \c PLYFeatureContainerWriter instance.
+    # \brief Contructs the \c PLYFeatureContainerWriter instance.
     # \param os 
     # 
     def __init__(os: Base.OStream) -> None: pass

@@ -34,7 +34,7 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
+    # \brief Contructs a copy of the \c MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94BondStretchingInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94BondStretchingInteractionParameterizer) -> None: pass
@@ -110,7 +110,7 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94BondStretchingInteractionParameterizer instance to copy.
     # \return \a self
     # 

@@ -59,19 +59,19 @@ class Atom(AtomContainer, BondContainer, Entity3D):
         def __contains__(bond: Bond) -> bool: pass
 
     ##
-    # \brief Initializes the \c Atom instance.
+    # \brief Contructs the \c Atom instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Returns a reference to the parent molecule.
+    # \brief Returns the parent molecule.
     # 
     # \return A reference to the parent molecule.
     # 
     def getMolecule() -> Molecule: pass
 
     ##
-    # \brief Returns a reference to the bond that connects this atom to the argument atom.
+    # \brief Returns the bond that connects this atom to the argument atom.
     # 
     # \param atom The adjacent atom for which to return the connecting bond.
     # 
@@ -82,9 +82,9 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getBondToAtom(atom: Atom) -> Bond: pass
 
     ##
-    # \brief Returns a reference to the bond that connects this atom to the argument atom.
+    # \brief Returns the bond that connects this atom to the argument atom.
     # 
-    # \param atom The adjacent atom for which to return a reference to the connecting bond.
+    # \param atom The adjacent atom for which to return the connecting bond.
     # 
     # \return A reference to the bond that connects this atom to the argument atom, or <tt>None</tt> if the argument atom is not connected.
     # 
@@ -111,7 +111,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getBonds() -> BondSequence: pass
 
     ##
-    # \brief Returns a reference to the connected atom at index <em>idx</em>.
+    # \brief Returns the connected atom at index <em>idx</em>.
     # 
     # \param idx The index of the atom to return.
     # 
@@ -159,7 +159,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getNumEntities() -> int: pass
 
     ##
-    # \brief Returns a reference to the incident bond at index <em>idx</em>.
+    # \brief Returns the incident bond at index <em>idx</em>.
     # 
     # \param idx The index of the incident bond to return.
     # 

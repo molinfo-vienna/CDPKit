@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the input of pharmacophore data in the <em>CDPL</em> <em>PSD</em>-format.
+# \brief Handler for the input of pharmacophore data in the <em>%CDPL</em> <em>PSD</em>-format.
 # 
 class PSDPharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
-    # \brief Initializes the \c PSDPharmacophoreInputHandler instance.
+    # \brief Contructs the \c PSDPharmacophoreInputHandler instance.
     # 
     def __init__() -> None: pass

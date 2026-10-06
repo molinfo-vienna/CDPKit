@@ -44,7 +44,7 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MoleculeRDFDescriptorCalculator instance \a calc.
+    # \brief Contructs a copy of the \c MoleculeRDFDescriptorCalculator instance \a calc.
     # \param calc The \c MoleculeRDFDescriptorCalculator instance to copy.
     # 
     def __init__(calc: MoleculeRDFDescriptorCalculator) -> None: pass
@@ -70,7 +70,7 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MoleculeRDFDescriptorCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c MoleculeRDFDescriptorCalculator instance \a calc.
     # \param calc The \c MoleculeRDFDescriptorCalculator instance to copy.
     # \return \a self
     # 

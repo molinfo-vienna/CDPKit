@@ -25,13 +25,13 @@
 class FMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FMatrixRange instance \a r.
+    # \brief Contructs a copy of the \c FMatrixRange instance \a r.
     # \param r The \c FMatrixRange instance to copy.
     # 
     def __init__(r: FMatrixRange) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrixRange instance.
+    # \brief Contructs the \c FMatrixRange instance.
     # \param e 
     # \param r1 
     # \param r2 
@@ -110,7 +110,7 @@ class FMatrixRange(Boost.Python.instance):
     def assign(r: FMatrixRange) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -151,14 +151,14 @@ class FMatrixRange(Boost.Python.instance):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
     def getData() -> FMatrixExpression: pass
 
     ##
-    # \brief Returns a reference to the element at proxy index (<em>i</em>, <em>j</em>).
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based proxy row index.
     # \param j The zero-based proxy column index.

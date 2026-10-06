@@ -34,7 +34,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c AtomRDFCodeCalculator instance \a calc.
+    # \brief Contructs a copy of the \c AtomRDFCodeCalculator instance \a calc.
     # \param calc The \c AtomRDFCodeCalculator instance to copy.
     # 
     def __init__(calc: AtomRDFCodeCalculator) -> None: pass
@@ -62,7 +62,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c AtomRDFCodeCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c AtomRDFCodeCalculator instance \a calc.
     # \param calc The \c AtomRDFCodeCalculator instance to copy.
     # \return \a self
     # 

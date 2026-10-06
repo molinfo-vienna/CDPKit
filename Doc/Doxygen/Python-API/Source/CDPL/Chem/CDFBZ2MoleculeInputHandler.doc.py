@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the input of bzip2-compressed molecule data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the input of bzip2-compressed molecule data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFBZ2MoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c CDFBZ2MoleculeInputHandler instance.
+    # \brief Contructs the \c CDFBZ2MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

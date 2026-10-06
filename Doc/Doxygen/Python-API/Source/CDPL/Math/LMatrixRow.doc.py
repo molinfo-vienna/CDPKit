@@ -25,13 +25,13 @@
 class LMatrixRow(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c LMatrixRow instance \a mr.
+    # \brief Contructs a copy of the \c LMatrixRow instance \a mr.
     # \param mr The \c LMatrixRow instance to copy.
     # 
     def __init__(mr: LMatrixRow) -> None: pass
 
     ##
-    # \brief Initializes the \c LMatrixRow instance.
+    # \brief Contructs the \c LMatrixRow instance.
     # \param e 
     # \param i 
     # 
@@ -102,7 +102,7 @@ class LMatrixRow(Boost.Python.instance):
     def assign(r: LMatrixRow) -> LMatrixRow: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -136,7 +136,7 @@ class LMatrixRow(Boost.Python.instance):
     def setElement(i: int, v: int) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
@@ -171,7 +171,7 @@ class LMatrixRow(Boost.Python.instance):
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at column <em>i</em> of the row.
+    # \brief Returns the element at column <em>i</em> of the row.
     # 
     # \param i The zero-based column index.
     # 
@@ -180,7 +180,7 @@ class LMatrixRow(Boost.Python.instance):
     def __call__(i: int) -> int: pass
 
     ##
-    # \brief Returns a reference to the element at column <em>i</em> of the row.
+    # \brief Returns the element at column <em>i</em> of the row.
     # 
     # \param i The zero-based column index.
     # 

@@ -67,13 +67,13 @@ class MatchConstraint(Boost.Python.instance):
         NOT_EQUAL = 6
 
     ##
-    # \brief Initializes a copy of the \c MatchConstraint instance \a constr.
+    # \brief Contructs a copy of the \c MatchConstraint instance \a constr.
     # \param constr The \c MatchConstraint instance to copy.
     # 
     def __init__(constr: MatchConstraint) -> None: pass
 
     ##
-    # \brief Initializes the \c MatchConstraint instance.
+    # \brief Contructs the \c MatchConstraint instance.
     # \param id 
     # \param rel 
     # 
@@ -89,7 +89,7 @@ class MatchConstraint(Boost.Python.instance):
     def __init__(id: int, rel: Relation, val: Base.Any) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MatchConstraint instance \a constr.
+    # \brief Replaces the current state with a copy of the state of the \c MatchConstraint instance \a constr.
     # \param constr The \c MatchConstraint instance to copy.
     # \return \a self
     # 
@@ -124,7 +124,7 @@ class MatchConstraint(Boost.Python.instance):
     def setRelation(rel: Relation) -> None: pass
 
     ##
-    # \brief Returns a reference to the value of the query attribute of type <em>T</em>.
+    # \brief Returns the value of the query attribute of type <em>T</em>.
     # 
     # \return A reference to the value of the stored query attribute. 
     # 

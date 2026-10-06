@@ -25,6 +25,6 @@
 class PMLPharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
-    # \brief Initializes the \c PMLPharmacophoreInputHandler instance.
+    # \brief Contructs the \c PMLPharmacophoreInputHandler instance.
     # 
     def __init__() -> None: pass

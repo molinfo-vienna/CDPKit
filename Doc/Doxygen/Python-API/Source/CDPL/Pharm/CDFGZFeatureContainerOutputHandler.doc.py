@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the output of gzip-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the output of gzip-compressed feature container data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZFeatureContainerOutputHandler(FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \c CDFGZFeatureContainerOutputHandler instance.
+    # \brief Contructs the \c CDFGZFeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

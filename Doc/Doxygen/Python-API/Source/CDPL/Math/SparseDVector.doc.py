@@ -44,31 +44,31 @@ class SparseDVector(Boost.Python.instance):
     def __init__(n: int) -> None: pass
 
     ##
-    # \brief Initializes the \c SparseDVector instance.
+    # \brief Contructs the \c SparseDVector instance.
     # \param e 
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c SparseDVector instance.
+    # \brief Contructs the \c SparseDVector instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c SparseDVector instance.
+    # \brief Contructs the \c SparseDVector instance.
     # \param e 
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c SparseDVector instance.
+    # \brief Contructs the \c SparseDVector instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \c SparseDVector instance.
+    # \brief Contructs the \c SparseDVector instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -150,7 +150,7 @@ class SparseDVector(Boost.Python.instance):
     def assign(v: SparseDVector) -> SparseDVector: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -212,7 +212,7 @@ class SparseDVector(Boost.Python.instance):
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em>.
+    # \brief Returns the element at index <em>i</em>.
     # 
     # \param i The zero-based element index.
     # 
@@ -223,7 +223,7 @@ class SparseDVector(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em>.
+    # \brief Returns the element at index <em>i</em>.
     # 
     # \param i The zero-based element index.
     # 

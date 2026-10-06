@@ -27,7 +27,7 @@
 class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpression):
 
     ##
-    # \brief Initializes a copy of the \c MolecularGraphComponentGroupingMatchExpression instance \a expr.
+    # \brief Contructs a copy of the \c MolecularGraphComponentGroupingMatchExpression instance \a expr.
     # \param expr The \c MolecularGraphComponentGroupingMatchExpression instance to copy.
     # 
     def __init__(expr: MolecularGraphComponentGroupingMatchExpression) -> None: pass
@@ -40,7 +40,7 @@ class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpressi
     def __init__(comp_grouping: FragmentList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MolecularGraphComponentGroupingMatchExpression instance \a expr.
+    # \brief Replaces the current state with a copy of the state of the \c MolecularGraphComponentGroupingMatchExpression instance \a expr.
     # \param expr The \c MolecularGraphComponentGroupingMatchExpression instance to copy.
     # \return \a self
     # 

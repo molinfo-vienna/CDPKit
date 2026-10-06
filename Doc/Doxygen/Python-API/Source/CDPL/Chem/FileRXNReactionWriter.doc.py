@@ -25,7 +25,7 @@
 class FileRXNReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \c FileRXNReactionWriter instance.
+    # \brief Contructs the \c FileRXNReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

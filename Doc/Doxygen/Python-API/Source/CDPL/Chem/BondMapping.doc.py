@@ -32,7 +32,7 @@ class BondMapping(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c BondMapping instance \a mapping.
+    # \brief Contructs a copy of the \c BondMapping instance \a mapping.
     # \param mapping The \c BondMapping instance to copy.
     # 
     def __init__(mapping: BondMapping) -> None: pass
@@ -69,16 +69,16 @@ class BondMapping(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c BondMapping instance \a map.
+    # \brief Replaces the current state with a copy of the state of the \c BondMapping instance \a map.
     # \param map The \c BondMapping instance to copy.
     # \return \a self
     # 
     def assign(map: BondMapping) -> BondMapping: pass
 
     ##
-    # \brief Returns a reference to the first value associated with the specified key.
+    # \brief Returns the first value associated with the specified key.
     # 
-    # If the map contains the specified entry, a reference to the associated value is returned. If the map does not contain the entry and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a reference to a default constructed value object is returned. Otherwise, Base.ItemNotFound is thrown to indicate the error.
+    # If the map contains the specified entry, the associated value is returned. If the map does not contain the entry and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a reference to a default constructed value object is returned. Otherwise, Base.ItemNotFound is thrown to indicate the error.
     # 
     # \param key The key associated with the requested value.
     # 
@@ -91,9 +91,9 @@ class BondMapping(Boost.Python.instance):
     def getValue(key: Bond) -> Bond: pass
 
     ##
-    # \brief Returns a reference to the first value associated with the specified key, or the value given by the second argument if an entry with the given key does not exist.
+    # \brief Returns the first value associated with the specified key, or the value given by the second argument if an entry with the given key does not exist.
     # 
-    # If the map contains an entry with the specified key, a reference to the associated value is returned. If the map does not contain the entry, the second argument <em>def_value</em> is returned.
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry, the second argument <em>def_value</em> is returned.
     # 
     # \param key The key associated with the requested value.
     # \param def_value The value which is returned if the specified entry does not exist.
@@ -171,7 +171,7 @@ class BondMapping(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a reference to the first value associated with the specified key.
+    # \brief Returns the first value associated with the specified key.
     # 
     # The method is equivalent to getValue(const Key&) const.
     # 

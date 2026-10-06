@@ -25,18 +25,18 @@
 class DoubleVector2DArray2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c DoubleVector2DArray2Functor instance.
+    # \brief Contructs the \c DoubleVector2DArray2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c DoubleVector2DArray2Functor instance \a func.
+    # \brief Contructs a copy of the \c DoubleVector2DArray2Functor instance \a func.
     # \param func The \c DoubleVector2DArray2Functor instance to copy.
     # 
     def __init__(func: DoubleVector2DArray2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \c DoubleVector2DArray2Functor instance for the specified callable object.
+    # \brief Contructs the \c DoubleVector2DArray2Functor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

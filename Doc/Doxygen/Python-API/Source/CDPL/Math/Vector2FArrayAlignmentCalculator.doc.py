@@ -25,12 +25,12 @@
 class Vector2FArrayAlignmentCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c Vector2FArrayAlignmentCalculator instance.
+    # \brief Contructs the \c Vector2FArrayAlignmentCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Vector2FArrayAlignmentCalculator instance \a algo.
+    # \brief Contructs a copy of the \c Vector2FArrayAlignmentCalculator instance \a algo.
     # \param algo The \c Vector2FArrayAlignmentCalculator instance to copy.
     # 
     def __init__(algo: Vector2FArrayAlignmentCalculator) -> None: pass
@@ -48,7 +48,7 @@ class Vector2FArrayAlignmentCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Vector2FArrayAlignmentCalculator instance \a algo.
+    # \brief Replaces the current state with a copy of the state of the \c Vector2FArrayAlignmentCalculator instance \a algo.
     # \param algo The \c Vector2FArrayAlignmentCalculator instance to copy.
     # \return \a self
     # 

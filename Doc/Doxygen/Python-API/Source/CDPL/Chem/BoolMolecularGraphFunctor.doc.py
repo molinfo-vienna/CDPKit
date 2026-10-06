@@ -25,18 +25,18 @@
 class BoolMolecularGraphFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c BoolMolecularGraphFunctor instance.
+    # \brief Contructs the \c BoolMolecularGraphFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c BoolMolecularGraphFunctor instance \a func.
+    # \brief Contructs a copy of the \c BoolMolecularGraphFunctor instance \a func.
     # \param func The \c BoolMolecularGraphFunctor instance to copy.
     # 
     def __init__(func: BoolMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c BoolMolecularGraphFunctor instance for the specified callable object.
+    # \brief Contructs the \c BoolMolecularGraphFunctor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

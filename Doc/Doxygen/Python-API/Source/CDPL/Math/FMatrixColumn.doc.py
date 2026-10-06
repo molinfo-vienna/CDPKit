@@ -25,13 +25,13 @@
 class FMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FMatrixColumn instance \a mc.
+    # \brief Contructs a copy of the \c FMatrixColumn instance \a mc.
     # \param mc The \c FMatrixColumn instance to copy.
     # 
     def __init__(mc: FMatrixColumn) -> None: pass
 
     ##
-    # \brief Initializes the \c FMatrixColumn instance.
+    # \brief Contructs the \c FMatrixColumn instance.
     # \param e 
     # \param i 
     # 
@@ -102,7 +102,7 @@ class FMatrixColumn(Boost.Python.instance):
     def assign(c: FMatrixColumn) -> FMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a a.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
     # \return \a self
     # 
@@ -136,7 +136,7 @@ class FMatrixColumn(Boost.Python.instance):
     def setElement(i: int, v: float) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped matrix (via its stored closure).
+    # \brief Returns the wrapped matrix (via its stored closure).
     # 
     # \return A reference to the wrapped matrix closure.
     # 
@@ -171,7 +171,7 @@ class FMatrixColumn(Boost.Python.instance):
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # \brief Returns the element at row <em>i</em> of the column.
     # 
     # \param i The zero-based row index.
     # 
@@ -180,7 +180,7 @@ class FMatrixColumn(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the element at row <em>i</em> of the column.
+    # \brief Returns the element at row <em>i</em> of the column.
     # 
     # \param i The zero-based row index.
     # 

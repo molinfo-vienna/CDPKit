@@ -25,7 +25,7 @@
 class FileCDFBZ2ReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \c FileCDFBZ2ReactionWriter instance.
+    # \brief Contructs the \c FileCDFBZ2ReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

@@ -25,18 +25,18 @@
 class LRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c LRealQuaternion instance.
+    # \brief Contructs the \c LRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c LRealQuaternion instance \a q.
+    # \brief Contructs a copy of the \c LRealQuaternion instance \a q.
     # \param q The \c LRealQuaternion instance to copy.
     # 
     def __init__(q: LRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \c LRealQuaternion instance.
+    # \brief Contructs the \c LRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: int) -> None: pass
@@ -66,7 +66,7 @@ class LRealQuaternion(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c LRealQuaternion instance \a q.
+    # \brief Replaces the current state with a copy of the state of the \c LRealQuaternion instance \a q.
     # \param q The \c LRealQuaternion instance to copy.
     # \return \a self
     # 

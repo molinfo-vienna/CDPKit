@@ -47,13 +47,13 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
         ACCEPTOR = 2
 
     ##
-    # \brief Initializes a copy of the \c MMFF94VanDerWaalsInteraction instance \a iactn.
+    # \brief Contructs a copy of the \c MMFF94VanDerWaalsInteraction instance \a iactn.
     # \param iactn The \c MMFF94VanDerWaalsInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94VanDerWaalsInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \c MMFF94VanDerWaalsInteraction instance.
+    # \brief Contructs the \c MMFF94VanDerWaalsInteraction instance.
     # \param atom1_idx 
     # \param atom2_idx 
     # \param atom_params1 
@@ -102,7 +102,7 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
     def getRIJPow7() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94VanDerWaalsInteraction instance \a iactn.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94VanDerWaalsInteraction instance \a iactn.
     # \param iactn The \c MMFF94VanDerWaalsInteraction instance to copy.
     # \return \a self
     # 

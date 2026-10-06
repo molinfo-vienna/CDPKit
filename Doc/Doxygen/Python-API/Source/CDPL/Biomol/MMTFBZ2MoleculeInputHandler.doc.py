@@ -25,6 +25,6 @@
 class MMTFBZ2MoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \c MMTFBZ2MoleculeInputHandler instance.
+    # \brief Contructs the \c MMTFBZ2MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

@@ -27,7 +27,7 @@
 class MolecularGraphMatchExpression(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c MolecularGraphMatchExpression instance.
+    # \brief Contructs the \c MolecularGraphMatchExpression instance.
     # 
     def __init__() -> None: pass
 

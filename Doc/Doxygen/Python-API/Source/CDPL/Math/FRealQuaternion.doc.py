@@ -25,18 +25,18 @@
 class FRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c FRealQuaternion instance.
+    # \brief Contructs the \c FRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c FRealQuaternion instance \a q.
+    # \brief Contructs a copy of the \c FRealQuaternion instance \a q.
     # \param q The \c FRealQuaternion instance to copy.
     # 
     def __init__(q: FRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \c FRealQuaternion instance.
+    # \brief Contructs the \c FRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: float) -> None: pass
@@ -66,7 +66,7 @@ class FRealQuaternion(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FRealQuaternion instance \a q.
+    # \brief Replaces the current state with a copy of the state of the \c FRealQuaternion instance \a q.
     # \param q The \c FRealQuaternion instance to copy.
     # \return \a self
     # 

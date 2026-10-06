@@ -25,13 +25,13 @@
 class ConstDVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstDVectorRange instance \a r.
+    # \brief Contructs a copy of the \c ConstDVectorRange instance \a r.
     # \param r The \c ConstDVectorRange instance to copy.
     # 
     def __init__(r: ConstDVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstDVectorRange instance.
+    # \brief Contructs the \c ConstDVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -75,7 +75,7 @@ class ConstDVectorRange(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 
@@ -110,7 +110,7 @@ class ConstDVectorRange(Boost.Python.instance):
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 
@@ -119,7 +119,7 @@ class ConstDVectorRange(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns a reference to the element at index <em>i</em> of the view.
+    # \brief Returns the element at index <em>i</em> of the view.
     # 
     # \param i The zero-based index within the view.
     # 

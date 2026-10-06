@@ -25,18 +25,18 @@
 class AtomMatchExpressionPtrAtomFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c AtomMatchExpressionPtrAtomFunctor instance.
+    # \brief Contructs the \c AtomMatchExpressionPtrAtomFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c AtomMatchExpressionPtrAtomFunctor instance \a func.
+    # \brief Contructs a copy of the \c AtomMatchExpressionPtrAtomFunctor instance \a func.
     # \param func The \c AtomMatchExpressionPtrAtomFunctor instance to copy.
     # 
     def __init__(func: AtomMatchExpressionPtrAtomFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c AtomMatchExpressionPtrAtomFunctor instance for the specified callable object.
+    # \brief Contructs the \c AtomMatchExpressionPtrAtomFunctor instance for the specified callable object.
     # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass

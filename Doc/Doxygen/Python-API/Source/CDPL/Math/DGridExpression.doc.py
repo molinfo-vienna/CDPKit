@@ -29,28 +29,28 @@ class DGridExpression(ConstDGridExpression):
     def swap(e: DGridExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c DGridExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c DGridExpression instance \a e.
     # \param e The \c DGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: DGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstFGridExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFGridExpression instance \a e.
     # \param e The \c ConstFGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ConstDGridExpression instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDGridExpression instance \a e.
     # \param e The \c ConstDGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c object instance \a e.
+    # \brief Replaces the current state with a copy of the state of the \c object instance \a e.
     # \param e The \c object instance to copy.
     # \return \a self
     # 

@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Handler for the output of feature container data in the native I/O format of the <em>CDPL</em>.
+# \brief Handler for the output of feature container data in the native I/O format of the <em>%CDPL</em>.
 # 
 class CDFFeatureContainerOutputHandler(FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \c CDFFeatureContainerOutputHandler instance.
+    # \brief Contructs the \c CDFFeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

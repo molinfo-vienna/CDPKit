@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Reader for molecule data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+# \brief Reader for molecule data in the gzip-compressed native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c CDFGZMoleculeReader instance.
+    # \brief Contructs the \c CDFGZMoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

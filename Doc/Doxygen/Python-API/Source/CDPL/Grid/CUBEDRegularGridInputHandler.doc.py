@@ -27,6 +27,6 @@
 class CUBEDRegularGridInputHandler(DRegularGridInputHandler):
 
     ##
-    # \brief Initializes the \c CUBEDRegularGridInputHandler instance.
+    # \brief Contructs the \c CUBEDRegularGridInputHandler instance.
     # 
     def __init__() -> None: pass

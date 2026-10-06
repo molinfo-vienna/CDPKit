@@ -30,7 +30,7 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c AtomHydrophobicityCalculator instance \a calc.
+    # \brief Contructs a copy of the \c AtomHydrophobicityCalculator instance \a calc.
     # \param calc The \c AtomHydrophobicityCalculator instance to copy.
     # 
     def __init__(calc: AtomHydrophobicityCalculator) -> None: pass
@@ -56,7 +56,7 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c AtomHydrophobicityCalculator instance \a calc.
+    # \brief Replaces the current state with a copy of the state of the \c AtomHydrophobicityCalculator instance \a calc.
     # \param calc The \c AtomHydrophobicityCalculator instance to copy.
     # \return \a self
     # 

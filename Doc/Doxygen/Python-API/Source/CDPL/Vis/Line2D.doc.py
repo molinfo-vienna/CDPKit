@@ -30,7 +30,7 @@ class Line2D(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c Line2D instance \a line.
+    # \brief Contructs a copy of the \c Line2D instance \a line.
     # \param line The \c Line2D instance to copy.
     # 
     def __init__(line: Line2D) -> None: pass
@@ -66,7 +66,7 @@ class Line2D(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c Line2D instance \a line.
+    # \brief Replaces the current state with a copy of the state of the \c Line2D instance \a line.
     # \param line The \c Line2D instance to copy.
     # \return \a self
     # 

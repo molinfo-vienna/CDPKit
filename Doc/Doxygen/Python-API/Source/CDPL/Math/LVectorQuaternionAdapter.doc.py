@@ -25,13 +25,13 @@
 class LVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c LVectorQuaternionAdapter instance \a a.
+    # \brief Contructs a copy of the \c LVectorQuaternionAdapter instance \a a.
     # \param a The \c LVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: LVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c LVectorQuaternionAdapter instance.
+    # \brief Contructs the \c LVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: LVectorExpression) -> None: pass
@@ -149,7 +149,7 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def set(c1: int = 0, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 

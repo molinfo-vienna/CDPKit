@@ -25,13 +25,13 @@
 class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c ConstDVectorQuaternionAdapter instance \a a.
+    # \brief Contructs a copy of the \c ConstDVectorQuaternionAdapter instance \a a.
     # \param a The \c ConstDVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: ConstDVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \c ConstDVectorQuaternionAdapter instance.
+    # \brief Contructs the \c ConstDVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
@@ -79,7 +79,7 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Returns a reference to the wrapped vector (via its stored closure).
+    # \brief Returns the wrapped vector (via its stored closure).
     # 
     # \return A reference to the wrapped vector closure.
     # 

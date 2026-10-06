@@ -25,7 +25,7 @@
 class FileINCHIMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \c FileINCHIMolecularGraphWriter instance.
+    # \brief Contructs the \c FileINCHIMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

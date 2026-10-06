@@ -25,12 +25,12 @@
 class TopologicalFeatureAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c TopologicalFeatureAlignment instance.
+    # \brief Contructs the \c TopologicalFeatureAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TopologicalFeatureAlignment instance \a alignment.
+    # \brief Contructs a copy of the \c TopologicalFeatureAlignment instance \a alignment.
     # \param alignment The \c TopologicalFeatureAlignment instance to copy.
     # 
     def __init__(alignment: TopologicalFeatureAlignment) -> None: pass
@@ -70,7 +70,7 @@ class TopologicalFeatureAlignment(Boost.Python.instance):
     def nextAlignment(mapping: Util.STPairArray) -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TopologicalFeatureAlignment instance \a alignment.
+    # \brief Replaces the current state with a copy of the state of the \c TopologicalFeatureAlignment instance \a alignment.
     # \param alignment The \c TopologicalFeatureAlignment instance to copy.
     # \return \a self
     # 

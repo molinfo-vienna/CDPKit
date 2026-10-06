@@ -37,7 +37,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c Entry instance \a entry.
+        # \brief Contructs a copy of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -67,7 +67,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c Entry instance \a entry.
+        # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
         # \return \a self
         # 
@@ -139,7 +139,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c MMFF94AngleBendingParameterTable instance \a table.
+    # \brief Contructs a copy of the \c MMFF94AngleBendingParameterTable instance \a table.
     # \param table The \c MMFF94AngleBendingParameterTable instance to copy.
     # 
     def __init__(table: MMFF94AngleBendingParameterTable) -> None: pass
@@ -181,7 +181,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     def removeEntry(angle_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int) -> bool: pass
 
     ##
-    # \brief Returns a reference to the entry matching the specified query values.
+    # \brief Returns the entry matching the specified query values.
     # 
     # \param angle_type_idx The MMFF94 angle type index.
     # \param term_atom1_type The numeric MMFF94 atom type of the first terminal atom.
@@ -219,7 +219,7 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c MMFF94AngleBendingParameterTable instance \a table.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94AngleBendingParameterTable instance \a table.
     # \param table The \c MMFF94AngleBendingParameterTable instance to copy.
     # \return \a self
     # 

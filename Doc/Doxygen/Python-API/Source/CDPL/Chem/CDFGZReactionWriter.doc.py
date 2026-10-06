@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief Writer for reaction data in the gzip-compressed native I/O format of the <em>CDPL</em>.
+# \brief Writer for reaction data in the gzip-compressed native I/O format of the <em>%CDPL</em>.
 # 
 class CDFGZReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \c CDFGZReactionWriter instance.
+    # \brief Contructs the \c CDFGZReactionWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

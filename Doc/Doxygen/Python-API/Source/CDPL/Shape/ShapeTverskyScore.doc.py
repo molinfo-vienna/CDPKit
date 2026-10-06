@@ -33,7 +33,7 @@ class ShapeTverskyScore(Boost.Python.instance):
     def __init__(alpha: float = 0.95, beta: float = 0.05) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ShapeTverskyScore instance \a score.
+    # \brief Contructs a copy of the \c ShapeTverskyScore instance \a score.
     # \param score The \c ShapeTverskyScore instance to copy.
     # 
     def __init__(score: ShapeTverskyScore) -> None: pass
@@ -51,7 +51,7 @@ class ShapeTverskyScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ShapeTverskyScore instance \a score.
+    # \brief Replaces the current state with a copy of the state of the \c ShapeTverskyScore instance \a score.
     # \param score The \c ShapeTverskyScore instance to copy.
     # \return \a self
     # 

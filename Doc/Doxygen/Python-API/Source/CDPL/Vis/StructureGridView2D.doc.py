@@ -160,7 +160,7 @@ class StructureGridView2D(View2D):
     def write(os: Base.OStream, fmt: Base.DataFormat) -> bool: pass
 
     ##
-    # \brief Returns a reference to the Vis.FontMetrics instance used for measuring the dimension of text labels.
+    # \brief Returns the Vis.FontMetrics instance used for measuring the dimension of text labels.
     # 
     # \return A reference to the used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 

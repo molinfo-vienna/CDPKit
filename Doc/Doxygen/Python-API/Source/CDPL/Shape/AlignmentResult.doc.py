@@ -32,7 +32,7 @@ class AlignmentResult(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c AlignmentResult instance \a res.
+    # \brief Contructs a copy of the \c AlignmentResult instance \a res.
     # \param res The \c AlignmentResult instance to copy.
     # 
     def __init__(res: AlignmentResult) -> None: pass
@@ -50,7 +50,7 @@ class AlignmentResult(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c AlignmentResult instance \a res.
+    # \brief Replaces the current state with a copy of the state of the \c AlignmentResult instance \a res.
     # \param res The \c AlignmentResult instance to copy.
     # \return \a self
     # 

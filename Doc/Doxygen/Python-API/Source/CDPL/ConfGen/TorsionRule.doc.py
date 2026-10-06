@@ -42,7 +42,7 @@ class TorsionRule(Boost.Python.instance):
         def __init__(ang: float, tol1: float, tol2: float, score: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \c AngleEntry instance \a entry.
+        # \brief Contructs a copy of the \c AngleEntry instance \a entry.
         # \param entry The \c AngleEntry instance to copy.
         # 
         def __init__(entry: AngleEntry) -> None: pass
@@ -60,7 +60,7 @@ class TorsionRule(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c AngleEntry instance \a entry.
+        # \brief Replaces the current state with a copy of the state of the \c AngleEntry instance \a entry.
         # \param entry The \c AngleEntry instance to copy.
         # \return \a self
         # 
@@ -105,12 +105,12 @@ class TorsionRule(Boost.Python.instance):
         tolerance2 = property(getTolerance2)
 
     ##
-    # \brief Initializes the \c TorsionRule instance.
+    # \brief Contructs the \c TorsionRule instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TorsionRule instance \a rule.
+    # \brief Contructs a copy of the \c TorsionRule instance \a rule.
     # \param rule The \c TorsionRule instance to copy.
     # 
     def __init__(rule: TorsionRule) -> None: pass
@@ -128,7 +128,7 @@ class TorsionRule(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c TorsionRule instance \a rule.
+    # \brief Replaces the current state with a copy of the state of the \c TorsionRule instance \a rule.
     # \param rule The \c TorsionRule instance to copy.
     # \return \a self
     # 

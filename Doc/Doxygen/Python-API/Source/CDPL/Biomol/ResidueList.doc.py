@@ -38,13 +38,13 @@ class ResidueList(Chem.FragmentList):
     def __init__(molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ResidueList instance \a res_list.
+    # \brief Contructs a copy of the \c ResidueList instance \a res_list.
     # \param res_list The \c ResidueList instance to copy.
     # 
     def __init__(res_list: ResidueList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ResidueList instance \a res_list.
+    # \brief Replaces the current state with a copy of the state of the \c ResidueList instance \a res_list.
     # \param res_list The \c ResidueList instance to copy.
     # \return \a self
     # 

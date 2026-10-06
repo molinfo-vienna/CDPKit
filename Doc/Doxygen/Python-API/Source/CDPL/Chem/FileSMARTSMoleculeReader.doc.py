@@ -25,7 +25,7 @@
 class FileSMARTSMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \c FileSMARTSMoleculeReader instance.
+    # \brief Contructs the \c FileSMARTSMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

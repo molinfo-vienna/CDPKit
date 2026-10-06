@@ -25,13 +25,13 @@
 class FRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \c FRotationMatrix instance \a m.
+    # \brief Contructs a copy of the \c FRotationMatrix instance \a m.
     # \param m The \c FRotationMatrix instance to copy.
     # 
     def __init__(m: FRotationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \c FRotationMatrix instance.
+    # \brief Contructs the \c FRotationMatrix instance.
     # \param n 
     # \param w 
     # \param ux 
@@ -65,7 +65,7 @@ class FRotationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c FRotationMatrix instance \a m.
+    # \brief Replaces the current state with a copy of the state of the \c FRotationMatrix instance \a m.
     # \param m The \c FRotationMatrix instance to copy.
     # \return \a self
     # 

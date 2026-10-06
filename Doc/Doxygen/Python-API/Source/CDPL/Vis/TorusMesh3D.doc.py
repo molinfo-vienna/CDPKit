@@ -39,7 +39,7 @@ class TorusMesh3D(TriangleMesh3D):
     def __init__(radius1: float, radius2: float, num_sect1: int, num_sect2: int, start_angle: float = 0.0, first_sect_size: float = 0.0) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c TorusMesh3D instance \a mesh.
+    # \brief Contructs a copy of the \c TorusMesh3D instance \a mesh.
     # \param mesh The \c TorusMesh3D instance to copy.
     # 
     def __init__(mesh: TorusMesh3D) -> None: pass

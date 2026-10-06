@@ -30,7 +30,7 @@ class ColorTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c ColorTable instance \a table.
+    # \brief Contructs a copy of the \c ColorTable instance \a table.
     # \param table The \c ColorTable instance to copy.
     # 
     def __init__(table: ColorTable) -> None: pass
@@ -54,7 +54,7 @@ class ColorTable(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c ColorTable instance \a map.
+    # \brief Replaces the current state with a copy of the state of the \c ColorTable instance \a map.
     # \param map The \c ColorTable instance to copy.
     # \return \a self
     # 
