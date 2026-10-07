@@ -62,7 +62,7 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     #  <tr><td><color></td><td>Text color; supports the attributes <em>r</em>, <em>g</em>, <em>b</em> and <em>a</em> with a value in the range [0.0, 1.0]; default component values are <em>r=0</em>, <em>b=0</em>, <em>g=0</em> and <em>a=1</em></td></tr>
     # </table>
     # 
-    # Newline characters <tt>\n</tt> are regarded and interpreted as such. Tab characters <tt>\t</tt> are replaced by a single whitespace character. Any other special characters are deleted. The supported tags listed above are all optional. Plain ASCII text will thus be rendered using the set font (see setFont()) and color (see setPen()).
+    # Newline characters <tt>\n</tt> are regarded and interpreted as such. Tab characters <tt>\t</tt> are replaced by a single whitespace character. %Any other special characters are deleted. The supported tags listed above are all optional. Plain ASCII text will thus be rendered using the set font (see setFont()) and color (see setPen()).
     # 
     # \param text The text content of the block.
     # 

@@ -82,7 +82,7 @@ class SubstructureSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the query matches a substructure of the target molecular graph, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
     # 
     def mappingExists(target: MolecularGraph) -> bool: pass
 
@@ -95,7 +95,7 @@ class SubstructureSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the query matches at least one substructure of the specified target molecular graph, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
     # 
     def findMappings(target: MolecularGraph) -> bool: pass
 

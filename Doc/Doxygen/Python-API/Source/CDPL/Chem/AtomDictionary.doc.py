@@ -240,7 +240,7 @@ class AtomDictionary(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds the given entry to the dictionary. Any pre-existing entry for the same (type, isotope) is replaced.
+    # \brief Adds the given entry to the dictionary. %Any pre-existing entry for the same (type, isotope) is replaced.
     # 
     # \param entry The entry to add.
     # 

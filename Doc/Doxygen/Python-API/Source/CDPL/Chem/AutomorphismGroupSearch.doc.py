@@ -97,7 +97,7 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if any mappings of the specified molecular graph have been found, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
     # 
     def findMappings(molgraph: MolecularGraph) -> bool: pass
 

@@ -63,7 +63,7 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if a common substructure of at least the minimum accepted size could be found, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxBondMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxBondMappings() will be discarded.
     # 
     def mappingExists(target: MolecularGraph) -> bool: pass
 
@@ -76,7 +76,7 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if common substructures of at least the minimum accepted size were found, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxBondMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxBondMappings() will be discarded.
     # 
     def findAllMappings(target: MolecularGraph) -> bool: pass
 
@@ -89,7 +89,7 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if common substructures of at least the minimum accepted size were found, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxBondMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findAllMappings() or findMaxBondMappings() will be discarded.
     # 
     def findMaxBondMappings(target: MolecularGraph) -> bool: pass
 
@@ -165,7 +165,7 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     ##
     # \brief Allows to specify the minimum accepted common substructure size.
     # 
-    # Any found common substructures which cover less than <em>min_size</em> atoms are not accepted as a valid solution and will be discarded.
+    # %Any found common substructures which cover less than <em>min_size</em> atoms are not accepted as a valid solution and will be discarded.
     # 
     # \param min_size The minimum accepted common substructure size in number of atoms.
     # 

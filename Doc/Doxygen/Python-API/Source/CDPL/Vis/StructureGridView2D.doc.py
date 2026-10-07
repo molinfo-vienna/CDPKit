@@ -195,7 +195,7 @@ class StructureGridView2D(View2D):
     ##
     # \brief Chnages the current number of grid rows and columns.
     # 
-    # The grid gets resized dynamically if a cell outside the currently sized grid is requested by __call__. Calling this method is thus only necessary if a specific grid size is desired. Any already existing cells that are located outside the new grid dimensions will be deleted.
+    # The grid gets resized dynamically if a cell outside the currently sized grid is requested by __call__. Calling this method is thus only necessary if a specific grid size is desired. %Any already existing cells that are located outside the new grid dimensions will be deleted.
     # 
     # \param num_rows The new numer of grid rows.
     # \param num_cols The new numer of grid columns.

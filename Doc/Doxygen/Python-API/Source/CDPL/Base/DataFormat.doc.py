@@ -25,16 +25,37 @@
 class DataFormat(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Iterable type providing access to file extensions registered on a \c Base.DataFormat instance.
+    # 
     class FileExtensionSequence(Boost.Python.instance):
 
+        ##
+        # \brief Returns the number of registered file extensions.
+        # \return The number of registered file extensions.
+        # 
         def __len__() -> int: pass
 
+        ##
+        # \brief Returns the file extension at index \a idx.
+        # \param idx The zero-based index of the file extension.
+        # \return The file extension at index \a idx.
+        # \throw Base.IndexError if \a idx is out of bounds.
+        # 
         def __getitem__(idx: int) -> str: pass
 
+        ##
+        # \brief Deletes the file extension at index \a idx.
+        # \param idx The zero-based index of the file extension.
+        # \throw Base.IndexError if \a idx is out of bounds.
+        # 
         def __delitem__(idx: int) -> None: pass
 
+        ##
+        # \brief Changes the file extension at index \a idx to \a file_ext.
+        # \param idx The zero-based index of the file extension.
+        # \param file_ext The new file extension.
+        # \throw Base.IndexError if \a idx is out of bounds.
+        # 
         def __setitem__(idx: int, file_ext: str) -> None: pass
 
         ##
@@ -216,6 +237,10 @@ class DataFormat(Boost.Python.instance):
     # 
     def setMultiRecordFormat(multi_rec: bool) -> None: pass
 
+    ##
+    # \brief Returns the sequence of all registered file extensions.
+    # \return The sequence of all registered file extensions.
+    # 
     def getFileExtensions() -> FileExtensionSequence: pass
 
     ##

@@ -4212,7 +4212,7 @@ def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset
 #  - A molecule bond connecting two atoms that match labeled search pattern atoms which is not occurring in the result <em>SMILES</em> string will be left unchanged
 #  - A molecule atom matching a labeled search pattern atom which is not occurring in the result <em>SMILES</em> string will be left unchanged
 #  - A labeled atom in the result <em>SMILES</em> string with a numeric id that does not occur in the search pattern will be created with specified properties (symbol, form. charge, isotope, chirality, ...)
-#  - Any unlabeled atoms in the result <em>SMILES</em> string will be created with the specified properties (symbol, form. charge, isotope, chirality, ...)
+#  - %Any unlabeled atoms in the result <em>SMILES</em> string will be created with the specified properties (symbol, form. charge, isotope, chirality, ...)
 #  - Bonds to/between unlabeled result <em>SMILES</em> string atoms will be created with the specified bond order
 #  - For a mapped molecule atom only those properties (symbol, form. charge, isotope, chirality, ...) that were specified for the corresponding result <em>SMILES</em> string atom will be modified
 #  - The special result <em>SMILES</em> string atom type symbol <tt>x</tt> (only valid in brackets) results in the removal of the mapped molecule atom including any incident bonds
@@ -4246,7 +4246,7 @@ def editSubstructures(molgraph: MolecularGraph, result_mol: Molecule, search_ptn
 #  - A molecule bond connecting two atoms that match labeled search pattern atoms which is not occurring in the result <em>SMILES</em> string will be left unchanged
 #  - A molecule atom matching a labeled search pattern atom which is not occurring in the result <em>SMILES</em> string will be left unchanged
 #  - A labeled atom in the result <em>SMILES</em> string with a numeric id that does not occur in the search pattern will be created with specified properties (symbol, form. charge, isotope, chirality, ...)
-#  - Any unlabeled atoms in the result <em>SMILES</em> string will be created with the specified properties (symbol, form. charge, isotope, chirality, ...)
+#  - %Any unlabeled atoms in the result <em>SMILES</em> string will be created with the specified properties (symbol, form. charge, isotope, chirality, ...)
 #  - Bonds to/between unlabeled result <em>SMILES</em> string atoms will be created with the specified bond order
 #  - For a mapped molecule atom only those properties (symbol, form. charge, isotope, chirality, ...) that were specified for the corresponding result <em>SMILES</em> string atom will be modified
 #  - The special result <em>SMILES</em> string atom type symbol <tt>x</tt> (only valid in brackets) results in the removal of the mapped molecule atom including any incident bonds

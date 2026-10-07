@@ -99,7 +99,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     ##
     # \brief Registers a rule exclude pattern.
     # 
-    # Any matching substructures present in the parent molecular graph will be excluded from structure transformations.
+    # %Any matching substructures present in the parent molecular graph will be excluded from structure transformations.
     # 
     # \param molgraph The exclude match pattern.
     # 

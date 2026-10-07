@@ -150,6 +150,7 @@ class StringIOStream(IOStream):
 
     ##
     # \brief Outputs the specified string.
+    # \param string The string to output.
     # \note Due to buffering, the string may not actually show up in the file until the flush() or close() method is called.
     # 
     def write(string: object) -> None: pass

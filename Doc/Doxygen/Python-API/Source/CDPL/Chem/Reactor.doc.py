@@ -66,7 +66,7 @@ class Reactor(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if matching reaction sites were found, and <tt>False</tt> otherwise. 
     # 
-    # \note Any reaction site mappings that were recorded in a previous call to findReactionSites() will be discarded. 
+    # \note %Any reaction site mappings that were recorded in a previous call to findReactionSites() will be discarded. 
     # 
     # \see performReaction()
     # 

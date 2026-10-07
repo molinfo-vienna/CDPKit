@@ -111,7 +111,7 @@ class PropertyContainer(Boost.Python.instance):
     ##
     # \brief Adds the property value entries in the <tt>PropertyContainer</tt> instance <em>cntnr</em>.
     # 
-    # Any property values which have no corresponding assigned value in <em>cntnr</em> are left unchanged. Otherwise the value of the local property gets overwritten by the value stored in <em>cntnr</em>.
+    # %Any property values which have no corresponding assigned value in <em>cntnr</em> are left unchanged. Otherwise the value of the local property gets overwritten by the value stored in <em>cntnr</em>.
     # 
     # \param cntnr The <tt>PropertyContainer</tt> instance containing the property value entries to add.
     # 

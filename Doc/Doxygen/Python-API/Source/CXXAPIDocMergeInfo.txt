@@ -28,6 +28,8 @@ A reference to itself. § \a self
 a reference to the § the
 int idx § idx: int
 Base class § %Base class
+' Any ' § ' %Any '
+'\nAny ' § '\n%Any '
 <em>CDPL</em> § <em>%CDPL</em>
 
 #
@@ -61,6 +63,45 @@ Otherwise an empty Base.Any object gets returned if <em>_throw</em> is <tt>False
 \param throw_ Specifies whether to throw a Base.ItemNotFound exception or to return an empty Base.Any object if the requested property value does not exist. §
 \throw Base.ItemNotFound if an entry for the requested property value does not exist and <em>throw_</em> is <tt>True</tt> § \throw Base.ItemNotFound if an entry for the requested property value does not exist
 \return The stored property value or and empty Base.Any object § \return The stored property value
+
+Base.ControlParameterContainer.getParameterOrDefault § Base.ControlParameterContainer.getParameterOrDefault
+as a reference to an object of type <em>T</em> §
+\throw Base.BadCast if the stored control-parameter value cannot be casted to the target type <em>T</em>. §
+
+Base.ControlParameterContainer.setParameter § Base.ControlParameterContainer.setParameter
+of type Base.Any and empty, i.e. the method Base.Any.isEmpty() returns <tt>True</tt> § \c None
+
+Base.ControlParameterContainer.registerParentChangedCallback § Base.ControlParameterContainer.registerParentChangedCallback
+ControlParameterContainer.ParentChangedCallbackFunction § Base.VoidFunctor
+
+Base.ControlParameterContainer.registerParameterRemovedCallback § Base.ControlParameterContainer.registerParameterRemovedCallback
+ControlParameterContainer.ParameterRemovedCallbackFunction § Base.VoidLookupKeyFunctor
+
+Base.ControlParameterContainer.registerParameterChangedCallback § Base.ControlParameterContainer.registerParameterChangedCallback
+ControlParameterContainer.ParameterChangedCallbackFunction § Base.VoidLookupKeyFunctor
+
+Base.ControlParameterContainer.getSize § Base.ControlParameterContainer.getNumParameters
+
+Base.ControlParameterContainer.__delitem__ § Base.ControlParameterContainer.removeParameter
+
+Base.ControlParameterContainer.__setitem__ § Base.ControlParameterContainer.setParameter
+
+Base.ControlParameterContainer.__getitem__(key) § Base.ControlParameterContainer.getParameter(key,throw_,local)
+If an entry for the control-parameter does not exist, the result depends on the arguments <em>throw_</em> and <em>local</em> § Otherwise a Base.ItemNotFound exception will be thrown
+If a parent container has been set and the argument <em>local</em> is <tt>False</tt>, the request is forwarded to the parent (which may also forward the request). Otherwise an empty Base.Any object is returned if <em>_throw</em> is <tt>False</tt>, and a Base.ItemNotFound exception will be thrown if <em>_throw</em> is <tt>True</tt>. §
+\param throw_ Specifies whether or not to throw a Base.ItemNotFound exception if an entry for the control-parameter does not exist. §
+\param local Specifies whether or not the request shall be forwarded to the parent container if a local entry for the control-parameter does not exist. §
+The stored control-parameter value or an empty Base.Any object  § The stored control-parameter value
+' and <em>_throw</em> is <tt>True</tt>' §
+
+Base.ControlParameterContainer.__contains__(key) § Base.ControlParameterContainer.isParameterSet(key,local)
+If the container does not contain an entry for the specified control-parameter, a parent container has been set and the argument <em>local</em> is <tt>False</tt>, the call is forwarded to the parent (which may also forward the call). Otherwise the result of the local search is returned. §
+\param local Specifies whether or not the query shall be forwarded to the parent container if a local entry for the control-parameter does not exist. §
+
+Base.ControlParameterContainer § Base.ControlParameterContainer
+Iterators pointing to the beginning and end of the container are obtained via the methods getEntriesBegin() and getEntriesEnd(), respectively. §
+' of type ControlParameterContainer.ParameterEntry' §
+family of overloaded methods is provided which expect & method is provided which expects §
 
 #
 # --- CDPL.Math package ---

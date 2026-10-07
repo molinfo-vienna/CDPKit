@@ -70,7 +70,7 @@ namespace CDPL
                 ControlParameterContainer(cntnr) {}
 
             /**
-             * \brief Assignment operator.
+             * \brief Replaces the current set control-parameters by a copy of the parameters in \a cntnr.
              * \param cntnr The \c %ControlParameterContainer instance to copy.
              * \return A reference to itself.
              */

@@ -41,7 +41,7 @@ class ControlParameterList(ControlParameterContainer):
     def __init__(cntnr: ControlParameterContainer) -> None: pass
 
     ##
-    # \brief Assignment operator.
+    # \brief Replaces the current set control-parameters by a copy of the parameters in <em>cntnr</em>.
     # 
     # \param cntnr The <tt>ControlParameterContainer</tt> instance to copy.
     # 

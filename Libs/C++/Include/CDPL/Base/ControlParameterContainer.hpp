@@ -161,8 +161,8 @@ namespace CDPL
              * \brief Returns the value of the control-parameter specified by \a key.
              *
              * If the container contains an entry for the specified control-parameter, the stored value will be returned.
-             * If an entry for the control-parameter does not exist, the results depends on the arguments
-             * \a throw_ and \a local:
+             * If an entry for the control-parameter does not exist, the result depends on the arguments
+             * \a throw_ and \a local.
              *
              * If a parent container has been set and the argument \a local is \c false, the request is forwarded to the parent
              * (which may also forward the request). Otherwise an empty Base::Any object is returned if \a _throw is \c false,
@@ -268,7 +268,7 @@ namespace CDPL
             void addParameters(const ControlParameterContainer& cntnr);
 
             /**
-             * \brief Replaces the current set of properties by a copy of the entries in \a cntnr.
+             * \brief Replaces the current set control-parameters by a copy of the parameters in \a cntnr.
              *
              * The assignment is equivalent to first erasing all entries by calling clearParameters() and then calling
              * setParameter() for each key/value entry in \a cntnr.

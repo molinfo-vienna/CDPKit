@@ -127,13 +127,13 @@ void CDPLPythonBase::exportControlParameterContainer()
 
     python::class_<ControlParameterContainerWrapper, boost::noncopyable>("ControlParameterContainer", python::no_init)
         .def(python::init<>(python::arg("self")))
-        .def("setParameter", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("value")))
+        .def("setParameter", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("val")))
         .def("removeParameter", &Base::ControlParameterContainer::removeParameter, (python::arg("self"), python::arg("key")))
         .def("getParameter", GetParameterFuncType(&Base::ControlParameterContainer::getParameter), 
              ((python::arg("self"), python::arg("key"), python::arg("throw_") = false, python::arg("local") = false)),
              python::return_value_policy<python::copy_const_reference>())
         .def("getParameterOrDefault", &getParameterOrDef, 
-             ((python::arg("self"), python::arg("key"), python::arg("def_value"), python::arg("local") = false)),
+             ((python::arg("self"), python::arg("key"), python::arg("def_val"), python::arg("local") = false)),
              python::return_value_policy<python::copy_const_reference>()) 
         .def("isParameterSet", &Base::ControlParameterContainer::isParameterSet,
              ((python::arg("self"), python::arg("key"), python::arg("local") = false)))
@@ -167,7 +167,7 @@ void CDPLPythonBase::exportControlParameterContainer()
         .add_property("parameters", &getParameters)
         .add_property("numParameters", &Base::ControlParameterContainer::getNumParameters)
         .def("__getitem__", &getItem, python::return_value_policy<python::copy_const_reference>(), (python::arg("self"), python::arg("key")))
-        .def("__setitem__", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("value")))
+        .def("__setitem__", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("val")))
         .def("__delitem__", &Base::ControlParameterContainer::removeParameter,  (python::arg("self"), python::arg("key")))
         .def("__contains__", &containsItem, (python::arg("self"), python::arg("key")))
         .def("__len__", &Base::ControlParameterContainer::getNumParameters, python::arg("self"));

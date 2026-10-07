@@ -154,7 +154,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
     ##
     # \brief Allows to specify the minimum length a path must have to contribute to the generated fingerprint.
     # 
-    # Any path whose length (in number of bonds) is lower than the specified minimum length will not be represented by a corresponding bit in the generated fingerprint.
+    # %Any path whose length (in number of bonds) is lower than the specified minimum length will not be represented by a corresponding bit in the generated fingerprint.
     # 
     # \param min_length The minimum path length in number of bonds.
     # 
@@ -165,7 +165,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
     ##
     # \brief Allows to specify the maximum considered path length.
     # 
-    # Any path whose length (in number of bonds) is greater than the specified maximum length will not be represented by a corresponding bit in the generated fingerprint.
+    # %Any path whose length (in number of bonds) is greater than the specified maximum length will not be represented by a corresponding bit in the generated fingerprint.
     # 
     # \param max_length The maximum path length in number of bonds.
     # 

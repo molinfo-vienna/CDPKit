@@ -59,7 +59,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the query matches the target reaction, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
     # 
     def mappingExists(target: Reaction) -> bool: pass
 
@@ -72,7 +72,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the query can be mapped to the specified target reaction, and <tt>False</tt> otherwise. 
     # 
-    # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
+    # \note %Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
     # 
     def findMappings(target: Reaction) -> bool: pass
 
