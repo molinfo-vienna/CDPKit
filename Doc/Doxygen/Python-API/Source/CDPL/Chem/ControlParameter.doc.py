@@ -108,7 +108,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies whether the stereo parity of atoms shall be ignored when reading or writing data in an <em>MDL CTFile</em>-based format.
     # 
-    # If the parameter is set to <tt>True</tt>, the stereo parity of atoms will be ignored both on reading (i.e. the read <em>MDL</em> parity of an input atom will not be converted to the corresponding Chem.StereoDescriptor object and stored in the Chem.Atom property Chem.AtomProperty.STEREO_DESCRIPTOR) and writing (i.e. the property Chem.AtomProperty.MDL_PARITY is not written to the corresponding connection table data field).
+    # If the parameter is set to <tt>True</tt>, the stereo parity of atoms will be ignored both on reading (i.e. the read <em>MDL</em> parity of an input atom will not be converted to the corresponding Chem.StereoDescriptor instance and stored in the Chem.Atom property Chem.AtomProperty.STEREO_DESCRIPTOR) and writing (i.e. the property Chem.AtomProperty.MDL_PARITY is not written to the corresponding connection table data field).
     # 
     # \valuetype  <tt>bool</tt> 
     # \see [\ref CTFILE]

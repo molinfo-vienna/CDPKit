@@ -97,7 +97,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> Vector7D: pass
 
@@ -106,7 +106,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> Vector7D: pass
 
@@ -115,7 +115,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> Vector7D: pass
 
@@ -124,7 +124,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> Vector7D: pass
 
@@ -133,7 +133,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param v The source fixed-size vector.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(v: Vector7D) -> Vector7D: pass
 
@@ -301,7 +301,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstDVectorExpression) -> Vector7D: pass
 
@@ -317,7 +317,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstDVectorExpression) -> Vector7D: pass
 
@@ -326,7 +326,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> Vector7D: pass
 
@@ -335,7 +335,7 @@ class Vector7D(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> Vector7D: pass
 

@@ -59,7 +59,7 @@ class Feature(Chem.Entity3D):
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 

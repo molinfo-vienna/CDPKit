@@ -52,7 +52,7 @@ namespace CDPL
 
         /**
          * \brief Class implementing the creation of Vis::Object3D instances providing a 
-         *        3D representation of Pharm::FeatureContainer data objects for visualization purposes.
+         *        3D representation of Pharm::FeatureContainer data for visualization purposes.
          * \since 1.3
          */
         class CDPL_VIS_API FeatureContainerObject3DFactory : public Object3DFactory<Pharm::FeatureContainer>
@@ -65,9 +65,9 @@ namespace CDPL
             typedef std::shared_ptr<FeatureContainerObject3DFactory> SharedPointer;
 
             /**
-             * \brief Creates an Object3D that provides a 3D representation of the pharmacophore \a cntnr.
+             * \brief Creates an Vis::Object3D instance that provides a 3D representation of the pharmacophore \a cntnr.
              * \param cntnr The feature container to visualize.
-             * \return A smart pointer to the constructed 3D object.
+             * \return A smart pointer to the constructed Vis::Object3D instance.
              */
             Object3D::SharedPointer create(const Pharm::FeatureContainer& cntnr);
 

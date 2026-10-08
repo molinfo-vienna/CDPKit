@@ -133,7 +133,7 @@ class FragmentLibrary(Boost.Python.instance):
     # 
     # \param lib The source <tt>FragmentLibrary</tt>.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(lib: FragmentLibrary) -> FragmentLibrary: pass
 

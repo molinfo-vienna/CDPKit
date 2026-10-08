@@ -22,7 +22,7 @@
 ##
 # \brief Common interface for data structures that support a random access to stored Chem.Atom instances.
 # 
-# Implementations have to guarantee that a given Chem.Atom object is stored only once and its index is unique amongst all contained Chem.Atom instances. Otherwise algorithms that rely on this behaviour may not work correctly!
+# Implementations have to guarantee that a given Chem.Atom instance is stored only once and its index is unique amongst all contained Chem.Atom instances. Otherwise algorithms that rely on this behaviour may not work correctly!
 # 
 class AtomContainer(Entity3DContainer):
 
@@ -90,7 +90,7 @@ class AtomContainer(Entity3DContainer):
     def getEntity(idx: int) -> Entity3D: pass
 
     ##
-    # \brief Returns the number of stored Chem.Entity3D objects.
+    # \brief Returns the number of stored Chem.Entity3D instances.
     # 
     # Forwards to getNumAtoms() and exists to satisfy the Chem.Entity3DContainer interface.
     # 

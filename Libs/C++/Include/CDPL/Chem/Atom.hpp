@@ -59,22 +59,22 @@ namespace CDPL
 
           public:
             /**
-             * \brief A mutable random access iterator used to iterate over the connected Chem::Atom objects.
+             * \brief A mutable random access iterator used to iterate over the connected Chem::Atom instances.
              */
             typedef AtomContainer::AtomIterator AtomIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the connected \c const Chem::Atom objects.
+             * \brief A constant random access iterator used to iterate over the connected \c const Chem::Atom instances.
              */
             typedef AtomContainer::ConstAtomIterator ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the incident Chem::Bond objects.
+             * \brief A mutable random access iterator used to iterate over the incident Chem::Bond instances.
              */
             typedef BondContainer::BondIterator BondIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the incident \c const Chem::Bond objects.
+             * \brief A constant random access iterator used to iterate over the incident \c const Chem::Bond instances.
              */
             typedef BondContainer::ConstBondIterator ConstBondIterator;
 

@@ -78,7 +78,7 @@ namespace CDPL
 
             /**
              * \brief Calculates the axis-aligned bounding rectangle of the visualized model.
-             * \param bounds A Vis::Rectangle2D object storing the calculated bounding rectangle.
+             * \param bounds A Vis::Rectangle2D instance storing the calculated bounding rectangle.
              */
             virtual void getModelBounds(Rectangle2D& bounds) = 0;
         };

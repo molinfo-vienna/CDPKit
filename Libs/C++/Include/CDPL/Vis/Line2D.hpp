@@ -323,7 +323,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param line The other \c %Line2D object to be compared with.
+             * \param line The other \c %Line2D instance to be compared with.
              * \return \c true if the starting and end points compare equal, and \c false otherwise.
              */
             bool operator==(const Line2D& line) const;
@@ -333,7 +333,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == line)</tt>.
              *
-             * \param line The other \c %Line2D object to be compared with.
+             * \param line The other \c %Line2D instance to be compared with.
              * \return \c true if either the starting or end points compare non-equal, and \c false otherwise.
              */
             bool operator!=(const Line2D& line) const;

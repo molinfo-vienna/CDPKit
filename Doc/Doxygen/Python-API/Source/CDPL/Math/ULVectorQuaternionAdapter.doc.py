@@ -53,7 +53,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
@@ -62,7 +62,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
@@ -71,7 +71,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
@@ -80,7 +80,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
@@ -89,7 +89,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param a The source adapter.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
 
@@ -274,7 +274,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar summand.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(t: int) -> ULVectorQuaternionAdapter: pass
 
@@ -297,7 +297,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar subtrahend.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(t: int) -> ULVectorQuaternionAdapter: pass
 
@@ -320,7 +320,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULVectorQuaternionAdapter: pass
 
@@ -343,7 +343,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULVectorQuaternionAdapter: pass
 

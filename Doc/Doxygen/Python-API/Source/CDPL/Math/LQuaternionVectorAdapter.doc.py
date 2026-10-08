@@ -53,7 +53,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LQuaternionVectorAdapter: pass
 
@@ -62,7 +62,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LQuaternionVectorAdapter: pass
 
@@ -71,7 +71,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LQuaternionVectorAdapter: pass
 
@@ -80,7 +80,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LQuaternionVectorAdapter: pass
 
@@ -89,7 +89,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param a The source adapter.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: LQuaternionVectorAdapter) -> LQuaternionVectorAdapter: pass
 
@@ -98,7 +98,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param a The source adapter.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: object) -> None: pass
 
@@ -266,7 +266,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param e The vector expression to add.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LQuaternionVectorAdapter: pass
 
@@ -282,7 +282,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param e The vector expression to subtract.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LQuaternionVectorAdapter: pass
 
@@ -291,7 +291,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> LQuaternionVectorAdapter: pass
 
@@ -300,7 +300,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LQuaternionVectorAdapter: pass
 

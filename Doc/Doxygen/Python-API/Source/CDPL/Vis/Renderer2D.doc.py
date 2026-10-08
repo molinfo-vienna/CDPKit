@@ -32,7 +32,7 @@
 #  - drawPath() for drawing arbitrary shapes
 #  - and drawText() for drawing text
 # 
-# Drawing operations can be clipped to arbitrary shapes defined by a Vis.Path2D object. A new clip region is set by calling the method setClipPath() and disabled by calling clearClipPath().
+# Drawing operations can be clipped to arbitrary shapes defined by a Vis.Path2D instance. A new clip region is set by calling the method setClipPath() and disabled by calling clearClipPath().
 # 
 # Coordinates of points that define the geometry of graphical primitives are normally directly mapped to the coordinate system of the drawing device (e.g. an off-screen image buffer). This 1:1 mapping can be changed by applying affine transformations to the input coordinates.
 # 

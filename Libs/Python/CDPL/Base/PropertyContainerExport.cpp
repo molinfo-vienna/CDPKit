@@ -121,13 +121,13 @@ void CDPLPythonBase::exportPropertyContainer()
         .def(ObjectIdentityCheckVisitor<Base::PropertyContainer>())
         .def("getNumProperties", &Base::PropertyContainer::getNumProperties, python::arg("self"))
         .def("getPropertyOrDefault", &getPropertyOrDef, 
-             ((python::arg("self"), python::arg("key"), python::arg("def_value"))),
+             ((python::arg("self"), python::arg("key"), python::arg("def_val"))),
              python::return_value_policy<python::copy_const_reference>()) 
         .def("getPropertyKeys", &getPropertyKeys, python::arg("self"))
         .def("getPropertyValues", &getPropertyValues, python::arg("self"))
         .def("getProperties", &getProperties, python::arg("self"))
         .def("setProperty", &Base::PropertyContainer::setProperty<const Base::Any&>,
-             (python::arg("self"), python::arg("key"), python::arg("value")))
+             (python::arg("self"), python::arg("key"), python::arg("val")))
         .def("removeProperty", &Base::PropertyContainer::removeProperty,
              (python::arg("self"), python::arg("key")))
         .def("getProperty", getPropertyFunc,

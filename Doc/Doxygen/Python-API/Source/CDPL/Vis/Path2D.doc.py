@@ -24,20 +24,20 @@
 # 
 # A path consits of a number of graphical building blocks, such as rectangles, ellipses, lines and arcs. Building blocks can be joined to form closed subpaths, for example a rounded rectangle, or they can exist independently as unclosed subpaths, such as lines and curves. A closed path has coinciding start and end points.
 # 
-# <tt>Path2D</tt> objects can be used for filling, outlining, and clipping. The main advantage over a sequence of basic drawing operations is that complex shapes need to be created only once and can be stored for repeated later uses.
+# <tt>Path2D</tt> instances can be used for filling, outlining, and clipping. The main advantage over a sequence of basic drawing operations is that complex shapes need to be created only once and can be stored for repeated later uses.
 # 
-# A <tt>Path2D</tt> object can be constructed as an empty path, or as a copy of another <tt>Path2D</tt> instance. Once created, lines and curves can be added to the path using the lineTo(), arcTo() and arc() functions. The lines and curves stretch from the current position to the position passed as argument. The current position is always the end point of the last drawing operation. Use the moveTo() method to move the current position without adding a component. The moveTo() method implicitly starts a new subpath, and closes the previous one. Another way of starting a new subpath is to call the closePath() method which closes the current path by adding a line from the current position back to the path's start position. The <tt>Path2D</tt> class also provides convenience methods for the generation of common shapes: addEllipse() and addRectangle(). The generation of these shapes is implemented by executing a sequence of appropriate moveTo(), lineTo() and arcTo() calls. The axis-aligned bounding box of a path constructed in this way can be calculated by the method getBounds().
+# A <tt>Path2D</tt> instance can be constructed as an empty path, or as a copy of another <tt>Path2D</tt> instance. Once created, lines and curves can be added to the path using the lineTo(), arcTo() and arc() functions. The lines and curves stretch from the current position to the position passed as argument. The current position is always the end point of the last drawing operation. Use the moveTo() method to move the current position without adding a component. The moveTo() method implicitly starts a new subpath, and closes the previous one. Another way of starting a new subpath is to call the closePath() method which closes the current path by adding a line from the current position back to the path's start position. The <tt>Path2D</tt> class also provides convenience methods for the generation of common shapes: addEllipse() and addRectangle(). The generation of these shapes is implemented by executing a sequence of appropriate moveTo(), lineTo() and arcTo() calls. The axis-aligned bounding box of a path constructed in this way can be calculated by the method getBounds().
 # 
-# Whether or not a <tt>Path2D</tt> object contains any elements can be queried by the method isEmpty(). Whether the path also features visual elements (lines and arcs) can be queried by the method hasDrawingElements(). The method clear() deletes all elements added so far and sets the default fill rule (see setFillRule() and getFillRule()).
+# Whether or not a <tt>Path2D</tt> instance contains any elements can be queried by the method isEmpty(). Whether the path also features visual elements (lines and arcs) can be queried by the method hasDrawingElements(). The method clear() deletes all elements added so far and sets the default fill rule (see setFillRule() and getFillRule()).
 # 
-# Elements added to a <tt>Path2D</tt> object cannot inspected directly. For path analysis and rendering the method convert() is available which calls element type specific methods on a provided instance of a class implementing the Vis.Path2DConverter interface.
+# Elements added to a <tt>Path2D</tt> instance cannot inspected directly. For path analysis and rendering the method convert() is available which calls element type specific methods on a provided instance of a class implementing the Vis.Path2DConverter interface.
 # 
 # \since 1.1
 # 
 class Path2D(Boost.Python.instance):
 
     ##
-    # \brief Specifies which method to use for filling closed shapes described by the <tt>Path2D</tt> object.
+    # \brief Specifies which method to use for filling closed shapes described by the <tt>Path2D</tt> instance.
     # 
     class FillRule(Boost.Python.enum):
 
@@ -84,7 +84,7 @@ class Path2D(Boost.Python.instance):
     # 
     # \param path The <tt>Path2D</tt> instance to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(path: Path2D) -> Path2D: pass
 
@@ -291,7 +291,7 @@ class Path2D(Boost.Python.instance):
     # 
     # \param path The <tt>Path2D</tt> instance providing the elements to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(path: Path2D) -> Path2D: pass
 

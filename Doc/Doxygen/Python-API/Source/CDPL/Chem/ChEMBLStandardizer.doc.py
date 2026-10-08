@@ -125,7 +125,7 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # 
     # \param standardizer The source <tt>ChEMBLStandardizer</tt>.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(standardizer: ChEMBLStandardizer) -> ChEMBLStandardizer: pass
 

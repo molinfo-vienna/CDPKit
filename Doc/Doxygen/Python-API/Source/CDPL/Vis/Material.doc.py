@@ -163,7 +163,7 @@ class Material(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param material The other <tt>Material</tt> object to be compared with.
+    # \param material The other <tt>Material</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if the style and color attributes compare equal, and <tt>False</tt> otherwise.
     # 
@@ -174,7 +174,7 @@ class Material(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == material)</tt>.
     # 
-    # \param material The other <tt>Material</tt> object to be compared with.
+    # \param material The other <tt>Material</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if either the style or the color attributes compare non-equal, and <tt>False</tt> otherwise.
     # 

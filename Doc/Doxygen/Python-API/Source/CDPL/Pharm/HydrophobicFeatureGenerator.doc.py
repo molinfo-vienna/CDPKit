@@ -81,7 +81,7 @@ class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
     # 
     # \param gen The <tt>HydrophobicFeatureGenerator</tt> to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: HydrophobicFeatureGenerator) -> HydrophobicFeatureGenerator: pass
 

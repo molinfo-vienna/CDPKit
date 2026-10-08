@@ -44,7 +44,7 @@ namespace CDPL
         /**
          * \brief Data type for the storage and lookup of arbitrary entity to entity mappings.
          *
-         * Entity3Ds mappings are stored as pairs of pointers to the mapped \c const Chem::Entity3D objects.
+         * Entity3Ds mappings are stored as pairs of pointers to the mapped \c const Chem::Entity3D instances.
          * Mappings do not have to be unique and multiple mappings of a given entity to other entities are possible.
          * If a mapping entry for a particular entity does not exist, the methods Entity3DMapping::getValue()
          * and Entity3DMapping::operator[]() return \c nullptr to indicate that the lookup of the 

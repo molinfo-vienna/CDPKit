@@ -51,6 +51,6 @@ class ExactGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     # 
     # \param func The other <tt>ExactGaussianShapeOverlapFunction</tt> instance.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: ExactGaussianShapeOverlapFunction) -> ExactGaussianShapeOverlapFunction: pass

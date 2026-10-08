@@ -315,7 +315,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \param gen The <tt>FragmentGenerator</tt> instance to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: FragmentGenerator) -> FragmentGenerator: pass
 

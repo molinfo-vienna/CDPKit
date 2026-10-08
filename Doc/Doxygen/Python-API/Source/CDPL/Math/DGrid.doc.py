@@ -108,7 +108,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFGridExpression) -> DGrid: pass
 
@@ -117,7 +117,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDGridExpression) -> DGrid: pass
 
@@ -126,7 +126,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: object) -> DGrid: pass
 
@@ -135,7 +135,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param g The source grid (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(g: DGrid) -> DGrid: pass
 
@@ -322,7 +322,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstDGridExpression) -> DGrid: pass
 
@@ -338,7 +338,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstDGridExpression) -> DGrid: pass
 
@@ -347,7 +347,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> DGrid: pass
 
@@ -356,7 +356,7 @@ class DGrid(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> DGrid: pass
 

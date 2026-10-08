@@ -55,7 +55,7 @@ class BuriednessGridCalculator(Boost.Python.instance):
     # 
     # \param calc The other <tt>BuriednessGridCalculator</tt> instance.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
 

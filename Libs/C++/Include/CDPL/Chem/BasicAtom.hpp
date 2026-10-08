@@ -87,22 +87,22 @@ namespace CDPL
 
           public:
             /**
-             * \brief A mutable random access iterator used to iterate over the connected Chem::BasicAtom objects.
+             * \brief A mutable random access iterator used to iterate over the connected Chem::BasicAtom instances.
              */
             typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator>             AtomIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the connected \c const Chem::BasicAtom objects.
+             * \brief A constant random access iterator used to iterate over the connected \c const Chem::BasicAtom instances.
              */
             typedef boost::transform_iterator<AtomAccessor<const BasicAtom>, NeighborList::const_iterator> ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the incident Chem::BasicBond objects.
+             * \brief A mutable random access iterator used to iterate over the incident Chem::BasicBond instances.
              */
             typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator>             BondIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the incident \c const Chem::BasicBond objects.
+             * \brief A constant random access iterator used to iterate over the incident \c const Chem::BasicBond instances.
              */
             typedef boost::transform_iterator<BondAccessor<const BasicBond>, NeighborList::const_iterator> ConstBondIterator;
 
@@ -131,50 +131,50 @@ namespace CDPL
             Atom& getAtom(std::size_t idx);
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the connected \c const Chem::BasicAtom objects.
-             * \return A constant iterator pointing to the beginning of the connected \c const Chem::BasicAtom objects.
+             * \brief Returns a constant iterator pointing to the beginning of the connected \c const Chem::BasicAtom instances.
+             * \return A constant iterator pointing to the beginning of the connected \c const Chem::BasicAtom instances.
              */
             ConstAtomIterator getAtomsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the connected Chem::BasicAtom objects.
-             * \return A mutable iterator pointing to the end of the connected Chem::BasicAtom objects.
+             * \brief Returns a mutable iterator pointing to the end of the connected Chem::BasicAtom instances.
+             * \return A mutable iterator pointing to the end of the connected Chem::BasicAtom instances.
              */
             AtomIterator getAtomsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the connected \c const Chem::BasicAtom objects.
-             * \return A constant iterator pointing to the end of the connected \c const Chem::BasicAtom objects.
+             * \brief Returns a constant iterator pointing to the end of the connected \c const Chem::BasicAtom instances.
+             * \return A constant iterator pointing to the end of the connected \c const Chem::BasicAtom instances.
              */
             ConstAtomIterator getAtomsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the connected Chem::BasicAtom objects.
-             * \return A mutable iterator pointing to the end of the connected Chem::BasicAtom objects.
+             * \brief Returns a mutable iterator pointing to the end of the connected Chem::BasicAtom instances.
+             * \return A mutable iterator pointing to the end of the connected Chem::BasicAtom instances.
              */
             AtomIterator getAtomsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the incident \c const Chem::BasicBond objects.
-             * \return A constant iterator pointing to the beginning of the incident \c const Chem::BasicBond objects.
+             * \brief Returns a constant iterator pointing to the beginning of the incident \c const Chem::BasicBond instances.
+             * \return A constant iterator pointing to the beginning of the incident \c const Chem::BasicBond instances.
              */
             ConstBondIterator getBondsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the incident Chem::BasicBond objects.
-             * \return A mutable iterator pointing to the beginning of the incident Chem::BasicBond objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the incident Chem::BasicBond instances.
+             * \return A mutable iterator pointing to the beginning of the incident Chem::BasicBond instances.
              */
             BondIterator getBondsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the incident \c const Chem::BasicBond objects.
-             * \return A constant iterator pointing to the end of the incident \c const Chem::BasicBond objects.
+             * \brief Returns a constant iterator pointing to the end of the incident \c const Chem::BasicBond instances.
+             * \return A constant iterator pointing to the end of the incident \c const Chem::BasicBond instances.
              */
             ConstBondIterator getBondsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the incident Chem::BasicBond objects.
-             * \return A mutable iterator pointing to the end of the incident Chem::BasicBond objects.
+             * \brief Returns a mutable iterator pointing to the end of the incident Chem::BasicBond instances.
+             * \return A mutable iterator pointing to the end of the incident Chem::BasicBond instances.
              */
             BondIterator getBondsEnd();
 

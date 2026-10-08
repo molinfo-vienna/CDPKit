@@ -52,12 +52,12 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %StringDataBlockEntry object with an empty data header and content.
+             * \brief Constructs a \c %StringDataBlockEntry instance with an empty data header and content.
              */
             StringDataBlockEntry() {}
 
             /**
-             * \brief Constructs a \c %StringDataBlockEntry object with the specified data header and content.
+             * \brief Constructs a \c %StringDataBlockEntry instance with the specified data header and content.
              * \param header The data header.
              * \param data The data content.
              */
@@ -90,7 +90,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \param entry The other \c %StringDataBlockEntry instance to be compared with.
              * \return \c true if the data entry headers and values compare equal, and \c false otherwise. 
              */
             bool operator==(const StringDataBlockEntry& entry) const;
@@ -100,7 +100,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == entry)</tt>.
              *
-             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \param entry The other \c %StringDataBlockEntry instance to be compared with.
              * \return \c true if the data headers and/or values compare non-equal, and \c false otherwise. 
              * \see operator==()
              */
@@ -108,28 +108,28 @@ namespace CDPL
 
             /**
              * \brief Less-than comparison operator (lexicographic ordering by header, then data).
-             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \param entry The other \c %StringDataBlockEntry instance to be compared with.
              * \return \c true if \c *this is less than \a entry, and \c false otherwise.
              */
             bool operator<(const StringDataBlockEntry& entry) const;
 
             /**
              * \brief Greater-than comparison operator (lexicographic ordering by header, then data).
-             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \param entry The other \c %StringDataBlockEntry instance to be compared with.
              * \return \c true if \c *this is greater than \a entry, and \c false otherwise.
              */
             bool operator>(const StringDataBlockEntry& entry) const;
 
             /**
              * \brief Less-than-or-equal comparison operator (lexicographic ordering by header, then data).
-             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \param entry The other \c %StringDataBlockEntry instance to be compared with.
              * \return \c true if \c *this is less than or equal to \a entry, and \c false otherwise.
              */
             bool operator<=(const StringDataBlockEntry& entry) const;
 
             /**
              * \brief Greater-than-or-equal comparison operator (lexicographic ordering by header, then data).
-             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \param entry The other \c %StringDataBlockEntry instance to be compared with.
              * \return \c true if \c *this is greater than or equal to \a entry, and \c false otherwise.
              */
             bool operator>=(const StringDataBlockEntry& entry) const;
@@ -140,7 +140,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Array of Chem::StringDataBlockEntry objects.
+         * \brief Array of Chem::StringDataBlockEntry instances.
          *
          * Used to store the structure or reaction data block of an <em>MDL SD-</em>
          * or \e RD-File record (see [\ref CTFILE]).

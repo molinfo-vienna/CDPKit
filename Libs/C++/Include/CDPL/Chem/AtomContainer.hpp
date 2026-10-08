@@ -48,7 +48,7 @@ namespace CDPL
         /**
          * \brief Common interface for data structures that support a random access to stored Chem::Atom instances.
          *
-         * Implementations have to guarantee that a given Chem::Atom object is stored only once and its index is unique amongst
+         * Implementations have to guarantee that a given Chem::Atom instance is stored only once and its index is unique amongst
          * all contained Chem::Atom instances. Otherwise algorithms that rely on this behaviour may not work correctly!
          */
         class CDPL_CHEM_API AtomContainer : public Entity3DContainer
@@ -59,12 +59,12 @@ namespace CDPL
 
           public:
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom instances.
              */
             typedef Util::IndexedElementIterator<const Atom, ConstAtomAccessor> ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Chem::Atom objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Atom instances.
              */
             typedef Util::IndexedElementIterator<Atom, AtomAccessor> AtomIterator;
 
@@ -91,50 +91,50 @@ namespace CDPL
             virtual Atom& getAtom(std::size_t idx) = 0;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Atom instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Atom instances.
              */
             ConstAtomIterator getAtomsBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::Atom objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Atom instances.
              */
             ConstAtomIterator getAtomsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Atom objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Atom instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Atom instances.
              */
             AtomIterator getAtomsBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Atom objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Atom instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::Atom instances.
              */
             AtomIterator getAtomsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Atom instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Atom instances.
              */
             ConstAtomIterator begin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::Atom objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Atom instances.
              */
             ConstAtomIterator end() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Atom objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Atom instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Atom instances.
              */
             AtomIterator begin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Atom objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Atom instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::Atom instances.
              */
             AtomIterator end();
 
@@ -154,7 +154,7 @@ namespace CDPL
             virtual std::size_t getAtomIndex(const Atom& atom) const = 0;
 
             /**
-             * \brief Returns the number of stored Chem::Entity3D objects.
+             * \brief Returns the number of stored Chem::Entity3D instances.
              *
              * Forwards to getNumAtoms() and exists to satisfy the Chem::Entity3DContainer interface.
              *

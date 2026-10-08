@@ -58,8 +58,7 @@ namespace CDPL
          * For the retrieval of control-parameter values the getParameter() family of overloaded methods
          * is provided which expect the key of the control-parameter as an argument. The method getParameterOrDefault() 
          * additionally allows to specify a default value that gets returned if an entry for the requested control-parameter
-         * value does not exist. \c %ControlParameterContainer guarantees that the complexity of these operations is never worse
-         * than logarithmic. 
+         * value does not exist.
          *
          * Control-parameter values are stored in an associative map as Base::LookupKey / Base::Any pairs of type
          * ControlParameterContainer::ParameterEntry. The current number of entries can be queried with the method getNumParameters(). Iterators
@@ -70,7 +69,7 @@ namespace CDPL
          * has exactly one parent and zero or more children. In such hierarchies, a child container forwards requests for control-parameter
          * values to their parents if they do not contain a local entry for a given control-parameter.
          * The parent container is set and detached by the method setParent(). A \c %ControlParameterContainer instance automatically keeps
-         * track of any links from and to other instances in the hierarchy and detaches any parent or child containers on object destruction.
+         * track of any links from and to other instances in the hierarchy and detaches any parent or child containers on destruction.
          *
          * For the notification of client code about any changes that affect control-parameter values, the
          * \c %ControlParameterContainer interface provides three methods for the registration of callback functions: 
@@ -165,7 +164,7 @@ namespace CDPL
              * \a throw_ and \a local.
              *
              * If a parent container has been set and the argument \a local is \c false, the request is forwarded to the parent
-             * (which may also forward the request). Otherwise an empty Base::Any object is returned if \a _throw is \c false,
+             * (which may also forward the request). Otherwise an empty Base::Any instance is returned if \a _throw is \c false,
              * and a Base::ItemNotFound exception will be thrown if \a _throw is \c true.
              *
              * \param key The key of the control-parameter value to return.
@@ -173,7 +172,7 @@ namespace CDPL
              *               for the control-parameter does not exist.
              * \param local Specifies whether or not the request shall be forwarded to the parent container if a local entry 
              *              for the control-parameter does not exist.
-             * \return The stored control-parameter value or an empty Base::Any object.
+             * \return The stored control-parameter value or an empty Base::Any instance.
              * \throw Base::ItemNotFound if an entry for the requested control-parameter value does not exist and \a _throw
              *        is \c true.
              */
@@ -200,7 +199,7 @@ namespace CDPL
 
             /**
              * \brief Returns the value of the control-parameter specified by \a key as a \c const reference
-             *        to an object of type \a T, or the default value \a def_val if a stored value does not exist.
+             *        to an object of type \a T, or the default value \a def_val if an entry does not exist.
              *
              * If the container contains an entry for the specified control-parameter, the stored value will be returned.
              * If an entry for the control-parameter does not exist, a parent container has been set and the argument \a local
@@ -255,25 +254,25 @@ namespace CDPL
             bool isParameterSet(const LookupKey& key, bool local = false) const;
 
             /**
-             * \brief Adds the control-parameter value entries in the \c %ControlParameterContainer instance \a cntnr.
+             * \brief Adds the control-parameter value entries of the \c %ControlParameterContainer instance \a cntnr.
              *
-             * Any control-parameter values which have no corresponding assigned value in \a cntnr are left unchanged. Otherwise the value
+             * Any control-parameters which have no corresponding entry in \a cntnr are left unchanged. Otherwise the value
              * of the local control-parameter gets overwritten by the value stored in \a cntnr and any callback functions registered by
              * registerParameterChangedCallback() will be invoked with \a key and \a value provided as arguments.
              * Callbacks of affected direct and indirect children which do not have an entry for the specified control-parameter also get
              * invoked.    
              *
-             * \param cntnr The \c %ControlParameterContainer instance containing the control-parameter value entries to add.
+             * \param cntnr The \c %ControlParameterContainer instance providing the control-parameter entries to add.
              */
             void addParameters(const ControlParameterContainer& cntnr);
 
             /**
-             * \brief Replaces the current set control-parameters by a copy of the parameters in \a cntnr.
+             * \brief Replaces the current control-parameter entries by a copy of the entries in \a cntnr.
              *
              * The assignment is equivalent to first erasing all entries by calling clearParameters() and then calling
              * setParameter() for each key/value entry in \a cntnr.
              *
-             * \param cntnr The \c %ControlParameterContainer instance containing the control-parameter value entries to add.
+             * \param cntnr The \c %ControlParameterContainer instance providing the control-parameter entries to copy.
              */
             void copyParameters(const ControlParameterContainer& cntnr);
 
@@ -327,7 +326,7 @@ namespace CDPL
             /**
              * \brief Registers a callback target function that gets invoked when the value of a
              *        control-parameter has changed. 
-             * \param func A ControlParameterContainer::ParameterChangedCallbackFunction object wrapping the target function.
+             * \param func A ControlParameterContainer::ParameterChangedCallbackFunction instance wrapping the target function.
              * \return An identifier for the registered callback.
              */
             std::size_t registerParameterChangedCallback(const ParameterChangedCallbackFunction& func);
@@ -344,7 +343,7 @@ namespace CDPL
             /**
              * \brief Registers a callback target function that gets invoked when a control-parameter entry
              *        has been removed. 
-             * \param func A ControlParameterContainer::ParameterRemovedCallbackFunction object wrapping the target function.
+             * \param func A ControlParameterContainer::ParameterRemovedCallbackFunction instance wrapping the target function.
              * \return An identifier for the registered callback.
              */
             std::size_t registerParameterRemovedCallback(const ParameterRemovedCallbackFunction& func);
@@ -361,7 +360,7 @@ namespace CDPL
             /**
              * \brief Registers a callback target function that gets invoked when the parent 
              *        container has been changed or was detached.
-             * \param func A ControlParameterContainer::ParentChangedCallbackFunction object wrapping the target function.
+             * \param func A ControlParameterContainer::ParentChangedCallbackFunction instance wrapping the target function.
              * \return An identifier for the registered callback.
              */
             std::size_t registerParentChangedCallback(const ParentChangedCallbackFunction& func);

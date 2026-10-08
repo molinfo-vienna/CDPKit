@@ -64,7 +64,7 @@ class StringIOStream(IOStream):
 
     ##
     # \brief Returns the stream instance.
-    # \return \c self.
+    # \return \a self.
     # 
     def xreadlines() -> StringIOStream: pass
 
@@ -237,7 +237,7 @@ class StringIOStream(IOStream):
 
     ##
     # \brief Returns the stream instance.
-    # \return \c self.
+    # \return \a self.
     # 
     def __iter__() -> StringIOStream: pass
 

@@ -20,57 +20,57 @@
 #
 
 ##
-# \brief Provides methods for the creation of <tt>QFont</tt>, <tt>QColor</tt>, <tt>QPen</tt> and <tt>QBrush</tt> objects from Vis.Font, Vis.Color, Vis.Pen and Vis.Brush instances.
+# \brief Provides methods for the creation of <tt>QFont</tt>, <tt>QColor</tt>, <tt>QPen</tt> and <tt>QBrush</tt> instances from Vis.Font, Vis.Color, Vis.Pen and Vis.Brush instances.
 # 
 # \see [\ref QTDOC] for more information about <tt>QFont</tt>, <tt>QColor</tt>, <tt>QPen</tt> and <tt>QBrush</tt>.
 # 
 class QtObjectFactory(builtins.object):
 
     ##
-    # \brief Creates a <tt>QFont</tt> object that corresponds to the specified font.
+    # \brief Creates a <tt>QFont</tt> instance that corresponds to the specified font.
     # 
-    # \param font The font object.
+    # \param font The Vis.Font instance.
     # 
-    # \return A <tt>QFont</tt> object equivalent to <em>font</em>.
+    # \return A <tt>QFont</tt> instance equivalent to <em>font</em>.
     # 
     @staticmethod
     def createQFont(font: Vis.Font) -> PyQt5.QtGui.QFont: pass
 
     ##
-    # \brief Creates a <tt>QColor</tt> object that corresponds to the specified color.
+    # \brief Creates a <tt>QColor</tt> instance that corresponds to the specified color.
     # 
-    # \param color The color object.
+    # \param color The Vis.Color instance.
     # 
-    # \return A <tt>QColor</tt> object equivalent to <em>color</em>.
+    # \return A <tt>QColor</tt> instance equivalent to <em>color</em>.
     # 
     @staticmethod
     def createQColor(color: Vis.Color) -> PyQt5.QtGui.QColor: pass
 
     ##
-    # \brief Creates a <tt>QPen</tt> object that corresponds to the specified pen.
+    # \brief Creates a <tt>QPen</tt> instance that corresponds to the specified pen.
     # 
-    # \param pen The pen object.
+    # \param pen The Vis.Pen instance.
     # 
-    # \return A <tt>QPen</tt> object equivalent to <em>pen</em>.
+    # \return A <tt>QPen</tt> instance equivalent to <em>pen</em>.
     # 
     @staticmethod
     def createQPen(pen: Vis.Pen) -> PyQt5.QtGui.QPen: pass
 
     ##
-    # \brief Creates a <tt>QBrush</tt> object that corresponds to the specified brush.
+    # \brief Creates a <tt>QBrush</tt> instance that corresponds to the specified brush.
     # 
-    # \param brush The brush object.
+    # \param brush The Vis.Brush instance.
     # 
-    # \return A <tt>QBrush</tt> object equivalent to <em>brush</em>.
+    # \return A <tt>QBrush</tt> instance equivalent to <em>brush</em>.
     # 
     @staticmethod
     def createQBrush(brush: Vis.Brush) -> PyQt5.QtGui.QBrush: pass
 
     ##
-    # \brief Creates a <tt>QPainterPath</tt> object that corresponds to the specified path.
+    # \brief Creates a <tt>QPainterPath</tt> instance that corresponds to the specified path.
     # 
-    # \param path The path object.
-    # \param qt_path The QPainterPath object to create.
+    # \param path The Vis.Path2D instance.
+    # \param qt_path The <tt>QPainterPath</tt> instance to create.
     # 
     # \return The argument <em>qt_path</em>.
     # 

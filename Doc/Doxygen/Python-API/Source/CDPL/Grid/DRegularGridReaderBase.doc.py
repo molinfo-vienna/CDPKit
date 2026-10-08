@@ -47,7 +47,7 @@ class DRegularGridReaderBase(Base.DataIOBase):
     # \param grid The DRegularGrid object storing the read data.
     # \param overwrite Specifies whether any existing data in <em>grid</em> shall be replaced by the newly read data or if the read data should be appended (if supported by the reader and data type).
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IOError if an I/O error occurred.
     # 
@@ -62,7 +62,7 @@ class DRegularGridReaderBase(Base.DataIOBase):
     # \param grid The DRegularGrid object storing the read data.
     # \param overwrite Specifies whether any existing data in <em>grid</em> shall be replaced by the newly read data or if the read data should be appended (if supported by the reader and data type).
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IndexError if <em>idx</em> is greater or equal to the number of records. Base.IOError if an I/O error occurred.
     # 
@@ -73,7 +73,7 @@ class DRegularGridReaderBase(Base.DataIOBase):
     # 
     # If the operation was successful, the record index is incremented by <em>1</em>.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IOError if an I/O error occurred.
     # 

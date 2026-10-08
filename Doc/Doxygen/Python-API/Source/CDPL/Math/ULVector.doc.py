@@ -113,7 +113,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> ULVector: pass
 
@@ -122,7 +122,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> ULVector: pass
 
@@ -131,7 +131,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> ULVector: pass
 
@@ -140,7 +140,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> ULVector: pass
 
@@ -149,7 +149,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param v The source vector (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(v: ULVector) -> ULVector: pass
 
@@ -317,7 +317,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstULVectorExpression) -> ULVector: pass
 
@@ -333,7 +333,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstULVectorExpression) -> ULVector: pass
 
@@ -342,7 +342,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULVector: pass
 
@@ -351,7 +351,7 @@ class ULVector(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULVector: pass
 

@@ -71,8 +71,8 @@ namespace CDPL
             virtual ~DataInputHandler() {}
 
             /**
-             * \brief Returns a Base::DataFormat object that provides information about the handled input data format.
-             * \return A Base::DataFormat object that provides information about the handled data format.
+             * \brief Returns a Base::DataFormat instance that provides information about the handled input data format.
+             * \return A Base::DataFormat instance that provides information about the handled data format.
              */
             virtual const DataFormat& getDataFormat() const = 0;
 

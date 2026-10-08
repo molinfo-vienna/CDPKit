@@ -61,7 +61,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LMatrixRow: pass
 
@@ -70,7 +70,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LMatrixRow: pass
 
@@ -79,7 +79,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LMatrixRow: pass
 
@@ -88,7 +88,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LMatrixRow: pass
 
@@ -97,7 +97,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param r The source row.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(r: LMatrixRow) -> LMatrixRow: pass
 
@@ -268,7 +268,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LMatrixRow: pass
 
@@ -284,7 +284,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LMatrixRow: pass
 
@@ -293,7 +293,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> LMatrixRow: pass
 
@@ -302,7 +302,7 @@ class LMatrixRow(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LMatrixRow: pass
 

@@ -68,12 +68,12 @@ namespace CDPL
             typedef std::shared_ptr<Reaction> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Molecule objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Molecule instances.
              */
             typedef Util::IndexedElementIterator<const Molecule, ConstComponentAccessor> ConstComponentIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Chem::Molecule objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Molecule instances.
              */
             typedef Util::IndexedElementIterator<Molecule, ComponentAccessor> ComponentIterator;
 

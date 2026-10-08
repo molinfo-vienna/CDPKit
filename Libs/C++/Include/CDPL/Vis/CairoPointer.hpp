@@ -149,7 +149,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %CairoPointer that manages the reference count of the object
+             * \brief Constructs a \c %CairoPointer instance that manages the reference count of the object
              *        pointed to by \a ptr.
              * \param ptr A pointer to the object whose reference count has to be managed.
              * \note The reference count of the object specified by \a ptr is not incremented.

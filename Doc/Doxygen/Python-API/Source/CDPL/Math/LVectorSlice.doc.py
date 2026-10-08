@@ -68,7 +68,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LVectorSlice: pass
 
@@ -77,7 +77,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LVectorSlice: pass
 
@@ -86,7 +86,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LVectorSlice: pass
 
@@ -95,7 +95,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LVectorSlice: pass
 
@@ -104,7 +104,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param s The source slice view.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(s: LVectorSlice) -> LVectorSlice: pass
 
@@ -275,7 +275,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param e The vector expression to add.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LVectorSlice: pass
 
@@ -291,7 +291,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param e The vector expression to subtract.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LVectorSlice: pass
 
@@ -300,7 +300,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> LVectorSlice: pass
 
@@ -309,7 +309,7 @@ class LVectorSlice(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LVectorSlice: pass
 

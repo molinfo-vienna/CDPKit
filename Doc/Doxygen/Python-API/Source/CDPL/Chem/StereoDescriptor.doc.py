@@ -133,7 +133,7 @@ class StereoDescriptor(Boost.Python.instance):
     # 
     # \param descr The <tt>StereoDescriptor</tt> instance to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(descr: StereoDescriptor) -> StereoDescriptor: pass
 

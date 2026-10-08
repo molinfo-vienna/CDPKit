@@ -53,7 +53,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrixTranspose: pass
 
@@ -62,7 +62,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrixTranspose: pass
 
@@ -71,7 +71,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrixTranspose: pass
 
@@ -80,7 +80,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrixTranspose: pass
 
@@ -89,7 +89,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param mt The source transpose view.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(mt: DMatrixTranspose) -> DMatrixTranspose: pass
 
@@ -263,7 +263,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrixTranspose: pass
 
@@ -279,7 +279,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrixTranspose: pass
 
@@ -288,7 +288,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> DMatrixTranspose: pass
 
@@ -297,7 +297,7 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> DMatrixTranspose: pass
 

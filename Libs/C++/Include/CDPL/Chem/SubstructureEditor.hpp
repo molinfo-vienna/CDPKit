@@ -77,12 +77,12 @@ namespace CDPL
             typedef std::shared_ptr<SubstructureEditor> SharedPointer;
 
             /**
-             * \brief A constant iterator used to iterate over the stored search/exclude pattern Chem::MolecularGraph objects.
+             * \brief A constant iterator used to iterate over the stored search/exclude pattern Chem::MolecularGraph instances.
              */
             typedef boost::transform_iterator<GetMolGraphFunc, PatternList::const_iterator> ConstPatternIterator;
 
             /**
-             * \brief A mutable iterator used to iterate over the stored search/exclude pattern Chem::MolecularGraph objects.
+             * \brief A mutable iterator used to iterate over the stored search/exclude pattern Chem::MolecularGraph instances.
              */
             typedef boost::transform_iterator<GetMolGraphFunc, PatternList::iterator>       PatternIterator;
 
@@ -144,26 +144,26 @@ namespace CDPL
             void clearSearchPatterns();
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored search pattern Chem::MolecularGraph objects.
-             * \return A mutable iterator pointing to the beginning of the stored search pattern Chem::MolecularGraph objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored search pattern Chem::MolecularGraph instances.
+             * \return A mutable iterator pointing to the beginning of the stored search pattern Chem::MolecularGraph instances.
              */
             PatternIterator getSearchPatternsBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored search pattern Chem::MolecularGraph objects.
-             * \return A mutable iterator pointing to the end of the stored search pattern Chem::MolecularGraph objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored search pattern Chem::MolecularGraph instances.
+             * \return A mutable iterator pointing to the end of the stored search pattern Chem::MolecularGraph instances.
              */
             PatternIterator getSearchPatternsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored search pattern \c const Chem::MolecularGraph objects.
-             * \return A constant iterator pointing to the beginning of the stored search pattern \c const Chem::MolecularGraph objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored search pattern \c const Chem::MolecularGraph instances.
+             * \return A constant iterator pointing to the beginning of the stored search pattern \c const Chem::MolecularGraph instances.
              */
             ConstPatternIterator getSearchPatternsBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored search pattern \c const Chem::MolecularGraph objects.
-             * \return A constant iterator pointing to the end of the stored search pattern \c const Chem::MolecularGraph objects.
+             * \brief Returns a constant iterator pointing to the end of the stored search pattern \c const Chem::MolecularGraph instances.
+             * \return A constant iterator pointing to the end of the stored search pattern \c const Chem::MolecularGraph instances.
              */
             ConstPatternIterator getSearchPatternsEnd() const;
 
@@ -207,26 +207,26 @@ namespace CDPL
             void clearExcludePatterns();
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored exclude pattern Chem::MolecularGraph objects.
-             * \return A mutable iterator pointing to the beginning of the stored exclude pattern Chem::MolecularGraph objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored exclude pattern Chem::MolecularGraph instances.
+             * \return A mutable iterator pointing to the beginning of the stored exclude pattern Chem::MolecularGraph instances.
              */
             PatternIterator getExcludePatternsBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored exclude pattern Chem::MolecularGraph objects.
-             * \return A mutable iterator pointing to the end of the stored exclude pattern Chem::MolecularGraph objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored exclude pattern Chem::MolecularGraph instances.
+             * \return A mutable iterator pointing to the end of the stored exclude pattern Chem::MolecularGraph instances.
              */
             PatternIterator getExcludePatternsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored exclude pattern \c const Chem::MolecularGraph objects.
-             * \return A constant iterator pointing to the beginning of the stored exclude pattern \c const Chem::MolecularGraph objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored exclude pattern \c const Chem::MolecularGraph instances.
+             * \return A constant iterator pointing to the beginning of the stored exclude pattern \c const Chem::MolecularGraph instances.
              */
             ConstPatternIterator getExcludePatternsBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored exclude pattern \c const Chem::MolecularGraph objects.
-             * \return A constant iterator pointing to the end of the stored exclude pattern \c const Chem::MolecularGraph objects.
+             * \brief Returns a constant iterator pointing to the end of the stored exclude pattern \c const Chem::MolecularGraph instances.
+             * \return A constant iterator pointing to the end of the stored exclude pattern \c const Chem::MolecularGraph instances.
              */
             ConstPatternIterator getExcludePatternsEnd() const;
 

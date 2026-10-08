@@ -70,7 +70,7 @@ class AtomDensityGridCalculator(Boost.Python.instance):
     # 
     # \param calc The other <tt>AtomDensityGridCalculator</tt> instance.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: AtomDensityGridCalculator) -> AtomDensityGridCalculator: pass
 

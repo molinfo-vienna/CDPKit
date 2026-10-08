@@ -93,7 +93,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFQuaternionExpression) -> FQuaternion: pass
 
@@ -102,7 +102,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDQuaternionExpression) -> FQuaternion: pass
 
@@ -111,7 +111,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLQuaternionExpression) -> FQuaternion: pass
 
@@ -120,7 +120,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULQuaternionExpression) -> FQuaternion: pass
 
@@ -129,7 +129,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param q The source quaternion.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(q: FQuaternion) -> FQuaternion: pass
 
@@ -314,7 +314,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar addend.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(t: float) -> FQuaternion: pass
 
@@ -337,7 +337,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar subtrahend.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(t: float) -> FQuaternion: pass
 
@@ -360,7 +360,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> FQuaternion: pass
 
@@ -383,7 +383,7 @@ class FQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FQuaternion: pass
 

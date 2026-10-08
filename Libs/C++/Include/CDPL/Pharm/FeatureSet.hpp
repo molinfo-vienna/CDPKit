@@ -48,10 +48,10 @@ namespace CDPL
         /**
          * \brief Concrete implementation of the Pharm::FeatureContainer interface that stores references to selectable Pharm::Feature instances.
          *
-         * Unlike a Pharm::Pharmacophore instance, a \c %FeatureSet object does not own its features. It is typically used
+         * Unlike a Pharm::Pharmacophore instance, a \c %FeatureSet instance does not own its features. It is typically used
          * to represent subsets/selections of features that live elsewhere.
          *
-         * \note Since \c %FeatureSet does not own the stored features they must outlive 
+         * \note Since \c %FeatureSet does not own the referenced features they must outlive 
          *       any \c %FeatureSet instance that references them!
          */
         class CDPL_PHARM_API FeatureSet : public FeatureContainer
@@ -66,12 +66,12 @@ namespace CDPL
             typedef std::shared_ptr<FeatureSet> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature objects.
+             * \brief A constant random access iterator used to iterate over the referenced \c const Pharm::Feature instances.
              */
             typedef boost::indirect_iterator<FeatureList::const_iterator, const Feature> ConstFeatureIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored \c const Pharm::Feature objects.
+             * \brief A mutable random access iterator used to iterate over the referenced \c const Pharm::Feature instances.
              */
             typedef boost::indirect_iterator<FeatureList::iterator, Feature> FeatureIterator;
 
@@ -106,26 +106,26 @@ namespace CDPL
             std::size_t getFeatureIndex(const Feature& feature) const;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
+             * \brief Returns a constant iterator pointing to the beginning of the referenced \c const Pharm::Feature instances.
+             * \return A constant iterator pointing to the beginning of the referenced \c const Pharm::Feature instances.
              */
             ConstFeatureIterator getFeaturesBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
-             * \return A mutable iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the referenced \c const Pharm::Feature instances.
+             * \return A mutable iterator pointing to the beginning of the referenced \c const Pharm::Feature instances.
              */
             FeatureIterator getFeaturesBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
-             * \return A constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
+             * \brief Returns a constant iterator pointing to the end of the referenced \c const Pharm::Feature instances.
+             * \return A constant iterator pointing to the end of the referenced \c const Pharm::Feature instances.
              */
             ConstFeatureIterator getFeaturesEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored \c const Pharm::Feature objects.
-             * \return A mutable iterator pointing to the end of the stored \c const Pharm::Feature objects.
+             * \brief Returns a mutable iterator pointing to the end of the referenced \c const Pharm::Feature instances.
+             * \return A mutable iterator pointing to the end of the referenced \c const Pharm::Feature instances.
              */
             FeatureIterator getFeaturesEnd();
 

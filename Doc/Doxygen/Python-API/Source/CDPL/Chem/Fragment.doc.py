@@ -22,9 +22,9 @@
 ##
 # \brief Concrete implementation of the Chem.MolecularGraph interface that stores references to selectable Chem.Atom and Chem.Bond instances.
 # 
-# Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond(). Adding a bond automatically adds its end atoms when needed and removing an atom automatically removes any stored incident bonds. Unlike a Chem.Molecule instance, a <tt>Fragment</tt> object does not own its atoms and bonds. It is typically used to represent substructures comprising atoms and bonds that live elsewhere.
+# Atoms and bonds are added via addAtom() / addBond() and removed via removeAtom() / removeBond(). Adding a bond automatically adds its end atoms when needed and removing an atom automatically removes any referenced incident bonds. Unlike a Chem.Molecule instance, a <tt>Fragment</tt> instance does not own its atoms and bonds. It is typically used to represent substructures comprising atoms and bonds that live elsewhere.
 # 
-# \note Since <tt>Fragment</tt> does not own the stored atoms or bonds they must outlive any <tt>Fragment</tt> instance that references them!
+# \note Since <tt>Fragment</tt> does not own the referenced atoms or bonds they must outlive any <tt>Fragment</tt> instance that references them!
 # 
 class Fragment(MolecularGraph):
 
@@ -88,7 +88,7 @@ class Fragment(MolecularGraph):
     # 
     # \param frag The fragment to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(frag: Fragment) -> Fragment: pass
 
@@ -97,7 +97,7 @@ class Fragment(MolecularGraph):
     # 
     # \param molgraph The molecular graph providing the atoms, bonds and properties to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(molgraph: MolecularGraph) -> Fragment: pass
 
@@ -214,7 +214,7 @@ class Fragment(MolecularGraph):
     # 
     def __contains__(bond: Bond) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
@@ -225,7 +225,7 @@ class Fragment(MolecularGraph):
     # 
     # \param molgraph The molecular graph providing the atoms and bonds to add.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \note Does not affect any properties.
     # 
@@ -236,7 +236,7 @@ class Fragment(MolecularGraph):
     # 
     # \param molgraph The molecular graph providing the atoms and bonds to remove.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \note Does not affect any properties if <tt>this != &molgraph</tt>.
     # 

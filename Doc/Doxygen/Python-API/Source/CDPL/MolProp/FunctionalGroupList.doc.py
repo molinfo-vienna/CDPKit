@@ -50,7 +50,7 @@ class FunctionalGroupList(Chem.FragmentList):
     # 
     # \param fg_list The source list.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(fg_list: FunctionalGroupList) -> FunctionalGroupList: pass
 

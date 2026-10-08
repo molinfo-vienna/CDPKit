@@ -119,7 +119,7 @@ class PharmacophoreGenerator(Boost.Python.instance):
     # 
     # \param gen The <tt>PharmacophoreGenerator</tt> instance to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: PharmacophoreGenerator) -> PharmacophoreGenerator: pass
 

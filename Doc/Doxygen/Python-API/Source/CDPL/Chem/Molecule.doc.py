@@ -181,7 +181,7 @@ class Molecule(MolecularGraph):
     # 
     # \param mol The molecule to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(mol: Molecule) -> Molecule: pass
 
@@ -192,7 +192,7 @@ class Molecule(MolecularGraph):
     # 
     # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(molgraph: MolecularGraph) -> Molecule: pass
 
@@ -250,7 +250,7 @@ class Molecule(MolecularGraph):
     # 
     # \param mol The molecule providing the atoms and bonds to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(mol: Molecule) -> Molecule: pass
 
@@ -261,7 +261,7 @@ class Molecule(MolecularGraph):
     # 
     # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(molgraph: MolecularGraph) -> Molecule: pass
 
@@ -272,7 +272,7 @@ class Molecule(MolecularGraph):
     # 
     # \param molgraph The Chem.MolecularGraph instance specifying the atoms and bonds to remove.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(molgraph: MolecularGraph) -> Molecule: pass
 
@@ -299,7 +299,7 @@ class Molecule(MolecularGraph):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 

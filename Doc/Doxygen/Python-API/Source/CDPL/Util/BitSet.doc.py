@@ -107,20 +107,20 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Toggles the value of every bit in this bitset.
-    # \return \c self.
+    # \return \a self.
     # 
     def flip() -> BitSet: pass
 
     ##
     # \brief Toggles the value of bit \a idx in this bitset.
     # \param idx The index of the bit to toggle.
-    # \return \c self.
+    # \return \a self.
     # 
     def flip(idx: int) -> BitSet: pass
 
     ##
     # \brief Sets all the bits in this bitset.
-    # \return \c self.
+    # \return \a self.
     # 
     def set() -> BitSet: pass
 
@@ -128,20 +128,20 @@ class BitSet(Boost.Python.instance):
     # \brief Sets the bit \a idx in this bitset to \a value.
     # \param idx The index of the bit to set or clear.
     # \param value The value to set the bit to.
-    # \return \c self.
+    # \return \a self.
     # 
     def set(idx: int, value: bool = True) -> BitSet: pass
 
     ##
     # \brief Resets all the bits in this bitset.
-    # \return \c self.
+    # \return \a self.
     # 
     def reset() -> BitSet: pass
 
     ##
     # \brief Resets the bit \a idx in this bitset.
     # \param idx The index of the bit to reset.
-    # \return \c self.
+    # \return \a self.
     # 
     def reset(idx: int) -> BitSet: pass
 

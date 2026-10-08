@@ -81,8 +81,8 @@ namespace CDPL
 
             /**
              * \brief Calculates the bounds of the graphics primitive.
-             * \param bounds The object storing the calculated bounding box.
-             * \param font_metrics The font metrics object to use for bounds calculation (if required).
+             * \param bounds The Vis::Rectangle2D instance storing the calculated bounding box.
+             * \param font_metrics The Vis::FontMetrics instance to use for bounds calculation (if required).
              */
             virtual void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const = 0;
         };

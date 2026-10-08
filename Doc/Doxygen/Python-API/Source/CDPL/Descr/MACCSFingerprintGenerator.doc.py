@@ -72,7 +72,7 @@ class MACCSFingerprintGenerator(Boost.Python.instance):
     # 
     # \param gen The other <tt>MACCSFingerprintGenerator</tt> instance.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \note The internal state of <em>gen</em> is not copied and the assignee remains unchanged.
     # 

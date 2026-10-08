@@ -61,7 +61,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> FMatrixColumn: pass
 
@@ -70,7 +70,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> FMatrixColumn: pass
 
@@ -79,7 +79,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> FMatrixColumn: pass
 
@@ -88,7 +88,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> FMatrixColumn: pass
 
@@ -97,7 +97,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param c The source column.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(c: FMatrixColumn) -> FMatrixColumn: pass
 
@@ -268,7 +268,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstFVectorExpression) -> FMatrixColumn: pass
 
@@ -284,7 +284,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstFVectorExpression) -> FMatrixColumn: pass
 
@@ -293,7 +293,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> FMatrixColumn: pass
 
@@ -302,7 +302,7 @@ class FMatrixColumn(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FMatrixColumn: pass
 

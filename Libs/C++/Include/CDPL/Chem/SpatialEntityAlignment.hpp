@@ -209,7 +209,7 @@ namespace CDPL
 
             /**
              * \brief Adds an entity to the specified entity set.
-             * \param entity The entity object to add.
+             * \param entity The entity to add.
              * \param first_set If \c true, the entity is added to the first entity set, if \c false to the second one.
              */
             void addEntity(const EntityType& entity, bool first_set);

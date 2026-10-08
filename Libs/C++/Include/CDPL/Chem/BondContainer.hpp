@@ -47,7 +47,7 @@ namespace CDPL
         /**
          * \brief Common interface for data structures that support a random access to stored Chem::Bond instances.
          *
-         * Implementations have to guarantee that a given Chem::Bond object is stored only once and its index is unique amongst
+         * Implementations have to guarantee that a given Chem::Bond instance is stored only once and its index is unique amongst
          * all contained Chem::Bond instances. Otherwise algorithms that rely on this behaviour may not work correctly!
          */
         class CDPL_CHEM_API BondContainer
@@ -58,12 +58,12 @@ namespace CDPL
 
           public:
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Bond objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Bond instances.
              */
             typedef Util::IndexedElementIterator<const Bond, ConstBondAccessor> ConstBondIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Chem::Bond objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Bond instances.
              */
             typedef Util::IndexedElementIterator<Bond, BondAccessor> BondIterator;
 
@@ -90,50 +90,50 @@ namespace CDPL
             virtual Bond& getBond(std::size_t idx) = 0;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Bond instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Bond instances.
              */
             ConstBondIterator getBondsBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Bond objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::Bond objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Bond instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Bond instances.
              */
             ConstBondIterator getBondsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Bond objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::Bond objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Bond instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Bond instances.
              */
             BondIterator getBondsBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Bond objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::Bond objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Bond instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::Bond instances.
              */
             BondIterator getBondsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Bond instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Bond instances.
              */
             ConstBondIterator begin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Bond objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::Bond objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Bond instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Bond instances.
              */
             ConstBondIterator end() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Bond objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::Bond objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Bond instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Bond instances.
              */
             BondIterator begin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Bond objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::Bond objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Bond instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::Bond instances.
              */
             BondIterator end();
 

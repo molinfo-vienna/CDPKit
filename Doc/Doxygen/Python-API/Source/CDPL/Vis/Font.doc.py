@@ -22,12 +22,12 @@
 ##
 # \brief Specifies a font for drawing text.
 # 
-# On creation of a <tt>Font</tt> object one can specify various attributes the font should have. Attributes set in the constructor can also be set later, e.g. setFamily() and setSize(). Some attributes can only be specified after construction by the corresponding methods setUnderlined(), setOverlined(), setStrikedOut() and setFixedPitch(). The corresponding getter methods like getFamily() and getSize() return the values that were set, even though the values used may differ. Renderer2D implementations generally will use the font with the specified attributes, or if no exactly matching font exists, they will take the closest matching available font.
+# On creation of a <tt>Font</tt> instance one can specify various attributes the font should have. Attributes set in the constructor can also be set later, e.g. setFamily() and setSize(). Some attributes can only be specified after construction by the corresponding methods setUnderlined(), setOverlined(), setStrikedOut() and setFixedPitch(). The corresponding getter methods like getFamily() and getSize() return the values that were set, even though the values used may differ. Renderer2D implementations generally will use the font with the specified attributes, or if no exactly matching font exists, they will take the closest matching available font.
 # 
 class Font(Boost.Python.instance):
 
     ##
-    # \brief Constructs a font object with an unspecified family name and a font size of <em>12.0</em>.
+    # \brief Constructs a <tt>Font</tt> instance with an unspecified family name and a font size of <em>12.0</em>.
     # 
     def __init__() -> None: pass
 
@@ -38,7 +38,7 @@ class Font(Boost.Python.instance):
     def __init__(font: Font) -> None: pass
 
     ##
-    # \brief Constructs a font object with the specified font family name and font size.
+    # \brief Constructs a <tt>Font</tt> instance with the specified font family name and font size.
     # 
     # If <em>size</em> is negative, the font size is set to zero.
     # 
@@ -187,7 +187,7 @@ class Font(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param font The other <tt>Font</tt> object to be compared with.
+    # \param font The other <tt>Font</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if all font attributes compare equal, and <tt>False</tt> otherwise.
     # 
@@ -198,7 +198,7 @@ class Font(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == font)</tt>.
     # 
-    # \param font The other <tt>Font</tt> object to be compared with.
+    # \param font The other <tt>Font</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if one of the font attributes compares non-equal, and <tt>False</tt> otherwise.
     # 

@@ -87,7 +87,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
@@ -96,7 +96,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: Math.ConstDGridExpression) -> Math.FRegularSpatialGrid: pass
 
@@ -105,7 +105,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: object) -> Math.FRegularSpatialGrid: pass
 
@@ -176,7 +176,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __setitem__(ijk: tuple, v: float) -> None: pass
 
@@ -303,7 +303,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     # \param e The grid expression to add.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
@@ -319,7 +319,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     # \param e The grid expression to subtract.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
@@ -328,7 +328,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> Math.FRegularSpatialGrid: pass
 
@@ -337,7 +337,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> Math.FRegularSpatialGrid: pass
 

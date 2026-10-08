@@ -25,7 +25,7 @@
 class Exception(builtins.Exception):
 
     ##
-    # \brief Constructs an <tt>Exception</tt> object with the error message set to <em>msg</em>.
+    # \brief Constructs an <tt>Exception</tt> instance with the error message set to <em>msg</em>.
     # 
     # \param msg A message describing the cause of the exception and/or the location where the error occurred.
     # 

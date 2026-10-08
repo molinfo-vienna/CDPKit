@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Class implementing the creation of Vis.Object3D instances providing a 3D representation of Pharm.FeatureContainer data objects for visualization purposes.
+# \brief Class implementing the creation of Vis.Object3D instances providing a 3D representation of Pharm.FeatureContainer data for visualization purposes.
 # 
 # \since 1.3
 # 

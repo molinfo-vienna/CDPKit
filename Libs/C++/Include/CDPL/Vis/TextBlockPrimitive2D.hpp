@@ -263,7 +263,7 @@ namespace CDPL
             /**
              * \brief Computes the axis-aligned bounding rectangle of the text block.
              * \param bounds The Rectangle2D instance storing the result.
-             * \param font_metrics The font metrics object used for the bounds calculation.
+             * \param font_metrics Vis::FontMetrics instance used for the bounds calculation.
              */
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics) const;
 

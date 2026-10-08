@@ -139,7 +139,7 @@ namespace CDPL
              *
              * If the parameter is set to \c true, the stereo parity of atoms will be ignored both on
              * reading (i.e. the read \e MDL parity of an input atom will not be converted to the corresponding Chem::StereoDescriptor
-             * object and stored in the Chem::Atom property Chem::AtomProperty::STEREO_DESCRIPTOR) and writing (i.e. the property
+             * instance and stored in the Chem::Atom property Chem::AtomProperty::STEREO_DESCRIPTOR) and writing (i.e. the property
              * Chem::AtomProperty::MDL_PARITY is not written to the corresponding connection table data field).
              *
              * \valuetype \c bool

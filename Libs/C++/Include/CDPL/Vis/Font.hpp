@@ -43,7 +43,7 @@ namespace CDPL
         /**
          * \brief Specifies a font for drawing text.
          *
-         * On creation of a \c %Font object one can specify various attributes the font should have. Attributes set in
+         * On creation of a \c %Font instance one can specify various attributes the font should have. Attributes set in
          * the constructor can also be set later, e.g. setFamily() and setSize(). Some attributes can only be specified after
          * construction by the corresponding methods setUnderlined(), setOverlined(), setStrikedOut() and setFixedPitch().
          * The corresponding getter methods like getFamily() and getSize() return the values that were set, even though
@@ -55,12 +55,12 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a font object with an unspecified family name and a font size of \e 12.0.
+             * \brief Constructs a \c %Font instance with an unspecified family name and a font size of \e 12.0.
              */
             Font();
 
             /**
-             * \brief Constructs a font object with the specified font family name and font size.
+             * \brief Constructs a \c %Font instance with the specified font family name and font size.
              *
              * If \a size is negative, the font size is set to zero.
              *
@@ -173,7 +173,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param font The other \c %Font object to be compared with.
+             * \param font The other \c %Font instance to be compared with.
              * \return \c true if all font attributes compare equal, and \c false otherwise.
              */
             bool operator==(const Font& font) const;
@@ -183,7 +183,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == font)</tt>.
              *
-             * \param font The other \c %Font object to be compared with.
+             * \param font The other \c %Font instance to be compared with.
              * \return \c true if one of the font attributes compares non-equal, and \c false otherwise.
              */
             bool operator!=(const Font& font) const;

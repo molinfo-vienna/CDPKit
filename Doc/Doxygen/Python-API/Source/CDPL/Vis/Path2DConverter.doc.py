@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides an interface for classes that implement the conversion of Vis.Path2D objects into rendering backend specific path descriptions or drawing operations.
+# \brief Provides an interface for classes that implement the conversion of Vis.Path2D instances into rendering backend specific path descriptions or drawing operations.
 # 
 # \see Vis.Renderer2D 
 # 

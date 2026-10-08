@@ -122,6 +122,6 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     # 
     # \param rule The other rule to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(rule: PatternBasedTautomerizationRule) -> PatternBasedTautomerizationRule: pass

@@ -58,7 +58,7 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     # 
     # \param func The other <tt>FastGaussianShapeOverlapFunction</tt> instance.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass
 

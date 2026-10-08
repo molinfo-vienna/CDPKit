@@ -24,11 +24,11 @@
 # 
 # The purpose of <tt>PropertyContainer</tt> is to provide a common facility for the storage and lookup of dynamic object properties to subclasses and their clients.
 # 
-# <tt>PropertyContainer</tt> stores the properties in a map that associates unique property keys of type Base.LookupKey with corresponding property values of type Base.Any. Iterators pointing to the beginning and end of the property key/value pairs (see PropertyContainer.PropertyEntry) can be retrieved by the methods getPropertiesBegin() and getPropertiesEnd(), respectively. The number of currently stored property value entries is accessible via the method getNumProperties().
+# <tt>PropertyContainer</tt> stores the properties in a map that associates unique property keys of type Base.LookupKey with corresponding property values of type Base.Any.  The number of currently stored property value entries is accessible via the method getNumProperties().
 # 
 # For the explicit assignment of property values the method setProperty() is provided which expects the key of the property as its first and the value to assign as the second argument. Whether the value of a particular property has been set can be tested by the method isPropertySet(). For the erasure of property values the methods removeProperty() and clearProperties() are provided. The first method clears the value of a single property while the latter method removes all assigned property values.
 # 
-# To access the value of a property, two types of getProperty() methods are available that both expect the key of the property as the first argument. The templated versions return the stored property value (or the specified default if not available) as a reference to an object of the specified template argument type. The non-template method returns the requested property value indirectly as the Base.Any instance storing the actual value. If the requested property value does not exist, an additional argument decides whether to throw an exception or to return an empty Base.Any instance.
+# To access the value of a property the method getProperty() is available which expects the key of the property as the first argument. If the requested property value does not exist, an additional argument decides whether to throw an exception or to return an empty Base.Any instance.
 # 
 class PropertyContainer(Boost.Python.instance):
 
@@ -56,39 +56,67 @@ class PropertyContainer(Boost.Python.instance):
     # 
     def getNumProperties() -> int: pass
 
-    def getPropertyOrDefault(key: LookupKey, def_value: Any) -> Any: pass
+    ##
+    # \brief Returns the value of the property specified by <em>key</em> , or the default value <em>def_val</em> if an entry does not exist.
+    # 
+    # If a value has been assigned to the specified property, the stored value will be returned. Otherwise the default value specified by <em>def_val</em> gets returned.
+    # 
+    # \param key The key of the property for which to return the stored (or specified default) value.
+    # \param def_val The default value that shall be returned if an entry for the specified property does not exist.
+    # 
+    # \return The stored property value or the default specified by <em>def_val</em>. 
+    # 
+    # 
+    # 
+    def getPropertyOrDefault(key: LookupKey, def_val: Any) -> Any: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current property entries.
+    # \return A list containing the requested property keys.
+    # 
     def getPropertyKeys() -> list: pass
 
+    ##
+    # \brief Returns a list containing the values of the current property entries.
+    # \return A list containing the requested property values.
+    # 
     def getPropertyValues() -> list: pass
 
     ##
     # \brief Returns a reference to itself.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def getProperties() -> list: pass
 
-    def setProperty(key: LookupKey, value: Any) -> None: pass
+    ##
+    # \brief Sets the value of the property specified by <em>key</em> to <em>val</em>.
+    # 
+    # If <em>val</em> is \c None, and a property entry for <em>key</em> exists, the entry gets erased (equivalent to removeProperty() with <em>key</em> as argument).
+    # 
+    # \param key The key of the property value to assign or remove.
+    # \param val The value of the property.
+    # 
+    def setProperty(key: LookupKey, val: Any) -> None: pass
 
     ##
-    # \brief Clears the value of the property specified by <em>key</em>.
+    # \brief Removes the entry for the property specified by <em>key</em>.
     # 
-    # \param key The key of the property value to erase.
+    # \param key The key of the property entry to remove.
     # 
-    # \return <tt>True</tt> if an entry for <em>key</em> could be found and was erased, and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if an entry for <em>key</em> could be found and was removed, and <tt>False</tt> otherwise.
     # 
     def removeProperty(key: LookupKey) -> bool: pass
 
     ##
     # \brief Returns the value of the property specified by <em>key</em>.
     # 
-    # If an entry for the specified property exists, the stored value will be returned. Otherwise an empty Base.Any object gets returned if <em>_throw</em> is <tt>False</tt>, and a Base.ItemNotFound exception will be thrown if <em>_throw</em> is <tt>True</tt>.
+    # If an entry for the specified property exists, the stored value will be returned. Otherwise an empty Base.Any instance gets returned if <em>_throw</em> is <tt>False</tt>, and a Base.ItemNotFound exception will be thrown if <em>_throw</em> is <tt>True</tt>.
     # 
     # \param key The key of the property value to return.
-    # \param throw_ Specifies whether to throw a Base.ItemNotFound exception or to return an empty Base.Any object if the requested property value does not exist.
+    # \param throw_ Specifies whether to throw a Base.ItemNotFound exception or to return an empty Base.Any instance if the requested property value does not exist.
     # 
-    # \return The stored property value or and empty Base.Any object. 
+    # \return The stored property value or and empty Base.Any instance. 
     # 
     # \throw Base.ItemNotFound if an entry for the requested property value does not exist and <em>throw_</em> is <tt>True</tt>.
     # 
@@ -104,30 +132,30 @@ class PropertyContainer(Boost.Python.instance):
     def isPropertySet(key: LookupKey) -> bool: pass
 
     ##
-    # \brief Clears all property values.
+    # \brief Erases all container entries.
     # 
     def clearProperties() -> None: pass
 
     ##
-    # \brief Adds the property value entries in the <tt>PropertyContainer</tt> instance <em>cntnr</em>.
+    # \brief Adds the property entries of the <tt>PropertyContainer</tt> instance <em>cntnr</em>.
     # 
-    # %Any property values which have no corresponding assigned value in <em>cntnr</em> are left unchanged. Otherwise the value of the local property gets overwritten by the value stored in <em>cntnr</em>.
+    # %Any properties which have no corresponding entry in <em>cntnr</em> are left unchanged. Otherwise the value of the local property gets overwritten by the value stored in <em>cntnr</em>.
     # 
-    # \param cntnr The <tt>PropertyContainer</tt> instance containing the property value entries to add.
+    # \param cntnr The <tt>PropertyContainer</tt> instance providing the property entries to add.
     # 
     def addProperties(cntnr: PropertyContainer) -> None: pass
 
     ##
-    # \brief Replaces the current set of properties by a copy of the entries in <em>cntnr</em>.
+    # \brief Replaces the current property entries by a copy of the entries in <em>cntnr</em>.
     # 
-    # \param cntnr The <tt>PropertyContainer</tt> instance containing the property value entries to add.
+    # \param cntnr The <tt>PropertyContainer</tt> instance providing the property entries to copy.
     # 
     def copyProperties(cntnr: PropertyContainer) -> None: pass
 
     ##
-    # \brief Exchanges the properties of this container with the properties of the container <em>cntnr</em>.
+    # \brief Exchanges the property entries of this container with the ones of <em>cntnr</em>.
     # 
-    # \param cntnr The container to exchange the properties with.
+    # \param cntnr The other <tt>PropertyContainer</tt> instance.
     # 
     def swap(cntnr: PropertyContainer) -> None: pass
 
@@ -146,16 +174,38 @@ class PropertyContainer(Boost.Python.instance):
     def __getitem__(key: LookupKey) -> Any: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether or not a value has been assigned to the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property.
+    # 
+    # \return <tt>True</tt> if a value has been assigned to the specified property, and <tt>False</tt> otherwise.
     # 
     def __contains__(key: LookupKey) -> bool: pass
 
-    def __setitem__(key: LookupKey, value: Any) -> None: pass
+    ##
+    # \brief Sets the value of the property specified by <em>key</em> to <em>val</em>.
+    # 
+    # If <em>val</em> is of type Base.Any and empty, i.e. the method Base.Any.isEmpty() returns <tt>True</tt>, and a property entry for <em>key</em> exists, the entry gets erased (equivalent to removeProperty() with <em>key</em> as argument).
+    # 
+    # \param key The key of the property value to assign or remove.
+    # \param val The value of the property.
+    # 
+    def __setitem__(key: LookupKey, val: Any) -> None: pass
 
+    ##
+    # \brief Removes the entry for the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry for <em>key</em> could be found and was removed, and <tt>False</tt> otherwise.
+    # 
     def __delitem__(key: LookupKey) -> bool: pass
 
+    ##
+    # \brief Returns the number of property entries.
+    # 
+    # \return The number of property entries.
+    # 
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

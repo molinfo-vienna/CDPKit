@@ -58,12 +58,12 @@ namespace CDPL
             typedef std::shared_ptr<Pharmacophore> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature instances.
              */
             typedef FeatureContainer::ConstFeatureIterator ConstFeatureIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Pharm::Feature objects.
+             * \brief A mutable random access iterator used to iterate over the stored Pharm::Feature instances.
              */
             typedef FeatureContainer::FeatureIterator FeatureIterator;
 

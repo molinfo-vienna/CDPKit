@@ -94,7 +94,7 @@ namespace CDPL
          * runs atom typing, bond typing, formal/partial charge assignment, aromaticity perception and
          * topological distance calculation, then dispatches to the seven per-interaction
          * <em>MMFF94*InteractionParameterizer</em> members and stores the resulting interaction parameter records in the
-         * supplied ForceField::MMFF94InteractionData object.
+         * supplied ForceField::MMFF94InteractionData instance.
          *
          * \see [\ref MMFF94]
          */

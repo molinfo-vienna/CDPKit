@@ -61,7 +61,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LMatrixColumn: pass
 
@@ -70,7 +70,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LMatrixColumn: pass
 
@@ -79,7 +79,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LMatrixColumn: pass
 
@@ -88,7 +88,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LMatrixColumn: pass
 
@@ -97,7 +97,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param c The source column.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(c: LMatrixColumn) -> LMatrixColumn: pass
 
@@ -268,7 +268,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LMatrixColumn: pass
 
@@ -284,7 +284,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LMatrixColumn: pass
 
@@ -293,7 +293,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> LMatrixColumn: pass
 
@@ -302,7 +302,7 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LMatrixColumn: pass
 

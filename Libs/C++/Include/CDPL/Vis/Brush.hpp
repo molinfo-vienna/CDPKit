@@ -44,7 +44,7 @@ namespace CDPL
          *
          * A brush has a style and a color attribute. The style defines the look of the fill pattern and the
          * color attribute specifies the color of the specified fill pattern. The style of a default constructed \c %Brush
-         * object is Brush::NO_PATTERN, which tells the renderer not to fill drawn shapes.
+         * instance is Brush::NO_PATTERN, which tells the renderer not to fill drawn shapes.
          */
         class CDPL_VIS_API Brush
         {
@@ -176,7 +176,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param brush The other \c %Brush object to be compared with.
+             * \param brush The other \c %Brush instance to be compared with.
              * \return \c true if the style and color attributes compare equal, and \c false otherwise.
              */
             bool operator==(const Brush& brush) const;
@@ -186,7 +186,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == brush)</tt>.
              *
-             * \param brush The other \c %Brush object to be compared with.
+             * \param brush The other \c %Brush instance to be compared with.
              * \return \c true if either the style or the color attributes compare non-equal, and \c false otherwise.
              */
             bool operator!=(const Brush& brush) const;

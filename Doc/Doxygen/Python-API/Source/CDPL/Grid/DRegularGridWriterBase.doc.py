@@ -40,7 +40,7 @@ class DRegularGridWriterBase(Base.DataIOBase):
     # 
     # \param grid The DRegularGrid object to write.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IOError if an I/O error occurred.
     # 

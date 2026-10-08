@@ -31,7 +31,7 @@ class SizeSpecification(Boost.Python.instance):
     def __init__(spec: SizeSpecification) -> None: pass
 
     ##
-    # \brief Constructs a <tt>SizeSpecification</tt> object with the given attributes.
+    # \brief Constructs a <tt>SizeSpecification</tt> instance with the given attributes.
     # 
     # \param value The value of the specified size.
     # \param relative <tt>True</tt> if the size specification is relative (proportional) to another size, and <tt>False</tt> otherwise.
@@ -136,7 +136,7 @@ class SizeSpecification(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param spec The other <tt>SizeSpecification</tt> object to be compared with.
+    # \param spec The other <tt>SizeSpecification</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if all attributes compare equal, and <tt>False</tt> otherwise.
     # 
@@ -147,7 +147,7 @@ class SizeSpecification(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == spec)</tt>.
     # 
-    # \param spec The other <tt>SizeSpecification</tt> object to be compared with.
+    # \param spec The other <tt>SizeSpecification</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if one of the attributes compares non-equal, and <tt>False</tt> otherwise.
     # 

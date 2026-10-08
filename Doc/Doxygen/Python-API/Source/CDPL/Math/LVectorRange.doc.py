@@ -61,7 +61,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LVectorRange: pass
 
@@ -70,7 +70,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LVectorRange: pass
 
@@ -79,7 +79,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LVectorRange: pass
 
@@ -88,7 +88,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LVectorRange: pass
 
@@ -97,7 +97,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param r The source range view.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(r: LVectorRange) -> LVectorRange: pass
 
@@ -268,7 +268,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param e The vector expression to add.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LVectorRange: pass
 
@@ -284,7 +284,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param e The vector expression to subtract.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LVectorRange: pass
 
@@ -293,7 +293,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> LVectorRange: pass
 
@@ -302,7 +302,7 @@ class LVectorRange(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LVectorRange: pass
 

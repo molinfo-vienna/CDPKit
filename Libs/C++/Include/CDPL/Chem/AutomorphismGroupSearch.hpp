@@ -53,7 +53,7 @@ namespace CDPL
          * atom and bond mapping constraints. %Atom and bond matching is configurable via bit masks composed by
          * a bitwise-OR combination of the constants defined in namespace Chem::AtomPropertyFlag
          * and Chem::BondPropertyFlag that are set using the methods setAtomPropertyFlags() and setBondPropertyFlags(), respectively.
-         * Found mappings are recorded as Chem::AtomBondMapping objects that can be accessed via index through
+         * Found mappings are recorded as Chem::AtomBondMapping instances that can be accessed via index through
          * the method getMapping() or iteration using the iterator pair returned by the methods begin() and end().
          * The method setFoundMappingCallback() allows to register a user-defined callback function that gets invoked
          * whenever a new mapping has been found.
@@ -87,12 +87,12 @@ namespace CDPL
             typedef std::shared_ptr<AutomorphismGroupSearch> SharedPointer;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Chem::AtomBondMapping objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::AtomBondMapping instances.
              */
             typedef SubstructureSearch::MappingIterator MappingIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::AtomBondMapping objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::AtomBondMapping instances.
              */
             typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
 
@@ -182,66 +182,66 @@ namespace CDPL
             std::size_t getNumMappings() const;
 
             /**
-             * \brief Returns a non-\c const reference to the stored atom/bond mapping object at index \a idx.
-             * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A non-\c const reference to the Chem::AtomBondMapping object at index \a idx.
+             * \brief Returns a non-\c const reference to the stored Chem::AtomBondMapping instance at index \a idx.
+             * \param idx The zero-based index of the Chem::AtomBondMapping instance to return.
+             * \return A non-\c const reference to the Chem::AtomBondMapping instance at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             AtomBondMapping& getMapping(std::size_t idx);
 
             /**
-             * \brief Returns a \c const reference to the stored atom/bond mapping object at index \a idx.
-             * \param idx The zero-based index of the atom/bond mapping object to return.
-             * \return A \c const reference to the Chem::AtomBondMapping object at index \a idx.
+             * \brief Returns a \c const reference to the stored Chem::AtomBondMapping instance at index \a idx.
+             * \param idx The zero-based index of the Chem::AtomBondMapping instance to return.
+             * \return A \c const reference to the Chem::AtomBondMapping instance at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMappings()).
              */
             const AtomBondMapping& getMapping(std::size_t idx) const;
 
              /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping instances.
              */
             MappingIterator getMappingsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping instances.
              */
             ConstMappingIterator getMappingsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping instances.
              */
             MappingIterator getMappingsEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping instances.
              */
             ConstMappingIterator getMappingsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::AtomBondMapping instances.
              */
             MappingIterator begin();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::AtomBondMapping instances.
              */
             ConstMappingIterator begin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::AtomBondMapping instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::AtomBondMapping instances.
              */
             MappingIterator end();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::AtomBondMapping instances.
              */
             ConstMappingIterator end() const;
 

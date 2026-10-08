@@ -198,7 +198,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \param rxn The reaction to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(rxn: Reaction) -> Reaction: pass
 
@@ -243,7 +243,7 @@ class Reaction(Base.PropertyContainer):
     # 
     def __contains__(mol: Molecule) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 

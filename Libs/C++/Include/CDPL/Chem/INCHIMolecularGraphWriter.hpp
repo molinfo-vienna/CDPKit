@@ -55,8 +55,8 @@ namespace CDPL
          * \brief Writer for molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em>
          *        [\ref INCHI] format.
          *
-         * \c %INCHIMolecularGraphWriter implements the generation of \e InChI strings from Chem::MolecularGraph objects. The output data
-         * are written by means of a \c std::ostream object that was provided to the \c %INCHIMolecularGraphWriter constructor.
+         * \c %INCHIMolecularGraphWriter implements the generation of \e InChI strings from Chem::MolecularGraph instances. The output data
+         * are written by means of a \c std::ostream instance that was provided to the \c %INCHIMolecularGraphWriter constructor.
          *
          * For the generation of the \e InChI output, \c %INCHIMolecularGraphWriter uses the function \c GetINCHI() of the
          * <em>InChI C-API</em>. The return value of the function provides information about the status of the performed

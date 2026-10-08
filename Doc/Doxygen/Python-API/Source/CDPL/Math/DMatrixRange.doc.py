@@ -69,7 +69,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrixRange: pass
 
@@ -78,7 +78,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrixRange: pass
 
@@ -87,7 +87,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrixRange: pass
 
@@ -96,7 +96,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrixRange: pass
 
@@ -105,7 +105,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param r The source matrix range.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(r: DMatrixRange) -> DMatrixRange: pass
 
@@ -279,7 +279,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrixRange: pass
 
@@ -295,7 +295,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrixRange: pass
 
@@ -304,7 +304,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> DMatrixRange: pass
 
@@ -313,7 +313,7 @@ class DMatrixRange(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> DMatrixRange: pass
 

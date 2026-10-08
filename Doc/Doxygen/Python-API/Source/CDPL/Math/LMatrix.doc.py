@@ -117,7 +117,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> LMatrix: pass
 
@@ -126,7 +126,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> LMatrix: pass
 
@@ -135,7 +135,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> LMatrix: pass
 
@@ -144,7 +144,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> LMatrix: pass
 
@@ -153,7 +153,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param m The source matrix (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(m: LMatrix) -> LMatrix: pass
 
@@ -322,7 +322,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLMatrixExpression) -> LMatrix: pass
 
@@ -338,7 +338,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLMatrixExpression) -> LMatrix: pass
 
@@ -347,7 +347,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> LMatrix: pass
 
@@ -356,7 +356,7 @@ class LMatrix(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LMatrix: pass
 

@@ -25,7 +25,7 @@
 class BondMatchConstraint(Boost.Python.instance):
 
     ##
-    # \brief Specifies a constraint which requires the target bond to fulfill additional constraints specified by a Chem.MatchConstraintList object.
+    # \brief Specifies a constraint which requires the target bond to fulfill additional constraints specified by a Chem.MatchConstraintList instance.
     # 
     CONSTRAINT_LIST = 0
 

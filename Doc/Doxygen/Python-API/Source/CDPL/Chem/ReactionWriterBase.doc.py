@@ -40,7 +40,7 @@ class ReactionWriterBase(Base.DataIOBase):
     # 
     # \param rxn The Reaction object to write.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IOError if an I/O error occurred.
     # 

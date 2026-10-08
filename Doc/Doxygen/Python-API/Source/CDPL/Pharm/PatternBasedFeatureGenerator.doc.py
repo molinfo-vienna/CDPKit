@@ -94,7 +94,7 @@ class PatternBasedFeatureGenerator(FeatureGenerator):
     # 
     # \param gen The <tt>PatternBasedFeatureGenerator</tt> instance providing the new patterns to use.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: PatternBasedFeatureGenerator) -> PatternBasedFeatureGenerator: pass
 

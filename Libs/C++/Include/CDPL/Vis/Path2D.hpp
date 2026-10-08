@@ -51,10 +51,10 @@ namespace CDPL
          * can be joined to form closed subpaths, for example a rounded rectangle, or they can exist independently as unclosed 
          * subpaths, such as lines and curves. A closed path has coinciding start and end points. 
          *
-         * \c %Path2D objects can be used for filling, outlining, and clipping. The main advantage over a sequence of basic drawing
+         * \c %Path2D instances can be used for filling, outlining, and clipping. The main advantage over a sequence of basic drawing
          * operations is that complex shapes need to be created only once and can be stored for repeated later uses.
          *
-         * A \c %Path2D object can be constructed as an empty path, or as a copy of another \c %Path2D instance. Once created, lines and curves
+         * A \c %Path2D instance can be constructed as an empty path, or as a copy of another \c %Path2D instance. Once created, lines and curves
          * can be added to the path using the lineTo(), arcTo() and arc() functions. The lines and curves stretch from the current position
          * to the position passed as argument.
          * The current position is always the end point of the last drawing operation. Use the moveTo()
@@ -65,11 +65,11 @@ namespace CDPL
          * The generation of these shapes is implemented by executing a sequence of appropriate moveTo(), lineTo() and arcTo() calls.
          * The axis-aligned bounding box of a path constructed in this way can be calculated by the method getBounds().
          *
-         * Whether or not a \c %Path2D object contains any elements can be queried by the method isEmpty(). Whether the path also features
+         * Whether or not a \c %Path2D instance contains any elements can be queried by the method isEmpty(). Whether the path also features
          * visual elements (lines and arcs) can be queried by the method hasDrawingElements(). The method clear() deletes all 
          * elements added so far and sets the default fill rule (see setFillRule() and getFillRule()).
          *
-         * Elements added to a \c %Path2D object cannot inspected directly. For path analysis and rendering the method convert()
+         * Elements added to a \c %Path2D instance cannot inspected directly. For path analysis and rendering the method convert()
          * is available which calls element type specific methods on a provided instance of a class implementing the Vis::Path2DConverter interface.
          *
          * \since 1.1
@@ -79,7 +79,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Specifies which method to use for filling closed shapes described by the \c %Path2D object.
+             * \brief Specifies which method to use for filling closed shapes described by the \c %Path2D instance.
              */
             enum FillRule
             {

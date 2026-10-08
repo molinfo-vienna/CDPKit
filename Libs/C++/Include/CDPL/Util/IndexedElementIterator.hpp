@@ -130,7 +130,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs and initializes the iterator with another iterator object.
+             * \brief Constructs and initializes the \c %IndexedElementIterator instance with another iterator object.
              * \param it The other iterator.
              */
             template <typename ValueType2, typename AccessFunc2, typename IndexType2>
@@ -139,7 +139,7 @@ namespace CDPL
             {}
 
             /**
-             * \brief Constructs and initializes the iterator with the access function \a access_func
+             * \brief Constructs and initializes the \c %IndexedElementIterator instance with the access function \a access_func
              *        and the start element index \a start_idx.
              * \param access_func The element access function to use.
              * \param start_idx The index of the first element the iterator will point to.

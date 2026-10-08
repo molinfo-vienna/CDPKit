@@ -259,7 +259,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param fmt The other \c %DataFormat object to be compared with.
+             * \param fmt The other \c %DataFormat instance to be compared with.
              * \return \c true if the names and mime-types compare equal (case-insensitive!), and \c false otherwise.
              */
             bool operator==(const DataFormat& fmt) const;
@@ -269,7 +269,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == fmt)</tt>.
              *
-             * \param fmt The other \c %DataFormat object to be compared with.
+             * \param fmt The other \c %DataFormat instance to be compared with.
              * \return \c true if the names and/or mime-types compare non-equal (case-insensitive!), and \c false otherwise.
              * \see operator==()
              */

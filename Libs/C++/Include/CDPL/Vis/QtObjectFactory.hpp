@@ -52,7 +52,7 @@ namespace CDPL
         class Path2D;
 
         /**
-         * \brief Provides methods for the creation of \c QFont, \c QColor, \c QPen and \c QBrush objects
+         * \brief Provides methods for the creation of \c QFont, \c QColor, \c QPen and \c QBrush instances
          *        from Vis::Font, Vis::Color, Vis::Pen and Vis::Brush instances.
          *
          * \see [\ref QTDOC] for more information about \c QFont, \c QColor, \c QPen and \c QBrush.
@@ -62,37 +62,37 @@ namespace CDPL
 
           public:
             /**
-             * \brief Creates a \c QFont object that corresponds to the specified font.
-             * \param font The font object.
-             * \return A \c QFont object equivalent to \a font.
+             * \brief Creates a \c QFont instance that corresponds to the specified font.
+             * \param font The Vis::Font instance.
+             * \return A \c QFont instance equivalent to \a font.
              */
             static QFont createQFont(const Font& font);
 
             /**
-             * \brief Creates a \c QColor object that corresponds to the specified color.
-             * \param color The color object.
-             * \return A \c QColor object equivalent to \a color.
+             * \brief Creates a \c QColor instance that corresponds to the specified color.
+             * \param color The Vis::Color instance.
+             * \return A \c QColor instance equivalent to \a color.
              */
             static QColor createQColor(const Color& color);
 
             /**
-             * \brief Creates a \c QPen object that corresponds to the specified pen.
-             * \param pen The pen object.
-             * \return A \c QPen object equivalent to \a pen.
+             * \brief Creates a \c QPen instance that corresponds to the specified pen.
+             * \param pen The Vis::Pen instance.
+             * \return A \c QPen instance equivalent to \a pen.
              */
             static QPen createQPen(const Pen& pen);
 
             /**
-             * \brief Creates a \c QBrush object that corresponds to the specified brush.
-             * \param brush The brush object.
-             * \return A \c QBrush object equivalent to \a brush.
+             * \brief Creates a \c QBrush instance that corresponds to the specified brush.
+             * \param brush The Vis::Brush instance.
+             * \return A \c QBrush instance equivalent to \a brush.
              */
             static QBrush createQBrush(const Brush& brush);
 
             /**
-             * \brief Creates a \c QPainterPath object that corresponds to the specified path.
-             * \param path The path object.
-             * \param qt_path The QPainterPath object to create.
+             * \brief Creates a \c QPainterPath instance that corresponds to the specified path.
+             * \param path The Vis::Path2D instance.
+             * \param qt_path The \c QPainterPath instance to create.
              * \return The argument \a qt_path.
              */
             static QPainterPath& createQPainterPath(const Path2D& path, QPainterPath& qt_path);

@@ -124,7 +124,7 @@ class AromaticFeatureGenerator(PatternBasedFeatureGenerator):
     # 
     # \param gen The <tt>AromaticFeatureGenerator</tt> instance to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: AromaticFeatureGenerator) -> AromaticFeatureGenerator: pass
 

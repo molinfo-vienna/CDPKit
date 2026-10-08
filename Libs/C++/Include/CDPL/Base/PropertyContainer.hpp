@@ -121,7 +121,7 @@ namespace CDPL
 
             /**
              * \brief Returns the value of the property specified by \a key as a \c const reference
-             *        to an object of type \a T, or the default value \a def_val if a stored value does not exist.
+             *        to an object of type \a T, or the default value \a def_val if an entry does not exist.
              *
              * If a value has been assigned to the specified property, the stored value will be returned.
              * Otherwise the default value specified by \a def_val gets returned.
@@ -139,12 +139,12 @@ namespace CDPL
              * \brief Returns the value of the property specified by \a key.
              *
              * If an entry for the specified property exists, the stored value will be returned. Otherwise an empty Base::Any
-             * object gets returned if \a _throw is \c false, and a Base::ItemNotFound exception will be thrown if \a _throw is \c true.
+             * instance gets returned if \a _throw is \c false, and a Base::ItemNotFound exception will be thrown if \a _throw is \c true.
              *
              * \param key The key of the property value to return.
-             * \param throw_ Specifies whether to throw a Base::ItemNotFound exception or to return an empty Base::Any object
+             * \param throw_ Specifies whether to throw a Base::ItemNotFound exception or to return an empty Base::Any instance
              *               if the requested property value does not exist.
-             * \return The stored property value or and empty Base::Any object.
+             * \return The stored property value or and empty Base::Any instance.
              * \throw Base::ItemNotFound if an entry for the requested property value does not exist and \a throw_ is \c true.
              */
             inline const Any& getProperty(const LookupKey& key, bool throw_ = false) const;
@@ -181,36 +181,36 @@ namespace CDPL
             ConstPropertyIterator end() const;
 
             /**
-             * \brief Clears the value of the property specified by \a key.
-             * \param key The key of the property value to erase.
-             * \return \c true if an entry for \a key could be found and was erased, and \c false otherwise.
+             * \brief Removes the entry for the property specified by \a key.
+             * \param key The key of the property entry to remove.
+             * \return \c true if an entry for \a key could be found and was removed, and \c false otherwise.
              */
             bool removeProperty(const LookupKey& key);
 
             /**
-             * \brief Clears all property values.
+             * \brief Erases all container entries.
              */
             void clearProperties();
 
             /**
-             * \brief Adds the property value entries in the \c %PropertyContainer instance \a cntnr.
+             * \brief Adds the property entries of the \c %PropertyContainer instance \a cntnr.
              *
-             * Any property values which have no corresponding assigned value in \a cntnr are left unchanged. Otherwise the value
+             * Any properties which have no corresponding entry in \a cntnr are left unchanged. Otherwise the value
              * of the local property gets overwritten by the value stored in \a cntnr. 
              *
-             * \param cntnr The \c %PropertyContainer instance containing the property value entries to add.
+             * \param cntnr The \c %PropertyContainer instance providing the property entries to add.
              */
             void addProperties(const PropertyContainer& cntnr);
 
             /**
-             * \brief Replaces the current set of properties by a copy of the entries in \a cntnr.
-             * \param cntnr The \c %PropertyContainer instance containing the property value entries to add.
+             * \brief Replaces the current property entries by a copy of the entries in \a cntnr.
+             * \param cntnr The \c %PropertyContainer instance providing the property entries to copy.
              */
             void copyProperties(const PropertyContainer& cntnr);
 
             /**
-             * \brief Exchanges the properties of this container with the properties of the container \a cntnr.
-             * \param cntnr The container to exchange the properties with.
+             * \brief Exchanges the property entries of this container with the ones of \a cntnr.
+             * \param cntnr The other \c %PropertyContainer instance.
              */
             void swap(PropertyContainer& cntnr);
 

@@ -22,7 +22,7 @@
 ##
 # \brief Applies a Chem.Reaction template to the reactant components of a target Chem.Reaction to generate the corresponding product molecules.
 # 
-# The reaction pattern (a Chem.Reaction with atom mapped reactant and product templates) is installed via setReactionPattern(). findReactionSites() then locates all matching substructures on the target reaction's reactants — internally using Chem.ReactionSubstructureSearch — and stores them as Reactor.ReactionSite instances. Calling performReaction() for a given reaction-site copies the matched reactants, applies the bond/atom changes encoded in the pattern, and appends the resulting product molecules to the target reaction's product list.
+# The reaction pattern (a Chem.Reaction with atom mapped reactant and product templates) is installed via setReactionPattern(). findReactionSites() then locates all matching substructures on the target reaction's reactants — internally using Chem.ReactionSubstructureSearch — and stores them as Reactor.ReactionSite instances. Calling performReaction() for a given reaction site copies the matched reactants, applies the bond/atom changes encoded in the pattern, and appends the resulting product molecules to the target reaction's product list.
 # 
 class Reactor(Boost.Python.instance):
 
@@ -80,11 +80,11 @@ class Reactor(Boost.Python.instance):
     def getNumReactionSites() -> int: pass
 
     ##
-    # \brief Returns the stored reaction site data object at index <em>idx</em>.
+    # \brief Returns the stored ReactionSite instance at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the reaction-site data object to return.
+    # \param idx The zero-based index of the ReactionSite instance to return.
     # 
-    # \return A reference to the reaction-site data object at the specified index. 
+    # \return A reference to the ReactionSite instance at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReactionSites()).
     # 
@@ -93,7 +93,7 @@ class Reactor(Boost.Python.instance):
     ##
     # \brief Performs a transformation of the target reactants to corresponding products at the reaction site <em>rxn_site</em>.
     # 
-    # The reactant components of the Chem.Reaction object specified in a prior call to findReactionSites() serve as starting materials for the reaction transformation into corresponding product molecules (according to the set reaction pattern). The input molecules are left unchanged by the transformation. New molecules will be generated that are directly stored as the product components of the given target reaction object. Note that the product molecules generated in a previous call will not be discarded and are still accessible after new products have been generated.
+    # The reactant components of the Chem.Reaction instance specified in a prior call to findReactionSites() serve as starting materials for the reaction transformation into corresponding product molecules (according to the set reaction pattern). The input molecules are left unchanged by the transformation. New molecules will be generated that are directly stored as the product components of the given target reaction instance. Note that the product molecules generated in a previous call will not be discarded and are still accessible after new products have been generated.
     # 
     # \param rxn_site Specifies the reaction site where the transformation shall take place.
     # 

@@ -40,7 +40,7 @@ class DRegularGridSetWriterBase(Base.DataIOBase):
     # 
     # \param grid_set The DRegularGridSet object to write.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IOError if an I/O error occurred.
     # 

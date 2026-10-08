@@ -31,7 +31,7 @@ class BasicAtom(Atom):
     # 
     # \param atom The atom whose properties get copied.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(atom: Atom) -> Atom: pass
 
@@ -40,6 +40,6 @@ class BasicAtom(Atom):
     # 
     # \param atom The atom whose properties get copied.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(atom: BasicAtom) -> BasicAtom: pass

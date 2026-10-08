@@ -117,7 +117,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> FMatrix: pass
 
@@ -126,7 +126,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> FMatrix: pass
 
@@ -135,7 +135,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> FMatrix: pass
 
@@ -144,7 +144,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> FMatrix: pass
 
@@ -153,7 +153,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param m The source matrix (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(m: FMatrix) -> FMatrix: pass
 
@@ -322,7 +322,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstFMatrixExpression) -> FMatrix: pass
 
@@ -338,7 +338,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstFMatrixExpression) -> FMatrix: pass
 
@@ -347,7 +347,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> FMatrix: pass
 
@@ -356,7 +356,7 @@ class FMatrix(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FMatrix: pass
 

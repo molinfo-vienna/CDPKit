@@ -27,7 +27,7 @@
 class StringDataBlockEntry(Boost.Python.instance):
 
     ##
-    # \brief Constructs a <tt>StringDataBlockEntry</tt> object with an empty data header and content.
+    # \brief Constructs a <tt>StringDataBlockEntry</tt> instance with an empty data header and content.
     # 
     def __init__() -> None: pass
 
@@ -38,7 +38,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     def __init__(entry: StringDataBlockEntry) -> None: pass
 
     ##
-    # \brief Constructs a <tt>StringDataBlockEntry</tt> object with the specified data header and content.
+    # \brief Constructs a <tt>StringDataBlockEntry</tt> instance with the specified data header and content.
     # 
     # \param header The data header.
     # \param data The data content.
@@ -95,7 +95,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # \param entry The other <tt>StringDataBlockEntry</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if the data entry headers and values compare equal, and <tt>False</tt> otherwise.
     # 
@@ -106,7 +106,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == entry)</tt>.
     # 
-    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # \param entry The other <tt>StringDataBlockEntry</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if the data headers and/or values compare non-equal, and <tt>False</tt> otherwise. 
     # 
@@ -117,7 +117,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     ##
     # \brief Less-than-or-equal comparison operator (lexicographic ordering by header, then data).
     # 
-    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # \param entry The other <tt>StringDataBlockEntry</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if <tt>self</tt> is less than or equal to <em>entry</em>, and <tt>False</tt> otherwise.
     # 
@@ -126,7 +126,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     ##
     # \brief Greater-than-or-equal comparison operator (lexicographic ordering by header, then data).
     # 
-    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # \param entry The other <tt>StringDataBlockEntry</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if <tt>self</tt> is greater than or equal to <em>entry</em>, and <tt>False</tt> otherwise.
     # 
@@ -135,7 +135,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     ##
     # \brief Less-than comparison operator (lexicographic ordering by header, then data).
     # 
-    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # \param entry The other <tt>StringDataBlockEntry</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if <tt>self</tt> is less than <em>entry</em>, and <tt>False</tt> otherwise.
     # 
@@ -144,7 +144,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     ##
     # \brief Greater-than comparison operator (lexicographic ordering by header, then data).
     # 
-    # \param entry The other <tt>StringDataBlockEntry</tt> object to be compared with.
+    # \param entry The other <tt>StringDataBlockEntry</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if <tt>self</tt> is greater than <em>entry</em>, and <tt>False</tt> otherwise.
     # 

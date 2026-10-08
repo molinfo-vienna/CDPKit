@@ -53,7 +53,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFQuaternionExpression) -> FVectorQuaternionAdapter: pass
 
@@ -62,7 +62,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDQuaternionExpression) -> FVectorQuaternionAdapter: pass
 
@@ -71,7 +71,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLQuaternionExpression) -> FVectorQuaternionAdapter: pass
 
@@ -80,7 +80,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULQuaternionExpression) -> FVectorQuaternionAdapter: pass
 
@@ -89,7 +89,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param a The source adapter.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: FVectorQuaternionAdapter) -> FVectorQuaternionAdapter: pass
 
@@ -274,7 +274,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar summand.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(t: float) -> FVectorQuaternionAdapter: pass
 
@@ -297,7 +297,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar subtrahend.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(t: float) -> FVectorQuaternionAdapter: pass
 
@@ -320,7 +320,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> FVectorQuaternionAdapter: pass
 
@@ -343,7 +343,7 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FVectorQuaternionAdapter: pass
 

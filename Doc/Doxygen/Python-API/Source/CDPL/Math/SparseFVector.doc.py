@@ -109,7 +109,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> SparseFVector: pass
 
@@ -118,7 +118,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> SparseFVector: pass
 
@@ -127,7 +127,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> SparseFVector: pass
 
@@ -136,7 +136,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> SparseFVector: pass
 
@@ -145,7 +145,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param v The source sparse vector (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(v: SparseFVector) -> SparseFVector: pass
 
@@ -313,7 +313,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstFVectorExpression) -> SparseFVector: pass
 
@@ -329,7 +329,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstFVectorExpression) -> SparseFVector: pass
 
@@ -338,7 +338,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> SparseFVector: pass
 
@@ -347,7 +347,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> SparseFVector: pass
 

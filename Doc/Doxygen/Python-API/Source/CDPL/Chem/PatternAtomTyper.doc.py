@@ -233,7 +233,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # 
     # \param typer The source <tt>PatternAtomTyper</tt>.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(typer: PatternAtomTyper) -> PatternAtomTyper: pass
 

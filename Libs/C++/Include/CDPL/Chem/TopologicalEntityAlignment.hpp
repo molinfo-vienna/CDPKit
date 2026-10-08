@@ -128,7 +128,7 @@ namespace CDPL
 
             /**
              * \brief Adds an entity to the specified alignment entity set.
-             * \param entity The entity object to add.
+             * \param entity The entity to add.
              * \param first_set If \c true, the entity is added to the first entity set, if \c false to the second one.
              * \note Adding the same entity instance more than once has no effect.
              */

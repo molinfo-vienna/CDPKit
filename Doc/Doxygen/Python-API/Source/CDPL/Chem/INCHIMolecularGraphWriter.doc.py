@@ -22,7 +22,7 @@
 ##
 # \brief Writer for molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
 # 
-# <tt>INCHIMolecularGraphWriter</tt> implements the generation of <em>InChI</em> strings from Chem.MolecularGraph objects. The output data are written by means of a <tt>std::ostream</tt> object that was provided to the <tt>INCHIMolecularGraphWriter</tt> constructor.
+# <tt>INCHIMolecularGraphWriter</tt> implements the generation of <em>InChI</em> strings from Chem.MolecularGraph instances. The output data are written by means of a <tt>std::ostream</tt> instance that was provided to the <tt>INCHIMolecularGraphWriter</tt> constructor.
 # 
 # For the generation of the <em>InChI</em> output, <tt>INCHIMolecularGraphWriter</tt> uses the function <tt>GetINCHI()</tt> of the <em>InChI C-API</em>. The return value of the function provides information about the status of the performed operation (see Chem.INCHIReturnCode) and can be accessed by the method getReturnCode(). Produced error and log messages are accessible via the methods getMessage() and getLogOutput(), respectively.
 # 

@@ -22,9 +22,9 @@
 ##
 # \brief Concrete implementation of the Pharm.FeatureContainer interface that stores references to selectable Pharm.Feature instances.
 # 
-# Unlike a Pharm.Pharmacophore instance, a <tt>FeatureSet</tt> object does not own its features. It is typically used to represent subsets/selections of features that live elsewhere.
+# Unlike a Pharm.Pharmacophore instance, a <tt>FeatureSet</tt> instance does not own its features. It is typically used to represent subsets/selections of features that live elsewhere.
 # 
-# \note Since <tt>FeatureSet</tt> does not own the stored features they must outlive any <tt>FeatureSet</tt> instance that references them!
+# \note Since <tt>FeatureSet</tt> does not own the referenced features they must outlive any <tt>FeatureSet</tt> instance that references them!
 # 
 class FeatureSet(FeatureContainer):
 
@@ -52,7 +52,7 @@ class FeatureSet(FeatureContainer):
     # 
     # \param ftr_set The feature set to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(ftr_set: FeatureSet) -> FeatureSet: pass
 
@@ -61,7 +61,7 @@ class FeatureSet(FeatureContainer):
     # 
     # \param cntnr The feature container providing the features and properties to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(cntnr: FeatureContainer) -> FeatureSet: pass
 
@@ -115,7 +115,7 @@ class FeatureSet(FeatureContainer):
     # 
     def __contains__(feature: Feature) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
@@ -126,7 +126,7 @@ class FeatureSet(FeatureContainer):
     # 
     # \param cntnr The feature container providing the features to append.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \note Does not affect any properties.
     # 
@@ -137,7 +137,7 @@ class FeatureSet(FeatureContainer):
     # 
     # \param cntnr The feature container providing the features to remove.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \note Equivalent to clear() if <tt>this == &cntr</tt>.
     # 

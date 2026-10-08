@@ -93,7 +93,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFQuaternionExpression) -> ULQuaternion: pass
 
@@ -102,7 +102,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDQuaternionExpression) -> ULQuaternion: pass
 
@@ -111,7 +111,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLQuaternionExpression) -> ULQuaternion: pass
 
@@ -120,7 +120,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param e The source quaternion expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULQuaternionExpression) -> ULQuaternion: pass
 
@@ -129,7 +129,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param q The source quaternion.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(q: ULQuaternion) -> ULQuaternion: pass
 
@@ -314,7 +314,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar addend.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(t: int) -> ULQuaternion: pass
 
@@ -337,7 +337,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar subtrahend.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(t: int) -> ULQuaternion: pass
 
@@ -360,7 +360,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULQuaternion: pass
 
@@ -383,7 +383,7 @@ class ULQuaternion(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULQuaternion: pass
 

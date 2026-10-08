@@ -74,7 +74,7 @@ class CanonicalFragment(Chem.MolecularGraph):
     # 
     # \param frag The source <tt>CanonicalFragment</tt>.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(frag: CanonicalFragment) -> CanonicalFragment: pass
 

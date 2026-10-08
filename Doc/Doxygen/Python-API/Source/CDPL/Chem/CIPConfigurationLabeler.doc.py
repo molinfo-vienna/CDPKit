@@ -52,7 +52,7 @@ class CIPConfigurationLabeler(Boost.Python.instance):
     # 
     # \param labeler The source <tt>CIPConfigurationLabeler</tt>.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(labeler: CIPConfigurationLabeler) -> CIPConfigurationLabeler: pass
 

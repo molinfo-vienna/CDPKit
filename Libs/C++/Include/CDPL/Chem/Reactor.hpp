@@ -53,7 +53,7 @@ namespace CDPL
          * The reaction pattern (a Chem::Reaction with atom mapped reactant and product templates) is installed
          * via setReactionPattern(). findReactionSites() then locates all matching substructures on the target
          * reaction's reactants — internally using Chem::ReactionSubstructureSearch — and stores them as
-         * Reactor::ReactionSite instances. Calling performReaction() for a given reaction-site copies the
+         * Reactor::ReactionSite instances. Calling performReaction() for a given reaction site copies the
          * matched reactants, applies the bond/atom changes encoded in the pattern, and appends the resulting
          * product molecules to the target reaction's product list.
          */
@@ -62,17 +62,17 @@ namespace CDPL
 
           public:
             /**
-             * \brief Stores information about perceived reaction-sites.
+             * \brief Stores information about perceived reaction sites.
              */
             typedef AtomBondMapping ReactionSite;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the perceived ReactionSite objects.
+             * \brief A mutable random access iterator used to iterate over the stored ReactionSite instances.
              */
             typedef ReactionSubstructureSearch::MappingIterator ReactionSiteIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the perceived \c const ReactionSite objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const ReactionSite instances.
              */
             typedef ReactionSubstructureSearch::ConstMappingIterator ConstReactionSiteIterator;
 
@@ -127,66 +127,66 @@ namespace CDPL
             std::size_t getNumReactionSites() const;
 
             /**
-             * \brief Returns a non-\c const reference to the stored reaction site data object at index \a idx.
-             * \param idx The zero-based index of the reaction site data object to return.
-             * \return A non-\c const reference to the reaction site data object at the specified index.
+             * \brief Returns a non-\c const reference to the stored ReactionSite instance at index \a idx.
+             * \param idx The zero-based index of the ReactionSite instance to return.
+             * \return A non-\c const reference to the ReactionSite instance at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumReactionSites()).
              */
             ReactionSite& getReactionSite(std::size_t idx);
 
             /**
-             * \brief Returns a \c const reference to the stored reaction site data object at index \a idx.
-             * \param idx The zero-based index of the reaction-site data object to return.
-             * \return A \c const reference to the reaction-site data object at the specified index.
+             * \brief Returns a \c const reference to the stored ReactionSite instance at index \a idx.
+             * \param idx The zero-based index of the ReactionSite instance to return.
+             * \return A \c const reference to the ReactionSite instance at the specified index.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumReactionSites()).
              */
             const ReactionSite& getReactionSite(std::size_t idx) const;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const ReactionSite objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const ReactionSite objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const ReactionSite instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const ReactionSite instances.
              */
             ConstReactionSiteIterator getReactionSitesBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const ReactionSite objects.
-             * \return A constant iterator pointing to the end of the stored \c const ReactionSite objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const ReactionSite instances.
+             * \return A constant iterator pointing to the end of the stored \c const ReactionSite instances.
              */
             ConstReactionSiteIterator getReactionSitesEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored ReactionSite objects.
-             * \return A mutable iterator pointing to the beginning of the stored ReactionSite objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored ReactionSite instances.
+             * \return A mutable iterator pointing to the beginning of the stored ReactionSite instances.
              */
             ReactionSiteIterator getReactionSitesBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored ReactionSite objects.
-             * \return A mutable iterator pointing to the end of the stored ReactionSite objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored ReactionSite instances.
+             * \return A mutable iterator pointing to the end of the stored ReactionSite instances.
              */
             ReactionSiteIterator getReactionSitesEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const ReactionSite objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const ReactionSite objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const ReactionSite instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const ReactionSite instances.
              */
             ConstReactionSiteIterator begin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const ReactionSite objects.
-             * \return A constant iterator pointing to the end of the stored \c const ReactionSite objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const ReactionSite instances.
+             * \return A constant iterator pointing to the end of the stored \c const ReactionSite instances.
              */
             ConstReactionSiteIterator end() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored ReactionSite objects.
-             * \return A mutable iterator pointing to the beginning of the stored ReactionSite objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored ReactionSite instances.
+             * \return A mutable iterator pointing to the beginning of the stored ReactionSite instances.
              */
             ReactionSiteIterator begin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored ReactionSite objects.
-             * \return A mutable iterator pointing to the end of the stored ReactionSite objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored ReactionSite instances.
+             * \return A mutable iterator pointing to the end of the stored ReactionSite instances.
              */
             ReactionSiteIterator end();
 
@@ -194,10 +194,10 @@ namespace CDPL
              * \brief Performs a transformation of the target reactants to corresponding products at the 
              *        reaction site \a rxn_site.
              *
-             * The reactant components of the Chem::Reaction object specified in a prior call to findReactionSites()
+             * The reactant components of the Chem::Reaction instance specified in a prior call to findReactionSites()
              * serve as starting materials for the reaction transformation into corresponding product molecules (according
              * to the set reaction pattern). The input molecules are left unchanged by the transformation. New molecules will be
-             * generated that are directly stored as the product components of the given target reaction object. Note that the
+             * generated that are directly stored as the product components of the given target reaction instance. Note that the
              * product molecules generated in a previous call will not be discarded and are still accessible after new products
              * have been generated.
              * 

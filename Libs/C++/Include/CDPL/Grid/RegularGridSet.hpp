@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Data structure for the storage of Grid::RegularGrid objects.
+         * \brief Data structure for the storage of Grid::RegularGrid instances.
          * \tparam T The grid cell value type.
          * \tparam CVT The world-coordinate value type used by the wrapped Grid::RegularGrid (defaults to \a T).
          */

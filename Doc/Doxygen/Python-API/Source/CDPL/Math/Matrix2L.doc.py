@@ -97,7 +97,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> Matrix2L: pass
 
@@ -106,7 +106,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> Matrix2L: pass
 
@@ -115,7 +115,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> Matrix2L: pass
 
@@ -124,7 +124,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> Matrix2L: pass
 
@@ -133,7 +133,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param m The source fixed-size matrix.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(m: Matrix2L) -> Matrix2L: pass
 
@@ -302,7 +302,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLMatrixExpression) -> Matrix2L: pass
 
@@ -318,7 +318,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLMatrixExpression) -> Matrix2L: pass
 
@@ -327,7 +327,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> Matrix2L: pass
 
@@ -336,7 +336,7 @@ class Matrix2L(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> Matrix2L: pass
 

@@ -108,7 +108,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     # 
     # \param calc The other <tt>FeatureInteractionScoreGridCalculator</tt> instance.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: FeatureInteractionScoreGridCalculator) -> FeatureInteractionScoreGridCalculator: pass
 

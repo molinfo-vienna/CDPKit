@@ -64,7 +64,7 @@ class FileIOStream(IOStream):
 
     ##
     # \brief Returns the stream instance.
-    # \return \c self.
+    # \return \a self.
     # 
     def xreadlines() -> FileIOStream: pass
 
@@ -206,7 +206,7 @@ class FileIOStream(IOStream):
 
     ##
     # \brief Returns the stream instance.
-    # \return \c self.
+    # \return \a self.
     # 
     def __iter__() -> FileIOStream: pass
 

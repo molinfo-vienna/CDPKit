@@ -46,7 +46,7 @@ namespace CDPL
         /**
          * \brief Common interface for data structures that support a random access to stored Chem::Entity3D instances.
          *
-         * Implementations have to guarantee that a given Chem::Entity3D object is stored only once and its index is unique amongst
+         * Implementations have to guarantee that a given Chem::Entity3D instance is stored only once and its index is unique amongst
          * all contained Chem::Entity3D instances. Otherwise algorithms that rely on this behaviour may not work correctly!
          */
         class CDPL_CHEM_API Entity3DContainer
@@ -57,12 +57,12 @@ namespace CDPL
 
           public:
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Entity3D objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Entity3D instances.
              */
             typedef Util::IndexedElementIterator<const Entity3D, ConstEntityAccessor> ConstEntityIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Chem::Entity3D objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Entity3D instances.
              */
             typedef Util::IndexedElementIterator<Entity3D, EntityAccessor> EntityIterator;
 
@@ -89,50 +89,50 @@ namespace CDPL
             virtual Entity3D& getEntity(std::size_t idx) = 0;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D instances.
              */
             ConstEntityIterator getEntitiesBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D instances.
              */
             ConstEntityIterator getEntitiesEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D instances.
              */
             EntityIterator getEntitiesBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::Entity3D instances.
              */
             EntityIterator getEntitiesEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D instances.
              */
             ConstEntityIterator begin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D instances.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D instances.
              */
             ConstEntityIterator end() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
-             * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D instances.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D instances.
              */
             EntityIterator begin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
-             * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D instances.
+             * \return A mutable iterator pointing to the end of the stored Chem::Entity3D instances.
              */
             EntityIterator end();
 

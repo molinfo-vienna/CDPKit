@@ -83,7 +83,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> FMatrixSlice: pass
 
@@ -92,7 +92,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> FMatrixSlice: pass
 
@@ -101,7 +101,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> FMatrixSlice: pass
 
@@ -110,7 +110,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> FMatrixSlice: pass
 
@@ -119,7 +119,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param s The source matrix slice.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(s: FMatrixSlice) -> FMatrixSlice: pass
 
@@ -293,7 +293,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstFMatrixExpression) -> FMatrixSlice: pass
 
@@ -309,7 +309,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstFMatrixExpression) -> FMatrixSlice: pass
 
@@ -318,7 +318,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> FMatrixSlice: pass
 
@@ -327,7 +327,7 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FMatrixSlice: pass
 

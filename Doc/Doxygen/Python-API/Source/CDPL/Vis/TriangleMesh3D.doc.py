@@ -144,7 +144,7 @@ class TriangleMesh3D(Shape3D):
     # 
     # \param mesh The mesh to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
 

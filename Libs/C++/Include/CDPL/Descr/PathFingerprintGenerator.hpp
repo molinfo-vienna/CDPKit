@@ -95,7 +95,7 @@ namespace CDPL
 
               public:
                 /**
-                 * \brief Constructs the atom descriptor functor object for the specified set of atomic properties.
+                 * \brief Constructs the \c %DefAtomDescriptorFunctor instance for the specified set of atomic properties.
                  *
                  * The \a flags argument is an OR combination of the constants defined in namespace
                  * Chem::AtomPropertyFlag. Supported property flags are:
@@ -132,7 +132,7 @@ namespace CDPL
 
               public:
                 /**
-                 * \brief Constructs the bond descriptor functor object for the specified set of bond properties.
+                 * \brief Constructs the \c %DefBondDescriptorFunctor instance for the specified set of bond properties.
                  *
                  * The \a flags argument is an OR combination of the constants defined in namespace
                  * Chem::BondPropertyFlag. Supported property flags are:

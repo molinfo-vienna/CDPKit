@@ -55,7 +55,7 @@ namespace CDPL
          *        [\ref INCHI] format.
          *
          * \c %INCHIMoleculeReader implements the conversion of \e InChI strings (or strings with auxiliary \e InChI information)
-         * to corresponding Chem::Molecule objects. The input data are read by means of a \c std::istream object that was provided
+         * to corresponding Chem::Molecule instances. The input data are read by means of a \c std::istream instance that was provided
          * to the \c %INCHIMoleculeReader constructor.
          *
          * For the actual decoding of the \e InChI input, \c %INCHIMoleculeReader uses an appropriate function (\c GetStructFromINCHI()

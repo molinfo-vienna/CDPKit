@@ -143,12 +143,12 @@ namespace CDPL
             static const Color TRANSPARENT;
 
             /**
-             * \brief Constructs and initializes a \c %Color object with all RGBA components set to zero.
+             * \brief Constructs and initializes a \c %Color instance with all RGBA components set to zero.
              */
             Color();
 
             /**
-             * \brief Constructs and initializes a \c %Color object with the RGBA components set to 
+             * \brief Constructs and initializes a \c %Color instance with the RGBA components set to 
              *        the specified values.
              *
              * Component values outside the interval <em>[0, 1]</em> are clamped to the nearest interval
@@ -240,7 +240,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param color The other \c %Color object to be compared with.
+             * \param color The other \c %Color instance to be compared with.
              * \return \c true if all pairs of the RGBA components compare equal, \c false otherwise.
              */
             bool operator==(const Color& color) const;
@@ -250,7 +250,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == color)</tt>.
              *
-             * \param color The other \c %Color object to be compared with.
+             * \param color The other \c %Color instance to be compared with.
              * \return \c true if at least one pair of the RGBA components compares non-equal, \c false otherwise.
              */
             bool operator!=(const Color& color) const;

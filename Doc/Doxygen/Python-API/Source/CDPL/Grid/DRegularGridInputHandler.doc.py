@@ -42,9 +42,9 @@ class DRegularGridInputHandler(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns a Base.DataFormat object that provides information about the handled input data format.
+    # \brief Returns a Base.DataFormat instance that provides information about the handled input data format.
     # 
-    # \return A Base.DataFormat object that provides information about the handled data format.
+    # \return A Base.DataFormat instance that provides information about the handled data format.
     # 
     def getDataFormat() -> Base.DataFormat: pass
 

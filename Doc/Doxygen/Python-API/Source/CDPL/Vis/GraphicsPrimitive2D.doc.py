@@ -53,8 +53,8 @@ class GraphicsPrimitive2D(Boost.Python.instance):
     ##
     # \brief Calculates the bounds of the graphics primitive.
     # 
-    # \param bounds The object storing the calculated bounding box.
-    # \param font_metrics The font metrics object to use for bounds calculation (if required).
+    # \param bounds The Vis.Rectangle2D instance storing the calculated bounding box.
+    # \param font_metrics The Vis.FontMetrics instance to use for bounds calculation (if required).
     # 
     def getBounds(bounds: Rectangle2D, font_metrics: FontMetrics = 0) -> None: pass
 

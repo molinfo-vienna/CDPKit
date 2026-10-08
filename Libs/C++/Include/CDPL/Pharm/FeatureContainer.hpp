@@ -49,7 +49,7 @@ namespace CDPL
         /**
          * \brief Common interface for data structures that support a random access to stored Pharm::Feature instances.
          *
-         * Implementations have to guarantee that a given Pharm::Feature object is stored only once and its index is unique amongst
+         * Implementations have to guarantee that a given Pharm::Feature instance is stored only once and its index is unique amongst
          * all contained Pharm::Feature instances. Otherwise algorithms that rely on this behaviour may not work correctly!
          */
         class CDPL_PHARM_API FeatureContainer : public Chem::Entity3DContainer,
@@ -66,12 +66,12 @@ namespace CDPL
             typedef std::shared_ptr<FeatureContainer> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature instances.
              */
             typedef Util::IndexedElementIterator<const Feature, ConstFeatureAccessor> ConstFeatureIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Pharm::Feature objects.
+             * \brief A mutable random access iterator used to iterate over the stored Pharm::Feature instances.
              */
             typedef Util::IndexedElementIterator<Feature, FeatureAccessor> FeatureIterator;
 
@@ -118,50 +118,50 @@ namespace CDPL
             virtual bool containsFeature(const Feature& feature) const = 0;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Pharm::Feature instances.
              */
             ConstFeatureIterator getFeaturesBegin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
-             * \return A constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::Feature instances.
+             * \return A constant iterator pointing to the end of the stored \c const Pharm::Feature instances.
              */
             ConstFeatureIterator getFeaturesEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
-             * \return A mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::Feature instances.
+             * \return A mutable iterator pointing to the beginning of the stored Pharm::Feature instances.
              */
             FeatureIterator getFeaturesBegin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Pharm::Feature objects.
-             * \return A mutable iterator pointing to the end of the stored Pharm::Feature objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Pharm::Feature instances.
+             * \return A mutable iterator pointing to the end of the stored Pharm::Feature instances.
              */
             FeatureIterator getFeaturesEnd();
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Pharm::Feature instances.
              */
             ConstFeatureIterator begin() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
-             * \return A constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::Feature instances.
+             * \return A constant iterator pointing to the end of the stored \c const Pharm::Feature instances.
              */
             ConstFeatureIterator end() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
-             * \return A mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::Feature instances.
+             * \return A mutable iterator pointing to the beginning of the stored Pharm::Feature instances.
              */
             FeatureIterator begin();
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Pharm::Feature objects.
-             * \return A mutable iterator pointing to the end of the stored Pharm::Feature objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Pharm::Feature instances.
+             * \return A mutable iterator pointing to the end of the stored Pharm::Feature instances.
              */
             FeatureIterator end();
 

@@ -105,7 +105,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     # 
     # \param gen The generator to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 

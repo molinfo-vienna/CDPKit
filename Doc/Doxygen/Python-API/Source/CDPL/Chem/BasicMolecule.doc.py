@@ -107,7 +107,7 @@ class BasicMolecule(Molecule):
     # 
     # \param mol The molecule to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(mol: BasicMolecule) -> BasicMolecule: pass
 
@@ -118,7 +118,7 @@ class BasicMolecule(Molecule):
     # 
     # \param mol The molecule to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(mol: Molecule) -> BasicMolecule: pass
 
@@ -129,7 +129,7 @@ class BasicMolecule(Molecule):
     # 
     # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(molgraph: MolecularGraph) -> BasicMolecule: pass
 
@@ -140,7 +140,7 @@ class BasicMolecule(Molecule):
     # 
     # \param mol The molecule providing the atoms and bonds to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(mol: BasicMolecule) -> BasicMolecule: pass
 
@@ -151,7 +151,7 @@ class BasicMolecule(Molecule):
     # 
     # \param mol The molecule providing the atoms and bonds to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(mol: Molecule) -> BasicMolecule: pass
 
@@ -162,6 +162,6 @@ class BasicMolecule(Molecule):
     # 
     # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(molgraph: MolecularGraph) -> BasicMolecule: pass

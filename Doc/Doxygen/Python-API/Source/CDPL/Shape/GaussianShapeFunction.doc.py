@@ -72,7 +72,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     # 
     # \param func The other <tt>GaussianShapeFunction</tt> instance.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: GaussianShapeFunction) -> GaussianShapeFunction: pass
 

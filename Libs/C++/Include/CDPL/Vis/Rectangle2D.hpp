@@ -288,7 +288,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param rect The other \c %Rectangle2D object to be compared with.
+             * \param rect The other \c %Rectangle2D instance to be compared with.
              * \return \c true if the minimum and maximum points compare equal, and \c false otherwise.
              */
             bool operator==(const Rectangle2D& rect) const;
@@ -298,7 +298,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == rect)</tt>.
              *
-             * \param rect The other \c %Rectangle2D object to be compared with.
+             * \param rect The other \c %Rectangle2D instance to be compared with.
              * \return \c true if either the minimum or maximum points compare non-equal, and \c false otherwise.
              */
             bool operator!=(const Rectangle2D& rect) const;

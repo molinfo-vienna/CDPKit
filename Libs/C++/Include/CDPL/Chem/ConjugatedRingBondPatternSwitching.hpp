@@ -73,7 +73,7 @@ namespace CDPL
 
             /**
              * \brief Generates the next bond-pattern-switched tautomer.
-             * \param tautomer The tautomer output molecule object.
+             * \param tautomer The tautomer output molecule.
              * \return \c true if a tautomer was generated, and \c false if no more tautomers are available.
              */
             bool generate(Molecule& tautomer);

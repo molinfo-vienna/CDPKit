@@ -83,7 +83,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrixSlice: pass
 
@@ -92,7 +92,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrixSlice: pass
 
@@ -101,7 +101,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrixSlice: pass
 
@@ -110,7 +110,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrixSlice: pass
 
@@ -119,7 +119,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param s The source matrix slice.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(s: DMatrixSlice) -> DMatrixSlice: pass
 
@@ -293,7 +293,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrixSlice: pass
 
@@ -309,7 +309,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrixSlice: pass
 
@@ -318,7 +318,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> DMatrixSlice: pass
 
@@ -327,7 +327,7 @@ class DMatrixSlice(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> DMatrixSlice: pass
 

@@ -46,7 +46,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %SizeSpecification object with the given attributes.
+             * \brief Constructs a \c %SizeSpecification instance with the given attributes.
              * \param value The value of the specified size.
              * \param relative \c true if the size specification is relative (proportional) to another size, and \c false otherwise.
              * \param input_scaling \c true if the specified size has to follow input scaling, and \c false otherwise.
@@ -125,7 +125,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param spec The other \c %SizeSpecification object to be compared with.
+             * \param spec The other \c %SizeSpecification instance to be compared with.
              * \return \c true if all attributes compare equal, and \c false otherwise.
              */
             bool operator==(const SizeSpecification& spec) const;
@@ -135,7 +135,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == spec)</tt>.
              *
-             * \param spec The other \c %SizeSpecification object to be compared with.
+             * \param spec The other \c %SizeSpecification instance to be compared with.
              * \return \c true if one of the attributes compares non-equal, and \c false otherwise.
              */
             bool operator!=(const SizeSpecification& spec) const;

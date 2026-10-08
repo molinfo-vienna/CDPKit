@@ -226,7 +226,7 @@ namespace CDPL
 
             /**
              * \brief Equality comparison operator.
-             * \param pen The other \c %Pen object to be compared with.
+             * \param pen The other \c %Pen instance to be compared with.
              * \return \c true if all pen attributes compare equal, and \c false otherwise.
              */
             bool operator==(const Pen& pen) const;
@@ -236,7 +236,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == pen)</tt>.
              *
-             * \param pen The other \c %Pen object to be compared with.
+             * \param pen The other \c %Pen instance to be compared with.
              * \return \c true if the pen attributes compare non-equal, and \c false otherwise.
              */
             bool operator!=(const Pen& pen) const;

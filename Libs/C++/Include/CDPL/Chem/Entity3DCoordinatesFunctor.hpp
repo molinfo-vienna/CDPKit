@@ -42,16 +42,16 @@ namespace CDPL
         class Entity3D;
 
         /**
-         * \brief Helper-functor for retrieving the 3D coordinates of an Chem::Entity3D object (via the Chem::Entity3DProperty::COORDINATES_3D property).
+         * \brief Helper-functor for retrieving the 3D coordinates of an Chem::Entity3D instance (via the Chem::Entity3DProperty::COORDINATES_3D property).
          */
         struct CDPL_CHEM_API Entity3DCoordinatesFunctor
         {
 
           public:
             /**
-             * \brief Returns the 3D coordinates of the argument entity object.
-             * \param entity The entity object.
-             * \return The 3D coordinates of the entity object.
+             * \brief Returns the 3D coordinates of the argument entity.
+             * \param entity The entity.
+             * \return The 3D coordinates of the entity.
              * \see Chem::get3DCoordinates(const Entity3D&)
              */
             const Math::Vector3D& operator()(const Entity3D& entity) const;

@@ -318,7 +318,7 @@ class Line2D(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param line The other <tt>Line2D</tt> object to be compared with.
+    # \param line The other <tt>Line2D</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if the starting and end points compare equal, and <tt>False</tt> otherwise.
     # 
@@ -329,7 +329,7 @@ class Line2D(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == line)</tt>.
     # 
-    # \param line The other <tt>Line2D</tt> object to be compared with.
+    # \param line The other <tt>Line2D</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if either the starting or end points compare non-equal, and <tt>False</tt> otherwise.
     # 

@@ -47,7 +47,7 @@ namespace CDPL
          * \brief Abstract base class for data structures that represent chemical structures as molecular graphs.
          *
          * Vertices (= atoms) of the molecular graph are represented by Chem::Atom instances and edges (= bonds)
-         * by Chem::Bond instances. Read-only access to the Chem::Atom and Chem::Bond objects is enabled by
+         * by Chem::Bond instances. Read-only access to the Chem::Atom and Chem::Bond instances is enabled by
          * corresponding methods inherited from Chem::AtomContainer and Chem::BondContainer, respectively.
          * Molecular graph properties can be stored/retrieved via methods provided by the Base::PropertyContainer
          * base class.

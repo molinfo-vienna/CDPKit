@@ -151,7 +151,7 @@ namespace CDPL
             
             /**
              * \brief Equality comparison operator.
-             * \param material The other \c %Material object to be compared with.
+             * \param material The other \c %Material instance to be compared with.
              * \return \c true if the style and color attributes compare equal, and \c false otherwise.
              */
             bool operator==(const Material& material) const;
@@ -161,7 +161,7 @@ namespace CDPL
              *
              * The result is equivalent to <tt>!(*this == material)</tt>.
              *
-             * \param material The other \c %Material object to be compared with.
+             * \param material The other \c %Material instance to be compared with.
              * \return \c true if either the style or the color attributes compare non-equal, and \c false otherwise.
              */
             bool operator!=(const Material& material) const;

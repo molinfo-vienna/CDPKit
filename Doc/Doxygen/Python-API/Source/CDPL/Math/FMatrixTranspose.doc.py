@@ -53,7 +53,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> FMatrixTranspose: pass
 
@@ -62,7 +62,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> FMatrixTranspose: pass
 
@@ -71,7 +71,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> FMatrixTranspose: pass
 
@@ -80,7 +80,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> FMatrixTranspose: pass
 
@@ -89,7 +89,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param mt The source transpose view.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(mt: FMatrixTranspose) -> FMatrixTranspose: pass
 
@@ -263,7 +263,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstFMatrixExpression) -> FMatrixTranspose: pass
 
@@ -279,7 +279,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstFMatrixExpression) -> FMatrixTranspose: pass
 
@@ -288,7 +288,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> FMatrixTranspose: pass
 
@@ -297,7 +297,7 @@ class FMatrixTranspose(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FMatrixTranspose: pass
 

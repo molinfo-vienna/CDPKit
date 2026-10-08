@@ -48,7 +48,7 @@ namespace CDPL
          *
          * For a queried bond in a molecular graph the matcher iterates the configured torsion library
          * (top-down through torsion categories) and reports every rule whose central bond
-         * pattern matches the queried bond. Each match is stored as a ConfGen::TorsionRuleMatch object
+         * pattern matches the queried bond. Each match is stored as a ConfGen::TorsionRuleMatch instance
          * providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
          */
         class CDPL_CONFGEN_API TorsionRuleMatcher
@@ -128,9 +128,9 @@ namespace CDPL
             std::size_t getNumMatches() const;
 
             /**
-             * \brief Returns a \c const reference to the stored torsion rule match object at index \a idx.
-             * \param idx The zero-based index of the torsion rule match object to return.
-             * \return A \c const reference to the torsion rule match object at index \a idx.
+             * \brief Returns a \c const reference to the stored ConfGen::TorsionRuleMatch instance at index \a idx.
+             * \param idx The zero-based index of the ConfGen::TorsionRuleMatch instance to return.
+             * \return A \c const reference to the ConfGen::TorsionRuleMatch instance at index \a idx.
              * \throw Base::IndexError if \a idx is not in the range [0, getNumMatches()).
              */
             const TorsionRuleMatch& getMatch(std::size_t idx) const;

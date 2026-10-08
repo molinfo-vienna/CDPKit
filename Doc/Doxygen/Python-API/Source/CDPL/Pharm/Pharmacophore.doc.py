@@ -100,7 +100,7 @@ class Pharmacophore(FeatureContainer):
     # 
     # \param pharm The pharmacophore to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(pharm: Pharmacophore) -> Pharmacophore: pass
 
@@ -111,7 +111,7 @@ class Pharmacophore(FeatureContainer):
     # 
     # \param cntnr The feature container providing the features and properties to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(cntnr: FeatureContainer) -> Pharmacophore: pass
 
@@ -145,7 +145,7 @@ class Pharmacophore(FeatureContainer):
     # 
     # \param pharm The pharmacophore providing the features to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(pharm: Pharmacophore) -> Pharmacophore: pass
 
@@ -156,7 +156,7 @@ class Pharmacophore(FeatureContainer):
     # 
     # \param cntnr The feature container providing the features to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
@@ -167,7 +167,7 @@ class Pharmacophore(FeatureContainer):
     # 
     # \param cntnr The feature container providing the features to remove.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
@@ -193,6 +193,6 @@ class Pharmacophore(FeatureContainer):
     # 
     def __contains__(feature: Feature) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __len__() -> int: pass

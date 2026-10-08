@@ -63,7 +63,7 @@ namespace CDPL
 
             /**
              * \brief Constructs the \c %AtomConfigurationMatchExpression instance for the specified matching logic and stereo configuration constraints.
-             * \param query_stereo_descr The descriptor object specifying the query atom's stereo configuration reference atoms and associated configuration constraints
+             * \param query_stereo_descr The descriptor instance specifying the query atom's stereo configuration reference atoms and associated configuration constraints
              *                           on matching target atoms.
              * \param query_atom The atom for which this \c %AtomConfigurationMatchExpression instance gets constructed.
              * \param not_match Specifies whether the stereo configuration of a target atom actually has to match (\c true) or \e not match (\c false)

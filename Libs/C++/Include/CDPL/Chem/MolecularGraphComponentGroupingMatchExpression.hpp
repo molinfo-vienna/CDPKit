@@ -78,11 +78,11 @@ namespace CDPL
              * \brief Checks whether the provided query to target atom/bond mapping candidate statisfies the component-level grouping constraints
              *        specified in the constructor.
              *
-             * Component-level grouping constraints are specified as a list of Chem::Fragment objects (see constructor argument
+             * Component-level grouping constraints are specified as a list of Chem::Fragment instances (see constructor argument
              * \a comp_grouping). The expression evaluates to \c true only if for each of the specified fragments the provided
              * query to target atom/bond mapping candidate is able to satisfy the following conditions: All query molecular graph atoms
-             * stored in a given Chem::Fragment object must map to atoms that are part of the same component of the target molecular
-             * graph. Query atoms in different Chem::Fragment objects must also map to atoms in different target molecular graph
+             * stored in a given Chem::Fragment instance must map to atoms that are part of the same component of the target molecular
+             * graph. Query atoms in different Chem::Fragment instances must also map to atoms in different target molecular graph
              * components. If the provided mapping candidate fails to fulfill one of these requirements, the expression evaluates
              * to \c false.
              *

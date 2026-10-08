@@ -45,6 +45,6 @@ class ControlParameterList(ControlParameterContainer):
     # 
     # \param cntnr The <tt>ControlParameterContainer</tt> instance to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(cntnr: ControlParameterContainer) -> ControlParameterList: pass

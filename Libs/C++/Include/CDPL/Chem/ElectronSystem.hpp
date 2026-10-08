@@ -63,12 +63,12 @@ namespace CDPL
             typedef std::shared_ptr<ElectronSystem> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom objects.
+             * \brief A constant random access iterator used to iterate over the referenced \c const Chem::Atom instances.
              */
             typedef boost::indirect_iterator<AtomList::const_iterator, const Atom> ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored \c const Chem::Atom objects.
+             * \brief A mutable random access iterator used to iterate over the referenced \c const Chem::Atom instances.
              */
             typedef boost::indirect_iterator<AtomList::iterator, Atom> AtomIterator;
 
@@ -115,26 +115,26 @@ namespace CDPL
             Atom& getAtom(std::size_t idx);
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+             * \brief Returns a constant iterator pointing to the beginning of the referenced \c const Chem::Atom instances.
+             * \return A constant iterator pointing to the beginning of the referenced \c const Chem::Atom instances.
              */
             ConstAtomIterator getAtomsBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
-             * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the referenced \c const Chem::Atom instances.
+             * \return A mutable iterator pointing to the beginning of the referenced \c const Chem::Atom instances.
              */
             AtomIterator getAtomsBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom objects.
-             * \return A constant iterator pointing to the end of the stored \c const Chem::Atom objects.
+             * \brief Returns a constant iterator pointing to the end of the referenced \c const Chem::Atom instances.
+             * \return A constant iterator pointing to the end of the referenced \c const Chem::Atom instances.
              */
             ConstAtomIterator getAtomsEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored \c const Chem::Atom objects.
-             * \return A mutable iterator pointing to the end of the stored \c const Chem::Atom objects.
+             * \brief Returns a mutable iterator pointing to the end of the referenced \c const Chem::Atom instances.
+             * \return A mutable iterator pointing to the end of the referenced \c const Chem::Atom instances.
              */
             AtomIterator getAtomsEnd();
 
@@ -144,7 +144,7 @@ namespace CDPL
             void clear();
 
             /**
-             * \brief Orders the stored atoms according to criteria implemented by the provided atom comparison function.
+             * \brief Orders the referenced atoms according to criteria implemented by the provided atom comparison function.
              * \param func The atom comparison function implementing the applied ordering criteria.
              */
             void orderAtoms(const AtomCompareFunction& func);

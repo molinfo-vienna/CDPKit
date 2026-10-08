@@ -31,7 +31,7 @@ class BasicBond(Bond):
     # 
     # \param bond The bond whose properties get copied.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(bond: Bond) -> Bond: pass
 
@@ -40,6 +40,6 @@ class BasicBond(Bond):
     # 
     # \param bond The bond whose properties get copied.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(bond: BasicBond) -> BasicBond: pass

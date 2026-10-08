@@ -256,12 +256,12 @@ $$$$
 
 IOStream.xreadlines()
 \brief Returns the stream instance.
-\return \c self.
+\return \a self.
 $$$$
 
 IOStream.__iter__()
 \brief Returns the stream instance.
-\return \c self.
+\return \a self.
 $$$$
 
 #-----
@@ -333,13 +333,25 @@ $$$$
 #-----
 
 ControlParameterContainer.getParameterKeys()
-\brief Returns a list containing the keys of the currently set control-parameters.
+\brief Returns a list containing the keys of the current control-parameter entries.
 \return A list containing the requested control-parameter keys.
 $$$$
 
 ControlParameterContainer.getParameterValues()
-\brief Returns a list containing the values of the currently set control-parameters.
+\brief Returns a list containing the values of the current control-parameter entries.
 \return A list containing the requested control-parameter values.
+$$$$
+
+#-----
+
+PropertyContainer.getPropertyKeys()
+\brief Returns a list containing the keys of the current property entries.
+\return A list containing the requested property keys.
+$$$$
+
+PropertyContainer.getPropertyValues()
+\brief Returns a list containing the values of the current property entries.
+\return A list containing the requested property values.
 $$$$
 
 #

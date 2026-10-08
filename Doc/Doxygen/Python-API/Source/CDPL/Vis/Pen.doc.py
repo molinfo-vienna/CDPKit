@@ -232,7 +232,7 @@ class Pen(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param pen The other <tt>Pen</tt> object to be compared with.
+    # \param pen The other <tt>Pen</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if all pen attributes compare equal, and <tt>False</tt> otherwise.
     # 
@@ -243,7 +243,7 @@ class Pen(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == pen)</tt>.
     # 
-    # \param pen The other <tt>Pen</tt> object to be compared with.
+    # \param pen The other <tt>Pen</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if the pen attributes compare non-equal, and <tt>False</tt> otherwise.
     # 

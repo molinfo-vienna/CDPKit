@@ -97,7 +97,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> Matrix3UL: pass
 
@@ -106,7 +106,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> Matrix3UL: pass
 
@@ -115,7 +115,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> Matrix3UL: pass
 
@@ -124,7 +124,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> Matrix3UL: pass
 
@@ -133,7 +133,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param m The source fixed-size matrix.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(m: Matrix3UL) -> Matrix3UL: pass
 
@@ -302,7 +302,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstULMatrixExpression) -> Matrix3UL: pass
 
@@ -318,7 +318,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstULMatrixExpression) -> Matrix3UL: pass
 
@@ -327,7 +327,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> Matrix3UL: pass
 
@@ -336,7 +336,7 @@ class Matrix3UL(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> Matrix3UL: pass
 

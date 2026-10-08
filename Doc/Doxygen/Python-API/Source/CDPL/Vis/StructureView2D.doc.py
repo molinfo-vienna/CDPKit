@@ -24,7 +24,7 @@
 # 
 # <tt>StructureView2D</tt> visualizes chemical structures in the form of 2D structure diagrams (also known as skeletal formulas [\ref WSKF] or structural formulas [\ref WSTF]) that allow for an easy perception of important chemical characteristics like constitution, connectivity and stereochemistry.
 # 
-# Graphical details of the generated structure diagrams (colors, fonts, line-widths etc.) are configurable on a <tt>StructureView2D</tt> instance level by control-parameters and on a visualized data object level by setting appropriate Chem.Atom, Chem.Bond or Chem.MolecularGraph properties. Properties of the visualized data objects have a higher priority than equivalent control-parameters of the <tt>StructureView2D</tt> instance and properties of Chem.Atom or Chem.Bond objects override corresponding properties of the parent Chem.MolecularGraph instance.
+# Graphical details of the generated structure diagrams (colors, fonts, line-widths etc.) are configurable on a <tt>StructureView2D</tt> instance level by control-parameters and on a visualized data object level by setting appropriate Chem.Atom, Chem.Bond or Chem.MolecularGraph properties. Properties of the visualized data objects have a higher priority than equivalent control-parameters of the <tt>StructureView2D</tt> instance and properties of Chem.Atom or Chem.Bond instances override corresponding properties of the parent Chem.MolecularGraph instance.
 # 
 # <tt>StructureView2D</tt> supports the following control-parameters:
 # 
@@ -199,7 +199,7 @@ class StructureView2D(View2D):
     ##
     # \brief Constructs and initializes a <tt>StructureView2D</tt> instance for the visualization of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph A reference to the Chem.MolecularGraph object to visualize.
+    # \param molgraph A reference to the Chem.MolecularGraph instance to visualize.
     # 
     def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
@@ -208,14 +208,14 @@ class StructureView2D(View2D):
     # 
     # If the structure or any properties of <em>molgraph</em> have changed <em>after</em> this method has been called then the method needs to be invoked again for the object to make the changes visible.
     # 
-    # \param molgraph A reference to the Chem.MolecularGraph object to visualize, or <tt>None</tt>.
+    # \param molgraph A reference to the Chem.MolecularGraph instance to visualize, or <tt>None</tt>.
     # 
     def setStructure(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the visualized chemical structure.
     # 
-    # \return A reference to the visualized Chem.MolecularGraph object, or <tt>None</tt> if none was specified.
+    # \return A reference to the visualized Chem.MolecularGraph instance, or <tt>None</tt> if none was specified.
     # 
     def getStructure() -> Chem.MolecularGraph: pass
 

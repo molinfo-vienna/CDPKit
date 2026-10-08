@@ -107,7 +107,7 @@ class BasicPharmacophore(Pharmacophore):
     # 
     # \param pharm The pharmacophore to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
@@ -118,7 +118,7 @@ class BasicPharmacophore(Pharmacophore):
     # 
     # \param pharm The pharmacophore to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
@@ -129,7 +129,7 @@ class BasicPharmacophore(Pharmacophore):
     # 
     # \param cntnr The feature container providing the features and properties to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(cntnr: FeatureContainer) -> BasicPharmacophore: pass
 
@@ -140,7 +140,7 @@ class BasicPharmacophore(Pharmacophore):
     # 
     # \param pharm The pharmacophore providing the features to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
@@ -151,7 +151,7 @@ class BasicPharmacophore(Pharmacophore):
     # 
     # \param pharm The pharmacophore providing the features to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
@@ -162,6 +162,6 @@ class BasicPharmacophore(Pharmacophore):
     # 
     # \param cntnr The feature container providing the features to append.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(cntnr: FeatureContainer) -> BasicPharmacophore: pass

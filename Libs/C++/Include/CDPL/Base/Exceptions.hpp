@@ -49,7 +49,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs an \c %Exception object with the error message set to \a msg.
+             * \brief Constructs an \c %Exception instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             Exception(const std::string& msg = "");
@@ -77,7 +77,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %ValueError object with the error message set to \a msg.
+             * \brief Constructs a \c %ValueError instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             ValueError(const std::string& msg = "");
@@ -96,7 +96,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %NullPointerException object with the error message set to \a msg.
+             * \brief Constructs a \c %NullPointerException instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             NullPointerException(const std::string& msg = "");
@@ -115,7 +115,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %RangeError object with the error message set to \a msg.
+             * \brief Constructs a \c %RangeError instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             RangeError(const std::string& msg = "");
@@ -134,7 +134,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %SizeError object with the error message set to \a msg.
+             * \brief Constructs a \c %SizeError instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             SizeError(const std::string& msg = "");
@@ -153,7 +153,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs an \c %IndexError object with the error message set to \a msg.
+             * \brief Constructs an \c %IndexError instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             IndexError(const std::string& msg = "");
@@ -172,7 +172,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs an \c %ItemNotFound object with the error message set to \a msg.
+             * \brief Constructs an \c %ItemNotFound instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             ItemNotFound(const std::string& msg = "");
@@ -192,7 +192,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %BadCast object with the error message set to \a msg.
+             * \brief Constructs a \c %BadCast instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             BadCast(const std::string& msg = "");
@@ -212,7 +212,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs an \c %OperationFailed object with the error message set to \a msg.
+             * \brief Constructs an \c %OperationFailed instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             OperationFailed(const std::string& msg = "");
@@ -231,7 +231,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %CalaculationFailed object with the error message set to \a msg.
+             * \brief Constructs a \c %CalaculationFailed instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             CalculationFailed(const std::string& msg = "");
@@ -251,7 +251,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs an \c %IOError object with the error message set to \a msg.
+             * \brief Constructs an \c %IOError instance with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
              */
             IOError(const std::string& msg = "");

@@ -85,7 +85,7 @@ class BasicReaction(Reaction):
     # 
     # \param rxn The reaction to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(rxn: BasicReaction) -> BasicReaction: pass
 
@@ -96,6 +96,6 @@ class BasicReaction(Reaction):
     # 
     # \param rxn The reaction to copy.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(rxn: Reaction) -> BasicReaction: pass

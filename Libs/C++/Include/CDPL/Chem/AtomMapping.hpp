@@ -44,7 +44,7 @@ namespace CDPL
         /**
          * \brief Data type for the storage and lookup of arbitrary atom to atom mappings.
          *
-         * Atoms mappings are stored as pairs of pointers to the mapped \c const Chem::Atom objects.
+         * Atoms mappings are stored as pairs of pointers to the mapped \c const Chem::Atom instances.
          * Mappings do not have to be unique and multiple mappings of a given atom to other atoms are possible.
          * If a mapping entry for a particular atom does not exist, the methods AtomMapping::getValue()
          * and AtomMapping::operator[]() return \c nullptr to indicate that the lookup of the 

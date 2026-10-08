@@ -61,14 +61,14 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs an object of type \c %Any with an empty state.
+             * \brief Constructs an empty \c %Any instance.
              * \throw None.
              */
             Any() noexcept : vtable(nullptr) {}
 
             /**
-             * \brief Constructs an object of type \c %Any with an equivalent state as \a rhs.
-             * \param rhs The other \c %Any instance.
+             * \brief Constructs an \c %Any instance with a state equivalent to \a rhs.
+             * \param rhs The other \c %Any instance to copy.
              */
             Any(const Any& rhs):
                 vtable(rhs.vtable)
@@ -78,8 +78,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs an object of type \c %Any with a state equivalent to the original state of \a rhs.
-             * \param rhs The other \c %Any instance.
+             * \brief Constructs an \c %Any instance with a state equivalent to the original state of \a rhs.
+             * \param rhs The other \c %Any instance to move.
              * \post The state of <tt>*this</tt> is equivalent to the original state of \a rhs and \a rhs is left in a valid
              *       but otherwise unspecified state.
              * \throw None.

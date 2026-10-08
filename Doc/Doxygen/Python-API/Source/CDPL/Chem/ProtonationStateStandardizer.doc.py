@@ -73,7 +73,7 @@ class ProtonationStateStandardizer(Boost.Python.instance):
     # 
     # \param standardizer The source <tt>ProtonationStateStandardizer</tt>.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(standardizer: ProtonationStateStandardizer) -> ProtonationStateStandardizer: pass
 

@@ -117,7 +117,7 @@ class Color(Boost.Python.instance):
     YELLOW = Color(r=1, g=1, b=0)
 
     ##
-    # \brief Constructs and initializes a <tt>Color</tt> object with all RGBA components set to zero.
+    # \brief Constructs and initializes a <tt>Color</tt> instance with all RGBA components set to zero.
     # 
     def __init__() -> None: pass
 
@@ -128,7 +128,7 @@ class Color(Boost.Python.instance):
     def __init__(color: Color) -> None: pass
 
     ##
-    # \brief Constructs and initializes a <tt>Color</tt> object with the RGBA components set to the specified values.
+    # \brief Constructs and initializes a <tt>Color</tt> instance with the RGBA components set to the specified values.
     # 
     # Component values outside the interval <em>[0, 1]</em> are clamped to the nearest interval bound, i.e. <em>0</em> if the value is negative and <em>1</em> if the value is greater than one.
     # 
@@ -237,7 +237,7 @@ class Color(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param color The other <tt>Color</tt> object to be compared with.
+    # \param color The other <tt>Color</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if all pairs of the RGBA components compare equal, <tt>False</tt> otherwise.
     # 
@@ -248,7 +248,7 @@ class Color(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == color)</tt>.
     # 
-    # \param color The other <tt>Color</tt> object to be compared with.
+    # \param color The other <tt>Color</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if at least one pair of the RGBA components compares non-equal, <tt>False</tt> otherwise.
     # 

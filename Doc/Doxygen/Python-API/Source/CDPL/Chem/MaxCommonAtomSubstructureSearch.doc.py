@@ -22,7 +22,7 @@
 ##
 # \brief Searches for the maximum common atom substructures between a query and a target molecular graph.
 # 
-# Successive calls to setQuery() and findAllMappings() or findMaxBondMappings() produce all possible common substructure atom/bond mapping solutions (subject to an atom count lower bound set by setMinSubstructureSize()). The method findAllMappings() enumerates all atom count-maximal common substructures, and findMaxBondMappings() restricts the output to atom and bond count-maximal substructures. If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest then the more efficient method mappingExists() can be used. Found common substructures are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instances are retrieved as values of the corresponding atom, bond and molecular graph properties (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION). Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
+# Successive calls to setQuery() and findAllMappings() or findMaxBondMappings() produce all possible common substructure atom/bond mapping solutions (subject to an atom count lower bound set by setMinSubstructureSize()). The method findAllMappings() enumerates all atom count-maximal common substructures, and findMaxBondMappings() restricts the output to atom and bond count-maximal substructures. If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest then the more efficient method mappingExists() can be used. Found common substructures are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instances are retrieved as values of the corresponding atom, bond and molecular graph properties (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION). Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
 # 
 # \see [\ref MCASA] 
 # 
@@ -103,11 +103,11 @@ class MaxCommonAtomSubstructureSearch(Boost.Python.instance):
     def getNumMappings() -> int: pass
 
     ##
-    # \brief Returns the stored atom/bond mapping object at index <em>idx</em>.
+    # \brief Returns the stored Chem.AtomBondMapping instance at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the atom/bond mapping object to return.
+    # \param idx The zero-based index of the Chem.AtomBondMapping instance to return.
     # 
-    # \return A reference to the Chem.AtomBondMapping object at index <em>idx</em>. 
+    # \return A reference to the Chem.AtomBondMapping instance at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 

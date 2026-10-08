@@ -217,7 +217,7 @@ class TautomerGenerator(Boost.Python.instance):
     # 
     # \param gen The source <tt>TautomerGenerator</tt>.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: TautomerGenerator) -> TautomerGenerator: pass
 

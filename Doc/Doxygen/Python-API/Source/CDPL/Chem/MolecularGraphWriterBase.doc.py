@@ -40,7 +40,7 @@ class MolecularGraphWriterBase(Base.DataIOBase):
     # 
     # \param molgraph The MolecularGraph object to write.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IOError if an I/O error occurred.
     # 

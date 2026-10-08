@@ -40,7 +40,7 @@ class FeatureContainerWriterBase(Base.DataIOBase):
     # 
     # \param cntnr The FeatureContainer object to write.
     # 
-    # \return \a self 
+    # \return \a self. 
     # 
     # \throw Base.IOError if an I/O error occurred.
     # 

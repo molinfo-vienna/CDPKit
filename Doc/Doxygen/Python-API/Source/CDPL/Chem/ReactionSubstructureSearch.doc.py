@@ -22,7 +22,7 @@
 ##
 # \brief Searches for substructures of the components of a target reaction that match a given query reaction pattern.
 # 
-# Use setQuery() to fix the query reaction pattern and mappingExists() or findMappings() to evaluate it against a specified target Chem.Reaction instance. Found mappings are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Component visibility based on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem.ReactionRole). The search algorithm considers atom-, bond-, and reaction-level Chem.MatchExpression implementation instances attached to the query reaction and its components as corresponding property values (see Chem.SubstructureSearch and Chem.ReactionProperty.MATCH_EXPRESSION). The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
+# Use setQuery() to fix the query reaction pattern and mappingExists() or findMappings() to evaluate it against a specified target Chem.Reaction instance. Found mappings are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Component visibility based on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem.ReactionRole). The search algorithm considers atom-, bond-, and reaction-level Chem.MatchExpression implementation instances attached to the query reaction and its components as corresponding property values (see Chem.SubstructureSearch and Chem.ReactionProperty.MATCH_EXPRESSION). The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
 # 
 class ReactionSubstructureSearch(Boost.Python.instance):
 
@@ -84,11 +84,11 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     def getNumMappings() -> int: pass
 
     ##
-    # \brief Returns the stored atom/bond mapping object at index <em>idx</em>.
+    # \brief Returns the stored Chem.AtomBondMapping instance at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the atom/bond mapping object to return.
+    # \param idx The zero-based index of the Chem.AtomBondMapping instance to return.
     # 
-    # \return A reference to the Chem.AtomBondMapping object at index <em>idx</em>. 
+    # \return A reference to the Chem.AtomBondMapping instance at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 

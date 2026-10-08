@@ -22,7 +22,7 @@
 ##
 # \brief Finds torsion rules from a ConfGen.TorsionLibrary instance that match a given rotatable bond.
 # 
-# For a queried bond in a molecular graph the matcher iterates the configured torsion library (top-down through torsion categories) and reports every rule whose central bond pattern matches the queried bond. Each match is stored as a ConfGen.TorsionRuleMatch object providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
+# For a queried bond in a molecular graph the matcher iterates the configured torsion library (top-down through torsion categories) and reports every rule whose central bond pattern matches the queried bond. Each match is stored as a ConfGen.TorsionRuleMatch instance providing the four matching atoms, the matched rule and the underlying atom/bond mapping.
 # 
 class TorsionRuleMatcher(Boost.Python.instance):
 
@@ -102,11 +102,11 @@ class TorsionRuleMatcher(Boost.Python.instance):
     def getNumMatches() -> int: pass
 
     ##
-    # \brief Returns the stored torsion rule match object at index <em>idx</em>.
+    # \brief Returns the stored ConfGen.TorsionRuleMatch instance at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the torsion rule match object to return.
+    # \param idx The zero-based index of the ConfGen.TorsionRuleMatch instance to return.
     # 
-    # \return A reference to the torsion rule match object at index <em>idx</em>. 
+    # \return A reference to the ConfGen.TorsionRuleMatch instance at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMatches()).
     # 

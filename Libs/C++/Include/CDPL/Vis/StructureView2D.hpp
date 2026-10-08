@@ -91,7 +91,7 @@ namespace CDPL
          * \c %StructureView2D instance level by control-parameters and on a visualized data object level
          * by setting appropriate Chem::Atom, Chem::Bond or Chem::MolecularGraph properties. Properties of the
          * visualized data objects have a higher priority than equivalent control-parameters of the \c %StructureView2D
-         * instance and properties of Chem::Atom or Chem::Bond objects override corresponding properties of the
+         * instance and properties of Chem::Atom or Chem::Bond instances override corresponding properties of the
          * parent Chem::MolecularGraph instance.
          *
          * \c %StructureView2D supports the following control-parameters:
@@ -687,7 +687,7 @@ namespace CDPL
 
             /**
              * \brief Constructs and initializes a \c %StructureView2D instance for the visualization of the molecular graph \a molgraph.
-             * \param molgraph A pointer to the Chem::MolecularGraph object to visualize.
+             * \param molgraph A pointer to the Chem::MolecularGraph instance to visualize.
              */
             StructureView2D(const Chem::MolecularGraph* molgraph = 0);
 
@@ -716,13 +716,13 @@ namespace CDPL
              * If the structure or any properties of \a molgraph have changed \e after this method has been called
              * then the method needs to be invoked again for the object to make the changes visible.
              *
-             * \param molgraph A pointer to the Chem::MolecularGraph object to visualize, or \c nullptr.
+             * \param molgraph A pointer to the Chem::MolecularGraph instance to visualize, or \c nullptr.
              */
             void setStructure(const Chem::MolecularGraph* molgraph);
 
             /**
              * \brief Returns a pointer to the visualized chemical structure.
-             * \return A pointer to the visualized Chem::MolecularGraph object, or \c nullptr if none was specified.
+             * \return A pointer to the visualized Chem::MolecularGraph instance, or \c nullptr if none was specified.
              */
             const Chem::MolecularGraph* getStructure() const;
 

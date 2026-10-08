@@ -95,7 +95,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # 
     # \param bond The bond whose properties get copied.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(bond: Bond) -> Bond: pass
 
@@ -167,7 +167,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 

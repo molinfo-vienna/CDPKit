@@ -66,12 +66,12 @@ namespace CDPL
             typedef std::shared_ptr<BasicPharmacophore> SharedPointer;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Pharm::BasicFeature objects.
+             * \brief A mutable random access iterator used to iterate over the stored Pharm::BasicFeature instances.
              */
             typedef boost::indirect_iterator<FeatureList::iterator, BasicFeature>             FeatureIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::BasicFeature objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Pharm::BasicFeature instances.
              */
             typedef boost::indirect_iterator<FeatureList::const_iterator, const BasicFeature> ConstFeatureIterator;
 
@@ -111,26 +111,26 @@ namespace CDPL
             std::size_t getNumFeatures() const;
 
             /**
-             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::BasicFeature objects.
-             * \return A constant iterator pointing to the beginning of the stored \c const Pharm::BasicFeature objects.
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::BasicFeature instances.
+             * \return A constant iterator pointing to the beginning of the stored \c const Pharm::BasicFeature instances.
              */
             ConstFeatureIterator getFeaturesBegin() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::BasicFeature objects.
-             * \return A mutable iterator pointing to the beginning of the stored Pharm::BasicFeature objects.
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::BasicFeature instances.
+             * \return A mutable iterator pointing to the beginning of the stored Pharm::BasicFeature instances.
              */
             FeatureIterator getFeaturesBegin();
 
             /**
-             * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::BasicFeature objects.
-             * \return A constant iterator pointing to the end of the stored \c const Pharm::BasicFeature objects.
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::BasicFeature instances.
+             * \return A constant iterator pointing to the end of the stored \c const Pharm::BasicFeature instances.
              */
             ConstFeatureIterator getFeaturesEnd() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the end of the stored Pharm::BasicFeature objects.
-             * \return A mutable iterator pointing to the end of the stored Pharm::BasicFeature objects.
+             * \brief Returns a mutable iterator pointing to the end of the stored Pharm::BasicFeature instances.
+             * \return A mutable iterator pointing to the end of the stored Pharm::BasicFeature instances.
              */
             FeatureIterator getFeaturesEnd();
 

@@ -90,7 +90,7 @@ namespace CDPL
              * 
              * If a molecular graph has not yet been specified (in the constructor or by a prior call to reset(const Chem::MolecularGraph&)), the
              * method has no effect. Otherwise, all connected substructures of the specified size are added as Chem::Fragment
-             * objects to the list of previously found (if any) substructures. If the specified size is zero, substructures
+             * instances to the list of previously found (if any) substructures. If the specified size is zero, substructures
              * of size \e 1 (i.e. the bonds of the molecular graph) will be extracted.
              *
              * \param size The substructure size in terms of number of bonds.

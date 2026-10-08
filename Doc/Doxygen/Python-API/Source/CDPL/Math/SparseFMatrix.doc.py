@@ -115,7 +115,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> SparseFMatrix: pass
 
@@ -124,7 +124,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> SparseFMatrix: pass
 
@@ -133,7 +133,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> SparseFMatrix: pass
 
@@ -142,7 +142,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> SparseFMatrix: pass
 
@@ -151,7 +151,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param m The source sparse matrix (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(m: SparseFMatrix) -> SparseFMatrix: pass
 
@@ -320,7 +320,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstFMatrixExpression) -> SparseFMatrix: pass
 
@@ -336,7 +336,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstFMatrixExpression) -> SparseFMatrix: pass
 
@@ -345,7 +345,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> SparseFMatrix: pass
 
@@ -354,7 +354,7 @@ class SparseFMatrix(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> SparseFMatrix: pass
 

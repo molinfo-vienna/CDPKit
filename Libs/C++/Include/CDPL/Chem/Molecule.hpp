@@ -59,22 +59,22 @@ namespace CDPL
             typedef std::shared_ptr<Molecule> SharedPointer;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom instances.
              */
             typedef AtomContainer::ConstAtomIterator ConstAtomIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Chem::Atom objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Atom instances.
              */
             typedef AtomContainer::AtomIterator AtomIterator;
 
             /**
-             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Bond objects.
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Bond instances.
              */
             typedef BondContainer::ConstBondIterator ConstBondIterator;
 
             /**
-             * \brief A mutable random access iterator used to iterate over the stored Chem::Bond objects.
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Bond instances.
              */
             typedef BondContainer::BondIterator BondIterator;
 

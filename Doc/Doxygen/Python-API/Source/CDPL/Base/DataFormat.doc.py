@@ -273,7 +273,7 @@ class DataFormat(Boost.Python.instance):
     # 
     # The result is equivalent to <tt>!(self == fmt)</tt>.
     # 
-    # \param fmt The other <tt>DataFormat</tt> object to be compared with.
+    # \param fmt The other <tt>DataFormat</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if the names and/or mime-types compare non-equal (case-insensitive!), and <tt>False</tt> otherwise. 
     # 
@@ -284,7 +284,7 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Equality comparison operator.
     # 
-    # \param fmt The other <tt>DataFormat</tt> object to be compared with.
+    # \param fmt The other <tt>DataFormat</tt> instance to be compared with.
     # 
     # \return <tt>True</tt> if the names and mime-types compare equal (case-insensitive!), and <tt>False</tt> otherwise.
     # 

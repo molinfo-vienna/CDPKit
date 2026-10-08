@@ -115,7 +115,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> SparseULMatrix: pass
 
@@ -124,7 +124,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> SparseULMatrix: pass
 
@@ -133,7 +133,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> SparseULMatrix: pass
 
@@ -142,7 +142,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> SparseULMatrix: pass
 
@@ -151,7 +151,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param m The source sparse matrix (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(m: SparseULMatrix) -> SparseULMatrix: pass
 
@@ -320,7 +320,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstULMatrixExpression) -> SparseULMatrix: pass
 
@@ -336,7 +336,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param e The source matrix expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstULMatrixExpression) -> SparseULMatrix: pass
 
@@ -345,7 +345,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> SparseULMatrix: pass
 
@@ -354,7 +354,7 @@ class SparseULMatrix(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> SparseULMatrix: pass
 

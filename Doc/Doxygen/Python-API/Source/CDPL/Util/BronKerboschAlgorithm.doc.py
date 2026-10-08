@@ -76,7 +76,7 @@ class BronKerboschAlgorithm(Boost.Python.instance):
     # 
     # \param bka The other <tt>BronKerboschAlgorithm</tt> instance.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(bka: BronKerboschAlgorithm) -> BronKerboschAlgorithm: pass
 

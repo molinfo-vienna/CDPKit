@@ -34,7 +34,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     class DefAtomIdentifierFunctor(Boost.Python.instance):
 
         ##
-        # \brief Constructs the atom identifier functor object for the specified set of atomic properties.
+        # \brief Constructs the <tt>DefAtomIdentifierFunctor</tt> instance for the specified set of atomic properties.
         # 
         # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.AtomPropertyFlag.
         # 
@@ -70,7 +70,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     class DefBondIdentifierFunctor(Boost.Python.instance):
 
         ##
-        # \brief Constructs the bond identifier functor object for the specified set of bond properties.
+        # \brief Constructs the <tt>DefBondIdentifierFunctor</tt> instance for the specified set of bond properties.
         # 
         # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag.
         # 

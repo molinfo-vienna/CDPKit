@@ -62,7 +62,7 @@ class FSpatialGrid(AttributedGrid):
 
     def __setitem__(i: int, value: float) -> None: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.

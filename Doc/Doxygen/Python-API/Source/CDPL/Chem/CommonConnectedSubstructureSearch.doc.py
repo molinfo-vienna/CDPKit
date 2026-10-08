@@ -22,7 +22,7 @@
 ##
 # \brief Enumerates all maximal common connected substructures shared between a query and a target molecular graph.
 # 
-# Unlike Chem.MaxCommonAtomSubstructureSearch and Chem.MaxCommonBondSubstructureSearch, the matches reported here are required to be <em>connected</em> — i.e. each mapping covers a single connected subgraph of both the query and the target. Successive calls to setQuery() and findAllMappings() or findMaxMappings() produce all possible common substructure atom/bond mapping solutions (subject to an atom count lower bound set by setMinSubstructureSize()). If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest then the more efficient method mappingExists() can be used. Found common substructures are recorded as Chem.AtomBondMapping objects that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. User-defined per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instance accessor functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions saved as corresponding atom, bond and molecular graph property values (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION). Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
+# Unlike Chem.MaxCommonAtomSubstructureSearch and Chem.MaxCommonBondSubstructureSearch, the matches reported here are required to be <em>connected</em> — i.e. each mapping covers a single connected subgraph of both the query and the target. Successive calls to setQuery() and findAllMappings() or findMaxMappings() produce all possible common substructure atom/bond mapping solutions (subject to an atom count lower bound set by setMinSubstructureSize()). If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest then the more efficient method mappingExists() can be used. Found common substructures are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. User-defined per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instance accessor functions can be installed to extend equivalence tests beyond pure topology. The default functions retrieve the expressions saved as corresponding atom, bond and molecular graph property values (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION). Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
 # 
 # \see [\ref MCSA]
 # 
@@ -122,11 +122,11 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
     def getNumMappings() -> int: pass
 
     ##
-    # \brief Returns the stored atom/bond mapping object at index <em>idx</em>.
+    # \brief Returns the stored Chem.AtomBondMapping instance at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the atom/bond mapping object to return.
+    # \param idx The zero-based index of the Chem.AtomBondMapping instance to return.
     # 
-    # \return A reference to the Chem.AtomBondMapping object at index <em>idx</em>. 
+    # \return A reference to the Chem.AtomBondMapping instance at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 

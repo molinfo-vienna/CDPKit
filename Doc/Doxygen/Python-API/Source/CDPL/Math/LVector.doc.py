@@ -113,7 +113,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LVector: pass
 
@@ -122,7 +122,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LVector: pass
 
@@ -131,7 +131,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LVector: pass
 
@@ -140,7 +140,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LVector: pass
 
@@ -149,7 +149,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param v The source vector (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(v: LVector) -> LVector: pass
 
@@ -317,7 +317,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LVector: pass
 
@@ -333,7 +333,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LVector: pass
 
@@ -342,7 +342,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> LVector: pass
 
@@ -351,7 +351,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LVector: pass
 

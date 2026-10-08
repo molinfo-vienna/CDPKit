@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides preinitialized Base::DataFormat objects for all supported biopolymer data formats.
+         * \brief Provides preinitialized Base::DataFormat instances for all supported biopolymer data formats.
          */
         namespace DataFormat
         {

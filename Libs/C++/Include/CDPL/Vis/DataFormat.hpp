@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides preinitialized Base::DataFormat objects for all supported image output formats.
+         * \brief Provides preinitialized Base::DataFormat instances for all supported image output formats.
          */
         namespace DataFormat
         {

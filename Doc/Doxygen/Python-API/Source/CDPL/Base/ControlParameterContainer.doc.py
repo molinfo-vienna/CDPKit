@@ -24,11 +24,11 @@
 # 
 # The purpose of <tt>ControlParameterContainer</tt> is to provide a common facility for the storage and lookup of dynamic parameter values to subclasses which can be used to control their runtime-behaviour.
 # 
-# For the explicit assignment of control-parameter values the method setParameter() is provided which expects the key of the control-parameter as its first and the value to assign as the second argument. The availability of a value for a particular control-parameter can be tested by the method isParameterSet(). For the retrieval of control-parameter values the getParameter() family of overloaded methods is provided which expect the key of the control-parameter as an argument. The method getParameterOrDefault() additionally allows to specify a default value that gets returned if an entry for the requested control-parameter value does not exist. <tt>ControlParameterContainer</tt> guarantees that the complexity of these operations is never worse than logarithmic.
+# For the explicit assignment of control-parameter values the method setParameter() is provided which expects the key of the control-parameter as its first and the value to assign as the second argument. The availability of a value for a particular control-parameter can be tested by the method isParameterSet(). For the retrieval of control-parameter values the getParameter() method is provided which expects the key of the control-parameter as an argument. The method getParameterOrDefault() additionally allows to specify a default value that gets returned if an entry for the requested control-parameter value does not exist.
 # 
 # Control-parameter values are stored in an associative map as Base.LookupKey / Base.Any pairs. The current number of entries can be queried with the method getNumParameters(). 
 # 
-# <tt>ControlParameterContainer</tt> allows for an arrangement of instances in a tree-like hierarchy where each non-root instance has exactly one parent and zero or more children. In such hierarchies, a child container forwards requests for control-parameter values to their parents if they do not contain a local entry for a given control-parameter. The parent container is set and detached by the method setParent(). A <tt>ControlParameterContainer</tt> instance automatically keeps track of any links from and to other instances in the hierarchy and detaches any parent or child containers on object destruction.
+# <tt>ControlParameterContainer</tt> allows for an arrangement of instances in a tree-like hierarchy where each non-root instance has exactly one parent and zero or more children. In such hierarchies, a child container forwards requests for control-parameter values to their parents if they do not contain a local entry for a given control-parameter. The parent container is set and detached by the method setParent(). A <tt>ControlParameterContainer</tt> instance automatically keeps track of any links from and to other instances in the hierarchy and detaches any parent or child containers on destruction.
 # 
 # For the notification of client code about any changes that affect control-parameter values, the <tt>ControlParameterContainer</tt> interface provides three methods for the registration of callback functions:
 #  - registerParameterChangedCallback() <br>
@@ -73,20 +73,20 @@ class ControlParameterContainer(Boost.Python.instance):
     # 
     # If the container contains an entry for the specified control-parameter, the stored value will be returned. If an entry for the control-parameter does not exist, the result depends on the arguments <em>throw_</em> and <em>local</em>.
     # 
-    # If a parent container has been set and the argument <em>local</em> is <tt>False</tt>, the request is forwarded to the parent (which may also forward the request). Otherwise an empty Base.Any object is returned if <em>_throw</em> is <tt>False</tt>, and a Base.ItemNotFound exception will be thrown if <em>_throw</em> is <tt>True</tt>.
+    # If a parent container has been set and the argument <em>local</em> is <tt>False</tt>, the request is forwarded to the parent (which may also forward the request). Otherwise an empty Base.Any instance is returned if <em>_throw</em> is <tt>False</tt>, and a Base.ItemNotFound exception will be thrown if <em>_throw</em> is <tt>True</tt>.
     # 
     # \param key The key of the control-parameter value to return.
     # \param throw_ Specifies whether or not to throw a Base.ItemNotFound exception if an entry for the control-parameter does not exist.
     # \param local Specifies whether or not the request shall be forwarded to the parent container if a local entry for the control-parameter does not exist.
     # 
-    # \return The stored control-parameter value or an empty Base.Any object. 
+    # \return The stored control-parameter value or an empty Base.Any instance. 
     # 
     # \throw Base.ItemNotFound if an entry for the requested control-parameter value does not exist and <em>_throw</em> is <tt>True</tt>.
     # 
     def getParameter(key: LookupKey, throw_: bool = False, local: bool = False) -> Any: pass
 
     ##
-    # \brief Returns the value of the control-parameter specified by <em>key</em> , or the default value <em>def_val</em> if a stored value does not exist.
+    # \brief Returns the value of the control-parameter specified by <em>key</em> , or the default value <em>def_val</em> if an entry does not exist.
     # 
     # If the container contains an entry for the specified control-parameter, the stored value will be returned. If an entry for the control-parameter does not exist, a parent container has been set and the argument <em>local</em> is <tt>False</tt>, the call is forwarded to the parent (which may also forward the request). Otherwise the default value specified by <em>def_val</em> is returned.
     # 
@@ -115,25 +115,25 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Erases all container entries.
     # 
-    # For each container entry, any callback functions registered by registerParameterRemovedCallback() will be invoked with the key of the removed control-parameter entry as an argument. Callbacks of affected direct and indirect children which do not have an entry for the erased control-parameter also get invoked. <br>
+    # For each container entry, any callback functions registered by registerParameterRemovedCallback() will be invoked with the key of the removed control-parameter entry as an argument. Callbacks of affected direct and indirect children which do not have an entry for the erased control-parameter also get invoked.
     # 
     def clearParameters() -> None: pass
 
     ##
-    # \brief Adds the control-parameter value entries in the <tt>ControlParameterContainer</tt> instance <em>cntnr</em>.
+    # \brief Adds the control-parameter value entries of the <tt>ControlParameterContainer</tt> instance <em>cntnr</em>.
     # 
-    # %Any control-parameter values which have no corresponding assigned value in <em>cntnr</em> are left unchanged. Otherwise the value of the local control-parameter gets overwritten by the value stored in <em>cntnr</em> and any callback functions registered by registerParameterChangedCallback() will be invoked with <em>key</em> and <em>value</em> provided as arguments. Callbacks of affected direct and indirect children which do not have an entry for the specified control-parameter also get invoked. <br>
+    # %Any control-parameters which have no corresponding entry in <em>cntnr</em> are left unchanged. Otherwise the value of the local control-parameter gets overwritten by the value stored in <em>cntnr</em> and any callback functions registered by registerParameterChangedCallback() will be invoked with <em>key</em> and <em>value</em> provided as arguments. Callbacks of affected direct and indirect children which do not have an entry for the specified control-parameter also get invoked. <br>
     # 
-    # \param cntnr The <tt>ControlParameterContainer</tt> instance containing the control-parameter value entries to add.
+    # \param cntnr The <tt>ControlParameterContainer</tt> instance providing the control-parameter entries to add.
     # 
     def addParameters(cntnr: ControlParameterContainer) -> None: pass
 
     ##
-    # \brief Replaces the current set control-parameters by a copy of the parameters in <em>cntnr</em>.
+    # \brief Replaces the current control-parameter entries by a copy of the entries in <em>cntnr</em>.
     # 
     # The assignment is equivalent to first erasing all entries by calling clearParameters() and then calling setParameter() for each key/value entry in <em>cntnr</em>.
     # 
-    # \param cntnr The <tt>ControlParameterContainer</tt> instance containing the control-parameter value entries to add.
+    # \param cntnr The <tt>ControlParameterContainer</tt> instance providing the control-parameter entries to copy.
     # 
     def copyParameters(cntnr: ControlParameterContainer) -> None: pass
 
@@ -147,7 +147,7 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Registers a callback target function that gets invoked when the value of a control-parameter has changed.
     # 
-    # \param func A Base.VoidLookupKeyFunctor object wrapping the target function.
+    # \param func A Base.VoidLookupKeyFunctor instance wrapping the target function.
     # 
     # \return An identifier for the registered callback.
     # 
@@ -165,7 +165,7 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Registers a callback target function that gets invoked when a control-parameter entry has been removed.
     # 
-    # \param func A Base.VoidLookupKeyFunctor object wrapping the target function.
+    # \param func A Base.VoidLookupKeyFunctor instance wrapping the target function.
     # 
     # \return An identifier for the registered callback.
     # 
@@ -183,7 +183,7 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Registers a callback target function that gets invoked when the parent container has been changed or was detached.
     # 
-    # \param func A Base.VoidFunctor object wrapping the target function.
+    # \param func A Base.VoidFunctor instance wrapping the target function.
     # 
     # \return An identifier for the registered callback.
     # 
@@ -219,13 +219,13 @@ class ControlParameterContainer(Boost.Python.instance):
     def setParent(cntnr: ControlParameterContainer) -> None: pass
 
     ##
-    # \brief Returns a list containing the keys of the currently set control-parameters.
+    # \brief Returns a list containing the keys of the current control-parameter entries.
     # \return A list containing the requested control-parameter keys.
     # 
     def getParameterKeys() -> list: pass
 
     ##
-    # \brief Returns a list containing the values of the currently set control-parameters.
+    # \brief Returns a list containing the values of the current control-parameter entries.
     # \return A list containing the requested control-parameter values.
     # 
     def getParameterValues() -> list: pass
@@ -233,7 +233,7 @@ class ControlParameterContainer(Boost.Python.instance):
     ##
     # \brief Returns a reference to itself.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def getParameters() -> list: pass
 

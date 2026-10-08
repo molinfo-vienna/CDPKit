@@ -61,7 +61,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> ULVectorRange: pass
 
@@ -70,7 +70,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> ULVectorRange: pass
 
@@ -79,7 +79,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> ULVectorRange: pass
 
@@ -88,7 +88,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> ULVectorRange: pass
 
@@ -97,7 +97,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param r The source range view.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(r: ULVectorRange) -> ULVectorRange: pass
 
@@ -268,7 +268,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param e The vector expression to add.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstULVectorExpression) -> ULVectorRange: pass
 
@@ -284,7 +284,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param e The vector expression to subtract.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstULVectorExpression) -> ULVectorRange: pass
 
@@ -293,7 +293,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULVectorRange: pass
 
@@ -302,7 +302,7 @@ class ULVectorRange(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULVectorRange: pass
 

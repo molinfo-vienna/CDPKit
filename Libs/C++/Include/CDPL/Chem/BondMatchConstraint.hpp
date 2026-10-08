@@ -76,7 +76,7 @@ namespace CDPL
 
             /**
              * \brief Specifies a constraint which requires the target bond to fulfill additional constraints
-             *        specified by a Chem::MatchConstraintList object.
+             *        specified by a Chem::MatchConstraintList instance.
              */
             constexpr unsigned int CONSTRAINT_LIST = 0;
 

@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides preinitialized Base::DataFormat objects for all supported chemical data formats.
+         * \brief Provides preinitialized Base::DataFormat instances for all supported chemical data formats.
          */
         namespace DataFormat
         {

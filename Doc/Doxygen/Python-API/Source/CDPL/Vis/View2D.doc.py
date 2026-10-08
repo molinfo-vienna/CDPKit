@@ -48,6 +48,6 @@ class View2D(Base.ControlParameterContainer):
     ##
     # \brief Calculates the axis-aligned bounding rectangle of the visualized model.
     # 
-    # \param bounds A Vis.Rectangle2D object storing the calculated bounding rectangle.
+    # \param bounds A Vis.Rectangle2D instance storing the calculated bounding rectangle.
     # 
     def getModelBounds(bounds: Rectangle2D) -> None: pass

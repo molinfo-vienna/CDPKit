@@ -493,7 +493,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFGridExpression) -> DRegularSpatialGrid: pass
 
@@ -502,7 +502,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDGridExpression) -> DRegularSpatialGrid: pass
 
@@ -511,7 +511,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param e The source grid expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: object) -> DRegularSpatialGrid: pass
 
@@ -696,7 +696,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param e The grid expression to add.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstDGridExpression) -> DRegularSpatialGrid: pass
 
@@ -712,7 +712,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param e The grid expression to subtract.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstDGridExpression) -> DRegularSpatialGrid: pass
 
@@ -721,7 +721,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: float) -> DRegularSpatialGrid: pass
 
@@ -730,7 +730,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: float) -> DRegularSpatialGrid: pass
 

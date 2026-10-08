@@ -22,7 +22,7 @@
 ##
 # \brief Common interface for data structures that support a random access to stored Pharm.Feature instances.
 # 
-# Implementations have to guarantee that a given Pharm.Feature object is stored only once and its index is unique amongst all contained Pharm.Feature instances. Otherwise algorithms that rely on this behaviour may not work correctly!
+# Implementations have to guarantee that a given Pharm.Feature instance is stored only once and its index is unique amongst all contained Pharm.Feature instances. Otherwise algorithms that rely on this behaviour may not work correctly!
 # 
 class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
 
@@ -116,7 +116,7 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     # 
     def __contains__(feature: Feature) -> bool: pass
 
-    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 

@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Dynamically-sized array of shared pointers to ConfGen::ConformerData objects.
+         * \brief Dynamically-sized array of shared pointers to ConfGen::ConformerData instances.
          */
         typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
     } // namespace ConfGen

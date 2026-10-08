@@ -63,7 +63,7 @@ namespace CDPL
 
             /**
              * \brief Constructs the \c %BondConfigurationMatchExpression instance for the specified matching logic and cis/trans bond configuration constraints.
-             * \param query_stereo_descr The descriptor object specifying the query bond's cis/trans configuration reference atoms and associated configuration constraints
+             * \param query_stereo_descr The descriptor instance specifying the query bond's cis/trans configuration reference atoms and associated configuration constraints
              *                           on matching target bonds.
              * \param query_bond The bond for which this \c %BondConfigurationMatchExpression instance gets constructed.
              * \param not_match Specifies whether the configuration of a target bond actually has to match (\c true) or \e not match (\c false)

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Data structure for the storage of Chem.Fragment objects.
+# \brief Data structure for the storage of Chem.Fragment instances.
 # 
 class FragmentList(Boost.Python.instance):
 

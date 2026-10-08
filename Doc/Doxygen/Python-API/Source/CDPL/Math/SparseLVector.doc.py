@@ -109,7 +109,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> SparseLVector: pass
 
@@ -118,7 +118,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> SparseLVector: pass
 
@@ -127,7 +127,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> SparseLVector: pass
 
@@ -136,7 +136,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> SparseLVector: pass
 
@@ -145,7 +145,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param v The source sparse vector (left in a valid but unspecified state).
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def assign(v: SparseLVector) -> SparseLVector: pass
 
@@ -313,7 +313,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> SparseLVector: pass
 
@@ -329,7 +329,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param e The source vector expression.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> SparseLVector: pass
 
@@ -338,7 +338,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param t The scalar multiplier.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __imul__(t: int) -> SparseLVector: pass
 
@@ -347,7 +347,7 @@ class SparseLVector(Boost.Python.instance):
     # 
     # \param t The scalar divisor.
     # 
-    # \return \a self
+    # \return \a self.
     # 
     def __idiv__(t: int) -> SparseLVector: pass
 
