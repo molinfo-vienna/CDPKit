@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Array storing <tt>std::string</tt> objects.
+# \brief Array storing <tt>std::string</tt> instances.
 # 
 class SArray(Boost.Python.instance):
 

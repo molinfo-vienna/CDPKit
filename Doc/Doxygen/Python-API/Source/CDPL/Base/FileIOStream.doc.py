@@ -139,7 +139,7 @@ class FileIOStream(IOStream):
 
     ##
     # \brief Returns the open mode flags that were provided as argument to the constructor.
-    # \return The open mode flags that were provided as argument to the constructor (see IOStream.OpenMode).
+    # \return The open mode flags that were provided as argument to the constructor (see Stream.OpenMode).
     # 
     def getOpenModeFlags() -> OpenMode: pass
 

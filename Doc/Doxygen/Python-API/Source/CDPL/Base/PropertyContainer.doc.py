@@ -24,9 +24,9 @@
 # 
 # The purpose of <tt>PropertyContainer</tt> is to provide a common facility for the storage and lookup of dynamic object properties to subclasses and their clients.
 # 
-# <tt>PropertyContainer</tt> stores the properties in a map that associates unique property keys of type Base.LookupKey with corresponding property values of type Base.Any.  The number of currently stored property value entries is accessible via the method getNumProperties().
+# <tt>PropertyContainer</tt> stores the properties in a map that associates unique property keys of type Base.LookupKey with corresponding property values of type Base.Any.  The number of currently stored property entries is accessible via the method getNumProperties().
 # 
-# For the explicit assignment of property values the method setProperty() is provided which expects the key of the property as its first and the value to assign as the second argument. Whether the value of a particular property has been set can be tested by the method isPropertySet(). For the erasure of property values the methods removeProperty() and clearProperties() are provided. The first method clears the value of a single property while the latter method removes all assigned property values.
+# For the explicit assignment of property values the method setProperty() is provided which expects the key of the property as its first and the value to assign as the second argument. Whether the value of a particular property has been set can be tested by the method isPropertySet(). For the erasure of property entries the methods removeProperty() and clearProperties() are provided. The first method removes the entry for a single property while the latter method removes all entries.
 # 
 # To access the value of a property the method getProperty() is available which expects the key of the property as the first argument. If the requested property value does not exist, an additional argument decides whether to throw an exception or to return an empty Base.Any instance.
 # 

@@ -35,26 +35,77 @@ class BZip2OStream(Base.OStream):
     # 
     def __init__(os: Base.OStream) -> None: pass
 
+    ##
+    # \brief Flushes the internal buffer.
+    # 
     def flush() -> None: pass
 
+    ##
+    # \brief Outputs the specified string.
+    # \param string The string to output.
+    # \note Due to buffering, the string may not actually show up in the file until the flush() or close() method is called.
+    # 
     def write(string: object) -> None: pass
 
+    ##
+    # \brief Outputs the specified sequence of strings.
+    # \param iterable The string sequence to output (can be any iterable object producing strings, typically a list of strings).
+    # 
     def writelines(iterable: object) -> None: pass
 
+    ##
+    # \brief Returns the current write position.
+    # \return The current write position.
+    # 
     def tellw() -> int: pass
 
+    ##
+    # \brief Sets the current write position.
+    # 
+    # The whence argument is optional and defaults to \e 0 (absolute positioning).
+    # Other supported values are \e 1 to seek relative to the current position and \e 2 for seeking relative to the end of input.
+    # 
+    # \param offs The offset to use for the seek operation.
+    # \param whence Value specifying how to calculate the final write position.
+    # 
     def seekw(offs: int, whence: int = 0) -> None: pass
 
+    ##
+    # \brief Tells whether the stream has been closed.
+    # \see close()
+    # 
     def isClosed() -> bool: pass
 
+    ##
+    # \brief Returns the open mode string that was provided as argument to the constructor.
+    # \return The open mode string (e.g. 'r+') that was provided as argument to the constructor.
+    # 
     def getOpenModeString() -> str: pass
 
+    ##
+    # \brief Returns the open mode flags that were provided as argument to the constructor.
+    # \return The open mode flags that were provided as argument to the constructor (see Stream.OpenMode).
+    # 
     def getOpenModeFlags() -> OpenMode: pass
 
+    ##
+    # \brief Returns a boolean that indicates whether a space character needs to be printed before another value when using the print statement.
+    # \return \c True if a space character needs to be printed before another value when using the print statement, and \c False otherwise.
+    # 
     def getSoftSpace() -> bool: pass
 
+    ##
+    # \brief Sets a boolean that indicates whether a space character needs to be printed before another value when using the print statement.
+    # \param value \c True if a space character shall be printed before another value when using the print statement, and \c False otherwise.
+    # 
     def setSoftSpace(value: bool) -> None: pass
 
+    ##
+    # \brief Closes the stream.
+    # 
+    # A closed stream cannot be read from or written to anymore. %Any operation which requires the stream to be open will raise a
+    # Base.ValueError after the stream has been closed. Calling close() more than once is allowed.
+    # 
     def close() -> None: pass
 
     def open(os: Base.OStream) -> None: pass

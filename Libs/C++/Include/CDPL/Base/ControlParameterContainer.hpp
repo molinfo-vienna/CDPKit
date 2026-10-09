@@ -52,18 +52,18 @@ namespace CDPL
          * The purpose of \c %ControlParameterContainer is to provide a common facility for the storage and lookup of
          * dynamic parameter values to subclasses which can be used to control their runtime-behaviour.
          *
+         * Control-parameters are stored in an associative map as Base::LookupKey / Base::Any pairs of type
+         * ControlParameterContainer::ParameterEntry. The current number of entries can be queried with the method getNumParameters(). Iterators
+         * pointing to the beginning and end of the container are obtained via the methods getEntriesBegin() and getEntriesEnd(),
+         * respectively.
+         *
          * For the explicit assignment of control-parameter values the method setParameter() is provided which
          * expects the key of the control-parameter as its first and the value to assign as the second argument.
          * The availability of a value for a particular control-parameter can be tested by the method isParameterSet().
          * For the retrieval of control-parameter values the getParameter() family of overloaded methods
          * is provided which expect the key of the control-parameter as an argument. The method getParameterOrDefault() 
          * additionally allows to specify a default value that gets returned if an entry for the requested control-parameter
-         * value does not exist.
-         *
-         * Control-parameter values are stored in an associative map as Base::LookupKey / Base::Any pairs of type
-         * ControlParameterContainer::ParameterEntry. The current number of entries can be queried with the method getNumParameters(). Iterators
-         * pointing to the beginning and end of the container are obtained via the methods getEntriesBegin() and getEntriesEnd(),
-         * respectively.
+         * does not exist.
          *
          * \c %ControlParameterContainer allows for an arrangement of instances in a tree-like hierarchy where each non-root instance
          * has exactly one parent and zero or more children. In such hierarchies, a child container forwards requests for control-parameter

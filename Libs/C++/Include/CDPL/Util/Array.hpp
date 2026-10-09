@@ -598,12 +598,12 @@ namespace CDPL
         typedef Array<double> DArray;
 
         /**
-         * \brief Array storing <tt>std::string</tt> objects.
+         * \brief Array storing <tt>std::string</tt> instances.
          */
         typedef Array<std::string> SArray;
 
         /**
-         * \brief Array storing <tt>Util::BitSet</tt> objects.
+         * \brief Array storing <tt>Util::BitSet</tt> instances.
          */
         typedef Array<BitSet> BitSetArray;
 

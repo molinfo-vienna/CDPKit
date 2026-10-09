@@ -1,5 +1,9 @@
+BitSet.npos
+\brief Specifies an invalid bit index.
+$$$$
+
 BitSet.__init__()
-\brief Constructs a \c BitSet instance of size of zero.
+\brief Constructs a \c BitSet instance of size zero.
 $$$$
 
 BitSet.__init__(num_bits,value)
@@ -13,7 +17,7 @@ The first \e M bits (where \e M is the number of bits of the data type <tt>unsig
 $$$$
 
 BitSet.__init__(bit_str)
-\brief Constructs a \c BitSet instance with total size and bit values initialized as specified by the string \a bit_str.
+\brief Constructs a \c BitSet instance with size and bit values specified by the string \a bit_str.
 
 The value of bit \e i is specified by the character '1' (= on) or '0' (= off) at index \e i of \a bit_str. 
 
@@ -21,81 +25,101 @@ The value of bit \e i is specified by the character '1' (= on) or '0' (= off) at
 $$$$
 
 BitSet.swap(bs)
-\brief Swaps the contents of this bitset and bitset \a bs.
-\param bs The other bitset.
+\brief Swaps the contents of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
 $$$$
 
 BitSet.resize(num_bits,value)
-\brief Changes the number of bits of the bitset to \a num_bits.
+\brief Changes the number of bits to \a num_bits.
 \param num_bits The new size of the bitset.
 \param value The value of emerging new bits.
 $$$$
 
 BitSet.clear()
-\brief Clears the bitset, i.e. makes its size zero.
+\brief Resizes the bitset to zero length.
 $$$$
 
 BitSet.append(value)
 \brief Increases the size of the bitset by one, and sets the value of the new most significant bit to \a value.
-\param value The value to set the most significant bit to.
+\param value The value of the new bit.
 $$$$
 
 BitSet.flip()
-\brief Toggles the value of every bit in this bitset.
+\brief Toggles the value of every bit.
 \return \a self.
 $$$$
 
 BitSet.flip(idx)
-\brief Toggles the value of bit \a idx in this bitset.
-\param idx The index of the bit to toggle.
+\brief Toggles the value of the bit at index \a idx.
+\param idx The zero-based index of the bit.
 \return \a self.
 $$$$
 
 BitSet.set()
-\brief Sets all the bits in this bitset.
+\brief Sets all bits to \c True.
 \return \a self.
 $$$$
 
 BitSet.set(idx,value)
-\brief Sets the bit \a idx in this bitset to \a value.
-\param idx The index of the bit to set or clear.
-\param value The value to set the bit to.
+\brief Sets the bit at index \a idx to \a value.
+\param idx The zero-based index of the bit.
+\param value The new value of the bit.
 \return \a self.
 $$$$
 
 BitSet.reset()
-\brief Resets all the bits in this bitset.
+\brief Sets all bits to \c False.
 \return \a self.
 $$$$
 
 BitSet.reset(idx)
-\brief Resets the bit \a idx in this bitset.
-\param idx The index of the bit to reset.
+\brief Sets the bit at index \a idx to \c False.
+\param idx The zero-based index of the bit.
 \return \a self.
 $$$$
 
 BitSet.test(idx)
+\brief Returns the value of the bit at index \a idx.
+\param idx The zero-based index of the bit.
+\return The value of the bit.
 $$$$
 
 BitSet.findFirst()
+\brief Returns the index of the first set bit (if any).
+\return The lowest zero-based index of a set bit or npos if no such bit exists.
 $$$$
 
 BitSet.findNext(idx)
+\brief Returns the index of the first set bit after \a idx (if any).
+\return The lowest zero-based index > \a idx of a set bit or npos if no such bit exists.
 $$$$
 
 BitSet.isSubsetOf(bs)
+\brief Checks whether this bitset is a subset of the bitset \a bs.
+\param bs The other \c BitSet instance to test against.
+\return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set, and \c False otherwise.
 $$$$
 
 BitSet.isProperSubsetOf(bs)
+\brief Checks whether this bitset is a proper subset of the bitset \a bs.
+\param bs The other \c BitSet instance to test against.
+\return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set and furthermore
+        <tt>self.getCount() < bs.getCount()</tt>. Otherwise \c False is returned.
 $$$$
 
 BitSet.isEmpty()
+\brief Checks whether this bitset has size zero.
+\return \c True if the size is zero, and \c False  otherwise.
 $$$$
 
 BitSet.getCount()
+\brief Returns the number of set bits.
+\return The number of set bits.
 $$$$
 
 BitSet.getSize()
+\brief Returns the size of the bitset.
+\return The size of the bitset.
 $$$$
 
 BitSet.getMaxSize()

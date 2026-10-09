@@ -20,19 +20,19 @@
 #
 
 ##
-# \brief Data structure for the storage and manipulation of variably sized bit sets.
+# \brief Data structure for the storage and processing of variably sized bit sets.
 # 
 # For further information see [\ref BDBS].
 # 
 class BitSet(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an invalid bit index.
+    # 
     npos = 18446744073709551615
 
     ##
-    # \brief Constructs a \c BitSet instance of size of zero.
+    # \brief Constructs a \c BitSet instance of size zero.
     # 
     def __init__() -> None: pass
 
@@ -54,7 +54,7 @@ class BitSet(Boost.Python.instance):
     def __init__(num_bits: int, value: int = 0) -> None: pass
 
     ##
-    # \brief Constructs a \c BitSet instance with total size and bit values initialized as specified by the string \a bit_str.
+    # \brief Constructs a \c BitSet instance with size and bit values specified by the string \a bit_str.
     # 
     # The value of bit \e i is specified by the character '1' (= on) or '0' (= off) at index \e i of \a bit_str. 
     # 
@@ -75,8 +75,8 @@ class BitSet(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Swaps the contents of this bitset and bitset \a bs.
-    # \param bs The other bitset.
+    # \brief Swaps the contents of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
     # 
     def swap(bs: BitSet) -> None: pass
 
@@ -88,77 +88,113 @@ class BitSet(Boost.Python.instance):
     def assign(bs: BitSet) -> BitSet: pass
 
     ##
-    # \brief Changes the number of bits of the bitset to \a num_bits.
+    # \brief Changes the number of bits to \a num_bits.
     # \param num_bits The new size of the bitset.
     # \param value The value of emerging new bits.
     # 
     def resize(num_bits: int, value: bool = False) -> None: pass
 
     ##
-    # \brief Clears the bitset, i.e. makes its size zero.
+    # \brief Resizes the bitset to zero length.
     # 
     def clear() -> None: pass
 
     ##
     # \brief Increases the size of the bitset by one, and sets the value of the new most significant bit to \a value.
-    # \param value The value to set the most significant bit to.
+    # \param value The value of the new bit.
     # 
     def append(value: bool) -> None: pass
 
     ##
-    # \brief Toggles the value of every bit in this bitset.
+    # \brief Toggles the value of every bit.
     # \return \a self.
     # 
     def flip() -> BitSet: pass
 
     ##
-    # \brief Toggles the value of bit \a idx in this bitset.
-    # \param idx The index of the bit to toggle.
+    # \brief Toggles the value of the bit at index \a idx.
+    # \param idx The zero-based index of the bit.
     # \return \a self.
     # 
     def flip(idx: int) -> BitSet: pass
 
     ##
-    # \brief Sets all the bits in this bitset.
+    # \brief Sets all bits to \c True.
     # \return \a self.
     # 
     def set() -> BitSet: pass
 
     ##
-    # \brief Sets the bit \a idx in this bitset to \a value.
-    # \param idx The index of the bit to set or clear.
-    # \param value The value to set the bit to.
+    # \brief Sets the bit at index \a idx to \a value.
+    # \param idx The zero-based index of the bit.
+    # \param value The new value of the bit.
     # \return \a self.
     # 
     def set(idx: int, value: bool = True) -> BitSet: pass
 
     ##
-    # \brief Resets all the bits in this bitset.
+    # \brief Sets all bits to \c False.
     # \return \a self.
     # 
     def reset() -> BitSet: pass
 
     ##
-    # \brief Resets the bit \a idx in this bitset.
-    # \param idx The index of the bit to reset.
+    # \brief Sets the bit at index \a idx to \c False.
+    # \param idx The zero-based index of the bit.
     # \return \a self.
     # 
     def reset(idx: int) -> BitSet: pass
 
+    ##
+    # \brief Returns the value of the bit at index \a idx.
+    # \param idx The zero-based index of the bit.
+    # \return The value of the bit.
+    # 
     def test(idx: int) -> bool: pass
 
+    ##
+    # \brief Returns the index of the first set bit (if any).
+    # \return The lowest zero-based index of a set bit or npos if no such bit exists.
+    # 
     def findFirst() -> int: pass
 
+    ##
+    # \brief Returns the index of the first set bit after \a idx (if any).
+    # \return The lowest zero-based index > \a idx of a set bit or npos if no such bit exists.
+    # 
     def findNext(idx: int) -> int: pass
 
+    ##
+    # \brief Checks whether this bitset is a subset of the bitset \a bs.
+    # \param bs The other \c BitSet instance to test against.
+    # \return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set, and \c False otherwise.
+    # 
     def isSubsetOf(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Checks whether this bitset is a proper subset of the bitset \a bs.
+    # \param bs The other \c BitSet instance to test against.
+    # \return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set and furthermore
+    #         <tt>self.getCount() < bs.getCount()</tt>. Otherwise \c False is returned.
+    # 
     def isProperSubsetOf(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Checks whether this bitset has size zero.
+    # \return \c True if the size is zero, and \c False  otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the number of set bits.
+    # \return The number of set bits.
+    # 
     def getCount() -> int: pass
 
+    ##
+    # \brief Returns the size of the bitset.
+    # \return The size of the bitset.
+    # 
     def getSize() -> int: pass
 
     def getMaxSize() -> int: pass
