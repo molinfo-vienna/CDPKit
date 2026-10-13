@@ -53,6 +53,7 @@ BitSet.flip(idx)
 \brief Toggles the value of the bit at index \a idx.
 \param idx The zero-based index of the bit.
 \return \a self.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()).
 $$$$
 
 BitSet.set()
@@ -65,6 +66,7 @@ BitSet.set(idx,value)
 \param idx The zero-based index of the bit.
 \param value The new value of the bit.
 \return \a self.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()).
 $$$$
 
 BitSet.reset()
@@ -76,12 +78,14 @@ BitSet.reset(idx)
 \brief Sets the bit at index \a idx to \c False.
 \param idx The zero-based index of the bit.
 \return \a self.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()).
 $$$$
 
 BitSet.test(idx)
 \brief Returns the value of the bit at index \a idx.
 \param idx The zero-based index of the bit.
 \return The value of the bit.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()).
 $$$$
 
 BitSet.findFirst()
@@ -92,19 +96,20 @@ $$$$
 BitSet.findNext(idx)
 \brief Returns the index of the first set bit after \a idx (if any).
 \return The lowest zero-based index > \a idx of a set bit or npos if no such bit exists.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()).
 $$$$
 
 BitSet.isSubsetOf(bs)
 \brief Checks whether this bitset is a subset of the bitset \a bs.
-\param bs The other \c BitSet instance to test against.
+\param bs The other \c BitSet instance.
 \return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set, and \c False otherwise.
 $$$$
 
 BitSet.isProperSubsetOf(bs)
 \brief Checks whether this bitset is a proper subset of the bitset \a bs.
-\param bs The other \c BitSet instance to test against.
+\param bs The other \c BitSet instance.
 \return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set and furthermore
-        <tt>self.getCount() < bs.getCount()</tt>. Otherwise \c False is returned.
+        <tt>getCount() < bs.getCount()</tt>. Otherwise \c False is returned.
 $$$$
 
 BitSet.isEmpty()
@@ -123,118 +128,160 @@ BitSet.getSize()
 $$$$
 
 BitSet.getMaxSize()
+\brief Returns the maximum allowed bitset size.
+\return The maximum allowed bitset size.
 $$$$
 
 BitSet.hasAny()
+\brief Checks whether at least one bit is set.
+\return \c True if at least one bit is set, and \c False otherwise. 
 $$$$
 
 BitSet.hasNone()
+\brief Checks whether all bits are unset.
+\return \c True if none of the bits is set, and \c False otherwise. 
 $$$$
 
 BitSet.__getitem__(idx)
+\brief Returns the value of the bit at index \a idx.
+\param idx The zero-based index of the bit.
+\return The value of the bit.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()).
 $$$$
 
 BitSet.__setitem__(idx,value)
+\brief Sets the bit at index \a idx to \a value.
+\param idx The zero-based index of the bit.
+\param value The new value of the bit.
+\return \a self.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()).
 $$$$
 
 BitSet.__and__(bs)
+\brief Performs a bitwise‐AND of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return The result of the bitwise‐AND operation.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
 BitSet.__or__(bs)
+\brief Performs a bitwise‐OR of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return The result of the bitwise‐OR operation.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
 BitSet.__xor__(bs)
+\brief Performs a bitwise‐XOR of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return The result of the bitwise‐XOR operation.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
-##
-# \brief Returns the result of the subtraction operation <tt>self - bs</tt>.
-# \param bs Specifies the subtrahend.
-# \return A \c BitSet instance holding the result of the subtraction.
-# 
 BitSet.__sub__(bs)
+\brief Computes the set difference of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return The computed set difference.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
 BitSet.__iand__(bs)
+\brief Performs an inplace bitwise‐AND of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \a self.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
 BitSet.__ior__(bs)
+\brief Performs an inplace bitwise‐OR of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \a self.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
 BitSet.__ixor__(bs)
+\brief Performs an inplace bitwise‐XOR of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \a self.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
-##
-# \brief Performs the in-place subtraction operation <tt>self -= bs</tt>.
-# \param bs Specifies the subtrahend.
-# \return The updated \c BitSet instance \a self.
-# 
 BitSet.__isub__(bs)
+\brief Computes the inplace set difference of this bitset and the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \a self.
+\throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
 $$$$
 
 BitSet.__long__()
+\brief Returns the numeric value that corresponds to this bitset (\e 0 if empty).
+\return The numeric value corresponding to this bitset.
+\throw RuntimeError if that value is too large to be represented in an <tt>unsigned long</tt>.
 $$$$
 
 BitSet.__ilshift__(num_bits)
+\brief Shifts the bits to the left by \a num_bits positions.
+\param num_bits The number of positions to shift.
+\return \a self.
 $$$$
 
 BitSet.__lshift__(num_bits)
+\brief Shifts the bits in a copy of this bitset to the left by \a num_bits positions.
+\param num_bits The number of positions to shift.
+\return The resulting shifted bitset.
 $$$$
 
 BitSet.__irshift__(num_bits)
+\brief Shifts the bits to the right by \a num_bits positions.
+\param num_bits The number of positions to shift.
+\return \a self.
 $$$$
 
 BitSet.__rshift__(num_bits)
+\brief Shifts the bits in a copy of this bitset to the right by \a num_bits positions.
+\param num_bits The number of positions to shift.
+\return The resulting shifted bitset.
 $$$$
 
 BitSet.__invert__()
+\brief Toggles the value of every bit.
+\return \a self.
 $$$$
 
-##
-# \brief Returns the result of the comparison operation <tt>self == bs</tt>.
-# \param bs The \c BitSet instance to be compared with.
-# \return The result of the comparison operation.
-# 
 BitSet.__eq__(bs)
+\brief Checks whether this bitset is equal to the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \c True if this bitset is equal to \a bs, and \c False otherwise.
 $$$$
 
-##
-# \brief Returns the result of the comparison operation <tt>self != bs</tt>.
-# \param bs The \c BitSet instance to be compared with.
-# \return The result of the comparison operation.
-# 
 BitSet.__ne__(bs)
+\brief Checks whether this bitset is not equal to the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \c True this bitset is not equal to \a bs, and \c False otherwise.
 $$$$
 
-##
-# \brief Returns the result of the comparison operation <tt>self < bs</tt>.
-# \param bs The \c BitSet instance to be compared with.
-# \return The result of the comparison operation.
-# 
 BitSet.__lt__(bs)
+\brief Checks whether this bitset is lexicographically less than the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \c True if this bitset is lexicographically less than \a bs, and \c False otherwise.
 $$$$
 
-##
-# \brief Returns the result of the comparison operation <tt>self <= bs</tt>.
-# \param bs The \c BitSet instance to be compared with.
-# \return The result of the comparison operation.
-# 
 BitSet.__le__(bs)
+\brief Checks whether this bitset is lexicographically less or equal to the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \c True if this bitset is lexicographically less or equal to \a bs, and \c False otherwise.
 $$$$
 
-##
-# \brief Returns the result of the comparison operation <tt>self > bs</tt>.
-# \param bs The \c BitSet instance to be compared with.
-# \return The result of the comparison operation.
-# 
 BitSet.__gt__(bs)
+\brief Checks whether this bitset is lexicographically greater than the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \c True if this bitset is lexicographically greater than \a bs, and \c False otherwise.
 $$$$
 
-##
-# \brief Returns the result of the comparison operation <tt>self >= bs</tt>.
-# \param bs The \c BitSet instance to be compared with.
-# \return The result of the comparison operation.
-# 
 BitSet.__ge__(bs)
+\brief Checks whether this bitset is lexicographically greater or equal to the bitset \a bs.
+\param bs The other \c BitSet instance.
+\return \c True if this bitset is lexicographically greater or equal to \a bs, and \c False otherwise.
 $$$$
 
 BitSet.__len__()
@@ -243,9 +290,108 @@ BitSet.__len__()
 $$$$
 
 BitSet.__nonzero__()
+\brief Checks whether at least one bit is set.
+\return \c True if at least one bit is set, and \c False otherwise.
 $$$$
 
 BitSet.__bool__()
+\brief Checks whether at least one bit is set.
+\return \c True if at least one bit is set, and \c False otherwise.
+$$$$
+
+# ---
+
+DG2DCoordinatesGenerator^
+\brief Generic distance-geometry (DG) implementation for the generation of 2D coordinates that fulfill user-provided distance constraints.
+\see [\ref ASPE]
+$$$$
+
+CDPL.Util.DG3DCoordinatesGenerator^
+\brief Generic distance-geometry (DG) implementation for the generation of 3D coordinates that fulfill user-provided distance and volume constraints.
+\see [\ref ASPE]
+$$$$
+
+CoordinatesGenerator.getDistanceConstraints()
+\brief Returns a list containing the configured distance constraints.
+\return A list containing the configured distance constraints.
+$$$$
+
+CoordinatesGenerator.getVolumeConstraints()
+\brief Returns a list containing the configured volume constraints.
+\return A list containing the configured volume constraints.
+$$$$
+
+DistanceConstraintList^
+\brief Sequence of configured distance constraints.
+$$$$
+
+VolumeConstraintList^
+\brief Sequence of configured volume constraints.
+$$$$
+
+ConstraintList.__getitem__(idx)
+\brief Returns the constraint at index \a idx.
+\param idx The zero-based constraint index.
+\return The constraint at index \a idx.
+\throw Base.IndexError if \a idx is not in the range [0, __len__()).
+$$$$
+
+ConstraintList.__delitem__(idx)
+\brief Deletes the constraint at index \a idx.
+\param idx The zero-based constraint index.
+\throw Base.IndexError if \a idx is not in the range [0, __len__()).
+$$$$
+
+ConstraintList.__len__()
+\brief Returns the number of constraints.
+\return The number of constraints.
+$$$$
+
+# ---
+
+OStream.__init__(os)
+\brief Constructs a \c @CN@ instance that will write compressed data to the output stream \a os.
+\param os The output stream to write to.
+$$$$
+
+IStream.__init__(is)
+\brief Constructs a \c @CN@ instance that will read the compressed data from the input stream \a is.
+\param is The input stream to read from.
+$$$$
+
+IOStream.__init__(ios)
+\brief Constructs a \c @CN@ instance that will read/write the compressed data from/to the I/O stream \a ios.
+\param ios The I/O stream to read from/write to.
+$$$$
+
+OStream.open(os)
+\brief Sets the output stream that receives the compressed data.
+\param os The new output stream to write to.
+$$$$
+
+IStream.open(is)
+\brief Sets the input stream that provides the compressed data.
+\param is The new input stream to read from.
+$$$$
+
+IOStream.open(ios)
+\brief Sets the I/O stream that receives/provides the compressed data.
+\param ios The new I/O stream to read from/write to.
+$$$$
+
+# ---
+
+Util.forEach(seq,func)
+\brief Invokes <tt>func(e)</tt> for each element \e e of the sequence \a seq.
+\param seq The sequence of objects.
+\param func The unary function to invoke for each element of \a seq.
+$$$$
+
+Util.forEachPair(seq1,seq2,func)
+\brief Invokes <tt>func(seq1[i], seq2[i])</tt> for each \e i in the range <em>[0, min(len(seq1), len(seq2)))</em>.
+\param seq1 The first object sequence.
+\param seq2 The second object sequence.
+\param func The binary function to invoke for each element pair.
 $$$$
 
 #

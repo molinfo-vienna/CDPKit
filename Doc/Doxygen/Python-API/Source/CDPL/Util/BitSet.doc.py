@@ -115,6 +115,7 @@ class BitSet(Boost.Python.instance):
     # \brief Toggles the value of the bit at index \a idx.
     # \param idx The zero-based index of the bit.
     # \return \a self.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()).
     # 
     def flip(idx: int) -> BitSet: pass
 
@@ -129,6 +130,7 @@ class BitSet(Boost.Python.instance):
     # \param idx The zero-based index of the bit.
     # \param value The new value of the bit.
     # \return \a self.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()).
     # 
     def set(idx: int, value: bool = True) -> BitSet: pass
 
@@ -142,6 +144,7 @@ class BitSet(Boost.Python.instance):
     # \brief Sets the bit at index \a idx to \c False.
     # \param idx The zero-based index of the bit.
     # \return \a self.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()).
     # 
     def reset(idx: int) -> BitSet: pass
 
@@ -149,6 +152,7 @@ class BitSet(Boost.Python.instance):
     # \brief Returns the value of the bit at index \a idx.
     # \param idx The zero-based index of the bit.
     # \return The value of the bit.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()).
     # 
     def test(idx: int) -> bool: pass
 
@@ -161,21 +165,22 @@ class BitSet(Boost.Python.instance):
     ##
     # \brief Returns the index of the first set bit after \a idx (if any).
     # \return The lowest zero-based index > \a idx of a set bit or npos if no such bit exists.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()).
     # 
     def findNext(idx: int) -> int: pass
 
     ##
     # \brief Checks whether this bitset is a subset of the bitset \a bs.
-    # \param bs The other \c BitSet instance to test against.
+    # \param bs The other \c BitSet instance.
     # \return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set, and \c False otherwise.
     # 
     def isSubsetOf(bs: BitSet) -> bool: pass
 
     ##
     # \brief Checks whether this bitset is a proper subset of the bitset \a bs.
-    # \param bs The other \c BitSet instance to test against.
+    # \param bs The other \c BitSet instance.
     # \return \c True if for every bit that is set in this bitset the corresponding bit in \a bs is also set and furthermore
-    #         <tt>self.getCount() < bs.getCount()</tt>. Otherwise \c False is returned.
+    #         <tt>getCount() < bs.getCount()</tt>. Otherwise \c False is returned.
     # 
     def isProperSubsetOf(bs: BitSet) -> bool: pass
 
@@ -197,54 +202,186 @@ class BitSet(Boost.Python.instance):
     # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the maximum allowed bitset size.
+    # \return The maximum allowed bitset size.
+    # 
     def getMaxSize() -> int: pass
 
+    ##
+    # \brief Checks whether at least one bit is set.
+    # \return \c True if at least one bit is set, and \c False otherwise. 
+    # 
     def hasAny() -> bool: pass
 
+    ##
+    # \brief Checks whether all bits are unset.
+    # \return \c True if none of the bits is set, and \c False otherwise. 
+    # 
     def hasNone() -> bool: pass
 
+    ##
+    # \brief Returns the value of the bit at index \a idx.
+    # \param idx The zero-based index of the bit.
+    # \return The value of the bit.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()).
+    # 
     def __getitem__(idx: int) -> bool: pass
 
+    ##
+    # \brief Sets the bit at index \a idx to \a value.
+    # \param idx The zero-based index of the bit.
+    # \param value The new value of the bit.
+    # \return \a self.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()).
+    # 
     def __setitem__(idx: int, value: bool) -> None: pass
 
+    ##
+    # \brief Performs a bitwise‐AND of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return The result of the bitwise‐AND operation.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __and__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Performs a bitwise‐OR of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return The result of the bitwise‐OR operation.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __or__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Performs a bitwise‐XOR of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return The result of the bitwise‐XOR operation.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __xor__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Computes the set difference of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return The computed set difference.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __sub__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Performs an inplace bitwise‐AND of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \a self.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __iand__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Performs an inplace bitwise‐OR of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \a self.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __ior__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Performs an inplace bitwise‐XOR of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \a self.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __ixor__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Computes the inplace set difference of this bitset and the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \a self.
+    # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
+    # 
     def __isub__(bs: BitSet) -> BitSet: pass
 
+    ##
+    # \brief Returns the numeric value that corresponds to this bitset (\e 0 if empty).
+    # \return The numeric value corresponding to this bitset.
+    # \throw RuntimeError if that value is too large to be represented in an <tt>unsigned long</tt>.
+    # 
     def __long__() -> int: pass
 
+    ##
+    # \brief Shifts the bits to the left by \a num_bits positions.
+    # \param num_bits The number of positions to shift.
+    # \return \a self.
+    # 
     def __ilshift__(num_bits: int) -> BitSet: pass
 
+    ##
+    # \brief Shifts the bits in a copy of this bitset to the left by \a num_bits positions.
+    # \param num_bits The number of positions to shift.
+    # \return The resulting shifted bitset.
+    # 
     def __lshift__(num_bits: int) -> BitSet: pass
 
+    ##
+    # \brief Shifts the bits to the right by \a num_bits positions.
+    # \param num_bits The number of positions to shift.
+    # \return \a self.
+    # 
     def __irshift__(num_bits: int) -> BitSet: pass
 
+    ##
+    # \brief Shifts the bits in a copy of this bitset to the right by \a num_bits positions.
+    # \param num_bits The number of positions to shift.
+    # \return The resulting shifted bitset.
+    # 
     def __rshift__(num_bits: int) -> BitSet: pass
 
+    ##
+    # \brief Toggles the value of every bit.
+    # \return \a self.
+    # 
     def __invert__() -> BitSet: pass
 
+    ##
+    # \brief Checks whether this bitset is equal to the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \c True if this bitset is equal to \a bs, and \c False otherwise.
+    # 
     def __eq__(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Checks whether this bitset is not equal to the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \c True this bitset is not equal to \a bs, and \c False otherwise.
+    # 
     def __ne__(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Checks whether this bitset is lexicographically less than the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \c True if this bitset is lexicographically less than \a bs, and \c False otherwise.
+    # 
     def __lt__(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Checks whether this bitset is lexicographically less or equal to the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \c True if this bitset is lexicographically less or equal to \a bs, and \c False otherwise.
+    # 
     def __le__(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Checks whether this bitset is lexicographically greater than the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \c True if this bitset is lexicographically greater than \a bs, and \c False otherwise.
+    # 
     def __gt__(bs: BitSet) -> bool: pass
 
+    ##
+    # \brief Checks whether this bitset is lexicographically greater or equal to the bitset \a bs.
+    # \param bs The other \c BitSet instance.
+    # \return \c True if this bitset is lexicographically greater or equal to \a bs, and \c False otherwise.
+    # 
     def __ge__(bs: BitSet) -> bool: pass
 
     ##
@@ -253,8 +390,16 @@ class BitSet(Boost.Python.instance):
     # 
     def __len__() -> int: pass
 
+    ##
+    # \brief Checks whether at least one bit is set.
+    # \return \c True if at least one bit is set, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass
 
+    ##
+    # \brief Checks whether at least one bit is set.
+    # \return \c True if at least one bit is set, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
     ##

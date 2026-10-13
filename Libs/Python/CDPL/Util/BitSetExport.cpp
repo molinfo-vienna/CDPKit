@@ -101,14 +101,14 @@ namespace
 
     bool isSubsetOf(const CDPL::Util::BitSet& bs1, const CDPL::Util::BitSet& bs2)
     {
-        checkSizeEquality(bs1, bs2);
+        //checkSizeEquality(bs1, bs2);
 
         return bs1.is_subset_of(bs2);
     }
 
     bool isProperSubsetOf(const CDPL::Util::BitSet& bs1, const CDPL::Util::BitSet& bs2)
     {
-        checkSizeEquality(bs1, bs2);
+        //checkSizeEquality(bs1, bs2);
 
         return bs1.is_proper_subset_of(bs2);
     }
@@ -171,28 +171,28 @@ namespace
 
     bool ltOperator(CDPL::Util::BitSet& bs1, CDPL::Util::BitSet& bs2)
     {
-        checkSizeEquality(bs1, bs2);
+        //checkSizeEquality(bs1, bs2);
 
         return (bs1 < bs2);
     }
 
     bool leOperator(CDPL::Util::BitSet& bs1, CDPL::Util::BitSet& bs2)
     {
-        checkSizeEquality(bs1, bs2);
+        //checkSizeEquality(bs1, bs2);
 
         return (bs1 <= bs2);
     }
 
     bool gtOperator(CDPL::Util::BitSet& bs1, CDPL::Util::BitSet& bs2)
     {
-        checkSizeEquality(bs1, bs2);
+        //checkSizeEquality(bs1, bs2);
 
         return (bs1 > bs2);
     }
 
     bool geOperator(CDPL::Util::BitSet& bs1, CDPL::Util::BitSet& bs2)
     {
-        checkSizeEquality(bs1, bs2);
+        //checkSizeEquality(bs1, bs2);
 
         return (bs1 >= bs2);
     }

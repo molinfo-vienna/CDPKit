@@ -214,6 +214,10 @@ def loadCPPAPIDocMergeInfo(file_name):
 def getDocBlockEntry(key, allow_part_match):
     if not allow_part_match:
         for entry in DOC_BLOCKS:
+            if entry[0].endswith('^'):
+                if key == entry[0][0:-1]:
+                    return entry
+            
             if key == entry[0]:
                 return entry
 

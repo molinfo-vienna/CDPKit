@@ -6,7 +6,7 @@ $$$$
 \brief The standard input stream of the current process.
 $$$$
 
-#-----
+# ---
 
 .OStream^
 \brief Wrapper for C++ \c std::ostream instances.
@@ -20,13 +20,13 @@ $$$$
 \brief The standard error stream of the current process.
 $$$$
 
-#-----
+# ---
 
 .IOStream^
 \brief Wrapper for C++ \c std::iostream instances.
 $$$$
 
-#-----
+# ---
 
 .IOStream.OpenMode^
 \brief Provides as set of stream open mode flags that mirror those defined in C++ class \c std::ios_base.
@@ -56,7 +56,7 @@ $$$$
 \brief Specifies to open the stream for binary data I/O.
 $$$$
 
-#-----
+# ---
 
 FileIOStream^
 \brief Wrapper for C++ \c std::fstream exposing a Python-style file-oriented I/O interface.
@@ -73,7 +73,7 @@ FileIOStream.getFileName()
 \return The file path string that got passed to the constructor.
 $$$$
 
-#-----
+# ---
 
 StringIOStream^
 \brief Wrapper for C++ \c std::stringstream exposing a Python-style file-oriented I/O interface.
@@ -117,7 +117,7 @@ StringIOStream.setvalue(value)
 \note The current I/O position will be reset to zero.
 $$$$
 
-#-----
+# ---
 
 DataFormat.__init__(name,descr,mime_type,file_exts,multi_rec)
 \brief Constructs and initializes the \c %DataFormat instance with the given attributes.
@@ -143,10 +143,10 @@ DataFormat.getFileExtensions()
 \return The sequence of all registered file extensions.
 $$$$
 
-#-----
+# ---
 
 DataFormat.FileExtensionSequence^
-\brief Iterable type providing access to file extensions registered on a \c Base.DataFormat instance.
+\brief Sequence of registered file extensions.
 $$$$
 
 DataFormat.FileExtensionSequence.__len__()
@@ -158,23 +158,23 @@ DataFormat.FileExtensionSequence.__getitem__(idx)
 \brief Returns the file extension at index \a idx.
 \param idx The zero-based index of the file extension.
 \return The file extension at index \a idx.
-\throw Base.IndexError if \a idx is out of bounds.
+\throw Base.IndexError if \a idx is not in the range[0, __len__()).
 $$$$
 
 DataFormat.FileExtensionSequence.__delitem__(idx)
 \brief Deletes the file extension at index \a idx.
 \param idx The zero-based index of the file extension.
-\throw Base.IndexError if \a idx is out of bounds.
+\throw Base.IndexError if \a idx is not in the range[0, __len__()).
 $$$$
 
 DataFormat.FileExtensionSequence.__setitem__(idx,file_ext)
 \brief Changes the file extension at index \a idx to \a file_ext.
 \param idx The zero-based index of the file extension.
 \param file_ext The new file extension.
-\throw Base.IndexError if \a idx is out of bounds.
+\throw Base.IndexError if \a idx is not in the range[0, __len__()).
 $$$$
 
-#-----
+# ---
 
 CDPL.Base.DataIOBase
 \brief Provides infrastructure for the registration of I/O callback functions.
@@ -183,7 +183,7 @@ The purpose of <tt>DataIOBase</tt> is to provide methods for the registration of
 I/O callbacks allow client code to be notified whenever a data object was read, written or skipped. I/O callbacks are registered by calling the method registerIOCallback() with an argument of type Base.VoidDataIOBaseFunctor. Base.VoidDataIOBaseFunctor is a generic functor implementation that is able to wrap any compatible (in terms of return and argument type) callable object. Therefore, no special requirements beside return and argument types are imposed on the type of the used I/O callback target function.
 $$$$
 
-#-----
+# ---
 
 ControlParameterContainer.getParameterKeys()
 \brief Returns a list containing the keys of the current control-parameter entries.
@@ -195,7 +195,7 @@ ControlParameterContainer.getParameterValues()
 \return A list containing the requested control-parameter values.
 $$$$
 
-#-----
+# ---
 
 PropertyContainer.getPropertyKeys()
 \brief Returns a list containing the keys of the current property entries.

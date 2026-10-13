@@ -49,18 +49,18 @@ def fileExists(path: str) -> bool: pass
 def fold(bs: BitSet, num_times: int) -> None: pass
 
 ##
-# \brief 
-# \param seq1 
-# \param seq2 
-# \param func 
-#
+# \brief Invokes <tt>func(seq1[i], seq2[i])</tt> for each \e i in the range <em>[0, min(len(seq1), len(seq2)))</em>.
+# \param seq1 The first object sequence.
+# \param seq2 The second object sequence.
+# \param func The binary function to invoke for each element pair.
+# 
 def forEachPair(seq1: object, seq2: object, func: object) -> None: pass
 
 ##
-# \brief 
-# \param seq 
-# \param func 
-#
+# \brief Invokes <tt>func(e)</tt> for each element \e e of the sequence \a seq.
+# \param seq The sequence of objects.
+# \param func The unary function to invoke for each element of \a seq.
+# 
 def forEach(seq: object, func: object) -> None: pass
 
 ##

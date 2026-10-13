@@ -30,8 +30,8 @@ class BZip2IStream(Base.IStream):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs the \c BZip2IStream instance.
-    # \param is 
+    # \brief Constructs a \c BZip2IStream instance that will read the compressed data from the input stream \a is.
+    # \param is The input stream to read from.
     # 
     def __init__(is: Base.IStream) -> None: pass
 
@@ -148,6 +148,10 @@ class BZip2IStream(Base.IStream):
     # 
     def close() -> None: pass
 
+    ##
+    # \brief Sets the input stream that provides the compressed data.
+    # \param is The new input stream to read from.
+    # 
     def open(is: Base.IStream) -> None: pass
 
     ##

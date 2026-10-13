@@ -316,6 +316,16 @@ Util.SArray. § Util.Array.
 
 Util.BitSetArray. § Util.Array.
 
+Util.DG2DCoordinatesGenerator. § Util.DGCoordinatesGenerator.
+
+Util.DG2DCoordinatesGenerator. § Util.DGCoordinatesGeneratorBase.
+
+Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGenerator.
+
+Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGenerator< 3, T >.
+
+Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGeneratorBase.
+
 #
 # --- CDPL.Chem package ---
 #

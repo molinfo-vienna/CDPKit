@@ -30,8 +30,8 @@ class BZip2OStream(Base.OStream):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs the \c BZip2OStream instance.
-    # \param os 
+    # \brief Constructs a \c BZip2OStream instance that will write compressed data to the output stream \a os.
+    # \param os The output stream to write to.
     # 
     def __init__(os: Base.OStream) -> None: pass
 
@@ -108,6 +108,10 @@ class BZip2OStream(Base.OStream):
     # 
     def close() -> None: pass
 
+    ##
+    # \brief Sets the output stream that receives the compressed data.
+    # \param os The new output stream to write to.
+    # 
     def open(os: Base.OStream) -> None: pass
 
     ##

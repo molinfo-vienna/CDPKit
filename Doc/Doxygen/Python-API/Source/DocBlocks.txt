@@ -208,7 +208,7 @@ The numeric identifier returned by this method allows to correctly implement suc
 \return The numeric ID of the internally referenced C++ class instance.
 $$$$
 
-#-----
+# ---
 
 Stream.readline(size)
 \brief Reads one entire line.

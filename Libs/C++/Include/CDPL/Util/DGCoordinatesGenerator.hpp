@@ -253,8 +253,8 @@ namespace CDPL
             void setStartLearningRate(const ValueType& rate);
 
             /**
-             * \brief Sets the per-cycle learning-rate decrement.
-             * \param decr The new per-cycle learning-rate decrement.
+             * \brief Sets the per-cycle learning rate decrement.
+             * \param decr The new per-cycle learning rate decrement.
              */
             void setLearningRateDecrement(const ValueType& decr);
 
@@ -277,8 +277,8 @@ namespace CDPL
             const ValueType& getStartLearningRate() const;
 
             /**
-             * \brief Returns the currently configured per-cycle learning-rate decrement.
-             * \return A \c const reference to the per-cycle learning-rate decrement.
+             * \brief Returns the currently configured per-cycle learning rate decrement.
+             * \return A \c const reference to the per-cycle learning rate decrement.
              */
             const ValueType& getLearningRateDecrement() const;
 
@@ -290,7 +290,7 @@ namespace CDPL
 
             /**
              * \brief Generates \a num_points coordinate vectors that try to satisfy the configured constraints and stores them in \a coords.
-             * \tparam CoordsArray The output coordinate-array type (must be index-accessible and writable).
+             * \tparam CoordsArray The output coordinate array type (must be index-accessible and writable).
              * \param num_points The number of points whose coordinates are to be generated.
              * \param coords The output coordinate array (resized as needed).
              */
@@ -299,7 +299,7 @@ namespace CDPL
 
             /**
              * \brief Computes the cumulative squared distance error of \a coords against the configured distance constraints.
-             * \tparam CoordsArray The input coordinate-array type.
+             * \tparam CoordsArray The input coordinate array type.
              * \param coords The input coordinate array.
              * \return The cumulative distance error.
              */
@@ -554,7 +554,7 @@ namespace CDPL
 
             /**
              * \brief Computes the cumulative volume error of \a coords against the configured volume constraints.
-             * \tparam CoordsArray The input coordinate-array type.
+             * \tparam CoordsArray The input coordinate array type.
              * \param coords The input coordinate array.
              * \return The cumulative volume error.
              */
@@ -576,7 +576,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Convenience alias for the 3D coordinates generator with double-precision values.
+         * \brief Convenience alias for DG3DCoordinatesGenerator<3, double>.
          */
         typedef DGCoordinatesGenerator<3, double> DG3DCoordinatesGenerator;
     } // namespace Util

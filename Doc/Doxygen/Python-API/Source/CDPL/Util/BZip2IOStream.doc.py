@@ -30,8 +30,8 @@ class BZip2IOStream(Base.IOStream):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs the \c BZip2IOStream instance.
-    # \param ios 
+    # \brief Constructs a \c BZip2IOStream instance that will read/write the compressed data from/to the I/O stream \a ios.
+    # \param ios The I/O stream to read from/write to.
     # 
     def __init__(ios: Base.IOStream) -> None: pass
 
@@ -195,6 +195,10 @@ class BZip2IOStream(Base.IOStream):
     # 
     def close() -> None: pass
 
+    ##
+    # \brief Sets the I/O stream that receives/provides the compressed data.
+    # \param ios The new I/O stream to read from/write to.
+    # 
     def open(ios: Base.IOStream) -> None: pass
 
     ##
