@@ -270,7 +270,7 @@ class BitSet(Boost.Python.instance):
     def __sub__(bs: BitSet) -> BitSet: pass
 
     ##
-    # \brief Performs an inplace bitwise‐AND of this bitset and the bitset \a bs.
+    # \brief Performs an in-place bitwise‐AND of this bitset and the bitset \a bs.
     # \param bs The other \c BitSet instance.
     # \return \a self.
     # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
@@ -278,7 +278,7 @@ class BitSet(Boost.Python.instance):
     def __iand__(bs: BitSet) -> BitSet: pass
 
     ##
-    # \brief Performs an inplace bitwise‐OR of this bitset and the bitset \a bs.
+    # \brief Performs an in-place bitwise‐OR of this bitset and the bitset \a bs.
     # \param bs The other \c BitSet instance.
     # \return \a self.
     # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
@@ -286,7 +286,7 @@ class BitSet(Boost.Python.instance):
     def __ior__(bs: BitSet) -> BitSet: pass
 
     ##
-    # \brief Performs an inplace bitwise‐XOR of this bitset and the bitset \a bs.
+    # \brief Performs an in-place bitwise‐XOR of this bitset and the bitset \a bs.
     # \param bs The other \c BitSet instance.
     # \return \a self.
     # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.
@@ -294,7 +294,7 @@ class BitSet(Boost.Python.instance):
     def __ixor__(bs: BitSet) -> BitSet: pass
 
     ##
-    # \brief Computes the inplace set difference of this bitset and the bitset \a bs.
+    # \brief Computes the in-place set difference of this bitset and the bitset \a bs.
     # \param bs The other \c BitSet instance.
     # \return \a self.
     # \throw Base.ValueError if <tt>getSize() != bs.getSize()</tt>.

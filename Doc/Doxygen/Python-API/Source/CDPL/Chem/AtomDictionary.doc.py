@@ -41,22 +41,23 @@ class AtomDictionary(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Contructs the \c Entry instance.
-        # \param atom_type 
-        # \param iso 
-        # \param sym 
-        # \param name 
-        # \param most_abdt_iso 
-        # \param avg_weight 
-        # \param iupac_grp 
-        # \param period 
-        # \param metal 
-        # \param non_metal 
-        # \param val_states 
-        # \param vdw_rad 
-        # \param cov_radii 
-        # \param ar_eneg 
-        # \param iso_masses 
+        # \brief Constructs an entry with the given properties.
+        # 
+        # \param atom_type The atom type (see namespace Chem.AtomType).
+        # \param iso The mass number of the isotope (<em>0</em> if not specified).
+        # \param sym The element symbol.
+        # \param name The element name.
+        # \param most_abdt_iso The mass number of the most abundant isotope of the element.
+        # \param avg_weight The standard (average) atomic weight of the element.
+        # \param iupac_grp The IUPAC group number of the element.
+        # \param period The period of the element.
+        # \param metal <tt>True</tt> if the element is a metal.
+        # \param non_metal <tt>True</tt> if the element is a non-metal.
+        # \param val_states The valence states of the element.
+        # \param vdw_rad The Van der Waals radius of the element.
+        # \param cov_radii Array of covalent radii indexed by bond order (single, double, triple).
+        # \param ar_eneg The Allred-Rochow electronegativity of the element.
+        # \param iso_masses Map from isotope mass number to its relative isotopic mass.
         # 
         def __init__(atom_type: int, iso: int, sym: str, name: str, most_abdt_iso: int, avg_weight: float, iupac_grp: int, period: int, metal: bool, non_metal: bool, val_states: object, vdw_rad: float, cov_radii: object, ar_eneg: float, iso_masses: object) -> None: pass
 

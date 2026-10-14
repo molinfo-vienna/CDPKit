@@ -30,9 +30,9 @@ class LVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Move-constructs a vector from <em>v</em> (<em>v</em> is left in a valid empty state).
+    # \brief Constructs a copy of the vector <em>v</em>.
     # 
-    # \param v The vector to move from.
+    # \param v The vector to copy.
     # 
     def __init__(v: LVector) -> None: pass
 
@@ -52,26 +52,30 @@ class LVector(Boost.Python.instance):
     def __init__(n: int, v: int) -> None: pass
 
     ##
-    # \brief Contructs the \c LVector instance.
-    # \param e 
+    # \brief Constructs the vector from the vector expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The vector expression to materialize.
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c LVector instance.
-    # \param e 
+    # \brief Constructs the vector from the vector expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The vector expression to materialize.
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c LVector instance.
-    # \param e 
+    # \brief Constructs the vector from the vector expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The vector expression to materialize.
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c LVector instance.
-    # \param e 
+    # \brief Constructs the vector from the vector expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The vector expression to materialize.
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
@@ -145,9 +149,9 @@ class LVector(Boost.Python.instance):
     def assign(e: ConstULVectorExpression) -> LVector: pass
 
     ##
-    # \brief Move-assigns the elements of <em>v</em> to this vector.
+    # \brief Copy-assigns the elements of <em>v</em> to this vector.
     # 
-    # \param v The source vector (left in a valid but unspecified state).
+    # \param v The source vector.
     # 
     # \return \a self.
     # 
@@ -220,7 +224,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -231,7 +235,7 @@ class LVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -250,8 +254,16 @@ class LVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> LVector: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstLVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstLVectorExpression: pass
 
     ##
@@ -355,6 +367,13 @@ class LVector(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> LVector: pass
 
+    ##
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: int) -> LVector: pass
 
     objectID = property(getObjectID)

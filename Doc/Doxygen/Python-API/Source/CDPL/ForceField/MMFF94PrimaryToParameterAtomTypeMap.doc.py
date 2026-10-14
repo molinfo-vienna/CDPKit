@@ -48,9 +48,10 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Contructs the \c Entry instance.
-        # \param atom_type 
-        # \param param_types 
+        # \brief Constructs an <tt>Entry</tt> for the primary numeric MMFF94 atom type <em>atom_type</em> and its associated fallback list <em>param_types</em>.
+        # 
+        # \param atom_type The primary numeric MMFF94 atom type.
+        # \param param_types A <tt>NUM_TYPES</tt>-element array of fallback parameter atom types.
         # 
         def __init__(atom_type: int, param_types: object) -> None: pass
 

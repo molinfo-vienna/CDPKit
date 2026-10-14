@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Vector expression proxy that views a single row of an underlying matrix.
-# 
+# \brief 
+#
 class FMatrixRow(Boost.Python.instance):
 
     ##
@@ -37,11 +37,6 @@ class FMatrixRow(Boost.Python.instance):
     # 
     def __init__(e: FMatrixExpression, i: int) -> None: pass
 
-    ##
-    # \brief Returns the row index this proxy refers to within the wrapped matrix.
-    # 
-    # \return The zero-based row index.
-    # 
     def getIndex() -> int: pass
 
     ##
@@ -57,47 +52,37 @@ class FMatrixRow(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this row without intermediate temporary.
-    # 
-    # \param e The source vector expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
+    # \param e The \c ConstFVectorExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> FMatrixRow: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this row without intermediate temporary.
-    # 
-    # \param e The source vector expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
+    # \param e The \c ConstDVectorExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> FMatrixRow: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this row without intermediate temporary.
-    # 
-    # \param e The source vector expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
+    # \param e The \c ConstLVectorExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> FMatrixRow: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this row without intermediate temporary.
-    # 
-    # \param e The source vector expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
+    # \param e The \c ConstULVectorExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> FMatrixRow: pass
 
     ##
-    # \brief Copy-assigns the contents of <em>r</em> to this row (via a temporary to handle aliasing).
-    # 
-    # \param r The source row.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c FMatrixRow instance \a r.
+    # \param r The \c FMatrixRow instance to copy.
+    # \return \a self
     # 
     def assign(r: FMatrixRow) -> FMatrixRow: pass
 
@@ -108,38 +93,18 @@ class FMatrixRow(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief Tells whether the row is empty (the wrapped matrix has zero columns).
-    # 
-    # \return <tt>True</tt> if the wrapped matrix has zero columns, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief Returns the size of the row (number of columns of the wrapped matrix).
-    # 
-    # \return The number of columns.
-    # 
     def getSize() -> int: pass
 
     def getElement(i: int) -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Swaps the contents of this row with those of <em>r</em> (via element-wise swap of the underlying matrix elements).
-    # 
-    # \param r The row to swap with.
-    # 
     def swap(r: FMatrixRow) -> None: pass
 
     def setElement(i: int, v: float) -> None: pass
 
-    ##
-    # \brief Returns the wrapped matrix (via its stored closure).
-    # 
-    # \return A reference to the wrapped matrix closure.
-    # 
     def getData() -> FMatrixExpression: pass
 
     ##
@@ -170,29 +135,10 @@ class FMatrixRow(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
-    ##
-    # \brief Returns the element at column <em>i</em> of the row.
-    # 
-    # \param i The zero-based column index.
-    # 
-    # \return A reference to the underlying element <tt>m(index, i)</tt>.
-    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the element at column <em>i</em> of the row.
-    # 
-    # \param i The zero-based column index.
-    # 
-    # \return A reference to the underlying element.
-    # 
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the size of the row (number of columns of the wrapped matrix).
-    # 
-    # \return The number of columns.
-    # 
     def __len__() -> int: pass
 
     ##
@@ -201,8 +147,16 @@ class FMatrixRow(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> FMatrixRow: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstFVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstFVectorExpression: pass
 
     ##
@@ -264,11 +218,9 @@ class FMatrixRow(Boost.Python.instance):
     def __iadd__(r: FMatrixRow) -> FMatrixRow: pass
 
     ##
-    # \brief Adds the elements of the vector expression <em>e</em> to this row (via a temporary to handle aliasing).
-    # 
-    # \param e The source vector expression.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param e Specifies the second addend.
+    # \return The updated \c FMatrixRow instance \a self.
     # 
     def __iadd__(e: ConstFVectorExpression) -> FMatrixRow: pass
 
@@ -280,32 +232,31 @@ class FMatrixRow(Boost.Python.instance):
     def __isub__(r: FMatrixRow) -> FMatrixRow: pass
 
     ##
-    # \brief Subtracts the elements of the vector expression <em>e</em> from this row (via a temporary to handle aliasing).
-    # 
-    # \param e The source vector expression.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param e Specifies the subtrahend.
+    # \return The updated \c FMatrixRow instance \a self.
     # 
     def __isub__(e: ConstFVectorExpression) -> FMatrixRow: pass
 
     ##
-    # \brief Multiplies every element of this row by the scalar <em>t</em>.
-    # 
-    # \param t The scalar multiplier.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param t Specifies the multiplier.
+    # \return The updated \c FMatrixRow instance \a self.
     # 
     def __imul__(t: float) -> FMatrixRow: pass
 
     ##
-    # \brief Divides every element of this row by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c FMatrixRow instance \a self.
     # 
     def __idiv__(t: float) -> FMatrixRow: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c FMatrixRow instance \a self.
+    # 
     def __itruediv__(t: float) -> FMatrixRow: pass
 
     objectID = property(getObjectID)

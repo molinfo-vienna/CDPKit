@@ -238,7 +238,7 @@ def getProvidedDocBlock(key, func_data, func_name, class_name, is_static, allow_
         if func_name == '__init__':
             if func_data['arg_types'][1].endswith(class_name):
                 key = key.replace('.__init__(', '.__copy__init__(')
-                
+            
         elif func_name == 'assign':
             key = key.replace('.assign(', '.__copy__assign(')
 
@@ -293,11 +293,18 @@ def performGenericCPPAPIDocFixes(doc_block):
         doc_block = doc_block.replace(entry[0], entry[1])
 
     return doc_block
-    
+
+def patchKey(key, ptn, repl):
+    ptn = ptn.replace('.', '\\.').replace('(', '\\(').replace(')', '\\)').replace('*', '.*')
+
+    return re.sub(ptn, repl, key)
+
 def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_name = None, is_static = True, verbatim_key = False):
     if not verbatim_key:
         key = sys.argv[1] + '.' + key
 
+    key = key.replace('.__init__(arg1,', '.__init__(')
+            
     doc_block = getProvidedDocBlock(key, func_data, func_name, class_name, is_static, False)
 
     if not doc_block:
@@ -323,7 +330,7 @@ def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_na
                 if entry[0] == entry[1]:
                     continue
                 
-                mod_key = mod_orig_key.replace(entry[0], entry[1])
+                mod_key = patchKey(mod_orig_key, entry[0], entry[1])
             
                 if mod_key in CPP_API_DOC_BLOCKS:
                     doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_key])

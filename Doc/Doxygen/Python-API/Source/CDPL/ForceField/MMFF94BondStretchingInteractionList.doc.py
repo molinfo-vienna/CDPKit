@@ -78,7 +78,7 @@ class MMFF94BondStretchingInteractionList(Boost.Python.instance):
 
     def insertElements(idx: int, num_elem: int, value: MMFF94BondStretchingInteraction) -> None: pass
 
-    def insertElements(index: int, values: MMFF94BondStretchingInteractionList) -> None: pass
+    def insertElements(idx: int, values: MMFF94BondStretchingInteractionList) -> None: pass
 
     def popLastElement() -> None: pass
 
@@ -100,7 +100,7 @@ class MMFF94BondStretchingInteractionList(Boost.Python.instance):
 
     def __len__() -> int: pass
 
-    def __setitem__(index: int, value: MMFF94BondStretchingInteraction) -> None: pass
+    def __setitem__(idx: int, value: MMFF94BondStretchingInteraction) -> None: pass
 
     objectID = property(getObjectID)
 

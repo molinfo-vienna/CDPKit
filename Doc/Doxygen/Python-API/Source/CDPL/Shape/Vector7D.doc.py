@@ -270,12 +270,17 @@ class Vector7D(Boost.Python.instance):
     def __imul__(t: float) -> Math.Vector7D: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c Math.Vector7D instance \a self.
     # 
     def __idiv__(t: float) -> Math.Vector7D: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c Math.Vector7D instance \a self.
+    # 
     def __itruediv__(t: float) -> Math.Vector7D: pass
 
     objectID = property(getObjectID)

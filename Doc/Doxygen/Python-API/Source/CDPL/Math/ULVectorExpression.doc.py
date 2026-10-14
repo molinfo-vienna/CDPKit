@@ -20,10 +20,8 @@
 #
 
 ##
-# \brief CRTP base class of all vector expression types.
-# 
-# Provides downcast access to the concrete derived expression class instance via the function call operator.
-# 
+# \brief 
+#
 class ULVectorExpression(ConstULVectorExpression):
 
     def swap(e: ULVectorExpression) -> None: pass
@@ -110,10 +108,15 @@ class ULVectorExpression(ConstULVectorExpression):
     def __imul__(t: int) -> ULVectorExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c ULVectorExpression instance \a self.
     # 
     def __idiv__(t: int) -> ULVectorExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c ULVectorExpression instance \a self.
+    # 
     def __itruediv__(t: int) -> ULVectorExpression: pass

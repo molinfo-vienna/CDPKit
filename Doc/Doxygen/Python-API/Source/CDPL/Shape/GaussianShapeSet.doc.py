@@ -78,7 +78,7 @@ class GaussianShapeSet(Boost.Python.instance):
 
     def insertElements(idx: int, num_elem: int, value: GaussianShape) -> None: pass
 
-    def insertElements(index: int, values: GaussianShapeSet) -> None: pass
+    def insertElements(idx: int, values: GaussianShapeSet) -> None: pass
 
     def popLastElement() -> None: pass
 
@@ -100,7 +100,7 @@ class GaussianShapeSet(Boost.Python.instance):
 
     def __len__() -> int: pass
 
-    def __setitem__(index: int, value: GaussianShape) -> None: pass
+    def __setitem__(idx: int, value: GaussianShape) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == list</tt>.

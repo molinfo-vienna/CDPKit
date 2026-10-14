@@ -30,9 +30,9 @@ class SparseULVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Move-constructs from <em>v</em> (<em>v</em> is left in a valid empty state).
+    # \brief Constructs a copy of the sparse vector <em>v</em>.
     # 
-    # \param v The sparse vector to move from.
+    # \param v The sparse vector to copy.
     # 
     def __init__(v: SparseULVector) -> None: pass
 
@@ -44,26 +44,30 @@ class SparseULVector(Boost.Python.instance):
     def __init__(n: int) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseULVector instance.
-    # \param e 
+    # \brief Constructs a sparse vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseULVector instance.
-    # \param e 
+    # \brief Constructs a sparse vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseULVector instance.
-    # \param e 
+    # \brief Constructs a sparse vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseULVector instance.
-    # \param e 
+    # \brief Constructs a sparse vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
@@ -141,9 +145,9 @@ class SparseULVector(Boost.Python.instance):
     def assign(e: ConstULVectorExpression) -> SparseULVector: pass
 
     ##
-    # \brief Move-assigns the contents of <em>v</em> to this sparse vector.
+    # \brief Copy-assigns the contents of <em>v</em> to this sparse vector.
     # 
-    # \param v The source sparse vector (left in a valid but unspecified state).
+    # \param v The source sparse vector.
     # 
     # \return \a self.
     # 
@@ -246,8 +250,16 @@ class SparseULVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> SparseULVector: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULVectorExpression: pass
 
     ##
@@ -351,6 +363,13 @@ class SparseULVector(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> SparseULVector: pass
 
+    ##
+    # \brief Divides every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: int) -> SparseULVector: pass
 
     objectID = property(getObjectID)

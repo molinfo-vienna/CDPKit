@@ -122,7 +122,7 @@ class MatchConstraintList(Boost.Python.instance):
 
     def insertElements(idx: int, num_elem: int, value: MatchConstraint) -> None: pass
 
-    def insertElements(index: int, values: MatchConstraintList) -> None: pass
+    def insertElements(idx: int, values: MatchConstraintList) -> None: pass
 
     def popLastElement() -> None: pass
 
@@ -158,7 +158,7 @@ class MatchConstraintList(Boost.Python.instance):
 
     def __len__() -> int: pass
 
-    def __setitem__(index: int, value: MatchConstraint) -> None: pass
+    def __setitem__(idx: int, value: MatchConstraint) -> None: pass
 
     ##
     # \brief Returns a string representation of the \c MatchConstraintList instance.

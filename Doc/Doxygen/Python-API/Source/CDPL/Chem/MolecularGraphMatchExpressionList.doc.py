@@ -112,7 +112,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def assign(num_elem: int, value: MolecularGraphMatchExpression) -> None: pass
 
     ##
-    # \brief Inserts a new element at the end of the list.
+    # \brief Adds a new element at the end of the list.
     # 
     # \param value The value of the new element.
     # 
@@ -141,7 +141,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     def insertElements(idx: int, num_elem: int, value: MolecularGraphMatchExpression) -> None: pass
 
-    def insertElements(index: int, values: MolecularGraphMatchExpressionList) -> None: pass
+    def insertElements(idx: int, values: MolecularGraphMatchExpressionList) -> None: pass
 
     ##
     # \brief Removes the last element of the list.
@@ -151,7 +151,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def popLastElement() -> None: pass
 
     ##
-    # \brief Removes the element at the position specified by the index <em>idx</em>.
+    # \brief Removes the element at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the element to remove.
     # 
@@ -186,16 +186,16 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     # \param idx The zero-based index of the element.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def getElement(idx: int) -> MolecularGraphMatchExpression: pass
 
     ##
-    # \brief Assigns a new value to the element specified by the index <em>idx</em>.
+    # \brief Assigns a new value to the element at index <em>idx</em>.
     # 
-    # \param idx The zero-based index of the element for which to assign a new value.
+    # \param idx The zero-based index of the element.
     # \param value The new value of the element after assignment.
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
@@ -209,7 +209,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     # \param idx The zero-based index of the element.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
@@ -222,7 +222,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     def __len__() -> int: pass
 
-    def __setitem__(index: int, value: MolecularGraphMatchExpression) -> None: pass
+    def __setitem__(idx: int, value: MolecularGraphMatchExpression) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == expr</tt>.

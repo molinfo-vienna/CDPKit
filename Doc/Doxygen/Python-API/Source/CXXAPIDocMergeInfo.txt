@@ -26,6 +26,7 @@ false § False
 nullptr § None
 A reference to itself. § \a self.
 a reference to the § the
+A reference to the element. § The value of the element.
 int idx § idx: int
 Base class § %Base class
 ' Any ' § ' %Any '
@@ -37,6 +38,7 @@ Base class § %Base class
 #
 .__len__ § .getSize
 .__truediv__ § .__div__
+.__itruediv__ § .__idiv__
 
 #
 # --- CDPL package ---
@@ -129,65 +131,8 @@ family of overloaded methods is provided which expect § method is provided whic
 #
 # --- CDPL.Math package ---
 #
-Math.ConstFGrid § Math.Grid
 
-Math.ConstDGrid § Math.Grid
-
-Math.ConstFMatrix § Math.Matrix
-
-Math.ConstDMatrix § Math.Matrix
-
-Math.ConstLMatrix § Math.Matrix
-
-Math.ConstULMatrix § Math.Matrix
-
-Math.FGrid § Math.Grid
-
-Math.DGrid § Math.Grid
-
-Math.FMatrix § Math.Matrix
-
-Math.DMatrix § Math.Matrix
-
-Math.LMatrix § Math.Matrix
-
-Math.ULMatri. § Math.Matrix
-
-Math.Matrix2F. § Math.CMatrix.
-
-Math.Matrix3F. § Math.CMatrix.
-
-Math.Matrix4F. § Math.CMatrix.
-
-Math.Matrix2D. § Math.CMatrix.
-
-Math.Matrix3D. § Math.CMatrix.
-
-Math.Matrix4D. § Math.CMatrix.
-
-Math.Matrix2L. § Math.CMatrix.
-
-Math.Matrix3L. § Math.CMatrix.
-
-Math.Matrix4L. § Math.CMatrix.
-
-Math.Matrix2UL. § Math.CMatrix.
-
-Math.Matrix3UL. § Math.CMatrix.
-
-Math.Matrix4UL. § Math.CMatrix.
-
-Math.SparseFMatrix. § Math.SparseMatrix.
-
-Math.SparseDMatrix. § Math.SparseMatrix.
-
-Math.SparseLMatrix. § Math.SparseMatrix.
-
-Math.SparseULMatrix. § Math.SparseMatrix.
-
-Math.FRegularSpatialGrid. § Math.RegularSpatialGrid.
-
-Math.DRegularSpatialGrid. § Math.RegularSpatialGrid.
+# CVector typedefs
 
 Math.Vector2F. § Math.CVector.
 
@@ -215,21 +160,37 @@ Math.Vector3UL. § Math.CVector.
 
 Math.Vector4UL. § Math.CVector.
 
-Math.ConstFVector § Math.Vector
+# ScalarVector typedefs
 
-Math.ConstDVector § Math.Vector
+Math.ScalarFVector. § Math.ScalarVector.
 
-Math.ConstLVector § Math.Vector
+Math.ScalarDVector. § Math.ScalarVector.
 
-Math.ConstULVector § Math.Vector
+Math.ScalarLVector. § Math.ScalarVector.
 
-Math.FVector § Math.Vector
+Math.ScalarULVector. § Math.ScalarVector.
 
-Math.DVector § Math.Vector
+# ZeroVector typedefs
 
-Math.LVector § Math.Vector
+Math.ZeroFVector. § Math.ZeroVector.
 
-Math.ULVector § Math.Vector
+Math.ZeroDVector. § Math.ZeroVector.
+
+Math.ZeroLVector. § Math.ZeroVector.
+
+Math.ZeroULVector. § Math.ZeroVector.
+
+# UnitVector typedefs
+
+Math.UnitFVector. § Math.UnitVector.
+
+Math.UnitDVector. § Math.UnitVector.
+
+Math.UnitLVector. § Math.UnitVector.
+
+Math.UnitULVector. § Math.UnitVector.
+
+# SparseVector typedefs
 
 Math.SparseFVector. § Math.SparseVector.
 
@@ -238,6 +199,138 @@ Math.SparseDVector. § Math.SparseVector.
 Math.SparseLVector. § Math.SparseVector.
 
 Math.SparseULVector. § Math.SparseVector.
+
+# Vector typedefs
+
+Math.FVector. § Math.Vector.
+
+Math.DVector. § Math.Vector.
+
+Math.LVector. § Math.Vector.
+
+Math.ULVector. § Math.Vector.
+
+# Matrix typedefs
+
+Math.FMatrix. § Math.Matrix.
+
+Math.DMatrix. § Math.Matrix.
+
+Math.LMatrix. § Math.Matrix.
+
+Math.ULMatrix. § Math.Matrix.
+
+# CMatrix typedefs
+
+Math.Matrix2F. § Math.CMatrix.
+
+Math.Matrix3F. § Math.CMatrix.
+
+Math.Matrix4F. § Math.CMatrix.
+
+Math.Matrix2D. § Math.CMatrix.
+
+Math.Matrix3D. § Math.CMatrix.
+
+Math.Matrix4D. § Math.CMatrix.
+
+Math.Matrix2L. § Math.CMatrix.
+
+Math.Matrix3L. § Math.CMatrix.
+
+Math.Matrix4L. § Math.CMatrix.
+
+Math.Matrix2UL. § Math.CMatrix.
+
+Math.Matrix3UL. § Math.CMatrix.
+
+Math.Matrix4UL. § Math.CMatrix.
+
+# SparseMatrix typedefs
+
+Math.SparseFMatrix. § Math.SparseMatrix.
+
+Math.SparseDMatrix. § Math.SparseMatrix.
+
+Math.SparseLMatrix. § Math.SparseMatrix.
+
+Math.SparseULMatrix. § Math.SparseMatrix.
+
+# ZeroMatrix typedefs
+
+Math.ZeroFMatrix. § Math.ZeroMatrix.
+
+Math.ZeroDMatrix. § Math.ZeroMatrix.
+
+Math.ZeroLMatrix. § Math.ZeroMatrix.
+
+Math.ZeroULMatrix. § Math.ZeroMatrix.
+
+# ScalarMatrix typedefs
+
+Math.ScalarFMatrix. § Math.ScalarMatrix.
+
+Math.ScalarDMatrix. § Math.ScalarMatrix.
+
+Math.ScalarLMatrix. § Math.ScalarMatrix.
+
+Math.ScalarULMatrix. § Math.ScalarMatrix.
+
+# IdentityMatrix typedefs
+
+Math.IdentityFMatrix. § Math.IdentityMatrix.
+
+Math.IdentityDMatrix. § Math.IdentityMatrix.
+
+Math.IdentityLMatrix. § Math.IdentityMatrix.
+
+Math.IdentityULMatrix. § Math.IdentityMatrix.
+
+# Quaternion typedefs
+
+Math.FQuaternion. § Math.Quaternion.
+
+Math.DQuaternion. § Math.Quaternion.
+
+Math.LQuaternion. § Math.Quaternion.
+
+Math.ULQuaternion. § Math.Quaternion.
+
+# RealQuaternion typedefs
+
+Math.FRealQuaternion. § Math.RealQuaternion.
+
+Math.DRealQuaternion. § Math.RealQuaternion.
+
+Math.LRealQuaternion. § Math.RealQuaternion.
+
+Math.ULRealQuaternion. § Math.RealQuaternion.
+
+# Grid typedefs
+
+Math.FGrid. § Math.Grid.
+
+Math.DGrid. § Math.Grid.
+
+# ZeroGrid typedefs
+
+Math.FZeroGrid. § Math.ZeroGrid.
+
+Math.DZeroGrid. § Math.ZeroGrid.
+
+# ScalarGrid typedefs
+
+Math.FScalarGrid. § Math.ScalarGrid.
+
+Math.DScalarGrid. § Math.ScalarGrid.
+
+# RegularSpatialGrid typedefs
+
+Math.FRegularSpatialGrid. § Math.RegularSpatialGrid.
+
+Math.DRegularSpatialGrid. § Math.RegularSpatialGrid.
+
+# VectorArray typedefs
 
 Math.Vector2FArray. § Math.VectorArray.
 
@@ -271,50 +364,76 @@ Math.Vector3ULArray. § Math.VectorArray.
 
 Math.Vector3ULArray. § Util.Array.
 
+# Misc. fixes
+
 Math.DMLR § Math.MLR
 
 Math.FMLR § Math.MLR
-
-Math.DSparse § Math.Sparse
-
-Math.FSparse § Math.Sparse
 
 Math.DVectorBFGSMinimizer § Math.BFGSMinimizer
 
 Math.FVectorBFGSMinimizer § Math.BFGSMinimizer
 
-Math.ConstFQuaternion § Math.Quaternion
+# ---
 
-Math.ConstDQuaternion § Math.Quaternion
+Math.*Grid.__getitem__(i) § Math.Grid.__call__(i)
 
-Math.ConstLQuaternion § Math.Quaternion
+Math.*Grid.__getitem__(ijk) § Math.Grid.__call__(i,j,k)
 
-Math.ConstULQuaternion § Math.Quaternion
+Math.*Grid.getElement(i) § Math.Grid.__call__(i)
 
-Math.FQuaternion § Math.Quaternion
+Math.*Grid.getElement(i,j,k) § Math.Grid.__call__(i,j,k)
 
-Math.DQuaternion § Math.Quaternion
+Math.*Grid.__iadd__(g) § Math.Grid.__iadd__(c)
 
-Math.LQuaternion § Math.Quaternion
-
-Math.ULQuaternion § Math.Quaternion
+Math.*Grid.__isub__(g) § Math.Grid.__isub__(c)
 
 #
 # --- CDPL.Util package ---
 #
 Util.UIArray. § Util.Array.
 
+Util.UIArray.__delitem__ § Util.Array.removeElement
+
+Util.UIArray.__setitem__ § Util.Array.setElement
+
 Util.STArray. § Util.Array.
+
+Util.STArray.__delitem__ § Util.Array.removeElement
+
+Util.STArray.__setitem__ § Util.Array.setElement
 
 Util.LArray. § Util.Array.
 
+Util.LArray.__delitem__ § Util.Array.removeElement
+
+Util.LArray.__setitem__ § Util.Array.setElement
+
 Util.STPairArray. § Util.Array.
+
+Util.STPairArray.__delitem__ § Util.Array.removeElement
+
+Util.STPairArray.__setitem__ § Util.Array.setElement
 
 Util.DArray. § Util.Array.
 
+Util.DArray.__delitem__ § Util.Array.removeElement
+
+Util.DArray.__setitem__ § Util.Array.setElement
+
 Util.SArray. § Util.Array.
 
+Util.SArray.__delitem__ § Util.Array.removeElement
+
+Util.SArray.__setitem__ § Util.Array.setElement
+
 Util.BitSetArray. § Util.Array.
+
+Util.BitSetArray.__delitem__ § Util.Array.removeElement
+
+Util.BitSetArray.__setitem__ § Util.Array.setElement
+
+# ---
 
 Util.DG2DCoordinatesGenerator. § Util.DGCoordinatesGenerator.
 

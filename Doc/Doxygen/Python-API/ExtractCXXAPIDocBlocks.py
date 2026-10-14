@@ -315,6 +315,9 @@ def processCXXAPIDocFile(file_path, api_doc_db):
 
         if not doc_block:
             continue
+
+        if 'Move-' in doc_block:
+            continue
         
         mem_name = getTextRecursive(mem_def.getElementsByTagName('name')[0]).strip()
 

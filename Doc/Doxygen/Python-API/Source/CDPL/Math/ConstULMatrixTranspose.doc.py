@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Mutable view adapter that exposes the transpose of a matrix <em>M</em> as a matrix expression ( \f$ (i, j) \to M(j, i) \f$).
-# 
+# \brief 
+#
 class ConstULMatrixTranspose(Boost.Python.instance):
 
     ##
@@ -48,46 +48,18 @@ class ConstULMatrixTranspose(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief Returns the number of rows of the transpose view (= number of columns of the wrapped matrix).
-    # 
-    # \return The number of rows.
-    # 
     def getSize1() -> int: pass
 
-    ##
-    # \brief Returns the number of columns of the transpose view (= number of rows of the wrapped matrix).
-    # 
-    # \return The number of columns.
-    # 
     def getSize2() -> int: pass
 
-    ##
-    # \brief Tells whether the view is empty (the wrapped matrix has zero rows or zero columns).
-    # 
-    # \return <tt>True</tt> if the wrapped matrix is empty, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
     def getElement(i: int, j: int) -> int: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Returns the wrapped matrix (via its stored closure).
-    # 
-    # \return A reference to the wrapped matrix closure.
-    # 
     def getData() -> ConstULMatrixExpression: pass
 
-    ##
-    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
-    # 
-    # \param i The zero-based row index in the transposed view.
-    # \param j The zero-based column index in the transposed view.
-    # 
-    # \return A reference to <tt>m(j, i)</tt>.
-    # 
     def __call__(i: int, j: int) -> int: pass
 
     def __getitem__(ij: tuple) -> int: pass
@@ -128,8 +100,16 @@ class ConstULMatrixTranspose(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstULMatrixTranspose: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##

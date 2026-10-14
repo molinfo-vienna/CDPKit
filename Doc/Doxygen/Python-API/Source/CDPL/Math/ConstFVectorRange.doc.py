@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Vector expression proxy that views a contiguous half-open subrange of an underlying vector.
-# 
+# \brief 
+#
 class ConstFVectorRange(Boost.Python.instance):
 
     ##
@@ -37,11 +37,6 @@ class ConstFVectorRange(Boost.Python.instance):
     # 
     def __init__(e: ConstFVectorExpression, r: Range) -> None: pass
 
-    ##
-    # \brief Returns the start index of the viewed range within the wrapped vector.
-    # 
-    # \return The start index of the range.
-    # 
     def getStart() -> int: pass
 
     ##
@@ -56,29 +51,14 @@ class ConstFVectorRange(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief Tells whether the view is empty (zero-length range).
-    # 
-    # \return <tt>True</tt> if the range is empty, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief Returns the size of the view (number of elements covered by the range).
-    # 
-    # \return The number of elements in the view.
-    # 
     def getSize() -> int: pass
 
     def getElement(i: int) -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Returns the wrapped vector (via its stored closure).
-    # 
-    # \return A reference to the wrapped vector closure.
-    # 
     def getData() -> ConstFVectorExpression: pass
 
     ##
@@ -109,29 +89,10 @@ class ConstFVectorRange(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
-    ##
-    # \brief Returns the element at index <em>i</em> of the view.
-    # 
-    # \param i The zero-based index within the view.
-    # 
-    # \return A reference to the underlying element <tt>v(range(i))</tt>.
-    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the element at index <em>i</em> of the view.
-    # 
-    # \param i The zero-based index within the view.
-    # 
-    # \return A reference to the underlying element.
-    # 
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the size of the view (number of elements covered by the range).
-    # 
-    # \return The number of elements in the view.
-    # 
     def __len__() -> int: pass
 
     ##
@@ -140,8 +101,16 @@ class ConstFVectorRange(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstFVectorRange: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstFVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstFVectorExpression: pass
 
     ##

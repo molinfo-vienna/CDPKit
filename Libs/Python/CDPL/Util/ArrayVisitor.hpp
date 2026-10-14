@@ -93,7 +93,7 @@ namespace CDPLPythonUtil
                      ElementAdditionPolicy2())
                 .def("insertElements", insertElementsFunc, (python::arg("self"), python::arg("idx"), python::arg("num_elem"), python::arg("value")),
                      ElementAdditionPolicy3())
-                .def("insertElements", &insertElements, (python::arg("self"), python::arg("index"), python::arg("values")),
+                .def("insertElements", &insertElements, (python::arg("self"), python::arg("idx"), python::arg("values")),
                      ElementAdditionPolicy2())
                 .def("popLastElement", &ArrayType::popLastElement, python::arg("self"))
                 .def("removeElement", removeElementFunc, (python::arg("self"), python::arg("idx")))
@@ -107,7 +107,7 @@ namespace CDPLPythonUtil
                 .def("__delitem__", &delItem, (python::arg("self"), python::arg("idx")))
                 .def("__getitem__", &getItem, (python::arg("self"), python::arg("idx")), ElementReturnPolicy())
                 .def("__len__", &ArrayType::getSize, python::arg("self"))
-                .def("__setitem__", &setItem, (python::arg("self"), python::arg("index"), python::arg("value")),
+                .def("__setitem__", &setItem, (python::arg("self"), python::arg("idx"), python::arg("value")),
                      ElementAdditionPolicy2())
                 .add_property("size", &ArrayType::getSize);
         }

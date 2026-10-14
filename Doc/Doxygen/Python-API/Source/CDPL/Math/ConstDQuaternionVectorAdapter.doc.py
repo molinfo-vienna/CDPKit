@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components C1, C2, C3, C4).
-# 
+# \brief 
+#
 class ConstDQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
@@ -48,29 +48,14 @@ class ConstDQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief Tells whether the view is empty (always <tt>False</tt>, the view is fixed-size with 4 components).
-    # 
-    # \return <tt>False</tt>.
-    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief Returns the dimensionality of the view (always <em>4</em>).
-    # 
-    # \return <em>4</em>.
-    # 
     def getSize() -> int: pass
 
     def getElement(i: int) -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Returns the wrapped quaternion (via its stored closure).
-    # 
-    # \return A reference to the wrapped quaternion closure.
-    # 
     def getData() -> ConstDQuaternionExpression: pass
 
     ##
@@ -101,33 +86,10 @@ class ConstDQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
-    ##
-    # \brief Returns the quaternion component at index <em>i</em>.
-    # 
-    # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
-    # 
-    # \return A reference to the component. 
-    # 
-    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
-    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the quaternion component at index <em>i</em>.
-    # 
-    # \param i The zero-based component index.
-    # 
-    # \return A reference to the component. 
-    # 
-    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
-    # 
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the dimensionality of the view (always <em>4</em>).
-    # 
-    # \return <em>4</em>.
-    # 
     def __len__() -> int: pass
 
     ##
@@ -136,8 +98,16 @@ class ConstDQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstDQuaternionVectorAdapter: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDVectorExpression: pass
 
     ##

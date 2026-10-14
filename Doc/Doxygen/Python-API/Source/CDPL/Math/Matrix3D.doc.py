@@ -44,26 +44,30 @@ class Matrix3D(Boost.Python.instance):
     def __init__(m: Matrix3D) -> None: pass
 
     ##
-    # \brief Contructs the \c Matrix3D instance.
-    # \param e 
+    # \brief Constructs a fixed-size matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c Matrix3D instance.
-    # \param e 
+    # \brief Constructs a fixed-size matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c Matrix3D instance.
-    # \param e 
+    # \brief Constructs a fixed-size matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c Matrix3D instance.
-    # \param e 
+    # \brief Constructs a fixed-size matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
@@ -184,7 +188,7 @@ class Matrix3D(Boost.Python.instance):
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -228,8 +232,16 @@ class Matrix3D(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> Matrix3D: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##
@@ -340,6 +352,13 @@ class Matrix3D(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> Matrix3D: pass
 
+    ##
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: float) -> Matrix3D: pass
 
     objectID = property(getObjectID)

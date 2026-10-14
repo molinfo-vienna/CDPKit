@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Matrix expression proxy that views a strided rectangular slice of an underlying matrix.
-# 
+# \brief 
+#
 class ConstDMatrixSlice(Boost.Python.instance):
 
     ##
@@ -38,32 +38,12 @@ class ConstDMatrixSlice(Boost.Python.instance):
     # 
     def __init__(e: ConstDMatrixExpression, s1: Slice, s2: Slice) -> None: pass
 
-    ##
-    # \brief Returns the row slice's start index in the wrapped matrix.
-    # 
-    # \return The start row index.
-    # 
     def getStart1() -> int: pass
 
-    ##
-    # \brief Returns the column slice's start index in the wrapped matrix.
-    # 
-    # \return The start column index.
-    # 
     def getStart2() -> int: pass
 
-    ##
-    # \brief Returns the row slice's stride in the wrapped matrix.
-    # 
-    # \return The row stride.
-    # 
     def getStride1() -> int: pass
 
-    ##
-    # \brief Returns the column slice's stride in the wrapped matrix.
-    # 
-    # \return The column stride.
-    # 
     def getStride2() -> int: pass
 
     ##
@@ -78,46 +58,18 @@ class ConstDMatrixSlice(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief Returns the number of rows in the proxy (size of the row slice).
-    # 
-    # \return The number of rows.
-    # 
     def getSize1() -> int: pass
 
-    ##
-    # \brief Returns the number of columns in the proxy (size of the column slice).
-    # 
-    # \return The number of columns.
-    # 
     def getSize2() -> int: pass
 
-    ##
-    # \brief Tells whether the proxy is empty (either slice has size zero).
-    # 
-    # \return <tt>True</tt> if either slice has zero size, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
     def getElement(i: int, j: int) -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Returns the wrapped matrix (via its stored closure).
-    # 
-    # \return A reference to the wrapped matrix closure.
-    # 
     def getData() -> ConstDMatrixExpression: pass
 
-    ##
-    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
-    # 
-    # \param i The zero-based proxy row index.
-    # \param j The zero-based proxy column index.
-    # 
-    # \return A reference to the underlying element <tt>m(s1(i), s2(j))</tt>.
-    # 
     def __call__(i: int, j: int) -> float: pass
 
     def __getitem__(ij: tuple) -> float: pass
@@ -158,8 +110,16 @@ class ConstDMatrixSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstDMatrixSlice: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##

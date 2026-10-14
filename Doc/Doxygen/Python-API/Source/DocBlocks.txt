@@ -2,7 +2,7 @@ Functor^
 \brief A wrapper class for various types of callable objects.
 $$$$
 
-Functor.__init__(arg1,callable)^
+Functor.__init__(callable)^
 \brief Contructs the \c @CN@ instance for the specified callable object.
 \param callable The callable object to wrap.
 $$$$
@@ -51,6 +51,8 @@ Functor.__nonzero__()^
 \brief Tells whether the instance holds a callable object.
 \return \c True if the instance holds a callable object, and \c False otherwise.
 $$$$
+
+# ---
 
 .__init__
 \brief Contructs the \c @CN@ instance.
@@ -141,7 +143,14 @@ $$$$
 $$$$
 
 .__idiv__
-\brief Performs the in-place division operation <tt>@A0@ /= @A1@</tt>.
+\brief Performs the in-place division operation <tt>@A0@ //= @A1@</tt>.
+\param @A0@ The \c @CN@ instance acting as in-place dividend.
+\param @A1@ Specifies the divisor.
+\return The updated \c @RT@ instance \a @A0@.
+$$$$
+
+.__itruediv__
+\brief Returns the result of the in-place \e true division operation <tt>@A0@ /= @A1@</tt>.
 \param @A0@ The \c @CN@ instance acting as in-place dividend.
 \param @A1@ Specifies the divisor.
 \return The updated \c @RT@ instance \a @A0@.
@@ -195,6 +204,8 @@ $$$$
 \param @A1@ The \c @AT1@ instance to copy.
 \return \a @A0@
 $$$$
+
+# ---
 
 .getObjectID
 \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -353,4 +364,26 @@ $$$$
 Stream.__iter__()
 \brief Returns the stream instance.
 \return \a self.
+$$$$
+
+# ---
+
+Array.addElements(values)
+\brief Adds the elements of \a values to the end of the array.
+\param values The \c @CN@ instance providing the elements to add.
+$$$$
+
+Array.insertElements(idx,values)
+\brief Insert the elements of \a values before the location specified by the index \a idx.
+\param idx The zero-based insertion index.
+\param values The \c @CN@ instance providing the elements to insert.
+\throw Base.IndexError if \a idx is not in the range [0, getSize()].
+$$$$
+
+Array.removeElements(begin_idx,end_idx)
+\brief Removes the elements at indices in the range <em>[begin_idx, end_idx)</em>.
+\param begin_idx The zero-based index range start.
+\param end_idx The zero-based index range end.
+\throw Base.IndexError if \a begin_idx or \a end_idx is not in the range
+       [0, getSize()] or \a end_idx < \a begin_idx.
 $$$$

@@ -25,52 +25,59 @@
 class ULMatrix(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c ULMatrix instance.
+    # \brief Constructs an empty matrix (zero rows and zero columns).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c ULMatrix instance \a m.
-    # \param m The \c ULMatrix instance to copy.
+    # \brief Constructs a copy of the matrix <em>m</em>.
+    # 
+    # \param m The matrix to copy.
     # 
     def __init__(m: ULMatrix) -> None: pass
 
     ##
-    # \brief Contructs the \c ULMatrix instance.
-    # \param m 
-    # \param n 
+    # \brief Constructs an <em>m&times;n</em> matrix with default-initialized elements.
+    # 
+    # \param m The number of rows.
+    # \param n The number of columns.
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Contructs the \c ULMatrix instance.
-    # \param m 
-    # \param n 
-    # \param v 
+    # \brief Constructs an <em>m&times;n</em> matrix with every element initialized to <em>v</em>.
+    # 
+    # \param m The number of rows.
+    # \param n The number of columns.
+    # \param v The value used for element initialization.
     # 
     def __init__(m: int, n: int, v: int) -> None: pass
 
     ##
-    # \brief Contructs the \c ULMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c ULMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c ULMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c ULMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
@@ -80,8 +87,21 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __init__(a: object) -> None: pass
 
+    ##
+    # \brief Resizes the matrix to <em>m&times;n</em> elements.
+    # 
+    # \param m The new row count.
+    # \param n The new column count.
+    # \param preserve If <tt>True</tt>, existing element values at indices that remain valid are kept. If <tt>False</tt>, all elements are set to <em>v</em>.
+    # \param v The fill value for newly added elements (or for all elements when <em>preserve</em> is <tt>False</tt>).
+    # 
     def resize(m: int, n: int, preserve: bool = True, v: int = 0) -> None: pass
 
+    ##
+    # \brief Sets every element of the matrix to the value <em>v</em>.
+    # 
+    # \param v The fill value.
+    # 
     def clear(v: int = 0) -> None: pass
 
     ##
@@ -97,37 +117,47 @@ class ULMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
-    # \param e The \c ConstFMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
-    # \param e The \c ConstDMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
-    # \param e The \c ConstLMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
-    # \param e The \c ConstULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULMatrix instance \a m.
-    # \param m The \c ULMatrix instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the contents of <em>m</em> to this matrix.
+    # 
+    # \param m The source matrix.
+    # 
+    # \return \a self.
     # 
     def assign(m: ULMatrix) -> ULMatrix: pass
 
@@ -138,20 +168,50 @@ class ULMatrix(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
+    ##
+    # \brief Returns the number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the number of columns.
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the matrix is empty.
+    # 
+    # \return <tt>True</tt> if the underlying storage holds no elements, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     def getElement(i: int, j: int) -> int: pass
 
     def toArray() -> object: pass
 
+    ##
+    # \brief Swaps the contents of this matrix with those of <em>m</em>.
+    # 
+    # \param m The matrix to swap with.
+    # 
     def swap(m: ULMatrix) -> None: pass
 
     def setElement(i: int, j: int, v: int) -> None: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __call__(i: int, j: int) -> int: pass
 
     def __getitem__(ij: tuple) -> int: pass
@@ -192,8 +252,16 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ULMatrix: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##
@@ -262,9 +330,11 @@ class ULMatrix(Boost.Python.instance):
     def __iadd__(m: ULMatrix) -> ULMatrix: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c ULMatrix instance \a self.
+    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstULMatrixExpression) -> ULMatrix: pass
 
@@ -276,26 +346,39 @@ class ULMatrix(Boost.Python.instance):
     def __isub__(m: ULMatrix) -> ULMatrix: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c ULMatrix instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstULMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c ULMatrix instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULMatrix: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULMatrix instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULMatrix: pass
 
+    ##
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: int) -> ULMatrix: pass
 
     objectID = property(getObjectID)

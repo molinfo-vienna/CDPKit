@@ -341,6 +341,13 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     # 
     def __idiv__(t: float) -> Math.FRegularSpatialGrid: pass
 
+    ##
+    # \brief Divides every cell value by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: float) -> Math.FRegularSpatialGrid: pass
 
     size1 = property(getSize1)

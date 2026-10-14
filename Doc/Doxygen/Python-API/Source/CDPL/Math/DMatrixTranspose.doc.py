@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Mutable view adapter that exposes the transpose of a matrix <em>M</em> as a matrix expression ( \f$ (i, j) \to M(j, i) \f$).
-# 
+# \brief 
+#
 class DMatrixTranspose(Boost.Python.instance):
 
     ##
@@ -49,47 +49,37 @@ class DMatrixTranspose(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this transpose view without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
+    # \param e The \c ConstFMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrixTranspose: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this transpose view without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
+    # \param e The \c ConstDMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrixTranspose: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this transpose view without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
+    # \param e The \c ConstLMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrixTranspose: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this transpose view without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
+    # \param e The \c ConstULMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrixTranspose: pass
 
     ##
-    # \brief Assigns the wrapped matrix from <em>mt's</em> wrapped matrix (possibly differing types).
-    # 
-    # \param mt The source transpose view.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c DMatrixTranspose instance \a mt.
+    # \param mt The \c DMatrixTranspose instance to copy.
+    # \return \a self
     # 
     def assign(mt: DMatrixTranspose) -> DMatrixTranspose: pass
 
@@ -100,55 +90,22 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief Returns the number of rows of the transpose view (= number of columns of the wrapped matrix).
-    # 
-    # \return The number of rows.
-    # 
     def getSize1() -> int: pass
 
-    ##
-    # \brief Returns the number of columns of the transpose view (= number of rows of the wrapped matrix).
-    # 
-    # \return The number of columns.
-    # 
     def getSize2() -> int: pass
 
-    ##
-    # \brief Tells whether the view is empty (the wrapped matrix has zero rows or zero columns).
-    # 
-    # \return <tt>True</tt> if the wrapped matrix is empty, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
     def getElement(i: int, j: int) -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Swaps the underlying matrices of the two transpose views.
-    # 
-    # \param mt The transpose view to swap with.
-    # 
     def swap(mt: DMatrixTranspose) -> None: pass
 
     def setElement(i: int, j: int, v: float) -> None: pass
 
-    ##
-    # \brief Returns the wrapped matrix (via its stored closure).
-    # 
-    # \return A reference to the wrapped matrix closure.
-    # 
     def getData() -> DMatrixExpression: pass
 
-    ##
-    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
-    # 
-    # \param i The zero-based row index in the transposed view.
-    # \param j The zero-based column index in the transposed view.
-    # 
-    # \return A reference to <tt>m(j, i)</tt>.
-    # 
     def __call__(i: int, j: int) -> float: pass
 
     def __getitem__(ij: tuple) -> float: pass
@@ -189,8 +146,16 @@ class DMatrixTranspose(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> DMatrixTranspose: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##
@@ -259,11 +224,9 @@ class DMatrixTranspose(Boost.Python.instance):
     def __iadd__(mt: DMatrixTranspose) -> DMatrixTranspose: pass
 
     ##
-    # \brief Adds the matrix expression <em>e</em> to this transpose view.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param e Specifies the second addend.
+    # \return The updated \c DMatrixTranspose instance \a self.
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrixTranspose: pass
 
@@ -275,32 +238,31 @@ class DMatrixTranspose(Boost.Python.instance):
     def __isub__(mt: DMatrixTranspose) -> DMatrixTranspose: pass
 
     ##
-    # \brief Subtracts the matrix expression <em>e</em> from this transpose view.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param e Specifies the subtrahend.
+    # \return The updated \c DMatrixTranspose instance \a self.
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrixTranspose: pass
 
     ##
-    # \brief Multiplies every element of the wrapped matrix by the scalar <em>t</em>.
-    # 
-    # \param t The scalar multiplier.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param t Specifies the multiplier.
+    # \return The updated \c DMatrixTranspose instance \a self.
     # 
     def __imul__(t: float) -> DMatrixTranspose: pass
 
     ##
-    # \brief Divides every element of the wrapped matrix by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c DMatrixTranspose instance \a self.
     # 
     def __idiv__(t: float) -> DMatrixTranspose: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c DMatrixTranspose instance \a self.
+    # 
     def __itruediv__(t: float) -> DMatrixTranspose: pass
 
     objectID = property(getObjectID)

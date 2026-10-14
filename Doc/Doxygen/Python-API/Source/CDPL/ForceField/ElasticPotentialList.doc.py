@@ -78,7 +78,7 @@ class ElasticPotentialList(Boost.Python.instance):
 
     def insertElements(idx: int, num_elem: int, value: ElasticPotential) -> None: pass
 
-    def insertElements(index: int, values: ElasticPotentialList) -> None: pass
+    def insertElements(idx: int, values: ElasticPotentialList) -> None: pass
 
     def popLastElement() -> None: pass
 
@@ -100,7 +100,7 @@ class ElasticPotentialList(Boost.Python.instance):
 
     def __len__() -> int: pass
 
-    def __setitem__(index: int, value: ElasticPotential) -> None: pass
+    def __setitem__(idx: int, value: ElasticPotential) -> None: pass
 
     objectID = property(getObjectID)
 

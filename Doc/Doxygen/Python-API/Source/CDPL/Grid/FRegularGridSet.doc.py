@@ -76,7 +76,7 @@ class FRegularGridSet(Boost.Python.instance):
 
     def insertElements(idx: int, num_elem: int, value: FRegularGrid) -> None: pass
 
-    def insertElements(index: int, values: FRegularGridSet) -> None: pass
+    def insertElements(idx: int, values: FRegularGridSet) -> None: pass
 
     def popLastElement() -> None: pass
 
@@ -98,7 +98,7 @@ class FRegularGridSet(Boost.Python.instance):
 
     def __len__() -> int: pass
 
-    def __setitem__(index: int, value: FRegularGrid) -> None: pass
+    def __setitem__(idx: int, value: FRegularGrid) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == set</tt>.

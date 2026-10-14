@@ -181,7 +181,7 @@ class GaussianShape(Base.PropertyContainer):
     # 
     # \param idx The index of the element.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumElements()).
     # 

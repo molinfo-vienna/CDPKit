@@ -156,8 +156,16 @@ class ULMatrixSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ULMatrixSlice: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##
@@ -254,12 +262,17 @@ class ULMatrixSlice(Boost.Python.instance):
     def __imul__(t: int) -> ULMatrixSlice: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c ULMatrixSlice instance \a self.
     # 
     def __idiv__(t: int) -> ULMatrixSlice: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c ULMatrixSlice instance \a self.
+    # 
     def __itruediv__(t: int) -> ULMatrixSlice: pass
 
     objectID = property(getObjectID)

@@ -115,8 +115,16 @@ class DUnitVector(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> DUnitVector: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDVectorExpression: pass
 
     ##

@@ -284,7 +284,7 @@ namespace CDPL
             void assign(const InputIter& first, const InputIter& last);
 
             /**
-             * \brief Inserts a new element at the end of the array.
+             * \brief Adds a new element at the end of the array.
              * \param value The value of the new element.
              */
             void addElement(const ValueType& value = ValueType());
@@ -351,26 +351,26 @@ namespace CDPL
             void popLastElement();
 
             /**
-             * \brief Removes the element at the position specified by the index \a idx.
+             * \brief Removes the element at index \a idx.
              * \param idx The zero-based index of the element to remove.
              * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */
             void removeElement(std::size_t idx);
 
             /**
-             * \brief Removes the element at the position specified by the iterator \a it.
+             * \brief Removes the element specified by the iterator \a it.
              * \param it The iterator specifying the element to remove.
-             * \return An iterator pointing to the position of the element immediately 
+             * \return An iterator pointing to the location of the element immediately 
              *         following the one that was removed.
              * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd()).
              */
             ElementIterator removeElement(const ElementIterator& it);
 
             /**
-             * \brief Removes the elements pointed to by the iterators in the range <em>[first, last)</em>.
+             * \brief Removes the elements specified by the iterators in the range <em>[first, last)</em>.
              * \param first The start of the range.
              * \param last The end of the range.
-             * \return An iterator pointing to the position of the element immediately 
+             * \return An iterator pointing to the element immediately 
              *         following the ones that were removed.
              * \throw Base::RangeError if \a first or \a last is not in the range
              *        [getElementsBegin(), getElementsEnd()] or \a last < \a first.
@@ -500,8 +500,8 @@ namespace CDPL
             ValueType& getElement(std::size_t idx);
 
             /**
-             * \brief Assigns a new value to the element specified by the index \a idx.
-             * \param idx The zero-based index of the element for which to assign a new value.
+             * \brief Assigns a new value to the element at index \a idx.
+             * \param idx The zero-based index of the element.
              * \param value The new value of the element after assignment.
              * \throw Base::IndexError if \a idx is not in the range [0, getSize()).
              */

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Vector expression proxy that views a single row of an underlying matrix.
-# 
+# \brief 
+#
 class ConstULMatrixRow(Boost.Python.instance):
 
     ##
@@ -37,11 +37,6 @@ class ConstULMatrixRow(Boost.Python.instance):
     # 
     def __init__(e: ConstULMatrixExpression, i: int) -> None: pass
 
-    ##
-    # \brief Returns the row index this proxy refers to within the wrapped matrix.
-    # 
-    # \return The zero-based row index.
-    # 
     def getIndex() -> int: pass
 
     ##
@@ -56,29 +51,14 @@ class ConstULMatrixRow(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief Tells whether the row is empty (the wrapped matrix has zero columns).
-    # 
-    # \return <tt>True</tt> if the wrapped matrix has zero columns, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief Returns the size of the row (number of columns of the wrapped matrix).
-    # 
-    # \return The number of columns.
-    # 
     def getSize() -> int: pass
 
     def getElement(i: int) -> int: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Returns the wrapped matrix (via its stored closure).
-    # 
-    # \return A reference to the wrapped matrix closure.
-    # 
     def getData() -> ConstULMatrixExpression: pass
 
     ##
@@ -109,29 +89,10 @@ class ConstULMatrixRow(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
-    ##
-    # \brief Returns the element at column <em>i</em> of the row.
-    # 
-    # \param i The zero-based column index.
-    # 
-    # \return A reference to the underlying element <tt>m(index, i)</tt>.
-    # 
     def __call__(i: int) -> int: pass
 
-    ##
-    # \brief Returns the element at column <em>i</em> of the row.
-    # 
-    # \param i The zero-based column index.
-    # 
-    # \return A reference to the underlying element.
-    # 
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief Returns the size of the row (number of columns of the wrapped matrix).
-    # 
-    # \return The number of columns.
-    # 
     def __len__() -> int: pass
 
     ##
@@ -140,8 +101,16 @@ class ConstULMatrixRow(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstULMatrixRow: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULVectorExpression: pass
 
     ##

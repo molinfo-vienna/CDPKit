@@ -20,10 +20,8 @@
 #
 
 ##
-# \brief CRTP base class of all vector expression types.
-# 
-# Provides downcast access to the concrete derived expression class instance via the function call operator.
-# 
+# \brief 
+#
 class DVectorExpression(ConstDVectorExpression):
 
     def swap(e: DVectorExpression) -> None: pass
@@ -110,10 +108,15 @@ class DVectorExpression(ConstDVectorExpression):
     def __imul__(t: float) -> DVectorExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c DVectorExpression instance \a self.
     # 
     def __idiv__(t: float) -> DVectorExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c DVectorExpression instance \a self.
+    # 
     def __itruediv__(t: float) -> DVectorExpression: pass

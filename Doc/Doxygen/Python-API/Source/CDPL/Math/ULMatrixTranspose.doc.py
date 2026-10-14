@@ -146,8 +146,16 @@ class ULMatrixTranspose(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ULMatrixTranspose: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULMatrixExpression: pass
 
     ##
@@ -244,12 +252,17 @@ class ULMatrixTranspose(Boost.Python.instance):
     def __imul__(t: int) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c ULMatrixTranspose instance \a self.
     # 
     def __idiv__(t: int) -> ULMatrixTranspose: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c ULMatrixTranspose instance \a self.
+    # 
     def __itruediv__(t: int) -> ULMatrixTranspose: pass
 
     objectID = property(getObjectID)

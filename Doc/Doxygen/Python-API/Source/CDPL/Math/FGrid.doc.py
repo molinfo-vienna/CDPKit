@@ -30,9 +30,9 @@ class FGrid(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Move-constructs a grid from <em>g</em> (<em>g</em> is left in a valid empty state).
+    # \brief Constructs a copy of the grid <em>g</em>.
     # 
-    # \param g The grid to move from.
+    # \param g The grid to copy.
     # 
     def __init__(g: FGrid) -> None: pass
 
@@ -56,20 +56,23 @@ class FGrid(Boost.Python.instance):
     def __init__(m: int, n: int, o: int, v: float) -> None: pass
 
     ##
-    # \brief Contructs the \c FGrid instance.
-    # \param e 
+    # \brief Constructs the grid from the grid expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The grid expression to materialize.
     # 
     def __init__(e: ConstFGridExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c FGrid instance.
-    # \param e 
+    # \brief Constructs the grid from the grid expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The grid expression to materialize.
     # 
     def __init__(e: ConstDGridExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c FGrid instance.
-    # \param e 
+    # \brief Constructs the grid from the grid expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The grid expression to materialize.
     # 
     def __init__(e: object) -> None: pass
 
@@ -131,9 +134,9 @@ class FGrid(Boost.Python.instance):
     def assign(e: object) -> FGrid: pass
 
     ##
-    # \brief Move-assigns the contents of <em>g</em> to this grid.
+    # \brief Copy-assigns the contents of <em>g</em> to this grid.
     # 
-    # \param g The source grid (left in a valid but unspecified state).
+    # \param g The source grid.
     # 
     # \return \a self.
     # 
@@ -167,8 +170,28 @@ class FGrid(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def getElement(i: int, j: int, k: int) -> float: pass
 
+    ##
+    # \brief Returns the element at linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def getElement(i: int) -> float: pass
 
     def toArray() -> object: pass
@@ -198,7 +221,7 @@ class FGrid(Boost.Python.instance):
     # \param j The zero-based second-axis index.
     # \param k The zero-based third-axis index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if any of the indices is out of range.
     # 
@@ -209,14 +232,34 @@ class FGrid(Boost.Python.instance):
     # 
     # \param i The zero-based linear index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __getitem__(ijk: tuple) -> float: pass
 
+    ##
+    # \brief Returns the element at linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> float: pass
 
     ##
@@ -260,8 +303,16 @@ class FGrid(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> FGrid: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstFGridExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstFGridExpression: pass
 
     ##
@@ -311,9 +362,11 @@ class FGrid(Boost.Python.instance):
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += g</tt>.
-    # \param g Specifies the second addend.
-    # \return The updated \c FGrid instance \a self.
+    # \brief Adds the contents of the grid container <em>c</em> element-wise to this grid (no alias check needed).
+    # 
+    # \param c The source grid container.
+    # 
+    # \return \a self.
     # 
     def __iadd__(g: FGrid) -> FGrid: pass
 
@@ -327,9 +380,11 @@ class FGrid(Boost.Python.instance):
     def __iadd__(e: ConstFGridExpression) -> FGrid: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
-    # \param g Specifies the subtrahend.
-    # \return The updated \c FGrid instance \a self.
+    # \brief Subtracts the contents of the grid container <em>c</em> element-wise from this grid (no alias check needed).
+    # 
+    # \param c The source grid container.
+    # 
+    # \return \a self.
     # 
     def __isub__(g: FGrid) -> FGrid: pass
 
@@ -360,6 +415,13 @@ class FGrid(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> FGrid: pass
 
+    ##
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: float) -> FGrid: pass
 
     objectID = property(getObjectID)

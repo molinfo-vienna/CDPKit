@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices 0-3 map to C1-C4).
-# 
+# \brief 
+#
 class DVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
@@ -49,85 +49,50 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
-    # 
-    # \param e The source quaternion expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFQuaternionExpression instance \a e.
+    # \param e The \c ConstFQuaternionExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstFQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
-    # 
-    # \param e The source quaternion expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDQuaternionExpression instance \a e.
+    # \param e The \c ConstDQuaternionExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
-    # 
-    # \param e The source quaternion expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLQuaternionExpression instance \a e.
+    # \param e The \c ConstLQuaternionExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstLQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this view without intermediate temporary (use only when <em>e</em> does not alias the wrapped vector).
-    # 
-    # \param e The source quaternion expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULQuaternionExpression instance \a e.
+    # \param e The \c ConstULQuaternionExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstULQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Copies the components of <em>a</em> into this view (writing through to the wrapped vector).
-    # 
-    # \param a The source adapter.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c DVectorQuaternionAdapter instance \a a.
+    # \param a The \c DVectorQuaternionAdapter instance to copy.
+    # \return \a self
     # 
     def assign(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
-    ##
-    # \brief Returns a reference to component C1.
-    # 
-    # \return A reference to C1.
-    # 
     def getC1() -> float: pass
 
-    ##
-    # \brief Returns a reference to component C2.
-    # 
-    # \return A reference to C2.
-    # 
     def getC2() -> float: pass
 
-    ##
-    # \brief Returns a reference to component C3.
-    # 
-    # \return A reference to C3.
-    # 
     def getC3() -> float: pass
 
-    ##
-    # \brief Returns a reference to component C4.
-    # 
-    # \return A reference to C4.
-    # 
     def getC4() -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Swaps the components of this view with those of <em>a</em>.
-    # 
-    # \param a The adapter to swap with.
-    # 
     def swap(a: DVectorQuaternionAdapter) -> None: pass
 
     def setC1(v: float) -> None: pass
@@ -138,21 +103,8 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
 
     def setC4(v: float) -> None: pass
 
-    ##
-    # \brief Assigns the four supplied component values to this view (writing through to the wrapped vector).
-    # 
-    # \param c1 The C1 component value.
-    # \param c2 The C2 component value.
-    # \param c3 The C3 component value.
-    # \param c4 The C4 component value.
-    # 
     def set(c1: float = 0.0, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
-    ##
-    # \brief Returns the wrapped vector (via its stored closure).
-    # 
-    # \return A reference to the wrapped vector closure.
-    # 
     def getData() -> DVectorExpression: pass
 
     ##
@@ -189,8 +141,16 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> DVectorQuaternionAdapter: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDQuaternionExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
@@ -270,11 +230,9 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
-    # \brief Adds the scalar <em>t</em> to component C1 of this view.
-    # 
-    # \param t The scalar summand.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place addition operation <tt>self += t</tt>.
+    # \param t Specifies the second addend.
+    # \return The updated \c DVectorQuaternionAdapter instance \a self.
     # 
     def __iadd__(t: float) -> DVectorQuaternionAdapter: pass
 
@@ -293,11 +251,9 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def __iadd__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Subtracts the scalar <em>t</em> from component C1 of this view.
-    # 
-    # \param t The scalar subtrahend.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
+    # \param t Specifies the subtrahend.
+    # \return The updated \c DVectorQuaternionAdapter instance \a self.
     # 
     def __isub__(t: float) -> DVectorQuaternionAdapter: pass
 
@@ -316,11 +272,9 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def __isub__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Multiplies every component of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar multiplier.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param t Specifies the multiplier.
+    # \return The updated \c DVectorQuaternionAdapter instance \a self.
     # 
     def __imul__(t: float) -> DVectorQuaternionAdapter: pass
 
@@ -339,32 +293,45 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def __imul__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Divides every component of this view by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c DVectorQuaternionAdapter instance \a self.
     # 
     def __idiv__(t: float) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= a</tt>.
+    # \brief Performs the in-place division operation <tt>self //= a</tt>.
     # \param a Specifies the divisor.
     # \return The updated \c DVectorQuaternionAdapter instance \a self.
     # 
     def __idiv__(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= q</tt>.
+    # \brief Performs the in-place division operation <tt>self //= q</tt>.
     # \param q Specifies the divisor.
     # \return The updated \c DVectorQuaternionAdapter instance \a self.
     # 
     def __idiv__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c DVectorQuaternionAdapter instance \a self.
+    # 
     def __itruediv__(t: float) -> DVectorQuaternionAdapter: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= a</tt>.
+    # \param a Specifies the divisor.
+    # \return The updated \c DVectorQuaternionAdapter instance \a self.
+    # 
     def __itruediv__(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
+    # \param q Specifies the divisor.
+    # \return The updated \c DVectorQuaternionAdapter instance \a self.
+    # 
     def __itruediv__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     objectID = property(getObjectID)

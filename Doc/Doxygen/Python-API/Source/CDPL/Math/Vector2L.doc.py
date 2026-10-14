@@ -44,26 +44,30 @@ class Vector2L(Boost.Python.instance):
     def __init__(v: int) -> None: pass
 
     ##
-    # \brief Contructs the \c Vector2L instance.
-    # \param e 
+    # \brief Constructs a fixed-size vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c Vector2L instance.
-    # \param e 
+    # \brief Constructs a fixed-size vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c Vector2L instance.
-    # \param e 
+    # \brief Constructs a fixed-size vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c Vector2L instance.
-    # \param e 
+    # \brief Constructs a fixed-size vector from the vector expression <em>e</em>.
+    # 
+    # \param e The source vector expression.
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
@@ -204,7 +208,7 @@ class Vector2L(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -215,7 +219,7 @@ class Vector2L(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -234,8 +238,16 @@ class Vector2L(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> Vector2L: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstLVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstLVectorExpression: pass
 
     ##
@@ -339,6 +351,13 @@ class Vector2L(Boost.Python.instance):
     # 
     def __idiv__(t: int) -> Vector2L: pass
 
+    ##
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: int) -> Vector2L: pass
 
     objectID = property(getObjectID)

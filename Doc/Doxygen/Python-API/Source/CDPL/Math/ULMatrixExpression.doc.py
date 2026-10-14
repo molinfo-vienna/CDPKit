@@ -108,10 +108,15 @@ class ULMatrixExpression(ConstULMatrixExpression):
     def __imul__(t: int) -> ULMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c ULMatrixExpression instance \a self.
     # 
     def __idiv__(t: int) -> ULMatrixExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c ULMatrixExpression instance \a self.
+    # 
     def __itruediv__(t: int) -> ULMatrixExpression: pass

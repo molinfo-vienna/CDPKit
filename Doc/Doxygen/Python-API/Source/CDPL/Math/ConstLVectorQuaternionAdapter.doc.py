@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices 0-3 map to C1-C4).
-# 
+# \brief 
+#
 class ConstLVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
@@ -48,41 +48,16 @@ class ConstLVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief Returns a reference to component C1.
-    # 
-    # \return A reference to C1.
-    # 
     def getC1() -> int: pass
 
-    ##
-    # \brief Returns a reference to component C2.
-    # 
-    # \return A reference to C2.
-    # 
     def getC2() -> int: pass
 
-    ##
-    # \brief Returns a reference to component C3.
-    # 
-    # \return A reference to C3.
-    # 
     def getC3() -> int: pass
 
-    ##
-    # \brief Returns a reference to component C4.
-    # 
-    # \return A reference to C4.
-    # 
     def getC4() -> int: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Returns the wrapped vector (via its stored closure).
-    # 
-    # \return A reference to the wrapped vector closure.
-    # 
     def getData() -> ConstLVectorExpression: pass
 
     ##
@@ -119,8 +94,16 @@ class ConstLVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstLVectorQuaternionAdapter: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstLQuaternionExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstLQuaternionExpression: pass
 
     ##

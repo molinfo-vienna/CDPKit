@@ -30,9 +30,9 @@ class FMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Move-constructs a matrix from <em>m</em> (<em>m</em> is left in a valid empty state).
+    # \brief Constructs a copy of the matrix <em>m</em>.
     # 
-    # \param m The matrix to move from.
+    # \param m The matrix to copy.
     # 
     def __init__(m: FMatrix) -> None: pass
 
@@ -54,26 +54,30 @@ class FMatrix(Boost.Python.instance):
     def __init__(m: int, n: int, v: float) -> None: pass
 
     ##
-    # \brief Contructs the \c FMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c FMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c FMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c FMatrix instance.
-    # \param e 
+    # \brief Constructs the matrix from the matrix expression <em>e</em> (materializing the expression result).
+    # 
+    # \param e The matrix expression to materialize.
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
@@ -149,9 +153,9 @@ class FMatrix(Boost.Python.instance):
     def assign(e: ConstULMatrixExpression) -> FMatrix: pass
 
     ##
-    # \brief Move-assigns the contents of <em>m</em> to this matrix.
+    # \brief Copy-assigns the contents of <em>m</em> to this matrix.
     # 
-    # \param m The source matrix (left in a valid but unspecified state).
+    # \param m The source matrix.
     # 
     # \return \a self.
     # 
@@ -204,7 +208,7 @@ class FMatrix(Boost.Python.instance):
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return A reference to the element. 
+    # \return The value of the element. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -248,8 +252,16 @@ class FMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> FMatrix: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstFMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstFMatrixExpression: pass
 
     ##
@@ -360,6 +372,13 @@ class FMatrix(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> FMatrix: pass
 
+    ##
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: float) -> FMatrix: pass
 
     objectID = property(getObjectID)

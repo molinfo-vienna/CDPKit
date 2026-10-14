@@ -550,8 +550,28 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def getElement(i: int, j: int, k: int) -> float: pass
 
+    ##
+    # \brief Returns the element at linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def getElement(i: int) -> float: pass
 
     def toArray() -> object: pass
@@ -589,8 +609,28 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __getitem__(ijk: tuple) -> float: pass
 
+    ##
+    # \brief Returns the element at linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> float: pass
 
     ##
@@ -634,8 +674,16 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> FRegularSpatialGrid: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstFGridExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstFGridExpression: pass
 
     ##
@@ -685,9 +733,11 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += g</tt>.
-    # \param g Specifies the second addend.
-    # \return The updated \c FRegularSpatialGrid instance \a self.
+    # \brief Adds the contents of the grid container <em>c</em> element-wise to this grid (no alias check needed).
+    # 
+    # \param c The source grid container.
+    # 
+    # \return \a self.
     # 
     def __iadd__(g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
 
@@ -701,9 +751,11 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def __iadd__(e: ConstFGridExpression) -> FRegularSpatialGrid: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
-    # \param g Specifies the subtrahend.
-    # \return The updated \c FRegularSpatialGrid instance \a self.
+    # \brief Subtracts the contents of the grid container <em>c</em> element-wise from this grid (no alias check needed).
+    # 
+    # \param c The source grid container.
+    # 
+    # \return \a self.
     # 
     def __isub__(g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
 
@@ -734,6 +786,13 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> FRegularSpatialGrid: pass
 
+    ##
+    # \brief Divides every cell value by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: float) -> FRegularSpatialGrid: pass
 
     data = property(getData)

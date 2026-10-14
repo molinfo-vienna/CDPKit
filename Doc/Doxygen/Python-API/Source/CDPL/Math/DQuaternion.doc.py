@@ -47,26 +47,30 @@ class DQuaternion(Boost.Python.instance):
     def __init__(c1: float, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
     ##
-    # \brief Contructs the \c DQuaternion instance.
-    # \param e 
+    # \brief Constructs the quaternion from the quaternion expression <em>e</em>.
+    # 
+    # \param e The quaternion expression to materialize.
     # 
     def __init__(e: ConstFQuaternionExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c DQuaternion instance.
-    # \param e 
+    # \brief Constructs the quaternion from the quaternion expression <em>e</em>.
+    # 
+    # \param e The quaternion expression to materialize.
     # 
     def __init__(e: ConstDQuaternionExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c DQuaternion instance.
-    # \param e 
+    # \brief Constructs the quaternion from the quaternion expression <em>e</em>.
+    # 
+    # \param e The quaternion expression to materialize.
     # 
     def __init__(e: ConstLQuaternionExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c DQuaternion instance.
-    # \param e 
+    # \brief Constructs the quaternion from the quaternion expression <em>e</em>.
+    # 
+    # \param e The quaternion expression to materialize.
     # 
     def __init__(e: ConstULQuaternionExpression) -> None: pass
 
@@ -229,8 +233,16 @@ class DQuaternion(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> DQuaternion: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDQuaternionExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
@@ -388,23 +400,40 @@ class DQuaternion(Boost.Python.instance):
     def __idiv__(t: float) -> DQuaternion: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= q</tt>.
+    # \brief Performs the in-place division operation <tt>self //= q</tt>.
     # \param q Specifies the divisor.
     # \return The updated \c DQuaternion instance \a self.
     # 
     def __idiv__(q: DQuaternion) -> DQuaternion: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= q</tt>.
+    # \brief Performs the in-place division operation <tt>self //= q</tt>.
     # \param q Specifies the divisor.
     # \return The updated \c DQuaternion instance \a self.
     # 
     def __idiv__(q: ConstDQuaternionExpression) -> DQuaternion: pass
 
+    ##
+    # \brief Divides every component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: float) -> DQuaternion: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
+    # \param q Specifies the divisor.
+    # \return The updated \c DQuaternion instance \a self.
+    # 
     def __itruediv__(q: DQuaternion) -> DQuaternion: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
+    # \param q Specifies the divisor.
+    # \return The updated \c DQuaternion instance \a self.
+    # 
     def __itruediv__(q: ConstDQuaternionExpression) -> DQuaternion: pass
 
     objectID = property(getObjectID)

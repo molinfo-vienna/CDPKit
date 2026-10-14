@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Vector expression proxy that views a strided slice of an underlying vector.
-# 
+# \brief 
+#
 class ConstFVectorSlice(Boost.Python.instance):
 
     ##
@@ -37,18 +37,8 @@ class ConstFVectorSlice(Boost.Python.instance):
     # 
     def __init__(e: ConstFVectorExpression, s: Slice) -> None: pass
 
-    ##
-    # \brief Returns the start index of the slice within the wrapped vector.
-    # 
-    # \return The start index of the slice.
-    # 
     def getStart() -> int: pass
 
-    ##
-    # \brief Returns the stride of the slice (step between successive viewed elements).
-    # 
-    # \return The stride.
-    # 
     def getStride() -> int: pass
 
     ##
@@ -63,29 +53,14 @@ class ConstFVectorSlice(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief Tells whether the view is empty (zero-length slice).
-    # 
-    # \return <tt>True</tt> if the slice is empty, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
-    ##
-    # \brief Returns the size of the view (number of elements covered by the slice).
-    # 
-    # \return The number of elements in the view.
-    # 
     def getSize() -> int: pass
 
     def getElement(i: int) -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Returns the wrapped vector (via its stored closure).
-    # 
-    # \return A reference to the wrapped vector closure.
-    # 
     def getData() -> ConstFVectorExpression: pass
 
     ##
@@ -116,29 +91,10 @@ class ConstFVectorSlice(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
-    ##
-    # \brief Returns the element at index <em>i</em> of the view.
-    # 
-    # \param i The zero-based index within the view.
-    # 
-    # \return A reference to the underlying element <tt>v(slice(i))</tt>.
-    # 
     def __call__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the element at index <em>i</em> of the view.
-    # 
-    # \param i The zero-based index within the view.
-    # 
-    # \return A reference to the underlying element.
-    # 
     def __getitem__(i: int) -> float: pass
 
-    ##
-    # \brief Returns the size of the view (number of elements covered by the slice).
-    # 
-    # \return The number of elements in the view.
-    # 
     def __len__() -> int: pass
 
     ##
@@ -147,8 +103,16 @@ class ConstFVectorSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstFVectorSlice: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstFVectorExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstFVectorExpression: pass
 
     ##

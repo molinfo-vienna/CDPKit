@@ -25,7 +25,7 @@
 class DScalarGrid(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c DScalarGrid instance.
+    # \brief Constructs an empty scalar grid.
     # 
     def __init__() -> None: pass
 
@@ -36,14 +36,22 @@ class DScalarGrid(Boost.Python.instance):
     def __init__(g: DScalarGrid) -> None: pass
 
     ##
-    # \brief Contructs the \c DScalarGrid instance.
-    # \param m 
-    # \param n 
-    # \param o 
-    # \param v 
+    # \brief Constructs a scalar grid of size <em>m&times;n&times;o</em> in which every element equals <em>v</em>.
+    # 
+    # \param m The first-axis size.
+    # \param n The second-axis size.
+    # \param o The third-axis size.
+    # \param v The common element value.
     # 
     def __init__(m: int, n: int, o: int, v: float = 0.0) -> None: pass
 
+    ##
+    # \brief Resizes the grid axes to (<em>m</em>, <em>n</em>, <em>o</em>).
+    # 
+    # \param m The new first-axis size.
+    # \param n The new second-axis size.
+    # \param o The new third-axis size.
+    # 
     def resize(m: int, n: int, o: int) -> None: pass
 
     ##
@@ -58,39 +66,136 @@ class DScalarGrid(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the first-axis size.
+    # 
+    # \return The size along the first axis.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the second-axis size.
+    # 
+    # \return The size along the second axis.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Returns the third-axis size.
+    # 
+    # \return The size along the third axis.
+    # 
     def getSize3() -> int: pass
 
+    ##
+    # \brief Tells whether the grid is empty (any axis has zero size).
+    # 
+    # \return <tt>True</tt> if any axis is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def getElement(i: int, j: int, k: int) -> float: pass
 
+    ##
+    # \brief Returns the element at linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def getElement(i: int) -> float: pass
 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+    # 
+    # \return The total number of elements.
+    # 
     def getSize() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c DScalarGrid instance \a g.
-    # \param g The \c DScalarGrid instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the axis sizes and common value from <em>g</em>.
+    # 
+    # \param g The source scalar grid.
+    # 
+    # \return \a self.
     # 
     def assign(g: DScalarGrid) -> DScalarGrid: pass
 
+    ##
+    # \brief Swaps the axis sizes and common value with <em>g</em>.
+    # 
+    # \param g The scalar grid to swap with.
+    # 
     def swap(g: DScalarGrid) -> None: pass
 
+    ##
+    # \brief Returns the common element value.
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return A reference to the common element value. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __call__(i: int, j: int, k: int) -> float: pass
 
+    ##
+    # \brief Returns the common element value.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return A reference to the common element value. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __getitem__(ijk: tuple) -> float: pass
 
+    ##
+    # \brief Returns the element at linear index <em>i</em>.
+    # 
+    # \param i The zero-based linear index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+    # 
+    # \return The total number of elements.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -127,8 +232,16 @@ class DScalarGrid(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> DScalarGrid: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDGridExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDGridExpression: pass
 
     ##

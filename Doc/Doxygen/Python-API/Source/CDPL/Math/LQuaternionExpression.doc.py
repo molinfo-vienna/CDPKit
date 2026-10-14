@@ -20,10 +20,8 @@
 #
 
 ##
-# \brief CRTP base class of all quaternion expression types.
-# 
-# Provides downcast access to the concrete derived expression class instance via the function call operator.
-# 
+# \brief 
+#
 class LQuaternionExpression(ConstLQuaternionExpression):
 
     def swap(e: LQuaternionExpression) -> None: pass
@@ -144,28 +142,43 @@ class LQuaternionExpression(ConstLQuaternionExpression):
     def __imul__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c LQuaternionExpression instance \a self.
     # 
     def __idiv__(t: int) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= e</tt>.
+    # \brief Performs the in-place division operation <tt>self //= e</tt>.
     # \param e Specifies the divisor.
     # \return The updated \c LQuaternionExpression instance \a self.
     # 
     def __idiv__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= q</tt>.
+    # \brief Performs the in-place division operation <tt>self //= q</tt>.
     # \param q Specifies the divisor.
     # \return The updated \c LQuaternionExpression instance \a self.
     # 
     def __idiv__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c LQuaternionExpression instance \a self.
+    # 
     def __itruediv__(t: int) -> LQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= e</tt>.
+    # \param e Specifies the divisor.
+    # \return The updated \c LQuaternionExpression instance \a self.
+    # 
     def __itruediv__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
+    # \param q Specifies the divisor.
+    # \return The updated \c LQuaternionExpression instance \a self.
+    # 
     def __itruediv__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass

@@ -20,10 +20,8 @@
 #
 
 ##
-# \brief CRTP base class of all quaternion expression types.
-# 
-# Provides downcast access to the concrete derived expression class instance via the function call operator.
-# 
+# \brief 
+#
 class ConstULQuaternionExpression(Boost.Python.instance):
 
     ##
@@ -68,8 +66,16 @@ class ConstULQuaternionExpression(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ConstULQuaternionExpression: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULQuaternionExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULQuaternionExpression: pass
 
     ##

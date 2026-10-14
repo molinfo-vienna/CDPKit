@@ -25,19 +25,21 @@
 class ULRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c ULRealQuaternion instance.
+    # \brief Constructs a zero-valued real quaternion (<em>C1</em> = 0).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c ULRealQuaternion instance \a q.
-    # \param q The \c ULRealQuaternion instance to copy.
+    # \brief Constructs a copy of the real quaternion <em>q</em> (possibly converting the component type).
+    # 
+    # \param q The real quaternion to copy.
     # 
     def __init__(q: ULRealQuaternion) -> None: pass
 
     ##
-    # \brief Contructs the \c ULRealQuaternion instance.
-    # \param r 
+    # \brief Constructs the real quaternion with the supplied real component.
+    # 
+    # \param r The real component value.
     # 
     def __init__(r: int) -> None: pass
 
@@ -55,83 +57,140 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the real component <em>C1</em>.
+    # 
+    # \return A reference to <em>C1</em>.
+    # 
     def getC1() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C2</em> (always zero for a real quaternion).
+    # 
+    # \return A reference to the zero element.
+    # 
     def getC2() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C3</em> (always zero for a real quaternion).
+    # 
+    # \return A reference to the zero element.
+    # 
     def getC3() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C4</em> (always zero for a real quaternion).
+    # 
+    # \return A reference to the zero element.
+    # 
     def getC4() -> int: pass
 
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULRealQuaternion instance \a q.
-    # \param q The \c ULRealQuaternion instance to copy.
-    # \return \a self
+    # \brief Assigns the real component from <em>q</em> without intermediate temporary.
+    # 
+    # \param q The source real quaternion.
+    # 
+    # \return \a self.
     # 
     def assign(q: ULRealQuaternion) -> ULRealQuaternion: pass
 
+    ##
+    # \brief Swaps the real component value with <em>q</em>.
+    # 
+    # \param q The real quaternion to swap with.
+    # 
     def swap(q: ULRealQuaternion) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param t Specifies the second addend.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Adds the scalar <em>t</em> to the real component.
+    # 
+    # \param t The scalar addend.
+    # 
+    # \return \a self.
     # 
     def __iadd__(t: int) -> ULRealQuaternion: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param q Specifies the second addend.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Adds the real component of <em>q</em> to this quaternion's real component.
+    # 
+    # \param q The source real quaternion.
+    # 
+    # \return \a self.
     # 
     def __iadd__(q: object) -> ULRealQuaternion: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param t Specifies the subtrahend.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Subtracts the scalar <em>t</em> from the real component.
+    # 
+    # \param t The scalar subtrahend.
+    # 
+    # \return \a self.
     # 
     def __isub__(t: int) -> ULRealQuaternion: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param q Specifies the subtrahend.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Subtracts the real component of <em>q</em> from this quaternion's real component.
+    # 
+    # \param q The source real quaternion.
+    # 
+    # \return \a self.
     # 
     def __isub__(q: object) -> ULRealQuaternion: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Multiplies the real component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULRealQuaternion: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param q Specifies the multiplier.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Multiplies the real component by the real component of <em>q</em>.
+    # 
+    # \param q The source real quaternion.
+    # 
+    # \return \a self.
     # 
     def __imul__(q: object) -> ULRealQuaternion: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Divides the real component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULRealQuaternion: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c ULRealQuaternion instance \a self.
+    # \brief Divides the real component by the real component of <em>q</em>.
+    # 
+    # \param q The source real quaternion.
+    # 
+    # \return \a self.
     # 
     def __idiv__(q: object) -> ULRealQuaternion: pass
 
+    ##
+    # \brief Divides the real component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: int) -> ULRealQuaternion: pass
 
+    ##
+    # \brief Divides the real component by the real component of <em>q</em>.
+    # 
+    # \param q The source real quaternion.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(q: object) -> ULRealQuaternion: pass
 
     ##
@@ -168,8 +227,16 @@ class ULRealQuaternion(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> ULRealQuaternion: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstULQuaternionExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstULQuaternionExpression: pass
 
     ##

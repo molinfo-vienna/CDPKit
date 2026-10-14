@@ -20,10 +20,8 @@
 #
 
 ##
-# \brief CRTP base class of all grid expression types.
-# 
-# Provides downcast access to the concrete derived expression class instance via the function call operator.
-# 
+# \brief 
+#
 class DGridExpression(ConstDGridExpression):
 
     def swap(e: DGridExpression) -> None: pass
@@ -96,10 +94,15 @@ class DGridExpression(ConstDGridExpression):
     def __imul__(t: float) -> DGridExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c DGridExpression instance \a self.
     # 
     def __idiv__(t: float) -> DGridExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c DGridExpression instance \a self.
+    # 
     def __itruediv__(t: float) -> DGridExpression: pass

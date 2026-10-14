@@ -1,3 +1,15 @@
+.__neg__
+\brief Negates each element and returns the result.
+\param @A0@ The \c @CN@ instance.
+\return A \c @RT@ instance holding the result of the element negation.
+$$$$
+
+.__pos__
+\brief Returns \a self.
+\param @A0@ The \c @CN@ instance.
+\return \a self.
+$$$$
+
 #
 # --- Unresolved property getter/setter functions ---
 #

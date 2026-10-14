@@ -20,10 +20,8 @@
 #
 
 ##
-# \brief CRTP base class of all vector expression types.
-# 
-# Provides downcast access to the concrete derived expression class instance via the function call operator.
-# 
+# \brief 
+#
 class FVectorExpression(ConstFVectorExpression):
 
     def swap(e: FVectorExpression) -> None: pass
@@ -110,10 +108,15 @@ class FVectorExpression(ConstFVectorExpression):
     def __imul__(t: float) -> FVectorExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c FVectorExpression instance \a self.
     # 
     def __idiv__(t: float) -> FVectorExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c FVectorExpression instance \a self.
+    # 
     def __itruediv__(t: float) -> FVectorExpression: pass

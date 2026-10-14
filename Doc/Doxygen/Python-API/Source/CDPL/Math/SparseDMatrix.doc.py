@@ -30,9 +30,9 @@ class SparseDMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Move-constructs a sparse matrix from <em>m</em> (<em>m</em> is left in a valid empty state).
+    # \brief Constructs a copy of the sparse matrix <em>m</em>.
     # 
-    # \param m The sparse matrix to move from.
+    # \param m The sparse matrix to copy.
     # 
     def __init__(m: SparseDMatrix) -> None: pass
 
@@ -47,26 +47,38 @@ class SparseDMatrix(Boost.Python.instance):
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseDMatrix instance.
-    # \param e 
+    # \brief Constructs a sparse matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \throw Base.SizeError if the dimensions of <em>e</em> exceed the underlying container's capacity.
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseDMatrix instance.
-    # \param e 
+    # \brief Constructs a sparse matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \throw Base.SizeError if the dimensions of <em>e</em> exceed the underlying container's capacity.
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseDMatrix instance.
-    # \param e 
+    # \brief Constructs a sparse matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \throw Base.SizeError if the dimensions of <em>e</em> exceed the underlying container's capacity.
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseDMatrix instance.
-    # \param e 
+    # \brief Constructs a sparse matrix from the matrix expression <em>e</em>.
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \throw Base.SizeError if the dimensions of <em>e</em> exceed the underlying container's capacity.
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
@@ -147,9 +159,9 @@ class SparseDMatrix(Boost.Python.instance):
     def assign(e: ConstULMatrixExpression) -> SparseDMatrix: pass
 
     ##
-    # \brief Move-assigns the contents of <em>m</em> to this sparse matrix.
+    # \brief Copy-assigns the contents of <em>m</em> to this sparse matrix.
     # 
-    # \param m The source sparse matrix (left in a valid but unspecified state).
+    # \param m The source sparse matrix.
     # 
     # \return \a self.
     # 
@@ -246,8 +258,16 @@ class SparseDMatrix(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> SparseDMatrix: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstDMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstDMatrixExpression: pass
 
     ##
@@ -358,6 +378,13 @@ class SparseDMatrix(Boost.Python.instance):
     # 
     def __idiv__(t: float) -> SparseDMatrix: pass
 
+    ##
+    # \brief Divides every stored entry by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
+    # 
     def __itruediv__(t: float) -> SparseDMatrix: pass
 
     objectID = property(getObjectID)

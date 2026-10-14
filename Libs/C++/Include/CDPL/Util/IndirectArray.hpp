@@ -129,13 +129,13 @@ namespace CDPL
             /**
              * \brief Creates and initializes the array with \a num_elem copies of \a ptr.
              * \param num_elem The size of the created array.
-             * \param ptr The value with which each pointer element of the array will be initialized.
+             * \param ptr The value with which each element of the array will be initialized.
              */
             IndirectArray(std::size_t num_elem, const PointerType& ptr = PointerType()):
                 BaseType(num_elem, ptr) {}
 
             /**
-             * \brief Creates and initializes the array with copies of the pointers in the
+             * \brief Creates and initializes the array with copies of the elements in the
              *        range <em>[first, last)</em>.
              * \param first The start of the range.
              * \param last The end of the range.
@@ -155,7 +155,7 @@ namespace CDPL
             /**
              * \brief Inserts a new element before the location specified by the iterator \a it.
              * \param it The location where to insert the new element.
-             * \param ptr The value of pointer element to insert.
+             * \param ptr The value of element to insert.
              * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd()].
              */
             ElementIterator insertElement(const ElementIterator& it, const PointerType& ptr);
@@ -164,17 +164,17 @@ namespace CDPL
 
             /**
              * \brief Inserts \a num_elem copies of \a ptr before the location specified by the iterator \a it.
-             * \param it The location where to insert the new pointers.
+             * \param it The location where to insert the new elements.
              * \param num_elem The number of pointers to insert.
-             * \param ptr The value of the pointer elements to insert.
+             * \param ptr The value of the elements to insert.
              * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd()].
              */
             void insertElements(const ElementIterator& it, std::size_t num_elem, const PointerType& ptr);
 
             /**
-             * \brief Inserts the range of pointers <em>[first, last)</em> before the location specified by the
+             * \brief Inserts the range of elements <em>[first, last)</em> before the location specified by the
              *        iterator \a it.
-             * \param it The location where to insert the new pointer elements.
+             * \param it The location where to insert the new elements.
              * \param first The start of the range.
              * \param last The end of the range.
              * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd()].
@@ -185,9 +185,9 @@ namespace CDPL
             using BaseType::removeElement;
 
             /**
-             * \brief Removes the element at the position specified by the iterator \a it.
-             * \param it The iterator specifying the pointer to remove.
-             * \return An iterator pointing to the position of the pointer element immediately 
+             * \brief Removes the element specified by the iterator \a it.
+             * \param it The iterator specifying the element to remove.
+             * \return An iterator pointing to the location of the element immediately 
              *         following the one that was removed.
              * \throw Base::RangeError if \a it is not in the range [getElementsBegin(), getElementsEnd()).
              */
@@ -196,10 +196,10 @@ namespace CDPL
             using BaseType::removeElements;
 
             /**
-             * \brief Removes the elements pointed to by the iterators in the range <em>[first, last)</em>.
+             * \brief Removes the elements specified by the iterators in the range <em>[first, last)</em>.
              * \param first The start of the range.
              * \param last The end of the range.
-             * \return An iterator pointing to the position of the pointer element immediately 
+             * \return An iterator pointing to the location of the element immediately 
              *         following the ones that were removed.
              * \throw Base::RangeError if \a first or \a last is not in the range
              *        [getElementsBegin(), getElementsEnd()] or \a last < \a first.
@@ -327,12 +327,12 @@ namespace CDPL
             ReverseElementIterator getElementsReverseEnd();
 
             /**
-             * \brief Returns a \c const reference to the object pointed-to by the pointer
+             * \brief Returns a \c const reference to the object pointed-to by the
              *        element at index \a idx.
              *
              * The method is equivalent to operator[](std::size_t) const.
              *
-             * \param idx The zero-based index of the pointer element.
+             * \param idx The zero-based index of the element.
              * \return A \c const reference to the pointed-to object.
              * \throw Base::IndexError if \a idx is not in the range [0, getSize()). 
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.
@@ -340,12 +340,12 @@ namespace CDPL
             const ValueType& getElement(std::size_t idx) const;
 
             /**
-             * \brief Returns a non-\c const reference to the object pointed-to by the pointer
+             * \brief Returns a non-\c const reference to the object pointed-to by the
              *        element at index \a idx.
              *
              * The method is equivalent to operator[](std::size_t) const.
              *
-             * \param idx The zero-based index of the pointer element.
+             * \param idx The zero-based index of the element.
              * \return A non-\c const reference to the pointed-to object.
              * \throw Base::IndexError if \a idx is not in the range [0, getSize()). 
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.
@@ -353,9 +353,9 @@ namespace CDPL
             ValueType& getElement(std::size_t idx);
 
             /**
-             * \brief Returns a \c const reference to the object pointed-to by the pointer
+             * \brief Returns a \c const reference to the object pointed-to by the
              *        element at index \a idx.
-             * \param idx The zero-based index of the pointer element.
+             * \param idx The zero-based index of the element.
              * \return A \c const reference to the pointed-to object.
              * \throw Base::IndexError if \a idx is not in the range [0, getSize()). 
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.
@@ -364,8 +364,8 @@ namespace CDPL
 
             /**
              * \brief Returns a non-\c const reference to the object pointed-to by the
-             *        pointer element at index \a idx.
-             * \param idx The zero-based index of the pointer element.
+             *        element at index \a idx.
+             * \param idx The zero-based index of the element.
              * \return A non-\c const reference to the pointed-to object.
              * \throw Base::IndexError if \a idx is not in the range [0, getSize()).  
              *        Base::NullPointerException if \e null pointer checking is enabled and the object pointer is \e null.

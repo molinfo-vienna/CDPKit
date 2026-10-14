@@ -20,10 +20,8 @@
 #
 
 ##
-# \brief CRTP base class of all matrix expression types.
-# 
-# Provides downcast access to the concrete derived expression class instance via the function call operator.
-# 
+# \brief 
+#
 class LMatrixExpression(ConstLMatrixExpression):
 
     def swap(e: LMatrixExpression) -> None: pass
@@ -110,10 +108,15 @@ class LMatrixExpression(ConstLMatrixExpression):
     def __imul__(t: int) -> LMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
     # \param t Specifies the divisor.
     # \return The updated \c LMatrixExpression instance \a self.
     # 
     def __idiv__(t: int) -> LMatrixExpression: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c LMatrixExpression instance \a self.
+    # 
     def __itruediv__(t: int) -> LMatrixExpression: pass

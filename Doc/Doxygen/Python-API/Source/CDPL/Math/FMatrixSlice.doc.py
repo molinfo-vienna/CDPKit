@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief Matrix expression proxy that views a strided rectangular slice of an underlying matrix.
-# 
+# \brief 
+#
 class FMatrixSlice(Boost.Python.instance):
 
     ##
@@ -38,32 +38,12 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     def __init__(e: FMatrixExpression, s1: Slice, s2: Slice) -> None: pass
 
-    ##
-    # \brief Returns the row slice's start index in the wrapped matrix.
-    # 
-    # \return The start row index.
-    # 
     def getStart1() -> int: pass
 
-    ##
-    # \brief Returns the column slice's start index in the wrapped matrix.
-    # 
-    # \return The start column index.
-    # 
     def getStart2() -> int: pass
 
-    ##
-    # \brief Returns the row slice's stride in the wrapped matrix.
-    # 
-    # \return The row stride.
-    # 
     def getStride1() -> int: pass
 
-    ##
-    # \brief Returns the column slice's stride in the wrapped matrix.
-    # 
-    # \return The column stride.
-    # 
     def getStride2() -> int: pass
 
     ##
@@ -79,47 +59,37 @@ class FMatrixSlice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
+    # \param e The \c ConstFMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
+    # \param e The \c ConstDMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
+    # \param e The \c ConstLMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix slice without intermediate temporary.
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
+    # \param e The \c ConstULMatrixExpression instance to copy.
+    # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief Copy-assigns the contents of <em>s</em> to this matrix slice (via a temporary to handle aliasing).
-    # 
-    # \param s The source matrix slice.
-    # 
-    # \return \a self.
+    # \brief Replaces the current state with a copy of the state of the \c FMatrixSlice instance \a s.
+    # \param s The \c FMatrixSlice instance to copy.
+    # \return \a self
     # 
     def assign(s: FMatrixSlice) -> FMatrixSlice: pass
 
@@ -130,55 +100,22 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     def assign(a: object) -> None: pass
 
-    ##
-    # \brief Returns the number of rows in the proxy (size of the row slice).
-    # 
-    # \return The number of rows.
-    # 
     def getSize1() -> int: pass
 
-    ##
-    # \brief Returns the number of columns in the proxy (size of the column slice).
-    # 
-    # \return The number of columns.
-    # 
     def getSize2() -> int: pass
 
-    ##
-    # \brief Tells whether the proxy is empty (either slice has size zero).
-    # 
-    # \return <tt>True</tt> if either slice has zero size, and <tt>False</tt> otherwise.
-    # 
     def isEmpty() -> bool: pass
 
     def getElement(i: int, j: int) -> float: pass
 
     def toArray() -> object: pass
 
-    ##
-    # \brief Swaps the contents of this matrix slice with those of <em>s</em> (via element-wise swap of the underlying matrix elements).
-    # 
-    # \param s The matrix slice to swap with.
-    # 
     def swap(s: FMatrixSlice) -> None: pass
 
     def setElement(i: int, j: int, v: float) -> None: pass
 
-    ##
-    # \brief Returns the wrapped matrix (via its stored closure).
-    # 
-    # \return A reference to the wrapped matrix closure.
-    # 
     def getData() -> FMatrixExpression: pass
 
-    ##
-    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
-    # 
-    # \param i The zero-based proxy row index.
-    # \param j The zero-based proxy column index.
-    # 
-    # \return A reference to the underlying element <tt>m(s1(i), s2(j))</tt>.
-    # 
     def __call__(i: int, j: int) -> float: pass
 
     def __getitem__(ij: tuple) -> float: pass
@@ -219,8 +156,16 @@ class FMatrixSlice(Boost.Python.instance):
     # 
     def __str__() -> str: pass
 
+    ##
+    # \brief Returns \a self.
+    # \return \a self.
+    # 
     def __pos__() -> FMatrixSlice: pass
 
+    ##
+    # \brief Negates each element and returns the result.
+    # \return A \c ConstFMatrixExpression instance holding the result of the element negation.
+    # 
     def __neg__() -> ConstFMatrixExpression: pass
 
     ##
@@ -289,11 +234,9 @@ class FMatrixSlice(Boost.Python.instance):
     def __iadd__(s: FMatrixSlice) -> FMatrixSlice: pass
 
     ##
-    # \brief Adds the elements of the matrix expression <em>e</em> to this matrix slice (via a temporary to handle aliasing).
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param e Specifies the second addend.
+    # \return The updated \c FMatrixSlice instance \a self.
     # 
     def __iadd__(e: ConstFMatrixExpression) -> FMatrixSlice: pass
 
@@ -305,32 +248,31 @@ class FMatrixSlice(Boost.Python.instance):
     def __isub__(s: FMatrixSlice) -> FMatrixSlice: pass
 
     ##
-    # \brief Subtracts the elements of the matrix expression <em>e</em> from this matrix slice (via a temporary to handle aliasing).
-    # 
-    # \param e The source matrix expression.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param e Specifies the subtrahend.
+    # \return The updated \c FMatrixSlice instance \a self.
     # 
     def __isub__(e: ConstFMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief Multiplies every element of this matrix slice by the scalar <em>t</em>.
-    # 
-    # \param t The scalar multiplier.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param t Specifies the multiplier.
+    # \return The updated \c FMatrixSlice instance \a self.
     # 
     def __imul__(t: float) -> FMatrixSlice: pass
 
     ##
-    # \brief Divides every element of this matrix slice by the scalar <em>t</em>.
-    # 
-    # \param t The scalar divisor.
-    # 
-    # \return \a self.
+    # \brief Performs the in-place division operation <tt>self //= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c FMatrixSlice instance \a self.
     # 
     def __idiv__(t: float) -> FMatrixSlice: pass
 
+    ##
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
+    # \param t Specifies the divisor.
+    # \return The updated \c FMatrixSlice instance \a self.
+    # 
     def __itruediv__(t: float) -> FMatrixSlice: pass
 
     objectID = property(getObjectID)
