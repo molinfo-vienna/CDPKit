@@ -96,6 +96,11 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ULHomogenousCoordsAdapter instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def swap(r: ULHomogenousCoordsAdapter) -> None: pass
@@ -151,7 +156,7 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     def __pos__() -> ULHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULVectorExpression: pass

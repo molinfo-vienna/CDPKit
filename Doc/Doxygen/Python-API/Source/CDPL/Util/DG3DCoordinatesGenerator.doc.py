@@ -45,9 +45,11 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         def __getitem__(idx: int) -> VolumeConstraint: pass
 
         ##
-        # \brief Deletes the constraint at index \a idx.
-        # \param idx The zero-based constraint index.
-        # \throw Base.IndexError if \a idx is not in the range [0, __len__()).
+        # \brief Removes the element at index <em>idx</em>.
+        # 
+        # \param idx The zero-based index of the element to remove.
+        # 
+        # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
         # 
         def __delitem__(idx: int) -> None: pass
 
@@ -169,9 +171,11 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         def __getitem__(idx: int) -> DistanceConstraint: pass
 
         ##
-        # \brief Deletes the constraint at index \a idx.
-        # \param idx The zero-based constraint index.
-        # \throw Base.IndexError if \a idx is not in the range [0, __len__()).
+        # \brief Removes the element at index <em>idx</em>.
+        # 
+        # \param idx The zero-based index of the element to remove.
+        # 
+        # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
         # 
         def __delitem__(idx: int) -> None: pass
 

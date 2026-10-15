@@ -59,8 +59,23 @@ class ULTranslationMatrix(Boost.Python.instance):
 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def getElement(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ULTranslationMatrix instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -74,8 +89,23 @@ class ULTranslationMatrix(Boost.Python.instance):
 
     def __call__(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __getitem__(ij: tuple) -> int: pass
 
+    ##
+    # \brief Returns the number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -119,7 +149,7 @@ class ULTranslationMatrix(Boost.Python.instance):
     def __pos__() -> ULTranslationMatrix: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULMatrixExpression: pass

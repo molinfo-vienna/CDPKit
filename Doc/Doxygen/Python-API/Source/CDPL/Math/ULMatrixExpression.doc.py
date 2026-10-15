@@ -27,37 +27,47 @@ class ULMatrixExpression(ConstULMatrixExpression):
     def swap(e: ULMatrixExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULMatrixExpression instance \a e.
-    # \param e The \c ULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
-    # \param e The \c ConstFMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
-    # \param e The \c ConstDMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
-    # \param e The \c ConstLMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
-    # \param e The \c ConstULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> ULMatrixExpression: pass
 
@@ -68,55 +78,82 @@ class ULMatrixExpression(ConstULMatrixExpression):
     # 
     def assign(a: object) -> None: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j) to \a v.
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def setElement(i: int, j: int, v: int) -> None: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j to \a v.
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c ULMatrixExpression instance \a self.
+    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c ULMatrixExpression instance \a self.
+    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c ULMatrixExpression instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c ULMatrixExpression instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c ULMatrixExpression instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULMatrixExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULMatrixExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> ULMatrixExpression: pass

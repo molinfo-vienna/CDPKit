@@ -329,8 +329,6 @@ def processCXXAPIDocFile(file_path, api_doc_db):
 
                 if comp_name_uq == mem_name:
                     mem_name = '__init__'
-                elif mem_name == 'operator=':
-                    mem_name = 'assign'
                 elif mem_name == 'operator<':
                     mem_name = '__lt__'
                 elif mem_name == 'operator>':

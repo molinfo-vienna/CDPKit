@@ -85,10 +85,15 @@ class DRealQuaternion(Boost.Python.instance):
     # 
     def getC4() -> float: pass
 
+    ##
+    # \brief Converts the \c DRealQuaternion instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
-    # \brief Assigns the real component from <em>q</em> without intermediate temporary.
+    # \brief Assigns the real component from <em>q</em> (possibly converting the component type).
     # 
     # \param q The source real quaternion.
     # 
@@ -234,7 +239,7 @@ class DRealQuaternion(Boost.Python.instance):
     def __pos__() -> DRealQuaternion: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstDQuaternionExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstDQuaternionExpression: pass

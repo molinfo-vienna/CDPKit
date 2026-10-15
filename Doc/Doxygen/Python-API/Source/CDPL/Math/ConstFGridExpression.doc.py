@@ -36,22 +36,85 @@ class ConstFGridExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the first-axis size.
+    # 
+    # \return The size along the first axis.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the second-axis size.
+    # 
+    # \return The size along the second axis.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Returns the third-axis size.
+    # 
+    # \return The size along the third axis.
+    # 
     def getSize3() -> int: pass
 
+    ##
+    # \brief Tells whether the grid is empty.
+    # 
+    # \return <tt>True</tt> if the underlying storage holds no elements, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def getElement(i: int, j: int, k: int) -> float: pass
 
+    ##
+    # \brief Converts the \c ConstFGridExpression instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __call__(i: int, j: int, k: int) -> float: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # 
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __getitem__(ijk: tuple) -> float: pass
 
+    ##
+    # \brief Returns the total element count \f$ \mathrm{size}_1 \cdot \mathrm{size}_2 \cdot \mathrm{size}_3 \f$.
+    # 
+    # \return The total number of elements.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -81,7 +144,7 @@ class ConstFGridExpression(Boost.Python.instance):
     def __pos__() -> ConstFGridExpression: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstFGridExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstFGridExpression: pass

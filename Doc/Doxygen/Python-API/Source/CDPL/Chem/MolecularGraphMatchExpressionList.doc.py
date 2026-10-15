@@ -102,9 +102,9 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def assign(array: MolecularGraphMatchExpressionList) -> MolecularGraphMatchExpressionList: pass
 
     ##
-    # \brief This function fills the list with <em>num_elem</em> copies of the given <em>value</em>.
+    # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.
     # 
-    # Note that the assignment completely changes the list and the new size is the same as the number of elements assigned. Old data will be lost.
+    # Note that the assignment completely changes the array and the new size is the same as the number of elements assigned. Old data will be lost.
     # 
     # \param num_elem The number of elements to be assigned.
     # \param value The value to be assigned.
@@ -118,6 +118,10 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     def addElement(value: MolecularGraphMatchExpression) -> None: pass
 
+    ##
+    # \brief Adds the elements of \a values to the end of the list.
+    # \param values The \c MolecularGraphMatchExpressionList instance providing the elements to add.
+    # 
     def addElements(values: MolecularGraphMatchExpressionList) -> None: pass
 
     ##
@@ -141,6 +145,12 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     def insertElements(idx: int, num_elem: int, value: MolecularGraphMatchExpression) -> None: pass
 
+    ##
+    # \brief Insert the elements of \a values before the location specified by the index \a idx.
+    # \param idx The zero-based insertion index.
+    # \param values The \c MolecularGraphMatchExpressionList instance providing the elements to insert.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()].
+    # 
     def insertElements(idx: int, values: MolecularGraphMatchExpressionList) -> None: pass
 
     ##
@@ -159,6 +169,13 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     def removeElement(idx: int) -> None: pass
 
+    ##
+    # \brief Removes the elements at indices in the range <em>[begin_idx, end_idx)</em>.
+    # \param begin_idx The zero-based index range start.
+    # \param end_idx The zero-based index range end.
+    # \throw Base.IndexError if \a begin_idx or \a end_idx is not in the range
+    #        [0, getSize()] or \a end_idx < \a begin_idx.
+    # 
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
@@ -202,6 +219,13 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     def setElement(idx: int, value: MolecularGraphMatchExpression) -> None: pass
 
+    ##
+    # \brief Removes the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __delitem__(idx: int) -> None: pass
 
     ##
@@ -222,6 +246,14 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     # 
     def __len__() -> int: pass
 
+    ##
+    # \brief Assigns a new value to the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # \param value The new value of the element after assignment.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __setitem__(idx: int, value: MolecularGraphMatchExpression) -> None: pass
 
     ##

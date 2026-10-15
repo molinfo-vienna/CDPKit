@@ -44,6 +44,11 @@ class ConstFQuaternionExpression(Boost.Python.instance):
 
     def getC4() -> float: pass
 
+    ##
+    # \brief Converts the \c ConstFQuaternionExpression instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -73,7 +78,7 @@ class ConstFQuaternionExpression(Boost.Python.instance):
     def __pos__() -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstFQuaternionExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstFQuaternionExpression: pass

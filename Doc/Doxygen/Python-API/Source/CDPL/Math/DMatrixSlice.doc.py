@@ -108,6 +108,11 @@ class DMatrixSlice(Boost.Python.instance):
 
     def getElement(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Converts the \c DMatrixSlice instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def swap(s: DMatrixSlice) -> None: pass
@@ -163,7 +168,7 @@ class DMatrixSlice(Boost.Python.instance):
     def __pos__() -> DMatrixSlice: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstDMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstDMatrixExpression: pass

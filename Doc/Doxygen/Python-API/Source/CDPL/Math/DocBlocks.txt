@@ -1,5 +1,5 @@
 .__neg__
-\brief Negates each element and returns the result.
+\brief Returns the result of the operation <tt>self * -1</tt>.
 \param @A0@ The \c @CN@ instance.
 \return A \c @RT@ instance holding the result of the element negation.
 $$$$
@@ -8,6 +8,125 @@ $$$$
 \brief Returns \a self.
 \param @A0@ The \c @CN@ instance.
 \return \a self.
+$$$$
+
+# ---
+
+Grid.setElement(i,j,k,v)
+\brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+\param i The zero-based first-axis index.
+\param j The zero-based second-axis index.
+\param k The zero-based third-axis index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+Grid.setElement(i,v)
+\brief Sets the value of the element at linear index \a i to \a v.
+\param i The zero-based linear index.
+\param v The new value of the element.
+$$$$
+
+Grid.__setitem__(ijk,v)
+\brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+\param i The zero-based first-axis index.
+\param j The zero-based second-axis index.
+\param k The zero-based third-axis index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+Grid.__setitem__(i,v)
+\brief Sets the value of the element at linear index \a i to \a v.
+\param i The zero-based linear index.
+\param v The new value of the element.
+$$$$
+
+# ---
+
+GridExpression.setElement(i,j,k,v)
+\brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+\param i The zero-based first-axis index.
+\param j The zero-based second-axis index.
+\param k The zero-based third-axis index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+GridExpression.__setitem__(ijk,v)
+\brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+\param i The zero-based first-axis index.
+\param j The zero-based second-axis index.
+\param k The zero-based third-axis index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+# ---
+
+Matrix.setElement(i,j,v)
+\brief Sets the value of the element (\a i, \a j) to \a v.
+\param i The zero-based row index.
+\param j The zero-based column index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+Matrix.__setitem__(ij,v)
+\brief Sets the value of the element (\a i, \a j) to \a v.
+\param i The zero-based row index.
+\param j The zero-based column index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+# ---
+
+MatrixExpression.setElement(i,j,v)
+\brief Sets the value of the element (\a i, \a j) to \a v.
+\param i The zero-based row index.
+\param j The zero-based column index.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+MatrixExpression.__setitem__(ij,v)
+\brief Sets the value of the element (\a i, \a j to \a v.
+\param i The zero-based row index.
+\param j The zero-based column index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+# ---
+
+Vector.setElement(i,v)
+\brief Sets the value of the element at index \a i to \a v.
+\param i The zero-based element index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+Vector.__setitem__(i,v)
+\brief Sets the value of the element at index \a i to \a v.
+\param i The zero-based element index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+# ---
+
+VectorExpression.setElement(i,v)
+\brief Sets the value of the element at index \a i to \a v.
+\param i The zero-based element index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+VectorExpression.__setitem__(i,v)
+\brief Sets the value of the element at index \a i to \a v.
+\param i The zero-based element index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
 $$$$
 
 #

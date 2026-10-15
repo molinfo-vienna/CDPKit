@@ -25,23 +25,31 @@
 class ULZeroMatrix(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c ULZeroMatrix instance.
+    # \brief Constructs an empty zero matrix.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c ULZeroMatrix instance \a m.
-    # \param m The \c ULZeroMatrix instance to copy.
+    # \brief Constructs a copy of the zero matrix <em>m</em>.
+    # 
+    # \param m The zero matrix to copy.
     # 
     def __init__(m: ULZeroMatrix) -> None: pass
 
     ##
-    # \brief Contructs the \c ULZeroMatrix instance.
-    # \param m 
-    # \param n 
+    # \brief Constructs a zero matrix of size <em>m&times;n</em>.
+    # 
+    # \param m The number of rows.
+    # \param n The number of columns.
     # 
     def __init__(m: int, n: int) -> None: pass
 
+    ##
+    # \brief Resizes the dimensions to <em>m&times;n</em>.
+    # 
+    # \param m The new row count.
+    # \param n The new column count.
+    # 
     def resize(m: int, n: int) -> None: pass
 
     ##
@@ -56,29 +64,91 @@ class ULZeroMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the logical number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the logical number of columns.
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the matrix is empty (either dimension is zero).
+    # 
+    # \return <tt>True</tt> if either dimension is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def getElement(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ULZeroMatrix instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULZeroMatrix instance \a m.
-    # \param m The \c ULZeroMatrix instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the dimensions from <em>m</em>.
+    # 
+    # \param m The source zero matrix.
+    # 
+    # \return \a self.
     # 
     def assign(m: ULZeroMatrix) -> ULZeroMatrix: pass
 
+    ##
+    # \brief Swaps the dimensions with <em>m</em>.
+    # 
+    # \param m The zero matrix to swap with.
+    # 
     def swap(m: ULZeroMatrix) -> None: pass
 
+    ##
+    # \brief Returns the zero element.
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return A reference to the zero element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __call__(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __getitem__(ij: tuple) -> int: pass
 
+    ##
+    # \brief Returns the number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -122,7 +192,7 @@ class ULZeroMatrix(Boost.Python.instance):
     def __pos__() -> ULZeroMatrix: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULMatrixExpression: pass

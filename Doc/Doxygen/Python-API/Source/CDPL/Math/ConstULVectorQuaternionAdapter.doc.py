@@ -56,6 +56,11 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     def getC4() -> int: pass
 
+    ##
+    # \brief Converts the \c ConstULVectorQuaternionAdapter instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def getData() -> ConstULVectorExpression: pass
@@ -101,7 +106,7 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     def __pos__() -> ConstULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULQuaternionExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULQuaternionExpression: pass

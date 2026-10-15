@@ -27,82 +27,120 @@ class FGridExpression(ConstFGridExpression):
     def swap(e: FGridExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c FGridExpression instance \a e.
-    # \param e The \c FGridExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: FGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFGridExpression instance \a e.
-    # \param e The \c ConstFGridExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDGridExpression instance \a e.
-    # \param e The \c ConstDGridExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a e.
-    # \param e The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: object) -> FGridExpression: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __setitem__(ijk: tuple, v: float) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c FGridExpression instance \a self.
+    # \brief Adds the grid expression <em>e</em> element-wise to this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: FGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c FGridExpression instance \a self.
+    # \brief Adds the grid expression <em>e</em> element-wise to this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c FGridExpression instance \a self.
+    # \brief Subtracts the grid expression <em>e</em> element-wise from this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: FGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c FGridExpression instance \a self.
+    # \brief Subtracts the grid expression <em>e</em> element-wise from this grid (via a temporary to handle aliasing).
+    # 
+    # \param e The source grid expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c FGridExpression instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: float) -> FGridExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c FGridExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FGridExpression: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c FGridExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: float) -> FGridExpression: pass

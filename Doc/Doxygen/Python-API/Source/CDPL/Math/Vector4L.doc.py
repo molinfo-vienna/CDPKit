@@ -97,7 +97,7 @@ class Vector4L(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this fixed-size vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -106,7 +106,7 @@ class Vector4L(Boost.Python.instance):
     def assign(e: ConstFVectorExpression) -> Vector4L: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this fixed-size vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -115,7 +115,7 @@ class Vector4L(Boost.Python.instance):
     def assign(e: ConstDVectorExpression) -> Vector4L: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this fixed-size vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -124,7 +124,7 @@ class Vector4L(Boost.Python.instance):
     def assign(e: ConstLVectorExpression) -> Vector4L: pass
 
     ##
-    # \brief Assigns the elements of the vector expression <em>e</em> to this fixed-size vector without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this fixed-size vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -164,6 +164,11 @@ class Vector4L(Boost.Python.instance):
 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c Vector4L instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -245,7 +250,7 @@ class Vector4L(Boost.Python.instance):
     def __pos__() -> Vector4L: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstLVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstLVectorExpression: pass

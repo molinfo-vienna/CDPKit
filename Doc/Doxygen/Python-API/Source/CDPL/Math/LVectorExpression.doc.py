@@ -27,37 +27,47 @@ class LVectorExpression(ConstLVectorExpression):
     def swap(e: LVectorExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c LVectorExpression instance \a e.
-    # \param e The \c LVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
-    # \param e The \c ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
-    # \param e The \c ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
-    # \param e The \c ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
-    # \param e The \c ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LVectorExpression: pass
 
@@ -68,55 +78,81 @@ class LVectorExpression(ConstLVectorExpression):
     # 
     def assign(a: object) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i to \a v.
+    # \param i The zero-based element index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def setElement(i: int, v: int) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i to \a v.
+    # \param i The zero-based element index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c LVectorExpression instance \a self.
+    # \brief Adds the vector expression <em>e</em> element-wise to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c LVectorExpression instance \a self.
+    # \brief Adds the vector expression <em>e</em> element-wise to this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c LVectorExpression instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> element-wise from this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c LVectorExpression instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> element-wise from this vector (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c LVectorExpression instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> LVectorExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LVectorExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LVectorExpression: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LVectorExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> LVectorExpression: pass

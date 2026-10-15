@@ -118,6 +118,10 @@ class FragmentList(Boost.Python.instance):
     # 
     def addElement(value: Fragment) -> None: pass
 
+    ##
+    # \brief Adds the elements of \a values to the end of the list.
+    # \param values The \c FragmentList instance providing the elements to add.
+    # 
     def addElements(values: FragmentList) -> None: pass
 
     ##
@@ -141,6 +145,12 @@ class FragmentList(Boost.Python.instance):
     # 
     def insertElements(idx: int, num_elem: int, value: Fragment) -> None: pass
 
+    ##
+    # \brief Insert the elements of \a values before the location specified by the index \a idx.
+    # \param idx The zero-based insertion index.
+    # \param values The \c FragmentList instance providing the elements to insert.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()].
+    # 
     def insertElements(idx: int, values: FragmentList) -> None: pass
 
     ##
@@ -159,6 +169,13 @@ class FragmentList(Boost.Python.instance):
     # 
     def removeElement(idx: int) -> None: pass
 
+    ##
+    # \brief Removes the elements at indices in the range <em>[begin_idx, end_idx)</em>.
+    # \param begin_idx The zero-based index range start.
+    # \param end_idx The zero-based index range end.
+    # \throw Base.IndexError if \a begin_idx or \a end_idx is not in the range
+    #        [0, getSize()] or \a end_idx < \a begin_idx.
+    # 
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
@@ -202,6 +219,13 @@ class FragmentList(Boost.Python.instance):
     # 
     def setElement(idx: int, value: Fragment) -> None: pass
 
+    ##
+    # \brief Removes the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __delitem__(idx: int) -> None: pass
 
     ##
@@ -222,6 +246,14 @@ class FragmentList(Boost.Python.instance):
     # 
     def __len__() -> int: pass
 
+    ##
+    # \brief Assigns a new value to the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # \param value The new value of the element after assignment.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __setitem__(idx: int, value: Fragment) -> None: pass
 
     ##

@@ -54,6 +54,11 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ConstLHomogenousCoordsAdapter instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def getData() -> ConstLVectorExpression: pass
@@ -105,7 +110,7 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
     def __pos__() -> ConstLHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstLVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstLVectorExpression: pass

@@ -221,6 +221,14 @@ $$$$
 
 # ---
 
+.toArray()
+\brief Converts the \c @CN@ instance into a corresponding \e NumPy array.
+\return The generated \e NumPy array.
+\see [\ref NUMPY]
+$$$$
+
+# ---
+
 Stream.readline(size)
 \brief Reads one entire line.
 
@@ -373,14 +381,19 @@ Array.addElements(values)
 \param values The \c @CN@ instance providing the elements to add.
 $$$$
 
-Array.insertElements(idx,values)
+List.addElements(values)
+\brief Adds the elements of \a values to the end of the list.
+\param values The \c @CN@ instance providing the elements to add.
+$$$$
+
+.insertElements(idx,values)
 \brief Insert the elements of \a values before the location specified by the index \a idx.
 \param idx The zero-based insertion index.
 \param values The \c @CN@ instance providing the elements to insert.
 \throw Base.IndexError if \a idx is not in the range [0, getSize()].
 $$$$
 
-Array.removeElements(begin_idx,end_idx)
+.removeElements(begin_idx,end_idx)
 \brief Removes the elements at indices in the range <em>[begin_idx, end_idx)</em>.
 \param begin_idx The zero-based index range start.
 \param end_idx The zero-based index range end.

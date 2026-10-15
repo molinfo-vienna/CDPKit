@@ -108,6 +108,11 @@ class FMatrixSlice(Boost.Python.instance):
 
     def getElement(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Converts the \c FMatrixSlice instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def swap(s: FMatrixSlice) -> None: pass
@@ -163,7 +168,7 @@ class FMatrixSlice(Boost.Python.instance):
     def __pos__() -> FMatrixSlice: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstFMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstFMatrixExpression: pass

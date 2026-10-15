@@ -36,12 +36,36 @@ class ConstDVectorExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the vector is empty.
+    # 
+    # \return <tt>True</tt> if the vector contains no elements, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the current element count.
+    # 
+    # \return The number of elements.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def getElement(i: int) -> float: pass
 
+    ##
+    # \brief Converts the \c ConstDVectorExpression instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -58,10 +82,33 @@ class ConstDVectorExpression(Boost.Python.instance):
     # 
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the current element count.
+    # 
+    # \return The number of elements.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -77,7 +124,7 @@ class ConstDVectorExpression(Boost.Python.instance):
     def __pos__() -> ConstDVectorExpression: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstDVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstDVectorExpression: pass

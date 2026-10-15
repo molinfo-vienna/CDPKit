@@ -234,6 +234,13 @@ class Vector3ULArray(Boost.Python.instance):
 
     def toArray(as_vec: bool) -> object: pass
 
+    ##
+    # \brief Removes the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __delitem__(idx: int) -> None: pass
 
     ##
@@ -254,6 +261,14 @@ class Vector3ULArray(Boost.Python.instance):
     # 
     def __len__() -> int: pass
 
+    ##
+    # \brief Assigns a new value to the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # \param value The new value of the element after assignment.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __setitem__(idx: int, value: Vector3UL) -> None: pass
 
     ##

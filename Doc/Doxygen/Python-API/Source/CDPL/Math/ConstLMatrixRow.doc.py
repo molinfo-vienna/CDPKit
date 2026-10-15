@@ -57,6 +57,11 @@ class ConstLMatrixRow(Boost.Python.instance):
 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ConstLMatrixRow instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def getData() -> ConstLMatrixExpression: pass
@@ -108,7 +113,7 @@ class ConstLMatrixRow(Boost.Python.instance):
     def __pos__() -> ConstLMatrixRow: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstLVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstLVectorExpression: pass

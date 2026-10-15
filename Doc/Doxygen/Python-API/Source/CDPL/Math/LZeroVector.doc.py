@@ -25,22 +25,29 @@
 class LZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c LZeroVector instance.
+    # \brief Constructs an empty zero vector.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c LZeroVector instance \a v.
-    # \param v The \c LZeroVector instance to copy.
+    # \brief Constructs a copy of the zero vector <em>v</em>.
+    # 
+    # \param v The zero vector to copy.
     # 
     def __init__(v: LZeroVector) -> None: pass
 
     ##
-    # \brief Contructs the \c LZeroVector instance.
-    # \param n 
+    # \brief Constructs a zero vector of size <em>n</em>.
+    # 
+    # \param n The element count.
     # 
     def __init__(n: int) -> None: pass
 
+    ##
+    # \brief Resizes the logical element count to <em>n</em>.
+    # 
+    # \param n The new element count.
+    # 
     def resize(n: int) -> None: pass
 
     ##
@@ -55,21 +62,52 @@ class LZeroVector(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the vector has zero logical size.
+    # 
+    # \return <tt>True</tt> if the logical size is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the logical element count.
+    # 
+    # \return The element count.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c LZeroVector instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c LZeroVector instance \a v.
-    # \param v The \c LZeroVector instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the logical size from <em>v</em>.
+    # 
+    # \param v The source zero vector.
+    # 
+    # \return \a self.
     # 
     def assign(v: LZeroVector) -> LZeroVector: pass
 
+    ##
+    # \brief Swaps the logical sizes with <em>v</em>.
+    # 
+    # \param v The zero vector to swap with.
+    # 
     def swap(v: LZeroVector) -> None: pass
 
     ##
@@ -100,10 +138,33 @@ class LZeroVector(Boost.Python.instance):
     # 
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the zero element.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the zero element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the zero element.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to the zero element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the logical element count.
+    # 
+    # \return The element count.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -119,7 +180,7 @@ class LZeroVector(Boost.Python.instance):
     def __pos__() -> LZeroVector: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstLVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstLVectorExpression: pass

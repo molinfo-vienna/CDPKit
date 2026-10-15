@@ -429,9 +429,16 @@ ISBN 0-521-43108-5, http://www.nr.com/
 </tr>
 
 <tr>
+<td valign="top">\anchor NUMPY<i>[NUMPY]</i></td>
+<td valign="top">
+NumPy Project Website: https://numpy.org/
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor PCDS<i>[PCDS]</i></td>
 <td valign="top">
-\c PubChem Fingerprint Specification: https://pubchem.ncbi.nlm.nih.gov/docs/data-specification
+PubChem Fingerprint Specification: https://pubchem.ncbi.nlm.nih.gov/docs/data-specification
 </td>
 </tr>
 

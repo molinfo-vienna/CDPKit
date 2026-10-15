@@ -36,20 +36,75 @@ class ConstDMatrixExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the number of columns.
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the matrix is empty.
+    # 
+    # \return <tt>True</tt> if the underlying storage holds no elements, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def getElement(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Converts the \c ConstDMatrixExpression instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __call__(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __getitem__(ij: tuple) -> float: pass
 
+    ##
+    # \brief Returns the number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -79,7 +134,7 @@ class ConstDMatrixExpression(Boost.Python.instance):
     def __pos__() -> ConstDMatrixExpression: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstDMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstDMatrixExpression: pass

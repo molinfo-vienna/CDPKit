@@ -83,7 +83,7 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -92,7 +92,7 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     def assign(e: Math.ConstFGridExpression) -> Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -101,7 +101,7 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     def assign(e: Math.ConstDGridExpression) -> Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -148,6 +148,11 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
 
     def getElement(i: int) -> float: pass
 
+    ##
+    # \brief Converts the \c DRegularGrid instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##

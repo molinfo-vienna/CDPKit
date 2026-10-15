@@ -109,7 +109,7 @@ class SparseULVector(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this sparse vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -118,7 +118,7 @@ class SparseULVector(Boost.Python.instance):
     def assign(e: ConstFVectorExpression) -> SparseULVector: pass
 
     ##
-    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this sparse vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -127,7 +127,7 @@ class SparseULVector(Boost.Python.instance):
     def assign(e: ConstDVectorExpression) -> SparseULVector: pass
 
     ##
-    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this sparse vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -136,7 +136,7 @@ class SparseULVector(Boost.Python.instance):
     def assign(e: ConstLVectorExpression) -> SparseULVector: pass
 
     ##
-    # \brief Resizes this vector to match <em>e</em> and assigns the elements of <em>e</em> without intermediate temporary.
+    # \brief Assigns the vector expression <em>e</em> to this sparse vector (via a temporary to handle aliasing).
     # 
     # \param e The source vector expression.
     # 
@@ -174,8 +174,22 @@ class SparseULVector(Boost.Python.instance):
     # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c SparseULVector instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -185,6 +199,12 @@ class SparseULVector(Boost.Python.instance):
     # 
     def swap(v: SparseULVector) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i to \a v.
+    # \param i The zero-based element index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def setElement(i: int, v: int) -> None: pass
 
     ##
@@ -257,7 +277,7 @@ class SparseULVector(Boost.Python.instance):
     def __pos__() -> SparseULVector: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULVectorExpression: pass
@@ -311,12 +331,20 @@ class SparseULVector(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULVectorExpression: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i to \a v.
+    # \param i The zero-based element index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param v Specifies the second addend.
-    # \return The updated \c SparseULVector instance \a self.
+    # \brief Adds the contents of the vector <em>v</em> element-wise to this vector (no alias check needed).
+    # 
+    # \param v The source vector.
+    # 
+    # \return \a self.
     # 
     def __iadd__(v: SparseULVector) -> SparseULVector: pass
 
@@ -330,9 +358,11 @@ class SparseULVector(Boost.Python.instance):
     def __iadd__(e: ConstULVectorExpression) -> SparseULVector: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param v Specifies the subtrahend.
-    # \return The updated \c SparseULVector instance \a self.
+    # \brief Subtracts the contents of the vector <em>v</em> element-wise from this vector (no alias check needed).
+    # 
+    # \param v The source vector.
+    # 
+    # \return \a self.
     # 
     def __isub__(v: SparseULVector) -> SparseULVector: pass
 

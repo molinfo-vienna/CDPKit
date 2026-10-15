@@ -39,6 +39,7 @@ Base class § %Base class
 .__len__ § .getSize
 .__truediv__ § .__div__
 .__itruediv__ § .__idiv__
+.assign( § .operator=(
 
 #
 # --- CDPL package ---
@@ -162,33 +163,33 @@ Math.Vector4UL. § Math.CVector.
 
 # ScalarVector typedefs
 
-Math.ScalarFVector. § Math.ScalarVector.
+Math.FScalarVector. § Math.ScalarVector.
 
-Math.ScalarDVector. § Math.ScalarVector.
+Math.DScalarVector. § Math.ScalarVector.
 
-Math.ScalarLVector. § Math.ScalarVector.
+Math.LScalarVector. § Math.ScalarVector.
 
-Math.ScalarULVector. § Math.ScalarVector.
+Math.ULScalarVector. § Math.ScalarVector.
 
 # ZeroVector typedefs
 
-Math.ZeroFVector. § Math.ZeroVector.
+Math.FZeroVector. § Math.ZeroVector.
 
-Math.ZeroDVector. § Math.ZeroVector.
+Math.DZeroVector. § Math.ZeroVector.
 
-Math.ZeroLVector. § Math.ZeroVector.
+Math.LZeroVector. § Math.ZeroVector.
 
-Math.ZeroULVector. § Math.ZeroVector.
+Math.ULZeroVector. § Math.ZeroVector.
 
 # UnitVector typedefs
 
-Math.UnitFVector. § Math.UnitVector.
+Math.FUnitVector. § Math.UnitVector.
 
-Math.UnitDVector. § Math.UnitVector.
+Math.DUnitVector. § Math.UnitVector.
 
-Math.UnitLVector. § Math.UnitVector.
+Math.LUnitVector. § Math.UnitVector.
 
-Math.UnitULVector. § Math.UnitVector.
+Math.ULUnitVector. § Math.UnitVector.
 
 # SparseVector typedefs
 
@@ -258,33 +259,33 @@ Math.SparseULMatrix. § Math.SparseMatrix.
 
 # ZeroMatrix typedefs
 
-Math.ZeroFMatrix. § Math.ZeroMatrix.
+Math.FZeroMatrix. § Math.ZeroMatrix.
 
-Math.ZeroDMatrix. § Math.ZeroMatrix.
+Math.DZeroMatrix. § Math.ZeroMatrix.
 
-Math.ZeroLMatrix. § Math.ZeroMatrix.
+Math.LZeroMatrix. § Math.ZeroMatrix.
 
-Math.ZeroULMatrix. § Math.ZeroMatrix.
+Math.ULZeroMatrix. § Math.ZeroMatrix.
 
 # ScalarMatrix typedefs
 
-Math.ScalarFMatrix. § Math.ScalarMatrix.
+Math.FScalarMatrix. § Math.ScalarMatrix.
 
-Math.ScalarDMatrix. § Math.ScalarMatrix.
+Math.DScalarMatrix. § Math.ScalarMatrix.
 
-Math.ScalarLMatrix. § Math.ScalarMatrix.
+Math.LScalarMatrix. § Math.ScalarMatrix.
 
-Math.ScalarULMatrix. § Math.ScalarMatrix.
+Math.ULScalarMatrix. § Math.ScalarMatrix.
 
 # IdentityMatrix typedefs
 
-Math.IdentityFMatrix. § Math.IdentityMatrix.
+Math.FIdentityMatrix. § Math.IdentityMatrix.
 
-Math.IdentityDMatrix. § Math.IdentityMatrix.
+Math.DIdentityMatrix. § Math.IdentityMatrix.
 
-Math.IdentityLMatrix. § Math.IdentityMatrix.
+Math.LIdentityMatrix. § Math.IdentityMatrix.
 
-Math.IdentityULMatrix. § Math.IdentityMatrix.
+Math.ULIdentityMatrix. § Math.IdentityMatrix.
 
 # Quaternion typedefs
 
@@ -385,53 +386,99 @@ Math.*Grid.getElement(i) § Math.Grid.__call__(i)
 Math.*Grid.getElement(i,j,k) § Math.Grid.__call__(i,j,k)
 
 Math.*Grid.__iadd__(g) § Math.Grid.__iadd__(c)
+grid container § grid
+<em>c</em> § <em>g</em>
+param c § param g
 
 Math.*Grid.__isub__(g) § Math.Grid.__isub__(c)
+grid container § grid
+<em>c</em> § <em>g</em>
+param c § param g
+
+# ---
+
+Math.*GridExpression. § Math.Grid.
+
+Math.*GridExpression.getElement(i,j,k) § Math.Grid.__call__(i,j,k)
+
+Math.*GridExpression.__getitem__(ijk) § Math.Grid.__call__(i,j,k)
+
+# ---
+
+Math.*Matrix.__getitem__(ij) § Math.Matrix.__call__(i,j)
+
+Math.*Matrix.getElement(i,j) § Math.Matrix.__call__(i,j)
+
+Math.*Matrix.__iadd__(m) § Math.Matrix.__iadd__(c)
+matrix container § matrix
+<em>c</em> § <em>m</em>
+param c § param m
+
+Math.*Matrix.__isub__(m) § Math.Matrix.__isub__(c)
+matrix container § matrix
+<em>c</em> § <em>m</em>
+param c § param m
+
+Math.*Matrix.getSize() § Math.Matrix.getSize1()
+
+# ---
+
+Math.*MatrixExpression. § Math.Matrix.
+
+Math.*MatrixExpression.getElement(i,j) § Math.Matrix.__call__(i,j)
+
+Math.*MatrixExpression.__getitem__(ij) § Math.Matrix.__call__(i,j)
+
+Math.*MatrixExpression.getSize() § Math.Matrix.getSize1()
+
+# ---
+
+Math.*Vector.getElement(i) § Math.Vector.__getitem__(i)
+
+Math.*Vector.__iadd__(v) § Math.Vector.__iadd__(c)
+vector container § vector
+<em>c</em> § <em>v</em>
+param c § param v
+
+Math.*Vector.__isub__(v) § Math.Vector.__isub__(c)
+vector container § vector
+<em>c</em> § <em>v</em>
+param c § param v
+
+# ---
+
+Math.*VectorExpression. § Math.Vector.
+
+Math.*VectorExpression.getElement(i) § Math.Vector.__getitem__(i)
 
 #
 # --- CDPL.Util package ---
 #
 Util.UIArray. § Util.Array.
 
-Util.UIArray.__delitem__ § Util.Array.removeElement
-
-Util.UIArray.__setitem__ § Util.Array.setElement
-
 Util.STArray. § Util.Array.
-
-Util.STArray.__delitem__ § Util.Array.removeElement
-
-Util.STArray.__setitem__ § Util.Array.setElement
 
 Util.LArray. § Util.Array.
 
-Util.LArray.__delitem__ § Util.Array.removeElement
-
-Util.LArray.__setitem__ § Util.Array.setElement
-
 Util.STPairArray. § Util.Array.
-
-Util.STPairArray.__delitem__ § Util.Array.removeElement
-
-Util.STPairArray.__setitem__ § Util.Array.setElement
 
 Util.DArray. § Util.Array.
 
-Util.DArray.__delitem__ § Util.Array.removeElement
-
-Util.DArray.__setitem__ § Util.Array.setElement
-
 Util.SArray. § Util.Array.
-
-Util.SArray.__delitem__ § Util.Array.removeElement
-
-Util.SArray.__setitem__ § Util.Array.setElement
 
 Util.BitSetArray. § Util.Array.
 
-Util.BitSetArray.__delitem__ § Util.Array.removeElement
+*Array.__delitem__ § CDPL.Util.Array.removeElement
 
-Util.BitSetArray.__setitem__ § Util.Array.setElement
+*Array.__setitem__ § CDPL.Util.Array.setElement
+
+*Array.operator= § CDPL.Util.Array.assign
+
+*List.__delitem__ § CDPL.Util.Array.removeElement
+
+*List.__setitem__ § CDPL.Util.Array.setElement
+
+*List.operator= § CDPL.Util.Array.assign
 
 # ---
 

@@ -91,6 +91,11 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
 
     def getC4() -> int: pass
 
+    ##
+    # \brief Converts the \c ULVectorQuaternionAdapter instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def swap(a: ULVectorQuaternionAdapter) -> None: pass
@@ -148,7 +153,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def __pos__() -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULQuaternionExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULQuaternionExpression: pass

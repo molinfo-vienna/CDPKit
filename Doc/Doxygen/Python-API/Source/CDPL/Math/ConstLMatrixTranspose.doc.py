@@ -56,6 +56,11 @@ class ConstLMatrixTranspose(Boost.Python.instance):
 
     def getElement(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ConstLMatrixTranspose instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def getData() -> ConstLMatrixExpression: pass
@@ -107,7 +112,7 @@ class ConstLMatrixTranspose(Boost.Python.instance):
     def __pos__() -> ConstLMatrixTranspose: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstLMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstLMatrixExpression: pass

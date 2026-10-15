@@ -489,7 +489,7 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -498,7 +498,7 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def assign(e: ConstFGridExpression) -> FRegularSpatialGrid: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -507,7 +507,7 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def assign(e: ConstDGridExpression) -> FRegularSpatialGrid: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -574,6 +574,11 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # 
     def getElement(i: int) -> float: pass
 
+    ##
+    # \brief Converts the \c FRegularSpatialGrid instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -585,8 +590,21 @@ class FRegularSpatialGrid(Boost.Python.instance):
 
     def swap(g: FRegularSpatialGrid) -> None: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at linear index \a i to \a v.
+    # \param i The zero-based linear index.
+    # \param v The new value of the element.
+    # 
     def setElement(i: int, v: float) -> None: pass
 
     ##
@@ -681,7 +699,7 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def __pos__() -> FRegularSpatialGrid: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstFGridExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstFGridExpression: pass
@@ -728,14 +746,27 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFGridExpression: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j, \a k) to \a v.
+    # \param i The zero-based first-axis index.
+    # \param j The zero-based second-axis index.
+    # \param k The zero-based third-axis index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __setitem__(ijk: tuple, v: float) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at linear index \a i to \a v.
+    # \param i The zero-based linear index.
+    # \param v The new value of the element.
+    # 
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
-    # \brief Adds the contents of the grid container <em>c</em> element-wise to this grid (no alias check needed).
+    # \brief Adds the contents of the grid <em>g</em> element-wise to this grid (no alias check needed).
     # 
-    # \param c The source grid container.
+    # \param g The source grid.
     # 
     # \return \a self.
     # 
@@ -751,9 +782,9 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def __iadd__(e: ConstFGridExpression) -> FRegularSpatialGrid: pass
 
     ##
-    # \brief Subtracts the contents of the grid container <em>c</em> element-wise from this grid (no alias check needed).
+    # \brief Subtracts the contents of the grid <em>g</em> element-wise from this grid (no alias check needed).
     # 
-    # \param c The source grid container.
+    # \param g The source grid.
     # 
     # \return \a self.
     # 

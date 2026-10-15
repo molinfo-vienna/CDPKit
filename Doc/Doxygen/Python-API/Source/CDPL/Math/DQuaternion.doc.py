@@ -93,7 +93,7 @@ class DQuaternion(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion (via a temporary to handle aliasing).
     # 
     # \param e The source quaternion expression.
     # 
@@ -102,7 +102,7 @@ class DQuaternion(Boost.Python.instance):
     def assign(e: ConstFQuaternionExpression) -> DQuaternion: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion (via a temporary to handle aliasing).
     # 
     # \param e The source quaternion expression.
     # 
@@ -111,7 +111,7 @@ class DQuaternion(Boost.Python.instance):
     def assign(e: ConstDQuaternionExpression) -> DQuaternion: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion (via a temporary to handle aliasing).
     # 
     # \param e The source quaternion expression.
     # 
@@ -120,7 +120,7 @@ class DQuaternion(Boost.Python.instance):
     def assign(e: ConstLQuaternionExpression) -> DQuaternion: pass
 
     ##
-    # \brief Assigns the quaternion expression <em>e</em> to this quaternion without intermediate temporary.
+    # \brief Assigns the quaternion expression <em>e</em> to this quaternion (via a temporary to handle aliasing).
     # 
     # \param e The source quaternion expression.
     # 
@@ -172,6 +172,11 @@ class DQuaternion(Boost.Python.instance):
     # 
     def getC4() -> float: pass
 
+    ##
+    # \brief Converts the \c DQuaternion instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -240,7 +245,7 @@ class DQuaternion(Boost.Python.instance):
     def __pos__() -> DQuaternion: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstDQuaternionExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstDQuaternionExpression: pass

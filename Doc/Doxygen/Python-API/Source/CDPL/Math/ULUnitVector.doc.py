@@ -25,23 +25,30 @@
 class ULUnitVector(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c ULUnitVector instance.
+    # \brief Constructs an empty unit vector (size zero, index zero).
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c ULUnitVector instance \a v.
-    # \param v The \c ULUnitVector instance to copy.
+    # \brief Constructs a copy of the unit vector <em>v</em>.
+    # 
+    # \param v The unit vector to copy.
     # 
     def __init__(v: ULUnitVector) -> None: pass
 
     ##
-    # \brief Contructs the \c ULUnitVector instance.
-    # \param n 
-    # \param i 
+    # \brief Constructs a unit vector of size <em>n</em> with the <em>1</em> element at index <em>i</em>.
+    # 
+    # \param n The element count.
+    # \param i The zero-based index of the non-zero element.
     # 
     def __init__(n: int, i: int) -> None: pass
 
+    ##
+    # \brief Resizes the logical element count to <em>n</em>.
+    # 
+    # \param n The new element count.
+    # 
     def resize(n: int) -> None: pass
 
     def getIndex() -> int: pass
@@ -58,21 +65,52 @@ class ULUnitVector(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the vector has zero logical size.
+    # 
+    # \return <tt>True</tt> if the logical size is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the logical element count.
+    # 
+    # \return The element count.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ULUnitVector instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULUnitVector instance \a v.
-    # \param v The \c ULUnitVector instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the size and unit index from <em>v</em>.
+    # 
+    # \param v The source unit vector.
+    # 
+    # \return \a self.
     # 
     def assign(v: ULUnitVector) -> ULUnitVector: pass
 
+    ##
+    # \brief Swaps the size and unit index with <em>v</em>.
+    # 
+    # \param v The unit vector to swap with.
+    # 
     def swap(v: ULUnitVector) -> None: pass
 
     ##
@@ -103,10 +141,33 @@ class ULUnitVector(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to either <em>1</em> (if <em>i</em> equals the unit index) or <em>0</em>. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em>.
+    # 
+    # \param i The zero-based element index.
+    # 
+    # \return A reference to either <em>1</em> (if <em>i</em> equals the unit index) or <em>0</em>. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is out of range.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the logical element count.
+    # 
+    # \return The element count.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -122,7 +183,7 @@ class ULUnitVector(Boost.Python.instance):
     def __pos__() -> ULUnitVector: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULVectorExpression: pass

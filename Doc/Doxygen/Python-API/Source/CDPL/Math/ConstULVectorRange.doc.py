@@ -57,6 +57,11 @@ class ConstULVectorRange(Boost.Python.instance):
 
     def getElement(i: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ConstULVectorRange instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def getData() -> ConstULVectorExpression: pass
@@ -108,7 +113,7 @@ class ConstULVectorRange(Boost.Python.instance):
     def __pos__() -> ConstULVectorRange: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULVectorExpression: pass

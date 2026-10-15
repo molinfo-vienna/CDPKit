@@ -133,6 +133,11 @@ class Vector7D(Boost.Python.instance):
 
     def getElement(i: int) -> float: pass
 
+    ##
+    # \brief Converts the \c Vector7D instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def swap(v: Math.Vector7D) -> None: pass

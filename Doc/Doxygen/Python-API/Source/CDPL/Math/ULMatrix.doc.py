@@ -117,7 +117,7 @@ class ULMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -126,7 +126,7 @@ class ULMatrix(Boost.Python.instance):
     def assign(e: ConstFMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -135,7 +135,7 @@ class ULMatrix(Boost.Python.instance):
     def assign(e: ConstDMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -144,7 +144,7 @@ class ULMatrix(Boost.Python.instance):
     def assign(e: ConstLMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Resizes this matrix to match the dimensions of <em>e</em> and assigns its elements (without intermediate temporary).
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -189,8 +189,23 @@ class ULMatrix(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def getElement(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Converts the \c ULMatrix instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -200,6 +215,13 @@ class ULMatrix(Boost.Python.instance):
     # 
     def swap(m: ULMatrix) -> None: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j) to \a v.
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def setElement(i: int, j: int, v: int) -> None: pass
 
     ##
@@ -214,8 +236,23 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __call__(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
     def __getitem__(ij: tuple) -> int: pass
 
+    ##
+    # \brief Returns the number of rows.
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -259,7 +296,7 @@ class ULMatrix(Boost.Python.instance):
     def __pos__() -> ULMatrix: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstULMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstULMatrixExpression: pass
@@ -320,12 +357,21 @@ class ULMatrix(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULMatrixExpression: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j) to \a v.
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += m</tt>.
-    # \param m Specifies the second addend.
-    # \return The updated \c ULMatrix instance \a self.
+    # \brief Adds the contents of the matrix <em>m</em> element-wise to this matrix (no alias check needed).
+    # 
+    # \param m The source matrix.
+    # 
+    # \return \a self.
     # 
     def __iadd__(m: ULMatrix) -> ULMatrix: pass
 
@@ -339,9 +385,11 @@ class ULMatrix(Boost.Python.instance):
     def __iadd__(e: ConstULMatrixExpression) -> ULMatrix: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= m</tt>.
-    # \param m Specifies the subtrahend.
-    # \return The updated \c ULMatrix instance \a self.
+    # \brief Subtracts the contents of the matrix <em>m</em> element-wise from this matrix (no alias check needed).
+    # 
+    # \param m The source matrix.
+    # 
+    # \return \a self.
     # 
     def __isub__(m: ULMatrix) -> ULMatrix: pass
 

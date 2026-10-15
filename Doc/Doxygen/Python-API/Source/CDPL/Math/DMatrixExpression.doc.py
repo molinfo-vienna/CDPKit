@@ -27,37 +27,47 @@ class DMatrixExpression(ConstDMatrixExpression):
     def swap(e: DMatrixExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c DMatrixExpression instance \a e.
-    # \param e The \c DMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
-    # \param e The \c ConstFMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
-    # \param e The \c ConstDMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
-    # \param e The \c ConstLMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
-    # \param e The \c ConstULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrixExpression: pass
 
@@ -68,55 +78,82 @@ class DMatrixExpression(ConstDMatrixExpression):
     # 
     def assign(a: object) -> None: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j) to \a v.
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def setElement(i: int, j: int, v: float) -> None: pass
 
+    ##
+    # \brief Sets the value of the element (\a i, \a j to \a v.
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c DMatrixExpression instance \a self.
+    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c DMatrixExpression instance \a self.
+    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c DMatrixExpression instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c DMatrixExpression instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c DMatrixExpression instance \a self.
+    # \brief Multiplies every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: float) -> DMatrixExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c DMatrixExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: float) -> DMatrixExpression: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c DMatrixExpression instance \a self.
+    # \brief Divides every element by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: float) -> DMatrixExpression: pass

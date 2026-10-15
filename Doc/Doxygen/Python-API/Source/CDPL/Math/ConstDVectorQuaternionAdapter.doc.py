@@ -56,6 +56,11 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     def getC4() -> float: pass
 
+    ##
+    # \brief Converts the \c ConstDVectorQuaternionAdapter instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def getData() -> ConstDVectorExpression: pass
@@ -101,7 +106,7 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     def __pos__() -> ConstDVectorQuaternionAdapter: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstDQuaternionExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstDQuaternionExpression: pass

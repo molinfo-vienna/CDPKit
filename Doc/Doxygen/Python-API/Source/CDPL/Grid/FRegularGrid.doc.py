@@ -83,7 +83,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -92,7 +92,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def assign(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -101,7 +101,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def assign(e: Math.ConstDGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to the underlying grid data without intermediate temporary.
+    # \brief Assigns the grid expression <em>e</em> to the underlying grid data (the spatial parameters are left unchanged).
     # 
     # \param e The source grid expression.
     # 
@@ -148,6 +148,11 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
 
     def getElement(i: int) -> float: pass
 
+    ##
+    # \brief Converts the \c FRegularGrid instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##

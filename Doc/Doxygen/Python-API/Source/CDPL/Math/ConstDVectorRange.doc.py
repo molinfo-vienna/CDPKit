@@ -57,6 +57,11 @@ class ConstDVectorRange(Boost.Python.instance):
 
     def getElement(i: int) -> float: pass
 
+    ##
+    # \brief Converts the \c ConstDVectorRange instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     def getData() -> ConstDVectorExpression: pass
@@ -108,7 +113,7 @@ class ConstDVectorRange(Boost.Python.instance):
     def __pos__() -> ConstDVectorRange: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstDVectorExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstDVectorExpression: pass

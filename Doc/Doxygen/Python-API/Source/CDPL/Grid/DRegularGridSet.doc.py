@@ -76,12 +76,25 @@ class DRegularGridSet(Boost.Python.instance):
 
     def insertElements(idx: int, num_elem: int, value: DRegularGrid) -> None: pass
 
+    ##
+    # \brief Insert the elements of \a values before the location specified by the index \a idx.
+    # \param idx The zero-based insertion index.
+    # \param values The \c DRegularGridSet instance providing the elements to insert.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()].
+    # 
     def insertElements(idx: int, values: DRegularGridSet) -> None: pass
 
     def popLastElement() -> None: pass
 
     def removeElement(idx: int) -> None: pass
 
+    ##
+    # \brief Removes the elements at indices in the range <em>[begin_idx, end_idx)</em>.
+    # \param begin_idx The zero-based index range start.
+    # \param end_idx The zero-based index range end.
+    # \throw Base.IndexError if \a begin_idx or \a end_idx is not in the range
+    #        [0, getSize()] or \a end_idx < \a begin_idx.
+    # 
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     def getFirstElement() -> DRegularGrid: pass

@@ -97,7 +97,7 @@ class Matrix3F(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # \brief Assigns the matrix expression <em>e</em> to this fixed-size matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -106,7 +106,7 @@ class Matrix3F(Boost.Python.instance):
     def assign(e: ConstFMatrixExpression) -> Matrix3F: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # \brief Assigns the matrix expression <em>e</em> to this fixed-size matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -115,7 +115,7 @@ class Matrix3F(Boost.Python.instance):
     def assign(e: ConstDMatrixExpression) -> Matrix3F: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # \brief Assigns the matrix expression <em>e</em> to this fixed-size matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -124,7 +124,7 @@ class Matrix3F(Boost.Python.instance):
     def assign(e: ConstLMatrixExpression) -> Matrix3F: pass
 
     ##
-    # \brief Assigns the elements of the matrix expression <em>e</em> to this fixed-size matrix without intermediate temporary.
+    # \brief Assigns the matrix expression <em>e</em> to this fixed-size matrix (via a temporary to handle aliasing).
     # 
     # \param e The source matrix expression.
     # 
@@ -171,6 +171,11 @@ class Matrix3F(Boost.Python.instance):
 
     def getElement(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Converts the \c Matrix3F instance into a corresponding \e NumPy array.
+    # \return The generated \e NumPy array.
+    # \see [\ref NUMPY]
+    # 
     def toArray() -> object: pass
 
     ##
@@ -239,7 +244,7 @@ class Matrix3F(Boost.Python.instance):
     def __pos__() -> Matrix3F: pass
 
     ##
-    # \brief Negates each element and returns the result.
+    # \brief Returns the result of the operation <tt>self * -1</tt>.
     # \return A \c ConstFMatrixExpression instance holding the result of the element negation.
     # 
     def __neg__() -> ConstFMatrixExpression: pass

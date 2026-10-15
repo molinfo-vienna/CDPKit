@@ -95,6 +95,14 @@ class MatchConstraintList(Boost.Python.instance):
     # 
     def assign(array: MatchConstraintList) -> MatchConstraintList: pass
 
+    ##
+    # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.
+    # 
+    # Note that the assignment completely changes the array and the new size is the same as the number of elements assigned. Old data will be lost.
+    # 
+    # \param num_elem The number of elements to be assigned.
+    # \param value The value to be assigned.
+    # 
     def assign(num_elem: int, value: MatchConstraint) -> None: pass
 
     def addElement(value: MatchConstraint) -> None: pass
@@ -116,18 +124,35 @@ class MatchConstraintList(Boost.Python.instance):
     # 
     def addElement(id: int, rel: Relation, val: Base.Any) -> None: pass
 
+    ##
+    # \brief Adds the elements of \a values to the end of the list.
+    # \param values The \c MatchConstraintList instance providing the elements to add.
+    # 
     def addElements(values: MatchConstraintList) -> None: pass
 
     def insertElement(idx: int, value: MatchConstraint) -> None: pass
 
     def insertElements(idx: int, num_elem: int, value: MatchConstraint) -> None: pass
 
+    ##
+    # \brief Insert the elements of \a values before the location specified by the index \a idx.
+    # \param idx The zero-based insertion index.
+    # \param values The \c MatchConstraintList instance providing the elements to insert.
+    # \throw Base.IndexError if \a idx is not in the range [0, getSize()].
+    # 
     def insertElements(idx: int, values: MatchConstraintList) -> None: pass
 
     def popLastElement() -> None: pass
 
     def removeElement(idx: int) -> None: pass
 
+    ##
+    # \brief Removes the elements at indices in the range <em>[begin_idx, end_idx)</em>.
+    # \param begin_idx The zero-based index range start.
+    # \param end_idx The zero-based index range end.
+    # \throw Base.IndexError if \a begin_idx or \a end_idx is not in the range
+    #        [0, getSize()] or \a end_idx < \a begin_idx.
+    # 
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     def getFirstElement() -> MatchConstraint: pass
@@ -152,12 +177,27 @@ class MatchConstraintList(Boost.Python.instance):
     # 
     def setType(type: Type) -> None: pass
 
+    ##
+    # \brief Removes the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __delitem__(idx: int) -> None: pass
 
     def __getitem__(idx: int) -> MatchConstraint: pass
 
     def __len__() -> int: pass
 
+    ##
+    # \brief Assigns a new value to the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # \param value The new value of the element after assignment.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __setitem__(idx: int, value: MatchConstraint) -> None: pass
 
     ##
