@@ -33,7 +33,7 @@ else()
     DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf.gz" 
     COMMENT "-- Processing residue dictionary structure data..."
     )
-  add_custom_target(gen-biomol-data-files DEPENDS ResidueDictionaryStructureData.cdf.gz.str)
+  add_custom_target(biomol-data-files DEPENDS ResidueDictionaryStructureData.cdf.gz.str)
 endif()
 
 set(cdpl-biomol_LIB_SRCS
@@ -100,7 +100,7 @@ if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
   if(NOT MSVC)
-    add_dependencies(cdpl-biomol-static gen-biomol-data-files)
+    add_dependencies(cdpl-biomol-static biomol-data-files)
   endif()
   
   set_target_properties(cdpl-biomol-static PROPERTIES 
@@ -121,7 +121,7 @@ endif(NOT PYPI_PACKAGE_BUILD)
 add_library(cdpl-biomol-shared SHARED ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 if(NOT MSVC)
-  add_dependencies(cdpl-biomol-shared gen-biomol-data-files)
+  add_dependencies(cdpl-biomol-shared biomol-data-files)
 endif()
 
 target_link_libraries(cdpl-biomol-shared PUBLIC cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)

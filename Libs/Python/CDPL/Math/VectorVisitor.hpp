@@ -324,7 +324,8 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+            cl.def("assign", &assign, (python::arg("self"), python::arg("a")),
+                   python::return_self<>());
         }
 
         static void assign(VectorType& vec, PyArrayObject* arr)

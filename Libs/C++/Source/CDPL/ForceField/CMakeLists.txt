@@ -58,7 +58,7 @@ foreach(PARAM_FILE ${PARAMETER_FILES})
   set(PARAMETER_FILE_STRINGS "${PARAMETER_FILE_STRINGS}" "${PARAM_FILE}.str") 
 endforeach(PARAM_FILE)
 
-add_custom_target(gen-forcefield-data-files DEPENDS ${PARAMETER_FILE_STRINGS})
+add_custom_target(forcefield-data-files DEPENDS ${PARAMETER_FILE_STRINGS})
 
 set(cdpl-forcefield_LIB_SRCS
     ${PARAMETER_FILE_STRINGS}
@@ -123,7 +123,7 @@ set(cdpl-forcefield_LIB_SRCS
 
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-  add_dependencies(cdpl-forcefield-static gen-forcefield-data-files)
+  add_dependencies(cdpl-forcefield-static forcefield-data-files)
   
   set_target_properties(cdpl-forcefield-static PROPERTIES 
     OUTPUT_NAME cdpl-forcefield
@@ -141,7 +141,7 @@ if(NOT PYPI_PACKAGE_BUILD)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-add_dependencies(cdpl-forcefield-shared gen-forcefield-data-files)
+add_dependencies(cdpl-forcefield-shared forcefield-data-files)
 
 target_link_libraries(cdpl-forcefield-shared PUBLIC cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared)
 target_link_libraries(cdpl-forcefield-shared PRIVATE Boost::iostreams)

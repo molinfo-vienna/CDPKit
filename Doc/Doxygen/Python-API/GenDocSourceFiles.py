@@ -238,9 +238,6 @@ def getProvidedDocBlock(key, func_data, func_name, class_name, is_static, allow_
         if func_name == '__init__':
             if func_data['arg_types'][1].endswith(class_name):
                 key = key.replace('.__init__(', '.__copy__init__(')
-            
-        elif func_name == 'assign':
-            key = key.replace('.assign(', '.__copy__assign(')
 
     doc_block = getDocBlockEntry(key, allow_part_match)
 

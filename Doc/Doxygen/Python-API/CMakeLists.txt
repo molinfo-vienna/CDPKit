@@ -30,16 +30,16 @@ configure_file(CopyDocSourceFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopyDocS
 configure_file(GenDocSourceFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/GenDocSourceFiles.cmake" @ONLY)
 configure_file(PostProcHTMLFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/PostProcHTMLFiles.cmake" @ONLY)
 
-add_custom_target(gen-c++-api-doc-db
+add_custom_target(c++-api-doc-db
   "${PYTHON_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/ExtractCXXAPIDocBlocks.py" 
   "${CDPL_CXX_API_DOC_BUILD_DIR}/xml/" "${CMAKE_CURRENT_BINARY_DIR}/cxx_api_doc.db"
   COMMENT "-- Extracting CDPL C++ API documentation blocks..."
   DEPENDS c++-api-doc-xml)
 
-add_custom_target(gen-python-api-doc-sources
+add_custom_target(python-api-doc-sources
   ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/GenDocSourceFiles.cmake"
   COMMENT "-- Generating CDPL Python API documentation source files..."
-  DEPENDS gen-c++-api-doc-db)
+  DEPENDS c++-api-doc-db)
 
 add_custom_target(copy-python-api-doc-sources
   ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake"

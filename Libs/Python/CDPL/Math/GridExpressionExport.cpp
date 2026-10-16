@@ -69,7 +69,7 @@ namespace
                 python::bases<ConstGridExpression<T> >, boost::noncopyable>(name, python::no_init)
                 .def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
                 .def(GridAssignAndSwapVisitor<ExpressionType>("e"))
-                .def(AssignFunctionGeneratorVisitor<ExpressionType, ConstGridExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<ExpressionType, ConstGridExpression, boost::mpl::list<float, double> >("e"))
                 .def(GridNDArrayAssignVisitor<ExpressionType>())
                 .def(GridVisitor<ExpressionType>("e"));
 

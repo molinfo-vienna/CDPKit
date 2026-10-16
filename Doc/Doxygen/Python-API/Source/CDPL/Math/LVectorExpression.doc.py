@@ -20,14 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief Represents the outcome of mathematical expressions/operations that result in a vector.
+# 
 class LVectorExpression(ConstLVectorExpression):
 
+    ##
+    # \brief Swaps the contents of this vector expression with those of <em>e</em>.
+    # 
+    # \param e The vector expression to swap with.
+    # 
     def swap(e: LVectorExpression) -> None: pass
 
     ##
-    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the vector expression <em>e</em> to this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -36,7 +41,7 @@ class LVectorExpression(ConstLVectorExpression):
     def assign(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the vector expression <em>e</em> to this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -45,7 +50,7 @@ class LVectorExpression(ConstLVectorExpression):
     def assign(e: ConstFVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the vector expression <em>e</em> to this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -54,7 +59,7 @@ class LVectorExpression(ConstLVectorExpression):
     def assign(e: ConstDVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the vector expression <em>e</em> to this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -63,7 +68,7 @@ class LVectorExpression(ConstLVectorExpression):
     def assign(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Assigns the vector expression <em>e</em> to this vector (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the vector expression <em>e</em> to this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -72,11 +77,11 @@ class LVectorExpression(ConstLVectorExpression):
     def assign(e: ConstULVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this vector expression.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
-    def assign(a: object) -> None: pass
+    def assign(a: object) -> LVectorExpression: pass
 
     ##
     # \brief Sets the value of the element at index \a i to \a v.
@@ -95,7 +100,7 @@ class LVectorExpression(ConstLVectorExpression):
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Adds the vector expression <em>e</em> element-wise to this vector (via a temporary to handle aliasing).
+    # \brief Adds the vector expression <em>e</em> element-wise to this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -104,7 +109,7 @@ class LVectorExpression(ConstLVectorExpression):
     def __iadd__(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Adds the vector expression <em>e</em> element-wise to this vector (via a temporary to handle aliasing).
+    # \brief Adds the vector expression <em>e</em> element-wise to this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -113,7 +118,7 @@ class LVectorExpression(ConstLVectorExpression):
     def __iadd__(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Subtracts the vector expression <em>e</em> element-wise from this vector (via a temporary to handle aliasing).
+    # \brief Subtracts the vector expression <em>e</em> element-wise from this expression.
     # 
     # \param e The source vector expression.
     # 
@@ -122,7 +127,7 @@ class LVectorExpression(ConstLVectorExpression):
     def __isub__(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief Subtracts the vector expression <em>e</em> element-wise from this vector (via a temporary to handle aliasing).
+    # \brief Subtracts the vector expression <em>e</em> element-wise from this expression.
     # 
     # \param e The source vector expression.
     # 

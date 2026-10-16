@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Represents the outcome of mathematical expressions/operations that result in a quaternion.
+# 
 class ConstDQuaternionExpression(Boost.Python.instance):
 
     ##
@@ -45,8 +45,8 @@ class ConstDQuaternionExpression(Boost.Python.instance):
     def getC4() -> float: pass
 
     ##
-    # \brief Converts the \c ConstDQuaternionExpression instance into a corresponding \e NumPy array.
-    # \return The generated \e NumPy array.
+    # \brief Converts the \c ConstDQuaternionExpression instance into a corresponding \c numpy.ndarray object.
+    # \return The generated \c numpy.ndarray object.
     # \see [\ref NUMPY]
     # 
     def toArray() -> object: pass

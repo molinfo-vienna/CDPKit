@@ -88,7 +88,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # \param a The \c object instance to copy.
     # \return \a self
     # 
-    def assign(a: object) -> None: pass
+    def assign(a: object) -> LQuaternionVectorAdapter: pass
 
     def isEmpty() -> bool: pass
 
@@ -97,8 +97,8 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def getElement(i: int) -> int: pass
 
     ##
-    # \brief Converts the \c LQuaternionVectorAdapter instance into a corresponding \e NumPy array.
-    # \return The generated \e NumPy array.
+    # \brief Converts the \c LQuaternionVectorAdapter instance into a corresponding \c numpy.ndarray object.
+    # \return The generated \c numpy.ndarray object.
     # \see [\ref NUMPY]
     # 
     def toArray() -> object: pass

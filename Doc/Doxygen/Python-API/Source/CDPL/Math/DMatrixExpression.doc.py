@@ -20,14 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief Represents the outcome of mathematical expressions/operations that result in a matrix.
+# 
 class DMatrixExpression(ConstDMatrixExpression):
 
+    ##
+    # \brief Swaps the contents of this matrix expression with those of <em>e</em>.
+    # 
+    # \param e The matrix expression to swap with.
+    # 
     def swap(e: DMatrixExpression) -> None: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the matrix expression <em>e</em> to this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -36,7 +41,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def assign(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the matrix expression <em>e</em> to this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -45,7 +50,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def assign(e: ConstFMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the matrix expression <em>e</em> to this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -54,7 +59,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def assign(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the matrix expression <em>e</em> to this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -63,7 +68,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def assign(e: ConstLMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Assigns the matrix expression <em>e</em> to this matrix (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the matrix expression <em>e</em> to this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -72,9 +77,9 @@ class DMatrixExpression(ConstDMatrixExpression):
     def assign(e: ConstULMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the 2D \c numpy.ndarray object \a a to this matrix expression.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> None: pass
 
@@ -96,7 +101,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
-    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # \brief Adds the matrix expression <em>e</em> element-wise to this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -105,7 +110,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def __iadd__(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Adds the matrix expression <em>e</em> element-wise to this matrix (via a temporary to handle aliasing).
+    # \brief Adds the matrix expression <em>e</em> element-wise to this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -114,7 +119,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def __iadd__(e: ConstDMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this expression.
     # 
     # \param e The source matrix expression.
     # 
@@ -123,7 +128,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def __isub__(e: DMatrixExpression) -> DMatrixExpression: pass
 
     ##
-    # \brief Subtracts the matrix expression <em>e</em> element-wise from this matrix (via a temporary to handle aliasing).
+    # \brief Subtracts the matrix expression <em>e</em> element-wise from this expression.
     # 
     # \param e The source matrix expression.
     # 

@@ -55,8 +55,8 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     def getElement(i: int) -> float: pass
 
     ##
-    # \brief Converts the \c ConstFQuaternionVectorAdapter instance into a corresponding \e NumPy array.
-    # \return The generated \e NumPy array.
+    # \brief Converts the \c ConstFQuaternionVectorAdapter instance into a corresponding \c numpy.ndarray object.
+    # \return The generated \c numpy.ndarray object.
     # \see [\ref NUMPY]
     # 
     def toArray() -> object: pass

@@ -37,7 +37,7 @@ add_custom_command(OUTPUT ChEMBL-Salts.smi.str
   DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
   COMMENT "-- Processing ChEMBL-Salts.smi..."
   )
-add_custom_target(gen-chem-data-files DEPENDS ChEMBL-Solvents.smi.str ChEMBL-Salts.smi.str)
+add_custom_target(chem-data-files DEPENDS ChEMBL-Solvents.smi.str ChEMBL-Salts.smi.str)
            
 set(cdpl-chem_LIB_SRCS
     ChEMBL-Solvents.smi.str
@@ -348,7 +348,7 @@ set(cdpl-chem_LIB_SRCS
 
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
-  add_dependencies(cdpl-chem-static gen-chem-data-files)
+  add_dependencies(cdpl-chem-static chem-data-files)
   
   set_target_properties(cdpl-chem-static PROPERTIES 
     OUTPUT_NAME cdpl-chem
@@ -366,7 +366,7 @@ if(NOT PYPI_PACKAGE_BUILD)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
-add_dependencies(cdpl-chem-shared gen-chem-data-files)
+add_dependencies(cdpl-chem-shared chem-data-files)
 
 target_link_libraries(cdpl-chem-shared PUBLIC cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 target_link_libraries(cdpl-chem-shared PRIVATE Boost::iostreams)

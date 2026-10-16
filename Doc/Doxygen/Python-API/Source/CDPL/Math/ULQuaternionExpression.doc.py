@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Represents the outcome of mathematical expressions/operations that result in a quaternion.
+# 
 class ULQuaternionExpression(ConstULQuaternionExpression):
 
     def swap(e: ULQuaternionExpression) -> None: pass

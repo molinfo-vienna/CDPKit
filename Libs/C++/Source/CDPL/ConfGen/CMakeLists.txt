@@ -45,7 +45,7 @@ foreach(DATA_FILE ${DATA_FILES})
   set(DATA_FILE_STRINGS "${DATA_FILE_STRINGS}" "${DATA_FILE}.str") 
 endforeach(DATA_FILE)
 
-add_custom_target(gen-confgen-data-files DEPENDS ${DATA_FILE_STRINGS})
+add_custom_target(confgen-data-files DEPENDS ${DATA_FILE_STRINGS})
 
 set(cdpl-confgen_LIB_SRCS
     ${DATA_FILE_STRINGS}
@@ -124,7 +124,7 @@ endif()
   
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-  add_dependencies(cdpl-confgen-static gen-confgen-data-files)
+  add_dependencies(cdpl-confgen-static confgen-data-files)
   
   set_target_properties(cdpl-confgen-static PROPERTIES 
     OUTPUT_NAME cdpl-confgen
@@ -143,7 +143,7 @@ if(NOT PYPI_PACKAGE_BUILD)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-add_dependencies(cdpl-confgen-shared gen-confgen-data-files)
+add_dependencies(cdpl-confgen-shared confgen-data-files)
 
 target_link_libraries(cdpl-confgen-shared PUBLIC cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared
   cdpl-util-shared cdpl-forcefield-shared)

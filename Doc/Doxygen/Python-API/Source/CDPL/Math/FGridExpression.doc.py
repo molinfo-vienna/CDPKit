@@ -20,14 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief Represents the outcome of mathematical expressions/operations that result in a 3D grid.
+# 
 class FGridExpression(ConstFGridExpression):
 
+    ##
+    # \brief Swaps the contents of this grid expression with those of <em>e</em>.
+    # 
+    # \param e The grid expression to swap with.
+    # 
     def swap(e: FGridExpression) -> None: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the grid expression <em>e</em> to this expression.
     # 
     # \param e The source grid expression.
     # 
@@ -36,7 +41,7 @@ class FGridExpression(ConstFGridExpression):
     def assign(e: FGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the grid expression <em>e</em> to this expression.
     # 
     # \param e The source grid expression.
     # 
@@ -45,7 +50,7 @@ class FGridExpression(ConstFGridExpression):
     def assign(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the grid expression <em>e</em> to this expression.
     # 
     # \param e The source grid expression.
     # 
@@ -54,13 +59,11 @@ class FGridExpression(ConstFGridExpression):
     def assign(e: ConstDGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
+    # \brief Assigns the contents of the 3D \c numpy.ndarray object \a a to this grid expression.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
-    # \param e The source grid expression.
-    # 
-    # \return \a self.
-    # 
-    def assign(e: object) -> FGridExpression: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief Sets the value of the element (\a i, \a j, \a k) to \a v.
@@ -83,7 +86,7 @@ class FGridExpression(ConstFGridExpression):
     def __setitem__(ijk: tuple, v: float) -> None: pass
 
     ##
-    # \brief Adds the grid expression <em>e</em> element-wise to this grid (via a temporary to handle aliasing).
+    # \brief Adds the grid expression <em>e</em> element-wise to this expression.
     # 
     # \param e The source grid expression.
     # 
@@ -92,7 +95,7 @@ class FGridExpression(ConstFGridExpression):
     def __iadd__(e: FGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Adds the grid expression <em>e</em> element-wise to this grid (via a temporary to handle aliasing).
+    # \brief Adds the grid expression <em>e</em> element-wise to this expression.
     # 
     # \param e The source grid expression.
     # 
@@ -101,7 +104,7 @@ class FGridExpression(ConstFGridExpression):
     def __iadd__(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Subtracts the grid expression <em>e</em> element-wise from this grid (via a temporary to handle aliasing).
+    # \brief Subtracts the grid expression <em>e</em> element-wise from this expression.
     # 
     # \param e The source grid expression.
     # 
@@ -110,7 +113,7 @@ class FGridExpression(ConstFGridExpression):
     def __isub__(e: FGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Subtracts the grid expression <em>e</em> element-wise from this grid (via a temporary to handle aliasing).
+    # \brief Subtracts the grid expression <em>e</em> element-wise from this expression.
     # 
     # \param e The source grid expression.
     # 

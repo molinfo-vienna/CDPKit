@@ -66,6 +66,11 @@ class DRegularGridSet(Boost.Python.instance):
     # 
     def assign(array: DRegularGridSet) -> DRegularGridSet: pass
 
+    ##
+    # \brief Replaces the current state with a copy of the state of the \c int instance \a num_elem.
+    # \param num_elem The \c int instance to copy.
+    # \return \a self
+    # 
     def assign(num_elem: int, value: DRegularGrid) -> None: pass
 
     def addElement(value: DRegularGrid) -> None: pass

@@ -371,6 +371,10 @@ Math.DMLR § Math.MLR
 
 Math.FMLR § Math.MLR
 
+Math.DKabschAlgorithm § Math.KabschAlgorithm
+
+Math.FKabschAlgorithm § Math.KabschAlgorithm
+
 Math.DVectorBFGSMinimizer § Math.BFGSMinimizer
 
 Math.FVectorBFGSMinimizer § Math.BFGSMinimizer
@@ -398,10 +402,18 @@ param c § param g
 # ---
 
 Math.*GridExpression. § Math.Grid.
+grid ( § expression (
+Assigns the grid expression § Assigns the contents of the grid expression
+' (via a temporary to handle aliasing)' §
 
 Math.*GridExpression.getElement(i,j,k) § Math.Grid.__call__(i,j,k)
 
 Math.*GridExpression.__getitem__(ijk) § Math.Grid.__call__(i,j,k)
+
+Math.*GridExpression.swap(e) § Math.Grid.swap(g)
+grid § grid expression
+<em>g</em> § <em>e</em>
+param g § param e
 
 # ---
 
@@ -424,12 +436,20 @@ Math.*Matrix.getSize() § Math.Matrix.getSize1()
 # ---
 
 Math.*MatrixExpression. § Math.Matrix.
+matrix ( § expression (
+Assigns the matrix expression § Assigns the contents of the matrix expression
+' (via a temporary to handle aliasing)' §
 
 Math.*MatrixExpression.getElement(i,j) § Math.Matrix.__call__(i,j)
 
 Math.*MatrixExpression.__getitem__(ij) § Math.Matrix.__call__(i,j)
 
 Math.*MatrixExpression.getSize() § Math.Matrix.getSize1()
+
+Math.*MatrixExpression.swap(e) § Math.Matrix.swap(m)
+matrix § matrix expression
+<em>m</em> § <em>e</em>
+param m § param e
 
 # ---
 
@@ -448,8 +468,16 @@ param c § param v
 # ---
 
 Math.*VectorExpression. § Math.Vector.
+vector ( § expression (
+Assigns the vector expression § Assigns the contents of the vector expression
+' (via a temporary to handle aliasing)' §
 
 Math.*VectorExpression.getElement(i) § Math.Vector.__getitem__(i)
+
+Math.*VectorExpression.swap(e) § Math.Vector.swap(v)
+vector § vector expression
+<em>v</em> § <em>e</em>
+param v § param e
 
 #
 # --- CDPL.Util package ---

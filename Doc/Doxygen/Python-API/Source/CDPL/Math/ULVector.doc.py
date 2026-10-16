@@ -80,8 +80,9 @@ class ULVector(Boost.Python.instance):
     def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c ULVector instance.
-    # \param a 
+    # \brief Constructs the vector from the \c numpy.ndarray object \a a.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def __init__(a: object) -> None: pass
 
@@ -158,9 +159,9 @@ class ULVector(Boost.Python.instance):
     def assign(v: ULVector) -> ULVector: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this vector.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> None: pass
 
@@ -190,8 +191,8 @@ class ULVector(Boost.Python.instance):
     def getElement(i: int) -> int: pass
 
     ##
-    # \brief Converts the \c ULVector instance into a corresponding \e NumPy array.
-    # \return The generated \e NumPy array.
+    # \brief Converts the \c ULVector instance into a corresponding \c numpy.ndarray object.
+    # \return The generated \c numpy.ndarray object.
     # \see [\ref NUMPY]
     # 
     def toArray() -> object: pass

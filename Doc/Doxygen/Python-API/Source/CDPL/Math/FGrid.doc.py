@@ -70,11 +70,11 @@ class FGrid(Boost.Python.instance):
     def __init__(e: ConstDGridExpression) -> None: pass
 
     ##
-    # \brief Constructs the grid from the grid expression <em>e</em> (materializing the expression result).
+    # \brief Constructs the grid from the 3D \c numpy.ndarray object \a a.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
-    # \param e The grid expression to materialize.
-    # 
-    def __init__(e: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief Resizes the grid to <em>m&times;n&times;o</em> elements.
@@ -125,15 +125,6 @@ class FGrid(Boost.Python.instance):
     def assign(e: ConstDGridExpression) -> FGrid: pass
 
     ##
-    # \brief Assigns the grid expression <em>e</em> to this grid (via a temporary to handle aliasing).
-    # 
-    # \param e The source grid expression.
-    # 
-    # \return \a self.
-    # 
-    def assign(e: object) -> FGrid: pass
-
-    ##
     # \brief Copy-assigns the contents of <em>g</em> to this grid.
     # 
     # \param g The source grid.
@@ -141,6 +132,13 @@ class FGrid(Boost.Python.instance):
     # \return \a self.
     # 
     def assign(g: FGrid) -> FGrid: pass
+
+    ##
+    # \brief Assigns the contents of the 3D \c numpy.ndarray object \a a to this grid.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
+    # 
+    def assign(a: object) -> FGrid: pass
 
     ##
     # \brief Returns the first-axis size.
@@ -195,8 +193,8 @@ class FGrid(Boost.Python.instance):
     def getElement(i: int) -> float: pass
 
     ##
-    # \brief Converts the \c FGrid instance into a corresponding \e NumPy array.
-    # \return The generated \e NumPy array.
+    # \brief Converts the \c FGrid instance into a corresponding \c numpy.ndarray object.
+    # \return The generated \c numpy.ndarray object.
     # \see [\ref NUMPY]
     # 
     def toArray() -> object: pass

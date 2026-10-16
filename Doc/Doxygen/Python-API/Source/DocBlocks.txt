@@ -198,7 +198,7 @@ $$$$
 \return A \c @RT@ instance holding the result of the division.
 $$$$
 
-.__copy__assign
+.assign(
 \brief Replaces the current state with a copy of the state of the \c @AT1@ instance \a @A1@.
 \param @A0@ The \c @CN@ instance this method is called upon.
 \param @A1@ The \c @AT1@ instance to copy.
@@ -222,8 +222,8 @@ $$$$
 # ---
 
 .toArray()
-\brief Converts the \c @CN@ instance into a corresponding \e NumPy array.
-\return The generated \e NumPy array.
+\brief Converts the \c @CN@ instance into a corresponding \c numpy.ndarray object.
+\return The generated \c numpy.ndarray object.
 \see [\ref NUMPY]
 $$$$
 

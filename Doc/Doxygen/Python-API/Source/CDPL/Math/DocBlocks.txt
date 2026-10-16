@@ -12,6 +12,18 @@ $$$$
 
 # ---
 
+Grid.__init__(a)
+\brief Constructs the grid from the 3D \c numpy.ndarray object \a a.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+Grid.assign(a)
+\brief Assigns the contents of the 3D \c numpy.ndarray object \a a to this grid.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
 Grid.setElement(i,j,k,v)
 \brief Sets the value of the element (\a i, \a j, \a k) to \a v.
 \param i The zero-based first-axis index.
@@ -44,6 +56,16 @@ $$$$
 
 # ---
 
+GridExpression^
+\brief Represents the outcome of mathematical expressions/operations that result in a 3D grid.
+$$$$
+
+GridExpression.assign(a)
+\brief Assigns the contents of the 3D \c numpy.ndarray object \a a to this grid expression.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
 GridExpression.setElement(i,j,k,v)
 \brief Sets the value of the element (\a i, \a j, \a k) to \a v.
 \param i The zero-based first-axis index.
@@ -64,6 +86,18 @@ $$$$
 
 # ---
 
+Matrix.__init__(a)
+\brief Constructs the matrix from the 2D \c numpy.ndarray object \a a.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+Matrix.assign(a)
+\brief Assigns the contents of the 2D \c numpy.ndarray object \a a to this matrix.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
 Matrix.setElement(i,j,v)
 \brief Sets the value of the element (\a i, \a j) to \a v.
 \param i The zero-based row index.
@@ -82,6 +116,16 @@ $$$$
 
 # ---
 
+MatrixExpression^
+\brief Represents the outcome of mathematical expressions/operations that result in a matrix.
+$$$$
+
+MatrixExpression.assign(a)
+\brief Assigns the contents of the 2D \c numpy.ndarray object \a a to this matrix expression.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
 MatrixExpression.setElement(i,j,v)
 \brief Sets the value of the element (\a i, \a j) to \a v.
 \param i The zero-based row index.
@@ -99,6 +143,18 @@ $$$$
 
 # ---
 
+Vector.__init__(a)
+\brief Constructs the vector from the \c numpy.ndarray object \a a.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+Vector.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this vector.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
 Vector.setElement(i,v)
 \brief Sets the value of the element at index \a i to \a v.
 \param i The zero-based element index.
@@ -115,6 +171,16 @@ $$$$
 
 # ---
 
+VectorExpression^
+\brief Represents the outcome of mathematical expressions/operations that result in a vector.
+$$$$
+
+VectorExpression.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this vector expression.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
 VectorExpression.setElement(i,v)
 \brief Sets the value of the element at index \a i to \a v.
 \param i The zero-based element index.
@@ -127,6 +193,12 @@ VectorExpression.__setitem__(i,v)
 \param i The zero-based element index.
 \param v The new value of the element.
 \throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+# ---
+
+QuaternionExpression^
+\brief Represents the outcome of mathematical expressions/operations that result in a quaternion.
 $$$$
 
 #

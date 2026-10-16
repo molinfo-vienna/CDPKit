@@ -83,8 +83,9 @@ class SparseFMatrix(Boost.Python.instance):
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c SparseFMatrix instance.
-    # \param a 
+    # \brief Constructs the matrix from the 2D \c numpy.ndarray object \a a.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def __init__(a: object) -> None: pass
 
@@ -168,11 +169,11 @@ class SparseFMatrix(Boost.Python.instance):
     def assign(m: SparseFMatrix) -> SparseFMatrix: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the 2D \c numpy.ndarray object \a a to this matrix.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
-    def assign(a: object) -> None: pass
+    def assign(a: object) -> SparseFMatrix: pass
 
     ##
     # \brief Returns the logical number of rows.
@@ -208,8 +209,8 @@ class SparseFMatrix(Boost.Python.instance):
     def getElement(i: int, j: int) -> float: pass
 
     ##
-    # \brief Converts the \c SparseFMatrix instance into a corresponding \e NumPy array.
-    # \return The generated \e NumPy array.
+    # \brief Converts the \c SparseFMatrix instance into a corresponding \c numpy.ndarray object.
+    # \return The generated \c numpy.ndarray object.
     # \see [\ref NUMPY]
     # 
     def toArray() -> object: pass

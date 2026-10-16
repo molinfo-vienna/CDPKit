@@ -431,7 +431,7 @@ ISBN 0-521-43108-5, http://www.nr.com/
 <tr>
 <td valign="top">\anchor NUMPY<i>[NUMPY]</i></td>
 <td valign="top">
-NumPy Project Website: https://numpy.org/
+\c numpy.ndarray Documentation: https://numpy.org/doc/stable/reference/arrays.ndarray.html
 </td>
 </tr>
 

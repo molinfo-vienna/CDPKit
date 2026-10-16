@@ -68,6 +68,11 @@ class GaussianShapeSet(Boost.Python.instance):
     # 
     def assign(array: GaussianShapeSet) -> GaussianShapeSet: pass
 
+    ##
+    # \brief Replaces the current state with a copy of the state of the \c int instance \a num_elem.
+    # \param num_elem The \c int instance to copy.
+    # \return \a self
+    # 
     def assign(num_elem: int, value: GaussianShape) -> None: pass
 
     def addElement(value: GaussianShape) -> None: pass

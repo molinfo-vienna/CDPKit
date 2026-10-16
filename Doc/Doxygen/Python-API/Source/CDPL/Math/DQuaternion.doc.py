@@ -173,8 +173,8 @@ class DQuaternion(Boost.Python.instance):
     def getC4() -> float: pass
 
     ##
-    # \brief Converts the \c DQuaternion instance into a corresponding \e NumPy array.
-    # \return The generated \e NumPy array.
+    # \brief Converts the \c DQuaternion instance into a corresponding \c numpy.ndarray object.
+    # \return The generated \c numpy.ndarray object.
     # \see [\ref NUMPY]
     # 
     def toArray() -> object: pass
