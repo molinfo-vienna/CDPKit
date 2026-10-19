@@ -479,6 +479,44 @@ vector § vector expression
 <em>v</em> § <em>e</em>
 param v § param e
 
+# ---
+
+Math.*RealQuaternion.set(r) § Math.RealQuaternion.operator=(t)
+<em>t</em> § <em>r</em>
+param t § param r
+
+Math.*Quaternion.__iadd__(q) § Math.Quaternion.__iadd__(c)
+quaternion container § quaternion
+<em>c</em> § <em>q</em>
+param c § param q
+
+Math.*Quaternion.__isub__(q) § Math.Quaternion.__isub__(c)
+quaternion container § quaternion
+<em>c</em> § <em>q</em>
+param c § param q
+
+Math.*Quaternion.__imul__(q) § Math.Quaternion.__imul__(c)
+quaternion container § quaternion
+<em>c</em> § <em>q</em>
+param c § param q
+
+Math.*Quaternion.__idiv__(q) § Math.Quaternion.__idiv__(c)
+quaternion container § quaternion
+<em>c</em> § <em>q</em>
+param c § param q
+
+# ---
+
+Math.*QuaternionExpression. § Math.Quaternion.
+quaternion ( § expression (
+Assigns the quaternion expression § Assigns the contents of the quaternion expression
+' (via a temporary to handle aliasing)' §
+
+Math.*QuaternionExpression.swap(e) § Math.Quaternion.swap(q)
+quaternion § quaternion expression
+<em>q</em> § <em>e</em>
+param q § param e
+
 #
 # --- CDPL.Util package ---
 #

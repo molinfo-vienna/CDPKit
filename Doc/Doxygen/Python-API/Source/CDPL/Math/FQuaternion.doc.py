@@ -37,7 +37,7 @@ class FQuaternion(Boost.Python.instance):
     def __init__(q: FQuaternion) -> None: pass
 
     ##
-    # \brief Constructs the quaternion with the supplied component values (omitted components default to the value-initialized ValueType).
+    # \brief Constructs the quaternion with the supplied component values.
     # 
     # \param c1 The real component.
     # \param c2 The first imaginary component.
@@ -75,8 +75,9 @@ class FQuaternion(Boost.Python.instance):
     def __init__(e: ConstULQuaternionExpression) -> None: pass
 
     ##
-    # \brief Contructs the \c FQuaternion instance.
-    # \param a 
+    # \brief Constructs the quaternion from the \c numpy.ndarray object \a a.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def __init__(a: object) -> None: pass
 
@@ -138,9 +139,9 @@ class FQuaternion(Boost.Python.instance):
     def assign(q: FQuaternion) -> FQuaternion: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this quaternion.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> None: pass
 
@@ -186,16 +187,32 @@ class FQuaternion(Boost.Python.instance):
     # 
     def swap(q: FQuaternion) -> None: pass
 
+    ##
+    # \brief Sets the value of the real component \e C1 to \a v.
+    # \param v The new value of the real component \e C1.
+    # 
     def setC1(v: float) -> None: pass
 
+    ##
+    # \brief Sets the value of the imaginary component \e C2 to \a v.
+    # \param v The new value of the imaginary component \e C2.
+    # 
     def setC2(v: float) -> None: pass
 
+    ##
+    # \brief Sets the value of the imaginary component \e C3 to \a v.
+    # \param v The new value of the imaginary component \e C3.
+    # 
     def setC3(v: float) -> None: pass
 
+    ##
+    # \brief Sets the value of the imaginary component \e C4 to \a v.
+    # \param v The new value of the imaginary component \e C4.
+    # 
     def setC4(v: float) -> None: pass
 
     ##
-    # \brief Sets the four quaternion components to the supplied values (omitted arguments default to the value-initialized ValueType).
+    # \brief Sets the four quaternion components to the supplied values.
     # 
     # \param c1 The new real component.
     # \param c2 The new first imaginary component.
@@ -264,6 +281,11 @@ class FQuaternion(Boost.Python.instance):
     # 
     def __add__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the addition operation <tt>t + self</tt>.
+    # \param t Specifies the first addend.
+    # \return A \c ConstFQuaternionExpression instance holding the result of the addition.
+    # 
     def __radd__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
@@ -280,6 +302,11 @@ class FQuaternion(Boost.Python.instance):
     # 
     def __sub__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the subtraction operation <tt>t - self</tt>.
+    # \param t Specifies the minuend.
+    # \return A \c FQuaternion instance holding the result of the subtraction.
+    # 
     def __rsub__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
@@ -324,6 +351,11 @@ class FQuaternion(Boost.Python.instance):
     # 
     def __truediv__(t: float) -> ConstFQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the division operation <tt>t // self</tt>.
+    # \param t Specifies the dividend.
+    # \return A \c ConstFQuaternionExpression instance holding the result of the division.
+    # 
     def __rdiv__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
@@ -336,18 +368,22 @@ class FQuaternion(Boost.Python.instance):
     def __iadd__(t: float) -> FQuaternion: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param q Specifies the second addend.
-    # \return The updated \c FQuaternion instance \a self.
+    # \brief Adds the components of the quaternion <em>q</em> to this quaternion (no alias check needed).
+    # 
+    # \param q The source quaternion.
+    # 
+    # \return \a self.
     # 
     def __iadd__(q: FQuaternion) -> FQuaternion: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param q Specifies the second addend.
-    # \return The updated \c FQuaternion instance \a self.
+    # \brief Adds the quaternion expression <em>e</em> to this quaternion (via a temporary to handle aliasing).
     # 
-    def __iadd__(q: ConstFQuaternionExpression) -> FQuaternion: pass
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __iadd__(e: ConstFQuaternionExpression) -> FQuaternion: pass
 
     ##
     # \brief Subtracts the scalar <em>t</em> from the real component.
@@ -359,18 +395,22 @@ class FQuaternion(Boost.Python.instance):
     def __isub__(t: float) -> FQuaternion: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param q Specifies the subtrahend.
-    # \return The updated \c FQuaternion instance \a self.
+    # \brief Subtracts the components of the quaternion <em>q</em> from this quaternion (no alias check needed).
+    # 
+    # \param q The source quaternion.
+    # 
+    # \return \a self.
     # 
     def __isub__(q: FQuaternion) -> FQuaternion: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param q Specifies the subtrahend.
-    # \return The updated \c FQuaternion instance \a self.
+    # \brief Subtracts the quaternion expression <em>e</em> from this quaternion (via a temporary to handle aliasing).
     # 
-    def __isub__(q: ConstFQuaternionExpression) -> FQuaternion: pass
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __isub__(e: ConstFQuaternionExpression) -> FQuaternion: pass
 
     ##
     # \brief Multiplies every component by the scalar <em>t</em>.
@@ -382,18 +422,13 @@ class FQuaternion(Boost.Python.instance):
     def __imul__(t: float) -> FQuaternion: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param q Specifies the multiplier.
-    # \return The updated \c FQuaternion instance \a self.
+    # \brief Right-multiplies this quaternion by the quaternion expression <em>e</em> (Hamilton product, via a temporary).
     # 
-    def __imul__(q: FQuaternion) -> FQuaternion: pass
-
-    ##
-    # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param q Specifies the multiplier.
-    # \return The updated \c FQuaternion instance \a self.
+    # \param e The right-hand quaternion expression.
     # 
-    def __imul__(q: ConstFQuaternionExpression) -> FQuaternion: pass
+    # \return \a self.
+    # 
+    def __imul__(e: ConstFQuaternionExpression) -> FQuaternion: pass
 
     ##
     # \brief Divides every component by the scalar <em>t</em>.
@@ -405,18 +440,13 @@ class FQuaternion(Boost.Python.instance):
     def __idiv__(t: float) -> FQuaternion: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c FQuaternion instance \a self.
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
     # 
-    def __idiv__(q: FQuaternion) -> FQuaternion: pass
-
-    ##
-    # \brief Performs the in-place division operation <tt>self //= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c FQuaternion instance \a self.
+    # \param e The right-hand quaternion expression.
     # 
-    def __idiv__(q: ConstFQuaternionExpression) -> FQuaternion: pass
+    # \return \a self.
+    # 
+    def __idiv__(e: ConstFQuaternionExpression) -> FQuaternion: pass
 
     ##
     # \brief Divides every component by the scalar <em>t</em>.
@@ -428,17 +458,12 @@ class FQuaternion(Boost.Python.instance):
     def __itruediv__(t: float) -> FQuaternion: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c FQuaternion instance \a self.
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
     # 
-    def __itruediv__(q: FQuaternion) -> FQuaternion: pass
-
-    ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c FQuaternion instance \a self.
+    # \param e The right-hand quaternion expression.
     # 
-    def __itruediv__(q: ConstFQuaternionExpression) -> FQuaternion: pass
+    # \return \a self.
+    # 
+    def __itruediv__(e: ConstFQuaternionExpression) -> FQuaternion: pass
 
     objectID = property(getObjectID)

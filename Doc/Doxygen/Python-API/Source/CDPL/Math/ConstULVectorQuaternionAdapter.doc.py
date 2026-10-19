@@ -125,6 +125,11 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __add__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the addition operation <tt>t + self</tt>.
+    # \param t Specifies the first addend.
+    # \return A \c ConstULQuaternionExpression instance holding the result of the addition.
+    # 
     def __radd__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -141,6 +146,11 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __sub__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the subtraction operation <tt>t - self</tt>.
+    # \param t Specifies the minuend.
+    # \return A \c ConstULVectorQuaternionAdapter instance holding the result of the subtraction.
+    # 
     def __rsub__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -185,6 +195,11 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __truediv__(t: int) -> ConstULQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the division operation <tt>t // self</tt>.
+    # \param t Specifies the dividend.
+    # \return A \c ConstULQuaternionExpression instance holding the result of the division.
+    # 
     def __rdiv__(t: int) -> ConstULQuaternionExpression: pass
 
     objectID = property(getObjectID)

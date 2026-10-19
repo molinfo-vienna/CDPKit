@@ -163,10 +163,24 @@ $$$$
 \return A \c @RT@ instance holding the result of the addition.
 $$$$
 
+.__radd__
+\brief Returns the result of the addition operation <tt>@A1@ + @A0@</tt>.
+\param @A0@ The \c @CN@ instance representing the second addend.
+\param @A1@ Specifies the first addend.
+\return A \c @RT@ instance holding the result of the addition.
+$$$$
+
 .__sub__
 \brief Returns the result of the subtraction operation <tt>@A0@ - @A1@</tt>.
 \param @A0@ The \c @CN@ instance acting as minuend.
 \param @A1@ Specifies the subtrahend.
+\return A \c @CN@ instance holding the result of the subtraction.
+$$$$
+
+.__rsub__
+\brief Returns the result of the subtraction operation <tt>@A1@ - @A0@</tt>.
+\param @A0@ The \c @CN@ instance acting as subtrahend.
+\param @A1@ Specifies the minuend.
 \return A \c @CN@ instance holding the result of the subtraction.
 $$$$
 
@@ -188,6 +202,13 @@ $$$$
 \brief Returns the result of the division operation <tt>@A0@ // @A1@</tt>.
 \param @A0@ The \c @CN@ instance acting as dividend.
 \param @A1@ Specifies the divisor.
+\return A \c @RT@ instance holding the result of the division.
+$$$$
+
+.__rdiv__
+\brief Returns the result of the division operation <tt>@A1@ // @A0@</tt>.
+\param @A0@ The \c @CN@ instance acting as divisor.
+\param @A1@ Specifies the dividend.
 \return A \c @RT@ instance holding the result of the division.
 $$$$
 

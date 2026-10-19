@@ -24,161 +24,203 @@
 # 
 class LQuaternionExpression(ConstLQuaternionExpression):
 
+    ##
+    # \brief Swaps the four components of this quaternion expression with those of <em>e</em>.
+    # 
+    # \param e The quaternion expression to swap with.
+    # 
     def swap(e: LQuaternionExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c LQuaternionExpression instance \a e.
-    # \param e The \c LQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the quaternion expression <em>e</em> to this expression.
+    # 
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFQuaternionExpression instance \a e.
-    # \param e The \c ConstFQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the quaternion expression <em>e</em> to this expression.
+    # 
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDQuaternionExpression instance \a e.
-    # \param e The \c ConstDQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the quaternion expression <em>e</em> to this expression.
+    # 
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLQuaternionExpression instance \a e.
-    # \param e The \c ConstLQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the quaternion expression <em>e</em> to this expression.
+    # 
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULQuaternionExpression instance \a e.
-    # \param e The \c ConstULQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the quaternion expression <em>e</em> to this expression.
+    # 
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this quaternion expression.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> None: pass
 
+    ##
+    # \brief Sets the value of the real component \e C1 to \a v.
+    # \param v The new value of the real component \e C1.
+    # 
     def setC1(v: int) -> None: pass
 
+    ##
+    # \brief Sets the value of the imaginary component \e C2 to \a v.
+    # \param v The new value of the imaginary component \e C2.
+    # 
     def setC2(v: int) -> None: pass
 
+    ##
+    # \brief Sets the value of the imaginary component \e C3 to \a v.
+    # \param v The new value of the imaginary component \e C3.
+    # 
     def setC3(v: int) -> None: pass
 
+    ##
+    # \brief Sets the value of the imaginary component \e C4 to \a v.
+    # \param v The new value of the imaginary component \e C4.
+    # 
     def setC4(v: int) -> None: pass
 
+    ##
+    # \brief Sets the four quaternion components to the supplied values.
+    # 
+    # \param c1 The new real component.
+    # \param c2 The new first imaginary component.
+    # \param c3 The new second imaginary component.
+    # \param c4 The new third imaginary component.
+    # 
     def set(c1: int = 0, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param t Specifies the second addend.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Adds the scalar <em>t</em> to the real component.
+    # 
+    # \param t The scalar addend.
+    # 
+    # \return \a self.
     # 
     def __iadd__(t: int) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Adds the quaternion expression <em>e</em> to this expression.
+    # 
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param q Specifies the second addend.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Adds the quaternion expression <em>e</em> to this expression.
     # 
-    def __iadd__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __iadd__(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param t Specifies the subtrahend.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Subtracts the scalar <em>t</em> from the real component.
+    # 
+    # \param t The scalar subtrahend.
+    # 
+    # \return \a self.
     # 
     def __isub__(t: int) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Subtracts the quaternion expression <em>e</em> from this expression.
+    # 
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param q Specifies the subtrahend.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Subtracts the quaternion expression <em>e</em> from this expression.
     # 
-    def __isub__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
+    # \param e The source quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __isub__(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Multiplies every component by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= e</tt>.
-    # \param e Specifies the multiplier.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Right-multiplies this quaternion by the quaternion expression <em>e</em> (Hamilton product, via a temporary).
     # 
-    def __imul__(e: LQuaternionExpression) -> LQuaternionExpression: pass
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __imul__(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param q Specifies the multiplier.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Divides every component by the scalar <em>t</em>.
     # 
-    def __imul__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
-
-    ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= e</tt>.
-    # \param e Specifies the divisor.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
     # 
-    def __idiv__(e: LQuaternionExpression) -> LQuaternionExpression: pass
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __idiv__(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Divides every component by the scalar <em>t</em>.
     # 
-    def __idiv__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
-
-    ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> LQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= e</tt>.
-    # \param e Specifies the divisor.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
     # 
-    def __itruediv__(e: LQuaternionExpression) -> LQuaternionExpression: pass
-
-    ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c LQuaternionExpression instance \a self.
+    # \param e The right-hand quaternion expression.
     # 
-    def __itruediv__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
+    # \return \a self.
+    # 
+    def __itruediv__(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass

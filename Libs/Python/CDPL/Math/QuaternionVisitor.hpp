@@ -307,21 +307,23 @@ namespace CDPLPythonMath
                      python::return_self<>())
                 .def("__isub__", &isubOperatorQuat, (python::arg("self"), python::arg(argName)),
                      python::return_self<>())
+                /*
                 .def("__imul__", &imulOperatorQuat,
                      (python::arg("self"), python::arg(argName)), python::return_self<>())
                 .def("__idiv__", &idivOperatorQuat,
                      (python::arg("self"), python::arg(argName)), python::return_self<>())
                 .def("__itruediv__", &idivOperatorQuat,
                      (python::arg("self"), python::arg(argName)), python::return_self<>())
-                .def("__iadd__", &iaddOperatorQuatExpr, (python::arg("self"), python::arg("q")),
+                */
+                .def("__iadd__", &iaddOperatorQuatExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
-                .def("__isub__", &isubOperatorQuatExpr, (python::arg("self"), python::arg("q")),
+                .def("__isub__", &isubOperatorQuatExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
-                .def("__imul__", &imulOperatorQuatExpr, (python::arg("self"), python::arg("q")),
+                .def("__imul__", &imulOperatorQuatExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
-                .def("__idiv__", &idivOperatorQuatExpr, (python::arg("self"), python::arg("q")),
+                .def("__idiv__", &idivOperatorQuatExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
-                .def("__itruediv__", &idivOperatorQuatExpr, (python::arg("self"), python::arg("q")),
+                .def("__itruediv__", &idivOperatorQuatExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>());
         }
 

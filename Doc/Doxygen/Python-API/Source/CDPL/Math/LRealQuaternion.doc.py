@@ -43,6 +43,13 @@ class LRealQuaternion(Boost.Python.instance):
     # 
     def __init__(r: int) -> None: pass
 
+    ##
+    # \brief Assigns the scalar <em>r</em> to the real component.
+    # 
+    # \param r The scalar value.
+    # 
+    # \return \a self.
+    # 
     def set(r: int = 0) -> LRealQuaternion: pass
 
     ##
@@ -258,6 +265,11 @@ class LRealQuaternion(Boost.Python.instance):
     # 
     def __add__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the addition operation <tt>t + self</tt>.
+    # \param t Specifies the first addend.
+    # \return A \c ConstLQuaternionExpression instance holding the result of the addition.
+    # 
     def __radd__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
@@ -274,6 +286,11 @@ class LRealQuaternion(Boost.Python.instance):
     # 
     def __sub__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the subtraction operation <tt>t - self</tt>.
+    # \param t Specifies the minuend.
+    # \return A \c LRealQuaternion instance holding the result of the subtraction.
+    # 
     def __rsub__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
@@ -318,6 +335,11 @@ class LRealQuaternion(Boost.Python.instance):
     # 
     def __truediv__(t: int) -> ConstLQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the division operation <tt>t // self</tt>.
+    # \param t Specifies the dividend.
+    # \return A \c ConstLQuaternionExpression instance holding the result of the division.
+    # 
     def __rdiv__(t: int) -> ConstLQuaternionExpression: pass
 
     objectID = property(getObjectID)

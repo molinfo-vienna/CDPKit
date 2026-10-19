@@ -36,12 +36,32 @@ class ConstULQuaternionExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the real component <em>C1</em>.
+    # 
+    # \return A reference to <em>C1</em>.
+    # 
     def getC1() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C2</em>.
+    # 
+    # \return A reference to <em>C2</em>.
+    # 
     def getC2() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C3</em>.
+    # 
+    # \return A reference to <em>C3</em>.
+    # 
     def getC3() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C4</em>.
+    # 
+    # \return A reference to <em>C4</em>.
+    # 
     def getC4() -> int: pass
 
     ##
@@ -97,6 +117,11 @@ class ConstULQuaternionExpression(Boost.Python.instance):
     # 
     def __add__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the addition operation <tt>t + self</tt>.
+    # \param t Specifies the first addend.
+    # \return A \c ConstULQuaternionExpression instance holding the result of the addition.
+    # 
     def __radd__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -113,6 +138,11 @@ class ConstULQuaternionExpression(Boost.Python.instance):
     # 
     def __sub__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the subtraction operation <tt>t - self</tt>.
+    # \param t Specifies the minuend.
+    # \return A \c ConstULQuaternionExpression instance holding the result of the subtraction.
+    # 
     def __rsub__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
@@ -157,6 +187,11 @@ class ConstULQuaternionExpression(Boost.Python.instance):
     # 
     def __truediv__(t: int) -> ConstULQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the division operation <tt>t // self</tt>.
+    # \param t Specifies the dividend.
+    # \return A \c ConstULQuaternionExpression instance holding the result of the division.
+    # 
     def __rdiv__(t: int) -> ConstULQuaternionExpression: pass
 
     objectID = property(getObjectID)

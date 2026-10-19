@@ -172,6 +172,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __add__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the addition operation <tt>t + self</tt>.
+    # \param t Specifies the first addend.
+    # \return A \c ConstLQuaternionExpression instance holding the result of the addition.
+    # 
     def __radd__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
@@ -188,6 +193,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __sub__(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the subtraction operation <tt>t - self</tt>.
+    # \param t Specifies the minuend.
+    # \return A \c LVectorQuaternionAdapter instance holding the result of the subtraction.
+    # 
     def __rsub__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
@@ -232,6 +242,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def __truediv__(t: int) -> ConstLQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the division operation <tt>t // self</tt>.
+    # \param t Specifies the dividend.
+    # \return A \c ConstLQuaternionExpression instance holding the result of the division.
+    # 
     def __rdiv__(t: int) -> ConstLQuaternionExpression: pass
 
     ##
@@ -249,11 +264,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __iadd__(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param q Specifies the second addend.
+    # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param e Specifies the second addend.
     # \return The updated \c LVectorQuaternionAdapter instance \a self.
     # 
-    def __iadd__(q: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
+    def __iadd__(e: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
@@ -270,11 +285,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __isub__(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param q Specifies the subtrahend.
+    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param e Specifies the subtrahend.
     # \return The updated \c LVectorQuaternionAdapter instance \a self.
     # 
-    def __isub__(q: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
+    def __isub__(e: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
@@ -284,18 +299,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __imul__(t: int) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= a</tt>.
-    # \param a Specifies the multiplier.
+    # \brief Performs the in-place multiplication operation <tt>self *= e</tt>.
+    # \param e Specifies the multiplier.
     # \return The updated \c LVectorQuaternionAdapter instance \a self.
     # 
-    def __imul__(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
-
-    ##
-    # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param q Specifies the multiplier.
-    # \return The updated \c LVectorQuaternionAdapter instance \a self.
-    # 
-    def __imul__(q: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
+    def __imul__(e: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self //= t</tt>.
@@ -305,18 +313,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __idiv__(t: int) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= a</tt>.
-    # \param a Specifies the divisor.
+    # \brief Performs the in-place division operation <tt>self //= e</tt>.
+    # \param e Specifies the divisor.
     # \return The updated \c LVectorQuaternionAdapter instance \a self.
     # 
-    def __idiv__(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
-
-    ##
-    # \brief Performs the in-place division operation <tt>self //= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c LVectorQuaternionAdapter instance \a self.
-    # 
-    def __idiv__(q: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
+    def __idiv__(e: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
 
     ##
     # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
@@ -326,18 +327,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __itruediv__(t: int) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= a</tt>.
-    # \param a Specifies the divisor.
+    # \brief Returns the result of the in-place \e true division operation <tt>self /= e</tt>.
+    # \param e Specifies the divisor.
     # \return The updated \c LVectorQuaternionAdapter instance \a self.
     # 
-    def __itruediv__(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
-
-    ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= q</tt>.
-    # \param q Specifies the divisor.
-    # \return The updated \c LVectorQuaternionAdapter instance \a self.
-    # 
-    def __itruediv__(q: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
+    def __itruediv__(e: ConstLQuaternionExpression) -> LVectorQuaternionAdapter: pass
 
     objectID = property(getObjectID)
 

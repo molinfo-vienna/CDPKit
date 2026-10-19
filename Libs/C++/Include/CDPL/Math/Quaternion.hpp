@@ -388,7 +388,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Sets the components of the wrapped quaternion to the supplied values (omitted components default to the value-initialized ValueType).
+             * \brief Sets the components of the wrapped quaternion to the supplied values.
              * \param c1 The real component.
              * \param c2 The first imaginary component.
              * \param c3 The second imaginary component.
@@ -466,7 +466,7 @@ namespace CDPL
             Quaternion() {}
 
             /**
-             * \brief Constructs the quaternion with the supplied component values (omitted components default to the value-initialized ValueType).
+             * \brief Constructs the quaternion with the supplied component values.
              * \param c1 The real component.
              * \param c2 The first imaginary component.
              * \param c3 The second imaginary component.
@@ -592,7 +592,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Sets the four quaternion components to the supplied values (omitted arguments default to the value-initialized ValueType).
+             * \brief Sets the four quaternion components to the supplied values.
              * \param c1 The new real component.
              * \param c2 The new first imaginary component.
              * \param c3 The new second imaginary component.

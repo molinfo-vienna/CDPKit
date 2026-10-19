@@ -197,8 +197,68 @@ $$$$
 
 # ---
 
+Quaternion.__init__(a)
+\brief Constructs the quaternion from the \c numpy.ndarray object \a a.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+Quaternion.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this quaternion.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+Quaternion.setC1(v)
+\brief Sets the value of the real component \e C1 to \a v.
+\param v The new value of the real component \e C1.
+$$$$
+
+Quaternion.setC2(v)
+\brief Sets the value of the imaginary component \e C2 to \a v.
+\param v The new value of the imaginary component \e C2.
+$$$$
+
+Quaternion.setC3(v)
+\brief Sets the value of the imaginary component \e C3 to \a v.
+\param v The new value of the imaginary component \e C3.
+$$$$
+
+Quaternion.setC4(v)
+\brief Sets the value of the imaginary component \e C4 to \a v.
+\param v The new value of the imaginary component \e C4.
+$$$$
+
+# ---
+
 QuaternionExpression^
 \brief Represents the outcome of mathematical expressions/operations that result in a quaternion.
+$$$$
+
+QuaternionExpression.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this quaternion expression.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+QuaternionExpression.setC1(v)
+\brief Sets the value of the real component \e C1 to \a v.
+\param v The new value of the real component \e C1.
+$$$$
+
+QuaternionExpression.setC2(v)
+\brief Sets the value of the imaginary component \e C2 to \a v.
+\param v The new value of the imaginary component \e C2.
+$$$$
+
+QuaternionExpression.setC3(v)
+\brief Sets the value of the imaginary component \e C3 to \a v.
+\param v The new value of the imaginary component \e C3.
+$$$$
+
+QuaternionExpression.setC4(v)
+\brief Sets the value of the imaginary component \e C4 to \a v.
+\param v The new value of the imaginary component \e C4.
 $$$$
 
 #

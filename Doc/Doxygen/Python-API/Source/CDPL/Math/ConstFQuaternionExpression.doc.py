@@ -36,12 +36,32 @@ class ConstFQuaternionExpression(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the real component <em>C1</em>.
+    # 
+    # \return A reference to <em>C1</em>.
+    # 
     def getC1() -> float: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C2</em>.
+    # 
+    # \return A reference to <em>C2</em>.
+    # 
     def getC2() -> float: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C3</em>.
+    # 
+    # \return A reference to <em>C3</em>.
+    # 
     def getC3() -> float: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C4</em>.
+    # 
+    # \return A reference to <em>C4</em>.
+    # 
     def getC4() -> float: pass
 
     ##
@@ -97,6 +117,11 @@ class ConstFQuaternionExpression(Boost.Python.instance):
     # 
     def __add__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the addition operation <tt>t + self</tt>.
+    # \param t Specifies the first addend.
+    # \return A \c ConstFQuaternionExpression instance holding the result of the addition.
+    # 
     def __radd__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
@@ -113,6 +138,11 @@ class ConstFQuaternionExpression(Boost.Python.instance):
     # 
     def __sub__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the subtraction operation <tt>t - self</tt>.
+    # \param t Specifies the minuend.
+    # \return A \c ConstFQuaternionExpression instance holding the result of the subtraction.
+    # 
     def __rsub__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
@@ -157,6 +187,11 @@ class ConstFQuaternionExpression(Boost.Python.instance):
     # 
     def __truediv__(t: float) -> ConstFQuaternionExpression: pass
 
+    ##
+    # \brief Returns the result of the division operation <tt>t // self</tt>.
+    # \param t Specifies the dividend.
+    # \return A \c ConstFQuaternionExpression instance holding the result of the division.
+    # 
     def __rdiv__(t: float) -> ConstFQuaternionExpression: pass
 
     objectID = property(getObjectID)
