@@ -56,7 +56,7 @@ namespace
 
             python::class_<MatrixColumnWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
                 .def(python::init<const MatrixColumnWrapper&>((python::arg("self"), python::arg("mc"))))
-                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
+                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("m"), python::arg("i"))))
                 .def("getIndex", &MatrixColumnType::getIndex, python::arg("self"))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixColumnType>())
                 .def(AssignFunctionGeneratorVisitor<MatrixColumnType, ConstVectorExpression>("e"))

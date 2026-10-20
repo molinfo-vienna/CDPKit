@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Matrix expression proxy that views a contiguous rectangular subrange of an underlying matrix.
+# 
 class ConstFMatrixRange(Boost.Python.instance):
 
     ##
@@ -31,15 +31,26 @@ class ConstFMatrixRange(Boost.Python.instance):
     def __init__(r: ConstFMatrixRange) -> None: pass
 
     ##
-    # \brief Contructs the \c ConstFMatrixRange instance.
-    # \param e 
-    # \param r1 
-    # \param r2 
+    # \brief Constructs the matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>m</em>.
     # 
-    def __init__(e: ConstFMatrixExpression, r1: Range, r2: Range) -> None: pass
+    # \param m The wrapped matrix.
+    # \param r1 The row index range.
+    # \param r2 The column index range.
+    # 
+    def __init__(m: ConstFMatrixExpression, r1: Range, r2: Range) -> None: pass
 
+    ##
+    # \brief Returns the row index range's start index in the wrapped matrix.
+    # 
+    # \return The start row index.
+    # 
     def getStart1() -> int: pass
 
+    ##
+    # \brief Returns the column index range's start index in the wrapped matrix.
+    # 
+    # \return The start column index.
+    # 
     def getStart2() -> int: pass
 
     ##
@@ -54,12 +65,35 @@ class ConstFMatrixRange(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the number of rows in the proxy (size of the row range).
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the number of columns in the proxy (size of the column range).
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the proxy is empty (either range has size zero).
+    # 
+    # \return <tt>True</tt> if either range has zero size, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def getElement(i: int, j: int) -> float: pass
 
     ##
@@ -69,12 +103,38 @@ class ConstFMatrixRange(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> ConstFMatrixExpression: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def __call__(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def __getitem__(ij: tuple) -> float: pass
 
+    ##
+    # \brief Returns the number of rows in the proxy (size of the row range).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##

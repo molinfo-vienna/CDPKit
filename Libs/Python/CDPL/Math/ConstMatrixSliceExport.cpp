@@ -56,7 +56,7 @@ namespace
             python::class_<MatrixSliceWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
                 .def(python::init<const MatrixSliceWrapper&>((python::arg("self"), python::arg("s"))))
                 .def(python::init<const ExpressionPointerType&, const SliceType&, const SliceType&>(
-                         (python::arg("self"), python::arg("e"), python::arg("s1"), python::arg("s2"))))
+                         (python::arg("self"), python::arg("m"), python::arg("s1"), python::arg("s2"))))
                 .def("getStart1", &MatrixSliceType::getStart1, python::arg("self"))
                 .def("getStart2", &MatrixSliceType::getStart2, python::arg("self"))
                 .def("getStride1", &MatrixSliceType::getStride1, python::arg("self"))

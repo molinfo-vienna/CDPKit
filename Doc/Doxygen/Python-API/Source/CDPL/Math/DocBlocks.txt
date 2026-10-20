@@ -134,7 +134,7 @@ MatrixExpression.setElement(i,j,v)
 $$$$
 
 MatrixExpression.__setitem__(ij,v)
-\brief Sets the value of the element (\a i, \a j to \a v.
+\brief Sets the value of the element (\a i, \a j) to \a v.
 \param i The zero-based row index.
 \param j The zero-based column index.
 \param v The new value of the element.
@@ -259,6 +259,140 @@ $$$$
 QuaternionExpression.setC4(v)
 \brief Sets the value of the imaginary component \e C4 to \a v.
 \param v The new value of the imaginary component \e C4.
+$$$$
+
+# ---
+
+MatrixColumn.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this column.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+MatrixColumn.setElement(i,v)
+\brief Sets the value of the element at row \a i of the column to \a v.
+\param i The zero-based row index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+MatrixColumn.__setitem__(i,v)
+\brief Sets the value of the element at row \a i of the column to \a v.
+\param i The zero-based row index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+# ---
+
+MatrixRow.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this row.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+MatrixRow.setElement(i,v)
+\brief Sets the value of the element at column \a i of the row to \a v.
+\param i The zero-based column index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+MatrixRow.__setitem__(i,v)
+\brief Sets the value of the element at column \a i of the row to \a v.
+\param i The zero-based column index.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+# ---
+
+MatrixRange.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this matrix range.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+MatrixRange.setElement(i,j,v)
+\brief Sets the value of the element at proxy index (\a i, \a j) to \a v.
+\param i The zero-based proxy row index.
+\param j The zero-based proxy column index.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+MatrixRange.__setitem__(ij,v)
+\brief Sets the value of the element at proxy index (\a i, \a j) to \a v.
+\param i The zero-based proxy row index.
+\param j The zero-based proxy column index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+# ---
+
+MatrixSlice.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this matrix slice.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+MatrixSlice.setElement(i,j,v)
+\brief Sets the value of the element at proxy index (\a i, \a j) to \a v.
+\param i The zero-based proxy row index.
+\param j The zero-based proxy column index.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+MatrixSlice.__setitem__(ij,v)
+\brief Sets the value of the element at proxy index (\a i, \a j) to \a v.
+\param i The zero-based proxy row index.
+\param j The zero-based proxy column index.
+\param v The new value of the element.
+\throw Base.IndexError if any of the indices is out of range.
+$$$$
+
+# ---
+
+VectorRange.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this view.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+VectorRange.setElement(i,v)
+\brief Sets the value of the element at index \a i of the view to \a v.
+\param i The zero-based index within the view.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+VectorRange.__setitem__(i,v)
+\brief Sets the value of the element at index \a i of the view to \a v.
+\param i The zero-based index within the view.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the range [0, getSize()).
+$$$$
+
+# ---
+
+VectorSlice.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this view.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+VectorSlice.setElement(i,v)
+\brief Sets the value of the element at index \a i of the view to \a v.
+\param i The zero-based index within the view.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the slice [0, getSize()).
+$$$$
+
+VectorSlice.__setitem__(i,v)
+\brief Sets the value of the element at index \a i of the view to \a v.
+\param i The zero-based index within the view.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the slice [0, getSize()).
 $$$$
 
 #

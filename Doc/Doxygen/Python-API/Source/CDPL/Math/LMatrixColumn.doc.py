@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a single column of an underlying matrix.
+# 
 class LMatrixColumn(Boost.Python.instance):
 
     ##
@@ -31,12 +31,18 @@ class LMatrixColumn(Boost.Python.instance):
     def __init__(mc: LMatrixColumn) -> None: pass
 
     ##
-    # \brief Contructs the \c LMatrixColumn instance.
-    # \param e 
-    # \param i 
+    # \brief Constructs the column proxy viewing column <em>i</em> of <em>m</em>.
     # 
-    def __init__(e: LMatrixExpression, i: int) -> None: pass
+    # \param m The wrapped matrix.
+    # \param i The zero-based column index to view.
+    # 
+    def __init__(m: LMatrixExpression, i: int) -> None: pass
 
+    ##
+    # \brief Returns the column index this proxy refers to within the wrapped matrix.
+    # 
+    # \return The zero-based column index.
+    # 
     def getIndex() -> int: pass
 
     ##
@@ -52,51 +58,78 @@ class LMatrixColumn(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
-    # \param e The \c ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> LMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
-    # \param e The \c ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> LMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
-    # \param e The \c ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> LMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
-    # \param e The \c ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> LMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c LMatrixColumn instance \a c.
-    # \param c The \c LMatrixColumn instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the contents of <em>c</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param c The source column.
+    # 
+    # \return \a self.
     # 
     def assign(c: LMatrixColumn) -> LMatrixColumn: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this column.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> LMatrixColumn: pass
 
+    ##
+    # \brief Tells whether the column is empty (the wrapped matrix has zero rows).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix has zero rows, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return The value of the element <tt>m(i, index)</tt>.
+    # 
     def getElement(i: int) -> int: pass
 
     ##
@@ -106,10 +139,26 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Swaps the contents of this column with those of <em>c</em> (via element-wise swap of the underlying matrix elements).
+    # 
+    # \param c The column to swap with.
+    # 
     def swap(c: LMatrixColumn) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at row \a i of the column to \a v.
+    # \param i The zero-based row index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def setElement(i: int, v: int) -> None: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> LMatrixExpression: pass
 
     ##
@@ -140,10 +189,29 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return The value of the element <tt>m(i, index)</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return The value of the element <tt>m(i, index)</tt>.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -213,54 +281,74 @@ class LMatrixColumn(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstLVectorExpression: pass
 
+    ##
+    # \brief Sets the value of the element at row \a i of the column to \a v.
+    # \param i The zero-based row index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += c</tt>.
-    # \param c Specifies the second addend.
-    # \return The updated \c LMatrixColumn instance \a self.
+    # \brief Adds the elements of the matrix column <em>c</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param c The source matrix column.
+    # 
+    # \return \a self.
     # 
     def __iadd__(c: LMatrixColumn) -> LMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c LMatrixColumn instance \a self.
+    # \brief Adds the elements of the vector expression <em>e</em> to this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstLVectorExpression) -> LMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= c</tt>.
-    # \param c Specifies the subtrahend.
-    # \return The updated \c LMatrixColumn instance \a self.
+    # \brief Subtracts the elements of the matrix column <em>c</em> from this column (via a temporary to handle aliasing).
+    # 
+    # \param c The source matrix column.
+    # 
+    # \return \a self.
     # 
     def __isub__(c: LMatrixColumn) -> LMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c LMatrixColumn instance \a self.
+    # \brief Subtracts the elements of the vector expression <em>e</em> from this column (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstLVectorExpression) -> LMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c LMatrixColumn instance \a self.
+    # \brief Multiplies every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> LMatrixColumn: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LMatrixColumn instance \a self.
+    # \brief Divides every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LMatrixColumn: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LMatrixColumn instance \a self.
+    # \brief Divides every element of this column by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> LMatrixColumn: pass
 

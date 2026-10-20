@@ -92,7 +92,7 @@ class DMatrixExpression(ConstDMatrixExpression):
     def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
-    # \brief Sets the value of the element (\a i, \a j to \a v.
+    # \brief Sets the value of the element (\a i, \a j) to \a v.
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # \param v The new value of the element.

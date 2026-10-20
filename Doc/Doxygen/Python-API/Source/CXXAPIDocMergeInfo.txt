@@ -27,11 +27,13 @@ nullptr § None
 A reference to itself. § \a self.
 a reference to the § the
 A reference to the element. § The value of the element.
+A reference to the underlying element § The value of the element 
 int idx § idx: int
 Base class § %Base class
 ' Any ' § ' %Any '
 '\nAny ' § '\n%Any '
 <em>CDPL</em> § <em>%CDPL</em>
+' (via its stored closure)' §
 
 #
 # --- General method name replacements ---
@@ -516,6 +518,114 @@ Math.*QuaternionExpression.swap(e) § Math.Quaternion.swap(q)
 quaternion § quaternion expression
 <em>q</em> § <em>e</em>
 param q § param e
+
+# ---
+
+Math.*MatrixColumn § Math.MatrixColumn
+
+Math.*MatrixColumn.getElement § Math.MatrixColumn.__getitem__
+
+Math.*MatrixColumn.__iadd__(c) § Math.MatrixColumn.__iadd__(e)
+vector expression § matrix column
+<em>e</em> § <em>c</em>
+param e § param c
+
+Math.*MatrixColumn.__isub__(c) § Math.MatrixColumn.__isub__(e)
+vector expression § matrix column
+<em>e</em> § <em>c</em>
+param e § param c
+
+# ---
+
+Math.*MatrixRow § Math.MatrixRow
+
+Math.*MatrixRow.getElement § Math.MatrixRow.__getitem__
+
+Math.*MatrixRow.__iadd__(r) § Math.MatrixRow.__iadd__(e)
+vector expression § matrix row
+<em>e</em> § <em>r</em>
+param e § param r
+
+Math.*MatrixRow.__isub__(r) § Math.MatrixRow.__isub__(e)
+vector expression § matrix row
+<em>e</em> § <em>r</em>
+param e § param r
+
+# ---
+
+Math.*MatrixRange § Math.MatrixRange
+
+Math.*MatrixRange.__getitem__(ij) § Math.MatrixRange.__call__(i,j)
+
+Math.*MatrixRange.getElement(i,j) § Math.MatrixRange.__call__(i,j)
+
+Math.*MatrixRange.getSize() § Math.MatrixRange.getSize1()
+
+Math.*MatrixRange.__iadd__(r) § Math.MatrixRange.__iadd__(e)
+matrix range § range
+matrix expression § matrix range
+<em>e</em> § <em>r</em>
+param e § param r
+
+Math.*MatrixRange.__isub__(r) § Math.MatrixRange.__isub__(e)
+matrix range § range
+matrix expression § matrix range
+<em>e</em> § <em>r</em>
+param e § param r
+
+# ---
+
+Math.*MatrixSlice § Math.MatrixSlice
+
+Math.*MatrixSlice.__getitem__(ij) § Math.MatrixSlice.__call__(i,j)
+
+Math.*MatrixSlice.getElement(i,j) § Math.MatrixSlice.__call__(i,j)
+
+Math.*MatrixSlice.getSize() § Math.MatrixSlice.getSize1()
+
+Math.*MatrixSlice.__iadd__(s) § Math.MatrixSlice.__iadd__(e)
+matrix slice § slice
+matrix expression § matrix slice
+<em>e</em> § <em>s</em>
+param e § param s
+
+Math.*MatrixSlice.__isub__(s) § Math.MatrixSlice.__isub__(e)
+matrix slice § slice
+matrix expression § matrix slice
+<em>e</em> § <em>s</em>
+param e § param s
+
+# ---
+
+Math.*VectorRange § Math.VectorRange
+
+Math.*VectorRange.getElement(i) § Math.VectorRange.__getitem__(i)
+
+Math.*VectorRange.__iadd__(r) § Math.VectorRange.__iadd__(e)
+vector expression § vector range
+<em>e</em> § <em>r</em>
+param e § param r
+
+Math.*VectorRange.__isub__(r) § Math.VectorRange.__isub__(e)
+vector expression § vector range
+<em>e</em> § <em>r</em>
+param e § param r
+
+# ---
+
+Math.*VectorSlice § Math.VectorSlice
+
+Math.*VectorSlice.getElement(i) § Math.VectorSlice.__getitem__(i)
+
+Math.*VectorSlice.__iadd__(s) § Math.VectorSlice.__iadd__(e)
+vector expression § vector slice
+<em>e</em> § <em>s</em>
+param e § param s
+
+Math.*VectorSlice.__isub__(s) § Math.VectorSlice.__isub__(e)
+vector expression § vector slice
+<em>e</em> § <em>s</em>
+param e § param s
 
 #
 # --- CDPL.Util package ---

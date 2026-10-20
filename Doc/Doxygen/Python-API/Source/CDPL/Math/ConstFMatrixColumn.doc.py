@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a single column of an underlying matrix.
+# 
 class ConstFMatrixColumn(Boost.Python.instance):
 
     ##
@@ -31,12 +31,18 @@ class ConstFMatrixColumn(Boost.Python.instance):
     def __init__(c: ConstFMatrixColumn) -> None: pass
 
     ##
-    # \brief Contructs the \c ConstFMatrixColumn instance.
-    # \param e 
-    # \param i 
+    # \brief Constructs the column proxy viewing column <em>i</em> of <em>m</em>.
     # 
-    def __init__(e: ConstFMatrixExpression, i: int) -> None: pass
+    # \param m The wrapped matrix.
+    # \param i The zero-based column index to view.
+    # 
+    def __init__(m: ConstFMatrixExpression, i: int) -> None: pass
 
+    ##
+    # \brief Returns the column index this proxy refers to within the wrapped matrix.
+    # 
+    # \return The zero-based column index.
+    # 
     def getIndex() -> int: pass
 
     ##
@@ -51,10 +57,27 @@ class ConstFMatrixColumn(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the column is empty (the wrapped matrix has zero rows).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix has zero rows, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return The value of the element <tt>m(i, index)</tt>.
+    # 
     def getElement(i: int) -> float: pass
 
     ##
@@ -64,6 +87,11 @@ class ConstFMatrixColumn(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> ConstFMatrixExpression: pass
 
     ##
@@ -94,10 +122,29 @@ class ConstFMatrixColumn(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return The value of the element <tt>m(i, index)</tt>.
+    # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the element at row <em>i</em> of the column.
+    # 
+    # \param i The zero-based row index.
+    # 
+    # \return The value of the element <tt>m(i, index)</tt>.
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the size of the column (number of rows of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##

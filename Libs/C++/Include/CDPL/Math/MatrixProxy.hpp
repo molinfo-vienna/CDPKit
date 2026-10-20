@@ -135,7 +135,7 @@ namespace CDPL
             /**
              * \brief Returns a mutable reference to the element at column \a i of the row.
              * \param i The zero-based column index.
-             * \return A mutable reference to the underlying element.
+             * \return A mutable reference to the underlying element <tt>m(index, i)</tt>.
              */
             Reference operator[](SizeType i)
             {
@@ -145,7 +145,7 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the element at column \a i of the row.
              * \param i The zero-based column index.
-             * \return A \c const reference to the underlying element.
+             * \return A \c const reference to the underlying element <tt>m(index, i)</tt>.
              */
             ConstReference operator[](SizeType i) const
             {
@@ -428,7 +428,7 @@ namespace CDPL
             /**
              * \brief Returns a mutable reference to the element at row \a i of the column.
              * \param i The zero-based row index.
-             * \return A mutable reference to the underlying element.
+             * \return A mutable reference to the underlying element <tt>m(i, index)</tt>.
              */
             Reference operator[](SizeType i)
             {
@@ -438,7 +438,7 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the element at row \a i of the column.
              * \param i The zero-based row index.
-             * \return A \c const reference to the underlying element.
+             * \return A \c const reference to the underlying element <tt>m(i, index)</tt>.
              */
             ConstReference operator[](SizeType i) const
             {

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a strided slice of an underlying vector.
+# 
 class DVectorSlice(Boost.Python.instance):
 
     ##
@@ -37,8 +37,18 @@ class DVectorSlice(Boost.Python.instance):
     # 
     def __init__(e: DVectorExpression, s: Slice) -> None: pass
 
+    ##
+    # \brief Returns the start index of the slice within the wrapped vector.
+    # 
+    # \return The start index of the slice.
+    # 
     def getStart() -> int: pass
 
+    ##
+    # \brief Returns the stride of the slice (step between successive viewed elements).
+    # 
+    # \return The stride.
+    # 
     def getStride() -> int: pass
 
     ##
@@ -54,51 +64,78 @@ class DVectorSlice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
-    # \param e The \c ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> DVectorSlice: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
-    # \param e The \c ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> DVectorSlice: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
-    # \param e The \c ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> DVectorSlice: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
-    # \param e The \c ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> DVectorSlice: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c DVectorSlice instance \a s.
-    # \param s The \c DVectorSlice instance to copy.
-    # \return \a self
+    # \brief Copies the elements of <em>s</em> into this view (writing through to the wrapped vector).
+    # 
+    # \param s The source slice view.
+    # 
+    # \return \a self.
     # 
     def assign(s: DVectorSlice) -> DVectorSlice: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this view.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> DVectorSlice: pass
 
+    ##
+    # \brief Tells whether the view is empty (zero-length slice).
+    # 
+    # \return <tt>True</tt> if the slice is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the slice).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(slice(i))</tt>.
+    # 
     def getElement(i: int) -> float: pass
 
     ##
@@ -108,10 +145,26 @@ class DVectorSlice(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Swaps the elements of this view with those of <em>s</em>.
+    # 
+    # \param s The view to swap with.
+    # 
     def swap(s: DVectorSlice) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i of the view to \a v.
+    # \param i The zero-based index within the view.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the slice [0, getSize()).
+    # 
     def setElement(i: int, v: float) -> None: pass
 
+    ##
+    # \brief Returns the wrapped vector.
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> DVectorExpression: pass
 
     ##
@@ -142,10 +195,29 @@ class DVectorSlice(Boost.Python.instance):
     # 
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(slice(i))</tt>.
+    # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(slice(i))</tt>.
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the slice).
+    # 
+    # \return The number of elements in the view.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -215,54 +287,74 @@ class DVectorSlice(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i of the view to \a v.
+    # \param i The zero-based index within the view.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the slice [0, getSize()).
+    # 
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += s</tt>.
-    # \param s Specifies the second addend.
-    # \return The updated \c DVectorSlice instance \a self.
+    # \brief Adds the vector slice <em>s</em> componentwise to this view.
+    # 
+    # \param s The vector slice to add.
+    # 
+    # \return \a self.
     # 
     def __iadd__(s: DVectorSlice) -> DVectorSlice: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c DVectorSlice instance \a self.
+    # \brief Adds the vector expression <em>e</em> componentwise to this view.
+    # 
+    # \param e The vector expression to add.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstDVectorExpression) -> DVectorSlice: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= s</tt>.
-    # \param s Specifies the subtrahend.
-    # \return The updated \c DVectorSlice instance \a self.
+    # \brief Subtracts the vector slice <em>s</em> componentwise from this view.
+    # 
+    # \param s The vector slice to subtract.
+    # 
+    # \return \a self.
     # 
     def __isub__(s: DVectorSlice) -> DVectorSlice: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c DVectorSlice instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> componentwise from this view.
+    # 
+    # \param e The vector expression to subtract.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstDVectorExpression) -> DVectorSlice: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c DVectorSlice instance \a self.
+    # \brief Multiplies every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: float) -> DVectorSlice: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c DVectorSlice instance \a self.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: float) -> DVectorSlice: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c DVectorSlice instance \a self.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: float) -> DVectorSlice: pass
 

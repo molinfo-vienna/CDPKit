@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a strided slice of an underlying vector.
+# 
 class ConstULVectorSlice(Boost.Python.instance):
 
     ##
@@ -37,8 +37,18 @@ class ConstULVectorSlice(Boost.Python.instance):
     # 
     def __init__(e: ConstULVectorExpression, s: Slice) -> None: pass
 
+    ##
+    # \brief Returns the start index of the slice within the wrapped vector.
+    # 
+    # \return The start index of the slice.
+    # 
     def getStart() -> int: pass
 
+    ##
+    # \brief Returns the stride of the slice (step between successive viewed elements).
+    # 
+    # \return The stride.
+    # 
     def getStride() -> int: pass
 
     ##
@@ -53,10 +63,27 @@ class ConstULVectorSlice(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the view is empty (zero-length slice).
+    # 
+    # \return <tt>True</tt> if the slice is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the slice).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(slice(i))</tt>.
+    # 
     def getElement(i: int) -> int: pass
 
     ##
@@ -66,6 +93,11 @@ class ConstULVectorSlice(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped vector.
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ConstULVectorExpression: pass
 
     ##
@@ -96,10 +128,29 @@ class ConstULVectorSlice(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(slice(i))</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(slice(i))</tt>.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the slice).
+    # 
+    # \return The number of elements in the view.
+    # 
     def __len__() -> int: pass
 
     ##

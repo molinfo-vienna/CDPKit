@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a contiguous half-open subrange of an underlying vector.
+# 
 class ConstULVectorRange(Boost.Python.instance):
 
     ##
@@ -37,6 +37,11 @@ class ConstULVectorRange(Boost.Python.instance):
     # 
     def __init__(e: ConstULVectorExpression, r: Range) -> None: pass
 
+    ##
+    # \brief Returns the start index of the viewed range within the wrapped vector.
+    # 
+    # \return The start index of the range.
+    # 
     def getStart() -> int: pass
 
     ##
@@ -51,10 +56,27 @@ class ConstULVectorRange(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the view is empty (zero-length range).
+    # 
+    # \return <tt>True</tt> if the range is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the range).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(range(i))</tt>.
+    # 
     def getElement(i: int) -> int: pass
 
     ##
@@ -64,6 +86,11 @@ class ConstULVectorRange(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped vector.
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ConstULVectorExpression: pass
 
     ##
@@ -94,10 +121,29 @@ class ConstULVectorRange(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(range(i))</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(range(i))</tt>.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the range).
+    # 
+    # \return The number of elements in the view.
+    # 
     def __len__() -> int: pass
 
     ##

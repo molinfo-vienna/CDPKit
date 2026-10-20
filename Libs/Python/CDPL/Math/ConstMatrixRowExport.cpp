@@ -55,7 +55,7 @@ namespace
 
             python::class_<MatrixRowWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
                 .def(python::init<const MatrixRowWrapper&>((python::arg("self"), python::arg("r"))))
-                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
+                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("m"), python::arg("i"))))
                 .def("getIndex", &MatrixRowType::getIndex, python::arg("self"))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRowType>())
                 .def(ConstVectorVisitor<MatrixRowType>("r"))

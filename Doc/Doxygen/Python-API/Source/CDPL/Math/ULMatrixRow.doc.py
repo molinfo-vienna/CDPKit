@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a single row of an underlying matrix.
+# 
 class ULMatrixRow(Boost.Python.instance):
 
     ##
@@ -31,12 +31,18 @@ class ULMatrixRow(Boost.Python.instance):
     def __init__(mr: ULMatrixRow) -> None: pass
 
     ##
-    # \brief Contructs the \c ULMatrixRow instance.
-    # \param e 
-    # \param i 
+    # \brief Constructs the row proxy viewing row <em>i</em> of <em>m</em>.
     # 
-    def __init__(e: ULMatrixExpression, i: int) -> None: pass
+    # \param m The wrapped matrix.
+    # \param i The zero-based row index to view.
+    # 
+    def __init__(m: ULMatrixExpression, i: int) -> None: pass
 
+    ##
+    # \brief Returns the row index this proxy refers to within the wrapped matrix.
+    # 
+    # \return The zero-based row index.
+    # 
     def getIndex() -> int: pass
 
     ##
@@ -52,51 +58,78 @@ class ULMatrixRow(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
-    # \param e The \c ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this row (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
-    # \param e The \c ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this row (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
-    # \param e The \c ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this row (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
-    # \param e The \c ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the vector expression <em>e</em> to this row (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULMatrixRow instance \a r.
-    # \param r The \c ULMatrixRow instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the contents of <em>r</em> to this row (via a temporary to handle aliasing).
+    # 
+    # \param r The source row.
+    # 
+    # \return \a self.
     # 
     def assign(r: ULMatrixRow) -> ULMatrixRow: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this row.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> ULMatrixRow: pass
 
+    ##
+    # \brief Tells whether the row is empty (the wrapped matrix has zero columns).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix has zero columns, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the size of the row (number of columns of the wrapped matrix).
+    # 
+    # \return The number of columns.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at column <em>i</em> of the row.
+    # 
+    # \param i The zero-based column index.
+    # 
+    # \return The value of the element <tt>m(index, i)</tt>.
+    # 
     def getElement(i: int) -> int: pass
 
     ##
@@ -106,10 +139,26 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Swaps the contents of this row with those of <em>r</em> (via element-wise swap of the underlying matrix elements).
+    # 
+    # \param r The row to swap with.
+    # 
     def swap(r: ULMatrixRow) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at column \a i of the row to \a v.
+    # \param i The zero-based column index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def setElement(i: int, v: int) -> None: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> ULMatrixExpression: pass
 
     ##
@@ -140,10 +189,29 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at column <em>i</em> of the row.
+    # 
+    # \param i The zero-based column index.
+    # 
+    # \return The value of the element <tt>m(index, i)</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the element at column <em>i</em> of the row.
+    # 
+    # \param i The zero-based column index.
+    # 
+    # \return The value of the element <tt>m(index, i)</tt>.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the row (number of columns of the wrapped matrix).
+    # 
+    # \return The number of columns.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -213,54 +281,74 @@ class ULMatrixRow(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULVectorExpression: pass
 
+    ##
+    # \brief Sets the value of the element at column \a i of the row to \a v.
+    # \param i The zero-based column index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += r</tt>.
-    # \param r Specifies the second addend.
-    # \return The updated \c ULMatrixRow instance \a self.
+    # \brief Adds the elements of the matrix row <em>r</em> to this row (via a temporary to handle aliasing).
+    # 
+    # \param r The source matrix row.
+    # 
+    # \return \a self.
     # 
     def __iadd__(r: ULMatrixRow) -> ULMatrixRow: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c ULMatrixRow instance \a self.
+    # \brief Adds the elements of the vector expression <em>e</em> to this row (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstULVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= r</tt>.
-    # \param r Specifies the subtrahend.
-    # \return The updated \c ULMatrixRow instance \a self.
+    # \brief Subtracts the elements of the matrix row <em>r</em> from this row (via a temporary to handle aliasing).
+    # 
+    # \param r The source matrix row.
+    # 
+    # \return \a self.
     # 
     def __isub__(r: ULMatrixRow) -> ULMatrixRow: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c ULMatrixRow instance \a self.
+    # \brief Subtracts the elements of the vector expression <em>e</em> from this row (via a temporary to handle aliasing).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstULVectorExpression) -> ULMatrixRow: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c ULMatrixRow instance \a self.
+    # \brief Multiplies every element of this row by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULMatrixRow: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULMatrixRow instance \a self.
+    # \brief Divides every element of this row by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULMatrixRow: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULMatrixRow instance \a self.
+    # \brief Divides every element of this row by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> ULMatrixRow: pass
 

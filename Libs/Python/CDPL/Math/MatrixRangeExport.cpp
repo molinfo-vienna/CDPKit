@@ -57,7 +57,7 @@ namespace
             python::class_<MatrixRangeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
                 .def(python::init<const MatrixRangeWrapper&>((python::arg("self"), python::arg("r"))))
                 .def(python::init<const ExpressionPointerType&, const RangeType&, const RangeType&>(
-                         (python::arg("self"), python::arg("e"), python::arg("r1"), python::arg("r2"))))
+                         (python::arg("self"), python::arg("m"), python::arg("r1"), python::arg("r2"))))
                 .def("getStart1", &MatrixRangeType::getStart1, python::arg("self"))
                 .def("getStart2", &MatrixRangeType::getStart2, python::arg("self"))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRangeType>())

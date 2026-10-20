@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Matrix expression proxy that views a strided rectangular slice of an underlying matrix.
+# 
 class ConstULMatrixSlice(Boost.Python.instance):
 
     ##
@@ -31,19 +31,40 @@ class ConstULMatrixSlice(Boost.Python.instance):
     def __init__(s: ConstULMatrixSlice) -> None: pass
 
     ##
-    # \brief Contructs the \c ConstULMatrixSlice instance.
-    # \param e 
-    # \param s1 
-    # \param s2 
+    # \brief Constructs the matrix slice proxy viewing rows in <em>s1</em> and columns in <em>s2</em> of <em>m</em>.
     # 
-    def __init__(e: ConstULMatrixExpression, s1: Slice, s2: Slice) -> None: pass
+    # \param m The wrapped matrix.
+    # \param s1 The row slice (start, stride, size).
+    # \param s2 The column slice (start, stride, size).
+    # 
+    def __init__(m: ConstULMatrixExpression, s1: Slice, s2: Slice) -> None: pass
 
+    ##
+    # \brief Returns the row slice's start index in the wrapped matrix.
+    # 
+    # \return The start row index.
+    # 
     def getStart1() -> int: pass
 
+    ##
+    # \brief Returns the column slice's start index in the wrapped matrix.
+    # 
+    # \return The start column index.
+    # 
     def getStart2() -> int: pass
 
+    ##
+    # \brief Returns the row slice's stride in the wrapped matrix.
+    # 
+    # \return The row stride.
+    # 
     def getStride1() -> int: pass
 
+    ##
+    # \brief Returns the column slice's stride in the wrapped matrix.
+    # 
+    # \return The column stride.
+    # 
     def getStride2() -> int: pass
 
     ##
@@ -58,12 +79,35 @@ class ConstULMatrixSlice(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the number of rows in the proxy (size of the row slice).
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the number of columns in the proxy (size of the column slice).
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the proxy is empty (either slice has size zero).
+    # 
+    # \return <tt>True</tt> if either slice has zero size, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(s1(i), s2(j))</tt>.
+    # 
     def getElement(i: int, j: int) -> int: pass
 
     ##
@@ -73,12 +117,38 @@ class ConstULMatrixSlice(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> ConstULMatrixExpression: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(s1(i), s2(j))</tt>.
+    # 
     def __call__(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(s1(i), s2(j))</tt>.
+    # 
     def __getitem__(ij: tuple) -> int: pass
 
+    ##
+    # \brief Returns the number of rows in the proxy (size of the row slice).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##

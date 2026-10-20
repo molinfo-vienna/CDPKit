@@ -139,7 +139,7 @@ namespace CDPL
             /**
              * \brief Returns a mutable reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
-             * \return A mutable reference to the underlying element.
+             * \return A mutable reference to the underlying element <tt>v(range(i))</tt>.
              */
             Reference operator[](SizeType i)
             {
@@ -149,7 +149,7 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
-             * \return A \c const reference to the underlying element.
+             * \return A \c const reference to the underlying element <tt>v(range(i))</tt>.
              */
             ConstReference operator[](SizeType i) const
             {
@@ -438,7 +438,7 @@ namespace CDPL
             /**
              * \brief Returns a mutable reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
-             * \return A mutable reference to the underlying element.
+             * \return A mutable reference to the underlying element <tt>v(slice(i))</tt>.
              */
             Reference operator[](SizeType i)
             {
@@ -448,7 +448,7 @@ namespace CDPL
             /**
              * \brief Returns a \c const reference to the element at index \a i of the view.
              * \param i The zero-based index within the view.
-             * \return A \c const reference to the underlying element.
+             * \return A \c const reference to the underlying element <tt>v(slice(i))</tt>.
              */
             ConstReference operator[](SizeType i) const
             {

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Matrix expression proxy that views a contiguous rectangular subrange of an underlying matrix.
+# 
 class FMatrixRange(Boost.Python.instance):
 
     ##
@@ -31,15 +31,26 @@ class FMatrixRange(Boost.Python.instance):
     def __init__(r: FMatrixRange) -> None: pass
 
     ##
-    # \brief Contructs the \c FMatrixRange instance.
-    # \param e 
-    # \param r1 
-    # \param r2 
+    # \brief Constructs the matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>m</em>.
     # 
-    def __init__(e: FMatrixExpression, r1: Range, r2: Range) -> None: pass
+    # \param m The wrapped matrix.
+    # \param r1 The row index range.
+    # \param r2 The column index range.
+    # 
+    def __init__(m: FMatrixExpression, r1: Range, r2: Range) -> None: pass
 
+    ##
+    # \brief Returns the row index range's start index in the wrapped matrix.
+    # 
+    # \return The start row index.
+    # 
     def getStart1() -> int: pass
 
+    ##
+    # \brief Returns the column index range's start index in the wrapped matrix.
+    # 
+    # \return The start column index.
+    # 
     def getStart2() -> int: pass
 
     ##
@@ -55,53 +66,86 @@ class FMatrixRange(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
-    # \param e The \c ConstFMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
-    # \param e The \c ConstDMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
-    # \param e The \c ConstLMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
-    # \param e The \c ConstULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the elements of the matrix expression <em>e</em> to this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c FMatrixRange instance \a r.
-    # \param r The \c FMatrixRange instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the contents of <em>r</em> to this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param r The source matrix range.
+    # 
+    # \return \a self.
     # 
     def assign(r: FMatrixRange) -> FMatrixRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this matrix range.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> None: pass
 
+    ##
+    # \brief Returns the number of rows in the proxy (size of the row range).
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the number of columns in the proxy (size of the column range).
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the proxy is empty (either range has size zero).
+    # 
+    # \return <tt>True</tt> if either range has zero size, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def getElement(i: int, j: int) -> float: pass
 
     ##
@@ -111,16 +155,53 @@ class FMatrixRange(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Swaps the contents of this matrix range with those of <em>r</em> (via element-wise swap of the underlying matrix elements).
+    # 
+    # \param r The matrix range to swap with.
+    # 
     def swap(r: FMatrixRange) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at proxy index (\a i, \a j) to \a v.
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def setElement(i: int, j: int, v: float) -> None: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> FMatrixExpression: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def __call__(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Returns the element at proxy index (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # 
+    # \return The value of the element <tt>m(r1(i), r2(j))</tt>.
+    # 
     def __getitem__(ij: tuple) -> float: pass
 
+    ##
+    # \brief Returns the number of rows in the proxy (size of the row range).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -225,54 +306,75 @@ class FMatrixRange(Boost.Python.instance):
     # 
     def __rmul__(t: float) -> ConstFMatrixExpression: pass
 
+    ##
+    # \brief Sets the value of the element at proxy index (\a i, \a j) to \a v.
+    # \param i The zero-based proxy row index.
+    # \param j The zero-based proxy column index.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += r</tt>.
-    # \param r Specifies the second addend.
-    # \return The updated \c FMatrixRange instance \a self.
+    # \brief Adds the elements of the matrix range <em>r</em> to this range (via a temporary to handle aliasing).
+    # 
+    # \param r The source matrix range.
+    # 
+    # \return \a self.
     # 
     def __iadd__(r: FMatrixRange) -> FMatrixRange: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c FMatrixRange instance \a self.
+    # \brief Adds the elements of the matrix expression <em>e</em> to this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstFMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= r</tt>.
-    # \param r Specifies the subtrahend.
-    # \return The updated \c FMatrixRange instance \a self.
+    # \brief Subtracts the elements of the matrix range <em>r</em> from this range (via a temporary to handle aliasing).
+    # 
+    # \param r The source matrix range.
+    # 
+    # \return \a self.
     # 
     def __isub__(r: FMatrixRange) -> FMatrixRange: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c FMatrixRange instance \a self.
+    # \brief Subtracts the elements of the matrix expression <em>e</em> from this matrix range (via a temporary to handle aliasing).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstFMatrixExpression) -> FMatrixRange: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c FMatrixRange instance \a self.
+    # \brief Multiplies every element of this matrix range by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: float) -> FMatrixRange: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c FMatrixRange instance \a self.
+    # \brief Divides every element of this matrix range by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: float) -> FMatrixRange: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c FMatrixRange instance \a self.
+    # \brief Divides every element of this matrix range by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: float) -> FMatrixRange: pass
 

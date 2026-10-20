@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression proxy that views a contiguous half-open subrange of an underlying vector.
+# 
 class ULVectorRange(Boost.Python.instance):
 
     ##
@@ -37,6 +37,11 @@ class ULVectorRange(Boost.Python.instance):
     # 
     def __init__(e: ULVectorExpression, r: Range) -> None: pass
 
+    ##
+    # \brief Returns the start index of the viewed range within the wrapped vector.
+    # 
+    # \return The start index of the range.
+    # 
     def getStart() -> int: pass
 
     ##
@@ -52,51 +57,78 @@ class ULVectorRange(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
-    # \param e The \c ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> ULVectorRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
-    # \param e The \c ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> ULVectorRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
-    # \param e The \c ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> ULVectorRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
-    # \param e The \c ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped vector).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> ULVectorRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULVectorRange instance \a r.
-    # \param r The \c ULVectorRange instance to copy.
-    # \return \a self
+    # \brief Copies the elements of <em>r</em> into this view (writing through to the wrapped vector).
+    # 
+    # \param r The source range view.
+    # 
+    # \return \a self.
     # 
     def assign(r: ULVectorRange) -> ULVectorRange: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this view.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> ULVectorRange: pass
 
+    ##
+    # \brief Tells whether the view is empty (zero-length range).
+    # 
+    # \return <tt>True</tt> if the range is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the range).
+    # 
+    # \return The number of elements in the view.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(range(i))</tt>.
+    # 
     def getElement(i: int) -> int: pass
 
     ##
@@ -106,10 +138,26 @@ class ULVectorRange(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Swaps the elements of this view with those of <em>r</em>.
+    # 
+    # \param r The view to swap with.
+    # 
     def swap(r: ULVectorRange) -> None: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i of the view to \a v.
+    # \param i The zero-based index within the view.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def setElement(i: int, v: int) -> None: pass
 
+    ##
+    # \brief Returns the wrapped vector.
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ULVectorExpression: pass
 
     ##
@@ -140,10 +188,29 @@ class ULVectorRange(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(range(i))</tt>.
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element <tt>v(range(i))</tt>.
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the size of the view (number of elements covered by the range).
+    # 
+    # \return The number of elements in the view.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -213,54 +280,74 @@ class ULVectorRange(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstULVectorExpression: pass
 
+    ##
+    # \brief Sets the value of the element at index \a i of the view to \a v.
+    # \param i The zero-based index within the view.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
+    # 
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += r</tt>.
-    # \param r Specifies the second addend.
-    # \return The updated \c ULVectorRange instance \a self.
+    # \brief Adds the vector range <em>r</em> componentwise to this view.
+    # 
+    # \param r The vector range to add.
+    # 
+    # \return \a self.
     # 
     def __iadd__(r: ULVectorRange) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c ULVectorRange instance \a self.
+    # \brief Adds the vector expression <em>e</em> componentwise to this view.
+    # 
+    # \param e The vector expression to add.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstULVectorExpression) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= r</tt>.
-    # \param r Specifies the subtrahend.
-    # \return The updated \c ULVectorRange instance \a self.
+    # \brief Subtracts the vector range <em>r</em> componentwise from this view.
+    # 
+    # \param r The vector range to subtract.
+    # 
+    # \return \a self.
     # 
     def __isub__(r: ULVectorRange) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c ULVectorRange instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> componentwise from this view.
+    # 
+    # \param e The vector expression to subtract.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstULVectorExpression) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c ULVectorRange instance \a self.
+    # \brief Multiplies every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULVectorRange: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULVectorRange instance \a self.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULVectorRange: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULVectorRange instance \a self.
+    # \brief Divides every element of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> ULVectorRange: pass
 
