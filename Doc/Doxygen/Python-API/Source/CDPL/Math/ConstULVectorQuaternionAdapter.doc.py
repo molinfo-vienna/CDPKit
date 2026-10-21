@@ -66,11 +66,11 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     def getData() -> ConstULVectorExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c ConstULVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == qa</tt>.
+    # \param qa The \c ConstULVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: ConstULVectorQuaternionAdapter) -> bool: pass
+    def __eq__(qa: ConstULVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
@@ -80,11 +80,11 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     def __eq__(q: ConstULQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c ConstULVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != qa</tt>.
+    # \param qa The \c ConstULVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: ConstULVectorQuaternionAdapter) -> bool: pass
+    def __ne__(qa: ConstULVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.

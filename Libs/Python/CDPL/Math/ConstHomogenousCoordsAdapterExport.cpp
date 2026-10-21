@@ -53,10 +53,10 @@ namespace
             using namespace CDPLPythonMath;
         
             python::class_<HomogenousCoordsAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-                .def(python::init<const HomogenousCoordsAdapterWrapper&>((python::arg("self"), python::arg("a"))))
-                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(python::init<const HomogenousCoordsAdapterWrapper&>((python::arg("self"), python::arg("va"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("v"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<HomogenousCoordsAdapterType>())
-                .def(ConstVectorVisitor<HomogenousCoordsAdapterType>("a"))
+                .def(ConstVectorVisitor<HomogenousCoordsAdapterType>("va"))
                 .def(WrappedDataVisitor<HomogenousCoordsAdapterWrapper>());
 
             python::def("homog", &homog, python::arg("e"));

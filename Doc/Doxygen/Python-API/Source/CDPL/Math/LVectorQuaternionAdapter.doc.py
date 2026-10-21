@@ -77,11 +77,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def assign(e: ConstULQuaternionExpression) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c LVectorQuaternionAdapter instance \a a.
-    # \param a The \c LVectorQuaternionAdapter instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c LVectorQuaternionAdapter instance \a va.
+    # \param va The \c LVectorQuaternionAdapter instance to copy.
     # \return \a self
     # 
-    def assign(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
+    def assign(va: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
 
     def getC1() -> int: pass
 
@@ -98,7 +98,7 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
-    def swap(a: LVectorQuaternionAdapter) -> None: pass
+    def swap(va: LVectorQuaternionAdapter) -> None: pass
 
     def setC1(v: int) -> None: pass
 
@@ -113,11 +113,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def getData() -> LVectorExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c LVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == va</tt>.
+    # \param va The \c LVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: LVectorQuaternionAdapter) -> bool: pass
+    def __eq__(va: LVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
@@ -127,11 +127,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __eq__(q: ConstLQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c LVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != va</tt>.
+    # \param va The \c LVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: LVectorQuaternionAdapter) -> bool: pass
+    def __ne__(va: LVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
@@ -257,11 +257,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __iadd__(t: int) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += a</tt>.
-    # \param a Specifies the second addend.
+    # \brief Performs the in-place addition operation <tt>self += va</tt>.
+    # \param va Specifies the second addend.
     # \return The updated \c LVectorQuaternionAdapter instance \a self.
     # 
-    def __iadd__(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
+    def __iadd__(va: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
@@ -278,11 +278,11 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __isub__(t: int) -> LVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
-    # \param a Specifies the subtrahend.
+    # \brief Performs the in-place subtraction operation <tt>self -= va</tt>.
+    # \param va Specifies the subtrahend.
     # \return The updated \c LVectorQuaternionAdapter instance \a self.
     # 
-    def __isub__(a: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
+    def __isub__(va: LVectorQuaternionAdapter) -> LVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.

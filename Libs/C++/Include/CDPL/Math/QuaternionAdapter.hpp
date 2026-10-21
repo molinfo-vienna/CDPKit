@@ -223,13 +223,13 @@ namespace CDPL
             }
 
             /**
-             * \brief Copies the components of \a a into this view (writing through to the wrapped quaternion).
-             * \param a The source adapter.
+             * \brief Copies the components of \a qa into this view (writing through to the wrapped quaternion).
+             * \param qa The source adapter.
              * \return A reference to itself.
              */
-            QuaternionVectorAdapter& operator=(const QuaternionVectorAdapter& a)
+            QuaternionVectorAdapter& operator=(const QuaternionVectorAdapter& qa)
             {
-                vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<SelfType>::Type(a));
+                vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<SelfType>::Type(qa));
                 return *this;
             }
 
@@ -339,13 +339,13 @@ namespace CDPL
             }
 
             /**
-             * \brief Swaps the components of this view with those of \a a.
-             * \param a The adapter to swap with.
+             * \brief Swaps the components of this view with those of \a qa.
+             * \param qa The adapter to swap with.
              */
-            void swap(QuaternionVectorAdapter& a)
+            void swap(QuaternionVectorAdapter& qa)
             {
-                if (this != &a)
-                    vectorSwap(*this, a);
+                if (this != &qa)
+                    vectorSwap(*this, qa);
             }
 
             /**

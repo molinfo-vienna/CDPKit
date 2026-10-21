@@ -395,6 +395,28 @@ VectorSlice.__setitem__(i,v)
 \throw Base.IndexError if \a i is not in the slice [0, getSize()).
 $$$$
 
+# ---
+
+HomogenousCoordsAdapter.assign(a)
+\brief Assigns the contents of the \c numpy.ndarray object \a a to this view.
+\param a The \c numpy.ndarray object.
+\see [\ref NUMPY]
+$$$$
+
+HomogenousCoordsAdapter.setElement(i,v)
+\brief Sets the value of the element at index \a i of the view to \a v.
+\param i The zero-based index within the view.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the slice [0, getSize()).
+$$$$
+
+HomogenousCoordsAdapter.__setitem__(i,v)
+\brief Sets the value of the element at index \a i of the view to \a v.
+\param i The zero-based index within the view.
+\param v The new value of the element.
+\throw Base.IndexError if \a i is not in the slice [0, getSize()).
+$$$$
+
 #
 # --- Unresolved property getter/setter functions ---
 #

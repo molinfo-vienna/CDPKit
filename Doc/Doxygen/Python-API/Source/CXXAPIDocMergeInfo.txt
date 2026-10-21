@@ -369,17 +369,11 @@ Math.Vector3ULArray. § Util.Array.
 
 # Misc. fixes
 
-Math.DMLR § Math.MLR
+Math.*MLR § Math.MLR
 
-Math.FMLR § Math.MLR
+Math.*KabschAlgorithm § Math.KabschAlgorithm
 
-Math.DKabschAlgorithm § Math.KabschAlgorithm
-
-Math.FKabschAlgorithm § Math.KabschAlgorithm
-
-Math.DVectorBFGSMinimizer § Math.BFGSMinimizer
-
-Math.FVectorBFGSMinimizer § Math.BFGSMinimizer
+Math.*BFGSMinimizer § Math.BFGSMinimizer
 
 # ---
 
@@ -626,6 +620,39 @@ Math.*VectorSlice.__isub__(s) § Math.VectorSlice.__isub__(e)
 vector expression § vector slice
 <em>e</em> § <em>s</em>
 param e § param s
+
+# ---
+
+Math.*HomogenousCoordsAdapter § Math.HomogenousCoordsAdapter
+vector <em>V</em> § vector
+
+Math.*HomogenousCoordsAdapter.getElement(i) § Math.HomogenousCoordsAdapter.__getitem__(i)
+
+Math.*HomogenousCoordsAdapter.__iadd__(va) § Math.HomogenousCoordsAdapter.__iadd__(e)
+vector expression § adapter
+<em>e</em> § <em>va</em>
+param e § param va
+
+Math.*HomogenousCoordsAdapter.__isub__(va) § Math.HomogenousCoordsAdapter.__isub__(e)
+vector expression § adapter
+<em>e</em> § <em>va</em>
+param e § param va
+
+# ---
+
+Math.*QuaternionVectorAdapter § Math.QuaternionVectorAdapter
+
+Math.*QuaternionVectorAdapter.getElement(i) § Math.QuaternionVectorAdapter.__getitem__(i)
+
+Math.*QuaternionVectorAdapter.__iadd__(qa) § Math.QuaternionVectorAdapter.__iadd__(e)
+vector expression § adapter
+<em>e</em> § <em>qa</em>
+param e § param qa
+
+Math.*QuaternionVectorAdapter.__isub__(qa) § Math.QuaternionVectorAdapter.__isub__(e)
+vector expression § adapter
+<em>e</em> § <em>qa</em>
+param e § param qa
 
 #
 # --- CDPL.Util package ---

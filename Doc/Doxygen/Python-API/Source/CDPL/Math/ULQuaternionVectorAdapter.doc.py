@@ -20,21 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components C1, C2, C3, C4).
+# 
 class ULQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c ULQuaternionVectorAdapter instance \a a.
-    # \param a The \c ULQuaternionVectorAdapter instance to copy.
+    # \brief Contructs a copy of the \c ULQuaternionVectorAdapter instance \a qa.
+    # \param qa The \c ULQuaternionVectorAdapter instance to copy.
     # 
-    def __init__(a: ULQuaternionVectorAdapter) -> None: pass
+    def __init__(qa: ULQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Contructs the \c ULQuaternionVectorAdapter instance.
-    # \param e 
+    # \brief Constructs the adapter wrapping the quaternion <em>q</em>.
     # 
-    def __init__(e: ULQuaternionExpression) -> None: pass
+    # \param q The quaternion to be viewed as a <em>4</em> element vector.
+    # 
+    def __init__(q: ULQuaternionExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -49,39 +50,49 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
-    # \param e The \c ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
-    # \param e The \c ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
-    # \param e The \c ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
-    # \param e The \c ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the vector expression <em>e</em> to this view (writing through to the wrapped quaternion).
+    # 
+    # \param e The source vector expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULQuaternionVectorAdapter instance \a a.
-    # \param a The \c ULQuaternionVectorAdapter instance to copy.
-    # \return \a self
+    # \brief Copies the components of <em>qa</em> into this view (writing through to the wrapped quaternion).
     # 
-    def assign(a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
+    # \param qa The source adapter.
+    # 
+    # \return \a self.
+    # 
+    def assign(qa: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
@@ -90,10 +101,29 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def assign(a: object) -> ULQuaternionVectorAdapter: pass
 
+    ##
+    # \brief Tells whether the view is empty (always <tt>False</tt>, the view is fixed-size with 4 components).
+    # 
+    # \return <tt>False</tt>.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the dimensionality of the view (always <em>4</em>).
+    # 
+    # \return <em>4</em>.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the quaternion component at index <em>i</em>.
+    # 
+    # \param i The zero-based component index.
+    # 
+    # \return A reference to the component. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
+    # 
     def getElement(i: int) -> int: pass
 
     ##
@@ -103,18 +133,28 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
-    def swap(a: ULQuaternionVectorAdapter) -> None: pass
+    ##
+    # \brief Swaps the components of this view with those of <em>qa</em>.
+    # 
+    # \param qa The adapter to swap with.
+    # 
+    def swap(qa: ULQuaternionVectorAdapter) -> None: pass
 
     def setElement(i: int, v: int) -> None: pass
 
+    ##
+    # \brief Returns the wrapped quaternion.
+    # 
+    # \return A reference to the wrapped quaternion closure.
+    # 
     def getData() -> ULQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c ULQuaternionVectorAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == qa</tt>.
+    # \param qa The \c ULQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: ULQuaternionVectorAdapter) -> bool: pass
+    def __eq__(qa: ULQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
@@ -124,11 +164,11 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     def __eq__(e: ConstULVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c ULQuaternionVectorAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != qa</tt>.
+    # \param qa The \c ULQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: ULQuaternionVectorAdapter) -> bool: pass
+    def __ne__(qa: ULQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
@@ -137,10 +177,33 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __ne__(e: ConstULVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the quaternion component at index <em>i</em>.
+    # 
+    # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
+    # 
+    # \return A reference to the component. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
+    # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the quaternion component at index <em>i</em>.
+    # 
+    # \param i The zero-based component index.
+    # 
+    # \return A reference to the component. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
+    # 
     def __getitem__(i: int) -> int: pass
 
+    ##
+    # \brief Returns the dimensionality of the view (always <em>4</em>).
+    # 
+    # \return <em>4</em>.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -213,51 +276,65 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += a</tt>.
-    # \param a Specifies the second addend.
-    # \return The updated \c ULQuaternionVectorAdapter instance \a self.
+    # \brief Adds the adapter <em>qa</em> componentwise to this view.
     # 
-    def __iadd__(a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
+    # \param qa The adapter to add.
+    # 
+    # \return \a self.
+    # 
+    def __iadd__(qa: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c ULQuaternionVectorAdapter instance \a self.
+    # \brief Adds the vector expression <em>e</em> componentwise to this view.
+    # 
+    # \param e The vector expression to add.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
-    # \param a Specifies the subtrahend.
-    # \return The updated \c ULQuaternionVectorAdapter instance \a self.
+    # \brief Subtracts the adapter <em>qa</em> componentwise from this view.
     # 
-    def __isub__(a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
+    # \param qa The adapter to subtract.
+    # 
+    # \return \a self.
+    # 
+    def __isub__(qa: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c ULQuaternionVectorAdapter instance \a self.
+    # \brief Subtracts the vector expression <em>e</em> componentwise from this view.
+    # 
+    # \param e The vector expression to subtract.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c ULQuaternionVectorAdapter instance \a self.
+    # \brief Multiplies every component of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULQuaternionVectorAdapter instance \a self.
+    # \brief Divides every component of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> ULQuaternionVectorAdapter: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c ULQuaternionVectorAdapter instance \a self.
+    # \brief Divides every component of this view by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> ULQuaternionVectorAdapter: pass
 

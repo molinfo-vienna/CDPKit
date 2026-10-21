@@ -175,7 +175,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the view is empty (always \c false and the view always has at least the extension element).
+             * \brief Tells whether the view is empty (always \c false).
              * \return \c false.
              */
             bool isEmpty() const
@@ -489,13 +489,13 @@ namespace CDPL
             }
 
             /**
-             * \brief Copies the components of \a a into this view (writing through to the wrapped vector).
-             * \param a The source adapter.
+             * \brief Copies the components of \a va into this view (writing through to the wrapped vector).
+             * \param va The source adapter.
              * \return A reference to itself.
              */
-            VectorQuaternionAdapter& operator=(const VectorQuaternionAdapter& a)
+            VectorQuaternionAdapter& operator=(const VectorQuaternionAdapter& va)
             {
-                quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(a));
+                quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(va));
                 return *this;
             }
 
@@ -678,13 +678,13 @@ namespace CDPL
             }
 
             /**
-             * \brief Swaps the components of this view with those of \a a.
-             * \param a The adapter to swap with.
+             * \brief Swaps the components of this view with those of \a va.
+             * \param va The adapter to swap with.
              */
-            void swap(VectorQuaternionAdapter& a)
+            void swap(VectorQuaternionAdapter& va)
             {
-                if (this != &a)
-                    quaternionSwap(*this, a);
+                if (this != &va)
+                    quaternionSwap(*this, va);
             }
 
             /**

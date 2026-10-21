@@ -59,7 +59,7 @@ namespace
                 .def(python::init<const VectorAdapterWrapper&>((python::arg("self"), python::arg("a"))))
                 .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorAdapterType>())
-                .def(ConstQuaternionVisitor<VectorAdapterType>("a"))
+                .def(ConstQuaternionVisitor<VectorAdapterType>("qa"))
                 .def(WrappedDataVisitor<VectorAdapterWrapper>());
 
             python::def("quat", &quat, python::arg("e"));

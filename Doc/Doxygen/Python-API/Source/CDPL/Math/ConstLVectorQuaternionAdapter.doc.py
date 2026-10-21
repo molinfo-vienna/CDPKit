@@ -66,11 +66,11 @@ class ConstLVectorQuaternionAdapter(Boost.Python.instance):
     def getData() -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c ConstLVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == qa</tt>.
+    # \param qa The \c ConstLVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: ConstLVectorQuaternionAdapter) -> bool: pass
+    def __eq__(qa: ConstLVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
@@ -80,11 +80,11 @@ class ConstLVectorQuaternionAdapter(Boost.Python.instance):
     def __eq__(q: ConstLQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c ConstLVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != qa</tt>.
+    # \param qa The \c ConstLVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: ConstLVectorQuaternionAdapter) -> bool: pass
+    def __ne__(qa: ConstLVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.

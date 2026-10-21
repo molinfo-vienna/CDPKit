@@ -61,9 +61,9 @@ namespace
                 .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorAdapterType>())
                 .def(AssignFunctionGeneratorVisitor<VectorAdapterType, ConstQuaternionExpression>("e"))
-                .def(ConstQuaternionVisitor<VectorAdapterType>("a"))
-                .def(QuaternionAssignAndSwapVisitor<VectorAdapterType>("a"))
-                .def(QuaternionVisitor<VectorAdapterType>("a"))
+                .def(ConstQuaternionVisitor<VectorAdapterType>("va"))
+                .def(QuaternionAssignAndSwapVisitor<VectorAdapterType>("va"))
+                .def(QuaternionVisitor<VectorAdapterType>("va"))
                 .def(WrappedDataVisitor<VectorAdapterWrapper>());
 
             python::def("quat", &quat, python::arg("e"));

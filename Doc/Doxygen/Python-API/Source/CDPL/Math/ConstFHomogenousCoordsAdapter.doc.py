@@ -20,21 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief Vector expression that exposes a vector as its homogeneous-coordinate extension by appending an implicit <em>1</em> at the end.
+# 
 class ConstFHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c ConstFHomogenousCoordsAdapter instance \a a.
-    # \param a The \c ConstFHomogenousCoordsAdapter instance to copy.
+    # \brief Contructs a copy of the \c ConstFHomogenousCoordsAdapter instance \a va.
+    # \param va The \c ConstFHomogenousCoordsAdapter instance to copy.
     # 
-    def __init__(a: ConstFHomogenousCoordsAdapter) -> None: pass
+    def __init__(va: ConstFHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Contructs the \c ConstFHomogenousCoordsAdapter instance.
-    # \param e 
+    # \brief Constructs the adapter wrapping <em>v</em>.
     # 
-    def __init__(e: ConstFVectorExpression) -> None: pass
+    # \param v The vector to be viewed as its homogeneous-coordinate extension.
+    # 
+    def __init__(v: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -48,10 +49,27 @@ class ConstFHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the view is empty (always <tt>False</tt>).
+    # 
+    # \return <tt>False</tt>.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the dimensionality of the view (wrapped vector size + 1).
+    # 
+    # \return The view size.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element.
+    # 
     def getElement(i: int) -> float: pass
 
     ##
@@ -61,14 +79,19 @@ class ConstFHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped vector.
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ConstFVectorExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c ConstFHomogenousCoordsAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == va</tt>.
+    # \param va The \c ConstFHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: ConstFHomogenousCoordsAdapter) -> bool: pass
+    def __eq__(va: ConstFHomogenousCoordsAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
@@ -78,11 +101,11 @@ class ConstFHomogenousCoordsAdapter(Boost.Python.instance):
     def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c ConstFHomogenousCoordsAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != va</tt>.
+    # \param va The \c ConstFHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: ConstFHomogenousCoordsAdapter) -> bool: pass
+    def __ne__(va: ConstFHomogenousCoordsAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
@@ -91,10 +114,29 @@ class ConstFHomogenousCoordsAdapter(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element.
+    # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the element at index <em>i</em> of the view.
+    # 
+    # \param i The zero-based index within the view.
+    # 
+    # \return The value of the element.
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the dimensionality of the view (wrapped vector size + 1).
+    # 
+    # \return The view size.
+    # 
     def __len__() -> int: pass
 
     ##

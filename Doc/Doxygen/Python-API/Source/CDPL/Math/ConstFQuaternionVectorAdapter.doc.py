@@ -20,21 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components C1, C2, C3, C4).
+# 
 class ConstFQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c ConstFQuaternionVectorAdapter instance \a a.
-    # \param a The \c ConstFQuaternionVectorAdapter instance to copy.
+    # \brief Contructs a copy of the \c ConstFQuaternionVectorAdapter instance \a qa.
+    # \param qa The \c ConstFQuaternionVectorAdapter instance to copy.
     # 
-    def __init__(a: ConstFQuaternionVectorAdapter) -> None: pass
+    def __init__(qa: ConstFQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Contructs the \c ConstFQuaternionVectorAdapter instance.
-    # \param e 
+    # \brief Constructs the adapter wrapping the quaternion <em>q</em>.
     # 
-    def __init__(e: ConstFQuaternionExpression) -> None: pass
+    # \param q The quaternion to be viewed as a <em>4</em> element vector.
+    # 
+    def __init__(q: ConstFQuaternionExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -48,10 +49,29 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Tells whether the view is empty (always <tt>False</tt>, the view is fixed-size with 4 components).
+    # 
+    # \return <tt>False</tt>.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the dimensionality of the view (always <em>4</em>).
+    # 
+    # \return <em>4</em>.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Returns the quaternion component at index <em>i</em>.
+    # 
+    # \param i The zero-based component index.
+    # 
+    # \return A reference to the component. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
+    # 
     def getElement(i: int) -> float: pass
 
     ##
@@ -61,14 +81,19 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped quaternion.
+    # 
+    # \return A reference to the wrapped quaternion closure.
+    # 
     def getData() -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c ConstFQuaternionVectorAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == qa</tt>.
+    # \param qa The \c ConstFQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: ConstFQuaternionVectorAdapter) -> bool: pass
+    def __eq__(qa: ConstFQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
@@ -78,11 +103,11 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c ConstFQuaternionVectorAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != qa</tt>.
+    # \param qa The \c ConstFQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: ConstFQuaternionVectorAdapter) -> bool: pass
+    def __ne__(qa: ConstFQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
@@ -91,10 +116,33 @@ class ConstFQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
+    ##
+    # \brief Returns the quaternion component at index <em>i</em>.
+    # 
+    # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
+    # 
+    # \return A reference to the component. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
+    # 
     def __call__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the quaternion component at index <em>i</em>.
+    # 
+    # \param i The zero-based component index.
+    # 
+    # \return A reference to the component. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
+    # 
     def __getitem__(i: int) -> float: pass
 
+    ##
+    # \brief Returns the dimensionality of the view (always <em>4</em>).
+    # 
+    # \return <em>4</em>.
+    # 
     def __len__() -> int: pass
 
     ##

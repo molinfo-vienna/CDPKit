@@ -55,10 +55,10 @@ namespace
             using namespace CDPLPythonMath;
 
             python::class_<QuaternionAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-                .def(python::init<const QuaternionAdapterWrapper&>((python::arg("self"), python::arg("a"))))
-                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(python::init<const QuaternionAdapterWrapper&>((python::arg("self"), python::arg("qa"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("q"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<QuaternionAdapterType>())
-                .def(ConstVectorVisitor<QuaternionAdapterType>("a"))
+                .def(ConstVectorVisitor<QuaternionAdapterType>("qa"))
                 .def(WrappedDataVisitor<QuaternionAdapterWrapper>());
 
             python::def("vec", &vec, python::arg("e"));
@@ -83,13 +83,13 @@ namespace
             using namespace CDPLPythonMath;
 
             python::class_<QuaternionAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-                .def(python::init<const QuaternionAdapterWrapper&>((python::arg("self"), python::arg("a"))))
-                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(python::init<const QuaternionAdapterWrapper&>((python::arg("self"), python::arg("qa"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("q"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<QuaternionAdapterType>())
                 .def(AssignFunctionGeneratorVisitor<QuaternionAdapterType, ConstVectorExpression>("e"))
-                .def(ConstVectorVisitor<QuaternionAdapterType>("a"))
-                .def(VectorAssignAndSwapVisitor<QuaternionAdapterType>("a"))
-                .def(VectorVisitor<QuaternionAdapterType>("a"))
+                .def(ConstVectorVisitor<QuaternionAdapterType>("qa"))
+                .def(VectorAssignAndSwapVisitor<QuaternionAdapterType>("qa"))
+                .def(VectorVisitor<QuaternionAdapterType>("qa"))
                 .def(VectorNDArrayAssignVisitor<QuaternionAdapterType>())
                 .def(WrappedDataVisitor<QuaternionAdapterWrapper>());
         }

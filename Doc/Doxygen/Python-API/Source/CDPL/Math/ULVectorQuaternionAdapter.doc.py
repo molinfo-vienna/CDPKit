@@ -77,11 +77,11 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def assign(e: ConstULQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ULVectorQuaternionAdapter instance \a a.
-    # \param a The \c ULVectorQuaternionAdapter instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c ULVectorQuaternionAdapter instance \a va.
+    # \param va The \c ULVectorQuaternionAdapter instance to copy.
     # \return \a self
     # 
-    def assign(a: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
+    def assign(va: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
 
     def getC1() -> int: pass
 
@@ -98,7 +98,7 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
-    def swap(a: ULVectorQuaternionAdapter) -> None: pass
+    def swap(va: ULVectorQuaternionAdapter) -> None: pass
 
     def setC1(v: int) -> None: pass
 
@@ -113,11 +113,11 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def getData() -> ULVectorExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c ULVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == va</tt>.
+    # \param va The \c ULVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: ULVectorQuaternionAdapter) -> bool: pass
+    def __eq__(va: ULVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
@@ -127,11 +127,11 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def __eq__(q: ConstULQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c ULVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != va</tt>.
+    # \param va The \c ULVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: ULVectorQuaternionAdapter) -> bool: pass
+    def __ne__(va: ULVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
@@ -257,11 +257,11 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def __iadd__(t: int) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += a</tt>.
-    # \param a Specifies the second addend.
+    # \brief Performs the in-place addition operation <tt>self += va</tt>.
+    # \param va Specifies the second addend.
     # \return The updated \c ULVectorQuaternionAdapter instance \a self.
     # 
-    def __iadd__(a: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
+    def __iadd__(va: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
@@ -278,11 +278,11 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def __isub__(t: int) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
-    # \param a Specifies the subtrahend.
+    # \brief Performs the in-place subtraction operation <tt>self -= va</tt>.
+    # \param va Specifies the subtrahend.
     # \return The updated \c ULVectorQuaternionAdapter instance \a self.
     # 
-    def __isub__(a: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
+    def __isub__(va: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
