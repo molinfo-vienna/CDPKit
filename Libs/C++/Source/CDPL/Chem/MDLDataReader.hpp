@@ -35,6 +35,7 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -110,7 +111,7 @@ namespace CDPL
             void readCTabV2000AtomParity(std::istream&, Atom&);
             void readCTabV2000AtomQueryHCount(std::istream&, Atom&);
             void readCTabV2000AtomStereoBoxFlag(std::istream&, Atom&) const;
-            void readCTabV2000AtomValence(std::istream&, Atom&) const;
+            void readCTabV2000AtomValence(std::istream&, Atom&);
             void readCTabV2000AtomRxnInfo(std::istream&, Atom&) const;
 
             bool        readCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
@@ -121,9 +122,9 @@ namespace CDPL
             void        readCTabV2000BondRxnCenterStatus(std::istream&, Bond&) const;
 
             void readCTabV2000AList(std::istream&, Molecule&, std::size_t);
-            void readCTabV2000ChargeProperties(std::istream&, Molecule&, std::size_t) const;
-            void readCTabV2000RadicalProperties(std::istream&, Molecule&, std::size_t) const;
-            void readCTabV2000IsotopeProperties(std::istream&, Molecule&, std::size_t) const;
+            void readCTabV2000ChargeProperties(std::istream&, Molecule&, std::size_t);
+            void readCTabV2000RadicalProperties(std::istream&, Molecule&, std::size_t);
+            void readCTabV2000IsotopeProperties(std::istream&, Molecule&, std::size_t, bool) const;
             void readCTabV2000RingBondCountProperties(std::istream&, Molecule&, std::size_t) const;
             void readCTabV2000SubstCountProperties(std::istream&, Molecule&, std::size_t) const;
             void readCTabV2000UnsaturationProperties(std::istream&, Molecule&, std::size_t) const;
@@ -174,7 +175,7 @@ namespace CDPL
             void readCTabV3000AtomRadicalType(std::istream&, Atom&) const;
             void readCTabV3000AtomStereoConfig(std::istream&, Atom&);
             void readCTabV3000AtomMass(std::istream&, Atom&) const;
-            void readCTabV3000AtomValence(std::istream&, Atom&) const;
+            void readCTabV3000AtomValence(std::istream&, Atom&);
             void readCTabV3000AtomQueryHCount(std::istream&, Atom&);
             void readCTabV3000AtomStereoBoxFlag(std::istream&, Atom&) const;
             void readCTabV3000AtomRxnInvRetFlag(std::istream&, Atom&, unsigned int&) const;
@@ -212,12 +213,13 @@ namespace CDPL
             void skipV3000Data(std::istream&);
 
             void postprocAtomCoords(Molecule&, std::size_t) const;
+            void postprocTotalAtomValences(Molecule&) const;
             void addAtomQueryHCountConstraints() const;
             void kekulizeBonds(Molecule&) const;
             void convertParities(Molecule&) const;
 
             typedef std::map<std::size_t, std::size_t>          AtomIndexMap;
-            typedef std::vector<std::pair<Atom*, std::size_t> > AtomQueryHCountList;
+            typedef std::vector<std::pair<Atom*, std::size_t> > AtomUIntPairList;
             typedef std::vector<Atom*>                          StereoAtomList;
 
             const Base::DataIOBase& ioBase;
@@ -231,8 +233,10 @@ namespace CDPL
             unsigned int            ctabVersion;
             unsigned int            rxnVersion;
             AtomIndexMap            atomIndexMap;
-            AtomQueryHCountList     atomQueryHCountList;
+            AtomUIntPairList        atomQueryHCountList;
+            AtomUIntPairList        atomTotValList;
             StereoAtomList          stereoAtoms;
+            Util::BitSet            propBlockAtomMask;
             bool                    strictErrorChecking;
             bool                    ignoreParity;
             bool                    trimStrings;

@@ -1,5 +1,7 @@
 master:
 
+ - Formal charge, radical type and isotope property block data in MDL V2000 data files are now processed according to the original specification
+ - Added missing postprocessing of total atom valence information in MDL CTabs
  - Fixed typos in the names of constants defined in namespaces Chem::RECAPRuleID and Chem::RECAPAtomLabel (QUARTERNARY -> QUATERNARY)
  - Fixed the incorrect sizing of single atom reaction components in 2D visualizations with "best fit" scaling policy setting
  - New control-paramter Grid::ControlParameter::CUBE_COMMENT_IS_NAME plus associated function

@@ -64,6 +64,7 @@
 #include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 #include "CDPL/Internal/AtomContainerFunctions.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "MDLDataReader.hpp"
 #include "MDLFormatData.hpp"
@@ -875,6 +876,7 @@ void Chem::MDLDataReader::readCTabV2000(std::istream& is, Molecule& mol)
     std::size_t atom_index_offs = mol.getNumAtoms();
 
     atomQueryHCountList.clear();
+    atomTotValList.clear();
     stereoAtoms.clear();
 
     readCTabV2000AtomBlock(is, mol, atom_index_offs);
@@ -886,6 +888,7 @@ void Chem::MDLDataReader::readCTabV2000(std::istream& is, Molecule& mol)
     readCTabV2000STextBlock(is);
     readCTabV2000PropertyBlock(is, mol, atom_index_offs);
 
+    postprocTotalAtomValences(mol);
     addAtomQueryHCountConstraints();    
 
     if (!ignoreParity)
@@ -949,7 +952,15 @@ void Chem::MDLDataReader::readCTabV2000PropertyBlock(std::istream& is, Molecule&
     using namespace MOLFile::CTab::V2000;
 
     bool exit = false;
-
+    bool clear_isotopes = true;
+    bool have_chg_prop = false;
+    bool have_rad_prop = false;
+    
+    auto num_read_atoms = mol.getNumAtoms() - atom_index_offs;
+    
+    propBlockAtomMask.resize(num_read_atoms);
+    propBlockAtomMask.reset();
+    
     for (std::size_t i = 0; !exit && (ctabVersion == MDLDataFormatVersion::V2000 || i < propertyCount); i++) {
         std::size_t skip_cnt = 1;
         std::istream::pos_type last_spos = is.tellg();
@@ -965,16 +976,19 @@ void Chem::MDLDataReader::readCTabV2000PropertyBlock(std::istream& is, Molecule&
             if (tmpString == PropertyBlock::LINE_SKIP_PREFIX)
                 skip_cnt += readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading line skip count in property block");
 
-            else if (tmpString == PropertyBlock::CHARGE_PREFIX)
+            else if (tmpString == PropertyBlock::CHARGE_PREFIX) {
                 readCTabV2000ChargeProperties(is, mol, atom_index_offs);
-
-            else if (tmpString == PropertyBlock::RADICAL_PREFIX)
+                have_chg_prop = true;
+                
+            } else if (tmpString == PropertyBlock::RADICAL_PREFIX) {
                 readCTabV2000RadicalProperties(is, mol, atom_index_offs);
+                have_rad_prop = true;
 
-            else if (tmpString == PropertyBlock::ISOTOPE_PREFIX)
-                readCTabV2000IsotopeProperties(is, mol, atom_index_offs);
+            } else if (tmpString == PropertyBlock::ISOTOPE_PREFIX) {
+                readCTabV2000IsotopeProperties(is, mol, atom_index_offs, clear_isotopes);
+                clear_isotopes = false;
 
-            else if (tmpString == PropertyBlock::RING_BOND_COUNT_PREFIX)
+            } else if (tmpString == PropertyBlock::RING_BOND_COUNT_PREFIX)
                 readCTabV2000RingBondCountProperties(is, mol, atom_index_offs);
 
             else if (tmpString == PropertyBlock::SUBSTITUTION_COUNT_PREFIX)
@@ -994,12 +1008,27 @@ void Chem::MDLDataReader::readCTabV2000PropertyBlock(std::istream& is, Molecule&
 
             else if (tmpString.find(PropertyBlock::LINE_PREFIX)) {
                 is.seekg(last_spos);
-                return;
+                break;
             }
         }
 
         skipMDLLines(is, skip_cnt, "MDLDataReader: error while reading property block");
         i += (skip_cnt - 1);
+    }
+
+    if (!have_chg_prop && !have_rad_prop)
+        return;
+        
+    for (std::size_t i = 0; i < num_read_atoms; i++) {
+        if (propBlockAtomMask.test(i))
+            continue;
+
+        auto& atom = mol.getAtom(i + atom_index_offs);
+
+        clearFormalCharge(atom);
+
+        if (have_rad_prop)
+            clearRadicalType(atom);
     }
 }
 
@@ -1211,23 +1240,23 @@ void Chem::MDLDataReader::readCTabV2000AtomQueryHCount(std::istream& is, Atom& a
             return;
 
         case AtomBlock::HYDROGEN_COUNT_E0:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 0));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 0));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE1:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 1));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 1));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE2:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 2));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 2));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE3:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 3));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 3));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE4:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 4));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 4));
             return;
 
         default:
@@ -1253,7 +1282,7 @@ void Chem::MDLDataReader::readCTabV2000AtomStereoBoxFlag(std::istream& is, Atom&
         throw Base::IOError("MDLDataReader: invalid atom stereo box flag");
 }
 
-void Chem::MDLDataReader::readCTabV2000AtomValence(std::istream& is, Atom& atom) const
+void Chem::MDLDataReader::readCTabV2000AtomValence(std::istream& is, Atom& atom)
 {
     using namespace MDL::MOLFile::CTab::V2000;
 
@@ -1265,14 +1294,13 @@ void Chem::MDLDataReader::readCTabV2000AtomValence(std::istream& is, Atom& atom)
             return;
 
         case AtomBlock::VALENCE_ZERO:
-            //atom.setProperty(AtomProperty::TOTAL_VALENCE, std::size_t(0));
+            atomTotValList.emplace_back(&atom, 0);
             return;
 
         default:
-            if (valence <= AtomBlock::VALENCE_MAX) {
-                //atom.setProperty(AtomProperty::TOTAL_VALENCE, std::size_t(valence));
-
-            } else if (strictErrorChecking)
+            if (valence <= AtomBlock::VALENCE_MAX)
+                atomTotValList.emplace_back(&atom, valence);
+            else if (strictErrorChecking)
                 throw Base::IOError("MDLDataReader: invalid atom valence specification");    
     }
 }
@@ -1616,17 +1644,18 @@ void Chem::MDLDataReader::readCTabV2000AList(std::istream& is, Molecule& mol, st
     skipMDLLines(is, 1, "MDLDataReader: error while reading atom list block");    
 }
 
-void Chem::MDLDataReader::readCTabV2000ChargeProperties(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
+void Chem::MDLDataReader::readCTabV2000ChargeProperties(std::istream& is, Molecule& mol, std::size_t atom_index_offs)
 {
     using namespace MDL::MOLFile::CTab::V2000;
 
-    std::size_t max_atom_index = mol.getNumAtoms() - atom_index_offs;
+    std::size_t num_atoms = mol.getNumAtoms();
+    std::size_t max_atom_index = num_atoms - atom_index_offs;
     std::size_t num_entries = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading charge property list size", 
                                                             strictErrorChecking);
     
     if ((strictErrorChecking || checkLineLength) && num_entries > PropertyBlock::MAX_CHARGE_ENTRIES)
         throw Base::IOError("MDLDataReader: number of charge property entries exceeds maximum list size");
-
+        
     for (std::size_t i = 0; i < num_entries; i++) {
         skipMDLChars(is, 1, "MDLDataReader: error while reading charge property list");
 
@@ -1651,15 +1680,17 @@ void Chem::MDLDataReader::readCTabV2000ChargeProperties(std::istream& is, Molecu
         if (strictErrorChecking && (charge < PropertyBlock::MIN_CHARGE || charge > PropertyBlock::MAX_CHARGE))
             throw Base::IOError("MDLDataReader: charge value in charge property list item is out of valid range");
 
+        propBlockAtomMask.set(atom_index - 1);
         setFormalCharge(atom, charge);
     }
 }
 
-void Chem::MDLDataReader::readCTabV2000RadicalProperties(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
+void Chem::MDLDataReader::readCTabV2000RadicalProperties(std::istream& is, Molecule& mol, std::size_t atom_index_offs)
 {
     using namespace MDL::MOLFile::CTab::V2000;
 
-    std::size_t max_atom_index = mol.getNumAtoms() - atom_index_offs;
+    std::size_t num_atoms = mol.getNumAtoms();
+    std::size_t max_atom_index = num_atoms - atom_index_offs;
     std::size_t num_entries = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading radical property list size", 
                                                             strictErrorChecking);
 
@@ -1684,6 +1715,8 @@ void Chem::MDLDataReader::readCTabV2000RadicalProperties(std::istream& is, Molec
 
         skipMDLChars(is, 1, "MDLDataReader: error while reading radical property list");
 
+        propBlockAtomMask.set(atom_index - 1);
+        
         switch (readMDLNumber<unsigned int, 3>(is, "MDLDataReader: error while reading radical type from charge property list item", 
                                                strictErrorChecking)) {
 
@@ -1710,17 +1743,22 @@ void Chem::MDLDataReader::readCTabV2000RadicalProperties(std::istream& is, Molec
     }
 }
 
-void Chem::MDLDataReader::readCTabV2000IsotopeProperties(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
+void Chem::MDLDataReader::readCTabV2000IsotopeProperties(std::istream& is, Molecule& mol, std::size_t atom_index_offs, bool clear_isotopes) const
 {
     using namespace MDL::MOLFile::CTab::V2000;
 
-    std::size_t max_atom_index = mol.getNumAtoms() - atom_index_offs;
+    std::size_t num_atoms = mol.getNumAtoms();
+    std::size_t max_atom_index = num_atoms - atom_index_offs;
     std::size_t num_entries = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading isotope property list size",
                                                             strictErrorChecking);
 
     if ((strictErrorChecking || checkLineLength) && num_entries > PropertyBlock::MAX_ISOTOPE_ENTRIES)
         throw Base::IOError("MDLDataReader: number of isotope property entries exceeds maximum list size");
 
+    if (clear_isotopes)
+        for (std::size_t i = atom_index_offs; i < num_atoms; i++)
+            clearIsotope(mol.getAtom(i));
+        
     for (std::size_t i = 0; i < num_entries; i++) {
         skipMDLChars(is, 1, "MDLDataReader: error while reading isotope property list");
 
@@ -2704,6 +2742,7 @@ void Chem::MDLDataReader::readCTabV3000(std::istream& is, Molecule& mol)
     using namespace MDL::MOLFile::CTab;
 
     atomQueryHCountList.clear();
+    atomTotValList.clear();
     stereoAtoms.clear();
     atomIndexMap.clear();
 
@@ -2719,6 +2758,7 @@ void Chem::MDLDataReader::readCTabV3000(std::istream& is, Molecule& mol)
 
     readPastCTabV3000BlockEnd(is);
 
+    postprocTotalAtomValences(mol);
     addAtomQueryHCountConstraints();    
 
     if (!ignoreParity)
@@ -3154,7 +3194,7 @@ void Chem::MDLDataReader::readCTabV3000AtomMass(std::istream& is, Atom& atom) co
     setIsotope(atom, isotope);
 }
 
-void Chem::MDLDataReader::readCTabV3000AtomValence(std::istream& is, Atom& atom) const
+void Chem::MDLDataReader::readCTabV3000AtomValence(std::istream& is, Atom& atom)
 {
     using namespace MDL::MOLFile::CTab::V3000;
 
@@ -3169,7 +3209,7 @@ void Chem::MDLDataReader::readCTabV3000AtomValence(std::istream& is, Atom& atom)
             return;
 
         case AtomBlock::VALENCE_ZERO:
-            //atom.setProperty(AtomProperty::TOTAL_VALENCE, 0);
+            atomTotValList.emplace_back(&atom, 0);
             return;
 
         default:
@@ -3177,8 +3217,8 @@ void Chem::MDLDataReader::readCTabV3000AtomValence(std::istream& is, Atom& atom)
                 if (strictErrorChecking)
                     throw Base::IOError("MDLDataReader: invalid ctab V3000 atom valence specification");    
 
-            }// else 
-            //    atom.setProperty(AtomProperty::TOTAL_VALENCE, valence);
+            } else
+                atomTotValList.emplace_back(&atom, valence);
     }
 }
 
@@ -3197,23 +3237,23 @@ void Chem::MDLDataReader::readCTabV3000AtomQueryHCount(std::istream& is, Atom& a
             return;
 
         case AtomBlock::HYDROGEN_COUNT_E0:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 0));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 0));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE1:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 1));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 1));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE2:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 2));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 2));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE3:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 3));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 3));
             return;
 
         case AtomBlock::HYDROGEN_COUNT_GE4:
-            atomQueryHCountList.push_back(AtomQueryHCountList::value_type(&atom, 4));
+            atomQueryHCountList.push_back(AtomUIntPairList::value_type(&atom, 4));
             return;
 
         default:
@@ -3960,6 +4000,16 @@ void Chem::MDLDataReader::skipV3000Data(std::istream& is)
     }
 }
 
+void Chem::MDLDataReader::postprocTotalAtomValences(Molecule& mol) const
+{
+    for (auto& [atom, tot_val] : atomTotValList) {
+        auto expl_val = Internal::calcExplicitValence(*atom, mol);
+
+        if (tot_val >= expl_val)
+            setImplicitHydrogenCount(*atom, tot_val - expl_val);
+    }
+}
+
 void Chem::MDLDataReader::postprocAtomCoords(Molecule& mol, std::size_t old_num_atoms) const
 {
     if (coordsDim == 3) {
@@ -4018,9 +4068,9 @@ void Chem::MDLDataReader::postprocAtomCoords(Molecule& mol, std::size_t old_num_
 
 void Chem::MDLDataReader::addAtomQueryHCountConstraints() const
 {
-    AtomQueryHCountList::const_iterator end = atomQueryHCountList.end();
+    AtomUIntPairList::const_iterator end = atomQueryHCountList.end();
 
-    for (AtomQueryHCountList::const_iterator it = atomQueryHCountList.begin(); it != end; ++it) {
+    for (AtomUIntPairList::const_iterator it = atomQueryHCountList.begin(); it != end; ++it) {
         Atom& atom = *(it->first);
         std::size_t h_count = it->second;
 
