@@ -166,7 +166,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the dimensionality of the view (wrapped vector size + 1).
+             * \brief Returns the dimensionality of the view (wrapped vector size + \e 1).
              * \return The view size.
              */
             SizeType getSize() const
@@ -342,7 +342,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices 0-3 map to C1-C4).
+         * \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices <em>0-3</em> map to <em>C1-C4</em>).
          * \tparam V The wrapped 4-element vector type.
          */
         template <typename V>
@@ -399,8 +399,8 @@ namespace CDPL
                 data(v) {}
 
             /**
-             * \brief Returns a mutable reference to component C1 (mapped to element \e 0 of the wrapped vector).
-             * \return A mutable reference to C1.
+             * \brief Returns a mutable reference to the real component \e C1.
+             * \return A mutable reference to \e C1.
              */
             Reference getC1()
             {
@@ -408,8 +408,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to component C2 (mapped to element \e 1 of the wrapped vector).
-             * \return A mutable reference to C2.
+             * \brief Returns a mutable reference to the imaginary component \e C2.
+             * \return A mutable reference to \e C2.
              */
             Reference getC2()
             {
@@ -417,8 +417,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to component C3 (mapped to element \e 2 of the wrapped vector).
-             * \return A mutable reference to C3.
+             * \brief Returns a mutable reference to the imaginary component \e C3.
+             * \return A mutable reference to \e C3.
              */
             Reference getC3()
             {
@@ -426,8 +426,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a mutable reference to component C4 (mapped to element \e 3 of the wrapped vector).
-             * \return A mutable reference to C4.
+             * \brief Returns a mutable reference to the imaginary component \e C4.
+             * \return A mutable reference to \e C4.
              */
             Reference getC4()
             {
@@ -435,8 +435,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to component C1.
-             * \return A \c const reference to C1.
+             * \brief Returns a \c const reference to the real component \e C1.
+             * \return A \c const reference to \e C1.
              */
             ConstReference getC1() const
             {
@@ -444,8 +444,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to component C2.
-             * \return A \c const reference to C2.
+             * \brief Returns a \c const reference to the imaginary component \e C2.
+             * \return A \c const reference to \e C2.
              */
             ConstReference getC2() const
             {
@@ -453,8 +453,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to component C3.
-             * \return A \c const reference to C3.
+             * \brief Returns a \c const reference to the imaginary component \e C3.
+             * \return A \c const reference to \e C3.
              */
             ConstReference getC3() const
             {
@@ -462,8 +462,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const reference to component C4.
-             * \return A \c const reference to C4.
+             * \brief Returns a \c const reference to the imaginary component \e C4.
+             * \return A \c const reference to \e C4.
              */
             ConstReference getC4() const
             {
@@ -513,7 +513,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Assigns the scalar \a t to this view (sets C1 to \a t and the remaining components to the default value).
+             * \brief Assigns the scalar \a t to this view (sets \e C1 to \a t and the remaining components to the default value).
              * \tparam T The scalar type.
              * \param t The scalar to assign.
              * \return A reference to itself.
@@ -543,7 +543,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Adds the scalar \a t to component C1 of this view.
+             * \brief Adds the scalar \a t to component \e C1 of this view.
              * \tparam T The scalar type.
              * \param t The scalar summand.
              * \return A reference to itself.
@@ -570,7 +570,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Subtracts the scalar \a t from component C1 of this view.
+             * \brief Subtracts the scalar \a t from component \e C1 of this view.
              * \tparam T The scalar type.
              * \param t The scalar subtrahend.
              * \return A reference to itself.
@@ -689,20 +689,20 @@ namespace CDPL
 
             /**
              * \brief ADL-enabled free-function form of swap().
-             * \param a1 The first adapter.
-             * \param a2 The second adapter.
+             * \param va1 The first adapter.
+             * \param va2 The second adapter.
              */
-            friend void swap(VectorQuaternionAdapter& a1, VectorQuaternionAdapter& a2)
+            friend void swap(VectorQuaternionAdapter& va1, VectorQuaternionAdapter& va2)
             {
-                a1.swap(a2);
+                va1.swap(va2);
             }
 
             /**
              * \brief Assigns the four supplied component values to this view (writing through to the wrapped vector).
-             * \param c1 The C1 component value.
-             * \param c2 The C2 component value.
-             * \param c3 The C3 component value.
-             * \param c4 The C4 component value.
+             * \param c1 The \e C1 component value.
+             * \param c2 The \e C2 component value.
+             * \param c3 The \e C3 component value.
+             * \param c4 The \e C4 component value.
              */
             void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(),
                      const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType())

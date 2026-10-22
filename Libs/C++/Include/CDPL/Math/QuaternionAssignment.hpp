@@ -43,7 +43,7 @@ namespace CDPL
          * \brief Applies the binary functor \a F componentwise between the destination quaternion \a q and
          *        the source quaternion expression \a e.
          *
-         * For each of the four quaternion components <em>i</em> in \e {C1, C2, C3, C4}, the call
+         * For each of the four quaternion components <em>i</em> in <em>{C1, C2, C3, C4}</em>, the call
          * <tt>F::apply(q.getCi(), e().getCi())</tt> is performed.
          *
          * \tparam F The element-wise binary functor template (instantiated as <tt>F<Q::Reference, E::ValueType></tt>).

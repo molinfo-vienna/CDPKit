@@ -76,6 +76,15 @@ class Slice(Boost.Python.instance):
     # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Maps the local position <em>i</em> to the global index \f$ start + i \cdot stride \f$.
+    # 
+    # \param i The zero-based local position.
+    # 
+    # \return The global index. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, getSize()).
+    # 
     def getIndex(i: int) -> int: pass
 
     ##
@@ -133,6 +142,15 @@ class Slice(Boost.Python.instance):
     # 
     def __call__(i: int) -> int: pass
 
+    ##
+    # \brief Maps the local position <em>i</em> to the global index \f$ start + i \cdot stride \f$.
+    # 
+    # \param i The zero-based local position.
+    # 
+    # \return The global index. 
+    # 
+    # \throw Base.IndexError if <em>i</em> is not in the range [0, getSize()).
+    # 
     def __getitem__(i: int) -> int: pass
 
     objectID = property(getObjectID)

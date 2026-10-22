@@ -2527,38 +2527,38 @@ def quat(e: ULVectorExpression) -> ULVectorQuaternionAdapter: pass
 # 
 # \param t The real component.
 # 
-# \return A real quaternion with <tt>C1</tt> = <em>t</em> and zero imaginary components.
+# \return A real quaternion with <em>C1</em> = <em>t</em> and zero imaginary components.
 # 
 def quat(t: float) -> FRealQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from two scalar components <em>t1</em> and <em>t2</em> (C1, C2) — remaining components are zero.
+# \brief Constructs a Math.Quaternion from two scalar components <em>t1</em> and <em>t2</em> (<em>C1</em>, <em>C2</em>) — remaining components are zero.
 # 
-# \param t1 The C1 component.
-# \param t2 The C2 component.
+# \param t1 The <em>C1</em> component.
+# \param t2 The <em>C2</em> component.
 # 
 # \return A quaternion (<em>t1</em>, <em>t2</em>, <tt>0</tt>, <tt>0</tt>).
 # 
 def quat(t1: float, t2: float) -> FQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from three scalar components (C1, C2, C3) — C4 is zero.
+# \brief Constructs a Math.Quaternion from three scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>) — <em>C4</em> is zero.
 # 
-# \param t1 The C1 component.
-# \param t2 The C2 component.
-# \param t3 The C3 component.
+# \param t1 The <em>C1</em> component.
+# \param t2 The <em>C2</em> component.
+# \param t3 The <em>C3</em> component.
 # 
 # \return A quaternion (<em>t1</em>, <em>t2</em>, <em>t3</em>, <tt>0</tt>).
 # 
 def quat(t1: float, t2: float, t3: float) -> FQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from four scalar components (C1, C2, C3, C4).
+# \brief Constructs a Math.Quaternion from four scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
-# \param t1 The C1 component.
-# \param t2 The C2 component.
-# \param t3 The C3 component.
-# \param t4 The C4 component.
+# \param t1 The <em>C1</em> component.
+# \param t2 The <em>C2</em> component.
+# \param t3 The <em>C3</em> component.
+# \param t4 The <em>C4</em> component.
 # 
 # \return A quaternion (<em>t1</em>, <em>t2</em>, <em>t3</em>, <em>t4</em>).
 # 
@@ -2569,38 +2569,38 @@ def quat(t1: float, t2: float, t3: float, t4: float) -> FQuaternion: pass
 # 
 # \param t The real component.
 # 
-# \return A real quaternion with <tt>C1</tt> = <em>t</em> and zero imaginary components.
+# \return A real quaternion with <em>C1</em> = <em>t</em> and zero imaginary components.
 # 
 def quat(t: int) -> LRealQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from two scalar components <em>t1</em> and <em>t2</em> (C1, C2) — remaining components are zero.
+# \brief Constructs a Math.Quaternion from two scalar components <em>t1</em> and <em>t2</em> (<em>C1</em>, <em>C2</em>) — remaining components are zero.
 # 
-# \param t1 The C1 component.
-# \param t2 The C2 component.
+# \param t1 The <em>C1</em> component.
+# \param t2 The <em>C2</em> component.
 # 
 # \return A quaternion (<em>t1</em>, <em>t2</em>, <tt>0</tt>, <tt>0</tt>).
 # 
 def quat(t1: int, t2: int) -> LQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from three scalar components (C1, C2, C3) — C4 is zero.
+# \brief Constructs a Math.Quaternion from three scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>) — <em>C4</em> is zero.
 # 
-# \param t1 The C1 component.
-# \param t2 The C2 component.
-# \param t3 The C3 component.
+# \param t1 The <em>C1</em> component.
+# \param t2 The <em>C2</em> component.
+# \param t3 The <em>C3</em> component.
 # 
 # \return A quaternion (<em>t1</em>, <em>t2</em>, <em>t3</em>, <tt>0</tt>).
 # 
 def quat(t1: int, t2: int, t3: int) -> LQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from four scalar components (C1, C2, C3, C4).
+# \brief Constructs a Math.Quaternion from four scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
-# \param t1 The C1 component.
-# \param t2 The C2 component.
-# \param t3 The C3 component.
-# \param t4 The C4 component.
+# \param t1 The <em>C1</em> component.
+# \param t2 The <em>C2</em> component.
+# \param t3 The <em>C3</em> component.
+# \param t4 The <em>C4</em> component.
 # 
 # \return A quaternion (<em>t1</em>, <em>t2</em>, <em>t3</em>, <em>t4</em>).
 # 
@@ -4655,7 +4655,7 @@ def triang(e: ConstULMatrixExpression, type: Lower) -> ConstLowerTriangularULMat
 def triang(e: ConstULMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularULMatrixAdapter: pass
 
 ##
-# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with C1 zeroed out).
+# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with <em>C1</em> zeroed out).
 # 
 # \param e The quaternion expression.
 # 
@@ -4664,7 +4664,7 @@ def triang(e: ConstULMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangu
 def unreal(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
 ##
-# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with C1 zeroed out).
+# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with <em>C1</em> zeroed out).
 # 
 # \param e The quaternion expression.
 # 
@@ -4673,7 +4673,7 @@ def unreal(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 def unreal(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
 ##
-# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with C1 zeroed out).
+# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with <em>C1</em> zeroed out).
 # 
 # \param e The quaternion expression.
 # 
@@ -4682,7 +4682,7 @@ def unreal(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 def unreal(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
 ##
-# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with C1 zeroed out).
+# \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with <em>C1</em> zeroed out).
 # 
 # \param e The quaternion expression.
 # 

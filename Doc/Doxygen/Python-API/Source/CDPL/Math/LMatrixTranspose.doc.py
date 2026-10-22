@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Mutable view adapter that exposes the transpose of a matrix <em>M</em> as a matrix expression ( \f$ (i, j) \to M(j, i) \f$).
+# 
 class LMatrixTranspose(Boost.Python.instance):
 
     ##
@@ -31,10 +31,11 @@ class LMatrixTranspose(Boost.Python.instance):
     def __init__(mt: LMatrixTranspose) -> None: pass
 
     ##
-    # \brief Contructs the \c LMatrixTranspose instance.
-    # \param e 
+    # \brief Constructs the transpose view proxy referring to <em>m</em>.
     # 
-    def __init__(e: LMatrixExpression) -> None: pass
+    # \param m The wrapped matrix.
+    # 
+    def __init__(m: LMatrixExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -49,53 +50,86 @@ class LMatrixTranspose(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstFMatrixExpression instance \a e.
-    # \param e The \c ConstFMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this transpose view (writes the transpose into the wrapped matrix).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstFMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstDMatrixExpression instance \a e.
-    # \param e The \c ConstDMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this transpose view (writes the transpose into the wrapped matrix).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstDMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstLMatrixExpression instance \a e.
-    # \param e The \c ConstLMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this transpose view (writes the transpose into the wrapped matrix).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstLMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ConstULMatrixExpression instance \a e.
-    # \param e The \c ConstULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief Assigns the matrix expression <em>e</em> to this transpose view (writes the transpose into the wrapped matrix).
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def assign(e: ConstULMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c LMatrixTranspose instance \a mt.
-    # \param mt The \c LMatrixTranspose instance to copy.
-    # \return \a self
+    # \brief Assigns the wrapped matrix from <em>mt's</em> wrapped matrix (possibly differing types).
+    # 
+    # \param mt The source transpose view.
+    # 
+    # \return \a self.
     # 
     def assign(mt: LMatrixTranspose) -> LMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the 2D \c numpy.ndarray object \a a to this transpose view.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> None: pass
 
+    ##
+    # \brief Returns the number of rows of the transpose view (= number of columns of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the number of columns of the transpose view (= number of rows of the wrapped matrix).
+    # 
+    # \return The number of columns.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the view is empty (the wrapped matrix has zero rows or zero columns).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
+    # 
+    # \param i The zero-based row index in the transposed view.
+    # \param j The zero-based column index in the transposed view.
+    # 
+    # \return A reference to <tt>m(j, i)</tt>.
+    # 
     def getElement(i: int, j: int) -> int: pass
 
     ##
@@ -105,16 +139,54 @@ class LMatrixTranspose(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Swaps the underlying matrices of the two transpose views.
+    # 
+    # \param mt The transpose view to swap with.
+    # 
     def swap(mt: LMatrixTranspose) -> None: pass
 
+    ##
+    # \brief Sets the value of the wrapped matrix's element at (\a j, \a i) to \a v.
+    # \param i The zero-based row index in the transposed view.
+    # \param j The zero-based column index in the transposed view.
+    # \param v The new value of the element.
+    # \throw Base.IndexError if any of the indices is out of range.
+    # 
     def setElement(i: int, j: int, v: int) -> None: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return A reference to the wrapped matrix closure.
+    # 
     def getData() -> LMatrixExpression: pass
 
+    ##
+    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
+    # 
+    # \param i The zero-based row index in the transposed view.
+    # \param j The zero-based column index in the transposed view.
+    # 
+    # \return A reference to <tt>m(j, i)</tt>.
+    # 
     def __call__(i: int, j: int) -> int: pass
 
+    ##
+    # \brief Returns the wrapped matrix's element at (<em>j</em>, <em>i</em>).
+    # 
+    # \param i The zero-based row index in the transposed view.
+    # \param j The zero-based column index in the transposed view.
+    # 
+    # \return A reference to <tt>m(j, i)</tt>.
+    # 
     def __getitem__(ij: tuple) -> int: pass
 
+    ##
+    # \brief Returns the number of rows of the transpose view (= number of columns of the wrapped matrix).
+    # 
+    # \return The number of rows.
+    # 
     def __len__() -> int: pass
 
     ##
@@ -222,51 +294,65 @@ class LMatrixTranspose(Boost.Python.instance):
     def __setitem__(ij: tuple, v: int) -> None: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += mt</tt>.
-    # \param mt Specifies the second addend.
-    # \return The updated \c LMatrixTranspose instance \a self.
+    # \brief Adds the matrix transpose <em>mt</em> to this transpose view.
+    # 
+    # \param mt The source matrix transpose.
+    # 
+    # \return \a self.
     # 
     def __iadd__(mt: LMatrixTranspose) -> LMatrixTranspose: pass
 
     ##
-    # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param e Specifies the second addend.
-    # \return The updated \c LMatrixTranspose instance \a self.
+    # \brief Adds the matrix expression <em>e</em> to this transpose view.
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __iadd__(e: ConstLMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= mt</tt>.
-    # \param mt Specifies the subtrahend.
-    # \return The updated \c LMatrixTranspose instance \a self.
+    # \brief Subtracts the matrix transpose <em>mt</em> from this transpose view.
+    # 
+    # \param mt The source matrix transpose.
+    # 
+    # \return \a self.
     # 
     def __isub__(mt: LMatrixTranspose) -> LMatrixTranspose: pass
 
     ##
-    # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param e Specifies the subtrahend.
-    # \return The updated \c LMatrixTranspose instance \a self.
+    # \brief Subtracts the matrix expression <em>e</em> from this transpose view.
+    # 
+    # \param e The source matrix expression.
+    # 
+    # \return \a self.
     # 
     def __isub__(e: ConstLMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param t Specifies the multiplier.
-    # \return The updated \c LMatrixTranspose instance \a self.
+    # \brief Multiplies every element of the wrapped matrix by the scalar <em>t</em>.
+    # 
+    # \param t The scalar multiplier.
+    # 
+    # \return \a self.
     # 
     def __imul__(t: int) -> LMatrixTranspose: pass
 
     ##
-    # \brief Performs the in-place division operation <tt>self //= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LMatrixTranspose instance \a self.
+    # \brief Divides every element of the wrapped matrix by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __idiv__(t: int) -> LMatrixTranspose: pass
 
     ##
-    # \brief Returns the result of the in-place \e true division operation <tt>self /= t</tt>.
-    # \param t Specifies the divisor.
-    # \return The updated \c LMatrixTranspose instance \a self.
+    # \brief Divides every element of the wrapped matrix by the scalar <em>t</em>.
+    # 
+    # \param t The scalar divisor.
+    # 
+    # \return \a self.
     # 
     def __itruediv__(t: int) -> LMatrixTranspose: pass
 

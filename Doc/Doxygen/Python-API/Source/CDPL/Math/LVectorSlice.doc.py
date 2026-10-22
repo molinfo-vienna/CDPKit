@@ -156,7 +156,7 @@ class LVectorSlice(Boost.Python.instance):
     # \brief Sets the value of the element at index \a i of the view to \a v.
     # \param i The zero-based index within the view.
     # \param v The new value of the element.
-    # \throw Base.IndexError if \a i is not in the slice [0, getSize()).
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
     # 
     def setElement(i: int, v: int) -> None: pass
 
@@ -291,7 +291,7 @@ class LVectorSlice(Boost.Python.instance):
     # \brief Sets the value of the element at index \a i of the view to \a v.
     # \param i The zero-based index within the view.
     # \param v The new value of the element.
-    # \throw Base.IndexError if \a i is not in the slice [0, getSize()).
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
     # 
     def __setitem__(i: int, v: int) -> None: pass
 

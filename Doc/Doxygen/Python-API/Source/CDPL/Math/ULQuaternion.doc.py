@@ -148,28 +148,28 @@ class ULQuaternion(Boost.Python.instance):
     ##
     # \brief Returns the real component <em>C1</em>.
     # 
-    # \return A reference to <em>C1</em>.
+    # \return The value of <em>C1</em>.
     # 
     def getC1() -> int: pass
 
     ##
     # \brief Returns the imaginary component <em>C2</em>.
     # 
-    # \return A reference to <em>C2</em>.
+    # \return The value of <em>C2</em>.
     # 
     def getC2() -> int: pass
 
     ##
     # \brief Returns the imaginary component <em>C3</em>.
     # 
-    # \return A reference to <em>C3</em>.
+    # \return The value of <em>C3</em>.
     # 
     def getC3() -> int: pass
 
     ##
     # \brief Returns the imaginary component <em>C4</em>.
     # 
-    # \return A reference to <em>C4</em>.
+    # \return The value of <em>C4</em>.
     # 
     def getC4() -> int: pass
 
@@ -368,7 +368,7 @@ class ULQuaternion(Boost.Python.instance):
     def __iadd__(t: int) -> ULQuaternion: pass
 
     ##
-    # \brief Adds the components of the quaternion <em>q</em> to this quaternion (no alias check needed).
+    # \brief Adds the quaternion <em>q</em> to this quaternion (via a temporary to handle aliasing).
     # 
     # \param q The source quaternion.
     # 
@@ -395,7 +395,7 @@ class ULQuaternion(Boost.Python.instance):
     def __isub__(t: int) -> ULQuaternion: pass
 
     ##
-    # \brief Subtracts the components of the quaternion <em>q</em> from this quaternion (no alias check needed).
+    # \brief Subtracts the quaternion <em>q</em> from this quaternion (via a temporary to handle aliasing).
     # 
     # \param q The source quaternion.
     # 
@@ -422,6 +422,15 @@ class ULQuaternion(Boost.Python.instance):
     def __imul__(t: int) -> ULQuaternion: pass
 
     ##
+    # \brief Right-multiplies this quaternion by the quaternion <em>q</em> (Hamilton product, via a temporary).
+    # 
+    # \param q The right-hand quaternion.
+    # 
+    # \return \a self.
+    # 
+    def __imul__(q: ULQuaternion) -> ULQuaternion: pass
+
+    ##
     # \brief Right-multiplies this quaternion by the quaternion expression <em>e</em> (Hamilton product, via a temporary).
     # 
     # \param e The right-hand quaternion expression.
@@ -440,6 +449,15 @@ class ULQuaternion(Boost.Python.instance):
     def __idiv__(t: int) -> ULQuaternion: pass
 
     ##
+    # \brief Right-divides this quaternion by the quaternion <em>q</em> (Hamilton-product inverse, via a temporary).
+    # 
+    # \param q The right-hand quaternion.
+    # 
+    # \return \a self.
+    # 
+    def __idiv__(q: ULQuaternion) -> ULQuaternion: pass
+
+    ##
     # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
     # 
     # \param e The right-hand quaternion expression.
@@ -456,6 +474,15 @@ class ULQuaternion(Boost.Python.instance):
     # \return \a self.
     # 
     def __itruediv__(t: int) -> ULQuaternion: pass
+
+    ##
+    # \brief Right-divides this quaternion by the quaternion <em>q</em> (Hamilton-product inverse, via a temporary).
+    # 
+    # \param q The right-hand quaternion.
+    # 
+    # \return \a self.
+    # 
+    def __itruediv__(q: ULQuaternion) -> ULQuaternion: pass
 
     ##
     # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).

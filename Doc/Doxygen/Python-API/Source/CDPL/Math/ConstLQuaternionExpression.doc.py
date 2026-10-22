@@ -39,28 +39,28 @@ class ConstLQuaternionExpression(Boost.Python.instance):
     ##
     # \brief Returns the real component <em>C1</em>.
     # 
-    # \return A reference to <em>C1</em>.
+    # \return The value of <em>C1</em>.
     # 
     def getC1() -> int: pass
 
     ##
     # \brief Returns the imaginary component <em>C2</em>.
     # 
-    # \return A reference to <em>C2</em>.
+    # \return The value of <em>C2</em>.
     # 
     def getC2() -> int: pass
 
     ##
     # \brief Returns the imaginary component <em>C3</em>.
     # 
-    # \return A reference to <em>C3</em>.
+    # \return The value of <em>C3</em>.
     # 
     def getC3() -> int: pass
 
     ##
     # \brief Returns the imaginary component <em>C4</em>.
     # 
-    # \return A reference to <em>C4</em>.
+    # \return The value of <em>C4</em>.
     # 
     def getC4() -> int: pass
 

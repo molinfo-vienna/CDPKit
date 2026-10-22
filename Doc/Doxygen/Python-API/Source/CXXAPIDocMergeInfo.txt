@@ -27,7 +27,9 @@ nullptr § None
 A reference to itself. § \a self.
 a reference to the § the
 A reference to the element. § The value of the element.
-A reference to the underlying element § The value of the element 
+A reference to the component. § The value of the component.
+A reference to the underlying element § The value of the element
+A reference to <em>C § The value of <em>C
 int idx § idx: int
 Base class § %Base class
 ' Any ' § ' %Any '
@@ -377,6 +379,18 @@ Math.*BFGSMinimizer § Math.BFGSMinimizer
 
 # ---
 
+Math.Range.getIndex § Math.Range.__call__
+
+Math.Range.__getitem__ § Math.Range.__call__
+
+# ---
+
+Math.Slice.getIndex § Math.Slice.__call__
+
+Math.Slice.__getitem__ § Math.Slice.__call__
+
+# ---
+
 Math.*Grid.__getitem__(i) § Math.Grid.__call__(i)
 
 Math.*Grid.__getitem__(ijk) § Math.Grid.__call__(i,j,k)
@@ -481,25 +495,25 @@ Math.*RealQuaternion.set(r) § Math.RealQuaternion.operator=(t)
 <em>t</em> § <em>r</em>
 param t § param r
 
-Math.*Quaternion.__iadd__(q) § Math.Quaternion.__iadd__(c)
-quaternion container § quaternion
-<em>c</em> § <em>q</em>
-param c § param q
+Math.*Quaternion.__iadd__(q) § Math.Quaternion.__iadd__(e)
+quaternion expression § quaternion
+<em>e</em> § <em>q</em>
+param e § param q
 
-Math.*Quaternion.__isub__(q) § Math.Quaternion.__isub__(c)
-quaternion container § quaternion
-<em>c</em> § <em>q</em>
-param c § param q
+Math.*Quaternion.__isub__(q) § Math.Quaternion.__isub__(e)
+quaternion expression § quaternion
+<em>e</em> § <em>q</em>
+param e § param q
 
-Math.*Quaternion.__imul__(q) § Math.Quaternion.__imul__(c)
-quaternion container § quaternion
-<em>c</em> § <em>q</em>
-param c § param q
+Math.*Quaternion.__imul__(q) § Math.Quaternion.__imul__(e)
+quaternion expression § quaternion
+<em>e</em> § <em>q</em>
+param e § param q
 
-Math.*Quaternion.__idiv__(q) § Math.Quaternion.__idiv__(c)
-quaternion container § quaternion
-<em>c</em> § <em>q</em>
-param c § param q
+Math.*Quaternion.__idiv__(q) § Math.Quaternion.__idiv__(e)
+quaternion expression § quaternion
+<em>e</em> § <em>q</em>
+param e § param q
 
 # ---
 
@@ -569,6 +583,28 @@ param e § param r
 
 # ---
 
+Math.*MatrixTranspose § Math.MatrixTranspose
+
+Math.*MatrixTranspose.__getitem__(ij) § Math.MatrixTranspose.__call__(i,j)
+
+Math.*MatrixTranspose.getElement(i,j) § Math.MatrixTranspose.__call__(i,j)
+
+Math.*MatrixTranspose.getSize() § Math.MatrixTranspose.getSize1()
+
+Math.*MatrixTranspose.__iadd__(mt) § Math.MatrixTranspose.__iadd__(e)
+matrix transpose § transpose
+matrix expression § matrix transpose
+<em>e</em> § <em>mt</em>
+param e § param mt
+
+Math.*MatrixTranspose.__isub__(mt) § Math.MatrixTranspose.__isub__(e)
+matrix transpose § transpose
+matrix expression § matrix transpose
+<em>e</em> § <em>mt</em>
+param e § param mt
+
+# ---
+
 Math.*MatrixSlice § Math.MatrixSlice
 
 Math.*MatrixSlice.__getitem__(ij) § Math.MatrixSlice.__call__(i,j)
@@ -629,12 +665,12 @@ vector <em>V</em> § vector
 Math.*HomogenousCoordsAdapter.getElement(i) § Math.HomogenousCoordsAdapter.__getitem__(i)
 
 Math.*HomogenousCoordsAdapter.__iadd__(va) § Math.HomogenousCoordsAdapter.__iadd__(e)
-vector expression § adapter
+vector expression § vector adapter
 <em>e</em> § <em>va</em>
 param e § param va
 
 Math.*HomogenousCoordsAdapter.__isub__(va) § Math.HomogenousCoordsAdapter.__isub__(e)
-vector expression § adapter
+vector expression § vector adapter
 <em>e</em> § <em>va</em>
 param e § param va
 
@@ -642,17 +678,41 @@ param e § param va
 
 Math.*QuaternionVectorAdapter § Math.QuaternionVectorAdapter
 
-Math.*QuaternionVectorAdapter.getElement(i) § Math.QuaternionVectorAdapter.__getitem__(i)
+Math.*QuaternionVectorAdapter.getElement(i) § Math.QuaternionVectorAdapter.__call__(i)
 
 Math.*QuaternionVectorAdapter.__iadd__(qa) § Math.QuaternionVectorAdapter.__iadd__(e)
-vector expression § adapter
+vector expression § quaternion adapter
 <em>e</em> § <em>qa</em>
 param e § param qa
 
 Math.*QuaternionVectorAdapter.__isub__(qa) § Math.QuaternionVectorAdapter.__isub__(e)
-vector expression § adapter
+vector expression § quaternion adapter
 <em>e</em> § <em>qa</em>
 param e § param qa
+
+# ---
+
+Math.*VectorQuaternionAdapter § Math.VectorQuaternionAdapter
+
+Math.*VectorQuaternionAdapter.__iadd__(va) § Math.VectorQuaternionAdapter.__iadd__(e)
+quaternion expression § vector adapter
+<em>e</em> § <em>va</em>
+param e § param va
+
+Math.*VectorQuaternionAdapter.__isub__(va) § Math.VectorQuaternionAdapter.__isub__(e)
+quaternion expression § vector adapter
+<em>e</em> § <em>va</em>
+param e § param va
+
+Math.*VectorQuaternionAdapter.__imul__(va) § Math.VectorQuaternionAdapter.__imul__(e)
+quaternion expression § vector adapter
+<em>e</em> § <em>va</em>
+param e § param va
+
+Math.*VectorQuaternionAdapter.__idiv__(va) § Math.VectorQuaternionAdapter.__idiv__(e)
+quaternion expression § vector adapter
+<em>e</em> § <em>va</em>
+param e § param va
 
 #
 # --- CDPL.Util package ---

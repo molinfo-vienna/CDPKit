@@ -1517,7 +1517,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the unreal (pure-quaternion) part of the quaternion expression \a e (with C1 zeroed out).
+         * \brief Returns the unreal (pure-quaternion) part of the quaternion expression \a e (with \e C1 zeroed out).
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression.
          * \return An expression template node representing the unreal part of \a e.
@@ -1532,7 +1532,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the quaternion conjugate of the quaternion expression \a e (negates C2, C3, C4).
+         * \brief Returns the quaternion conjugate of the quaternion expression \a e (negates \e C2, \e C3, \e C4).
          * \tparam E The quaternion expression type.
          * \param e The quaternion expression.
          * \return An expression template node representing \f$ \overline{e} \f$.

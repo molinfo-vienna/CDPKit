@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components C1, C2, C3, C4).
+# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components <em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
 class LQuaternionVectorAdapter(Boost.Python.instance):
 
@@ -95,14 +95,14 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def assign(qa: LQuaternionVectorAdapter) -> LQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
-    # \param a The \c object instance to copy.
-    # \return \a self
+    # \brief Assigns the contents of the \c numpy.ndarray object \a a to this view.
+    # \param a The \c numpy.ndarray object.
+    # \see [\ref NUMPY]
     # 
     def assign(a: object) -> LQuaternionVectorAdapter: pass
 
     ##
-    # \brief Tells whether the view is empty (always <tt>False</tt>, the view is fixed-size with 4 components).
+    # \brief Tells whether the view is empty (always <tt>False</tt>).
     # 
     # \return <tt>False</tt>.
     # 
@@ -118,9 +118,9 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the quaternion component at index <em>i</em>.
     # 
-    # \param i The zero-based component index.
+    # \param i The zero-based component index (<em>0</em> = <em>C1</em>, <em>1</em> = <em>C2</em>, <em>2</em> = <em>C3</em>, <em>3</em> = <em>C4</em>).
     # 
-    # \return A reference to the component. 
+    # \return The value of the component. 
     # 
     # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
     # 
@@ -140,6 +140,12 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def swap(qa: LQuaternionVectorAdapter) -> None: pass
 
+    ##
+    # \brief Sets the value of the quaternion component at index \a i to \a v.
+    # \param i The zero-based component index (\e 0 = C1, \e 1 = C2, \e 2 = C3, \e 3 = C4).
+    # \param v The new value of the component.
+    # \throw Base.IndexError if \a i is not in the range [0, 3].
+    # 
     def setElement(i: int, v: int) -> None: pass
 
     ##
@@ -180,9 +186,9 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the quaternion component at index <em>i</em>.
     # 
-    # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
+    # \param i The zero-based component index (<em>0</em> = <em>C1</em>, <em>1</em> = <em>C2</em>, <em>2</em> = <em>C3</em>, <em>3</em> = <em>C4</em>).
     # 
-    # \return A reference to the component. 
+    # \return The value of the component. 
     # 
     # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
     # 
@@ -191,9 +197,9 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the quaternion component at index <em>i</em>.
     # 
-    # \param i The zero-based component index.
+    # \param i The zero-based component index (<em>0</em> = <em>C1</em>, <em>1</em> = <em>C2</em>, <em>2</em> = <em>C3</em>, <em>3</em> = <em>C4</em>).
     # 
-    # \return A reference to the component. 
+    # \return The value of the component. 
     # 
     # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
     # 
@@ -273,12 +279,18 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     # 
     def __rmul__(t: int) -> ConstLVectorExpression: pass
 
+    ##
+    # \brief Sets the value of the quaternion component at index \a i to \a v.
+    # \param i The zero-based component index (\e 0 = C1, \e 1 = C2, \e 2 = C3, \e 3 = C4).
+    # \param v The new value of the component.
+    # \throw Base.IndexError if \a i is not in the range [0, 3].
+    # 
     def __setitem__(i: int, v: int) -> None: pass
 
     ##
-    # \brief Adds the adapter <em>qa</em> componentwise to this view.
+    # \brief Adds the quaternion adapter <em>qa</em> componentwise to this view.
     # 
-    # \param qa The adapter to add.
+    # \param qa The quaternion adapter to add.
     # 
     # \return \a self.
     # 
@@ -294,9 +306,9 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def __iadd__(e: ConstLVectorExpression) -> LQuaternionVectorAdapter: pass
 
     ##
-    # \brief Subtracts the adapter <em>qa</em> componentwise from this view.
+    # \brief Subtracts the quaternion adapter <em>qa</em> componentwise from this view.
     # 
-    # \param qa The adapter to subtract.
+    # \param qa The quaternion adapter to subtract.
     # 
     # \return \a self.
     # 

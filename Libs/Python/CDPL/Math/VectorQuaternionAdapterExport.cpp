@@ -57,10 +57,11 @@ namespace
             using namespace CDPLPythonMath;
 
             python::class_<VectorAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-                .def(python::init<const VectorAdapterWrapper&>((python::arg("self"), python::arg("a"))))
-                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(python::init<const VectorAdapterWrapper&>((python::arg("self"), python::arg("va"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("v"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorAdapterType>())
                 .def(AssignFunctionGeneratorVisitor<VectorAdapterType, ConstQuaternionExpression>("e"))
+                .def(QuaternionNDArrayAssignVisitor<VectorAdapterType>())
                 .def(ConstQuaternionVisitor<VectorAdapterType>("va"))
                 .def(QuaternionAssignAndSwapVisitor<VectorAdapterType>("va"))
                 .def(QuaternionVisitor<VectorAdapterType>("va"))
