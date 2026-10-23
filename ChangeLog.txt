@@ -1,5 +1,6 @@
 master:
 
+ - When reading MDL CTabs the unpaired electron count of atoms now gets calculated from total valence information (if provided)
  - Fix for bug that caused reading MDL V3000 CTabs without an explicit bond block for molecules that have no bonds to fail
  - Formal charge, radical type and isotope property blocks in MDL V2000 data files are now processed according to the original specification
  - Added missing postprocessing of total atom valence information in MDL CTabs
