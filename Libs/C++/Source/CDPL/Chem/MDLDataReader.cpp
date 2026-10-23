@@ -4008,14 +4008,9 @@ void Chem::MDLDataReader::postprocTotalAtomValences(Molecule& mol) const
     for (auto& [atom, tot_val] : atomTotValList) {
         auto expl_val = Internal::calcExplicitValence(*atom, mol);
 
-        if (tot_val >= expl_val) {
-            auto impl_h_count = calcImplicitHydrogenCount(*atom, mol);
-            auto tot_val_impl_h_count = tot_val - expl_val;
-            
-            setImplicitHydrogenCount(*atom, tot_val_impl_h_count);
-            setUnpairedElectronCount(*atom, impl_h_count > tot_val_impl_h_count ? impl_h_count - tot_val_impl_h_count : 0);
-
-        } else if (strictErrorChecking)
+        if (tot_val >= expl_val)
+            setImplicitHydrogenCount(*atom, tot_val - expl_val);
+        else if (strictErrorChecking)
             throw Base::IOError("MDLDataReader: specified total atom valence < explicit valence");
     }
 }
