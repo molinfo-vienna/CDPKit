@@ -109,7 +109,7 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the dimensionality of the view (wrapped vector size + 1).
+    # \brief Returns the dimensionality of the view (wrapped vector size + <em>1</em>).
     # 
     # \return The view size.
     # 
@@ -142,7 +142,7 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     # \brief Sets the value of the element at index \a i of the view to \a v.
     # \param i The zero-based index within the view.
     # \param v The new value of the element.
-    # \throw Base.IndexError if \a i is not in the slice [0, getSize()).
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
     # 
     def setElement(i: int, v: float) -> None: pass
 
@@ -200,7 +200,7 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     def __getitem__(i: int) -> float: pass
 
     ##
-    # \brief Returns the dimensionality of the view (wrapped vector size + 1).
+    # \brief Returns the dimensionality of the view (wrapped vector size + <em>1</em>).
     # 
     # \return The view size.
     # 
@@ -277,14 +277,14 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     # \brief Sets the value of the element at index \a i of the view to \a v.
     # \param i The zero-based index within the view.
     # \param v The new value of the element.
-    # \throw Base.IndexError if \a i is not in the slice [0, getSize()).
+    # \throw Base.IndexError if \a i is not in the range [0, getSize()).
     # 
     def __setitem__(i: int, v: float) -> None: pass
 
     ##
-    # \brief Adds the adapter <em>va</em> componentwise to this view.
+    # \brief Adds the vector adapter <em>va</em> componentwise to this view.
     # 
-    # \param va The adapter to add.
+    # \param va The vector adapter to add.
     # 
     # \return \a self.
     # 
@@ -300,9 +300,9 @@ class DHomogenousCoordsAdapter(Boost.Python.instance):
     def __iadd__(e: ConstDVectorExpression) -> DHomogenousCoordsAdapter: pass
 
     ##
-    # \brief Subtracts the adapter <em>va</em> componentwise from this view.
+    # \brief Subtracts the vector adapter <em>va</em> componentwise from this view.
     # 
-    # \param va The adapter to subtract.
+    # \param va The vector adapter to subtract.
     # 
     # \return \a self.
     # 

@@ -57,7 +57,7 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the dimensionality of the view (wrapped vector size + 1).
+    # \brief Returns the dimensionality of the view (wrapped vector size + <em>1</em>).
     # 
     # \return The view size.
     # 
@@ -133,7 +133,7 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
     def __getitem__(i: int) -> int: pass
 
     ##
-    # \brief Returns the dimensionality of the view (wrapped vector size + 1).
+    # \brief Returns the dimensionality of the view (wrapped vector size + <em>1</em>).
     # 
     # \return The view size.
     # 

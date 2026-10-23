@@ -187,6 +187,15 @@ class ULQuaternionExpression(ConstULQuaternionExpression):
     # 
     # \return \a self.
     # 
+    def __imul__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
+
+    ##
+    # \brief Right-multiplies this quaternion by the quaternion expression <em>e</em> (Hamilton product, via a temporary).
+    # 
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
     def __imul__(e: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
@@ -205,6 +214,15 @@ class ULQuaternionExpression(ConstULQuaternionExpression):
     # 
     # \return \a self.
     # 
+    def __idiv__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
+
+    ##
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
+    # 
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
     def __idiv__(e: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
@@ -215,6 +233,15 @@ class ULQuaternionExpression(ConstULQuaternionExpression):
     # \return \a self.
     # 
     def __itruediv__(t: int) -> ULQuaternionExpression: pass
+
+    ##
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
+    # 
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __itruediv__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).

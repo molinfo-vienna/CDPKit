@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components C1, C2, C3, C4).
+# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components <em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
 class ConstLQuaternionVectorAdapter(Boost.Python.instance):
 
@@ -50,7 +50,7 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Tells whether the view is empty (always <tt>False</tt>, the view is fixed-size with 4 components).
+    # \brief Tells whether the view is empty (always <tt>False</tt>).
     # 
     # \return <tt>False</tt>.
     # 
@@ -66,9 +66,9 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the quaternion component at index <em>i</em>.
     # 
-    # \param i The zero-based component index.
+    # \param i The zero-based component index (<em>0</em> = <em>C1</em>, <em>1</em> = <em>C2</em>, <em>2</em> = <em>C3</em>, <em>3</em> = <em>C4</em>).
     # 
-    # \return A reference to the component. 
+    # \return The value of the component. 
     # 
     # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
     # 
@@ -119,9 +119,9 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the quaternion component at index <em>i</em>.
     # 
-    # \param i The zero-based component index (<em>0</em> = C1, <em>1</em> = C2, <em>2</em> = C3, <em>3</em> = C4).
+    # \param i The zero-based component index (<em>0</em> = <em>C1</em>, <em>1</em> = <em>C2</em>, <em>2</em> = <em>C3</em>, <em>3</em> = <em>C4</em>).
     # 
-    # \return A reference to the component. 
+    # \return The value of the component. 
     # 
     # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
     # 
@@ -130,9 +130,9 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the quaternion component at index <em>i</em>.
     # 
-    # \param i The zero-based component index.
+    # \param i The zero-based component index (<em>0</em> = <em>C1</em>, <em>1</em> = <em>C2</em>, <em>2</em> = <em>C3</em>, <em>3</em> = <em>C4</em>).
     # 
-    # \return A reference to the component. 
+    # \return The value of the component. 
     # 
     # \throw Base.IndexError if <em>i</em> is not in the range [0, 3].
     # 

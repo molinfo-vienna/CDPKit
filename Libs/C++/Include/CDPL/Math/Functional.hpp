@@ -1819,7 +1819,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Per-component functor returning the unreal (pure-quaternion) part of a quaternion expression (zeros \c C1, keeps \c C2/\c C3/\c C4).
+         * \brief Per-component functor returning the unreal (pure-quaternion) part of a quaternion expression (zeros \e C1, keeps \e C2/\e C3/\e C4).
          * \tparam Q The quaternion expression type.
          */
         template <typename Q>
@@ -1829,7 +1829,7 @@ namespace CDPL
             typedef typename QuaternionUnaryFunctor<Q>::ResultType ResultType;
 
             /**
-             * \brief Returns the \c C1 component of the unreal part (always zero).
+             * \brief Returns the \e C1 component of the unreal part (always zero).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return Zero.
@@ -1841,7 +1841,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of the unreal part (equals \c e.getC2()).
+             * \brief Returns the \e C2 component of the unreal part (equals \c e.getC2()).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return \c e.getC2().
@@ -1853,7 +1853,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of the unreal part (equals \c e.getC3()).
+             * \brief Returns the \e C3 component of the unreal part (equals \c e.getC3()).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return \c e.getC3().
@@ -1865,7 +1865,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of the unreal part (equals \c e.getC4()).
+             * \brief Returns the \e C4 component of the unreal part (equals \c e.getC4()).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return \c e.getC4().
@@ -1878,7 +1878,7 @@ namespace CDPL
         };
 
         /**
-         * \brief Per-component functor returning the quaternion conjugate (keeps \c C1, negates \c C2/\c C3/\c C4).
+         * \brief Per-component functor returning the quaternion conjugate (keeps \e C1, negates \e C2/\e C3/\e C4).
          * \tparam Q The quaternion expression type.
          */
         template <typename Q>
@@ -1888,7 +1888,7 @@ namespace CDPL
             typedef typename QuaternionUnaryFunctor<Q>::ResultType ResultType;
 
             /**
-             * \brief Returns the \c C1 component of the conjugate (equals \c e.getC1()).
+             * \brief Returns the \e C1 component of the conjugate (equals \c e.getC1()).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return \c e.getC1().
@@ -1900,7 +1900,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of the conjugate (equals \c -e.getC2()).
+             * \brief Returns the \e C2 component of the conjugate (equals \c -e.getC2()).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return \c -e.getC2().
@@ -1912,7 +1912,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of the conjugate (equals \c -e.getC3()).
+             * \brief Returns the \e C3 component of the conjugate (equals \c -e.getC3()).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return \c -e.getC3().
@@ -1924,7 +1924,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of the conjugate (equals \c -e.getC4()).
+             * \brief Returns the \e C4 component of the conjugate (equals \c -e.getC4()).
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \return \c -e.getC4().
@@ -1969,7 +1969,7 @@ namespace CDPL
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
             /**
-             * \brief Returns the \c C1 component of \f$ t + e \f$.
+             * \brief Returns the \e C1 component of \f$ t + e \f$.
              * \tparam E The quaternion expression type.
              * \param t The scalar value on the left-hand side.
              * \param e The quaternion expression on the right-hand side.
@@ -1982,7 +1982,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of \f$ t + e \f$.
+             * \brief Returns the \e C2 component of \f$ t + e \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the right-hand side.
              * \return \c e.getC2() (the scalar argument does not contribute to this component).
@@ -1994,7 +1994,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of \f$ t + e \f$.
+             * \brief Returns the \e C3 component of \f$ t + e \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the right-hand side.
              * \return \c e.getC3() (the scalar argument does not contribute to this component).
@@ -2006,7 +2006,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of \f$ t + e \f$.
+             * \brief Returns the \e C4 component of \f$ t + e \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the right-hand side.
              * \return \c e.getC4() (the scalar argument does not contribute to this component).
@@ -2031,7 +2031,7 @@ namespace CDPL
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
             /**
-             * \brief Returns the \c C1 component of \f$ t - e \f$.
+             * \brief Returns the \e C1 component of \f$ t - e \f$.
              * \tparam E The quaternion expression type.
              * \param t The scalar value on the left-hand side.
              * \param e The quaternion expression on the right-hand side.
@@ -2044,7 +2044,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of \f$ t - e \f$.
+             * \brief Returns the \e C2 component of \f$ t - e \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the right-hand side.
              * \return \c -e.getC2() (the scalar argument does not contribute to this component).
@@ -2056,7 +2056,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of \f$ t - e \f$.
+             * \brief Returns the \e C3 component of \f$ t - e \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the right-hand side.
              * \return \c -e.getC3() (the scalar argument does not contribute to this component).
@@ -2068,7 +2068,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of \f$ t - e \f$.
+             * \brief Returns the \e C4 component of \f$ t - e \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the right-hand side.
              * \return \c -e.getC4() (the scalar argument does not contribute to this component).
@@ -2113,7 +2113,7 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
             /**
-             * \brief Returns the \c C1 component of \f$ e + t \f$.
+             * \brief Returns the \e C1 component of \f$ e + t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \param t The scalar value on the right-hand side.
@@ -2126,7 +2126,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of \f$ e + t \f$.
+             * \brief Returns the \e C2 component of \f$ e + t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \return \c e.getC2() (the scalar argument does not contribute to this component).
@@ -2138,7 +2138,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of \f$ e + t \f$.
+             * \brief Returns the \e C3 component of \f$ e + t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \return \c e.getC3() (the scalar argument does not contribute to this component).
@@ -2150,7 +2150,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of \f$ e + t \f$.
+             * \brief Returns the \e C4 component of \f$ e + t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \return \c e.getC4() (the scalar argument does not contribute to this component).
@@ -2175,7 +2175,7 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
             /**
-             * \brief Returns the \c C1 component of \f$ e - t \f$.
+             * \brief Returns the \e C1 component of \f$ e - t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \param t The scalar value on the right-hand side.
@@ -2188,7 +2188,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of \f$ e - t \f$.
+             * \brief Returns the \e C2 component of \f$ e - t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \return \c e.getC2() (the scalar argument does not contribute to this component).
@@ -2200,7 +2200,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of \f$ e - t \f$.
+             * \brief Returns the \e C3 component of \f$ e - t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \return \c e.getC3() (the scalar argument does not contribute to this component).
@@ -2212,7 +2212,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of \f$ e - t \f$.
+             * \brief Returns the \e C4 component of \f$ e - t \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression on the left-hand side.
              * \return \c e.getC4() (the scalar argument does not contribute to this component).
@@ -2237,7 +2237,7 @@ namespace CDPL
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
             /**
-             * \brief Returns the \c C1 (real) component of the multiplicative inverse \f$ e^{-1} = \overline{e} / \|e\|^2 \f$.
+             * \brief Returns the \e C1 (real) component of the multiplicative inverse \f$ e^{-1} = \overline{e} / \|e\|^2 \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
@@ -2250,7 +2250,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of the multiplicative inverse \f$ e^{-1} \f$.
+             * \brief Returns the \e C2 component of the multiplicative inverse \f$ e^{-1} \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
@@ -2263,7 +2263,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of the multiplicative inverse \f$ e^{-1} \f$.
+             * \brief Returns the \e C3 component of the multiplicative inverse \f$ e^{-1} \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
@@ -2276,7 +2276,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of the multiplicative inverse \f$ e^{-1} \f$.
+             * \brief Returns the \e C4 component of the multiplicative inverse \f$ e^{-1} \f$.
              * \tparam E The quaternion expression type.
              * \param e The quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e\|^2 \f$.
@@ -2316,12 +2316,12 @@ namespace CDPL
             typedef typename QuaternionBinaryFunctor<Q1, Q2>::ResultType ResultType;
 
             /**
-             * \brief Returns the \c C1 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \brief Returns the \e C1 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The first quaternion expression.
              * \param e2 The second quaternion expression.
-             * \return The \c C1 component of the Hamilton product.
+             * \return The \e C1 component of the Hamilton product.
              */
             template <typename E1, typename E2>
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -2331,12 +2331,12 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \brief Returns the \e C2 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The first quaternion expression.
              * \param e2 The second quaternion expression.
-             * \return The \c C2 component of the Hamilton product.
+             * \return The \e C2 component of the Hamilton product.
              */
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -2346,12 +2346,12 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \brief Returns the \e C3 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The first quaternion expression.
              * \param e2 The second quaternion expression.
-             * \return The \c C3 component of the Hamilton product.
+             * \return The \e C3 component of the Hamilton product.
              */
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -2361,12 +2361,12 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
+             * \brief Returns the \e C4 component of the Hamilton product \f$ e_1 \cdot e_2 \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The first quaternion expression.
              * \param e2 The second quaternion expression.
-             * \return The \c C4 component of the Hamilton product.
+             * \return The \e C4 component of the Hamilton product.
              */
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -2411,13 +2411,13 @@ namespace CDPL
             typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::ResultType    ResultType;
 
             /**
-             * \brief Returns the \c C1 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \brief Returns the \e C1 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The dividend quaternion expression.
              * \param e2 The divisor quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
-             * \return The \c C1 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             * \return The \e C1 component of \f$ e_1 \cdot e_2^{-1} \f$.
              */
             template <typename E1, typename E2>
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
@@ -2427,13 +2427,13 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \brief Returns the \e C2 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The dividend quaternion expression.
              * \param e2 The divisor quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
-             * \return The \c C2 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             * \return The \e C2 component of \f$ e_1 \cdot e_2^{-1} \f$.
              */
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
@@ -2443,13 +2443,13 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \brief Returns the \e C3 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The dividend quaternion expression.
              * \param e2 The divisor quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
-             * \return The \c C3 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             * \return The \e C3 component of \f$ e_1 \cdot e_2^{-1} \f$.
              */
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
@@ -2459,13 +2459,13 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
+             * \brief Returns the \e C4 component of the quaternion division \f$ e_1 \cdot e_2^{-1} \f$.
              * \tparam E1 The first quaternion expression type.
              * \tparam E2 The second quaternion expression type.
              * \param e1 The dividend quaternion expression.
              * \param e2 The divisor quaternion expression.
              * \param n2 The precomputed squared norm \f$ \|e_2\|^2 \f$.
-             * \return The \c C4 component of \f$ e_1 \cdot e_2^{-1} \f$.
+             * \return The \e C4 component of \f$ e_1 \cdot e_2^{-1} \f$.
              */
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
@@ -2516,7 +2516,7 @@ namespace CDPL
             typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::ResultType    ResultType;
 
             /**
-             * \brief Returns the \c C1 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \brief Returns the \e C1 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
              * \tparam E The quaternion expression type.
              * \param t The scalar value on the left-hand side.
              * \param e The quaternion expression on the right-hand side.
@@ -2530,7 +2530,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C2 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \brief Returns the \e C2 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
              * \tparam E The quaternion expression type.
              * \param t The scalar value on the left-hand side.
              * \param e The quaternion expression on the right-hand side.
@@ -2544,7 +2544,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C3 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \brief Returns the \e C3 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
              * \tparam E The quaternion expression type.
              * \param t The scalar value on the left-hand side.
              * \param e The quaternion expression on the right-hand side.
@@ -2558,7 +2558,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the \c C4 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
+             * \brief Returns the \e C4 component of \f$ t / e \f$ using the precomputed squared norm \a n2 of \a e.
              * \tparam E The quaternion expression type.
              * \param t The scalar value on the left-hand side.
              * \param e The quaternion expression on the right-hand side.

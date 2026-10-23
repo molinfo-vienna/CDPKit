@@ -20,21 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices <em>0-3</em> map to <em>C1-C4</em>).
+# 
 class ConstLVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c ConstLVectorQuaternionAdapter instance \a a.
-    # \param a The \c ConstLVectorQuaternionAdapter instance to copy.
+    # \brief Contructs a copy of the \c ConstLVectorQuaternionAdapter instance \a va.
+    # \param va The \c ConstLVectorQuaternionAdapter instance to copy.
     # 
-    def __init__(a: ConstLVectorQuaternionAdapter) -> None: pass
+    def __init__(va: ConstLVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Contructs the \c ConstLVectorQuaternionAdapter instance.
-    # \param e 
+    # \brief Constructs the adapter wrapping the 4-element vector <em>v</em>.
     # 
-    def __init__(e: ConstLVectorExpression) -> None: pass
+    # \param v The 4-element vector to be viewed as a quaternion.
+    # 
+    def __init__(v: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -48,12 +49,32 @@ class ConstLVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the real component <em>C1</em>.
+    # 
+    # \return The value of <em>C1</em>.
+    # 
     def getC1() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C2</em>.
+    # 
+    # \return The value of <em>C2</em>.
+    # 
     def getC2() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C3</em>.
+    # 
+    # \return The value of <em>C3</em>.
+    # 
     def getC3() -> int: pass
 
+    ##
+    # \brief Returns the imaginary component <em>C4</em>.
+    # 
+    # \return The value of <em>C4</em>.
+    # 
     def getC4() -> int: pass
 
     ##
@@ -63,14 +84,19 @@ class ConstLVectorQuaternionAdapter(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped vector.
+    # 
+    # \return A reference to the wrapped vector closure.
+    # 
     def getData() -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == qa</tt>.
-    # \param qa The \c ConstLVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == va</tt>.
+    # \param va The \c ConstLVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(qa: ConstLVectorQuaternionAdapter) -> bool: pass
+    def __eq__(va: ConstLVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
@@ -80,11 +106,11 @@ class ConstLVectorQuaternionAdapter(Boost.Python.instance):
     def __eq__(q: ConstLQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != qa</tt>.
-    # \param qa The \c ConstLVectorQuaternionAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != va</tt>.
+    # \param va The \c ConstLVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(qa: ConstLVectorQuaternionAdapter) -> bool: pass
+    def __ne__(va: ConstLVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.

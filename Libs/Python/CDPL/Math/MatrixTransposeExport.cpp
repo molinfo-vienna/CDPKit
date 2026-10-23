@@ -24,7 +24,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Math/MatrixAdapter.hpp"
+#include "CDPL/Math/MatrixExpression.hpp"
 #include "CDPL/Math/IO.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -55,7 +55,7 @@ namespace
         
             python::class_<MatrixTransposeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
                 .def(python::init<const MatrixTransposeWrapper&>((python::arg("self"), python::arg("mt"))))
-                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("m"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixTransposeType>())
                 .def(AssignFunctionGeneratorVisitor<MatrixTransposeType, ConstMatrixExpression>("e"))
                 .def(ConstMatrixVisitor<MatrixTransposeType>("mt"))

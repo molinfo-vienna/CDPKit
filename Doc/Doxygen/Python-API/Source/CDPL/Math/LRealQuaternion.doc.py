@@ -67,7 +67,7 @@ class LRealQuaternion(Boost.Python.instance):
     ##
     # \brief Returns the real component <em>C1</em>.
     # 
-    # \return A reference to <em>C1</em>.
+    # \return The value of <em>C1</em>.
     # 
     def getC1() -> int: pass
 

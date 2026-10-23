@@ -1205,7 +1205,7 @@ namespace CDPL
          * \brief Constructs a Math::RealQuaternion from the scalar \a t (its real component).
          * \tparam T The scalar value type.
          * \param t The real component.
-         * \return A real quaternion with \c C1 = \a t and zero imaginary components.
+         * \return A real quaternion with \e C1 = \a t and zero imaginary components.
          */
         template <typename T>
         typename std::enable_if<IsScalar<T>::value, RealQuaternion<T> >::type
@@ -1215,11 +1215,11 @@ namespace CDPL
         }
 
         /**
-         * \brief Constructs a Math::Quaternion from two scalar components \a t1 and \a t2 (C1, C2) — remaining components are zero.
+         * \brief Constructs a Math::Quaternion from two scalar components \a t1 and \a t2 (\e C1, \e C2) — remaining components are zero.
          * \tparam T1 The type of the first component.
          * \tparam T2 The type of the second component.
-         * \param t1 The C1 component.
-         * \param t2 The C2 component.
+         * \param t1 The \e C1 component.
+         * \param t2 The \e C2 component.
          * \return A quaternion (\a t1, \a t2, \c 0, \c 0).
          */
         template <typename T1, typename T2>
@@ -1232,13 +1232,13 @@ namespace CDPL
         }
 
         /**
-         * \brief Constructs a Math::Quaternion from three scalar components (C1, C2, C3) — C4 is zero.
-         * \tparam T1 The type of the C1 component.
-         * \tparam T2 The type of the C2 component.
-         * \tparam T3 The type of the C3 component.
-         * \param t1 The C1 component.
-         * \param t2 The C2 component.
-         * \param t3 The C3 component.
+         * \brief Constructs a Math::Quaternion from three scalar components (\e C1, \e C2, \e C3) — \e C4 is zero.
+         * \tparam T1 The type of the \e C1 component.
+         * \tparam T2 The type of the \e C2 component.
+         * \tparam T3 The type of the \e C3 component.
+         * \param t1 The \e C1 component.
+         * \param t2 The \e C2 component.
+         * \param t3 The \e C3 component.
          * \return A quaternion (\a t1, \a t2, \a t3, \c 0).
          */
         template <typename T1, typename T2, typename T3>
@@ -1251,15 +1251,15 @@ namespace CDPL
         }
 
         /**
-         * \brief Constructs a Math::Quaternion from four scalar components (C1, C2, C3, C4).
-         * \tparam T1 The type of the C1 component.
-         * \tparam T2 The type of the C2 component.
-         * \tparam T3 The type of the C3 component.
-         * \tparam T4 The type of the C4 component.
-         * \param t1 The C1 component.
-         * \param t2 The C2 component.
-         * \param t3 The C3 component.
-         * \param t4 The C4 component.
+         * \brief Constructs a Math::Quaternion from four scalar components (\e C1, \e C2, \e C3, \e C4).
+         * \tparam T1 The type of the \e C1 component.
+         * \tparam T2 The type of the \e C2 component.
+         * \tparam T3 The type of the \e C3 component.
+         * \tparam T4 The type of the \e C4 component.
+         * \param t1 The \e C1 component.
+         * \param t2 The \e C2 component.
+         * \param t3 The \e C3 component.
+         * \param t4 The \e C4 component.
          * \return A quaternion (\a t1, \a t2, \a t3, \a t4).
          */
         template <typename T1, typename T2, typename T3, typename T4>

@@ -187,6 +187,15 @@ class DQuaternionExpression(ConstDQuaternionExpression):
     # 
     # \return \a self.
     # 
+    def __imul__(e: DQuaternionExpression) -> DQuaternionExpression: pass
+
+    ##
+    # \brief Right-multiplies this quaternion by the quaternion expression <em>e</em> (Hamilton product, via a temporary).
+    # 
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
     def __imul__(e: ConstDQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
@@ -205,6 +214,15 @@ class DQuaternionExpression(ConstDQuaternionExpression):
     # 
     # \return \a self.
     # 
+    def __idiv__(e: DQuaternionExpression) -> DQuaternionExpression: pass
+
+    ##
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
+    # 
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
     def __idiv__(e: ConstDQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
@@ -215,6 +233,15 @@ class DQuaternionExpression(ConstDQuaternionExpression):
     # \return \a self.
     # 
     def __itruediv__(t: float) -> DQuaternionExpression: pass
+
+    ##
+    # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).
+    # 
+    # \param e The right-hand quaternion expression.
+    # 
+    # \return \a self.
+    # 
+    def __itruediv__(e: DQuaternionExpression) -> DQuaternionExpression: pass
 
     ##
     # \brief Right-divides this quaternion by the quaternion expression <em>e</em> (Hamilton-product inverse, via a temporary).

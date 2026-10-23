@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Adapter that exposes a quaternion as a \e 4 element vector expression (indices map to the components C1, C2, C3, C4).
+         * \brief Adapter that exposes a quaternion as a \e 4 element vector expression (indices map to the components \e C1, \e C2, \e C3, \e C4).
          * \tparam Q The wrapped quaternion type.
          */
         template <typename Q>
@@ -112,7 +112,7 @@ namespace CDPL
 
             /**
              * \brief Returns a mutable reference to the quaternion component at index \a i.
-             * \param i The zero-based component index (\e 0 = C1, \e 1 = C2, \e 2 = C3, \e 3 = C4).
+             * \param i The zero-based component index (\e 0 = \e C1, \e 1 = \e C2, \e 2 = \e C3, \e 3 = \e C4).
              * \return A mutable reference to the component.
              * \throw Base::IndexError if \a i is not in the range [0, 3].
              */
@@ -139,7 +139,7 @@ namespace CDPL
 
             /**
              * \brief Returns a \c const reference to the quaternion component at index \a i.
-             * \param i The zero-based component index (\e 0 = C1, \e 1 = C2, \e 2 = C3, \e 3 = C4).
+             * \param i The zero-based component index (\e 0 = \e C1, \e 1 = \e C2, \e 2 = \e C3, \e 3 = \e C4).
              * \return A \c const reference to the component.
              * \throw Base::IndexError if \a i is not in the range [0, 3].
              */
@@ -166,7 +166,7 @@ namespace CDPL
 
             /**
              * \brief Returns a mutable reference to the quaternion component at index \a i.
-             * \param i The zero-based component index.
+             * \param i The zero-based component index (\e 0 = \e C1, \e 1 = \e C2, \e 2 = \e C3, \e 3 = \e C4).
              * \return A mutable reference to the component.
              * \throw Base::IndexError if \a i is not in the range [0, 3].
              */
@@ -177,7 +177,7 @@ namespace CDPL
 
             /**
              * \brief Returns a \c const reference to the quaternion component at index \a i.
-             * \param i The zero-based component index.
+             * \param i The zero-based component index (\e 0 = \e C1, \e 1 = \e C2, \e 2 = \e C3, \e 3 = \e C4).
              * \return A \c const reference to the component.
              * \throw Base::IndexError if \a i is not in the range [0, 3].
              */
@@ -196,7 +196,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Tells whether the view is empty (always \c false, the view is fixed-size with 4 components).
+             * \brief Tells whether the view is empty (always \c false).
              * \return \c false.
              */
             bool isEmpty() const
@@ -350,12 +350,12 @@ namespace CDPL
 
             /**
              * \brief ADL-enabled free-function form of swap().
-             * \param a1 The first adapter.
-             * \param a2 The second adapter.
+             * \param qa1 The first adapter.
+             * \param qa2 The second adapter.
              */
-            friend void swap(QuaternionVectorAdapter& a1, QuaternionVectorAdapter& a2)
+            friend void swap(QuaternionVectorAdapter& qa1, QuaternionVectorAdapter& qa2)
             {
-                a1.swap(a2);
+                qa1.swap(qa2);
             }
 
           private:
