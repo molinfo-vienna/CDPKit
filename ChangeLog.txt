@@ -1,5 +1,6 @@
 master:
 
+ - Fix for bug that caused reading MDL V3000 CTabs without an explicit bond block for molecules that have no bonds to fail
  - Formal charge, radical type and isotope property blocks in MDL V2000 data files are now processed according to the original specification
  - Added missing postprocessing of total atom valence information in MDL CTabs
  - Fixed typos in the names of constants defined in namespaces Chem::RECAPRuleID and Chem::RECAPAtomLabel (QUARTERNARY -> QUATERNARY)

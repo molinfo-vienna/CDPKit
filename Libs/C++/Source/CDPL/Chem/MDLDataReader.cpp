@@ -543,75 +543,78 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
         }
 
         readV3000BlockEnd(is, AtomBlock::BLOCK_TYPE_KEY);
-        readV3000BlockBegin(is, BondBlock::BLOCK_TYPE_KEY);
 
-        for (std::size_t i = 0; i < bondCount; i++) {
-            readV3000DataLine(is);
+        if (bondCount > 0) {
+            readV3000BlockBegin(is, BondBlock::BLOCK_TYPE_KEY);
 
-            std::istringstream line_iss(line);
+            for (std::size_t i = 0; i < bondCount; i++) {
+                readV3000DataLine(is);
 
-            if (!(line_iss >> tmpString))
-                throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond index");
+                std::istringstream line_iss(line);
 
-            unsigned int bond_type;
+                if (!(line_iss >> tmpString))
+                    throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond index");
 
-            if (!(line_iss >> bond_type))
-                throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond type property");
+                unsigned int bond_type;
 
-            const Bond& bond = molgraph.getBond(i);
+                if (!(line_iss >> bond_type))
+                    throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond type property");
 
-            switch (bond_type) {
+                const Bond& bond = molgraph.getBond(i);
 
-                case BondBlock::TYPE_SINGLE:
-                    if (getOrder(bond) != 1)
-                        return false;
-                    break;
+                switch (bond_type) {
 
-                case BondBlock::TYPE_DOUBLE:
-                    if (getOrder(bond) != 2)
-                        return false;
-                    break;
+                    case BondBlock::TYPE_SINGLE:
+                        if (getOrder(bond) != 1)
+                            return false;
+                        break;
 
-                case BondBlock::TYPE_TRIPLE:
-                    if (getOrder(bond) != 3)
-                        return false;
-                    break;
+                    case BondBlock::TYPE_DOUBLE:
+                        if (getOrder(bond) != 2)
+                            return false;
+                        break;
+
+                    case BondBlock::TYPE_TRIPLE:
+                        if (getOrder(bond) != 3)
+                            return false;
+                        break;
+                }
+
+                std::size_t atom1_index;
+
+                if (!(line_iss >> atom1_index))
+                    throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond start atom index");
+
+                if (strictErrorChecking && atom1_index == 0)
+                    throw Base::IOError("MDLDataReader: invalid ctab V3000 bond start atom index - has to be > 0");
+
+                AtomIndexMap::const_iterator mol_atom1_index_it = atomIndexMap.find(atom1_index);
+
+                if (mol_atom1_index_it == atomIndexMap.end())
+                    throw Base::IOError("MDLDataReader: ctab V3000 bond start atom with specified index does not exist");
+
+                if (molgraph.getAtomIndex(bond.getBegin()) != mol_atom1_index_it->second)
+                    return false;
+
+                std::size_t atom2_index;
+
+                if (!(line_iss >> atom2_index))
+                    throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond target atom index");
+
+                if (strictErrorChecking && atom2_index == 0)
+                    throw Base::IOError("MDLDataReader: invalid ctab V3000 bond target atom index - has to be > 0");
+
+                AtomIndexMap::const_iterator mol_atom2_index_it = atomIndexMap.find(atom2_index);
+
+                if (mol_atom2_index_it == atomIndexMap.end())
+                    throw Base::IOError("MDLDataReader: ctab V3000 bond target atom with specified index does not exist");
+
+                if (molgraph.getAtomIndex(bond.getEnd()) != mol_atom2_index_it->second)
+                    return false;
             }
 
-            std::size_t atom1_index;
-
-            if (!(line_iss >> atom1_index))
-                throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond start atom index");
-
-            if (strictErrorChecking && atom1_index == 0)
-                throw Base::IOError("MDLDataReader: invalid ctab V3000 bond start atom index - has to be > 0");
-
-            AtomIndexMap::const_iterator mol_atom1_index_it = atomIndexMap.find(atom1_index);
-    
-            if (mol_atom1_index_it == atomIndexMap.end())
-                throw Base::IOError("MDLDataReader: ctab V3000 bond start atom with specified index does not exist");
-
-            if (molgraph.getAtomIndex(bond.getBegin()) != mol_atom1_index_it->second)
-                return false;
-
-            std::size_t atom2_index;
-
-            if (!(line_iss >> atom2_index))
-                throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond target atom index");
-
-            if (strictErrorChecking && atom2_index == 0)
-                throw Base::IOError("MDLDataReader: invalid ctab V3000 bond target atom index - has to be > 0");
-
-            AtomIndexMap::const_iterator mol_atom2_index_it = atomIndexMap.find(atom2_index);
-    
-            if (mol_atom2_index_it == atomIndexMap.end())
-                throw Base::IOError("MDLDataReader: ctab V3000 bond target atom with specified index does not exist");
-
-            if (molgraph.getAtomIndex(bond.getEnd()) != mol_atom2_index_it->second)
-                return false;
+            readV3000BlockEnd(is, BondBlock::BLOCK_TYPE_KEY);
         }
-
-        readV3000BlockEnd(is, BondBlock::BLOCK_TYPE_KEY);
 
         readPastCTabV3000BlockEnd(is);
 
@@ -2752,8 +2755,8 @@ void Chem::MDLDataReader::readCTabV3000(std::istream& is, Molecule& mol)
     
     readCTabV3000CountsLine(is, mol);
     readCTabV3000AtomBlock(is, mol);
-    
-    if (readCTabV3000BondBlock(is, mol, atom_index_offs))
+
+    if ((bondCount > 0) && readCTabV3000BondBlock(is, mol, atom_index_offs))
         kekulizeBonds(mol);
 
     readPastCTabV3000BlockEnd(is);
