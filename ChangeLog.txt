@@ -1,5 +1,7 @@
 master:
 
+ - New functions Chem::calcUnpairedElectronCounts(molgraph, bool) and Chem::calcUnpairedElectronCount(atom, molgraph) for
+   the calculation of the unpaired electron count of atoms from given implicit hydrogen count property values
  - Fix for bug that caused reading MDL V3000 CTabs without an explicit bond block for molecules that have no bonds to fail
  - Formal charge, radical type and isotope property blocks in MDL V2000 data files are now processed according to the original specification
  - Added missing postprocessing of total atom valence information in MDL CTabs

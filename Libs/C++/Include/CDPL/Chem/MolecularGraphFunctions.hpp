@@ -1348,6 +1348,7 @@ namespace CDPL
          * \brief Computes and stores implicit hydrogen counts for the atoms of the molecular graph \a molgraph.
          * \param molgraph The molecular graph.
          * \param overwrite Specifies whether already existing hydrogen count properties should be replaced.
+          * \see calcImplicitHydrogenCount()
          */
         CDPL_CHEM_API void calcImplicitHydrogenCounts(MolecularGraph& molgraph, bool overwrite);
 
@@ -1355,13 +1356,24 @@ namespace CDPL
          * \brief Computes and stores formal charges for the atoms of the molecular graph \a molgraph.
          * \param molgraph The molecular graph.
          * \param overwrite Specifies whether already existing formal charge properties should be replaced.
+         * \see calcFormalCharge()
          */
         CDPL_CHEM_API void calcFormalCharges(MolecularGraph& molgraph, bool overwrite);
 
         /**
+         * \brief Computes and stores the unpaired (radical) electron counts for the atoms in the molecular graph \a molgraph.
+         * \param molgraph The molecular graph.
+         * \param overwrite Specifies whether already existing unpaired electron count properties should be replaced.
+         * \see calcUnpairedElectronCount()
+         * \since 1.4
+         */
+        CDPL_CHEM_API void calcUnpairedElectronCounts(MolecularGraph& molgraph, bool overwrite);
+        
+        /**
          * \brief Computes and stores hybridization states for the atoms of the molecular graph \a molgraph.
          * \param molgraph The molecular graph.
          * \param overwrite Specifies whether already existing hybridization state properties should be replaced.
+         * \see perceiveHybridizationState()
          */
         CDPL_CHEM_API void perceiveHybridizationStates(MolecularGraph& molgraph, bool overwrite);
 

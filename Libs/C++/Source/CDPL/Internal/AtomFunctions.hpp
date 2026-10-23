@@ -63,7 +63,8 @@ namespace CDPL
         inline std::size_t calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
         inline std::size_t calcValenceElectronCount(const Chem::Atom& atom);
         inline std::size_t calcFreeValenceElectronCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-
+        inline std::size_t calcImplicitHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t num_rad_elecs);
+    
         inline bool isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
         inline bool isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
                                        unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);

@@ -3920,6 +3920,8 @@ def calcFormalCharge(atom: Atom, molgraph: MolecularGraph) -> int: pass
 # \param molgraph The molecular graph.
 # \param overwrite Specifies whether already existing formal charge properties should be replaced.
 # 
+# \see calcFormalCharge()
+# 
 def calcFormalCharges(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
@@ -3988,6 +3990,8 @@ def calcImplicitHydrogenCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
 # 
 # \param molgraph The molecular graph.
 # \param overwrite Specifies whether already existing hydrogen count properties should be replaced.
+# 
+# \see calcImplicitHydrogenCount()
 # 
 def calcImplicitHydrogenCounts(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
@@ -4066,6 +4070,32 @@ def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> 
 # \param mtx The output topological distance matrix.
 # 
 def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.ULMatrix) -> None: pass
+
+##
+# \brief Computes the unpaired (radical) electron count of the atom <em>atom</em> from its implict hydrogen count property value.
+# 
+# For atoms without a set implict hydrogen count property the unpaired electron count is considered to be zero.
+# 
+# \param atom The atom for which to calculate the unpaired electron count.
+# \param molgraph The molecular graph providing the structural context.
+# 
+# \return The computed unpaired electron count. 
+# 
+# \since 1.4
+# 
+def calcUnpairedElectronCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
+
+##
+# \brief Computes and stores the unpaired (radical) electron counts for the atoms in the molecular graph <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# \param overwrite Specifies whether already existing unpaired electron count properties should be replaced.
+# 
+# \see calcUnpairedElectronCount() 
+# 
+# \since 1.4
+# 
+def calcUnpairedElectronCounts(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief Reorders the atoms (and optionally their neighbors and bonds) of the molecular graph <em>molgraph</em> according to the canonical number property value of its atoms.
@@ -4948,6 +4978,8 @@ def perceiveHybridizationState(atom: Atom, molgraph: MolecularGraph) -> int: pas
 # 
 # \param molgraph The molecular graph.
 # \param overwrite Specifies whether already existing hybridization state properties should be replaced.
+# 
+# \see perceiveHybridizationState()
 # 
 def perceiveHybridizationStates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 

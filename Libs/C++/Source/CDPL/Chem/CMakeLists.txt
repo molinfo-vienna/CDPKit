@@ -236,6 +236,7 @@ set(cdpl-chem_LIB_SRCS
     AtomHybridizationPerceptionFunction.cpp
     AtomFragmentMembershipFunctions.cpp
     AtomImplicitHydrogenCountFunction.cpp
+    AtomUnpairedElectronCountFunction.cpp
     AtomConformerCoordinatesFunction.cpp
     AtomStereoDescriptorFunctions.cpp
     AtomMDLParityFunction.cpp
@@ -287,7 +288,8 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphMorganNumberingFunction.cpp 
     MolecularGraphAtomStereoFunctions.cpp 
     MolecularGraphBondStereoFunctions.cpp 
-    MolecularGraphImplicitHydrogenCountsFunction.cpp 
+    MolecularGraphImplicitHydrogenCountsFunction.cpp
+    MolecularGraphUnpairedElectronCountsFunction.cpp 
     MolecularGraphFormalChargesFunction.cpp 
     MolecularGraphHybridizationStatesFunction.cpp 
     MolecularGraphAromaticityFlagsFunction.cpp 

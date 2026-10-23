@@ -128,6 +128,7 @@ namespace
     MAKE_FUNCTION_WRAPPER2(long, calcFormalCharge, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveHybridizationState, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, calcImplicitHydrogenCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(std::size_t, calcUnpairedElectronCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(CDPL::Chem::StereoDescriptor, calcStereoDescriptorFromMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(unsigned int, calcMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, generateMatchExpression, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
@@ -241,6 +242,8 @@ void CDPLPythonChem::exportAtomFunctions()
     python::def("perceiveHybridizationState", &perceiveHybridizationStateWrapper2,
                 (python::arg("atom"), python::arg("molgraph")));
     python::def("calcImplicitHydrogenCount", &calcImplicitHydrogenCountWrapper2,
+                (python::arg("atom"), python::arg("molgraph")));
+    python::def("calcUnpairedElectronCount", &calcUnpairedElectronCountWrapper2,
                 (python::arg("atom"), python::arg("molgraph")));
     python::def("calcStereoDescriptorFromMDLParity", &calcStereoDescriptorFromMDLParityWrapper2,
                 (python::arg("atom"), python::arg("molgraph")), python::with_custodian_and_ward_postcall<0, 1>());

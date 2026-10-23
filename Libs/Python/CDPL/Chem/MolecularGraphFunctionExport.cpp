@@ -137,6 +137,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcImplicitHydrogenCounts", &Chem::calcImplicitHydrogenCounts, 
                 (python::arg("molgraph"), python::arg("overwrite")));
+    python::def("calcUnpairedElectronCounts", &Chem::calcUnpairedElectronCounts, 
+                (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcFormalCharges", &Chem::calcFormalCharges,
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("perceiveHybridizationStates", &Chem::perceiveHybridizationStates, 
