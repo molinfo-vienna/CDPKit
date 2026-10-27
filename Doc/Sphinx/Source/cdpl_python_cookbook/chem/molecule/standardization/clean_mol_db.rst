@@ -84,6 +84,10 @@ and then writes only those molecules that fulfill particular user-defined criter
  -S
 
     Remove atom and bond stereochemistry information (default: false)
+
+ -r
+
+    Replace radical electrons by hydrogens (default: true)
  
  -c
 

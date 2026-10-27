@@ -39,7 +39,18 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
         # if changes were made then from now on use the 'uncharged' molecule for further checks
         if chgs_mod:  
             mol = res_mol
-        
+
+    derad = False
+
+    if args.deradicalize:
+        # clear radical information
+        for atom in mol.atoms:
+            if Chem.getRadicalType(atom) != Chem.RadicalType.NOT_RADICALIC or Chem.getUnpairedElectronCount(atom) > 0:
+                Chem.clearRadicalType(atom)
+                Chem.clearUnpairedElectronCount(atom)
+                Chem.clearImplicitHydrogenCount(atom)
+                derad = True
+                
     comps_strpd = False
     
     if args.strip_comps:
@@ -97,11 +108,17 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
     if chgs_mod:
         log_msg = 'reduced charged atom count'
 
+    if derad:
+        if log_msg:
+            log_msg += ', '
+            
+        log_msg = 'removed radical information'
+        
     if comps_strpd:
         if log_msg:
-            log_msg += ', removed components'
-        else:
-            log_msg = 'removed components'
+            log_msg += ', '
+
+        log_msg = 'removed components'
 
     if args.strip_stereo:
         for atom in mol.atoms:  # clear atom stereo descriptors
@@ -280,6 +297,13 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Minimize number of charged atoms (default: false)')
+    parser.add_argument('-r',
+                        dest='deradicalize',
+                        required=False,
+                        metavar='<true|false>',
+                        type=lambda x:bool(strtobool(x)),
+                        default=True,
+                        help='Replace radical electrons by hydrogens (default: true)')
     parser.add_argument('-C',
                         dest='canonicalize',
                         required=False,
