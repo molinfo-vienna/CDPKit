@@ -1,5 +1,8 @@
 master:
 
+ - MDL data reading code now sets the unpaired electron count of atoms based on radical type information (if present)
+ - SMILES generation code now regards existing implicit hydrogen count atom property values. Before they were calculated on-the-fly which
+   lead to unintended data loss in some cases (e.g. radical atoms)
  - New functions Chem::calcUnpairedElectronCounts(molgraph, bool) and Chem::calcUnpairedElectronCount(atom, molgraph) for
    the calculation of the unpaired electron count of atoms from given implicit hydrogen count property values
  - Fix for bug that caused reading MDL V3000 CTabs without an explicit bond block for molecules that have no bonds to fail
