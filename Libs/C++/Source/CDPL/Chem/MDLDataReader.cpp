@@ -1030,8 +1030,10 @@ void Chem::MDLDataReader::readCTabV2000PropertyBlock(std::istream& is, Molecule&
 
         clearFormalCharge(atom);
 
-        if (have_rad_prop)
+        if (have_rad_prop) {
             clearRadicalType(atom);
+            clearUnpairedElectronCount(atom);
+        }
     }
 }
 
@@ -1190,6 +1192,7 @@ void Chem::MDLDataReader::readCTabV2000AtomCharge(std::istream& is, Atom& atom) 
 
         case AtomBlock::DOUBLET_RADICAL:
             setRadicalType(atom, RadicalType::DOUBLET);
+            setUnpairedElectronCount(atom, 1);
             return;
 
         default:
@@ -1729,14 +1732,17 @@ void Chem::MDLDataReader::readCTabV2000RadicalProperties(std::istream& is, Molec
 
             case PropertyBlock::SINGLET_RADICAL:
                 setRadicalType(atom, RadicalType::SINGLET);
+                setUnpairedElectronCount(atom, 2);
                 continue;
 
             case PropertyBlock::DOUBLET_RADICAL:
                 setRadicalType(atom, RadicalType::DOUBLET);
+                setUnpairedElectronCount(atom, 1);
                 continue;
 
             case PropertyBlock::TRIPLET_RADICAL:
                 setRadicalType(atom, RadicalType::TRIPLET);
+                setUnpairedElectronCount(atom, 2);
                 continue;
 
             default:
@@ -3133,14 +3139,17 @@ void Chem::MDLDataReader::readCTabV3000AtomRadicalType(std::istream& is, Atom& a
 
         case AtomBlock::SINGLET_RADICAL:
             setRadicalType(atom, RadicalType::SINGLET);
+            setUnpairedElectronCount(atom, 2);
             return;
 
         case AtomBlock::DOUBLET_RADICAL:
             setRadicalType(atom, RadicalType::DOUBLET);
+            setUnpairedElectronCount(atom, 1);
             return;
 
         case AtomBlock::TRIPLET_RADICAL:
             setRadicalType(atom, RadicalType::TRIPLET);
+            setUnpairedElectronCount(atom, 2);
             return;
 
         default:
