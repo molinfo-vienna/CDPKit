@@ -59,6 +59,9 @@
 #include "SMILESData.hpp"
 
 
+using namespace CDPL;
+
+
 namespace
 {
 
@@ -75,7 +78,7 @@ namespace
 
     int getBondConfigPriority(unsigned int config)
     {
-        using namespace CDPL::Chem;
+        using namespace Chem;
         
         switch (config) {
 
@@ -90,13 +93,25 @@ namespace
                 return 0;
         }
     }
+
+    std::size_t getImplicitHCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent_molgraph)
+    {
+        using namespace Chem;
+        
+        if (hasImplicitHydrogenCount(atom)) {
+            if (&molgraph == &parent_molgraph)
+                return getImplicitHydrogenCount(atom);
+            
+            return (getImplicitHydrogenCount(atom) + Internal::getExplicitAtomCount(atom, parent_molgraph, AtomType::H) -
+                    Internal::getExplicitAtomCount(atom, molgraph, AtomType::H));
+        }
+        
+        return calcImplicitHydrogenCount(atom, molgraph);
+    }
     
     constexpr std::size_t MAX_NODE_CACHE_SIZE = 1000;
     constexpr std::size_t MAX_EDGE_CACHE_SIZE = 1000;
 }
-
-
-using namespace CDPL;
 
 
 Chem::SMILESDataWriter::SMILESDataWriter(const Base::DataIOBase& io_base): 
@@ -335,7 +350,7 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 
         init();
 
-        buildNonCanonDFSTree(*output_molgraph);
+        buildNonCanonDFSTree(*output_molgraph, molgraph);
         distRingClosureNumbers();
         distBondDirections(molgraph);
         generateSMILES(os);
@@ -400,7 +415,7 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 
         init();
 
-        buildCanonDFSTree(*canonMolGraph);
+        buildCanonDFSTree(*canonMolGraph, molgraph);
         distRingClosureNumbers();
         distBondDirections(molgraph);
         generateSMILES(oss);
@@ -451,7 +466,7 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
             if (exp_bond_count == 2 &&
                 Internal::calcExplicitValence(atom, *hDepleteMolGraph) == 3 &&
                 Internal::getExplicitBondCount(atom, *hDepleteMolGraph, 1, AtomType::H) == 1 &&
-                calcImplicitHydrogenCount(atom, *hDepleteMolGraph) == 0) {
+                getImplicitHCount(atom, *hDepleteMolGraph, *hDepleteMolGraph) == 0) {
 
                 bool has_db_geom = false;
 
@@ -527,7 +542,7 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
             if (Internal::calcExplicitValence(nbr_atom, *hDepleteMolGraph) != 1)
                 continue;
 
-            if (calcImplicitHydrogenCount(nbr_atom, *hDepleteMolGraph) != 0)
+            if (getImplicitHCount(nbr_atom, *hDepleteMolGraph, *hDepleteMolGraph) != 0)
                 continue;
 
             std::size_t nbr_atom_idx = hDepleteMolGraph->getAtomIndex(nbr_atom);
@@ -571,11 +586,11 @@ void Chem::SMILESDataWriter::buildCanonMolGraph(const MolecularGraph& molgraph)
     }
 }
 
-void Chem::SMILESDataWriter::buildNonCanonDFSTree(const MolecularGraph& molgraph, DFSTreeNode* node)
+void Chem::SMILESDataWriter::buildNonCanonDFSTree(const MolecularGraph& molgraph, const MolecularGraph& parent_molgraph, DFSTreeNode* node)
 {
     if (!node) {
-        node = createRootNode(molgraph);
-
+        node = createRootNode(molgraph, parent_molgraph);
+        
         atomNodeMapping.assign(molgraph.getNumAtoms(), 0);
     }
 
@@ -621,7 +636,7 @@ void Chem::SMILESDataWriter::buildNonCanonDFSTree(const MolecularGraph& molgraph
         nbr_node = allocNode();
 
         nbr_node->setAtom(nbr_atom);
-        nbr_node->setMolGraph(&molgraph);
+        nbr_node->setMolGraphs(&molgraph, &parent_molgraph);
         nbr_node->setParentEdge(edge);
 
         edge->setBond(bond);
@@ -630,16 +645,16 @@ void Chem::SMILESDataWriter::buildNonCanonDFSTree(const MolecularGraph& molgraph
 
         node->addChildEdge(edge);
 
-        buildNonCanonDFSTree(molgraph, nbr_node);
+        buildNonCanonDFSTree(molgraph, parent_molgraph, nbr_node);
     }
 }
 
-void Chem::SMILESDataWriter::buildCanonDFSTree(const MolecularGraph& molgraph, DFSTreeNode* node)
+void Chem::SMILESDataWriter::buildCanonDFSTree(const MolecularGraph& molgraph, const MolecularGraph& parent_molgraph, DFSTreeNode* node)
 {
     using namespace std::placeholders;
     
     if (!node) {
-        node = createRootNode(molgraph);
+        node = createRootNode(molgraph, parent_molgraph);
 
         atomNodeMapping.assign(molgraph.getNumAtoms(), 0);
     }
@@ -709,7 +724,7 @@ void Chem::SMILESDataWriter::buildCanonDFSTree(const MolecularGraph& molgraph, D
         nbr_node = allocNode();
 
         nbr_node->setAtom(nbr_atom);
-        nbr_node->setMolGraph(&molgraph);
+        nbr_node->setMolGraphs(&molgraph, &parent_molgraph);
         nbr_node->setParentEdge(edge);
 
         edge->setBond(bond);
@@ -718,11 +733,11 @@ void Chem::SMILESDataWriter::buildCanonDFSTree(const MolecularGraph& molgraph, D
         
         node->addChildEdge(edge);
 
-        buildCanonDFSTree(molgraph, nbr_node);
+        buildCanonDFSTree(molgraph, parent_molgraph, nbr_node);
     }
 }
 
-Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::createRootNode(const MolecularGraph& molgraph)
+Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::createRootNode(const MolecularGraph& molgraph, const MolecularGraph& parent_molgraph)
 {
     DFSTreeNode* root_node = allocNode();
     const Atom* root_atom = 0;
@@ -753,7 +768,7 @@ Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::createRootNode(cons
     }
 
     root_node->setAtom(root_atom);
-    root_node->setMolGraph(&molgraph);
+    root_node->setMolGraphs(&molgraph, &parent_molgraph);
     root_node->setParentEdge(0);
 
     return root_node;
@@ -1055,9 +1070,10 @@ void Chem::SMILESDataWriter::DFSTreeNode::setAtom(const Atom* atm)
     atom = atm;
 }
 
-void Chem::SMILESDataWriter::DFSTreeNode::setMolGraph(const MolecularGraph* molgraph)
+void Chem::SMILESDataWriter::DFSTreeNode::setMolGraphs(const MolecularGraph* molgraph, const MolecularGraph* parent_molgraph)
 {
     molGraph = molgraph;
+    parentMolGraph = parent_molgraph;
 }
 
 const Chem::Atom* Chem::SMILESDataWriter::DFSTreeNode::getAtom() const
@@ -1191,7 +1207,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
     std::size_t isotope = (writer.ctrlParameters.outputIsotope ? getIsotope(*atom) : 0);
     std::size_t aam_id = (writer.ctrlParameters.outputRxnAtomMappingID ? getAtomMappingID(*atom) : 0);
     int stereo_rot = (writer.ctrlParameters.outputAtomStereo ? getStereoParity() : 0);
-    std::size_t impl_h_count = (writer.ctrlParameters.outputHCount ? calcImplicitHydrogenCount(*atom, *molGraph) : 0);
+    std::size_t impl_h_count = (writer.ctrlParameters.outputHCount ? getImplicitHCount(*atom, *molGraph, *parentMolGraph) : 0);
     bool in_brackets;
 
     if (!(in_brackets = (writer.ctrlParameters.noOrganicSubset || charge != 0 || isotope > 0 || stereo_rot != 0 || aam_id > 0))) {

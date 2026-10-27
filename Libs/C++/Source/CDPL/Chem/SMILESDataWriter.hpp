@@ -84,10 +84,10 @@ namespace CDPL
             void buildHDepleteMolGraph(const MolecularGraph&);
             void buildCanonMolGraph(const MolecularGraph&);
 
-            void buildNonCanonDFSTree(const MolecularGraph&, DFSTreeNode* = 0);
-            void buildCanonDFSTree(const MolecularGraph&, DFSTreeNode* = 0);
+            void buildNonCanonDFSTree(const MolecularGraph&, const MolecularGraph&, DFSTreeNode* = 0);
+            void buildCanonDFSTree(const MolecularGraph&, const MolecularGraph&, DFSTreeNode* = 0);
 
-            DFSTreeNode* createRootNode(const MolecularGraph&);
+            DFSTreeNode* createRootNode(const MolecularGraph&, const MolecularGraph&);
 
             void distRingClosureNumbers();
             
@@ -213,8 +213,8 @@ namespace CDPL
                 void clear();
 
                 void setAtom(const Atom*);
-                void setMolGraph(const MolecularGraph*);
-
+                void setMolGraphs(const MolecularGraph*, const MolecularGraph*);
+                
                 const Atom* getAtom() const;
 
                 void setLexicalOrder(std::size_t);
@@ -266,6 +266,7 @@ namespace CDPL
 
                 SMILESDataWriter&     writer;
                 const MolecularGraph* molGraph;
+                const MolecularGraph* parentMolGraph;
                 const Atom*           atom;
                 DFSTreeEdge*          parentEdge;
                 EdgeList              childEdges;

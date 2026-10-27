@@ -88,7 +88,12 @@ BOOST_AUTO_TEST_CASE(SubstructureEditingFunctionsTest)
 
         calcBasicProperties(edited_mol, false);
         generateSMILES(edited_mol, res_smiles, true);
-   
+
+        if (res_smiles != *it) {
+            BOOST_TEST_MESSAGE("expected: " << *it);
+            BOOST_TEST_MESSAGE("received: " << res_smiles);
+        }
+        
         BOOST_CHECK(res_smiles == *it);
 
         // ------
