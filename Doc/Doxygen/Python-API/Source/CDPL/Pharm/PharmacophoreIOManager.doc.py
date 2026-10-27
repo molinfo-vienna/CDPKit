@@ -119,7 +119,7 @@ class PharmacophoreIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Pharm.PharmacophoreInputHandler implementation instance to return.
     # 
-    # \return A reference to the Pharm.PharmacophoreInputHandler implementation instance with the specified index. 
+    # \return The Pharm.PharmacophoreInputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 
@@ -240,7 +240,7 @@ class PharmacophoreIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Pharm.PharmacophoreOutputHandler implementation instance to return.
     # 
-    # \return A reference to the Pharm.PharmacophoreOutputHandler implementation instance with the specified index. 
+    # \return The Pharm.PharmacophoreOutputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 

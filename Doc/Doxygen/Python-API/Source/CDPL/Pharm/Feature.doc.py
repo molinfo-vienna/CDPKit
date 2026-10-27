@@ -32,7 +32,7 @@ class Feature(Chem.Entity3D):
     ##
     # \brief Returns the parent pharmacophore.
     # 
-    # \return A reference to the parent pharmacophore.
+    # \return The parent pharmacophore.
     # 
     def getPharmacophore() -> Pharmacophore: pass
 

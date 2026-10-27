@@ -70,7 +70,7 @@ class StructureGridView2D(View2D):
         ##
         # \brief Returns the stored data of the currently displayed molecular structure (if any).
         # 
-        # \return A reference to the stored Chem.MolecularGraph instance.
+        # \return The stored Chem.MolecularGraph instance.
         # 
         def getStructure() -> Chem.MolecularGraph: pass
 
@@ -86,7 +86,7 @@ class StructureGridView2D(View2D):
         # 
         # \param pos The position of the text block (see setText()).
         # 
-        # \return A reference to the string storing the displayed text.
+        # \return The string storing the displayed text.
         # 
         def getText(pos: int = 11) -> object: pass
 
@@ -162,7 +162,7 @@ class StructureGridView2D(View2D):
     ##
     # \brief Returns the Vis.FontMetrics instance used for measuring the dimension of text labels.
     # 
-    # \return A reference to the used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
+    # \return The used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 
     def getFontMetrics() -> FontMetrics: pass
 
@@ -247,7 +247,7 @@ class StructureGridView2D(View2D):
     # \param row The zero-based row index of the cell.
     # \param col The zero-based columns index of the cell.
     # 
-    # \return A reference to the Cell instance.
+    # \return The Cell instance.
     # 
     def __call__(row: int, col: int) -> Cell: pass
 

@@ -88,49 +88,49 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
     ##
     # \brief Returns the core (ligand) pharmacophore generator.
     # 
-    # \return A reference to the core pharmacophore generator.
+    # \return The core pharmacophore generator.
     # 
     def getCorePharmacophoreGenerator() -> PharmacophoreGenerator: pass
 
     ##
     # \brief Returns the environment (pocket) pharmacophore generator.
     # 
-    # \return A reference to the environment pharmacophore generator.
+    # \return The environment pharmacophore generator.
     # 
     def getEnvironmentPharmacophoreGenerator() -> PharmacophoreGenerator: pass
 
     ##
     # \brief Returns the interaction analyzer used to perceive feature-feature interactions.
     # 
-    # \return A reference to the interaction analyzer.
+    # \return The interaction analyzer.
     # 
     def getInteractionAnalyzer() -> InteractionAnalyzer: pass
 
     ##
     # \brief Returns the core (ligand) pharmacophore produced by the last generate() call.
     # 
-    # \return A reference to the core pharmacophore.
+    # \return The core pharmacophore.
     # 
     def getCorePharmacophore() -> Pharmacophore: pass
 
     ##
     # \brief Returns the environment (pocket) pharmacophore produced by the last generate() call.
     # 
-    # \return A reference to the environment pharmacophore.
+    # \return The environment pharmacophore.
     # 
     def getEnvironmentPharmacophore() -> Pharmacophore: pass
 
     ##
     # \brief Returns the feature-to-feature interaction mapping produced by the last generate() call.
     # 
-    # \return A reference to the interaction mapping.
+    # \return The interaction mapping.
     # 
     def getInteractionMapping() -> FeatureMapping: pass
 
     ##
     # \brief Returns the core-environment substructure extracted by the last generate() call (only valid when <em>extract_core_env</em> was <tt>True</tt>).
     # 
-    # \return A reference to the core-environment fragment.
+    # \return The core-environment fragment.
     # 
     def getCoreEnvironment() -> Chem.Fragment: pass
 

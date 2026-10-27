@@ -82,7 +82,7 @@ class FeatureMapping(Boost.Python.instance):
     # 
     # \param key The key associated with the requested value.
     # 
-    # \return A reference to the requested value. 
+    # \return The requested value. 
     # 
     # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
     # 
@@ -98,7 +98,7 @@ class FeatureMapping(Boost.Python.instance):
     # \param key The key associated with the requested value.
     # \param def_value The value which is returned if the specified entry does not exist.
     # 
-    # \return A reference to the requested or default value.
+    # \return The requested or default value.
     # 
     def getValue(key: Feature, def_value: Feature) -> Feature: pass
 
@@ -177,7 +177,7 @@ class FeatureMapping(Boost.Python.instance):
     # 
     # \param key The key associated with the requested value.
     # 
-    # \return A reference to the requested value. 
+    # \return The requested value. 
     # 
     # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
     # 

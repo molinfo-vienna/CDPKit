@@ -36,7 +36,7 @@ class Entity3DContainer(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the entity to return.
     # 
-    # \return A reference to the entity at the specified index. 
+    # \return The entity at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntities()).
     # 

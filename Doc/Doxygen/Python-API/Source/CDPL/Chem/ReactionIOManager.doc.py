@@ -119,7 +119,7 @@ class ReactionIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Chem.ReactionInputHandler implementation instance to return.
     # 
-    # \return A reference to the Chem.ReactionInputHandler implementation instance with the specified index. 
+    # \return The Chem.ReactionInputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 
@@ -240,7 +240,7 @@ class ReactionIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Chem.ReactionOutputHandler implementation instance to return.
     # 
-    # \return A reference to the Chem.ReactionOutputHandler implementation instance with the specified index. 
+    # \return The Chem.ReactionOutputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 

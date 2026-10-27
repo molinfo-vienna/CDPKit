@@ -99,7 +99,7 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     ##
     # \brief Returns the nested fragment conformer build settings.
     # 
-    # \return A reference to the build settings.
+    # \return The build settings.
     # 
     def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 

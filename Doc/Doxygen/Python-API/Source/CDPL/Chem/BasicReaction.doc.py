@@ -48,7 +48,7 @@ class BasicReaction(Reaction):
     # 
     # \param role The reaction role of the new component (see namespace Chem.ReactionRole).
     # 
-    # \return A reference to the newly created component molecule. 
+    # \return The newly created component molecule. 
     # 
     # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
@@ -60,7 +60,7 @@ class BasicReaction(Reaction):
     # \param role The Chem.ReactionRole flag indicating where the new component is inserted (REACTANT, AGENT, or PRODUCT).
     # \param mol The molecule whose contents are copied into the new component, or <tt>None</tt> to create an empty component.
     # 
-    # \return A reference to the newly added component.
+    # \return The newly added component.
     # 
     def addComponent(role: int, mol: Molecule) -> BasicMolecule: pass
 

@@ -243,7 +243,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns the embedded fragment-build settings.
     # 
-    # \return A reference to the fragment-build settings.
+    # \return The fragment-build settings.
     # 
     def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 

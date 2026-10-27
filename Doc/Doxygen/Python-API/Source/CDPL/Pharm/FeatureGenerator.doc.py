@@ -51,7 +51,7 @@ class FeatureGenerator(Boost.Python.instance):
     ##
     # \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
     # 
-    # \return A reference to the registered atom 3D coordinates function.
+    # \return The registered atom 3D coordinates function.
     # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 

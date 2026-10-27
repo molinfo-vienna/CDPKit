@@ -57,10 +57,10 @@ namespace CDPLPythonMath
             using namespace CDPLPythonMath;
 
             python::class_<TriangularAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-                .def(python::init<const TriangularAdapterWrapper&>((python::arg("self"), python::arg("a"))))
-                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(python::init<const TriangularAdapterWrapper&>((python::arg("self"), python::arg("ta"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("m"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<TriangularAdapterType>())
-                .def(ConstMatrixVisitor<TriangularAdapterType>("a"))
+                .def(ConstMatrixVisitor<TriangularAdapterType>("ta"))
                 .def(WrappedDataVisitor<TriangularAdapterWrapper>());
 
             python::def("triang", &triang, (python::arg("e"), python::arg("type")));

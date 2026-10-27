@@ -36,7 +36,7 @@ class BondContainer(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the bond to return.
     # 
-    # \return A reference to the bond at the specified index. 
+    # \return The bond at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
     # 

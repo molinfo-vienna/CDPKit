@@ -66,7 +66,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     ##
     # \brief Returns the parent molecule.
     # 
-    # \return A reference to the parent molecule.
+    # \return The parent molecule.
     # 
     def getMolecule() -> Molecule: pass
 
@@ -75,7 +75,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \param atom The adjacent atom for which to return the connecting bond.
     # 
-    # \return A reference to the bond connecting this atom and the argument atom. 
+    # \return The bond connecting this atom and the argument atom. 
     # 
     # \throw Base.ItemNotFound if the argument atom is not connected to this atom.
     # 
@@ -86,7 +86,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \param atom The adjacent atom for which to return the connecting bond.
     # 
-    # \return A reference to the bond that connects this atom to the argument atom, or <tt>None</tt> if the argument atom is not connected.
+    # \return The bond that connects this atom to the argument atom, or <tt>None</tt> if the argument atom is not connected.
     # 
     def findBondToAtom(atom: Atom) -> Bond: pass
 
@@ -115,7 +115,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \param idx The index of the atom to return.
     # 
-    # \return A reference to the connected atom at index <em>idx</em>. 
+    # \return The connected atom at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
@@ -163,7 +163,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \param idx The index of the incident bond to return.
     # 
-    # \return A reference to the incident bond at index <em>idx</em>. 
+    # \return The incident bond at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
     # 

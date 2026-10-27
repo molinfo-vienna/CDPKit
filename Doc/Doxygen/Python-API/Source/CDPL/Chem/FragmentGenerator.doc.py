@@ -247,7 +247,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Returns the cleaved bond from the original molecular graph.
         # 
-        # \return A reference to the bond.
+        # \return The bond.
         # 
         def getBond() -> Bond: pass
 
@@ -348,7 +348,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based rule index.
     # 
-    # \return A reference to the rule. 
+    # \return The rule. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFragmentationRules()).
     # 
@@ -395,7 +395,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based pattern index.
     # 
-    # \return A reference to the exclude pattern. 
+    # \return The exclude pattern. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
@@ -423,7 +423,7 @@ class FragmentGenerator(Boost.Python.instance):
     ##
     # \brief Returns the predicate used to filter the generated fragments.
     # 
-    # \return A reference to the fragment filter function.
+    # \return The fragment filter function.
     # 
     def getFragmentFilterFunction() -> BoolConstMolecularGraphFunctor: pass
 
@@ -441,7 +441,7 @@ class FragmentGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based link index.
     # 
-    # \return A reference to the fragment link. 
+    # \return The fragment link. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFragmentLinks()).
     # 

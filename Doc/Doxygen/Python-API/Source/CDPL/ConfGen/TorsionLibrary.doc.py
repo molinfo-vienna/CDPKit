@@ -69,7 +69,7 @@ class TorsionLibrary(TorsionCategory):
     ##
     # \brief Returns the globally accessible default torsion library (created on first access).
     # 
-    # \return A reference to the default torsion library shared reference.
+    # \return The default torsion library shared reference.
     # 
     @staticmethod
     def get(: ) -> TorsionLibrary: pass

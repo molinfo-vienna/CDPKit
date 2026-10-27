@@ -162,7 +162,7 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     # \param atomic_no1 The atomic number of the first bonded atom.
     # \param atomic_no2 The atomic number of the second bonded atom.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atomic_no1: int, atomic_no2: int) -> Entry: pass
 

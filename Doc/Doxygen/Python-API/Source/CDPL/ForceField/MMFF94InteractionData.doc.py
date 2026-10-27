@@ -47,49 +47,49 @@ class MMFF94InteractionData(Boost.Python.instance):
     ##
     # \brief Returns the list of MMFF94 bond-stretching interactions.
     # 
-    # \return A reference to the bond-stretching interaction list.
+    # \return The bond-stretching interaction list.
     # 
     def getBondStretchingInteractions() -> MMFF94BondStretchingInteractionList: pass
 
     ##
     # \brief Returns the list of MMFF94 angle-bending interactions.
     # 
-    # \return A reference to the angle-bending interaction list.
+    # \return The angle-bending interaction list.
     # 
     def getAngleBendingInteractions() -> MMFF94AngleBendingInteractionList: pass
 
     ##
     # \brief Returns the list of MMFF94 stretch-bend interactions.
     # 
-    # \return A reference to the stretch-bend interaction list.
+    # \return The stretch-bend interaction list.
     # 
     def getStretchBendInteractions() -> MMFF94StretchBendInteractionList: pass
 
     ##
     # \brief Returns the list of MMFF94 out-of-plane bending interactions.
     # 
-    # \return A reference to the out-of-plane bending interaction list.
+    # \return The out-of-plane bending interaction list.
     # 
     def getOutOfPlaneBendingInteractions() -> MMFF94OutOfPlaneBendingInteractionList: pass
 
     ##
     # \brief Returns the list of MMFF94 torsion interactions.
     # 
-    # \return A reference to the torsion interaction list.
+    # \return The torsion interaction list.
     # 
     def getTorsionInteractions() -> MMFF94TorsionInteractionList: pass
 
     ##
     # \brief Returns the list of MMFF94 electrostatic interactions.
     # 
-    # \return A reference to the electrostatic interaction list.
+    # \return The electrostatic interaction list.
     # 
     def getElectrostaticInteractions() -> MMFF94ElectrostaticInteractionList: pass
 
     ##
     # \brief Returns the list of MMFF94 Van der Waals interactions.
     # 
-    # \return A reference to the Van der Waals interaction list.
+    # \return The Van der Waals interaction list.
     # 
     def getVanDerWaalsInteractions() -> MMFF94VanDerWaalsInteractionList: pass
 

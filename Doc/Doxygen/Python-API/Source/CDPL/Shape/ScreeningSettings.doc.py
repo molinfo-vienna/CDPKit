@@ -146,7 +146,7 @@ class ScreeningSettings(Boost.Python.instance):
     ##
     # \brief Returns the currently configured scoring function.
     # 
-    # \return A reference to the scoring function.
+    # \return The scoring function.
     # 
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 

@@ -217,7 +217,7 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     # 
     # \param atom_type The numeric MMFF94 atom type.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atom_type: int) -> Entry: pass
 

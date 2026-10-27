@@ -92,14 +92,14 @@ class GaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured overlap function.
     # 
-    # \return A reference to the overlap function.
+    # \return The overlap function.
     # 
     def getOverlapFunction() -> GaussianShapeOverlapFunction: pass
 
     ##
     # \brief Returns the built-in default overlap function.
     # 
-    # \return A reference to the default overlap function.
+    # \return The default overlap function.
     # 
     def getDefaultOverlapFunction() -> FastGaussianShapeOverlapFunction: pass
 
@@ -113,14 +113,14 @@ class GaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured alignment-start generator.
     # 
-    # \return A reference to the alignment-start generator.
+    # \return The alignment-start generator.
     # 
     def getStartGenerator() -> GaussianShapeAlignmentStartGenerator: pass
 
     ##
     # \brief Returns the built-in principal-axes alignment-start generator.
     # 
-    # \return A reference to the default alignment-start generator.
+    # \return The default alignment-start generator.
     # 
     def getDefaultStartGenerator() -> PrincipalAxesAlignmentStartGenerator: pass
 
@@ -134,7 +134,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured color-match function.
     # 
-    # \return A reference to the color-match function.
+    # \return The color-match function.
     # 
     def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
@@ -148,7 +148,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured color-filter function.
     # 
-    # \return A reference to the color-filter function.
+    # \return The color-filter function.
     # 
     def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
@@ -162,7 +162,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured result compare function.
     # 
-    # \return A reference to the result compare function.
+    # \return The result compare function.
     # 
     def getResultCompareFunction() -> BoolAlignmentResult2Functor: pass
 
@@ -176,7 +176,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured scoring function.
     # 
-    # \return A reference to the scoring function.
+    # \return The scoring function.
     # 
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
@@ -367,7 +367,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the reference shape.
     # 
-    # \return A reference to the reference shape. 
+    # \return The reference shape. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReferenceShapes()).
     # 
@@ -403,7 +403,7 @@ class GaussianShapeAlignment(Boost.Python.instance):
     # 
     # \param idx The zero-based result index.
     # 
-    # \return A reference to the result. 
+    # \return The result. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumResults()).
     # 

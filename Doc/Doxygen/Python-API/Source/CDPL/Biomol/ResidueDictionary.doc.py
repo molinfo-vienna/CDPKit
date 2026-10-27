@@ -77,28 +77,28 @@ class ResidueDictionary(Boost.Python.instance):
         ##
         # \brief Returns the three-letter code of the residue.
         # 
-        # \return A reference to the three-letter residue code.
+        # \return The three-letter residue code.
         # 
         def getCode() -> str: pass
 
         ##
         # \brief Returns the three-letter code of the residue this entry replaces.
         # 
-        # \return A reference to the replaced residue code (or an empty string if this entry does not replace any other residue).
+        # \return The replaced residue code (or an empty string if this entry does not replace any other residue).
         # 
         def getReplacedCode() -> str: pass
 
         ##
         # \brief Returns the three-letter code of the residue that replaces this one.
         # 
-        # \return A reference to the replacing residue code (or an empty string if this entry has not been replaced).
+        # \return The replacing residue code (or an empty string if this entry has not been replaced).
         # 
         def getReplacedByCode() -> str: pass
 
         ##
         # \brief Returns the three-letter code of the parent residue.
         # 
-        # \return A reference to the parent residue code (or an empty string if there is no parent). 
+        # \return The parent residue code (or an empty string if there is no parent). 
         # 
         # \since 1.2
         # 
@@ -107,7 +107,7 @@ class ResidueDictionary(Boost.Python.instance):
         ##
         # \brief Returns the one-letter residue code.
         # 
-        # \return A reference to the one-letter residue code (or an empty string if not defined). 
+        # \return The one-letter residue code (or an empty string if not defined). 
         # 
         # \since 1.2
         # 
@@ -123,7 +123,7 @@ class ResidueDictionary(Boost.Python.instance):
         ##
         # \brief Returns the full residue name.
         # 
-        # \return A reference to the residue name.
+        # \return The residue name.
         # 
         def getName() -> str: pass
 
@@ -214,7 +214,7 @@ class ResidueDictionary(Boost.Python.instance):
     # 
     # \param code The residue three-letter code.
     # 
-    # \return A reference to the matching entry (or to an empty default-constructed entry if no matching entry exists).
+    # \return The matching entry (or to an empty default-constructed entry if no matching entry exists).
     # 
     def getEntry(code: str) -> Entry: pass
 
@@ -255,7 +255,7 @@ class ResidueDictionary(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default dictionary (lazily initialized on first call).
     # 
-    # \return A reference to the default-dictionary shared reference.
+    # \return The default-dictionary shared reference.
     # 
     @staticmethod
     def get(: ) -> ResidueDictionary: pass

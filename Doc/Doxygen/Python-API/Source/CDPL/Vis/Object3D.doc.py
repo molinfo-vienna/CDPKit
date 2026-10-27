@@ -66,7 +66,7 @@ class Object3D(Base.PropertyContainer):
     # 
     # \param idx The zero-based sub-object index.
     # 
-    # \return A reference to the sub-object. 
+    # \return The sub-object. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSubObjects()).
     # 
@@ -82,7 +82,7 @@ class Object3D(Base.PropertyContainer):
     ##
     # \brief Creates a new empty sub-object and appends it to the sub-object list.
     # 
-    # \return A reference to the newly created sub-object.
+    # \return The newly created sub-object.
     # 
     def addSubObject() -> Object3D: pass
 

@@ -119,7 +119,7 @@ class DRegularGridSetIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Grid.DRegularGridSetInputHandler implementation instance to return.
     # 
-    # \return A reference to the Grid.DRegularGridSetInputHandler implementation instance with the specified index. 
+    # \return The Grid.DRegularGridSetInputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 
@@ -240,7 +240,7 @@ class DRegularGridSetIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Grid.DRegularGridSetOutputHandler implementation instance to return.
     # 
-    # \return A reference to the Grid.DRegularGridSetOutputHandler implementation instance with the specified index. 
+    # \return The Grid.DRegularGridSetOutputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 

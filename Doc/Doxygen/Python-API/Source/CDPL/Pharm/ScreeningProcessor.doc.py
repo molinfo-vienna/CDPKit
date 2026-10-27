@@ -91,35 +91,35 @@ class ScreeningProcessor(Boost.Python.instance):
         ##
         # \brief Returns the screening processor that produced the hit.
         # 
-        # \return A reference to the hit-providing screening processor.
+        # \return The hit-providing screening processor.
         # 
         def getHitProvider() -> ScreeningProcessor: pass
 
         ##
         # \brief Returns the query pharmacophore.
         # 
-        # \return A reference to the query pharmacophore.
+        # \return The query pharmacophore.
         # 
         def getQueryPharmacophore() -> FeatureContainer: pass
 
         ##
         # \brief Returns the hit pharmacophore.
         # 
-        # \return A reference to the hit pharmacophore.
+        # \return The hit pharmacophore.
         # 
         def getHitPharmacophore() -> FeatureContainer: pass
 
         ##
         # \brief Returns the hit molecule.
         # 
-        # \return A reference to the hit molecule.
+        # \return The hit molecule.
         # 
         def getHitMolecule() -> Chem.Molecule: pass
 
         ##
         # \brief Returns the rigid-body transformation that aligns the hit onto the query pharmacophore.
         # 
-        # \return A reference to the alignment transformation matrix.
+        # \return The alignment transformation matrix.
         # 
         def getHitAlignmentTransform() -> Math.Matrix4D: pass
 
@@ -191,7 +191,7 @@ class ScreeningProcessor(Boost.Python.instance):
     ##
     # \brief Returns the currently configured screening database accessor.
     # 
-    # \return A reference to the database accessor.
+    # \return The database accessor.
     # 
     def getDBAccessor() -> ScreeningDBAccessor: pass
 
@@ -261,7 +261,7 @@ class ScreeningProcessor(Boost.Python.instance):
     ##
     # \brief Returns the currently configured hit-callback function.
     # 
-    # \return A reference to the hit-callback function.
+    # \return The hit-callback function.
     # 
     def getHitCallback() -> BoolSearchHitDoubleFunctor: pass
 
@@ -275,7 +275,7 @@ class ScreeningProcessor(Boost.Python.instance):
     ##
     # \brief Returns the currently configured progress-reporting callback.
     # 
-    # \return A reference to the progress-callback function.
+    # \return The progress-callback function.
     # 
     def getProgressCallback() -> BoolSizeType2Functor: pass
 
@@ -289,7 +289,7 @@ class ScreeningProcessor(Boost.Python.instance):
     ##
     # \brief Returns the currently configured scoring function.
     # 
-    # \return A reference to the scoring function.
+    # \return The scoring function.
     # 
     def getScoringFunction() -> DoubleSearchHitFunctor: pass
 

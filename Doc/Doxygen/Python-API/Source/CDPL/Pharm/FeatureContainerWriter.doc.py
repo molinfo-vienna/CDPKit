@@ -79,7 +79,7 @@ class FeatureContainerWriter(FeatureContainerWriterBase):
     ##
     # \brief Returns the data format actually used by the wrapped output handler.
     # 
-    # \return A reference to the resolved Base.DataFormat.
+    # \return The resolved Base.DataFormat.
     # 
     def getDataFormat() -> Base.DataFormat: pass
 

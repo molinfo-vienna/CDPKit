@@ -314,7 +314,7 @@ class PDBData(Boost.Python.instance):
     # 
     # \param type The record type whose data is requested.
     # 
-    # \return A reference to the data string. 
+    # \return The data string. 
     # 
     # \throw Base.ItemNotFound if no record of the given type is stored.
     # 

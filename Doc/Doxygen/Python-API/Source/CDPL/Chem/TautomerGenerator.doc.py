@@ -91,7 +91,7 @@ class TautomerGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based rule index.
     # 
-    # \return A reference to the rule smart reference. 
+    # \return The rule smart reference. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumTautomerizationRules()).
     # 
@@ -116,7 +116,7 @@ class TautomerGenerator(Boost.Python.instance):
     ##
     # \brief Returns the currently configured callback.
     # 
-    # \return A reference to the callback function.
+    # \return The callback function.
     # 
     def getCallbackFunction() -> BoolMolecularGraphFunctor: pass
 

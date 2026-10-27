@@ -103,7 +103,7 @@ class CanonicalFragment(Chem.MolecularGraph):
     ##
     # \brief Returns the atom mapping from this fragment to the parent molecular graph.
     # 
-    # \return A reference to the atom mapping.
+    # \return The atom mapping.
     # 
     def getAtomMapping() -> Chem.AtomMapping: pass
 

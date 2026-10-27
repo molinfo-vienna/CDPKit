@@ -139,7 +139,7 @@ class ScreeningDBCreator(Boost.Python.instance):
     ##
     # \brief Returns the name of the currently open database.
     # 
-    # \return A reference to the database name.
+    # \return The database name.
     # 
     def getDatabaseName() -> str: pass
 

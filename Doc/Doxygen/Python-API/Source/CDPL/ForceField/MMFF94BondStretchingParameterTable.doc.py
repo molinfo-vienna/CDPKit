@@ -175,7 +175,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     # \param atom1_type The numeric MMFF94 atom type of the first bonded atom.
     # \param atom2_type The numeric MMFF94 atom type of the second bonded atom.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(bond_type_idx: int, atom1_type: int, atom2_type: int) -> Entry: pass
 

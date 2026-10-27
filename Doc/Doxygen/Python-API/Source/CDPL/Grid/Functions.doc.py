@@ -45,7 +45,7 @@ def hasComment(grid: AttributedGrid) -> bool: pass
 # 
 # \param grid The attributed grid for which to return the property value.
 # 
-# \return A reference to the comment. 
+# \return The comment. 
 # 
 # \since 1.4
 # 
@@ -82,7 +82,7 @@ def hasName(grid: AttributedGrid) -> bool: pass
 # 
 # \param grid The attributed grid for which to return the property value.
 # 
-# \return A reference to the name.
+# \return The name.
 # 
 def getName(grid: AttributedGrid) -> str: pass
 

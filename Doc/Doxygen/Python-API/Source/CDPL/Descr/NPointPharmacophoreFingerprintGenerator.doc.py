@@ -120,7 +120,7 @@ class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
     ##
     # \brief Returns the internal pharmacophore generator used for the input molecular graph.
     # 
-    # \return A reference to the pharmacophore generator.
+    # \return The pharmacophore generator.
     # 
     def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
 

@@ -110,14 +110,14 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         ##
         # \brief Returns the lower distance bound.
         # 
-        # \return A reference to the lower distance bound.
+        # \return The lower distance bound.
         # 
         def getLowerBound() -> float: pass
 
         ##
         # \brief Returns the upper distance bound.
         # 
-        # \return A reference to the upper distance bound.
+        # \return The upper distance bound.
         # 
         def getUpperBound() -> float: pass
 
@@ -203,7 +203,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based constraint index.
     # 
-    # \return A reference to the distance constraint. 
+    # \return The distance constraint. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumDistanceConstraints()).
     # 
@@ -266,7 +266,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     ##
     # \brief Returns the currently configured initial learning rate.
     # 
-    # \return A reference to the initial learning rate.
+    # \return The initial learning rate.
     # 
     def getStartLearningRate() -> float: pass
 
@@ -280,7 +280,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     ##
     # \brief Returns the currently configured per-cycle learning rate decrement.
     # 
-    # \return A reference to the per-cycle learning rate decrement.
+    # \return The per-cycle learning rate decrement.
     # 
     def getLearningRateDecrement() -> float: pass
 

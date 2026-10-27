@@ -72,7 +72,7 @@ class RMSDConformerSelector(Boost.Python.instance):
     ##
     # \brief Returns the currently configured abort-check callback.
     # 
-    # \return A reference to the abort-check callback.
+    # \return The abort-check callback.
     # 
     def getAbortCallback() -> CallbackFunction: pass
 

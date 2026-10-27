@@ -86,7 +86,7 @@ class MMCIFData(Boost.Python.instance):
         # 
         # \param index The zero-based value index.
         # 
-        # \return A reference to the value. 
+        # \return The value. 
         # 
         # \throw Base.IndexError if <em>index</em> is not in the range [0, getNumValues()).
         # 
@@ -229,7 +229,7 @@ class MMCIFData(Boost.Python.instance):
         # 
         # \param name The data item name.
         # 
-        # \return A reference to the matching item. 
+        # \return The matching item. 
         # 
         # \throw Base.ItemNotFound if no matching item exists.
         # 
@@ -240,7 +240,7 @@ class MMCIFData(Boost.Python.instance):
         # 
         # \param index The zero-based item index.
         # 
-        # \return A reference to the item. 
+        # \return The item. 
         # 
         # \throw Base.IndexError if <em>index</em> is not in the range [0, getNumItems()).
         # 
@@ -328,7 +328,7 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Returns the <em>mmCIF</em> data-block ID.
     # 
-    # \return A reference to the data-block ID.
+    # \return The data-block ID.
     # 
     def getID() -> str: pass
 
@@ -391,7 +391,7 @@ class MMCIFData(Boost.Python.instance):
     # 
     # \param name The <em>mmCIF</em> category name (without the leading underscore!).
     # 
-    # \return A reference to the matching category. 
+    # \return The matching category. 
     # 
     # \throw Base.ItemNotFound if no matching category exists.
     # 
@@ -402,7 +402,7 @@ class MMCIFData(Boost.Python.instance):
     # 
     # \param index The zero-based category index.
     # 
-    # \return A reference to the category. 
+    # \return The category. 
     # 
     # \throw Base.IndexError if <em>index</em> is not in the range [0, getNumCategories()).
     # 

@@ -176,14 +176,14 @@ class FMLRModel(Boost.Python.instance):
     ##
     # \brief Returns a read-only matrix where each row represents the vector \f$ \vec{X}_i \f$ with independent variables of the currently stored data points \f$ (y_i, \vec{X}_i), \, i = 1, 2, \ldots, N \f$.
     # 
-    # \return A reference to the matrix with the independent variables \f$ \vec{X}_i \f$.
+    # \return The matrix with the independent variables \f$ \vec{X}_i \f$.
     # 
     def getXMatrix() -> FMatrix: pass
 
     ##
     # \brief Returns a read-only vector containing the dependent variables \f$ y_i \f$ of the currently stored data points \f$ (y_i, \vec{X}_i), \, i = 1, 2, \ldots, N \f$.
     # 
-    # \return A reference to the vector with the dependent variables \f$ y_i \f$.
+    # \return The vector with the dependent variables \f$ y_i \f$.
     # 
     def getYValues() -> FVector: pass
 
@@ -250,7 +250,7 @@ class FMLRModel(Boost.Python.instance):
     ##
     # \brief Returns a read-only vector containing the estimated regression coefficients \f$ \beta_i \f$ which were calculated by buildModel().
     # 
-    # \return A reference to the vector with the estimated regression coefficients \f$ \beta_i \f$.
+    # \return The vector with the estimated regression coefficients \f$ \beta_i \f$.
     # 
     def getCoefficients() -> FVector: pass
 

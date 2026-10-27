@@ -93,56 +93,56 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     ##
     # \brief Returns the total MMFF94 energy computed by the most recent __call__() call.
     # 
-    # \return A reference to the total energy.
+    # \return The total energy.
     # 
     def getTotalEnergy() -> float: pass
 
     ##
     # \brief Returns the bond-stretching energy contribution computed by the most recent __call__() call.
     # 
-    # \return A reference to the bond-stretching energy.
+    # \return The bond-stretching energy.
     # 
     def getBondStretchingEnergy() -> float: pass
 
     ##
     # \brief Returns the angle-bending energy contribution computed by the most recent __call__() call.
     # 
-    # \return A reference to the angle-bending energy.
+    # \return The angle-bending energy.
     # 
     def getAngleBendingEnergy() -> float: pass
 
     ##
     # \brief Returns the stretch-bend coupling energy contribution computed by the most recent __call__() call.
     # 
-    # \return A reference to the stretch-bend energy.
+    # \return The stretch-bend energy.
     # 
     def getStretchBendEnergy() -> float: pass
 
     ##
     # \brief Returns the out-of-plane bending energy contribution computed by the most recent __call__() call.
     # 
-    # \return A reference to the out-of-plane bending energy.
+    # \return The out-of-plane bending energy.
     # 
     def getOutOfPlaneBendingEnergy() -> float: pass
 
     ##
     # \brief Returns the torsion energy contribution computed by the most recent __call__() call.
     # 
-    # \return A reference to the torsion energy.
+    # \return The torsion energy.
     # 
     def getTorsionEnergy() -> float: pass
 
     ##
     # \brief Returns the electrostatic energy contribution computed by the most recent __call__() call.
     # 
-    # \return A reference to the electrostatic energy.
+    # \return The electrostatic energy.
     # 
     def getElectrostaticEnergy() -> float: pass
 
     ##
     # \brief Returns the Van der Waals energy contribution computed by the most recent __call__() call.
     # 
-    # \return A reference to the Van der Waals energy.
+    # \return The Van der Waals energy.
     # 
     def getVanDerWaalsEnergy() -> float: pass
 
@@ -153,7 +153,7 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     # 
     # \param coords The atom 3D coordinates.
     # 
-    # \return A reference to the computed total energy.
+    # \return The computed total energy.
     # 
     def __call__(coords: Math.Vector3DArray) -> float: pass
 

@@ -143,7 +143,7 @@ class FZeroVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the zero element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -154,7 +154,7 @@ class FZeroVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the zero element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

@@ -151,7 +151,7 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the wrapped quaternion.
     # 
-    # \return A reference to the wrapped quaternion closure.
+    # \return The wrapped quaternion closure.
     # 
     def getData() -> ULQuaternionExpression: pass
 

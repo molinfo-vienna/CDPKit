@@ -90,7 +90,7 @@ class TorsionRuleMatcher(Boost.Python.instance):
     ##
     # \brief Returns the currently associated torsion library.
     # 
-    # \return A reference to the torsion library smart reference.
+    # \return The torsion library smart reference.
     # 
     def getTorsionLibrary() -> TorsionLibrary: pass
 
@@ -106,7 +106,7 @@ class TorsionRuleMatcher(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the ConfGen.TorsionRuleMatch instance to return.
     # 
-    # \return A reference to the ConfGen.TorsionRuleMatch instance at index <em>idx</em>. 
+    # \return The ConfGen.TorsionRuleMatch instance at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMatches()).
     # 

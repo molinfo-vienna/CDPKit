@@ -95,7 +95,7 @@ class Molecule(MolecularGraph):
     # 
     # Note that this method does not create any bonds - the returned atom is always unconnected.
     # 
-    # \return A reference to the newly created atom.
+    # \return The newly created atom.
     # 
     def addAtom() -> Atom: pass
 
@@ -107,7 +107,7 @@ class Molecule(MolecularGraph):
     # \param atom1_idx The zero-based index of the first atom of the bond.
     # \param atom2_idx The zero-based index of the second atom of the bond.
     # 
-    # \return A reference to the newly created or already existing bond between the specified atoms. 
+    # \return The newly created or already existing bond between the specified atoms. 
     # 
     # \throw Base.IndexError if <em>atom1_idx</em> and/or <em>atom2_idx</em> is not in the range [0, getNumAtoms()).
     # 

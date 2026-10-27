@@ -107,7 +107,7 @@ def hasChainID(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return A reference to the chain ID.
+# \return The chain ID.
 # 
 def getChainID(atom: Chem.Atom) -> str: pass
 
@@ -140,7 +140,7 @@ def hasChainID(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A reference to the chain ID.
+# \return The chain ID.
 # 
 def getChainID(molgraph: Chem.MolecularGraph) -> str: pass
 
@@ -173,7 +173,7 @@ def hasEntityID(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return A reference to the entity ID. 
+# \return The entity ID. 
 # 
 # \since 1.2
 # 
@@ -250,7 +250,7 @@ def hasMMCIFData(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A reference to the <em>mmCIF</em> data record shared reference. 
+# \return The <em>mmCIF</em> data record shared reference. 
 # 
 # \since 1.2
 # 
@@ -384,7 +384,7 @@ def hasPDBData(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A reference to the <em>PDB</em> data record shared reference.
+# \return The <em>PDB</em> data record shared reference.
 # 
 def getPDBData(molgraph: Chem.MolecularGraph) -> PDBData: pass
 
@@ -417,7 +417,7 @@ def hasResidueAltAtomName(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return A reference to the alternative residue atom name.
+# \return The alternative residue atom name.
 # 
 def getResidueAltAtomName(atom: Chem.Atom) -> str: pass
 
@@ -450,7 +450,7 @@ def hasResidueAtomName(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return A reference to the residue atom name.
+# \return The residue atom name.
 # 
 def getResidueAtomName(atom: Chem.Atom) -> str: pass
 
@@ -483,7 +483,7 @@ def hasResidueCode(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return A reference to the residue three-letter code.
+# \return The residue three-letter code.
 # 
 def getResidueCode(atom: Chem.Atom) -> str: pass
 
@@ -516,7 +516,7 @@ def hasResidueCode(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A reference to the residue three-letter code.
+# \return The residue three-letter code.
 # 
 def getResidueCode(molgraph: Chem.MolecularGraph) -> str: pass
 
@@ -1264,7 +1264,7 @@ def hasMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterCont
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return A reference to the <em>mmCIF</em> output data postprocessing function. 
+# \return The <em>mmCIF</em> output data postprocessing function. 
 # 
 # \since 1.2
 # 

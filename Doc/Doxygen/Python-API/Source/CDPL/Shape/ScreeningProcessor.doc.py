@@ -60,14 +60,14 @@ class ScreeningProcessor(Boost.Python.instance):
     ##
     # \brief Returns the currently configured hit callback.
     # 
-    # \return A reference to the hit-callback function.
+    # \return The hit-callback function.
     # 
     def getHitCallback() -> VoidMolecularGraph2AlignmentResultFunctor: pass
 
     ##
     # \brief Returns the current screening settings (mutable).
     # 
-    # \return A reference to the screening settings.
+    # \return The screening settings.
     # 
     def getSettings() -> ScreeningSettings: pass
 
@@ -95,7 +95,7 @@ class ScreeningProcessor(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the query molecule.
     # 
-    # \return A reference to the query molecule. 
+    # \return The query molecule. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getQuerySetSize()).
     # 

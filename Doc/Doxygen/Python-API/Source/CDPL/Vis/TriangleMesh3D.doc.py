@@ -47,7 +47,7 @@ class TriangleMesh3D(Shape3D):
     ##
     # \brief Returns the array storing the mesh vertices.
     # 
-    # \return A reference to the vertex array.
+    # \return The vertex array.
     # 
     def getVertices() -> Math.Vector3DArray: pass
 
@@ -70,7 +70,7 @@ class TriangleMesh3D(Shape3D):
     ##
     # \brief Returns the array storing the per-vertex normals.
     # 
-    # \return A reference to the vertex-normal array.
+    # \return The vertex-normal array.
     # 
     def getVertexNormals() -> Math.Vector3DArray: pass
 
@@ -93,7 +93,7 @@ class TriangleMesh3D(Shape3D):
     ##
     # \brief Returns the array storing the triangle faces.
     # 
-    # \return A reference to the face array.
+    # \return The face array.
     # 
     def getFaces() -> Math.Vector3ULArray: pass
 

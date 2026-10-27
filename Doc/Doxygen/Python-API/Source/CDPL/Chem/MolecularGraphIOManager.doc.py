@@ -119,7 +119,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Chem.MolecularGraphInputHandler implementation instance to return.
     # 
-    # \return A reference to the Chem.MolecularGraphInputHandler implementation instance with the specified index. 
+    # \return The Chem.MolecularGraphInputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 
@@ -240,7 +240,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Chem.MolecularGraphOutputHandler implementation instance to return.
     # 
-    # \return A reference to the Chem.MolecularGraphOutputHandler implementation instance with the specified index. 
+    # \return The Chem.MolecularGraphOutputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 

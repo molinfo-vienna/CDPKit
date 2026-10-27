@@ -164,7 +164,7 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default map (lazily initialized on first call).
     # 
-    # \return A reference to the default-map shared reference.
+    # \return The default-map shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94SymbolicToNumericAtomTypeMap: pass

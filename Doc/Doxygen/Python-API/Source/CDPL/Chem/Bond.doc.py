@@ -52,7 +52,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # 
     # \param atom The atom for which to return the connected neighbor atom.
     # 
-    # \return A reference to the connected neighbor atom of the argument atom. 
+    # \return The connected neighbor atom of the argument atom. 
     # 
     # \throw Base.ItemNotFound if the specified atom is not involved in the bond.
     # 
@@ -63,7 +63,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # 
     # Equivalent to calling <tt>getAtom(0)</tt>.
     # 
-    # \return A reference to the start atom of the bond.
+    # \return The start atom of the bond.
     # 
     def getBegin() -> Atom: pass
 
@@ -72,14 +72,14 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # 
     # Equivalent to calling <tt>getAtom(1)</tt>.
     # 
-    # \return A reference to the end atom of the bond.
+    # \return The end atom of the bond.
     # 
     def getEnd() -> Atom: pass
 
     ##
     # \brief Returns the parent molecule.
     # 
-    # \return A reference to the parent molecule.
+    # \return The parent molecule.
     # 
     def getMolecule() -> Molecule: pass
 
@@ -108,7 +108,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # 
     # \param idx The index of the atom to return.
     # 
-    # \return A reference to the atom at index <em>idx</em>. 
+    # \return The atom at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, 1].
     # 

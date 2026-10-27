@@ -27,7 +27,7 @@ class HierarchyViewNode(Chem.Fragment):
     ##
     # \brief Returns the list of residues belonging to this node (lazily perceived on first access).
     # 
-    # \return A reference to the residue list.
+    # \return The residue list.
     # 
     def getResidues() -> ResidueList: pass
 

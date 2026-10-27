@@ -253,7 +253,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     # 
     # \param ftr_idx The zero-based feature index.
     # 
-    # \return A reference to the atom-bit mask.
+    # \return The atom-bit mask.
     # 
     def getFeatureSubstructure(ftr_idx: int) -> Util.BitSet: pass
 

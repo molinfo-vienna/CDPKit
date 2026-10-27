@@ -106,7 +106,7 @@ class ConstFMatrixRange(Boost.Python.instance):
     ##
     # \brief Returns the wrapped matrix.
     # 
-    # \return A reference to the wrapped matrix closure.
+    # \return The wrapped matrix.
     # 
     def getData() -> ConstFMatrixExpression: pass
 

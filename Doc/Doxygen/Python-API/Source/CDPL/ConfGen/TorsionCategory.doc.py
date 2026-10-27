@@ -121,7 +121,7 @@ class TorsionCategory(Boost.Python.instance):
     ##
     # \brief Returns the <em>SMARTS</em> match pattern describing the bonds that belong to this category.
     # 
-    # \return A reference to the <em>SMARTS</em> match pattern.
+    # \return The <em>SMARTS</em> match pattern.
     # 
     def getMatchPatternString() -> str: pass
 
@@ -177,7 +177,7 @@ class TorsionCategory(Boost.Python.instance):
     ##
     # \brief Returns the category name.
     # 
-    # \return A reference to the category name.
+    # \return The category name.
     # 
     def getName() -> str: pass
 
@@ -202,7 +202,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \param idx The zero-based rule index.
     # 
-    # \return A reference to the rule. 
+    # \return The rule. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumRules()).
     # 
@@ -222,7 +222,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \param rule The torsion rule to copy.
     # 
-    # \return A reference to the newly added rule.
+    # \return The newly added rule.
     # 
     def addRule(rule: TorsionRule) -> TorsionRule: pass
 
@@ -242,7 +242,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \param idx The zero-based child category index.
     # 
-    # \return A reference to the child category. 
+    # \return The child category. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumCategories()).
     # 
@@ -262,7 +262,7 @@ class TorsionCategory(Boost.Python.instance):
     # 
     # \param cat The child category to copy.
     # 
-    # \return A reference to the newly added child category.
+    # \return The newly added child category.
     # 
     def addCategory(cat: TorsionCategory) -> TorsionCategory: pass
 

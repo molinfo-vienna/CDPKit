@@ -20,21 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief Matrix expression that exposes only the <em>lower</em> triangular part of an underlying matrix <em>M</em> with the diagonal elements set to one.
+# 
 class ConstUnitLowerTriangularFMatrixAdapter(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c ConstUnitLowerTriangularFMatrixAdapter instance \a a.
-    # \param a The \c ConstUnitLowerTriangularFMatrixAdapter instance to copy.
+    # \brief Contructs a copy of the \c ConstUnitLowerTriangularFMatrixAdapter instance \a ta.
+    # \param ta The \c ConstUnitLowerTriangularFMatrixAdapter instance to copy.
     # 
-    def __init__(a: ConstUnitLowerTriangularFMatrixAdapter) -> None: pass
+    def __init__(ta: ConstUnitLowerTriangularFMatrixAdapter) -> None: pass
 
     ##
-    # \brief Contructs the \c ConstUnitLowerTriangularFMatrixAdapter instance.
-    # \param e 
+    # \brief Constructs the adapter wrapping <em>m</em>.
     # 
-    def __init__(e: ConstFMatrixExpression) -> None: pass
+    # \param m The matrix to be viewed through the <em>unit lower</em> triangular policy.
+    # 
+    def __init__(m: ConstFMatrixExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -48,12 +49,35 @@ class ConstUnitLowerTriangularFMatrixAdapter(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the number of rows of the wrapped matrix.
+    # 
+    # \return The row count.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the number of columns of the wrapped matrix.
+    # 
+    # \return The column count.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the wrapped matrix is empty (zero rows or zero columns).
+    # 
+    # \return <tt>True</tt> if the wrapped matrix is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The element value as defined by the <em>unit lower</em> triangular-view policy.
+    # 
     def getElement(i: int, j: int) -> float: pass
 
     ##
@@ -63,20 +87,46 @@ class ConstUnitLowerTriangularFMatrixAdapter(Boost.Python.instance):
     # 
     def toArray() -> object: pass
 
+    ##
+    # \brief Returns the wrapped matrix.
+    # 
+    # \return The wrapped matrix.
+    # 
     def getData() -> ConstFMatrixExpression: pass
 
+    ##
+    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The element value as defined by the <em>unit lower</em> triangular-view policy.
+    # 
     def __call__(i: int, j: int) -> float: pass
 
+    ##
+    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The element value as defined by the <em>unit lower</em> triangular-view policy.
+    # 
     def __getitem__(ij: tuple) -> float: pass
 
+    ##
+    # \brief Returns the number of rows of the wrapped matrix.
+    # 
+    # \return The row count.
+    # 
     def __len__() -> int: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \c ConstUnitLowerTriangularFMatrixAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self == ta</tt>.
+    # \param ta The \c ConstUnitLowerTriangularFMatrixAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(a: ConstUnitLowerTriangularFMatrixAdapter) -> bool: pass
+    def __eq__(ta: ConstUnitLowerTriangularFMatrixAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
@@ -86,11 +136,11 @@ class ConstUnitLowerTriangularFMatrixAdapter(Boost.Python.instance):
     def __eq__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \c ConstUnitLowerTriangularFMatrixAdapter instance to be compared with.
+    # \brief Returns the result of the comparison operation <tt>self != ta</tt>.
+    # \param ta The \c ConstUnitLowerTriangularFMatrixAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(a: ConstUnitLowerTriangularFMatrixAdapter) -> bool: pass
+    def __ne__(ta: ConstUnitLowerTriangularFMatrixAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.

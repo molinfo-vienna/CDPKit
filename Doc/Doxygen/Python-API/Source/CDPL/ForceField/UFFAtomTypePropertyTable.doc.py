@@ -95,7 +95,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         ##
         # \brief Returns the UFF atom type symbol.
         # 
-        # \return A reference to the atom type symbol.
+        # \return The atom type symbol.
         # 
         def getAtomTypeSymbol() -> str: pass
 
@@ -217,7 +217,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     # 
     # \param atom_type The numeric UFF atom type.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atom_type: int) -> Entry: pass
 

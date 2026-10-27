@@ -25,11 +25,13 @@ false § False
 <em>null</em> § <em>None</em>
 nullptr § None
 A reference to itself. § \a self.
-a reference to the § the
 A reference to the element. § The value of the element.
 A reference to the component. § The value of the component.
 A reference to the underlying element § The value of the element
 A reference to <em>C § The value of <em>C
+A reference to the wrapped matrix closure § The wrapped matrix
+a reference to the § the
+A reference to the § The
 int idx § idx: int
 Base class § %Base class
 ' Any ' § ' %Any '
@@ -375,6 +377,8 @@ Math.*MLR § Math.MLR
 
 Math.*KabschAlgorithm § Math.KabschAlgorithm
 
+Math.*AlignmentCalculator § Math.AlignmentCalculator
+
 Math.*BFGSMinimizer § Math.BFGSMinimizer
 
 # ---
@@ -713,6 +717,62 @@ Math.*VectorQuaternionAdapter.__idiv__(va) § Math.VectorQuaternionAdapter.__idi
 quaternion expression § vector adapter
 <em>e</em> § <em>va</em>
 param e § param va
+
+# ---
+
+Math.*UnitUpperTriangular*MatrixAdapter. § Math.TriangularAdapter.
+the triangular § the <em>unit upper</em> triangular
+
+Math.*UnitUpperTriangular*MatrixAdapter § Math.TriangularAdapter
+the triangular § the <em>upper</em> triangular
+selected by the policy <em>Tri</em> (Math.Lower, Math.UnitLower, Math.Upper or Math.UnitUpper) § with the diagonal elements set to one
+
+Math.*UnitUpperTriangular*MatrixAdapter.__getitem__(ij) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>unit upper</em> triangular
+
+Math.*UnitUpperTriangular*MatrixAdapter.getElement(i,j) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>unit upper</em> triangular
+
+Math.*UpperTriangular*MatrixAdapter § Math.TriangularAdapter
+the triangular § the <em>upper</em> triangular
+' selected by the policy <em>Tri</em> (Math.Lower, Math.UnitLower, Math.Upper or Math.UnitUpper)' § 
+(off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
+
+Math.*UpperTriangular*MatrixAdapter.__getitem__(ij) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>upper</em> triangular
+(off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
+
+Math.*UpperTriangular*MatrixAdapter.getElement(i,j) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>upper</em> triangular
+(off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
+
+Math.*UnitLowerTriangular*MatrixAdapter. § Math.TriangularAdapter.
+the triangular § the <em>unit lower</em> triangular
+
+Math.*UnitLowerTriangular*MatrixAdapter § Math.TriangularAdapter
+the triangular § the <em>lower</em> triangular
+selected by the policy <em>Tri</em> (Math.Lower, Math.UnitLower, Math.Upper or Math.UnitUpper) § with the diagonal elements set to one
+
+Math.*UnitLowerTriangular*MatrixAdapter.__getitem__(ij) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>unit lower</em> triangular
+
+Math.*UnitLowerTriangular*MatrixAdapter.getElement(i,j) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>unit lower</em> triangular
+
+Math.*LowerTriangular*MatrixAdapter § Math.TriangularAdapter
+the triangular § the <em>lower</em> triangular
+' selected by the policy <em>Tri</em> (Math.Lower, Math.UnitLower, Math.Upper or Math.UnitUpper)' § 
+(off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
+
+Math.*LowerTriangular*MatrixAdapter.__getitem__(ij) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>lower</em> triangular
+(off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
+
+Math.*LowerTriangular*MatrixAdapter.getElement(i,j) § Math.TriangularAdapter.__call__(i,j)
+the triangular § the <em>lower</em> triangular
+(off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
+
+Math.*Triangular*MatrixAdapter.getSize() § Math.TriangularAdapter.getSize1()
 
 #
 # --- CDPL.Util package ---

@@ -241,7 +241,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the stored value, or to the zero element if no entry exists at <em>i</em>. 
+    # \return The stored value, or to the zero element if no entry exists at <em>i</em>. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -252,7 +252,7 @@ class SparseFVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the element (or to the zero element if no entry is stored at <em>i</em>). 
+    # \return The element (or to the zero element if no entry is stored at <em>i</em>). 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

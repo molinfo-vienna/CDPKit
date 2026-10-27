@@ -144,7 +144,7 @@ class FScalarVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the common element value. 
+    # \return The common element value. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -155,7 +155,7 @@ class FScalarVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return A reference to the common element value. 
+    # \return The common element value. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

@@ -82,7 +82,7 @@ class FragmentLibrary(Boost.Python.instance):
     # 
     # \param hash_code The hash code of the queried entry.
     # 
-    # \return A reference to the matching entry's smart reference, or to an empty smart reference if no entry with <em>hash_code</em> exists.
+    # \return The matching entry's smart reference, or to an empty smart reference if no entry with <em>hash_code</em> exists.
     # 
     def getEntry(hash_code: int) -> FragmentLibraryEntry: pass
 

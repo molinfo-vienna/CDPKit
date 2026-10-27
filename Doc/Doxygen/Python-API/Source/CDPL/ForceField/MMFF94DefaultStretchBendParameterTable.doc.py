@@ -177,7 +177,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     # \param ctr_atom_pte_row The PTE row of the center atom.
     # \param term_atom2_pte_row The PTE row of the second terminal atom.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(term_atom1_pte_row: int, ctr_atom_pte_row: int, term_atom2_pte_row: int) -> Entry: pass
 

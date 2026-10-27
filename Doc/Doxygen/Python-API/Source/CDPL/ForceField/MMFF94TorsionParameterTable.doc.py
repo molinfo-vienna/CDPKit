@@ -212,7 +212,7 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
     # \param ctr_atom2_type The numeric MMFF94 atom type of the second center atom.
     # \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int) -> Entry: pass
 

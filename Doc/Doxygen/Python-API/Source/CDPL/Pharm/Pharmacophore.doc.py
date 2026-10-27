@@ -39,7 +39,7 @@ class Pharmacophore(FeatureContainer):
     ##
     # \brief Creates a new pharmacophore feature and adds it to the pharmacophore.
     # 
-    # \return A reference to the newly created features.
+    # \return The newly created features.
     # 
     def addFeature() -> Feature: pass
 

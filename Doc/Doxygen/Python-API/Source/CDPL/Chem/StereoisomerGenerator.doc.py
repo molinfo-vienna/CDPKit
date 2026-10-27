@@ -99,7 +99,7 @@ class StereoisomerGenerator(Boost.Python.instance):
     ##
     # \brief Returns the currently configured atom predicate.
     # 
-    # \return A reference to the atom predicate.
+    # \return The atom predicate.
     # 
     def getAtomPredicate() -> AtomPredicate: pass
 
@@ -113,7 +113,7 @@ class StereoisomerGenerator(Boost.Python.instance):
     ##
     # \brief Returns the currently configured bond predicate.
     # 
-    # \return A reference to the bond predicate.
+    # \return The bond predicate.
     # 
     def getBondPredicate() -> BondPredicate: pass
 
@@ -246,14 +246,14 @@ class StereoisomerGenerator(Boost.Python.instance):
     ##
     # \brief Returns the per-atom stereo descriptors for the current stereoisomer.
     # 
-    # \return A reference to the atom-stereo-descriptor array.
+    # \return The atom-stereo-descriptor array.
     # 
     def getAtomDescriptors() -> StereoDescriptorArray: pass
 
     ##
     # \brief Returns the per-bond stereo descriptors for the current stereoisomer.
     # 
-    # \return A reference to the bond-stereo-descriptor array.
+    # \return The bond-stereo-descriptor array.
     # 
     def getBondDescriptors() -> StereoDescriptorArray: pass
 

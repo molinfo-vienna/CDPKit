@@ -63,7 +63,7 @@ class FKabschAlgorithm(Boost.Python.instance):
     ##
     # \brief Returns the rigid-body transformation produced by the most recent successful align() call.
     # 
-    # \return A reference to the \f$ (D+1) \times (D+1) \f$ transformation matrix (homogeneous form).
+    # \return The \f$ (D+1) \times (D+1) \f$ transformation matrix (homogeneous form).
     # 
     def getTransform() -> FMatrix: pass
 

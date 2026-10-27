@@ -194,7 +194,7 @@ class Vector2FArray(Boost.Python.instance):
     ##
     # \brief Returns the first element of the array.
     # 
-    # \return A reference to the first element. 
+    # \return The first element. 
     # 
     # \throw Base.OperationFailed if the array is empty.
     # 
@@ -203,7 +203,7 @@ class Vector2FArray(Boost.Python.instance):
     ##
     # \brief Returns the last element of the array.
     # 
-    # \return A reference to the last element. 
+    # \return The last element. 
     # 
     # \throw Base.OperationFailed if the array is empty.
     # 

@@ -58,7 +58,7 @@ class HierarchyView(Boost.Python.instance):
     ##
     # \brief Returns the flat list of all residues across all models of the biological macromolecule.
     # 
-    # \return A reference to the residue list.
+    # \return The residue list.
     # 
     def getResidues() -> ResidueList: pass
 
@@ -74,7 +74,7 @@ class HierarchyView(Boost.Python.instance):
     # 
     # \param idx The zero-based model index.
     # 
-    # \return A reference to the model. 
+    # \return The model. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumModels()).
     # 
@@ -94,7 +94,7 @@ class HierarchyView(Boost.Python.instance):
     # 
     # \param num The model number.
     # 
-    # \return A reference to the model. 
+    # \return The model. 
     # 
     # \throw Base.ItemNotFound if no model with the requested number exists.
     # 

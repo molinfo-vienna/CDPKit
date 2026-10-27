@@ -287,7 +287,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     ##
     # \brief Returns the internal pharmacophore generator used for the target environment.
     # 
-    # \return A reference to the pharmacophore generator.
+    # \return The pharmacophore generator.
     # 
     def getPharmacophoreGenerator() -> Pharm.DefaultPharmacophoreGenerator: pass
 

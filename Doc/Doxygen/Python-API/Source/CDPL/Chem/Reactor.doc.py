@@ -84,7 +84,7 @@ class Reactor(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the ReactionSite instance to return.
     # 
-    # \return A reference to the ReactionSite instance at the specified index. 
+    # \return The ReactionSite instance at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReactionSites()).
     # 

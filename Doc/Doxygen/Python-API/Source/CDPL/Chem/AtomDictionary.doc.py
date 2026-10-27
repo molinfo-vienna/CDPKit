@@ -271,7 +271,7 @@ class AtomDictionary(Boost.Python.instance):
     # \param type The atom type.
     # \param isotope The isotope mass number.
     # 
-    # \return A reference to the matching entry, or to an empty entry if no matching entry exists.
+    # \return The matching entry, or to an empty entry if no matching entry exists.
     # 
     def getEntry(type: int, isotope: int) -> Entry: pass
 

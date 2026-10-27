@@ -225,7 +225,7 @@ def getCovalentRadius(atom: Chem.Atom, order: int = 1) -> float: pass
 # 
 # \param atom The atom.
 # 
-# \return A reference to the element name.
+# \return The element name.
 # 
 def getElementName(atom: Chem.Atom) -> str: pass
 

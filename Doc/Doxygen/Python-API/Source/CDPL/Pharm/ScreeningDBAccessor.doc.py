@@ -56,7 +56,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     ##
     # \brief Returns the name of the currently open database.
     # 
-    # \return A reference to the database name.
+    # \return The database name.
     # 
     def getDatabaseName() -> str: pass
 
@@ -134,7 +134,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     # 
     # \param pharm_idx The zero-based pharmacophore index.
     # 
-    # \return A reference to the feature-type histogram.
+    # \return The feature-type histogram.
     # 
     def getFeatureCounts(pharm_idx: int) -> FeatureTypeHistogram: pass
 
@@ -144,7 +144,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     # \param mol_idx The zero-based molecule index.
     # \param mol_conf_idx The zero-based conformer index within the molecule.
     # 
-    # \return A reference to the feature-type histogram.
+    # \return The feature-type histogram.
     # 
     def getFeatureCounts(mol_idx: int, mol_conf_idx: int) -> FeatureTypeHistogram: pass
 

@@ -74,14 +74,14 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         ##
         # \brief Returns the provisional (input) atom type of the entry.
         # 
-        # \return A reference to the provisional atom type.
+        # \return The provisional atom type.
         # 
         def getOldAtomType() -> str: pass
 
         ##
         # \brief Returns the aromatic MMFF94 atom type assigned on a match.
         # 
-        # \return A reference to the aromatic atom type.
+        # \return The aromatic atom type.
         # 
         def getAromAtomType() -> str: pass
 
@@ -186,7 +186,7 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     # 
     # \param idx The zero-based entry index.
     # 
-    # \return A reference to the entry. 
+    # \return The entry. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntries()).
     # 

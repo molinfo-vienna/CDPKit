@@ -3239,7 +3239,7 @@ def clearStructureData(molgraph: MolecularGraph) -> None: pass
 # 
 # \param sybyl_type The Sybyl atom type identifier (Chem.SybylAtomType value).
 # 
-# \return A reference to the type-name string (empty for unknown types).
+# \return The type-name string (empty for unknown types).
 # 
 def getSybylAtomTypeString(sybyl_type: int) -> str: pass
 
@@ -3248,7 +3248,7 @@ def getSybylAtomTypeString(sybyl_type: int) -> str: pass
 # 
 # \param sybyl_type The Sybyl bond-type identifier (Chem.SybylBondType value).
 # 
-# \return A reference to the type-name string (empty for unknown types).
+# \return The type-name string (empty for unknown types).
 # 
 def getSybylBondTypeString(sybyl_type: int) -> str: pass
 

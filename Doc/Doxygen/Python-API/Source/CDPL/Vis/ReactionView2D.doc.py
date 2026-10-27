@@ -245,7 +245,7 @@ class ReactionView2D(View2D):
     ##
     # \brief Constructs and initializes a <tt>ReactionView2D</tt> instance for the visualization of the chemical reaction <em>rxn</em>.
     # 
-    # \param rxn A reference to the Chem.Reaction object to visualize.
+    # \param rxn The Chem.Reaction object to visualize.
     # 
     def __init__(rxn: Chem.Reaction) -> None: pass
 
@@ -254,21 +254,21 @@ class ReactionView2D(View2D):
     # 
     # If components or any properties of <em>rxn</em> have changed <em>after</em> this method has been called then the method needs to be invoked again for the object to make the changes visible.
     # 
-    # \param rxn A reference to the Chem.Reaction object to visualize, or <tt>None</tt>.
+    # \param rxn The Chem.Reaction object to visualize, or <tt>None</tt>.
     # 
     def setReaction(rxn: Chem.Reaction) -> None: pass
 
     ##
     # \brief Returns the visualized chemical reaction.
     # 
-    # \return A reference to the visualized Chem.Reaction object, or <tt>None</tt> if none was specified.
+    # \return The visualized Chem.Reaction object, or <tt>None</tt> if none was specified.
     # 
     def getReaction() -> Chem.Reaction: pass
 
     ##
     # \brief Returns the Vis.FontMetrics instance used for measuring the dimension of text labels.
     # 
-    # \return A reference to the used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
+    # \return The used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 
     def getFontMetrics() -> FontMetrics: pass
 

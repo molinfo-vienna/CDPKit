@@ -62,7 +62,7 @@ class CompoundDRegularGridSetReader(DRegularGridSetReaderBase):
     # 
     # \param idx The zero-based reader index.
     # 
-    # \return A reference to the reader shared reference. 
+    # \return The reader shared reference. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumReaders()).
     # 

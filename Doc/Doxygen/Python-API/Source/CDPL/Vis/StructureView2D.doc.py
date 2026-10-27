@@ -199,7 +199,7 @@ class StructureView2D(View2D):
     ##
     # \brief Constructs and initializes a <tt>StructureView2D</tt> instance for the visualization of the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph A reference to the Chem.MolecularGraph instance to visualize.
+    # \param molgraph The Chem.MolecularGraph instance to visualize.
     # 
     def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
@@ -208,21 +208,21 @@ class StructureView2D(View2D):
     # 
     # If the structure or any properties of <em>molgraph</em> have changed <em>after</em> this method has been called then the method needs to be invoked again for the object to make the changes visible.
     # 
-    # \param molgraph A reference to the Chem.MolecularGraph instance to visualize, or <tt>None</tt>.
+    # \param molgraph The Chem.MolecularGraph instance to visualize, or <tt>None</tt>.
     # 
     def setStructure(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the visualized chemical structure.
     # 
-    # \return A reference to the visualized Chem.MolecularGraph instance, or <tt>None</tt> if none was specified.
+    # \return The visualized Chem.MolecularGraph instance, or <tt>None</tt> if none was specified.
     # 
     def getStructure() -> Chem.MolecularGraph: pass
 
     ##
     # \brief Returns the Vis.FontMetrics instance used for measuring the dimension of text labels.
     # 
-    # \return A reference to the used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
+    # \return The used Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 
     def getFontMetrics() -> FontMetrics: pass
 

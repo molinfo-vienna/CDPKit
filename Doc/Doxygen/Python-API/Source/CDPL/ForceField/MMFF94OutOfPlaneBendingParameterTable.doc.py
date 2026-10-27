@@ -177,7 +177,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     # \param term_atom2_type The numeric MMFF94 atom type of the second terminal atom.
     # \param oop_atom_type The numeric MMFF94 atom type of the out-of-plane atom.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, oop_atom_type: int) -> Entry: pass
 

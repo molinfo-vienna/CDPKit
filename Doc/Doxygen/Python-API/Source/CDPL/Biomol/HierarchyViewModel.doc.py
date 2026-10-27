@@ -38,7 +38,7 @@ class HierarchyViewModel(HierarchyViewNode):
     # 
     # \param idx The zero-based chain index.
     # 
-    # \return A reference to the chain. 
+    # \return The chain. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumChains()).
     # 
@@ -58,7 +58,7 @@ class HierarchyViewModel(HierarchyViewNode):
     # 
     # \param id The chain ID.
     # 
-    # \return A reference to the chain. 
+    # \return The chain. 
     # 
     # \throw Base.ItemNotFound if no chain with the requested ID exists.
     # 

@@ -183,7 +183,7 @@ class BondMatchExpressionList(BondMatchExpression):
     ##
     # \brief Returns the first element of the list.
     # 
-    # \return A reference to the first element. 
+    # \return The first element. 
     # 
     # \throw Base.OperationFailed if the list is empty.
     # 
@@ -192,7 +192,7 @@ class BondMatchExpressionList(BondMatchExpression):
     ##
     # \brief Returns the last element of the list.
     # 
-    # \return A reference to the last element. 
+    # \return The last element. 
     # 
     # \throw Base.OperationFailed if the list is empty.
     # 

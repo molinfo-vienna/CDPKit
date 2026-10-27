@@ -154,7 +154,7 @@ class FZeroGrid(Boost.Python.instance):
     # \param j The zero-based second-axis index.
     # \param k The zero-based third-axis index.
     # 
-    # \return A reference to the zero element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if any of the indices is out of range.
     # 
@@ -165,7 +165,7 @@ class FZeroGrid(Boost.Python.instance):
     # 
     # \param i The zero-based linear index.
     # 
-    # \return A reference to the zero element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

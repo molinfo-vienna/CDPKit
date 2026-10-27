@@ -94,7 +94,7 @@ class MaxCommonBondSubstructureSearch(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the atom/bond mapping instance to return.
     # 
-    # \return A reference to the Chem.AtomBondMapping instance at index <em>idx</em>. 
+    # \return The Chem.AtomBondMapping instance at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 

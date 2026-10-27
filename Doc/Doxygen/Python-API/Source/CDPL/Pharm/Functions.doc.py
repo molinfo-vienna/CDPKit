@@ -144,7 +144,7 @@ def getFeatureCount(cntnr: FeatureContainer, type: int) -> int: pass
 # 
 # \param ftr_type The feature type identifier (see namespace Pharm.FeatureType).
 # 
-# \return A reference to the feature type string.
+# \return The feature type string.
 # 
 def getFeatureTypeString(ftr_type: int) -> str: pass
 
@@ -344,7 +344,7 @@ def hasOrientation(feature: Feature) -> bool: pass
 # 
 # \param feature The feature for which to get the property value.
 # 
-# \return A reference to the 3D orientation vector.
+# \return The 3D orientation vector.
 # 
 def getOrientation(feature: Feature) -> Math.Vector3D: pass
 

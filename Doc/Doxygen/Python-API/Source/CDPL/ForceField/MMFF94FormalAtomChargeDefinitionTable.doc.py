@@ -76,7 +76,7 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         ##
         # \brief Returns the symbolic MMFF94 atom type of the entry.
         # 
-        # \return A reference to the symbolic atom type.
+        # \return The symbolic atom type.
         # 
         def getAtomType() -> str: pass
 
@@ -97,7 +97,7 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         ##
         # \brief Returns the whitespace-separated list of neighbour atom types used by the assignment.
         # 
-        # \return A reference to the neighbour atom type list.
+        # \return The neighbour atom type list.
         # 
         def getAtomTypeList() -> str: pass
 
@@ -154,7 +154,7 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     # 
     # \param atom_type The symbolic MMFF94 atom type.
     # 
-    # \return A reference to the matching entry or to an uninitialized entry if no matching entry exists.
+    # \return The matching entry or to an uninitialized entry if no matching entry exists.
     # 
     def getEntry(atom_type: str) -> Entry: pass
 

@@ -127,7 +127,7 @@ class FScalarMatrix(Boost.Python.instance):
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return A reference to the common entry value. 
+    # \return The common entry value. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

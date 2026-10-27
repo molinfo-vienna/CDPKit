@@ -126,7 +126,7 @@ class ULZeroMatrix(Boost.Python.instance):
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return A reference to the zero element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

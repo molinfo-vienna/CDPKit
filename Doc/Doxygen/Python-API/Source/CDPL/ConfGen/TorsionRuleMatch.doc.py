@@ -80,14 +80,14 @@ class TorsionRuleMatch(Boost.Python.instance):
     ##
     # \brief Returns the rotatable bond at which the rule matched.
     # 
-    # \return A reference to the bond.
+    # \return The bond.
     # 
     def getBond() -> Chem.Bond: pass
 
     ##
     # \brief Returns the matched torsion rule.
     # 
-    # \return A reference to the rule.
+    # \return The rule.
     # 
     def getRule() -> TorsionRule: pass
 

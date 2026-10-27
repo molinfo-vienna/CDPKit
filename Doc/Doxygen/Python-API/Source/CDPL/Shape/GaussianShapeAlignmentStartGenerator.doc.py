@@ -96,7 +96,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the starting transformation.
     # 
-    # \return A reference to the starting transformation. 
+    # \return The starting transformation. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumStartTransforms()).
     # 

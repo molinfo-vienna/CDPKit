@@ -48,7 +48,7 @@ class FragmentAssembler(Boost.Python.instance):
     ##
     # \brief Returns the current assembler settings (mutable).
     # 
-    # \return A reference to the settings.
+    # \return The settings.
     # 
     def getSettings() -> FragmentAssemblerSettings: pass
 
@@ -74,7 +74,7 @@ class FragmentAssembler(Boost.Python.instance):
     ##
     # \brief Returns the currently configured abort-check callback.
     # 
-    # \return A reference to the abort-check callback.
+    # \return The abort-check callback.
     # 
     def getAbortCallback() -> CallbackFunction: pass
 
@@ -88,7 +88,7 @@ class FragmentAssembler(Boost.Python.instance):
     ##
     # \brief Returns the currently configured timeout-check callback.
     # 
-    # \return A reference to the timeout-check callback.
+    # \return The timeout-check callback.
     # 
     def getTimeoutCallback() -> CallbackFunction: pass
 
@@ -102,7 +102,7 @@ class FragmentAssembler(Boost.Python.instance):
     ##
     # \brief Returns the currently configured log-message callback.
     # 
-    # \return A reference to the log-message callback.
+    # \return The log-message callback.
     # 
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 

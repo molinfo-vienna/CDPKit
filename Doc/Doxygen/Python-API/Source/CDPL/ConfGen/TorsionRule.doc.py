@@ -137,7 +137,7 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Returns the <em>SMARTS</em> match pattern.
     # 
-    # \return A reference to the <em>SMARTS</em> match pattern.
+    # \return The <em>SMARTS</em> match pattern.
     # 
     def getMatchPatternString() -> str: pass
 
@@ -174,7 +174,7 @@ class TorsionRule(Boost.Python.instance):
     # 
     # \param idx The zero-based angle entry index.
     # 
-    # \return A reference to the angle entry. 
+    # \return The angle entry. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAngles()).
     # 

@@ -66,14 +66,14 @@ class GaussianShapeGenerator(Boost.Python.instance):
     ##
     # \brief Returns the currently configured pharmacophore generator.
     # 
-    # \return A reference to the pharmacophore generator.
+    # \return The pharmacophore generator.
     # 
     def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
 
     ##
     # \brief Returns the built-in default pharmacophore generator (mutable).
     # 
-    # \return A reference to the default pharmacophore generator.
+    # \return The default pharmacophore generator.
     # 
     def getDefaultPharmacophoreGenerator() -> Pharm.DefaultPharmacophoreGenerator: pass
 
@@ -194,14 +194,14 @@ class GaussianShapeGenerator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph.
     # 
-    # \return A reference to the generated Shape.GaussianShapeSet.
+    # \return The generated Shape.GaussianShapeSet.
     # 
     def generate(molgraph: Chem.MolecularGraph) -> GaussianShapeSet: pass
 
     ##
     # \brief Returns the shapes produced by the most recent call to generate().
     # 
-    # \return A reference to the produced Shape.GaussianShapeSet.
+    # \return The produced Shape.GaussianShapeSet.
     # 
     def getShapes() -> GaussianShapeSet: pass
 

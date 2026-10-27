@@ -41,7 +41,7 @@ class View2D(Base.ControlParameterContainer):
     ##
     # \brief Specifies a Vis.FontMetrics instance that will be used to measure the dimension of text labels.
     # 
-    # \param font_metrics A reference to the Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
+    # \param font_metrics The Vis.FontMetrics instance, or <tt>None</tt> if none was specified.
     # 
     def setFontMetrics(font_metrics: FontMetrics) -> None: pass
 

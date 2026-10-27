@@ -110,7 +110,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     # 
     # \param parent_type The symbolic MMFF94 type of the heavy parent atom.
     # 
-    # \return A reference to the symbolic hydrogen type, or to an empty string if no mapping exists.
+    # \return The symbolic hydrogen type, or to an empty string if no mapping exists.
     # 
     def getEntry(parent_type: str) -> object: pass
 

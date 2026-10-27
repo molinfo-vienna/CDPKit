@@ -141,7 +141,7 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     ##
     # \brief Returns the formal atomic charges assigned during the last calculation.
     # 
-    # \return A reference to the array of formal charges.
+    # \return The array of formal charges.
     # 
     def getFormalCharges() -> Util.DArray: pass
 

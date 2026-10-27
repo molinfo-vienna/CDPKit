@@ -164,7 +164,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     ##
     # \brief Returns the coordinate transformation mapping grid space to world coordinates.
     # 
-    # \return A reference to the transformation matrix.
+    # \return The transformation matrix.
     # 
     def getCoordinatesTransform() -> Matrix4D: pass
 
@@ -614,7 +614,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # \param j The zero-based cell index along the y-axis.
     # \param k The zero-based cell index along the z-axis.
     # 
-    # \return A reference to the cell value.
+    # \return The cell value.
     # 
     def __call__(i: int, j: int, k: int) -> float: pass
 
@@ -623,7 +623,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     # 
     # \param i The zero-based linear cell index.
     # 
-    # \return A reference to the cell value.
+    # \return The cell value.
     # 
     def __call__(i: int) -> float: pass
 

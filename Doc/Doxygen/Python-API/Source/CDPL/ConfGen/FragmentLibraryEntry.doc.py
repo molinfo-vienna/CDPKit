@@ -80,7 +80,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     ##
     # \brief Returns the canonical <em>SMILES</em> string describing the stored fragment.
     # 
-    # \return A reference to the <em>SMILES</em> string.
+    # \return The <em>SMILES</em> string.
     # 
     def getSMILES() -> str: pass
 
@@ -115,7 +115,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     # 
     # \param idx The zero-based conformer index.
     # 
-    # \return A reference to the conformer. 
+    # \return The conformer. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumConformers()).
     # 

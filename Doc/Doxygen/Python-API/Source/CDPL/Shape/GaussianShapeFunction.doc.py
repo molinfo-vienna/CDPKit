@@ -86,7 +86,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     ##
     # \brief Returns the associated Gaussian shape (or <tt>None</tt> if none is associated).
     # 
-    # \return A reference to the associated Gaussian shape.
+    # \return The associated Gaussian shape.
     # 
     def getShape() -> GaussianShape: pass
 
@@ -142,7 +142,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     # 
     # \param idx The element index.
     # 
-    # \return A reference to the element 3D position. 
+    # \return The element 3D position. 
     # 
     # \throw Base.IndexError if no shape is associated with this function or <em>idx</em> is not in the range [0, <tt>getShape()->getNumElements()</tt>).
     # 

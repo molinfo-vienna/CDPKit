@@ -36,7 +36,7 @@ class AtomContainer(Entity3DContainer):
     # 
     # \param idx The zero-based index of the atom to return.
     # 
-    # \return A reference to the atom at the specified index. 
+    # \return The atom at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 
@@ -83,7 +83,7 @@ class AtomContainer(Entity3DContainer):
     # 
     # \param idx The zero-based entity index.
     # 
-    # \return A reference to the entity at the specified index. 
+    # \return The entity at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
     # 

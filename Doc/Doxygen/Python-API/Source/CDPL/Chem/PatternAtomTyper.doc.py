@@ -161,7 +161,7 @@ class PatternAtomTyper(Boost.Python.instance):
     # 
     # \param idx The zero-based pattern index.
     # 
-    # \return A reference to the pattern. 
+    # \return The pattern. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumPatterns()).
     # 

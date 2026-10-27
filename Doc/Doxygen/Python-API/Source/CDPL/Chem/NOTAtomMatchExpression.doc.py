@@ -29,14 +29,14 @@ class NOTAtomMatchExpression(AtomMatchExpression):
     ##
     # \brief Constructs the <tt>NOTAtomMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
     # 
-    # \param expr_ptr A reference to the the match expression instance to wrap.
+    # \param expr_ptr The the match expression instance to wrap.
     # 
     def __init__(expr_ptr: NOTAtomMatchExpression) -> None: pass
 
     ##
     # \brief Constructs the <tt>NOTAtomMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
     # 
-    # \param expr_ptr A reference to the the match expression instance to wrap.
+    # \param expr_ptr The the match expression instance to wrap.
     # 
     def __init__(expr_ptr: AtomMatchExpression) -> None: pass
 

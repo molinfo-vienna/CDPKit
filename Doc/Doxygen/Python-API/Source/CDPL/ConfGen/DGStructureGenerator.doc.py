@@ -59,7 +59,7 @@ class DGStructureGenerator(Boost.Python.instance):
     ##
     # \brief Returns the bit mask of hydrogens excluded from the coordinate-generation step.
     # 
-    # \return A reference to the bit mask.
+    # \return The bit mask.
     # 
     def getExcludedHydrogenMask() -> Util.BitSet: pass
 
@@ -124,14 +124,14 @@ class DGStructureGenerator(Boost.Python.instance):
     ##
     # \brief Returns the current generator settings.
     # 
-    # \return A reference to the settings.
+    # \return The settings.
     # 
     def getSettings() -> DGStructureGeneratorSettings: pass
 
     ##
     # \brief Returns the embedded constraint generator used to produce the distance/volume constraints.
     # 
-    # \return A reference to the constraint generator.
+    # \return The constraint generator.
     # 
     def getConstraintGenerator() -> DGConstraintGenerator: pass
 

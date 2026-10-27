@@ -59,7 +59,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \param role The reaction role of the new component (see namespace Chem.ReactionRole).
     # 
-    # \return A reference to the newly created component molecule. 
+    # \return The newly created component molecule. 
     # 
     # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
@@ -120,7 +120,7 @@ class Reaction(Base.PropertyContainer):
     # \param idx The zero-based index of the reaction component to return.
     # \param role A flag indicating the reaction role of the component (see namespace Chem.ReactionRole).
     # 
-    # \return A reference to the reaction component with the specified role and index. 
+    # \return The reaction component with the specified role and index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, <tt>getNumComponents(role)</tt>). Base.ValueError if the value of <em>role</em> is not equal to Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
@@ -131,7 +131,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \param idx The zero-based index of the reaction component to return.
     # 
-    # \return A reference to the reaction component at the specified index. 
+    # \return The reaction component at the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumComponents()).
     # 

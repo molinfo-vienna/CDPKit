@@ -82,7 +82,7 @@ class ConstULHomogenousCoordsAdapter(Boost.Python.instance):
     ##
     # \brief Returns the wrapped vector.
     # 
-    # \return A reference to the wrapped vector closure.
+    # \return The wrapped vector closure.
     # 
     def getData() -> ConstULVectorExpression: pass
 

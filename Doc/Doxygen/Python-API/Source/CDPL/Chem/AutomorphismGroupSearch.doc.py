@@ -120,7 +120,7 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Chem.AtomBondMapping instance to return.
     # 
-    # \return A reference to the Chem.AtomBondMapping instance at index <em>idx</em>. 
+    # \return The Chem.AtomBondMapping instance at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
     # 
@@ -192,7 +192,7 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     ##
     # \brief Returns the currently installed callback function invoked for every found atom/bond mapping.
     # 
-    # \return A reference to the installed callback function.
+    # \return The installed callback function.
     # 
     def getFoundMappingCallback() -> BoolMolecularGraphAtomBondMappingFunctor: pass
 

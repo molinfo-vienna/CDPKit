@@ -99,7 +99,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     ##
     # \brief Returns the bit mask of hydrogen atoms that have been excluded from constraint generation.
     # 
-    # \return A reference to the excluded-hydrogen bit mask.
+    # \return The excluded-hydrogen bit mask.
     # 
     def getExcludedHydrogenMask() -> Util.BitSet: pass
 
@@ -130,7 +130,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based stereo-center index.
     # 
-    # \return A reference to the stereo-center data. 
+    # \return The stereo-center data. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtomStereoCenters()).
     # 
@@ -141,7 +141,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based stereo-center index.
     # 
-    # \return A reference to the stereo-center data. 
+    # \return The stereo-center data. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBondStereoCenters()).
     # 
@@ -213,7 +213,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     ##
     # \brief Returns the constraint-generation settings.
     # 
-    # \return A reference to the settings.
+    # \return The settings.
     # 
     def getSettings() -> DGConstraintGeneratorSettings: pass
 

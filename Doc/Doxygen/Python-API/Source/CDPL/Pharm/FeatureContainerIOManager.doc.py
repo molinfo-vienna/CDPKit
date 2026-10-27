@@ -119,7 +119,7 @@ class FeatureContainerIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Pharm.FeatureContainerInputHandler implementation instance to return.
     # 
-    # \return A reference to the Pharm.FeatureContainerInputHandler implementation instance with the specified index. 
+    # \return The Pharm.FeatureContainerInputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 
@@ -240,7 +240,7 @@ class FeatureContainerIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Pharm.FeatureContainerOutputHandler implementation instance to return.
     # 
-    # \return A reference to the Pharm.FeatureContainerOutputHandler implementation instance with the specified index. 
+    # \return The Pharm.FeatureContainerOutputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 

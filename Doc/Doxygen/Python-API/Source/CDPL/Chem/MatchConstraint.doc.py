@@ -126,7 +126,7 @@ class MatchConstraint(Boost.Python.instance):
     ##
     # \brief Returns the value of the query attribute of type <em>T</em>.
     # 
-    # \return A reference to the value of the stored query attribute. 
+    # \return The value of the stored query attribute. 
     # 
     # \throw Base.BadCast if the stored <tt>Any</tt> instance is empty, or the stored value is not of the specified type <em>T</em>.
     # 

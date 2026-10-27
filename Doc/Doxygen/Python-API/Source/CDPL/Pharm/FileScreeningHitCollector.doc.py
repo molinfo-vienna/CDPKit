@@ -66,7 +66,7 @@ class FileScreeningHitCollector(Boost.Python.instance):
     ##
     # \brief Returns the currently configured molecular graph writer.
     # 
-    # \return A reference to the data writer.
+    # \return The data writer.
     # 
     def getDataWriter() -> Chem.MolecularGraphWriterBase: pass
 

@@ -70,14 +70,14 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
         ##
         # \brief Returns the substructure pattern.
         # 
-        # \return A reference to the pattern shared reference.
+        # \return The pattern shared reference.
         # 
         def getPattern() -> Chem.MolecularGraph: pass
 
         ##
         # \brief Returns the symbolic MMFF94 atom type assigned on a match.
         # 
-        # \return A reference to the symbolic atom type.
+        # \return The symbolic atom type.
         # 
         def getSymbolicType() -> str: pass
 
@@ -142,7 +142,7 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     # 
     # \param idx The zero-based entry index.
     # 
-    # \return A reference to the entry. 
+    # \return The entry. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntries()).
     # 
@@ -192,7 +192,7 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A reference to the default table shared reference.
+    # \return The default table shared reference.
     # 
     @staticmethod
     def get(: ) -> MMFF94SymbolicAtomTypePatternTable: pass

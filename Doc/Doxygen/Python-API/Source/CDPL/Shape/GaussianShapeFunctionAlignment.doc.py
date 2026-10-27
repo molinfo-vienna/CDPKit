@@ -69,7 +69,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         ##
         # \brief Returns the rigid-body transformation that maps the aligned shape onto the reference shape.
         # 
-        # \return A reference to the rigid-body transformation matrix.
+        # \return The rigid-body transformation matrix.
         # 
         def getTransform() -> Math.Matrix4D: pass
 
@@ -140,14 +140,14 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured overlap function.
     # 
-    # \return A reference to the overlap function.
+    # \return The overlap function.
     # 
     def getOverlapFunction() -> GaussianShapeOverlapFunction: pass
 
     ##
     # \brief Returns the built-in default overlap function (Shape.FastGaussianShapeOverlapFunction).
     # 
-    # \return A reference to the default overlap function.
+    # \return The default overlap function.
     # 
     def getDefaultOverlapFunction() -> FastGaussianShapeOverlapFunction: pass
 
@@ -162,7 +162,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Returns the current reference shape function (or <tt>None</tt> if none is set).
     # 
-    # \return A reference to the reference shape function.
+    # \return The reference shape function.
     # 
     def getReference() -> GaussianShapeFunction: pass
 
@@ -176,14 +176,14 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured alignment-start generator.
     # 
-    # \return A reference to the alignment-start generator.
+    # \return The alignment-start generator.
     # 
     def getStartGenerator() -> GaussianShapeAlignmentStartGenerator: pass
 
     ##
     # \brief Returns the built-in default principal-axes alignment-start generator.
     # 
-    # \return A reference to the default alignment-start generator.
+    # \return The default alignment-start generator.
     # 
     def getDefaultStartGenerator() -> PrincipalAxesAlignmentStartGenerator: pass
 
@@ -197,7 +197,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured color-match function.
     # 
-    # \return A reference to the color-match function.
+    # \return The color-match function.
     # 
     def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
@@ -211,7 +211,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured color-filter function.
     # 
-    # \return A reference to the color-filter function.
+    # \return The color-filter function.
     # 
     def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
@@ -359,7 +359,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # 
     # \param idx The zero-based result index.
     # 
-    # \return A reference to the result. 
+    # \return The result. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumResults()).
     # 

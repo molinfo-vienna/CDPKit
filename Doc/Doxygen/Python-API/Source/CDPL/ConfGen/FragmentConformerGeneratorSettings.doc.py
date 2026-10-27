@@ -297,21 +297,21 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Returns the per-fragment-class settings used for chain fragments.
     # 
-    # \return A reference to the chain-fragment settings.
+    # \return The chain-fragment settings.
     # 
     def getChainSettings() -> FragmentSettings: pass
 
     ##
     # \brief Returns the per-fragment-class settings used for flexible macrocyclic ring systems.
     # 
-    # \return A reference to the macrocycle settings.
+    # \return The macrocycle settings.
     # 
     def getMacrocycleSettings() -> FragmentSettings: pass
 
     ##
     # \brief Returns the per-fragment-class settings used for small ring systems.
     # 
-    # \return A reference to the small ring system settings.
+    # \return The small ring system settings.
     # 
     def getSmallRingSystemSettings() -> FragmentSettings: pass
 

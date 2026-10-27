@@ -31,7 +31,7 @@ class QtFontMetrics(Vis.FontMetrics):
     ##
     # \brief Constructs a <tt>QtFontMetrics</tt> instance for <em>Qt's</em> default font and the given paint device.
     # 
-    # \param paint_dev A reference to the <em>Qt</em> paint device, or <tt>None</tt> if unspecified.
+    # \param paint_dev The <em>Qt</em> paint device, or <tt>None</tt> if unspecified.
     # 
     def __init__(paint_dev: PyQt5.QtGui.QPaintDevice) -> None: pass
 

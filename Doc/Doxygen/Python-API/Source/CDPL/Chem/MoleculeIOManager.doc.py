@@ -119,7 +119,7 @@ class MoleculeIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Chem.MoleculeInputHandler implementation instance to return.
     # 
-    # \return A reference to the Chem.MoleculeInputHandler implementation instance with the specified index. 
+    # \return The Chem.MoleculeInputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 
@@ -240,7 +240,7 @@ class MoleculeIOManager(Boost.Python.instance):
     # 
     # \param idx The zero-based index of the Chem.MoleculeOutputHandler implementation instance to return.
     # 
-    # \return A reference to the Chem.MoleculeOutputHandler implementation instance with the specified index. 
+    # \return The Chem.MoleculeOutputHandler implementation instance with the specified index. 
     # 
     # \throw Base.IndexError if <em>idx</em> is out of bounds.
     # 

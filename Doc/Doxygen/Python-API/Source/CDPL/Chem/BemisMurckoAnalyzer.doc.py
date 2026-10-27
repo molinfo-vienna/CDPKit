@@ -74,28 +74,28 @@ class BemisMurckoAnalyzer(Boost.Python.instance):
     ##
     # \brief Returns the perceived ring systems of the input molecular graph.
     # 
-    # \return A reference to the list of ring system fragments.
+    # \return The list of ring system fragments.
     # 
     def getRingSystems() -> FragmentList: pass
 
     ##
     # \brief Returns the side chains (acyclic substituents) of the input molecular graph.
     # 
-    # \return A reference to the list of side chain fragments.
+    # \return The list of side chain fragments.
     # 
     def getSideChains() -> FragmentList: pass
 
     ##
     # \brief Returns the linker fragments connecting different ring systems of the input molecular graph.
     # 
-    # \return A reference to the list of linker fragments.
+    # \return The list of linker fragments.
     # 
     def getLinkers() -> FragmentList: pass
 
     ##
     # \brief Returns the Bemis-Murcko frameworks of the input molecular graph (union of ring systems and linkers).
     # 
-    # \return A reference to the list of framework fragments.
+    # \return The list of framework fragments.
     # 
     def getFrameworks() -> FragmentList: pass
 

@@ -59,14 +59,14 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         ##
         # \brief Returns the formal atom charges of this resonance structure.
         # 
-        # \return A reference to the formal charge array.
+        # \return The formal charge array.
         # 
         def getAtomCharges() -> Util.LArray: pass
 
         ##
         # \brief Returns the bond orders of this resonance structure.
         # 
-        # \return A reference to the bond order array.
+        # \return The bond order array.
         # 
         def getBondOrders() -> Util.STArray: pass
 
@@ -154,7 +154,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     ##
     # \brief Returns the bit mask of atom types subjected to the octet rule check during violation minimization.
     # 
-    # \return A reference to the bit mask (indexed by Chem.AtomType value).
+    # \return The bit mask (indexed by Chem.AtomType value).
     # 
     def getOctetRuleCheckAtomTypes() -> Util.BitSet: pass
 
@@ -205,7 +205,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     # 
     # \param idx The zero-based structure index.
     # 
-    # \return A reference to the resonance structure record. 
+    # \return The resonance structure record. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumStructures()).
     # 

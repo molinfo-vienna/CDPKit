@@ -59,14 +59,14 @@ class AtomBondMapping(Boost.Python.instance):
     ##
     # \brief Returns the Chem.AtomMapping data member storing the atom to atom mappings.
     # 
-    # \return A reference to the Chem.AtomMapping data member.
+    # \return The Chem.AtomMapping data member.
     # 
     def getAtomMapping() -> AtomMapping: pass
 
     ##
     # \brief Returns the Chem.BondMapping data member storing the bond to bond mappings.
     # 
-    # \return A reference to the Chem.BondMapping data member.
+    # \return The Chem.BondMapping data member.
     # 
     def getBondMapping() -> BondMapping: pass
 

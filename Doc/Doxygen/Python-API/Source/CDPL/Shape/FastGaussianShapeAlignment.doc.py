@@ -97,7 +97,7 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured result compare function.
     # 
-    # \return A reference to the result compare function.
+    # \return The result compare function.
     # 
     def getResultCompareFunction() -> BoolAlignmentResult2Functor: pass
 
@@ -111,7 +111,7 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Returns the currently configured scoring function.
     # 
-    # \return A reference to the scoring function.
+    # \return The scoring function.
     # 
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
@@ -404,7 +404,7 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     # 
     # \param idx The zero-based result index.
     # 
-    # \return A reference to the result. 
+    # \return The result. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumResults()).
     # 

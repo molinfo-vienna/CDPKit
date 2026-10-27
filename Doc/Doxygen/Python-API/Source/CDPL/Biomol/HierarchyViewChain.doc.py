@@ -38,7 +38,7 @@ class HierarchyViewChain(HierarchyViewNode):
     # 
     # \param idx The zero-based fragment index.
     # 
-    # \return A reference to the chain fragment. 
+    # \return The chain fragment. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumFragments()).
     # 

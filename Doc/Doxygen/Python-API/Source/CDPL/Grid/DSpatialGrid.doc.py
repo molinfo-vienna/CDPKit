@@ -50,7 +50,7 @@ class DSpatialGrid(AttributedGrid):
     # 
     # \param i The linear element index.
     # 
-    # \return A reference to the grid element.
+    # \return The grid element.
     # 
     def __call__(i: int) -> float: pass
 

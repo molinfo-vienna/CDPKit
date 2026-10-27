@@ -74,21 +74,21 @@ class FRealQuaternion(Boost.Python.instance):
     ##
     # \brief Returns the imaginary component <em>C2</em> (always zero for a real quaternion).
     # 
-    # \return A reference to the zero element.
+    # \return The zero element.
     # 
     def getC2() -> float: pass
 
     ##
     # \brief Returns the imaginary component <em>C3</em> (always zero for a real quaternion).
     # 
-    # \return A reference to the zero element.
+    # \return The zero element.
     # 
     def getC3() -> float: pass
 
     ##
     # \brief Returns the imaginary component <em>C4</em> (always zero for a real quaternion).
     # 
-    # \return A reference to the zero element.
+    # \return The zero element.
     # 
     def getC4() -> float: pass
 
