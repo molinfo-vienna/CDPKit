@@ -37,6 +37,9 @@
            single: Atoms; Hybridization State Property
            single: Atoms; Hybridization State Perception
            single: Atoms; Aromaticity Flag Property
+           single: Atoms; Unpaired Electron Count Property
+           single: Atoms; Radical Type Property
+           single: Atoms; Radical Perception
            single: Atoms; Aromaticity Perception
            single: Bonds; Stereo Descriptor Property
            single: Bonds; Aromaticity Flag Property

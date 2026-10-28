@@ -414,11 +414,13 @@ namespace CDPL
         /**
          * \brief Computes the unpaired (radical) electron count of the atom \a atom from its implict hydrogen count property value.
          *
-         * For atoms without a set implict hydrogen count property the unpaired electron count is considered to be zero.
+         * This function calculates the number of valence electrons that are not engaged in a bond and thus reduce
+         * the total atom valence to a value lower than the allowed maximum (atom element and formal charge dependent).
          *
          * \param atom The atom for which to calculate the unpaired electron count.
          * \param molgraph The molecular graph providing the structural context.
          * \return The computed unpaired electron count.
+         * \note For atoms without a set implict hydrogen count property the unpaired electron count is considered to be zero.
          * \since 1.4
          */
         CDPL_CHEM_API std::size_t calcUnpairedElectronCount(const Atom& atom, const MolecularGraph& molgraph);

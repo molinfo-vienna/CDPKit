@@ -4074,12 +4074,14 @@ def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.ULMatrix) 
 ##
 # \brief Computes the unpaired (radical) electron count of the atom <em>atom</em> from its implict hydrogen count property value.
 # 
-# For atoms without a set implict hydrogen count property the unpaired electron count is considered to be zero.
+# This function calculates the number of valence electrons that are not engaged in a bond and thus reduce the total atom valence to a value lower than the allowed maximum (atom element and formal charge dependent).
 # 
 # \param atom The atom for which to calculate the unpaired electron count.
 # \param molgraph The molecular graph providing the structural context.
 # 
 # \return The computed unpaired electron count. 
+# 
+# \note For atoms without a set implict hydrogen count property the unpaired electron count is considered to be zero. 
 # 
 # \since 1.4
 # 
@@ -4087,6 +4089,8 @@ def calcUnpairedElectronCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
 # \brief Computes and stores the unpaired (radical) electron counts for the atoms in the molecular graph <em>molgraph</em>.
+# 
+# For each atom of <em>molgraph</em> this function calculates the number of valence electrons that are not engaged in a bond from the value of the property AtomProperty.IMPLICIT_HYDROGEN_COUNT and stores the result as value of the property AtomProperty.UNPAIRED_ELECTRON_COUNT (the treatment of already present property values depends on the flag <em>overwrite</em>). This function can be called after reading molecules from data in formats that do not support explicit atom radical electron count information (e.g. SMILES) in order to generate the missing data (if of relevance for further processing).
 # 
 # \param molgraph The molecular graph.
 # \param overwrite Specifies whether already existing unpaired electron count properties should be replaced.

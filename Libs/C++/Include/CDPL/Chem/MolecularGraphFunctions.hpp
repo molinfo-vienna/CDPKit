@@ -1362,6 +1362,15 @@ namespace CDPL
 
         /**
          * \brief Computes and stores the unpaired (radical) electron counts for the atoms in the molecular graph \a molgraph.
+         *
+         * For each atom of \a molgraph this function calculates the number of valence electrons that are not engaged in a
+         * bond from the value of the property AtomProperty::IMPLICIT_HYDROGEN_COUNT and stores the result as value of
+         * the property AtomProperty::UNPAIRED_ELECTRON_COUNT (the treatment of already present property values
+         * depends on the flag \a overwrite).
+         * This function can be called after reading molecules from data in formats that do not support explicit atom
+         * radical electron count information (e.g. SMILES) in order to generate the missing data (if of relevance for
+         * further processing).
+         *
          * \param molgraph The molecular graph.
          * \param overwrite Specifies whether already existing unpaired electron count properties should be replaced.
          * \see calcUnpairedElectronCount()
