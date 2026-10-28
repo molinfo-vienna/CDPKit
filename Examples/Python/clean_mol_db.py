@@ -26,6 +26,21 @@ import CDPL.MolProp as MolProp
 # performs a (optional) standardization of the argument molecule and then checks whether
 # it fulfills certain user-defined criteria for forwarding/rejection
 def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
+    derad = False
+
+    if args.deradicalize:
+        # calculates the number of electrons for each atom that are not engaged in a bond although
+        # they should be according to the valence rules
+        Chem.calcUnpairedElectronCounts(mol, False)
+        
+        # clear radical information
+        for atom in mol.atoms:
+            if Chem.getRadicalType(atom) != Chem.RadicalType.NOT_RADICALIC or Chem.getUnpairedElectronCount(atom) > 0:
+                Chem.clearRadicalType(atom)
+                Chem.clearUnpairedElectronCount(atom)
+                Chem.clearImplicitHydrogenCount(atom)
+                derad = True
+                
     chgs_mod = False
 
     if args.min_charges:
@@ -39,18 +54,7 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
         # if changes were made then from now on use the 'uncharged' molecule for further checks
         if chgs_mod:  
             mol = res_mol
-
-    derad = False
-
-    if args.deradicalize:
-        # clear radical information
-        for atom in mol.atoms:
-            if Chem.getRadicalType(atom) != Chem.RadicalType.NOT_RADICALIC or Chem.getUnpairedElectronCount(atom) > 0:
-                Chem.clearRadicalType(atom)
-                Chem.clearUnpairedElectronCount(atom)
-                Chem.clearImplicitHydrogenCount(atom)
-                derad = True
-                
+  
     comps_strpd = False
     
     if args.strip_comps:
@@ -103,22 +107,22 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
     if not checkMaxAtomCounts(elem_histo, args.max_atom_counts):
         return (None, 'maximum atom count exceeded')
 
-    log_msg = None
-    
     if chgs_mod:
         log_msg = 'reduced charged atom count'
+    else:
+        log_msg = ''
 
     if derad:
         if log_msg:
             log_msg += ', '
             
-        log_msg = 'removed radical information'
+        log_msg += 'removed radical information'
         
     if comps_strpd:
         if log_msg:
             log_msg += ', '
 
-        log_msg = 'removed components'
+        log_msg += 'removed components'
 
     if args.strip_stereo:
         for atom in mol.atoms:  # clear atom stereo descriptors
