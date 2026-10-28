@@ -38,7 +38,7 @@ class PolylinePrimitive2D(PointArray2D, GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c PolylinePrimitive2D instance \a prim.
     # \param prim The \c PolylinePrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: PolylinePrimitive2D) -> PolylinePrimitive2D: pass
 

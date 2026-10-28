@@ -52,7 +52,7 @@ class AtomBondMapping(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AtomBondMapping instance \a mapping.
     # \param mapping The \c AtomBondMapping instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(mapping: AtomBondMapping) -> AtomBondMapping: pass
 

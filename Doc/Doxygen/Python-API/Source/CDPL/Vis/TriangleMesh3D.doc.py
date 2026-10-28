@@ -40,7 +40,7 @@ class TriangleMesh3D(Shape3D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TriangleMesh3D instance \a mesh.
     # \param mesh The \c TriangleMesh3D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
 

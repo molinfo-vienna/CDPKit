@@ -100,7 +100,7 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94StretchBendInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \c MMFF94StretchBendInteractionParameterizer instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(parameterizer: MMFF94StretchBendInteractionParameterizer) -> MMFF94StretchBendInteractionParameterizer: pass
 

@@ -52,7 +52,7 @@ class CosineSimilarity(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c CosineSimilarity instance \a func.
     # \param func The \c CosineSimilarity instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: CosineSimilarity) -> CosineSimilarity: pass
 

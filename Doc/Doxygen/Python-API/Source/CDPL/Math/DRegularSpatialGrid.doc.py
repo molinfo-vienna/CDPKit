@@ -518,7 +518,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DRegularSpatialGrid instance \a g.
     # \param g The \c DRegularSpatialGrid instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(g: DRegularSpatialGrid) -> DRegularSpatialGrid: pass
 

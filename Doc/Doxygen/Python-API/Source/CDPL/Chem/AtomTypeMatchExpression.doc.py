@@ -43,6 +43,6 @@ class AtomTypeMatchExpression(AtomMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AtomTypeMatchExpression instance \a expr.
     # \param expr The \c AtomTypeMatchExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expr: AtomTypeMatchExpression) -> AtomTypeMatchExpression: pass

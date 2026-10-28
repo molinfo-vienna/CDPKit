@@ -63,7 +63,7 @@ class TPSACalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TPSACalculator instance \a calc.
     # \param calc The \c TPSACalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: TPSACalculator) -> TPSACalculator: pass
 

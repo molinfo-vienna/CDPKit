@@ -133,7 +133,7 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94TorsionInteraction instance \a iactn.
     # \param iactn The \c MMFF94TorsionInteraction instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(iactn: MMFF94TorsionInteraction) -> MMFF94TorsionInteraction: pass
 

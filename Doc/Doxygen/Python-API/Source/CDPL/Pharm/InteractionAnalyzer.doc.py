@@ -79,7 +79,7 @@ class InteractionAnalyzer(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c InteractionAnalyzer instance \a analyzer.
     # \param analyzer The \c InteractionAnalyzer instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(analyzer: InteractionAnalyzer) -> InteractionAnalyzer: pass
 

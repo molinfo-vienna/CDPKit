@@ -87,7 +87,7 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FeatureGeometryMatchFunctor instance \a func.
     # \param func The \c FeatureGeometryMatchFunctor instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: FeatureGeometryMatchFunctor) -> FeatureGeometryMatchFunctor: pass
 

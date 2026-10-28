@@ -54,7 +54,7 @@ class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AtomConformer3DCoordinatesFunctor instance \a func.
     # \param func The \c AtomConformer3DCoordinatesFunctor instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: AtomConformer3DCoordinatesFunctor) -> AtomConformer3DCoordinatesFunctor: pass
 

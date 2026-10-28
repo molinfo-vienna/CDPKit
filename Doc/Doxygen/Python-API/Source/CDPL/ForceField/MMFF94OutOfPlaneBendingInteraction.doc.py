@@ -109,7 +109,7 @@ class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94OutOfPlaneBendingInteraction instance \a iactn.
     # \param iactn The \c MMFF94OutOfPlaneBendingInteraction instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(iactn: MMFF94OutOfPlaneBendingInteraction) -> MMFF94OutOfPlaneBendingInteraction: pass
 

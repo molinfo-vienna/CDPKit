@@ -52,7 +52,7 @@ class ManhattanSimilarity(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ManhattanSimilarity instance \a func.
     # \param func The \c ManhattanSimilarity instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: ManhattanSimilarity) -> ManhattanSimilarity: pass
 

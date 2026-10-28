@@ -56,7 +56,7 @@ class BitSetBulkSimilarityCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c BitSetBulkSimilarityCalculator instance \a calc.
     # \param calc The \c BitSetBulkSimilarityCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: BitSetBulkSimilarityCalculator) -> BitSetBulkSimilarityCalculator: pass
 

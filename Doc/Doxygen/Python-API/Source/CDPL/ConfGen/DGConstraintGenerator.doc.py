@@ -92,7 +92,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DGConstraintGenerator instance \a gen.
     # \param gen The \c DGConstraintGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: DGConstraintGenerator) -> DGConstraintGenerator: pass
 

@@ -40,6 +40,6 @@ class ClipPathPrimitive2D(Path2D, GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ClipPathPrimitive2D instance \a prim.
     # \param prim The \c ClipPathPrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: ClipPathPrimitive2D) -> ClipPathPrimitive2D: pass

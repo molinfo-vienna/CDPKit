@@ -60,7 +60,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c FragmentationRule instance \a rule.
         # \param rule The \c FragmentationRule instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(rule: FragmentationRule) -> FragmentationRule: pass
 
@@ -134,7 +134,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c ExcludePattern instance \a excl_ptn.
         # \param excl_ptn The \c ExcludePattern instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(excl_ptn: ExcludePattern) -> ExcludePattern: pass
 
@@ -226,7 +226,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c FragmentLink instance \a link.
         # \param link The \c FragmentLink instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(link: FragmentLink) -> FragmentLink: pass
 

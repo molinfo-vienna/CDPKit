@@ -68,7 +68,7 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c PharmacophoreRDFDescriptorCalculator instance \a calc.
     # \param calc The \c PharmacophoreRDFDescriptorCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: PharmacophoreRDFDescriptorCalculator) -> PharmacophoreRDFDescriptorCalculator: pass
 

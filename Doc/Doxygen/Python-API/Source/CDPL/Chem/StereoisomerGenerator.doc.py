@@ -85,7 +85,7 @@ class StereoisomerGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c StereoisomerGenerator instance \a gen.
     # \param gen The \c StereoisomerGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: StereoisomerGenerator) -> StereoisomerGenerator: pass
 

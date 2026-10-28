@@ -94,7 +94,7 @@ class TorsionRuleMatch(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TorsionRuleMatch instance \a match.
     # \param match The \c TorsionRuleMatch instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(match: TorsionRuleMatch) -> TorsionRuleMatch: pass
 

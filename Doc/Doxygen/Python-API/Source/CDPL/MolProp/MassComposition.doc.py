@@ -58,7 +58,7 @@ class MassComposition(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MassComposition instance \a map.
     # \param map The \c MassComposition instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(map: MassComposition) -> MassComposition: pass
 

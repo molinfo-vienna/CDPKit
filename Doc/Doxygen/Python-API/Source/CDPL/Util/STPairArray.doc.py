@@ -97,7 +97,7 @@ class STPairArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c STPairArray instance \a array.
     # \param array The \c STPairArray instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: STPairArray) -> STPairArray: pass
 

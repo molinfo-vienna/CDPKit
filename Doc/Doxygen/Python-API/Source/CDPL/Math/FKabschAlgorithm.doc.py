@@ -56,14 +56,14 @@ class FKabschAlgorithm(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FKabschAlgorithm instance \a algo.
     # \param algo The \c FKabschAlgorithm instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(algo: FKabschAlgorithm) -> FKabschAlgorithm: pass
 
     ##
     # \brief Returns the rigid-body transformation produced by the most recent successful align() call.
     # 
-    # \return The \f$ (D+1) \times (D+1) \f$ transformation matrix (homogeneous form).
+    # \return The <em>(D+1)&times;(D+1)</em> transformation matrix (homogeneous form).
     # 
     def getTransform() -> FMatrix: pass
 
@@ -77,9 +77,9 @@ class FKabschAlgorithm(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if convergence in the internal SV-decomposition has been reached in <em>max_svd_iter</em> iterations, and <tt>False</tt> otherwise. 
     # 
-    # \pre <tt>points().getSize1() == ref_points().getSize1()</tt> 
+    # \pre <tt>points.getSize1() == ref_points.getSize1()</tt> 
     # 
-    # \pre <tt>points().getSize2() == ref_points().getSize2()</tt> 
+    # \pre <tt>points.getSize2() == ref_points.getSize2()</tt> 
     # 
     # \throw Base.SizeError if preconditions got violated.
     # 
@@ -95,9 +95,9 @@ class FKabschAlgorithm(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if convergence in the internal SV-decomposition has been reached in <em>max_svd_iter</em> iterations, and <tt>False</tt> otherwise. 
     # 
-    # \pre <tt>points().getSize1() == ref_points().getSize1()</tt> 
+    # \pre <tt>points.getSize1() == ref_points.getSize1()</tt> 
     # 
-    # \pre <tt>points().getSize2() == ref_points().getSize2()</tt> 
+    # \pre <tt>points.getSize2() == ref_points.getSize2()</tt> 
     # 
     # \throw Base.SizeError if preconditions got violated.
     # 
@@ -114,11 +114,11 @@ class FKabschAlgorithm(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if convergence in the internal SV-decomposition has been reached in <em>max_svd_iter</em> iterations, and <tt>False</tt> otherwise. 
     # 
-    # \pre <tt>points().getSize1() == ref_points().getSize1()</tt> 
+    # \pre <tt>points.getSize1() == ref_points.getSize1()</tt> 
     # 
-    # \pre <tt>points().getSize2() == ref_points().getSize2()</tt> 
+    # \pre <tt>points.getSize2() == ref_points.getSize2()</tt> 
     # 
-    # \pre <tt>weights().getSize() == points().getSize2()</tt> 
+    # \pre <tt>weights().getSize() == points.getSize2()</tt> 
     # 
     # \pre <tt>weights()(i) >= 0 && sum(weights) > 0</tt> 
     # 
@@ -137,11 +137,11 @@ class FKabschAlgorithm(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if convergence in the internal SV-decomposition has been reached in <em>max_svd_iter</em> iterations, and <tt>False</tt> otherwise. 
     # 
-    # \pre <tt>points().getSize1() == ref_points().getSize1()</tt> 
+    # \pre <tt>points.getSize1() == ref_points.getSize1()</tt> 
     # 
-    # \pre <tt>points().getSize2() == ref_points().getSize2()</tt> 
+    # \pre <tt>points.getSize2() == ref_points.getSize2()</tt> 
     # 
-    # \pre <tt>weights().getSize() == points().getSize2()</tt> 
+    # \pre <tt>weights().getSize() == points.getSize2()</tt> 
     # 
     # \pre <tt>weights()(i) >= 0 && sum(weights) > 0</tt> 
     # 

@@ -50,7 +50,7 @@ class TanimotoComboScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TanimotoComboScore instance \a score.
     # \param score The \c TanimotoComboScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(score: TanimotoComboScore) -> TanimotoComboScore: pass
 

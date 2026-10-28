@@ -53,7 +53,7 @@ class TverskyComboScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TverskyComboScore instance \a score.
     # \param score The \c TverskyComboScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(score: TverskyComboScore) -> TverskyComboScore: pass
 

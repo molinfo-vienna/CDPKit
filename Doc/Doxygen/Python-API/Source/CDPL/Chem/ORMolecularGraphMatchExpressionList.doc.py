@@ -40,6 +40,6 @@ class ORMolecularGraphMatchExpressionList(MolecularGraphMatchExpressionList):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ORMolecularGraphMatchExpressionList instance \a expr.
     # \param expr The \c ORMolecularGraphMatchExpressionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expr: ORMolecularGraphMatchExpressionList) -> ORMolecularGraphMatchExpressionList: pass

@@ -70,7 +70,7 @@ class ResidueDictionary(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(entry: Entry) -> Entry: pass
 
@@ -240,7 +240,7 @@ class ResidueDictionary(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ResidueDictionary instance \a dict.
     # \param dict The \c ResidueDictionary instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(dict: ResidueDictionary) -> ResidueDictionary: pass
 

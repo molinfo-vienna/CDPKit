@@ -66,7 +66,7 @@ class XLogPCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c XLogPCalculator instance \a calc.
     # \param calc The \c XLogPCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: XLogPCalculator) -> XLogPCalculator: pass
 

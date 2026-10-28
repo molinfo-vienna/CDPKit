@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Implementation of the <em>Broyden-Fletcher-Goldfarb-Shanno (BFGS)</em> algorithm for
+         * \brief Implementation of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) algorithm for
          *        solving unconstrained nonlinear optimization problems.
          *
          * The base implementation has been taken from the <em>GNU Scientific Library</em>.
@@ -80,7 +80,9 @@ namespace CDPL
             typedef typename std::function<FVT(const VA&)>      ObjectiveFunction;
 
             /**
-             * \brief Status bitmask reported by minimize() and getStatus(). Multiple flags may be combined.
+             * \brief %Status bitmask reported by minimize() and getStatus().
+             *
+             * Multiple flags may be combined by a logocal-OR operation.
              */
             enum Status
             {
@@ -106,7 +108,7 @@ namespace CDPL
                 GNORM_REACHED = 4,
 
                 /**
-                 * \brief The configured function-value delta between successive iterations has been reached.
+                 * \brief The configured function value delta between successive iterations has been reached.
                  */
                 DELTAF_REACHED = 8
             };
@@ -129,8 +131,8 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns the magnitude of the function-value decrease produced by the most recent iterate() call.
-             * \return The function-value delta (positive when the function decreased).
+             * \brief Returns the magnitude of the function value decrease produced by the most recent iterate() call.
+             * \return The function value delta (positive when the function decreased).
              */
             ValueType getFunctionDelta() const
             {
@@ -170,7 +172,7 @@ namespace CDPL
              * \param g The gradient vector (modified in place).
              * \param max_iter The maximum number of iterations (\e 0 means unlimited).
              * \param g_norm The gradient-norm threshold below which the minimization is stopped (negative values disable this stop condition).
-             * \param delta_f The function-value-delta threshold below which the minimization is stopped (negative values disable this stop condition).
+             * \param delta_f The function value delta threshold below which the minimization is stopped (negative values disable this stop condition).
              * \param do_setup If \c true, setup() is invoked at the start to initialize the minimizer.
              * \return The terminal Status bitmask of the minimization.
              */

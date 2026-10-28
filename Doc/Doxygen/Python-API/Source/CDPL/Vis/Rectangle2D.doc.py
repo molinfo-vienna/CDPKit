@@ -72,7 +72,7 @@ class Rectangle2D(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Rectangle2D instance \a rect.
     # \param rect The \c Rectangle2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(rect: Rectangle2D) -> Rectangle2D: pass
 

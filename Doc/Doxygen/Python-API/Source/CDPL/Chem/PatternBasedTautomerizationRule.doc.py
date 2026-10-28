@@ -45,7 +45,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         ##
         # \brief Replaces the current state with a copy of the state of the \c BondOrderChange instance \a bond_chg.
         # \param bond_chg The \c BondOrderChange instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(bond_chg: BondOrderChange) -> BondOrderChange: pass
 

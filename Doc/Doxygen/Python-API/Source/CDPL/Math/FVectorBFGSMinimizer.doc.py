@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implementation of the <em>Broyden-Fletcher-Goldfarb-Shanno (BFGS)</em> algorithm for solving unconstrained nonlinear optimization problems.
+# \brief Implementation of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) algorithm for solving unconstrained nonlinear optimization problems.
 # 
 # The base implementation has been taken from the <em>GNU Scientific Library</em>.
 # 
@@ -29,7 +29,9 @@
 class FVectorBFGSMinimizer(Boost.Python.instance):
 
     ##
-    # \brief Status bitmask reported by minimize() and getStatus(). Multiple flags may be combined.
+    # \brief %Status bitmask reported by minimize() and getStatus().
+    # 
+    # Multiple flags may be combined by a logocal-OR operation.
     # 
     class Status(Boost.Python.enum):
 
@@ -54,7 +56,7 @@ class FVectorBFGSMinimizer(Boost.Python.instance):
         GNORM_REACHED = 4
 
         ##
-        # \brief The configured function-value delta between successive iterations has been reached.
+        # \brief The configured function value delta between successive iterations has been reached.
         # 
         DELTAF_REACHED = 8
 
@@ -86,9 +88,9 @@ class FVectorBFGSMinimizer(Boost.Python.instance):
     def getGradientNorm() -> float: pass
 
     ##
-    # \brief Returns the magnitude of the function-value decrease produced by the most recent iterate() call.
+    # \brief Returns the magnitude of the function value decrease produced by the most recent iterate() call.
     # 
-    # \return The function-value delta (positive when the function decreased).
+    # \return The function value delta (positive when the function decreased).
     # 
     def getFunctionDelta() -> float: pass
 
@@ -120,7 +122,7 @@ class FVectorBFGSMinimizer(Boost.Python.instance):
     # \param g The gradient vector (modified in place).
     # \param max_iter The maximum number of iterations (<em>0</em> means unlimited).
     # \param g_norm The gradient-norm threshold below which the minimization is stopped (negative values disable this stop condition).
-    # \param delta_f The function-value-delta threshold below which the minimization is stopped (negative values disable this stop condition).
+    # \param delta_f The function value delta threshold below which the minimization is stopped (negative values disable this stop condition).
     # \param do_setup If <tt>True</tt>, setup() is invoked at the start to initialize the minimizer.
     # 
     # \return The terminal Status bitmask of the minimization.

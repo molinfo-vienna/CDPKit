@@ -81,7 +81,7 @@ class NPoint2DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
     ##
     # \brief Replaces the current state with a copy of the state of the \c NPoint2DPharmacophoreFingerprintGenerator instance \a gen.
     # \param gen The \c NPoint2DPharmacophoreFingerprintGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: NPoint2DPharmacophoreFingerprintGenerator) -> NPoint2DPharmacophoreFingerprintGenerator: pass
 

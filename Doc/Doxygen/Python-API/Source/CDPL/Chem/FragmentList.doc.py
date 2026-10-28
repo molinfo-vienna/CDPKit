@@ -97,7 +97,7 @@ class FragmentList(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FragmentList instance \a array.
     # \param array The \c FragmentList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: FragmentList) -> FragmentList: pass
 

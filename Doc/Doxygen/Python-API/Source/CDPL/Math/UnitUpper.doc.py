@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Tag selecting the unit-upper-triangular view (zero below the diagonal, one on the diagonal) for Math.TriangularAdapter.
+# \brief Tag selecting the <em>unit-upper</em> triangular view (zero below the diagonal, one on the diagonal) for triangular matrix adapters.
 # 
 class UnitUpper(Boost.Python.instance):
 

@@ -143,7 +143,7 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94HeavyToHydrogenAtomTypeMap instance \a map.
     # \param map The \c MMFF94HeavyToHydrogenAtomTypeMap instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(map: MMFF94HeavyToHydrogenAtomTypeMap) -> MMFF94HeavyToHydrogenAtomTypeMap: pass
 

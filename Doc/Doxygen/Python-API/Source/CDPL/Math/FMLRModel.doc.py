@@ -62,7 +62,7 @@ class FMLRModel(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FMLRModel instance \a model.
     # \param model The \c FMLRModel instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(model: FMLRModel) -> FMLRModel: pass
 

@@ -78,11 +78,11 @@ class ULScalarVector(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief Returns the element at index <em>i</em>.
+    # \brief Returns the common element value.
     # 
     # \param i The zero-based element index.
     # 
-    # \return The value of the element. 
+    # \return The common element value. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

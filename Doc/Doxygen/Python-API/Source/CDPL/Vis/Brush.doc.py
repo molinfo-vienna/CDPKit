@@ -147,7 +147,7 @@ class Brush(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Brush instance \a brush.
     # \param brush The \c Brush instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(brush: Brush) -> Brush: pass
 

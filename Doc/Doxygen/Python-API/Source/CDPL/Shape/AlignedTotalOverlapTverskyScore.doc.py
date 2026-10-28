@@ -52,7 +52,7 @@ class AlignedTotalOverlapTverskyScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AlignedTotalOverlapTverskyScore instance \a score.
     # \param score The \c AlignedTotalOverlapTverskyScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(score: AlignedTotalOverlapTverskyScore) -> AlignedTotalOverlapTverskyScore: pass
 

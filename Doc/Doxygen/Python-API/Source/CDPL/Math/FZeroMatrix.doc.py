@@ -86,12 +86,12 @@ class FZeroMatrix(Boost.Python.instance):
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the zero element.
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -133,12 +133,12 @@ class FZeroMatrix(Boost.Python.instance):
     def __call__(i: int, j: int) -> float: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the zero element.
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

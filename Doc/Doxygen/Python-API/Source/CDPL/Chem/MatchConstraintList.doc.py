@@ -91,7 +91,7 @@ class MatchConstraintList(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MatchConstraintList instance \a array.
     # \param array The \c MatchConstraintList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: MatchConstraintList) -> MatchConstraintList: pass
 

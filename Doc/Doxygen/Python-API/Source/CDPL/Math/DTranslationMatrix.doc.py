@@ -25,20 +25,29 @@
 class DTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c DTranslationMatrix instance \a m.
-    # \param m The \c DTranslationMatrix instance to copy.
+    # \brief Constructs a copy of the translation matrix <em>m</em>.
+    # 
+    # \param m The translation matrix to copy.
     # 
     def __init__(m: DTranslationMatrix) -> None: pass
 
     ##
-    # \brief Contructs the \c DTranslationMatrix instance.
-    # \param n 
-    # \param tx 
-    # \param ty 
-    # \param tz 
+    # \brief Constructs an <em>N&times;N</em> translation matrix with the supplied per-axis translation components.
+    # 
+    # \param n The matrix dimension <em>N</em>.
+    # \param tx The x-axis translation.
+    # \param ty The y-axis translation.
+    # \param tz The z-axis translation.
     # 
     def __init__(n: int, tx: float = 0.0, ty: float = 0.0, tz: float = 0.0) -> None: pass
 
+    ##
+    # \brief Sets the per-axis translation components.
+    # 
+    # \param tx The x-axis translation.
+    # \param ty The y-axis translation.
+    # \param tz The z-axis translation.
+    # 
     def set(tx: float = 0.0, ty: float = 0.0, tz: float = 0.0) -> None: pass
 
     ##
@@ -53,19 +62,34 @@ class DTranslationMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the dimension <em>N</em> (the row count).
+    # 
+    # \return <em>N</em>.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the dimension <em>N</em> (the column count).
+    # 
+    # \return <em>N</em>.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the matrix is empty (size zero).
+    # 
+    # \return <tt>True</tt> if <em>N</em> is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the translation matrix element at (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return <em>1</em> on the diagonal, the corresponding translation component in the last column (rows 0-2) and <em>0</em> elsewhere. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -79,23 +103,40 @@ class DTranslationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c DTranslationMatrix instance \a m.
-    # \param m The \c DTranslationMatrix instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the dimension and the translation components from <em>m</em>.
+    # 
+    # \param m The source translation matrix.
+    # 
+    # \return \a self.
     # 
     def assign(m: DTranslationMatrix) -> DTranslationMatrix: pass
 
+    ##
+    # \brief Swaps the dimension and the translation components with <em>m</em>.
+    # 
+    # \param m The translation matrix to swap with.
+    # 
     def swap(m: DTranslationMatrix) -> None: pass
 
-    def __call__(i: int, j: int) -> float: pass
-
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the translation matrix element at (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return <em>1</em> on the diagonal, the corresponding translation component in the last column (rows 0-2) and <em>0</em> elsewhere. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
+    def __call__(i: int, j: int) -> float: pass
+
+    ##
+    # \brief Returns the translation matrix element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return <em>1</em> on the diagonal, the corresponding translation component in the last column (rows 0-2) and <em>0</em> elsewhere. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

@@ -38,7 +38,7 @@ class TextLabelPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TextLabelPrimitive2D instance \a prim.
     # \param prim The \c TextLabelPrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: TextLabelPrimitive2D) -> TextLabelPrimitive2D: pass
 

@@ -84,7 +84,7 @@ class MMFF94BondTyper(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94BondTyper instance \a typer.
     # \param typer The \c MMFF94BondTyper instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(typer: MMFF94BondTyper) -> MMFF94BondTyper: pass
 

@@ -62,7 +62,7 @@ class TorsionRule(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c AngleEntry instance \a entry.
         # \param entry The \c AngleEntry instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(entry: AngleEntry) -> AngleEntry: pass
 
@@ -130,7 +130,7 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TorsionRule instance \a rule.
     # \param rule The \c TorsionRule instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(rule: TorsionRule) -> TorsionRule: pass
 

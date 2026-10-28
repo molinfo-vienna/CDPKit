@@ -40,6 +40,6 @@ class BRICSFragmentGenerator(FragmentGenerator):
     ##
     # \brief Replaces the current state with a copy of the state of the \c BRICSFragmentGenerator instance \a gen.
     # \param gen The \c BRICSFragmentGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: BRICSFragmentGenerator) -> BRICSFragmentGenerator: pass

@@ -52,7 +52,7 @@ class ReferenceShapeTverskyScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ReferenceShapeTverskyScore instance \a score.
     # \param score The \c ReferenceShapeTverskyScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(score: ReferenceShapeTverskyScore) -> ReferenceShapeTverskyScore: pass
 

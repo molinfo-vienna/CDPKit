@@ -56,7 +56,7 @@ class FVectorBulkSimilarityCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FVectorBulkSimilarityCalculator instance \a calc.
     # \param calc The \c FVectorBulkSimilarityCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: FVectorBulkSimilarityCalculator) -> FVectorBulkSimilarityCalculator: pass
 

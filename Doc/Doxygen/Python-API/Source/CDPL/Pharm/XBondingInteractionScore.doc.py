@@ -113,7 +113,7 @@ class XBondingInteractionScore(FeatureInteractionScore):
     ##
     # \brief Replaces the current state with a copy of the state of the \c XBondingInteractionScore instance \a constr.
     # \param constr The \c XBondingInteractionScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(constr: XBondingInteractionScore) -> XBondingInteractionScore: pass
 

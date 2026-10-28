@@ -56,7 +56,7 @@ class LVectorBulkSimilarityCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c LVectorBulkSimilarityCalculator instance \a calc.
     # \param calc The \c LVectorBulkSimilarityCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: LVectorBulkSimilarityCalculator) -> LVectorBulkSimilarityCalculator: pass
 

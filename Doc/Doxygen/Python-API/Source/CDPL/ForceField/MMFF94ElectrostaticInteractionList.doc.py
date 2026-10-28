@@ -64,7 +64,7 @@ class MMFF94ElectrostaticInteractionList(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94ElectrostaticInteractionList instance \a array.
     # \param array The \c MMFF94ElectrostaticInteractionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: MMFF94ElectrostaticInteractionList) -> MMFF94ElectrostaticInteractionList: pass
 

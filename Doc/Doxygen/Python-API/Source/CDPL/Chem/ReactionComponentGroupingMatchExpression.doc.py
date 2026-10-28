@@ -42,6 +42,6 @@ class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ReactionComponentGroupingMatchExpression instance \a expr.
     # \param expr The \c ReactionComponentGroupingMatchExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expr: ReactionComponentGroupingMatchExpression) -> ReactionComponentGroupingMatchExpression: pass

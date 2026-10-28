@@ -85,7 +85,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ConformerGeneratorSettings instance \a settings.
     # \param settings The \c ConformerGeneratorSettings instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(settings: ConformerGeneratorSettings) -> ConformerGeneratorSettings: pass
 

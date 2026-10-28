@@ -84,7 +84,7 @@ class ULUnitVector(Boost.Python.instance):
     # 
     # \param i The zero-based element index.
     # 
-    # \return The value of the element. 
+    # \return A reference to either <em>1</em> (if <em>i</em> equals the unit index) or <em>0</em>. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

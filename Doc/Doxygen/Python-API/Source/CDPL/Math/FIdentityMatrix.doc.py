@@ -86,12 +86,12 @@ class FIdentityMatrix(Boost.Python.instance):
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns a reference to either <em>1</em> (on the diagonal) or <em>0</em> (off the diagonal).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return A reference to <em>1</em> (on the diagonal) or <em>0</em> (off the diagonal). 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -133,12 +133,12 @@ class FIdentityMatrix(Boost.Python.instance):
     def __call__(i: int, j: int) -> float: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns a reference to either <em>1</em> (on the diagonal) or <em>0</em> (off the diagonal).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return A reference to <em>1</em> (on the diagonal) or <em>0</em> (off the diagonal). 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

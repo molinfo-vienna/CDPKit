@@ -428,9 +428,9 @@ namespace CDPL
             /**
              * \brief Constructs an <em>N&times;N</em> scaling matrix with the supplied per-axis scale factors.
              * \param n The matrix dimension \e N.
-             * \param sx The x-axis scale factor (default: 1).
-             * \param sy The y-axis scale factor (default: 1).
-             * \param sz The z-axis scale factor (default: 1).
+             * \param sx The x-axis scale factor.
+             * \param sy The y-axis scale factor.
+             * \param sz The z-axis scale factor.
              */
             explicit ScalingMatrix(SizeType n, const ValueType& sx = ValueType(1),
                                    const ValueType& sy = ValueType(1), const ValueType& sz = ValueType(1)):
@@ -451,9 +451,9 @@ namespace CDPL
 
             /**
              * \brief Sets the per-axis scale factors.
-             * \param sx The x-axis scale factor (default: 1).
-             * \param sy The y-axis scale factor (default: 1).
-             * \param sz The z-axis scale factor (default: 1).
+             * \param sx The x-axis scale factor.
+             * \param sy The y-axis scale factor.
+             * \param sz The z-axis scale factor.
              */
             void set(const ValueType& sx = ValueType(1), const ValueType& sy = ValueType(1),
                      const ValueType& sz = ValueType(1))
@@ -645,9 +645,9 @@ namespace CDPL
             /**
              * \brief Constructs an <em>N&times;N</em> translation matrix with the supplied per-axis translation components.
              * \param n The matrix dimension \e N.
-             * \param tx The x-axis translation (default: 0).
-             * \param ty The y-axis translation (default: 0).
-             * \param tz The z-axis translation (default: 0).
+             * \param tx The x-axis translation.
+             * \param ty The y-axis translation.
+             * \param tz The z-axis translation.
              */
             explicit TranslationMatrix(SizeType n, const ValueType& tx = ValueType(),
                                        const ValueType& ty = ValueType(), const ValueType& tz = ValueType()):
@@ -668,9 +668,9 @@ namespace CDPL
 
             /**
              * \brief Sets the per-axis translation components.
-             * \param tx The x-axis translation (default: 0).
-             * \param ty The y-axis translation (default: 0).
-             * \param tz The z-axis translation (default: 0).
+             * \param tx The x-axis translation.
+             * \param ty The y-axis translation.
+             * \param tz The z-axis translation.
              */
             void set(const ValueType& tx = ValueType(), const ValueType& ty = ValueType(),
                      const ValueType& tz = ValueType())

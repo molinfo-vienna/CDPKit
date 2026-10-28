@@ -43,13 +43,13 @@ namespace CDPL
         class Range;
 
         /**
-         * \brief Tag selecting the lower-triangular view (entries strictly above the diagonal read as zero) for Math::TriangularAdapter.
+         * \brief Tag selecting the lower triangular view (entries strictly above the diagonal read as zero) for Math::TriangularAdapter.
          */
         struct Lower
         {
 
             /**
-             * \brief Returns element (\a i, \a j) of \a m under the lower-triangular policy (zero above the diagonal).
+             * \brief Returns element (\a i, \a j) of \a m under the lower triangular policy (zero above the diagonal).
              * \tparam M The Math::TriangularAdapter instantiation.
              * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
              * \param i The zero-based row index.
@@ -67,13 +67,13 @@ namespace CDPL
         };
 
         /**
-         * \brief Tag selecting the unit-lower-triangular view (zero above the diagonal, one on the diagonal) for Math::TriangularAdapter.
+         * \brief Tag selecting the unit-lower triangular view (zero above the diagonal, one on the diagonal) for Math::TriangularAdapter.
          */
         struct UnitLower
         {
 
             /**
-             * \brief Returns element (\a i, \a j) of \a m under the unit-lower-triangular policy (one on the diagonal, zero above).
+             * \brief Returns element (\a i, \a j) of \a m under the unit-lower triangular policy (one on the diagonal, zero above).
              * \tparam M The Math::TriangularAdapter instantiation.
              * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
              * \param i The zero-based row index.
@@ -94,13 +94,13 @@ namespace CDPL
         };
 
         /**
-         * \brief Tag selecting the upper-triangular view (entries strictly below the diagonal read as zero) for Math::TriangularAdapter.
+         * \brief Tag selecting the upper triangular view (entries strictly below the diagonal read as zero) for Math::TriangularAdapter.
          */
         struct Upper
         {
 
             /**
-             * \brief Returns element (\a i, \a j) of \a m under the upper-triangular policy (zero below the diagonal).
+             * \brief Returns element (\a i, \a j) of \a m under the upper triangular policy (zero below the diagonal).
              * \tparam M The Math::TriangularAdapter instantiation.
              * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
              * \param i The zero-based row index.
@@ -118,13 +118,13 @@ namespace CDPL
         };
 
         /**
-         * \brief Tag selecting the unit-upper-triangular view (zero below the diagonal, one on the diagonal) for Math::TriangularAdapter.
+         * \brief Tag selecting the unit-upper triangular view (zero below the diagonal, one on the diagonal) for Math::TriangularAdapter.
          */
         struct UnitUpper
         {
 
             /**
-             * \brief Returns element (\a i, \a j) of \a m under the unit-upper-triangular policy (one on the diagonal, zero below).
+             * \brief Returns element (\a i, \a j) of \a m under the unit-upper triangular policy (one on the diagonal, zero below).
              * \tparam M The Math::TriangularAdapter instantiation.
              * \param m The adapter providing access to the underlying matrix and the zero/one fill values.
              * \param i The zero-based row index.

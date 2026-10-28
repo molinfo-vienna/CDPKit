@@ -45,7 +45,7 @@ class ExtendedSSSR(FragmentList):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ExtendedSSSR instance \a esssr.
     # \param esssr The \c ExtendedSSSR instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(esssr: ExtendedSSSR) -> ExtendedSSSR: pass
 

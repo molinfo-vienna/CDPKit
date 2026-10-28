@@ -91,7 +91,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c VolumeConstraint instance \a constr.
         # \param constr The \c VolumeConstraint instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(constr: VolumeConstraint) -> VolumeConstraint: pass
 
@@ -215,7 +215,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c DistanceConstraint instance \a constr.
         # \param constr The \c DistanceConstraint instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(constr: DistanceConstraint) -> DistanceConstraint: pass
 
@@ -308,7 +308,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DG3DCoordinatesGenerator instance \a gen.
     # \param gen The \c DG3DCoordinatesGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: DG3DCoordinatesGenerator) -> DG3DCoordinatesGenerator: pass
 

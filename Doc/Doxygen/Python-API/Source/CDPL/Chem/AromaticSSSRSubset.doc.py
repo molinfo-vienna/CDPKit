@@ -45,7 +45,7 @@ class AromaticSSSRSubset(FragmentList):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AromaticSSSRSubset instance \a arom_sssr.
     # \param arom_sssr The \c AromaticSSSRSubset instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(arom_sssr: AromaticSSSRSubset) -> AromaticSSSRSubset: pass
 

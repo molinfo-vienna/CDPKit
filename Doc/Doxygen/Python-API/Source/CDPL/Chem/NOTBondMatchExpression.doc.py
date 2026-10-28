@@ -43,6 +43,6 @@ class NOTBondMatchExpression(BondMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c NOTBondMatchExpression instance \a expression.
     # \param expression The \c NOTBondMatchExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expression: NOTBondMatchExpression) -> NOTBondMatchExpression: pass

@@ -52,7 +52,7 @@ class AlignmentResult(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AlignmentResult instance \a res.
     # \param res The \c AlignmentResult instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(res: AlignmentResult) -> AlignmentResult: pass
 

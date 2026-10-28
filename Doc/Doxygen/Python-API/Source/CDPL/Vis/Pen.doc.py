@@ -147,7 +147,7 @@ class Pen(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Pen instance \a pen.
     # \param pen The \c Pen instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(pen: Pen) -> Pen: pass
 

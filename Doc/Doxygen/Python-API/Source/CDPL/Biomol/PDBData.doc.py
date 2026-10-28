@@ -296,7 +296,7 @@ class PDBData(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c PDBData instance \a data.
     # \param data The \c PDBData instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(data: PDBData) -> PDBData: pass
 

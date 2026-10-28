@@ -47,7 +47,7 @@ class EllipsePrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c EllipsePrimitive2D instance \a prim.
     # \param prim The \c EllipsePrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: EllipsePrimitive2D) -> EllipsePrimitive2D: pass
 

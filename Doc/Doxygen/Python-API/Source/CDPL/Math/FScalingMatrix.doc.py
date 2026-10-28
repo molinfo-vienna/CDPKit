@@ -25,20 +25,29 @@
 class FScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c FScalingMatrix instance \a m.
-    # \param m The \c FScalingMatrix instance to copy.
+    # \brief Constructs a copy of the scaling matrix <em>m</em>.
+    # 
+    # \param m The scaling matrix to copy.
     # 
     def __init__(m: FScalingMatrix) -> None: pass
 
     ##
-    # \brief Contructs the \c FScalingMatrix instance.
-    # \param n 
-    # \param sx 
-    # \param sy 
-    # \param sz 
+    # \brief Constructs an <em>N&times;N</em> scaling matrix with the supplied per-axis scale factors.
+    # 
+    # \param n The matrix dimension <em>N</em>.
+    # \param sx The x-axis scale factor.
+    # \param sy The y-axis scale factor.
+    # \param sz The z-axis scale factor.
     # 
     def __init__(n: int, sx: float = 1.0, sy: float = 1.0, sz: float = 1.0) -> None: pass
 
+    ##
+    # \brief Sets the per-axis scale factors.
+    # 
+    # \param sx The x-axis scale factor.
+    # \param sy The y-axis scale factor.
+    # \param sz The z-axis scale factor.
+    # 
     def set(sx: float = 1.0, sy: float = 1.0, sz: float = 1.0) -> None: pass
 
     ##
@@ -53,19 +62,34 @@ class FScalingMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the dimension <em>N</em> (the row count).
+    # 
+    # \return <em>N</em>.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the dimension <em>N</em> (the column count).
+    # 
+    # \return <em>N</em>.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the matrix is empty (size zero).
+    # 
+    # \return <tt>True</tt> if <em>N</em> is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the scaling matrix element at (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The corresponding axis scaling factor on a diagonal position and <em>0</em> off the diagonal. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -79,23 +103,40 @@ class FScalingMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c FScalingMatrix instance \a m.
-    # \param m The \c FScalingMatrix instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the dimension and the per-axis scale factors from <em>m</em>.
+    # 
+    # \param m The source scaling matrix.
+    # 
+    # \return \a self.
     # 
     def assign(m: FScalingMatrix) -> FScalingMatrix: pass
 
+    ##
+    # \brief Swaps the dimension and the per-axis scale factors with <em>m</em>.
+    # 
+    # \param m The scaling matrix to swap with.
+    # 
     def swap(m: FScalingMatrix) -> None: pass
 
-    def __call__(i: int, j: int) -> float: pass
-
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the scaling matrix element at (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The corresponding axis scaling factor on a diagonal position and <em>0</em> off the diagonal. 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
+    def __call__(i: int, j: int) -> float: pass
+
+    ##
+    # \brief Returns the scaling matrix element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The corresponding axis scaling factor on a diagonal position and <em>0</em> off the diagonal. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

@@ -43,6 +43,6 @@ class NOTReactionMatchExpression(ReactionMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c NOTReactionMatchExpression instance \a expression.
     # \param expression The \c NOTReactionMatchExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expression: NOTReactionMatchExpression) -> NOTReactionMatchExpression: pass

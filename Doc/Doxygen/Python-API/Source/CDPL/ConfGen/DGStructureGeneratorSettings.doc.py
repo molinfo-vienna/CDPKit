@@ -43,14 +43,14 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DGStructureGeneratorSettings instance \a settings.
     # \param settings The \c DGStructureGeneratorSettings instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(settings: DGStructureGeneratorSettings) -> DGStructureGeneratorSettings: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c DGConstraintGeneratorSettings instance \a settings.
     # \param settings The \c DGConstraintGeneratorSettings instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(settings: DGConstraintGeneratorSettings) -> DGStructureGeneratorSettings: pass
 

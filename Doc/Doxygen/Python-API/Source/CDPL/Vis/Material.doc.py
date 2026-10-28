@@ -72,7 +72,7 @@ class Material(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Material instance \a material.
     # \param material The \c Material instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(material: Material) -> Material: pass
 

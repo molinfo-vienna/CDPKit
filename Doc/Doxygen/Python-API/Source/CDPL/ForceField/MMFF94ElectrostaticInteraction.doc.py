@@ -97,7 +97,7 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94ElectrostaticInteraction instance \a iactn.
     # \param iactn The \c MMFF94ElectrostaticInteraction instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(iactn: MMFF94ElectrostaticInteraction) -> MMFF94ElectrostaticInteraction: pass
 

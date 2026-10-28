@@ -68,7 +68,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(entry: Entry) -> Entry: pass
 
@@ -208,7 +208,7 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94BondStretchingParameterTable instance \a table.
     # \param table The \c MMFF94BondStretchingParameterTable instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(table: MMFF94BondStretchingParameterTable) -> MMFF94BondStretchingParameterTable: pass
 

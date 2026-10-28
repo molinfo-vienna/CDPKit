@@ -43,6 +43,6 @@ class NOTMolecularGraphMatchExpression(MolecularGraphMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c NOTMolecularGraphMatchExpression instance \a expression.
     # \param expression The \c NOTMolecularGraphMatchExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expression: NOTMolecularGraphMatchExpression) -> NOTMolecularGraphMatchExpression: pass

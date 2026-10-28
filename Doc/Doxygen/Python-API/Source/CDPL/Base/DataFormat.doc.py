@@ -246,7 +246,7 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DataFormat instance \a fmt.
     # \param fmt The \c DataFormat instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(fmt: DataFormat) -> DataFormat: pass
 

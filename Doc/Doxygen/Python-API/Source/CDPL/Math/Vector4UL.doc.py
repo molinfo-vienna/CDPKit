@@ -144,7 +144,7 @@ class Vector4UL(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: object) -> Vector4UL: pass
 

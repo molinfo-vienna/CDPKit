@@ -94,7 +94,7 @@ class SpatialAtomAlignment(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c SpatialAtomAlignment instance \a alignment.
     # \param alignment The \c SpatialAtomAlignment instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(alignment: SpatialAtomAlignment) -> SpatialAtomAlignment: pass
 

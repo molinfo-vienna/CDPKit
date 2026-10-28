@@ -25,21 +25,31 @@
 class FRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Contructs a copy of the \c FRotationMatrix instance \a m.
-    # \param m The \c FRotationMatrix instance to copy.
+    # \brief Constructs a copy of the rotation matrix <em>m</em>.
+    # 
+    # \param m The rotation matrix to copy.
     # 
     def __init__(m: FRotationMatrix) -> None: pass
 
     ##
-    # \brief Contructs the \c FRotationMatrix instance.
-    # \param n 
-    # \param w 
-    # \param ux 
-    # \param uy 
-    # \param uz 
+    # \brief Constructs an <em>N&times;N</em> rotation matrix from an axis-angle representation.
+    # 
+    # \param n The matrix dimension <em>N</em>.
+    # \param w The rotation angle (in radians).
+    # \param ux The x-component of the rotation axis (unit vector).
+    # \param uy The y-component of the rotation axis (unit vector).
+    # \param uz The z-component of the rotation axis (unit vector).
     # 
     def __init__(n: int, w: float, ux: float, uy: float, uz: float) -> None: pass
 
+    ##
+    # \brief Sets the rotation from an axis-angle representation.
+    # 
+    # \param w The rotation angle (in radians).
+    # \param ux The x-component of the rotation axis (unit vector).
+    # \param uy The y-component of the rotation axis (unit vector).
+    # \param uz The z-component of the rotation axis (unit vector).
+    # 
     def set(w: float, ux: float, uy: float, uz: float) -> None: pass
 
     ##
@@ -54,19 +64,34 @@ class FRotationMatrix(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the dimension <em>N</em> (the row count).
+    # 
+    # \return <em>N</em>.
+    # 
     def getSize1() -> int: pass
 
+    ##
+    # \brief Returns the dimension <em>N</em> (the column count).
+    # 
+    # \return <em>N</em>.
+    # 
     def getSize2() -> int: pass
 
+    ##
+    # \brief Tells whether the matrix is empty (size zero).
+    # 
+    # \return <tt>True</tt> if <em>N</em> is zero, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the rotation matrix element at (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The matrix element (computed from the stored unit quaternion). 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -80,23 +105,40 @@ class FRotationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c FRotationMatrix instance \a m.
-    # \param m The \c FRotationMatrix instance to copy.
-    # \return \a self
+    # \brief Copy-assigns the dimension and the underlying quaternion components from <em>m</em>.
+    # 
+    # \param m The source rotation matrix.
+    # 
+    # \return \a self.
     # 
     def assign(m: FRotationMatrix) -> FRotationMatrix: pass
 
+    ##
+    # \brief Swaps the dimension and the underlying quaternion components with <em>m</em>.
+    # 
+    # \param m The rotation matrix to swap with.
+    # 
     def swap(m: FRotationMatrix) -> None: pass
 
-    def __call__(i: int, j: int) -> float: pass
-
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the rotation matrix element at (<em>i</em>, <em>j</em>).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The matrix element (computed from the stored unit quaternion). 
+    # 
+    # \throw Base.IndexError if either index is out of range.
+    # 
+    def __call__(i: int, j: int) -> float: pass
+
+    ##
+    # \brief Returns the rotation matrix element at (<em>i</em>, <em>j</em>).
+    # 
+    # \param i The zero-based row index.
+    # \param j The zero-based column index.
+    # 
+    # \return The matrix element (computed from the stored unit quaternion). 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

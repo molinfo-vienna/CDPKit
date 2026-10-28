@@ -64,7 +64,7 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FeatureRDFCodeCalculator instance \a calc.
     # \param calc The \c FeatureRDFCodeCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
 

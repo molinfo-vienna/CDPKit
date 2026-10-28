@@ -66,7 +66,7 @@ class LogSCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c LogSCalculator instance \a calc.
     # \param calc The \c LogSCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: LogSCalculator) -> LogSCalculator: pass
 

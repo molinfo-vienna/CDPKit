@@ -55,7 +55,7 @@ class TorsionDriverSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TorsionDriverSettings instance \a settings.
     # \param settings The \c TorsionDriverSettings instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(settings: TorsionDriverSettings) -> TorsionDriverSettings: pass
 

@@ -52,7 +52,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c ResonanceStructureGenerator instance \a data.
         # \param data The \c ResonanceStructureGenerator instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(data: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 

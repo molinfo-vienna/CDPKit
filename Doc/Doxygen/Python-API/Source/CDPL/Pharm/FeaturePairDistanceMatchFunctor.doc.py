@@ -59,7 +59,7 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FeaturePairDistanceMatchFunctor instance \a func.
     # \param func The \c FeaturePairDistanceMatchFunctor instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: FeaturePairDistanceMatchFunctor) -> FeaturePairDistanceMatchFunctor: pass
 

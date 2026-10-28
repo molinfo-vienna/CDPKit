@@ -93,7 +93,7 @@ class CationPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief Replaces the current state with a copy of the state of the \c CationPiInteractionScore instance \a constr.
     # \param constr The \c CationPiInteractionScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(constr: CationPiInteractionScore) -> CationPiInteractionScore: pass
 

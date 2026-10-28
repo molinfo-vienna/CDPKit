@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Kabsch algorithm [\ref KABA] implementation that operates directly on vector array inputs.
+# 
 class Vector2DArrayAlignmentCalculator(Boost.Python.instance):
 
     ##
@@ -50,16 +50,53 @@ class Vector2DArrayAlignmentCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Vector2DArrayAlignmentCalculator instance \a algo.
     # \param algo The \c Vector2DArrayAlignmentCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(algo: Vector2DArrayAlignmentCalculator) -> Vector2DArrayAlignmentCalculator: pass
 
+    ##
+    # \brief Returns the rigid-body transformation produced by the most recent successful calculate() call.
+    # 
+    # \return The homogeneous transformation matrix.
+    # 
     def getTransform() -> DMatrix: pass
 
+    ##
+    # \brief Aligns <em>points</em> onto <em>ref_points</em> (with uniform weights) using the Kabsch algorithm.
+    # 
+    # \param points The vector array containing the points to align.
+    # \param ref_points The vector array containing the reference points.
+    # \param do_center If <tt>True</tt>, the point sets are centered before alignment.
+    # \param max_svd_iter The maximum number of iterations for the internal SVD step (0 means unlimited).
+    # 
+    # \return <tt>True</tt> if the SVD step converged, and <tt>False</tt> otherwise.
+    # 
     def calculate(points: Vector2DArray, ref_points: Vector2DArray, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
+    ##
+    # \brief Aligns <em>points</em> onto <em>ref_points</em> (with per-point weights) using the Kabsch algorithm.
+    # 
+    # \param points The vector array containing the points to align.
+    # \param ref_points The vector array containing the reference points.
+    # \param weights The per-point weights.
+    # \param do_center If <tt>True</tt>, the point sets are centered before alignment.
+    # \param max_svd_iter The maximum number of iterations for the internal SVD step (0 means unlimited).
+    # 
+    # \return <tt>True</tt> if the SVD step converged, and <tt>False</tt> otherwise.
+    # 
     def calculate(points: Vector2DArray, ref_points: Vector2DArray, weights: ConstFVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
+    ##
+    # \brief Aligns <em>points</em> onto <em>ref_points</em> (with per-point weights) using the Kabsch algorithm.
+    # 
+    # \param points The vector array containing the points to align.
+    # \param ref_points The vector array containing the reference points.
+    # \param weights The per-point weights.
+    # \param do_center If <tt>True</tt>, the point sets are centered before alignment.
+    # \param max_svd_iter The maximum number of iterations for the internal SVD step (0 means unlimited).
+    # 
+    # \return <tt>True</tt> if the SVD step converged, and <tt>False</tt> otherwise.
+    # 
     def calculate(points: Vector2DArray, ref_points: Vector2DArray, weights: ConstDVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
     objectID = property(getObjectID)

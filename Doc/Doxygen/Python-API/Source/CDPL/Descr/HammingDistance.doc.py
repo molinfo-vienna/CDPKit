@@ -52,7 +52,7 @@ class HammingDistance(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c HammingDistance instance \a func.
     # \param func The \c HammingDistance instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: HammingDistance) -> HammingDistance: pass
 

@@ -82,7 +82,7 @@ class ElasticPotential(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ElasticPotential instance \a pot.
     # \param pot The \c ElasticPotential instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(pot: ElasticPotential) -> ElasticPotential: pass
 

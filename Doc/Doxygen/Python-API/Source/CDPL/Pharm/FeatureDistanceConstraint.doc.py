@@ -67,7 +67,7 @@ class FeatureDistanceConstraint(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FeatureDistanceConstraint instance \a constr.
     # \param constr The \c FeatureDistanceConstraint instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(constr: FeatureDistanceConstraint) -> FeatureDistanceConstraint: pass
 

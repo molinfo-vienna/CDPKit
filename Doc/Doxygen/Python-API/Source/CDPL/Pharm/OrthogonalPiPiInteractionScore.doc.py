@@ -105,7 +105,7 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief Replaces the current state with a copy of the state of the \c OrthogonalPiPiInteractionScore instance \a constr.
     # \param constr The \c OrthogonalPiPiInteractionScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(constr: OrthogonalPiPiInteractionScore) -> OrthogonalPiPiInteractionScore: pass
 

@@ -55,14 +55,14 @@ class ConformerData(Math.Vector3DArray):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ConformerData instance \a data.
     # \param data The \c ConformerData instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(data: ConformerData) -> ConformerData: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c Vector3DArray instance \a coords.
     # \param coords The \c Vector3DArray instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(coords: Math.Vector3DArray) -> ConformerData: pass
 

@@ -106,7 +106,7 @@ class MMFF94AtomTyper(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94AtomTyper instance \a typer.
     # \param typer The \c MMFF94AtomTyper instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(typer: MMFF94AtomTyper) -> MMFF94AtomTyper: pass
 

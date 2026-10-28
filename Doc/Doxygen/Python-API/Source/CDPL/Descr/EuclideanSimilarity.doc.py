@@ -52,7 +52,7 @@ class EuclideanSimilarity(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c EuclideanSimilarity instance \a func.
     # \param func The \c EuclideanSimilarity instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(func: EuclideanSimilarity) -> EuclideanSimilarity: pass
 

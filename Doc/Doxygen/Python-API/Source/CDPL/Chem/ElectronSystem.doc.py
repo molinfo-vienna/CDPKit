@@ -50,7 +50,7 @@ class ElectronSystem(AtomContainer):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ElectronSystem instance \a elec_sys.
     # \param elec_sys The \c ElectronSystem instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(elec_sys: ElectronSystem) -> ElectronSystem: pass
 

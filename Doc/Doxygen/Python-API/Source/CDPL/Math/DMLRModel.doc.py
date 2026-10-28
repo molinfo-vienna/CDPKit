@@ -62,7 +62,7 @@ class DMLRModel(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DMLRModel instance \a model.
     # \param model The \c DMLRModel instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(model: DMLRModel) -> DMLRModel: pass
 

@@ -43,6 +43,6 @@ class NOTAtomMatchExpression(AtomMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c NOTAtomMatchExpression instance \a expression.
     # \param expression The \c NOTAtomMatchExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expression: NOTAtomMatchExpression) -> NOTAtomMatchExpression: pass

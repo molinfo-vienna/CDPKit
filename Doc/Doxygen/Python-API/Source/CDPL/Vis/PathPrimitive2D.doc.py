@@ -40,7 +40,7 @@ class PathPrimitive2D(Path2D, GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c PathPrimitive2D instance \a prim.
     # \param prim The \c PathPrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: PathPrimitive2D) -> PathPrimitive2D: pass
 

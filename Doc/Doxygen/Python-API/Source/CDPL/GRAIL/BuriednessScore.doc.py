@@ -122,7 +122,7 @@ class BuriednessScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c BuriednessScore instance \a score.
     # \param score The \c BuriednessScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(score: BuriednessScore) -> BuriednessScore: pass
 

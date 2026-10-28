@@ -52,7 +52,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FragmentLibraryEntry instance \a entry.
     # \param entry The \c FragmentLibraryEntry instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(entry: FragmentLibraryEntry) -> FragmentLibraryEntry: pass
 

@@ -50,7 +50,7 @@ class GaussianShape(Base.PropertyContainer):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Element instance \a elem.
         # \param elem The \c Element instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(elem: Element) -> Element: pass
 
@@ -134,7 +134,7 @@ class GaussianShape(Base.PropertyContainer):
     ##
     # \brief Replaces the current state with a copy of the state of the \c GaussianShape instance \a shape.
     # \param shape The \c GaussianShape instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(shape: GaussianShape) -> GaussianShape: pass
 

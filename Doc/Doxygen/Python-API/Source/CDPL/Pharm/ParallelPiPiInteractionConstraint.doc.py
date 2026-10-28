@@ -103,7 +103,7 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ParallelPiPiInteractionConstraint instance \a constr.
     # \param constr The \c ParallelPiPiInteractionConstraint instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(constr: ParallelPiPiInteractionConstraint) -> ParallelPiPiInteractionConstraint: pass
 

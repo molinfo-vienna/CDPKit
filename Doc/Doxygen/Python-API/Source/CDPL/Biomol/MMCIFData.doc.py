@@ -61,7 +61,7 @@ class MMCIFData(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Item instance \a item.
         # \param item The \c Item instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(item: Item) -> Item: pass
 
@@ -165,14 +165,14 @@ class MMCIFData(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Category instance \a cat.
         # \param cat The \c Category instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(cat: Category) -> Category: pass
 
         ##
         # \brief Replaces the current state with a copy of the state of the \c MMCIFData instance \a cat.
         # \param cat The \c MMCIFData instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(cat: MMCIFData) -> MMCIFData: pass
 
@@ -349,7 +349,7 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMCIFData instance \a data.
     # \param data The \c MMCIFData instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(data: MMCIFData) -> MMCIFData: pass
 

@@ -83,7 +83,7 @@ class BitSet(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c BitSet instance \a bs.
     # \param bs The \c BitSet instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(bs: BitSet) -> BitSet: pass
 

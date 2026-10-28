@@ -74,7 +74,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(entry: Entry) -> Entry: pass
 
@@ -243,7 +243,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c UFFAtomTypePropertyTable instance \a table.
     # \param table The \c UFFAtomTypePropertyTable instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(table: UFFAtomTypePropertyTable) -> UFFAtomTypePropertyTable: pass
 

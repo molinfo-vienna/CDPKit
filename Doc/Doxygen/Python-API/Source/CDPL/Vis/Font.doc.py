@@ -66,7 +66,7 @@ class Font(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Font instance \a font.
     # \param font The \c Font instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(font: Font) -> Font: pass
 

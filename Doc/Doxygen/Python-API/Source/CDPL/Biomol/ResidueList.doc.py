@@ -46,7 +46,7 @@ class ResidueList(Chem.FragmentList):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ResidueList instance \a res_list.
     # \param res_list The \c ResidueList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(res_list: ResidueList) -> ResidueList: pass
 

@@ -64,7 +64,7 @@ class MMFF94StretchBendInteractionList(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94StretchBendInteractionList instance \a array.
     # \param array The \c MMFF94StretchBendInteractionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: MMFF94StretchBendInteractionList) -> MMFF94StretchBendInteractionList: pass
 

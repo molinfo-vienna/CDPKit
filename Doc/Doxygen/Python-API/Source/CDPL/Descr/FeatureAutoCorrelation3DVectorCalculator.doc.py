@@ -62,7 +62,7 @@ class FeatureAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FeatureAutoCorrelation3DVectorCalculator instance \a calc.
     # \param calc The \c FeatureAutoCorrelation3DVectorCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: FeatureAutoCorrelation3DVectorCalculator) -> FeatureAutoCorrelation3DVectorCalculator: pass
 

@@ -46,6 +46,6 @@ class XBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
     ##
     # \brief Replaces the current state with a copy of the state of the \c XBondAcceptorFeatureGenerator instance \a gen.
     # \param gen The \c XBondAcceptorFeatureGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: XBondAcceptorFeatureGenerator) -> XBondAcceptorFeatureGenerator: pass

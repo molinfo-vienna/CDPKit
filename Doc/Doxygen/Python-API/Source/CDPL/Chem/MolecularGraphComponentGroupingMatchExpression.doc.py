@@ -42,6 +42,6 @@ class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpressi
     ##
     # \brief Replaces the current state with a copy of the state of the \c MolecularGraphComponentGroupingMatchExpression instance \a expr.
     # \param expr The \c MolecularGraphComponentGroupingMatchExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expr: MolecularGraphComponentGroupingMatchExpression) -> MolecularGraphComponentGroupingMatchExpression: pass

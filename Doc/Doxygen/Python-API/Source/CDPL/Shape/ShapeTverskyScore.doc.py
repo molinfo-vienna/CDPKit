@@ -53,7 +53,7 @@ class ShapeTverskyScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ShapeTverskyScore instance \a score.
     # \param score The \c ShapeTverskyScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(score: ShapeTverskyScore) -> ShapeTverskyScore: pass
 

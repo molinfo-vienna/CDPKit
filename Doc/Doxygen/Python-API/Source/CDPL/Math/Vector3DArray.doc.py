@@ -103,7 +103,7 @@ class Vector3DArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Vector3DArray instance \a array.
     # \param array The \c Vector3DArray instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: Vector3DArray) -> Vector3DArray: pass
 
@@ -120,7 +120,7 @@ class Vector3DArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: object) -> None: pass
 

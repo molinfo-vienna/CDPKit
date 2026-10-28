@@ -68,7 +68,7 @@ class Line2D(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Line2D instance \a line.
     # \param line The \c Line2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(line: Line2D) -> Line2D: pass
 

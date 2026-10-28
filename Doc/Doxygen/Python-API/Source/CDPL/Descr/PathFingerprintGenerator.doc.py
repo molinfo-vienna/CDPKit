@@ -129,7 +129,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c PathFingerprintGenerator instance \a gen.
     # \param gen The \c PathFingerprintGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: PathFingerprintGenerator) -> PathFingerprintGenerator: pass
 

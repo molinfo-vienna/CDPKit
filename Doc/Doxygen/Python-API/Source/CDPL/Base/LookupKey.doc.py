@@ -59,7 +59,7 @@ class LookupKey(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c LookupKey instance \a key.
     # \param key The \c LookupKey instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(key: LookupKey) -> LookupKey: pass
 

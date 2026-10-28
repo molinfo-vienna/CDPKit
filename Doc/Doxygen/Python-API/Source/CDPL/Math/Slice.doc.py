@@ -90,7 +90,7 @@ class Slice(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Slice instance \a s.
     # \param s The \c Slice instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(s: Slice) -> Slice: pass
 

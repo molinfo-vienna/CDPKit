@@ -55,7 +55,7 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FragmentAssemblerSettings instance \a settings.
     # \param settings The \c FragmentAssemblerSettings instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(settings: FragmentAssemblerSettings) -> FragmentAssemblerSettings: pass
 

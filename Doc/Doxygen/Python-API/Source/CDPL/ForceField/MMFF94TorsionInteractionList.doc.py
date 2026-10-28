@@ -64,7 +64,7 @@ class MMFF94TorsionInteractionList(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94TorsionInteractionList instance \a array.
     # \param array The \c MMFF94TorsionInteractionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: MMFF94TorsionInteractionList) -> MMFF94TorsionInteractionList: pass
 

@@ -43,7 +43,7 @@ class Object3D(Base.PropertyContainer):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Object3D instance \a self.
     # \param self The \c Object3D instance to copy.
-    # \return \a arg1
+    # \return \a arg1.
     # 
     def assign(self: Object3D) -> Object3D: pass
 

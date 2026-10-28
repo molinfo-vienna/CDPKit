@@ -38,7 +38,7 @@ class PointListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c PointListPrimitive2D instance \a prim.
     # \param prim The \c PointListPrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: PointListPrimitive2D) -> PointListPrimitive2D: pass
 

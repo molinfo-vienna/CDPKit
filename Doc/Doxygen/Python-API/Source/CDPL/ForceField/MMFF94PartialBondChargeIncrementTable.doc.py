@@ -66,7 +66,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(entry: Entry) -> Entry: pass
 
@@ -182,7 +182,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94PartialBondChargeIncrementTable instance \a table.
     # \param table The \c MMFF94PartialBondChargeIncrementTable instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(table: MMFF94PartialBondChargeIncrementTable) -> MMFF94PartialBondChargeIncrementTable: pass
 

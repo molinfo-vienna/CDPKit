@@ -40,6 +40,6 @@ class ConjugatedRingBondPatternSwitching(TautomerizationRule):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ConjugatedRingBondPatternSwitching instance \a rule.
     # \param rule The \c ConjugatedRingBondPatternSwitching instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(rule: ConjugatedRingBondPatternSwitching) -> ConjugatedRingBondPatternSwitching: pass

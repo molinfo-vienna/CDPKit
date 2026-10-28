@@ -223,7 +223,7 @@ $$$$
 \brief Replaces the current state with a copy of the state of the \c @AT1@ instance \a @A1@.
 \param @A0@ The \c @CN@ instance this method is called upon.
 \param @A1@ The \c @AT1@ instance to copy.
-\return \a @A0@
+\return \a @A0@.
 $$$$
 
 # ---

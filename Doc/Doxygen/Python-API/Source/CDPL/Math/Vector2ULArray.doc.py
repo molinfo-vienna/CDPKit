@@ -103,7 +103,7 @@ class Vector2ULArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Vector2ULArray instance \a array.
     # \param array The \c Vector2ULArray instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: Vector2ULArray) -> Vector2ULArray: pass
 
@@ -120,7 +120,7 @@ class Vector2ULArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: object) -> None: pass
 

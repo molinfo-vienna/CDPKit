@@ -48,6 +48,6 @@ class PharmacophoreAlignment(SpatialFeatureAlignment):
     ##
     # \brief Replaces the current state with a copy of the state of the \c PharmacophoreAlignment instance \a alignment.
     # \param alignment The \c PharmacophoreAlignment instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(alignment: PharmacophoreAlignment) -> PharmacophoreAlignment: pass

@@ -132,7 +132,7 @@ class ScreeningSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ScreeningSettings instance \a settings.
     # \param settings The \c ScreeningSettings instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(settings: ScreeningSettings) -> ScreeningSettings: pass
 

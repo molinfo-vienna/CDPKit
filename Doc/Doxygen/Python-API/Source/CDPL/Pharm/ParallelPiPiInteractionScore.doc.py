@@ -105,7 +105,7 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ParallelPiPiInteractionScore instance \a constr.
     # \param constr The \c ParallelPiPiInteractionScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(constr: ParallelPiPiInteractionScore) -> ParallelPiPiInteractionScore: pass
 

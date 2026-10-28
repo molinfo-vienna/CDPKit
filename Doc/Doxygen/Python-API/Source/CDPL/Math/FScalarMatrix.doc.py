@@ -87,12 +87,12 @@ class FScalarMatrix(Boost.Python.instance):
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the common entry value.
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The common entry value. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -134,12 +134,12 @@ class FScalarMatrix(Boost.Python.instance):
     def __call__(i: int, j: int) -> float: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>).
+    # \brief Returns the common entry value.
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The value of the element. 
+    # \return The common entry value. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

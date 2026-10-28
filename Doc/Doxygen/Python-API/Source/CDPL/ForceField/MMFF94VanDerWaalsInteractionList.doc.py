@@ -64,7 +64,7 @@ class MMFF94VanDerWaalsInteractionList(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94VanDerWaalsInteractionList instance \a array.
     # \param array The \c MMFF94VanDerWaalsInteractionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: MMFF94VanDerWaalsInteractionList) -> MMFF94VanDerWaalsInteractionList: pass
 

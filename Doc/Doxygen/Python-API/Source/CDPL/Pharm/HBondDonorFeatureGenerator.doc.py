@@ -49,6 +49,6 @@ class HBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
     ##
     # \brief Replaces the current state with a copy of the state of the \c HBondDonorFeatureGenerator instance \a gen.
     # \param gen The \c HBondDonorFeatureGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: HBondDonorFeatureGenerator) -> HBondDonorFeatureGenerator: pass

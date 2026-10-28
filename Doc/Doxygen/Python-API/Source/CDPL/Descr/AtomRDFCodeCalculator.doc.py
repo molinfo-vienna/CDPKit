@@ -64,7 +64,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AtomRDFCodeCalculator instance \a calc.
     # \param calc The \c AtomRDFCodeCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: AtomRDFCodeCalculator) -> AtomRDFCodeCalculator: pass
 

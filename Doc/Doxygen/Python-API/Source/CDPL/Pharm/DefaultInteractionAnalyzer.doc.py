@@ -38,6 +38,6 @@ class DefaultInteractionAnalyzer(InteractionAnalyzer):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DefaultInteractionAnalyzer instance \a analyzer.
     # \param analyzer The \c DefaultInteractionAnalyzer instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(analyzer: DefaultInteractionAnalyzer) -> DefaultInteractionAnalyzer: pass

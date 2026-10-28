@@ -50,7 +50,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c FragmentSettings instance \a settings.
         # \param settings The \c FragmentSettings instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(settings: FragmentSettings) -> FragmentSettings: pass
 
@@ -193,7 +193,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FragmentConformerGeneratorSettings instance \a settings.
     # \param settings The \c FragmentConformerGeneratorSettings instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(settings: FragmentConformerGeneratorSettings) -> FragmentConformerGeneratorSettings: pass
 

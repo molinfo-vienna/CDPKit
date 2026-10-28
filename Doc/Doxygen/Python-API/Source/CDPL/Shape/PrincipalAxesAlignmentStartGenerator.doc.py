@@ -202,7 +202,7 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     ##
     # \brief Replaces the current state with a copy of the state of the \c PrincipalAxesAlignmentStartGenerator instance \a gen.
     # \param gen The \c PrincipalAxesAlignmentStartGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: PrincipalAxesAlignmentStartGenerator) -> PrincipalAxesAlignmentStartGenerator: pass
 

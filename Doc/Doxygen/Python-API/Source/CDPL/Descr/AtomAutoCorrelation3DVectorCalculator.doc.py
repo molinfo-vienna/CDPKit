@@ -62,7 +62,7 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AtomAutoCorrelation3DVectorCalculator instance \a calc.
     # \param calc The \c AtomAutoCorrelation3DVectorCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: AtomAutoCorrelation3DVectorCalculator) -> AtomAutoCorrelation3DVectorCalculator: pass
 

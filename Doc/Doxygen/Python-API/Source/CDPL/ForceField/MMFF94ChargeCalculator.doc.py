@@ -119,7 +119,7 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94ChargeCalculator instance \a parameterizer.
     # \param parameterizer The \c MMFF94ChargeCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(parameterizer: MMFF94ChargeCalculator) -> MMFF94ChargeCalculator: pass
 

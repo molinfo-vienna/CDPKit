@@ -209,7 +209,7 @@ namespace CDPL
 
             /**
              * \brief Returns the rigid-body transformation produced by the most recent successful align() call.
-             * \return A \c const reference to the \f$ (D+1) \times (D+1) \f$ transformation matrix (homogeneous form).
+             * \return A \c const reference to the <em>(D+1)&times;(D+1)</em> transformation matrix (homogeneous form).
              */
             const MatrixType& getTransform() const
             {

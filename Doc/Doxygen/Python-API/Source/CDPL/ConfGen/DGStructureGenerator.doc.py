@@ -52,7 +52,7 @@ class DGStructureGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c DGStructureGenerator instance \a gen.
     # \param gen The \c DGStructureGenerator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: DGStructureGenerator) -> DGStructureGenerator: pass
 

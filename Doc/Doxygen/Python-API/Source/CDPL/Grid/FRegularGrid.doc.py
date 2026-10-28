@@ -112,7 +112,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FRegularSpatialGrid instance \a g.
     # \param g The \c FRegularSpatialGrid instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(g: Math.FRegularSpatialGrid) -> Math.FRegularSpatialGrid: pass
 

@@ -70,7 +70,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         ##
         # \brief Replaces the current state with a copy of the state of the \c Entry instance \a entry.
         # \param entry The \c Entry instance to copy.
-        # \return \a self
+        # \return \a self.
         # 
         def assign(entry: Entry) -> Entry: pass
 
@@ -171,7 +171,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94PrimaryToParameterAtomTypeMap instance \a map.
     # \param map The \c MMFF94PrimaryToParameterAtomTypeMap instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(map: MMFF94PrimaryToParameterAtomTypeMap) -> MMFF94PrimaryToParameterAtomTypeMap: pass
 

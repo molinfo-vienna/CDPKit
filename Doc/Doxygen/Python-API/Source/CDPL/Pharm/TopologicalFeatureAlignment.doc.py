@@ -72,7 +72,7 @@ class TopologicalFeatureAlignment(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TopologicalFeatureAlignment instance \a alignment.
     # \param alignment The \c TopologicalFeatureAlignment instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(alignment: TopologicalFeatureAlignment) -> TopologicalFeatureAlignment: pass
 

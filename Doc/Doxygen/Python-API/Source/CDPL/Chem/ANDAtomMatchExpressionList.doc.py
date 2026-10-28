@@ -40,6 +40,6 @@ class ANDAtomMatchExpressionList(AtomMatchExpressionList):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ANDAtomMatchExpressionList instance \a expr.
     # \param expr The \c ANDAtomMatchExpressionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expr: ANDAtomMatchExpressionList) -> ANDAtomMatchExpressionList: pass

@@ -71,7 +71,7 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c KuvekPocketDescriptorCalculator instance \a calc.
     # \param calc The \c KuvekPocketDescriptorCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: KuvekPocketDescriptorCalculator) -> KuvekPocketDescriptorCalculator: pass
 

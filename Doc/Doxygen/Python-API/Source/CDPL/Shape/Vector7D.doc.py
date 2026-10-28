@@ -88,42 +88,42 @@ class Vector7D(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ConstFVectorExpression instance \a e.
     # \param e The \c ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: Math.ConstFVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c ConstDVectorExpression instance \a e.
     # \param e The \c ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: Math.ConstDVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c ConstLVectorExpression instance \a e.
     # \param e The \c ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: Math.ConstLVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c ConstULVectorExpression instance \a e.
     # \param e The \c ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(e: Math.ConstULVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c Vector7D instance \a v.
     # \param v The \c Vector7D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(v: Math.Vector7D) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c object instance \a a.
     # \param a The \c object instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(a: object) -> Math.Vector7D: pass
 

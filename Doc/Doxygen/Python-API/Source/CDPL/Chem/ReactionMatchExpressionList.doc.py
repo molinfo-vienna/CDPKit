@@ -97,7 +97,7 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ReactionMatchExpressionList instance \a array.
     # \param array The \c ReactionMatchExpressionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: ReactionMatchExpressionList) -> ReactionMatchExpressionList: pass
 

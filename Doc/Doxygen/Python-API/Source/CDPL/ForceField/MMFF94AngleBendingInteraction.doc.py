@@ -125,7 +125,7 @@ class MMFF94AngleBendingInteraction(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c MMFF94AngleBendingInteraction instance \a iactn.
     # \param iactn The \c MMFF94AngleBendingInteraction instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(iactn: MMFF94AngleBendingInteraction) -> MMFF94AngleBendingInteraction: pass
 

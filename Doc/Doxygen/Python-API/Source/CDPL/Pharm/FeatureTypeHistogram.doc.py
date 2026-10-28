@@ -71,7 +71,7 @@ class FeatureTypeHistogram(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c FeatureTypeHistogram instance \a map.
     # \param map The \c FeatureTypeHistogram instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(map: FeatureTypeHistogram) -> FeatureTypeHistogram: pass
 

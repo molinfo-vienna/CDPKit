@@ -95,24 +95,24 @@ class DScalarGrid(Boost.Python.instance):
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # \brief Returns the common element value.
     # 
     # \param i The zero-based first-axis index.
     # \param j The zero-based second-axis index.
     # \param k The zero-based third-axis index.
     # 
-    # \return The value of the element. 
+    # \return The common element value. 
     # 
     # \throw Base.IndexError if any of the indices is out of range.
     # 
     def getElement(i: int, j: int, k: int) -> float: pass
 
     ##
-    # \brief Returns the element at linear index <em>i</em>.
+    # \brief Returns the common element value.
     # 
     # \param i The zero-based linear index.
     # 
-    # \return The value of the element. 
+    # \return The common element value. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 
@@ -173,24 +173,24 @@ class DScalarGrid(Boost.Python.instance):
     def __call__(i: int) -> float: pass
 
     ##
-    # \brief Returns the element at (<em>i</em>, <em>j</em>, <em>k</em>).
+    # \brief Returns the common element value.
     # 
     # \param i The zero-based first-axis index.
     # \param j The zero-based second-axis index.
     # \param k The zero-based third-axis index.
     # 
-    # \return The value of the element. 
+    # \return The common element value. 
     # 
     # \throw Base.IndexError if any of the indices is out of range.
     # 
     def __getitem__(ijk: tuple) -> float: pass
 
     ##
-    # \brief Returns the element at linear index <em>i</em>.
+    # \brief Returns the common element value.
     # 
     # \param i The zero-based linear index.
     # 
-    # \return The value of the element. 
+    # \return The common element value. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

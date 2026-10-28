@@ -99,7 +99,7 @@ class BondMatchExpressionList(BondMatchExpression):
     ##
     # \brief Replaces the current state with a copy of the state of the \c BondMatchExpressionList instance \a array.
     # \param array The \c BondMatchExpressionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: BondMatchExpressionList) -> BondMatchExpressionList: pass
 

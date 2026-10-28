@@ -52,7 +52,7 @@ class AlignedShapeTverskyScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AlignedShapeTverskyScore instance \a score.
     # \param score The \c AlignedShapeTverskyScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(score: AlignedShapeTverskyScore) -> AlignedShapeTverskyScore: pass
 

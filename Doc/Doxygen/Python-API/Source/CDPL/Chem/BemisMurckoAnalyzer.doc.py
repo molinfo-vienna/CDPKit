@@ -44,7 +44,7 @@ class BemisMurckoAnalyzer(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c BemisMurckoAnalyzer instance \a gen.
     # \param gen The \c BemisMurckoAnalyzer instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(gen: BemisMurckoAnalyzer) -> BemisMurckoAnalyzer: pass
 

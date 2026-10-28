@@ -97,7 +97,7 @@ class UIArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c UIArray instance \a array.
     # \param array The \c UIArray instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: UIArray) -> UIArray: pass
 

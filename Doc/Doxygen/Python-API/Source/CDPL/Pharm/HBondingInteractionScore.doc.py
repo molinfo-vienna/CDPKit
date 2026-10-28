@@ -113,7 +113,7 @@ class HBondingInteractionScore(FeatureInteractionScore):
     ##
     # \brief Replaces the current state with a copy of the state of the \c HBondingInteractionScore instance \a constr.
     # \param constr The \c HBondingInteractionScore instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(constr: HBondingInteractionScore) -> HBondingInteractionScore: pass
 

@@ -40,6 +40,6 @@ class ANDReactionMatchExpressionList(ReactionMatchExpressionList):
     ##
     # \brief Replaces the current state with a copy of the state of the \c ANDReactionMatchExpressionList instance \a expr.
     # \param expr The \c ANDReactionMatchExpressionList instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(expr: ANDReactionMatchExpressionList) -> ANDReactionMatchExpressionList: pass

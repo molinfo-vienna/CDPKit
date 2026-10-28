@@ -77,11 +77,11 @@ class DZeroVector(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief Returns the element at index <em>i</em>.
+    # \brief Returns the zero element.
     # 
     # \param i The zero-based element index.
     # 
-    # \return The value of the element. 
+    # \return The zero element. 
     # 
     # \throw Base.IndexError if <em>i</em> is out of range.
     # 

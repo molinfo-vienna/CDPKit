@@ -33,7 +33,7 @@ class ConstUnitLowerTriangularLMatrixAdapter(Boost.Python.instance):
     ##
     # \brief Constructs the adapter wrapping <em>m</em>.
     # 
-    # \param m The matrix to be viewed through the <em>unit lower</em> triangular policy.
+    # \param m The matrix to be viewed through the <em>unit-lower</em> triangular policy.
     # 
     def __init__(m: ConstLMatrixExpression) -> None: pass
 
@@ -71,12 +71,12 @@ class ConstUnitLowerTriangularLMatrixAdapter(Boost.Python.instance):
     def isEmpty() -> bool: pass
 
     ##
-    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
+    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit-lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The element value as defined by the <em>unit lower</em> triangular-view policy.
+    # \return The element value as defined by the <em>unit-lower</em> triangular-view policy.
     # 
     def getElement(i: int, j: int) -> int: pass
 
@@ -95,22 +95,22 @@ class ConstUnitLowerTriangularLMatrixAdapter(Boost.Python.instance):
     def getData() -> ConstLMatrixExpression: pass
 
     ##
-    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
+    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit-lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The element value as defined by the <em>unit lower</em> triangular-view policy.
+    # \return The element value as defined by the <em>unit-lower</em> triangular-view policy.
     # 
     def __call__(i: int, j: int) -> int: pass
 
     ##
-    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
+    # \brief Returns the value of element (<em>i</em>, <em>j</em>) as seen through the <em>unit-lower</em> triangular policy (off-policy entries return the appropriate fill value: zero or one).
     # 
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The element value as defined by the <em>unit lower</em> triangular-view policy.
+    # \return The element value as defined by the <em>unit-lower</em> triangular-view policy.
     # 
     def __getitem__(ij: tuple) -> int: pass
 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Tag selecting the lower-triangular view (entries strictly above the diagonal read as zero) for Math.TriangularAdapter.
+# \brief Tag selecting the <em>lower</em> triangular view (entries strictly above the diagonal read as zero) for triangular matrix adapters.
 # 
 class Lower(Boost.Python.instance):
 

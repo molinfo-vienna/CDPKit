@@ -53,7 +53,7 @@ class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c LinePrimitive2D instance \a prim.
     # \param prim The \c LinePrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: LinePrimitive2D) -> LinePrimitive2D: pass
 

@@ -64,14 +64,14 @@ class StringDataBlock(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c StringDataBlock instance \a array.
     # \param array The \c StringDataBlock instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(array: StringDataBlock) -> StringDataBlock: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c int instance \a num_elem.
     # \param num_elem The \c int instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(num_elem: int, value: StringDataBlockEntry) -> None: pass
 

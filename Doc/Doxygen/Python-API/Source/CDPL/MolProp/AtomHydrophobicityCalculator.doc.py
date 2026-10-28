@@ -58,7 +58,7 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state with a copy of the state of the \c AtomHydrophobicityCalculator instance \a calc.
     # \param calc The \c AtomHydrophobicityCalculator instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(calc: AtomHydrophobicityCalculator) -> AtomHydrophobicityCalculator: pass
 

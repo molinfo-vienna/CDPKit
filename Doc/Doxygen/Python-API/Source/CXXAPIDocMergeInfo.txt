@@ -177,6 +177,8 @@ Math.LScalarVector. § Math.ScalarVector.
 
 Math.ULScalarVector. § Math.ScalarVector.
 
+Math.*ScalarVector.getElement § Math.ScalarVector.__call__
+
 # ZeroVector typedefs
 
 Math.FZeroVector. § Math.ZeroVector.
@@ -186,6 +188,8 @@ Math.DZeroVector. § Math.ZeroVector.
 Math.LZeroVector. § Math.ZeroVector.
 
 Math.ULZeroVector. § Math.ZeroVector.
+
+Math.*ZeroVector.getElement § Math.ZeroVector.__call__
 
 # UnitVector typedefs
 
@@ -197,6 +201,8 @@ Math.LUnitVector. § Math.UnitVector.
 
 Math.ULUnitVector. § Math.UnitVector.
 
+Math.*UnitVector.getElement § Math.UnitVector.__call__
+
 # SparseVector typedefs
 
 Math.SparseFVector. § Math.SparseVector.
@@ -206,6 +212,8 @@ Math.SparseDVector. § Math.SparseVector.
 Math.SparseLVector. § Math.SparseVector.
 
 Math.SparseULVector. § Math.SparseVector.
+
+Math.Sparse*Vector.getElement § Math.SparseVector.__call__
 
 # Vector typedefs
 
@@ -263,6 +271,10 @@ Math.SparseLMatrix. § Math.SparseMatrix.
 
 Math.SparseULMatrix. § Math.SparseMatrix.
 
+Math.Sparse*Matrix.__getitem__(ij) § Math.SparseMatrix.__call__(i,j)
+
+Math.Sparse*Matrix.getElement(i,j) § Math.SparseMatrix.__call__(i,j)
+
 # ZeroMatrix typedefs
 
 Math.FZeroMatrix. § Math.ZeroMatrix.
@@ -272,6 +284,10 @@ Math.DZeroMatrix. § Math.ZeroMatrix.
 Math.LZeroMatrix. § Math.ZeroMatrix.
 
 Math.ULZeroMatrix. § Math.ZeroMatrix.
+
+Math.*ZeroMatrix.__getitem__(ij) § Math.ZeroMatrix.__call__(i,j)
+
+Math.*ZeroMatrix.getElement(i,j) § Math.ZeroMatrix.__call__(i,j)
 
 # ScalarMatrix typedefs
 
@@ -283,6 +299,10 @@ Math.LScalarMatrix. § Math.ScalarMatrix.
 
 Math.ULScalarMatrix. § Math.ScalarMatrix.
 
+Math.*ScalarMatrix.__getitem__(ij) § Math.ScalarMatrix.__call__(i,j)
+
+Math.*ScalarMatrix.getElement(i,j) § Math.ScalarMatrix.__call__(i,j)
+
 # IdentityMatrix typedefs
 
 Math.FIdentityMatrix. § Math.IdentityMatrix.
@@ -292,6 +312,52 @@ Math.DIdentityMatrix. § Math.IdentityMatrix.
 Math.LIdentityMatrix. § Math.IdentityMatrix.
 
 Math.ULIdentityMatrix. § Math.IdentityMatrix.
+
+Math.*IdentityMatrix.__getitem__(ij) § Math.IdentityMatrix.__call__(i,j)
+
+Math.*IdentityMatrix.getElement(i,j) § Math.IdentityMatrix.__call__(i,j)
+
+# ScalingMatrix typedefs
+
+Math.FScalingMatrix. § Math.ScalingMatrix.
+
+Math.DScalingMatrix. § Math.ScalingMatrix.
+
+Math.LScalingMatrix. § Math.ScalingMatrix.
+
+Math.ULScalingMatrix. § Math.ScalingMatrix.
+
+Math.*ScalingMatrix.__getitem__(ij) § Math.ScalingMatrix.__call__(i,j)
+
+Math.*ScalingMatrix.getElement(i,j) § Math.ScalingMatrix.__call__(i,j)
+
+# RotationMatrix typedefs
+
+Math.FRotationMatrix. § Math.RotationMatrix.
+
+Math.DRotationMatrix. § Math.RotationMatrix.
+
+Math.LRotationMatrix. § Math.RotationMatrix.
+
+Math.ULRotationMatrix. § Math.RotationMatrix.
+
+Math.*RotationMatrix.__getitem__(ij) § Math.RotationMatrix.__call__(i,j)
+
+Math.*RotationMatrix.getElement(i,j) § Math.RotationMatrix.__call__(i,j)
+
+# TranslationMatrix typedefs
+
+Math.FTranslationMatrix. § Math.TranslationMatrix.
+
+Math.DTranslationMatrix. § Math.TranslationMatrix.
+
+Math.LTranslationMatrix. § Math.TranslationMatrix.
+
+Math.ULTranslationMatrix. § Math.TranslationMatrix.
+
+Math.*TranslationMatrix.__getitem__(ij) § Math.TranslationMatrix.__call__(i,j)
+
+Math.*TranslationMatrix.getElement(i,j) § Math.TranslationMatrix.__call__(i,j)
 
 # Quaternion typedefs
 
@@ -325,11 +391,27 @@ Math.FZeroGrid. § Math.ZeroGrid.
 
 Math.DZeroGrid. § Math.ZeroGrid.
 
+Math.*ZeroGrid.__getitem__(i) § Math.ZeroGrid.__call__(i)
+
+Math.*ZeroGrid.__getitem__(ijk) § Math.ZeroGrid.__call__(i,j,k)
+
+Math.*ZeroGrid.getElement(i) § Math.ZeroGrid.__call__(i)
+
+Math.*ZeroGrid.getElement(i,j,k) § Math.ZeroGrid.__call__(i,j,k)
+
 # ScalarGrid typedefs
 
 Math.FScalarGrid. § Math.ScalarGrid.
 
 Math.DScalarGrid. § Math.ScalarGrid.
+
+Math.*ScalarGrid.__getitem__(i) § Math.ScalarGrid.__call__(i)
+
+Math.*ScalarGrid.__getitem__(ijk) § Math.ScalarGrid.__call__(i,j,k)
+
+Math.*ScalarGrid.getElement(i) § Math.ScalarGrid.__call__(i)
+
+Math.*ScalarGrid.getElement(i,j,k) § Math.ScalarGrid.__call__(i,j,k)
 
 # RegularSpatialGrid typedefs
 
@@ -376,8 +458,14 @@ Math.Vector3ULArray. § Util.Array.
 Math.*MLR § Math.MLR
 
 Math.*KabschAlgorithm § Math.KabschAlgorithm
+points() § points
 
-Math.*AlignmentCalculator § Math.AlignmentCalculator
+Math.*AlignmentCalculator § Math.VectorArrayAlignmentCalculator
+Convenience wrapper around Math.KabschAlgorithm § Kabsch algorithm [\ref KABA] implementation
+Math.VectorArray § vector array
+
+Math.*BFGSMinimizer.Status § Math.BFGSMinimizer.Status
+brief Status § brief %Status
 
 Math.*BFGSMinimizer § Math.BFGSMinimizer
 
@@ -720,18 +808,36 @@ param e § param va
 
 # ---
 
+Math.UnitUpper § Math.UnitUpper
+unit-upper § <em>unit-upper</em>
+Math.TriangularAdapter § triangular matrix adapters
+
+Math.Upper § Math.Upper
+upper § <em>upper</em>
+Math.TriangularAdapter § triangular matrix adapters
+
+Math.UnitLower § Math.UnitLower
+unit-lower § <em>unit-lower</em>
+Math.TriangularAdapter § triangular matrix adapters
+
+Math.Lower § Math.Lower
+lower § <em>lower</em>
+Math.TriangularAdapter § triangular matrix adapters
+
+# ---
+
 Math.*UnitUpperTriangular*MatrixAdapter. § Math.TriangularAdapter.
-the triangular § the <em>unit upper</em> triangular
+the triangular § the <em>unit-upper</em> triangular
 
 Math.*UnitUpperTriangular*MatrixAdapter § Math.TriangularAdapter
 the triangular § the <em>upper</em> triangular
 selected by the policy <em>Tri</em> (Math.Lower, Math.UnitLower, Math.Upper or Math.UnitUpper) § with the diagonal elements set to one
 
 Math.*UnitUpperTriangular*MatrixAdapter.__getitem__(ij) § Math.TriangularAdapter.__call__(i,j)
-the triangular § the <em>unit upper</em> triangular
+the triangular § the <em>unit-upper</em> triangular
 
 Math.*UnitUpperTriangular*MatrixAdapter.getElement(i,j) § Math.TriangularAdapter.__call__(i,j)
-the triangular § the <em>unit upper</em> triangular
+the triangular § the <em>unit-upper</em> triangular
 
 Math.*UpperTriangular*MatrixAdapter § Math.TriangularAdapter
 the triangular § the <em>upper</em> triangular
@@ -747,17 +853,17 @@ the triangular § the <em>upper</em> triangular
 (off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
 
 Math.*UnitLowerTriangular*MatrixAdapter. § Math.TriangularAdapter.
-the triangular § the <em>unit lower</em> triangular
+the triangular § the <em>unit-lower</em> triangular
 
 Math.*UnitLowerTriangular*MatrixAdapter § Math.TriangularAdapter
 the triangular § the <em>lower</em> triangular
 selected by the policy <em>Tri</em> (Math.Lower, Math.UnitLower, Math.Upper or Math.UnitUpper) § with the diagonal elements set to one
 
 Math.*UnitLowerTriangular*MatrixAdapter.__getitem__(ij) § Math.TriangularAdapter.__call__(i,j)
-the triangular § the <em>unit lower</em> triangular
+the triangular § the <em>unit-lower</em> triangular
 
 Math.*UnitLowerTriangular*MatrixAdapter.getElement(i,j) § Math.TriangularAdapter.__call__(i,j)
-the triangular § the <em>unit lower</em> triangular
+the triangular § the <em>unit-lower</em> triangular
 
 Math.*LowerTriangular*MatrixAdapter § Math.TriangularAdapter
 the triangular § the <em>lower</em> triangular

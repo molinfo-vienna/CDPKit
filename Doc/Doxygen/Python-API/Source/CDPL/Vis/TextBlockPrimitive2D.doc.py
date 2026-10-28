@@ -40,7 +40,7 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c TextBlockPrimitive2D instance \a prim.
     # \param prim The \c TextBlockPrimitive2D instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(prim: TextBlockPrimitive2D) -> TextBlockPrimitive2D: pass
 

@@ -46,7 +46,7 @@ class Feature(Chem.Entity3D):
     ##
     # \brief Replaces the current state with a copy of the state of the \c Feature instance \a ftr.
     # \param ftr The \c Feature instance to copy.
-    # \return \a self
+    # \return \a self.
     # 
     def assign(ftr: Feature) -> Feature: pass
 
