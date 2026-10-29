@@ -475,10 +475,10 @@ void CDPLPythonMath::exportMatrixFunctions()
     python::def("imag", &imag<long>, python::arg("e"));
     python::def("imag", &imag<unsigned long>, python::arg("e"));
 
-    python::def("conj", &conj<float>, python::arg("e"));
-    python::def("conj", &conj<double>, python::arg("e"));
-    python::def("conj", &conj<long>, python::arg("e"));
-    python::def("conj", &conj<unsigned long>, python::arg("e"));
+    python::def("conj", &conj<float>, python::arg("me"));
+    python::def("conj", &conj<double>, python::arg("me"));
+    python::def("conj", &conj<long>, python::arg("me"));
+    python::def("conj", &conj<unsigned long>, python::arg("me"));
 
     python::def("herm", &herm<float>, python::arg("e"));
     python::def("herm", &herm<double>, python::arg("e"));

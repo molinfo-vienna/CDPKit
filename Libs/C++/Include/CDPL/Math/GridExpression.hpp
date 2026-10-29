@@ -712,18 +712,18 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the element-wise complex conjugate of the grid expression \a e (identity for real-valued grids).
+         * \brief Returns the element-wise complex conjugate of the grid expression \a ge (identity for real-valued grids).
          * \tparam E The grid expression type.
-         * \param e The grid expression.
-         * \return An expression template node representing \f$ \overline{e} \f$.
+         * \param ge The grid expression.
+         * \return An expression template node representing \f$ \overline{ge} \f$.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
-        conj(const GridExpression<E>& e)
+        conj(const GridExpression<E>& ge)
         {
             typedef typename GridUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ge());
         }
 
         /**

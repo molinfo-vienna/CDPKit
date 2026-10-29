@@ -907,18 +907,18 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the element-wise complex conjugate of the vector expression \a e (identity for real-valued vectors).
+         * \brief Returns the element-wise complex conjugate of the vector expression \a ve (identity for real-valued vectors).
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return An expression template node representing \f$ \overline{e} \f$.
+         * \param ve The vector expression.
+         * \return An expression template node representing \f$ \overline{ve} \f$.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
-        conj(const VectorExpression<E>& e)
+        conj(const VectorExpression<E>& ve)
         {
             typedef typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ve());
         }
 
         /**
@@ -1036,14 +1036,14 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the cosine of the angle between the vector expressions \a e1 and \a e2 (optionally clamped to <tt>[-1, 1]</tt>).
+         * \brief Returns the (optionally clamped) cosine of the angle between the vector expressions \a e1 and \a e2.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
          * \tparam T The norm-product scalar type.
          * \param e1 The first vector expression.
          * \param e2 The second vector expression.
          * \param sd The precomputed product \f$ \|e_1\| \cdot \|e_2\| \f$ of the two vector magnitudes.
-         * \param clamp If \c true (default), the result is clamped to the range <tt>[-1, 1]</tt>.
+         * \param clamp If \c true (default), the result is clamped to the range [\e -1, \e 1].
          * \return The (optionally clamped) cosine of the angle.
          */
         template <typename E1, typename E2, typename T>

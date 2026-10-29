@@ -20,442 +20,538 @@
 #
 
 ##
-# \brief Returns the cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em> (optionally clamped to <tt>[-1, 1]</tt>).
+# \brief Returns the (optionally clamped) cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em>.
 # 
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # \param sd The precomputed product \f$ \|e_1\| \cdot \|e_2\| \f$ of the two vector magnitudes.
-# \param clamp If <tt>True</tt> (default), the result is clamped to the range <tt>[-1, 1]</tt>.
+# \param clamp If <tt>True</tt> (default), the result is clamped to the range [<em>-1</em>, <em>1</em>].
 # 
 # \return The (optionally clamped) cosine of the angle.
 # 
 def angleCos(e1: ConstDVectorExpression, e2: ConstDVectorExpression, sd: float, clamp: bool = True) -> float: pass
 
 ##
-# \brief Returns the cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em> (optionally clamped to <tt>[-1, 1]</tt>).
+# \brief Returns the (optionally clamped) cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em>.
 # 
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # \param sd The precomputed product \f$ \|e_1\| \cdot \|e_2\| \f$ of the two vector magnitudes.
-# \param clamp If <tt>True</tt> (default), the result is clamped to the range <tt>[-1, 1]</tt>.
+# \param clamp If <tt>True</tt> (default), the result is clamped to the range [<em>-1</em>, <em>1</em>].
 # 
 # \return The (optionally clamped) cosine of the angle.
 # 
 def angleCos(e1: ConstFVectorExpression, e2: ConstFVectorExpression, sd: float, clamp: bool = True) -> float: pass
 
 ##
-# \brief Returns the cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em> (optionally clamped to <tt>[-1, 1]</tt>).
+# \brief Returns the (optionally clamped) cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em>.
 # 
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # \param sd The precomputed product \f$ \|e_1\| \cdot \|e_2\| \f$ of the two vector magnitudes.
-# \param clamp If <tt>True</tt> (default), the result is clamped to the range <tt>[-1, 1]</tt>.
+# \param clamp If <tt>True</tt> (default), the result is clamped to the range [<em>-1</em>, <em>1</em>].
 # 
 # \return The (optionally clamped) cosine of the angle.
 # 
 def angleCos(e1: ConstLVectorExpression, e2: ConstLVectorExpression, sd: int, clamp: bool = True) -> int: pass
 
 ##
-# \brief Returns the cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em> (optionally clamped to <tt>[-1, 1]</tt>).
+# \brief Returns the (optionally clamped) cosine of the angle between the vector expressions <em>e1</em> and <em>e2</em>.
 # 
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # \param sd The precomputed product \f$ \|e_1\| \cdot \|e_2\| \f$ of the two vector magnitudes.
-# \param clamp If <tt>True</tt> (default), the result is clamped to the range <tt>[-1, 1]</tt>.
+# \param clamp If <tt>True</tt> (default), the result is clamped to the range [<em>-1</em>, <em>1</em>].
 # 
 # \return The (optionally clamped) cosine of the angle.
 # 
 def angleCos(e1: ConstULVectorExpression, e2: ConstULVectorExpression, sd: int, clamp: bool = True) -> int: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector2DArray, ctr: Vector2D) -> bool: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector2FArray, ctr: Vector2F) -> bool: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector2LArray, ctr: Vector2L) -> bool: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector2ULArray, ctr: Vector2UL) -> bool: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector3DArray, ctr: Vector3D) -> bool: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector3FArray, ctr: Vector3F) -> bool: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector3LArray, ctr: Vector3L) -> bool: pass
 
 ##
-# \brief 
-# \param va 
-# \param ctr 
-# \return 
-#
+# \brief Calculates the centroid of the array elements.
+# 
+# \param va The vectors for which to calculate the centroid.
+# \param ctr Stores the calculated centroid.
+# 
+# \return <tt>True</tt> if the array is not empty, and <tt>False</tt> otherwise.
+# 
 def calcCentroid(va: Vector3ULArray, ctr: Vector3UL) -> bool: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2DArray, va2: Vector2DArray) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2DArray, va2: Vector2DArray, va1_xform: Matrix3D) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2FArray, va2: Vector2FArray) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2FArray, va2: Vector2FArray, va1_xform: Matrix3F) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2LArray, va2: Vector2LArray) -> int: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2LArray, va2: Vector2LArray, va1_xform: Matrix3L) -> int: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2ULArray, va2: Vector2ULArray) -> int: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector2ULArray, va2: Vector2ULArray, va1_xform: Matrix3UL) -> int: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3DArray, va2: Vector3DArray) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3DArray, va2: Vector3DArray, va1_xform: Matrix4D) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3FArray, va2: Vector3FArray) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3FArray, va2: Vector3FArray, va1_xform: Matrix4F) -> float: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3LArray, va2: Vector3LArray) -> int: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3LArray, va2: Vector3LArray, va1_xform: Matrix4L) -> int: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \return 
-#
+# \brief Calculates the RMSD between the corresponding elements of <em>va1</em> and <em>va2</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array.
+# \param va2 The second vector array.
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3ULArray, va2: Vector3ULArray) -> int: pass
 
 ##
-# \brief 
-# \param va1 
-# \param va2 
-# \param va1_xform 
-# \return 
-#
+# \brief Calculates the RMSD between corresponding elements of <em>va1</em> and <em>va2</em> after applying the homogeneous transformation <em>va1_xform</em> to the elements of <em>va1</em>.
+# 
+# If the two arrays have different sizes, only the first <tt>min(va1.getSize(), va2.getSize())</tt> elements are considered.
+# 
+# \param va1 The first vector array (transformed via <em>va1_xform</em> on the fly).
+# \param va2 The second vector array.
+# \param va1_xform The transformation matrix applied to <em>va1</em> (with implicit homogeneous coordinate <em>1</em>).
+# 
+# \return The RMSD value, or <em>0</em> if either array is empty.
+# 
 def calcRMSD(va1: Vector3ULArray, va2: Vector3ULArray, va1_xform: Matrix4UL) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: ConstDMatrixExpression, i: int) -> ConstDMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: ConstDMatrixExpression, j: int) -> ConstDMatrixColumn: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: ConstFMatrixExpression, i: int) -> ConstFMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: ConstFMatrixExpression, j: int) -> ConstFMatrixColumn: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: ConstLMatrixExpression, i: int) -> ConstLMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: ConstLMatrixExpression, j: int) -> ConstLMatrixColumn: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: ConstULMatrixExpression, i: int) -> ConstULMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: ConstULMatrixExpression, j: int) -> ConstULMatrixColumn: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: DMatrixExpression, i: int) -> DMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: DMatrixExpression, j: int) -> DMatrixColumn: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: FMatrixExpression, i: int) -> FMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: FMatrixExpression, j: int) -> FMatrixColumn: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: LMatrixExpression, i: int) -> LMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: LMatrixExpression, j: int) -> LMatrixColumn: pass
 
 ##
-# \brief 
-# \param e 
-# \param i 
-# \return 
-#
-def column(e: ULMatrixExpression, i: int) -> ULMatrixColumn: pass
+# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# 
+# \param e The matrix expression.
+# \param j The zero-based column index.
+# 
+# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# 
+def column(e: ULMatrixExpression, j: int) -> ULMatrixColumn: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the grid expression <em>ge</em> (identity for real-valued grids).
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{ge} \f$.
 # 
-def conj(e: ConstDGridExpression) -> ConstDGridExpression: pass
+def conj(ge: ConstDGridExpression) -> ConstDGridExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the matrix expression <em>me</em> (identity for real-valued matrices).
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{me} \f$.
 # 
-def conj(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+def conj(me: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the quaternion conjugate of the quaternion expression <em>qe</em> (negates <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{qe} \f$.
 # 
-def conj(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+def conj(qe: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the vector expression <em>ve</em> (identity for real-valued vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{ve} \f$.
 # 
-def conj(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+def conj(ve: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the grid expression <em>ge</em> (identity for real-valued grids).
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{ge} \f$.
 # 
-def conj(e: ConstFGridExpression) -> ConstFGridExpression: pass
+def conj(ge: ConstFGridExpression) -> ConstFGridExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the matrix expression <em>me</em> (identity for real-valued matrices).
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{me} \f$.
 # 
-def conj(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+def conj(me: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the quaternion conjugate of the quaternion expression <em>qe</em> (negates <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{qe} \f$.
 # 
-def conj(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
+def conj(qe: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the vector expression <em>ve</em> (identity for real-valued vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{ve} \f$.
 # 
-def conj(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+def conj(ve: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the matrix expression <em>me</em> (identity for real-valued matrices).
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{me} \f$.
 # 
-def conj(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+def conj(me: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the quaternion conjugate of the quaternion expression <em>qe</em> (negates <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{qe} \f$.
 # 
-def conj(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
+def conj(qe: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the vector expression <em>ve</em> (identity for real-valued vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{ve} \f$.
 # 
-def conj(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+def conj(ve: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the matrix expression <em>me</em> (identity for real-valued matrices).
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{me} \f$.
 # 
-def conj(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+def conj(me: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the quaternion conjugate of the quaternion expression <em>qe</em> (negates <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{qe} \f$.
 # 
-def conj(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
+def conj(qe: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise complex conjugate of the vector expression <em>e</em> (identity for real-valued vectors).
+# \brief Returns the element-wise complex conjugate of the vector expression <em>ve</em> (identity for real-valued vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression template node representing \f$ \overline{ve} \f$.
 # 
-def conj(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+def conj(ve: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
 # \brief Returns the cross-product (skew-symmetric) matrix corresponding to the 3D vector expression <em>e</em> (such that <tt>cross(e) * v == crossProd(e, v)</tt>).
@@ -494,7 +590,7 @@ def cross(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 def cross(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
@@ -504,7 +600,7 @@ def cross(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 def crossProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
@@ -514,7 +610,7 @@ def crossProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDV
 def crossProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
@@ -524,7 +620,7 @@ def crossProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFV
 def crossProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression template node.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
@@ -4157,12 +4253,12 @@ def svDecompose(a: ULMatrixExpression, w: ULVectorExpression, v: ULMatrixExpress
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4176,12 +4272,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4195,12 +4291,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4214,12 +4310,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4233,12 +4329,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4252,12 +4348,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4271,12 +4367,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4290,12 +4386,12 @@ def svSubstitute(u: ConstULMatrixExpression, w: ConstULVectorExpression, v: Cons
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4415,115 +4511,163 @@ def trans(e: LMatrixExpression) -> LMatrixTranspose: pass
 def trans(e: ULMatrixExpression) -> ULMatrixTranspose: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2DArray, xform: Matrix2D) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2DArray, xform: Matrix3D) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2FArray, xform: Matrix2F) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2FArray, xform: Matrix3F) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2LArray, xform: Matrix2L) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2LArray, xform: Matrix3L) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2ULArray, xform: Matrix2UL) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector2ULArray, xform: Matrix3UL) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3DArray, xform: Matrix3D) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3DArray, xform: Matrix4D) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3FArray, xform: Matrix3F) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3FArray, xform: Matrix4F) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3LArray, xform: Matrix3L) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3LArray, xform: Matrix4L) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3ULArray, xform: Matrix3UL) -> None: pass
 
 ##
-# \brief 
-# \param va 
-# \param xform 
-#
+# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# 
+# \param va The vectors to transform.
+# \param xform The transformation matrix.
+# 
+# \note The missing vector element is taken to be <em>1</em>.
+# 
 def transform(va: Vector3ULArray, xform: Matrix4UL) -> None: pass
 
 ##

@@ -203,10 +203,10 @@ void CDPLPythonMath::exportQuaternionFunctions()
     python::def("unreal", &unreal<long>, python::arg("e"));
     python::def("unreal", &unreal<unsigned long>, python::arg("e"));
 
-    python::def("conj", &conj<float>, python::arg("e"));
-    python::def("conj", &conj<double>, python::arg("e"));
-    python::def("conj", &conj<long>, python::arg("e"));
-    python::def("conj", &conj<unsigned long>, python::arg("e"));
+    python::def("conj", &conj<float>, python::arg("qe"));
+    python::def("conj", &conj<double>, python::arg("qe"));
+    python::def("conj", &conj<long>, python::arg("qe"));
+    python::def("conj", &conj<unsigned long>, python::arg("qe"));
 
     python::def("inv", &inv<float>, python::arg("e"));
     python::def("inv", &inv<double>, python::arg("e"));

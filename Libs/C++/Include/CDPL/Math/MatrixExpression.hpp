@@ -1588,18 +1588,18 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the element-wise complex conjugate of the matrix expression \a e (identity for real-valued matrices).
+         * \brief Returns the element-wise complex conjugate of the matrix expression \a me (identity for real-valued matrices).
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
-         * \return An expression template node representing \f$ \overline{e} \f$.
+         * \param me The matrix expression.
+         * \return An expression template node representing \f$ \overline{me} \f$.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
-        conj(const MatrixExpression<E>& e)
+        conj(const MatrixExpression<E>& me)
         {
             typedef typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(me());
         }
 
         /**

@@ -1532,18 +1532,18 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the quaternion conjugate of the quaternion expression \a e (negates \e C2, \e C3, \e C4).
+         * \brief Returns the quaternion conjugate of the quaternion expression \a qe (negates \e C2, \e C3, \e C4).
          * \tparam E The quaternion expression type.
-         * \param e The quaternion expression.
-         * \return An expression template node representing \f$ \overline{e} \f$.
+         * \param qe The quaternion expression.
+         * \return An expression template node representing \f$ \overline{qe} \f$.
          */
         template <typename E>
         typename QuaternionUnary2Traits<E, QuaternionConjugate<E> >::ResultType
-        conj(const QuaternionExpression<E>& e)
+        conj(const QuaternionExpression<E>& qe)
         {
             typedef typename QuaternionUnary2Traits<E, QuaternionConjugate<E> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(qe());
         }
 
         /**

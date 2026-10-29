@@ -364,9 +364,17 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                     
                 arg_names = ''
                     
-                for decl_name in mem_def.getElementsByTagName('declname'):
-                    arg_names += ',' + getTextRecursive(decl_name)
+                for child in mem_def.childNodes:
+                    if child.localName != 'param':
+                        continue
 
+                    declname = child.getElementsByTagName('declname')
+
+                    if declname:
+                        arg_names += ',' + getTextRecursive(declname[0])
+                    else:
+                        arg_names += ',?'
+                        
                 if arg_names:
                     arg_names = arg_names[1:]
                     

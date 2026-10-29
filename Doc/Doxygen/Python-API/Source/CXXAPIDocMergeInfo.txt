@@ -38,6 +38,7 @@ Base class § %Base class
 '\nAny ' § '\n%Any '
 <em>CDPL</em> § <em>%CDPL</em>
 ' (via its stored closure)' §
+' as an expression template node' §
 
 #
 # --- General method name replacements ---

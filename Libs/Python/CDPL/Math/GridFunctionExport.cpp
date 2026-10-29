@@ -133,8 +133,8 @@ void CDPLPythonMath::exportGridFunctions()
     python::def("imag", &imag<float>, python::arg("e"));
     python::def("imag", &imag<double>, python::arg("e"));
 
-    python::def("conj", &conj<float>, python::arg("e"));
-    python::def("conj", &conj<double>, python::arg("e"));
+    python::def("conj", &conj<float>, python::arg("ge"));
+    python::def("conj", &conj<double>, python::arg("ge"));
 
     python::def("herm", &herm<float>, python::arg("e"));
     python::def("herm", &herm<double>, python::arg("e"));
