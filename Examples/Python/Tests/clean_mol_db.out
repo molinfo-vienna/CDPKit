@@ -14,7 +14,7 @@ C12C(=CC(C(=C1)Nc1ccc(cc1)Cl)=NC(C)C)N(c1c(cccc1)N=2)c2ccc(cc2)Cl
 C(c1ccc(cc1)N(C)C)(CC(C[C@H]1[C@@H]([C@@H]([C@@H](C[C@H]2[C@H]([C@H]([C@H](C)O)C)O2)CO1)O)O)=O)=O
 C(c1c(cc(cc1F)C)F)(N[C@@H]1c2nc(c3c(cc(cc3)NC(OC)=O)NC(CCC=CC1)=O)c([nH]2)Cl)=O  
 C1(COC(=N1)Nc1cc2c(cc1)ncnc2Nc2cc(c(cc2)Oc2cc1ncnn1cc2)C)(C)C
-C(c1c(ccc(c1)[N+]([O-])=O)OC(c1ccc(cc1)NC)=O)#N
+C1(C(Oc2c(C#N)cc(cc2)[N+]([O-])=O)=O)=C[C]=C(C=C1)NC
 C12[C@@]34[C@@]5([C@@H]6[C@@]7([C@@H]([C@@](CC[C@@H]7OC)(CN6CC)C)[C@@H]5O)[C@@]1(C[C@@H]([C@@H]2OC)[C@H](C3)OC)O)OCO4
 C12C(C3CCC1N3C(c3ccc1c(ccc(c1)Oc1ccc(C(F)(F)F)cn1)n3)=O)CNC2 BDBM250863
 C([C@@]1([C@H](C2CC2)C1)NC([C@@H]1C[C@H](CN1C([C@H](C(C)(C)C)NC(O[C@@H]1C[C@H]2[C@H](C2)C1)=O)=O)Oc1c2c(c(cn1)OC)ccc(c2)Cl)=O)(NS(C2CC2)(=O)=O)=O  
@@ -39,7 +39,7 @@ C1(C(Cc2c(cc(cc2)[N](=O)=O)C)(C)O)C(N(c2ccccc2)NC=1N)=O
 c12c(c3c(cccc3)nc1cc(cc2)N=[N]=N)Nc2c(cc(cc2)NS(C)(=O)=O)OC
 C1(C(N(C(N2C=1C=CC=C2)=O)CCCCN2CCC(c1c3c(C=CC(F)=[F]3)[nH]c1)CC2)=O)c2ccc(cc2)F
 C12C(c3c4c1cccc4ccc3)=[N](c3c(cccc3)N=2)=NC(C(C)Br)=O
-C1(C(C)(C)[N+](=C(c2ccc(cc2)OCC(N[C@H](C(=O)O)CCCNC(=N)N)=O)N1O)[O-])(C)C
+C1(C(C)(C)[N+](=C(c2ccc(cc2)OCC(N[C@H](C(=O)O)CCCNC(=N)N)=O)N1[O])[O-])(C)C
 C(c1cn(C)nc1)(N1[C@@H]2[C@@H](CC1)N(Cc1cccnc1)CC2)=O
 C1(C(Nc2c1nccc2)=O)=Cc2c1c(cccc1)n(c2)C
 C12C3(c4c(ccc(c4)OC)CC1N(C)CC3)CCCC2
