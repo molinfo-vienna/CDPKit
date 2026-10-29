@@ -29,17 +29,23 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
     derad = False
 
     if args.deradicalize:
+        # will store the 'deradicalized' version of the argument mol
+        res_mol = Chem.BasicMolecule(mol)
+        
         # calculates the number of electrons for each atom that are not engaged in a bond although
         # they should be according to the valence rules
-        Chem.calcUnpairedElectronCounts(mol, False)
-        
+        Chem.calcUnpairedElectronCounts(res_mol, False)
+
         # clear radical information
-        for atom in mol.atoms:
+        for atom in res_mol.atoms:
             if Chem.getRadicalType(atom) != Chem.RadicalType.NOT_RADICALIC or Chem.getUnpairedElectronCount(atom) > 0:
                 Chem.clearRadicalType(atom)
                 Chem.clearUnpairedElectronCount(atom)
                 Chem.clearImplicitHydrogenCount(atom)
                 derad = True
+
+        if derad:
+            mol = res_mol
                 
     chgs_mod = False
 
@@ -304,10 +310,9 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-r',
                         dest='deradicalize',
                         required=False,
-                        metavar='<true|false>',
-                        type=lambda x:bool(strtobool(x)),
-                        default=True,
-                        help='Replace radical electrons by hydrogens (default: true)')
+                        action='store_true',
+                        default=False,
+                        help='Replace radical electrons by bonds to implicit hydrogens (default: false)')
     parser.add_argument('-C',
                         dest='canonicalize',
                         required=False,

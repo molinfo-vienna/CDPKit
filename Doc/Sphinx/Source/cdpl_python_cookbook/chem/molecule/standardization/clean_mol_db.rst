@@ -90,7 +90,7 @@ and then writes only those molecules that fulfill particular user-defined criter
 
  -r
 
-    Replace radical electrons by hydrogens (default: true)
+    Replace radical electrons by bonds to implicit hydrogens (default: false)
  
  -c
 
@@ -151,11 +151,12 @@ gets specified then the count is assumed to be ``1``.
 
 .. code-block:: shell
 
-   python clean_mol_db.py -i <path/to/molecule/input/file> -o <path/to/molecule/output/file> -a C,H,N,O,S,P,F,Cl,Br,I -m C,A:3 -M F:9 -c -s
+   python clean_mol_db.py -i <path/to/molecule/input/file> -o <path/to/molecule/output/file> -a C,H,N,O,S,P,F,Cl,Br,I -m C,A:3 -M F:9 -c -s -r
 
 When executed as shown, the script will perform the following operations on each
 read input molecule (in the order listed):
 
+#. Radical electrons replaced by bonds to implicit hydrogens (if any)
 #. Reduction of the number of charged atoms (if any and if possible)
 #. Removal of all but the largest molecular graph component (only if multi-comp. molecule)
 #. Check whether the chem. element of each atom of the working molecule (= result of prev. steps) is either C, H, N, O, S, P, F, Cl, Br, or I.
