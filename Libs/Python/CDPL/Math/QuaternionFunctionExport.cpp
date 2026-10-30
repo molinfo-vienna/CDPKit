@@ -178,25 +178,25 @@ void CDPLPythonMath::exportQuaternionFunctions()
     python::def("quat", &makeQuat4<long>, (python::arg("t1"), python::arg("t2"), python::arg("t3"), python::arg("t4")));
     python::def("quat", &makeQuat4<unsigned long>, (python::arg("t1"), python::arg("t2"), python::arg("t3"), python::arg("t4")));
 
-    python::def("equals", &equals<float>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<double>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<long>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<unsigned long>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
+    python::def("equals", &equals<float>, (python::arg("qe1"), python::arg("qe2"), python::arg("eps")));
+    python::def("equals", &equals<double>, (python::arg("qe1"), python::arg("qe2"), python::arg("eps")));
+    python::def("equals", &equals<long>, (python::arg("qe1"), python::arg("qe2"), python::arg("eps")));
+    python::def("equals", &equals<unsigned long>, (python::arg("qe1"), python::arg("qe2"), python::arg("eps")));
 
-    python::def("elemDiv", &elemDiv<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemDiv", &elemDiv<float>, (python::arg("qe1"), python::arg("qe2")));
+    python::def("elemDiv", &elemDiv<double>, (python::arg("qe1"), python::arg("qe2")));
+    python::def("elemDiv", &elemDiv<long>, (python::arg("qe1"), python::arg("qe2")));
+    python::def("elemDiv", &elemDiv<unsigned long>, (python::arg("qe1"), python::arg("qe2")));
 
-    python::def("elemProd", &elemProd<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemProd", &elemProd<float>, (python::arg("qe1"), python::arg("qe2")));
+    python::def("elemProd", &elemProd<double>, (python::arg("qe1"), python::arg("qe2")));
+    python::def("elemProd", &elemProd<long>, (python::arg("qe1"), python::arg("qe2")));
+    python::def("elemProd", &elemProd<unsigned long>, (python::arg("qe1"), python::arg("qe2")));
 
-    python::def("real", &real<float>, python::arg("e"));
-    python::def("real", &real<double>, python::arg("e"));
-    python::def("real", &real<long>, python::arg("e"));
-    python::def("real", &real<unsigned long>, python::arg("e"));
+    python::def("real", &real<float>, python::arg("qe"));
+    python::def("real", &real<double>, python::arg("qe"));
+    python::def("real", &real<long>, python::arg("qe"));
+    python::def("real", &real<unsigned long>, python::arg("qe"));
 
     python::def("unreal", &unreal<float>, python::arg("e"));
     python::def("unreal", &unreal<double>, python::arg("e"));

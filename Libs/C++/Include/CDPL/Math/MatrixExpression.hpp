@@ -1571,20 +1571,20 @@ namespace CDPL
         }
 
         /**
-         * \brief Tells whether the matrix expressions \a e1 and \a e2 agree element-wise within the absolute tolerance \a eps.
+         * \brief Tells whether the matrix expressions \a me1 and \a me2 agree element-wise within the absolute tolerance \a eps.
          * \tparam E1 The first matrix expression type.
          * \tparam E2 The second matrix expression type.
          * \tparam T The numeric tolerance type.
-         * \param e1 The first matrix expression.
-         * \param e2 The second matrix expression.
+         * \param me1 The first matrix expression.
+         * \param me2 The second matrix expression.
          * \param eps The non-negative absolute tolerance.
          * \return \c true if all elements agree within \a eps, and \c false otherwise.
          */
         template <typename E1, typename E2, typename T>
         typename std::enable_if<std::is_arithmetic<T>::value, typename MatrixToleranceEquality<E1, E2, T>::ResultType>::type
-        equals(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, const T& eps)
+        equals(const MatrixExpression<E1>& me1, const MatrixExpression<E2>& me2, const T& eps)
         {
-            return MatrixToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
+            return MatrixToleranceEquality<E1, E2, T>::apply(me1, me2, eps);
         }
 
         /**
@@ -1603,48 +1603,48 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression \a e — currently aliased to conj() pending transpose support.
+         * \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression \a me.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
-         * \return An expression template node representing \f$ \overline{e} \f$.
+         * \param me The matrix expression.
+         * \return An expression template node representing \f$ \overline{me^T} \f$.
          */
         template <typename E>
-        typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
-        herm(const MatrixExpression<E>& e)
+        MatrixTranspose<const typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType>
+        herm(const MatrixExpression<E>& me)
         {
-            typedef typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ExpressionType ExpressionType;
+            typedef typename MatrixUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ExpressionType ConjExpressionType;
 
-            return ExpressionType(e());
+            return MatrixTranspose<const ConjExpressionType>(ConjExpressionType(me()));
         }
 
         /**
-         * \brief Returns the element-wise real part of the matrix expression \a e.
+         * \brief Returns the element-wise real part of the matrix expression \a me.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
-         * \return An expression template node representing the real part of \a e.
+         * \param me The matrix expression.
+         * \return An expression template node representing the real part of \a me.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
-        real(const MatrixExpression<E>& e)
+        real(const MatrixExpression<E>& me)
         {
             typedef typename MatrixUnaryTraits<E, ScalarReal<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(me());
         }
 
         /**
-         * \brief Returns the element-wise imaginary part of the matrix expression \a e.
+         * \brief Returns the element-wise imaginary part of the matrix expression \a me.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
-         * \return An expression template node representing the imaginary part of \a e.
+         * \param me The matrix expression.
+         * \return An expression template node representing the imaginary part of \a me.
          */
         template <typename E>
         typename MatrixUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
-        imag(const MatrixExpression<E>& e)
+        imag(const MatrixExpression<E>& me)
         {
             typedef typename MatrixUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(me());
         }
 
         /**
@@ -1666,39 +1666,39 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the element-wise quotient of the matrix expressions \a e1 and \a e2.
+         * \brief Returns the element-wise quotient of the matrix expressions \a me1 and \a me2.
          * \tparam E1 The first matrix expression type.
          * \tparam E2 The second matrix expression type.
-         * \param e1 The numerator matrix expression.
-         * \param e2 The denominator matrix expression.
-         * \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         * \param me1 The numerator matrix expression.
+         * \param me2 The denominator matrix expression.
+         * \return An expression template node representing the element-wise quotient \f$ me_1 / me_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemDiv(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
+        elemDiv(const MatrixExpression<E1>& me1, const MatrixExpression<E2>& me2)
         {
             typedef typename MatrixBinary1Traits<E1, E2,
                                                  ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(me1(), me2());
         }
 
         /**
-         * \brief Returns the element-wise product (Hadamard product) of the matrix expressions \a e1 and \a e2.
+         * \brief Returns the element-wise product (Hadamard product) of the matrix expressions \a me1 and \a me2.
          * \tparam E1 The first matrix expression type.
          * \tparam E2 The second matrix expression type.
-         * \param e1 The first matrix expression.
-         * \param e2 The second matrix expression.
-         * \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         * \param me1 The first matrix expression.
+         * \param me2 The second matrix expression.
+         * \return An expression template node representing the element-wise product \f$ me_1 \odot me_2 \f$.
          */
         template <typename E1, typename E2>
         typename MatrixBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemProd(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2)
+        elemProd(const MatrixExpression<E1>& me1, const MatrixExpression<E2>& me2)
         {
             typedef typename MatrixBinary1Traits<E1, E2,
                                                  ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(me1(), me2());
         }
 
         /**

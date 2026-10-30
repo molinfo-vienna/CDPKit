@@ -44,7 +44,7 @@ namespace CDPL
          * \brief Computes an in-place LU decomposition of the matrix \a e without partial pivoting.
          * \tparam E The matrix expression type.
          * \param e The matrix to decompose (modified in place).
-         * \return The 1-based row index of the first singular pivot, or \e 0 if the matrix is non-singular.
+         * \return The <em>1</em>-based row index of the first singular pivot, or \e 0 if the matrix is non-singular.
          */
         template <typename E>
         typename E::SizeType
@@ -90,9 +90,9 @@ namespace CDPL
          * \tparam PV The permutation vector type (must support indexed write access).
          * \tparam T An arithmetic counter type.
          * \param e The matrix to decompose (modified in place).
-         * \param pv The output permutation vector recording the row pivots (\a pv[i] = pivot row index for step \a i).
+         * \param pv The output permutation vector recording the row pivots (\a pv[i] = pivot row index for step \e i).
          * \param num_row_swaps The output count of executed row swaps.
-         * \return The 1-based row index of the first singular pivot, or \e 0 if the matrix is non-singular.
+         * \return The <em>1</em>-based row index of the first singular pivot, or \e 0 if the matrix is non-singular.
          */
         template <typename E, typename PV, typename T>
         typename E::SizeType
@@ -183,77 +183,77 @@ namespace CDPL
         }
 
         /**
-         * \brief Solves \f$ LU\,x = b \f$ for \a b in place, given the LU decomposition \a lu (without pivoting).
+         * \brief Solves \f$ LU\,x = b \f$ for \a bv in place, given the LU decomposition \a lu (without pivoting).
          * \tparam E1 The matrix expression type of \a lu.
-         * \tparam E2 The vector expression type of \a b.
+         * \tparam E2 The vector expression type of \a bv.
          * \param lu The LU decomposition.
-         * \param b The right-hand side vector, overwritten with the solution.
+         * \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
          * \return \c true if the back-substitution succeeded, and \c false if a zero pivot was encountered.
          */
         template <typename E1, typename E2>
         bool
-        luSubstitute(const MatrixExpression<E1>& lu, VectorExpression<E2>& b)
+        luSubstitute(const MatrixExpression<E1>& lu, VectorExpression<E2>& bv)
         {
-            if (!solveUnitLower(lu, b))
+            if (!solveUnitLower(lu, bv))
                 return false;
 
-            return solveUpper(lu, b);
+            return solveUpper(lu, bv);
         }
 
         /**
-         * \brief Solves \f$ LU\,x = b \f$ for \a b in place, given the LU decomposition \a lu and pivot vector \a pv.
+         * \brief Solves \f$ LU\,x = b \f$ for \a bv in place, given the LU decomposition \a lu and pivot vector \a pv.
          * \tparam E1 The matrix expression type of \a lu.
-         * \tparam E2 The vector expression type of \a b.
+         * \tparam E2 The vector expression type of \a bv.
          * \tparam PV The permutation vector type.
          * \param lu The LU decomposition (with pivoting).
          * \param pv The permutation vector recorded during the LU decomposition.
-         * \param b The right-hand side vector, overwritten with the solution.
+         * \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
          * \return \c true if the back-substitution succeeded, and \c false if a zero pivot was encountered.
          */
         template <typename E1, typename E2, typename PV>
         bool
-        luSubstitute(const MatrixExpression<E1>& lu, const PV& pv, VectorExpression<E2>& b)
+        luSubstitute(const MatrixExpression<E1>& lu, const PV& pv, VectorExpression<E2>& bv)
         {
-            swapRows(b, pv);
+            swapRows(bv, pv);
 
-            return luSubstitute(lu, b);
+            return luSubstitute(lu, bv);
         }
 
         /**
-         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a b in place, given the LU decomposition \a lu (without pivoting).
+         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a bm in place, given the LU decomposition \a lu (without pivoting).
          * \tparam E1 The matrix expression type of \a lu.
-         * \tparam E2 The matrix expression type of \a b.
+         * \tparam E2 The matrix expression type of \a bm.
          * \param lu The LU decomposition.
-         * \param b The right-hand side matrix, overwritten with the solution.
+         * \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
          * \return \c true if the back-substitution succeeded, and \c false if a zero pivot was encountered.
          */
         template <typename E1, typename E2>
         bool
-        luSubstitute(const MatrixExpression<E1>& lu, MatrixExpression<E2>& b)
+        luSubstitute(const MatrixExpression<E1>& lu, MatrixExpression<E2>& bm)
         {
-            if (!solveUnitLower(lu, b))
+            if (!solveUnitLower(lu, bm))
                 return false;
 
-            return solveUpper(lu, b);
+            return solveUpper(lu, bm);
         }
 
         /**
-         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a b in place, given the LU decomposition \a lu and pivot vector \a pv.
+         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a bm in place, given the LU decomposition \a lu and pivot vector \a pv.
          * \tparam E1 The matrix expression type of \a lu.
-         * \tparam E2 The matrix expression type of \a b.
+         * \tparam E2 The matrix expression type of \a bm.
          * \tparam PV The permutation vector type.
          * \param lu The LU decomposition (with pivoting).
          * \param pv The permutation vector recorded during the LU decomposition.
-         * \param b The right-hand side matrix, overwritten with the solution.
+         * \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
          * \return \c true if the back-substitution succeeded, and \c false if a zero pivot was encountered.
          */
         template <typename E1, typename E2, typename PV>
         bool
-        luSubstitute(const MatrixExpression<E1>& lu, const PV& pv, MatrixExpression<E2>& b)
+        luSubstitute(const MatrixExpression<E1>& lu, const PV& pv, MatrixExpression<E2>& bm)
         {
-            swapRows(b, pv);
+            swapRows(bm, pv);
 
-            return luSubstitute(lu, b);
+            return luSubstitute(lu, bm);
         }
     } // namespace Math
 } // namespace CDPL

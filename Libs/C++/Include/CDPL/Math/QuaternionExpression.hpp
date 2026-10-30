@@ -1451,69 +1451,69 @@ namespace CDPL
         }
 
         /**
-         * \brief Tells whether the quaternion expressions \a e1 and \a e2 agree component-wise within the absolute tolerance \a eps.
+         * \brief Tells whether the quaternion expressions \a qe1 and \a qe2 agree component-wise within the absolute tolerance \a eps.
          * \tparam E1 The first quaternion expression type.
          * \tparam E2 The second quaternion expression type.
          * \tparam T The numeric tolerance type.
-         * \param e1 The first quaternion expression.
-         * \param e2 The second quaternion expression.
+         * \param qe1 The first quaternion expression.
+         * \param qe2 The second quaternion expression.
          * \param eps The non-negative absolute tolerance.
          * \return \c true if all four components agree within \a eps, and \c false otherwise.
          */
         template <typename E1, typename E2, typename T>
         typename std::enable_if<std::is_arithmetic<T>::value, typename QuaternionToleranceEquality<E1, E2, T>::ResultType>::type
-        equals(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, const T& eps)
+        equals(const QuaternionExpression<E1>& qe1, const QuaternionExpression<E2>& qe2, const T& eps)
         {
-            return QuaternionToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
+            return QuaternionToleranceEquality<E1, E2, T>::apply(qe1, qe2, eps);
         }
 
         /**
-         * \brief Returns the component-wise quotient of the quaternion expressions \a e1 and \a e2.
+         * \brief Returns the component-wise quotient of the quaternion expressions \a qe1 and \a qe2.
          * \tparam E1 The first quaternion expression type.
          * \tparam E2 The second quaternion expression type.
-         * \param e1 The numerator quaternion expression.
-         * \param e2 The denominator quaternion expression.
-         * \return An expression template node representing the component-wise quotient.
+         * \param qe1 The numerator quaternion expression.
+         * \param qe2 The denominator quaternion expression.
+         * \return An expression template node representing the component-wise quotient \f$ qe_1 / qe_2 \f$.
          */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemDiv(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
+        elemDiv(const QuaternionExpression<E1>& qe1, const QuaternionExpression<E2>& qe2)
         {
             typedef typename QuaternionBinary1Traits<E1, E2,
                                                      ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(qe1(), qe2());
         }
 
         /**
-         * \brief Returns the component-wise product (Hadamard product) of the quaternion expressions \a e1 and \a e2.
+         * \brief Returns the component-wise product (Hadamard product) of the quaternion expressions \a qe1 and \a qe2.
          * \tparam E1 The first quaternion expression type.
          * \tparam E2 The second quaternion expression type.
-         * \param e1 The first quaternion expression.
-         * \param e2 The second quaternion expression.
-         * \return An expression template node representing the component-wise product.
+         * \param qe1 The first quaternion expression.
+         * \param qe2 The second quaternion expression.
+         * \return An expression template node representing the component-wise product \f$ qe_1 \odot qe_2 \f$.
          */
         template <typename E1, typename E2>
         typename QuaternionBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemProd(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
+        elemProd(const QuaternionExpression<E1>& qe1, const QuaternionExpression<E2>& qe2)
         {
             typedef typename QuaternionBinary1Traits<E1, E2,
                                                      ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(qe1(), qe2());
         }
 
         /**
-         * \brief Returns the real component (C1) of the quaternion expression \a e.
+         * \brief Returns the real component (\e C1) of the quaternion expression \a qe.
          * \tparam E The quaternion expression type.
-         * \param e The quaternion expression.
-         * \return The real component \f$ \mathrm{Re}(e) \f$ as a scalar.
+         * \param qe The quaternion expression.
+         * \return The real component \f$ \mathrm{Re}(qe) \f$ as a scalar.
          */
         template <typename E>
         typename E::ValueType
-        real(const QuaternionExpression<E>& e)
+        real(const QuaternionExpression<E>& qe)
         {
-            return e().getC1();
+            return qe().getC1();
         }
 
         /**

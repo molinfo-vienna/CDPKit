@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix \a an using Jacobi's
+         * \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix \a a using Jacobi's
          *        algorithm [\ref WJACO ].
          *
          * On output, elements of \a a above the diagonal are destroyed. The vector \a d returns

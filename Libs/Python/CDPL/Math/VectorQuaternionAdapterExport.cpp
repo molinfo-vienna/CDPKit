@@ -67,7 +67,7 @@ namespace
                 .def(QuaternionVisitor<VectorAdapterType>("va"))
                 .def(WrappedDataVisitor<VectorAdapterWrapper>());
 
-            python::def("quat", &quat, python::arg("e"));
+            python::def("quat", &quat, python::arg("me"));
         }
 
         static WrapperPointerType quat(const ExpressionPointerType& e) {

@@ -64,7 +64,7 @@ namespace
                 .def(VectorNDArrayAssignVisitor<HomogenousCoordsAdapterType>())
                 .def(WrappedDataVisitor<HomogenousCoordsAdapterWrapper>());
 
-            python::def("homog", &homog, python::arg("e"));
+            python::def("homog", &homog, python::arg("me"));
         }
 
         static WrapperPointerType homog(const ExpressionPointerType& e) {

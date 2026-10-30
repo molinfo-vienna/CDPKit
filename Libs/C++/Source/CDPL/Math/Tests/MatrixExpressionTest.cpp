@@ -191,15 +191,15 @@ namespace
         typedef typename M::ValueType ValueType;
         typedef typename M::SizeType SizeType;
 
-        BOOST_CHECK_EQUAL(herm(m).getSize1(), m.getSize1());
-        BOOST_CHECK_EQUAL(herm(m).getSize2(), m.getSize2());
+        BOOST_CHECK_EQUAL(herm(m).getSize2(), m.getSize1());
+        BOOST_CHECK_EQUAL(herm(m).getSize1(), m.getSize2());
 
         for (SizeType i = 0; i < m.getSize1(); i++) 
             for (SizeType j = 0; j < m.getSize2(); j++) 
-                BOOST_CHECK_EQUAL(herm(m)(i, j), TypeTraits<ValueType>::conj(m(i, j)));
+                BOOST_CHECK_EQUAL(herm(m)(j, i), TypeTraits<ValueType>::conj(m(i, j)));
 
-        BOOST_CHECK_THROW(herm(m)(m.getSize1(), 0), Base::IndexError);
-        BOOST_CHECK_THROW(herm(m)(0, m.getSize2()), Base::IndexError);
+        BOOST_CHECK_THROW(herm(m)(m.getSize2(), 0), Base::IndexError);
+        BOOST_CHECK_THROW(herm(m)(0, m.getSize1()), Base::IndexError);
     }
 
     template <typename M>

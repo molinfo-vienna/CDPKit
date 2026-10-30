@@ -765,55 +765,55 @@ namespace CDPL
         {};
 
         /**
-         * \brief Creates a mutable Math::VectorQuaternionAdapter view of the 4-element vector expression \a e.
+         * \brief Creates a mutable Math::VectorQuaternionAdapter view of the 4-element vector expression \a me.
          * \tparam E The vector expression type.
-         * \param e The vector expression to wrap.
-         * \return A mutable quaternion view of \a e.
+         * \param me The vector expression to wrap.
+         * \return A mutable quaternion view of \a me.
          */
         template <typename E>
         VectorQuaternionAdapter<E>
-        quat(VectorExpression<E>& e)
+        quat(VectorExpression<E>& me)
         {
-            return VectorQuaternionAdapter<E>(e());
+            return VectorQuaternionAdapter<E>(me());
         }
 
         /**
-         * \brief Creates a constant Math::VectorQuaternionAdapter view of the 4-element vector expression \a e.
+         * \brief Creates a constant Math::VectorQuaternionAdapter view of the 4-element vector expression \a ce.
          * \tparam E The vector expression type.
-         * \param e The vector expression to wrap.
-         * \return A constant quaternion view of \a e.
+         * \param ce The vector expression to wrap.
+         * \return A constant quaternion view of \a ce.
          */
         template <typename E>
         VectorQuaternionAdapter<const E>
-        quat(const VectorExpression<E>& e)
+        quat(const VectorExpression<E>& ce)
         {
-            return VectorQuaternionAdapter<const E>(e());
+            return VectorQuaternionAdapter<const E>(ce());
         }
 
         /**
-         * \brief Creates a mutable Math::HomogenousCoordsAdapter view of the vector expression \a e (extends \a e by an implicit \c 1).
+         * \brief Creates a mutable Math::HomogenousCoordsAdapter view of the vector expression \a me.
          * \tparam E The vector expression type.
-         * \param e The vector expression to wrap.
-         * \return A mutable homogeneous-coordinates view of \a e.
+         * \param me The vector expression to wrap.
+         * \return A mutable homogeneous-coordinates view of \a me.
          */
         template <typename E>
         HomogenousCoordsAdapter<E>
-        homog(VectorExpression<E>& e)
+        homog(VectorExpression<E>& me)
         {
-            return HomogenousCoordsAdapter<E>(e());
+            return HomogenousCoordsAdapter<E>(me());
         }
 
         /**
-         * \brief Creates a constant Math::HomogenousCoordsAdapter view of the vector expression \a e.
+         * \brief Creates a constant Math::HomogenousCoordsAdapter view of the vector expression \a ce.
          * \tparam E The vector expression type.
-         * \param e The vector expression to wrap.
-         * \return A constant homogeneous-coordinates view of \a e.
+         * \param ce The vector expression to wrap.
+         * \return A constant homogeneous-coordinates view of \a ce.
          */
         template <typename E>
         HomogenousCoordsAdapter<const E>
-        homog(const VectorExpression<E>& e)
+        homog(const VectorExpression<E>& ce)
         {
-            return HomogenousCoordsAdapter<const E>(e());
+            return HomogenousCoordsAdapter<const E>(ce());
         }
     } // namespace Math
 } // namespace CDPL

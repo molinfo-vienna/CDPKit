@@ -38,7 +38,8 @@ Base class § %Base class
 '\nAny ' § '\n%Any '
 <em>CDPL</em> § <em>%CDPL</em>
 ' (via its stored closure)' §
-' as an expression template node' §
+as an expression template node § as an expression object
+An expression template node § An expression object
 
 #
 # --- General method name replacements ---
@@ -880,6 +881,23 @@ the triangular § the <em>lower</em> triangular
 (off-policy entries return the appropriate fill value: zero or one) § (off-policy entries return the fill value zero)
 
 Math.*Triangular*MatrixAdapter.getSize() § Math.TriangularAdapter.getSize1()
+
+# ---
+
+Math.column § Math.column
+A Math.MatrixColumn proxy § A proxy object
+
+Math.row § Math.row
+A Math.MatrixRow proxy § A proxy object
+
+Math.homog § Math.homog
+Math.HomogenousCoordsAdapter § homogeneous-coordinates
+
+Math.quat § Math.quat
+Math.VectorQuaternionAdapter § quaternion
+
+Math.luDecompose(e,pv) § Math.luDecompose(e,pv,num_row_swaps)
+\param num_row_swaps The output count of executed row swaps. §
 
 #
 # --- CDPL.Util package ---

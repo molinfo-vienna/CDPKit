@@ -124,26 +124,26 @@ void CDPLPythonMath::exportGridFunctions()
 {
     using namespace boost;
 
-    python::def("equals", &equals<float>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<double>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
+    python::def("equals", &equals<float>, (python::arg("ge1"), python::arg("ge2"), python::arg("eps")));
+    python::def("equals", &equals<double>, (python::arg("ge1"), python::arg("ge2"), python::arg("eps")));
 
-    python::def("real", &real<float>, python::arg("e"));
-    python::def("real", &real<double>, python::arg("e"));
+    python::def("real", &real<float>, python::arg("ge"));
+    python::def("real", &real<double>, python::arg("ge"));
 
-    python::def("imag", &imag<float>, python::arg("e"));
-    python::def("imag", &imag<double>, python::arg("e"));
+    python::def("imag", &imag<float>, python::arg("ge"));
+    python::def("imag", &imag<double>, python::arg("ge"));
 
     python::def("conj", &conj<float>, python::arg("ge"));
     python::def("conj", &conj<double>, python::arg("ge"));
 
-    python::def("herm", &herm<float>, python::arg("e"));
-    python::def("herm", &herm<double>, python::arg("e"));
+    python::def("herm", &herm<float>, python::arg("ge"));
+    python::def("herm", &herm<double>, python::arg("ge"));
 
-    python::def("elemDiv", &elemDiv<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<double>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemDiv", &elemDiv<float>, (python::arg("ge1"), python::arg("ge2")));
+    python::def("elemDiv", &elemDiv<double>, (python::arg("ge1"), python::arg("ge2")));
 
-    python::def("elemProd", &elemProd<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<double>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemProd", &elemProd<float>, (python::arg("ge1"), python::arg("ge2")));
+    python::def("elemProd", &elemProd<double>, (python::arg("ge1"), python::arg("ge2")));
 
     python::def("sum", &sum<float>, python::arg("e"));
     python::def("sum", &sum<double>, python::arg("e"));

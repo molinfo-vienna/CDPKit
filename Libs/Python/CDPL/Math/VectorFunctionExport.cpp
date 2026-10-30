@@ -250,20 +250,20 @@ void CDPLPythonMath::exportVectorFunctions()
     python::def("vec", &makeVec4<long>, (python::arg("t1"), python::arg("t2"), python::arg("t3"), python::arg("t4")));
     python::def("vec", &makeVec4<unsigned long>, (python::arg("t1"), python::arg("t2"), python::arg("t3"), python::arg("t4")));
 
-    python::def("equals", &equals<float>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<double>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<long>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<unsigned long>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
+    python::def("equals", &equals<float>, (python::arg("ve1"), python::arg("ve2"), python::arg("eps")));
+    python::def("equals", &equals<double>, (python::arg("ve1"), python::arg("ve2"), python::arg("eps")));
+    python::def("equals", &equals<long>, (python::arg("ve1"), python::arg("ve2"), python::arg("eps")));
+    python::def("equals", &equals<unsigned long>, (python::arg("ve1"), python::arg("ve2"), python::arg("eps")));
 
-    python::def("elemDiv", &elemDiv<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemDiv", &elemDiv<float>, (python::arg("ve1"), python::arg("ve2")));
+    python::def("elemDiv", &elemDiv<double>, (python::arg("ve1"), python::arg("ve2")));
+    python::def("elemDiv", &elemDiv<long>, (python::arg("ve1"), python::arg("ve2")));
+    python::def("elemDiv", &elemDiv<unsigned long>, (python::arg("ve1"), python::arg("ve2")));
 
-    python::def("elemProd", &elemProd<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemProd", &elemProd<float>, (python::arg("ve1"), python::arg("ve2")));
+    python::def("elemProd", &elemProd<double>, (python::arg("ve1"), python::arg("ve2")));
+    python::def("elemProd", &elemProd<long>, (python::arg("ve1"), python::arg("ve2")));
+    python::def("elemProd", &elemProd<unsigned long>, (python::arg("ve1"), python::arg("ve2")));
 
     python::def("crossProd", &crossProd<float>, (python::arg("e1"), python::arg("e2")));
     python::def("crossProd", &crossProd<double>, (python::arg("e1"), python::arg("e2")));
@@ -280,25 +280,25 @@ void CDPLPythonMath::exportVectorFunctions()
     python::def("angleCos", &angleCos<long>, (python::arg("e1"), python::arg("e2"), python::arg("sd"), python::arg("clamp") = true));
     python::def("angleCos", &angleCos<unsigned long>, (python::arg("e1"), python::arg("e2"), python::arg("sd"), python::arg("clamp") = true));
 
-    python::def("real", &real<float>, python::arg("e"));
-    python::def("real", &real<double>, python::arg("e"));
-    python::def("real", &real<long>, python::arg("e"));
-    python::def("real", &real<unsigned long>, python::arg("e"));
+    python::def("real", &real<float>, python::arg("ve"));
+    python::def("real", &real<double>, python::arg("ve"));
+    python::def("real", &real<long>, python::arg("ve"));
+    python::def("real", &real<unsigned long>, python::arg("ve"));
 
-    python::def("imag", &imag<float>, python::arg("e"));
-    python::def("imag", &imag<double>, python::arg("e"));
-    python::def("imag", &imag<long>, python::arg("e"));
-    python::def("imag", &imag<unsigned long>, python::arg("e"));
+    python::def("imag", &imag<float>, python::arg("ve"));
+    python::def("imag", &imag<double>, python::arg("ve"));
+    python::def("imag", &imag<long>, python::arg("ve"));
+    python::def("imag", &imag<unsigned long>, python::arg("ve"));
 
     python::def("conj", &conj<float>, python::arg("ve"));
     python::def("conj", &conj<double>, python::arg("ve"));
     python::def("conj", &conj<long>, python::arg("ve"));
     python::def("conj", &conj<unsigned long>, python::arg("ve"));
 
-    python::def("herm", &herm<float>, python::arg("e"));
-    python::def("herm", &herm<double>, python::arg("e"));
-    python::def("herm", &herm<long>, python::arg("e"));
-    python::def("herm", &herm<unsigned long>, python::arg("e"));
+    python::def("herm", &herm<float>, python::arg("ve"));
+    python::def("herm", &herm<double>, python::arg("ve"));
+    python::def("herm", &herm<long>, python::arg("ve"));
+    python::def("herm", &herm<unsigned long>, python::arg("ve"));
 
     python::def("norm1", &norm1<float>, python::arg("e"));
     python::def("norm1", &norm1<double>, python::arg("e"));

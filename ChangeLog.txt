@@ -1,5 +1,6 @@
 master:
 
+ - Fixed Math::herm() function for matrix expressions that just returned the complex conjugate and not the transpose of it
  - MDL data reading code now sets the unpaired electron count of atoms based on radical type information (if present)
  - SMILES generation code now regards existing implicit hydrogen count atom property values. Before they were calculated on-the-fly which
    lead to unintended data loss in some cases (e.g. radical atoms)

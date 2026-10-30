@@ -460,40 +460,40 @@ void CDPLPythonMath::exportMatrixFunctions()
     python::def("invert", &invert2<long>, (python::arg("e"), python::arg("c")));
     python::def("invert", &invert2<unsigned long>, (python::arg("e"), python::arg("c")));
 
-    python::def("equals", &equals<float>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<double>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<long>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
-    python::def("equals", &equals<unsigned long>, (python::arg("e1"), python::arg("e2"), python::arg("eps")));
+    python::def("equals", &equals<float>, (python::arg("me1"), python::arg("me2"), python::arg("eps")));
+    python::def("equals", &equals<double>, (python::arg("me1"), python::arg("me2"), python::arg("eps")));
+    python::def("equals", &equals<long>, (python::arg("me1"), python::arg("me2"), python::arg("eps")));
+    python::def("equals", &equals<unsigned long>, (python::arg("me1"), python::arg("me2"), python::arg("eps")));
 
-    python::def("real", &real<float>, python::arg("e"));
-    python::def("real", &real<double>, python::arg("e"));
-    python::def("real", &real<long>, python::arg("e"));
-    python::def("real", &real<unsigned long>, python::arg("e"));
+    python::def("real", &real<float>, python::arg("me"));
+    python::def("real", &real<double>, python::arg("me"));
+    python::def("real", &real<long>, python::arg("me"));
+    python::def("real", &real<unsigned long>, python::arg("me"));
 
-    python::def("imag", &imag<float>, python::arg("e"));
-    python::def("imag", &imag<double>, python::arg("e"));
-    python::def("imag", &imag<long>, python::arg("e"));
-    python::def("imag", &imag<unsigned long>, python::arg("e"));
+    python::def("imag", &imag<float>, python::arg("me"));
+    python::def("imag", &imag<double>, python::arg("me"));
+    python::def("imag", &imag<long>, python::arg("me"));
+    python::def("imag", &imag<unsigned long>, python::arg("me"));
 
     python::def("conj", &conj<float>, python::arg("me"));
     python::def("conj", &conj<double>, python::arg("me"));
     python::def("conj", &conj<long>, python::arg("me"));
     python::def("conj", &conj<unsigned long>, python::arg("me"));
 
-    python::def("herm", &herm<float>, python::arg("e"));
-    python::def("herm", &herm<double>, python::arg("e"));
-    python::def("herm", &herm<long>, python::arg("e"));
-    python::def("herm", &herm<unsigned long>, python::arg("e"));
+    python::def("herm", &herm<float>, python::arg("me"));
+    python::def("herm", &herm<double>, python::arg("me"));
+    python::def("herm", &herm<long>, python::arg("me"));
+    python::def("herm", &herm<unsigned long>, python::arg("me"));
 
-    python::def("elemDiv", &elemDiv<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemDiv", &elemDiv<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemDiv", &elemDiv<float>, (python::arg("me1"), python::arg("me2")));
+    python::def("elemDiv", &elemDiv<double>, (python::arg("me1"), python::arg("me2")));
+    python::def("elemDiv", &elemDiv<long>, (python::arg("me1"), python::arg("me2")));
+    python::def("elemDiv", &elemDiv<unsigned long>, (python::arg("me1"), python::arg("me2")));
 
-    python::def("elemProd", &elemProd<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("elemProd", &elemProd<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("elemProd", &elemProd<float>, (python::arg("me1"), python::arg("me2")));
+    python::def("elemProd", &elemProd<double>, (python::arg("me1"), python::arg("me2")));
+    python::def("elemProd", &elemProd<long>, (python::arg("me1"), python::arg("me2")));
+    python::def("elemProd", &elemProd<unsigned long>, (python::arg("me1"), python::arg("me2")));
 
     python::def("outerProd", &outerProd<float>, (python::arg("e1"), python::arg("e2")));
     python::def("outerProd", &outerProd<double>, (python::arg("e1"), python::arg("e2")));
@@ -584,25 +584,25 @@ void CDPLPythonMath::exportMatrixFunctions()
     python::def("luDecompose", &luDecompose2<long>, (python::arg("e"), python::arg("pv")));
     python::def("luDecompose", &luDecompose2<unsigned long>, (python::arg("e"), python::arg("pv")));
 
-    python::def("luSubstitute", &luSubstitute11<float>, (python::arg("e"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute11<double>, (python::arg("e"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute11<long>, (python::arg("e"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute11<unsigned long>, (python::arg("e"), python::arg("b")));
+    python::def("luSubstitute", &luSubstitute11<float>, (python::arg("lu"), python::arg("bv")));
+    python::def("luSubstitute", &luSubstitute11<double>, (python::arg("lu"), python::arg("bv")));
+    python::def("luSubstitute", &luSubstitute11<long>, (python::arg("lu"), python::arg("bv")));
+    python::def("luSubstitute", &luSubstitute11<unsigned long>, (python::arg("lu"), python::arg("bv")));
 
-    python::def("luSubstitute", &luSubstitute21<float>, (python::arg("e"), python::arg("pv"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute21<double>, (python::arg("e"), python::arg("pv"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute21<long>, (python::arg("e"), python::arg("pv"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute21<unsigned long>, (python::arg("e"), python::arg("pv"), python::arg("b")));
+    python::def("luSubstitute", &luSubstitute21<float>, (python::arg("lu"), python::arg("pv"), python::arg("bv")));
+    python::def("luSubstitute", &luSubstitute21<double>, (python::arg("lu"), python::arg("pv"), python::arg("bv")));
+    python::def("luSubstitute", &luSubstitute21<long>, (python::arg("lu"), python::arg("pv"), python::arg("bv")));
+    python::def("luSubstitute", &luSubstitute21<unsigned long>, (python::arg("lu"), python::arg("pv"), python::arg("bv")));
 
-    python::def("luSubstitute", &luSubstitute12<float>, (python::arg("e"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute12<double>, (python::arg("e"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute12<long>, (python::arg("e"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute12<unsigned long>, (python::arg("e"), python::arg("b")));
+    python::def("luSubstitute", &luSubstitute12<float>, (python::arg("lu"), python::arg("bm")));
+    python::def("luSubstitute", &luSubstitute12<double>, (python::arg("lu"), python::arg("bm")));
+    python::def("luSubstitute", &luSubstitute12<long>, (python::arg("lu"), python::arg("bm")));
+    python::def("luSubstitute", &luSubstitute12<unsigned long>, (python::arg("lu"), python::arg("bm")));
 
-    python::def("luSubstitute", &luSubstitute22<float>, (python::arg("e"), python::arg("pv"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute22<double>, (python::arg("e"), python::arg("pv"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute22<long>, (python::arg("e"), python::arg("pv"), python::arg("b")));
-    python::def("luSubstitute", &luSubstitute22<unsigned long>, (python::arg("e"), python::arg("pv"), python::arg("b")));
+    python::def("luSubstitute", &luSubstitute22<float>, (python::arg("lu"), python::arg("pv"), python::arg("bm")));
+    python::def("luSubstitute", &luSubstitute22<double>, (python::arg("lu"), python::arg("pv"), python::arg("bm")));
+    python::def("luSubstitute", &luSubstitute22<long>, (python::arg("lu"), python::arg("pv"), python::arg("bm")));
+    python::def("luSubstitute", &luSubstitute22<unsigned long>, (python::arg("lu"), python::arg("pv"), python::arg("bm")));
 
     python::def("svDecompose", &svDecompose<float>, 
                 (python::arg("a"), python::arg("w"), python::arg("v"), python::arg("max_iter") = 0));

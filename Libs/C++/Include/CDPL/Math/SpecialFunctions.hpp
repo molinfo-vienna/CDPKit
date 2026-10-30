@@ -72,15 +72,17 @@ namespace CDPL
          * \brief Computes \f$ \ln[\Gamma(z)] \f$ for \f$ z > 0 \f$.
          * \param z The argument to the gamma function.
          * \return The computed logarithm of the gamma function value for \a z.
+         * \see [\ref NRIC]
          */
         template <typename T>
         T lnGamma(const T& z);
 
         /**
-         * \brief Computes the incomplete gamma function \f$ Q(a, x) = 1 - P(a, x) \f$ (see [\ref NRIC] for details).
+         * \brief Computes the incomplete gamma function \f$ Q(a, x) = 1 - P(a, x) \f$.
          * \param a The function argument \a a.
          * \param x The function argument \a x.
-         * \return The computed value of the incomplete gamma function. 
+         * \return The computed value of the incomplete gamma function.
+         * \see [\ref NRIC]
          */
         template <typename T>
         T gammaQ(const T& a, const T& x);

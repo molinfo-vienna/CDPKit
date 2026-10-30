@@ -353,7 +353,7 @@ def calcRMSD(va1: Vector3ULArray, va2: Vector3ULArray, va1_xform: Matrix4UL) -> 
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: ConstDMatrixExpression, j: int) -> ConstDMatrixColumn: pass
 
@@ -363,7 +363,7 @@ def column(e: ConstDMatrixExpression, j: int) -> ConstDMatrixColumn: pass
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: ConstFMatrixExpression, j: int) -> ConstFMatrixColumn: pass
 
@@ -373,7 +373,7 @@ def column(e: ConstFMatrixExpression, j: int) -> ConstFMatrixColumn: pass
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: ConstLMatrixExpression, j: int) -> ConstLMatrixColumn: pass
 
@@ -383,7 +383,7 @@ def column(e: ConstLMatrixExpression, j: int) -> ConstLMatrixColumn: pass
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: ConstULMatrixExpression, j: int) -> ConstULMatrixColumn: pass
 
@@ -393,7 +393,7 @@ def column(e: ConstULMatrixExpression, j: int) -> ConstULMatrixColumn: pass
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: DMatrixExpression, j: int) -> DMatrixColumn: pass
 
@@ -403,7 +403,7 @@ def column(e: DMatrixExpression, j: int) -> DMatrixColumn: pass
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: FMatrixExpression, j: int) -> FMatrixColumn: pass
 
@@ -413,7 +413,7 @@ def column(e: FMatrixExpression, j: int) -> FMatrixColumn: pass
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: LMatrixExpression, j: int) -> LMatrixColumn: pass
 
@@ -423,7 +423,7 @@ def column(e: LMatrixExpression, j: int) -> LMatrixColumn: pass
 # \param e The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A Math.MatrixColumn proxy referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>e</em>.
 # 
 def column(e: ULMatrixExpression, j: int) -> ULMatrixColumn: pass
 
@@ -432,7 +432,7 @@ def column(e: ULMatrixExpression, j: int) -> ULMatrixColumn: pass
 # 
 # \param ge The grid expression.
 # 
-# \return An expression template node representing \f$ \overline{ge} \f$.
+# \return An expression object representing \f$ \overline{ge} \f$.
 # 
 def conj(ge: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -441,7 +441,7 @@ def conj(ge: ConstDGridExpression) -> ConstDGridExpression: pass
 # 
 # \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{me} \f$.
+# \return An expression object representing \f$ \overline{me} \f$.
 # 
 def conj(me: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -450,7 +450,7 @@ def conj(me: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 # 
 # \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{qe} \f$.
+# \return An expression object representing \f$ \overline{qe} \f$.
 # 
 def conj(qe: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -459,7 +459,7 @@ def conj(qe: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 # 
 # \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{ve} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
 def conj(ve: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -468,7 +468,7 @@ def conj(ve: ConstDVectorExpression) -> ConstDVectorExpression: pass
 # 
 # \param ge The grid expression.
 # 
-# \return An expression template node representing \f$ \overline{ge} \f$.
+# \return An expression object representing \f$ \overline{ge} \f$.
 # 
 def conj(ge: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -477,7 +477,7 @@ def conj(ge: ConstFGridExpression) -> ConstFGridExpression: pass
 # 
 # \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{me} \f$.
+# \return An expression object representing \f$ \overline{me} \f$.
 # 
 def conj(me: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -486,7 +486,7 @@ def conj(me: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 # 
 # \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{qe} \f$.
+# \return An expression object representing \f$ \overline{qe} \f$.
 # 
 def conj(qe: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -495,7 +495,7 @@ def conj(qe: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 # 
 # \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{ve} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
 def conj(ve: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -504,7 +504,7 @@ def conj(ve: ConstFVectorExpression) -> ConstFVectorExpression: pass
 # 
 # \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{me} \f$.
+# \return An expression object representing \f$ \overline{me} \f$.
 # 
 def conj(me: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -513,7 +513,7 @@ def conj(me: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 # 
 # \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{qe} \f$.
+# \return An expression object representing \f$ \overline{qe} \f$.
 # 
 def conj(qe: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -522,7 +522,7 @@ def conj(qe: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 # 
 # \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{ve} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
 def conj(ve: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -531,7 +531,7 @@ def conj(ve: ConstLVectorExpression) -> ConstLVectorExpression: pass
 # 
 # \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{me} \f$.
+# \return An expression object representing \f$ \overline{me} \f$.
 # 
 def conj(me: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -540,7 +540,7 @@ def conj(me: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 # 
 # \param qe The quaternion expression.
 # 
-# \return An expression template node representing \f$ \overline{qe} \f$.
+# \return An expression object representing \f$ \overline{qe} \f$.
 # 
 def conj(qe: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -549,7 +549,7 @@ def conj(qe: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 # 
 # \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{ve} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
 def conj(ve: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -558,7 +558,7 @@ def conj(ve: ConstULVectorExpression) -> ConstULVectorExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression template node representing the skew-symmetric matrix.
+# \return An expression object representing the skew-symmetric matrix.
 # 
 def cross(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 
@@ -567,7 +567,7 @@ def cross(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression template node representing the skew-symmetric matrix.
+# \return An expression object representing the skew-symmetric matrix.
 # 
 def cross(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 
@@ -576,7 +576,7 @@ def cross(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression template node representing the skew-symmetric matrix.
+# \return An expression object representing the skew-symmetric matrix.
 # 
 def cross(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 
@@ -585,47 +585,47 @@ def cross(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The 3D vector expression.
 # 
-# \return An expression template node representing the skew-symmetric matrix.
+# \return An expression object representing the skew-symmetric matrix.
 # 
 def cross(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression object.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression template node representing the cross product.
+# \return An expression object representing the cross product.
 # 
 def crossProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression object.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression template node representing the cross product.
+# \return An expression object representing the cross product.
 # 
 def crossProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression object.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression template node representing the cross product.
+# \return An expression object representing the cross product.
 # 
 def crossProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$.
+# \brief Returns the 3D vector cross product \f$ e_1 \times e_2 \f$ as an expression object.
 # 
 # \param e1 The first 3D vector expression.
 # \param e2 The second 3D vector expression.
 # 
-# \return An expression template node representing the cross product.
+# \return An expression object representing the cross product.
 # 
 def crossProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -670,7 +670,7 @@ def det(e: ConstULMatrixExpression) -> int: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression template node representing the diagonal matrix.
+# \return An expression object representing the diagonal matrix.
 # 
 def diag(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 
@@ -679,7 +679,7 @@ def diag(e: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression template node representing the diagonal matrix.
+# \return An expression object representing the diagonal matrix.
 # 
 def diag(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 
@@ -688,7 +688,7 @@ def diag(e: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression template node representing the diagonal matrix.
+# \return An expression object representing the diagonal matrix.
 # 
 def diag(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 
@@ -697,443 +697,443 @@ def diag(e: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 # 
 # \param e The vector expression.
 # 
-# \return An expression template node representing the diagonal matrix.
+# \return An expression object representing the diagonal matrix.
 # 
 def diag(e: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the grid expressions <em>ge1</em> and <em>ge2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param ge1 The numerator grid expression.
+# \param ge2 The denominator grid expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ ge_1 / ge_2 \f$.
 # 
-def elemDiv(e1: ConstDGridExpression, e2: ConstDGridExpression) -> ConstDGridExpression: pass
+def elemDiv(ge1: ConstDGridExpression, ge2: ConstDGridExpression) -> ConstDGridExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param me1 The numerator matrix expression.
+# \param me2 The denominator matrix expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ me_1 / me_2 \f$.
 # 
-def elemDiv(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+def elemDiv(me1: ConstDMatrixExpression, me2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise quotient of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param qe1 The numerator quaternion expression.
+# \param qe2 The denominator quaternion expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the component-wise quotient \f$ qe_1 / qe_2 \f$.
 # 
-def elemDiv(e1: ConstDQuaternionExpression, e2: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+def elemDiv(qe1: ConstDQuaternionExpression, qe2: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param ve1 The numerator vector expression.
+# \param ve2 The denominator vector expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ ve_1 / ve_2 \f$.
 # 
-def elemDiv(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
+def elemDiv(ve1: ConstDVectorExpression, ve2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the grid expressions <em>ge1</em> and <em>ge2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param ge1 The numerator grid expression.
+# \param ge2 The denominator grid expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ ge_1 / ge_2 \f$.
 # 
-def elemDiv(e1: ConstFGridExpression, e2: ConstFGridExpression) -> ConstFGridExpression: pass
+def elemDiv(ge1: ConstFGridExpression, ge2: ConstFGridExpression) -> ConstFGridExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param me1 The numerator matrix expression.
+# \param me2 The denominator matrix expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ me_1 / me_2 \f$.
 # 
-def elemDiv(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+def elemDiv(me1: ConstFMatrixExpression, me2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise quotient of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param qe1 The numerator quaternion expression.
+# \param qe2 The denominator quaternion expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the component-wise quotient \f$ qe_1 / qe_2 \f$.
 # 
-def elemDiv(e1: ConstFQuaternionExpression, e2: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
+def elemDiv(qe1: ConstFQuaternionExpression, qe2: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param ve1 The numerator vector expression.
+# \param ve2 The denominator vector expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ ve_1 / ve_2 \f$.
 # 
-def elemDiv(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
+def elemDiv(ve1: ConstFVectorExpression, ve2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param me1 The numerator matrix expression.
+# \param me2 The denominator matrix expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ me_1 / me_2 \f$.
 # 
-def elemDiv(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+def elemDiv(me1: ConstLMatrixExpression, me2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise quotient of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param qe1 The numerator quaternion expression.
+# \param qe2 The denominator quaternion expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the component-wise quotient \f$ qe_1 / qe_2 \f$.
 # 
-def elemDiv(e1: ConstLQuaternionExpression, e2: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
+def elemDiv(qe1: ConstLQuaternionExpression, qe2: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param ve1 The numerator vector expression.
+# \param ve2 The denominator vector expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ ve_1 / ve_2 \f$.
 # 
-def elemDiv(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
+def elemDiv(ve1: ConstLVectorExpression, ve2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param me1 The numerator matrix expression.
+# \param me2 The denominator matrix expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ me_1 / me_2 \f$.
 # 
-def elemDiv(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+def elemDiv(me1: ConstULMatrixExpression, me2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise quotient of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param qe1 The numerator quaternion expression.
+# \param qe2 The denominator quaternion expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the component-wise quotient \f$ qe_1 / qe_2 \f$.
 # 
-def elemDiv(e1: ConstULQuaternionExpression, e2: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
+def elemDiv(qe1: ConstULQuaternionExpression, qe2: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise quotient of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise quotient of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The numerator vector expression.
-# \param e2 The denominator vector expression.
+# \param ve1 The numerator vector expression.
+# \param ve2 The denominator vector expression.
 # 
-# \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+# \return An expression object representing the element-wise quotient \f$ ve_1 / ve_2 \f$.
 # 
-def elemDiv(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
+def elemDiv(ve1: ConstULVectorExpression, ve2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product of the grid expressions <em>ge1</em> and <em>ge2</em> (Hadamard product).
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ge1 The first grid expression.
+# \param ge2 The second grid expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ ge_1 \odot ge_2 \f$.
 # 
-def elemProd(e1: ConstDGridExpression, e2: ConstDGridExpression) -> ConstDGridExpression: pass
+def elemProd(ge1: ConstDGridExpression, ge2: ConstDGridExpression) -> ConstDGridExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ me_1 \odot me_2 \f$.
 # 
-def elemProd(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+def elemProd(me1: ConstDMatrixExpression, me2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise product (Hadamard product) of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the component-wise product \f$ qe_1 \odot qe_2 \f$.
 # 
-def elemProd(e1: ConstDQuaternionExpression, e2: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+def elemProd(qe1: ConstDQuaternionExpression, qe2: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ ve_1 \odot ve_2 \f$.
 # 
-def elemProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
+def elemProd(ve1: ConstDVectorExpression, ve2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product of the grid expressions <em>ge1</em> and <em>ge2</em> (Hadamard product).
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ge1 The first grid expression.
+# \param ge2 The second grid expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ ge_1 \odot ge_2 \f$.
 # 
-def elemProd(e1: ConstFGridExpression, e2: ConstFGridExpression) -> ConstFGridExpression: pass
+def elemProd(ge1: ConstFGridExpression, ge2: ConstFGridExpression) -> ConstFGridExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ me_1 \odot me_2 \f$.
 # 
-def elemProd(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+def elemProd(me1: ConstFMatrixExpression, me2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise product (Hadamard product) of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the component-wise product \f$ qe_1 \odot qe_2 \f$.
 # 
-def elemProd(e1: ConstFQuaternionExpression, e2: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
+def elemProd(qe1: ConstFQuaternionExpression, qe2: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ ve_1 \odot ve_2 \f$.
 # 
-def elemProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
+def elemProd(ve1: ConstFVectorExpression, ve2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ me_1 \odot me_2 \f$.
 # 
-def elemProd(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+def elemProd(me1: ConstLMatrixExpression, me2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise product (Hadamard product) of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the component-wise product \f$ qe_1 \odot qe_2 \f$.
 # 
-def elemProd(e1: ConstLQuaternionExpression, e2: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
+def elemProd(qe1: ConstLQuaternionExpression, qe2: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ ve_1 \odot ve_2 \f$.
 # 
-def elemProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
+def elemProd(ve1: ConstLVectorExpression, ve2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the matrix expressions <em>me1</em> and <em>me2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ me_1 \odot me_2 \f$.
 # 
-def elemProd(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+def elemProd(me1: ConstULMatrixExpression, me2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the component-wise product (Hadamard product) of the quaternion expressions <em>qe1</em> and <em>qe2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the component-wise product \f$ qe_1 \odot qe_2 \f$.
 # 
-def elemProd(e1: ConstULQuaternionExpression, e2: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
+def elemProd(qe1: ConstULQuaternionExpression, qe2: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
 ##
-# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>e1</em> and <em>e2</em>.
+# \brief Returns the element-wise product (Hadamard product) of the vector expressions <em>ve1</em> and <em>ve2</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # 
-# \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+# \return An expression object representing the element-wise product \f$ ve_1 \odot ve_2 \f$.
 # 
-def elemProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
+def elemProd(ve1: ConstULVectorExpression, ve2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the grid expressions <em>ge1</em> and <em>ge2</em> agree element-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ge1 The first grid expression.
+# \param ge2 The second grid expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstDGridExpression, e2: ConstDGridExpression, eps: float) -> bool: pass
+def equals(ge1: ConstDGridExpression, ge2: ConstDGridExpression, eps: float) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the matrix expressions <em>me1</em> and <em>me2</em> agree element-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression, eps: float) -> bool: pass
+def equals(me1: ConstDMatrixExpression, me2: ConstDMatrixExpression, eps: float) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the quaternion expressions <em>qe1</em> and <em>qe2</em> agree component-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
+# \param eps The non-negative absolute tolerance.
+# 
+# \return <tt>True</tt> if all four components agree within <em>eps</em>, and <tt>False</tt> otherwise.
+# 
+def equals(qe1: ConstDQuaternionExpression, qe2: ConstDQuaternionExpression, eps: float) -> bool: pass
+
+##
+# \brief Tells whether the vector expressions <em>ve1</em> and <em>ve2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# 
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstDQuaternionExpression, e2: ConstDQuaternionExpression, eps: float) -> bool: pass
+def equals(ve1: ConstDVectorExpression, ve2: ConstDVectorExpression, eps: float) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the grid expressions <em>ge1</em> and <em>ge2</em> agree element-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param ge1 The first grid expression.
+# \param ge2 The second grid expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstDVectorExpression, e2: ConstDVectorExpression, eps: float) -> bool: pass
+def equals(ge1: ConstFGridExpression, ge2: ConstFGridExpression, eps: float) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the matrix expressions <em>me1</em> and <em>me2</em> agree element-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstFGridExpression, e2: ConstFGridExpression, eps: float) -> bool: pass
+def equals(me1: ConstFMatrixExpression, me2: ConstFMatrixExpression, eps: float) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the quaternion expressions <em>qe1</em> and <em>qe2</em> agree component-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
+# \param eps The non-negative absolute tolerance.
+# 
+# \return <tt>True</tt> if all four components agree within <em>eps</em>, and <tt>False</tt> otherwise.
+# 
+def equals(qe1: ConstFQuaternionExpression, qe2: ConstFQuaternionExpression, eps: float) -> bool: pass
+
+##
+# \brief Tells whether the vector expressions <em>ve1</em> and <em>ve2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# 
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression, eps: float) -> bool: pass
+def equals(ve1: ConstFVectorExpression, ve2: ConstFVectorExpression, eps: float) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the matrix expressions <em>me1</em> and <em>me2</em> agree element-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstFQuaternionExpression, e2: ConstFQuaternionExpression, eps: float) -> bool: pass
+def equals(me1: ConstLMatrixExpression, me2: ConstLMatrixExpression, eps: int) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the quaternion expressions <em>qe1</em> and <em>qe2</em> agree component-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
+# \param eps The non-negative absolute tolerance.
+# 
+# \return <tt>True</tt> if all four components agree within <em>eps</em>, and <tt>False</tt> otherwise.
+# 
+def equals(qe1: ConstLQuaternionExpression, qe2: ConstLQuaternionExpression, eps: int) -> bool: pass
+
+##
+# \brief Tells whether the vector expressions <em>ve1</em> and <em>ve2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# 
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstFVectorExpression, e2: ConstFVectorExpression, eps: float) -> bool: pass
+def equals(ve1: ConstLVectorExpression, ve2: ConstLVectorExpression, eps: int) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the matrix expressions <em>me1</em> and <em>me2</em> agree element-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param me1 The first matrix expression.
+# \param me2 The second matrix expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression, eps: int) -> bool: pass
+def equals(me1: ConstULMatrixExpression, me2: ConstULMatrixExpression, eps: int) -> bool: pass
 
 ##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# \brief Tells whether the quaternion expressions <em>qe1</em> and <em>qe2</em> agree component-wise within the absolute tolerance <em>eps</em>.
 # 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
+# \param qe1 The first quaternion expression.
+# \param qe2 The second quaternion expression.
+# \param eps The non-negative absolute tolerance.
+# 
+# \return <tt>True</tt> if all four components agree within <em>eps</em>, and <tt>False</tt> otherwise.
+# 
+def equals(qe1: ConstULQuaternionExpression, qe2: ConstULQuaternionExpression, eps: int) -> bool: pass
+
+##
+# \brief Tells whether the vector expressions <em>ve1</em> and <em>ve2</em> agree element-wise within the absolute tolerance <em>eps</em>.
+# 
+# \param ve1 The first vector expression.
+# \param ve2 The second vector expression.
 # \param eps The non-negative absolute tolerance.
 # 
 # \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
 # 
-def equals(e1: ConstLQuaternionExpression, e2: ConstLQuaternionExpression, eps: int) -> bool: pass
-
-##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
-# 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
-# \param eps The non-negative absolute tolerance.
-# 
-# \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
-# 
-def equals(e1: ConstLVectorExpression, e2: ConstLVectorExpression, eps: int) -> bool: pass
-
-##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
-# 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
-# \param eps The non-negative absolute tolerance.
-# 
-# \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
-# 
-def equals(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression, eps: int) -> bool: pass
-
-##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
-# 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
-# \param eps The non-negative absolute tolerance.
-# 
-# \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
-# 
-def equals(e1: ConstULQuaternionExpression, e2: ConstULQuaternionExpression, eps: int) -> bool: pass
-
-##
-# \brief Tells whether the vector expressions <em>e1</em> and <em>e2</em> agree element-wise within the absolute tolerance <em>eps</em>.
-# 
-# \param e1 The first vector expression.
-# \param e2 The second vector expression.
-# \param eps The non-negative absolute tolerance.
-# 
-# \return <tt>True</tt> if all elements agree within <em>eps</em>, and <tt>False</tt> otherwise.
-# 
-def equals(e1: ConstULVectorExpression, e2: ConstULVectorExpression, eps: int) -> bool: pass
+def equals(ve1: ConstULVectorExpression, ve2: ConstULVectorExpression, eps: int) -> bool: pass
 
 ##
 # \brief Computes the factorial \f$ n! \f$ of the non-negative integer <em>n</em>.
@@ -1145,12 +1145,14 @@ def equals(e1: ConstULVectorExpression, e2: ConstULVectorExpression, eps: int) -
 def factorial(n: int) -> int: pass
 
 ##
-# \brief Computes the incomplete gamma function \f$ Q(a, x) = 1 - P(a, x) \f$ (see [\ref NRIC] for details).
+# \brief Computes the incomplete gamma function \f$ Q(a, x) = 1 - P(a, x) \f$.
 # 
 # \param a The function argument <em>a</em>.
 # \param x The function argument <em>x</em>.
 # 
-# \return The computed value of the incomplete gamma function.
+# \return The computed value of the incomplete gamma function. 
+# 
+# \see [\ref NRIC]
 # 
 def gammaQ(a: float, x: float) -> float: pass
 
@@ -1167,256 +1169,256 @@ def gammaQ(a: float, x: float) -> float: pass
 def generalizedBell(x: float, a: float, b: float, c: float) -> float: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate of the grid expression <em>ge</em> (alias of conj() for grids).
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{ge} \f$.
 # 
-def herm(e: ConstDGridExpression) -> ConstDGridExpression: pass
+def herm(ge: ConstDGridExpression) -> ConstDGridExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{me^T} \f$.
 # 
-def herm(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+def herm(me: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate of the vector expression <em>ve</em> (alias of conj() for vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
-def herm(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+def herm(ve: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate of the grid expression <em>ge</em> (alias of conj() for grids).
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{ge} \f$.
 # 
-def herm(e: ConstFGridExpression) -> ConstFGridExpression: pass
+def herm(ge: ConstFGridExpression) -> ConstFGridExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{me^T} \f$.
 # 
-def herm(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+def herm(me: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate of the vector expression <em>ve</em> (alias of conj() for vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
-def herm(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+def herm(ve: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{me^T} \f$.
 # 
-def herm(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+def herm(me: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate of the vector expression <em>ve</em> (alias of conj() for vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
-def herm(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+def herm(ve: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate (conjugate transpose) of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{me^T} \f$.
 # 
-def herm(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+def herm(me: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the Hermitian conjugate of the vector expression <em>e</em> (alias of conj() for vectors).
+# \brief Returns the Hermitian conjugate of the vector expression <em>ve</em> (alias of conj() for vectors).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing \f$ \overline{e} \f$.
+# \return An expression object representing \f$ \overline{ve} \f$.
 # 
-def herm(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+def herm(ve: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a constant homogeneous-coordinates view of the vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A constant homogeneous-coordinates view of <em>ce</em>.
 # 
-def homog(e: ConstDVectorExpression) -> ConstDHomogenousCoordsAdapter: pass
+def homog(ce: ConstDVectorExpression) -> ConstDHomogenousCoordsAdapter: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a constant homogeneous-coordinates view of the vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A constant homogeneous-coordinates view of <em>ce</em>.
 # 
-def homog(e: ConstFVectorExpression) -> ConstFHomogenousCoordsAdapter: pass
+def homog(ce: ConstFVectorExpression) -> ConstFHomogenousCoordsAdapter: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a constant homogeneous-coordinates view of the vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A constant homogeneous-coordinates view of <em>ce</em>.
 # 
-def homog(e: ConstLVectorExpression) -> ConstLHomogenousCoordsAdapter: pass
+def homog(ce: ConstLVectorExpression) -> ConstLHomogenousCoordsAdapter: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a constant homogeneous-coordinates view of the vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A constant homogeneous-coordinates view of <em>ce</em>.
 # 
-def homog(e: ConstULVectorExpression) -> ConstULHomogenousCoordsAdapter: pass
+def homog(ce: ConstULVectorExpression) -> ConstULHomogenousCoordsAdapter: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a mutable homogeneous-coordinates view of the vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A mutable homogeneous-coordinates view of <em>me</em>.
 # 
-def homog(e: DVectorExpression) -> DHomogenousCoordsAdapter: pass
+def homog(me: DVectorExpression) -> DHomogenousCoordsAdapter: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a mutable homogeneous-coordinates view of the vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A mutable homogeneous-coordinates view of <em>me</em>.
 # 
-def homog(e: FVectorExpression) -> FHomogenousCoordsAdapter: pass
+def homog(me: FVectorExpression) -> FHomogenousCoordsAdapter: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a mutable homogeneous-coordinates view of the vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A mutable homogeneous-coordinates view of <em>me</em>.
 # 
-def homog(e: LVectorExpression) -> LHomogenousCoordsAdapter: pass
+def homog(me: LVectorExpression) -> LHomogenousCoordsAdapter: pass
 
 ##
-# \brief Creates a constant Math.HomogenousCoordsAdapter view of the vector expression <em>e</em>.
+# \brief Creates a mutable homogeneous-coordinates view of the vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant homogeneous-coordinates view of <em>e</em>.
+# \return A mutable homogeneous-coordinates view of <em>me</em>.
 # 
-def homog(e: ULVectorExpression) -> ULHomogenousCoordsAdapter: pass
+def homog(me: ULVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the grid expression <em>ge</em>.
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>ge</em>.
 # 
-def imag(e: ConstDGridExpression) -> ConstDGridExpression: pass
+def imag(ge: ConstDGridExpression) -> ConstDGridExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>me</em>.
 # 
-def imag(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+def imag(me: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>ve</em>.
 # 
-def imag(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+def imag(ve: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the grid expression <em>ge</em>.
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>ge</em>.
 # 
-def imag(e: ConstFGridExpression) -> ConstFGridExpression: pass
+def imag(ge: ConstFGridExpression) -> ConstFGridExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>me</em>.
 # 
-def imag(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+def imag(me: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>ve</em>.
 # 
-def imag(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+def imag(ve: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>me</em>.
 # 
-def imag(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+def imag(me: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>ve</em>.
 # 
-def imag(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+def imag(ve: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>me</em>.
 # 
-def imag(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+def imag(me: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise imaginary part of the vector expression <em>e</em>.
+# \brief Returns the element-wise imaginary part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the imaginary part of <em>e</em>.
+# \return An expression object representing the imaginary part of <em>ve</em>.
 # 
-def imag(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+def imag(ve: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
 # \brief Returns the inner (dot) product of the vector expressions <em>e1</em> and <em>e2</em>.
@@ -1485,7 +1487,7 @@ def interpolateTrilinear(grid: FRegularSpatialGrid, pos: Vector3F, local_pos: bo
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing \f$ e^{-1} \f$.
+# \return An expression object representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -1494,7 +1496,7 @@ def inv(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing \f$ e^{-1} \f$.
+# \return An expression object representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -1503,7 +1505,7 @@ def inv(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing \f$ e^{-1} \f$.
+# \return An expression object representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -1512,7 +1514,7 @@ def inv(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing \f$ e^{-1} \f$.
+# \return An expression object representing \f$ e^{-1} \f$.
 # 
 def inv(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -1593,7 +1595,7 @@ def invert(c: LMatrixExpression) -> bool: pass
 def invert(c: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>an</em> using Jacobi's algorithm [\ref WJACO ].
+# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>a</em> using Jacobi's algorithm [\ref WJACO ].
 # 
 # On output, elements of <em>a</em> above the diagonal are destroyed. The vector <em>d</em> returns the eigenvalues of <em>a</em>. The columns of matrix <em>v</em> contain, on output, the normalized eigenvectors of <em>a</em>. For implementation details see [\ref NRIC].
 # 
@@ -1611,7 +1613,7 @@ def invert(c: ULMatrixExpression) -> bool: pass
 def jacobiDiagonalize(a: DMatrixExpression, d: DVectorExpression, v: DMatrixExpression, max_iter: int = 50) -> bool: pass
 
 ##
-# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>an</em> using Jacobi's algorithm [\ref WJACO ].
+# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>a</em> using Jacobi's algorithm [\ref WJACO ].
 # 
 # On output, elements of <em>a</em> above the diagonal are destroyed. The vector <em>d</em> returns the eigenvalues of <em>a</em>. The columns of matrix <em>v</em> contain, on output, the normalized eigenvectors of <em>a</em>. For implementation details see [\ref NRIC].
 # 
@@ -1629,7 +1631,7 @@ def jacobiDiagonalize(a: DMatrixExpression, d: DVectorExpression, v: DMatrixExpr
 def jacobiDiagonalize(a: FMatrixExpression, d: FVectorExpression, v: FMatrixExpression, max_iter: int = 50) -> bool: pass
 
 ##
-# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>an</em> using Jacobi's algorithm [\ref WJACO ].
+# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>a</em> using Jacobi's algorithm [\ref WJACO ].
 # 
 # On output, elements of <em>a</em> above the diagonal are destroyed. The vector <em>d</em> returns the eigenvalues of <em>a</em>. The columns of matrix <em>v</em> contain, on output, the normalized eigenvectors of <em>a</em>. For implementation details see [\ref NRIC].
 # 
@@ -1647,7 +1649,7 @@ def jacobiDiagonalize(a: FMatrixExpression, d: FVectorExpression, v: FMatrixExpr
 def jacobiDiagonalize(a: LMatrixExpression, d: LVectorExpression, v: LMatrixExpression, max_iter: int = 50) -> bool: pass
 
 ##
-# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>an</em> using Jacobi's algorithm [\ref WJACO ].
+# \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix <em>a</em> using Jacobi's algorithm [\ref WJACO ].
 # 
 # On output, elements of <em>a</em> above the diagonal are destroyed. The vector <em>d</em> returns the eigenvalues of <em>a</em>. The columns of matrix <em>v</em> contain, on output, the normalized eigenvectors of <em>a</em>. For implementation details see [\ref NRIC].
 # 
@@ -1705,7 +1707,9 @@ def length(e: ConstULVectorExpression) -> int: pass
 # 
 # \param z The argument to the gamma function.
 # 
-# \return The computed logarithm of the gamma function value for <em>z</em>.
+# \return The computed logarithm of the gamma function value for <em>z</em>. 
+# 
+# \see [\ref NRIC]
 # 
 def lnGamma(z: float) -> float: pass
 
@@ -1714,16 +1718,19 @@ def lnGamma(z: float) -> float: pass
 # 
 # \param e The matrix to decompose (modified in place).
 # 
-# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
 # 
 def luDecompose(e: DMatrixExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> with partial (row) pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# \param pv The output permutation vector recording the row pivots (<em>pv</em>[i] = pivot row index for step <em>i</em>).
+# 
+# 
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: DMatrixExpression, pv: ULVectorExpression) -> int: pass
 
 ##
@@ -1731,16 +1738,19 @@ def luDecompose(e: DMatrixExpression, pv: ULVectorExpression) -> int: pass
 # 
 # \param e The matrix to decompose (modified in place).
 # 
-# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
 # 
 def luDecompose(e: FMatrixExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> with partial (row) pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# \param pv The output permutation vector recording the row pivots (<em>pv</em>[i] = pivot row index for step <em>i</em>).
+# 
+# 
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: FMatrixExpression, pv: ULVectorExpression) -> int: pass
 
 ##
@@ -1748,16 +1758,19 @@ def luDecompose(e: FMatrixExpression, pv: ULVectorExpression) -> int: pass
 # 
 # \param e The matrix to decompose (modified in place).
 # 
-# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
 # 
 def luDecompose(e: LMatrixExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> with partial (row) pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# \param pv The output permutation vector recording the row pivots (<em>pv</em>[i] = pivot row index for step <em>i</em>).
+# 
+# 
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: LMatrixExpression, pv: ULVectorExpression) -> int: pass
 
 ##
@@ -1765,153 +1778,188 @@ def luDecompose(e: LMatrixExpression, pv: ULVectorExpression) -> int: pass
 # 
 # \param e The matrix to decompose (modified in place).
 # 
-# \return The 1-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
 # 
 def luDecompose(e: ULMatrixExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \return 
-#
+# \brief Computes an in-place LU decomposition of the matrix <em>e</em> with partial (row) pivoting.
+# 
+# \param e The matrix to decompose (modified in place).
+# \param pv The output permutation vector recording the row pivots (<em>pv</em>[i] = pivot row index for step <em>i</em>).
+# 
+# 
+# \return The <em>1</em>-based row index of the first singular pivot, or <em>0</em> if the matrix is non-singular.
+# 
 def luDecompose(e: ULMatrixExpression, pv: ULVectorExpression) -> int: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstDMatrixExpression, b: DVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstDMatrixExpression, bv: DVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstDMatrixExpression, pv: ConstULVectorExpression, b: DVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstDMatrixExpression, pv: ConstULVectorExpression, bv: DVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstDMatrixExpression, b: DMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstDMatrixExpression, bm: DMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstDMatrixExpression, pv: ConstULVectorExpression, b: DMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstDMatrixExpression, pv: ConstULVectorExpression, bm: DMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstFMatrixExpression, b: FVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstFMatrixExpression, bv: FVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstFMatrixExpression, pv: ConstULVectorExpression, b: FVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstFMatrixExpression, pv: ConstULVectorExpression, bv: FVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstFMatrixExpression, b: FMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstFMatrixExpression, bm: FMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstFMatrixExpression, pv: ConstULVectorExpression, b: FMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstFMatrixExpression, pv: ConstULVectorExpression, bm: FMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstLMatrixExpression, b: LVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstLMatrixExpression, bv: LVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstLMatrixExpression, pv: ConstULVectorExpression, b: LVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstLMatrixExpression, pv: ConstULVectorExpression, bv: LVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstLMatrixExpression, b: LMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstLMatrixExpression, bm: LMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstLMatrixExpression, pv: ConstULVectorExpression, b: LMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstLMatrixExpression, pv: ConstULVectorExpression, bm: LMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstULMatrixExpression, b: ULVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstULMatrixExpression, bv: ULVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstULMatrixExpression, pv: ConstULVectorExpression, b: ULVectorExpression) -> bool: pass
+# \brief Solves \f$ LU\,x = b \f$ for <em>bv</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bv The right-hand side vector \f$ b \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstULMatrixExpression, pv: ConstULVectorExpression, bv: ULVectorExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstULMatrixExpression, b: ULMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> (without pivoting).
+# 
+# \param lu The LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstULMatrixExpression, bm: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief 
-# \param e 
-# \param pv 
-# \param b 
-# \return 
-#
-def luSubstitute(e: ConstULMatrixExpression, pv: ConstULVectorExpression, b: ULMatrixExpression) -> bool: pass
+# \brief Solves \f$ LU\,X = B \f$ for the matrix <em>bm</em> in place, given the LU decomposition <em>lu</em> and pivot vector <em>pv</em>.
+# 
+# \param lu The LU decomposition (with pivoting).
+# \param pv The permutation vector recorded during the LU decomposition.
+# \param bm The right-hand side matrix \f$ B \f$, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the back-substitution succeeded, and <tt>False</tt> if a zero pivot was encountered.
+# 
+def luSubstitute(lu: ConstULMatrixExpression, pv: ConstULVectorExpression, bm: ULMatrixExpression) -> bool: pass
 
 ##
 # \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
@@ -2243,7 +2291,7 @@ def normInfIndex(e: ConstULVectorExpression) -> int: pass
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression template node representing the outer product.
+# \return An expression object representing the outer product.
 # 
 def outerProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDMatrixExpression: pass
 
@@ -2253,7 +2301,7 @@ def outerProd(e1: ConstDVectorExpression, e2: ConstDVectorExpression) -> ConstDM
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression template node representing the outer product.
+# \return An expression object representing the outer product.
 # 
 def outerProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFMatrixExpression: pass
 
@@ -2263,7 +2311,7 @@ def outerProd(e1: ConstFVectorExpression, e2: ConstFVectorExpression) -> ConstFM
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression template node representing the outer product.
+# \return An expression object representing the outer product.
 # 
 def outerProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLMatrixExpression: pass
 
@@ -2273,7 +2321,7 @@ def outerProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLM
 # \param e1 The first vector expression.
 # \param e2 The second vector expression.
 # 
-# \return An expression template node representing the outer product.
+# \return An expression object representing the outer product.
 # 
 def outerProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
@@ -2290,7 +2338,7 @@ def prime(i: int) -> int: pass
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstDMatrixExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -2311,7 +2359,7 @@ def prod(e1: ConstDMatrixExpression, e2: ConstDVectorExpression, c: DVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -2332,7 +2380,7 @@ def prod(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression, c: DMatrixExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstDVectorExpression, e2: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
@@ -2353,7 +2401,7 @@ def prod(e1: ConstDVectorExpression, e2: ConstDMatrixExpression, c: DVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstFMatrixExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -2374,7 +2422,7 @@ def prod(e1: ConstFMatrixExpression, e2: ConstFVectorExpression, c: FVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -2395,7 +2443,7 @@ def prod(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression, c: FMatrixExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstFVectorExpression, e2: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
@@ -2416,7 +2464,7 @@ def prod(e1: ConstFVectorExpression, e2: ConstFMatrixExpression, c: FVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstLMatrixExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -2437,7 +2485,7 @@ def prod(e1: ConstLMatrixExpression, e2: ConstLVectorExpression, c: LVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -2458,7 +2506,7 @@ def prod(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression, c: LMatrixExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstLVectorExpression, e2: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
@@ -2479,7 +2527,7 @@ def prod(e1: ConstLVectorExpression, e2: ConstLMatrixExpression, c: LVectorExpre
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstULMatrixExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -2500,7 +2548,7 @@ def prod(e1: ConstULMatrixExpression, e2: ConstULVectorExpression, c: ULVectorEx
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -2521,7 +2569,7 @@ def prod(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression, c: ULMatrixEx
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
 # 
-# \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
 # 
 def prod(e1: ConstULVectorExpression, e2: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
@@ -2547,76 +2595,76 @@ def prod(e1: ConstULVectorExpression, e2: ConstULMatrixExpression, c: ULVectorEx
 def pythag(a: float, b: float) -> float: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a constant quaternion view of the 4-element vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A constant quaternion view of <em>ce</em>.
 # 
-def quat(e: ConstDVectorExpression) -> ConstDVectorQuaternionAdapter: pass
+def quat(ce: ConstDVectorExpression) -> ConstDVectorQuaternionAdapter: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a constant quaternion view of the 4-element vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A constant quaternion view of <em>ce</em>.
 # 
-def quat(e: ConstFVectorExpression) -> ConstFVectorQuaternionAdapter: pass
+def quat(ce: ConstFVectorExpression) -> ConstFVectorQuaternionAdapter: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a constant quaternion view of the 4-element vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A constant quaternion view of <em>ce</em>.
 # 
-def quat(e: ConstLVectorExpression) -> ConstLVectorQuaternionAdapter: pass
+def quat(ce: ConstLVectorExpression) -> ConstLVectorQuaternionAdapter: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a constant quaternion view of the 4-element vector expression <em>ce</em>.
 # 
-# \param e The vector expression to wrap.
+# \param ce The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A constant quaternion view of <em>ce</em>.
 # 
-def quat(e: ConstULVectorExpression) -> ConstULVectorQuaternionAdapter: pass
+def quat(ce: ConstULVectorExpression) -> ConstULVectorQuaternionAdapter: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a mutable quaternion view of the 4-element vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A mutable quaternion view of <em>me</em>.
 # 
-def quat(e: DVectorExpression) -> DVectorQuaternionAdapter: pass
+def quat(me: DVectorExpression) -> DVectorQuaternionAdapter: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a mutable quaternion view of the 4-element vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A mutable quaternion view of <em>me</em>.
 # 
-def quat(e: FVectorExpression) -> FVectorQuaternionAdapter: pass
+def quat(me: FVectorExpression) -> FVectorQuaternionAdapter: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a mutable quaternion view of the 4-element vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A mutable quaternion view of <em>me</em>.
 # 
-def quat(e: LVectorExpression) -> LVectorQuaternionAdapter: pass
+def quat(me: LVectorExpression) -> LVectorQuaternionAdapter: pass
 
 ##
-# \brief Creates a constant Math.VectorQuaternionAdapter view of the 4-element vector expression <em>e</em>.
+# \brief Creates a mutable quaternion view of the 4-element vector expression <em>me</em>.
 # 
-# \param e The vector expression to wrap.
+# \param me The vector expression to wrap.
 # 
-# \return A constant quaternion view of <em>e</em>.
+# \return A mutable quaternion view of <em>me</em>.
 # 
-def quat(e: ULVectorExpression) -> ULVectorQuaternionAdapter: pass
+def quat(me: ULVectorExpression) -> ULVectorQuaternionAdapter: pass
 
 ##
 # \brief Constructs a Math.RealQuaternion from the scalar <em>t</em> (its real component).
@@ -3073,130 +3121,130 @@ def range(e: ULVectorExpression, start: int, stop: int) -> ULVectorRange: pass
 def range(start: int, stop: int) -> Range: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the grid expression <em>ge</em>.
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>ge</em>.
 # 
-def real(e: ConstDGridExpression) -> ConstDGridExpression: pass
+def real(ge: ConstDGridExpression) -> ConstDGridExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>me</em>.
 # 
-def real(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+def real(me: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the real component (<em>C1</em>) of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return The real component \f$ \mathrm{Re}(qe) \f$ as a scalar.
 # 
-def real(e: ConstDQuaternionExpression) -> float: pass
+def real(qe: ConstDQuaternionExpression) -> float: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>ve</em>.
 # 
-def real(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+def real(ve: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the grid expression <em>ge</em>.
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>ge</em>.
 # 
-def real(e: ConstFGridExpression) -> ConstFGridExpression: pass
+def real(ge: ConstFGridExpression) -> ConstFGridExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>me</em>.
 # 
-def real(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+def real(me: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the real component (<em>C1</em>) of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return The real component \f$ \mathrm{Re}(qe) \f$ as a scalar.
 # 
-def real(e: ConstFQuaternionExpression) -> float: pass
+def real(qe: ConstFQuaternionExpression) -> float: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>ve</em>.
 # 
-def real(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+def real(ve: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>me</em>.
 # 
-def real(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+def real(me: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the real component (<em>C1</em>) of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return The real component \f$ \mathrm{Re}(qe) \f$ as a scalar.
 # 
-def real(e: ConstLQuaternionExpression) -> int: pass
+def real(qe: ConstLQuaternionExpression) -> int: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>ve</em>.
 # 
-def real(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+def real(ve: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>me</em>.
 # 
-def real(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+def real(me: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the real component (<em>C1</em>) of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return The real component \f$ \mathrm{Re}(qe) \f$ as a scalar.
 # 
-def real(e: ConstULQuaternionExpression) -> int: pass
+def real(qe: ConstULQuaternionExpression) -> int: pass
 
 ##
-# \brief Returns the element-wise real part of the vector expression <em>e</em>.
+# \brief Returns the element-wise real part of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return An expression template node representing the real part of <em>e</em>.
+# \return An expression object representing the real part of <em>ve</em>.
 # 
-def real(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+def real(ve: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
 # \brief Rotates the vector expression <em>e2</em> by the quaternion expression <em>e1</em>.
@@ -3204,7 +3252,7 @@ def real(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression object representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstDQuaternionExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
@@ -3214,7 +3262,7 @@ def rotate(e1: ConstDQuaternionExpression, e2: ConstDVectorExpression) -> ConstD
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression object representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstFQuaternionExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -3224,7 +3272,7 @@ def rotate(e1: ConstFQuaternionExpression, e2: ConstFVectorExpression) -> ConstF
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression object representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
@@ -3234,7 +3282,7 @@ def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstL
 # \param e1 The unit quaternion expression encoding the rotation.
 # \param e2 The vector expression to rotate.
 # 
-# \return An expression template node representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
+# \return An expression object representing the rotated 3D vector \f$ e_1 \cdot e_2 \cdot e_1^{-1} \f$.
 # 
 def rotate(e1: ConstULQuaternionExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
@@ -3244,7 +3292,7 @@ def rotate(e1: ConstULQuaternionExpression, e2: ConstULVectorExpression) -> Cons
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: ConstDMatrixExpression, i: int) -> ConstDMatrixRow: pass
 
@@ -3254,7 +3302,7 @@ def row(e: ConstDMatrixExpression, i: int) -> ConstDMatrixRow: pass
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: ConstFMatrixExpression, i: int) -> ConstFMatrixRow: pass
 
@@ -3264,7 +3312,7 @@ def row(e: ConstFMatrixExpression, i: int) -> ConstFMatrixRow: pass
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: ConstLMatrixExpression, i: int) -> ConstLMatrixRow: pass
 
@@ -3274,7 +3322,7 @@ def row(e: ConstLMatrixExpression, i: int) -> ConstLMatrixRow: pass
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: ConstULMatrixExpression, i: int) -> ConstULMatrixRow: pass
 
@@ -3284,7 +3332,7 @@ def row(e: ConstULMatrixExpression, i: int) -> ConstULMatrixRow: pass
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: DMatrixExpression, i: int) -> DMatrixRow: pass
 
@@ -3294,7 +3342,7 @@ def row(e: DMatrixExpression, i: int) -> DMatrixRow: pass
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: FMatrixExpression, i: int) -> FMatrixRow: pass
 
@@ -3304,7 +3352,7 @@ def row(e: FMatrixExpression, i: int) -> FMatrixRow: pass
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: LMatrixExpression, i: int) -> LMatrixRow: pass
 
@@ -3314,7 +3362,7 @@ def row(e: LMatrixExpression, i: int) -> LMatrixRow: pass
 # \param e The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A Math.MatrixRow proxy referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>e</em>.
 # 
 def row(e: ULMatrixExpression, i: int) -> ULMatrixRow: pass
 
@@ -4253,12 +4301,12 @@ def svDecompose(a: ULMatrixExpression, w: ULVectorExpression, v: ULMatrixExpress
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4272,12 +4320,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4291,12 +4339,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4310,12 +4358,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4329,12 +4377,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4348,12 +4396,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4367,12 +4415,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4386,12 +4434,12 @@ def svSubstitute(u: ConstULMatrixExpression, w: ConstULVectorExpression, v: Cons
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4803,7 +4851,7 @@ def triang(e: ConstULMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangu
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing the unreal part of <em>e</em>.
+# \return An expression object representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -4812,7 +4860,7 @@ def unreal(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing the unreal part of <em>e</em>.
+# \return An expression object representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
@@ -4821,7 +4869,7 @@ def unreal(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing the unreal part of <em>e</em>.
+# \return An expression object representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 
@@ -4830,7 +4878,7 @@ def unreal(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 # 
 # \param e The quaternion expression.
 # 
-# \return An expression template node representing the unreal part of <em>e</em>.
+# \return An expression object representing the unreal part of <em>e</em>.
 # 
 def unreal(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 

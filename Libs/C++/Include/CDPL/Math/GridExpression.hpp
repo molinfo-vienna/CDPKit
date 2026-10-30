@@ -695,20 +695,20 @@ namespace CDPL
         }
 
         /**
-         * \brief Tells whether the grid expressions \a e1 and \a e2 agree element-wise within the absolute tolerance \a eps.
+         * \brief Tells whether the grid expressions \a ge1 and \a ge2 agree element-wise within the absolute tolerance \a eps.
          * \tparam E1 The first grid expression type.
          * \tparam E2 The second grid expression type.
          * \tparam T The numeric tolerance type.
-         * \param e1 The first grid expression.
-         * \param e2 The second grid expression.
+         * \param ge1 The first grid expression.
+         * \param ge2 The second grid expression.
          * \param eps The non-negative absolute tolerance.
          * \return \c true if all elements agree within \a eps, and \c false otherwise.
          */
         template <typename E1, typename E2, typename T>
         typename std::enable_if<std::is_arithmetic<T>::value, typename GridToleranceEquality<E1, E2, T>::ResultType>::type
-        equals(const GridExpression<E1>& e1, const GridExpression<E2>& e2, const T& eps)
+        equals(const GridExpression<E1>& ge1, const GridExpression<E2>& ge2, const T& eps)
         {
-            return GridToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
+            return GridToleranceEquality<E1, E2, T>::apply(ge1, ge2, eps);
         }
 
         /**
@@ -727,84 +727,84 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the Hermitian conjugate of the grid expression \a e (alias of conj() for grids).
+         * \brief Returns the Hermitian conjugate of the grid expression \a ge (alias of conj() for grids).
          * \tparam E The grid expression type.
-         * \param e The grid expression.
-         * \return An expression template node representing \f$ \overline{e} \f$.
+         * \param ge The grid expression.
+         * \return An expression template node representing \f$ \overline{ge} \f$.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
-        herm(const GridExpression<E>& e)
+        herm(const GridExpression<E>& ge)
         {
             typedef typename GridUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ge());
         }
 
         /**
-         * \brief Returns the element-wise real part of the grid expression \a e.
+         * \brief Returns the element-wise real part of the grid expression \a ge.
          * \tparam E The grid expression type.
-         * \param e The grid expression.
-         * \return An expression template node representing the real part of \a e.
+         * \param ge The grid expression.
+         * \return An expression template node representing the real part of \a ge.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
-        real(const GridExpression<E>& e)
+        real(const GridExpression<E>& ge)
         {
             typedef typename GridUnaryTraits<E, ScalarReal<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ge());
         }
 
         /**
-         * \brief Returns the element-wise imaginary part of the grid expression \a e.
+         * \brief Returns the element-wise imaginary part of the grid expression \a ge.
          * \tparam E The grid expression type.
-         * \param e The grid expression.
-         * \return An expression template node representing the imaginary part of \a e.
+         * \param ge The grid expression.
+         * \return An expression template node representing the imaginary part of \a ge.
          */
         template <typename E>
         typename GridUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
-        imag(const GridExpression<E>& e)
+        imag(const GridExpression<E>& ge)
         {
             typedef typename GridUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ge());
         }
 
         /**
-         * \brief Returns the element-wise quotient of the grid expressions \a e1 and \a e2.
+         * \brief Returns the element-wise quotient of the grid expressions \a ge1 and \a ge2.
          * \tparam E1 The first grid expression type.
          * \tparam E2 The second grid expression type.
-         * \param e1 The numerator grid expression.
-         * \param e2 The denominator grid expression.
-         * \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         * \param ge1 The numerator grid expression.
+         * \param ge2 The denominator grid expression.
+         * \return An expression template node representing the element-wise quotient \f$ ge_1 / ge_2 \f$.
          */
         template <typename E1, typename E2>
         typename GridBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemDiv(const GridExpression<E1>& e1, const GridExpression<E2>& e2)
+        elemDiv(const GridExpression<E1>& ge1, const GridExpression<E2>& ge2)
         {
             typedef typename GridBinary1Traits<E1, E2,
                                                ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(ge1(), ge2());
         }
 
         /**
-         * \brief Returns the element-wise product of the grid expressions \a e1 and \a e2 (Hadamard product).
+         * \brief Returns the element-wise product of the grid expressions \a ge1 and \a ge2 (Hadamard product).
          * \tparam E1 The first grid expression type.
          * \tparam E2 The second grid expression type.
-         * \param e1 The first grid expression.
-         * \param e2 The second grid expression.
-         * \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         * \param ge1 The first grid expression.
+         * \param ge2 The second grid expression.
+         * \return An expression template node representing the element-wise product \f$ ge_1 \odot ge_2 \f$.
          */
         template <typename E1, typename E2>
         typename GridBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemProd(const GridExpression<E1>& e1, const GridExpression<E2>& e2)
+        elemProd(const GridExpression<E1>& ge1, const GridExpression<E2>& ge2)
         {
             typedef typename GridBinary1Traits<E1, E2,
                                                ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(ge1(), ge2());
         }
 
         /**

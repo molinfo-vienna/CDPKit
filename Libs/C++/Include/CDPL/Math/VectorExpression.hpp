@@ -890,20 +890,20 @@ namespace CDPL
         }
 
         /**
-         * \brief Tells whether the vector expressions \a e1 and \a e2 agree element-wise within the absolute tolerance \a eps.
+         * \brief Tells whether the vector expressions \a ve1 and \a ve2 agree element-wise within the absolute tolerance \a eps.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
          * \tparam T The numeric tolerance type.
-         * \param e1 The first vector expression.
-         * \param e2 The second vector expression.
+         * \param ve1 The first vector expression.
+         * \param ve2 The second vector expression.
          * \param eps The non-negative absolute tolerance.
          * \return \c true if all elements agree within \a eps, and \c false otherwise.
          */
         template <typename E1, typename E2, typename T>
         typename std::enable_if<std::is_arithmetic<T>::value, typename VectorToleranceEquality<E1, E2, T>::ResultType>::type
-        equals(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, const T& eps)
+        equals(const VectorExpression<E1>& ve1, const VectorExpression<E2>& ve2, const T& eps)
         {
-            return VectorToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
+            return VectorToleranceEquality<E1, E2, T>::apply(ve1, ve2, eps);
         }
 
         /**
@@ -922,84 +922,84 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the Hermitian conjugate of the vector expression \a e (alias of conj() for vectors).
+         * \brief Returns the Hermitian conjugate of the vector expression \a ve (alias of conj() for vectors).
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return An expression template node representing \f$ \overline{e} \f$.
+         * \param ve The vector expression.
+         * \return An expression template node representing \f$ \overline{ve} \f$.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType
-        herm(const VectorExpression<E>& e)
+        herm(const VectorExpression<E>& ve)
         {
             typedef typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ve());
         }
 
         /**
-         * \brief Returns the element-wise real part of the vector expression \a e.
+         * \brief Returns the element-wise real part of the vector expression \a ve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return An expression template node representing the real part of \a e.
+         * \param ve The vector expression.
+         * \return An expression template node representing the real part of \a ve.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType
-        real(const VectorExpression<E>& e)
+        real(const VectorExpression<E>& ve)
         {
             typedef typename VectorUnaryTraits<E, ScalarReal<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ve());
         }
 
         /**
-         * \brief Returns the element-wise imaginary part of the vector expression \a e.
+         * \brief Returns the element-wise imaginary part of the vector expression \a ve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return An expression template node representing the imaginary part of \a e.
+         * \param ve The vector expression.
+         * \return An expression template node representing the imaginary part of \a ve.
          */
         template <typename E>
         typename VectorUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType
-        imag(const VectorExpression<E>& e)
+        imag(const VectorExpression<E>& ve)
         {
             typedef typename VectorUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e());
+            return ExpressionType(ve());
         }
 
         /**
-         * \brief Returns the element-wise quotient of the vector expressions \a e1 and \a e2.
+         * \brief Returns the element-wise quotient of the vector expressions \a ve1 and \a ve2.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
-         * \param e1 The numerator vector expression.
-         * \param e2 The denominator vector expression.
-         * \return An expression template node representing the element-wise quotient \f$ e_1 / e_2 \f$.
+         * \param ve1 The numerator vector expression.
+         * \param ve2 The denominator vector expression.
+         * \return An expression template node representing the element-wise quotient \f$ ve_1 / ve_2 \f$.
          */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemDiv(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
+        elemDiv(const VectorExpression<E1>& ve1, const VectorExpression<E2>& ve2)
         {
             typedef typename VectorBinary1Traits<E1, E2,
                                                  ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(ve1(), ve2());
         }
 
         /**
-         * \brief Returns the element-wise product (Hadamard product) of the vector expressions \a e1 and \a e2.
+         * \brief Returns the element-wise product (Hadamard product) of the vector expressions \a ve1 and \a ve2.
          * \tparam E1 The first vector expression type.
          * \tparam E2 The second vector expression type.
-         * \param e1 The first vector expression.
-         * \param e2 The second vector expression.
-         * \return An expression template node representing the element-wise product \f$ e_1 \odot e_2 \f$.
+         * \param ve1 The first vector expression.
+         * \param ve2 The second vector expression.
+         * \return An expression template node representing the element-wise product \f$ ve_1 \odot ve_2 \f$.
          */
         template <typename E1, typename E2>
         typename VectorBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType
-        elemProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
+        elemProd(const VectorExpression<E1>& ve1, const VectorExpression<E2>& ve2)
         {
             typedef typename VectorBinary1Traits<E1, E2,
                                                  ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(ve1(), ve2());
         }
 
         /**
