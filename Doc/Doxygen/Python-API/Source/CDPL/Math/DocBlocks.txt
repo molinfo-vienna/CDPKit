@@ -491,6 +491,15 @@ VectorQuaternionAdapter.setC4(v)
 \param v The new value of the imaginary component \e C4.
 $$$$
 
+# ---
+
+.prime(i)
+\brief Returns the <em>i</em>-th entry in the sequence of the first 10000 prime numbers (starting with \e 2).
+\param i The zero-based prime number index.
+\return The prime number at index \a i.
+\throw RuntimeError if \a i &ge; \e 10000.
+$$$$
+
 #
 # --- Unresolved property getter/setter functions ---
 #

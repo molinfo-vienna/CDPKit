@@ -63,7 +63,7 @@ namespace CDPLPythonMath
                 .def(ConstMatrixVisitor<TriangularAdapterType>("ta"))
                 .def(WrappedDataVisitor<TriangularAdapterWrapper>());
 
-            python::def("triang", &triang, (python::arg("e"), python::arg("type")));
+            python::def("triang", &triang, (python::arg("ce"), python::arg("type")));
         }
 
         static WrapperPointerType triang(const ExpressionPointerType& e, const TriangType&)

@@ -1719,36 +1719,36 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the matrix-vector product \f$ e_1 \cdot e_2 \f$ as a vector expression (named-function form of operator*).
+         * \brief Returns the matrix-vector product \f$ me \cdot ve \f$ as a vector expression (named-function form of operator*).
          * \tparam E1 The matrix expression type.
          * \tparam E2 The vector expression type.
-         * \param e1 The matrix expression.
-         * \param e2 The vector expression.
-         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+         * \param me The matrix expression.
+         * \param ve The vector expression.
+         * \return An expression template node representing \f$ me \cdot ve \f$.
          */
         template <typename E1, typename E2>
         typename Matrix1VectorBinaryTraits<E1, E2, MatrixVectorProduct<E1, E2> >::ResultType
-        prod(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2)
+        prod(const MatrixExpression<E1>& me, const VectorExpression<E2>& ve)
         {
             typedef typename Matrix1VectorBinaryTraits<E1, E2, MatrixVectorProduct<E1, E2> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(me(), ve());
         }
 
         /**
-         * \brief Computes the matrix-vector product \f$ e_1 \cdot e_2 \f$ and stores it in \a c.
+         * \brief Computes the matrix-vector product \f$ me \cdot ve \f$ and stores it in \a c.
          * \tparam C The output vector container type.
          * \tparam E1 The matrix expression type.
-         * \tparam E2 The input vector expression type.
-         * \param e1 The matrix expression.
-         * \param e2 The input vector expression.
+         * \tparam E2 The vector expression type.
+         * \param me The matrix expression.
+         * \param ve The vector expression.
          * \param c The output vector container receiving the result.
          * \return A reference to \a c.
          */
         template <typename C, typename E1, typename E2>
-        C& prod(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2, VectorContainer<C>& c)
+        C& prod(const MatrixExpression<E1>& me, const VectorExpression<E2>& ve, VectorContainer<C>& c)
         {
-            return c().assign(prod(e1, e2));
+            return c().assign(prod(me, ve));
         }
 
         /**
@@ -1769,36 +1769,36 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the vector-matrix product \f$ e_1 \cdot e_2 \f$ as a vector expression (named-function form of operator*).
+         * \brief Returns the vector-matrix product \f$ ve \cdot me \f$ as a vector expression (named-function form of operator*).
          * \tparam E1 The vector expression type.
          * \tparam E2 The matrix expression type.
-         * \param e1 The vector expression.
-         * \param e2 The matrix expression.
-         * \return An expression template node representing \f$ e_1 \cdot e_2 \f$.
+         * \param ve The vector expression.
+         * \param me The matrix expression.
+         * \return An expression template node representing \f$ ve \cdot me \f$.
          */
         template <typename E1, typename E2>
         typename Matrix2VectorBinaryTraits<E1, E2, VectorMatrixProduct<E1, E2> >::ResultType
-        prod(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2)
+        prod(const VectorExpression<E1>& ve, const MatrixExpression<E2>& me)
         {
             typedef typename Matrix2VectorBinaryTraits<E1, E2, VectorMatrixProduct<E1, E2> >::ExpressionType ExpressionType;
 
-            return ExpressionType(e1(), e2());
+            return ExpressionType(ve(), me());
         }
 
         /**
-         * \brief Computes the vector-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in \a c.
+         * \brief Computes the vector-matrix product \f$ ve \cdot me \f$ and stores it in \a c.
          * \tparam C The output vector container type.
-         * \tparam E1 The input vector expression type.
+         * \tparam E1 The vector expression type.
          * \tparam E2 The matrix expression type.
-         * \param e1 The input vector expression.
-         * \param e2 The matrix expression.
+         * \param ve The vector expression.
+         * \param me The matrix expression.
          * \param c The output vector container receiving the result.
          * \return A reference to \a c.
          */
         template <typename C, typename E1, typename E2>
-        C& prod(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2, VectorContainer<C>& c)
+        C& prod(const VectorExpression<E1>& ve, const MatrixExpression<E2>& me, VectorContainer<C>& c)
         {
-            return c().assign(prod(e1, e2));
+            return c().assign(prod(ve, me));
         }
 
         /**
@@ -1865,16 +1865,16 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the L1 (maximum absolute column sum) norm of the matrix expression \a e.
+         * \brief Returns the L1 (maximum absolute column sum) norm of the matrix expression \a me.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
-         * \return The L1 norm of \a e.
+         * \param me The matrix expression.
+         * \return The L1 norm of \a me.
          */
         template <typename E>
         typename MatrixNorm1<E>::ResultType
-        norm1(const MatrixExpression<E>& e)
+        norm1(const MatrixExpression<E>& me)
         {
-            return MatrixNorm1<E>::apply(e);
+            return MatrixNorm1<E>::apply(me);
         }
 
         /**
@@ -1891,16 +1891,16 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the L&infin; (maximum absolute row sum) norm of the matrix expression \a e.
+         * \brief Returns the L&infin; (maximum absolute row sum) norm of the matrix expression \a me.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
-         * \return The L&infin; norm of \a e.
+         * \param me The matrix expression.
+         * \return The L&infin; norm of \a me.
          */
         template <typename E>
         typename MatrixNormInfinity<E>::ResultType
-        normInf(const MatrixExpression<E>& e)
+        normInf(const MatrixExpression<E>& me)
         {
-            return MatrixNormInfinity<E>::apply(e);
+            return MatrixNormInfinity<E>::apply(me);
         }
 
         /**
@@ -1958,16 +1958,16 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the sum of all elements of the matrix expression \a e.
+         * \brief Returns the sum of all elements of the matrix expression \a me.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
-         * \return \f$ \sum_{i, j} e(i, j) \f$.
+         * \param me The matrix expression.
+         * \return \f$ \sum_{i, j} me(i, j) \f$.
          */
         template <typename E>
         typename MatrixElementSum<E>::ResultType
-        sum(const MatrixExpression<E>& e)
+        sum(const MatrixExpression<E>& me)
         {
-            return MatrixElementSum<E>::apply(e);
+            return MatrixElementSum<E>::apply(me);
         }
     } // namespace Math
 } // namespace CDPL

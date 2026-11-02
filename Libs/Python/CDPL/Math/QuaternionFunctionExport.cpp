@@ -218,13 +218,13 @@ void CDPLPythonMath::exportQuaternionFunctions()
     python::def("norm", &norm<long>, python::arg("e"));
     python::def("norm", &norm<unsigned long>, python::arg("e"));
 
-    python::def("norm2", &norm2<float>, python::arg("e"));
-    python::def("norm2", &norm2<double>, python::arg("e"));
-    python::def("norm2", &norm2<long>, python::arg("e"));
-    python::def("norm2", &norm2<unsigned long>, python::arg("e"));
+    python::def("norm2", &norm2<float>, python::arg("qe"));
+    python::def("norm2", &norm2<double>, python::arg("qe"));
+    python::def("norm2", &norm2<long>, python::arg("qe"));
+    python::def("norm2", &norm2<unsigned long>, python::arg("qe"));
 
-    python::def("sum", &sum<float>, python::arg("e"));
-    python::def("sum", &sum<double>, python::arg("e"));
-    python::def("sum", &sum<long>, python::arg("e"));
-    python::def("sum", &sum<unsigned long>, python::arg("e"));
+    python::def("sum", &sum<float>, python::arg("qe"));
+    python::def("sum", &sum<double>, python::arg("qe"));
+    python::def("sum", &sum<long>, python::arg("qe"));
+    python::def("sum", &sum<unsigned long>, python::arg("qe"));
 }

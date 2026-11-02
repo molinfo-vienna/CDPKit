@@ -69,8 +69,8 @@ namespace
                 .add_property("start", &VectorSliceType::getStart)
                 .add_property("stride", &VectorSliceType::getStride);
 
-            python::def("slice", &slice1, (python::arg("e"), python::arg("s")));
-            python::def("slice", &slice2, (python::arg("e"), python::arg("start"), python::arg("stride"), python::arg("size")));
+            python::def("slice", &slice1, (python::arg("mve"), python::arg("s")));
+            python::def("slice", &slice2, (python::arg("mve"), python::arg("start"), python::arg("stride"), python::arg("size")));
         }
 
         static WrapperPointerType slice1(const ExpressionPointerType& e, const SliceType& s) {

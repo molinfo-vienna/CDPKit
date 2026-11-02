@@ -1361,108 +1361,108 @@ namespace CDPL
         {};
 
         /**
-         * \brief Returns a mutable row proxy for row \a i of the matrix expression \a e.
+         * \brief Returns a mutable row proxy for row \a i of the matrix expression \a me.
          * \tparam M The matrix expression type.
-         * \param e The matrix expression.
+         * \param me The matrix expression.
          * \param i The zero-based row index.
-         * \return A Math::MatrixRow proxy referring to row \a i of \a e.
+         * \return A Math::MatrixRow proxy referring to row \a i of \a me.
          */
         template <typename M>
         MatrixRow<M>
-        row(MatrixExpression<M>& e, typename MatrixRow<M>::SizeType i)
+        row(MatrixExpression<M>& me, typename MatrixRow<M>::SizeType i)
         {
-            return MatrixRow<M>(e(), i);
+            return MatrixRow<M>(me(), i);
         }
 
         /**
-         * \brief Returns a \c const row proxy for row \a i of the matrix expression \a e.
+         * \brief Returns a constant row proxy for row \a i of the matrix expression \a ce.
          * \tparam M The matrix expression type.
-         * \param e The matrix expression.
+         * \param ce The matrix expression.
          * \param i The zero-based row index.
-         * \return A Math::MatrixRow proxy referring to row \a i of \a e.
+         * \return A Math::MatrixRow proxy referring to row \a i of \a ce.
          */
         template <typename M>
         MatrixRow<const M>
-        row(const MatrixExpression<M>& e, typename MatrixRow<const M>::SizeType i)
+        row(const MatrixExpression<M>& ce, typename MatrixRow<const M>::SizeType i)
         {
-            return MatrixRow<const M>(e(), i);
+            return MatrixRow<const M>(ce(), i);
         }
 
         /**
-         * \brief Returns a mutable column proxy for column \a j of the matrix expression \a e.
+         * \brief Returns a mutable column proxy for column \a j of the matrix expression \a me.
          * \tparam M The matrix expression type.
-         * \param e The matrix expression.
+         * \param me The matrix expression.
          * \param j The zero-based column index.
-         * \return A Math::MatrixColumn proxy referring to column \a j of \a e.
+         * \return A Math::MatrixColumn proxy referring to column \a j of \a me.
          */
         template <typename M>
         MatrixColumn<M>
-        column(MatrixExpression<M>& e, typename MatrixColumn<M>::SizeType j)
+        column(MatrixExpression<M>& me, typename MatrixColumn<M>::SizeType j)
         {
-            return MatrixColumn<M>(e(), j);
+            return MatrixColumn<M>(me(), j);
         }
 
         /**
-         * \brief Returns a \c const column proxy for column \a j of the matrix expression \a e.
+         * \brief Returns a constant column proxy for column \a j of the matrix expression \a ce.
          * \tparam M The matrix expression type.
-         * \param e The matrix expression.
+         * \param ce The matrix expression.
          * \param j The zero-based column index.
-         * \return A Math::MatrixColumn proxy referring to column \a j of \a e.
+         * \return A Math::MatrixColumn proxy referring to column \a j of \a ce.
          */
         template <typename M>
         MatrixColumn<const M>
-        column(const MatrixExpression<M>& e, typename MatrixColumn<const M>::SizeType j)
+        column(const MatrixExpression<M>& ce, typename MatrixColumn<const M>::SizeType j)
         {
-            return MatrixColumn<const M>(e(), j);
+            return MatrixColumn<const M>(ce(), j);
         }
 
         /**
-         * \brief Returns a mutable matrix range proxy viewing rows in \a r1 and columns in \a r2 of \a e.
+         * \brief Returns a mutable matrix range proxy viewing rows in \a r1 and columns in \a r2 of \a mme.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param mme The matrix expression.
          * \param r1 The row index range.
          * \param r2 The column index range.
-         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a e.
+         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a mme.
          */
         template <typename E>
         MatrixRange<E>
-        range(MatrixExpression<E>&                      e,
+        range(MatrixExpression<E>&                      mme,
               const typename MatrixRange<E>::RangeType& r1,
               const typename MatrixRange<E>::RangeType& r2)
         {
-            return MatrixRange<E>(e(), r1, r2);
+            return MatrixRange<E>(mme(), r1, r2);
         }
 
         /**
-         * \brief Returns a \c const matrix range proxy viewing rows in \a r1 and columns in \a r2 of \a e.
+         * \brief Returns a constant matrix range proxy viewing rows in \a r1 and columns in \a r2 of \a cme.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param cme The matrix expression.
          * \param r1 The row index range.
          * \param r2 The column index range.
-         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a e.
+         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a cme.
          */
         template <typename E>
         MatrixRange<const E>
-        range(const MatrixExpression<E>&                      e,
+        range(const MatrixExpression<E>&                      cme,
               const typename MatrixRange<const E>::RangeType& r1,
               const typename MatrixRange<const E>::RangeType& r2)
         {
-            return MatrixRange<const E>(e(), r1, r2);
+            return MatrixRange<const E>(cme(), r1, r2);
         }
 
         /**
-         * \brief Returns a mutable matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a e.
+         * \brief Returns a mutable matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a mme.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param mme The matrix expression.
          * \param start1 The first row index (inclusive).
          * \param stop1 The last row index (exclusive).
          * \param start2 The first column index (inclusive).
          * \param stop2 The last column index (exclusive).
-         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a e.
+         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a mme.
          */
         template <typename E>
         MatrixRange<E>
-        range(MatrixExpression<E>&                         e,
+        range(MatrixExpression<E>&                         mme,
               typename MatrixRange<E>::RangeType::SizeType start1,
               typename MatrixRange<E>::RangeType::SizeType stop1,
               typename MatrixRange<E>::RangeType::SizeType start2,
@@ -1470,22 +1470,22 @@ namespace CDPL
         {
             typedef typename MatrixRange<E>::RangeType RangeType;
 
-            return MatrixRange<E>(e(), RangeType(start1, stop1), RangeType(start2, stop2));
+            return MatrixRange<E>(mme(), RangeType(start1, stop1), RangeType(start2, stop2));
         }
 
         /**
-         * \brief Returns a \c const matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a e.
+         * \brief Returns a constant matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a cme.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param cme The matrix expression.
          * \param start1 The first row index (inclusive).
          * \param stop1 The last row index (exclusive).
          * \param start2 The first column index (inclusive).
          * \param stop2 The last column index (exclusive).
-         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a e.
+         * \return A Math::MatrixRange proxy referring to the specified rectangular subrange of \a cme.
          */
         template <typename E>
         MatrixRange<const E>
-        range(const MatrixExpression<E>&                         e,
+        range(const MatrixExpression<E>&                         cme,
               typename MatrixRange<const E>::RangeType::SizeType start1,
               typename MatrixRange<const E>::RangeType::SizeType stop1,
               typename MatrixRange<const E>::RangeType::SizeType start2,
@@ -1493,58 +1493,58 @@ namespace CDPL
         {
             typedef typename MatrixRange<const E>::RangeType RangeType;
 
-            return MatrixRange<const E>(e(), RangeType(start1, stop1), RangeType(start2, stop2));
+            return MatrixRange<const E>(cme(), RangeType(start1, stop1), RangeType(start2, stop2));
         }
 
         /**
-         * \brief Returns a mutable matrix slice proxy viewing the strided rectangular slice (\a s1, \a s2) of \a e.
+         * \brief Returns a mutable matrix slice proxy viewing the strided rectangular slice (\a s1, \a s2) of \a mme.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param mme The matrix expression.
          * \param s1 The row slice (start, stride, size).
          * \param s2 The column slice (start, stride, size).
-         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a e.
+         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a mme.
          */
         template <typename E>
         MatrixSlice<E>
-        slice(MatrixExpression<E>&                      e,
+        slice(MatrixExpression<E>&                      mme,
               const typename MatrixSlice<E>::SliceType& s1,
               const typename MatrixSlice<E>::SliceType& s2)
         {
-            return MatrixSlice<E>(e(), s1, s2);
+            return MatrixSlice<E>(mme(), s1, s2);
         }
 
         /**
-         * \brief Returns a \c const matrix slice proxy viewing the strided rectangular slice (\a s1, \a s2) of \a e.
+         * \brief Returns a constant matrix slice proxy viewing the strided rectangular slice (\a s1, \a s2) of \a cme.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param cme The matrix expression.
          * \param s1 The row slice (start, stride, size).
          * \param s2 The column slice (start, stride, size).
-         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a e.
+         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a cme.
          */
         template <typename E>
         MatrixSlice<const E>
-        slice(const MatrixExpression<E>&                      e,
+        slice(const MatrixExpression<E>&                      cme,
               const typename MatrixSlice<const E>::SliceType& s1,
               const typename MatrixSlice<const E>::SliceType& s2)
         {
-            return MatrixSlice<const E>(e(), s1, s2);
+            return MatrixSlice<const E>(cme(), s1, s2);
         }
 
         /**
-         * \brief Returns a mutable matrix slice proxy specified by row (\a start1, \a stride1, \a size1) and column (\a start2, \a stride2, \a size2).
+         * \brief Returns a mutable matrix slicme proxy specified by row (\a start1, \a stride1, \a size1) and column (\a start2, \a stride2, \a size2).
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param mme The matrix expression.
          * \param start1 The start row index.
          * \param stride1 The row stride.
          * \param size1 The number of rows.
          * \param start2 The start column index.
          * \param stride2 The column stride.
          * \param size2 The number of columns.
-         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a e.
+         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a mme.
          */
         template <typename E>
         MatrixSlice<E>
-        slice(MatrixExpression<E>&                               e,
+        slice(MatrixExpression<E>&                               mme,
               typename MatrixSlice<E>::SliceType::SizeType       start1,
               typename MatrixSlice<E>::SliceType::DifferenceType stride1,
               typename MatrixSlice<E>::SliceType::SizeType       size1,
@@ -1554,24 +1554,24 @@ namespace CDPL
         {
             typedef typename MatrixSlice<E>::SliceType SliceType;
 
-            return MatrixSlice<E>(e(), SliceType(start1, stride1, size1), SliceType(start2, stride2, size2));
+            return MatrixSlice<E>(mme(), SliceType(start1, stride1, size1), SliceType(start2, stride2, size2));
         }
 
         /**
-         * \brief Returns a \c const matrix slice proxy specified by row (\a start1, \a stride1, \a size1) and column (\a start2, \a stride2, \a size2).
+         * \brief Returns a constant matrix slice proxy specified by row (\a start1, \a stride1, \a size1) and column (\a start2, \a stride2, \a size2).
          * \tparam E The matrix expression type.
-         * \param e The matrix expression.
+         * \param cme The matrix expression.
          * \param start1 The start row index.
          * \param stride1 The row stride.
          * \param size1 The number of rows.
          * \param start2 The start column index.
          * \param stride2 The column stride.
          * \param size2 The number of columns.
-         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a e.
+         * \return A Math::MatrixSlice proxy referring to the specified strided rectangular slice of \a cme.
          */
         template <typename E>
         MatrixSlice<const E>
-        slice(const MatrixExpression<E>&                               e,
+        slice(const MatrixExpression<E>&                               cme,
               typename MatrixSlice<const E>::SliceType::SizeType       start1,
               typename MatrixSlice<const E>::SliceType::DifferenceType stride1,
               typename MatrixSlice<const E>::SliceType::SizeType       size1,
@@ -1581,7 +1581,7 @@ namespace CDPL
         {
             typedef typename MatrixSlice<const E>::SliceType SliceType;
 
-            return MatrixSlice<const E>(e(), SliceType(start1, stride1, size1), SliceType(start2, stride2, size2));
+            return MatrixSlice<const E>(cme(), SliceType(start1, stride1, size1), SliceType(start2, stride2, size2));
         }
     } // namespace Math
 } // namespace CDPL

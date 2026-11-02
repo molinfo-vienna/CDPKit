@@ -300,20 +300,20 @@ void CDPLPythonMath::exportVectorFunctions()
     python::def("herm", &herm<long>, python::arg("ve"));
     python::def("herm", &herm<unsigned long>, python::arg("ve"));
 
-    python::def("norm1", &norm1<float>, python::arg("e"));
-    python::def("norm1", &norm1<double>, python::arg("e"));
-    python::def("norm1", &norm1<long>, python::arg("e"));
-    python::def("norm1", &norm1<unsigned long>, python::arg("e"));
+    python::def("norm1", &norm1<float>, python::arg("ve"));
+    python::def("norm1", &norm1<double>, python::arg("ve"));
+    python::def("norm1", &norm1<long>, python::arg("ve"));
+    python::def("norm1", &norm1<unsigned long>, python::arg("ve"));
 
-    python::def("norm2", &norm2<float>, python::arg("e"));
-    python::def("norm2", &norm2<double>, python::arg("e"));
-    python::def("norm2", &norm2<long>, python::arg("e"));
-    python::def("norm2", &norm2<unsigned long>, python::arg("e"));
+    python::def("norm2", &norm2<float>, python::arg("ve"));
+    python::def("norm2", &norm2<double>, python::arg("ve"));
+    python::def("norm2", &norm2<long>, python::arg("ve"));
+    python::def("norm2", &norm2<unsigned long>, python::arg("ve"));
 
-    python::def("normInf", &normInf<float>, python::arg("e"));
-    python::def("normInf", &normInf<double>, python::arg("e"));
-    python::def("normInf", &normInf<long>, python::arg("e"));
-    python::def("normInf", &normInf<unsigned long>, python::arg("e"));
+    python::def("normInf", &normInf<float>, python::arg("ve"));
+    python::def("normInf", &normInf<double>, python::arg("ve"));
+    python::def("normInf", &normInf<long>, python::arg("ve"));
+    python::def("normInf", &normInf<unsigned long>, python::arg("ve"));
 
     python::def("normInfIndex", &normInfIndex<float>, python::arg("e"));
     python::def("normInfIndex", &normInfIndex<double>, python::arg("e"));
@@ -325,10 +325,10 @@ void CDPLPythonMath::exportVectorFunctions()
     python::def("length", &length<long>, python::arg("e"));
     python::def("length", &length<unsigned long>, python::arg("e"));
 
-    python::def("sum", &sum<float>, python::arg("e"));
-    python::def("sum", &sum<double>, python::arg("e"));
-    python::def("sum", &sum<long>, python::arg("e"));
-    python::def("sum", &sum<unsigned long>, python::arg("e"));
+    python::def("sum", &sum<float>, python::arg("ve"));
+    python::def("sum", &sum<double>, python::arg("ve"));
+    python::def("sum", &sum<long>, python::arg("ve"));
+    python::def("sum", &sum<unsigned long>, python::arg("ve"));
 
     python::def("rotate", &rotate<float>, (python::arg("e1"), python::arg("e2")));
     python::def("rotate", &rotate<double>, (python::arg("e1"), python::arg("e2")));

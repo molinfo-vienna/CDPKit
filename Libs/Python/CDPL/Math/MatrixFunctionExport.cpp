@@ -500,25 +500,25 @@ void CDPLPythonMath::exportMatrixFunctions()
     python::def("outerProd", &outerProd<long>, (python::arg("e1"), python::arg("e2")));
     python::def("outerProd", &outerProd<unsigned long>, (python::arg("e1"), python::arg("e2")));
 
-    python::def("prod", &mtxVecProd1<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("prod", &mtxVecProd1<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("prod", &mtxVecProd1<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("prod", &mtxVecProd1<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("prod", &mtxVecProd1<float>, (python::arg("me"), python::arg("ve")));
+    python::def("prod", &mtxVecProd1<double>, (python::arg("me"), python::arg("ve")));
+    python::def("prod", &mtxVecProd1<long>, (python::arg("me"), python::arg("ve")));
+    python::def("prod", &mtxVecProd1<unsigned long>, (python::arg("me"), python::arg("ve")));
 
-    python::def("prod", &mtxVecProd2<float>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
-    python::def("prod", &mtxVecProd2<double>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
-    python::def("prod", &mtxVecProd2<long>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
-    python::def("prod", &mtxVecProd2<unsigned long>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
+    python::def("prod", &mtxVecProd2<float>, (python::arg("me"), python::arg("ve"), python::arg("c")));
+    python::def("prod", &mtxVecProd2<double>, (python::arg("me"), python::arg("ve"), python::arg("c")));
+    python::def("prod", &mtxVecProd2<long>, (python::arg("me"), python::arg("ve"), python::arg("c")));
+    python::def("prod", &mtxVecProd2<unsigned long>, (python::arg("me"), python::arg("ve"), python::arg("c")));
 
-    python::def("prod", &vecMtxProd1<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("prod", &vecMtxProd1<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("prod", &vecMtxProd1<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("prod", &vecMtxProd1<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("prod", &vecMtxProd1<float>, (python::arg("ve"), python::arg("me")));
+    python::def("prod", &vecMtxProd1<double>, (python::arg("ve"), python::arg("me")));
+    python::def("prod", &vecMtxProd1<long>, (python::arg("ve"), python::arg("me")));
+    python::def("prod", &vecMtxProd1<unsigned long>, (python::arg("ve"), python::arg("me")));
 
-    python::def("prod", &vecMtxProd2<float>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
-    python::def("prod", &vecMtxProd2<double>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
-    python::def("prod", &vecMtxProd2<long>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
-    python::def("prod", &vecMtxProd2<unsigned long>, (python::arg("e1"), python::arg("e2"), python::arg("c")));
+    python::def("prod", &vecMtxProd2<float>, (python::arg("ve"), python::arg("me"), python::arg("c")));
+    python::def("prod", &vecMtxProd2<double>, (python::arg("ve"), python::arg("me"), python::arg("c")));
+    python::def("prod", &vecMtxProd2<long>, (python::arg("ve"), python::arg("me"), python::arg("c")));
+    python::def("prod", &vecMtxProd2<unsigned long>, (python::arg("ve"), python::arg("me"), python::arg("c")));
 
     python::def("prod", &mtxMtxProd1<float>, (python::arg("e1"), python::arg("e2")));
     python::def("prod", &mtxMtxProd1<double>, (python::arg("e1"), python::arg("e2")));
@@ -535,25 +535,25 @@ void CDPLPythonMath::exportMatrixFunctions()
     python::def("trace", &trace<long>, python::arg("e"));
     python::def("trace", &trace<unsigned long>, python::arg("e"));
 
-    python::def("norm1", &norm1<float>, python::arg("e"));
-    python::def("norm1", &norm1<double>, python::arg("e"));
-    python::def("norm1", &norm1<long>, python::arg("e"));
-    python::def("norm1", &norm1<unsigned long>, python::arg("e"));
+    python::def("norm1", &norm1<float>, python::arg("me"));
+    python::def("norm1", &norm1<double>, python::arg("me"));
+    python::def("norm1", &norm1<long>, python::arg("me"));
+    python::def("norm1", &norm1<unsigned long>, python::arg("me"));
 
     python::def("normFrob", &normFrob<float>, python::arg("e"));
     python::def("normFrob", &normFrob<double>, python::arg("e"));
     python::def("normFrob", &normFrob<long>, python::arg("e"));
     python::def("normFrob", &normFrob<unsigned long>, python::arg("e"));
 
-    python::def("normInf", &normInf<float>, python::arg("e"));
-    python::def("normInf", &normInf<double>, python::arg("e"));
-    python::def("normInf", &normInf<long>, python::arg("e"));
-    python::def("normInf", &normInf<unsigned long>, python::arg("e"));
+    python::def("normInf", &normInf<float>, python::arg("me"));
+    python::def("normInf", &normInf<double>, python::arg("me"));
+    python::def("normInf", &normInf<long>, python::arg("me"));
+    python::def("normInf", &normInf<unsigned long>, python::arg("me"));
 
-    python::def("sum", &sum<float>, python::arg("e"));
-    python::def("sum", &sum<double>, python::arg("e"));
-    python::def("sum", &sum<long>, python::arg("e"));
-    python::def("sum", &sum<unsigned long>, python::arg("e"));
+    python::def("sum", &sum<float>, python::arg("me"));
+    python::def("sum", &sum<double>, python::arg("me"));
+    python::def("sum", &sum<long>, python::arg("me"));
+    python::def("sum", &sum<unsigned long>, python::arg("me"));
 
     python::def("cross", &cross<float>, python::arg("e"));
     python::def("cross", &cross<double>, python::arg("e"));

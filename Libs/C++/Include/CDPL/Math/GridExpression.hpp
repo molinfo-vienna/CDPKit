@@ -808,16 +808,16 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the sum of all elements of the grid expression \a e.
+         * \brief Returns the sum of all elements of the grid expression \a ge.
          * \tparam E The grid expression type.
-         * \param e The grid expression.
-         * \return \f$ \sum_{i, j, k} e(i, j, k) \f$.
+         * \param ge The grid expression.
+         * \return \f$ \sum_{i, j, k} ge(i, j, k) \f$.
          */
         template <typename E>
         typename GridElementSum<E>::ResultType
-        sum(const GridExpression<E>& e)
+        sum(const GridExpression<E>& ge)
         {
-            return GridElementSum<E>::apply(e);
+            return GridElementSum<E>::apply(ge);
         }
     } // namespace Math
 } // namespace CDPL

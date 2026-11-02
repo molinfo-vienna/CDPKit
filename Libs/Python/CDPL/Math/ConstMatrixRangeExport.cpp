@@ -65,8 +65,8 @@ namespace
                 .add_property("start1", &MatrixRangeType::getStart1)
                 .add_property("start2", &MatrixRangeType::getStart2);
 
-            python::def("range", &range1, (python::arg("e"), python::arg("r1"), python::arg("r2")));
-            python::def("range", &range2, (python::arg("e"), python::arg("start1"), python::arg("stop1"),
+            python::def("range", &range1, (python::arg("cme"), python::arg("r1"), python::arg("r2")));
+            python::def("range", &range2, (python::arg("cme"), python::arg("start1"), python::arg("stop1"),
                                            python::arg("start2"), python::arg("stop2")));
         }
 

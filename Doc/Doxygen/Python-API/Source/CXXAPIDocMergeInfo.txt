@@ -895,9 +895,22 @@ Math.HomogenousCoordsAdapter § homogeneous-coordinates
 
 Math.quat § Math.quat
 Math.VectorQuaternionAdapter § quaternion
+Math.RealQuaternion § real quaternion
+Math.Quaternion § quaternion
+
+Math.range § Math.range
+Math.VectorRange view § proxy object viewing
+
+# ---
 
 Math.luDecompose(e,pv) § Math.luDecompose(e,pv,num_row_swaps)
 \param num_row_swaps The output count of executed row swaps. §
+
+# ---
+
+Math.prod § Math.prod
+' (named-function form of operator*)' §
+A reference to <em>c § The output container <em>c
 
 #
 # --- CDPL.Util package ---

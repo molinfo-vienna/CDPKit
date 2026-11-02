@@ -394,29 +394,29 @@ namespace CDPL
         };
 
         /**
-         * \brief Creates a mutable Math::QuaternionVectorAdapter view of the quaternion expression \a e.
+         * \brief Creates a mutable Math::QuaternionVectorAdapter view of the quaternion expression \a me.
          * \tparam E The quaternion expression type.
-         * \param e The quaternion expression to wrap.
-         * \return A mutable \e 4 element vector view of \a e.
+         * \param me The quaternion expression to wrap.
+         * \return A mutable \e 4 element vector view of \a me.
          */
         template <typename E>
         QuaternionVectorAdapter<E>
-        vec(QuaternionExpression<E>& e)
+        vec(QuaternionExpression<E>& me)
         {
-            return QuaternionVectorAdapter<E>(e());
+            return QuaternionVectorAdapter<E>(me());
         }
 
         /**
-         * \brief Creates a constant Math::QuaternionVectorAdapter view of the quaternion expression \a e.
+         * \brief Creates a constant Math::QuaternionVectorAdapter view of the quaternion expression \a ce.
          * \tparam E The quaternion expression type.
-         * \param e The quaternion expression to wrap.
-         * \return A constant \e 4 element vector view of \a e.
+         * \param ce The quaternion expression to wrap.
+         * \return A constant \e 4 element vector view of \a ce.
          */
         template <typename E>
         QuaternionVectorAdapter<const E>
-        vec(const QuaternionExpression<E>& e)
+        vec(const QuaternionExpression<E>& ce)
         {
-            return QuaternionVectorAdapter<const E>(e());
+            return QuaternionVectorAdapter<const E>(ce());
         }
     } // namespace Math
 } // namespace CDPL

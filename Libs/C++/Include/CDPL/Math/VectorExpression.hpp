@@ -1054,55 +1054,55 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the sum of all elements of the vector expression \a e.
+         * \brief Returns the sum of all elements of the vector expression \a ve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return \f$ \sum_i e(i) \f$.
+         * \param ve The vector expression.
+         * \return \f$ \sum_i ve(i) \f$.
          */
         template <typename E>
         typename VectorElementSum<E>::ResultType
-        sum(const VectorExpression<E>& e)
+        sum(const VectorExpression<E>& ve)
         {
-            return VectorElementSum<E>::apply(e);
+            return VectorElementSum<E>::apply(ve);
         }
 
         /**
-         * \brief Returns the L1 norm of the vector expression \a e (\f$ \sum_i |e(i)| \f$).
+         * \brief Returns the L1 norm of the vector expression \a ve (\f$ \sum_i |ve(i)| \f$).
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return The L1 norm.
+         * \param ve The vector expression.
+         * \return The L1 norm of \a ve.
          */
         template <typename E>
         typename VectorNorm1<E>::ResultType
-        norm1(const VectorExpression<E>& e)
+        norm1(const VectorExpression<E>& ve)
         {
-            return VectorNorm1<E>::apply(e);
+            return VectorNorm1<E>::apply(ve);
         }
 
         /**
-         * \brief Returns the L2 (Euclidean) norm of the vector expression \a e (\f$ \sqrt{\sum_i |e(i)|^2} \f$).
+         * \brief Returns the L2 (Euclidean) norm of the vector expression \a ve (\f$ \sqrt{\sum_i |ve(i)|^2} \f$).
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return The L2 norm.
+         * \param ve The vector expression.
+         * \return The L2 norm of \a ve.
          */
         template <typename E>
         typename VectorNorm2<E>::ResultType
-        norm2(const VectorExpression<E>& e)
+        norm2(const VectorExpression<E>& ve)
         {
-            return VectorNorm2<E>::apply(e);
+            return VectorNorm2<E>::apply(ve);
         }
 
         /**
-         * \brief Returns the L&infin; norm of the vector expression \a e (\f$ \max_i |e(i)| \f$).
+         * \brief Returns the L&infin; norm of the vector expression \a ve (\f$ \max_i |ve(i)| \f$).
          * \tparam E The vector expression type.
-         * \param e The vector expression.
-         * \return The L&infin; norm.
+         * \param ve The vector expression.
+         * \return The L&infin; norm of \a ve.
          */
         template <typename E>
         typename VectorNormInfinity<E>::ResultType
-        normInf(const VectorExpression<E>& e)
+        normInf(const VectorExpression<E>& ve)
         {
-            return VectorNormInfinity<E>::apply(e);
+            return VectorNormInfinity<E>::apply(ve);
         }
 
         /**
@@ -1122,7 +1122,7 @@ namespace CDPL
          * \brief Returns the length (L2 norm) of the vector expression \a e (alias of norm2()).
          * \tparam E The vector expression type.
          * \param e The vector expression.
-         * \return The vector length.
+         * \return The vector length of \a e.
          */
         template <typename E>
         typename VectorNorm2<E>::ResultType

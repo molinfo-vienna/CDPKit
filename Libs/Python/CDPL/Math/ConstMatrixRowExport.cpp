@@ -62,7 +62,7 @@ namespace
                 .def(WrappedDataVisitor<MatrixRowWrapper>())
                 .add_property("index", &MatrixRowType::getIndex);
 
-            python::def("row", &row, (python::arg("e"), python::arg("i")));
+            python::def("row", &row, (python::arg("ce"), python::arg("i")));
         }
 
         static WrapperPointerType row(const ExpressionPointerType& e, SizeType i) {

@@ -683,139 +683,139 @@ namespace CDPL
         {};
 
         /**
-         * \brief Creates a mutable Math::VectorRange view of the subrange \a r of the vector expression \a e.
+         * \brief Creates a mutable Math::VectorRange view of the subrange \a r of the vector expression \a mve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param mve The vector expression.
          * \param r The index range to view.
-         * \return A mutable range view of \a e.
+         * \return A mutable range view of \a me.
          */
         template <typename E>
         VectorRange<E>
-        range(VectorExpression<E>& e, const typename VectorRange<E>::RangeType& r)
+        range(VectorExpression<E>& mve, const typename VectorRange<E>::RangeType& r)
         {
-            return VectorRange<E>(e(), r);
+            return VectorRange<E>(mve(), r);
         }
 
         /**
-         * \brief Creates a constant Math::VectorRange view of the subrange \a r of the vector expression \a e.
+         * \brief Creates a constant Math::VectorRange view of the subrange \a r of the vector expression \a cve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param cve The vector expression.
          * \param r The index range to view.
-         * \return A constant range view of \a e.
+         * \return A constant range view of \a cve.
          */
         template <typename E>
         VectorRange<const E>
-        range(const VectorExpression<E>& e, const typename VectorRange<const E>::RangeType& r)
+        range(const VectorExpression<E>& cve, const typename VectorRange<const E>::RangeType& r)
         {
-            return VectorRange<const E>(e(), r);
+            return VectorRange<const E>(cve(), r);
         }
 
         /**
-         * \brief Creates a mutable Math::VectorRange view of the subrange [\a start, \a stop) of the vector expression \a e.
+         * \brief Creates a mutable Math::VectorRange view of the subrange [\a start, \a stop) of the vector expression \a mve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param mve The vector expression.
          * \param start The (inclusive) start index of the range.
          * \param stop The (exclusive) end index of the range.
-         * \return A mutable range view of \a e.
+         * \return A mutable range view of \a mve.
          */
         template <typename E>
         VectorRange<E>
-        range(VectorExpression<E>&                         e,
+        range(VectorExpression<E>&                         mve,
               typename VectorRange<E>::RangeType::SizeType start,
               typename VectorRange<E>::RangeType::SizeType stop)
         {
             typedef typename VectorRange<E>::RangeType RangeType;
 
-            return VectorRange<E>(e(), RangeType(start, stop));
+            return VectorRange<E>(mve(), RangeType(start, stop));
         }
 
         /**
-         * \brief Creates a constant Math::VectorRange view of the subrange [\a start, \a stop) of the vector expression \a e.
+         * \brief Creates a constant Math::VectorRange view of the subrange [\a start, \a stop) of the vector expression \a cve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param cve The vector expression.
          * \param start The (inclusive) start index of the range.
          * \param stop The (exclusive) end index of the range.
-         * \return A constant range view of \a e.
+         * \return A constant range view of \a cve.
          */
         template <typename E>
         VectorRange<const E>
-        range(const VectorExpression<E>&                         e,
+        range(const VectorExpression<E>&                         cve,
               typename VectorRange<const E>::RangeType::SizeType start,
               typename VectorRange<const E>::RangeType::SizeType stop)
         {
             typedef typename VectorRange<const E>::RangeType RangeType;
 
-            return VectorRange<const E>(e(), RangeType(start, stop));
+            return VectorRange<const E>(cve(), RangeType(start, stop));
         }
 
         /**
-         * \brief Creates a mutable Math::VectorSlice view of the slice \a s of the vector expression \a e.
+         * \brief Creates a mutable Math::VectorSlice view of the slice \a s of the vector expression \a mve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param mve The vector expression.
          * \param s The (start, stride, size) slice to view.
-         * \return A mutable slice view of \a e.
+         * \return A mutable slice view of \a mve.
          */
         template <typename E>
         VectorSlice<E>
-        slice(VectorExpression<E>& e, const typename VectorSlice<E>::SliceType& s)
+        slice(VectorExpression<E>& mve, const typename VectorSlice<E>::SliceType& s)
         {
-            return VectorSlice<E>(e(), s);
+            return VectorSlice<E>(mve(), s);
         }
 
         /**
-         * \brief Creates a constant Math::VectorSlice view of the slice \a s of the vector expression \a e.
+         * \brief Creates a constant Math::VectorSlice view of the slice \a s of the vector expression \a cve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param cve The vector expression.
          * \param s The (start, stride, size) slice to view.
-         * \return A constant slice view of \a e.
+         * \return A constant slice view of \a cve.
          */
         template <typename E>
         VectorSlice<const E>
-        slice(const VectorExpression<E>& e, const typename VectorSlice<const E>::SliceType& s)
+        slice(const VectorExpression<E>& cve, const typename VectorSlice<const E>::SliceType& s)
         {
-            return VectorSlice<const E>(e(), s);
+            return VectorSlice<const E>(cve(), s);
         }
 
         /**
-         * \brief Creates a mutable Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a e.
+         * \brief Creates a mutable Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a mve.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param mve The vector expression.
          * \param start The (inclusive) start index of the slice.
          * \param stride The stride between successive slice elements.
          * \param size The number of elements of the slice.
-         * \return A mutable slice view of \a e.
+         * \return A mutable slice view of \a mve.
          */
         template <typename E>
         VectorSlice<E>
-        slice(VectorExpression<E>&                               e,
+        slice(VectorExpression<E>&                               mve,
               typename VectorSlice<E>::SliceType::SizeType       start,
               typename VectorSlice<E>::SliceType::DifferenceType stride,
               typename VectorSlice<E>::SliceType::SizeType       size)
         {
             typedef typename VectorSlice<E>::SliceType SliceType;
 
-            return VectorSlice<E>(e(), SliceType(start, stride, size));
+            return VectorSlice<E>(mve(), SliceType(start, stride, size));
         }
 
         /**
-         * \brief Creates a constant Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a e.
+         * \brief Creates a constant Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a vce.
          * \tparam E The vector expression type.
-         * \param e The vector expression.
+         * \param cve The vector expression.
          * \param start The (inclusive) start index of the slice.
          * \param stride The stride between successive slice elements.
          * \param size The number of elements of the slice.
-         * \return A constant slice view of \a e.
+         * \return A constant slice view of \a cve.
          */
         template <typename E>
         VectorSlice<const E>
-        slice(const VectorExpression<E>&                               e,
+        slice(const VectorExpression<E>&                               cve,
               typename VectorSlice<const E>::SliceType::SizeType       start,
               typename VectorSlice<const E>::SliceType::DifferenceType stride,
               typename VectorSlice<const E>::SliceType::SizeType       size)
         {
             typedef typename VectorSlice<const E>::SliceType SliceType;
 
-            return VectorSlice<const E>(e(), SliceType(start, stride, size));
+            return VectorSlice<const E>(cve(), SliceType(start, stride, size));
         }
     } // namespace Math
 } // namespace CDPL

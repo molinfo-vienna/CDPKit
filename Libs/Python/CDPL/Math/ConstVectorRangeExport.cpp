@@ -63,8 +63,8 @@ namespace
                 .def(WrappedDataVisitor<VectorRangeWrapper>())
                 .add_property("start", &VectorRangeType::getStart);
 
-            python::def("range", &range1, (python::arg("e"), python::arg("r")));
-            python::def("range", &range2, (python::arg("e"), python::arg("start"), python::arg("stop")));
+            python::def("range", &range1, (python::arg("cve"), python::arg("r")));
+            python::def("range", &range2, (python::arg("cve"), python::arg("start"), python::arg("stop")));
         }
 
         static WrapperPointerType range1(const ExpressionPointerType& e, const RangeType& r) {

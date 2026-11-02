@@ -348,84 +348,84 @@ def calcRMSD(va1: Vector3ULArray, va2: Vector3ULArray) -> int: pass
 def calcRMSD(va1: Vector3ULArray, va2: Vector3ULArray, va1_xform: Matrix4UL) -> int: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant column proxy for column <em>j</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>ce</em>.
 # 
-def column(e: ConstDMatrixExpression, j: int) -> ConstDMatrixColumn: pass
+def column(ce: ConstDMatrixExpression, j: int) -> ConstDMatrixColumn: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant column proxy for column <em>j</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>ce</em>.
 # 
-def column(e: ConstFMatrixExpression, j: int) -> ConstFMatrixColumn: pass
+def column(ce: ConstFMatrixExpression, j: int) -> ConstFMatrixColumn: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant column proxy for column <em>j</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>ce</em>.
 # 
-def column(e: ConstLMatrixExpression, j: int) -> ConstLMatrixColumn: pass
+def column(ce: ConstLMatrixExpression, j: int) -> ConstLMatrixColumn: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant column proxy for column <em>j</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>ce</em>.
 # 
-def column(e: ConstULMatrixExpression, j: int) -> ConstULMatrixColumn: pass
+def column(ce: ConstULMatrixExpression, j: int) -> ConstULMatrixColumn: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable column proxy for column <em>j</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>me</em>.
 # 
-def column(e: DMatrixExpression, j: int) -> DMatrixColumn: pass
+def column(me: DMatrixExpression, j: int) -> DMatrixColumn: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable column proxy for column <em>j</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>me</em>.
 # 
-def column(e: FMatrixExpression, j: int) -> FMatrixColumn: pass
+def column(me: FMatrixExpression, j: int) -> FMatrixColumn: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable column proxy for column <em>j</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>me</em>.
 # 
-def column(e: LMatrixExpression, j: int) -> LMatrixColumn: pass
+def column(me: LMatrixExpression, j: int) -> LMatrixColumn: pass
 
 ##
-# \brief Returns a column proxy for column <em>j</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable column proxy for column <em>j</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param j The zero-based column index.
 # 
-# \return A proxy object referring to column <em>j</em> of <em>e</em>.
+# \return A proxy object referring to column <em>j</em> of <em>me</em>.
 # 
-def column(e: ULMatrixExpression, j: int) -> ULMatrixColumn: pass
+def column(me: ULMatrixExpression, j: int) -> ULMatrixColumn: pass
 
 ##
 # \brief Returns the element-wise complex conjugate of the grid expression <em>ge</em> (identity for real-valued grids).
@@ -1671,7 +1671,7 @@ def jacobiDiagonalize(a: ULMatrixExpression, d: ULVectorExpression, v: ULMatrixE
 # 
 # \param e The vector expression.
 # 
-# \return The vector length.
+# \return The vector length of <em>e</em>.
 # 
 def length(e: ConstDVectorExpression) -> float: pass
 
@@ -1680,7 +1680,7 @@ def length(e: ConstDVectorExpression) -> float: pass
 # 
 # \param e The vector expression.
 # 
-# \return The vector length.
+# \return The vector length of <em>e</em>.
 # 
 def length(e: ConstFVectorExpression) -> float: pass
 
@@ -1689,7 +1689,7 @@ def length(e: ConstFVectorExpression) -> float: pass
 # 
 # \param e The vector expression.
 # 
-# \return The vector length.
+# \return The vector length of <em>e</em>.
 # 
 def length(e: ConstLVectorExpression) -> int: pass
 
@@ -1698,7 +1698,7 @@ def length(e: ConstLVectorExpression) -> int: pass
 # 
 # \param e The vector expression.
 # 
-# \return The vector length.
+# \return The vector length of <em>e</em>.
 # 
 def length(e: ConstULVectorExpression) -> int: pass
 
@@ -1962,148 +1962,148 @@ def luSubstitute(lu: ConstULMatrixExpression, bm: ULMatrixExpression) -> bool: p
 def luSubstitute(lu: ConstULMatrixExpression, pv: ConstULVectorExpression, bm: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 (maximum absolute column sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>me</em>.
 # 
-def norm1(e: ConstDMatrixExpression) -> float: pass
+def norm1(me: ConstDMatrixExpression) -> float: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 norm of the vector expression <em>ve</em> ( \f$ \sum_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>ve</em>.
 # 
-def norm1(e: ConstDVectorExpression) -> float: pass
+def norm1(ve: ConstDVectorExpression) -> float: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 (maximum absolute column sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>me</em>.
 # 
-def norm1(e: ConstFMatrixExpression) -> float: pass
+def norm1(me: ConstFMatrixExpression) -> float: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 norm of the vector expression <em>ve</em> ( \f$ \sum_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>ve</em>.
 # 
-def norm1(e: ConstFVectorExpression) -> float: pass
+def norm1(ve: ConstFVectorExpression) -> float: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 (maximum absolute column sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>me</em>.
 # 
-def norm1(e: ConstLMatrixExpression) -> int: pass
+def norm1(me: ConstLMatrixExpression) -> int: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 norm of the vector expression <em>ve</em> ( \f$ \sum_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>ve</em>.
 # 
-def norm1(e: ConstLVectorExpression) -> int: pass
+def norm1(ve: ConstLVectorExpression) -> int: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 (maximum absolute column sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>me</em>.
 # 
-def norm1(e: ConstULMatrixExpression) -> int: pass
+def norm1(me: ConstULMatrixExpression) -> int: pass
 
 ##
-# \brief Returns the L1 norm of the vector expression <em>e</em> ( \f$ \sum_i |e(i)| \f$).
+# \brief Returns the L1 norm of the vector expression <em>ve</em> ( \f$ \sum_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L1 norm.
+# \return The L1 norm of <em>ve</em>.
 # 
-def norm1(e: ConstULVectorExpression) -> int: pass
+def norm1(ve: ConstULVectorExpression) -> int: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the squared norm of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return The L2 norm.
+# \return \f$ \|qe\|^2 = qe \cdot \overline{qe} \f$.
 # 
-def norm2(e: ConstDQuaternionExpression) -> float: pass
+def norm2(qe: ConstDQuaternionExpression) -> float: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the L2 (Euclidean) norm of the vector expression <em>ve</em> ( \f$ \sqrt{\sum_i |ve(i)|^2} \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L2 norm.
+# \return The L2 norm of <em>ve</em>.
 # 
-def norm2(e: ConstDVectorExpression) -> float: pass
+def norm2(ve: ConstDVectorExpression) -> float: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the squared norm of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return The L2 norm.
+# \return \f$ \|qe\|^2 = qe \cdot \overline{qe} \f$.
 # 
-def norm2(e: ConstFQuaternionExpression) -> float: pass
+def norm2(qe: ConstFQuaternionExpression) -> float: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the L2 (Euclidean) norm of the vector expression <em>ve</em> ( \f$ \sqrt{\sum_i |ve(i)|^2} \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L2 norm.
+# \return The L2 norm of <em>ve</em>.
 # 
-def norm2(e: ConstFVectorExpression) -> float: pass
+def norm2(ve: ConstFVectorExpression) -> float: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the squared norm of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return The L2 norm.
+# \return \f$ \|qe\|^2 = qe \cdot \overline{qe} \f$.
 # 
-def norm2(e: ConstLQuaternionExpression) -> int: pass
+def norm2(qe: ConstLQuaternionExpression) -> int: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the L2 (Euclidean) norm of the vector expression <em>ve</em> ( \f$ \sqrt{\sum_i |ve(i)|^2} \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L2 norm.
+# \return The L2 norm of <em>ve</em>.
 # 
-def norm2(e: ConstLVectorExpression) -> int: pass
+def norm2(ve: ConstLVectorExpression) -> int: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the squared norm of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return The L2 norm.
+# \return \f$ \|qe\|^2 = qe \cdot \overline{qe} \f$.
 # 
-def norm2(e: ConstULQuaternionExpression) -> int: pass
+def norm2(qe: ConstULQuaternionExpression) -> int: pass
 
 ##
-# \brief Returns the L2 (Euclidean) norm of the vector expression <em>e</em> ( \f$ \sqrt{\sum_i |e(i)|^2} \f$).
+# \brief Returns the L2 (Euclidean) norm of the vector expression <em>ve</em> ( \f$ \sqrt{\sum_i |ve(i)|^2} \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L2 norm.
+# \return The L2 norm of <em>ve</em>.
 # 
-def norm2(e: ConstULVectorExpression) -> int: pass
+def norm2(ve: ConstULVectorExpression) -> int: pass
 
 ##
 # \brief Returns the norm (Euclidean length) of the quaternion expression <em>e</em>.
@@ -2178,76 +2178,76 @@ def normFrob(e: ConstLMatrixExpression) -> int: pass
 def normFrob(e: ConstULMatrixExpression) -> int: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; (maximum absolute row sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>me</em>.
 # 
-def normInf(e: ConstDMatrixExpression) -> float: pass
+def normInf(me: ConstDMatrixExpression) -> float: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; norm of the vector expression <em>ve</em> ( \f$ \max_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>ve</em>.
 # 
-def normInf(e: ConstDVectorExpression) -> float: pass
+def normInf(ve: ConstDVectorExpression) -> float: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; (maximum absolute row sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>me</em>.
 # 
-def normInf(e: ConstFMatrixExpression) -> float: pass
+def normInf(me: ConstFMatrixExpression) -> float: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; norm of the vector expression <em>ve</em> ( \f$ \max_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>ve</em>.
 # 
-def normInf(e: ConstFVectorExpression) -> float: pass
+def normInf(ve: ConstFVectorExpression) -> float: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; (maximum absolute row sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>me</em>.
 # 
-def normInf(e: ConstLMatrixExpression) -> int: pass
+def normInf(me: ConstLMatrixExpression) -> int: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; norm of the vector expression <em>ve</em> ( \f$ \max_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>ve</em>.
 # 
-def normInf(e: ConstLVectorExpression) -> int: pass
+def normInf(ve: ConstLVectorExpression) -> int: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; (maximum absolute row sum) norm of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>me</em>.
 # 
-def normInf(e: ConstULMatrixExpression) -> int: pass
+def normInf(me: ConstULMatrixExpression) -> int: pass
 
 ##
-# \brief Returns the L&infin; norm of the vector expression <em>e</em> ( \f$ \max_i |e(i)| \f$).
+# \brief Returns the L&infin; norm of the vector expression <em>ve</em> ( \f$ \max_i |ve(i)| \f$).
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return The L&infin; norm.
+# \return The L&infin; norm of <em>ve</em>.
 # 
-def normInf(e: ConstULVectorExpression) -> int: pass
+def normInf(ve: ConstULVectorExpression) -> int: pass
 
 ##
 # \brief Returns the (first) index at which the vector expression <em>e</em> attains its L&infin; norm.
@@ -2326,35 +2326,36 @@ def outerProd(e1: ConstLVectorExpression, e2: ConstLVectorExpression) -> ConstLM
 def outerProd(e1: ConstULVectorExpression, e2: ConstULVectorExpression) -> ConstULMatrixExpression: pass
 
 ##
-# \brief 
-# \param i 
-# \return 
-#
+# \brief Returns the <em>i</em>-th entry in the sequence of the first 10000 prime numbers (starting with \e 2).
+# \param i The zero-based prime number index.
+# \return The prime number at index \a i.
+# \throw RuntimeError if \a i &ge; \e 10000.
+# 
 def prime(i: int) -> int: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-vector product \f$ me \cdot ve \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param me The matrix expression.
+# \param ve The vector expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ me \cdot ve \f$.
 # 
-def prod(e1: ConstDMatrixExpression, e2: ConstDVectorExpression) -> ConstDVectorExpression: pass
+def prod(me: ConstDMatrixExpression, ve: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the matrix-vector product \f$ me \cdot ve \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param me The matrix expression.
+# \param ve The vector expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstDMatrixExpression, e2: ConstDVectorExpression, c: DVectorExpression) -> DVectorExpression: pass
+def prod(me: ConstDMatrixExpression, ve: ConstDVectorExpression, c: DVectorExpression) -> DVectorExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression.
 # 
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
@@ -2370,54 +2371,54 @@ def prod(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression) -> ConstDMatrix
 # \param e2 The second matrix expression.
 # \param c The output matrix container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
 def prod(e1: ConstDMatrixExpression, e2: ConstDMatrixExpression, c: DMatrixExpression) -> DMatrixExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the vector-matrix product \f$ ve \cdot me \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param ve The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ ve \cdot me \f$.
 # 
-def prod(e1: ConstDVectorExpression, e2: ConstDMatrixExpression) -> ConstDVectorExpression: pass
+def prod(ve: ConstDVectorExpression, me: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the vector-matrix product \f$ ve \cdot me \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param ve The vector expression.
+# \param me The matrix expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstDVectorExpression, e2: ConstDMatrixExpression, c: DVectorExpression) -> DVectorExpression: pass
+def prod(ve: ConstDVectorExpression, me: ConstDMatrixExpression, c: DVectorExpression) -> DVectorExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-vector product \f$ me \cdot ve \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param me The matrix expression.
+# \param ve The vector expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ me \cdot ve \f$.
 # 
-def prod(e1: ConstFMatrixExpression, e2: ConstFVectorExpression) -> ConstFVectorExpression: pass
+def prod(me: ConstFMatrixExpression, ve: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the matrix-vector product \f$ me \cdot ve \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param me The matrix expression.
+# \param ve The vector expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstFMatrixExpression, e2: ConstFVectorExpression, c: FVectorExpression) -> FVectorExpression: pass
+def prod(me: ConstFMatrixExpression, ve: ConstFVectorExpression, c: FVectorExpression) -> FVectorExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression.
 # 
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
@@ -2433,54 +2434,54 @@ def prod(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression) -> ConstFMatrix
 # \param e2 The second matrix expression.
 # \param c The output matrix container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
 def prod(e1: ConstFMatrixExpression, e2: ConstFMatrixExpression, c: FMatrixExpression) -> FMatrixExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the vector-matrix product \f$ ve \cdot me \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param ve The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ ve \cdot me \f$.
 # 
-def prod(e1: ConstFVectorExpression, e2: ConstFMatrixExpression) -> ConstFVectorExpression: pass
+def prod(ve: ConstFVectorExpression, me: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the vector-matrix product \f$ ve \cdot me \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param ve The vector expression.
+# \param me The matrix expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstFVectorExpression, e2: ConstFMatrixExpression, c: FVectorExpression) -> FVectorExpression: pass
+def prod(ve: ConstFVectorExpression, me: ConstFMatrixExpression, c: FVectorExpression) -> FVectorExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-vector product \f$ me \cdot ve \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param me The matrix expression.
+# \param ve The vector expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ me \cdot ve \f$.
 # 
-def prod(e1: ConstLMatrixExpression, e2: ConstLVectorExpression) -> ConstLVectorExpression: pass
+def prod(me: ConstLMatrixExpression, ve: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the matrix-vector product \f$ me \cdot ve \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param me The matrix expression.
+# \param ve The vector expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstLMatrixExpression, e2: ConstLVectorExpression, c: LVectorExpression) -> LVectorExpression: pass
+def prod(me: ConstLMatrixExpression, ve: ConstLVectorExpression, c: LVectorExpression) -> LVectorExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression.
 # 
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
@@ -2496,54 +2497,54 @@ def prod(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression) -> ConstLMatrix
 # \param e2 The second matrix expression.
 # \param c The output matrix container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
 def prod(e1: ConstLMatrixExpression, e2: ConstLMatrixExpression, c: LMatrixExpression) -> LMatrixExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the vector-matrix product \f$ ve \cdot me \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param ve The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ ve \cdot me \f$.
 # 
-def prod(e1: ConstLVectorExpression, e2: ConstLMatrixExpression) -> ConstLVectorExpression: pass
+def prod(ve: ConstLVectorExpression, me: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the vector-matrix product \f$ ve \cdot me \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param ve The vector expression.
+# \param me The matrix expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstLVectorExpression, e2: ConstLMatrixExpression, c: LVectorExpression) -> LVectorExpression: pass
+def prod(ve: ConstLVectorExpression, me: ConstLMatrixExpression, c: LVectorExpression) -> LVectorExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-vector product \f$ me \cdot ve \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param me The matrix expression.
+# \param ve The vector expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ me \cdot ve \f$.
 # 
-def prod(e1: ConstULMatrixExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
+def prod(me: ConstULMatrixExpression, ve: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the matrix-vector product \f$ me \cdot ve \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param me The matrix expression.
+# \param ve The vector expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstULMatrixExpression, e2: ConstULVectorExpression, c: ULVectorExpression) -> ULVectorExpression: pass
+def prod(me: ConstULMatrixExpression, ve: ConstULVectorExpression, c: ULVectorExpression) -> ULVectorExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression.
 # 
 # \param e1 The first matrix expression.
 # \param e2 The second matrix expression.
@@ -2559,30 +2560,30 @@ def prod(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression) -> ConstULMat
 # \param e2 The second matrix expression.
 # \param c The output matrix container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
 def prod(e1: ConstULMatrixExpression, e2: ConstULMatrixExpression, c: ULMatrixExpression) -> ULMatrixExpression: pass
 
 ##
-# \brief Returns the matrix-matrix product \f$ e_1 \cdot e_2 \f$ as a matrix expression (named-function form of operator*).
+# \brief Returns the vector-matrix product \f$ ve \cdot me \f$ as a vector expression.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
+# \param ve The vector expression.
+# \param me The matrix expression.
 # 
-# \return An expression object representing \f$ e_1 \cdot e_2 \f$.
+# \return An expression object representing \f$ ve \cdot me \f$.
 # 
-def prod(e1: ConstULVectorExpression, e2: ConstULMatrixExpression) -> ConstULVectorExpression: pass
+def prod(ve: ConstULVectorExpression, me: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief Computes the matrix-matrix product \f$ e_1 \cdot e_2 \f$ and stores it in <em>c</em>.
+# \brief Computes the vector-matrix product \f$ ve \cdot me \f$ and stores it in <em>c</em>.
 # 
-# \param e1 The first matrix expression.
-# \param e2 The second matrix expression.
-# \param c The output matrix container receiving the result.
+# \param ve The vector expression.
+# \param me The matrix expression.
+# \param c The output vector container receiving the result.
 # 
-# \return A reference to <em>c</em>.
+# \return The output container <em>c</em>.
 # 
-def prod(e1: ConstULVectorExpression, e2: ConstULMatrixExpression, c: ULVectorExpression) -> ULVectorExpression: pass
+def prod(ve: ConstULVectorExpression, me: ConstULMatrixExpression, c: ULVectorExpression) -> ULVectorExpression: pass
 
 ##
 # \brief Computes \f$ \sqrt{a^2 + b^2} \f$ without destructive underflow or overflow.
@@ -2667,7 +2668,7 @@ def quat(me: LVectorExpression) -> LVectorQuaternionAdapter: pass
 def quat(me: ULVectorExpression) -> ULVectorQuaternionAdapter: pass
 
 ##
-# \brief Constructs a Math.RealQuaternion from the scalar <em>t</em> (its real component).
+# \brief Constructs a real quaternion from the scalar <em>t</em> (its real component).
 # 
 # \param t The real component.
 # 
@@ -2676,7 +2677,7 @@ def quat(me: ULVectorExpression) -> ULVectorQuaternionAdapter: pass
 def quat(t: float) -> FRealQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from two scalar components <em>t1</em> and <em>t2</em> (<em>C1</em>, <em>C2</em>) — remaining components are zero.
+# \brief Constructs a quaternion from two scalar components <em>t1</em> and <em>t2</em> (<em>C1</em>, <em>C2</em>) — remaining components are zero.
 # 
 # \param t1 The <em>C1</em> component.
 # \param t2 The <em>C2</em> component.
@@ -2686,7 +2687,7 @@ def quat(t: float) -> FRealQuaternion: pass
 def quat(t1: float, t2: float) -> FQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from three scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>) — <em>C4</em> is zero.
+# \brief Constructs a quaternion from three scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>) — <em>C4</em> is zero.
 # 
 # \param t1 The <em>C1</em> component.
 # \param t2 The <em>C2</em> component.
@@ -2697,7 +2698,7 @@ def quat(t1: float, t2: float) -> FQuaternion: pass
 def quat(t1: float, t2: float, t3: float) -> FQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from four scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
+# \brief Constructs a quaternion from four scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
 # \param t1 The <em>C1</em> component.
 # \param t2 The <em>C2</em> component.
@@ -2709,7 +2710,7 @@ def quat(t1: float, t2: float, t3: float) -> FQuaternion: pass
 def quat(t1: float, t2: float, t3: float, t4: float) -> FQuaternion: pass
 
 ##
-# \brief Constructs a Math.RealQuaternion from the scalar <em>t</em> (its real component).
+# \brief Constructs a real quaternion from the scalar <em>t</em> (its real component).
 # 
 # \param t The real component.
 # 
@@ -2718,7 +2719,7 @@ def quat(t1: float, t2: float, t3: float, t4: float) -> FQuaternion: pass
 def quat(t: int) -> LRealQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from two scalar components <em>t1</em> and <em>t2</em> (<em>C1</em>, <em>C2</em>) — remaining components are zero.
+# \brief Constructs a quaternion from two scalar components <em>t1</em> and <em>t2</em> (<em>C1</em>, <em>C2</em>) — remaining components are zero.
 # 
 # \param t1 The <em>C1</em> component.
 # \param t2 The <em>C2</em> component.
@@ -2728,7 +2729,7 @@ def quat(t: int) -> LRealQuaternion: pass
 def quat(t1: int, t2: int) -> LQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from three scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>) — <em>C4</em> is zero.
+# \brief Constructs a quaternion from three scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>) — <em>C4</em> is zero.
 # 
 # \param t1 The <em>C1</em> component.
 # \param t2 The <em>C2</em> component.
@@ -2739,7 +2740,7 @@ def quat(t1: int, t2: int) -> LQuaternion: pass
 def quat(t1: int, t2: int, t3: int) -> LQuaternion: pass
 
 ##
-# \brief Constructs a Math.Quaternion from four scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
+# \brief Constructs a quaternion from four scalar components (<em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
 # \param t1 The <em>C1</em> component.
 # \param t2 The <em>C2</em> component.
@@ -2751,364 +2752,364 @@ def quat(t1: int, t2: int, t3: int) -> LQuaternion: pass
 def quat(t1: int, t2: int, t3: int, t4: int) -> LQuaternion: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstDMatrixExpression, r1: Range, r2: Range) -> ConstDMatrixRange: pass
+def range(cme: ConstDMatrixExpression, r1: Range, r2: Range) -> ConstDMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstDMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstDMatrixRange: pass
+def range(cme: ConstDMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstDMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange <em>r</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstDVectorExpression, r: Range) -> ConstDVectorRange: pass
+def range(cve: ConstDVectorExpression, r: Range) -> ConstDVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstDVectorExpression, start: int, stop: int) -> ConstDVectorRange: pass
+def range(cve: ConstDVectorExpression, start: int, stop: int) -> ConstDVectorRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstFMatrixExpression, r1: Range, r2: Range) -> ConstFMatrixRange: pass
+def range(cme: ConstFMatrixExpression, r1: Range, r2: Range) -> ConstFMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstFMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstFMatrixRange: pass
+def range(cme: ConstFMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstFMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange <em>r</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstFVectorExpression, r: Range) -> ConstFVectorRange: pass
+def range(cve: ConstFVectorExpression, r: Range) -> ConstFVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstFVectorExpression, start: int, stop: int) -> ConstFVectorRange: pass
+def range(cve: ConstFVectorExpression, start: int, stop: int) -> ConstFVectorRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstLMatrixExpression, r1: Range, r2: Range) -> ConstLMatrixRange: pass
+def range(cme: ConstLMatrixExpression, r1: Range, r2: Range) -> ConstLMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstLMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstLMatrixRange: pass
+def range(cme: ConstLMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstLMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange <em>r</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstLVectorExpression, r: Range) -> ConstLVectorRange: pass
+def range(cve: ConstLVectorExpression, r: Range) -> ConstLVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstLVectorExpression, start: int, stop: int) -> ConstLVectorRange: pass
+def range(cve: ConstLVectorExpression, start: int, stop: int) -> ConstLVectorRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstULMatrixExpression, r1: Range, r2: Range) -> ConstULMatrixRange: pass
+def range(cme: ConstULMatrixExpression, r1: Range, r2: Range) -> ConstULMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a constant matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>cme</em>.
 # 
-def range(e: ConstULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstULMatrixRange: pass
+def range(cme: ConstULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ConstULMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange <em>r</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstULVectorExpression, r: Range) -> ConstULVectorRange: pass
+def range(cve: ConstULVectorExpression, r: Range) -> ConstULVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A constant range view of <em>cve</em>.
 # 
-def range(e: ConstULVectorExpression, start: int, stop: int) -> ConstULVectorRange: pass
+def range(cve: ConstULVectorExpression, start: int, stop: int) -> ConstULVectorRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: DMatrixExpression, r1: Range, r2: Range) -> DMatrixRange: pass
+def range(mme: DMatrixExpression, r1: Range, r2: Range) -> DMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: DMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> DMatrixRange: pass
+def range(mme: DMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> DMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange <em>r</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>me</em>.
 # 
-def range(e: DVectorExpression, r: Range) -> DVectorRange: pass
+def range(mve: DVectorExpression, r: Range) -> DVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>mve</em>.
 # 
-def range(e: DVectorExpression, start: int, stop: int) -> DVectorRange: pass
+def range(mve: DVectorExpression, start: int, stop: int) -> DVectorRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: FMatrixExpression, r1: Range, r2: Range) -> FMatrixRange: pass
+def range(mme: FMatrixExpression, r1: Range, r2: Range) -> FMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: FMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> FMatrixRange: pass
+def range(mme: FMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> FMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange <em>r</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>me</em>.
 # 
-def range(e: FVectorExpression, r: Range) -> FVectorRange: pass
+def range(mve: FVectorExpression, r: Range) -> FVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>mve</em>.
 # 
-def range(e: FVectorExpression, start: int, stop: int) -> FVectorRange: pass
+def range(mve: FVectorExpression, start: int, stop: int) -> FVectorRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: LMatrixExpression, r1: Range, r2: Range) -> LMatrixRange: pass
+def range(mme: LMatrixExpression, r1: Range, r2: Range) -> LMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: LMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> LMatrixRange: pass
+def range(mme: LMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> LMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange <em>r</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>me</em>.
 # 
-def range(e: LVectorExpression, r: Range) -> LVectorRange: pass
+def range(mve: LVectorExpression, r: Range) -> LVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>mve</em>.
 # 
-def range(e: LVectorExpression, start: int, stop: int) -> LVectorRange: pass
+def range(mve: LVectorExpression, start: int, stop: int) -> LVectorRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows in <em>r1</em> and columns in <em>r2</em> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param r1 The row index range.
 # \param r2 The column index range.
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: ULMatrixExpression, r1: Range, r2: Range) -> ULMatrixRange: pass
+def range(mme: ULMatrixExpression, r1: Range, r2: Range) -> ULMatrixRange: pass
 
 ##
-# \brief Returns a matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>e</em>.
+# \brief Returns a mutable matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The first row index (inclusive).
 # \param stop1 The last row index (exclusive).
 # \param start2 The first column index (inclusive).
 # \param stop2 The last column index (exclusive).
 # 
-# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>e</em>.
+# \return A Math.MatrixRange proxy referring to the specified rectangular subrange of <em>mme</em>.
 # 
-def range(e: ULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ULMatrixRange: pass
+def range(mme: ULMatrixExpression, start1: int, stop1: int, start2: int, stop2: int) -> ULMatrixRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange <em>r</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange <em>r</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param r The index range to view.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>me</em>.
 # 
-def range(e: ULVectorExpression, r: Range) -> ULVectorRange: pass
+def range(mve: ULVectorExpression, r: Range) -> ULVectorRange: pass
 
 ##
-# \brief Creates a constant Math.VectorRange view of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable proxy object viewing of the subrange [<em>start</em>, <em>stop</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the range.
 # \param stop The (exclusive) end index of the range.
 # 
-# \return A constant range view of <em>e</em>.
+# \return A mutable range view of <em>mve</em>.
 # 
-def range(e: ULVectorExpression, start: int, stop: int) -> ULVectorRange: pass
+def range(mve: ULVectorExpression, start: int, stop: int) -> ULVectorRange: pass
 
 ##
 # \brief Convenience factory function for Math.Range with <tt>std::size_t</tt> indices.
@@ -3287,84 +3288,84 @@ def rotate(e1: ConstLQuaternionExpression, e2: ConstLVectorExpression) -> ConstL
 def rotate(e1: ConstULQuaternionExpression, e2: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant row proxy for row <em>i</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>ce</em>.
 # 
-def row(e: ConstDMatrixExpression, i: int) -> ConstDMatrixRow: pass
+def row(ce: ConstDMatrixExpression, i: int) -> ConstDMatrixRow: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant row proxy for row <em>i</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>ce</em>.
 # 
-def row(e: ConstFMatrixExpression, i: int) -> ConstFMatrixRow: pass
+def row(ce: ConstFMatrixExpression, i: int) -> ConstFMatrixRow: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant row proxy for row <em>i</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>ce</em>.
 # 
-def row(e: ConstLMatrixExpression, i: int) -> ConstLMatrixRow: pass
+def row(ce: ConstLMatrixExpression, i: int) -> ConstLMatrixRow: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a constant row proxy for row <em>i</em> of the matrix expression <em>ce</em>.
 # 
-# \param e The matrix expression.
+# \param ce The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>ce</em>.
 # 
-def row(e: ConstULMatrixExpression, i: int) -> ConstULMatrixRow: pass
+def row(ce: ConstULMatrixExpression, i: int) -> ConstULMatrixRow: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable row proxy for row <em>i</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>me</em>.
 # 
-def row(e: DMatrixExpression, i: int) -> DMatrixRow: pass
+def row(me: DMatrixExpression, i: int) -> DMatrixRow: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable row proxy for row <em>i</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>me</em>.
 # 
-def row(e: FMatrixExpression, i: int) -> FMatrixRow: pass
+def row(me: FMatrixExpression, i: int) -> FMatrixRow: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable row proxy for row <em>i</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>me</em>.
 # 
-def row(e: LMatrixExpression, i: int) -> LMatrixRow: pass
+def row(me: LMatrixExpression, i: int) -> LMatrixRow: pass
 
 ##
-# \brief Returns a row proxy for row <em>i</em> of the matrix expression <em>e</em>.
+# \brief Returns a mutable row proxy for row <em>i</em> of the matrix expression <em>me</em>.
 # 
-# \param e The matrix expression.
+# \param me The matrix expression.
 # \param i The zero-based row index.
 # 
-# \return A proxy object referring to row <em>i</em> of <em>e</em>.
+# \return A proxy object referring to row <em>i</em> of <em>me</em>.
 # 
-def row(e: ULMatrixExpression, i: int) -> ULMatrixRow: pass
+def row(me: ULMatrixExpression, i: int) -> ULMatrixRow: pass
 
 ##
 # \brief Returns the magnitude of parameter <em>a</em> times the sign of parameter <em>b</em>.
@@ -3377,20 +3378,20 @@ def row(e: ULMatrixExpression, i: int) -> ULMatrixRow: pass
 def sign(a: float, b: float) -> float: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a constant matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstDMatrixExpression, s1: Slice, s2: Slice) -> ConstDMatrixSlice: pass
+def slice(cme: ConstDMatrixExpression, s1: Slice, s2: Slice) -> ConstDMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a constant matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3398,47 +3399,47 @@ def slice(e: ConstDMatrixExpression, s1: Slice, s2: Slice) -> ConstDMatrixSlice:
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstDMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstDMatrixSlice: pass
+def slice(cme: ConstDMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstDMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstDVectorExpression, s: Slice) -> ConstDVectorSlice: pass
+def slice(cve: ConstDVectorExpression, s: Slice) -> ConstDVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>vce</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstDVectorExpression, start: int, stride: int, size: int) -> ConstDVectorSlice: pass
+def slice(cve: ConstDVectorExpression, start: int, stride: int, size: int) -> ConstDVectorSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a constant matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstFMatrixExpression, s1: Slice, s2: Slice) -> ConstFMatrixSlice: pass
+def slice(cme: ConstFMatrixExpression, s1: Slice, s2: Slice) -> ConstFMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a constant matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3446,47 +3447,47 @@ def slice(e: ConstFMatrixExpression, s1: Slice, s2: Slice) -> ConstFMatrixSlice:
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstFMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstFMatrixSlice: pass
+def slice(cme: ConstFMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstFMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstFVectorExpression, s: Slice) -> ConstFVectorSlice: pass
+def slice(cve: ConstFVectorExpression, s: Slice) -> ConstFVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>vce</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstFVectorExpression, start: int, stride: int, size: int) -> ConstFVectorSlice: pass
+def slice(cve: ConstFVectorExpression, start: int, stride: int, size: int) -> ConstFVectorSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a constant matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstLMatrixExpression, s1: Slice, s2: Slice) -> ConstLMatrixSlice: pass
+def slice(cme: ConstLMatrixExpression, s1: Slice, s2: Slice) -> ConstLMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a constant matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3494,47 +3495,47 @@ def slice(e: ConstLMatrixExpression, s1: Slice, s2: Slice) -> ConstLMatrixSlice:
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstLMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstLMatrixSlice: pass
+def slice(cme: ConstLMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstLMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstLVectorExpression, s: Slice) -> ConstLVectorSlice: pass
+def slice(cve: ConstLVectorExpression, s: Slice) -> ConstLVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>vce</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstLVectorExpression, start: int, stride: int, size: int) -> ConstLVectorSlice: pass
+def slice(cve: ConstLVectorExpression, start: int, stride: int, size: int) -> ConstLVectorSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a constant matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>cme</em>.
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstULMatrixExpression, s1: Slice, s2: Slice) -> ConstULMatrixSlice: pass
+def slice(cme: ConstULMatrixExpression, s1: Slice, s2: Slice) -> ConstULMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a constant matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param cme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3542,47 +3543,47 @@ def slice(e: ConstULMatrixExpression, s1: Slice, s2: Slice) -> ConstULMatrixSlic
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>cme</em>.
 # 
-def slice(e: ConstULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstULMatrixSlice: pass
+def slice(cme: ConstULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ConstULMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>cve</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstULVectorExpression, s: Slice) -> ConstULVectorSlice: pass
+def slice(cve: ConstULVectorExpression, s: Slice) -> ConstULVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>vce</em>.
 # 
-# \param e The vector expression.
+# \param cve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A constant slice view of <em>cve</em>.
 # 
-def slice(e: ConstULVectorExpression, start: int, stride: int, size: int) -> ConstULVectorSlice: pass
+def slice(cve: ConstULVectorExpression, start: int, stride: int, size: int) -> ConstULVectorSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a mutable matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: DMatrixExpression, s1: Slice, s2: Slice) -> DMatrixSlice: pass
+def slice(mme: DMatrixExpression, s1: Slice, s2: Slice) -> DMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a mutable matrix slicme proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3590,47 +3591,47 @@ def slice(e: DMatrixExpression, s1: Slice, s2: Slice) -> DMatrixSlice: pass
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: DMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> DMatrixSlice: pass
+def slice(mme: DMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> DMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: DVectorExpression, s: Slice) -> DVectorSlice: pass
+def slice(mve: DVectorExpression, s: Slice) -> DVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: DVectorExpression, start: int, stride: int, size: int) -> DVectorSlice: pass
+def slice(mve: DVectorExpression, start: int, stride: int, size: int) -> DVectorSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a mutable matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: FMatrixExpression, s1: Slice, s2: Slice) -> FMatrixSlice: pass
+def slice(mme: FMatrixExpression, s1: Slice, s2: Slice) -> FMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a mutable matrix slicme proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3638,47 +3639,47 @@ def slice(e: FMatrixExpression, s1: Slice, s2: Slice) -> FMatrixSlice: pass
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: FMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> FMatrixSlice: pass
+def slice(mme: FMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> FMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: FVectorExpression, s: Slice) -> FVectorSlice: pass
+def slice(mve: FVectorExpression, s: Slice) -> FVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: FVectorExpression, start: int, stride: int, size: int) -> FVectorSlice: pass
+def slice(mve: FVectorExpression, start: int, stride: int, size: int) -> FVectorSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a mutable matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: LMatrixExpression, s1: Slice, s2: Slice) -> LMatrixSlice: pass
+def slice(mme: LMatrixExpression, s1: Slice, s2: Slice) -> LMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a mutable matrix slicme proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3686,47 +3687,47 @@ def slice(e: LMatrixExpression, s1: Slice, s2: Slice) -> LMatrixSlice: pass
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: LMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> LMatrixSlice: pass
+def slice(mme: LMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> LMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: LVectorExpression, s: Slice) -> LVectorSlice: pass
+def slice(mve: LVectorExpression, s: Slice) -> LVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: LVectorExpression, start: int, stride: int, size: int) -> LVectorSlice: pass
+def slice(mve: LVectorExpression, start: int, stride: int, size: int) -> LVectorSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>e</em>.
+# \brief Returns a mutable matrix slice proxy viewing the strided rectangular slice (<em>s1</em>, <em>s2</em>) of <em>mme</em>.
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param s1 The row slice (start, stride, size).
 # \param s2 The column slice (start, stride, size).
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: ULMatrixExpression, s1: Slice, s2: Slice) -> ULMatrixSlice: pass
+def slice(mme: ULMatrixExpression, s1: Slice, s2: Slice) -> ULMatrixSlice: pass
 
 ##
-# \brief Returns a matrix slice proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
+# \brief Returns a mutable matrix slicme proxy specified by row (<em>start1</em>, <em>stride1</em>, <em>size1</em>) and column (<em>start2</em>, <em>stride2</em>, <em>size2</em>).
 # 
-# \param e The matrix expression.
+# \param mme The matrix expression.
 # \param start1 The start row index.
 # \param stride1 The row stride.
 # \param size1 The number of rows.
@@ -3734,31 +3735,31 @@ def slice(e: ULMatrixExpression, s1: Slice, s2: Slice) -> ULMatrixSlice: pass
 # \param stride2 The column stride.
 # \param size2 The number of columns.
 # 
-# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>e</em>.
+# \return A Math.MatrixSlice proxy referring to the specified strided rectangular slice of <em>mme</em>.
 # 
-def slice(e: ULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ULMatrixSlice: pass
+def slice(mme: ULMatrixExpression, start1: int, stride1: int, size1: int, start2: int, stride2: int, size2: int) -> ULMatrixSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice <em>s</em> of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param s The (start, stride, size) slice to view.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: ULVectorExpression, s: Slice) -> ULVectorSlice: pass
+def slice(mve: ULVectorExpression, s: Slice) -> ULVectorSlice: pass
 
 ##
-# \brief Creates a constant Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>e</em>.
+# \brief Creates a mutable Math.VectorSlice view of the slice (<em>start</em>, <em>stride</em>, <em>size</em>) of the vector expression <em>mve</em>.
 # 
-# \param e The vector expression.
+# \param mve The vector expression.
 # \param start The (inclusive) start index of the slice.
 # \param stride The stride between successive slice elements.
 # \param size The number of elements of the slice.
 # 
-# \return A constant slice view of <em>e</em>.
+# \return A mutable slice view of <em>mve</em>.
 # 
-def slice(e: ULVectorExpression, start: int, stride: int, size: int) -> ULVectorSlice: pass
+def slice(mve: ULVectorExpression, start: int, stride: int, size: int) -> ULVectorSlice: pass
 
 ##
 # \brief Convenience factory function for Math.Slice with <tt>std::size_t</tt> indices and <tt>std::ptrdiff_t</tt> stride.
@@ -4092,139 +4093,139 @@ def solveUpper(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pas
 def solveUpper(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the grid expression <em>ge</em>.
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i, j, k} ge(i, j, k) \f$.
 # 
-def sum(e: ConstDGridExpression) -> float: pass
+def sum(ge: ConstDGridExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i, j} me(i, j) \f$.
 # 
-def sum(e: ConstDMatrixExpression) -> float: pass
+def sum(me: ConstDMatrixExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of the four components of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i} C_i(qe) \f$.
 # 
-def sum(e: ConstDQuaternionExpression) -> float: pass
+def sum(qe: ConstDQuaternionExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_i ve(i) \f$.
 # 
-def sum(e: ConstDVectorExpression) -> float: pass
+def sum(ve: ConstDVectorExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the grid expression <em>ge</em>.
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i, j, k} ge(i, j, k) \f$.
 # 
-def sum(e: ConstFGridExpression) -> float: pass
+def sum(ge: ConstFGridExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i, j} me(i, j) \f$.
 # 
-def sum(e: ConstFMatrixExpression) -> float: pass
+def sum(me: ConstFMatrixExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of the four components of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i} C_i(qe) \f$.
 # 
-def sum(e: ConstFQuaternionExpression) -> float: pass
+def sum(qe: ConstFQuaternionExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_i ve(i) \f$.
 # 
-def sum(e: ConstFVectorExpression) -> float: pass
+def sum(ve: ConstFVectorExpression) -> float: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i, j} me(i, j) \f$.
 # 
-def sum(e: ConstLMatrixExpression) -> int: pass
+def sum(me: ConstLMatrixExpression) -> int: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of the four components of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i} C_i(qe) \f$.
 # 
-def sum(e: ConstLQuaternionExpression) -> int: pass
+def sum(qe: ConstLQuaternionExpression) -> int: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_i ve(i) \f$.
 # 
-def sum(e: ConstLVectorExpression) -> int: pass
+def sum(ve: ConstLVectorExpression) -> int: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the matrix expression <em>me</em>.
 # 
-# \param e The vector expression.
+# \param me The matrix expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i, j} me(i, j) \f$.
 # 
-def sum(e: ConstULMatrixExpression) -> int: pass
+def sum(me: ConstULMatrixExpression) -> int: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of the four components of the quaternion expression <em>qe</em>.
 # 
-# \param e The vector expression.
+# \param qe The quaternion expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i} C_i(qe) \f$.
 # 
-def sum(e: ConstULQuaternionExpression) -> int: pass
+def sum(qe: ConstULQuaternionExpression) -> int: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the vector expression <em>ve</em>.
 # 
-# \param e The vector expression.
+# \param ve The vector expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_i ve(i) \f$.
 # 
-def sum(e: ConstULVectorExpression) -> int: pass
+def sum(ve: ConstULVectorExpression) -> int: pass
 
 ##
-# \brief Returns the sum of all elements of the vector expression <em>e</em>.
+# \brief Returns the sum of all elements of the grid expression <em>ge</em>.
 # 
-# \param e The vector expression.
+# \param ge The grid expression.
 # 
-# \return \f$ \sum_i e(i) \f$.
+# \return \f$ \sum_{i, j, k} ge(i, j, k) \f$.
 # 
-def sum(e: object) -> int: pass
+def sum(ge: object) -> int: pass
 
 ##
 # \brief Computes the <em>Singular Value Decomposition</em> [\ref WSVD] \f$ A = UWV^T \f$ of a \f$ M \times N \f$-dimensional matrix <em>a</em>.
@@ -4301,12 +4302,12 @@ def svDecompose(a: ULMatrixExpression, w: ULVectorExpression, v: ULMatrixExpress
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4320,12 +4321,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4339,12 +4340,12 @@ def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstD
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4358,12 +4359,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4377,12 +4378,12 @@ def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstF
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4396,12 +4397,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4415,12 +4416,12 @@ def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstL
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4434,12 +4435,12 @@ def svSubstitute(u: ConstULMatrixExpression, w: ConstULVectorExpression, v: Cons
 ##
 # \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
+# \param b The \f$ M \times P \f$-dimensional right-hand side matrix \f$ B \f$.
 # \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
 # 
 # \pre <tt>w().getSize() == u().getSize2()</tt>, <tt>v().getSize1() == u().getSize2() && v().getSize2() == u().getSize2()</tt>, <tt>x().getSize1() == u().getSize2()</tt> and <tt>b().getSize1() == u().getSize1() && b().getSize2() == x().getSize2()</tt>. 
@@ -4720,131 +4721,131 @@ def transform(va: Vector3ULArray, xform: Matrix4UL) -> None: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstDMatrixExpression, type: Upper) -> ConstUpperTriangularDMatrixAdapter: pass
+def triang(ce: ConstDMatrixExpression, type: Upper) -> ConstUpperTriangularDMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstDMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularDMatrixAdapter: pass
+def triang(ce: ConstDMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularDMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstDMatrixExpression, type: Lower) -> ConstLowerTriangularDMatrixAdapter: pass
+def triang(ce: ConstDMatrixExpression, type: Lower) -> ConstLowerTriangularDMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstDMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularDMatrixAdapter: pass
+def triang(ce: ConstDMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularDMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstFMatrixExpression, type: Upper) -> ConstUpperTriangularFMatrixAdapter: pass
+def triang(ce: ConstFMatrixExpression, type: Upper) -> ConstUpperTriangularFMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstFMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularFMatrixAdapter: pass
+def triang(ce: ConstFMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularFMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstFMatrixExpression, type: Lower) -> ConstLowerTriangularFMatrixAdapter: pass
+def triang(ce: ConstFMatrixExpression, type: Lower) -> ConstLowerTriangularFMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstFMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularFMatrixAdapter: pass
+def triang(ce: ConstFMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularFMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstLMatrixExpression, type: Upper) -> ConstUpperTriangularLMatrixAdapter: pass
+def triang(ce: ConstLMatrixExpression, type: Upper) -> ConstUpperTriangularLMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstLMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularLMatrixAdapter: pass
+def triang(ce: ConstLMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularLMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstLMatrixExpression, type: Lower) -> ConstLowerTriangularLMatrixAdapter: pass
+def triang(ce: ConstLMatrixExpression, type: Lower) -> ConstLowerTriangularLMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstLMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularLMatrixAdapter: pass
+def triang(ce: ConstLMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularLMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstULMatrixExpression, type: Upper) -> ConstUpperTriangularULMatrixAdapter: pass
+def triang(ce: ConstULMatrixExpression, type: Upper) -> ConstUpperTriangularULMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstULMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularULMatrixAdapter: pass
+def triang(ce: ConstULMatrixExpression, type: UnitUpper) -> ConstUnitUpperTriangularULMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstULMatrixExpression, type: Lower) -> ConstLowerTriangularULMatrixAdapter: pass
+def triang(ce: ConstULMatrixExpression, type: Lower) -> ConstLowerTriangularULMatrixAdapter: pass
 
 ##
 # \brief 
-# \param e 
+# \param ce 
 # \param type 
 # \return 
 #
-def triang(e: ConstULMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularULMatrixAdapter: pass
+def triang(ce: ConstULMatrixExpression, type: UnitLower) -> ConstUnitLowerTriangularULMatrixAdapter: pass
 
 ##
 # \brief Returns the unreal (pure-quaternion) part of the quaternion expression <em>e</em> (with <em>C1</em> zeroed out).
@@ -4883,40 +4884,76 @@ def unreal(e: ConstLQuaternionExpression) -> ConstLQuaternionExpression: pass
 def unreal(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
 ##
-# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>ce</em>.
 # 
-# \param e The quaternion expression to wrap.
+# \param ce The quaternion expression to wrap.
 # 
-# \return A constant <em>4</em> element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>ce</em>.
 # 
-def vec(e: ConstDQuaternionExpression) -> ConstDQuaternionVectorAdapter: pass
+def vec(ce: ConstDQuaternionExpression) -> ConstDQuaternionVectorAdapter: pass
 
 ##
-# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>ce</em>.
 # 
-# \param e The quaternion expression to wrap.
+# \param ce The quaternion expression to wrap.
 # 
-# \return A constant <em>4</em> element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>ce</em>.
 # 
-def vec(e: ConstFQuaternionExpression) -> ConstFQuaternionVectorAdapter: pass
+def vec(ce: ConstFQuaternionExpression) -> ConstFQuaternionVectorAdapter: pass
 
 ##
-# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>ce</em>.
 # 
-# \param e The quaternion expression to wrap.
+# \param ce The quaternion expression to wrap.
 # 
-# \return A constant <em>4</em> element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>ce</em>.
 # 
-def vec(e: ConstLQuaternionExpression) -> ConstLQuaternionVectorAdapter: pass
+def vec(ce: ConstLQuaternionExpression) -> ConstLQuaternionVectorAdapter: pass
 
 ##
-# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>e</em>.
+# \brief Creates a constant Math.QuaternionVectorAdapter view of the quaternion expression <em>ce</em>.
 # 
-# \param e The quaternion expression to wrap.
+# \param ce The quaternion expression to wrap.
 # 
-# \return A constant <em>4</em> element vector view of <em>e</em>.
+# \return A constant <em>4</em> element vector view of <em>ce</em>.
 # 
-def vec(e: ConstULQuaternionExpression) -> ConstULQuaternionVectorAdapter: pass
+def vec(ce: ConstULQuaternionExpression) -> ConstULQuaternionVectorAdapter: pass
+
+##
+# \brief Creates a mutable Math.QuaternionVectorAdapter view of the quaternion expression <em>me</em>.
+# 
+# \param me The quaternion expression to wrap.
+# 
+# \return A mutable <em>4</em> element vector view of <em>me</em>.
+# 
+def vec(me: DQuaternionExpression) -> DQuaternionVectorAdapter: pass
+
+##
+# \brief Creates a mutable Math.QuaternionVectorAdapter view of the quaternion expression <em>me</em>.
+# 
+# \param me The quaternion expression to wrap.
+# 
+# \return A mutable <em>4</em> element vector view of <em>me</em>.
+# 
+def vec(me: FQuaternionExpression) -> FQuaternionVectorAdapter: pass
+
+##
+# \brief Creates a mutable Math.QuaternionVectorAdapter view of the quaternion expression <em>me</em>.
+# 
+# \param me The quaternion expression to wrap.
+# 
+# \return A mutable <em>4</em> element vector view of <em>me</em>.
+# 
+def vec(me: LQuaternionExpression) -> LQuaternionVectorAdapter: pass
+
+##
+# \brief Creates a mutable Math.QuaternionVectorAdapter view of the quaternion expression <em>me</em>.
+# 
+# \param me The quaternion expression to wrap.
+# 
+# \return A mutable <em>4</em> element vector view of <em>me</em>.
+# 
+def vec(me: ULQuaternionExpression) -> ULQuaternionVectorAdapter: pass
 
 ##
 # \brief Constructs a Math.CVector of size 2 from the components <em>t1</em> and <em>t2</em>.

@@ -145,8 +145,8 @@ void CDPLPythonMath::exportGridFunctions()
     python::def("elemProd", &elemProd<float>, (python::arg("ge1"), python::arg("ge2")));
     python::def("elemProd", &elemProd<double>, (python::arg("ge1"), python::arg("ge2")));
 
-    python::def("sum", &sum<float>, python::arg("e"));
-    python::def("sum", &sum<double>, python::arg("e"));
-    python::def("sum", &sum<long>, python::arg("e"));
-    python::def("sum", &sum<unsigned long>, python::arg("e"));
+    python::def("sum", &sum<float>, python::arg("ge"));
+    python::def("sum", &sum<double>, python::arg("ge"));
+    python::def("sum", &sum<long>, python::arg("ge"));
+    python::def("sum", &sum<unsigned long>, python::arg("ge"));
 }

@@ -61,7 +61,7 @@ namespace
                 .def(ConstVectorVisitor<QuaternionAdapterType>("qa"))
                 .def(WrappedDataVisitor<QuaternionAdapterWrapper>());
 
-            python::def("vec", &vec, python::arg("e"));
+            python::def("vec", &vec, python::arg("ce"));
         }
 
         static WrapperPointerType vec(const ExpressionPointerType& e) {
@@ -92,6 +92,8 @@ namespace
                 .def(VectorVisitor<QuaternionAdapterType>("qa"))
                 .def(VectorNDArrayAssignVisitor<QuaternionAdapterType>())
                 .def(WrappedDataVisitor<QuaternionAdapterWrapper>());
+
+            python::def("vec", &vec, python::arg("me"));
         }
 
         static WrapperPointerType vec(const ExpressionPointerType& e) {

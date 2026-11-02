@@ -67,7 +67,7 @@ namespace
                 .def(WrappedDataVisitor<MatrixColumnWrapper>())
                 .add_property("index", &MatrixColumnType::getIndex);
 
-            python::def("column", &column, (python::arg("e"), python::arg("j")));
+            python::def("column", &column, (python::arg("me"), python::arg("j")));
         }
 
         static WrapperPointerType column(const ExpressionPointerType& e, SizeType j) {

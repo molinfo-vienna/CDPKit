@@ -1577,29 +1577,29 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns the squared norm of the quaternion expression \a e.
+         * \brief Returns the squared norm of the quaternion expression \a qe.
          * \tparam E The quaternion expression type.
-         * \param e The quaternion expression.
-         * \return \f$ \|e\|^2 = e \cdot \overline{e} \f$.
+         * \param qe The quaternion expression.
+         * \return \f$ \|qe\|^2 = qe \cdot \overline{qe} \f$.
          */
         template <typename E>
         typename QuaternionNorm2<E>::ResultType
-        norm2(const QuaternionExpression<E>& e)
+        norm2(const QuaternionExpression<E>& qe)
         {
-            return QuaternionNorm2<E>::apply(e);
+            return QuaternionNorm2<E>::apply(qe);
         }
 
         /**
-         * \brief Returns the sum of the four components of the quaternion expression \a e.
+         * \brief Returns the sum of the four components of the quaternion expression \a qe.
          * \tparam E The quaternion expression type.
-         * \param e The quaternion expression.
-         * \return \f$ \sum_{i} C_i(e) \f$.
+         * \param qe The quaternion expression.
+         * \return \f$ \sum_{i} C_i(qe) \f$.
          */
         template <typename E>
         typename QuaternionElementSum<E>::ResultType
-        sum(const QuaternionExpression<E>& e)
+        sum(const QuaternionExpression<E>& qe)
         {
-            return QuaternionElementSum<E>::apply(e);
+            return QuaternionElementSum<E>::apply(qe);
         }
     } // namespace Math
 } // namespace CDPL

@@ -333,31 +333,31 @@ namespace CDPL
         {};
 
         /**
-         * \brief Creates a Math::TriangularAdapter view of the matrix expression \a e using the triangular policy \a Tri.
+         * \brief Creates a Math::TriangularAdapter view of the matrix expression \a me using the triangular policy \a Tri.
          * \tparam Tri The triangular-view selection policy (Math::Lower, Math::UnitLower, Math::Upper or Math::UnitUpper).
          * \tparam E The matrix expression type.
-         * \param e The matrix expression to wrap.
-         * \return A mutable triangular view of \a e.
+         * \param me The matrix expression to wrap.
+         * \return A mutable triangular view of \a me.
          */
         template <typename Tri, typename E>
         TriangularAdapter<E, Tri>
-        triang(MatrixExpression<E>& e)
+        triang(MatrixExpression<E>& me)
         {
-            return TriangularAdapter<E, Tri>(e());
+            return TriangularAdapter<E, Tri>(me());
         }
 
         /**
-         * \brief Creates a constant Math::TriangularAdapter view of the matrix expression \a e using the triangular policy \a Tri.
+         * \brief Creates a constant Math::TriangularAdapter view of the matrix expression \a ce using the triangular policy \a Tri.
          * \tparam Tri The triangular-view selection policy (Math::Lower, Math::UnitLower, Math::Upper or Math::UnitUpper).
          * \tparam E The matrix expression type.
-         * \param e The matrix expression to wrap.
-         * \return A constant triangular view of \a e.
+         * \param ce The matrix expression to wrap.
+         * \return A constant triangular view of \a ce.
          */
         template <typename Tri, typename E>
         TriangularAdapter<const E, Tri>
-        triang(const MatrixExpression<E>& e)
+        triang(const MatrixExpression<E>& ce)
         {
-            return TriangularAdapter<const E, Tri>(e());
+            return TriangularAdapter<const E, Tri>(ce());
         }
     } // namespace Math
 } // namespace CDPL

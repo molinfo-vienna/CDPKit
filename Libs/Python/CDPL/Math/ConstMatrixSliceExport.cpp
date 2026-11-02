@@ -69,8 +69,8 @@ namespace
                 .add_property("stride1", &MatrixSliceType::getStride1)
                 .add_property("stride2", &MatrixSliceType::getStride2);
 
-            python::def("slice", &slice1, (python::arg("e"), python::arg("s1"), python::arg("s2")));
-            python::def("slice", &slice2, (python::arg("e"), python::arg("start1"), python::arg("stride1"), 
+            python::def("slice", &slice1, (python::arg("cme"), python::arg("s1"), python::arg("s2")));
+            python::def("slice", &slice2, (python::arg("cme"), python::arg("start1"), python::arg("stride1"), 
                                            python::arg("size1"), python::arg("start2"), python::arg("stride2"), 
                                            python::arg("size2")));
         }
