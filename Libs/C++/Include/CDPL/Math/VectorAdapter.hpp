@@ -342,8 +342,8 @@ namespace CDPL
         };
 
         /**
-         * \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices <em>0-3</em> map to <em>C1-C4</em>).
-         * \tparam V The wrapped 4-element vector type.
+         * \brief Quaternion expression that exposes a <em>4</em>-element vector as a quaternion (component indices <em>0-3</em> map to <em>C1-C4</em>).
+         * \tparam V The wrapped <em>4</em>-element vector type.
          */
         template <typename V>
         class VectorQuaternionAdapter : public QuaternionExpression<VectorQuaternionAdapter<V> >
@@ -353,7 +353,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief The wrapped 4-element vector type.
+             * \brief The wrapped <em>4</em>-element vector type.
              */
             typedef V                                                        VectorType;
 
@@ -392,8 +392,8 @@ namespace CDPL
             typedef SelfType                                                 ClosureType;
 
             /**
-             * \brief Constructs the adapter wrapping the 4-element vector \a v.
-             * \param v The 4-element vector to be viewed as a quaternion.
+             * \brief Constructs the adapter wrapping the <em>4</em>-element vector \a v.
+             * \param v The <em>4</em>-element vector to be viewed as a quaternion.
              */
             explicit VectorQuaternionAdapter(VectorType& v):
                 data(v) {}
@@ -722,7 +722,7 @@ namespace CDPL
 
         /**
          * \brief Math::QuaternionTemporaryTraits specialization selecting Math::Quaternion as the temporary type for a Math::VectorQuaternionAdapter view.
-         * \tparam V The wrapped 4-element vector type.
+         * \tparam V The wrapped <em>4</em>-element vector type.
          */
         template <typename V>
         struct QuaternionTemporaryTraits<VectorQuaternionAdapter<V> >
@@ -736,7 +736,7 @@ namespace CDPL
 
         /**
          * \brief Math::QuaternionTemporaryTraits specialization selecting Math::Quaternion as the temporary type for a \c const Math::VectorQuaternionAdapter view.
-         * \tparam V The wrapped 4-element vector type.
+         * \tparam V The wrapped <em>4</em>-element vector type.
          */
         template <typename V>
         struct QuaternionTemporaryTraits<const VectorQuaternionAdapter<V> >
@@ -765,10 +765,10 @@ namespace CDPL
         {};
 
         /**
-         * \brief Creates a mutable Math::VectorQuaternionAdapter view of the 4-element vector expression \a me.
+         * \brief Returns a mutable vector adapter that exposes the <em>4</em>-element vector expression \a me as quaternion.
          * \tparam E The vector expression type.
          * \param me The vector expression to wrap.
-         * \return A mutable quaternion view of \a me.
+         * \return A Math::VectorQuaternionAdapter instance exposing \a me as quaternion.
          */
         template <typename E>
         VectorQuaternionAdapter<E>
@@ -778,10 +778,10 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::VectorQuaternionAdapter view of the 4-element vector expression \a ce.
+         * \brief Returns a constant vector adapter that exposes the <em>4</em>-element vector expression \a ce as quaternion.
          * \tparam E The vector expression type.
          * \param ce The vector expression to wrap.
-         * \return A constant quaternion view of \a ce.
+         * \return A Math::VectorQuaternionAdapter instance exposing \a ce as quaternion.
          */
         template <typename E>
         VectorQuaternionAdapter<const E>
@@ -791,10 +791,10 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a mutable Math::HomogenousCoordsAdapter view of the vector expression \a me.
+         * \brief Returns a mutable vector adapter that exposes \a me as its homogeneous-coordinate extension.
          * \tparam E The vector expression type.
          * \param me The vector expression to wrap.
-         * \return A mutable homogeneous-coordinates view of \a me.
+         * \return A Math::HomogenousCoordsAdapter instance exposing \a me as its homogeneous-coordinate extension.
          */
         template <typename E>
         HomogenousCoordsAdapter<E>
@@ -804,10 +804,10 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::HomogenousCoordsAdapter view of the vector expression \a ce.
+         * \brief Returns a constant vector adapter that exposes \a ce as its homogeneous-coordinate extension.
          * \tparam E The vector expression type.
          * \param ce The vector expression to wrap.
-         * \return A constant homogeneous-coordinates view of \a ce.
+         * \return A Math::HomogenousCoordsAdapter instance exposing \a ce as its homogeneous-coordinate extension.
          */
         template <typename E>
         HomogenousCoordsAdapter<const E>

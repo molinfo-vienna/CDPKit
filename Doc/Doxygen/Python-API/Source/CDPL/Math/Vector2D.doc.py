@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Bounded <em>2</em> element vector holding floating-point values of type <tt>double</tt>.
+# \brief Bounded <em>2</em>-element vector holding floating-point values of type <tt>double</tt>.
 # 
 class Vector2D(Boost.Python.instance):
 

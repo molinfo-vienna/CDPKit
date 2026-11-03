@@ -3069,7 +3069,7 @@ namespace CDPL
          * \tparam T2 The type of the second component.
          * \param t1 The first component.
          * \param t2 The second component.
-         * \return A 2-element vector with components (\a t1, \a t2).
+         * \return A <em>2</em>-element vector with components (\a t1, \a t2).
          */
         template <typename T1, typename T2>
         CVector<typename CommonType<T1, T2>::Type, 2>
@@ -3091,7 +3091,7 @@ namespace CDPL
          * \param t1 The first component.
          * \param t2 The second component.
          * \param t3 The third component.
-         * \return A 3-element vector with components (\a t1, \a t2, \a t3).
+         * \return A <em>3</em>-element vector with components (\a t1, \a t2, \a t3).
          */
         template <typename T1, typename T2, typename T3>
         CVector<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, 3>
@@ -3116,7 +3116,7 @@ namespace CDPL
          * \param t2 The second component.
          * \param t3 The third component.
          * \param t4 The fourth component.
-         * \return A 4-element vector with components (\a t1, \a t2, \a t3, \a t4).
+         * \return A <em>4</em>-element vector with components (\a t1, \a t2, \a t3, \a t4).
          */
         template <typename T1, typename T2, typename T3, typename T4>
         CVector<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type, 4>
@@ -3193,67 +3193,67 @@ namespace CDPL
         typedef UnitVector<unsigned long> ULUnitVector;
 
         /**
-         * \brief Bounded \e 2 element vector holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded <em>2</em>-element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 2> Vector2F;
 
         /**
-         * \brief Bounded \e 3 element vector holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded <em>3</em>-element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 3> Vector3F;
 
         /**
-         * \brief Bounded \e 4 element vector holding floating-point values of type <tt>float</tt>.
+         * \brief Bounded <em>4</em>-element vector holding floating-point values of type <tt>float</tt>.
          */
         typedef CVector<float, 4> Vector4F;
 
         /**
-         * \brief Bounded \e 2 element vector holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded <em>2</em>-element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 2> Vector2D;
 
         /**
-         * \brief Bounded \e 3 element vector holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded <em>3</em>-element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 3> Vector3D;
 
         /**
-         * \brief Bounded \e 4 element vector holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded <em>4</em>-element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 4> Vector4D;
 
         /**
-         * \brief Bounded 7 element vector holding floating-point values of type <tt>double</tt>.
+         * \brief Bounded <em>7</em>-element vector holding floating-point values of type <tt>double</tt>.
          */
         typedef CVector<double, 7> Vector7D;
 
         /**
-         * \brief Bounded \e 2 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded <em>2</em>-element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 2> Vector2L;
 
         /**
-         * \brief Bounded \e 3 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded <em>3</em>-element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 3> Vector3L;
 
         /**
-         * \brief Bounded \e 4 element vector holding signed integers of type <tt>long</tt>.
+         * \brief Bounded <em>4</em>-element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 4> Vector4L;
 
         /**
-         * \brief Bounded \e 2 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded <em>2</em>-element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 2> Vector2UL;
 
         /**
-         * \brief Bounded \e 3 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded <em>3</em>-element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 3> Vector3UL;
 
         /**
-         * \brief Bounded \e 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+         * \brief Bounded <em>4</em>-element vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef CVector<unsigned long, 4> Vector4UL;
 

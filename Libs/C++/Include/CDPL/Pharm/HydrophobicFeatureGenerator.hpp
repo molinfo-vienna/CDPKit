@@ -75,7 +75,7 @@ namespace CDPL
             /**
              * \brief Default value for the feature tolerance property of generated hydrophobic features.
              */
-            static constexpr double       DEF_FEATURE_TOL  = 1.5;
+            static constexpr double DEF_FEATURE_TOL  = 1.5;
 
             /**
              * \brief Default value for the feature type property of generated hydrophobic features (Pharm::FeatureType::HYDROPHOBIC).

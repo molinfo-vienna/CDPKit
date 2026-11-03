@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Bounded <em>2</em> element vector holding signed integers of type <tt>long</tt>.
+# \brief Bounded <em>2</em>-element vector holding signed integers of type <tt>long</tt>.
 # 
 class Vector2L(Boost.Python.instance):
 

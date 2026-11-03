@@ -64,7 +64,7 @@ namespace
                 .def(MatrixNDArrayAssignVisitor<MatrixTransposeType>())
                 .def(WrappedDataVisitor<MatrixTransposeWrapper>());
 
-            python::def("trans", &trans, python::arg("e"));
+            python::def("trans", &trans, python::arg("me"));
         }
 
         static WrapperPointerType trans(const ExpressionPointerType& e) {

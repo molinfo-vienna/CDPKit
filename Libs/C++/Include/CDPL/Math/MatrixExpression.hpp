@@ -1934,27 +1934,27 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a mutable Math::MatrixTranspose view of the matrix expression \a e.
+         * \brief Returns a transposed view of the mutable matrix expression \a me.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression to transpose.
-         * \return A mutable transpose view of \a e.
+         * \param me The matrix expression to transpose.
+         * \return A Math::MatrixTranspose instance representing the transpose of \a me.
          */
         template <typename E>
-        MatrixTranspose<E> trans(MatrixExpression<E>& e)
+        MatrixTranspose<E> trans(MatrixExpression<E>& me)
         {
-            return MatrixTranspose<E>(e());
+            return MatrixTranspose<E>(me());
         }
 
         /**
-         * \brief Returns a constant Math::MatrixTranspose view of the matrix expression \a e.
+         * \brief Returns a transposed view of the constant matrix expression \a ce.
          * \tparam E The matrix expression type.
-         * \param e The matrix expression to transpose.
-         * \return A constant transpose view of \a e.
+         * \param ce The matrix expression to transpose.
+         * \return A Math::MatrixTranspose instance representing the transpose of \a ce.
          */
         template <typename E>
-        MatrixTranspose<const E> trans(const MatrixExpression<E>& e)
+        MatrixTranspose<const E> trans(const MatrixExpression<E>& ce)
         {
-            return MatrixTranspose<const E>(e());
+            return MatrixTranspose<const E>(ce());
         }
 
         /**

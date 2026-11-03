@@ -74,7 +74,7 @@ namespace CDPL
              *                the acceptor-feature, and \c false otherwise.
              * \param min_ax_dist The minimum allowed distance between the halogen-atom and the acceptor-feature.
              * \param max_ax_dist The maximum allowed distance between the halogen-atom and the acceptor-feature.
-             * \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor snd halogen->bound atom.
+             * \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor and halogen->bound atom.
              * \param max_acc_ang The maximum allowed angle deviation from the acceptor's preferred X-bonding direction.
              */
             XBondingInteractionConstraint(bool don_acc, double min_ax_dist = DEF_MIN_AX_DISTANCE, double max_ax_dist = DEF_MAX_AX_DISTANCE,

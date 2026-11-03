@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Adapter that exposes a quaternion as a <em>4</em> element vector expression (indices map to the components <em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
+# \brief Adapter that exposes a quaternion as a <em>4</em>-element vector expression (indices map to the components <em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em>).
 # 
 class ConstDQuaternionVectorAdapter(Boost.Python.instance):
 
@@ -33,7 +33,7 @@ class ConstDQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Constructs the adapter wrapping the quaternion <em>q</em>.
     # 
-    # \param q The quaternion to be viewed as a <em>4</em> element vector.
+    # \param q The quaternion to be viewed as a <em>4</em>-element vector.
     # 
     def __init__(q: ConstDQuaternionExpression) -> None: pass
 

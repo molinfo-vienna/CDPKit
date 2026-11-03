@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Adapter that exposes a quaternion as a \e 4 element vector expression (indices map to the components \e C1, \e C2, \e C3, \e C4).
+         * \brief Adapter that exposes a quaternion as a <em>4</em>-element vector expression (indices map to the components \e C1, \e C2, \e C3, \e C4).
          * \tparam Q The wrapped quaternion type.
          */
         template <typename Q>
@@ -105,7 +105,7 @@ namespace CDPL
 
             /**
              * \brief Constructs the adapter wrapping the quaternion \a q.
-             * \param q The quaternion to be viewed as a \e 4 element vector.
+             * \param q The quaternion to be viewed as a <em>4</em>-element vector.
              */
             explicit QuaternionVectorAdapter(QuaternionType& q):
                 data(q) {}
@@ -394,10 +394,10 @@ namespace CDPL
         };
 
         /**
-         * \brief Creates a mutable Math::QuaternionVectorAdapter view of the quaternion expression \a me.
+         * \brief Returns a mutable quaternion adapter that exposes \a me as <em>4</em>-element vector expression.
          * \tparam E The quaternion expression type.
          * \param me The quaternion expression to wrap.
-         * \return A mutable \e 4 element vector view of \a me.
+         * \return A Math::QuaternionVectorAdapter instance exposing \a me as <em>4</em>-element vector expression.
          */
         template <typename E>
         QuaternionVectorAdapter<E>
@@ -407,10 +407,10 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::QuaternionVectorAdapter view of the quaternion expression \a ce.
+         * \brief Returns a mutable quaternion adapter that exposes \a ce as <em>4</em>-element vector expression.
          * \tparam E The quaternion expression type.
          * \param ce The quaternion expression to wrap.
-         * \return A constant \e 4 element vector view of \a ce.
+         * \return A Math::QuaternionVectorAdapter instance exposing \a ce as <em>4</em>-element vector expression.
          */
         template <typename E>
         QuaternionVectorAdapter<const E>

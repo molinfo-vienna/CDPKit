@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices <em>0-3</em> map to <em>C1-C4</em>).
+# \brief Quaternion expression that exposes a <em>4</em>-element vector as a quaternion (component indices <em>0-3</em> map to <em>C1-C4</em>).
 # 
 class LVectorQuaternionAdapter(Boost.Python.instance):
 
@@ -31,9 +31,9 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __init__(va: LVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Constructs the adapter wrapping the 4-element vector <em>v</em>.
+    # \brief Constructs the adapter wrapping the <em>4</em>-element vector <em>v</em>.
     # 
-    # \param v The 4-element vector to be viewed as a quaternion.
+    # \param v The <em>4</em>-element vector to be viewed as a quaternion.
     # 
     def __init__(v: LVectorExpression) -> None: pass
 

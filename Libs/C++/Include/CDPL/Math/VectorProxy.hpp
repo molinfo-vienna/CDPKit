@@ -683,11 +683,11 @@ namespace CDPL
         {};
 
         /**
-         * \brief Creates a mutable Math::VectorRange view of the subrange \a r of the vector expression \a mve.
+         * \brief Returns a mutable vector proxy viewing the subrange \a r of \a mve.
          * \tparam E The vector expression type.
          * \param mve The vector expression.
          * \param r The index range to view.
-         * \return A mutable range view of \a me.
+         * \return A Math::VectorRange proxy referring to the specified subbrange of \a mve.
          */
         template <typename E>
         VectorRange<E>
@@ -697,11 +697,11 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::VectorRange view of the subrange \a r of the vector expression \a cve.
+         * \brief Returns a constant vector proxy viewing the subrange \a r of \a cve.
          * \tparam E The vector expression type.
          * \param cve The vector expression.
          * \param r The index range to view.
-         * \return A constant range view of \a cve.
+         * \return A Math::VectorRange proxy referring to the specified subbrange of \a cve.
          */
         template <typename E>
         VectorRange<const E>
@@ -711,12 +711,12 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a mutable Math::VectorRange view of the subrange [\a start, \a stop) of the vector expression \a mve.
+         * \brief Returns a mutable vector proxy viewing the subrange [\a start, \a stop) of \a mve.
          * \tparam E The vector expression type.
          * \param mve The vector expression.
          * \param start The (inclusive) start index of the range.
          * \param stop The (exclusive) end index of the range.
-         * \return A mutable range view of \a mve.
+         * \return A Math::VectorRange proxy referring to the specified subbrange of \a mve.
          */
         template <typename E>
         VectorRange<E>
@@ -730,12 +730,12 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::VectorRange view of the subrange [\a start, \a stop) of the vector expression \a cve.
+         * \brief Returns a constant vector proxy viewing the subrange [\a start, \a stop) of \a cve.
          * \tparam E The vector expression type.
          * \param cve The vector expression.
          * \param start The (inclusive) start index of the range.
          * \param stop The (exclusive) end index of the range.
-         * \return A constant range view of \a cve.
+         * \return A Math::VectorRange proxy referring to the specified subbrange of \a cve.
          */
         template <typename E>
         VectorRange<const E>
@@ -749,11 +749,11 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a mutable Math::VectorSlice view of the slice \a s of the vector expression \a mve.
+         * \brief Returns a mutable vector proxy viewing the strided slice \a s of \a mve.
          * \tparam E The vector expression type.
          * \param mve The vector expression.
          * \param s The (start, stride, size) slice to view.
-         * \return A mutable slice view of \a mve.
+         * \return A Math::VectorSlice proxy referring to the specified strided slice of \a mve.
          */
         template <typename E>
         VectorSlice<E>
@@ -763,11 +763,11 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::VectorSlice view of the slice \a s of the vector expression \a cve.
+         * \brief Returns a constant vector proxy viewing the strided slice \a s of \a cve.
          * \tparam E The vector expression type.
          * \param cve The vector expression.
          * \param s The (start, stride, size) slice to view.
-         * \return A constant slice view of \a cve.
+         * \return A Math::VectorSlice proxy referring to the specified strided slice of \a cve.
          */
         template <typename E>
         VectorSlice<const E>
@@ -777,13 +777,13 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a mutable Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a mve.
+         * \brief Returns a mutable vector proxy viewing the strided slice (\a start, \a stride, \a size) of \a mve.
          * \tparam E The vector expression type.
          * \param mve The vector expression.
          * \param start The (inclusive) start index of the slice.
          * \param stride The stride between successive slice elements.
          * \param size The number of elements of the slice.
-         * \return A mutable slice view of \a mve.
+         * \return A Math::VectorSlice proxy referring to the specified strided slice of \a mve.
          */
         template <typename E>
         VectorSlice<E>
@@ -798,13 +798,13 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::VectorSlice view of the slice (\a start, \a stride, \a size) of the vector expression \a vce.
+         * \brief Returns a constant vector proxy viewing the strided slice (\a start, \a stride, \a size) of \a cve.
          * \tparam E The vector expression type.
          * \param cve The vector expression.
          * \param start The (inclusive) start index of the slice.
          * \param stride The stride between successive slice elements.
          * \param size The number of elements of the slice.
-         * \return A constant slice view of \a cve.
+         * \return A Math::VectorSlice proxy referring to the specified strided slice of \a cve.
          */
         template <typename E>
         VectorSlice<const E>

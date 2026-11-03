@@ -73,7 +73,7 @@ namespace CDPL
 
             /**
              * \brief Returns the four torsion atoms (A, B, C, D).
-             * \return A pointer to a 4-element array of \c const Chem::Atom* (A, B, C, D).
+             * \return A pointer to a <em>4</em>-element array of \c const Chem::Atom* (A, B, C, D).
              */
             const Chem::Atom* const* getAtoms() const;
 

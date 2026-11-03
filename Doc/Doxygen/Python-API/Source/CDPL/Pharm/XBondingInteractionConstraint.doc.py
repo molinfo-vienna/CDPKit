@@ -56,7 +56,7 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     # \param don_acc <tt>True</tt> if the first feature argument represents the donor- and the second one the acceptor-feature, and <tt>False</tt> otherwise.
     # \param min_ax_dist The minimum allowed distance between the halogen-atom and the acceptor-feature.
     # \param max_ax_dist The maximum allowed distance between the halogen-atom and the acceptor-feature.
-    # \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor snd halogen->bound atom.
+    # \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor and halogen->bound atom.
     # \param max_acc_ang The maximum allowed angle deviation from the acceptor's preferred X-bonding direction.
     # 
     def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 1.6, min_axb_ang: float = 135.0, max_acc_ang: float = 45.0) -> None: pass

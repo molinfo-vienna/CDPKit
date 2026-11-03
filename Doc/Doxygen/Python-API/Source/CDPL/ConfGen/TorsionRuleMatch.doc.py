@@ -73,7 +73,7 @@ class TorsionRuleMatch(Boost.Python.instance):
     ##
     # \brief Returns the four torsion atoms (A, B, C, D).
     # 
-    # \return A reference to a 4-element array of Chem.Atom* (A, B, C, D).
+    # \return A reference to a <em>4</em>-element array of Chem.Atom* (A, B, C, D).
     # 
     def getAtoms() -> AtomArray: pass
 

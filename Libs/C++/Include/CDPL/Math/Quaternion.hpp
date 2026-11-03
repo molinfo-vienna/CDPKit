@@ -502,7 +502,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a pointer to the contiguous 4-element component array.
+             * \brief Returns a pointer to the contiguous <em>4</em>-element component array.
              * \return A mutable pointer to the component array.
              */
             Pointer getData()
@@ -511,7 +511,7 @@ namespace CDPL
             }
 
             /**
-             * \brief Returns a \c const pointer to the contiguous 4-element component array.
+             * \brief Returns a \c const pointer to the contiguous <em>4</em>-element component array.
              * \return A \c const pointer to the component array.
              */
             ConstPointer getData() const

@@ -890,21 +890,52 @@ A Math.MatrixColumn proxy § A proxy object
 Math.row § Math.row
 A Math.MatrixRow proxy § A proxy object
 
+Math.range § Math.range
+A Math.MatrixRange proxy § A proxy object
+A Math.VectorRange proxy § A proxy object
+
+Math.slice § Math.slice
+A Math.MatrixSlice proxy § A proxy object
+A Math.VectorSlice proxy § A proxy object
+
 Math.homog § Math.homog
-Math.HomogenousCoordsAdapter § homogeneous-coordinates
+A Math.HomogenousCoordsAdapter instance § An adapter object
+
+Math.trans § Math.trans
+A Math.MatrixTranspose instance § A matrix wrapper object
+
+Math.triang(ce,type) § Math.triang(ce)
+<em>Tri</em> § <em>type</em>
+\return § \param type The triangular-view selection policy\n\return
+A Math.TriangularAdapter instance § An adapter object
+
+Math.vec § Math.vec
+A Math.QuaternionVectorAdapter instance § An adapter object
+Math.CVector § vector
 
 Math.quat § Math.quat
-Math.VectorQuaternionAdapter § quaternion
 Math.RealQuaternion § real quaternion
 Math.Quaternion § quaternion
-
-Math.range § Math.range
-Math.VectorRange view § proxy object viewing
+A Math.VectorQuaternionAdapter instance § An adapter object
 
 # ---
 
 Math.luDecompose(e,pv) § Math.luDecompose(e,pv,num_row_swaps)
 \param num_row_swaps The output count of executed row swaps. §
+
+# ---
+
+Math.svDecompose § Math.svDecompose
+w(). § w.
+a(). § a.
+v(). § v.
+
+Math.svSubstitute § Math.svSubstitute
+w(). § w.
+b(). § b.
+v(). § v.
+u(). § u.
+x(). § x.
 
 # ---
 

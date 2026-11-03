@@ -333,11 +333,11 @@ namespace CDPL
         {};
 
         /**
-         * \brief Creates a Math::TriangularAdapter view of the matrix expression \a me using the triangular policy \a Tri.
+         * \brief Returns a mutable matrix adapter that exposes a triangular part of \a me according to the policy \a Tri.
          * \tparam Tri The triangular-view selection policy (Math::Lower, Math::UnitLower, Math::Upper or Math::UnitUpper).
          * \tparam E The matrix expression type.
          * \param me The matrix expression to wrap.
-         * \return A mutable triangular view of \a me.
+         * \return A Math::TriangularAdapter instance exposing a triangular part of \a me according to the selected policy.
          */
         template <typename Tri, typename E>
         TriangularAdapter<E, Tri>
@@ -347,11 +347,11 @@ namespace CDPL
         }
 
         /**
-         * \brief Creates a constant Math::TriangularAdapter view of the matrix expression \a ce using the triangular policy \a Tri.
+         * \brief Returns a constant matrix adapter that exposes a triangular part of \a ce according to the policy \a Tri.
          * \tparam Tri The triangular-view selection policy (Math::Lower, Math::UnitLower, Math::Upper or Math::UnitUpper).
          * \tparam E The matrix expression type.
          * \param ce The matrix expression to wrap.
-         * \return A constant triangular view of \a ce.
+         * \return A Math::TriangularAdapter instance exposing a triangular part of \a ce according to the selected policy.
          */
         template <typename Tri, typename E>
         TriangularAdapter<const E, Tri>

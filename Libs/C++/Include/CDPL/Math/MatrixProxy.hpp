@@ -1361,7 +1361,7 @@ namespace CDPL
         {};
 
         /**
-         * \brief Returns a mutable row proxy for row \a i of the matrix expression \a me.
+         * \brief Returns a mutable matrix proxy viewing row \a i of \a me.
          * \tparam M The matrix expression type.
          * \param me The matrix expression.
          * \param i The zero-based row index.
@@ -1375,7 +1375,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a constant row proxy for row \a i of the matrix expression \a ce.
+         * \brief Returns a constant matrix proxy viewing row \a i of \a ce.
          * \tparam M The matrix expression type.
          * \param ce The matrix expression.
          * \param i The zero-based row index.
@@ -1389,7 +1389,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a mutable column proxy for column \a j of the matrix expression \a me.
+         * \brief Returns a mutable matrix proxy viewing column \a j of \a me.
          * \tparam M The matrix expression type.
          * \param me The matrix expression.
          * \param j The zero-based column index.
@@ -1403,7 +1403,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a constant column proxy for column \a j of the matrix expression \a ce.
+         * \brief Returns a constant matrix proxy viewing column \a j of \a ce.
          * \tparam M The matrix expression type.
          * \param ce The matrix expression.
          * \param j The zero-based column index.
@@ -1417,7 +1417,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a mutable matrix range proxy viewing rows in \a r1 and columns in \a r2 of \a mme.
+         * \brief Returns a mutable matrix range proxy viewing the range of rows in \a r1 and columns in \a r2 of \a mme.
          * \tparam E The matrix expression type.
          * \param mme The matrix expression.
          * \param r1 The row index range.
@@ -1434,7 +1434,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a constant matrix range proxy viewing rows in \a r1 and columns in \a r2 of \a cme.
+         * \brief Returns a constant matrix proxy viewing the range of rows in \a r1 and columns in \a r2 of \a cme.
          * \tparam E The matrix expression type.
          * \param cme The matrix expression.
          * \param r1 The row index range.
@@ -1451,7 +1451,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a mutable matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a mme.
+         * \brief Returns a mutable matrix proxy viewing the range of rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a mme.
          * \tparam E The matrix expression type.
          * \param mme The matrix expression.
          * \param start1 The first row index (inclusive).
@@ -1474,7 +1474,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a constant matrix range proxy viewing rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a cme.
+         * \brief Returns a constant matrix proxy viewing the range of rows <tt>[start1, stop1)</tt> and columns <tt>[start2, stop2)</tt> of \a cme.
          * \tparam E The matrix expression type.
          * \param cme The matrix expression.
          * \param start1 The first row index (inclusive).
@@ -1514,7 +1514,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a constant matrix slice proxy viewing the strided rectangular slice (\a s1, \a s2) of \a cme.
+         * \brief Returns a constant matrix proxy viewing the strided rectangular slice (\a s1, \a s2) of \a cme.
          * \tparam E The matrix expression type.
          * \param cme The matrix expression.
          * \param s1 The row slice (start, stride, size).
@@ -1531,7 +1531,8 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a mutable matrix slicme proxy specified by row (\a start1, \a stride1, \a size1) and column (\a start2, \a stride2, \a size2).
+         * \brief Returns a mutable matrix proxy viewing the strided rectangular slice specified by rows (\a start1, \a stride1, \a size1) and
+         *        columns (\a start2, \a stride2, \a size2) of \a mme.
          * \tparam E The matrix expression type.
          * \param mme The matrix expression.
          * \param start1 The start row index.
@@ -1558,7 +1559,8 @@ namespace CDPL
         }
 
         /**
-         * \brief Returns a constant matrix slice proxy specified by row (\a start1, \a stride1, \a size1) and column (\a start2, \a stride2, \a size2).
+         * \brief Returns a constant matrix proxy viewing the strided rectangular slice specified by rows (\a start1, \a stride1, \a size1) and
+         *        columns (\a start2, \a stride2, \a size2) of \a cme.
          * \tparam E The matrix expression type.
          * \param cme The matrix expression.
          * \param start1 The start row index.

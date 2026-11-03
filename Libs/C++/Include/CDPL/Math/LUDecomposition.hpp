@@ -41,7 +41,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Computes an in-place LU decomposition of the matrix \a e without partial pivoting.
+         * \brief Computes an in-place <em>LU decomposition</em> [\ref WLUD] of the matrix \a e without partial pivoting.
          * \tparam E The matrix expression type.
          * \param e The matrix to decompose (modified in place).
          * \return The <em>1</em>-based row index of the first singular pivot, or \e 0 if the matrix is non-singular.
@@ -85,7 +85,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Computes an in-place LU decomposition of the matrix \a e with partial (row) pivoting.
+         * \brief Computes an in-place <em>LU decomposition</em> [\ref WLUD] of the matrix \a e with partial (row) pivoting.
          * \tparam E The matrix expression type.
          * \tparam PV The permutation vector type (must support indexed write access).
          * \tparam T An arithmetic counter type.
@@ -183,7 +183,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Solves \f$ LU\,x = b \f$ for \a bv in place, given the LU decomposition \a lu (without pivoting).
+         * \brief Solves \f$ LU\,x = b \f$ for \a bv in place, given the <em>LU decomposition</em> [\ref WLUD] \a lu (without pivoting).
          * \tparam E1 The matrix expression type of \a lu.
          * \tparam E2 The vector expression type of \a bv.
          * \param lu The LU decomposition.
@@ -201,7 +201,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Solves \f$ LU\,x = b \f$ for \a bv in place, given the LU decomposition \a lu and pivot vector \a pv.
+         * \brief Solves \f$ LU\,x = b \f$ for \a bv in place, given the <em>LU decomposition</em> [\ref WLUD] \a lu and pivot vector \a pv.
          * \tparam E1 The matrix expression type of \a lu.
          * \tparam E2 The vector expression type of \a bv.
          * \tparam PV The permutation vector type.
@@ -220,7 +220,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a bm in place, given the LU decomposition \a lu (without pivoting).
+         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a bm in place, given the <em>LU decomposition</em> [\ref WLUD] \a lu (without pivoting).
          * \tparam E1 The matrix expression type of \a lu.
          * \tparam E2 The matrix expression type of \a bm.
          * \param lu The LU decomposition.
@@ -238,7 +238,7 @@ namespace CDPL
         }
 
         /**
-         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a bm in place, given the LU decomposition \a lu and pivot vector \a pv.
+         * \brief Solves \f$ LU\,X = B \f$ for the matrix \a bm in place, given the <em>LU decomposition</em> [\ref WLUD] \a lu and pivot vector \a pv.
          * \tparam E1 The matrix expression type of \a lu.
          * \tparam E2 The matrix expression type of \a bm.
          * \tparam PV The permutation vector type.
