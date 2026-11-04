@@ -62,11 +62,11 @@ class MMFF94TorsionInteractionList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c MMFF94TorsionInteractionList instance \a array.
-    # \param array The \c MMFF94TorsionInteractionList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94TorsionInteractionList instance \a ia_list.
+    # \param ia_list The \c MMFF94TorsionInteractionList instance to copy.
     # \return \a self.
     # 
-    def assign(array: MMFF94TorsionInteractionList) -> MMFF94TorsionInteractionList: pass
+    def assign(ia_list: MMFF94TorsionInteractionList) -> MMFF94TorsionInteractionList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.

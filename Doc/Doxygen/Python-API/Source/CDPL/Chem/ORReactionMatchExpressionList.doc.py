@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Chem.MatchExpressionList implementation that evaluates the stored expressions as a logical disjunction (OR).
+# \brief Chem.ReactionMatchExpressionList implementation that evaluates the stored expressions as a logical disjunction (OR).
 # 
-# The list evaluates to <tt>True</tt> as soon as one contained Chem.MatchExpression instance evaluates to <tt>True</tt> for the given query/target object pairs (short-circuit evaluation). An empty list evaluates to <tt>False</tt>.
+# The list evaluates to <tt>True</tt> as soon as one contained Chem.ReactionMatchExpression instance evaluates to <tt>True</tt> for the given query/target object pairs (short-circuit evaluation). An empty list evaluates to <tt>False</tt>.
 # 
 class ORReactionMatchExpressionList(ReactionMatchExpressionList):
 
     ##
-    # \brief Contructs the \c ORReactionMatchExpressionList instance.
+    # \brief Creates an empty list.
     # 
     def __init__() -> None: pass
 

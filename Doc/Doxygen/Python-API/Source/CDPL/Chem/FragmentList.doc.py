@@ -25,7 +25,7 @@
 class FragmentList(Boost.Python.instance):
 
     ##
-    # \brief Creates an empty array.
+    # \brief Creates an empty list.
     # 
     def __init__() -> None: pass
 
@@ -48,16 +48,16 @@ class FragmentList(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the number of elements stored in the array.
+    # \brief Returns the number of elements stored in the list.
     # 
-    # \return The size of the array.
+    # \return The size of the list.
     # 
     def getSize() -> int: pass
 
     ##
-    # \brief Tells whether the array is empty (<tt>getSize() == 0</tt>).
+    # \brief Tells whether the list is empty (<tt>getSize() == 0</tt>).
     # 
-    # \return <tt>True</tt> if the array is empty, <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if the list is empty, <tt>False</tt> otherwise.
     # 
     def isEmpty() -> bool: pass
 
@@ -95,11 +95,11 @@ class FragmentList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c FragmentList instance \a array.
-    # \param array The \c FragmentList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c FragmentList instance \a list.
+    # \param list The \c FragmentList instance to copy.
     # \return \a self.
     # 
-    def assign(array: FragmentList) -> FragmentList: pass
+    def assign(list: FragmentList) -> FragmentList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.
@@ -112,7 +112,7 @@ class FragmentList(Boost.Python.instance):
     def assign(num_elem: int, value: Fragment) -> None: pass
 
     ##
-    # \brief Adds a new element at the end of the array.
+    # \brief Adds a new element at the end of the list.
     # 
     # \param value The value of the new element.
     # 
@@ -154,9 +154,9 @@ class FragmentList(Boost.Python.instance):
     def insertElements(idx: int, values: FragmentList) -> None: pass
 
     ##
-    # \brief Removes the last element of the array.
+    # \brief Removes the last element of the list.
     # 
-    # \throw Base.OperationFailed if the array is empty.
+    # \throw Base.OperationFailed if the list is empty.
     # 
     def popLastElement() -> None: pass
 
@@ -179,20 +179,20 @@ class FragmentList(Boost.Python.instance):
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
-    # \brief Returns the first element of the array.
+    # \brief Returns the first element of the list.
     # 
     # \return The first element. 
     # 
-    # \throw Base.OperationFailed if the array is empty.
+    # \throw Base.OperationFailed if the list is empty.
     # 
     def getFirstElement() -> Fragment: pass
 
     ##
-    # \brief Returns the last element of the array.
+    # \brief Returns the last element of the list.
     # 
     # \return The last element. 
     # 
-    # \throw Base.OperationFailed if the array is empty.
+    # \throw Base.OperationFailed if the list is empty.
     # 
     def getLastElement() -> Fragment: pass
 
@@ -240,9 +240,9 @@ class FragmentList(Boost.Python.instance):
     def __getitem__(idx: int) -> Fragment: pass
 
     ##
-    # \brief Returns the number of elements stored in the array.
+    # \brief Returns the number of elements stored in the list.
     # 
-    # \return The size of the array.
+    # \return The size of the list.
     # 
     def __len__() -> int: pass
 

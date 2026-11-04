@@ -25,7 +25,7 @@
 class ElectronSystemList(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c ElectronSystemList instance.
+    # \brief Creates an empty list.
     # 
     def __init__() -> None: pass
 
@@ -47,24 +47,59 @@ class ElectronSystemList(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the number of elements stored in the list.
+    # 
+    # \return The size of the list.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Tells whether the list is empty (<tt>getSize() == 0</tt>).
+    # 
+    # \return <tt>True</tt> if the list is empty, <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Inserts or erases elements at the end so that the size becomes <em>num_elem</em>.
+    # 
+    # \param num_elem The new size.
+    # \param value The value for newly inserted elements.
+    # 
     def resize(num_elem: int, value: ElectronSystem) -> None: pass
 
+    ##
+    # \brief Preallocates memory for (at least) <em>num_elem</em> elements.
+    # 
+    # If <em>num_elem</em> is less than or equal to the current capacity, this call has no effect. Otherwise, it is a request for allocation of additional memory. If the request is successful, then the capacity is greater than or equal to <em>num_elem</em>. Otherwise, the capacity is unchanged. In either case, the number of elements will not change.
+    # 
+    # \param num_elem The number of elements to reserve memory for.
+    # 
+    # \see getCapacity()
+    # 
     def reserve(num_elem: int) -> None: pass
 
+    ##
+    # \brief Returns the number of elements for which memory has been allocated.
+    # 
+    # The capacity is always greater than or equal to the number of currently stored elements.
+    # 
+    # \return The current capacity.
+    # 
     def getCapacity() -> int: pass
 
+    ##
+    # \brief Erases all elements.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ElectronSystemList instance \a array.
-    # \param array The \c ElectronSystemList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c ElectronSystemList instance \a list.
+    # \param list The \c ElectronSystemList instance to copy.
     # \return \a self.
     # 
-    def assign(array: ElectronSystemList) -> ElectronSystemList: pass
+    def assign(list: ElectronSystemList) -> ElectronSystemList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.
@@ -76,6 +111,11 @@ class ElectronSystemList(Boost.Python.instance):
     # 
     def assign(num_elem: int, value: ElectronSystem) -> None: pass
 
+    ##
+    # \brief Adds a new element at the end of the list.
+    # 
+    # \param value The value of the new element.
+    # 
     def addElement(value: ElectronSystem) -> None: pass
 
     ##
@@ -84,8 +124,25 @@ class ElectronSystemList(Boost.Python.instance):
     # 
     def addElements(values: ElectronSystemList) -> None: pass
 
+    ##
+    # \brief Inserts a new element before the location specified by the index <em>idx</em>.
+    # 
+    # \param idx The location where to insert the new element.
+    # \param value The value of the element to insert.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()].
+    # 
     def insertElement(idx: int, value: ElectronSystem) -> None: pass
 
+    ##
+    # \brief Inserts <em>num_elem</em> copies of <em>value</em> before the location specified by the index <em>idx</em>.
+    # 
+    # \param idx The location where to insert the new elements.
+    # \param num_elem The number of elements to insert.
+    # \param value The value of the elements to insert.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()].
+    # 
     def insertElements(idx: int, num_elem: int, value: ElectronSystem) -> None: pass
 
     ##
@@ -96,8 +153,20 @@ class ElectronSystemList(Boost.Python.instance):
     # 
     def insertElements(idx: int, values: ElectronSystemList) -> None: pass
 
+    ##
+    # \brief Removes the last element of the list.
+    # 
+    # \throw Base.OperationFailed if the list is empty.
+    # 
     def popLastElement() -> None: pass
 
+    ##
+    # \brief Removes the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def removeElement(idx: int) -> None: pass
 
     ##
@@ -109,12 +178,45 @@ class ElectronSystemList(Boost.Python.instance):
     # 
     def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
+    ##
+    # \brief Returns the first element of the list.
+    # 
+    # \return The first element. 
+    # 
+    # \throw Base.OperationFailed if the list is empty.
+    # 
     def getFirstElement() -> ElectronSystem: pass
 
+    ##
+    # \brief Returns the last element of the list.
+    # 
+    # \return The last element. 
+    # 
+    # \throw Base.OperationFailed if the list is empty.
+    # 
     def getLastElement() -> ElectronSystem: pass
 
+    ##
+    # \brief Returns the element at index <em>idx</em>.
+    # 
+    # The method is equivalent to __getitem__(std::size_t).
+    # 
+    # \param idx The zero-based index of the element.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def getElement(idx: int) -> ElectronSystem: pass
 
+    ##
+    # \brief Assigns a new value to the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # \param value The new value of the element after assignment.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def setElement(idx: int, value: ElectronSystem) -> None: pass
 
     ##
@@ -126,8 +228,22 @@ class ElectronSystemList(Boost.Python.instance):
     # 
     def __delitem__(idx: int) -> None: pass
 
+    ##
+    # \brief Returns the element at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the element.
+    # 
+    # \return The value of the element. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
+    # 
     def __getitem__(idx: int) -> ElectronSystem: pass
 
+    ##
+    # \brief Returns the number of elements stored in the list.
+    # 
+    # \return The size of the list.
+    # 
     def __len__() -> int: pass
 
     ##

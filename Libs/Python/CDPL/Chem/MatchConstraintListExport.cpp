@@ -124,7 +124,7 @@ void CDPLPythonChem::exportMatchConstraintList()
         .def(python::init<Chem::MatchConstraintList::Type>((python::arg("self"), python::arg("type") = Chem::MatchConstraintList::AND_LIST)))
         .def(CDPLPythonUtil::ArrayVisitor<Chem::MatchConstraintList, 
              python::return_internal_reference<>, python::default_call_policies,
-             python::default_call_policies, python::default_call_policies>())
+             python::default_call_policies, python::default_call_policies>("list"))
         .def("assign", CDPLPythonBase::copyAssOp<Chem::MatchConstraintList>(), (python::arg("self"), python::arg("list")),
              python::return_self<>())
         .def("getType", &Chem::MatchConstraintList::getType, python::arg("self"))

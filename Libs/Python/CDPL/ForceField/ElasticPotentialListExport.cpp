@@ -41,5 +41,5 @@ void CDPLPythonForceField::exportElasticPotentialList()
         .def(python::init<const ForceField::ElasticPotentialList&>((python::arg("self"), python::arg("list"))))
         .def(CDPLPythonUtil::ArrayVisitor<ForceField::ElasticPotentialList, 
              python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-             python::default_call_policies>());
+             python::default_call_policies>("list"));
 }

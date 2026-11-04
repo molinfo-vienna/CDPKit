@@ -1095,17 +1095,14 @@ Chem.CompoundMoleculeReader § Util.CompoundDataReader
 
 Chem.CompoundReactionReader § Util.CompoundDataReader
 
-Chem.FragmentList. § Util.Array.
+Chem.*List. § Util.Array.
+array § list
 
 Chem.AtomMapping. § Util.MultiMap.
 
 Chem.BondMapping. § Util.MultiMap.
 
-Chem.AtomMatchExpressionList. § Util.Array.
-array § list
-
-Chem.AtomMatchExpression § Chem.MatchExpression
-MatchExpression § AtomMatchExpression
+# ---
 
 Chem.AtomMatchExpression.__call__(query_atom,query_molgraph,target_atom,target_molgraph § Chem.MatchExpression.__call__(query_obj1,query_obj2,target_obj1,target_obj2
 primary query object § query atom
@@ -1115,20 +1112,10 @@ secondary target object § target molecular graph
 obj1 § atom
 obj2 § molgraph
 
-ANDAtomMatch § ANDMatch
-ANDMatch § ANDAtomMatch
+AtomMatch § Match
+Match § AtomMatch
 
-ORAtomMatch § ORMatch
-ORMatch § ORAtomMatch
-
-NOTAtomMatch § NOTMatch
-NOTMatch § NOTAtomMatch
-
-Chem.BondMatchExpressionList. § Util.Array.
-array § list
-
-Chem.BondMatchExpression § Chem.MatchExpression
-MatchExpression § BondMatchExpression
+# --
 
 Chem.BondMatchExpression.__call__(query_bond,query_molgraph,target_bond,target_molgraph § Chem.MatchExpression.__call__(query_obj1,query_obj2,target_obj1,target_obj2
 primary query object § query bond
@@ -1138,52 +1125,26 @@ secondary target object § target molecular graph
 obj1 § bond
 obj2 § molgraph
 
-ANDBondMatch § ANDMatch
-ANDMatch § ANDBondMatch
+BondMatch § Match
+Match § BondMatch
 
-ORBondMatch § ORMatch
-ORMatch § ORBondMatch
-
-NOTBondMatch § NOTMatch
-NOTMatch § NOTBondMatch
-
-Chem.MolecularGraphMatchExpressionList. § Util.Array.
-array § list
-
-Chem.MolecularGraphMatchExpression § Chem.MatchExpression< ObjType, void >
-MatchExpression § MolecularGraphMatchExpression
+# --
 
 Chem.MolecularGraphMatchExpression.__call__(query_molgraph,target_molgraph § Chem.MatchExpression< ObjType, void >.__call__(query_obj,target_obj
 object § molecular graph
 obj § molgraph
 
-ANDMolecularGraphMatch § ANDMatch
-ANDMatch § ANDMolecularGraphMatch
+MolecularGraphMatch § Match
+Match § MolecularGraphMatch
 
-ORMolecularGraphMatch § ORMatch
-ORMatch § ORMolecularGraphMatch
-
-NOTMolecularGraphMatch § NOTMatch
-NOTMatch § NOTMolecularGraphMatch
-
-Chem.ReactionMatchExpressionList. § Util.Array.
-array § list
-
-Chem.ReactionMatchExpression § Chem.MatchExpression< ObjType, void >
-MatchExpression § ReactionMatchExpression
+# --
 
 Chem.ReactionMatchExpression.__call__(query_rxn,target_rxn § Chem.MatchExpression< ObjType, void >.__call__(query_obj,target_obj
 object § reaction
 obj § rxn
 
-ANDReactionMatch § ANDMatch
-ANDMatch § ANDReactionMatch
-
-ORReactionMatch § ORMatch
-ORMatch § ORReactionMatch
-
-NOTReactionMatch § NOTMatch
-NOTMatch § NOTReactionMatch
+ReactionMatch § Match
+Match § ReactionMatch
 
 #
 # --- CDPL.Pharm package ---

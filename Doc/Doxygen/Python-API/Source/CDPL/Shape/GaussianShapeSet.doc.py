@@ -32,10 +32,10 @@ class GaussianShapeSet(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c GaussianShapeSet instance \a list.
-    # \param list The \c GaussianShapeSet instance to copy.
+    # \brief Contructs a copy of the \c GaussianShapeSet instance \a set.
+    # \param set The \c GaussianShapeSet instance to copy.
     # 
-    def __init__(list: GaussianShapeSet) -> None: pass
+    def __init__(set: GaussianShapeSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -62,11 +62,11 @@ class GaussianShapeSet(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c GaussianShapeSet instance \a array.
-    # \param array The \c GaussianShapeSet instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c GaussianShapeSet instance \a set.
+    # \param set The \c GaussianShapeSet instance to copy.
     # \return \a self.
     # 
-    def assign(array: GaussianShapeSet) -> GaussianShapeSet: pass
+    def assign(set: GaussianShapeSet) -> GaussianShapeSet: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c int instance \a num_elem.

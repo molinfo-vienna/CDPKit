@@ -62,11 +62,11 @@ class MMFF94StretchBendInteractionList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c MMFF94StretchBendInteractionList instance \a array.
-    # \param array The \c MMFF94StretchBendInteractionList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c MMFF94StretchBendInteractionList instance \a ia_list.
+    # \param ia_list The \c MMFF94StretchBendInteractionList instance to copy.
     # \return \a self.
     # 
-    def assign(array: MMFF94StretchBendInteractionList) -> MMFF94StretchBendInteractionList: pass
+    def assign(ia_list: MMFF94StretchBendInteractionList) -> MMFF94StretchBendInteractionList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.

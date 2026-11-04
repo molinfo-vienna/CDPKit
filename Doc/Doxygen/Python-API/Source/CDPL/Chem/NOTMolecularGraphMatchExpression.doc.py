@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.MatchExpression implementation that negates the evaluation results of a wrapped external expression instance.
+# \brief Chem.MolecularGraphMatchExpression implementation that negates the evaluation results of a wrapped external expression instance.
 # 
 # The expression evaluates to the logical negation of its wrapped expression. Useful for expressing "!X" constraints in substructure searches.
 # 

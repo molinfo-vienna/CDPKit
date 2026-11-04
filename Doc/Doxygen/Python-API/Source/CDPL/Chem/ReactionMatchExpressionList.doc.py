@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Container for the storage and evaluation of logical match expression lists.
+# 
+# <tt>ReactionMatchExpressionList</tt> allows for a concatenation of multiple Chem.ReactionMatchExpression instances that get evaluated in turn according to some logic. The actual logic of expression list evaluation has to be implemented by subclasses by overriding the virtual function call operator methods of the Chem.ReactionMatchExpression interface.
+# 
 class ReactionMatchExpressionList(ReactionMatchExpression):
 
     ##
@@ -95,11 +97,11 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ReactionMatchExpressionList instance \a array.
-    # \param array The \c ReactionMatchExpressionList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c ReactionMatchExpressionList instance \a list.
+    # \param list The \c ReactionMatchExpressionList instance to copy.
     # \return \a self.
     # 
-    def assign(array: ReactionMatchExpressionList) -> ReactionMatchExpressionList: pass
+    def assign(list: ReactionMatchExpressionList) -> ReactionMatchExpressionList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.
@@ -218,6 +220,13 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def setElement(idx: int, value: ReactionMatchExpression) -> None: pass
+
+    ##
+    # \brief Tells whether the expression list requires a reevaluation after a query to target object mapping candidate has been found.
+    # 
+    # \return <tt>True</tt> if one of the stored expressions requires a reevaluation after a mapping candidate has been found, and <tt>False</tt> otherwise.
+    # 
+    def requiresAtomBondMapping() -> bool: pass
 
     ##
     # \brief Removes the element at index <em>idx</em>.

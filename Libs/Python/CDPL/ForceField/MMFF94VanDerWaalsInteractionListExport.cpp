@@ -41,5 +41,5 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsInteractionList()
         .def(python::init<const ForceField::MMFF94VanDerWaalsInteractionList&>((python::arg("self"), python::arg("ia_list"))))
         .def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94VanDerWaalsInteractionList, 
              python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-             python::default_call_policies>());
+             python::default_call_policies>("ia_list"));
 }

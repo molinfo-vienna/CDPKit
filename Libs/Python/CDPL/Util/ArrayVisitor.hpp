@@ -50,10 +50,14 @@ namespace CDPLPythonUtil
     template <typename ArrayType, typename ElementReturnPolicy,
               typename ElementAdditionPolicy1, typename ElementAdditionPolicy2, typename ElementAdditionPolicy3>
     class ArrayVisitor : public boost::python::def_visitor<ArrayVisitor<ArrayType, ElementReturnPolicy,
-                                                                        ElementAdditionPolicy1, ElementAdditionPolicy2, ElementAdditionPolicy3> >
+                                                                         ElementAdditionPolicy1, ElementAdditionPolicy2, ElementAdditionPolicy3> >
     {
         friend class boost::python::def_visitor_access;
 
+    public:
+        ArrayVisitor(const char* copy_op_arg_name = "array"):copyAssOpArgName(copy_op_arg_name) {}
+
+            private:
         template <typename ClassType>
         void visit(ClassType& cl) const
         {
@@ -81,7 +85,7 @@ namespace CDPLPythonUtil
                 .def("reserve", &ArrayType::reserve, (python::arg("self"), python::arg("num_elem")))
                 .def("getCapacity", &ArrayType::getCapacity, python::arg("self"))
                 .def("clear", &ArrayType::clear, python::arg("self"))
-                .def("assign", CDPLPythonBase::copyAssOp<ArrayType>(), (python::arg("self"), python::arg("array")),
+                .def("assign", CDPLPythonBase::copyAssOp<ArrayType>(), (python::arg("self"), python::arg(copyAssOpArgName)),
                      python::return_self<ElementAdditionPolicy1>())
                 .def("assign", assignFunc, (python::arg("self"), python::arg("num_elem"), python::arg("value")),
                      ElementAdditionPolicy2())
@@ -162,6 +166,8 @@ namespace CDPLPythonUtil
 
             array.setElement(idx, value);
         }
+
+        const char* copyAssOpArgName;
     };
 } // namespace CDPLPythonUtil
 

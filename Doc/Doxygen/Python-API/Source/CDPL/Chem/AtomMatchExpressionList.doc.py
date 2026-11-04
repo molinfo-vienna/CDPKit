@@ -97,11 +97,11 @@ class AtomMatchExpressionList(AtomMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c AtomMatchExpressionList instance \a array.
-    # \param array The \c AtomMatchExpressionList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c AtomMatchExpressionList instance \a list.
+    # \param list The \c AtomMatchExpressionList instance to copy.
     # \return \a self.
     # 
-    def assign(array: AtomMatchExpressionList) -> AtomMatchExpressionList: pass
+    def assign(list: AtomMatchExpressionList) -> AtomMatchExpressionList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.
@@ -220,6 +220,13 @@ class AtomMatchExpressionList(AtomMatchExpression):
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def setElement(idx: int, value: AtomMatchExpression) -> None: pass
+
+    ##
+    # \brief Tells whether the expression list requires a reevaluation after a query to target object mapping candidate has been found.
+    # 
+    # \return <tt>True</tt> if one of the stored expressions requires a reevaluation after a mapping candidate has been found, and <tt>False</tt> otherwise.
+    # 
+    def requiresAtomBondMapping() -> bool: pass
 
     ##
     # \brief Removes the element at index <em>idx</em>.

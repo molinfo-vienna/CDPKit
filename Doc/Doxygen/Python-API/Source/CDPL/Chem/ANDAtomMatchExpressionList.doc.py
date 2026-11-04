@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Chem.MatchExpressionList implementation that evaluates the stored expressions as a logical conjunction (AND).
+# \brief Chem.AtomMatchExpressionList implementation that evaluates the stored expressions as a logical conjunction (AND).
 # 
-# The list evaluates to <tt>True</tt> if and only if every contained Chem.MatchExpression instance evaluates to <tt>True</tt> for the given query/target object pairs (short-circuit evaluation). An empty list evaluates to <tt>True</tt>.
+# The list evaluates to <tt>True</tt> if and only if every contained Chem.AtomMatchExpression instance evaluates to <tt>True</tt> for the given query/target object pairs (short-circuit evaluation). An empty list evaluates to <tt>True</tt>.
 # 
 class ANDAtomMatchExpressionList(AtomMatchExpressionList):
 
     ##
-    # \brief Contructs the \c ANDAtomMatchExpressionList instance.
+    # \brief Creates an empty list.
     # 
     def __init__() -> None: pass
 

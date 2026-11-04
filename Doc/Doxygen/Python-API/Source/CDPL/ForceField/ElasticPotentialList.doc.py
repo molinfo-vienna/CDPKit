@@ -62,11 +62,11 @@ class ElasticPotentialList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c ElasticPotentialList instance \a array.
-    # \param array The \c ElasticPotentialList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c ElasticPotentialList instance \a list.
+    # \param list The \c ElasticPotentialList instance to copy.
     # \return \a self.
     # 
-    def assign(array: ElasticPotentialList) -> ElasticPotentialList: pass
+    def assign(list: ElasticPotentialList) -> ElasticPotentialList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.

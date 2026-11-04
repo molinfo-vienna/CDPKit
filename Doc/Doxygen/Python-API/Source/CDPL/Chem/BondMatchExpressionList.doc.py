@@ -97,11 +97,11 @@ class BondMatchExpressionList(BondMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c BondMatchExpressionList instance \a array.
-    # \param array The \c BondMatchExpressionList instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c BondMatchExpressionList instance \a list.
+    # \param list The \c BondMatchExpressionList instance to copy.
     # \return \a self.
     # 
-    def assign(array: BondMatchExpressionList) -> BondMatchExpressionList: pass
+    def assign(list: BondMatchExpressionList) -> BondMatchExpressionList: pass
 
     ##
     # \brief This function fills the array with <em>num_elem</em> copies of the given <em>value</em>.
@@ -220,6 +220,13 @@ class BondMatchExpressionList(BondMatchExpression):
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getSize()).
     # 
     def setElement(idx: int, value: BondMatchExpression) -> None: pass
+
+    ##
+    # \brief Tells whether the expression list requires a reevaluation after a query to target object mapping candidate has been found.
+    # 
+    # \return <tt>True</tt> if one of the stored expressions requires a reevaluation after a mapping candidate has been found, and <tt>False</tt> otherwise.
+    # 
+    def requiresAtomBondMapping() -> bool: pass
 
     ##
     # \brief Removes the element at index <em>idx</em>.

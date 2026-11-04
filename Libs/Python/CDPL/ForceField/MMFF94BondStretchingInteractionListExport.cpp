@@ -41,5 +41,5 @@ void CDPLPythonForceField::exportMMFF94BondStretchingInteractionList()
         .def(python::init<const ForceField::MMFF94BondStretchingInteractionList&>((python::arg("self"), python::arg("ia_list"))))
         .def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94BondStretchingInteractionList, 
              python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-             python::default_call_policies>());
+             python::default_call_policies>("ia_list"));
 }

@@ -58,10 +58,13 @@ namespace
                      python::return_value_policy<python::copy_non_const_reference, 
                      python::with_custodian_and_ward_postcall<0, 1> >, 
                      python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, 
-                     python::with_custodian_and_ward<1, 4> >())
+                     python::with_custodian_and_ward<1, 4> >("list"))
                 .def("assign", CDPLPythonBase::copyAssOp<Chem::MatchExpressionList<ObjType1, ObjType2>>(),
                      (python::arg("self"), python::arg("expr")),
                      python::return_self<python::with_custodian_and_ward<1, 2> >())
+                .def("requiresAtomBondMapping", 
+                     &Chem::MatchExpressionList<ObjType1, ObjType2>::requiresAtomBondMapping, 
+                     python::arg("self"))
                 .def("__eq__", &Util::operator==<typename Chem::MatchExpressionList<ObjType1, ObjType2>::BaseType::ElementType>, 
                      (python::arg("self"), python::arg("expr")))
                 .def("__ne__", &Util::operator!=<typename Chem::MatchExpressionList<ObjType1, ObjType2>::BaseType::ElementType>,

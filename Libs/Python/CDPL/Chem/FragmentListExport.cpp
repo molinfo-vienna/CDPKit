@@ -42,7 +42,7 @@ void CDPLPythonChem::exportFragmentList()
              [python::with_custodian_and_ward<1, 2>()])
         .def(CDPLPythonUtil::ArrayVisitor<Chem::FragmentList, 
              python::return_value_policy<python::copy_non_const_reference, python::with_custodian_and_ward_postcall<0, 1> >, 
-             python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >())
+             python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >("list"))
         .def("__eq__", &Util::operator==<Chem::FragmentList::BaseType::ElementType>, (python::arg("self"), python::arg("list")))
         .def("__ne__", &Util::operator!=<Chem::FragmentList::BaseType::ElementType>, (python::arg("self"), python::arg("list")));
 }

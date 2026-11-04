@@ -60,11 +60,11 @@ class DRegularGridSet(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state with a copy of the state of the \c DRegularGridSet instance \a array.
-    # \param array The \c DRegularGridSet instance to copy.
+    # \brief Replaces the current state with a copy of the state of the \c DRegularGridSet instance \a set.
+    # \param set The \c DRegularGridSet instance to copy.
     # \return \a self.
     # 
-    def assign(array: DRegularGridSet) -> DRegularGridSet: pass
+    def assign(set: DRegularGridSet) -> DRegularGridSet: pass
 
     ##
     # \brief Replaces the current state with a copy of the state of the \c int instance \a num_elem.

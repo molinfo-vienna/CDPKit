@@ -38,11 +38,11 @@ void CDPLPythonShape::exportGaussianShapeSet()
 
     python::class_<Shape::GaussianShapeSet, Shape::GaussianShapeSet::SharedPointer>("GaussianShapeSet", python::no_init)
         .def(python::init<>(python::arg("self")))
-        .def(python::init<const Shape::GaussianShapeSet&>((python::arg("self"), python::arg("list")))
+        .def(python::init<const Shape::GaussianShapeSet&>((python::arg("self"), python::arg("set")))
              [python::with_custodian_and_ward<1, 2>()])
         .def(CDPLPythonUtil::ArrayVisitor<Shape::GaussianShapeSet, 
              python::return_value_policy<python::copy_non_const_reference, python::with_custodian_and_ward_postcall<0, 1> >, 
-             python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >())
+             python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >("set"))
         .def("__eq__", &Util::operator==<Shape::GaussianShapeSet::BaseType::ElementType>, (python::arg("self"), python::arg("list")))
         .def("__ne__", &Util::operator!=<Shape::GaussianShapeSet::BaseType::ElementType>, (python::arg("self"), python::arg("list")));
 }
