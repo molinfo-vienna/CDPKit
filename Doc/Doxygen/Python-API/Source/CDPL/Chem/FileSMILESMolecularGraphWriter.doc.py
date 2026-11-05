@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class FileSMILESMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

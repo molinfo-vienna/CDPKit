@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
 class FileSMARTSReactionWriter(ReactionWriterBase):
 
     ##

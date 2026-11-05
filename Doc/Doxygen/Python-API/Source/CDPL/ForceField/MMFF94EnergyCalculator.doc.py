@@ -22,7 +22,7 @@
 ##
 # \brief Calculates the total MMFF94 force field energy for a set of atom 3D coordinates.
 # 
-# The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions for a supplied set of atom 3D coordinates. The per-component energies are retained and made available via the dedicated accessors, the calculated sum is returned by __call__() and getTotalEnergy().
+# The calculator takes a ForceField.MMFF94InteractionData instance (typically produced by ForceField.MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending, stretch-bend, out-of-plane bending, torsion, electrostatic and Van der Waals energy contributions for a supplied set of atom 3D coordinates. The per-component energies are retained and made available via the dedicated accessors, the calculated sum is returned by \__call\__() and getTotalEnergy().
 # 
 # \see [\ref MMFF94]
 # 
@@ -31,7 +31,7 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     ##
     # \brief Constructs the calculator without an associated ForceField.MMFF94InteractionData instance.
     # 
-    # __call__() will return zero until setup() has been called.
+    # \__call\__() will return zero until setup() has been called.
     # 
     def __init__() -> None: pass
 
@@ -91,56 +91,56 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def setup(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
-    # \brief Returns the total MMFF94 energy computed by the most recent __call__() call.
+    # \brief Returns the total MMFF94 energy computed by the most recent \__call\__() call.
     # 
     # \return The total energy.
     # 
     def getTotalEnergy() -> float: pass
 
     ##
-    # \brief Returns the bond-stretching energy contribution computed by the most recent __call__() call.
+    # \brief Returns the bond-stretching energy contribution computed by the most recent \__call\__() call.
     # 
     # \return The bond-stretching energy.
     # 
     def getBondStretchingEnergy() -> float: pass
 
     ##
-    # \brief Returns the angle-bending energy contribution computed by the most recent __call__() call.
+    # \brief Returns the angle-bending energy contribution computed by the most recent \__call\__() call.
     # 
     # \return The angle-bending energy.
     # 
     def getAngleBendingEnergy() -> float: pass
 
     ##
-    # \brief Returns the stretch-bend coupling energy contribution computed by the most recent __call__() call.
+    # \brief Returns the stretch-bend coupling energy contribution computed by the most recent \__call\__() call.
     # 
     # \return The stretch-bend energy.
     # 
     def getStretchBendEnergy() -> float: pass
 
     ##
-    # \brief Returns the out-of-plane bending energy contribution computed by the most recent __call__() call.
+    # \brief Returns the out-of-plane bending energy contribution computed by the most recent \__call\__() call.
     # 
     # \return The out-of-plane bending energy.
     # 
     def getOutOfPlaneBendingEnergy() -> float: pass
 
     ##
-    # \brief Returns the torsion energy contribution computed by the most recent __call__() call.
+    # \brief Returns the torsion energy contribution computed by the most recent \__call\__() call.
     # 
     # \return The torsion energy.
     # 
     def getTorsionEnergy() -> float: pass
 
     ##
-    # \brief Returns the electrostatic energy contribution computed by the most recent __call__() call.
+    # \brief Returns the electrostatic energy contribution computed by the most recent \__call\__() call.
     # 
     # \return The electrostatic energy.
     # 
     def getElectrostaticEnergy() -> float: pass
 
     ##
-    # \brief Returns the Van der Waals energy contribution computed by the most recent __call__() call.
+    # \brief Returns the Van der Waals energy contribution computed by the most recent \__call\__() call.
     # 
     # \return The Van der Waals energy.
     # 

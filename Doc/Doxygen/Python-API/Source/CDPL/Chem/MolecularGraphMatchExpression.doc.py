@@ -75,7 +75,7 @@ class MolecularGraphMatchExpression(Boost.Python.instance):
     # 
     # \return The result of the expression evaluation for the specified query and target molecular graphs. 
     # 
-    # \note The default implementation returns the result of <tt>__call__(query_molgraph, target_molgraph, aux_data)</tt>.
+    # \note The default implementation returns the result of <tt>\__call\__(query_molgraph, target_molgraph, aux_data)</tt>.
     # 
     def __call__(query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: Base.Any) -> bool: pass
 

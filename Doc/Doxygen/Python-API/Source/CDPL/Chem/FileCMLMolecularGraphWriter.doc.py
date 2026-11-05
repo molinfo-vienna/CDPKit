@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the <em>Chemical Markup Language</em> [\ref CML] format.
+# 
+# \since 1.2
+# 
 class FileCMLMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

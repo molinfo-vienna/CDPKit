@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
+# 
 class FileJMEReactionReader(ReactionReaderBase):
 
     ##

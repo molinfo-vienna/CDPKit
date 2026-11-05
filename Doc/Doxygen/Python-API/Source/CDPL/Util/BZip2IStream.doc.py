@@ -160,17 +160,8 @@ class BZip2IStream(Base.IStream):
     # 
     def __iter__() -> BZip2IStream: pass
 
-    ##
-    # \brief FIXME!
-    #
-    closed = property(getClosed)
+    closed = property(isClosed)
 
-    ##
-    # \brief FIXME!
-    #
-    mode = property(getMode)
+    mode = property(getOpenModeString)
 
-    ##
-    # \brief FIXME!
-    #
-    modeFlags = property(getModeFlags)
+    modeFlags = property(getOpenModeFlags)

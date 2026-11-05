@@ -188,20 +188,11 @@ class Material(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    ambient = property(getAmbient, setAmbient)
+    ambient = property(getAmbientColor, setAmbientColor)
 
-    ##
-    # \brief FIXME!
-    #
-    diffuse = property(getDiffuse, setDiffuse)
+    diffuse = property(getDiffuseColor, setDiffuseColor)
 
-    ##
-    # \brief FIXME!
-    #
-    specular = property(getSpecular, setSpecular)
+    specular = property(getSpecularColor, setSpecularColor)
 
     ambientFactor = property(getAmbientFactor, setAmbientFactor)
 

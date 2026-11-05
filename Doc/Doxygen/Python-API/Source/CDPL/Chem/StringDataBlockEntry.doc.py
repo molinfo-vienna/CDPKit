@@ -110,7 +110,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the data headers and/or values compare non-equal, and <tt>False</tt> otherwise. 
     # 
-    # \see __eq__()
+    # \see \__eq\__()
     # 
     def __ne__(entry: StringDataBlockEntry) -> bool: pass
 

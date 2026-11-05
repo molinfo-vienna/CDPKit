@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+# 
 class FileMOLMoleculeReader(MoleculeReaderBase):
 
     ##

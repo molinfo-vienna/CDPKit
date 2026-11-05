@@ -53,6 +53,36 @@ class FeatureContainerWriterBase(Base.DataIOBase):
     # 
     def close() -> None: pass
 
+    ##
+    # \brief Returns a boolean indicating the error state of the writer.
+    # 
+    # This special method allows to write expressions like: 
+    # \code
+    # if writer: ... 
+    # if writer.write(...): ...
+    # \endcode
+    # 
+    # \return \c True if the writer is in a good state, and \c False otherwise. 
+    # 
+    #  
+    # 
+    # 
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Returns a boolean indicating the error state of the writer.
+    # 
+    # This special method allows to write expressions like: 
+    # \code
+    # if writer: ... 
+    # if writer.write(...): ...
+    # \endcode
+    # 
+    # \return \c True if the writer is in a good state, and \c False otherwise. 
+    # 
+    #  
+    # 
+    # 
+    # 
     def __nonzero__() -> bool: pass

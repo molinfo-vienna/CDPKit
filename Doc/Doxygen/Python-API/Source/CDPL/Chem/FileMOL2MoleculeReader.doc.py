@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the <em>Sybyl MOL2</em> format.
+# 
 class FileMOL2MoleculeReader(MoleculeReaderBase):
 
     ##

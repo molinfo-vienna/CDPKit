@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
 class FileSMARTSMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

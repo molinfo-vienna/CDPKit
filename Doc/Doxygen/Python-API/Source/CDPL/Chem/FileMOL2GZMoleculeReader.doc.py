@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the gzip-compressed <em>Sybyl MOL2</em> format.
+# 
 class FileMOL2GZMoleculeReader(MoleculeReaderBase):
 
     ##

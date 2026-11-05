@@ -114,22 +114,10 @@ class GZipOStream(Base.OStream):
     # 
     def open(os: Base.OStream) -> None: pass
 
-    ##
-    # \brief FIXME!
-    #
-    closed = property(getClosed)
+    closed = property(isClosed)
 
-    ##
-    # \brief FIXME!
-    #
-    softspace = property(getSoftspace, setSoftspace)
+    softspace = property(getSoftSpace, setSoftSpace)
 
-    ##
-    # \brief FIXME!
-    #
-    mode = property(getMode)
+    mode = property(getOpenModeString)
 
-    ##
-    # \brief FIXME!
-    #
-    modeFlags = property(getModeFlags)
+    modeFlags = property(getOpenModeFlags)

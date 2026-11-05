@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class FileSMILESReactionWriter(ReactionWriterBase):
 
     ##

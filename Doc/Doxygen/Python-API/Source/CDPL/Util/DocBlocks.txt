@@ -397,7 +397,6 @@ $$$$
 #
 # --- Unresolved property getter/setter functions ---
 #
-
 BitSet.any.value
 hasAny
 $$$$

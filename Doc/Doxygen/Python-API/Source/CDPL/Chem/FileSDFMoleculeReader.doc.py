@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class FileSDFMoleculeReader(MoleculeReaderBase):
 
     ##

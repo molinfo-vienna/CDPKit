@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the bzip2-compressed <em>Sybyl MOL2</em> format.
+# 
 class FileMOL2BZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class FileSDFMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

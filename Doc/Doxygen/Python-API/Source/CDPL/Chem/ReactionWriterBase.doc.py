@@ -26,7 +26,7 @@
 # 
 # From the <tt>ReactionWriterBase</tt> interface point of view, the data sink is continuous output stream in which the data objects are written as data records. For the output of a given data object the method write() has to be called with the object passed as an argument.
 # 
-# If the write() operation fails, the writer instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>ReactionWriterBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
+# If the write() operation fails, the writer instance is set into an error state that can be queried by the special methods \__bool\__() and \__nonzero\__(). Additionally, a <tt>ReactionWriterBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
 # 
 class ReactionWriterBase(Base.DataIOBase):
 
@@ -53,6 +53,36 @@ class ReactionWriterBase(Base.DataIOBase):
     # 
     def close() -> None: pass
 
+    ##
+    # \brief Returns a boolean indicating the error state of the writer.
+    # 
+    # This special method allows to write expressions like: 
+    # \code
+    # if writer: ... 
+    # if writer.write(...): ...
+    # \endcode
+    # 
+    # \return \c True if the writer is in a good state, and \c False otherwise. 
+    # 
+    #  
+    # 
+    # 
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Returns a boolean indicating the error state of the writer.
+    # 
+    # This special method allows to write expressions like: 
+    # \code
+    # if writer: ... 
+    # if writer.write(...): ...
+    # \endcode
+    # 
+    # \return \c True if the writer is in a good state, and \c False otherwise. 
+    # 
+    #  
+    # 
+    # 
+    # 
     def __nonzero__() -> bool: pass

@@ -20,9 +20,9 @@
 #
 
 ##
-# \brief Generic boolean expression interface for the implementation of query/target object equivalence tests in molecular graph matching algorithms.
+# \brief Generic boolean expression interface for the implementation of query/target object equivalence tests in reaction matching algorithms.
 # 
-# The <tt>ReactionMatchExpression</tt> interface abstracts the task of checking a set of constraints on the attributes of target objects when performing query object equivalence tests in molecular graph matching procedures. Subclasses of <tt>ReactionMatchExpression</tt> must override one (or all, if required) of the provided function call operators to implement the logic of the constraint checks. The first form of the two operators gets called in the pre-mapping stage of the graph matching algorithm where all feasible query/target object pairings are determined. In this pre-mapping stage all sorts of query constraints can be checked that are invariant with respect to the final mapping between any of the other query and target objects. The second type of operator is invoked immediately after a complete graph mapping solution has been found and can be used to re-evaluate the validity of a given query/target object pairing in the context of the provided matching result. As soon as a pairing is found to be invalid, the current mapping solution is rejected and the algorithm proceeds to find the next possible query to target graph mapping (if any). For efficiency reasons, subclasses of <tt>ReactionMatchExpression</tt> which implement the post-mapping function call operator must explicitly enable its invocation by additionally overriding the ReactionMatchExpression.requiresAtomBondMapping() method. Its implementation simply has to return <tt>True</tt> (the default implementation returns <tt>False</tt>) to request the invocation of the operator.
+# The <tt>ReactionMatchExpression</tt> interface abstracts the task of checking a set of constraints on the attributes of target objects when performing query object equivalence tests in reaction matching procedures. Subclasses of <tt>ReactionMatchExpression</tt> must override one (or all, if required) of the provided function call operators to implement the logic of the constraint checks. The first form of the two operators gets called in the pre-mapping stage of the graph matching algorithm where all feasible query/target object pairings are determined. In this pre-mapping stage all sorts of query constraints can be checked that are invariant with respect to the final mapping between any of the other query and target objects. The second type of operator is invoked immediately after a complete graph mapping solution has been found and can be used to re-evaluate the validity of a given query/target object pairing in the context of the provided matching result. As soon as a pairing is found to be invalid, the current mapping solution is rejected and the algorithm proceeds to find the next possible query to target graph mapping (if any). For efficiency reasons, subclasses of <tt>ReactionMatchExpression</tt> which implement the post-mapping function call operator must explicitly enable its invocation by additionally overriding the ReactionMatchExpression.requiresAtomBondMapping() method. Its implementation simply has to return <tt>True</tt> (the default implementation returns <tt>False</tt>) to request the invocation of the operator.
 # 
 class ReactionMatchExpression(Boost.Python.instance):
 
@@ -75,7 +75,7 @@ class ReactionMatchExpression(Boost.Python.instance):
     # 
     # \return The result of the expression evaluation for the specified query and target reactions. 
     # 
-    # \note The default implementation returns the result of <tt>__call__(query_rxn, target_rxn, aux_data)</tt>.
+    # \note The default implementation returns the result of <tt>\__call\__(query_rxn, target_rxn, aux_data)</tt>.
     # 
     def __call__(query_rxn: Reaction, target_rxn: Reaction, mapping: AtomBondMapping, aux_data: Base.Any) -> bool: pass
 

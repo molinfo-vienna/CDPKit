@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class FileSMILESMoleculeReader(MoleculeReaderBase):
 
     ##

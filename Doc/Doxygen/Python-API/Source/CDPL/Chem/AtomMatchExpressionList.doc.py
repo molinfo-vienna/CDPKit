@@ -201,7 +201,7 @@ class AtomMatchExpressionList(AtomMatchExpression):
     ##
     # \brief Returns the element at index <em>idx</em>.
     # 
-    # The method is equivalent to __getitem__(std::size_t).
+    # The method is equivalent to \__getitem\__(std::size_t).
     # 
     # \param idx The zero-based index of the element.
     # 
@@ -222,7 +222,7 @@ class AtomMatchExpressionList(AtomMatchExpression):
     def setElement(idx: int, value: AtomMatchExpression) -> None: pass
 
     ##
-    # \brief Tells whether the expression list requires a reevaluation after a query to target object mapping candidate has been found.
+    # \brief Tells whether the expression list requires a reevaluation after a query to target atom mapping candidate has been found.
     # 
     # \return <tt>True</tt> if one of the stored expressions requires a reevaluation after a mapping candidate has been found, and <tt>False</tt> otherwise.
     # 

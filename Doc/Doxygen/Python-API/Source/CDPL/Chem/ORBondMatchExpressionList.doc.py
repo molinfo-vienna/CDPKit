@@ -22,7 +22,7 @@
 ##
 # \brief Chem.BondMatchExpressionList implementation that evaluates the stored expressions as a logical disjunction (OR).
 # 
-# The list evaluates to <tt>True</tt> as soon as one contained Chem.BondMatchExpression instance evaluates to <tt>True</tt> for the given query/target object pairs (short-circuit evaluation). An empty list evaluates to <tt>False</tt>.
+# The list evaluates to <tt>True</tt> as soon as one contained Chem.BondMatchExpression instance evaluates to <tt>True</tt> for the given query/target bond pairs (short-circuit evaluation). An empty list evaluates to <tt>False</tt>.
 # 
 class ORBondMatchExpressionList(BondMatchExpressionList):
 

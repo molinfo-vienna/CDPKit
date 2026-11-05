@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
 class FileSMARTSMoleculeReader(MoleculeReaderBase):
 
     ##

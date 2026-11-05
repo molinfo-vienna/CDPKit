@@ -93,7 +93,7 @@ class AtomBondMapping(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the atom to atom and/or bond to bond mappings compare non-equal, and <tt>False</tt> otherwise. 
     # 
-    # \see __eq__()
+    # \see \__eq\__()
     # 
     def __ne__(mapping: AtomBondMapping) -> bool: pass
 

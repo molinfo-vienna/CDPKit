@@ -277,7 +277,7 @@ class DataFormat(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if the names and/or mime-types compare non-equal (case-insensitive!), and <tt>False</tt> otherwise. 
     # 
-    # \see __eq__()
+    # \see \__eq\__()
     # 
     def __ne__(fmt: DataFormat) -> bool: pass
 

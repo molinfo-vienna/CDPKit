@@ -27,14 +27,14 @@
 class NOTBondMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Constructs the <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # \brief Constructs the <tt>NOTBondMatchExpression</tt> bond that wraps the match expression instance specified by <em>expr_ptr</em>.
     # 
     # \param expr_ptr The the match expression instance to wrap.
     # 
     def __init__(expr_ptr: NOTBondMatchExpression) -> None: pass
 
     ##
-    # \brief Constructs the <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # \brief Constructs the <tt>NOTBondMatchExpression</tt> bond that wraps the match expression instance specified by <em>expr_ptr</em>.
     # 
     # \param expr_ptr The the match expression instance to wrap.
     # 

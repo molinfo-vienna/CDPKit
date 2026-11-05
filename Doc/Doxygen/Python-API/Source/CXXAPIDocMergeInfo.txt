@@ -40,6 +40,7 @@ Base class § %Base class
 ' (via its stored closure)' §
 as an expression template node § as an expression object
 An expression template node § An expression object
+__ § \__
 
 #
 # --- General method name replacements ---
@@ -68,6 +69,52 @@ Defined § True
 #
 Base.Any § Base.Any
 std::experimental.any § std::experimental::any
+
+# ---
+
+CDPL.*ReaderBase.__bool__() § CDPL.Base.DataReader.operator const void *()
+Returns a reference whose value indicates § Returns a boolean indicating
+The operator § This special method
+/* FIXME! */\n §
+if (reader) { § if reader:
+if (reader.write(...)) { § if reader.write(...):
+A non-<em>None</em> reference if the reader is in a good state, <tt>None</tt> otherwise § \c True if the reader is in a good state, and \c False otherwise
+\see operator!() §
+note § info
+\info The returned reference is not meant to be dereferenced, it is just a state indicator. §
+
+CDPL.*ReaderBase.__nonzero__() § CDPL.Base.DataReader.operator const void *()
+Returns a reference whose value indicates § Returns a boolean indicating
+The operator § This special method
+/* FIXME! */\n §
+if (reader) { § if reader:
+if (reader.write(...)) { § if reader.write(...):
+A non-<em>None</em> reference if the reader is in a good state, <tt>None</tt> otherwise § \c True if the reader is in a good state, and \c False otherwise
+\see operator!() §
+note § info
+\info The returned reference is not meant to be dereferenced, it is just a state indicator. §
+
+CDPL.*WriterBase.__bool__() § CDPL.Base.DataWriter.operator const void *()
+Returns a reference whose value indicates § Returns a boolean indicating
+The operator § This special method
+/* FIXME! */\n §
+if (writer) { § if writer:
+if (writer.write(...)) { § if writer.write(...):
+A non-<em>None</em> reference if the writer is in a good state, <tt>None</tt> otherwise § \c True if the writer is in a good state, and \c False otherwise
+\see operator!() §
+note § info
+\info The returned reference is not meant to be dereferenced, it is just a state indicator. §
+
+CDPL.*WriterBase.__nonzero__() § CDPL.Base.DataWriter.operator const void *()
+Returns a reference whose value indicates § Returns a boolean indicating
+The operator § This special method
+/* FIXME! */\n §
+if (writer) { § if writer:
+if (writer.write(...)) { § if writer.write(...):
+A non-<em>None</em> reference if the writer is in a good state, <tt>None</tt> otherwise § \c True if the writer is in a good state, and \c False otherwise
+\see operator!() §
+note § info
+\info The returned reference is not meant to be dereferenced, it is just a state indicator. §
 
 # ---
 
@@ -991,8 +1038,9 @@ Chem.MoleculeReaderBase § Base.DataReader
 DataReader § MoleculeReaderBase
 a given type (specified by the template parameter <em>T</em>) § type Chem.Molecule
 of a given type § of type Chem.Molecule
-operators operator const void*() and bool operator!() § special methods __bool__() and __nonzero__()
+operators operator const void*() and bool operator!() § special methods \__bool\__() and \__nonzero\__()
 DataType& obj § mol: Molecule
+ , the method read(std::size_t idx, mol: Molecule) is available. In contrast to the former read() method, this method § ' a special read() method version is provided that'
 
 Chem.MoleculeReaderBase.read(mol,overwrite) § Base.DataReader.read(obj,overwrite)
 obj § mol
@@ -1006,19 +1054,22 @@ Chem.MolecularGraphWriterBase § Base.DataWriter
 DataWriter § MolecularGraphWriterBase
 a given type (specified by the template parameter <em>T</em>) § type Chem.MolecularGraph
 of a given type § of type Chem.MolecularGraph
-operators operator const void*() and bool operator!() § special methods __bool__() and __nonzero__()
+operators operator const void*() and bool operator!() § special methods \__bool\__() and \__nonzero\__()
 
 Chem.MolecularGraphWriterBase.write(molgraph) § Base.DataWriter.write(obj)
 obj § molgraph
 data molgraphect § MolecularGraph object
 
+# ---
+
 Chem.ReactionReaderBase § Base.DataReader
 DataReader § ReactionReaderBase
 a given type (specified by the template parameter <em>T</em>) § type Chem.Reaction
 of a given type § of type Chem.Reaction
-operators operator const void*() and bool operator!() § special methods __bool__() and __nonzero__()
+operators operator const void*() and bool operator!() § special methods \__bool\__() and \__nonzero\__()
 DataType& obj § rxn: Reaction
-
+ , the method read(std::size_t idx, rxn: Reaction) is available. In contrast to the former read() method, this method § ' a special read() method version is provided that'
+ 
 Chem.ReactionReaderBase.read(rxn,overwrite) § Base.DataReader.read(obj,overwrite)
 obj § rxn
 rxnect § Reaction object
@@ -1031,11 +1082,13 @@ Chem.ReactionWriterBase § Base.DataWriter
 DataWriter § ReactionWriterBase
 a given type (specified by the template parameter <em>T</em>) § type Chem.Reaction
 of a given type § of type Chem.Reaction
-operators operator const void*() and bool operator!() § special methods __bool__() and __nonzero__()
+operators operator const void*() and bool operator!() § special methods \__bool\__() and \__nonzero\__()
 
 Chem.ReactionWriterBase.write(rxn) § Base.DataWriter.write(obj)
 obj § rxn
 data rxnect § Reaction object
+
+# ---
 
 Chem.MoleculeIOManager § Base.DataIOManager
 Base.DataIOManager § Chem.MoleculeIOManager
@@ -1055,6 +1108,8 @@ Base.DataInputHandler § Chem.ReactionInputHandler
 Base.DataOutputHandler § Chem.ReactionOutputHandler
 formats for a specific object type (specified by the template parameter <em>T</em>) § formats
 
+# ---
+
 Chem.MoleculeInputHandler.create § Base.DataInputHandler.create
 Base.DataReader § MoleculeReaderBase
 A shared reference to t § T
@@ -1068,6 +1123,8 @@ A shared reference to t § T
 
 Chem.MolecularGraphOutputHandler § Base.DataOutputHandler
 Base.DataWriter instances handling a particular object type and storage format § Chem.MolecularGraphWriterBase instances for data output in a particular storage format
+
+# ---
 
 Chem.ReactionInputHandler.create § Base.DataInputHandler.create
 Base.DataReader § ReactionReaderBase
@@ -1083,6 +1140,8 @@ A shared reference to t § T
 Chem.ReactionOutputHandler § Base.DataOutputHandler
 Base.DataWriter instances handling a particular object type and storage format § Chem.ReactionWriterBase instances for data output in a particular storage format
 
+# ---
+
 Chem.MoleculeReader. § Util.MultiFormatDataReader.
 
 Chem.MolecularGraphWriter. § Util.MultiFormatDataWriter.
@@ -1094,6 +1153,156 @@ Chem.ReactionWriter. § Util.MultiFormatDataWriter.
 Chem.CompoundMoleculeReader § Util.CompoundDataReader
 
 Chem.CompoundReactionReader § Util.CompoundDataReader
+
+# ---
+
+Chem.FileCDFMoleculeReader § Chem.CDFMoleculeReader
+molecule data § molecule data files
+
+Chem.FileCDFMoleculeReader § Util.FileDataReader
+FileDataReader § FileCDFMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
+
+Chem.FileCDFMolecularGraphWriter § Chem.CDFMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileCDFMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileCDFMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
+
+Chem.FileMOL2GZMolecularGraphWriter § Chem.MOL2GZMolecularGraphWriter
+
+Chem.FileJMEMoleculeReader § Chem.JMEMoleculeReader
+
+Chem.FileMOL2BZ2MoleculeReader § Chem.MOL2BZ2MoleculeReader
+
+Chem.FileSMILESGZMolecularGraphWriter § Chem.SMILESGZMolecularGraphWriter
+
+Chem.FileSDFBZ2MolecularGraphWriter § Chem.SDFBZ2MolecularGraphWriter
+
+Chem.FileCDFBZ2ReactionReader § Chem.CDFBZ2ReactionReader
+
+Chem.FileCDFBZ2ReactionWriter § Chem.CDFBZ2ReactionWriter
+
+Chem.FileSMILESReactionWriter § Chem.SMILESReactionWriter
+
+Chem.FileXYZMoleculeReader § Chem.XYZMoleculeReader
+
+Chem.FileINCHIMolecularGraphWriter § Chem.INCHIMolecularGraphWriter
+
+Chem.FileRDFReactionWriter § Chem.RDFReactionWriter
+
+Chem.FileSMILESGZMoleculeReader § Chem.SMILESGZMoleculeReader
+
+Chem.FileRDFGZReactionReader § Chem.RDFGZReactionReader
+
+Chem.FileINCHIMoleculeReader § Chem.INCHIMoleculeReader
+
+Chem.FileCDFReactionReader § Chem.CDFReactionReader
+
+Chem.FileRDFGZReactionWriter § Chem.RDFGZReactionWriter
+
+Chem.FileSMARTSMoleculeReader § Chem.SMARTSMoleculeReader
+
+Chem.FileJMEReactionWriter § Chem.JMEReactionWriter
+
+Chem.FileSMILESMoleculeReader § Chem.SMILESMoleculeReader
+
+Chem.FileSDFGZMolecularGraphWriter § Chem.SDFGZMolecularGraphWriter
+
+Chem.FileSMILESBZ2ReactionWriter § Chem.SMILESBZ2ReactionWriter
+
+Chem.FileMOL2GZMoleculeReader § Chem.MOL2GZMoleculeReader
+
+Chem.FileCMLBZ2MoleculeReader § Chem.CMLBZ2MoleculeReader
+
+Chem.FileSDFBZ2MoleculeReader § Chem.SDFBZ2MoleculeReader
+
+Chem.FileSMARTSReactionReader § Chem.SMARTSReactionReader
+
+Chem.FileMOLMoleculeReader § Chem.MOLMoleculeReader
+
+Chem.FileCDFGZReactionReader § Chem.CDFGZReactionReader
+
+Chem.FileRDFBZ2ReactionWriter § Chem.RDFBZ2ReactionWriter
+
+Chem.FileMOLMolecularGraphWriter § Chem.MOLMolecularGraphWriter
+
+Chem.FileSMILESGZReactionWriter § Chem.SMILESGZReactionWriter
+
+Chem.FileXYZBZ2MoleculeReader § Chem.XYZBZ2MoleculeReader
+
+Chem.FileCDFGZReactionWriter § Chem.CDFGZReactionWriter
+
+Chem.FileSMARTSMolecularGraphWriter § Chem.SMARTSMolecularGraphWriter
+
+Chem.FileMOL2MoleculeReader § Chem.MOL2MoleculeReader
+
+Chem.FileRDFReactionReader § Chem.RDFReactionReader
+
+Chem.FileRDFBZ2ReactionReader § Chem.RDFBZ2ReactionReader
+
+Chem.FileCMLMoleculeReader § Chem.CMLMoleculeReader
+
+Chem.FileSMILESBZ2MoleculeReader § Chem.SMILESBZ2MoleculeReader
+
+Chem.FileCDFReactionWriter § Chem.CDFReactionWriter
+
+Chem.FileMOL2MolecularGraphWriter § Chem.MOL2MolecularGraphWriter
+
+Chem.FileRXNReactionWriter § Chem.RXNReactionWriter
+
+Chem.FileCDFBZ2MoleculeReader § Chem.CDFBZ2MoleculeReader
+
+Chem.FileSMILESReactionReader § Chem.SMILESReactionReader
+
+Chem.FileCMLBZ2MolecularGraphWriter § Chem.CMLBZ2MolecularGraphWriter
+
+Chem.FileMOL2BZ2MolecularGraphWriter § Chem.MOL2BZ2MolecularGraphWriter
+
+Chem.FileXYZGZMolecularGraphWriter § Chem.XYZGZMolecularGraphWriter
+
+Chem.FileXYZBZ2MolecularGraphWriter § Chem.XYZBZ2MolecularGraphWriter
+
+Chem.FileJMEMolecularGraphWriter § Chem.JMEMolecularGraphWriter
+
+Chem.FileCDFGZMoleculeReader § Chem.CDFGZMoleculeReader
+
+Chem.FileXYZMolecularGraphWriter § Chem.XYZMolecularGraphWriter
+
+Chem.FileCDFGZMolecularGraphWriter § Chem.CDFGZMolecularGraphWriter
+
+Chem.FileSMILESGZReactionReader § Chem.SMILESGZReactionReader
+
+Chem.FileCDFBZ2MolecularGraphWriter § Chem.CDFBZ2MolecularGraphWriter
+
+Chem.FileSMILESBZ2ReactionReader § Chem.SMILESBZ2ReactionReader
+
+Chem.FileCMLMolecularGraphWriter § Chem.CMLMolecularGraphWriter
+
+Chem.FileSDFMoleculeReader § Chem.SDFMoleculeReader
+
+Chem.FileSDFMolecularGraphWriter § Chem.SDFMolecularGraphWriter
+
+Chem.FileCMLGZMoleculeReader § Chem.CMLGZMoleculeReader
+
+Chem.FileSMILESMolecularGraphWriter § Chem.SMILESMolecularGraphWriter
+
+Chem.FileSDFGZMoleculeReader § Chem.SDFGZMoleculeReader
+
+Chem.FileCMLGZMolecularGraphWriter § Chem.CMLGZMolecularGraphWriter
+
+Chem.FileJMEReactionReader § Chem.JMEReactionReader
+
+Chem.FileSMARTSReactionWriter § Chem.SMARTSReactionWriter
+
+Chem.FileXYZGZMoleculeReader § Chem.XYZGZMoleculeReader
+
+Chem.FileSMILESBZ2MolecularGraphWriter § Chem.SMILESBZ2MolecularGraphWriter
+
+# ---
 
 Chem.*List. § Util.Array.
 array § list
@@ -1114,6 +1323,7 @@ obj2 § molgraph
 
 AtomMatch § Match
 Match § AtomMatch
+object § atom
 
 # --
 
@@ -1127,6 +1337,7 @@ obj2 § molgraph
 
 BondMatch § Match
 Match § BondMatch
+object § bond
 
 # --
 
@@ -1136,6 +1347,7 @@ obj § molgraph
 
 MolecularGraphMatch § Match
 Match § MolecularGraphMatch
+#object § molecular graph
 
 # --
 
@@ -1145,6 +1357,8 @@ obj § rxn
 
 ReactionMatch § Match
 Match § ReactionMatch
+molecular graph § reaction
+#object § reaction
 
 #
 # --- CDPL.Pharm package ---

@@ -207,22 +207,10 @@ class BZip2IOStream(Base.IOStream):
     # 
     def __iter__() -> BZip2IOStream: pass
 
-    ##
-    # \brief FIXME!
-    #
-    closed = property(getClosed)
+    closed = property(isClosed)
 
-    ##
-    # \brief FIXME!
-    #
-    mode = property(getMode)
+    mode = property(getOpenModeString)
 
-    ##
-    # \brief FIXME!
-    #
-    modeFlags = property(getModeFlags)
+    modeFlags = property(getOpenModeFlags)
 
-    ##
-    # \brief FIXME!
-    #
-    softspace = property(getSoftspace, setSoftspace)
+    softspace = property(getSoftSpace, setSoftSpace)

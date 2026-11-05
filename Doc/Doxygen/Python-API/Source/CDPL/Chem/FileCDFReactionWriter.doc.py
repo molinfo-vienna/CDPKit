@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for reaction data in the native I/O format of the <em>%CDPL</em>.
+# 
 class FileCDFReactionWriter(ReactionWriterBase):
 
     ##
