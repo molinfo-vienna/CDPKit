@@ -40,6 +40,7 @@ Base class § %Base class
 ' (via its stored closure)' §
 as an expression template node § as an expression object
 An expression template node § An expression object
+equivalent to __getitem__(std::size_t) § equivalent to __getitem__()
 __ § \__
 
 #
@@ -185,9 +186,49 @@ Iterators pointing to the beginning and end of the container are obtained via th
 family of overloaded methods is provided which expect § method is provided which expects
 
 #
+# --- CDPL.Util package ---
+#
+Util.UIArray. § Util.Array.
+
+Util.STArray. § Util.Array.
+
+Util.LArray. § Util.Array.
+
+Util.STPairArray. § Util.Array.
+
+Util.DArray. § Util.Array.
+
+Util.SArray. § Util.Array.
+
+Util.BitSetArray. § Util.Array.
+
+*Array.__delitem__ § CDPL.Util.Array.removeElement
+
+*Array.__setitem__ § CDPL.Util.Array.setElement
+
+*Array.operator= § CDPL.Util.Array.assign
+
+*List.__delitem__ § CDPL.Util.Array.removeElement
+
+*List.__setitem__ § CDPL.Util.Array.setElement
+
+*List.operator= § CDPL.Util.Array.assign
+
+# ---
+
+Util.DG2DCoordinatesGenerator. § Util.DGCoordinatesGenerator.
+
+Util.DG2DCoordinatesGenerator. § Util.DGCoordinatesGeneratorBase.
+
+Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGenerator.
+
+Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGenerator< 3, T >.
+
+Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGeneratorBase.
+
+#
 # --- CDPL.Math package ---
 #
-
 # CVector typedefs
 
 Math.Vector2F. § Math.CVector.
@@ -991,47 +1032,6 @@ Math.prod § Math.prod
 A reference to <em>c § The output container <em>c
 
 #
-# --- CDPL.Util package ---
-#
-Util.UIArray. § Util.Array.
-
-Util.STArray. § Util.Array.
-
-Util.LArray. § Util.Array.
-
-Util.STPairArray. § Util.Array.
-
-Util.DArray. § Util.Array.
-
-Util.SArray. § Util.Array.
-
-Util.BitSetArray. § Util.Array.
-
-*Array.__delitem__ § CDPL.Util.Array.removeElement
-
-*Array.__setitem__ § CDPL.Util.Array.setElement
-
-*Array.operator= § CDPL.Util.Array.assign
-
-*List.__delitem__ § CDPL.Util.Array.removeElement
-
-*List.__setitem__ § CDPL.Util.Array.setElement
-
-*List.operator= § CDPL.Util.Array.assign
-
-# ---
-
-Util.DG2DCoordinatesGenerator. § Util.DGCoordinatesGenerator.
-
-Util.DG2DCoordinatesGenerator. § Util.DGCoordinatesGeneratorBase.
-
-Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGenerator.
-
-Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGenerator< 3, T >.
-
-Util.DG3DCoordinatesGenerator. § Util.DGCoordinatesGeneratorBase.
-
-#
 # --- CDPL.Chem package ---
 #
 Chem.MoleculeReaderBase § Base.DataReader
@@ -1172,135 +1172,203 @@ FileDataWriter § FileCDFMolecularGraphWriter
 ' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
 <tt>std::fstream</tt> § file stream
 
-Chem.FileMOL2GZMolecularGraphWriter § Chem.MOL2GZMolecularGraphWriter
-
-Chem.FileJMEMoleculeReader § Chem.JMEMoleculeReader
-
-Chem.FileMOL2BZ2MoleculeReader § Chem.MOL2BZ2MoleculeReader
-
-Chem.FileSMILESGZMolecularGraphWriter § Chem.SMILESGZMolecularGraphWriter
-
-Chem.FileSDFBZ2MolecularGraphWriter § Chem.SDFBZ2MolecularGraphWriter
-
-Chem.FileCDFBZ2ReactionReader § Chem.CDFBZ2ReactionReader
-
-Chem.FileCDFBZ2ReactionWriter § Chem.CDFBZ2ReactionWriter
-
-Chem.FileSMILESReactionWriter § Chem.SMILESReactionWriter
-
-Chem.FileXYZMoleculeReader § Chem.XYZMoleculeReader
-
-Chem.FileINCHIMolecularGraphWriter § Chem.INCHIMolecularGraphWriter
-
-Chem.FileRDFReactionWriter § Chem.RDFReactionWriter
-
-Chem.FileSMILESGZMoleculeReader § Chem.SMILESGZMoleculeReader
-
-Chem.FileRDFGZReactionReader § Chem.RDFGZReactionReader
-
-Chem.FileINCHIMoleculeReader § Chem.INCHIMoleculeReader
-
-Chem.FileCDFReactionReader § Chem.CDFReactionReader
-
-Chem.FileRDFGZReactionWriter § Chem.RDFGZReactionWriter
-
-Chem.FileSMARTSMoleculeReader § Chem.SMARTSMoleculeReader
-
-Chem.FileJMEReactionWriter § Chem.JMEReactionWriter
-
-Chem.FileSMILESMoleculeReader § Chem.SMILESMoleculeReader
-
-Chem.FileSDFGZMolecularGraphWriter § Chem.SDFGZMolecularGraphWriter
-
-Chem.FileSMILESBZ2ReactionWriter § Chem.SMILESBZ2ReactionWriter
+# ---
 
 Chem.FileMOL2GZMoleculeReader § Chem.MOL2GZMoleculeReader
 
-Chem.FileCMLBZ2MoleculeReader § Chem.CMLBZ2MoleculeReader
+Chem.FileMOL2GZMolecularGraphWriter § Chem.MOL2GZMolecularGraphWriter
 
-Chem.FileSDFBZ2MoleculeReader § Chem.SDFBZ2MoleculeReader
+# ---
 
-Chem.FileSMARTSReactionReader § Chem.SMARTSReactionReader
-
-Chem.FileMOLMoleculeReader § Chem.MOLMoleculeReader
-
-Chem.FileCDFGZReactionReader § Chem.CDFGZReactionReader
-
-Chem.FileRDFBZ2ReactionWriter § Chem.RDFBZ2ReactionWriter
-
-Chem.FileMOLMolecularGraphWriter § Chem.MOLMolecularGraphWriter
-
-Chem.FileSMILESGZReactionWriter § Chem.SMILESGZReactionWriter
-
-Chem.FileXYZBZ2MoleculeReader § Chem.XYZBZ2MoleculeReader
-
-Chem.FileCDFGZReactionWriter § Chem.CDFGZReactionWriter
-
-Chem.FileSMARTSMolecularGraphWriter § Chem.SMARTSMolecularGraphWriter
-
-Chem.FileMOL2MoleculeReader § Chem.MOL2MoleculeReader
-
-Chem.FileRDFReactionReader § Chem.RDFReactionReader
-
-Chem.FileRDFBZ2ReactionReader § Chem.RDFBZ2ReactionReader
-
-Chem.FileCMLMoleculeReader § Chem.CMLMoleculeReader
-
-Chem.FileSMILESBZ2MoleculeReader § Chem.SMILESBZ2MoleculeReader
-
-Chem.FileCDFReactionWriter § Chem.CDFReactionWriter
-
-Chem.FileMOL2MolecularGraphWriter § Chem.MOL2MolecularGraphWriter
-
-Chem.FileRXNReactionWriter § Chem.RXNReactionWriter
-
-Chem.FileCDFBZ2MoleculeReader § Chem.CDFBZ2MoleculeReader
-
-Chem.FileSMILESReactionReader § Chem.SMILESReactionReader
-
-Chem.FileCMLBZ2MolecularGraphWriter § Chem.CMLBZ2MolecularGraphWriter
-
-Chem.FileMOL2BZ2MolecularGraphWriter § Chem.MOL2BZ2MolecularGraphWriter
-
-Chem.FileXYZGZMolecularGraphWriter § Chem.XYZGZMolecularGraphWriter
-
-Chem.FileXYZBZ2MolecularGraphWriter § Chem.XYZBZ2MolecularGraphWriter
+Chem.FileJMEMoleculeReader § Chem.JMEMoleculeReader
 
 Chem.FileJMEMolecularGraphWriter § Chem.JMEMolecularGraphWriter
 
-Chem.FileCDFGZMoleculeReader § Chem.CDFGZMoleculeReader
+# ---
+
+Chem.FileMOL2BZ2MoleculeReader § Chem.MOL2BZ2MoleculeReader
+
+Chem.FileMOL2BZ2MolecularGraphWriter § Chem.MOL2BZ2MolecularGraphWriter
+
+# ---
+
+Chem.FileSMILESGZMoleculeReader § Chem.SMILESGZMoleculeReader
+
+Chem.FileSMILESGZMolecularGraphWriter § Chem.SMILESGZMolecularGraphWriter
+
+# ---
+
+Chem.FileSDFBZ2MoleculeReader § Chem.SDFBZ2MoleculeReader
+
+Chem.FileSDFBZ2MolecularGraphWriter § Chem.SDFBZ2MolecularGraphWriter
+
+# ---
+
+Chem.FileXYZMoleculeReader § Chem.XYZMoleculeReader
 
 Chem.FileXYZMolecularGraphWriter § Chem.XYZMolecularGraphWriter
 
-Chem.FileCDFGZMolecularGraphWriter § Chem.CDFGZMolecularGraphWriter
+# ---
 
-Chem.FileSMILESGZReactionReader § Chem.SMILESGZReactionReader
+Chem.FileINCHIMoleculeReader § Chem.INCHIMoleculeReader
+
+Chem.FileINCHIMolecularGraphWriter § Chem.INCHIMolecularGraphWriter
+
+# ---
+
+Chem.FileSMILESMoleculeReader § Chem.SMILESMoleculeReader
+
+Chem.FileSMILESMolecularGraphWriter § Chem.SMILESMolecularGraphWriter
+
+# ---
+
+Chem.FileSMARTSMoleculeReader § Chem.SMARTSMoleculeReader
+
+Chem.FileSMARTSMolecularGraphWriter § Chem.SMARTSMolecularGraphWriter
+
+# ---
+
+Chem.FileSDFGZMoleculeReader § Chem.SDFGZMoleculeReader
+
+Chem.FileSDFGZMolecularGraphWriter § Chem.SDFGZMolecularGraphWriter
+
+# ---
+
+Chem.FileCMLBZ2MoleculeReader § Chem.CMLBZ2MoleculeReader
+
+Chem.FileCMLBZ2MolecularGraphWriter § Chem.CMLBZ2MolecularGraphWriter
+
+# ---
+
+Chem.FileMOLMoleculeReader § Chem.MOLMoleculeReader
+
+Chem.FileMOLMolecularGraphWriter § Chem.MOLMolecularGraphWriter
+
+# ---
+
+Chem.FileXYZBZ2MoleculeReader § Chem.XYZBZ2MoleculeReader
+
+Chem.FileXYZBZ2MolecularGraphWriter § Chem.XYZBZ2MolecularGraphWriter
+
+# ---
+
+Chem.FileMOL2MoleculeReader § Chem.MOL2MoleculeReader
+
+Chem.FileMOL2MolecularGraphWriter § Chem.MOL2MolecularGraphWriter
+
+# ---
+
+Chem.FileCMLMoleculeReader § Chem.CMLMoleculeReader
+
+Chem.FileCMLMolecularGraphWriter § Chem.CMLMolecularGraphWriter
+
+# ---
+
+Chem.FileSMILESBZ2MoleculeReader § Chem.SMILESBZ2MoleculeReader
+
+Chem.FileSMILESBZ2MolecularGraphWriter § Chem.SMILESBZ2MolecularGraphWriter
+
+# ---
+
+Chem.FileCDFBZ2MoleculeReader § Chem.CDFBZ2MoleculeReader
 
 Chem.FileCDFBZ2MolecularGraphWriter § Chem.CDFBZ2MolecularGraphWriter
 
-Chem.FileSMILESBZ2ReactionReader § Chem.SMILESBZ2ReactionReader
+# ---
 
-Chem.FileCMLMolecularGraphWriter § Chem.CMLMolecularGraphWriter
+Chem.FileXYZGZMoleculeReader § Chem.XYZGZMoleculeReader
+
+Chem.FileXYZGZMolecularGraphWriter § Chem.XYZGZMolecularGraphWriter
+
+# ---
 
 Chem.FileSDFMoleculeReader § Chem.SDFMoleculeReader
 
 Chem.FileSDFMolecularGraphWriter § Chem.SDFMolecularGraphWriter
 
+# ---
+
 Chem.FileCMLGZMoleculeReader § Chem.CMLGZMoleculeReader
-
-Chem.FileSMILESMolecularGraphWriter § Chem.SMILESMolecularGraphWriter
-
-Chem.FileSDFGZMoleculeReader § Chem.SDFGZMoleculeReader
 
 Chem.FileCMLGZMolecularGraphWriter § Chem.CMLGZMolecularGraphWriter
 
+# ---
+
+Chem.FileCDFGZMoleculeReader § Chem.CDFGZMoleculeReader
+
+Chem.FileCDFGZMolecularGraphWriter § Chem.CDFGZMolecularGraphWriter
+
+# ---
+
+Chem.FileCDFBZ2ReactionReader § Chem.CDFBZ2ReactionReader
+
+Chem.FileCDFBZ2ReactionWriter § Chem.CDFBZ2ReactionWriter
+
+# ---
+
+Chem.FileSMILESReactionReader § Chem.SMILESReactionReader
+
+Chem.FileSMILESReactionWriter § Chem.SMILESReactionWriter
+
+# ---
+
+Chem.FileRDFReactionReader § Chem.RDFReactionReader
+
+Chem.FileRDFReactionWriter § Chem.RDFReactionWriter
+
+# ---
+
+Chem.FileRDFGZReactionReader § Chem.RDFGZReactionReader
+
+Chem.FileRDFGZReactionWriter § Chem.RDFGZReactionWriter
+
+# ---
+
+Chem.FileCDFReactionReader § Chem.CDFReactionReader
+
+Chem.FileCDFReactionWriter § Chem.CDFReactionWriter
+
+# ---
+
 Chem.FileJMEReactionReader § Chem.JMEReactionReader
+
+Chem.FileJMEReactionWriter § Chem.JMEReactionWriter
+
+# ---
+
+Chem.FileSMILESBZ2ReactionReader § Chem.SMILESBZ2ReactionReader
+
+Chem.FileSMILESBZ2ReactionWriter § Chem.SMILESBZ2ReactionWriter
+
+# ---
+
+Chem.FileSMARTSReactionReader § Chem.SMARTSReactionReader
 
 Chem.FileSMARTSReactionWriter § Chem.SMARTSReactionWriter
 
-Chem.FileXYZGZMoleculeReader § Chem.XYZGZMoleculeReader
+# ---
 
-Chem.FileSMILESBZ2MolecularGraphWriter § Chem.SMILESBZ2MolecularGraphWriter
+Chem.FileCDFGZReactionReader § Chem.CDFGZReactionReader
+
+Chem.FileCDFGZReactionWriter § Chem.CDFGZReactionWriter
+
+# ---
+
+Chem.FileRDFBZ2ReactionReader § Chem.RDFBZ2ReactionReader
+
+Chem.FileRDFBZ2ReactionWriter § Chem.RDFBZ2ReactionWriter
+
+# ---
+
+Chem.FileSMILESGZReactionReader § Chem.SMILESGZReactionReader
+
+Chem.FileSMILESGZReactionWriter § Chem.SMILESGZReactionWriter
+
+# ---
+
+Chem.FileRXNReactionReader § Chem.RXNReactionReader
+
+Chem.FileRXNReactionWriter § Chem.RXNReactionWriter
 
 # ---
 
@@ -1324,6 +1392,7 @@ obj2 § molgraph
 AtomMatch § Match
 Match § AtomMatch
 object § atom
+all feasible query/target atom § all feasible query/target atom/bond
 
 # --
 
@@ -1338,6 +1407,7 @@ obj2 § molgraph
 BondMatch § Match
 Match § BondMatch
 object § bond
+all feasible query/target bond § all feasible query/target atom/bond
 
 # --
 
@@ -1347,7 +1417,11 @@ obj § molgraph
 
 MolecularGraphMatch § Match
 Match § MolecularGraphMatch
-#object § molecular graph
+query/target object equivalence tests in molecular graph matching § query/target equivalence tests in molecular graph matching
+target objects when performing query object equivalence § target molecular graphs when performing query equivalence
+a given query/target object pairing in the context of §
+all feasible query/target object § all feasible query/target atom/bond
+As soon as a pairing is found to be invalid, the current mapping solution is rejected § As soon the current mapping solution is found to be invalid it is rejected
 
 # --
 
@@ -1358,7 +1432,14 @@ obj § rxn
 ReactionMatch § Match
 Match § ReactionMatch
 molecular graph § reaction
-#object § reaction
+query/target object equivalence tests in reaction matching § query/target equivalence tests in reaction matching
+target objects when performing query object equivalence § target reactions when performing query equivalence
+all feasible query/target object § all feasible query/target atom/bond
+of operator is invoked immediately after a complete graph mapping solution § of operator is invoked immediately after a complete query to target mapping solution
+a given query/target object pairing in the context of §
+As soon as a pairing is found to be invalid, the current mapping solution is rejected § As soon the current mapping solution is found to be invalid it is rejected
+possible query to target graph mapping § possible query to target mapping
+pre-mapping stage of the graph matching § pre-mapping stage of the matching
 
 #
 # --- CDPL.Pharm package ---

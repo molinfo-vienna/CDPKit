@@ -212,7 +212,7 @@ class Vector2DArray(Boost.Python.instance):
     ##
     # \brief Returns the element at index <em>idx</em>.
     # 
-    # The method is equivalent to \__getitem\__(std::size_t).
+    # The method is equivalent to \__getitem\__().
     # 
     # \param idx The zero-based index of the element.
     # 
