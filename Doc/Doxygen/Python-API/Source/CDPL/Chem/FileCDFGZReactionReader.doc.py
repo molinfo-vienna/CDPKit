@@ -20,13 +20,16 @@
 #
 
 ##
-# \brief Reader for reaction data in the gzip-compressed native I/O format of the <em>%CDPL</em>.
+# \brief Reader for reaction data files in the gzip-compressed native I/O format of the <em>%CDPL</em>.
 # 
 class FileCDFGZReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Contructs the \c FileCDFGZReactionReader instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileCDFGZReactionReader</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the input file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

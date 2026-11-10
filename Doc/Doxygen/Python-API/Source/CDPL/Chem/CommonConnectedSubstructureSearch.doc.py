@@ -53,14 +53,14 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Installs a function that resolves the Chem.MatchExpression implementation instance for a query atom.
+    # \brief Installs a function that resolves the Chem.AtomMatchExpression implementation instance for a query atom.
     # 
     # \param func The accessor function to use.
     # 
     def setAtomMatchExpressionFunction(func: AtomMatchExpressionPtrAtomFunctor) -> None: pass
 
     ##
-    # \brief Installs a function that resolves the Chem.MatchExpression implementation instance for a query bond.
+    # \brief Installs a function that resolves the Chem.BondMatchExpression implementation instance for a query bond.
     # 
     # \param func The accessor function to use.
     # 

@@ -38,7 +38,7 @@ namespace CDPL
 
         /**
          * \brief Provides constants for the specification of stereogenic atom/bond configurations 
-         *        determined by the <em>Cahn-Ingold-Prelog (CIP)</em> sequence rules.
+         *        determined by the Cahn-Ingold-Prelog (CIP) sequence rules.
          * \since 1.1
          */
         namespace CIPDescriptor

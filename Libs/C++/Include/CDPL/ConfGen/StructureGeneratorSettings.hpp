@@ -107,26 +107,26 @@ namespace CDPL
             std::size_t getTimeout() const;
 
             /**
-             * \brief Sets the MMFF94 force field variant used for fragment-mode structure generation (see ForceField::MMFF94 variants).
-             * \param type The new force field type.
+             * \brief Sets the MMFF94 force field variant used for fragment-mode structure generation.
+             * \param type The new force field type (see name ConfGen::ForceFieldType).
              */
             void setFragmentModeForceFieldType(unsigned int type);
 
             /**
              * \brief Returns the currently configured fragment-mode force field type.
-             * \return The current force field type.
+             * \return The current force field type (see name ConfGen::ForceFieldType).
              */
             unsigned int getFragmentModeForceFieldType() const;
 
             /**
              * \brief Sets the MMFF94 force field variant used for DG-mode structure generation.
-             * \param type The new force field type.
+             * \param type The new force field type (see name ConfGen::ForceFieldType).
              */
             void setDGModeForceFieldType(unsigned int type);
 
             /**
              * \brief Returns the currently configured DG-mode force field type.
-             * \return The force field type identifier.
+             * \return The force field type identifier (see name ConfGen::ForceFieldType).
              */
             unsigned int getDGModeForceFieldType() const;
 

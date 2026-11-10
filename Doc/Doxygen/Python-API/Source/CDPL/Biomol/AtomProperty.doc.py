@@ -25,7 +25,7 @@
 class AtomProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the residue name of the atom (e.g. <em>CA</em>, <em>CB</em>).
+    # \brief Specifies the residue name of the atom (e.g.\ <em>CA</em>, <em>CB</em>).
     # 
     # \valuetype  <tt>std::string</tt>
     # 

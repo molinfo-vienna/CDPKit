@@ -32,7 +32,7 @@ class INCHIReturnCode(Boost.Python.instance):
     SKIP = -2
 
     ##
-    # \brief Specifies that no structural data were provided for the <em>InChI</em> generation (e.g. empty structure).
+    # \brief Specifies that no structural data were provided for the <em>InChI</em> generation (e.g.\ empty structure).
     # 
     EOF_ = -1
 

@@ -38,13 +38,28 @@ class InteractionFilterFunction3(Boost.Python.instance):
     def __init__(func: InteractionFilterFunction3) -> None: pass
 
     ##
-    # \brief Contructs the \c InteractionFilterFunction3 instance.
-    # \param callable 
+    # \brief Contructs the \c InteractionFilterFunction3 instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given arguments.
+    # \param arg1 The first argument to forward.
+    # \param arg2 The second argument to forward.
+    # \param arg3 The third argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Chem.Atom, arg2: Chem.Atom, arg3: Chem.Atom) -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass

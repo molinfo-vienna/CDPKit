@@ -116,30 +116,30 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def getTimeout() -> int: pass
 
     ##
-    # \brief Sets the MMFF94 force field variant used for fragment-mode structure generation (see ForceField.MMFF94 variants).
+    # \brief Sets the MMFF94 force field variant used for fragment-mode structure generation.
     # 
-    # \param type The new force field type.
+    # \param type The new force field type (see name ConfGen.ForceFieldType).
     # 
     def setFragmentModeForceFieldType(type: int) -> None: pass
 
     ##
     # \brief Returns the currently configured fragment-mode force field type.
     # 
-    # \return The current force field type.
+    # \return The current force field type (see name ConfGen.ForceFieldType).
     # 
     def getFragmentModeForceFieldType() -> int: pass
 
     ##
     # \brief Sets the MMFF94 force field variant used for DG-mode structure generation.
     # 
-    # \param type The new force field type.
+    # \param type The new force field type (see name ConfGen.ForceFieldType).
     # 
     def setDGModeForceFieldType(type: int) -> None: pass
 
     ##
     # \brief Returns the currently configured DG-mode force field type.
     # 
-    # \return The force field type identifier.
+    # \return The force field type identifier (see name ConfGen.ForceFieldType).
     # 
     def getDGModeForceFieldType() -> int: pass
 

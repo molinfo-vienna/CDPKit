@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Writer for molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
+# \brief Writer for molecular graph data files in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
 # 
 # <tt>INCHIMolecularGraphWriter</tt> implements the generation of <em>InChI</em> strings from Chem.MolecularGraph instances. The output data are written by means of a <tt>std::ostream</tt> instance that was provided to the <tt>INCHIMolecularGraphWriter</tt> constructor.
 # 
@@ -39,8 +39,11 @@
 class FileINCHIMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Contructs the \c FileINCHIMolecularGraphWriter instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileINCHIMolecularGraphWriter</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the output file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

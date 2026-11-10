@@ -20,13 +20,16 @@
 #
 
 ##
-# \brief Writer for reaction data in the gzip-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+# \brief Convenience wrapper that adapts a stream-based writer implementation <em>WriterImpl</em> into a file-based Base.DataWriter by opening an file stream and forwarding all write operations to the wrapped writer.
 # 
 class FileRDFGZReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Contructs the \c FileRDFGZReactionWriter instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileRDFGZReactionWriter</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the output file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

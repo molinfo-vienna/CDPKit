@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Writer for molecular graph data in <em>XYZ</em> format to an output stream.
+# \brief Writer for molecular graph data files in <em>XYZ</em> format to an output stream.
 # 
 # The writer implements the Base.DataWriter interface for molecular graphs and emits one record per call to write(). The configuration of the output formatting is controlled by the I/O-related control parameters registered for the writer instance.
 # 
@@ -29,8 +29,11 @@
 class FileXYZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Contructs the \c FileXYZMolecularGraphWriter instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileXYZMolecularGraphWriter</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the output file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

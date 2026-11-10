@@ -116,7 +116,7 @@ class ScreeningDBCreator(Boost.Python.instance):
     def getNumProcessed() -> int: pass
 
     ##
-    # \brief Returns the number of molecules that were rejected (e.g. as duplicates) since the database was opened.
+    # \brief Returns the number of molecules that were rejected (e.g.\ as duplicates) since the database was opened.
     # 
     # \return The rejected-molecule count.
     # 

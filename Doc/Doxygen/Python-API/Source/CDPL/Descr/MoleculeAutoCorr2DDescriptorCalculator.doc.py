@@ -44,12 +44,12 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     class Mode(Boost.Python.enum):
 
         ##
-        # \brief Semi-split partitioning: atom pair contributions are grouped by involved atom types (e.g. Chem.AtomType.Cl, see class documentation for considered atom types).
+        # \brief Semi-split partitioning: atom pair contributions are grouped by involved atom types (e.g.\ Chem.AtomType.Cl, see class documentation for considered atom types).
         # 
         SEMI_SPLIT = 0
 
         ##
-        # \brief Full-split partitioning: atom pair contributions are grouped by distinct combinations of involved atom types (e.g. Chem.AtomType.C &harr; Chem.AtomType.Cl, see class documentation for considered atom types).
+        # \brief Full-split partitioning: atom pair contributions are grouped by distinct combinations of involved atom types (e.g.\ Chem.AtomType.C &harr; Chem.AtomType.Cl, see class documentation for considered atom types).
         # 
         FULL_SPLIT = 1
 

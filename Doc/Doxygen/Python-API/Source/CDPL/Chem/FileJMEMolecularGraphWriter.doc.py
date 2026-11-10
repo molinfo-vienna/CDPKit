@@ -20,13 +20,16 @@
 #
 
 ##
-# \brief Writer for molecular graph data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
+# \brief Writer for molecular graph data files in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
 # 
 class FileJMEMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Contructs the \c FileJMEMolecularGraphWriter instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileJMEMolecularGraphWriter</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the output file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

@@ -35,7 +35,7 @@ class ReactionRole(Boost.Python.instance):
     ALL = 7
 
     ##
-    # \brief Specifies the agents of a reaction (e.g. solvent or catalyst).
+    # \brief Specifies the agents of a reaction (e.g.\ solvent or catalyst).
     # 
     AGENT = 2
 

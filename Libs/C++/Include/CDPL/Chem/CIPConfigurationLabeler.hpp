@@ -46,7 +46,7 @@ namespace CDPL
         class CIPConfigurationLabelerImpl;
         
         /**
-         * \brief Assigns <em>Cahn-Ingold-Prelog (CIP)</em> configuration labels to stereogenic atoms and bonds of a molecular graph.
+         * \brief Assigns Cahn-Ingold-Prelog (CIP) configuration labels to stereogenic atoms and bonds of a molecular graph.
          *
          * After calling setup() for a molecular graph the per-atom or per-bond CIP descriptor
          * can be queried via the getLabel() overloads. The implementation

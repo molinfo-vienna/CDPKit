@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Reader for molecule data in <em>XYZ</em> format from an input stream.
+# \brief Reader for molecule data files in <em>XYZ</em> format from an input stream.
 # 
 # The reader decodes one molecule per record. The configuration of the input parsing is controlled by the I/O-related control parameters registered for the reader instance.
 # 
@@ -29,8 +29,11 @@
 class FileXYZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Contructs the \c FileXYZMoleculeReader instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileXYZMoleculeReader</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the input file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

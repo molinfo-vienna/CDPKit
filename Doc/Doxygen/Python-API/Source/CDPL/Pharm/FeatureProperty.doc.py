@@ -95,7 +95,7 @@ class FeatureProperty(Boost.Python.instance):
     HYDROPHOBICITY = CDPL.Base.LookupKey('HYDROPHOBICITY')
 
     ##
-    # \brief Specifies the environment atoms and bonds (e.g. of interacting pocket residues) associated with the feature.
+    # \brief Specifies the environment atoms and bonds (e.g.\ of interacting pocket residues) associated with the feature.
     # 
     # \valuetype  Chem.Fragment.SharedPointer \since 1.4
     # 

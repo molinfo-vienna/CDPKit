@@ -292,7 +292,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     def getPharmacophoreGenerator() -> Pharm.DefaultPharmacophoreGenerator: pass
 
     ##
-    # \brief Sets the function applied to the generated target pharmacophore before grid calculation (e.g. for filtering or modification).
+    # \brief Sets the function applied to the generated target pharmacophore before grid calculation (e.g.\ for filtering or modification).
     # 
     # \param func The pharmacophore processing function.
     # 

@@ -20,13 +20,16 @@
 #
 
 ##
-# \brief Reader for molecule data in the bzip2-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+# \brief Reader for molecule data files in the bzip2-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
 # 
 class FileSDFBZ2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Contructs the \c FileSDFBZ2MoleculeReader instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileSDFBZ2MoleculeReader</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the input file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

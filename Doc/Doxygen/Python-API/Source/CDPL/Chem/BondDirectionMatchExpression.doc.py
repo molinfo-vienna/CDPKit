@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.MatchExpression implementation that constrains target bonds by their <em>Daylight SMARTS</em> bond direction.
+# \brief Chem.BondMatchExpression implementation that constrains target bonds by their <em>Daylight SMARTS</em> bond direction.
 # 
 # The expression evaluates the target bond's direction value (provided as auxiliary matching data) against the configured direction constraint flags. The matching logic (match/not-match) is configurable.
 # 

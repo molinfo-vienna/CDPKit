@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.MatchExpression implementation that constrains target bonds by their stereo configuration relative to a query bond.
+# \brief Chem.BondMatchExpression implementation that constrains target bonds by their stereo configuration relative to a query bond.
 # 
 # The expression evaluates the target bond's cis/trans stereo configuration (as defined by its stereo descriptor) against the configuration constraint flags derived from the query bond's descriptor. The matching logic (match/not-match) and partial mapping tolerance are configurable.
 # 

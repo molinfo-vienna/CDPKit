@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.MatchExpression implementation that constrains target atoms by their stereo configuration relative to a query atom.
+# \brief Chem.AtomMatchExpression implementation that constrains target atoms by their stereo configuration relative to a query atom.
 # 
 # The expression evaluates the target atom's stereo configuration (as defined by its stereo descriptor) against the configuration constraint flags derived from the query atom's descriptor. The matching logic (match/not-match) and partial mapping tolerance are configurable.
 # 

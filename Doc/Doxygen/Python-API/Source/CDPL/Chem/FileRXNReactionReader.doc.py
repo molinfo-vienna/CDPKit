@@ -1,0 +1,35 @@
+#
+# This file is part of the Chemical Data Processing Toolkit
+#
+# Copyright (C) Thomas Seidel <thomas.seidel@univie.ac.at>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program; see the file COPYING. If not, write to
+# the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+#
+
+##
+# \brief Reader for reaction data files in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+# 
+class FileRXNReactionReader(ReactionReaderBase):
+
+    ##
+    # \brief Constructs a <tt>FileRXNReactionReader</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the input file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
+    # 
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

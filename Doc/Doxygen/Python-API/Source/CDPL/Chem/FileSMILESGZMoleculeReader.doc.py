@@ -20,13 +20,16 @@
 #
 
 ##
-# \brief Reader for molecule data in the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+# \brief Reader for molecule data files in the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
 # 
 class FileSMILESGZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Contructs the \c FileSMILESGZMoleculeReader instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileSMILESGZMoleculeReader</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the input file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

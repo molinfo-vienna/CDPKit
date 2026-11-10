@@ -122,8 +122,12 @@ def loadDocBlocks(file_name):
                 break
 
             entry.append(line)
-            
-        DOC_BLOCKS.append(entry)
+
+        patterns = entry[0].split('%')
+
+        for ptn in patterns:
+            entry[0] = ptn.strip()
+            DOC_BLOCKS.append(list(entry))
         
 def parseStringReplacement(line):
     str_rpl = line.split('§')
@@ -291,8 +295,11 @@ def performGenericCPPAPIDocFixes(doc_block):
 
     return doc_block
 
+def getRegExpPattern(ptn):
+    return ptn.replace('.', '\\.').replace('(', '\\(').replace(')', '\\)').replace('*', '.*')
+
 def patchKey(key, ptn, repl):
-    ptn = ptn.replace('.', '\\.').replace('(', '\\(').replace(')', '\\)').replace('*', '.*')
+    ptn = getRegExpPattern(ptn)
 
     return re.sub(ptn, repl, key)
 
@@ -314,7 +321,7 @@ def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_na
             if entry[0] != entry[1]:
                 continue
             
-            if entry[0] in mod_orig_key and mod_orig_key in CPP_API_DOC_BLOCKS:
+            if re.search(getRegExpPattern(entry[0]), mod_orig_key) and mod_orig_key in CPP_API_DOC_BLOCKS:
                 doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_orig_key])
                 
                 for str_repl in entry[2]:

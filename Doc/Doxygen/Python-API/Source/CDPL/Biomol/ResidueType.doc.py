@@ -37,7 +37,7 @@ class ResidueType(Boost.Python.instance):
     OTHER = 1
 
     ##
-    # \brief Specifies a non-polymer chemical component (e.g. small-molecule ligand).
+    # \brief Specifies a non-polymer chemical component (e.g.\ small-molecule ligand).
     # 
     NON_POLYMER = 2
 

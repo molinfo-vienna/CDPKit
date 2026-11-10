@@ -20,13 +20,16 @@
 #
 
 ##
-# \brief Writer for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
+# \brief Writer for reaction data files in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
 # 
 class FileJMEReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Contructs the \c FileJMEReactionWriter instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>FileJMEReactionWriter</tt> instance that opens the file <em>file_name</em> in the given mode.
+    # 
+    # \param file_name The path of the output file to open.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if the file could not be opened.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

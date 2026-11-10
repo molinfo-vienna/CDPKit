@@ -1175,200 +1175,596 @@ FileDataWriter § FileCDFMolecularGraphWriter
 # ---
 
 Chem.FileMOL2GZMoleculeReader § Chem.MOL2GZMoleculeReader
+molecule data § molecule data files
+
+Chem.FileMOL2GZMoleculeReader § Util.FileDataReader
+FileDataReader § FileMOL2GZMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileMOL2GZMolecularGraphWriter § Chem.MOL2GZMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileMOL2GZMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileMOL2GZMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileJMEMoleculeReader § Chem.JMEMoleculeReader
+molecule data § molecule data files
+
+Chem.FileJMEMoleculeReader § Util.FileDataReader
+FileDataReader § FileJMEMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileJMEMolecularGraphWriter § Chem.JMEMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileJMEMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileJMEMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileMOL2BZ2MoleculeReader § Chem.MOL2BZ2MoleculeReader
+molecule data § molecule data files
+
+Chem.FileMOL2BZ2MoleculeReader § Util.FileDataReader
+FileDataReader § FileMOL2BZ2MoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileMOL2BZ2MolecularGraphWriter § Chem.MOL2BZ2MolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileMOL2BZ2MolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileMOL2BZ2MolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMILESGZMoleculeReader § Chem.SMILESGZMoleculeReader
+molecule data § molecule data files
+
+Chem.FileSMILESGZMoleculeReader § Util.FileDataReader
+FileDataReader § FileSMILESGZMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMILESGZMolecularGraphWriter § Chem.SMILESGZMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileSMILESGZMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileSMILESGZMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSDFBZ2MoleculeReader § Chem.SDFBZ2MoleculeReader
+molecule data § molecule data files
+
+Chem.FileSDFBZ2MoleculeReader § Util.FileDataReader
+FileDataReader § FileSDFBZ2MoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSDFBZ2MolecularGraphWriter § Chem.SDFBZ2MolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileSDFBZ2MolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileSDFBZ2MolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileXYZMoleculeReader § Chem.XYZMoleculeReader
+molecule data § molecule data files
+
+Chem.FileXYZMoleculeReader § Util.FileDataReader
+FileDataReader § FileXYZMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileXYZMolecularGraphWriter § Chem.XYZMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileXYZMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileXYZMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileINCHIMoleculeReader § Chem.INCHIMoleculeReader
+molecule data § molecule data files
+
+Chem.FileINCHIMoleculeReader § Util.FileDataReader
+FileDataReader § FileINCHIMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileINCHIMolecularGraphWriter § Chem.INCHIMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileINCHIMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileINCHIMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMILESMoleculeReader § Chem.SMILESMoleculeReader
+molecule data § molecule data files
+
+Chem.FileSMILESMoleculeReader § Util.FileDataReader
+FileDataReader § FileSMILESMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMILESMolecularGraphWriter § Chem.SMILESMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileSMILESMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileSMILESMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMARTSMoleculeReader § Chem.SMARTSMoleculeReader
+molecule data § molecule data files
+
+Chem.FileSMARTSMoleculeReader § Util.FileDataReader
+FileDataReader § FileSMARTSMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMARTSMolecularGraphWriter § Chem.SMARTSMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileSMARTSMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileSMARTSMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSDFGZMoleculeReader § Chem.SDFGZMoleculeReader
+molecule data § molecule data files
+
+Chem.FileSDFGZMoleculeReader § Util.FileDataReader
+FileDataReader § FileSDFGZMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSDFGZMolecularGraphWriter § Chem.SDFGZMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileSDFGZMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileSDFGZMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCMLBZ2MoleculeReader § Chem.CMLBZ2MoleculeReader
+molecule data § molecule data files
+
+Chem.FileCMLBZ2MoleculeReader § Util.FileDataReader
+FileDataReader § FileCMLBZ2MoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCMLBZ2MolecularGraphWriter § Chem.CMLBZ2MolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileCMLBZ2MolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileCMLBZ2MolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileMOLMoleculeReader § Chem.MOLMoleculeReader
+molecule data § molecule data files
+
+Chem.FileMOLMoleculeReader § Util.FileDataReader
+FileDataReader § FileMOLMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileMOLMolecularGraphWriter § Chem.MOLMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileMOLMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileMOLMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileXYZBZ2MoleculeReader § Chem.XYZBZ2MoleculeReader
+molecule data § molecule data files
+
+Chem.FileXYZBZ2MoleculeReader § Util.FileDataReader
+FileDataReader § FileXYZBZ2MoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileXYZBZ2MolecularGraphWriter § Chem.XYZBZ2MolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileXYZBZ2MolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileXYZBZ2MolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileMOL2MoleculeReader § Chem.MOL2MoleculeReader
+molecule data § molecule data files
+
+Chem.FileMOL2MoleculeReader § Util.FileDataReader
+FileDataReader § FileMOL2MoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileMOL2MolecularGraphWriter § Chem.MOL2MolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileMOL2MolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileMOL2MolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCMLMoleculeReader § Chem.CMLMoleculeReader
+molecule data § molecule data files
+
+Chem.FileCMLMoleculeReader § Util.FileDataReader
+FileDataReader § FileCMLMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCMLMolecularGraphWriter § Chem.CMLMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileCMLMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileCMLMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMILESBZ2MoleculeReader § Chem.SMILESBZ2MoleculeReader
+molecule data § molecule data files
+
+Chem.FileSMILESBZ2MoleculeReader § Util.FileDataReader
+FileDataReader § FileSMILESBZ2MoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMILESBZ2MolecularGraphWriter § Chem.SMILESBZ2MolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileSMILESBZ2MolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileSMILESBZ2MolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCDFBZ2MoleculeReader § Chem.CDFBZ2MoleculeReader
+molecule data § molecule data files
+
+Chem.FileCDFBZ2MoleculeReader § Util.FileDataReader
+FileDataReader § FileCDFBZ2MoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCDFBZ2MolecularGraphWriter § Chem.CDFBZ2MolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileCDFBZ2MolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileCDFBZ2MolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileXYZGZMoleculeReader § Chem.XYZGZMoleculeReader
+molecule data § molecule data files
+
+Chem.FileXYZGZMoleculeReader § Util.FileDataReader
+FileDataReader § FileXYZGZMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileXYZGZMolecularGraphWriter § Chem.XYZGZMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileXYZGZMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileXYZGZMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSDFMoleculeReader § Chem.SDFMoleculeReader
+molecule data § molecule data files
+
+Chem.FileSDFMoleculeReader § Util.FileDataReader
+FileDataReader § FileSDFMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSDFMolecularGraphWriter § Chem.SDFMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileSDFMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileSDFMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCMLGZMoleculeReader § Chem.CMLGZMoleculeReader
+molecule data § molecule data files
+
+Chem.FileCMLGZMoleculeReader § Util.FileDataReader
+FileDataReader § FileCMLGZMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCMLGZMolecularGraphWriter § Chem.CMLGZMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileCMLGZMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileCMLGZMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCDFGZMoleculeReader § Chem.CDFGZMoleculeReader
+molecule data § molecule data files
+
+Chem.FileCDFGZMoleculeReader § Util.FileDataReader
+FileDataReader § FileCDFGZMoleculeReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCDFGZMolecularGraphWriter § Chem.CDFGZMolecularGraphWriter
+molecular graph data § molecular graph data files
+
+Chem.FileCDFGZMolecularGraphWriter § Util.FileDataWriter
+FileDataWriter § FileCDFGZMolecularGraphWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCDFBZ2ReactionReader § Chem.CDFBZ2ReactionReader
+reaction data § reaction data files
+
+Chem.FileCDFBZ2ReactionReader § Util.FileDataReader
+FileDataReader § FileCDFBZ2ReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCDFBZ2ReactionWriter § Chem.CDFBZ2ReactionWriter
+reaction data § reaction data files
+
+Chem.FileCDFBZ2ReactionWriter § Util.FileDataWriter
+FileDataWriter § FileCDFBZ2ReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMILESReactionReader § Chem.SMILESReactionReader
+reaction data § reaction data files
+
+Chem.FileSMILESReactionReader § Util.FileDataReader
+FileDataReader § FileSMILESReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMILESReactionWriter § Chem.SMILESReactionWriter
+reaction data § reaction data files
+
+Chem.FileSMILESReactionWriter § Util.FileDataWriter
+FileDataWriter § FileSMILESReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileRDFReactionReader § Chem.RDFReactionReader
+reaction data § reaction data files
+
+Chem.FileRDFReactionReader § Util.FileDataReader
+FileDataReader § FileRDFReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileRDFReactionWriter § Chem.RDFReactionWriter
+reaction data § reaction data files
+
+Chem.FileRDFReactionWriter § Util.FileDataWriter
+FileDataWriter § FileRDFReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileRDFGZReactionReader § Chem.RDFGZReactionReader
+reaction data § reaction data files
 
-Chem.FileRDFGZReactionWriter § Chem.RDFGZReactionWriter
+Chem.FileRDFGZReactionReader § Util.FileDataReader
+FileDataReader § FileRDFGZReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
+
+Chem.FileRDFGZGZReactionWriter § Chem.RDFGZGZReactionWriter
+reaction data § reaction data files
+
+Chem.FileRDFGZReactionWriter § Util.FileDataWriter
+FileDataWriter § FileRDFGZReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCDFReactionReader § Chem.CDFReactionReader
+reaction data § reaction data files
+
+Chem.FileCDFReactionReader § Util.FileDataReader
+FileDataReader § FileCDFReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCDFReactionWriter § Chem.CDFReactionWriter
+reaction data § reaction data files
+
+Chem.FileCDFReactionWriter § Util.FileDataWriter
+FileDataWriter § FileCDFReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileJMEReactionReader § Chem.JMEReactionReader
+reaction data § reaction data files
+
+Chem.FileJMEReactionReader § Util.FileDataReader
+FileDataReader § FileJMEReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileJMEReactionWriter § Chem.JMEReactionWriter
+reaction data § reaction data files
+
+Chem.FileJMEReactionWriter § Util.FileDataWriter
+FileDataWriter § FileJMEReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMILESBZ2ReactionReader § Chem.SMILESBZ2ReactionReader
+reaction data § reaction data files
+
+Chem.FileSMILESBZ2ReactionReader § Util.FileDataReader
+FileDataReader § FileSMILESBZ2ReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMILESBZ2ReactionWriter § Chem.SMILESBZ2ReactionWriter
+reaction data § reaction data files
+
+Chem.FileSMILESBZ2ReactionWriter § Util.FileDataWriter
+FileDataWriter § FileSMILESBZ2ReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMARTSReactionReader § Chem.SMARTSReactionReader
+reaction data § reaction data files
+
+Chem.FileSMARTSReactionReader § Util.FileDataReader
+FileDataReader § FileSMARTSReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMARTSReactionWriter § Chem.SMARTSReactionWriter
+reaction data § reaction data files
+
+Chem.FileSMARTSReactionWriter § Util.FileDataWriter
+FileDataWriter § FileSMARTSReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileCDFGZReactionReader § Chem.CDFGZReactionReader
+reaction data § reaction data files
+
+Chem.FileCDFGZReactionReader § Util.FileDataReader
+FileDataReader § FileCDFGZReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileCDFGZReactionWriter § Chem.CDFGZReactionWriter
+reaction data § reaction data files
+
+Chem.FileCDFGZReactionWriter § Util.FileDataWriter
+FileDataWriter § FileCDFGZReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileRDFBZ2ReactionReader § Chem.RDFBZ2ReactionReader
+reaction data § reaction data files
+
+Chem.FileRDFBZ2ReactionReader § Util.FileDataReader
+FileDataReader § FileRDFBZ2ReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileRDFBZ2ReactionWriter § Chem.RDFBZ2ReactionWriter
+reaction data § reaction data files
+
+Chem.FileRDFBZ2ReactionWriter § Util.FileDataWriter
+FileDataWriter § FileRDFBZ2ReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileSMILESGZReactionReader § Chem.SMILESGZReactionReader
+reaction data § reaction data files
+
+Chem.FileSMILESGZReactionReader § Util.FileDataReader
+FileDataReader § FileSMILESGZReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileSMILESGZReactionWriter § Chem.SMILESGZReactionWriter
+reaction data § reaction data files
+
+Chem.FileSMILESGZReactionWriter § Util.FileDataWriter
+FileDataWriter § FileSMILESGZReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
 Chem.FileRXNReactionReader § Chem.RXNReactionReader
+reaction data § reaction data files
+
+Chem.FileRXNReactionReader § Util.FileDataReader
+FileDataReader § FileRXNReactionReader
+' and forwards all read operations to a freshly constructed <em>ReaderImpl</em> wrapping the file stream' §
+<tt>std::ifstream</tt> § file stream
 
 Chem.FileRXNReactionWriter § Chem.RXNReactionWriter
+reaction data § reaction data files
+
+Chem.FileRXNReactionWriter § Util.FileDataWriter
+FileDataWriter § FileRXNReactionWriter
+' and forwards all write operations to a freshly constructed <em>WriterImpl</em> wrapping the file stream' §
+<tt>std::fstream</tt> § file stream
 
 # ---
 
@@ -1408,6 +1804,16 @@ BondMatch § Match
 Match § BondMatch
 object § bond
 all feasible query/target bond § all feasible query/target atom/bond
+
+# --
+
+Atom*MatchExpression § Atom*MatchExpression
+Chem.MatchExpression § Chem.AtomMatchExpression
+
+# --
+
+Bond*MatchExpression § Bond*MatchExpression
+Chem.MatchExpression § Chem.BondMatchExpression
 
 # --
 

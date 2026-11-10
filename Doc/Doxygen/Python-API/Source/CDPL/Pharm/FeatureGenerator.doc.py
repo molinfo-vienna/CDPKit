@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Abstract base class for generators that perceive one type of pharmacophore feature (e.g. an aromatic ring or H-bond donor) and append the perceived features to a Pharm.Pharmacophore.
+# \brief Abstract base class for generators that perceive one type of pharmacophore feature (e.g.\ an aromatic ring or H-bond donor) and append the perceived features to a Pharm.Pharmacophore.
 # 
 class FeatureGenerator(Boost.Python.instance):
 

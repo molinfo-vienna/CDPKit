@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.MatchExpression implementation that constrains target atoms by a specified structural environment.
+# \brief Chem.AtomMatchExpression implementation that constrains target atoms by a specified structural environment.
 # 
 # A target atom matches the expression when the supplied atom environment pattern (anchored on the target atom) is found by an inner Chem.SubstructureSearch instance. The matching logic (match/not-match) is configurable.
 # 
