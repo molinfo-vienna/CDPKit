@@ -50,13 +50,13 @@ namespace CDPLPythonUtil
                     (python::arg("self"), python::arg("file_name"),
                      python::arg("mode") = std::ios_base::in | std::ios_base::binary)))
                 .def(python::init<const std::string&, const std::string&, std::ios_base::openmode>(
-                    (python::arg("self"), python::arg("file_name"), python::arg("fmt"),
+                    (python::arg("self"), python::arg("file_name"), python::arg("fmt_str"),
                      python::arg("mode") = std::ios_base::in | std::ios_base::binary)))
                 .def(python::init<const std::string&, const Base::DataFormat&, std::ios_base::openmode>(
                     (python::arg("self"), python::arg("file_name"), python::arg("fmt"),
                      python::arg("mode") = std::ios_base::in | std::ios_base::binary)))
                 .def(python::init<std::istream&, const std::string&>(
-                    (python::arg("self"), python::arg("is"), python::arg("fmt"))))
+                    (python::arg("self"), python::arg("is"), python::arg("fmt_str"))))
                 .def(python::init<std::istream&, const Base::DataFormat&>(
                     (python::arg("self"), python::arg("is"), python::arg("fmt"))))
                 .def("getDataFormat", &ReaderType::getDataFormat, python::arg("self"),

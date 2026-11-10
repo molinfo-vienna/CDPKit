@@ -143,8 +143,8 @@ namespace CDPL
                                                                 Chem::MolecularGraph& molgraph, Chem::Fragment& fixed_substr,
                                                                 Math::Vector3DArray* fixed_substr_coords);
        /**
-         * \brief Configures the fixed-substructure handling of \a molgraph using the matches produced by \a sub_search.
-         * \param sub_search The common-connected-substructure search engine providing the matches.
+         * \brief Configures the fixed-substructure handling of \a molgraph using the matches produced by \a com_sub_search.
+         * \param com_sub_search The common-connected-substructure search engine providing the matches.
          * \param max_num_matches The maximum number of matches to process (\e 0 means unlimited).
          * \param molgraph The molecular graph that holds the input atoms (modified in place).
          * \param fixed_substr The output fragment receiving the matched atoms/bonds.
@@ -152,7 +152,7 @@ namespace CDPL
          * \return The number of matches processed.
          * \since 1.1
          */
-        CDPL_CONFGEN_API std::size_t setupFixedSubstructureData(const Chem::CommonConnectedSubstructureSearch& sub_search,
+        CDPL_CONFGEN_API std::size_t setupFixedSubstructureData(const Chem::CommonConnectedSubstructureSearch& com_sub_search,
                                                                 std::size_t max_num_matches, Chem::MolecularGraph& molgraph,
                                                                 Chem::Fragment& fixed_substr, Math::Vector3DArray* fixed_substr_coords);
         /**

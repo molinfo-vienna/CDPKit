@@ -86,7 +86,7 @@ class LMatrixTranspose(Boost.Python.instance):
     def assign(e: ConstULMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief Assigns the wrapped matrix from <em>mt's</em> wrapped matrix (possibly differing types).
+    # \brief Copy-assigns the wrapped matrix from the contents of <em>mt's</em> wrapped matrix.
     # 
     # \param mt The source transpose view.
     # 
@@ -128,7 +128,7 @@ class LMatrixTranspose(Boost.Python.instance):
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.
     # 
-    # \return A reference to <tt>m(j, i)</tt>.
+    # \return The wrapped matrix value <tt>m(j, i)</tt>.
     # 
     def getElement(i: int, j: int) -> int: pass
 
@@ -168,7 +168,7 @@ class LMatrixTranspose(Boost.Python.instance):
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.
     # 
-    # \return A reference to <tt>m(j, i)</tt>.
+    # \return The wrapped matrix value <tt>m(j, i)</tt>.
     # 
     def __call__(i: int, j: int) -> int: pass
 
@@ -178,7 +178,7 @@ class LMatrixTranspose(Boost.Python.instance):
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.
     # 
-    # \return A reference to <tt>m(j, i)</tt>.
+    # \return The wrapped matrix value <tt>m(j, i)</tt>.
     # 
     def __getitem__(ij: tuple) -> int: pass
 

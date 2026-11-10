@@ -112,8 +112,8 @@ namespace CDPL
             /**
              * \brief Returns a mutable reference to the element at index \a i of the view.
              *
-             * Index <tt>getSize() - 1</tt> returns the extension element (initialized to \e 1); all lower indices
-             * return the corresponding element of the wrapped vector.
+             * At index <tt>getSize() - 1</tt> the method returns the extension element (initialized to \e 1). At lower indices
+             * it returns the corresponding element of the wrapped vector.
              *
              * \param i The zero-based index within the view.
              * \return A mutable reference to the element.
@@ -128,6 +128,10 @@ namespace CDPL
 
             /**
              * \brief Returns a \c const reference to the element at index \a i of the view.
+             *
+             * At index <tt>getSize() - 1</tt> the method returns the extension element (initialized to \e 1). At lower indices
+             * it returns the corresponding element of the wrapped vector.
+             *
              * \param i The zero-based index within the view.
              * \return A \c const reference to the element.
              */

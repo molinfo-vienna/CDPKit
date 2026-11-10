@@ -355,7 +355,6 @@ namespace CDPL
              * \return A \c const reference to the requested value.
              * \throw Base::ItemNotFound if \a AllowDefValues is \c false and the map does not
              *        contain an entry with the specified key.
-             * \see getValue(const Key&) const
              */
             const Value& getValue(const Key& key) const;
 

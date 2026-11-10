@@ -293,8 +293,18 @@ def getDocBlock(node):
         doc_block += '\n' + detailed_doc
 
     return doc_block.replace('$<', '\\f$<').replace('$ ', '\\f$ ').replace(' $', ' \\f$').replace('\\[', '\\f[').replace('\\]', '\\f]')
-    
-def processCXXAPIDocFile(file_path, api_doc_db):
+
+def updateStatEntry(stats, entry_name):
+    if entry_name not in stats:
+        stats[entry_name] = 1
+    else:
+        stats[entry_name] = stats[entry_name] + 1
+
+def updateDBEntry(api_doc_db, entry_name, doc_block):
+    if entry_name not in api_doc_db:
+        api_doc_db[entry_name] = doc_block
+
+def processCXXAPIDocFile(file_path, api_doc_db, stats):
     print('Processing file: %s...' % path.basename(file_path))
     
     dom = parse(file_path)
@@ -302,9 +312,12 @@ def processCXXAPIDocFile(file_path, api_doc_db):
     comp_name = getTextRecursive(comp_def.getElementsByTagName('compoundname')[0]).replace('::', '.').strip()
     doc_block = getDocBlock(comp_def)
 
+    if comp_name not in api_doc_db:
+        updateStatEntry(stats, comp_def.attributes['kind'].value)
+      
     if doc_block:
-        api_doc_db[comp_name] = doc_block
-
+        updateDBEntry(api_doc_db, comp_name, doc_block)
+      
     sup_mem_kinds = [ 'function', 'variable', 'enum', 'typedef', 'define' ]
         
     for mem_def in comp_def.getElementsByTagName('memberdef'):
@@ -383,9 +396,17 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                 mem_name += '(' + arg_names + ')'
 
         if mem_kind == 'define':
-            api_doc_db[mem_name] = doc_block
+            if mem_name not in api_doc_db:
+                updateStatEntry(stats, mem_kind)
+
+            updateDBEntry(api_doc_db, mem_name, doc_block)
         else:
-            api_doc_db[comp_name + '.' + mem_name] = doc_block
+            entry_name = comp_name + '.' + mem_name
+            
+            if entry_name not in api_doc_db:
+                updateStatEntry(stats, mem_kind)
+
+            updateDBEntry(api_doc_db, entry_name, doc_block)
 
         if mem_kind == 'enum':
             for enum_val in comp_def.getElementsByTagName('enumvalue'):
@@ -395,21 +416,53 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                     continue
                 
                 name = getTextRecursive(enum_val.getElementsByTagName('name')[0]).strip()
-                api_doc_db[comp_name + '.' + mem_name + '.' + name] = doc_block
-                
+                entry_name = comp_name + '.' + mem_name + '.' + name
+            
+                if entry_name not in api_doc_db:
+                    updateStatEntry(stats, 'enumvalue')
+
+                updateDBEntry(api_doc_db, entry_name, doc_block)
+
+def printDocStats(doc_stats):
+    print('Statistics:')
+
+    titles = { 'file' : 'Header Files',
+               'class' : 'Classes',
+               'struct' : 'Structures',
+               'function' : 'Functions',
+               'typedef' : 'Type Definitions',
+               'variable' : 'Variables/Constants',
+               'namespace' : 'Namespaces',
+               'enum' : 'Enumerations',
+               'enumvalue' : 'Enumeration Values',
+               'define' : 'Preprocessor Definitions' }
+
+    count = 0
+    
+    for item in doc_stats.items():
+        print(f' {titles[item[0]]}: {item[1]}')
+        count += item[1]
+
+    print(f' --------------------------\n Total: {count}')
+    
 def extractCXXAPIDocBlocks():
     if len(sys.argv) < 3:
         print('Usage:', sys.argv[0], '[C++ API doc. XML dir] [output file]', file=sys.stderr)
         sys.exit(2)
 
     api_doc_db = {}
+    doc_stats = {}
         
     for f in glob.glob(path.join(sys.argv[1], '*.xml')):
         if 'spacestd' in f or 'spaceboost' in f:
             continue
         
         if 'struct' in f or 'class' in f or 'namespace' in f or 'hpp' in f:
-            processCXXAPIDocFile(f, api_doc_db)
+            processCXXAPIDocFile(f, api_doc_db, doc_stats)
+
+    printDocStats(doc_stats)
+
+    print(f' Num. DB-Entries: {len(api_doc_db)}')
 
     out_file = open(sys.argv[2], 'wb')
 

@@ -271,7 +271,7 @@ namespace CDPL
             virtual ~RegularSpatialGrid() {}
 
             /**
-             * \brief Returns a mutable reference to the cell at the linear index \a i.
+             * \brief Returns a mutable reference to the value of the cell at the linear index \a i.
              * \param i The zero-based linear cell index.
              * \return A mutable reference to the cell value.
              */

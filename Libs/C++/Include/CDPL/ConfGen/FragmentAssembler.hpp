@@ -102,7 +102,7 @@ namespace CDPL
             const FragmentAssemblerSettings& getSettings() const;
 
             /**
-             * \brief Returns the current assembler settings (mutable).
+             * \brief Returns the current assembler settings.
              * \return A reference to the settings.
              */
             FragmentAssemblerSettings& getSettings();

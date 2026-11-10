@@ -26,12 +26,21 @@ false § False
 nullptr § None
 A reference to itself. § \a self.
 A reference to the element. § The value of the element.
+A mutable reference to the element. § The value of the element.
 A reference to the component. § The value of the component.
+A mutable reference to the component. § The value of the component.
 A reference to the underlying element § The value of the element
+A mutable reference to the underlying element § The value of the element
 A reference to <em>C § The value of <em>C
+A mutable reference to <em>C § The value of <em>C
 A reference to the wrapped matrix closure § The wrapped matrix
 a reference to the § the
 A reference to the § The
+A mutable reference to the § The
+a mutable reference to the § the
+a mutable proxy reference to the § the
+A mutable proxy reference to the § The
+A mutable proxy reference (creates a stored entry on first assignment). § The stored value, or the zero element if no entry exists.
 int idx § idx: int
 Base class § %Base class
 ' Any ' § ' %Any '
@@ -42,6 +51,7 @@ as an expression template node § as an expression object
 An expression template node § An expression object
 equivalent to __getitem__(std::size_t) § equivalent to __getitem__()
 __ § \__
+__() const § __()
 
 #
 # --- General method name replacements ---
@@ -766,10 +776,13 @@ param e § param r
 # ---
 
 Math.*MatrixTranspose § Math.MatrixTranspose
+A mutable reference to <tt>m § The wrapped matrix value <tt>m
 
 Math.*MatrixTranspose.__getitem__(ij) § Math.MatrixTranspose.__call__(i,j)
+A mutable reference to <tt>m § The wrapped matrix value <tt>m
 
 Math.*MatrixTranspose.getElement(i,j) § Math.MatrixTranspose.__call__(i,j)
+A mutable reference to <tt>m § The wrapped matrix value <tt>m
 
 Math.*MatrixTranspose.getSize() § Math.MatrixTranspose.getSize1()
 

@@ -146,9 +146,9 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def setZStepSize(zs: float) -> None: pass
 
     ##
-    # \brief Returns a mutable reference to the underlying grid data container.
+    # \brief Returns the underlying grid data container.
     # 
-    # \return A mutable reference to the grid data.
+    # \return The grid data.
     # 
     def getData() -> DGrid: pass
 

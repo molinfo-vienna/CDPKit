@@ -126,7 +126,7 @@ namespace CDPL
             /**
              * \brief Returns a non-\c const reference to the connected neighbor of the argument atom.
              * \param atom The atom for which to return the connected neighbor atom.
-             * \return A non-\c const reference to the connected neighbor atom of the argument atom.
+             * \return A non-\c const reference to the connected neighbor of the argument atom.
              * \throw Base::ItemNotFound if the specified atom is not involved in the bond.
              */
             virtual Atom& getNeighbor(const Atom& atom) = 0;

@@ -92,7 +92,7 @@ namespace CDPL
             FragmentConformerGenerator& operator=(const FragmentConformerGenerator&) = delete;
 
             /**
-             * \brief Returns the current generator settings (mutable).
+             * \brief Returns the current generator settings.
              * \return A reference to the settings.
              */
             FragmentConformerGeneratorSettings& getSettings();

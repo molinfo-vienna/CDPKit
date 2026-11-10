@@ -46,7 +46,7 @@ class FragmentAssembler(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the current assembler settings (mutable).
+    # \brief Returns the current assembler settings.
     # 
     # \return The settings.
     # 

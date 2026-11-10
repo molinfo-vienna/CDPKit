@@ -3660,17 +3660,17 @@ def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, s
 def align3DCoordinates(cntnr: Entity3DContainer, ref_entities: Entity3DContainer, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
-# \brief Aligns each stored conformation of <em>cntnr</em> onto the supplied reference coordinates using the atoms of <em>ref_atoms</em> as alignment anchors.
+# \brief Aligns each stored conformation of <em>cntnr</em> onto the supplied reference coordinates using the atoms flagged in <em>ref_atom_mask</em> as alignment anchors.
 # 
 # \param cntnr The atom container holding the conformations to be aligned.
-# \param ref_atoms The atoms used as alignment anchors (must all be members of <em>cntnr</em>).
+# \param ref_atom_mask Bit mask selecting the atoms of <em>cntnr</em> used as alignment anchors.
 # \param ref_coords Reference 3D coordinates of the alignment-anchor atoms.
 # 
 # \return <tt>True</tt> if the alignment succeeded for every conformation, and <tt>False</tt> otherwise. 
 # 
 # \since 1.1
 # 
-def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_coords: Math.Vector3DArray) -> bool: pass
+def alignConformations(cntnr: AtomContainer, ref_atom_mask: Util.BitSet, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
 # \brief Aligns each stored conformation of <em>cntnr</em> onto the supplied reference coordinates using the atoms of <em>ref_atoms</em> as alignment anchors.
@@ -3686,16 +3686,16 @@ def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_coords:
 def alignConformations(cntnr: AtomContainer, ref_atoms: AtomContainer, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
-# \brief Aligns each stored conformation of <em>cntnr</em> to the first conformation using the atoms of <em>ref_atoms</em> as alignment anchors.
+# \brief Aligns each stored conformation of <em>cntnr</em> to the first conformation using the atoms flagged in <em>ref_atom_mask</em> as alignment anchors.
 # 
 # \param cntnr The atom container holding the conformations to be aligned.
-# \param ref_atoms The atoms used as alignment anchors (must all be members of <em>cntnr</em>).
+# \param ref_atom_mask Bit mask selecting the atoms of <em>cntnr</em> used as alignment anchors.
 # 
 # \return <tt>True</tt> if the alignment succeeded for every conformation, and <tt>False</tt> otherwise. 
 # 
 # \since 1.1
 # 
-def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet) -> bool: pass
+def alignConformations(cntnr: AtomContainer, ref_atom_mask: Util.BitSet) -> bool: pass
 
 ##
 # \brief Aligns each stored conformation of <em>cntnr</em> to the first conformation using the atoms of <em>ref_atoms</em> as alignment anchors.

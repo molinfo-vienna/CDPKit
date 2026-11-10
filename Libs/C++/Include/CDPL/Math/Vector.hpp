@@ -2138,12 +2138,12 @@ namespace CDPL
             }
 
             /**
-             * \brief Constructs a copy of the fixed-size vector \a v.
-             * \param v The fixed-size vector to copy.
+             * \brief Constructs a copy of the fixed-size vector \a vec.
+             * \param vec The fixed-size vector to copy.
              */
-            CVector(const CVector& v)
+            CVector(const CVector& vec)
             {
-                std::copy(v.data, v.data + N, data);
+                std::copy(vec.data, vec.data + N, data);
             }
 
             /**

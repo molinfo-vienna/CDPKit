@@ -143,9 +143,9 @@ def perceiveFragmentType(molgraph: Chem.MolecularGraph) -> int: pass
 def prepareForConformerGeneration(mol: Chem.Molecule, canonicalize: bool = False) -> None: pass
 
 ##
-# \brief Configures the fixed-substructure handling of <em>molgraph</em> using the matches produced by <em>sub_search</em>.
+# \brief Configures the fixed-substructure handling of <em>molgraph</em> using the matches produced by <em>com_sub_search</em>.
 # 
-# \param sub_search The common-connected-substructure search engine providing the matches.
+# \param com_sub_search The common-connected-substructure search engine providing the matches.
 # \param max_num_matches The maximum number of matches to process (<em>0</em> means unlimited).
 # \param molgraph The molecular graph that holds the input atoms (modified in place).
 # \param fixed_substr The output fragment receiving the matched atoms/bonds.
@@ -155,12 +155,12 @@ def prepareForConformerGeneration(mol: Chem.Molecule, canonicalize: bool = False
 # 
 # \since 1.1
 # 
-def setupFixedSubstructureData(sub_search: Chem.CommonConnectedSubstructureSearch, max_num_matches: int, molgraph: Chem.MolecularGraph, fixed_substr: Chem.Fragment, fixed_substr_coords: Math.Vector3DArray = 0) -> int: pass
+def setupFixedSubstructureData(com_sub_search: Chem.CommonConnectedSubstructureSearch, max_num_matches: int, molgraph: Chem.MolecularGraph, fixed_substr: Chem.Fragment, fixed_substr_coords: Math.Vector3DArray = 0) -> int: pass
 
 ##
 # \brief Configures the fixed-substructure handling of <em>molgraph</em> using the matches produced by <em>sub_search</em>.
 # 
-# \param sub_search The common-connected-substructure search engine providing the matches.
+# \param sub_search The substructure search engine providing the matches.
 # \param max_num_matches The maximum number of matches to process (<em>0</em> means unlimited).
 # \param molgraph The molecular graph that holds the input atoms (modified in place).
 # \param fixed_substr The output fragment receiving the matched atoms/bonds.

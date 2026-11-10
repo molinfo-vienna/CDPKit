@@ -30,16 +30,16 @@ class Vector2L(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs a copy of the fixed-size vector <em>v</em>.
+    # \brief Constructs a copy of the fixed-size vector <em>vec</em>.
     # 
-    # \param v The fixed-size vector to copy.
+    # \param vec The fixed-size vector to copy.
     # 
-    def __init__(v: Vector2L) -> None: pass
+    def __init__(vec: Vector2L) -> None: pass
 
     ##
-    # \brief Constructs a copy of the fixed-size vector <em>v</em>.
+    # \brief Constructs an <em>N-element</em> vector with every element initialized to <em>v</em>.
     # 
-    # \param v The fixed-size vector to copy.
+    # \param v The initial element value.
     # 
     def __init__(v: int) -> None: pass
 

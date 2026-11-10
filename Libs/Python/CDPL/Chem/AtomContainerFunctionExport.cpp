@@ -88,11 +88,11 @@ void CDPLPythonChem::exportAtomContainerFunctions()
     python::def("getNumConformations", &getNumConformationsWrapper1, python::arg("cntnr"));
     python::def("alignConformations",
                 static_cast<bool (*)(Chem::AtomContainer&, const Util::BitSet&, const Math::Vector3DArray&)>(&Chem::alignConformations),
-                (python::arg("cntnr"), python::arg("ref_atoms"), python::arg("ref_coords")));
+                (python::arg("cntnr"), python::arg("ref_atom_mask"), python::arg("ref_coords")));
     python::def("alignConformations", &alignConformationsWrapper3,
                 (python::arg("cntnr"), python::arg("ref_atoms"), python::arg("ref_coords")));
     python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, const Util::BitSet&)>(&Chem::alignConformations),
-                (python::arg("cntnr"), python::arg("ref_atoms")));
+                (python::arg("cntnr"), python::arg("ref_atom_mask")));
     python::def("alignConformations", &alignConformationsWrapper2,
                 (python::arg("cntnr"), python::arg("ref_atoms")));
     python::def("createAtomTypeMask", &createAtomTypeMaskWrapper5,

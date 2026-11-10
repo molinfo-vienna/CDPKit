@@ -75,7 +75,7 @@ class ConstULMatrixTranspose(Boost.Python.instance):
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.
     # 
-    # \return A reference to <tt>m(j, i)</tt>.
+    # \return The wrapped matrix value <tt>m(j, i)</tt>.
     # 
     def getElement(i: int, j: int) -> int: pass
 
@@ -99,7 +99,7 @@ class ConstULMatrixTranspose(Boost.Python.instance):
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.
     # 
-    # \return A reference to <tt>m(j, i)</tt>.
+    # \return The wrapped matrix value <tt>m(j, i)</tt>.
     # 
     def __call__(i: int, j: int) -> int: pass
 
@@ -109,7 +109,7 @@ class ConstULMatrixTranspose(Boost.Python.instance):
     # \param i The zero-based row index in the transposed view.
     # \param j The zero-based column index in the transposed view.
     # 
-    # \return A reference to <tt>m(j, i)</tt>.
+    # \return The wrapped matrix value <tt>m(j, i)</tt>.
     # 
     def __getitem__(ij: tuple) -> int: pass
 

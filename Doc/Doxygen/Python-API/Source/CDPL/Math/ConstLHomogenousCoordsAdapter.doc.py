@@ -117,6 +117,8 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
     ##
     # \brief Returns the element at index <em>i</em> of the view.
     # 
+    # At index <tt>getSize() - 1</tt> the method returns the extension element (initialized to <em>1</em>). At lower indices it returns the corresponding element of the wrapped vector.
+    # 
     # \param i The zero-based index within the view.
     # 
     # \return The value of the element.

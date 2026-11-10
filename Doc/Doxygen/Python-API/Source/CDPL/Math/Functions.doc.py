@@ -3773,324 +3773,324 @@ def slice(mve: ULVectorExpression, start: int, stride: int, size: int) -> ULVect
 def slice(start: int, stride: int, size: int) -> Slice: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
-# 
-def solveLower(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
-# 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveLower(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
+def solveLower(l: ConstDMatrixExpression, bv: DVectorExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveLower(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
+def solveLower(l: ConstDMatrixExpression, bm: DMatrixExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveLower(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
+def solveLower(l: ConstFMatrixExpression, bv: FVectorExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveLower(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
+def solveLower(l: ConstFMatrixExpression, bm: FMatrixExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveLower(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
+def solveLower(l: ConstLMatrixExpression, bv: LVectorExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveLower(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
+def solveLower(l: ConstLMatrixExpression, bm: LMatrixExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a lower-triangular matrix.
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The lower-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveLower(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
+def solveLower(l: ConstULMatrixExpression, bv: ULVectorExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a lower-triangular matrix.
 # 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
-# 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
-# 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
-# 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
-# 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
-# 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
-# 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>e1</em> is a unit lower-triangular matrix.
-# 
-# \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitLower(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is a unit upper-triangular matrix.
-# 
-# \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
-# \param e2 The right-hand side matrix, overwritten with the solution.
-# 
-# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
-# 
-def solveUnitUpper(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
-
-##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
-# 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The lower-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstDMatrixExpression, e2: DVectorExpression) -> bool: pass
+def solveLower(l: ConstULMatrixExpression, bm: ULMatrixExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a unit lower-triangular matrix (1 on the diagonal).
 # 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstDMatrixExpression, bv: DVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a unit lower-triangular matrix.
+# 
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstDMatrixExpression, bm: DMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a unit lower-triangular matrix (1 on the diagonal).
+# 
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstFMatrixExpression, bv: FVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a unit lower-triangular matrix.
+# 
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstFMatrixExpression, bm: FMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a unit lower-triangular matrix (1 on the diagonal).
+# 
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstLMatrixExpression, bv: LVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a unit lower-triangular matrix.
+# 
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstLMatrixExpression, bm: LMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where <em>l</em> is a unit lower-triangular matrix (1 on the diagonal).
+# 
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstULMatrixExpression, bv: ULVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where <em>l</em> is a unit lower-triangular matrix.
+# 
+# \param l The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitLower(l: ConstULMatrixExpression, bm: ULMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is a unit upper-triangular matrix (1 on the diagonal).
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstDMatrixExpression, bv: DVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is a unit upper-triangular matrix.
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstDMatrixExpression, bm: DMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is a unit upper-triangular matrix (1 on the diagonal).
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstFMatrixExpression, bv: FVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is a unit upper-triangular matrix.
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstFMatrixExpression, bm: FMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is a unit upper-triangular matrix (1 on the diagonal).
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstLMatrixExpression, bv: LVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is a unit upper-triangular matrix.
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstLMatrixExpression, bm: LMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is a unit upper-triangular matrix (1 on the diagonal).
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bv The right-hand side vector, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstULMatrixExpression, bv: ULVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is a unit upper-triangular matrix.
+# 
+# \param u The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square or dimensions do not match.
+# 
+def solveUnitUpper(u: ConstULMatrixExpression, bm: ULMatrixExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is an upper-triangular matrix.
+# 
+# \param u The upper-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstDMatrixExpression, e2: DMatrixExpression) -> bool: pass
+def solveUpper(u: ConstDMatrixExpression, bv: DVectorExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is an upper-triangular matrix.
 # 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param u The upper-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstFMatrixExpression, e2: FVectorExpression) -> bool: pass
+def solveUpper(u: ConstDMatrixExpression, bm: DMatrixExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is an upper-triangular matrix.
 # 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param u The upper-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstFMatrixExpression, e2: FMatrixExpression) -> bool: pass
+def solveUpper(u: ConstFMatrixExpression, bv: FVectorExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is an upper-triangular matrix.
 # 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param u The upper-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstLMatrixExpression, e2: LVectorExpression) -> bool: pass
+def solveUpper(u: ConstFMatrixExpression, bm: FMatrixExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is an upper-triangular matrix.
 # 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param u The upper-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstLMatrixExpression, e2: LMatrixExpression) -> bool: pass
+def solveUpper(u: ConstLMatrixExpression, bv: LVectorExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is an upper-triangular matrix.
 # 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param u The upper-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstULMatrixExpression, e2: ULVectorExpression) -> bool: pass
+def solveUpper(u: ConstLMatrixExpression, bm: LMatrixExpression) -> bool: pass
 
 ##
-# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>e1</em> is an upper-triangular matrix.
+# \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where <em>u</em> is an upper-triangular matrix.
 # 
-# \param e1 The upper-triangular coefficient matrix.
-# \param e2 The right-hand side matrix, overwritten with the solution.
+# \param u The upper-triangular coefficient matrix.
+# \param bv The right-hand side vector, overwritten with the solution.
 # 
 # \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
 # 
-def solveUpper(e1: ConstULMatrixExpression, e2: ULMatrixExpression) -> bool: pass
+def solveUpper(u: ConstULMatrixExpression, bv: ULVectorExpression) -> bool: pass
+
+##
+# \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where <em>u</em> is an upper-triangular matrix.
+# 
+# \param u The upper-triangular coefficient matrix.
+# \param bm The right-hand side matrix, overwritten with the solution.
+# 
+# \return <tt>True</tt> if the substitution succeeded, and <tt>False</tt> if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+# 
+def solveUpper(u: ConstULMatrixExpression, bm: ULMatrixExpression) -> bool: pass
 
 ##
 # \brief Returns the sum of all elements of the grid expression <em>ge</em>.
@@ -4300,152 +4300,136 @@ def svDecompose(a: LMatrixExpression, w: LVectorExpression, v: LMatrixExpression
 def svDecompose(a: ULMatrixExpression, w: ULVectorExpression, v: ULMatrixExpression, max_iter: int = 0) -> bool: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
 def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstDMatrixExpression, b: ConstDVectorExpression, x: DVectorExpression) -> None: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
 def svSubstitute(u: ConstDMatrixExpression, w: ConstDVectorExpression, v: ConstDMatrixExpression, b: ConstDMatrixExpression, x: DMatrixExpression) -> None: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
 def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstFMatrixExpression, b: ConstFVectorExpression, x: FVectorExpression) -> None: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
 def svSubstitute(u: ConstFMatrixExpression, w: ConstFVectorExpression, v: ConstFMatrixExpression, b: ConstFMatrixExpression, x: FMatrixExpression) -> None: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
 def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstLMatrixExpression, b: ConstLVectorExpression, x: LVectorExpression) -> None: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
 def svSubstitute(u: ConstLMatrixExpression, w: ConstLVectorExpression, v: ConstLMatrixExpression, b: ConstLMatrixExpression, x: LMatrixExpression) -> None: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
 def svSubstitute(u: ConstULMatrixExpression, w: ConstULVectorExpression, v: ConstULMatrixExpression, b: ConstULVectorExpression, x: ULVectorExpression) -> None: pass
 
 ##
-# \brief Solves \f$ A \cdot X = B \f$ for a matrix \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
+# \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$ is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 # 
-# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$ is given by <em>b</em>, and <em>x</em> is the \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
+# The \f$ M \times N \f$-dimensional matrix \f$ A \f$ is specified by its singular value decomposition \f$ A = UWV^T \f$, where \f$ U \f$ is given by the \f$ M \times N \f$-dimensional matrix <em>u</em>, \f$ W \f$ by the \f$ N \f$-dimensional vector <em>w</em>, and \f$ V \f$ is provided by the \f$ N \times N \f$-dimensional matrix <em>v</em>. The right-hand side vector \f$ B \f$ is given by the \f$ M \f$-dimensional vector <em>b</em>, and <em>x</em> is the \f$ N \f$-dimensional output solution vector \f$ X \f$. No input quantities are destroyed, so the routine may be called sequentially with different arguments <em>b</em>. For implementation details see [\ref NRIC].
 # 
 # \param u The \f$ M \times N \f$-dimensional matrix \f$ U \f$.
 # \param w The \f$ N \f$-dimensional vector \f$ W \f$ holding the singular values of \f$ A \f$.
 # \param v The \f$ N \times N \f$-dimensional matrix \f$ V \f$.
-# \param b The \f$ M  \times P \f$-dimensional right-hand side matrix \f$ B \f$.
-# \param x The \f$ N \times P \f$-dimensional output solution matrix \f$ X \f$.
+# \param b The \f$ M \f$-dimensional right-hand side vector \f$ B \f$.
+# \param x The \f$ N \f$-dimensional output solution vector \f$ X \f$.
 # 
-# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize1() == u.getSize2()</tt> and <tt>b.getSize1() == u.getSize1() && b.getSize2() == x.getSize2()</tt>. 
-# 
-# \throw Base.SizeError if preconditions are violated.
+# \pre <tt>w.getSize() == u.getSize2()</tt>, <tt>v.getSize1() == u.getSize2() && v.getSize2() == u.getSize2()</tt>, <tt>x.getSize() == u.getSize2())</tt> and <tt>b.getSize() == u.getSize1()</tt>. 
 # 
 # \see svDecomposition()
 # 
@@ -4560,162 +4544,130 @@ def trans(me: LMatrixExpression) -> LMatrixTranspose: pass
 def trans(me: ULMatrixExpression) -> ULMatrixTranspose: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2DArray, xform: Matrix2D) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2DArray, xform: Matrix3D) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2FArray, xform: Matrix2F) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2FArray, xform: Matrix3F) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2LArray, xform: Matrix2L) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2LArray, xform: Matrix3L) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2ULArray, xform: Matrix2UL) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector2ULArray, xform: Matrix3UL) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3DArray, xform: Matrix3D) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3DArray, xform: Matrix4D) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3FArray, xform: Matrix3F) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3FArray, xform: Matrix4F) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3LArray, xform: Matrix3L) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3LArray, xform: Matrix4L) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3ULArray, xform: Matrix3UL) -> None: pass
 
 ##
-# \brief Transforms each vector in the array with the homogeneous transformation matrix <em>xform</em>.
+# \brief Transforms each vector in the array with the transformation matrix <em>xform</em>.
 # 
 # \param va The vectors to transform.
 # \param xform The transformation matrix.
-# 
-# \note The missing vector element is taken to be <em>1</em>.
 # 
 def transform(va: Vector3ULArray, xform: Matrix4UL) -> None: pass
 

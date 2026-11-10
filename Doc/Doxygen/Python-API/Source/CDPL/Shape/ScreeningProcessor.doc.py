@@ -65,7 +65,7 @@ class ScreeningProcessor(Boost.Python.instance):
     def getHitCallback() -> VoidMolecularGraph2AlignmentResultFunctor: pass
 
     ##
-    # \brief Returns the current screening settings (mutable).
+    # \brief Returns the current screening settings.
     # 
     # \return The screening settings.
     # 

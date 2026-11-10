@@ -167,7 +167,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
     # 
-    # \note The order of incident bonds corresponds to the order of connected atoms.
+    # \note The order of incident bonds corresponds to the order of the connected atoms.
     # 
     def getBond(idx: int) -> Bond: pass
 

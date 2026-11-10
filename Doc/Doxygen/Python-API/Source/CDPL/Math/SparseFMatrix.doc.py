@@ -202,7 +202,7 @@ class SparseFMatrix(Boost.Python.instance):
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The stored value, or to the zero element if no entry exists at (<em>i</em>, <em>j</em>). 
+    # \return The stored value, or the zero element if no entry exists. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -237,7 +237,7 @@ class SparseFMatrix(Boost.Python.instance):
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The stored value, or to the zero element if no entry exists at (<em>i</em>, <em>j</em>). 
+    # \return The stored value, or the zero element if no entry exists. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 
@@ -249,7 +249,7 @@ class SparseFMatrix(Boost.Python.instance):
     # \param i The zero-based row index.
     # \param j The zero-based column index.
     # 
-    # \return The stored value, or to the zero element if no entry exists at (<em>i</em>, <em>j</em>). 
+    # \return The stored value, or the zero element if no entry exists. 
     # 
     # \throw Base.IndexError if either index is out of range.
     # 

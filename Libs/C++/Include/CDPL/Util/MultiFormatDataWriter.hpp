@@ -70,13 +70,13 @@ namespace CDPL
                                   std::ios_base::trunc | std::ios_base::binary);
 
             /**
-             * \brief Constructs a \c %MultiFormatDataWriter that opens \a file_name and uses the output handler matching the file-extension/format name \a fmt.
+             * \brief Constructs a \c %MultiFormatDataWriter that opens \a file_name and uses the output handler matching the file-extension/format name \a fmt_str.
              * \param file_name The output-file name.
-             * \param fmt A file-extension or format name resolvable via Base::DataIOManager.
+             * \param fmt_str A file-extension or format name resolvable via Base::DataIOManager.
              * \param mode The open mode of the underlying file stream.
              * \throw Base::IOError if no matching output handler was found.
              */
-            MultiFormatDataWriter(const std::string& file_name, const std::string& fmt,
+            MultiFormatDataWriter(const std::string& file_name, const std::string& fmt_str,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::out |
                                   std::ios_base::trunc | std::ios_base::binary);
 
@@ -92,12 +92,12 @@ namespace CDPL
                                   std::ios_base::trunc | std::ios_base::binary);
 
             /**
-             * \brief Constructs a \c %MultiFormatDataWriter that wraps \a ios and uses the output handler matching the file-extension/format name \a fmt.
+             * \brief Constructs a \c %MultiFormatDataWriter that wraps \a ios and uses the output handler matching the file-extension/format name \a fmt_str.
              * \param ios The output stream to wrap.
-             * \param fmt A file-extension or format name resolvable via Base::DataIOManager.
+             * \param fmt_str A file-extension or format name resolvable via Base::DataIOManager.
              * \throw Base::IOError if no matching output handler was found.
              */
-            MultiFormatDataWriter(std::iostream& ios, const std::string& fmt);
+            MultiFormatDataWriter(std::iostream& ios, const std::string& fmt_str);
 
             /**
              * \brief Constructs a \c %MultiFormatDataWriter that wraps \a ios and uses the output handler matching the Base::DataFormat \a fmt.

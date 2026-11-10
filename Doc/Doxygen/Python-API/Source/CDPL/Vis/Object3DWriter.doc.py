@@ -36,10 +36,10 @@ class Object3DWriter(Object3DWriterBase):
     ##
     # \brief Contructs the \c Object3DWriter instance.
     # \param file_name 
-    # \param fmt 
+    # \param fmt_str 
     # \param mode 
     # 
-    def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
+    def __init__(file_name: str, fmt_str: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
 
     ##
     # \brief Contructs the \c Object3DWriter instance.
@@ -52,9 +52,9 @@ class Object3DWriter(Object3DWriterBase):
     ##
     # \brief Contructs the \c Object3DWriter instance.
     # \param ios 
-    # \param fmt 
+    # \param fmt_str 
     # 
-    def __init__(ios: Base.IOStream, fmt: str) -> None: pass
+    def __init__(ios: Base.IOStream, fmt_str: str) -> None: pass
 
     ##
     # \brief Contructs the \c Object3DWriter instance.

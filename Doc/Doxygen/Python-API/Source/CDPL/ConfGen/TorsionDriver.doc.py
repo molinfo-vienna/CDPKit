@@ -42,7 +42,7 @@ class TorsionDriver(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the current driver settings (mutable).
+    # \brief Returns the current driver settings.
     # 
     # \return The settings.
     # 
@@ -107,7 +107,7 @@ class TorsionDriver(Boost.Python.instance):
     def addInputCoordinates(coords: Math.Vector3DArray, frag_idx: int) -> None: pass
 
     ##
-    # \brief Adds the conformer data shared reference <em>conf_data</em> as a new starting conformation restricted to the fragment at index <em>frag_idx</em>.
+    # \brief Adds the conformer data <em>conf_data</em> as a new starting conformation restricted to the fragment at index <em>frag_idx</em>.
     # 
     # \param conf_data The input conformer data.
     # \param frag_idx The zero-based fragment index.

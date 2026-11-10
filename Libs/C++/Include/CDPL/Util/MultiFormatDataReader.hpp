@@ -72,13 +72,13 @@ namespace CDPL
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
             /**
-             * \brief Constructs a reader for the file \a file_name using the format identified by the string \a fmt.
+             * \brief Constructs a reader for the file \a file_name using the format identified by the string \a fmt_str.
              * \param file_name The path of the input file.
-             * \param fmt The format identifier (e.g. the file extension associated with the format).
+             * \param fmt_str The format identifier (e.g. the file extension associated with the format).
              * \param mode The flags specifying the file open mode.
              * \throw Base::IOError if no input handler for \a fmt is registered.
              */
-            MultiFormatDataReader(const std::string& file_name, const std::string& fmt,
+            MultiFormatDataReader(const std::string& file_name, const std::string& fmt_str,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
             /**
@@ -92,12 +92,12 @@ namespace CDPL
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
             /**
-             * \brief Constructs a reader for the input stream \a is using the format identified by the string \a fmt.
+             * \brief Constructs a reader for the input stream \a is using the format identified by the string \a fmt_str.
              * \param is The input stream providing the data.
-             * \param fmt The format identifier (e.g. the file extension associated with the format).
+             * \param fmt_str The format identifier (e.g. the file extension associated with the format).
              * \throw Base::IOError if no input handler for \a fmt is registered.
              */
-            MultiFormatDataReader(std::istream& is, const std::string& fmt);
+            MultiFormatDataReader(std::istream& is, const std::string& fmt_str);
 
             /**
              * \brief Constructs a reader for the input stream \a is using the format described by \a fmt.

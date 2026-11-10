@@ -35,15 +35,15 @@ class ReactionReader(ReactionReaderBase):
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Constructs a reader for the file <em>file_name</em> using the format described by <em>fmt</em>.
+    # \brief Constructs a reader for the file <em>file_name</em> using the format identified by the string <em>fmt_str</em>.
     # 
     # \param file_name The path of the input file.
-    # \param fmt The Base.DataFormat instance describing the format.
+    # \param fmt_str The format identifier (e.g. the file extension associated with the format).
     # \param mode The flags specifying the file open mode.
     # 
     # \throw Base.IOError if no input handler for <em>fmt</em> is registered.
     # 
-    def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
+    def __init__(file_name: str, fmt_str: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
     # \brief Constructs a reader for the file <em>file_name</em> using the format described by <em>fmt</em>.
@@ -57,14 +57,14 @@ class ReactionReader(ReactionReaderBase):
     def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Constructs a reader for the input stream <em>is</em> using the format described by <em>fmt</em>.
+    # \brief Constructs a reader for the input stream <em>is</em> using the format identified by the string <em>fmt_str</em>.
     # 
     # \param is The input stream providing the data.
-    # \param fmt The Base.DataFormat instance describing the format.
+    # \param fmt_str The format identifier (e.g. the file extension associated with the format).
     # 
     # \throw Base.IOError if no input handler for <em>fmt</em> is registered.
     # 
-    def __init__(is: Base.IStream, fmt: str) -> None: pass
+    def __init__(is: Base.IStream, fmt_str: str) -> None: pass
 
     ##
     # \brief Constructs a reader for the input stream <em>is</em> using the format described by <em>fmt</em>.

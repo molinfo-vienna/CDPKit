@@ -71,7 +71,7 @@ class GaussianShapeGenerator(Boost.Python.instance):
     def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
 
     ##
-    # \brief Returns the built-in default pharmacophore generator (mutable).
+    # \brief Returns the built-in default pharmacophore generator.
     # 
     # \return The default pharmacophore generator.
     # 

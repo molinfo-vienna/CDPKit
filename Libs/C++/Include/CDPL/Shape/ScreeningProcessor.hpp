@@ -125,7 +125,7 @@ namespace CDPL
             const ScreeningSettings& getSettings() const;
 
             /**
-             * \brief Returns the current screening settings (mutable).
+             * \brief Returns the current screening settings.
              * \return A reference to the screening settings.
              */
             ScreeningSettings& getSettings();

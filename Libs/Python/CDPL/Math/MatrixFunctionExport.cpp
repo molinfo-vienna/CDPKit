@@ -631,43 +631,43 @@ void CDPLPythonMath::exportMatrixFunctions()
     python::def("svSubstitute", &svSubstitute2<unsigned long>, 
                 (python::arg("u"), python::arg("w"), python::arg("v"), python::arg("b"),  python::arg("x")));
 
-    python::def("solveLower", &solveLower1<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveLower", &solveLower1<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveLower", &solveLower1<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveLower", &solveLower1<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveLower", &solveLower1<float>, (python::arg("l"), python::arg("bv")));
+    python::def("solveLower", &solveLower1<double>, (python::arg("l"), python::arg("bv")));
+    python::def("solveLower", &solveLower1<long>, (python::arg("l"), python::arg("bv")));
+    python::def("solveLower", &solveLower1<unsigned long>, (python::arg("l"), python::arg("bv")));
 
-    python::def("solveLower", &solveLower2<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveLower", &solveLower2<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveLower", &solveLower2<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveLower", &solveLower2<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveLower", &solveLower2<float>, (python::arg("l"), python::arg("bm")));
+    python::def("solveLower", &solveLower2<double>, (python::arg("l"), python::arg("bm")));
+    python::def("solveLower", &solveLower2<long>, (python::arg("l"), python::arg("bm")));
+    python::def("solveLower", &solveLower2<unsigned long>, (python::arg("l"), python::arg("bm")));
 
-    python::def("solveUnitLower", &solveUnitLower1<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitLower", &solveUnitLower1<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitLower", &solveUnitLower1<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitLower", &solveUnitLower1<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveUnitLower", &solveUnitLower1<float>, (python::arg("l"), python::arg("bv")));
+    python::def("solveUnitLower", &solveUnitLower1<double>, (python::arg("l"), python::arg("bv")));
+    python::def("solveUnitLower", &solveUnitLower1<long>, (python::arg("l"), python::arg("bv")));
+    python::def("solveUnitLower", &solveUnitLower1<unsigned long>, (python::arg("l"), python::arg("bv")));
 
-    python::def("solveUnitLower", &solveUnitLower2<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitLower", &solveUnitLower2<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitLower", &solveUnitLower2<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitLower", &solveUnitLower2<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveUnitLower", &solveUnitLower2<float>, (python::arg("l"), python::arg("bm")));
+    python::def("solveUnitLower", &solveUnitLower2<double>, (python::arg("l"), python::arg("bm")));
+    python::def("solveUnitLower", &solveUnitLower2<long>, (python::arg("l"), python::arg("bm")));
+    python::def("solveUnitLower", &solveUnitLower2<unsigned long>, (python::arg("l"), python::arg("bm")));
 
-    python::def("solveUpper", &solveUpper1<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUpper", &solveUpper1<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUpper", &solveUpper1<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUpper", &solveUpper1<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveUpper", &solveUpper1<float>, (python::arg("u"), python::arg("bv")));
+    python::def("solveUpper", &solveUpper1<double>, (python::arg("u"), python::arg("bv")));
+    python::def("solveUpper", &solveUpper1<long>, (python::arg("u"), python::arg("bv")));
+    python::def("solveUpper", &solveUpper1<unsigned long>, (python::arg("u"), python::arg("bv")));
 
-    python::def("solveUpper", &solveUpper2<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUpper", &solveUpper2<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUpper", &solveUpper2<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUpper", &solveUpper2<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveUpper", &solveUpper2<float>, (python::arg("u"), python::arg("bm")));
+    python::def("solveUpper", &solveUpper2<double>, (python::arg("u"), python::arg("bm")));
+    python::def("solveUpper", &solveUpper2<long>, (python::arg("u"), python::arg("bm")));
+    python::def("solveUpper", &solveUpper2<unsigned long>, (python::arg("u"), python::arg("bm")));
 
-    python::def("solveUnitUpper", &solveUnitUpper1<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitUpper", &solveUnitUpper1<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitUpper", &solveUnitUpper1<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitUpper", &solveUnitUpper1<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveUnitUpper", &solveUnitUpper1<float>, (python::arg("u"), python::arg("bv")));
+    python::def("solveUnitUpper", &solveUnitUpper1<double>, (python::arg("u"), python::arg("bv")));
+    python::def("solveUnitUpper", &solveUnitUpper1<long>, (python::arg("u"), python::arg("bv")));
+    python::def("solveUnitUpper", &solveUnitUpper1<unsigned long>, (python::arg("u"), python::arg("bv")));
 
-    python::def("solveUnitUpper", &solveUnitUpper2<float>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitUpper", &solveUnitUpper2<double>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitUpper", &solveUnitUpper2<long>, (python::arg("e1"), python::arg("e2")));
-    python::def("solveUnitUpper", &solveUnitUpper2<unsigned long>, (python::arg("e1"), python::arg("e2")));
+    python::def("solveUnitUpper", &solveUnitUpper2<float>, (python::arg("u"), python::arg("bm")));
+    python::def("solveUnitUpper", &solveUnitUpper2<double>, (python::arg("u"), python::arg("bm")));
+    python::def("solveUnitUpper", &solveUnitUpper2<long>, (python::arg("u"), python::arg("bm")));
+    python::def("solveUnitUpper", &solveUnitUpper2<unsigned long>, (python::arg("u"), python::arg("bm")));
 }

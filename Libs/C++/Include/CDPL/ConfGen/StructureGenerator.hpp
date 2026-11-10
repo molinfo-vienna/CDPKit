@@ -85,7 +85,7 @@ namespace CDPL
             const StructureGeneratorSettings& getSettings() const;
 
             /**
-             * \brief Returns the current generator settings (mutable).
+             * \brief Returns the current generator settings.
              * \return A reference to the settings.
              */
             StructureGeneratorSettings& getSettings();

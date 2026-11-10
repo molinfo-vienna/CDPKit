@@ -185,11 +185,9 @@ class ResidueDictionary(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Adds (or overwrites) the dictionary entry <em>entry</em> by moving its data.
+    # \brief Adds (or overwrites) the dictionary entry <em>entry</em>.
     # 
     # \param entry The entry to add.
-    # 
-    # \since 1.2
     # 
     def addEntry(entry: Entry) -> None: pass
 

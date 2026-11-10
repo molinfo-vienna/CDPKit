@@ -97,7 +97,7 @@ namespace CDPL
             const TorsionDriverSettings& getSettings() const;
 
             /**
-             * \brief Returns the current driver settings (mutable).
+             * \brief Returns the current driver settings.
              * \return A reference to the settings.
              */
             TorsionDriverSettings& getSettings();

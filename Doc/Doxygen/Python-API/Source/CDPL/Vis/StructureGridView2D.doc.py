@@ -242,7 +242,7 @@ class StructureGridView2D(View2D):
     ##
     # \brief Returns the Cell instance storing the contents of the specified grid cell.
     # 
-    # If <em>row</em> and <em>col</em> specify a cell outside of the current grid bounds the grid will <em>not</em> be automatically resized to accommodate the new cell. For such cells a reference to an "empty" Cell instance is returned. The same is done for not yet touched cells (within the current grid bounds).
+    # If <em>row</em> and <em>col</em> specify a cell outside of the current grid bounds the grid will be automatically resized to accommodate the new cell.
     # 
     # \param row The zero-based row index of the cell.
     # \param col The zero-based columns index of the cell.

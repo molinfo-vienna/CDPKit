@@ -124,11 +124,9 @@ class MatchConstraint(Boost.Python.instance):
     def setRelation(rel: Relation) -> None: pass
 
     ##
-    # \brief Returns the value of the query attribute of type <em>T</em>.
+    # \brief Returns the value of the query attribute.
     # 
-    # \return The value of the stored query attribute. 
-    # 
-    # \throw Base.BadCast if the stored <tt>Any</tt> instance is empty, or the stored value is not of the specified type <em>T</em>.
+    # \return The value of the query attribute.
     # 
     def getValue() -> Base.Any: pass
 

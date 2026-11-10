@@ -93,19 +93,19 @@ class MMCIFData(Boost.Python.instance):
         def getValue(index: int) -> str: pass
 
         ##
-        # \brief Replaces the value at index <em>index</em> by moving <em>value</em>.
+        # \brief Replaces the value at index <em>index</em> by <em>value</em>.
         # 
         # \param index The zero-based value index.
-        # \param value The new value to move-assign.
+        # \param value The new value.
         # 
         # \throw Base.IndexError if <em>index</em> is not in the range [0, getNumValues()).
         # 
         def setValue(index: int, value: str) -> None: pass
 
         ##
-        # \brief Appends the value <em>value</em> to the item's value list by moving.
+        # \brief Appends the value <em>value</em> to the item's value list.
         # 
-        # \param value The value to move-append.
+        # \param value The value to append.
         # 
         def addValue(value: str) -> None: pass
 
@@ -205,11 +205,11 @@ class MMCIFData(Boost.Python.instance):
         def swap(cat: Category) -> None: pass
 
         ##
-        # \brief Returns a mutable reference to the item with name <em>name</em>, or <tt>None</tt> if no matching item exists.
+        # \brief Returns the item with name <em>name</em>, or <tt>None</tt> if no matching item exists.
         # 
         # \param name The data item name.
         # 
-        # \return A mutable reference to the matching item, or <tt>None</tt>.
+        # \return The matching item, or <tt>None</tt>.
         # 
         def findItem(name: str) -> Item: pass
 
@@ -220,7 +220,7 @@ class MMCIFData(Boost.Python.instance):
         # 
         # \param name The data item name.
         # 
-        # \return A mutable reference to the added (or pre-existing) item.
+        # \return The added (or pre-existing) item.
         # 
         def addItem(name: str) -> Item: pass
 
@@ -366,11 +366,11 @@ class MMCIFData(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Returns a mutable reference to the category with name <em>name</em>, or <tt>None</tt> if no matching category exists.
+    # \brief Returns the category with name <em>name</em>, or <tt>None</tt> if no matching category exists.
     # 
     # \param name The <em>mmCIF</em> category name (without the leading underscore!).
     # 
-    # \return A mutable reference to the matching category, or <tt>None</tt>.
+    # \return The matching category, or <tt>None</tt>.
     # 
     def findCategory(name: str) -> Category: pass
 
@@ -382,7 +382,7 @@ class MMCIFData(Boost.Python.instance):
     # \param name The <em>mmCIF</em> category name (without the leading underscore!).
     # \param front If <tt>True</tt>, the new category is inserted at the front of the category list. If <tt>False</tt>, it is appended.
     # 
-    # \return A mutable reference to the added (or pre-existing) category.
+    # \return The added (or pre-existing) category.
     # 
     def addCategory(name: str, front: bool = False) -> Category: pass
 
@@ -409,9 +409,9 @@ class MMCIFData(Boost.Python.instance):
     def getCategory(index: int) -> Category: pass
 
     ##
-    # \brief Returns a mutable reference to the last category of the data record.
+    # \brief Returns the last category of the data record.
     # 
-    # \return A mutable reference to the last category. 
+    # \return The last category. 
     # 
     # \throw Base.OperationFailed if the data record is empty.
     # 

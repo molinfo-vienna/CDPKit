@@ -100,7 +100,7 @@ class FRealQuaternion(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Assigns the real component from <em>q</em> (possibly converting the component type).
+    # \brief Copy-assigns the real component from <em>q</em>.
     # 
     # \param q The source real quaternion.
     # 

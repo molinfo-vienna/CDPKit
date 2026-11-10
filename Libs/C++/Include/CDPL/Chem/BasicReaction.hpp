@@ -258,7 +258,7 @@ namespace CDPL
             ConstComponentIterator getProductsEnd() const;
             ComponentIterator      getProductsEnd();
 
-            /**
+            /*
              * \brief Returns a \c const reference to the reactant at index \a idx.
              * \param idx The zero-based reactant index.
              * \return A \c const reference to the reactant molecule.
@@ -266,7 +266,7 @@ namespace CDPL
              */
             const BasicMolecule& getReactant(std::size_t idx) const;
 
-            /**
+            /*
              * \brief Returns a mutable reference to the reactant at index \a idx.
              * \param idx The zero-based reactant index.
              * \return A mutable reference to the reactant molecule.
@@ -274,7 +274,7 @@ namespace CDPL
              */
             BasicMolecule&       getReactant(std::size_t idx);
 
-            /**
+            /*
              * \brief Returns a \c const reference to the agent at index \a idx.
              * \param idx The zero-based agent index.
              * \return A \c const reference to the agent molecule.
@@ -282,7 +282,7 @@ namespace CDPL
              */
             const BasicMolecule& getAgent(std::size_t idx) const;
 
-            /**
+            /*
              * \brief Returns a mutable reference to the agent at index \a idx.
              * \param idx The zero-based agent index.
              * \return A mutable reference to the agent molecule.
@@ -290,7 +290,7 @@ namespace CDPL
              */
             BasicMolecule&       getAgent(std::size_t idx);
 
-            /**
+            /*
              * \brief Returns a \c const reference to the product at index \a idx.
              * \param idx The zero-based product index.
              * \return A \c const reference to the product molecule.
@@ -298,7 +298,7 @@ namespace CDPL
              */
             const BasicMolecule& getProduct(std::size_t idx) const;
 
-            /**
+            /*
              * \brief Returns a mutable reference to the product at index \a idx.
              * \param idx The zero-based product index.
              * \return A mutable reference to the product molecule.
@@ -306,43 +306,43 @@ namespace CDPL
              */
             BasicMolecule&       getProduct(std::size_t idx);
 
-            /**
+            /*
              * \brief Removes the reactant at index \a idx.
              * \param idx The zero-based reactant index.
              * \throw Base::IndexError if \a idx is not less than getNumReactants().
              */
             void removeReactant(std::size_t idx);
 
-            /**
+            /*
              * \brief Removes the agent at index \a idx.
              * \param idx The zero-based agent index.
              * \throw Base::IndexError if \a idx is not less than getNumAgents().
              */
             void removeAgent(std::size_t idx);
 
-            /**
+            /*
              * \brief Removes the product at index \a idx.
              * \param idx The zero-based product index.
              * \throw Base::IndexError if \a idx is not less than getNumProducts().
              */
             void removeProduct(std::size_t idx);
 
-            /**
+            /*
              * \brief Removes all reactants from the reaction.
              */
             void removeReactants();
 
-            /**
+            /*
              * \brief Removes all agents from the reaction.
              */
             void removeAgents();
 
-            /**
+            /*
              * \brief Removes all products from the reaction.
              */
             void removeProducts();
 
-            /**
+            /*
              * \brief Creates a new reaction component with the supplied \a role, optionally copying the contents of \a mol.
              * \param role The Chem::ReactionRole flag indicating where the new component is inserted (REACTANT, AGENT, or PRODUCT).
              * \param mol The molecule whose contents are copied into the new component, or \c nullptr to create an empty component.
@@ -350,39 +350,39 @@ namespace CDPL
              */
             BasicMolecule& addComponent(unsigned int role, const Molecule* mol);
 
-            /**
+            /*
              * \brief Creates a new reactant component, optionally copying the contents of \a mol.
              * \param mol The molecule whose contents are copied into the new reactant, or \c nullptr to create an empty reactant.
              * \return A reference to the newly added reactant.
              */
             BasicMolecule& addReactant(const Molecule* mol);
 
-            /**
+            /*
              * \brief Creates a new agent component, optionally copying the contents of \a mol.
              * \param mol The molecule whose contents are copied into the new agent, or \c nullptr to create an empty agent.
              * \return A reference to the newly added agent.
              */
             BasicMolecule& addAgent(const Molecule* mol);
 
-            /**
+            /*
              * \brief Creates a new product component, optionally copying the contents of \a mol.
              * \param mol The molecule whose contents are copied into the new product, or \c nullptr to create an empty product.
              * \return A reference to the newly added product.
              */
             BasicMolecule& addProduct(const Molecule* mol);
 
-            /**
+            /*
              * \brief Removes all reactant, agent, and product components from the reaction.
              */
             void clearComponents();
 
-            /**
+            /*
              * \brief Replaces the current reactants, agents, and products by deep copies of those in \a rxn.
              * \param rxn The source reaction.
              */
             void copyComponents(const BasicReaction& rxn);
 
-            /**
+            /*
              * \brief Replaces the current reactants, agents, and products by deep copies of those in \a rxn.
              * \param rxn The source reaction.
              */

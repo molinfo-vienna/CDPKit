@@ -78,15 +78,13 @@ class FeatureMapping(Boost.Python.instance):
     ##
     # \brief Returns the first value associated with the specified key.
     # 
-    # If the map contains the specified entry, the associated value is returned. If the map does not contain the entry and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a reference to a default constructed value object is returned. Otherwise, Base.ItemNotFound is thrown to indicate the error.
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error.
     # 
     # \param key The key associated with the requested value.
     # 
     # \return The requested value. 
     # 
     # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
-    # 
-    # \see getValue(const Key&) const
     # 
     def getValue(key: Feature) -> Feature: pass
 
@@ -173,7 +171,7 @@ class FeatureMapping(Boost.Python.instance):
     ##
     # \brief Returns the first value associated with the specified key.
     # 
-    # The method is equivalent to getValue(const Key&) const.
+    # The method is equivalent to getValue(const Key&).
     # 
     # \param key The key associated with the requested value.
     # 
@@ -181,7 +179,7 @@ class FeatureMapping(Boost.Python.instance):
     # 
     # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
     # 
-    # \see getValue(const Key&) const
+    # \see getValue(const Key&)
     # 
     def __getitem__(key: Feature) -> Feature: pass
 

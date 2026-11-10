@@ -55,7 +55,7 @@ namespace CDPLPythonMath
 
             python::class_<VectorType>(name, python::no_init)
                 .def(python::init<>(python::arg("self")))
-                .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<const VectorType&>((python::arg("self"), python::arg("vec"))))
                 .def(python::init<const ValueType&>((python::arg("self"), python::arg("v"))))
                 .def("clear", &VectorType::clear, (python::arg("self"), python::arg("v") = ValueType()))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())

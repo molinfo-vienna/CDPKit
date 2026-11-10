@@ -30,10 +30,10 @@ class Vector7D(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c Vector7D instance \a v.
-    # \param v The \c Vector7D instance to copy.
+    # \brief Contructs a copy of the \c Vector7D instance \a vec.
+    # \param vec The \c Vector7D instance to copy.
     # 
-    def __init__(v: Math.Vector7D) -> None: pass
+    def __init__(vec: Math.Vector7D) -> None: pass
 
     ##
     # \brief Contructs the \c Vector7D instance.

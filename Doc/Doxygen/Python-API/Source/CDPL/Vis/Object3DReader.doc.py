@@ -36,10 +36,10 @@ class Object3DReader(Object3DReaderBase):
     ##
     # \brief Contructs the \c Object3DReader instance.
     # \param file_name 
-    # \param fmt 
+    # \param fmt_str 
     # \param mode 
     # 
-    def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
+    def __init__(file_name: str, fmt_str: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
     # \brief Contructs the \c Object3DReader instance.
@@ -52,9 +52,9 @@ class Object3DReader(Object3DReaderBase):
     ##
     # \brief Contructs the \c Object3DReader instance.
     # \param is 
-    # \param fmt 
+    # \param fmt_str 
     # 
-    def __init__(is: Base.IStream, fmt: str) -> None: pass
+    def __init__(is: Base.IStream, fmt_str: str) -> None: pass
 
     ##
     # \brief Contructs the \c Object3DReader instance.

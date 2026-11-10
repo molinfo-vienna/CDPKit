@@ -227,7 +227,7 @@ namespace CDPL
             std::size_t getMacrocycleRotorBondCountThreshold() const;
 
             /**
-             * \brief Returns the embedded fragment-build settings (mutable).
+             * \brief Returns the embedded fragment-build settings.
              * \return A reference to the fragment-build settings.
              */
             FragmentConformerGeneratorSettings& getFragmentBuildSettings();

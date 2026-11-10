@@ -52,9 +52,9 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # 
     # \param atom The atom for which to return the connected neighbor atom.
     # 
-    # \return The connected neighbor atom of the argument atom. 
+    # \return The connected neighbor of the argument atom. 
     # 
-    # \throw Base.ItemNotFound if the specified atom is not involved in the bond.
+    # \throw Base.ItemNotFound if the bond is not incident to the specified atom.
     # 
     def getNeighbor(atom: Atom) -> Atom: pass
 

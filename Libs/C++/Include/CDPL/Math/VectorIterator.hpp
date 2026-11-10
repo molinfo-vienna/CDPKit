@@ -53,7 +53,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs the accessor referencing the (mutable) vector \a e.
+             * \brief Constructs the accessor referencing the vector \a e.
              * \param e The referenced vector.
              */
             VectorElementAccessor(VectorType& e):
@@ -154,7 +154,7 @@ namespace CDPL
         {
 
             /**
-             * \brief The (mutable) vector expression type being iterated.
+             * \brief The vector expression type being iterated.
              */
             typedef E                                                               VectorType;
 

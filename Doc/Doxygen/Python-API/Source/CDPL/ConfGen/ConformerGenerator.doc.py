@@ -50,7 +50,7 @@ class ConformerGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the current generator settings (mutable).
+    # \brief Returns the current generator settings.
     # 
     # \return The settings.
     # 

@@ -153,14 +153,14 @@ namespace CDPL
 
         /**
          * \brief Aligns each stored conformation of \a cntnr onto the supplied reference coordinates using
-         *        the atoms flagged in \a ref_atoms as alignment anchors.
+         *        the atoms flagged in \a ref_atom_mask as alignment anchors.
          * \param cntnr The atom container holding the conformations to be aligned.
-         * \param ref_atoms Bit mask selecting the atoms of \a cntnr used as alignment anchors.
+         * \param ref_atom_mask Bit mask selecting the atoms of \a cntnr used as alignment anchors.
          * \param ref_coords Reference 3D coordinates of the alignment-anchor atoms.
          * \return \c true if the alignment succeeded for every conformation, and \c false otherwise.
          * \since 1.1
          */
-        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, const Math::Vector3DArray& ref_coords);
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atom_mask, const Math::Vector3DArray& ref_coords);
 
         /**
          * \brief Aligns each stored conformation of \a cntnr onto the supplied reference coordinates using
@@ -175,13 +175,13 @@ namespace CDPL
 
         /**
          * \brief Aligns each stored conformation of \a cntnr to the first conformation using the atoms flagged
-         *        in \a ref_atoms as alignment anchors.
+         *        in \a ref_atom_mask as alignment anchors.
          * \param cntnr The atom container holding the conformations to be aligned.
-         * \param ref_atoms Bit mask selecting the atoms of \a cntnr used as alignment anchors.
+         * \param ref_atom_mask Bit mask selecting the atoms of \a cntnr used as alignment anchors.
          * \return \c true if the alignment succeeded for every conformation, and \c false otherwise.
          * \since 1.1
          */
-        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms);
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atom_mask);
 
         /**
          * \brief Aligns each stored conformation of \a cntnr to the first conformation using the atoms of

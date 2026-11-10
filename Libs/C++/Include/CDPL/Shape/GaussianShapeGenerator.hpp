@@ -186,7 +186,7 @@ namespace CDPL
             const Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator() const;
 
             /**
-             * \brief Returns the built-in default pharmacophore generator (mutable).
+             * \brief Returns the built-in default pharmacophore generator.
              * \return A reference to the default pharmacophore generator.
              */
             Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator();
