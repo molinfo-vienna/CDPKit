@@ -78,13 +78,13 @@ class AtomMapping(Boost.Python.instance):
     ##
     # \brief Returns the first value associated with the specified key.
     # 
-    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error.
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with \c None.
     # 
     # \param key The key associated with the requested value.
     # 
-    # \return The requested value. 
+    # \return The requested value if it exists or \c None. 
     # 
-    # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
+    # 
     # 
     def getValue(key: Atom) -> Atom: pass
 
@@ -101,9 +101,11 @@ class AtomMapping(Boost.Python.instance):
     def getValue(key: Atom, def_value: Atom) -> Atom: pass
 
     ##
-    # \brief Removes the first entry with the specified key from the map.
+    # \brief Removes the first entry with the specified key.
     # 
     # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
     # 
     def removeEntry(key: Atom) -> bool: pass
 
@@ -115,22 +117,51 @@ class AtomMapping(Boost.Python.instance):
     # \param key The key of the entries to replace.
     # \param value The value associated with <em>key</em>.
     # 
-    # \return An iterator that points to the entry with a key that is equivalent to the specified key.
+    # 
     # 
     def setEntry(key: Atom, value: Atom) -> None: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def getKeys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def keys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def getValues() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values currently mapped to the specified key.
+    # \param key The key associated with the entries of interest.
+    # \return A list containing the requested values.
+    # 
     def getValues(key: Atom) -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def values() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def getEntries() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def items() -> object: pass
 
     ##
@@ -143,7 +174,7 @@ class AtomMapping(Boost.Python.instance):
     def getNumEntries(key: Atom) -> int: pass
 
     ##
-    # \brief Removes all entries with the specified key from the map.
+    # \brief Removes all entries with the specified key.
     # 
     # \param key The key specifying the entries to remove.
     # 
@@ -152,12 +183,12 @@ class AtomMapping(Boost.Python.instance):
     def removeEntries(key: Atom) -> int: pass
 
     ##
-    # \brief Inserts a new entry with specified key and value into the map.
+    # \brief Inserts a new entry with specified key and value.
     # 
     # \param key The key of the entry to insert.
     # \param value The value associated with <em>key</em>
     # 
-    # \return An iterator pointing to the inserted entry.
+    # 
     # 
     def insertEntry(key: Atom, value: Atom) -> None: pass
 
@@ -171,26 +202,43 @@ class AtomMapping(Boost.Python.instance):
     ##
     # \brief Returns the first value associated with the specified key.
     # 
-    # The method is equivalent to getValue(const Key&).
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with \c None.
     # 
     # \param key The key associated with the requested value.
     # 
-    # \return The requested value. 
+    # \return The requested value if it exists or \c None. 
     # 
-    # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
     # 
-    # \see getValue(const Key&)
     # 
     def __getitem__(key: Atom) -> Atom: pass
 
+    ##
+    # \brief Replaces all entries with a key equivalent to <em>key</em> with a single copy of the key/value pair (<em>key</em>, <em>value</em>).
+    # 
+    # If no entries with a key equivalent to the specified key exist, <tt>setEntry(k, v)</tt> is equivalent to <tt>insertEntry(k, v)</tt>.
+    # 
+    # \param key The key of the entries to replace.
+    # \param value The value associated with <em>key</em>.
+    # 
+    # 
+    # 
     def __setitem__(key: Atom, value: Atom) -> None: pass
 
+    ##
+    # \brief Removes the first entry with the specified key.
+    # 
+    # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # 
     def __delitem__(key: Atom) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Returns the number of entries with the specified key.
+    # 
+    # \param key The key of the entries to count.
+    # 
+    # \return The number of entries with the specified key.
     # 
     def __contains__(key: Atom) -> int: pass
 

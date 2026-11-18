@@ -422,6 +422,29 @@ $$$$
        [0, getSize()] or \a end_idx < \a begin_idx.
 $$$$
 
+# ---
+
+Mapping.keys() % Histogram.keys() % Mapping.getKeys() % Histogram.getKeys() % Composition.keys() % Composition.getKeys()
+\brief Returns a list containing the keys of the current entries.
+\return A list containing the requested keys.
+$$$$
+
+Mapping.values() % Histogram.values() % Mapping.getValues() % Histogram.getValues() % Composition.values() % Composition.getValues()
+\brief Returns a list containing the values of the current entries.
+\return A list containing the requested values.
+$$$$
+
+Mapping.getValues(key)
+\brief Returns a list containing the values currently mapped to the specified key.
+\param key The key associated with the entries of interest.
+\return A list containing the requested values.
+$$$$
+
+Mapping.items() % Histogram.items() % Mapping.getEntries() % Histogram.getEntries() % Composition.items() % Composition.getEntries()
+\brief Returns a list containing the current entries as (key,value) tuples.
+\return A list containing the current entries as (key,value) tuples.
+$$$$
+
 #
 # --- Unresolved property getter/setter functions ---
 #

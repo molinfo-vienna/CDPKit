@@ -70,16 +70,40 @@ class MassComposition(Boost.Python.instance):
 
     def setEntry(key: int, value: float) -> None: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def getKeys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def keys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def getValues() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def values() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def getEntries() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def items() -> object: pass
 
     def containsEntry(key: int) -> bool: pass

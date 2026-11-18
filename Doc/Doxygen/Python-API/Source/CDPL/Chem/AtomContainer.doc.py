@@ -105,8 +105,22 @@ class AtomContainer(Entity3DContainer):
     # 
     def __contains__(atom: Atom) -> bool: pass
 
+    ##
+    # \brief Returns the atom at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the atom to return.
+    # 
+    # \return The atom at the specified index. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms()).
+    # 
     def __getitem__(idx: int) -> Atom: pass
 
+    ##
+    # \brief Returns the number of atoms.
+    # 
+    # \return The number of atoms.
+    # 
     def __len__() -> int: pass
 
     numAtoms = property(getNumAtoms)

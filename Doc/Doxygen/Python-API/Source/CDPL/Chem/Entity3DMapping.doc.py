@@ -49,10 +49,23 @@ class Entity3DMapping(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the size (number of entries) of the map.
+    # 
+    # \return The size of the map.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Tells whether the map is empty (<tt>getSize() == 0</tt>).
+    # 
+    # \return <tt>True</tt> if the map is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Erases all entries.
+    # 
     def clear() -> None: pass
 
     ##
@@ -62,46 +75,170 @@ class Entity3DMapping(Boost.Python.instance):
     # 
     def assign(map: Entity3DMapping) -> Entity3DMapping: pass
 
+    ##
+    # \brief Returns the first value associated with the specified key.
+    # 
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with \c None.
+    # 
+    # \param key The key associated with the requested value.
+    # 
+    # \return The requested value if it exists or \c None. 
+    # 
+    # 
+    # 
     def getValue(key: Entity3D) -> Entity3D: pass
 
+    ##
+    # \brief Returns the first value associated with the specified key, or the value given by the second argument if an entry with the given key does not exist.
+    # 
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry, the second argument <em>def_value</em> is returned.
+    # 
+    # \param key The key associated with the requested value.
+    # \param def_value The value which is returned if the specified entry does not exist.
+    # 
+    # \return The requested or default value.
+    # 
     def getValue(key: Entity3D, def_value: Entity3D) -> Entity3D: pass
 
+    ##
+    # \brief Removes the first entry with the specified key.
+    # 
+    # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # 
     def removeEntry(key: Entity3D) -> bool: pass
 
+    ##
+    # \brief Replaces all entries with a key equivalent to <em>key</em> with a single copy of the key/value pair (<em>key</em>, <em>value</em>).
+    # 
+    # If no entries with a key equivalent to the specified key exist, <tt>setEntry(k, v)</tt> is equivalent to <tt>insertEntry(k, v)</tt>.
+    # 
+    # \param key The key of the entries to replace.
+    # \param value The value associated with <em>key</em>.
+    # 
+    # 
+    # 
     def setEntry(key: Entity3D, value: Entity3D) -> None: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def getKeys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def keys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def getValues() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values currently mapped to the specified key.
+    # \param key The key associated with the entries of interest.
+    # \return A list containing the requested values.
+    # 
     def getValues(key: Entity3D) -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def values() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def getEntries() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def items() -> object: pass
 
+    ##
+    # \brief Returns the number of entries with the specified key.
+    # 
+    # \param key The key of the entries to count.
+    # 
+    # \return The number of entries with the specified key.
+    # 
     def getNumEntries(key: Entity3D) -> int: pass
 
+    ##
+    # \brief Removes all entries with the specified key.
+    # 
+    # \param key The key specifying the entries to remove.
+    # 
+    # \return The number of removed entries.
+    # 
     def removeEntries(key: Entity3D) -> int: pass
 
+    ##
+    # \brief Inserts a new entry with specified key and value.
+    # 
+    # \param key The key of the entry to insert.
+    # \param value The value associated with <em>key</em>
+    # 
+    # 
+    # 
     def insertEntry(key: Entity3D, value: Entity3D) -> None: pass
 
+    ##
+    # \brief Returns the size (number of entries) of the map.
+    # 
+    # \return The size of the map.
+    # 
     def __len__() -> int: pass
 
+    ##
+    # \brief Returns the first value associated with the specified key.
+    # 
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with \c None.
+    # 
+    # \param key The key associated with the requested value.
+    # 
+    # \return The requested value if it exists or \c None. 
+    # 
+    # 
+    # 
     def __getitem__(key: Entity3D) -> Entity3D: pass
 
+    ##
+    # \brief Replaces all entries with a key equivalent to <em>key</em> with a single copy of the key/value pair (<em>key</em>, <em>value</em>).
+    # 
+    # If no entries with a key equivalent to the specified key exist, <tt>setEntry(k, v)</tt> is equivalent to <tt>insertEntry(k, v)</tt>.
+    # 
+    # \param key The key of the entries to replace.
+    # \param value The value associated with <em>key</em>.
+    # 
+    # 
+    # 
     def __setitem__(key: Entity3D, value: Entity3D) -> None: pass
 
+    ##
+    # \brief Removes the first entry with the specified key.
+    # 
+    # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # 
     def __delitem__(key: Entity3D) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Returns the number of entries with the specified key.
+    # 
+    # \param key The key of the entries to count.
+    # 
+    # \return The number of entries with the specified key.
     # 
     def __contains__(key: Entity3D) -> int: pass
 

@@ -401,40 +401,41 @@ namespace CDPL
             const Value& operator[](const Key& key) const;
 
             /**
-             * \brief Removes the entry pointed to by the iterator \a it from the map.
+             * \brief Removes the entry pointed to by the iterator \a it.
              * \param it The iterator pointing to the entry to remove.
              */
             void removeEntry(const EntryIterator& it);
 
             /**
-             * \brief Removes the first entry with the specified key from the map.
+             * \brief Removes the first entry with the specified key.
              * \param key The key specifying the entry to remove.
+             * \return \c true if an entry specified by \a key existed, and \c false if not.
              */
             bool removeEntry(const Key& key);
 
             /**
-             * \brief Removes all entries pointed to by the iterators in the range <em>[first, last)</em> from the map.
+             * \brief Removes all entries pointed to by the iterators in the range <em>[first, last)</em>.
              * \param first The start of the range.
              * \param last The end of the range.
              */
             void removeEntries(const EntryIterator& first, const EntryIterator& last);
 
             /**
-             * \brief Removes all entries with the specified key from the map.
+             * \brief Removes all entries with the specified key.
              * \param key The key specifying the entries to remove.
              * \return The number of removed entries.
              */
             std::size_t removeEntries(const Key& key);
 
             /**
-             * \brief Inserts the key/value pair \a item into the map.
+             * \brief Inserts the key/value pair \a item.
              * \param item The key/value pair to insert.
              * \return An iterator pointing to the inserted entry.
              */
             EntryIterator insertEntry(const Entry& item);
 
             /**
-             * \brief Inserts a new entry with specified key and value into the map.
+             * \brief Inserts a new entry with specified key and value.
              * \param key The key of the entry to insert.
              * \param value The value associated with \a key
              * \return An iterator pointing to the inserted entry.
@@ -442,7 +443,7 @@ namespace CDPL
             EntryIterator insertEntry(const Key& key, const Value& value);
 
             /**
-             * \brief Inserts the key/value pair \a item into the map and uses the iterator \a it as
+             * \brief Inserts the key/value pair \a item and uses the iterator \a it as
              *        a hint for the insertion location.
              *
              * The return value is a dereferenceable iterator that points to the entry with a key
@@ -455,7 +456,7 @@ namespace CDPL
             EntryIterator insertEntry(const EntryIterator& it, const Entry& item);
 
             /**
-             * \brief Inserts a new entry with the specified key and value into the map
+             * \brief Inserts a new entry with the specified key and value
              *        and uses the iterator \a it as a hint for the insertion location.
              *
              * The argument \a it is a hint and points to the location where the insertion position
@@ -495,7 +496,7 @@ namespace CDPL
             EntryIterator setEntry(const Key& key, const Value& value);
 
             /**
-             * \brief Inserts the key/value pairs in the range <em>[first, last)</em> into the map.
+             * \brief Inserts the key/value pairs in the range <em>[first, last)</em>.
              *
              * This is equivalent to calling insertEntry(const Entry&) for each key/value pair \a i that
              * is pointed to by an iterator in the range <em>[first, last)</em>.

@@ -27,7 +27,7 @@
 class AtomBondMapping(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c AtomBondMapping instance.
+    # \brief Creates an empty map.
     # 
     def __init__() -> None: pass
 

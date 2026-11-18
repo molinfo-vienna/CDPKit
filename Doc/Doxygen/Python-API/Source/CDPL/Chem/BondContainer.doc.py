@@ -95,8 +95,22 @@ class BondContainer(Boost.Python.instance):
     # 
     def __contains__(bond: Bond) -> bool: pass
 
+    ##
+    # \brief Returns the bond at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the bond to return.
+    # 
+    # \return The bond at the specified index. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds()).
+    # 
     def __getitem__(idx: int) -> Bond: pass
 
+    ##
+    # \brief Returns the number of bonds.
+    # 
+    # \return The number of bonds.
+    # 
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

@@ -365,26 +365,27 @@ namespace CDPL
             const Value& operator[](const Key& key) const;
 
             /**
-             * \brief Removes the entry pointed to by the iterator \a it from the map.
+             * \brief Removes the entry pointed to by the iterator \a it.
              * \param it The iterator pointing to the entry to remove.
              */
             void removeEntry(const EntryIterator& it);
 
             /**
-             * \brief Removes the entry specified by \a key from the map.
+             * \brief Removes the entry specified by \a key.
              * \param key The key specifying the entry to remove.
+             * \return \c true if an entry specified by \a key existed, and \c false if not.
              */
             bool removeEntry(const Key& key);
 
             /**
-             * \brief Removes all entries pointed to by the iterators in the range <em>[first, last)</em> from the map.
+             * \brief Removes all entries pointed to by the iterators in the range <em>[first, last)</em>.
              * \param first The start of the range.
              * \param last The end of the range.
              */
             void removeEntries(const EntryIterator& first, const EntryIterator& last);
 
             /**
-             * \brief Tries to insert the key/value pair \a item into the map.
+             * \brief Tries to insert the key/value pair \a item.
              *
              * Inserts \a item if and only if the map does not already contain an entry whose key is
              * the same as the key of \a item. The return value is a pair \c P. \c P.first is an iterator
@@ -401,7 +402,7 @@ namespace CDPL
             std::pair<EntryIterator, bool> insertEntry(const Entry& item);
 
             /**
-             * \brief Tries to insert a new entry with specified key and value into the map.
+             * \brief Tries to insert a new entry with specified key and value.
              *
              * Inserts a new entry if and only if the map does not already contain an entry whose key is
              * the same as the specified key. The return value is a pair \c P. \c P.first is an iterator
@@ -419,7 +420,7 @@ namespace CDPL
             std::pair<EntryIterator, bool> insertEntry(const Key& key, const Value& value);
 
             /**
-             * \brief Tries to insert the key/value pair \a item into the map and uses the iterator \a it as
+             * \brief Tries to insert the key/value pair \a item and uses the iterator \a it as
              *        a hint for the insertion location.
              *
              * Inserts \a item if and only if the map does not already contain an entry whose key is
@@ -434,7 +435,7 @@ namespace CDPL
             EntryIterator insertEntry(const EntryIterator& it, const Entry& item);
 
             /**
-             * \brief Tries to insert a new entry with the specified key and value into the map
+             * \brief Tries to insert a new entry with the specified key and value
              *        and uses the iterator \a it as a hint for the insertion location.
              *
              * Inserts a new entry if and only if the map does not already contain an entry whose key is

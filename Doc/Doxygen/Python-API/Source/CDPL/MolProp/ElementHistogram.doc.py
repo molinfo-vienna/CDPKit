@@ -78,13 +78,13 @@ class ElementHistogram(Boost.Python.instance):
     ##
     # \brief Returns the value associated with the specified key.
     # 
-    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error.
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with the value \e 0.
     # 
     # \param key The key associated with the requested value.
     # 
-    # \return The requested value. 
+    # \return The requested value if it exists or \e 0. 
     # 
-    # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
+    # 
     # 
     def getValue(key: int) -> int: pass
 
@@ -101,34 +101,60 @@ class ElementHistogram(Boost.Python.instance):
     def getValue(key: int, def_value: int) -> int: pass
 
     ##
-    # \brief Removes the entry specified by <em>key</em> from the map.
+    # \brief Removes the entry specified by <em>key</em>.
     # 
     # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
     # 
     def removeEntry(key: int) -> bool: pass
 
     ##
     # \brief Inserts a new entry or updates the value of an existing entry with the specified key and value.
     # 
-    # If the map does not already contain an entry whose key is the same as <em>key</em> then a new entry will be created. Otherwise, the value of the existing entry is updated with <em>value</em>. The return value is a dereferenceable iterator that points to the newly inserted or updated entry whose key is equivalent to the specified key.
+    # If the map does not already contain an entry whose key is the same as <em>key</em> then a new entry will be created. Otherwise, the value of the existing entry is updated with <em>value</em>. 
     # 
     # \param key The key of the entry to insert or update.
     # \param value The value to be associated with <em>key</em>.
     # 
-    # \return An iterator that points to the newly inserted or updated entry.
+    # 
     # 
     def setEntry(key: int, value: int) -> None: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def getKeys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the keys of the current entries.
+    # \return A list containing the requested keys.
+    # 
     def keys() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def getValues() -> object: pass
 
+    ##
+    # \brief Returns a list containing the values of the current entries.
+    # \return A list containing the requested values.
+    # 
     def values() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def getEntries() -> object: pass
 
+    ##
+    # \brief Returns a list containing the current entries as (key,value) tuples.
+    # \return A list containing the current entries as (key,value) tuples.
+    # 
     def items() -> object: pass
 
     ##
@@ -141,14 +167,14 @@ class ElementHistogram(Boost.Python.instance):
     def containsEntry(key: int) -> bool: pass
 
     ##
-    # \brief Tries to insert a new entry with specified key and value into the map.
+    # \brief Tries to insert a new entry with specified key and value.
     # 
-    # Inserts a new entry if and only if the map does not already contain an entry whose key is the same as the specified key. The return value is a pair <tt>P</tt>. <tt>P.first</tt> is an iterator pointing to the entry whose key is the same as the specified key. <tt>P.second</tt> is a boolean value which is <tt>True</tt> if <em>item</em> was actually inserted, and <tt>False</tt> if the map already contained an entry with the specified key.
+    # Inserts a new entry if and only if the map does not already contain an entry whose key is the same as the specified key. 
     # 
     # \param key The key of the entry to insert.
     # \param value The value associated with <em>key</em>.
     # 
-    # \return A std::pair consisting of an iterator pointing to an entry whose key is the same as <em>key</em> and a boolean value, which is <tt>True</tt> if the insertion of <em>item</em> was successful (an entry with the specified key did not already exist), and <tt>False</tt> otherwise.
+    # \return \c true if a new entry was inserted, and \c false otherwise.
     # 
     def insertEntry(key: int, value: int) -> bool: pass
 
@@ -162,26 +188,43 @@ class ElementHistogram(Boost.Python.instance):
     ##
     # \brief Returns the value associated with the specified key.
     # 
-    # The method is equivalent to getValue(const Key&).
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with the value \e 0.
     # 
     # \param key The key associated with the requested value.
     # 
-    # \return The requested value. 
+    # \return The requested value if it exists or \e 0. 
     # 
-    # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
     # 
-    # \see getValue(const Key&)
     # 
     def __getitem__(key: int) -> int: pass
 
+    ##
+    # \brief Inserts a new entry or updates the value of an existing entry with the specified key and value.
+    # 
+    # If the map does not already contain an entry whose key is the same as <em>key</em> then a new entry will be created. Otherwise, the value of the existing entry is updated with <em>value</em>. 
+    # 
+    # \param key The key of the entry to insert or update.
+    # \param value The value to be associated with <em>key</em>.
+    # 
+    # 
+    # 
     def __setitem__(key: int, value: int) -> None: pass
 
+    ##
+    # \brief Removes the entry specified by <em>key</em>.
+    # 
+    # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # 
     def __delitem__(key: int) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether the map contains an entry with the specified key.
+    # 
+    # \param key The key specifying the entry.
+    # 
+    # \return <tt>True</tt> if the map contains the specified entry, and <tt>False</tt> otherwise.
     # 
     def __contains__(key: int) -> bool: pass
 

@@ -1,3 +1,44 @@
+PatternBasedTautomerizationRule.addTransformationPattern(molgraph,bond_chgs)
+\brief Registers a new transformation pattern.
+
+%Bond order changes are read from the sequence \a bond_chgs.
+Each element must be a value of type BondOrderChange that specifies the bond to change
+via the mapping IDs of the match pattern atoms.
+
+\param molgraph The match pattern specifying the substructure to transform.
+\param bond_chgs A sequence of BondOrderChange objects.
+$$$$
+
+PatternBasedTautomerizationRule.BondOrderChange.getAtom1ID()
+\brief Returns the pattern atom mapping ID of the first atom of the bond whose order changes.
+\return The pattern atom mapping ID of the first atom of the bond.
+$$$$
+
+PatternBasedTautomerizationRule.BondOrderChange.setAtom1ID(id)
+\brief Sets the pattern atom mapping ID of the first atom of the bond whose order changes.
+\param id The pattern atom mapping ID of the first atom of the bond.
+$$$$
+
+PatternBasedTautomerizationRule.BondOrderChange.getAtom2ID()
+\brief Returns the pattern atom mapping ID of the second atom of the bond whose order changes.
+\return The pattern atom mapping ID of the second atom of the bond.
+$$$$
+
+PatternBasedTautomerizationRule.BondOrderChange.setAtom2ID(id)
+\brief Sets the pattern atom mapping ID of the second atom of the bond whose order changes.
+\param id The pattern atom mapping ID of the second atom of the bond.
+$$$$
+
+PatternBasedTautomerizationRule.BondOrderChange.getOrderChange()
+\brief Returns the bond order delta applied to the matched bond.
+\return The bond order delta applied to the matched bond (positive = increase, negative = decrease).
+$$$$
+
+PatternBasedTautomerizationRule.BondOrderChange.setOrderChange(value)
+\brief Sets the bond order delta to apply to the matched bond.
+\param value The bond order delta to apply to the matched bond (positive = increase, negative = decrease).
+$$$$
+
 #
 # --- Unresolved property getter/setter functions ---
 #

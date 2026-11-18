@@ -1784,10 +1784,6 @@ FileDataWriter § FileRXNReactionWriter
 Chem.*List. § Util.Array.
 array § list
 
-Chem.AtomMapping. § Util.MultiMap.
-
-Chem.BondMapping. § Util.MultiMap.
-
 # ---
 
 Chem.AtomMatchExpression.__call__(query_atom,query_molgraph,target_atom,target_molgraph § Chem.MatchExpression.__call__(query_obj1,query_obj2,target_obj1,target_obj2
@@ -1860,6 +1856,45 @@ As soon as a pairing is found to be invalid, the current mapping solution is rej
 possible query to target graph mapping § possible query to target mapping
 pre-mapping stage of the graph matching § pre-mapping stage of the matching
 
+# --
+
+AtomContainer.__getitem__ § AtomContainer.getAtom
+
+AtomContainer.getSize § AtomContainer.getNumAtoms
+
+# --
+
+BondContainer.__getitem__ § BondContainer.getBond
+
+BondContainer.getSize § BondContainer.getNumBonds
+
+# --
+
+Chem.*Mapping.__delitem__ § Util.MultiMap.removeEntry
+
+Chem.*Mapping.__setitem__ § Util.MultiMap.setEntry
+\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+
+Chem.*Mapping.setEntry § Util.MultiMap.setEntry
+\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+
+Chem.*Mapping.insertEntry § Util.MultiMap.insertEntry
+\return An iterator pointing to the inserted entry. §
+
+Chem.*Mapping.__getitem__(key) § Util.MultiMap.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
+The requested value § The requested value if it exists or \c None 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+Chem.*Mapping.getValue(key) § Util.MultiMap.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
+The requested value § The requested value if it exists or \c None 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+Chem.*Mapping.__contains__(key) § Util.MultiMap.getNumEntries(key)
+
+Chem.*Mapping. § Util.MultiMap.
+
 #
 # --- CDPL.Pharm package ---
 #
@@ -1920,9 +1955,32 @@ Pharm.FeatureContainerWriter. § Util.MultiFormatDataWriter.
 
 Pharm.CompoundPharmacophoreReader § Util.CompoundDataReader
 
-Pharm.FeatureTypeHistogram. § Util.Map.
+# --
 
-Pharm.FeatureMapping. § Util.MultiMap.
+Pharm.*Mapping.__delitem__ § Util.MultiMap.removeEntry
+
+Pharm.*Mapping.__setitem__ § Util.MultiMap.setEntry
+\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+
+Pharm.*Mapping.setEntry § Util.MultiMap.setEntry
+\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+
+Pharm.*Mapping.insertEntry § Util.MultiMap.insertEntry
+\return An iterator pointing to the inserted entry. §
+
+Pharm.*Mapping.__getitem__(key) § Util.MultiMap.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
+The requested value § The requested value if it exists or \c None 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+Pharm.*Mapping.getValue(key) § Util.MultiMap.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
+The requested value § The requested value if it exists or \c None 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+Pharm.*Mapping.__contains__(key) § Util.MultiMap.getNumEntries(key)
+
+Pharm.*Mapping. § Util.MultiMap.
 
 #
 # --- CDPL.Grid package ---
@@ -2044,7 +2102,33 @@ Grid.FSpatial § Grid.Spatial
 #
 # --- CDPL.MolProp package ---
 #
-MolProp.ElementHistogram. § Util.Map.
+MolProp.*Histogram.__delitem__ § Util.Map.removeEntry
+
+MolProp.*Histogram.__setitem__ § Util.Map.setEntry
+\return An iterator that points to the newly inserted or updated entry. §
+The return value is a dereferenceable iterator that points to the newly inserted or updated entry whose key is equivalent to the specified key. §
+
+MolProp.*Histogram.setEntry § Util.Map.setEntry
+\return An iterator that points to the newly inserted or updated entry. §
+The return value is a dereferenceable iterator that points to the newly inserted or updated entry whose key is equivalent to the specified key. §
+
+MolProp.*Histogram.insertEntry § Util.Map.insertEntry
+The return value is a pair <tt>P</tt>. <tt>P.first</tt> is an iterator pointing to the entry whose key is the same as the specified key. <tt>P.second</tt> is a boolean value which is <tt>True</tt> if <em>item</em> was actually inserted, and <tt>False</tt> if the map already contained an entry with the specified key. §
+A std::pair consisting of an iterator pointing to an entry whose key is the same as <em>key</em> and a boolean value, which is <tt>True</tt> if the insertion of <em>item</em> was successful (an entry with the specified key did not already exist), and <tt>False</tt> otherwise. § \c true if a new entry was inserted, and \c false otherwise.
+
+MolProp.*Histogram.__getitem__(key) § Util.Map.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with the value \e 0.
+The requested value § The requested value if it exists or \e 0 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+MolProp.*Histogram.getValue(key) § Util.Map.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with the value \e 0.
+The requested value § The requested value if it exists or \e 0 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+MolProp.*Histogram.__contains__(key) § Util.Map.containsEntry(key)
+
+MolProp.*Histogram. § Util.Map.
 
 #
 # --- CDPL.ConfGen package ---

@@ -27,7 +27,7 @@
 class PatternBasedTautomerizationRule(TautomerizationRule):
 
     ##
-    # \brief Encodes a single bond order change between two pattern atoms applied when the parent transformation pattern matches.
+    # \brief Encodes a single bond order change between two pattern atoms that gets applied when the parent transformation pattern matches.
     # 
     class BondOrderChange(Boost.Python.instance):
 
@@ -61,16 +61,40 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         # 
         def getObjectID() -> int: pass
 
+        ##
+        # \brief Returns the pattern atom mapping ID of the first atom of the bond whose order changes.
+        # \return The pattern atom mapping ID of the first atom of the bond.
+        # 
         def getAtom1ID() -> int: pass
 
+        ##
+        # \brief Sets the pattern atom mapping ID of the first atom of the bond whose order changes.
+        # \param id The pattern atom mapping ID of the first atom of the bond.
+        # 
         def setAtom1ID(id: int) -> None: pass
 
+        ##
+        # \brief Returns the pattern atom mapping ID of the second atom of the bond whose order changes.
+        # \return The pattern atom mapping ID of the second atom of the bond.
+        # 
         def getAtom2ID() -> int: pass
 
+        ##
+        # \brief Sets the pattern atom mapping ID of the second atom of the bond whose order changes.
+        # \param id The pattern atom mapping ID of the second atom of the bond.
+        # 
         def setAtom2ID(id: int) -> None: pass
 
+        ##
+        # \brief Returns the bond order delta applied to the matched bond.
+        # \return The bond order delta applied to the matched bond (positive = increase, negative = decrease).
+        # 
         def getOrderChange() -> int: pass
 
+        ##
+        # \brief Sets the bond order delta to apply to the matched bond.
+        # \param value The bond order delta to apply to the matched bond (positive = increase, negative = decrease).
+        # 
         def setOrderChange(value: int) -> None: pass
 
         objectID = property(getObjectID)
@@ -94,6 +118,16 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     # 
     def __init__(rule: PatternBasedTautomerizationRule) -> None: pass
 
+    ##
+    # \brief Registers a new transformation pattern.
+    # 
+    # %Bond order changes are read from the sequence \a bond_chgs.
+    # Each element must be a value of type BondOrderChange that specifies the bond to change
+    # via the mapping IDs of the match pattern atoms.
+    # 
+    # \param molgraph The match pattern specifying the substructure to transform.
+    # \param bond_chgs A sequence of BondOrderChange objects.
+    # 
     def addTransformationPattern(molgraph: MolecularGraph, bond_chgs: object) -> None: pass
 
     ##
