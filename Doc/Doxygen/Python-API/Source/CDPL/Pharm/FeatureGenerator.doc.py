@@ -66,7 +66,7 @@ class FeatureGenerator(Boost.Python.instance):
     ##
     # \brief Creates a deep copy of the <tt>FeatureGenerator</tt> instance.
     # 
-    # \return A smart reference to the cloned feature generator.
+    # \return The cloned feature generator.
     # 
     def clone() -> FeatureGenerator: pass
 

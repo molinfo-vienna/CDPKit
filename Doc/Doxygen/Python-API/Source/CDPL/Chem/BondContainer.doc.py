@@ -89,9 +89,11 @@ class BondContainer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param bond The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether the specified bond is part of the bond sequence.
+    # 
+    # \param bond The bond to look for.
+    # 
+    # \return <tt>True</tt> if <em>bond</em> is part of the sequence, and <tt>False</tt> otherwise.
     # 
     def __contains__(bond: Bond) -> bool: pass
 

@@ -194,9 +194,11 @@ class ElectronSystem(AtomContainer):
     def connected(elec_sys: ElectronSystem, bonds: BondContainer) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param atom The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether the specified atom is part of the atom sequence.
+    # 
+    # \param atom The atom to look for.
+    # 
+    # \return <tt>True</tt> if <em>atom</em> is part of the sequence, and <tt>False</tt> otherwise.
     # 
     def __contains__(atom: Atom) -> bool: pass
 

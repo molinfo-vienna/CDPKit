@@ -27,8 +27,8 @@
 class Reaction(Base.PropertyContainer):
 
     ##
-    # \brief 
-    #
+    # \brief Mutable sequence of Chem.Molecule objects.
+    # 
     class ComponentSequence(Boost.Python.instance):
 
         ##
@@ -38,10 +38,31 @@ class Reaction(Base.PropertyContainer):
         # 
         def __contains__(mol: Molecule) -> bool: pass
 
+        ##
+        # \brief Returns the  number of reaction components.
+        # 
+        # \return The  number of reaction components.
+        # 
         def __len__() -> int: pass
 
+        ##
+        # \brief Removes the reaction component at the specified index.
+        # 
+        # \param idx The zero-based index of the component to remove.
+        # 
+        # \throw Base.IndexError if <em>idx</em> is not in the range [0, \c len(self)).
+        # 
         def __delitem__(idx: int) -> None: pass
 
+        ##
+        # \brief Returns the reaction component at index <em>idx</em>.
+        # 
+        # \param idx The zero-based index of the reaction component to return.
+        # 
+        # \return The reaction component at the specified index. 
+        # 
+        # \throw Base.IndexError if <em>idx</em> is not in the range [0, \c len(self)).
+        # 
         def __getitem__(idx: int) -> Molecule: pass
 
     ##
@@ -180,7 +201,7 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief Creates a deep copy of the current reaction state.
     # 
-    # \return A smart reference to the copy of the reaction.
+    # \return The copy of the reaction.
     # 
     def clone() -> Reaction: pass
 
@@ -202,10 +223,22 @@ class Reaction(Base.PropertyContainer):
     # 
     def assign(rxn: Reaction) -> Reaction: pass
 
+    ##
+    # \brief Returns the list of reactant components.
+    # \return The list of reactants.
+    # 
     def getReactants() -> ComponentSequence: pass
 
+    ##
+    # \brief Returns the list of agent components.
+    # \return The list of agents.
+    # 
     def getAgents() -> ComponentSequence: pass
 
+    ##
+    # \brief Returns the list of product components.
+    # \return The list of products.
+    # 
     def getProducts() -> ComponentSequence: pass
 
     ##
@@ -223,16 +256,43 @@ class Reaction(Base.PropertyContainer):
     # 
     def invokeCopyPostprocessingFunctions(src_rxn: Reaction) -> None: pass
 
+    ##
+    # \brief Returns the serialized state of the \c Reaction instance.
+    # \return The serialized state of the \c Reaction instance.
+    # 
     def __getstate__() -> tuple: pass
 
+    ##
+    # \brief Returns the value of the property specified by <em>key</em>.
+    # 
+    # If an entry for the specified property exists, the stored value will be returned. Otherwise a Base.ItemNotFound exception will be thrown.
+    # 
+    # \param key The key of the property value to return.
+    # 
+    # 
+    # \return The stored property value. 
+    # 
+    # \throw Base.ItemNotFound if an entry for the requested property value does not exist.
+    # 
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
+    ##
+    # \brief Returns the reaction component at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the reaction component to return.
+    # 
+    # \return The reaction component at the specified index. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumComponents()).
+    # 
     def __getitem__(idx: int) -> Molecule: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether or not a value has been assigned to the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property.
+    # 
+    # \return <tt>True</tt> if a value has been assigned to the specified property, and <tt>False</tt> otherwise.
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
@@ -243,12 +303,39 @@ class Reaction(Base.PropertyContainer):
     # 
     def __contains__(mol: Molecule) -> bool: pass
 
+    ##
+    # \brief Sets the value of the property specified by <em>key</em> to <em>val</em>.
+    # 
+    # If <em>val</em> is of type Base.Any and empty, i.e. the method Base.Any.isEmpty() returns <tt>True</tt>, and a property entry for <em>key</em> exists, the entry gets erased (equivalent to removeProperty() with <em>key</em> as argument).
+    # 
+    # \param key The key of the property value to assign or remove.
+    # \param val The value of the property.
+    # 
     def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
+    ##
+    # \brief Removes the entry for the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry for <em>key</em> could be found and was removed, and <tt>False</tt> otherwise.
+    # 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
+    ##
+    # \brief Removes the reaction component at the specified index.
+    # 
+    # \param idx The zero-based index of the component to remove.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumComponents()).
+    # 
     def __delitem__(idx: int) -> None: pass
 
+    ##
+    # \brief Returns the total number of reaction components.
+    # 
+    # \return The total number of reaction components.
+    # 
     def __len__() -> int: pass
 
     reactants = property(getReactants)

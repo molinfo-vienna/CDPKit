@@ -25,7 +25,7 @@
 class DataFormat(Boost.Python.instance):
 
     ##
-    # \brief Sequence of registered file extensions.
+    # \brief Mutable sequence of registered file extensions.
     # 
     class FileExtensionSequence(Boost.Python.instance):
 

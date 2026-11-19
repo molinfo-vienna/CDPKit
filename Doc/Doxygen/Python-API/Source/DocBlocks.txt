@@ -66,6 +66,11 @@ $$$$
 \param @A1@ The \c @AT1@ instance to copy.
 $$$$
 
+.__getstate__
+\brief Returns the serialized state of the \c @CN@ instance.
+\return The serialized state of the \c @CN@ instance.
+$$$$
+
 .__str__
 \brief Returns a string representation of the \c @CN@ instance.
 \param @A0@ The \c @CN@ instance this method is called upon.

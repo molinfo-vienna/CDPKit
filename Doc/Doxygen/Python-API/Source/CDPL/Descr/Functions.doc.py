@@ -24,7 +24,8 @@
 # 
 # The <em>Cosine Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \f[ S_{ab} = \frac{N_{ab}}{\sqrt{N_a \: N_b}} \f]
+# \f[   S_{ab} = \frac{N_{ab}}{\sqrt{N_a \: N_b}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set in the first bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset.
 # 
@@ -42,7 +43,8 @@ def calcCosineSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Cosine Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -58,7 +60,8 @@ def calcCosineSimilarity(v1: Math.DVector, v2: Math.DVector) -> float: pass
 # 
 # The <em>Cosine Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -74,7 +77,8 @@ def calcCosineSimilarity(v1: Math.FVector, v2: Math.FVector) -> float: pass
 # 
 # The <em>Cosine Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -90,7 +94,8 @@ def calcCosineSimilarity(v1: Math.LVector, v2: Math.LVector) -> float: pass
 # 
 # The <em>Cosine Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -106,7 +111,8 @@ def calcCosineSimilarity(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 # 
 # The <em>Dice Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \f[ S_{ab} = \frac{2 \: N_{ab}}{N_a + N_b + 2 \: N_{ab}} \f]
+# \f[   S_{ab} = \frac{2 \: N_{ab}}{N_a + N_b + 2 \: N_{ab}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset.
 # 
@@ -124,7 +130,8 @@ def calcDiceSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Euclidean Distance</em> \f$ D_{ab} \f$ is calculated by:
 # 
-# \f[ D_{ab} = \sqrt{N_a + N_b} \f]
+# \f[   D_{ab} = \sqrt{N_a + N_b}
+# \f]
 # 
 # where \f$ N_a \f$ is the number of bits that are set in the first bitset but not in the second bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset but not in the first one.
 # 
@@ -142,7 +149,8 @@ def calcEuclideanDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -158,7 +166,8 @@ def calcEuclideanDistance(v1: Math.DVector, v2: Math.DVector) -> float: pass
 # 
 # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -174,7 +183,8 @@ def calcEuclideanDistance(v1: Math.FVector, v2: Math.FVector) -> float: pass
 # 
 # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -190,7 +200,8 @@ def calcEuclideanDistance(v1: Math.LVector, v2: Math.LVector) -> float: pass
 # 
 # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -206,7 +217,8 @@ def calcEuclideanDistance(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 # 
 # The <em>Euclidean Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \f[ S_{ab} = \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}} \f]
+# \f[   S_{ab} = \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}}
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set only in the first bitset, \f$ N_b \f$ is the number of bits that are set only in the second bitset and \f$ N_{!ab} \f$ is the number of bits that are not set in both bitsets.
 # 
@@ -270,7 +282,8 @@ def calcGeometricalRadius(cntnr: Chem.Entity3DContainer) -> float: pass
 # 
 # The <em>Hamming Distance</em> \f$ D_{ab} \f$ is calculated by:
 # 
-# \f[ D_{ab} = N_a + N_b \f]
+# \f[   D_{ab} = N_a + N_b
+# \f]
 # 
 # where \f$ N_a \f$ is the number of bits that are set in the first bitset but not in the second bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset but not in the first one.
 # 
@@ -315,7 +328,8 @@ def calcKierShape3(molgraph: Chem.MolecularGraph) -> float: pass
 # 
 # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -331,7 +345,8 @@ def calcManhattanDistance(v1: Math.DVector, v2: Math.DVector) -> float: pass
 # 
 # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -347,7 +362,8 @@ def calcManhattanDistance(v1: Math.FVector, v2: Math.FVector) -> float: pass
 # 
 # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -363,7 +379,8 @@ def calcManhattanDistance(v1: Math.LVector, v2: Math.LVector) -> float: pass
 # 
 # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \f[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \f]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -379,7 +396,8 @@ def calcManhattanDistance(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 # 
 # The <em>Manhattan Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \f[ S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}} \f]
+# \f[   S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}}
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set only in the first bitset, \f$ N_b \f$ is the number of bits that are set only in the second bitset and \f$ N_{!ab} \f$ is the number of bits that are not set in both bitsets.
 # 
@@ -426,7 +444,8 @@ def calcRingComplexity(molgraph: Chem.MolecularGraph) -> float: pass
 # 
 # The <em>Tanimoto Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \f[ S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} \f]
+# \f[   S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set in the first bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset.
 # 
@@ -444,7 +463,8 @@ def calcTanimotoSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -460,7 +480,8 @@ def calcTanimotoSimilarity(v1: Math.DVector, v2: Math.DVector) -> float: pass
 # 
 # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -476,7 +497,8 @@ def calcTanimotoSimilarity(v1: Math.FVector, v2: Math.FVector) -> float: pass
 # 
 # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -492,7 +514,8 @@ def calcTanimotoSimilarity(v1: Math.LVector, v2: Math.LVector) -> float: pass
 # 
 # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \f[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \f]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -535,7 +558,8 @@ def calcTotalWalkCount(molgraph: Chem.MolecularGraph) -> int: pass
 # 
 # The <em>Tversky Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \f[ S_{ab} = \frac{N_{ab}}{\alpha \: N_a + \beta \: N_b + N_{ab}} \f]
+# \f[   S_{ab} = \frac{N_{ab}}{\alpha \: N_a + \beta \: N_b + N_{ab}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset. \f$ \alpha \f$ and \f$ \beta \f$ are bitset contribution weighting factors.
 # 

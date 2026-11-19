@@ -57,6 +57,11 @@ class MoleculeIOManager(Boost.Python.instance):
         @staticmethod
         def __delitem__(handler: MoleculeInputHandler) -> bool: pass
 
+        ##
+        # \brief Returns the number of property entries.
+        # 
+        # \return The number of property entries.
+        # 
         @staticmethod
         def __len__(: ) -> int: pass
 
@@ -83,6 +88,11 @@ class MoleculeIOManager(Boost.Python.instance):
         @staticmethod
         def __delitem__(handler: MoleculeOutputHandler) -> bool: pass
 
+        ##
+        # \brief Returns the number of property entries.
+        # 
+        # \return The number of property entries.
+        # 
         @staticmethod
         def __len__(: ) -> int: pass
 

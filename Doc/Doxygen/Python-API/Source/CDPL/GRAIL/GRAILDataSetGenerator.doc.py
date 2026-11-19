@@ -322,7 +322,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \param coords_func The function used to retrieve atom 3D coordinates.
     # \param grid_name The name to assign to the resulting grid.
     # 
-    # \return A smart reference to the calculated atom-density grid.
+    # \return The calculated atom-density grid.
     # 
     def calcAtomDensityGrid(atoms: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, grid_name: str) -> Grid.DRegularGrid: pass
 

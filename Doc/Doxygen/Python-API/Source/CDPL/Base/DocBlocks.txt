@@ -146,7 +146,7 @@ $$$$
 # ---
 
 DataFormat.FileExtensionSequence^
-\brief Sequence of registered file extensions.
+\brief Mutable sequence of registered file extensions.
 $$$$
 
 DataFormat.FileExtensionSequence.__len__()

@@ -112,16 +112,37 @@ class MassComposition(Boost.Python.instance):
 
     def __len__() -> int: pass
 
+    ##
+    # \brief Returns the value of the property specified by <em>key</em>.
+    # 
+    # If an entry for the specified property exists, the stored value will be returned. Otherwise a Base.ItemNotFound exception will be thrown.
+    # 
+    # \param key The key of the property value to return.
+    # 
+    # 
+    # \return The stored property value. 
+    # 
+    # \throw Base.ItemNotFound if an entry for the requested property value does not exist.
+    # 
     def __getitem__(key: int) -> float: pass
 
     def __setitem__(key: int, value: float) -> None: pass
 
+    ##
+    # \brief Removes the entry for the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry for <em>key</em> could be found and was removed, and <tt>False</tt> otherwise.
+    # 
     def __delitem__(key: int) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether or not a value has been assigned to the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property.
+    # 
+    # \return <tt>True</tt> if a value has been assigned to the specified property, and <tt>False</tt> otherwise.
     # 
     def __contains__(key: int) -> bool: pass
 

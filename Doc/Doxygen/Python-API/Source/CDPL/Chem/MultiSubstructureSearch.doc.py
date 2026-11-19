@@ -50,7 +50,7 @@ class MultiSubstructureSearch(Boost.Python.instance):
     # 
     # The query receives the 1-based ID equal to the new value of getNumSubstructures(), which is how it is referenced in the boolean expression.
     # 
-    # \param molgraph A smart reference to the substructure query molecular graph.
+    # \param molgraph The substructure query molecular graph.
     # 
     def addSubstructure(molgraph: MolecularGraph) -> None: pass
 

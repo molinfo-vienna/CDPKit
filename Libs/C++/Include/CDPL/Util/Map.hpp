@@ -244,26 +244,26 @@ namespace CDPL
             KeyCompFunc getKeyCompareFunction() const;
 
             /**
-             * \brief Returns a mutable iterator pointing to the entry specified by \a key.
+             * \brief Returns a mutable iterator pointing to the entry with the specified key.
              *
              * If the map does not contain an entry with the specified key, an iterator pointing
              * one past the last entry of the map (<tt>== getEntriesEnd()</tt>) is returned.
              *
              * \param key The key specifying the entry.
-             * \return A mutable iterator pointing the entry specified by the key or
-             *         getEntriesEnd(), if the map contains no such entry.
+             * \return A mutable iterator pointing to the entry with the specified key or
+             *         getEntriesEnd() if the map contains no such entry.
              */
             EntryIterator getEntry(const Key& key);
 
             /**
-             * \brief Returns a constant iterator pointing to the entry specified by \a key.
+             * \brief Returns a constant iterator pointing to the entry with the specified key.
              *
              * If the map does not contain an entry with the specified key, an iterator pointing
              * one past the last entry of the map (<tt>== getEntriesEnd()</tt>) is returned.
              *
              * \param key The key specifying the entry.
-             * \return A constant iterator pointing the entry specified by the key or
-             *         getEntriesEnd(), if the map contains no such entry.
+             * \return A constant iterator pointing to the entry with the specified key or
+             *         getEntriesEnd() if the map contains no such entry.
              */
             ConstEntryIterator getEntry(const Key& key) const;
 
@@ -371,9 +371,9 @@ namespace CDPL
             void removeEntry(const EntryIterator& it);
 
             /**
-             * \brief Removes the entry specified by \a key.
+             * \brief Removes the entry with the specified key.
              * \param key The key specifying the entry to remove.
-             * \return \c true if an entry specified by \a key existed, and \c false if not.
+             * \return \c true if an entry with the specified key existed, and \c false if not.
              */
             bool removeEntry(const Key& key);
 

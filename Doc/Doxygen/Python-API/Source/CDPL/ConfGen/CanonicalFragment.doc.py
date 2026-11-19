@@ -33,6 +33,11 @@ class CanonicalFragment(Chem.MolecularGraph):
     # 
     class AtomMapping(Boost.Python.instance):
 
+        ##
+        # \brief Returns the size (number of entries) of the map.
+        # 
+        # \return The size of the map.
+        # 
         def __len__() -> int: pass
 
         def __getitem__(idx: int) -> Chem.Atom: pass

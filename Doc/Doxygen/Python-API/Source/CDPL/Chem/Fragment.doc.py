@@ -29,38 +29,70 @@
 class Fragment(MolecularGraph):
 
     ##
-    # \brief 
-    #
+    # \brief Sequence of Chem.Atom objects.
+    # 
     class AtomSequence(Boost.Python.instance):
 
+        ##
+        # \brief Returns the number of atoms.
+        # 
+        # \return The number of atoms.
+        # 
         def __len__() -> int: pass
 
+        ##
+        # \brief Returns the atom at index <em>idx</em>.
+        # 
+        # \param idx The zero-based index of the atom to return.
+        # 
+        # \return The atom at the specified index. 
+        # 
+        # \throw Base.IndexError if <em>idx</em> is not in the range [0, \c len(self)).
+        # 
         def __getitem__(idx: int) -> Atom: pass
 
         def __delitem__(idx: int) -> None: pass
 
         ##
-        # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param atom The value to test for membership.
-        # \return The result of the membership test operation.
+        # \brief Tells whether the specified atom is part of the atom sequence.
+        # 
+        # \param atom The atom to look for.
+        # 
+        # \return <tt>True</tt> if <em>atom</em> is part of the sequence, and <tt>False</tt> otherwise.
         # 
         def __contains__(atom: Atom) -> bool: pass
 
     ##
-    # \brief 
-    #
+    # \brief Sequence of Chem.Bond objects.
+    # 
     class BondSequence(Boost.Python.instance):
 
+        ##
+        # \brief Returns the number of bonds.
+        # 
+        # \return The number of bonds.
+        # 
         def __len__() -> int: pass
 
+        ##
+        # \brief Returns the bond at index <em>idx</em>.
+        # 
+        # \param idx The zero-based index of the bond to return.
+        # 
+        # \return The bond at the specified index. 
+        # 
+        # \throw Base.IndexError if <em>idx</em> is not in the range [0, \c len(self)).
+        # 
         def __getitem__(idx: int) -> Bond: pass
 
         def __delitem__(idx: int) -> None: pass
 
         ##
-        # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-        # \param bond The value to test for membership.
-        # \return The result of the membership test operation.
+        # \brief Tells whether the specified bond is part of the bond sequence.
+        # 
+        # \param bond The bond to look for.
+        # 
+        # \return <tt>True</tt> if <em>bond</em> is part of the sequence, and <tt>False</tt> otherwise.
         # 
         def __contains__(bond: Bond) -> bool: pass
 
@@ -173,8 +205,16 @@ class Fragment(MolecularGraph):
     # 
     def swap(frag: Fragment) -> None: pass
 
+    ##
+    # \brief Returns the associated atom sequence.
+    # \return The associated atom sequence.
+    # 
     def getAtoms() -> AtomSequence: pass
 
+    ##
+    # \brief Returns the associated bond sequence.
+    # \return The associated bond sequence.
+    # 
     def getBonds() -> BondSequence: pass
 
     ##
@@ -191,33 +231,71 @@ class Fragment(MolecularGraph):
     # 
     def reserveMemoryForBonds(num_bonds: int) -> None: pass
 
+    ##
+    # \brief Returns the value of the property specified by <em>key</em>.
+    # 
+    # If an entry for the specified property exists, the stored value will be returned. Otherwise a Base.ItemNotFound exception will be thrown.
+    # 
+    # \param key The key of the property value to return.
+    # 
+    # 
+    # \return The stored property value. 
+    # 
+    # \throw Base.ItemNotFound if an entry for the requested property value does not exist.
+    # 
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether or not a value has been assigned to the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property.
+    # 
+    # \return <tt>True</tt> if a value has been assigned to the specified property, and <tt>False</tt> otherwise.
     # 
     def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param atom The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether the specified atom is part of the atom sequence.
+    # 
+    # \param atom The atom to look for.
+    # 
+    # \return <tt>True</tt> if <em>atom</em> is part of the sequence, and <tt>False</tt> otherwise.
     # 
     def __contains__(atom: Atom) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param bond The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether the specified bond is part of the bond sequence.
+    # 
+    # \param bond The bond to look for.
+    # 
+    # \return <tt>True</tt> if <em>bond</em> is part of the sequence, and <tt>False</tt> otherwise.
     # 
     def __contains__(bond: Bond) -> bool: pass
 
+    ##
+    # \brief Sets the value of the property specified by <em>key</em> to <em>val</em>.
+    # 
+    # If <em>val</em> is of type Base.Any and empty, i.e. the method Base.Any.isEmpty() returns <tt>True</tt>, and a property entry for <em>key</em> exists, the entry gets erased (equivalent to removeProperty() with <em>key</em> as argument).
+    # 
+    # \param key The key of the property value to assign or remove.
+    # \param val The value of the property.
+    # 
     def __setitem__(key: Base.LookupKey, val: Base.Any) -> None: pass
 
+    ##
+    # \brief Removes the entry for the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry for <em>key</em> could be found and was removed, and <tt>False</tt> otherwise.
+    # 
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
+    ##
+    # \brief Returns the number of property entries.
+    # 
+    # \return The number of property entries.
+    # 
     def __len__() -> int: pass
 
     ##

@@ -60,7 +60,7 @@ class PharmacophoreGenerator(Boost.Python.instance):
     ##
     # \brief Creates a deep copy of the <tt>PharmacophoreGenerator</tt> instance (including all registered feature generators).
     # 
-    # \return A smart reference to the cloned generator.
+    # \return The cloned generator.
     # 
     def clone() -> PharmacophoreGenerator: pass
 

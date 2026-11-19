@@ -62,7 +62,7 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Appends a new substructure search pattern to the current set of patterns.
     # 
-    # \param molgraph A smart reference to the molecular graph of the substructure search pattern to add.
+    # \param molgraph The molecular graph of the substructure search pattern to add.
     # 
     def addSearchPattern(molgraph: MolecularGraph) -> None: pass
 
@@ -78,7 +78,7 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     # \param idx The zero-based search pattern index.
     # 
-    # \return A smart reference to the molecular graph of the search pattern at index <em>idx</em>. 
+    # \return The molecular graph of the search pattern at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumSearchPatterns()).
     # 
@@ -101,7 +101,7 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Appends a new substructure exclude pattern to the current set of patterns.
     # 
-    # \param molgraph A smart reference to the molecular graph of the substructure exclude pattern to add.
+    # \param molgraph The molecular graph of the substructure exclude pattern to add.
     # 
     def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 
@@ -117,7 +117,7 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     # \param idx The zero-based exclude pattern index.
     # 
-    # \return A smart reference to the molecular graph of the exclude pattern at index <em>idx</em>. 
+    # \return The molecular graph of the exclude pattern at index <em>idx</em>. 
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumExcludePatterns()).
     # 
@@ -142,7 +142,7 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Returns the currently set result pattern.
     # 
-    # \return A smart reference to the molecular graph of the currently set result pattern, or a null reference if none has been set.
+    # \return The molecular graph of the currently set result pattern, or a null reference if none has been set.
     # 
     def getResultPattern() -> MolecularGraph: pass
 

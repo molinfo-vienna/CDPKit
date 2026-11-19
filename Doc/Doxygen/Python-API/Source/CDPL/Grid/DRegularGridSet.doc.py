@@ -132,6 +132,10 @@ class DRegularGridSet(Boost.Python.instance):
     # 
     def __ne__(set: object) -> bool: pass
 
+    ##
+    # \brief Returns the serialized state of the \c DRegularGridSet instance.
+    # \return The serialized state of the \c DRegularGridSet instance.
+    # 
     def __getstate__() -> tuple: pass
 
     objectID = property(getObjectID)

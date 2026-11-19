@@ -105,7 +105,7 @@ class FeatureMapping(Boost.Python.instance):
     # 
     # \param key The key specifying the entry to remove.
     # 
-    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # \return <tt>True</tt> if an entry with the specified key existed, and <tt>False</tt> if not.
     # 
     def removeEntry(key: Feature) -> bool: pass
 
@@ -229,7 +229,7 @@ class FeatureMapping(Boost.Python.instance):
     # 
     # \param key The key specifying the entry to remove.
     # 
-    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # \return <tt>True</tt> if an entry with the specified key existed, and <tt>False</tt> if not.
     # 
     def __delitem__(key: Feature) -> bool: pass
 

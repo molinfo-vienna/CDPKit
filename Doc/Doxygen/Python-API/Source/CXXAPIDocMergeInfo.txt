@@ -36,6 +36,7 @@ A mutable reference to <em>C § The value of <em>C
 A reference to the wrapped matrix closure § The wrapped matrix
 a reference to the § the
 A reference to the § The
+A smart reference to the § The
 A mutable reference to the § The
 a mutable reference to the § the
 a mutable proxy reference to the § the
@@ -1858,6 +1859,12 @@ pre-mapping stage of the graph matching § pre-mapping stage of the matching
 
 # --
 
+Entity3DContainer.__getitem__ § Entity3DContainer.getEntity
+
+Entity3DContainer.getSize § Entity3DContainer.getNumEntities
+
+# --
+
 AtomContainer.__getitem__ § AtomContainer.getAtom
 
 AtomContainer.getSize § AtomContainer.getNumAtoms
@@ -1870,30 +1877,52 @@ BondContainer.getSize § BondContainer.getNumBonds
 
 # --
 
-Chem.*Mapping.__delitem__ § Util.MultiMap.removeEntry
+Chem.*.AtomSequence.getSize § Chem.AtomContainer.getNumAtoms
 
-Chem.*Mapping.__setitem__ § Util.MultiMap.setEntry
-\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+Chem.*.AtomSequence.__getitem__ § Chem.AtomContainer.getAtom
+getNumAtoms() § \c len(self)
 
-Chem.*Mapping.setEntry § Util.MultiMap.setEntry
-\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+# --
 
-Chem.*Mapping.insertEntry § Util.MultiMap.insertEntry
-\return An iterator pointing to the inserted entry. §
+Chem.*.BondSequence.getSize § Chem.BondContainer.getNumBonds
 
-Chem.*Mapping.__getitem__(key) § Util.MultiMap.getValue(key)
-and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
-The requested value § The requested value if it exists or \c None 
-\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+Chem.*.BondSequence.__getitem__ § Chem.BondContainer.getBond
+getNumBonds() § \c len(self)
 
-Chem.*Mapping.getValue(key) § Util.MultiMap.getValue(key)
-and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
-The requested value § The requested value if it exists or \c None 
-\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+# --
 
-Chem.*Mapping.__contains__(key) § Util.MultiMap.getNumEntries(key)
+Chem.*.ComponentSequence.getSize() § Chem.Reaction.getNumComponents()
+total §
 
-Chem.*Mapping. § Util.MultiMap.
+Chem.*.ComponentSequence.__getitem__(idx) § Chem.Reaction.getComponent(idx)
+getNumComponents() § \c len(self)
+
+Chem.*.ComponentSequence.__delitem__(idx) § Chem.Reaction.removeComponent(idx)
+getNumComponents() § \c len(self)
+
+# --
+
+Chem.*.__contains__(atom) § Chem.AtomContainer.containsAtom(atom)
+
+Chem.*.__contains__(bond) § Chem.BondContainer.containsBond(bond)
+
+Chem.*Atom.getSize § Base.PropertyContainer.getNumProperties
+
+Chem.*Bond.getSize § Base.PropertyContainer.getNumProperties
+
+Chem.*Molecul*.getSize § Base.PropertyContainer.getNumProperties
+
+Chem.Fragment.getSize § Base.PropertyContainer.getNumProperties
+
+Chem.Entity3D.getSize § Base.PropertyContainer.getNumProperties
+
+# --
+
+Chem.Reaction.getSize § Chem.Reaction.getNumComponents
+
+Chem.Reaction.__getitem__(idx) § Chem.Reaction.getComponent(idx)
+
+Chem.Reaction.__delitem__(idx) § Chem.Reaction.removeComponent(idx)
 
 #
 # --- CDPL.Pharm package ---
@@ -1954,33 +1983,6 @@ Pharm.PharmacophoreReader. § Util.MultiFormatDataReader.
 Pharm.FeatureContainerWriter. § Util.MultiFormatDataWriter.
 
 Pharm.CompoundPharmacophoreReader § Util.CompoundDataReader
-
-# --
-
-Pharm.*Mapping.__delitem__ § Util.MultiMap.removeEntry
-
-Pharm.*Mapping.__setitem__ § Util.MultiMap.setEntry
-\return An iterator that points to the entry with a key that is equivalent to the specified key. §
-
-Pharm.*Mapping.setEntry § Util.MultiMap.setEntry
-\return An iterator that points to the entry with a key that is equivalent to the specified key. §
-
-Pharm.*Mapping.insertEntry § Util.MultiMap.insertEntry
-\return An iterator pointing to the inserted entry. §
-
-Pharm.*Mapping.__getitem__(key) § Util.MultiMap.getValue(key)
-and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
-The requested value § The requested value if it exists or \c None 
-\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
-
-Pharm.*Mapping.getValue(key) § Util.MultiMap.getValue(key)
-and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
-The requested value § The requested value if it exists or \c None 
-\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
-
-Pharm.*Mapping.__contains__(key) § Util.MultiMap.getNumEntries(key)
-
-Pharm.*Mapping. § Util.MultiMap.
 
 #
 # --- CDPL.Grid package ---
@@ -2102,33 +2104,6 @@ Grid.FSpatial § Grid.Spatial
 #
 # --- CDPL.MolProp package ---
 #
-MolProp.*Histogram.__delitem__ § Util.Map.removeEntry
-
-MolProp.*Histogram.__setitem__ § Util.Map.setEntry
-\return An iterator that points to the newly inserted or updated entry. §
-The return value is a dereferenceable iterator that points to the newly inserted or updated entry whose key is equivalent to the specified key. §
-
-MolProp.*Histogram.setEntry § Util.Map.setEntry
-\return An iterator that points to the newly inserted or updated entry. §
-The return value is a dereferenceable iterator that points to the newly inserted or updated entry whose key is equivalent to the specified key. §
-
-MolProp.*Histogram.insertEntry § Util.Map.insertEntry
-The return value is a pair <tt>P</tt>. <tt>P.first</tt> is an iterator pointing to the entry whose key is the same as the specified key. <tt>P.second</tt> is a boolean value which is <tt>True</tt> if <em>item</em> was actually inserted, and <tt>False</tt> if the map already contained an entry with the specified key. §
-A std::pair consisting of an iterator pointing to an entry whose key is the same as <em>key</em> and a boolean value, which is <tt>True</tt> if the insertion of <em>item</em> was successful (an entry with the specified key did not already exist), and <tt>False</tt> otherwise. § \c true if a new entry was inserted, and \c false otherwise.
-
-MolProp.*Histogram.__getitem__(key) § Util.Map.getValue(key)
-and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with the value \e 0.
-The requested value § The requested value if it exists or \e 0 
-\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
-
-MolProp.*Histogram.getValue(key) § Util.Map.getValue(key)
-and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with the value \e 0.
-The requested value § The requested value if it exists or \e 0 
-\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
-
-MolProp.*Histogram.__contains__(key) § Util.Map.containsEntry(key)
-
-MolProp.*Histogram. § Util.Map.
 
 #
 # --- CDPL.ConfGen package ---
@@ -2142,3 +2117,74 @@ DGStructureGeneratorSettings.DEFAULT_ § DGStructureGeneratorSettings.DEFAULT
 
 .CairoBackend. § .
 
+#
+# --- Generic ---
+#
+CDPL.*.*Mapping.__delitem__ § CDPL.Util.MultiMap.removeEntry
+
+CDPL.*.*Mapping.__setitem__ § CDPL.Util.MultiMap.setEntry
+\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+
+CDPL.*.*Mapping.setEntry § CDPL.Util.MultiMap.setEntry
+\return An iterator that points to the entry with a key that is equivalent to the specified key. §
+
+CDPL.*.*Mapping.insertEntry § CDPL.Util.MultiMap.insertEntry
+\return An iterator pointing to the inserted entry. §
+
+CDPL.*.*Mapping.__getitem__(key) § CDPL.Util.MultiMap.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
+The requested value § The requested value if it exists or \c None 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+CDPL.*.*Mapping.getValue(key) § CDPL.Util.MultiMap.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with \c None.
+The requested value § The requested value if it exists or \c None 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+CDPL.*.*Mapping.__contains__(key) § CDPL.Util.MultiMap.getNumEntries(key)
+
+CDPL.*.*Mapping. § CDPL.Util.MultiMap.
+
+# --
+
+CDPL.*.*Histogram.__delitem__ § CDPL.Util.Map.removeEntry
+
+CDPL.*.*Histogram.__setitem__ § CDPL.Util.Map.setEntry
+\return An iterator that points to the newly inserted or updated entry. §
+The return value is a dereferenceable iterator that points to the newly inserted or updated entry whose key is equivalent to the specified key. §
+
+CDPL.*.*Histogram.setEntry § CDPL.Util.Map.setEntry
+\return An iterator that points to the newly inserted or updated entry. §
+The return value is a dereferenceable iterator that points to the newly inserted or updated entry whose key is equivalent to the specified key. §
+
+CDPL.*.*Histogram.insertEntry § CDPL.Util.Map.insertEntry
+The return value is a pair <tt>P</tt>. <tt>P.first</tt> is an iterator pointing to the entry whose key is the same as the specified key. <tt>P.second</tt> is a boolean value which is <tt>True</tt> if <em>item</em> was actually inserted, and <tt>False</tt> if the map already contained an entry with the specified key. §
+A std::pair consisting of an iterator pointing to an entry whose key is the same as <em>key</em> and a boolean value, which is <tt>True</tt> if the insertion of <em>item</em> was successful (an entry with the specified key did not already exist), and <tt>False</tt> otherwise. § \c True if a new entry was inserted, and \c False otherwise.
+
+CDPL.*.*Histogram.__getitem__(key) § CDPL.Util.Map.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with the value \e 0.
+The requested value § The requested value if it exists or \e 0 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+CDPL.*.*Histogram.getValue(key) § CDPL.Util.Map.getValue(key)
+and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a new map entry is created which associates <em>key</em> with the default constructed value object. Otherwise, Base.ItemNotFound is thrown to indicate the error. § a new map entry is created which associates <em>key</em> with the value \e 0.
+The requested value § The requested value if it exists or \e 0 
+\throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key. §
+
+CDPL.*.*Histogram.__contains__(key) § CDPL.Util.Map.containsEntry(key)
+
+CDPL.*.*Histogram. § CDPL.Util.Map.
+
+# --
+
+CDPL.*.*.__getitem__(key) § CDPL.Base.PropertyContainer.getProperty(key,throw_)
+Otherwise an empty Base.Any instance gets returned if <em>_throw</em> is <tt>False</tt>, and a Base.ItemNotFound exception will be thrown if <em>_throw</em> is <tt>True</tt> § Otherwise a Base.ItemNotFound exception will be thrown
+\param throw_ Specifies whether to throw a Base.ItemNotFound exception or to return an empty Base.Any instance if the requested property value does not exist. §
+\throw Base.ItemNotFound if an entry for the requested property value does not exist and <em>throw_</em> is <tt>True</tt> § \throw Base.ItemNotFound if an entry for the requested property value does not exist
+\return The stored property value or and empty Base.Any instance § \return The stored property value
+
+CDPL.*.*.__delitem__(key) § CDPL.Base.PropertyContainer.removeProperty(key)
+
+CDPL.*.*.__setitem__(key,val) § CDPL.Base.PropertyContainer.setProperty(key,val)
+
+CDPL.*.*.__contains__(key) § CDPL.Base.PropertyContainer.isPropertySet(key)

@@ -61,8 +61,22 @@ class Entity3DContainer(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the entity at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the entity to return.
+    # 
+    # \return The entity at the specified index. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntities()).
+    # 
     def __getitem__(idx: int) -> Entity3D: pass
 
+    ##
+    # \brief Returns the number of entities.
+    # 
+    # \return The number of entities.
+    # 
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

@@ -101,11 +101,11 @@ class ElementHistogram(Boost.Python.instance):
     def getValue(key: int, def_value: int) -> int: pass
 
     ##
-    # \brief Removes the entry specified by <em>key</em>.
+    # \brief Removes the entry with the specified key.
     # 
     # \param key The key specifying the entry to remove.
     # 
-    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # \return <tt>True</tt> if an entry with the specified key existed, and <tt>False</tt> if not.
     # 
     def removeEntry(key: int) -> bool: pass
 
@@ -174,7 +174,7 @@ class ElementHistogram(Boost.Python.instance):
     # \param key The key of the entry to insert.
     # \param value The value associated with <em>key</em>.
     # 
-    # \return \c true if a new entry was inserted, and \c false otherwise.
+    # \return \c True if a new entry was inserted, and \c False otherwise.
     # 
     def insertEntry(key: int, value: int) -> bool: pass
 
@@ -211,11 +211,11 @@ class ElementHistogram(Boost.Python.instance):
     def __setitem__(key: int, value: int) -> None: pass
 
     ##
-    # \brief Removes the entry specified by <em>key</em>.
+    # \brief Removes the entry with the specified key.
     # 
     # \param key The key specifying the entry to remove.
     # 
-    # \return <tt>True</tt> if an entry specified by <em>key</em> existed, and <tt>False</tt> if not.
+    # \return <tt>True</tt> if an entry with the specified key existed, and <tt>False</tt> if not.
     # 
     def __delitem__(key: int) -> bool: pass
 

@@ -57,6 +57,11 @@ class MolecularGraphIOManager(Boost.Python.instance):
         @staticmethod
         def __delitem__(handler: MolecularGraphInputHandler) -> bool: pass
 
+        ##
+        # \brief Returns the number of property entries.
+        # 
+        # \return The number of property entries.
+        # 
         @staticmethod
         def __len__(: ) -> int: pass
 
@@ -83,6 +88,11 @@ class MolecularGraphIOManager(Boost.Python.instance):
         @staticmethod
         def __delitem__(handler: MolecularGraphOutputHandler) -> bool: pass
 
+        ##
+        # \brief Returns the number of property entries.
+        # 
+        # \return The number of property entries.
+        # 
         @staticmethod
         def __len__(: ) -> int: pass
 

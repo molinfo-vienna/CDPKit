@@ -1,3 +1,46 @@
+AtomSequence^
+\brief Sequence of Chem.Atom objects.
+$$$$
+
+BondSequence^
+\brief Sequence of Chem.Bond objects.
+$$$$
+
+ComponentSequence^
+\brief Mutable sequence of Chem.Molecule objects.
+$$$$
+
+# --
+
+.getAtoms()
+\brief Returns the associated atom sequence.
+\return The associated atom sequence.
+$$$$
+
+.getBonds()
+\brief Returns the associated bond sequence.
+\return The associated bond sequence.
+$$$$
+
+# --
+
+Reaction.getAgents()
+\brief Returns the list of agent components.
+\return The list of agents.
+$$$$
+
+Reaction.getReactants()
+\brief Returns the list of reactant components.
+\return The list of reactants.
+$$$$
+
+Reaction.getProducts()
+\brief Returns the list of product components.
+\return The list of products.
+$$$$
+
+# --
+
 PatternBasedTautomerizationRule.addTransformationPattern(molgraph,bond_chgs)
 \brief Registers a new transformation pattern.
 

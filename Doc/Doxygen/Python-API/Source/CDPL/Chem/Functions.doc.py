@@ -4783,7 +4783,7 @@ def markReachableAtoms(atom: Atom, molgraph: MolecularGraph, atom_mask: Util.Bit
 # \param smarts The <em>SMARTS</em> string to parse.
 # \param init_qry If <tt>True</tt>, query-specific perception (e.g. ring-membership, aromaticity) is run on the parsed molecule.
 # 
-# \return A smart reference to the parsed molecule, or an empty smart reference if parsing failed.
+# \return The parsed molecule, or an empty smart reference if parsing failed.
 # 
 def parseSMARTS(smarts: str, init_qry: bool = True) -> Molecule: pass
 
@@ -4803,7 +4803,7 @@ def parseSMARTS(smarts: str, mol: Molecule, init_qry: bool = True) -> bool: pass
 # 
 # \param smiles The <em>SMILES</em> string to parse.
 # 
-# \return A smart reference to the parsed molecule, or an empty smart reference if parsing failed.
+# \return The parsed molecule, or an empty smart reference if parsing failed.
 # 
 def parseSMILES(smiles: str) -> Molecule: pass
 

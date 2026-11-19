@@ -27,7 +27,7 @@
 class FeatureTypeHistogram(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c FeatureTypeHistogram instance.
+    # \brief Creates an empty map.
     # 
     def __init__() -> None: pass
 
@@ -49,10 +49,23 @@ class FeatureTypeHistogram(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Returns the size (number of entries) of the map.
+    # 
+    # \return The size of the map.
+    # 
     def getSize() -> int: pass
 
+    ##
+    # \brief Tells whether the map is empty (<tt>getSize() == 0</tt>).
+    # 
+    # \return <tt>True</tt> if the map is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
+    ##
+    # \brief Erases all entries.
+    # 
     def clear() -> None: pass
 
     ##
@@ -62,12 +75,50 @@ class FeatureTypeHistogram(Boost.Python.instance):
     # 
     def assign(map: FeatureTypeHistogram) -> FeatureTypeHistogram: pass
 
+    ##
+    # \brief Returns the value associated with the specified key.
+    # 
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with the value \e 0.
+    # 
+    # \param key The key associated with the requested value.
+    # 
+    # \return The requested value if it exists or \e 0. 
+    # 
+    # 
+    # 
     def getValue(key: int) -> int: pass
 
+    ##
+    # \brief Returns the value associated with the specified key, or the value given by the second argument if the specified entry does not exist.
+    # 
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry, the second argument <em>def_value</em> is returned.
+    # 
+    # \param key The key associated with the requested value.
+    # \param def_value The value which is returned if the specified entry does not exist.
+    # 
+    # \return The requested or default value.
+    # 
     def getValue(key: int, def_value: int) -> int: pass
 
+    ##
+    # \brief Removes the entry with the specified key.
+    # 
+    # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry with the specified key existed, and <tt>False</tt> if not.
+    # 
     def removeEntry(key: int) -> bool: pass
 
+    ##
+    # \brief Inserts a new entry or updates the value of an existing entry with the specified key and value.
+    # 
+    # If the map does not already contain an entry whose key is the same as <em>key</em> then a new entry will be created. Otherwise, the value of the existing entry is updated with <em>value</em>. 
+    # 
+    # \param key The key of the entry to insert or update.
+    # \param value The value to be associated with <em>key</em>.
+    # 
+    # 
+    # 
     def setEntry(key: int, value: int) -> None: pass
 
     ##
@@ -106,22 +157,74 @@ class FeatureTypeHistogram(Boost.Python.instance):
     # 
     def items() -> object: pass
 
+    ##
+    # \brief Tells whether the map contains an entry with the specified key.
+    # 
+    # \param key The key specifying the entry.
+    # 
+    # \return <tt>True</tt> if the map contains the specified entry, and <tt>False</tt> otherwise.
+    # 
     def containsEntry(key: int) -> bool: pass
 
+    ##
+    # \brief Tries to insert a new entry with specified key and value.
+    # 
+    # Inserts a new entry if and only if the map does not already contain an entry whose key is the same as the specified key. 
+    # 
+    # \param key The key of the entry to insert.
+    # \param value The value associated with <em>key</em>.
+    # 
+    # \return \c True if a new entry was inserted, and \c False otherwise.
+    # 
     def insertEntry(key: int, value: int) -> bool: pass
 
+    ##
+    # \brief Returns the size (number of entries) of the map.
+    # 
+    # \return The size of the map.
+    # 
     def __len__() -> int: pass
 
+    ##
+    # \brief Returns the value associated with the specified key.
+    # 
+    # If the map contains an entry with the specified key, the associated value is returned. If the map does not contain the entry a new map entry is created which associates <em>key</em> with the value \e 0.
+    # 
+    # \param key The key associated with the requested value.
+    # 
+    # \return The requested value if it exists or \e 0. 
+    # 
+    # 
+    # 
     def __getitem__(key: int) -> int: pass
 
+    ##
+    # \brief Inserts a new entry or updates the value of an existing entry with the specified key and value.
+    # 
+    # If the map does not already contain an entry whose key is the same as <em>key</em> then a new entry will be created. Otherwise, the value of the existing entry is updated with <em>value</em>. 
+    # 
+    # \param key The key of the entry to insert or update.
+    # \param value The value to be associated with <em>key</em>.
+    # 
+    # 
+    # 
     def __setitem__(key: int, value: int) -> None: pass
 
+    ##
+    # \brief Removes the entry with the specified key.
+    # 
+    # \param key The key specifying the entry to remove.
+    # 
+    # \return <tt>True</tt> if an entry with the specified key existed, and <tt>False</tt> if not.
+    # 
     def __delitem__(key: int) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
+    # \brief Tells whether the map contains an entry with the specified key.
+    # 
+    # \param key The key specifying the entry.
+    # 
+    # \return <tt>True</tt> if the map contains the specified entry, and <tt>False</tt> otherwise.
     # 
     def __contains__(key: int) -> bool: pass
 

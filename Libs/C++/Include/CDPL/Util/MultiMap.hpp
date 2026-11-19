@@ -409,7 +409,7 @@ namespace CDPL
             /**
              * \brief Removes the first entry with the specified key.
              * \param key The key specifying the entry to remove.
-             * \return \c true if an entry specified by \a key existed, and \c false if not.
+             * \return \c true if an entry with the specified key existed, and \c false if not.
              */
             bool removeEntry(const Key& key);
 

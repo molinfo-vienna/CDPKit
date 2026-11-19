@@ -106,7 +106,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     ##
     # \brief Appends the given conformer to the entry.
     # 
-    # \param conf_data A smart reference to the conformer data to add.
+    # \param conf_data The conformer data to add.
     # 
     def addConformer(conf_data: ConformerData) -> None: pass
 
