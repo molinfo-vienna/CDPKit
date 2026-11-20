@@ -36,13 +36,26 @@ class BondPredicate(Boost.Python.instance):
     def __init__(func: BondPredicate) -> None: pass
 
     ##
-    # \brief Contructs the \c BondPredicate instance.
-    # \param callable 
+    # \brief Contructs the \c BondPredicate instance for the specified callable object.
+    # \param callable The callable object to wrap.
     # 
     def __init__(callable: object) -> None: pass
 
+    ##
+    # \brief Invokes the wrapped callable object with the given argument.
+    # \param arg1 The argument to forward.
+    # \return The obtained return value.
+    # 
     def __call__(arg1: Bond) -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __bool__() -> bool: pass
 
+    ##
+    # \brief Tells whether the instance holds a callable object.
+    # \return \c True if the instance holds a callable object, and \c False otherwise.
+    # 
     def __nonzero__() -> bool: pass

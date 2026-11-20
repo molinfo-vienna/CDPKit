@@ -96,14 +96,14 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     # 
     # \note By default, formal charges will be used.
     # 
-    def setAtomChargeFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def setAtomChargeFunction(func: Chem.DoubleAtomFunctor) -> None: pass
 
     ##
     # \brief Returns the function used for the retrieval of atom charges.
     # 
     # \return The configured atom charge function.
     # 
-    def getAtomChargeFunction() -> ForceField.MMFF94AtomChargeFunction: pass
+    def getAtomChargeFunction() -> Chem.DoubleAtomFunctor: pass
 
     ##
     # \brief Sets the probe sphere radius.

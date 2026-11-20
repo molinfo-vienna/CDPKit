@@ -104,7 +104,7 @@ class ReactionIOManager(Boost.Python.instance):
     ##
     # \brief 
     #
-    numOutputHandlers = 16
+    numOutputHandlers = 12
 
     ##
     # \brief Registers the specified Chem.ReactionInputHandler implementation instance.

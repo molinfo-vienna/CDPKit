@@ -1,31 +1,31 @@
-Functor^ % Function^
+Predicate^ % Functor^ % Function^
 \brief A wrapper class for various types of callable objects.
 $$$$
 
-Functor.__init__(callable)^ % Function.__init__(callable)^ % Function2.__init__(callable)^ % Function3.__init__(callable)^ % Function4.__init__(callable)^
+Predicate.__init__(callable) % Functor.__init__(callable) % Function.__init__(callable) % Function2.__init__(callable) % Function3.__init__(callable) % Function4.__init__(callable)
 \brief Contructs the \c @CN@ instance for the specified callable object.
 \param callable The callable object to wrap.
 $$$$
 
-Functor.__call__()^ % Function.__call__()^
+Functor.__call__() % Function.__call__()
 \brief Invokes the wrapped callable object.
 \return The obtained return value.
 $$$$
 
-Functor.__call__(arg1)^ % Function.__call__(arg1)^
+Predicate.__call__(arg1) % Functor.__call__(arg1) % Function.__call__(arg1)
 \brief Invokes the wrapped callable object with the given argument.
 \param arg1 The argument to forward.
 \return The obtained return value.
 $$$$
 
-Functor.__call__(arg1,arg2)^ % Function.__call__(arg1,arg2)^ % Function2.__call__(arg1,arg2)^
+Functor.__call__(arg1,arg2) % Function.__call__(arg1,arg2) % Function2.__call__(arg1,arg2)
 \brief Invokes the wrapped callable object with the given arguments.
 \param arg1 The first argument to forward.
 \param arg2 The second argument to forward.
 \return The obtained return value.
 $$$$
 
-Functor.__call__(arg1,arg2,arg3)^ % Function.__call__(arg1,arg2,arg3)^ % Function3.__call__(arg1,arg2,arg3)^
+Functor.__call__(arg1,arg2,arg3) % Function.__call__(arg1,arg2,arg3) % Function3.__call__(arg1,arg2,arg3)
 \brief Invokes the wrapped callable object with the given arguments.
 \param arg1 The first argument to forward.
 \param arg2 The second argument to forward.
@@ -33,7 +33,7 @@ Functor.__call__(arg1,arg2,arg3)^ % Function.__call__(arg1,arg2,arg3)^ % Functio
 \return The obtained return value.
 $$$$
 
-Functor.__call__(arg1,arg2,arg3,arg4)^ % Function.__call__(arg1,arg2,arg3,arg4)^ % Function4.__call__(arg1,arg2,arg3,arg4)^
+Functor.__call__(arg1,arg2,arg3,arg4) % Function.__call__(arg1,arg2,arg3,arg4) % Function4.__call__(arg1,arg2,arg3,arg4)
 \brief Invokes the wrapped callable object with the given arguments.
 \param arg1 The first argument to forward.
 \param arg2 The second argument to forward.
@@ -42,12 +42,12 @@ Functor.__call__(arg1,arg2,arg3,arg4)^ % Function.__call__(arg1,arg2,arg3,arg4)^
 \return The obtained return value.
 $$$$
 
-Functor.__bool__()^ % Function.__bool__()^ % Function2.__bool__()^ % Function3.__bool__()^ % Function4.__bool__()^
+Predicate.__bool__() % Functor.__bool__() % Function.__bool__() % Function2.__bool__() % Function3.__bool__() % Function4.__bool__()
 \brief Tells whether the instance holds a callable object.
 \return \c True if the instance holds a callable object, and \c False otherwise.
 $$$$
 
-Functor.__nonzero__()^ % Function.__nonzero__()^ % Function2.__nonzero__()^ % Function3.__nonzero__()^ % Function4.__nonzero__()^
+Predicate.__nonzero__() % Functor.__nonzero__() % Function.__nonzero__() % Function2.__nonzero__() % Function3.__nonzero__() % Function4.__nonzero__()
 \brief Tells whether the instance holds a callable object.
 \return \c True if the instance holds a callable object, and \c False otherwise.
 $$$$

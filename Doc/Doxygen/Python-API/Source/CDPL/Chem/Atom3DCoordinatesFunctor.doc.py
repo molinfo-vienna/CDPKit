@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Helper-functor for retrieving the 3D coordinates of an atom (via the Chem.Entity3DProperty.COORDINATES_3D property).
+# \brief Functor for retrieving the 3D coordinates of an atom (stored as Chem.Entity3DProperty.COORDINATES_3D property).
 # 
 class Atom3DCoordinatesFunctor(Boost.Python.instance):
 
@@ -56,7 +56,7 @@ class Atom3DCoordinatesFunctor(Boost.Python.instance):
     # 
     # \return The 3D coordinates of the atom. 
     # 
-    # \see Chem.get3DCoordinates(const Atom&)
+    # \see Chem.get3DCoordinates(Entity3D)
     # 
     def __call__(atom: Atom) -> Math.Vector3D: pass
 

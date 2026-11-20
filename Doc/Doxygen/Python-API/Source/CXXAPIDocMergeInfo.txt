@@ -1924,6 +1924,24 @@ Chem.Reaction.__getitem__(idx) § Chem.Reaction.getComponent(idx)
 
 Chem.Reaction.__delitem__(idx) § Chem.Reaction.removeComponent(idx)
 
+# --
+
+Atom3DCoordinatesFunctor.__call__(atom) § Atom3DCoordinatesFunctor.__call__(atom)
+Chem.get3DCoordinates(const Atom&) § Chem.get3DCoordinates(Entity3D)
+
+# --
+
+SpatialAtomAlignment § SpatialEntityAlignment
+3D entity § atom
+3D entities § atoms
+entity § atom
+entities § atoms
+Chem.TopologicalEntityAlignment § Chem.TopologicalAtomAlignment
+param atom § param entity
+
+SpatialEntity3DAlignment § SpatialEntityAlignment
+Chem.TopologicalEntityAlignment § Chem.TopologicalEntity3DAlignment
+
 #
 # --- CDPL.Pharm package ---
 #

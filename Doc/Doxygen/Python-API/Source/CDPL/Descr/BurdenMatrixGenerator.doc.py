@@ -60,7 +60,7 @@ class BurdenMatrixGenerator(Boost.Python.instance):
     # 
     # \note By default, the diagonal elements of the <em>Burden</em> matrix are atom types (see namespace Chem.AtomType).
     # 
-    def setAtomWeightFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def setAtomWeightFunction(func: Chem.DoubleAtomFunctor) -> None: pass
 
     ##
     # \brief Generates the <em>Burden</em> matrix of the molecular graph <em>molgraph</em>.

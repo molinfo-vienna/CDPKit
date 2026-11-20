@@ -62,7 +62,7 @@ class BCUTDescriptorCalculator(Boost.Python.instance):
     # 
     # \see Descr.BurdenMatrixGenerator.setAtomWeightFunction()
     # 
-    def setAtomWeightFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def setAtomWeightFunction(func: Chem.DoubleAtomFunctor) -> None: pass
 
     ##
     # \brief Calculates the <em>BCUT</em> descriptor of the molecular graph <em>molgraph</em>.

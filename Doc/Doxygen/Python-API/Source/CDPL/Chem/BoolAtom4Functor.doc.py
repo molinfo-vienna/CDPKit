@@ -30,10 +30,10 @@ class BoolAtom4Functor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs the \c BoolAtom4Functor instance.
-    # \param func 
+    # \brief Contructs a copy of the \c BoolAtom4Functor instance \a func.
+    # \param func The \c BoolAtom4Functor instance to copy.
     # 
-    def __init__(func: ForceField.InteractionFilterFunction4) -> None: pass
+    def __init__(func: BoolAtom4Functor) -> None: pass
 
     ##
     # \brief Contructs the \c BoolAtom4Functor instance for the specified callable object.

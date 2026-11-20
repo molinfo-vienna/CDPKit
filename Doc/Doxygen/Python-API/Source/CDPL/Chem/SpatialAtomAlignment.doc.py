@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Computes a spatial alignment between two sets of atoms by combining topological atom matching with Kabsch-style 3D superposition.
+# 
+# The class drives an internal Chem.TopologicalAtomAlignment instance over the two atom sets to enumerate candidate atom mappings (subject to constraints specified via setMinTopologicalMappingSize() and setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted mapping using Kabsch's algorithm with the atom 3D coordinates supplied by a retrieval function specified via setEntity3DCoordinatesFunction() and (optionally) the per-atom weights supplied by a function specified by setEntityWeightFunction(). Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping can be accessed by the methods getTransform() and getTopologicalMapping(), respectively.
+# 
 class SpatialAtomAlignment(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c SpatialAtomAlignment instance.
+    # \brief Constructs the <tt>SpatialEntityAlignment</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -47,48 +49,160 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Specifies a function for restricting allowed atom mappings in the search for alignment solutions.
+    # 
+    # \param func The constraint check function.
+    # 
     def setEntityMatchFunction(func: BoolAtom2Functor) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for restricting allowed atom mappings.
+    # 
+    # \return The registered constraint check function.
+    # 
     def getEntityMatchFunction() -> BoolAtom2Functor: pass
 
-    def setEntityPairMatchFunction(func: ForceField.InteractionFilterFunction4) -> None: pass
+    ##
+    # \brief Specifies a function for checking the compatibility of atom pairs in the search for alignment solutions.
+    # 
+    # \param func The constraint check function.
+    # 
+    # \note This function gets only called for pairs with already matching first and second atoms.
+    # 
+    def setEntityPairMatchFunction(func: BoolAtom4Functor) -> None: pass
 
-    def getEntityPairMatchFunction() -> ForceField.InteractionFilterFunction4: pass
+    ##
+    # \brief Returns the function that was registered for checking the compatibility of atom pairs.
+    # 
+    # \return The registered constraint check function.
+    # 
+    def getEntityPairMatchFunction() -> BoolAtom4Functor: pass
 
+    ##
+    # \brief Specifies a function for restricting allowed topological atom alignments.
+    # 
+    # \param func The constraint check function.
+    # 
     def setTopAlignmentConstraintFunction(func: BoolSTPairArrayFunctor) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for restricting allowed topological atom alignments.
+    # 
+    # \return The registered constraint check function.
+    # 
     def getTopAlignmentConstraintFunction() -> BoolSTPairArrayFunctor: pass
 
+    ##
+    # \brief Specifies a function for the retrieval of atom 3D coordinates.
+    # 
+    # \param func The atom 3D coordinates function.
+    # 
     def setEntity3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
+    # 
+    # \return The registered atom 3D coordinates function.
+    # 
     def getEntity3DCoordinatesFunction() -> Atom3DCoordinatesFunction: pass
 
-    def setEntityWeightFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
+    ##
+    # \brief Specifies a function for the retrieval of atom weights for spatial alignment.
+    # 
+    # \param func The atom weight function.
+    # 
+    def setEntityWeightFunction(func: DoubleAtomFunctor) -> None: pass
 
-    def getEntityWeightFunction() -> ForceField.MMFF94AtomChargeFunction: pass
+    ##
+    # \brief Returns the function that was registered for the retrieval of atom weights for spatial alignment.
+    # 
+    # \return The registered atom weight function.
+    # 
+    def getEntityWeightFunction() -> DoubleAtomFunctor: pass
 
+    ##
+    # \brief Specifies whether additional topological atom mappings (derived from the found max.\ mappings) shall be enumerated in order to increase the number of generated spatial alignment candidates.
+    # 
+    # \param exhaustive <tt>True</tt> to enumerate additional topological mappings, and <tt>False</tt> if only the primary max. mappings shall be used.
+    # 
     def performExhaustiveSearch(exhaustive: bool) -> None: pass
 
+    ##
+    # \brief Tells whether or not additional topological atom mappings (derived from the found max.\ mappings) are enumerated.
+    # 
+    # \return <tt>True</tt> if exhaustive enumeration is enabled, and <tt>False</tt> otherwise. 
+    # 
+    # \see performExhaustiveSearch()
+    # 
     def exhaustiveSearchPerformed() -> bool: pass
 
+    ##
+    # \brief Adds an atom to the specified atom set.
+    # 
+    # \param entity The atom to add.
+    # \param first_set If <tt>True</tt>, the atom is added to the first atom set, if <tt>False</tt> to the second one.
+    # 
     def addEntity(entity: Atom, first_set: bool) -> None: pass
 
+    ##
+    # \brief Removes all atoms in the specified atom set.
+    # 
+    # \param first_set If <tt>True</tt>, the first atom set is cleared, if <tt>False</tt> the second one.
+    # 
     def clearEntities(first_set: bool) -> None: pass
 
+    ##
+    # \brief Returns the number of atoms in the specified alignment atom set.
+    # 
+    # \param first_set If <tt>True</tt>, the size of first atom set is returned, if <tt>False</tt> the size of the second one.
+    # 
     def getNumEntities(first_set: bool) -> int: pass
 
     def getEntities(first_set: bool) -> object: pass
 
+    ##
+    # \brief Returns the stored atom at index <em>idx</em> in the specified set.
+    # 
+    # \param idx The zero-based index of the atom instance to return.
+    # \param first_set <tt>True</tt>, if the atom to return is stored in the first set. <tt>False</tt>, if stored in the second set.
+    # 
+    # \return The atom stored at index <em>idx</em> in the specified set. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntities()).
+    # 
     def getEntity(idx: int, first_set: bool) -> Atom: pass
 
+    ##
+    # \brief Specifies the minimum number of topologically mapped atoms that is required to enable a subsequent spatial alignment.
+    # 
+    # \param min_size The minimum required number of topologically mapped atoms.
+    # 
     def setMinTopologicalMappingSize(min_size: int) -> None: pass
 
+    ##
+    # \brief Returns the minimum number of topologically mapped atoms that is required to enable a subsequent spatial alignment.
+    # 
+    # \return The minimum required number of topologically mapped atoms.
+    # 
     def getMinTopologicalMappingSize() -> int: pass
 
     def reset() -> None: pass
 
+    ##
+    # \brief Searches for the next alignment solution.
+    # 
+    # \return <tt>True</tt> if a new alignment solution could be found, and <tt>False</tt> otherwise.
+    # 
     def nextAlignment() -> bool: pass
 
+    ##
+    # \brief Returns the alignment transformation matrix that was calculated in the last successful call to nextAlignment().
+    # 
+    # A transformation of the positions of the atoms in the second set aligns them spatially to the topologically mapped atoms in the first set.
+    # 
+    # \return The alignment transformation matrix.
+    # 
     def getTransform() -> Math.Matrix4D: pass
 
     ##
@@ -98,6 +212,11 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # 
     def assign(alignment: SpatialAtomAlignment) -> SpatialAtomAlignment: pass
 
+    ##
+    # \brief Returns the topological atom mapping resulting from the last successful call to nextAlignment().
+    # 
+    # \return The topological atom mapping as an array of pairs of atom indices.
+    # 
     def getTopologicalMapping() -> Util.STPairArray: pass
 
     objectID = property(getObjectID)

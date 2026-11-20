@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Computes a spatial alignment between two sets of 3D entities by combining topological entity matching with Kabsch-style 3D superposition.
+# 
+# The class drives an internal Chem.TopologicalEntity3DAlignment instance over the two entity sets to enumerate candidate entity mappings (subject to constraints specified via setMinTopologicalMappingSize() and setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted mapping using Kabsch's algorithm with the entity 3D coordinates supplied by a retrieval function specified via setEntity3DCoordinatesFunction() and (optionally) the per-entity weights supplied by a function specified by setEntityWeightFunction(). Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping can be accessed by the methods getTransform() and getTopologicalMapping(), respectively.
+# 
 class SpatialEntity3DAlignment(Boost.Python.instance):
 
     ##
-    # \brief Contructs the \c SpatialEntity3DAlignment instance.
+    # \brief Constructs the <tt>SpatialEntityAlignment</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -47,48 +49,160 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # 
     def getObjectID() -> int: pass
 
+    ##
+    # \brief Specifies a function for restricting allowed entity mappings in the search for alignment solutions.
+    # 
+    # \param func The constraint check function.
+    # 
     def setEntityMatchFunction(func: BoolEntity3D2Functor) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for restricting allowed entity mappings.
+    # 
+    # \return The registered constraint check function.
+    # 
     def getEntityMatchFunction() -> BoolEntity3D2Functor: pass
 
+    ##
+    # \brief Specifies a function for checking the compatibility of entity pairs in the search for alignment solutions.
+    # 
+    # \param func The constraint check function.
+    # 
+    # \note This function gets only called for pairs with already matching first and second entities.
+    # 
     def setEntityPairMatchFunction(func: BoolEntity3D4Functor) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for checking the compatibility of entity pairs.
+    # 
+    # \return The registered constraint check function.
+    # 
     def getEntityPairMatchFunction() -> BoolEntity3D4Functor: pass
 
+    ##
+    # \brief Specifies a function for restricting allowed topological entity alignments.
+    # 
+    # \param func The constraint check function.
+    # 
     def setTopAlignmentConstraintFunction(func: BoolSTPairArrayFunctor) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for restricting allowed topological entity alignments.
+    # 
+    # \return The registered constraint check function.
+    # 
     def getTopAlignmentConstraintFunction() -> BoolSTPairArrayFunctor: pass
 
+    ##
+    # \brief Specifies a function for the retrieval of entity 3D coordinates.
+    # 
+    # \param func The entity 3D coordinates function.
+    # 
     def setEntity3DCoordinatesFunction(func: Vector3DEntity3DFunctor) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for the retrieval of entity 3D coordinates.
+    # 
+    # \return The registered entity 3D coordinates function.
+    # 
     def getEntity3DCoordinatesFunction() -> Vector3DEntity3DFunctor: pass
 
+    ##
+    # \brief Specifies a function for the retrieval of entity weights for spatial alignment.
+    # 
+    # \param func The entity weight function.
+    # 
     def setEntityWeightFunction(func: DoubleEntity3DFunctor) -> None: pass
 
+    ##
+    # \brief Returns the function that was registered for the retrieval of entity weights for spatial alignment.
+    # 
+    # \return The registered entity weight function.
+    # 
     def getEntityWeightFunction() -> DoubleEntity3DFunctor: pass
 
+    ##
+    # \brief Specifies whether additional topological entity mappings (derived from the found max.\ mappings) shall be enumerated in order to increase the number of generated spatial alignment candidates.
+    # 
+    # \param exhaustive <tt>True</tt> to enumerate additional topological mappings, and <tt>False</tt> if only the primary max. mappings shall be used.
+    # 
     def performExhaustiveSearch(exhaustive: bool) -> None: pass
 
+    ##
+    # \brief Tells whether or not additional topological entity mappings (derived from the found max.\ mappings) are enumerated.
+    # 
+    # \return <tt>True</tt> if exhaustive enumeration is enabled, and <tt>False</tt> otherwise. 
+    # 
+    # \see performExhaustiveSearch()
+    # 
     def exhaustiveSearchPerformed() -> bool: pass
 
+    ##
+    # \brief Adds an entity to the specified entity set.
+    # 
+    # \param entity The entity to add.
+    # \param first_set If <tt>True</tt>, the entity is added to the first entity set, if <tt>False</tt> to the second one.
+    # 
     def addEntity(entity: Entity3D, first_set: bool) -> None: pass
 
+    ##
+    # \brief Removes all entities in the specified entity set.
+    # 
+    # \param first_set If <tt>True</tt>, the first entity set is cleared, if <tt>False</tt> the second one.
+    # 
     def clearEntities(first_set: bool) -> None: pass
 
+    ##
+    # \brief Returns the number of entities in the specified alignment entity set.
+    # 
+    # \param first_set If <tt>True</tt>, the size of first entity set is returned, if <tt>False</tt> the size of the second one.
+    # 
     def getNumEntities(first_set: bool) -> int: pass
 
     def getEntities(first_set: bool) -> object: pass
 
+    ##
+    # \brief Returns the stored entity at index <em>idx</em> in the specified set.
+    # 
+    # \param idx The zero-based index of the entity instance to return.
+    # \param first_set <tt>True</tt>, if the entity to return is stored in the first set. <tt>False</tt>, if stored in the second set.
+    # 
+    # \return The entity stored at index <em>idx</em> in the specified set. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumEntities()).
+    # 
     def getEntity(idx: int, first_set: bool) -> Entity3D: pass
 
+    ##
+    # \brief Specifies the minimum number of topologically mapped entities that is required to enable a subsequent spatial alignment.
+    # 
+    # \param min_size The minimum required number of topologically mapped entities.
+    # 
     def setMinTopologicalMappingSize(min_size: int) -> None: pass
 
+    ##
+    # \brief Returns the minimum number of topologically mapped entities that is required to enable a subsequent spatial alignment.
+    # 
+    # \return The minimum required number of topologically mapped entities.
+    # 
     def getMinTopologicalMappingSize() -> int: pass
 
     def reset() -> None: pass
 
+    ##
+    # \brief Searches for the next alignment solution.
+    # 
+    # \return <tt>True</tt> if a new alignment solution could be found, and <tt>False</tt> otherwise.
+    # 
     def nextAlignment() -> bool: pass
 
+    ##
+    # \brief Returns the alignment transformation matrix that was calculated in the last successful call to nextAlignment().
+    # 
+    # A transformation of the positions of the entities in the second set aligns them spatially to the topologically mapped entities in the first set.
+    # 
+    # \return The alignment transformation matrix.
+    # 
     def getTransform() -> Math.Matrix4D: pass
 
     ##
@@ -98,6 +212,11 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # 
     def assign(alignment: SpatialEntity3DAlignment) -> SpatialEntity3DAlignment: pass
 
+    ##
+    # \brief Returns the topological entity mapping resulting from the last successful call to nextAlignment().
+    # 
+    # \return The topological entity mapping as an array of pairs of entity indices.
+    # 
     def getTopologicalMapping() -> Util.STPairArray: pass
 
     objectID = property(getObjectID)

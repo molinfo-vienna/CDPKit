@@ -30,22 +30,6 @@ import re
 import pickle
 import functools
 
-import CDPL
-import CDPL.Base
-import CDPL.Util
-import CDPL.Math
-import CDPL.Chem
-import CDPL.Vis
-import CDPL.Pharm
-import CDPL.Shape
-import CDPL.Grid
-import CDPL.ForceField
-import CDPL.ConfGen
-import CDPL.Biomol
-import CDPL.Descr
-import CDPL.MolProp
-import CDPL.GRAIL
-
 
 HIDE_SELF_ARG = True
 DOC_FILE_EXT = '.doc.py'

@@ -30,10 +30,10 @@ class DoubleAtomFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs the \c DoubleAtomFunctor instance.
-    # \param func 
+    # \brief Contructs a copy of the \c DoubleAtomFunctor instance \a func.
+    # \param func The \c DoubleAtomFunctor instance to copy.
     # 
-    def __init__(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def __init__(func: DoubleAtomFunctor) -> None: pass
 
     ##
     # \brief Contructs the \c DoubleAtomFunctor instance for the specified callable object.

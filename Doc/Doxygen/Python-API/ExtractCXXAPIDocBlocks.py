@@ -256,7 +256,7 @@ def getBriefDocText(node):
     if not doc_text:
         return doc_text
 
-    doc_text = doc_text.replace('e.g. ', 'e.g.\\ ')
+    doc_text = doc_text.replace('e.g. ', 'e.g.\\ ').replace('max. ', 'max.\\ ').replace('min. ', 'min.\\ ')
     
     return '\\brief ' + doc_text + '\n'
 
