@@ -22,12 +22,12 @@
 ##
 # \brief Computes a spatial alignment between two sets of atoms by combining topological atom matching with Kabsch-style 3D superposition.
 # 
-# The class drives an internal Chem.TopologicalAtomAlignment instance over the two atom sets to enumerate candidate atom mappings (subject to constraints specified via setMinTopologicalMappingSize() and setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted mapping using Kabsch's algorithm with the atom 3D coordinates supplied by a retrieval function specified via setEntity3DCoordinatesFunction() and (optionally) the per-atom weights supplied by a function specified by setEntityWeightFunction(). Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping can be accessed by the methods getTransform() and getTopologicalMapping(), respectively.
+# The class drives an internal Chem.TopologicalAtomAlignment instance over the two atom sets to enumerate candidate atom mappings (subject to constraints specified via setMinTopologicalMappingSize() and setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted mapping using Kabsch's algorithm [\ref KABA] with the atom 3D coordinates supplied by a retrieval function specified via setEntity3DCoordinatesFunction() and (optionally) the per-atom weights supplied by a function specified by setEntityWeightFunction(). Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping can be accessed by the methods getTransform() and getTopologicalMapping(), respectively.
 # 
 class SpatialAtomAlignment(Boost.Python.instance):
 
     ##
-    # \brief Constructs the <tt>SpatialEntityAlignment</tt> instance.
+    # \brief Constructs the <tt>SpatialAtomAlignment</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -138,27 +138,32 @@ class SpatialAtomAlignment(Boost.Python.instance):
     def exhaustiveSearchPerformed() -> bool: pass
 
     ##
-    # \brief Adds an atom to the specified atom set.
+    # \brief Adds an atom to the specified set.
     # 
     # \param entity The atom to add.
-    # \param first_set If <tt>True</tt>, the atom is added to the first atom set, if <tt>False</tt> to the second one.
+    # \param first_set If <tt>True</tt>, the atom is added to the first set, if <tt>False</tt> to the second one.
     # 
     def addEntity(entity: Atom, first_set: bool) -> None: pass
 
     ##
-    # \brief Removes all atoms in the specified atom set.
+    # \brief Removes all atoms in the specified set.
     # 
-    # \param first_set If <tt>True</tt>, the first atom set is cleared, if <tt>False</tt> the second one.
+    # \param first_set If <tt>True</tt>, the first set is cleared, if <tt>False</tt> the second one.
     # 
     def clearEntities(first_set: bool) -> None: pass
 
     ##
-    # \brief Returns the number of atoms in the specified alignment atom set.
+    # \brief Returns the number of atoms in the specified set.
     # 
-    # \param first_set If <tt>True</tt>, the size of first atom set is returned, if <tt>False</tt> the size of the second one.
+    # \param first_set If <tt>True</tt>, the size of first set is returned, if <tt>False</tt> the size of the second one.
     # 
     def getNumEntities(first_set: bool) -> int: pass
 
+    ##
+    # \brief Returns a list containing the atoms in the specified set.
+    # \param first_set If \c True, the atoms in the first set are returned and if \c False, the atoms in the second set.
+    # \return A list containing the atoms in the specified set.
+    # 
     def getEntities(first_set: bool) -> object: pass
 
     ##
@@ -187,6 +192,9 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # 
     def getMinTopologicalMappingSize() -> int: pass
 
+    ##
+    # \brief Discards the current alignment search state so that the next call to nextAlignment() restarts the topological mapping enumeration from scratch.
+    # 
     def reset() -> None: pass
 
     ##

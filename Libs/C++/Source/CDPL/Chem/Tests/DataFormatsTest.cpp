@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
     using namespace Chem;
 
     BOOST_CHECK(DataFormat::JME.getName() == "JME");
-    BOOST_CHECK(DataFormat::JME.getDescription() == "JME Molecular Editor String");
+    BOOST_CHECK(DataFormat::JME.getDescription() == "JSME Molecular Editor String");
     BOOST_CHECK(DataFormat::JME.getMimeType() == "");
     BOOST_CHECK(DataFormat::JME.isMultiRecordFormat() == true);
 

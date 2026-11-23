@@ -41,6 +41,20 @@ $$$$
 
 # --
 
+AtomAlignment.getEntities(first_set)
+\brief Returns a list containing the atoms in the specified set.
+\param first_set If \c True, the atoms in the first set are returned and if \c False, the atoms in the second set.
+\return A list containing the atoms in the specified set.
+$$$$
+
+Entity3DAlignment.getEntities(first_set)
+\brief Returns a list containing the entities in the specified set.
+\param first_set If \c True, the entities in the first set are returned and if \c False, the entities in the second set.
+\return A list containing the entities in the specified set.
+$$$$
+
+# --
+
 PatternBasedTautomerizationRule.addTransformationPattern(molgraph,bond_chgs)
 \brief Registers a new transformation pattern.
 

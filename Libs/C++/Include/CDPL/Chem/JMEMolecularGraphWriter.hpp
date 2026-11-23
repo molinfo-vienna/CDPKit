@@ -46,7 +46,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief Writer for molecular graph data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
+         * \brief Writer for molecular graph data in the native I/O format of the <em>JSME Molecular Editor</em> [\ref JME].
          */
         class CDPL_CHEM_API JMEMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
         {

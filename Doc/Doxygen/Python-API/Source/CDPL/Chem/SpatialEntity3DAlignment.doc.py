@@ -22,12 +22,12 @@
 ##
 # \brief Computes a spatial alignment between two sets of 3D entities by combining topological entity matching with Kabsch-style 3D superposition.
 # 
-# The class drives an internal Chem.TopologicalEntity3DAlignment instance over the two entity sets to enumerate candidate entity mappings (subject to constraints specified via setMinTopologicalMappingSize() and setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted mapping using Kabsch's algorithm with the entity 3D coordinates supplied by a retrieval function specified via setEntity3DCoordinatesFunction() and (optionally) the per-entity weights supplied by a function specified by setEntityWeightFunction(). Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping can be accessed by the methods getTransform() and getTopologicalMapping(), respectively.
+# The class drives an internal Chem.TopologicalEntity3DAlignment instance over the two entity sets to enumerate candidate entity mappings (subject to constraints specified via setMinTopologicalMappingSize() and setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted mapping using Kabsch's algorithm [\ref KABA] with the entity 3D coordinates supplied by a retrieval function specified via setEntity3DCoordinatesFunction() and (optionally) the per-entity weights supplied by a function specified by setEntityWeightFunction(). Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping can be accessed by the methods getTransform() and getTopologicalMapping(), respectively.
 # 
 class SpatialEntity3DAlignment(Boost.Python.instance):
 
     ##
-    # \brief Constructs the <tt>SpatialEntityAlignment</tt> instance.
+    # \brief Constructs the <tt>SpatialEntity3DAlignment</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -138,27 +138,32 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     def exhaustiveSearchPerformed() -> bool: pass
 
     ##
-    # \brief Adds an entity to the specified entity set.
+    # \brief Adds an entity to the specified set.
     # 
     # \param entity The entity to add.
-    # \param first_set If <tt>True</tt>, the entity is added to the first entity set, if <tt>False</tt> to the second one.
+    # \param first_set If <tt>True</tt>, the entity is added to the first set, if <tt>False</tt> to the second one.
     # 
     def addEntity(entity: Entity3D, first_set: bool) -> None: pass
 
     ##
-    # \brief Removes all entities in the specified entity set.
+    # \brief Removes all entities in the specified set.
     # 
-    # \param first_set If <tt>True</tt>, the first entity set is cleared, if <tt>False</tt> the second one.
+    # \param first_set If <tt>True</tt>, the first set is cleared, if <tt>False</tt> the second one.
     # 
     def clearEntities(first_set: bool) -> None: pass
 
     ##
-    # \brief Returns the number of entities in the specified alignment entity set.
+    # \brief Returns the number of entities in the specified set.
     # 
-    # \param first_set If <tt>True</tt>, the size of first entity set is returned, if <tt>False</tt> the size of the second one.
+    # \param first_set If <tt>True</tt>, the size of first set is returned, if <tt>False</tt> the size of the second one.
     # 
     def getNumEntities(first_set: bool) -> int: pass
 
+    ##
+    # \brief Returns a list containing the entities in the specified set.
+    # \param first_set If \c True, the entities in the first set are returned and if \c False, the entities in the second set.
+    # \return A list containing the entities in the specified set.
+    # 
     def getEntities(first_set: bool) -> object: pass
 
     ##
@@ -187,6 +192,9 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # 
     def getMinTopologicalMappingSize() -> int: pass
 
+    ##
+    # \brief Discards the current alignment search state so that the next call to nextAlignment() restarts the topological mapping enumeration from scratch.
+    # 
     def reset() -> None: pass
 
     ##

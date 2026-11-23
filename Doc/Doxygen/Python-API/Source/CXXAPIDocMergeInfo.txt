@@ -1938,9 +1938,22 @@ entity § atom
 entities § atoms
 Chem.TopologicalEntityAlignment § Chem.TopologicalAtomAlignment
 param atom § param entity
+SpatialEntityAlignment § SpatialAtomAlignment
 
 SpatialEntity3DAlignment § SpatialEntityAlignment
 Chem.TopologicalEntityAlignment § Chem.TopologicalEntity3DAlignment
+SpatialEntityAlignment § SpatialEntity3DAlignment
+
+# --
+
+TopologicalAtomAlignment § TopologicalEntityAlignment
+entity § atom
+entities § atoms
+param atom § param entity
+TopologicalEntityAlignment § TopologicalAtomAlignment
+
+TopologicalEntity3DAlignment § TopologicalEntityAlignment
+TopologicalEntityAlignment § TopologicalEntity3DAlignment
 
 #
 # --- CDPL.Pharm package ---

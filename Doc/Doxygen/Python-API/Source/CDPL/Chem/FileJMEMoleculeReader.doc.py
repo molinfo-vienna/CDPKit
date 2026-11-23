@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Reader for molecule data files in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
+# \brief Reader for molecule data files in the native I/O format of the <em>JSME Molecular Editor</em> [\ref JME].
 # 
 class FileJMEMoleculeReader(MoleculeReaderBase):
 

@@ -58,7 +58,7 @@ namespace CDPL
          * The class drives an internal Chem::TopologicalEntityAlignment instance over the two entity sets to
          * enumerate candidate entity mappings (subject to constraints specified via setMinTopologicalMappingSize() and 
          * setTopAlignmentConstraintFunction()), then computes the optimal rigid-body transformation for each accepted
-         * mapping using Kabsch's algorithm with the entity 3D coordinates supplied by a retrieval function
+         * mapping using Kabsch's algorithm [\ref KABA] with the entity 3D coordinates supplied by a retrieval function
          * specified via setEntity3DCoordinatesFunction() and (optionally) the per-entity weights supplied by a function
          * specified by setEntityWeightFunction().
          * Calls to nextAlignment() advance the search. The resulting transformation and the corresponding topological mapping
@@ -208,34 +208,34 @@ namespace CDPL
             bool exhaustiveSearchPerformed() const;
 
             /**
-             * \brief Adds an entity to the specified entity set.
+             * \brief Adds an entity to the specified set.
              * \param entity The entity to add.
-             * \param first_set If \c true, the entity is added to the first entity set, if \c false to the second one.
+             * \param first_set If \c true, the entity is added to the first set, if \c false to the second one.
              */
             void addEntity(const EntityType& entity, bool first_set);
 
             /**
-             * \brief Removes all entities in the specified entity set.
-             * \param first_set If \c true, the first entity set is cleared, if \c false the second one.
+             * \brief Removes all entities in the specified set.
+             * \param first_set If \c true, the first set is cleared, if \c false the second one.
              */
             void clearEntities(bool first_set);
 
             /**
-             * \brief Returns the number of entities in the specified alignment entity set.
-             * \param first_set If \c true, the size of first entity set is returned, if \c false the size of the second one.
+             * \brief Returns the number of entities in the specified set.
+             * \param first_set If \c true, the size of first set is returned, if \c false the size of the second one.
              */
             std::size_t getNumEntities(bool first_set) const;
 
             /**
              * \brief Returns a constant iterator pointing to the beginning of the entities stored in the specified set.
-             * \param first_set If \c true, an iterator for first entity set is returned, if \c false for the second one.
+             * \param first_set If \c true, an iterator for first set is returned, if \c false for the second one.
              * \return A constant iterator pointing to the beginning of the entities stored in the specified set.
              */
             ConstEntityIterator getEntitiesBegin(bool first_set) const;
 
             /**
              * \brief Returns a constant iterator pointing to the end of the entities stored in the specified set.
-             * \param first_set If \c true, an iterator for first entity set is returned, if \c false for the second one.
+             * \param first_set If \c true, an iterator for first set is returned, if \c false for the second one.
              * \return A constant iterator pointing to the end of the entities stored in the specified set.
              */
             ConstEntityIterator getEntitiesEnd(bool first_set) const;

@@ -132,7 +132,7 @@ namespace
 using namespace CDPL;
 
         
-const Base::DataFormat Chem::DataFormat::JME("JME", "JME Molecular Editor String", "", 
+const Base::DataFormat Chem::DataFormat::JME("JME", "JSME Molecular Editor String", "", 
                                              jmeFileExtensions, jmeFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::MOL("MOL", "MDL Molfile", "chemical/x-mdl-molfile", 
                                              molFileExtensions, molFileExtensions + 1, true);

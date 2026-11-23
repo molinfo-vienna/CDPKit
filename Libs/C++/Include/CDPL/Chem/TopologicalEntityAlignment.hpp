@@ -51,10 +51,10 @@ namespace CDPL
          *        a maximum common subgraph search on a entity pair compatibility graph.
          *
          * The compatibility graph is built from the two stored entity sets: a node (\e i, \e j) is created
-         * for every pair of matching entities (checked by an optionally provided EntityMatchFunction instance; default behavior: always matching),
-         * and edges connect mutually compatible node pairs (compatibility being decided by an optionally provided EntityPairMatchFunction
-         * instance which always sees pairs whose first/second entities already match; default behavior: always compatible).
-         * Each call to nextAlignment() advances the underlying Bron-Kerbosch algorithm one maximal clique forward and reports the
+         * for every pair of matching entities (checked by an optional entity match function that can be specified via method setEntityMatchFunction();
+         * default behavior: always matching), and edges connect mutually compatible node pairs (decided by an optional entity pair match function
+         * that can be specified via setEntityPairMatchFunction(); default behavior: always compatible).
+         * Each call to nextAlignment() advances the underlying Bron-Kerbosch algorithm [\ref BKA] one maximal clique forward and reports the
          * corresponding entity mapping between the first an second set. Via the method reset() a fresh search on the next nextAlignment()
          * call can be enforced.
          *
@@ -127,35 +127,35 @@ namespace CDPL
             const EntityPairMatchFunction& getEntityPairMatchFunction() const;
 
             /**
-             * \brief Adds an entity to the specified alignment entity set.
+             * \brief Adds an entity to the specified set.
              * \param entity The entity to add.
-             * \param first_set If \c true, the entity is added to the first entity set, if \c false to the second one.
+             * \param first_set If \c true, the entity is added to the first set, if \c false to the second one.
              * \note Adding the same entity instance more than once has no effect.
              */
             void addEntity(const EntityType& entity, bool first_set);
 
             /**
-             * \brief Removes all entities in the specified alignment entity set.
-             * \param first_set If \c true, the first entity set is cleared, if \c false the second one.
+             * \brief Removes all entities in the specified set.
+             * \param first_set If \c true, the first set is cleared, if \c false the second one.
              */
             void clearEntities(bool first_set);
 
             /**
-             * \brief Returns the number of entities in the specified alignment entity set.
-             * \param first_set If \c true, the size of first entity set is returned, if \c false the size of the second one.
+             * \brief Returns the number of entities in the specified set.
+             * \param first_set If \c true, the size of first set is returned, if \c false the size of the second one.
              */
             std::size_t getNumEntities(bool first_set) const;
 
             /**
              * \brief Returns a constant iterator pointing to the beginning of the entities stored in the specified set.
-             * \param first_set If \c true, an iterator for first entity set is returned, if \c false for the second one.
+             * \param first_set If \c true, an iterator for first set is returned, if \c false for the second one.
              * \return A constant iterator pointing to the beginning of the entities stored in the specified set.
              */
             ConstEntityIterator getEntitiesBegin(bool first_set) const;
 
             /**
              * \brief Returns a constant iterator pointing to the end of the entities stored in the specified set.
-             * \param first_set If \c true, an iterator for first entity set is returned, if \c false for the second one.
+             * \param first_set If \c true, an iterator for first set is returned, if \c false for the second one.
              * \return A constant iterator pointing to the end of the entities stored in the specified set.
              */
             ConstEntityIterator getEntitiesEnd(bool first_set) const;
@@ -172,7 +172,7 @@ namespace CDPL
             /**
              * \brief Searches for the next alignment solution and stores the corresponding mapping of the entities
              *        in the first set to the entities in the second set in the map provided as an argument.
-             * \param mapping The map where the entitiy mapping of the found alignment solution has to be stored.
+             * \param mapping The map where the entity mapping of the found alignment solution has to be stored.
              * \return \c true if a new alignment solution could be found, and \c false otherwise.
              */
             bool nextAlignment(Util::STPairArray& mapping);

@@ -25,9 +25,9 @@
 class DataFormat(Boost.Python.instance):
 
     ##
-    # \brief Provides meta-information about the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+    # \brief Provides meta-information about the native I/O format of the <em>JSME Molecular Editor</em> [\ref JME].
     # 
-    JME = CDPL.Base.DataFormat(name='JME', descr='JME Molecular Editor String', mime_type'', file_exts=['jme'], multi_rec=True)
+    JME = CDPL.Base.DataFormat(name='JME', descr='JSME Molecular Editor String', mime_type'', file_exts=['jme'], multi_rec=True)
 
     ##
     # \brief Provides meta-information about the native <em>%CDPL</em> format.

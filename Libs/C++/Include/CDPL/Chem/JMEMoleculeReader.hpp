@@ -45,7 +45,7 @@ namespace CDPL
         class Molecule;
 
         /**
-         * \brief Reader for molecule data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
+         * \brief Reader for molecule data in the native I/O format of the <em>JSME Molecular Editor</em> [\ref JME].
          */
         class CDPL_CHEM_API JMEMoleculeReader : public Util::StreamDataReader<Molecule, JMEMoleculeReader>
         {

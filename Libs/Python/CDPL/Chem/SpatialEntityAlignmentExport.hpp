@@ -89,7 +89,7 @@ namespace CDPLPythonChem
                      (python::arg("self"), python::arg("min_size")))
                 .def("getMinTopologicalMappingSize", &AlignmentType::getMinTopologicalMappingSize,
                      python::arg("self"))
-                .def("reset", &AlignmentType::reset, python::arg("reset"))
+                .def("reset", &AlignmentType::reset, python::arg("self"))
                 .def("nextAlignment", &AlignmentType::nextAlignment,
                      python::arg("self"))
                 .def("getTransform", &AlignmentType::getTransform,

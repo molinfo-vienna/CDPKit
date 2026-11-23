@@ -46,7 +46,7 @@ namespace CDPL
         class Reaction;
 
         /**
-         * \brief Writer for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] Java applet.
+         * \brief Writer for reaction data in the native I/O format of the <em>JSME Molecular Editor</em> [\ref JME].
          */
         class CDPL_CHEM_API JMEReactionWriter : public Base::DataWriter<Reaction>
         {

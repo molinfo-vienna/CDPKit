@@ -319,7 +319,7 @@ def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_na
                     continue
                 
                 mod_key = patchKey(mod_orig_key, entry[0], entry[1])
-            
+                
                 if mod_key in CPP_API_DOC_BLOCKS:
                     doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_key])
                 
