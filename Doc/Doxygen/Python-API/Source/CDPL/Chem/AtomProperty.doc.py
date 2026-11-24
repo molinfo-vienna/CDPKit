@@ -39,7 +39,7 @@ class AtomProperty(Boost.Python.instance):
     SYMBOL = CDPL.Base.LookupKey('SYMBOL')
 
     ##
-    # \brief Specifies the atom type (see namespace Chem.AtomType).
+    # \brief Specifies the atom type (see class Chem.AtomType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -60,14 +60,14 @@ class AtomProperty(Boost.Python.instance):
     ISOTOPE = CDPL.Base.LookupKey('ISOTOPE')
 
     ##
-    # \brief Specifies the radical type of the atom (see namespace Chem.RadicalType).
+    # \brief Specifies the radical type of the atom (see class Chem.RadicalType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     RADICAL_TYPE = CDPL.Base.LookupKey('RADICAL_TYPE')
 
     ##
-    # \brief Specifies the orbital hybridization state of the atom (see namespace Chem.HybridizationState).
+    # \brief Specifies the orbital hybridization state of the atom (see class Chem.HybridizationState).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -161,14 +161,14 @@ class AtomProperty(Boost.Python.instance):
     STEREO_CENTER_FLAG = CDPL.Base.LookupKey('STEREO_CENTER_FLAG')
 
     ##
-    # \brief Specifies the CIP stereochemical configuration label of the atom (see namespace Chem.CIPDescriptor).
+    # \brief Specifies the CIP stereochemical configuration label of the atom (see class Chem.CIPDescriptor).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     CIP_CONFIGURATION = CDPL.Base.LookupKey('CIP_CONFIGURATION')
 
     ##
-    # \brief Specifies the <em>MDL</em> stereo parity of the atom (see namespace Chem.MDLParity).
+    # \brief Specifies the <em>MDL</em> stereo parity of the atom (see class Chem.MDLParity).
     # 
     # \valuetype  <tt>unsigned int</tt> 
     # \see [\ref CTFILE]
@@ -184,7 +184,7 @@ class AtomProperty(Boost.Python.instance):
     MDL_DB_STEREO_CARE_FLAG = CDPL.Base.LookupKey('MDL_DB_STEREO_CARE_FLAG')
 
     ##
-    # \brief Specifies the <em>Sybyl MOL2</em> atom type (see namespace Chem.SybylAtomType).
+    # \brief Specifies the <em>Sybyl MOL2</em> atom type (see class Chem.SybylAtomType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -233,7 +233,7 @@ class AtomProperty(Boost.Python.instance):
     MOL2_SUBSTRUCTURE_CHAIN = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_CHAIN')
 
     ##
-    # \brief Specifies the reaction center status of the atom (see namespace Chem.ReactionCenterStatus).
+    # \brief Specifies the reaction center status of the atom (see class Chem.ReactionCenterStatus).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 

@@ -142,7 +142,7 @@ def getFeatureCount(cntnr: FeatureContainer, type: int) -> int: pass
 ##
 # \brief Returns a concise human-readable string (e.g.\ <em>"HBD"</em> for H-bond donor) for the given numeric feature type identifier <em>ftr_type</em>.
 # 
-# \param ftr_type The feature type identifier (see namespace Pharm.FeatureType).
+# \param ftr_type The feature type identifier (see class Pharm.FeatureType).
 # 
 # \return The feature type string.
 # 
@@ -161,7 +161,7 @@ def getFeatures(ftr_set: FeatureSet, mapping: FeatureMapping, first: bool) -> No
 # \brief Sets the value of the Pharm.FeatureProperty.GEOMETRY property of the feature <em>feature</em> to <em>geom</em>.
 # 
 # \param feature The feature for which to set the property value.
-# \param geom The new feature geometry identifier (see namespace Pharm.FeatureGeometry).
+# \param geom The new feature geometry identifier (see class Pharm.FeatureGeometry).
 # 
 def setGeometry(feature: Feature, geom: int) -> None: pass
 
@@ -179,7 +179,7 @@ def hasGeometry(feature: Feature) -> bool: pass
 # 
 # \param feature The feature for which to get the property value.
 # 
-# \return The feature geometry identifier (see namespace Pharm.FeatureGeometry).
+# \return The feature geometry identifier (see class Pharm.FeatureGeometry).
 # 
 def getGeometry(feature: Feature) -> int: pass
 
@@ -435,7 +435,7 @@ def clearTolerance(feature: Feature) -> None: pass
 # \brief Sets the value of the Pharm.FeatureProperty.TYPE property of the feature <em>feature</em> to <em>type</em>.
 # 
 # \param feature The feature for which to set the property value.
-# \param type The new feature type identifier (see namespace Pharm.FeatureType).
+# \param type The new feature type identifier (see class Pharm.FeatureType).
 # 
 def setType(feature: Feature, type: int) -> None: pass
 
@@ -453,7 +453,7 @@ def hasType(feature: Feature) -> bool: pass
 # 
 # \param feature The feature for which to get the property value.
 # 
-# \return The feature type identifier (see namespace Pharm.FeatureType).
+# \return The feature type identifier (see class Pharm.FeatureType).
 # 
 def getType(feature: Feature) -> int: pass
 
@@ -592,7 +592,7 @@ def removeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomCont
 # 
 # \param cntnr The feature container providing the input features.
 # \param tgt_set The feature set receiving the filtered features.
-# \param type The feature type to exclude (see namespace Pharm.FeatureType).
+# \param type The feature type to exclude (see class Pharm.FeatureType).
 # \param append If <tt>False</tt>, <em>tgt_set</em> is cleared before adding any features.
 # 
 # \return <tt>True</tt> if at least one feature was excluded, and <tt>False</tt> otherwise. 
@@ -605,7 +605,7 @@ def removeFeaturesWithType(cntnr: FeatureContainer, tgt_set: FeatureSet, type: i
 # \brief Removes features of the given type from the feature set <em>ftr_set</em>.
 # 
 # \param ftr_set The feature set to clean (modified in place).
-# \param type The feature type to remove (see namespace Pharm.FeatureType).
+# \param type The feature type to remove (see class Pharm.FeatureType).
 # 
 # \return <tt>True</tt> if at least one feature was removed, and <tt>False</tt> otherwise. 
 # 
@@ -617,7 +617,7 @@ def removeFeaturesWithType(ftr_set: FeatureSet, type: int) -> bool: pass
 # \brief Removes every feature in the pharmacophore <em>pharm</em> whose type matches <em>type</em>.
 # 
 # \param pharm The pharmacophore to filter.
-# \param type The feature type to remove (see namespace Pharm.FeatureType).
+# \param type The feature type to remove (see class Pharm.FeatureType).
 # 
 # \return <tt>True</tt> if at least one feature was removed, and <tt>False</tt> otherwise. 
 # 

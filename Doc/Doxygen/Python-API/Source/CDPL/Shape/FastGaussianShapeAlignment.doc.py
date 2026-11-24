@@ -118,14 +118,14 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     ##
     # \brief Sets the alignment result selection mode.
     # 
-    # \param mode The new result-selection mode (see namespace Shape.AlignmentResultSelectionMode).
+    # \param mode The new result-selection mode (see class Shape.AlignmentResultSelectionMode).
     # 
     def setResultSelectionMode(mode: int) -> None: pass
 
     ##
     # \brief Returns the currently configured alignment result selection mode.
     # 
-    # \return The result-selection mode (see namespace Shape.AlignmentResultSelectionMode).
+    # \return The result-selection mode (see class Shape.AlignmentResultSelectionMode).
     # 
     def getResultSelectionMode() -> int: pass
 

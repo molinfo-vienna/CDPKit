@@ -67,7 +67,7 @@ def calcAlignedTverskyComboScore(res: AlignmentResult, beta: float = 0.95) -> fl
 # \param from_ctr_xform The output inverse transformation.
 # \param mom_eq_thresh The relative threshold below which two principal moments are considered equal.
 # 
-# \return The perceived symmetry class of the shape (see namespace Shape.SymmetryClass).
+# \return The perceived symmetry class of the shape (see class Shape.SymmetryClass).
 # 
 def calcCenterAlignmentTransforms(func: GaussianShapeFunction, to_ctr_xform: Math.Matrix4D, from_ctr_xform: Math.Matrix4D, mom_eq_thresh: float = 0.15) -> int: pass
 
@@ -219,7 +219,7 @@ def calcTverskyComboScore(res: AlignmentResult, alpha: float = 0.95, beta: float
 # \param back_xform The output transformation that maps the aligned shape back to its original frame.
 # \param mom_eq_thresh The relative threshold below which two principal moments are considered equal.
 # 
-# \return The perceived symmetry class of the shape (see namespace Shape.SymmetryClass).
+# \return The perceived symmetry class of the shape (see class Shape.SymmetryClass).
 # 
 def centerAndAlignPrincipalAxes(shape: GaussianShape, func: GaussianShapeFunction, back_xform: Math.Matrix4D, mom_eq_thresh: float = 0.15) -> int: pass
 
@@ -274,7 +274,7 @@ def matrixToQuaternion(mtx: Math.Matrix4D, quat: Math.Vector7D) -> None: pass
 # \param moments The principal moments.
 # \param eq_thresh The relative threshold below which two moments are considered equal.
 # 
-# \return The perceived symmetry class (see namespace Shape.SymmetryClass).
+# \return The perceived symmetry class (see class Shape.SymmetryClass).
 # 
 def perceiveSymmetryClass(moments: Math.Vector3D, eq_thresh: float = 0.15) -> int: pass
 

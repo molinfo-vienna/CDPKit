@@ -58,7 +58,7 @@ class BurdenMatrixGenerator(Boost.Python.instance):
     # 
     # \param func A BurdenMatrixGenerator.AtomWeightFunction instance that wraps the target function.
     # 
-    # \note By default, the diagonal elements of the <em>Burden</em> matrix are atom types (see namespace Chem.AtomType).
+    # \note By default, the diagonal elements of the <em>Burden</em> matrix are atom types (see class Chem.AtomType).
     # 
     def setAtomWeightFunction(func: Chem.DoubleAtomFunctor) -> None: pass
 

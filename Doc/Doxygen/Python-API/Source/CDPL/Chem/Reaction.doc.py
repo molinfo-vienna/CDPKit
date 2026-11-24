@@ -22,7 +22,7 @@
 ##
 # \brief Abstract base class for chemical reactions composed of role-tagged reaction components of type Chem.Molecule.
 # 
-# Each component carries a reaction role that is specified by one of the constants declared in namespace Chem.ReactionRole. Reaction roles divide the components into three different subsets: reactants, agents/catalysts and products. For component management/access the methods getComponentRole(), getNumComponents(), getComponent(), getComponentsBegin() and getComponentsEnd() are available. For reaction editing the methods addComponent(), removeComponent(), swapComponentRoles() and clear(). The method clone() allows the creation of polymorphic deep copies and reaction properties can be stored/retrieved via the methods of the Base.PropertyContainer base class.
+# Each component carries a reaction role that is specified by one of the constants declared in class Chem.ReactionRole. Reaction roles divide the components into three different subsets: reactants, agents/catalysts and products. For component management/access the methods getComponentRole(), getNumComponents(), getComponent(), getComponentsBegin() and getComponentsEnd() are available. For reaction editing the methods addComponent(), removeComponent(), swapComponentRoles() and clear(). The method clone() allows the creation of polymorphic deep copies and reaction properties can be stored/retrieved via the methods of the Base.PropertyContainer base class.
 # 
 class Reaction(Base.PropertyContainer):
 
@@ -78,7 +78,7 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief Creates a new reaction component with the specified role.
     # 
-    # \param role The reaction role of the new component (see namespace Chem.ReactionRole).
+    # \param role The reaction role of the new component (see class Chem.ReactionRole).
     # 
     # \return The newly created component molecule. 
     # 
@@ -102,7 +102,7 @@ class Reaction(Base.PropertyContainer):
     # 
     # \param mol The component for which to return the reaction role.
     # 
-    # \return The reaction role of the component (see namespace Chem.ReactionRole).
+    # \return The reaction role of the component (see class Chem.ReactionRole).
     # 
     def getComponentRole(mol: Molecule) -> int: pass
 
@@ -120,7 +120,7 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief Returns the number of reaction components with the specified role.
     # 
-    # \param role The reaction role (see namespace Chem.ReactionRole).
+    # \param role The reaction role (see class Chem.ReactionRole).
     # 
     # \return The number of reaction components with the specified role. 
     # 
@@ -139,7 +139,7 @@ class Reaction(Base.PropertyContainer):
     # \brief Returns the reaction component at index <em>idx</em> in the list of components with the specified role.
     # 
     # \param idx The zero-based index of the reaction component to return.
-    # \param role A flag indicating the reaction role of the component (see namespace Chem.ReactionRole).
+    # \param role A flag indicating the reaction role of the component (see class Chem.ReactionRole).
     # 
     # \return The reaction component with the specified role and index. 
     # 
@@ -161,7 +161,7 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief Removes all components with the specified role.
     # 
-    # \param role The reaction role of the components to remove (see namespace Chem.ReactionRole).
+    # \param role The reaction role of the components to remove (see class Chem.ReactionRole).
     # 
     # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
@@ -171,7 +171,7 @@ class Reaction(Base.PropertyContainer):
     # \brief Removes the reaction component at index <em>idx</em> in the list of components with the specified role.
     # 
     # \param idx The zero-based index of the component to remove.
-    # \param role The reaction role of the component (see namespace Chem.ReactionRole).
+    # \param role The reaction role of the component (see class Chem.ReactionRole).
     # 
     # \throw Base.IndexError if <em>idx</em> is not in the range [0, <tt>getNumComponents(role)</tt>). Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 
@@ -191,8 +191,8 @@ class Reaction(Base.PropertyContainer):
     # 
     # If <em>role1</em> is equal to <em>role2</em>, the method has no effect.
     # 
-    # \param role1 The reaction role of the first component set (see namespace Chem.ReactionRole).
-    # \param role2 The reaction role of the second component set (see namespace Chem.ReactionRole).
+    # \param role1 The reaction role of the first component set (see class Chem.ReactionRole).
+    # \param role2 The reaction role of the second component set (see class Chem.ReactionRole).
     # 
     # \throw Base.ValueError if the value of <em>role1</em> and/or <em>role2</em> is not equal to Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
     # 

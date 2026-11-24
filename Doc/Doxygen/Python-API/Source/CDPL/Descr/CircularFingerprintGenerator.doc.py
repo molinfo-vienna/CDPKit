@@ -36,7 +36,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
         ##
         # \brief Constructs the <tt>DefAtomIdentifierFunctor</tt> instance for the specified set of atomic properties.
         # 
-        # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.AtomPropertyFlag.
+        # The <em>flags</em> argument is an OR combination of the constants defined in class Chem.AtomPropertyFlag.
         # 
         # Supported property flags are:
         #  - Chem.AtomPropertyFlag.TYPE
@@ -72,7 +72,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
         ##
         # \brief Constructs the <tt>DefBondIdentifierFunctor</tt> instance for the specified set of bond properties.
         # 
-        # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag.
+        # The <em>flags</em> argument is an OR combination of the constants defined in class Chem.BondPropertyFlag.
         # 
         # Supported property flags are:
         #  - Chem.BondPropertyFlag.ORDER

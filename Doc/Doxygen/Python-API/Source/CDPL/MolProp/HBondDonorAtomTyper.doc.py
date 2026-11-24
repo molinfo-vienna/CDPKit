@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implements the perception of H-bond donor atom types (see namespace MolProp.HBondDonorAtomType).
+# \brief Implements the perception of H-bond donor atom types (see class MolProp.HBondDonorAtomType).
 # 
 class HBondDonorAtomTyper(Boost.Python.instance):
 

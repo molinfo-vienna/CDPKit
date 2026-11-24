@@ -42,7 +42,7 @@
 #  <tr><td>Vis.ControlParameter.GRID_VIEW_TEXT_COLOR</td><td>Specifies the default text color</td></tr>
 # </table>
 # 
-# Default values for the control-parameters are defined in namespace Vis.ControlParameterDefault.
+# Default values for the control-parameters are defined in class Vis.ControlParameterDefault.
 # 
 # \since 1.2
 # 

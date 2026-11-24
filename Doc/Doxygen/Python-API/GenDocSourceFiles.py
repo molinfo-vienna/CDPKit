@@ -322,7 +322,7 @@ def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_na
                 
                 if mod_key in CPP_API_DOC_BLOCKS:
                     doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_key])
-                
+
                     for str_repl in entry[2]:
                         doc_block = doc_block.replace(str_repl[0], str_repl[1])
 

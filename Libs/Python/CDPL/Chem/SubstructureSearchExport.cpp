@@ -82,7 +82,5 @@ void CDPLPythonChem::exportSubstructureSearch()
                       &Chem::SubstructureSearch::setMaxNumMappings)
         .def("__getitem__", getMappingFunc, (python::arg("self"), python::arg("idx")), 
              python::return_internal_reference<1>())
-        .def("__len__", &Chem::SubstructureSearch::getNumMappings, python::arg("self"))
-        .def("__nonzero__", &Chem::SubstructureSearch::mappingExists, python::arg("self"))
-        .def("__bool__", &Chem::SubstructureSearch::mappingExists, python::arg("self"));
+        .def("__len__", &Chem::SubstructureSearch::getNumMappings, python::arg("self"));
 }

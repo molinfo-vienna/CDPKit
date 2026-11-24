@@ -89,7 +89,7 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
     # 
     # \param func An AutoCorrelation2DVectorCalculator.AtomPairWeightFunction instance that wraps the target function.
     # 
-    # \note The default atom pair weight function returns the product of the atom types (see namespace Chem.AtomType).
+    # \note The default atom pair weight function returns the product of the atom types (see class Chem.AtomType).
     # 
     def setAtomPairWeightFunction(func: Chem.DoubleAtom2Functor) -> None: pass
 

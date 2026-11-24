@@ -22,7 +22,7 @@
 ##
 # \brief Calculator that derives 2D wedge/hash bond stereo flags from atom 2D coordinates and stereochemical descriptors of a molecular graph.
 # 
-# The result is an array of stereo flag values (see namespace Chem.BondStereoFlag) indexed by the bond index in the molecular graph. The atom 2D coordinates accessor function can be customized via setAtom2DCoordinatesFunction().
+# The result is an array of stereo flag values (see class Chem.BondStereoFlag) indexed by the bond index in the molecular graph. The atom 2D coordinates accessor function can be customized via setAtom2DCoordinatesFunction().
 # 
 class BondStereoFlagCalculator(Boost.Python.instance):
 
@@ -35,7 +35,7 @@ class BondStereoFlagCalculator(Boost.Python.instance):
     # \brief Constructs the <tt>BondStereoFlagCalculator</tt> instance and calculates the 2D stereo flags of the bonds in the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to calculate the stereo flags.
-    # \param flags An array containing the calculated stereo flags (possible values are defined as constants in namespace Chem.BondStereoFlag). The stereo flags are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the 2D stereo flag of a bond is accessible via its index).
+    # \param flags An array containing the calculated stereo flags (possible values are defined as constants in class Chem.BondStereoFlag). The stereo flags are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the 2D stereo flag of a bond is accessible via its index).
     # 
     def __init__(molgraph: MolecularGraph, flags: Util.UIArray) -> None: pass
 
@@ -69,7 +69,7 @@ class BondStereoFlagCalculator(Boost.Python.instance):
     # \brief Calculates the 2D stereo flags of the bonds in the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to calculate the stereo flags.
-    # \param flags An array containing the calculated stereo flags (possible values are defined as constants in namespace Chem.BondStereoFlag). The stereo flags are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the 2D stereo flag of a bond is accessible via its index).
+    # \param flags An array containing the calculated stereo flags (possible values are defined as constants in class Chem.BondStereoFlag). The stereo flags are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the 2D stereo flag of a bond is accessible via its index).
     # 
     def calculate(molgraph: MolecularGraph, flags: Util.UIArray) -> None: pass
 

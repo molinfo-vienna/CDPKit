@@ -114,7 +114,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \brief Constructs the <tt>GaussianShapeFunctionAlignment</tt> instance with the given reference shape function.
     # 
     # \param ref_func The reference shape function.
-    # \param sym_class The symmetry class of the reference shape (see namespace Shape.SymmetryClass).
+    # \param sym_class The symmetry class of the reference shape (see class Shape.SymmetryClass).
     # 
     def __init__(ref_func: GaussianShapeFunction, sym_class: int) -> None: pass
 
@@ -155,7 +155,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \brief Sets the reference shape function used by subsequent align() calls.
     # 
     # \param func The reference shape function.
-    # \param sym_class The symmetry class of the reference shape (see namespace Shape.SymmetryClass).
+    # \param sym_class The symmetry class of the reference shape (see class Shape.SymmetryClass).
     # 
     def setReference(func: GaussianShapeFunction, sym_class: int) -> None: pass
 
@@ -291,7 +291,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \param func The reference shape function (may be modified).
     # \param xform The output transformation that maps the prepared frame back to the original frame.
     # 
-    # \return The perceived symmetry class of the reference shape (see namespace Shape.SymmetryClass).
+    # \return The perceived symmetry class of the reference shape (see class Shape.SymmetryClass).
     # 
     def setupReference(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
@@ -301,7 +301,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \param func The aligned shape function (may be modified).
     # \param xform The output transformation that maps the prepared frame back to the original frame.
     # 
-    # \return The perceived symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # \return The perceived symmetry class of the aligned shape (see class Shape.SymmetryClass).
     # 
     def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
@@ -341,7 +341,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \brief Aligns the shape function <em>func</em> against the configured reference shape.
     # 
     # \param func The aligned shape function.
-    # \param sym_class The symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # \param sym_class The symmetry class of the aligned shape (see class Shape.SymmetryClass).
     # 
     # \return <tt>True</tt> if at least one alignment result was produced, and <tt>False</tt> otherwise.
     # 

@@ -22,7 +22,7 @@
 ##
 # \brief Provides constants for the specification of GRAIL-specific extended pharmacophore feature types that refine H-bond donor and acceptor categories by the chemical environment (atom element + SYBYL-like type) of the participating heavy atom.
 # 
-# Re-exports all constants from namespace Pharm.FeatureType and adds extended donor/acceptor subtypes used by the GRAIL descriptor calculation.
+# Re-exports all constants from class Pharm.FeatureType and adds extended donor/acceptor subtypes used by the GRAIL descriptor calculation.
 # 
 # \since 1.1
 # 
@@ -204,6 +204,6 @@ class FeatureType(Boost.Python.instance):
     H_BOND_ACCEPTOR_S2 = 33
 
     ##
-    # \brief Highest extended feature type constant defined in this namespace.
+    # \brief Highest extended feature type constant defined in this class.
     # 
     MAX_EXT_TYPE = 33

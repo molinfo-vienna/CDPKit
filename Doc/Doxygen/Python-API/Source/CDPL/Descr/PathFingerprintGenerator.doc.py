@@ -36,7 +36,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
         ##
         # \brief Constructs the <tt>DefAtomDescriptorFunctor</tt> instance for the specified set of atomic properties.
         # 
-        # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.AtomPropertyFlag. Supported property flags are:
+        # The <em>flags</em> argument is an OR combination of the constants defined in class Chem.AtomPropertyFlag. Supported property flags are:
         #  - Chem.AtomPropertyFlag.TYPE
         #  - Chem.AtomPropertyFlag.ISOTOPE
         #  - Chem.AtomPropertyFlag.AROMATICITY
@@ -65,7 +65,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
         ##
         # \brief Constructs the <tt>DefBondDescriptorFunctor</tt> instance for the specified set of bond properties.
         # 
-        # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag. Supported property flags are:
+        # The <em>flags</em> argument is an OR combination of the constants defined in class Chem.BondPropertyFlag. Supported property flags are:
         #  - Chem.BondPropertyFlag.ORDER
         #  - Chem.BondPropertyFlag.TOPOLOGY
         #  - and Chem.BondPropertyFlag.AROMATICITY

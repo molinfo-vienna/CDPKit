@@ -205,7 +205,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     ##
     # \brief Loads the built-in default out-of-plane bending parameter entries for the specified MMFF94 parameter set.
     # 
-    # \param param_set The parameter set identifier (see namespace ForceField.MMFF94ParameterSet) selecting which built-in defaults to load.
+    # \param param_set The parameter set identifier (see class ForceField.MMFF94ParameterSet) selecting which built-in defaults to load.
     # 
     def loadDefaults(param_set: int) -> None: pass
 
@@ -220,7 +220,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     # \brief Replaces the process-wide default table for <em>param_set</em> by <em>table</em>.
     # 
     # \param table The new default table (<tt>None</tt> resets to the built-in default).
-    # \param param_set The parameter set identifier (see namespace ForceField.MMFF94ParameterSet) selecting which default table to replace.
+    # \param param_set The parameter set identifier (see class ForceField.MMFF94ParameterSet) selecting which default table to replace.
     # 
     @staticmethod
     def set(table: MMFF94OutOfPlaneBendingParameterTable, param_set: int) -> None: pass
@@ -228,7 +228,7 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table for <em>param_set</em> (lazily initialized on first call).
     # 
-    # \param param_set The parameter set identifier (see namespace ForceField.MMFF94ParameterSet) selecting which default table to return.
+    # \param param_set The parameter set identifier (see class ForceField.MMFF94ParameterSet) selecting which default table to return.
     # 
     # \return A shared reference to the selected default table.
     # 

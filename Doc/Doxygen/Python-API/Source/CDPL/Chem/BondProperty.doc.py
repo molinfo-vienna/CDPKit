@@ -32,7 +32,7 @@ class BondProperty(Boost.Python.instance):
     ORDER = CDPL.Base.LookupKey('ORDER')
 
     ##
-    # \brief Specifies the <em>Sybyl MOL2</em> bond type (see namespace Chem.SybylBondType).
+    # \brief Specifies the <em>Sybyl MOL2</em> bond type (see class Chem.SybylBondType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -67,14 +67,14 @@ class BondProperty(Boost.Python.instance):
     STEREO_CENTER_FLAG = CDPL.Base.LookupKey('STEREO_CENTER_FLAG')
 
     ##
-    # \brief Specifies the CIP stereochemical configuration label of the bond (see namespace Chem.CIPDescriptor).
+    # \brief Specifies the CIP stereochemical configuration label of the bond (see class Chem.CIPDescriptor).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     CIP_CONFIGURATION = CDPL.Base.LookupKey('CIP_CONFIGURATION')
 
     ##
-    # \brief Specifies the bond direction in <em>SMILES</em> and <em>SMARTS</em> strings (see namespace Chem.BondDirection).
+    # \brief Specifies the bond direction in <em>SMILES</em> and <em>SMARTS</em> strings (see class Chem.BondDirection).
     # 
     # \valuetype  <tt>unsigned int</tt> 
     # \see [\ref SMILES, \ref SMARTS]
@@ -82,14 +82,14 @@ class BondProperty(Boost.Python.instance):
     DIRECTION = CDPL.Base.LookupKey('DIRECTION')
 
     ##
-    # \brief Specifies the 2D stereo flag of the bond (see namespace Chem.BondStereoFlag).
+    # \brief Specifies the 2D stereo flag of the bond (see class Chem.BondStereoFlag).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     STEREO_2D_FLAG = CDPL.Base.LookupKey('STEREO_2D_FLAG')
 
     ##
-    # \brief Specifies the reaction center status of the bond (see namespace Chem.ReactionCenterStatus).
+    # \brief Specifies the reaction center status of the bond (see class Chem.ReactionCenterStatus).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 

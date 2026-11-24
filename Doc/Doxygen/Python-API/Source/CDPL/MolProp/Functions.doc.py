@@ -71,7 +71,7 @@ def getAromaticBondCount(cntnr: Chem.BondContainer) -> int: pass
 # 
 # \param atom The atom.
 # \param molgraph The molecular graph.
-# \param type The atom type to count (see namespace Chem.AtomType).
+# \param type The atom type to count (see class Chem.AtomType).
 # \param strict If <tt>True</tt>, the atom type must match <em>type</em> exactly. Otherwise, generic types match via Chem.atomTypesMatch().
 # 
 # \return The matching neighbor count.
@@ -91,7 +91,7 @@ def getAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 # \brief Returns the number of atoms in the molecular graph <em>molgraph</em> whose type property matches <em>type</em>.
 # 
 # \param molgraph The molecular graph.
-# \param type The atom type to count (see namespace Chem.AtomType).
+# \param type The atom type to count (see class Chem.AtomType).
 # \param strict If <tt>True</tt>, the atom type must match <em>type</em> exactly. Otherwise, generic types match via Chem.atomTypesMatch().
 # 
 # \return The number of matching atoms (including implicit hydrogens when <em>type</em> matches Chem.AtomType.H). 
@@ -136,7 +136,7 @@ def getBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: int) -> 
 # \param atom The atom.
 # \param molgraph The molecular graph.
 # \param order The bond order to count.
-# \param type The atom type of the bonded partner (see namespace Chem.AtomType).
+# \param type The atom type of the bonded partner (see class Chem.AtomType).
 # \param strict If <tt>True</tt>, the atom type must match <em>type</em> exactly. Otherwise, generic types match via Chem.atomTypesMatch().
 # 
 # \return The number of matching bonds.
@@ -243,7 +243,7 @@ def getElementValenceElectronCount(atom: Chem.Atom) -> int: pass
 # 
 # \param atom The atom.
 # \param molgraph The molecular graph.
-# \param type The atom type to count (see namespace Chem.AtomType).
+# \param type The atom type to count (see class Chem.AtomType).
 # \param strict If <tt>True</tt>, the atom type must match <em>type</em> exactly. Otherwise, generic types match via Chem.atomTypesMatch().
 # 
 # \return The matching explicit atom neighbor count.
@@ -263,7 +263,7 @@ def getExplicitAtomCount(cntnr: Chem.AtomContainer) -> int: pass
 # \brief Returns the number of explicit atoms in <em>cntnr</em> that match the given atom type.
 # 
 # \param cntnr The atom container.
-# \param type The atom type to match (see namespace Chem.AtomType).
+# \param type The atom type to match (see class Chem.AtomType).
 # \param strict If <tt>True</tt>, atoms must match the type strictly. Otherwise, generic-type matching applies.
 # 
 # \return The number of matching explicit atoms.
@@ -297,7 +297,7 @@ def getExplicitBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: 
 # \param atom The atom.
 # \param molgraph The molecular graph.
 # \param order The bond order to count.
-# \param type The atom type of the bonded partner (see namespace Chem.AtomType).
+# \param type The atom type of the bonded partner (see class Chem.AtomType).
 # \param strict If <tt>True</tt>, the atom type must match <em>type</em> exactly. Otherwise, generic types match via Chem.atomTypesMatch().
 # 
 # \return The number of matching explicit bonds.
@@ -437,7 +437,7 @@ def getHBondAcceptorAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 # \brief Sets the value of the MolProp.AtomProperty.H_BOND_ACCEPTOR_TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param type The new H-bond acceptor type identifier (see namespace MolProp.HBondAcceptorAtomType).
+# \param type The new H-bond acceptor type identifier (see class MolProp.HBondAcceptorAtomType).
 # 
 def setHBondAcceptorType(atom: Chem.Atom, type: int) -> None: pass
 
@@ -455,7 +455,7 @@ def hasHBondAcceptorType(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The H-bond acceptor type identifier (see namespace MolProp.HBondAcceptorAtomType).
+# \return The H-bond acceptor type identifier (see class MolProp.HBondAcceptorAtomType).
 # 
 def getHBondAcceptorType(atom: Chem.Atom) -> int: pass
 
@@ -479,7 +479,7 @@ def getHBondDonorAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 # \brief Sets the value of the MolProp.AtomProperty.H_BOND_DONOR_TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param type The new H-bond donor type identifier (see namespace MolProp.HBondDonorAtomType).
+# \param type The new H-bond donor type identifier (see class MolProp.HBondDonorAtomType).
 # 
 def setHBondDonorType(atom: Chem.Atom, type: int) -> None: pass
 
@@ -497,7 +497,7 @@ def hasHBondDonorType(atom: Chem.Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The H-bond donor type identifier (see namespace MolProp.HBondDonorAtomType).
+# \return The H-bond donor type identifier (see class MolProp.HBondDonorAtomType).
 # 
 def getHBondDonorType(atom: Chem.Atom) -> int: pass
 
@@ -895,7 +895,7 @@ def getRuleOfFiveScore(molgraph: Chem.MolecularGraph) -> int: pass
 # \param atom The atom.
 # \param molgraph The molecular graph.
 # 
-# \return The coordination geometry identifier (see namespace MolProp.CoordinationGeometry).
+# \return The coordination geometry identifier (see class MolProp.CoordinationGeometry).
 # 
 def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
@@ -906,7 +906,7 @@ def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph)
 # \param molgraph The molecular graph.
 # \param steric_num The pre-computed steric number of the atom <em>atom</em> (avoids re-computation).
 # 
-# \return The coordination geometry identifier (see namespace MolProp.CoordinationGeometry).
+# \return The coordination geometry identifier (see class MolProp.CoordinationGeometry).
 # 
 def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph, steric_num: int) -> int: pass
 

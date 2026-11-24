@@ -25,14 +25,14 @@
 class FeatureProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the type of the pharmacophore feature (see namespace Pharm.FeatureType).
+    # \brief Specifies the type of the pharmacophore feature (see class Pharm.FeatureType).
     # 
     # \valuetype  <tt>int</tt>
     # 
     TYPE = CDPL.Base.LookupKey('TYPE')
 
     ##
-    # \brief Specifies the geometric shape of the feature (see namespace Pharm.FeatureGeometry).
+    # \brief Specifies the geometric shape of the feature (see class Pharm.FeatureGeometry).
     # 
     # \valuetype  <tt>int</tt>
     # 

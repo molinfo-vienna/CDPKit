@@ -84,7 +84,5 @@ void CDPLPythonChem::exportCommonConnectedSubstructureSearch()
                       &Chem::CommonConnectedSubstructureSearch::setMinSubstructureSize)
         .def("__getitem__", getMappingFunc, (python::arg("self"), python::arg("idx")),
              python::return_internal_reference<1>())
-        .def("__len__", &Chem::CommonConnectedSubstructureSearch::getNumMappings, python::arg("self"))
-        .def("__nonzero__", &Chem::CommonConnectedSubstructureSearch::mappingExists, python::arg("self"))
-        .def("__bool__", &Chem::CommonConnectedSubstructureSearch::mappingExists, python::arg("self"));
+        .def("__len__", &Chem::CommonConnectedSubstructureSearch::getNumMappings, python::arg("self"));
 }

@@ -22,15 +22,15 @@
 ##
 # \brief Enumerates the atom and bond self-mappings (automorphism group) of a molecular graph.
 # 
-# The automorphism group of a molecular graph is the set of self-mappings (atom permutations and the induced bond permutations) that preserve the molecular graph structure under the configured atom and bond mapping constraints. %Atom and bond matching is configurable via bit masks composed by a bitwise-OR combination of the constants defined in namespace Chem.AtomPropertyFlag and Chem.BondPropertyFlag that are set using the methods setAtomPropertyFlags() and setBondPropertyFlags(), respectively. Found mappings are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(). The method setFoundMappingCallback() allows to register a user-defined callback function that gets invoked whenever a new mapping has been found. The maximum number of stored solutions can be bounded by setMaxNumMappings() and stopSearch() allows an immediate abort of the search process. Furthermore, query &harr; target atom and bond mappings can be restricted to user-defined subsets by the methods addAtomMappingConstraint() and addBondMappingConstraint(), respectively.
+# The automorphism group of a molecular graph is the set of self-mappings (atom permutations and the induced bond permutations) that preserve the molecular graph structure under the configured atom and bond mapping constraints. %Atom and bond matching is configurable via bit masks composed by a bitwise-OR combination of the constants defined in class Chem.AtomPropertyFlag and Chem.BondPropertyFlag that are set using the methods setAtomPropertyFlags() and setBondPropertyFlags(), respectively. Found mappings are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping(). The method setFoundMappingCallback() allows to register a user-defined callback function that gets invoked whenever a new mapping has been found. The maximum number of stored solutions can be bounded by setMaxNumMappings() and stopSearch() allows an immediate abort of the search process. Furthermore, query &harr; target atom and bond mappings can be restricted to user-defined subsets by the methods addAtomMappingConstraint() and addBondMappingConstraint(), respectively.
 # 
 class AutomorphismGroupSearch(Boost.Python.instance):
 
     ##
     # \brief Constructs and initializes the <tt>AutomorphismGroupSearch</tt> instance for the specified atom and bond properties.
     # 
-    # \param atom_flags Bitwise-OR combination of Chem.AtomPropertyFlag values specifying atomic properties considered for atom matching.
-    # \param bond_flags Bitwise-OR combination of Chem.BondPropertyFlag values specifying bond properties considered for bond matching.
+    # \param atom_flags Bitwise-OR combination of constants in class Chem.AtomPropertyFlag specifying the set of considered atom properties.
+    # \param bond_flags Bitwise-OR combination of constants in class Chem.BondPropertyFlag specifying the set of considered bond properties.
     # 
     def __init__(atom_flags: int = 12702, bond_flags: int = 30) -> None: pass
 
@@ -49,28 +49,28 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     ##
     # \brief Specifies the atomic properties considered for atom matching during automorphism search.
     # 
-    # \param flags The new bitwise-OR combination of corresponding Chem.AtomPropertyFlag values.
+    # \param flags Bitwise-OR combination of constants in class Chem.AtomPropertyFlag.
     # 
     def setAtomPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief Returns the atomic properties currently considered for atom matching.
     # 
-    # \return The currently set bitwise-OR combination of corresponding Chem.AtomPropertyFlag values.
+    # \return The currently set bitwise-OR combination of constants in class Chem.AtomPropertyFlag.
     # 
     def getAtomPropertyFlags() -> int: pass
 
     ##
     # \brief Specifies the bond properties considered for bond matching during automorphism search.
     # 
-    # \param flags The new bitwise-OR combination of corresponding Chem.BondPropertyFlag values.
+    # \param flags Bitwise-OR combination of constants in class Chem.BondPropertyFlag.
     # 
     def setBondPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief Returns the bond properties currently considered for bond matching.
     # 
-    # \return The currently set bitwise-OR combination of corresponding Chem.BondPropertyFlag values.
+    # \return The currently set bitwise-OR combination of constants in class Chem.BondPropertyFlag.
     # 
     def getBondPropertyFlags() -> int: pass
 
@@ -196,8 +196,22 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     # 
     def getFoundMappingCallback() -> BoolMolecularGraphAtomBondMappingFunctor: pass
 
+    ##
+    # \brief Returns the stored Chem.AtomBondMapping instance at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the Chem.AtomBondMapping instance to return.
+    # 
+    # \return The Chem.AtomBondMapping instance at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
+    # 
     def __getitem__(idx: int) -> AtomBondMapping: pass
 
+    ##
+    # \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
+    # 
+    # \return The number of atom/bond mappings that were recorded in the last call to findMappings().
+    # 
     def __len__() -> int: pass
 
     objectID = property(getObjectID)

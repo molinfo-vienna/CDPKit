@@ -75,6 +75,6 @@ class FeatureType(Boost.Python.instance):
     EXCLUSION_VOLUME = 9
 
     ##
-    # \brief Specifies the highest feature type constant defined in this namespace.
+    # \brief Specifies the highest feature type constant defined in this class.
     # 
     MAX_TYPE = 9

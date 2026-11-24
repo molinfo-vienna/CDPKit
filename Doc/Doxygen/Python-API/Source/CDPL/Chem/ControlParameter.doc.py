@@ -94,7 +94,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the desired version of the connection table data format for the output of molecular graphs in <em>MDL SD-</em> or <em>Mol-File</em> format.
     # 
-    # The desired data format version is specified by one of the constants defined in namespace CDPL.Chem.MDLDataFormatVersion. If <tt>MDL_CTAB_VERSION</tt> has not been set or the parameter value equals CDPL.Chem.MDLDataFormatVersion.UNDEF, the format specified by the Chem.MolecularGraph property Chem.MolecularGraphProperty.MDL_CTAB_VERSION will take effect.
+    # The desired data format version is specified by one of the constants defined in class CDPL.Chem.MDLDataFormatVersion. If <tt>MDL_CTAB_VERSION</tt> has not been set or the parameter value equals CDPL.Chem.MDLDataFormatVersion.UNDEF, the format specified by the Chem.MolecularGraph property Chem.MolecularGraphProperty.MDL_CTAB_VERSION will take effect.
     # 
     # If, after all, both the parameter and the property do not specify a particular connection table format version, a suitable output format is chosen as follows:
     #  - if both the atom and bond count of the molecular graph is less than <em>1000</em>, data will be written in the <em>V2000</em> format
@@ -118,7 +118,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the desired data format version for the output of reactions in <em>MDL Rxn-</em> or <em>RD-File</em> format.
     # 
-    # The desired data format version is specified by one of the constants defined in namespace CDPL.Chem.MDLDataFormatVersion. If <tt>MDL_RXN_FILE_VERSION</tt> has not been set or the parameter value equals CDPL.Chem.MDLDataFormatVersion.UNDEF, the format specified by the Chem.Reaction property Chem.ReactionProperty.MDL_RXN_FILE_VERSION will take effect.
+    # The desired data format version is specified by one of the constants defined in class CDPL.Chem.MDLDataFormatVersion. If <tt>MDL_RXN_FILE_VERSION</tt> has not been set or the parameter value equals CDPL.Chem.MDLDataFormatVersion.UNDEF, the format specified by the Chem.Reaction property Chem.ReactionProperty.MDL_RXN_FILE_VERSION will take effect.
     # 
     # If, after all, both the parameter and the property do not specify a particular <em>Rxn-File</em> format version, a suitable output format is chosen as follows:
     #  - if both the reactant and product count of the output reaction is less than <em>1000</em>, data will be written in the <em>V2000</em> format
@@ -464,7 +464,7 @@ class ControlParameter(Boost.Python.instance):
     MOL2_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_CALC_FORMAL_CHARGES')
 
     ##
-    # \brief Specifies the charge type to write to the <tt>@<TRIPOS>MOLECULE</tt> block when generating <em>Sybyl MOL2</em> output (see namespace Chem.MOL2ChargeType). 
+    # \brief Specifies the charge type to write to the <tt>@<TRIPOS>MOLECULE</tt> block when generating <em>Sybyl MOL2</em> output (see class Chem.MOL2ChargeType). 
     # \valuetype  <tt>unsigned int</tt>
     # 
     MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
@@ -477,7 +477,7 @@ class ControlParameter(Boost.Python.instance):
     MOL2_OUTPUT_SUBSTRUCTURES = CDPL.Base.LookupKey('MOL2_OUTPUT_SUBSTRUCTURES')
 
     ##
-    # \brief Specifies the molecule type to write to the <tt>@<TRIPOS>MOLECULE</tt> block when generating <em>Sybyl MOL2</em> output (see namespace Chem.MOL2MoleculeType).
+    # \brief Specifies the molecule type to write to the <tt>@<TRIPOS>MOLECULE</tt> block when generating <em>Sybyl MOL2</em> output (see class Chem.MOL2MoleculeType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -535,7 +535,7 @@ class ControlParameter(Boost.Python.instance):
     CML_OUTPUT_XML_DECLARATION = CDPL.Base.LookupKey('CML_OUTPUT_XML_DECLARATION')
 
     ##
-    # \brief Specifies the XML namespace URI emitted with the root element when generating <em>CML</em> output.
+    # \brief Specifies the XML class URI emitted with the root element when generating <em>CML</em> output.
     # 
     # \valuetype  <tt>std::string</tt> 
     # \see [\ref CML] 

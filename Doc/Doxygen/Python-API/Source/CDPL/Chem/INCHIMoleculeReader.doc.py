@@ -46,7 +46,7 @@ class INCHIMoleculeReader(MoleculeReaderBase):
     ##
     # \brief Returns the error code of the last read operation.
     # 
-    # Possible return values are defined in namespace Chem.INCHIReturnCode.
+    # Possible return values are defined in class Chem.INCHIReturnCode.
     # 
     # \return The error code of the last read operation.
     # 

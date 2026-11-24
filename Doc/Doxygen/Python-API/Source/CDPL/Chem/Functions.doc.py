@@ -73,7 +73,7 @@ def get2DCoordinates(cntnr: AtomContainer, coords: Math.Vector2DArray, append: b
 # \brief Sets the value of the Chem.BondProperty.STEREO_2D_FLAG property of the bond <em>bond</em> to <em>flag</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param flag The new 2D stereo flag value (see namespace Chem.BondStereoFlag).
+# \param flag The new 2D stereo flag value (see class Chem.BondStereoFlag).
 # 
 def set2DStereoFlag(bond: Bond, flag: int) -> None: pass
 
@@ -91,7 +91,7 @@ def has2DStereoFlag(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored 2D stereo flag (see namespace Chem.BondStereoFlag).
+# \return The stored 2D stereo flag (see class Chem.BondStereoFlag).
 # 
 def get2DStereoFlag(bond: Bond) -> int: pass
 
@@ -444,7 +444,7 @@ def setBondMatchConstraints(rxn: Reaction, constr: MatchConstraintList, overwrit
 # \brief Sets the value of the Chem.AtomProperty.CIP_CONFIGURATION property of the atom <em>atom</em> to <em>config</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param config The new CIP configuration label (see namespace Chem.CIPDescriptor).
+# \param config The new CIP configuration label (see class Chem.CIPDescriptor).
 # 
 def setCIPConfiguration(atom: Atom, config: int) -> None: pass
 
@@ -462,7 +462,7 @@ def hasCIPConfiguration(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored CIP configuration label (see namespace Chem.CIPDescriptor).
+# \return The stored CIP configuration label (see class Chem.CIPDescriptor).
 # 
 def getCIPConfiguration(atom: Atom) -> int: pass
 
@@ -477,7 +477,7 @@ def clearCIPConfiguration(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.BondProperty.CIP_CONFIGURATION property of the bond <em>bond</em> to <em>config</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param config The new CIP configuration label (see namespace Chem.CIPDescriptor).
+# \param config The new CIP configuration label (see class Chem.CIPDescriptor).
 # 
 def setCIPConfiguration(bond: Bond, config: int) -> None: pass
 
@@ -495,7 +495,7 @@ def hasCIPConfiguration(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored CIP configuration label (see namespace Chem.CIPDescriptor).
+# \return The stored CIP configuration label (see class Chem.CIPDescriptor).
 # 
 def getCIPConfiguration(bond: Bond) -> int: pass
 
@@ -1015,7 +1015,7 @@ def clearCyclicSubstructure(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.BondProperty.DIRECTION property of the bond <em>bond</em> to <em>dir</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param dir The new bond direction descriptor (see namespace Chem.BondDirection).
+# \param dir The new bond direction descriptor (see class Chem.BondDirection).
 # 
 def setDirection(bond: Bond, dir: int) -> None: pass
 
@@ -1033,7 +1033,7 @@ def hasDirection(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored <em>SMILES/SMARTS</em> bond direction descriptor (see namespace Chem.BondDirection).
+# \return The stored <em>SMILES/SMARTS</em> bond direction descriptor (see class Chem.BondDirection).
 # 
 def getDirection(bond: Bond) -> int: pass
 
@@ -1095,7 +1095,7 @@ def clearFormalCharge(atom: Atom) -> None: pass
 # 
 # \param atom The atom to query.
 # 
-# \return The generic atom type (see namespace Chem.AtomType).
+# \return The generic atom type (see class Chem.AtomType).
 # 
 def getGenericType(atom: Atom) -> int: pass
 
@@ -1169,7 +1169,7 @@ def clearHashCode(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.HYBRIDIZATION property of the atom <em>atom</em> to <em>state</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param state The new hybridization state (see namespace Chem.HybridizationState).
+# \param state The new hybridization state (see class Chem.HybridizationState).
 # 
 def setHybridizationState(atom: Atom, state: int) -> None: pass
 
@@ -1187,7 +1187,7 @@ def hasHybridizationState(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored hybridization state (see namespace Chem.HybridizationState).
+# \return The stored hybridization state (see class Chem.HybridizationState).
 # 
 def getHybridizationState(atom: Atom) -> int: pass
 
@@ -1278,7 +1278,7 @@ def clearIsotope(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MDL_CTAB_VERSION property of the molecular graph <em>molgraph</em> to <em>version</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param version The new CTAB version (see namespace Chem.MDLDataFormatVersion).
+# \param version The new CTAB version (see class Chem.MDLDataFormatVersion).
 # 
 def setMDLCTABVersion(molgraph: MolecularGraph, version: int) -> None: pass
 
@@ -1296,7 +1296,7 @@ def hasMDLCTABVersion(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored CTAB version (see namespace Chem.MDLDataFormatVersion).
+# \return The stored CTAB version (see class Chem.MDLDataFormatVersion).
 # 
 def getMDLCTABVersion(molgraph: MolecularGraph) -> int: pass
 
@@ -1509,7 +1509,7 @@ def clearMDLMoleculeRecord(rxn: Reaction) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.MDL_PARITY property of the atom <em>atom</em> to <em>parity</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param parity The new <em>MDL</em> stereo parity (see namespace Chem.MDLParity).
+# \param parity The new <em>MDL</em> stereo parity (see class Chem.MDLParity).
 # 
 def setMDLParity(atom: Atom, parity: int) -> None: pass
 
@@ -1527,7 +1527,7 @@ def hasMDLParity(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored <em>MDL</em> stereo parity (see namespace Chem.MDLParity).
+# \return The stored <em>MDL</em> stereo parity (see class Chem.MDLParity).
 # 
 def getMDLParity(atom: Atom) -> int: pass
 
@@ -1905,7 +1905,7 @@ def clearMOL2Charge(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MOL2_CHARGE_TYPE property of the molecular graph <em>molgraph</em> to <em>type</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param type The new <em>Sybyl MOL2</em> charge type (see namespace Chem.MOL2ChargeType).
+# \param type The new <em>Sybyl MOL2</em> charge type (see class Chem.MOL2ChargeType).
 # 
 def setMOL2ChargeType(molgraph: MolecularGraph, type: int) -> None: pass
 
@@ -1923,7 +1923,7 @@ def hasMOL2ChargeType(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored <em>Sybyl MOL2</em> charge type (see namespace Chem.MOL2ChargeType).
+# \return The stored <em>Sybyl MOL2</em> charge type (see class Chem.MOL2ChargeType).
 # 
 def getMOL2ChargeType(molgraph: MolecularGraph) -> int: pass
 
@@ -1938,7 +1938,7 @@ def clearMOL2ChargeType(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.MolecularGraphProperty.MOL2_MOLECULE_TYPE property of the molecular graph <em>molgraph</em> to <em>type</em>.
 # 
 # \param molgraph The molecular graph for which to set the property value.
-# \param type The new <em>Sybyl MOL2</em> molecule type (see namespace Chem.MOL2MoleculeType).
+# \param type The new <em>Sybyl MOL2</em> molecule type (see class Chem.MOL2MoleculeType).
 # 
 def setMOL2MoleculeType(molgraph: MolecularGraph, type: int) -> None: pass
 
@@ -1956,7 +1956,7 @@ def hasMOL2MoleculeType(molgraph: MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return The stored <em>Sybyl MOL2</em> molecule type (see namespace Chem.MOL2MoleculeType).
+# \return The stored <em>Sybyl MOL2</em> molecule type (see class Chem.MOL2MoleculeType).
 # 
 def getMOL2MoleculeType(molgraph: MolecularGraph) -> int: pass
 
@@ -2728,7 +2728,7 @@ def clearPiElectronSystems(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.RADICAL_TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param type The new radical type (see namespace Chem.RadicalType).
+# \param type The new radical type (see class Chem.RadicalType).
 # 
 def setRadicalType(atom: Atom, type: int) -> None: pass
 
@@ -2746,7 +2746,7 @@ def hasRadicalType(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored radical type (see namespace Chem.RadicalType).
+# \return The stored radical type (see class Chem.RadicalType).
 # 
 def getRadicalType(atom: Atom) -> int: pass
 
@@ -2761,7 +2761,7 @@ def clearRadicalType(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.REACTION_CENTER_STATUS property of the atom <em>atom</em> to <em>status</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param status The new reaction-center status (see namespace Chem.ReactionCenterStatus).
+# \param status The new reaction-center status (see class Chem.ReactionCenterStatus).
 # 
 def setReactionCenterStatus(atom: Atom, status: int) -> None: pass
 
@@ -2779,7 +2779,7 @@ def hasReactionCenterStatus(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored reaction-center status (see namespace Chem.ReactionCenterStatus).
+# \return The stored reaction-center status (see class Chem.ReactionCenterStatus).
 # 
 def getReactionCenterStatus(atom: Atom) -> int: pass
 
@@ -2794,7 +2794,7 @@ def clearReactionCenterStatus(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.BondProperty.REACTION_CENTER_STATUS property of the bond <em>bond</em> to <em>status</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param status The new reaction-center status (see namespace Chem.ReactionCenterStatus).
+# \param status The new reaction-center status (see class Chem.ReactionCenterStatus).
 # 
 def setReactionCenterStatus(bond: Bond, status: int) -> None: pass
 
@@ -2812,7 +2812,7 @@ def hasReactionCenterStatus(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored reaction-center status (see namespace Chem.ReactionCenterStatus).
+# \return The stored reaction-center status (see class Chem.ReactionCenterStatus).
 # 
 def getReactionCenterStatus(bond: Bond) -> int: pass
 
@@ -3256,7 +3256,7 @@ def getSybylBondTypeString(sybyl_type: int) -> str: pass
 # \brief Sets the value of the Chem.AtomProperty.SYBYL_TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param type The new <em>Sybyl MOL2</em> atom type (see namespace Chem.SybylAtomType).
+# \param type The new <em>Sybyl MOL2</em> atom type (see class Chem.SybylAtomType).
 # 
 def setSybylType(atom: Atom, type: int) -> None: pass
 
@@ -3274,7 +3274,7 @@ def hasSybylType(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored <em>Sybyl MOL2</em> atom type (see namespace Chem.SybylAtomType).
+# \return The stored <em>Sybyl MOL2</em> atom type (see class Chem.SybylAtomType).
 # 
 def getSybylType(atom: Atom) -> int: pass
 
@@ -3289,7 +3289,7 @@ def clearSybylType(atom: Atom) -> None: pass
 # \brief Sets the value of the Chem.BondProperty.SYBYL_TYPE property of the bond <em>bond</em> to <em>type</em>.
 # 
 # \param bond The bond for which to set the property value.
-# \param type The new <em>Sybyl MOL2</em> bond type (see namespace Chem.SybylBondType).
+# \param type The new <em>Sybyl MOL2</em> bond type (see class Chem.SybylBondType).
 # 
 def setSybylType(bond: Bond, type: int) -> None: pass
 
@@ -3307,7 +3307,7 @@ def hasSybylType(bond: Bond) -> bool: pass
 # 
 # \param bond The bond for which to return the property value.
 # 
-# \return The stored <em>Sybyl MOL2</em> bond type (see namespace Chem.SybylBondType).
+# \return The stored <em>Sybyl MOL2</em> bond type (see class Chem.SybylBondType).
 # 
 def getSybylType(bond: Bond) -> int: pass
 
@@ -3356,7 +3356,7 @@ def clearSymbol(atom: Atom) -> None: pass
 # 
 # \param atom The atom to query.
 # 
-# \return The symbol associated with the numeric type (see namespace Chem.AtomType).
+# \return The symbol associated with the numeric type (see class Chem.AtomType).
 # 
 def getSymbolForType(atom: Atom) -> str: pass
 
@@ -3507,7 +3507,7 @@ def clearTopologicalDistanceMatrix(molgraph: MolecularGraph) -> None: pass
 # \brief Sets the value of the Chem.AtomProperty.TYPE property of the atom <em>atom</em> to <em>type</em>.
 # 
 # \param atom The atom for which to set the property value.
-# \param type The new atom type (see namespace Chem.AtomType).
+# \param type The new atom type (see class Chem.AtomType).
 # 
 def setType(atom: Atom, type: int) -> None: pass
 
@@ -3525,7 +3525,7 @@ def hasType(atom: Atom) -> bool: pass
 # 
 # \param atom The atom for which to return the property value.
 # 
-# \return The stored atom type (see namespace Chem.AtomType).
+# \return The stored atom type (see class Chem.AtomType).
 # 
 def getType(atom: Atom) -> int: pass
 
@@ -3541,7 +3541,7 @@ def clearType(atom: Atom) -> None: pass
 # 
 # \param atom The atom to query.
 # 
-# \return The numeric atom type (see namespace Chem.AtomType) associated with the symbol.
+# \return The numeric atom type (see class Chem.AtomType) associated with the symbol.
 # 
 def getTypeForSymbol(atom: Atom) -> int: pass
 
@@ -3888,7 +3888,7 @@ def calcCentroid(cntnr: Entity3DContainer, ctr: Math.Vector3D) -> bool: pass
 # \param descr The stereo descriptor providing the reference atoms.
 # \param coords The atom 3D coordinates to use for the calculation.
 # 
-# \return The calculated configuration (see namespace Chem.AtomConfiguration).
+# \return The calculated configuration (see class Chem.AtomConfiguration).
 # 
 def calcConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
 
@@ -3900,7 +3900,7 @@ def calcConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDescrip
 # \param descr The stereo descriptor providing the reference atoms.
 # \param coords The atom 3D coordinates to use for the calculation.
 # 
-# \return The calculated configuration (see namespace Chem.BondConfiguration).
+# \return The calculated configuration (see class Chem.BondConfiguration).
 # 
 def calcConfiguration(bond: Bond, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
 
@@ -4009,7 +4009,7 @@ def calcMDLParities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \param atom The atom for which to calculate the parity.
 # \param molgraph The molecular graph providing the structural context.
 # 
-# \return The calculated <em>MDL</em> parity (see namespace Chem.MDLParity).
+# \return The calculated <em>MDL</em> parity (see class Chem.MDLParity).
 # 
 def calcMDLParity(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
@@ -4746,7 +4746,7 @@ def makeHydrogenDeplete(mol: Molecule, corr_impl_h_count: bool = True) -> bool: 
 # \brief Removes all explicit ordinary hydrogen atoms from the fragment <em>frag</em>.
 # 
 # \param frag The fragment for which to remove all explicit ordinary hydrogen atoms.
-# \param flags Specifies the set of atom properties to check (see namespace Chem.AtomPropertyFlag).
+# \param flags Specifies the set of atom properties to check (see class Chem.AtomPropertyFlag).
 # 
 # \return <tt>False</tt> if <em>frag</em> was not altered, <tt>True</tt> otherwise. 
 # 
@@ -4758,7 +4758,7 @@ def makeOrdinaryHydrogenDeplete(frag: Fragment, flags: int) -> bool: pass
 # \brief Removes all explicit ordinary hydrogen atoms from the molecule <em>mol</em>.
 # 
 # \param mol The molecule for which to remove all explicit ordinary hydrogen atoms.
-# \param flags Specifies the set of atom properties to check (see namespace Chem.AtomPropertyFlag).
+# \param flags Specifies the set of atom properties to check (see class Chem.AtomPropertyFlag).
 # \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the affected remaining atoms shall be corrected, <tt>False</tt> if the property shall be left unchanged.
 # 
 # \return <tt>False</tt> if <em>mol</em> was not altered, <tt>True</tt> otherwise. 
@@ -4973,7 +4973,7 @@ def perceiveCyclicSubstructure(molgraph: MolecularGraph, overwrite: bool) -> Fra
 # \param atom The atom for which to perceive the hybridzation state.
 # \param molgraph The molecular graph providing the structural context.
 # 
-# \return The perceived hybridization state (see namespace Chem.HybridizationState).
+# \return The perceived hybridization state (see class Chem.HybridizationState).
 # 
 def perceiveHybridizationState(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
@@ -5058,7 +5058,7 @@ def perceiveSybylAtomTypes(molgraph: MolecularGraph, overwrite: bool) -> None: p
 # \param atom The atom for which to perceive the type.
 # \param molgraph The molecular graph providing the structural context.
 # 
-# \return The perceived <em>Sybyl MOL2</em> atom type (see namespace Chem.SybylAtomType).
+# \return The perceived <em>Sybyl MOL2</em> atom type (see class Chem.SybylAtomType).
 # 
 def perceiveSybylType(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
@@ -5068,7 +5068,7 @@ def perceiveSybylType(atom: Atom, molgraph: MolecularGraph) -> int: pass
 # \param bond The bond for which to perceive the type..
 # \param molgraph The molecular graph providing the structural context.
 # 
-# \return The perceived <em>Sybyl MOL2</em> bond type (see namespace Chem.SybylBondType).
+# \return The perceived <em>Sybyl MOL2</em> bond type (see class Chem.SybylBondType).
 # 
 def perceiveSybylType(bond: Bond, molgraph: MolecularGraph) -> int: pass
 
@@ -5472,7 +5472,7 @@ def clearCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContaine
 # \brief Sets the value of the Chem.ControlParameter.CML_OUTPUT_ELEMENT_NAMESPACE parameter of <em>cntnr</em> to <em>ns</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param ns The new XML-namespace string.
+# \param ns The new XML-class string.
 # 
 # \since 1.2
 # 
@@ -5494,7 +5494,7 @@ def hasCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer)
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored XML-namespace string. 
+# \return The stored XML-class string. 
 # 
 # \since 1.2
 # 
@@ -5957,7 +5957,7 @@ def clearJMESeparateComponentsParameter(cntnr: Base.ControlParameterContainer) -
 # \brief Sets the value of the Chem.ControlParameter.MDL_CTAB_VERSION parameter of <em>cntnr</em> to <em>version</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param version The new CTAB version (see namespace Chem.MDLDataFormatVersion).
+# \param version The new CTAB version (see class Chem.MDLDataFormatVersion).
 # 
 def setMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
@@ -5975,7 +5975,7 @@ def hasMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> bool: p
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored CTAB version (see namespace Chem.MDLDataFormatVersion).
+# \return The stored CTAB version (see class Chem.MDLDataFormatVersion).
 # 
 def getMDLCTABVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
@@ -6163,7 +6163,7 @@ def clearMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterC
 # \brief Sets the value of the Chem.ControlParameter.MDL_RXN_FILE_VERSION parameter of <em>cntnr</em> to <em>version</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param version The new <em>MDL Rxn-File</em> version (see namespace Chem.MDLDataFormatVersion).
+# \param version The new <em>MDL Rxn-File</em> version (see class Chem.MDLDataFormatVersion).
 # 
 def setMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer, version: int) -> None: pass
 
@@ -6181,7 +6181,7 @@ def hasMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> bool
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored <em>MDL Rxn-File</em> version (see namespace Chem.MDLDataFormatVersion).
+# \return The stored <em>MDL Rxn-File</em> version (see class Chem.MDLDataFormatVersion).
 # 
 def getMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
@@ -6394,7 +6394,7 @@ def clearMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -
 # \brief Sets the value of the Chem.ControlParameter.MOL2_CHARGE_TYPE parameter of <em>cntnr</em> to <em>type</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param type The new <em>Sybyl MOL2</em> charge type (see namespace Chem.MOL2ChargeType).
+# \param type The new <em>Sybyl MOL2</em> charge type (see class Chem.MOL2ChargeType).
 # 
 def setMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer, type: int) -> None: pass
 
@@ -6412,7 +6412,7 @@ def hasMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> bool: p
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored <em>Sybyl MOL2</em> charge type (see namespace Chem.MOL2ChargeType).
+# \return The stored <em>Sybyl MOL2</em> charge type (see class Chem.MOL2ChargeType).
 # 
 def getMOL2ChargeTypeParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
@@ -6493,7 +6493,7 @@ def clearMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContai
 # \brief Sets the value of the Chem.ControlParameter.MOL2_MOLECULE_TYPE parameter of <em>cntnr</em> to <em>type</em>.
 # 
 # \param cntnr The control-parameter container.
-# \param type The new <em>Sybyl MOL2</em> molecule type (see namespace Chem.MOL2MoleculeType).
+# \param type The new <em>Sybyl MOL2</em> molecule type (see class Chem.MOL2MoleculeType).
 # 
 def setMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer, type: int) -> None: pass
 
@@ -6511,7 +6511,7 @@ def hasMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> bool:
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return The stored <em>Sybyl MOL2</em> molecule type (see namespace Chem.MOL2MoleculeType).
+# \return The stored <em>Sybyl MOL2</em> molecule type (see class Chem.MOL2MoleculeType).
 # 
 def getMOL2MoleculeTypeParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 

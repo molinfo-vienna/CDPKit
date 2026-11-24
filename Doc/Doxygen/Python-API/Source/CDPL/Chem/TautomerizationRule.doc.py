@@ -44,7 +44,7 @@ class TautomerizationRule(Boost.Python.instance):
     ##
     # \brief Returns the rule identifier.
     # 
-    # \return The rule identifier (see namespace Chem.TautomerizationType for IDs of built-in rules).
+    # \return The rule identifier (see class Chem.TautomerizationType for IDs of built-in rules).
     # 
     def getID() -> int: pass
 

@@ -115,7 +115,7 @@
 #  <tr><td>Vis.ControlParameter.SHOW_REACTION_PLUS_SIGNS</td><td>Specifies whether or not to draw '+' signs between the components of the reaction</td></tr>
 # </table>
 # 
-# Default values for the control-parameters are defined in namespace Vis.ControlParameterDefault.
+# Default values for the control-parameters are defined in class Vis.ControlParameterDefault.
 # 
 # Supported Chem.Reaction properties:
 # 

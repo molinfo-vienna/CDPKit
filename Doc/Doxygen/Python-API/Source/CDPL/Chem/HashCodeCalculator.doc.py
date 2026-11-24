@@ -59,7 +59,7 @@ class HashCodeCalculator(Boost.Python.instance):
         ##
         # \brief Constructs the <tt>DefBondHashSeedFunctor</tt> instance for the specified set of bond properties.
         # 
-        # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag. Supported property flags are:
+        # The <em>flags</em> argument is an OR combination of the constants defined in class Chem.BondPropertyFlag. Supported property flags are:
         #  - Chem.BondPropertyFlag.ORDER
         #  - Chem.BondPropertyFlag.TOPOLOGY
         #  - Chem.BondPropertyFlag.AROMATICITY

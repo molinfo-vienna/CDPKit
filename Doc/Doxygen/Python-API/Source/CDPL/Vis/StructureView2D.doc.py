@@ -95,7 +95,7 @@
 #  <tr><td>Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING</td><td>Specifies whether or not to enable the highlighting of bonds</td></tr>
 # </table>
 # 
-# Default values for the control-parameters are defined in namespace Vis.ControlParameterDefault.
+# Default values for the control-parameters are defined in class Vis.ControlParameterDefault.
 # 
 # Supported Chem.MolecularGraph properties:
 # 

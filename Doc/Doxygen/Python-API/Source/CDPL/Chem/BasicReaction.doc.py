@@ -46,7 +46,7 @@ class BasicReaction(Reaction):
     ##
     # \brief Creates a new reaction component with the specified role.
     # 
-    # \param role The reaction role of the new component (see namespace Chem.ReactionRole).
+    # \param role The reaction role of the new component (see class Chem.ReactionRole).
     # 
     # \return The newly created component molecule. 
     # 
@@ -57,7 +57,7 @@ class BasicReaction(Reaction):
     ##
     # \brief Creates a new reaction component with the specified role that is a copy of the molecule <em>mol</em>.
     # 
-    # \param role A flag specifying the reaction role of the new component (see namespace Chem.ReactionRole).
+    # \param role A flag specifying the reaction role of the new component (see class Chem.ReactionRole).
     # \param mol Specifies a molecule that provides the data for the new reaction component (note that only explicitly assigned molecule, atom and bond properties will be copied).
     # 
     # \return The newly created component molecule. 

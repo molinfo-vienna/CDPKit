@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A global dictionary for the lookup of data associated with the atom types defined in namespace Chem.AtomType.
+# \brief A global dictionary for the lookup of data associated with the atom types defined in class Chem.AtomType.
 # 
 class AtomDictionary(Boost.Python.instance):
 
@@ -43,7 +43,7 @@ class AtomDictionary(Boost.Python.instance):
         ##
         # \brief Constructs an entry with the given properties.
         # 
-        # \param atom_type The atom type (see namespace Chem.AtomType).
+        # \param atom_type The atom type (see class Chem.AtomType).
         # \param iso The mass number of the isotope (<em>0</em> if not specified).
         # \param sym The element symbol.
         # \param name The element name.

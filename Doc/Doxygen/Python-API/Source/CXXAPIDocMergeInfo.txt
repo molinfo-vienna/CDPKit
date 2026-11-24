@@ -24,6 +24,7 @@ true § True
 false § False
 <em>null</em> § <em>None</em>
 nullptr § None
+namespace § class
 A reference to itself. § \a self.
 A reference to the element. § The value of the element.
 A mutable reference to the element. § The value of the element.
@@ -1789,6 +1790,12 @@ array § list
 
 # ---
 
+AtomTypeMatchExpression § AtomTypeMatchExpression
+' (see \__call\__() for the complete table)' §
+Chem.MatchExpression § Chem.AtomMatchExpression
+
+# ---
+
 Chem.AtomMatchExpression.__call__(query_atom,query_molgraph,target_atom,target_molgraph § Chem.MatchExpression.__call__(query_obj1,query_obj2,target_obj1,target_obj2
 primary query object § query atom
 primary target object § target atom
@@ -1962,6 +1969,15 @@ TopologicalEntityAlignment § TopologicalEntity3DAlignment
 Chem.*Property. § Chem.*Property.
 Chem.MatchExpression<Chem.Atom, Chem.MolecularGraph> § Chem.AtomMatchExpression
 Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph> § Chem.BondMatchExpression
+
+# --
+
+Search.getSize() § Search.getNumMappings()
+
+Search.__getitem__ § Search.getMapping
+
+Search § Search
+' or iteration using the iterator pair returned by the methods begin() and end()' §
 
 #
 # --- CDPL.Pharm package ---

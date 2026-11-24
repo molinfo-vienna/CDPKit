@@ -182,7 +182,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey('MDL_REGISTRY_NUMBER')
 
     ##
-    # \brief Specifies the <em>MDL</em> connection table (CTAB) version (see namespace Chem.MDLDataFormatVersion).
+    # \brief Specifies the <em>MDL</em> connection table (CTAB) version (see class Chem.MDLDataFormatVersion).
     # 
     # \valuetype  <tt>unsigned int</tt> 
     # \see [\ref CTFILE]
@@ -230,14 +230,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     MDL_CHIRAL_FLAG = CDPL.Base.LookupKey('MDL_CHIRAL_FLAG')
 
     ##
-    # \brief Specifies the <em>Sybyl MOL2</em> partial atom charge type (see namespace Chem.MOL2ChargeType).
+    # \brief Specifies the <em>Sybyl MOL2</em> partial atom charge type (see class Chem.MOL2ChargeType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
     MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
 
     ##
-    # \brief Specifies the <em>Sybyl MOL2</em> molecule type of the molecular graph (see namespace Chem.MOL2MoleculeType).
+    # \brief Specifies the <em>Sybyl MOL2</em> molecule type of the molecular graph (see class Chem.MOL2MoleculeType).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 

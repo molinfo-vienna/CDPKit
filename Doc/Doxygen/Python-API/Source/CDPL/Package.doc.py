@@ -21,6 +21,6 @@
 
 ##
 # \package CDPL
-# \brief The namespace of the Chemical Data Processing Library.
+# \brief The class of the Chemical Data Processing Library.
 # 
 

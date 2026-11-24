@@ -1646,6 +1646,6 @@ def perceiveMMFF94AromaticRings(molgraph: Chem.MolecularGraph, overwrite: bool) 
 # \param atom The atom whose UFF type is to be perceived.
 # \param molgraph The molecular graph providing the atom environment for type perception.
 # 
-# \return The perceived numeric UFF atom type (see namespace ForceField.UFFAtomType).
+# \return The perceived numeric UFF atom type (see class ForceField.UFFAtomType).
 # 
 def perceiveUFFType(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass

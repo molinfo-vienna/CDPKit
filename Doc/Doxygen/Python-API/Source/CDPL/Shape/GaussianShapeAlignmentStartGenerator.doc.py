@@ -49,7 +49,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # \param func The reference shape function (may be modified, e.g. centered).
     # \param xform The output transformation that maps the reference shape from its prepared frame back to its original frame.
     # 
-    # \return The perceived symmetry class of the reference shape (see namespace Shape.SymmetryClass).
+    # \return The perceived symmetry class of the reference shape (see class Shape.SymmetryClass).
     # 
     def setupReference(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
@@ -59,7 +59,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # \param func The aligned shape function (may be modified, e.g. centered).
     # \param xform The output transformation that maps the aligned shape from its prepared frame back to its original frame.
     # 
-    # \return The perceived symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # \return The perceived symmetry class of the aligned shape (see class Shape.SymmetryClass).
     # 
     def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
@@ -69,7 +69,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # \brief Generates the set of starting transformations for the alignment of <em>func</em>.
     # 
     # \param func The aligned shape function.
-    # \param sym_class The symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # \param sym_class The symmetry class of the aligned shape (see class Shape.SymmetryClass).
     # 
     # \return <tt>True</tt> if at least one starting transformation was produced, and <tt>False</tt> otherwise.
     # 

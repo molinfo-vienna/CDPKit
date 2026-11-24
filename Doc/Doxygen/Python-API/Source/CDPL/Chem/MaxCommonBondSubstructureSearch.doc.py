@@ -22,7 +22,7 @@
 ##
 # \brief Searches for the maximum common bond substructures between a query and a target molecular graph.
 # 
-# Successive calls to setQuery() and findMappings() produce all possible common substructure atom/bond mapping solutions (subject to a bond count lower bound set by setMinSubstructureSize()). If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest then the more efficient method mappingExists() can be used. Found common substructures are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instances are retrieved as values of the corresponding atom, bond and molecular graph properties (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION). Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
+# Successive calls to setQuery() and findMappings() produce all possible common substructure atom/bond mapping solutions (subject to a bond count lower bound set by setMinSubstructureSize()). If just the information whether or not a common substructure (fulfilling the size lower bound) exists is of interest then the more efficient method mappingExists() can be used. Found common substructures are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping(), respectively. Per-atom, per-bond and per-molecular graph Chem.MatchExpression implementation instances are retrieved as values of the corresponding atom, bond and molecular graph properties (see Chem.AtomProperty.MATCH_EXPRESSION, Chem.BondProperty.MATCH_EXPRESSION and Chem.MolecularGraphProperty.MATCH_EXPRESSION). Result accumulation can be bounded by setMaxNumMappings() and uniqueMappingsOnly().
 # 
 # \see [\ref MCESA] 
 # 
@@ -167,13 +167,25 @@ class MaxCommonBondSubstructureSearch(Boost.Python.instance):
     # 
     def setQuery(query: MolecularGraph) -> None: pass
 
+    ##
+    # \brief Returns the stored atom/bond mapping instance at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the atom/bond mapping instance to return.
+    # 
+    # \return The Chem.AtomBondMapping instance at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
+    # 
     def __getitem__(idx: int) -> AtomBondMapping: pass
 
+    ##
+    # \brief Returns the number of atom/bond mappings that were recorded in the last search for common substructures.
+    # 
+    # \return The number of atom/bond mappings that were recorded in the last search for common substructures. 
+    # 
+    # \see findMappings()
+    # 
     def __len__() -> int: pass
-
-    def __nonzero__(self: MolecularGraph) -> bool: pass
-
-    def __bool__(self: MolecularGraph) -> bool: pass
 
     objectID = property(getObjectID)
 

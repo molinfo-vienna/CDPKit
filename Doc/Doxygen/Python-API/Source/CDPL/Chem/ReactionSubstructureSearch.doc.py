@@ -22,7 +22,7 @@
 ##
 # \brief Searches for substructures of the components of a target reaction that match a given query reaction pattern.
 # 
-# Use setQuery() to fix the query reaction pattern and mappingExists() or findMappings() to evaluate it against a specified target Chem.Reaction instance. Found mappings are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping() or iteration using the iterator pair returned by the methods begin() and end(), respectively. Component visibility based on reaction role is controlled with setEnabledReactionRoles() (see namespace Chem.ReactionRole). The search algorithm considers atom-, bond-, and reaction-level Chem.MatchExpression implementation instances attached to the query reaction and its components as corresponding property values (see Chem.SubstructureSearch and Chem.ReactionProperty.MATCH_EXPRESSION). The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
+# Use setQuery() to fix the query reaction pattern and mappingExists() or findMappings() to evaluate it against a specified target Chem.Reaction instance. Found mappings are recorded as Chem.AtomBondMapping instances that can be accessed via index through the method getMapping(), respectively. Component visibility based on reaction role is controlled with setEnabledReactionRoles() (see class Chem.ReactionRole). The search algorithm considers atom-, bond-, and reaction-level Chem.MatchExpression implementation instances attached to the query reaction and its components as corresponding property values (see Chem.SubstructureSearch and Chem.ReactionProperty.MATCH_EXPRESSION). The result set can be limited by the methods setMaxNumMappings() and uniqueMappingsOnly().
 # 
 class ReactionSubstructureSearch(Boost.Python.instance):
 
@@ -146,7 +146,7 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     ##
     # \brief Allows the reaction role specific exclusion of query and target components from the search for matching reaction substructures.
     # 
-    # The <em>roles</em> argument is a bitwise-OR combination of the flags defined in namespace Chem.ReactionRole. When the flag for a particular reaction role is missing in the provided bitmask then all reaction components with this role assignment (both in the query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing' the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
+    # The <em>roles</em> argument is a bitwise-OR combination of the flags defined in class Chem.ReactionRole. When the flag for a particular reaction role is missing in the provided bitmask then all reaction components with this role assignment (both in the query and target reaction) will be simply ignored during the reaction substructure search. This has the same effect as 'removing' the affected components from the query and target reaction prior to starting the search and adding them again afterwards.
     # 
     # \param roles A bitmask specifying the non-excluded reaction component roles.
     # 
@@ -161,13 +161,23 @@ class ReactionSubstructureSearch(Boost.Python.instance):
     # 
     def setQuery(query: Reaction) -> None: pass
 
+    ##
+    # \brief Returns the stored Chem.AtomBondMapping instance at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the Chem.AtomBondMapping instance to return.
+    # 
+    # \return The Chem.AtomBondMapping instance at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumMappings()).
+    # 
     def __getitem__(idx: int) -> AtomBondMapping: pass
 
+    ##
+    # \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
+    # 
+    # \return The number of atom/bond mappings that were recorded in the last call to findMappings().
+    # 
     def __len__() -> int: pass
-
-    def __nonzero__(self: Reaction) -> bool: pass
-
-    def __bool__(self: Reaction) -> bool: pass
 
     objectID = property(getObjectID)
 

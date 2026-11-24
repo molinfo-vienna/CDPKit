@@ -150,7 +150,7 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Specifies the way lines should be horizontally aligned.
     # 
-    # Possible horizontal alignment values are defined in namespace Vis.Alignment.
+    # Possible horizontal alignment values are defined in class Vis.Alignment.
     # 
     # \param alignment The horizontal text alignment specification.
     # 
@@ -159,7 +159,7 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Returns the active horizontal text alignment specification.
     # 
-    # Possible horizontal alignment values are defined in namespace Vis.Alignment.
+    # Possible horizontal alignment values are defined in class Vis.Alignment.
     # 
     # \return The current horizontal text alignment specification.
     # 

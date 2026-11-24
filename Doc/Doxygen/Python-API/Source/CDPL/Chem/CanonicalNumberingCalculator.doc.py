@@ -68,7 +68,7 @@ class CanonicalNumberingCalculator(Boost.Python.instance):
     ##
     # \brief Allows to specify the set of atomic properties that has to be considered by the canonical numering algorithm.
     # 
-    # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.AtomPropertyFlag. Supported property flags are:
+    # The <em>flags</em> argument is an OR combination of the constants defined in class Chem.AtomPropertyFlag. Supported property flags are:
     #  - Chem.AtomPropertyFlag.TYPE
     #  - Chem.AtomPropertyFlag.ISOTOPE
     #  - Chem.AtomPropertyFlag.FORMAL_CHARGE
@@ -94,7 +94,7 @@ class CanonicalNumberingCalculator(Boost.Python.instance):
     ##
     # \brief Allows to specify the set of bond properties that has to be considered by the canonical numering algorithm.
     # 
-    # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag. Supported property flags are:
+    # The <em>flags</em> argument is an OR combination of the constants defined in class Chem.BondPropertyFlag. Supported property flags are:
     #  - Chem.BondPropertyFlag.ORDER
     #  - Chem.BondPropertyFlag.CONFIGURATION
     #  - and Chem.BondPropertyFlag.AROMATICITY

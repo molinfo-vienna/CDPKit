@@ -22,7 +22,7 @@
 ##
 # \brief Highly configurable implementation of the complete workflow for molecular graph MMFF94 interaction perception and parameterization.
 # 
-# The constructor installs default parameter tables and atom-/bond-typing helpers for the selected force field variant (see namespace ForceField.MMFF94ParameterSet). Every table, map and filter function can be overridden via the corresponding setter methods. Calling parameterize() runs atom typing, bond typing, formal/partial charge assignment, aromaticity perception and topological distance calculation, then dispatches to the seven per-interaction <em>MMFF94*InteractionParameterizer</em> members and stores the resulting interaction parameter records in the supplied ForceField.MMFF94InteractionData instance.
+# The constructor installs default parameter tables and atom-/bond-typing helpers for the selected force field variant (see class ForceField.MMFF94ParameterSet). Every table, map and filter function can be overridden via the corresponding setter methods. Calling parameterize() runs atom typing, bond typing, formal/partial charge assignment, aromaticity perception and topological distance calculation, then dispatches to the seven per-interaction <em>MMFF94*InteractionParameterizer</em> members and stores the resulting interaction parameter records in the supplied ForceField.MMFF94InteractionData instance.
 # 
 # \see [\ref MMFF94]
 # 
@@ -31,7 +31,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Constructs the parameterizer with the default tables for the chosen MMFF94 parameter set.
     # 
-    # \param param_set The parameter set variant (see namespace ForceField.MMFF94ParameterSet).
+    # \param param_set The parameter set variant (see class ForceField.MMFF94ParameterSet).
     # 
     def __init__(param_set: int = 1) -> None: pass
 
@@ -244,7 +244,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Switches the active MMFF94 parameter set variant to a different one.
     # 
-    # \param param_set The new parameter set variant (see namespace ForceField.MMFF94ParameterSet).
+    # \param param_set The new parameter set variant (see class ForceField.MMFF94ParameterSet).
     # 
     def setParameterSet(param_set: int) -> None: pass
 
@@ -262,7 +262,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph to parameterize.
     # \param ia_data The output container receiving the perceived interactions and their parameters.
-    # \param ia_types A bitmask of flags specifying which interaction types to parameterize (see namespace ForceField.InteractionType).
+    # \param ia_types A bitmask of flags specifying which interaction types to parameterize (see class ForceField.InteractionType).
     # \param strict If <tt>True</tt>, the parameterization fails when any required parameter is missing. Otherwise, fallback strategies (rule-based parameters, default values) are used.
     # 
     def parameterize(molgraph: Chem.MolecularGraph, ia_data: MMFF94InteractionData, ia_types: int = 127, strict: bool = True) -> None: pass

@@ -36,7 +36,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the alignment of a 2D depiction within the viewport area.
     # 
-    # The alignment is specified by a combination of the flags defined in namespace Vis.Alignment. If <tt>ALIGNMENT</tt> is left unspecified, the default alignment setting Vis.ControlParameterDefault.ALIGNMENT will be used.
+    # The alignment is specified by a combination of the flags defined in class Vis.Alignment. If <tt>ALIGNMENT</tt> is left unspecified, the default alignment setting Vis.ControlParameterDefault.ALIGNMENT will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 
@@ -282,7 +282,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the vertical alignment of reaction agents relative to the reaction arrow.
     # 
-    # Supported vertical alignment styles are defined in namespace Vis.Alignment. If <tt>REACTION_AGENT_ALIGNMENT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_ALIGNMENT is not set, the default alignment setting Vis.ControlParameterDefault.REACTION_AGENT_ALIGNMENT will be used.
+    # Supported vertical alignment styles are defined in class Vis.Alignment. If <tt>REACTION_AGENT_ALIGNMENT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_ALIGNMENT is not set, the default alignment setting Vis.ControlParameterDefault.REACTION_AGENT_ALIGNMENT will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_ALIGNMENT.
     # 
@@ -291,7 +291,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the reaction agent layout style.
     # 
-    # Supported layout styles are defined in namespace Vis.LayoutStyle. If <tt>REACTION_AGENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT is not set, the default layout Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT will be used.
+    # Supported layout styles are defined in class Vis.LayoutStyle. If <tt>REACTION_AGENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT is not set, the default layout Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT.
     # 
@@ -300,7 +300,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the reaction agent layout direction.
     # 
-    # Supported layout directions are defined in namespace Vis.LayoutDirection. If <tt>REACTION_AGENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT_DIRECTION will be used.
+    # Supported layout directions are defined in class Vis.LayoutDirection. If <tt>REACTION_AGENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT_DIRECTION will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION.
     # 
@@ -363,7 +363,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the style of reaction arrows.
     # 
-    # Supported styles are defined as constants in namespace Vis.ArrowStyle. If <tt>REACTION_ARROW_STYLE</tt> is left unspecified and the property Vis.ReactionProperty.ARROW_STYLE is not set, the default arrow style Vis.ControlParameterDefault.REACTION_ARROW_STYLE will be used.
+    # Supported styles are defined as constants in class Vis.ArrowStyle. If <tt>REACTION_ARROW_STYLE</tt> is left unspecified and the property Vis.ReactionProperty.ARROW_STYLE is not set, the default arrow style Vis.ControlParameterDefault.REACTION_ARROW_STYLE will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_STYLE.
     # 
@@ -372,7 +372,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the layout style of reaction products and reactants.
     # 
-    # Supported layout styles are defined in namespace Vis.LayoutStyle. If <tt>REACTION_COMPONENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT is not set, the default layout setting Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT will be used.
+    # Supported layout styles are defined in class Vis.LayoutStyle. If <tt>REACTION_COMPONENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT is not set, the default layout setting Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT.
     # 
@@ -381,7 +381,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the layout direction of reaction products and reactants.
     # 
-    # Supported layout directions are defined in namespace Vis.LayoutDirection. If <tt>REACTION_COMPONENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT_DIRECTION will be used.
+    # Supported layout directions are defined in class Vis.LayoutDirection. If <tt>REACTION_COMPONENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT_DIRECTION will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION.
     # 
@@ -632,7 +632,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies how to adjust the size of a 2D depiction relative to the available viewport area.
     # 
-    # Supported adjustment policies are defined in namespace Vis.SizeAdjustment. If <tt>SIZE_ADJUSTMENT</tt> is left unspecified, the default size adjustment setting Vis.ControlParameterDefault.SIZE_ADJUSTMENT will be used.
+    # Supported adjustment policies are defined in class Vis.SizeAdjustment. If <tt>SIZE_ADJUSTMENT</tt> is left unspecified, the default size adjustment setting Vis.ControlParameterDefault.SIZE_ADJUSTMENT will be used.
     # 
     # \valuetype  <tt>unsigned int</tt> \note The parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 

@@ -300,6 +300,6 @@ class HBondDonorAtomType(Boost.Python.instance):
     O_CL5_PHENOL = 54
 
     ##
-    # \brief Highest H-bond donor type constant defined in this namespace.
+    # \brief Highest H-bond donor type constant defined in this class.
     # 
     MAX_TYPE = 54

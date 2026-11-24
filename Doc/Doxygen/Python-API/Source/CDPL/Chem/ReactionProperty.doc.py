@@ -129,7 +129,7 @@ class ReactionProperty(Boost.Python.instance):
     MDL_EXTERNAL_REGISTRY_NUMBER = CDPL.Base.LookupKey('MDL_EXTERNAL_REGISTRY_NUMBER')
 
     ##
-    # \brief Specifies the <em>MDL Rxn-File</em> version (see namespace Chem.MDLDataFormatVersion).
+    # \brief Specifies the <em>MDL Rxn-File</em> version (see class Chem.MDLDataFormatVersion).
     # 
     # \valuetype  <tt>unsigned int</tt> 
     # \see [\ref CTFILE]

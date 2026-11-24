@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implements the perception of H-bond acceptor atom types (see namespace MolProp.HBondAcceptorAtomType).
+# \brief Implements the perception of H-bond acceptor atom types (see class MolProp.HBondAcceptorAtomType).
 # 
 class HBondAcceptorAtomTyper(Boost.Python.instance):
 

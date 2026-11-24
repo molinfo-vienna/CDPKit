@@ -57,14 +57,14 @@ class AtomProperty(Boost.Python.instance):
     MHMO_PI_CHARGE = CDPL.Base.LookupKey('MHMO_PI_CHARGE')
 
     ##
-    # \brief Specifies the H-bond donor atom type (see namespace MolProp.HBondDonorAtomType).
+    # \brief Specifies the H-bond donor atom type (see class MolProp.HBondDonorAtomType).
     # 
     # \valuetype  <tt>int</tt>
     # 
     H_BOND_DONOR_TYPE = CDPL.Base.LookupKey('H_BOND_DONOR_TYPE')
 
     ##
-    # \brief Specifies the H-bond acceptor atom type (see namespace MolProp.HBondAcceptorAtomType).
+    # \brief Specifies the H-bond acceptor atom type (see class MolProp.HBondAcceptorAtomType).
     # 
     # \valuetype  <tt>int</tt>
     # 

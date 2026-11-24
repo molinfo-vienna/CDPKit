@@ -27,7 +27,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the vertical alignment of the reaction agents relative to the reaction arrow.
     # 
-    # Supported vertical alignment styles are defined in namespace Vis.Alignment. The specified alignment takes precedence over the alignment specified by the parameter Vis.ControlParameter.REACTION_AGENT_ALIGNMENT.
+    # Supported vertical alignment styles are defined in class Vis.Alignment. The specified alignment takes precedence over the alignment specified by the parameter Vis.ControlParameter.REACTION_AGENT_ALIGNMENT.
     # 
     # \valuetype  <tt>int</tt>
     # 
@@ -36,7 +36,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the style of the reaction agent layout.
     # 
-    # Supported layout styles are defined in namespace Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT.
+    # Supported layout styles are defined in class Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT.
     # 
     # \valuetype  <tt>int</tt>
     # 
@@ -45,7 +45,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the direction of the reaction agent layout.
     # 
-    # Supported layout directions are defined in namespace Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION.
+    # Supported layout directions are defined in class Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION.
     # 
     # \valuetype  <tt>int</tt>
     # 
@@ -108,7 +108,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the style of the reaction arrow.
     # 
-    # Supported styles are defined as constants in namespace Vis.ArrowStyle. The arrow style specified by this property takes precedence over the style specified by the parameter Vis.ControlParameter.REACTION_ARROW_STYLE.
+    # Supported styles are defined as constants in class Vis.ArrowStyle. The arrow style specified by this property takes precedence over the style specified by the parameter Vis.ControlParameter.REACTION_ARROW_STYLE.
     # 
     # \valuetype  <tt>int</tt>
     # 
@@ -117,7 +117,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the style of the reaction product and reactant layout.
     # 
-    # Supported layout styles are defined in namespace Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT.
+    # Supported layout styles are defined in class Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT.
     # 
     # \valuetype  <tt>int</tt>
     # 
@@ -126,7 +126,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the direction of the reaction product and reactant layout.
     # 
-    # Supported layout directions are defined in namespace Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION.
+    # Supported layout directions are defined in class Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION.
     # 
     # \valuetype  <tt>int</tt>
     # 

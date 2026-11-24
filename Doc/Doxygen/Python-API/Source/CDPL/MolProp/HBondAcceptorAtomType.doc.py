@@ -200,6 +200,6 @@ class HBondAcceptorAtomType(Boost.Python.instance):
     P_TRI_PHOSPHINE = 34
 
     ##
-    # \brief Highest H-bond acceptor type constant defined in this namespace.
+    # \brief Highest H-bond acceptor type constant defined in this class.
     # 
     MAX_TYPE = 34

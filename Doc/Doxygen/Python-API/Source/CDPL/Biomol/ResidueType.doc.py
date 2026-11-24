@@ -32,7 +32,7 @@ class ResidueType(Boost.Python.instance):
     UNKNOWN = 0
 
     ##
-    # \brief Specifies a residue type not covered by the other constants in this namespace.
+    # \brief Specifies a residue type not covered by the other constants in this class.
     # 
     OTHER = 1
 
