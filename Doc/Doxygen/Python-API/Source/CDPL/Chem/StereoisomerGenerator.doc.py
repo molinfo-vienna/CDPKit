@@ -22,7 +22,7 @@
 ##
 # \brief Enumerates the stereoisomers of a molecular graph by flipping the configurations of selected atom and bond stereocenters.
 # 
-# After calling setup() for an input molecular graph, each call to generate() yields the next stereoisomer (encoded as per-atom and per-bond StereoDescriptor arrays accessible via getAtomDescriptors() / getBondDescriptors()); generate() returns <tt>False</tt> when the enumeration is exhausted. Atom and bond predicates plus a number of inclusion flags control which stereocenters are enumerated.
+# After calling setup() for an input molecular graph, each call to generate() yields the next stereoisomer (encoded as per-atom and per-bond StereoDescriptor arrays accessible via getAtomDescriptors() / getBondDescriptors()); generate() returns <tt>False</tt> when the enumeration is exhausted. %Atom and bond predicates plus a number of inclusion flags control which stereocenters are enumerated.
 # 
 # \since 1.1
 # 

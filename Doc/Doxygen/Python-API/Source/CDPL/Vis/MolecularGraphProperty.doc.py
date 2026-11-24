@@ -38,7 +38,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # If the color for a particular atom type is missing, the color specified by Vis.ControlParameter.ATOM_COLOR or Vis.MolecularGraphProperty.ATOM_COLOR will be used instead. The specified color takes precedence over the table specified by the parameter Vis.ControlParameter.ATOM_COLOR_TABLE.
     # 
-    # \valuetype  Vis.ColorTable.SharedPointer \note The color table will only be considered if the Chem.Atom property Vis.AtomProperty.COLOR has not been set.
+    # \valuetype  Vis.ColorTable \note The color table will only be considered if the Chem.Atom property Vis.AtomProperty.COLOR has not been set.
     # 
     ATOM_COLOR_TABLE = CDPL.Base.LookupKey('ATOM_COLOR_TABLE')
 
@@ -173,7 +173,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     BOND_LABEL_SIZE = CDPL.Base.LookupKey('BOND_LABEL_SIZE')
 
     ##
-    # \brief Specifies the distance between the lines of double and triple bonds.
+    # \brief Specifies the distance between the lines of float and triple bonds.
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line spacing takes precedence over the distance specified by the parameter Vis.ControlParameter.BOND_LINE_SPACING.
     # 
@@ -233,7 +233,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey('STEREO_BOND_WEDGE_WIDTH')
 
     ##
-    # \brief Specifies the amount by which the non-central lines of asymmetric double bonds have to be trimmed at each line end.
+    # \brief Specifies the amount by which the non-central lines of asymmetric float bonds have to be trimmed at each line end.
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified trim length takes precedence over the length specified by the parameter Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH.
     # 

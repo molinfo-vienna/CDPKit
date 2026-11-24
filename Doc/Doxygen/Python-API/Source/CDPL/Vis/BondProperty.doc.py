@@ -34,7 +34,7 @@ class BondProperty(Boost.Python.instance):
     COLOR = CDPL.Base.LookupKey('COLOR')
 
     ##
-    # \brief Specifies the amount by which the non-central lines of asymmetric double bonds have to be trimmed at each line end.
+    # \brief Specifies the amount by which the non-central lines of asymmetric float bonds have to be trimmed at each line end.
     # 
     # The trim length can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the trim length will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the length grows/shrinks with the size of the chemical structure during viewport size adjustment. The trim length specified by this property takes precedence over the lengths specified by Vis.ControlParameter.DOUBLE_BOND_TRIM_LENGTH and Vis.MolecularGraphProperty.DOUBLE_BOND_TRIM_LENGTH. <br>
     # 
@@ -70,7 +70,7 @@ class BondProperty(Boost.Python.instance):
     LABEL_SIZE = CDPL.Base.LookupKey('LABEL_SIZE')
 
     ##
-    # \brief Specifies the distance between the lines of double and triple bonds.
+    # \brief Specifies the distance between the lines of float and triple bonds.
     # 
     # The distance can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line distance will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the distance grows/shrinks with the size of the chemical structure during viewport size adjustment. The line spacing specified by this property takes precedence over the distances specified by Vis.ControlParameter.BOND_LINE_SPACING and Vis.MolecularGraphProperty.BOND_LINE_SPACING. <br>
     # 
@@ -190,7 +190,7 @@ class BondProperty(Boost.Python.instance):
 
     ##
     # \brief Specifies the custom label text. 
-    # \valuetype  <tt>std::string</tt>.
+    # \valuetype  <tt>str</tt>.
     # 
     # \since 1.2
     # 

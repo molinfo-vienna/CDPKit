@@ -53,7 +53,7 @@ namespace CDPL
             constexpr unsigned int DEFAULT = 0x80000000;
 
             /**
-             * \brief Specifies the <em>CIP</em>-configuration of a double bond.
+             * \brief Specifies the CIP configuration of a double bond.
              */
             constexpr unsigned int CIP_CONFIGURATION = 0x1;
 

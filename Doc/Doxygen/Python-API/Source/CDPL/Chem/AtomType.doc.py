@@ -22,7 +22,7 @@
 ##
 # \brief Provides constants for the specification of the chemical element or generic type of an atom.
 # 
-# For constants with a name equal to the symbol of a chemical element, the value of the constant corresponds to the atomic number of the respective element. Atom types with a value higher than AtomType.MAX_ATOMIC_NO are generic atom types that represent a set of chemical elements.
+# For constants with a name equal to the symbol of a chemical element, the value of the constant corresponds to the atomic number of the respective element. %Atom types with a value higher than AtomType.MAX_ATOMIC_NO are generic atom types that represent a set of chemical elements.
 # 
 class AtomType(Boost.Python.instance):
 

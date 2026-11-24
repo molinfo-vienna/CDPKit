@@ -29,7 +29,7 @@ class Object3DProperty(Boost.Python.instance):
     ##
     # \brief Specifies the Vis.Shape3D instance associated with the 3D object.
     # 
-    # \valuetype  Vis.Shape3D.SharedPointer \since 1.3
+    # \valuetype  Vis.Shape3D \since 1.3
     # 
     SHAPE = CDPL.Base.LookupKey('SHAPE')
 

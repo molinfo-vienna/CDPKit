@@ -305,7 +305,7 @@ def updateDBEntry(api_doc_db, entry_name, doc_block):
         api_doc_db[entry_name] = doc_block
 
 def processCXXAPIDocFile(file_path, api_doc_db, stats):
-    print('Processing file: %s...' % path.basename(file_path))
+    #print('Processing file: %s...' % path.basename(file_path))
     
     dom = parse(file_path)
     comp_def = dom.getElementsByTagName('compounddef')[0]
@@ -460,9 +460,9 @@ def extractCXXAPIDocBlocks():
         if 'struct' in f or 'class' in f or 'namespace' in f or 'hpp' in f:
             processCXXAPIDocFile(f, api_doc_db, doc_stats)
 
-    printDocStats(doc_stats)
+    #printDocStats(doc_stats)
 
-    print(f' Num. DB-Entries: {len(api_doc_db)}')
+    #print(f' Num. DB-Entries: {len(api_doc_db)}')
 
     out_file = open(sys.argv[2], 'wb')
 

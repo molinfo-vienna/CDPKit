@@ -48,35 +48,35 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the substructure match expression associated with the reaction.
     # 
-    # \valuetype  Chem.MatchExpression<Chem.Reaction>.SharedPointer
+    # \valuetype  Chem.MatchExpression<Chem.Reaction>
     # 
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 
     ##
     # \brief Specifies the substructure match constraints associated with the reaction.
     # 
-    # \valuetype  Chem.MatchConstraintList.SharedPointer
+    # \valuetype  Chem.MatchConstraintList
     # 
     MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
     # \brief Specifies the per-component groupings of the reactant and product molecules for substructure searching.
     # 
-    # \valuetype  Chem.FragmentList.SharedPointer
+    # \valuetype  Chem.FragmentList
     # 
     COMPONENT_GROUPS = CDPL.Base.LookupKey('COMPONENT_GROUPS')
 
     ##
     # \brief Specifies the atom-atom mapping between the reactant and product molecules of the reaction.
     # 
-    # \valuetype  Chem.AtomMapping.SharedPointer
+    # \valuetype  Chem.AtomMapping
     # 
     ATOM_MAPPING = CDPL.Base.LookupKey('ATOM_MAPPING')
 
     ##
     # \brief Specifies the reaction data block associated with the reaction (typically read from/written to the data section of an <em>MDL RD-File</em>).
     # 
-    # \valuetype  Chem.StringDataBlock.SharedPointer
+    # \valuetype  Chem.StringDataBlock
     # 
     REACTION_DATA = CDPL.Base.LookupKey('REACTION_DATA')
 
@@ -107,7 +107,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the embedded <em>MDL</em> molecule record associated with the reaction.
     # 
-    # \valuetype  Chem.Molecule.SharedPointer 
+    # \valuetype  Chem.Molecule 
     # \see [\ref CTFILE]
     # 
     MDL_MOLECULE_RECORD = CDPL.Base.LookupKey('MDL_MOLECULE_RECORD')

@@ -34,10 +34,10 @@ class CIPPriorityCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs the <tt>CIPPriorityCalculator</tt> instance and calculates the topological <em>CIP</em> priorities of the atoms in the molecular graph <em>molgraph</em>.
+    # \brief Constructs the <tt>CIPPriorityCalculator</tt> instance and calculates the topological CIP priorities of the atoms in the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to calculate the <em>CIP</em> priorities.
-    # \param priorities An array containing the calculated <em>CIP</em> priorities. The <em>CIP</em> priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the <em>CIP</em> priority of an atom is accessible via its index).
+    # \param molgraph The molecular graph for which to calculate the CIP priorities.
+    # \param priorities An array containing the calculated CIP priorities. The CIP priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the CIP priority of an atom is accessible via its index).
     # 
     def __init__(molgraph: MolecularGraph, priorities: Util.STArray) -> None: pass
 
@@ -54,10 +54,10 @@ class CIPPriorityCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Calculates the topological <em>CIP</em> priorities of the atoms in the molecular graph <em>molgraph</em>.
+    # \brief Calculates the topological CIP priorities of the atoms in the molecular graph <em>molgraph</em>.
     # 
-    # \param molgraph The molecular graph for which to calculate the <em>CIP</em> priorities.
-    # \param priorities An array containing the calculated <em>CIP</em> priorities. The <em>CIP</em> priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the <em>CIP</em> priority of an atom is accessible via its index).
+    # \param molgraph The molecular graph for which to calculate the CIP priorities.
+    # \param priorities An array containing the calculated CIP priorities. The CIP priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the CIP priority of an atom is accessible via its index).
     # 
     def calculate(molgraph: MolecularGraph, priorities: Util.STArray) -> None: pass
 

@@ -22,7 +22,7 @@
 ##
 # \brief Identifies the accessible surface atoms in a given set of atoms.
 # 
-# For each candidate atom, a configurable number of probe sphere test points is generated on the atom's Van der Waals surface and tested against the surrounding atoms (looked up via an internal 3D grid for efficiency). An atom is reported as surface-accessible when at least the minimum required fraction of its test points is reachable by the probe sphere. The probe radius, accessibility threshold, test point count, and grid parameters can be tuned via the provided dedicated methods. Atom 3D coordinates are obtained through an accessor function that can be customized to specific needs.
+# For each candidate atom, a configurable number of probe sphere test points is generated on the atom's Van der Waals surface and tested against the surrounding atoms (looked up via an internal 3D grid for efficiency). An atom is reported as surface-accessible when at least the minimum required fraction of its test points is reachable by the probe sphere. The probe radius, accessibility threshold, test point count, and grid parameters can be tuned via the provided dedicated methods. %Atom 3D coordinates are obtained through an accessor function that can be customized to specific needs.
 # 
 class SurfaceAtomExtractor(Boost.Python.instance):
 

@@ -164,7 +164,7 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # \param first_set If \c True, the entities in the first set are returned and if \c False, the entities in the second set.
     # \return A list containing the entities in the specified set.
     # 
-    def getEntities(first_set: bool) -> object: pass
+    def getEntities(first_set: bool) -> list: pass
 
     ##
     # \brief Returns the stored entity at index <em>idx</em> in the specified set.

@@ -111,7 +111,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies an array of atom 3D coordinates for one or more molecular conformations.
     # 
-    # \valuetype  Math.Vector3DArray.SharedPointer
+    # \valuetype  Math.Vector3DArray
     # 
     COORDINATES_3D_ARRAY = CDPL.Base.LookupKey('COORDINATES_3D_ARRAY')
 
@@ -161,7 +161,7 @@ class AtomProperty(Boost.Python.instance):
     STEREO_CENTER_FLAG = CDPL.Base.LookupKey('STEREO_CENTER_FLAG')
 
     ##
-    # \brief Specifies the <em>CIP</em> stereochemical configuration label of the atom (see namespace Chem.CIPDescriptor).
+    # \brief Specifies the CIP stereochemical configuration label of the atom (see namespace Chem.CIPDescriptor).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -198,8 +198,10 @@ class AtomProperty(Boost.Python.instance):
     MOL2_NAME = CDPL.Base.LookupKey('MOL2_NAME')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the <em>Sybyl MOL2</em> atomic partial charge.
+    # 
+    # \valuetype  <tt>double</tt>
+    # 
     MOL2_CHARGE = CDPL.Base.LookupKey('MOL2_CHARGE')
 
     ##
@@ -247,14 +249,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the substructure match constraints associated with the atom.
     # 
-    # \valuetype  Chem.MatchConstraintList.SharedPointer
+    # \valuetype  Chem.MatchConstraintList
     # 
     MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
     # \brief Specifies the substructure match expression associated with the atom.
     # 
-    # \valuetype  Chem.MatchExpression<Chem.Atom, Chem.MolecularGraph>.SharedPointer
+    # \valuetype  Chem.AtomMatchExpression
     # 
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 

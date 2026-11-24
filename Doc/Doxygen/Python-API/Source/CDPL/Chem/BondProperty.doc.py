@@ -67,7 +67,7 @@ class BondProperty(Boost.Python.instance):
     STEREO_CENTER_FLAG = CDPL.Base.LookupKey('STEREO_CENTER_FLAG')
 
     ##
-    # \brief Specifies the <em>CIP</em> stereochemical configuration label of the bond (see namespace Chem.CIPDescriptor).
+    # \brief Specifies the CIP stereochemical configuration label of the bond (see namespace Chem.CIPDescriptor).
     # 
     # \valuetype  <tt>unsigned int</tt>
     # 
@@ -98,14 +98,14 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief Specifies the substructure match constraints associated with the bond.
     # 
-    # \valuetype  Chem.MatchConstraintList.SharedPointer
+    # \valuetype  Chem.MatchConstraintList
     # 
     MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
     # \brief Specifies the substructure match expression associated with the bond.
     # 
-    # \valuetype  Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph>.SharedPointer
+    # \valuetype  Chem.BondMatchExpression
     # 
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 

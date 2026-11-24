@@ -25,7 +25,7 @@
 class SybylAtomType(Boost.Python.instance):
 
     ##
-    # \brief Atom with no matching <em>Sybyl</em> atom type.
+    # \brief %Atom with no matching <em>Sybyl</em> atom type.
     # 
     UNKNOWN = 0
 

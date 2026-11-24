@@ -45,7 +45,7 @@ class AtomPropertyFlag(Boost.Python.instance):
     TYPE = 2
 
     ##
-    # \brief Specifies the <em>CIP</em>-configuration of a chiral atom.
+    # \brief Specifies the CIP configuration of a chiral atom.
     # 
     CIP_CONFIGURATION = 1
 

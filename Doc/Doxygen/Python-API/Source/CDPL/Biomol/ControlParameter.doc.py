@@ -46,7 +46,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the residue dictionary consulted during <em>PDB</em> and <em>mmCIF</em> I/O when looking up canonical residue atom names, bonding, atom types, and formal charges.
     # 
-    # \valuetype  Biomol.ResidueDictionary.SharedPointer 
+    # \valuetype  Biomol.ResidueDictionary 
     # \see [\ref PDB, \ref MMCIF] 
     # 
     # \since 1.2

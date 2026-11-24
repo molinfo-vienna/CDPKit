@@ -27,7 +27,7 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief Specifies the MHMO &pi;-bond order of the bond.
     # 
-    # \valuetype  <tt>double</tt> 
+    # \valuetype  <tt>float</tt> 
     # \see [\ref MHMO]
     # 
     MHMO_PI_ORDER = CDPL.Base.LookupKey('MHMO_PI_ORDER')

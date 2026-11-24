@@ -65,12 +65,12 @@ namespace CDPL
             CIPPriorityCalculator();
 
             /**
-             * \brief Constructs the \c %CIPPriorityCalculator instance and calculates the topological \e CIP priorities
+             * \brief Constructs the \c %CIPPriorityCalculator instance and calculates the topological CIP priorities
              *        of the atoms in the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
-             * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
+             * \param molgraph The molecular graph for which to calculate the CIP priorities.
+             * \param priorities An array containing the calculated CIP priorities. The CIP priorities
              *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-             *         (i.e. the \e CIP priority of an atom is accessible via its index).
+             *         (i.e. the CIP priority of an atom is accessible via its index).
              */
             CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities);
 
@@ -79,11 +79,11 @@ namespace CDPL
             CIPPriorityCalculator& operator=(const CIPPriorityCalculator&) = delete;
 
             /**
-             * \brief Calculates the topological \e CIP priorities of the atoms in the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
-             * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
+             * \brief Calculates the topological CIP priorities of the atoms in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the CIP priorities.
+             * \param priorities An array containing the calculated CIP priorities. The CIP priorities
              *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-             *         (i.e. the \e CIP priority of an atom is accessible via its index).
+             *         (i.e. the CIP priority of an atom is accessible via its index).
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& priorities);
 

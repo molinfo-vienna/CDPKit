@@ -143,7 +143,7 @@ class AtomProperty(Boost.Python.instance):
 
     ##
     # \brief Specifies the custom label text. 
-    # \valuetype  <tt>std::string</tt>.
+    # \valuetype  <tt>str</tt>.
     # 
     # \since 1.2
     # 

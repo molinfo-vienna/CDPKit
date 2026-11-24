@@ -27,7 +27,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the hydrophobicity of the atom.
     # 
-    # \valuetype  <tt>double</tt> 
+    # \valuetype  <tt>float</tt> 
     # \see MolProp.calcAtomHydrophobicities()
     # 
     HYDROPHOBICITY = CDPL.Base.LookupKey('HYDROPHOBICITY')
@@ -35,7 +35,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the calculated PEOE &sigma;-charge of the atom.
     # 
-    # \valuetype  <tt>double</tt> 
+    # \valuetype  <tt>float</tt> 
     # \see [\ref PEOE]
     # 
     PEOE_SIGMA_CHARGE = CDPL.Base.LookupKey('PEOE_SIGMA_CHARGE')
@@ -43,7 +43,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the calculated PEOE &sigma;-electronegativity of the atom.
     # 
-    # \valuetype  <tt>double</tt> 
+    # \valuetype  <tt>float</tt> 
     # \see [\ref PEOE]
     # 
     PEOE_SIGMA_ELECTRONEGATIVITY = CDPL.Base.LookupKey('PEOE_SIGMA_ELECTRONEGATIVITY')
@@ -51,7 +51,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the calculated MHMO &pi;-charge of the atom.
     # 
-    # \valuetype  <tt>double</tt> 
+    # \valuetype  <tt>float</tt> 
     # \see [\ref MHMO]
     # 
     MHMO_PI_CHARGE = CDPL.Base.LookupKey('MHMO_PI_CHARGE')
@@ -59,13 +59,13 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the H-bond donor atom type (see namespace MolProp.HBondDonorAtomType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     H_BOND_DONOR_TYPE = CDPL.Base.LookupKey('H_BOND_DONOR_TYPE')
 
     ##
     # \brief Specifies the H-bond acceptor atom type (see namespace MolProp.HBondAcceptorAtomType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     H_BOND_ACCEPTOR_TYPE = CDPL.Base.LookupKey('H_BOND_ACCEPTOR_TYPE')

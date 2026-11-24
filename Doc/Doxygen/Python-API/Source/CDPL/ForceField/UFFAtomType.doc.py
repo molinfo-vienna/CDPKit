@@ -27,7 +27,7 @@
 class UFFAtomType(Boost.Python.instance):
 
     ##
-    # \brief Atom with no matching UFF type.
+    # \brief %Atom with no matching UFF type.
     # 
     NONE = 0
 

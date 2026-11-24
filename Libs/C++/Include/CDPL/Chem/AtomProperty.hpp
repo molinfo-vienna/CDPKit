@@ -187,7 +187,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
 
             /**
-             * \brief Specifies the \e CIP stereochemical configuration label of the atom (see namespace Chem::CIPDescriptor).
+             * \brief Specifies the CIP stereochemical configuration label of the atom (see namespace Chem::CIPDescriptor).
              *
              * \valuetype <tt>unsigned int</tt>
              */
@@ -218,7 +218,7 @@ namespace CDPL
 
             /**
              * \brief Specifies the <em>Sybyl MOL2</em> atomic partial charge.
-x             *
+             *
              * \valuetype \c double
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;

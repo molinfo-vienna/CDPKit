@@ -46,6 +46,7 @@ int idx § idx: int
 Base class § %Base class
 ' Any ' § ' %Any '
 '\nAny ' § '\n%Any '
+' Atom ' § ' %Atom '
 <em>CDPL</em> § <em>%CDPL</em>
 ' (via its stored closure)' §
 as an expression template node § as an expression object
@@ -53,6 +54,7 @@ An expression template node § An expression object
 equivalent to __getitem__(std::size_t) § equivalent to __getitem__()
 __ § \__
 __() const § __()
+.SharedPointer §
 
 #
 # --- General method name replacements ---
@@ -1955,6 +1957,12 @@ TopologicalEntityAlignment § TopologicalAtomAlignment
 TopologicalEntity3DAlignment § TopologicalEntityAlignment
 TopologicalEntityAlignment § TopologicalEntity3DAlignment
 
+# --
+
+Chem.*Property. § Chem.*Property.
+Chem.MatchExpression<Chem.Atom, Chem.MolecularGraph> § Chem.AtomMatchExpression
+Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph> § Chem.BondMatchExpression
+
 #
 # --- CDPL.Pharm package ---
 #
@@ -2151,6 +2159,15 @@ DGStructureGeneratorSettings.DEFAULT_ § DGStructureGeneratorSettings.DEFAULT
 #
 # --- Generic ---
 #
+*Property. § *Property.
+double § float
+std::size_t § int
+long § int
+unsigned int § int
+std::string § str
+
+# --
+
 CDPL.*.*Mapping.__delitem__ § CDPL.Util.MultiMap.removeEntry
 
 CDPL.*.*Mapping.__setitem__ § CDPL.Util.MultiMap.setEntry

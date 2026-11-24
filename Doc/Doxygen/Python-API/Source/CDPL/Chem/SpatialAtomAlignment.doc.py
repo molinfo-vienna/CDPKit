@@ -164,7 +164,7 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # \param first_set If \c True, the atoms in the first set are returned and if \c False, the atoms in the second set.
     # \return A list containing the atoms in the specified set.
     # 
-    def getEntities(first_set: bool) -> object: pass
+    def getEntities(first_set: bool) -> list: pass
 
     ##
     # \brief Returns the stored atom at index <em>idx</em> in the specified set.

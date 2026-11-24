@@ -56,7 +56,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the color for a particular atom type is missing, the color specified by Vis.ControlParameter.ATOM_COLOR or Vis.MolecularGraphProperty.ATOM_COLOR will be used.
     # 
-    # \valuetype  Vis.ColorTable.SharedPointer \note The color table will only be considered if the property Vis.AtomProperty.COLOR has not been set for the atom to visualize. A color table specified by Vis.MolecularGraphProperty.ATOM_COLOR_TABLE takes precedence over the table specified by <tt>ATOM_COLOR_TABLE</tt>.
+    # \valuetype  Vis.ColorTable \note The color table will only be considered if the property Vis.AtomProperty.COLOR has not been set for the atom to visualize. A color table specified by Vis.MolecularGraphProperty.ATOM_COLOR_TABLE takes precedence over the table specified by <tt>ATOM_COLOR_TABLE</tt>.
     # 
     ATOM_COLOR_TABLE = CDPL.Base.LookupKey('ATOM_COLOR_TABLE')
 
@@ -909,7 +909,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the color for a particular feature type is missing then the color specified for that type in Vis.DefaultFeatureColorTable will be used.
     # 
-    # \valuetype  Vis.ColorTable.SharedPointer \since 1.3
+    # \valuetype  Vis.ColorTable \since 1.3
     # 
     FEATURE_COLOR_TABLE = CDPL.Base.LookupKey('FEATURE_COLOR_TABLE')
 

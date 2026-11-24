@@ -27,13 +27,13 @@ class AttributedGridProperty(Boost.Python.instance):
     ##
     # \brief Specifies the name (or title) of the attributed grid.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     NAME = CDPL.Base.LookupKey('NAME')
 
     ##
     # \brief Specifies a free-text comment associated with the attributed grid.
     # 
-    # \valuetype  <tt>std::string</tt> \since 1.4
+    # \valuetype  <tt>str</tt> \since 1.4
     # 
     COMMENT = CDPL.Base.LookupKey('COMMENT')

@@ -45,7 +45,7 @@ namespace CDPL
         class MolecularGraph;
 
         /**
-         * \brief MatchExpression that checks the atom type of a target atom against a query atom type.
+         * \brief Chem::MatchExpression implementation that checks the atom type of a target atom against a query atom type.
          *
          * The expression matches according to a table of equivalence rules: explicit atomic numbers
          * (Chem::AtomType::H to Chem::AtomType::MAX_ATOMIC_NO) match the same target type, while generic

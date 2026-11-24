@@ -123,7 +123,7 @@ namespace CDPLPythonChem
                               &AlignmentType::setEntityWeightFunction);
         }
 
-        static boost::python::object getEntitiesFunc(AlignmentType& alignment, bool first_set)
+        static boost::python::list getEntitiesFunc(AlignmentType& alignment, bool first_set)
         {
             using namespace boost;
 
@@ -134,7 +134,7 @@ namespace CDPLPythonChem
                  it != end; ++it)
                 entities.append(boost::ref(*it));
 
-            return std::move(entities);
+            return entities;
         }
 
         static void addEntityFunc(AlignmentType& alignment, T& ent, bool first_set)

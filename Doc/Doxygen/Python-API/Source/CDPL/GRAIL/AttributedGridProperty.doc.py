@@ -27,13 +27,13 @@ class AttributedGridProperty(Boost.Python.instance):
     ##
     # \brief Specifies the ligand-side pharmacophore feature type.
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     FEATURE_TYPE = CDPL.Base.LookupKey('FEATURE_TYPE')
 
     ##
     # \brief Specifies the interaction target pharmacophore feature type.
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     TARGET_FEATURE_TYPE = CDPL.Base.LookupKey('TARGET_FEATURE_TYPE')

@@ -77,7 +77,7 @@ class SpatialFeatureAlignment(Boost.Python.instance):
 
     def getNumEntities(first_set: bool) -> int: pass
 
-    def getEntities(first_set: bool) -> object: pass
+    def getEntities(first_set: bool) -> list: pass
 
     def getEntity(idx: int, first_set: bool) -> Feature: pass
 

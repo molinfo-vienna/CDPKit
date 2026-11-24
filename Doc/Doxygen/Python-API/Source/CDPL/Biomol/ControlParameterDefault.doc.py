@@ -35,7 +35,7 @@ class ControlParameterDefault(Boost.Python.instance):
     CHECK_LINE_LENGTH = False
 
     ##
-    # \brief Default value (= <tt>ResidueDictionary.SharedPointer()</tt>) of the control-parameter Biomol.ControlParameter.RESIDUE_DICTIONARY (an empty shared reference selects the built-in default dictionary).
+    # \brief Default value (= <tt>ResidueDictionary()</tt>) of the control-parameter Biomol.ControlParameter.RESIDUE_DICTIONARY (an empty shared reference selects the built-in default dictionary).
     # 
     # \since 1.2
     # 

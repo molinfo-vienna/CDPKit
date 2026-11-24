@@ -27,21 +27,21 @@ class FeatureProperty(Boost.Python.instance):
     ##
     # \brief Specifies the type of the pharmacophore feature (see namespace Pharm.FeatureType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     TYPE = CDPL.Base.LookupKey('TYPE')
 
     ##
     # \brief Specifies the geometric shape of the feature (see namespace Pharm.FeatureGeometry).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     GEOMETRY = CDPL.Base.LookupKey('GEOMETRY')
 
     ##
     # \brief Specifies the length of the feature (for directional features).
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     LENGTH = CDPL.Base.LookupKey('LENGTH')
 
@@ -55,21 +55,21 @@ class FeatureProperty(Boost.Python.instance):
     ##
     # \brief Specifies the positional tolerance of the feature.
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     TOLERANCE = CDPL.Base.LookupKey('TOLERANCE')
 
     ##
     # \brief Specifies the weight (relative importance) of the feature.
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     WEIGHT = CDPL.Base.LookupKey('WEIGHT')
 
     ##
     # \brief Specifies the atoms and bonds associated with the feature.
     # 
-    # \valuetype  Chem.Fragment.SharedPointer
+    # \valuetype  Chem.Fragment
     # 
     SUBSTRUCTURE = CDPL.Base.LookupKey('SUBSTRUCTURE')
 
@@ -90,13 +90,13 @@ class FeatureProperty(Boost.Python.instance):
     ##
     # \brief Specifies the summed hydrophobicities of the atoms that are covered by the feature.
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     HYDROPHOBICITY = CDPL.Base.LookupKey('HYDROPHOBICITY')
 
     ##
     # \brief Specifies the environment atoms and bonds (e.g.\ of interacting pocket residues) associated with the feature.
     # 
-    # \valuetype  Chem.Fragment.SharedPointer \since 1.4
+    # \valuetype  Chem.Fragment \since 1.4
     # 
     ENVIRONMENT_SUBSTRUCTURE = CDPL.Base.LookupKey('ENVIRONMENT_SUBSTRUCTURE')

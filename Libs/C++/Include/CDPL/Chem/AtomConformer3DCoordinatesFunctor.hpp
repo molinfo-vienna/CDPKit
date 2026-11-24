@@ -47,7 +47,7 @@ namespace CDPL
          * \brief Functor for retrieving atom 3D coordinates from a specific conformer.
          *
          * The conformer-specific atom 3D coordinates are taken from the atom property
-         * Chem::AtomProperty::CONFORMER_COORDINATES_3D. The conformer index 
+         * Chem::AtomProperty::COORDINATES_3D_ARRAY. The conformer index 
          * is provided as argument to the constructor.
          */
         class CDPL_CHEM_API AtomConformer3DCoordinatesFunctor

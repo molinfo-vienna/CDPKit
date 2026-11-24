@@ -234,7 +234,7 @@ class ControlParameterDefault(Boost.Python.instance):
     MULTI_CONF_EXPORT = True
 
     ##
-    # \brief Default value (= <tt>MultiConfMoleculeInputProcessor.SharedPointer()</tt>) of the control-parameter Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR.
+    # \brief Default value (= <tt>MultiConfMoleculeInputProcessor()</tt>) of the control-parameter Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR.
     # 
     MULTI_CONF_INPUT_PROCESSOR = None
 

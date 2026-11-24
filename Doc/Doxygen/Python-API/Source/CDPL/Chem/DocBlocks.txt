@@ -55,6 +55,13 @@ $$$$
 
 # --
 
+AtomDictionary.getEntries()
+\brief Returns a list containing the dictionary entries.
+\return A list containing the dictionary entries.
+$$$$
+
+# --
+
 PatternBasedTautomerizationRule.addTransformationPattern(molgraph,bond_chgs)
 \brief Registers a new transformation pattern.
 

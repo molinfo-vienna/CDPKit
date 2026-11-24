@@ -290,7 +290,7 @@ namespace CDPL
             ConstEntryIterator end() const;
 
             /**
-             * \brief Loads the default atom dictionary bundled with CDPKit.
+             * \brief Loads the built-in default atom dictionary entries.
              */
             void loadDefaults();
 
@@ -393,9 +393,9 @@ namespace CDPL
             static double getAtomicWeight(unsigned int type, std::size_t isotope = 0);
 
             /**
-             * \brief Returns the <em>Van der Waals</em> radius of the chemical element specified by \a type.
+             * \brief Returns the Van der Waals radius of the chemical element specified by \a type.
              * \param type The atom type specifying the chemical element.
-             * \return The <em>Van der Waals</em> radius, or \e 0.0 if \a type
+             * \return The Van der Waals radius, or \e 0.0 if \a type
              *         does not specify a supported chemical element.
              */
             static double getVdWRadius(unsigned int type);
@@ -410,10 +410,10 @@ namespace CDPL
             static double getCovalentRadius(unsigned int type, std::size_t order = 1);
 
             /**
-             * \brief Returns the <em>Allred-Rochow</em> electronegativity of the chemical element specified
+             * \brief Returns the Allred-Rochow electronegativity of the chemical element specified
              *        by \a type.
              * \param type The atom type specifying the chemical element.
-             * \return The <em>Allred-Rochow</em> electronegativity, or \e 0.0 if the electronegativity of the
+             * \return The Allred-Rochow electronegativity, or \e 0.0 if the electronegativity of the
              *         specified element is not available.
              */
             static double getAllredRochowElectronegativity(unsigned int type);

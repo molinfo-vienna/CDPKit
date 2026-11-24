@@ -40,7 +40,7 @@ class BondPropertyFlag(Boost.Python.instance):
     AROMATICITY = 8
 
     ##
-    # \brief Specifies the <em>CIP</em>-configuration of a double bond.
+    # \brief Specifies the CIP configuration of a double bond.
     # 
     CIP_CONFIGURATION = 1
 

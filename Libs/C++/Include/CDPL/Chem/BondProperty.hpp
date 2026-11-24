@@ -86,7 +86,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
 
             /**
-             * \brief Specifies the \e CIP stereochemical configuration label of the bond (see namespace Chem::CIPDescriptor).
+             * \brief Specifies the CIP stereochemical configuration label of the bond (see namespace Chem::CIPDescriptor).
              *
              * \valuetype <tt>unsigned int</tt>
              */

@@ -62,7 +62,7 @@ class ChEMBLStandardizer(Boost.Python.instance):
         STRUCTURE_NORMALIZED = 16
 
         ##
-        # \brief Atom formal charges were removed where possible.
+        # \brief %Atom formal charges were removed where possible.
         # 
         CHARGES_REMOVED = 32
 
@@ -77,7 +77,7 @@ class ChEMBLStandardizer(Boost.Python.instance):
         STRUCTURE_2D_CORRECTED = 128
 
         ##
-        # \brief Atom isotope information was cleared.
+        # \brief %Atom isotope information was cleared.
         # 
         ISOTOPE_INFO_CLEARED = 256
 

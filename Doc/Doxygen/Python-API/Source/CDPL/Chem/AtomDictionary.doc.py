@@ -287,10 +287,14 @@ class AtomDictionary(Boost.Python.instance):
     # 
     def getNumEntries() -> int: pass
 
+    ##
+    # \brief Returns a list containing the dictionary entries.
+    # \return A list containing the dictionary entries.
+    # 
     def getEntries() -> list: pass
 
     ##
-    # \brief Loads the default atom dictionary bundled with CDPKit.
+    # \brief Loads the built-in default atom dictionary entries.
     # 
     def loadDefaults() -> None: pass
 
@@ -408,11 +412,11 @@ class AtomDictionary(Boost.Python.instance):
     def getAtomicWeight(type: int, isotope: int = 0) -> float: pass
 
     ##
-    # \brief Returns the <em>Van der Waals</em> radius of the chemical element specified by <em>type</em>.
+    # \brief Returns the Van der Waals radius of the chemical element specified by <em>type</em>.
     # 
     # \param type The atom type specifying the chemical element.
     # 
-    # \return The <em>Van der Waals</em> radius, or <em>0.0</em> if <em>type</em> does not specify a supported chemical element.
+    # \return The Van der Waals radius, or <em>0.0</em> if <em>type</em> does not specify a supported chemical element.
     # 
     @staticmethod
     def getVdWRadius(type: int) -> float: pass
@@ -429,11 +433,11 @@ class AtomDictionary(Boost.Python.instance):
     def getCovalentRadius(type: int, order: int = 1) -> float: pass
 
     ##
-    # \brief Returns the <em>Allred-Rochow</em> electronegativity of the chemical element specified by <em>type</em>.
+    # \brief Returns the Allred-Rochow electronegativity of the chemical element specified by <em>type</em>.
     # 
     # \param type The atom type specifying the chemical element.
     # 
-    # \return The <em>Allred-Rochow</em> electronegativity, or <em>0.0</em> if the electronegativity of the specified element is not available.
+    # \return The Allred-Rochow electronegativity, or <em>0.0</em> if the electronegativity of the specified element is not available.
     # 
     @staticmethod
     def getAllredRochowElectronegativity(type: int) -> float: pass

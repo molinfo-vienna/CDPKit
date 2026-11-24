@@ -27,14 +27,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the residue name of the atom (e.g.\ <em>CA</em>, <em>CB</em>).
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     RESIDUE_ATOM_NAME = CDPL.Base.LookupKey('RESIDUE_ATOM_NAME')
 
     ##
     # \brief Specifies the alternative residue name of the atom.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     RESIDUE_ALT_ATOM_NAME = CDPL.Base.LookupKey('RESIDUE_ALT_ATOM_NAME')
 
@@ -53,21 +53,21 @@ class AtomProperty(Boost.Python.instance):
     RESIDUE_LINKING_ATOM_FLAG = CDPL.Base.LookupKey('RESIDUE_LINKING_ATOM_FLAG')
 
     ##
-    # \brief Specifies the three-letter code of the residue the atom belongs to.
+    # \brief Specifies the three-letter code of the residue the atom beints to.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     RESIDUE_CODE = CDPL.Base.LookupKey('RESIDUE_CODE')
 
     ##
-    # \brief Specifies the sequence number of the residue the atom belongs to.
+    # \brief Specifies the sequence number of the residue the atom beints to.
     # 
-    # \valuetype  <tt>long</tt>
+    # \valuetype  <tt>int</tt>
     # 
     RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey('RESIDUE_SEQUENCE_NUMBER')
 
     ##
-    # \brief Specifies the insertion code of the residue the atom belongs to.
+    # \brief Specifies the insertion code of the residue the atom beints to.
     # 
     # \valuetype  <tt>char</tt>
     # 
@@ -81,9 +81,9 @@ class AtomProperty(Boost.Python.instance):
     HETERO_ATOM_FLAG = CDPL.Base.LookupKey('HETERO_ATOM_FLAG')
 
     ##
-    # \brief Specifies the identifier of the chain the atom belongs to.
+    # \brief Specifies the identifier of the chain the atom beints to.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     CHAIN_ID = CDPL.Base.LookupKey('CHAIN_ID')
 
@@ -95,36 +95,36 @@ class AtomProperty(Boost.Python.instance):
     ALT_LOCATION_ID = CDPL.Base.LookupKey('ALT_LOCATION_ID')
 
     ##
-    # \brief Specifies the identifier of the entity the atom belongs to).
+    # \brief Specifies the identifier of the entity the atom beints to).
     # 
-    # \valuetype  <tt>std::string</tt> \since 1.2
+    # \valuetype  <tt>str</tt> \since 1.2
     # 
     ENTITY_ID = CDPL.Base.LookupKey('ENTITY_ID')
 
     ##
-    # \brief Specifies the number of the model the atom belongs to.
+    # \brief Specifies the number of the model the atom beints to.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     MODEL_NUMBER = CDPL.Base.LookupKey('MODEL_NUMBER')
 
     ##
     # \brief Specifies the serial number of the atom.
     # 
-    # \valuetype  <tt>long</tt>
+    # \valuetype  <tt>int</tt>
     # 
     SERIAL_NUMBER = CDPL.Base.LookupKey('SERIAL_NUMBER')
 
     ##
     # \brief Specifies the occupancy of the atom.
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     OCCUPANCY = CDPL.Base.LookupKey('OCCUPANCY')
 
     ##
     # \brief Specifies the isotropic temperature (B) factor of the atom.
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     B_FACTOR = CDPL.Base.LookupKey('B_FACTOR')

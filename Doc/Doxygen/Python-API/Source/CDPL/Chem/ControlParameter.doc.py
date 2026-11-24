@@ -415,7 +415,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies an instance of Chem.MultiConfMoleculeInputProcessor that implements the logic of multi-conformer molecule detection and conformational data processing.
     # 
-    # \valuetype  Chem.MultiConfMoleculeInputProcessor.SharedPointer
+    # \valuetype  Chem.MultiConfMoleculeInputProcessor
     # 
     MULTI_CONF_INPUT_PROCESSOR = CDPL.Base.LookupKey('MULTI_CONF_INPUT_PROCESSOR')
 
