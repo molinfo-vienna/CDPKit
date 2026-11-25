@@ -32,16 +32,18 @@ class BasicReaction(Reaction):
     def __init__() -> None: pass
 
     ##
-    # \brief Contructs a copy of the \c BasicReaction instance \a mol.
-    # \param mol The \c BasicReaction instance to copy.
+    # \brief Constructs a <tt>BasicReaction</tt> instance that is a copy of the reaction <em>rxn</em>.
     # 
-    def __init__(mol: BasicReaction) -> None: pass
+    # \param rxn The other reaction to copy.
+    # 
+    def __init__(rxn: BasicReaction) -> None: pass
 
     ##
-    # \brief Contructs the \c BasicReaction instance.
-    # \param mol 
+    # \brief Constructs a <tt>BasicReaction</tt> instance that is a copy of the reaction <em>rxn</em>.
     # 
-    def __init__(mol: Reaction) -> None: pass
+    # \param rxn The other reaction to copy.
+    # 
+    def __init__(rxn: Reaction) -> None: pass
 
     ##
     # \brief Creates a new reaction component with the specified role.

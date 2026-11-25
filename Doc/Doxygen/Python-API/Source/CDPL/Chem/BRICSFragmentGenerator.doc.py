@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Molecular graph fragment generator implementing the <em>BRICS</em> bond-cleavage rule set.
+# \brief Molecular graph fragment generator implementing the BRICS bond-cleavage rule set.
 # 
-# The rule (and exclude-pattern) set follows the original publication [\ref BRICS]. <em>BRICS</em> rule IDs are defined in class Chem.BRICSRuleID and the corresponding atom label values in class Chem.BRICSAtomLabel.
+# The rule (and exclude-pattern) set follows the original publication [\ref BRICS]. BRICS rule IDs are defined in class Chem.BRICSRuleID and the corresponding atom label values in class Chem.BRICSAtomLabel.
 # 
 class BRICSFragmentGenerator(FragmentGenerator):
 
     ##
-    # \brief Constructs the <tt>BRICSFragmentGenerator</tt> instance and registers the corresponding <em>BRICS</em> fragmentation rules.
+    # \brief Constructs the <tt>BRICSFragmentGenerator</tt> instance and registers the corresponding BRICS fragmentation rules.
     # 
     def __init__() -> None: pass
 

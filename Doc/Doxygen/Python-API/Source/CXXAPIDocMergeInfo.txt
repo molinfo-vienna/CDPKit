@@ -1935,6 +1935,11 @@ Chem.Reaction.__delitem__(idx) § Chem.Reaction.removeComponent(idx)
 
 # --
 
+Chem.Bond.getAtom( § Chem.Bond.getAtom(
+) const §
+
+# --
+
 Atom3DCoordinatesFunctor.__call__(atom) § Atom3DCoordinatesFunctor.__call__(atom)
 Chem.get3DCoordinates(const Atom&) § Chem.get3DCoordinates(Entity3D)
 

@@ -47,7 +47,7 @@ namespace CDPL
          *
          * After calling analyze() the four constituent fragment sets can be queried separately via
          * getRingSystems(), getLinkers(), getFrameworks() and getSideChains(). The framework of a molecule is
-         * the union of all ring systems together with the linker chains that connect them; side chains are
+         * the union of all ring systems together with the linker chains that connect them. Side chains are
          * the remaining acyclic substituents. Hydrogen atoms can optionally be stripped from the input.
          *
          * \see [\ref BEMU]
@@ -68,21 +68,21 @@ namespace CDPL
             BemisMurckoAnalyzer();
 
             /**
-             * \brief Specifies whether hydrogen atoms shall be stripped from the input before the decomposition.
-             * \param strip If \c true, hydrogens are removed prior to analysis.
+             * \brief Specifies whether hydrogen atoms shall be stripped from the input before performing the analysis.
+             * \param strip If \c true, hydrogens are removed.
              */
             void stripHydrogens(bool strip);
 
             /**
-             * \brief Tells whether hydrogen atoms are stripped from the input before the decomposition.
+             * \brief Tells whether hydrogen atoms will be stripped from the input before performing the analysis.
              * \return \c true if hydrogens are stripped, and \c false otherwise.
              */
             bool hydrogensStripped() const;
 
             /**
-             * \brief Performs the Bemis-Murcko decomposition of the molecular graph \a molgraph.
+             * \brief Performs the Bemis-Murcko analysis of the molecular graph \a molgraph.
              *
-             * After this call the four fragment sets produced by the decomposition are available via
+             * After this call the four fragment sets produced by the analysis are available via
              * getRingSystems(), getLinkers(), getFrameworks() and getSideChains().
              *
              * \param molgraph The molecular graph to decompose.

@@ -37,7 +37,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants for the identification of \e RECAP fragmentation rules.
+         * \brief Provides constants for the identification of RECAP fragmentation rules.
          * \see [\ref RECAP]
          */
         namespace RECAPRuleID

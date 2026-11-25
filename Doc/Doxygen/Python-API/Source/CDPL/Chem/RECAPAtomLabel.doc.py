@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides constants for labeling the endpoints of bonds matched by <em>RECAP</em> fragmentation rules.
+# \brief Provides constants for labeling the endpoints of bonds matched by RECAP fragmentation rules.
 # 
 # \see [\ref RECAP]
 # 

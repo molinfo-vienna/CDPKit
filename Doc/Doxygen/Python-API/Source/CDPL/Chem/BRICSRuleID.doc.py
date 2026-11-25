@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides constants for the identification of <em>BRICS</em> fragmentation rules.
+# \brief Provides constants for the identification of BRICS fragmentation rules.
 # 
 # \see [\ref BRICS]
 # 

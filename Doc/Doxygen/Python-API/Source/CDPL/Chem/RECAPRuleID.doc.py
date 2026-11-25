@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides constants for the identification of <em>RECAP</em> fragmentation rules.
+# \brief Provides constants for the identification of RECAP fragmentation rules.
 # 
 # \see [\ref RECAP]
 # 

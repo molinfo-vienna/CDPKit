@@ -22,7 +22,7 @@
 ##
 # \brief Decomposes a molecular graph into its Bemis-Murcko framework, ring systems, linkers and side chains.
 # 
-# After calling analyze() the four constituent fragment sets can be queried separately via getRingSystems(), getLinkers(), getFrameworks() and getSideChains(). The framework of a molecule is the union of all ring systems together with the linker chains that connect them; side chains are the remaining acyclic substituents. Hydrogen atoms can optionally be stripped from the input.
+# After calling analyze() the four constituent fragment sets can be queried separately via getRingSystems(), getLinkers(), getFrameworks() and getSideChains(). The framework of a molecule is the union of all ring systems together with the linker chains that connect them. Side chains are the remaining acyclic substituents. Hydrogen atoms can optionally be stripped from the input.
 # 
 # \see [\ref BEMU] 
 # 
@@ -49,23 +49,23 @@ class BemisMurckoAnalyzer(Boost.Python.instance):
     def assign(gen: BemisMurckoAnalyzer) -> BemisMurckoAnalyzer: pass
 
     ##
-    # \brief Specifies whether hydrogen atoms shall be stripped from the input before the decomposition.
+    # \brief Specifies whether hydrogen atoms shall be stripped from the input before performing the analysis.
     # 
-    # \param strip If <tt>True</tt>, hydrogens are removed prior to analysis.
+    # \param strip If <tt>True</tt>, hydrogens are removed.
     # 
     def stripHydrogens(strip: bool) -> None: pass
 
     ##
-    # \brief Tells whether hydrogen atoms are stripped from the input before the decomposition.
+    # \brief Tells whether hydrogen atoms will be stripped from the input before performing the analysis.
     # 
     # \return <tt>True</tt> if hydrogens are stripped, and <tt>False</tt> otherwise.
     # 
     def hydrogensStripped() -> bool: pass
 
     ##
-    # \brief Performs the Bemis-Murcko decomposition of the molecular graph <em>molgraph</em>.
+    # \brief Performs the Bemis-Murcko analysis of the molecular graph <em>molgraph</em>.
     # 
-    # After this call the four fragment sets produced by the decomposition are available via getRingSystems(), getLinkers(), getFrameworks() and getSideChains().
+    # After this call the four fragment sets produced by the analysis are available via getRingSystems(), getLinkers(), getFrameworks() and getSideChains().
     # 
     # \param molgraph The molecular graph to decompose.
     # 

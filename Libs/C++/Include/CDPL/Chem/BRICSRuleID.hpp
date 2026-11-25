@@ -37,7 +37,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants for the identification of \e BRICS fragmentation rules.
+         * \brief Provides constants for the identification of BRICS fragmentation rules.
          * \see [\ref BRICS]
          */
         namespace BRICSRuleID

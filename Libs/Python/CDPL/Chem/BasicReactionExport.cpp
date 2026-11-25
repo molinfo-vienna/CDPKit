@@ -46,8 +46,8 @@ void CDPLPythonChem::exportBasicReaction()
     python::class_<Chem::BasicReaction, Chem::BasicReaction::SharedPointer,
                    python::bases<Chem::Reaction> >("BasicReaction", python::no_init)
         .def(python::init<>(python::arg("self")))
-        .def(python::init<const Chem::BasicReaction&>((python::arg("self"), python::arg("mol"))))
-        .def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("mol"))))
+        .def(python::init<const Chem::BasicReaction&>((python::arg("self"), python::arg("rxn"))))
+        .def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("rxn"))))
         .def("addComponent", addComponentFunc, (python::arg("self"), python::arg("role")),
              python::return_internal_reference<1>())
         .def("addComponent", addComponentCopyFunc, (python::arg("self"), python::arg("role"), python::arg("mol")),
