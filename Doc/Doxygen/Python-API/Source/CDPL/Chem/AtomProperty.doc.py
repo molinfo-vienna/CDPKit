@@ -27,49 +27,49 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the name of the atom.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     NAME = CDPL.Base.LookupKey('NAME')
 
     ##
     # \brief Specifies the element symbol of the atom.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     SYMBOL = CDPL.Base.LookupKey('SYMBOL')
 
     ##
     # \brief Specifies the atom type (see class Chem.AtomType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     TYPE = CDPL.Base.LookupKey('TYPE')
 
     ##
     # \brief Specifies the formal charge of the atom.
     # 
-    # \valuetype  <tt>long</tt>
+    # \valuetype  <tt>int</tt>
     # 
     FORMAL_CHARGE = CDPL.Base.LookupKey('FORMAL_CHARGE')
 
     ##
     # \brief Specifies the isotopic mass number of the atom.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     ISOTOPE = CDPL.Base.LookupKey('ISOTOPE')
 
     ##
     # \brief Specifies the radical type of the atom (see class Chem.RadicalType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     RADICAL_TYPE = CDPL.Base.LookupKey('RADICAL_TYPE')
 
     ##
     # \brief Specifies the orbital hybridization state of the atom (see class Chem.HybridizationState).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     HYBRIDIZATION = CDPL.Base.LookupKey('HYBRIDIZATION')
 
@@ -90,14 +90,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the number of unpaired electrons of the atom.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     UNPAIRED_ELECTRON_COUNT = CDPL.Base.LookupKey('UNPAIRED_ELECTRON_COUNT')
 
     ##
     # \brief Specifies the number of implicit hydrogens attached to the atom.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     IMPLICIT_HYDROGEN_COUNT = CDPL.Base.LookupKey('IMPLICIT_HYDROGEN_COUNT')
 
@@ -118,7 +118,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the canonical number of the atom obtained by the Morgan algorithm.
     # 
-    # \valuetype  <tt>std::size_t</tt> 
+    # \valuetype  <tt>int</tt> 
     # \see [\ref MOCAN]
     # 
     MORGAN_NUMBER = CDPL.Base.LookupKey('MORGAN_NUMBER')
@@ -126,14 +126,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the canonical number of the atom.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     CANONICAL_NUMBER = CDPL.Base.LookupKey('CANONICAL_NUMBER')
 
     ##
     # \brief Specifies the topological CIP priority of the atom.
     # 
-    # \valuetype  <tt>std::size_t</tt> 
+    # \valuetype  <tt>int</tt> 
     # \see [\ref TCIP]
     # 
     CIP_PRIORITY = CDPL.Base.LookupKey('CIP_PRIORITY')
@@ -141,7 +141,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the topological symmetry class of the atom.
     # 
-    # \valuetype  <tt>std::size_t</tt> 
+    # \valuetype  <tt>int</tt> 
     # \see [\ref TOPSY]
     # 
     SYMMETRY_CLASS = CDPL.Base.LookupKey('SYMMETRY_CLASS')
@@ -163,14 +163,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the CIP stereochemical configuration label of the atom (see class Chem.CIPDescriptor).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     CIP_CONFIGURATION = CDPL.Base.LookupKey('CIP_CONFIGURATION')
 
     ##
     # \brief Specifies the <em>MDL</em> stereo parity of the atom (see class Chem.MDLParity).
     # 
-    # \valuetype  <tt>unsigned int</tt> 
+    # \valuetype  <tt>int</tt> 
     # \see [\ref CTFILE]
     # 
     MDL_PARITY = CDPL.Base.LookupKey('MDL_PARITY')
@@ -186,63 +186,63 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> atom type (see class Chem.SybylAtomType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     SYBYL_TYPE = CDPL.Base.LookupKey('SYBYL_TYPE')
 
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> atom name.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     MOL2_NAME = CDPL.Base.LookupKey('MOL2_NAME')
 
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> atomic partial charge.
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     MOL2_CHARGE = CDPL.Base.LookupKey('MOL2_CHARGE')
 
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> numeric substructure identifier associated with the atom.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     MOL2_SUBSTRUCTURE_ID = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_ID')
 
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> substructure name associated with the atom.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     MOL2_SUBSTRUCTURE_NAME = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_NAME')
 
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> substructure subtype associated with the atom.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     MOL2_SUBSTRUCTURE_SUBTYPE = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_SUBTYPE')
 
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> chain identifier associated with the atom.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     MOL2_SUBSTRUCTURE_CHAIN = CDPL.Base.LookupKey('MOL2_SUBSTRUCTURE_CHAIN')
 
     ##
-    # \brief Specifies the reaction center status of the atom (see class Chem.ReactionCenterStatus).
+    # \brief Specifies the reaction-center status of the atom (see class Chem.ReactionCenterStatus).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     REACTION_CENTER_STATUS = CDPL.Base.LookupKey('REACTION_CENTER_STATUS')
 
     ##
     # \brief Specifies the atom-atom mapping ID relating reaction reactant atoms to product atoms.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     ATOM_MAPPING_ID = CDPL.Base.LookupKey('ATOM_MAPPING_ID')
 
@@ -256,7 +256,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the substructure match expression associated with the atom.
     # 
-    # \valuetype  Chem.AtomMatchExpression
+    # \valuetype  Chem.AtomMatchExpressio
     # 
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 
@@ -268,8 +268,8 @@ class AtomProperty(Boost.Python.instance):
     MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey('MATCH_EXPRESSION_STRING')
 
     ##
-    # \brief Specifies the ID of the component group the atom belongs to.
+    # \brief Specifies the ID of the component group the atom beints to.
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     COMPONENT_GROUP_ID = CDPL.Base.LookupKey('COMPONENT_GROUP_ID')

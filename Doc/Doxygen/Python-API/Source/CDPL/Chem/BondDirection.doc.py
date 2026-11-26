@@ -22,7 +22,9 @@
 ##
 # \brief Provides constants for the specification of directional bonds in <em>Daylight SMILES</em> and <em>SMARTS</em> strings.
 # 
-# Directional bonds in <em>Daylight SMILES</em> or <em>SMARTS</em> strings are used to specify the configuration around a double bond by indicating the relative direction of the bonds to its substituent atoms. They have only a meaning when they occur on both sides of the double bond (see [\ref SMILES, \ref SMARTS]).
+# Directional bonds in <em>Daylight SMILES</em> or <em>SMARTS</em> strings are used to specify the configuration around a double bond by indicating the relative direction of the bonds to its substituent atoms. They have only a meaning when they occur on both sides of the double bond.
+# 
+# \see [\ref SMILES, \ref SMARTS]
 # 
 class BondDirection(Boost.Python.instance):
 

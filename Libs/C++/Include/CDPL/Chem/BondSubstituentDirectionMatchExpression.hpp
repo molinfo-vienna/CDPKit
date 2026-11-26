@@ -48,8 +48,10 @@ namespace CDPL
          * \brief Chem::MatchExpression implementation that constrains target double bond configuration via the per-substituent bond direction
          *        annotations carried by the query.
          *
-         * \c %BondSubstituentDirectionMatchExpression implements <em>Daylight SMARTS</em> [\ref SMARTS] cis/trans double bond configuration constraints
+         * \c %BondSubstituentDirectionMatchExpression implements <em>Daylight SMARTS</em> cis/trans double bond configuration constraints
          * that are specified by the relative direction of the bonds to its substituent atoms.
+         *
+         * \see [\ref SMARTS]
          */
         class CDPL_CHEM_API BondSubstituentDirectionMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {

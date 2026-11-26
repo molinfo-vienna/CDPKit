@@ -79,7 +79,7 @@ class BondMatchConstraint(Boost.Python.instance):
     ORDER = 1
 
     ##
-    # \brief Specifies a constraint on the reaction center status of the target bond.
+    # \brief Specifies a constraint on the reaction-center status of the target bond.
     # 
     # \see Chem.ReactionCenterStatus
     # 

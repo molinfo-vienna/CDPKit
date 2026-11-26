@@ -114,7 +114,7 @@ namespace CDPL
             constexpr unsigned int DIRECTION = 6;
 
             /**
-             * \brief Specifies a constraint on the reaction center status of the target bond.
+             * \brief Specifies a constraint on the reaction-center status of the target bond.
              * \see Chem::ReactionCenterStatus
              */
             constexpr unsigned int REACTION_CENTER_STATUS = 7;

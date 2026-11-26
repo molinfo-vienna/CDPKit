@@ -446,8 +446,8 @@ Mapping.getValues(key)
 $$$$
 
 Mapping.items() % Histogram.items() % Mapping.getEntries() % Histogram.getEntries() % Composition.items() % Composition.getEntries()
-\brief Returns a list containing the current entries as (key,value) tuples.
-\return A list containing the current entries as (key,value) tuples.
+\brief Returns a list containing the current entries as <em>(key, value)</em> pairs.
+\return A list containing the current entries as <em>(key, value)</em> pairs.
 $$$$
 
 #

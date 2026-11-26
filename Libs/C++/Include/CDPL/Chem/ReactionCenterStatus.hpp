@@ -38,27 +38,27 @@ namespace CDPL
 
         /**
          * \brief Provides flags that are used to describe state changes of atoms and bonds in a
-         *        reaction center.
+         *        reaction-center.
          * \note The flags ReactionCenterStatus::IS_CENTER, ReactionCenterStatus::BOND_MADE, ReactionCenterStatus::BOND_BROKEN,
          *       and ReactionCenterStatus::BOND_ORDER_CHANGE may be combined by bitwise-OR operations to obtain a composite
-         *       reaction center state.
+         *       reaction-center state.
          */
         namespace ReactionCenterStatus
         {
 
             /**
-             * \brief Specifies that the atom or bond is not part of the reaction center.
+             * \brief Specifies that the atom or bond is not part of the reaction-center.
              */
             constexpr unsigned int NONE = 0;
 
             /**
              * \brief Specifies for bonds in a reaction substructure search query that matching target bonds must not
-             *        be part of a reaction center.
+             *        be part of a reaction-center.
              */
             constexpr unsigned int NO_CENTER = 0x1;
 
             /**
-             * \brief Specifies that the bond is part of the reaction center.
+             * \brief Specifies that the bond is part of the reaction-center.
              */
             constexpr unsigned int IS_CENTER = 0x2;
 

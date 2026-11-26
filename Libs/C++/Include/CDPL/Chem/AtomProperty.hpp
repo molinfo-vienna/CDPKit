@@ -259,7 +259,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_CHAIN;
 
             /**
-             * \brief Specifies the reaction center status of the atom (see namespace Chem::ReactionCenterStatus).
+             * \brief Specifies the reaction-center status of the atom (see namespace Chem::ReactionCenterStatus).
              *
              * \valuetype <tt>unsigned int</tt>
              */

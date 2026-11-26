@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides constants that are used to specify the <em>cis/trans</em> configuration of bonds.
+# \brief Provides constants that are used to specify the cis/trans configuration of bonds.
 # 
 class BondConfiguration(Boost.Python.instance):
 

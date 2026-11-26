@@ -22,7 +22,9 @@
 ##
 # \brief Chem.BondMatchExpression implementation that constrains target double bond configuration via the per-substituent bond direction annotations carried by the query.
 # 
-# <tt>BondSubstituentDirectionMatchExpression</tt> implements <em>Daylight SMARTS</em> [\ref SMARTS] cis/trans double bond configuration constraints that are specified by the relative direction of the bonds to its substituent atoms.
+# <tt>BondSubstituentDirectionMatchExpression</tt> implements <em>Daylight SMARTS</em> cis/trans double bond configuration constraints that are specified by the relative direction of the bonds to its substituent atoms.
+# 
+# \see [\ref SMARTS]
 # 
 class BondSubstituentDirectionMatchExpression(BondMatchExpression):
 

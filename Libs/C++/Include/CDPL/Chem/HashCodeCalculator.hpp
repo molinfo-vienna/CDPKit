@@ -95,7 +95,7 @@ namespace CDPL
                 /**
                  * \brief Constructs the \c %DefAtomHashSeedFunctor instance for the specified set of atomic properties.
                  *
-                 * The \a flags argument is an OR combination of the constants defined in namespace
+                 * The \a flags argument is a bitwise-OR combination of the constants defined in namespace
                  * Chem::AtomPropertyFlag. Supported property flags are:
                  *  - Chem::AtomPropertyFlag::TYPE
                  *  - Chem::AtomPropertyFlag::ISOTOPE
@@ -143,7 +143,7 @@ namespace CDPL
                 /**
                  * \brief Constructs the \c %DefBondHashSeedFunctor instance for the specified set of bond properties.
                  *
-                 * The \a flags argument is an OR combination of the constants defined in namespace
+                 * The \a flags argument is a bitwise-OR combination of the constants defined in namespace
                  * Chem::BondPropertyFlag. Supported property flags are:
                  *  - Chem::BondPropertyFlag::ORDER
                  *  - Chem::BondPropertyFlag::TOPOLOGY

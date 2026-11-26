@@ -114,7 +114,7 @@ namespace CDPL
              * \brief Allows to specify the set of atomic properties that has to be considered by the
              *        canonical numering algorithm.
              *
-             * The \a flags argument is an OR combination of the constants defined in namespace
+             * The \a flags argument is a bitwise-OR combination of the constants defined in namespace
              * Chem::AtomPropertyFlag. Supported property flags are:
              *  - Chem::AtomPropertyFlag::TYPE
              *  - Chem::AtomPropertyFlag::ISOTOPE
@@ -140,7 +140,7 @@ namespace CDPL
              * \brief Allows to specify the set of bond properties that has to be considered by the
              *        canonical numering algorithm.
              *
-             * The \a flags argument is an OR combination of the constants defined in namespace
+             * The \a flags argument is a bitwise-OR combination of the constants defined in namespace
              * Chem::BondPropertyFlag. Supported property flags are:
              *  - Chem::BondPropertyFlag::ORDER
              *  - Chem::BondPropertyFlag::CONFIGURATION

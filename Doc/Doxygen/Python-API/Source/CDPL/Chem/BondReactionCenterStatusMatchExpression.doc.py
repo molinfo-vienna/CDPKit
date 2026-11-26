@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Chem.BondMatchExpression implementation that constrains target bonds by their reaction-center status.
+# \brief Chem.MatchExpression implementation that constrains target bonds by their reaction-center status.
 # 
 # \see Chem.ReactionCenterStatus
 # 
@@ -33,9 +33,9 @@ class BondReactionCenterStatusMatchExpression(BondMatchExpression):
     def __init__(expr: BondReactionCenterStatusMatchExpression) -> None: pass
 
     ##
-    # \brief Constructs the <tt>BondReactionCenterStatusMatchExpression</tt> instance for the specified query reaction center status.
+    # \brief Constructs the <tt>BondReactionCenterStatusMatchExpression</tt> instance for the specified query reaction-center status.
     # 
-    # \param status The query reaction center status as a (valid) bitwise-OR combination of the flags defined in class Chem.ReactionCenterStatus (for or valid flag combinations see \__call\__()).
+    # \param status The query reaction-center status as a (valid) bitwise-OR combination of the flags defined in class Chem.ReactionCenterStatus.
     # 
     def __init__(status: int) -> None: pass
 

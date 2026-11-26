@@ -22,7 +22,7 @@
 ##
 # \brief Container for the storage and evaluation of logical match expression lists.
 # 
-# <tt>ReactionMatchExpressionList</tt> allows for a concatenation of multiple Chem.ReactionMatchExpression instances that get evaluated in turn according to some logic. The actual logic of expression list evaluation has to be implemented by subclasses by overriding the virtual function call operator methods of the Chem.ReactionMatchExpression interface.
+# <tt>ReactionMatchExpressionList</tt> allows for a concatenation of multiple Chem.ReactionMatchExpression instances that get evaluated in turn according to some logic. The actual logic of expression list evaluation has to be implemented by subclasses that override the virtual function call operator methods of the Chem.ReactionMatchExpression interface.
 # 
 class ReactionMatchExpressionList(ReactionMatchExpression):
 

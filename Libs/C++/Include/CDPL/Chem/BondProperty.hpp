@@ -115,7 +115,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
 
             /**
-             * \brief Specifies the reaction center status of the bond (see namespace Chem::ReactionCenterStatus).
+             * \brief Specifies the reaction-center status of the bond (see namespace Chem::ReactionCenterStatus).
              *
              * \valuetype <tt>unsigned int</tt>
              */

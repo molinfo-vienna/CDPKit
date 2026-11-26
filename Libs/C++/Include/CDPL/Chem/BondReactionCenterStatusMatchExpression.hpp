@@ -59,26 +59,26 @@ namespace CDPL
             typedef std::shared_ptr<BondReactionCenterStatusMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs the \c %BondReactionCenterStatusMatchExpression instance for the specified query reaction center status.
-             * \param status The query reaction center status as a (valid) bitwise-OR combination of the flags defined in namespace Chem::ReactionCenterStatus
+             * \brief Constructs the \c %BondReactionCenterStatusMatchExpression instance for the specified query reaction-center status.
+             * \param status The query reaction-center status as a (valid) bitwise-OR combination of the flags defined in namespace Chem::ReactionCenterStatus
              *               (for or valid flag combinations see operator()()).
              */
             BondReactionCenterStatusMatchExpression(unsigned int status);
 
             /**
-             * \brief Checks whether the reaction center status of \a target_bond matches the query reaction center status
+             * \brief Checks whether the reaction-center status of \a target_bond matches the query reaction-center status
              *        specified in the constructor.
              *
-             * The following table lists all supported combinations of query reaction center status flags and the associated
-             * matching target reaction center states:
+             * The following table lists all supported combinations of query reaction-center status flags and the associated
+             * matching target reaction-center states:
              *
              * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
              *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-             *   <th>Query %Reaction Center Status</th> <th>Matching Target %Reaction Center Status</th>
+             *   <th>Query %Reaction-center Status</th> <th>Matching Target %Reaction-center Status</th>
              *  </tr>
              *  <tr>
              *   <td>None specified</td>
-             *   <td>Expression evaluates to \c true for any target reaction center status</td>
+             *   <td>Expression evaluates to \c true for any target reaction-center status</td>
              *  </tr>
              *  <tr>
              *   <td>Chem::ReactionCenterStatus::NO_CENTER</td>
@@ -106,9 +106,9 @@ namespace CDPL
              * \param target_bond The checked target bond.
              * \param target_molgraph The molecular graph containing the target bond (ignored).
              * \param aux_data Auxiliary information for expression evaluation (ignored).
-             * \return \c true if the reaction center status of the target bond matches the query reaction center status (see constructor),
+             * \return \c true if the reaction-center status of the target bond matches the query reaction-center status (see constructor),
              *         and \c false otherwise.
-             * \note The reaction center status of \a target_bond is retrieved from the Chem::Bond property Chem::BondProperty::REACTION_CENTER_STATUS.
+             * \note The reaction-center status of \a target_bond is retrieved from the Chem::Bond property Chem::BondProperty::REACTION_CENTER_STATUS.
              */
             bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, const Bond& target_bond,
                             const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;

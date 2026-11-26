@@ -105,7 +105,7 @@ namespace CDPL
                 /**
                  * \brief Constructs the \c %DefAtomIdentifierFunctor instance for the specified set of atomic properties.
                  *
-                 * The \a flags argument is an OR combination of the constants defined in namespace
+                 * The \a flags argument is a bitwise-OR combination of the constants defined in namespace
                  * Chem::AtomPropertyFlag. 
                  *
                  * Supported property flags are:
@@ -149,7 +149,7 @@ namespace CDPL
                 /**
                  * \brief Constructs the \c %DefBondIdentifierFunctor instance for the specified set of bond properties.
                  *
-                 * The \a flags argument is an OR combination of the constants defined in namespace
+                 * The \a flags argument is a bitwise-OR combination of the constants defined in namespace
                  * Chem::BondPropertyFlag. 
                  *
                  * Supported property flags are:

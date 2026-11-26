@@ -42,7 +42,9 @@ namespace CDPL
          *
          * Directional bonds in <em>Daylight SMILES</em> or \e SMARTS strings are used to specify the configuration 
          * around a double bond by indicating the relative direction of the bonds to its substituent atoms. They have only
-         * a meaning when they occur on both sides of the double bond (see [\ref SMILES, \ref SMARTS]). 
+         * a meaning when they occur on both sides of the double bond.
+         *
+         * \see [\ref SMILES, \ref SMARTS]
          */
         namespace BondDirection
         {

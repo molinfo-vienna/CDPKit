@@ -124,7 +124,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     ##
     # \brief Returns the atom at index <em>idx</em>.
     # 
-    # The index <em>0</em> specifies the start atom (see getBegin() and <em>1</em> the end atom of the bond (see getEnd().
+    # The index <em>0</em> specifies the start atom (see getBegin()) and <em>1</em> the end atom of the bond (see getEnd()).
     # 
     # \param idx The index of the atom to return.
     # 

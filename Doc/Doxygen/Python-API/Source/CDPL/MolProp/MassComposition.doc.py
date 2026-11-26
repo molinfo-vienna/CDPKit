@@ -95,14 +95,14 @@ class MassComposition(Boost.Python.instance):
     def values() -> object: pass
 
     ##
-    # \brief Returns a list containing the current entries as (key,value) tuples.
-    # \return A list containing the current entries as (key,value) tuples.
+    # \brief Returns a list containing the current entries as <em>(key, value)</em> pairs.
+    # \return A list containing the current entries as <em>(key, value)</em> pairs.
     # 
     def getEntries() -> object: pass
 
     ##
-    # \brief Returns a list containing the current entries as (key,value) tuples.
-    # \return A list containing the current entries as (key,value) tuples.
+    # \brief Returns a list containing the current entries as <em>(key, value)</em> pairs.
+    # \return A list containing the current entries as <em>(key, value)</em> pairs.
     # 
     def items() -> object: pass
 

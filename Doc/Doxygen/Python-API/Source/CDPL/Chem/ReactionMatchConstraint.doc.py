@@ -35,8 +35,8 @@ class ReactionMatchConstraint(Boost.Python.instance):
     ATOM_MAPPING = 1
 
     ##
-    # \brief Specifies a constraint which requires the target reaction to match any component level groupings defined by the query reaction.
+    # \brief Specifies a constraint which requires the target reaction to match any component-level groupings defined by the query reaction.
     # 
-    # Component level groupings specify whether the components of a query reaction have to be matched by a single target reaction component (intramolecular reaction) or by different components of the target (intermolecular reaction). <em>Daylight SMARTS</em> patterns [\ref SMARTS] allow to specify component groupings by parentheses that enclose those components of the query which have to be part of the same target reaction component.
+    # Component-level groupings specify whether the components of a query reaction have to be matched by a single target reaction component (intramolecular reaction) or by different components of the target (intermolecular reaction). <em>Daylight SMARTS</em> patterns [\ref SMARTS] allow to specify component groupings by parentheses that enclose those components of the query which have to be part of the same target reaction component.
     # 
     COMPONENT_GROUPING = 2

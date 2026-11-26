@@ -27,14 +27,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the name (or title) of the molecular graph.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     NAME = CDPL.Base.LookupKey('NAME')
 
     ##
     # \brief Specifies a free-text comment associated with the molecular graph.
     # 
-    # \valuetype  <tt>std::string</tt>
+    # \valuetype  <tt>str</tt>
     # 
     COMMENT = CDPL.Base.LookupKey('COMMENT')
 
@@ -125,14 +125,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the stoichiometric multiplier of the molecular graph in a reaction.
     # 
-    # \valuetype  <tt>double</tt>
+    # \valuetype  <tt>float</tt>
     # 
     STOICHIOMETRIC_NUMBER = CDPL.Base.LookupKey('STOICHIOMETRIC_NUMBER')
 
     ##
     # \brief Specifies the index of the active conformation (within the per-atom 3D coordinates arrays).
     # 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     CONFORMATION_INDEX = CDPL.Base.LookupKey('CONFORMATION_INDEX')
 
@@ -160,7 +160,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the user initials stored in the <em>MDL</em> CTAB header.
     # 
-    # \valuetype  <tt>std::string</tt> 
+    # \valuetype  <tt>str</tt> 
     # \see [\ref CTFILE]
     # 
     MDL_USER_INITIALS = CDPL.Base.LookupKey('MDL_USER_INITIALS')
@@ -168,7 +168,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the program name stored in the <em>MDL</em> CTAB header.
     # 
-    # \valuetype  <tt>std::string</tt> 
+    # \valuetype  <tt>str</tt> 
     # \see [\ref CTFILE]
     # 
     MDL_PROGRAM_NAME = CDPL.Base.LookupKey('MDL_PROGRAM_NAME')
@@ -177,14 +177,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     # \brief Specifies the registry number stored in the <em>MDL</em> CTAB header.
     # 
     # \see [\ref CTFILE] 
-    # \valuetype  <tt>std::size_t</tt>
+    # \valuetype  <tt>int</tt>
     # 
     MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey('MDL_REGISTRY_NUMBER')
 
     ##
     # \brief Specifies the <em>MDL</em> connection table (CTAB) version (see class Chem.MDLDataFormatVersion).
     # 
-    # \valuetype  <tt>unsigned int</tt> 
+    # \valuetype  <tt>int</tt> 
     # \see [\ref CTFILE]
     # 
     MDL_CTAB_VERSION = CDPL.Base.LookupKey('MDL_CTAB_VERSION')
@@ -192,7 +192,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the dimensionality flag stored in the <em>MDL</em> CTAB header (<em>0</em> = unspecified, <em>2</em> = 2D, <em>3</em> = 3D).
     # 
-    # \valuetype  <tt>std::size_t</tt> 
+    # \valuetype  <tt>int</tt> 
     # \see [\ref CTFILE]
     # 
     MDL_DIMENSIONALITY = CDPL.Base.LookupKey('MDL_DIMENSIONALITY')
@@ -201,14 +201,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     # \brief Specifies the first (integer) scaling factor stored in the <em>MDL</em> CTAB header.
     # 
     # \see [\ref CTFILE] 
-    # \valuetype  <tt>long</tt>
+    # \valuetype  <tt>int</tt>
     # 
     MDL_SCALING_FACTOR1 = CDPL.Base.LookupKey('MDL_SCALING_FACTOR1')
 
     ##
     # \brief Specifies the second (floating-point) scaling factor stored in the <em>MDL</em> CTAB header.
     # 
-    # \valuetype  <tt>double</tt> 
+    # \valuetype  <tt>float</tt> 
     # \see [\ref CTFILE]
     # 
     MDL_SCALING_FACTOR2 = CDPL.Base.LookupKey('MDL_SCALING_FACTOR2')
@@ -216,7 +216,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the energy value stored in the <em>MDL</em> CTAB header.
     # 
-    # \valuetype  <tt>double</tt> 
+    # \valuetype  <tt>float</tt> 
     # \see [\ref CTFILE]
     # 
     MDL_ENERGY = CDPL.Base.LookupKey('MDL_ENERGY')
@@ -232,13 +232,13 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> partial atom charge type (see class Chem.MOL2ChargeType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
 
     ##
     # \brief Specifies the <em>Sybyl MOL2</em> molecule type of the molecular graph (see class Chem.MOL2MoleculeType).
     # 
-    # \valuetype  <tt>unsigned int</tt>
+    # \valuetype  <tt>int</tt>
     # 
     MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey('MOL2_MOLECULE_TYPE')

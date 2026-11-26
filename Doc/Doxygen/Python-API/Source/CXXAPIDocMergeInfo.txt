@@ -1809,6 +1809,11 @@ Match § AtomMatch
 object § atom
 all feasible query/target atom § all feasible query/target atom/bond
 
+# ---
+
+BondReactionCenterStatusMatchExpression § BondReactionCenterStatusMatchExpression
+' (for or valid flag combinations see \__call\__())' §
+
 # --
 
 Chem.BondMatchExpression.__call__(query_bond,query_molgraph,target_bond,target_molgraph § Chem.MatchExpression.__call__(query_obj1,query_obj2,target_obj1,target_obj2
@@ -1936,7 +1941,7 @@ Chem.Reaction.__delitem__(idx) § Chem.Reaction.removeComponent(idx)
 # --
 
 Chem.Bond.getAtom( § Chem.Bond.getAtom(
-) const §
+) const § )
 
 # --
 
@@ -1971,8 +1976,8 @@ TopologicalEntityAlignment § TopologicalEntity3DAlignment
 
 # --
 
-Chem.*Property. § Chem.*Property.
-Chem.MatchExpression<Chem.Atom, Chem.MolecularGraph> § Chem.AtomMatchExpression
+Chem.*Property.MATCH_EXP* § Chem.*Property.MATCH_EXP*
+Chem.MatchExpression<Chem.Atom, Chem.MolecularGraph> § Chem.AtomMatchExpressio
 Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph> § Chem.BondMatchExpression
 
 # --

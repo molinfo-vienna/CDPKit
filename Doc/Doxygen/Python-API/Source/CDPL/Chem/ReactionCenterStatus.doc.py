@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief Provides flags that are used to describe state changes of atoms and bonds in a reaction center.
+# \brief Provides flags that are used to describe state changes of atoms and bonds in a reaction-center.
 # 
-# \note The flags ReactionCenterStatus.IS_CENTER, ReactionCenterStatus.BOND_MADE, ReactionCenterStatus.BOND_BROKEN, and ReactionCenterStatus.BOND_ORDER_CHANGE may be combined by bitwise-OR operations to obtain a composite reaction center state.
+# \note The flags ReactionCenterStatus.IS_CENTER, ReactionCenterStatus.BOND_MADE, ReactionCenterStatus.BOND_BROKEN, and ReactionCenterStatus.BOND_ORDER_CHANGE may be combined by bitwise-OR operations to obtain a composite reaction-center state.
 # 
 class ReactionCenterStatus(Boost.Python.instance):
 
     ##
-    # \brief Specifies that the atom or bond is not part of the reaction center.
+    # \brief Specifies that the atom or bond is not part of the reaction-center.
     # 
     NONE = 0
 
@@ -52,12 +52,12 @@ class ReactionCenterStatus(Boost.Python.instance):
     EXACT_CHANGE = 128
 
     ##
-    # \brief Specifies that the bond is part of the reaction center.
+    # \brief Specifies that the bond is part of the reaction-center.
     # 
     IS_CENTER = 2
 
     ##
-    # \brief Specifies for bonds in a reaction substructure search query that matching target bonds must not be part of a reaction center.
+    # \brief Specifies for bonds in a reaction substructure search query that matching target bonds must not be part of a reaction-center.
     # 
     NO_CENTER = 1
 
