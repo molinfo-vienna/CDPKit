@@ -67,7 +67,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Returns the bond substructure match pattern of this rule.
         # 
-        # \return A shared reference to the match pattern molecular graph.
+        # \return The match pattern molecular graph.
         # 
         def getMatchPattern() -> MolecularGraph: pass
 
@@ -141,7 +141,7 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Returns the substructure match pattern.
         # 
-        # \return A shared reference to the match pattern molecular graph.
+        # \return The match pattern molecular graph.
         # 
         def getMatchPattern() -> MolecularGraph: pass
 

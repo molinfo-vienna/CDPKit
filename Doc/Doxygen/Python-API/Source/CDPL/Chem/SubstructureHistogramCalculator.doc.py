@@ -70,7 +70,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         ##
         # \brief Returns the query molecular graph of this pattern.
         # 
-        # \return A shared reference to the query molecular graph.
+        # \return The query molecular graph.
         # 
         def getStructure() -> MolecularGraph: pass
 

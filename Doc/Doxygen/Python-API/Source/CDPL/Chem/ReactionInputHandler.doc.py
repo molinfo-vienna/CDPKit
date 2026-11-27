@@ -61,7 +61,7 @@ class ReactionInputHandler(Boost.Python.instance):
     # \brief Creates a ReactionReaderBase instance that will read the data from the file specified by <em>file_name</em>.
     # 
     # \param file_name The full path of the file to read from.
-    # \param mode Flags specifying the file open-mode.
+    # \param mode Flags specifying the file open mode.
     # 
     # \return The created ReactionReaderBase instance.
     # 

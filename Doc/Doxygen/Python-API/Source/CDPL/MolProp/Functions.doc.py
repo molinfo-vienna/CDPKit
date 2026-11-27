@@ -409,7 +409,7 @@ def hasFunctionalGroups(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A shared reference to the functional group list. 
+# \return The functional group list. 
 # 
 # \since 1.3
 # 
@@ -1522,7 +1522,7 @@ def isUnsaturated(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph.
 # 
-# \return A shared reference to the perceived functional group list. 
+# \return The perceived functional group list. 
 # 
 # \since 1.3
 # 
@@ -1534,7 +1534,7 @@ def perceiveFunctionalGroups(molgraph: Chem.MolecularGraph) -> Chem.FragmentList
 # \param molgraph The molecular graph (modified in place).
 # \param overwrite If <tt>True</tt>, an existing MolProp.MolecularGraphProperty.FUNCTIONAL_GROUPS property is overwritten.
 # 
-# \return A shared reference to the perceived functional group list. 
+# \return The perceived functional group list. 
 # 
 # \since 1.3
 # 

@@ -86,7 +86,7 @@ namespace CDPL
             /**
              * \brief Creates a Base::DataReader instance that will read the data from the file specified by \a file_name.
              * \param file_name The full path of the file to read from.
-             * \param mode Flags specifying the file open-mode.
+             * \param mode Flags specifying the file open mode.
              * \return A shared pointer to the created Base::DataReader instance.
              */
             virtual typename ReaderType::SharedPointer createReader(const std::string&      file_name,

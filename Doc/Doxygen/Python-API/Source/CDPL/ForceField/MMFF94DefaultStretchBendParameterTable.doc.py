@@ -225,7 +225,7 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default table (lazily initialized on first call).
     # 
-    # \return A shared reference to the default table.
+    # \return The default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94DefaultStretchBendParameterTable: pass

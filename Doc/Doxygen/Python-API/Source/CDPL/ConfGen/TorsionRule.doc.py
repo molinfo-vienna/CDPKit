@@ -151,7 +151,7 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Returns the match pattern molecular graph.
     # 
-    # \return A shared reference to the match pattern molecular graph.
+    # \return The match pattern molecular graph.
     # 
     def getMatchPattern() -> Chem.MolecularGraph: pass
 

@@ -26,7 +26,7 @@
 # 
 # From the <tt>MoleculeReaderBase</tt> interface point of view, the data source is organized as an array of logical data records. Each record is addressed by a zero-based sequential record index and contains the data for exactly <em>one</em> data object. The total number of available data records (which is equal to the maximum record index plus <em>1</em>) can be queried by the method getNumRecords().
 # 
-# Similar to low-level file I/O, data records may either be read in a sequential or in a random access manner. For sequential access the method read(mol: Molecule) is provided which will read the data record at the 'current' record index (similar to a file reference). The current record index is accessible by the method getRecordIndex() and can be modified using the method setRecordIndex() (similar to a seek operation).
+# Similar to low-level file I/O, data records may either be read in a sequential or in a random access manner. For sequential access the method read() is provided which will read the data record at the 'current' record index (similar to a file reference). The current record index is accessible by the method getRecordIndex() and can be modified using the method setRecordIndex() (similar to a seek operation).
 # 
 # For reading data records in a random access manner a special read() method version is provided that expects the index of the record to read as the first argument.
 # 
@@ -125,8 +125,8 @@ class MoleculeReaderBase(Base.DataIOBase):
     # 
     # This special method allows to write expressions like: 
     # \code
-    # if reader: ... 
-    # if (reader.skip()) { ...
+    # if not reader: ... 
+    # if reader.read(...): ...
     # \endcode
     # 
     # \return \c True if the reader is in a good state, and \c False otherwise. 
@@ -143,7 +143,7 @@ class MoleculeReaderBase(Base.DataIOBase):
     # This special method allows to write expressions like: 
     # \code
     # if reader: ... 
-    # if (reader.skip()) { ...
+    # if reader.read(...): ...
     # \endcode
     # 
     # \return \c True if the reader is in a good state, and \c False otherwise. 

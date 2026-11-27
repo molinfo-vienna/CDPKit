@@ -85,7 +85,7 @@ namespace CDPL
             /**
              * \brief Creates a Base::DataWriter instance that will write the data to the file specified by \a file_name.
              * \param file_name The full path of the file to write to.
-             * \param mode Flags specifying the file open-mode.
+             * \param mode Flags specifying the file open mode.
              * \return A shared pointer to the created Base::DataWriter instance.
              */
             virtual typename WriterType::SharedPointer createWriter(const std::string& file_name,

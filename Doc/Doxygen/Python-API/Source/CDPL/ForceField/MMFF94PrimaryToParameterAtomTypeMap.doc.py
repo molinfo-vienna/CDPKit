@@ -181,7 +181,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     ##
     # \brief Returns the process-wide default map (lazily initialized on first call).
     # 
-    # \return A shared reference to the default table.
+    # \return The default table.
     # 
     @staticmethod
     def get(: ) -> MMFF94PrimaryToParameterAtomTypeMap: pass

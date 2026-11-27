@@ -1847,7 +1847,7 @@ def hasResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> bool
 # 
 # \param cntnr The control-parameter container.
 # 
-# \return A shared reference to the residue dictionary. 
+# \return The residue dictionary. 
 # 
 # \since 1.2
 # 

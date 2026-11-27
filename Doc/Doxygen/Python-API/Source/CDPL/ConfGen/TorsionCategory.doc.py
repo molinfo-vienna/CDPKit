@@ -135,7 +135,7 @@ class TorsionCategory(Boost.Python.instance):
     ##
     # \brief Returns the match pattern molecular graph used to perceive the bonds that belong to this category.
     # 
-    # \return A shared reference to the match pattern molecular graph.
+    # \return The match pattern molecular graph.
     # 
     def getMatchPattern() -> Chem.MolecularGraph: pass
 

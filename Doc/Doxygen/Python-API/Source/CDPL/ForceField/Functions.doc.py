@@ -41,7 +41,7 @@ def hasMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> bool: pass
 # 
 # \param molgraph The molecular graph for which to return the property value.
 # 
-# \return A shared reference to the list of MMFF94 aromatic rings.
+# \return The list of MMFF94 aromatic rings.
 # 
 def getMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
 
@@ -1626,7 +1626,7 @@ def filterInteractions(ia_data: MMFF94InteractionData, filtered_ia_data: MMFF94I
 # 
 # \param molgraph The molecular graph.
 # 
-# \return A shared reference to the perceived list of MMFF94 aromatic rings.
+# \return The perceived list of MMFF94 aromatic rings.
 # 
 def perceiveMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
 
@@ -1636,7 +1636,7 @@ def perceiveMMFF94AromaticRings(molgraph: Chem.MolecularGraph) -> Chem.FragmentL
 # \param molgraph The molecular graph.
 # \param overwrite Specifies whether an already existing value of the property should be replaced.
 # 
-# \return A shared reference to the perceived (or pre-existing) list of MMFF94 aromatic rings.
+# \return The perceived (or pre-existing) list of MMFF94 aromatic rings.
 # 
 def perceiveMMFF94AromaticRings(molgraph: Chem.MolecularGraph, overwrite: bool) -> Chem.FragmentList: pass
 

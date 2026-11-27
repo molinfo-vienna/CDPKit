@@ -5030,7 +5030,7 @@ def perceiveRings(molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pa
 # 
 # \param molgraph The molecular graph.
 # 
-# \return A shared reference to the perceived SSSR.
+# \return The perceived SSSR.
 # 
 def perceiveSSSR(molgraph: MolecularGraph) -> FragmentList: pass
 

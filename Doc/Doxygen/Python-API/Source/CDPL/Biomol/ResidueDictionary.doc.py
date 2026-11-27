@@ -137,7 +137,7 @@ class ResidueDictionary(Boost.Python.instance):
         ##
         # \brief Retrieves the residue structure via the configured structure retrieval function.
         # 
-        # \return A shared reference to the residue structure (or an empty reference if no structure could be retrieved).
+        # \return The residue structure (or an empty reference if no structure could be retrieved).
         # 
         def getStructure() -> Chem.MolecularGraph: pass
 

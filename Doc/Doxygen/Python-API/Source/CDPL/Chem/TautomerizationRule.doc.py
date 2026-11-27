@@ -71,7 +71,7 @@ class TautomerizationRule(Boost.Python.instance):
     ##
     # \brief Returns a deep copy of this rule instance.
     # 
-    # \return A shared reference to the cloned rule.
+    # \return The cloned rule.
     # 
     def clone() -> TautomerizationRule: pass
 
