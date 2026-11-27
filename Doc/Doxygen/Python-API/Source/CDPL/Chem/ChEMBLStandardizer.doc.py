@@ -133,13 +133,22 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \brief Standardizes <em>mol</em> in place.
     # 
     # \param mol The molecule to standardize (modified in place).
-    # \param proc_excld If <tt>True</tt>, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
+    # \param proc_excluded If <tt>True</tt>, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
     # 
     # \return A bitwise-OR combination of ChangeFlags reporting which standardization steps modified the molecule.
     # 
-    def standardize(mol: Molecule, proc_excld: bool = False) -> ChangeFlags: pass
+    def standardize(mol: Molecule, proc_excluded: bool = False) -> ChangeFlags: pass
 
-    def standardize(mol: MolecularGraph, std_mol: Molecule, proc_excluded: bool = False) -> ChangeFlags: pass
+    ##
+    # \brief Outputs a standardized copy of <em>molgraph</em> to <em>std_mol</em>.
+    # 
+    # \param molgraph The input molecular graph.
+    # \param std_mol The output molecule receiving the standardized copy.
+    # \param proc_excluded If <tt>True</tt>, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
+    # 
+    # \return A bitwise-OR combination of ChangeFlags reporting which standardization steps modified the molecule.
+    # 
+    def standardize(molgraph: MolecularGraph, std_mol: Molecule, proc_excluded: bool = False) -> ChangeFlags: pass
 
     ##
     # \brief Extracts the parent compound of <em>mol</em> in place (removing salt/solvent components).
@@ -152,6 +161,16 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # 
     def getParent(mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
 
-    def getParent(mol: MolecularGraph, parent_mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
+    ##
+    # \brief Extracts the parent compound of <em>molgraph</em> into <em>parent_mol</em>.
+    # 
+    # \param molgraph The input molecular graph.
+    # \param parent_mol The output molecule receiving the parent compound.
+    # \param neutralize If <tt>True</tt>, charges of the extracted parent are subsequently neutralized.
+    # \param check_exclusion If <tt>True</tt>, ChEMBL exclusion criteria are checked before processing.
+    # 
+    # \return A bitwise-OR combination of ChangeFlags reporting which steps modified the molecule.
+    # 
+    def getParent(molgraph: MolecularGraph, parent_mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
 
     objectID = property(getObjectID)

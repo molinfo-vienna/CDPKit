@@ -48,7 +48,7 @@ namespace CDPL
         /**
          * \brief Assigns Cahn-Ingold-Prelog (CIP) configuration labels to stereogenic atoms and bonds of a molecular graph.
          *
-         * After calling setup() for a molecular graph the per-atom or per-bond CIP descriptor
+         * After calling setup() for the molecular graph the per-atom or per-bond CIP descriptor
          * can be queried via the getLabel() overloads. The implementation
          * is largely based on John Mayfield's Java implementation of the CIP
          * sequence rules [\ref CIPJM].
@@ -96,14 +96,14 @@ namespace CDPL
             /**
              * \brief Returns the CIP descriptor of the stereogenic atom \a atom.
              * \param atom The atom whose CIP descriptor is queried.
-             * \return One of the Chem::CIPDescriptor values.
+             * \return One of the constants defined in namespace Chem::CIPDescriptor.
              */
             unsigned int getLabel(const Atom& atom);
 
             /**
              * \brief Returns the CIP descriptor of the stereogenic bond \a bond.
              * \param bond The bond whose CIP descriptor is queried.
-             * \return One of the Chem::CIPDescriptor values.
+             * \return One of the constants defined in namespace Chem::CIPDescriptor.
              */
             unsigned int getLabel(const Bond& bond);
 

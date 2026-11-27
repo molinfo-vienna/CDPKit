@@ -63,14 +63,14 @@ void CDPLPythonChem::exportChEMBLStandardizer()
              (python::arg("self"), python::arg("standardizer")), python::return_self<>())
         .def("standardize", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(Chem::Molecule&, bool)>
              (&Chem::ChEMBLStandardizer::standardize),
-             (python::arg("self"), python::arg("mol"), python::arg("proc_excld") = false))
+             (python::arg("self"), python::arg("mol"), python::arg("proc_excluded") = false))
         .def("standardize", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(const Chem::MolecularGraph&, Chem::Molecule&, bool)>
              (&Chem::ChEMBLStandardizer::standardize),
-             (python::arg("self"), python::arg("mol"), python::arg("std_mol"), python::arg("proc_excluded") = false))
+             (python::arg("self"), python::arg("molgraph"), python::arg("std_mol"), python::arg("proc_excluded") = false))
         .def("getParent", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(Chem::Molecule&, bool, bool)>
              (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol"),
                                                       python::arg("neutralize") = true, python::arg("check_exclusion") = true))
         .def("getParent", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(const Chem::MolecularGraph&, Chem::Molecule&, bool, bool)>
-             (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol"), python::arg("parent_mol"),
+             (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("molgraph"), python::arg("parent_mol"),
                                                       python::arg("neutralize") = true, python::arg("check_exclusion") = true));
 }

@@ -22,7 +22,7 @@
 ##
 # \brief Assigns Cahn-Ingold-Prelog (CIP) configuration labels to stereogenic atoms and bonds of a molecular graph.
 # 
-# After calling setup() for a molecular graph the per-atom or per-bond CIP descriptor can be queried via the getLabel() overloads. The implementation is largely based on John Mayfield's Java implementation of the CIP sequence rules [\ref CIPJM].
+# After calling setup() for the molecular graph the per-atom or per-bond CIP descriptor can be queried via the getLabel() overloads. The implementation is largely based on John Mayfield's Java implementation of the CIP sequence rules [\ref CIPJM].
 # 
 # \see Chem.CIPDescriptor 
 # 
@@ -68,7 +68,7 @@ class CIPConfigurationLabeler(Boost.Python.instance):
     # 
     # \param atom The atom whose CIP descriptor is queried.
     # 
-    # \return One of the Chem.CIPDescriptor values.
+    # \return One of the constants defined in class Chem.CIPDescriptor.
     # 
     def getLabel(atom: Atom) -> int: pass
 
@@ -77,7 +77,7 @@ class CIPConfigurationLabeler(Boost.Python.instance):
     # 
     # \param bond The bond whose CIP descriptor is queried.
     # 
-    # \return One of the Chem.CIPDescriptor values.
+    # \return One of the constants defined in class Chem.CIPDescriptor.
     # 
     def getLabel(bond: Bond) -> int: pass
 

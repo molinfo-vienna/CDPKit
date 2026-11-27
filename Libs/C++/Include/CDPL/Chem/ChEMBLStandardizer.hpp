@@ -156,13 +156,13 @@ namespace CDPL
             /**
              * \brief Standardizes \a mol in place.
              * \param mol The molecule to standardize (modified in place).
-             * \param proc_excld If \c true, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
+             * \param proc_excluded If \c true, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.
              * \return A bitwise-OR combination of ChangeFlags reporting which standardization steps modified the molecule.
              */
-            ChangeFlags standardize(Molecule& mol, bool proc_excld = false);
+            ChangeFlags standardize(Molecule& mol, bool proc_excluded = false);
 
             /**
-             * \brief Writes a standardized copy of \a molgraph to \a std_mol.
+             * \brief Outputs a standardized copy of \a molgraph to \a std_mol.
              * \param molgraph The input molecular graph.
              * \param std_mol The output molecule receiving the standardized copy.
              * \param proc_excluded If \c true, ChEMBL exclusion criteria are ignored and the molecule is processed regardless.

@@ -1840,6 +1840,11 @@ Chem.MatchExpression § Chem.BondMatchExpression
 
 # --
 
+MolecularGraph*MatchExpression § MolecularGraph*MatchExpression
+Chem.MatchExpression § Chem.MolecularGraphMatchExpression
+
+# --
+
 Chem.MolecularGraphMatchExpression.__call__(query_molgraph,target_molgraph § Chem.MatchExpression< ObjType, void >.__call__(query_obj,target_obj
 object § molecular graph
 obj § molgraph
@@ -1976,7 +1981,7 @@ TopologicalEntityAlignment § TopologicalEntity3DAlignment
 # --
 
 Chem.*Property.MATCH_EXP* § Chem.*Property.MATCH_EXP*
-Chem.MatchExpression<Chem.Atom, Chem.MolecularGraph> § Chem.AtomMatchExpressio
+Chem.MatchExpression<Chem.Atom, Chem.MolecularGraph> § Chem.AtomMatchExpression
 Chem.MatchExpression<Chem.Bond, Chem.MolecularGraph> § Chem.BondMatchExpression
 
 # --
@@ -1986,7 +1991,8 @@ Search.getSize() § Search.getNumMappings()
 Search.__getitem__ § Search.getMapping
 
 Search § Search
-' or iteration using the iterator pair returned by the methods begin() and end()' §
+' or iteration using the iterator pair returned by the methods begin() and end(), respectively' §
+Chem.MatchExpression implementation instance § match expression
 
 #
 # --- CDPL.Pharm package ---

@@ -256,7 +256,7 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief Specifies the substructure match expression associated with the atom.
     # 
-    # \valuetype  Chem.AtomMatchExpressio
+    # \valuetype  Chem.AtomMatchExpression
     # 
     MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 
